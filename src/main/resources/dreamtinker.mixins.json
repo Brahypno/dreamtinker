@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.7",
+  "package": "org.dreamtinker.dreamtinker.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "dreamtinker.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
