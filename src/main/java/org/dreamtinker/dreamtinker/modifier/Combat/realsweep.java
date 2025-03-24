@@ -38,7 +38,6 @@ public class realsweep extends BaseModifier {
         if (!level.isClientSide&&player.getAttackStrengthScale(0)>0.8&& !tool.isBroken()){
             // basically sword sweep logic, just deals full damage to all entities
             float diameter=2;//getSweepRange(tool); To improve in 1.20
-            System.out.println(" event triggered! Modifier level: " + getSweepRange(tool));
             double range = diameter + tool.getModifierLevel(TinkerModifiers.expanded.getId());
             float sweepDamage = TinkerModifiers.sweeping.get().getSweepingDamage(tool, tool.getStats().get(ToolStats.ATTACK_DAMAGE));
 

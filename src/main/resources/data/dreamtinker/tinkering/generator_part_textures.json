@@ -1,0 +1,9 @@
+{
+  "parts": [
+    {
+      "path": "dreamtinker:item/tool/trident_head/trident_head",
+      "stat_type": "tconstruct:head"
+    }
+  ],
+  "replace": false
+}
