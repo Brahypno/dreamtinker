@@ -1,5 +1,7 @@
 {
   "modifier.dreamtinker.realsweep": "超级横扫",
+  "itemGroup.Dreamtinker.tool": "工匠幻梦|工具",
+  "itemGroup.Dreamtinker.part": "工匠幻梦|部件",
   "item.dreamtinker.explode_core": "镇爆核心",
   "item.dreamtinker.tntarrow": "镇爆箭",
   "item.dreamtinker.tntarrow.description": "一种消耗性的，造成范围伤害的特种近战武器，使用弓以发射。射程小于范围！",

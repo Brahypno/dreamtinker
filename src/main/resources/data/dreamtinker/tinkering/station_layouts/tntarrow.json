@@ -1,23 +1,14 @@
 {
   "icon": {
     "item": "dreamtinker:tntarrow",
-    "nbt": {
-      "tic_display": true,
-      "tic_materials": [
-        "tconstruct:ui_render#head",
-        "tconstruct:ui_render#handle",
-        "tconstruct:ui_render#extra",
-        "tconstruct:ui_render#large",
-        "tconstruct:ui_render#extra_large"
-      ]
-    }
+    "nbt": "{Damage:0,tic_broken:0b,tic_display:1b,tic_materials:[\"tconstruct:ui_render#head\",\"tconstruct:ui_render#handle\",\"tconstruct:ui_render#extra\",\"tconstruct:ui_render#large\",\"tconstruct:ui_render#extra_large\"]}"
   },
   "input_slots": [
     {
+      "icon": "dreamtinker:explode_core",
       "filter": {
         "item": "dreamtinker:explode_core"
       },
-      "icon": "dreamtinker:explode_core",
       "translation_key": "item.dreamtinker.explode_core",
       "x": 48,
       "y": 26
