@@ -1,5 +1,7 @@
 {
   "modifier.dreamtinker.realsweep": "real sweep",
+  "itemGroup.Dreamtinker.tool": "dreamtinker|tool",
+  "itemGroup.Dreamtinker.part": "dreamtinker|part",
   "item.dreamtinker.explode_core": "explode core",
   "item.dreamtinker.tntarrow": "exploding arrow",
   "item.dreamtinker.tntarrow.description": "a consumable, special melee weapon.range less than exploding range！",

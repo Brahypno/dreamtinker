@@ -1,0 +1,14 @@
+{
+  "tool": "dreamtinker:tntarrow",
+  "text": [
+    {
+      "text": "a consumable, special melee weapon\nlaunch with any vanilla or tconstruct BOW\nrange less than exploding range！！\n"
+    }
+  ],
+  "properties": [
+    "+3 Damage",
+    "strong *Gravity*",
+    "Deal damage to all within the range",
+    "one time use"
+  ]
+}

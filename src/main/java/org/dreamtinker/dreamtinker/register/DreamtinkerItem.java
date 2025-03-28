@@ -18,7 +18,7 @@ public class DreamtinkerItem {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
 
     private static final Item.Properties TOOL = (new Item.Properties()).tab(DreamtinkerTab.TOOL).stacksTo(1);
-    private static final Item.Properties PART = (new Item.Properties()).tab(DreamtinkerTab.TOOL).stacksTo(64);
+    private static final Item.Properties PART = (new Item.Properties()).tab(DreamtinkerTab.PART).stacksTo(64);
 
     public static final RegistryObject<ModifiableItem> tntarrow = ITEMS.register("tntarrow", () -> new TNTarrow(TOOL,toolsDefinition.TNTARROW));
     public static final RegistryObject<ModifiableItem> masu = ITEMS.register("masu", () -> new Masu(TOOL,toolsDefinition.MASU));
