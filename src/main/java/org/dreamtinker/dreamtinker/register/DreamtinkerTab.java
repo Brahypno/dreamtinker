@@ -13,5 +13,11 @@ public class DreamtinkerTab {
             return new ItemStack(DreamtinkerItem.tntarrow.get());
         }
     };
+    public static final CreativeModeTab PART = new CreativeModeTab("Dreamtinker.part") {
+        @Override
+        public @NotNull ItemStack makeIcon() {
+            return new ItemStack(DreamtinkerItem.explode_core.get());
+        }
+    };
 
 }

@@ -1,0 +1,21 @@
+{
+  "parts": [
+    {
+      "path": "dreamtinker:item/tool/explode_core/explode_core",
+      "stat_type": "tconstruct:head"
+    },
+    {
+      "path": "dreamtinker:item/tool/tntarrow/explode_core",
+      "stat_type": "tconstruct:head"
+    },
+    {
+      "path": "dreamtinker:item/tool/tntarrow/arrow_wing",
+      "stat_type": "tconstruct:handle"
+    },
+    {
+      "path": "dreamtinker:item/tool/tntarrow/arrow_handle",
+      "stat_type": "tconstruct:handle"
+    }
+  ],
+  "replace": false
+}

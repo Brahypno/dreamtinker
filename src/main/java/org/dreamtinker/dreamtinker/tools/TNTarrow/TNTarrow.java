@@ -8,7 +8,6 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.tools.definition.ToolDefinition;
 import slimeknights.tconstruct.library.tools.item.ModifiableItem;
-import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
 public class TNTarrow extends ModifiableItem {
 
@@ -17,10 +16,9 @@ public class TNTarrow extends ModifiableItem {
     }
 
     public @NotNull AbstractArrow createArrow(Level world, ItemStack stack, LivingEntity shooter) {
-        System.out.println("Arrow create: " + world);
-
-        return new TNTArrowEntity(world, shooter, ToolStack.from(stack));
+        return new TNTArrowEntity(world, shooter, stack);
     }
+
     public boolean isInfinite(ItemStack stack, ItemStack bow, Player player) {
         return false;
     }

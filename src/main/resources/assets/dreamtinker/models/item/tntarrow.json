@@ -1,0 +1,26 @@
+{
+  "loader": "tconstruct:tool",
+  "parent": "forge:item/default-tool",
+  "textures": {
+    "explore_core": "dreamtinker:item/tool/tntarrow/explode_core",
+    "arrow_handle": "dreamtinker:item/tool/tntarrow/arrow_handle",
+    "arrow_wing": "dreamtinker:item/tool/tntarrow/arrow_wing"
+  },
+  "modifier_roots": [
+    "dreamtinker:item/tool/tntarrow/modifiers/"
+  ],
+  "parts": [
+    {
+      "name": "explore_core",
+      "index": 0
+    },
+    {
+      "name": "arrow_handle",
+      "index": 1
+    },
+    {
+      "name": "arrow_wing",
+      "index": 2
+    }
+  ]
+}
