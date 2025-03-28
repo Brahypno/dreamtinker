@@ -8,7 +8,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import org.dreamtinker.dreamtinker.tools.TNTarrow.TNTArrowEntity;
+import org.dreamtinker.dreamtinker.entity.TNTArrowEntity;
+import org.jetbrains.annotations.NotNull;
 
 import static org.dreamtinker.dreamtinker.Dreamtinker.MODID;
 
@@ -20,7 +21,7 @@ public class  Dreamtinkertoolutils {
         event.enqueueWork(() -> {
             EntityRenderers.register(DreamtinkerEntity.TNTARROW.get(), (EntityRendererProvider.Context context) -> new ArrowRenderer<>(context) {
                 @Override
-                public ResourceLocation getTextureLocation(TNTArrowEntity tntArrowEntity) {
+                public @NotNull ResourceLocation getTextureLocation(@NotNull TNTArrowEntity tntArrowEntity) {
                     return new  ResourceLocation("minecraft", "textures/entity/projectiles/arrow.png");
 
                 }
