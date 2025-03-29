@@ -28,7 +28,7 @@ public abstract class BaseModifier extends Modifier implements MeleeHitModifierH
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
         super.registerHooks(hookBuilder);
-        hookBuilder.addHook(this, ModifierHooks.MELEE_DAMAGE/*ModifierHooks.MELEE_HIT,ModifierHooks.PROJECTILE_LAUNCH,ModifierHooks.PROJECTILE_HIT,ModifierHooks.TOOL_DAMAGE,ModifierHooks.INVENTORY_TICK*/, DreamtinkerHook.LEFT_CLICK );
+        hookBuilder.addHook(this, ModifierHooks.MELEE_DAMAGE/*ModifierHooks.MELEE_HIT,ModifierHooks.PROJECTILE_LAUNCH,ModifierHooks.PROJECTILE_HIT,ModifierHooks.TOOL_DAMAGE*/,ModifierHooks.INVENTORY_TICK, DreamtinkerHook.LEFT_CLICK );
     }
 
     @Override

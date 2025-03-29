@@ -27,7 +27,7 @@ public class TNTArrowEntity extends AbstractArrow {
         super(type, world);
     }
     private ItemStack tntarrow = new ItemStack(Items.ARROW);
-    private  int hitradius=5;
+    private  int hitradius = 5;
 
     public TNTArrowEntity(Level world, LivingEntity shooter, ItemStack stack) {
         super(DreamtinkerEntity.TNTARROW.get(), shooter, world);
@@ -43,6 +43,7 @@ public class TNTArrowEntity extends AbstractArrow {
                 ServerLevel serverLevel = (ServerLevel) this.level;
                 FakePlayer fakeAttacker = FakePlayerFactory.getMinecraft(serverLevel);
                 ToolAttackUtil.attackEntity(ToolStack.from(this.tntarrow), fakeAttacker, InteractionHand.MAIN_HAND,entity,() -> 10, false);
+                fakeAttacker = null;
             } catch (SecurityException e) {
                 // 捕获异常，说明 FakePlayer 被禁用
                 ToolAttackUtil.attackEntity(ToolStack.from(this.tntarrow), (LivingEntity)this.getOwner(), InteractionHand.MAIN_HAND,entity,() -> 10, false);

@@ -15,6 +15,34 @@
     {
       "path": "dreamtinker:item/tool/tntarrow/arrow_handle",
       "stat_type": "tconstruct:handle"
+    },
+    {
+      "path": "dreamtinker:item/tool/masu/masu_blade",
+      "stat_type": "tconstruct:head"
+    },
+    {
+      "path": "dreamtinker:item/tool/masu/masu_blade_broken",
+      "stat_type": "tconstruct:head"
+    },
+    {
+      "path": "dreamtinker:item/tool/masu/masu_line",
+      "stat_type": "tconstruct:head"
+    },
+    {
+      "path": "dreamtinker:item/tool/masu/masu_line_broken",
+      "stat_type": "tconstruct:head"
+    },
+    {
+      "path": "dreamtinker:item/tool/masu/masu_binding",
+      "stat_type": "tconstruct:binding"
+    },
+    {
+      "path": "dreamtinker:item/tool/masu/masu_handle",
+      "stat_type": "tconstruct:handle"
+    },
+    {
+      "path": "dreamtinker:item/tool/masu/masu_end",
+      "stat_type": "tconstruct:handle"
     }
   ],
   "replace": false
