@@ -1,5 +1,12 @@
 {
   "modifier.dreamtinker.realsweep": "real sweep",
+  "modifier.dreamtinker.realsweep.flavor": "Hack and Slash!",
+  "modifier.dreamtinker.realsweep.description": "A easier and much supreme sweep attack; If level larger than 1, the modifiers on the weapon would be trigger as well",
+
+  "modifier.dreamtinker.strong_heavy": "strong heavy",
+  "modifier.dreamtinker.strong_heavy.flavor": "too heavy to be use",
+  "modifier.dreamtinker.strong_heavy.description": "if user not have speed/strength, or on a moving live entity, weakness is applied; Otherwise weakness is removed",
+
   "itemGroup.Dreamtinker.tool": "dreamtinker|tool",
   "itemGroup.Dreamtinker.part": "dreamtinker|part",
   "item.dreamtinker.explode_core": "explode core",

@@ -4,6 +4,7 @@ package org.dreamtinker.dreamtinker.modifier.Combat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.decoration.ArmorStand;
@@ -33,8 +34,9 @@ public class realsweep extends BaseModifier {
         }
         return 0.0f;
     }
+    private int getLevel(IToolStackView tool){return tool.getModifierLevel(this);}
 
-    public static void supersweep(IToolStackView tool, ModifierEntry entry, Player player, Level level){
+    public void supersweep(IToolStackView tool, ModifierEntry entry, Player player, Level level){
         if (!level.isClientSide&&player.getAttackStrengthScale(0)>0.8&& !tool.isBroken()){
             // basically sword sweep logic, just deals full damage to all entities
             float diameter=2;//getSweepRange(tool); To improve in 1.20
@@ -46,9 +48,13 @@ public class realsweep extends BaseModifier {
                 for (LivingEntity aoeTarget : level.getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(range, 0.25D, range))) {
                     if (aoeTarget != player &&  !player.isAlliedTo(aoeTarget)
                             && !(aoeTarget instanceof ArmorStand stand && stand.isMarker()) && player.distanceToSqr(aoeTarget) < rangeSq) {
-                        float angle = player.getYRot() * ((float)Math.PI / 180F);
-                        aoeTarget.knockback(0.4F, Mth.sin(angle), -Mth.cos(angle));
-                        ToolAttackUtil.dealDefaultDamage(player, aoeTarget, sweepDamage);
+                        if (1 < getLevel(tool)) {
+                            ToolAttackUtil.attackEntity(tool, player, tool.getItem().equals(player.getMainHandItem().getItem())?InteractionHand.MAIN_HAND:InteractionHand.OFF_HAND,aoeTarget,() -> 10, true);
+                        }else{
+                            float angle = player.getYRot() * ((float)Math.PI / 180F);
+                            aoeTarget.knockback(0.4F, Mth.sin(angle), -Mth.cos(angle));
+                            ToolAttackUtil.dealDefaultDamage(player, aoeTarget, sweepDamage);
+                        }
                     }
                 }
 

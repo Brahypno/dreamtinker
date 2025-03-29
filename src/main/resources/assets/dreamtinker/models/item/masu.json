@@ -2,34 +2,34 @@
   "loader": "tconstruct:tool",
   "parent": "forge:item/default-tool",
   "textures": {
-    "head1": "dreamtinker:item/tool/masu/head1",
-    "head2": "dreamtinker:item/tool/masu/head2",
-    "head3": "dreamtinker:item/tool/masu/head3",
-    "binding": "dreamtinker:item/tool/masu/binding",
-    "handle": "dreamtinker:item/tool/masu/handle"
+    "masu_blade": "dreamtinker:item/tool/masu/masu_blade",
+    "masu_line": "dreamtinker:item/tool/masu/masu_line",
+    "masu_binding": "dreamtinker:item/tool/masu/masu_binding",
+    "masu_handle": "dreamtinker:item/tool/masu/masu_handle",
+    "masu_end": "dreamtinker:item/tool/masu/masu_end"
   },
   "modifier_roots": [
     "dreamtinker:item/tool/masu/modifiers/"
   ],
   "parts": [
     {
-      "name": "head1",
-      "index": 3
-    },
-    {
-      "name": "head2",
-      "index": 2
-    },
-    {
-      "name": "binding",
-      "index": 1
-    },
-    {
-      "name": "head3",
+      "name": "masu_blade",
       "index": 0
     },
     {
-      "name": "handle",
+      "name": "masu_line",
+      "index": 1
+    },
+    {
+      "name": "masu_binding",
+      "index": 2
+    },
+    {
+      "name": "masu_handle",
+      "index": 3
+    },
+    {
+      "name": "masu_end",
       "index": 4
     }
   ]
