@@ -2,9 +2,11 @@ package org.dreamtinker.dreamtinker.modifier.Combat;
 
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.decoration.ArmorStand;
@@ -20,6 +22,8 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 
 import static slimeknights.tconstruct.TConstruct.getResource;
+import static slimeknights.tconstruct.library.tools.SlotType.ABILITY;
+import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.NO_COOLDOWN;
 
 public class realsweep extends BattleModifier {
     public realsweep(){}
@@ -54,9 +58,10 @@ public class realsweep extends BattleModifier {
                 double rangeSq = range * range;
                 for (LivingEntity aoeTarget : level.getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(range, 0.25D, range))) {
                     if (aoeTarget != player &&  !player.isAlliedTo(aoeTarget)
-                            && !(aoeTarget instanceof ArmorStand stand && stand.isMarker()) && player.distanceToSqr(aoeTarget) < rangeSq) {
+                            && !(aoeTarget instanceof ArmorStand stand && stand.isMarker()) && player.distanceToSqr(aoeTarget) < rangeSq
+                    && aoeTarget!=entity) {
                         if (1 < getLevel(tool)) {
-                            ToolAttackUtil.attackEntity(tool, player, tool.getItem().equals(player.getMainHandItem().getItem())?InteractionHand.MAIN_HAND:InteractionHand.OFF_HAND,aoeTarget,() -> 10, true);
+                            ToolAttackUtil.attackEntity(tool, player, tool.getItem().equals(player.getMainHandItem().getItem())?InteractionHand.MAIN_HAND:InteractionHand.OFF_HAND,aoeTarget,NO_COOLDOWN, false);
                         }else{
                             float angle = player.getYRot() * ((float)Math.PI / 180F);
                             aoeTarget.knockback(0.4F, Mth.sin(angle), -Mth.cos(angle));

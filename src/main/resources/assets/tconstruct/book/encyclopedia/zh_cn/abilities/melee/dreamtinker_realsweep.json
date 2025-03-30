@@ -1,0 +1,14 @@
+{
+  "modifier_id": "dreamtinker:realsweep",
+  "text": [
+    {
+      "text": "真实横扫，对攻击范围内所有实体造成伤害。如果词条等级大于1，则该伤害会触发匠魂词条。"
+    }
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable/melee/sword",
+  "effects": [
+    "需要1能力槽",
+    "最高2级"
+  ]
+}
