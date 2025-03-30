@@ -1,0 +1,33 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "check_trait_level": true,
+  "inputs": [
+    {
+      "item": "minecraft:echo_shard",
+      "amount_needed": 8
+    },
+    {
+      "item": "minecraft:echo_shard",
+      "amount_needed": 8
+    }
+  ],
+  "level": {
+    "max": 2
+  },
+  "result": "dreamtinker:realsweep",
+  "slots": {
+    "ability": 1
+  },
+  "tools": [
+    {
+      "tag": "tconstruct:modifiable/melee/sword"
+    },
+    {
+      "item": "tconstruct:kama"
+    },
+    {
+      "item": "tconstruct:scythe"
+    }
+  ]
+}
