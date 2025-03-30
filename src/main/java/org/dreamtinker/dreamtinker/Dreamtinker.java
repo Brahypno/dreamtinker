@@ -37,6 +37,7 @@ public class Dreamtinker {
         MinecraftForge.EVENT_BUS.register(this);
         forgeEventBus.addListener(PlayerEvent::onLeftClickBlock);
         forgeEventBus.addListener(PlayerEvent::onLeftClick);
+        forgeEventBus.addListener(PlayerEvent::onLeftClickEntity);
 
         Dnetwork.registerPackets();
     }

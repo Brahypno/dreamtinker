@@ -2,9 +2,11 @@ package org.dreamtinker.dreamtinker.modifier.Combat;
 
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.decoration.ArmorStand;
@@ -12,6 +14,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.dreamtinker.dreamtinker.modifier.base.BaseModifier;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
@@ -19,6 +22,7 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 
 import static slimeknights.tconstruct.TConstruct.getResource;
+import static slimeknights.tconstruct.library.tools.SlotType.ABILITY;
 
 public class realsweep extends BaseModifier {
     public realsweep(){}
@@ -36,7 +40,13 @@ public class realsweep extends BaseModifier {
     }
     private int getLevel(IToolStackView tool){return tool.getModifierLevel(this);}
 
-    public void supersweep(IToolStackView tool, ModifierEntry entry, Player player, Level level){
+    @Override
+    public Component onModifierRemoved(IToolStackView tool, Modifier modifier) {
+        tool.getPersistentData().addSlots(ABILITY,1);
+        return null;
+    }
+
+    public void supersweep(IToolStackView tool, ModifierEntry entry, Player player, Level level, Entity entity){
         if (!level.isClientSide&&player.getAttackStrengthScale(0)>0.8&& !tool.isBroken()){
             // basically sword sweep logic, just deals full damage to all entities
             float diameter=2;//getSweepRange(tool); To improve in 1.20
@@ -47,9 +57,10 @@ public class realsweep extends BaseModifier {
                 double rangeSq = range * range;
                 for (LivingEntity aoeTarget : level.getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(range, 0.25D, range))) {
                     if (aoeTarget != player &&  !player.isAlliedTo(aoeTarget)
-                            && !(aoeTarget instanceof ArmorStand stand && stand.isMarker()) && player.distanceToSqr(aoeTarget) < rangeSq) {
+                            && !(aoeTarget instanceof ArmorStand stand && stand.isMarker()) && player.distanceToSqr(aoeTarget) < rangeSq
+                    && aoeTarget!=entity) {
                         if (1 < getLevel(tool)) {
-                            ToolAttackUtil.attackEntity(tool, player, tool.getItem().equals(player.getMainHandItem().getItem())?InteractionHand.MAIN_HAND:InteractionHand.OFF_HAND,aoeTarget,() -> 10, true);
+                            ToolAttackUtil.attackEntity(tool, player, tool.getItem().equals(player.getMainHandItem().getItem())?InteractionHand.MAIN_HAND:InteractionHand.OFF_HAND,aoeTarget,() -> 10, false);
                         }else{
                             float angle = player.getYRot() * ((float)Math.PI / 180F);
                             aoeTarget.knockback(0.4F, Mth.sin(angle), -Mth.cos(angle));
@@ -66,11 +77,17 @@ public class realsweep extends BaseModifier {
 
     @Override
     public void onLeftClickEmpty(IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot) {
-        supersweep(tool, entry, player, level);
+        supersweep(tool, entry, player, level,null);
     }
 
     @Override
     public void onLeftClickBlock(IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot, BlockState state, BlockPos pos) {
-        supersweep(tool, entry, player, level);
+        supersweep(tool, entry, player, level,null);
     }
+
+    @Override
+    public void onLeftClickEntity(IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot,Entity target) {
+        supersweep(tool, entry, player, level,target);
+    }
+
 }
