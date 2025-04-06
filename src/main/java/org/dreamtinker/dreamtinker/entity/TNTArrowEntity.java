@@ -26,6 +26,8 @@ import java.util.Objects;
 
 import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.NO_COOLDOWN;
 
+import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.NO_COOLDOWN;
+
 public class TNTArrowEntity extends AbstractArrow {
     public TNTArrowEntity(EntityType<? extends AbstractArrow> type, Level world) {
         super(type, world);
@@ -49,7 +51,6 @@ public class TNTArrowEntity extends AbstractArrow {
                 ToolAttackUtil.attackEntity(ToolStack.from(this.tntarrow), fakeAttacker, InteractionHand.MAIN_HAND,entity,NO_COOLDOWN, false, Util.getSlotType(InteractionHand.OFF_HAND));
                 fakeAttacker = null;
             } catch (SecurityException e) {
-                // 捕获异常，说明 FakePlayer 被禁用
                 ToolAttackUtil.attackEntity(ToolStack.from(this.tntarrow), (LivingEntity)this.getOwner(), InteractionHand.MAIN_HAND,entity,NO_COOLDOWN, false, Util.getSlotType(InteractionHand.OFF_HAND));
             } catch (Exception ignored) {
             }
