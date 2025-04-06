@@ -2,16 +2,29 @@
   "modifier.dreamtinker.realsweep": "real sweep",
   "modifier.dreamtinker.realsweep.flavor": "Hack and Slash!",
   "modifier.dreamtinker.realsweep.description": "A easier and much supreme sweep attack; If level larger than 1, the modifiers on the weapon would be trigger as well",
-
   "modifier.dreamtinker.strong_heavy": "strong heavy",
   "modifier.dreamtinker.strong_heavy.flavor": "too heavy to be use",
   "modifier.dreamtinker.strong_heavy.description": "if user not have speed/strength, or on a moving live entity, weakness is applied; Otherwise weakness is removed",
+  "modifier.dreamtinker.strong_explode": "strong explode",
+  "modifier.dreamtinker.strong_explode.flavor": "High-yield strike detected. Hope you brought your helmet!",
+  "modifier.dreamtinker.strong_explode.description": "Multiply tool damage based on modifier level",
+  "modifier.dreamtinker.echoed_attack": "echoed attack",
+  "modifier.dreamtinker.echoed_attack.flavor": "The Deep Dark will bury you.",
+  "modifier.dreamtinker.echoed_attack.description": "melee 50% deal a follow-up attack; ranged 50% double damage; When triggered, echo energy is gathered and would trigger a sonic beam when reach 9",
+  "modifier.dreamtinker.tooltip.echo_energy": "echo energy amount: ",
 
-  "itemGroup.Dreamtinker.tool": "dreamtinker|tool",
-  "itemGroup.Dreamtinker.part": "dreamtinker|part",
+  "itemGroup.Dreamtinker.tool": "dreamtinker | tool",
+  "itemGroup.Dreamtinker.part": "dreamtinker | part",
+  "itemGroup.Dreamtinker.item": "dreamtinker | item",
+
   "item.dreamtinker.explode_core": "explode core",
   "item.dreamtinker.tntarrow": "exploding arrow",
   "item.dreamtinker.tntarrow.description": "a consumable, special melee weapon.range less than exploding range！",
   "item.dreamtinker.masu": "MaShuo",
-  "item.dreamtinker.masu.description": "Composing poetry while wielding a spear—truly a hero of his time!----a special heave spear that slow and sweep. Need to ride something or with strength effect otherwise apply weakness to self"
+  "item.dreamtinker.masu.description": "Composing poetry while wielding a spear—truly a hero of his time!----a special heave spear that slow and sweep. Need to ride something or with strength effect otherwise apply weakness to self",
+
+  "material.dreamtinker.echo_shard": "echo shard",
+
+  "item.dreamtinker.molten_echo_shard_bucket": "Molten echo shard Bucket",
+  "fluid_type.dreamtinker.molten_echo_shard": "Molten echo"
 }

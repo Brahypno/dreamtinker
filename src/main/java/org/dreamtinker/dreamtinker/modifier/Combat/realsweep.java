@@ -90,5 +90,7 @@ public class realsweep extends BaseModifier {
     public void onLeftClickEntity(IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot,Entity target) {
         supersweep(tool, entry, player, level,target);
     }
-
+    public boolean isNoLevels() {
+        return false;
+    }
 }

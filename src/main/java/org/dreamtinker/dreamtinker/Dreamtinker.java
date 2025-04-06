@@ -10,6 +10,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.dreamtinker.dreamtinker.event.PlayerEvent;
 import org.dreamtinker.dreamtinker.network.Dnetwork;
 import org.dreamtinker.dreamtinker.register.DreamtinkerEntity;
+import org.dreamtinker.dreamtinker.register.DreamtinkerFluid;
 import org.dreamtinker.dreamtinker.register.DreamtinkerItem;
 import org.dreamtinker.dreamtinker.register.DreamtinkerModifer;
 
@@ -29,6 +30,7 @@ public class Dreamtinker {
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
         DreamtinkerItem.ITEMS.register(modEventBus);
+        DreamtinkerFluid.FLUIDS.register(modEventBus);
         DreamtinkerModifer.MODIFIERS.register(modEventBus);
         DreamtinkerEntity.ENTITIES.register(modEventBus);
 
