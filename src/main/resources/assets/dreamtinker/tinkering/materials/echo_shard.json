@@ -1,0 +1,62 @@
+{
+  "color": "03415099",
+  "fallbacks": [
+    "metal"
+  ],
+  "luminosity": 0,
+  "generator": {
+    "supported_stats": [
+      "tconstruct:head",
+      "tconstruct:handle",
+      "tconstruct:binding",
+      "tconstruct:repair_kit",
+      "tconstruct:armor_plating",
+      "tconstruct:plating_helmet",
+      "tconstruct:plating_chestplate",
+      "tconstruct:plating_leggings",
+      "tconstruct:plating_boots",
+      "tconstruct:plating_shield",
+      "tconstruct:maille",
+      "tconstruct:armor_maille",
+      "tconstruct:limb",
+      "tconstruct:grip"
+    ],
+    "transformer": {
+      "type": "tconstruct:grey_to_sprite",
+      "palette": [
+        {
+          "grey": 0,
+          "color": "03415099",
+          "path": "minecraft:textures/item/echo_shard.png"
+        },
+        {
+          "grey": 0,
+          "color": "FFFFFFFF",
+          "path": "minecraft:textures/item/echo_shard.png"
+        },
+        {
+          "grey": 0,
+          "color": "FFFFFFFF",
+          "path": "minecraft:textures/item/echo_shard.png"
+        },
+        {
+          "grey": 0,
+          "color": "FFFFFFFF",
+          "path": "minecraft:textures/item/echo_shard.png"
+        },
+        {
+          "grey": 0,
+          "color": "03415099"
+        },
+        {
+          "grey": 0,
+          "color": "03415099"
+        },
+        {
+          "grey": 0,
+          "color": "03415099"
+        }
+      ]
+    }
+  }
+}
