@@ -2,16 +2,32 @@
   "modifier.dreamtinker.realsweep": "超级横扫",
   "modifier.dreamtinker.realsweep.flavor": "超级横扫",
   "modifier.dreamtinker.realsweep.description": "真实横扫，对攻击范围内所有实体造成伤害。如果词条等级大于1，则该伤害会触发匠魂词条。",
-
   "modifier.dreamtinker.strong_heavy": "超沉重",
   "modifier.dreamtinker.strong_heavy.flavor": "这工具可不好用啊",
   "modifier.dreamtinker.strong_heavy.description": "如果使用者不具有力量、速度效果，或骑乘且速度大于一定值，则会获得虚弱效果；否则移除虚弱效果",
+  "modifier.dreamtinker.strong_explode": "强化镇爆",
+  "modifier.dreamtinker.strong_explode.flavor": "左舷弹幕这下不薄了",
+  "modifier.dreamtinker.strong_explode.description": "伤害增加本强化等级倍数的伤害",
+  "modifier.dreamtinker.echoed_attack": "回响打击",
+  "modifier.dreamtinker.echoed_attack.flavor": "深暗将埋葬你们",
+  "modifier.dreamtinker.echoed_attack.description": "近战时，50% 进行一次追加攻击；拉弓时，50%伤害增加50%；每次触发时充能，计数达到9时进行一次强大的攻击",
+  "modifier.dreamtinker.tooltip.echo_energy": "回响充能计数: ",
 
-  "itemGroup.Dreamtinker.tool": "工匠幻梦|工具",
-  "itemGroup.Dreamtinker.part": "工匠幻梦|部件",
+
+  "itemGroup.Dreamtinker.tool": "工匠幻梦 | 工具",
+  "itemGroup.Dreamtinker.part": "工匠幻梦 | 部件",
+  "itemGroup.Dreamtinker.item": "工匠幻梦 | 道具",
+
   "item.dreamtinker.explode_core": "镇爆核心",
   "item.dreamtinker.tntarrow": "镇爆箭",
   "item.dreamtinker.tntarrow.description": "一种消耗性的，造成范围伤害的特种近战武器，使用弓以发射。射程小于范围！",
   "item.dreamtinker.masu": "马槊",
-  "item.dreamtinker.masu.description": "横槊赋诗，固一世之雄也。一款长距离低速横扫重武器，如果不在骑乘或力量状态下使用，会受到虚弱效果"
+  "item.dreamtinker.masu.description": "横槊赋诗，固一世之雄也。一款长距离低速横扫重武器，如果不在骑乘或力量状态下使用，会受到虚弱效果",
+
+
+  "material.dreamtinker.echo_shard": "回响碎片",
+
+  "item.dreamtinker.molten_echo_shard_bucket": "熔融回响碎片桶",
+  "fluid_type.dreamtinker.molten_echo_shard": "熔融回响"
+
 }

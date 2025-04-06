@@ -3,11 +3,7 @@ package org.dreamtinker.dreamtinker.register;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.registries.RegistryObject;
-<<<<<<< HEAD
-import org.dreamtinker.dreamtinker.tools.TNTarrow.TNTArrowEntity;
-=======
 import org.dreamtinker.dreamtinker.entity.TNTArrowEntity;
->>>>>>> 4b7a4cc (tnt arroe)
 import slimeknights.mantle.registration.deferred.EntityTypeDeferredRegister;
 
 import static org.dreamtinker.dreamtinker.Dreamtinker.MODID;

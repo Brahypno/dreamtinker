@@ -27,8 +27,7 @@ public class strong_heavy extends BattleModifier {
                 player.removeEffect(MobEffects.WEAKNESS);
             } else {
                 MobEffectInstance weaknessEffect = player.getEffect(MobEffects.WEAKNESS);
-                int level = null == weaknessEffect ? 0 : Math.min(weaknessEffect.getAmplifier() + 1,10);
-                player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 200, level, true, false));
+                player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 200, 2, true, false));
 
             }
         }
@@ -36,5 +35,8 @@ public class strong_heavy extends BattleModifier {
 
     private boolean isAllowedVehicle(Player player) {
         return player.getVehicle() != null && player.getVehicle().isAlive();
+    }
+    public boolean isNoLevels() {
+        return true;
     }
 }
