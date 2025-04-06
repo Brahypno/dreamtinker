@@ -10,7 +10,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.FakePlayer;
@@ -56,15 +55,6 @@ public class TNTArrowEntity extends AbstractArrow {
 
         }
     }
-    @Override
-    protected void onHitEntity(@NotNull EntityHitResult hitResult) {
-        super.onHitEntity(hitResult);
-        if (!this.level.isClientSide) {
-            Entity entity = hitResult.getEntity();
-            hitEntity(entity);
-        }
-
-    }
 
     @Override
     protected void onHit(@NotNull HitResult result) {
@@ -82,7 +72,8 @@ public class TNTArrowEntity extends AbstractArrow {
                     hitEntity(livingEntity);
                 }
             }
-            hitEntity(this.getOwner());
+            if(this.getOwner().position().distanceTo(hitPos)<=this.hitradius)
+                hitEntity(this.getOwner());
         }
     }
 
