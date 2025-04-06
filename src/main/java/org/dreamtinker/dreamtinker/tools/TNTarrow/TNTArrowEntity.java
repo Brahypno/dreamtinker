@@ -10,7 +10,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.FakePlayer;
@@ -19,8 +18,11 @@ import org.dreamtinker.dreamtinker.register.DreamtinkerEntity;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
+import slimeknights.tconstruct.library.utils.Util;
 
 import java.util.List;
+
+import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.NO_COOLDOWN;
 
 public class TNTArrowEntity extends AbstractArrow {
     public TNTArrowEntity(EntityType<? extends AbstractArrow> type, Level world) {
@@ -36,30 +38,22 @@ public class TNTArrowEntity extends AbstractArrow {
 
     protected void hitEntity(Entity entity){
         if(null !=this.getOwner() && this.getOwner() instanceof LivingEntity && entity.getUUID() != this.getOwner().getUUID()){
-            ToolAttackUtil.attackEntity(ToolStack.from(this.tntarrow), (LivingEntity)this.getOwner(), InteractionHand.MAIN_HAND,entity,() -> 10, false);
+            ToolAttackUtil.attackEntity(ToolStack.from(this.tntarrow), (LivingEntity)this.getOwner(), InteractionHand.OFF_HAND,entity,NO_COOLDOWN, false,Util.getSlotType(InteractionHand.OFF_HAND));
+
         }
         else{
             try {
                 ServerLevel serverLevel = (ServerLevel) this.level;
                 FakePlayer fakeAttacker = FakePlayerFactory.getMinecraft(serverLevel);
-                ToolAttackUtil.attackEntity(ToolStack.from(this.tntarrow), fakeAttacker, InteractionHand.MAIN_HAND,entity,() -> 10, false);
+                ToolAttackUtil.attackEntity(ToolStack.from(this.tntarrow), fakeAttacker, InteractionHand.MAIN_HAND,entity,NO_COOLDOWN, false, Util.getSlotType(InteractionHand.OFF_HAND));
                 fakeAttacker = null;
             } catch (SecurityException e) {
                 // 捕获异常，说明 FakePlayer 被禁用
-                ToolAttackUtil.attackEntity(ToolStack.from(this.tntarrow), (LivingEntity)this.getOwner(), InteractionHand.MAIN_HAND,entity,() -> 10, false);
+                ToolAttackUtil.attackEntity(ToolStack.from(this.tntarrow), (LivingEntity)this.getOwner(), InteractionHand.MAIN_HAND,entity,NO_COOLDOWN, false);
             } catch (Exception ignored) {
             }
 
         }
-    }
-    @Override
-    protected void onHitEntity(@NotNull EntityHitResult hitResult) {
-        super.onHitEntity(hitResult);
-        if (!this.level.isClientSide) {
-            Entity entity = hitResult.getEntity();
-            hitEntity(entity);
-        }
-
     }
 
     @Override
@@ -78,7 +72,8 @@ public class TNTArrowEntity extends AbstractArrow {
                     hitEntity(livingEntity);
                 }
             }
-            hitEntity(this.getOwner());
+            if(this.getOwner().position().distanceTo(hitPos)<=this.hitradius)
+                hitEntity(this.getOwner());
         }
     }
 
