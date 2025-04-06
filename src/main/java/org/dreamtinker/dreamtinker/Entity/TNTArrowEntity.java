@@ -1,6 +1,7 @@
-package org.dreamtinker.dreamtinker.tools.TNTarrow;
+package org.dreamtinker.dreamtinker.Entity;
 
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -21,6 +22,7 @@ import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.utils.Util;
 
 import java.util.List;
+import java.util.Objects;
 
 import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.NO_COOLDOWN;
 
@@ -49,7 +51,7 @@ public class TNTArrowEntity extends AbstractArrow {
                 fakeAttacker = null;
             } catch (SecurityException e) {
                 // 捕获异常，说明 FakePlayer 被禁用
-                ToolAttackUtil.attackEntity(ToolStack.from(this.tntarrow), (LivingEntity)this.getOwner(), InteractionHand.MAIN_HAND,entity,NO_COOLDOWN, false);
+                ToolAttackUtil.attackEntity(ToolStack.from(this.tntarrow), (LivingEntity)this.getOwner(), InteractionHand.MAIN_HAND,entity,NO_COOLDOWN, false, Util.getSlotType(InteractionHand.OFF_HAND));
             } catch (Exception ignored) {
             }
 
@@ -60,6 +62,7 @@ public class TNTArrowEntity extends AbstractArrow {
     protected void onHit(@NotNull HitResult result) {
         super.onHit(result);
         if (!this.level.isClientSide) {
+            float sound=2.0F;
             Vec3 hitPos = result.getLocation();
             // 查找半径内的实体
             List<Entity> nearbyEntities = this.level.getEntities(null,
@@ -70,10 +73,14 @@ public class TNTArrowEntity extends AbstractArrow {
                 if (entity instanceof LivingEntity livingEntity) {
                     // 你可以根据需要对实体进行处理
                     hitEntity(livingEntity);
+                    sound++;
                 }
             }
-            if(this.getOwner().position().distanceTo(hitPos)<=this.hitradius)
+            if(Objects.requireNonNull(this.getOwner()).position().distanceTo(hitPos)<=this.hitradius){
                 hitEntity(this.getOwner());
+                sound++;
+            }
+            this.playSound(SoundEvents.GENERIC_EXPLODE, sound, (1.0F + (random.nextFloat() - random.nextFloat()) * 0.2F) * 0.7F);
         }
     }
 

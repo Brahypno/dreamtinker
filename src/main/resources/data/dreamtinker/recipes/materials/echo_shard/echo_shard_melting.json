@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "item": "minecraft:echo_shard"
+  },
+  "result": {
+    "fluid": "dreamtinker:molten_echo_shard",
+    "amount": 100
+  },
+  "temperature": 1500,
+  "time": 20
+}

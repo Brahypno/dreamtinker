@@ -1,6 +1,10 @@
 {
   "modifier.dreamtinker": {
     "realsweep": "#330066",
-    "strong_heavy": "#808080"
-}
+    "strong_heavy": "#808080",
+    "echoed_attack": "#415099"
+},
+  "material.dreamtinker": {
+    "echo_shard": "#034150"
+  }
 }

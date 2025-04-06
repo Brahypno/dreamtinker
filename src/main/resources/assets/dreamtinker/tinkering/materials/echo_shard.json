@@ -1,0 +1,41 @@
+{
+  "color": "FF415099",
+  "fallbacks": [
+    "metal",
+    "crystal"
+  ],
+  "generator": {
+    "ignoreMaterialStats": false,
+    "supportedStats": [
+      "tconstruct:head",
+      "tconstruct:handle",
+      "tconstruct:binding",
+      "tconstruct:repair_kit",
+      "tconstruct:armor_plating",
+      "tconstruct:plating_helmet",
+      "tconstruct:plating_chestplate",
+      "tconstruct:plating_leggings",
+      "tconstruct:plating_boots",
+      "tconstruct:plating_shield",
+      "tconstruct:maille",
+      "tconstruct:armor_maille",
+      "tconstruct:limb",
+      "tconstruct:grip"
+    ],
+    "transformer": {
+      "type": "tconstruct:grey_to_sprite",
+      "palette": [
+        { "grey": 0, "path": "dreamtinker:hover/gradient_echo_shard_0" },
+        { "grey": 48, "path": "dreamtinker:hover/gradient_echo_shard_1" },
+        { "grey": 96, "path": "dreamtinker:hover/gradient_echo_shard_2" },
+        { "grey": 128, "path": "dreamtinker:hover/gradient_echo_shard_5" },
+        { "grey": 160, "path": "dreamtinker:hover/gradient_echo_shard_6" },
+        { "grey": 192, "path": "dreamtinker:hover/gradient_echo_shard_7" },
+        { "grey": 220, "path": "dreamtinker:hover/gradient_echo_shard_8" },
+        { "grey": 235, "path": "dreamtinker:hover/gradient_echo_shard_3" },
+        { "grey": 248, "path": "dreamtinker:hover/gradient_echo_shard_4" }
+      ]
+    }
+  },
+  "luminosity": 0
+}
