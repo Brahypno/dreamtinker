@@ -1,0 +1,31 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "check_trait_level": true,
+  "inputs": [
+    {
+      "item": "minecraft:creeper_head",
+      "amount_needed": 1
+    },
+    {
+      "item": "minecraft:gunpowder",
+      "amount_needed": 1
+    }
+  ],
+  "level": {
+    "max": 3
+  },
+  "result": "dreamtinker:strong_explode",
+  "slots": {
+    "upgrades": 1
+  },
+  "pre_condition": {
+    "modifier": "dreamtinker:strong_explode",
+    "level": 2
+  },
+  "tools": [
+    {
+      "item": "dreamtinker:tntarrow"
+    }
+  ]
+}
