@@ -22,6 +22,12 @@
   "tools": [
     {
       "tag": "tconstruct:modifiable/melee/sword"
+    },
+    {
+      "item": "tconstruct:kama"
+    },
+    {
+      "item": "tconstruct:scythe"
     }
   ]
 }
