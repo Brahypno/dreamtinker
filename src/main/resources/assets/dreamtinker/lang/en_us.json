@@ -12,6 +12,9 @@
   "modifier.dreamtinker.echoed_attack.flavor": "The Deep Dark will bury you.",
   "modifier.dreamtinker.echoed_attack.description": "melee 50% deal a follow-up attack; ranged 50% double damage; When triggered, echo energy is gathered and would trigger a sonic beam when reach 9",
   "modifier.dreamtinker.tooltip.echo_energy": "echo energy amount: ",
+  "modifier.dreamtinker.silvernamebee": "Silver ledger",
+  "modifier.dreamtinker.silvernamebee.flavor": "we know what we get",
+  "modifier.dreamtinker.silvernamebee.description": "Loot extra rate item",
 
   "itemGroup.Dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.Dreamtinker.part": "dreamtinker | part",
@@ -22,9 +25,11 @@
   "item.dreamtinker.tntarrow.description": "a consumable, special melee weapon.range less than exploding range！",
   "item.dreamtinker.masu": "MaShuo",
   "item.dreamtinker.masu.description": "Composing poetry while wielding a spear—truly a hero of his time!----a special heave spear that slow and sweep. Need to ride something or with strength effect otherwise apply weakness to self",
+  "item.dreamtinker.molten_echo_shard_bucket": "Molten echo shard Bucket",
 
   "material.dreamtinker.echo_shard": "echo shard",
 
-  "item.dreamtinker.molten_echo_shard_bucket": "Molten echo shard Bucket",
-  "fluid_type.dreamtinker.molten_echo_shard": "Molten echo"
+  "fluid_type.dreamtinker.molten_echo_shard": "Molten echo",
+
+  "effect.dreamtinker.effectsilvernamebee": "silver ledger"
 }

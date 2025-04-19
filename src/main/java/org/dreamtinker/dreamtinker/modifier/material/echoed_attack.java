@@ -20,6 +20,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.modifier.base.BaseModifier;
+import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -59,8 +60,7 @@ public class echoed_attack extends BaseModifier {
         }
     }
     @Override
-    public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
-        LivingEntity entity= context.getAttacker();
+    public float beforeMeleeHit(IToolStackView tool, @NotNull ModifierEntry modifier, @NotNull ToolAttackContext context, float damage, float baseKnockback, float knockback) {
         ModDataNBT nbt = tool.getPersistentData();
         int count = nbt.getInt(TAG_ECHO_ENERGY);
         if(9<=count){
@@ -71,7 +71,7 @@ public class echoed_attack extends BaseModifier {
         return knockback;
     }
     public void onProjectileLaunch(IToolStackView tool, ModifierEntry modifier, LivingEntity shooter, Projectile projectile, @Nullable AbstractArrow arrow, NamespacedNBT persistentData, boolean primary) {
-        if (!(shooter.level instanceof ServerLevel level)) return;
+        if (!(shooter.level instanceof ServerLevel)) return;
         ModDataNBT nbt = tool.getPersistentData();
         int count = nbt.getInt(TAG_ECHO_ENERGY)+1;
         if (projectile instanceof AbstractArrow && null!=arrow && 0.5 < Math.random()) {
@@ -111,7 +111,6 @@ public class echoed_attack extends BaseModifier {
         ModDataNBT nbt = tool.getPersistentData();
         int count = nbt.getInt(TAG_ECHO_ENERGY);
         nbt.putInt(TAG_ECHO_ENERGY, count + echo_energy);
-        System.out.println("check"+count);
     }
 
     private void shortCutDamage(IToolStackView tool, ToolAttackContext context) {
