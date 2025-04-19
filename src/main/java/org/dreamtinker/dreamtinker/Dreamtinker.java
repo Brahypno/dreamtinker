@@ -9,10 +9,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.dreamtinker.dreamtinker.event.PlayerEvent;
 import org.dreamtinker.dreamtinker.network.Dnetwork;
-import org.dreamtinker.dreamtinker.register.DreamtinkerEntity;
-import org.dreamtinker.dreamtinker.register.DreamtinkerFluid;
-import org.dreamtinker.dreamtinker.register.DreamtinkerItem;
-import org.dreamtinker.dreamtinker.register.DreamtinkerModifer;
+import org.dreamtinker.dreamtinker.register.*;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(Dreamtinker.MODID)
@@ -33,6 +30,7 @@ public class Dreamtinker {
         DreamtinkerFluid.FLUIDS.register(modEventBus);
         DreamtinkerModifer.MODIFIERS.register(modEventBus);
         DreamtinkerEntity.ENTITIES.register(modEventBus);
+        DreamtinkerEffect.EFFECT.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
         forgeEventBus.addListener(PlayerEvent::onLeftClickBlock);

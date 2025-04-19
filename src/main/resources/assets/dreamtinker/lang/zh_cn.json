@@ -12,6 +12,9 @@
   "modifier.dreamtinker.echoed_attack.flavor": "深暗将埋葬你们",
   "modifier.dreamtinker.echoed_attack.description": "近战时，50% 进行一次追加攻击；拉弓时，50%伤害增加50%；每次触发时充能，计数达到9时进行一次强大的攻击",
   "modifier.dreamtinker.tooltip.echo_energy": "回响充能计数: ",
+  "modifier.dreamtinker.silvernamebee": "银账本",
+  "modifier.dreamtinker.silvernamebee.flavor": "按着账本搜一搜",
+  "modifier.dreamtinker.silvernamebee.description": "针对稀有掉落物的抢夺效果",
 
 
   "itemGroup.Dreamtinker.tool": "工匠幻梦 | 工具",
@@ -23,11 +26,12 @@
   "item.dreamtinker.tntarrow.description": "一种消耗性的，造成范围伤害的特种近战武器，使用弓以发射。射程小于范围！",
   "item.dreamtinker.masu": "马槊",
   "item.dreamtinker.masu.description": "横槊赋诗，固一世之雄也。一款长距离低速横扫重武器，如果不在骑乘或力量状态下使用，会受到虚弱效果",
-
+  "item.dreamtinker.molten_echo_shard_bucket": "熔融回响碎片桶",
 
   "material.dreamtinker.echo_shard": "回响碎片",
 
-  "item.dreamtinker.molten_echo_shard_bucket": "熔融回响碎片桶",
-  "fluid_type.dreamtinker.molten_echo_shard": "熔融回响"
+  "fluid_type.dreamtinker.molten_echo_shard": "熔融回响",
+
+  "effect.dreamtinker.effectsilvernamebee": "银账本"
 
 }

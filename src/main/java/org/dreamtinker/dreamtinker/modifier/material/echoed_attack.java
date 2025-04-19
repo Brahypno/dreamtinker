@@ -60,8 +60,7 @@ public class echoed_attack extends BattleModifier {
         }
     }
     @Override
-    public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
-        LivingEntity entity= context.getAttacker();
+    public float beforeMeleeHit(IToolStackView tool, @NotNull ModifierEntry modifier, @NotNull ToolAttackContext context, float damage, float baseKnockback, float knockback) {
         ModDataNBT nbt = tool.getPersistentData();
         int count = nbt.getInt(TAG_ECHO_ENERGY);
         if(9<=count){
@@ -113,7 +112,6 @@ public class echoed_attack extends BattleModifier {
         ModDataNBT nbt = tool.getPersistentData();
         int count = nbt.getInt(TAG_ECHO_ENERGY);
         nbt.putInt(TAG_ECHO_ENERGY, count + echo_energy);
-        System.out.println("check"+count);
     }
 
     private void shortCutDamage(IToolStackView tool, ToolAttackContext context) {
