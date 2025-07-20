@@ -15,6 +15,9 @@
   "modifier.dreamtinker.silvernamebee": "Silver ledger",
   "modifier.dreamtinker.silvernamebee.flavor": "we know what we get",
   "modifier.dreamtinker.silvernamebee.description": "Loot extra rate item",
+  "modifier.dreamtinker.glacial_river": "Glacial River",
+  "modifier.dreamtinker.glacial_river.flavor": "...in lunar flame!",
+  "modifier.dreamtinker.glacial_river.description": "in exchange of HP, deal extra damage",
 
   "itemGroup.Dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.Dreamtinker.part": "dreamtinker | part",
@@ -28,6 +31,7 @@
   "item.dreamtinker.molten_echo_shard_bucket": "Molten echo shard Bucket",
 
   "material.dreamtinker.echo_shard": "echo shard",
+  "material.dreamtinker.moonlight_ice": "moonlight",
 
   "fluid_type.dreamtinker.molten_echo_shard": "Molten echo",
 

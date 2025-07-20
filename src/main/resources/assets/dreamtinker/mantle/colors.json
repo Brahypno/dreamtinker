@@ -2,7 +2,10 @@
   "modifier.dreamtinker": {
     "realsweep": "#330066",
     "strong_heavy": "#808080",
-    "echoed_attack": "#415099"
+    "echoed_attack": "#415099",
+    "strong_explode": "#AA0000",
+    "silvernamebee": "#C0C0C0",
+    "glacial_river": "#D7EFFA"
 },
   "material.dreamtinker": {
     "echo_shard": "#034150"

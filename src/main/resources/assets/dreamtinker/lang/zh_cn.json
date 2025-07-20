@@ -15,6 +15,9 @@
   "modifier.dreamtinker.silvernamebee": "银账本",
   "modifier.dreamtinker.silvernamebee.flavor": "按着账本搜一搜",
   "modifier.dreamtinker.silvernamebee.description": "针对稀有掉落物的抢夺效果",
+  "modifier.dreamtinker.glacial_river": "寒川",
+  "modifier.dreamtinker.glacial_river.flavor": "照彻——",
+  "modifier.dreamtinker.glacial_river.description": "以血量为代价造成额外伤害",
 
 
   "itemGroup.Dreamtinker.tool": "工匠幻梦 | 工具",
@@ -29,6 +32,7 @@
   "item.dreamtinker.molten_echo_shard_bucket": "熔融回响碎片桶",
 
   "material.dreamtinker.echo_shard": "回响碎片",
+  "material.dreamtinker.moonlight_ice": "月光",
 
   "fluid_type.dreamtinker.molten_echo_shard": "熔融回响",
 

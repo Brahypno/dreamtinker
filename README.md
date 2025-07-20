@@ -1,13 +1,15 @@
-# 工匠幻梦
+# dreamtinker
 
-## route map and progress for en_us, check wiki!
+## check wiki for detailed infomation!
 
-### 工具
+## This mod aims to add dream thing, that is unreal, or even troll
+
+### Tool
 
 * 镇爆箭---以剑的系数造成范围近战伤害  
 * 马槊----长距离慢横扫武器，需要骑乘或力量状态否则会获得虚弱；但满足条件会移除虚弱
 
-### 材料（进行中）
+### material
 
 1. 回响碎片
 2. 化学的婚礼
