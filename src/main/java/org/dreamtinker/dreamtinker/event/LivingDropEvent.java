@@ -32,6 +32,8 @@ import java.util.*;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class LivingDropEvent {
+    private static final Random random = new Random();
+
     @SubscribeEvent
     public static void onSilverNameBeeDrops(LivingDropsEvent event) {
         LivingEntity entity = event.getEntity();
@@ -58,7 +60,7 @@ public class LivingDropEvent {
                 .withParameter(LootContextParams.DAMAGE_SOURCE, event.getSource())
                 .withOptionalParameter(LootContextParams.KILLER_ENTITY, attacker)
                 .withOptionalParameter(LootContextParams.DIRECT_KILLER_ENTITY, event.getSource().getDirectEntity())
-                .withOptionalParameter(LootContextParams.LAST_DAMAGE_PLAYER, attacker instanceof ServerPlayer ? (ServerPlayer) attacker: null);
+                .withOptionalParameter(LootContextParams.LAST_DAMAGE_PLAYER, attacker instanceof ServerPlayer ? (ServerPlayer) attacker : null);
 
         ItemStack originalTool = livingAttacker.getMainHandItem();
         ItemStack lootingTool = originalTool.copy();
@@ -80,25 +82,23 @@ public class LivingDropEvent {
         LootTable table = serverLevel.getServer().getLootTables().get(lootId);
 
         // 从稀有条目中 roll 掉落
-        rollRareEntries(table, entity,context);
+        rollRareEntries(table, entity, context);
     }
-    private static final Random random = new Random();
-    private static void rollRareEntries(LootTable table, LivingEntity entity,LootContext context) {
+
+    private static void rollRareEntries(LootTable table, LivingEntity entity, LootContext context) {
         List<LootPoolEntryContainer> rareEntries = new ArrayList<>();
 
-        for (LootPool pool : table.pools) {
-            for (LootPoolEntryContainer entry : pool.entries) {
-                if (isRare(entry,context)) {
+        for (LootPool pool : table.pools)
+            for (LootPoolEntryContainer entry : pool.entries)
+                if (isRare(entry, context))
                     rareEntries.add(entry);
-                }
-            }
-        }
+
+
 
         if (!rareEntries.isEmpty()) {
             LootPoolEntryContainer chosen = rareEntries.get(random.nextInt(rareEntries.size()));
             entity.spawnAtLocation(LootEntryInspector.getItemStack(chosen));
-        }
-        else{
+        } else {
             Map<Item, Integer> totals = new HashMap<>();
 
             for (int i = 0; i < 100; i++) {
@@ -127,14 +127,14 @@ public class LivingDropEvent {
 
     }
 
-    private static boolean isRare(LootPoolEntryContainer entry,LootContext context) {
+    private static boolean isRare(LootPoolEntryContainer entry, LootContext context) {
         LootItemCondition[] conditions = LootEntryInspector.getConditions(entry);
         //System.out.println("[Warning] 尝试判断是否: " + LootEntryInspector.describeLootEntry(entry));
         for (LootItemCondition condition : conditions) {
-            if (LootEntryInspector.isLowChanceCondition(condition)||LootEntryInspector.matchRareKeys(condition))
+            if (LootEntryInspector.isLowChanceCondition(condition) || LootEntryInspector.matchRareKeys(condition))
                 return true;
         }
-        return LootEntryInspector.hasRareFunctionCondition(entry, context)||LootEntryInspector.rarityfromitem(entry);
+        return LootEntryInspector.hasRareFunctionCondition(entry, context) || LootEntryInspector.rarityfromitem(entry);
     }
 
 }

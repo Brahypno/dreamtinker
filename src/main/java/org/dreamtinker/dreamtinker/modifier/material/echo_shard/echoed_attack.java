@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.modifier.material;
+package org.dreamtinker.dreamtinker.modifier.material.echo_shard;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
