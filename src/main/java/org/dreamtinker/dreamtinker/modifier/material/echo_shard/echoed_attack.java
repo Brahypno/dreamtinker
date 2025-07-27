@@ -38,10 +38,14 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.EchoAttackCharge;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.EchoAttackChargingChance;
 import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.getAttributeAttackDamage;
 
 public class echoed_attack extends BattleModifier {
     private static final ResourceLocation TAG_ECHO_ENERGY = new ResourceLocation(Dreamtinker.MODID, "echo_energy");
+    private static final int E_C = EchoAttackCharge.get();
+    private static final double charingchance= EchoAttackChargingChance.get();
 
     @Override
     public Component onModifierRemoved(IToolStackView tool, Modifier modifier) {
@@ -63,8 +67,8 @@ public class echoed_attack extends BattleModifier {
     public float beforeMeleeHit(IToolStackView tool, @NotNull ModifierEntry modifier, @NotNull ToolAttackContext context, float damage, float baseKnockback, float knockback) {
         ModDataNBT nbt = tool.getPersistentData();
         int count = nbt.getInt(TAG_ECHO_ENERGY);
-        if(9<=count){
-            count-=9;
+        if(E_C<=count){
+            count-=E_C;
             performSonicBoomSweep(tool, (ServerLevel) context.getAttacker().level, context.getAttacker());
             nbt.putInt(TAG_ECHO_ENERGY, count);
         }
@@ -75,12 +79,12 @@ public class echoed_attack extends BattleModifier {
         if (!(shooter.level instanceof ServerLevel)) return;
         ModDataNBT nbt = tool.getPersistentData();
         int count = nbt.getInt(TAG_ECHO_ENERGY)+1;
-        if (projectile instanceof AbstractArrow && null!=arrow && 0.5 < Math.random()) {
+        if (projectile instanceof AbstractArrow && null!=arrow && Math.random()<charingchance) {
             ((AbstractArrow) projectile).setBaseDamage(((AbstractArrow) projectile).getBaseDamage()*1.5);
             count++;
         }
-        if(9<=count){
-            count-=9;
+        if(E_C<=count){
+            count-=E_C;
             performSonicBoomSweep(tool, (ServerLevel) shooter.level, shooter);
             nbt.putInt(TAG_ECHO_ENERGY, count);
         }
@@ -98,7 +102,7 @@ public class echoed_attack extends BattleModifier {
 
     private void hitEntity(IToolStackView tool,LivingEntity attacker,LivingEntity target,ToolAttackContext context){
         int echo_energy = 1;
-        if (null != target && 0.5 < Math.random()) {
+        if (null != target && Math.random()<charingchance) {
             shortCutDamage(tool, context);
             for (LivingEntity entity : new LivingEntity[]{attacker, target}) {
                 if (entity != null) {

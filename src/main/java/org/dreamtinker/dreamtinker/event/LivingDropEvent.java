@@ -30,6 +30,8 @@ import org.dreamtinker.dreamtinker.utils.LootEntryInspector;
 
 import java.util.*;
 
+import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.SilvernamebeeNum;
+
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class LivingDropEvent {
     private static final Random random = new Random();
@@ -117,7 +119,7 @@ public class LivingDropEvent {
                         .orElse(null);
 
                 if (smallestEntry != null) {
-                    ItemStack smallest = new ItemStack(smallestEntry.getKey(), 1);
+                    ItemStack smallest = new ItemStack(smallestEntry.getKey(), SilvernamebeeNum.get());
                     //System.out.println("[DEBUG] 最小掉落: " + smallest.getCount() + " × " + smallest.getItem().getDescriptionId());
                     entity.spawnAtLocation(smallest);
                 }

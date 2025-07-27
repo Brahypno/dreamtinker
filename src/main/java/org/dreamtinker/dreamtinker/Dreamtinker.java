@@ -4,9 +4,12 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.dreamtinker.dreamtinker.config.DreamtinkerConfig;
 import org.dreamtinker.dreamtinker.event.PlayerEvent;
 import org.dreamtinker.dreamtinker.network.Dnetwork;
 import org.dreamtinker.dreamtinker.register.*;
@@ -39,6 +42,8 @@ public class Dreamtinker {
         forgeEventBus.addListener(PlayerEvent::onLeftClickEntity);
 
         Dnetwork.registerPackets();
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, DreamtinkerConfig.specs, "DreamTinkerMaterials.toml");
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

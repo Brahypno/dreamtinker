@@ -20,9 +20,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
+import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.AntimonyLootChance;
+
 public class AntimonyLootModifier extends LootModifier {
     private final Item antimony;
     private final TagKey<Block> target_tag;
+
     public static final Codec<AntimonyLootModifier> CODEC = RecordCodecBuilder.create(inst -> codecStart(inst)
             .and(ForgeRegistries.ITEMS.getCodec().fieldOf("antimony").forGetter(mod -> mod.antimony))
             .and(ResourceLocation.CODEC.optionalFieldOf("target_tag").forGetter(m -> {
@@ -34,7 +37,6 @@ public class AntimonyLootModifier extends LootModifier {
                 return new AntimonyLootModifier(conditions, item, tag);
             })
     );
-    public static final float basechance=0.01f;
 
     public AntimonyLootModifier(LootItemCondition[] conditions, Item antimony, TagKey<Block> target_tag) {
         super(conditions);
@@ -60,8 +62,8 @@ public class AntimonyLootModifier extends LootModifier {
             }
         }
         float luckBoost = (float) lootContext.getLuck() * 0.005f;
-        float chance = (fortune+1)*basechance+luckBoost;
-        if (lootContext.getRandom().nextFloat() < 10) {
+        float chance = (float) ((fortune+1)*AntimonyLootChance.get()+luckBoost);
+        if (lootContext.getRandom().nextFloat() < chance) {
             int amount = 1 + lootContext.getRandom().nextInt(1 + fortune);
             objectArrayList.add(new ItemStack(antimony,amount));
         }

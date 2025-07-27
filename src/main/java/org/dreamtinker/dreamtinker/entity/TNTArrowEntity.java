@@ -24,6 +24,7 @@ import slimeknights.tconstruct.library.utils.Util;
 import java.util.List;
 import java.util.Objects;
 
+import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.TNTarrowgravity;
 import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.NO_COOLDOWN;
 
 public class TNTArrowEntity extends AbstractArrow {
@@ -71,7 +72,6 @@ public class TNTArrowEntity extends AbstractArrow {
             // 遍历实体列表
             for (Entity entity : nearbyEntities) {
                 if (entity instanceof LivingEntity livingEntity) {
-                    // 你可以根据需要对实体进行处理
                     hitEntity(livingEntity);
                     sound++;
                 }
@@ -93,7 +93,7 @@ public class TNTArrowEntity extends AbstractArrow {
     public void tick() {
         super.tick();
         if (!this.isNoGravity()) {
-            this.setDeltaMovement(this.getDeltaMovement().add(0.0, -5, 0.0));
+            this.setDeltaMovement(this.getDeltaMovement().add(0.0, TNTarrowgravity.get(), 0.0));
         }
     }
 }

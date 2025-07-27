@@ -21,6 +21,7 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 
+import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.RealSweepRange;
 import static slimeknights.tconstruct.TConstruct.getResource;
 import static slimeknights.tconstruct.library.tools.SlotType.ABILITY;
 import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.NO_COOLDOWN;
@@ -50,7 +51,7 @@ public class realsweep extends BattleModifier {
     public void superSweep(IToolStackView tool, ModifierEntry entry, Player player, Level level, Entity entity){
         if (!level.isClientSide&&player.getAttackStrengthScale(0)>0.8&& !tool.isBroken()){
             // basically sword sweep logic, just deals full damage to all entities
-            float diameter=2;//getSweepRange(tool); To improve in 1.20
+            float diameter=RealSweepRange.get();//getSweepRange(tool); To improve in 1.20
             double range = diameter + tool.getModifierLevel(TinkerModifiers.expanded.getId());
             float sweepDamage = TinkerModifiers.sweeping.get().getSweepingDamage(tool, tool.getStats().get(ToolStats.ATTACK_DAMAGE));
 
