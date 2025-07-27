@@ -22,7 +22,7 @@ public class DreamtinkerConfig {
         builder.push("LOOT Configuration");
     }
     public static final ForgeConfigSpec.DoubleValue AntimonyLootChance = builder.comment("Base chance to get Antimony drop from Ore")
-            .defineInRange("AntimonyLootChance", 0.001, 0, 1000);
+            .defineInRange("AntimonyLootChance", 0.02, 0, 1000);
 
     static {
         builder.pop();
@@ -48,6 +48,12 @@ public class DreamtinkerConfig {
 
     public static final ForgeConfigSpec.DoubleValue EchoAttackChargingChance = builder.comment("Chance for trigger to update")
             .defineInRange("EchoAttackChargingChance", 0.5, 0, 1);
+
+    public static final ForgeConfigSpec.DoubleValue EchoDefenceRange = builder.comment("Entity within this range would be considered as potential target")
+            .defineInRange("EchoDefenceRange", 10.0, 1, 1000);
+
+    public static final ForgeConfigSpec.DoubleValue EchoDefenceSpeed = builder.comment("Speed of bounced arrow")
+            .defineInRange("EchoDefenceSpeed", 5.0, 3, 100);
 
     public static final ForgeConfigSpec specs = builder.pop().build();
 }
