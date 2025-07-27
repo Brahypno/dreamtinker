@@ -36,5 +36,10 @@ public class DreamtinkerTab {
             return DreamtinkerItem.explode_core.get().withMaterial(MaterialVariantId.parse("tconstruct:blazing_bone"));
         }
     };
-
+    public static final CreativeModeTab ORE = new CreativeModeTab("Dreamtinker.ore") {
+        @Override
+        public @NotNull ItemStack makeIcon() {
+            return new ItemStack(DreamtinkerItem.stibnite_ore.get());
+        }
+    };
 }

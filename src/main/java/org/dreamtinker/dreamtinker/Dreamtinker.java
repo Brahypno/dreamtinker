@@ -31,6 +31,7 @@ public class Dreamtinker {
         DreamtinkerModifer.MODIFIERS.register(modEventBus);
         DreamtinkerEntity.ENTITIES.register(modEventBus);
         DreamtinkerEffect.EFFECT.register(modEventBus);
+        DreamtinkerLoots.LOOTMODIFIERS.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
         forgeEventBus.addListener(PlayerEvent::onLeftClickBlock);

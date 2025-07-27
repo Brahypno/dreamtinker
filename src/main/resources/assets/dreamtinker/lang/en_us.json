@@ -22,6 +22,7 @@
   "itemGroup.Dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.Dreamtinker.part": "dreamtinker | part",
   "itemGroup.Dreamtinker.item": "dreamtinker | item",
+  "itemGroup.Dreamtinker.ore": "dreamtinker | item",
 
   "item.dreamtinker.explode_core": "explode core",
   "item.dreamtinker.tntarrow": "exploding arrow",
@@ -29,6 +30,8 @@
   "item.dreamtinker.masu": "MaShuo",
   "item.dreamtinker.masu.description": "Composing poetry while wielding a spear—truly a hero of his time!----a special heave spear that slow and sweep. Need to ride something or with strength effect otherwise apply weakness to self",
   "item.dreamtinker.molten_echo_shard_bucket": "Molten echo shard Bucket",
+
+  "item.dreamtinker.stibnite_ore": "Stibnite Ore",
 
   "material.dreamtinker.echo_shard": "echo shard",
   "material.dreamtinker.moonlight_ice": "moonlight",

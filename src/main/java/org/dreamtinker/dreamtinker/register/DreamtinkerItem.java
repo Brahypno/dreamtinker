@@ -24,5 +24,8 @@ public class DreamtinkerItem {
     public static final RegistryObject<ModifiableItem> masu = ITEMS.register("masu", () -> new Masu(TOOL,toolsDefinition.MASU));
 
     public static final RegistryObject<ToolPartItem> explode_core = ITEMS.register("explode_core", () -> new ToolPartItem(PART, HeadMaterialStats.ID));
+
+    public static final RegistryObject<Item> stibnite_ore = ITEMS.register("stibnite_ore",() -> new Item(new Item.Properties().tab(DreamtinkerTab.ORE)));
+
 }
 

@@ -23,6 +23,7 @@
   "itemGroup.Dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.Dreamtinker.part": "工匠幻梦 | 部件",
   "itemGroup.Dreamtinker.item": "工匠幻梦 | 道具",
+  "itemGroup.Dreamtinker.ore": "工匠幻梦 | 杂项",
 
   "item.dreamtinker.explode_core": "镇爆核心",
   "item.dreamtinker.tntarrow": "镇爆箭",
@@ -30,6 +31,8 @@
   "item.dreamtinker.masu": "马槊",
   "item.dreamtinker.masu.description": "横槊赋诗，固一世之雄也。一款长距离低速横扫重武器，如果不在骑乘或力量状态下使用，会受到虚弱效果",
   "item.dreamtinker.molten_echo_shard_bucket": "熔融回响碎片桶",
+
+  "item.dreamtinker.stibnite_ore": "辉锑矿",
 
   "material.dreamtinker.echo_shard": "回响碎片",
   "material.dreamtinker.moonlight_ice": "月光",
