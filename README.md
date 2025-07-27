@@ -4,29 +4,11 @@
 
 ## This mod aims to add dream thing, that is unreal, or even troll
 
-### Tool
-
-* 镇爆箭---以剑的系数造成范围近战伤害  
-* 马槊----长距离慢横扫武器，需要骑乘或力量状态否则会获得虚弱；但满足条件会移除虚弱
-
+## Route Map
 ### material
+1. Currus Triumphalis Antimonii
+2. Chemical Wedding
+4. Amber
+5. Narcissus
 
-1. 回响碎片
-2. 化学的婚礼
-3. 锑的螺旋车
-4. 琥珀
-5. 水仙
-
-### 多方块结构
-1. 炼金
-
-### 强化
-
-1. 超级横扫
-2. 超沉重
-3. 强化震爆
-4. 回响打击
-
-### 联动（未开始）
-1. 幻梦
-2. 神秘遗物
+### multi-block structure
