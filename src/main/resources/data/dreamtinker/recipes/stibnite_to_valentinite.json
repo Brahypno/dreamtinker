@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "dreamtinker:stibnite_ore"
+  },
+  "result": "dreamtinker:valentinite",
+  "experience": 1,
+  "cookingtime": 100
+}

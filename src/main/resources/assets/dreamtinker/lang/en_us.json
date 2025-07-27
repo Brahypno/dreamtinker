@@ -21,6 +21,9 @@
   "modifier.dreamtinker.glacial_river": "Glacial River",
   "modifier.dreamtinker.glacial_river.flavor": "...in lunar flame!",
   "modifier.dreamtinker.glacial_river.description": "in exchange of HP, deal extra damage",
+  "modifier.dreamtinker.antimony_usage": "antimony usage",
+  "modifier.dreamtinker.antimony_usage.flavor": "This is STEM",
+  "modifier.dreamtinker.antimony_usage.description": "Increase hardness of the tool",
 
   "itemGroup.Dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.Dreamtinker.part": "dreamtinker | part",

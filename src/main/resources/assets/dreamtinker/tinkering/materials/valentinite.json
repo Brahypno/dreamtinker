@@ -1,0 +1,52 @@
+{
+  "color": "FFF6E07E",
+  "fallbacks": [
+    "crystal"
+  ],
+  "generator": {
+    "ignoreMaterialStats": false,
+    "supportedStats": [
+      "tconstruct:handle",
+      "tconstruct:binding",
+      "tconstruct:repair_kit",
+      "tconstruct:armor_plating",
+      "tconstruct:maille",
+      "tconstruct:armor_maille",
+      "tconstruct:limb"
+    ],
+    "transformer": {
+      "type": "tconstruct:grey_to_sprite",
+      "palette": [
+        {
+          "grey": 0,
+          "color": "FFFAF9E6"
+        },
+        {
+          "grey": 63,
+          "color": "FFF4E8A3"
+        },
+        {
+          "grey": 102,
+          "color": "FFF1D970"
+        },
+        {
+          "grey": 140,
+          "color": "FFEDC954"
+        },
+        {
+          "grey": 178,
+          "color": "FFE5AC2E"
+        },
+        {
+          "grey": 216,
+          "color": "FFBB8923"
+        },
+        {
+          "grey": 255,
+          "color": "FF7A5C18"
+        }
+      ]
+    }
+  },
+  "luminosity": 15
+}

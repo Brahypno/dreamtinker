@@ -28,12 +28,11 @@ public class DreamtinkerConfig {
         builder.pop();
         builder.push("Modifier Configuration");
     }
+
     public static final ForgeConfigSpec.DoubleValue glaciriverPortion = builder.comment("Portion of life that glarical river steal")
             .defineInRange("GlaciralRiverPortion", 0.1, 0, 1000);
-
     public static final ForgeConfigSpec.IntValue glaciriverRange = builder.comment("Range that glarical river effect")
             .defineInRange("GlaciralRiverRange", 5, 1, 1000);
-
     public static final ForgeConfigSpec.IntValue glaciriverKillPlayer = builder.comment("Does Glarical river kill player? 0=no")
             .defineInRange("GlaciralRiverKillPlayer", 0, 0, 1);
 
@@ -45,15 +44,22 @@ public class DreamtinkerConfig {
 
     public static final ForgeConfigSpec.IntValue EchoAttackCharge = builder.comment("Numbers of Charge needed to trigger")
             .defineInRange("EchoAttackCharge", 9, 1, 1000);
-
     public static final ForgeConfigSpec.DoubleValue EchoAttackChargingChance = builder.comment("Chance for trigger to update")
             .defineInRange("EchoAttackChargingChance", 0.5, 0, 1);
 
     public static final ForgeConfigSpec.DoubleValue EchoDefenceRange = builder.comment("Entity within this range would be considered as potential target")
             .defineInRange("EchoDefenceRange", 10.0, 1, 1000);
-
     public static final ForgeConfigSpec.DoubleValue EchoDefenceSpeed = builder.comment("Speed of bounced arrow")
             .defineInRange("EchoDefenceSpeed", 5.0, 3, 100);
+
+    public static final ForgeConfigSpec.DoubleValue AntimonyUsageDur = builder.comment("Durability improvement from antimony_usage")
+            .defineInRange("AntimonyUsageDur", 0.1, 0, 1000);
+    public static final ForgeConfigSpec.DoubleValue AntimonyUsageAttack = builder.comment("Tool improvement from antimony_usage")
+            .defineInRange("AntimonyUsageAttack", 0.1, 0, 1000);
+    public static final ForgeConfigSpec.DoubleValue AntimonyUsageArmor = builder.comment("Armor improvement from antimony_usage")
+            .defineInRange("AntimonyUsageArmor", 0.1, 0, 1000);
+    public static final ForgeConfigSpec.DoubleValue AntimonyUsageProj = builder.comment("Projectile modifier from antimony_usage")
+            .defineInRange("AntimonyUsageProj", 0.1, 0, 1000);
 
     public static final ForgeConfigSpec specs = builder.pop().build();
 }

@@ -21,6 +21,9 @@
   "modifier.dreamtinker.glacial_river": "寒川",
   "modifier.dreamtinker.glacial_river.flavor": "照彻——",
   "modifier.dreamtinker.glacial_river.description": "以血量为代价造成额外伤害",
+  "modifier.dreamtinker.antimony_usage": "锑之用",
+  "modifier.dreamtinker.antimony_usage.flavor": "稀土金属，朋友",
+  "modifier.dreamtinker.antimony_usage.description": "提升工具的硬度*",
 
 
   "itemGroup.Dreamtinker.tool": "工匠幻梦 | 工具",

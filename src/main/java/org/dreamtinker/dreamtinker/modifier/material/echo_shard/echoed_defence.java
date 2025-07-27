@@ -70,7 +70,6 @@ public class echoed_defence extends ArmorModifier {
             projectile.lookAt(EntityAnchorArgument.Anchor.EYES, newTarget.getEyePosition());
         }
 
-        // 可选：添加音效/粒子
         context.getEntity().level.playSound(null, context.getEntity().blockPosition(), SoundEvents.TRIDENT_RETURN, SoundSource.PLAYERS, 1f, 1f);
 
         return true;
