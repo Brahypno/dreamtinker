@@ -5,14 +5,16 @@ import net.minecraft.world.entity.EquipmentSlot;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.armor.DamageBlockModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.armor.EquipmentChangeModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.armor.OnAttackedModifierHook;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
+import slimeknights.tconstruct.library.tools.context.EquipmentChangeContext;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
-public interface ArmorInterface extends OnAttackedModifierHook, DamageBlockModifierHook {
+public interface ArmorInterface extends OnAttackedModifierHook, DamageBlockModifierHook, EquipmentChangeModifierHook{
     default void ArmorInterfaceInit(ModuleHookMap.Builder hookBuilder) {
-        hookBuilder.addHook(this, ModifierHooks.ON_ATTACKED,ModifierHooks.DAMAGE_BLOCK);
+        hookBuilder.addHook(this, ModifierHooks.ON_ATTACKED,ModifierHooks.DAMAGE_BLOCK,ModifierHooks.EQUIPMENT_CHANGE);
     }
 
     default void onAttacked(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount, boolean isDirectDamage) {
@@ -22,5 +24,8 @@ public interface ArmorInterface extends OnAttackedModifierHook, DamageBlockModif
     default boolean isDamageBlocked(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount) {
         return false;
     }
+    default void onEquip(IToolStackView tool, ModifierEntry modifier, EquipmentChangeContext context) {}
+    default void onUnequip(IToolStackView tool, ModifierEntry modifier, EquipmentChangeContext context) {}
+    default void onEquipmentChange(IToolStackView tool, ModifierEntry modifier, EquipmentChangeContext context, EquipmentSlot slotType) {}
 
 }

@@ -7,6 +7,8 @@ import org.dreamtinker.dreamtinker.modifier.Combat.silvernamebee;
 import org.dreamtinker.dreamtinker.modifier.Combat.strong_explode;
 import org.dreamtinker.dreamtinker.modifier.material.echo_shard.echoed_attack;
 import org.dreamtinker.dreamtinker.modifier.material.echo_shard.echoed_defence;
+import org.dreamtinker.dreamtinker.modifier.material.nigrescence_antimony.broken_vessel;
+import org.dreamtinker.dreamtinker.modifier.material.nigrescence_antimony.ewige_widerkunft;
 import org.dreamtinker.dreamtinker.modifier.material.valentinite.antimony_usage;
 import org.dreamtinker.dreamtinker.modifier.tools.strong_heavy;
 import slimeknights.tconstruct.library.modifiers.util.ModifierDeferredRegister;
@@ -23,4 +25,6 @@ public class DreamtinkerModifer {
     public static final StaticModifier<silvernamebee> silvernamebee = MODIFIERS.register("silvernamebee", silvernamebee::new);
     public static final StaticModifier<glacialriver> glacial_river = MODIFIERS.register("glacial_river", glacialriver::new);
     public static final StaticModifier<antimony_usage> antimony_usage = MODIFIERS.register("antimony_usage", antimony_usage::new);
+    public static final StaticModifier<broken_vessel> broken_vessel = MODIFIERS.register("broken_vessel", broken_vessel::new);
+    public static final StaticModifier<ewige_widerkunft> ewige_widerkunft = MODIFIERS.register("ewige_widerkunft", ewige_widerkunft::new);
 }

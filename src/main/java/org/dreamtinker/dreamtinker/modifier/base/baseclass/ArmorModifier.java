@@ -2,7 +2,7 @@ package org.dreamtinker.dreamtinker.modifier.base.baseclass;
 
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.event.entity.living.*;
 import org.dreamtinker.dreamtinker.modifier.base.baseinterface.ArmorInterface;
 import org.dreamtinker.dreamtinker.modifier.base.baseinterface.BasicInterface;
 import org.jetbrains.annotations.NotNull;
@@ -14,6 +14,8 @@ public abstract class ArmorModifier extends Modifier implements ArmorInterface, 
         MinecraftForge.EVENT_BUS.addListener(this::LivingHurtEvent);
         MinecraftForge.EVENT_BUS.addListener(this::LivingAttackEvent);
         MinecraftForge.EVENT_BUS.addListener(this::LivingDamageEvent);
+        MinecraftForge.EVENT_BUS.addListener(this::LivingHealEvent);
+        MinecraftForge.EVENT_BUS.addListener(this::LivingUpdateEvent);
     }
 
     @Override
@@ -23,13 +25,17 @@ public abstract class ArmorModifier extends Modifier implements ArmorInterface, 
         super.registerHooks(hookBuilder);
     }
 
-    private void LivingDamageEvent(Event event) {
+    private void LivingDamageEvent(LivingDamageEvent event) {
     }
 
-    private void LivingAttackEvent(Event event) {
+    private void LivingAttackEvent(LivingAttackEvent event) {
     }
 
-    private void LivingHurtEvent(Event event) {
+    private void LivingHurtEvent(LivingHurtEvent event) {
+    }
+    private void LivingHealEvent(LivingHealEvent event) {
+    }
+    private void LivingUpdateEvent(LivingEvent event) {
     }
 
     public @NotNull Component getDisplayName(int level) {

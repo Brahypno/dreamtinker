@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.Item;
+package org.dreamtinker.dreamtinker.Item.antimony;
 
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;

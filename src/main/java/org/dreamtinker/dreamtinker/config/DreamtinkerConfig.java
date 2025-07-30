@@ -61,6 +61,11 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.DoubleValue AntimonyUsageProj = builder.comment("Projectile modifier from antimony_usage")
             .defineInRange("AntimonyUsageProj", 0.1, 0, 1000);
 
+    public static final ForgeConfigSpec.IntValue BrokenVesselBoost = builder.comment("HP boost from BrokenBessel")
+            .defineInRange("BrokenVesselBoost", 1, 0, 1000);
+
+    public static final ForgeConfigSpec.DoubleValue Prometheus = builder.comment("status boot everytime for ewige_widerkunft")
+            .defineInRange("Prometheus", 0.13, 0, 1);
     public static final ForgeConfigSpec specs = builder.pop().build();
 }
 

@@ -24,6 +24,13 @@
   "modifier.dreamtinker.antimony_usage": "antimony usage",
   "modifier.dreamtinker.antimony_usage.flavor": "This is STEM",
   "modifier.dreamtinker.antimony_usage.description": "Increase hardness of the tool",
+  "modifier.dreamtinker.broken_vessel": "Long-Shattered Vessel",
+  "modifier.dreamtinker.broken_vessel.flavor": "Darkest Deep",
+  "modifier.dreamtinker.broken_vessel.description": "Boost max HP in exchange of......",
+  "modifier.dreamtinker.ewige_widerkunft": "ewige widerkunft",
+  "modifier.dreamtinker.ewige_widerkunft.flavor": "Unterlasse es, zu sagen: „Verweile doch, du bist so schön!“",
+  "modifier.dreamtinker.ewige_widerkunft.description": "Every break make this weapon stronger",
+  "modifier.dreamtinker.tooltip.ewige_widerkunft": "The Wheel Spins: ",
 
   "itemGroup.Dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.Dreamtinker.part": "dreamtinker | part",
@@ -36,15 +43,21 @@
   "item.dreamtinker.masu": "MaShuo",
   "item.dreamtinker.masu.description": "Composing poetry while wielding a spear—truly a hero of his time!----a special heave spear that slow and sweep. Need to ride something or with strength effect otherwise apply weakness to self",
   "item.dreamtinker.molten_echo_shard_bucket": "Molten echo shard Bucket",
+  "item.dreamtinker.molten_nigrescence_antimony_bucket": "Molten Nigrescence of Antimon Bucket",
 
   "item.dreamtinker.stibnite_ore": "Stibnite Ore",
   "item.dreamtinker.valentinite": "Valentinite",
+  "item.dreamtinker.nigrescence_antimony": "Nigrescence of Antimony",
 
   "material.dreamtinker.echo_shard": "echo shard",
   "material.dreamtinker.moonlight_ice": "moonlight",
   "material.dreamtinker.valentinite": "Valentinite",
+  "material.dreamtinker.nigrescence_antimony": "Nigrescence of Antimony",
+  "tooltip.nigrescence_antimony.desc1": "Void-Antimony, Corruptum Antimonii,Antimony of the First Death......Names so manifold it doth bear",
+  "tooltip.nigrescence_antimony.desc2": "And lo, the means of its grasping are but simple.",
 
   "fluid_type.dreamtinker.molten_echo_shard": "Molten echo",
+  "fluid_type.dreamtinker.molten_nigrescence_antimony": "Molten Nigrescence of Antimony",
 
   "effect.dreamtinker.effectsilvernamebee": "silver ledger"
 }

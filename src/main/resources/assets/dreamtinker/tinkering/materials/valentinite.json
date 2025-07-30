@@ -19,15 +19,15 @@
       "palette": [
         {
           "grey": 0,
-          "color": "FFFAF9E6"
+          "color": "FF7A5C18"
         },
         {
           "grey": 63,
-          "color": "FFF4E8A3"
+          "color": "FFBB8923"
         },
         {
           "grey": 102,
-          "color": "FFF1D970"
+          "color": "FFE5AC2E"
         },
         {
           "grey": 140,
@@ -35,15 +35,15 @@
         },
         {
           "grey": 178,
-          "color": "FFE5AC2E"
+          "color": "FFF1D970"
         },
         {
           "grey": 216,
-          "color": "FFBB8923"
+          "color": "FFF4E8A3"
         },
         {
           "grey": 255,
-          "color": "FF7A5C18"
+          "color": "FFFAF9E6"
         }
       ]
     }

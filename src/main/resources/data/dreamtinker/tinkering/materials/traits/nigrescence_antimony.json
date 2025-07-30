@@ -1,0 +1,22 @@
+{
+  "perStat": {
+    "tconstruct:melee_harvest": [
+      {
+        "name": "dreamtinker:ewige_widerkunft",
+        "level": 1
+      }
+    ],
+    "tconstruct:ranged": [
+      {
+        "name": "dreamtinker:",
+        "level": 1
+      }
+    ],
+    "tconstruct:armor": [
+      {
+        "name": "dreamtinker:broken_vessel",
+        "level": 1
+      }
+    ]
+  }
+}

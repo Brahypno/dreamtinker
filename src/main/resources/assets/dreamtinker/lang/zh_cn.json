@@ -24,6 +24,13 @@
   "modifier.dreamtinker.antimony_usage": "锑之用",
   "modifier.dreamtinker.antimony_usage.flavor": "稀土金属，朋友",
   "modifier.dreamtinker.antimony_usage.description": "提升工具的硬度*",
+  "modifier.dreamtinker.broken_vessel": "破碎容器",
+  "modifier.dreamtinker.broken_vessel.flavor": "不是蓝鲸鱼",
+  "modifier.dreamtinker.broken_vessel.description": "提升最大HP......",
+  "modifier.dreamtinker.ewige_widerkunft": "永劫轮回",
+  "modifier.dreamtinker.ewige_widerkunft.flavor": "在五完美巡后的世界再会吧",
+  "modifier.dreamtinker.ewige_widerkunft.description": "当耐久度归零时，恢复耐久并提升数值",
+  "modifier.dreamtinker.tooltip.ewige_widerkunft": "The Wheel Spins: ",
 
 
   "itemGroup.Dreamtinker.tool": "工匠幻梦 | 工具",
@@ -37,15 +44,21 @@
   "item.dreamtinker.masu": "马槊",
   "item.dreamtinker.masu.description": "横槊赋诗，固一世之雄也。一款长距离低速横扫重武器，如果不在骑乘或力量状态下使用，会受到虚弱效果",
   "item.dreamtinker.molten_echo_shard_bucket": "熔融回响碎片桶",
+  "item.dreamtinker.molten_nigrescence_antimony_bucket": "融化黑锑桶",
 
   "item.dreamtinker.stibnite_ore": "辉锑矿",
   "item.dreamtinker.valentinite": "锑华",
+  "item.dreamtinker.nigrescence_antimony": "黑化锑",
 
   "material.dreamtinker.echo_shard": "回响碎片",
   "material.dreamtinker.moonlight_ice": "月光",
   "material.dreamtinker.valentinite": "锑华",
+  "material.dreamtinker.nigrescence_antimony": "黑化锑",
+  "tooltip.nigrescence_antimony.desc1": "虚空锑, 堕落之锑,锑之一死物......众名环绕，象征其神秘与堕落",
+  "tooltip.nigrescence_antimony.desc2": "可它的唤现之法，竟是如此轻而易举",
 
   "fluid_type.dreamtinker.molten_echo_shard": "熔融回响",
+  "fluid_type.dreamtinker.molten_nigrescence_antimony": "融化黑锑",
 
   "effect.dreamtinker.effectsilvernamebee": "银账本"
 

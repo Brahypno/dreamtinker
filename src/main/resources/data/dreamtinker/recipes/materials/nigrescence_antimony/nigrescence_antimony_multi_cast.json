@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/gem"
+  },
+  "cast_consumed": false,
+  "fluid": {
+    "name": "dreamtinker:molten_nigrescence_antimony",
+    "amount": 100
+  },
+  "result": "dreamtinker:nigrescence_antimony",
+  "cooling_time": 200
+}

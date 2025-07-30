@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "dreamtinker:valentinite" },
+    { "item": "minecraft:rotten_flesh" }
+  ],
+  "result": {
+    "item": "dreamtinker:nigrescence_antimony",
+    "count": 1
+  }
+}
