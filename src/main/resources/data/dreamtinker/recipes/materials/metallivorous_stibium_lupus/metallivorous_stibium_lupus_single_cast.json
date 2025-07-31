@@ -1,13 +1,13 @@
 {
   "type": "tconstruct:casting_table",
   "cast": {
-    "tag": "tconstruct:casts/single_use/gem"
+    "tag": "tconstruct:casts/single_use/ingot"
   },
   "cast_consumed": true,
   "fluid": {
-    "name": "dreamtinker:molten_nigrescence_antimony",
-    "amount": 100
+    "name": "dreamtinker:molten_metallivorous_stibium_lupus",
+    "amount": 90
   },
   "result": "minecraft:nigrescence_antimony",
-  "cooling_time": 200
+  "cooling_time": 20
 }

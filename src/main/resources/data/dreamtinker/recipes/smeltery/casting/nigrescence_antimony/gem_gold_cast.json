@@ -3,7 +3,7 @@
   "cast": {
     "tag": "tconstruct:casts/multi_use/gem"
   },
-  "cooling_time": 83,
+  "cooling_time": 40,
   "fluid": {
     "amount": 100,
     "tag": "dreamtinker:molten_nigrescence_antimony"

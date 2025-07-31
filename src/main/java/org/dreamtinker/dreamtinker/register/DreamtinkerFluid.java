@@ -27,5 +27,8 @@ public class DreamtinkerFluid {
 
     public static final FluidObject<ForgeFlowingFluid> molten_echo_shard = registerFluid("molten_echo_shard", 1500,2000,10000,0,Material.LAVA);
     public static final FluidObject<ForgeFlowingFluid> molten_nigrescence_antimony = registerFluid("molten_nigrescence_antimony", 600,5000,6666,0,Material.LAVA);
-
+    public static final FluidObject<ForgeFlowingFluid> molten_albedo_stibium = registerFluid("molten_albedo_stibium", 600,1000,3190,15,Material.WATER);
+    public static final FluidObject<ForgeFlowingFluid> molten_lupi_antimony = registerFluid("molten_lupi_antimony", 1500,44,7676,15,Material.LAVA);
+    public static final FluidObject<ForgeFlowingFluid> molten_accending_antimony = registerFluid("molten_accending_antimony", 600,1000,3190,15,Material.WATER);
+    //public static final FluidObject<ForgeFlowingFluid> molten_smoky_stibium = registerFluid("molten_smoky_stibium", 600,1000,3190,15,Material.WATER);
 }

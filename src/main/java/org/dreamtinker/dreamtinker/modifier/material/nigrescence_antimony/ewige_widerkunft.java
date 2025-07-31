@@ -48,14 +48,17 @@ public class ewige_widerkunft extends BattleModifier {
             nbt.putInt(TAG_TOMB, breaks);
             tool.setDamage(0);
             if (holder != null) {
+                holder.sendSystemMessage(
+                        Component.literal("13=1")
+                );
                 holder.level.explode(
                         holder,
                         holder.getX(),  holder.getY(), holder.getZ(),
-                        tool.getDamage(), true,
+                        current, true,
                         Explosion.BlockInteraction.BREAK
                 );
             }
-            return 0; // 本次不再真正掉耐久
+            return 0;
         }
         return breaks*amount;
     }
@@ -71,9 +74,11 @@ public class ewige_widerkunft extends BattleModifier {
         if (modifier.getLevel() > 0) {
             ModDataNBT nbt = tool.getPersistentData();
             int breaks = nbt.getInt(TAG_TOMB);
-            consumer.accept(Attributes.ATTACK_DAMAGE, new AttributeModifier(UUID.fromString("3d1df7e8-4b20-4e2d-9d5f-5c1b2f8e7c9d"), Attributes.ATTACK_DAMAGE.getDescriptionId(), Math.pow(Prometheus.get(),breaks), AttributeModifier.Operation.MULTIPLY_BASE));
-            consumer.accept(Attributes.ATTACK_SPEED, new AttributeModifier(UUID.fromString("8f2c1a9e-3f54-4d7b-96a1-7a2e6cf3b1a4"), Attributes.ATTACK_SPEED.getDescriptionId(), Math.pow(Prometheus.get(),breaks), AttributeModifier.Operation.MULTIPLY_BASE));
-            consumer.accept(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(UUID.fromString("8f2c1a9e-3f54-4d7b-96a1-7a2e6cf3b1a4"), Attributes.ATTACK_KNOCKBACK.getDescriptionId(), Math.pow(Prometheus.get(),breaks), AttributeModifier.Operation.MULTIPLY_BASE));
+            if(breaks>0) {
+                consumer.accept(Attributes.ATTACK_DAMAGE, new AttributeModifier(UUID.fromString("3d1df7e8-4b20-4e2d-9d5f-5c1b2f8e7c9d"), Attributes.ATTACK_DAMAGE.getDescriptionId(), Math.pow(Prometheus.get(), breaks), AttributeModifier.Operation.MULTIPLY_BASE));
+                consumer.accept(Attributes.ATTACK_SPEED, new AttributeModifier(UUID.fromString("8f2c1a9e-3f54-4d7b-96a1-7a2e6cf3b1a4"), Attributes.ATTACK_SPEED.getDescriptionId(), Math.pow(Prometheus.get(), breaks), AttributeModifier.Operation.MULTIPLY_BASE));
+                consumer.accept(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(UUID.fromString("7f58b4e7-9ab6-42bb-952a-c41016464b14"), Attributes.ATTACK_KNOCKBACK.getDescriptionId(), Math.pow(Prometheus.get(), breaks), AttributeModifier.Operation.MULTIPLY_BASE));
+            }
         }
     }
     @Override
@@ -91,5 +96,11 @@ public class ewige_widerkunft extends BattleModifier {
             }
         }
     }
+    @Override
+    public boolean isNoLevels(){return true;}
 
+    @Override
+    public int getPriority() {
+        return Integer.MIN_VALUE;
+    }
 }

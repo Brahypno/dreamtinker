@@ -1,7 +1,7 @@
 {
   "type": "tconstruct:material_melting",
   "input": "dreamtinker:nigrescence_antimony",
-  "temperature": 1500,
+  "temperature": 600,
   "result": {
     "fluid": "dreamtinker:molten_nigrescence_antimony",
     "amount": 100

@@ -6,7 +6,7 @@
   "cast_consumed": true,
   "fluid": {
     "name": "dreamtinker:molten_echo_shard",
-    "amount": 90
+    "amount": 100
   },
   "result": "minecraft:echo_shard",
   "cooling_time": 200

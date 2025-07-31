@@ -44,20 +44,27 @@
   "item.dreamtinker.masu.description": "Composing poetry while wielding a spear—truly a hero of his time!----a special heave spear that slow and sweep. Need to ride something or with strength effect otherwise apply weakness to self",
   "item.dreamtinker.molten_echo_shard_bucket": "Molten echo shard Bucket",
   "item.dreamtinker.molten_nigrescence_antimony_bucket": "Molten Nigrescence of Antimon Bucket",
+  "item.dreamtinker.molten_albedo_stibium_bucket": "Molten albedo stibium Bucket",
+  "item.dreamtinker.molten_lupi_antimony_bucket": "Molten Stibium Metallivorum Lupi Bucket",
 
   "item.dreamtinker.stibnite_ore": "Stibnite Ore",
   "item.dreamtinker.valentinite": "Valentinite",
   "item.dreamtinker.nigrescence_antimony": "Nigrescence of Antimony",
+  "tooltip.nigrescence_antimony.desc1": "Void-Antimony, Corruptum Antimonii,Antimony of the First Death......Names so manifold it doth bear",
+  "tooltip.nigrescence_antimony.desc2": "And lo, the means of its grasping are but simple.",
+  "item.dreamtinker.metallivorous_stibium_lupus": "Stibium Metallivorum Lupi",
 
   "material.dreamtinker.echo_shard": "echo shard",
   "material.dreamtinker.moonlight_ice": "moonlight",
   "material.dreamtinker.valentinite": "Valentinite",
   "material.dreamtinker.nigrescence_antimony": "Nigrescence of Antimony",
-  "tooltip.nigrescence_antimony.desc1": "Void-Antimony, Corruptum Antimonii,Antimony of the First Death......Names so manifold it doth bear",
-  "tooltip.nigrescence_antimony.desc2": "And lo, the means of its grasping are but simple.",
+  "material.dreamtinker.metallivorous_stibium_lupus": "Stibium Metallivorum Lupi",
+
 
   "fluid_type.dreamtinker.molten_echo_shard": "Molten echo",
   "fluid_type.dreamtinker.molten_nigrescence_antimony": "Molten Nigrescence of Antimony",
+  "fluid_type.dreamtinker.molten_albedo_stibium": "Molten albedo stibium",
+  "fluid_type.dreamtinker.molten_lupi_antimony": "Molten Stibium Metallivorum Lupi",
 
   "effect.dreamtinker.effectsilvernamebee": "silver ledger"
 }

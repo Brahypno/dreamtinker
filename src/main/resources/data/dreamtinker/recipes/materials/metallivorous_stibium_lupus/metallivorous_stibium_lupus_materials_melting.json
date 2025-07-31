@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "dreamtinker:metallivorous_stibium_lupus",
+  "temperature": 1500,
+  "result": {
+    "fluid": "dreamtinker:molten_metallivorous_stibium_lupus",
+    "amount": 90
+  }
+}
