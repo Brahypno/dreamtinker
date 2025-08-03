@@ -72,6 +72,7 @@
   "material.dreamtinker.valentinite": "锑华",
   "material.dreamtinker.nigrescence_antimony": "黑化锑",
   "material.dreamtinker.metallivorous_stibium_lupus": "狼锑",
+  "material.dreamtinker.star_regulus": "星锑",
 
 
   "fluid_type.dreamtinker.molten_echo_shard": "熔融回响",
@@ -79,7 +80,7 @@
   "fluid_type.dreamtinker.molten_albedo_stibium": "熔融月光锑",
   "fluid_type.dreamtinker.molten_lupi_antimony": "熔融狼锑",
   "fluid_type.dreamtinker.molten_ascending_antimony": "熔融升华锑",
-  "fluid_type.dreamtinker.liquid_smoky_antimony_bucket": "液体锑烟",
+  "fluid_type.dreamtinker.liquid_smoky_antimony": "液态锑烟",
 
   "effect.dreamtinker.effectsilvernamebee": "银账本"
 
