@@ -1,6 +1,7 @@
 package org.dreamtinker.dreamtinker.modifier.material.nigrescence_antimony;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -32,6 +33,7 @@ public class broken_vessel extends ArmorModifier {
 
     @Override
     public void onEquip(IToolStackView tool, ModifierEntry modifier, EquipmentChangeContext context) {
+        if(context.getChangedSlot()== EquipmentSlot.MAINHAND||context.getChangedSlot()==EquipmentSlot.OFFHAND) return;
         LivingEntity entity = context.getEntity();
         AttributeInstance attr = entity.getAttribute(Attributes.MAX_HEALTH);
         if (attr == null) return;

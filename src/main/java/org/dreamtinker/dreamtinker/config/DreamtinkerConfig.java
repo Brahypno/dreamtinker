@@ -64,8 +64,19 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.IntValue BrokenVesselBoost = builder.comment("HP boost from BrokenBessel")
             .defineInRange("BrokenVesselBoost", 1, 0, 1000);
 
+    public static final ForgeConfigSpec.DoubleValue OuroboricHourglassMutiply = builder.comment("increase damage reducer from OuroboricHourglass")
+            .defineInRange("OuroboricHourglassMutiply", 2.0, 0, 1000);
+
     public static final ForgeConfigSpec.DoubleValue Prometheus = builder.comment("status boot everytime for ewige_widerkunft")
             .defineInRange("Prometheus", 0.13, 0, 1);
+
+    public static final ForgeConfigSpec.IntValue BurninVainRandomProj = builder.comment("Allow Burn in Vain Modifier summon random Projectile when shooting")
+            .defineInRange("BurninVainRandomProj", 1, 0, 1);
+    public static final ForgeConfigSpec.DoubleValue BurninVainInaccuracy = builder.comment("Inaccuracy of Projectile sending from this Modifier")
+            .defineInRange("BurninVainInaccurity", 5.0, 0, 1000);
+    public static final ForgeConfigSpec.IntValue BurninVainProjLimit = builder.comment("Numbers of dangling projectile allowed when shooting. This is aim to reduce cases like Dragon fire Ball stay still in air and cause system lagging")
+            .defineInRange("BurninVainProjLimit", 9, 0, 1000);
+
     public static final ForgeConfigSpec specs = builder.pop().build();
 }
 

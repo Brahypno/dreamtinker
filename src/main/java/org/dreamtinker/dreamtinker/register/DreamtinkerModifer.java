@@ -8,11 +8,14 @@ import org.dreamtinker.dreamtinker.modifier.Combat.strong_explode;
 import org.dreamtinker.dreamtinker.modifier.material.echo_shard.echoed_attack;
 import org.dreamtinker.dreamtinker.modifier.material.echo_shard.echoed_defence;
 import org.dreamtinker.dreamtinker.modifier.material.nigrescence_antimony.broken_vessel;
+import org.dreamtinker.dreamtinker.modifier.material.nigrescence_antimony.burning_in_vain;
 import org.dreamtinker.dreamtinker.modifier.material.nigrescence_antimony.ewige_widerkunft;
+import org.dreamtinker.dreamtinker.modifier.material.nigrescence_antimony.ouroboric_hourglass;
 import org.dreamtinker.dreamtinker.modifier.material.valentinite.antimony_usage;
 import org.dreamtinker.dreamtinker.modifier.tools.strong_heavy;
 import slimeknights.tconstruct.library.modifiers.util.ModifierDeferredRegister;
 import slimeknights.tconstruct.library.modifiers.util.StaticModifier;
+
 
 
 public class DreamtinkerModifer {
@@ -27,4 +30,6 @@ public class DreamtinkerModifer {
     public static final StaticModifier<antimony_usage> antimony_usage = MODIFIERS.register("antimony_usage", antimony_usage::new);
     public static final StaticModifier<broken_vessel> broken_vessel = MODIFIERS.register("broken_vessel", broken_vessel::new);
     public static final StaticModifier<ewige_widerkunft> ewige_widerkunft = MODIFIERS.register("ewige_widerkunft", ewige_widerkunft::new);
+    public static final StaticModifier<ouroboric_hourglass> ouroboric_hourglass = MODIFIERS.register("ouroboric_hourglass", ouroboric_hourglass::new);
+    public static final StaticModifier<burning_in_vain> burning_in_vain = MODIFIERS.register("burning_in_vain", burning_in_vain::new);
 }

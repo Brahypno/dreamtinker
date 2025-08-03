@@ -27,10 +27,16 @@
   "modifier.dreamtinker.broken_vessel": "破碎容器",
   "modifier.dreamtinker.broken_vessel.flavor": "不是蓝鲸鱼",
   "modifier.dreamtinker.broken_vessel.description": "提升最大HP......",
+  "modifier.dreamtinker.ouroboric_hourglass": "衔尾时轮",
+  "modifier.dreamtinker.ouroboric_hourglass.flavor": "I know nothing......",
+  "modifier.dreamtinker.ouroboric_hourglass.description": "减少大额伤害，但......",
   "modifier.dreamtinker.ewige_widerkunft": "永劫轮回",
   "modifier.dreamtinker.ewige_widerkunft.flavor": "在五完美巡后的世界再会吧",
   "modifier.dreamtinker.ewige_widerkunft.description": "当耐久度归零时，恢复耐久并提升数值",
   "modifier.dreamtinker.tooltip.ewige_widerkunft": "踏上轮回: ",
+  "modifier.dreamtinker.burning_in_vain": "徒劳之火",
+  "modifier.dreamtinker.burning_in_vain.flavor": "§kPale......任何......",
+  "modifier.dreamtinker.burning_in_vain.description": "使自身着火，并获得一系列箭矢加成",
 
 
   "itemGroup.Dreamtinker.tool": "工匠幻梦 | 工具",
@@ -47,6 +53,8 @@
   "item.dreamtinker.molten_nigrescence_antimony_bucket": "融化黑锑桶",
   "item.dreamtinker.molten_albedo_stibium_bucket": "熔融月光锑桶",
   "item.dreamtinker.molten_lupi_antimony_bucket": "熔融狼锑桶",
+  "item.dreamtinker.molten_ascending_antimony_bucket": "熔融升华锑桶",
+  "item.dreamtinker.liquid_smoky_antimony_bucket": "液态锑烟桶",
 
 
   "item.dreamtinker.stibnite_ore": "辉锑矿",
@@ -55,6 +63,7 @@
   "tooltip.nigrescence_antimony.desc1": "虚空锑, 堕落之锑,锑之一死物......众名环绕，象征其神秘与堕落",
   "tooltip.nigrescence_antimony.desc2": "可它的唤现之法，竟是如此轻而易举",
   "item.dreamtinker.metallivorous_stibium_lupus": "狼锑",
+  "item.dreamtinker.star_regulus": "星锑",
 
 
 
@@ -69,6 +78,8 @@
   "fluid_type.dreamtinker.molten_nigrescence_antimony": "融化黑锑",
   "fluid_type.dreamtinker.molten_albedo_stibium": "熔融月光锑",
   "fluid_type.dreamtinker.molten_lupi_antimony": "熔融狼锑",
+  "fluid_type.dreamtinker.molten_ascending_antimony": "熔融升华锑",
+  "fluid_type.dreamtinker.liquid_smoky_antimony_bucket": "液体锑烟",
 
   "effect.dreamtinker.effectsilvernamebee": "银账本"
 

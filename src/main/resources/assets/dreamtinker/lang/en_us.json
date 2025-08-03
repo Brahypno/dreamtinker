@@ -27,10 +27,16 @@
   "modifier.dreamtinker.broken_vessel": "Long-Shattered Vessel",
   "modifier.dreamtinker.broken_vessel.flavor": "Darkest Deep",
   "modifier.dreamtinker.broken_vessel.description": "Boost max HP in exchange of......",
+  "modifier.dreamtinker.ouroboric_hourglass": "ouroboric hourglass",
+  "modifier.dreamtinker.ouroboric_hourglass.flavor": "I know nothing......after all",
+  "modifier.dreamtinker.ouroboric_hourglass.description": "Reduce damage, especially to the large number, but......",
   "modifier.dreamtinker.ewige_widerkunft": "ewige widerkunft",
   "modifier.dreamtinker.ewige_widerkunft.flavor": "Unterlasse es, zu sagen: „Verweile doch, du bist so schön!“",
   "modifier.dreamtinker.ewige_widerkunft.description": "Every break make this weapon stronger",
   "modifier.dreamtinker.tooltip.ewige_widerkunft": "The Wheel Spins: ",
+  "modifier.dreamtinker.burning_in_vain": "Burning in vain",
+  "modifier.dreamtinker.burning_in_vain.flavor": "RAGE",
+  "modifier.dreamtinker.burning_in_vain.description": "Set self in fire,but strength the arrow",
 
   "itemGroup.Dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.Dreamtinker.part": "dreamtinker | part",
@@ -46,6 +52,8 @@
   "item.dreamtinker.molten_nigrescence_antimony_bucket": "Molten Nigrescence of Antimon Bucket",
   "item.dreamtinker.molten_albedo_stibium_bucket": "Molten albedo stibium Bucket",
   "item.dreamtinker.molten_lupi_antimony_bucket": "Molten Stibium Metallivorum Lupi Bucket",
+  "item.dreamtinker.molten_ascending_antimony_bucket": "Molten Ascending antimony Bucket",
+  "item.dreamtinker.liquid_smoky_antimony_bucket": "Liquid Ascending antimony Bucket",
 
   "item.dreamtinker.stibnite_ore": "Stibnite Ore",
   "item.dreamtinker.valentinite": "Valentinite",
@@ -53,6 +61,7 @@
   "tooltip.nigrescence_antimony.desc1": "Void-Antimony, Corruptum Antimonii,Antimony of the First Death......Names so manifold it doth bear",
   "tooltip.nigrescence_antimony.desc2": "And lo, the means of its grasping are but simple.",
   "item.dreamtinker.metallivorous_stibium_lupus": "Stibium Metallivorum Lupi",
+  "item.dreamtinker.star_regulus": "star-regulus of antimony",
 
   "material.dreamtinker.echo_shard": "echo shard",
   "material.dreamtinker.moonlight_ice": "moonlight",
@@ -65,6 +74,8 @@
   "fluid_type.dreamtinker.molten_nigrescence_antimony": "Molten Nigrescence of Antimony",
   "fluid_type.dreamtinker.molten_albedo_stibium": "Molten albedo stibium",
   "fluid_type.dreamtinker.molten_lupi_antimony": "Molten Stibium Metallivorum Lupi",
+  "fluid_type.dreamtinker.molten_ascending_antimony": "Molten Ascending antimony",
+  "fluid_type.dreamtinker.liquid_smoky_antimony": "Liquid Ascending antimony",
 
   "effect.dreamtinker.effectsilvernamebee": "silver ledger"
 }
