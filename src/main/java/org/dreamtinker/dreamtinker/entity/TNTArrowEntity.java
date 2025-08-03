@@ -22,7 +22,6 @@ import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.utils.Util;
 
 import java.util.List;
-import java.util.Objects;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.TNTarrowgravity;
 import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.NO_COOLDOWN;
@@ -76,7 +75,7 @@ public class TNTArrowEntity extends AbstractArrow {
                     sound++;
                 }
             }
-            if(Objects.requireNonNull(this.getOwner()).position().distanceTo(hitPos)<= hitRadius){
+            if(this.getOwner()!=null&& this.getOwner().position().distanceTo(hitPos)<= hitRadius){
                 hitEntity(this.getOwner());
                 sound++;
             }
