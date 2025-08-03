@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:alloy",
+  "inputs": [
+    {
+      "fluid": "dreamtinker:molten_lupi_antimony",
+      "amount": 90
+    },
+    {
+      "amount": 90,
+      "tag": "forge:molten_gold"
+    }
+  ],
+  "result": {
+    "amount": 100,
+    "fluid": "dreamtinker:molten_albedo_stibium"
+  },
+  "temperature": 600
+}

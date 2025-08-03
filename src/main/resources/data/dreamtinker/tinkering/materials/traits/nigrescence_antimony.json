@@ -8,13 +8,17 @@
     ],
     "tconstruct:ranged": [
       {
-        "name": "dreamtinker:",
+        "name": "dreamtinker:burning_in_vain",
         "level": 1
       }
     ],
     "tconstruct:armor": [
       {
         "name": "dreamtinker:broken_vessel",
+        "level": 1
+      },
+      {
+        "name": "dreamtinker:ouroboric_hourglass",
         "level": 1
       }
     ]
