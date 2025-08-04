@@ -85,8 +85,8 @@ public class echoed_attack extends BattleModifier {
         }
         if(E_C<=count){
             count-=E_C;
-            performSonicBoomSweep(tool, (ServerLevel) shooter.level, shooter);
             nbt.putInt(TAG_ECHO_ENERGY, count);
+            performSonicBoomSweep(tool, (ServerLevel) shooter.level, shooter);
         }
     }
 
