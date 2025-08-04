@@ -2,13 +2,29 @@
   "perStat": {
     "tconstruct:melee_harvest": [
       {
-        "name": "dreamtinker:echoed_attack",
+        "name": "dreamtinker:the_wolf_wonder",
+        "level": 1
+      },
+      {
+        "name": "dreamtinker:the_wolf_answer",
+        "level": 1
+      },
+      {
+        "name": "dreamtinker:the_wolf_was",
         "level": 1
       }
     ],
     "tconstruct:ranged": [
       {
-        "name": "dreamtinker:echoed_attack",
+        "name": "dreamtinker:the_wolf_wonder",
+        "level": 1
+      },
+      {
+        "name": "dreamtinker:the_wolf_answer",
+        "level": 1
+      },
+      {
+        "name": "dreamtinker:the_wolf_was",
         "level": 1
       }
     ]

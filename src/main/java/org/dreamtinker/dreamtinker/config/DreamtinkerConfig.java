@@ -77,6 +77,22 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.IntValue BurninVainProjLimit = builder.comment("Numbers of dangling projectile allowed when shooting. This is aim to reduce cases like Dragon fire Ball stay still in air and cause system lagging")
             .defineInRange("BurninVainProjLimit", 9, 0, 1000);
 
+    public static final ForgeConfigSpec.IntValue TheWolfWonderEffectNum = builder.comment("Number of effective that applied on target")
+            .defineInRange("TheWolfWonderEffectNum", 10, 0, 100);
+    public static final ForgeConfigSpec.IntValue TheWolfWonderEffectMinTime = builder.comment("Min time effective last in second")
+            .defineInRange("TheWolfWonderEffectMinTime", 10, 0, 100);
+    public static final ForgeConfigSpec.IntValue TheWolfWonderEffectMaxTime = builder.comment("Max time effective last in second")
+            .defineInRange("TheWolfWonderEffectMaxTime", 10, 0, 100);
+    public static final ForgeConfigSpec.IntValue TheWolfWonderEffectAmplifier = builder.comment("Max Amplifier of effects")
+            .defineInRange("TheWolfWonderEffectAmplifier", 10, 0, 100);
+
+    public static final ForgeConfigSpec.IntValue TheWolfWasEnable = builder.comment("Enable the Wolf Was modifier")
+            .defineInRange("TheWolfWasEnable", 1, 0, 1);
+    public static final ForgeConfigSpec.IntValue TheWolfWasDamage = builder.comment("In the hidden crucible of our path, there can be no ascendance without renunciation—where loss is absent, growth withers----Modify the damage taken for this Modifier work")
+            .defineInRange("TheWolfWasDamage", 77, 1, 1000);
+    public static final ForgeConfigSpec.IntValue TheWolfWasMaxTier = builder.comment("Maximum tier the wolf was may get")
+            .defineInRange("TheWolfWasMaxTier", 4, 2, 100);
+
     public static final ForgeConfigSpec specs = builder.pop().build();
 }
 

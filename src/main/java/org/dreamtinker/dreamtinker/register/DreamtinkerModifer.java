@@ -7,6 +7,9 @@ import org.dreamtinker.dreamtinker.modifier.Combat.silvernamebee;
 import org.dreamtinker.dreamtinker.modifier.Combat.strong_explode;
 import org.dreamtinker.dreamtinker.modifier.material.echo_shard.echoed_attack;
 import org.dreamtinker.dreamtinker.modifier.material.echo_shard.echoed_defence;
+import org.dreamtinker.dreamtinker.modifier.material.lupus_antimony.the_wolf_answer;
+import org.dreamtinker.dreamtinker.modifier.material.lupus_antimony.the_wolf_was;
+import org.dreamtinker.dreamtinker.modifier.material.lupus_antimony.the_wolf_wonder;
 import org.dreamtinker.dreamtinker.modifier.material.nigrescence_antimony.broken_vessel;
 import org.dreamtinker.dreamtinker.modifier.material.nigrescence_antimony.burning_in_vain;
 import org.dreamtinker.dreamtinker.modifier.material.nigrescence_antimony.ewige_widerkunft;
@@ -32,4 +35,7 @@ public class DreamtinkerModifer {
     public static final StaticModifier<ewige_widerkunft> ewige_widerkunft = MODIFIERS.register("ewige_widerkunft", ewige_widerkunft::new);
     public static final StaticModifier<ouroboric_hourglass> ouroboric_hourglass = MODIFIERS.register("ouroboric_hourglass", ouroboric_hourglass::new);
     public static final StaticModifier<burning_in_vain> burning_in_vain = MODIFIERS.register("burning_in_vain", burning_in_vain::new);
+    public static final StaticModifier<the_wolf_wonder> the_wolf_wonder = MODIFIERS.register("the_wolf_wonder", the_wolf_wonder::new);
+    public static final StaticModifier<the_wolf_answer> the_wolf_answer = MODIFIERS.register("the_wolf_answer", the_wolf_answer::new);
+    public static final StaticModifier<the_wolf_was> the_wolf_was = MODIFIERS.register("the_wolf_was", the_wolf_was::new);
 }

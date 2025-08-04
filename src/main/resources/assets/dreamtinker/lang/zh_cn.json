@@ -37,6 +37,16 @@
   "modifier.dreamtinker.burning_in_vain": "徒劳之火",
   "modifier.dreamtinker.burning_in_vain.flavor": "§kPale......任何......",
   "modifier.dreamtinker.burning_in_vain.description": "使自身着火，并获得一系列箭矢加成",
+  "modifier.dreamtinker.the_wolf_wonder": "奇迹之狼",
+  "modifier.dreamtinker.the_wolf_wonder.flavor": "即使走在公正的路上,那狼仍然会来向我们询问。\n而我们回以相同的问题。",
+  "modifier.dreamtinker.the_wolf_wonder.description": "向敌人施加随机的负面效果......",
+  "modifier.dreamtinker.the_wolf_answer": "狼的答案",
+  "modifier.dreamtinker.the_wolf_answer.flavor": "§k痛苦§r是§k答案§r，问题是什么？",
+  "modifier.dreamtinker.the_wolf_answer.description": "穿透几乎所有护甲抗性",
+  "modifier.dreamtinker.the_wolf_was": "§kThe Wolf Was",
+  "modifier.dreamtinker.the_wolf_was.flavor": "曾死去，曾变化，而现在为狼",
+  "modifier.dreamtinker.the_wolf_was.description": "当工具消耗一定耐久后，强化工具上的其他材料",
+  "modifier.dreamtinker.tooltip.the_wolf_was": "§kThe wolf devoured§r: ",
 
 
   "itemGroup.Dreamtinker.tool": "工匠幻梦 | 工具",
