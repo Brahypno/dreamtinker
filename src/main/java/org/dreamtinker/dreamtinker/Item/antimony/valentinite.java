@@ -21,6 +21,7 @@ public class valentinite extends Item {
 
         // 仅服务器执行效果
         if (!level.isClientSide) {
+            player.startUsingItem(hand);
             // 添加中毒和恶心效果（持续时间单位为tick，20 ticks = 1秒）
             player.addEffect(new MobEffectInstance(MobEffects.POISON, 20 * 10, 1)); // 10 秒 中毒 II
             player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 20 * 15, 0)); // 15 秒 恶心 I

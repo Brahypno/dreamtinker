@@ -1,20 +1,14 @@
 {
   "perStat": {
-    "tconstruct:melee_harvest": [
-      {
-        "name": "dreamtinker:echoed_attack",
-        "level": 1
-      }
-    ],
     "tconstruct:ranged": [
       {
-        "name": "dreamtinker:echoed_attack",
+        "name": "dreamtinker:regulus_attack",
         "level": 1
       }
     ],
     "tconstruct:armor": [
       {
-        "name": "dreamtinker:echoed_defence",
+        "name": "dreamtinker:regulus_defence",
         "level": 1
       }
     ]

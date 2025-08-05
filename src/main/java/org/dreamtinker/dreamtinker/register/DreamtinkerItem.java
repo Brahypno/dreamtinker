@@ -5,6 +5,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.Item.antimony.nigrescence_antimony;
+import org.dreamtinker.dreamtinker.Item.antimony.star_regulus;
 import org.dreamtinker.dreamtinker.Item.antimony.valentinite;
 import org.dreamtinker.dreamtinker.tools.Masu.Masu;
 import org.dreamtinker.dreamtinker.tools.TNTarrow.TNTarrow;
@@ -32,7 +33,7 @@ public class DreamtinkerItem {
     public static final RegistryObject<Item> valentinite = ITEMS.register("valentinite", () -> new valentinite(new Item.Properties().tab(DreamtinkerTab.ORE)));
     public static final RegistryObject<Item> nigrescence_antimony = ITEMS.register("nigrescence_antimony", () -> new nigrescence_antimony(new Item.Properties().tab(DreamtinkerTab.ORE)));
     public static final RegistryObject<Item> metallivorous_stibium_lupus = ITEMS.register("metallivorous_stibium_lupus", () -> new Item(new Item.Properties().tab(DreamtinkerTab.ORE)));
-    public static final RegistryObject<Item> regulus = ITEMS.register("star_regulus", () -> new Item(new Item.Properties().tab(DreamtinkerTab.ORE)));
+    public static final RegistryObject<Item> regulus = ITEMS.register("star_regulus", () -> new star_regulus(new Item.Properties().tab(DreamtinkerTab.ORE)));
 
 
 }

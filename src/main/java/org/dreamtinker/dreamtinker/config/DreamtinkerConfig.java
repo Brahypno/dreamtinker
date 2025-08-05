@@ -9,6 +9,18 @@ public class DreamtinkerConfig {
 
     public static final ForgeConfigSpec.IntValue TNTarrowgravity = builder.comment("vertical accelerator or tnt arrow")
             .defineInRange("TNTArrowGravity", -5, Integer.MIN_VALUE, 0);
+    public static final ForgeConfigSpec.IntValue StrongExplodeDamageBoost = builder.comment("Strong Explode Damage Boost")
+            .defineInRange("StrongExplodeDamageBoost", 1, 1, 1000);
+
+    public static final ForgeConfigSpec.IntValue RealSweepRange = builder.comment("Real Sweep range")
+            .defineInRange("RealSweepRange", 2, 1, 1000);
+
+    static {
+        builder.pop();
+        builder.push("Advancement Configuration");
+    }
+    public static final ForgeConfigSpec.IntValue StarRegulus = builder.comment("1=Enable star regulus advancement effect")
+            .defineInRange("StarRegulus", 1, 0, 1);
 
     static {
         builder.pop();
@@ -29,6 +41,7 @@ public class DreamtinkerConfig {
         builder.push("Modifier Configuration");
     }
 
+    static {builder.comment("Moonlight Ice: ");}
     public static final ForgeConfigSpec.DoubleValue glaciriverPortion = builder.comment("Portion of life that glarical river steal")
             .defineInRange("GlaciralRiverPortion", 0.1, 0, 1000);
     public static final ForgeConfigSpec.IntValue glaciriverRange = builder.comment("Range that glarical river effect")
@@ -36,12 +49,7 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.IntValue glaciriverKillPlayer = builder.comment("Does Glarical river kill player? 0=no")
             .defineInRange("GlaciralRiverKillPlayer", 0, 0, 1);
 
-    public static final ForgeConfigSpec.IntValue RealSweepRange = builder.comment("Real Sweep range")
-            .defineInRange("RealSweepRange", 2, 1, 1000);
-
-    public static final ForgeConfigSpec.IntValue StrongExplodeDamageBoost = builder.comment("Strong Explode Damage Boost")
-            .defineInRange("StrongExplodeDamageBoost", 1, 1, 1000);
-
+    static {builder.comment("\nEcho Shard: ");}
     public static final ForgeConfigSpec.IntValue EchoAttackCharge = builder.comment("Numbers of Charge needed to trigger")
             .defineInRange("EchoAttackCharge", 9, 1, 1000);
     public static final ForgeConfigSpec.DoubleValue EchoAttackChargingChance = builder.comment("Chance for trigger to update")
@@ -52,6 +60,7 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.DoubleValue EchoDefenceSpeed = builder.comment("Speed of bounced arrow")
             .defineInRange("EchoDefenceSpeed", 5.0, 3, 100);
 
+    static {builder.comment("\nValentinite: ");}
     public static final ForgeConfigSpec.DoubleValue AntimonyUsageDur = builder.comment("Durability improvement from antimony_usage")
             .defineInRange("AntimonyUsageDur", 0.1, 0, 1000);
     public static final ForgeConfigSpec.DoubleValue AntimonyUsageAttack = builder.comment("Tool improvement from antimony_usage")
@@ -61,9 +70,9 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.DoubleValue AntimonyUsageProj = builder.comment("Projectile modifier from antimony_usage")
             .defineInRange("AntimonyUsageProj", 0.1, 0, 1000);
 
+    static {builder.comment("\nNigrescence Antimony: ");}
     public static final ForgeConfigSpec.IntValue BrokenVesselBoost = builder.comment("HP boost from BrokenBessel")
             .defineInRange("BrokenVesselBoost", 1, 0, 1000);
-
     public static final ForgeConfigSpec.DoubleValue OuroboricHourglassMutiply = builder.comment("increase damage reducer from OuroboricHourglass")
             .defineInRange("OuroboricHourglassMutiply", 2.0, 0, 1000);
 
@@ -77,6 +86,7 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.IntValue BurninVainProjLimit = builder.comment("Numbers of dangling projectile allowed when shooting. This is aim to reduce cases like Dragon fire Ball stay still in air and cause system lagging")
             .defineInRange("BurninVainProjLimit", 9, 0, 1000);
 
+    static {builder.comment("\nMetallivorous Stibium Lupus: ");}
     public static final ForgeConfigSpec.IntValue TheWolfWonderEffectNum = builder.comment("Number of effective that applied on target")
             .defineInRange("TheWolfWonderEffectNum", 10, 0, 100);
     public static final ForgeConfigSpec.IntValue TheWolfWonderEffectMinTime = builder.comment("Min time effective last in second")
@@ -93,6 +103,7 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.IntValue TheWolfWasMaxTier = builder.comment("Maximum tier the wolf was may get")
             .defineInRange("TheWolfWasMaxTier", 4, 2, 100);
 
+    //static {builder.comment("\nstar_regulus: ");}
     public static final ForgeConfigSpec specs = builder.pop().build();
 }
 

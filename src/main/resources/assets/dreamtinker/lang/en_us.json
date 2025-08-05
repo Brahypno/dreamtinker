@@ -72,6 +72,8 @@
   "tooltip.nigrescence_antimony.desc2": "And lo, the means of its grasping are but simple.",
   "item.dreamtinker.metallivorous_stibium_lupus": "Stibium Metallivorum Lupi",
   "item.dreamtinker.star_regulus": "star-regulus of antimony",
+  "tooltip.star_regulus.desc1": "This is no true Magnum Opus—yet its essence quivers on the threshold of that sacred transmutation.",
+  "tooltip.star_regulus.desc2": "By the arcane forge of Tinker’s Construct, through eldritch craft and secret rites, thou hast summoned them into being.",
 
   "material.dreamtinker.echo_shard": "echo shard",
   "material.dreamtinker.moonlight_ice": "moonlight",
@@ -88,5 +90,8 @@
   "fluid_type.dreamtinker.molten_ascending_antimony": "Molten Ascending antimony",
   "fluid_type.dreamtinker.liquid_smoky_antimony": "Liquid Ascending antimony",
 
-  "effect.dreamtinker.effectsilvernamebee": "silver ledger"
+  "effect.dreamtinker.effectsilvernamebee": "silver ledger",
+
+  "adv.dreamtinker.eat_star_regulus.title": "Magnum Opus",
+  "adv.dreamtinker.eat_star_regulus.desc":"Devour star regulus"
 }
