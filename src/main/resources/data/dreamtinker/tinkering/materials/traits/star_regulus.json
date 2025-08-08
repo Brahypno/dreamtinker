@@ -2,13 +2,13 @@
   "perStat": {
     "tconstruct:ranged": [
       {
-        "name": "dreamtinker:regulus_attack",
+        "name": "dreamtinker:two_headed_seven",
         "level": 1
       }
     ],
     "tconstruct:armor": [
       {
-        "name": "dreamtinker:regulus_defence",
+        "name": "dreamtinker:as_one",
         "level": 1
       }
     ]

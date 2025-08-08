@@ -14,6 +14,8 @@ import org.dreamtinker.dreamtinker.modifier.material.nigrescence_antimony.broken
 import org.dreamtinker.dreamtinker.modifier.material.nigrescence_antimony.burning_in_vain;
 import org.dreamtinker.dreamtinker.modifier.material.nigrescence_antimony.ewige_widerkunft;
 import org.dreamtinker.dreamtinker.modifier.material.nigrescence_antimony.ouroboric_hourglass;
+import org.dreamtinker.dreamtinker.modifier.material.star_regulus.as_one;
+import org.dreamtinker.dreamtinker.modifier.material.star_regulus.two_headed_seven;
 import org.dreamtinker.dreamtinker.modifier.material.valentinite.antimony_usage;
 import org.dreamtinker.dreamtinker.modifier.tools.strong_heavy;
 import slimeknights.tconstruct.library.modifiers.util.ModifierDeferredRegister;
@@ -38,4 +40,6 @@ public class DreamtinkerModifer {
     public static final StaticModifier<the_wolf_wonder> the_wolf_wonder = MODIFIERS.register("the_wolf_wonder", the_wolf_wonder::new);
     public static final StaticModifier<the_wolf_answer> the_wolf_answer = MODIFIERS.register("the_wolf_answer", the_wolf_answer::new);
     public static final StaticModifier<the_wolf_was> the_wolf_was = MODIFIERS.register("the_wolf_was", the_wolf_was::new);
+    public static final StaticModifier<as_one> as_one = MODIFIERS.register("as_one", as_one::new);
+    public static final StaticModifier<two_headed_seven> two_headed_seven = MODIFIERS.register("two_headed_seven", two_headed_seven::new);
 }

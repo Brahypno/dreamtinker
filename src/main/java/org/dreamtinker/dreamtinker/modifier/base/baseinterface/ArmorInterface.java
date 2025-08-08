@@ -23,7 +23,7 @@ public interface ArmorInterface extends OnAttackedModifierHook, DamageBlockModif
     default boolean isDamageBlocked(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount) {
         return false;
     }
-    default float modifyDamageTaken(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount, boolean isDirectDamage){ return amount;};
+    default float modifyDamageTaken(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount, boolean isDirectDamage){ return amount;}
 
     default void onEquip(IToolStackView tool, ModifierEntry modifier, EquipmentChangeContext context) {}
     default void onUnequip(IToolStackView tool, ModifierEntry modifier, EquipmentChangeContext context) {}

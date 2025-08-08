@@ -47,6 +47,13 @@
   "modifier.dreamtinker.the_wolf_was.flavor": "It had died; it was transfigured; and behold, it is become a wolf.",
   "modifier.dreamtinker.the_wolf_was.description": "When tool lose durability, it store count and would improve other materials in the tool",
   "modifier.dreamtinker.tooltip.the_wolf_was": "§kThe wolf devoured§r: ",
+  "modifier.dreamtinker.as_one": "As Above, So Below",
+  "modifier.dreamtinker.as_one.flavor": "Only antimony harbors its radiance in silence; only through descent does the path of rebirth emerge.",
+  "modifier.dreamtinker.as_one.description": "Gain ability to reduce damage, resist death and clear effects and fly",
+  "modifier.dreamtinker.tooltip.as_one": "Revive times: ",
+  "modifier.dreamtinker.two_headed_seven": "Two headed Seven",
+  "modifier.dreamtinker.two_headed_seven.flavor": "Two path, one result",
+  "modifier.dreamtinker.two_headed_seven.description": "teleport when hit block;boost damage when hit entity",
 
   "itemGroup.Dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.Dreamtinker.part": "dreamtinker | part",

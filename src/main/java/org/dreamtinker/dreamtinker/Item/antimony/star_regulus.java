@@ -4,6 +4,9 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -12,8 +15,13 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
+import java.util.UUID;
+
+import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.StarRegulusMaxHP;
 
 public class star_regulus extends Item{
+    private static final UUID HEALTH_BOOST_ID = UUID.fromString("e7a5d3c2-91f8-4b67-a1e3-cf0a9b8d6e5f");
+    private static final String TAG_STAR_REGULUS = "star_regulus";
 
     public star_regulus(Item.Properties p_41383_) {
         super(p_41383_);
@@ -29,6 +37,15 @@ public class star_regulus extends Item{
         // 仅服务器执行效果
         if (!level.isClientSide) {
             player.startUsingItem(hand);
+            AttributeInstance attr = player.getAttribute(Attributes.MAX_HEALTH);
+            if (attr != null&&attr.getModifier(HEALTH_BOOST_ID) == null) {
+                attr.addPermanentModifier(new AttributeModifier(
+                        HEALTH_BOOST_ID,
+                        TAG_STAR_REGULUS,
+                        StarRegulusMaxHP.get(),
+                        AttributeModifier.Operation.ADDITION
+                ));
+            }
             /* manual gain advancement
             Advancement advancement = serverPlayer.server.getAdvancements()
                     .getAdvancement(TAG_MO);

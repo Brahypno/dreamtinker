@@ -11,6 +11,8 @@ import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
+import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.AsOneA;
+
 public class silvernamebee extends BattleModifier {
     public silvernamebee(){}
 
@@ -21,7 +23,7 @@ public class silvernamebee extends BattleModifier {
     @Override
     public void modifierOnInventoryTick(@NotNull IToolStackView tool, @NotNull ModifierEntry modifier, @NotNull Level world, @NotNull LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, @NotNull ItemStack stack){
         if (holder instanceof Player player && isCorrectSlot && !player.hasEffect(DreamtinkerEffect.SilverNameBee.get())) {
-            player.addEffect(new MobEffectInstance(DreamtinkerEffect.SilverNameBee.get(), 40, 0, false, false,false));
+            player.addEffect(new MobEffectInstance(DreamtinkerEffect.SilverNameBee.get(), 40, AsOneA.get(), false, false,false));
         }
     }
 }

@@ -17,6 +17,7 @@ import slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifie
 import slimeknights.tconstruct.library.modifiers.hook.behavior.ToolDamageModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.build.ModifierRemovalHook;
 import slimeknights.tconstruct.library.modifiers.hook.build.ToolStatsModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.build.ValidateModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolContext;
@@ -26,9 +27,9 @@ import slimeknights.tconstruct.library.tools.stat.ModifierStatsBuilder;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-public interface BasicInterface extends ToolDamageModifierHook, ModifierRemovalHook, TooltipModifierHook, ToolStatsModifierHook, AttributesModifierHook {
+public interface BasicInterface extends ToolDamageModifierHook, ModifierRemovalHook, TooltipModifierHook, ToolStatsModifierHook, AttributesModifierHook, ValidateModifierHook {
     default void BasicInterfaceInit(ModuleHookMap.Builder hookBuilder) {
-        hookBuilder.addHook(this, ModifierHooks.REMOVE, ModifierHooks.TOOLTIP,ModifierHooks.TOOL_DAMAGE,ModifierHooks.TOOL_STATS,ModifierHooks.ATTRIBUTES);
+        hookBuilder.addHook(this, ModifierHooks.REMOVE, ModifierHooks.TOOLTIP,ModifierHooks.TOOL_DAMAGE,ModifierHooks.TOOL_STATS,ModifierHooks.ATTRIBUTES,ModifierHooks.VALIDATE);
     }
 
     default int onDamageTool(IToolStackView tool, ModifierEntry modifier, int amount, @javax.annotation.Nullable LivingEntity holder) {
@@ -51,4 +52,7 @@ public interface BasicInterface extends ToolDamageModifierHook, ModifierRemovalH
 
     default void addToolStats(IToolContext context, ModifierEntry modifier, ModifierStatsBuilder builder) {}
     default void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer){}
+    default Component validate(IToolStackView tool, ModifierEntry modifier) {
+        return null;
+    }
 }

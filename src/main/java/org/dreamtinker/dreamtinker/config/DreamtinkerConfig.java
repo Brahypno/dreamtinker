@@ -17,10 +17,17 @@ public class DreamtinkerConfig {
 
     static {
         builder.pop();
+        builder.push("Item Configuration");
+    }
+    public static final ForgeConfigSpec.IntValue StarRegulusMaxHP = builder.comment("MAX HP BOOST from star Regulus")
+            .defineInRange("StarRegulusMaxHP", 77, 0, 1000);
+
+    static {
+        builder.pop();
         builder.push("Advancement Configuration");
     }
-    public static final ForgeConfigSpec.IntValue StarRegulus = builder.comment("1=Enable star regulus advancement effect")
-            .defineInRange("StarRegulus", 1, 0, 1);
+    public static final ForgeConfigSpec.IntValue StarRegulusAdvancement = builder.comment("1=Enable star regulus advancement effect")
+            .defineInRange("StarRegulusAdvancement", 1, 0, 1);
 
     static {
         builder.pop();
@@ -103,7 +110,16 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.IntValue TheWolfWasMaxTier = builder.comment("Maximum tier the wolf was may get")
             .defineInRange("TheWolfWasMaxTier", 4, 2, 100);
 
-    //static {builder.comment("\nstar_regulus: ");}
+    static {builder.comment("\nstar_regulus: ");}
+    public static final ForgeConfigSpec.IntValue AsOneRe = builder.comment("Initial Revive cound of As one")
+            .defineInRange("AsOneRe", 2, 0, 10000);
+    public static final ForgeConfigSpec.IntValue AsOneT = builder.comment("Time counter for gaining revive counts")
+            .defineInRange("AsOneT", 777, 1, 10000);
+    public static final ForgeConfigSpec.IntValue AsOneA = builder.comment("Max amp of effect that would be clear")
+            .defineInRange("AsOneA", 3, 1, 10000);
+    public static final ForgeConfigSpec.DoubleValue AsOneS = builder.comment("Percentage damage taken")
+            .defineInRange("AsOneS", 0.33, 0, 1);
+
     public static final ForgeConfigSpec specs = builder.pop().build();
 }
 

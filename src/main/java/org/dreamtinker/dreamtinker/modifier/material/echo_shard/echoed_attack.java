@@ -38,6 +38,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import static net.minecraft.nbt.Tag.TAG_INT;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.EchoAttackCharge;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.EchoAttackChargingChance;
 import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.getAttributeAttackDamage;
@@ -57,8 +58,8 @@ public class echoed_attack extends BattleModifier {
     public void addTooltip(IToolStackView tool, @NotNull ModifierEntry modifier, @Nullable Player player, List<Component> tooltip, TooltipKey tooltipKey, TooltipFlag tooltipFlag) {
         if (tool instanceof ToolStack && tooltipKey.isShiftOrUnknown()) {
             ModDataNBT nbt = tool.getPersistentData();
-            int count = nbt.getInt(TAG_ECHO_ENERGY);
-            if (count > 0) {
+            if (nbt.contains(TAG_ECHO_ENERGY, TAG_INT)) {
+                int count=nbt.getInt(TAG_ECHO_ENERGY);
                 tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.echo_energy").append(String.valueOf(count)).withStyle(this.getDisplayName().getStyle()));
             }
         }

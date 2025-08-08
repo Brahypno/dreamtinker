@@ -11,6 +11,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.dreamtinker.dreamtinker.config.DreamtinkerConfig;
 import org.dreamtinker.dreamtinker.event.PlayerEvent;
+import org.dreamtinker.dreamtinker.event.star_regulus_boost;
 import org.dreamtinker.dreamtinker.network.Dnetwork;
 import org.dreamtinker.dreamtinker.register.*;
 
@@ -25,10 +26,12 @@ public class Dreamtinker {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
 
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, DreamtinkerConfig.specs, "DreamTinkerConfig.toml");
+
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
         // Register ourselves for server and other game events we are interested in
-        MinecraftForge.EVENT_BUS.register(this);
+
         DreamtinkerItem.ITEMS.register(modEventBus);
         DreamtinkerFluid.FLUIDS.register(modEventBus);
         DreamtinkerModifer.MODIFIERS.register(modEventBus);
@@ -37,13 +40,13 @@ public class Dreamtinker {
         DreamtinkerLoots.LOOTMODIFIERS.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
+        forgeEventBus.addListener(star_regulus_boost::onServerTick);
         forgeEventBus.addListener(PlayerEvent::onLeftClickBlock);
         forgeEventBus.addListener(PlayerEvent::onLeftClick);
         forgeEventBus.addListener(PlayerEvent::onLeftClickEntity);
 
         Dnetwork.registerPackets();
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, DreamtinkerConfig.specs, "DreamTinkerMaterials.toml");
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
