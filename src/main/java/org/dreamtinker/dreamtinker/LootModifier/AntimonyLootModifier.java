@@ -3,7 +3,7 @@ package org.dreamtinker.dreamtinker.LootModifier;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -26,17 +26,14 @@ public class AntimonyLootModifier extends LootModifier {
     private final Item antimony;
     private final TagKey<Block> target_tag;
 
-    public static final Codec<AntimonyLootModifier> CODEC = RecordCodecBuilder.create(inst -> codecStart(inst)
-            .and(ForgeRegistries.ITEMS.getCodec().fieldOf("antimony").forGetter(mod -> mod.antimony))
-            .and(ResourceLocation.CODEC.optionalFieldOf("target_tag").forGetter(m -> {
-                if (m.target_tag == null) return Optional.empty();
-                return Optional.of(m.target_tag.location());
-            }))
-            .apply(inst, (conditions, item, tagLocation) -> {
-                TagKey<Block> tag = tagLocation.map(loc -> TagKey.create(Registry.BLOCK_REGISTRY, loc)).orElse(null);
-                return new AntimonyLootModifier(conditions, item, tag);
-            })
-    );
+    public static final Codec<AntimonyLootModifier> CODEC = RecordCodecBuilder.create(inst -> codecStart(inst).and(ForgeRegistries.ITEMS.getCodec().fieldOf("antimony").forGetter(mod -> mod.antimony)).and(ResourceLocation.CODEC.optionalFieldOf("target_tag").forGetter(m -> {
+        if (m.target_tag == null)
+            return Optional.empty();
+        return Optional.of(m.target_tag.location());
+    })).apply(inst, (conditions, item, tagLocation) -> {
+        TagKey<Block> tag = tagLocation.map(loc -> TagKey.create(Registries.BLOCK, loc)).orElse(null);
+        return new AntimonyLootModifier(conditions, item, tag);
+    }));
 
     public AntimonyLootModifier(LootItemCondition[] conditions, Item antimony, TagKey<Block> target_tag) {
         super(conditions);
@@ -48,24 +45,24 @@ public class AntimonyLootModifier extends LootModifier {
     protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> objectArrayList, LootContext lootContext) {
         BlockState state = lootContext.getParamOrNull(LootContextParams.BLOCK_STATE);
 
-        if (state == null|| !state.is(target_tag))
+        if (state == null || !state.is(target_tag))
             return objectArrayList;
 
         int fortune = 0;
 
-        if (lootContext.hasParam(LootContextParams.TOOL)) {
+        if (lootContext.hasParam(LootContextParams.TOOL)){
             ItemStack tool = lootContext.getParam(LootContextParams.TOOL);
             fortune = tool.getEnchantmentLevel(Enchantments.BLOCK_FORTUNE);
             // 可选：排除精准采集
-            if (tool.getEnchantmentLevel(Enchantments.SILK_TOUCH) > 0) {
+            if (tool.getEnchantmentLevel(Enchantments.SILK_TOUCH) > 0){
                 return objectArrayList;
             }
         }
         float luckBoost = (float) lootContext.getLuck() * 0.005f;
-        float chance = (float) ((fortune+1)*AntimonyLootChance.get()+luckBoost);
-        if (lootContext.getRandom().nextFloat() < chance) {
+        float chance = (float) ((fortune + 1) * AntimonyLootChance.get() + luckBoost);
+        if (lootContext.getRandom().nextFloat() < chance){
             int amount = 1 + lootContext.getRandom().nextInt(1 + fortune);
-            objectArrayList.add(new ItemStack(antimony,amount));
+            objectArrayList.add(new ItemStack(antimony, amount));
         }
 
         return objectArrayList;

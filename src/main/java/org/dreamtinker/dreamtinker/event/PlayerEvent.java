@@ -13,7 +13,7 @@ import slimeknights.tconstruct.library.tools.item.IModifiable;
 public class PlayerEvent {
     public static void onLeftClick(PlayerInteractEvent.LeftClickEmpty event){
         Player player = event.getEntity();
-        if (player!=null&&player.level.isClientSide) {
+        if (player!=null&&player.level().isClientSide) {
             ItemStack stack = player.getItemInHand(player.getUsedItemHand());
             if (stack.getItem() instanceof IModifiable) {
                 EquipmentSlot slot = stack.getEquipmentSlot();
@@ -25,7 +25,7 @@ public class PlayerEvent {
         Player player = event.getEntity();
         BlockPos pos = event.getPos();
         if (player!=null) {
-            BlockState state = player.level.getBlockState(pos);
+            BlockState state = player.level().getBlockState(pos);
             ItemStack stack = player.getItemInHand(player.getUsedItemHand());
             if (stack.getItem() instanceof IModifiable) {
                 EquipmentSlot slot = stack.getEquipmentSlot();

@@ -58,10 +58,6 @@
       "traits": [
         {
           "level": 1,
-          "name": "dreamtinker:explode_hit"
-        },
-        {
-          "level": 1,
           "name": "dreamtinker:strong_explode"
         }
       ]

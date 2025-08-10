@@ -22,7 +22,7 @@ public interface LeftClickHook {
     default void onLeftClickBlock(IToolStackView tool, ModifierEntry entry, Player player, Level level , EquipmentSlot equipmentSlot, BlockState state, BlockPos pos){}
     default void onLeftClickEntity(IToolStackView tool, ModifierEntry entry, Player player, Level level , EquipmentSlot equipmentSlot,Entity target){}
     static void handleLeftClick(ItemStack stack, Player player, EquipmentSlot slot){
-        Level level = player.level;
+        Level level = player.level();
         IToolStackView tool = ToolStack.from(stack);
         for (ModifierEntry entry:tool.getModifierList()){
             entry.getHook(DreamtinkerHook.LEFT_CLICK).onLeftClickEmpty(tool,entry,player,level,slot);
@@ -32,14 +32,14 @@ public interface LeftClickHook {
         }
     }
     static void handleLeftClickBlock(ItemStack stack, Player player, EquipmentSlot slot, BlockState state, BlockPos pos){
-        Level level = player.level;
+        Level level = player.level();
         IToolStackView tool = ToolStack.from(stack);
         for (ModifierEntry entry:tool.getModifierList()){
             entry.getHook(DreamtinkerHook.LEFT_CLICK).onLeftClickBlock(tool,entry,player,level,slot,state,pos);
         }
     }
     static void handleLeftClickEntity(ItemStack stack, Player player, EquipmentSlot slot, Entity target){
-        Level level = player.level;
+        Level level = player.level();
         IToolStackView tool = ToolStack.from(stack);
         for (ModifierEntry entry:tool.getModifierList()){
             entry.getHook(DreamtinkerHook.LEFT_CLICK).onLeftClickEntity(tool,entry,player,level,slot,target);

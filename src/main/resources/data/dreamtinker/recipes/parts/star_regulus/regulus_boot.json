@@ -1,0 +1,20 @@
+{
+  "type": "tconstruct:item_part_builder",
+  "cost": 2,
+  "material": "dreamtinker:star_regulus",
+  "pattern": "tconstruct:boots_plating",
+  "pattern_item": [
+    {
+      "tag": "tconstruct:patterns/default"
+    },
+    {
+      "item": "tconstruct:boots_plating_cast"
+    }
+  ],
+  "result": {
+    "nbt": {
+      "Material": "dreamtinker:star_regulus"
+    },
+    "item": "tconstruct:boots_plating"
+  }
+}

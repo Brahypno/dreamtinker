@@ -2,6 +2,7 @@ package org.dreamtinker.dreamtinker.modifier.material.nigrescence_antimony;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -9,7 +10,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
@@ -38,65 +39,62 @@ public class ewige_widerkunft extends BattleModifier {
     }
 
     @Override
-    public  int modifierDamageTool(IToolStackView tool, ModifierEntry modifier, int amount, @Nullable LivingEntity holder) {
+    public int modifierDamageTool(IToolStackView tool, ModifierEntry modifier, int amount, @Nullable LivingEntity holder) {
         int current = tool.getCurrentDurability();
         ModDataNBT nbt = tool.getPersistentData();
-        int breaks = nbt.getInt(TAG_TOMB)+1;
+        int breaks = nbt.getInt(TAG_TOMB) + 1;
 
-        if (current - breaks*amount <= 1) {
+        if (current - breaks * amount <= 1){
             nbt.putInt(TAG_TOMB, breaks);
             tool.setDamage(0);
-            if (holder != null) {
-                holder.sendSystemMessage(
-                        Component.literal("13=1")
-                );
-                holder.level.explode(
-                        holder,
-                        holder.getX(),  holder.getY(), holder.getZ(),
-                        current, true,
-                        Explosion.BlockInteraction.BREAK
-                );
+            if (holder != null){
+                holder.sendSystemMessage(Component.literal("13=1"));
+                holder.level().explode(holder, holder.getX(), holder.getY(), holder.getZ(), current, true, Level.ExplosionInteraction.MOB);
             }
             return 0;
         }
-        return breaks*amount;
+        return breaks * amount;
     }
+
     private void LivingHurtEvent(LivingHurtEvent event) {
-        if (event.getSource().isExplosion() && event.getEntity() !=null) {
+        if (event.getSource().is(DamageTypeTags.IS_EXPLOSION) && event.getEntity() != null){
             ModifierInHand(event.getEntity(), this.getId());
             event.setCanceled(true);
         }
     }
 
     @Override
-    public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer){
-        if (modifier.getLevel() > 0) {
+    public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
+        if (modifier.getLevel() > 0){
             ModDataNBT nbt = tool.getPersistentData();
             int breaks = nbt.getInt(TAG_TOMB);
-            if(breaks>0) {
-                consumer.accept(Attributes.ATTACK_DAMAGE, new AttributeModifier(UUID.fromString("3d1df7e8-4b20-4e2d-9d5f-5c1b2f8e7c9d"), Attributes.ATTACK_DAMAGE.getDescriptionId(), Math.pow(1+Prometheus.get(), breaks)/2, AttributeModifier.Operation.MULTIPLY_BASE));
-                consumer.accept(Attributes.ATTACK_SPEED, new AttributeModifier(UUID.fromString("8f2c1a9e-3f54-4d7b-96a1-7a2e6cf3b1a4"), Attributes.ATTACK_SPEED.getDescriptionId(), Math.pow(1+Prometheus.get(), breaks)/2, AttributeModifier.Operation.MULTIPLY_BASE));
-                consumer.accept(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(UUID.fromString("7f58b4e7-9ab6-42bb-952a-c41016464b14"), Attributes.ATTACK_KNOCKBACK.getDescriptionId(), Math.pow(1+Prometheus.get(), breaks)/2, AttributeModifier.Operation.MULTIPLY_BASE));
+            if (breaks > 0){
+                consumer.accept(Attributes.ATTACK_DAMAGE, new AttributeModifier(UUID.fromString("3d1df7e8-4b20-4e2d-9d5f-5c1b2f8e7c9d"), Attributes.ATTACK_DAMAGE.getDescriptionId(), Math.pow(1 + Prometheus.get(), breaks) / 2, AttributeModifier.Operation.MULTIPLY_BASE));
+                consumer.accept(Attributes.ATTACK_SPEED, new AttributeModifier(UUID.fromString("8f2c1a9e-3f54-4d7b-96a1-7a2e6cf3b1a4"), Attributes.ATTACK_SPEED.getDescriptionId(), Math.pow(1 + Prometheus.get(), breaks) / 2, AttributeModifier.Operation.MULTIPLY_BASE));
+                consumer.accept(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(UUID.fromString("7f58b4e7-9ab6-42bb-952a-c41016464b14"), Attributes.ATTACK_KNOCKBACK.getDescriptionId(), Math.pow(1 + Prometheus.get(), breaks) / 2, AttributeModifier.Operation.MULTIPLY_BASE));
             }
         }
     }
+
     @Override
     public Component onModifierRemoved(IToolStackView tool, Modifier modifier) {
         tool.getPersistentData().remove(TAG_TOMB);
         return null;
     }
+
     @Override
     public void addTooltip(IToolStackView tool, @NotNull ModifierEntry modifier, @javax.annotation.Nullable Player player, List<Component> tooltip, TooltipKey tooltipKey, TooltipFlag tooltipFlag) {
-        if (tool instanceof ToolStack && tooltipKey.isShiftOrUnknown()) {
+        if (tool instanceof ToolStack && tooltipKey.isShiftOrUnknown()){
             ModDataNBT nbt = tool.getPersistentData();
             int count = nbt.getInt(TAG_TOMB);
-            if (count > 0) {
+            if (count > 0){
                 tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.ewige_widerkunft").append(String.valueOf(count)).withStyle(this.getDisplayName().getStyle()));
             }
         }
     }
+
     @Override
-    public boolean isNoLevels(){return true;}
+    public boolean isNoLevels() {return true;}
 
     @Override
     public int getPriority() {

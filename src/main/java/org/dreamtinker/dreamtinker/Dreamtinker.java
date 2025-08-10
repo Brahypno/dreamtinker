@@ -22,6 +22,7 @@ public class Dreamtinker {
     // Define mod id in a common place for everything to reference
     public static final String MODID = "dreamtinker";
 
+    @SuppressWarnings({"removal"})
     public Dreamtinker() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
@@ -38,6 +39,7 @@ public class Dreamtinker {
         DreamtinkerEntity.ENTITIES.register(modEventBus);
         DreamtinkerEffect.EFFECT.register(modEventBus);
         DreamtinkerLoots.LOOTMODIFIERS.register(modEventBus);
+        DreamtinkerTab.TABS.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
         forgeEventBus.addListener(star_regulus_boost::onServerTick);

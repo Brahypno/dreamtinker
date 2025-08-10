@@ -15,7 +15,7 @@ import org.dreamtinker.dreamtinker.modifier.base.baseclass.BattleModifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.nbt.IToolContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
-import slimeknights.tconstruct.library.tools.nbt.NamespacedNBT;
+import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.stat.ModifierStatsBuilder;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
@@ -45,9 +45,9 @@ public class burning_in_vain extends BattleModifier  {
 
     private static final List<EntityType<? extends Projectile>> PROJECTILE_TYPES = new ArrayList<>();
     @Override
-    public void onProjectileLaunch(IToolStackView tool, ModifierEntry modifier, LivingEntity shooter, Projectile projectile, @Nullable AbstractArrow arrow, NamespacedNBT persistentData, boolean primary) {
-        if(shooter.level.isClientSide) return;
-        ServerLevel world = (ServerLevel) shooter.level;
+    public void onProjectileLaunch(IToolStackView tool, ModifierEntry modifier, LivingEntity shooter, Projectile projectile, @Nullable AbstractArrow arrow, ModDataNBT persistentData, boolean primary) {
+        if(shooter.level().isClientSide) return;
+        ServerLevel world = (ServerLevel) shooter.level();
 
         double px = shooter.getX(), pz = shooter.getZ();
         clearProjectile(world,px,pz);

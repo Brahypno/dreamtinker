@@ -17,40 +17,47 @@ public class the_wolf_answer extends BattleModifier {
     {
         MinecraftForge.EVENT_BUS.addListener(this::LivingAttackEvent);
     }
+
     @Override
     public void failedMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageAttempted) {
-        LivingEntity target=context.getLivingTarget();
-        if(target==null) return;
-        float curHP=target.getHealth();
-        if(damageAttempted<curHP){
-            target.setHealth(curHP-damageAttempted);
-            if(target.getHealth()<curHP) {
+        LivingEntity target = context.getLivingTarget();
+        if (target == null)
+            return;
+        float curHP = target.getHealth();
+        if (damageAttempted < curHP){
+            target.setHealth(curHP - damageAttempted);
+            if (target.getHealth() < curHP){
                 target.setLastHurtByMob(context.getAttacker());
-                if(context.getAttacker() instanceof Player player)
+                if (context.getAttacker() instanceof Player player)
                     target.setLastHurtByPlayer(player);
             }
         }else {
-            if(context.getAttacker() instanceof Player player)
-                target.die(DamageSource.playerAttack(player));
+            DamageSource dam;
+            if (context.getAttacker() instanceof Player player)
+                dam = context.getAttacker().level().damageSources().playerAttack(player);
             else
-                target.die(DamageSource.mobAttack(context.getAttacker()));
+                dam = context.getAttacker().level().damageSources().mobAttack(context.getAttacker());
+            target.die(dam);
         }
     }
+
     public void LivingAttackEvent(LivingAttackEvent event) {
-        if (event.getSource().getEntity() instanceof LivingEntity entity) {
-            if (0<getMainhandModifierlevel(entity,this.getId())) {
+        if (event.getSource().getEntity() instanceof LivingEntity entity){
+            if (0 < getMainhandModifierlevel(entity, this.getId())){
                 event.getEntity().invulnerableTime = 0;
-                event.getSource().bypassArmor().bypassMagic().bypassEnchantments().bypassInvul();
+                //event.getSource().bypassArmor().bypassMagic().bypassEnchantments().bypassInvul();
             }
         }
     }
+
     @Override
     public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
-        int types=1;
-        if(null!=context.getLivingTarget())
-            types=context.getLivingTarget().getActiveEffects().size();
-        return damage*types;
+        int types = 1;
+        if (null != context.getLivingTarget())
+            types = context.getLivingTarget().getActiveEffects().size();
+        return damage * Math.max(1, types);
     }
+
     @Override
-    public boolean isNoLevels(){return true;}
+    public boolean isNoLevels() {return true;}
 }
