@@ -54,12 +54,10 @@
   "modifier.dreamtinker.two_headed_seven": "Two headed Seven",
   "modifier.dreamtinker.two_headed_seven.flavor": "Two path, one result",
   "modifier.dreamtinker.two_headed_seven.description": "teleport when hit block;boost damage when hit entity",
-
-  "itemGroup.Dreamtinker.tool": "dreamtinker | tool",
-  "itemGroup.Dreamtinker.part": "dreamtinker | part",
-  "itemGroup.Dreamtinker.item": "dreamtinker | item",
-  "itemGroup.Dreamtinker.ore": "dreamtinker | item",
-
+  "itemGroup.dreamtinker.tool": "dreamtinker | tool",
+  "itemGroup.dreamtinker.part": "dreamtinker | part",
+  "itemGroup.dreamtinker.item": "dreamtinker | item",
+  "itemGroup.dreamtinker.ore": "dreamtinker | item",
   "item.dreamtinker.explode_core": "explode core",
   "item.dreamtinker.tntarrow": "exploding arrow",
   "item.dreamtinker.tntarrow.description": "a consumable, special melee weapon.range less than exploding range！",
@@ -69,9 +67,8 @@
   "item.dreamtinker.molten_nigrescence_antimony_bucket": "Molten Nigrescence of Antimon Bucket",
   "item.dreamtinker.molten_albedo_stibium_bucket": "Molten albedo stibium Bucket",
   "item.dreamtinker.molten_lupi_antimony_bucket": "Molten Stibium Metallivorum Lupi Bucket",
-  "item.dreamtinker.molten_ascending_antimony_bucket": "Molten Ascending antimony Bucket",
-  "item.dreamtinker.liquid_smoky_antimony_bucket": "Liquid Ascending antimony Bucket",
-
+  "item.dreamtinker.molten_ascending_antimony_bucket": "Molten Ascending Antimony Bucket",
+  "item.dreamtinker.liquid_smoky_antimony_bucket": "Liquid Smoky Antimony Bucket",
   "item.dreamtinker.stibnite_ore": "Stibnite Ore",
   "item.dreamtinker.valentinite": "Valentinite",
   "item.dreamtinker.nigrescence_antimony": "Nigrescence of Antimony",
@@ -81,24 +78,19 @@
   "item.dreamtinker.star_regulus": "star-regulus of antimony",
   "tooltip.star_regulus.desc1": "This is no true Magnum Opus—yet its essence quivers on the threshold of that sacred transmutation.",
   "tooltip.star_regulus.desc2": "By the arcane forge of Tinker’s Construct, through eldritch craft and secret rites, thou hast summoned them into being.",
-
   "material.dreamtinker.echo_shard": "echo shard",
   "material.dreamtinker.moonlight_ice": "moonlight",
   "material.dreamtinker.valentinite": "Valentinite",
   "material.dreamtinker.nigrescence_antimony": "Nigrescence of Antimony",
   "material.dreamtinker.metallivorous_stibium_lupus": "Stibium Metallivorum Lupi",
   "material.dreamtinker.star_regulus": "star-regulus of antimony",
-
-
   "fluid_type.dreamtinker.molten_echo_shard": "Molten echo",
   "fluid_type.dreamtinker.molten_nigrescence_antimony": "Molten Nigrescence of Antimony",
   "fluid_type.dreamtinker.molten_albedo_stibium": "Molten albedo stibium",
   "fluid_type.dreamtinker.molten_lupi_antimony": "Molten Stibium Metallivorum Lupi",
-  "fluid_type.dreamtinker.molten_ascending_antimony": "Molten Ascending antimony",
-  "fluid_type.dreamtinker.liquid_smoky_antimony": "Liquid Ascending antimony",
-
+  "fluid_type.dreamtinker.molten_ascending_antimony": "Molten Ascending Antimony",
+  "fluid_type.dreamtinker.liquid_smoky_antimony": "Liquid Smoky Antimony",
   "effect.dreamtinker.effectsilvernamebee": "silver ledger",
-
   "adv.dreamtinker.eat_star_regulus.title": "Magnum Opus",
-  "adv.dreamtinker.eat_star_regulus.desc":"Devour star regulus"
+  "adv.dreamtinker.eat_star_regulus.desc": "Devour star regulus"
 }

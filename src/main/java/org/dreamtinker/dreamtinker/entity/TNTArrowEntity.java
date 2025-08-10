@@ -44,7 +44,7 @@ public class TNTArrowEntity extends AbstractArrow {
         }
         else{
             try {
-                ServerLevel serverLevel = (ServerLevel) this.level;
+                ServerLevel serverLevel = (ServerLevel) this.level();
                 FakePlayer fakeAttacker = FakePlayerFactory.getMinecraft(serverLevel);
                 ToolAttackUtil.attackEntity(ToolStack.from(this.tntarrow), fakeAttacker, InteractionHand.MAIN_HAND,entity,NO_COOLDOWN, false, Util.getSlotType(InteractionHand.OFF_HAND));
                 fakeAttacker = null;
@@ -60,12 +60,12 @@ public class TNTArrowEntity extends AbstractArrow {
     @Override
     protected void onHit(@NotNull HitResult result) {
         super.onHit(result);
-        if (!this.level.isClientSide) {
+        if (!this.level().isClientSide) {
             float sound=2.0F;
             Vec3 hitPos = result.getLocation();
             // 查找半径内的实体
             int hitRadius = 5;
-            List<Entity> nearbyEntities = this.level.getEntities(null,
+            List<Entity> nearbyEntities = this.level().getEntities(null,
                     new AABB(hitPos.subtract(hitRadius, hitRadius, hitRadius), hitPos.add(hitRadius, hitRadius, hitRadius)));
 
             // 遍历实体列表

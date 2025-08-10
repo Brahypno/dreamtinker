@@ -17,8 +17,8 @@ import net.minecraft.world.phys.EntityHitResult;
 import org.dreamtinker.dreamtinker.modifier.base.baseclass.BattleModifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.nbt.IToolContext;
+import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
-import slimeknights.tconstruct.library.tools.nbt.NamespacedNBT;
 import slimeknights.tconstruct.library.tools.stat.ModifierStatsBuilder;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
@@ -28,13 +28,13 @@ import java.util.UUID;
 public class two_headed_seven extends BattleModifier {
     private static final UUID ARMOR_ID   = UUID.fromString("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa1");
     @Override
-    public boolean onProjectileHitBlock(ModifierNBT modifiers, NamespacedNBT persistentData, ModifierEntry modifier, Projectile projectile, BlockHitResult hit, @Nullable LivingEntity attacker) {
-        if(null==attacker) return false;
-        if (attacker.level.isClientSide) return false;
-        ServerLevel level = (ServerLevel) attacker.level;
+    public void onProjectileHitBlock(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, BlockHitResult hit, @Nullable LivingEntity attacker) {
+        if(null==attacker) return;
+        if (attacker.level().isClientSide) return;
+        ServerLevel level = (ServerLevel) attacker.level();
 
         LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(level);
-        if (bolt == null) return false;
+        if (bolt == null) return;
         BlockPos ep=attacker.getOnPos();
         BlockPos pos=hit.getBlockPos();
         attacker.teleportToWithTicket(pos.getX(),pos.getY()+1,pos.getZ());
@@ -43,11 +43,9 @@ public class two_headed_seven extends BattleModifier {
         if(attacker instanceof ServerPlayer player) bolt.setCause(player);
         bolt.setVisualOnly(false);
         level.addFreshEntity(bolt);
-
-        return false;
     }
     @Override
-    public boolean onProjectileHitEntity(ModifierNBT modifiers, NamespacedNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target) {
+    public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target) {
         if(null==target) return false;
         AttributeModifier neg = new AttributeModifier(ARMOR_ID, "def_suppress", Integer.MIN_VALUE, AttributeModifier.Operation.ADDITION);
         AttributeInstance attr=target.getAttribute(Attributes.ARMOR);

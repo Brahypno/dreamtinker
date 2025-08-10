@@ -1,5 +1,6 @@
 package org.dreamtinker.dreamtinker.register;
 
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -20,20 +21,29 @@ import static org.dreamtinker.dreamtinker.Dreamtinker.MODID;
 public class DreamtinkerItem {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
 
-    private static final Item.Properties TOOL = (new Item.Properties()).tab(DreamtinkerTab.TOOL).stacksTo(1);
-    private static final Item.Properties PART = (new Item.Properties()).tab(DreamtinkerTab.PART).stacksTo(64);
+    private static final Item.Properties TOOL = (new Item.Properties()).stacksTo(1);
+    private static final Item.Properties PART = (new Item.Properties()).stacksTo(64);
 
     public static final RegistryObject<ModifiableItem> tntarrow = ITEMS.register("tntarrow", () -> new TNTarrow(TOOL, toolsDefinition.TNTARROW));
-    public static final RegistryObject<ModifiableItem> masu = ITEMS.register("masu", () -> new Masu(TOOL,toolsDefinition.MASU));
+    public static final RegistryObject<ModifiableItem> masu = ITEMS.register("masu", () -> new Masu(TOOL, toolsDefinition.MASU));
 
     public static final RegistryObject<ToolPartItem> explode_core = ITEMS.register("explode_core", () -> new ToolPartItem(PART, HeadMaterialStats.ID));
 
     //star antimony
-    public static final RegistryObject<Item> stibnite_ore = ITEMS.register("stibnite_ore",() -> new Item(new Item.Properties().tab(DreamtinkerTab.ORE)));
-    public static final RegistryObject<Item> valentinite = ITEMS.register("valentinite", () -> new valentinite(new Item.Properties().tab(DreamtinkerTab.ORE)));
-    public static final RegistryObject<Item> nigrescence_antimony = ITEMS.register("nigrescence_antimony", () -> new nigrescence_antimony(new Item.Properties().tab(DreamtinkerTab.ORE)));
-    public static final RegistryObject<Item> metallivorous_stibium_lupus = ITEMS.register("metallivorous_stibium_lupus", () -> new Item(new Item.Properties().tab(DreamtinkerTab.ORE)));
-    public static final RegistryObject<Item> regulus = ITEMS.register("star_regulus", () -> new star_regulus(new Item.Properties().tab(DreamtinkerTab.ORE)));
+    public static final RegistryObject<Item> stibnite_ore = ITEMS.register("stibnite_ore", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> valentinite = ITEMS.register("valentinite", () -> new valentinite(new Item.Properties()));
+    public static final RegistryObject<Item> nigrescence_antimony = ITEMS.register("nigrescence_antimony", () -> new nigrescence_antimony(new Item.Properties()));
+    public static final RegistryObject<Item> metallivorous_stibium_lupus = ITEMS.register("metallivorous_stibium_lupus", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> regulus = ITEMS.register("star_regulus", () -> new star_regulus(new Item.Properties()));
+
+    public static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
+        output.accept(stibnite_ore.get());
+        output.accept(valentinite.get());
+        output.accept(nigrescence_antimony.get());
+        output.accept(metallivorous_stibium_lupus.get());
+        output.accept(regulus.get());
+
+    }
 
 
 }
