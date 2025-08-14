@@ -4,6 +4,7 @@
     "name": "dreamtinker:molten_lupi_antimony",
     "amount": 90
   },
+  "rate": 10,
   "duration": 776,
   "temperature": 7776
 }
