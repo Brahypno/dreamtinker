@@ -5,7 +5,7 @@
   },
   "cast_consumed": false,
   "fluid": {
-    "name": "dreamtinker:molten_nigrescence_antimony",
+    "fluid": "dreamtinker:molten_nigrescence_antimony",
     "amount": 100
   },
   "result": "dreamtinker:nigrescence_antimony",

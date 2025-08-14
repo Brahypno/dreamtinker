@@ -5,7 +5,7 @@
   },
   "cast_consumed": false,
   "fluid": {
-    "name": "dreamtinker:molten_lupi_antimony",
+    "fluid": "dreamtinker:molten_lupi_antimony",
     "amount": 90
   },
   "result": "dreamtinker:metallivorous_stibium_lupus",

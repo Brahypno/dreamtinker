@@ -5,7 +5,7 @@
   },
   "cast_consumed": true,
   "fluid": {
-    "name": "dreamtinker:molten_albedo_stibium",
+    "fluid": "dreamtinker:molten_albedo_stibium",
     "amount": 100
   },
   "result": "dreamtinker:metallivorous_stibium_lupus",

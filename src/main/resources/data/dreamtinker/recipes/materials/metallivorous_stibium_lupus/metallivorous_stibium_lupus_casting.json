@@ -1,7 +1,7 @@
 {
   "type": "tconstruct:material_fluid",
   "fluid": {
-    "name": "dreamtinker:molten_lupi_antimony",
+    "fluid": "dreamtinker:molten_lupi_antimony",
     "amount": 90
   },
   "temperature": 1500,

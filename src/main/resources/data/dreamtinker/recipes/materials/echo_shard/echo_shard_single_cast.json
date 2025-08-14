@@ -5,7 +5,7 @@
   },
   "cast_consumed": true,
   "fluid": {
-    "name": "dreamtinker:molten_echo_shard",
+    "fluid": "dreamtinker:molten_echo_shard",
     "amount": 100
   },
   "result": "minecraft:echo_shard",

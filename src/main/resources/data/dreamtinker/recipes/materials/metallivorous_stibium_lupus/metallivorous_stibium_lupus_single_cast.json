@@ -5,9 +5,9 @@
   },
   "cast_consumed": true,
   "fluid": {
-    "name": "dreamtinker:molten_lupi_antimony",
+    "fluid": "dreamtinker:molten_lupi_antimony",
     "amount": 90
   },
-  "result": "minecraft:nigrescence_antimony",
+  "result": "dreamtinker:nigrescence_antimony",
   "cooling_time": 20
 }
