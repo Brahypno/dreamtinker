@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.modifier.Combat;
+package org.dreamtinker.dreamtinker.modifier.tools.tntarrow;
 
 import org.dreamtinker.dreamtinker.modifier.base.baseclass.BattleModifier;
 import org.jetbrains.annotations.NotNull;
