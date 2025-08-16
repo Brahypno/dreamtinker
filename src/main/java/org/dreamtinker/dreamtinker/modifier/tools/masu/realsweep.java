@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.modifier.Combat;
+package org.dreamtinker.dreamtinker.modifier.tools.masu;
 
 
 import net.minecraft.core.BlockPos;
@@ -8,10 +8,12 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.ForgeMod;
 import org.dreamtinker.dreamtinker.modifier.base.baseclass.BattleModifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
@@ -19,7 +21,6 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.RealSweepRange;
 import static slimeknights.tconstruct.TConstruct.getResource;
 import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.NO_COOLDOWN;
 
@@ -42,9 +43,8 @@ public class realsweep extends BattleModifier {
 
     public void superSweep(IToolStackView tool, ModifierEntry entry, Player player, Level level, Entity entity) {
         if (!level.isClientSide && player.getAttackStrengthScale(0) > 0.8 && !tool.isBroken()){
-            // basically sword sweep logic, just deals full damage to all entities
-            float diameter = RealSweepRange.get();//getSweepRange(tool); To improve in 1.20
-            double range = diameter + tool.getModifierLevel(TinkerModifiers.expanded.getId());
+            AttributeInstance reach = player.getAttribute(ForgeMod.ENTITY_REACH.get());
+            double range = null != reach ? reach.getValue() : 1;
             float sweepDamage = TinkerModifiers.sweeping.get().getSweepingDamage(tool, tool.getStats().get(ToolStats.ATTACK_DAMAGE));
 
             if (range > 0){

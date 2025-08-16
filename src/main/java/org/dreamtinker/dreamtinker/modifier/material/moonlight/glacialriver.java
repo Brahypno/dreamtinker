@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.modifier.Combat;
+package org.dreamtinker.dreamtinker.modifier.material.moonlight;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
