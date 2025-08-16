@@ -58,7 +58,6 @@ public class moonlightConversion {
 
             // 检查其当前位置是否为水
             int moonPhase = level.getMoonPhase();
-            System.out.println("putin" + moonPhase);
             boolean isAllowedPhase = (moonPhase == 0 || moonPhase == 4) && level.isNight();
 
             if (item.isInWater()){

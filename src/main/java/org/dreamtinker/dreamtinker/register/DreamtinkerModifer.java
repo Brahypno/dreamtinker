@@ -1,15 +1,12 @@
 package org.dreamtinker.dreamtinker.register;
 
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.modifier.Combat.glacialriver;
-import org.dreamtinker.dreamtinker.modifier.Combat.realsweep;
-import org.dreamtinker.dreamtinker.modifier.Combat.silvernamebee;
-import org.dreamtinker.dreamtinker.modifier.Combat.strong_explode;
 import org.dreamtinker.dreamtinker.modifier.material.echo_shard.echoed_attack;
 import org.dreamtinker.dreamtinker.modifier.material.echo_shard.echoed_defence;
 import org.dreamtinker.dreamtinker.modifier.material.lupus_antimony.the_wolf_answer;
 import org.dreamtinker.dreamtinker.modifier.material.lupus_antimony.the_wolf_was;
 import org.dreamtinker.dreamtinker.modifier.material.lupus_antimony.the_wolf_wonder;
+import org.dreamtinker.dreamtinker.modifier.material.moonlight.glacialriver;
 import org.dreamtinker.dreamtinker.modifier.material.nigrescence_antimony.broken_vessel;
 import org.dreamtinker.dreamtinker.modifier.material.nigrescence_antimony.burning_in_vain;
 import org.dreamtinker.dreamtinker.modifier.material.nigrescence_antimony.ewige_widerkunft;
@@ -17,10 +14,12 @@ import org.dreamtinker.dreamtinker.modifier.material.nigrescence_antimony.ourobo
 import org.dreamtinker.dreamtinker.modifier.material.star_regulus.as_one;
 import org.dreamtinker.dreamtinker.modifier.material.star_regulus.two_headed_seven;
 import org.dreamtinker.dreamtinker.modifier.material.valentinite.antimony_usage;
-import org.dreamtinker.dreamtinker.modifier.tools.strong_heavy;
+import org.dreamtinker.dreamtinker.modifier.tools.masu.realsweep;
+import org.dreamtinker.dreamtinker.modifier.tools.masu.silvernamebee;
+import org.dreamtinker.dreamtinker.modifier.tools.masu.strong_heavy;
+import org.dreamtinker.dreamtinker.modifier.tools.tntarrow.strong_explode;
 import slimeknights.tconstruct.library.modifiers.util.ModifierDeferredRegister;
 import slimeknights.tconstruct.library.modifiers.util.StaticModifier;
-
 
 
 public class DreamtinkerModifer {
