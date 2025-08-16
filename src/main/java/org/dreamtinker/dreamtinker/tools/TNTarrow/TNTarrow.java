@@ -12,6 +12,10 @@ import slimeknights.tconstruct.library.tools.item.ModifiableItem;
 
 public class TNTarrow extends ModifiableItem {
 
+    public TNTarrow(Properties properties, ToolDefinition toolDefinition, int maxStackSize) {
+        super(properties, toolDefinition, maxStackSize);
+    }
+
     public TNTarrow(Properties properties, ToolDefinition toolDefinition) {
         super(properties, toolDefinition);
     }
