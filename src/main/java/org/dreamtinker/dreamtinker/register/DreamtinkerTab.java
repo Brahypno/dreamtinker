@@ -34,5 +34,5 @@ public class DreamtinkerTab {
         return DreamtinkerItem.explode_core.get().withMaterialForDisplay(material);
     }).displayItems((params, output) -> DreamtinkerItem.explode_core.get().addVariants(output::accept, "")).build());
 
-    public static final RegistryObject<CreativeModeTab> ORE = TABS.register("ore", () -> CreativeModeTab.builder().title(Component.translatable("itemGroup." + MODID + ".ore")).icon(() -> new ItemStack(DreamtinkerItem.stibnite_ore.get())).displayItems(DreamtinkerItem::addTabItems).build());
+    public static final RegistryObject<CreativeModeTab> ORE = TABS.register("ore", () -> CreativeModeTab.builder().title(Component.translatable("itemGroup." + MODID + ".ore")).icon(() -> new ItemStack(DreamtinkerItem.raw_stibnite.get())).displayItems(DreamtinkerItem::addTabItems).build());
 }

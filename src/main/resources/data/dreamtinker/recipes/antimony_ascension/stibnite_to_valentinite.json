@@ -1,7 +1,7 @@
 {
   "type": "minecraft:blasting",
   "ingredient": {
-    "item": "dreamtinker:stibnite_ore"
+    "tag": "forge:raw_materials/stibnite"
   },
   "result": "dreamtinker:valentinite",
   "experience": 1,

@@ -1,6 +1,6 @@
 {
   "type": "dreamtinker:antimony_loot",
   "conditions": [],
-  "antimony": "dreamtinker:stibnite_ore",
+  "antimony": "dreamtinker:raw_stibnite",
   "target_tag": "forge:ores/gold"
 }

@@ -30,14 +30,14 @@ public class DreamtinkerItem {
     public static final RegistryObject<ToolPartItem> explode_core = ITEMS.register("explode_core", () -> new ToolPartItem(PART, HeadMaterialStats.ID));
 
     //star antimony
-    public static final RegistryObject<Item> stibnite_ore = ITEMS.register("stibnite_ore", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> raw_stibnite = ITEMS.register("raw_stibnite", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> valentinite = ITEMS.register("valentinite", () -> new valentinite(new Item.Properties()));
     public static final RegistryObject<Item> nigrescence_antimony = ITEMS.register("nigrescence_antimony", () -> new nigrescence_antimony(new Item.Properties()));
     public static final RegistryObject<Item> metallivorous_stibium_lupus = ITEMS.register("metallivorous_stibium_lupus", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> regulus = ITEMS.register("star_regulus", () -> new star_regulus(new Item.Properties()));
 
     public static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
-        output.accept(stibnite_ore.get());
+        output.accept(raw_stibnite.get());
         output.accept(valentinite.get());
         output.accept(nigrescence_antimony.get());
         output.accept(metallivorous_stibium_lupus.get());
