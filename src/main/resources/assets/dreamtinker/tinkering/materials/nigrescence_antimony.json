@@ -4,7 +4,7 @@
     "crystal"
   ],
   "generator": {
-    "ignoreMaterialStats": false,
+    "ignore_material_stats": false,
     "supported_stats": [
       "tconstruct:head",
       "tconstruct:handle",
