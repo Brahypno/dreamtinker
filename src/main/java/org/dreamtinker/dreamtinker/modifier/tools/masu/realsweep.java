@@ -21,23 +21,10 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 
-import static slimeknights.tconstruct.TConstruct.getResource;
 import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.NO_COOLDOWN;
 
 public class realsweep extends BattleModifier {
     public realsweep() {}
-
-    public static float getSweepRange(IToolStackView toolData) {
-        System.out.println(" event triggered! Modifier level: " + toolData.getPersistentData());
-
-        if (toolData.getPersistentData().contains(getResource("sweep_range"), 99)){
-            return toolData.getPersistentData().getFloat(getResource("sweep_melee"));
-        }
-        if (toolData.getPersistentData().contains(getResource("attack_range"), 99)){
-            return toolData.getPersistentData().getFloat(getResource("attack_range"));
-        }
-        return 0.0f;
-    }
 
     private int getLevel(IToolStackView tool) {return tool.getModifierLevel(this);}
 

@@ -5,11 +5,11 @@
   "inputs": [
     {
       "item": "minecraft:echo_shard",
-      "amount_needed": 8
+      "amount_needed": 1
     },
     {
       "item": "minecraft:echo_shard",
-      "amount_needed": 8
+      "amount_needed": 1
     }
   ],
   "level": {
@@ -21,13 +21,7 @@
   },
   "tools": [
     {
-      "tag": "tconstruct:modifiable/melee/sword"
-    },
-    {
-      "item": "tconstruct:kama"
-    },
-    {
-      "item": "tconstruct:scythe"
+      "item": "dreamtinker:masu"
     }
   ]
 }
