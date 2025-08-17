@@ -54,10 +54,12 @@
   "modifier.dreamtinker.two_headed_seven": "双头七",
   "modifier.dreamtinker.two_headed_seven.flavor": "龙蛇本一体",
   "modifier.dreamtinker.two_headed_seven.description": "击中方块时传送，击中实体时削减其护甲",
+
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
   "itemGroup.dreamtinker.item": "工匠幻梦 | 道具",
   "itemGroup.dreamtinker.ore": "工匠幻梦 | 杂项",
+
   "item.dreamtinker.explode_core": "镇爆核心",
   "item.dreamtinker.tntarrow": "镇爆箭",
   "item.dreamtinker.tntarrow.description": "一种消耗性的，造成范围伤害的特种近战武器，使用弓以发射。射程小于范围！",
@@ -69,7 +71,7 @@
   "item.dreamtinker.molten_lupi_antimony_bucket": "熔融狼锑桶",
   "item.dreamtinker.molten_ascending_antimony_bucket": "熔融升华锑桶",
   "item.dreamtinker.liquid_smoky_antimony_bucket": "液态锑烟桶",
-  "item.dreamtinker.stibnite_ore": "辉锑矿",
+  "item.dreamtinker.raw_stibnite": "粗辉锑",
   "item.dreamtinker.valentinite": "锑华",
   "item.dreamtinker.nigrescence_antimony": "黑化锑",
   "tooltip.nigrescence_antimony.desc1": "虚空锑, 堕落之锑,锑之一死物......众名环绕，象征其神秘与堕落",
@@ -78,20 +80,40 @@
   "item.dreamtinker.star_regulus": "星锑",
   "tooltip.star_regulus.desc1": "这并非纯粹之终极，但亦可称工程已毕",
   "tooltip.star_regulus.desc2": "匠魂炉的鬼斧神工",
+
   "material.dreamtinker.echo_shard": "回响碎片",
   "material.dreamtinker.moonlight_ice": "月光",
   "material.dreamtinker.valentinite": "锑华",
   "material.dreamtinker.nigrescence_antimony": "黑化锑",
   "material.dreamtinker.metallivorous_stibium_lupus": "狼锑",
   "material.dreamtinker.star_regulus": "星锑",
+
   "fluid_type.dreamtinker.molten_echo_shard": "熔融回响",
+  "fluid.dreamtinker.molten_echo_shard": "熔融回响",
+  "fluid.dreamtinker.molten_echo_shard.fluid_effect": "熔融回响有高的基础伤害，并使敌人死于无形",
   "fluid_type.dreamtinker.molten_nigrescence_antimony": "融化黑锑",
+  "fluid.dreamtinker.molten_nigrescence_antimony": "融化黑锑",
+  "fluid.dreamtinker.molten_nigrescence_antimony.fluid_effect": "融合黑锑对实体造成伤害",
   "fluid_type.dreamtinker.molten_albedo_stibium": "熔融月光锑",
+  "fluid.dreamtinker.molten_albedo_stibium": "熔融月光锑",
+  "fluid.dreamtinker.molten_albedo_stibium.fluid_effect": "熔融月光锑提供夜视",
   "fluid_type.dreamtinker.molten_lupi_antimony": "熔融狼锑",
+  "fluid.dreamtinker.molten_lupi_antimony": "熔融狼锑",
+  "fluid.dreamtinker.molten_lupi_antimony.fluid_effect": "这种极其危险的液体会让一切自毁",
   "fluid_type.dreamtinker.molten_ascending_antimony": "熔融升华锑",
+  "fluid.dreamtinker.molten_ascending_antimony": "熔融升华锑",
+  "fluid.dreamtinker.molten_ascending_antimony.fluid_effect": "熔融升华锑可以提供力量效果并且挖掘方块获得更多产物",
   "fluid_type.dreamtinker.liquid_smoky_antimony": "液态锑烟",
+  "fluid.dreamtinker.liquid_smoky_antimony": "液态锑烟",
+  "fluid.dreamtinker.liquid_smoky_antimony.fluid_effect": "液体锑烟能治疗",
+
+  "fluid_effect.tconstruct.damage.tconstruct.bleed": "流血",
+
   "pattern.dreamtinker.explode_core": "镇爆核心",
+
   "effect.dreamtinker.effectsilvernamebee": "银账本",
+  "effect.dreamtinker.real_darkness": "真实黑暗",
+
   "adv.dreamtinker.eat_star_regulus.title": "大功业",
   "adv.dreamtinker.eat_star_regulus.desc": "品味星之锑"
 }

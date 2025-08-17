@@ -1,0 +1,16 @@
+{
+  "entity_effects": [
+    {
+      "type": "tconstruct:damage",
+      "damage": 6.0,
+      "damage_type": {
+        "melee": "tconstruct:fluid_spike_melee",
+        "ranged": "tconstruct:fluid_spike_ranged"
+      }
+    }
+  ],
+  "fluid": {
+    "amount": 50,
+    "fluid": "dreamtinker:molten_nigrescence_antimony"
+  }
+}

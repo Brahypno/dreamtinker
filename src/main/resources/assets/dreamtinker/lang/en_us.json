@@ -54,14 +54,16 @@
   "modifier.dreamtinker.two_headed_seven": "Two headed Seven",
   "modifier.dreamtinker.two_headed_seven.flavor": "Two path, one result",
   "modifier.dreamtinker.two_headed_seven.description": "teleport when hit block;boost damage when hit entity",
+
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",
   "itemGroup.dreamtinker.item": "dreamtinker | item",
   "itemGroup.dreamtinker.ore": "dreamtinker | item",
+
   "item.dreamtinker.explode_core": "explode core",
   "item.dreamtinker.tntarrow": "exploding arrow",
   "item.dreamtinker.tntarrow.description": "a consumable, special melee weapon.range less than exploding range！",
-  "item.dreamtinker.masu": "MaShuo",
+  "item.dreamtinker.masu": "Ma Shuo",
   "item.dreamtinker.masu.description": "Composing poetry while wielding a spear—truly a hero of his time!----a special heave spear that slow and sweep. Need to ride something or with strength effect otherwise apply weakness to self",
   "item.dreamtinker.molten_echo_shard_bucket": "Molten echo shard Bucket",
   "item.dreamtinker.molten_nigrescence_antimony_bucket": "Molten Nigrescence of Antimon Bucket",
@@ -69,7 +71,7 @@
   "item.dreamtinker.molten_lupi_antimony_bucket": "Molten Stibium Metallivorum Lupi Bucket",
   "item.dreamtinker.molten_ascending_antimony_bucket": "Molten Ascending Antimony Bucket",
   "item.dreamtinker.liquid_smoky_antimony_bucket": "Liquid Smoky Antimony Bucket",
-  "item.dreamtinker.stibnite_ore": "Stibnite Ore",
+  "item.dreamtinker.raw_stibnite": "Raw Stibnite",
   "item.dreamtinker.valentinite": "Valentinite",
   "item.dreamtinker.nigrescence_antimony": "Nigrescence of Antimony",
   "tooltip.nigrescence_antimony.desc1": "Void-Antimony, Corruptum Antimonii,Antimony of the First Death......Names so manifold it doth bear",
@@ -78,20 +80,40 @@
   "item.dreamtinker.star_regulus": "star-regulus of antimony",
   "tooltip.star_regulus.desc1": "This is no true Magnum Opus—yet its essence quivers on the threshold of that sacred transmutation.",
   "tooltip.star_regulus.desc2": "By the arcane forge of Tinker’s Construct, through eldritch craft and secret rites, thou hast summoned them into being.",
+
   "material.dreamtinker.echo_shard": "echo shard",
   "material.dreamtinker.moonlight_ice": "moonlight",
   "material.dreamtinker.valentinite": "Valentinite",
   "material.dreamtinker.nigrescence_antimony": "Nigrescence of Antimony",
   "material.dreamtinker.metallivorous_stibium_lupus": "Stibium Metallivorum Lupi",
   "material.dreamtinker.star_regulus": "star-regulus of antimony",
+
   "fluid_type.dreamtinker.molten_echo_shard": "Molten echo",
+  "fluid.dreamtinker.molten_echo_shard": "Molten echo",
+  "fluid.dreamtinker.molten_echo_shard.fluid_effect": "Molten echo have high base damage, and make entities darkness",
   "fluid_type.dreamtinker.molten_nigrescence_antimony": "Molten Nigrescence of Antimony",
+  "fluid.dreamtinker.molten_nigrescence_antimony": "Molten Nigrescence of Antimony",
+  "fluid.dreamtinker.molten_nigrescence_antimony.fluid_effect": "Molten Nigrescence of Antimony deal damage to entity",
   "fluid_type.dreamtinker.molten_albedo_stibium": "Molten albedo stibium",
+  "fluid.dreamtinker.molten_albedo_stibium": "Molten albedo stibium",
+  "fluid.dreamtinker.molten_albedo_stibium.fluid_effect": "Molten albedo stibium give night vision",
   "fluid_type.dreamtinker.molten_lupi_antimony": "Molten Stibium Metallivorum Lupi",
+  "fluid.dreamtinker.molten_lupi_antimony": "Molten Stibium Metallivorum Lupi",
+  "fluid.dreamtinker.molten_lupi_antimony.fluid_effect": "This extremely dangerous fluid would lead everything deconstruct",
   "fluid_type.dreamtinker.molten_ascending_antimony": "Molten Ascending Antimony",
+  "fluid.dreamtinker.molten_ascending_antimony": "Molten Ascending Antimony",
+  "fluid.dreamtinker.molten_ascending_antimony.fluid_effect": "Molten Ascending Antimony can provide strength and mine blocks",
   "fluid_type.dreamtinker.liquid_smoky_antimony": "Liquid Smoky Antimony",
+  "fluid.dreamtinker.liquid_smoky_antimony": "Liquid Smoky Antimony",
+  "fluid.dreamtinker.liquid_smoky_antimony.fluid_effect": "Liquid Smoky Antimony can heal entities",
+
+  "fluid_effect.tconstruct.damage.tconstruct.bleed": "bleed",
+
   "pattern.dreamtinker.explode_core": "explode core",
+
   "effect.dreamtinker.effectsilvernamebee": "silver ledger",
+  "effect.dreamtinker.real_darkness": "Real Darkness",
+
   "adv.dreamtinker.eat_star_regulus.title": "Magnum Opus",
   "adv.dreamtinker.eat_star_regulus.desc": "Devour star regulus"
 }

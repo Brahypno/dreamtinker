@@ -28,9 +28,8 @@ public class DreamtinkerFluid {
 
     public static final FluidDeferredRegister FLUIDS = new FluidDeferredRegister(MODID);
 
-    public static FluidType.Properties createFluidType(int temperature, int lightLevel,int viscosity, int density) {
-        return FluidType.Properties.create()
-                .temperature(temperature) // 设置流体的温度
+    public static FluidType.Properties createFluidType(int temperature, int lightLevel, int viscosity, int density) {
+        return FluidType.Properties.create().temperature(temperature) // 设置流体的温度
                 .lightLevel(lightLevel)    // 设置流体的亮度
                 .viscosity(viscosity)      // 设置流体的粘度
                 .density(density)         // 设置流体的密度
@@ -39,28 +38,29 @@ public class DreamtinkerFluid {
     }
 
     private static FlowingFluidObject<ForgeFlowingFluid> registerFluid(String name, int temp, int viscosity, int density, int lightLevel, Function<Supplier<? extends FlowingFluid>, LiquidBlock> blockFunction) {
-         return FLUIDS.register(name).type(createFluidType(temp,lightLevel,viscosity,density)).block(blockFunction).bucket().flowing();
+        return FLUIDS.register(name).type(createFluidType(temp, lightLevel, viscosity, density)).block(blockFunction).bucket().flowing();
     }
 
-    public static final FluidObject<ForgeFlowingFluid> molten_echo_shard = registerFluid("molten_echo_shard", 1500,2000,10000,0,supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_BLACK, 0), 0, 8){
-        @Override
-        public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-            super.entityInside(state, level, pos, entity);
-            if (entity instanceof LivingEntity living)
-                living.addEffect(new MobEffectInstance(MobEffects.DARKNESS));
-
-        }
-    });
-    public static final FluidObject<ForgeFlowingFluid> molten_nigrescence_antimony = registerFluid("molten_nigrescence_antimony", 600,5000,6666,0,supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_BLACK, 0), 0, 16){
+    public static final FluidObject<ForgeFlowingFluid> molten_echo_shard = registerFluid("molten_echo_shard", 1500, 2000, 10000, 0, supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_BLACK, 0), 0, 8) {
         @Override
         public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
             super.entityInside(state, level, pos, entity);
             if (entity instanceof LivingEntity living){
-                living.addEffect(new MobEffectInstance(MobEffects.HARM,10,2));
+                living.addEffect(new MobEffectInstance(MobEffects.DARKNESS));
+                living.addEffect(new MobEffectInstance(DreamtinkerEffect.RealDarkness.get()));
             }
         }
     });
-    public static final FluidObject<ForgeFlowingFluid> molten_albedo_stibium = registerFluid("molten_albedo_stibium", 600,1000,3190,15,supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_LIGHT_GRAY, 15), 0, 8){
+    public static final FluidObject<ForgeFlowingFluid> molten_nigrescence_antimony = registerFluid("molten_nigrescence_antimony", 600, 5000, 6666, 0, supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_BLACK, 0), 0, 16) {
+        @Override
+        public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+            super.entityInside(state, level, pos, entity);
+            if (entity instanceof LivingEntity living){
+                living.addEffect(new MobEffectInstance(MobEffects.HARM, 10, 2));
+            }
+        }
+    });
+    public static final FluidObject<ForgeFlowingFluid> molten_albedo_stibium = registerFluid("molten_albedo_stibium", 600, 1000, 3190, 15, supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_LIGHT_GRAY, 15), 0, 8) {
         @Override
         public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
             super.entityInside(state, level, pos, entity);
@@ -69,16 +69,16 @@ public class DreamtinkerFluid {
 
         }
     });
-    public static final FluidObject<ForgeFlowingFluid> molten_lupi_antimony = registerFluid("molten_lupi_antimony", 1500,44,7676,15,supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_BLACK, 0), 30000, 8){
+    public static final FluidObject<ForgeFlowingFluid> molten_lupi_antimony = registerFluid("molten_lupi_antimony", 1500, 44, 7676, 15, supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_BLACK, 0), 30000, 8) {
         @Override
         public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
             super.entityInside(state, level, pos, entity);
             if (entity instanceof LivingEntity living)
-                living.addEffect(new MobEffectInstance(MobEffects.HARM,10,2));
+                living.addEffect(new MobEffectInstance(MobEffects.HARM, 10, 3));
 
         }
     });
-    public static final FluidObject<ForgeFlowingFluid> molten_ascending_antimony = registerFluid("molten_ascending_antimony", 600,1000,3190,15,supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_BLACK, 0), 10, 0){
+    public static final FluidObject<ForgeFlowingFluid> molten_ascending_antimony = registerFluid("molten_ascending_antimony", 600, 1000, 3190, 15, supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_BLACK, 0), 10, 0) {
         @Override
         public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
             super.entityInside(state, level, pos, entity);
@@ -87,7 +87,7 @@ public class DreamtinkerFluid {
 
         }
     });
-    public static final FluidObject<ForgeFlowingFluid> liquid_smoky_antimony = registerFluid("liquid_smoky_antimony", 600, 1000, 3190, 15,supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_BLACK, 0), 10, 0){
+    public static final FluidObject<ForgeFlowingFluid> liquid_smoky_antimony = registerFluid("liquid_smoky_antimony", 600, 1000, 3190, 15, supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_BLACK, 0), 10, 0) {
         @Override
         public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
             super.entityInside(state, level, pos, entity);
