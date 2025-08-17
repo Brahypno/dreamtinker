@@ -8,8 +8,6 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.IntValue TNTarrowgravity = builder.comment("vertical accelerator or tnt arrow").defineInRange("TNTArrowGravity", -5, Integer.MIN_VALUE, 0);
     public static final ForgeConfigSpec.IntValue StrongExplodeDamageBoost = builder.comment("Strong Explode Damage Boost").defineInRange("StrongExplodeDamageBoost", 1, 1, 1000);
 
-    public static final ForgeConfigSpec.IntValue RealSweepRange = builder.comment("Real Sweep range").defineInRange("RealSweepRange", 2, 1, 1000);
-
     static {
         builder.pop();
         builder.push("Item Configuration");

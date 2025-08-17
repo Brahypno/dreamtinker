@@ -6,31 +6,35 @@
     "masu_line": "dreamtinker:item/tool/masu/masu_line",
     "masu_binding": "dreamtinker:item/tool/masu/masu_binding",
     "masu_handle": "dreamtinker:item/tool/masu/masu_handle",
-    "masu_end": "dreamtinker:item/tool/masu/masu_end"
+    "masu_end": "dreamtinker:item/tool/masu/masu_end",
+
+    "large_masu_blade": "dreamtinker:item/tool/masu/large/masu_blade",
+    "large_masu_line": "dreamtinker:item/tool/masu/large/masu_line",
+    "large_masu_binding": "dreamtinker:item/tool/masu/large/masu_binding",
+    "large_masu_handle": "dreamtinker:item/tool/masu/large/masu_handle",
+    "large_masu_end": "dreamtinker:item/tool/masu/large/masu_end"
   },
-  "modifier_roots": [
-    "dreamtinker:item/tool/masu/modifiers/"
-  ],
+  "modifier_roots": {
+    "small": [ "dreamtinker:item/tool/masu/modifiers/" ],
+    "large": [ "dreamtinker:item/tool/masu/large/modifiers/" ]
+  },
+  "large": true,
+  "large_offset": [-2, 2],
   "parts": [
+   {"name": "masu_blade", "index": 0 },
+   {"name": "masu_line","index": 1 },
+   {"name": "masu_binding", "index": 2 },
+   {"name": "masu_handle", "index": 3 },
+   {"name": "masu_end", "index": 4 }
+  ],
+  "overrides": [
     {
-      "name": "masu_blade",
-      "index": 0
+      "predicate": { "tconstruct:charging": 2 },
+      "model": "dreamtinker:item/tool/masu/blocking"
     },
     {
-      "name": "masu_line",
-      "index": 1
-    },
-    {
-      "name": "masu_binding",
-      "index": 2
-    },
-    {
-      "name": "masu_handle",
-      "index": 3
-    },
-    {
-      "name": "masu_end",
-      "index": 4
+      "predicate": { "tconstruct:broken": 1 },
+      "model": "dreamtinker:item/tool/masu/broken"
     }
   ]
 }
