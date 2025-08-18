@@ -23,6 +23,7 @@ import slimeknights.tconstruct.library.utils.Util;
 
 import java.util.List;
 
+import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.TNTarrowRadius;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.TNTarrowgravity;
 import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.NO_COOLDOWN;
 
@@ -30,6 +31,7 @@ public class TNTArrowEntity extends AbstractArrow {
     public TNTArrowEntity(EntityType<? extends AbstractArrow> type, Level world) {
         super(type, world);
     }
+
     private ItemStack tntarrow = new ItemStack(Items.ARROW);
 
     public TNTArrowEntity(Level world, LivingEntity shooter, ItemStack stack) {
@@ -37,21 +39,25 @@ public class TNTArrowEntity extends AbstractArrow {
         this.tntarrow = stack.copy();
     }
 
-    protected void hitEntity(Entity entity){
-        if(null !=this.getOwner() && this.getOwner() instanceof LivingEntity && entity.getUUID() != this.getOwner().getUUID()){
-            ToolAttackUtil.attackEntity(ToolStack.from(this.tntarrow), (LivingEntity)this.getOwner(), InteractionHand.OFF_HAND,entity,NO_COOLDOWN, false,Util.getSlotType(InteractionHand.OFF_HAND));
-
-        }
-        else{
+    protected void hitEntity(Entity entity) {
+        if (null == this.getOwner() || !(this.getOwner() instanceof LivingEntity) || null == entity)
+            return;
+        entity.setInvulnerable(false);
+        entity.invulnerableTime = 0;
+        if (entity.getUUID() != this.getOwner().getUUID()){
+            ToolAttackUtil.attackEntity(ToolStack.from(this.tntarrow), (LivingEntity) this.getOwner(), InteractionHand.OFF_HAND, entity, NO_COOLDOWN, false, Util.getSlotType(InteractionHand.OFF_HAND));
+        }else {
             try {
                 ServerLevel serverLevel = (ServerLevel) this.level();
                 FakePlayer fakeAttacker = FakePlayerFactory.getMinecraft(serverLevel);
-                ToolAttackUtil.attackEntity(ToolStack.from(this.tntarrow), fakeAttacker, InteractionHand.MAIN_HAND,entity,NO_COOLDOWN, false, Util.getSlotType(InteractionHand.OFF_HAND));
+                ToolAttackUtil.attackEntity(ToolStack.from(this.tntarrow), fakeAttacker, InteractionHand.MAIN_HAND, entity, NO_COOLDOWN, false, Util.getSlotType(InteractionHand.OFF_HAND));
                 fakeAttacker = null;
-            } catch (SecurityException e) {
+            }
+            catch (SecurityException e) {
                 // 捕获异常，说明 FakePlayer 被禁用
-                ToolAttackUtil.attackEntity(ToolStack.from(this.tntarrow), (LivingEntity)this.getOwner(), InteractionHand.MAIN_HAND,entity,NO_COOLDOWN, false, Util.getSlotType(InteractionHand.OFF_HAND));
-            } catch (Exception ignored) {
+                ToolAttackUtil.attackEntity(ToolStack.from(this.tntarrow), (LivingEntity) this.getOwner(), InteractionHand.MAIN_HAND, entity, NO_COOLDOWN, false, Util.getSlotType(InteractionHand.OFF_HAND));
+            }
+            catch (Exception ignored) {
             }
 
         }
@@ -60,22 +66,21 @@ public class TNTArrowEntity extends AbstractArrow {
     @Override
     protected void onHit(@NotNull HitResult result) {
         super.onHit(result);
-        if (!this.level().isClientSide) {
-            float sound=2.0F;
+        if (!this.level().isClientSide){
+            float sound = 2.0F;
             Vec3 hitPos = result.getLocation();
             // 查找半径内的实体
-            int hitRadius = 5;
-            List<Entity> nearbyEntities = this.level().getEntities(null,
-                    new AABB(hitPos.subtract(hitRadius, hitRadius, hitRadius), hitPos.add(hitRadius, hitRadius, hitRadius)));
+            int hitRadius = TNTarrowRadius.get();
+            List<Entity> nearbyEntities = this.level().getEntities(null, new AABB(hitPos.subtract(hitRadius, hitRadius, hitRadius), hitPos.add(hitRadius, hitRadius, hitRadius)));
 
             // 遍历实体列表
             for (Entity entity : nearbyEntities) {
-                if (entity instanceof LivingEntity livingEntity) {
+                if (entity instanceof LivingEntity livingEntity){
                     hitEntity(livingEntity);
                     sound++;
                 }
             }
-            if(this.getOwner()!=null&& this.getOwner().position().distanceTo(hitPos)<= hitRadius){
+            if (this.getOwner() != null && this.getOwner().position().distanceTo(hitPos) <= hitRadius){
                 hitEntity(this.getOwner());
                 sound++;
             }
@@ -91,7 +96,7 @@ public class TNTArrowEntity extends AbstractArrow {
     @Override
     public void tick() {
         super.tick();
-        if (!this.isNoGravity()) {
+        if (!this.isNoGravity()){
             this.setDeltaMovement(this.getDeltaMovement().add(0.0, TNTarrowgravity.get(), 0.0));
         }
     }

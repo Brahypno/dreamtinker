@@ -6,6 +6,7 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder().comment("Configuration to almost all data in this mod. Take your own risk modify it!!!").push("Tool Configuration");
 
     public static final ForgeConfigSpec.IntValue TNTarrowgravity = builder.comment("vertical accelerator or tnt arrow").defineInRange("TNTArrowGravity", -5, Integer.MIN_VALUE, 0);
+    public static final ForgeConfigSpec.IntValue TNTarrowRadius = builder.comment("tnt arrow effect range").defineInRange("TNTarrowRadius", 5, 0, 100);
     public static final ForgeConfigSpec.IntValue StrongExplodeDamageBoost = builder.comment("Strong Explode Damage Boost").defineInRange("StrongExplodeDamageBoost", 1, 1, 1000);
 
     static {
