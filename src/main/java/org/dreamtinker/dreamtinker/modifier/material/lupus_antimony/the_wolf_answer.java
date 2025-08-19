@@ -52,9 +52,9 @@ public class the_wolf_answer extends BattleModifier {
 
     @Override
     public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
-        int types = 1;
+        int types = 0;
         if (null != context.getLivingTarget())
-            types = context.getLivingTarget().getActiveEffects().size();
+            types += context.getLivingTarget().getActiveEffects().size();
         return damage * Math.max(1, types);
     }
 

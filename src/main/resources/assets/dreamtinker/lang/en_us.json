@@ -42,7 +42,7 @@
   "modifier.dreamtinker.the_wolf_wonder.description": "Deal random effect to target......",
   "modifier.dreamtinker.the_wolf_answer": "The Wolf Answer",
   "modifier.dreamtinker.the_wolf_answer.flavor": "The answer is a reference to......",
-  "modifier.dreamtinker.the_wolf_answer.description": "By pass (almost) all shield and resistance",
+  "modifier.dreamtinker.the_wolf_answer.description": "By pass (almost) all shield and resistance; and boost damage by effects number",
   "modifier.dreamtinker.the_wolf_was": "§kThe Wolf Was",
   "modifier.dreamtinker.the_wolf_was.flavor": "It had died; it was transfigured; and behold, it is become a wolf.",
   "modifier.dreamtinker.the_wolf_was.description": "When tool lose durability, it store count and would improve other materials in the tool",
