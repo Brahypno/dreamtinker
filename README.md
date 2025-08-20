@@ -17,3 +17,8 @@
 1. pants
 
 ### multi-block structure
+
+## planned Compact
+
+1. Enigmatic Legacy
+2. Malum
