@@ -24,5 +24,5 @@ public abstract class BattleModifier extends Modifier implements ArrowInterface,
         return this.isNoLevels() ? super.getDisplayName() : super.getDisplayName(level);
     }
 
-    public boolean isNoLevels(){return false;}
+    public boolean isNoLevels() {return true;}
 }

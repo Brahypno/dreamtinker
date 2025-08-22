@@ -92,10 +92,7 @@ public class ewige_widerkunft extends BattleModifier {
             }
         }
     }
-
-    @Override
-    public boolean isNoLevels() {return true;}
-
+    
     @Override
     public int getPriority() {
         return Integer.MIN_VALUE;

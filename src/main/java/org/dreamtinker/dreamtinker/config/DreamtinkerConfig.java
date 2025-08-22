@@ -93,6 +93,13 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.IntValue AsOneA = builder.comment("Max amp of effect that would be clear").defineInRange("AsOneA", 3, 1, 10000);
     public static final ForgeConfigSpec.DoubleValue AsOneS = builder.comment("Percentage damage taken").defineInRange("AsOneS", 0.33, 0, 1);
 
+    static {builder.comment("\ncrying_obsidian: ");}
+
+    public static final ForgeConfigSpec.IntValue CryingParticles = builder.comment("Do you want more particles in Sharpened With?").defineInRange("CryingParticles", 1, 0, 10000);
+    public static final ForgeConfigSpec.DoubleValue CryingDamageBoost = builder.comment("Damage boost of Sharpened With").defineInRange("CryingDamageBoost", 0.16, 0, 100);
+    public static final ForgeConfigSpec.IntValue IsoLdeEaseTime = builder.comment("Torrance period for ISOLDE;also the least time allowed").defineInRange("IsoLdeEaseTime", 3, 1, 10);
+
+
     public static final ForgeConfigSpec specs = builder.pop().build();
 }
 

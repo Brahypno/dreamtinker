@@ -54,6 +54,15 @@
   "modifier.dreamtinker.two_headed_seven": "Two headed Seven",
   "modifier.dreamtinker.two_headed_seven.flavor": "Two path, one result",
   "modifier.dreamtinker.two_headed_seven.description": "teleport when hit block;boost damage when hit entity",
+  "modifier.dreamtinker.sharpened_with": "Sharpen With T......",
+  "modifier.dreamtinker.sharpened_with.flavor": "Despair, my best friends",
+  "modifier.dreamtinker.sharpened_with.description": "Summon rain when hit entities;Boost damage when in rain",
+  "modifier.dreamtinker.isolde": "Tristan! Isolde!",
+  "modifier.dreamtinker.isolde.flavor": "Black Sails, Or White Sails",
+  "modifier.dreamtinker.isolde.description": "Buff arrow ability when release in specify time, otherwise nerf it",
+  "modifier.dreamtinker.in_rain": "In Rain",
+  "modifier.dreamtinker.in_rain.flavor": "Just like Tear......",
+  "modifier.dreamtinker.in_rain.description": "Reverse the effect of Protection. When in Boots, create water path",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",
@@ -71,6 +80,8 @@
   "item.dreamtinker.molten_lupi_antimony_bucket": "Molten Stibium Metallivorum Lupi Bucket",
   "item.dreamtinker.molten_ascending_antimony_bucket": "Molten Ascending Antimony Bucket",
   "item.dreamtinker.liquid_smoky_antimony_bucket": "Liquid Smoky Antimony Bucket",
+  "item.dreamtinker.molten_crying_obsidian_bucket": "Molten Crying Obsidian Bucket",
+
   "item.dreamtinker.raw_stibnite": "Raw Stibnite",
   "item.dreamtinker.valentinite": "Valentinite",
   "item.dreamtinker.nigrescence_antimony": "Nigrescence of Antimony",
@@ -87,6 +98,7 @@
   "material.dreamtinker.nigrescence_antimony": "Nigrescence of Antimony",
   "material.dreamtinker.metallivorous_stibium_lupus": "Stibium Metallivorum Lupi",
   "material.dreamtinker.star_regulus": "star-regulus of antimony",
+  "material.dreamtinker.crying_obsidian": "Crying Obsidian",
 
   "fluid_type.dreamtinker.molten_echo_shard": "Molten echo",
   "fluid.dreamtinker.molten_echo_shard": "Molten echo",
@@ -106,6 +118,9 @@
   "fluid_type.dreamtinker.liquid_smoky_antimony": "Liquid Smoky Antimony",
   "fluid.dreamtinker.liquid_smoky_antimony": "Liquid Smoky Antimony",
   "fluid.dreamtinker.liquid_smoky_antimony.fluid_effect": "Liquid Smoky Antimony can heal entities",
+  "fluid_type.dreamtinker.molten_crying_obsidian": "Molten Crying Obsidian",
+  "fluid.dreamtinker.molten_crying_obsidian": "Molten Crying Obsidian",
+  "fluid.dreamtinker.molten_crying_obsidian.fluid_effect": "Molten Crying Obsidian becomes a very difficult to remove blockage.",
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "bleed",
 

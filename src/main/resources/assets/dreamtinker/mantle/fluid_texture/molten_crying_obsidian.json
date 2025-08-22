@@ -1,0 +1,11 @@
+{
+  "color": "FFFFFFFF",
+  "flowing": "tconstruct:fluid/molten/stone/obsidian/flowing",
+  "fog": {
+    "calculate_color": true,
+    "end": 2.0,
+    "shape": "sphere",
+    "start": 0.25
+  },
+  "still": "tconstruct:fluid/molten/stone/obsidian/still"
+}

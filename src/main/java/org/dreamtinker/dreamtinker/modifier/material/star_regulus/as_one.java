@@ -36,7 +36,7 @@ import static org.dreamtinker.dreamtinker.utils.modiferCheck.getToolWithModifier
 
 
 public class as_one extends ArmorModifier {
-    private final int as_one_life=AsOneRe.get();
+    private final int as_one_life = AsOneRe.get();
     private static final int SECOND_THRESHOLD = AsOneT.get();
 
     private static final ResourceLocation TAG_AS_ONE = new ResourceLocation(Dreamtinker.MODID, "as_one");
@@ -45,82 +45,82 @@ public class as_one extends ArmorModifier {
     {
         MinecraftForge.EVENT_BUS.addListener(this::onLivingDeath);
     }
+
     @Override
-    public  void onEquip(IToolStackView tool, ModifierEntry modifier, EquipmentChangeContext context){
+    public void onEquip(IToolStackView tool, ModifierEntry modifier, EquipmentChangeContext context) {
         ModDataNBT nbt = tool.getPersistentData();
-        if(!nbt.contains(TAG_AS_ONE,TAG_INT))
+        if (!nbt.contains(TAG_AS_ONE, TAG_INT))
             nbt.putInt(TAG_AS_ONE, as_one_life);
     }
 
     public void onLivingDeath(LivingDeathEvent event) {
         LivingEntity entity = event.getEntity();
-        ToolStack tool=getToolWithModifier(entity,this.getId());
-        if(null!=tool){
+        ToolStack tool = getToolWithModifier(entity, this.getId());
+        if (null != tool){
             ModDataNBT tooldata = tool.getPersistentData();
             int count = tooldata.getInt(TAG_AS_ONE);
-            if (0<count){
+            if (0 < count){
                 tooldata.putInt(TAG_AS_ONE, --count);
                 event.setCanceled(true);
                 entity.deathTime = -10;
-                entity.setHealth((float) (entity.getMaxHealth()*0.15));
-                entity.invulnerableTime=1000;
+                entity.setHealth((float) (entity.getMaxHealth() * 0.15));
+                entity.invulnerableTime = 1000;
             }
         }
     }
 
     @Override
     public void addTooltip(IToolStackView tool, @NotNull ModifierEntry modifier, @Nullable Player player, List<Component> tooltip, TooltipKey tooltipKey, TooltipFlag tooltipFlag) {
-        if (tool instanceof ToolStack && tooltipKey.isShiftOrUnknown()) {
+        if (tool instanceof ToolStack && tooltipKey.isShiftOrUnknown()){
             ModDataNBT nbt = tool.getPersistentData();
             int count = nbt.getInt(TAG_AS_ONE);
-            if (count > 0) {
+            if (count > 0){
                 tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.as_one").append(String.valueOf(count)).withStyle(this.getDisplayName().getStyle()));
             }
         }
     }
+
     @Override
     public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         if (!isCorrectSlot)
             return;
         if (world.isClientSide)
             return;
-        if(world.getGameTime()%20==0){
+        if (world.getGameTime() % 20 == 0){
             ModDataNBT toolData = tool.getPersistentData();
-            int last_second=toolData.getInt(TAG_LAST);
-            int as_one_cnt=toolData.getInt(TAG_AS_ONE);
-            if (SECOND_THRESHOLD<=last_second+1) {
-                toolData.putInt(TAG_LAST, last_second+1-SECOND_THRESHOLD);
-                toolData.putInt(TAG_AS_ONE,++as_one_cnt);
+            int last_second = toolData.getInt(TAG_LAST);
+            int as_one_cnt = toolData.getInt(TAG_AS_ONE);
+            if (SECOND_THRESHOLD <= last_second + 1){
+                toolData.putInt(TAG_LAST, last_second + 1 - SECOND_THRESHOLD);
+                toolData.putInt(TAG_AS_ONE, ++as_one_cnt);
             }else
-                toolData.putInt(TAG_LAST, last_second+1);
+                toolData.putInt(TAG_LAST, last_second + 1);
         }
         List<MobEffectInstance> snapshot = new ArrayList<>(holder.getActiveEffects());
         for (MobEffectInstance inst : snapshot) {
             int amp = inst.getAmplifier();
-            if (amp < AsOneA.get()) {
-                MobEffect type      = inst.getEffect();
-                int      duration  = inst.getDuration();
-                boolean  ambient   = inst.isAmbient();
-                boolean  particles = inst.isVisible();
-                boolean  icon      = inst.showIcon();
+            if (amp < AsOneA.get()){
+                MobEffect type = inst.getEffect();
+                int duration = inst.getDuration();
+                boolean ambient = inst.isAmbient();
+                boolean particles = inst.isVisible();
+                boolean icon = inst.showIcon();
 
                 holder.removeEffect(type);
-                if(0<=amp-2)
-                    holder.addEffect(new MobEffectInstance(
-                        type, duration, amp-2, ambient, particles, icon
-                    ));
+                if (0 <= amp - 2)
+                    holder.addEffect(new MobEffectInstance(type, duration, amp - 2, ambient, particles, icon));
             }
         }
-        if (holder instanceof ServerPlayer player &&!player.isCreative() && !player.isSpectator()&&!player.getAbilities().mayfly) {
-            player.getAbilities().mayfly  = true;   // 允许飞行
+        if (holder instanceof ServerPlayer player && !player.isCreative() && !player.isSpectator() && !player.getAbilities().mayfly){
+            player.getAbilities().mayfly = true;   // 允许飞行
             player.connection.send(new ClientboundPlayerAbilitiesPacket(player.getAbilities()));
         }
     }
+
     @Override
     public int modifierDamageTool(IToolStackView tool, ModifierEntry modifier, int amount, @org.jetbrains.annotations.Nullable LivingEntity holder) {return 0;}
+
     @Override
-    public boolean isNoLevels(){return true;}
-    @Override
-    public float modifyDamageTaken(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount, boolean isDirectDamage){ return (float) (amount*AsOneS.get());}
+    public float modifyDamageTaken(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount, boolean isDirectDamage) {return (float) (amount * AsOneS.get());}
 }
 

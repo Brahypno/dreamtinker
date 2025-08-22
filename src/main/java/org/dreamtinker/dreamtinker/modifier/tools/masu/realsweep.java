@@ -105,4 +105,7 @@ public class realsweep extends BattleModifier {
             });
         }
     }
+
+    @Override
+    public boolean isNoLevels() {return false;}
 }

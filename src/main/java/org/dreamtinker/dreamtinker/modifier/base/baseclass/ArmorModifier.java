@@ -24,5 +24,5 @@ public abstract class ArmorModifier extends Modifier implements ArmorInterface, 
         return this.isNoLevels() ? super.getDisplayName() : super.getDisplayName(level);
     }
 
-    public boolean isNoLevels(){return false;}
+    public boolean isNoLevels() {return true;}
 }

@@ -18,4 +18,7 @@ public class strong_explode extends BattleModifier {
     public int getPriority() {
         return Integer.MIN_VALUE;
     }
+
+    @Override
+    public boolean isNoLevels() {return false;}
 }

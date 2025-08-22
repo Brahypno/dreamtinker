@@ -54,6 +54,15 @@
   "modifier.dreamtinker.two_headed_seven": "双头七",
   "modifier.dreamtinker.two_headed_seven.flavor": "龙蛇本一体",
   "modifier.dreamtinker.two_headed_seven.description": "击中方块时传送，击中实体时削减其护甲",
+  "modifier.dreamtinker.sharpened_with": "盈泪",
+  "modifier.dreamtinker.sharpened_with.flavor": "虚幻的雨……",
+  "modifier.dreamtinker.sharpened_with.description": "攻击敌人时召唤雨，在雨中时增伤。",
+  "modifier.dreamtinker.isolde": "伊索尔德！",
+  "modifier.dreamtinker.isolde.flavor": "来的是黑帆，还是白帆",
+  "modifier.dreamtinker.isolde.description": "在适当时候松开弓弦可以加强箭矢，否则会削弱",
+  "modifier.dreamtinker.in_rain": "雨中",
+  "modifier.dreamtinker.in_rain.flavor": "就像泪水......",
+  "modifier.dreamtinker.in_rain.description": "反转保护效果。在靴子上时，行走时会产生水径",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
@@ -71,6 +80,8 @@
   "item.dreamtinker.molten_lupi_antimony_bucket": "熔融狼锑桶",
   "item.dreamtinker.molten_ascending_antimony_bucket": "熔融升华锑桶",
   "item.dreamtinker.liquid_smoky_antimony_bucket": "液态锑烟桶",
+  "item.dreamtinker.molten_crying_obsidian_bucket": "熔融哭泣黑曜石桶",
+
   "item.dreamtinker.raw_stibnite": "粗辉锑",
   "item.dreamtinker.valentinite": "锑华",
   "item.dreamtinker.nigrescence_antimony": "黑化锑",
@@ -87,6 +98,7 @@
   "material.dreamtinker.nigrescence_antimony": "黑化锑",
   "material.dreamtinker.metallivorous_stibium_lupus": "狼锑",
   "material.dreamtinker.star_regulus": "星锑",
+  "material.dreamtinker.crying_obsidian": "哭泣的黑曜石",
 
   "fluid_type.dreamtinker.molten_echo_shard": "熔融回响",
   "fluid.dreamtinker.molten_echo_shard": "熔融回响",
@@ -106,6 +118,9 @@
   "fluid_type.dreamtinker.liquid_smoky_antimony": "液态锑烟",
   "fluid.dreamtinker.liquid_smoky_antimony": "液态锑烟",
   "fluid.dreamtinker.liquid_smoky_antimony.fluid_effect": "液体锑烟能治疗",
+  "fluid_type.dreamtinker.molten_crying_obsidian": "熔融哭泣黑曜石",
+  "fluid.dreamtinker.molten_crying_obsidian": "熔融哭泣黑曜石",
+  "fluid.dreamtinker.molten_crying_obsidian.fluid_effect": "熔融哭泣黑曜石会冷却成一种难以破坏的方块",
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "流血",
 

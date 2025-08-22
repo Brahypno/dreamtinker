@@ -57,7 +57,4 @@ public class the_wolf_answer extends BattleModifier {
             types += context.getLivingTarget().getActiveEffects().size();
         return damage * Math.max(1, types);
     }
-
-    @Override
-    public boolean isNoLevels() {return true;}
 }

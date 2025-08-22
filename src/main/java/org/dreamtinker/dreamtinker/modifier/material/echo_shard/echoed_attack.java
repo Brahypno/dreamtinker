@@ -46,7 +46,7 @@ import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.getAtt
 public class echoed_attack extends BattleModifier {
     private static final ResourceLocation TAG_ECHO_ENERGY = new ResourceLocation(Dreamtinker.MODID, "echo_energy");
     private static final int E_C = EchoAttackCharge.get();
-    private static final double charingchance= EchoAttackChargingChance.get();
+    private static final double charingchance = EchoAttackChargingChance.get();
 
     @Override
     public Component onModifierRemoved(IToolStackView tool, Modifier modifier) {
@@ -56,20 +56,21 @@ public class echoed_attack extends BattleModifier {
 
     @Override
     public void addTooltip(IToolStackView tool, @NotNull ModifierEntry modifier, @Nullable Player player, List<Component> tooltip, TooltipKey tooltipKey, TooltipFlag tooltipFlag) {
-        if (tool instanceof ToolStack && tooltipKey.isShiftOrUnknown()) {
+        if (tool instanceof ToolStack && tooltipKey.isShiftOrUnknown()){
             ModDataNBT nbt = tool.getPersistentData();
-            if (nbt.contains(TAG_ECHO_ENERGY, TAG_INT)) {
-                int count=nbt.getInt(TAG_ECHO_ENERGY);
+            if (nbt.contains(TAG_ECHO_ENERGY, TAG_INT)){
+                int count = nbt.getInt(TAG_ECHO_ENERGY);
                 tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.echo_energy").append(String.valueOf(count)).withStyle(this.getDisplayName().getStyle()));
             }
         }
     }
+
     @Override
     public float beforeMeleeHit(IToolStackView tool, @NotNull ModifierEntry modifier, @NotNull ToolAttackContext context, float damage, float baseKnockback, float knockback) {
         ModDataNBT nbt = tool.getPersistentData();
         int count = nbt.getInt(TAG_ECHO_ENERGY);
-        if(E_C<=count){
-            count-=E_C;
+        if (E_C <= count){
+            count -= E_C;
             performSonicBoomSweep(tool, (ServerLevel) context.getAttacker().level(), context.getAttacker());
             nbt.putInt(TAG_ECHO_ENERGY, count);
         }
@@ -78,15 +79,16 @@ public class echoed_attack extends BattleModifier {
 
     @Override
     public void onProjectileLaunch(IToolStackView tool, ModifierEntry modifier, LivingEntity shooter, ItemStack ammo, Projectile projectile, @Nullable AbstractArrow arrow, ModDataNBT persistentData, boolean primary) {
-        if (!(shooter.level() instanceof ServerLevel)) return;
+        if (!(shooter.level() instanceof ServerLevel))
+            return;
         ModDataNBT nbt = tool.getPersistentData();
-        int count = nbt.getInt(TAG_ECHO_ENERGY)+1;
-        if (projectile instanceof AbstractArrow && null!=arrow && Math.random()<charingchance) {
-            ((AbstractArrow) projectile).setBaseDamage(((AbstractArrow) projectile).getBaseDamage()*1.5);
+        int count = nbt.getInt(TAG_ECHO_ENERGY) + 1;
+        if (projectile instanceof AbstractArrow && null != arrow && Math.random() < charingchance){
+            ((AbstractArrow) projectile).setBaseDamage(((AbstractArrow) projectile).getBaseDamage() * 1.5);
             count++;
         }
-        if(E_C<=count){
-            count-=E_C;
+        if (E_C <= count){
+            count -= E_C;
             nbt.putInt(TAG_ECHO_ENERGY, count);
             performSonicBoomSweep(tool, (ServerLevel) shooter.level(), shooter);
         }
@@ -94,7 +96,7 @@ public class echoed_attack extends BattleModifier {
 
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        hitEntity(tool, context.getAttacker(), context.getLivingTarget(),context);
+        hitEntity(tool, context.getAttacker(), context.getLivingTarget(), context);
     }
 
     @Override
@@ -102,12 +104,12 @@ public class echoed_attack extends BattleModifier {
         return Integer.MIN_VALUE;
     }
 
-    private void hitEntity(IToolStackView tool,LivingEntity attacker,LivingEntity target,ToolAttackContext context){
+    private void hitEntity(IToolStackView tool, LivingEntity attacker, LivingEntity target, ToolAttackContext context) {
         int echo_energy = 1;
-        if (null != target && Math.random()<charingchance) {
+        if (null != target && Math.random() < charingchance){
             shortCutDamage(tool, context);
             for (LivingEntity entity : new LivingEntity[]{attacker, target}) {
-                if (entity != null) {
+                if (entity != null){
                     entity.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 60));
                     entity.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 60));
                 }
@@ -130,13 +132,13 @@ public class echoed_attack extends BattleModifier {
         Objects.requireNonNull(context.getLivingTarget()).setInvulnerable(false);
         DamageSource dam;
         if (context.getAttacker() instanceof Player player)
-            dam=context.getLivingTarget().level().damageSources().playerAttack(player);
+            dam = context.getLivingTarget().level().damageSources().playerAttack(player);
         else
-            dam=context.getLivingTarget().level().damageSources().mobAttack(context.getAttacker());
+            dam = context.getLivingTarget().level().damageSources().mobAttack(context.getAttacker());
         context.getLivingTarget().hurt(dam, damage);
     }
 
-    public static void performSonicBoomSweep(IToolStackView tool,ServerLevel level, LivingEntity attacker) {
+    public static void performSonicBoomSweep(IToolStackView tool, ServerLevel level, LivingEntity attacker) {
         //Sonic Boom damage depend on range modifier!
         List<ModifierEntry> modifiers = tool.getModifierList();
         Arrow arrow = new Arrow(level, attacker);
@@ -144,9 +146,9 @@ public class echoed_attack extends BattleModifier {
         ModDataNBT nbt = tool.getPersistentData();
         int count = nbt.getInt(TAG_ECHO_ENERGY);//In case count is modified due to below hook.
         for (ModifierEntry entry : modifiers) {
-            entry.getHook(ModifierHooks.PROJECTILE_LAUNCH).onProjectileLaunch(tool,entry,attacker,arrow,arrow,persistentData,true);
+            entry.getHook(ModifierHooks.PROJECTILE_LAUNCH).onProjectileLaunch(tool, entry, attacker, arrow, arrow, persistentData, true);
         }
-        float damage= (float) (arrow.getDeltaMovement().length()*arrow.getBaseDamage());
+        float damage = (float) (arrow.getDeltaMovement().length() * arrow.getBaseDamage());
         nbt.putInt(TAG_ECHO_ENERGY, count);
 
         //
@@ -165,12 +167,11 @@ public class echoed_attack extends BattleModifier {
             level.sendParticles(ParticleTypes.SONIC_BOOM, pos.x, pos.y, pos.z, 1, 0, 0, 0, 0);
 
             // 检测这格内的实体（半径1格球形范围）
-            List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class,
-                    new AABB(pos.x - 0.5, pos.y - 0.5, pos.z - 0.5, pos.x + 0.5, pos.y + 0.5, pos.z + 0.5),
-                    e -> e != attacker && e.isAlive() && attacker.canAttack(e));
+            List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, new AABB(pos.x - 0.5, pos.y - 0.5, pos.z - 0.5, pos.x + 0.5, pos.y + 0.5, pos.z + 0.5), e -> e != attacker && e.isAlive() && attacker.canAttack(e));
 
             for (LivingEntity target : entities) {
-                if (hitEntities.contains(target)) continue;
+                if (hitEntities.contains(target))
+                    continue;
 
                 hitEntities.add(target);
 
@@ -188,9 +189,4 @@ public class echoed_attack extends BattleModifier {
         // 播放音效
         attacker.playSound(SoundEvents.WARDEN_SONIC_BOOM, 3.0F, 1.0F);
     }
-    @Override
-    public boolean isNoLevels() {
-        return true;
-    }
-
 }

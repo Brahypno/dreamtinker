@@ -16,7 +16,10 @@
     "the_wolf_answer": "#630202",
     "the_wolf_was": "#630202",
     "as_one": "#8C1F1F",
-    "two_headed_seven": "#8C1F1F"
+    "two_headed_seven": "#8C1F1F",
+    "sharpened_with": "#3B2754",
+    "isolde": "#3B2754",
+    "in_rain": "#3B2754"
 
 },
   "material.dreamtinker": {
@@ -25,6 +28,7 @@
     "valentinite": "#F6E07E",
     "nigrescence_antimony": "#332222",
     "metallivorous_stibium_lupus": "#E1B873",
-    "star_regulus": "#8C1F1F"
+    "star_regulus": "#8C1F1F",
+    "crying_obsidian": "#3B2754"
   }
 }

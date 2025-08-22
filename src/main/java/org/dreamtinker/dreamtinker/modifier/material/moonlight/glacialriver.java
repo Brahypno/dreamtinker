@@ -28,9 +28,4 @@ public class glacialriver extends BattleModifier {
         damage += damageboost;
         return damage;
     }
-
-    public boolean isNoLevels() {
-        return true;
-    }
-
 }

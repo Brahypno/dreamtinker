@@ -46,9 +46,6 @@ public class the_wolf_wonder extends BattleModifier {
         return false;
     }
 
-    @Override
-    public boolean isNoLevels() {return true;}
-
     private static void applyRandomEffects(LivingEntity target, LivingEntity attacker) {
         RandomSource rand = target.getRandom();
         List<MobEffect> negatives = ForgeRegistries.MOB_EFFECTS.getValues().stream().filter(e -> e.getCategory() == MobEffectCategory.HARMFUL).collect(Collectors.toList());

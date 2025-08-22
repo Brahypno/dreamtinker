@@ -1,6 +1,5 @@
 package org.dreamtinker.dreamtinker.modifier.material.valentinite;
 
-import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -13,19 +12,16 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.*;
 
-public class antimony_usage extends Modifier implements ToolStatsModifierHook{
+public class antimony_usage extends Modifier implements ToolStatsModifierHook {
     private static final Double ATTACK_MULTIPLIER = AntimonyUsageAttack.get();
     private static final Double RANGE_MULTIPLIER = AntimonyUsageProj.get();
     private static final Double ARMOR_MULTIPLIER = AntimonyUsageArmor.get();
     private static final Double DUR_MULTIPLIER = AntimonyUsageDur.get();
+
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
         hookBuilder.addHook(this, ModifierHooks.TOOL_STATS);
         super.registerHooks(hookBuilder);
-    }
-
-    public @NotNull Component getDisplayName(int level) {
-        return super.getDisplayName();
     }
 
     @Override

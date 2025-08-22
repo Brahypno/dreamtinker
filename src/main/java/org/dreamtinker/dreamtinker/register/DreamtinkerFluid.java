@@ -98,4 +98,5 @@ public class DreamtinkerFluid {
 
         }
     });
+    public static final FluidObject<ForgeFlowingFluid> molten_crying_obsidian = registerFluid("molten_crying_obsidian", 1400, 1000, 3190, 4, supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_BLACK, 0), 10, 0) {});
 }

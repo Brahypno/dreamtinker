@@ -36,8 +36,4 @@ public class strong_heavy extends BattleModifier {
     private boolean isAllowedVehicle(Player player) {
         return player.getVehicle() != null && player.getVehicle().isAlive();
     }
-
-    public boolean isNoLevels() {
-        return true;
-    }
 }
