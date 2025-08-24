@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "dreamtinker:moonlight_ice",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:star_regulus",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:metallivorous_stibium_lupus",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:nigrescence_antimony",
+      "required": false
+    }
+  ]
+}
