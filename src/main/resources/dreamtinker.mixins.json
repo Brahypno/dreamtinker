@@ -6,8 +6,8 @@
   "refmap": "dreamtinker.refmap.json",
   "mixins": [
     "BowItemMixin",
-    "ModifiableBowItemMixin"
-  ,"enigmaticlegacymixin.SuperpositionHandlerMixin"],
+    "ModifiableBowItemMixin",
+    "enigmaticlegacymixin.SuperpositionHandlerMixin"],
   "client": [
   ],
   "injectors": {

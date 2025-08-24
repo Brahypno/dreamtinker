@@ -4,6 +4,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -40,6 +41,8 @@ public class Dreamtinker {
         DreamtinkerEffect.EFFECT.register(modEventBus);
         DreamtinkerLoots.LOOTMODIFIERS.register(modEventBus);
         DreamtinkerTab.TABS.register(modEventBus);
+        if (ModList.get().isLoaded("enigmaticlegacy")){
+        }
 
         MinecraftForge.EVENT_BUS.register(this);
         forgeEventBus.addListener(star_regulus_boost::onServerTick);
