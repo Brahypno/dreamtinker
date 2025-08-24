@@ -32,7 +32,7 @@ import java.util.List;
 
 import static net.minecraft.nbt.Tag.TAG_INT;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.*;
-import static org.dreamtinker.dreamtinker.utils.modiferCheck.getToolWithModifier;
+import static org.dreamtinker.dreamtinker.utils.DTModiferCheck.getToolWithModifier;
 
 
 public class as_one extends ArmorModifier {
@@ -75,7 +75,8 @@ public class as_one extends ArmorModifier {
             ModDataNBT nbt = tool.getPersistentData();
             int count = nbt.getInt(TAG_AS_ONE);
             if (count > 0){
-                tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.as_one").append(String.valueOf(count)).withStyle(this.getDisplayName().getStyle()));
+                tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.as_one").append(String.valueOf(count))
+                                     .withStyle(this.getDisplayName().getStyle()));
             }
         }
     }
@@ -111,7 +112,8 @@ public class as_one extends ArmorModifier {
                     holder.addEffect(new MobEffectInstance(type, duration, amp - 2, ambient, particles, icon));
             }
         }
-        if (holder instanceof ServerPlayer player && !player.isCreative() && !player.isSpectator() && !player.getAbilities().mayfly){
+        if (holder instanceof ServerPlayer player && !player.isCreative() && !player.isSpectator() &&
+            !player.getAbilities().mayfly){
             player.getAbilities().mayfly = true;   // 允许飞行
             player.connection.send(new ClientboundPlayerAbilitiesPacket(player.getAbilities()));
         }
@@ -121,6 +123,8 @@ public class as_one extends ArmorModifier {
     public int modifierDamageTool(IToolStackView tool, ModifierEntry modifier, int amount, @org.jetbrains.annotations.Nullable LivingEntity holder) {return 0;}
 
     @Override
-    public float modifyDamageTaken(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount, boolean isDirectDamage) {return (float) (amount * AsOneS.get());}
+    public float modifyDamageTaken(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount, boolean isDirectDamage) {
+        return (float) (amount * AsOneS.get());
+    }
 }
 

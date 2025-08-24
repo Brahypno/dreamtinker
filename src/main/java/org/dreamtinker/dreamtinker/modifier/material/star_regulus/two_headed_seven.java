@@ -62,8 +62,6 @@ public class two_headed_seven extends BattleModifier {
         if (null != attr && attr.getModifier(ARMOR_ID) == null)
             attr.addTransientModifier(neg);
         target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 10, 10));
-        if (null == attacker)
-            return false;
         return false;
     }
 

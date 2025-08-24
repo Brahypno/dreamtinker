@@ -29,10 +29,11 @@ import java.util.UUID;
 import java.util.function.BiConsumer;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.Prometheus;
-import static org.dreamtinker.dreamtinker.utils.modiferCheck.ModifierInHand;
+import static org.dreamtinker.dreamtinker.utils.DTModiferCheck.ModifierInHand;
 
 public class ewige_widerkunft extends BattleModifier {
-    private static final ResourceLocation TAG_TOMB = new ResourceLocation(Dreamtinker.MODID, "ewige_widerkunft");
+    private static final ResourceLocation TAG_TOMB = new ResourceLocation(Dreamtinker.MODID,
+                                                                          "ewige_widerkunft");
 
     {
         MinecraftForge.EVENT_BUS.addListener(this::LivingHurtEvent);
@@ -47,11 +48,18 @@ public class ewige_widerkunft extends BattleModifier {
         int breaks = nbt.getInt(TAG_TOMB) + 1;
 
         if (current - breaks * amount <= 1){
-            nbt.putInt(TAG_TOMB, breaks);
+            nbt.putInt(TAG_TOMB,
+                       breaks);
             tool.setDamage(0);
             if (holder != null){
                 holder.sendSystemMessage(Component.literal("13=1"));
-                holder.level().explode(holder, holder.getX(), holder.getY(), holder.getZ(), current, true, Level.ExplosionInteraction.MOB);
+                holder.level().explode(holder,
+                                       holder.getX(),
+                                       holder.getY(),
+                                       holder.getZ(),
+                                       current,
+                                       true,
+                                       Level.ExplosionInteraction.MOB);
             }
             return 0;
         }
@@ -59,8 +67,10 @@ public class ewige_widerkunft extends BattleModifier {
     }
 
     private void LivingHurtEvent(LivingHurtEvent event) {
-        if (event.getSource().is(DamageTypeTags.IS_EXPLOSION) && event.getEntity() != null){
-            ModifierInHand(event.getEntity(), this.getId());
+        if (event.getSource()
+                 .is(DamageTypeTags.IS_EXPLOSION) && event.getEntity() != null){
+            ModifierInHand(event.getEntity(),
+                           this.getId());
             event.setCanceled(true);
         }
     }
@@ -71,9 +81,24 @@ public class ewige_widerkunft extends BattleModifier {
             ModDataNBT nbt = tool.getPersistentData();
             int breaks = nbt.getInt(TAG_TOMB);
             if (breaks > 0){
-                consumer.accept(Attributes.ATTACK_DAMAGE, new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.ATTACK_DAMAGE.getDescriptionId(), Math.pow(1 + Prometheus.get(), breaks) / 2, AttributeModifier.Operation.MULTIPLY_BASE));
-                consumer.accept(Attributes.ATTACK_SPEED, new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.ATTACK_SPEED.getDescriptionId(), Math.pow(1 + Prometheus.get(), breaks) / 2, AttributeModifier.Operation.MULTIPLY_BASE));
-                consumer.accept(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.ATTACK_KNOCKBACK.getDescriptionId(), Math.pow(1 + Prometheus.get(), breaks) / 2, AttributeModifier.Operation.MULTIPLY_BASE));
+                consumer.accept(Attributes.ATTACK_DAMAGE,
+                                new AttributeModifier(UUID.fromString(tool_attribute_uuid),
+                                                      Attributes.ATTACK_DAMAGE.getDescriptionId(),
+                                                      Math.pow(1 + Prometheus.get(),
+                                                               breaks) / 2,
+                                                      AttributeModifier.Operation.MULTIPLY_BASE));
+                consumer.accept(Attributes.ATTACK_SPEED,
+                                new AttributeModifier(UUID.fromString(tool_attribute_uuid),
+                                                      Attributes.ATTACK_SPEED.getDescriptionId(),
+                                                      Math.pow(1 + Prometheus.get(),
+                                                               breaks) / 2,
+                                                      AttributeModifier.Operation.MULTIPLY_BASE));
+                consumer.accept(Attributes.ATTACK_KNOCKBACK,
+                                new AttributeModifier(UUID.fromString(tool_attribute_uuid),
+                                                      Attributes.ATTACK_KNOCKBACK.getDescriptionId(),
+                                                      Math.pow(1 + Prometheus.get(),
+                                                               breaks) / 2,
+                                                      AttributeModifier.Operation.MULTIPLY_BASE));
             }
         }
     }
@@ -90,7 +115,10 @@ public class ewige_widerkunft extends BattleModifier {
             ModDataNBT nbt = tool.getPersistentData();
             int count = nbt.getInt(TAG_TOMB);
             if (count > 0){
-                tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.ewige_widerkunft").append(String.valueOf(count)).withStyle(this.getDisplayName().getStyle()));
+                tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.ewige_widerkunft")
+                                     .append(String.valueOf(count))
+                                     .withStyle(this.getDisplayName()
+                                                    .getStyle()));
             }
         }
     }

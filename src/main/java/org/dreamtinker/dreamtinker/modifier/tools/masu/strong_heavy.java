@@ -12,7 +12,7 @@ import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 import static org.dreamtinker.dreamtinker.register.DreamtinkerModifer.as_one;
-import static org.dreamtinker.dreamtinker.utils.modiferCheck.haveModifierIn;
+import static org.dreamtinker.dreamtinker.utils.DTModiferCheck.haveModifierIn;
 
 public class strong_heavy extends BattleModifier {
 
@@ -26,7 +26,8 @@ public class strong_heavy extends BattleModifier {
             double speed = player.getDeltaMovement().length();
 
             // 处理虚弱效果
-            if (player.hasEffect(MobEffects.DAMAGE_BOOST) || player.hasEffect(MobEffects.MOVEMENT_SPEED) || (isAllowedVehicle(player) && SPEED_THRESHOLD < speed) || haveModifierIn(holder, as_one.getId())){
+            if (player.hasEffect(MobEffects.DAMAGE_BOOST) || player.hasEffect(MobEffects.MOVEMENT_SPEED) ||
+                isAllowedVehicle(player) && SPEED_THRESHOLD < speed || haveModifierIn(holder, as_one.getId())){
                 player.removeEffect(MobEffects.WEAKNESS);
             }else
                 player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 200, 2, true, false));
