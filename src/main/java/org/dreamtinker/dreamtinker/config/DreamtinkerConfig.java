@@ -99,6 +99,8 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.DoubleValue CryingDamageBoost = builder.comment("Damage boost of Sharpened With").defineInRange("CryingDamageBoost", 0.16, 0, 100);
     public static final ForgeConfigSpec.IntValue IsoLdeEaseTime = builder.comment("Torrance period for ISOLDE;also the least time allowed").defineInRange("IsoLdeEaseTime", 3, 1, 10);
 
+    public static final ForgeConfigSpec.IntValue RedTime = builder.comment("The seconds used to level up itself ").defineInRange("RedTime", 1200, 1, 1000000);
+
 
     public static final ForgeConfigSpec specs = builder.pop().build();
 }

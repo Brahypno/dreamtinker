@@ -51,8 +51,6 @@ public class in_rain extends ArmorModifier {
         long last = tag.getLong(ONE_KEY);
         if (last == stamp)
             return false;
-        System.out.println("stamp" + stamp);
-        System.out.println("last" + last);
         tag.putLong(ONE_KEY, stamp);
         return true;
     }

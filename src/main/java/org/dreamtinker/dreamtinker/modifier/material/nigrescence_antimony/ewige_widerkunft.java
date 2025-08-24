@@ -38,6 +38,8 @@ public class ewige_widerkunft extends BattleModifier {
         MinecraftForge.EVENT_BUS.addListener(this::LivingHurtEvent);
     }
 
+    private final String tool_attribute_uuid = "3d1df7e8-4b20-4e2d-9d5f-5c1b2f8e7c9d";
+
     @Override
     public int modifierDamageTool(IToolStackView tool, ModifierEntry modifier, int amount, @Nullable LivingEntity holder) {
         int current = tool.getCurrentDurability();
@@ -69,9 +71,9 @@ public class ewige_widerkunft extends BattleModifier {
             ModDataNBT nbt = tool.getPersistentData();
             int breaks = nbt.getInt(TAG_TOMB);
             if (breaks > 0){
-                consumer.accept(Attributes.ATTACK_DAMAGE, new AttributeModifier(UUID.fromString("3d1df7e8-4b20-4e2d-9d5f-5c1b2f8e7c9d"), Attributes.ATTACK_DAMAGE.getDescriptionId(), Math.pow(1 + Prometheus.get(), breaks) / 2, AttributeModifier.Operation.MULTIPLY_BASE));
-                consumer.accept(Attributes.ATTACK_SPEED, new AttributeModifier(UUID.fromString("8f2c1a9e-3f54-4d7b-96a1-7a2e6cf3b1a4"), Attributes.ATTACK_SPEED.getDescriptionId(), Math.pow(1 + Prometheus.get(), breaks) / 2, AttributeModifier.Operation.MULTIPLY_BASE));
-                consumer.accept(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(UUID.fromString("7f58b4e7-9ab6-42bb-952a-c41016464b14"), Attributes.ATTACK_KNOCKBACK.getDescriptionId(), Math.pow(1 + Prometheus.get(), breaks) / 2, AttributeModifier.Operation.MULTIPLY_BASE));
+                consumer.accept(Attributes.ATTACK_DAMAGE, new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.ATTACK_DAMAGE.getDescriptionId(), Math.pow(1 + Prometheus.get(), breaks) / 2, AttributeModifier.Operation.MULTIPLY_BASE));
+                consumer.accept(Attributes.ATTACK_SPEED, new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.ATTACK_SPEED.getDescriptionId(), Math.pow(1 + Prometheus.get(), breaks) / 2, AttributeModifier.Operation.MULTIPLY_BASE));
+                consumer.accept(Attributes.ATTACK_KNOCKBACK, new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.ATTACK_KNOCKBACK.getDescriptionId(), Math.pow(1 + Prometheus.get(), breaks) / 2, AttributeModifier.Operation.MULTIPLY_BASE));
             }
         }
     }
@@ -92,7 +94,7 @@ public class ewige_widerkunft extends BattleModifier {
             }
         }
     }
-    
+
     @Override
     public int getPriority() {
         return Integer.MIN_VALUE;
