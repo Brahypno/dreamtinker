@@ -1,6 +1,7 @@
 package org.dreamtinker.dreamtinker.register;
 
 import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.modifier.Combat.mei;
 import org.dreamtinker.dreamtinker.modifier.material.crying_obsidian.in_rain;
 import org.dreamtinker.dreamtinker.modifier.material.crying_obsidian.isolde;
 import org.dreamtinker.dreamtinker.modifier.material.crying_obsidian.sharpened_with;
@@ -55,4 +56,6 @@ public class DreamtinkerModifer {
     public static final StaticModifier<sharpened_with> sharpened_with = MODIFIERS.register("sharpened_with", sharpened_with::new);
     public static final StaticModifier<in_rain> in_rain = MODIFIERS.register("in_rain", in_rain::new);
     public static final StaticModifier<isolde> isolde = MODIFIERS.register("isolde", isolde::new);
+
+    public static final StaticModifier<mei> mei = MODIFIERS.register("mei", mei::new);
 }

@@ -14,9 +14,9 @@
       "melee_attack": 7.6
     },
     "tconstruct:grip": {
-      "durability": -0.76,
+      "durability": -0.33,
       "accuracy": 3.0,
-      "melee_damage": 7.6
+      "melee_damage": 0.76
     }
   }
 }

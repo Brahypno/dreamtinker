@@ -20,7 +20,8 @@ public class Dnetwork {
 
     public static void registerPackets() {
         CHANNEL.registerMessage(packetId++, LeftClickEmptyPacket.class, LeftClickEmptyPacket::toBytes, LeftClickEmptyPacket::new, LeftClickEmptyPacket::handle);
-        CHANNEL.registerMessage(packetId, PerfectOverlayMsg.class, PerfectOverlayMsg::encode, PerfectOverlayMsg::decode, PerfectOverlayMsg::handle,                    // 仅客户端处理
+        CHANNEL.registerMessage(packetId++, PerfectOverlayMsg.class, PerfectOverlayMsg::encode, PerfectOverlayMsg::decode, PerfectOverlayMsg::handle,                    // 仅客户端处理
                                 Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        CHANNEL.registerMessage(packetId++, S2CColorMaskToggle.class, S2CColorMaskToggle::encode, S2CColorMaskToggle::decode, S2CColorMaskToggle::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
     }
 }

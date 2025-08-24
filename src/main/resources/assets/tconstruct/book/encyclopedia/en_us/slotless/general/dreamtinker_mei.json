@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:mei",
+  "text": [
+    {
+      "text": "This modifier could level up on conditions and increase melee damage 1.3*level"
+    }
+  ],
+  "more_text_space": true,
+  "effects": [
+    "Can apply levels incrementally",
+    "Slotless"
+  ]
+}

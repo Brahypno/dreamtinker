@@ -46,15 +46,12 @@ public class echoed_defence extends ArmorModifier {
             final double ARROW_SPEED = EchoDefenceSpeed.get();
             Vec3 dest;
             if (newTarget == context.getEntity()){
-
                 double maxOffset = Math.min(currentBounce * 0.5, 3.0);
                 double xOffset = (projectile.level().random.nextDouble() - 0.5) * 4 * maxOffset;
                 double zOffset = (projectile.level().random.nextDouble() - 0.5) * 4 * maxOffset;
 
                 dest = new Vec3(newTarget.getEyePosition().x + xOffset, newTarget.getEyePosition().y + 10, newTarget.getEyePosition().z + zOffset);
-                System.out.println("target: " + dest);
                 projectile.setNoGravity(false);
-
             }else {
                 dest = newTarget.getEyePosition();
                 projectile.setNoGravity(true);
