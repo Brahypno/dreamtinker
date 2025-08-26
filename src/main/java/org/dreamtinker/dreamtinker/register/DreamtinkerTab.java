@@ -19,20 +19,24 @@ public class DreamtinkerTab {
 
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
-    public static final RegistryObject<CreativeModeTab> TOOL = TABS.register("tool", () -> CreativeModeTab.builder().title(Component.translatable("itemGroup." + MODID + ".tool")).icon(() -> DreamtinkerItem.masu.get().getRenderTool()).displayItems((params, output) -> {
-        ToolBuildHandler.addVariants(output::accept, DreamtinkerItem.masu.get(), "");
-        ToolBuildHandler.addVariants(output::accept, DreamtinkerItem.tntarrow.get(), "");
+    public static final RegistryObject<CreativeModeTab> TOOL = TABS.register("tool", () -> CreativeModeTab.builder().title(Component.translatable(
+            "itemGroup." + MODID + ".tool")).icon(() -> DreamtinkerItems.masu.get().getRenderTool()).displayItems((params, output) -> {
+        ToolBuildHandler.addVariants(output::accept, DreamtinkerItems.masu.get(), "");
+        ToolBuildHandler.addVariants(output::accept, DreamtinkerItems.tntarrow.get(), "");
     }).build());
 
-    public static final RegistryObject<CreativeModeTab> PART = TABS.register("part", () -> CreativeModeTab.builder().title(Component.translatable("itemGroup." + MODID + ".part")).icon(() -> {
-        MaterialVariantId material;
-        if (MaterialRegistry.isFullyLoaded()){
-            material = ToolBuildHandler.RANDOM.getMaterial(HeadMaterialStats.ID, RandomSource.create());
-        }else {
-            material = ToolBuildHandler.getRenderMaterial(0);
-        }
-        return DreamtinkerItem.explode_core.get().withMaterialForDisplay(material);
-    }).displayItems((params, output) -> DreamtinkerItem.explode_core.get().addVariants(output::accept, "")).build());
+    public static final RegistryObject<CreativeModeTab> PART =
+            TABS.register("part", () -> CreativeModeTab.builder().title(Component.translatable("itemGroup." + MODID + ".part")).icon(() -> {
+                MaterialVariantId material;
+                if (MaterialRegistry.isFullyLoaded()){
+                    material = ToolBuildHandler.RANDOM.getMaterial(HeadMaterialStats.ID, RandomSource.create());
+                }else {
+                    material = ToolBuildHandler.getRenderMaterial(0);
+                }
+                return DreamtinkerItems.explode_core.get().withMaterialForDisplay(material);
+            }).displayItems((params, output) -> DreamtinkerItems.explode_core.get().addVariants(output::accept, "")).build());
 
-    public static final RegistryObject<CreativeModeTab> ORE = TABS.register("ore", () -> CreativeModeTab.builder().title(Component.translatable("itemGroup." + MODID + ".ore")).icon(() -> new ItemStack(DreamtinkerItem.raw_stibnite.get())).displayItems(DreamtinkerItem::addTabItems).build());
+    public static final RegistryObject<CreativeModeTab> ORE =
+            TABS.register("ore", () -> CreativeModeTab.builder().title(Component.translatable("itemGroup." + MODID + ".ore")).icon(() -> new ItemStack(
+                    DreamtinkerItems.raw_stibnite.get())).displayItems(DreamtinkerItems::addTabItems).build());
 }

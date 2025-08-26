@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_fluid",
+  "fluid": {
+    "amount": 90,
+    "tag": "dreamtinker:molten_evil"
+  },
+  "output": "dreamtinker:nefarious",
+  "temperature": 1100
+}

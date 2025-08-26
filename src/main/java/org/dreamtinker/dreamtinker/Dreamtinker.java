@@ -1,6 +1,7 @@
 package org.dreamtinker.dreamtinker;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -13,6 +14,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.dreamtinker.dreamtinker.config.DreamtinkerConfig;
 import org.dreamtinker.dreamtinker.event.PlayerEvent;
+import org.dreamtinker.dreamtinker.event.addUnholywater;
 import org.dreamtinker.dreamtinker.event.star_regulus_boost;
 import org.dreamtinker.dreamtinker.network.Dnetwork;
 import org.dreamtinker.dreamtinker.register.*;
@@ -35,14 +37,19 @@ public class Dreamtinker {
         modEventBus.addListener(this::commonSetup);
         // Register ourselves for server and other game events we are interested in
 
-        DreamtinkerItem.ITEMS.register(modEventBus);
-        DreamtinkerFluid.FLUIDS.register(modEventBus);
+        DreamtinkerItems.ITEMS.register(modEventBus);
+        DreamtinkerFluids.FLUIDS.register(modEventBus);
         DreamtinkerModifer.MODIFIERS.register(modEventBus);
         DreamtinkerEntity.ENTITIES.register(modEventBus);
         DreamtinkerEffect.EFFECT.register(modEventBus);
         DreamtinkerLoots.LOOTMODIFIERS.register(modEventBus);
         DreamtinkerTab.TABS.register(modEventBus);
         if (ModList.get().isLoaded("enigmaticlegacy")){
+            DreamtinkerModifer.EL_MODIFIERS.register(modEventBus);
+            DreamtinkerFluids.EL_FLUIDS.register(modEventBus);
+            DreamtinkerEffect.EL_EFFECT.register(modEventBus);
+            forgeEventBus.addGenericListener(ItemStack.class, addUnholywater::attachCaps);
+
         }
 
         MinecraftForge.EVENT_BUS.register(this);

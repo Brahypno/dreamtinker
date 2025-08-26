@@ -1,5 +1,6 @@
 package org.dreamtinker.dreamtinker.data.providers;
 
+import com.aizistral.enigmaticlegacy.registries.EnigmaticItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -7,7 +8,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.dreamtinker.dreamtinker.data.DreamtinkerTagkeys;
-import org.dreamtinker.dreamtinker.register.DreamtinkerItem;
+import org.dreamtinker.dreamtinker.register.DreamtinkerItems;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.tconstruct.common.TinkerTags;
 
@@ -21,10 +22,11 @@ public class DreamtinkerItemTagProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider Provider) {
-        this.tag(TinkerTags.Items.TOOL_PARTS).add(DreamtinkerItem.explode_core.get());
-        this.tag(Tags.Items.INGOTS).add(DreamtinkerItem.metallivorous_stibium_lupus.get(), DreamtinkerItem.regulus.get());
-        this.tag(Tags.Items.GEMS).add(DreamtinkerItem.valentinite.get(), DreamtinkerItem.nigrescence_antimony.get());
-        this.tag(DreamtinkerTagkeys.Items.raw_stibnite).add(DreamtinkerItem.raw_stibnite.get());
+        this.tag(TinkerTags.Items.TOOL_PARTS).add(DreamtinkerItems.explode_core.get());
+        this.tag(Tags.Items.INGOTS)
+            .add(DreamtinkerItems.metallivorous_stibium_lupus.get(), DreamtinkerItems.regulus.get(), EnigmaticItems.EVIL_INGOT, EnigmaticItems.ETHERIUM_INGOT);
+        this.tag(Tags.Items.GEMS).add(DreamtinkerItems.valentinite.get(), DreamtinkerItems.nigrescence_antimony.get());
+        this.tag(DreamtinkerTagkeys.Items.raw_stibnite).add(DreamtinkerItems.raw_stibnite.get());
     }
 
 }

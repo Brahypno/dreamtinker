@@ -16,8 +16,8 @@ public class DreamtinkerMaterialTagProvider extends AbstractMaterialTagProvider 
     protected void addTags() {
         this.tag(TinkerTags.Materials.EXCLUDE_FROM_LOOT)
             .add(DreamtinkerMaterialIds.moonlight_ice, DreamtinkerMaterialIds.nigrescence_antimony, DreamtinkerMaterialIds.metallivorous_stibium_lupus,
-                 DreamtinkerMaterialIds.nigrescence_antimony);
-        this.tag(TinkerTags.Materials.NETHER).add(DreamtinkerMaterialIds.star_regulus);
+                 DreamtinkerMaterialIds.nigrescence_antimony, DreamtinkerMaterialIds.etherium, DreamtinkerMaterialIds.nefarious);
+        this.tag(TinkerTags.Materials.NETHER).add(DreamtinkerMaterialIds.star_regulus, DreamtinkerMaterialIds.nefarious);
     }
 
     @Override

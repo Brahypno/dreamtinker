@@ -4,6 +4,10 @@
       {
         "level": 1,
         "name": "dreamtinker:as_one"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:fly"
       }
     ],
     "tconstruct:ranged": [

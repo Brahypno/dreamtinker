@@ -1,0 +1,25 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "byproducts": [
+    {
+      "amount": 250,
+      "tag": "forge:ender",
+      "unit_size": 50
+    },
+    {
+      "amount": 200,
+      "fluid": "tconstruct:molten_diamond",
+      "unit_size": 25
+    }
+  ],
+  "ingredient": {
+    "item": "enigmaticlegacy:etherium_sword"
+  },
+  "result": {
+    "amount": 180,
+    "fluid": "dreamtinker:unstable_liquid_aether",
+    "unit_size": 10
+  },
+  "temperature": 1300,
+  "time": 300
+}

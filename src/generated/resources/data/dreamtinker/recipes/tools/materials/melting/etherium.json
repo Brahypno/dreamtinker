@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "dreamtinker:etherium",
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:unstable_liquid_aether"
+  },
+  "temperature": 1300
+}

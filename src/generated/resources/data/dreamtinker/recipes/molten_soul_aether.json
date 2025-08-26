@@ -1,0 +1,30 @@
+{
+  "type": "tconstruct:alloy",
+  "inputs": [
+    {
+      "amount": 100,
+      "tag": "forge:molten_nefariousness"
+    },
+    {
+      "amount": 100,
+      "tag": "forge:liquid_pure_soul"
+    },
+    {
+      "amount": 90,
+      "tag": "forge:unstable_liquid_aether"
+    },
+    {
+      "amount": 250,
+      "tag": "forge:molten_void"
+    },
+    {
+      "amount": 100,
+      "tag": "forge:molten_echo_shard"
+    }
+  ],
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_soul_aether"
+  },
+  "temperature": 1700
+}

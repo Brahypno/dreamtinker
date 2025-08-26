@@ -25,6 +25,9 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.metallivorous_stibium_lupus, 6, 45, false, false, null);
         addMaterial(DreamtinkerMaterialIds.star_regulus, 7, 50, true, false, null);
         addMaterial(DreamtinkerMaterialIds.crying_obsidian, 3, 30, false, false, null);
+
+        addMaterial(DreamtinkerMaterialIds.etherium, 4, 40, false, false, modLoaded("enigmaticlegacy"));
+        addMaterial(DreamtinkerMaterialIds.nefarious, 4, 40, false, false, modLoaded("enigmaticlegacy"));
     }
 
     @Override

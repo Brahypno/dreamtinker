@@ -1,0 +1,16 @@
+{
+  "entity_effects": [
+    {
+      "type": "tconstruct:damage",
+      "damage": 4.0,
+      "damage_type": {
+        "melee": "minecraft:out_of_world",
+        "ranged": "minecraft:out_of_world"
+      }
+    }
+  ],
+  "fluid": {
+    "amount": 50,
+    "tag": "dreamtinker:molten_void"
+  }
+}

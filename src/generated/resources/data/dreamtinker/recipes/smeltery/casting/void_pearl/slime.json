@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:casting_table",
+  "cooling_time": 111,
+  "fluid": {
+    "amount": 250,
+    "fluid": "dreamtinker:molten_void"
+  },
+  "result": "dreamtinker:void_pearl"
+}

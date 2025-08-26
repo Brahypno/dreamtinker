@@ -1,0 +1,54 @@
+{
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "dreamtinker:etherium_protection"
+      },
+      {
+        "level": 1,
+        "name": "tconstruct:magic_protection"
+      },
+      {
+        "level": 1,
+        "name": "tconstruct:magic_protection"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:fly"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:ender_dodge"
+      }
+    ],
+    "tconstruct:melee_harvest": [
+      {
+        "level": 1,
+        "name": "tconstruct:smite"
+      },
+      {
+        "level": 1,
+        "name": "tconstruct:smite"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:explosive_hit"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:astral_break"
+      }
+    ],
+    "tconstruct:ranged": [
+      {
+        "level": 1,
+        "name": "dreamtinker:ranged_shoot"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:explosive_hit"
+      }
+    ]
+  }
+}

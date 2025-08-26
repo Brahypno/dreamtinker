@@ -42,6 +42,15 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new HeadMaterialStats(700, 6f, Tiers.DIAMOND, 2f),
                          HandleMaterialStats.multipliers().durability(1.1f).miningSpeed(1.05f).attackDamage(1.1f).attackSpeed(1.1f).build(),
                          StatlessMaterialStats.BINDING);
+
+        addMaterialStats(DreamtinkerMaterialIds.etherium,
+                         new HeadMaterialStats(3000, 8f, Tiers.NETHERITE, 5f),
+                         HandleMaterialStats.multipliers().durability(1.0f).miningSpeed(1.2f).attackDamage(1.3f).attackSpeed(1.4f).build(),
+                         StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.nefarious,
+                         new HeadMaterialStats(3000, 4f, Tiers.NETHERITE, 8f),
+                         HandleMaterialStats.multipliers().durability(1.2f).miningSpeed(1.4f).attackDamage(0.6f).attackSpeed(1.2f).build(),
+                         StatlessMaterialStats.BINDING);
     }
 
     private void addRanged() {
@@ -59,6 +68,15 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addMaterialStats(DreamtinkerMaterialIds.crying_obsidian,
                          new LimbMaterialStats(800, 0.3f, -0.2f, 0.4f),
                          new GripMaterialStats(0.5f, -0.4f, 1.0f));
+
+        addMaterialStats(DreamtinkerMaterialIds.etherium,
+                         new LimbMaterialStats(3000, 0.7f, 0.7f, 0.6f),
+                         new GripMaterialStats(0.0f, 0.6f, 1.0f),
+                         StatlessMaterialStats.BOWSTRING);
+        addMaterialStats(DreamtinkerMaterialIds.nefarious,
+                         new LimbMaterialStats(2000, 0.9f, 1.7f, -0.6f),
+                         new GripMaterialStats(0.2f, 0.6f, 1.0f),
+                         StatlessMaterialStats.BOWSTRING);
     }
 
     private void addArmor() {
@@ -75,6 +93,13 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                             StatlessMaterialStats.MAILLE);
         addArmorShieldStats(DreamtinkerMaterialIds.crying_obsidian,
                             PlatingMaterialStats.builder().durabilityFactor(12).armor(3f, 4f, 5f, 3f).toughness(0).knockbackResistance(0.65f),
+                            StatlessMaterialStats.MAILLE);
+
+        addArmorShieldStats(DreamtinkerMaterialIds.etherium,
+                            PlatingMaterialStats.builder().durabilityFactor(132).armor(4f, 9f, 7f, 4f).toughness(4).knockbackResistance(0f),
+                            StatlessMaterialStats.MAILLE);
+        addArmorShieldStats(DreamtinkerMaterialIds.nefarious,
+                            PlatingMaterialStats.builder().durabilityFactor(126).armor(6f, 9f, 4f, 7f).toughness(6).knockbackResistance(5f),
                             StatlessMaterialStats.MAILLE);
     }
 

@@ -1,0 +1,46 @@
+{
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "dreamtinker:cursed_ring_bound"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:wither_body"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:stone_heart"
+      }
+    ],
+    "tconstruct:melee_harvest": [
+      {
+        "level": 1,
+        "name": "dreamtinker:cursed_ring_bound"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:wither_body"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:evil_attack"
+      }
+    ],
+    "tconstruct:ranged": [
+      {
+        "level": 1,
+        "name": "dreamtinker:cursed_ring_bound"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:wither_shoot"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:wither_body"
+      }
+    ]
+  }
+}

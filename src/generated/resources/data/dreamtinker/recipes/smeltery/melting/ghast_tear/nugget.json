@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "item": "minecraft:ghast_tear"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "dreamtinker:liquid_trist"
+  },
+  "temperature": 200,
+  "time": 152
+}

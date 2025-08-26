@@ -35,13 +35,26 @@ public class DreamtinkerMaterialModifierProvider extends AbstractMaterialTraitDa
                   DreamtinkerModifer.the_wolf_wonder, DreamtinkerModifer.the_wolf_answer, DreamtinkerModifer.the_wolf_was);
 
         addTraits(DreamtinkerMaterialIds.star_regulus, RANGED, DreamtinkerModifer.two_headed_seven);
-        addTraits(DreamtinkerMaterialIds.star_regulus, ARMOR, DreamtinkerModifer.as_one);
+        addTraits(DreamtinkerMaterialIds.star_regulus, ARMOR, DreamtinkerModifer.as_one, DreamtinkerModifer.fly);
 
         addTraits(DreamtinkerMaterialIds.crying_obsidian, MELEE_HARVEST, DreamtinkerModifer.sharpened_with);
         addTraits(DreamtinkerMaterialIds.crying_obsidian, RANGED, DreamtinkerModifer.isolde);
         addTraits(DreamtinkerMaterialIds.crying_obsidian, ARMOR,
                   DreamtinkerModifer.in_rain.getId(), ModifierIds.luck, ModifierIds.luck);
 
+        addTraits(DreamtinkerMaterialIds.etherium, MELEE_HARVEST, ModifierIds.smite, ModifierIds.smite, DreamtinkerModifer.explosive_hit.getId(),
+                  DreamtinkerModifer.astral_break.getId());
+        addTraits(DreamtinkerMaterialIds.etherium, RANGED, DreamtinkerModifer.ranged_shoot, DreamtinkerModifer.explosive_hit);
+        addTraits(DreamtinkerMaterialIds.etherium, ARMOR,
+                  DreamtinkerModifer.etherium_protection.getId(), ModifierIds.magicProtection, ModifierIds.magicProtection, DreamtinkerModifer.fly.getId(),
+                  DreamtinkerModifer.ender_dodge.getId());
+
+        addTraits(DreamtinkerMaterialIds.nefarious, MELEE_HARVEST, DreamtinkerModifer.cursed_ring_bound, DreamtinkerModifer.wither_body,
+                  DreamtinkerModifer.evil_attack);
+        addTraits(DreamtinkerMaterialIds.nefarious, RANGED, DreamtinkerModifer.cursed_ring_bound, DreamtinkerModifer.wither_shoot,
+                  DreamtinkerModifer.wither_body);
+        addTraits(DreamtinkerMaterialIds.nefarious, ARMOR, DreamtinkerModifer.cursed_ring_bound, DreamtinkerModifer.wither_body,
+                  DreamtinkerModifer.stone_heart);
     }
 
     @Override

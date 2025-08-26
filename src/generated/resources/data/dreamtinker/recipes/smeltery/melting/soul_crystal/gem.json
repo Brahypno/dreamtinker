@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "item": "enigmaticlegacy:soul_crystal"
+  },
+  "result": {
+    "amount": 100,
+    "fluid": "dreamtinker:liquid_pure_soul"
+  },
+  "temperature": 300,
+  "time": 169
+}

@@ -21,7 +21,18 @@
     "isolde": "#3B2754",
     "in_rain": "#3B2754",
     "mei_2": "#5E52AB",
-    "mei_3": "#8A221C"
+    "mei_3": "#8A221C",
+    "etherium_protection": "#96E8E0",
+    "ranged_shoot": "#96E8E0",
+    "ender_dodge": "#CB59FF",
+    "explosive_hit": "#8513A0",
+    "astral_break": "#96E8E0",
+    "cursed_ring_bound": "#aa0000",
+    "wither_shoot": "#8513A0",
+    "wither_body": "#8513A0",
+    "stone_heart": "#8513A0",
+    "evil_attack": "#8513A0",
+    "ender_slayer": "#AA00AA"
 },
   "material.dreamtinker": {
     "echo_shard": "#034150",
@@ -30,6 +41,8 @@
     "nigrescence_antimony": "#332222",
     "metallivorous_stibium_lupus": "#E1B873",
     "star_regulus": "#8C1F1F",
-    "crying_obsidian": "#3B2754"
+    "crying_obsidian": "#3B2754",
+    "etherium": "#96E8E0",
+    "nefarious": "#8513A0"
   }
 }

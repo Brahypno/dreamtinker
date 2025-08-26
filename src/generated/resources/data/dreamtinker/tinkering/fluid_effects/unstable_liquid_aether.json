@@ -1,0 +1,16 @@
+{
+  "entity_effects": [
+    {
+      "type": "tconstruct:damage",
+      "damage": 8.0,
+      "damage_type": {
+        "melee": "minecraft:explosion",
+        "ranged": "minecraft:explosion"
+      }
+    }
+  ],
+  "fluid": {
+    "amount": 10,
+    "tag": "dreamtinker:unstable_liquid_aether"
+  }
+}

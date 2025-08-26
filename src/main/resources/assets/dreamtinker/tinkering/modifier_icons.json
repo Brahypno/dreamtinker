@@ -1,3 +1,4 @@
 {
-  "dreamtinker:mei":     ["minecraft:block/poppy", "tconstruct:gui/modifiers/tier"]
+  "dreamtinker:mei":     ["minecraft:block/poppy", "tconstruct:gui/modifiers/tier"],
+  "dreamtinker:ender_slayer":     ["enigmaticlegacy:item/ender_slayer"]
 }

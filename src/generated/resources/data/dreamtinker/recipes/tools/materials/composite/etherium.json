@@ -1,0 +1,10 @@
+{
+  "type": "tconstruct:material_fluid",
+  "fluid": {
+    "amount": 90,
+    "tag": "dreamtinker:unstable_liquid_aether"
+  },
+  "input": "tconstruct:string",
+  "output": "dreamtinker:etherium",
+  "temperature": 1300
+}

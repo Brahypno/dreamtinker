@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:ore_melting",
+  "byproducts": [
+    {
+      "amount": 30,
+      "fluid": "dreamtinker:unstable_liquid_aether"
+    }
+  ],
+  "ingredient": {
+    "item": "enigmaticlegacy:etherium_ore"
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:unstable_liquid_aether"
+  },
+  "temperature": 1300,
+  "time": 300
+}

@@ -1,0 +1,20 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "byproducts": [
+    {
+      "amount": 500,
+      "tag": "forge:ender",
+      "unit_size": 50
+    }
+  ],
+  "ingredient": {
+    "item": "enigmaticlegacy:etherium_axe"
+  },
+  "result": {
+    "amount": 360,
+    "fluid": "dreamtinker:unstable_liquid_aether",
+    "unit_size": 10
+  },
+  "temperature": 1300,
+  "time": 300
+}

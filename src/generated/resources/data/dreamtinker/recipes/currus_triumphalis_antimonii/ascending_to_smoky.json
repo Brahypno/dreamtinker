@@ -3,10 +3,10 @@
   "inputs": [
     {
       "amount": 90,
-      "tag": "dreamtinker:molten_ascending_antimony"
+      "tag": "forge:molten_ascending_antimony"
     },
     {
-      "amount": 90,
+      "amount": 1000,
       "tag": "tconstruct:liquid_soul"
     }
   ],

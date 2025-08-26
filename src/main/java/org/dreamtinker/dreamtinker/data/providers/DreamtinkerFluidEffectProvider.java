@@ -1,14 +1,19 @@
 package org.dreamtinker.dreamtinker.data.providers;
 
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.crafting.conditions.ICondition;
+import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
+import net.minecraftforge.common.crafting.conditions.OrCondition;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.register.DreamtinkerEffect;
-import org.dreamtinker.dreamtinker.register.DreamtinkerFluid;
+import org.dreamtinker.dreamtinker.register.DreamtinkerFluids;
 import slimeknights.tconstruct.common.TinkerDamageTypes;
+import slimeknights.tconstruct.common.json.ConfigEnabledCondition;
 import slimeknights.tconstruct.library.data.tinkering.AbstractFluidEffectProvider;
 import slimeknights.tconstruct.library.json.predicate.HarvestTierPredicate;
 import slimeknights.tconstruct.library.modifiers.fluid.FluidMobEffect;
@@ -18,6 +23,7 @@ import slimeknights.tconstruct.library.modifiers.fluid.block.MobEffectCloudFluid
 import slimeknights.tconstruct.library.modifiers.fluid.block.PlaceBlockFluidEffect;
 import slimeknights.tconstruct.library.modifiers.fluid.entity.DamageFluidEffect;
 import slimeknights.tconstruct.library.modifiers.fluid.general.ScalingFluidEffect;
+import slimeknights.tconstruct.library.recipe.FluidValues;
 import slimeknights.tconstruct.shared.TinkerEffects;
 
 public class DreamtinkerFluidEffectProvider extends AbstractFluidEffectProvider {
@@ -27,7 +33,7 @@ public class DreamtinkerFluidEffectProvider extends AbstractFluidEffectProvider 
 
     @Override
     protected void addFluids() {
-        addFluid(DreamtinkerFluid.molten_echo_shard, 50)
+        addFluid(DreamtinkerFluids.molten_echo_shard, 50)
                 .addDamage(2.5f, new DamageFluidEffect.DamageTypePair(TinkerDamageTypes.BLEEDING, TinkerDamageTypes.BLEEDING))
                 .addEntityEffects(FluidMobEffect.builder().effect(DreamtinkerEffect.RealDarkness.get(), 100, 1).buildEntity(TimeAction.ADD))
                 .addEntityEffects(FluidMobEffect.builder().effect(MobEffects.DARKNESS, 100, 1).buildEntity(TimeAction.ADD))
@@ -36,28 +42,28 @@ public class DreamtinkerFluidEffectProvider extends AbstractFluidEffectProvider 
                 .addBlockEffect(
                         new MobEffectCloudFluidEffect(FluidMobEffect.builder().effect(MobEffects.DARKNESS, 100, 1).buildCloud().effects()));
 
-        addFluid(DreamtinkerFluid.molten_nigrescence_antimony, 50)
+        addFluid(DreamtinkerFluids.molten_nigrescence_antimony, 50)
                 .spikeDamage(6.0f);
 
-        addFluid(DreamtinkerFluid.molten_albedo_stibium, 50)
+        addFluid(DreamtinkerFluids.molten_albedo_stibium, 50)
                 .addEntityEffects(FluidMobEffect.builder().effect(MobEffects.NIGHT_VISION, 100, 1).buildEntity(TimeAction.ADD))
                 .addBlockEffect(
                         new MobEffectCloudFluidEffect(FluidMobEffect.builder().effect(MobEffects.NIGHT_VISION, 100, 1).buildCloud().effects()));
 
-        addFluid(DreamtinkerFluid.molten_lupi_antimony, 100)
+        addFluid(DreamtinkerFluids.molten_lupi_antimony, 100)
                 .addDamage(1.0f, new DamageFluidEffect.DamageTypePair(TinkerDamageTypes.SELF_DESTRUCT, TinkerDamageTypes.SELF_DESTRUCT))
                 .addEntityEffects(FluidMobEffect.builder().effect(TinkerEffects.selfDestructing.get(), 100, 1).buildEntity(TimeAction.ADD))
                 .addBlockEffect(
                         new MobEffectCloudFluidEffect(FluidMobEffect.builder().effect(TinkerEffects.selfDestructing.get(), 100, 1).buildCloud().effects()));
 
-        addFluid(DreamtinkerFluid.molten_ascending_antimony, 50)
+        addFluid(DreamtinkerFluids.molten_ascending_antimony, 50)
                 .addEntityEffects(FluidMobEffect.builder().effect(MobEffects.DAMAGE_BOOST, 100, 3).buildEntity(TimeAction.ADD))
                 .addBlockEffect(
                         new MobEffectCloudFluidEffect(FluidMobEffect.builder().effect(MobEffects.DAMAGE_BOOST, 100, 3).buildCloud().effects())).
                 addBlockEffect(
                         new HarvestTierPredicate(Tiers.NETHERITE), new BreakBlockFluidEffect(50, Enchantments.BLOCK_FORTUNE, 3));
 
-        addFluid(DreamtinkerFluid.liquid_smoky_antimony, 50)
+        addFluid(DreamtinkerFluids.liquid_smoky_antimony, 50)
                 .addEntityEffects(FluidMobEffect.builder().effect(MobEffects.HEAL, 100, 2).buildEntity(TimeAction.ADD))
                 .addEntityEffects(FluidMobEffect.builder().effect(MobEffects.REGENERATION, 100, 2).buildEntity(TimeAction.ADD))
                 .addBlockEffect(
@@ -65,16 +71,46 @@ public class DreamtinkerFluidEffectProvider extends AbstractFluidEffectProvider 
                 .addBlockEffect(
                         new MobEffectCloudFluidEffect(FluidMobEffect.builder().effect(MobEffects.REGENERATION, 100, 2).buildCloud().effects()));
 
-        addGlass(DreamtinkerFluid.molten_crying_obsidian)
+        addGlass(DreamtinkerFluids.molten_crying_obsidian)
                 .spikeDamage(4.0f)
                 .addBlockEffect(ScalingFluidEffect.blocks()
                                                   .effect(4, new PlaceBlockFluidEffect(Blocks.CRYING_OBSIDIAN))
                                                   .build());
-
+        addMetal(DreamtinkerFluids.unstable_liquid_aether)
+                .addDamage(8.0f, new DamageFluidEffect.DamageTypePair(DamageTypes.EXPLOSION, DamageTypes.EXPLOSION));
+        addSlime(DreamtinkerFluids.molten_void)
+                .addDamage(4.0f, new DamageFluidEffect.DamageTypePair(DamageTypes.FELL_OUT_OF_WORLD, DamageTypes.FELL_OUT_OF_WORLD));
+        addFluid(DreamtinkerFluids.unholy_water, FluidValues.SIP)
+                .addCondition(modLoaded("enigmaticlegacy"))
+                .addEntityEffects(FluidMobEffect.builder().effect(DreamtinkerEffect.unholy.get(), 100, 2).buildEntity(TimeAction.ADD))
+                .addBlockEffect(
+                        new MobEffectCloudFluidEffect(FluidMobEffect.builder().effect(DreamtinkerEffect.unholy.get(), 100, 2).buildCloud().effects()));
+        addGem(DreamtinkerFluids.molten_nefariousness)
+                .addCondition(modLoaded("enigmaticlegacy"))
+                .magicDamage(2)
+                .addEntityEffects(FluidMobEffect.builder().effect(TinkerEffects.bleeding.get(), 100, 2).buildEntity(TimeAction.ADD))
+                .addEntityEffects(FluidMobEffect.builder().effect(MobEffects.WITHER, 100, 2).buildEntity(TimeAction.ADD))
+                .addBlockEffect(
+                        new MobEffectCloudFluidEffect(FluidMobEffect.builder().effect(MobEffects.WITHER, 100, 2).buildCloud().effects()))
+                .addBlockEffect(
+                        new MobEffectCloudFluidEffect(FluidMobEffect.builder().effect(TinkerEffects.bleeding.get(), 100, 2).buildCloud().effects()));
+        addMetal(DreamtinkerFluids.molten_evil)
+                .addCondition(modLoaded("enigmaticlegacy"))
+                .magicDamage(4)
+                .addEntityEffects(FluidMobEffect.builder().effect(TinkerEffects.bleeding.get(), 100, 3).buildEntity(TimeAction.ADD))
+                .addEntityEffects(FluidMobEffect.builder().effect(MobEffects.WITHER, 100, 3).buildEntity(TimeAction.ADD))
+                .addBlockEffect(
+                        new MobEffectCloudFluidEffect(FluidMobEffect.builder().effect(MobEffects.WITHER, 100, 3).buildCloud().effects()))
+                .addBlockEffect(
+                        new MobEffectCloudFluidEffect(FluidMobEffect.builder().effect(TinkerEffects.bleeding.get(), 100, 3).buildCloud().effects()));
     }
 
     @Override
     public String getName() {
         return "Dreamtinker Fluid Effect Provider.";
+    }
+
+    public static ICondition modLoaded(String modId) {
+        return new OrCondition(ConfigEnabledCondition.FORCE_INTEGRATION_MATERIALS, new ModLoadedCondition(modId));
     }
 }

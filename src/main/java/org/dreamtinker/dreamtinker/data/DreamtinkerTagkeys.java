@@ -31,6 +31,15 @@ public class DreamtinkerTagkeys {
         public static final TagKey<Fluid> molten_ascending_antimony = forgeTag("molten_ascending_antimony");
         public static final TagKey<Fluid> liquid_smoky_antimony = forgeTag("liquid_smoky_antimony");
         public static final TagKey<Fluid> molten_crying_obsidian = forgeTag("molten_crying_obsidian");
+        public static final TagKey<Fluid> liquid_trist = forgeTag("liquid_trist");
+        public static final TagKey<Fluid> molten_void = forgeTag("molten_void");
+        public static final TagKey<Fluid> unstable_liquid_aether = forgeTag("unstable_liquid_aether");
+        public static final TagKey<Fluid> liquid_pure_soul = forgeTag("liquid_pure_soul");
+        public static final TagKey<Fluid> molten_nefariousness = forgeTag("molten_nefariousness");
+        public static final TagKey<Fluid> molten_evil = forgeTag("molten_evil");
+        public static final TagKey<Fluid> molten_soul_aether = forgeTag("molten_soul_aether");
+        public static final TagKey<Fluid> unholy_water = forgeTag("unholy_water");
+        public static final TagKey<Fluid> reversed_shadow = forgeTag("reversed_shadow");
     }
 
     public static class Items {

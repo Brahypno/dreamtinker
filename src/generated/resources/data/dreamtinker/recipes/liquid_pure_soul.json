@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:alloy",
+  "inputs": [
+    {
+      "amount": 10,
+      "tag": "forge:liquid_trist"
+    },
+    {
+      "amount": 10000,
+      "tag": "tconstruct:liquid_soul"
+    }
+  ],
+  "result": {
+    "amount": 100,
+    "fluid": "dreamtinker:liquid_pure_soul"
+  },
+  "temperature": 1600
+}

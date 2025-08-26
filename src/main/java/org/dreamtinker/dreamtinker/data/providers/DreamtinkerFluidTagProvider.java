@@ -7,7 +7,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.dreamtinker.dreamtinker.data.DreamtinkerTagkeys;
-import org.dreamtinker.dreamtinker.register.DreamtinkerFluid;
+import org.dreamtinker.dreamtinker.register.DreamtinkerFluids;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.registration.object.FlowingFluidObject;
 import slimeknights.mantle.registration.object.FluidObject;
@@ -23,19 +23,30 @@ public class DreamtinkerFluidTagProvider extends FluidTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider Provider) {
-        tag(DreamtinkerTagkeys.Fluids.molten_crying_obsidian)
-                .add(DreamtinkerFluid.molten_crying_obsidian.getStill(), DreamtinkerFluid.molten_crying_obsidian.getFlowing());
+        addFullTag(DreamtinkerFluids.molten_echo_shard, DreamtinkerTagkeys.Fluids.molten_echo_shard);
+        addFullTag(DreamtinkerFluids.molten_nigrescence_antimony, DreamtinkerTagkeys.Fluids.molten_nigrescence_antimony);
+        addFullTag(DreamtinkerFluids.molten_albedo_stibium, DreamtinkerTagkeys.Fluids.molten_albedo_stibium);
+        addFullTag(DreamtinkerFluids.molten_lupi_antimony, DreamtinkerTagkeys.Fluids.molten_lupi_antimony);
+        addFullTag(DreamtinkerFluids.molten_ascending_antimony, DreamtinkerTagkeys.Fluids.molten_ascending_antimony);
+        addFullTag(DreamtinkerFluids.liquid_smoky_antimony, DreamtinkerTagkeys.Fluids.liquid_smoky_antimony);
+        addFullTag(DreamtinkerFluids.molten_crying_obsidian, DreamtinkerTagkeys.Fluids.molten_crying_obsidian);
+        addFullTag(DreamtinkerFluids.liquid_trist, DreamtinkerTagkeys.Fluids.liquid_trist);
+        addFullTag(DreamtinkerFluids.molten_void, DreamtinkerTagkeys.Fluids.molten_void);
+        addFullTag(DreamtinkerFluids.unstable_liquid_aether, DreamtinkerTagkeys.Fluids.unstable_liquid_aether);
+        addFullTag(DreamtinkerFluids.liquid_pure_soul, DreamtinkerTagkeys.Fluids.liquid_pure_soul);
+        addFullTag(DreamtinkerFluids.molten_nefariousness, DreamtinkerTagkeys.Fluids.molten_nefariousness);
+        addFullTag(DreamtinkerFluids.molten_evil, DreamtinkerTagkeys.Fluids.molten_evil);
+        addFullTag(DreamtinkerFluids.molten_soul_aether, DreamtinkerTagkeys.Fluids.molten_soul_aether);
+        addFullTag(DreamtinkerFluids.unholy_water, DreamtinkerTagkeys.Fluids.unholy_water);
+        addFullTag(DreamtinkerFluids.reversed_shadow, DreamtinkerTagkeys.Fluids.reversed_shadow);
+        tag(TinkerTags.Fluids.GLASS_TOOLTIPS).addTag(DreamtinkerFluids.molten_crying_obsidian.getTag());
+        this.tag(TinkerTags.Fluids.METAL_TOOLTIPS)
+            .addTags(DreamtinkerFluids.molten_lupi_antimony.getTag(), DreamtinkerFluids.molten_evil.getTag(), DreamtinkerFluids.molten_soul_aether.getTag());
+    }
 
-        fluidTag(DreamtinkerFluid.molten_echo_shard);
-        fluidTag(DreamtinkerFluid.molten_nigrescence_antimony);
-        fluidTag(DreamtinkerFluid.molten_albedo_stibium);
-        fluidTag(DreamtinkerFluid.molten_lupi_antimony);
-        fluidTag(DreamtinkerFluid.molten_ascending_antimony);
-        fluidTag(DreamtinkerFluid.liquid_smoky_antimony);
-        fluidTag(DreamtinkerFluid.molten_crying_obsidian);
-        tag(TinkerTags.Fluids.GLASS_TOOLTIPS).addTag(DreamtinkerFluid.molten_crying_obsidian.getTag());
-        this.tag(TinkerTags.Fluids.METAL_TOOLTIPS).addTag(DreamtinkerFluid.molten_lupi_antimony.getTag());
-
+    private void addFullTag(FlowingFluidObject<?> fluid, TagKey<Fluid> fluidTagKey) {
+        fluidTag(fluid);
+        this.tag(fluidTagKey).add(fluid.getStill(), fluid.getFlowing());
     }
 
     /**

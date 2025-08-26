@@ -10,8 +10,8 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.register.DreamtinkerFluid;
-import org.dreamtinker.dreamtinker.register.DreamtinkerItem;
+import org.dreamtinker.dreamtinker.register.DreamtinkerFluids;
+import org.dreamtinker.dreamtinker.register.DreamtinkerItems;
 import slimeknights.mantle.registration.object.FluidObject;
 
 public class DreamtinkerItemModelProvider extends ItemModelProvider {
@@ -39,7 +39,7 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
     }
 
     public ResourceLocation getItemLocation(String path, String typePath) {
-        return new ResourceLocation(Dreamtinker.MODID, "item/" + typePath + "/" + path);
+        return new ResourceLocation(Dreamtinker.MODID, "item/" + (typePath.isEmpty() ? typePath : typePath + "/") + path);
     }
 
     public ResourceLocation getBlockItemLocation(String path) {
@@ -49,18 +49,19 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
 
-        generateItemModel(DreamtinkerItem.raw_stibnite, "materials");
-        generateItemModel(DreamtinkerItem.valentinite, "materials");
-        generateItemModel(DreamtinkerItem.nigrescence_antimony, "materials");
-        generateItemModel(DreamtinkerItem.metallivorous_stibium_lupus, "materials");
-        generateItemModel(DreamtinkerItem.regulus, "materials");
+        generateItemModel(DreamtinkerItems.raw_stibnite, "materials");
+        generateItemModel(DreamtinkerItems.valentinite, "materials");
+        generateItemModel(DreamtinkerItems.nigrescence_antimony, "materials");
+        generateItemModel(DreamtinkerItems.metallivorous_stibium_lupus, "materials");
+        generateItemModel(DreamtinkerItems.regulus, "materials");
+        generateItemModel(DreamtinkerItems.void_pearl, "");
         //generateBlockItemModel(object);
-        generateBucketItemModel(DreamtinkerFluid.molten_echo_shard);
-        generateBucketItemModel(DreamtinkerFluid.molten_albedo_stibium);
-        generateBucketItemModel(DreamtinkerFluid.molten_lupi_antimony);
-        generateBucketItemModel(DreamtinkerFluid.molten_ascending_antimony);
-        generateBucketItemModel(DreamtinkerFluid.liquid_smoky_antimony);
-        generateBucketItemModel(DreamtinkerFluid.molten_crying_obsidian);
+        generateBucketItemModel(DreamtinkerFluids.molten_echo_shard);
+        generateBucketItemModel(DreamtinkerFluids.molten_albedo_stibium);
+        generateBucketItemModel(DreamtinkerFluids.molten_lupi_antimony);
+        generateBucketItemModel(DreamtinkerFluids.molten_ascending_antimony);
+        generateBucketItemModel(DreamtinkerFluids.liquid_smoky_antimony);
+        generateBucketItemModel(DreamtinkerFluids.molten_crying_obsidian);
 
     }
 }

@@ -1,9 +1,7 @@
 package org.dreamtinker.dreamtinker.modifier.material.star_regulus;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.game.ClientboundPlayerAbilitiesPacket;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -111,11 +109,6 @@ public class as_one extends ArmorModifier {
                 if (0 <= amp - 2)
                     holder.addEffect(new MobEffectInstance(type, duration, amp - 2, ambient, particles, icon));
             }
-        }
-        if (holder instanceof ServerPlayer player && !player.isCreative() && !player.isSpectator() &&
-            !player.getAbilities().mayfly){
-            player.getAbilities().mayfly = true;   // 允许飞行
-            player.connection.send(new ClientboundPlayerAbilitiesPacket(player.getAbilities()));
         }
     }
 

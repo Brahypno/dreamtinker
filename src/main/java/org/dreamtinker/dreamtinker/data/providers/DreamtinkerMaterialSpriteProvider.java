@@ -98,5 +98,30 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFF3B2754)
                                                 .addARGB(255, 0xFF5b3c82)
                                                 .build());
+
+        this.buildMaterial(DreamtinkerMaterialIds.etherium)
+            .ranged().meleeHarvest().armor().statType(StatlessMaterialStats.BOWSTRING)
+            .fallbacks("metal", "crystal")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(0, 0xFF8FE7E7)
+                                                .addARGB(63, 0xFF98EEEE)
+                                                .addARGB(102, 0xFF9CF0F0)
+                                                .addARGB(140, 0xFF96E8E0)
+                                                .addARGB(178, 0xFFB5F5ED)
+                                                .addARGB(216, 0xFFC8FDF5)
+                                                .addARGB(255, 0xFFCEFFF8)
+                                                .build());
+        this.buildMaterial(DreamtinkerMaterialIds.nefarious)
+            .ranged().meleeHarvest().armor().statType(StatlessMaterialStats.BOWSTRING)
+            .fallbacks("metal", "crystal", "gem")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(0, 0xFF781190)
+                                                .addARGB(63, 0xFF771191)
+                                                .addARGB(102, 0xFFA01EAF)
+                                                .addARGB(140, 0xFF760AB0)
+                                                .addARGB(178, 0xFFB54ABC)
+                                                .addARGB(216, 0xFFC77FCA)
+                                                .addARGB(255, 0xFFC77FCA)
+                                                .build());
     }
 }

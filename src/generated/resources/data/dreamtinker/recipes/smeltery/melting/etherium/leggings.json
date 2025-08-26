@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "ingredient": {
+    "item": "enigmaticlegacy:etherium_leggings"
+  },
+  "result": {
+    "amount": 630,
+    "fluid": "dreamtinker:unstable_liquid_aether",
+    "unit_size": 10
+  },
+  "temperature": 1300,
+  "time": 300
+}

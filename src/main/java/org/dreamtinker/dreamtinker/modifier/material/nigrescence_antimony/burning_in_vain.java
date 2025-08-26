@@ -6,12 +6,13 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.WitherSkull;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.modifier.base.baseclass.BattleModifier;
+import org.dreamtinker.dreamtinker.utils.DThelper;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.nbt.IToolContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
@@ -22,13 +23,12 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.*;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.BurninVainInaccuracy;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.BurninVainRandomProj;
 
 public class burning_in_vain extends BattleModifier {
     Double maxInaccuracy = BurninVainInaccuracy.get();
-    Integer maxDanglingProject = BurninVainProjLimit.get();
     Integer SummonRandomProj = BurninVainRandomProj.get();
 
 
@@ -52,7 +52,7 @@ public class burning_in_vain extends BattleModifier {
         ServerLevel world = (ServerLevel) shooter.level();
 
         double px = shooter.getX(), pz = shooter.getZ();
-        clearProjectile(world, px, pz);
+        DThelper.clearProjectile(world, px, pz);
         if (!SummonRandomProj.equals(1))
             return;
         Vec3 motion = projectile.getDeltaMovement();
@@ -69,17 +69,6 @@ public class burning_in_vain extends BattleModifier {
         if (!isCorrectSlot || !isSelected)
             return;
         holder.setSecondsOnFire(20);
-    }
-
-    private void clearProjectile(ServerLevel level, double px, double pz) {
-        int viewDist = level.getServer().getPlayerList().getViewDistance();
-        double radius = viewDist * 16.0;
-        AABB box = new AABB(px - radius, level.getMinBuildHeight(), pz - radius, px + radius, level.getMaxBuildHeight(), pz + radius);
-        Predicate<Projectile> all = p -> true;
-        List<Projectile> list = level.getEntitiesOfClass(Projectile.class, box, all);
-        if (maxDanglingProject <= list.size())
-            for (Projectile old : list)
-                old.remove(Entity.RemovalReason.DISCARDED);
     }
 
     @SuppressWarnings("unchecked")
@@ -116,6 +105,8 @@ public class burning_in_vain extends BattleModifier {
         newProj.shoot(motion.x, motion.y, motion.z, speed, inaccuracy);
         if (newProj instanceof AbstractArrow)
             ((AbstractArrow) newProj).pickup = (AbstractArrow.Pickup.DISALLOWED);
+        if (newProj instanceof WitherSkull)
+            ((WitherSkull) newProj).setDangerous(level.random.nextFloat() < 0.15);
         return newProj;
     }
 
