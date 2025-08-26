@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "byproducts": [
+    {
+      "amount": 30,
+      "fluid": "dreamtinker:molten_albedo_stibium"
+    }
+  ],
+  "ingredient": {
+    "item": "dreamtinker:nigrescence_antimony"
+  },
+  "result": {
+    "amount": 100,
+    "fluid": "dreamtinker:molten_nigrescence_antimony"
+  },
+  "temperature": 600,
+  "time": 107
+}

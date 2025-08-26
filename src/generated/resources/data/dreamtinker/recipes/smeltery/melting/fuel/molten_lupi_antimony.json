@@ -1,0 +1,10 @@
+{
+  "type": "tconstruct:melting_fuel",
+  "duration": 776,
+  "fluid": {
+    "amount": 90,
+    "tag": "dreamtinker:molten_lupi_antimony"
+  },
+  "rate": 77,
+  "temperature": 7776
+}

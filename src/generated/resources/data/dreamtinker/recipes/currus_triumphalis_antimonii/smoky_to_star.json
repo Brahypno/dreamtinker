@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "forge:dusts/redstone"
+  },
+  "cast_consumed": true,
+  "cooling_time": 100,
+  "fluid": {
+    "amount": 90,
+    "tag": "dreamtinker:liquid_smoky_antimony"
+  },
+  "result": "dreamtinker:star_regulus"
+}

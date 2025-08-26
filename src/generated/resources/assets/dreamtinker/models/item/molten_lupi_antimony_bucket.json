@@ -1,0 +1,5 @@
+{
+  "parent": "forge:item/bucket_drip",
+  "fluid": "dreamtinker:molten_lupi_antimony",
+  "loader": "forge:fluid_container"
+}

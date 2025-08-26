@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "forge:storage_blocks/gold"
+  },
+  "cast_consumed": true,
+  "cooling_time": 100,
+  "fluid": {
+    "amount": 100,
+    "tag": "dreamtinker:molten_albedo_stibium"
+  },
+  "result": "dreamtinker:metallivorous_stibium_lupus"
+}

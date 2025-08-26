@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "dreamtinker:currus_triumphalis_antimonii/valentinite_nigredo"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_valentinite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dreamtinker:valentinite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_valentinite",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "dreamtinker:currus_triumphalis_antimonii/valentinite_nigredo"
+    ]
+  },
+  "sends_telemetry_event": false
+}

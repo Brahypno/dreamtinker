@@ -1,0 +1,34 @@
+{
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "tconstruct:soulbound"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:echoed_defence"
+      }
+    ],
+    "tconstruct:melee_harvest": [
+      {
+        "level": 1,
+        "name": "tconstruct:soulbound"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:echoed_attack"
+      }
+    ],
+    "tconstruct:ranged": [
+      {
+        "level": 1,
+        "name": "tconstruct:soulbound"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:echoed_attack"
+      }
+    ]
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "block_effects": [
+    {
+      "type": "tconstruct:mob_effect_cloud",
+      "effects": [
+        {
+          "effect": "dreamtinker:real_darkness",
+          "level": 1,
+          "time": 100
+        }
+      ]
+    },
+    {
+      "type": "tconstruct:mob_effect_cloud",
+      "effects": [
+        {
+          "effect": "minecraft:darkness",
+          "level": 1,
+          "time": 100
+        }
+      ]
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "tconstruct:damage",
+      "damage": 2.5,
+      "damage_type": {
+        "melee": "tconstruct:bleeding",
+        "ranged": "tconstruct:bleeding"
+      }
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "action": "add",
+      "effect": "dreamtinker:real_darkness",
+      "level": 1,
+      "time": 100
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "action": "add",
+      "effect": "minecraft:darkness",
+      "level": 1,
+      "time": 100
+    }
+  ],
+  "fluid": {
+    "amount": 50,
+    "tag": "dreamtinker:molten_echo_shard"
+  }
+}

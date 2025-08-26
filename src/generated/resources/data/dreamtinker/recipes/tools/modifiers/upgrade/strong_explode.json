@@ -1,0 +1,22 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "tconstruct:efln_ball"
+    },
+    {
+      "tag": "forge:gunpowder"
+    }
+  ],
+  "level": {
+    "max": 3
+  },
+  "result": "dreamtinker:strong_explode",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "item": "dreamtinker:masu"
+  }
+}

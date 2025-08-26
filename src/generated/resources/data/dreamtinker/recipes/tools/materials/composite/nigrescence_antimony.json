@@ -1,0 +1,10 @@
+{
+  "type": "tconstruct:material_fluid",
+  "fluid": {
+    "amount": 100,
+    "tag": "dreamtinker:molten_nigrescence_antimony"
+  },
+  "input": "tconstruct:string",
+  "output": "dreamtinker:nigrescence_antimony",
+  "temperature": 600
+}

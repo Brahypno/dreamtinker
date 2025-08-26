@@ -1,0 +1,5 @@
+{
+  "parent": "forge:item/bucket_drip",
+  "fluid": "dreamtinker:molten_albedo_stibium",
+  "loader": "forge:fluid_container"
+}

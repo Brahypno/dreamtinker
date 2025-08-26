@@ -1,0 +1,26 @@
+{
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "dreamtinker:broken_vessel"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:ouroboric_hourglass"
+      }
+    ],
+    "tconstruct:melee_harvest": [
+      {
+        "level": 1,
+        "name": "dreamtinker:ewige_widerkunft"
+      }
+    ],
+    "tconstruct:ranged": [
+      {
+        "level": 1,
+        "name": "dreamtinker:burning_in_vain"
+      }
+    ]
+  }
+}
