@@ -64,6 +64,11 @@ public class DTModiferCheck {
                0 < getLegModifierlevel(entity, modifierId) || 0 < getFeetModifierlevel(entity, modifierId);
     }
 
+    public static boolean ModifierALLBody(LivingEntity entity, ModifierId modifierId) {
+        return 0 < getHeadModifierlevel(entity, modifierId) && 0 < getChestModifierlevel(entity, modifierId) &&
+               0 < getLegModifierlevel(entity, modifierId) && 0 < getFeetModifierlevel(entity, modifierId);
+    }
+
     public static boolean haveModifierIn(LivingEntity entity, ModifierId modifierId) {
         return ModifierInBody(entity, modifierId) || ModifierInHand(entity, modifierId);
     }

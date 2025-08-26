@@ -74,6 +74,9 @@
   "modifier.dreamtinker.mei.salvage": "All the beauties are here, so this modifier cannot be removed",
   "modifier.dreamtinker.mei_2.salvage": "Never turn back...... so this modifier cannot be removed",
   "modifier.dreamtinker.mei_3.salvage": "In Oblivion......so this modifier cannot be removed",
+  "modifier.dreamtinker.etherium_protection": "Etherium Protection",
+  "modifier.dreamtinker.etherium_protection.flavor": "UnSeen Power",
+  "modifier.dreamtinker.etherium_protection.description": "When Full set applied, gain etherium Armor Full set Bonus",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",

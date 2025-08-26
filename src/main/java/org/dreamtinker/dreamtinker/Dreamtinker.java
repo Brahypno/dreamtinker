@@ -43,6 +43,7 @@ public class Dreamtinker {
         DreamtinkerLoots.LOOTMODIFIERS.register(modEventBus);
         DreamtinkerTab.TABS.register(modEventBus);
         if (ModList.get().isLoaded("enigmaticlegacy")){
+            DreamtinkerModifer.EL_MODIFIERS.register(modEventBus);
         }
 
         MinecraftForge.EVENT_BUS.register(this);

@@ -74,6 +74,9 @@
   "modifier.dreamtinker.mei.salvage": "红花忆人……因而强化无法被移除",
   "modifier.dreamtinker.mei_2.salvage": "勿回头……因而强化无法被移除",
   "modifier.dreamtinker.mei_3.salvage": "忘川之水何其苦……因而强化无法被移除",
+  "modifier.dreamtinker.etherium_protection": "以太防护",
+  "modifier.dreamtinker.etherium_protection.flavor": "不可见之力",
+  "modifier.dreamtinker.etherium_protection.description": "当全套装备有此强化时，获得以太装备的全套加成",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
