@@ -3,8 +3,8 @@
   "parent": "forge:item/default-tool",
   "textures": {
     "masu_blade": "dreamtinker:item/tool/masu/masu_blade_broken",
-    "masu_line": "dreamtinker:item/tool/masu/masu_line",
-    "masu_binding": "dreamtinker:item/tool/masu/masu_binding",
+    "masu_line": "dreamtinker:item/tool/masu/masu_line_broken",
+    "masu_binding": "dreamtinker:item/tool/masu/masu_binding_broken",
     "masu_handle": "dreamtinker:item/tool/masu/masu_handle",
     "masu_end": "dreamtinker:item/tool/masu/masu_end",
 

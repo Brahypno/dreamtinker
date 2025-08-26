@@ -1,5 +1,6 @@
 package org.dreamtinker.dreamtinker;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -63,5 +64,7 @@ public class Dreamtinker {
     public void onServerStarting(ServerStartingEvent event) {
 
     }
+
+    public static ResourceLocation getLocation(String name) {return new ResourceLocation(MODID, name);}
 
 }

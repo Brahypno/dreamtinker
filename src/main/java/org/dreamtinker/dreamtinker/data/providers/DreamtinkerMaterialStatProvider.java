@@ -1,0 +1,87 @@
+package org.dreamtinker.dreamtinker.data.providers;
+
+import net.minecraft.data.PackOutput;
+import net.minecraft.world.item.Tiers;
+import org.dreamtinker.dreamtinker.data.DreamtinkerMaterialIds;
+import slimeknights.tconstruct.library.data.material.AbstractMaterialStatsDataProvider;
+import slimeknights.tconstruct.tools.stats.*;
+
+public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataProvider {
+    public DreamtinkerMaterialStatProvider(PackOutput packOutput) {
+        super(packOutput, new DreamtinkerMaterialDataProvider(packOutput));
+    }
+
+    @Override
+    protected void addMaterialStats() {
+        addMeleeHarvest();
+        addRanged();
+        addArmor();
+        addMisc();
+
+    }
+
+    private void addMeleeHarvest() {
+        addMaterialStats(DreamtinkerMaterialIds.echo_shard,
+                         new HeadMaterialStats(400, 5.5f, Tiers.NETHERITE, 4.3f),
+                         HandleMaterialStats.multipliers().durability(0.5f).miningSpeed(0.5f).attackDamage(1.5f).attackSpeed(0.5f).build(),
+                         StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.moonlight_ice,
+                         new HeadMaterialStats(200, 0.1f, Tiers.NETHERITE, 8.0f));
+        addMaterialStats(DreamtinkerMaterialIds.valentinite,
+                         HandleMaterialStats.multipliers().durability(0.9f).miningSpeed(1.1f).attackDamage(1.1f).attackSpeed(1.1f).build(),
+                         StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.nigrescence_antimony,
+                         new HeadMaterialStats(3355, 3.36f, Tiers.NETHERITE, 1.13f),
+                         HandleMaterialStats.multipliers().durability(0.5f).miningSpeed(0.5f).attackDamage(0.5f).attackSpeed(0.5f).build(),
+                         StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.metallivorous_stibium_lupus,
+                         new HeadMaterialStats(1600, 7.6f, Tiers.NETHERITE, 7.6f),
+                         HandleMaterialStats.multipliers().durability(0.67f).miningSpeed(0.34f).attackDamage(1.33f).attackSpeed(1.76f).build(),
+                         StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.crying_obsidian,
+                         new HeadMaterialStats(700, 6f, Tiers.DIAMOND, 2f),
+                         HandleMaterialStats.multipliers().durability(1.1f).miningSpeed(1.05f).attackDamage(1.1f).attackSpeed(1.1f).build(),
+                         StatlessMaterialStats.BINDING);
+    }
+
+    private void addRanged() {
+        addMaterialStats(DreamtinkerMaterialIds.echo_shard,
+                         new LimbMaterialStats(800, -1f, 3.0f, 3.0f),
+                         new GripMaterialStats(-0.5f, 3.0f, 6.0f));
+        addMaterialStats(DreamtinkerMaterialIds.valentinite,
+                         new LimbMaterialStats(400, 0.1f, 0.1f, .15f));
+        addMaterialStats(DreamtinkerMaterialIds.nigrescence_antimony,
+                         StatlessMaterialStats.BOWSTRING);
+        addMaterialStats(DreamtinkerMaterialIds.metallivorous_stibium_lupus,
+                         new GripMaterialStats(-0.33f, 3.0f, 0.76f));
+        addMaterialStats(DreamtinkerMaterialIds.star_regulus,
+                         new LimbMaterialStats(777, 7.7f, 0.7f, .7f));
+        addMaterialStats(DreamtinkerMaterialIds.crying_obsidian,
+                         new LimbMaterialStats(800, 0.3f, -0.2f, 0.4f),
+                         new GripMaterialStats(0.5f, -0.4f, 1.0f));
+    }
+
+    private void addArmor() {
+        addArmorShieldStats(DreamtinkerMaterialIds.echo_shard,
+                            PlatingMaterialStats.builder().durabilityFactor(65).armor(3, 4, 6.66f, 2).toughness(5).knockbackResistance(2.5f),
+                            StatlessMaterialStats.MAILLE);
+        addMaterialStats(DreamtinkerMaterialIds.valentinite,
+                         StatlessMaterialStats.MAILLE);
+        addArmorShieldStats(DreamtinkerMaterialIds.nigrescence_antimony,
+                            PlatingMaterialStats.builder().durabilityFactor(40).armor(1.08f, 2.46f, 4.31f, 2).toughness(3).knockbackResistance(6330f));
+        addArmorShieldStats(DreamtinkerMaterialIds.star_regulus,
+                            PlatingMaterialStats.builder().durabilityFactor(73).armor(4.38f, 7.52f, 10.16f, 5.18f).toughness(7).knockbackResistance(0.65f)
+                                                .shieldDurability(7777),
+                            StatlessMaterialStats.MAILLE);
+        addArmorShieldStats(DreamtinkerMaterialIds.crying_obsidian,
+                            PlatingMaterialStats.builder().durabilityFactor(12).armor(3f, 4f, 5f, 3f).toughness(0).knockbackResistance(0.65f),
+                            StatlessMaterialStats.MAILLE);
+    }
+
+    private void addMisc() {}
+
+    @Override
+    public String getName() {
+        return "Dreamtinker Material Stats Data Provider";
+    }
+}

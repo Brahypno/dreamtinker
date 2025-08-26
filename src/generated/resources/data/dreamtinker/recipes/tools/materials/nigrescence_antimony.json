@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "dreamtinker:nigrescence_antimony"
+  },
+  "material": "dreamtinker:nigrescence_antimony",
+  "needed": 1,
+  "value": 1
+}

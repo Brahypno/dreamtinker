@@ -2,6 +2,6 @@
   "loader": "tconstruct:material",
   "parent": "forge:item/default",
   "textures": {
-    "texture": "dreamtinker:item/tool/explode_core/explode_core"
+    "texture": "dreamtinker:item/tool/parts/explode_core"
   }
 }

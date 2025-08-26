@@ -1,0 +1,41 @@
+{
+  "block_effects": [
+    {
+      "type": "tconstruct:mob_effect_cloud",
+      "effects": [
+        {
+          "effect": "minecraft:strength",
+          "level": 3,
+          "time": 100
+        }
+      ]
+    },
+    {
+      "type": "tconstruct:conditional",
+      "block": {
+        "type": "tconstruct:harvest_tier",
+        "tier": "minecraft:netherite"
+      },
+      "effect": {
+        "type": "tconstruct:break_block",
+        "enchantments": {
+          "minecraft:fortune": 3
+        },
+        "hardness": 50.0
+      }
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "tconstruct:mob_effect",
+      "action": "add",
+      "effect": "minecraft:strength",
+      "level": 3,
+      "time": 100
+    }
+  ],
+  "fluid": {
+    "amount": 50,
+    "tag": "dreamtinker:molten_ascending_antimony"
+  }
+}

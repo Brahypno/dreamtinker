@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "item": "minecraft:crying_obsidian"
+  },
+  "result": {
+    "amount": 1000,
+    "fluid": "dreamtinker:molten_crying_obsidian"
+  },
+  "temperature": 1100,
+  "time": 139
+}

@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_fluid",
+  "fluid": {
+    "amount": 1000,
+    "tag": "dreamtinker:molten_crying_obsidian"
+  },
+  "output": "dreamtinker:crying_obsidian",
+  "temperature": 1100
+}

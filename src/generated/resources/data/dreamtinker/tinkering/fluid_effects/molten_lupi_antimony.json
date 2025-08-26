@@ -1,0 +1,35 @@
+{
+  "block_effects": [
+    {
+      "type": "tconstruct:mob_effect_cloud",
+      "effects": [
+        {
+          "effect": "tconstruct:self_destructing",
+          "level": 1,
+          "time": 100
+        }
+      ]
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "tconstruct:damage",
+      "damage": 1.0,
+      "damage_type": {
+        "melee": "tconstruct:self_destruct",
+        "ranged": "tconstruct:self_destruct"
+      }
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "action": "add",
+      "effect": "tconstruct:self_destructing",
+      "level": 1,
+      "time": 100
+    }
+  ],
+  "fluid": {
+    "amount": 100,
+    "tag": "dreamtinker:molten_lupi_antimony"
+  }
+}

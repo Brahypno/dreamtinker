@@ -1,0 +1,46 @@
+{
+  "fallbacks": [
+    "metal",
+    "crystal"
+  ],
+  "generator": {
+    "supported_stats": [
+      "tconstruct:head",
+      "tconstruct:repair_kit"
+    ],
+    "transformer": {
+      "type": "tconstruct:grey_to_sprite",
+      "palette": [
+        {
+          "color": "FF081829",
+          "grey": 0
+        },
+        {
+          "color": "FF0F2E52",
+          "grey": 63
+        },
+        {
+          "color": "FF1C4A7B",
+          "grey": 102
+        },
+        {
+          "color": "FF2D6EC0",
+          "grey": 140
+        },
+        {
+          "color": "FF4990E4",
+          "grey": 178
+        },
+        {
+          "color": "FFCFE6F9",
+          "grey": 216
+        },
+        {
+          "color": "FFEFFAFF",
+          "grey": 255
+        }
+      ]
+    }
+  },
+  "luminosity": 15
+}

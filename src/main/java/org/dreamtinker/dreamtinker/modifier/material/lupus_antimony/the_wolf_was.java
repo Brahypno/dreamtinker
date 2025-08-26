@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.*;
-import static org.dreamtinker.dreamtinker.register.DreamtinkerMaterial.metallivorous_stibium_lupus;
+import static org.dreamtinker.dreamtinker.data.DreamtinkerMaterialIds.metallivorous_stibium_lupus;
 
 public class the_wolf_was extends BattleModifier {
     private static final ResourceLocation TAG_WOLF = new ResourceLocation(Dreamtinker.MODID, "twwc");
@@ -55,7 +55,9 @@ public class the_wolf_was extends BattleModifier {
             ModDataNBT nbt = tool.getPersistentData();
             int count = nbt.getInt(TAG_WOLF);
             if (count > 0){
-                tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.the_wolf_was").append(String.valueOf(count)).append(" / " + TheWolfWasDamage.get()).withStyle(this.getDisplayName().getStyle()));
+                tooltip.add(
+                        Component.translatable("modifier.dreamtinker.tooltip.the_wolf_was").append(String.valueOf(count)).append(" / " + TheWolfWasDamage.get())
+                                 .withStyle(this.getDisplayName().getStyle()));
             }
         }
     }
@@ -115,7 +117,9 @@ public class the_wolf_was extends BattleModifier {
         int possible_tier = Math.min(Math.min(tier + 1, TheWolfWasMaxTier.get()), 4);//Traditionally, tier 4 is the highest one
 
         // 5. 从 Registry 中筛选同 tier 的所有材料变体
-        List<MaterialVariantId> candidates = MaterialRegistry.getInstance().getAllMaterials().stream().filter(m -> possible_tier <= m.getTier()).map(IMaterial::getIdentifier).filter(statsId::canUseMaterial).filter(id -> !id.equals(mat.getIdentifier())).collect(Collectors.toList());
+        List<MaterialVariantId> candidates =
+                MaterialRegistry.getInstance().getAllMaterials().stream().filter(m -> possible_tier <= m.getTier()).map(IMaterial::getIdentifier)
+                                .filter(statsId::canUseMaterial).filter(id -> !id.equals(mat.getIdentifier())).collect(Collectors.toList());
 
         if (candidates.isEmpty())
             return;

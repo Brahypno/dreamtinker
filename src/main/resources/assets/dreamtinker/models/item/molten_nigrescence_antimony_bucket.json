@@ -1,5 +1,0 @@
-{
-  "parent": "forge:item/bucket_drip",
-  "loader": "tconstruct:fluid_container",
-  "fluid": "dreamtinker:molten_nigrescence_antimony"
-}

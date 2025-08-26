@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:material_melting",
-  "input": "dreamtinker:echo_shard",
-  "temperature": 1500,
-  "result": {
-    "fluid": "dreamtinker:molten_echo_shard",
-    "amount": 100
-  }
-}

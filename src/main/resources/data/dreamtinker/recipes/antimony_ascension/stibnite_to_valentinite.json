@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "tag": "forge:raw_materials/stibnite"
-  },
-  "result": "dreamtinker:valentinite",
-  "experience": 1,
-  "cookingtime": 100
-}

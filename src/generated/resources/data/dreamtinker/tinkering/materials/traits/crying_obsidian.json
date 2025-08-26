@@ -1,0 +1,30 @@
+{
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "dreamtinker:in_rain"
+      },
+      {
+        "level": 1,
+        "name": "tconstruct:luck"
+      },
+      {
+        "level": 1,
+        "name": "tconstruct:luck"
+      }
+    ],
+    "tconstruct:melee_harvest": [
+      {
+        "level": 1,
+        "name": "dreamtinker:sharpened_with"
+      }
+    ],
+    "tconstruct:ranged": [
+      {
+        "level": 1,
+        "name": "dreamtinker:isolde"
+      }
+    ]
+  }
+}
