@@ -2,5 +2,5 @@
   "type": "dreamtinker:antimony_loot",
   "conditions": [],
   "antimony": "dreamtinker:raw_stibnite",
-  "target_tag": "forge:ores/gold"
+  "target_tags": ["forge:ores/gold", "forge:ores/copper","forge:ores/lead","forge:ores/silver"]
 }

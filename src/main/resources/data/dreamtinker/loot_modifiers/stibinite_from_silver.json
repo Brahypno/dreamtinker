@@ -1,6 +1,0 @@
-{
-  "type": "dreamtinker:antimony_loot",
-  "conditions": [],
-  "antimony": "dreamtinker:raw_stibnite",
-  "target_tag": "forge:ores/silver"
-}

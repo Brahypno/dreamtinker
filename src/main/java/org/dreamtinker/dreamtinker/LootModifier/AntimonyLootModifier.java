@@ -1,5 +1,6 @@
 package org.dreamtinker.dreamtinker.LootModifier;
 
+import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -17,35 +18,40 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraftforge.common.loot.LootModifier;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
 
-import java.util.Optional;
+import java.util.List;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.AntimonyLootChance;
 
 public class AntimonyLootModifier extends LootModifier {
     private final Item antimony;
-    private final TagKey<Block> target_tag;
+    private final List<TagKey<Block>> target_tags;
 
-    public static final Codec<AntimonyLootModifier> CODEC = RecordCodecBuilder.create(inst -> codecStart(inst).and(ForgeRegistries.ITEMS.getCodec().fieldOf("antimony").forGetter(mod -> mod.antimony)).and(ResourceLocation.CODEC.optionalFieldOf("target_tag").forGetter(m -> {
-        if (m.target_tag == null)
-            return Optional.empty();
-        return Optional.of(m.target_tag.location());
-    })).apply(inst, (conditions, item, tagLocation) -> {
-        TagKey<Block> tag = tagLocation.map(loc -> TagKey.create(Registries.BLOCK, loc)).orElse(null);
-        return new AntimonyLootModifier(conditions, item, tag);
-    }));
+    private static final Logger LOGGER = LogUtils.getLogger();
 
-    public AntimonyLootModifier(LootItemCondition[] conditions, Item antimony, TagKey<Block> target_tag) {
+    public static final Codec<AntimonyLootModifier> CODEC = RecordCodecBuilder.create(inst -> codecStart(inst)
+            .and(ForgeRegistries.ITEMS.getCodec().fieldOf("antimony").forGetter(m -> m.antimony))
+            .and(ResourceLocation.CODEC.listOf().optionalFieldOf("target_tags", List.of())
+                                       .forGetter(m -> m.target_tags.stream().map(TagKey::location).toList()))
+            .apply(inst, (conditions, item, tagLocs) -> {
+                List<TagKey<Block>> tags = tagLocs.stream().map(loc -> TagKey.create(Registries.BLOCK, loc)).toList();
+                return new AntimonyLootModifier(conditions, item, tags);
+            })
+    );
+
+
+    public AntimonyLootModifier(LootItemCondition[] conditions, Item antimony, List<TagKey<Block>> target_tags) {
         super(conditions);
         this.antimony = antimony;
-        this.target_tag = target_tag;
+        this.target_tags = List.copyOf(target_tags);
     }
 
     @Override
     protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> objectArrayList, LootContext lootContext) {
         BlockState state = lootContext.getParamOrNull(LootContextParams.BLOCK_STATE);
 
-        if (state == null || !state.is(target_tag))
+        if (state == null || target_tags.stream().noneMatch(state::is))
             return objectArrayList;
 
         int fortune = 0;
@@ -58,10 +64,9 @@ public class AntimonyLootModifier extends LootModifier {
                 return objectArrayList;
             }
         }
-        float luckBoost = (float) lootContext.getLuck() * 0.005f;
-        float chance = (float) ((fortune + 1) * AntimonyLootChance.get() + luckBoost);
+        float chance = (float) ((fortune + 1 + lootContext.getLuck()) * AntimonyLootChance.get());
         if (lootContext.getRandom().nextFloat() < chance){
-            int amount = 1 + lootContext.getRandom().nextInt(1 + fortune);
+            int amount = 1 + lootContext.getRandom().nextInt((int) (1 + fortune + lootContext.getLuck()));
             objectArrayList.add(new ItemStack(antimony, amount));
         }
 
