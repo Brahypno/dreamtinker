@@ -4,7 +4,13 @@ import net.minecraft.data.PackOutput;
 import org.dreamtinker.dreamtinker.data.DreamtinkerMaterialIds;
 import org.dreamtinker.dreamtinker.register.DreamtinkerModifer;
 import slimeknights.tconstruct.library.data.material.AbstractMaterialTraitDataProvider;
+import slimeknights.tconstruct.library.materials.definition.MaterialId;
+import slimeknights.tconstruct.library.materials.traits.MaterialTraits;
+import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.tools.data.ModifierIds;
+
+import java.lang.reflect.Method;
+import java.util.List;
 
 import static slimeknights.tconstruct.library.materials.MaterialRegistry.*;
 
@@ -22,8 +28,9 @@ public class DreamtinkerMaterialModifierProvider extends AbstractMaterialTraitDa
         addTraits(DreamtinkerMaterialIds.moonlight_ice, MELEE_HARVEST, DreamtinkerModifer.glacial_river);
 
         addDefaultTraits(DreamtinkerMaterialIds.valentinite, DreamtinkerModifer.antimony_usage);
-        addTraits(DreamtinkerMaterialIds.valentinite, ARMOR,
-                  ModifierIds.fireProtection, ModifierIds.fireProtection, ModifierIds.fireProtection, ModifierIds.fireProtection);
+        callGetOrCreate(this, DreamtinkerMaterialIds.valentinite).setTraits(ARMOR, List.of(
+                new ModifierEntry[]{new ModifierEntry(ModifierIds.fireProtection, 4),
+                        new ModifierEntry(DreamtinkerModifer.antimony_usage.getId(), 1)}));
 
         addTraits(DreamtinkerMaterialIds.nigrescence_antimony, MELEE_HARVEST, DreamtinkerModifer.ewige_widerkunft);
         addTraits(DreamtinkerMaterialIds.nigrescence_antimony, RANGED, DreamtinkerModifer.burning_in_vain);
@@ -39,15 +46,19 @@ public class DreamtinkerMaterialModifierProvider extends AbstractMaterialTraitDa
 
         addTraits(DreamtinkerMaterialIds.crying_obsidian, MELEE_HARVEST, DreamtinkerModifer.sharpened_with);
         addTraits(DreamtinkerMaterialIds.crying_obsidian, RANGED, DreamtinkerModifer.isolde);
-        addTraits(DreamtinkerMaterialIds.crying_obsidian, ARMOR,
-                  DreamtinkerModifer.in_rain.getId(), ModifierIds.luck, ModifierIds.luck);
+        callGetOrCreate(this, DreamtinkerMaterialIds.crying_obsidian).setTraits(ARMOR, List.of(
+                new ModifierEntry[]{new ModifierEntry(ModifierIds.luck, 2),
+                        new ModifierEntry(DreamtinkerModifer.in_rain.getId(), 1)}));
 
-        addTraits(DreamtinkerMaterialIds.etherium, MELEE_HARVEST, ModifierIds.smite, ModifierIds.smite, DreamtinkerModifer.explosive_hit.getId(),
-                  DreamtinkerModifer.astral_break.getId());
+        callGetOrCreate(this, DreamtinkerMaterialIds.etherium).setTraits(MELEE_HARVEST, List.of(new ModifierEntry[]{new ModifierEntry(ModifierIds.smite, 2),
+                new ModifierEntry(DreamtinkerModifer.explosive_hit.getId(), 1), new ModifierEntry(
+                DreamtinkerModifer.astral_break.getId(), 1)}));
         addTraits(DreamtinkerMaterialIds.etherium, RANGED, DreamtinkerModifer.ranged_shoot, DreamtinkerModifer.explosive_hit);
-        addTraits(DreamtinkerMaterialIds.etherium, ARMOR,
-                  DreamtinkerModifer.etherium_protection.getId(), ModifierIds.magicProtection, ModifierIds.magicProtection, DreamtinkerModifer.fly.getId(),
-                  DreamtinkerModifer.ender_dodge.getId());
+        callGetOrCreate(this, DreamtinkerMaterialIds.etherium).setTraits(ARMOR, List.of(
+                new ModifierEntry[]{new ModifierEntry(ModifierIds.magicProtection, 2),
+                        new ModifierEntry(DreamtinkerModifer.etherium_protection.getId(), 1),
+                        new ModifierEntry(DreamtinkerModifer.ender_dodge.getId(), 1),
+                        new ModifierEntry(DreamtinkerModifer.fly.getId(), 1)}));
 
         addTraits(DreamtinkerMaterialIds.nefarious, MELEE_HARVEST, DreamtinkerModifer.cursed_ring_bound, DreamtinkerModifer.wither_body,
                   DreamtinkerModifer.evil_attack);
@@ -55,11 +66,24 @@ public class DreamtinkerMaterialModifierProvider extends AbstractMaterialTraitDa
                   DreamtinkerModifer.wither_body);
         addTraits(DreamtinkerMaterialIds.nefarious, ARMOR, DreamtinkerModifer.cursed_ring_bound, DreamtinkerModifer.wither_body,
                   DreamtinkerModifer.stone_heart);
+
     }
 
     @Override
     public String getName() {
         return "Dreamtinker Material Modifier Provider";
+    }
+
+    @SuppressWarnings("unchecked")
+    private static MaterialTraits.Builder callGetOrCreate(AbstractMaterialTraitDataProvider self, MaterialId id) {
+        try {
+            Method m = AbstractMaterialTraitDataProvider.class.getDeclaredMethod("getOrCreateMaterialTraits", MaterialId.class);
+            m.setAccessible(true);
+            return (MaterialTraits.Builder) m.invoke(self, id);
+        }
+        catch (ReflectiveOperationException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

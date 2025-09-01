@@ -2,33 +2,25 @@
   "perStat": {
     "tconstruct:armor": [
       {
+        "level": 2,
+        "name": "tconstruct:magic_protection"
+      },
+      {
         "level": 1,
         "name": "dreamtinker:etherium_protection"
       },
       {
         "level": 1,
-        "name": "tconstruct:magic_protection"
-      },
-      {
-        "level": 1,
-        "name": "tconstruct:magic_protection"
+        "name": "dreamtinker:ender_dodge"
       },
       {
         "level": 1,
         "name": "dreamtinker:fly"
-      },
-      {
-        "level": 1,
-        "name": "dreamtinker:ender_dodge"
       }
     ],
     "tconstruct:melee_harvest": [
       {
-        "level": 1,
-        "name": "tconstruct:smite"
-      },
-      {
-        "level": 1,
+        "level": 2,
         "name": "tconstruct:smite"
       },
       {

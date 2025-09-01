@@ -15,10 +15,14 @@
 ### tool
 
 1. pants
+2. Narcissus wing
 
 ### multi-block structure
 
-## planned Compact
+## supported Compact
 
 1. Enigmatic Legacy
-2. Malum
+
+## planned Compact
+
+1. Malum

@@ -2,16 +2,12 @@
   "perStat": {
     "tconstruct:armor": [
       {
+        "level": 2,
+        "name": "tconstruct:luck"
+      },
+      {
         "level": 1,
         "name": "dreamtinker:in_rain"
-      },
-      {
-        "level": 1,
-        "name": "tconstruct:luck"
-      },
-      {
-        "level": 1,
-        "name": "tconstruct:luck"
       }
     ],
     "tconstruct:melee_harvest": [
