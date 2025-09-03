@@ -1,11 +1,14 @@
 package org.dreamtinker.dreamtinker.modifier.common;
 
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.food.FoodData;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
@@ -52,11 +55,30 @@ public class stone_heart extends ArmorModifier {
 
     @Override
     public float modifyDamageTaken(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount, boolean isDirectDamage) {
-        if (context.getEntity() instanceof Player player && !player.level().isClientSide)
+        if (context.getEntity().level().isClientSide){
             if (source.is(DamageTypes.ARROW) || source.is(DamageTypes.FIREWORKS) || source.is(DamageTypes.FIREBALL) ||
                 source.getEntity() instanceof Projectile || source.getDirectEntity() instanceof Projectile)
-                return (float) (amount * StoneheartProjreduce.get());
+                amount *= StoneheartProjreduce.get();
+            if (context.getEntity() instanceof ServerPlayer player){
+                FoodData fd = player.getFoodData();
+                int newFood = (int) Math.min(20, amount + fd.getFoodLevel());
+                fd.setFoodLevel(newFood);
+                if (20 < amount + fd.getFoodLevel()){
+                    float newSat = Math.min(fd.getSaturationLevel() + amount + fd.getFoodLevel() - 20, 20);
+                    fd.setSaturation(newSat);
+                }
+            }
+        }
         return amount;
     }
+
+    @Override
+    public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
+        if ((isCorrectSlot || isSelected) && !world.isClientSide && world.getGameTime() % 20 == 0)
+            if (holder instanceof ServerPlayer player)
+                player.causeFoodExhaustion(4 * 1.0F);
+
+    }
+
 
 }

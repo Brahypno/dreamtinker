@@ -63,7 +63,7 @@ public class DreamtinkerMaterialModifierProvider extends AbstractMaterialTraitDa
         addTraits(DreamtinkerMaterialIds.nefarious, MELEE_HARVEST, DreamtinkerModifer.cursed_ring_bound, DreamtinkerModifer.wither_body,
                   DreamtinkerModifer.evil_attack);
         addTraits(DreamtinkerMaterialIds.nefarious, RANGED, DreamtinkerModifer.cursed_ring_bound, DreamtinkerModifer.wither_shoot,
-                  DreamtinkerModifer.wither_body);
+                  DreamtinkerModifer.wither_body, DreamtinkerModifer.evil_attack);
         addTraits(DreamtinkerMaterialIds.nefarious, ARMOR, DreamtinkerModifer.cursed_ring_bound, DreamtinkerModifer.wither_body,
                   DreamtinkerModifer.stone_heart);
 

@@ -7,6 +7,7 @@ import net.minecraft.data.recipes.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -28,6 +29,7 @@ import org.dreamtinker.dreamtinker.register.DreamtinkerModifer;
 import slimeknights.mantle.recipe.data.IRecipeHelper;
 import slimeknights.mantle.recipe.helper.FluidOutput;
 import slimeknights.mantle.recipe.helper.ItemOutput;
+import slimeknights.mantle.recipe.ingredient.EntityIngredient;
 import slimeknights.mantle.recipe.ingredient.FluidIngredient;
 import slimeknights.mantle.recipe.ingredient.SizedIngredient;
 import slimeknights.tconstruct.common.TinkerTags;
@@ -40,6 +42,7 @@ import slimeknights.tconstruct.library.recipe.FluidValues;
 import slimeknights.tconstruct.library.recipe.alloying.AlloyRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.casting.ItemCastingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.casting.material.MaterialCastingRecipeBuilder;
+import slimeknights.tconstruct.library.recipe.entitymelting.EntityMeltingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.fuel.MeltingFuelBuilder;
 import slimeknights.tconstruct.library.recipe.melting.IMeltingContainer;
 import slimeknights.tconstruct.library.recipe.melting.IMeltingRecipe;
@@ -77,6 +80,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         this.addPartRecipes(consumer);
         this.addToolBuildingRecipes(consumer);
         this.addModifierRecipes(consumer);
+        this.addEntityMeltingRecipes(consumer);
     }
 
     private void addToolBuildingRecipes(Consumer<FinishedRecipe> consumer) {
@@ -385,6 +389,15 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setSlots(SlotType.ABILITY, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifer.ender_slayer, abilitySalvage))
                              .save(consumer, prefix(DreamtinkerModifer.ender_slayer, abilityFolder));
+    }
+
+    private void addEntityMeltingRecipes(Consumer<FinishedRecipe> consumer) {
+        String folder = "smeltery/entity_melting/";
+        String headFolder = "smeltery/entity_melting/heads/";
+
+        // meat soup just comes from edible creatures
+        EntityMeltingRecipeBuilder.melting(EntityIngredient.of(EntityType.WARDEN), DreamtinkerFluids.molten_echo_shard.result(FluidValues.GEM_SHARD), 5)
+                                  .save(consumer, location(folder + "molten_echo_shard"));
     }
 
     @Override

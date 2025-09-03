@@ -22,7 +22,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
 
     private void addMeleeHarvest() {
         addMaterialStats(DreamtinkerMaterialIds.echo_shard,
-                         new HeadMaterialStats(400, 5.5f, Tiers.NETHERITE, 4.3f),
+                         new HeadMaterialStats(400, 3.5f, Tiers.DIAMOND, 4.3f),
                          HandleMaterialStats.multipliers().durability(0.5f).miningSpeed(0.5f).attackDamage(1.5f).attackSpeed(0.5f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.moonlight_ice,
@@ -55,8 +55,8 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
 
     private void addRanged() {
         addMaterialStats(DreamtinkerMaterialIds.echo_shard,
-                         new LimbMaterialStats(800, -1f, 3.0f, 3.0f),
-                         new GripMaterialStats(-0.5f, 3.0f, 6.0f));
+                         new LimbMaterialStats(400, -1f, 3.0f, 3.0f),
+                         new GripMaterialStats(-0.5f, 3.0f, 4.0f));
         addMaterialStats(DreamtinkerMaterialIds.valentinite,
                          new LimbMaterialStats(400, 0.1f, 0.1f, .15f));
         addMaterialStats(DreamtinkerMaterialIds.nigrescence_antimony,
