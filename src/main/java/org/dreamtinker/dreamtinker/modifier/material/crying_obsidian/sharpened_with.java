@@ -24,7 +24,7 @@ public class sharpened_with extends BattleModifier {
         ServerLevel level = (ServerLevel) attacker.level();
         BlockPos pos = null == context.getLivingTarget() ? attacker.getOnPos() : context.getLivingTarget().getOnPos();
         if (canRainAt(level, pos))
-            level.setWeatherParameters(0, 6000, true, false);
+            level.setWeatherParameters(0, 6000, true, level.random.nextBoolean());
         else {
             AABB box = new AABB(pos).inflate(8, 6, 8); // 半径8、向上6
             for (int i = 0; i < 120 * CryingParticles.get(); i++) {
