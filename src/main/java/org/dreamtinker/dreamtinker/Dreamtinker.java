@@ -15,6 +15,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.dreamtinker.dreamtinker.config.DreamtinkerConfig;
 import org.dreamtinker.dreamtinker.event.PlayerEvent;
 import org.dreamtinker.dreamtinker.event.addUnholywater;
+import org.dreamtinker.dreamtinker.event.compact.death_handler;
 import org.dreamtinker.dreamtinker.event.star_regulus_boost;
 import org.dreamtinker.dreamtinker.network.Dnetwork;
 import org.dreamtinker.dreamtinker.register.*;
@@ -50,7 +51,7 @@ public class Dreamtinker {
             DreamtinkerEffects.EL_EFFECT.register(modEventBus);
             DreamtinkerItems.EL_ITEMS.register(modEventBus);
             forgeEventBus.addGenericListener(ItemStack.class, addUnholywater::attachCaps);
-
+            forgeEventBus.addListener(death_handler::onLivingDeath);
         }
 
         MinecraftForge.EVENT_BUS.register(this);

@@ -30,15 +30,17 @@ public class stone_heart extends ArmorModifier {
     private void LivingHealEvent(LivingHealEvent event) {
         LivingEntity entity = event.getEntity();
         if (DTModiferCheck.haveModifierIn(entity, this.getId()))
-            event.setAmount((float) (event.getAmount() * 0.2));
+            event.setAmount(event.getAmount() * 0.2F);
     }
 
     public void onEat(LivingEntityUseItemEvent.Finish e) {
         if (!(e.getEntity() instanceof Player p) || p.level().isClientSide || !DTModiferCheck.haveModifierIn(p, this.getId()))
             return;
         var fd = p.getFoodData();
-        fd.setFoodLevel(Math.min(20, fd.getFoodLevel() - 2));
-        fd.setSaturation(Math.min(fd.getFoodLevel(), fd.getSaturationLevel() - 2f));
+        if (!fd.needsFood())
+            return;
+        fd.setFoodLevel(Math.min(20, Math.max(0, fd.getFoodLevel() - 2)));
+        fd.setSaturation(Math.min(fd.getFoodLevel(), Math.max(0, fd.getSaturationLevel() - 2f)));
     }
 
     @Override

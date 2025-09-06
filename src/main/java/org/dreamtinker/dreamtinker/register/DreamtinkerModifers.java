@@ -80,17 +80,18 @@ public class DreamtinkerModifers {
     public static final StaticModifier<ender_dodge> ender_dodge = MODIFIERS.register("ender_dodge", ender_dodge::new);
     public static final StaticModifier<explosive_hit> explosive_hit = MODIFIERS.register("explosive_hit", explosive_hit::new);
     public static final StaticModifier<ranged_shoot> ranged_shoot = MODIFIERS.register("ranged_shoot", ranged_shoot::new);
+
+    public static final StaticModifier<wither_shoot> wither_shoot = MODIFIERS.register("wither_shoot", wither_shoot::new);
+    public static final StaticModifier<stone_heart> stone_heart = MODIFIERS.register("stone_heart", stone_heart::new);
+    public static final StaticModifier<life_looting> life_looting = MODIFIERS.register("life_looting", life_looting::new);
+    //etherium
     public static final StaticModifier<astral_break> astral_break = EL_MODIFIERS.register("astral_break", astral_break::new);
     public static final StaticModifier<etherium_protection> etherium_protection = EL_MODIFIERS.register("etherium_protection", etherium_protection::new);
 
     public static final StaticModifier<cursed_ring_bound> cursed_ring_bound = EL_MODIFIERS.register("cursed_ring_bound", cursed_ring_bound::new);
     //evil
-    public static final StaticModifier<wither_shoot> wither_shoot = MODIFIERS.register("wither_shoot", wither_shoot::new);
-    public static final StaticModifier<stone_heart> stone_heart = MODIFIERS.register("stone_heart", stone_heart::new);
     public static final StaticModifier<evil_attack> evil_attack = EL_MODIFIERS.register("evil_attack", evil_attack::new);
     public static final StaticModifier<ender_slayer> ender_slayer = EL_MODIFIERS.register("ender_slayer", ender_slayer::new);
-    public static final StaticModifier<life_looting> life_looting = MODIFIERS.register("life_looting", life_looting::new);
-
     public static final StaticModifier<weapon_books> weapon_books = EL_MODIFIERS.register("weapon_books", weapon_books::new);
     public static final StaticModifier<eldritch_pan> eldritch_pan = EL_MODIFIERS.register("eldritch_pan", eldritch_pan::new);
     public static final StaticModifier<Modifier> by_pass_worthy = EL_MODIFIERS.register("by_pass_worthy", Modifier::new);

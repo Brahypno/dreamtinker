@@ -5,18 +5,13 @@ import com.aizistral.enigmaticlegacy.effects.GrowingBloodlustEffect;
 import com.aizistral.enigmaticlegacy.handlers.SuperpositionHandler;
 import com.aizistral.enigmaticlegacy.items.TheInfinitum;
 import com.aizistral.enigmaticlegacy.items.TheTwist;
-import com.aizistral.enigmaticlegacy.registries.EnigmaticEffects;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import org.dreamtinker.dreamtinker.modifier.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.register.DreamtinkerModifers;
-import org.dreamtinker.dreamtinker.utils.DTModiferCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
@@ -26,10 +21,9 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.dreamtinker.dreamtinker.modifier.Compact.enigmaticLegacy.eldritch_pan.getBloodlust;
+
 public class weapon_books extends BattleModifier {
-    {
-        MinecraftForge.EVENT_BUS.addListener(this::onLivingDeath);
-    }
 
     private final String book_key_1 = "item.enigmaticlegacy.the_acknowledgment";
     private final String book_key_2 = "item.enigmaticlegacy.the_twist";
@@ -115,22 +109,14 @@ public class weapon_books extends BattleModifier {
         if (3 <= tool.getModifierLevel(this.getId()))
             if (context.getAttacker() instanceof Player player && !player.level().isClientSide){
                 float lifesteal = SuperpositionHandler.isTheWorthyOne(player) ? damageDealt * 0.1F : 0;
-                if (player.hasEffect(EnigmaticEffects.GROWING_BLOODLUST)){
-                    int amplifier = 1 + player.getEffect(EnigmaticEffects.GROWING_BLOODLUST).getAmplifier();
+
+                if (null != getBloodlust() && player.hasEffect(getBloodlust())){
+                    int amplifier = 1 + player.getEffect(getBloodlust()).getAmplifier();
                     lifesteal += (float) (damageDealt * (GrowingBloodlustEffect.lifestealBoost.getValue() * amplifier));
                 }
+
                 player.heal(lifesteal);
             }
-    }
-
-    public void onLivingDeath(LivingDeathEvent event) {
-        LivingEntity entity = event.getEntity();
-        if (entity instanceof Player player && SuperpositionHandler.isTheWorthyOne(player))
-            if (3 <= DTModiferCheck.getMainhandModifierlevel(player, this.getId()))
-                if (Math.random() <= TheInfinitum.undeadProbability.getValue().asMultiplier(false)){
-                    event.setCanceled(true);
-                    player.setHealth(1);
-                }
     }
 
     @Override

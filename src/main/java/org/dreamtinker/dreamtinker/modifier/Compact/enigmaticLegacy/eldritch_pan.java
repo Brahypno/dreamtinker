@@ -1,14 +1,11 @@
 package org.dreamtinker.dreamtinker.modifier.Compact.enigmaticLegacy;
 
 import com.aizistral.enigmaticlegacy.effects.GrowingBloodlustEffect;
-import com.aizistral.enigmaticlegacy.effects.GrowingHungerEffect;
 import com.aizistral.enigmaticlegacy.handlers.SuperpositionHandler;
 import com.aizistral.enigmaticlegacy.items.EldritchPan;
-import com.aizistral.enigmaticlegacy.registries.EnigmaticEffects;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -19,34 +16,32 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.modifier.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.register.DreamtinkerModifers;
-import org.dreamtinker.dreamtinker.utils.DTModiferCheck;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
-import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
 public class eldritch_pan extends BattleModifier {
+    public static final ResourceLocation BLOODLUST_ID =
+            new ResourceLocation("enigmaticlegacy", "growing_bloodlust");
+    public static final ResourceLocation HUNGER_ID =
+            new ResourceLocation("enigmaticlegacy", "growing_hunger");
+
     @Override
     public int getPriority() {
         return Integer.MAX_VALUE;
     }
 
-    {
-        MinecraftForge.EVENT_BUS.addListener(this::onLivingDeath);
-    }
-
-    private static final ResourceLocation TAG_PAN = new ResourceLocation(Dreamtinker.MODID, "eldritch_pan");
+    public static final ResourceLocation TAG_PAN = new ResourceLocation(Dreamtinker.MODID, "eldritch_pan");
     private static final ResourceLocation TAG_PAN_TICKS = new ResourceLocation(Dreamtinker.MODID, "eldritch_tick");
     private final String tool_attribute_uuid = "50c030b6-e8ef-4a99-9a6a-9c231b2365a8";
 
@@ -56,56 +51,57 @@ public class eldritch_pan extends BattleModifier {
             var3.add(DreamtinkerModifers.cursed_ring_bound.getId(), 20);
     }
 
+    public static MobEffect getBloodlust() {
+        if (!ModList.get().isLoaded("enigmaticlegacy"))
+            return null;
+        return ForgeRegistries.MOB_EFFECTS.getValue(BLOODLUST_ID);
+    }
+
+    public static MobEffect getHunger() {
+        if (!ModList.get().isLoaded("enigmaticlegacy"))
+            return null;
+        return ForgeRegistries.MOB_EFFECTS.getValue(HUNGER_ID);
+    }
+
     @Override
     public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         if (world.isClientSide)
             return;
+
         if (holder instanceof Player player)
             if (isSelected){
                 int currentTicks = tool.getPersistentData().getInt(TAG_PAN_TICKS);
 
                 if (SuperpositionHandler.cannotHunger(player)){
-                    int bloodlustAmplifier = currentTicks / GrowingBloodlustEffect.ticksPerLevel.getValue();
+                    int bloodlustAmplifier = currentTicks / GrowingBloodlustEffect
+                            .ticksPerLevel.getValue();
 
                     bloodlustAmplifier = Math.min(bloodlustAmplifier, 9);
 
-                    player.addEffect(new MobEffectInstance(EnigmaticEffects.GROWING_BLOODLUST,
-                                                           MobEffectInstance.INFINITE_DURATION, bloodlustAmplifier, true, true));
+                    if (null != getBloodlust())
+                        player.addEffect(new MobEffectInstance(getBloodlust(),
+                                                               MobEffectInstance.INFINITE_DURATION, bloodlustAmplifier, true, true));
                 }else {
-                    int hungerAmplifier = currentTicks / GrowingHungerEffect.ticksPerLevel.getValue();
+                    int hungerAmplifier = currentTicks / GrowingBloodlustEffect
+                            .ticksPerLevel.getValue();
 
                     hungerAmplifier = Math.min(hungerAmplifier, 9);
 
-                    player.addEffect(new MobEffectInstance(EnigmaticEffects.GROWING_HUNGER,
-                                                           MobEffectInstance.INFINITE_DURATION, hungerAmplifier, true, true));
+                    if (null != getBloodlust())
+                        player.addEffect(new MobEffectInstance(getBloodlust(),
+                                                               MobEffectInstance.INFINITE_DURATION, hungerAmplifier, true, true));
                 }
 
                 EldritchPan.HOLDING_DURATIONS.put(player, ++currentTicks);
                 tool.getPersistentData().putInt(TAG_PAN_TICKS, ++currentTicks);
             }else {
                 tool.getPersistentData().putInt(TAG_PAN_TICKS, 0);
-                player.removeEffect(EnigmaticEffects.GROWING_HUNGER);
-                player.removeEffect(EnigmaticEffects.GROWING_BLOODLUST);
+                if (null != getHunger())
+                    player.removeEffect(getHunger());
+                if (null != getBloodlust())
+                    player.removeEffect(getBloodlust());
             }
-    }
 
-    public void onLivingDeath(LivingDeathEvent event) {
-        if (event.getSource().getDirectEntity() instanceof ServerPlayer attacker){
-            ItemStack weapon = attacker.getMainHandItem();
-
-            if (0 < DTModiferCheck.getMainhandModifierlevel(attacker, this.getId())){
-                ResourceLocation killedType = ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType());
-
-                if (EldritchPan.addKillIfNotPresent(weapon, killedType)){
-                    attacker.sendSystemMessage(Component.translatable("message.enigmaticlegacy.eldritch_pan_buff")
-                                                        .withStyle(ChatFormatting.GOLD));
-                    ToolStack toolstack = ToolStack.from(weapon);
-                    ModDataNBT nbt = toolstack.getPersistentData();
-                    nbt.putInt(TAG_PAN, EldritchPan.getKillCount(weapon));
-                    toolstack.updateStack(weapon);
-                }
-            }
-        }
     }
 
     @Override
@@ -113,10 +109,12 @@ public class eldritch_pan extends BattleModifier {
         if (context.getAttacker() instanceof Player player && !player.level().isClientSide){
             if (SuperpositionHandler.isTheWorthyOne(player)){
                 float lifesteal = (float) (damageDealt * EldritchPan.lifeSteal.getValue());
-                if (player.hasEffect(EnigmaticEffects.GROWING_BLOODLUST)){
-                    int amplifier = 1 + player.getEffect(EnigmaticEffects.GROWING_BLOODLUST).getAmplifier();
-                    lifesteal += (float) (damageDealt * (GrowingBloodlustEffect.lifestealBoost.getValue() * amplifier));
+
+                if (null != getBloodlust() && player.hasEffect(getBloodlust())){
+                    int amplifier = 1 + player.getEffect(getBloodlust()).getAmplifier();
+                    lifesteal += (float) ((damageDealt) * (GrowingBloodlustEffect.lifestealBoost.getValue() * amplifier));
                 }
+
                 player.heal(lifesteal);
                 float hungersteal = (float) EldritchPan.hungerSteal.getValue();
                 boolean noHunger = SuperpositionHandler.cannotHunger(player);
