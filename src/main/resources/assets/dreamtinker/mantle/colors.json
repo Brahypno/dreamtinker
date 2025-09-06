@@ -32,7 +32,13 @@
     "wither_body": "#8513A0",
     "stone_heart": "#8513A0",
     "evil_attack": "#8513A0",
-    "ender_slayer": "#AA00AA"
+    "ender_slayer": "#AA00AA",
+    "eldritch_pan": "#AA00AA",
+    "soul_form": "#034150",
+    "open_soul": "#96E8E0",
+    "soul_blessing": "#201820",
+    "exiles_faulty": "#8CBA99",
+    "desolation_ring": "#AA00AA"
 },
   "material.dreamtinker": {
     "echo_shard": "#034150",
@@ -43,6 +49,7 @@
     "star_regulus": "#8C1F1F",
     "crying_obsidian": "#3B2754",
     "etherium": "#96E8E0",
-    "nefarious": "#8513A0"
+    "nefarious": "#8513A0",
+    "soul_etherium": "#7A59E2"
   }
 }

@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:modifier_salvage",
+  "level": {
+    "min": 3
+  },
+  "modifier": "dreamtinker:weapon_books",
+  "slots": {
+    "souls": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/melee/primary"
+  }
+}

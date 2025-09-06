@@ -2,7 +2,7 @@ package org.dreamtinker.dreamtinker.mixin;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobType;
-import org.dreamtinker.dreamtinker.register.DreamtinkerModifer;
+import org.dreamtinker.dreamtinker.register.DreamtinkerModifers;
 import org.dreamtinker.dreamtinker.utils.DTModiferCheck;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -17,7 +17,7 @@ public abstract class LivingEntityGetMobTypeMixin {
     private void dreamtinker$overrideMobType(CallbackInfoReturnable<MobType> cir) {
         LivingEntity self = (LivingEntity) (Object) this;
         MobType original = cir.getReturnValue();
-        if (DTModiferCheck.haveModifierIn(self, DreamtinkerModifer.wither_body.getId()))
+        if (DTModiferCheck.haveModifierIn(self, DreamtinkerModifers.Ids.wither_body))
             cir.setReturnValue(MobType.UNDEAD);
     }
 }

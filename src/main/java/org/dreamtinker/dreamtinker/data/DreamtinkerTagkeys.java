@@ -16,7 +16,8 @@ public class DreamtinkerTagkeys {
             return ModifierManager.getTag(new ResourceLocation(Dreamtinker.MODID, name));
         }
 
-        public static final TagKey<Modifier> CURSED_MODIFIERS = DreamtinkerTag("cursed_modifiers");
+        public static final TagKey<Modifier> EL_CURSED_MODIFIERS = DreamtinkerTag("cursed_modifiers");
+        public static final TagKey<Modifier> EL_CURSED_RELIEF = DreamtinkerTag("cursed_relief");
     }
 
     public static class Fluids {

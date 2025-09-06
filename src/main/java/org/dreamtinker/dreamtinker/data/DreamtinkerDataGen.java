@@ -44,6 +44,7 @@ public class DreamtinkerDataGen {
         generator.addProvider(event.includeClient(), new DreamtinkerMaterialStatProvider(output));
         generator.addProvider(event.includeClient(), new DreamtinkerMaterialModifierProvider(output));
         generator.addProvider(event.includeClient(), new DreamtinkerRecipeProvider(output));
+        generator.addProvider(event.includeClient(), new DreamtinkerModifierProvider(output));
 
 
     }

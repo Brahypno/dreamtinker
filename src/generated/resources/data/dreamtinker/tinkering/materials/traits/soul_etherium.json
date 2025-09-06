@@ -1,0 +1,66 @@
+{
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "dreamtinker:cursed_ring_bound"
+      },
+      {
+        "level": 1,
+        "name": "tconstruct:soulbound"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:soul_form"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:soul_blessing"
+      }
+    ],
+    "tconstruct:melee_harvest": [
+      {
+        "level": 1,
+        "name": "dreamtinker:cursed_ring_bound"
+      },
+      {
+        "level": 1,
+        "name": "tconstruct:soulbound"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:soul_form"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:open_soul"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:exiles_faulty"
+      }
+    ],
+    "tconstruct:ranged": [
+      {
+        "level": 1,
+        "name": "dreamtinker:cursed_ring_bound"
+      },
+      {
+        "level": 1,
+        "name": "tconstruct:soulbound"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:soul_form"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:open_soul"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:exiles_faulty"
+      }
+    ]
+  }
+}

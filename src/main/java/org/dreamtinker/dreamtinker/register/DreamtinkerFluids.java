@@ -52,7 +52,7 @@ public class DreamtinkerFluids {
                                       living.addEffect(
                                               new MobEffectInstance(MobEffects.DARKNESS, 100));
                                       living.addEffect(new MobEffectInstance(
-                                              DreamtinkerEffect.RealDarkness.get(), 100));
+                                              DreamtinkerEffects.RealDarkness.get(), 100));
                                   }
                               }
                           });
@@ -147,7 +147,7 @@ public class DreamtinkerFluids {
             registerFluid(EL_FLUIDS, "molten_evil", 1400, 400, 10, 6,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_PURPLE, 9), 10, 0) {});
     public static final FlowingFluidObject<ForgeFlowingFluid> molten_soul_aether =
-            registerFluid(EL_FLUIDS, "molten_soul_aether", 2000, 400, 10, 15,
+            registerFluid(EL_FLUIDS, "molten_soul_aether", 6000, 400, 10, 15,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.CRIMSON_STEM, 15), 10, 0) {});
     public static final FlowingFluidObject<ForgeFlowingFluid> unholy_water =
             registerFluid(EL_FLUIDS, "unholy_water", 15, 10, 1, 2,
@@ -157,7 +157,7 @@ public class DreamtinkerFluids {
                                   super.entityInside(state, level, pos, entity);
                                   if (entity instanceof LivingEntity living){
                                       living.addEffect(
-                                              new MobEffectInstance(DreamtinkerEffect.unholy.get(), 1000));
+                                              new MobEffectInstance(DreamtinkerEffects.unholy.get(), 1000));
                                   }
 
                               }

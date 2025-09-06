@@ -25,6 +25,7 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
 
         buildRenderInfo(DreamtinkerMaterialIds.etherium).color(0xFF96E8E0).fallbacks("metal", "crystal").luminosity(15);
         buildRenderInfo(DreamtinkerMaterialIds.nefarious).color(0xFF8513A0).fallbacks("metal", "crystal", "gem").luminosity(8);
+        buildRenderInfo(DreamtinkerMaterialIds.soul_etherium).color(0xFFC2A2C2).fallbacks("metal", "crystal", "gem").luminosity(15);
 
     }
 

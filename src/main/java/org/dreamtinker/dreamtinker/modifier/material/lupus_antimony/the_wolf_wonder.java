@@ -1,6 +1,5 @@
 package org.dreamtinker.dreamtinker.modifier.material.lupus_antimony;
 
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -48,7 +47,8 @@ public class the_wolf_wonder extends BattleModifier {
 
     private static void applyRandomEffects(LivingEntity target, LivingEntity attacker) {
         RandomSource rand = target.getRandom();
-        List<MobEffect> negatives = ForgeRegistries.MOB_EFFECTS.getValues().stream().filter(e -> e.getCategory() == MobEffectCategory.HARMFUL).collect(Collectors.toList());
+        List<MobEffect> negatives =
+                ForgeRegistries.MOB_EFFECTS.getValues().stream().filter(e -> e.getCategory() == MobEffectCategory.HARMFUL).collect(Collectors.toList());
         if (negatives.isEmpty())
             return;
 
@@ -75,14 +75,6 @@ public class the_wolf_wonder extends BattleModifier {
             for (MobEffectInstance inst : instances) {
                 attacker.addEffect(new MobEffectInstance(inst.getEffect(), inst.getDuration(), inst.getAmplifier(), inst.isAmbient(), inst.isVisible()));
             }
-        }
-    }
-
-    private static void debugEffects(List<MobEffect> effects) {
-        for (MobEffect effect : effects) {
-            ResourceLocation id = ForgeRegistries.MOB_EFFECTS.getKey(effect);
-            String key = effect.getDescriptionId();
-            System.out.println("Random effect → {" + id + "} ({" + key + "})");
         }
     }
 }

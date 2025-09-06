@@ -158,6 +158,26 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.DoubleValue StoneheartProjreduce =
             builder.comment("Amount percentage reduced of stone heart").defineInRange("StoneheartProjreduce", 0.2, 0, 100);
 
+    public static final ForgeConfigSpec.DoubleValue Lifelootingbonus =
+            builder.comment("Bonus for life looting").defineInRange("Lifelootingbonus", 0.5, 0, 100);
+
+    public static final ForgeConfigSpec.DoubleValue OpenSoulDeathCount =
+            builder.comment("Count for Open Soul to reject death").defineInRange("OpenSoulDeathCount", 1000.0, 0, 100000);
+    public static final ForgeConfigSpec.DoubleValue OpenSoulRepairCount =
+            builder.comment("Count for Open soul to repair tool").defineInRange("OpenSoulRepairCount", 1.0, 0, 100);
+    public static final ForgeConfigSpec.DoubleValue OpenSoulRangedGet =
+            builder.comment("Count gain from ranged hit").defineInRange("OpenSoulRangedGet", 0.1, 0, 1);
+
+    public static final ForgeConfigSpec.IntValue SoulBoundRange =
+            builder.comment("At what range to find the scapegoat").defineInRange("SoulBoundRange", 5, 1, 16);
+    public static final ForgeConfigSpec.IntValue SoulBoundCoolDown =
+            builder.comment("how many Seconds need to wait before next time").defineInRange("SoulBoundCoolDown", 120, 0, 6400);
+
+    public static final ForgeConfigSpec.DoubleValue ExilesFaultyCurseHPPercentage =
+            builder.comment("Percentage of Max HP taken by the curse").defineInRange("ExilesFaultyCurseHPPercentage", 0.01, 0, 100);
+    public static final ForgeConfigSpec.DoubleValue ExilesFaultyAbsorbHPPercentage =
+            builder.comment("Percentage of Damage turn into absorption").defineInRange("ExilesFaultyAbsorbHPPercentage", 0.1, 0, 100);
+
     public static final ForgeConfigSpec specs = builder.pop().build();
 }
 

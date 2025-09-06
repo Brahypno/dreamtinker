@@ -25,7 +25,7 @@ import org.dreamtinker.dreamtinker.data.DreamtinkerMaterialIds;
 import org.dreamtinker.dreamtinker.data.DreamtinkerTagkeys;
 import org.dreamtinker.dreamtinker.register.DreamtinkerFluids;
 import org.dreamtinker.dreamtinker.register.DreamtinkerItems;
-import org.dreamtinker.dreamtinker.register.DreamtinkerModifer;
+import org.dreamtinker.dreamtinker.register.DreamtinkerModifers;
 import slimeknights.mantle.recipe.data.IRecipeHelper;
 import slimeknights.mantle.recipe.helper.FluidOutput;
 import slimeknights.mantle.recipe.helper.ItemOutput;
@@ -152,6 +152,16 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         ItemCastingRecipeBuilder.basinRecipe(EnigmaticBlocks.ETHERIUM_BLOCK)
                                 .setFluidAndTime(DreamtinkerFluids.unstable_liquid_aether, FluidValues.METAL_BLOCK)
                                 .save(consumer, location(folder + "etherium/block"));
+        ItemCastingRecipeBuilder.tableRecipe(EnigmaticItems.VOID_PEARL)
+                                .setCoolingTime(2000, 10)
+                                .setCast(DreamtinkerItems.void_pearl.get(), true)
+                                .setFluid(FluidIngredient.of(new FluidStack(DreamtinkerFluids.molten_ascending_antimony.get(), FluidValues.METAL_BLOCK)))
+                                .save(consumer, location("void_pearl/ascending"));
+        ItemCastingRecipeBuilder.tableRecipe(EnigmaticItems.OCEAN_STONE)
+                                .setCoolingTime(2000, 10)
+                                .setCast(Items.HEART_OF_THE_SEA, true)
+                                .setFluid(FluidIngredient.of(new FluidStack(DreamtinkerFluids.molten_ascending_antimony.get(), FluidValues.METAL_BLOCK)))
+                                .save(consumer, location("ocean_stone/ascending"));
     }
 
     private void addMeltingRecipes(Consumer<FinishedRecipe> consumer) {
@@ -251,20 +261,12 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                 .save(consumer, location(
                                         "smeltery/casting/" +
                                         Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(DreamtinkerItems.void_pearl.get())).getPath() + "/slime"));
-        ItemCastingRecipeBuilder.tableRecipe(EnigmaticItems.VOID_PEARL)
-                                .setCoolingTime(2000, 10)
-                                .setCast(DreamtinkerItems.void_pearl.get(), true)
-                                .setFluid(FluidIngredient.of(new FluidStack(DreamtinkerFluids.molten_ascending_antimony.get(), FluidValues.METAL_BLOCK)))
-                                .save(consumer, location(
-                                        "smeltery/casting/" +
-                                        Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(EnigmaticItems.VOID_PEARL)).getPath() + "/ascending"));
-        ItemCastingRecipeBuilder.tableRecipe(EnigmaticItems.OCEAN_STONE)
-                                .setCoolingTime(2000, 10)
-                                .setCast(Items.HEART_OF_THE_SEA, true)
-                                .setFluid(FluidIngredient.of(new FluidStack(DreamtinkerFluids.molten_ascending_antimony.get(), FluidValues.METAL_BLOCK)))
-                                .save(consumer, location(
-                                        "smeltery/casting/" +
-                                        Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(EnigmaticItems.OCEAN_STONE)).getPath() + "/ascending"));
+
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerItems.soul_etherium.get()),
+                                     DreamtinkerFluids.molten_soul_aether, FluidValues.INGOT, 2.0f)
+                            .save(consumer, location(folder + "soul_etherium/foundry"));
+        cast(DreamtinkerFluids.molten_soul_aether.get(), DreamtinkerItems.soul_etherium.get(), FluidValues.INGOT, consumer);
+
     }
 
     private void addMaterialRecipes(Consumer<FinishedRecipe> consumer) {
@@ -300,6 +302,11 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         materialRecipe(consumer, DreamtinkerMaterialIds.nefarious, Ingredient.of(EnigmaticItems.EVIL_INGOT), 1, 1,
                        folder + "nefarious");
         materialComposite(consumer, MaterialIds.string, DreamtinkerMaterialIds.nefarious, DreamtinkerFluids.molten_evil,
+                          FluidValues.INGOT, folder);
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.soul_etherium, DreamtinkerFluids.molten_soul_aether, FluidValues.INGOT, folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.soul_etherium, Ingredient.of(DreamtinkerItems.soul_etherium.get()), 1, 1,
+                       folder + "soul_etherium");
+        materialComposite(consumer, MaterialIds.string, DreamtinkerMaterialIds.soul_etherium, DreamtinkerFluids.molten_soul_aether,
                           FluidValues.INGOT, folder);
     }
 
@@ -353,49 +360,94 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         String defenseFolder = "tools/modifiers/defense/";
         String compatFolder = "tools/modifiers/compat/";
         String worktableFolder = "tools/modifiers/worktable/";
+        String soulFolder = "tools/modifiers/soul/";
         // salvage
         String salvageFolder = "tools/modifiers/salvage/";
         String upgradeSalvage = salvageFolder + "upgrade/";
         String abilitySalvage = salvageFolder + "ability/";
         String defenseSalvage = salvageFolder + "defense/";
         String compatSalvage = salvageFolder + "compat/";
-        ModifierRecipeBuilder.modifier(DreamtinkerModifer.realsweep)
+        String soulSalvage = salvageFolder + "soul/";
+        ModifierRecipeBuilder.modifier(DreamtinkerModifers.realsweep)
                              .setTools(Ingredient.of(DreamtinkerItems.masu.get()))
                              .addInput(Items.ECHO_SHARD)
                              .addInput(Items.ECHO_SHARD)
                              .setMaxLevel(2)
                              .setSlots(SlotType.ABILITY, 1)
-                             .saveSalvage(consumer, prefix(DreamtinkerModifer.realsweep, abilitySalvage))
-                             .save(consumer, prefix(DreamtinkerModifer.realsweep, abilityFolder));
-        ModifierRecipeBuilder.modifier(DreamtinkerModifer.strong_explode)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifers.realsweep, abilitySalvage))
+                             .save(consumer, prefix(DreamtinkerModifers.realsweep, abilityFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifers.strong_explode)
                              .setTools(Ingredient.of(DreamtinkerItems.masu.get()))
                              .addInput(TinkerGadgets.efln)
                              .addInput(Tags.Items.GUNPOWDER)
                              .setMaxLevel(3)
                              .setSlots(SlotType.UPGRADE, 1)
-                             .saveSalvage(consumer, prefix(DreamtinkerModifer.strong_explode, upgradeSalvage))
-                             .save(consumer, prefix(DreamtinkerModifer.strong_explode, upgradeFolder));
-        ModifierRecipeBuilder.modifier(DreamtinkerModifer.mei)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifers.strong_explode, upgradeSalvage))
+                             .save(consumer, prefix(DreamtinkerModifers.strong_explode, upgradeFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifers.mei)
                              .setTools(TinkerTags.Items.MELEE)
                              .addInput(Items.POPPY).addInput(Items.POPPY)
                              .addInput(Items.CHAIN).addInput(Items.CHAIN)
-                             .save(consumer, prefix(DreamtinkerModifer.mei, slotlessFolder));
-        ModifierRecipeBuilder.modifier(DreamtinkerModifer.ender_slayer)
+                             .save(consumer, prefix(DreamtinkerModifers.mei, slotlessFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifers.ender_slayer)
                              .setTools(TinkerTags.Items.MELEE)
                              .addInput(Tags.Items.OBSIDIAN, 2)
                              .addInput(Items.GHAST_TEAR, 2)
                              .addInput(Items.ENDER_EYE, 2)
                              .setMaxLevel(1)
                              .setSlots(SlotType.ABILITY, 1)
-                             .saveSalvage(consumer, prefix(DreamtinkerModifer.ender_slayer, abilitySalvage))
-                             .save(consumer, prefix(DreamtinkerModifer.ender_slayer, abilityFolder));
+                             .saveSalvage(consumer, prefix(DreamtinkerModifers.ender_slayer, abilitySalvage))
+                             .save(consumer, prefix(DreamtinkerModifers.ender_slayer, abilityFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifers.life_looting)
+                             .setTools(TinkerTags.Items.MODIFIABLE)
+                             .addInput(EnigmaticItems.LORE_INSCRIBER, 1)
+                             .setMaxLevel(1)
+                             .setSlots(SlotType.ABILITY, 1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifers.life_looting, abilitySalvage))
+                             .save(consumer, prefix(DreamtinkerModifers.life_looting, abilityFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifers.weapon_books)
+                             .setTools(TinkerTags.Items.MELEE_PRIMARY)
+                             .addInput(EnigmaticItems.THE_ACKNOWLEDGMENT, 1)
+                             .setMaxLevel(1)
+                             .setSlots(SlotType.ABILITY, 1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifers.weapon_books, abilitySalvage))
+                             .save(consumer, prefix(DreamtinkerModifers.weapon_books, abilityFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifers.weapon_books)
+                             .setTools(TinkerTags.Items.MELEE_PRIMARY)
+                             .addInput(EnigmaticItems.THE_TWIST, 1)
+                             .setLevelRange(2, 2)
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifers.weapon_books, upgradeSalvage))
+                             .save(consumer, prefix(DreamtinkerModifers.weapon_books, upgradeFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifers.weapon_books)
+                             .setTools(TinkerTags.Items.MELEE_PRIMARY)
+                             .addInput(EnigmaticItems.THE_INFINITUM, 1)
+                             .setLevelRange(3, 3)
+                             .setSlots(SlotType.SOUL, 1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifers.weapon_books, soulSalvage))
+                             .save(consumer, prefix(DreamtinkerModifers.weapon_books, soulFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifers.eldritch_pan)
+                             .setTools(TinkerTags.Items.MELEE_PRIMARY)
+                             .addInput(EnigmaticItems.ELDRITCH_PAN, 1)
+                             .setMaxLevel(1)
+                             .setSlots(SlotType.ABILITY, 1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifers.eldritch_pan, abilitySalvage))
+                             .save(consumer, prefix(DreamtinkerModifers.eldritch_pan, abilityFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifers.desolation_ring)
+                             .setTools(TinkerTags.Items.MODIFIABLE)
+                             .addInput(EnigmaticItems.EVIL_ESSENCE, 2)
+                             .addInput(Items.HEART_OF_THE_SEA, 2)
+                             .addInput(Tags.Items.INGOTS_NETHERITE, 2)
+                             .setMaxLevel(1)
+                             .setSlots(SlotType.ABILITY, 1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifers.desolation_ring, abilitySalvage))
+                             .save(consumer, prefix(DreamtinkerModifers.desolation_ring, abilityFolder));
     }
 
     private void addEntityMeltingRecipes(Consumer<FinishedRecipe> consumer) {
         String folder = "smeltery/entity_melting/";
         String headFolder = "smeltery/entity_melting/heads/";
 
-        // meat soup just comes from edible creatures
         EntityMeltingRecipeBuilder.melting(EntityIngredient.of(EntityType.WARDEN), DreamtinkerFluids.molten_echo_shard.result(FluidValues.GEM_SHARD), 5)
                                   .save(consumer, location(folder + "molten_echo_shard"));
     }

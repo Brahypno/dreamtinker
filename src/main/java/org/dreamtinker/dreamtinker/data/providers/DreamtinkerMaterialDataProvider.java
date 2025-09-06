@@ -28,6 +28,7 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
 
         addMaterial(DreamtinkerMaterialIds.etherium, 4, 40, false, false, modLoaded("enigmaticlegacy"));
         addMaterial(DreamtinkerMaterialIds.nefarious, 4, 40, false, false, modLoaded("enigmaticlegacy"));
+        addMaterial(DreamtinkerMaterialIds.soul_etherium, 5, 50, false, false, modLoaded("enigmaticlegacy"));
     }
 
     @Override

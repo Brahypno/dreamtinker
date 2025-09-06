@@ -10,7 +10,7 @@ import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
 import net.minecraftforge.common.crafting.conditions.OrCondition;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.register.DreamtinkerEffect;
+import org.dreamtinker.dreamtinker.register.DreamtinkerEffects;
 import org.dreamtinker.dreamtinker.register.DreamtinkerFluids;
 import slimeknights.tconstruct.common.TinkerDamageTypes;
 import slimeknights.tconstruct.common.json.ConfigEnabledCondition;
@@ -35,10 +35,10 @@ public class DreamtinkerFluidEffectProvider extends AbstractFluidEffectProvider 
     protected void addFluids() {
         addFluid(DreamtinkerFluids.molten_echo_shard, 50)
                 .addDamage(2.5f, new DamageFluidEffect.DamageTypePair(TinkerDamageTypes.BLEEDING, TinkerDamageTypes.BLEEDING))
-                .addEntityEffects(FluidMobEffect.builder().effect(DreamtinkerEffect.RealDarkness.get(), 100, 1).buildEntity(TimeAction.ADD))
+                .addEntityEffects(FluidMobEffect.builder().effect(DreamtinkerEffects.RealDarkness.get(), 100, 1).buildEntity(TimeAction.ADD))
                 .addEntityEffects(FluidMobEffect.builder().effect(MobEffects.DARKNESS, 100, 1).buildEntity(TimeAction.ADD))
                 .addBlockEffect(
-                        new MobEffectCloudFluidEffect(FluidMobEffect.builder().effect(DreamtinkerEffect.RealDarkness.get(), 100, 1).buildCloud().effects()))
+                        new MobEffectCloudFluidEffect(FluidMobEffect.builder().effect(DreamtinkerEffects.RealDarkness.get(), 100, 1).buildCloud().effects()))
                 .addBlockEffect(
                         new MobEffectCloudFluidEffect(FluidMobEffect.builder().effect(MobEffects.DARKNESS, 100, 1).buildCloud().effects()));
 
@@ -82,9 +82,9 @@ public class DreamtinkerFluidEffectProvider extends AbstractFluidEffectProvider 
                 .addDamage(4.0f, new DamageFluidEffect.DamageTypePair(DamageTypes.FELL_OUT_OF_WORLD, DamageTypes.FELL_OUT_OF_WORLD));
         addFluid(DreamtinkerFluids.unholy_water, FluidValues.SIP)
                 .addCondition(modLoaded("enigmaticlegacy"))
-                .addEntityEffects(FluidMobEffect.builder().effect(DreamtinkerEffect.unholy.get(), 100, 2).buildEntity(TimeAction.ADD))
+                .addEntityEffects(FluidMobEffect.builder().effect(DreamtinkerEffects.unholy.get(), 100, 2).buildEntity(TimeAction.ADD))
                 .addBlockEffect(
-                        new MobEffectCloudFluidEffect(FluidMobEffect.builder().effect(DreamtinkerEffect.unholy.get(), 100, 2).buildCloud().effects()));
+                        new MobEffectCloudFluidEffect(FluidMobEffect.builder().effect(DreamtinkerEffects.unholy.get(), 100, 2).buildCloud().effects()));
         addGem(DreamtinkerFluids.molten_nefariousness)
                 .addCondition(modLoaded("enigmaticlegacy"))
                 .magicDamage(2)

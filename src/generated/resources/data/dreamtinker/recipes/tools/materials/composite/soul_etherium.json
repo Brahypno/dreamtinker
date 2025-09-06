@@ -1,0 +1,10 @@
+{
+  "type": "tconstruct:material_fluid",
+  "fluid": {
+    "amount": 90,
+    "tag": "dreamtinker:molten_soul_aether"
+  },
+  "input": "tconstruct:string",
+  "output": "dreamtinker:soul_etherium",
+  "temperature": 5700
+}

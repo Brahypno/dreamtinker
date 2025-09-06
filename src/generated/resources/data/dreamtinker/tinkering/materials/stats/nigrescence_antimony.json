@@ -4,9 +4,9 @@
     "tconstruct:bowstring": {},
     "tconstruct:handle": {
       "durability": -0.5,
-      "melee_damage": -0.5,
-      "melee_speed": -0.5,
-      "mining_speed": -0.5
+      "melee_damage": 0.0,
+      "melee_speed": 0.0,
+      "mining_speed": 0.0
     },
     "tconstruct:head": {
       "durability": 3355,

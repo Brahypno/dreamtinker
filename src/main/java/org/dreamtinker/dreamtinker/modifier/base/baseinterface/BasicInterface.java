@@ -16,6 +16,7 @@ import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.behavior.ToolDamageModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.build.ModifierRemovalHook;
+import slimeknights.tconstruct.library.modifiers.hook.build.ModifierTraitHook;
 import slimeknights.tconstruct.library.modifiers.hook.build.ToolStatsModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.build.ValidateModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
@@ -27,17 +28,18 @@ import slimeknights.tconstruct.library.tools.stat.ModifierStatsBuilder;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-public interface BasicInterface extends ToolDamageModifierHook, ModifierRemovalHook, TooltipModifierHook, ToolStatsModifierHook, AttributesModifierHook, ValidateModifierHook {
+public interface BasicInterface extends ToolDamageModifierHook, ModifierRemovalHook, TooltipModifierHook, ToolStatsModifierHook, AttributesModifierHook, ValidateModifierHook, ModifierTraitHook {
     default void BasicInterfaceInit(ModuleHookMap.Builder hookBuilder) {
-        hookBuilder.addHook(this, ModifierHooks.REMOVE, ModifierHooks.TOOLTIP,ModifierHooks.TOOL_DAMAGE,ModifierHooks.TOOL_STATS,ModifierHooks.ATTRIBUTES,ModifierHooks.VALIDATE);
+        hookBuilder.addHook(this, ModifierHooks.REMOVE, ModifierHooks.TOOLTIP, ModifierHooks.TOOL_DAMAGE, ModifierHooks.TOOL_STATS, ModifierHooks.ATTRIBUTES,
+                            ModifierHooks.VALIDATE, ModifierHooks.MODIFIER_TRAITS);
     }
 
     default int onDamageTool(IToolStackView tool, ModifierEntry modifier, int amount, @javax.annotation.Nullable LivingEntity holder) {
-        return this.modifierDamageTool(tool,modifier,amount,holder);
+        return this.modifierDamageTool(tool, modifier, amount, holder);
     }
 
     default Component onRemoved(@NotNull IToolStackView tool, @NotNull Modifier modifier) {
-        return this.onModifierRemoved(tool,modifier);
+        return this.onModifierRemoved(tool, modifier);
     }
 
     default int modifierDamageTool(IToolStackView tool, ModifierEntry modifier, int amount, @Nullable LivingEntity holder) {
@@ -51,8 +53,12 @@ public interface BasicInterface extends ToolDamageModifierHook, ModifierRemovalH
     default void addTooltip(IToolStackView tool, @NotNull ModifierEntry modifier, @javax.annotation.Nullable Player player, List<Component> tooltip, TooltipKey tooltipKey, TooltipFlag tooltipFlag) {}
 
     default void addToolStats(IToolContext context, ModifierEntry modifier, ModifierStatsBuilder builder) {}
-    default void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer){}
+
+    default void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {}
+
     default Component validate(IToolStackView tool, ModifierEntry modifier) {
         return null;
     }
+
+    default void addTraits(IToolContext var1, ModifierEntry var2, TraitBuilder var3, boolean var4) {}
 }

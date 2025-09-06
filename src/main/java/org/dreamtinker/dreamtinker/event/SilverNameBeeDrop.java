@@ -27,7 +27,7 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.register.DreamtinkerEffect;
+import org.dreamtinker.dreamtinker.register.DreamtinkerEffects;
 import org.dreamtinker.dreamtinker.utils.LootEntryInspector;
 
 import java.util.ArrayList;
@@ -58,10 +58,18 @@ public class SilverNameBeeDrop {
 
 
         // 如果攻击者是生物，则可以检查药水效果
-        if (!(attacker instanceof LivingEntity livingAttacker && livingAttacker.hasEffect(DreamtinkerEffect.SilverNameBee.get())))
+        if (!(attacker instanceof LivingEntity livingAttacker && livingAttacker.hasEffect(DreamtinkerEffects.SilverNameBee.get())))
             return;
 
-        LootParams.Builder builder = new LootParams.Builder(serverLevel).withParameter(LootContextParams.THIS_ENTITY, entity).withParameter(LootContextParams.ORIGIN, entity.position()).withParameter(LootContextParams.DAMAGE_SOURCE, event.getSource()).withOptionalParameter(LootContextParams.KILLER_ENTITY, attacker).withOptionalParameter(LootContextParams.DIRECT_KILLER_ENTITY, event.getSource().getDirectEntity()).withOptionalParameter(LootContextParams.LAST_DAMAGE_PLAYER, attacker instanceof ServerPlayer ? (ServerPlayer) attacker : null);
+        LootParams.Builder builder = new LootParams.Builder(serverLevel).withParameter(LootContextParams.THIS_ENTITY, entity)
+                                                                        .withParameter(LootContextParams.ORIGIN, entity.position())
+                                                                        .withParameter(LootContextParams.DAMAGE_SOURCE, event.getSource())
+                                                                        .withOptionalParameter(LootContextParams.KILLER_ENTITY, attacker)
+                                                                        .withOptionalParameter(LootContextParams.DIRECT_KILLER_ENTITY,
+                                                                                               event.getSource().getDirectEntity())
+                                                                        .withOptionalParameter(LootContextParams.LAST_DAMAGE_PLAYER,
+                                                                                               attacker instanceof ServerPlayer ? (ServerPlayer) attacker :
+                                                                                               null);
 
         ItemStack originalTool = livingAttacker.getMainHandItem();
         ItemStack lootingTool = originalTool.copy();

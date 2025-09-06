@@ -123,5 +123,17 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFFC77FCA)
                                                 .addARGB(255, 0xFFC77FCA)
                                                 .build());
+        this.buildMaterial(DreamtinkerMaterialIds.soul_etherium)
+            .ranged().meleeHarvest().armor().statType(StatlessMaterialStats.BOWSTRING)
+            .fallbacks("gem", "metal")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(0, 0xFF062E31)  // 深青
+                                                .addARGB(63, 0xFF0C6D79)  // 深青→中青
+                                                .addARGB(102, 0xFF1098AA)  // 中青
+                                                .addARGB(140, 0xFF15BFCF)  // 亮青
+                                                .addARGB(178, 0xFF8656DF)  // 高饱和紫
+                                                .addARGB(216, 0xFFF84CB7)  // 亮粉
+                                                .addARGB(255, 0xFFFFD5EC)  // 粉白高光
+                                                .build());
     }
 }

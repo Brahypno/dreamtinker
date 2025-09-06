@@ -2,6 +2,7 @@ package org.dreamtinker.dreamtinker.modifier.Compact.enigmaticLegacy;
 
 import com.aizistral.enigmaticlegacy.handlers.SuperpositionHandler;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,10 +18,17 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 public class cursed_ring_bound extends ArmorModifier {
     private static final ResourceLocation TAG_DEEP_CURSE = new ResourceLocation(Dreamtinker.MODID, "deeper_curse");
 
+    private boolean check(IToolStackView tool, ServerPlayer player) {
+        boolean worthy_check = 20 <= tool.getModifierLevel(this.getId());
+        boolean pass = player.getAbilities().instabuild ||
+                       (SuperpositionHandler.isTheCursedOne(player) &&
+                        (!worthy_check || SuperpositionHandler.isTheWorthyOne(player)));
+        return pass;
+    }
+
     @Override
     public InteractionResult onToolUse(IToolStackView tool, ModifierEntry modifier, Player player, InteractionHand hand, InteractionSource source) {
-        boolean worthy_check = 0 < tool.getPersistentData().getInt(TAG_DEEP_CURSE);
-        if (!player.level().isClientSide && SuperpositionHandler.isTheCursedOne(player) && (!worthy_check || SuperpositionHandler.isTheWorthyOne(player)))
+        if (!player.level().isClientSide && player instanceof ServerPlayer sp && this.check(tool, sp))
             return InteractionResult.PASS;
         return InteractionResult.FAIL;
     }
@@ -28,9 +36,11 @@ public class cursed_ring_bound extends ArmorModifier {
     @Override
     public void onEquip(IToolStackView tool, ModifierEntry modifier, EquipmentChangeContext context) {
         LivingEntity entity = context.getEntity();
-        boolean worthy_check = 0 < tool.getPersistentData().getInt(TAG_DEEP_CURSE);
-        if (!(entity instanceof Player player && SuperpositionHandler.isTheCursedOne(player) &&
-              (!worthy_check || SuperpositionHandler.isTheWorthyOne(player)))){
+        if (entity.level().isClientSide)
+            return;
+
+        boolean pass = entity instanceof ServerPlayer player && this.check(tool, player);
+        if (!pass){
             if (entity instanceof Player p){
                 if (!p.getInventory().add(context.getReplacement().copy())){
                     p.drop(context.getReplacement().copy(), true); // 背包满则掉落

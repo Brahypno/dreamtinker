@@ -1,0 +1,17 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "enigmaticlegacy:the_twist"
+    }
+  ],
+  "level": 2,
+  "result": "dreamtinker:weapon_books",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/melee/primary"
+  }
+}

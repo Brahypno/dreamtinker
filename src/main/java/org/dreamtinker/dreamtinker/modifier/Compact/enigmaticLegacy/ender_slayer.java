@@ -9,19 +9,22 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
 import org.dreamtinker.dreamtinker.modifier.base.baseclass.BattleModifier;
+import org.dreamtinker.dreamtinker.register.DreamtinkerModifers;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
+import slimeknights.tconstruct.library.tools.nbt.IToolContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 public class ender_slayer extends BattleModifier {
 
     @Override
     public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
+        float knockbackPower = 1F;
         if (context.getAttacker() instanceof Player player && SuperpositionHandler.isTheCursedOne(player))
             if (EnigmaticItems.ENDER_SLAYER.isEndDweller(context.getLivingTarget())){
-                knockback += EnderSlayer.endKnockbackBonus.getValue().asModifier(false);
+                knockbackPower += EnderSlayer.endKnockbackBonus.getValue().asModifier(false);
             }
-        return knockback;
+        return knockback * knockbackPower;
     }
 
     @Override
@@ -39,5 +42,11 @@ public class ender_slayer extends BattleModifier {
             }
         }
         return damage;
+    }
+
+    @Override
+    public void addTraits(IToolContext var1, ModifierEntry var2, TraitBuilder var3, boolean var4) {
+        if (var4 && 0 == var1.getModifierLevel(DreamtinkerModifers.cursed_ring_bound.getId()))
+            var3.add(DreamtinkerModifers.cursed_ring_bound.getId(), 1);
     }
 }

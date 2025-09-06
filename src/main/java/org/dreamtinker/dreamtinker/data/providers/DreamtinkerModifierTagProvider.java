@@ -9,7 +9,7 @@ import slimeknights.tconstruct.library.data.tinkering.AbstractModifierTagProvide
 import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.data.ModifierIds;
 
-import static org.dreamtinker.dreamtinker.register.DreamtinkerModifer.*;
+import static org.dreamtinker.dreamtinker.register.DreamtinkerModifers.*;
 
 public class DreamtinkerModifierTagProvider extends AbstractModifierTagProvider {
     public DreamtinkerModifierTagProvider(PackOutput packOutput, ExistingFileHelper existingFileHelper) {
@@ -18,23 +18,25 @@ public class DreamtinkerModifierTagProvider extends AbstractModifierTagProvider 
 
     @Override
     protected void addTags() {
-        this.tag(DreamtinkerTagkeys.Modifiers.CURSED_MODIFIERS)
+        this.tag(DreamtinkerTagkeys.Modifiers.EL_CURSED_MODIFIERS)
             .add(ModifierIds.blindshot, ModifierIds.vintage, ModifierIds.flamestance, ModifierIds.entangled,
                  ModifierIds.crystalbound, ModifierIds.crystalstrike, ModifierIds.dense, ModifierIds.sharpweight,
-                 ModifierIds.heavy, /*ModifierIds.solid,*/
+                 ModifierIds.heavy, /*Ids.solid,*/
                  TinkerModifiers.jagged.getId(), TinkerModifiers.stonebound.getId(), TinkerModifiers.decay.getId(),
                  TinkerModifiers.selfDestructive.getId())
             .add(strong_heavy.getId(), echoed_attack.getId(), echoed_defence.getId(), glacial_river.getId(),
                  broken_vessel.getId(), ewige_widerkunft.getId(), ouroboric_hourglass.getId(), burning_in_vain.getId(),
                  the_wolf_wonder.getId(), the_wolf_was.getId(), as_one.getId(), in_rain.getId(), isolde.getId(),
-                 mei.getId(), ender_dodge.getId(), explosive_hit.getId(), ranged_shoot.getId(), cursed_ring_bound.getId(), wither_body.getId(),
+                 mei.getId(), ender_dodge.getId(), explosive_hit.getId(), ranged_shoot.getId(), cursed_ring_bound.getId(), Ids.wither_body,
                  stone_heart.getId(), evil_attack.getId());
+        this.tag(DreamtinkerTagkeys.Modifiers.EL_CURSED_RELIEF)
+            .add(weapon_books.getId(), eldritch_pan.getId(), exiles_faulty.getId());
         this.tag(TinkerTags.Modifiers.MELEE_UPGRADES)
             .add(strong_explode.getId());
         this.tag(TinkerTags.Modifiers.GENERAL_SLOTLESS)
             .add(mei.getId());
         this.tag(TinkerTags.Modifiers.MELEE_ABILITIES)
-            .add(realsweep.getId(), ender_slayer.getId());
+            .add(realsweep.getId(), ender_slayer.getId(), weapon_books.getId());
         //.addOptional();
     }
 

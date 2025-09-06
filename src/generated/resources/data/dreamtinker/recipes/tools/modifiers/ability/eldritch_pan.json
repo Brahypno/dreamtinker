@@ -1,0 +1,17 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "enigmaticlegacy:eldritch_pan"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:eldritch_pan",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/melee/primary"
+  }
+}

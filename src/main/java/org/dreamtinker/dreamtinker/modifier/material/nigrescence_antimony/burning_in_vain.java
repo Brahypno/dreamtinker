@@ -66,7 +66,7 @@ public class burning_in_vain extends BattleModifier {
     public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         if (world.isClientSide)
             return;
-        if (!isCorrectSlot || !isSelected)
+        if (!isCorrectSlot && !isSelected)
             return;
         holder.setSecondsOnFire(20);
     }

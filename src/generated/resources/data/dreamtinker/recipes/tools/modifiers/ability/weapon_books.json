@@ -1,0 +1,17 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "enigmaticlegacy:the_acknowledgment"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:weapon_books",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/melee/primary"
+  }
+}

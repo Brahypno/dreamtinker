@@ -1,0 +1,26 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "amount_needed": 2,
+      "item": "enigmaticlegacy:evil_essence"
+    },
+    {
+      "amount_needed": 2,
+      "item": "minecraft:heart_of_the_sea"
+    },
+    {
+      "amount_needed": 2,
+      "tag": "forge:ingots/netherite"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:desolation_ring",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

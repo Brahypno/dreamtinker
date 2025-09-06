@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
-import static org.dreamtinker.dreamtinker.register.DreamtinkerModifer.as_one;
+import static org.dreamtinker.dreamtinker.register.DreamtinkerModifers.as_one;
 import static org.dreamtinker.dreamtinker.utils.DTModiferCheck.haveModifierIn;
 
 public class strong_heavy extends BattleModifier {

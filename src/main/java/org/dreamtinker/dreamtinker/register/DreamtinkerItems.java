@@ -1,7 +1,12 @@
 package org.dreamtinker.dreamtinker.register;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -16,11 +21,14 @@ import slimeknights.tconstruct.library.tools.item.ModifiableItem;
 import slimeknights.tconstruct.library.tools.part.ToolPartItem;
 import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
 
+import java.util.List;
+
 import static org.dreamtinker.dreamtinker.Dreamtinker.MODID;
 
 
 public class DreamtinkerItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
+    public static final DeferredRegister<Item> EL_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
 
     private static final Item.Properties TOOL = (new Item.Properties()).stacksTo(1);
     private static final Item.Properties PART = (new Item.Properties()).stacksTo(64);
@@ -39,6 +47,17 @@ public class DreamtinkerItems {
     public static final RegistryObject<Item> metallivorous_stibium_lupus = ITEMS.register("metallivorous_stibium_lupus", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> regulus = ITEMS.register("star_regulus", () -> new star_regulus(new Item.Properties()));
     public static final RegistryObject<Item> void_pearl = ITEMS.register("void_pearl", () -> new void_perl((new Item.Properties()).stacksTo(16)));
+    public static final RegistryObject<Item> soul_etherium = EL_ITEMS.register(
+            "soul_etherium",
+            () -> new Item(new Item.Properties()) {
+                public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.enigmaticlegacy.worthyOnesOnly1"));
+                    tooltip.add(Component.translatable("tooltip.enigmaticlegacy.worthyOnesOnly2"));
+                    tooltip.add(Component.translatable("tooltip.enigmaticlegacy.worthyOnesOnly3"));
+                    super.appendHoverText(stack, level, tooltip, flag);
+                }
+            }
+    );
 
     public static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         output.accept(raw_stibnite.get());
@@ -47,7 +66,8 @@ public class DreamtinkerItems {
         output.accept(metallivorous_stibium_lupus.get());
         output.accept(regulus.get());
         output.accept(void_pearl.get());
-
+        if (ModList.get().isLoaded("enigmaticlegacy"))
+            output.accept(soul_etherium.get());
     }
 
 

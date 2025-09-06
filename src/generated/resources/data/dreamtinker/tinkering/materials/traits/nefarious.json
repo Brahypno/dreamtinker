@@ -40,6 +40,10 @@
       {
         "level": 1,
         "name": "dreamtinker:wither_body"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:evil_attack"
       }
     ]
   }

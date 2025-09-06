@@ -55,6 +55,7 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
         generateItemModel(DreamtinkerItems.metallivorous_stibium_lupus, "materials");
         generateItemModel(DreamtinkerItems.regulus, "materials");
         generateItemModel(DreamtinkerItems.void_pearl, "");
+        generateItemModel(DreamtinkerItems.soul_etherium, "materials");
         //generateBlockItemModel(object);
         generateBucketItemModel(DreamtinkerFluids.molten_echo_shard);
         generateBucketItemModel(DreamtinkerFluids.molten_albedo_stibium);

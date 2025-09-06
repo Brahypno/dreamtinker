@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "dreamtinker:soul_etherium",
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_soul_aether"
+  },
+  "temperature": 5700
+}

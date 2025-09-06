@@ -1,0 +1,17 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "enigmaticlegacy:the_infinitum"
+    }
+  ],
+  "level": 3,
+  "result": "dreamtinker:weapon_books",
+  "slots": {
+    "souls": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/melee/primary"
+  }
+}

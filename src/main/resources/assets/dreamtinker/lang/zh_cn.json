@@ -110,6 +110,34 @@
   "modifier.dreamtinker.ender_slayer": "末影之屠",
   "modifier.dreamtinker.ender_slayer.flavor": "看来，这是唯一的选择",
   "modifier.dreamtinker.ender_slayer.description": "获得一定末影之屠的能力",
+  "modifier.dreamtinker.life_looting": "以血淬运",
+  "modifier.dreamtinker.life_looting.flavor": "徒具灵",
+  "modifier.dreamtinker.life_looting.description": "在血量上限低于20时，提高时运，抢夺；反之降低",
+  "modifier.dreamtinker.weapon_books": "启示之证",
+  "modifier.dreamtinker.weapon_books.flavor": "§5那来自于启示的眩目光晕，",
+  "modifier.dreamtinker.weapon_books.description": "§5将会焚化那些拒绝承启之人。",
+  "modifier.dreamtinker.eldritch_pan": "饕餮之锅",
+  "modifier.dreamtinker.eldritch_pan.flavor": "好吃！！！",
+  "modifier.dreamtinker.eldritch_pan.description": "获得饕餮之锅的能力",
+  "modifier.dreamtinker.soul_form": "魂缚之庇",
+  "modifier.dreamtinker.soul_form.flavor": "魂魄，重铸身躯",
+  "modifier.dreamtinker.soul_form.description": "对所有类型的槽位+1",
+  "modifier.dreamtinker.open_soul": "洞开的灵魂",
+  "modifier.dreamtinker.open_soul.flavor": "这份幸运，由剥夺他人的幸福而来",
+  "modifier.dreamtinker.open_soul.description": "根据造成的伤害积累充能，消耗充能以修复工具，避免死亡",
+  "modifier.dreamtinker.tooltip.open_soul": "你已夺去幸福: ",
+  "modifier.dreamtinker.soul_blessing": "缚魂的宠爱",
+  "modifier.dreamtinker.soul_blessing.flavor": "这份幸运，由剥夺他人的幸福而来",
+  "modifier.dreamtinker.soul_blessing.description": "将死时，寻找替罪羊让它受过",
+  "modifier.dreamtinker.tooltip.soul_blessing": "替罪羊冷却: ",
+  "modifier.dreamtinker.exiles_faulty": "驱除错误",
+  "modifier.dreamtinker.exiles_faulty.flavor": "透彻灵魂",
+  "modifier.dreamtinker.exiles_faulty.description": "击中时根据诅咒层数减少血量上限；并在击中时获得黄心",
+  "modifier.dreamtinker.desolation_ring": "荒芜之戒",
+  "modifier.dreamtinker.desolation_ring.flavor": "荒芜不失为一种选择",
+  "modifier.dreamtinker.desolation_ring.description": "杀死荒芜之负会杀死的实体",
+
+
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
@@ -133,6 +161,7 @@
   "tooltip.star_regulus.desc2": "匠魂炉的鬼斧神工",
   "item.dreamtinker.void_pearl": "虚空珍珠",
   "tooltip.void_pearl.desc1": "以至黑至深至无重塑",
+  "item.dreamtinker.soul_etherium": "魂缚以太锭",
 
   "material.dreamtinker.echo_shard": "回响碎片",
   "material.dreamtinker.echo_shard.flavor": "是神秘的回响，还是秘密的回响",
@@ -152,6 +181,8 @@
   "material.dreamtinker.etherium.flavor": "以太金属本不存在",
   "material.dreamtinker.nefarious": "极恶",
   "material.dreamtinker.nefarious.flavor": "邪恶精髓注魔下界合金",
+  "material.dreamtinker.soul_etherium": "魂缚以太",
+  "material.dreamtinker.soul_etherium.flavor": "虚空灵魂回响以太",
 
 
   "fluid_type.dreamtinker.molten_echo_shard": "熔融回响",
@@ -229,6 +260,7 @@
   "effect.dreamtinker.effectsilvernamebee": "银账本",
   "effect.dreamtinker.real_darkness": "真实黑暗",
   "effect.dreamtinker.unholy": "不洁",
+  "effect.dreamtinker.cursed": "血咒",
 
   "adv.dreamtinker.eat_star_regulus.title": "大功业",
   "adv.dreamtinker.eat_star_regulus.desc": "品味星之锑"

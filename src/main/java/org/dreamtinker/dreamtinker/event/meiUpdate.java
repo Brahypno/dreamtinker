@@ -6,7 +6,7 @@ import net.minecraftforge.event.entity.player.PlayerXpEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.register.DreamtinkerModifer;
+import org.dreamtinker.dreamtinker.register.DreamtinkerModifers;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
@@ -24,12 +24,12 @@ public class meiUpdate {
         if (event.getLevels() <= 0 || player.level().isClientSide)
             return;
 
-        List<ItemStack> hits = findStacksWithModifier(player, DreamtinkerModifer.mei.getId());
+        List<ItemStack> hits = findStacksWithModifier(player, DreamtinkerModifers.mei.getId());
 
         if (!hits.isEmpty()){
             for (ItemStack stack : hits) {
                 ToolStack ts = ToolStack.from(stack);
-                ts.addModifier(DreamtinkerModifer.mei.getId(), event.getLevels());//I know this may cause thread overwritten,but who cares
+                ts.addModifier(DreamtinkerModifers.mei.getId(), event.getLevels());//I know this may cause thread overwritten,but who cares
                 ts.updateStack(stack);
             }
         }

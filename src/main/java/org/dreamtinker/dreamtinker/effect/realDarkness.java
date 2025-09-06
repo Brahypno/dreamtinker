@@ -8,7 +8,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
-import org.dreamtinker.dreamtinker.register.DreamtinkerEffect;
+import org.dreamtinker.dreamtinker.register.DreamtinkerEffects;
 
 import java.util.UUID;
 
@@ -68,7 +68,7 @@ public class realDarkness extends MobEffect {
             return;
 
         // 你注册的效果实例
-        if (mob.hasEffect(DreamtinkerEffect.RealDarkness.get())){
+        if (mob.hasEffect(DreamtinkerEffects.RealDarkness.get())){
             // 任何尝试设定新目标都阻止
             if (event.getNewTarget() != null){
                 // 取消并清空目标

@@ -14,10 +14,10 @@ import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import javax.annotation.Nullable;
 
 public class DTModiferCheck {
-    private static final EquipmentSlot[] slots =
+    public static final EquipmentSlot[] slots =
             new EquipmentSlot[]{EquipmentSlot.FEET, EquipmentSlot.LEGS, EquipmentSlot.CHEST, EquipmentSlot.HEAD, EquipmentSlot.OFFHAND, EquipmentSlot.MAINHAND};
 
-    private static int getModifierlevel(LivingEntity entity, ModifierId id, EquipmentSlot slot) {
+    public static int getModifierlevel(LivingEntity entity, ModifierId id, EquipmentSlot slot) {
         if (entity != null){
             if (!entity.getItemBySlot(slot).is(TinkerTags.Items.MODIFIABLE))
                 return 0;
@@ -25,7 +25,6 @@ public class DTModiferCheck {
             if (!toolStack.isBroken()){
                 return ModifierUtil.getModifierLevel(entity.getItemBySlot(slot), id);
             }
-
         }
         return 0;
     }

@@ -39,15 +39,16 @@ public class Dreamtinker {
 
         DreamtinkerItems.ITEMS.register(modEventBus);
         DreamtinkerFluids.FLUIDS.register(modEventBus);
-        DreamtinkerModifer.MODIFIERS.register(modEventBus);
+        DreamtinkerModifers.MODIFIERS.register(modEventBus);
         DreamtinkerEntity.ENTITIES.register(modEventBus);
-        DreamtinkerEffect.EFFECT.register(modEventBus);
+        DreamtinkerEffects.EFFECT.register(modEventBus);
         DreamtinkerLoots.LOOTMODIFIERS.register(modEventBus);
         DreamtinkerTab.TABS.register(modEventBus);
         if (ModList.get().isLoaded("enigmaticlegacy")){
-            DreamtinkerModifer.EL_MODIFIERS.register(modEventBus);
+            DreamtinkerModifers.EL_MODIFIERS.register(modEventBus);
             DreamtinkerFluids.EL_FLUIDS.register(modEventBus);
-            DreamtinkerEffect.EL_EFFECT.register(modEventBus);
+            DreamtinkerEffects.EL_EFFECT.register(modEventBus);
+            DreamtinkerItems.EL_ITEMS.register(modEventBus);
             forgeEventBus.addGenericListener(ItemStack.class, addUnholywater::attachCaps);
 
         }
