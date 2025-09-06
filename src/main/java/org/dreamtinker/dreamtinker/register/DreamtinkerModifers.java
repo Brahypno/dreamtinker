@@ -102,6 +102,7 @@ public class DreamtinkerModifers {
     public static class Ids {
         public static final ModifierId soul_form = id("soul_form");
         public static final ModifierId wither_body = id("wither_body");
+        public static final ModifierId soul_upgrade = id("soul_upgrade");
 
         private static ModifierId id(String name) {
             return new ModifierId(Dreamtinker.MODID, name);

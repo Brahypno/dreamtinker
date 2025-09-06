@@ -22,6 +22,18 @@ public class DreamtinkerItemTagProvider extends ItemTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider Provider) {
         this.tag(TinkerTags.Items.TOOL_PARTS).add(DreamtinkerItems.explode_core.get());
+        this.tag(TinkerTags.Items.INTERACTABLE_RIGHT).add(DreamtinkerItems.masu.get());
+        this.tag(TinkerTags.Items.AOE).add(DreamtinkerItems.masu.get());
+        this.tag(TinkerTags.Items.BONUS_SLOTS).add(DreamtinkerItems.masu.get());
+        this.tag(TinkerTags.Items.BROAD_TOOLS).add(DreamtinkerItems.masu.get());
+        this.tag(TinkerTags.Items.DURABILITY).add(DreamtinkerItems.masu.get());
+        this.tag(TinkerTags.Items.SMALL_TOOLS).add(DreamtinkerItems.tntarrow.get());
+        this.tag(TinkerTags.Items.MELEE_PRIMARY).add(DreamtinkerItems.masu.get());
+        this.tag(TinkerTags.Items.MELEE_WEAPON).add(DreamtinkerItems.masu.get());
+        this.tag(TinkerTags.Items.SCYTHES).add(DreamtinkerItems.masu.get());
+        this.tag(TinkerTags.Items.CASTS).add(DreamtinkerItems.persona_cast.get());
+        this.tag(TinkerTags.Items.PATTERNS).add(DreamtinkerItems.persona_cast.get());
+        this.tag(TinkerTags.Items.SINGLE_USE_CASTS).add(DreamtinkerItems.persona_cast.get());
         this.tag(Tags.Items.INGOTS)
             .add(DreamtinkerItems.metallivorous_stibium_lupus.get(), DreamtinkerItems.regulus.get(), DreamtinkerItems.soul_etherium.get());
         this.tag(Tags.Items.GEMS).add(DreamtinkerItems.valentinite.get(), DreamtinkerItems.nigrescence_antimony.get());

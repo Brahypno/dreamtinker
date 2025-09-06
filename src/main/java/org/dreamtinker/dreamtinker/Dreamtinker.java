@@ -39,6 +39,7 @@ public class Dreamtinker {
         // Register ourselves for server and other game events we are interested in
 
         DreamtinkerItems.ITEMS.register(modEventBus);
+        DreamtinkerBlocks.BLOCKS.register(modEventBus);
         DreamtinkerFluids.FLUIDS.register(modEventBus);
         DreamtinkerModifers.MODIFIERS.register(modEventBus);
         DreamtinkerEntity.ENTITIES.register(modEventBus);

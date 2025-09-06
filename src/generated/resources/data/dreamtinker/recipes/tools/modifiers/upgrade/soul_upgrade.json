@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "dreamtinker:twist_obsidian_pane"
+    }
+  ],
+  "level": {
+    "max": 3
+  },
+  "result": "dreamtinker:soul_upgrade",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

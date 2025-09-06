@@ -6,6 +6,13 @@
         {
           "effect": {
             "type": "tconstruct:place_block",
+            "block": "dreamtinker:crying_obsidian_pane"
+          },
+          "level": 1.0
+        },
+        {
+          "effect": {
+            "type": "tconstruct:place_block",
             "block": "minecraft:crying_obsidian"
           },
           "level": 4.0
@@ -16,7 +23,7 @@
   "entity_effects": [
     {
       "type": "tconstruct:damage",
-      "damage": 4.0,
+      "damage": 3.0,
       "damage_type": {
         "melee": "tconstruct:fluid_spike_melee",
         "ranged": "tconstruct:fluid_spike_ranged"

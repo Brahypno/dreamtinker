@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "M": {
+      "item": "dreamtinker:twist_obsidian_pane"
+    },
+    "e": {
+      "item": "minecraft:weeping_vines"
+    }
+  },
+  "pattern": [
+    " e ",
+    "eMe",
+    " e "
+  ],
+  "result": {
+    "item": "dreamtinker:persona_cast"
+  },
+  "show_notification": true
+}

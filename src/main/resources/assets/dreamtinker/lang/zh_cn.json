@@ -135,9 +135,10 @@
   "modifier.dreamtinker.exiles_faulty.description": "击中时根据诅咒层数减少血量上限；并在击中时获得黄心",
   "modifier.dreamtinker.desolation_ring": "荒芜之戒",
   "modifier.dreamtinker.desolation_ring.flavor": "荒芜不失为一种选择",
-  "modifier.dreamtinker.desolation_ring.description": "杀死荒芜之负会杀死的实体",
-
-
+  "modifier.dreamtinker.desolation_ring.description": "杀死荒芜之负会阻止的实体",
+  "modifier.dreamtinker.soul_upgrade": "灵魂升级",
+  "modifier.dreamtinker.soul_upgrade.flavor": "升级灵魂",
+  "modifier.dreamtinker.soul_upgrade.description": "以一个升级槽为代价获得灵魂槽",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
@@ -149,6 +150,7 @@
   "item.dreamtinker.tntarrow.description": "一种消耗性的，造成范围伤害的特种近战武器，使用弓以发射。射程小于范围！",
   "item.dreamtinker.masu": "马槊",
   "item.dreamtinker.masu.description": "横槊赋诗，固一世之雄也。一款长距离低速横扫重武器，如果不在骑乘或力量状态下使用，会受到虚弱效果",
+
 
   "item.dreamtinker.raw_stibnite": "粗辉锑",
   "item.dreamtinker.valentinite": "锑华",
@@ -162,6 +164,10 @@
   "item.dreamtinker.void_pearl": "虚空珍珠",
   "tooltip.void_pearl.desc1": "以至黑至深至无重塑",
   "item.dreamtinker.soul_etherium": "魂缚以太锭",
+  "item.dreamtinker.twist_obsidian_pane": "悲恸之板",
+  "item.dreamtinker.persona_cast": "人格模具",
+
+  "block.dreamtinker.crying_obsidian_pane": "哭泣的黑曜石板",
 
   "material.dreamtinker.echo_shard": "回响碎片",
   "material.dreamtinker.echo_shard.flavor": "是神秘的回响，还是秘密的回响",

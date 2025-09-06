@@ -1,10 +1,7 @@
 package org.dreamtinker.dreamtinker.register;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.DeferredRegister;
@@ -46,10 +43,11 @@ public class DreamtinkerItems {
             ITEMS.register("nigrescence_antimony", () -> new nigrescence_antimony(new Item.Properties()));
     public static final RegistryObject<Item> metallivorous_stibium_lupus = ITEMS.register("metallivorous_stibium_lupus", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> regulus = ITEMS.register("star_regulus", () -> new star_regulus(new Item.Properties()));
-    public static final RegistryObject<Item> void_pearl = ITEMS.register("void_pearl", () -> new void_perl((new Item.Properties()).stacksTo(16)));
+    public static final RegistryObject<Item> void_pearl = ITEMS.register("void_pearl", () -> new void_perl((new Item.Properties().rarity(
+            Rarity.UNCOMMON)).stacksTo(16)));
     public static final RegistryObject<Item> soul_etherium = EL_ITEMS.register(
             "soul_etherium",
-            () -> new Item(new Item.Properties()) {
+            () -> new Item(new Item.Properties().rarity(Rarity.EPIC)) {
                 public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag flag) {
                     tooltip.add(Component.translatable("tooltip.enigmaticlegacy.worthyOnesOnly1"));
                     tooltip.add(Component.translatable("tooltip.enigmaticlegacy.worthyOnesOnly2"));
@@ -58,6 +56,9 @@ public class DreamtinkerItems {
                 }
             }
     );
+    public static final RegistryObject<Item> twist_obsidian_pane =
+            ITEMS.register("twist_obsidian_pane", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> persona_cast = ITEMS.register("persona_cast", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
 
     public static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         output.accept(raw_stibnite.get());
@@ -66,6 +67,8 @@ public class DreamtinkerItems {
         output.accept(metallivorous_stibium_lupus.get());
         output.accept(regulus.get());
         output.accept(void_pearl.get());
+        output.accept(twist_obsidian_pane.get());
+        output.accept(persona_cast.get());
         if (ModList.get().isLoaded("enigmaticlegacy"))
             output.accept(soul_etherium.get());
     }

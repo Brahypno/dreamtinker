@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "byproducts": [
+    {
+      "amount": 250,
+      "fluid": "dreamtinker:molten_crying_obsidian"
+    }
+  ],
+  "ingredient": {
+    "item": "dreamtinker:twist_obsidian_pane"
+  },
+  "result": {
+    "amount": 30,
+    "fluid": "dreamtinker:liquid_trist"
+  },
+  "temperature": 200,
+  "time": 22
+}

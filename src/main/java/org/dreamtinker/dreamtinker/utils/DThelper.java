@@ -1,14 +1,23 @@
 package org.dreamtinker.dreamtinker.utils;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.event.entity.EntityTeleportEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
@@ -63,6 +72,50 @@ public class DThelper {
             ResourceLocation id = ForgeRegistries.MOB_EFFECTS.getKey(effect);
             String key = effect.getDescriptionId();
             System.out.println("Random effect → {" + id + "} ({" + key + "})");
+        }
+    }
+
+    public static boolean teleport(LivingEntity entity) {
+        if (!entity.level().isClientSide() && entity.isAlive()){
+            double d0 = entity.getX() + (entity.level().random.nextDouble() - (double) 0.5F) * (double) 64.0F;
+            double d1 = entity.getY() + (double) (entity.level().random.nextInt(64) - 32);
+            double d2 = entity.getZ() + (entity.level().random.nextDouble() - (double) 0.5F) * (double) 64.0F;
+            return teleport(entity, d0, d1, d2);
+        }else {
+            return false;
+        }
+    }
+
+    private static boolean teleport(LivingEntity entity, double p_32544_, double p_32545_, double p_32546_) {
+        BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos(p_32544_, p_32545_, p_32546_);
+
+        while (blockpos$mutableblockpos.getY() > entity.level().getMinBuildHeight() && !entity.level().getBlockState(blockpos$mutableblockpos).blocksMotion()) {
+            blockpos$mutableblockpos.move(Direction.DOWN);
+        }
+
+        BlockState blockstate = entity.level().getBlockState(blockpos$mutableblockpos);
+        boolean flag = blockstate.blocksMotion();
+        boolean flag1 = blockstate.getFluidState().is(FluidTags.WATER);
+        if (flag && !flag1){
+            EntityTeleportEvent.EnderEntity event = ForgeEventFactory.onEnderTeleport(entity, p_32544_, p_32545_, p_32546_);
+            if (event.isCanceled()){
+                return false;
+            }else {
+                Vec3 vec3 = entity.position();
+                boolean flag2 = entity.randomTeleport(event.getTargetX(), event.getTargetY(), event.getTargetZ(), true);
+                if (flag2){
+                    entity.level().gameEvent(GameEvent.TELEPORT, vec3, GameEvent.Context.of(entity));
+                    if (!entity.isSilent()){
+                        entity.level()
+                              .playSound((Player) null, entity.xo, entity.yo, entity.zo, SoundEvents.ENDERMAN_TELEPORT, entity.getSoundSource(), 1.0F, 1.0F);
+                        entity.playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0F, 1.0F);
+                    }
+                }
+
+                return flag2;
+            }
+        }else {
+            return false;
         }
     }
 }

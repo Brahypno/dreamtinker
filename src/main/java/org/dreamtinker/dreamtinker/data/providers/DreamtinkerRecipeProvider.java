@@ -23,6 +23,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.data.DreamtinkerMaterialIds;
 import org.dreamtinker.dreamtinker.data.DreamtinkerTagkeys;
+import org.dreamtinker.dreamtinker.register.DreamtinkerBlocks;
 import org.dreamtinker.dreamtinker.register.DreamtinkerFluids;
 import org.dreamtinker.dreamtinker.register.DreamtinkerItems;
 import org.dreamtinker.dreamtinker.register.DreamtinkerModifers;
@@ -148,6 +149,9 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         ItemCastingRecipeBuilder.basinRecipe(Blocks.CRYING_OBSIDIAN)
                                 .setFluidAndTime(DreamtinkerFluids.molten_crying_obsidian, FluidValues.GLASS_BLOCK)
                                 .save(consumer, location(folder + "crying_obsidian/block"));
+        ItemCastingRecipeBuilder.tableRecipe(DreamtinkerBlocks.crying_obsidian_plane)
+                                .setFluidAndTime(DreamtinkerFluids.molten_crying_obsidian, FluidValues.GLASS_PANE)
+                                .save(consumer, location(folder + "crying_obsidian/pane"));
 
         ItemCastingRecipeBuilder.basinRecipe(EnigmaticBlocks.ETHERIUM_BLOCK)
                                 .setFluidAndTime(DreamtinkerFluids.unstable_liquid_aether, FluidValues.METAL_BLOCK)
@@ -162,6 +166,11 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                 .setCast(Items.HEART_OF_THE_SEA, true)
                                 .setFluid(FluidIngredient.of(new FluidStack(DreamtinkerFluids.molten_ascending_antimony.get(), FluidValues.METAL_BLOCK)))
                                 .save(consumer, location("ocean_stone/ascending"));
+
+        ItemCastingRecipeBuilder.tableRecipe(DreamtinkerItems.twist_obsidian_pane.get())
+                                .setFluidAndTime(DreamtinkerFluids.liquid_trist, FluidValues.NUGGET * 3)
+                                .setCast(DreamtinkerBlocks.crying_obsidian_plane.get(), true)
+                                .save(consumer, location(folder + "twist_obsidian/pane"));
     }
 
     private void addMeltingRecipes(Consumer<FinishedRecipe> consumer) {
@@ -173,6 +182,9 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
         MeltingRecipeBuilder.melting(Ingredient.of(Items.CRYING_OBSIDIAN), DreamtinkerFluids.molten_crying_obsidian, FluidValues.GLASS_BLOCK, 2.0f)
                             .save(consumer, location(folder + "crying_obsidian/block"));
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerBlocks.crying_obsidian_plane), DreamtinkerFluids.molten_crying_obsidian, FluidValues.GLASS_PANE,
+                                     1.5f)
+                            .save(consumer, location(folder + "crying_obsidian/pane"));
 
         MeltingRecipeBuilder.melting(Ingredient.of(Items.ECHO_SHARD), DreamtinkerFluids.molten_echo_shard, FluidValues.GEM, 2.0f)
                             .save(consumer, location(folder + "echo_shard/gem"));
@@ -267,6 +279,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                             .save(consumer, location(folder + "soul_etherium/foundry"));
         cast(DreamtinkerFluids.molten_soul_aether.get(), DreamtinkerItems.soul_etherium.get(), FluidValues.INGOT, consumer);
 
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerItems.twist_obsidian_pane.get()), DreamtinkerFluids.liquid_trist, FluidValues.NUGGET * 3)
+                            .addByproduct(DreamtinkerFluids.molten_crying_obsidian.result(FluidValues.GLASS_PANE))
+                            .save(consumer, location(folder + "twist/reinforcement"));
+
     }
 
     private void addMaterialRecipes(Consumer<FinishedRecipe> consumer) {
@@ -323,6 +339,15 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                             100)
                                   .unlockedBy("has_stibnite", has(DreamtinkerTagkeys.Items.raw_stibnite))
                                   .save(consumer, location("currus_triumphalis_antimonii/stibnite_to_valentinite"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, DreamtinkerItems.persona_cast.get())
+                           .define('e', Items.WEEPING_VINES)
+                           .define('M', DreamtinkerItems.twist_obsidian_pane.get())
+                           .pattern(" e ")
+                           .pattern("eMe")
+                           .pattern(" e ")
+                           .unlockedBy("has_item", has(DreamtinkerItems.twist_obsidian_pane.get()))
+                           //.group(prefix("fancy_item_frame"))
+                           .save(consumer, location("casts/" + DreamtinkerItems.persona_cast.get()));
     }
 
     private void addPartRecipes(Consumer<FinishedRecipe> consumer) {
@@ -442,6 +467,13 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setSlots(SlotType.ABILITY, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifers.desolation_ring, abilitySalvage))
                              .save(consumer, prefix(DreamtinkerModifers.desolation_ring, abilityFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifers.Ids.soul_upgrade)
+                             .setTools(TinkerTags.Items.MODIFIABLE)
+                             .addInput(DreamtinkerItems.twist_obsidian_pane.get(), 1)
+                             .setMaxLevel(3)
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifers.Ids.soul_upgrade, upgradeSalvage))
+                             .save(consumer, prefix(DreamtinkerModifers.Ids.soul_upgrade, upgradeFolder));
     }
 
     private void addEntityMeltingRecipes(Consumer<FinishedRecipe> consumer) {

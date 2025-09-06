@@ -136,6 +136,9 @@
   "modifier.dreamtinker.desolation_ring": "Desolation Ring",
   "modifier.dreamtinker.desolation_ring.flavor": "Desolation is a Choice",
   "modifier.dreamtinker.desolation_ring.description": "Kill nearby entities that matches original desolation ring",
+  "modifier.dreamtinker.soul_upgrade": "Soul Upgrade",
+  "modifier.dreamtinker.soul_upgrade.flavor": "Upgrade Soul",
+  "modifier.dreamtinker.soul_upgrade.description": "Trades an upgrade slot for one soul slot!",
 
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
@@ -162,6 +165,10 @@
   "item.dreamtinker.void_pearl": "Void Pearl",
   "tooltip.void_pearl.desc1": "Reform by the darkest deepest null",
   "item.dreamtinker.soul_etherium": "Soul Etherium",
+  "item.dreamtinker.twist_obsidian_pane": "Twist Obsidian Pane",
+  "item.dreamtinker.persona_cast": "Persona Cast",
+
+  "block.dreamtinker.crying_obsidian_pane": "Crying Obsidian Pane",
 
   "material.dreamtinker.echo_shard": "Echo Shard",
   "material.dreamtinker.echo_shard.flavor": "Its echo of mystery, or echo of enigma",

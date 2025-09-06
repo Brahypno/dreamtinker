@@ -8,7 +8,15 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.data.providers.*;
+import org.dreamtinker.dreamtinker.data.providers.DreamtinkerBlockTagProvider;
+import org.dreamtinker.dreamtinker.data.providers.DreamtinkerFluidTagProvider;
+import org.dreamtinker.dreamtinker.data.providers.DreamtinkerItemTagProvider;
+import org.dreamtinker.dreamtinker.data.providers.DreamtinkerRecipeProvider;
+import org.dreamtinker.dreamtinker.data.providers.loot.DreamtinkerLootTableProvider;
+import org.dreamtinker.dreamtinker.data.providers.model.DreamTinkerBlockStateProvider;
+import org.dreamtinker.dreamtinker.data.providers.model.DreamtinkerFluidTextureProvider;
+import org.dreamtinker.dreamtinker.data.providers.model.DreamtinkerItemModelProvider;
+import org.dreamtinker.dreamtinker.data.providers.tinker.*;
 import slimeknights.tconstruct.fluids.data.FluidBucketModelProvider;
 import slimeknights.tconstruct.library.client.data.material.MaterialPartTextureGenerator;
 import slimeknights.tconstruct.tools.data.sprite.TinkerMaterialSpriteProvider;
@@ -38,13 +46,17 @@ public class DreamtinkerDataGen {
         generator.addProvider(event.includeClient(), new FluidBucketModelProvider(output, Dreamtinker.MODID));
         generator.addProvider(event.includeClient(), new DreamtinkerFluidTagProvider(output, lookupProvider, Dreamtinker.MODID, helper));
         DreamtinkerBlockTagProvider blockTags = new DreamtinkerBlockTagProvider(output, lookupProvider, Dreamtinker.MODID, helper);
-        //generator.addProvider(event.includeClient(), new DreamtinkerItemTagProvider(output, lookupProvider, blockTags.contentsGetter(), Dreamtinker.MODID, helper));
+        generator.addProvider(event.includeClient(), blockTags);
+        generator.addProvider(event.includeServer(),
+                              new DreamtinkerItemTagProvider(output, lookupProvider, blockTags.contentsGetter(), Dreamtinker.MODID, helper));
         generator.addProvider(event.includeClient(), new DreamtinkerItemModelProvider(output, helper));
         generator.addProvider(event.includeClient(), new DreamtinkerMaterialDataProvider(output));
         generator.addProvider(event.includeClient(), new DreamtinkerMaterialStatProvider(output));
         generator.addProvider(event.includeClient(), new DreamtinkerMaterialModifierProvider(output));
         generator.addProvider(event.includeClient(), new DreamtinkerRecipeProvider(output));
         generator.addProvider(event.includeClient(), new DreamtinkerModifierProvider(output));
+        generator.addProvider(event.includeClient(), new DreamTinkerBlockStateProvider(output, helper));
+        generator.addProvider(event.includeServer(), new DreamtinkerLootTableProvider(output));
 
 
     }

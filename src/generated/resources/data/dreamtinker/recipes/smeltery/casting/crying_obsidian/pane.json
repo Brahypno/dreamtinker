@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:casting_table",
+  "cooling_time": 111,
+  "fluid": {
+    "amount": 250,
+    "tag": "dreamtinker:molten_crying_obsidian"
+  },
+  "result": "dreamtinker:crying_obsidian_pane"
+}

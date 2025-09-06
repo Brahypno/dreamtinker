@@ -38,5 +38,8 @@ public class DreamtinkerTab {
 
     public static final RegistryObject<CreativeModeTab> ORE =
             TABS.register("ore", () -> CreativeModeTab.builder().title(Component.translatable("itemGroup." + MODID + ".ore")).icon(() -> new ItemStack(
-                    DreamtinkerItems.metallivorous_stibium_lupus.get())).displayItems(DreamtinkerItems::addTabItems).build());
+                    DreamtinkerItems.metallivorous_stibium_lupus.get())).displayItems((params, output) -> {
+                DreamtinkerItems.addTabItems(params, output);
+                DreamtinkerBlocks.addTabBlocks(params, output);
+            }).build());
 }
