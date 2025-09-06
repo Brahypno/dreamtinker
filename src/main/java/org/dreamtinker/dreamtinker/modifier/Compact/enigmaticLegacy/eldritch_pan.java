@@ -43,7 +43,6 @@ public class eldritch_pan extends BattleModifier {
 
     public static final ResourceLocation TAG_PAN = new ResourceLocation(Dreamtinker.MODID, "eldritch_pan");
     private static final ResourceLocation TAG_PAN_TICKS = new ResourceLocation(Dreamtinker.MODID, "eldritch_tick");
-    private final String tool_attribute_uuid = "50c030b6-e8ef-4a99-9a6a-9c231b2365a8";
 
     @Override
     public void addTraits(IToolContext var1, ModifierEntry var2, TraitBuilder var3, boolean var4) {
@@ -87,8 +86,8 @@ public class eldritch_pan extends BattleModifier {
 
                     hungerAmplifier = Math.min(hungerAmplifier, 9);
 
-                    if (null != getBloodlust())
-                        player.addEffect(new MobEffectInstance(getBloodlust(),
+                    if (null != getHunger())
+                        player.addEffect(new MobEffectInstance(getHunger(),
                                                                MobEffectInstance.INFINITE_DURATION, hungerAmplifier, true, true));
                 }
 
@@ -151,6 +150,7 @@ public class eldritch_pan extends BattleModifier {
             ModDataNBT nbt = tool.getPersistentData();
             int kills = nbt.getInt(TAG_PAN);
             if (kills > 0){
+                String tool_attribute_uuid = "50c030b6-e8ef-4a99-9a6a-9c231b2365a8";
                 consumer.accept(Attributes.ATTACK_DAMAGE,
                                 new AttributeModifier(UUID.fromString(tool_attribute_uuid),
                                                       Attributes.ATTACK_DAMAGE.getDescriptionId(),

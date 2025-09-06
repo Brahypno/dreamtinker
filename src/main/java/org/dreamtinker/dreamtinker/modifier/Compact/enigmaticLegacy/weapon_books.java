@@ -25,12 +25,11 @@ import static org.dreamtinker.dreamtinker.modifier.Compact.enigmaticLegacy.eldri
 
 public class weapon_books extends BattleModifier {
 
-    private final String book_key_1 = "item.enigmaticlegacy.the_acknowledgment";
-    private final String book_key_2 = "item.enigmaticlegacy.the_twist";
-    private final String book_key_3 = "item.enigmaticlegacy.the_infinitum";
-
     @Override
     public @NotNull Component getDisplayName(int level) {
+        String book_key_1 = "item.enigmaticlegacy.the_acknowledgment";
+        String book_key_2 = "item.enigmaticlegacy.the_twist";
+        String book_key_3 = "item.enigmaticlegacy.the_infinitum";
         if (1 == level)
             return Component.translatable(book_key_1);
         else if (2 == level)
