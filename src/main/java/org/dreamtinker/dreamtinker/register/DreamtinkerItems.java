@@ -10,7 +10,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.Item.antimony.nigrescence_antimony;
 import org.dreamtinker.dreamtinker.Item.antimony.star_regulus;
 import org.dreamtinker.dreamtinker.Item.antimony.valentinite;
-import org.dreamtinker.dreamtinker.Item.void_perl;
+import org.dreamtinker.dreamtinker.Item.void_pearl;
 import org.dreamtinker.dreamtinker.tools.Masu.Masu;
 import org.dreamtinker.dreamtinker.tools.TNTarrow.TNTarrow;
 import org.dreamtinker.dreamtinker.tools.toolsDefinition;
@@ -43,7 +43,7 @@ public class DreamtinkerItems {
             ITEMS.register("nigrescence_antimony", () -> new nigrescence_antimony(new Item.Properties()));
     public static final RegistryObject<Item> metallivorous_stibium_lupus = ITEMS.register("metallivorous_stibium_lupus", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> regulus = ITEMS.register("star_regulus", () -> new star_regulus(new Item.Properties()));
-    public static final RegistryObject<Item> void_pearl = ITEMS.register("void_pearl", () -> new void_perl((new Item.Properties().rarity(
+    public static final RegistryObject<Item> void_pearl = ITEMS.register("void_pearl", () -> new void_pearl((new Item.Properties().rarity(
             Rarity.UNCOMMON)).stacksTo(16)));
     public static final RegistryObject<Item> soul_etherium = EL_ITEMS.register(
             "soul_etherium",
