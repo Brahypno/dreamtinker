@@ -11,9 +11,9 @@ import org.dreamtinker.dreamtinker.Item.antimony.nigrescence_antimony;
 import org.dreamtinker.dreamtinker.Item.antimony.star_regulus;
 import org.dreamtinker.dreamtinker.Item.antimony.valentinite;
 import org.dreamtinker.dreamtinker.Item.void_pearl;
+import org.dreamtinker.dreamtinker.tools.DTtoolsDefinition;
 import org.dreamtinker.dreamtinker.tools.Masu.Masu;
 import org.dreamtinker.dreamtinker.tools.TNTarrow.TNTarrow;
-import org.dreamtinker.dreamtinker.tools.toolsDefinition;
 import slimeknights.mantle.registration.object.EnumObject;
 import slimeknights.mantle.registration.object.ItemObject;
 import slimeknights.tconstruct.common.registration.ItemDeferredRegisterExtension;
@@ -37,10 +37,10 @@ public class DreamtinkerItems {
     private static final Item.Properties PART = (new Item.Properties()).stacksTo(64);
 
     public static final ItemObject<ModifiableItem> tntarrow =
-            MODI_TOOLS.register("tntarrow", () -> new TNTarrow((new Item.Properties()).stacksTo(4), toolsDefinition.TNTARROW, 4));
-    public static final ItemObject<ModifiableItem> masu = MODI_TOOLS.register("masu", () -> new Masu(TOOL, toolsDefinition.MASU));
+            MODI_TOOLS.register("tntarrow", () -> new TNTarrow((new Item.Properties()).stacksTo(4), DTtoolsDefinition.TNTARROW, 4));
+    public static final ItemObject<ModifiableItem> masu = MODI_TOOLS.register("masu", () -> new Masu(TOOL, DTtoolsDefinition.MASU));
     public static final EnumObject<ArmorItem.Type, ModifiableArmorItem> underPlate =
-            MODI_TOOLS.registerEnum("under_plate", ArmorItem.Type.values(), type -> new MultilayerArmorItem(toolsDefinition.UNDER_PLATE, type, TOOL));
+            MODI_TOOLS.registerEnum("under_plate", ArmorItem.Type.values(), type -> new MultilayerArmorItem(DTtoolsDefinition.UNDER_PLATE, type, TOOL));
 
     public static final RegistryObject<ToolPartItem> explode_core = ITEMS.register("explode_core", () -> new ToolPartItem(PART, HeadMaterialStats.ID));
 

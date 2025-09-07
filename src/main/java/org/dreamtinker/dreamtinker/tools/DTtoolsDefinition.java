@@ -6,7 +6,7 @@ import slimeknights.tconstruct.common.Sounds;
 import slimeknights.tconstruct.library.tools.definition.ModifiableArmorMaterial;
 import slimeknights.tconstruct.library.tools.definition.ToolDefinition;
 
-public class toolsDefinition {
+public class DTtoolsDefinition {
     public static final ToolDefinition TNTARROW = ToolDefinition.create(DreamtinkerItems.tntarrow);
     public static final ToolDefinition MASU = ToolDefinition.create(DreamtinkerItems.masu);
     public static final ModifiableArmorMaterial UNDER_PLATE =

@@ -8,7 +8,7 @@ import net.minecraftforge.common.ToolActions;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.register.DreamtinkerItems;
 import org.dreamtinker.dreamtinker.register.DreamtinkerModifers;
-import org.dreamtinker.dreamtinker.tools.toolsDefinition;
+import org.dreamtinker.dreamtinker.tools.DTtoolsDefinition;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.data.tinkering.AbstractToolDefinitionDataProvider;
 import slimeknights.tconstruct.library.materials.RandomMaterial;
@@ -47,7 +47,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 IsEffectiveModule.tag(TinkerTags.Blocks.MINABLE_WITH_SWORD),
                 MiningSpeedModifierModule.blocks(7.5f, Blocks.COBWEB)
         };
-        define(toolsDefinition.MASU)
+        define(DTtoolsDefinition.MASU)
                 // parts
                 .module(PartStatsModule.parts()
                                        .part(TinkerToolParts.broadBlade, 0.75f)
@@ -77,7 +77,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 .module(ToolActionsModule.of(ToolActions.SWORD_DIG))
                 .module(swordHarvest)
                 .module(new CircleWeaponAttack(4));
-        define(toolsDefinition.TNTARROW)
+        define(DTtoolsDefinition.TNTARROW)
                 // parts
                 .module(PartStatsModule.parts()
                                        .part(DreamtinkerItems.explode_core)
@@ -107,7 +107,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                                .slots(SlotType.ABILITY, 1)
                                .slots(SlotType.UPGRADE, 2)
                                .slots(SlotType.DEFENSE, 3).build();
-        defineArmor(toolsDefinition.UNDER_PLATE)
+        defineArmor(DTtoolsDefinition.UNDER_PLATE)
                 .modules(slots -> PartStatsModule.armor(slots)
                                                  .part(TinkerToolParts.plating, 1)
                                                  .part(TinkerToolParts.maille, 1)
