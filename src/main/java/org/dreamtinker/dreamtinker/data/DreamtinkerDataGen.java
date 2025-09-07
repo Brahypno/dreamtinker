@@ -13,10 +13,11 @@ import org.dreamtinker.dreamtinker.data.providers.DreamtinkerFluidTagProvider;
 import org.dreamtinker.dreamtinker.data.providers.DreamtinkerItemTagProvider;
 import org.dreamtinker.dreamtinker.data.providers.DreamtinkerRecipeProvider;
 import org.dreamtinker.dreamtinker.data.providers.loot.DreamtinkerLootTableProvider;
-import org.dreamtinker.dreamtinker.data.providers.model.DreamTinkerBlockStateProvider;
-import org.dreamtinker.dreamtinker.data.providers.model.DreamtinkerFluidTextureProvider;
-import org.dreamtinker.dreamtinker.data.providers.model.DreamtinkerItemModelProvider;
+import org.dreamtinker.dreamtinker.data.providers.model.*;
 import org.dreamtinker.dreamtinker.data.providers.tinker.*;
+import org.dreamtinker.dreamtinker.data.providers.tool.DreamtinkerPartSpriteProvider;
+import org.dreamtinker.dreamtinker.data.providers.tool.DreamtinkerStationLayout;
+import org.dreamtinker.dreamtinker.data.providers.tool.DreamtinkerToolDefinitionProvider;
 import slimeknights.tconstruct.fluids.data.FluidBucketModelProvider;
 import slimeknights.tconstruct.library.client.data.material.MaterialPartTextureGenerator;
 import slimeknights.tconstruct.tools.data.sprite.TinkerMaterialSpriteProvider;
@@ -57,6 +58,10 @@ public class DreamtinkerDataGen {
         generator.addProvider(event.includeClient(), new DreamtinkerModifierProvider(output));
         generator.addProvider(event.includeClient(), new DreamTinkerBlockStateProvider(output, helper));
         generator.addProvider(event.includeServer(), new DreamtinkerLootTableProvider(output));
+        generator.addProvider(event.includeServer(), new DreamtinkerToolDefinitionProvider(output));
+        generator.addProvider(event.includeServer(), new DreamtinkerStationLayout(output));
+        generator.addProvider(event.includeClient(), new DreamtinkerToolItemModelprovider(output, helper));
+        generator.addProvider(event.includeClient(), new DreamtinkerArmorModel(output));
 
 
     }

@@ -1,0 +1,15 @@
+{
+  "layers": [
+    {
+      "type": "tconstruct:material",
+      "index": 0,
+      "prefix": "dreamtinker:under_plate/plating_"
+    },
+    {
+      "type": "tconstruct:material",
+      "index": 1,
+      "prefix": "dreamtinker:under_plate/maille_"
+    },
+    "tconstruct:trim"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "loader": "tconstruct:tool",
+  "parent": "forge:item/default",
+  "textures": {
+    "plating": "dreamtinker:item/tool/armor/under_plate/chestplate/plating_broken",
+    "maille": "dreamtinker:item/tool/armor/under_plate/chestplate/maille_broken",
+    "maille1": "dreamtinker:item/tool/armor/under_plate/chestplate/maille1_broken"
+  },
+  "modifier_roots": [
+    "tconstruct:item/tool/armor/plate/chestplate/modifiers/broken/",
+    "tconstruct:item/tool/armor/plate/chestplate/modifiers/"
+  ],
+  "first_modifiers": [
+    "tconstruct:trim"
+  ],
+  "parts": [
+    {
+      "name": "plating",
+      "index": 0
+    },
+    {
+      "name": "maille",
+      "index": 1
+    },
+    {
+      "name": "maille1",
+      "index": 1
+    }
+  ]
+}

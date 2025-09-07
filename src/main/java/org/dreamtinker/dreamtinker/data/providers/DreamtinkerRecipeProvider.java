@@ -55,6 +55,7 @@ import slimeknights.tconstruct.library.recipe.tinkerstation.building.ToolBuildin
 import slimeknights.tconstruct.library.tools.SlotType;
 import slimeknights.tconstruct.library.tools.part.ToolPartItem;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
+import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.TinkerToolParts;
 import slimeknights.tconstruct.tools.data.material.MaterialIds;
 
@@ -94,6 +95,12 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         folder = "tools/recycling/";
         PartBuilderToolRecycleBuilder.tools(SizedIngredient.fromItems(4, DreamtinkerItems.tntarrow.get()))
                                      .save(consumer, location(folder + "tntarrow"));
+        DreamtinkerItems.underPlate.forEach(
+                item -> ToolBuildingRecipeBuilder.toolBuildingRecipe(item).layoutSlot(Dreamtinker.getLocation("under_plate"))
+                                                 .addExtraRequirement(Ingredient.of(TinkerModifiers.silkyCloth))
+                                                 .addExtraRequirement(Ingredient.of(TinkerModifiers.silkyCloth))
+                                                 .save(consumer, this.prefix(this.id(item), armorFolder)));
+
     }
 
     private void addAlloyRecipes(Consumer<FinishedRecipe> consumer) {

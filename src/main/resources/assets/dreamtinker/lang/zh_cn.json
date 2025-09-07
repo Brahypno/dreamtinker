@@ -150,7 +150,12 @@
   "item.dreamtinker.tntarrow.description": "一种消耗性的，造成范围伤害的特种近战武器，使用弓以发射。射程小于范围！",
   "item.dreamtinker.masu": "马槊",
   "item.dreamtinker.masu.description": "横槊赋诗，固一世之雄也。一款长距离低速横扫重武器，如果不在骑乘或力量状态下使用，会受到虚弱效果",
-
+  "item.dreamtinker.under_plate": "内衣护甲",
+  "item.dreamtinker.under_plate.description": "全方位防护——希望没有过防",
+  "item.dreamtinker.under_plate_helmet": "内衣头盔",
+  "item.dreamtinker.under_plate_chestplate": "内衣胸甲",
+  "item.dreamtinker.under_plate_leggings": "内裤和腿环",
+  "item.dreamtinker.under_plate_boots": "长短袜",
 
   "item.dreamtinker.raw_stibnite": "粗辉锑",
   "item.dreamtinker.valentinite": "锑华",

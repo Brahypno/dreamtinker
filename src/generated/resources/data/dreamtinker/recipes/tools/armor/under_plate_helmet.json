@@ -1,0 +1,14 @@
+{
+  "type": "tconstruct:tool_building",
+  "extra_requirements": [
+    {
+      "item": "tconstruct:silky_cloth"
+    },
+    {
+      "item": "tconstruct:silky_cloth"
+    }
+  ],
+  "result": "dreamtinker:under_plate_helmet",
+  "result_count": 1,
+  "slot_layout": "dreamtinker:under_plate"
+}

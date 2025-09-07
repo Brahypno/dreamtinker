@@ -14,7 +14,12 @@ import org.dreamtinker.dreamtinker.Item.void_pearl;
 import org.dreamtinker.dreamtinker.tools.Masu.Masu;
 import org.dreamtinker.dreamtinker.tools.TNTarrow.TNTarrow;
 import org.dreamtinker.dreamtinker.tools.toolsDefinition;
+import slimeknights.mantle.registration.object.EnumObject;
+import slimeknights.mantle.registration.object.ItemObject;
+import slimeknights.tconstruct.common.registration.ItemDeferredRegisterExtension;
 import slimeknights.tconstruct.library.tools.item.ModifiableItem;
+import slimeknights.tconstruct.library.tools.item.armor.ModifiableArmorItem;
+import slimeknights.tconstruct.library.tools.item.armor.MultilayerArmorItem;
 import slimeknights.tconstruct.library.tools.part.ToolPartItem;
 import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
 
@@ -26,13 +31,16 @@ import static org.dreamtinker.dreamtinker.Dreamtinker.MODID;
 public class DreamtinkerItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
     public static final DeferredRegister<Item> EL_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
+    public static final ItemDeferredRegisterExtension MODI_TOOLS = new ItemDeferredRegisterExtension(MODID);
 
     private static final Item.Properties TOOL = (new Item.Properties()).stacksTo(1);
     private static final Item.Properties PART = (new Item.Properties()).stacksTo(64);
 
-    public static final RegistryObject<ModifiableItem> tntarrow =
-            ITEMS.register("tntarrow", () -> new TNTarrow((new Item.Properties()).stacksTo(4), toolsDefinition.TNTARROW, 4));
-    public static final RegistryObject<ModifiableItem> masu = ITEMS.register("masu", () -> new Masu(TOOL, toolsDefinition.MASU));
+    public static final ItemObject<ModifiableItem> tntarrow =
+            MODI_TOOLS.register("tntarrow", () -> new TNTarrow((new Item.Properties()).stacksTo(4), toolsDefinition.TNTARROW, 4));
+    public static final ItemObject<ModifiableItem> masu = MODI_TOOLS.register("masu", () -> new Masu(TOOL, toolsDefinition.MASU));
+    public static final EnumObject<ArmorItem.Type, ModifiableArmorItem> underPlate =
+            MODI_TOOLS.registerEnum("under_plate", ArmorItem.Type.values(), type -> new MultilayerArmorItem(toolsDefinition.UNDER_PLATE, type, TOOL));
 
     public static final RegistryObject<ToolPartItem> explode_core = ITEMS.register("explode_core", () -> new ToolPartItem(PART, HeadMaterialStats.ID));
 

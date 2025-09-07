@@ -19,6 +19,7 @@ import org.dreamtinker.dreamtinker.event.compact.death_handler;
 import org.dreamtinker.dreamtinker.event.star_regulus_boost;
 import org.dreamtinker.dreamtinker.network.Dnetwork;
 import org.dreamtinker.dreamtinker.register.*;
+import slimeknights.tconstruct.library.utils.Util;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(Dreamtinker.MODID)
@@ -39,6 +40,7 @@ public class Dreamtinker {
         // Register ourselves for server and other game events we are interested in
 
         DreamtinkerItems.ITEMS.register(modEventBus);
+        DreamtinkerItems.MODI_TOOLS.register(modEventBus);
         DreamtinkerBlocks.BLOCKS.register(modEventBus);
         DreamtinkerFluids.FLUIDS.register(modEventBus);
         DreamtinkerModifers.MODIFIERS.register(modEventBus);
@@ -76,5 +78,9 @@ public class Dreamtinker {
     }
 
     public static ResourceLocation getLocation(String name) {return new ResourceLocation(MODID, name);}
+
+    public static String makeTranslationKey(String base, String name) {
+        return Util.makeTranslationKey(base, getLocation(name));
+    }
 
 }

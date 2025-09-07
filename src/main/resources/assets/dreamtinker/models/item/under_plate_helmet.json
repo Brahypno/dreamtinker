@@ -1,0 +1,22 @@
+{
+  "loader": "tconstruct:tool",
+  "parent": "forge:item/default",
+  "textures": {
+    "plating": "dreamtinker:item/tool/armor/under_plate/helmet/plating",
+    "maille":  "dreamtinker:item/tool/armor/under_plate/helmet/maille",
+    "maille1":  "dreamtinker:item/tool/armor/under_plate/helmet/maille1"
+  },
+  "modifier_roots": [ "tconstruct:item/tool/armor/plate/helmet/modifiers/" ],
+  "first_modifiers": [ "tconstruct:trim" ],
+  "parts": [
+    { "name": "plating", "index": 0 },
+    { "name": "maille",  "index": 1 },
+    { "name": "maille1",  "index": 2 }
+  ],
+  "overrides": [
+    {
+      "predicate": { "tconstruct:broken": 1 },
+      "model": "tconstruct:item/armor/under_plate/helmet_broken"
+    }
+  ]
+}

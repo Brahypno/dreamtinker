@@ -23,6 +23,9 @@ public class DreamtinkerTab {
             "itemGroup." + MODID + ".tool")).icon(() -> DreamtinkerItems.masu.get().getRenderTool()).displayItems((params, output) -> {
         ToolBuildHandler.addVariants(output::accept, DreamtinkerItems.masu.get(), "");
         ToolBuildHandler.addVariants(output::accept, DreamtinkerItems.tntarrow.get(), "");
+        for (var item : DreamtinkerItems.underPlate.values()) {
+            ToolBuildHandler.addVariants(output::accept, item, "");
+        }
     }).build());
 
     public static final RegistryObject<CreativeModeTab> PART =
