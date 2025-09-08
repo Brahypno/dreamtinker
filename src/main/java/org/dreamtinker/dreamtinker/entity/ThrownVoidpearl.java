@@ -10,6 +10,8 @@ import net.minecraft.world.phys.HitResult;
 import org.dreamtinker.dreamtinker.utils.DThelper;
 import org.jetbrains.annotations.NotNull;
 
+import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.voidpearlDamage;
+
 public class ThrownVoidpearl extends ThrownEnderpearl {
     public ThrownVoidpearl(EntityType<? extends ThrownEnderpearl> p_37491_, Level p_37492_) {
         super(p_37491_, p_37492_);
@@ -23,8 +25,10 @@ public class ThrownVoidpearl extends ThrownEnderpearl {
         super.onHitEntity(p_37502_);
         if (p_37502_.getEntity() instanceof LivingEntity le)
             for (int i = 0; i < 64; ++i)
-                if (DThelper.teleport(le))
+                if (DThelper.teleport(le)){
+                    le.hurt(le.level().damageSources().fellOutOfWorld(), voidpearlDamage.get().floatValue());
                     return;
+                }
 
     }
 
@@ -40,6 +44,8 @@ public class ThrownVoidpearl extends ThrownEnderpearl {
                 .addParticle(ParticleTypes.PORTAL, this.getX(), this.getY() + this.random.nextDouble() * (double) 2.0F, this.getZ(), this.random.nextGaussian(),
                              (double) 0.0F, this.random.nextGaussian());
         }
+        if (null != this.getOwner() && this.getOwner() instanceof LivingEntity le)
+            le.hurt(le.level().damageSources().fellOutOfWorld(), voidpearlDamage.get().floatValue());
         super.onHit(p_37504_);
     }
 }
