@@ -42,8 +42,15 @@
       }
     },
     {
+      "type": "tconstruct:base_stats",
+      "stats": {
+        "tconstruct:armor_toughness": 1.0
+      }
+    },
+    {
       "type": "tconstruct:multiply_stats",
       "multipliers": {
+        "tconstruct:armor": 0.7,
         "tconstruct:durability": 0.8
       }
     },

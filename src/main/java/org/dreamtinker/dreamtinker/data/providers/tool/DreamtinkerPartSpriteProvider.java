@@ -6,6 +6,9 @@ import slimeknights.tconstruct.library.client.data.material.AbstractPartSpritePr
 import slimeknights.tconstruct.tools.stats.PlatingMaterialStats;
 import slimeknights.tconstruct.tools.stats.StatlessMaterialStats;
 
+import static slimeknights.tconstruct.tools.data.sprite.TinkerPartSpriteProvider.ARMOR_MAILLE;
+import static slimeknights.tconstruct.tools.data.sprite.TinkerPartSpriteProvider.ARMOR_PLATING;
+
 public class DreamtinkerPartSpriteProvider extends AbstractPartSpriteProvider {
     public DreamtinkerPartSpriteProvider() {
         super(Dreamtinker.MODID);
@@ -31,10 +34,10 @@ public class DreamtinkerPartSpriteProvider extends AbstractPartSpriteProvider {
                                                             .addBreakablePart("maille", StatlessMaterialStats.MAILLE.getIdentifier())
                                                             .addBreakablePart("maille1", StatlessMaterialStats.MAILLE.getIdentifier());
         }
-        //addTexture("tinker_armor/plate/plating_armor", ARMOR_PLATING).disallowAnimated();
-        //addTexture("tinker_armor/plate/plating_leggings", ARMOR_PLATING).disallowAnimated();
-        //addTexture("tinker_armor/plate/maille_armor", ARMOR_MAILLE).disallowAnimated();
-        //addTexture("tinker_armor/plate/maille_leggings", ARMOR_MAILLE).disallowAnimated();
+        addTexture("tinker_armor/under_plate/plating_armor", ARMOR_PLATING).disallowAnimated();
+        addTexture("tinker_armor/under_plate/plating_leggings", ARMOR_PLATING).disallowAnimated();
+        addTexture("tinker_armor/under_plate/maille_armor", ARMOR_MAILLE).disallowAnimated();
+        addTexture("tinker_armor/under_plate/maille_leggings", ARMOR_MAILLE).disallowAnimated();
         //addTexture("tinker_armor/plate/maille_wings", ARMOR_MAILLE).disallowAnimated();
     }
 }

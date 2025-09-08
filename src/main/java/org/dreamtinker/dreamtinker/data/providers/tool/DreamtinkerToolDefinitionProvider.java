@@ -114,8 +114,11 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                                                  .part(TinkerToolParts.maille, 1))
                 .module(underplateMaterials)
                 .module(ArmorItem.Type.CHESTPLATE, new MultiplyStatsModule(MultiplierNBT.builder().set(ToolStats.ATTACK_DAMAGE, 0.4f).build()))
+                .module(new SetStatsModule(StatsNBT.builder()
+                                                   .set(ToolStats.ARMOR_TOUGHNESS, 1f).build()))
                 .module(new MultiplyStatsModule(MultiplierNBT.builder()
-                                                             .set(ToolStats.DURABILITY, 0.8f).build()))
+                                                             .set(ToolStats.DURABILITY, 0.8f)
+                                                             .set(ToolStats.ARMOR, 0.7f).build()))
                 .module(plateSlots);
     }
 

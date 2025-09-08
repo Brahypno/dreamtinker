@@ -14,12 +14,11 @@ import org.dreamtinker.dreamtinker.Item.void_pearl;
 import org.dreamtinker.dreamtinker.tools.DTtoolsDefinition;
 import org.dreamtinker.dreamtinker.tools.Masu.Masu;
 import org.dreamtinker.dreamtinker.tools.TNTarrow.TNTarrow;
+import org.dreamtinker.dreamtinker.tools.UnderArmor.UnderArmorItem;
 import slimeknights.mantle.registration.object.EnumObject;
 import slimeknights.mantle.registration.object.ItemObject;
 import slimeknights.tconstruct.common.registration.ItemDeferredRegisterExtension;
 import slimeknights.tconstruct.library.tools.item.ModifiableItem;
-import slimeknights.tconstruct.library.tools.item.armor.ModifiableArmorItem;
-import slimeknights.tconstruct.library.tools.item.armor.MultilayerArmorItem;
 import slimeknights.tconstruct.library.tools.part.ToolPartItem;
 import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
 
@@ -39,8 +38,8 @@ public class DreamtinkerItems {
     public static final ItemObject<ModifiableItem> tntarrow =
             MODI_TOOLS.register("tntarrow", () -> new TNTarrow((new Item.Properties()).stacksTo(4), DTtoolsDefinition.TNTARROW, 4));
     public static final ItemObject<ModifiableItem> masu = MODI_TOOLS.register("masu", () -> new Masu(TOOL, DTtoolsDefinition.MASU));
-    public static final EnumObject<ArmorItem.Type, ModifiableArmorItem> underPlate =
-            MODI_TOOLS.registerEnum("under_plate", ArmorItem.Type.values(), type -> new MultilayerArmorItem(DTtoolsDefinition.UNDER_PLATE, type, TOOL));
+    public static final EnumObject<ArmorItem.Type, UnderArmorItem> underPlate =
+            MODI_TOOLS.registerEnum("under_plate", ArmorItem.Type.values(), type -> new UnderArmorItem(DTtoolsDefinition.UNDER_PLATE, type, TOOL));
 
     public static final RegistryObject<ToolPartItem> explode_core = ITEMS.register("explode_core", () -> new ToolPartItem(PART, HeadMaterialStats.ID));
 
