@@ -42,6 +42,15 @@ public class DreamtinkerItemTagProvider extends ItemTagsProvider {
         this.tag(DreamtinkerTagkeys.Items.raw_stibnite).add(DreamtinkerItems.raw_stibnite.get());
         addArmorTags(DreamtinkerItems.underPlate, MULTIPART_TOOL, DURABILITY, TinkerTags.Items.BONUS_SLOTS,
                      TinkerTags.Items.TRIM);
+        tag(BASIC_ARMOR);
+        IntrinsicTagAppender<Item> bookArmor = tag(PUNY_ARMOR);
+        for (ArmorItem.Type slotType : ArmorItem.Type.values()) {
+            bookArmor.add(DreamtinkerItems.underPlate.get(slotType));
+        }
+        tag(MIGHTY_ARMOR);
+        tag(FANTASTIC_ARMOR);
+        bookArmor = tag(GADGETRY_ARMOR);
+        tag(BOOK_ARMOR).addTags(BASIC_ARMOR, PUNY_ARMOR, MIGHTY_ARMOR, FANTASTIC_ARMOR, GADGETRY_ARMOR);
     }
 
     private TagKey<Item> getArmorTag(ArmorItem.Type slotType) {

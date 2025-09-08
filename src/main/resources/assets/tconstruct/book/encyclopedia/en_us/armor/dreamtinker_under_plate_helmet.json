@@ -1,0 +1,16 @@
+{
+  "tool": "dreamtinker:under_plate_helmet",
+  "text": [
+    { "text": "UnderWear helmet are defensive helmet, with less protection, and balance all slots and low defense slots." }
+  ],
+  "properties": [
+    "Material controlled stats",
+    "80% durability",
+        "70% armor",
+        "2 Soul Slot",
+              "2 Ability Slots",
+            "2 Upgrade Slot",
+            "1 Defense Slots",
+            "3 Material Traits"
+  ]
+}

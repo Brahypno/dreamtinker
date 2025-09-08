@@ -103,10 +103,10 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
         DefaultMaterialsModule underplateMaterials = DefaultMaterialsModule.builder().material(tier2Material, tier2Material, tier2Material).build();
         ToolModule plateSlots =
                 ToolSlotsModule.builder()
-                               .slots(SlotType.SOUL, 1)
-                               .slots(SlotType.ABILITY, 1)
+                               .slots(SlotType.SOUL, 2)
+                               .slots(SlotType.ABILITY, 2)
                                .slots(SlotType.UPGRADE, 2)
-                               .slots(SlotType.DEFENSE, 3).build();
+                               .slots(SlotType.DEFENSE, 1).build();
         defineArmor(DTtoolsDefinition.UNDER_PLATE)
                 .modules(slots -> PartStatsModule.armor(slots)
                                                  .part(TinkerToolParts.plating, 1)
@@ -119,6 +119,8 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 .module(new MultiplyStatsModule(MultiplierNBT.builder()
                                                              .set(ToolStats.DURABILITY, 0.8f)
                                                              .set(ToolStats.ARMOR, 0.7f).build()))
+                .module(ToolTraitsModule.builder()
+                                        .trait(DreamtinkerModifers.weapon_transformation, 1).build())
                 .module(plateSlots);
     }
 

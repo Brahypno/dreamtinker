@@ -55,11 +55,20 @@
       }
     },
     {
+      "type": "tconstruct:traits",
+      "traits": [
+        {
+          "level": 1,
+          "name": "dreamtinker:weapon_transformation"
+        }
+      ]
+    },
+    {
       "type": "tconstruct:modifier_slots",
       "slots": {
-        "abilities": 1,
-        "defense": 3,
-        "souls": 1,
+        "abilities": 2,
+        "defense": 1,
+        "souls": 2,
         "upgrades": 2
       }
     }

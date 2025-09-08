@@ -139,6 +139,9 @@
   "modifier.dreamtinker.soul_upgrade": "灵魂升级",
   "modifier.dreamtinker.soul_upgrade.flavor": "升级灵魂",
   "modifier.dreamtinker.soul_upgrade.description": "以一个升级槽为代价获得灵魂槽",
+  "modifier.dreamtinker.weapon_transformation": "武器化",
+  "modifier.dreamtinker.weapon_transformation.flavor": "变身的时间到了！",
+  "modifier.dreamtinker.weapon_transformation.description": "基于护甲&韧性，在脚部提升远程，在腿部提升近战,胸甲提升幸运",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",

@@ -32,6 +32,7 @@ import org.dreamtinker.dreamtinker.modifier.tools.masu.realsweep;
 import org.dreamtinker.dreamtinker.modifier.tools.masu.silvernamebee;
 import org.dreamtinker.dreamtinker.modifier.tools.masu.strong_heavy;
 import org.dreamtinker.dreamtinker.modifier.tools.tntarrow.strong_explode;
+import org.dreamtinker.dreamtinker.modifier.tools.underPlate.weapon_transformation;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
 import slimeknights.tconstruct.library.modifiers.util.ModifierDeferredRegister;
@@ -84,6 +85,9 @@ public class DreamtinkerModifers {
     public static final StaticModifier<wither_shoot> wither_shoot = MODIFIERS.register("wither_shoot", wither_shoot::new);
     public static final StaticModifier<stone_heart> stone_heart = MODIFIERS.register("stone_heart", stone_heart::new);
     public static final StaticModifier<life_looting> life_looting = MODIFIERS.register("life_looting", life_looting::new);
+    //underplate
+    public static final StaticModifier<weapon_transformation> weapon_transformation = MODIFIERS.register("weapon_transformation", weapon_transformation::new);
+
     //etherium
     public static final StaticModifier<astral_break> astral_break = EL_MODIFIERS.register("astral_break", astral_break::new);
     public static final StaticModifier<etherium_protection> etherium_protection = EL_MODIFIERS.register("etherium_protection", etherium_protection::new);

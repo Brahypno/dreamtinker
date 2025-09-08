@@ -139,6 +139,9 @@
   "modifier.dreamtinker.soul_upgrade": "Soul Upgrade",
   "modifier.dreamtinker.soul_upgrade.flavor": "Upgrade Soul",
   "modifier.dreamtinker.soul_upgrade.description": "Trades an upgrade slot for one soul slot!",
+  "modifier.dreamtinker.weapon_transformation": "Weapon Transformation",
+  "modifier.dreamtinker.weapon_transformation.flavor": "Its time for transformation!",
+  "modifier.dreamtinker.weapon_transformation.description": "According to armor&toughness, boost melee on FEET, boost range on LEGS,boost LUCK on CHEST",
 
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",

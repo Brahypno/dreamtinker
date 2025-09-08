@@ -44,12 +44,13 @@ public class DreamtinkerItems {
     public static final RegistryObject<ToolPartItem> explode_core = ITEMS.register("explode_core", () -> new ToolPartItem(PART, HeadMaterialStats.ID));
 
     //star antimony
-    public static final RegistryObject<Item> raw_stibnite = ITEMS.register("raw_stibnite", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> valentinite = ITEMS.register("valentinite", () -> new valentinite(new Item.Properties()));
+    public static final RegistryObject<Item> raw_stibnite = ITEMS.register("raw_stibnite", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> valentinite = ITEMS.register("valentinite", () -> new valentinite(new Item.Properties().rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> nigrescence_antimony =
-            ITEMS.register("nigrescence_antimony", () -> new nigrescence_antimony(new Item.Properties()));
-    public static final RegistryObject<Item> metallivorous_stibium_lupus = ITEMS.register("metallivorous_stibium_lupus", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> regulus = ITEMS.register("star_regulus", () -> new star_regulus(new Item.Properties()));
+            ITEMS.register("nigrescence_antimony", () -> new nigrescence_antimony(new Item.Properties().rarity(Rarity.UNCOMMON)));
+    public static final RegistryObject<Item> metallivorous_stibium_lupus =
+            ITEMS.register("metallivorous_stibium_lupus", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> regulus = ITEMS.register("star_regulus", () -> new star_regulus(new Item.Properties().rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> void_pearl = ITEMS.register("void_pearl", () -> new void_pearl((new Item.Properties().rarity(
             Rarity.UNCOMMON)).stacksTo(16)));
     public static final RegistryObject<Item> soul_etherium = EL_ITEMS.register(
