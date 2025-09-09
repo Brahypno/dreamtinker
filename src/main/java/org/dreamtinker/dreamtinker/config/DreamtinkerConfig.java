@@ -100,6 +100,8 @@ public class DreamtinkerConfig {
 
     public static final ForgeConfigSpec.DoubleValue Prometheus =
             builder.comment("status boot everytime for ewige_widerkunft").defineInRange("Prometheus", 0.13, 0, 1);
+    public static final ForgeConfigSpec.IntValue CentralFlame =
+            builder.comment("How many Spins can ewige_widerkunft do?").defineInRange("CentralFlame", 12, 1, Integer.MAX_VALUE);
 
     public static final ForgeConfigSpec.IntValue BurninVainRandomProj =
             builder.comment("Allow Burn in Vain Modifier summon random Projectile when shooting").defineInRange("BurninVainRandomProj", 1, 0, 1);

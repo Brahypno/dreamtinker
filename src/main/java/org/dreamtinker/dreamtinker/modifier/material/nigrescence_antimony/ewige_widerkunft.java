@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
+import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.CentralFlame;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.Prometheus;
 import static org.dreamtinker.dreamtinker.utils.DTModiferCheck.ModifierInHand;
 
@@ -52,8 +53,11 @@ public class ewige_widerkunft extends BattleModifier {
                        breaks);
             tool.setDamage(0);
             if (holder != null){
-                holder.sendSystemMessage(Component.literal("13=1"));
+                holder.sendSystemMessage(Component.literal("13=1").withStyle(this.getDisplayName()
+                                                                                 .getStyle()));
                 holder.level().explode(holder,
+                                       holder.level().damageSources().explosion(holder, holder),
+                                       null,
                                        holder.getX(),
                                        holder.getY(),
                                        holder.getZ(),
@@ -68,44 +72,45 @@ public class ewige_widerkunft extends BattleModifier {
 
     private void LivingHurtEvent(LivingHurtEvent event) {
         if (event.getSource()
-                 .is(DamageTypeTags.IS_EXPLOSION) && event.getEntity() != null){
-            ModifierInHand(event.getEntity(),
-                           this.getId());
-            event.setCanceled(true);
+                 .is(DamageTypeTags.IS_EXPLOSION) && event.getEntity() != null && ModifierInHand(event.getEntity(),
+                                                                                                 this.getId())){
+            if (event.getEntity().getHealth() <= event.getAmount())
+                event.setCanceled(true);
         }
     }
 
     @Override
     public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
-        if (modifier.getLevel() > 0){
+        if (modifier.getLevel() > 0 && EquipmentSlot.MAINHAND == slot){
             ModDataNBT nbt = tool.getPersistentData();
-            int breaks = nbt.getInt(TAG_TOMB);
+            int breaks = Math.min(nbt.getInt(TAG_TOMB), modifier.getLevel() * CentralFlame.get());
             if (breaks > 0){
                 consumer.accept(Attributes.ATTACK_DAMAGE,
                                 new AttributeModifier(UUID.fromString(tool_attribute_uuid),
                                                       Attributes.ATTACK_DAMAGE.getDescriptionId(),
                                                       Math.pow(1 + Prometheus.get(),
                                                                breaks) / 2,
-                                                      AttributeModifier.Operation.MULTIPLY_BASE));
+                                                      AttributeModifier.Operation.MULTIPLY_TOTAL));
                 consumer.accept(Attributes.ATTACK_SPEED,
                                 new AttributeModifier(UUID.fromString(tool_attribute_uuid),
                                                       Attributes.ATTACK_SPEED.getDescriptionId(),
                                                       Math.pow(1 + Prometheus.get(),
                                                                breaks) / 2,
-                                                      AttributeModifier.Operation.MULTIPLY_BASE));
+                                                      AttributeModifier.Operation.MULTIPLY_TOTAL));
                 consumer.accept(Attributes.ATTACK_KNOCKBACK,
                                 new AttributeModifier(UUID.fromString(tool_attribute_uuid),
                                                       Attributes.ATTACK_KNOCKBACK.getDescriptionId(),
                                                       Math.pow(1 + Prometheus.get(),
                                                                breaks) / 2,
-                                                      AttributeModifier.Operation.MULTIPLY_BASE));
+                                                      AttributeModifier.Operation.MULTIPLY_TOTAL));
             }
         }
     }
 
     @Override
     public Component onModifierRemoved(IToolStackView tool, Modifier modifier) {
-        tool.getPersistentData().remove(TAG_TOMB);
+        if (0 < tool.getPersistentData().getInt(TAG_TOMB))
+            return Component.translatable(this.getTranslationKey() + ".salvage").withStyle((style) -> style.withColor(this.getTextColor()));
         return null;
     }
 
