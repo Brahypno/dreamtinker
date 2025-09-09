@@ -141,7 +141,7 @@
   "modifier.dreamtinker.soul_upgrade.description": "Trades an upgrade slot for one soul slot!",
   "modifier.dreamtinker.weapon_transformation": "Weapon Transformation",
   "modifier.dreamtinker.weapon_transformation.flavor": "Its time for transformation!",
-  "modifier.dreamtinker.weapon_transformation.description": "According to armor&toughness, boost melee on FEET, boost range on LEGS,boost LUCK on CHEST",
+  "modifier.dreamtinker.weapon_transformation.description": "According to armor&toughness, boost projectile damage on LEGGINGS, boost melee attack/damage on BOOTS,boost LUCK on CHESTPLATE",
 
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
@@ -158,7 +158,7 @@
   "item.dreamtinker.under_plate.description": "Give 360000 deg protection to all body!",
   "item.dreamtinker.under_plate_helmet": "UnderWear Plate Helmet",
   "item.dreamtinker.under_plate_chestplate": "UnderWear Plate Chestplate",
-  "item.dreamtinker.under_plate_leggings": "UnderWear Plate Pants",
+  "item.dreamtinker.under_plate_leggings": "Pants and Leg band",
   "item.dreamtinker.under_plate_boots": "UnderWear Plate Socks",
 
   "item.dreamtinker.raw_stibnite": "Raw Stibnite",

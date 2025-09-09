@@ -55,7 +55,6 @@ public class exiles_faulty extends BattleModifier {
             if (attacker.getAbsorptionAmount() < attacker.getMaxHealth())
                 attacker.setAbsorptionAmount(
                         (float) Math.min(attacker.getAbsorptionAmount() + damageDealt * ExilesFaultyAbsorbHPPercentage.get(), attacker.getMaxHealth()));
-        System.out.println(tool.getModifierList());
     }
 
     @Override

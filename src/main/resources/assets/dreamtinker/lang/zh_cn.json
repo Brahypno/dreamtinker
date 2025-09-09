@@ -141,7 +141,7 @@
   "modifier.dreamtinker.soul_upgrade.description": "以一个升级槽为代价获得灵魂槽",
   "modifier.dreamtinker.weapon_transformation": "武器化",
   "modifier.dreamtinker.weapon_transformation.flavor": "变身的时间到了！",
-  "modifier.dreamtinker.weapon_transformation.description": "基于护甲&韧性，在脚部提升远程，在腿部提升近战,胸甲提升幸运",
+  "modifier.dreamtinker.weapon_transformation.description": "基于护甲&韧性，在腿部提升弹射物伤害，在脚部提升攻击伤害和速度,在胸甲提升幸运",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
@@ -157,7 +157,7 @@
   "item.dreamtinker.under_plate.description": "全方位防护——希望没有过防",
   "item.dreamtinker.under_plate_helmet": "内衣头盔",
   "item.dreamtinker.under_plate_chestplate": "内衣胸甲",
-  "item.dreamtinker.under_plate_leggings": "内裤和腿环",
+  "item.dreamtinker.under_plate_leggings": "热裤和腿环",
   "item.dreamtinker.under_plate_boots": "长短袜",
 
   "item.dreamtinker.raw_stibnite": "粗辉锑",

@@ -13,6 +13,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.dreamtinker.dreamtinker.config.DreamtinkerConfig;
+import org.dreamtinker.dreamtinker.event.GeneralHurtHandler;
 import org.dreamtinker.dreamtinker.event.PlayerEvent;
 import org.dreamtinker.dreamtinker.event.addUnholywater;
 import org.dreamtinker.dreamtinker.event.compact.death_handler;
@@ -62,6 +63,7 @@ public class Dreamtinker {
         forgeEventBus.addListener(PlayerEvent::onLeftClickBlock);
         forgeEventBus.addListener(PlayerEvent::onLeftClick);
         forgeEventBus.addListener(PlayerEvent::onLeftClickEntity);
+        forgeEventBus.addListener(GeneralHurtHandler::LivingHurtEvent);
 
         Dnetwork.registerPackets();
 

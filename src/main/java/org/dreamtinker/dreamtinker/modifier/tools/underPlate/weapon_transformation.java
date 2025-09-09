@@ -1,20 +1,14 @@
 package org.dreamtinker.dreamtinker.modifier.tools.underPlate;
 
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraftforge.common.Tags;
 import org.dreamtinker.dreamtinker.modifier.base.baseclass.BattleModifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
-import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
-import javax.annotation.Nullable;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
@@ -53,15 +47,6 @@ public class weapon_transformation extends BattleModifier {
                 case HEAD -> {}
                 default -> {}
             }
-        }
-    }
-
-    @Override
-    public void onProjectileLaunch(IToolStackView tool, ModifierEntry modifier, LivingEntity shooter, Projectile projectile, @Nullable AbstractArrow arrow, ModDataNBT persistentData, boolean primary) {
-        if (tool.hasTag(Tags.Items.ARMORS_LEGGINGS)){
-            float armor = tool.getStats().get(ToolStats.ARMOR);
-            float toughness = tool.getStats().get(ToolStats.ARMOR_TOUGHNESS);
-            projectile.setDeltaMovement(projectile.getDeltaMovement().scale(1 + armor * toughness * UnderPlateBoostMutiply.get()));
         }
     }
 }

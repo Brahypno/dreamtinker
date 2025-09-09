@@ -22,9 +22,8 @@ public class DTModiferCheck {
             if (!entity.getItemBySlot(slot).is(TinkerTags.Items.MODIFIABLE))
                 return 0;
             ToolStack toolStack = ToolStack.from(entity.getItemBySlot(slot));
-            if (!toolStack.isBroken()){
+            if (!toolStack.isBroken())
                 return ModifierUtil.getModifierLevel(entity.getItemBySlot(slot), id);
-            }
         }
         return 0;
     }
@@ -75,11 +74,10 @@ public class DTModiferCheck {
 
     @Nullable
     public static ToolStack getToolWithModifier(LivingEntity entity, ModifierId modifierId) {
-        for (EquipmentSlot slot : slots) {
-            if (0 < getModifierlevel(entity, modifierId, slot)){
+        for (EquipmentSlot slot : slots)
+            if (0 < getModifierlevel(entity, modifierId, slot))
                 return ToolStack.from(entity.getItemBySlot(slot));
-            }
-        }
+        
         return null;
     }
 
