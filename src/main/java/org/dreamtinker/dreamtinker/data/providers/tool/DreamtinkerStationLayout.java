@@ -19,12 +19,12 @@ public class DreamtinkerStationLayout extends AbstractStationSlotLayoutProvider 
     @Override
     protected void addLayouts() {
         defineModifiable(DreamtinkerItems.masu)
-                .sortIndex(SORT_WEAPON + SORT_LARGE)
+                .sortIndex(SORT_WEAPON * 2 + SORT_LARGE)
                 .addInputItem(TinkerToolParts.broadBlade, 45, 62)
                 .addInputItem(TinkerToolParts.broadBlade, 45, 26)
                 .addInputItem(TinkerToolParts.largePlate, 45, 46)
-                .addInputItem(TinkerToolParts.toolHandle, 7, 62)
-                .addInputItem(TinkerToolParts.toolHandle, 25, 46)
+                .addInputItem(TinkerToolParts.toughHandle, 7, 62)
+                .addInputItem(TinkerToolParts.toughHandle, 25, 46)
                 .build();
         defineModifiable(DreamtinkerItems.tntarrow)
                 .sortIndex(SORT_WEAPON + SORT_RANGED)
