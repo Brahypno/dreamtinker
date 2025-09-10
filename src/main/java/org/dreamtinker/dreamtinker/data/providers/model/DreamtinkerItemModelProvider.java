@@ -58,6 +58,7 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
         generateItemModel(DreamtinkerItems.soul_etherium, "materials");
         generateItemModel(DreamtinkerItems.twist_obsidian_pane, "");
         generateItemModel(DreamtinkerItems.persona_cast, "casts");
+        generateItemModel(DreamtinkerItems.white_peach, "");
         //generateBlockItemModel(object);
         generateBucketItemModel(DreamtinkerFluids.molten_echo_shard);
         generateBucketItemModel(DreamtinkerFluids.molten_albedo_stibium);

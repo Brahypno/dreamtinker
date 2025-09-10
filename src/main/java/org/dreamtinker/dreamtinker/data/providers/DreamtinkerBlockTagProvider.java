@@ -5,8 +5,10 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import org.dreamtinker.dreamtinker.data.DreamtinkerTagkeys;
 import org.dreamtinker.dreamtinker.register.DreamtinkerBlocks;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.registration.object.BuildingBlockObject;
@@ -29,6 +31,7 @@ public class DreamtinkerBlockTagProvider extends BlockTagsProvider {
     protected void addTags(HolderLookup.Provider provider) {
         this.tag(BlockTags.DRAGON_IMMUNE).add(DreamtinkerBlocks.crying_obsidian_plane.get());
         tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_DIAMOND_TOOL, DreamtinkerBlocks.crying_obsidian_plane);
+        this.tag(DreamtinkerTagkeys.Blocks.drop_peach).add(Blocks.BIRCH_LEAVES);
     }
 
     @SafeVarargs

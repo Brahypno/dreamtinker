@@ -17,33 +17,40 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraftforge.common.loot.LootModifier;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.dreamtinker.dreamtinker.register.DreamtinkerItems;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.AntimonyLootChance;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.WhitepeachLootChance;
 
-public class AntimonyLootModifier extends LootModifier {
-    private final Item antimony;
+public class ExtraDropLootModifier extends LootModifier {
+    private final Item result;
     private final List<TagKey<Block>> target_tags;
+    private final Map<Item, Double> rates = Map.of(
+            DreamtinkerItems.raw_stibnite.get(), AntimonyLootChance.get(),
+            DreamtinkerItems.white_peach.get(), WhitepeachLootChance.get()
+    );
 
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public static final Codec<AntimonyLootModifier> CODEC = RecordCodecBuilder.create(inst -> codecStart(inst)
-            .and(ForgeRegistries.ITEMS.getCodec().fieldOf("antimony").forGetter(m -> m.antimony))
+    public static final Codec<ExtraDropLootModifier> CODEC = RecordCodecBuilder.create(inst -> codecStart(inst)
+            .and(ForgeRegistries.ITEMS.getCodec().fieldOf("result").forGetter(m -> m.result))
             .and(ResourceLocation.CODEC.listOf().optionalFieldOf("target_tags", List.of())
                                        .forGetter(m -> m.target_tags.stream().map(TagKey::location).toList()))
             .apply(inst, (conditions, item, tagLocs) -> {
                 List<TagKey<Block>> tags = tagLocs.stream().map(loc -> TagKey.create(Registries.BLOCK, loc)).toList();
-                return new AntimonyLootModifier(conditions, item, tags);
+                return new ExtraDropLootModifier(conditions, item, tags);
             })
     );
 
 
-    public AntimonyLootModifier(LootItemCondition[] conditions, Item antimony, List<TagKey<Block>> target_tags) {
+    public ExtraDropLootModifier(LootItemCondition[] conditions, Item result, List<TagKey<Block>> target_tags) {
         super(conditions);
-        this.antimony = antimony;
+        this.result = result;
         this.target_tags = List.copyOf(target_tags);
     }
 
@@ -64,16 +71,16 @@ public class AntimonyLootModifier extends LootModifier {
                 return objectArrayList;
             }
         }
-        float chance = (float) ((fortune + 1 + lootContext.getLuck()) * AntimonyLootChance.get());
+        float chance = (float) ((fortune + 1 + lootContext.getLuck()) * rates.getOrDefault(result, 1d));
         if (lootContext.getRandom().nextFloat() < chance){
             int amount = 1 + lootContext.getRandom().nextInt((int) (1 + fortune + lootContext.getLuck()));
-            objectArrayList.add(new ItemStack(antimony, amount));
+            objectArrayList.add(new ItemStack(result, amount));
         }
 
         return objectArrayList;
     }
 
-    public Codec<AntimonyLootModifier> codec() {
+    public Codec<ExtraDropLootModifier> codec() {
         return CODEC;
     }
 

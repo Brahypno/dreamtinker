@@ -45,6 +45,16 @@ public class DreamtinkerItems {
             MODI_TOOLS.registerEnum("under_plate", ArmorItem.Type.values(), type -> new UnderArmorItem(DTtoolsDefinition.UNDER_PLATE, type, TOOL));
 
     public static final RegistryObject<ToolPartItem> explode_core = ITEMS.register("explode_core", () -> new ToolPartItem(PART, HeadMaterialStats.ID));
+    public static final RegistryObject<ToolPartItem> memoryOrthant =
+            ITEMS.register("memory_orthant", () -> new ToolPartItem(PART.rarity(Rarity.RARE), HeadMaterialStats.ID));
+    public static final RegistryObject<ToolPartItem> wishOrthant =
+            ITEMS.register("wish_orthant", () -> new ToolPartItem(PART, StatlessMaterialStats.BINDING.getIdentifier()));
+    public static final RegistryObject<ToolPartItem> soulOrthant =
+            ITEMS.register("soul_orthant", () -> new ToolPartItem(PART.rarity(Rarity.RARE), LimbMaterialStats.ID));
+    public static final RegistryObject<ToolPartItem> personaOrthant =
+            ITEMS.register("persona_orthant", () -> new ToolPartItem(PART.rarity(Rarity.RARE), GripMaterialStats.ID));
+    public static final RegistryObject<ToolPartItem> reasonEmanation =
+            ITEMS.register("reason_emanation", () -> new ToolPartItem(PART.rarity(Rarity.RARE), HeadMaterialStats.ID));
 
     //star antimony
     public static final RegistryObject<Item> raw_stibnite = ITEMS.register("raw_stibnite", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
@@ -56,6 +66,18 @@ public class DreamtinkerItems {
     public static final RegistryObject<Item> regulus = ITEMS.register("star_regulus", () -> new star_regulus(new Item.Properties().rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> void_pearl = ITEMS.register("void_pearl", () -> new void_pearl((new Item.Properties().rarity(
             Rarity.UNCOMMON)).stacksTo(16)));
+
+    public static final RegistryObject<Item> twist_obsidian_pane =
+            ITEMS.register("twist_obsidian_pane", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> memory_cast = ITEMS.register("memory_cast", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> wish_cast = ITEMS.register("wish_cast", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> soul_cast = ITEMS.register("soul_cast", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> persona_cast = ITEMS.register("persona_cast", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> reason_cast = ITEMS.register("reason_cast", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+
+    public static final RegistryObject<Item> white_peach = ITEMS.register("white_peach", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
+
+
     public static final RegistryObject<Item> soul_etherium = EL_ITEMS.register(
             "soul_etherium",
             () -> new Item(new Item.Properties().rarity(Rarity.EPIC)) {
@@ -67,24 +89,6 @@ public class DreamtinkerItems {
                 }
             }
     );
-    public static final RegistryObject<Item> twist_obsidian_pane =
-            ITEMS.register("twist_obsidian_pane", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
-    public static final RegistryObject<Item> memory_cast = ITEMS.register("memory_cast", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
-    public static final RegistryObject<Item> wish_cast = ITEMS.register("wish_cast", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
-    public static final RegistryObject<Item> soul_cast = ITEMS.register("soul_cast", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
-    public static final RegistryObject<Item> persona_cast = ITEMS.register("persona_cast", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
-    public static final RegistryObject<Item> reason_cast = ITEMS.register("reason_cast", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
-
-    public static final RegistryObject<ToolPartItem> memoryOrthant =
-            ITEMS.register("memory_orthant", () -> new ToolPartItem(PART.rarity(Rarity.RARE), HeadMaterialStats.ID));
-    public static final RegistryObject<ToolPartItem> wishOrthant =
-            ITEMS.register("wish_orthant", () -> new ToolPartItem(PART, StatlessMaterialStats.BINDING.getIdentifier()));
-    public static final RegistryObject<ToolPartItem> soulOrthant =
-            ITEMS.register("soul_orthant", () -> new ToolPartItem(PART.rarity(Rarity.RARE), LimbMaterialStats.ID));
-    public static final RegistryObject<ToolPartItem> personaOrthant =
-            ITEMS.register("persona_orthant", () -> new ToolPartItem(PART.rarity(Rarity.RARE), GripMaterialStats.ID));
-    public static final RegistryObject<ToolPartItem> reasonEmanation =
-            ITEMS.register("reason_emanation", () -> new ToolPartItem(PART.rarity(Rarity.RARE), HeadMaterialStats.ID));
 
     public static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         output.accept(raw_stibnite.get());
@@ -99,6 +103,7 @@ public class DreamtinkerItems {
         output.accept(soul_cast.get());
         output.accept(persona_cast.get());
         output.accept(reason_cast.get());
+        output.accept(white_peach.get());
         if (ModList.get().isLoaded("enigmaticlegacy"))
             output.accept(soul_etherium.get());
     }

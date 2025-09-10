@@ -3,6 +3,7 @@ package org.dreamtinker.dreamtinker.data;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Dreamtinker;
@@ -49,5 +50,17 @@ public class DreamtinkerTagkeys {
         }
 
         public static final TagKey<Item> raw_stibnite = forgeTag("raw_materials/stibnite");
+    }
+
+    public static class Blocks {
+        private static TagKey<Block> forgeTag(String name) {
+            return TagKey.create(ForgeRegistries.BLOCKS.getRegistryKey(), new ResourceLocation("forge", name));
+        }
+
+        private static TagKey<Block> dreamtinkerTag(String name) {
+            return TagKey.create(ForgeRegistries.BLOCKS.getRegistryKey(), new ResourceLocation(Dreamtinker.MODID, name));
+        }
+
+        public static final TagKey<Block> drop_peach = dreamtinkerTag("drops/peach");
     }
 }

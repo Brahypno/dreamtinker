@@ -1,0 +1,6 @@
+{
+  "type": "dreamtinker:extra_drop_loot",
+  "conditions": [],
+  "result": "dreamtinker:white_peach",
+  "target_tags": ["dreamtinker:drops/peach"]
+}

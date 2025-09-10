@@ -49,6 +49,8 @@ public class DreamtinkerConfig {
             builder.comment("how many times trying to dodge?").defineInRange("voidpearlDropRate", 0.1, 0, 1);
     public static final ForgeConfigSpec.DoubleValue voidpearlDamage =
             builder.comment("how many damage this voidPearDeal?").defineInRange("voidpearlDamage", 2.0, 0.1, 1000);
+    public static final ForgeConfigSpec.DoubleValue WhitepeachLootChance =
+            builder.comment("Base chance to get White Peach drop from birch").defineInRange("WhitepeachLootChance", 0.2, 0, 10);
 
     static {
         builder.pop();

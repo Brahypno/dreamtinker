@@ -6,7 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.LootModifier.AntimonyLootModifier;
+import org.dreamtinker.dreamtinker.LootModifier.ExtraDropLootModifier;
 
 public class DreamtinkerLoots {
     public static final DeferredRegister<Codec<? extends IGlobalLootModifier>> LOOTMODIFIERS =
@@ -14,5 +14,5 @@ public class DreamtinkerLoots {
 
 
     public static final RegistryObject<Codec<? extends IGlobalLootModifier>> ANTIMONY_LOOT =
-            LOOTMODIFIERS.register("antimony_loot", () -> AntimonyLootModifier.CODEC);
+            LOOTMODIFIERS.register("extra_drop_loot", () -> ExtraDropLootModifier.CODEC);
 }
