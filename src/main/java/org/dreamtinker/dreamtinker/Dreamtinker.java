@@ -13,9 +13,8 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.dreamtinker.dreamtinker.config.DreamtinkerConfig;
-import org.dreamtinker.dreamtinker.event.GeneralHurtHandler;
 import org.dreamtinker.dreamtinker.event.PlayerEvent;
-import org.dreamtinker.dreamtinker.event.addUnholywater;
+import org.dreamtinker.dreamtinker.event.compact.addUnholywater;
 import org.dreamtinker.dreamtinker.event.compact.death_handler;
 import org.dreamtinker.dreamtinker.event.star_regulus_boost;
 import org.dreamtinker.dreamtinker.network.Dnetwork;
@@ -31,10 +30,9 @@ public class Dreamtinker {
 
     @SuppressWarnings({"removal"})
     public Dreamtinker() {
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, DreamtinkerConfig.specs, "DreamTinkerConfig.toml");
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
-
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, DreamtinkerConfig.specs, "DreamTinkerConfig.toml");
 
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
@@ -59,11 +57,10 @@ public class Dreamtinker {
         }
 
         MinecraftForge.EVENT_BUS.register(this);
-        forgeEventBus.addListener(star_regulus_boost::onServerTick);
         forgeEventBus.addListener(PlayerEvent::onLeftClickBlock);
         forgeEventBus.addListener(PlayerEvent::onLeftClick);
         forgeEventBus.addListener(PlayerEvent::onLeftClickEntity);
-        forgeEventBus.addListener(GeneralHurtHandler::LivingHurtEvent);
+        forgeEventBus.addListener(star_regulus_boost::onServerTick);
 
         Dnetwork.registerPackets();
 

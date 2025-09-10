@@ -13,8 +13,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.data.DreamtinkerMaterialIds;
 import slimeknights.tconstruct.library.materials.MaterialRegistry;
-import slimeknights.tconstruct.library.materials.definition.MaterialId;
 import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
 import slimeknights.tconstruct.library.tools.part.ToolPartItem;
 import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
@@ -78,9 +78,11 @@ public class moonlightConversion {
     }
 
     private static ItemStack getRandomMoonlightIceHeadPart() {
-        MaterialVariantId mli = MaterialRegistry.getMaterial(Objects.requireNonNull(MaterialId.tryParse("dreamtinker:moonlight_ice"))).getIdentifier();
+        MaterialVariantId mli = MaterialRegistry.getMaterial(DreamtinkerMaterialIds.moonlight_ice.getId()).getIdentifier();
 
-        List<ToolPartItem> headParts = ForgeRegistries.ITEMS.getValues().stream().filter(item -> item instanceof ToolPartItem part && part.getStatType() == HeadMaterialStats.ID).map(item -> (ToolPartItem) item).toList();
+        List<ToolPartItem> headParts =
+                ForgeRegistries.ITEMS.getValues().stream().filter(item -> item instanceof ToolPartItem part && part.getStatType() == HeadMaterialStats.ID)
+                                     .map(item -> (ToolPartItem) item).toList();
 
 
         if (headParts.isEmpty())

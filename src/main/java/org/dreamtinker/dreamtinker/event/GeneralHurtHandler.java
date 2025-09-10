@@ -5,6 +5,9 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.register.DreamtinkerModifers;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
@@ -13,7 +16,9 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.UnderPlateBoostMutiply;
 
+@Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class GeneralHurtHandler {
+    @SubscribeEvent
     public static void LivingHurtEvent(LivingHurtEvent event) {
         DamageSource dmg = event.getSource();
         if (null != dmg.getEntity() && dmg.getDirectEntity() instanceof Projectile)

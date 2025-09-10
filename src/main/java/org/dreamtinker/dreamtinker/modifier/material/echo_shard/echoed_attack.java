@@ -5,6 +5,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -60,7 +61,8 @@ public class echoed_attack extends BattleModifier {
             ModDataNBT nbt = tool.getPersistentData();
             if (nbt.contains(TAG_ECHO_ENERGY, TAG_INT)){
                 int count = nbt.getInt(TAG_ECHO_ENERGY);
-                tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.echo_energy").append(String.valueOf(count)).withStyle(this.getDisplayName().getStyle()));
+                tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.echo_energy").append(String.valueOf(count))
+                                     .withStyle(this.getDisplayName().getStyle()));
             }
         }
     }
@@ -123,7 +125,8 @@ public class echoed_attack extends BattleModifier {
     }
 
     private void shortCutDamage(IToolStackView tool, ToolAttackContext context) {
-        float damage = getAttributeAttackDamage(tool, context.getAttacker(), Util.getSlotType(tool.getItem().equals(context.getAttacker().getMainHandItem().getItem()) ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND));
+        float damage = getAttributeAttackDamage(tool, context.getAttacker(), Util.getSlotType(
+                tool.getItem().equals(context.getAttacker().getMainHandItem().getItem()) ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND));
         float baseDamage = damage;
         List<ModifierEntry> modifiers = tool.getModifierList();
         for (ModifierEntry entry : modifiers) {
@@ -139,6 +142,8 @@ public class echoed_attack extends BattleModifier {
     }
 
     public static void performSonicBoomSweep(IToolStackView tool, ServerLevel level, LivingEntity attacker) {
+        if (level.isClientSide)
+            return;
         //Sonic Boom damage depend on range modifier!
         List<ModifierEntry> modifiers = tool.getModifierList();
         Arrow arrow = new Arrow(level, attacker);
@@ -167,7 +172,9 @@ public class echoed_attack extends BattleModifier {
             level.sendParticles(ParticleTypes.SONIC_BOOM, pos.x, pos.y, pos.z, 1, 0, 0, 0, 0);
 
             // 检测这格内的实体（半径1格球形范围）
-            List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, new AABB(pos.x - 0.5, pos.y - 0.5, pos.z - 0.5, pos.x + 0.5, pos.y + 0.5, pos.z + 0.5), e -> e != attacker && e.isAlive() && attacker.canAttack(e));
+            List<LivingEntity> entities =
+                    level.getEntitiesOfClass(LivingEntity.class, new AABB(pos.x - 0.5, pos.y - 0.5, pos.z - 0.5, pos.x + 0.5, pos.y + 0.5, pos.z + 0.5),
+                                             e -> e != attacker && e.isAlive() && attacker.canAttack(e));
 
             for (LivingEntity target : entities) {
                 if (hitEntities.contains(target))
@@ -187,6 +194,6 @@ public class echoed_attack extends BattleModifier {
         }
 
         // 播放音效
-        attacker.playSound(SoundEvents.WARDEN_SONIC_BOOM, 3.0F, 1.0F);
+        attacker.level().playSound(null, attacker.getOnPos(), SoundEvents.WARDEN_SONIC_BOOM, SoundSource.NEUTRAL, 3.0F, 1.0F);
     }
 }

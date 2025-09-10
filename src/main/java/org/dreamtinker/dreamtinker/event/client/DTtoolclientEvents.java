@@ -1,6 +1,10 @@
 package org.dreamtinker.dreamtinker.event.client;
 
 import net.minecraft.client.color.item.ItemColors;
+import net.minecraft.client.renderer.entity.ArrowRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
@@ -8,7 +12,10 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.entity.TNTArrowEntity;
+import org.dreamtinker.dreamtinker.register.DreamtinkerEntity;
 import org.dreamtinker.dreamtinker.register.DreamtinkerItems;
+import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.ClientEventBase;
 import slimeknights.tconstruct.library.client.model.TinkerItemProperties;
 import slimeknights.tconstruct.library.client.model.tools.ToolModel;
@@ -27,6 +34,13 @@ public class DTtoolclientEvents extends ClientEventBase {
 
             Consumer<Item> brokenConsumer = TinkerItemProperties::registerBrokenProperty;
             DreamtinkerItems.underPlate.forEach(brokenConsumer);
+            EntityRenderers.register(DreamtinkerEntity.TNTARROW.get(), (EntityRendererProvider.Context context) -> new ArrowRenderer<>(context) {
+                @Override
+                public @NotNull ResourceLocation getTextureLocation(@NotNull TNTArrowEntity tntArrowEntity) {
+                    return new ResourceLocation("minecraft", "textures/entity/projectiles/arrow.png");
+
+                }
+            });
         });
     }
 
