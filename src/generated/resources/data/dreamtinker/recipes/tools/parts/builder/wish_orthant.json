@@ -1,0 +1,11 @@
+{
+  "type": "tconstruct:part_builder",
+  "cost": 3,
+  "pattern": "dreamtinker:wish_orthant",
+  "pattern_item": {
+    "item": "dreamtinker:wish_cast"
+  },
+  "result": {
+    "item": "dreamtinker:wish_orthant"
+  }
+}

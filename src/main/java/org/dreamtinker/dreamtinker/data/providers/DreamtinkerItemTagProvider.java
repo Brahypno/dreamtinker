@@ -29,17 +29,27 @@ public class DreamtinkerItemTagProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider Provider) {
+        //tools
         this.tag(TinkerTags.Items.TOOL_PARTS).add(DreamtinkerItems.explode_core.get());
         addToolTags(DreamtinkerItems.masu, MULTIPART_TOOL, DURABILITY, HARVEST, MELEE_PRIMARY, INTERACTABLE_RIGHT, SWORD, BROAD_TOOLS, BONUS_SLOTS,
                     ItemTags.SWORDS, AOE);
         addToolTags(DreamtinkerItems.tntarrow, MULTIPART_TOOL, DURABILITY, HARVEST, MELEE, SMALL_TOOLS, BONUS_SLOTS);
-        this.tag(TinkerTags.Items.CASTS).add(DreamtinkerItems.persona_cast.get());
-        this.tag(TinkerTags.Items.PATTERNS).add(DreamtinkerItems.persona_cast.get());
-        this.tag(TinkerTags.Items.SINGLE_USE_CASTS).add(DreamtinkerItems.persona_cast.get());
+        //parts
+        this.tag(TinkerTags.Items.CASTS)
+            .add(DreamtinkerItems.memory_cast.get(), DreamtinkerItems.wish_cast.get(), DreamtinkerItems.soul_cast.get(), DreamtinkerItems.persona_cast.get(),
+                 DreamtinkerItems.reason_cast.get());
+        this.tag(TinkerTags.Items.PATTERNS)
+            .add(DreamtinkerItems.memory_cast.get(), DreamtinkerItems.wish_cast.get(), DreamtinkerItems.soul_cast.get(), DreamtinkerItems.persona_cast.get(),
+                 DreamtinkerItems.reason_cast.get());
+        this.tag(TinkerTags.Items.SINGLE_USE_CASTS)
+            .add(DreamtinkerItems.memory_cast.get(), DreamtinkerItems.wish_cast.get(), DreamtinkerItems.soul_cast.get(), DreamtinkerItems.persona_cast.get(),
+                 DreamtinkerItems.reason_cast.get());
+        //items
         this.tag(Tags.Items.INGOTS)
             .add(DreamtinkerItems.metallivorous_stibium_lupus.get(), DreamtinkerItems.regulus.get(), DreamtinkerItems.soul_etherium.get());
         this.tag(Tags.Items.GEMS).add(DreamtinkerItems.valentinite.get(), DreamtinkerItems.nigrescence_antimony.get());
         this.tag(DreamtinkerTagkeys.Items.raw_stibnite).add(DreamtinkerItems.raw_stibnite.get());
+        //armor
         addArmorTags(DreamtinkerItems.underPlate, MULTIPART_TOOL, DURABILITY, TinkerTags.Items.BONUS_SLOTS,
                      TinkerTags.Items.TRIM);
         tag(BASIC_ARMOR);

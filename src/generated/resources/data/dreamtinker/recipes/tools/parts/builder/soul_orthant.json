@@ -1,0 +1,11 @@
+{
+  "type": "tconstruct:part_builder",
+  "cost": 3,
+  "pattern": "dreamtinker:soul_orthant",
+  "pattern_item": {
+    "item": "dreamtinker:soul_cast"
+  },
+  "result": {
+    "item": "dreamtinker:soul_orthant"
+  }
+}

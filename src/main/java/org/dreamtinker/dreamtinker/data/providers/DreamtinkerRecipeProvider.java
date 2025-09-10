@@ -42,6 +42,7 @@ import slimeknights.tconstruct.library.data.recipe.IToolRecipeHelper;
 import slimeknights.tconstruct.library.recipe.FluidValues;
 import slimeknights.tconstruct.library.recipe.alloying.AlloyRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.casting.ItemCastingRecipeBuilder;
+import slimeknights.tconstruct.library.recipe.casting.material.CompositeCastingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.casting.material.MaterialCastingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.entitymelting.EntityMeltingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.fuel.MeltingFuelBuilder;
@@ -50,6 +51,7 @@ import slimeknights.tconstruct.library.recipe.melting.IMeltingRecipe;
 import slimeknights.tconstruct.library.recipe.melting.MeltingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.modifiers.adding.ModifierRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.partbuilder.ItemPartRecipeBuilder;
+import slimeknights.tconstruct.library.recipe.partbuilder.PartRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.partbuilder.recycle.PartBuilderToolRecycleBuilder;
 import slimeknights.tconstruct.library.recipe.tinkerstation.building.ToolBuildingRecipeBuilder;
 import slimeknights.tconstruct.library.tools.SlotType;
@@ -361,27 +363,43 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         String partFolder = "tools/parts/";
         String castFolder = "smeltery/casts/";
         //backdoor for star_regulus
-        ArrayList<CastItemObject> casts = new ArrayList<>(
+        ArrayList<CastItemObject> armor_casts = new ArrayList<>(
                 Arrays.asList(TinkerSmeltery.helmetPlatingCast, TinkerSmeltery.chestplatePlatingCast, TinkerSmeltery.leggingsPlatingCast,
                               TinkerSmeltery.bootsPlatingCast));
         List<ToolPartItem> toolParts = TinkerToolParts.plating.values();
-        int[] costs = {3, 6, 5, 2};
+        int[] armor_costs = {3, 6, 5, 2};
         CompoundTag nbt = new CompoundTag();
         nbt.putString("Material", "dreamtinker:star_regulus");
-        for (int i = 0; i < casts.size(); i++) {
+        for (int i = 0; i < armor_casts.size(); i++) {
             ItemStack stack = new ItemStack(toolParts.get(i));
             stack.getOrCreateTag().merge(nbt);
-            ItemPartRecipeBuilder.item(casts.get(i).getName(), ItemOutput.fromStack(stack))
-                                 .material(DreamtinkerMaterialIds.star_regulus, costs[i])
+            ItemPartRecipeBuilder.item(armor_casts.get(i).getName(), ItemOutput.fromStack(stack))
+                                 .material(DreamtinkerMaterialIds.star_regulus, armor_costs[i])
                                  .setPatternItem(CompoundIngredient.of(Ingredient.of(TinkerTags.Items.DEFAULT_PATTERNS),
-                                                                       Ingredient.of(casts.get(i).get())))
-                                 .save(consumer, location(partFolder + "builder/star_regulus/" + casts.get(i).getName().getPath()));
+                                                                       Ingredient.of(armor_casts.get(i).get())))
+                                 .save(consumer, location(partFolder + "builder/star_regulus/" + armor_casts.get(i).getName().getPath()));
         }
 
         MaterialCastingRecipeBuilder.tableRecipe(DreamtinkerItems.explode_core.get())
                                     .setCast(Items.GUNPOWDER, true)
                                     .setItemCost(8)
                                     .save(consumer, location(partFolder + "explode_core"));
+        //partRecipes(consumer, DreamtinkerItems.memoryOrthant, TinkerSmeltery.pickHeadCast, 2, partFolder, castFolder);
+        ToolPartItem[] tree_parts =
+                new ToolPartItem[]{DreamtinkerItems.memoryOrthant.get(), DreamtinkerItems.wishOrthant.get(), DreamtinkerItems.soulOrthant.get(), DreamtinkerItems.personaOrthant.get(), DreamtinkerItems.reasonEmanation.get()};
+        Item[] tree_casts =
+                new Item[]{DreamtinkerItems.memory_cast.get(), DreamtinkerItems.wish_cast.get(), DreamtinkerItems.soul_cast.get(), DreamtinkerItems.persona_cast.get(), DreamtinkerItems.reason_cast.get()};
+        int[] tree_costs = new int[]{2, 3, 3, 3, 8};
+        for (int i = 0; i < tree_parts.length; i++) {
+            PartRecipeBuilder.partRecipe(tree_parts[i]).setPattern(this.id(tree_parts[i]))
+                             .setPatternItem(Ingredient.of(tree_casts[i])).setCost(tree_costs[i])
+                             .save(consumer, this.location(partFolder + "builder/" + this.id(tree_parts[i]).getPath()));
+            MaterialCastingRecipeBuilder.tableRecipe(tree_parts[i]).setItemCost(tree_costs[i]).setCast(tree_casts[i], true)
+                                        .save(consumer, this.location(castFolder + this.id(tree_parts[i]).getPath() + "_cast"));
+            CompositeCastingRecipeBuilder.table(tree_parts[i], tree_costs[i])
+                                         .save(consumer, this.location(castFolder + this.id(tree_parts[i]).getPath() + "_composite"));
+        }
+
     }
 
     private void addModifierRecipes(Consumer<FinishedRecipe> consumer) {

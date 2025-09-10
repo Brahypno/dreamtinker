@@ -37,7 +37,14 @@ public class DreamtinkerTab {
                     material = ToolBuildHandler.getRenderMaterial(0);
                 }
                 return DreamtinkerItems.explode_core.get().withMaterialForDisplay(material);
-            }).displayItems((params, output) -> DreamtinkerItems.explode_core.get().addVariants(output::accept, "")).build());
+            }).displayItems((params, output) -> {
+                DreamtinkerItems.explode_core.get().addVariants(output::accept, "");
+                DreamtinkerItems.memoryOrthant.get().addVariants(output::accept, "");
+                DreamtinkerItems.wishOrthant.get().addVariants(output::accept, "");
+                DreamtinkerItems.soulOrthant.get().addVariants(output::accept, "");
+                DreamtinkerItems.personaOrthant.get().addVariants(output::accept, "");
+                DreamtinkerItems.reasonEmanation.get().addVariants(output::accept, "");
+            }).build());
 
     public static final RegistryObject<CreativeModeTab> ORE =
             TABS.register("ore", () -> CreativeModeTab.builder().title(Component.translatable("itemGroup." + MODID + ".ore")).icon(() -> new ItemStack(

@@ -1,0 +1,11 @@
+{
+  "type": "tconstruct:part_builder",
+  "cost": 8,
+  "pattern": "dreamtinker:reason_emanation",
+  "pattern_item": {
+    "item": "dreamtinker:reason_cast"
+  },
+  "result": {
+    "item": "dreamtinker:reason_emanation"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:table_casting_material",
+  "cast": {
+    "item": "dreamtinker:reason_cast"
+  },
+  "cast_consumed": true,
+  "item_cost": 8,
+  "result": "dreamtinker:reason_emanation"
+}

@@ -20,7 +20,10 @@ import slimeknights.mantle.registration.object.ItemObject;
 import slimeknights.tconstruct.common.registration.ItemDeferredRegisterExtension;
 import slimeknights.tconstruct.library.tools.item.ModifiableItem;
 import slimeknights.tconstruct.library.tools.part.ToolPartItem;
+import slimeknights.tconstruct.tools.stats.GripMaterialStats;
 import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
+import slimeknights.tconstruct.tools.stats.LimbMaterialStats;
+import slimeknights.tconstruct.tools.stats.StatlessMaterialStats;
 
 import java.util.List;
 
@@ -66,7 +69,22 @@ public class DreamtinkerItems {
     );
     public static final RegistryObject<Item> twist_obsidian_pane =
             ITEMS.register("twist_obsidian_pane", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> memory_cast = ITEMS.register("memory_cast", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> wish_cast = ITEMS.register("wish_cast", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> soul_cast = ITEMS.register("soul_cast", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> persona_cast = ITEMS.register("persona_cast", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> reason_cast = ITEMS.register("reason_cast", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+
+    public static final RegistryObject<ToolPartItem> memoryOrthant =
+            ITEMS.register("memory_orthant", () -> new ToolPartItem(PART.rarity(Rarity.RARE), HeadMaterialStats.ID));
+    public static final RegistryObject<ToolPartItem> wishOrthant =
+            ITEMS.register("wish_orthant", () -> new ToolPartItem(PART, StatlessMaterialStats.BINDING.getIdentifier()));
+    public static final RegistryObject<ToolPartItem> soulOrthant =
+            ITEMS.register("soul_orthant", () -> new ToolPartItem(PART.rarity(Rarity.RARE), LimbMaterialStats.ID));
+    public static final RegistryObject<ToolPartItem> personaOrthant =
+            ITEMS.register("persona_orthant", () -> new ToolPartItem(PART.rarity(Rarity.RARE), GripMaterialStats.ID));
+    public static final RegistryObject<ToolPartItem> reasonEmanation =
+            ITEMS.register("reason_emanation", () -> new ToolPartItem(PART.rarity(Rarity.RARE), HeadMaterialStats.ID));
 
     public static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         output.accept(raw_stibnite.get());
@@ -76,7 +94,11 @@ public class DreamtinkerItems {
         output.accept(regulus.get());
         output.accept(void_pearl.get());
         output.accept(twist_obsidian_pane.get());
+        output.accept(memory_cast.get());
+        output.accept(wish_cast.get());
+        output.accept(soul_cast.get());
         output.accept(persona_cast.get());
+        output.accept(reason_cast.get());
         if (ModList.get().isLoaded("enigmaticlegacy"))
             output.accept(soul_etherium.get());
     }

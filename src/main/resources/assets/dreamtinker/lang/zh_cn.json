@@ -174,7 +174,16 @@
   "tooltip.void_pearl.desc1": "以至黑至深至无重塑",
   "item.dreamtinker.soul_etherium": "魂缚以太锭",
   "item.dreamtinker.twist_obsidian_pane": "悲恸之板",
+  "item.dreamtinker.memory_cast": "记忆模具",
+  "item.dreamtinker.wish_cast": "愿望模具",
+  "item.dreamtinker.soul_cast": "灵魂模具",
   "item.dreamtinker.persona_cast": "人格模具",
+  "item.dreamtinker.reason_cast": "理性模具",
+  "item.dreamtinker.memory_orthant": "记忆象限",
+  "item.dreamtinker.wish_orthant": "愿望象限",
+  "item.dreamtinker.soul_orthant": "灵魂象限",
+  "item.dreamtinker.persona_orthant": "人格象限",
+  "item.dreamtinker.reason_emanation": "理性流涌",
 
   "block.dreamtinker.crying_obsidian_pane": "哭泣的黑曜石板",
 
@@ -271,6 +280,11 @@
   "fluid_effect.tconstruct.damage.explosion": "爆炸",
 
   "pattern.dreamtinker.explode_core": "镇爆核心",
+  "pattern.dreamtinker.memory_orthant": "记忆象限",
+  "pattern.dreamtinker.wish_orthant": "愿望象限",
+  "pattern.dreamtinker.soul_orthant": "灵魂象限",
+  "pattern.dreamtinker.persona_orthant": "人格象限",
+  "pattern.dreamtinker.reason_emanation": "理性流涌",
 
   "effect.dreamtinker.effectsilvernamebee": "银账本",
   "effect.dreamtinker.real_darkness": "真实黑暗",

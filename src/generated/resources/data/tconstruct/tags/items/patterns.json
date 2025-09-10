@@ -1,5 +1,9 @@
 {
   "values": [
-    "dreamtinker:persona_cast"
+    "dreamtinker:memory_cast",
+    "dreamtinker:wish_cast",
+    "dreamtinker:soul_cast",
+    "dreamtinker:persona_cast",
+    "dreamtinker:reason_cast"
   ]
 }

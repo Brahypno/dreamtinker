@@ -175,7 +175,16 @@
   "tooltip.void_pearl.desc1": "Reform by the darkest deepest null",
   "item.dreamtinker.soul_etherium": "Soul Etherium",
   "item.dreamtinker.twist_obsidian_pane": "Twist Obsidian Pane",
+  "item.dreamtinker.memory_cast": "Memory Cast",
+  "item.dreamtinker.wish_cast": "Wish Cast",
+  "item.dreamtinker.soul_cast": "Soul Cast",
   "item.dreamtinker.persona_cast": "Persona Cast",
+  "item.dreamtinker.reason_cast": "Reason Cast",
+  "item.dreamtinker.memory_orthant": "Memory Orthant",
+  "item.dreamtinker.wish_orthant": "Wish Orthant",
+  "item.dreamtinker.soul_orthant": "Soul Orthant",
+  "item.dreamtinker.persona_orthant": "Persona Orthant",
+  "item.dreamtinker.reason_emanation": "Reason Emanation",
 
   "block.dreamtinker.crying_obsidian_pane": "Crying Obsidian Pane",
 
@@ -270,6 +279,11 @@
   "fluid_effect.tconstruct.damage.explosion": "explosion",
 
   "pattern.dreamtinker.explode_core": "explode core",
+  "pattern.dreamtinker.memory_orthant": "Memory Orthant",
+  "pattern.dreamtinker.wish_orthant": "Wish Orthant",
+  "pattern.dreamtinker.soul_orthant": "Soul Orthant",
+  "pattern.dreamtinker.persona_orthant": "Persona Orthant",
+  "pattern.dreamtinker.reason_emanation": "Reason Emanation",
 
   "effect.dreamtinker.effectsilvernamebee": "silver ledger",
   "effect.dreamtinker.real_darkness": "Real Darkness",

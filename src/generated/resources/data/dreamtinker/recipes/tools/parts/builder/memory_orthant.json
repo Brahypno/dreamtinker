@@ -1,0 +1,11 @@
+{
+  "type": "tconstruct:part_builder",
+  "cost": 2,
+  "pattern": "dreamtinker:memory_orthant",
+  "pattern_item": {
+    "item": "dreamtinker:memory_cast"
+  },
+  "result": {
+    "item": "dreamtinker:memory_orthant"
+  }
+}
