@@ -3,6 +3,7 @@ package org.dreamtinker.dreamtinker.data.providers;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ArmorItem;
@@ -11,6 +12,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.data.DreamtinkerTagkeys;
 import org.dreamtinker.dreamtinker.register.DreamtinkerItems;
 import org.jetbrains.annotations.Nullable;
@@ -44,11 +46,6 @@ public class DreamtinkerItemTagProvider extends ItemTagsProvider {
         this.tag(TinkerTags.Items.SINGLE_USE_CASTS)
             .add(DreamtinkerItems.memory_cast.get(), DreamtinkerItems.wish_cast.get(), DreamtinkerItems.soul_cast.get(), DreamtinkerItems.persona_cast.get(),
                  DreamtinkerItems.reason_cast.get());
-        //items
-        this.tag(Tags.Items.INGOTS)
-            .add(DreamtinkerItems.metallivorous_stibium_lupus.get(), DreamtinkerItems.regulus.get(), DreamtinkerItems.soul_etherium.get());
-        this.tag(Tags.Items.GEMS).add(DreamtinkerItems.valentinite.get(), DreamtinkerItems.nigrescence_antimony.get());
-        this.tag(DreamtinkerTagkeys.Items.raw_stibnite).add(DreamtinkerItems.raw_stibnite.get());
         //armor
         addArmorTags(DreamtinkerItems.underPlate, MULTIPART_TOOL, DURABILITY, TinkerTags.Items.BONUS_SLOTS,
                      TinkerTags.Items.TRIM);
@@ -61,6 +58,18 @@ public class DreamtinkerItemTagProvider extends ItemTagsProvider {
         tag(FANTASTIC_ARMOR);
         bookArmor = tag(GADGETRY_ARMOR);
         tag(BOOK_ARMOR).addTags(BASIC_ARMOR, PUNY_ARMOR, MIGHTY_ARMOR, FANTASTIC_ARMOR, GADGETRY_ARMOR);
+        //items
+        this.tag(Tags.Items.INGOTS)
+            .add(DreamtinkerItems.metallivorous_stibium_lupus.get(), DreamtinkerItems.regulus.get(), DreamtinkerItems.soul_etherium.get());
+        this.tag(Tags.Items.GEMS).add(DreamtinkerItems.valentinite.get(), DreamtinkerItems.nigrescence_antimony.get());
+        this.tag(DreamtinkerTagkeys.Items.raw_stibnite).add(DreamtinkerItems.raw_stibnite.get());
+        this.tag(mcItemTag("fox_food")).add(DreamtinkerItems.white_peach.get());
+        this.tag(mcItemTag("arrows")).add(DreamtinkerItems.tntarrow.get());
+
+    }
+
+    private static TagKey<Item> mcItemTag(String name) {
+        return TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("minecraft", name));
     }
 
     private TagKey<Item> getArmorTag(ArmorItem.Type slotType) {

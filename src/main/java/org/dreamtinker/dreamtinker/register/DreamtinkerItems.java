@@ -1,6 +1,7 @@
 package org.dreamtinker.dreamtinker.register;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.ModList;
@@ -75,7 +76,8 @@ public class DreamtinkerItems {
     public static final RegistryObject<Item> persona_cast = ITEMS.register("persona_cast", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> reason_cast = ITEMS.register("reason_cast", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
 
-    public static final RegistryObject<Item> white_peach = ITEMS.register("white_peach", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> white_peach = ITEMS.register("white_peach", () -> new Item(
+            new Item.Properties().rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(2).saturationMod(6F).build())));
 
 
     public static final RegistryObject<Item> soul_etherium = EL_ITEMS.register(
