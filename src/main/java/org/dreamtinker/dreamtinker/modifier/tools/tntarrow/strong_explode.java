@@ -16,7 +16,7 @@ public class strong_explode extends BattleModifier {
 
     @Override
     public int getPriority() {
-        return Integer.MIN_VALUE;
+        return Integer.MIN_VALUE / 2;
     }
 
     @Override

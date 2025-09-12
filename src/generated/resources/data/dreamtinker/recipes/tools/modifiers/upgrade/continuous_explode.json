@@ -3,7 +3,7 @@
   "allow_crystal": true,
   "inputs": [
     {
-      "item": "tconstruct:efln_ball"
+      "item": "minecraft:tnt"
     },
     {
       "tag": "forge:gunpowder"
@@ -12,9 +12,9 @@
   "level": {
     "max": 3
   },
-  "result": "dreamtinker:strong_explode",
+  "result": "dreamtinker:continuous_explode",
   "slots": {
-    "upgrades": 1
+    "abilities": 1
   },
   "tools": {
     "item": "dreamtinker:tntarrow"

@@ -143,7 +143,10 @@
   "modifier.dreamtinker.weapon_transformation": "Weapon Transformation",
   "modifier.dreamtinker.weapon_transformation.flavor": "Its time for transformation!",
   "modifier.dreamtinker.weapon_transformation.description": "According to armor&toughness, boost projectile damage on LEGGINGS, boost melee attack/damage on BOOTS,boost LUCK on CHESTPLATE",
-
+  "modifier.dreamtinker.continuous_explode": "Continuous Explode",
+  "modifier.dreamtinker.continuous_explode.flavor": "Better creeper",
+  "modifier.dreamtinker.continuous_explode.description": "Give TNTarrow the ability of explode many times",
+  "modifier.dreamtinker.tooltip.continuous_explode": "Time remains: ",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",

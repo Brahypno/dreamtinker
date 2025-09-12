@@ -1,8 +1,8 @@
 {
   "type": "tconstruct:modifier_salvage",
-  "modifier": "dreamtinker:strong_explode",
+  "modifier": "dreamtinker:continuous_explode",
   "slots": {
-    "upgrades": 1
+    "abilities": 1
   },
   "tools": {
     "item": "dreamtinker:tntarrow"

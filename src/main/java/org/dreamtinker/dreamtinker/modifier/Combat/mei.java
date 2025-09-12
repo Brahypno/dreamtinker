@@ -55,7 +55,8 @@ public class mei extends BattleModifier {
         else if (level < 50)
             return ModifierLevelDisplay.DEFAULT.nameForLevel(this, 9);
         else if (level <= 100)
-            return Component.translatable(this.getTranslationKey() + "." + "9").withStyle((style) -> style.withColor(ResourceColorManager.getTextColor(mei_key_2)));
+            return Component.translatable(this.getTranslationKey() + "." + "9")
+                            .withStyle((style) -> style.withColor(ResourceColorManager.getTextColor(mei_key_2)));
         else if (level <= 150)//mei_2
             return Component.translatable(this.getTranslationKey()).withStyle((style) -> style.withColor(ResourceColorManager.getTextColor(mei_key_2)));
         else//mei.3
@@ -67,9 +68,11 @@ public class mei extends BattleModifier {
         if (level < 100)
             return this.getDescriptionList();
         else if (level <= 150)//mei.2
-            return Arrays.asList(Component.translatable(mei_key_2 + ".flavor").withStyle(ChatFormatting.ITALIC), Component.translatable(mei_key_2 + ".description").withStyle(ChatFormatting.GRAY));
+            return Arrays.asList(Component.translatable(mei_key_2 + ".flavor").withStyle(ChatFormatting.ITALIC),
+                                 Component.translatable(mei_key_2 + ".description").withStyle(ChatFormatting.GRAY));
         else//mei.3
-            return Arrays.asList(Component.translatable(mei_key_3 + ".flavor").withStyle(ChatFormatting.ITALIC), Component.translatable(mei_key_3 + ".description").withStyle(ChatFormatting.GRAY));
+            return Arrays.asList(Component.translatable(mei_key_3 + ".flavor").withStyle(ChatFormatting.ITALIC),
+                                 Component.translatable(mei_key_3 + ".description").withStyle(ChatFormatting.GRAY));
     }
 
     @Override
@@ -117,14 +120,20 @@ public class mei extends BattleModifier {
         }else {
             mod = 0.2 * level / 100;
         }
-        consumer.accept(Attributes.ATTACK_DAMAGE, new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.ATTACK_DAMAGE.getDescriptionId(), mod, AttributeModifier.Operation.MULTIPLY_BASE));
-        consumer.accept(Attributes.ATTACK_SPEED, new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.ATTACK_SPEED.getDescriptionId(), mod, AttributeModifier.Operation.MULTIPLY_BASE));
+        consumer.accept(Attributes.ATTACK_DAMAGE, new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.ATTACK_DAMAGE.getDescriptionId(), mod,
+                                                                        AttributeModifier.Operation.MULTIPLY_BASE));
+        consumer.accept(Attributes.ATTACK_SPEED, new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.ATTACK_SPEED.getDescriptionId(), mod,
+                                                                       AttributeModifier.Operation.MULTIPLY_BASE));
         if (100 <= level){
-            consumer.accept(Attributes.ARMOR, new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.ARMOR.getDescriptionId(), mod, AttributeModifier.Operation.MULTIPLY_BASE));
-            consumer.accept(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.ARMOR_TOUGHNESS.getDescriptionId(), mod, AttributeModifier.Operation.MULTIPLY_BASE));
+            consumer.accept(Attributes.ARMOR, new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.ARMOR.getDescriptionId(), mod,
+                                                                    AttributeModifier.Operation.MULTIPLY_BASE));
+            consumer.accept(Attributes.ARMOR_TOUGHNESS,
+                            new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.ARMOR_TOUGHNESS.getDescriptionId(), mod,
+                                                  AttributeModifier.Operation.MULTIPLY_BASE));
         }
         if (150 <= level)
-            consumer.accept(Attributes.MOVEMENT_SPEED, new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.MOVEMENT_SPEED.getDescriptionId(), 2.0 * (level - 100) / 100 + .1, AttributeModifier.Operation.MULTIPLY_BASE));
+            consumer.accept(Attributes.MOVEMENT_SPEED, new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.MOVEMENT_SPEED.getDescriptionId(),
+                                                                             2.0 * (level - 100) / 100 + .1, AttributeModifier.Operation.MULTIPLY_BASE));
     }
 
     @Override
@@ -135,7 +144,8 @@ public class mei extends BattleModifier {
             int level = tool.getModifierLevel(this);
             ModDataNBT toolData = tool.getPersistentData();
             int last_second = toolData.getInt(TAG_MLT);
-            int cur_exp_cap = (int) Math.ceil(Math.max(1, max_level_second / Math.max(1.0, level / 100.0)));//MAYBE SHOULDNT this fast or this is super slow......i dont know
+            int cur_exp_cap = (int) Math.ceil(
+                    Math.max(1, max_level_second / Math.max(1.0, level / 100.0)));//MAYBE SHOULDNT this fast or this is super slow......i dont know
             if (cur_exp_cap <= last_second + 1){
                 ToolStack ts = ToolStack.from(stack);
                 ts.addModifier(this.getId(), 1);
@@ -165,7 +175,8 @@ public class mei extends BattleModifier {
                         AttributeModifier cur = attr_instance.getModifier(UUID.fromString(player_attribute_uuid));
                         if ((cur == null) || mod < cur.getAmount()){
                             attr_instance.removeModifier(UUID.fromString(player_attribute_uuid));
-                            attr_instance.addPermanentModifier(new AttributeModifier(UUID.fromString(player_attribute_uuid), attr.getDescriptionId(), mod, AttributeModifier.Operation.MULTIPLY_BASE));
+                            attr_instance.addPermanentModifier(new AttributeModifier(UUID.fromString(player_attribute_uuid), attr.getDescriptionId(), mod,
+                                                                                     AttributeModifier.Operation.MULTIPLY_BASE));
                         }
                     }
                 }
@@ -185,8 +196,10 @@ public class mei extends BattleModifier {
             return knockback;
         int level = tool.getModifierLevel(this.getId());
         if (150 <= level){
-            DamageSource dam = new DamageSource(attacker.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.GENERIC_KILL), attacker, attacker);
-            target.hurt(dam, 250 <= level ? Integer.MIN_VALUE : damage);
+            DamageSource dam =
+                    new DamageSource(attacker.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.GENERIC_KILL),
+                                     attacker, attacker);
+            target.hurt(dam, 250 <= level ? Integer.MAX_VALUE : damage);
         }
         return knockback;
     }

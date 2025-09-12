@@ -6,15 +6,13 @@
       "item": "tconstruct:efln_ball"
     },
     {
-      "tag": "forge:gunpowder"
+      "item": "minecraft:tnt"
     }
   ],
-  "level": {
-    "max": 3
-  },
-  "result": "dreamtinker:strong_explode",
+  "level": 1,
+  "result": "dreamtinker:continuous_explode",
   "slots": {
-    "upgrades": 1
+    "abilities": 1
   },
   "tools": {
     "item": "dreamtinker:tntarrow"

@@ -3,6 +3,7 @@ package org.dreamtinker.dreamtinker.data.providers.tinker;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import org.dreamtinker.dreamtinker.register.DreamtinkerModifers;
+import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.data.tinkering.AbstractModifierProvider;
 import slimeknights.tconstruct.library.modifiers.impl.BasicModifier;
 import slimeknights.tconstruct.library.modifiers.modules.build.ModifierSlotModule;
@@ -25,10 +26,11 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(DreamtinkerModifers.Ids.soul_upgrade).tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
                                                            .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                                                            .addModules(ModifierSlotModule.slot(SlotType.SOUL).flat(1));
+        buildModifier(DreamtinkerModifers.Ids.continuous_explode).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
     }
 
     @Override
-    public String getName() {
+    public @NotNull String getName() {
         return "Dreamtinker";
     }
 }

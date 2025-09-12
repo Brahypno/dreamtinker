@@ -47,7 +47,7 @@ import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.getAtt
 public class echoed_attack extends BattleModifier {
     private static final ResourceLocation TAG_ECHO_ENERGY = new ResourceLocation(Dreamtinker.MODID, "echo_energy");
     private static final int E_C = EchoAttackCharge.get();
-    private static final double charingchance = EchoAttackChargingChance.get();
+    private static final double ChargingChance = EchoAttackChargingChance.get();
 
     @Override
     public Component onModifierRemoved(IToolStackView tool, Modifier modifier) {
@@ -85,7 +85,7 @@ public class echoed_attack extends BattleModifier {
             return;
         ModDataNBT nbt = tool.getPersistentData();
         int count = nbt.getInt(TAG_ECHO_ENERGY) + 1;
-        if (projectile instanceof AbstractArrow && null != arrow && Math.random() < charingchance){
+        if (projectile instanceof AbstractArrow && null != arrow && Math.random() < ChargingChance){
             ((AbstractArrow) projectile).setBaseDamage(((AbstractArrow) projectile).getBaseDamage() * 1.5);
             count++;
         }
@@ -103,12 +103,12 @@ public class echoed_attack extends BattleModifier {
 
     @Override
     public int getPriority() {
-        return Integer.MIN_VALUE;
+        return 10;
     }
 
     private void hitEntity(IToolStackView tool, LivingEntity attacker, LivingEntity target, ToolAttackContext context) {
         int echo_energy = 1;
-        if (null != target && Math.random() < charingchance){
+        if (null != target && Math.random() < ChargingChance){
             shortCutDamage(tool, context);
             for (LivingEntity entity : new LivingEntity[]{attacker, target}) {
                 if (entity != null){

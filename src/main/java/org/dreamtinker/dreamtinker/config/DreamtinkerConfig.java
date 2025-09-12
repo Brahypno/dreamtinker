@@ -11,6 +11,8 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.IntValue TNTarrowRadius = builder.comment("tnt arrow effect range").defineInRange("TNTarrowRadius", 5, 0, 100);
     public static final ForgeConfigSpec.IntValue StrongExplodeDamageBoost =
             builder.comment("Strong Explode Damage Boost").defineInRange("StrongExplodeDamageBoost", 1, 1, 1000);
+    public static final ForgeConfigSpec.IntValue ContinuousExplodeTimes =
+            builder.comment("how many times use per level for tnt Arrow").defineInRange("ContinuousExplodeTimes", 2, 0, 100);
     public static final ForgeConfigSpec.DoubleValue UnderPlateBoostMutiply =
             builder.comment("how many status you want to boost?").defineInRange("UnderPlateBoostMutiply", 0.01, 0, 100);
 
