@@ -30,9 +30,15 @@
     "dreamtinker:ender_dodge",
     "dreamtinker:explosive_hit",
     "dreamtinker:ranged_shoot",
-    "dreamtinker:cursed_ring_bound",
     "dreamtinker:wither_body",
     "dreamtinker:stone_heart",
-    "dreamtinker:evil_attack"
+    {
+      "id": "dreamtinker:cursed_ring_bound",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:evil_attack",
+      "required": false
+    }
   ]
 }

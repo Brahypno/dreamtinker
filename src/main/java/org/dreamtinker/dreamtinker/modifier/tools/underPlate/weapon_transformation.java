@@ -44,7 +44,18 @@ public class weapon_transformation extends BattleModifier {
                                                           armor * toughness * UnderPlateBoostMutiply.get(),
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                 }
-                case HEAD -> {}
+                case HEAD -> {
+                    consumer.accept(Attributes.MAX_HEALTH,
+                                    new AttributeModifier(UUID.fromString(tool_attribute_uuid),
+                                                          Attributes.MAX_HEALTH.getDescriptionId(),
+                                                          armor * toughness * UnderPlateBoostMutiply.get(),
+                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
+                    consumer.accept(Attributes.KNOCKBACK_RESISTANCE,
+                                    new AttributeModifier(UUID.fromString(tool_attribute_uuid),
+                                                          Attributes.KNOCKBACK_RESISTANCE.getDescriptionId(),
+                                                          -armor * toughness * UnderPlateBoostMutiply.get(),
+                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
+                }
                 default -> {}
             }
         }

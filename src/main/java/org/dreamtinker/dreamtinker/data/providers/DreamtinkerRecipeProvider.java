@@ -448,7 +448,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(Tags.Items.GUNPOWDER)
                              .setMinLevel(1)
                              .setMaxLevel(3)
-                             .setSlots(SlotType.ABILITY, 1)
+                             .setSlots(SlotType.UPGRADE, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifers.Ids.continuous_explode, upgradeSalvage))
                              .save(consumer, prefix(DreamtinkerModifers.Ids.continuous_explode, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifers.mei)

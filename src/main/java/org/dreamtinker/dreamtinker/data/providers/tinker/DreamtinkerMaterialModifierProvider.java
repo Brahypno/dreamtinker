@@ -25,7 +25,7 @@ public class DreamtinkerMaterialModifierProvider extends AbstractMaterialTraitDa
         addTraits(DreamtinkerMaterialIds.echo_shard, MELEE_HARVEST, ModifierIds.soulbound, DreamtinkerModifers.echoed_attack.getId());
         addTraits(DreamtinkerMaterialIds.echo_shard, RANGED, ModifierIds.soulbound, DreamtinkerModifers.echoed_attack.getId());
 
-        addTraits(DreamtinkerMaterialIds.moonlight_ice, MELEE_HARVEST, DreamtinkerModifers.glacial_river);
+        addTraits(DreamtinkerMaterialIds.moonlight_ice, MELEE_HARVEST, DreamtinkerModifers.Ids.moonlight_ice_info, DreamtinkerModifers.glacial_river.getId());
 
         addDefaultTraits(DreamtinkerMaterialIds.valentinite, DreamtinkerModifers.antimony_usage);
         callGetOrCreate(this, DreamtinkerMaterialIds.valentinite).setTraits(ARMOR, List.of(

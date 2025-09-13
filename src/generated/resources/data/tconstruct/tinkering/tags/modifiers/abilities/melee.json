@@ -1,7 +1,22 @@
 {
   "values": [
     "dreamtinker:realsweep",
-    "dreamtinker:ender_slayer",
-    "dreamtinker:weapon_books"
+    "dreamtinker:continuous_explode",
+    {
+      "id": "dreamtinker:ender_slayer",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:weapon_books",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:desolation_ring",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:eldritch_pan",
+      "required": false
+    }
   ]
 }

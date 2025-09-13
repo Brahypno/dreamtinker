@@ -1,6 +1,8 @@
 package org.dreamtinker.dreamtinker.register;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
@@ -16,6 +18,7 @@ import org.dreamtinker.dreamtinker.tools.DTtoolsDefinition;
 import org.dreamtinker.dreamtinker.tools.Masu.Masu;
 import org.dreamtinker.dreamtinker.tools.TNTarrow.TNTarrow;
 import org.dreamtinker.dreamtinker.tools.UnderArmor.UnderArmorItem;
+import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.registration.object.EnumObject;
 import slimeknights.mantle.registration.object.ItemObject;
 import slimeknights.tconstruct.common.registration.ItemDeferredRegisterExtension;
@@ -70,14 +73,55 @@ public class DreamtinkerItems {
 
     public static final RegistryObject<Item> twist_obsidian_pane =
             ITEMS.register("twist_obsidian_pane", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
-    public static final RegistryObject<Item> memory_cast = ITEMS.register("memory_cast", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
-    public static final RegistryObject<Item> wish_cast = ITEMS.register("wish_cast", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
-    public static final RegistryObject<Item> soul_cast = ITEMS.register("soul_cast", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
-    public static final RegistryObject<Item> persona_cast = ITEMS.register("persona_cast", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> memory_cast = ITEMS.register("memory_cast", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)) {
+        public void appendHoverText(@NotNull ItemStack stack, Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
+            tooltip.add(Component.translatable("tooltip.dreamtinker.memory_cast_1").withStyle(ChatFormatting.AQUA));
+            tooltip.add(Component.translatable("tooltip.dreamtinker.memory_cast_2").withStyle(ChatFormatting.GREEN));
+            super.appendHoverText(stack, level, tooltip, flag);
+        }
+    });
+    public static final RegistryObject<Item> wish_cast = ITEMS.register("wish_cast", () -> new Item(new Item.Properties().rarity(Rarity.RARE)) {
+        public void appendHoverText(@NotNull ItemStack stack, Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
+            tooltip.add(Component.translatable("tooltip.dreamtinker.wish_cast_1").withStyle(ChatFormatting.GREEN));
+            tooltip.add(Component.translatable("tooltip.dreamtinker.wish_cast_2").withStyle(ChatFormatting.DARK_RED));
+            super.appendHoverText(stack, level, tooltip, flag);
+        }
+    });
+    public static final RegistryObject<Item> soul_cast = ITEMS.register("soul_cast", () -> new Item(new Item.Properties().rarity(Rarity.RARE)) {
+        public void appendHoverText(@NotNull ItemStack stack, Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
+            tooltip.add(Component.translatable("tooltip.dreamtinker.soul_cast_1").withStyle(ChatFormatting.DARK_RED));
+            tooltip.add(Component.translatable("tooltip.dreamtinker.soul_cast_2").withStyle(ChatFormatting.DARK_RED));
+            if (!stack.serializeNBT().contains("love")){
+                tooltip.add(Component.translatable("tooltip.dreamtinker.soul_cast_3").withStyle(ChatFormatting.DARK_GRAY));
+                tooltip.add(Component.translatable("tooltip.dreamtinker.soul_cast_4").withStyle(ChatFormatting.GOLD));
+            }
+            if (!stack.serializeNBT().contains("desire")){
+                tooltip.add(Component.translatable("tooltip.dreamtinker.soul_cast_5").withStyle(ChatFormatting.GREEN));
+                //tooltip.add(Component.translatable("tooltip.dreamtinker.soul_cast_6").withStyle(ChatFormatting.DARK_RED));
+            }
+            if (stack.serializeNBT().contains("love"))
+                tooltip.add(Component.translatable("tooltip.dreamtinker.soul_cast_7").withStyle(ChatFormatting.DARK_RED));
+            if (stack.serializeNBT().contains("desire"))
+                tooltip.add(Component.translatable("tooltip.dreamtinker.soul_cast_8").withStyle(ChatFormatting.DARK_RED));
+            super.appendHoverText(stack, level, tooltip, flag);
+        }
+    });
+    public static final RegistryObject<Item> persona_cast = ITEMS.register("persona_cast", () -> new Item(new Item.Properties().rarity(Rarity.RARE)) {
+        public void appendHoverText(@NotNull ItemStack stack, Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
+            tooltip.add(Component.translatable("tooltip.dreamtinker.persona_cast_1").withStyle(ChatFormatting.DARK_PURPLE));
+            tooltip.add(Component.translatable("tooltip.dreamtinker.persona_cast_2").withStyle(ChatFormatting.DARK_RED));
+            super.appendHoverText(stack, level, tooltip, flag);
+        }
+    });
     public static final RegistryObject<Item> reason_cast = ITEMS.register("reason_cast", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
 
     public static final RegistryObject<Item> white_peach = ITEMS.register("white_peach", () -> new Item(
-            new Item.Properties().rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(2).saturationMod(6F).build())));
+            new Item.Properties().rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(2).saturationMod(6F).build())) {
+        public void appendHoverText(@NotNull ItemStack stack, Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
+            tooltip.add(Component.translatable("tooltip.dreamtinker.white_peach").withStyle(s -> s.withColor(TextColor.fromRgb(0xFFB6C1))));
+            super.appendHoverText(stack, level, tooltip, flag);
+        }
+    });
 
 
     public static final RegistryObject<Item> soul_etherium = EL_ITEMS.register(

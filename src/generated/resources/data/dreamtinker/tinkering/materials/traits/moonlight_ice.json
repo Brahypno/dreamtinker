@@ -3,6 +3,10 @@
     "tconstruct:melee_harvest": [
       {
         "level": 1,
+        "name": "dreamtinker:moonlight_ice_info"
+      },
+      {
+        "level": 1,
         "name": "dreamtinker:glacial_river"
       }
     ]

@@ -1,7 +1,16 @@
 {
   "values": [
-    "dreamtinker:weapon_books",
-    "dreamtinker:eldritch_pan",
-    "dreamtinker:exiles_faulty"
+    {
+      "id": "dreamtinker:weapon_books",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:eldritch_pan",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:exiles_faulty",
+      "required": false
+    }
   ]
 }

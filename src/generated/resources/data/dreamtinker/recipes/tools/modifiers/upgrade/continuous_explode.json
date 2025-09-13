@@ -14,7 +14,7 @@
   },
   "result": "dreamtinker:continuous_explode",
   "slots": {
-    "abilities": 1
+    "upgrades": 1
   },
   "tools": {
     "item": "dreamtinker:tntarrow"
