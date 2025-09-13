@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.Overlay;
+package org.dreamtinker.dreamtinker.client.Overlay;
 
 
 import com.mojang.blaze3d.systems.RenderSystem;

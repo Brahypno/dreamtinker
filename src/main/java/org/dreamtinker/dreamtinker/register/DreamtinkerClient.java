@@ -4,7 +4,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import org.dreamtinker.dreamtinker.Overlay.PerfectOverlay;
+import org.dreamtinker.dreamtinker.client.Overlay.PerfectOverlay;
 
 import static org.dreamtinker.dreamtinker.Dreamtinker.MODID;
 

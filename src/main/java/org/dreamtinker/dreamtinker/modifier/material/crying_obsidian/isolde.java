@@ -2,6 +2,8 @@ package org.dreamtinker.dreamtinker.modifier.material.crying_obsidian;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -51,8 +53,15 @@ public class isolde extends BattleModifier {
         if (nbt.contains(TAG_ISOLDE_TIME, TAG_INT)){
             int target = nbt.getInt(TAG_ISOLDE_TIME);
             if (IsoLdeEaseTime.get() == target - useDuration + timeLeft){
-                if (entity instanceof ServerPlayer sp)
-                    Dnetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> sp), new PerfectOverlayMsg(new ResourceLocation(MODID, "textures/gui/perfect_release.png"), 2 * IsoLdeEaseTime.get()));
+                if (entity instanceof ServerPlayer sp){
+                    Dnetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> sp),
+                                          new PerfectOverlayMsg(new ResourceLocation(MODID, "textures/gui/perfect_release.png"), 2 * IsoLdeEaseTime.get()));
+                    sp.playNotifySound(
+                            SoundEvents.EXPERIENCE_ORB_PICKUP,
+                            SoundSource.PLAYERS, 1.0f, 1.15f
+                    );
+
+                }
             }
         }
 
