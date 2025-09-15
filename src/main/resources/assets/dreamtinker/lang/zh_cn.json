@@ -167,6 +167,8 @@
   "item.dreamtinker.under_plate_chestplate": "内衣胸甲",
   "item.dreamtinker.under_plate_leggings": "热裤和腿环",
   "item.dreamtinker.under_plate_boots": "长短袜",
+  "item.dreamtinker.narcissus_wing": "水仙之羽",
+  "item.dreamtinker.narcissus_wing.description": "记忆，愿望，灵魂，人格，理性……这柄仪式剑因你而在。\n 在故事结束之前，这幻梦只对你有意义。",
 
   "item.dreamtinker.raw_stibnite": "粗辉锑",
   "item.dreamtinker.valentinite": "锑华",
@@ -200,6 +202,9 @@
   "tooltip.dreamtinker.persona_cast_1": "原初一滴，侵染坚固，悲恸凝结",
   "tooltip.dreamtinker.persona_cast_2": "原初一滴，生于烈火，从不分离",
   "item.dreamtinker.reason_cast": "理性模具",
+  "tooltip.dreamtinker.reason_cast_1": "生于大梦，大梦无醒，从不分离",
+  "tooltip.dreamtinker.reason_cast_2": "生于长梦，长梦无觉，从不分离",
+  "tooltip.dreamtinker.reason_cast_3": "大梦终醒，长梦终觉，澄澈如初",
   "item.dreamtinker.memory_orthant": "记忆象限",
   "item.dreamtinker.wish_orthant": "愿望象限",
   "item.dreamtinker.soul_orthant": "灵魂象限",
@@ -207,8 +212,14 @@
   "item.dreamtinker.reason_emanation": "理性流涌",
   "item.dreamtinker.white_peach": "白桃",
   "tooltip.dreamtinker.white_peach": "汇聚了生命的喜悦与甜美，也同样脆弱易逝",
+  "item.dreamtinker.unborn_egg": "未能出生之蛋",
+  "item.dreamtinker.unborn_turtle_egg": "未能出生之海龟蛋",
+  "item.dreamtinker.unborn_sniffer_egg": "未能出生之嗅探兽蛋",
+  "item.dreamtinker.unborn_dragon_egg": "未能出生之龙蛋",
+  "item.dreamtinker.unborn_spawn_egg": "未能出生之刷怪蛋（仅创造）",
 
   "block.dreamtinker.crying_obsidian_pane": "哭泣的黑曜石板",
+  "block.dreamtinker.narcissus": "水仙",
 
   "material.dreamtinker.echo_shard": "回响碎片",
   "material.dreamtinker.echo_shard.flavor": "是神秘的回响，还是秘密的回响",

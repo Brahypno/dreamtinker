@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "forge:eggs"
+  },
+  "cast_consumed": true,
+  "cooling_time": 10,
+  "fluid": {
+    "amount": 300,
+    "tag": "forge:molten_nigrescence_antimony"
+  },
+  "result": "dreamtinker:unborn_egg"
+}

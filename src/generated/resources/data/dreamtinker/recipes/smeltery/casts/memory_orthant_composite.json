@@ -1,5 +1,5 @@
 {
   "type": "tconstruct:table_casting_composite",
-  "item_cost": 2,
+  "item_cost": 8,
   "result": "dreamtinker:memory_orthant"
 }

@@ -8,10 +8,7 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.data.providers.DreamtinkerBlockTagProvider;
-import org.dreamtinker.dreamtinker.data.providers.DreamtinkerFluidTagProvider;
-import org.dreamtinker.dreamtinker.data.providers.DreamtinkerItemTagProvider;
-import org.dreamtinker.dreamtinker.data.providers.DreamtinkerRecipeProvider;
+import org.dreamtinker.dreamtinker.data.providers.*;
 import org.dreamtinker.dreamtinker.data.providers.loot.DreamtinkerLootTableProvider;
 import org.dreamtinker.dreamtinker.data.providers.model.*;
 import org.dreamtinker.dreamtinker.data.providers.tinker.*;
@@ -19,6 +16,7 @@ import org.dreamtinker.dreamtinker.data.providers.tool.DreamtinkerPartSpriteProv
 import org.dreamtinker.dreamtinker.data.providers.tool.DreamtinkerStationLayout;
 import org.dreamtinker.dreamtinker.data.providers.tool.DreamtinkerToolDefinitionProvider;
 import slimeknights.tconstruct.fluids.data.FluidBucketModelProvider;
+import slimeknights.tconstruct.library.client.data.material.GeneratorPartTextureJsonGenerator;
 import slimeknights.tconstruct.library.client.data.material.MaterialPartTextureGenerator;
 import slimeknights.tconstruct.tools.data.sprite.TinkerMaterialSpriteProvider;
 import slimeknights.tconstruct.tools.data.sprite.TinkerPartSpriteProvider;
@@ -62,6 +60,8 @@ public class DreamtinkerDataGen {
         generator.addProvider(event.includeServer(), new DreamtinkerStationLayout(output));
         generator.addProvider(event.includeClient(), new DreamtinkerToolItemModelprovider(output, helper));
         generator.addProvider(event.includeClient(), new DreamtinkerArmorModel(output));
+        generator.addProvider(event.includeServer(), new ModDatapackProvider(output, lookupProvider));
+        generator.addProvider(event.includeClient(), new GeneratorPartTextureJsonGenerator(output, Dreamtinker.MODID, new DreamtinkerPartSpriteProvider()));
 
 
     }

@@ -6,6 +6,7 @@ import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.register.DreamtinkerBlocks;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -16,7 +17,7 @@ public class DreamtinkerBlockLootTableProvider extends BlockLootSubProvider {
     }
 
     @Override
-    protected Iterable<Block> getKnownBlocks() {
+    protected @NotNull Iterable<Block> getKnownBlocks() {
         return BuiltInRegistries.BLOCK.stream()
                                       .filter(block -> Dreamtinker.MODID.equals(BuiltInRegistries.BLOCK.getKey(block).getNamespace()))
                                       .collect(Collectors.toList());
@@ -29,6 +30,7 @@ public class DreamtinkerBlockLootTableProvider extends BlockLootSubProvider {
 
     private void addDecorative() {
         this.dropSelf(DreamtinkerBlocks.crying_obsidian_plane.get());
+        this.dropSelf(DreamtinkerBlocks.narcissus.get());
 
     }
 }

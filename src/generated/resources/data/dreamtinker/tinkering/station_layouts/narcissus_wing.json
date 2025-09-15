@@ -1,0 +1,55 @@
+{
+  "icon": {
+    "item": "dreamtinker:narcissus_wing",
+    "nbt": "{Damage:0,tic_broken:0b,tic_display:1b,tic_materials:[\"tconstruct:ui_render#head\",\"tconstruct:ui_render#handle\",\"tconstruct:ui_render#extra\",\"tconstruct:ui_render#large\",\"tconstruct:ui_render#extra_large\"]}"
+  },
+  "input_slots": [
+    {
+      "filter": {
+        "item": "dreamtinker:memory_orthant"
+      },
+      "icon": "dreamtinker:memory_orthant",
+      "translation_key": "item.dreamtinker.memory_orthant",
+      "x": 7,
+      "y": 26
+    },
+    {
+      "filter": {
+        "item": "dreamtinker:wish_orthant"
+      },
+      "icon": "dreamtinker:wish_orthant",
+      "translation_key": "item.dreamtinker.wish_orthant",
+      "x": 25,
+      "y": 26
+    },
+    {
+      "filter": {
+        "item": "dreamtinker:soul_orthant"
+      },
+      "icon": "dreamtinker:soul_orthant",
+      "translation_key": "item.dreamtinker.soul_orthant",
+      "x": 45,
+      "y": 26
+    },
+    {
+      "filter": {
+        "item": "dreamtinker:persona_orthant"
+      },
+      "icon": "dreamtinker:persona_orthant",
+      "translation_key": "item.dreamtinker.persona_orthant",
+      "x": 25,
+      "y": 62
+    },
+    {
+      "filter": {
+        "item": "dreamtinker:reason_emanation"
+      },
+      "icon": "dreamtinker:reason_emanation",
+      "translation_key": "item.dreamtinker.reason_emanation",
+      "x": 25,
+      "y": 46
+    }
+  ],
+  "sortIndex": 17,
+  "translation_key": "item.dreamtinker.narcissus_wing"
+}

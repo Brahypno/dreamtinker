@@ -28,6 +28,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                                            .addModules(ModifierSlotModule.slot(SlotType.SOUL).flat(1));
         buildModifier(DreamtinkerModifers.Ids.continuous_explode).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
         buildModifier(DreamtinkerModifers.Ids.moonlight_ice_info).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
+        buildModifier(DreamtinkerModifers.Ids.soul_core).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
     }
 
     @Override

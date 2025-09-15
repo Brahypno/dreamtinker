@@ -1,8 +1,7 @@
 package org.dreamtinker.dreamtinker.event.recipes;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -15,7 +14,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.register.DreamtinkerItems;
 import slimeknights.tconstruct.tools.TinkerTools;
@@ -30,8 +28,7 @@ public class memoryCastConversion {
 
         Player player = event.getEntity();
         ItemStack held = player.getItemInHand(event.getHand());
-        if (!(held.getItem() instanceof FlintAndSteelItem || held.getItem().equals(TinkerTools.flintAndBrick.asItem())) || held.is(TagKey.create(
-                ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("minecraft", "creeper_igniters"))))
+        if (!(held.getItem() instanceof FlintAndSteelItem || held.getItem().equals(TinkerTools.flintAndBrick.asItem())) || held.is(ItemTags.CREEPER_IGNITERS))
             return;
 
         BlockPos clicked = event.getPos();

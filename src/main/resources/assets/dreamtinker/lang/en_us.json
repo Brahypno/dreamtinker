@@ -167,6 +167,8 @@
   "item.dreamtinker.under_plate_chestplate": "UnderWear Plate Chestplate",
   "item.dreamtinker.under_plate_leggings": "Pants and Leg band",
   "item.dreamtinker.under_plate_boots": "UnderWear Plate Socks",
+  "item.dreamtinker.narcissus_wing": "Narcissus Wing",
+  "item.dreamtinker.narcissus_wing.description": "Memory, Wish, Soul, Persona, Reason......This ritual blade that exists because of you.\n This dream only meaning for you, befor story ends",
 
   "item.dreamtinker.raw_stibnite": "Raw Stibnite",
   "item.dreamtinker.valentinite": "Valentinite",
@@ -200,6 +202,9 @@
   "tooltip.dreamtinker.persona_cast_1": "The first droplet,infuse solid，Twist Set",
   "tooltip.dreamtinker.persona_cast_2": "The first droplet, born in fire, always united",
   "item.dreamtinker.reason_cast": "Reason Cast",
+  "tooltip.dreamtinker.reason_cast_1": "Born in huge dream, never awake, always united",
+  "tooltip.dreamtinker.reason_cast_2": "Born in long dream, never aware, always united",
+  "tooltip.dreamtinker.reason_cast_3": "Hung dream finally awake，Long dream inevitable aware，But as pure as usual",
   "item.dreamtinker.memory_orthant": "Memory Orthant",
   "item.dreamtinker.wish_orthant": "Wish Orthant",
   "item.dreamtinker.soul_orthant": "Soul Orthant",
@@ -207,8 +212,14 @@
   "item.dreamtinker.reason_emanation": "Reason Emanation",
   "item.dreamtinker.white_peach": "White Peach",
   "tooltip.dreamtinker.white_peach": "embody life's delights and pleasures, but are equally fragile and short-lived",
+  "item.dreamtinker.unborn_egg": "Unborn Egg",
+  "item.dreamtinker.unborn_turtle_egg": "Unborn Turtle Egg",
+  "item.dreamtinker.unborn_sniffer_egg": "Unborn Sniffer Egg",
+  "item.dreamtinker.unborn_dragon_egg": "Unborn Dragon Egg",
+  "item.dreamtinker.unborn_spawn_egg": "Unborn Spawn Egg(creative)",
 
   "block.dreamtinker.crying_obsidian_pane": "Crying Obsidian Pane",
+  "block.dreamtinker.narcissus": "Narcissus",
 
   "material.dreamtinker.echo_shard": "Echo Shard",
   "material.dreamtinker.echo_shard.flavor": "Its echo of mystery, or echo of enigma",

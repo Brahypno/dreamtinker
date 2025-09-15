@@ -1,0 +1,245 @@
+{
+  "parts": [
+    {
+      "path": "dreamtinker:item/tool/parts/explode_core",
+      "stat_type": "tconstruct:head"
+    },
+    {
+      "path": "dreamtinker:item/tool/parts/memory_orthant",
+      "stat_type": "tconstruct:head"
+    },
+    {
+      "path": "dreamtinker:item/tool/parts/wish_orthant",
+      "stat_type": "tconstruct:handle"
+    },
+    {
+      "path": "dreamtinker:item/tool/parts/soul_orthant",
+      "stat_type": "tconstruct:limb"
+    },
+    {
+      "path": "dreamtinker:item/tool/parts/persona_orthant",
+      "stat_type": "tconstruct:limb"
+    },
+    {
+      "path": "dreamtinker:item/tool/parts/reason_emanation",
+      "stat_type": "tconstruct:head"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:tinker_armor/under_plate/plating_armor",
+      "stat_type": "tconstruct:armor_plating"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:tinker_armor/under_plate/plating_leggings",
+      "stat_type": "tconstruct:armor_plating"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:tinker_armor/under_plate/maille_armor",
+      "stat_type": "tconstruct:armor_maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:tinker_armor/under_plate/maille_leggings",
+      "stat_type": "tconstruct:armor_maille"
+    },
+    {
+      "path": "dreamtinker:item/tool/tntarrow/explode_core",
+      "stat_type": "tconstruct:head"
+    },
+    {
+      "path": "dreamtinker:item/tool/tntarrow/arrow_handle",
+      "stat_type": "tconstruct:handle"
+    },
+    {
+      "path": "dreamtinker:item/tool/tntarrow/arrow_wing",
+      "stat_type": "tconstruct:handle"
+    },
+    {
+      "path": "dreamtinker:item/tool/masu/masu_blade",
+      "stat_type": "tconstruct:head"
+    },
+    {
+      "path": "dreamtinker:item/tool/masu/masu_blade_broken",
+      "stat_type": "tconstruct:head"
+    },
+    {
+      "path": "dreamtinker:item/tool/masu/masu_line",
+      "stat_type": "tconstruct:head"
+    },
+    {
+      "path": "dreamtinker:item/tool/masu/masu_line_broken",
+      "stat_type": "tconstruct:head"
+    },
+    {
+      "path": "dreamtinker:item/tool/masu/masu_binding",
+      "stat_type": "tconstruct:binding"
+    },
+    {
+      "path": "dreamtinker:item/tool/masu/masu_binding_broken",
+      "stat_type": "tconstruct:binding"
+    },
+    {
+      "path": "dreamtinker:item/tool/masu/masu_handle",
+      "stat_type": "tconstruct:handle"
+    },
+    {
+      "path": "dreamtinker:item/tool/masu/masu_end",
+      "stat_type": "tconstruct:handle"
+    },
+    {
+      "path": "dreamtinker:item/tool/masu/large/masu_blade",
+      "stat_type": "tconstruct:head"
+    },
+    {
+      "path": "dreamtinker:item/tool/masu/large/masu_blade_broken",
+      "stat_type": "tconstruct:head"
+    },
+    {
+      "path": "dreamtinker:item/tool/masu/large/masu_line",
+      "stat_type": "tconstruct:head"
+    },
+    {
+      "path": "dreamtinker:item/tool/masu/large/masu_line_broken",
+      "stat_type": "tconstruct:head"
+    },
+    {
+      "path": "dreamtinker:item/tool/masu/large/masu_binding",
+      "stat_type": "tconstruct:binding"
+    },
+    {
+      "path": "dreamtinker:item/tool/masu/large/masu_binding_broken",
+      "stat_type": "tconstruct:binding"
+    },
+    {
+      "path": "dreamtinker:item/tool/masu/large/masu_handle",
+      "stat_type": "tconstruct:handle"
+    },
+    {
+      "path": "dreamtinker:item/tool/masu/large/masu_end",
+      "stat_type": "tconstruct:handle"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/helmet/plating",
+      "stat_type": "tconstruct:plating_helmet"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/helmet/plating_broken",
+      "stat_type": "tconstruct:plating_helmet"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/helmet/maille",
+      "stat_type": "tconstruct:maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/helmet/maille_broken",
+      "stat_type": "tconstruct:maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/helmet/maille1",
+      "stat_type": "tconstruct:maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/helmet/maille1_broken",
+      "stat_type": "tconstruct:maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/chestplate/plating",
+      "stat_type": "tconstruct:plating_chestplate"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/chestplate/plating_broken",
+      "stat_type": "tconstruct:plating_chestplate"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/chestplate/maille",
+      "stat_type": "tconstruct:maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/chestplate/maille_broken",
+      "stat_type": "tconstruct:maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/chestplate/maille1",
+      "stat_type": "tconstruct:maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/chestplate/maille1_broken",
+      "stat_type": "tconstruct:maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/leggings/plating",
+      "stat_type": "tconstruct:plating_leggings"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/leggings/plating_broken",
+      "stat_type": "tconstruct:plating_leggings"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/leggings/maille",
+      "stat_type": "tconstruct:maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/leggings/maille_broken",
+      "stat_type": "tconstruct:maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/leggings/maille1",
+      "stat_type": "tconstruct:maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/leggings/maille1_broken",
+      "stat_type": "tconstruct:maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/boots/plating",
+      "stat_type": "tconstruct:plating_boots"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/boots/plating_broken",
+      "stat_type": "tconstruct:plating_boots"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/boots/maille",
+      "stat_type": "tconstruct:maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/boots/maille_broken",
+      "stat_type": "tconstruct:maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/boots/maille1",
+      "stat_type": "tconstruct:maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/boots/maille1_broken",
+      "stat_type": "tconstruct:maille"
+    }
+  ],
+  "replace": false
+}

@@ -2,6 +2,7 @@ package org.dreamtinker.dreamtinker.data.providers.tool;
 
 import net.minecraft.world.item.ArmorItem;
 import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.client.data.material.AbstractPartSpriteProvider;
 import slimeknights.tconstruct.tools.stats.PlatingMaterialStats;
 import slimeknights.tconstruct.tools.stats.StatlessMaterialStats;
@@ -15,14 +16,18 @@ public class DreamtinkerPartSpriteProvider extends AbstractPartSpriteProvider {
     }
 
     @Override
-    public String getName() {
+    public @NotNull String getName() {
         return "Dreamtinker Part Sprite Provider";
     }
 
     @Override
     protected void addAllSpites() {
         addHead("explode_core");
-        //addSprite("item/tool/parts/explode_core", HeadMaterialStats.ID);
+        addHead("memory_orthant");
+        addHandle("wish_orthant");
+        addLimb("soul_orthant");
+        addLimb("persona_orthant");
+        addHead("reason_emanation");
         buildTool("tntarrow").addHead("explode_core").addHandle("arrow_handle").addHandle("arrow_wing");
         buildTool("masu").withLarge()
                          .addBreakableHead("masu_blade").addBreakableHead("masu_line")

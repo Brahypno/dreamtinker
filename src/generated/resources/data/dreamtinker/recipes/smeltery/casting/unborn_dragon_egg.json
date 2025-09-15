@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "item": "minecraft:dragon_egg"
+  },
+  "cast_consumed": true,
+  "cooling_time": 10,
+  "fluid": {
+    "amount": 300,
+    "tag": "forge:molten_albedo_stibium"
+  },
+  "result": "dreamtinker:unborn_dragon_egg"
+}

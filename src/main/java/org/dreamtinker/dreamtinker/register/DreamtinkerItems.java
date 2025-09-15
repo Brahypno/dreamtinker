@@ -16,6 +16,7 @@ import org.dreamtinker.dreamtinker.Item.antimony.valentinite;
 import org.dreamtinker.dreamtinker.Item.void_pearl;
 import org.dreamtinker.dreamtinker.tools.DTtoolsDefinition;
 import org.dreamtinker.dreamtinker.tools.Masu.Masu;
+import org.dreamtinker.dreamtinker.tools.NarcissusWing.NarcissusWing;
 import org.dreamtinker.dreamtinker.tools.TNTarrow.TNTarrow;
 import org.dreamtinker.dreamtinker.tools.UnderArmor.UnderArmorItem;
 import org.jetbrains.annotations.NotNull;
@@ -24,10 +25,9 @@ import slimeknights.mantle.registration.object.ItemObject;
 import slimeknights.tconstruct.common.registration.ItemDeferredRegisterExtension;
 import slimeknights.tconstruct.library.tools.item.ModifiableItem;
 import slimeknights.tconstruct.library.tools.part.ToolPartItem;
-import slimeknights.tconstruct.tools.stats.GripMaterialStats;
+import slimeknights.tconstruct.tools.stats.HandleMaterialStats;
 import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
 import slimeknights.tconstruct.tools.stats.LimbMaterialStats;
-import slimeknights.tconstruct.tools.stats.StatlessMaterialStats;
 
 import java.util.List;
 
@@ -45,6 +45,8 @@ public class DreamtinkerItems {
     public static final ItemObject<ModifiableItem> tntarrow =
             MODI_TOOLS.register("tntarrow", () -> new TNTarrow((new Item.Properties()).stacksTo(4), DTtoolsDefinition.TNTARROW, 4));
     public static final ItemObject<ModifiableItem> masu = MODI_TOOLS.register("masu", () -> new Masu(TOOL, DTtoolsDefinition.MASU));
+    public static final ItemObject<ModifiableItem> narcissus_wing =
+            MODI_TOOLS.register("narcissus_wing", () -> new NarcissusWing(TOOL.rarity(Rarity.EPIC), DTtoolsDefinition.narcissus_wing));
     public static final EnumObject<ArmorItem.Type, UnderArmorItem> underPlate =
             MODI_TOOLS.registerEnum("under_plate", ArmorItem.Type.values(), type -> new UnderArmorItem(DTtoolsDefinition.UNDER_PLATE, type, TOOL));
 
@@ -52,11 +54,14 @@ public class DreamtinkerItems {
     public static final RegistryObject<ToolPartItem> memoryOrthant =
             ITEMS.register("memory_orthant", () -> new ToolPartItem(PART.rarity(Rarity.RARE), HeadMaterialStats.ID));
     public static final RegistryObject<ToolPartItem> wishOrthant =
-            ITEMS.register("wish_orthant", () -> new ToolPartItem(PART, StatlessMaterialStats.BINDING.getIdentifier()));
+            ITEMS.register("wish_orthant", () -> new ToolPartItem(PART, HandleMaterialStats.ID) {
+                @Override
+                public boolean isFoil(@NotNull ItemStack stack) {return true;}
+            });
     public static final RegistryObject<ToolPartItem> soulOrthant =
-            ITEMS.register("soul_orthant", () -> new ToolPartItem(PART.rarity(Rarity.RARE), LimbMaterialStats.ID));
+            ITEMS.register("soul_orthant", () -> new ToolPartItem(PART, LimbMaterialStats.ID));
     public static final RegistryObject<ToolPartItem> personaOrthant =
-            ITEMS.register("persona_orthant", () -> new ToolPartItem(PART.rarity(Rarity.RARE), GripMaterialStats.ID));
+            ITEMS.register("persona_orthant", () -> new ToolPartItem(PART.rarity(Rarity.RARE), LimbMaterialStats.ID));
     public static final RegistryObject<ToolPartItem> reasonEmanation =
             ITEMS.register("reason_emanation", () -> new ToolPartItem(PART.rarity(Rarity.RARE), HeadMaterialStats.ID));
 
@@ -113,7 +118,14 @@ public class DreamtinkerItems {
             super.appendHoverText(stack, level, tooltip, flag);
         }
     });
-    public static final RegistryObject<Item> reason_cast = ITEMS.register("reason_cast", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> reason_cast = ITEMS.register("reason_cast", () -> new Item(new Item.Properties().rarity(Rarity.RARE)) {
+        public void appendHoverText(@NotNull ItemStack stack, Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
+            tooltip.add(Component.translatable("tooltip.dreamtinker.reason_cast_1").withStyle(ChatFormatting.GOLD));
+            tooltip.add(Component.translatable("tooltip.dreamtinker.reason_cast_2").withStyle(ChatFormatting.GOLD));
+            tooltip.add(Component.translatable("tooltip.dreamtinker.reason_cast_3").withStyle(ChatFormatting.GOLD));
+            super.appendHoverText(stack, level, tooltip, flag);
+        }
+    });
 
     public static final RegistryObject<Item> white_peach = ITEMS.register("white_peach", () -> new Item(
             new Item.Properties().rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(2).saturationMod(6F).build())) {
@@ -122,7 +134,14 @@ public class DreamtinkerItems {
             super.appendHoverText(stack, level, tooltip, flag);
         }
     });
-
+    public static final RegistryObject<Item> unborn_egg = ITEMS.register("unborn_egg", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> unborn_turtle_egg =
+            ITEMS.register("unborn_turtle_egg", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> unborn_sniffer_egg =
+            ITEMS.register("unborn_sniffer_egg", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> unborn_dragon_egg =
+            ITEMS.register("unborn_dragon_egg", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
+    public static final RegistryObject<Item> unborn_spawn_egg = ITEMS.register("unborn_spawn_egg", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
 
     public static final RegistryObject<Item> soul_etherium = EL_ITEMS.register(
             "soul_etherium",
@@ -150,6 +169,11 @@ public class DreamtinkerItems {
         output.accept(persona_cast.get());
         output.accept(reason_cast.get());
         output.accept(white_peach.get());
+        output.accept(unborn_egg.get());
+        output.accept(unborn_turtle_egg.get());
+        output.accept(unborn_dragon_egg.get());
+        output.accept(unborn_sniffer_egg.get());
+        output.accept(unborn_spawn_egg.get());
         if (ModList.get().isLoaded("enigmaticlegacy"))
             output.accept(soul_etherium.get());
     }

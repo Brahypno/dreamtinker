@@ -2,24 +2,27 @@ package org.dreamtinker.dreamtinker.data.providers;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.data.DreamtinkerTagkeys;
 import org.dreamtinker.dreamtinker.register.DreamtinkerBlocks;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.registration.object.BuildingBlockObject;
 import slimeknights.mantle.registration.object.EnumObject;
+import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.common.registration.GeodeItemObject;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
-import static net.minecraft.tags.BlockTags.MINEABLE_WITH_PICKAXE;
-import static net.minecraft.tags.BlockTags.NEEDS_DIAMOND_TOOL;
+import static net.minecraft.tags.BlockTags.*;
 
 public class DreamtinkerBlockTagProvider extends BlockTagsProvider {
 
@@ -28,10 +31,21 @@ public class DreamtinkerBlockTagProvider extends BlockTagsProvider {
     }
 
     @Override
-    protected void addTags(HolderLookup.Provider provider) {
+    protected void addTags(HolderLookup.@NotNull Provider provider) {
         this.tag(BlockTags.DRAGON_IMMUNE).add(DreamtinkerBlocks.crying_obsidian_plane.get());
         tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_DIAMOND_TOOL, DreamtinkerBlocks.crying_obsidian_plane);
         this.tag(DreamtinkerTagkeys.Blocks.drop_peach).add(Blocks.BIRCH_LEAVES);
+        addBlocksTags(DreamtinkerBlocks.narcissus.get(), forgeBlockTag("mineable/shears"), TinkerTags.Blocks.SLIMY_FUNGUS_CAN_GROW_THROUGH,
+                      TinkerTags.Blocks.MINABLE_WITH_DAGGER, FLOWERS, ENDERMAN_HOLDABLE, SMALL_FLOWERS, SWORD_EFFICIENT, TinkerTags.Blocks.MINABLE_WITH_SCYTHE,
+                      forgeBlockTag("mineable/sword"), TinkerTags.Blocks.MINABLE_WITH_SHEARS);
+    }
+
+    private static TagKey<Block> mcBlockTag(String name) {
+        return TagKey.create(ForgeRegistries.BLOCKS.getRegistryKey(), new ResourceLocation("minecraft", name));
+    }
+
+    private static TagKey<Block> forgeBlockTag(String name) {
+        return TagKey.create(ForgeRegistries.BLOCKS.getRegistryKey(), new ResourceLocation("forge", name));
     }
 
     @SafeVarargs
@@ -59,6 +73,7 @@ public class DreamtinkerBlockTagProvider extends BlockTagsProvider {
     /**
      * Applies a set of tags to a block
      */
+    @SafeVarargs
     @SuppressWarnings("SameParameterValue")
     private void tagBlocks(TagKey<Block> tag1, TagKey<Block> tag2, Supplier<? extends Block>... blocks) {
         tagBlocks(tag1, blocks);
@@ -102,5 +117,12 @@ public class DreamtinkerBlockTagProvider extends BlockTagsProvider {
     private void tagBlocks(TagKey<Block> tag1, TagKey<Block> tag2, BuildingBlockObject... blocks) {
         tagBlocks(tag1, blocks);
         tagBlocks(tag2, blocks);
+    }
+
+    @SafeVarargs
+    private void addBlocksTags(Block block, TagKey<Block>... tags) {
+        for (TagKey<Block> tag : tags) {
+            this.tag(tag).add(block);
+        }
     }
 }

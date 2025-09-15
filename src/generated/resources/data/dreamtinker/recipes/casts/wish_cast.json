@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "M": {
+      "item": "minecraft:clock"
+    },
+    "e": {
+      "item": "dreamtinker:narcissus"
+    }
+  },
+  "pattern": [
+    "eee",
+    "eMe",
+    "eee"
+  ],
+  "result": {
+    "item": "dreamtinker:reason_cast"
+  },
+  "show_notification": true
+}

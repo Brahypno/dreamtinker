@@ -1,6 +1,6 @@
 {
   "type": "tconstruct:part_builder",
-  "cost": 2,
+  "cost": 8,
   "pattern": "dreamtinker:memory_orthant",
   "pattern_item": {
     "item": "dreamtinker:memory_cast"

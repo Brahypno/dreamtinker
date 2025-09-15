@@ -14,7 +14,9 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.data.DreamtinkerTagkeys;
+import org.dreamtinker.dreamtinker.register.DreamtinkerBlocks;
 import org.dreamtinker.dreamtinker.register.DreamtinkerItems;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.registration.object.EnumObject;
 import slimeknights.tconstruct.common.TinkerTags;
@@ -30,12 +32,14 @@ public class DreamtinkerItemTagProvider extends ItemTagsProvider {
     }
 
     @Override
-    protected void addTags(HolderLookup.Provider Provider) {
+    protected void addTags(HolderLookup.@NotNull Provider Provider) {
         //tools
         this.tag(TinkerTags.Items.TOOL_PARTS).add(DreamtinkerItems.explode_core.get());
-        addToolTags(DreamtinkerItems.masu, MULTIPART_TOOL, DURABILITY, HARVEST, MELEE_PRIMARY, INTERACTABLE_RIGHT, SWORD, BROAD_TOOLS, BONUS_SLOTS,
-                    ItemTags.SWORDS, AOE);
-        addToolTags(DreamtinkerItems.tntarrow, MULTIPART_TOOL, DURABILITY, MELEE_WEAPON, SMALL_TOOLS, BONUS_SLOTS);
+        addItemsTags(DreamtinkerItems.masu, MULTIPART_TOOL, DURABILITY, HARVEST, MELEE_PRIMARY, INTERACTABLE_RIGHT, SWORD, BROAD_TOOLS, BONUS_SLOTS,
+                     ItemTags.SWORDS, AOE);
+        addItemsTags(DreamtinkerItems.narcissus_wing, MULTIPART_TOOL, DURABILITY, HARVEST, MELEE_PRIMARY, INTERACTABLE_RIGHT, SCYTHES, BROAD_TOOLS, BONUS_SLOTS,
+                     ItemTags.SWORDS, AOE, RANGED);
+        addItemsTags(DreamtinkerItems.tntarrow, MULTIPART_TOOL, DURABILITY, MELEE_WEAPON, SMALL_TOOLS, BONUS_SLOTS);
         //parts
         this.tag(TinkerTags.Items.CASTS)
             .add(DreamtinkerItems.memory_cast.get(), DreamtinkerItems.wish_cast.get(), DreamtinkerItems.soul_cast.get(), DreamtinkerItems.persona_cast.get(),
@@ -56,15 +60,15 @@ public class DreamtinkerItemTagProvider extends ItemTagsProvider {
         }
         tag(MIGHTY_ARMOR);
         tag(FANTASTIC_ARMOR);
-        bookArmor = tag(GADGETRY_ARMOR);
         tag(BOOK_ARMOR).addTags(BASIC_ARMOR, PUNY_ARMOR, MIGHTY_ARMOR, FANTASTIC_ARMOR, GADGETRY_ARMOR);
         //items
         this.tag(Tags.Items.INGOTS)
             .add(DreamtinkerItems.metallivorous_stibium_lupus.get(), DreamtinkerItems.regulus.get(), DreamtinkerItems.soul_etherium.get());
         this.tag(Tags.Items.GEMS).add(DreamtinkerItems.valentinite.get(), DreamtinkerItems.nigrescence_antimony.get());
         this.tag(DreamtinkerTagkeys.Items.raw_stibnite).add(DreamtinkerItems.raw_stibnite.get());
-        this.tag(mcItemTag("fox_food")).add(DreamtinkerItems.white_peach.get());
-        this.tag(mcItemTag("arrows")).add(DreamtinkerItems.tntarrow.get());
+        this.tag(ItemTags.FOX_FOOD).add(DreamtinkerItems.white_peach.get());
+        this.tag(ItemTags.ARROWS).add(DreamtinkerItems.tntarrow.get());
+        addItemsTags(DreamtinkerBlocks.narcissus.asItem(), ItemTags.SMALL_FLOWERS, ItemTags.FLOWERS);
 
     }
 
@@ -102,7 +106,7 @@ public class DreamtinkerItemTagProvider extends ItemTagsProvider {
     }
 
     @SafeVarargs
-    private void addToolTags(ItemLike tool, TagKey<Item>... tags) {
+    private void addItemsTags(ItemLike tool, TagKey<Item>... tags) {
         Item item = tool.asItem();
         for (TagKey<Item> tag : tags) {
             this.tag(tag).add(item);

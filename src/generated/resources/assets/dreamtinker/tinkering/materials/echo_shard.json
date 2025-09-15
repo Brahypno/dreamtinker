@@ -29,36 +29,28 @@
           "path": "dreamtinker:material/echo_shard/gradient_echo_shard_0"
         },
         {
-          "grey": 48,
+          "grey": 63,
           "path": "dreamtinker:material/echo_shard/gradient_echo_shard_1"
         },
         {
-          "grey": 96,
+          "grey": 102,
           "path": "dreamtinker:material/echo_shard/gradient_echo_shard_2"
         },
         {
-          "grey": 128,
-          "path": "dreamtinker:material/echo_shard/gradient_echo_shard_5"
-        },
-        {
-          "grey": 160,
-          "path": "dreamtinker:material/echo_shard/gradient_echo_shard_6"
-        },
-        {
-          "grey": 192,
-          "path": "dreamtinker:material/echo_shard/gradient_echo_shard_7"
-        },
-        {
-          "grey": 220,
-          "path": "dreamtinker:material/echo_shard/gradient_echo_shard_8"
-        },
-        {
-          "grey": 235,
+          "grey": 140,
           "path": "dreamtinker:material/echo_shard/gradient_echo_shard_3"
         },
         {
-          "grey": 248,
+          "grey": 178,
           "path": "dreamtinker:material/echo_shard/gradient_echo_shard_4"
+        },
+        {
+          "grey": 216,
+          "path": "dreamtinker:material/echo_shard/gradient_echo_shard_5"
+        },
+        {
+          "grey": 255,
+          "path": "dreamtinker:material/echo_shard/gradient_echo_shard_6"
         }
       ]
     }

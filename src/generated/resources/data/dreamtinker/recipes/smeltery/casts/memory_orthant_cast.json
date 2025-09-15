@@ -4,6 +4,6 @@
     "item": "dreamtinker:memory_cast"
   },
   "cast_consumed": true,
-  "item_cost": 2,
+  "item_cost": 8,
   "result": "dreamtinker:memory_orthant"
 }

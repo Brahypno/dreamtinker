@@ -30,8 +30,12 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        ResourceLocation obsidian = new ResourceLocation("block/crying_obsidian");
-        paneBlock(DreamtinkerBlocks.crying_obsidian_plane.get(), "crying_obsidian_pane/", obsidian, obsidian, false, -1, false, RenderType.solid());
+        ResourceLocation crying_obsidian = new ResourceLocation("block/crying_obsidian");
+        paneBlock(DreamtinkerBlocks.crying_obsidian_plane.get(), "crying_obsidian_pane/", crying_obsidian, crying_obsidian, false, -1, false,
+                  RenderType.solid());
+        simpleBlockWithItem(DreamtinkerBlocks.narcissus.get(),
+                            models().cross("narcissus", modLoc("block/narcissus"))
+                                    .renderType("cutout"));
     }
 
     /**

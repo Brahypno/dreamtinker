@@ -2,13 +2,14 @@ package org.dreamtinker.dreamtinker.data.providers.tinker;
 
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.data.DreamtinkerMaterialIds;
+import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.client.data.material.AbstractMaterialSpriteProvider;
 import slimeknights.tconstruct.library.client.data.spritetransformer.GreyToSpriteTransformer;
 import slimeknights.tconstruct.tools.stats.*;
 
 public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpriteProvider {
     @Override
-    public String getName() {
+    public @NotNull String getName() {
         return "Dreamtinker Material Sprite Provider";
     }
 
@@ -17,14 +18,12 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
         this.buildMaterial(DreamtinkerMaterialIds.echo_shard).ranged().meleeHarvest().armor().fallbacks("crystal", "metal")
             .transformer(GreyToSpriteTransformer.builder()
                                                 .addTexture(0, Dreamtinker.getLocation("material/echo_shard/gradient_echo_shard_0"))
-                                                .addTexture(48, Dreamtinker.getLocation("material/echo_shard/gradient_echo_shard_1"))
-                                                .addTexture(96, Dreamtinker.getLocation("material/echo_shard/gradient_echo_shard_2"))
-                                                .addTexture(128, Dreamtinker.getLocation("material/echo_shard/gradient_echo_shard_5"))
-                                                .addTexture(160, Dreamtinker.getLocation("material/echo_shard/gradient_echo_shard_6"))
-                                                .addTexture(192, Dreamtinker.getLocation("material/echo_shard/gradient_echo_shard_7"))
-                                                .addTexture(220, Dreamtinker.getLocation("material/echo_shard/gradient_echo_shard_8"))
-                                                .addTexture(235, Dreamtinker.getLocation("material/echo_shard/gradient_echo_shard_3"))
-                                                .addTexture(248, Dreamtinker.getLocation("material/echo_shard/gradient_echo_shard_4"))
+                                                .addTexture(63, Dreamtinker.getLocation("material/echo_shard/gradient_echo_shard_1"))
+                                                .addTexture(102, Dreamtinker.getLocation("material/echo_shard/gradient_echo_shard_2"))
+                                                .addTexture(140, Dreamtinker.getLocation("material/echo_shard/gradient_echo_shard_3"))
+                                                .addTexture(178, Dreamtinker.getLocation("material/echo_shard/gradient_echo_shard_4"))
+                                                .addTexture(216, Dreamtinker.getLocation("material/echo_shard/gradient_echo_shard_5"))
+                                                .addTexture(255, Dreamtinker.getLocation("material/echo_shard/gradient_echo_shard_6"))
                                                 .build());
         this.buildMaterial(DreamtinkerMaterialIds.moonlight_ice).statType(HeadMaterialStats.ID).repairKit().fallbacks("metal")
             .transformer(GreyToSpriteTransformer.builder()

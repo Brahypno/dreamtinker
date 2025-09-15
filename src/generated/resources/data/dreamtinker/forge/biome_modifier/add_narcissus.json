@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_features",
+  "biomes": [
+    "minecraft:river",
+    "minecraft:savanna_plateau",
+    "minecraft:flower_forest"
+  ],
+  "features": "dreamtinker:narcissus_patch",
+  "step": "vegetal_decoration"
+}

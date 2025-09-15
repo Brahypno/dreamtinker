@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "item": "dreamtinker:void_pearl"
+  },
+  "cast_consumed": true,
+  "conditions": [
+    {
+      "type": "forge:item_exists",
+      "item": "enigmaticlegacy:void_pearl"
+    }
+  ],
+  "cooling_time": 31,
+  "fluid": {
+    "amount": 810,
+    "fluid": "dreamtinker:molten_ascending_antimony"
+  },
+  "result": "enigmaticlegacy:void_pearl"
+}

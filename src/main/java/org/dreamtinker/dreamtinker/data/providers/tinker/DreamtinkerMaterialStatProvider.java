@@ -3,6 +3,7 @@ package org.dreamtinker.dreamtinker.data.providers.tinker;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Tiers;
 import org.dreamtinker.dreamtinker.data.DreamtinkerMaterialIds;
+import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.data.material.AbstractMaterialStatsDataProvider;
 import slimeknights.tconstruct.tools.stats.*;
 
@@ -82,7 +83,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new GripMaterialStats(0.2f, 0.6f, 1.0f),
                          StatlessMaterialStats.BOWSTRING);
         addMaterialStats(DreamtinkerMaterialIds.soul_etherium,
-                         new LimbMaterialStats(10, 1.6f, -0.7f, 0.6f),
+                         new LimbMaterialStats(10, 1.6f, -0.1f, 0.6f),
                          new GripMaterialStats(0.2f, -0.6f, 7.0f),
                          StatlessMaterialStats.BOWSTRING);
     }
@@ -117,7 +118,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
     private void addMisc() {}
 
     @Override
-    public String getName() {
+    public @NotNull String getName() {
         return "Dreamtinker Material Stats Data Provider";
     }
 }

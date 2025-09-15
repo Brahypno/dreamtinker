@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "item": "minecraft:turtle_egg"
+  },
+  "cast_consumed": true,
+  "cooling_time": 10,
+  "fluid": {
+    "amount": 300,
+    "tag": "forge:molten_nigrescence_antimony"
+  },
+  "result": "dreamtinker:unborn_turtle_egg"
+}

@@ -26,6 +26,7 @@ public class DreamtinkerTab {
         for (var item : DreamtinkerItems.underPlate.values()) {
             ToolBuildHandler.addVariants(output::accept, item, "");
         }
+        ToolBuildHandler.addVariants(output::accept, DreamtinkerItems.narcissus_wing.get(), "");
     }).build());
 
     public static final RegistryObject<CreativeModeTab> PART =

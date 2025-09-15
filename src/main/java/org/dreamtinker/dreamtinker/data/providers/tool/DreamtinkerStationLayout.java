@@ -5,6 +5,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.register.DreamtinkerItems;
+import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.data.tinkering.AbstractStationSlotLayoutProvider;
 import slimeknights.tconstruct.library.recipe.partbuilder.Pattern;
 import slimeknights.tconstruct.library.tools.layout.Patterns;
@@ -35,18 +36,26 @@ public class DreamtinkerStationLayout extends AbstractStationSlotLayoutProvider 
         define(Dreamtinker.getLocation("under_plate"))
                 .sortIndex(SORT_ARMOR * 2)
                 .translationKey(Dreamtinker.makeTranslationKey("item", "under_plate"))
-                .icon(Patterns.PLATE_ARMOR)
+                .icon(new Pattern("dreamtinker:under_plate"))
                 .addInputPattern(Patterns.PLATING, 33, 29, Ingredient.of(TinkerToolParts.plating.values().toArray(new Item[0])))
                 .addInputItem(TinkerToolParts.maille, 13, 53)
                 .addInputItem(TinkerToolParts.maille, 53, 53)
                 .addInputItem(new Pattern("dreamtinker:silky_cloth"), TinkerModifiers.silkyCloth, 13, 29)
                 .addInputItem(new Pattern("dreamtinker:silky_cloth"), TinkerModifiers.silkyCloth, 33, 53)
                 .build();
+        defineModifiable(DreamtinkerItems.narcissus_wing)
+                .sortIndex(SORT_WEAPON + SORT_RANGED + SORT_LARGE)
+                .addInputItem(DreamtinkerItems.memoryOrthant.get(), 7, 26)
+                .addInputItem(DreamtinkerItems.wishOrthant.get(), 25, 26)
+                .addInputItem(DreamtinkerItems.soulOrthant.get(), 45, 26)
+                .addInputItem(DreamtinkerItems.personaOrthant.get(), 25, 62)
+                .addInputItem(DreamtinkerItems.reasonEmanation.get(), 25, 46)
+                .build();
 
     }
 
     @Override
-    public String getName() {
+    public @NotNull String getName() {
         return "DreamTinker Station Slot Layouts";
     }
 
