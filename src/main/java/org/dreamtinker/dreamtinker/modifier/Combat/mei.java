@@ -30,6 +30,7 @@ import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ModifierStatsBuilder;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
+import slimeknights.tconstruct.library.utils.RomanNumeralHelper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,7 +56,7 @@ public class mei extends BattleModifier {
         else if (level < 50)
             return ModifierLevelDisplay.DEFAULT.nameForLevel(this, 9);
         else if (level <= 100)
-            return Component.translatable(this.getTranslationKey() + "." + "9")
+            return Component.translatable(this.getTranslationKey()).append(" ").append(RomanNumeralHelper.getNumeral(9))
                             .withStyle((style) -> style.withColor(ResourceColorManager.getTextColor(mei_key_2)));
         else if (level <= 150)//mei_2
             return Component.translatable(this.getTranslationKey()).withStyle((style) -> style.withColor(ResourceColorManager.getTextColor(mei_key_2)));
