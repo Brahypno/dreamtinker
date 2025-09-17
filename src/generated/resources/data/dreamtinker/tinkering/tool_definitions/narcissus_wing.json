@@ -53,14 +53,15 @@
     {
       "type": "tconstruct:multiply_stats",
       "multipliers": {
-        "tconstruct:durability": 1.1
+        "tconstruct:durability": 0.8
       }
     },
     {
       "type": "tconstruct:modifier_slots",
       "slots": {
-        "abilities": 4,
-        "souls": 6
+        "abilities": 2,
+        "souls": 6,
+        "upgrades": 1
       }
     },
     {

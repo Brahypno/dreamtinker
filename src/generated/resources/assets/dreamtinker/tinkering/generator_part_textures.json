@@ -121,6 +121,46 @@
       "stat_type": "tconstruct:handle"
     },
     {
+      "path": "dreamtinker:item/tool/narcissus_wing/memory_orthant",
+      "stat_type": "tconstruct:handle"
+    },
+    {
+      "path": "dreamtinker:item/tool/narcissus_wing/wish_orthant",
+      "stat_type": "tconstruct:handle"
+    },
+    {
+      "path": "dreamtinker:item/tool/narcissus_wing/soul_orthant",
+      "stat_type": "tconstruct:limb"
+    },
+    {
+      "path": "dreamtinker:item/tool/narcissus_wing/persona_orthant",
+      "stat_type": "tconstruct:limb"
+    },
+    {
+      "path": "dreamtinker:item/tool/narcissus_wing/reason_emanation",
+      "stat_type": "tconstruct:head"
+    },
+    {
+      "path": "dreamtinker:item/tool/narcissus_wing/large/memory_orthant",
+      "stat_type": "tconstruct:handle"
+    },
+    {
+      "path": "dreamtinker:item/tool/narcissus_wing/large/wish_orthant",
+      "stat_type": "tconstruct:handle"
+    },
+    {
+      "path": "dreamtinker:item/tool/narcissus_wing/large/soul_orthant",
+      "stat_type": "tconstruct:limb"
+    },
+    {
+      "path": "dreamtinker:item/tool/narcissus_wing/large/persona_orthant",
+      "stat_type": "tconstruct:limb"
+    },
+    {
+      "path": "dreamtinker:item/tool/narcissus_wing/large/reason_emanation",
+      "stat_type": "tconstruct:head"
+    },
+    {
       "allow_animated": false,
       "path": "dreamtinker:item/tool/armor/under_plate/helmet/plating",
       "stat_type": "tconstruct:plating_helmet"

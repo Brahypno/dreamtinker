@@ -58,7 +58,7 @@ public class DreamtinkerDataGen {
         generator.addProvider(event.includeServer(), new DreamtinkerLootTableProvider(output));
         generator.addProvider(event.includeServer(), new DreamtinkerToolDefinitionProvider(output));
         generator.addProvider(event.includeServer(), new DreamtinkerStationLayout(output));
-        generator.addProvider(event.includeClient(), new DreamtinkerToolItemModelprovider(output, helper));
+        generator.addProvider(event.includeClient(), new DreamtinkerToolItemModelProvider(output, helper));
         generator.addProvider(event.includeClient(), new DreamtinkerArmorModel(output));
         generator.addProvider(event.includeServer(), new ModDatapackProvider(output, lookupProvider));
         generator.addProvider(event.includeClient(), new GeneratorPartTextureJsonGenerator(output, Dreamtinker.MODID, new DreamtinkerPartSpriteProvider()));

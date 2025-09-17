@@ -1,0 +1,23 @@
+{
+  "parent": "forge:item/default",
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [ 0, 90, 20 ],
+      "translation": [ 0, 7.0, -1.0 ],
+      "scale": [ 1, 1.5, 1 ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [ 0, 90, 0 ],
+      "translation": [ 0, 7.0, 8.0 ],
+      "scale": [ 1, 1.5, 1 ]
+    },
+    "firstperson_righthand": {
+      "rotation": [ 0, 90, 0 ],
+      "scale": [ 1, 1.5, 1 ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [ 0, 90, -90 ],
+      "scale": [ 1, 1.5, 1 ]
+    }
+  }
+}

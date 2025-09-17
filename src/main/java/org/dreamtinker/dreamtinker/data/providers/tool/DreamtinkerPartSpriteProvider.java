@@ -33,6 +33,10 @@ public class DreamtinkerPartSpriteProvider extends AbstractPartSpriteProvider {
                          .addBreakableHead("masu_blade").addBreakableHead("masu_line")
                          .addBreakablePart("masu_binding", StatlessMaterialStats.BINDING.getIdentifier()).addHandle("masu_handle")
                          .addHandle("masu_end");
+        buildTool("narcissus_wing").withLarge()
+                                   .addHandle("memory_orthant").addHandle("wish_orthant")
+                                   .addLimb("soul_orthant").addLimb("persona_orthant")
+                                   .addHead("reason_emanation");
         for (ArmorItem.Type slot : ArmorItem.Type.values()) {
             buildTool("armor/under_plate/" + slot.getName()).disallowAnimated() // the armor model won't be animated, so don't animate the item
                                                             .addBreakablePart("plating", PlatingMaterialStats.TYPES.get(slot.ordinal()).getId())

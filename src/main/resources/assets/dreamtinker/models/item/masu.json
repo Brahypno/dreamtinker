@@ -1,6 +1,6 @@
 {
   "loader": "tconstruct:tool",
-  "parent": "forge:item/default-tool",
+  "parent": "dreamtinker:item/base/masu",
   "textures": {
     "masu_blade": "dreamtinker:item/tool/masu/masu_blade",
     "masu_line": "dreamtinker:item/tool/masu/masu_line",
@@ -36,55 +36,5 @@
       "predicate": { "tconstruct:broken": 1 },
       "model": "dreamtinker:item/tool/masu/broken"
     }
-  ],
-  "display": {
-    "firstperson_righthand": {
-      "rotation": [
-        0,
-        90,
-        0
-      ],
-      "scale": [
-        1,
-        1.5,
-        1
-      ]
-    },
-    "firstperson_lefthand": {
-      "rotation": [
-        0,
-        90,
-        0
-      ],
-      "scale": [
-        1,
-        1.5,
-        1
-      ]
-    },
-    "thirdperson_righthand": {
-      "rotation": [
-        0,
-        90,
-        0
-      ],
-      "scale": [
-        1,
-        1.5,
-        1
-      ]
-    },
-    "thirdperson_lefthand": {
-      "rotation": [
-        0,
-        90,
-        0
-      ],
-      "scale": [
-        1,
-        1.5,
-        1
-      ]
-    }
-  }
+  ]
 }

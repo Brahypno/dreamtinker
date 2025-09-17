@@ -1,0 +1,52 @@
+{
+  "loader": "tconstruct:tool",
+  "parent": "dreamtinker:item/base/narcissus_wing",
+  "textures": {
+    "memory": "dreamtinker:item/tool/narcissus_wing/memory_orthant",
+    "wish": "dreamtinker:item/tool/narcissus_wing/wish_orthant",
+    "soul": "dreamtinker:item/tool/narcissus_wing/soul_orthant",
+    "persona": "dreamtinker:item/tool/narcissus_wing/persona_orthant",
+    "reason": "dreamtinker:item/tool/narcissus_wing/reason_emanation",
+
+    "large_memory": "dreamtinker:item/tool/narcissus_wing/large/memory_orthant",
+    "large_wish": "dreamtinker:item/tool/narcissus_wing/large/wish_orthant",
+    "large_soul": "dreamtinker:item/tool/narcissus_wing/large/soul_orthant",
+    "large_persona": "dreamtinker:item/tool/narcissus_wing/large/persona_orthant",
+    "large_reason": "dreamtinker:item/tool/narcissus_wing/large/reason_emanation"
+  },
+  "modifier_roots": {
+    "small": [ "dreamtinker:item/tool/narcissus_wing/modifiers/" ],
+    "large": [ "dreamtinker:item/tool/narcissus_wing/large/modifiers/" ]
+  },
+  "large": true,
+  "large_offset": [-2, 2],
+  "parts": [
+   {"name": "memory", "index": 4 },
+   {"name": "wish","index": 2 },
+   {"name": "soul", "index": 3 },
+   {"name": "persona", "index": 1 },
+   {"name": "reason", "index": 0 }
+  ],
+  "overrides": [
+    {
+      "predicate": { "tconstruct:charging": 1 },
+      "model": "dreamtinker:item/tool/narcissus_wing/pulling_1"
+    },
+    {
+      "predicate": { "tconstruct:charging": 1, "tconstruct:charge": 1.0 },
+      "model": "dreamtinker:item/tool/narcissus_wing/pulling_2"
+    },
+    {
+      "predicate": { "tconstruct:charging": 2 },
+      "model": "dreamtinker:item/tool/narcissus_wing/blocking"
+    },
+    {
+      "predicate": { "tconstruct:charging": 2, "tconstruct:charge": 0.05 },
+      "model": "dreamtinker:item/tool/narcissus_wing/blocking_1"
+    },
+    {
+      "predicate": { "tconstruct:charging": 2, "tconstruct:charge": 1.0 },
+      "model": "dreamtinker:item/tool/narcissus_wing/blocking_2"
+    }
+  ]
+}
