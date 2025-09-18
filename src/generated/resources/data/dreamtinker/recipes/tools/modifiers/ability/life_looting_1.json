@@ -1,0 +1,23 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "tag": "forge:gems/emerald"
+    },
+    {
+      "tag": "forge:storage_blocks/emerald"
+    },
+    {
+      "tag": "forge:gems/emerald"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:life_looting",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

@@ -29,10 +29,10 @@ public class DreamtinkerPartSpriteProvider extends AbstractPartSpriteProvider {
         addLimb("persona_orthant");
         addHead("reason_emanation");
         buildTool("tntarrow").addHead("explode_core").addHandle("arrow_handle").addHandle("arrow_wing");
-        buildTool("masu").withLarge()
-                         .addBreakableHead("masu_blade").addBreakableHead("masu_line")
-                         .addBreakablePart("masu_binding", StatlessMaterialStats.BINDING.getIdentifier()).addHandle("masu_handle")
-                         .addHandle("masu_end");
+        buildTool("mashou").withLarge()
+                           .addBreakableHead("mashou_blade").addBreakableHead("mashou_line")
+                           .addBreakablePart("mashou_binding", StatlessMaterialStats.BINDING.getIdentifier()).addHandle("mashou_handle")
+                           .addHandle("mashou_end");
         buildTool("narcissus_wing").withLarge()
                                    .addHandle("memory_orthant").addHandle("wish_orthant")
                                    .addLimb("soul_orthant").addLimb("persona_orthant")

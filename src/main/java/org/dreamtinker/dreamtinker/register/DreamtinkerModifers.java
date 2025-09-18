@@ -43,14 +43,15 @@ public class DreamtinkerModifers {
     public static ModifierDeferredRegister MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     public static ModifierDeferredRegister EL_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     //Mashuo
-    public static final StaticModifier<realsweep> realsweep = MODIFIERS.register("realsweep", realsweep::new);
+    public static final StaticModifier<realsweep> real_sweep = MODIFIERS.register("real_sweep", realsweep::new);
     public static final StaticModifier<strong_heavy> strong_heavy = MODIFIERS.register("strong_heavy", strong_heavy::new);
-    public static final StaticModifier<silvernamebee> silvernamebee = MODIFIERS.register("silvernamebee", silvernamebee::new);
+    public static final StaticModifier<silvernamebee> silver_name_bee = MODIFIERS.register("silver_name_bee", silvernamebee::new);
+    //tnt arrow
+    public static final StaticModifier<strong_explode> strong_explode = MODIFIERS.register("strong_explode", strong_explode::new);
     //echo shard
     public static final StaticModifier<echoed_attack> echoed_attack = MODIFIERS.register("echoed_attack", echoed_attack::new);
     public static final StaticModifier<echoed_defence> echoed_defence = MODIFIERS.register("echoed_defence", echoed_defence::new);
-    //tnt arrow
-    public static final StaticModifier<strong_explode> strong_explode = MODIFIERS.register("strong_explode", strong_explode::new);
+
     //moonlight ice
     public static final StaticModifier<glacialriver> glacial_river = MODIFIERS.register("glacial_river", glacialriver::new);
     //valentinite

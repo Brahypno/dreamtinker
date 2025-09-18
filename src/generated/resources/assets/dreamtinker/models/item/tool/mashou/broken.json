@@ -1,0 +1,53 @@
+{
+  "loader": "tconstruct:tool",
+  "parent": "dreamtinker:item/base/mashou",
+  "textures": {
+    "mashou_blade": "dreamtinker:item/tool/mashou/mashou_blade_broken",
+    "mashou_line": "dreamtinker:item/tool/mashou/mashou_line_broken",
+    "mashou_binding": "dreamtinker:item/tool/mashou/mashou_binding_broken",
+    "mashou_handle": "dreamtinker:item/tool/mashou/mashou_handle",
+    "mashou_end": "dreamtinker:item/tool/mashou/mashou_end",
+    "large_mashou_blade": "dreamtinker:item/tool/mashou/large/mashou_blade_broken",
+    "large_mashou_line": "dreamtinker:item/tool/mashou/large/mashou_line_broken",
+    "large_mashou_binding": "dreamtinker:item/tool/mashou/large/mashou_binding_broken",
+    "large_mashou_handle": "dreamtinker:item/tool/mashou/large/mashou_handle",
+    "large_mashou_end": "dreamtinker:item/tool/mashou/large/mashou_end"
+  },
+  "modifier_roots": {
+    "small": [
+      "dreamtinker:item/tool/mashou/modifiers/broken/",
+      "dreamtinker:item/tool/mashou/modifiers/"
+    ],
+    "large": [
+      "dreamtinker:item/tool/mashou/large/modifiers/broken/",
+      "dreamtinker:item/tool/mashou/large/modifiers/"
+    ]
+  },
+  "large": true,
+  "large_offset": [
+    -2,
+    2
+  ],
+  "parts": [
+    {
+      "name": "mashou_blade",
+      "index": 0
+    },
+    {
+      "name": "mashou_line",
+      "index": 1
+    },
+    {
+      "name": "mashou_binding",
+      "index": 2
+    },
+    {
+      "name": "mashou_handle",
+      "index": 3
+    },
+    {
+      "name": "mashou_end",
+      "index": 4
+    }
+  ]
+}

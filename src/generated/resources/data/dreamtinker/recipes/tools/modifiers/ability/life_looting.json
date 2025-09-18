@@ -1,6 +1,12 @@
 {
   "type": "tconstruct:modifier",
   "allow_crystal": true,
+  "conditions": [
+    {
+      "type": "forge:item_exists",
+      "item": "enigmaticlegacy:lore_inscriber"
+    }
+  ],
   "inputs": [
     {
       "item": "enigmaticlegacy:lore_inscriber"

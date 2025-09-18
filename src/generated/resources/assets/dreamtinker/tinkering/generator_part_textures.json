@@ -57,67 +57,67 @@
       "stat_type": "tconstruct:handle"
     },
     {
-      "path": "dreamtinker:item/tool/masu/masu_blade",
+      "path": "dreamtinker:item/tool/mashou/mashou_blade",
       "stat_type": "tconstruct:head"
     },
     {
-      "path": "dreamtinker:item/tool/masu/masu_blade_broken",
+      "path": "dreamtinker:item/tool/mashou/mashou_blade_broken",
       "stat_type": "tconstruct:head"
     },
     {
-      "path": "dreamtinker:item/tool/masu/masu_line",
+      "path": "dreamtinker:item/tool/mashou/mashou_line",
       "stat_type": "tconstruct:head"
     },
     {
-      "path": "dreamtinker:item/tool/masu/masu_line_broken",
+      "path": "dreamtinker:item/tool/mashou/mashou_line_broken",
       "stat_type": "tconstruct:head"
     },
     {
-      "path": "dreamtinker:item/tool/masu/masu_binding",
+      "path": "dreamtinker:item/tool/mashou/mashou_binding",
       "stat_type": "tconstruct:binding"
     },
     {
-      "path": "dreamtinker:item/tool/masu/masu_binding_broken",
+      "path": "dreamtinker:item/tool/mashou/mashou_binding_broken",
       "stat_type": "tconstruct:binding"
     },
     {
-      "path": "dreamtinker:item/tool/masu/masu_handle",
+      "path": "dreamtinker:item/tool/mashou/mashou_handle",
       "stat_type": "tconstruct:handle"
     },
     {
-      "path": "dreamtinker:item/tool/masu/masu_end",
+      "path": "dreamtinker:item/tool/mashou/mashou_end",
       "stat_type": "tconstruct:handle"
     },
     {
-      "path": "dreamtinker:item/tool/masu/large/masu_blade",
+      "path": "dreamtinker:item/tool/mashou/large/mashou_blade",
       "stat_type": "tconstruct:head"
     },
     {
-      "path": "dreamtinker:item/tool/masu/large/masu_blade_broken",
+      "path": "dreamtinker:item/tool/mashou/large/mashou_blade_broken",
       "stat_type": "tconstruct:head"
     },
     {
-      "path": "dreamtinker:item/tool/masu/large/masu_line",
+      "path": "dreamtinker:item/tool/mashou/large/mashou_line",
       "stat_type": "tconstruct:head"
     },
     {
-      "path": "dreamtinker:item/tool/masu/large/masu_line_broken",
+      "path": "dreamtinker:item/tool/mashou/large/mashou_line_broken",
       "stat_type": "tconstruct:head"
     },
     {
-      "path": "dreamtinker:item/tool/masu/large/masu_binding",
+      "path": "dreamtinker:item/tool/mashou/large/mashou_binding",
       "stat_type": "tconstruct:binding"
     },
     {
-      "path": "dreamtinker:item/tool/masu/large/masu_binding_broken",
+      "path": "dreamtinker:item/tool/mashou/large/mashou_binding_broken",
       "stat_type": "tconstruct:binding"
     },
     {
-      "path": "dreamtinker:item/tool/masu/large/masu_handle",
+      "path": "dreamtinker:item/tool/mashou/large/mashou_handle",
       "stat_type": "tconstruct:handle"
     },
     {
-      "path": "dreamtinker:item/tool/masu/large/masu_end",
+      "path": "dreamtinker:item/tool/mashou/large/mashou_end",
       "stat_type": "tconstruct:handle"
     },
     {

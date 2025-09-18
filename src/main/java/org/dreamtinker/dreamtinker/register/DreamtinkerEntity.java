@@ -3,7 +3,7 @@ package org.dreamtinker.dreamtinker.register;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.registries.RegistryObject;
-import org.dreamtinker.dreamtinker.tools.TNTarrow.TNTarrow;
+import org.dreamtinker.dreamtinker.Items.tools.TNTarrow.TNTarrow;
 import slimeknights.mantle.registration.deferred.EntityTypeDeferredRegister;
 
 import static org.dreamtinker.dreamtinker.Dreamtinker.MODID;

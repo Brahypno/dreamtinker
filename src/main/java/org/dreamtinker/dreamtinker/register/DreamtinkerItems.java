@@ -10,15 +10,15 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import org.dreamtinker.dreamtinker.Item.antimony.nigrescence_antimony;
-import org.dreamtinker.dreamtinker.Item.antimony.star_regulus;
-import org.dreamtinker.dreamtinker.Item.antimony.valentinite;
-import org.dreamtinker.dreamtinker.Item.void_pearl;
-import org.dreamtinker.dreamtinker.tools.DTtoolsDefinition;
-import org.dreamtinker.dreamtinker.tools.Masu.Masu;
-import org.dreamtinker.dreamtinker.tools.NarcissusWing.NarcissusWing;
-import org.dreamtinker.dreamtinker.tools.TNTarrow.TNTarrow;
-import org.dreamtinker.dreamtinker.tools.UnderArmor.UnderArmorItem;
+import org.dreamtinker.dreamtinker.Items.antimony.nigrescence_antimony;
+import org.dreamtinker.dreamtinker.Items.antimony.star_regulus;
+import org.dreamtinker.dreamtinker.Items.antimony.valentinite;
+import org.dreamtinker.dreamtinker.Items.tools.DTtoolsDefinition;
+import org.dreamtinker.dreamtinker.Items.tools.MaShuo.MaShou;
+import org.dreamtinker.dreamtinker.Items.tools.NarcissusWing.NarcissusWing;
+import org.dreamtinker.dreamtinker.Items.tools.TNTarrow.TNTarrow;
+import org.dreamtinker.dreamtinker.Items.tools.UnderArmor.UnderArmorItem;
+import org.dreamtinker.dreamtinker.Items.void_pearl;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.registration.object.EnumObject;
 import slimeknights.mantle.registration.object.ItemObject;
@@ -44,7 +44,7 @@ public class DreamtinkerItems {
 
     public static final ItemObject<ModifiableItem> tntarrow =
             MODI_TOOLS.register("tntarrow", () -> new TNTarrow((new Item.Properties()).stacksTo(4), DTtoolsDefinition.TNTARROW, 4));
-    public static final ItemObject<ModifiableItem> masu = MODI_TOOLS.register("masu", () -> new Masu(TOOL, DTtoolsDefinition.MASU));
+    public static final ItemObject<ModifiableItem> mashou = MODI_TOOLS.register("mashou", () -> new MaShou(TOOL, DTtoolsDefinition.MASU));
     public static final ItemObject<ModifiableItem> narcissus_wing =
             MODI_TOOLS.register("narcissus_wing", () -> new NarcissusWing(TOOL.rarity(Rarity.EPIC), DTtoolsDefinition.narcissus_wing));
     public static final EnumObject<ArmorItem.Type, UnderArmorItem> underPlate =

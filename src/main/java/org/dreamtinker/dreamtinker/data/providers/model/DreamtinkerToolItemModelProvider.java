@@ -26,7 +26,7 @@ public class DreamtinkerToolItemModelProvider extends AbstractToolItemModelProvi
 
         // blocking //
         // pickaxe
-        tool(DreamtinkerItems.masu, toolBlocking, "masu_blade", "masu_line", "masu_binding");
+        tool(DreamtinkerItems.mashou, toolBlocking, "mashou_blade", "mashou_line", "mashou_binding");
         // armor
         armor("under_plate", DreamtinkerItems.underPlate, "plating", "maille", "maille1");
         //shield("plate", TinkerTools.plateShield, readJson(getResource("base/shield_large_blocking")), "plating", "core");

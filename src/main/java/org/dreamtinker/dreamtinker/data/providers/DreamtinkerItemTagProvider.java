@@ -35,7 +35,7 @@ public class DreamtinkerItemTagProvider extends ItemTagsProvider {
     protected void addTags(HolderLookup.@NotNull Provider Provider) {
         //tools
         this.tag(TinkerTags.Items.TOOL_PARTS).add(DreamtinkerItems.explode_core.get());
-        addItemsTags(DreamtinkerItems.masu, MULTIPART_TOOL, DURABILITY, HARVEST, MELEE_PRIMARY, INTERACTABLE_RIGHT, SWORD, BROAD_TOOLS, BONUS_SLOTS,
+        addItemsTags(DreamtinkerItems.mashou, MULTIPART_TOOL, DURABILITY, HARVEST, MELEE_PRIMARY, INTERACTABLE_RIGHT, SWORD, BROAD_TOOLS, BONUS_SLOTS,
                      ItemTags.SWORDS, AOE);
         addItemsTags(DreamtinkerItems.narcissus_wing, MULTIPART_TOOL, DURABILITY, HARVEST, MELEE_PRIMARY, INTERACTABLE_RIGHT, SCYTHES, BROAD_TOOLS, BONUS_SLOTS,
                      ItemTags.SWORDS, AOE, RANGED);

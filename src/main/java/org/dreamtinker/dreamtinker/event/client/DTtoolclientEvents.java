@@ -20,9 +20,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.Items.tools.TNTarrow.TNTarrow;
 import org.dreamtinker.dreamtinker.register.DreamtinkerEntity;
 import org.dreamtinker.dreamtinker.register.DreamtinkerItems;
-import org.dreamtinker.dreamtinker.tools.TNTarrow.TNTarrow;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.ClientEventBase;
 import slimeknights.tconstruct.library.client.model.TinkerItemProperties;
@@ -38,7 +38,7 @@ public class DTtoolclientEvents extends ClientEventBase {
     static void clientSetupEvent(FMLClientSetupEvent event) {
         // keybinds
         event.enqueueWork(() -> {
-            TinkerItemProperties.registerToolProperties(DreamtinkerItems.masu);
+            TinkerItemProperties.registerToolProperties(DreamtinkerItems.mashou);
 
             Consumer<Item> brokenConsumer = TinkerItemProperties::registerBrokenProperty;
             DreamtinkerItems.underPlate.forEach(brokenConsumer);
@@ -97,7 +97,7 @@ public class DTtoolclientEvents extends ClientEventBase {
 
         // tint modifiers
         //
-        registerItemColors(colors, DreamtinkerItems.masu);
+        registerItemColors(colors, DreamtinkerItems.mashou);
         Consumer<Item> brokenConsumer = item -> event.register(ToolModel.COLOR_HANDLER, item);
         DreamtinkerItems.underPlate.forEach(brokenConsumer);
     }

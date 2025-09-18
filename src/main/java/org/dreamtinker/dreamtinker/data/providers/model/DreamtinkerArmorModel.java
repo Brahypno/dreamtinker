@@ -1,7 +1,7 @@
 package org.dreamtinker.dreamtinker.data.providers.model;
 
 import net.minecraft.data.PackOutput;
-import org.dreamtinker.dreamtinker.tools.DTtoolsDefinition;
+import org.dreamtinker.dreamtinker.Items.tools.DTtoolsDefinition;
 import slimeknights.tconstruct.library.client.armor.texture.ArmorTextureSupplier;
 import slimeknights.tconstruct.library.client.armor.texture.MaterialArmorTextureSupplier;
 import slimeknights.tconstruct.library.client.armor.texture.TrimArmorTextureSupplier;

@@ -19,7 +19,7 @@ public class DreamtinkerStationLayout extends AbstractStationSlotLayoutProvider 
 
     @Override
     protected void addLayouts() {
-        defineModifiable(DreamtinkerItems.masu)
+        defineModifiable(DreamtinkerItems.mashou)
                 .sortIndex(SORT_WEAPON * 2 + SORT_LARGE)
                 .addInputItem(TinkerToolParts.broadBlade, 45, 62)
                 .addInputItem(TinkerToolParts.broadBlade, 45, 26)

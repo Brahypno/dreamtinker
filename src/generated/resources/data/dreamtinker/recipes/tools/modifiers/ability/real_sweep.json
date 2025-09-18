@@ -1,0 +1,22 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "minecraft:echo_shard"
+    },
+    {
+      "item": "minecraft:echo_shard"
+    }
+  ],
+  "level": {
+    "max": 2
+  },
+  "result": "dreamtinker:real_sweep",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "item": "dreamtinker:mashou"
+  }
+}

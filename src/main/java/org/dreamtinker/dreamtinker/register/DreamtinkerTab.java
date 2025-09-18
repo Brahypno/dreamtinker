@@ -20,8 +20,8 @@ public class DreamtinkerTab {
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
     public static final RegistryObject<CreativeModeTab> TOOL = TABS.register("tool", () -> CreativeModeTab.builder().title(Component.translatable(
-            "itemGroup." + MODID + ".tool")).icon(() -> DreamtinkerItems.masu.get().getRenderTool()).displayItems((params, output) -> {
-        ToolBuildHandler.addVariants(output::accept, DreamtinkerItems.masu.get(), "");
+            "itemGroup." + MODID + ".tool")).icon(() -> DreamtinkerItems.mashou.get().getRenderTool()).displayItems((params, output) -> {
+        ToolBuildHandler.addVariants(output::accept, DreamtinkerItems.mashou.get(), "");
         ToolBuildHandler.addVariants(output::accept, DreamtinkerItems.tntarrow.get(), "");
         for (var item : DreamtinkerItems.underPlate.values()) {
             ToolBuildHandler.addVariants(output::accept, item, "");

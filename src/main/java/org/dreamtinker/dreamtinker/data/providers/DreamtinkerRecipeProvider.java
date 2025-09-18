@@ -95,7 +95,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         ToolBuildingRecipeBuilder.toolBuildingRecipe(DreamtinkerItems.tntarrow.get())
                                  .outputSize(4)
                                  .save(consumer, prefix(DreamtinkerItems.tntarrow, folder));
-        toolBuilding(consumer, DreamtinkerItems.masu, folder);
+        toolBuilding(consumer, DreamtinkerItems.mashou, folder);
         toolBuilding(consumer, DreamtinkerItems.narcissus_wing, folder);
         String recycle_folder = "tools/recycling/";
         PartBuilderToolRecycleBuilder.tools(SizedIngredient.fromItems(4, DreamtinkerItems.tntarrow.get()))
@@ -461,14 +461,14 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         String defenseSalvage = salvageFolder + "defense/";
         String compatSalvage = salvageFolder + "compat/";
         String soulSalvage = salvageFolder + "soul/";
-        ModifierRecipeBuilder.modifier(DreamtinkerModifers.realsweep)
-                             .setTools(Ingredient.of(DreamtinkerItems.masu.get()))
+        ModifierRecipeBuilder.modifier(DreamtinkerModifers.real_sweep)
+                             .setTools(Ingredient.of(DreamtinkerItems.mashou.get()))
                              .addInput(Items.ECHO_SHARD)
                              .addInput(Items.ECHO_SHARD)
                              .setMaxLevel(2)
                              .setSlots(SlotType.ABILITY, 1)
-                             .saveSalvage(consumer, prefix(DreamtinkerModifers.realsweep, abilitySalvage))
-                             .save(consumer, prefix(DreamtinkerModifers.realsweep, abilityFolder));
+                             .saveSalvage(consumer, prefix(DreamtinkerModifers.real_sweep, abilitySalvage))
+                             .save(consumer, prefix(DreamtinkerModifers.real_sweep, abilityFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifers.strong_explode)
                              .setTools(Ingredient.of(DreamtinkerItems.tntarrow.get()))
                              .addInput(TinkerGadgets.efln)
@@ -514,7 +514,16 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(1)
                              .setSlots(SlotType.ABILITY, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifers.life_looting, abilitySalvage))
-                             .save(consumer, prefix(DreamtinkerModifers.life_looting, abilityFolder));
+                             .save(withCondition(consumer, new ItemExistsCondition(ForgeRegistries.ITEMS.getKey(EnigmaticItems.LORE_INSCRIBER))),
+                                   prefix(DreamtinkerModifers.life_looting, abilityFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifers.life_looting)
+                             .setTools(TinkerTags.Items.MODIFIABLE)
+                             .addInput(Tags.Items.GEMS_EMERALD, 1)
+                             .addInput(Tags.Items.STORAGE_BLOCKS_EMERALD, 1)
+                             .addInput(Tags.Items.GEMS_EMERALD, 1)
+                             .setMaxLevel(1)
+                             .setSlots(SlotType.ABILITY, 1)
+                             .save(consumer, wrap(DreamtinkerModifers.life_looting, abilityFolder, "_1"));
         ModifierRecipeBuilder.modifier(DreamtinkerModifers.weapon_books)
                              .setTools(TinkerTags.Items.MELEE_PRIMARY)
                              .addInput(EnigmaticItems.THE_ACKNOWLEDGMENT, 1)

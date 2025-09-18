@@ -7,9 +7,9 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.ToolActions;
 import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.Items.tools.DTtoolsDefinition;
 import org.dreamtinker.dreamtinker.register.DreamtinkerItems;
 import org.dreamtinker.dreamtinker.register.DreamtinkerModifers;
-import org.dreamtinker.dreamtinker.tools.DTtoolsDefinition;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.data.predicate.block.BlockPredicate;
 import slimeknights.tconstruct.common.TinkerTags;
@@ -75,9 +75,9 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 // traits
                 .module(ToolTraitsModule.builder()
                                         .trait(ModifierIds.reach, 6)
-                                        .trait(DreamtinkerModifers.realsweep, 1)
+                                        .trait(DreamtinkerModifers.real_sweep, 1)
                                         .trait(DreamtinkerModifers.strong_heavy, 1)
-                                        .trait(DreamtinkerModifers.silvernamebee, 1).build())
+                                        .trait(DreamtinkerModifers.silver_name_bee, 1).build())
                 // behavior
                 .module(ToolActionsModule.of(ToolActions.SWORD_DIG))
                 .module(swordHarvest)
