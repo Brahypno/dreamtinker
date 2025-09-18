@@ -19,8 +19,8 @@ public class weapon_transformation extends BattleModifier {
 
     @Override
     public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
-        float armor = tool.getStats().get(ToolStats.ARMOR);
-        float toughness = tool.getStats().get(ToolStats.ARMOR_TOUGHNESS);
+        float armor = Math.max(1, tool.getStats().get(ToolStats.ARMOR));
+        float toughness = Math.max(1, tool.getStats().get(ToolStats.ARMOR_TOUGHNESS));
         if (modifier.getLevel() > 0){
             switch (slot) {
                 case CHEST -> {

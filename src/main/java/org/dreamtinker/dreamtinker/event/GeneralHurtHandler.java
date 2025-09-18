@@ -29,7 +29,7 @@ public class GeneralHurtHandler {
                         if (0 < ModifierUtil.getModifierLevel(itemStack, DreamtinkerModifers.weapon_transformation.getId())){
                             float armor = toolStack.getStats().get(ToolStats.ARMOR);
                             float toughness = toolStack.getStats().get(ToolStats.ARMOR_TOUGHNESS);
-                            event.setAmount(event.getAmount() * (1 + armor * toughness * UnderPlateBoostMutiply.get().floatValue()));
+                            event.setAmount(event.getAmount() * (1 + Math.max(1, armor * toughness) * UnderPlateBoostMutiply.get().floatValue()));
                         }
                 }
             }
