@@ -34,7 +34,7 @@ public class DreamtinkerPartSpriteProvider extends AbstractPartSpriteProvider {
                            .addBreakablePart("mashou_binding", StatlessMaterialStats.BINDING.getIdentifier()).addHandle("mashou_handle")
                            .addHandle("mashou_end");
         buildTool("narcissus_wing").withLarge()
-                                   .addHandle("memory_orthant").addHandle("wish_orthant")
+                                   .addHandle("memory_orthant").addHandle("wish_orthant").addHandle("wish_orthant_1")
                                    .addLimb("soul_orthant").addLimb("persona_orthant")
                                    .addHead("reason_emanation");
         for (ArmorItem.Type slot : ArmorItem.Type.values()) {

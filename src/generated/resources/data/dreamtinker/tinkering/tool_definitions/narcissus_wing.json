@@ -69,6 +69,10 @@
       "traits": [
         {
           "level": 1,
+          "name": "dreamtinker:memory_base"
+        },
+        {
+          "level": 1,
           "name": "tconstruct:soulbound"
         },
         {
@@ -125,7 +129,7 @@
     },
     {
       "type": "tconstruct:vein_aoe",
-      "max_distance": 2
+      "max_distance": 1
     }
   ]
 }

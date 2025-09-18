@@ -39,6 +39,7 @@ public class DTtoolclientEvents extends ClientEventBase {
         // keybinds
         event.enqueueWork(() -> {
             TinkerItemProperties.registerToolProperties(DreamtinkerItems.mashou);
+            TinkerItemProperties.registerToolProperties(DreamtinkerItems.narcissus_wing);
 
             Consumer<Item> brokenConsumer = TinkerItemProperties::registerBrokenProperty;
             DreamtinkerItems.underPlate.forEach(brokenConsumer);
@@ -98,6 +99,7 @@ public class DTtoolclientEvents extends ClientEventBase {
         // tint modifiers
         //
         registerItemColors(colors, DreamtinkerItems.mashou);
+        registerItemColors(colors, DreamtinkerItems.narcissus_wing);
         Consumer<Item> brokenConsumer = item -> event.register(ToolModel.COLOR_HANDLER, item);
         DreamtinkerItems.underPlate.forEach(brokenConsumer);
     }

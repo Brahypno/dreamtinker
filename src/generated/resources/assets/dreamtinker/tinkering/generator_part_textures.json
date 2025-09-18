@@ -129,6 +129,10 @@
       "stat_type": "tconstruct:handle"
     },
     {
+      "path": "dreamtinker:item/tool/narcissus_wing/wish_orthant_1",
+      "stat_type": "tconstruct:handle"
+    },
+    {
       "path": "dreamtinker:item/tool/narcissus_wing/soul_orthant",
       "stat_type": "tconstruct:limb"
     },
@@ -146,6 +150,10 @@
     },
     {
       "path": "dreamtinker:item/tool/narcissus_wing/large/wish_orthant",
+      "stat_type": "tconstruct:handle"
+    },
+    {
+      "path": "dreamtinker:item/tool/narcissus_wing/large/wish_orthant_1",
       "stat_type": "tconstruct:handle"
     },
     {

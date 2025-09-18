@@ -31,6 +31,7 @@ import org.dreamtinker.dreamtinker.modifier.material.valentinite.antimony_usage;
 import org.dreamtinker.dreamtinker.modifier.tools.masu.realsweep;
 import org.dreamtinker.dreamtinker.modifier.tools.masu.silvernamebee;
 import org.dreamtinker.dreamtinker.modifier.tools.masu.strong_heavy;
+import org.dreamtinker.dreamtinker.modifier.tools.narcissus_wing.memoryBase;
 import org.dreamtinker.dreamtinker.modifier.tools.tntarrow.strong_explode;
 import org.dreamtinker.dreamtinker.modifier.tools.underPlate.weapon_transformation;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -48,6 +49,8 @@ public class DreamtinkerModifers {
     public static final StaticModifier<silvernamebee> silver_name_bee = MODIFIERS.register("silver_name_bee", silvernamebee::new);
     //tnt arrow
     public static final StaticModifier<strong_explode> strong_explode = MODIFIERS.register("strong_explode", strong_explode::new);
+    //narcissus wing
+    public static final StaticModifier<memoryBase> memory_base = MODIFIERS.register("memory_base", memoryBase::new);
     //echo shard
     public static final StaticModifier<echoed_attack> echoed_attack = MODIFIERS.register("echoed_attack", echoed_attack::new);
     public static final StaticModifier<echoed_defence> echoed_defence = MODIFIERS.register("echoed_defence", echoed_defence::new);

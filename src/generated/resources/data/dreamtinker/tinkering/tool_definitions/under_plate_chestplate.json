@@ -36,12 +36,6 @@
       ]
     },
     {
-      "type": "tconstruct:multiply_stats",
-      "multipliers": {
-        "tconstruct:attack_damage": 0.4
-      }
-    },
-    {
       "type": "tconstruct:base_stats",
       "stats": {
         "tconstruct:armor_toughness": 1.0
@@ -68,8 +62,8 @@
       "slots": {
         "abilities": 2,
         "defense": 1,
-        "souls": 2,
-        "upgrades": 2
+        "souls": 4,
+        "upgrades": 1
       }
     }
   ]

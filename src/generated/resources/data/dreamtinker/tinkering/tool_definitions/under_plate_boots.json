@@ -62,8 +62,8 @@
       "slots": {
         "abilities": 2,
         "defense": 1,
-        "souls": 2,
-        "upgrades": 2
+        "souls": 4,
+        "upgrades": 1
       }
     }
   ]

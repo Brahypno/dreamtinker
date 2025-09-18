@@ -33,20 +33,12 @@
       "model": "dreamtinker:item/tool/narcissus_wing/pulling_1"
     },
     {
-      "predicate": { "tconstruct:charging": 1, "tconstruct:charge": 1.0 },
-      "model": "dreamtinker:item/tool/narcissus_wing/pulling_2"
-    },
-    {
-      "predicate": { "tconstruct:charging": 2 },
+      "predicate": { "tconstruct:charging": 1 },
       "model": "dreamtinker:item/tool/narcissus_wing/blocking"
     },
     {
-      "predicate": { "tconstruct:charging": 2, "tconstruct:charge": 0.05 },
+      "predicate": { "tconstruct:charging": 1, "tconstruct:charge": 0.05 },
       "model": "dreamtinker:item/tool/narcissus_wing/blocking_1"
-    },
-    {
-      "predicate": { "tconstruct:charging": 2, "tconstruct:charge": 1.0 },
-      "model": "dreamtinker:item/tool/narcissus_wing/blocking_2"
     }
   ]
 }

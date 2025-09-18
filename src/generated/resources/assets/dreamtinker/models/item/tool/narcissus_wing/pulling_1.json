@@ -1,0 +1,53 @@
+{
+  "loader": "tconstruct:tool",
+  "parent": "dreamtinker:item/base/narcissus_wing",
+  "textures": {
+    "memory": "dreamtinker:item/tool/narcissus_wing/memory_orthant",
+    "wish": "dreamtinker:item/tool/narcissus_wing/wish_orthant_1",
+    "soul": "dreamtinker:item/tool/narcissus_wing/soul_orthant",
+    "persona": "dreamtinker:item/tool/narcissus_wing/persona_orthant",
+    "reason": "dreamtinker:item/tool/narcissus_wing/reason_emanation",
+    "large_memory": "dreamtinker:item/tool/narcissus_wing/large/memory_orthant",
+    "large_wish": "dreamtinker:item/tool/narcissus_wing/large/wish_orthant_1",
+    "large_soul": "dreamtinker:item/tool/narcissus_wing/large/soul_orthant",
+    "large_persona": "dreamtinker:item/tool/narcissus_wing/large/persona_orthant",
+    "large_reason": "dreamtinker:item/tool/narcissus_wing/large/reason_emanation"
+  },
+  "modifier_roots": {
+    "small": [
+      "dreamtinker:item/tool/narcissus_wing/modifiers/1/",
+      "dreamtinker:item/tool/narcissus_wing/modifiers/"
+    ],
+    "large": [
+      "dreamtinker:item/tool/narcissus_wing/large/modifiers/1/",
+      "dreamtinker:item/tool/narcissus_wing/large/modifiers/"
+    ]
+  },
+  "large": true,
+  "large_offset": [
+    -2,
+    2
+  ],
+  "parts": [
+    {
+      "name": "memory",
+      "index": 4
+    },
+    {
+      "name": "wish",
+      "index": 2
+    },
+    {
+      "name": "soul",
+      "index": 3
+    },
+    {
+      "name": "persona",
+      "index": 1
+    },
+    {
+      "name": "reason",
+      "index": 0
+    }
+  ]
+}

@@ -3,7 +3,6 @@ package org.dreamtinker.dreamtinker.data.providers.tool;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.ToolActions;
 import org.dreamtinker.dreamtinker.Dreamtinker;
@@ -108,9 +107,9 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
         DefaultMaterialsModule underplateMaterials = DefaultMaterialsModule.builder().material(tier2Material, tier2Material, tier2Material).build();
         ToolModule plateSlots =
                 ToolSlotsModule.builder()
-                               .slots(SlotType.SOUL, 2)
+                               .slots(SlotType.SOUL, 4)
                                .slots(SlotType.ABILITY, 2)
-                               .slots(SlotType.UPGRADE, 2)
+                               .slots(SlotType.UPGRADE, 1)
                                .slots(SlotType.DEFENSE, 1).build();
         defineArmor(DTtoolsDefinition.UNDER_PLATE)
                 .modules(slots -> PartStatsModule.armor(slots)
@@ -118,7 +117,6 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                                                  .part(TinkerToolParts.maille, 1)
                                                  .part(TinkerToolParts.maille, 1))
                 .module(underplateMaterials)
-                .module(ArmorItem.Type.CHESTPLATE, new MultiplyStatsModule(MultiplierNBT.builder().set(ToolStats.ATTACK_DAMAGE, 0.4f).build()))
                 .module(new SetStatsModule(StatsNBT.builder()
                                                    .set(ToolStats.ARMOR_TOUGHNESS, 1f).build()))
                 .module(new MultiplyStatsModule(MultiplierNBT.builder()
@@ -147,6 +145,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 .module(new ToolSlotsModule(ImmutableMap.of(SlotType.SOUL, 6, SlotType.ABILITY, 2, SlotType.UPGRADE, 1)))
                 // traits
                 .module(ToolTraitsModule.builder()
+                                        .trait(DreamtinkerModifers.memory_base, 1)
                                         .trait(ModifierIds.soulbound, 1)
                                         .trait(DreamtinkerModifers.Ids.soul_core, 1)
                                         .build())
@@ -156,7 +155,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 .module(new MiningSpeedModifierModule(1.5f, BlockPredicate.and(BlockPredicate.tag(BlockTags.MINEABLE_WITH_SHOVEL),
                                                                                BlockPredicate.set(Blocks.COBWEB))),
                         MiningSpeedModifierModule.blocks(0.10f, Blocks.VINE, Blocks.GLOW_LICHEN), MiningSpeedModifierModule.tag(BlockTags.WOOL, 0.3f))
-                .module(new VeiningAOEIterator(2));
+                .module(new VeiningAOEIterator(1));
     }
 
     @Override

@@ -2,10 +2,12 @@ package org.dreamtinker.dreamtinker.data.providers.model;
 
 import com.google.gson.JsonObject;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.register.DreamtinkerItems;
 import org.jetbrains.annotations.NotNull;
+import slimeknights.mantle.registration.object.IdAwareObject;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.data.AbstractToolItemModelProvider;
 
@@ -30,7 +32,16 @@ public class DreamtinkerToolItemModelProvider extends AbstractToolItemModelProvi
         // armor
         armor("under_plate", DreamtinkerItems.underPlate, "plating", "maille", "maille1");
         //shield("plate", TinkerTools.plateShield, readJson(getResource("base/shield_large_blocking")), "plating", "core");
-        //pulling(TinkerTools.swasher, readJson(getResource("base/swasher_blocking")), AmmoType.NONE, "blade", 2, "barrel");
+        pulling_wo_broken(DreamtinkerItems.narcissus_wing, readJson(Dreamtinker.getLocation("base/narcissus_wing_blocking")), AmmoType.NONE, 1, "wish");
+    }
+
+    private void pulling_wo_broken(IdAwareObject bow, JsonObject properties, AmmoHandler ammo, int pullingCount, String... pullingParts) throws IOException {
+        ResourceLocation id = bow.getId();
+        String name = id.getPath();
+        JsonObject base = this.readJson(id);
+        base.remove("overrides");
+        this.withDisplay("tool/" + name + "/blocking", id, properties);
+        ammo.apply(this, name, base, properties, pullingCount, pullingParts);
     }
 
     @Override
