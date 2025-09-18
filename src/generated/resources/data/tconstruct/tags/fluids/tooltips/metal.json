@@ -1,7 +1,13 @@
 {
   "values": [
     "#dreamtinker:molten_lupi_antimony",
-    "#dreamtinker:molten_evil",
-    "#dreamtinker:molten_soul_aether"
+    {
+      "id": "#dreamtinker:molten_evil",
+      "required": false
+    },
+    {
+      "id": "#dreamtinker:molten_soul_aether",
+      "required": false
+    }
   ]
 }

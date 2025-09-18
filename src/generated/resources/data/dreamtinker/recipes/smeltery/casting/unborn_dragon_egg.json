@@ -7,7 +7,7 @@
   "cooling_time": 10,
   "fluid": {
     "amount": 300,
-    "tag": "forge:molten_albedo_stibium"
+    "tag": "dreamtinker:molten_albedo_stibium"
   },
   "result": "dreamtinker:unborn_dragon_egg"
 }

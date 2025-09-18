@@ -11,6 +11,6 @@
   ],
   "fluid": {
     "amount": 50,
-    "fluid": "dreamtinker:molten_nigrescence_antimony"
+    "tag": "dreamtinker:molten_nigrescence_antimony"
   }
 }

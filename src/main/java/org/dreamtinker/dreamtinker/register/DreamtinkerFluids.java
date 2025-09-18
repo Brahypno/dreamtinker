@@ -166,4 +166,8 @@ public class DreamtinkerFluids {
             registerFluid(FLUIDS, "reversed_shadow", 1500, 300, 10, 15,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.CRIMSON_NYLIUM, 15), 20, 10) {});
 
+    public static final FlowingFluidObject<ForgeFlowingFluid> blood_soul =
+            registerFluid(FLUIDS, "blood_soul", 37, 100, 10, 7,
+                          supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.CRIMSON_NYLIUM, 7), 0, 0) {});
+
 }

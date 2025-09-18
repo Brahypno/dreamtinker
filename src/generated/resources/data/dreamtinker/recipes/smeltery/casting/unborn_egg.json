@@ -7,7 +7,7 @@
   "cooling_time": 10,
   "fluid": {
     "amount": 300,
-    "tag": "forge:molten_nigrescence_antimony"
+    "tag": "dreamtinker:molten_nigrescence_antimony"
   },
   "result": "dreamtinker:unborn_egg"
 }

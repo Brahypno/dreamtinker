@@ -12,7 +12,11 @@
         4,
         6
       ],
-      "scale": [ 0.3, 0.3, 0.3 ]
+      "scale": [
+        0.3,
+        0.3,
+        0.3
+      ]
     },
     "firstperson_lefthand": {
       "rotation": [

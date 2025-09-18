@@ -3,11 +3,11 @@
   "inputs": [
     {
       "amount": 400,
-      "tag": "forge:molten_nefariousness"
+      "tag": "dreamtinker:molten_nefariousness"
     },
     {
       "amount": 40,
-      "tag": "forge:liquid_trist"
+      "tag": "dreamtinker:liquid_trist"
     },
     {
       "amount": 90,

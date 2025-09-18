@@ -3,7 +3,7 @@
   "inputs": [
     {
       "amount": 10,
-      "tag": "forge:liquid_trist"
+      "tag": "dreamtinker:liquid_trist"
     },
     {
       "amount": 10000,
