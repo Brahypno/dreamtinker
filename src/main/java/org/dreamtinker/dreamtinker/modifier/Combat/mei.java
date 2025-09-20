@@ -58,7 +58,7 @@ public class mei extends BattleModifier {
         else if (level <= 100)
             return Component.translatable(this.getTranslationKey()).append(" ").append(RomanNumeralHelper.getNumeral(9))
                             .withStyle((style) -> style.withColor(ResourceColorManager.getTextColor(mei_key_2)));
-        else if (level <= 150)//mei_2
+        else if (level <= 130)//mei_2
             return Component.translatable(this.getTranslationKey()).withStyle((style) -> style.withColor(ResourceColorManager.getTextColor(mei_key_2)));
         else//mei.3
             return Component.translatable(mei_key_3).withStyle((style) -> style.withColor(ResourceColorManager.getTextColor(mei_key_3)));
@@ -66,7 +66,7 @@ public class mei extends BattleModifier {
 
     @Override
     public @NotNull List<Component> getDescriptionList(int level) {
-        if (level < 100)
+        if (level < 130)
             return this.getDescriptionList();
         else if (level <= 150)//mei.2
             return Arrays.asList(Component.translatable(mei_key_2 + ".flavor").withStyle(ChatFormatting.ITALIC),
@@ -95,7 +95,7 @@ public class mei extends BattleModifier {
         int level = tool.getModifierLevel(this);
         if (level < 100)
             return Component.translatable(this.getTranslationKey() + ".salvage");
-        else if (level < 150)//mei_2
+        else if (level < 130)//mei_2
             return Component.translatable(mei_key_2 + ".salvage").withStyle((style) -> style.withColor(ResourceColorManager.getTextColor(mei_key_2)));
         else//mei_3
             return Component.translatable(mei_key_3 + ".salvage").withStyle((style) -> style.withColor(ResourceColorManager.getTextColor(mei_key_3)));
@@ -132,7 +132,7 @@ public class mei extends BattleModifier {
                             new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.ARMOR_TOUGHNESS.getDescriptionId(), mod,
                                                   AttributeModifier.Operation.MULTIPLY_BASE));
         }
-        if (150 <= level)
+        if (130 <= level)
             consumer.accept(Attributes.MOVEMENT_SPEED, new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.MOVEMENT_SPEED.getDescriptionId(),
                                                                              2.0 * (level - 100) / 100 + .1, AttributeModifier.Operation.MULTIPLY_BASE));
     }
@@ -168,7 +168,7 @@ public class mei extends BattleModifier {
                 }
                 if (100 <= level)
                     attributes.addAll(Arrays.asList(Attributes.ARMOR, Attributes.ARMOR_TOUGHNESS));
-                if (150 <= level)
+                if (130 <= level)
                     attributes.add(Attributes.MOVEMENT_SPEED);
                 for (Attribute attr : attributes) {
                     AttributeInstance attr_instance = player.getAttribute(attr);
@@ -181,9 +181,9 @@ public class mei extends BattleModifier {
                         }
                     }
                 }
-                if (350 <= level)
+                if (250 <= level)
                     MaskService.ensureOn(player, 0xDC3D3A3A, -1);
-                else if (250 <= level)
+                else if (200 <= level)
                     MaskService.ensureOn(player, 0xAC8A221C, -1);
             }
         }
@@ -200,14 +200,14 @@ public class mei extends BattleModifier {
             DamageSource dam =
                     new DamageSource(attacker.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.GENERIC_KILL),
                                      attacker, attacker);
-            target.hurt(dam, 250 <= level ? Integer.MAX_VALUE : damage);
+            target.hurt(dam, 200 <= level ? Integer.MAX_VALUE : damage);
         }
         return knockback;
     }
 
     @Override
     public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
-        if (200 <= tool.getModifierLevel(this.getId()))
+        if (170 <= tool.getModifierLevel(this.getId()))
             return Integer.MAX_VALUE;
         return damage;
     }
