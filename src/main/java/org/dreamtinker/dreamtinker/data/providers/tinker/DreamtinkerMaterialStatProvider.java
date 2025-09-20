@@ -2,6 +2,7 @@ package org.dreamtinker.dreamtinker.data.providers.tinker;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Tiers;
+import org.dreamtinker.dreamtinker.Items.tools.DtTiers;
 import org.dreamtinker.dreamtinker.data.DreamtinkerMaterialIds;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.data.material.AbstractMaterialStatsDataProvider;
@@ -36,7 +37,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          HandleMaterialStats.multipliers().durability(0.5f).miningSpeed(1f).attackDamage(1f).attackSpeed(1f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.metallivorous_stibium_lupus,
-                         new HeadMaterialStats(1600, 7.6f, Tiers.NETHERITE, 7.6f),
+                         new HeadMaterialStats(1600, 7.6f, DtTiers.WOLF_TIER, 7.6f),
                          HandleMaterialStats.multipliers().durability(0.67f).miningSpeed(0.34f).attackDamage(1.33f).attackSpeed(1.76f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.crying_obsidian,
