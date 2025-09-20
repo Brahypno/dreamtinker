@@ -14,7 +14,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.dreamtinker.dreamtinker.Items.tools.DtTiers;
 import org.dreamtinker.dreamtinker.config.DreamtinkerConfig;
-import org.dreamtinker.dreamtinker.event.PlayerEvent;
+import org.dreamtinker.dreamtinker.event.PlayerLeftClickEvent;
 import org.dreamtinker.dreamtinker.event.compact.addUnholywater;
 import org.dreamtinker.dreamtinker.event.compact.death_handler;
 import org.dreamtinker.dreamtinker.event.star_regulus_boost;
@@ -59,9 +59,9 @@ public class Dreamtinker {
         }
 
         MinecraftForge.EVENT_BUS.register(this);
-        forgeEventBus.addListener(PlayerEvent::onLeftClickBlock);
-        forgeEventBus.addListener(PlayerEvent::onLeftClick);
-        forgeEventBus.addListener(PlayerEvent::onLeftClickEntity);
+        forgeEventBus.addListener(PlayerLeftClickEvent::onLeftClickBlock);
+        forgeEventBus.addListener(PlayerLeftClickEvent::onLeftClick);
+        forgeEventBus.addListener(PlayerLeftClickEvent::onLeftClickEntity);
         forgeEventBus.addListener(star_regulus_boost::onServerTick);
 
         Dnetwork.registerPackets();

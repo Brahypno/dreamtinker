@@ -42,6 +42,15 @@
       }
     },
     {
+      "type": "tconstruct:traits",
+      "traits": [
+        {
+          "level": 1,
+          "name": "tconstruct:thorns"
+        }
+      ]
+    },
+    {
       "type": "tconstruct:multiply_stats",
       "multipliers": {
         "tconstruct:armor": 0.7,

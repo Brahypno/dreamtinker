@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.Model;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -109,6 +109,29 @@ public class SideAwareArmorModel extends MultilayerArmorModel {
                         hmodel.leftLeg.visible = oldL;
                         hmodel.rightLeg.visible = oldR;
                     }
+                }else if (currentSlot == EquipmentSlot.HEAD && textureType == ArmorTextureSupplier.TextureType.ARMOR){
+                    var head = target.head;
+
+                    // 备份原状态（一定要恢复，不然会影响后续层/其他槽位）
+                    float ox = head.x, oy = head.y, oz = head.z;
+                    float sx = head.xScale, sy = head.yScale, sz = head.zScale;
+
+                    // 相对“玩家后方”移动：+Z 往后，Y 负数是向上
+                    head.z += 5.0F;   // 往后约 5px（可调 3.5~6.0）
+                    head.y -= 3.0F;   // 上抬约 3px（可调 2.0~4.0）
+
+                    // 适度放大
+                    float k = 1.22F;  // 可调 1.15~1.30
+                    head.xScale *= k;
+                    head.yScale *= k;
+                    head.zScale *= k;
+                    tex.renderTexture(target, pose, buffer, LightTexture.FULL_BRIGHT, overlay, r, g, b, a, armorGlint);
+                    head.x = ox;
+                    head.y = oy;
+                    head.z = oz;
+                    head.xScale = sx;
+                    head.yScale = sy;
+                    head.zScale = sz;
                 }else {
                     // 非腿/脚槽位，直接渲染
                     tex.renderTexture(target, pose, buffer, light, overlay, r, g, b, a, armorGlint);
@@ -124,31 +147,6 @@ public class SideAwareArmorModel extends MultilayerArmorModel {
                     wingGlint = false;
                 }
             }
-        }
-    }
-
-
-    /**
-     * 代理模型：只把选中的腿渲染出去，其它部位不画
-     */
-    private static final class LegFilteredModel<T extends LivingEntity> extends Model {
-        private final HumanoidModel<T> base;
-        private final boolean left, right;
-
-        @SuppressWarnings("unchecked")
-        LegFilteredModel(HumanoidModel<?> base, boolean left, boolean right) {
-            super(RenderType::entityCutoutNoCull); // 实际不使用此函数，安全占位
-            this.base = (HumanoidModel<T>) base;
-            this.left = left;
-            this.right = right;
-        }
-
-        @Override
-        public void renderToBuffer(PoseStack pose, VertexConsumer vc, int light, int overlay, float r, float g, float b, float a) {
-            if (left)
-                base.leftLeg.render(pose, vc, light, overlay, r, g, b, a);
-            if (right)
-                base.rightLeg.render(pose, vc, light, overlay, r, g, b, a);
         }
     }
 }

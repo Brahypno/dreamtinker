@@ -1,17 +1,28 @@
 package org.dreamtinker.dreamtinker.modifier.tools.underPlate;
 
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.common.Tags;
 import org.dreamtinker.dreamtinker.modifier.base.baseclass.BattleModifier;
+import org.jetbrains.annotations.NotNull;
+import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
+import java.util.Objects;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
+import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.AsOneA;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.UnderPlateBoostMutiply;
 
 public class weapon_transformation extends BattleModifier {
@@ -19,15 +30,16 @@ public class weapon_transformation extends BattleModifier {
 
     @Override
     public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
-        float armor = Math.max(1, tool.getStats().get(ToolStats.ARMOR));
-        float toughness = Math.max(1, tool.getStats().get(ToolStats.ARMOR_TOUGHNESS));
+        float armor = tool.getStats().get(ToolStats.ARMOR);
+        float toughness = tool.getStats().get(ToolStats.ARMOR_TOUGHNESS);
+        float muti = armor * toughness * UnderPlateBoostMutiply.get().floatValue();
         if (modifier.getLevel() > 0){
             switch (slot) {
                 case CHEST -> {
                     consumer.accept(Attributes.LUCK,
                                     new AttributeModifier(UUID.fromString(tool_attribute_uuid),
                                                           Attributes.LUCK.getDescriptionId(),
-                                                          armor * toughness * UnderPlateBoostMutiply.get(),
+                                                          muti,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                 }
                 case LEGS -> {
@@ -36,27 +48,37 @@ public class weapon_transformation extends BattleModifier {
                     consumer.accept(Attributes.ATTACK_DAMAGE,
                                     new AttributeModifier(UUID.fromString(tool_attribute_uuid),
                                                           Attributes.ATTACK_DAMAGE.getDescriptionId(),
-                                                          armor * toughness * UnderPlateBoostMutiply.get(),
+                                                          muti,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                     consumer.accept(Attributes.ATTACK_SPEED,
                                     new AttributeModifier(UUID.fromString(tool_attribute_uuid),
                                                           Attributes.ATTACK_SPEED.getDescriptionId(),
-                                                          armor * toughness * UnderPlateBoostMutiply.get(),
+                                                          muti,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                 }
                 case HEAD -> {
                     consumer.accept(Attributes.MAX_HEALTH,
                                     new AttributeModifier(UUID.fromString(tool_attribute_uuid),
                                                           Attributes.MAX_HEALTH.getDescriptionId(),
-                                                          armor * toughness * UnderPlateBoostMutiply.get(),
+                                                          muti / 2,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                     consumer.accept(Attributes.KNOCKBACK_RESISTANCE,
                                     new AttributeModifier(UUID.fromString(tool_attribute_uuid),
                                                           Attributes.KNOCKBACK_RESISTANCE.getDescriptionId(),
-                                                          -armor * toughness * UnderPlateBoostMutiply.get(),
+                                                          -muti,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                 }
                 default -> {}
+            }
+        }
+    }
+
+    @Override
+    public void modifierOnInventoryTick(@NotNull IToolStackView tool, @NotNull ModifierEntry modifier, @NotNull Level world, @NotNull LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, @NotNull ItemStack stack) {
+        if (holder instanceof Player player && (isCorrectSlot || isSelected) && stack.is(Tags.Items.ARMORS_HELMETS) && stack.is(TinkerTags.Items.HELMETS)){
+            if (player.getEffect(MobEffects.NIGHT_VISION) == null
+                || Objects.requireNonNull(player.getEffect(MobEffects.NIGHT_VISION)).getDuration() <= 20 * 11){
+                player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 20 * 21, AsOneA.get(), false, false));
             }
         }
     }

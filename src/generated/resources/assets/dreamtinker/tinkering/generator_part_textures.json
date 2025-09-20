@@ -170,36 +170,6 @@
     },
     {
       "allow_animated": false,
-      "path": "dreamtinker:item/tool/armor/under_plate/helmet/plating",
-      "stat_type": "tconstruct:plating_helmet"
-    },
-    {
-      "allow_animated": false,
-      "path": "dreamtinker:item/tool/armor/under_plate/helmet/plating_broken",
-      "stat_type": "tconstruct:plating_helmet"
-    },
-    {
-      "allow_animated": false,
-      "path": "dreamtinker:item/tool/armor/under_plate/helmet/maille",
-      "stat_type": "tconstruct:maille"
-    },
-    {
-      "allow_animated": false,
-      "path": "dreamtinker:item/tool/armor/under_plate/helmet/maille_broken",
-      "stat_type": "tconstruct:maille"
-    },
-    {
-      "allow_animated": false,
-      "path": "dreamtinker:item/tool/armor/under_plate/helmet/maille1",
-      "stat_type": "tconstruct:maille"
-    },
-    {
-      "allow_animated": false,
-      "path": "dreamtinker:item/tool/armor/under_plate/helmet/maille1_broken",
-      "stat_type": "tconstruct:maille"
-    },
-    {
-      "allow_animated": false,
       "path": "dreamtinker:item/tool/armor/under_plate/chestplate/plating",
       "stat_type": "tconstruct:plating_chestplate"
     },
@@ -286,6 +256,21 @@
     {
       "allow_animated": false,
       "path": "dreamtinker:item/tool/armor/under_plate/boots/maille1_broken",
+      "stat_type": "tconstruct:maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/helmet/plating",
+      "stat_type": "tconstruct:plating_helmet"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/helmet/maille",
+      "stat_type": "tconstruct:maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/helmet/maille1",
       "stat_type": "tconstruct:maille"
     }
   ],
