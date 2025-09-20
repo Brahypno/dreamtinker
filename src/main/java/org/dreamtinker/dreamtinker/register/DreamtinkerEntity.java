@@ -4,6 +4,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.Items.tools.TNTarrow.TNTarrow;
+import org.dreamtinker.dreamtinker.entity.NarcissusFluidProjectile;
 import slimeknights.mantle.registration.deferred.EntityTypeDeferredRegister;
 
 import static org.dreamtinker.dreamtinker.Dreamtinker.MODID;
@@ -20,4 +21,10 @@ public class DreamtinkerEntity {
 
             );
 
+    public static final RegistryObject<EntityType<NarcissusFluidProjectile>> NarcissusSpitEntity =
+            ENTITIES.register("narcissus_fluid_spit",
+                              () -> EntityType.Builder.<NarcissusFluidProjectile>of(NarcissusFluidProjectile::new, MobCategory.MISC).sized(0.25F, 0.25F)
+                                                      .clientTrackingRange(4)
+                                                      .updateInterval(10)
+                                                      .setShouldReceiveVelocityUpdates(false));
 }

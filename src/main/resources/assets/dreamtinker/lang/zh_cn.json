@@ -34,7 +34,7 @@
   "modifier.dreamtinker.ouroboric_hourglass.flavor": "我一无所知",
   "modifier.dreamtinker.ouroboric_hourglass.description": "当受到大额伤害时，对此次伤害进行高额减伤，但……",
   "modifier.dreamtinker.ewige_widerkunft": "永劫轮回",
-  "modifier.dreamtinker.ewige_widerkunft.flavor": "在五完美巡后的世界再会吧",
+  "modifier.dreamtinker.ewige_widerkunft.flavor": "在2^12(2^13-1)巡后的世界再会吧",
   "modifier.dreamtinker.ewige_widerkunft.description": "当耐久度归零时，恢复耐久并提升数值",
   "modifier.dreamtinker.tooltip.ewige_widerkunft": "踏上轮回: ",
   "modifier.dreamtinker.ewige_widerkunft.salvage": "无缘黎明，因而此强化无法被移除，此材料无法被替换",
@@ -150,6 +150,9 @@
   "modifier.dreamtinker.continuous_explode.flavor": "比苦力怕有劲",
   "modifier.dreamtinker.continuous_explode.description": "给予镇爆箭多次爆炸的能力",
   "modifier.dreamtinker.tooltip.continuous_explode": "剩余次数: ",
+  "modifier.dreamtinker.memory_base": "记忆，王国之门",
+  "modifier.dreamtinker.memory_base.flavor": "魂来自血，人即为天使",
+  "modifier.dreamtinker.memory_base.description": "获得发射流体箭矢的能力。箭矢命中实体时，能造成一次额外的近战攻击。\n当流体不足时，用生命补足。流体箭矢的流体效果不会施加在目标而是发射者身上。",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
@@ -291,6 +294,9 @@
   "fluid_type.dreamtinker.reversed_shadow": "逆转阴影",
   "fluid.dreamtinker.reversed_shadow": "逆转阴影",
   "fluid.dreamtinker.reversed_shadow.fluid_effect": "Reversed Shadow",
+  "fluid_type.dreamtinker.blood_soul": "活魂血",
+  "fluid.dreamtinker.blood_soul": "活魂血",
+  "fluid.dreamtinker.blood_soul.fluid_effect": "活魂血会带来瞬间治疗效果",
 
   "item.dreamtinker.molten_echo_shard_bucket": "熔融回响碎片桶",
   "item.dreamtinker.molten_nigrescence_antimony_bucket": "融化黑锑桶",
@@ -308,6 +314,7 @@
   "item.dreamtinker.molten_soul_aether_bucket": "熔融聚灵以太桶",
   "item.dreamtinker.unholy_water_bucket": "不洁之水桶",
   "item.dreamtinker.reversed_shadow_bucket": "逆转阴影桶",
+  "item.dreamtinker.blood_soul_bucket": "活魂血桶",
 
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "流血",
@@ -326,5 +333,6 @@
   "effect.dreamtinker.cursed": "血咒",
 
   "adv.dreamtinker.eat_star_regulus.title": "大功业",
-  "adv.dreamtinker.eat_star_regulus.desc": "品味星之锑"
+  "adv.dreamtinker.eat_star_regulus.desc": "品味星之锑",
+  "stat.tconstruct.harvest_tier.dreamtinker.lupus": "狼"
 }

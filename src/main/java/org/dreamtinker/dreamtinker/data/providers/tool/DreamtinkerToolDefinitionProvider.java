@@ -139,7 +139,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 .module(new SetStatsModule(StatsNBT.builder()
                                                    .set(ToolStats.ATTACK_DAMAGE, 2f)
                                                    .set(ToolStats.ATTACK_SPEED, 1f)
-                                                   .set(ToolStats.DRAW_SPEED, 1.5f).build()))
+                                                   .set(ToolStats.DRAW_SPEED, 2.5f).build()))
                 .module(new MultiplyStatsModule(MultiplierNBT.builder()
                                                              .set(ToolStats.DURABILITY, 0.8f).build()))
                 .module(new ToolSlotsModule(ImmutableMap.of(SlotType.SOUL, 6, SlotType.ABILITY, 2, SlotType.UPGRADE, 1)))

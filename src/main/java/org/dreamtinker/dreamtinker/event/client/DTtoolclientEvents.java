@@ -15,12 +15,14 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.Items.tools.TNTarrow.TNTarrow;
+import org.dreamtinker.dreamtinker.client.NarcissusFluidProjectileRenderer;
 import org.dreamtinker.dreamtinker.register.DreamtinkerEntity;
 import org.dreamtinker.dreamtinker.register.DreamtinkerItems;
 import org.jetbrains.annotations.NotNull;
@@ -102,5 +104,10 @@ public class DTtoolclientEvents extends ClientEventBase {
         registerItemColors(colors, DreamtinkerItems.narcissus_wing);
         Consumer<Item> brokenConsumer = item -> event.register(ToolModel.COLOR_HANDLER, item);
         DreamtinkerItems.underPlate.forEach(brokenConsumer);
+    }
+
+    @SubscribeEvent
+    static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(DreamtinkerEntity.NarcissusSpitEntity.get(), NarcissusFluidProjectileRenderer::new);
     }
 }

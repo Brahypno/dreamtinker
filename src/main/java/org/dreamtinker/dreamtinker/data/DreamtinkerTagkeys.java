@@ -69,5 +69,6 @@ public class DreamtinkerTagkeys {
         }
 
         public static final TagKey<Block> drop_peach = dreamtinkerTag("drops/peach");
+        public static final TagKey<Block> need_lupus = dreamtinkerTag("need_tool/lupus");
     }
 }

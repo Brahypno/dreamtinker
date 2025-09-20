@@ -150,6 +150,9 @@
   "modifier.dreamtinker.continuous_explode.flavor": "Better creeper",
   "modifier.dreamtinker.continuous_explode.description": "Give TNTarrow the ability of explode many times",
   "modifier.dreamtinker.tooltip.continuous_explode": "Time remains: ",
+  "modifier.dreamtinker.memory_base": "Men like Base",
+  "modifier.dreamtinker.memory_base.flavor": "Blood is Soul, Men is Malkuth",
+  "modifier.dreamtinker.memory_base.description": "Gain ability to launch fluid arrow that hit ranged entity with your tool, and can use HP to refill. The fluid effect would trigger on shooter not target",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",
@@ -290,6 +293,9 @@
   "fluid_type.dreamtinker.reversed_shadow": "Reversed Shadow",
   "fluid.dreamtinker.reversed_shadow": "Reversed Shadow",
   "fluid.dreamtinker.reversed_shadow.fluid_effect": "Reversed Shadow",
+  "fluid_type.dreamtinker.blood_soul": "Blood Soul",
+  "fluid.dreamtinker.blood_soul": "Blood Soul",
+  "fluid.dreamtinker.blood_soul.fluid_effect": "Blood Soul bring heal",
 
   "item.dreamtinker.molten_echo_shard_bucket": "Molten echo shard Bucket",
   "item.dreamtinker.molten_nigrescence_antimony_bucket": "Molten Nigrescence of Antimon Bucket",
@@ -307,6 +313,7 @@
   "item.dreamtinker.molten_soul_aether_bucket": "Molten Soul Aether Bucket",
   "item.dreamtinker.unholy_water_bucket": "Unholy Water Bucket",
   "item.dreamtinker.reversed_shadow_bucket": "Reversed Shadow Bucket",
+  "item.dreamtinker.blood_soul_bucket": "Blood Soul Bucket",
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "bleed",
   "fluid_effect.tconstruct.damage.explosion": "explosion",
@@ -324,5 +331,6 @@
   "effect.dreamtinker.cursed": "Blood cursed",
 
   "adv.dreamtinker.eat_star_regulus.title": "Magnum Opus",
-  "adv.dreamtinker.eat_star_regulus.desc": "Devour star regulus"
+  "adv.dreamtinker.eat_star_regulus.desc": "Devour star regulus",
+  "stat.tconstruct.harvest_tier.dreamtinker.lupus": "Lupus"
 }

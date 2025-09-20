@@ -106,6 +106,8 @@ public class DreamtinkerFluidEffectProvider extends AbstractFluidEffectProvider 
                         new MobEffectCloudFluidEffect(FluidMobEffect.builder().effect(MobEffects.WITHER, 100, 3).buildCloud().effects()))
                 .addBlockEffect(
                         new MobEffectCloudFluidEffect(FluidMobEffect.builder().effect(TinkerEffects.bleeding.get(), 100, 3).buildCloud().effects()));
+        addFluid(DreamtinkerTagkeys.Fluids.blood_soul, 10)
+                .addEntityEffects(FluidMobEffect.builder().effect(MobEffects.HEAL, 100, 1).buildEntity(TimeAction.ADD));
     }
 
     @Override

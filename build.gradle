@@ -122,6 +122,7 @@ minecraft {
     }
 }
 
+
 mixin {
     add sourceSets.main, "${mod_id}.refmap.json"
 
@@ -232,6 +233,15 @@ tasks.named('jar', Jar).configure {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+tasks.register('cleanOldLogs', Delete) {
+    delete fileTree(dir: 'run/logs', include: ['*.zip', '*.gz'])
+}
+tasks.withType(JavaExec).configureEach {
+    if (name.toLowerCase().startsWith('run')) {
+        dependsOn tasks.named('cleanOldLogs')
+    }
 }
 
 mixin {

@@ -39,7 +39,8 @@
     "soul_blessing": "#201820",
     "exiles_faulty": "#8CBA99",
     "desolation_ring": "#AA00AA",
-    "weapon_transformation": "#FF69B4"
+    "weapon_transformation": "#FF69B4",
+    "memory_base": "#808000"
 },
   "material.dreamtinker": {
     "echo_shard": "#034150",
@@ -52,5 +53,8 @@
     "etherium": "#96E8E0",
     "nefarious": "#8513A0",
     "soul_etherium": "#7A59E2"
-  }
+  },
+    "harvest_tier.dreamtinker": {
+      "lupus":      "#E1B873"
+    }
 }

@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.dreamtinker.dreamtinker.Items.tools.DtTiers;
 import org.dreamtinker.dreamtinker.config.DreamtinkerConfig;
 import org.dreamtinker.dreamtinker.event.PlayerEvent;
 import org.dreamtinker.dreamtinker.event.compact.addUnholywater;
@@ -47,6 +48,7 @@ public class Dreamtinker {
         DreamtinkerEffects.EFFECT.register(modEventBus);
         DreamtinkerLoots.LOOTMODIFIERS.register(modEventBus);
         DreamtinkerTab.TABS.register(modEventBus);
+        DtTiers.init();
         if (ModList.get().isLoaded("enigmaticlegacy")){
             DreamtinkerModifers.EL_MODIFIERS.register(modEventBus);
             DreamtinkerFluids.EL_FLUIDS.register(modEventBus);
