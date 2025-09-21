@@ -31,6 +31,7 @@ public class DreamtinkerBlockLootTableProvider extends BlockLootSubProvider {
     private void addDecorative() {
         this.dropSelf(DreamtinkerBlocks.crying_obsidian_plane.get());
         this.dropSelf(DreamtinkerBlocks.narcissus.get());
+        this.dropPottedContents(DreamtinkerBlocks.potted_narcissus.get());
 
     }
 }

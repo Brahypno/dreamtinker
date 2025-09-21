@@ -2,6 +2,8 @@ package org.dreamtinker.dreamtinker;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -58,7 +60,7 @@ public class Dreamtinker {
             forgeEventBus.addGenericListener(ItemStack.class, addUnholywater::attachCaps);
             forgeEventBus.addListener(death_handler::onLivingDeath);
         }
-        
+
         forgeEventBus.addListener(PlayerLeftClickEvent::onLeftClickBlock);
         forgeEventBus.addListener(PlayerLeftClickEvent::onLeftClick);
         forgeEventBus.addListener(PlayerLeftClickEvent::onLeftClickEntity);
@@ -67,9 +69,11 @@ public class Dreamtinker {
         Dnetwork.registerPackets();
 
     }
-
+    
     private void commonSetup(final FMLCommonSetupEvent event) {
-
+        event.enqueueWork(() -> {
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(DreamtinkerBlocks.narcissus.getId(), DreamtinkerBlocks.potted_narcissus);
+        });
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
