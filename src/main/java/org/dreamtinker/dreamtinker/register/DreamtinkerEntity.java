@@ -5,6 +5,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.Items.tools.TNTarrow.TNTarrow;
 import org.dreamtinker.dreamtinker.entity.NarcissusFluidProjectile;
+import org.dreamtinker.dreamtinker.entity.SlashOrbitEntity;
 import slimeknights.mantle.registration.deferred.EntityTypeDeferredRegister;
 
 import static org.dreamtinker.dreamtinker.Dreamtinker.MODID;
@@ -27,4 +28,8 @@ public class DreamtinkerEntity {
                                                       .clientTrackingRange(4)
                                                       .updateInterval(10)
                                                       .setShouldReceiveVelocityUpdates(false));
+    public static final RegistryObject<EntityType<SlashOrbitEntity>> SLASH_ORBIT =
+            ENTITIES.register("slash_orbit",
+                              () -> EntityType.Builder.<SlashOrbitEntity>of(SlashOrbitEntity::new, MobCategory.MISC)
+                                                      .sized(0.1f, 0.1f).clientTrackingRange(64).updateInterval(2));
 }

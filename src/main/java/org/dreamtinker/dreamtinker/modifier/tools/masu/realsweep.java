@@ -5,7 +5,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustColorTransitionOptions;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -16,13 +15,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeMod;
+import org.dreamtinker.dreamtinker.entity.SlashOrbitEntity;
 import org.dreamtinker.dreamtinker.modifier.base.baseclass.BattleModifier;
 import org.joml.Vector3f;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
-import slimeknights.tconstruct.library.tools.stat.ToolStats;
-import slimeknights.tconstruct.tools.TinkerModifiers;
 
 import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.NO_COOLDOWN;
 
@@ -35,24 +33,24 @@ public class realsweep extends BattleModifier {
         if (!level.isClientSide && player.getAttackStrengthScale(0) > 0.8 && !tool.isBroken()){
             AttributeInstance reach = player.getAttribute(ForgeMod.ENTITY_REACH.get());
             double range = null != reach ? reach.getValue() : 1;
-            float sweepDamage = TinkerModifiers.sweeping.get().getSweepingDamage(tool, tool.getStats().get(ToolStats.ATTACK_DAMAGE));
+
 
             if (range > 0){
                 double rangeSq = range * range;
                 for (LivingEntity aoeTarget : level.getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(range, 0.25D, range))) {
-                    if (aoeTarget != player && !player.isAlliedTo(aoeTarget) && !(aoeTarget instanceof ArmorStand stand && stand.isMarker()) && player.distanceToSqr(aoeTarget) < rangeSq && aoeTarget != entity){
-                        if (1 < getLevel(tool)){
-                            ToolAttackUtil.attackEntity(tool, player, tool.getItem().equals(player.getMainHandItem().getItem()) ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND, aoeTarget, NO_COOLDOWN, false);
-                        }else {
-                            float angle = player.getYRot() * ((float) Math.PI / 180F);
-                            aoeTarget.knockback(0.4F, Mth.sin(angle), -Mth.cos(angle));
-                            ToolAttackUtil.dealDefaultDamage(player, aoeTarget, sweepDamage);
-                        }
+                    if (aoeTarget != player && !player.isAlliedTo(aoeTarget) && !(aoeTarget instanceof ArmorStand stand && stand.isMarker()) &&
+                        player.distanceToSqr(aoeTarget) < rangeSq && aoeTarget != entity){
+                        ToolAttackUtil.attackEntity(tool, player, tool.getItem().equals(player.getMainHandItem().getItem()) ? InteractionHand.MAIN_HAND :
+                                                                  InteractionHand.OFF_HAND, aoeTarget, NO_COOLDOWN, 1 < getLevel(tool));
                     }
                 }
-
                 level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, player.getSoundSource(), 1.0F, 1.0F);
-                sweepArcRightToLeft((ServerLevel) level, player, range - 3, range, 360.0, 2000);
+                //sweepArcRightToLeft((ServerLevel) level, player, range - 3, range, 360.0, 2000);
+                SlashOrbitEntity e = new SlashOrbitEntity((ServerLevel) level, player, 6, 15, 0.35f, 6, 0, 4);
+                e.setSolidColor(0xFF000000)
+                 .setHueShift(0.02f);
+                level.addFreshEntity(e);
+
             }
         }
     }

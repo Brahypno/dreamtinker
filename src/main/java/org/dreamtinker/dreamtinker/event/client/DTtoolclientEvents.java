@@ -23,6 +23,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.Items.tools.TNTarrow.TNTarrow;
 import org.dreamtinker.dreamtinker.client.NarcissusFluidProjectileRenderer;
+import org.dreamtinker.dreamtinker.client.SlashOrbitRenderer;
 import org.dreamtinker.dreamtinker.register.DreamtinkerEntity;
 import org.dreamtinker.dreamtinker.register.DreamtinkerItems;
 import org.jetbrains.annotations.NotNull;
@@ -109,5 +110,6 @@ public class DTtoolclientEvents extends ClientEventBase {
     @SubscribeEvent
     static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(DreamtinkerEntity.NarcissusSpitEntity.get(), NarcissusFluidProjectileRenderer::new);
+        event.registerEntityRenderer(DreamtinkerEntity.SLASH_ORBIT.get(), SlashOrbitRenderer::new);
     }
 }

@@ -49,6 +49,7 @@ public class Dreamtinker {
         DreamtinkerLoots.LOOTMODIFIERS.register(modEventBus);
         DreamtinkerTab.TABS.register(modEventBus);
         DtTiers.init();
+        MinecraftForge.EVENT_BUS.register(this);
         if (ModList.get().isLoaded("enigmaticlegacy")){
             DreamtinkerModifers.EL_MODIFIERS.register(modEventBus);
             DreamtinkerFluids.EL_FLUIDS.register(modEventBus);
@@ -57,8 +58,7 @@ public class Dreamtinker {
             forgeEventBus.addGenericListener(ItemStack.class, addUnholywater::attachCaps);
             forgeEventBus.addListener(death_handler::onLivingDeath);
         }
-
-        MinecraftForge.EVENT_BUS.register(this);
+        
         forgeEventBus.addListener(PlayerLeftClickEvent::onLeftClickBlock);
         forgeEventBus.addListener(PlayerLeftClickEvent::onLeftClick);
         forgeEventBus.addListener(PlayerLeftClickEvent::onLeftClickEntity);

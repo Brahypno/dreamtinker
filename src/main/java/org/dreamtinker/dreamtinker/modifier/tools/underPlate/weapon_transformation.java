@@ -42,7 +42,7 @@ public class weapon_transformation extends BattleModifier {
                                                           muti,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                 }
-                case LEGS -> {
+                case LEGS -> {//see hurt event
                 }
                 case FEET -> {
                     consumer.accept(Attributes.ATTACK_DAMAGE,
@@ -54,6 +54,11 @@ public class weapon_transformation extends BattleModifier {
                                     new AttributeModifier(UUID.fromString(tool_attribute_uuid),
                                                           Attributes.ATTACK_SPEED.getDescriptionId(),
                                                           muti,
+                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
+                    consumer.accept(Attributes.MOVEMENT_SPEED,
+                                    new AttributeModifier(UUID.fromString(tool_attribute_uuid),
+                                                          Attributes.MOVEMENT_SPEED.getDescriptionId(),
+                                                          -Math.min(muti, 0.15),
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                 }
                 case HEAD -> {

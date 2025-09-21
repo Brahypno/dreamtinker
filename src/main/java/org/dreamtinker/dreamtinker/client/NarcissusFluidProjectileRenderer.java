@@ -16,11 +16,14 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.dreamtinker.dreamtinker.entity.NarcissusFluidProjectile;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 
+@OnlyIn(Dist.CLIENT)
 public class NarcissusFluidProjectileRenderer<T extends NarcissusFluidProjectile> extends EntityRenderer<T> {
     private TextureAtlasSprite s0, s1;
 
