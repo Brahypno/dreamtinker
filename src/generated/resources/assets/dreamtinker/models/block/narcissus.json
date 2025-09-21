@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/cross",
+  "gui_light": "front",
   "render_type": "minecraft:cutout",
   "textures": {
     "cross": "dreamtinker:block/narcissus"

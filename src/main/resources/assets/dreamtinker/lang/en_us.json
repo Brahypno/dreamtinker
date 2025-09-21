@@ -223,6 +223,9 @@
 
   "block.dreamtinker.crying_obsidian_pane": "Crying Obsidian Pane",
   "block.dreamtinker.narcissus": "Narcissus",
+  "tooltip.dreamtinker.narcissus_1": "What left its name behind?",
+  "tooltip.dreamtinker.narcissus_2": "What lies spread all over the valley? ",
+  "block.dreamtinker.potted_narcissus": "pot with Narcissus",
 
   "material.dreamtinker.echo_shard": "Echo Shard",
   "material.dreamtinker.echo_shard.flavor": "Its echo of mystery, or echo of enigma",

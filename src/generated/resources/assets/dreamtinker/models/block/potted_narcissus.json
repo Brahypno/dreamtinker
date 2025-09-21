@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/flower_pot_cross",
+  "gui_light": "front",
   "render_type": "minecraft:cutout",
   "textures": {
     "plant": "dreamtinker:block/narcissus"

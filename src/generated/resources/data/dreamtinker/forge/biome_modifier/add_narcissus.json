@@ -2,8 +2,10 @@
   "type": "forge:add_features",
   "biomes": [
     "minecraft:river",
-    "minecraft:savanna_plateau",
-    "minecraft:flower_forest"
+    "minecraft:lush_caves",
+    "minecraft:flower_forest",
+    "minecraft:meadow",
+    "minecraft:snowy_slopes"
   ],
   "features": "dreamtinker:narcissus_patch",
   "step": "vegetal_decoration"

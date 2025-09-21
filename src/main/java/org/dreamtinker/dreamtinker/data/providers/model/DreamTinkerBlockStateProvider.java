@@ -1,6 +1,7 @@
 package org.dreamtinker.dreamtinker.data.providers.model;
 
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -35,11 +36,11 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
                   RenderType.solid());
         simpleBlockWithItem(DreamtinkerBlocks.narcissus.get(),
                             models().cross("narcissus", modLoc("block/narcissus"))
-                                    .renderType("cutout"));
+                                    .renderType("cutout").guiLight(BlockModel.GuiLight.FRONT));
         simpleBlockWithItem(DreamtinkerBlocks.potted_narcissus.get(),
                             models().withExistingParent("potted_narcissus", new ResourceLocation("minecraft", "block/flower_pot_cross"))
                                     .texture("plant", blockTexture(DreamtinkerBlocks.narcissus.get()))
-                                    .renderType("cutout"));
+                                    .renderType("cutout").guiLight(BlockModel.GuiLight.FRONT));
     }
 
     /**

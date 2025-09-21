@@ -223,6 +223,9 @@
 
   "block.dreamtinker.crying_obsidian_pane": "哭泣的黑曜石板",
   "block.dreamtinker.narcissus": "水仙",
+  "tooltip.dreamtinker.narcissus_1": "何物徒留名字",
+  "tooltip.dreamtinker.narcissus_2": "何物开遍幽谷",
+  "block.dreamtinker.potted_narcissus": "有水仙的花盆",
 
   "material.dreamtinker.echo_shard": "回响碎片",
   "material.dreamtinker.echo_shard.flavor": "是神秘的回响，还是秘密的回响",

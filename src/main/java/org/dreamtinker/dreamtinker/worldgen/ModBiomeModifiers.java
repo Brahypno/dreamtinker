@@ -28,8 +28,10 @@ public class ModBiomeModifiers {
 
         HolderSet<Biome> targets = HolderSet.direct(
                 biomes.getOrThrow(Biomes.RIVER),
-                biomes.getOrThrow(Biomes.SAVANNA_PLATEAU),
-                biomes.getOrThrow(Biomes.FLOWER_FOREST)
+                biomes.getOrThrow(Biomes.LUSH_CAVES),
+                biomes.getOrThrow(Biomes.FLOWER_FOREST),
+                biomes.getOrThrow(Biomes.MEADOW),
+                biomes.getOrThrow(Biomes.SNOWY_SLOPES)
         );
 
         HolderSet<PlacedFeature> feats = HolderSet.direct(
