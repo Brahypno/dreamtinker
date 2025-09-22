@@ -12,11 +12,5 @@
     { "name": "plating", "index": 0 },
     { "name": "maille",  "index": 1 },
     { "name": "maille1",  "index": 2 }
-  ],
-  "overrides": [
-    {
-      "predicate": { "tconstruct:broken": 1 },
-      "model": "tconstruct:item/armor/under_plate/helmet_broken"
-    }
   ]
 }

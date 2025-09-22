@@ -16,7 +16,7 @@
   "overrides": [
     {
       "predicate": { "tconstruct:broken": 1 },
-      "model": "tconstruct:item/armor/under_plate/leggings_broken"
+      "model": "dreamtinker:item/armor/under_plate/leggings_broken"
     }
   ]
 }

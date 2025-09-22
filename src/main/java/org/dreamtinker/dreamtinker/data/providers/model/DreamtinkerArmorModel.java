@@ -2,6 +2,7 @@ package org.dreamtinker.dreamtinker.data.providers.model;
 
 import net.minecraft.data.PackOutput;
 import org.dreamtinker.dreamtinker.Items.tools.DTtoolsDefinition;
+import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.client.armor.texture.ArmorTextureSupplier;
 import slimeknights.tconstruct.library.client.armor.texture.MaterialArmorTextureSupplier;
 import slimeknights.tconstruct.library.client.armor.texture.TrimArmorTextureSupplier;
@@ -23,7 +24,7 @@ public class DreamtinkerArmorModel extends AbstractArmorModelProvider {
     }
 
     @Override
-    public String getName() {
+    public @NotNull String getName() {
         return "Dreamtinker Armor Models";
     }
 }
