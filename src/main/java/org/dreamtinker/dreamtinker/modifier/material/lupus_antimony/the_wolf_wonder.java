@@ -71,7 +71,7 @@ public class the_wolf_wonder extends BattleModifier {
             target.forceAddEffect(inst, target);
             instances.add(inst);
         }
-        if (attacker != null && rand.nextInt(666) < TheWolfWonderSurpriseNumber.get()){
+        if (attacker != null && rand.nextInt(6666) < TheWolfWonderSurpriseNumber.get()){
             for (MobEffectInstance inst : instances) {
                 attacker.addEffect(new MobEffectInstance(inst.getEffect(), inst.getDuration(), inst.getAmplifier(), inst.isAmbient(), inst.isVisible()));
             }

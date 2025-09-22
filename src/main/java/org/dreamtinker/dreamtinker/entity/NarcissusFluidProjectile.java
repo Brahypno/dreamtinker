@@ -6,14 +6,16 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -35,11 +37,13 @@ import slimeknights.tconstruct.library.utils.Util;
 
 import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.NO_COOLDOWN;
 
-public class NarcissusFluidProjectile extends AbstractArrow {
+public class NarcissusFluidProjectile extends Projectile {
     private IToolStackView toolStackView;
     private static final EntityDataAccessor<FluidStack> FLUID;
-    private float power;
-    private int knockback;
+    private float power = 1;
+
+    private int knockback = 1;
+    private float basedamage = 1;//mock abstract arrow and to improved based on specific modifier
 
 
     public NarcissusFluidProjectile(EntityType<? extends NarcissusFluidProjectile> type, Level level) {
@@ -47,6 +51,7 @@ public class NarcissusFluidProjectile extends AbstractArrow {
         this.power = 1.0F;
         this.knockback = 1;
     }
+
 
     public NarcissusFluidProjectile(Level level) {
         this(DreamtinkerEntity.NarcissusSpitEntity.get(), level);
@@ -58,7 +63,6 @@ public class NarcissusFluidProjectile extends AbstractArrow {
         this.setOwner(owner);
         this.setFluid(fluid);
         this.setPower(power);
-        this.setNoPhysics(true);
         this.setTool(tool);
     }
 
@@ -71,6 +75,11 @@ public class NarcissusFluidProjectile extends AbstractArrow {
         }
 
         return builder;
+    }
+
+    @Override
+    protected boolean canHitEntity(@NotNull Entity p_36743_) {
+        return p_36743_ instanceof LivingEntity entity && entity.isAlive() && (super.canHitEntity(p_36743_) || !p_36743_.canBeHitByProjectile());
     }
 
     @Override
@@ -89,7 +98,6 @@ public class NarcissusFluidProjectile extends AbstractArrow {
         }
         if (hitType != HitResult.Type.MISS && hitResult != null && !ForgeEventFactory.onProjectileImpact(this, hitResult))
             this.onHit(hitResult);
-
         if (!this.isRemoved()){
             this.updateRotation();
             level().addParticle(ParticleTypes.SOUL_FIRE_FLAME, getX(), getY(), getZ(), 0, 0, 0);
@@ -106,21 +114,50 @@ public class NarcissusFluidProjectile extends AbstractArrow {
             this.setDeltaMovement(velocity);
             this.setPos(newLocation);
         }
-
         if (this.getY() > (double) (this.level().getMaxBuildHeight() + 64) || this.getY() < (double) (this.level().getMinBuildHeight() - 64)){
             this.discard();
         }
-
     }
 
     @Override
-    protected void onHitEntity(EntityHitResult result) {
+    protected void onHitEntity(@NotNull EntityHitResult result) {
+
         Entity target = result.getEntity();
-        if (this.getKnockback() > 0){
-            Vec3 vec3 = this.getDeltaMovement().multiply((double) 1.0F, (double) 0.0F, (double) 1.0F).normalize().scale((double) this.knockback * 0.6);
-            if (vec3.lengthSqr() > (double) 0.0F){
-                target.push(vec3.x, 0.1, vec3.z);
+        float f = (float) this.getDeltaMovement().length();
+        int i = Mth.ceil(Mth.clamp((double) f * this.getBaseDamage(), 0.0F, Integer.MAX_VALUE));
+
+        if (this.isCritArrow()){
+            long j = this.random.nextInt(i / 2 + 2);
+            i = (int) Math.min(j + (long) i, 2147483647L);
+        }
+
+        Entity entity1 = this.getOwner();
+        if (null != entity1){
+            DamageSource damagesource = this.damageSources().mobProjectile(this, (LivingEntity) entity1);
+            if (entity1 instanceof LivingEntity){
+                ((LivingEntity) entity1).setLastHurtMob(target);
             }
+            if (target instanceof LivingEntity livingentity && target.hurt(damagesource, (float) i)){
+                if (this.knockback > 0){
+                    double d0 = Math.max(0.0F, (double) 1.0F - livingentity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
+                    Vec3 vec3 =
+                            this.getDeltaMovement().multiply(1.0F, 0.0F, 1.0F).normalize()
+                                .scale((double) this.knockback * 0.6 * d0);
+                    if (vec3.lengthSqr() > (double) 0.0F){
+                        livingentity.push(vec3.x, 0.1, vec3.z);
+                    }
+                }
+
+                if (!this.level().isClientSide && entity1 instanceof LivingEntity){
+                    EnchantmentHelper.doPostHurtEffects(livingentity, entity1);
+                    EnchantmentHelper.doPostDamageEffects((LivingEntity) entity1, livingentity);
+                }
+
+            }
+        }
+
+        if (this.isOnFire()){
+            target.setSecondsOnFire(5);
         }
 
         FluidStack fluid = this.getFluid();
@@ -138,13 +175,20 @@ public class NarcissusFluidProjectile extends AbstractArrow {
                     }else {
                         this.setFluid(fluid);
                     }
+                    //target.invulnerableTime = 0; potential improvements here
+                    ToolAttackUtil.attackEntity(toolStackView, (LivingEntity) this.getOwner(), InteractionHand.MAIN_HAND, target, NO_COOLDOWN, false,
+                                                Util.getSlotType(InteractionHand.MAIN_HAND));
                 }
             }
-            ToolAttackUtil.attackEntity(toolStackView, (LivingEntity) this.getOwner(), InteractionHand.MAIN_HAND, target, NO_COOLDOWN, false,
-                                        Util.getSlotType(InteractionHand.MAIN_HAND));
+
+
         }
 
     }
+
+    private double getBaseDamage() {return basedamage;}
+
+    private boolean isCritArrow() {return false;}
 
     @Override
     protected void onHit(HitResult p_37260_) {
@@ -157,7 +201,6 @@ public class NarcissusFluidProjectile extends AbstractArrow {
 
     @Override
     protected void defineSynchedData() {
-        super.defineSynchedData();
         this.entityData.define(FLUID, FluidStack.EMPTY);
     }
 
@@ -195,11 +238,6 @@ public class NarcissusFluidProjectile extends AbstractArrow {
         this.setFluid(FluidStack.loadFluidStackFromNBT(nbt.getCompound("fluid")));
     }
 
-    @Override
-    protected @NotNull ItemStack getPickupItem() {
-        return Items.AIR.getDefaultInstance();
-    }
-
     public FluidStack getFluid() {
         return this.entityData.get(FLUID);
     }
@@ -212,20 +250,13 @@ public class NarcissusFluidProjectile extends AbstractArrow {
         this.power = power;
     }
 
-    public void setKnockback(int knockback) {
-        this.knockback = knockback;
-    }
-
-    public int getKnockback() {
-        return this.knockback;
-    }
-
     protected @NotNull Component getTypeName() {
         return this.getFluid().getDisplayName();
     }
 
     public void setTool(IToolStackView tool) {
         this.toolStackView = tool;
+        //XXX: read modifier and improve status here.
     }
 
     public IToolStackView getTool() {

@@ -139,7 +139,7 @@ public class memoryBase extends BattleModifier {
                             // let modifiers set properties
                             for (ModifierEntry entry : tool.getModifierList()) {
                                 entry.getHook(ModifierHooks.PROJECTILE_LAUNCH)
-                                     .onProjectileLaunch(tool, entry, entity, ItemStack.EMPTY, spit, spit, arrowData, shotIndex == primaryIndex);
+                                     .onProjectileLaunch(tool, entry, entity, ItemStack.EMPTY, spit, null, arrowData, shotIndex == primaryIndex);
                             }
 
                             // finally, fire the projectile

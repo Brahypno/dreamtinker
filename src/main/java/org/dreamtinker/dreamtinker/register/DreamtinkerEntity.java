@@ -24,7 +24,7 @@ public class DreamtinkerEntity {
 
     public static final RegistryObject<EntityType<NarcissusFluidProjectile>> NarcissusSpitEntity =
             ENTITIES.register("narcissus_fluid_spit",
-                              () -> EntityType.Builder.<NarcissusFluidProjectile>of(NarcissusFluidProjectile::new, MobCategory.MISC).sized(0.25F, 0.25F)
+                              () -> EntityType.Builder.<NarcissusFluidProjectile>of(NarcissusFluidProjectile::new, MobCategory.MISC).sized(0.25F, 0.5F)
                                                       .clientTrackingRange(4)
                                                       .updateInterval(10)
                                                       .setShouldReceiveVelocityUpdates(false));
