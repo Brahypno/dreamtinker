@@ -2,6 +2,8 @@ package org.dreamtinker.dreamtinker.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 
+import java.util.List;
+
 public class DreamtinkerConfig {
     public static final ForgeConfigSpec.Builder builder =
             new ForgeConfigSpec.Builder().comment("Configuration to almost all data in this mod. Take your own risk modify it!!!").push("Tool Configuration");
@@ -125,7 +127,12 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.IntValue TheWolfWonderEffectAmplifier =
             builder.comment("Max Amplifier of effects").defineInRange("TheWolfWonderEffectAmplifier", 10, 0, 100);
     public static final ForgeConfigSpec.IntValue TheWolfWonderSurpriseNumber =
-            builder.comment("This is a suprise!").defineInRange("TheWolfWonderSurpriseNumber", 7, 0, 666);
+            builder.comment("This is a suprise!").defineInRange("TheWolfWonderSurpriseNumber", 7, 0, 6666);
+    public static final ForgeConfigSpec.ConfigValue<List<? extends String>> TheWolfBlackList =
+            builder.comment("Blacklist for the worlf").defineList("blacklist",
+                                                                  List.of("minecraft:bad_omen", "minecraft:hero_of_the_village"), // 默认例子（可换）
+                                                                  o -> o instanceof String s && isValidIdFormat(s));
+    ;
 
     public static final ForgeConfigSpec.IntValue TheWolfWasEnable = builder.comment("Enable the Wolf Was modifier").defineInRange("TheWolfWasEnable", 1, 0, 1);
     public static final ForgeConfigSpec.IntValue TheWolfWasDamage = builder.comment(
@@ -191,5 +198,10 @@ public class DreamtinkerConfig {
             builder.comment("Percentage of Damage turn into absorption").defineInRange("ExilesFaultyAbsorbHPPercentage", 0.1, 0, 100);
 
     public static final ForgeConfigSpec specs = builder.pop().build();
+
+    private static boolean isValidIdFormat(String s) {
+        // 只做基本校验：有冒号且不含空格。真正解析在读取阶段做。
+        return s != null && s.indexOf(':') > 0 && !s.contains(" ");
+    }
 }
 
