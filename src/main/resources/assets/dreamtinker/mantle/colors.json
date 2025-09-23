@@ -1,11 +1,12 @@
 {
   "modifier.dreamtinker": {
-    "realsweep": "#330066",
+    "real_sweep": "#330066",
     "strong_heavy": "#808080",
     "echoed_attack": "#415099",
     "echoed_defence": "#415099",
     "strong_explode": "#AA0000",
-    "silvernamebee": "#C0C0C0",
+    "continuous_explode": "#AA0000",
+    "silver_name_bee": "#C0C0C0",
     "glacial_river": "#D7EFFA",
     "antimony_usage": "#F6E07E",
     "broken_vessel": "#332222",
@@ -40,7 +41,8 @@
     "exiles_faulty": "#8CBA99",
     "desolation_ring": "#AA00AA",
     "weapon_transformation": "#FF69B4",
-    "memory_base": "#808000"
+    "memory_base": "#808000",
+    "soul_core": "#034150"
 },
   "material.dreamtinker": {
     "echo_shard": "#034150",

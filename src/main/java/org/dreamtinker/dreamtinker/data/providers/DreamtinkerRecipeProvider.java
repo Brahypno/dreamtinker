@@ -568,6 +568,20 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setSlots(SlotType.UPGRADE, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifers.Ids.soul_upgrade, upgradeSalvage))
                              .save(consumer, prefix(DreamtinkerModifers.Ids.soul_upgrade, upgradeFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifers.Ids.soul_core)
+                             .setTools(TinkerTags.Items.MELEE_WEAPON)
+                             .addInput(DreamtinkerItems.unborn_turtle_egg.get(), 1)
+                             .setMaxLevel(1)
+                             .setSlots(SlotType.SOUL, 1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifers.Ids.soul_core, soulSalvage))
+                             .save(consumer, prefix(DreamtinkerModifers.Ids.soul_core, soulFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifers.Ids.soul_core)
+                             .setTools(TinkerTags.Items.MELEE_WEAPON)
+                             .addInput(DreamtinkerItems.unborn_turtle_egg.get(), 1)
+                             .addInput(DreamtinkerItems.unborn_sniffer_egg.get(), 1)
+                             .setMaxLevel(3)
+                             .setSlots(SlotType.SOUL, 1)
+                             .save(consumer, wrap(DreamtinkerModifers.Ids.soul_core, soulFolder, "_1"));
     }
 
     private void addEntityMeltingRecipes(Consumer<FinishedRecipe> consumer) {

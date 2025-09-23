@@ -152,7 +152,11 @@
   "modifier.dreamtinker.tooltip.continuous_explode": "Time remains: ",
   "modifier.dreamtinker.memory_base": "Men like Base",
   "modifier.dreamtinker.memory_base.flavor": "Blood is Soul, Men is Malkuth",
-  "modifier.dreamtinker.memory_base.description": "Gain ability to launch fluid arrow that hit ranged entity with your tool, and can use HP to refill. The fluid effect would trigger on shooter not target",
+  "modifier.dreamtinker.memory_base.description": "Gain ability to launch Memory Projectile which can use HP to refill. When hit entity, Memory Projectile would apply an extra hit with shooter`s tool and apply fluid effect on shooter; Memory Projectile would ignore Block hit",
+  "modifier.dreamtinker.soul_core": "Soul Core",
+  "modifier.dreamtinker.soul_core.flavor": "Hate of unborn",
+  "modifier.dreamtinker.soul_core.description": "Add filter only hit live living entity and exclude Armor Stand;\n Starting from Level 2, Memory Projectile would chase the mortals, higher level means higher speed",
+  "modifier.dreamtinker.soul_core.requirements": "Soul Core requires Men like Base to apply",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",

@@ -1,5 +1,6 @@
 package org.dreamtinker.dreamtinker.modifier.tools.narcissus_wing;
 
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -20,7 +21,6 @@ import org.dreamtinker.dreamtinker.register.DreamtinkerFluids;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
-import slimeknights.tconstruct.common.Sounds;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.fluid.FluidEffectManager;
@@ -144,7 +144,7 @@ public class memoryBase extends BattleModifier {
 
                             // finally, fire the projectile
                             world.addFreshEntity(spit);
-                            world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), Sounds.SPIT.getSound(), SoundSource.PLAYERS, 1.0F,
+                            world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.FIRE_AMBIENT, SoundSource.PLAYERS, 1.0F,
                                             1.0F / (world.getRandom().nextFloat() * 0.4F + 1.2F) + charge * 0.5F + (angle / 10f));
 
                         }

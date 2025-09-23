@@ -24,12 +24,11 @@ public class DreamtinkerEntity {
 
     public static final RegistryObject<EntityType<NarcissusFluidProjectile>> NarcissusSpitEntity =
             ENTITIES.register("narcissus_fluid_spit",
-                              () -> EntityType.Builder.<NarcissusFluidProjectile>of(NarcissusFluidProjectile::new, MobCategory.MISC).sized(0.25F, 0.5F)
+                              () -> EntityType.Builder.<NarcissusFluidProjectile>of(NarcissusFluidProjectile::new, MobCategory.MISC).sized(0.5F, 0.5F)
                                                       .clientTrackingRange(4)
-                                                      .updateInterval(10)
-                                                      .setShouldReceiveVelocityUpdates(false));
+                                                      .updateInterval(10));
     public static final RegistryObject<EntityType<SlashOrbitEntity>> SLASH_ORBIT =
             ENTITIES.register("slash_orbit",
                               () -> EntityType.Builder.<SlashOrbitEntity>of(SlashOrbitEntity::new, MobCategory.MISC)
-                                                      .sized(0.1f, 0.1f).clientTrackingRange(64).updateInterval(2));
+                                                      .sized(0.5f, 0.5f).clientTrackingRange(64).updateInterval(2));
 }

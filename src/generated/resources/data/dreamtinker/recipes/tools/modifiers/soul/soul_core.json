@@ -1,0 +1,17 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "dreamtinker:unborn_turtle_egg"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:soul_core",
+  "slots": {
+    "souls": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/melee/weapon"
+  }
+}

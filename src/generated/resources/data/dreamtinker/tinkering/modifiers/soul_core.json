@@ -1,4 +1,24 @@
 {
-  "level_display": "tconstruct:single_level",
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:requirements",
+      "display_modifiers": [
+        {
+          "level": 1,
+          "name": "dreamtinker:memory_base"
+        }
+      ],
+      "requirement": {
+        "type": "tconstruct:has_modifier",
+        "check": "all",
+        "modifier": {
+          "type": "tconstruct:single",
+          "modifier": "dreamtinker:memory_base"
+        }
+      },
+      "translation_key": "modifier.dreamtinker.soul_core.requirements"
+    }
+  ],
   "tooltip_display": "always"
 }

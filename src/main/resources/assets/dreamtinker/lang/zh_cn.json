@@ -152,7 +152,11 @@
   "modifier.dreamtinker.tooltip.continuous_explode": "剩余次数: ",
   "modifier.dreamtinker.memory_base": "记忆，王国之门",
   "modifier.dreamtinker.memory_base.flavor": "魂来自血，人即为天使",
-  "modifier.dreamtinker.memory_base.description": "获得发射流体箭矢的能力。箭矢命中实体时，能造成一次额外的近战攻击。\n当流体不足时，用生命补足。流体箭矢的流体效果不会施加在目标而是发射者身上。",
+  "modifier.dreamtinker.memory_base.description": "获得发射记忆弹的能力。记忆弹命中实体时，造成一次发射者造成的额外的近战攻击，并对发射者施加流体效果。\n当流体不足时，用生命补足。记忆弹会忽略方块碰撞",
+  "modifier.dreamtinker.soul_core": "魂核",
+  "modifier.dreamtinker.soul_core.flavor": "未生者的遗恨",
+  "modifier.dreamtinker.soul_core.description": "使记忆弹忽略非活着的实体和盔甲架\n;从二级开始，记忆弹会试图追击最近的活体。等级越高，追击越快",
+  "modifier.dreamtinker.soul_core.requirements": "魂核需要”记忆，王国之门“作为前置",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
