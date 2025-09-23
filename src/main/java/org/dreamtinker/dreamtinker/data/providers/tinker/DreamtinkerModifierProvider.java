@@ -6,6 +6,7 @@ import org.dreamtinker.dreamtinker.register.DreamtinkerModifers;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.data.tinkering.AbstractModifierProvider;
 import slimeknights.tconstruct.library.modifiers.impl.BasicModifier;
+import slimeknights.tconstruct.library.modifiers.modules.build.ModifierRequirementsModule;
 import slimeknights.tconstruct.library.modifiers.modules.build.ModifierSlotModule;
 import slimeknights.tconstruct.library.modifiers.util.ModifierLevelDisplay;
 import slimeknights.tconstruct.library.tools.SlotType;
@@ -28,11 +29,13 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                                            .addModules(ModifierSlotModule.slot(SlotType.SOUL).flat(1));
         buildModifier(DreamtinkerModifers.Ids.continuous_explode).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
         buildModifier(DreamtinkerModifers.Ids.moonlight_ice_info).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
-        buildModifier(DreamtinkerModifers.Ids.soul_core).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
+        buildModifier(DreamtinkerModifers.Ids.soul_core)
+                .addModule(ModifierRequirementsModule.builder().requireModifier(DreamtinkerModifers.memory_base.getId(), 1)
+                                                     .modifierKey(DreamtinkerModifers.Ids.soul_core).build());
     }
 
     @Override
     public @NotNull String getName() {
-        return "Dreamtinker";
+        return "Dreamtinker Modifier Provider";
     }
 }

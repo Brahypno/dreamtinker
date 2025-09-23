@@ -19,8 +19,8 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
     @Override
     protected void addMaterials() {
         addMaterial(DreamtinkerMaterialIds.echo_shard, 4, 35, false, false, null);
-        addMaterial(DreamtinkerMaterialIds.moonlight_ice, 4, 35, false, false, null);
-        addMaterial(DreamtinkerMaterialIds.valentinite, 3, 16, true, false, null);
+        addMaterial(DreamtinkerMaterialIds.moonlight_ice, 3, 35, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.valentinite, 2, 16, true, false, null);
         addMaterial(DreamtinkerMaterialIds.nigrescence_antimony, 3, 23, false, false, null);
         addMaterial(DreamtinkerMaterialIds.metallivorous_stibium_lupus, 6, 45, false, false, null);
         addMaterial(DreamtinkerMaterialIds.star_regulus, 7, 50, true, false, null);
