@@ -20,7 +20,6 @@ public class ranged_shoot extends BattleModifier {
 
     public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target) {
         if (null != attacker && null != target && !projectile.getPersistentData().getBoolean(mark)){
-            System.out.println(projectile);
             if (rangedhit.get() <= 1e-6)
                 return false;
             double dis = attacker.position().distanceTo(target.position());

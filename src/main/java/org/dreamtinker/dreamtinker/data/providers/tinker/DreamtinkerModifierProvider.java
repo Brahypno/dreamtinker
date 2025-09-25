@@ -5,11 +5,13 @@ import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import org.dreamtinker.dreamtinker.register.DreamtinkerModifers;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.data.tinkering.AbstractModifierProvider;
+import slimeknights.tconstruct.library.json.LevelingValue;
 import slimeknights.tconstruct.library.modifiers.impl.BasicModifier;
 import slimeknights.tconstruct.library.modifiers.modules.build.ModifierRequirementsModule;
 import slimeknights.tconstruct.library.modifiers.modules.build.ModifierSlotModule;
 import slimeknights.tconstruct.library.modifiers.util.ModifierLevelDisplay;
 import slimeknights.tconstruct.library.tools.SlotType;
+import slimeknights.tconstruct.tools.modules.combat.FieryAttackModule;
 
 public class DreamtinkerModifierProvider extends AbstractModifierProvider implements IConditionBuilder {
     public DreamtinkerModifierProvider(PackOutput packOutput) {
@@ -32,6 +34,19 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(DreamtinkerModifers.Ids.soul_core)
                 .addModule(ModifierRequirementsModule.builder().requireModifier(DreamtinkerModifers.memory_base.getId(), 1)
                                                      .modifierKey(DreamtinkerModifers.Ids.soul_core).build());
+        buildModifier(DreamtinkerModifers.Ids.flaming_memory)
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(ModifierRequirementsModule.builder().requireModifier(DreamtinkerModifers.memory_base.getId(), 1)
+                                                     .modifierKey(DreamtinkerModifers.Ids.flaming_memory).build())
+                .addModule(new FieryAttackModule(LevelingValue.eachLevel(5)));
+        buildModifier(DreamtinkerModifers.Ids.icy_memory)
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(ModifierRequirementsModule.builder().requireModifier(DreamtinkerModifers.memory_base.getId(), 1)
+                                                     .modifierKey(DreamtinkerModifers.Ids.icy_memory).build());
+        buildModifier(DreamtinkerModifers.Ids.hate_memory)
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(ModifierRequirementsModule.builder().requireModifier(DreamtinkerModifers.memory_base.getId(), 1)
+                                                     .modifierKey(DreamtinkerModifers.Ids.hate_memory).build());
     }
 
     @Override

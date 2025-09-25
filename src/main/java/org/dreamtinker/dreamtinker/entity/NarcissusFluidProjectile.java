@@ -1,6 +1,5 @@
 package org.dreamtinker.dreamtinker.entity;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -16,6 +15,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.decoration.ArmorStand;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -48,7 +48,7 @@ public class NarcissusFluidProjectile extends Projectile {
     private static final EntityDataAccessor<FluidStack> FLUID;
     private static final EntityDataAccessor<Integer> CHASE_LIVING;
     private float power;
-    private int life = 30;
+    private int life = 30 * 20;
     private int knock_back;
 
 
@@ -125,14 +125,12 @@ public class NarcissusFluidProjectile extends Projectile {
                                                                                                  !(this.getOwner() != null &&
                                                                                                    target.isAlliedTo(this.getOwner())) &&
                                                                                                  !(target instanceof ArmorStand) &&
-                                                                                                 (!this.level().isClientSide() ||
-                                                                                                  target != Minecraft.getInstance().player));
+                                                                                                 !(target instanceof Player));
 
                 if (!potential_targets.isEmpty()){
                     LivingEntity nearest = potential_targets.stream().min(Comparator.comparingDouble((e) -> e.distanceToSqr(this))).get();
                     Vec3 diff = nearest.position().add(0, nearest.getBbHeight() / 2, 0).subtract(this.position());
-                    Vec3 new_motion = this.getDeltaMovement().add(diff.normalize()).scale(0.75 * Math.max(1, getChaseLiving() - 1));
-                    this.setDeltaMovement(new_motion);
+                    velocity = velocity.add(diff.normalize()).scale(0.75 * Math.max(1, getChaseLiving() - 1));
                 }
             }
 
@@ -140,6 +138,7 @@ public class NarcissusFluidProjectile extends Projectile {
             this.setPos(newLocation);
             --life;
         }
+
         if (this.getY() > (double) (this.level().getMaxBuildHeight() + 64) || this.getY() < (double) (this.level().getMinBuildHeight() - 64) || this.life <= 0){
             this.discard();
         }
@@ -158,7 +157,11 @@ public class NarcissusFluidProjectile extends Projectile {
 
         Entity entity1 = this.getOwner();
         if (null != entity1){
-            DamageSource damagesource = this.damageSources().mobProjectile(this, (LivingEntity) entity1);
+            DamageSource damagesource = null != toolStackView && 1 < toolStackView.getModifierLevel(DreamtinkerModifers.Ids.icy_memory) ?
+                                        this.damageSources().sonicBoom(entity1) :
+                                        null != toolStackView && 0 < toolStackView.getModifierLevel(DreamtinkerModifers.Ids.icy_memory) ?
+                                        this.damageSources().indirectMagic(this, entity1) :
+                                        this.damageSources().mobProjectile(this, (LivingEntity) entity1);
             if (entity1 instanceof LivingEntity){
                 ((LivingEntity) entity1).setLastHurtMob(target);
             }
@@ -177,11 +180,13 @@ public class NarcissusFluidProjectile extends Projectile {
                     EnchantmentHelper.doPostHurtEffects(livingentity, entity1);
                     EnchantmentHelper.doPostDamageEffects((LivingEntity) entity1, livingentity);
                 }
-            }
-        }
+                if (!this.level().isClientSide)
+                    if (this.isOnFire()){
+                        target.setSecondsOnFire(5 * Math.max(1, this.level().random.nextInt(3)));
+                        System.out.println(target.getRemainingFireTicks());
+                    }
 
-        if (this.isOnFire()){
-            target.setSecondsOnFire(5);
+            }
         }
 
         FluidStack fluid = this.getFluid();
@@ -192,7 +197,10 @@ public class NarcissusFluidProjectile extends Projectile {
                 if (recipe.hasEntityEffects()){
                     FluidEffectContext.Entity context = this.buildContext().location(result.getLocation()).target(this.getOwner());
                     int consumed = recipe.applyToEntity(fluid, this.power, context, IFluidHandler.FluidAction.EXECUTE);
-                    fluid.shrink(consumed);
+                    int hate = 1;
+                    if (null != toolStackView)
+                        hate = Math.max(1, toolStackView.getModifierLevel(DreamtinkerModifers.Ids.hate_memory));
+                    fluid.shrink(consumed / hate);
                     if (fluid.isEmpty()){
                         this.discard();
                     }else {

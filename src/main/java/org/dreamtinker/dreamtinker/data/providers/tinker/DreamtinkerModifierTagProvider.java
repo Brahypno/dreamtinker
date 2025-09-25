@@ -34,6 +34,8 @@ public class DreamtinkerModifierTagProvider extends AbstractModifierTagProvider 
             .addOptional(weapon_books.getId(), eldritch_pan.getId(), exiles_faulty.getId());
         this.tag(TinkerTags.Modifiers.MELEE_UPGRADES)
             .add(strong_explode.getId());
+        this.tag(TinkerTags.Modifiers.RANGED_UPGRADES)
+            .add(Ids.flaming_memory, Ids.icy_memory, Ids.hate_memory);
         this.tag(TinkerTags.Modifiers.GENERAL_UPGRADES)
             .add(Ids.soul_upgrade);
         this.tag(TinkerTags.Modifiers.GENERAL_SLOTLESS)
@@ -43,6 +45,10 @@ public class DreamtinkerModifierTagProvider extends AbstractModifierTagProvider 
             .addOptional(ender_slayer.getId(), weapon_books.getId(), desolation_ring.getId(), eldritch_pan.getId());
         this.tag(TinkerTags.Modifiers.GENERAL_ABILITIES)
             .add(life_looting.getId());
+        this.tag(TinkerTags.Modifiers.BLOCK_WHILE_CHARGING)
+            .add(memory_base.getId());
+        this.tag(TinkerTags.Modifiers.INTERACTION_ABILITIES)
+            .add(memory_base.getId());
     }
 
     @Override

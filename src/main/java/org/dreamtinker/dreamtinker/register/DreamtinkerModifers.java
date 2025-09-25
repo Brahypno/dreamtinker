@@ -114,6 +114,9 @@ public class DreamtinkerModifers {
         public static final ModifierId continuous_explode = id("continuous_explode");
         public static final ModifierId moonlight_ice_info = id("moonlight_ice_info");
         public static final ModifierId soul_core = id("soul_core");
+        public static final ModifierId flaming_memory = id("flaming_memory");
+        public static final ModifierId icy_memory = id("icy_memory");
+        public static final ModifierId hate_memory = id("hate_memory");
 
         private static ModifierId id(String name) {
             return new ModifierId(Dreamtinker.MODID, name);

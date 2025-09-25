@@ -5,6 +5,7 @@ import com.aizistral.enigmaticlegacy.registries.EnigmaticItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
@@ -582,6 +583,29 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(3)
                              .setSlots(SlotType.SOUL, 1)
                              .save(consumer, wrap(DreamtinkerModifers.Ids.soul_core, soulFolder, "_1"));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifers.memory_base)
+                             .setTools(Ingredient.of(DreamtinkerItems.narcissus_wing.get()))
+                             .addInput(DreamtinkerItems.narcissus_wing)
+                             .setMinLevel(1)
+                             .setSlots(SlotType.ABILITY, 1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifers.memory_base, abilitySalvage))
+                             .save(consumer, prefix(DreamtinkerModifers.memory_base, abilityFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifers.Ids.icy_memory)
+                             .setTools(TinkerTags.Items.MELEE_WEAPON)
+                             .addInput(DreamtinkerItems.unborn_egg.get())
+                             .addInput(Items.POWDER_SNOW_BUCKET)
+                             .setMaxLevel(2)
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifers.Ids.icy_memory, upgradeSalvage))
+                             .save(consumer, prefix(DreamtinkerModifers.Ids.icy_memory, upgradeFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifers.Ids.hate_memory)
+                             .setTools(TinkerTags.Items.MELEE_WEAPON)
+                             .addInput(DreamtinkerItems.unborn_egg.get())
+                             .addInput(Ingredient.of(ominousBannerStack()))
+                             .setMaxLevel(3)
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifers.Ids.hate_memory, upgradeSalvage))
+                             .save(consumer, prefix(DreamtinkerModifers.Ids.hate_memory, upgradeFolder));
     }
 
     private void addEntityMeltingRecipes(Consumer<FinishedRecipe> consumer) {
@@ -625,6 +649,31 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                 .setFluid(FluidIngredient.of(new FluidStack(fluid, amount)))
                                 .setCast(cast.getMultiUseTag(), false).save(consumer, location(
                                         "smeltery/casting/" + Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(ingredient.asItem())).getPath() + "/multi"));
+    }
+
+    public static ItemStack ominousBannerStack() {
+        ItemStack stack = new ItemStack(Items.WHITE_BANNER);
+        CompoundTag bet = stack.getOrCreateTagElement("BlockEntityTag");
+        ListTag patterns = new ListTag();
+
+        patterns.add(pattern("mr", 9));   // cyan lozenge
+        patterns.add(pattern("bs", 8));   // light_gray stripe_bottom
+        patterns.add(pattern("cs", 7));   // gray stripe_center
+        patterns.add(pattern("bo", 8));   // light_gray border
+        patterns.add(pattern("ms", 15));  // black stripe_middle
+        patterns.add(pattern("hh", 8));   // light_gray half_horizontal (top)
+        patterns.add(pattern("mc", 8));   // light_gray circle
+        patterns.add(pattern("bo", 15));  // black border
+
+        bet.put("Patterns", patterns);
+        return stack;
+    }
+
+    private static CompoundTag pattern(String code, int color) {
+        CompoundTag t = new CompoundTag();
+        t.putString("Pattern", code);
+        t.putInt("Color", color);
+        return t;
     }
 }
 
