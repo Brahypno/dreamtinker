@@ -15,7 +15,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.decoration.ArmorStand;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -24,7 +23,6 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.dreamtinker.dreamtinker.register.DreamtinkerEntity;
@@ -93,55 +91,145 @@ public class NarcissusFluidProjectile extends Projectile {
     @Override
     public void tick() {
         super.tick();
-        Vec3 from = this.position();
-        Vec3 vel = this.getDeltaMovement();
-        Vec3 to = from.add(vel);
-        EntityHitResult hitResult = ProjectileUtil.getEntityHitResult(
-                this.level(), this, from, to,
-                this.getBoundingBox().expandTowards(vel).inflate(1.0),
-                this::canHitEntity);
-        HitResult.Type hitType = null;
-        if (hitResult != null){
-            hitType = hitResult.getType();
-        }
-        if (hitType != HitResult.Type.MISS && hitResult != null && !ForgeEventFactory.onProjectileImpact(this, hitResult))
-            this.onHit(hitResult);
-        if (!this.isRemoved()){
-            this.updateRotation();
-            level().addParticle(ParticleTypes.SOUL_FIRE_FLAME, getX(), getY(), getZ(), 0, 0, 0);
-            Vec3 newLocation = this.position();
-            Vec3 velocity = this.getDeltaMovement();
-            newLocation = newLocation.add(velocity);
+        if (this.isRemoved())
+            return;
 
-            velocity = velocity.scale(0.99F);
+        // 旋转 & 粒子（粒子只在客户端）
+        this.updateRotation();
+
+
+        // --- 追踪逻辑（不变，写回 vel） ---
+        Vec3 vel = this.getDeltaMovement();
+        if (getChaseLiving() > 1 && !this.onGround()){
+            List<LivingEntity> candidates = this.level().getEntitiesOfClass(
+                    LivingEntity.class,
+                    this.getBoundingBox().inflate(12),
+                    t -> t.isAlive()
+                         && t != this.getOwner()
+                         && !(this.getOwner() != null && t.isAlliedTo(this.getOwner()))
+                         && !(t instanceof ArmorStand)
+            );
+            if (!candidates.isEmpty()){
+                LivingEntity nearest = candidates.stream()
+                                                 .min(Comparator.comparingDouble(e -> e.distanceToSqr(this)))
+                                                 .get();
+                Vec3 aim = nearest.position().add(0, nearest.getBbHeight() * 0.5, 0).subtract(this.position());
+                vel = this.getDeltaMovement().add(aim.normalize()).scale(0.75 * Math.max(1, getChaseLiving() - 1));
+            }
+        }
+
+        // --- 连续实体碰撞：求最早命中时刻 t* ---
+        Vec3 from = this.position();
+        ResultTOI toi = sweepToFirstEntityHit(from, vel);
+        boolean impacted = false;
+
+        if (toi.hit != null && toi.hit.getType() != HitResult.Type.MISS){
+            // 把位置推进到命中点（略微回退 epsilon，避免下一帧重叠)
+            double t = Math.max(0.0, Math.min(1.0, toi.t));
+            Vec3 hitPos = from.add(vel.scale(t));
+            this.setPos(hitPos.x, hitPos.y, hitPos.z);
+
+            if (!net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, toi.hit)){
+                this.onHit(toi.hit); // 只实体命中
+            }
+            impacted = true;
+        }
+
+        if (!this.isRemoved() && !impacted){
+            // 未命中：推进到完整终点
+            Vec3 to = from.add(vel);
+            this.setPos(to.x, to.y, to.z);
+            if (level().isClientSide){
+                level().addParticle(ParticleTypes.SOUL_FIRE_FLAME, getX(), getY(), getZ(), 0, 0, 0);
+            }
+        }
+
+        if (!this.isRemoved()){
+            // 阻尼 & 重力
+            Vec3 v2 = this.getDeltaMovement();
+            if (!impacted)
+                v2 = vel; // onHit 可能修改了速度，命中过则尊重修改
+            v2 = v2.scale(0.99F);
             if (!this.isNoGravity()){
                 FluidStack fluid = this.getFluid();
-                velocity = velocity.add(0.0F, fluid.getFluid().getFluidType().isLighterThanAir() ? 0.06 : -0.06, 0.0F);
+                v2 = v2.add(0.0F, fluid.getFluid().getFluidType().isLighterThanAir() ? 0.06 : -0.06, 0.0F);
             }
-            if (1 < getChaseLiving() && !this.onGround()){
-                List<LivingEntity> potential_targets = this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(12),
-                                                                                       target -> target != this.getOwner() &&
-                                                                                                 target.isAlive() &&
-                                                                                                 !(this.getOwner() != null &&
-                                                                                                   target.isAlliedTo(this.getOwner())) &&
-                                                                                                 !(target instanceof ArmorStand) &&
-                                                                                                 !(target instanceof Player));
-
-                if (!potential_targets.isEmpty()){
-                    LivingEntity nearest = potential_targets.stream().min(Comparator.comparingDouble((e) -> e.distanceToSqr(this))).get();
-                    Vec3 diff = nearest.position().add(0, nearest.getBbHeight() / 2, 0).subtract(this.position());
-                    velocity = velocity.add(diff.normalize()).scale(0.75 * Math.max(1, getChaseLiving() - 1));
-                }
-            }
-
-            this.setDeltaMovement(velocity);
-            this.setPos(newLocation);
+            this.setDeltaMovement(v2);
             --life;
         }
 
-        if (this.getY() > (double) (this.level().getMaxBuildHeight() + 64) || this.getY() < (double) (this.level().getMinBuildHeight() - 64) || this.life <= 0){
+        if (this.getY() > this.level().getMaxBuildHeight() + 64
+            || this.getY() < this.level().getMinBuildHeight() - 64
+            || this.life <= 0){
             this.discard();
         }
+    }
+
+    // --- 辅助结构 ---
+    private static final class ResultTOI {
+        final EntityHitResult hit;  // 可能为 null
+        final double t;             // 命中最早时刻 ∈[0,1]；未命中时无意义
+
+        ResultTOI(EntityHitResult hit, double t) {
+            this.hit = hit;
+            this.t = t;
+        }
+    }
+
+    // 连续扫描 + 二分逼近，只做“实体碰撞”检测
+    private ResultTOI sweepToFirstEntityHit(Vec3 from, Vec3 vel) {
+        // 快速粗采样：4~6次通常够定位
+        final int SAMPLES = 6;
+        final double inflate = 1.0;          // 与你原来保持一致
+        final double EPS = 1e-4;             // 二分收敛阈值
+        final int MAX_BISECT = 12;           // 二分次数上限
+
+        double tLo = 0.0;
+        EntityHitResult hitAt = null;
+
+        // 先做均匀采样找到第一次命中出现的采样点
+        for (int i = 1; i <= SAMPLES; i++) {
+            double t = (double) i / (double) SAMPLES;
+            Vec3 midFrom = from.add(vel.scale(tLo));
+            Vec3 midTo = from.add(vel.scale(t));
+            Vec3 seg = midTo.subtract(midFrom);
+
+            EntityHitResult hr = ProjectileUtil.getEntityHitResult(
+                    this.level(), this, midFrom, midTo,
+                    this.getBoundingBox().expandTowards(seg).inflate(inflate),
+                    this::canHitEntity
+            );
+
+            if (hr != null && hr.getType() != HitResult.Type.MISS){
+                // 命中出现在(tLo, t] 区间，进入二分
+                double lo = tLo, hi = t;
+                EntityHitResult best = hr;
+                for (int k = 0; k < MAX_BISECT && hi - lo > EPS; k++) {
+                    double midT = (lo + hi) * 0.5;
+                    Vec3 a = from.add(vel.scale(lo));
+                    Vec3 b = from.add(vel.scale(midT));
+                    Vec3 d = b.subtract(a);
+
+                    EntityHitResult test = ProjectileUtil.getEntityHitResult(
+                            this.level(), this, a, b,
+                            this.getBoundingBox().expandTowards(d).inflate(inflate),
+                            this::canHitEntity
+                    );
+
+                    if (test != null && test.getType() != HitResult.Type.MISS){
+                        best = test;
+                        hi = midT;     // 命中在前半段，收缩到更早
+                    }else {
+                        lo = midT;     // 未命中，向后探
+                    }
+                }
+                hitAt = best;
+                return new ResultTOI(hitAt, hi);
+            }
+            tLo = t;
+        }
+        // 完全未命中
+        return new ResultTOI(null, 1.0);
     }
 
     @Override
@@ -183,7 +271,6 @@ public class NarcissusFluidProjectile extends Projectile {
                 if (!this.level().isClientSide)
                     if (this.isOnFire()){
                         target.setSecondsOnFire(5 * Math.max(1, this.level().random.nextInt(3)));
-                        System.out.println(target.getRemainingFireTicks());
                     }
 
             }
@@ -201,19 +288,30 @@ public class NarcissusFluidProjectile extends Projectile {
                     if (null != toolStackView)
                         hate = Math.max(1, toolStackView.getModifierLevel(DreamtinkerModifers.Ids.hate_memory));
                     fluid.shrink(consumed / hate);
+                    System.out.println("HATE" + hate);
                     if (fluid.isEmpty()){
                         this.discard();
                     }else {
                         this.setFluid(fluid);
                     }
-
+                    System.out.println(1 + "" + this.level() +
+                                       "Fiery try: wet=" + target.isInWaterRainOrBubble() + ", immune={}, fireTicksBefore=" + target.getRemainingFireTicks() +
+                                       "");
+                    System.out.println(toolStackView);
+                    target.invulnerableTime = 0;
                     ToolAttackUtil.attackEntity(toolStackView, (LivingEntity) this.getOwner(), InteractionHand.MAIN_HAND, target, NO_COOLDOWN, false,
                                                 Util.getSlotType(InteractionHand.MAIN_HAND));
+                    System.out.println(this.level() +
+                                       "Fiery try: wet=" + target.isInWaterRainOrBubble() + ", immune={}, fireTicksBefore=" + target.getRemainingFireTicks() +
+                                       "");
+
+
                 }
             }
 
 
         }
+
 
     }
 
