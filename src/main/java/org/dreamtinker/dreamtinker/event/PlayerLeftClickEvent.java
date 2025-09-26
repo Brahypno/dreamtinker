@@ -1,6 +1,7 @@
 package org.dreamtinker.dreamtinker.event;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -15,10 +16,9 @@ public class PlayerLeftClickEvent {
         Player player = event.getEntity();
         if (player != null && player.level().isClientSide){
             ItemStack stack = player.getItemInHand(player.getUsedItemHand());
-            if (stack.getItem() instanceof IModifiable){
-                EquipmentSlot slot = stack.getEquipmentSlot();
-                LeftClickHook.handleLeftClick(stack, player, slot);
-            }
+            if (stack.getItem() instanceof IModifiable)
+                LeftClickHook.handleLeftClick(stack, player,
+                                              InteractionHand.MAIN_HAND == player.getUsedItemHand() ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
         }
     }
 
@@ -28,10 +28,11 @@ public class PlayerLeftClickEvent {
         if (player != null){
             BlockState state = player.level().getBlockState(pos);
             ItemStack stack = player.getItemInHand(player.getUsedItemHand());
-            if (stack.getItem() instanceof IModifiable){
-                EquipmentSlot slot = stack.getEquipmentSlot();
-                LeftClickHook.handleLeftClickBlock(stack, player, slot, state, pos);
-            }
+            if (stack.getItem() instanceof IModifiable)
+                LeftClickHook.handleLeftClickBlock(stack, player,
+                                                   InteractionHand.MAIN_HAND == player.getUsedItemHand() ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND,
+                                                   state, pos);
+
         }
     }
 
@@ -39,10 +40,11 @@ public class PlayerLeftClickEvent {
         Player player = event.getEntity();
         if (player != null){
             ItemStack stack = player.getItemInHand(player.getUsedItemHand());
-            if (stack.getItem() instanceof IModifiable){
-                EquipmentSlot slot = stack.getEquipmentSlot();
-                LeftClickHook.handleLeftClickEntity(stack, player, slot, event.getTarget());
-            }
+            if (stack.getItem() instanceof IModifiable)
+                LeftClickHook.handleLeftClickEntity(stack, player,
+                                                    InteractionHand.MAIN_HAND == player.getUsedItemHand() ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND,
+                                                    event.getTarget());
+            
         }
     }
 }

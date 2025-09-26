@@ -73,6 +73,10 @@
         },
         {
           "level": 1,
+          "name": "dreamtinker:foundation_will"
+        },
+        {
+          "level": 1,
           "name": "tconstruct:soulbound"
         }
       ]
@@ -122,10 +126,6 @@
       "modifier": 0.3,
       "predicate_type": "mantle:tag",
       "tag": "minecraft:wool"
-    },
-    {
-      "type": "tconstruct:vein_aoe",
-      "max_distance": 1
     }
   ]
 }

@@ -166,6 +166,12 @@
   "modifier.dreamtinker.hate_memory": "爱与恨",
   "modifier.dreamtinker.hate_memory.flavor": "连绵不绝",
   "modifier.dreamtinker.hate_memory.description": "给予记忆弹类似穿透的能力",
+  "modifier.dreamtinker.foundation_will": "启程的意志",
+  "modifier.dreamtinker.foundation_will.flavor": "不会忘记",
+  "modifier.dreamtinker.foundation_will.description": "主手左键点击以经验为代价进行大范围挖掘，可以挖掘远处的方块。升级此强化会获得更大的范围和更多的方块上限。以这种方式挖掘时，有效挖掘等级减1",
+  "modifier.dreamtinker.huge_ego": "自我即一切",
+  "modifier.dreamtinker.huge_ego.flavor": "全部的自我",
+  "modifier.dreamtinker.huge_ego.description": "每级获得一个升级槽",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",

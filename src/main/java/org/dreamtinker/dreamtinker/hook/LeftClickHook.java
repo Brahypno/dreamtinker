@@ -18,50 +18,58 @@ import java.util.Collection;
 
 
 public interface LeftClickHook {
-    default void onLeftClickEmpty(IToolStackView tool, ModifierEntry entry, Player player, Level level , EquipmentSlot equipmentSlot){}
-    default void onLeftClickBlock(IToolStackView tool, ModifierEntry entry, Player player, Level level , EquipmentSlot equipmentSlot, BlockState state, BlockPos pos){}
-    default void onLeftClickEntity(IToolStackView tool, ModifierEntry entry, Player player, Level level , EquipmentSlot equipmentSlot,Entity target){}
-    static void handleLeftClick(ItemStack stack, Player player, EquipmentSlot slot){
+    default void onLeftClickEmpty(IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot) {}
+
+    default void onLeftClickBlock(IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot, BlockState state, BlockPos pos) {}
+
+    default void onLeftClickEntity(IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot, Entity target) {}
+
+    static void handleLeftClick(ItemStack stack, Player player, EquipmentSlot slot) {
         Level level = player.level();
         IToolStackView tool = ToolStack.from(stack);
-        for (ModifierEntry entry:tool.getModifierList()){
-            entry.getHook(DreamtinkerHook.LEFT_CLICK).onLeftClickEmpty(tool,entry,player,level,slot);
+        for (ModifierEntry entry : tool.getModifierList()) {
+            entry.getHook(DreamtinkerHook.LEFT_CLICK).onLeftClickEmpty(tool, entry, player, level, slot);
         }
         if (level.isClientSide){
             Dnetwork.CHANNEL.sendToServer(new LeftClickEmptyPacket());
         }
     }
-    static void handleLeftClickBlock(ItemStack stack, Player player, EquipmentSlot slot, BlockState state, BlockPos pos){
+
+    static void handleLeftClickBlock(ItemStack stack, Player player, EquipmentSlot slot, BlockState state, BlockPos pos) {
         Level level = player.level();
         IToolStackView tool = ToolStack.from(stack);
-        for (ModifierEntry entry:tool.getModifierList()){
-            entry.getHook(DreamtinkerHook.LEFT_CLICK).onLeftClickBlock(tool,entry,player,level,slot,state,pos);
+        for (ModifierEntry entry : tool.getModifierList()) {
+            entry.getHook(DreamtinkerHook.LEFT_CLICK).onLeftClickBlock(tool, entry, player, level, slot, state, pos);
         }
     }
-    static void handleLeftClickEntity(ItemStack stack, Player player, EquipmentSlot slot, Entity target){
+
+    static void handleLeftClickEntity(ItemStack stack, Player player, EquipmentSlot slot, Entity target) {
         Level level = player.level();
         IToolStackView tool = ToolStack.from(stack);
-        for (ModifierEntry entry:tool.getModifierList()){
-            entry.getHook(DreamtinkerHook.LEFT_CLICK).onLeftClickEntity(tool,entry,player,level,slot,target);
+        for (ModifierEntry entry : tool.getModifierList()) {
+            entry.getHook(DreamtinkerHook.LEFT_CLICK).onLeftClickEntity(tool, entry, player, level, slot, target);
         }
     }
+
     record AllMerger(Collection<LeftClickHook> modules) implements LeftClickHook {
         @Override
-        public void onLeftClickEmpty(IToolStackView tool, ModifierEntry entry, Player player, Level level , EquipmentSlot equipmentSlot) {
-            for (LeftClickHook module:this.modules){
-                module.onLeftClickEmpty(tool,entry,player,level,equipmentSlot);
+        public void onLeftClickEmpty(IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot) {
+            for (LeftClickHook module : this.modules) {
+                module.onLeftClickEmpty(tool, entry, player, level, equipmentSlot);
             }
         }
+
         @Override
-        public void onLeftClickBlock(IToolStackView tool, ModifierEntry entry, Player player, Level level , EquipmentSlot equipmentSlot, BlockState state, BlockPos pos) {
-            for (LeftClickHook module:this.modules){
-                module.onLeftClickBlock(tool,entry,player,level,equipmentSlot,state,pos);
+        public void onLeftClickBlock(IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot, BlockState state, BlockPos pos) {
+            for (LeftClickHook module : this.modules) {
+                module.onLeftClickBlock(tool, entry, player, level, equipmentSlot, state, pos);
             }
         }
+
         @Override
-        public void onLeftClickEntity(IToolStackView tool, ModifierEntry entry, Player player, Level level , EquipmentSlot equipmentSlot,Entity target) {
-            for (LeftClickHook module:this.modules){
-                module.onLeftClickEntity(tool,entry,player,level,equipmentSlot,target);
+        public void onLeftClickEntity(IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot, Entity target) {
+            for (LeftClickHook module : this.modules) {
+                module.onLeftClickEntity(tool, entry, player, level, equipmentSlot, target);
             }
         }
     }

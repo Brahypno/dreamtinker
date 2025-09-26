@@ -42,7 +42,11 @@
     "desolation_ring": "#AA00AA",
     "weapon_transformation": "#FF69B4",
     "memory_base": "#808000",
-    "soul_core": "#034150"
+    "soul_core": "#034150",
+    "icy_memory": "#CFE6F9",
+    "hate_memory": "#FFF000",
+    "foundation_will": "#633375",
+    "huge_ego": "#633375"
 },
   "material.dreamtinker": {
     "echo_shard": "#034150",

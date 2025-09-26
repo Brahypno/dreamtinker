@@ -31,6 +31,7 @@ import org.dreamtinker.dreamtinker.modifier.material.valentinite.antimony_usage;
 import org.dreamtinker.dreamtinker.modifier.tools.masu.realsweep;
 import org.dreamtinker.dreamtinker.modifier.tools.masu.silvernamebee;
 import org.dreamtinker.dreamtinker.modifier.tools.masu.strong_heavy;
+import org.dreamtinker.dreamtinker.modifier.tools.narcissus_wing.foundationWill;
 import org.dreamtinker.dreamtinker.modifier.tools.narcissus_wing.memoryBase;
 import org.dreamtinker.dreamtinker.modifier.tools.tntarrow.strong_explode;
 import org.dreamtinker.dreamtinker.modifier.tools.underPlate.weapon_transformation;
@@ -51,6 +52,7 @@ public class DreamtinkerModifers {
     public static final StaticModifier<strong_explode> strong_explode = MODIFIERS.register("strong_explode", strong_explode::new);
     //narcissus wing
     public static final StaticModifier<memoryBase> memory_base = MODIFIERS.register("memory_base", memoryBase::new);
+    public static final StaticModifier<foundationWill> foundation_will = MODIFIERS.register("foundation_will", foundationWill::new);
     //echo shard
     public static final StaticModifier<echoed_attack> echoed_attack = MODIFIERS.register("echoed_attack", echoed_attack::new);
     public static final StaticModifier<echoed_defence> echoed_defence = MODIFIERS.register("echoed_defence", echoed_defence::new);
@@ -117,6 +119,8 @@ public class DreamtinkerModifers {
         public static final ModifierId flaming_memory = id("flaming_memory");
         public static final ModifierId icy_memory = id("icy_memory");
         public static final ModifierId hate_memory = id("hate_memory");
+        public static final ModifierId huge_ego = id("huge_ego");
+        public static final ModifierId full_concentration = id("full_concentration");
 
         private static ModifierId id(String name) {
             return new ModifierId(Dreamtinker.MODID, name);

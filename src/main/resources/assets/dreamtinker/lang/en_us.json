@@ -166,6 +166,12 @@
   "modifier.dreamtinker.hate_memory": "LOVE&HATE",
   "modifier.dreamtinker.hate_memory.flavor": "Continuous, and unstop",
   "modifier.dreamtinker.hate_memory.description": "Give Memory Projectile piercing like ability",
+  "modifier.dreamtinker.foundation_will": "Foundation Will",
+  "modifier.dreamtinker.foundation_will.flavor": "contact, connect and communicate",
+  "modifier.dreamtinker.foundation_will.description": "Left Click on Main hand to leash beam to have large range mining in cost of EXP;Can mine distant blocks; Higher level means higher range. When mining in this way, would decrease one level harvest tier.",
+  "modifier.dreamtinker.huge_ego": "Huge Ego",
+  "modifier.dreamtinker.huge_ego.flavor": "ME AND ALL",
+  "modifier.dreamtinker.huge_ego.description": "Give one upgrade slot per level",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",

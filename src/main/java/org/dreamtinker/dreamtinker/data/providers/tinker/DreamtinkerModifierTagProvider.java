@@ -4,6 +4,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.data.DreamtinkerTagkeys;
+import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.data.tinkering.AbstractModifierTagProvider;
 import slimeknights.tconstruct.tools.TinkerModifiers;
@@ -35,11 +36,15 @@ public class DreamtinkerModifierTagProvider extends AbstractModifierTagProvider 
         this.tag(TinkerTags.Modifiers.MELEE_UPGRADES)
             .add(strong_explode.getId());
         this.tag(TinkerTags.Modifiers.RANGED_UPGRADES)
-            .add(Ids.flaming_memory, Ids.icy_memory, Ids.hate_memory);
+            .add(Ids.icy_memory, Ids.hate_memory);
         this.tag(TinkerTags.Modifiers.GENERAL_UPGRADES)
             .add(Ids.soul_upgrade);
+        this.tag(TinkerTags.Modifiers.HARVEST_UPGRADES)
+            .add(foundation_will.getId());
         this.tag(TinkerTags.Modifiers.GENERAL_SLOTLESS)
             .add(mei.getId());
+        this.tag(TinkerTags.Modifiers.BONUS_SLOTLESS)
+            .add(Ids.huge_ego);
         this.tag(TinkerTags.Modifiers.MELEE_ABILITIES)
             .add(real_sweep.getId(), Ids.continuous_explode)
             .addOptional(ender_slayer.getId(), weapon_books.getId(), desolation_ring.getId(), eldritch_pan.getId());
@@ -52,7 +57,7 @@ public class DreamtinkerModifierTagProvider extends AbstractModifierTagProvider 
     }
 
     @Override
-    public String getName() {
+    public @NotNull String getName() {
         return "Dreamtinker Modifier Tag Provider.";
     }
 }

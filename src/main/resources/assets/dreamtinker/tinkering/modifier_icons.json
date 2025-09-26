@@ -1,5 +1,6 @@
 {
   "dreamtinker:mei":     ["minecraft:block/poppy", "tconstruct:gui/modifiers/tier"],
   "dreamtinker:ender_slayer":     ["enigmaticlegacy:item/ender_slayer"],
-  "dreamtinker:weapon_books":     ["enigmaticlegacy:item/the_infinitum"]
+  "dreamtinker:weapon_books":     ["enigmaticlegacy:item/the_infinitum"],
+  "dreamtinker:soul_core":        ["dreamtinker:item/unborn_sniffer_egg", "tconstruct:gui/modifiers/tier"]
 }

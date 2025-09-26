@@ -165,15 +165,11 @@ public class NarcissusFluidProjectile extends Projectile {
         }
     }
 
-    // --- 辅助结构 ---
-    private static final class ResultTOI {
-        final EntityHitResult hit;  // 可能为 null
-        final double t;             // 命中最早时刻 ∈[0,1]；未命中时无意义
-
-        ResultTOI(EntityHitResult hit, double t) {
-            this.hit = hit;
-            this.t = t;
-        }
+    /**
+     * @param hit 可能为 null
+     * @param t   命中最早时刻 ∈[0,1]；未命中时无意义
+     */ // --- 辅助结构 ---
+    private record ResultTOI(EntityHitResult hit, double t) {
     }
 
     // 连续扫描 + 二分逼近，只做“实体碰撞”检测
@@ -286,24 +282,16 @@ public class NarcissusFluidProjectile extends Projectile {
                     int consumed = recipe.applyToEntity(fluid, this.power, context, IFluidHandler.FluidAction.EXECUTE);
                     int hate = 1;
                     if (null != toolStackView)
-                        hate = Math.max(1, toolStackView.getModifierLevel(DreamtinkerModifers.Ids.hate_memory));
+                        hate = Math.max(1, toolStackView.getModifierLevel(DreamtinkerModifers.Ids.hate_memory) + 1);
                     fluid.shrink(consumed / hate);
-                    System.out.println("HATE" + hate);
                     if (fluid.isEmpty()){
                         this.discard();
                     }else {
                         this.setFluid(fluid);
                     }
-                    System.out.println(1 + "" + this.level() +
-                                       "Fiery try: wet=" + target.isInWaterRainOrBubble() + ", immune={}, fireTicksBefore=" + target.getRemainingFireTicks() +
-                                       "");
-                    System.out.println(toolStackView);
                     target.invulnerableTime = 0;
                     ToolAttackUtil.attackEntity(toolStackView, (LivingEntity) this.getOwner(), InteractionHand.MAIN_HAND, target, NO_COOLDOWN, false,
                                                 Util.getSlotType(InteractionHand.MAIN_HAND));
-                    System.out.println(this.level() +
-                                       "Fiery try: wet=" + target.isInWaterRainOrBubble() + ", immune={}, fireTicksBefore=" + target.getRemainingFireTicks() +
-                                       "");
 
 
                 }

@@ -7,6 +7,12 @@
     },
     {
       "item": "minecraft:white_banner"
+    },
+    {
+      "item": "minecraft:iron_axe"
+    },
+    {
+      "tag": "forge:tools/crossbows"
     }
   ],
   "level": {

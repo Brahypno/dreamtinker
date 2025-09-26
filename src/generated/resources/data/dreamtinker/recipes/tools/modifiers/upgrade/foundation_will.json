@@ -1,0 +1,22 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "dreamtinker:unborn_turtle_egg"
+    },
+    {
+      "item": "dreamtinker:unborn_turtle_egg"
+    },
+    {
+      "tag": "tconstruct:modifiable/harvest/primary"
+    }
+  ],
+  "result": "dreamtinker:foundation_will",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "item": "dreamtinker:narcissus_wing"
+  }
+}

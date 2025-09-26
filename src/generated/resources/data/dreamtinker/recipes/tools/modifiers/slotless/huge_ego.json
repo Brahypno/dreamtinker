@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "dreamtinker:persona_cast"
+    },
+    {
+      "item": "dreamtinker:persona_cast"
+    }
+  ],
+  "level": {
+    "max": 3
+  },
+  "result": "dreamtinker:huge_ego",
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

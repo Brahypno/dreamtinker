@@ -17,7 +17,6 @@ import slimeknights.tconstruct.library.data.tinkering.AbstractToolDefinitionData
 import slimeknights.tconstruct.library.materials.RandomMaterial;
 import slimeknights.tconstruct.library.tools.SlotType;
 import slimeknights.tconstruct.library.tools.definition.module.ToolModule;
-import slimeknights.tconstruct.library.tools.definition.module.aoe.VeiningAOEIterator;
 import slimeknights.tconstruct.library.tools.definition.module.build.*;
 import slimeknights.tconstruct.library.tools.definition.module.material.DefaultMaterialsModule;
 import slimeknights.tconstruct.library.tools.definition.module.material.PartStatsModule;
@@ -148,6 +147,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 // traits
                 .module(ToolTraitsModule.builder()
                                         .trait(DreamtinkerModifers.memory_base, 1)
+                                        .trait(DreamtinkerModifers.foundation_will, 1)
                                         .trait(ModifierIds.soulbound, 1)
                                         .build())
                 // behavior
@@ -155,8 +155,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 .module(IsEffectiveModule.tag(BlockTags.MINEABLE_WITH_PICKAXE))
                 .module(new MiningSpeedModifierModule(1.5f, BlockPredicate.and(BlockPredicate.tag(BlockTags.MINEABLE_WITH_SHOVEL),
                                                                                BlockPredicate.set(Blocks.COBWEB))),
-                        MiningSpeedModifierModule.blocks(0.10f, Blocks.VINE, Blocks.GLOW_LICHEN), MiningSpeedModifierModule.tag(BlockTags.WOOL, 0.3f))
-                .module(new VeiningAOEIterator(1));
+                        MiningSpeedModifierModule.blocks(0.10f, Blocks.VINE, Blocks.GLOW_LICHEN), MiningSpeedModifierModule.tag(BlockTags.WOOL, 0.3f));
     }
 
     @Override
