@@ -44,13 +44,12 @@ public class TNTarrow extends ModifiableItem {
     public static final ResourceLocation TAG_CONTINUOUS = new ResourceLocation(Dreamtinker.MODID, "continuous_explode");
 
     public void appendHoverText(@NotNull ItemStack stack, Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
+        super.appendHoverText(stack, level, tooltip, flag);
         int timeAllows = ModifierUtil.getModifierLevel(stack, DreamtinkerModifers.Ids.continuous_explode) * ContinuousExplodeTimes.get();
         int currentTime = ModifierUtil.getPersistentInt(stack, TAG_CONTINUOUS, 0);
         if (currentTime < timeAllows)
             tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.continuous_explode").append(String.valueOf(timeAllows - currentTime))
                                  .withStyle(ChatFormatting.DARK_RED));
-
-        super.appendHoverText(stack, level, tooltip, flag);
     }
 
     public TNTarrow(Properties properties, ToolDefinition toolDefinition, int maxStackSize) {

@@ -10,7 +10,6 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import org.dreamtinker.dreamtinker.Items.antimony.nigrescence_antimony;
 import org.dreamtinker.dreamtinker.Items.antimony.star_regulus;
 import org.dreamtinker.dreamtinker.Items.antimony.valentinite;
 import org.dreamtinker.dreamtinker.Items.tools.DTtoolsDefinition;
@@ -69,7 +68,14 @@ public class DreamtinkerItems {
     public static final RegistryObject<Item> raw_stibnite = ITEMS.register("raw_stibnite", () -> new Item(new Item.Properties().rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> valentinite = ITEMS.register("valentinite", () -> new valentinite(new Item.Properties().rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> nigrescence_antimony =
-            ITEMS.register("nigrescence_antimony", () -> new nigrescence_antimony(new Item.Properties().rarity(Rarity.UNCOMMON)));
+            ITEMS.register("nigrescence_antimony", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)) {
+
+                public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.nigrescence_antimony.desc1").withStyle(ChatFormatting.DARK_GRAY));
+                    tooltip.add(Component.translatable("tooltip.nigrescence_antimony.desc2").withStyle(ChatFormatting.BLACK));
+                    super.appendHoverText(stack, level, tooltip, flag);
+                }
+            });
     public static final RegistryObject<Item> metallivorous_stibium_lupus =
             ITEMS.register("metallivorous_stibium_lupus", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
     public static final RegistryObject<Item> regulus = ITEMS.register("star_regulus", () -> new star_regulus(new Item.Properties().rarity(Rarity.EPIC)));

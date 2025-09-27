@@ -30,7 +30,6 @@ import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
-import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.utils.Util;
 
 import javax.annotation.Nullable;
@@ -57,7 +56,7 @@ public class echoed_attack extends BattleModifier {
 
     @Override
     public void addTooltip(IToolStackView tool, @NotNull ModifierEntry modifier, @Nullable Player player, List<Component> tooltip, TooltipKey tooltipKey, TooltipFlag tooltipFlag) {
-        if (tool instanceof ToolStack && tooltipKey.isShiftOrUnknown()){
+        if (tooltipKey.isShiftOrUnknown()){
             ModDataNBT nbt = tool.getPersistentData();
             if (nbt.contains(TAG_ECHO_ENERGY, TAG_INT)){
                 int count = nbt.getInt(TAG_ECHO_ENERGY);
