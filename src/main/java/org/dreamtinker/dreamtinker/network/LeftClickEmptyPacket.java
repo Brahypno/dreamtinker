@@ -6,7 +6,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.NetworkEvent;
-import org.dreamtinker.dreamtinker.hook.LeftClickHook;
+import org.dreamtinker.dreamtinker.library.modifiers.hook.LeftClickHook;
 
 import java.util.function.Supplier;
 

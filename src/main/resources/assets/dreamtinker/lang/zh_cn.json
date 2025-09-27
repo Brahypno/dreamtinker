@@ -172,6 +172,9 @@
   "modifier.dreamtinker.huge_ego": "自我即一切",
   "modifier.dreamtinker.huge_ego.flavor": "全部的自我",
   "modifier.dreamtinker.huge_ego.description": "每级获得一个升级槽",
+  "modifier.dreamtinker.splendour_heart": "骄盛之心",
+  "modifier.dreamtinker.splendour_heart.flavor": "总有一处乐园需要人来建成",
+  "modifier.dreamtinker.splendour_heart.description": "随已完成进度的数量，逐步提升工具能力",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",

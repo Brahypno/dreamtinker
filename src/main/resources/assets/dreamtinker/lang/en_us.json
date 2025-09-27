@@ -172,6 +172,9 @@
   "modifier.dreamtinker.huge_ego": "Huge Ego",
   "modifier.dreamtinker.huge_ego.flavor": "ME AND ALL",
   "modifier.dreamtinker.huge_ego.description": "Give one upgrade slot per level",
+  "modifier.dreamtinker.splendour_heart": "Splendour heart",
+  "modifier.dreamtinker.splendour_heart.flavor": "Achieve to high",
+  "modifier.dreamtinker.splendour_heart.description": "Increase tool status base on advancements that have made",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",

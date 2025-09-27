@@ -3,7 +3,7 @@ package org.dreamtinker.dreamtinker.network;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkEvent;
-import org.dreamtinker.dreamtinker.client.Overlay.PerfectOverlay;
+import org.dreamtinker.dreamtinker.library.client.Overlay.PerfectOverlay;
 
 import java.util.function.Supplier;
 

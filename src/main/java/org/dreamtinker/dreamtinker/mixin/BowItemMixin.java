@@ -6,7 +6,7 @@ import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import org.dreamtinker.dreamtinker.Items.tools.TNTarrow.TNTarrow;
+import org.dreamtinker.dreamtinker.tools.items.TNTarrow.TNTarrow;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;

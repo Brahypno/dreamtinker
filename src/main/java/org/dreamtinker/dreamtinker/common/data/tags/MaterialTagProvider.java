@@ -1,0 +1,28 @@
+package org.dreamtinker.dreamtinker.common.data.tags;
+
+import net.minecraft.data.PackOutput;
+import net.minecraftforge.common.data.ExistingFileHelper;
+import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
+import slimeknights.tconstruct.common.TinkerTags;
+import slimeknights.tconstruct.library.data.tinkering.AbstractMaterialTagProvider;
+
+public class MaterialTagProvider extends AbstractMaterialTagProvider {
+    public MaterialTagProvider(PackOutput packOutput, ExistingFileHelper existingFileHelper) {
+        super(packOutput, Dreamtinker.MODID, existingFileHelper);
+    }
+
+    @Override
+    protected void addTags() {
+        this.tag(TinkerTags.Materials.EXCLUDE_FROM_LOOT)
+            .add(DreamtinkerMaterialIds.moonlight_ice, DreamtinkerMaterialIds.nigrescence_antimony, DreamtinkerMaterialIds.metallivorous_stibium_lupus,
+                 DreamtinkerMaterialIds.nigrescence_antimony, DreamtinkerMaterialIds.etherium, DreamtinkerMaterialIds.nefarious);
+        this.tag(TinkerTags.Materials.NETHER).add(DreamtinkerMaterialIds.star_regulus, DreamtinkerMaterialIds.nefarious);
+    }
+
+    @Override
+    public String getName() {
+        return "Dreamtinker Material Tag Provider";
+    }
+}
+

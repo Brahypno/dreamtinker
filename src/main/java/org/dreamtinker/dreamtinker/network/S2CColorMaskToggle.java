@@ -3,7 +3,7 @@ package org.dreamtinker.dreamtinker.network;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkEvent;
-import org.dreamtinker.dreamtinker.client.ClientMask;
+import org.dreamtinker.dreamtinker.library.client.ClientMask;
 
 public record S2CColorMaskToggle(boolean enable, int argb, int fadeIn, int fadeOut) {
     public static S2CColorMaskToggle decode(FriendlyByteBuf buf) {

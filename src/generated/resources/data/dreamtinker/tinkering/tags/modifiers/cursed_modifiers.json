@@ -32,6 +32,7 @@
     "dreamtinker:ranged_shoot",
     "dreamtinker:wither_body",
     "dreamtinker:stone_heart",
+    "dreamtinker:splendour_heart",
     {
       "id": "dreamtinker:cursed_ring_bound",
       "required": false
