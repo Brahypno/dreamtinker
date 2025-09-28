@@ -175,6 +175,12 @@
   "modifier.dreamtinker.splendour_heart": "骄盛之心",
   "modifier.dreamtinker.splendour_heart.flavor": "总有一处乐园需要人来建成",
   "modifier.dreamtinker.splendour_heart.description": "随已完成进度的数量，逐步提升工具能力",
+  "modifier.dreamtinker.tooltip.splendour_heart": "进度已履行: ",
+  "modifier.dreamtinker.tooltip.splendour_heart_entry": "要改变什么，人只能依靠自己",
+  "modifier.dreamtinker.tooltip.splendour_heart_easy": "我将越过荆棘",
+  "modifier.dreamtinker.tooltip.splendour_heart_normal": "我将踏过迷茫",
+  "modifier.dreamtinker.tooltip.splendour_heart_high": "即使在接近时我将融毁",
+  "modifier.dreamtinker.tooltip.splendour_heart_excellent": "当万物各就其位，荣光便从秩序中升起",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",

@@ -20,7 +20,7 @@ public class DreamtinkerConfig {
             builder.comment("how many status you want to boost?").defineInRange("UnderPlateBoostMultiply", 0.005, 0, 100);
     public static final ForgeConfigSpec.ConfigValue<List<? extends Number>> TheSplendourHeart =
             builder.comment("The level range for The splendour heart. Must be exactly 5 between 0% and 100% otherwise omit!")
-                   .defineList("splendour_heart", List.of(0.25d, 0.40d, 0.608d, .894d, 1.0d),
+                   .defineList("splendour_heart", List.of(0.25d, 0.40d, 0.65d, .80d, 1.0d),
                                o -> o instanceof Number d && 0 < d.doubleValue() && d.doubleValue() <= 1);
 
     static {

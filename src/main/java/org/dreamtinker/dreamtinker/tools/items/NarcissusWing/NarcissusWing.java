@@ -48,8 +48,8 @@ public class NarcissusWing extends ModifiableItem {
 
     public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag flag) {
         super.appendHoverText(stack, level, tooltip, flag);
-        CompoundTag tag = stack.getTag();
-        if (tag != null && tag.hasUUID(TAG_OWNER) && SafeClientAccess.getTooltipKey().isShiftOrUnknown()){
+        CompoundTag tag = stack.getOrCreateTag();
+        if (tag.hasUUID(TAG_OWNER) && SafeClientAccess.getTooltipKey().isShiftOrUnknown()){
             String name = tag.getString(TAG_OWNER_NAME);
             tooltip.add(Component.translatable("tooltip.narcissus_wing.desc1").append(name.isEmpty() ? tag.getUUID(TAG_OWNER).toString() : name)
                                  .withStyle(ChatFormatting.AQUA));
@@ -58,10 +58,13 @@ public class NarcissusWing extends ModifiableItem {
 
     public static boolean isOwnerOrBypass(ItemStack stack, Player player) {
         CompoundTag tag = stack.getOrCreateTag();
-        if (!tag.hasUUID(TAG_OWNER) && !player.level().isClientSide){
-            tag.putUUID(TAG_OWNER, player.getUUID());
-            tag.putString(TAG_OWNER_NAME, player.getGameProfile().getName());
-            return true; // 未绑定：允许首次绑定/使用（也可改为 false 并强制先右键绑定）
+        if (!tag.hasUUID(TAG_OWNER)){
+            if (!player.level().isClientSide){
+                tag.putUUID(TAG_OWNER, player.getUUID());
+                tag.putString(TAG_OWNER_NAME, player.getGameProfile().getName());
+                // 未绑定：允许首次绑定/使用（也可改为 false 并强制先右键绑定）
+            }
+            return true;
         }
         UUID owner = tag.getUUID(TAG_OWNER);
         // 允许创造模式/OP 绕过（按需）

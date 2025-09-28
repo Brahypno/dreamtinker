@@ -15,23 +15,21 @@ import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.behavior.ToolDamageModifierHook;
-import slimeknights.tconstruct.library.modifiers.hook.build.ModifierRemovalHook;
-import slimeknights.tconstruct.library.modifiers.hook.build.ModifierTraitHook;
-import slimeknights.tconstruct.library.modifiers.hook.build.ToolStatsModifierHook;
-import slimeknights.tconstruct.library.modifiers.hook.build.ValidateModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.build.*;
 import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
+import slimeknights.tconstruct.library.tools.nbt.ToolDataNBT;
 import slimeknights.tconstruct.library.tools.stat.ModifierStatsBuilder;
 
 import java.util.List;
 import java.util.function.BiConsumer;
 
-public interface BasicInterface extends ToolDamageModifierHook, ModifierRemovalHook, TooltipModifierHook, ToolStatsModifierHook, AttributesModifierHook, ValidateModifierHook, ModifierTraitHook {
+public interface BasicInterface extends ToolDamageModifierHook, ModifierRemovalHook, TooltipModifierHook, ToolStatsModifierHook, AttributesModifierHook, ValidateModifierHook, ModifierTraitHook, VolatileDataModifierHook {
     default void BasicInterfaceInit(ModuleHookMap.Builder hookBuilder) {
         hookBuilder.addHook(this, ModifierHooks.REMOVE, ModifierHooks.TOOLTIP, ModifierHooks.TOOL_DAMAGE, ModifierHooks.TOOL_STATS, ModifierHooks.ATTRIBUTES,
-                            ModifierHooks.VALIDATE, ModifierHooks.MODIFIER_TRAITS);
+                            ModifierHooks.VALIDATE, ModifierHooks.MODIFIER_TRAITS, ModifierHooks.VOLATILE_DATA);
     }
 
     default int onDamageTool(IToolStackView tool, ModifierEntry modifier, int amount, @javax.annotation.Nullable LivingEntity holder) {
@@ -61,4 +59,6 @@ public interface BasicInterface extends ToolDamageModifierHook, ModifierRemovalH
     }
 
     default void addTraits(IToolContext var1, ModifierEntry var2, TraitBuilder var3, boolean var4) {}
+
+    default void addVolatileData(IToolContext context, ModifierEntry modifier, ToolDataNBT volatileData) {}
 }
