@@ -36,7 +36,9 @@ import slimeknights.tconstruct.library.utils.Util;
 
 import java.util.List;
 
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.*;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.TNT_ARROW_GRAVITY;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.TNT_ARROW_RADIUS;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.ContinuousExplodeTimes;
 import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.NO_COOLDOWN;
 
 public class TNTarrow extends ModifiableItem {
@@ -150,7 +152,7 @@ public class TNTarrow extends ModifiableItem {
                 float sound = 2.0F;
                 Vec3 hitPos = result.getLocation();
                 // 查找半径内的实体
-                int hitRadius = TNTarrowRadius.get();
+                int hitRadius = TNT_ARROW_RADIUS.get();
                 List<Entity> nearbyEntities =
                         this.level().getEntities(null, new AABB(hitPos.subtract(hitRadius, hitRadius, hitRadius), hitPos.add(hitRadius, hitRadius, hitRadius)));
 
@@ -186,7 +188,7 @@ public class TNTarrow extends ModifiableItem {
         public void tick() {
             super.tick();
             if (!this.isNoGravity()){
-                this.setDeltaMovement(this.getDeltaMovement().add(0.0, TNTarrowgravity.get(), 0.0));
+                this.setDeltaMovement(this.getDeltaMovement().add(0.0, TNT_ARROW_GRAVITY.get(), 0.0));
             }
         }
     }

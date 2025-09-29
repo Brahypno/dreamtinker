@@ -12,8 +12,8 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 
 import java.util.Objects;
 
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.StarRegulusAdvancement;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.AsOneA;
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.StarRegulusAdvancement;
 
 public class star_regulus_boost {
     // 要检测的进度 ID
@@ -22,7 +22,7 @@ public class star_regulus_boost {
     private static final int amp = AsOneA.get();
 
     public static void onServerTick(ServerTickEvent event) {
-        if (1 != StarRegulusAdvancement.get())
+        if (!StarRegulusAdvancement.get())
             return;
         if (event.phase != ServerTickEvent.Phase.END)
             return;

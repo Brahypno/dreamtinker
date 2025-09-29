@@ -39,8 +39,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import static net.minecraft.nbt.Tag.TAG_INT;
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.EchoAttackCharge;
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.EchoAttackChargingChance;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.EchoAttackCharge;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.EchoAttackChargingChance;
 import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.getAttributeAttackDamage;
 
 public class echoed_attack extends BattleModifier {

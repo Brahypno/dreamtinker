@@ -8,7 +8,7 @@ import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.*;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.*;
 
 public class glacialriver extends BattleModifier {
     public glacialriver() {}
@@ -20,9 +20,9 @@ public class glacialriver extends BattleModifier {
         Level level = context.getLivingTarget().level();
         float damageboost = 0;
         for (LivingEntity aoeTarget : level.getEntitiesOfClass(LivingEntity.class,
-                                                               context.getAttacker().getBoundingBox().inflate(glaciriverRange.get(), 0.25D, 5))) {
-            float lifehurt = (float) (aoeTarget.getMaxHealth() * glaciriverPortion.get());
-            float life = 0 == glaciriverKillPlayer.get() && aoeTarget instanceof Player && aoeTarget.getHealth() - lifehurt < 1 ? 1 :
+                                                               context.getAttacker().getBoundingBox().inflate(glacialRiverRange.get(), 0.25D, 5))) {
+            float lifehurt = (float) (aoeTarget.getMaxHealth() * glacialRiverPortion.get());
+            float life = !glacialRiverKillPlayer.get() && aoeTarget instanceof Player && aoeTarget.getHealth() - lifehurt < 1 ? 1 :
                          (aoeTarget.getHealth()) - lifehurt;
             aoeTarget.setHealth(life);
             damageboost += lifehurt;

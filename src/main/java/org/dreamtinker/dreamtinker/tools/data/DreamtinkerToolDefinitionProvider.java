@@ -148,6 +148,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 .module(ToolTraitsModule.builder()
                                         .trait(DreamtinkerModifiers.memory_base, 1)
                                         .trait(DreamtinkerModifiers.foundation_will, 1)
+                                        .trait(DreamtinkerModifiers.splendour_heart, 1)
                                         .trait(ModifierIds.soulbound, 1)
                                         .build())
                 // behavior

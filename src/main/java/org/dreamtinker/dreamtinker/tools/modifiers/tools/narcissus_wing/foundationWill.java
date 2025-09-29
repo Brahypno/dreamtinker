@@ -22,6 +22,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.*;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.ForgeMod;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.TierSortingRegistry;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.library.modifiers.DreamtinkerHook;
@@ -95,7 +96,8 @@ public class foundationWill extends Modifier implements LeftClickHook, ProcessLo
         }
     }
 
-    static List<String> avoid = List.of("machine", "furnace", "smoker", "comparator", "repeater", "observer", "dropper", "dispenser");
+    final static List<String> avoid_path = List.of("machine", "furnace", "smoker", "comparator", "repeater", "observer", "dropper", "dispenser");
+    final static List<String> avoid_namespace = List.of("ae2", "mekanism");
 
     private static boolean canHarvest(Player player, BlockState state) {
         ItemStack itemStack = player.getMainHandItem();
@@ -106,11 +108,14 @@ public class foundationWill extends Modifier implements LeftClickHook, ProcessLo
         ToolStack tool = ToolStack.from(itemStack);
         if (tool.isBroken())
             return false;
-        //1)filter the block
-        Item block = state.getBlock().asItem();
-        ResourceLocation rs = ForgeRegistries.ITEMS.getKey(block);
-        if (null == rs || avoid.stream().anyMatch(e -> rs.getPath().contains(e)))
-            return false;
+        //1)filter the block--we don`t care ores right
+        if (state.is(Tags.Blocks.ORES)){
+            Item block = state.getBlock().asItem();
+            ResourceLocation rs = ForgeRegistries.ITEMS.getKey(block);
+            if (null == rs || avoid_path.stream().anyMatch(e -> rs.getPath().contains(e)) ||
+                avoid_namespace.stream().anyMatch(e -> rs.getNamespace().contains(e)))
+                return false;
+        }
 
         int extra_tiers = tool.getModifierLevel(DreamtinkerModifiers.Ids.full_concentration);
 

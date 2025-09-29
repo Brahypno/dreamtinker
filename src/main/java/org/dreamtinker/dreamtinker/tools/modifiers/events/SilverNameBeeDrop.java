@@ -35,7 +35,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.SilvernamebeeNum;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.SilverNameBeeNum;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class SilverNameBeeDrop {
@@ -132,7 +132,7 @@ public class SilverNameBeeDrop {
                 Map.Entry<Item, Integer> smallestEntry = totals.entrySet().stream().min(Map.Entry.comparingByValue()).orElse(null);
 
                 if (smallestEntry != null){
-                    ItemStack smallest = new ItemStack(smallestEntry.getKey(), SilvernamebeeNum.get());
+                    ItemStack smallest = new ItemStack(smallestEntry.getKey(), SilverNameBeeNum.get());
                     //System.out.println("[DEBUG] 最小掉落: " + smallest.getCount() + " × " + smallest.getItem().getDescriptionId());
                     entity.spawnAtLocation(smallest);
                 }

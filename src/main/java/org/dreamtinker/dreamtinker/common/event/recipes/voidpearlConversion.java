@@ -17,7 +17,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.voidpearlDropRate;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.voidPearlDropRate;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class voidpearlConversion {
@@ -80,7 +80,7 @@ public class voidpearlConversion {
                 int minY = level.getMinBuildHeight();
                 if (item.getY() < (minY + 1)){
                     // 1% 概率
-                    if (level.getRandom().nextFloat() < voidpearlDropRate.get()){
+                    if (level.getRandom().nextFloat() < voidPearlDropRate.get()){
                         item.setItem(new ItemStack(DreamtinkerCommon.void_pearl.get()));
                         // 返航时悬浮，不受重力；短暂不可拾取避免被路过玩家截胡
                         item.setNoGravity(true);

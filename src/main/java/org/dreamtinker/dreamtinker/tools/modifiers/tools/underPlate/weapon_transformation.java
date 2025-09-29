@@ -22,8 +22,8 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.UnderPlateBoostMultiply;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.AsOneA;
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.UnderPlateBoostMutiply;
 
 public class weapon_transformation extends BattleModifier {
     private final String tool_attribute_uuid = "facdf7e8-4b20-4e2d-9aba-5c1b408e7c9d";
@@ -32,7 +32,7 @@ public class weapon_transformation extends BattleModifier {
     public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
         float armor = tool.getStats().get(ToolStats.ARMOR);
         float toughness = tool.getStats().get(ToolStats.ARMOR_TOUGHNESS);
-        float muti = armor * toughness * UnderPlateBoostMutiply.get().floatValue();
+        float muti = armor * toughness * UnderPlateBoostMultiply.get().floatValue();
         if (modifier.getLevel() > 0){
             switch (slot) {
                 case CHEST -> {

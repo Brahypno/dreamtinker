@@ -26,7 +26,7 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import slimeknights.tconstruct.shared.TinkerCommons;
 
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.SoulCastLoveLootChance;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.SoulCastLoveLootChance;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class soulCastConversion {

@@ -8,15 +8,20 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.Builder builder =
             new ForgeConfigSpec.Builder().comment("Configuration to almost all data in this mod. Take your own risk modify it!!!").push("Tool Configuration");
 
-    public static final ForgeConfigSpec.IntValue TNTarrowgravity =
+    public static final ForgeConfigSpec.IntValue tnt_arrow_gravity =
             builder.comment("vertical accelerator or tnt arrow").defineInRange("TNTArrowGravity", -5, Integer.MIN_VALUE, 0);
-    public static final ForgeConfigSpec.IntValue TNTarrowRadius = builder.comment("tnt arrow effect range").defineInRange("TNTarrowRadius", 5, 0, 100);
+    public static final ForgeConfigSpec.IntValue tnt_arrow_radius = builder.comment("tnt arrow effect range")
+                                                                           .defineInRange("TNTArrowRadius", 5, 0, 100);
     public static final ForgeConfigSpec.IntValue StrongExplodeDamageBoost =
             builder.comment("Strong Explode Damage Boost").defineInRange("StrongExplodeDamageBoost", 1, 1, 1000);
     public static final ForgeConfigSpec.IntValue ContinuousExplodeTimes =
             builder.comment("how many times use per level for tnt Arrow").defineInRange("ContinuousExplodeTimes", 2, 0, 100);
-    public static final ForgeConfigSpec.DoubleValue UnderPlateBoostMutiply =
-            builder.comment("how many status you want to boost?").defineInRange("UnderPlateBoostMutiply", 0.005, 0, 100);
+    public static final ForgeConfigSpec.DoubleValue UnderPlateBoostMultiply =
+            builder.comment("how many status you want to boost?").defineInRange("UnderPlateBoostMultiply", 0.005, 0, 100);
+    public static final ForgeConfigSpec.ConfigValue<List<? extends Number>> TheSplendourHeart =
+            builder.comment("The level range for The splendour heart. Must be exactly 5 between 0% and 100% otherwise omit!")
+                   .defineList("splendour_heart", List.of(0.25d, 0.40d, 0.608d, .894d, 1.0d),
+                               o -> o instanceof Number d && 0 < d.doubleValue() && d.doubleValue() <= 1);
 
     static {
         builder.pop();
@@ -31,16 +36,16 @@ public class DreamtinkerConfig {
         builder.push("Advancement Configuration");
     }
 
-    public static final ForgeConfigSpec.IntValue StarRegulusAdvancement =
-            builder.comment("1=Enable star regulus advancement effect").defineInRange("StarRegulusAdvancement", 1, 0, 1);
+    public static final ForgeConfigSpec.BooleanValue StarRegulusAdvancement =
+            builder.comment("1=Enable star regulus advancement effect").define("StarRegulusAdvancement", true);
 
     static {
         builder.pop();
         builder.push("Effect Configuration");
     }
 
-    public static final ForgeConfigSpec.IntValue SilvernamebeeNum =
-            builder.comment("This is not very powerful, btw.").defineInRange("SilvernamebeeItemNum", 1, 0, 1000);
+    public static final ForgeConfigSpec.IntValue SilverNameBeeNum =
+            builder.comment("This is not very powerful, btw.").defineInRange("SilverNameBeeItemNum", 1, 0, 1000);
 
     static {
         builder.pop();
@@ -49,12 +54,12 @@ public class DreamtinkerConfig {
 
     public static final ForgeConfigSpec.DoubleValue AntimonyLootChance =
             builder.comment("Base chance to get Antimony drop from Ore").defineInRange("AntimonyLootChance", 0.2, 0, 10);
-    public static final ForgeConfigSpec.DoubleValue voidpearlDropRate =
-            builder.comment("how many times trying to dodge?").defineInRange("voidpearlDropRate", 0.1, 0, 1);
-    public static final ForgeConfigSpec.DoubleValue voidpearlDamage =
-            builder.comment("how many damage this voidPearDeal?").defineInRange("voidpearlDamage", 2.0, 0.1, 1000);
-    public static final ForgeConfigSpec.DoubleValue WhitepeachLootChance =
-            builder.comment("Base chance to get White Peach drop from birch").defineInRange("WhitepeachLootChance", 0.2, 0, 10);
+    public static final ForgeConfigSpec.DoubleValue voidPearlDropRate =
+            builder.comment("how many times trying to dodge?").defineInRange("voidPearlDropRate", 0.1, 0, 1);
+    public static final ForgeConfigSpec.DoubleValue voidPearlDamage =
+            builder.comment("how many damage this voidPearDeal?").defineInRange("voidPearlDamage", 2.0, 0.1, 1000);
+    public static final ForgeConfigSpec.DoubleValue WhitePeachLootChance =
+            builder.comment("Base chance to get White Peach drop from birch").defineInRange("WhitePeachLootChance", 0.2, 0, 10);
     public static final ForgeConfigSpec.DoubleValue SoulCastLoveLootChance =
             builder.comment("Base chance to get Soul Cast from love`s path").defineInRange("SoulCastLoveLootChance", 0.1, 0, 1);
 
@@ -70,12 +75,12 @@ public class DreamtinkerConfig {
 
     static {builder.comment("Moonlight Ice: ");}
 
-    public static final ForgeConfigSpec.DoubleValue glaciriverPortion =
-            builder.comment("Portion of life that glarical river steal").defineInRange("GlaciralRiverPortion", 0.1, 0, 1000);
-    public static final ForgeConfigSpec.IntValue glaciriverRange =
-            builder.comment("Range that glarical river effect").defineInRange("GlaciralRiverRange", 5, 1, 1000);
-    public static final ForgeConfigSpec.IntValue glaciriverKillPlayer =
-            builder.comment("Does Glarical river kill player? 0=no").defineInRange("GlaciralRiverKillPlayer", 0, 0, 1);
+    public static final ForgeConfigSpec.DoubleValue glacialRiverPortion =
+            builder.comment("Portion of life that glacial river steal").defineInRange("GlacialRiverPortion", 0.1, 0, 1000);
+    public static final ForgeConfigSpec.IntValue glacialRiverRange =
+            builder.comment("Range that glacial river effect").defineInRange("GlacialRiverRange", 5, 1, 1000);
+    public static final ForgeConfigSpec.BooleanValue glacialRiverKillPlayer =
+            builder.comment("Does Glacial river kill player? 0=no").define("GlacialRiverKillPlayer", false);
 
     static {builder.comment("\nEcho Shard: ");}
 
@@ -129,9 +134,9 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.IntValue TheWolfWonderSurpriseNumber =
             builder.comment("This is a suprise!").defineInRange("TheWolfWonderSurpriseNumber", 7, 0, 6666);
     public static final ForgeConfigSpec.ConfigValue<List<? extends String>> TheWolfBlackList =
-            builder.comment("Blacklist for the worlf").defineList("blacklist",
-                                                                  List.of("minecraft:bad_omen", "minecraft:hero_of_the_village"), // 默认例子（可换）
-                                                                  o -> o instanceof String s && isValidIdFormat(s));
+            builder.comment("Blacklist for the wolf").defineList("wolf_blacklist",
+                                                                 List.of("minecraft:bad_omen", "minecraft:hero_of_the_village"), // 默认例子（可换）
+                                                                 o -> o instanceof String s && isValidIdFormat(s));
     ;
 
     public static final ForgeConfigSpec.IntValue TheWolfWasEnable = builder.comment("Enable the Wolf Was modifier").defineInRange("TheWolfWasEnable", 1, 0, 1);

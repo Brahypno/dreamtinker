@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.voidpearlDamage;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.voidPearlDamage;
 
 public class void_pearl extends EnderpearlItem {
     public void_pearl(Properties p_41188_) {
@@ -70,7 +70,7 @@ public class void_pearl extends EnderpearlItem {
             if (p_37502_.getEntity() instanceof LivingEntity le)
                 for (int i = 0; i < 64; ++i)
                     if (DThelper.teleport(le)){
-                        le.hurt(le.level().damageSources().fellOutOfWorld(), voidpearlDamage.get().floatValue());
+                        le.hurt(le.level().damageSources().fellOutOfWorld(), voidPearlDamage.get().floatValue());
                         return;
                     }
 
@@ -90,7 +90,7 @@ public class void_pearl extends EnderpearlItem {
                                  0.0F, this.random.nextGaussian());
             }
             if (null != this.getOwner() && this.getOwner() instanceof LivingEntity le)
-                le.hurt(le.level().damageSources().fellOutOfWorld(), voidpearlDamage.get().floatValue());
+                le.hurt(le.level().damageSources().fellOutOfWorld(), voidPearlDamage.get().floatValue());
             super.onHit(p_37504_);
         }
     }

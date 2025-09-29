@@ -16,8 +16,8 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 import java.util.List;
 
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.EchoDefenceRange;
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.EchoDefenceSpeed;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.EchoDefenceRange;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.EchoDefenceSpeed;
 
 public class echoed_defence extends ArmorModifier {
     public static final String BOUNCE_TAG = "redirect_bounce_count";

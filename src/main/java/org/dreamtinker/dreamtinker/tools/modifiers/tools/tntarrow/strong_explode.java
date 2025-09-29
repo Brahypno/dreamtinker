@@ -6,7 +6,7 @@ import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.StrongExplodeDamageBoost;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.StrongExplodeDamageBoost;
 
 public class strong_explode extends BattleModifier {
     @Override

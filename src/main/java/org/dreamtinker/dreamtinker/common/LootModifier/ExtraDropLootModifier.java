@@ -24,15 +24,15 @@ import org.slf4j.Logger;
 import java.util.List;
 import java.util.Map;
 
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.AntimonyLootChance;
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.WhitepeachLootChance;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.AntimonyLootChance;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.WhitePeachLootChance;
 
 public class ExtraDropLootModifier extends LootModifier {
     private final Item result;
     private final List<TagKey<Block>> target_tags;
     private final Map<Item, Double> rates = Map.of(
             DreamtinkerCommon.raw_stibnite.get(), AntimonyLootChance.get(),
-            DreamtinkerCommon.white_peach.get(), WhitepeachLootChance.get()
+            DreamtinkerCommon.white_peach.get(), WhitePeachLootChance.get()
     );
 
     private static final Logger LOGGER = LogUtils.getLogger();

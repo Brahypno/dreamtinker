@@ -17,7 +17,7 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 import java.util.UUID;
 
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.StarRegulusMaxHP;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.StarRegulusMaxHP;
 
 public class star_regulus extends Item {
     private static final UUID HEALTH_BOOST_ID = UUID.fromString("e7a5d3c2-91f8-4b67-a1e3-cf0a9b8d6e5f");
