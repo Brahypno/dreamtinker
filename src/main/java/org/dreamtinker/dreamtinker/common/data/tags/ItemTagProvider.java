@@ -69,7 +69,7 @@ public class ItemTagProvider extends ItemTagsProvider {
         //items
         this.tag(Tags.Items.INGOTS)
             .add(DreamtinkerCommon.metallivorous_stibium_lupus.get(), DreamtinkerCommon.regulus.get(), DreamtinkerCommon.soul_etherium.get());
-        this.tag(Tags.Items.GEMS).add(DreamtinkerCommon.valentinite.get(), DreamtinkerCommon.nigrescence_antimony.get());
+        this.tag(Tags.Items.GEMS).add(DreamtinkerCommon.valentinite.get(), DreamtinkerCommon.nigrescence_antimony.get(), DreamtinkerCommon.echo_alloy.get());
         this.tag(DreamtinkerTagkeys.Items.raw_stibnite).add(DreamtinkerCommon.raw_stibnite.get());
         this.tag(ItemTags.FOX_FOOD).add(DreamtinkerCommon.white_peach.get());
         this.tag(ItemTags.ARROWS).add(DreamtinkerTools.tntarrow.get());

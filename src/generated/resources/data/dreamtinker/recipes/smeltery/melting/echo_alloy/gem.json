@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "item": "dreamtinker:echo_alloy"
+  },
+  "result": {
+    "amount": 100,
+    "fluid": "dreamtinker:molten_echo_alloy"
+  },
+  "temperature": 1500,
+  "time": 160
+}

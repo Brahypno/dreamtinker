@@ -16,6 +16,7 @@ public class DreamtinkerFluidTextureProvider extends AbstractFluidTextureProvide
     @Override
     public void addTextures() {
         this.commonFluid(DreamtinkerFluids.molten_echo_shard.getType());
+        this.commonFluid(DreamtinkerFluids.molten_echo_alloy.getType());
         this.commonFluid(DreamtinkerFluids.molten_nigrescence_antimony.getType());
         this.commonFluid(DreamtinkerFluids.molten_albedo_stibium.getType());
         this.commonFluid(DreamtinkerFluids.molten_lupi_antimony.getType());
@@ -24,6 +25,7 @@ public class DreamtinkerFluidTextureProvider extends AbstractFluidTextureProvide
         this.commonFluid(DreamtinkerFluids.molten_crying_obsidian.getType());
         this.commonFluid(DreamtinkerFluids.molten_void.getType());
         this.commonFluid(DreamtinkerFluids.liquid_trist.getType());
+
 
         this.commonFluid(DreamtinkerFluids.unstable_liquid_aether.getType());
         this.commonFluid(DreamtinkerFluids.liquid_pure_soul.getType());

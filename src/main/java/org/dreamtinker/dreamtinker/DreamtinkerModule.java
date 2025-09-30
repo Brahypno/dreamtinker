@@ -11,7 +11,7 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import org.dreamtinker.dreamtinker.common.LootModifier.ExtraDropLootModifier;
+import org.dreamtinker.dreamtinker.library.LootModifier.ExtraDropLootModifier;
 import slimeknights.mantle.registration.deferred.EntityTypeDeferredRegister;
 import slimeknights.mantle.registration.deferred.FluidDeferredRegister;
 import slimeknights.mantle.registration.deferred.SynchronizedDeferredRegister;

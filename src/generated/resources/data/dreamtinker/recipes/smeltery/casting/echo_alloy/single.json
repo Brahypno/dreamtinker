@@ -4,10 +4,10 @@
     "tag": "tconstruct:casts/single_use/gem"
   },
   "cast_consumed": true,
-  "cooling_time": 56,
+  "cooling_time": 85,
   "fluid": {
     "amount": 100,
-    "fluid": "dreamtinker:molten_echo_shard"
+    "fluid": "dreamtinker:molten_echo_alloy"
   },
-  "result": "minecraft:echo_shard"
+  "result": "dreamtinker:echo_alloy"
 }

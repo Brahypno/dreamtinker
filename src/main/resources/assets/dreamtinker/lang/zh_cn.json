@@ -176,7 +176,7 @@
   "modifier.dreamtinker.splendour_heart.flavor": "总有一处乐园需要人来建成",
   "modifier.dreamtinker.splendour_heart.description": "随已完成进度的数量，逐步提升工具能力",
   "modifier.dreamtinker.tooltip.splendour_heart": "进度已履行: ",
-  "modifier.dreamtinker.tooltip.splendour_heart_entry": "要改变什么，人只能依靠自己",
+  "modifier.dreamtinker.tooltip.splendour_heart_entry": "要想改变什么，人只能依靠自己",
   "modifier.dreamtinker.tooltip.splendour_heart_easy": "我将越过荆棘",
   "modifier.dreamtinker.tooltip.splendour_heart_normal": "我将踏过迷茫",
   "modifier.dreamtinker.tooltip.splendour_heart_high": "即使在接近时我将融毁",
@@ -202,6 +202,7 @@
   "item.dreamtinker.narcissus_wing.description": "记忆，愿望，灵魂，人格，理性……这柄仪式剑因你而在。\n 在故事结束之前，这幻梦只对你有意义。",
   "tooltip.narcissus_wing.desc1": "主角： ",
 
+  "item.dreamtinker.echo_alloy": "回响合金",
   "item.dreamtinker.raw_stibnite": "粗辉锑",
   "item.dreamtinker.valentinite": "锑华",
   "item.dreamtinker.nigrescence_antimony": "黑化锑",
@@ -256,8 +257,8 @@
   "tooltip.dreamtinker.narcissus_2": "何物开遍幽谷",
   "block.dreamtinker.potted_narcissus": "有水仙的花盆",
 
-  "material.dreamtinker.echo_shard": "回响碎片",
-  "material.dreamtinker.echo_shard.flavor": "是神秘的回响，还是秘密的回响",
+  "material.dreamtinker.echo_alloy": "回响合金",
+  "material.dreamtinker.echo_alloy.flavor": "是神秘的回响，还是秘密的回响",
   "material.dreamtinker.moonlight_ice": "月光冰",
   "material.dreamtinker.moonlight_ice.flavor": "这部件以月光的圆满与缺失塑形，因此无法轻易得到",
   "material.dreamtinker.valentinite": "锑华",
@@ -277,7 +278,9 @@
   "material.dreamtinker.soul_etherium": "魂缚以太",
   "material.dreamtinker.soul_etherium.flavor": "虚空灵魂回响以太",
 
-
+  "fluid_type.dreamtinker.molten_echo_alloy": "熔融回响合金",
+  "fluid.dreamtinker.molten_echo_alloy": "熔融回响合金",
+  "fluid.dreamtinker.molten_echo_alloy.fluid_effect": "熔融回响有高的基础伤害，并使敌人死于无形",
   "fluid_type.dreamtinker.molten_echo_shard": "熔融回响",
   "fluid.dreamtinker.molten_echo_shard": "熔融回响",
   "fluid.dreamtinker.molten_echo_shard.fluid_effect": "熔融回响有高的基础伤害，并使敌人死于无形",

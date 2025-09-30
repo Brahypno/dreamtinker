@@ -2,8 +2,8 @@
   "type": "tconstruct:material_fluid",
   "fluid": {
     "amount": 100,
-    "tag": "dreamtinker:molten_echo_shard"
+    "tag": "dreamtinker:molten_echo_alloy"
   },
-  "output": "dreamtinker:echo_shard",
+  "output": "dreamtinker:echo_alloy",
   "temperature": 1500
 }

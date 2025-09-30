@@ -150,7 +150,7 @@
   "modifier.dreamtinker.continuous_explode.flavor": "Better creeper",
   "modifier.dreamtinker.continuous_explode.description": "Give TNTarrow the ability of explode many times",
   "modifier.dreamtinker.tooltip.continuous_explode": "Time remains: ",
-  "modifier.dreamtinker.memory_base": "Men like Base",
+  "modifier.dreamtinker.memory_base": "Memory, Gate of the Kingdom",
   "modifier.dreamtinker.memory_base.flavor": "Blood is Soul, Men is Malkuth",
   "modifier.dreamtinker.memory_base.description": "Gain ability to launch Memory Projectile which can use HP to refill. When hit entity, Memory Projectile would apply an extra hit with shooter`s tool and apply fluid effect on shooter; Memory Projectile would ignore Block hit",
   "modifier.dreamtinker.soul_core": "Soul Core",
@@ -202,6 +202,7 @@
   "item.dreamtinker.narcissus_wing.description": "Memory, Wish, Soul, Persona, Reason......This ritual blade that exists because of you.\n This dream only meaning for you, befor story ends",
   "tooltip.narcissus_wing.desc1": "hero: ",
 
+  "item.dreamtinker.echo_alloy": "Echo Alloy",
   "item.dreamtinker.raw_stibnite": "Raw Stibnite",
   "item.dreamtinker.valentinite": "Valentinite",
   "item.dreamtinker.nigrescence_antimony": "Nigrescence of Antimony",
@@ -256,8 +257,8 @@
   "tooltip.dreamtinker.narcissus_2": "What lies spread all over the valley? ",
   "block.dreamtinker.potted_narcissus": "pot with Narcissus",
 
-  "material.dreamtinker.echo_shard": "Echo Shard",
-  "material.dreamtinker.echo_shard.flavor": "Its echo of mystery, or echo of enigma",
+  "material.dreamtinker.echo_alloy": "Echo Alloy",
+  "material.dreamtinker.echo_alloy.flavor": "Its echo of mystery, or echo of enigma",
   "material.dreamtinker.moonlight_ice": "Moonlight Ice",
   "material.dreamtinker.moonlight_ice.flavor": "This piece of ice takes its form from the moonlight—its plenitude and its absences.",
   "material.dreamtinker.valentinite": "Valentinite",
@@ -277,6 +278,9 @@
   "material.dreamtinker.soul_etherium": "Soul Etherium",
   "material.dreamtinker.soul_etherium.flavor": "Void Soul echoed Aether",
 
+  "fluid_type.dreamtinker.molten_echo_alloy": "Molten echo Alloy",
+  "fluid.dreamtinker.molten_echo_alloy": "Molten echo Alloy",
+  "fluid.dreamtinker.molten_echo_alloy.fluid_effect": "Molten echo have high base damage, and make entities darkness",
   "fluid_type.dreamtinker.molten_echo_shard": "Molten echo",
   "fluid.dreamtinker.molten_echo_shard": "Molten echo",
   "fluid.dreamtinker.molten_echo_shard.fluid_effect": "Molten echo have high base damage, and make entities darkness",

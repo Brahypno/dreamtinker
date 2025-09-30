@@ -7,7 +7,7 @@ import static org.dreamtinker.dreamtinker.Dreamtinker.MODID;
 
 public class DreamtinkerMaterialIds {
 
-    public static final MaterialId echo_shard = new MaterialId(new ResourceLocation(MODID, "echo_shard"));
+    public static final MaterialId echo_alloy = new MaterialId(new ResourceLocation(MODID, "echo_alloy"));
     public static final MaterialId moonlight_ice = new MaterialId(new ResourceLocation(MODID, "moonlight_ice"));
     public static final MaterialId valentinite = new MaterialId(new ResourceLocation(MODID, "valentinite"));
     public static final MaterialId nigrescence_antimony = new MaterialId(new ResourceLocation(MODID, "nigrescence_antimony"));

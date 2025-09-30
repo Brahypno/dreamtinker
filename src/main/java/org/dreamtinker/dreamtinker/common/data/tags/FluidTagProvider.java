@@ -24,6 +24,7 @@ public class FluidTagProvider extends FluidTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider Provider) {
         addFullTag(DreamtinkerFluids.molten_echo_shard, DreamtinkerTagkeys.Fluids.molten_echo_shard);
+        addFullTag(DreamtinkerFluids.molten_echo_alloy, DreamtinkerTagkeys.Fluids.molten_echo_alloy);
         addFullTag(DreamtinkerFluids.molten_nigrescence_antimony, DreamtinkerTagkeys.Fluids.molten_nigrescence_antimony);
         addFullTag(DreamtinkerFluids.molten_albedo_stibium, DreamtinkerTagkeys.Fluids.molten_albedo_stibium);
         addFullTag(DreamtinkerFluids.molten_lupi_antimony, DreamtinkerTagkeys.Fluids.molten_lupi_antimony);

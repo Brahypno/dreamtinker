@@ -1,9 +1,9 @@
 {
   "type": "tconstruct:material",
   "ingredient": {
-    "item": "minecraft:echo_shard"
+    "item": "dreamtinker:echo_alloy"
   },
-  "material": "dreamtinker:echo_shard",
+  "material": "dreamtinker:echo_alloy",
   "needed": 1,
   "value": 1
 }

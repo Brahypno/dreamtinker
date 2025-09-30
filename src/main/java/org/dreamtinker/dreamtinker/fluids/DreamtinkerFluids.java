@@ -43,7 +43,21 @@ public class DreamtinkerFluids {
     }
 
     public static final FlowingFluidObject<ForgeFlowingFluid> molten_echo_shard =
-            registerFluid(FLUIDS, "molten_echo_shard", 1800, 2000, 10000, 0,
+            registerFluid(FLUIDS, "molten_echo_shard", 900, 200, 1000, 0,
+                          supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_BLACK, 0), 0, 8) {
+                              @Override
+                              public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+                                  super.entityInside(state, level, pos, entity);
+                                  if (entity instanceof LivingEntity living){
+                                      living.addEffect(
+                                              new MobEffectInstance(MobEffects.DARKNESS, 100));
+                                      living.addEffect(new MobEffectInstance(
+                                              DreamtinkerEffects.RealDarkness.get(), 100));
+                                  }
+                              }
+                          });
+    public static final FlowingFluidObject<ForgeFlowingFluid> molten_echo_alloy =
+            registerFluid(FLUIDS, "molten_echo_alloy", 1800, 2000, 10000, 0,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_BLACK, 0), 0, 8) {
                               @Override
                               public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {

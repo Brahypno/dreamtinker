@@ -23,7 +23,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
     }
 
     private void addMeleeHarvest() {
-        addMaterialStats(DreamtinkerMaterialIds.echo_shard,
+        addMaterialStats(DreamtinkerMaterialIds.echo_alloy,
                          new HeadMaterialStats(400, 3.5f, Tiers.DIAMOND, 4.3f),
                          HandleMaterialStats.multipliers().durability(0.5f).miningSpeed(0.5f).attackDamage(1.5f).attackSpeed(0.5f).build(),
                          StatlessMaterialStats.BINDING);
@@ -60,7 +60,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
     }
 
     private void addRanged() {
-        addMaterialStats(DreamtinkerMaterialIds.echo_shard,
+        addMaterialStats(DreamtinkerMaterialIds.echo_alloy,
                          new LimbMaterialStats(400, -1f, 3.0f, 3.0f),
                          new GripMaterialStats(-0.5f, 3.0f, 4.0f));
         addMaterialStats(DreamtinkerMaterialIds.valentinite,
@@ -90,7 +90,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
     }
 
     private void addArmor() {
-        addArmorShieldStats(DreamtinkerMaterialIds.echo_shard,
+        addArmorShieldStats(DreamtinkerMaterialIds.echo_alloy,
                             PlatingMaterialStats.builder().durabilityFactor(65).armor(3, 4, 6.66f, 2).toughness(2).knockbackResistance(2.5f),
                             StatlessMaterialStats.MAILLE);
         addMaterialStats(DreamtinkerMaterialIds.valentinite,

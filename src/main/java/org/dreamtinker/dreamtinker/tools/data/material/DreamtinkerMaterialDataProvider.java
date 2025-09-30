@@ -18,7 +18,7 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
 
     @Override
     protected void addMaterials() {
-        addMaterial(DreamtinkerMaterialIds.echo_shard, 4, 35, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.echo_alloy, 4, 35, false, false, null);
         addMaterial(DreamtinkerMaterialIds.moonlight_ice, 3, 35, false, false, null);
         addMaterial(DreamtinkerMaterialIds.valentinite, 2, 16, true, false, null);
         addMaterial(DreamtinkerMaterialIds.nigrescence_antimony, 3, 23, false, false, null);

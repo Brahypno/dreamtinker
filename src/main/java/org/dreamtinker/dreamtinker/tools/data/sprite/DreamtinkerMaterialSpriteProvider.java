@@ -15,7 +15,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
 
     @Override
     protected void addAllMaterials() {
-        this.buildMaterial(DreamtinkerMaterialIds.echo_shard).ranged().meleeHarvest().armor().fallbacks("crystal", "metal")
+        this.buildMaterial(DreamtinkerMaterialIds.echo_alloy).ranged().meleeHarvest().armor().fallbacks("crystal", "metal")
             .transformer(GreyToSpriteTransformer.builder()
                                                 .addTexture(0, Dreamtinker.getLocation("material/echo_shard/gradient_echo_shard_0"))
                                                 .addTexture(63, Dreamtinker.getLocation("material/echo_shard/gradient_echo_shard_1"))

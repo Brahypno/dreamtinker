@@ -76,6 +76,7 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
         generateItemModel(DreamtinkerCommon.unborn_sniffer_egg, "");
         generateItemModel(DreamtinkerCommon.unborn_dragon_egg, "");
         generateItemModel(DreamtinkerCommon.unborn_spawn_egg, "");
+        generateItemModel(DreamtinkerCommon.echo_alloy, "materials");
         //generateBlockItemModel(object);
         generateBucketItemModel(DreamtinkerFluids.molten_echo_shard);
         generateBucketItemModel(DreamtinkerFluids.molten_albedo_stibium);

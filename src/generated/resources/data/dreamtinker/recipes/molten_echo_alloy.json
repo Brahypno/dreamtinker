@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:alloy",
+  "inputs": [
+    {
+      "amount": 100,
+      "tag": "dreamtinker:molten_echo_shard"
+    },
+    {
+      "amount": 500,
+      "tag": "forge:ender"
+    }
+  ],
+  "result": {
+    "amount": 100,
+    "fluid": "dreamtinker:molten_echo_alloy"
+  },
+  "temperature": 1500
+}

@@ -31,6 +31,7 @@ public class DreamtinkerTagkeys {
         }
 
         public static final TagKey<Fluid> molten_echo_shard = dtTag("molten_echo_shard");
+        public static final TagKey<Fluid> molten_echo_alloy = dtTag("molten_echo_alloy");
         public static final TagKey<Fluid> molten_nigrescence_antimony = dtTag("molten_nigrescence_antimony");
         public static final TagKey<Fluid> molten_albedo_stibium = dtTag("molten_albedo_stibium");
         public static final TagKey<Fluid> molten_lupi_antimony = dtTag("molten_lupi_antimony");

@@ -21,9 +21,9 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
 
     @Override
     protected void addMaterialTraits() {
-        addTraits(DreamtinkerMaterialIds.echo_shard, ARMOR, ModifierIds.soulbound, DreamtinkerModifiers.echoed_defence.getId());
-        addTraits(DreamtinkerMaterialIds.echo_shard, MELEE_HARVEST, ModifierIds.soulbound, DreamtinkerModifiers.echoed_attack.getId());
-        addTraits(DreamtinkerMaterialIds.echo_shard, RANGED, ModifierIds.soulbound, DreamtinkerModifiers.echoed_attack.getId());
+        addTraits(DreamtinkerMaterialIds.echo_alloy, ARMOR, ModifierIds.soulbound, DreamtinkerModifiers.echoed_defence.getId());
+        addTraits(DreamtinkerMaterialIds.echo_alloy, MELEE_HARVEST, ModifierIds.soulbound, DreamtinkerModifiers.echoed_attack.getId());
+        addTraits(DreamtinkerMaterialIds.echo_alloy, RANGED, ModifierIds.soulbound, DreamtinkerModifiers.echoed_attack.getId());
 
         addTraits(DreamtinkerMaterialIds.moonlight_ice, MELEE_HARVEST, DreamtinkerModifiers.Ids.moonlight_ice_info, DreamtinkerModifiers.glacial_river.getId());
 

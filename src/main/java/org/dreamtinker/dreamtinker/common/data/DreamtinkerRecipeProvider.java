@@ -138,6 +138,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                           .addInput(DreamtinkerTagkeys.Fluids.molten_void, FluidValues.SLIMEBALL * 2)
                           .addInput(TinkerFluids.moltenEnder.getTag(), FluidValues.SLIMEBALL * 2)
                           .save(consumer, location("reversed_shadow"));
+        AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_echo_alloy, FluidValues.GEM)
+                          .addInput(DreamtinkerTagkeys.Fluids.molten_echo_shard, FluidValues.GEM)
+                          .addInput(TinkerFluids.moltenEnder.getTag(), FluidValues.SLIMEBALL * 2)
+                          .save(consumer, location("molten_echo_alloy"));
     }
 
     private void addCastingRecipes(Consumer<FinishedRecipe> consumer) {
@@ -225,6 +229,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         MeltingRecipeBuilder.melting(Ingredient.of(Items.ECHO_SHARD), DreamtinkerFluids.molten_echo_shard, FluidValues.GEM, 2.0f)
                             .save(consumer, location(folder + "echo_shard/gem"));
         cast(DreamtinkerFluids.molten_echo_shard.get(), Items.ECHO_SHARD, FluidValues.GEM, consumer);
+
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.echo_alloy.get()), DreamtinkerFluids.molten_echo_alloy, FluidValues.GEM, 2.0f)
+                            .save(consumer, location(folder + "echo_alloy/gem"));
+        cast(DreamtinkerFluids.molten_echo_alloy.get(), DreamtinkerCommon.echo_alloy.get(), FluidValues.GEM, consumer);
 
         MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.metallivorous_stibium_lupus.get()),
                                      DreamtinkerFluids.molten_lupi_antimony, FluidValues.INGOT, 2.0f)
@@ -326,8 +334,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         materialMeltingCasting(consumer, DreamtinkerMaterialIds.crying_obsidian, DreamtinkerFluids.molten_crying_obsidian, FluidValues.GLASS_BLOCK, folder);
         materialRecipe(consumer, DreamtinkerMaterialIds.crying_obsidian, Ingredient.of(Items.CRYING_OBSIDIAN), 1, 1, folder + "crying_obsidian");
 
-        materialMeltingCasting(consumer, DreamtinkerMaterialIds.echo_shard, DreamtinkerFluids.molten_echo_shard, FluidValues.GEM, folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.echo_shard, Ingredient.of(Items.ECHO_SHARD), 1, 1, folder + "echo_shard");
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.echo_alloy, DreamtinkerFluids.molten_echo_alloy, FluidValues.GEM, folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.echo_alloy, Ingredient.of(DreamtinkerCommon.echo_alloy.get()), 1, 1, folder + "echo_alloy");
 
         materialMeltingCasting(consumer, DreamtinkerMaterialIds.metallivorous_stibium_lupus, DreamtinkerFluids.molten_lupi_antimony, FluidValues.INGOT, folder);
         materialRecipe(consumer, DreamtinkerMaterialIds.metallivorous_stibium_lupus, Ingredient.of(DreamtinkerCommon.metallivorous_stibium_lupus.get()), 1, 1,

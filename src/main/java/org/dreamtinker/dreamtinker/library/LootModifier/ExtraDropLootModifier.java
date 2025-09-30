@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.common.LootModifier;
+package org.dreamtinker.dreamtinker.library.LootModifier;
 
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;

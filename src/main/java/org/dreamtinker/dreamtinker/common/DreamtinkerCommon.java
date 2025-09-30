@@ -14,6 +14,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.RegistryObject;
+import org.dreamtinker.dreamtinker.DreamtinkerModule;
 import org.dreamtinker.dreamtinker.common.Items.star_regulus;
 import org.dreamtinker.dreamtinker.common.Items.valentinite;
 import org.dreamtinker.dreamtinker.common.Items.void_pearl;
@@ -25,9 +26,8 @@ import java.util.List;
 import java.util.function.Function;
 
 import static org.dreamtinker.dreamtinker.Dreamtinker.MODID;
-import static org.dreamtinker.dreamtinker.DreamtinkerModule.*;
 
-public class DreamtinkerCommon {
+public class DreamtinkerCommon extends DreamtinkerModule {
     public static final RegistryObject<CreativeModeTab> ORE =
             TABS.register("ore", () -> CreativeModeTab.builder().title(Component.translatable("itemGroup." + MODID + ".ore")).icon(() -> new ItemStack(
                     DreamtinkerCommon.metallivorous_stibium_lupus.get())).displayItems(DreamtinkerCommon::addTabs).build());
@@ -128,8 +128,10 @@ public class DreamtinkerCommon {
                 }
             }
     );
+    public static final RegistryObject<Item> echo_alloy = ITEMS.register("echo_alloy", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
 
     public static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
+        output.accept(echo_alloy.get());
         output.accept(raw_stibnite.get());
         output.accept(valentinite.get());
         output.accept(nigrescence_antimony.get());
