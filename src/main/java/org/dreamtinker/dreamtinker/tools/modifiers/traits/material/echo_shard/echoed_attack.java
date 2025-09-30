@@ -35,7 +35,6 @@ import slimeknights.tconstruct.library.utils.Util;
 import javax.annotation.Nullable;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 import static net.minecraft.nbt.Tag.TAG_INT;
@@ -131,13 +130,15 @@ public class echoed_attack extends BattleModifier {
         for (ModifierEntry entry : modifiers) {
             damage = entry.getHook(ModifierHooks.MELEE_DAMAGE).getMeleeDamage(tool, entry, context, baseDamage, damage);
         }
-        Objects.requireNonNull(context.getLivingTarget()).setInvulnerable(false);
-        DamageSource dam;
-        if (context.getAttacker() instanceof Player player)
-            dam = context.getLivingTarget().level().damageSources().playerAttack(player);
-        else
-            dam = context.getLivingTarget().level().damageSources().mobAttack(context.getAttacker());
-        context.getLivingTarget().hurt(dam, damage);
+        if (null != context.getLivingTarget()){
+            context.getLivingTarget().setInvulnerable(false);
+            DamageSource dam;
+            if (context.getAttacker() instanceof Player player)
+                dam = context.getLivingTarget().level().damageSources().playerAttack(player);
+            else
+                dam = context.getLivingTarget().level().damageSources().mobAttack(context.getAttacker());
+            context.getLivingTarget().hurt(dam, damage);
+        }
     }
 
     public static void performSonicBoomSweep(IToolStackView tool, ServerLevel level, LivingEntity attacker) {

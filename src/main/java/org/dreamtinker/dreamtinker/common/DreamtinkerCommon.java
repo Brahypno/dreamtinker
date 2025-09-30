@@ -172,7 +172,6 @@ public class DreamtinkerCommon extends DreamtinkerModule {
     public static void addTabBlocks(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         output.accept(crying_obsidian_plane.get());
         output.accept(narcissus.get());
-        output.accept(potted_narcissus);
     }
 
     protected static BlockBehaviour.Properties builder(SoundType soundType) {

@@ -48,6 +48,7 @@ public class the_wolf_answer extends BattleModifier {
                 dam = context.getAttacker().level()
                              .damageSources()
                              .mobAttack(context.getAttacker());
+            target.setHealth(0);
             target.die(dam);
         }
     }
