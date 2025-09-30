@@ -79,7 +79,7 @@ public class splendourHeart extends BattleModifier {
 
             if (1 <= level){
                 Tier tier = builder.getStat(ToolStats.HARVEST_TIER);
-                int idx = Math.min(TierSortingRegistry.getSortedTiers().indexOf(tier) + 1, TierSortingRegistry.getSortedTiers().size() - 1);
+                int idx = Math.min(TierSortingRegistry.getSortedTiers().indexOf(tier) + level, TierSortingRegistry.getSortedTiers().size() - 1);
                 Tier expected = TierSortingRegistry.getSortedTiers().get(idx);
                 ToolStats.HARVEST_TIER.update(builder, expected);
             }

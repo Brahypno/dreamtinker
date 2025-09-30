@@ -97,7 +97,7 @@ public class foundationWill extends Modifier implements LeftClickHook, ProcessLo
     }
 
     final static List<String> avoid_path = List.of("machine", "furnace", "smoker", "comparator", "repeater", "observer", "dropper", "dispenser");
-    final static List<String> avoid_namespace = List.of("ae2", "mekanism");
+    final static List<String> avoid_namespace = List.of("ae2", "mekanism", "thermal");
 
     private static boolean canHarvest(Player player, BlockState state) {
         ItemStack itemStack = player.getMainHandItem();
@@ -109,7 +109,7 @@ public class foundationWill extends Modifier implements LeftClickHook, ProcessLo
         if (tool.isBroken())
             return false;
         //1)filter the block--we don`t care ores right
-        if (state.is(Tags.Blocks.ORES)){
+        if (state.is(Tags.Blocks.ORES) || state.is(Tags.Blocks.STORAGE_BLOCKS)){
             Item block = state.getBlock().asItem();
             ResourceLocation rs = ForgeRegistries.ITEMS.getKey(block);
             if (null == rs || avoid_path.stream().anyMatch(e -> rs.getPath().contains(e)) ||
