@@ -92,10 +92,11 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 // stats
                 .module(new SetStatsModule(StatsNBT.builder()
                                                    .set(ToolStats.ATTACK_DAMAGE, 3f)
-                                                   .set(ToolStats.ATTACK_SPEED, 0f).build()))
+                                                   .set(ToolStats.ATTACK_SPEED, -9999f).build()))
                 .module(new MultiplyStatsModule(MultiplierNBT.builder()
                                                              .set(ToolStats.ATTACK_DAMAGE, 1.5f)
                                                              .set(ToolStats.MINING_SPEED, 0f)
+                                                             .set(ToolStats.ATTACK_SPEED, 0f)
                                                              .set(ToolStats.DURABILITY, 1.1f).build()))
                 .module(new ToolSlotsModule(ImmutableMap.of(SlotType.UPGRADE, 4, SlotType.ABILITY, 2)))
                 // traits
@@ -104,7 +105,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
 
         // plate armor
         RandomMaterial tier2Material = RandomMaterial.random().tier(1, 2).build();
-        DefaultMaterialsModule underplateMaterials = DefaultMaterialsModule.builder().material(tier2Material, tier2Material, tier2Material).build();
+        DefaultMaterialsModule underPlateMaterials = DefaultMaterialsModule.builder().material(tier2Material, tier2Material, tier2Material).build();
         ToolModule plateSlots =
                 ToolSlotsModule.builder()
                                .slots(SlotType.SOUL, 4)
@@ -116,13 +117,13 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                                                  .part(TinkerToolParts.plating, 1)
                                                  .part(TinkerToolParts.maille, 1)
                                                  .part(TinkerToolParts.maille, 1))
-                .module(underplateMaterials)
+                .module(underPlateMaterials)
                 .module(new SetStatsModule(StatsNBT.builder()
-                                                   .set(ToolStats.ARMOR_TOUGHNESS, 1f).build()))
+                                                   .set(ToolStats.ARMOR_TOUGHNESS, 2f).build()))
                 .module(ArmorItem.Type.HELMET, ToolTraitsModule.builder().trait(ModifierIds.thorns, 1).build())
                 .module(new MultiplyStatsModule(MultiplierNBT.builder()
                                                              .set(ToolStats.DURABILITY, 0.8f)
-                                                             .set(ToolStats.ARMOR, 0.7f).build()))
+                                                             .set(ToolStats.ARMOR, 0.5f).build()))
                 .module(ToolTraitsModule.builder()
                                         .trait(DreamtinkerModifiers.weapon_transformation, 1).build())
                 .module(plateSlots);
