@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.mixin.enigmaticlegacymixin;
+package org.dreamtinker.dreamtinker.mixin.enigmatic_legacy_mixin;
 
 import com.aizistral.enigmaticlegacy.handlers.EnigmaticEventHandler;
 import net.minecraft.world.entity.LivingEntity;

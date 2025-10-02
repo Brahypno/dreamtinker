@@ -34,7 +34,8 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
         this.tag(DreamtinkerTagkeys.Modifiers.EL_CURSED_RELIEF)
             .addOptional(weapon_books.getId(), eldritch_pan.getId(), exiles_faulty.getId());
         this.tag(TinkerTags.Modifiers.MELEE_UPGRADES)
-            .add(strong_explode.getId());
+            .add(strong_explode.getId())
+            .addOptional(Ids.malum_haunted, Ids.malum_animated);
         this.tag(TinkerTags.Modifiers.RANGED_UPGRADES)
             .add(Ids.icy_memory, Ids.hate_memory);
         this.tag(TinkerTags.Modifiers.GENERAL_UPGRADES)
@@ -53,7 +54,8 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
         this.tag(TinkerTags.Modifiers.BLOCK_WHILE_CHARGING)
             .add(memory_base.getId());
         this.tag(TinkerTags.Modifiers.INTERACTION_ABILITIES)
-            .add(memory_base.getId());
+            .add(memory_base.getId())
+            .addOptional(Ids.malum_ascension, Ids.malum_rebound);
     }
 
     @Override

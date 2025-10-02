@@ -1,5 +1,6 @@
 package org.dreamtinker.dreamtinker.common.data.tags;
 
+import com.sammy.malum.registry.common.item.ItemTagRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -21,6 +22,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.registration.object.EnumObject;
 import slimeknights.tconstruct.common.TinkerTags;
+import slimeknights.tconstruct.tools.TinkerTools;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -42,6 +44,8 @@ public class ItemTagProvider extends ItemTagsProvider {
                      BONUS_SLOTS,
                      ItemTags.SWORDS, AOE, RANGED, ItemTags.PICKAXES);
         addItemsTags(DreamtinkerTools.tntarrow, MULTIPART_TOOL, DURABILITY, MELEE_WEAPON, SMALL_TOOLS, BONUS_SLOTS);
+
+        this.tag(ItemTagRegistry.SCYTHE).add(TinkerTools.scythe.asItem(), TinkerTools.kama.asItem(), DreamtinkerTools.narcissus_wing.asItem());
         //parts
         this.tag(TinkerTags.Items.CASTS)
             .add(DreamtinkerCommon.memory_cast.get(), DreamtinkerCommon.wish_cast.get(), DreamtinkerCommon.soul_cast.get(),
@@ -67,10 +71,13 @@ public class ItemTagProvider extends ItemTagsProvider {
         tag(FANTASTIC_ARMOR);
         tag(BOOK_ARMOR).addTags(BASIC_ARMOR, PUNY_ARMOR, MIGHTY_ARMOR, FANTASTIC_ARMOR, GADGETRY_ARMOR);
         //items
+
+
         this.tag(Tags.Items.INGOTS)
             .add(DreamtinkerCommon.metallivorous_stibium_lupus.get(), DreamtinkerCommon.regulus.get(), DreamtinkerCommon.soul_etherium.get());
         this.tag(Tags.Items.GEMS).add(DreamtinkerCommon.valentinite.get(), DreamtinkerCommon.nigrescence_antimony.get(), DreamtinkerCommon.echo_alloy.get());
         this.tag(DreamtinkerTagkeys.Items.raw_stibnite).add(DreamtinkerCommon.raw_stibnite.get());
+        this.tag(Tags.Items.RAW_MATERIALS).add(DreamtinkerCommon.raw_stibnite.get());
         this.tag(ItemTags.FOX_FOOD).add(DreamtinkerCommon.white_peach.get());
         this.tag(ItemTags.ARROWS).add(DreamtinkerTools.tntarrow.get());
         addItemsTags(DreamtinkerCommon.narcissus.asItem(), ItemTags.SMALL_FLOWERS, ItemTags.FLOWERS);

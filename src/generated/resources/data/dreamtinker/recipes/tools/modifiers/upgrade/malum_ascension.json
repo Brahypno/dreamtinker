@@ -1,0 +1,26 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "conditions": [
+    {
+      "type": "forge:item_exists",
+      "item": "malum:crude_scythe"
+    }
+  ],
+  "inputs": [
+    {
+      "item": "malum:crude_scythe"
+    }
+  ],
+  "level": {
+    "max": 3,
+    "min": 2
+  },
+  "result": "dreamtinker:malum_ascension",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

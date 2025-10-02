@@ -1,6 +1,8 @@
 package org.dreamtinker.dreamtinker.common;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.effect.MobEffects;
@@ -12,12 +14,17 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.data.event.GatherDataEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.DreamtinkerModule;
 import org.dreamtinker.dreamtinker.common.Items.star_regulus;
 import org.dreamtinker.dreamtinker.common.Items.valentinite;
 import org.dreamtinker.dreamtinker.common.Items.void_pearl;
+import org.dreamtinker.dreamtinker.common.data.model.DreamTinkerBlockStateProvider;
+import org.dreamtinker.dreamtinker.common.data.model.DreamtinkerItemModelProvider;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.registration.object.ItemObject;
 import slimeknights.tconstruct.shared.block.BetterPaneBlock;
@@ -185,5 +192,16 @@ public class DreamtinkerCommon extends DreamtinkerModule {
     public static void addTabs(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         addTabItems(itemDisplayParameters, output);
         addTabBlocks(itemDisplayParameters, output);
+    }
+
+    @SubscribeEvent
+    void gatherData(final GatherDataEvent event) {
+        DataGenerator generator = event.getGenerator();
+        PackOutput output = generator.getPackOutput();
+        ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+        boolean client = event.includeClient();
+
+        generator.addProvider(client, new DreamtinkerItemModelProvider(output, existingFileHelper));
+        generator.addProvider(client, new DreamTinkerBlockStateProvider(output, existingFileHelper));
     }
 }

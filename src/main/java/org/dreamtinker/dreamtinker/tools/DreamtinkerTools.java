@@ -28,6 +28,7 @@ import org.dreamtinker.dreamtinker.tools.items.TNTarrow.TNTarrow;
 import org.dreamtinker.dreamtinker.tools.items.UnderArmor.UnderArmorItem;
 import slimeknights.mantle.registration.object.EnumObject;
 import slimeknights.mantle.registration.object.ItemObject;
+import slimeknights.tconstruct.library.client.data.material.GeneratorPartTextureJsonGenerator;
 import slimeknights.tconstruct.library.client.data.material.MaterialPartTextureGenerator;
 import slimeknights.tconstruct.library.tools.helper.ToolBuildHandler;
 import slimeknights.tconstruct.library.tools.item.IModifiable;
@@ -81,6 +82,7 @@ public class DreamtinkerTools extends DreamtinkerModule {
         generator.addProvider(event.includeServer(), new DreamtinkerToolDefinitionProvider(output));
         generator.addProvider(event.includeServer(), new DreamtinkerStationLayout(output));
         generator.addProvider(event.includeClient(), new MaterialTagProvider(output, existingFileHelper));
+        generator.addProvider(event.includeClient(), new GeneratorPartTextureJsonGenerator(output, Dreamtinker.MODID, new DreamtinkerPartSpriteProvider()));
     }
 
     /**

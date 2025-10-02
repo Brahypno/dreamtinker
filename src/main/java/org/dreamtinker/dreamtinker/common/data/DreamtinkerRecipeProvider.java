@@ -2,6 +2,8 @@ package org.dreamtinker.dreamtinker.common.data;
 
 import com.aizistral.enigmaticlegacy.registries.EnigmaticBlocks;
 import com.aizistral.enigmaticlegacy.registries.EnigmaticItems;
+import com.sammy.malum.registry.common.item.ItemRegistry;
+import com.sammy.malum.registry.common.item.ItemTagRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.nbt.CompoundTag;
@@ -628,6 +630,74 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(DreamtinkerCommon.persona_cast.get())
                              .setMaxLevel(3)
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.huge_ego, slotlessFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_rebound)
+                             .setTools(ItemTagRegistry.SCYTHE)
+                             .setTools(TinkerTags.Items.MODIFIABLE)
+                             .addInput(ItemRegistry.CRUDE_SCYTHE.get())
+                             .addInput(ItemRegistry.EARTHEN_SPIRIT.get())
+                             .setMaxLevel(1)
+                             .setSlots(SlotType.ABILITY, 1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.malum_rebound, abilitySalvage))
+                             .save(withCondition(consumer, new ItemExistsCondition(ForgeRegistries.ITEMS.getKey(ItemRegistry.CRUDE_SCYTHE.get()))),
+                                   prefix(DreamtinkerModifiers.Ids.malum_rebound, abilityFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_rebound)
+                             .setTools(ItemTagRegistry.SCYTHE)
+                             .setTools(TinkerTags.Items.MODIFIABLE)
+                             .addInput(ItemRegistry.CRUDE_SCYTHE.get())
+                             .setLevelRange(2, 3)
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.malum_rebound, upgradeSalvage))
+                             .save(withCondition(consumer, new ItemExistsCondition(ForgeRegistries.ITEMS.getKey(ItemRegistry.CRUDE_SCYTHE.get()))),
+                                   prefix(DreamtinkerModifiers.Ids.malum_rebound, upgradeFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_ascension)
+                             .setTools(ItemTagRegistry.SCYTHE)
+                             .setTools(TinkerTags.Items.MODIFIABLE)
+                             .addInput(ItemRegistry.CRUDE_SCYTHE.get())
+                             .addInput(ItemRegistry.AERIAL_SPIRIT.get())
+                             .setMaxLevel(1)
+                             .setSlots(SlotType.ABILITY, 1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.malum_ascension, abilitySalvage))
+                             .save(withCondition(consumer, new ItemExistsCondition(ForgeRegistries.ITEMS.getKey(ItemRegistry.CRUDE_SCYTHE.get()))),
+                                   prefix(DreamtinkerModifiers.Ids.malum_ascension, abilityFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_ascension)
+                             .setTools(ItemTagRegistry.SCYTHE)
+                             .setTools(TinkerTags.Items.MODIFIABLE)
+                             .addInput(ItemRegistry.CRUDE_SCYTHE.get())
+                             .setLevelRange(2, 3)
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.malum_ascension, upgradeSalvage))
+                             .save(withCondition(consumer, new ItemExistsCondition(ForgeRegistries.ITEMS.getKey(ItemRegistry.CRUDE_SCYTHE.get()))),
+                                   prefix(DreamtinkerModifiers.Ids.malum_ascension, upgradeFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_animated)
+                             .setTools(ItemTagRegistry.SCYTHE)
+                             .setTools(TinkerTags.Items.MODIFIABLE)
+                             .addInput(ItemRegistry.WICKED_SPIRIT.get())
+                             .addInput(ItemRegistry.AERIAL_SPIRIT.get())
+                             .setMaxLevel(2)
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.malum_animated, upgradeSalvage))
+                             .save(withCondition(consumer, new ItemExistsCondition(ForgeRegistries.ITEMS.getKey(ItemRegistry.WICKED_SPIRIT.get()))),
+                                   prefix(DreamtinkerModifiers.Ids.malum_animated, upgradeFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_haunted)
+                             .setTools(ItemTagRegistry.SCYTHE)
+                             .setTools(TinkerTags.Items.MODIFIABLE)
+                             .addInput(ItemRegistry.WICKED_SPIRIT.get())
+                             .addInput(ItemRegistry.SACRED_SPIRIT.get())
+                             .setMaxLevel(2)
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.malum_haunted, upgradeSalvage))
+                             .save(withCondition(consumer, new ItemExistsCondition(ForgeRegistries.ITEMS.getKey(ItemRegistry.WICKED_SPIRIT.get()))),
+                                   prefix(DreamtinkerModifiers.Ids.malum_haunted, upgradeFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_spirit_plunder)
+                             .setTools(ItemTagRegistry.SCYTHE)
+                             .setTools(TinkerTags.Items.MODIFIABLE)
+                             .addInput(ItemRegistry.SACRED_SPIRIT.get())
+                             .addInput(ItemRegistry.SACRED_SPIRIT.get())
+                             .setMaxLevel(2)
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.malum_spirit_plunder, upgradeSalvage))
+                             .save(withCondition(consumer, new ItemExistsCondition(ForgeRegistries.ITEMS.getKey(ItemRegistry.WICKED_SPIRIT.get()))),
+                                   prefix(DreamtinkerModifiers.Ids.malum_spirit_plunder, upgradeFolder));
     }
 
     private void addEntityMeltingRecipes(Consumer<FinishedRecipe> consumer) {

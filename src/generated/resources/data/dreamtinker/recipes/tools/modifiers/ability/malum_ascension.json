@@ -1,0 +1,26 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "conditions": [
+    {
+      "type": "forge:item_exists",
+      "item": "malum:crude_scythe"
+    }
+  ],
+  "inputs": [
+    {
+      "item": "malum:crude_scythe"
+    },
+    {
+      "item": "malum:aerial_spirit"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:malum_ascension",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

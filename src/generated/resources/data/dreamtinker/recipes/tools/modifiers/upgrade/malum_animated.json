@@ -1,0 +1,28 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "conditions": [
+    {
+      "type": "forge:item_exists",
+      "item": "malum:wicked_spirit"
+    }
+  ],
+  "inputs": [
+    {
+      "item": "malum:wicked_spirit"
+    },
+    {
+      "item": "malum:aerial_spirit"
+    }
+  ],
+  "level": {
+    "max": 2
+  },
+  "result": "dreamtinker:malum_animated",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "condition": {
+    "type": "forge:mod_loaded",
+    "modid": "malum"
+  },
+  "level_display": "tconstruct:single_level",
+  "modules": [
+    {
+      "type": "tconstruct:constant_enchantment",
+      "level": 1,
+      "name": "malum:ascension"
+    },
+    {
+      "type": "tconstruct:requirements",
+      "display_modifiers": [
+        {
+          "level": 1,
+          "name": "dreamtinker:malum_base"
+        }
+      ],
+      "requirement": {
+        "type": "mantle:and",
+        "predicates": [
+          {
+            "type": "tconstruct:has_modifier",
+            "check": "all",
+            "modifier": {
+              "type": "tconstruct:single",
+              "modifier": "dreamtinker:malum_base"
+            }
+          },
+          {
+            "type": "tconstruct:has_modifier",
+            "check": "all",
+            "level": 0,
+            "modifier": {
+              "type": "tconstruct:single",
+              "modifier": "dreamtinker:malum_rebound"
+            }
+          }
+        ]
+      },
+      "translation_key": "modifier.dreamtinker.malum_ascension.requirements"
+    }
+  ],
+  "tooltip_display": "always"
+}

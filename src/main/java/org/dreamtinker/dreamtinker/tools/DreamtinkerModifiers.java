@@ -12,6 +12,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.DreamtinkerModule;
 import org.dreamtinker.dreamtinker.common.data.tags.ModifierTagProvider;
+import org.dreamtinker.dreamtinker.tools.data.DreamtinkerEnchantmentToModifierProvider;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerFluidEffectProvider;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerModifierProvider;
 import org.dreamtinker.dreamtinker.tools.entity.NarcissusFluidProjectile;
@@ -65,10 +66,14 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         if (ModList.get().isLoaded("enigmaticlegacy")){
             EL_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         }
+        if (ModList.get().isLoaded("malum")){
+            MALUM_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        }
     }
 
     public static ModifierDeferredRegister MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     public static ModifierDeferredRegister EL_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
+    public static ModifierDeferredRegister MALUM_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     //Mashuo
     public static final StaticModifier<realsweep> real_sweep = MODIFIERS.register("real_sweep", realsweep::new);
     public static final StaticModifier<strong_heavy> strong_heavy = MODIFIERS.register("strong_heavy", strong_heavy::new);
@@ -79,6 +84,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<memoryBase> memory_base = MODIFIERS.register("memory_base", memoryBase::new);
     public static final StaticModifier<foundationWill> foundation_will = MODIFIERS.register("foundation_will", foundationWill::new);
     public static final StaticModifier<splendourHeart> splendour_heart = MODIFIERS.register("splendour_heart", splendourHeart::new);
+    //underplate
+    public static final StaticModifier<weapon_transformation> weapon_transformation = MODIFIERS.register("weapon_transformation", weapon_transformation::new);
     //echo shard
     public static final StaticModifier<echoed_attack> echoed_attack = MODIFIERS.register("echoed_attack", echoed_attack::new);
     public static final StaticModifier<echoed_defence> echoed_defence = MODIFIERS.register("echoed_defence", echoed_defence::new);
@@ -121,8 +128,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             MODIFIERS.register("wither_shoot", wither_shoot::new);
     public static final StaticModifier<stone_heart> stone_heart = MODIFIERS.register("stone_heart", stone_heart::new);
     public static final StaticModifier<life_looting> life_looting = MODIFIERS.register("life_looting", life_looting::new);
-    //underplate
-    public static final StaticModifier<weapon_transformation> weapon_transformation = MODIFIERS.register("weapon_transformation", weapon_transformation::new);
+
 
     //etherium
     public static final StaticModifier<astral_break> astral_break = EL_MODIFIERS.register("astral_break", astral_break::new);
@@ -143,6 +149,9 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.desolation_ring> desolation_ring =
             EL_MODIFIERS.register("desolation_ring", desolation_ring::new);
 
+    //Malum modifiers
+    public static final StaticModifier<org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum.malum_base> malum_base =
+            MALUM_MODIFIERS.register("malum_base", org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum.malum_base::new);
 
     public static class Ids {
         public static final ModifierId soul_form = id("soul_form");
@@ -156,6 +165,13 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId hate_memory = id("hate_memory");
         public static final ModifierId huge_ego = id("huge_ego");
         public static final ModifierId full_concentration = id("full_concentration");
+
+        public static final ModifierId malum_rebound = id("malum_rebound");
+        public static final ModifierId malum_ascension = id("malum_ascension");
+        public static final ModifierId malum_animated = id("malum_animated");
+        public static final ModifierId malum_haunted = id("malum_haunted");
+        public static final ModifierId malum_replenishing = id("malum_replenishing");
+        public static final ModifierId malum_spirit_plunder = id("malum_spirit_plunder");
 
         private static ModifierId id(String name) {
             return new ModifierId(Dreamtinker.MODID, name);
@@ -191,5 +207,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         generator.addProvider(server, new ModifierTagProvider(packOutput, event.getExistingFileHelper()));
         generator.addProvider(server, new DreamtinkerModifierProvider(packOutput));
         generator.addProvider(server, new DreamtinkerFluidEffectProvider(packOutput));
+        generator.addProvider(server, new DreamtinkerEnchantmentToModifierProvider(packOutput));
     }
 }

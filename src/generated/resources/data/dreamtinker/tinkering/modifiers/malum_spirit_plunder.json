@@ -1,0 +1,15 @@
+{
+  "condition": {
+    "type": "forge:mod_loaded",
+    "modid": "malum"
+  },
+  "level_display": "tconstruct:single_level",
+  "modules": [
+    {
+      "type": "tconstruct:constant_enchantment",
+      "level": 2,
+      "name": "malum:spirit_plunder"
+    }
+  ],
+  "tooltip_display": "always"
+}

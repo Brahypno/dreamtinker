@@ -1,5 +1,13 @@
 {
   "values": [
-    "dreamtinker:memory_base"
+    "dreamtinker:memory_base",
+    {
+      "id": "dreamtinker:malum_ascension",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_rebound",
+      "required": false
+    }
   ]
 }

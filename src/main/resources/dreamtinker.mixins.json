@@ -7,7 +7,10 @@
   "mixins": [
     "BowItemMixin",
     "ModifiableBowItemMixin",
-    "enigmaticlegacymixin.SuperpositionHandlerMixin","LivingEntityGetMobTypeMixin","enigmaticlegacymixin.EnigmaticEventHandlerMixin"],
+    "enigmatic_legacy_mixin.SuperpositionHandlerMixin",
+    "LivingEntityGetMobTypeMixin",
+    "enigmatic_legacy_mixin.EnigmaticEventHandlerMixin",
+    "malum_mixin.ExtraMalumModifier"],
   "client": [
   ],
   "injectors": {

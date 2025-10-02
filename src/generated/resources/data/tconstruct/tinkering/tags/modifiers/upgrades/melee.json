@@ -1,5 +1,13 @@
 {
   "values": [
-    "dreamtinker:strong_explode"
+    "dreamtinker:strong_explode",
+    {
+      "id": "dreamtinker:malum_haunted",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_animated",
+      "required": false
+    }
   ]
 }

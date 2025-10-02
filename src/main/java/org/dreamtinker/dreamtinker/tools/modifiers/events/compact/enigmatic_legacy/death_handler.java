@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.tools.modifiers.events.compact;
+package org.dreamtinker.dreamtinker.tools.modifiers.events.compact.enigmatic_legacy;
 
 import com.aizistral.enigmaticlegacy.handlers.SuperpositionHandler;
 import com.aizistral.enigmaticlegacy.items.EldritchPan;
