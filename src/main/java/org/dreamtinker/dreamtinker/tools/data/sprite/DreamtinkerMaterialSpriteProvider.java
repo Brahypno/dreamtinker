@@ -134,5 +134,17 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFFF84CB7)  // 亮粉
                                                 .addARGB(255, 0xFFFFD5EC)  // 粉白高光
                                                 .build());
+        this.buildMaterial(DreamtinkerMaterialIds.spirit_fabric)
+            .statType(StatlessMaterialStats.BINDING).armor().statType(StatlessMaterialStats.BOWSTRING)
+            .fallbacks("cloth")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(0, 0xFF0D0E0F)
+                                                .addARGB(63, 0xFF1A1B20)  // 暗灰
+                                                .addARGB(102, 0xFF1A1B20)
+                                                .addARGB(140, 0xFF1A1B20)
+                                                .addARGB(178, 0xFF442B4C)
+                                                .addARGB(216, 0xFF5A3670)
+                                                .addARGB(255, 0xFF9F32BC)
+                                                .build());
     }
 }

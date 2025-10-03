@@ -74,6 +74,9 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.soul_etherium, ARMOR, DreamtinkerModifiers.cursed_ring_bound.getId(), ModifierIds.soulbound,
                   DreamtinkerModifiers.Ids.soul_form, DreamtinkerModifiers.soul_blessing.getId());
 
+        addDefaultTraits(DreamtinkerMaterialIds.spirit_fabric, DreamtinkerModifiers.malum_distortion);
+        addTraits(DreamtinkerMaterialIds.spirit_fabric, ARMOR, DreamtinkerModifiers.malum_spirit_attributes);
+
     }
 
     @Override

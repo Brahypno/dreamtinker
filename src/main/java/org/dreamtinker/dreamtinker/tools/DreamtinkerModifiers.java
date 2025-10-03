@@ -32,6 +32,8 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegac
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.etherium.etherium_protection;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.evil.evil_attack;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.soul_aether.exiles_faulty;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum.malum_attributes;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum.malum_base;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.ender_dodge;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.soul_blessing;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.stone_heart;
@@ -116,6 +118,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.open_soul> open_soul =
             MODIFIERS.register("open_soul", open_soul::new);
     public static final StaticModifier<soul_blessing> soul_blessing = MODIFIERS.register("soul_blessing", soul_blessing::new);
+    public static final StaticModifier<random_hit> malum_distortion = MODIFIERS.register("malum_distortion", () -> new random_hit(0.9f, 1.2f));
 
     //etherium
     public static final StaticModifier<ender_dodge> ender_dodge = MODIFIERS.register("ender_dodge", ender_dodge::new);
@@ -150,8 +153,10 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             EL_MODIFIERS.register("desolation_ring", desolation_ring::new);
 
     //Malum modifiers
-    public static final StaticModifier<org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum.malum_base> malum_base =
-            MALUM_MODIFIERS.register("malum_base", org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum.malum_base::new);
+    public static final StaticModifier<malum_base> malum_base =
+            MALUM_MODIFIERS.register("malum_base", malum_base::new);
+    public static final StaticModifier<malum_attributes> malum_spirit_attributes =
+            MALUM_MODIFIERS.register("malum_spirit_attributes", malum_attributes::new);
 
     public static class Ids {
         public static final ModifierId soul_form = id("soul_form");
@@ -165,6 +170,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId hate_memory = id("hate_memory");
         public static final ModifierId huge_ego = id("huge_ego");
         public static final ModifierId full_concentration = id("full_concentration");
+
+        public static final ModifierId malum_spirit_attributes_blank = id("malum_spirit_attributes");
 
         public static final ModifierId malum_rebound = id("malum_rebound");
         public static final ModifierId malum_ascension = id("malum_ascension");

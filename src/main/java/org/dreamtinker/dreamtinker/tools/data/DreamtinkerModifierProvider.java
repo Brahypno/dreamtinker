@@ -79,6 +79,9 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(DreamtinkerModifiers.Ids.malum_spirit_plunder, modLoaded("malum"))
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModule(EnchantmentModule.builder(EnchantmentRegistry.SPIRIT_PLUNDER.get()).level(2).constant());
+
+        buildModifier(DreamtinkerModifiers.Ids.malum_spirit_attributes_blank, not(modLoaded("malum")))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
     }
 
     @Override

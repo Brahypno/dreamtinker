@@ -354,6 +354,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
         materialRecipe(consumer, DreamtinkerMaterialIds.valentinite, Ingredient.of(DreamtinkerCommon.valentinite.get()), 1, 1,
                        folder + "valentinite");
+        materialRecipe(consumer, DreamtinkerMaterialIds.spirit_fabric, Ingredient.of(ItemRegistry.SPIRIT_FABRIC.get()), 1, 3,
+                       folder + "spirit_fabric");
 
         materialMeltingCasting(consumer, DreamtinkerMaterialIds.etherium, DreamtinkerFluids.unstable_liquid_aether, FluidValues.INGOT, folder);
         materialRecipe(consumer, DreamtinkerMaterialIds.etherium, Ingredient.of(EnigmaticItems.ETHERIUM_INGOT), 1, 1,
@@ -423,16 +425,27 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                               TinkerSmeltery.bootsPlatingCast));
         List<ToolPartItem> toolParts = TinkerToolParts.plating.values();
         int[] armor_costs = {3, 6, 5, 2};
-        CompoundTag nbt = new CompoundTag();
-        nbt.putString("Material", "dreamtinker:star_regulus");
+        CompoundTag star_regulus_nbt = new CompoundTag();
+        star_regulus_nbt.putString("Material", "dreamtinker:star_regulus");
         for (int i = 0; i < armor_casts.size(); i++) {
             ItemStack stack = new ItemStack(toolParts.get(i));
-            stack.getOrCreateTag().merge(nbt);
+            stack.getOrCreateTag().merge(star_regulus_nbt);
             ItemPartRecipeBuilder.item(armor_casts.get(i).getName(), ItemOutput.fromStack(stack))
                                  .material(DreamtinkerMaterialIds.star_regulus, armor_costs[i])
                                  .setPatternItem(CompoundIngredient.of(Ingredient.of(TinkerTags.Items.DEFAULT_PATTERNS),
                                                                        Ingredient.of(armor_casts.get(i).get())))
                                  .save(consumer, location(partFolder + "builder/star_regulus/" + armor_casts.get(i).getName().getPath()));
+        }
+        CompoundTag spirit_fabric_nbt = new CompoundTag();
+        spirit_fabric_nbt.putString("Material", "dreamtinker:malum_spirit_fabric");
+        for (int i = 0; i < armor_casts.size(); i++) {
+            ItemStack stack = new ItemStack(toolParts.get(i));
+            stack.getOrCreateTag().merge(spirit_fabric_nbt);
+            ItemPartRecipeBuilder.item(armor_casts.get(i).getName(), ItemOutput.fromStack(stack))
+                                 .material(DreamtinkerMaterialIds.spirit_fabric, armor_costs[i])
+                                 .setPatternItem(CompoundIngredient.of(Ingredient.of(TinkerTags.Items.DEFAULT_PATTERNS),
+                                                                       Ingredient.of(armor_casts.get(i).get())))
+                                 .save(consumer, location(partFolder + "builder/malum_spirit_fabric/" + armor_casts.get(i).getName().getPath()));
         }
 
         MaterialCastingRecipeBuilder.tableRecipe(DreamtinkerToolParts.explode_core.get())

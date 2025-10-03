@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "malum:spirit_fabric"
+  },
+  "material": "dreamtinker:malum_spirit_fabric",
+  "needed": 3,
+  "value": 1
+}

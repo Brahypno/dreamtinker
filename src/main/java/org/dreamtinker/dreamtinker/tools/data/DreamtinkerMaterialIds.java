@@ -14,9 +14,11 @@ public class DreamtinkerMaterialIds {
     public static final MaterialId metallivorous_stibium_lupus = new MaterialId(new ResourceLocation(MODID, "metallivorous_stibium_lupus"));
     public static final MaterialId star_regulus = new MaterialId(new ResourceLocation(MODID, "star_regulus"));
     public static final MaterialId crying_obsidian = new MaterialId(new ResourceLocation(MODID, "crying_obsidian"));
-    //Compact
+    //Compact-enigmatic legacy
     public static final MaterialId etherium = new MaterialId(new ResourceLocation(MODID, "etherium"));
     public static final MaterialId nefarious = new MaterialId(new ResourceLocation(MODID, "nefarious"));
     public static final MaterialId soul_etherium = new MaterialId(new ResourceLocation(MODID, "soul_etherium"));
+    //Compact malum
+    public static final MaterialId spirit_fabric = new MaterialId(new ResourceLocation(MODID, "malum_spirit_fabric"));
 
 }

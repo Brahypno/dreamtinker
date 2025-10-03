@@ -47,7 +47,15 @@
     "hate_memory": "#FFF000",
     "foundation_will": "#633375",
     "huge_ego": "#633375",
-    "splendour_heart": "#FF7F00"
+    "splendour_heart": "#FF7F00",
+    "malum_base": "#6E2CA3",
+    "malum_rebound": "#2A86B9",
+    "malum_ascension": "#2A86B9",
+    "malum_animated": "#2ED3C7",
+    "malum_haunted": "#2ED3C7",
+    "malum_spirit_plunder": "#D9822B",
+    "malum_spirit_attributes": "#D9822B",
+    "malum_distortion": "#6E2CA3"
 },
   "material.dreamtinker": {
     "echo_shard": "#034150",
@@ -59,7 +67,8 @@
     "crying_obsidian": "#3B2754",
     "etherium": "#96E8E0",
     "nefarious": "#8513A0",
-    "soul_etherium": "#7A59E2"
+    "soul_etherium": "#7A59E2",
+    "malum_spirit_fabric": "#D9822B"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873"

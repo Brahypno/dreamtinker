@@ -57,6 +57,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new HeadMaterialStats(10, 6f, Tiers.NETHERITE, 6f),
                          HandleMaterialStats.multipliers().durability(0.7f).miningSpeed(1.4f).attackDamage(1.6f).attackSpeed(0.7f).build(),
                          StatlessMaterialStats.BINDING);
+
+        addMaterialStats(DreamtinkerMaterialIds.spirit_fabric,
+                         StatlessMaterialStats.BINDING);
     }
 
     private void addRanged() {
@@ -87,6 +90,8 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new LimbMaterialStats(10, 1.6f, -0.1f, 0.6f),
                          new GripMaterialStats(0.2f, -0.6f, 7.0f),
                          StatlessMaterialStats.BOWSTRING);
+        addMaterialStats(DreamtinkerMaterialIds.spirit_fabric,
+                         StatlessMaterialStats.BOWSTRING);
     }
 
     private void addArmor() {
@@ -113,6 +118,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                             StatlessMaterialStats.MAILLE);
         addArmorShieldStats(DreamtinkerMaterialIds.soul_etherium,
                             PlatingMaterialStats.builder().durabilityFactor(150).armor(10f, 5f, 17f, 6f).toughness(10).knockbackResistance(5f),
+                            StatlessMaterialStats.MAILLE);
+        addArmorShieldStats(DreamtinkerMaterialIds.spirit_fabric,
+                            PlatingMaterialStats.builder().durabilityFactor(16).armor(1f, 3f, 4f, 2f).toughness(0).knockbackResistance(0f),
                             StatlessMaterialStats.MAILLE);
     }
 

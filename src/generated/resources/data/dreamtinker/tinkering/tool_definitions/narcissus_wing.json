@@ -82,6 +82,10 @@
         {
           "level": 1,
           "name": "tconstruct:soulbound"
+        },
+        {
+          "level": 1,
+          "name": "dreamtinker:malum_spirit_attributes"
         }
       ]
     },

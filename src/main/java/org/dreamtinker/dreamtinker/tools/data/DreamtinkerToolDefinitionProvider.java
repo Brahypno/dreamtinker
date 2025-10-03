@@ -151,6 +151,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                                         .trait(DreamtinkerModifiers.foundation_will, 1)
                                         .trait(DreamtinkerModifiers.splendour_heart, 1)
                                         .trait(ModifierIds.soulbound, 1)
+                                        .trait(DreamtinkerModifiers.malum_spirit_attributes)
                                         .build())
                 // behavior
                 .module(ToolActionsModule.of(ToolActions.SWORD_DIG, ToolActions.PICKAXE_DIG, ToolActions.SHOVEL_DIG, TinkerToolActions.SHIELD_DISABLE))
