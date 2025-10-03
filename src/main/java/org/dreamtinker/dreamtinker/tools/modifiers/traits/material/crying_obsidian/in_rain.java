@@ -16,9 +16,7 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 public class in_rain extends ArmorModifier {
     @Override
     public float getProtectionModifier(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float modifierValue) {
-        if (shouldApply(context.getEntity(), source))
-            return -modifierValue;
-        return modifierValue;
+        return modifierValue - 80;
     }
 
     @Override

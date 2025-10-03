@@ -66,7 +66,7 @@
   "modifier.dreamtinker.isolde.description": "Buff arrow ability when release in specify time, otherwise nerf it",
   "modifier.dreamtinker.in_rain": "In Rain",
   "modifier.dreamtinker.in_rain.flavor": "Just like Tear......",
-  "modifier.dreamtinker.in_rain.description": "Reverse the effect of Protection. When in Boots, create water path",
+  "modifier.dreamtinker.in_rain.description": "Reduce Protection modifier. When in Boots, create water path",
   "modifier.dreamtinker.mei": "In Red",
   "modifier.dreamtinker.mei_3": "In Oblivion",
   "modifier.dreamtinker.mei.flavor": "Thorned Poppy",
