@@ -16,6 +16,7 @@ import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.behavior.ToolDamageModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.build.*;
+import slimeknights.tconstruct.library.modifiers.hook.display.RequirementsModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolContext;
@@ -26,10 +27,10 @@ import slimeknights.tconstruct.library.tools.stat.ModifierStatsBuilder;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-public interface BasicInterface extends ToolDamageModifierHook, ModifierRemovalHook, TooltipModifierHook, ToolStatsModifierHook, AttributesModifierHook, ValidateModifierHook, ModifierTraitHook, VolatileDataModifierHook {
+public interface BasicInterface extends ToolDamageModifierHook, ModifierRemovalHook, TooltipModifierHook, ToolStatsModifierHook, AttributesModifierHook, ValidateModifierHook, ModifierTraitHook, VolatileDataModifierHook, RequirementsModifierHook {
     default void BasicInterfaceInit(ModuleHookMap.Builder hookBuilder) {
         hookBuilder.addHook(this, ModifierHooks.REMOVE, ModifierHooks.TOOLTIP, ModifierHooks.TOOL_DAMAGE, ModifierHooks.TOOL_STATS, ModifierHooks.ATTRIBUTES,
-                            ModifierHooks.VALIDATE, ModifierHooks.MODIFIER_TRAITS, ModifierHooks.VOLATILE_DATA);
+                            ModifierHooks.VALIDATE, ModifierHooks.MODIFIER_TRAITS, ModifierHooks.VOLATILE_DATA, ModifierHooks.REQUIREMENTS);
     }
 
     default int onDamageTool(IToolStackView tool, ModifierEntry modifier, int amount, @javax.annotation.Nullable LivingEntity holder) {

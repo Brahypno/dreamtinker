@@ -47,7 +47,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
         this.tag(TinkerTags.Modifiers.BONUS_SLOTLESS)
             .add(Ids.huge_ego);
         this.tag(TinkerTags.Modifiers.MELEE_ABILITIES)
-            .add(real_sweep.getId(), Ids.continuous_explode)
+            .add(real_sweep.getId(), Ids.continuous_explode, flaming_memory.getId())
             .addOptional(ender_slayer.getId(), weapon_books.getId(), desolation_ring.getId(), eldritch_pan.getId());
         this.tag(TinkerTags.Modifiers.GENERAL_ABILITIES)
             .add(life_looting.getId());

@@ -1,5 +1,7 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing;
 
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -17,6 +19,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagkeys;
 import org.dreamtinker.dreamtinker.fluids.DreamtinkerFluids;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
+import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.entity.NarcissusFluidProjectile;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
@@ -41,10 +44,19 @@ import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.tools.modifiers.ability.interaction.BlockingModifier;
 
+import javax.annotation.Nullable;
+
 import static slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHelper.TANK_HELPER;
 
 public class memoryBase extends BattleModifier {
     private final Fluid fallback_fluid = DreamtinkerFluids.blood_soul.get();
+
+    @Override
+    public @NotNull Component getDisplayName(@NotNull IToolStackView tool, ModifierEntry entry, @Nullable RegistryAccess access) {
+        if (0 < tool.getModifierLevel(DreamtinkerModifiers.flaming_memory.getId()))
+            return Component.translatable(this.getTranslationKey()).withStyle((style) -> style.withColor(this.getTextColor()).withStrikethrough(true));
+        return entry.getDisplayName();
+    }
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder builder) {
@@ -70,7 +82,7 @@ public class memoryBase extends BattleModifier {
 
     @Override
     public InteractionResult onToolUse(IToolStackView tool, ModifierEntry modifier, Player player, InteractionHand hand, InteractionSource source) {
-        if (!tool.isBroken() && source == InteractionSource.RIGHT_CLICK){
+        if (!tool.isBroken() && source == InteractionSource.RIGHT_CLICK && tool.getModifierLevel(DreamtinkerModifiers.flaming_memory.getId()) < 1){
             // launch if the fluid has effects, cannot simulate as we don't know the target yet
             FluidStack fluid = TANK_HELPER.getFluid(tool);
             if (fluid.isEmpty())

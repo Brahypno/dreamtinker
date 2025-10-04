@@ -2,6 +2,7 @@
   "values": [
     "dreamtinker:real_sweep",
     "dreamtinker:continuous_explode",
+    "dreamtinker:flaming_memory",
     {
       "id": "dreamtinker:ender_slayer",
       "required": false

@@ -64,6 +64,7 @@ public class splendourHeart extends BattleModifier {
             tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.splendour_heart").append(String.format("%.2f", per * 100) + "%")
                                  .withStyle(this.getDisplayName().getStyle()));
             tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.splendour_heart" + rangeToText(per))
+                                 .append(": " + String.format("%.2f", rangeToValue(per) * 100) + "%")
                                  .withStyle(this.getDisplayName().getStyle()));
         }
     }

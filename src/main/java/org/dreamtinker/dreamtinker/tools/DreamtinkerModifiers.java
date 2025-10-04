@@ -21,6 +21,7 @@ import org.dreamtinker.dreamtinker.tools.items.TNTarrow.TNTarrow;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.masu.realsweep;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.masu.silvernamebee;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.masu.strong_heavy;
+import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.flamingMemory;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.foundationWill;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.memoryBase;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.splendourHeart;
@@ -84,6 +85,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<strong_explode> strong_explode = MODIFIERS.register("strong_explode", strong_explode::new);
     //narcissus wing
     public static final StaticModifier<memoryBase> memory_base = MODIFIERS.register("memory_base", memoryBase::new);
+    public static final StaticModifier<flamingMemory> flaming_memory = MODIFIERS.register("flaming_memory", flamingMemory::new);
     public static final StaticModifier<foundationWill> foundation_will = MODIFIERS.register("foundation_will", foundationWill::new);
     public static final StaticModifier<splendourHeart> splendour_heart = MODIFIERS.register("splendour_heart", splendourHeart::new);
     //underplate
@@ -165,7 +167,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId continuous_explode = id("continuous_explode");
         public static final ModifierId moonlight_ice_info = id("moonlight_ice_info");
         public static final ModifierId soul_core = id("soul_core");
-        public static final ModifierId flaming_memory = id("flaming_memory");
         public static final ModifierId icy_memory = id("icy_memory");
         public static final ModifierId hate_memory = id("hate_memory");
         public static final ModifierId huge_ego = id("huge_ego");

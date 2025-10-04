@@ -711,6 +711,14 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.malum_spirit_plunder, upgradeSalvage))
                              .save(withCondition(consumer, new ItemExistsCondition(ForgeRegistries.ITEMS.getKey(ItemRegistry.WICKED_SPIRIT.get()))),
                                    prefix(DreamtinkerModifiers.Ids.malum_spirit_plunder, upgradeFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.flaming_memory)
+                             .setTools(Ingredient.of(DreamtinkerTools.narcissus_wing))
+                             .addInput(DreamtinkerToolParts.memoryOrthant.get(), 1)
+                             .addInput(DreamtinkerCommon.nigrescence_antimony.get(), 6)
+                             .setMaxLevel(1)
+                             .setSlots(SlotType.ABILITY, 2)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.flaming_memory, abilitySalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.flaming_memory, abilityFolder));
     }
 
     private void addEntityMeltingRecipes(Consumer<FinishedRecipe> consumer) {

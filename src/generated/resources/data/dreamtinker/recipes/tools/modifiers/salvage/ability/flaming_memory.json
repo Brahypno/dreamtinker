@@ -1,0 +1,10 @@
+{
+  "type": "tconstruct:modifier_salvage",
+  "modifier": "dreamtinker:flaming_memory",
+  "slots": {
+    "abilities": 2
+  },
+  "tools": {
+    "item": "dreamtinker:narcissus_wing"
+  }
+}

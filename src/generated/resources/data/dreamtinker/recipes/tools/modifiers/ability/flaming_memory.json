@@ -1,0 +1,21 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "dreamtinker:memory_orthant"
+    },
+    {
+      "amount_needed": 6,
+      "item": "dreamtinker:nigrescence_antimony"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:flaming_memory",
+  "slots": {
+    "abilities": 2
+  },
+  "tools": {
+    "item": "dreamtinker:narcissus_wing"
+  }
+}
