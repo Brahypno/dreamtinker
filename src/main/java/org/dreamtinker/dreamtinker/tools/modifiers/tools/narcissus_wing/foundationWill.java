@@ -25,8 +25,10 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.TierSortingRegistry;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.dreamtinker.dreamtinker.library.client.PlayerKeyStateProvider;
 import org.dreamtinker.dreamtinker.library.modifiers.DreamtinkerHook;
 import org.dreamtinker.dreamtinker.library.modifiers.hook.LeftClickHook;
+import org.dreamtinker.dreamtinker.network.KeyStateMsg;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -79,7 +81,10 @@ public class foundationWill extends Modifier implements LeftClickHook, ProcessLo
     }
 
     private void foundationWillWrapper(ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot) {
-        if (!level.isClientSide && EquipmentSlot.MAINHAND == equipmentSlot){
+        boolean weapon_interact = player.getCapability(PlayerKeyStateProvider.PlayerKeyState.CAP)
+                                        .map(cap -> cap.isDown(KeyStateMsg.KeyKind.TOOL_INTERACT))
+                                        .orElse(false);
+        if (!level.isClientSide && EquipmentSlot.MAINHAND == equipmentSlot && weapon_interact){
             List<BlockPos> cluster = pickSameBlocksAlongLook(player, /*每节点最多扩展*/ 3 * entry.getLevel(), /*最大总数*/ 16 * entry.getLevel());
             for (BlockPos pos : cluster)
                 if (!ToolStack.from(player.getMainHandItem()).isBroken()){

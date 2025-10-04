@@ -169,7 +169,7 @@
   "modifier.dreamtinker.hate_memory.description": "Give Memory Projectile piercing like ability",
   "modifier.dreamtinker.foundation_will": "Foundation Will",
   "modifier.dreamtinker.foundation_will.flavor": "contact, connect and communicate",
-  "modifier.dreamtinker.foundation_will.description": "Left Click on Main hand to leash beam to have large range mining in cost of EXP;Can mine distant blocks; Higher level means higher range. When mining in this way, would decrease one level harvest tier.",
+  "modifier.dreamtinker.foundation_will.description": "When pressing 'tool interact key' and left Click on Main hand to leash beam to have large range mining in cost of EXP;Can mine distant blocks; Higher level means higher range. When mining in this way, would decrease one level harvest tier.",
   "modifier.dreamtinker.huge_ego": "Huge Ego",
   "modifier.dreamtinker.huge_ego.flavor": "ME AND ALL",
   "modifier.dreamtinker.huge_ego.description": "Give one upgrade slot per level",
@@ -402,5 +402,8 @@
 
   "adv.dreamtinker.eat_star_regulus.title": "Magnum Opus",
   "adv.dreamtinker.eat_star_regulus.desc": "Devour star regulus",
-  "stat.tconstruct.harvest_tier.dreamtinker.lupus": "Lupus"
+  "stat.tconstruct.harvest_tier.dreamtinker.lupus": "Lupus",
+
+  "key.categories.dreamtinker": "Dreamtinker",
+  "key.dreamtinker.tool_interact": "Tool Interact"
 }
