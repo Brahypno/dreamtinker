@@ -28,6 +28,7 @@ import org.dreamtinker.dreamtinker.common.data.loot.DreamtinkerLootTableProvider
 import org.dreamtinker.dreamtinker.common.data.tags.BlockTagProvider;
 import org.dreamtinker.dreamtinker.common.data.tags.FluidTagProvider;
 import org.dreamtinker.dreamtinker.common.data.tags.ItemTagProvider;
+import org.dreamtinker.dreamtinker.common.event.advancements.star_regulus_boost;
 import org.dreamtinker.dreamtinker.config.DreamtinkerConfig;
 import org.dreamtinker.dreamtinker.fluids.DreamtinkerFluids;
 import org.dreamtinker.dreamtinker.fluids.data.DreamtinkerFluidTextureProvider;
@@ -39,7 +40,6 @@ import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.enigmatic_legacy.addUnholywater;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.enigmatic_legacy.death_handler;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.malum.malum_hurt_handler;
-import org.dreamtinker.dreamtinker.tools.modifiers.events.star_regulus_boost;
 import org.dreamtinker.dreamtinker.world.data.DTDataPackProvider;
 import slimeknights.tconstruct.fluids.data.FluidBucketModelProvider;
 import slimeknights.tconstruct.library.utils.Util;

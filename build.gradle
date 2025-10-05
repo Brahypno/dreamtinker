@@ -153,6 +153,10 @@ repositories {
             includeGroup "curse.maven"
         }
     }
+    maven { // CraftTweaker, Immersive Engineering, JEI
+        name 'BlameJared Maven'
+        url 'https://maven.blamejared.com'
+    }
 }
 
 dependencies {
@@ -182,16 +186,19 @@ dependencies {
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     implementation fg.deobf("slimeknights.tconstruct:TConstruct:1.20.1-${tcon_version}")
     implementation fg.deobf("slimeknights.mantle:Mantle:1.20.1-${mantle_version}")
-    def isDataRun = gradle.startParameter.taskNames.any { it.toLowerCase().contains("rundata") }
-    if (!isDataRun) {
-        runtimeOnly fg.deobf("curse.maven:jei-238222:6075247")
-        runtimeOnly fg.deobf("curse.maven:tconjei-974154:6841685")
-    }
+
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
+    // at runtime, use the full JEI jar
+    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+    runtimeOnly fg.deobf("curse.maven:tconjei-974154:6841685")
 
     implementation fg.deobf("curse.maven:curios-309927:6418456")
     implementation fg.deobf("curse.maven:patchouli-306770:6164575")
     implementation fg.deobf("curse.maven:caelus-308989:5281700")
-    implementation fg.deobf("curse.maven:enigmatic-legacy-336184:5600004")
+    def isclientRun = gradle.startParameter.taskNames.any { it.toLowerCase().contains("runClient") }
+    if (!isclientRun)
+        implementation fg.deobf("curse.maven:enigmatic-legacy-336184:5600004")
 
     implementation fg.deobf("curse.maven:lodestone-616457:6213794")
     implementation fg.deobf("curse.maven:malum-484064:6646111")

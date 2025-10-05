@@ -9,6 +9,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.DreamtinkerModule;
+import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.common.data.tags.MaterialTagProvider;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerArmorModel;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerStationLayout;
@@ -48,7 +49,8 @@ public class DreamtinkerTools extends DreamtinkerModule {
     public static final RegistryObject<CreativeModeTab> TOOL =
             DreamtinkerModule.TABS.register("tool", () -> CreativeModeTab.builder().title(Dreamtinker.makeTranslation("itemGroup", "tool"))
                                                                          .icon(() -> DreamtinkerTools.mashou.get().getRenderTool())
-                                                                         .displayItems(DreamtinkerTools::addTabItems).withSearchBar().build());
+                                                                         .displayItems(DreamtinkerTools::addTabItems)
+                                                                         .withTabsBefore(DreamtinkerCommon.ORE.getId()).withSearchBar().build());
 
     public static final ItemObject<ModifiableItem> tntarrow =
             MODI_TOOLS.register("tntarrow", () -> new TNTarrow((new Item.Properties()).stacksTo(4), DTtoolsDefinition.TNTARROW, 4));

@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.tools.modifiers.events;
+package org.dreamtinker.dreamtinker.common.event.advancements;
 
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;

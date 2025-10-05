@@ -405,5 +405,14 @@
   "stat.tconstruct.harvest_tier.dreamtinker.lupus": "Lupus",
 
   "key.categories.dreamtinker": "Dreamtinker",
-  "key.dreamtinker.tool_interact": "Tool Interact"
+  "key.dreamtinker.tool_interact": "Tool Interact",
+  "jei.dreamtinker.category": "World Ritual",
+  "jei.dreamtinker.category.item_in_fluid": "Trigger: Put Item in Fluid",
+  "jei.dreamtinker.category.kill_entity": "Trigger: Sacrifice",
+  "jei.dreamtinker.category.breed_entity": "Trigger: New life",
+  "jei.dreamtinker.category.item_out_of_world": "Trigger: Drop Item Out of World",
+  "jei.dreamtinker.category.use_item_underwater": "Trigger: Use item Under Water",
+  "jei.dreamtinker.celestial_type.sun": "Day Time",
+  "jei.dreamtinker.celestial_type.moon_phase": "Night with Moon Phase: ",
+  "jei.dreamtinker.chance": "Chance"
 }

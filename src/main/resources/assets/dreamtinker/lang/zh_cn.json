@@ -406,5 +406,15 @@
   "stat.tconstruct.harvest_tier.dreamtinker.lupus": "狼",
 
   "key.categories.dreamtinker": "工匠幻梦",
-  "key.dreamtinker.tool_interact": "工具交互"
+  "key.dreamtinker.tool_interact": "工具交互",
+
+  "jei.dreamtinker.category": "世界仪式",
+  "jei.dreamtinker.category.item_in_fluid": "触发：弃置流体中",
+  "jei.dreamtinker.category.kill_entity": "触发：献祭",
+  "jei.dreamtinker.category.breed_entity": "触发：新生",
+  "jei.dreamtinker.category.item_out_of_world": "触发：弃置世界之外",
+  "jei.dreamtinker.category.use_item_underwater": "触发：水下使用物品",
+  "jei.dreamtinker.celestial_type.sun": "白日",
+  "jei.dreamtinker.celestial_type.moon_phase": "夜与月相: ",
+  "jei.dreamtinker.chance": "概率"
 }
