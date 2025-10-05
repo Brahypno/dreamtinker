@@ -269,7 +269,7 @@ public final class WorldRitualCategory implements IRecipeCategory<WorldRitualEnt
 
             @Override
             public @NotNull String getUniqueId(@NotNull CelestialIcon celestialIcon, UidContext uidContext) {
-                return UID_NS + "_" + uidContext.toString(); // dreamtinker:celestial/sun 或 /moon:4
+                return UID_NS + "_" + uidContext.toString().toLowerCase(); // dreamtinker:celestial/sun 或 /moon:4
             }
 
             @Override
