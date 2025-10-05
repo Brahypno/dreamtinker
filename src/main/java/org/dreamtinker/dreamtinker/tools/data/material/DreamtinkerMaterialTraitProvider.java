@@ -3,10 +3,12 @@ package org.dreamtinker.dreamtinker.tools.data.material;
 import net.minecraft.data.PackOutput;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
+import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.data.material.AbstractMaterialTraitDataProvider;
 import slimeknights.tconstruct.library.materials.definition.MaterialId;
 import slimeknights.tconstruct.library.materials.traits.MaterialTraits;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.data.ModifierIds;
 
 import java.lang.reflect.Method;
@@ -77,10 +79,14 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.spirit_fabric, DreamtinkerModifiers.malum_distortion);
         addTraits(DreamtinkerMaterialIds.spirit_fabric, ARMOR, DreamtinkerModifiers.malum_spirit_attributes);
 
+        callGetOrCreate(this, DreamtinkerMaterialIds.hallowed_gold).setTraits(MELEE_HARVEST, List.of(
+                new ModifierEntry[]{new ModifierEntry(ModifierIds.luck, 2)}));
+        addTraits(DreamtinkerMaterialIds.hallowed_gold, RANGED, TinkerModifiers.golden);
+
     }
 
     @Override
-    public String getName() {
+    public @NotNull String getName() {
         return "Dreamtinker Material Modifier Provider";
     }
 

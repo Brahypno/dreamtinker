@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "malum:hallowed_gold_ingot"
+  },
+  "material": "dreamtinker:malum_hallowed_gold",
+  "needed": 1,
+  "value": 1
+}

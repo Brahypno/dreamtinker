@@ -1,0 +1,22 @@
+{
+  "stats": {
+    "tconstruct:bowstring": {},
+    "tconstruct:grip": {
+      "accuracy": 0.15,
+      "durability": -0.2,
+      "melee_damage": 0.0
+    },
+    "tconstruct:head": {
+      "durability": 32,
+      "melee_attack": 0.0,
+      "mining_speed": 15.0,
+      "mining_tier": "minecraft:gold"
+    },
+    "tconstruct:limb": {
+      "accuracy": 0.1,
+      "draw_speed": 0.3,
+      "durability": 32,
+      "velocity": -0.15
+    }
+  }
+}

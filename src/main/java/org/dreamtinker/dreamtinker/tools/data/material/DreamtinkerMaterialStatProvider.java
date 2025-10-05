@@ -60,6 +60,8 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
 
         addMaterialStats(DreamtinkerMaterialIds.spirit_fabric,
                          StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.hallowed_gold,
+                         new HeadMaterialStats(32, 15f, Tiers.GOLD, 0f));
     }
 
     private void addRanged() {
@@ -91,6 +93,11 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new GripMaterialStats(0.2f, -0.6f, 7.0f),
                          StatlessMaterialStats.BOWSTRING);
         addMaterialStats(DreamtinkerMaterialIds.spirit_fabric,
+                         StatlessMaterialStats.BOWSTRING);
+
+        addMaterialStats(DreamtinkerMaterialIds.hallowed_gold,
+                         new LimbMaterialStats(32, 0.3f, -0.15f, 0.1f),
+                         new GripMaterialStats(-0.2f, 0.15f, 0f),
                          StatlessMaterialStats.BOWSTRING);
     }
 

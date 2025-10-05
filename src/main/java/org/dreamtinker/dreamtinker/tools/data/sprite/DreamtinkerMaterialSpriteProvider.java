@@ -146,5 +146,17 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFF5A3670)
                                                 .addARGB(255, 0xFF9F32BC)
                                                 .build());
+        this.buildMaterial(DreamtinkerMaterialIds.hallowed_gold)
+            .statType(HeadMaterialStats.ID).ranged().statType(StatlessMaterialStats.BOWSTRING)
+            .fallbacks("metal")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(0, 0xFF1E0F07)  // 极暗棕，底部阴影
+                                                .addARGB(63, 0xFF5A3C18)  // 暗金棕
+                                                .addARGB(102, 0xFFB86F22)  // 橙金中层
+                                                .addARGB(140, 0xFFE5B12D)  // 明金层
+                                                .addARGB(178, 0xFFF4C942)  // 高亮黄
+                                                .addARGB(216, 0xFFFCE14B)  // 亮面反光
+                                                .addARGB(255, 0xFFFFFAC2)  // 最亮反光白
+                                                .build());
     }
 }

@@ -20,5 +20,6 @@ public class DreamtinkerMaterialIds {
     public static final MaterialId soul_etherium = new MaterialId(new ResourceLocation(MODID, "soul_etherium"));
     //Compact malum
     public static final MaterialId spirit_fabric = new MaterialId(new ResourceLocation(MODID, "malum_spirit_fabric"));
+    public static final MaterialId hallowed_gold = new MaterialId(new ResourceLocation(MODID, "malum_hallowed_gold"));
 
 }
