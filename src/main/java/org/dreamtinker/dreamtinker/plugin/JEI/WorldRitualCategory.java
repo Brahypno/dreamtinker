@@ -162,7 +162,7 @@ public final class WorldRitualCategory implements IRecipeCategory<WorldRitualEnt
          * 成分数据
          */
         public static final class CelestialIcon {
-            public enum Kind {SUN, MOON}
+            public enum Kind {sun, moon}
 
             public final Kind kind;
             public final int phase; // MOON: 0..7; SUN 忽略
@@ -172,12 +172,12 @@ public final class WorldRitualCategory implements IRecipeCategory<WorldRitualEnt
                 this.phase = p;
             }
 
-            public static CelestialIcon sun() {return new CelestialIcon(Kind.SUN, 0);}
+            public static CelestialIcon sun() {return new CelestialIcon(Kind.sun, 0);}
 
-            public static CelestialIcon moon(int phase) {return new CelestialIcon(Kind.MOON, phase);}
+            public static CelestialIcon moon(int phase) {return new CelestialIcon(Kind.moon, phase);}
 
             @Override
-            public String toString() {return kind == Kind.SUN ? "sun" : "moon:" + phase;}
+            public String toString() {return kind == Kind.sun ? "sun" : "moon:" + phase;}
         }
 
         /**
@@ -222,7 +222,7 @@ public final class WorldRitualCategory implements IRecipeCategory<WorldRitualEnt
                 RenderSystem.setShader(GameRenderer::getPositionTexShader);
                 RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
 
-                if (icon.kind == CelestialIcon.Kind.SUN){
+                if (icon.kind == CelestialIcon.Kind.sun){
                     // 从 16×16 里裁 1px 边 -> 绘制 21×21（放大 1.5x）
                     g.blit(SUN, dx, dy, CROP, CROP, DRAW, DRAW, TEX_CELL, TEX_CELL);
                 }else {
@@ -242,7 +242,7 @@ public final class WorldRitualCategory implements IRecipeCategory<WorldRitualEnt
 
             @Override
             public void getTooltip(ITooltipBuilder tooltip, CelestialIcon icon, TooltipFlag flag) {
-                if (icon.kind == CelestialIcon.Kind.SUN){
+                if (icon.kind == CelestialIcon.Kind.sun){
                     tooltip.add(Component.translatable("jei.dreamtinker.celestial_type.sun"));
                 }else {
                     tooltip.add(Component.translatable("jei.dreamtinker.celestial_type.moon_phase").append(String.valueOf(icon.phase)));
@@ -263,7 +263,7 @@ public final class WorldRitualCategory implements IRecipeCategory<WorldRitualEnt
 
             @Override
             public @NotNull String getDisplayName(CelestialIcon ingredient) {
-                return ingredient.kind == CelestialIcon.Kind.SUN ? Component.translatable("jei.dreamtinker.celestial_type.sun").toString() :
+                return ingredient.kind == CelestialIcon.Kind.sun ? Component.translatable("jei.dreamtinker.celestial_type.sun").toString() :
                        Component.translatable("jei.dreamtinker.celestial_type.moon_phase").toString() + ingredient.phase;
             }
 
@@ -274,7 +274,7 @@ public final class WorldRitualCategory implements IRecipeCategory<WorldRitualEnt
 
             @Override
             public @NotNull CelestialIcon copyIngredient(CelestialIcon ingredient) {
-                return ingredient.kind == CelestialIcon.Kind.SUN ? CelestialIcon.sun() : CelestialIcon.moon(ingredient.phase);
+                return ingredient.kind == CelestialIcon.Kind.sun ? CelestialIcon.sun() : CelestialIcon.moon(ingredient.phase);
             }
 
             @Override

@@ -12,27 +12,27 @@
       "type": "tconstruct:grey_to_sprite",
       "palette": [
         {
-          "color": "FF2B1C30",
+          "color": "FF3B2542",
           "grey": 0
         },
         {
-          "color": "FF3B2542",
+          "color": "FF401FAD",
           "grey": 63
         },
         {
-          "color": "FF401FAD",
+          "color": "FF7F08FC",
           "grey": 102
         },
         {
-          "color": "FF7F08FC",
+          "color": "FFFC4EE7",
           "grey": 140
         },
         {
-          "color": "FFFC4EE7",
+          "color": "FFFCA87C",
           "grey": 178
         },
         {
-          "color": "FFFCA87C",
+          "color": "FFFCF4D3",
           "grey": 216
         },
         {
