@@ -1,0 +1,11 @@
+{
+  "type": "tconstruct:part_builder",
+  "cost": 8,
+  "pattern": "dreamtinker:explode_core",
+  "pattern_item": {
+    "item": "dreamtinker:explode_core"
+  },
+  "result": {
+    "item": "dreamtinker:explode_core"
+  }
+}

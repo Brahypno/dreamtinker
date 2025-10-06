@@ -450,12 +450,15 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         armorPlatingBuilder(consumer, DreamtinkerMaterialIds.star_regulus);
         armorPlatingBuilder(consumer, DreamtinkerMaterialIds.spirit_fabric);
         //explode_core
+        PartRecipeBuilder.partRecipe(DreamtinkerToolParts.explode_core.get()).setPattern(this.id(DreamtinkerToolParts.explode_core.get()))
+                         .setPatternItem(Ingredient.of(DreamtinkerToolParts.explode_core.get())).setCost(8)
+                         .save(consumer, this.location(partFolder + "builder/" + this.id(DreamtinkerToolParts.explode_core.get()).getPath()));
         MaterialCastingRecipeBuilder.tableRecipe(DreamtinkerToolParts.explode_core.get())
                                     .setCast(Items.GUNPOWDER, true)
                                     .setItemCost(8)
                                     .save(consumer, location(partFolder + "explode_core_cast"));
-        //CompositeCastingRecipeBuilder.table(DreamtinkerToolParts.explode_core.get(), 8)
-        //                             .save(consumer, this.location(castFolder + "explode_core_composite"));
+        CompositeCastingRecipeBuilder.table(DreamtinkerToolParts.explode_core.get(), 8)
+                                     .save(consumer, this.location(castFolder + "explode_core_composite"));
         //partRecipes(consumer, DreamtinkerToolParts.memoryOrthant, TinkerSmeltery.pickHeadCast, 2, partFolder, castFolder);
         //five Orthant
         ToolPartItem[] tree_parts =
