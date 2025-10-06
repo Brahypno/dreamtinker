@@ -2,6 +2,8 @@ package org.dreamtinker.dreamtinker.common.data;
 
 import com.aizistral.enigmaticlegacy.registries.EnigmaticBlocks;
 import com.aizistral.enigmaticlegacy.registries.EnigmaticItems;
+import com.sammy.malum.data.recipe.builder.SpiritInfusionRecipeBuilder;
+import com.sammy.malum.registry.common.SpiritTypeRegistry;
 import com.sammy.malum.registry.common.item.ItemRegistry;
 import com.sammy.malum.registry.common.item.ItemTagRegistry;
 import net.minecraft.data.PackOutput;
@@ -31,6 +33,8 @@ import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
+import org.dreamtinker.dreamtinker.utils.CastLookup;
+import org.dreamtinker.dreamtinker.utils.DThelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.recipe.data.IRecipeHelper;
 import slimeknights.mantle.recipe.helper.FluidOutput;
@@ -44,6 +48,8 @@ import slimeknights.tconstruct.fluids.TinkerFluids;
 import slimeknights.tconstruct.gadgets.TinkerGadgets;
 import slimeknights.tconstruct.library.data.recipe.IMaterialRecipeHelper;
 import slimeknights.tconstruct.library.data.recipe.IToolRecipeHelper;
+import slimeknights.tconstruct.library.materials.definition.MaterialId;
+import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
 import slimeknights.tconstruct.library.recipe.FluidValues;
 import slimeknights.tconstruct.library.recipe.alloying.AlloyRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.casting.ItemCastingRecipeBuilder;
@@ -65,11 +71,11 @@ import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.TinkerToolParts;
 import slimeknights.tconstruct.tools.data.material.MaterialIds;
+import slimeknights.tconstruct.tools.stats.HandleMaterialStats;
+import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
+import slimeknights.tconstruct.tools.stats.StatlessMaterialStats;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Consumer;
 
 public class DreamtinkerRecipeProvider extends RecipeProvider implements IMaterialRecipeHelper, IToolRecipeHelper, IConditionBuilder, IRecipeHelper {
@@ -85,7 +91,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         this.addCastingRecipes(consumer);
         this.addAlloyRecipes(consumer);
         this.addMaterialRecipes(consumer);
-        this.addCampactMaterialRecipes(consumer);
+        this.addCompactMaterialRecipes(consumer);
 
         this.addPartRecipes(consumer);
         this.addToolBuildingRecipes(consumer);
@@ -361,7 +367,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                        materials_folder + "valentinite");
     }
 
-    private void addCampactMaterialRecipes(Consumer<FinishedRecipe> consumer) {
+    private void addCompactMaterialRecipes(Consumer<FinishedRecipe> consumer) {
         addELMaterialRecipes(consumer);
         addMalumMatarialRecipes(consumer);
     }
@@ -390,6 +396,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                        materials_folder + "spirit_fabric");
         materialRecipe(consumer, DreamtinkerMaterialIds.hallowed_gold, Ingredient.of(ItemRegistry.HALLOWED_GOLD_INGOT.get()), 1, 1,
                        materials_folder + "hallowed_gold");
+        materialRecipe(consumer, DreamtinkerMaterialIds.mnemonic_fragment, Ingredient.of(ItemRegistry.MNEMONIC_FRAGMENT.get()), 1, 4,
+                       materials_folder + "mnemonic_fragment");
     }
 
     private void addCraftingRecipes(Consumer<FinishedRecipe> consumer) {
@@ -434,43 +442,22 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                            .save(consumer, location("casts/" + DreamtinkerCommon.wish_cast.get()));
     }
 
-    private void addPartRecipes(Consumer<FinishedRecipe> consumer) {
-        String partFolder = "tools/parts/";
-        String castFolder = "smeltery/casts/";
-        //backdoor for star_regulus
-        ArrayList<CastItemObject> armor_casts = new ArrayList<>(
-                Arrays.asList(TinkerSmeltery.helmetPlatingCast, TinkerSmeltery.chestplatePlatingCast, TinkerSmeltery.leggingsPlatingCast,
-                              TinkerSmeltery.bootsPlatingCast));
-        List<ToolPartItem> toolParts = TinkerToolParts.plating.values();
-        int[] armor_costs = {3, 6, 5, 2};
-        CompoundTag star_regulus_nbt = new CompoundTag();
-        star_regulus_nbt.putString("Material", "dreamtinker:star_regulus");
-        for (int i = 0; i < armor_casts.size(); i++) {
-            ItemStack stack = new ItemStack(toolParts.get(i));
-            stack.getOrCreateTag().merge(star_regulus_nbt);
-            ItemPartRecipeBuilder.item(armor_casts.get(i).getName(), ItemOutput.fromStack(stack))
-                                 .material(DreamtinkerMaterialIds.star_regulus, armor_costs[i])
-                                 .setPatternItem(CompoundIngredient.of(Ingredient.of(TinkerTags.Items.DEFAULT_PATTERNS),
-                                                                       Ingredient.of(armor_casts.get(i).get())))
-                                 .save(consumer, location(partFolder + "builder/star_regulus/" + armor_casts.get(i).getName().getPath()));
-        }
-        CompoundTag spirit_fabric_nbt = new CompoundTag();
-        spirit_fabric_nbt.putString("Material", "dreamtinker:malum_spirit_fabric");
-        for (int i = 0; i < armor_casts.size(); i++) {
-            ItemStack stack = new ItemStack(toolParts.get(i));
-            stack.getOrCreateTag().merge(spirit_fabric_nbt);
-            ItemPartRecipeBuilder.item(armor_casts.get(i).getName(), ItemOutput.fromStack(stack))
-                                 .material(DreamtinkerMaterialIds.spirit_fabric, armor_costs[i])
-                                 .setPatternItem(CompoundIngredient.of(Ingredient.of(TinkerTags.Items.DEFAULT_PATTERNS),
-                                                                       Ingredient.of(armor_casts.get(i).get())))
-                                 .save(consumer, location(partFolder + "builder/malum_spirit_fabric/" + armor_casts.get(i).getName().getPath()));
-        }
+    String partFolder = "tools/parts/";
+    String castFolder = "smeltery/casts/";
 
+    private void addPartRecipes(Consumer<FinishedRecipe> consumer) {
+        //armor
+        armorPlatingBuilder(consumer, DreamtinkerMaterialIds.star_regulus);
+        armorPlatingBuilder(consumer, DreamtinkerMaterialIds.spirit_fabric);
+        //explode_core
         MaterialCastingRecipeBuilder.tableRecipe(DreamtinkerToolParts.explode_core.get())
                                     .setCast(Items.GUNPOWDER, true)
                                     .setItemCost(8)
-                                    .save(consumer, location(partFolder + "explode_core"));
+                                    .save(consumer, location(partFolder + "explode_core_cast"));
+        //CompositeCastingRecipeBuilder.table(DreamtinkerToolParts.explode_core.get(), 8)
+        //                             .save(consumer, this.location(castFolder + "explode_core_composite"));
         //partRecipes(consumer, DreamtinkerToolParts.memoryOrthant, TinkerSmeltery.pickHeadCast, 2, partFolder, castFolder);
+        //five Orthant
         ToolPartItem[] tree_parts =
                 new ToolPartItem[]{DreamtinkerToolParts.memoryOrthant.get(), DreamtinkerToolParts.wishOrthant.get(), DreamtinkerToolParts.soulOrthant.get(), DreamtinkerToolParts.personaOrthant.get(), DreamtinkerToolParts.reasonEmanation.get()};
         Item[] tree_casts =
@@ -485,6 +472,59 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
             CompositeCastingRecipeBuilder.table(tree_parts[i], tree_costs[i])
                                          .save(consumer, this.location(castFolder + this.id(tree_parts[i]).getPath() + "_composite"));
         }
+        malumCompactMaterialBuilder(consumer, DreamtinkerMaterialIds.mnemonic_fragment, 4, HeadMaterialStats.ID);
+        malumCompactMaterialBuilder(consumer, DreamtinkerMaterialIds.mnemonic_fragment, 4, HandleMaterialStats.ID);
+        malumCompactMaterialBuilder(consumer, DreamtinkerMaterialIds.mnemonic_fragment, 4, StatlessMaterialStats.BINDING.getIdentifier());
+    }
+
+    private void armorPlatingBuilder(Consumer<FinishedRecipe> consumer, MaterialId id) {
+        ArrayList<CastItemObject> armor_casts = new ArrayList<>(
+                Arrays.asList(TinkerSmeltery.helmetPlatingCast, TinkerSmeltery.chestplatePlatingCast, TinkerSmeltery.leggingsPlatingCast,
+                              TinkerSmeltery.bootsPlatingCast));
+        List<ToolPartItem> toolParts = TinkerToolParts.plating.values();
+        int[] armor_costs = {3, 6, 5, 2};
+        CompoundTag nbt = new CompoundTag();
+        nbt.putString("Material", id.toString());
+        for (int i = 0; i < armor_casts.size(); i++) {
+            ItemStack stack = new ItemStack(toolParts.get(i));
+            stack.getOrCreateTag().merge(nbt);
+            ItemPartRecipeBuilder.item(armor_casts.get(i).getName(), ItemOutput.fromStack(stack))
+                                 .material(id, armor_costs[i])
+                                 .setPatternItem(CompoundIngredient.of(Ingredient.of(TinkerTags.Items.DEFAULT_PATTERNS),
+                                                                       Ingredient.of(armor_casts.get(i).get())))
+                                 .save(consumer, location(partFolder + "builder/" + id.getPath() + "/" + armor_casts.get(i).getName().getPath()));
+        }
+    }
+
+    private void malumCompactMaterialBuilder(Consumer<FinishedRecipe> consumer, MaterialId id, int value, MaterialStatsId statsId) {
+        List<ToolPartItem> Parts = DThelper.getPartList(statsId);
+        Map<ToolPartItem, CastLookup.CastTriple> map = CastLookup.findCastsForParts(Parts);
+        for (ToolPartItem part : Parts) {
+            Item castItem = map.get(part).cast(); // 可能为 null（没注册）
+            if (part == DreamtinkerToolParts.memoryOrthant.get())
+                castItem = DreamtinkerCommon.memory_cast.get();
+            if (part == DreamtinkerToolParts.reasonEmanation.get())
+                castItem = DreamtinkerCommon.reason_cast.get();
+            if (part == DreamtinkerToolParts.explode_core.get())
+                castItem = DreamtinkerToolParts.explode_core.get();
+            if (part == DreamtinkerToolParts.wishOrthant.get())
+                castItem = DreamtinkerCommon.wish_cast.get();
+            CompoundTag nbt = new CompoundTag();
+            nbt.putString("Material", id.toString());
+            ItemStack stack = new ItemStack(part);
+            stack.getOrCreateTag().merge(nbt);
+            new SpiritInfusionRecipeBuilder(castItem, 1, stack)
+                    .addExtraItem(ItemRegistry.MNEMONIC_FRAGMENT.get(), 4 * value)
+                    .addExtraItem(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get(), 1)
+                    .addExtraItem(ItemRegistry.SOULWOOD_PLANKS.get(), 1)
+                    .addSpirit(SpiritTypeRegistry.WICKED_SPIRIT, 4 * value)
+                    .addSpirit(SpiritTypeRegistry.AERIAL_SPIRIT, 2 * value)
+                    .addSpirit(SpiritTypeRegistry.AQUEOUS_SPIRIT, 2 * value)
+                    .addSpirit(SpiritTypeRegistry.ELDRITCH_SPIRIT, value)
+                    .build(consumer, id.getPath() + part);
+        }
+
+
     }
 
     private void addModifierRecipes(Consumer<FinishedRecipe> consumer) {
@@ -663,7 +703,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.huge_ego, slotlessFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_rebound)
                              .setTools(ItemTagRegistry.SCYTHE)
-                             .setTools(TinkerTags.Items.MODIFIABLE)
+                             //.setTools(TinkerTags.Items.MELEE_WEAPON)
                              .addInput(ItemRegistry.CRUDE_SCYTHE.get())
                              .addInput(ItemRegistry.EARTHEN_SPIRIT.get())
                              .setMaxLevel(1)
@@ -673,7 +713,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                    prefix(DreamtinkerModifiers.Ids.malum_rebound, abilityFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_rebound)
                              .setTools(ItemTagRegistry.SCYTHE)
-                             .setTools(TinkerTags.Items.MODIFIABLE)
+                             //.setTools(TinkerTags.Items.MELEE_WEAPON)
                              .addInput(ItemRegistry.CRUDE_SCYTHE.get())
                              .setLevelRange(2, 3)
                              .setSlots(SlotType.UPGRADE, 1)
@@ -682,7 +722,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                    prefix(DreamtinkerModifiers.Ids.malum_rebound, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_ascension)
                              .setTools(ItemTagRegistry.SCYTHE)
-                             .setTools(TinkerTags.Items.MODIFIABLE)
+                             //.setTools(TinkerTags.Items.MELEE_WEAPON)
                              .addInput(ItemRegistry.CRUDE_SCYTHE.get())
                              .addInput(ItemRegistry.AERIAL_SPIRIT.get())
                              .setMaxLevel(1)
@@ -692,7 +732,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                    prefix(DreamtinkerModifiers.Ids.malum_ascension, abilityFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_ascension)
                              .setTools(ItemTagRegistry.SCYTHE)
-                             .setTools(TinkerTags.Items.MODIFIABLE)
+                             //.setTools(TinkerTags.Items.MELEE_WEAPON)
                              .addInput(ItemRegistry.CRUDE_SCYTHE.get())
                              .setLevelRange(2, 3)
                              .setSlots(SlotType.UPGRADE, 1)
@@ -701,7 +741,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                    prefix(DreamtinkerModifiers.Ids.malum_ascension, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_animated)
                              .setTools(ItemTagRegistry.SCYTHE)
-                             .setTools(TinkerTags.Items.MODIFIABLE)
+                             //.setTools(TinkerTags.Items.MELEE_WEAPON)
                              .addInput(ItemRegistry.WICKED_SPIRIT.get())
                              .addInput(ItemRegistry.AERIAL_SPIRIT.get())
                              .setMaxLevel(2)
@@ -711,7 +751,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                    prefix(DreamtinkerModifiers.Ids.malum_animated, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_haunted)
                              .setTools(ItemTagRegistry.SCYTHE)
-                             .setTools(TinkerTags.Items.MODIFIABLE)
+                             //.setTools(TinkerTags.Items.MELEE_WEAPON)
                              .addInput(ItemRegistry.WICKED_SPIRIT.get())
                              .addInput(ItemRegistry.SACRED_SPIRIT.get())
                              .setMaxLevel(2)
@@ -721,7 +761,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                    prefix(DreamtinkerModifiers.Ids.malum_haunted, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_spirit_plunder)
                              .setTools(ItemTagRegistry.SCYTHE)
-                             .setTools(TinkerTags.Items.MODIFIABLE)
+                             //.setTools(TinkerTags.Items.MELEE_WEAPON)
                              .addInput(ItemRegistry.SACRED_SPIRIT.get())
                              .addInput(ItemRegistry.SACRED_SPIRIT.get())
                              .setMaxLevel(2)

@@ -10,7 +10,10 @@
     "LivingEntityGetMobTypeMixin",
     "malum_mixin.ExtraMalumModifier",
     "enigmatic_legacy_mixin.EnigmaticEventHandlerMixin",
-    "enigmatic_legacy_mixin.SuperpositionHandlerMixin","malum_mixin.HiddenTagRegistryMixin"],
+    "enigmatic_legacy_mixin.SuperpositionHandlerMixin",
+    "malum_mixin.HiddenTagRegistryMixin",
+    "malum_mixin.SpiritInfusionRecipeBuilderAccessor",
+    "malum_mixin.SpiritInfusionRecipeBuilderResultMixin"],
   "client": [
   ],
   "injectors": {

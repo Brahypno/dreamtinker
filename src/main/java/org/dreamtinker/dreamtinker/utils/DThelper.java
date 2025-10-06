@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,9 +21,15 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.EntityTeleportEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import slimeknights.tconstruct.common.TinkerTags;
+import slimeknights.tconstruct.library.materials.MaterialRegistry;
+import slimeknights.tconstruct.library.materials.definition.MaterialId;
+import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
+import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
 import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
+import slimeknights.tconstruct.library.tools.part.ToolPartItem;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -117,5 +124,24 @@ public class DThelper {
         }else {
             return false;
         }
+    }
+
+    public static List<ToolPartItem> getPartList(MaterialStatsId statsId) {
+        return ForgeRegistries.ITEMS.getValues().stream().
+                                    filter(item -> item instanceof ToolPartItem part && part.getStatType() == statsId)
+                                    .map(item -> (ToolPartItem) item).toList();
+
+    }
+
+    public static ItemStack getPart(MaterialId id, MaterialStatsId statsId, @Nullable RandomSource rdm) {
+        MaterialVariantId mli = MaterialRegistry.getMaterial(id).getIdentifier();
+
+        List<ToolPartItem> Parts = getPartList(statsId);
+        if (Parts.isEmpty())
+            return ItemStack.EMPTY;
+        ToolPartItem part = Parts.get(0);
+        if (rdm != null)
+            part = Parts.get(rdm.nextInt(Parts.size()));
+        return part.withMaterial(mli);
     }
 }

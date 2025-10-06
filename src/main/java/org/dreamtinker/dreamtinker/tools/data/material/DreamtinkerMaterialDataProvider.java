@@ -7,6 +7,7 @@ import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
 import net.minecraftforge.common.crafting.conditions.OrCondition;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
+import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.recipe.condition.TagFilledCondition;
 import slimeknights.tconstruct.common.json.ConfigEnabledCondition;
 import slimeknights.tconstruct.library.data.material.AbstractMaterialDataProvider;
@@ -32,10 +33,11 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
 
         addMaterial(DreamtinkerMaterialIds.spirit_fabric, 2, 10, true, false, modLoaded("malum"));
         addMaterial(DreamtinkerMaterialIds.hallowed_gold, 2, 15, true, false, modLoaded("malum"));
+        addMaterial(DreamtinkerMaterialIds.mnemonic_fragment, 4, 40, false, true, modLoaded("malum"));
     }
 
     @Override
-    public String getName() {
+    public @NotNull String getName() {
         return "Dreamtinker Material Data Provider";
     }
 

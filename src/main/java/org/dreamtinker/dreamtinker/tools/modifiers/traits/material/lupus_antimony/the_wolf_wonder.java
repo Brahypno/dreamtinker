@@ -53,7 +53,7 @@ public class the_wolf_wonder extends BattleModifier {
         RandomSource rand = target.getRandom();
         List<MobEffect> negatives =
                 ForgeRegistries.MOB_EFFECTS.getValues().stream()
-                                           .filter(this::filterMobeffects)
+                                           .filter(this::filterMobEffects)
                                            .collect(Collectors.toList());
         if (negatives.isEmpty())
             return;
@@ -99,7 +99,7 @@ public class the_wolf_wonder extends BattleModifier {
         }
     }
 
-    private boolean filterMobeffects(MobEffect effect) {
+    private boolean filterMobEffects(MobEffect effect) {
         if (!Blacklist_inited){
             Blacklist_inited = true;
             loadConfigBlacklist(TheWolfBlackList.get());

@@ -33,6 +33,7 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegac
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.etherium.etherium_protection;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.evil.evil_attack;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.soul_aether.exiles_faulty;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum.MalumHexStaff;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum.malum_attributes;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum.malum_base;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.ender_dodge;
@@ -159,6 +160,9 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             MALUM_MODIFIERS.register("malum_base", malum_base::new);
     public static final StaticModifier<malum_attributes> malum_spirit_attributes =
             MALUM_MODIFIERS.register("malum_spirit_attributes", malum_attributes::new);
+
+    public static final StaticModifier<MalumHexStaff> malum_hex_staff =
+            MALUM_MODIFIERS.register("malum_hex_staff", MalumHexStaff::new);
 
     public static class Ids {
         public static final ModifierId soul_form = id("soul_form");

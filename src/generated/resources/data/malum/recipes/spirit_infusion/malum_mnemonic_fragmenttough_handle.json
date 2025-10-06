@@ -1,0 +1,43 @@
+{
+  "type": "malum:spirit_infusion",
+  "extra_items": [
+    {
+      "count": 16,
+      "item": "malum:mnemonic_fragment"
+    },
+    {
+      "count": 1,
+      "item": "malum:soul_stained_steel_ingot"
+    },
+    {
+      "count": 1,
+      "item": "malum:soulwood_planks"
+    }
+  ],
+  "input": {
+    "count": 1,
+    "item": "tconstruct:tough_handle_cast"
+  },
+  "output": {
+    "item": "tconstruct:tough_handle",
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic_fragment\"}"
+  },
+  "spirits": [
+    {
+      "type": "wicked",
+      "count": 16
+    },
+    {
+      "type": "aerial",
+      "count": 8
+    },
+    {
+      "type": "aqueous",
+      "count": 8
+    },
+    {
+      "type": "eldritch",
+      "count": 4
+    }
+  ]
+}

@@ -158,5 +158,17 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFFFCE14B)  // 亮面反光
                                                 .addARGB(255, 0xFFFFFAC2)  // 最亮反光白
                                                 .build());
+        this.buildMaterial(DreamtinkerMaterialIds.mnemonic_fragment)
+            .statType(StatlessMaterialStats.BINDING).repairKit()
+            .fallbacks("gem")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(0, 0xFF2B1C30)  // 深紫黑（阴影）
+                                                .addARGB(63, 0xFF3B2542)  // 暗紫
+                                                .addARGB(102, 0xFF401FAD)  // 深靛紫
+                                                .addARGB(140, 0xFF7F08FC)  // 亮紫
+                                                .addARGB(178, 0xFFFC4EE7)  // 品红高光
+                                                .addARGB(216, 0xFFFCA87C)  // 暖橙亮面
+                                                .addARGB(255, 0xFFFCF4D3)  // 乳白反光
+                                                .build());
     }
 }
