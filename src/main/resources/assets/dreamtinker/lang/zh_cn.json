@@ -213,6 +213,9 @@
   "modifier.dreamtinker.malum_distortion": "扭曲无常",
   "modifier.dreamtinker.malum_distortion.flavor": "像小丑一样嘲弄",
   "modifier.dreamtinker.malum_distortion.description": "造成的伤害会随机变动；随等级少量增加上下界",
+  "modifier.dreamtinker.malum_hex_staff": "忆念咒术",
+  "modifier.dreamtinker.malum_hex_staff.flavor": "巫毒咒忆",
+  "modifier.dreamtinker.malum_hex_staff.description": "长按右键以使用忆念咒术",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
