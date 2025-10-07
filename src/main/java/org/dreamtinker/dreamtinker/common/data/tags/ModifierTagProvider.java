@@ -35,7 +35,8 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             .addOptional(weapon_books.getId(), eldritch_pan.getId(), exiles_faulty.getId());
         this.tag(TinkerTags.Modifiers.MELEE_UPGRADES)
             .add(strong_explode.getId())
-            .addOptional(Ids.malum_haunted, Ids.malum_animated);
+            .addOptional(Ids.malum_haunted, Ids.malum_animated)
+            .addOptional(Ids.el_wrath, Ids.el_torrent, Ids.el_slayer);
         this.tag(TinkerTags.Modifiers.RANGED_UPGRADES)
             .add(Ids.icy_memory, Ids.hate_memory);
         this.tag(TinkerTags.Modifiers.GENERAL_UPGRADES)
@@ -43,7 +44,8 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
         this.tag(TinkerTags.Modifiers.HARVEST_UPGRADES)
             .add(foundation_will.getId());
         this.tag(TinkerTags.Modifiers.GENERAL_SLOTLESS)
-            .add(mei.getId());
+            .add(mei.getId())
+            .addOptional(Ids.el_eternal_binding, Ids.el_sorrow, Ids.el_nemesis_curse);
         this.tag(TinkerTags.Modifiers.BONUS_SLOTLESS)
             .add(Ids.huge_ego);
         this.tag(TinkerTags.Modifiers.MELEE_ABILITIES)

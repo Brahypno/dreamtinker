@@ -1,5 +1,17 @@
 {
   "values": [
-    "dreamtinker:mei"
+    "dreamtinker:mei",
+    {
+      "id": "dreamtinker:el_eternal_binding",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:el_sorrow",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:el_nemesis_curse",
+      "required": false
+    }
   ]
 }

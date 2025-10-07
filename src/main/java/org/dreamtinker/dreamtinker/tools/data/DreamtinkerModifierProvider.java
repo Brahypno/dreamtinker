@@ -1,5 +1,6 @@
 package org.dreamtinker.dreamtinker.tools.data;
 
+import com.aizistral.enigmaticlegacy.registries.EnigmaticEnchantments;
 import com.sammy.malum.registry.common.item.EnchantmentRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
@@ -82,6 +83,31 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
 
         buildModifier(DreamtinkerModifiers.Ids.malum_spirit_attributes_blank, not(modLoaded("malum")))
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+
+        buildModifier(DreamtinkerModifiers.Ids.el_nemesis_curse, modLoaded("enigmaticlegacy"))
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(EnchantmentModule.builder(EnigmaticEnchantments.NEMESIS).level(1).constant());
+        buildModifier(DreamtinkerModifiers.Ids.el_sorrow, modLoaded("enigmaticlegacy"))
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(EnchantmentModule.builder(EnigmaticEnchantments.SORROW).level(1).constant());
+        buildModifier(DreamtinkerModifiers.Ids.el_eternal_binding, modLoaded("enigmaticlegacy"))
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(EnchantmentModule.builder(EnigmaticEnchantments.ETERNAL_BINDING).level(1).constant());
+        buildModifier(DreamtinkerModifiers.Ids.el_slayer, modLoaded("enigmaticlegacy"))
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(EnchantmentModule.builder(EnigmaticEnchantments.SLAYER).level(1).constant());
+        buildModifier(DreamtinkerModifiers.Ids.el_wrath, modLoaded("enigmaticlegacy"))
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(EnchantmentModule.builder(EnigmaticEnchantments.WRATH).level(1).constant())
+                .addModule(ModifierRequirementsModule.builder()
+                                                     .requirement(HasModifierPredicate.hasModifier(DreamtinkerModifiers.Ids.el_torrent, 1).inverted())
+                                                     .modifierKey(DreamtinkerModifiers.Ids.el_wrath).build());
+        buildModifier(DreamtinkerModifiers.Ids.el_torrent, modLoaded("enigmaticlegacy"))
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(EnchantmentModule.builder(EnigmaticEnchantments.TORRENT).level(1).constant())
+                .addModule(ModifierRequirementsModule.builder()
+                                                     .requirement(HasModifierPredicate.hasModifier(DreamtinkerModifiers.Ids.el_wrath, 1).inverted())
+                                                     .modifierKey(DreamtinkerModifiers.Ids.el_torrent).build());
     }
 
     @Override

@@ -1,0 +1,17 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "minecraft:shield"
+    },
+    {
+      "item": "minecraft:enchanting_table"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:el_nemesis_curse",
+  "tools": {
+    "tag": "tconstruct:modifiable/melee/primary"
+  }
+}

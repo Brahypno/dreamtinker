@@ -1,0 +1,15 @@
+{
+  "condition": {
+    "type": "forge:mod_loaded",
+    "modid": "enigmaticlegacy"
+  },
+  "level_display": "tconstruct:single_level",
+  "modules": [
+    {
+      "type": "tconstruct:constant_enchantment",
+      "level": 1,
+      "name": "enigmaticlegacy:slayer"
+    }
+  ],
+  "tooltip_display": "always"
+}

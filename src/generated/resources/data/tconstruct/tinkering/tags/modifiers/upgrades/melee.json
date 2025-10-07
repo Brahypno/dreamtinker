@@ -8,6 +8,18 @@
     {
       "id": "dreamtinker:malum_animated",
       "required": false
+    },
+    {
+      "id": "dreamtinker:el_wrath",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:el_torrent",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:el_slayer",
+      "required": false
     }
   ]
 }

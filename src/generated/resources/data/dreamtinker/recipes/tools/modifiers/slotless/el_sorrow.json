@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "amount_needed": 10,
+      "item": "minecraft:weeping_vines"
+    },
+    {
+      "item": "minecraft:enchanting_table"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:el_sorrow",
+  "tools": {
+    "tag": "tconstruct:modifiable/armor"
+  }
+}

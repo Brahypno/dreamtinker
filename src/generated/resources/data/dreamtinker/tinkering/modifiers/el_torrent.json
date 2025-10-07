@@ -1,0 +1,28 @@
+{
+  "condition": {
+    "type": "forge:mod_loaded",
+    "modid": "enigmaticlegacy"
+  },
+  "level_display": "tconstruct:single_level",
+  "modules": [
+    {
+      "type": "tconstruct:constant_enchantment",
+      "level": 1,
+      "name": "enigmaticlegacy:torrent"
+    },
+    {
+      "type": "tconstruct:requirements",
+      "requirement": {
+        "type": "tconstruct:has_modifier",
+        "check": "all",
+        "level": 0,
+        "modifier": {
+          "type": "tconstruct:single",
+          "modifier": "dreamtinker:el_wrath"
+        }
+      },
+      "translation_key": "modifier.dreamtinker.el_torrent.requirements"
+    }
+  ],
+  "tooltip_display": "always"
+}

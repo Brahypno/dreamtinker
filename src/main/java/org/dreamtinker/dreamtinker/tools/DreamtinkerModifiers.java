@@ -176,6 +176,13 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId huge_ego = id("huge_ego");
         public static final ModifierId full_concentration = id("full_concentration");
 
+        public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
+        public static final ModifierId el_sorrow = id("el_sorrow");
+        public static final ModifierId el_eternal_binding = id("el_eternal_binding");
+        public static final ModifierId el_slayer = id("el_slayer");
+        public static final ModifierId el_wrath = id("el_wrath");
+        public static final ModifierId el_torrent = id("el_torrent");
+
         public static final ModifierId malum_spirit_attributes_blank = id("malum_spirit_attributes");
 
         public static final ModifierId malum_rebound = id("malum_rebound");
