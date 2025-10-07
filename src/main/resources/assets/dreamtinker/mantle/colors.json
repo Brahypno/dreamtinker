@@ -56,7 +56,8 @@
     "malum_haunted": "#2ED3C7",
     "malum_spirit_plunder": "#D9822B",
     "malum_spirit_attributes": "#D9822B",
-    "malum_distortion": "#6E2CA3"
+    "malum_distortion": "#6E2CA3",
+    "malum_hex_staff": "#7F08FC"
 },
   "material.dreamtinker": {
     "echo_shard": "#034150",

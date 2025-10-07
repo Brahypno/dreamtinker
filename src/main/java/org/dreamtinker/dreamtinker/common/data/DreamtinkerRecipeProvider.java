@@ -517,13 +517,15 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
             ItemStack stack = new ItemStack(part);
             stack.getOrCreateTag().merge(nbt);
             new SpiritInfusionRecipeBuilder(castItem, 1, stack)
-                    .addExtraItem(ItemRegistry.MNEMONIC_FRAGMENT.get(), 4 * value)
+                    .addExtraItem(ItemRegistry.MNEMONIC_FRAGMENT.get(), 2 * value)
                     .addExtraItem(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get(), 1)
-                    .addExtraItem(ItemRegistry.SOULWOOD_PLANKS.get(), 1)
-                    .addSpirit(SpiritTypeRegistry.WICKED_SPIRIT, 4 * value)
-                    .addSpirit(SpiritTypeRegistry.AERIAL_SPIRIT, 2 * value)
+                    .addExtraItem(ItemRegistry.AURIC_EMBERS.get(), 2 * value)
+                    .addExtraItem(ItemRegistry.FUSED_CONSCIOUSNESS.get(), 1)
+                    .addSpirit(SpiritTypeRegistry.WICKED_SPIRIT, 6 * value)
+                    .addSpirit(SpiritTypeRegistry.AERIAL_SPIRIT, 4 * value)
                     .addSpirit(SpiritTypeRegistry.AQUEOUS_SPIRIT, 2 * value)
-                    .addSpirit(SpiritTypeRegistry.ELDRITCH_SPIRIT, value)
+                    .addSpirit(SpiritTypeRegistry.ELDRITCH_SPIRIT, 2 * value)
+                    .addSpirit(SpiritTypeRegistry.INFERNAL_SPIRIT, 2 * value)
                     .build(consumer, id.getPath() + part);
         }
 
