@@ -5,30 +5,27 @@ import com.sammy.malum.common.item.curiosities.armor.MalignantStrongholdArmorIte
 import com.sammy.malum.common.item.curiosities.armor.SoulHunterArmorItem;
 import com.sammy.malum.common.item.curiosities.armor.SoulStainedSteelArmorItem;
 import com.sammy.malum.registry.common.item.ItemRegistry;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ArmorItem;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.build.ToolStatsModifierHook;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
+import slimeknights.tconstruct.library.tools.nbt.IToolContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
-import slimeknights.tconstruct.library.utils.RomanNumeralHelper;
+import slimeknights.tconstruct.library.tools.stat.ModifierStatsBuilder;
+import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import java.util.function.BiConsumer;
 
-public class malum_attributes extends Modifier implements AttributesModifierHook {
+public class malum_attributes extends Modifier implements AttributesModifierHook, ToolStatsModifierHook {
     private final int tier;
 
     public malum_attributes(int tier) {
@@ -37,7 +34,7 @@ public class malum_attributes extends Modifier implements AttributesModifierHook
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        hookBuilder.addHook(this, ModifierHooks.ATTRIBUTES);
+        hookBuilder.addHook(this, ModifierHooks.ATTRIBUTES, ModifierHooks.TOOL_STATS);
         super.registerHooks(hookBuilder);
     }
 
@@ -57,11 +54,6 @@ public class malum_attributes extends Modifier implements AttributesModifierHook
                 );
                 biConsumer.accept(attr, scaled);
             }
-        biConsumer.accept(Attributes.ATTACK_SPEED,
-                          new AttributeModifier(UUID.fromString("3f9c2b1e-1d84-4f2a-b6c9-2e6c6df3a9b1"),
-                                                Attributes.ATTACK_SPEED.getDescriptionId(),
-                                                -0.05 * modifierEntry.getLevel(),
-                                                AttributeModifier.Operation.MULTIPLY_TOTAL));
     }
 
     private Multimap<Attribute, AttributeModifier> createExtraAttributes(ArmorItem.Type type) {
@@ -83,23 +75,8 @@ public class malum_attributes extends Modifier implements AttributesModifierHook
         };
     }
 
-    private final String real_key = "modifier.dreamtinker.malum_spirit_attributes_fulfill";
-
     @Override
-    public @NotNull Component getDisplayName(int level) {
-        if (1 == tier)
-            return Component.translatable(real_key).append(" ").append(RomanNumeralHelper.getNumeral(level))
-                            .withStyle((style) -> style.withColor(this.getTextColor()));
-        else
-            return super.getDisplayName(level);
-    }
-
-    @Override
-    public @NotNull List<Component> getDescriptionList(int level) {
-        if (1 == tier)
-            return Arrays.asList(Component.translatable(real_key + ".flavor").withStyle(ChatFormatting.ITALIC),
-                                 Component.translatable(real_key + ".description").withStyle(ChatFormatting.GRAY));
-        else
-            return super.getDescriptionList(level);
+    public void addToolStats(IToolContext iToolContext, ModifierEntry modifierEntry, ModifierStatsBuilder modifierStatsBuilder) {
+        ToolStats.ARMOR.add(modifierStatsBuilder, -0.1 * modifierStatsBuilder.getStat(ToolStats.ARMOR) * (modifierEntry.getLevel() - 1));
     }
 }

@@ -782,8 +782,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .save(withCondition(consumer, new ItemExistsCondition(ForgeRegistries.ITEMS.getKey(ItemRegistry.WICKED_SPIRIT.get()))),
                                    prefix(DreamtinkerModifiers.Ids.malum_animated, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_haunted)
-                             .setTools(ItemTagRegistry.SCYTHE)
-                             //.setTools(TinkerTags.Items.MELEE_WEAPON)
+                             //.setTools(ItemTagRegistry.SCYTHE)
+                             .setTools(TinkerTags.Items.MELEE_WEAPON)
                              .addInput(ItemRegistry.WICKED_SPIRIT.get())
                              .addInput(ItemRegistry.SACRED_SPIRIT.get())
                              .setMaxLevel(2)
@@ -792,8 +792,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .save(withCondition(consumer, new ItemExistsCondition(ForgeRegistries.ITEMS.getKey(ItemRegistry.WICKED_SPIRIT.get()))),
                                    prefix(DreamtinkerModifiers.Ids.malum_haunted, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_spirit_plunder)
-                             .setTools(ItemTagRegistry.SCYTHE)
-                             //.setTools(TinkerTags.Items.MELEE_WEAPON)
+                             //.setTools(ItemTagRegistry.SCYTHE)
+                             .setTools(TinkerTags.Items.MELEE_WEAPON)
                              .addInput(ItemRegistry.SACRED_SPIRIT.get())
                              .addInput(ItemRegistry.SACRED_SPIRIT.get())
                              .setMaxLevel(2)

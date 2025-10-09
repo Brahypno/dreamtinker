@@ -191,8 +191,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId el_wrath = id("el_wrath");
         public static final ModifierId el_torrent = id("el_torrent");
 
-        public static final ModifierId malum_spirit_attributes_blank = id("malum_spirit_attributes");
-
         public static final ModifierId malum_rebound = id("malum_rebound");
         public static final ModifierId malum_ascension = id("malum_ascension");
         public static final ModifierId malum_animated = id("malum_animated");
