@@ -36,6 +36,7 @@ public class DreamtinkerFluidTextureProvider extends AbstractFluidTextureProvide
         this.commonFluid(DreamtinkerFluids.reversed_shadow.getType());
         this.commonFluid(DreamtinkerFluids.blood_soul.getType());
         this.commonFluid(DreamtinkerFluids.molten_soul_stained_steel.getType());
+        this.commonFluid(DreamtinkerFluids.molten_malignant_pewter.getType());
     }
 
     public void commonFluid(FluidType fluid) {

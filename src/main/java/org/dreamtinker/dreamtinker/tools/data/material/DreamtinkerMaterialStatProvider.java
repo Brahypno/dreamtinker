@@ -71,6 +71,10 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new HeadMaterialStats(1450, 1.5f, Tiers.DIAMOND, 0.5f),
                          HandleMaterialStats.multipliers().durability(1.2f).miningSpeed(1.05f).attackDamage(1.3f).attackSpeed(0.8f).build(),
                          StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.malignant_pewter,
+                         new HeadMaterialStats(1800, 2.0f, Tiers.NETHERITE, 7f),
+                         HandleMaterialStats.multipliers().durability(0.8f).miningSpeed(1.3f).attackDamage(1.2f).attackSpeed(0.4f).build(),
+                         StatlessMaterialStats.BINDING);
     }
 
     private void addRanged() {
@@ -143,6 +147,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                             StatlessMaterialStats.MAILLE);
         addArmorShieldStats(DreamtinkerMaterialIds.soul_stained_steel,
                             PlatingMaterialStats.builder().durabilityFactor(24).armor(2f, 6f, 7f, 3f).toughness(2).knockbackResistance(0f),
+                            StatlessMaterialStats.MAILLE);
+        addArmorShieldStats(DreamtinkerMaterialIds.malignant_pewter,
+                            PlatingMaterialStats.builder().durabilityFactor(32).armor(3f, 6f, 8f, 3f).toughness(2).knockbackResistance(0f),
                             StatlessMaterialStats.MAILLE);
     }
 

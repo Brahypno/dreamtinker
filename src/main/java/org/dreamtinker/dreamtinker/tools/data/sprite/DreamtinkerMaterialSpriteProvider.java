@@ -182,5 +182,17 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFFBE86E9)  // 淡粉紫高光
                                                 .addARGB(255, 0xFFF3C9FF)  // 最亮高光（近白粉）
                                                 .build());
+        this.buildMaterial(DreamtinkerMaterialIds.malignant_pewter)
+            .meleeHarvest().armor()
+            .fallbacks("metal")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(0, 0xFF120B16)  // 最暗：深紫近黑
+                                                .addARGB(63, 0xFF24152A)  // 暗紫阴影
+                                                .addARGB(102, 0xFF3A2548)  // 深紫
+                                                .addARGB(140, 0xFF5E4A7A)  // 中紫
+                                                .addARGB(178, 0xFF8F79A8)  // 淡紫中亮
+                                                .addARGB(216, 0xFFC9B7D6)  // 柔和高光
+                                                .addARGB(255, 0xFFF3EAF7)  // 最亮高光（近白紫）
+                                                .build());
     }
 }

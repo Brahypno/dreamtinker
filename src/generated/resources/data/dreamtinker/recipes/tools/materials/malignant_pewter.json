@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "malum:malignant_pewter_plating"
+  },
+  "material": "dreamtinker:malum_malignant_pewter",
+  "needed": 2,
+  "value": 1
+}

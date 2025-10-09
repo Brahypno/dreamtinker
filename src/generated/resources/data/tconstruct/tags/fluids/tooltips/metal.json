@@ -12,6 +12,10 @@
     {
       "id": "#dreamtinker:malum_molten_soul_stained_steel",
       "required": false
+    },
+    {
+      "id": "#dreamtinker:malum_molten_malignant_pewter",
+      "required": false
     }
   ]
 }

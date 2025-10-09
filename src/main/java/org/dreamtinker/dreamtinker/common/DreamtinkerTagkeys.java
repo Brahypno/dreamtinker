@@ -50,6 +50,7 @@ public class DreamtinkerTagkeys {
         public static final TagKey<Fluid> reversed_shadow = dtTag("reversed_shadow");
         public static final TagKey<Fluid> blood_soul = dtTag("blood_soul");
         public static final TagKey<Fluid> molten_soul_stained_steel = dtTag("molten_soul_stained_steel");
+        public static final TagKey<Fluid> molten_malignant_pewter = dtTag("molten_malignant_pewter");
 
         public static final TagKey<Fluid> narcissus_wing_used = dtTag("narcissus_wing_used");
     }

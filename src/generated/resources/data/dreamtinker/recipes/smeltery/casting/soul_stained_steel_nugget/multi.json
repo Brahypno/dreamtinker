@@ -3,7 +3,7 @@
   "cast": {
     "tag": "tconstruct:casts/multi_use/nugget"
   },
-  "cooling_time": 26,
+  "cooling_time": 21,
   "fluid": {
     "amount": 10,
     "fluid": "dreamtinker:malum_molten_soul_stained_steel"

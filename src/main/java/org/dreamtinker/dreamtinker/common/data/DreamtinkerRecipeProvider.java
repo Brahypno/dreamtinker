@@ -224,6 +224,9 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         ItemCastingRecipeBuilder.basinRecipe(BlockRegistry.BLOCK_OF_SOUL_STAINED_STEEL.get())
                                 .setFluidAndTime(DreamtinkerFluids.molten_soul_stained_steel, FluidValues.METAL_BLOCK)
                                 .save(consumer, location(folder + "soul_stained_steel/block"));
+        ItemCastingRecipeBuilder.basinRecipe(BlockRegistry.BLOCK_OF_MALIGNANT_PEWTER.get())
+                                .setFluidAndTime(DreamtinkerFluids.molten_malignant_pewter, FluidValues.METAL_BLOCK)
+                                .save(consumer, location(folder + "malignant_pewter/block"));
     }
 
     private void addMeltingRecipes(Consumer<FinishedRecipe> consumer) {
@@ -357,6 +360,23 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         cast(DreamtinkerFluids.molten_soul_stained_steel.get(), ItemRegistry.SOUL_STAINED_STEEL_INGOT.get(), FluidValues.INGOT, consumer);
         cast(DreamtinkerFluids.molten_soul_stained_steel.get(), ItemRegistry.SOUL_STAINED_STEEL_NUGGET.get(), FluidValues.NUGGET, consumer);
 
+        MeltingRecipeBuilder.melting(Ingredient.of(ItemRegistry.MALIGNANT_PEWTER_INGOT.get()), DreamtinkerFluids.molten_malignant_pewter, FluidValues.INGOT,
+                                     2.0f)
+                            .save(consumer, location(folder + "malignant_pewter/ingot"));
+        MeltingRecipeBuilder.melting(Ingredient.of(ItemRegistry.MALIGNANT_PEWTER_NUGGET.get()), DreamtinkerFluids.molten_malignant_pewter,
+                                     FluidValues.NUGGET,
+                                     2.0f)
+                            .save(consumer, location(folder + "malignant_pewter/nugget"));
+        MeltingRecipeBuilder.melting(Ingredient.of(BlockRegistry.BLOCK_OF_MALIGNANT_PEWTER.get()), DreamtinkerFluids.molten_malignant_pewter,
+                                     FluidValues.METAL_BLOCK, 2.0f)
+                            .save(consumer, location(folder + "malignant_pewter/block"));
+        MeltingRecipeBuilder.melting(Ingredient.of(ItemRegistry.MALIGNANT_PEWTER_PLATING.get()), DreamtinkerFluids.molten_malignant_pewter,
+                                     65,//FluidValues.NUGGET * 6.5,
+                                     2.0f)
+                            .save(consumer, location(folder + "malignant_pewter/plating"));
+        cast(DreamtinkerFluids.molten_malignant_pewter.get(), ItemRegistry.MALIGNANT_PEWTER_INGOT.get(), FluidValues.INGOT, consumer);
+        cast(DreamtinkerFluids.molten_malignant_pewter.get(), ItemRegistry.MALIGNANT_PEWTER_NUGGET.get(), FluidValues.NUGGET, consumer);
+
     }
 
     String materials_folder = "tools/materials/";
@@ -422,6 +442,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         materialRecipe(consumer, DreamtinkerMaterialIds.soul_stained_steel, Ingredient.of(ItemRegistry.SOUL_STAINED_STEEL_PLATING.get()), 1, 2,
                        materials_folder + "soul_stained_steel");
         materialMeltingCasting(consumer, DreamtinkerMaterialIds.soul_stained_steel, DreamtinkerFluids.molten_soul_stained_steel, 130,
+                               materials_folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.malignant_pewter, Ingredient.of(ItemRegistry.MALIGNANT_PEWTER_PLATING.get()), 1, 2,
+                       materials_folder + "malignant_pewter");
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.malignant_pewter, DreamtinkerFluids.molten_malignant_pewter, 130,
                                materials_folder);
 
     }

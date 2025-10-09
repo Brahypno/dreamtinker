@@ -245,6 +245,15 @@
   "modifier.dreamtinker.malum_tyrving": "提尔锋",
   "modifier.dreamtinker.malum_tyrving.flavor": "扭曲之力",
   "modifier.dreamtinker.malum_tyrving.description": "像提尔锋一样造成额外伤害",
+  "modifier.dreamtinker.malum_world_of_weight": "宙界之重",
+  "modifier.dreamtinker.malum_world_of_weight.flavor": "沉重的世界",
+  "modifier.dreamtinker.malum_world_of_weight.description": "造成伤害时有 25% 概率伤害提升至 2 倍。\n\n击杀生物时获得 10 秒诡秘之必然效果",
+  "modifier.dreamtinker.malum_edge_of_deliverance": "挽魂锋镰",
+  "modifier.dreamtinker.malum_edge_of_deliverance.flavor": "万魂之利",
+  "modifier.dreamtinker.malum_edge_of_deliverance.description": "若目标具有挽魂将临效果，造成的伤害提升至 2 倍并移除此效果；\n\n否则，造成的伤害降低至 0.5 倍并给予目标 3 秒挽魂将临效果；",
+  "modifier.dreamtinker.malum_malignant_attributes": "恶念要塞",
+  "modifier.dreamtinker.malum_malignant_attributes.flavor": "恶意即力量",
+  "modifier.dreamtinker.malum_malignant_attributes.description": "每级获得0.25恶念转化",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
@@ -349,6 +358,8 @@
   "material.dreamtinker.malum_mnemonic_fragment.flavor": "记忆……",
   "material.dreamtinker.malum_soul_stained_steel": "魂染钢",
   "material.dreamtinker.malum_soul_stained_steel.flavor": "魂魄侵染",
+  "material.dreamtinker.malum_malignant_pewter": "恶念白镴",
+  "material.dreamtinker.malum_malignant_pewter.flavor": "恶意侵蚀魂魄",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "熔融回响合金",
   "fluid.dreamtinker.molten_echo_alloy": "熔融回响合金",
@@ -407,6 +418,9 @@
   "fluid_type.dreamtinker.malum_molten_soul_stained_steel": "熔融魂染钢",
   "fluid.dreamtinker.malum_molten_soul_stained_steel": "熔融魂染钢",
   "fluid.dreamtinker.malum_molten_soul_stained_steel.fluid_effect": "Blood Soul bring heal",
+  "fluid_type.dreamtinker.malum_molten_malignant_pewter": "熔融恶念白镴",
+  "fluid.dreamtinker.malum_molten_malignant_pewter": "熔融恶念白镴",
+  "fluid.dreamtinker.malum_molten_malignant_pewter.fluid_effect": "Malignant Pewter",
 
   "item.dreamtinker.molten_echo_shard_bucket": "熔融回响碎片桶",
   "item.dreamtinker.molten_nigrescence_antimony_bucket": "融化黑锑桶",
@@ -425,6 +439,8 @@
   "item.dreamtinker.unholy_water_bucket": "不洁之水桶",
   "item.dreamtinker.reversed_shadow_bucket": "逆转阴影桶",
   "item.dreamtinker.blood_soul_bucket": "活魂血桶",
+  "item.dreamtinker.malum_molten_soul_stained_steel_bucket": "熔融魂染钢桶",
+  "item.dreamtinker.malum_molten_malignant_pewter_bucket": "熔融恶念白镴桶",
 
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "流血",

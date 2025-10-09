@@ -4,7 +4,25 @@
     "dreamtinker:nigrescence_antimony",
     "dreamtinker:metallivorous_stibium_lupus",
     "dreamtinker:nigrescence_antimony",
-    "dreamtinker:etherium",
-    "dreamtinker:nefarious"
+    {
+      "id": "dreamtinker:etherium",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:nefarious",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:soul_etherium",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_soul_stained_steel",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_malignant_pewter",
+      "required": false
+    }
   ]
 }

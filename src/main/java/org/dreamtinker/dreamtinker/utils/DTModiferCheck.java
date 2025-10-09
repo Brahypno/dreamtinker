@@ -77,13 +77,13 @@ public class DTModiferCheck {
         for (EquipmentSlot slot : slots)
             if (0 < getModifierlevel(entity, modifierId, slot))
                 return ToolStack.from(entity.getItemBySlot(slot));
-        
+
         return null;
     }
 
     public static int getItemModifierTagNum(ItemStack stack, TagKey<Modifier> tag) {
         int matched = 0;
-        if (!stack.isEmpty() && stack.is(TinkerTags.Items.MODIFIABLE)){
+        if (null != stack && !stack.isEmpty() && stack.is(TinkerTags.Items.MODIFIABLE)){
             ToolStack toolStack = ToolStack.from(stack);
             for (ModifierEntry modifier : toolStack.getModifiers()) {
                 matched += modifier.getModifier().is(tag) ? 1 : 0;

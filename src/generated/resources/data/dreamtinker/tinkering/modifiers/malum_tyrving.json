@@ -4,5 +4,13 @@
     "modid": "malum"
   },
   "level_display": "tconstruct:no_levels",
+  "modules": [
+    {
+      "type": "tconstruct:stat_boost",
+      "flat": -0.6,
+      "operation": "multiply_all",
+      "stat": "tconstruct:attack_damage"
+    }
+  ],
   "tooltip_display": "always"
 }

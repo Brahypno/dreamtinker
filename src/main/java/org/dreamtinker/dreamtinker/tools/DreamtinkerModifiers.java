@@ -166,6 +166,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             MALUM_MODIFIERS.register("malum_spirit_attributes", () -> new malum_attributes(1));
     public static final StaticModifier<malum_attributes> malum_soul_attributes =
             MALUM_MODIFIERS.register("malum_soul_attributes", () -> new malum_attributes(2));
+    public static final StaticModifier<malum_attributes> malum_malignant_attributes =
+            MALUM_MODIFIERS.register("malum_malignant_attributes", () -> new malum_attributes(3));
 
     public static final StaticModifier<MalumHexStaff> malum_hex_staff =
             MALUM_MODIFIERS.register("malum_hex_staff", MalumHexStaff::new);
@@ -198,6 +200,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId malum_replenishing = id("malum_replenishing");
         public static final ModifierId malum_spirit_plunder = id("malum_spirit_plunder");
         public static final ModifierId malum_tyrving = id("malum_tyrving");
+        public static final ModifierId malum_world_of_weight = id("malum_world_of_weight");
+        public static final ModifierId malum_edge_of_deliverance = id("malum_edge_of_deliverance");
 
         private static ModifierId id(String name) {
             return new ModifierId(Dreamtinker.MODID, name);

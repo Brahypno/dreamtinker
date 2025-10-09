@@ -43,6 +43,22 @@
     {
       "id": "dreamtinker:malum_soul_attributes",
       "required": false
+    },
+    {
+      "id": "dreamtinker:malum_malignant_attributes",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_edge_of_deliverance",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_tyrving",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_world_of_weight",
+      "required": false
     }
   ]
 }

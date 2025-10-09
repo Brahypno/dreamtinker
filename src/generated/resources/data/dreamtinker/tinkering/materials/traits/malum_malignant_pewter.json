@@ -1,0 +1,24 @@
+{
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "dreamtinker:malum_malignant_attributes"
+      }
+    ],
+    "tconstruct:melee_harvest": [
+      {
+        "level": 1,
+        "name": "dreamtinker:malum_distortion"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:malum_world_of_weight"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:malum_edge_of_deliverance"
+      }
+    ]
+  }
+}

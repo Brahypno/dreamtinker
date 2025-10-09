@@ -60,7 +60,10 @@
     "malum_hex_staff": "#7F08FC",
     "malum_soul_attributes": "#D9822B",
     "malum_spirit_accelerator": "#D9822B",
-    "malum_tyrving": "#D9822B"
+    "malum_tyrving": "#D9822B",
+    "malum_world_of_weight": "#C9B7D6",
+    "malum_edge_of_deliverance": "#F3EAF7",
+    "malum_malignant_attributes": "#8F79A8"
 },
   "material.dreamtinker": {
     "echo_shard": "#034150",
@@ -76,7 +79,8 @@
     "malum_spirit_fabric": "#6E2CA3",
     "malum_hallowed_gold": "#B86F22",
     "malum_mnemonic_fragment": "#7F08FC",
-    "malum_soul_stained_steel": "#BE86E9"
+    "malum_soul_stained_steel": "#BE86E9",
+    "malum_malignant_pewter": "#C9B7D6"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873"

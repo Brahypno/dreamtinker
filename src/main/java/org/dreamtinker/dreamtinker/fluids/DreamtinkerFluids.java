@@ -184,7 +184,10 @@ public class DreamtinkerFluids {
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.CRIMSON_NYLIUM, 7), 0, 0) {});
 
     public static final FlowingFluidObject<ForgeFlowingFluid> molten_soul_stained_steel =
-            registerFluid(MALUM_FLUIDS, "malum_molten_soul_stained_steel", 1700, 100, 10, 7,
+            registerFluid(MALUM_FLUIDS, "malum_molten_soul_stained_steel", 1200, 100, 10, 7,
+                          supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_PURPLE, 7), 0, 0) {});
+    public static final FlowingFluidObject<ForgeFlowingFluid> molten_malignant_pewter =
+            registerFluid(MALUM_FLUIDS, "malum_molten_malignant_pewter", 1800, 100, 10, 7,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_PURPLE, 7), 0, 0) {});
 
 }

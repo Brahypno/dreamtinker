@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "dreamtinker:malum_malignant_pewter",
+  "result": {
+    "amount": 130,
+    "fluid": "dreamtinker:malum_molten_malignant_pewter"
+  },
+  "temperature": 1500
+}

@@ -23,5 +23,7 @@ public class DreamtinkerMaterialIds {
     public static final MaterialId hallowed_gold = new MaterialId(new ResourceLocation(MODID, "malum_hallowed_gold"));
     public static final MaterialId mnemonic_fragment = new MaterialId(new ResourceLocation(MODID, "malum_mnemonic_fragment"));
     public static final MaterialId soul_stained_steel = new MaterialId(new ResourceLocation(MODID, "malum_soul_stained_steel"));
+    public static final MaterialId malignant_pewter = new MaterialId(new ResourceLocation(MODID, "malum_malignant_pewter"));
+
 
 }

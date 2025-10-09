@@ -14,7 +14,8 @@
     "malum_mixin.HiddenTagRegistryMixin",
     "malum_mixin.SpiritInfusionRecipeBuilderAccessor",
     "malum_mixin.SpiritInfusionRecipeBuilderResultMixin",
-    "malum_mixin.SoulHandlerMixin"],
+    "malum_mixin.SoulHandlerMixin",
+    "malum_mixin.EdgeOfDeliveranceItemMixin"],
   "client": [
   ],
   "injectors": {

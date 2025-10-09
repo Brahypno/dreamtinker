@@ -39,7 +39,7 @@ import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.enigmatic_legacy.addUnholywater;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.enigmatic_legacy.death_handler;
-import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.malum.malum_hurt_handler;
+import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.malum.malum_events_handler;
 import org.dreamtinker.dreamtinker.world.data.DTDataPackProvider;
 import slimeknights.tconstruct.fluids.data.FluidBucketModelProvider;
 import slimeknights.tconstruct.library.utils.Util;
@@ -76,7 +76,8 @@ public class Dreamtinker {
             forgeEventBus.addListener(death_handler::onLivingDeath);
         }
         if (ModList.get().isLoaded("malum")){
-            forgeEventBus.addListener(malum_hurt_handler::MalumLivingHurtEvent);
+            forgeEventBus.addListener(malum_events_handler::MalumLivingHurtEvent);
+            forgeEventBus.addListener(malum_events_handler::MalumLivingDeathEvent);
         }
 
         forgeEventBus.addListener(PlayerLeftClickEvent::onLeftClickBlock);

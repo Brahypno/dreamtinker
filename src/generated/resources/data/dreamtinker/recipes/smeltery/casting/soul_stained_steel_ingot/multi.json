@@ -3,7 +3,7 @@
   "cast": {
     "tag": "tconstruct:casts/multi_use/ingot"
   },
-  "cooling_time": 78,
+  "cooling_time": 63,
   "fluid": {
     "amount": 90,
     "fluid": "dreamtinker:malum_molten_soul_stained_steel"

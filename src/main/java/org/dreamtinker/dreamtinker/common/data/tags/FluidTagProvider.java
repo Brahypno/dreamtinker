@@ -43,6 +43,7 @@ public class FluidTagProvider extends FluidTagsProvider {
         addFullTag(DreamtinkerFluids.reversed_shadow, DreamtinkerTagkeys.Fluids.reversed_shadow);
         addFullTag(DreamtinkerFluids.blood_soul, DreamtinkerTagkeys.Fluids.blood_soul);
         addFullTag(DreamtinkerFluids.molten_soul_stained_steel, DreamtinkerTagkeys.Fluids.molten_soul_stained_steel);
+        addFullTag(DreamtinkerFluids.molten_malignant_pewter, DreamtinkerTagkeys.Fluids.molten_malignant_pewter);
 
         addFullTag(DreamtinkerFluids.blood_soul, DreamtinkerTagkeys.Fluids.narcissus_wing_used);
 
@@ -50,7 +51,7 @@ public class FluidTagProvider extends FluidTagsProvider {
         this.tag(TinkerTags.Fluids.METAL_TOOLTIPS)
             .addTags(DreamtinkerFluids.molten_lupi_antimony.getTag())
             .addOptionalTags(DreamtinkerFluids.molten_evil.getTag(), DreamtinkerFluids.molten_soul_aether.getTag(),
-                             DreamtinkerFluids.molten_soul_stained_steel.getTag());
+                             DreamtinkerFluids.molten_soul_stained_steel.getTag(), DreamtinkerFluids.molten_malignant_pewter.getTag());
     }
 
     private void addFullTag(FlowingFluidObject<?> fluid, TagKey<Fluid> fluidTagKey) {

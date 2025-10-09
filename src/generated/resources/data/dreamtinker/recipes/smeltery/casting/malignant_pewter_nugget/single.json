@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/single_use/nugget"
+  },
+  "cast_consumed": true,
+  "cooling_time": 27,
+  "fluid": {
+    "amount": 10,
+    "fluid": "dreamtinker:malum_molten_malignant_pewter"
+  },
+  "result": "malum:malignant_pewter_nugget"
+}

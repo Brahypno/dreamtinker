@@ -12,8 +12,10 @@ import slimeknights.tconstruct.library.modifiers.impl.BasicModifier;
 import slimeknights.tconstruct.library.modifiers.modules.build.EnchantmentModule;
 import slimeknights.tconstruct.library.modifiers.modules.build.ModifierRequirementsModule;
 import slimeknights.tconstruct.library.modifiers.modules.build.ModifierSlotModule;
+import slimeknights.tconstruct.library.modifiers.modules.build.StatBoostModule;
 import slimeknights.tconstruct.library.modifiers.util.ModifierLevelDisplay;
 import slimeknights.tconstruct.library.tools.SlotType;
+import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 public class DreamtinkerModifierProvider extends AbstractModifierProvider implements IConditionBuilder {
     public DreamtinkerModifierProvider(PackOutput packOutput) {
@@ -80,8 +82,13 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(DreamtinkerModifiers.Ids.malum_spirit_plunder, modLoaded("malum"))
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModule(EnchantmentModule.builder(EnchantmentRegistry.SPIRIT_PLUNDER.get()).level(2).constant());
-        
+
         buildModifier(DreamtinkerModifiers.Ids.malum_tyrving, modLoaded("malum"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(StatBoostModule.multiplyAll(ToolStats.ATTACK_DAMAGE).flat(-0.6f));
+        buildModifier(DreamtinkerModifiers.Ids.malum_world_of_weight, modLoaded("malum"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+        buildModifier(DreamtinkerModifiers.Ids.malum_edge_of_deliverance, modLoaded("malum"))
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
 
         buildModifier(DreamtinkerModifiers.Ids.el_nemesis_curse, modLoaded("enigmaticlegacy"))
