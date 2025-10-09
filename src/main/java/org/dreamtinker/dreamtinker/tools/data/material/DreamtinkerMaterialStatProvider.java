@@ -1,5 +1,6 @@
 package org.dreamtinker.dreamtinker.tools.data.material;
 
+import com.aizistral.enigmaticlegacy.api.materials.EnigmaticMaterials;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Tiers;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
@@ -46,7 +47,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          StatlessMaterialStats.BINDING);
 
         addMaterialStats(DreamtinkerMaterialIds.etherium,
-                         new HeadMaterialStats(3000, 8f, Tiers.NETHERITE, 5f),
+                         new HeadMaterialStats(3000, 8f, EnigmaticMaterials.ETHERIUM, 5f),
                          HandleMaterialStats.multipliers().durability(1.0f).miningSpeed(1.2f).attackDamage(1.3f).attackSpeed(1.4f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.nefarious,
@@ -54,7 +55,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          HandleMaterialStats.multipliers().durability(1.2f).miningSpeed(1.4f).attackDamage(0.6f).attackSpeed(1.2f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.soul_etherium,
-                         new HeadMaterialStats(10, 6f, Tiers.NETHERITE, 6f),
+                         new HeadMaterialStats(10, 6f, EnigmaticMaterials.ETHERIUM, 6f),
                          HandleMaterialStats.multipliers().durability(0.7f).miningSpeed(1.4f).attackDamage(1.6f).attackSpeed(0.7f).build(),
                          StatlessMaterialStats.BINDING);
 

@@ -48,9 +48,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
 
         addTraits(DreamtinkerMaterialIds.crying_obsidian, MELEE_HARVEST, DreamtinkerModifiers.sharpened_with);
         addTraits(DreamtinkerMaterialIds.crying_obsidian, RANGED, DreamtinkerModifiers.isolde);
-        callGetOrCreate(this, DreamtinkerMaterialIds.crying_obsidian).setTraits(ARMOR, List.of(
-                new ModifierEntry[]{new ModifierEntry(ModifierIds.luck, 2),
-                        new ModifierEntry(DreamtinkerModifiers.in_rain.getId(), 1)}));
+        addTraits(DreamtinkerMaterialIds.crying_obsidian, ARMOR, DreamtinkerModifiers.in_rain.getId(), ModifierIds.luck);
 
         callGetOrCreate(this, DreamtinkerMaterialIds.etherium).setTraits(MELEE_HARVEST, List.of(
                 new ModifierEntry(ModifierIds.smite, 2),
@@ -103,7 +101,6 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         return "Dreamtinker Material Modifier Provider";
     }
 
-    @SuppressWarnings("unchecked")
     private static MaterialTraits.Builder callGetOrCreate(AbstractMaterialTraitDataProvider self, MaterialId id) {
         try {
             Method m = AbstractMaterialTraitDataProvider.class.getDeclaredMethod("getOrCreateMaterialTraits", MaterialId.class);
