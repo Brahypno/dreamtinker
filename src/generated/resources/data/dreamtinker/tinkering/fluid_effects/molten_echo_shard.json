@@ -47,6 +47,6 @@
   ],
   "fluid": {
     "amount": 50,
-    "tag": "dreamtinker:molten_echo_shard"
+    "tag": "forge:molten_echo_shard"
   }
 }

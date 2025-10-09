@@ -19,6 +19,7 @@ public class DreamtinkerTagkeys {
 
         public static final TagKey<Modifier> EL_CURSED_MODIFIERS = DreamtinkerTag("cursed_modifiers");
         public static final TagKey<Modifier> EL_CURSED_RELIEF = DreamtinkerTag("cursed_relief");
+        public static final TagKey<Modifier> MALUM_EXPOSE_SOUL = DreamtinkerTag("malum_expose_soul");
     }
 
     public static class Fluids {
@@ -30,7 +31,7 @@ public class DreamtinkerTagkeys {
             return TagKey.create(ForgeRegistries.FLUIDS.getRegistryKey(), new ResourceLocation(Dreamtinker.MODID, name));
         }
 
-        public static final TagKey<Fluid> molten_echo_shard = dtTag("molten_echo_shard");
+        public static final TagKey<Fluid> molten_echo_shard = forgeTag("molten_echo_shard");
         public static final TagKey<Fluid> molten_echo_alloy = dtTag("molten_echo_alloy");
         public static final TagKey<Fluid> molten_nigrescence_antimony = dtTag("molten_nigrescence_antimony");
         public static final TagKey<Fluid> molten_albedo_stibium = dtTag("molten_albedo_stibium");
@@ -48,6 +49,7 @@ public class DreamtinkerTagkeys {
         public static final TagKey<Fluid> unholy_water = dtTag("unholy_water");
         public static final TagKey<Fluid> reversed_shadow = dtTag("reversed_shadow");
         public static final TagKey<Fluid> blood_soul = dtTag("blood_soul");
+        public static final TagKey<Fluid> molten_soul_stained_steel = dtTag("molten_soul_stained_steel");
 
         public static final TagKey<Fluid> narcissus_wing_used = dtTag("narcissus_wing_used");
     }

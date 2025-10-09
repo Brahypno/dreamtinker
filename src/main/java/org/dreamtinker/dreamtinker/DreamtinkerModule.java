@@ -31,6 +31,7 @@ public abstract class DreamtinkerModule {
     public static final DeferredRegister<MobEffect> EL_EFFECT = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, MODID);
     public static final FluidDeferredRegister FLUIDS = new FluidDeferredRegister(MODID);
     public static final FluidDeferredRegister EL_FLUIDS = new FluidDeferredRegister(MODID);
+    public static final FluidDeferredRegister MALUM_FLUIDS = new FluidDeferredRegister(MODID);
     public static final DeferredRegister<Codec<? extends IGlobalLootModifier>> LOOT_MODIFIERS =
             DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MODID);
     public static final SynchronizedDeferredRegister<CreativeModeTab> TABS = SynchronizedDeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
@@ -52,6 +53,9 @@ public abstract class DreamtinkerModule {
             EL_FLUIDS.register(bus);
             EL_ITEMS.register(bus);
             EL_EFFECT.register(bus);
+        }
+        if (ModList.get().isLoaded("malum")){
+            MALUM_FLUIDS.register(bus);
         }
         TABS.register(bus);
     }

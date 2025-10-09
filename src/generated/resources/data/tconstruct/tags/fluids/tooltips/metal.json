@@ -8,6 +8,10 @@
     {
       "id": "#dreamtinker:molten_soul_aether",
       "required": false
+    },
+    {
+      "id": "#dreamtinker:malum_molten_soul_stained_steel",
+      "required": false
     }
   ]
 }

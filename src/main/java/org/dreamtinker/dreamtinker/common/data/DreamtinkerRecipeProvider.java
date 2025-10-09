@@ -4,6 +4,7 @@ import com.aizistral.enigmaticlegacy.registries.EnigmaticBlocks;
 import com.aizistral.enigmaticlegacy.registries.EnigmaticItems;
 import com.sammy.malum.data.recipe.builder.SpiritInfusionRecipeBuilder;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
+import com.sammy.malum.registry.common.block.BlockRegistry;
 import com.sammy.malum.registry.common.item.ItemRegistry;
 import com.sammy.malum.registry.common.item.ItemTagRegistry;
 import net.minecraft.data.PackOutput;
@@ -220,6 +221,9 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                 .setFluid(FluidIngredient.of(DreamtinkerTagkeys.Fluids.molten_albedo_stibium, FluidValues.GEM * 3))
                                 .setCoolingTime(10)
                                 .save(consumer, location(folder + "unborn_dragon_egg"));
+        ItemCastingRecipeBuilder.basinRecipe(BlockRegistry.BLOCK_OF_SOUL_STAINED_STEEL.get())
+                                .setFluidAndTime(DreamtinkerFluids.molten_soul_stained_steel, FluidValues.METAL_BLOCK)
+                                .save(consumer, location(folder + "soul_stained_steel/block"));
     }
 
     private void addMeltingRecipes(Consumer<FinishedRecipe> consumer) {
@@ -336,6 +340,23 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                             .addByproduct(DreamtinkerFluids.molten_crying_obsidian.result(FluidValues.GLASS_PANE))
                             .save(consumer, location(folder + "twist/reinforcement"));
 
+        MeltingRecipeBuilder.melting(Ingredient.of(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get()), DreamtinkerFluids.molten_soul_stained_steel, FluidValues.INGOT,
+                                     2.0f)
+                            .save(consumer, location(folder + "soul_stained_steel/ingot"));
+        MeltingRecipeBuilder.melting(Ingredient.of(ItemRegistry.SOUL_STAINED_STEEL_NUGGET.get()), DreamtinkerFluids.molten_soul_stained_steel,
+                                     FluidValues.NUGGET,
+                                     2.0f)
+                            .save(consumer, location(folder + "soul_stained_steel/nugget"));
+        MeltingRecipeBuilder.melting(Ingredient.of(BlockRegistry.BLOCK_OF_SOUL_STAINED_STEEL.get()), DreamtinkerFluids.molten_soul_stained_steel,
+                                     FluidValues.METAL_BLOCK, 2.0f)
+                            .save(consumer, location(folder + "soul_stained_steel/block"));
+        MeltingRecipeBuilder.melting(Ingredient.of(ItemRegistry.SOUL_STAINED_STEEL_PLATING.get()), DreamtinkerFluids.molten_soul_stained_steel,
+                                     65,//FluidValues.NUGGET * 6.5,
+                                     2.0f)
+                            .save(consumer, location(folder + "soul_stained_steel/plating"));
+        cast(DreamtinkerFluids.molten_soul_stained_steel.get(), ItemRegistry.SOUL_STAINED_STEEL_INGOT.get(), FluidValues.INGOT, consumer);
+        cast(DreamtinkerFluids.molten_soul_stained_steel.get(), ItemRegistry.SOUL_STAINED_STEEL_NUGGET.get(), FluidValues.NUGGET, consumer);
+
     }
 
     String materials_folder = "tools/materials/";
@@ -398,6 +419,11 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                        materials_folder + "hallowed_gold");
         materialRecipe(consumer, DreamtinkerMaterialIds.mnemonic_fragment, Ingredient.of(ItemRegistry.MNEMONIC_FRAGMENT.get()), 1, 4,
                        materials_folder + "mnemonic_fragment");
+        materialRecipe(consumer, DreamtinkerMaterialIds.soul_stained_steel, Ingredient.of(ItemRegistry.SOUL_STAINED_STEEL_PLATING.get()), 1, 2,
+                       materials_folder + "soul_stained_steel");
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.soul_stained_steel, DreamtinkerFluids.molten_soul_stained_steel, 130,
+                               materials_folder);
+
     }
 
     private void addCraftingRecipes(Consumer<FinishedRecipe> consumer) {

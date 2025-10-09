@@ -1,6 +1,9 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum;
 
+import com.google.common.collect.Multimap;
+import com.sammy.malum.common.item.curiosities.armor.MalignantStrongholdArmorItem;
 import com.sammy.malum.common.item.curiosities.armor.SoulHunterArmorItem;
+import com.sammy.malum.common.item.curiosities.armor.SoulStainedSteelArmorItem;
 import com.sammy.malum.registry.common.item.ItemRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -26,18 +29,27 @@ import java.util.UUID;
 import java.util.function.BiConsumer;
 
 public class malum_attributes extends Modifier implements AttributesModifierHook {
+    private final int tier;
+
+    public malum_attributes(int tier) {
+        this.tier = tier;
+    }
+
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
         hookBuilder.addHook(this, ModifierHooks.ATTRIBUTES);
         super.registerHooks(hookBuilder);
     }
 
+    private final SoulHunterArmorItem soulHunterArmorItem = (SoulHunterArmorItem) ItemRegistry.SOUL_HUNTER_CLOAK.get();
+    private final SoulStainedSteelArmorItem soulStainedSteelArmorItem = (SoulStainedSteelArmorItem) ItemRegistry.SOUL_STAINED_STEEL_LEGGINGS.get();
+    private final MalignantStrongholdArmorItem malignantStrongholdArmorItem = (MalignantStrongholdArmorItem) ItemRegistry.MALIGNANT_STRONGHOLD_BOOTS.get();
+
     @Override
     public void addAttributes(IToolStackView iToolStackView, ModifierEntry modifierEntry, EquipmentSlot equipmentSlot, BiConsumer<Attribute, AttributeModifier> biConsumer) {
         ArmorItem.Type type = armorTypeFromSlot(equipmentSlot);
         if (null != type)
-            for (Map.Entry<Attribute, AttributeModifier> e :
-                    ((SoulHunterArmorItem) ItemRegistry.SOUL_HUNTER_CLOAK.get()).createExtraAttributes(type).entries()) {
+            for (Map.Entry<Attribute, AttributeModifier> e : createExtraAttributes(type).entries()) {
                 Attribute attr = e.getKey();
                 AttributeModifier mod = e.getValue();
                 AttributeModifier scaled = new AttributeModifier(
@@ -50,6 +62,14 @@ public class malum_attributes extends Modifier implements AttributesModifierHook
                                                 Attributes.ATTACK_SPEED.getDescriptionId(),
                                                 -0.05 * modifierEntry.getLevel(),
                                                 AttributeModifier.Operation.MULTIPLY_TOTAL));
+    }
+
+    private Multimap<Attribute, AttributeModifier> createExtraAttributes(ArmorItem.Type type) {
+        switch (tier) {
+            case 2 -> {return soulStainedSteelArmorItem.createExtraAttributes(type);}
+            case 3 -> {return malignantStrongholdArmorItem.createExtraAttributes(type);}
+        }
+        return soulHunterArmorItem.createExtraAttributes(type);
     }
 
     @Nullable
@@ -67,13 +87,19 @@ public class malum_attributes extends Modifier implements AttributesModifierHook
 
     @Override
     public @NotNull Component getDisplayName(int level) {
-        return Component.translatable(real_key).append(" ").append(RomanNumeralHelper.getNumeral(level))
-                        .withStyle((style) -> style.withColor(this.getTextColor()));
+        if (1 == tier)
+            return Component.translatable(real_key).append(" ").append(RomanNumeralHelper.getNumeral(level))
+                            .withStyle((style) -> style.withColor(this.getTextColor()));
+        else
+            return super.getDisplayName(level);
     }
 
     @Override
     public @NotNull List<Component> getDescriptionList(int level) {
-        return Arrays.asList(Component.translatable(real_key + ".flavor").withStyle(ChatFormatting.ITALIC),
-                             Component.translatable(real_key + ".description").withStyle(ChatFormatting.GRAY));
+        if (1 == tier)
+            return Arrays.asList(Component.translatable(real_key + ".flavor").withStyle(ChatFormatting.ITALIC),
+                                 Component.translatable(real_key + ".description").withStyle(ChatFormatting.GRAY));
+        else
+            return super.getDescriptionList(level);
     }
 }

@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "item": "malum:block_of_soul_stained_steel"
+  },
+  "result": {
+    "amount": 810,
+    "fluid": "dreamtinker:malum_molten_soul_stained_steel"
+  },
+  "temperature": 1400,
+  "time": 155
+}

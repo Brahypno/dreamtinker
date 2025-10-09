@@ -33,7 +33,8 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
 
         addMaterial(DreamtinkerMaterialIds.spirit_fabric, 2, 10, true, false, modLoaded("malum"));
         addMaterial(DreamtinkerMaterialIds.hallowed_gold, 2, 15, true, false, modLoaded("malum"));
-        addMaterial(DreamtinkerMaterialIds.mnemonic_fragment, 2, 40, false, true, modLoaded("malum"));
+        addMaterial(DreamtinkerMaterialIds.mnemonic_fragment, 2, 30, false, true, modLoaded("malum"));
+        addMaterial(DreamtinkerMaterialIds.soul_stained_steel, 3, 40, false, false, modLoaded("malum"));
     }
 
     @Override

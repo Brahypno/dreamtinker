@@ -1,5 +1,6 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.events.compact.malum;
 
+import com.sammy.malum.common.item.curiosities.weapons.TyrvingItem;
 import com.sammy.malum.common.item.curiosities.weapons.scythe.MalumScytheItem;
 import com.sammy.malum.registry.common.item.ItemRegistry;
 import com.sammy.malum.registry.common.item.ItemTagRegistry;
@@ -7,7 +8,9 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import slimeknights.tconstruct.library.tools.item.ModifiableItem;
+import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
 public class malum_hurt_handler {
     public static void MalumLivingHurtEvent(LivingHurtEvent event) {
@@ -17,6 +20,8 @@ public class malum_hurt_handler {
             if (stack.getItem() instanceof ModifiableItem && stack.is(ItemTagRegistry.SCYTHE)){
                 ((MalumScytheItem) ItemRegistry.CRUDE_SCYTHE.get()).hurtEvent(event, player, event.getEntity(), stack);
             }
+            if (0 < ToolStack.from(stack).getModifierLevel(DreamtinkerModifiers.Ids.malum_tyrving))
+                ((TyrvingItem) ItemRegistry.TYRVING.get()).hurtEvent(event, player, event.getEntity(), stack);
         }
     }
 }

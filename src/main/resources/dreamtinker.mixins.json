@@ -13,7 +13,8 @@
     "enigmatic_legacy_mixin.SuperpositionHandlerMixin",
     "malum_mixin.HiddenTagRegistryMixin",
     "malum_mixin.SpiritInfusionRecipeBuilderAccessor",
-    "malum_mixin.SpiritInfusionRecipeBuilderResultMixin"],
+    "malum_mixin.SpiritInfusionRecipeBuilderResultMixin",
+    "malum_mixin.SoulHandlerMixin"],
   "client": [
   ],
   "injectors": {

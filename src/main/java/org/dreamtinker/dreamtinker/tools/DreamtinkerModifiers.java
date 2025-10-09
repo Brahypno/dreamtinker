@@ -2,8 +2,12 @@ package org.dreamtinker.dreamtinker.tools;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
@@ -159,10 +163,14 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<malum_base> malum_base =
             MALUM_MODIFIERS.register("malum_base", malum_base::new);
     public static final StaticModifier<malum_attributes> malum_spirit_attributes =
-            MALUM_MODIFIERS.register("malum_spirit_attributes", malum_attributes::new);
+            MALUM_MODIFIERS.register("malum_spirit_attributes", () -> new malum_attributes(1));
+    public static final StaticModifier<malum_attributes> malum_soul_attributes =
+            MALUM_MODIFIERS.register("malum_soul_attributes", () -> new malum_attributes(2));
 
     public static final StaticModifier<MalumHexStaff> malum_hex_staff =
             MALUM_MODIFIERS.register("malum_hex_staff", MalumHexStaff::new);
+    public static final StaticModifier<range_accelerator> malum_range_accelerator =
+            MALUM_MODIFIERS.register("malum_spirit_accelerator", () -> new range_accelerator(malumTag("spirit")));
 
     public static class Ids {
         public static final ModifierId soul_form = id("soul_form");
@@ -191,6 +199,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId malum_haunted = id("malum_haunted");
         public static final ModifierId malum_replenishing = id("malum_replenishing");
         public static final ModifierId malum_spirit_plunder = id("malum_spirit_plunder");
+        public static final ModifierId malum_tyrving = id("malum_tyrving");
 
         private static ModifierId id(String name) {
             return new ModifierId(Dreamtinker.MODID, name);
@@ -227,5 +236,9 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         generator.addProvider(server, new DreamtinkerModifierProvider(packOutput));
         generator.addProvider(server, new DreamtinkerFluidEffectProvider(packOutput));
         generator.addProvider(server, new DreamtinkerEnchantmentToModifierProvider(packOutput));
+    }
+
+    private static TagKey<Item> malumTag(String name) {
+        return ItemTags.create(new ResourceLocation("malum", name));
     }
 }

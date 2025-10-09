@@ -58,6 +58,10 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
         this.tag(TinkerTags.Modifiers.INTERACTION_ABILITIES)
             .add(memory_base.getId())
             .addOptional(Ids.malum_ascension, Ids.malum_rebound);
+        this.tag(DreamtinkerTagkeys.Modifiers.MALUM_EXPOSE_SOUL)
+            .addOptional(malum_hex_staff.getId(), malum_base.getId(), malum_distortion.getId(), malum_spirit_attributes.getId(),
+                         Ids.malum_animated, Ids.malum_rebound, Ids.malum_ascension, Ids.malum_haunted, Ids.malum_replenishing, Ids.malum_spirit_plunder,
+                         malum_soul_attributes.getId());
     }
 
     @Override

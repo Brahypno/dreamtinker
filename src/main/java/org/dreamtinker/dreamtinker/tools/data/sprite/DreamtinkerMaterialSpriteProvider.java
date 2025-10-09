@@ -170,5 +170,17 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFFFCF4D3)  // 暖橙亮面
                                                 .addARGB(255, 0xFFFCF4D3)  // 乳白反光
                                                 .build());
+        this.buildMaterial(DreamtinkerMaterialIds.soul_stained_steel)
+            .meleeHarvest().ranged().armor()
+            .fallbacks("metal")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(0, 0xFF0B0710)  // 最暗：近黑紫
+                                                .addARGB(63, 0xFF181022)  // 深阴影紫
+                                                .addARGB(102, 0xFF3A1F57)  // 深紫
+                                                .addARGB(140, 0xFF5E2F8F)  // 中紫
+                                                .addARGB(178, 0xFF8A57C8)  // 明亮紫
+                                                .addARGB(216, 0xFFBE86E9)  // 淡粉紫高光
+                                                .addARGB(255, 0xFFF3C9FF)  // 最亮高光（近白粉）
+                                                .build());
     }
 }

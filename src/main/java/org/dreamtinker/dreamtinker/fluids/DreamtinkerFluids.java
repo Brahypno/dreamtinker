@@ -22,8 +22,7 @@ import slimeknights.tconstruct.fluids.block.BurningLiquidBlock;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import static org.dreamtinker.dreamtinker.DreamtinkerModule.EL_FLUIDS;
-import static org.dreamtinker.dreamtinker.DreamtinkerModule.FLUIDS;
+import static org.dreamtinker.dreamtinker.DreamtinkerModule.*;
 
 public class DreamtinkerFluids {
 
@@ -183,5 +182,9 @@ public class DreamtinkerFluids {
     public static final FlowingFluidObject<ForgeFlowingFluid> blood_soul =
             registerFluid(FLUIDS, "blood_soul", 37, 100, 10, 7,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.CRIMSON_NYLIUM, 7), 0, 0) {});
+
+    public static final FlowingFluidObject<ForgeFlowingFluid> molten_soul_stained_steel =
+            registerFluid(MALUM_FLUIDS, "malum_molten_soul_stained_steel", 1700, 100, 10, 7,
+                          supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_PURPLE, 7), 0, 0) {});
 
 }

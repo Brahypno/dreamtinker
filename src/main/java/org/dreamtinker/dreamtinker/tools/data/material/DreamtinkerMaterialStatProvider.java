@@ -63,8 +63,12 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addMaterialStats(DreamtinkerMaterialIds.hallowed_gold,
                          new HeadMaterialStats(32, 15f, Tiers.GOLD, 0f));
         addMaterialStats(DreamtinkerMaterialIds.mnemonic_fragment,
-                         new HeadMaterialStats(1125, 1f, Tiers.IRON, 2f),
-                         HandleMaterialStats.multipliers().durability(1.1f).miningSpeed(1.05f).attackDamage(1.1f).attackSpeed(1.2f).build(),
+                         new HeadMaterialStats(1000, 1f, Tiers.IRON, 0f),
+                         HandleMaterialStats.multipliers().durability(0.8f).miningSpeed(1.05f).attackDamage(1.1f).attackSpeed(1.2f).build(),
+                         StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.soul_stained_steel,
+                         new HeadMaterialStats(1450, 1.5f, Tiers.DIAMOND, 0.5f),
+                         HandleMaterialStats.multipliers().durability(1.2f).miningSpeed(1.05f).attackDamage(1.3f).attackSpeed(0.8f).build(),
                          StatlessMaterialStats.BINDING);
     }
 
@@ -96,13 +100,16 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new LimbMaterialStats(10, 1.6f, -0.1f, 0.6f),
                          new GripMaterialStats(0.2f, -0.6f, 7.0f),
                          StatlessMaterialStats.BOWSTRING);
+
         addMaterialStats(DreamtinkerMaterialIds.spirit_fabric,
                          StatlessMaterialStats.BOWSTRING);
-
         addMaterialStats(DreamtinkerMaterialIds.hallowed_gold,
                          new LimbMaterialStats(32, 0.3f, -0.15f, 0.1f),
                          new GripMaterialStats(-0.2f, 0.15f, 0f),
                          StatlessMaterialStats.BOWSTRING);
+        addMaterialStats(DreamtinkerMaterialIds.soul_stained_steel,
+                         new LimbMaterialStats(1200, 0.3f, -0.2f, 0.5f),
+                         new GripMaterialStats(-0.3f, 0.5f, 0.1f));
     }
 
     private void addArmor() {
@@ -132,6 +139,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                             StatlessMaterialStats.MAILLE);
         addArmorShieldStats(DreamtinkerMaterialIds.spirit_fabric,
                             PlatingMaterialStats.builder().durabilityFactor(16).armor(1f, 3f, 4f, 2f).toughness(0).knockbackResistance(0f),
+                            StatlessMaterialStats.MAILLE);
+        addArmorShieldStats(DreamtinkerMaterialIds.soul_stained_steel,
+                            PlatingMaterialStats.builder().durabilityFactor(24).armor(2f, 6f, 7f, 3f).toughness(2).knockbackResistance(0f),
                             StatlessMaterialStats.MAILLE);
     }
 

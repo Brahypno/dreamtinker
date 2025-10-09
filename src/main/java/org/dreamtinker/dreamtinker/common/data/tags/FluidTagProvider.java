@@ -8,6 +8,7 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagkeys;
 import org.dreamtinker.dreamtinker.fluids.DreamtinkerFluids;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.registration.object.FlowingFluidObject;
 import slimeknights.mantle.registration.object.FluidObject;
@@ -22,7 +23,7 @@ public class FluidTagProvider extends FluidTagsProvider {
     }
 
     @Override
-    protected void addTags(HolderLookup.Provider Provider) {
+    protected void addTags(HolderLookup.@NotNull Provider Provider) {
         addFullTag(DreamtinkerFluids.molten_echo_shard, DreamtinkerTagkeys.Fluids.molten_echo_shard);
         addFullTag(DreamtinkerFluids.molten_echo_alloy, DreamtinkerTagkeys.Fluids.molten_echo_alloy);
         addFullTag(DreamtinkerFluids.molten_nigrescence_antimony, DreamtinkerTagkeys.Fluids.molten_nigrescence_antimony);
@@ -41,12 +42,15 @@ public class FluidTagProvider extends FluidTagsProvider {
         addFullTag(DreamtinkerFluids.unholy_water, DreamtinkerTagkeys.Fluids.unholy_water);
         addFullTag(DreamtinkerFluids.reversed_shadow, DreamtinkerTagkeys.Fluids.reversed_shadow);
         addFullTag(DreamtinkerFluids.blood_soul, DreamtinkerTagkeys.Fluids.blood_soul);
+        addFullTag(DreamtinkerFluids.molten_soul_stained_steel, DreamtinkerTagkeys.Fluids.molten_soul_stained_steel);
+
         addFullTag(DreamtinkerFluids.blood_soul, DreamtinkerTagkeys.Fluids.narcissus_wing_used);
 
         tag(TinkerTags.Fluids.GLASS_TOOLTIPS).addTag(DreamtinkerFluids.molten_crying_obsidian.getTag());
         this.tag(TinkerTags.Fluids.METAL_TOOLTIPS)
             .addTags(DreamtinkerFluids.molten_lupi_antimony.getTag())
-            .addOptionalTags(DreamtinkerFluids.molten_evil.getTag(), DreamtinkerFluids.molten_soul_aether.getTag());
+            .addOptionalTags(DreamtinkerFluids.molten_evil.getTag(), DreamtinkerFluids.molten_soul_aether.getTag(),
+                             DreamtinkerFluids.molten_soul_stained_steel.getTag());
     }
 
     private void addFullTag(FlowingFluidObject<?> fluid, TagKey<Fluid> fluidTagKey) {

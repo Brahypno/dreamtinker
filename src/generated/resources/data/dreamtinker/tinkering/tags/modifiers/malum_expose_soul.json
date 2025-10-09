@@ -1,0 +1,48 @@
+{
+  "values": [
+    {
+      "id": "dreamtinker:malum_hex_staff",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_base",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_distortion",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_spirit_attributes",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_animated",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_rebound",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_ascension",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_haunted",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_replenishing",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_spirit_plunder",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_soul_attributes",
+      "required": false
+    }
+  ]
+}

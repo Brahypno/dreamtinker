@@ -83,6 +83,8 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
 
         buildModifier(DreamtinkerModifiers.Ids.malum_spirit_attributes_blank, not(modLoaded("malum")))
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+        buildModifier(DreamtinkerModifiers.Ids.malum_tyrving, modLoaded("malum"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
 
         buildModifier(DreamtinkerModifiers.Ids.el_nemesis_curse, modLoaded("enigmaticlegacy"))
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)

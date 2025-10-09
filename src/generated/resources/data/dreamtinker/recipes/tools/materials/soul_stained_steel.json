@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "malum:soul_stained_steel_plating"
+  },
+  "material": "dreamtinker:malum_soul_stained_steel",
+  "needed": 2,
+  "value": 1
+}
