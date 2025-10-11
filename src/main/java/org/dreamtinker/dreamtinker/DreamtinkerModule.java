@@ -24,6 +24,7 @@ import static org.dreamtinker.dreamtinker.Dreamtinker.MODID;
 public abstract class DreamtinkerModule {
     public static final DeferredRegister<Item> EL_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
+    public static final DeferredRegister<Item> MALUM_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
     public static final ItemDeferredRegisterExtension MODI_TOOLS = new ItemDeferredRegisterExtension(MODID);
     public static final EntityTypeDeferredRegister ENTITIES = new EntityTypeDeferredRegister(MODID);
     public static final BlockDeferredRegisterExtension BLOCKS = new BlockDeferredRegisterExtension(MODID);
@@ -56,6 +57,7 @@ public abstract class DreamtinkerModule {
         }
         if (ModList.get().isLoaded("malum")){
             MALUM_FLUIDS.register(bus);
+            MALUM_ITEMS.register(bus);
         }
         TABS.register(bus);
     }

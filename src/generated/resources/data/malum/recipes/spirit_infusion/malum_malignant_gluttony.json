@@ -1,0 +1,46 @@
+{
+  "type": "malum:spirit_infusion",
+  "extra_items": [
+    {
+      "count": 4,
+      "item": "malum:null_slate"
+    },
+    {
+      "count": 1,
+      "item": "malum:malignant_pewter_ingot"
+    },
+    {
+      "count": 3,
+      "item": "malum:cursed_sap"
+    },
+    {
+      "count": 1,
+      "item": "malum:fused_consciousness"
+    }
+  ],
+  "input": {
+    "count": 1,
+    "item": "malum:the_vessel"
+  },
+  "output": {
+    "item": "dreamtinker:malignant_gluttony"
+  },
+  "spirits": [
+    {
+      "type": "wicked",
+      "count": 6
+    },
+    {
+      "type": "sacred",
+      "count": 6
+    },
+    {
+      "type": "eldritch",
+      "count": 6
+    },
+    {
+      "type": "infernal",
+      "count": 6
+    }
+  ]
+}

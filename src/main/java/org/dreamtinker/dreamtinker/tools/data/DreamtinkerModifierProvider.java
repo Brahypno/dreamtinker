@@ -85,7 +85,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
 
         buildModifier(DreamtinkerModifiers.Ids.malum_tyrving, modLoaded("malum"))
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
-                .addModule(StatBoostModule.multiplyAll(ToolStats.ATTACK_DAMAGE).flat(-0.6f));
+                .addModule(StatBoostModule.multiplyAll(ToolStats.ATTACK_DAMAGE).flat(-0.4f));
         buildModifier(DreamtinkerModifiers.Ids.malum_world_of_weight, modLoaded("malum"))
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
         buildModifier(DreamtinkerModifiers.Ids.malum_edge_of_deliverance, modLoaded("malum"))

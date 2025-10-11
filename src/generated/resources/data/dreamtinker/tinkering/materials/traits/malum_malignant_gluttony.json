@@ -1,0 +1,24 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "dreamtinker:malum_haunted"
+    }
+  ],
+  "perStat": {
+    "tconstruct:melee_harvest": [
+      {
+        "level": 1,
+        "name": "dreamtinker:malum_haunted"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:malum_magic_attack"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:malum_erosion"
+      }
+    ]
+  }
+}

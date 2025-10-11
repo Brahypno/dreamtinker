@@ -16,6 +16,10 @@
     {
       "id": "#dreamtinker:malum_molten_malignant_pewter",
       "required": false
+    },
+    {
+      "id": "#dreamtinker:malum_molten_malignant_gluttony",
+      "required": false
     }
   ]
 }

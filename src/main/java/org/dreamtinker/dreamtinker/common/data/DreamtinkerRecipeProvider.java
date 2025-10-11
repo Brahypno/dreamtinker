@@ -377,6 +377,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         cast(DreamtinkerFluids.molten_malignant_pewter.get(), ItemRegistry.MALIGNANT_PEWTER_INGOT.get(), FluidValues.INGOT, consumer);
         cast(DreamtinkerFluids.molten_malignant_pewter.get(), ItemRegistry.MALIGNANT_PEWTER_NUGGET.get(), FluidValues.NUGGET, consumer);
 
+        cast(DreamtinkerFluids.molten_malignant_gluttony.get(), DreamtinkerCommon.malignant_gluttony.get(), FluidValues.INGOT, consumer);
+
     }
 
     String materials_folder = "tools/materials/";
@@ -410,7 +412,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
     private void addCompactMaterialRecipes(Consumer<FinishedRecipe> consumer) {
         addELMaterialRecipes(consumer);
-        addMalumMatarialRecipes(consumer);
+        addMalumMaterialRecipes(consumer);
     }
 
     private void addELMaterialRecipes(Consumer<FinishedRecipe> consumer) {
@@ -432,7 +434,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                           FluidValues.INGOT, materials_folder);
     }
 
-    private void addMalumMatarialRecipes(Consumer<FinishedRecipe> consumer) {
+    private void addMalumMaterialRecipes(Consumer<FinishedRecipe> consumer) {
         materialRecipe(consumer, DreamtinkerMaterialIds.spirit_fabric, Ingredient.of(ItemRegistry.SPIRIT_FABRIC.get()), 1, 3,
                        materials_folder + "spirit_fabric");
         materialRecipe(consumer, DreamtinkerMaterialIds.hallowed_gold, Ingredient.of(ItemRegistry.HALLOWED_GOLD_INGOT.get()), 1, 1,
@@ -446,6 +448,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         materialRecipe(consumer, DreamtinkerMaterialIds.malignant_pewter, Ingredient.of(ItemRegistry.MALIGNANT_PEWTER_PLATING.get()), 1, 2,
                        materials_folder + "malignant_pewter");
         materialMeltingCasting(consumer, DreamtinkerMaterialIds.malignant_pewter, DreamtinkerFluids.molten_malignant_pewter, 130,
+                               materials_folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.malignant_gluttony, Ingredient.of(DreamtinkerCommon.malignant_gluttony.get()), 1, 1,
+                       materials_folder + "malignant_gluttony");
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.malignant_gluttony, DreamtinkerFluids.molten_malignant_gluttony, FluidValues.INGOT,
                                materials_folder);
 
     }
@@ -490,6 +496,16 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                            .unlockedBy("has_item", has(DreamtinkerCommon.unborn_egg.get()))
                            //.group(prefix("fancy_item_frame"))
                            .save(consumer, location("casts/" + DreamtinkerCommon.wish_cast.get()));
+        new SpiritInfusionRecipeBuilder(ItemRegistry.THE_VESSEL.get(), 1, new ItemStack(DreamtinkerCommon.malignant_gluttony.get()))
+                .addExtraItem(ItemRegistry.NULL_SLATE.get(), 4)
+                .addExtraItem(ItemRegistry.MALIGNANT_PEWTER_INGOT.get(), 1)
+                .addExtraItem(ItemRegistry.CURSED_SAP.get(), 3)
+                .addExtraItem(ItemRegistry.FUSED_CONSCIOUSNESS.get(), 1)
+                .addSpirit(SpiritTypeRegistry.WICKED_SPIRIT, 6)
+                .addSpirit(SpiritTypeRegistry.SACRED_SPIRIT, 6)
+                .addSpirit(SpiritTypeRegistry.ELDRITCH_SPIRIT, 6)
+                .addSpirit(SpiritTypeRegistry.INFERNAL_SPIRIT, 6)
+                .build(consumer, "malum_" + DreamtinkerCommon.malignant_gluttony.getId().getPath());
     }
 
     String partFolder = "tools/parts/";
@@ -528,6 +544,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         malumCompactMaterialBuilder(consumer, DreamtinkerMaterialIds.mnemonic_fragment, 4, HeadMaterialStats.ID);
         malumCompactMaterialBuilder(consumer, DreamtinkerMaterialIds.mnemonic_fragment, 4, HandleMaterialStats.ID);
         malumCompactMaterialBuilder(consumer, DreamtinkerMaterialIds.mnemonic_fragment, 4, StatlessMaterialStats.BINDING.getIdentifier());
+
     }
 
     private void armorPlatingBuilder(Consumer<FinishedRecipe> consumer, MaterialId id) {
@@ -576,7 +593,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                     .addSpirit(SpiritTypeRegistry.AQUEOUS_SPIRIT, 2 * value)
                     .addSpirit(SpiritTypeRegistry.ELDRITCH_SPIRIT, 2 * value)
                     .addSpirit(SpiritTypeRegistry.INFERNAL_SPIRIT, 2 * value)
-                    .build(consumer, id.getPath() + part);
+                    .build(consumer, id.getPath() + "_" + part);
         }
 
 

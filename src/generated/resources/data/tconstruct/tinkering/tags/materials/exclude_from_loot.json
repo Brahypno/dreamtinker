@@ -23,6 +23,10 @@
     {
       "id": "dreamtinker:malum_malignant_pewter",
       "required": false
+    },
+    {
+      "id": "dreamtinker:malum_malignant_gluttony",
+      "required": false
     }
   ]
 }

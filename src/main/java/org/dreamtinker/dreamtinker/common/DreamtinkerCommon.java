@@ -136,6 +136,14 @@ public class DreamtinkerCommon extends DreamtinkerModule {
             }
     );
     public static final RegistryObject<Item> echo_alloy = ITEMS.register("echo_alloy", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> malignant_gluttony = ITEMS.register("malignant_gluttony", () -> new Item(ITEM_PROPS.rarity(Rarity.EPIC)) {
+        public void appendHoverText(@NotNull ItemStack stack, Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
+            tooltip.add(Component.translatable("tooltip.dreamtinker.malignant_gluttony_1").withStyle(ChatFormatting.BLACK));
+            tooltip.add(Component.translatable("tooltip.dreamtinker.malignant_gluttony_2").withStyle(ChatFormatting.AQUA));
+            tooltip.add(Component.translatable("tooltip.dreamtinker.malignant_gluttony_3").withStyle(ChatFormatting.DARK_PURPLE));
+            super.appendHoverText(stack, level, tooltip, flag);
+        }
+    });
 
     public static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         output.accept(echo_alloy.get());
@@ -157,6 +165,8 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         output.accept(unborn_dragon_egg.get());
         output.accept(unborn_sniffer_egg.get());
         output.accept(unborn_spawn_egg.get());
+        if (ModList.get().isLoaded("malum"))
+            output.accept(malignant_gluttony.get());
         if (ModList.get().isLoaded("enigmaticlegacy"))
             output.accept(soul_etherium.get());
     }

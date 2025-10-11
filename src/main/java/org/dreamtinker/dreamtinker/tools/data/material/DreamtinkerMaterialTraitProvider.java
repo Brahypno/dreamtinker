@@ -99,6 +99,9 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
                   Ids.malum_edge_of_deliverance);
         addTraits(DreamtinkerMaterialIds.malignant_pewter, ARMOR, malum_malignant_attributes);
 
+        addDefaultTraits(DreamtinkerMaterialIds.malignant_gluttony, Ids.malum_haunted);
+        addTraits(DreamtinkerMaterialIds.malignant_gluttony, MELEE_HARVEST, Ids.malum_haunted, malum_magic_attack.getId(), malum_erosion.getId());
+
     }
 
     @Override

@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "dreamtinker:malignant_gluttony"
+  },
+  "material": "dreamtinker:malum_malignant_gluttony",
+  "needed": 1,
+  "value": 1
+}

@@ -69,11 +69,15 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.soul_stained_steel,
                          new HeadMaterialStats(1450, 1.5f, Tiers.DIAMOND, 0.5f),
-                         HandleMaterialStats.multipliers().durability(1.2f).miningSpeed(1.05f).attackDamage(1.3f).attackSpeed(0.8f).build(),
+                         HandleMaterialStats.multipliers().durability(0.4f).miningSpeed(1.05f).attackDamage(0.7f).attackSpeed(0.8f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.malignant_pewter,
                          new HeadMaterialStats(1800, 2.0f, Tiers.NETHERITE, 7f),
-                         HandleMaterialStats.multipliers().durability(0.8f).miningSpeed(1.3f).attackDamage(1.2f).attackSpeed(0.4f).build(),
+                         HandleMaterialStats.multipliers().durability(1.2f).miningSpeed(1.3f).attackDamage(1.2f).attackSpeed(0.4f).build(),
+                         StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.malignant_gluttony,
+                         new HeadMaterialStats(1200, 3.0f, Tiers.NETHERITE, 2f),
+                         HandleMaterialStats.multipliers().durability(0.5f).miningSpeed(1.3f).attackDamage(1.2f).attackSpeed(1.2f).build(),
                          StatlessMaterialStats.BINDING);
     }
 
@@ -150,6 +154,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                             StatlessMaterialStats.MAILLE);
         addArmorShieldStats(DreamtinkerMaterialIds.malignant_pewter,
                             PlatingMaterialStats.builder().durabilityFactor(32).armor(3f, 6f, 8f, 3f).toughness(2).knockbackResistance(0f),
+                            StatlessMaterialStats.MAILLE);
+        addArmorShieldStats(DreamtinkerMaterialIds.malignant_gluttony,
+                            PlatingMaterialStats.builder().durabilityFactor(27).armor(3f, 5f, 6f, 3f).toughness(3).knockbackResistance(2f),
                             StatlessMaterialStats.MAILLE);
     }
 

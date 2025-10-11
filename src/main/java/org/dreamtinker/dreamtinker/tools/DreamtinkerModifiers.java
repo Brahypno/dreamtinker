@@ -40,6 +40,7 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegac
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum.MalumHexStaff;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum.malum_attributes;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum.malum_base;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum.malum_magic_attack;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.ender_dodge;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.soul_blessing;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.stone_heart;
@@ -170,9 +171,13 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             MALUM_MODIFIERS.register("malum_malignant_attributes", () -> new malum_attributes(3));
 
     public static final StaticModifier<MalumHexStaff> malum_hex_staff =
-            MALUM_MODIFIERS.register("malum_hex_staff", MalumHexStaff::new);
+            MALUM_MODIFIERS.register("malum_hex_staff", () -> new MalumHexStaff(false));
     public static final StaticModifier<range_accelerator> malum_range_accelerator =
             MALUM_MODIFIERS.register("malum_spirit_accelerator", () -> new range_accelerator(malumTag("spirit")));
+    public static final StaticModifier<malum_magic_attack> malum_magic_attack =
+            MALUM_MODIFIERS.register("malum_magic_attack", malum_magic_attack::new);
+    public static final StaticModifier<MalumHexStaff> malum_erosion =
+            MALUM_MODIFIERS.register("malum_erosion", () -> new MalumHexStaff(true));
 
     public static class Ids {
         public static final ModifierId soul_form = id("soul_form");
@@ -202,6 +207,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId malum_tyrving = id("malum_tyrving");
         public static final ModifierId malum_world_of_weight = id("malum_world_of_weight");
         public static final ModifierId malum_edge_of_deliverance = id("malum_edge_of_deliverance");
+
 
         private static ModifierId id(String name) {
             return new ModifierId(Dreamtinker.MODID, name);

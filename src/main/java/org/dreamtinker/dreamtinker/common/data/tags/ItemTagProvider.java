@@ -81,6 +81,7 @@ public class ItemTagProvider extends ItemTagsProvider {
         this.tag(ItemTags.FOX_FOOD).add(DreamtinkerCommon.white_peach.get());
         this.tag(ItemTags.ARROWS).add(DreamtinkerTools.tntarrow.get());
         addItemsTags(DreamtinkerCommon.narcissus.asItem(), ItemTags.SMALL_FLOWERS, ItemTags.FLOWERS);
+        this.tag(ItemTagRegistry.HIDDEN_UNTIL_BLACK_CRYSTAL).addOptional(DreamtinkerCommon.malignant_gluttony.getId());
 
     }
 
