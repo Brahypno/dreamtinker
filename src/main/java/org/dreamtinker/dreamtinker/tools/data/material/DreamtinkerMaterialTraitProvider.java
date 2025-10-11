@@ -98,6 +98,11 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
                   malum_distortion.getId(), Ids.malum_world_of_weight,
                   Ids.malum_edge_of_deliverance);
         addTraits(DreamtinkerMaterialIds.malignant_pewter, ARMOR, malum_malignant_attributes);
+        
+        addTraits(DreamtinkerMaterialIds.malignant_gluttony, MELEE_HARVEST, Ids.malum_haunted, malum_magic_attack.getId(), malum_erosion.getId(),
+                  Ids.thundering_curse, malum_thirsty.getId(), malum_evolution.getId());
+        addTraits(DreamtinkerMaterialIds.malignant_gluttony, ARMOR, Ids.thundering_curse, malum_thirsty.getId(), malum_spirit_defense.getId());
+
 
     }
 

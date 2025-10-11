@@ -9,6 +9,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
@@ -30,7 +31,7 @@ public class realDarkness extends MobEffect {
     }
 
     @Override
-    public void applyEffectTick(LivingEntity entity, int amplifier) {
+    public void applyEffectTick(@NotNull LivingEntity entity, int amplifier) {
         if (entity instanceof Mob mob){
             if (mob.getTarget() != null){
                 mob.setTarget(null);

@@ -41,7 +41,7 @@ public class EdgeOfDeliveranceItemMixin {
     private boolean dreamtinker$redirectIsOnDamageSource(
             DamageSource instance, TagKey<DamageType> p_270890_) {
         boolean base = instance.is(p_270890_);
-        return base || 0 < DTModiferCheck.getItemModifierTagNum(TL_STACK.get(), DreamtinkerTagkeys.Modifiers.MALUM_EXPOSE_SOUL);
+        return base || 0 < DTModiferCheck.getItemModifierNum(TL_STACK.get(), DreamtinkerTagkeys.Modifiers.MALUM_EXPOSE_SOUL);
     }
 
     @Inject(method = "hurtEvent(Lnet/minecraftforge/event/entity/living/LivingHurtEvent;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;)V",

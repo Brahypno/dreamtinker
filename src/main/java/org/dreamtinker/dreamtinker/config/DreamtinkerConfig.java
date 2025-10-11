@@ -205,6 +205,15 @@ public class DreamtinkerConfig {
             builder.comment("Percentage of Max HP taken by the curse").defineInRange("ExilesFaultyCurseHPPercentage", 0.01, 0, 100);
     public static final ForgeConfigSpec.DoubleValue ExilesFaultyAbsorbHPPercentage =
             builder.comment("Percentage of Damage turn into absorption").defineInRange("ExilesFaultyAbsorbHPPercentage", 0.1, 0, 100);
+    public static final ForgeConfigSpec.DoubleValue thunderCurse =
+            builder.comment("Percentage of Change thunder hit").defineInRange("thunderCurse", 0.01, 0, 1);
+
+    public static final ForgeConfigSpec.DoubleValue CancerousPredatorRate =
+            builder.comment("Base rate for every level of CancerousPredator").defineInRange("CancerousPredatorRate", 3.0, 1, 100);
+    public static final ForgeConfigSpec.DoubleValue CancerousPredatorFactor =
+            builder.comment("Base factor for every level of CancerousPredator").defineInRange("CancerousPredatorFactor", 20.0, 1, 100);
+    public static final ForgeConfigSpec.DoubleValue SpiritDefence =
+            builder.comment("Soul Ward status from Spirit defence").defineInRange("SpiritDefence", 3.0, 1, 100);
 
     public static final ForgeConfigSpec specs = builder.pop().build();
 

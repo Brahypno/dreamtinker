@@ -4,10 +4,10 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.common.effect.realDarkness;
+import org.dreamtinker.dreamtinker.common.effect.thirsty;
 import org.dreamtinker.dreamtinker.common.effect.unholy;
 
-import static org.dreamtinker.dreamtinker.DreamtinkerModule.EFFECT;
-import static org.dreamtinker.dreamtinker.DreamtinkerModule.EL_EFFECT;
+import static org.dreamtinker.dreamtinker.DreamtinkerModule.*;
 
 public class DreamtinkerEffects {
     public DreamtinkerEffects() {}
@@ -17,5 +17,6 @@ public class DreamtinkerEffects {
     public static final RegistryObject<MobEffect> RealDarkness = EFFECT.register("real_darkness", realDarkness::new);
     public static final RegistryObject<MobEffect> unholy = EL_EFFECT.register("unholy", unholy::new);
     public static final RegistryObject<MobEffect> cursed = EFFECT.register("cursed", () -> new MobEffect(MobEffectCategory.HARMFUL, 0xA64DFF) {});
+    public static final RegistryObject<thirsty> thirsty = MALUM_EFFECT.register("thirsty", thirsty::new);
 
 }

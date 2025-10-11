@@ -25,7 +25,7 @@ public abstract class SoulHandlerMixin {
         DamageSource source = event.getSource();
         if (!(source.getEntity() instanceof LivingEntity attacker))
             return;
-        
+
         ItemStack stack;
         try {
             stack = SoulDataHandler.getSoulHunterWeapon(source, attacker);
@@ -34,7 +34,7 @@ public abstract class SoulHandlerMixin {
             stack = attacker.getMainHandItem();
         }
 
-        if (0 < DTModiferCheck.getItemModifierTagNum(stack, DreamtinkerTagkeys.Modifiers.MALUM_EXPOSE_SOUL)){
+        if (0 < DTModiferCheck.getItemModifierNum(stack, DreamtinkerTagkeys.Modifiers.MALUM_EXPOSE_SOUL)){
             // 直接复用原逻辑
             SoulDataHandler.exposeSoul(event.getEntity());
         }

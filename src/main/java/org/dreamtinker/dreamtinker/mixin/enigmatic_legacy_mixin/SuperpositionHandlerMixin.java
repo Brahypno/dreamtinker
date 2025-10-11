@@ -18,7 +18,7 @@ public abstract class SuperpositionHandlerMixin {
     @Inject(method = "getCurseAmount(Lnet/minecraft/world/item/ItemStack;)I", at = @At("RETURN"), cancellable = true)
     private static void dreamtinker$injectCurseAmountBeforeReturn(ItemStack stack, CallbackInfoReturnable<Integer> cir) {
         int total = cir.getReturnValue() +
-                    DTModiferCheck.getItemModifierTagNum(stack, DreamtinkerTagkeys.Modifiers.EL_CURSED_MODIFIERS);
+                    DTModiferCheck.getItemModifierNum(stack, DreamtinkerTagkeys.Modifiers.EL_CURSED_MODIFIERS);
 
         cir.setReturnValue(total);
     }

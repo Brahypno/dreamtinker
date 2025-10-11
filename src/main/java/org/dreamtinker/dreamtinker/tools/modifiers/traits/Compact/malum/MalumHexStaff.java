@@ -1,7 +1,9 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum;
 
+import com.sammy.malum.common.capability.MalumPlayerDataCapability;
 import com.sammy.malum.registry.common.item.ItemRegistry;
 import net.minecraft.network.chat.Component;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -15,6 +17,12 @@ import slimeknights.tconstruct.library.modifiers.hook.interaction.InteractionSou
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 public class MalumHexStaff extends BattleModifier {
+    private final boolean Erosion;
+
+    public MalumHexStaff(boolean erosion) {
+        this.Erosion = erosion;
+    }
+
     @Override
     public InteractionResult onToolUse(IToolStackView tool, ModifierEntry modifier, Player player, InteractionHand hand, InteractionSource source) {
         ItemStack itemstack = player.getItemInHand(hand);
@@ -29,18 +37,46 @@ public class MalumHexStaff extends BattleModifier {
     @Override
     public void onUsingTick(IToolStackView tool, ModifierEntry modifier, LivingEntity entity, int useDuration, int timeLeft, ModifierEntry activeModifier) {
         InteractionHand hand = entity.getUsedItemHand();
-        if (1 < modifier.getLevel())
-            ItemRegistry.STAFF_OF_THE_AURIC_FLAME.get().onUseTick(entity.level(), entity, entity.getItemInHand(hand), timeLeft);
-        else
-            ItemRegistry.MNEMONIC_HEX_STAFF.get().onUseTick(entity.level(), entity, entity.getItemInHand(hand), timeLeft);
+        if (!this.Erosion){
+            if (1 < modifier.getLevel())
+                ItemRegistry.STAFF_OF_THE_AURIC_FLAME.get().onUseTick(entity.level(), entity, entity.getItemInHand(hand), timeLeft);
+            else
+                ItemRegistry.MNEMONIC_HEX_STAFF.get().onUseTick(entity.level(), entity, entity.getItemInHand(hand), timeLeft);
+        }else
+            ItemRegistry.EROSION_SCEPTER.get().onUseTick(entity.level(), entity, entity.getItemInHand(hand), timeLeft);
     }
 
     @Override
     public void onStoppedUsing(IToolStackView tool, ModifierEntry modifier, LivingEntity entity, int timeLeft) {
-        if (1 < modifier.getLevel())
-            ItemRegistry.STAFF_OF_THE_AURIC_FLAME.get().releaseUsing(entity.getItemInHand(entity.getUsedItemHand()), entity.level(), entity, timeLeft);
-        else
-            ItemRegistry.MNEMONIC_HEX_STAFF.get().releaseUsing(entity.getItemInHand(entity.getUsedItemHand()), entity.level(), entity, timeLeft);
+        int charge = 0;
+        ItemStack staff = entity.getItemInHand(entity.getUsedItemHand());
+        if (entity instanceof Player player){
+            MalumPlayerDataCapability capability = MalumPlayerDataCapability.getCapability(player);
+            charge = capability.reserveStaffChargeHandler.chargeCount;
+        }
+        if (!this.Erosion){
+            if (1 < modifier.getLevel())
+                for (int i = 0; i < modifier.getLevel() - 1; i++)
+                    ItemRegistry.STAFF_OF_THE_AURIC_FLAME.get()
+                                                         .releaseUsing(staff, entity.level(), entity, timeLeft);
+            else
+                ItemRegistry.MNEMONIC_HEX_STAFF.get().releaseUsing(staff, entity.level(), entity, timeLeft);
+        }else
+            for (int i = 0; i < modifier.getLevel(); i++)
+                ItemRegistry.EROSION_SCEPTER.get().releaseUsing(staff, entity.level(), entity, timeLeft);
+
+        if (entity instanceof Player player){
+            player.awardStat(Stats.ITEM_USED.get(staff.getItem()));
+            if (!player.getAbilities().instabuild){
+                if (charge <= 0)//reserveStaff consumed in above releaseUsing, this is used to add cooldown.
+                    player.getCooldowns()
+                          .addCooldown(staff.getItem(), this.Erosion || modifier.getLevel() < 2 ? 80 : 160);
+                else {
+                    MalumPlayerDataCapability capability = MalumPlayerDataCapability.getCapability(player);
+                    capability.reserveStaffChargeHandler.chargeCount = --charge;
+                }
+            }
+        }
     }
 
     @Override
@@ -50,7 +86,7 @@ public class MalumHexStaff extends BattleModifier {
 
     @Override
     public @NotNull Component getDisplayName(int level) {
-        return level < 2 ? super.getDisplayName() :
+        return this.Erosion || level < 2 ? super.getDisplayName() :
                Component.translatable("modifier.dreamtinker.malum_hex_staff_1").withStyle((style) -> style.withColor(this.getTextColor()));
     }
 }

@@ -8,6 +8,8 @@ import org.dreamtinker.dreamtinker.fluids.DreamtinkerFluids;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.fluid.texture.AbstractFluidTextureProvider;
 
+import java.util.Objects;
+
 public class DreamtinkerFluidTextureProvider extends AbstractFluidTextureProvider {
     public DreamtinkerFluidTextureProvider(PackOutput packOutput) {
         super(packOutput, Dreamtinker.MODID);
@@ -37,11 +39,13 @@ public class DreamtinkerFluidTextureProvider extends AbstractFluidTextureProvide
         this.commonFluid(DreamtinkerFluids.blood_soul.getType());
         this.commonFluid(DreamtinkerFluids.molten_soul_stained_steel.getType());
         this.commonFluid(DreamtinkerFluids.molten_malignant_pewter.getType());
+        this.commonFluid(DreamtinkerFluids.molten_malignant_gluttony.getType());
     }
 
     public void commonFluid(FluidType fluid) {
         super.texture(fluid)
-             .textures(Dreamtinker.getLocation("fluid/" + ForgeRegistries.FLUID_TYPES.get().getKey(fluid).getPath() + "/"), false, false);
+             .textures(Dreamtinker.getLocation("fluid/" + Objects.requireNonNull(ForgeRegistries.FLUID_TYPES.get().getKey(fluid)).getPath() + "/"), false,
+                       false);
     }
 
     @Override

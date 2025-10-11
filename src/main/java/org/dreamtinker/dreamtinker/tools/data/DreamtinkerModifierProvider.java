@@ -50,46 +50,14 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                                         .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                                                         .addModules(ModifierSlotModule.slot(SlotType.UPGRADE).eachLevel(1));
         buildModifier(DreamtinkerModifiers.Ids.full_concentration).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
+        buildModifier(DreamtinkerModifiers.Ids.thundering_curse).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
+
+        addELModifiers();
         addMalumModifiers();
 
     }
 
-    private void addMalumModifiers() {
-        buildModifier(DreamtinkerModifiers.Ids.malum_rebound, modLoaded("malum"))
-                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                .addModule(EnchantmentModule.builder(EnchantmentRegistry.REBOUND.get()).level(1).constant())
-                .addModule(ModifierRequirementsModule.builder().requireModifier(DreamtinkerModifiers.malum_base.getId(), 1)
-                                                     .requirement(HasModifierPredicate.hasModifier(DreamtinkerModifiers.Ids.malum_ascension, 1).inverted())
-                                                     .modifierKey(DreamtinkerModifiers.Ids.malum_rebound).build());
-        buildModifier(DreamtinkerModifiers.Ids.malum_ascension, modLoaded("malum"))
-                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                .addModule(EnchantmentModule.builder(EnchantmentRegistry.ASCENSION.get()).level(1).constant())
-                .addModule(ModifierRequirementsModule.builder().requireModifier(DreamtinkerModifiers.malum_base.getId(), 1)
-                                                     .requirement(HasModifierPredicate.hasModifier(DreamtinkerModifiers.Ids.malum_rebound, 1).inverted())
-                                                     .modifierKey(DreamtinkerModifiers.Ids.malum_ascension).build());
-        buildModifier(DreamtinkerModifiers.Ids.malum_animated, modLoaded("malum"))
-                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                .addModule(EnchantmentModule.builder(EnchantmentRegistry.ANIMATED.get()).level(2).constant())
-                .addModule(ModifierRequirementsModule.builder()
-                                                     .requirement(HasModifierPredicate.hasModifier(DreamtinkerModifiers.Ids.malum_haunted, 1).inverted())
-                                                     .modifierKey(DreamtinkerModifiers.Ids.malum_animated).build());
-        buildModifier(DreamtinkerModifiers.Ids.malum_haunted, modLoaded("malum"))
-                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                .addModule(EnchantmentModule.builder(EnchantmentRegistry.HAUNTED.get()).level(3).constant())
-                .addModule(ModifierRequirementsModule.builder()
-                                                     .requirement(HasModifierPredicate.hasModifier(DreamtinkerModifiers.Ids.malum_animated, 1).inverted())
-                                                     .modifierKey(DreamtinkerModifiers.Ids.malum_haunted).build());
-        buildModifier(DreamtinkerModifiers.Ids.malum_spirit_plunder, modLoaded("malum"))
-                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                .addModule(EnchantmentModule.builder(EnchantmentRegistry.SPIRIT_PLUNDER.get()).level(2).constant());
-
-        buildModifier(DreamtinkerModifiers.Ids.malum_tyrving, modLoaded("malum"))
-                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
-                .addModule(StatBoostModule.multiplyAll(ToolStats.ATTACK_DAMAGE).flat(-0.6f));
-        buildModifier(DreamtinkerModifiers.Ids.malum_world_of_weight, modLoaded("malum"))
-                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
-        buildModifier(DreamtinkerModifiers.Ids.malum_edge_of_deliverance, modLoaded("malum"))
-                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+    private void addELModifiers() {
 
         buildModifier(DreamtinkerModifiers.Ids.el_nemesis_curse, modLoaded("enigmaticlegacy"))
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
@@ -115,6 +83,44 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(ModifierRequirementsModule.builder()
                                                      .requirement(HasModifierPredicate.hasModifier(DreamtinkerModifiers.Ids.el_wrath, 1).inverted())
                                                      .modifierKey(DreamtinkerModifiers.Ids.el_torrent).build());
+    }
+
+    private void addMalumModifiers() {
+        buildModifier(DreamtinkerModifiers.Ids.malum_rebound, modLoaded("malum"))
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(EnchantmentModule.builder(EnchantmentRegistry.REBOUND.get()).level(1).constant())
+                .addModule(ModifierRequirementsModule.builder().requireModifier(DreamtinkerModifiers.malum_base.getId(), 1)
+                                                     .requirement(HasModifierPredicate.hasModifier(DreamtinkerModifiers.Ids.malum_ascension, 1).inverted())
+                                                     .modifierKey(DreamtinkerModifiers.Ids.malum_rebound).build());
+        buildModifier(DreamtinkerModifiers.Ids.malum_ascension, modLoaded("malum"))
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(EnchantmentModule.builder(EnchantmentRegistry.ASCENSION.get()).level(1).constant())
+                .addModule(ModifierRequirementsModule.builder().requireModifier(DreamtinkerModifiers.malum_base.getId(), 1)
+                                                     .requirement(HasModifierPredicate.hasModifier(DreamtinkerModifiers.Ids.malum_rebound, 1).inverted())
+                                                     .modifierKey(DreamtinkerModifiers.Ids.malum_ascension).build());
+        buildModifier(DreamtinkerModifiers.Ids.malum_animated, modLoaded("malum"))
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(EnchantmentModule.builder(EnchantmentRegistry.ANIMATED.get()).level(2).constant())
+                .addModule(ModifierRequirementsModule.builder()
+                                                     .requirement(HasModifierPredicate.hasModifier(DreamtinkerModifiers.Ids.malum_haunted, 1).inverted())
+                                                     .modifierKey(DreamtinkerModifiers.Ids.malum_animated).build());
+        buildModifier(DreamtinkerModifiers.Ids.malum_haunted, modLoaded("malum"))
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(EnchantmentModule.builder(EnchantmentRegistry.HAUNTED.get()).level(2).constant())
+                .addModule(ModifierRequirementsModule.builder()
+                                                     .requirement(HasModifierPredicate.hasModifier(DreamtinkerModifiers.Ids.malum_animated, 1).inverted())
+                                                     .modifierKey(DreamtinkerModifiers.Ids.malum_haunted).build());
+        buildModifier(DreamtinkerModifiers.Ids.malum_spirit_plunder, modLoaded("malum"))
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(EnchantmentModule.builder(EnchantmentRegistry.SPIRIT_PLUNDER.get()).level(2).constant());
+
+        buildModifier(DreamtinkerModifiers.Ids.malum_tyrving, modLoaded("malum"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(StatBoostModule.multiplyAll(ToolStats.ATTACK_DAMAGE).flat(-0.4f));
+        buildModifier(DreamtinkerModifiers.Ids.malum_world_of_weight, modLoaded("malum"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+        buildModifier(DreamtinkerModifiers.Ids.malum_edge_of_deliverance, modLoaded("malum"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
     }
 
     @Override

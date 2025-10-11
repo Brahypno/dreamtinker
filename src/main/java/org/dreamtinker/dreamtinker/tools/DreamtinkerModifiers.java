@@ -37,9 +37,7 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegac
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.etherium.etherium_protection;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.evil.evil_attack;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.soul_aether.exiles_faulty;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum.MalumHexStaff;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum.malum_attributes;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum.malum_base;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum.*;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.ender_dodge;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.soul_blessing;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.stone_heart;
@@ -170,9 +168,19 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             MALUM_MODIFIERS.register("malum_malignant_attributes", () -> new malum_attributes(3));
 
     public static final StaticModifier<MalumHexStaff> malum_hex_staff =
-            MALUM_MODIFIERS.register("malum_hex_staff", MalumHexStaff::new);
+            MALUM_MODIFIERS.register("malum_hex_staff", () -> new MalumHexStaff(false));
     public static final StaticModifier<range_accelerator> malum_range_accelerator =
             MALUM_MODIFIERS.register("malum_spirit_accelerator", () -> new range_accelerator(malumTag("spirit")));
+    public static final StaticModifier<malum_magic_attack> malum_magic_attack =
+            MALUM_MODIFIERS.register("malum_magic_attack", malum_magic_attack::new);
+    public static final StaticModifier<MalumHexStaff> malum_erosion =
+            MALUM_MODIFIERS.register("malum_erosion", () -> new MalumHexStaff(true));
+    public static final StaticModifier<malum_thirsty> malum_thirsty =
+            MALUM_MODIFIERS.register("malum_thirsty", malum_thirsty::new);
+    public static final StaticModifier<malum_evolution> malum_evolution =
+            MALUM_MODIFIERS.register("malum_evolution", malum_evolution::new);
+    public static final StaticModifier<malum_spirit_defense> malum_spirit_defense =
+            MALUM_MODIFIERS.register("malum_spirit_defense", malum_spirit_defense::new);
 
     public static class Ids {
         public static final ModifierId soul_form = id("soul_form");
@@ -185,6 +193,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId hate_memory = id("hate_memory");
         public static final ModifierId huge_ego = id("huge_ego");
         public static final ModifierId full_concentration = id("full_concentration");
+        public static final ModifierId thundering_curse = id("thundering_curse");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");
@@ -202,6 +211,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId malum_tyrving = id("malum_tyrving");
         public static final ModifierId malum_world_of_weight = id("malum_world_of_weight");
         public static final ModifierId malum_edge_of_deliverance = id("malum_edge_of_deliverance");
+
 
         private static ModifierId id(String name) {
             return new ModifierId(Dreamtinker.MODID, name);

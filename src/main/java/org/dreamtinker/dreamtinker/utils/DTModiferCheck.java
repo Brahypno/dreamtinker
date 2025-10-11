@@ -81,7 +81,7 @@ public class DTModiferCheck {
         return null;
     }
 
-    public static int getItemModifierTagNum(ItemStack stack, TagKey<Modifier> tag) {
+    public static int getItemModifierNum(ItemStack stack, TagKey<Modifier> tag) {
         int matched = 0;
         if (null != stack && !stack.isEmpty() && stack.is(TinkerTags.Items.MODIFIABLE)){
             ToolStack toolStack = ToolStack.from(stack);
@@ -91,5 +91,26 @@ public class DTModiferCheck {
         }
         return matched;
     }
+
+    public static int getItemModifierNum(ItemStack stack, ModifierId id) {
+        int matched = 0;
+        if (null != stack && !stack.isEmpty() && stack.is(TinkerTags.Items.MODIFIABLE)){
+            ToolStack toolStack = ToolStack.from(stack);
+            matched += toolStack.getModifier(id).getLevel();
+        }
+        return matched;
+    }
+
+    public static int getEntityModifierNum(LivingEntity entity, ModifierId id) {
+        int matched = 0;
+        matched += getHeadModifierlevel(entity, id);
+        matched += getChestModifierlevel(entity, id);
+        matched += getLegModifierlevel(entity, id);
+        matched += getFeetModifierlevel(entity, id);
+        matched += getMainhandModifierlevel(entity, id);
+        matched += getOffhandModifierlevel(entity, id);
+        return matched;
+    }
+
 
 }

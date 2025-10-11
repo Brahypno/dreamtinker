@@ -1,0 +1,44 @@
+{
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "dreamtinker:thundering_curse"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:malum_thirsty"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:malum_spirit_defense"
+      }
+    ],
+    "tconstruct:melee_harvest": [
+      {
+        "level": 1,
+        "name": "dreamtinker:malum_haunted"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:malum_magic_attack"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:malum_erosion"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:thundering_curse"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:malum_thirsty"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:malum_evolution"
+      }
+    ]
+  }
+}

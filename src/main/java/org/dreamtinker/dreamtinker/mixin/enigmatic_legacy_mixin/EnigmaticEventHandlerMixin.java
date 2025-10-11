@@ -28,7 +28,7 @@ public abstract class EnigmaticEventHandlerMixin {
 
     private boolean dreamtinker$adjustBypassBeforeCheck(boolean bypass, LivingHurtEvent event) {
         if (!bypass && null != event.getSource().getDirectEntity() && event.getSource().getDirectEntity() instanceof LivingEntity entity)
-            return 0 < DTModiferCheck.getItemModifierTagNum(entity.getMainHandItem(), DreamtinkerTagkeys.Modifiers.EL_CURSED_RELIEF);
+            return 0 < DTModiferCheck.getItemModifierNum(entity.getMainHandItem(), DreamtinkerTagkeys.Modifiers.EL_CURSED_RELIEF);
 
         return bypass;
     }
