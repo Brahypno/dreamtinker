@@ -273,6 +273,12 @@
   "modifier.dreamtinker.malum_spirit_defense": "Spirit Defense",
   "modifier.dreamtinker.malum_spirit_defense.flavor": "Love from spirit",
   "modifier.dreamtinker.malum_spirit_defense.description": "Increase Soul Ward Integrity and Arcane Resonance",
+  "modifier.dreamtinker.malum_sol_tiferet": "☉",
+  "modifier.dreamtinker.malum_sol_tiferet.flavor": "The beauty and harmony hidden in spirit arcana",
+  "modifier.dreamtinker.malum_sol_tiferet.description": "",
+  "modifier.dreamtinker.malum_sol_tiferet_fulfill": "Sol Tiferet",
+  "modifier.dreamtinker.malum_sol_tiferet_fulfill.flavor": "Pride, all for Great Works",
+  "modifier.dreamtinker.malum_sol_tiferet_fulfill.description": "When targets`s health drop down certain level, trigger Pneuma Void; Share cooldown with Necklace of the Watcher",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",

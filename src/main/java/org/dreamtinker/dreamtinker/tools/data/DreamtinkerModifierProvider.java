@@ -121,6 +121,8 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
         buildModifier(DreamtinkerModifiers.Ids.malum_edge_of_deliverance, modLoaded("malum"))
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+        buildModifier(DreamtinkerModifiers.Ids.malum_sol_tiferet, not(modLoaded("malum")))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
     }
 
     @Override

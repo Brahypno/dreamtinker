@@ -181,6 +181,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             MALUM_MODIFIERS.register("malum_evolution", malum_evolution::new);
     public static final StaticModifier<malum_spirit_defense> malum_spirit_defense =
             MALUM_MODIFIERS.register("malum_spirit_defense", malum_spirit_defense::new);
+    public static final StaticModifier<MalumSolTiferet> malum_sol_tiferet =
+            MALUM_MODIFIERS.register("malum_sol_tiferet", MalumSolTiferet::new);
 
     public static class Ids {
         public static final ModifierId soul_form = id("soul_form");
@@ -211,6 +213,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId malum_tyrving = id("malum_tyrving");
         public static final ModifierId malum_world_of_weight = id("malum_world_of_weight");
         public static final ModifierId malum_edge_of_deliverance = id("malum_edge_of_deliverance");
+        public static final ModifierId malum_sol_tiferet = id("malum_sol_tiferet");
 
 
         private static ModifierId id(String name) {

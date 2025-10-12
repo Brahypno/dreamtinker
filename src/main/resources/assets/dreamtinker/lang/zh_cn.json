@@ -273,6 +273,12 @@
   "modifier.dreamtinker.malum_spirit_defense": "精魂之爱",
   "modifier.dreamtinker.malum_spirit_defense.flavor": "精魂护身",
   "modifier.dreamtinker.malum_spirit_defense.description": "增加灵魂护盾稳固度和奥数谐振",
+  "modifier.dreamtinker.malum_sol_tiferet": "☉",
+  "modifier.dreamtinker.malum_sol_tiferet.flavor": "美丽与和谐隐藏在禁忌奥术中",
+  "modifier.dreamtinker.malum_sol_tiferet.description": "",
+  "modifier.dreamtinker.malum_sol_tiferet_fulfill": "日之和美",
+  "modifier.dreamtinker.malum_sol_tiferet_fulfill.flavor": "傲慢于伟大事业",
+  "modifier.dreamtinker.malum_sol_tiferet_fulfill.description": "当目标的血量低于一定时，触发魂息虚空，与监视者项链共享冷却",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",

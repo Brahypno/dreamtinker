@@ -69,7 +69,8 @@
     "thundering_curse": "#8B00FF",
     "malum_thirsty": "#285052",
     "malum_evolution": "#285052",
-    "malum_spirit_defense": "#D9822B"
+    "malum_spirit_defense": "#D9822B",
+    "malum_sol_tiferet": "#FF66CC"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
