@@ -6,7 +6,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -123,8 +122,7 @@ public class echoed_attack extends BattleModifier {
     }
 
     private void shortCutDamage(IToolStackView tool, ToolAttackContext context) {
-        float damage = getAttributeAttackDamage(tool, context.getAttacker(), Util.getSlotType(
-                tool.getItem().equals(context.getAttacker().getMainHandItem().getItem()) ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND));
+        float damage = getAttributeAttackDamage(tool, context.getAttacker(), Util.getSlotType(context.getHand()));
         float baseDamage = damage;
         List<ModifierEntry> modifiers = tool.getModifierList();
         for (ModifierEntry entry : modifiers) {
@@ -132,6 +130,7 @@ public class echoed_attack extends BattleModifier {
         }
         if (null != context.getLivingTarget()){
             context.getLivingTarget().setInvulnerable(false);
+            context.getLivingTarget().invulnerableTime = 9;
             DamageSource dam;
             if (context.getAttacker() instanceof Player player)
                 dam = context.getLivingTarget().level().damageSources().playerAttack(player);

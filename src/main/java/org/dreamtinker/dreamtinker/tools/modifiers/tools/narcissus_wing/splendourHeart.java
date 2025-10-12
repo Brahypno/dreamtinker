@@ -3,7 +3,6 @@ package org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -117,8 +116,7 @@ public class splendourHeart extends BattleModifier {
             int level = java.util.Arrays.binarySearch(TheSplendourHeart.get().toArray(), (double) Math.nextUp(per));
             level = level <= 0 ? -(level) - 1 : level;
             if (1 < level){
-                float damage = getAttributeAttackDamage(tool, context.getAttacker(), Util.getSlotType(
-                        tool.getItem().equals(context.getAttacker().getMainHandItem().getItem()) ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND));
+                float damage = getAttributeAttackDamage(tool, context.getAttacker(), Util.getSlotType(context.getHand()));
                 float baseDamage = damage;
                 List<ModifierEntry> modifiers = tool.getModifierList();
                 for (ModifierEntry entry : modifiers) {
@@ -126,6 +124,7 @@ public class splendourHeart extends BattleModifier {
                 }
                 if (null != context.getLivingTarget() && null != context.getPlayerAttacker()){
                     context.getLivingTarget().setInvulnerable(false);
+                    context.getLivingTarget().invulnerableTime = 0;
                     DamageSource dam = context.getLivingTarget().level().damageSources().playerAttack(context.getPlayerAttacker());
                     context.getLivingTarget().hurt(dam, damage);
                 }

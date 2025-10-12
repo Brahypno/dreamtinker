@@ -29,8 +29,9 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
                  broken_vessel.getId(), ewige_widerkunft.getId(), ouroboric_hourglass.getId(), burning_in_vain.getId(),
                  the_wolf_wonder.getId(), the_wolf_was.getId(), as_one.getId(), in_rain.getId(), isolde.getId(),
                  mei.getId(), ender_dodge.getId(), explosive_hit.getId(), ranged_shoot.getId(), Ids.wither_body,
-                 stone_heart.getId(), splendour_heart.getId(), Ids.malum_tyrving)
-            .addOptional(cursed_ring_bound.getId(), evil_attack.getId());
+                 stone_heart.getId(), splendour_heart.getId())
+            .addOptional(cursed_ring_bound.getId(), evil_attack.getId(), Ids.malum_tyrving, eldritch_pan.getId(), malum_thirsty.getId(), Ids.thundering_curse,
+                         Ids.el_nemesis_curse, Ids.el_sorrow, Ids.el_eternal_binding);
         this.tag(DreamtinkerTagkeys.Modifiers.EL_CURSED_RELIEF)
             .addOptional(weapon_books.getId(), eldritch_pan.getId(), exiles_faulty.getId());
         this.tag(TinkerTags.Modifiers.MELEE_UPGRADES)
@@ -62,7 +63,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             .addOptional(malum_hex_staff.getId(), malum_base.getId(), malum_distortion.getId(), malum_spirit_attributes.getId(),
                          Ids.malum_animated, Ids.malum_rebound, Ids.malum_ascension, Ids.malum_haunted, Ids.malum_replenishing, Ids.malum_spirit_plunder,
                          malum_soul_attributes.getId(), malum_malignant_attributes.getId(), Ids.malum_edge_of_deliverance, Ids.malum_tyrving,
-                         Ids.malum_world_of_weight);
+                         Ids.malum_world_of_weight, malum_magic_attack.getId(), malum_range_accelerator.getId(), malum_evolution.getId());
     }
 
     @Override

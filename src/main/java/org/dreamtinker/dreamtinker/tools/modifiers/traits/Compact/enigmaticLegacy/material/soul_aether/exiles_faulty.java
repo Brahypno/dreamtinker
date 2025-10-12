@@ -33,19 +33,9 @@ public class exiles_faulty extends BattleModifier {
     public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
         LivingEntity target = context.getLivingTarget();
         LivingEntity attacker = context.getAttacker();
-        if (null != target && !target.level().isClientSide){
-            target.removeEffect(DreamtinkerEffects.cursed.get());
-            target.addEffect(new MobEffectInstance(DreamtinkerEffects.cursed.get(), 100, 0, false, false, false));
-            if (attacker instanceof Player player){
-                float cursesPercentage = (float) (SuperpositionHandler.getCurseAmount(player) * ExilesFaultyCurseHPPercentage.get());
-                float targetHealth = 1 < cursesPercentage ? 1 : target.getMaxHealth() * (1 - cursesPercentage);
-                if (targetHealth < target.getHealth())
-                    target.setHealth(targetHealth);
-                float attackerHealth = 1 < cursesPercentage ? 1 : attacker.getMaxHealth() * (1 - cursesPercentage);
-                if (attackerHealth < attacker.getHealth())
-                    attacker.setHealth(attackerHealth);
-            }
-        }
+        if (null != target && !target.level().isClientSide)
+            curse_faulty(attacker, target, damage);
+
         return knockback;
     }
 
@@ -62,28 +52,27 @@ public class exiles_faulty extends BattleModifier {
         if (null != attacker && !attacker.level().isClientSide){
             float data = (float) (projectile.getDeltaMovement().length() * (projectile instanceof AbstractArrow arrow ? arrow.getBaseDamage() : 1));
             float regain = (float) (data * ExilesFaultyAbsorbHPPercentage.get());
-            if (attacker.getAbsorptionAmount() < attacker.getMaxHealth())
-                attacker.setAbsorptionAmount(
-                        Math.min(attacker.getAbsorptionAmount() + regain, attacker.getMaxHealth()));
-            if (attacker instanceof Player player){
-                float cursesPercentage = (float) (SuperpositionHandler.getCurseAmount(player) * ExilesFaultyCurseHPPercentage.get());
-                if (target != null){
-                    float targetHealth = 1 < cursesPercentage ? 1 : target.getMaxHealth() * (1 - cursesPercentage);
-                    if (targetHealth < target.getHealth())
-                        target.setHealth(targetHealth);
-                }
-                float attackerHealth = 1 < cursesPercentage ? 1 : attacker.getMaxHealth() * (1 - cursesPercentage);
-                if (attackerHealth < attacker.getHealth())
-                    attacker.setHealth(attackerHealth);
-            }
-        }
-        if (null != target && !target.level().isClientSide){
-            target.removeEffect(DreamtinkerEffects.cursed.get());
-            target.addEffect(new MobEffectInstance(DreamtinkerEffects.cursed.get(), 100, 0, false, false, false));
-
+            curse_faulty(attacker, target, regain);
         }
         return false;
     }
 
-
+    private void curse_faulty(LivingEntity attacker, LivingEntity target, float damage) {
+        if (attacker.getAbsorptionAmount() < attacker.getMaxHealth())
+            attacker.setAbsorptionAmount(
+                    Math.min(attacker.getAbsorptionAmount() + damage, attacker.getMaxHealth()));
+        if (attacker instanceof Player player){
+            float cursesPercentage = (float) (SuperpositionHandler.getCurseAmount(player) * ExilesFaultyCurseHPPercentage.get());
+            if (target != null){
+                float targetHealth = 1 < cursesPercentage ? 1 : target.getMaxHealth() * (1 - cursesPercentage);
+                if (targetHealth < target.getHealth())
+                    target.setHealth(targetHealth);
+                target.removeEffect(DreamtinkerEffects.cursed.get());
+                target.addEffect(new MobEffectInstance(DreamtinkerEffects.cursed.get(), 100, 0, false, false, false));
+            }
+            float attackerHealth = 1 < cursesPercentage ? 1 : attacker.getMaxHealth() * (1 - cursesPercentage);
+            if (attackerHealth < attacker.getHealth())
+                attacker.setHealth(attackerHealth);
+        }
+    }
 }

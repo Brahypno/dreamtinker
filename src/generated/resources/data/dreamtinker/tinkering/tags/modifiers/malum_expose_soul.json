@@ -59,6 +59,18 @@
     {
       "id": "dreamtinker:malum_world_of_weight",
       "required": false
+    },
+    {
+      "id": "dreamtinker:malum_magic_attack",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_spirit_accelerator",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_evolution",
+      "required": false
     }
   ]
 }

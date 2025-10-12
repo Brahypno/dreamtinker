@@ -33,13 +33,40 @@
     "dreamtinker:wither_body",
     "dreamtinker:stone_heart",
     "dreamtinker:splendour_heart",
-    "dreamtinker:malum_tyrving",
     {
       "id": "dreamtinker:cursed_ring_bound",
       "required": false
     },
     {
       "id": "dreamtinker:evil_attack",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_tyrving",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:eldritch_pan",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_thirsty",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:thundering_curse",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:el_nemesis_curse",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:el_sorrow",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:el_eternal_binding",
       "required": false
     }
   ]

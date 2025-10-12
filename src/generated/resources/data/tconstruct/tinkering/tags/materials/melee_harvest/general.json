@@ -1,0 +1,13 @@
+{
+  "values": [
+    "dreamtinker:valentinite",
+    {
+      "id": "dreamtinker:etherium",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_spirit_fabric",
+      "required": false
+    }
+  ]
+}

@@ -1,18 +1,19 @@
 {
   "values": [
-    "dreamtinker:moonlight_ice",
     "dreamtinker:nigrescence_antimony",
+    "dreamtinker:moonlight_ice",
+    "dreamtinker:echo_alloy",
     "dreamtinker:metallivorous_stibium_lupus",
-    {
-      "id": "dreamtinker:etherium",
-      "required": false
-    },
     {
       "id": "dreamtinker:nefarious",
       "required": false
     },
     {
       "id": "dreamtinker:soul_etherium",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_spirit_fabric",
       "required": false
     },
     {

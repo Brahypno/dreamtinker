@@ -1,0 +1,34 @@
+{
+  "values": [
+    "dreamtinker:nigrescence_antimony",
+    "dreamtinker:echo_alloy",
+    {
+      "id": "dreamtinker:malum_spirit_fabric",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_soul_stained_steel",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:nefarious",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:etherium",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:soul_etherium",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:metallivorous_stibium_lupus",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:star_regulus",
+      "required": false
+    }
+  ]
+}
