@@ -22,26 +22,24 @@ import java.util.Objects;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
-import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.UnderPlateBoostMultiply;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.*;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.AsOneA;
 
 public class weapon_transformation extends BattleModifier {
-    private final String tool_attribute_uuid = "facdf7e8-4b20-4e2d-9aba-5c1b408e7c9d";
 
     @Override
     public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
         float armor = tool.getStats().get(ToolStats.ARMOR);
         float toughness = tool.getStats().get(ToolStats.ARMOR_TOUGHNESS);
-        float muti = armor * toughness * UnderPlateBoostMultiply.get().floatValue();
+        float muti = valueExpSoftCap(armor, toughness);
         if (modifier.getLevel() > 0){
+            String tool_attribute_uuid = "facdf7e8-4b20-4e2d-9aba-5c1b408e7c9d";
             switch (slot) {
-                case CHEST -> {
-                    consumer.accept(Attributes.LUCK,
-                                    new AttributeModifier(UUID.fromString(tool_attribute_uuid),
-                                                          Attributes.LUCK.getDescriptionId(),
-                                                          muti,
-                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
-                }
+                case CHEST -> consumer.accept(Attributes.LUCK,
+                                              new AttributeModifier(UUID.fromString(tool_attribute_uuid),
+                                                                    Attributes.LUCK.getDescriptionId(),
+                                                                    muti,
+                                                                    AttributeModifier.Operation.MULTIPLY_TOTAL));
                 case LEGS -> {//see hurt event
                 }
                 case FEET -> {
@@ -86,5 +84,15 @@ public class weapon_transformation extends BattleModifier {
                 player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 20 * 21, AsOneA.get(), false, false));
             }
         }
+    }
+
+    public static float valueExpSoftCap(float armor, float toughness) {
+        float U = Math.max(0f, UnderPlateBoostArmorFactor.get().floatValue() * armor +
+                               UnderPlateBoostToughnessFactor.get().floatValue() * toughness); // 或自定义权重
+        float K1 = 20f, p1 = 0.08f;  // 早期
+        float K2 = 400f, p2 = 0.17f; // 中后期
+        double g1 = Math.pow(1.0 + U / K1, -p1);
+        double g2 = Math.pow(1.0 + U / K2, -p2);
+        return (float) (UnderPlateBoostMax.get().floatValue() * (1.0 - g1 * g2)); // 返回“倍数”，乘100%即百分比
     }
 }

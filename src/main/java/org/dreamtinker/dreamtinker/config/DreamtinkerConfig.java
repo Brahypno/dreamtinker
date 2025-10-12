@@ -16,8 +16,14 @@ public class DreamtinkerConfig {
             builder.comment("Strong Explode Damage Boost").defineInRange("StrongExplodeDamageBoost", 1, 1, 1000);
     public static final ForgeConfigSpec.IntValue ContinuousExplodeTimes =
             builder.comment("how many times use per level for tnt Arrow").defineInRange("ContinuousExplodeTimes", 2, 0, 100);
-    public static final ForgeConfigSpec.DoubleValue UnderPlateBoostMultiply =
-            builder.comment("how many status you want to boost?").defineInRange("UnderPlateBoostMultiply", 0.005, 0, 100);
+    public static final ForgeConfigSpec.DoubleValue UnderPlateBoostMax =
+            builder.comment("Maximum Boost from Weapon transformation? default 10=1000%").defineInRange("UnderPlateBoostMax", 10.0, 1, 100);
+    public static final ForgeConfigSpec.DoubleValue UnderPlateBoostArmorFactor =
+            builder.comment("Armor factor for Weapon transformation, larger value means larger Boost")
+                   .defineInRange("UnderPlateBoostArmorFactor", 1.0, 0, 100);
+    public static final ForgeConfigSpec.DoubleValue UnderPlateBoostToughnessFactor =
+            builder.comment("ArmorToughness factor for Weapon transformation, larger value means larger Boost")
+                   .defineInRange("UnderPlateBoostToughnessFactor", 1.0, 0, 100);
     public static final ForgeConfigSpec.ConfigValue<List<? extends Number>> TheSplendourHeart =
             builder.comment("The level range for The splendour heart. Must be exactly 5 between 0% and 100% otherwise omit!")
                    .defineList("splendour_heart", List.of(0.25d, 0.40d, 0.65d, .80d, 1.0d),
@@ -141,7 +147,6 @@ public class DreamtinkerConfig {
             builder.comment("Blacklist for the wolf").defineList("wolf_blacklist",
                                                                  List.of("minecraft:bad_omen", "minecraft:hero_of_the_village"), // 默认例子（可换）
                                                                  o -> o instanceof String s && isValidIdFormat(s));
-    ;
 
     public static final ForgeConfigSpec.IntValue TheWolfWasEnable = builder.comment("Enable the Wolf Was modifier").defineInRange("TheWolfWasEnable", 1, 0, 1);
     public static final ForgeConfigSpec.IntValue TheWolfWasDamage = builder.comment(

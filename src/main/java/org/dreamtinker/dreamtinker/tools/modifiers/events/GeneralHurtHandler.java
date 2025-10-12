@@ -14,7 +14,8 @@ import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
-import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.UnderPlateBoostMultiply;
+import static org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.weapon_transformation.valueExpSoftCap;
+
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class GeneralHurtHandler {
@@ -29,7 +30,7 @@ public class GeneralHurtHandler {
                         if (0 < ModifierUtil.getModifierLevel(itemStack, DreamtinkerModifiers.weapon_transformation.getId())){
                             float armor = toolStack.getStats().get(ToolStats.ARMOR);
                             float toughness = toolStack.getStats().get(ToolStats.ARMOR_TOUGHNESS);
-                            event.setAmount(event.getAmount() * (1 + Math.max(1, armor * toughness) * UnderPlateBoostMultiply.get().floatValue()));
+                            event.setAmount(event.getAmount() * (1 + valueExpSoftCap(armor, toughness)));
                         }
                 }
             }
