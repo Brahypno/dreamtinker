@@ -30,6 +30,8 @@ public class ouroboric_hourglass extends ArmorModifier {
             // 超过 X 倍：对数压制
             final_amount = (Base * (float) Math.log(amount / Base / X));
         }
+        if (Integer.MAX_VALUE <= amount)
+            return 0;
 
         return final_amount;
     }
