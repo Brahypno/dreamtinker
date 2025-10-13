@@ -8,6 +8,14 @@
     "upgrades": 1
   },
   "tools": {
-    "tag": "malum:scythe"
+    "type": "forge:intersection",
+    "children": [
+      {
+        "tag": "malum:scythe"
+      },
+      {
+        "tag": "tconstruct:modifiable/melee/weapon"
+      }
+    ]
   }
 }

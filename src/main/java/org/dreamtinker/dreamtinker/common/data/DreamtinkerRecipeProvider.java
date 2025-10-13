@@ -22,6 +22,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.CompoundIngredient;
+import net.minecraftforge.common.crafting.IntersectionIngredient;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraftforge.common.crafting.conditions.ItemExistsCondition;
 import net.minecraftforge.fluids.FluidStack;
@@ -773,7 +774,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(3)
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.huge_ego, slotlessFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_rebound)
-                             .setTools(ItemTagRegistry.SCYTHE)
+                             .setTools(IntersectionIngredient.of(Ingredient.of(ItemTagRegistry.SCYTHE), Ingredient.of(TinkerTags.Items.MELEE_WEAPON)))
                              //.setTools(TinkerTags.Items.MELEE_WEAPON)
                              .addInput(ItemRegistry.CRUDE_SCYTHE.get())
                              .addInput(ItemRegistry.EARTHEN_SPIRIT.get())
@@ -783,8 +784,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .save(withCondition(consumer, new ItemExistsCondition(ForgeRegistries.ITEMS.getKey(ItemRegistry.CRUDE_SCYTHE.get()))),
                                    prefix(DreamtinkerModifiers.Ids.malum_rebound, abilityFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_rebound)
-                             .setTools(ItemTagRegistry.SCYTHE)
-                             //.setTools(TinkerTags.Items.MELEE_WEAPON)
+                             .setTools(IntersectionIngredient.of(Ingredient.of(ItemTagRegistry.SCYTHE), Ingredient.of(TinkerTags.Items.MELEE_WEAPON)))
                              .addInput(ItemRegistry.CRUDE_SCYTHE.get())
                              .setLevelRange(2, 3)
                              .setSlots(SlotType.UPGRADE, 1)
@@ -792,8 +792,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .save(withCondition(consumer, new ItemExistsCondition(ForgeRegistries.ITEMS.getKey(ItemRegistry.CRUDE_SCYTHE.get()))),
                                    prefix(DreamtinkerModifiers.Ids.malum_rebound, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_ascension)
-                             .setTools(ItemTagRegistry.SCYTHE)
-                             //.setTools(TinkerTags.Items.MELEE_WEAPON)
+                             .setTools(IntersectionIngredient.of(Ingredient.of(ItemTagRegistry.SCYTHE), Ingredient.of(TinkerTags.Items.MELEE_WEAPON)))
                              .addInput(ItemRegistry.CRUDE_SCYTHE.get())
                              .addInput(ItemRegistry.AERIAL_SPIRIT.get())
                              .setMaxLevel(1)
@@ -802,8 +801,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .save(withCondition(consumer, new ItemExistsCondition(ForgeRegistries.ITEMS.getKey(ItemRegistry.CRUDE_SCYTHE.get()))),
                                    prefix(DreamtinkerModifiers.Ids.malum_ascension, abilityFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_ascension)
-                             .setTools(ItemTagRegistry.SCYTHE)
-                             //.setTools(TinkerTags.Items.MELEE_WEAPON)
+                             .setTools(IntersectionIngredient.of(Ingredient.of(ItemTagRegistry.SCYTHE), Ingredient.of(TinkerTags.Items.MELEE_WEAPON)))
                              .addInput(ItemRegistry.CRUDE_SCYTHE.get())
                              .setLevelRange(2, 3)
                              .setSlots(SlotType.UPGRADE, 1)
@@ -811,8 +809,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .save(withCondition(consumer, new ItemExistsCondition(ForgeRegistries.ITEMS.getKey(ItemRegistry.CRUDE_SCYTHE.get()))),
                                    prefix(DreamtinkerModifiers.Ids.malum_ascension, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_animated)
-                             .setTools(ItemTagRegistry.SCYTHE)
-                             //.setTools(TinkerTags.Items.MELEE_WEAPON)
+                             .setTools(IntersectionIngredient.of(Ingredient.of(ItemTagRegistry.SCYTHE), Ingredient.of(TinkerTags.Items.MELEE_WEAPON)))
                              .addInput(ItemRegistry.WICKED_SPIRIT.get())
                              .addInput(ItemRegistry.AERIAL_SPIRIT.get())
                              .setMaxLevel(2)
@@ -821,8 +818,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .save(withCondition(consumer, new ItemExistsCondition(ForgeRegistries.ITEMS.getKey(ItemRegistry.WICKED_SPIRIT.get()))),
                                    prefix(DreamtinkerModifiers.Ids.malum_animated, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_haunted)
-                             //.setTools(ItemTagRegistry.SCYTHE)
-                             .setTools(TinkerTags.Items.MELEE_WEAPON)
+                             .setTools(Ingredient.of(TinkerTags.Items.MELEE_WEAPON))
                              .addInput(ItemRegistry.WICKED_SPIRIT.get())
                              .addInput(ItemRegistry.SACRED_SPIRIT.get())
                              .setMaxLevel(2)
@@ -831,8 +827,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .save(withCondition(consumer, new ItemExistsCondition(ForgeRegistries.ITEMS.getKey(ItemRegistry.WICKED_SPIRIT.get()))),
                                    prefix(DreamtinkerModifiers.Ids.malum_haunted, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_spirit_plunder)
-                             //.setTools(ItemTagRegistry.SCYTHE)
-                             .setTools(TinkerTags.Items.MELEE_WEAPON)
+                             .setTools(IntersectionIngredient.of(Ingredient.of(ItemTagRegistry.SOUL_HUNTER_WEAPON),
+                                                                 Ingredient.of(TinkerTags.Items.MELEE_WEAPON)))
                              .addInput(ItemRegistry.SACRED_SPIRIT.get())
                              .addInput(ItemRegistry.SACRED_SPIRIT.get())
                              .setMaxLevel(2)
