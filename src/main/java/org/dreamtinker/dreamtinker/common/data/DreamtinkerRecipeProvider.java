@@ -269,8 +269,9 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         MeltingRecipeBuilder.melting(Ingredient.of(EnigmaticBlocks.ETHERIUM_BLOCK), DreamtinkerFluids.unstable_liquid_aether, FluidValues.METAL_BLOCK, 4.0f)
                             .save(consumer, location(folder + "etherium/block"));
         MeltingRecipeBuilder.melting(Ingredient.of(EnigmaticItems.ETHERIUM_ORE), DreamtinkerFluids.unstable_liquid_aether, FluidValues.INGOT, 4.0F)
+                            .addByproduct(DreamtinkerFluids.reversed_shadow.result(30))
                             .setOre(IMeltingContainer.OreRateType.METAL)
-                            .addByproduct(DreamtinkerFluids.unstable_liquid_aether.result(30)).save(consumer, location(folder + "etherium/ore"));
+                            .save(consumer, location(folder + "etherium/ore"));
         //I am sure it's not the best way, but who cares
         int[] etherium_damage = {FluidValues.NUGGET, FluidValues.SLIME_DROP};
         MeltingRecipeBuilder.melting(Ingredient.of(EnigmaticItems.ETHERIUM_AXE), DreamtinkerFluids.unstable_liquid_aether, FluidValues.INGOT * 4, 4.0f)

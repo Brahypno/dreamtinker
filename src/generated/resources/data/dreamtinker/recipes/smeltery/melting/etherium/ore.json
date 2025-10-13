@@ -3,7 +3,7 @@
   "byproducts": [
     {
       "amount": 30,
-      "fluid": "dreamtinker:unstable_liquid_aether"
+      "fluid": "dreamtinker:reversed_shadow"
     }
   ],
   "ingredient": {
