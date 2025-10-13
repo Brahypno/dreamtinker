@@ -39,7 +39,7 @@ public class the_wolf_was extends BattleModifier {
 
     @Override
     public int modifierDamageTool(IToolStackView tool, ModifierEntry modifier, int amount, @Nullable LivingEntity holder) {
-        if (1 != TheWolfWasEnable.get())
+        if (!TheWolfWasEnable.get())
             return amount;
         if (holder == null)
             return amount;

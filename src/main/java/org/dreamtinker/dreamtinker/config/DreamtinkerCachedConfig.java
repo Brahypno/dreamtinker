@@ -17,16 +17,14 @@ import java.util.function.Supplier;
 public class DreamtinkerCachedConfig {
     @SubscribeEvent
     public static void onConfigLoading(ModConfigEvent.Loading e) {
-        if (e.getConfig().getModId().equals(Dreamtinker.MODID)){
+        if (e.getConfig().getModId().equals(Dreamtinker.MODID))
             ConfigLazy.invalidateAll();
-        }
     }
 
     @SubscribeEvent
     public static void onConfigReload(ModConfigEvent.Reloading e) {
-        if (e.getConfig().getModId().equals(Dreamtinker.MODID)){
+        if (e.getConfig().getModId().equals(Dreamtinker.MODID))
             ConfigLazy.invalidateAll();
-        }
     }
 
     public static final ConfigLazy<Integer> TNT_ARROW_GRAVITY = lazIntInSpec(DreamtinkerConfig.tnt_arrow_gravity);

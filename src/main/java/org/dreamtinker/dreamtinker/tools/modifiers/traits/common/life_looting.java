@@ -20,7 +20,7 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 import java.util.Map;
 
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.Lifelootingbonus;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.LifeLootingBonus;
 
 public class life_looting extends Modifier implements LootingModifierHook, ArmorLootingModifierHook, HarvestEnchantmentsModifierHook {
     @Override
@@ -47,7 +47,7 @@ public class life_looting extends Modifier implements LootingModifierHook, Armor
     }
 
     private int life_looting_bonus(LivingEntity entity, int i) {
-        i += (int) ((20 - entity.getMaxHealth()) * Lifelootingbonus.get());
+        i += (int) ((20 - entity.getMaxHealth()) * LifeLootingBonus.get());
         return i;
     }
 

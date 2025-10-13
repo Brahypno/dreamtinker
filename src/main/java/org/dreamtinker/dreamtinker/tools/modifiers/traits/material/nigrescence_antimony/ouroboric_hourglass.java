@@ -7,7 +7,7 @@ import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.OuroboricHourglassMutiply;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.OuroboricHourglassMultiply;
 
 public class ouroboric_hourglass extends ArmorModifier {
 
@@ -16,7 +16,7 @@ public class ouroboric_hourglass extends ArmorModifier {
         float Base = context.getEntity().getMaxHealth();
         // 参数
         float p = 0.8f;
-        Double X = OuroboricHourglassMutiply.get();
+        Double X = OuroboricHourglassMultiply.get();
         float final_amount;
 
         if (amount <= Base){

@@ -12,7 +12,7 @@ import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.EnderDodgeChance;
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.EnderDodgetimes;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.EnderDodgeTimes;
 
 public class ender_dodge extends ArmorModifier {
 
@@ -22,7 +22,7 @@ public class ender_dodge extends ArmorModifier {
         LivingEntity holder = context.getEntity();
         Level level = holder.level();
         if (!level.isClientSide() && !(source.getEntity() instanceof LivingEntity) && holder.level().random.nextFloat() < EnderDodgeChance.get()){
-            for (int i = 0; i < EnderDodgetimes.get(); ++i) {
+            for (int i = 0; i < EnderDodgeTimes.get(); ++i) {
                 if (DThelper.teleport(holder)){
                     return true;
                 }

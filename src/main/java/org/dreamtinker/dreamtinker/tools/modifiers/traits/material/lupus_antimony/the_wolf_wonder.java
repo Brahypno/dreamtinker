@@ -106,8 +106,21 @@ public class the_wolf_wonder extends BattleModifier {
         }
         if (effect.getCategory() != MobEffectCategory.HARMFUL)
             return false;
+        if (TheWolfWonderPotionEffectOnly.get() && !isPotionEffectCached(effect))
+            return false;
+
         ResourceLocation key = ForgeRegistries.MOB_EFFECTS.getKey(effect);
         return null != key && !BAD_CACHE.contains(key) &&
                !CONFIG_BLACKLIST.contains(key) && !key.getPath().contains("test") && !key.getPath().contains("ceshi");//exclude testing effect as well
+    }
+
+    private static final java.util.Set<MobEffect> BrewAble =
+            ForgeRegistries.POTIONS.getValues().stream()
+                                   .flatMap(p -> p.getEffects().stream())
+                                   .map(MobEffectInstance::getEffect)
+                                   .collect(java.util.stream.Collectors.toUnmodifiableSet());
+
+    public static boolean isPotionEffectCached(MobEffect effect) {
+        return BrewAble.contains(effect);
     }
 }

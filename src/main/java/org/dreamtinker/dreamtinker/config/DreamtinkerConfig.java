@@ -47,7 +47,7 @@ public class DreamtinkerConfig {
     }
 
     public static final ForgeConfigSpec.BooleanValue StarRegulusAdvancement =
-            builder.comment("1=Enable star regulus advancement effect").define("StarRegulusAdvancement", true);
+            builder.comment("Enable star regulus advancement effect").define("StarRegulusAdvancement", true);
 
     static {
         builder.pop();
@@ -118,18 +118,18 @@ public class DreamtinkerConfig {
 
     public static final ForgeConfigSpec.IntValue BrokenVesselBoost =
             builder.comment("HP boost from BrokenBessel").defineInRange("BrokenVesselBoost", 1, 0, 1000);
-    public static final ForgeConfigSpec.DoubleValue OuroboricHourglassMutiply =
-            builder.comment("increase damage reducer from OuroboricHourglass").defineInRange("OuroboricHourglassMutiply", 2.0, 0, 1000);
+    public static final ForgeConfigSpec.DoubleValue OuroboricHourglassMultiply =
+            builder.comment("increase damage reducer from OuroboricHourglass").defineInRange("OuroboricHourglassMultiply", 2.0, 0, 1000);
 
     public static final ForgeConfigSpec.DoubleValue Prometheus =
             builder.comment("status boot everytime for ewige_widerkunft").defineInRange("Prometheus", 0.13, 0, 1);
     public static final ForgeConfigSpec.IntValue CentralFlame =
             builder.comment("How many Spins can ewige_widerkunft do?").defineInRange("CentralFlame", 12, 1, Integer.MAX_VALUE);
 
-    public static final ForgeConfigSpec.IntValue BurninVainRandomProj =
-            builder.comment("Allow Burn in Vain Modifier summon random Projectile when shooting").defineInRange("BurninVainRandomProj", 1, 0, 1);
-    public static final ForgeConfigSpec.DoubleValue BurninVainInaccuracy =
-            builder.comment("Inaccuracy of Projectile sending from this Modifier").defineInRange("BurninVainInaccurity", 5.0, 0, 1000);
+    public static final ForgeConfigSpec.BooleanValue BurnInVainRandomProj =
+            builder.comment("Allow Burn in Vain Modifier summon random Projectile when shooting").define("BurnInVainRandomProj", true);
+    public static final ForgeConfigSpec.DoubleValue BurnInVainInAccuracy =
+            builder.comment("Inaccuracy of Projectile sending from this Modifier").defineInRange("BurnInVainInAccuracy", 5.0, 0, 1000);
 
     static {builder.comment("\nMetallivorous Stibium Lupus: ");}
 
@@ -142,13 +142,15 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.IntValue TheWolfWonderEffectAmplifier =
             builder.comment("Max Amplifier of effects").defineInRange("TheWolfWonderEffectAmplifier", 10, 0, 100);
     public static final ForgeConfigSpec.IntValue TheWolfWonderSurpriseNumber =
-            builder.comment("This is a suprise!").defineInRange("TheWolfWonderSurpriseNumber", 7, 0, 6666);
+            builder.comment("This is a surprise!").defineInRange("TheWolfWonderSurpriseNumber", 7, 0, 6666);
+    public static final ForgeConfigSpec.BooleanValue TheWolfWonderPotionEffectOnly =
+            builder.comment("Enable this means The wolf wonder would only apply Potion effects").define("TheWolfWonderPotionEffectOnly", false);
     public static final ForgeConfigSpec.ConfigValue<List<? extends String>> TheWolfBlackList =
             builder.comment("Blacklist for the wolf").defineList("wolf_blacklist",
                                                                  List.of("minecraft:bad_omen", "minecraft:hero_of_the_village"), // 默认例子（可换）
                                                                  o -> o instanceof String s && isValidIdFormat(s));
 
-    public static final ForgeConfigSpec.IntValue TheWolfWasEnable = builder.comment("Enable the Wolf Was modifier").defineInRange("TheWolfWasEnable", 1, 0, 1);
+    public static final ForgeConfigSpec.BooleanValue TheWolfWasEnable = builder.comment("Enable the Wolf Was modifier").define("TheWolfWasEnable", true);
     public static final ForgeConfigSpec.IntValue TheWolfWasDamage = builder.comment(
                                                                                    "In the hidden crucible of our path, there can be no ascendance without renunciation—where loss is absent, growth withers----Modify the damage taken for this Modifier work")
                                                                            .defineInRange("TheWolfWasDamage", 77, 1, 1000);
@@ -157,7 +159,7 @@ public class DreamtinkerConfig {
 
     static {builder.comment("\nstar_regulus: ");}
 
-    public static final ForgeConfigSpec.IntValue AsOneRe = builder.comment("Initial Revive cound of As one").defineInRange("AsOneRe", 2, 0, 10000);
+    public static final ForgeConfigSpec.IntValue AsOneRe = builder.comment("Initial Revive count of As one").defineInRange("AsOneRe", 2, 0, 10000);
     public static final ForgeConfigSpec.IntValue AsOneT = builder.comment("Time counter for gaining revive counts").defineInRange("AsOneT", 777, 1, 10000);
     public static final ForgeConfigSpec.IntValue AsOneA = builder.comment("Max amp of effect that would be clear").defineInRange("AsOneA", 3, 1, 10000);
     public static final ForgeConfigSpec.DoubleValue AsOneS = builder.comment("Percentage damage taken").defineInRange("AsOneS", 0.33, 0, 1);
@@ -177,22 +179,22 @@ public class DreamtinkerConfig {
 
     public static final ForgeConfigSpec.DoubleValue EnderDodgeChance =
             builder.comment("Can I dance?").defineInRange("EnderDodgeChance", 0.1, 0, 1);
-    public static final ForgeConfigSpec.IntValue EnderDodgetimes =
-            builder.comment("how many times trying to dodge?").defineInRange("EnderDodgetimes", 1, 0, 64);
+    public static final ForgeConfigSpec.IntValue EnderDodgeTimes =
+            builder.comment("how many times trying to dodge?").defineInRange("EnderDodgeTimes", 1, 0, 64);
 
-    public static final ForgeConfigSpec.BooleanValue ExplodehitFire =
-            builder.comment("Do you want fire in explode hit?").define("ExplodehitFire", true);
+    public static final ForgeConfigSpec.BooleanValue ExplodeHitFire =
+            builder.comment("Do you want fire in explode hit?").define("ExplodeHitFire", true);
 
-    public static final ForgeConfigSpec.IntValue rangedhit =
-            builder.comment("Distance for ranged hit start positive").defineInRange("rangedhit", 10, 1, 64);
+    public static final ForgeConfigSpec.IntValue rangedHit =
+            builder.comment("Distance for ranged hit start positive").defineInRange("rangedHit", 10, 1, 64);
 
     public static final ForgeConfigSpec.DoubleValue WitherShootDangerPercentage =
             builder.comment("Current health percentage for wither shoot dangerous skull").defineInRange("WitherShootDangerPercentage", 0.5, 0, 1);
-    public static final ForgeConfigSpec.DoubleValue StoneheartProjreduce =
-            builder.comment("Amount percentage reduced of stone heart").defineInRange("StoneheartProjreduce", 0.2, 0, 100);
+    public static final ForgeConfigSpec.DoubleValue StoneHeartProjReduce =
+            builder.comment("Amount percentage reduced of stone heart").defineInRange("StoneHeartProjReduce", 0.2, 0, 100);
 
-    public static final ForgeConfigSpec.DoubleValue Lifelootingbonus =
-            builder.comment("Bonus for life looting").defineInRange("Lifelootingbonus", 0.5, 0, 100);
+    public static final ForgeConfigSpec.DoubleValue LifeLootingBonus =
+            builder.comment("Bonus for life looting").defineInRange("LifeLootingBonus", 0.5, 0, 100);
 
     public static final ForgeConfigSpec.DoubleValue OpenSoulDeathCount =
             builder.comment("Count for Open Soul to reject death").defineInRange("OpenSoulDeathCount", 1000.0, 0, 100000);

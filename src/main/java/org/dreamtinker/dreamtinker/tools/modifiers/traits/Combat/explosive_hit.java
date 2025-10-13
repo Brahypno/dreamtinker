@@ -16,7 +16,7 @@ import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 
 import javax.annotation.Nullable;
 
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.ExplodehitFire;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.ExplodeHitFire;
 
 public class explosive_hit extends BattleModifier {
     @Override
@@ -39,8 +39,8 @@ public class explosive_hit extends BattleModifier {
         target.level().explode(target, target.getX(),
                                target.getY(),
                                target.getZ(),
-                               (float) range,
-                               ExplodehitFire.get(),
+                               range,
+                               ExplodeHitFire.get(),
                                Level.ExplosionInteraction.NONE);
     }
 }

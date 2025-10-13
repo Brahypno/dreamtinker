@@ -24,12 +24,11 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.BurninVainInaccuracy;
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.BurninVainRandomProj;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.BurnInVainInAccuracy;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.BurnInVainRandomProj;
 
 public class burning_in_vain extends BattleModifier {
-    Double maxInaccuracy = BurninVainInaccuracy.get();
-    Integer SummonRandomProj = BurninVainRandomProj.get();
+    Double maxInaccuracy = BurnInVainInAccuracy.get();
 
 
     @Override
@@ -53,7 +52,7 @@ public class burning_in_vain extends BattleModifier {
 
         double px = shooter.getX(), pz = shooter.getZ();
         DThelper.clearProjectile(world, px, pz);
-        if (!SummonRandomProj.equals(1))
+        if (!BurnInVainRandomProj.get())
             return;
         Vec3 motion = projectile.getDeltaMovement();
         Projectile newProj = createRandomProjectile(world, shooter, projectile.getX(), projectile.getY(), projectile.getZ(), motion);

@@ -19,7 +19,7 @@ import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.StoneheartProjreduce;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.StoneHeartProjReduce;
 
 public class stone_heart extends ArmorModifier {
     {
@@ -59,7 +59,7 @@ public class stone_heart extends ArmorModifier {
         if (context.getEntity().level().isClientSide){
             if (source.is(DamageTypes.ARROW) || source.is(DamageTypes.FIREWORKS) || source.is(DamageTypes.FIREBALL) ||
                 source.getEntity() instanceof Projectile || source.getDirectEntity() instanceof Projectile)
-                amount *= StoneheartProjreduce.get();
+                amount *= StoneHeartProjReduce.get();
             if (context.getEntity() instanceof ServerPlayer player){
                 FoodData fd = player.getFoodData();
                 int newFood = (int) Math.min(20, amount + fd.getFoodLevel());

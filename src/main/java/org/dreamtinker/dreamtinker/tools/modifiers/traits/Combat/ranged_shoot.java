@@ -13,21 +13,21 @@ import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 
 import javax.annotation.Nullable;
 
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.rangedhit;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.rangedHit;
 
 public class ranged_shoot extends BattleModifier {
     private static final String mark = "ranged_shot";
 
     public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target) {
         if (null != attacker && null != target && !projectile.getPersistentData().getBoolean(mark)){
-            if (rangedhit.get() <= 1e-6)
+            if (rangedHit.get() <= 1e-6)
                 return false;
             double dis = attacker.position().distanceTo(target.position());
-            double ratio = Math.max(dis / rangedhit.get(), 0.25);
+            double ratio = Math.max(dis / rangedHit.get(), 0.25);
             Vec3 vel = projectile.getDeltaMovement().scale(ratio);
             projectile.setDeltaMovement(vel);
             if (projectile instanceof AbstractArrow arrow){
-                arrow.setCritArrow(rangedhit.get() < dis);
+                arrow.setCritArrow(rangedHit.get() < dis);
                 arrow.setBaseDamage(arrow.getBaseDamage() * ratio);
             }
             projectile.getPersistentData().putBoolean(mark, true);
