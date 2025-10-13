@@ -2,7 +2,6 @@ package org.dreamtinker.dreamtinker.plugin.JEI;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
-import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IIngredientAcceptor;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -111,7 +110,7 @@ public final class WorldRitualCategory implements IRecipeCategory<WorldRitualEnt
         // 需要的方块（用物品图标）
         if (r.needBlocksAsItems() != null && !r.needBlocksAsItems().isEmpty()){
             b.addSlot(RecipeIngredientRole.INPUT, x, y)
-             .addIngredients(VanillaTypes.ITEM_STACK, r.needBlocksAsItems());
+             .addIngredients(r.needBlocksAsItems());
             x += 33;
         }
 
@@ -302,5 +301,5 @@ public final class WorldRitualCategory implements IRecipeCategory<WorldRitualEnt
             public boolean isIngredientOnServer(CelestialIcon ingredient) {return true;}
         }
     }
-
+    
 }

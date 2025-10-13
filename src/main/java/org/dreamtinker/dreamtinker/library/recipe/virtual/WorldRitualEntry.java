@@ -12,7 +12,7 @@ public record WorldRitualEntry(
         Trigger trigger,                          // 触发类型（仅用于显示）
         @Nullable Ingredient catalyst,            // 催化物（如 蓝冰 / 羽毛 / 末影珍珠 / 打火石）
         @Nullable FluidStack fluid,               // 需要的流体（如 水 1000mB）
-        @Nullable List<ItemStack> needBlocksAsItems, // 需要附近存在/被替换的方块（用物品图标展示）
+        @Nullable Ingredient needBlocksAsItems, // 需要附近存在/被替换的方块（用物品图标展示）
         @Nullable ItemStack resultItem,           // 产物（物品）
         @Nullable ItemStack resultBlockIcon,      // 产物（方块，用图标展示）
         @Nullable EntityIngredient entityIngredient,
@@ -29,6 +29,7 @@ public record WorldRitualEntry(
         KILL_ENTITY,         // 击杀实体（例：白天极限高度击杀凋零骷髅）
         BREED_ENTITY,        // 生物繁殖（周围有羽毛掉落物）
         ITEM_OUT_OF_WORLD,   // 物品出界/虚空（末影珍珠丢进虚空）
-        USE_ITEM_UNDERWATER  // 在水下使用物品（打火石点燃海带）
+        USE_ITEM_UNDERWATER,  // 在水下使用物品（打火石点燃海带）
+        FORTUNE_LOOTING,
     }
 }

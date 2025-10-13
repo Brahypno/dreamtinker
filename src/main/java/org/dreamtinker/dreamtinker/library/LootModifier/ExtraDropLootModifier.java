@@ -67,9 +67,8 @@ public class ExtraDropLootModifier extends LootModifier {
             ItemStack tool = lootContext.getParam(LootContextParams.TOOL);
             fortune = tool.getEnchantmentLevel(Enchantments.BLOCK_FORTUNE);
             // 可选：排除精准采集
-            if (tool.getEnchantmentLevel(Enchantments.SILK_TOUCH) > 0){
+            if (tool.getEnchantmentLevel(Enchantments.SILK_TOUCH) > 0)
                 return objectArrayList;
-            }
         }
         float chance = (float) ((fortune + 1 + lootContext.getLuck()) * rates.getOrDefault(result, 1d));
         if (lootContext.getRandom().nextFloat() < chance){

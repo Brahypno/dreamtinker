@@ -506,6 +506,7 @@
   "jei.dreamtinker.category.breed_entity": "Trigger: New life",
   "jei.dreamtinker.category.item_out_of_world": "Trigger: Drop Item Out of World",
   "jei.dreamtinker.category.use_item_underwater": "Trigger: Use item Under Water",
+  "jei.dreamtinker.category.fortune_looting": "Trigger: Loot with Fortune",
   "jei.dreamtinker.celestial_type.sun": "Day Time",
   "jei.dreamtinker.celestial_type.moon_phase": "Night with Moon Phase: ",
   "jei.dreamtinker.chance": "Chance"

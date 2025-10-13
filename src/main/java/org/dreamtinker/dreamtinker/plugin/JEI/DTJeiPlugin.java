@@ -8,14 +8,19 @@ import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
+import org.dreamtinker.dreamtinker.common.DreamtinkerTagkeys;
 import org.dreamtinker.dreamtinker.library.recipe.virtual.WorldRitualEntry;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.jetbrains.annotations.NotNull;
@@ -26,11 +31,11 @@ import slimeknights.tconstruct.library.tools.part.ToolPartItem;
 import slimeknights.tconstruct.shared.TinkerCommons;
 import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.SoulCastLoveLootChance;
-import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.voidPearlDropRate;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.*;
 import static org.dreamtinker.dreamtinker.plugin.JEI.WorldRitualCategory.CelestialTypes.CELESTIAL;
 import static org.dreamtinker.dreamtinker.plugin.JEI.WorldRitualCategory.WORLD_RITUAL;
 
@@ -85,7 +90,7 @@ public final class DTJeiPlugin implements IModPlugin {
         list.add(new WorldRitualEntry(
                 WorldRitualEntry.Trigger.KILL_ENTITY,
                 null, null,
-                List.of(new ItemStack(TinkerCommons.soulGlass)),    // A 方块图标
+                Ingredient.of(TinkerCommons.soulGlass),    // A 方块图标
                 hate,
                 null,
                 EntityIngredient.of(EntityType.WITHER_SKELETON, EntityType.PLAYER, EntityType.WITHER, EntityType.PHANTOM), // ✅ 一组实体（这里只有凋零骷髅）
@@ -93,7 +98,7 @@ public final class DTJeiPlugin implements IModPlugin {
         ));
         ItemStack love = new ItemStack(DreamtinkerCommon.soul_cast.get(), 1);
         love.getOrCreateTag().putBoolean("love", true);
-        // C) 生物繁殖 + 羽毛 掉落 25% 产出 B（示例限定鸡；若不限定实体可传 null）
+
         list.add(new WorldRitualEntry(
                 WorldRitualEntry.Trigger.BREED_ENTITY,
                 Ingredient.of(Items.FEATHER),
@@ -121,13 +126,37 @@ public final class DTJeiPlugin implements IModPlugin {
                 WorldRitualEntry.Trigger.USE_ITEM_UNDERWATER,
                 Ingredient.of(Items.FLINT_AND_STEEL),
                 null,
-                List.of(new ItemStack(Items.KELP)),
+                Ingredient.of(Items.KELP),
                 new ItemStack(DreamtinkerCommon.memory_cast.get()),
                 null,
                 null,
                 null, null, null, null, null,
                 true,  // underwater
                 true   // drowning
+        ));
+        list.add(new WorldRitualEntry(
+                WorldRitualEntry.Trigger.FORTUNE_LOOTING,
+                null,
+                null,
+                anyOfBlockTags(Tags.Blocks.ORES_COPPER, Tags.Blocks.ORES_GOLD, forgeBlockTag("ores/lead"), forgeBlockTag("ores/silver")),
+                new ItemStack(DreamtinkerCommon.raw_stibnite.get()),
+                null,
+                null,
+                null, null, null, null, AntimonyLootChance.get(),
+                false,  // underwater
+                false   // drowning
+        ));
+        list.add(new WorldRitualEntry(
+                WorldRitualEntry.Trigger.FORTUNE_LOOTING,
+                null,
+                null,
+                anyOfBlockTags(DreamtinkerTagkeys.Blocks.drop_peach),
+                new ItemStack(DreamtinkerCommon.white_peach.get()),
+                null,
+                null,
+                null, null, null, null, WhitePeachLootChance.get(),
+                false,  // underwater
+                false   // drowning
         ));
 
         reg.addRecipes(WORLD_RITUAL, list);
@@ -139,6 +168,50 @@ public final class DTJeiPlugin implements IModPlugin {
         reg.addRecipeCatalyst(new ItemStack(Items.FEATHER), WORLD_RITUAL);
         reg.addRecipeCatalyst(new ItemStack(Items.ENDER_PEARL), WORLD_RITUAL);
         reg.addRecipeCatalyst(new ItemStack(Items.FLINT_AND_STEEL), WORLD_RITUAL);
+    }
+
+    @SafeVarargs
+    public static Ingredient anyOfTags(TagKey<Item>... tags) {
+        if (tags == null || tags.length == 0)
+            return Ingredient.EMPTY;
+        // Ingredient.merge 会把多个 Ingredient 合并为“任意一个匹配即可”
+        return Ingredient.merge(
+                Arrays.stream(tags)
+                      .filter(Objects::nonNull)
+                      .map(Ingredient::of)
+                      .collect(Collectors.toList())
+        );
+    }
+
+    private static TagKey<Item> forgeTag(String name) {
+        return TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("forge", name));
+    }
+
+    private static TagKey<Block> forgeBlockTag(String name) {
+        return TagKey.create(ForgeRegistries.BLOCKS.getRegistryKey(), new ResourceLocation("forge", name));
+    }
+
+    @SafeVarargs
+    public static Ingredient anyOfBlockTags(TagKey<Block>... blockTags) {
+        if (blockTags == null || blockTags.length == 0)
+            return Ingredient.EMPTY;
+
+        // 用 LinkedHashSet 去重并保持稳定顺序
+        Set<Item> items = new LinkedHashSet<>();
+        for (TagKey<Block> tag : blockTags) {
+            if (tag == null)
+                continue;
+            // 运行期通过 Forge 的 tag 视图遍历标签成员
+            Stream<Item> s = Objects.requireNonNull(ForgeRegistries.BLOCKS.tags())
+                                    .getTag(tag).stream()        // Stream<Holder<Block>>
+                                    .map(Block::asItem)          // Item（无物品时为 Items.AIR）
+                                    .filter(i -> i != Items.AIR);
+            s.forEach(items::add);
+        }
+
+        if (items.isEmpty())
+            return Ingredient.EMPTY;
+        return Ingredient.of(items.toArray(Item[]::new));
     }
 }
 
