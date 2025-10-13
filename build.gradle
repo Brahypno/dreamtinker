@@ -197,9 +197,7 @@ dependencies {
     implementation fg.deobf("curse.maven:curios-309927:6418456")
     implementation fg.deobf("curse.maven:patchouli-306770:6164575")
     implementation fg.deobf("curse.maven:caelus-308989:5281700")
-    def isclientRun = gradle.startParameter.taskNames.any { it.toLowerCase().contains("runClient") }
-    if (!isclientRun)
-        implementation fg.deobf("curse.maven:enigmatic-legacy-336184:5600004")
+    implementation fg.deobf("curse.maven:enigmatic-legacy-336184:5600004")
 
     implementation fg.deobf("curse.maven:lodestone-616457:6213794")
     implementation fg.deobf("curse.maven:malum-484064:6646111")
@@ -216,6 +214,7 @@ tasks.named('processResources', ProcessResources).configure {
             loader_version_range: loader_version_range,
             mod_id              : mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
             mod_authors         : mod_authors, mod_description: mod_description,
+            tcon_range          : tcon_range, mantle_range: mantle_range, jei_range: jei_range,
     ]
 
     inputs.properties replaceProperties
