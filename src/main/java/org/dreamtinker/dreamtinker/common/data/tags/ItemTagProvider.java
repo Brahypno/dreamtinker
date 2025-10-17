@@ -14,7 +14,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagkeys;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
@@ -26,6 +25,7 @@ import slimeknights.tconstruct.tools.TinkerTools;
 
 import java.util.concurrent.CompletableFuture;
 
+import static org.dreamtinker.dreamtinker.common.DreamtinkerCommon.*;
 import static slimeknights.tconstruct.common.TinkerTags.Items.*;
 
 public class ItemTagProvider extends ItemTagsProvider {
@@ -48,17 +48,17 @@ public class ItemTagProvider extends ItemTagsProvider {
         this.tag(ItemTagRegistry.SCYTHE).add(TinkerTools.scythe.asItem(), TinkerTools.kama.asItem(), DreamtinkerTools.narcissus_wing.asItem());
         //parts
         this.tag(TinkerTags.Items.CASTS)
-            .add(DreamtinkerCommon.memory_cast.get(), DreamtinkerCommon.wish_cast.get(), DreamtinkerCommon.soul_cast.get(),
-                 DreamtinkerCommon.persona_cast.get(),
-                 DreamtinkerCommon.reason_cast.get());
+            .add(memory_cast.get(), wish_cast.get(), soul_cast.get(),
+                 persona_cast.get(),
+                 reason_cast.get());
         this.tag(TinkerTags.Items.PATTERNS)
-            .add(DreamtinkerCommon.memory_cast.get(), DreamtinkerCommon.wish_cast.get(), DreamtinkerCommon.soul_cast.get(),
-                 DreamtinkerCommon.persona_cast.get(),
-                 DreamtinkerCommon.reason_cast.get());
+            .add(memory_cast.get(), wish_cast.get(), soul_cast.get(),
+                 persona_cast.get(),
+                 reason_cast.get());
         this.tag(TinkerTags.Items.SINGLE_USE_CASTS)
-            .add(DreamtinkerCommon.memory_cast.get(), DreamtinkerCommon.wish_cast.get(), DreamtinkerCommon.soul_cast.get(),
-                 DreamtinkerCommon.persona_cast.get(),
-                 DreamtinkerCommon.reason_cast.get());
+            .add(memory_cast.get(), wish_cast.get(), soul_cast.get(),
+                 persona_cast.get(),
+                 reason_cast.get());
         //armor
         addArmorTags(DreamtinkerTools.underPlate, MULTIPART_TOOL, DURABILITY, TinkerTags.Items.BONUS_SLOTS,
                      TinkerTags.Items.TRIM);
@@ -74,14 +74,15 @@ public class ItemTagProvider extends ItemTagsProvider {
 
 
         this.tag(Tags.Items.INGOTS)
-            .add(DreamtinkerCommon.metallivorous_stibium_lupus.get(), DreamtinkerCommon.regulus.get(), DreamtinkerCommon.soul_etherium.get());
-        this.tag(Tags.Items.GEMS).add(DreamtinkerCommon.valentinite.get(), DreamtinkerCommon.nigrescence_antimony.get(), DreamtinkerCommon.echo_alloy.get());
-        this.tag(DreamtinkerTagkeys.Items.raw_stibnite).add(DreamtinkerCommon.raw_stibnite.get());
-        this.tag(Tags.Items.RAW_MATERIALS).add(DreamtinkerCommon.raw_stibnite.get());
-        this.tag(ItemTags.FOX_FOOD).add(DreamtinkerCommon.white_peach.get());
+            .add(metallivorous_stibium_lupus.get(), regulus.get(), soul_etherium.get());
+        this.tag(Tags.Items.GEMS)
+            .add(valentinite.get(), nigrescence_antimony.get(), echo_alloy.get(), larimar.get());
+        this.tag(DreamtinkerTagkeys.Items.raw_stibnite).add(raw_stibnite.get());
+        this.tag(Tags.Items.RAW_MATERIALS).add(raw_stibnite.get());
+        this.tag(ItemTags.FOX_FOOD).add(white_peach.get());
         this.tag(ItemTags.ARROWS).add(DreamtinkerTools.tntarrow.get());
-        addItemsTags(DreamtinkerCommon.narcissus.asItem(), ItemTags.SMALL_FLOWERS, ItemTags.FLOWERS);
-        this.tag(ItemTagRegistry.HIDDEN_UNTIL_BLACK_CRYSTAL).addOptional(DreamtinkerCommon.malignant_gluttony.getId());
+        addItemsTags(narcissus.asItem(), ItemTags.SMALL_FLOWERS, ItemTags.FLOWERS);
+        this.tag(ItemTagRegistry.HIDDEN_UNTIL_BLACK_CRYSTAL).addOptional(malignant_gluttony.getId());
 
     }
 

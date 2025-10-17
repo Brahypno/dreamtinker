@@ -1,0 +1,9 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_beach",
+  "features": [
+    "dreamtinker:larimar_ore_small",
+    "dreamtinker:larimar_ore_large"
+  ],
+  "step": "underground_decoration"
+}

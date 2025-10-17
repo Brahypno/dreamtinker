@@ -26,12 +26,16 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
     @Override
     protected void generate() {
         this.addDecorative();
+        this.addWorld();
     }
 
     private void addDecorative() {
         this.dropSelf(DreamtinkerCommon.crying_obsidian_plane.get());
         this.dropSelf(DreamtinkerCommon.narcissus.get());
         this.dropPottedContents(DreamtinkerCommon.potted_narcissus.get());
+    }
 
+    private void addWorld() {
+        this.add(DreamtinkerCommon.larimarOre.get(), block -> createOreDrop(block, DreamtinkerCommon.larimar.get()));
     }
 }

@@ -136,7 +136,7 @@ public class DreamtinkerCommon extends DreamtinkerModule {
             }
     );
     public static final RegistryObject<Item> echo_alloy = ITEMS.register("echo_alloy", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
-    public static final RegistryObject<Item> malignant_gluttony = ITEMS.register("malignant_gluttony", () -> new Item(ITEM_PROPS.rarity(Rarity.EPIC)) {
+    public static final RegistryObject<Item> malignant_gluttony = MALUM_ITEMS.register("malignant_gluttony", () -> new Item(ITEM_PROPS.rarity(Rarity.EPIC)) {
         public void appendHoverText(@NotNull ItemStack stack, Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
             tooltip.add(Component.translatable("tooltip.dreamtinker.malignant_gluttony_1").withStyle(ChatFormatting.BLACK));
             tooltip.add(Component.translatable("tooltip.dreamtinker.malignant_gluttony_2").withStyle(ChatFormatting.AQUA));
@@ -144,6 +144,7 @@ public class DreamtinkerCommon extends DreamtinkerModule {
             super.appendHoverText(stack, level, tooltip, flag);
         }
     });
+    public static final RegistryObject<Item> larimar = ITEMS.register("larimar", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
 
     public static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         output.accept(echo_alloy.get());
@@ -165,6 +166,7 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         output.accept(unborn_dragon_egg.get());
         output.accept(unborn_sniffer_egg.get());
         output.accept(unborn_spawn_egg.get());
+        output.accept(larimar.get());
         if (ModList.get().isLoaded("malum"))
             output.accept(malignant_gluttony.get());
         if (ModList.get().isLoaded("enigmaticlegacy"))
@@ -185,10 +187,13 @@ public class DreamtinkerCommon extends DreamtinkerModule {
                                                                                           .instabreak().sound(SoundType.STONE)
                                                                                           .offsetType(BlockBehaviour.OffsetType.XZ)
                                                                                           .pushReaction(PushReaction.DESTROY)), BLOCK_ITEM);
+    public static final ItemObject<Block> larimarOre = BLOCKS.register("larimar_ore", () -> new Block(
+            builder(MapColor.LAPIS, SoundType.LODESTONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(5.0F)), BLOCK_ITEM);
 
     public static void addTabBlocks(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         output.accept(crying_obsidian_plane.get());
         output.accept(narcissus.get());
+        output.accept(larimarOre.get());
     }
 
     protected static BlockBehaviour.Properties builder(SoundType soundType) {

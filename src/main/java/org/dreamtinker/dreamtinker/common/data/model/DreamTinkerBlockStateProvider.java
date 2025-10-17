@@ -41,6 +41,7 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
                             models().withExistingParent("potted_narcissus", new ResourceLocation("minecraft", "block/flower_pot_cross"))
                                     .texture("plant", blockTexture(DreamtinkerCommon.narcissus.get()))
                                     .renderType("cutout").guiLight(BlockModel.GuiLight.FRONT));
+        simpleBlockWithItem(DreamtinkerCommon.larimarOre.get(), cubeAll(DreamtinkerCommon.larimarOre.get()));
     }
 
     /**

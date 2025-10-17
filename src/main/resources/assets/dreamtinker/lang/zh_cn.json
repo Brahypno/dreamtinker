@@ -352,12 +352,14 @@
   "tooltip.dreamtinker.malignant_gluttony_1": "以深邃而不可知之容器",
   "tooltip.dreamtinker.malignant_gluttony_2": "以永归地狱的邪恶渎圣邪术",
   "tooltip.dreamtinker.malignant_gluttony_3": "以恶意为意识献上虚无的诅咒",
+  "item.dreamtinker.larimar": "海纹石",
 
   "block.dreamtinker.crying_obsidian_pane": "哭泣的黑曜石板",
   "block.dreamtinker.narcissus": "水仙",
   "tooltip.dreamtinker.narcissus_1": "何物徒留名字",
   "tooltip.dreamtinker.narcissus_2": "何物开遍幽谷",
   "block.dreamtinker.potted_narcissus": "有水仙的花盆",
+  "block.dreamtinker.larimar_ore": "海纹石原矿",
 
   "material.dreamtinker.echo_alloy": "回响合金",
   "material.dreamtinker.echo_alloy.flavor": "是神秘的回响，还是秘密的回响",
