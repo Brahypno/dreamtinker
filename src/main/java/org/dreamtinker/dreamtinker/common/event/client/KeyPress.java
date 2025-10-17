@@ -1,14 +1,18 @@
 package org.dreamtinker.dreamtinker.common.event.client;
 
 import net.minecraft.client.Minecraft;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.network.Dnetwork;
 import org.dreamtinker.dreamtinker.network.KeyStateMsg;
 
 import static org.dreamtinker.dreamtinker.common.event.client.KeyBindings.KEY_MODE;
 import static org.dreamtinker.dreamtinker.common.event.client.KeyBindings.TOOL_INTERACT;
 
+@Mod.EventBusSubscriber(modid = Dreamtinker.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class KeyPress {
     private static boolean lastToolInteract = false;
     private static boolean lastMode = false;

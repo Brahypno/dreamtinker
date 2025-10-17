@@ -34,7 +34,6 @@ public record KeyStateMsg(KeyKind kind, boolean down) {
 
             // 正确获取并写入能力
             sp.getCapability(PlayerKeyStateProvider.PlayerKeyState.CAP).ifPresent(cap -> {
-                System.out.println("handle" + m.kind() + m.down());
                 cap.set(m.kind(), m.down());   // 注意：KeyStateMsg 是 record -> 访问器是 kind()/down()
             });
         });
