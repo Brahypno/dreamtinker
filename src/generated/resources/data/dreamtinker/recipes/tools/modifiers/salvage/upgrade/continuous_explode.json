@@ -1,5 +1,8 @@
 {
   "type": "tconstruct:modifier_salvage",
+  "level": {
+    "min": 2
+  },
   "modifier": "dreamtinker:continuous_explode",
   "slots": {
     "upgrades": 1
