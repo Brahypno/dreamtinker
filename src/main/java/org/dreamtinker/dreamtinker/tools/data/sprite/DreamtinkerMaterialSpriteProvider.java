@@ -97,6 +97,18 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFF3B2754)
                                                 .addARGB(255, 0xFF5b3c82)
                                                 .build());
+        this.buildMaterial(DreamtinkerMaterialIds.larimar)
+            .ranged().meleeHarvest()
+            .fallbacks("gem")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(0, 0xFF0E4A66)  // 深影：冷青蓝
+                                                .addARGB(63, 0xFF1F6F88)  // 深蓝向青过渡
+                                                .addARGB(102, 0xFF2E90A5)  // 中深段
+                                                .addARGB(140, 0xFF51BACE)  // 标志性Larimar蓝
+                                                .addARGB(178, 0xFF86DDE2)  // 亮蓝青
+                                                .addARGB(216, 0xFFC7F7F6)  // 近白高光
+                                                .addARGB(255, 0xFFFFFFFF)  // 纯白镜面
+                                                .build());
 
         this.buildMaterial(DreamtinkerMaterialIds.etherium)
             .ranged().meleeHarvest().armor().statType(StatlessMaterialStats.BOWSTRING)

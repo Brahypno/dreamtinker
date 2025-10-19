@@ -50,6 +50,9 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.crying_obsidian, RANGED, isolde);
         addTraits(DreamtinkerMaterialIds.crying_obsidian, ARMOR, in_rain.getId(), ModifierIds.luck);
 
+        addTraits(DreamtinkerMaterialIds.larimar, MELEE_HARVEST, Ids.ykhEULA, Ids.MorningLordEULA, Ids.EULA);
+        addTraits(DreamtinkerMaterialIds.larimar, RANGED, Ids.why_i_cry, deep_sleep_with_roar.getId());
+
         callGetOrCreate(this, DreamtinkerMaterialIds.etherium).setTraits(MELEE_HARVEST, List.of(
                 new ModifierEntry(ModifierIds.smite, 2),
                 new ModifierEntry(explosive_hit.getId(), 1),
@@ -67,6 +70,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
                   Ids.wither_body, evil_attack.getId());
         addTraits(DreamtinkerMaterialIds.nefarious, ARMOR, cursed_ring_bound.getId(), Ids.wither_body,
                   stone_heart.getId());
+
 
         addTraits(DreamtinkerMaterialIds.soul_etherium, MELEE_HARVEST, cursed_ring_bound.getId(), ModifierIds.soulbound,
                   Ids.soul_form, open_soul.getId(), exiles_faulty.getId());
@@ -98,7 +102,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
                   malum_distortion.getId(), Ids.malum_world_of_weight,
                   Ids.malum_edge_of_deliverance);
         addTraits(DreamtinkerMaterialIds.malignant_pewter, ARMOR, malum_malignant_attributes);
-        
+
         addTraits(DreamtinkerMaterialIds.malignant_gluttony, MELEE_HARVEST, Ids.malum_haunted, malum_magic_attack.getId(), malum_erosion.getId(),
                   Ids.thundering_curse, malum_thirsty.getId(), malum_evolution.getId());
         addTraits(DreamtinkerMaterialIds.malignant_gluttony, ARMOR, Ids.thundering_curse, malum_thirsty.getId(), malum_spirit_defense.getId());

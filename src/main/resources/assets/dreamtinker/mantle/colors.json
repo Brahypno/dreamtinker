@@ -70,7 +70,12 @@
     "malum_thirsty": "#285052",
     "malum_evolution": "#285052",
     "malum_spirit_defense": "#D9822B",
-    "malum_sol_tiferet": "#FF66CC"
+    "malum_sol_tiferet": "#FF66CC",
+    "why_i_cry": "#B7A1C6",
+    "deep_sleep_with_roar": "#51BACE",
+    "morning_lord_eula": "#FFF4C9",
+    "ykh_eula": "#D9B24A",
+    "eula": "#51BACE"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
@@ -88,7 +93,8 @@
     "malum_mnemonic_fragment": "#7F08FC",
     "malum_soul_stained_steel": "#BE86E9",
     "malum_malignant_pewter": "#C9B7D6",
-    "malum_malignant_gluttony": "#1FA60A"
+    "malum_malignant_gluttony": "#1FA60A",
+    "larimar": "#B7A1C6"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873"

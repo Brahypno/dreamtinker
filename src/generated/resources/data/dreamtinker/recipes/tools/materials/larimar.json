@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "dreamtinker:larimar"
+  },
+  "material": "dreamtinker:larimar",
+  "needed": 1,
+  "value": 1
+}

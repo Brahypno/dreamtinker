@@ -410,6 +410,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                        materials_folder + "star_regulus");
         materialRecipe(consumer, DreamtinkerMaterialIds.valentinite, Ingredient.of(DreamtinkerCommon.valentinite.get()), 1, 1,
                        materials_folder + "valentinite");
+        materialRecipe(consumer, DreamtinkerMaterialIds.larimar, Ingredient.of(DreamtinkerCommon.larimar.get()), 1, 1,
+                       materials_folder + "larimar");
     }
 
     private void addCompactMaterialRecipes(Consumer<FinishedRecipe> consumer) {

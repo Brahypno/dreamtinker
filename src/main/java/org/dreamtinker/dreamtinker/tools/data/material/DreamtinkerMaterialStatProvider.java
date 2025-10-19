@@ -20,7 +20,6 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addRanged();
         addArmor();
         addMisc();
-
     }
 
     private void addMeleeHarvest() {
@@ -44,6 +43,10 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addMaterialStats(DreamtinkerMaterialIds.crying_obsidian,
                          new HeadMaterialStats(700, 6f, Tiers.DIAMOND, 2f),
                          HandleMaterialStats.multipliers().durability(1.1f).miningSpeed(1.05f).attackDamage(1.1f).attackSpeed(1.1f).build(),
+                         StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.larimar,
+                         new HeadMaterialStats(600, 4f, Tiers.DIAMOND, 0.5f),
+                         HandleMaterialStats.multipliers().durability(1.1f).miningSpeed(1.3f).attackDamage(0.5f).attackSpeed(1.1f).build(),
                          StatlessMaterialStats.BINDING);
 
         addMaterialStats(DreamtinkerMaterialIds.etherium,
@@ -96,6 +99,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addMaterialStats(DreamtinkerMaterialIds.crying_obsidian,
                          new LimbMaterialStats(800, 0.3f, -0.2f, 0.4f),
                          new GripMaterialStats(0.5f, -0.4f, 1.0f));
+        addMaterialStats(DreamtinkerMaterialIds.larimar,
+                         new LimbMaterialStats(900, 0.5f, 0.2f, 0.2f),
+                         new GripMaterialStats(0.5f, 0.2f, 1.0f));
 
         addMaterialStats(DreamtinkerMaterialIds.etherium,
                          new LimbMaterialStats(3000, 0.7f, 0.7f, 0.6f),

@@ -1,0 +1,33 @@
+{
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:conditional_mining_speed",
+      "formula": [
+        3.0,
+        "$light",
+        5.0,
+        "-",
+        6.0,
+        "/",
+        "^",
+        "$level",
+        "*",
+        "$multiplier",
+        "*",
+        "$speed",
+        "+"
+      ],
+      "percent": false,
+      "require_effective": true,
+      "variables": {
+        "light": {
+          "type": "tconstruct:block_light",
+          "fallback": 15.0,
+          "light_layer": "block"
+        }
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

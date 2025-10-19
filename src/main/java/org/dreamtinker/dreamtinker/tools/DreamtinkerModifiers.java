@@ -137,6 +137,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<stone_heart> stone_heart = MODIFIERS.register("stone_heart", stone_heart::new);
     public static final StaticModifier<life_looting> life_looting = MODIFIERS.register("life_looting", life_looting::new);
 
+    public static final StaticModifier<deepSleepWithRoar> deep_sleep_with_roar = MODIFIERS.register("deep_sleep_with_roar", deepSleepWithRoar::new);
+
 
     //etherium
     public static final StaticModifier<astral_break> astral_break = EL_MODIFIERS.register("astral_break", astral_break::new);
@@ -196,6 +198,10 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId huge_ego = id("huge_ego");
         public static final ModifierId full_concentration = id("full_concentration");
         public static final ModifierId thundering_curse = id("thundering_curse");
+        public static final ModifierId why_i_cry = id("why_i_cry");
+        public static final ModifierId ykhEULA = id("ykh_eula");
+        public static final ModifierId MorningLordEULA = id("morning_lord_eula");
+        public static final ModifierId EULA = id("eula");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");

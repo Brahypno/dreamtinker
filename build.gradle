@@ -249,6 +249,7 @@ tasks.withType(JavaCompile).configureEach {
 
 tasks.register('cleanOldLogs', Delete) {
     delete fileTree(dir: 'run/logs', include: ['*.zip', '*.gz'])
+    delete fileTree(dir: 'run-data/logs', include: ['*.zip', '*.gz'])
 }
 tasks.withType(JavaExec).configureEach {
     if (name.toLowerCase().startsWith('run')) {

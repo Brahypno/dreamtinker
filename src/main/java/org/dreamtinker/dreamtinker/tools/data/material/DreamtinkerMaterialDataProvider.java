@@ -26,6 +26,7 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.metallivorous_stibium_lupus, 6, 45, false, false, null);
         addMaterial(DreamtinkerMaterialIds.star_regulus, 7, 50, true, false, null);
         addMaterial(DreamtinkerMaterialIds.crying_obsidian, 3, 30, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.larimar, 3, 20, true, false, null);
 
         addMaterial(DreamtinkerMaterialIds.etherium, 4, 40, false, false, modLoaded("enigmaticlegacy"));
         addMaterial(DreamtinkerMaterialIds.nefarious, 4, 40, false, false, modLoaded("enigmaticlegacy"));
@@ -34,7 +35,7 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.spirit_fabric, 2, 10, true, false, modLoaded("malum"));
         addMaterial(DreamtinkerMaterialIds.hallowed_gold, 2, 15, true, false, modLoaded("malum"));
         addMaterial(DreamtinkerMaterialIds.mnemonic_fragment, 2, 30, false, true, modLoaded("malum"));
-        addMaterial(DreamtinkerMaterialIds.soul_stained_steel, 3, 40, false, false, modLoaded("malum"));
+        addMaterial(DreamtinkerMaterialIds.soul_stained_steel, 3, 30, false, false, modLoaded("malum"));
         addMaterial(DreamtinkerMaterialIds.malignant_pewter, 4, 45, false, true, modLoaded("malum"));
         addMaterial(DreamtinkerMaterialIds.malignant_gluttony, 5, 50, false, true, modLoaded("malum"));
     }

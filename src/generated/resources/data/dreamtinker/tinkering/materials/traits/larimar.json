@@ -1,0 +1,28 @@
+{
+  "perStat": {
+    "tconstruct:melee_harvest": [
+      {
+        "level": 1,
+        "name": "dreamtinker:ykh_eula"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:morning_lord_eula"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:eula"
+      }
+    ],
+    "tconstruct:ranged": [
+      {
+        "level": 1,
+        "name": "dreamtinker:why_i_cry"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:deep_sleep_with_roar"
+      }
+    ]
+  }
+}

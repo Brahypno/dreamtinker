@@ -1,0 +1,30 @@
+{
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:conditional_mining_speed",
+      "formula": [
+        "$temperature",
+        0.9,
+        "!-",
+        "$level",
+        "*",
+        6.0,
+        "*",
+        "$multiplier",
+        "*",
+        "$speed",
+        "+"
+      ],
+      "percent": false,
+      "require_effective": true,
+      "variables": {
+        "temperature": {
+          "type": "tconstruct:biome_temperature",
+          "fallback": -0.5
+        }
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}
