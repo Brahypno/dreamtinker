@@ -81,7 +81,7 @@ public class ewige_widerkunft extends BattleModifier {
 
     @Override
     public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
-        if (modifier.getLevel() > 0 && EquipmentSlot.MAINHAND == slot){
+        if (!tool.isBroken() && modifier.getLevel() > 0 && EquipmentSlot.MAINHAND == slot){
             ModDataNBT nbt = tool.getPersistentData();
             int breaks = Math.min(nbt.getInt(TAG_TOMB), modifier.getLevel() * CentralFlame.get());
             if (breaks > 0){

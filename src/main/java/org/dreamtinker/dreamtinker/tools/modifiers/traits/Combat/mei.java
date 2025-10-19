@@ -110,7 +110,7 @@ public class mei extends BattleModifier {
 
     @Override
     public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
-        if (slot != EquipmentSlot.MAINHAND)
+        if (tool.isBroken() || slot != EquipmentSlot.MAINHAND)
             return;
         int level = modifier.getLevel();
         double mod;

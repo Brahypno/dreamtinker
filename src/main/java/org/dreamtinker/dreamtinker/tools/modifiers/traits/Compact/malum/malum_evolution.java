@@ -67,7 +67,7 @@ public class malum_evolution extends BattleModifier {
 
     @Override
     public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
-        if (slot == EquipmentSlot.MAINHAND && 0 < tool.getPersistentData().getInt(Haunted))
+        if (!tool.isBroken() && slot == EquipmentSlot.MAINHAND && 0 < tool.getPersistentData().getInt(Haunted))
             consumer.accept(LodestoneAttributeRegistry.MAGIC_DAMAGE.get(),
                             new AttributeModifier(magic_damage,
                                                   LodestoneAttributeRegistry.MAGIC_DAMAGE.get().getDescriptionId(),

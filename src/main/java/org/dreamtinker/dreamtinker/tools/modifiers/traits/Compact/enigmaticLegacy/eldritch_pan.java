@@ -146,7 +146,7 @@ public class eldritch_pan extends BattleModifier {
 
     @Override
     public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
-        if (modifier.getLevel() > 0 && EquipmentSlot.MAINHAND == slot){
+        if (!tool.isBroken() && modifier.getLevel() > 0 && EquipmentSlot.MAINHAND == slot){
             ModDataNBT nbt = tool.getPersistentData();
             int kills = nbt.getInt(TAG_PAN);
             if (kills > 0){

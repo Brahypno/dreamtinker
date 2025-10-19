@@ -41,7 +41,7 @@ public class malum_spirit_defense extends ArmorModifier {
 
     @Override
     public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
-        if (EquipmentSlot.MAINHAND == slot || EquipmentSlot.OFFHAND == slot)
+        if (!tool.isBroken() && EquipmentSlot.MAINHAND == slot || EquipmentSlot.OFFHAND == slot)
             return;
         consumer.accept(AttributeRegistry.ARCANE_RESONANCE.get(),
                         new AttributeModifier(ARMOR_SLOT_UUIDS.get(slot),

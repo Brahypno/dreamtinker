@@ -80,7 +80,7 @@ public class malum_thirsty extends BattleModifier {
     @Override
     public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
         int extra_glu = tool.getPersistentData().getInt(TAG_GLU);
-        if (0 < extra_glu){
+        if (!tool.isBroken() && 0 < extra_glu){
             ArrayList<Attribute> attributes = new ArrayList<>(List.of(LodestoneAttributeRegistry.MAGIC_PROFICIENCY.get()));
             if (iron_spell_power_exists)
                 attributes.add(ForgeRegistries.ATTRIBUTES.getValue(iron_spell_power));

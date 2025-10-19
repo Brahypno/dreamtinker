@@ -29,6 +29,8 @@ public class weapon_transformation extends BattleModifier {
 
     @Override
     public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
+        if (tool.isBroken())
+            return;
         float armor = tool.getStats().get(ToolStats.ARMOR);
         float toughness = tool.getStats().get(ToolStats.ARMOR_TOUGHNESS);
         float muti = valueExpSoftCap(armor, toughness);
@@ -78,6 +80,8 @@ public class weapon_transformation extends BattleModifier {
 
     @Override
     public void modifierOnInventoryTick(@NotNull IToolStackView tool, @NotNull ModifierEntry modifier, @NotNull Level world, @NotNull LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, @NotNull ItemStack stack) {
+        if (tool.isBroken())
+            return;
         if (holder instanceof Player player && (isCorrectSlot || isSelected) && stack.is(Tags.Items.ARMORS_HELMETS) && stack.is(TinkerTags.Items.HELMETS)){
             if (player.getEffect(MobEffects.NIGHT_VISION) == null
                 || Objects.requireNonNull(player.getEffect(MobEffects.NIGHT_VISION)).getDuration() <= 20 * 11){
