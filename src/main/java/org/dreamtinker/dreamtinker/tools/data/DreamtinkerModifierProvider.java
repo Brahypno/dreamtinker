@@ -3,20 +3,36 @@ package org.dreamtinker.dreamtinker.tools.data;
 import com.aizistral.enigmaticlegacy.registries.EnigmaticEnchantments;
 import com.sammy.malum.registry.common.item.EnchantmentRegistry;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FarmBlock;
+import net.minecraft.world.level.block.FireBlock;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraftforge.fluids.FluidType;
 import org.jetbrains.annotations.NotNull;
+import slimeknights.mantle.data.predicate.IJsonPredicate;
+import slimeknights.mantle.data.predicate.block.BlockPropertiesPredicate;
+import slimeknights.mantle.data.predicate.damage.DamageTypePredicate;
+import slimeknights.mantle.data.predicate.item.ItemPredicate;
 import slimeknights.tconstruct.library.data.tinkering.AbstractModifierProvider;
 import slimeknights.tconstruct.library.json.LevelingInt;
 import slimeknights.tconstruct.library.json.predicate.tool.HasModifierPredicate;
 import slimeknights.tconstruct.library.json.variable.mining.BlockLightVariable;
 import slimeknights.tconstruct.library.json.variable.mining.BlockTemperatureVariable;
 import slimeknights.tconstruct.library.modifiers.impl.BasicModifier;
+import slimeknights.tconstruct.library.modifiers.modules.armor.BlockDamageSourceModule;
+import slimeknights.tconstruct.library.modifiers.modules.armor.ProtectionModule;
+import slimeknights.tconstruct.library.modifiers.modules.armor.ReplaceBlockWalkerModule;
 import slimeknights.tconstruct.library.modifiers.modules.build.EnchantmentModule;
 import slimeknights.tconstruct.library.modifiers.modules.build.ModifierRequirementsModule;
 import slimeknights.tconstruct.library.modifiers.modules.build.ModifierSlotModule;
 import slimeknights.tconstruct.library.modifiers.modules.build.StatBoostModule;
+import slimeknights.tconstruct.library.modifiers.modules.combat.LootingModule;
 import slimeknights.tconstruct.library.modifiers.modules.mining.ConditionalMiningSpeedModule;
 import slimeknights.tconstruct.library.modifiers.util.ModifierLevelDisplay;
 import slimeknights.tconstruct.library.tools.SlotType;
@@ -25,7 +41,9 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.tools.modules.MeltingModule;
 
 import static org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers.*;
+import static slimeknights.tconstruct.common.TinkerTags.Items.*;
 import static slimeknights.tconstruct.library.json.math.ModifierFormula.*;
+import static slimeknights.tconstruct.library.tools.definition.ModifiableArmorMaterial.ARMOR_SLOTS;
 
 public class DreamtinkerModifierProvider extends AbstractModifierProvider implements IConditionBuilder {
     public DreamtinkerModifierProvider(PackOutput packOutput) {
@@ -34,6 +52,32 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
 
     @Override
     protected void addModifiers() {
+
+        buildModifier(Ids.in_rain)
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(BlockDamageSourceModule.source(new DamageTypePredicate(DamageTypes.HOT_FLOOR)).build())
+                .addModule(ReplaceBlockWalkerModule.builder().replaceAlways(
+                        BlockPropertiesPredicate.block(Blocks.FIRE).range(FireBlock.AGE, 0, FireBlock.MAX_AGE).build(),
+                        Blocks.AIR.defaultBlockState()).amount(2, 1))
+                .addModule(ReplaceBlockWalkerModule.builder().replaceAlways(BlockPropertiesPredicate.block(Blocks.LAVA).matches(LiquidBlock.LEVEL, 0).build(),
+                                                                            Blocks.OBSIDIAN.defaultBlockState()).amount(2, 1))
+                .addModule(ReplaceBlockWalkerModule.builder().replaceAlways(BlockPropertiesPredicate.block(Blocks.LAVA).range(LiquidBlock.LEVEL, 1, 15).build(),
+                                                                            Blocks.STONE.defaultBlockState()).amount(2, 1))
+                .addModule(ReplaceBlockWalkerModule.builder().replaceAlways(
+                        BlockPropertiesPredicate.block(Blocks.FARMLAND).range(FarmBlock.MOISTURE, 0, FarmBlock.MAX_MOISTURE).build(),
+                        Blocks.FARMLAND.defaultBlockState()
+                                       .setValue(FarmBlock.MOISTURE, FarmBlock.MAX_MOISTURE)).amount(2, 1));
+        IJsonPredicate<Item> harvest = ItemPredicate.tag(HARVEST);
+        IJsonPredicate<Item> armor = ItemPredicate.tag(WORN_ARMOR);
+        EnchantmentModule CONSTANT_FORTUNE = EnchantmentModule.builder(Enchantments.BLOCK_FORTUNE).toolItem(harvest).constant();
+        EnchantmentModule ARMOR_FORTUNE = EnchantmentModule.builder(Enchantments.BLOCK_FORTUNE).toolItem(armor).armorHarvest(ARMOR_SLOTS);
+        // note chestplates will have both modules, but will get ignored due to setting the looting slot
+        // the air check on weapon looting is for projectiles which use an item of air in their tool context
+        LootingModule WEAPON_LOOTING = LootingModule.builder().toolItem(ItemPredicate.or(ItemPredicate.set(Items.AIR), ItemPredicate.tag(MELEE))).weapon();
+        LootingModule ARMOR_LOOTING = LootingModule.builder().toolItem(armor).armor(ARMOR_SLOTS);
+        buildModifier(Ids.with_tears)
+                .addModules(CONSTANT_FORTUNE, ARMOR_FORTUNE, WEAPON_LOOTING, ARMOR_LOOTING)
+                .addModule(ProtectionModule.builder().eachLevel(-5f));
         buildModifier(Ids.soul_form).levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                                     .addModules(ModifierSlotModule.slot(SlotType.ABILITY).flat(1),
                                                 ModifierSlotModule.slot(SlotType.DEFENSE).flat(1),

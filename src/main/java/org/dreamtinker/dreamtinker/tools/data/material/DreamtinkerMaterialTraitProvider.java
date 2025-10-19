@@ -48,7 +48,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
 
         addTraits(DreamtinkerMaterialIds.crying_obsidian, MELEE_HARVEST, sharpened_with);
         addTraits(DreamtinkerMaterialIds.crying_obsidian, RANGED, isolde);
-        addTraits(DreamtinkerMaterialIds.crying_obsidian, ARMOR, in_rain.getId(), ModifierIds.luck);
+        addTraits(DreamtinkerMaterialIds.crying_obsidian, ARMOR, Ids.in_rain, Ids.with_tears);
 
         addTraits(DreamtinkerMaterialIds.larimar, MELEE_HARVEST, Ids.ykhEULA, Ids.MorningLordEULA, Ids.EULA);
         addTraits(DreamtinkerMaterialIds.larimar, RANGED, Ids.why_i_cry, deep_sleep_with_roar.getId());

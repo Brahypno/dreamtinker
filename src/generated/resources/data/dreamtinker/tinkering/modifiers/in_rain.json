@@ -1,0 +1,101 @@
+{
+  "level_display": "tconstruct:no_levels",
+  "modules": [
+    {
+      "type": "tconstruct:block_damage",
+      "damage_source": {
+        "type": "mantle:damage_type",
+        "name": "minecraft:hot_floor"
+      }
+    },
+    {
+      "type": "tconstruct:replace_fluid",
+      "radius": {
+        "each_level": 1.0,
+        "flat": 2.0
+      },
+      "replace": [
+        {
+          "block": "minecraft:air",
+          "target": {
+            "type": "mantle:block_properties",
+            "block": "minecraft:fire",
+            "properties": {
+              "age": {
+                "max": "15",
+                "min": "0"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "tconstruct:replace_fluid",
+      "radius": {
+        "each_level": 1.0,
+        "flat": 2.0
+      },
+      "replace": [
+        {
+          "block": "minecraft:obsidian",
+          "target": {
+            "type": "mantle:block_properties",
+            "block": "minecraft:lava",
+            "properties": {
+              "level": "0"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "tconstruct:replace_fluid",
+      "radius": {
+        "each_level": 1.0,
+        "flat": 2.0
+      },
+      "replace": [
+        {
+          "block": "minecraft:stone",
+          "target": {
+            "type": "mantle:block_properties",
+            "block": "minecraft:lava",
+            "properties": {
+              "level": {
+                "max": "15",
+                "min": "1"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "tconstruct:replace_fluid",
+      "radius": {
+        "each_level": 1.0,
+        "flat": 2.0
+      },
+      "replace": [
+        {
+          "block": "minecraft:farmland",
+          "properties": {
+            "moisture": "7"
+          },
+          "target": {
+            "type": "mantle:block_properties",
+            "block": "minecraft:farmland",
+            "properties": {
+              "moisture": {
+                "max": "7",
+                "min": "0"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "tooltip_display": "always"
+}

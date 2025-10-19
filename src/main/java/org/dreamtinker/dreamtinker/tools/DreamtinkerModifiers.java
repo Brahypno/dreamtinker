@@ -43,7 +43,6 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.soul_blessing;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.stone_heart;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.common.fly;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.common.life_looting;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian.in_rain;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian.isolde;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian.sharpened_with;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.echo_shard.echoed_attack;
@@ -115,7 +114,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<two_headed_seven> two_headed_seven = MODIFIERS.register("two_headed_seven", two_headed_seven::new);
     //crying obsidian
     public static final StaticModifier<sharpened_with> sharpened_with = MODIFIERS.register("sharpened_with", sharpened_with::new);
-    public static final StaticModifier<in_rain> in_rain = MODIFIERS.register("in_rain", in_rain::new);
     public static final StaticModifier<isolde> isolde = MODIFIERS.register("isolde", isolde::new);
 
     public static final StaticModifier<org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.mei> mei = MODIFIERS.register("mei", mei::new);
@@ -187,6 +185,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             MALUM_MODIFIERS.register("malum_sol_tiferet", MalumSolTiferet::new);
 
     public static class Ids {
+        public static final ModifierId with_tears = id("with_tears");
+        public static final ModifierId in_rain = id("in_rain");
         public static final ModifierId soul_form = id("soul_form");
         public static final ModifierId wither_body = id("wither_body");
         public static final ModifierId soul_upgrade = id("soul_upgrade");
