@@ -57,7 +57,6 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.nigrescence_a
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.nigrescence_antimony.ouroboric_hourglass;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.star_regulus.as_one;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.star_regulus.two_headed_seven;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.valentinite.antimony_usage;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
 import slimeknights.tconstruct.library.modifiers.util.ModifierDeferredRegister;
@@ -98,8 +97,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
 
     //moonlight ice
     public static final StaticModifier<glacialriver> glacial_river = MODIFIERS.register("glacial_river", glacialriver::new);
-    //valentinite
-    public static final StaticModifier<antimony_usage> antimony_usage = MODIFIERS.register("antimony_usage", antimony_usage::new);
     //nigrescence antimony
     public static final StaticModifier<broken_vessel> broken_vessel = MODIFIERS.register("broken_vessel", broken_vessel::new);
     public static final StaticModifier<ewige_widerkunft> ewige_widerkunft = MODIFIERS.register("ewige_widerkunft", ewige_widerkunft::new);
@@ -185,13 +182,13 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             MALUM_MODIFIERS.register("malum_sol_tiferet", MalumSolTiferet::new);
 
     public static class Ids {
+        public static final ModifierId antimony_usage = id("antimony_usage");
         public static final ModifierId with_tears = id("with_tears");
         public static final ModifierId in_rain = id("in_rain");
         public static final ModifierId soul_form = id("soul_form");
         public static final ModifierId wither_body = id("wither_body");
         public static final ModifierId soul_upgrade = id("soul_upgrade");
         public static final ModifierId continuous_explode = id("continuous_explode");
-        public static final ModifierId moonlight_ice_info = id("moonlight_ice_info");
         public static final ModifierId soul_core = id("soul_core");
         public static final ModifierId icy_memory = id("icy_memory");
         public static final ModifierId hate_memory = id("hate_memory");

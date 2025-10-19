@@ -52,7 +52,16 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
 
     @Override
     protected void addModifiers() {
-
+        buildModifier(Ids.antimony_usage).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                                         .addModule(StatBoostModule.add(ToolStats.DURABILITY).eachLevel(0.1f))
+                                         .addModule(StatBoostModule.add(ToolStats.ATTACK_DAMAGE).eachLevel(0.1f))
+                                         .addModule(StatBoostModule.add(ToolStats.ATTACK_SPEED).eachLevel(0.05f))
+                                         .addModule(StatBoostModule.add(ToolStats.PROJECTILE_DAMAGE).eachLevel(0.1f))
+                                         .addModule(StatBoostModule.add(ToolStats.DRAW_SPEED).eachLevel(-0.1f))
+                                         .addModule(StatBoostModule.add(ToolStats.ARMOR).eachLevel(0.1f))
+                                         .addModule(StatBoostModule.add(ToolStats.ARMOR_TOUGHNESS).eachLevel(0.1f))
+                                         .addModule(StatBoostModule.add(ToolStats.KNOCKBACK_RESISTANCE).eachLevel(0.1f))
+                                         .addModule(StatBoostModule.add(ToolStats.BLOCK_AMOUNT).eachLevel(0.1f));
         buildModifier(Ids.in_rain)
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                 .addModule(BlockDamageSourceModule.source(new DamageTypePredicate(DamageTypes.HOT_FLOOR)).build())
@@ -88,7 +97,6 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                        .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                                        .addModules(ModifierSlotModule.slot(SlotType.SOUL).flat(1));
         buildModifier(Ids.continuous_explode).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
-        buildModifier(Ids.moonlight_ice_info).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
         buildModifier(Ids.soul_core)
                 .addModule(ModifierRequirementsModule.builder().requireModifier(memory_base.getId(), 1)
                                                      .modifierKey(Ids.soul_core).build());

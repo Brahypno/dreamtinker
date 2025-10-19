@@ -27,12 +27,12 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.echo_alloy, MELEE_HARVEST, ModifierIds.soulbound, echoed_attack.getId());
         addTraits(DreamtinkerMaterialIds.echo_alloy, RANGED, ModifierIds.soulbound, echoed_attack.getId());
 
-        addTraits(DreamtinkerMaterialIds.moonlight_ice, MELEE_HARVEST, Ids.moonlight_ice_info, glacial_river.getId());
+        addTraits(DreamtinkerMaterialIds.moonlight_ice, MELEE_HARVEST, glacial_river.getId());
 
-        addDefaultTraits(DreamtinkerMaterialIds.valentinite, antimony_usage);
+        addDefaultTraits(DreamtinkerMaterialIds.valentinite, Ids.antimony_usage);
         callGetOrCreate(this, DreamtinkerMaterialIds.valentinite).setTraits(ARMOR, List.of(
                 new ModifierEntry(ModifierIds.fireProtection, 4),
-                new ModifierEntry(antimony_usage.getId(), 1)));
+                new ModifierEntry(Ids.antimony_usage, 1)));
 
         addTraits(DreamtinkerMaterialIds.nigrescence_antimony, MELEE_HARVEST, ewige_widerkunft);
         addTraits(DreamtinkerMaterialIds.nigrescence_antimony, RANGED, burning_in_vain);

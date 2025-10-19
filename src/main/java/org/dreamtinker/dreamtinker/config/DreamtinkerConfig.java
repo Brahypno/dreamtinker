@@ -103,17 +103,6 @@ public class DreamtinkerConfig {
             builder.comment("Entity within this range would be considered as potential target").defineInRange("EchoDefenceRange", 10.0, 1, 1000);
     public static final ForgeConfigSpec.DoubleValue EchoDefenceSpeed = builder.comment("Speed of bounced arrow").defineInRange("EchoDefenceSpeed", 5.0, 3, 100);
 
-    static {builder.comment("\nValentinite: ");}
-
-    public static final ForgeConfigSpec.DoubleValue AntimonyUsageDur =
-            builder.comment("Durability improvement from antimony_usage").defineInRange("AntimonyUsageDur", 0.1, 0, 1000);
-    public static final ForgeConfigSpec.DoubleValue AntimonyUsageAttack =
-            builder.comment("Tool improvement from antimony_usage").defineInRange("AntimonyUsageAttack", 0.1, 0, 1000);
-    public static final ForgeConfigSpec.DoubleValue AntimonyUsageArmor =
-            builder.comment("Armor improvement from antimony_usage").defineInRange("AntimonyUsageArmor", 0.1, 0, 1000);
-    public static final ForgeConfigSpec.DoubleValue AntimonyUsageProj =
-            builder.comment("Projectile modifier from antimony_usage").defineInRange("AntimonyUsageProj", 0.1, 0, 1000);
-
     static {builder.comment("\nNigrescence Antimony: ");}
 
     public static final ForgeConfigSpec.IntValue BrokenVesselBoost =
