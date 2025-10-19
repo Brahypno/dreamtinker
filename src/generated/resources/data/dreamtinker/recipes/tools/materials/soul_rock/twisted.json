@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "malum:twisted_rock_blocks"
+  },
+  "material": "dreamtinker:malum_soul_rock#twisted",
+  "needed": 1,
+  "value": 1
+}

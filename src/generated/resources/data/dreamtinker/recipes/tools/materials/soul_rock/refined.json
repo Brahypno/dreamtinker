@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "malum:processed_soulstone"
+  },
+  "material": "dreamtinker:malum_soul_rock#refined",
+  "needed": 1,
+  "value": 1
+}

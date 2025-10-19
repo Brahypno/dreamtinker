@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "malum:tainted_rock_blocks"
+  },
+  "material": "dreamtinker:malum_soul_rock#tainted",
+  "needed": 1,
+  "value": 1
+}

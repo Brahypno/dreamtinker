@@ -465,6 +465,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                        materials_folder + "malignant_gluttony");
         materialMeltingCasting(consumer, DreamtinkerMaterialIds.malignant_gluttony, DreamtinkerFluids.molten_malignant_gluttony, FluidValues.INGOT,
                                materials_folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.tainted, Ingredient.of(ItemTagRegistry.TAINTED_BLOCKS), 1, 1, materials_folder + "soul_rock/tainted");
+        materialRecipe(consumer, DreamtinkerMaterialIds.twisted, Ingredient.of(ItemTagRegistry.TWISTED_BLOCKS), 1, 1, materials_folder + "soul_rock/twisted");
+        materialRecipe(consumer, DreamtinkerMaterialIds.refined, Ingredient.of(ItemRegistry.PROCESSED_SOULSTONE.get()), 1, 1,
+                       materials_folder + "soul_rock/refined");
 
     }
 

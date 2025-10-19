@@ -13,6 +13,10 @@
     {
       "amount_needed": 2,
       "tag": "forge:ingots/netherite"
+    },
+    {
+      "amount_needed": 2,
+      "item": "enigmaticlegacy:abyssal_heart"
     }
   ],
   "level": 1,

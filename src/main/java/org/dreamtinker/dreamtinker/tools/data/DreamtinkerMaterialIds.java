@@ -2,8 +2,10 @@ package org.dreamtinker.dreamtinker.tools.data;
 
 import net.minecraft.resources.ResourceLocation;
 import slimeknights.tconstruct.library.materials.definition.MaterialId;
+import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
 
 import static org.dreamtinker.dreamtinker.Dreamtinker.MODID;
+import static slimeknights.tconstruct.library.materials.definition.MaterialVariantId.create;
 
 public class DreamtinkerMaterialIds {
 
@@ -26,6 +28,10 @@ public class DreamtinkerMaterialIds {
     public static final MaterialId soul_stained_steel = new MaterialId(new ResourceLocation(MODID, "malum_soul_stained_steel"));
     public static final MaterialId malignant_pewter = new MaterialId(new ResourceLocation(MODID, "malum_malignant_pewter"));
     public static final MaterialId malignant_gluttony = new MaterialId(new ResourceLocation(MODID, "malum_malignant_gluttony"));
+    public static final MaterialId soul_rock = new MaterialId(new ResourceLocation(MODID, "malum_soul_rock"));
+    public static final MaterialVariantId twisted = create(soul_rock, "twisted");
+    public static final MaterialVariantId tainted = create(soul_rock, "tainted");
+    public static final MaterialVariantId refined = create(soul_rock, "refined");
 
 
 }

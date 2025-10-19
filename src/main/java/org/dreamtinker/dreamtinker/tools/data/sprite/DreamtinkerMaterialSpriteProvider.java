@@ -218,5 +218,41 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFF52A5A9)  // 亮青
                                                 .addARGB(255, 0xFFFFEAF7)  // 最亮高光：偏粉白
                                                 .build());
+        this.buildMaterial(DreamtinkerMaterialIds.tainted)
+            .shieldCore()
+            .fallbacks("rock")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(0, 0xFF363139)  // 深灰紫
+                                                .addARGB(63, 0xFF4A434F)
+                                                .addARGB(102, 0xFF5E5663)  // 中段主色
+                                                .addARGB(140, 0xFF736A79)
+                                                .addARGB(178, 0xFF8E8296)  // 浅灰紫
+                                                .addARGB(216, 0xFFB0A6BA)
+                                                .addARGB(255, 0xFFD9D0E1)  // 高光
+                                                .build());
+        this.buildMaterial(DreamtinkerMaterialIds.twisted)
+            .shieldCore()
+            .fallbacks("rock")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(0, 0xFF0F111A)  // 极深影：蓝黑偏紫
+                                                .addARGB(63, 0xFF1A1A26)  // 深段
+                                                .addARGB(102, 0xFF262438)  // 深紫灰
+                                                .addARGB(140, 0xFF332E48)  // 中深段：紫影
+                                                .addARGB(178, 0xFF433659)  // 中段主色：冷紫
+                                                .addARGB(216, 0xFF58466F)  // 亮部：灰紫
+                                                .addARGB(255, 0xFF7B5D95)  // 高光：淡紫
+                                                .build());
+        this.buildMaterial(DreamtinkerMaterialIds.refined)
+            .shieldCore()
+            .fallbacks("rock")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(0, 0xFF30253B)  // 极深影：冷紫黑  (48,37,59)
+                                                .addARGB(63, 0xFF433048)  // 深段过渡：暗紫   (~67,48,72)
+                                                .addARGB(102, 0xFF4D3A54)  // 深紫灰         (77,58,84)
+                                                .addARGB(140, 0xFF80417B)  // 中段主色：紫绛 (128,65,123)
+                                                .addARGB(178, 0xFF9A39A3)  // 亮紫/洋红      (154,57,163)
+                                                .addARGB(216, 0xFFAE3CB5)  // 高亮过渡       (~174,60,181)
+                                                .addARGB(255, 0xFFC13FC7)  // 高光：亮洋红紫 (193,63,199)
+                                                .build());
     }
 }
