@@ -29,6 +29,8 @@ import org.dreamtinker.dreamtinker.common.data.tags.BlockTagProvider;
 import org.dreamtinker.dreamtinker.common.data.tags.FluidTagProvider;
 import org.dreamtinker.dreamtinker.common.data.tags.ItemTagProvider;
 import org.dreamtinker.dreamtinker.common.event.advancements.star_regulus_boost;
+import org.dreamtinker.dreamtinker.common.event.compact.enigmatic_legacy.addUnholyWater;
+import org.dreamtinker.dreamtinker.common.event.compact.malum.addConcentratedGluttonyBottle;
 import org.dreamtinker.dreamtinker.config.DreamtinkerConfig;
 import org.dreamtinker.dreamtinker.fluids.DreamtinkerFluids;
 import org.dreamtinker.dreamtinker.fluids.data.DreamtinkerFluidTextureProvider;
@@ -37,7 +39,6 @@ import org.dreamtinker.dreamtinker.network.Dnetwork;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
-import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.enigmatic_legacy.addUnholywater;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.enigmatic_legacy.death_handler;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.malum.malum_events_handler;
 import org.dreamtinker.dreamtinker.world.data.DTDataPackProvider;
@@ -72,10 +73,11 @@ public class Dreamtinker {
 
         MinecraftForge.EVENT_BUS.register(this);
         if (ModList.get().isLoaded("enigmaticlegacy")){
-            forgeEventBus.addGenericListener(ItemStack.class, addUnholywater::attachCaps);
+            forgeEventBus.addGenericListener(ItemStack.class, addUnholyWater::attachCaps);
             forgeEventBus.addListener(death_handler::onLivingDeath);
         }
         if (ModList.get().isLoaded("malum")){
+            forgeEventBus.addGenericListener(ItemStack.class, addConcentratedGluttonyBottle::attachCaps);
             forgeEventBus.addListener(malum_events_handler::MalumLivingHurtEvent);
             forgeEventBus.addListener(malum_events_handler::MalumLivingDeathEvent);
         }

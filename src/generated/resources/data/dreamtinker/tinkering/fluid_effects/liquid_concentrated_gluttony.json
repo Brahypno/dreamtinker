@@ -1,0 +1,42 @@
+{
+  "block_effects": [
+    {
+      "type": "tconstruct:mob_effect_cloud",
+      "effects": [
+        {
+          "effect": "malum:gluttony",
+          "level": 4,
+          "time": 200
+        }
+      ]
+    }
+  ],
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:mod_loaded",
+          "modid": "malum"
+        }
+      ]
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "tconstruct:mob_effect",
+      "action": "add",
+      "effect": "malum:gluttony",
+      "level": 4,
+      "time": 200
+    }
+  ],
+  "fluid": {
+    "amount": 50,
+    "tag": "dreamtinker:liquid_concentrated_gluttony"
+  }
+}

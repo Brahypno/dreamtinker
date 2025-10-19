@@ -45,8 +45,10 @@ public class FluidTagProvider extends FluidTagsProvider {
         addFullTag(DreamtinkerFluids.molten_soul_stained_steel, DreamtinkerTagkeys.Fluids.molten_soul_stained_steel);
         addFullTag(DreamtinkerFluids.molten_malignant_pewter, DreamtinkerTagkeys.Fluids.molten_malignant_pewter);
         addFullTag(DreamtinkerFluids.molten_malignant_gluttony, DreamtinkerTagkeys.Fluids.molten_malignant_gluttony);
+        addFullTag(DreamtinkerFluids.liquid_concentrated_gluttony, DreamtinkerTagkeys.Fluids.liquid_concentrated_gluttony);
+        addFullTag(DreamtinkerFluids.liquid_arcana_juice, DreamtinkerTagkeys.Fluids.liquid_arcana_juice);
 
-        addFullTag(DreamtinkerFluids.blood_soul, DreamtinkerTagkeys.Fluids.narcissus_wing_used);
+        addFullTag(DreamtinkerTagkeys.Fluids.narcissus_wing_used, DreamtinkerFluids.blood_soul, DreamtinkerFluids.liquid_arcana_juice);
 
         tag(TinkerTags.Fluids.GLASS_TOOLTIPS).addTag(DreamtinkerFluids.molten_crying_obsidian.getTag());
         this.tag(TinkerTags.Fluids.METAL_TOOLTIPS)
@@ -59,6 +61,13 @@ public class FluidTagProvider extends FluidTagsProvider {
     private void addFullTag(FlowingFluidObject<?> fluid, TagKey<Fluid> fluidTagKey) {
         fluidTag(fluid);
         this.tag(fluidTagKey).add(fluid.getStill(), fluid.getFlowing());
+    }
+
+    private void addFullTag(TagKey<Fluid> fluidTagKey, FlowingFluidObject<?>... fluids) {
+        for (FlowingFluidObject<?> fluid : fluids) {
+            fluidTag(fluid);
+            this.tag(fluidTagKey).add(fluid.getStill(), fluid.getFlowing());
+        }
     }
 
     /**

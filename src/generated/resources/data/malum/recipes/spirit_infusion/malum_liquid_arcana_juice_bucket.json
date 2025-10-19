@@ -1,0 +1,46 @@
+{
+  "type": "malum:spirit_infusion",
+  "extra_items": [
+    {
+      "count": 8,
+      "item": "malum:null_slate"
+    },
+    {
+      "count": 8,
+      "item": "malum:mnemonic_fragment"
+    },
+    {
+      "count": 2,
+      "item": "malum:cursed_sap"
+    },
+    {
+      "count": 2,
+      "item": "malum:runic_sap"
+    }
+  ],
+  "input": {
+    "count": 1,
+    "item": "minecraft:bucket"
+  },
+  "output": {
+    "item": "dreamtinker:liquid_arcana_juice_bucket"
+  },
+  "spirits": [
+    {
+      "type": "arcane",
+      "count": 6
+    },
+    {
+      "type": "aqueous",
+      "count": 6
+    },
+    {
+      "type": "sacred",
+      "count": 6
+    },
+    {
+      "type": "eldritch",
+      "count": 6
+    }
+  ]
+}

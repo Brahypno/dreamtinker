@@ -1,5 +1,6 @@
 package org.dreamtinker.dreamtinker.tools.data;
 
+import com.sammy.malum.registry.common.MobEffectRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffects;
@@ -14,6 +15,7 @@ import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagkeys;
 import org.dreamtinker.dreamtinker.fluids.DreamtinkerFluids;
+import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.TinkerDamageTypes;
 import slimeknights.tconstruct.common.json.ConfigEnabledCondition;
 import slimeknights.tconstruct.library.data.tinkering.AbstractFluidEffectProvider;
@@ -106,12 +108,24 @@ public class DreamtinkerFluidEffectProvider extends AbstractFluidEffectProvider 
                         new MobEffectCloudFluidEffect(FluidMobEffect.builder().effect(MobEffects.WITHER, 100, 3).buildCloud().effects()))
                 .addBlockEffect(
                         new MobEffectCloudFluidEffect(FluidMobEffect.builder().effect(TinkerEffects.bleeding.get(), 100, 3).buildCloud().effects()));
-        addFluid(DreamtinkerTagkeys.Fluids.blood_soul, 10)
+
+        addFluid(DreamtinkerTagkeys.Fluids.blood_soul, 20)
                 .addEntityEffects(FluidMobEffect.builder().effect(MobEffects.HEAL, 100, 1).buildEntity(TimeAction.ADD));
+        addFluid(DreamtinkerFluids.liquid_concentrated_gluttony, FluidValues.SIP)
+                .addCondition(modLoaded("malum"))
+                .addEntityEffects(FluidMobEffect.builder().effect(MobEffectRegistry.GLUTTONY.get(), 10 * 20, 4).buildEntity(TimeAction.ADD))
+                .addBlockEffect(
+                        new MobEffectCloudFluidEffect(FluidMobEffect.builder().effect(MobEffectRegistry.GLUTTONY.get(), 10 * 20, 4).buildCloud().effects()));
+        addFluid(DreamtinkerFluids.liquid_arcana_juice, FluidValues.SIP)
+                .addCondition(modLoaded("malum"))
+                .addEntityEffects(FluidMobEffect.builder().effect(MobEffectRegistry.ECHOING_ARCANA.get(), 10 * 20, 3).buildEntity(TimeAction.ADD))
+                .addBlockEffect(
+                        new MobEffectCloudFluidEffect(
+                                FluidMobEffect.builder().effect(MobEffectRegistry.ECHOING_ARCANA.get(), 10 * 20, 3).buildCloud().effects()));
     }
 
     @Override
-    public String getName() {
+    public @NotNull String getName() {
         return "Dreamtinker Fluid Effect Provider.";
     }
 

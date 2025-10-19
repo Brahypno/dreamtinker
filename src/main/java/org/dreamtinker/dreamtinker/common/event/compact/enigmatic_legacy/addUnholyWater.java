@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.tools.modifiers.events.compact.enigmatic_legacy;
+package org.dreamtinker.dreamtinker.common.event.compact.enigmatic_legacy;
 
 import com.aizistral.enigmaticlegacy.registries.EnigmaticItems;
 import net.minecraft.core.Direction;
@@ -9,7 +9,6 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import org.dreamtinker.dreamtinker.Dreamtinker;
@@ -17,8 +16,7 @@ import org.dreamtinker.dreamtinker.fluids.DreamtinkerFluids;
 
 import javax.annotation.Nullable;
 
-public class addUnholywater {
-    @SubscribeEvent
+public class addUnholyWater {
     public static void attachCaps(AttachCapabilitiesEvent<ItemStack> e) {
         ItemStack stack = e.getObject();
         if (stack.getItem().equals(EnigmaticItems.UNHOLY_GRAIL)){

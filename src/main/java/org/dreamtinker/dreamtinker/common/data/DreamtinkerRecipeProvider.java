@@ -55,6 +55,7 @@ import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
 import slimeknights.tconstruct.library.recipe.FluidValues;
 import slimeknights.tconstruct.library.recipe.alloying.AlloyRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.casting.ItemCastingRecipeBuilder;
+import slimeknights.tconstruct.library.recipe.casting.PotionCastingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.casting.material.CompositeCastingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.casting.material.MaterialCastingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.entitymelting.EntityMeltingRecipeBuilder;
@@ -228,6 +229,12 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         ItemCastingRecipeBuilder.basinRecipe(BlockRegistry.BLOCK_OF_MALIGNANT_PEWTER.get())
                                 .setFluidAndTime(DreamtinkerFluids.molten_malignant_pewter, FluidValues.METAL_BLOCK)
                                 .save(consumer, location(folder + "malignant_pewter/block"));
+        PotionCastingRecipeBuilder.tableRecipe(ItemRegistry.CONCENTRATED_GLUTTONY.get())
+                                  .setBottle(Items.GLASS_BOTTLE)
+                                  .setFluid(FluidIngredient.of(new FluidStack(DreamtinkerFluids.liquid_concentrated_gluttony.get(), FluidValues.BOTTLE)))
+                                  .save(consumer, location(folder + "filling/" +
+                                                           Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(ItemRegistry.CONCENTRATED_GLUTTONY.get()))
+                                                                  .getPath()));
     }
 
     private void addMeltingRecipes(Consumer<FinishedRecipe> consumer) {
@@ -381,6 +388,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
         cast(DreamtinkerFluids.molten_malignant_gluttony.get(), DreamtinkerCommon.malignant_gluttony.get(), FluidValues.INGOT, consumer);
 
+
     }
 
     String materials_folder = "tools/materials/";
@@ -507,6 +515,17 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                 .addSpirit(SpiritTypeRegistry.ELDRITCH_SPIRIT, 6)
                 .addSpirit(SpiritTypeRegistry.INFERNAL_SPIRIT, 6)
                 .build(consumer, "malum_" + DreamtinkerCommon.malignant_gluttony.getId().getPath());
+        new SpiritInfusionRecipeBuilder(Items.BUCKET, 1, new ItemStack(
+                Objects.requireNonNull(ForgeRegistries.ITEMS.getValue(Dreamtinker.getLocation("liquid_arcana_juice_bucket")))))
+                .addExtraItem(ItemRegistry.NULL_SLATE.get(), 8)
+                .addExtraItem(ItemRegistry.MNEMONIC_FRAGMENT.get(), 8)
+                .addExtraItem(ItemRegistry.CURSED_SAP.get(), 2)
+                .addExtraItem(ItemRegistry.RUNIC_SAP.get(), 2)
+                .addSpirit(SpiritTypeRegistry.ARCANE_SPIRIT, 6)
+                .addSpirit(SpiritTypeRegistry.AQUEOUS_SPIRIT, 6)
+                .addSpirit(SpiritTypeRegistry.SACRED_SPIRIT, 6)
+                .addSpirit(SpiritTypeRegistry.ELDRITCH_SPIRIT, 6)
+                .build(consumer, "malum_" + "liquid_arcana_juice_bucket");
     }
 
     String partFolder = "tools/parts/";

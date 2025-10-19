@@ -191,6 +191,13 @@ public class DreamtinkerFluids {
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_PURPLE, 7), 0, 0) {});
     public static final FlowingFluidObject<ForgeFlowingFluid> molten_malignant_gluttony =
             registerFluid(MALUM_FLUIDS, "malum_molten_malignant_gluttony", 2200, 100, 10, 7,
+                          supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_LIGHT_GREEN, 7), 0, 0) {});
+    public static final FlowingFluidObject<ForgeFlowingFluid> liquid_concentrated_gluttony =
+            registerFluid(MALUM_FLUIDS, "liquid_concentrated_gluttony", 300, 100, 10, 7,
+                          supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_GREEN, 7), 0, 0) {});
+
+    public static final FlowingFluidObject<ForgeFlowingFluid> liquid_arcana_juice =
+            registerFluid(MALUM_FLUIDS, "liquid_arcana_juice", 300, 100, 10, 7,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_PURPLE, 7), 0, 0) {});
 
 }

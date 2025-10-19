@@ -480,6 +480,12 @@
   "fluid_type.dreamtinker.malum_molten_malignant_gluttony": "Molten Malignant Gluttony",
   "fluid.dreamtinker.malum_molten_malignant_gluttony": "Molten Malignant Gluttony",
   "fluid.dreamtinker.malum_molten_malignant_gluttony.fluid_effect": "Malignant Gluttony",
+  "fluid_type.dreamtinker.liquid_concentrated_gluttony": "Concentrated Gluttony Poison",
+  "fluid.dreamtinker.liquid_concentrated_gluttony": "Concentrated Gluttony Poison",
+  "fluid.dreamtinker.liquid_concentrated_gluttony.fluid_effect": "Concentrated Gluttony Poison would bring Concentrated IV",
+  "fluid_type.dreamtinker.liquid_arcana_juice": "Liquid Arcana Juice",
+  "fluid.dreamtinker.liquid_arcana_juice": "Liquid Arcana Juice",
+  "fluid.dreamtinker.liquid_arcana_juice.fluid_effect": "Liquid Arcana Juice would bring Echoing Arcana III",
 
   "item.dreamtinker.molten_echo_shard_bucket": "Molten echo shard Bucket",
   "item.dreamtinker.molten_nigrescence_antimony_bucket": "Molten Nigrescence of Antimon Bucket",
@@ -501,6 +507,8 @@
   "item.dreamtinker.malum_molten_soul_stained_steel_bucket": "Molten Soul Stained Steel Bucket",
   "item.dreamtinker.malum_molten_malignant_pewter_bucket": "Molten Malignant Pewter Bucket",
   "item.dreamtinker.malum_molten_malignant_gluttony_bucket": "Molten Malignant Gluttony Bucket",
+  "item.dreamtinker.liquid_concentrated_gluttony_bucket": "Concentrated Gluttony Poison Bucket",
+  "item.dreamtinker.liquid_arcana_juice_bucket": "Liquid Arcana Juice Bucket",
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "bleed",
   "fluid_effect.tconstruct.damage.explosion": "explosion",
