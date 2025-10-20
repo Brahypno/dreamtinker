@@ -1,0 +1,47 @@
+{
+  "type": "malum:spirit_infusion",
+  "extra_items": [
+    {
+      "count": 8,
+      "item": "malum:auric_embers"
+    },
+    {
+      "count": 1,
+      "item": "malum:soul_stained_steel_ingot"
+    },
+    {
+      "count": 1,
+      "item": "malum:fused_consciousness"
+    }
+  ],
+  "input": {
+    "count": 1,
+    "item": "tconstruct:tool_handle_cast"
+  },
+  "output": {
+    "item": "tconstruct:tool_handle",
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic_auric#auric\"}"
+  },
+  "spirits": [
+    {
+      "type": "wicked",
+      "count": 24
+    },
+    {
+      "type": "aerial",
+      "count": 16
+    },
+    {
+      "type": "aqueous",
+      "count": 8
+    },
+    {
+      "type": "eldritch",
+      "count": 8
+    },
+    {
+      "type": "infernal",
+      "count": 8
+    }
+  ]
+}

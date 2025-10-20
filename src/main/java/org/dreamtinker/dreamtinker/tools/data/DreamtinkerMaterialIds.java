@@ -24,7 +24,9 @@ public class DreamtinkerMaterialIds {
     //Compact malum
     public static final MaterialId spirit_fabric = new MaterialId(new ResourceLocation(MODID, "malum_spirit_fabric"));
     public static final MaterialId hallowed_gold = new MaterialId(new ResourceLocation(MODID, "malum_hallowed_gold"));
-    public static final MaterialId mnemonic_fragment = new MaterialId(new ResourceLocation(MODID, "malum_mnemonic_fragment"));
+    public static final MaterialId mnemonic_auric = new MaterialId(new ResourceLocation(MODID, "malum_mnemonic_auric"));
+    public static final MaterialVariantId mnemonic = create(mnemonic_auric, "mnemonic");
+    public static final MaterialVariantId auric = create(mnemonic_auric, "auric");
     public static final MaterialId soul_stained_steel = new MaterialId(new ResourceLocation(MODID, "malum_soul_stained_steel"));
     public static final MaterialId malignant_pewter = new MaterialId(new ResourceLocation(MODID, "malum_malignant_pewter"));
     public static final MaterialId malignant_gluttony = new MaterialId(new ResourceLocation(MODID, "malum_malignant_gluttony"));

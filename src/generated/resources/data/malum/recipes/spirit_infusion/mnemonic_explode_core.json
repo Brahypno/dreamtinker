@@ -10,21 +10,17 @@
       "item": "malum:soul_stained_steel_ingot"
     },
     {
-      "count": 8,
-      "item": "malum:auric_embers"
-    },
-    {
       "count": 1,
       "item": "malum:fused_consciousness"
     }
   ],
   "input": {
     "count": 1,
-    "item": "tconstruct:pick_head_cast"
+    "item": "dreamtinker:explode_core"
   },
   "output": {
-    "item": "tconstruct:pick_head",
-    "nbt": "{Material:\"dreamtinker:malum_mnemonic_fragment\"}"
+    "item": "dreamtinker:explode_core",
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic_auric#mnemonic\"}"
   },
   "spirits": [
     {

@@ -10,21 +10,17 @@
       "item": "malum:soul_stained_steel_ingot"
     },
     {
-      "count": 8,
-      "item": "malum:auric_embers"
-    },
-    {
       "count": 1,
       "item": "malum:fused_consciousness"
     }
   ],
   "input": {
     "count": 1,
-    "item": "tconstruct:tough_binding_cast"
+    "item": "tconstruct:adze_head_cast"
   },
   "output": {
-    "item": "tconstruct:tough_binding",
-    "nbt": "{Material:\"dreamtinker:malum_mnemonic_fragment\"}"
+    "item": "tconstruct:adze_head",
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic_auric#mnemonic\"}"
   },
   "spirits": [
     {

@@ -66,7 +66,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.hallowed_gold,
                          new HeadMaterialStats(32, 15f, Tiers.GOLD, 0f));
-        addMaterialStats(DreamtinkerMaterialIds.mnemonic_fragment,
+        addMaterialStats(DreamtinkerMaterialIds.mnemonic_auric,
                          new HeadMaterialStats(1000, 1f, Tiers.IRON, 0f),
                          HandleMaterialStats.multipliers().durability(0.8f).miningSpeed(1.05f).attackDamage(1.1f).attackSpeed(1.2f).build(),
                          StatlessMaterialStats.BINDING);

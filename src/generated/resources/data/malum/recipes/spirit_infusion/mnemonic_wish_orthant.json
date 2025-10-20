@@ -10,10 +10,6 @@
       "item": "malum:soul_stained_steel_ingot"
     },
     {
-      "count": 8,
-      "item": "malum:auric_embers"
-    },
-    {
       "count": 1,
       "item": "malum:fused_consciousness"
     }
@@ -24,7 +20,7 @@
   },
   "output": {
     "item": "dreamtinker:wish_orthant",
-    "nbt": "{Material:\"dreamtinker:malum_mnemonic_fragment\"}"
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic_auric#mnemonic\"}"
   },
   "spirits": [
     {

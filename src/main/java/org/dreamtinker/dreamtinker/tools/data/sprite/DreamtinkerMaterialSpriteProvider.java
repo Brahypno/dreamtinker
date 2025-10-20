@@ -170,7 +170,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFFFCE14B)  // 亮面反光
                                                 .addARGB(255, 0xFFFFFAC2)  // 最亮反光白
                                                 .build());
-        this.buildMaterial(DreamtinkerMaterialIds.mnemonic_fragment)
+        this.buildMaterial(DreamtinkerMaterialIds.mnemonic)
             .statType(StatlessMaterialStats.BINDING).repairKit()
             .fallbacks("gem")
             .transformer(GreyToSpriteTransformer.builder()
@@ -181,6 +181,18 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(178, 0xFFFCA87C)  // 品红高光
                                                 .addARGB(216, 0xFFFCF4D3)  // 暖橙亮面
                                                 .addARGB(255, 0xFFFCF4D3)  // 乳白反光
+                                                .build());
+        this.buildMaterial(DreamtinkerMaterialIds.auric)
+            .statType(StatlessMaterialStats.BINDING).repairKit()
+            .fallbacks("gem")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(0, 0xFF582F55)  // 深紫外缘
+                                                .addARGB(63, 0xFF973B41)  // 炽红暗部
+                                                .addARGB(102, 0xFFE19A2A)  // 橙金过渡（开始转金）
+                                                .addARGB(140, 0xFFF0C24A)  // 亮金
+                                                .addARGB(178, 0xFFF6DE6A)  // 浅金黄
+                                                .addARGB(216, 0xFFFFF2B8)  // 淡金高光
+                                                .addARGB(255, 0xFFFFFCF0)  // 微黄近白高光
                                                 .build());
         this.buildMaterial(DreamtinkerMaterialIds.soul_stained_steel)
             .meleeHarvest().ranged().armor()

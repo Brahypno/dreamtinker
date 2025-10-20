@@ -86,7 +86,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
                 new ModifierEntry(ModifierIds.luck, 2)));
         addTraits(DreamtinkerMaterialIds.hallowed_gold, RANGED, TinkerModifiers.golden);
 
-        callGetOrCreate(this, DreamtinkerMaterialIds.mnemonic_fragment).setTraits(MELEE_HARVEST, List.of(
+        callGetOrCreate(this, DreamtinkerMaterialIds.mnemonic_auric).setTraits(MELEE_HARVEST, List.of(
                 new ModifierEntry(Ids.malum_haunted, 2),
                 new ModifierEntry(malum_hex_staff, 1)));
 

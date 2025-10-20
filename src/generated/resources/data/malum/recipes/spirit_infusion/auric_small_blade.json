@@ -3,15 +3,11 @@
   "extra_items": [
     {
       "count": 8,
-      "item": "malum:mnemonic_fragment"
+      "item": "malum:auric_embers"
     },
     {
       "count": 1,
       "item": "malum:soul_stained_steel_ingot"
-    },
-    {
-      "count": 8,
-      "item": "malum:auric_embers"
     },
     {
       "count": 1,
@@ -20,11 +16,11 @@
   ],
   "input": {
     "count": 1,
-    "item": "tconstruct:broad_blade_cast"
+    "item": "tconstruct:small_blade_cast"
   },
   "output": {
-    "item": "tconstruct:broad_blade",
-    "nbt": "{Material:\"dreamtinker:malum_mnemonic_fragment\"}"
+    "item": "tconstruct:small_blade",
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic_auric#auric\"}"
   },
   "spirits": [
     {

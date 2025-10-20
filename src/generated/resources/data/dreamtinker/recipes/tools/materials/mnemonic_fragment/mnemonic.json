@@ -3,7 +3,7 @@
   "ingredient": {
     "item": "malum:mnemonic_fragment"
   },
-  "material": "dreamtinker:malum_mnemonic_fragment",
+  "material": "dreamtinker:malum_mnemonic_auric#mnemonic",
   "needed": 4,
   "value": 1
 }

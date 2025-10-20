@@ -51,6 +51,7 @@ import slimeknights.tconstruct.gadgets.TinkerGadgets;
 import slimeknights.tconstruct.library.data.recipe.IMaterialRecipeHelper;
 import slimeknights.tconstruct.library.data.recipe.IToolRecipeHelper;
 import slimeknights.tconstruct.library.materials.definition.MaterialId;
+import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
 import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
 import slimeknights.tconstruct.library.recipe.FluidValues;
 import slimeknights.tconstruct.library.recipe.alloying.AlloyRecipeBuilder;
@@ -451,8 +452,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                        materials_folder + "spirit_fabric");
         materialRecipe(consumer, DreamtinkerMaterialIds.hallowed_gold, Ingredient.of(ItemRegistry.HALLOWED_GOLD_INGOT.get()), 1, 1,
                        materials_folder + "hallowed_gold");
-        materialRecipe(consumer, DreamtinkerMaterialIds.mnemonic_fragment, Ingredient.of(ItemRegistry.MNEMONIC_FRAGMENT.get()), 1, 4,
-                       materials_folder + "mnemonic_fragment");
+        materialRecipe(consumer, DreamtinkerMaterialIds.mnemonic, Ingredient.of(ItemRegistry.MNEMONIC_FRAGMENT.get()), 1, 4,
+                       materials_folder + "mnemonic_fragment/mnemonic");
+        materialRecipe(consumer, DreamtinkerMaterialIds.auric, Ingredient.of(ItemRegistry.AURIC_EMBERS.get()), 1, 4,
+                       materials_folder + "mnemonic_fragment/auric");
         materialRecipe(consumer, DreamtinkerMaterialIds.soul_stained_steel, Ingredient.of(ItemRegistry.SOUL_STAINED_STEEL_PLATING.get()), 1, 2,
                        materials_folder + "soul_stained_steel");
         materialMeltingCasting(consumer, DreamtinkerMaterialIds.soul_stained_steel, DreamtinkerFluids.molten_soul_stained_steel, 130,
@@ -565,9 +568,13 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
             CompositeCastingRecipeBuilder.table(tree_parts[i], tree_costs[i])
                                          .save(consumer, this.location(castFolder + this.id(tree_parts[i]).getPath() + "_composite"));
         }
-        malumCompactMaterialBuilder(consumer, DreamtinkerMaterialIds.mnemonic_fragment, 4, HeadMaterialStats.ID);
-        malumCompactMaterialBuilder(consumer, DreamtinkerMaterialIds.mnemonic_fragment, 4, HandleMaterialStats.ID);
-        malumCompactMaterialBuilder(consumer, DreamtinkerMaterialIds.mnemonic_fragment, 4, StatlessMaterialStats.BINDING.getIdentifier());
+        malumCompactMaterialBuilder(consumer, DreamtinkerMaterialIds.mnemonic, ItemRegistry.MNEMONIC_FRAGMENT.get(), HeadMaterialStats.ID);
+        malumCompactMaterialBuilder(consumer, DreamtinkerMaterialIds.mnemonic, ItemRegistry.MNEMONIC_FRAGMENT.get(), HandleMaterialStats.ID);
+        malumCompactMaterialBuilder(consumer, DreamtinkerMaterialIds.mnemonic, ItemRegistry.MNEMONIC_FRAGMENT.get(),
+                                    StatlessMaterialStats.BINDING.getIdentifier());
+        malumCompactMaterialBuilder(consumer, DreamtinkerMaterialIds.auric, ItemRegistry.AURIC_EMBERS.get(), HeadMaterialStats.ID);
+        malumCompactMaterialBuilder(consumer, DreamtinkerMaterialIds.auric, ItemRegistry.AURIC_EMBERS.get(), HandleMaterialStats.ID);
+        malumCompactMaterialBuilder(consumer, DreamtinkerMaterialIds.auric, ItemRegistry.AURIC_EMBERS.get(), StatlessMaterialStats.BINDING.getIdentifier());
 
     }
 
@@ -590,7 +597,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         }
     }
 
-    private void malumCompactMaterialBuilder(Consumer<FinishedRecipe> consumer, MaterialId id, int value, MaterialStatsId statsId) {
+    private void malumCompactMaterialBuilder(Consumer<FinishedRecipe> consumer, MaterialVariantId id, Item item, MaterialStatsId statsId) {
         List<ToolPartItem> Parts = DThelper.getPartList(statsId);
         Map<ToolPartItem, CastLookup.CastTriple> map = CastLookup.findCastsForParts(Parts);
         for (ToolPartItem part : Parts) {
@@ -608,16 +615,15 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
             ItemStack stack = new ItemStack(part);
             stack.getOrCreateTag().merge(nbt);
             new SpiritInfusionRecipeBuilder(castItem, 1, stack)
-                    .addExtraItem(ItemRegistry.MNEMONIC_FRAGMENT.get(), 2 * value)
+                    .addExtraItem(item, 2 * 4)
                     .addExtraItem(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get(), 1)
-                    .addExtraItem(ItemRegistry.AURIC_EMBERS.get(), 2 * value)
                     .addExtraItem(ItemRegistry.FUSED_CONSCIOUSNESS.get(), 1)
-                    .addSpirit(SpiritTypeRegistry.WICKED_SPIRIT, 6 * value)
-                    .addSpirit(SpiritTypeRegistry.AERIAL_SPIRIT, 4 * value)
-                    .addSpirit(SpiritTypeRegistry.AQUEOUS_SPIRIT, 2 * value)
-                    .addSpirit(SpiritTypeRegistry.ELDRITCH_SPIRIT, 2 * value)
-                    .addSpirit(SpiritTypeRegistry.INFERNAL_SPIRIT, 2 * value)
-                    .build(consumer, id.getPath() + "_" + part);
+                    .addSpirit(SpiritTypeRegistry.WICKED_SPIRIT, 6 * 4)
+                    .addSpirit(SpiritTypeRegistry.AERIAL_SPIRIT, 4 * 4)
+                    .addSpirit(SpiritTypeRegistry.AQUEOUS_SPIRIT, 2 * 4)
+                    .addSpirit(SpiritTypeRegistry.ELDRITCH_SPIRIT, 2 * 4)
+                    .addSpirit(SpiritTypeRegistry.INFERNAL_SPIRIT, 2 * 4)
+                    .build(consumer, id.getVariant() + "_" + part);
         }
 
 
