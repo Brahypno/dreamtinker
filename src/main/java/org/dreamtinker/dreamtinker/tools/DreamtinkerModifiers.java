@@ -180,6 +180,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             MALUM_MODIFIERS.register("malum_spirit_defense", malum_spirit_defense::new);
     public static final StaticModifier<MalumSolTiferet> malum_sol_tiferet =
             MALUM_MODIFIERS.register("malum_sol_tiferet", MalumSolTiferet::new);
+    public static final StaticModifier<malumCatalystLobber> malum_catalyst_lobber =
+            MALUM_MODIFIERS.register("malum_catalyst_lobber", malumCatalystLobber::new);
 
     public static class Ids {
         public static final ModifierId antimony_usage = id("antimony_usage");

@@ -300,6 +300,9 @@
   "modifier.dreamtinker.eula.flavor": "EULA，是 End User Lease Agreements，但也是",
   "modifier.dreamtinker.eula.description": "环境寒冷时，增加挖掘速度；但炎热时会减少",
   "modifier.dreamtinker.eula.mining_speed": "EULA挖掘速度: ",
+  "modifier.dreamtinker.malum_catalyst_lobber": "促焰者",
+  "modifier.dreamtinker.malum_catalyst_lobber.flavor": "唯有铅可以承载火",
+  "modifier.dreamtinker.malum_catalyst_lobber.description": "消耗灵气余焰发射灵火硝石",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
@@ -418,6 +421,8 @@
   "material.dreamtinker.larimar.flavor": "浪花未必归海",
   "material.dreamtinker.malum_soul_rock": "精魂石",
   "material.dreamtinker.malum_soul_rock.flavor": "精魂注能",
+  "material.dreamtinker.malum_malignant_lead": "恶念之铅",
+  "material.dreamtinker.malum_malignant_lead.flavor": "生于金，长为铅",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "熔融回响合金",
   "fluid.dreamtinker.molten_echo_alloy": "熔融回响合金",

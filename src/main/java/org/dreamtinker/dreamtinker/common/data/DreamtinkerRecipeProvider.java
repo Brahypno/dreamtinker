@@ -576,6 +576,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         malumCompactMaterialBuilder(consumer, DreamtinkerMaterialIds.auric, ItemRegistry.AURIC_EMBERS.get(), HandleMaterialStats.ID);
         malumCompactMaterialBuilder(consumer, DreamtinkerMaterialIds.auric, ItemRegistry.AURIC_EMBERS.get(), StatlessMaterialStats.BINDING.getIdentifier());
 
+        malumCompactMaterialBuilder(consumer, DreamtinkerMaterialIds.malignant_lead, ItemRegistry.MALIGNANT_LEAD.get(), HandleMaterialStats.ID);
+
     }
 
     private void armorPlatingBuilder(Consumer<FinishedRecipe> consumer, MaterialId id) {
@@ -618,15 +620,13 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                     .addExtraItem(item, 2 * 4)
                     .addExtraItem(ItemRegistry.SOUL_STAINED_STEEL_INGOT.get(), 1)
                     .addExtraItem(ItemRegistry.FUSED_CONSCIOUSNESS.get(), 1)
-                    .addSpirit(SpiritTypeRegistry.WICKED_SPIRIT, 6 * 4)
+                    .addSpirit(SpiritTypeRegistry.WICKED_SPIRIT, 4 * 4)
                     .addSpirit(SpiritTypeRegistry.AERIAL_SPIRIT, 4 * 4)
                     .addSpirit(SpiritTypeRegistry.AQUEOUS_SPIRIT, 2 * 4)
                     .addSpirit(SpiritTypeRegistry.ELDRITCH_SPIRIT, 2 * 4)
                     .addSpirit(SpiritTypeRegistry.INFERNAL_SPIRIT, 2 * 4)
                     .build(consumer, id.getVariant() + "_" + part);
         }
-
-
     }
 
 

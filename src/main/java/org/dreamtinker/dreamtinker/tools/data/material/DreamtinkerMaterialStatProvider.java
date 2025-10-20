@@ -74,6 +74,8 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new HeadMaterialStats(1450, 1.5f, Tiers.DIAMOND, 0.5f),
                          HandleMaterialStats.multipliers().durability(0.4f).miningSpeed(1.05f).attackDamage(0.7f).attackSpeed(0.8f).build(),
                          StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.malignant_lead,
+                         HandleMaterialStats.multipliers().durability(0.8f).miningSpeed(0.9f).attackDamage(1.2f).attackSpeed(1.2f).build());
         addMaterialStats(DreamtinkerMaterialIds.malignant_pewter,
                          new HeadMaterialStats(1800, 2.0f, Tiers.NETHERITE, 7f),
                          HandleMaterialStats.multipliers().durability(1.2f).miningSpeed(1.3f).attackDamage(1.2f).attackSpeed(0.4f).build(),

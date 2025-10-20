@@ -35,6 +35,7 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
         buildRenderInfo(DreamtinkerMaterialIds.mnemonic).color(0xFF7F08FC).fallbacks("gem").luminosity(9);
         buildRenderInfo(DreamtinkerMaterialIds.auric);
         buildRenderInfo(DreamtinkerMaterialIds.soul_stained_steel).color(0xFFBE86E9).fallbacks("metal").luminosity(12);
+        buildRenderInfo(DreamtinkerMaterialIds.malignant_lead).color(0xFF626477).fallbacks("gem").luminosity(15);
         buildRenderInfo(DreamtinkerMaterialIds.malignant_pewter).color(0xFFC9B7D6).fallbacks("metal").luminosity(15);
         buildRenderInfo(DreamtinkerMaterialIds.malignant_gluttony).color(0xFF1FA60A).fallbacks("metal").luminosity(0);
         redirect(DreamtinkerMaterialIds.soul_rock, DreamtinkerMaterialIds.tainted);

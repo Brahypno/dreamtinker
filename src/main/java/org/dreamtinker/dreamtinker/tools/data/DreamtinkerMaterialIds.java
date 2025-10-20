@@ -28,6 +28,7 @@ public class DreamtinkerMaterialIds {
     public static final MaterialVariantId mnemonic = create(mnemonic_auric, "mnemonic");
     public static final MaterialVariantId auric = create(mnemonic_auric, "auric");
     public static final MaterialId soul_stained_steel = new MaterialId(new ResourceLocation(MODID, "malum_soul_stained_steel"));
+    public static final MaterialId malignant_lead = new MaterialId(new ResourceLocation(MODID, "malum_malignant_lead"));
     public static final MaterialId malignant_pewter = new MaterialId(new ResourceLocation(MODID, "malum_malignant_pewter"));
     public static final MaterialId malignant_gluttony = new MaterialId(new ResourceLocation(MODID, "malum_malignant_gluttony"));
     public static final MaterialId soul_rock = new MaterialId(new ResourceLocation(MODID, "malum_soul_rock"));

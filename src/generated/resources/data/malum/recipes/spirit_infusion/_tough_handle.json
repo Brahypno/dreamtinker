@@ -1,0 +1,47 @@
+{
+  "type": "malum:spirit_infusion",
+  "extra_items": [
+    {
+      "count": 8,
+      "item": "malum:malignant_lead"
+    },
+    {
+      "count": 1,
+      "item": "malum:soul_stained_steel_ingot"
+    },
+    {
+      "count": 1,
+      "item": "malum:fused_consciousness"
+    }
+  ],
+  "input": {
+    "count": 1,
+    "item": "tconstruct:tough_handle_cast"
+  },
+  "output": {
+    "item": "tconstruct:tough_handle",
+    "nbt": "{Material:\"dreamtinker:malum_malignant_lead\"}"
+  },
+  "spirits": [
+    {
+      "type": "wicked",
+      "count": 16
+    },
+    {
+      "type": "aerial",
+      "count": 16
+    },
+    {
+      "type": "aqueous",
+      "count": 8
+    },
+    {
+      "type": "eldritch",
+      "count": 8
+    },
+    {
+      "type": "infernal",
+      "count": 8
+    }
+  ]
+}

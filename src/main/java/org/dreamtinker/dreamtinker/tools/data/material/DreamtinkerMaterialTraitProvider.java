@@ -97,7 +97,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         callGetOrCreate(this, DreamtinkerMaterialIds.soul_stained_steel)
                 .setTraits(RANGED, List.of(new ModifierEntry(Ids.malum_haunted, 2),
                                            new ModifierEntry(malum_range_accelerator, 1)));
-
+        addDefaultTraits(DreamtinkerMaterialIds.malignant_lead, malum_catalyst_lobber);
         addTraits(DreamtinkerMaterialIds.malignant_pewter, MELEE_HARVEST,
                   malum_distortion.getId(), Ids.malum_world_of_weight,
                   Ids.malum_edge_of_deliverance);

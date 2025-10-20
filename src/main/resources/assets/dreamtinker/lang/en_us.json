@@ -300,6 +300,9 @@
   "modifier.dreamtinker.eula.flavor": "EULA, stand for End User Lease Agreements, but its also......",
   "modifier.dreamtinker.eula.description": "Increase mining speed in cold biome; But decrease when its hot",
   "modifier.dreamtinker.eula.mining_speed": "Mining speed from EULA: ",
+  "modifier.dreamtinker.malum_catalyst_lobber": "Catalyst Lobber",
+  "modifier.dreamtinker.malum_catalyst_lobber.flavor": "Only lead cap for Etheric Nitrate",
+  "modifier.dreamtinker.malum_catalyst_lobber.description": "Consume Auric Embers to launch Etheric Nitrate",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",
@@ -418,6 +421,8 @@
   "material.dreamtinker.larimar.flavor": "Tell Me Why Waves Roar High",
   "material.dreamtinker.malum_soul_rock": "Spiritual Rock",
   "material.dreamtinker.malum_soul_rock.flavor": "Rock with spirit",
+  "material.dreamtinker.malum_malignant_lead": "Malignant Lead",
+  "material.dreamtinker.malum_malignant_lead.flavor": "Born from Gold, Live as Lead",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "Molten echo Alloy",
   "fluid.dreamtinker.molten_echo_alloy": "Molten echo Alloy",
