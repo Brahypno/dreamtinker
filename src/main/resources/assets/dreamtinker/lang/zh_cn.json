@@ -178,7 +178,7 @@
   "modifier.dreamtinker.foundation_will.description": "在按住工具交互键时，主手左键点击以经验为代价进行大范围挖掘，可以挖掘远处的方块。升级此强化会获得更大的范围和更多的方块上限。以这种方式挖掘时，有效挖掘等级减1",
   "modifier.dreamtinker.huge_ego": "自我即一切",
   "modifier.dreamtinker.huge_ego.flavor": "全部的自我",
-  "modifier.dreamtinker.huge_ego.description": "每级获得一个升级槽",
+  "modifier.dreamtinker.huge_ego.description": "每级获得一个升级槽;但会减少工具耐久",
   "modifier.dreamtinker.splendour_heart": "骄盛之心",
   "modifier.dreamtinker.splendour_heart.flavor": "总有一处乐园需要人来建成",
   "modifier.dreamtinker.splendour_heart.description": "随已完成进度的数量，逐步提升工具能力",

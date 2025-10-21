@@ -5,6 +5,12 @@
       "type": "tconstruct:modifier_slot",
       "each_level": 1,
       "name": "upgrades"
+    },
+    {
+      "type": "tconstruct:stat_boost",
+      "flat": -0.2,
+      "operation": "multiply_all",
+      "stat": "tconstruct:durability"
     }
   ],
   "tooltip_display": "tinker_station"
