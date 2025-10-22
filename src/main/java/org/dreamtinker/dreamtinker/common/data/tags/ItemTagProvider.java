@@ -50,15 +50,15 @@ public class ItemTagProvider extends ItemTagsProvider {
         this.tag(TinkerTags.Items.CASTS)
             .add(memory_cast.get(), wish_cast.get(), soul_cast.get(),
                  persona_cast.get(),
-                 reason_cast.get());
+                 reason_cast.get(), DreamtinkerToolParts.explode_core.get());
         this.tag(TinkerTags.Items.PATTERNS)
             .add(memory_cast.get(), wish_cast.get(), soul_cast.get(),
                  persona_cast.get(),
-                 reason_cast.get());
+                 reason_cast.get(), DreamtinkerToolParts.explode_core.get());
         this.tag(TinkerTags.Items.SINGLE_USE_CASTS)
             .add(memory_cast.get(), wish_cast.get(), soul_cast.get(),
                  persona_cast.get(),
-                 reason_cast.get());
+                 reason_cast.get(), DreamtinkerToolParts.explode_core.get());
         //armor
         addArmorTags(DreamtinkerTools.underPlate, MULTIPART_TOOL, DURABILITY, TinkerTags.Items.BONUS_SLOTS,
                      TinkerTags.Items.TRIM);
