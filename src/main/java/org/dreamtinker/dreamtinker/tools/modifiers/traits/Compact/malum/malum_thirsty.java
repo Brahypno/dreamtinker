@@ -28,7 +28,7 @@ import java.util.function.BiConsumer;
 
 import static org.dreamtinker.dreamtinker.common.effect.thirsty.Gluttony;
 import static org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers.as_one;
-import static org.dreamtinker.dreamtinker.utils.DTModiferCheck.haveModifierIn;
+import static org.dreamtinker.dreamtinker.utils.DTModifierCheck.haveModifierIn;
 
 public class malum_thirsty extends BattleModifier {
     private static final ResourceLocation TAG_GLU = new ResourceLocation(Dreamtinker.MODID, "enhanced_glu");

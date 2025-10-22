@@ -13,6 +13,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
 import org.jetbrains.annotations.NotNull;
@@ -30,7 +31,7 @@ import java.util.List;
 
 import static net.minecraft.nbt.Tag.TAG_INT;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.*;
-import static org.dreamtinker.dreamtinker.utils.DTModiferCheck.getToolWithModifier;
+import static org.dreamtinker.dreamtinker.utils.DTModifierCheck.getPossibleToolWithModifier;
 
 
 public class as_one extends ArmorModifier {
@@ -42,6 +43,7 @@ public class as_one extends ArmorModifier {
 
     {
         MinecraftForge.EVENT_BUS.addListener(this::onLivingDeath);
+        MinecraftForge.EVENT_BUS.addListener(this::onLivingHurtEvent);
     }
 
     @Override
@@ -53,18 +55,29 @@ public class as_one extends ArmorModifier {
 
     public void onLivingDeath(LivingDeathEvent event) {
         LivingEntity entity = event.getEntity();
-        ToolStack tool = getToolWithModifier(entity, this.getId());
+        ToolStack tool = getPossibleToolWithModifier(entity, this.getId());
         if (null != tool){
-            ModDataNBT tooldata = tool.getPersistentData();
-            int count = tooldata.getInt(TAG_AS_ONE);
+            ModDataNBT toolData = tool.getPersistentData();
+            int count = toolData.getInt(TAG_AS_ONE);
             if (0 < count){
-                tooldata.putInt(TAG_AS_ONE, --count);
+                toolData.putInt(TAG_AS_ONE, --count);
                 event.setCanceled(true);
                 entity.deathTime = -10;
                 entity.setHealth((float) (entity.getMaxHealth() * 0.15));
                 entity.invulnerableTime = 1000;
             }
         }
+    }
+
+    public void onLivingHurtEvent(LivingHurtEvent event) {
+        LivingEntity entity = event.getEntity();
+        ToolStack tool = getPossibleToolWithModifier(entity, this.getId());
+        if (null != tool)
+            if (entity.getHealth() < event.getAmount()){
+                entity.setAbsorptionAmount(entity.getAbsorptionAmount() + event.getAmount());
+                event.setAmount(0);
+                event.setCanceled(true);
+            }
     }
 
     @Override
@@ -81,8 +94,6 @@ public class as_one extends ArmorModifier {
 
     @Override
     public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
-        if (!isCorrectSlot)
-            return;
         if (world.isClientSide)
             return;
         if (world.getGameTime() % 20 == 0){

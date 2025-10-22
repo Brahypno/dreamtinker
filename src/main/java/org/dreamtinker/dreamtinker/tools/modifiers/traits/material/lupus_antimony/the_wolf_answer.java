@@ -17,7 +17,7 @@ import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 
 import javax.annotation.Nullable;
 
-import static org.dreamtinker.dreamtinker.utils.DTModiferCheck.getMainhandModifierlevel;
+import static org.dreamtinker.dreamtinker.utils.DTModifierCheck.getMainhandModifierlevel;
 
 public class the_wolf_answer extends BattleModifier {
 

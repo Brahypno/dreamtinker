@@ -5,7 +5,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagkeys;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
-import org.dreamtinker.dreamtinker.utils.DTModiferCheck;
+import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -18,7 +18,7 @@ public abstract class SuperpositionHandlerMixin {
     @Inject(method = "getCurseAmount(Lnet/minecraft/world/item/ItemStack;)I", at = @At("RETURN"), cancellable = true)
     private static void dreamtinker$injectCurseAmountBeforeReturn(ItemStack stack, CallbackInfoReturnable<Integer> cir) {
         int total = cir.getReturnValue() +
-                    DTModiferCheck.getItemModifierNum(stack, DreamtinkerTagkeys.Modifiers.EL_CURSED_MODIFIERS);
+                    DTModifierCheck.getItemModifierNum(stack, DreamtinkerTagkeys.Modifiers.EL_CURSED_MODIFIERS);
 
         cir.setReturnValue(total);
     }
@@ -26,7 +26,7 @@ public abstract class SuperpositionHandlerMixin {
     @Inject(method = "isTheWorthyOne(Lnet/minecraft/world/entity/player/Player;)Z", at = @At("RETURN"), cancellable = true)
     private static void dreamtinker$injectBeforeWorthyReturn(Player player, CallbackInfoReturnable<Boolean> cir) {
         if (!cir.getReturnValue())
-            cir.setReturnValue(DTModiferCheck.haveModifierIn(player, DreamtinkerModifiers.by_pass_worthy.getId()));
+            cir.setReturnValue(DTModifierCheck.haveModifierIn(player, DreamtinkerModifiers.by_pass_worthy.getId()));
 
     }
 }

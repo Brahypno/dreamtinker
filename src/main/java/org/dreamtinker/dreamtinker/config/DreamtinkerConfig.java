@@ -144,7 +144,7 @@ public class DreamtinkerConfig {
                                                                                    "In the hidden crucible of our path, there can be no ascendance without renunciation—where loss is absent, growth withers----Modify the damage taken for this Modifier work")
                                                                            .defineInRange("TheWolfWasDamage", 77, 1, 1000);
     public static final ForgeConfigSpec.IntValue TheWolfWasMaxTier =
-            builder.comment("Maximum tier the wolf was may get").defineInRange("TheWolfWasMaxTier", 4, 2, 100);
+            builder.comment("Maximum tier the wolf was may get").defineInRange("TheWolfWasMaxTier", 5, 2, 100);
 
     static {builder.comment("\nstar_regulus: ");}
 

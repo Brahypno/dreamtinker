@@ -15,7 +15,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
-import org.dreamtinker.dreamtinker.utils.DTModiferCheck;
+import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -51,8 +51,8 @@ public class soul_blessing extends ArmorModifier {
 
     public void onLivingDeath(LivingDeathEvent event) {
         LivingEntity entity = event.getEntity();
-        for (EquipmentSlot slot : DTModiferCheck.slots) {
-            if (0 < DTModiferCheck.getModifierlevel(entity, DreamtinkerModifiers.soul_blessing.getId(), slot)){
+        for (EquipmentSlot slot : DTModifierCheck.slots) {
+            if (0 < DTModifierCheck.getModifierlevel(entity, DreamtinkerModifiers.soul_blessing.getId(), slot)){
                 ItemStack stack = entity.getItemBySlot(slot);
                 ToolStack ts = ToolStack.from(stack);
                 if (0 == ts.getPersistentData().getInt(TAG_SOUL_BOUND)){

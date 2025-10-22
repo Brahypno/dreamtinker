@@ -43,8 +43,8 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.metallivorous_stibium_lupus, RANGED,
                   the_wolf_wonder, the_wolf_answer, the_wolf_was);
 
-        addTraits(DreamtinkerMaterialIds.star_regulus, RANGED, two_headed_seven);
-        addTraits(DreamtinkerMaterialIds.star_regulus, ARMOR, as_one, fly);
+        addTraits(DreamtinkerMaterialIds.star_regulus, RANGED, two_headed_seven.getId(), ModifierIds.soulbound);
+        addTraits(DreamtinkerMaterialIds.star_regulus, ARMOR, as_one.getId(), fly.getId(), ModifierIds.soulbound);
 
         addTraits(DreamtinkerMaterialIds.crying_obsidian, MELEE_HARVEST, sharpened_with);
         addTraits(DreamtinkerMaterialIds.crying_obsidian, RANGED, isolde);

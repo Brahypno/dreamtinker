@@ -13,7 +13,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
-import org.dreamtinker.dreamtinker.utils.DTModiferCheck;
+import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.thunderCurse;
 
@@ -24,7 +24,7 @@ public class thundering_curse {
         Player player = event.player;
         Level world = player.level();
         if (!world.isClientSide && world.isThundering() && world.getGameTime() % 200 == 0){
-            int wearingConductive = DTModiferCheck.getEntityModifierNum(player, DreamtinkerModifiers.Ids.thundering_curse);
+            int wearingConductive = DTModifierCheck.getEntityModifierNum(player, DreamtinkerModifiers.Ids.thundering_curse);
             if (world.random.nextFloat() < thunderCurse.get() * wearingConductive){
                 LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(world);
                 if (bolt != null){
@@ -54,7 +54,7 @@ public class thundering_curse {
             // 仅统计“实体可tick的区块”（说明所在区已加载并活跃）
             if (!level.getChunkSource().isPositionTicking(p.chunkPosition().toLong()))
                 continue;
-            stormBias += DTModiferCheck.getEntityModifierNum(p, DreamtinkerModifiers.Ids.thundering_curse);
+            stormBias += DTModifierCheck.getEntityModifierNum(p, DreamtinkerModifiers.Ids.thundering_curse);
         }
         stormBias = (float) Math.min(stormBias * thunderCurse.get(), 1.0f);
 

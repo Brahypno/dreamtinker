@@ -14,7 +14,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
-import org.dreamtinker.dreamtinker.utils.DTModiferCheck;
+import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
@@ -29,12 +29,12 @@ public class stone_heart extends ArmorModifier {
 
     private void LivingHealEvent(LivingHealEvent event) {
         LivingEntity entity = event.getEntity();
-        if (DTModiferCheck.haveModifierIn(entity, this.getId()))
+        if (DTModifierCheck.haveModifierIn(entity, this.getId()))
             event.setAmount(event.getAmount() * 0.2F);
     }
 
     public void onEat(LivingEntityUseItemEvent.Finish e) {
-        if (!(e.getEntity() instanceof Player p) || p.level().isClientSide || !DTModiferCheck.haveModifierIn(p, this.getId()))
+        if (!(e.getEntity() instanceof Player p) || p.level().isClientSide || !DTModifierCheck.haveModifierIn(p, this.getId()))
             return;
         var fd = p.getFoodData();
         if (!fd.needsFood())

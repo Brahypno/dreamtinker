@@ -10,7 +10,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
-import org.dreamtinker.dreamtinker.utils.DTModiferCheck;
+import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
@@ -39,7 +39,7 @@ public class GeneralHurtHandler {
                 }
             }
         if (null != dmg.getEntity() && dmg.getEntity() instanceof LivingEntity entity){
-            if (0 < DTModiferCheck.getMainhandModifierlevel(entity, DreamtinkerModifiers.Ids.why_i_cry) && !why_i_cry_triggered){
+            if (0 < DTModifierCheck.getMainhandModifierlevel(entity, DreamtinkerModifiers.Ids.why_i_cry) && !why_i_cry_triggered){
                 why_i_cry_triggered = true;
                 event.getEntity().hurt(entity.level().damageSources().fellOutOfWorld(), event.getAmount() * .1f);
                 event.getEntity().invulnerableTime = 0;

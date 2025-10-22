@@ -30,7 +30,7 @@ import java.util.function.BiConsumer;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.CentralFlame;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.Prometheus;
-import static org.dreamtinker.dreamtinker.utils.DTModiferCheck.ModifierInHand;
+import static org.dreamtinker.dreamtinker.utils.DTModifierCheck.ModifierInHand;
 
 public class ewige_widerkunft extends BattleModifier {
     private static final ResourceLocation TAG_TOMB = new ResourceLocation(Dreamtinker.MODID,

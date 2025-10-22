@@ -6,7 +6,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagkeys;
-import org.dreamtinker.dreamtinker.utils.DTModiferCheck;
+import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -34,7 +34,7 @@ public abstract class SoulHandlerMixin {
             stack = attacker.getMainHandItem();
         }
 
-        if (0 < DTModiferCheck.getItemModifierNum(stack, DreamtinkerTagkeys.Modifiers.MALUM_EXPOSE_SOUL)){
+        if (0 < DTModifierCheck.getItemModifierNum(stack, DreamtinkerTagkeys.Modifiers.MALUM_EXPOSE_SOUL)){
             // 直接复用原逻辑
             SoulDataHandler.exposeSoul(event.getEntity());
         }

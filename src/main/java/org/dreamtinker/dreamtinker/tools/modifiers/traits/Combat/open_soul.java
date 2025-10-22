@@ -14,7 +14,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
-import org.dreamtinker.dreamtinker.utils.DTModiferCheck;
+import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.dreamtinker.dreamtinker.utils.DThelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
@@ -59,7 +59,7 @@ public class open_soul extends BattleModifier {
 
     public void onLivingDeath(LivingDeathEvent event) {
         LivingEntity entity = event.getEntity();
-        ToolStack tool = DTModiferCheck.getToolWithModifier(entity, this.getId());
+        ToolStack tool = DTModifierCheck.getToolWithModifier(entity, this.getId());
         if (null != tool){
             ModDataNBT tooldata = tool.getPersistentData();
             float count = tooldata.getFloat(TAG_SOUL);

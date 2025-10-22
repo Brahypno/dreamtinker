@@ -3,6 +3,7 @@ package org.dreamtinker.dreamtinker.utils;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -13,7 +14,7 @@ import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
 import javax.annotation.Nullable;
 
-public class DTModiferCheck {
+public class DTModifierCheck {
     public static final EquipmentSlot[] slots =
             new EquipmentSlot[]{EquipmentSlot.FEET, EquipmentSlot.LEGS, EquipmentSlot.CHEST, EquipmentSlot.HEAD, EquipmentSlot.OFFHAND, EquipmentSlot.MAINHAND};
 
@@ -77,6 +78,19 @@ public class DTModiferCheck {
         for (EquipmentSlot slot : slots)
             if (0 < getModifierlevel(entity, modifierId, slot))
                 return ToolStack.from(entity.getItemBySlot(slot));
+
+        return null;
+    }
+
+    @Nullable
+    public static ToolStack getPossibleToolWithModifier(LivingEntity entity, ModifierId modifierId) {
+        for (EquipmentSlot slot : slots)
+            if (0 < getModifierlevel(entity, modifierId, slot))
+                return ToolStack.from(entity.getItemBySlot(slot));
+        if (entity instanceof Player player)
+            for (ItemStack item : player.getInventory().items)
+                if (0 < getItemModifierNum(item, modifierId))
+                    return ToolStack.from(item);
 
         return null;
     }

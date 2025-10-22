@@ -10,7 +10,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
-import org.dreamtinker.dreamtinker.utils.DTModiferCheck;
+import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
@@ -18,7 +18,7 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 public class etherium_protection extends ArmorModifier {
 
     private boolean has_shield(Player player) {
-        return DTModiferCheck.ModifierALLBody(player, this.getId()) &&
+        return DTModifierCheck.ModifierALLBody(player, this.getId()) &&
                player.getHealth() / player.getMaxHealth() <= EtheriumConfigHandler.instance().getShieldThreshold(player).asMultiplier(false);
     }
 

@@ -8,7 +8,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagkeys;
-import org.dreamtinker.dreamtinker.utils.DTModiferCheck;
+import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -41,7 +41,7 @@ public class EdgeOfDeliveranceItemMixin {
     private boolean dreamtinker$redirectIsOnDamageSource(
             DamageSource instance, TagKey<DamageType> p_270890_) {
         boolean base = instance.is(p_270890_);
-        return base || 0 < DTModiferCheck.getItemModifierNum(TL_STACK.get(), DreamtinkerTagkeys.Modifiers.MALUM_EXPOSE_SOUL);
+        return base || 0 < DTModifierCheck.getItemModifierNum(TL_STACK.get(), DreamtinkerTagkeys.Modifiers.MALUM_EXPOSE_SOUL);
     }
 
     @Inject(method = "hurtEvent(Lnet/minecraftforge/event/entity/living/LivingHurtEvent;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;)V",

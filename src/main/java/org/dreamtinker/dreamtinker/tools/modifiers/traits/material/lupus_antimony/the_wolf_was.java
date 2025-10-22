@@ -114,13 +114,20 @@ public class the_wolf_was extends BattleModifier {
         MaterialVariant original = mats.get(slot);
         IMaterial mat = MaterialRegistry.getMaterial(original.getId());
         int tier = mat.getTier();
-        int possible_tier = Math.min(Math.min(tier + 1, TheWolfWasMaxTier.get()), 4);//Traditionally, tier 4 is the highest one
+        int possible_tier = Math.min(tier + 1, TheWolfWasMaxTier.get());
 
         // 5. 从 Registry 中筛选同 tier 的所有材料变体
+        int finalPossible_tier = possible_tier;
         List<MaterialVariantId> candidates =
-                MaterialRegistry.getInstance().getAllMaterials().stream().filter(m -> possible_tier <= m.getTier()).map(IMaterial::getIdentifier)
+                MaterialRegistry.getInstance().getAllMaterials().stream().filter(m -> finalPossible_tier <= m.getTier()).map(IMaterial::getIdentifier)
                                 .filter(statsId::canUseMaterial).filter(id -> !id.equals(mat.getIdentifier())).collect(Collectors.toList());
-
+        if (candidates.isEmpty()){
+            possible_tier = Math.min(possible_tier, 6);//6 is metallivorous_stibium_lupus
+            int finalPossible_tier1 = possible_tier;
+            candidates =
+                    MaterialRegistry.getInstance().getAllMaterials().stream().filter(m -> finalPossible_tier1 <= m.getTier()).map(IMaterial::getIdentifier)
+                                    .filter(statsId::canUseMaterial).filter(id -> !id.equals(mat.getIdentifier())).collect(Collectors.toList());
+        }
         if (candidates.isEmpty())
             return;
         // 6. 随机挑一个新的 MaterialVariantId

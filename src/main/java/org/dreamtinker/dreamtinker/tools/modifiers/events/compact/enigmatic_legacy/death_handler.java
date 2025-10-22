@@ -13,7 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
-import org.dreamtinker.dreamtinker.utils.DTModiferCheck;
+import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
@@ -23,7 +23,7 @@ public class death_handler {
     public static void onLivingDeath(LivingDeathEvent event) {
         LivingEntity entity = event.getEntity();
         if (entity instanceof Player player && SuperpositionHandler.isTheWorthyOne(player))
-            if (3 <= DTModiferCheck.getMainhandModifierlevel(player, DreamtinkerModifiers.weapon_books.getId()))
+            if (3 <= DTModifierCheck.getMainhandModifierlevel(player, DreamtinkerModifiers.weapon_books.getId()))
                 if (Math.random() <= TheInfinitum.undeadProbability.getValue().asMultiplier(false)){
                     event.setCanceled(true);
                     player.setHealth(1);
@@ -31,7 +31,7 @@ public class death_handler {
         if (event.getSource().getDirectEntity() instanceof ServerPlayer attacker){
             ItemStack weapon = attacker.getMainHandItem();
 
-            if (0 < DTModiferCheck.getMainhandModifierlevel(attacker, DreamtinkerModifiers.eldritch_pan.getId())){
+            if (0 < DTModifierCheck.getMainhandModifierlevel(attacker, DreamtinkerModifiers.eldritch_pan.getId())){
                 ResourceLocation killedType = ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType());
 
                 if (EldritchPan.addKillIfNotPresent(weapon, killedType)){

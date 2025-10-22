@@ -8,12 +8,20 @@
       {
         "level": 1,
         "name": "dreamtinker:fly"
+      },
+      {
+        "level": 1,
+        "name": "tconstruct:soulbound"
       }
     ],
     "tconstruct:ranged": [
       {
         "level": 1,
         "name": "dreamtinker:two_headed_seven"
+      },
+      {
+        "level": 1,
+        "name": "tconstruct:soulbound"
       }
     ]
   }

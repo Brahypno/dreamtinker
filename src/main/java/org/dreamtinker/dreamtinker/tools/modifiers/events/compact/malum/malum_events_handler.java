@@ -17,7 +17,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
-import org.dreamtinker.dreamtinker.utils.DTModiferCheck;
+import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import team.lodestar.lodestone.helpers.RandomHelper;
 
@@ -41,7 +41,7 @@ public class malum_events_handler {
                 ((ErosionScepterItem) ItemRegistry.EROSION_SCEPTER.get()).hurtEvent(event, player, event.getEntity(), stack);
             if (!(event.getSource().getEntity() instanceof LivingEntity attacker))
                 return;
-            int levels = DTModiferCheck.getMainhandModifierlevel(attacker, DreamtinkerModifiers.malum_sol_tiferet.getId());
+            int levels = DTModifierCheck.getMainhandModifierlevel(attacker, DreamtinkerModifiers.malum_sol_tiferet.getId());
             if (0 < levels && null != target && !target.level().isClientSide &&
                 crossedWhichN(target, event.getAmount() - target.getAbsorptionAmount(), levels + 1))
                 MalumLivingEntityDataCapability.getCapabilityOptional(target).ifPresent(c -> {
