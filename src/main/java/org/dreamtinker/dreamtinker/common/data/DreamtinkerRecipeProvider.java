@@ -658,7 +658,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setTools(Ingredient.of(DreamtinkerTools.tntarrow.get()))
                              .addInput(TinkerGadgets.efln)
                              .addInput(Tags.Items.GUNPOWDER)
-                             .setMaxLevel(3)
+                             .setLevelRange(2, 4)
                              .setSlots(SlotType.UPGRADE, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.strong_explode, upgradeSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.strong_explode, upgradeFolder));
