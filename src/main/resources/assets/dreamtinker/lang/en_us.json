@@ -377,6 +377,9 @@
   "tooltip.dreamtinker.malignant_gluttony_2": "With Nether evil Otherworldly Unholy",
   "tooltip.dreamtinker.malignant_gluttony_3": "With Such malignant, bring the consciousness null and curse",
   "item.dreamtinker.larimar": "larimar",
+  "item.dreamtinker.amber": "Amber",
+  "item.dreamtinker.despair_gem": "Despair Gem",
+  "item.dreamtinker.desire_gem": "Desire Gem",
 
   "block.dreamtinker.crying_obsidian_pane": "Crying Obsidian Pane",
   "block.dreamtinker.narcissus": "Narcissus",
@@ -384,6 +387,7 @@
   "tooltip.dreamtinker.narcissus_2": "What lies spread all over the valley? ",
   "block.dreamtinker.potted_narcissus": "pot with Narcissus",
   "block.dreamtinker.larimar_ore": "Larimar Ore",
+  "block.dreamtinker.amber_ore": "Amber Ore",
 
   "material.dreamtinker.echo_alloy": "Echo Alloy",
   "material.dreamtinker.echo_alloy.flavor": "Its echo of mystery, or echo of enigma",
@@ -428,6 +432,8 @@
   "material.dreamtinker.malum_soul_rock.flavor": "Rock with spirit",
   "material.dreamtinker.malum_malignant_lead": "Malignant Lead",
   "material.dreamtinker.malum_malignant_lead.flavor": "Born from Gold, Live as Lead",
+  "material.dreamtinker.amber": "Amber",
+  "material.dreamtinker.amber.flavor": "The world, too, has known stillness — as amber does.",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "Molten echo Alloy",
   "fluid.dreamtinker.molten_echo_alloy": "Molten echo Alloy",
@@ -498,6 +504,9 @@
   "fluid_type.dreamtinker.liquid_arcana_juice": "Liquid Arcana Juice",
   "fluid.dreamtinker.liquid_arcana_juice": "Liquid Arcana Juice",
   "fluid.dreamtinker.liquid_arcana_juice.fluid_effect": "Liquid Arcana Juice would bring Echoing Arcana III",
+  "fluid_type.dreamtinker.liquid_amber": "Temporal Nectar",
+  "fluid.dreamtinker.liquid_amber": "Temporal Nectar",
+  "fluid.dreamtinker.liquid_amber.fluid_effect": "Temporal Nectar",
 
   "item.dreamtinker.molten_echo_shard_bucket": "Molten echo shard Bucket",
   "item.dreamtinker.molten_nigrescence_antimony_bucket": "Molten Nigrescence of Antimon Bucket",

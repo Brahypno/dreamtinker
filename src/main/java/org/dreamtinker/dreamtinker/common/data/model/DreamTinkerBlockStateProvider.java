@@ -7,8 +7,10 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.IronBarsBlock;
 import net.minecraft.world.level.block.PipeBlock;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.dreamtinker.dreamtinker.Dreamtinker;
@@ -42,6 +44,20 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
                                     .texture("plant", blockTexture(DreamtinkerCommon.narcissus.get()))
                                     .renderType("cutout").guiLight(BlockModel.GuiLight.FRONT));
         simpleBlockWithItem(DreamtinkerCommon.larimarOre.get(), cubeAll(DreamtinkerCommon.larimarOre.get()));
+        this.axisBlock(DreamtinkerCommon.amberOre.get(), "block", modLoc("block/amber_ore"), true);
+    }
+
+    public void axisBlock(Block block, String location, ResourceLocation texture, boolean horizontal) {
+        ResourceLocation endTexture = horizontal ? texture.withSuffix("_top") : texture;
+        ModelFile model = this.models().cubeColumn(resourceString(location), texture, endTexture);
+        this.axisBlock((RotatedPillarBlock) block, model,
+                       (ModelFile) (horizontal ? this.models().cubeColumnHorizontal(resourceString(location + "_horizontal"), texture, endTexture) :
+                                    model));
+        this.simpleBlockItem(block, model);
+    }
+
+    public static String resourceString(String res) {
+        return String.format("%s:%s", Dreamtinker.MODID, res);
     }
 
     /**

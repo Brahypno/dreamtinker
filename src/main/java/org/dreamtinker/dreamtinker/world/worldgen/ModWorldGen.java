@@ -48,6 +48,16 @@ public class ModWorldGen {
     public static ResourceKey<PlacedFeature> placedLargeLarimarOre =
             key(Registries.PLACED_FEATURE, "larimar_ore_large");
 
+    public static ResourceKey<ConfiguredFeature<?, ?>> configuredSmallAmberOre =
+            key(Registries.CONFIGURED_FEATURE, "amber_ore_small");
+    public static ResourceKey<PlacedFeature> placedSmallAmberOre =
+            key(Registries.PLACED_FEATURE, "amber_ore_small");
+    //
+    public static ResourceKey<ConfiguredFeature<?, ?>> configuredLargeAmberOre =
+            key(Registries.CONFIGURED_FEATURE, "amber_ore_large");
+    public static ResourceKey<PlacedFeature> placedLargeAmberOre =
+            key(Registries.PLACED_FEATURE, "amber_ore_large");
+
 
     /**
      * ConfiguredFeature：一簇水仙（cross 小花），仅在能存活的位置尝试放置
@@ -73,6 +83,11 @@ public class ModWorldGen {
         BlockState larimarOre = DreamtinkerCommon.larimarOre.get().defaultBlockState();
         register(ctx, configuredSmallLarimarOre, Feature.ORE, new OreConfiguration(sandstone, larimarOre, 4));
         register(ctx, configuredLargeLarimarOre, Feature.ORE, new OreConfiguration(sandstone, larimarOre, 6));
+
+        RuleTest basalt = new BlockMatchTest(Blocks.BASALT);
+        BlockState amberOre = DreamtinkerCommon.amberOre.get().defaultBlockState();
+        register(ctx, configuredSmallAmberOre, Feature.ORE, new OreConfiguration(basalt, amberOre, 3));
+        register(ctx, configuredLargeAmberOre, Feature.ORE, new OreConfiguration(basalt, amberOre, 5));
     }
 
     /**
@@ -95,6 +110,18 @@ public class ModWorldGen {
                  HeightRangePlacement.triangle(
                          VerticalAnchor.absolute(45), VerticalAnchor.absolute(70)), BiomeFilter.biome());
 
+        register(ctx, placedSmallAmberOre, configuredSmallAmberOre,
+                 CountPlacement.of(5),
+                 InSquarePlacement.spread(),
+                 HeightRangePlacement.uniform(VerticalAnchor.absolute(10), VerticalAnchor.absolute(120)),
+                 BiomeFilter.biome());
+
+        // 下界里替换玄武岩的大矿脉
+        register(ctx, placedLargeAmberOre, configuredLargeAmberOre,
+                 CountPlacement.of(3),
+                 InSquarePlacement.spread(),
+                 HeightRangePlacement.uniform(VerticalAnchor.absolute(10), VerticalAnchor.absolute(120)),
+                 BiomeFilter.biome());
     }
 
     private static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> key, F feature, FC config) {

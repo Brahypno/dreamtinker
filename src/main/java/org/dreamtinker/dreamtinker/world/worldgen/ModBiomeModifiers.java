@@ -16,8 +16,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 
 import static net.minecraft.core.HolderSet.direct;
-import static org.dreamtinker.dreamtinker.world.worldgen.ModWorldGen.placedLargeLarimarOre;
-import static org.dreamtinker.dreamtinker.world.worldgen.ModWorldGen.placedSmallLarimarOre;
+import static org.dreamtinker.dreamtinker.world.worldgen.ModWorldGen.*;
 
 public class ModBiomeModifiers {
 
@@ -25,6 +24,8 @@ public class ModBiomeModifiers {
             ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, Dreamtinker.getLocation("add_narcissus"));
     public static ResourceKey<BiomeModifier> spawnLarimarOre =
             ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, Dreamtinker.getLocation("add_larimar_ore"));
+    public static ResourceKey<BiomeModifier> spawnAmberOre =
+            ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, Dreamtinker.getLocation("add_amber_ore"));
 
     /**
      * 把上面的 PlacedFeature 加进目标群系（此处示例：平原 + 花林）
@@ -51,5 +52,9 @@ public class ModBiomeModifiers {
                                                                                        direct(placed.getOrThrow(placedSmallLarimarOre),
                                                                                               placed.getOrThrow(placedLargeLarimarOre)),
                                                                                        GenerationStep.Decoration.UNDERGROUND_DECORATION));
+        ctx.register(spawnAmberOre, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(biomes.getOrThrow(BiomeTags.IS_NETHER),
+                                                                                     direct(placed.getOrThrow(placedSmallAmberOre),
+                                                                                            placed.getOrThrow(placedLargeAmberOre)),
+                                                                                     GenerationStep.Decoration.UNDERGROUND_DECORATION));
     }
 }

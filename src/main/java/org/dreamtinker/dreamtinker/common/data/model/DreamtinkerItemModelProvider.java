@@ -79,6 +79,8 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
         generateItemModel(DreamtinkerCommon.echo_alloy, "materials");
         generateItemModel(DreamtinkerCommon.malignant_gluttony, "materials");
         generateItemModel(DreamtinkerCommon.larimar, "materials");
+        generateItemModel(DreamtinkerCommon.amber, "materials");
+        generateItemModel(DreamtinkerCommon.despair_gem, "materials");
         //generateBlockItemModel(object);
         generateBucketItemModel(DreamtinkerFluids.molten_echo_shard);
         generateBucketItemModel(DreamtinkerFluids.molten_albedo_stibium);

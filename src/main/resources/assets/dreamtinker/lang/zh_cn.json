@@ -377,6 +377,9 @@
   "tooltip.dreamtinker.malignant_gluttony_2": "以永归地狱的邪恶渎圣邪术",
   "tooltip.dreamtinker.malignant_gluttony_3": "以恶意为意识献上虚无的诅咒",
   "item.dreamtinker.larimar": "海纹石",
+  "item.dreamtinker.amber": "琥珀",
+  "item.dreamtinker.despair_gem": "绝望宝石",
+  "item.dreamtinker.desire_gem": "渴望宝石",
 
   "block.dreamtinker.crying_obsidian_pane": "哭泣的黑曜石板",
   "block.dreamtinker.narcissus": "水仙",
@@ -384,6 +387,7 @@
   "tooltip.dreamtinker.narcissus_2": "何物开遍幽谷",
   "block.dreamtinker.potted_narcissus": "有水仙的花盆",
   "block.dreamtinker.larimar_ore": "海纹石原矿",
+  "block.dreamtinker.amber_ore": "琥珀原矿",
 
   "material.dreamtinker.echo_alloy": "回响合金",
   "material.dreamtinker.echo_alloy.flavor": "是神秘的回响，还是秘密的回响",
@@ -428,6 +432,8 @@
   "material.dreamtinker.malum_soul_rock.flavor": "精魂注能",
   "material.dreamtinker.malum_malignant_lead": "恶念之铅",
   "material.dreamtinker.malum_malignant_lead.flavor": "生于金，长为铅",
+  "material.dreamtinker.amber": "琥珀",
+  "material.dreamtinker.amber.flavor": "世界亦曾凝固，犹如琥珀之块",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "熔融回响合金",
   "fluid.dreamtinker.molten_echo_alloy": "熔融回响合金",
@@ -498,6 +504,9 @@
   "fluid_type.dreamtinker.liquid_arcana_juice": "奥术汁液",
   "fluid.dreamtinker.liquid_arcana_juice": "奥术汁液",
   "fluid.dreamtinker.liquid_arcana_juice.fluid_effect": "奥术汁液会带来奥术回响III效果",
+  "fluid_type.dreamtinker.liquid_amber": "时流浆",
+  "fluid.dreamtinker.liquid_amber": "时流浆",
+  "fluid.dreamtinker.liquid_amber.fluid_effect": "时流浆",
 
   "item.dreamtinker.molten_echo_shard_bucket": "熔融回响碎片桶",
   "item.dreamtinker.molten_nigrescence_antimony_bucket": "融化黑锑桶",

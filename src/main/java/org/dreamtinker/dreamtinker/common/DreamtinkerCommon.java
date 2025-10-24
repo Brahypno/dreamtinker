@@ -108,13 +108,6 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         }
     });
 
-    public static final RegistryObject<Item> white_peach = ITEMS.register("white_peach", () -> new Item(
-            ITEM_PROPS.rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(2).saturationMod(6F).build())) {
-        public void appendHoverText(@NotNull ItemStack stack, Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
-            tooltip.add(Component.translatable("tooltip.dreamtinker.white_peach").withStyle(s -> s.withColor(TextColor.fromRgb(0xFFB6C1))));
-            super.appendHoverText(stack, level, tooltip, flag);
-        }
-    });
     public static final RegistryObject<Item> unborn_egg = ITEMS.register("unborn_egg", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> unborn_turtle_egg =
             ITEMS.register("unborn_turtle_egg", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
@@ -145,6 +138,17 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         }
     });
     public static final RegistryObject<Item> larimar = ITEMS.register("larimar", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> amber = ITEMS.register("amber", () -> new Item(ITEM_PROPS.rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> despair_gem = ITEMS.register("despair_gem", () -> new Item(ITEM_PROPS.rarity(Rarity.EPIC)));
+    public static final RegistryObject<Item> desire_gem = ITEMS.register("desire_gem", () -> new Item(ITEM_PROPS.rarity(Rarity.RARE)));
+    
+    public static final RegistryObject<Item> white_peach = ITEMS.register("white_peach", () -> new Item(
+            ITEM_PROPS.rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(2).saturationMod(6F).build())) {
+        public void appendHoverText(@NotNull ItemStack stack, Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
+            tooltip.add(Component.translatable("tooltip.dreamtinker.white_peach").withStyle(s -> s.withColor(TextColor.fromRgb(0xFFB6C1))));
+            super.appendHoverText(stack, level, tooltip, flag);
+        }
+    });
 
     public static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         output.accept(echo_alloy.get());
@@ -167,6 +171,9 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         output.accept(unborn_sniffer_egg.get());
         output.accept(unborn_spawn_egg.get());
         output.accept(larimar.get());
+        output.accept(amber.get());
+        output.accept(despair_gem.get());
+        output.accept(desire_gem.get());
         if (ModList.get().isLoaded("malum"))
             output.accept(malignant_gluttony.get());
         if (ModList.get().isLoaded("enigmaticlegacy"))
@@ -189,11 +196,15 @@ public class DreamtinkerCommon extends DreamtinkerModule {
                                                                                           .pushReaction(PushReaction.DESTROY)), BLOCK_ITEM);
     public static final ItemObject<Block> larimarOre = BLOCKS.register("larimar_ore", () -> new Block(
             builder(MapColor.LAPIS, SoundType.LODESTONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(5.0F)), BLOCK_ITEM);
+    public static final ItemObject<RotatedPillarBlock> amberOre = BLOCKS.register("amber_ore", () -> new RotatedPillarBlock(
+            BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
+                                     .strength(1.25F, 4.2F).sound(SoundType.BASALT)), BLOCK_ITEM);
 
     public static void addTabBlocks(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         output.accept(crying_obsidian_plane.get());
         output.accept(narcissus.get());
         output.accept(larimarOre.get());
+        output.accept(amberOre);
     }
 
     protected static BlockBehaviour.Properties builder(SoundType soundType) {

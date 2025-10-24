@@ -37,5 +37,6 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
 
     private void addWorld() {
         this.add(DreamtinkerCommon.larimarOre.get(), block -> createOreDrop(block, DreamtinkerCommon.larimar.get()));
+        this.add(DreamtinkerCommon.amberOre.get(), block -> createOreDrop(block, DreamtinkerCommon.amber.get()));
     }
 }
