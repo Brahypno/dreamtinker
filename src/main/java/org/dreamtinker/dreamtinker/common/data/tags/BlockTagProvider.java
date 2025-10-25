@@ -11,7 +11,7 @@ import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
-import org.dreamtinker.dreamtinker.common.DreamtinkerTagkeys;
+import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.registration.object.BuildingBlockObject;
@@ -34,13 +34,13 @@ public class BlockTagProvider extends BlockTagsProvider {
     protected void addTags(HolderLookup.@NotNull Provider provider) {
         this.tag(BlockTags.DRAGON_IMMUNE).add(DreamtinkerCommon.crying_obsidian_plane.get());
         tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_DIAMOND_TOOL, DreamtinkerCommon.crying_obsidian_plane);
-        this.tag(DreamtinkerTagkeys.Blocks.drop_peach).add(Blocks.BIRCH_LEAVES);
+        this.tag(DreamtinkerTagKeys.Blocks.drop_peach).add(Blocks.BIRCH_LEAVES);
         addBlocksTags(DreamtinkerCommon.narcissus.get(), forgeBlockTag("mineable/shears"), TinkerTags.Blocks.SLIMY_FUNGUS_CAN_GROW_THROUGH,
                       TinkerTags.Blocks.MINABLE_WITH_DAGGER, FLOWERS, ENDERMAN_HOLDABLE, SMALL_FLOWERS, SWORD_EFFICIENT, TinkerTags.Blocks.MINABLE_WITH_SCYTHE,
                       forgeBlockTag("mineable/sword"), TinkerTags.Blocks.MINABLE_WITH_SHEARS);
         tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL, DreamtinkerCommon.larimarOre);
-        tagBlocks(DreamtinkerTagkeys.Blocks.larimarOre, DreamtinkerCommon.larimarOre);
-        tagBlocks(DreamtinkerTagkeys.Blocks.amberOre, DreamtinkerCommon.amberOre);
+        tagBlocks(DreamtinkerTagKeys.Blocks.larimarOre, DreamtinkerCommon.larimarOre);
+        tagBlocks(DreamtinkerTagKeys.Blocks.amberOre, DreamtinkerCommon.amberOre);
     }
 
     private static TagKey<Block> mcBlockTag(String name) {

@@ -29,7 +29,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
-import org.dreamtinker.dreamtinker.common.DreamtinkerTagkeys;
+import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.fluids.DreamtinkerFluids;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
@@ -124,35 +124,35 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
     private void addAlloyRecipes(Consumer<FinishedRecipe> consumer) {
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_albedo_stibium, FluidValues.GEM)
-                          .addCatalyst(FluidIngredient.of(DreamtinkerTagkeys.Fluids.molten_lupi_antimony, FluidValues.INGOT))
+                          .addCatalyst(FluidIngredient.of(DreamtinkerFluids.molten_lupi_antimony.getTag(), FluidValues.INGOT))
                           .addInput(TinkerTags.Fluids.METAL_TOOLTIPS, FluidValues.INGOT)
                           .save(consumer, location("currus_triumphalis_antimonii/lupi_to_albedo"));
         AlloyRecipeBuilder.alloy(FluidOutput.fromStack(new FluidStack(DreamtinkerFluids.liquid_smoky_antimony.get(), FluidValues.INGOT * 2)), 6000)
-                          .addInput(DreamtinkerTagkeys.Fluids.molten_ascending_antimony, FluidValues.INGOT)
+                          .addInput(DreamtinkerFluids.molten_ascending_antimony.getTag(), FluidValues.INGOT)
                           .addInput(TinkerFluids.liquidSoul.getTag(), FluidValues.GLASS_BLOCK)
                           .save(consumer, location("currus_triumphalis_antimonii/ascending_to_smoky"));
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_evil, FluidValues.INGOT * 2)
-                          .addInput(DreamtinkerTagkeys.Fluids.molten_nefariousness, FluidValues.GEM * 4)
-                          .addInput(DreamtinkerTagkeys.Fluids.liquid_trist, FluidValues.NUGGET * 4)
+                          .addInput(DreamtinkerFluids.molten_nefariousness.getTag(), FluidValues.GEM * 4)
+                          .addInput(DreamtinkerFluids.liquid_trist.getTag(), FluidValues.NUGGET * 4)
                           .addInput(TinkerFluids.moltenNetherite.getTag(), FluidValues.INGOT)
                           .save(consumer, location("evil_ingot"));
         AlloyRecipeBuilder.alloy(FluidOutput.fromStack(new FluidStack(DreamtinkerFluids.liquid_pure_soul.get(), FluidValues.GEM)), 1600)
-                          .addInput(DreamtinkerTagkeys.Fluids.liquid_trist, FluidValues.NUGGET)
+                          .addInput(DreamtinkerFluids.liquid_trist.getTag(), FluidValues.NUGGET)
                           .addInput(TinkerFluids.liquidSoul.getTag(), FluidValues.GLASS_BLOCK * 10)
                           .save(consumer, location("liquid_pure_soul"));
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_soul_aether, FluidValues.INGOT)
-                          .addInput(DreamtinkerTagkeys.Fluids.molten_nefariousness, FluidValues.GEM)
-                          .addInput(DreamtinkerTagkeys.Fluids.liquid_pure_soul, FluidValues.GEM)
-                          .addInput(DreamtinkerTagkeys.Fluids.unstable_liquid_aether, FluidValues.INGOT)
-                          .addInput(DreamtinkerTagkeys.Fluids.molten_void, FluidValues.SLIMEBALL)
-                          .addInput(DreamtinkerTagkeys.Fluids.molten_echo_shard, FluidValues.GEM)
+                          .addInput(DreamtinkerFluids.molten_nefariousness.getTag(), FluidValues.GEM)
+                          .addInput(DreamtinkerFluids.liquid_pure_soul.getTag(), FluidValues.GEM)
+                          .addInput(DreamtinkerFluids.unstable_liquid_aether.getTag(), FluidValues.INGOT)
+                          .addInput(DreamtinkerFluids.molten_void.getTag(), FluidValues.SLIMEBALL)
+                          .addInput(DreamtinkerTagKeys.Fluids.molten_echo_shard, FluidValues.GEM)
                           .save(consumer, location("molten_soul_aether"));
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.reversed_shadow, FluidValues.SLIMEBALL)
-                          .addInput(DreamtinkerTagkeys.Fluids.molten_void, FluidValues.SLIMEBALL * 2)
+                          .addInput(DreamtinkerFluids.molten_void.getTag(), FluidValues.SLIMEBALL * 2)
                           .addInput(TinkerFluids.moltenEnder.getTag(), FluidValues.SLIMEBALL * 2)
                           .save(consumer, location("reversed_shadow"));
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_echo_alloy, FluidValues.GEM)
-                          .addInput(DreamtinkerTagkeys.Fluids.molten_echo_shard, FluidValues.GEM)
+                          .addInput(DreamtinkerTagKeys.Fluids.molten_echo_shard, FluidValues.GEM)
                           .addInput(TinkerFluids.moltenEnder.getTag(), FluidValues.SLIMEBALL * 2)
                           .save(consumer, location("molten_echo_alloy"));
     }
@@ -206,22 +206,22 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                 .save(consumer, location(folder + folder + "twist_obsidian/pane"));
         ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.unborn_egg.get())
                                 .setCast(Tags.Items.EGGS, true)
-                                .setFluid(FluidIngredient.of(DreamtinkerTagkeys.Fluids.molten_nigrescence_antimony, FluidValues.GEM * 3))
+                                .setFluid(FluidIngredient.of(DreamtinkerFluids.molten_nigrescence_antimony.getTag(), FluidValues.GEM * 3))
                                 .setCoolingTime(10)
                                 .save(consumer, location(folder + "unborn_egg"));
         ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.unborn_turtle_egg.get())
                                 .setCast(Items.TURTLE_EGG, true)
-                                .setFluid(FluidIngredient.of(DreamtinkerTagkeys.Fluids.molten_nigrescence_antimony, FluidValues.GEM * 3))
+                                .setFluid(FluidIngredient.of(DreamtinkerFluids.molten_nigrescence_antimony.getTag(), FluidValues.GEM * 3))
                                 .setCoolingTime(10)
                                 .save(consumer, location(folder + "unborn_turtle_egg"));
         ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.unborn_sniffer_egg.get())
                                 .setCast(Items.SNIFFER_EGG, true)
-                                .setFluid(FluidIngredient.of(DreamtinkerTagkeys.Fluids.molten_nigrescence_antimony, FluidValues.GEM * 3))
+                                .setFluid(FluidIngredient.of(DreamtinkerFluids.molten_nigrescence_antimony.getTag(), FluidValues.GEM * 3))
                                 .setCoolingTime(10)
                                 .save(consumer, location(folder + "unborn_sniffer_egg"));
         ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.unborn_dragon_egg.get())
                                 .setCast(Items.DRAGON_EGG, true)
-                                .setFluid(FluidIngredient.of(DreamtinkerTagkeys.Fluids.molten_albedo_stibium, FluidValues.GEM * 3))
+                                .setFluid(FluidIngredient.of(DreamtinkerFluids.molten_albedo_stibium.getTag(), FluidValues.GEM * 3))
                                 .setCoolingTime(10)
                                 .save(consumer, location(folder + "unborn_dragon_egg"));
         ItemCastingRecipeBuilder.basinRecipe(BlockRegistry.BLOCK_OF_SOUL_STAINED_STEEL.get())
@@ -485,12 +485,12 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                               .requires(Items.ROTTEN_FLESH)
                               .unlockedBy("has_valentinite", has(DreamtinkerCommon.valentinite.get()))
                               .save(consumer, location("currus_triumphalis_antimonii/valentinite_nigredo"));
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(DreamtinkerTagkeys.Items.raw_stibnite),
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(DreamtinkerTagKeys.Items.raw_stibnite),
                                             RecipeCategory.MISC,
                                             DreamtinkerCommon.valentinite.get(),
                                             1.0f,
                                             100)
-                                  .unlockedBy("has_stibnite", has(DreamtinkerTagkeys.Items.raw_stibnite))
+                                  .unlockedBy("has_stibnite", has(DreamtinkerTagKeys.Items.raw_stibnite))
                                   .save(consumer, location("currus_triumphalis_antimonii/stibnite_to_valentinite"));
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, DreamtinkerCommon.persona_cast.get())
                            .define('e', Items.WEEPING_VINES)

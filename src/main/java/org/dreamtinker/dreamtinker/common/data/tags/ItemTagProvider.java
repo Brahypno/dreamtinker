@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.dreamtinker.dreamtinker.common.DreamtinkerTagkeys;
+import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.jetbrains.annotations.NotNull;
@@ -77,7 +77,7 @@ public class ItemTagProvider extends ItemTagsProvider {
             .add(metallivorous_stibium_lupus.get(), regulus.get(), soul_etherium.get());
         this.tag(Tags.Items.GEMS)
             .add(valentinite.get(), nigrescence_antimony.get(), echo_alloy.get(), larimar.get(), amber.get(), desire_gem.get(), despair_gem.get());
-        this.tag(DreamtinkerTagkeys.Items.raw_stibnite).add(raw_stibnite.get());
+        this.tag(DreamtinkerTagKeys.Items.raw_stibnite).add(raw_stibnite.get());
         this.tag(Tags.Items.RAW_MATERIALS).add(raw_stibnite.get());
         this.tag(ItemTags.FOX_FOOD).add(white_peach.get());
         this.tag(ItemTags.ARROWS).add(DreamtinkerTools.tntarrow.get());

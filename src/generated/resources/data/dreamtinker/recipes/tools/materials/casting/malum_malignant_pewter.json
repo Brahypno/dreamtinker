@@ -2,7 +2,7 @@
   "type": "tconstruct:material_fluid",
   "fluid": {
     "amount": 130,
-    "tag": "dreamtinker:malum_molten_malignant_pewter"
+    "tag": "dreamtinker:molten_malignant_pewter"
   },
   "output": "dreamtinker:malum_malignant_pewter",
   "temperature": 1500

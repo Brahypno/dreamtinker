@@ -2,7 +2,7 @@
   "type": "tconstruct:material_fluid",
   "fluid": {
     "amount": 130,
-    "tag": "dreamtinker:malum_molten_soul_stained_steel"
+    "tag": "dreamtinker:molten_soul_stained_steel"
   },
   "output": "dreamtinker:malum_soul_stained_steel",
   "temperature": 900

@@ -6,7 +6,7 @@
   "cooling_time": 90,
   "fluid": {
     "amount": 90,
-    "fluid": "dreamtinker:malum_molten_malignant_gluttony"
+    "fluid": "dreamtinker:molten_malignant_gluttony"
   },
   "result": "dreamtinker:malignant_gluttony"
 }

@@ -16,7 +16,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.dreamtinker.dreamtinker.common.DreamtinkerTagkeys;
+import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.fluids.DreamtinkerFluids;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
@@ -87,7 +87,7 @@ public class memoryBase extends BattleModifier {
             FluidStack fluid = TANK_HELPER.getFluid(tool);
             if (fluid.isEmpty())
                 fluid = new FluidStack(fallback_fluid, (int) (player.getAbilities().instabuild ? Integer.MAX_VALUE : Math.max(0, player.getHealth() - 1) * 5));
-            if (ForgeRegistries.FLUIDS.getHolder(fluid.getFluid()).map(h -> h.is(DreamtinkerTagkeys.Fluids.narcissus_wing_used)).orElse(false) &&
+            if (ForgeRegistries.FLUIDS.getHolder(fluid.getFluid()).map(h -> h.is(DreamtinkerTagKeys.Fluids.narcissus_wing_used)).orElse(false) &&
                 FluidEffectManager.INSTANCE.find(fluid.getFluid()).hasEffects() &&
                 1 + 2 * (modifier.getLevel() - 1) < fluid.getAmount()){//life can transform to blood soul, and we leave 1 HP(half heart)
                 GeneralInteractionModifierHook.startUsingWithDrawtime(tool, modifier.getId(), player, hand, 1.5f);

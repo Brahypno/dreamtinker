@@ -3,7 +3,7 @@ package org.dreamtinker.dreamtinker.common.data.tags;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.common.DreamtinkerTagkeys;
+import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.data.tinkering.AbstractModifierTagProvider;
@@ -19,7 +19,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
 
     @Override
     protected void addTags() {
-        this.tag(DreamtinkerTagkeys.Modifiers.EL_CURSED_MODIFIERS)
+        this.tag(DreamtinkerTagKeys.Modifiers.EL_CURSED_MODIFIERS)
             .add(ModifierIds.blindshot, ModifierIds.vintage, ModifierIds.flamestance, ModifierIds.entangled,
                  ModifierIds.crystalbound, ModifierIds.crystalstrike, ModifierIds.dense, ModifierIds.sharpweight,
                  ModifierIds.heavy, /*Ids.solid,*/
@@ -32,7 +32,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
                  stone_heart.getId(), splendour_heart.getId(), Ids.why_i_cry, Ids.EULA, Ids.huge_ego, wait_until.getId(), Ids.FragileButBright)
             .addOptional(cursed_ring_bound.getId(), evil_attack.getId(), Ids.malum_tyrving, eldritch_pan.getId(), malum_thirsty.getId(), Ids.thundering_curse,
                          Ids.el_nemesis_curse, Ids.el_sorrow, Ids.el_eternal_binding);
-        this.tag(DreamtinkerTagkeys.Modifiers.EL_CURSED_RELIEF)
+        this.tag(DreamtinkerTagKeys.Modifiers.EL_CURSED_RELIEF)
             .addOptional(weapon_books.getId(), eldritch_pan.getId(), exiles_faulty.getId());
         this.tag(TinkerTags.Modifiers.MELEE_UPGRADES)
             .add(strong_explode.getId())
@@ -59,7 +59,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
         this.tag(TinkerTags.Modifiers.INTERACTION_ABILITIES)
             .add(memory_base.getId())
             .addOptional(Ids.malum_ascension, Ids.malum_rebound);
-        this.tag(DreamtinkerTagkeys.Modifiers.MALUM_EXPOSE_SOUL)
+        this.tag(DreamtinkerTagKeys.Modifiers.MALUM_EXPOSE_SOUL)
             .addOptional(malum_hex_staff.getId(), malum_base.getId(), malum_distortion.getId(), malum_spirit_attributes.getId(),
                          Ids.malum_animated, Ids.malum_rebound, Ids.malum_ascension, Ids.malum_haunted, Ids.malum_replenishing, Ids.malum_spirit_plunder,
                          malum_soul_attributes.getId(), malum_malignant_attributes.getId(), Ids.malum_edge_of_deliverance, Ids.malum_tyrving,

@@ -10,15 +10,15 @@
       "required": false
     },
     {
-      "id": "#dreamtinker:malum_molten_soul_stained_steel",
+      "id": "#dreamtinker:molten_soul_stained_steel",
       "required": false
     },
     {
-      "id": "#dreamtinker:malum_molten_malignant_pewter",
+      "id": "#dreamtinker:molten_malignant_pewter",
       "required": false
     },
     {
-      "id": "#dreamtinker:malum_molten_malignant_gluttony",
+      "id": "#dreamtinker:molten_malignant_gluttony",
       "required": false
     }
   ]

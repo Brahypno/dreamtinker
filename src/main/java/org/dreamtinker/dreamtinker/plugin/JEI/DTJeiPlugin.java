@@ -20,7 +20,7 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
-import org.dreamtinker.dreamtinker.common.DreamtinkerTagkeys;
+import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.library.recipe.virtual.WorldRitualEntry;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.jetbrains.annotations.NotNull;
@@ -150,7 +150,7 @@ public final class DTJeiPlugin implements IModPlugin {
                 WorldRitualEntry.Trigger.FORTUNE_LOOTING,
                 null,
                 null,
-                anyOfBlockTags(DreamtinkerTagkeys.Blocks.drop_peach),
+                anyOfBlockTags(DreamtinkerTagKeys.Blocks.drop_peach),
                 new ItemStack(DreamtinkerCommon.white_peach.get()),
                 null,
                 null,

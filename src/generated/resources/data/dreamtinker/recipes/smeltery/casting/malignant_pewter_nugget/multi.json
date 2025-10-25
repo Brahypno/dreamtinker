@@ -6,7 +6,7 @@
   "cooling_time": 27,
   "fluid": {
     "amount": 10,
-    "fluid": "dreamtinker:malum_molten_malignant_pewter"
+    "fluid": "dreamtinker:molten_malignant_pewter"
   },
   "result": "malum:malignant_pewter_nugget"
 }

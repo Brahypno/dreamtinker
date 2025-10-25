@@ -3,7 +3,7 @@ package org.dreamtinker.dreamtinker.mixin.enigmatic_legacy_mixin;
 import com.aizistral.enigmaticlegacy.handlers.SuperpositionHandler;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import org.dreamtinker.dreamtinker.common.DreamtinkerTagkeys;
+import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,7 +18,7 @@ public abstract class SuperpositionHandlerMixin {
     @Inject(method = "getCurseAmount(Lnet/minecraft/world/item/ItemStack;)I", at = @At("RETURN"), cancellable = true)
     private static void dreamtinker$injectCurseAmountBeforeReturn(ItemStack stack, CallbackInfoReturnable<Integer> cir) {
         int total = cir.getReturnValue() +
-                    DTModifierCheck.getItemModifierNum(stack, DreamtinkerTagkeys.Modifiers.EL_CURSED_MODIFIERS);
+                    DTModifierCheck.getItemModifierNum(stack, DreamtinkerTagKeys.Modifiers.EL_CURSED_MODIFIERS);
 
         cir.setReturnValue(total);
     }

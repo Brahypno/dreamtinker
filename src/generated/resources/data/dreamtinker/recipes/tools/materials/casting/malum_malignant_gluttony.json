@@ -2,7 +2,7 @@
   "type": "tconstruct:material_fluid",
   "fluid": {
     "amount": 90,
-    "tag": "dreamtinker:malum_molten_malignant_gluttony"
+    "tag": "dreamtinker:molten_malignant_gluttony"
   },
   "output": "dreamtinker:malum_malignant_gluttony",
   "temperature": 1900

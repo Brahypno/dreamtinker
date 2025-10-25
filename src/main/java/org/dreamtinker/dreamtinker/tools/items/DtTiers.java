@@ -7,7 +7,7 @@ import net.minecraftforge.common.ForgeTier;
 import net.minecraftforge.common.TierSortingRegistry;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
-import org.dreamtinker.dreamtinker.common.DreamtinkerTagkeys;
+import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class DtTiers {
                     9.0F,            // 挖掘速度
                     4.0F,            // 额外攻击
                     15,              // 附魔性
-                    DreamtinkerTagkeys.Blocks.need_lupus, // “需要此等级工具”的方块标签
+                    DreamtinkerTagKeys.Blocks.need_lupus, // “需要此等级工具”的方块标签
                     () -> Ingredient.of(DreamtinkerCommon.metallivorous_stibium_lupus.get()) // 修复材料（可随意）
             ),
             Dreamtinker.getLocation("lupus"),

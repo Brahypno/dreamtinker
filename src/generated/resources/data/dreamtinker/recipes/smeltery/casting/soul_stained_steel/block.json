@@ -3,7 +3,7 @@
   "cooling_time": 190,
   "fluid": {
     "amount": 810,
-    "tag": "dreamtinker:malum_molten_soul_stained_steel"
+    "tag": "dreamtinker:molten_soul_stained_steel"
   },
   "result": "malum:block_of_soul_stained_steel"
 }

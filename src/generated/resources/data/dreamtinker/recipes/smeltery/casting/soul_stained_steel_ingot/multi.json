@@ -6,7 +6,7 @@
   "cooling_time": 63,
   "fluid": {
     "amount": 90,
-    "fluid": "dreamtinker:malum_molten_soul_stained_steel"
+    "fluid": "dreamtinker:molten_soul_stained_steel"
   },
   "result": "malum:soul_stained_steel_ingot"
 }

@@ -3,7 +3,7 @@ package org.dreamtinker.dreamtinker.mixin.enigmatic_legacy_mixin;
 import com.aizistral.enigmaticlegacy.handlers.EnigmaticEventHandler;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import org.dreamtinker.dreamtinker.common.DreamtinkerTagkeys;
+import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -28,7 +28,7 @@ public abstract class EnigmaticEventHandlerMixin {
 
     private boolean dreamtinker$adjustBypassBeforeCheck(boolean bypass, LivingHurtEvent event) {
         if (!bypass && null != event.getSource().getDirectEntity() && event.getSource().getDirectEntity() instanceof LivingEntity entity)
-            return 0 < DTModifierCheck.getItemModifierNum(entity.getMainHandItem(), DreamtinkerTagkeys.Modifiers.EL_CURSED_RELIEF);
+            return 0 < DTModifierCheck.getItemModifierNum(entity.getMainHandItem(), DreamtinkerTagKeys.Modifiers.EL_CURSED_RELIEF);
 
         return bypass;
     }

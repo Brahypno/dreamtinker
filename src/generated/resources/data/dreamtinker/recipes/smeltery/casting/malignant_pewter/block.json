@@ -3,7 +3,7 @@
   "cooling_time": 241,
   "fluid": {
     "amount": 810,
-    "tag": "dreamtinker:malum_molten_malignant_pewter"
+    "tag": "dreamtinker:molten_malignant_pewter"
   },
   "result": "malum:block_of_malignant_pewter"
 }
