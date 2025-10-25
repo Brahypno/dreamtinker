@@ -62,21 +62,6 @@ public class FluidTagProvider extends FluidTagsProvider {
         this.tag(DreamtinkerTagKeys.Fluids.molten_crying_obsidian).addTags(DreamtinkerFluids.molten_crying_obsidian.getTag());
     }
 
-    private void addFullTag(FlowingFluidObject<?> fluid, TagKey<Fluid> fluidTagKey) {
-        //fluidTag(fluid);
-        this.tag(fluidTagKey).add(fluid.getStill(), fluid.getFlowing());
-        //tag(fluid.getLocalTag()).add(fluid.getStill(), fluid.getFlowing());
-        TagKey<Fluid> tag = fluid.getCommonTag();
-        if (tag != null){
-            tag(tag).addTag(fluid.getLocalTag());
-        }
-    }
-
-    private void addFullTag(TagKey<Fluid> fluidTagKey, FlowingFluidObject<?>... fluids) {
-        for (FlowingFluidObject<?> fluid : fluids)
-            addFullTag(fluid, fluidTagKey);
-    }
-
     /**
      * Adds tags for an unplacable fluid
      */

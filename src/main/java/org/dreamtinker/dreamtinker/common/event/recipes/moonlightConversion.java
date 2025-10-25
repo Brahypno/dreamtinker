@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.tools.modifiers.events.recipes;
+package org.dreamtinker.dreamtinker.common.event.recipes;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;

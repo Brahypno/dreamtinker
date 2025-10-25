@@ -18,6 +18,7 @@ import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.FragileDodge;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.homunculusLifeCurseMaxEffectLevel;
 import static org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.weapon_transformation.valueExpSoftCap;
 
 
@@ -49,9 +50,15 @@ public class GeneralHurtHandler {
                     entity.hurt(entity.level().damageSources().fellOutOfWorld(), event.getAmount() * .1f);
                 why_i_cry_triggered = false;
             }
+
             int sand_level = DTModifierCheck.getMainhandModifierlevel(entity, DreamtinkerModifiers.Ids.AsSand);
             if (0 < sand_level)
                 applyWearToTarget(event.getEntity(), (int) (event.getAmount() / 10 * sand_level));
+
+            int homunculusLifeCurse = DTModifierCheck.getEntityModifierNum(entity, DreamtinkerModifiers.Ids.homunculusLifeCurse);
+            if (0 < homunculusLifeCurse)
+                event.setAmount(event.getAmount() * (1 - entity.getHealth() / entity.getMaxHealth()) *
+                                Math.min(homunculusLifeCurseMaxEffectLevel.get() + 1, homunculusLifeCurse + 1));
         }
         int fragileButBright = DTModifierCheck.getEntityModifierNum(event.getEntity(), DreamtinkerModifiers.Ids.FragileButBright);
         if (0 < fragileButBright && event.getEntity().level().random.nextFloat() < FragileDodge.get() * fragileButBright){

@@ -141,6 +141,7 @@ public class DreamtinkerCommon extends DreamtinkerModule {
     public static final RegistryObject<Item> amber = ITEMS.register("amber", () -> new Item(ITEM_PROPS.rarity(Rarity.RARE)));
     public static final RegistryObject<Item> despair_gem = ITEMS.register("despair_gem", () -> new Item(ITEM_PROPS.rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> desire_gem = ITEMS.register("desire_gem", () -> new Item(ITEM_PROPS.rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> poisonousHomunculus = ITEMS.register("poisonous_homunculus", () -> new Item(ITEM_PROPS.rarity(Rarity.RARE)));
 
     protected static final Item.Properties FOOD_PROPS = new Item.Properties();
     public static final RegistryObject<Item> white_peach = ITEMS.register("white_peach", () -> new Item(
@@ -175,6 +176,7 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         output.accept(amber.get());
         output.accept(despair_gem.get());
         output.accept(desire_gem.get());
+        output.accept(poisonousHomunculus.get());
         if (ModList.get().isLoaded("malum"))
             output.accept(malignant_gluttony.get());
         if (ModList.get().isLoaded("enigmaticlegacy"))

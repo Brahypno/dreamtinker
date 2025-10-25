@@ -43,10 +43,6 @@ public class BlockTagProvider extends BlockTagsProvider {
         tagBlocks(DreamtinkerTagKeys.Blocks.amberOre, DreamtinkerCommon.amberOre);
     }
 
-    private static TagKey<Block> mcBlockTag(String name) {
-        return TagKey.create(ForgeRegistries.BLOCKS.getRegistryKey(), new ResourceLocation("minecraft", name));
-    }
-
     private static TagKey<Block> forgeBlockTag(String name) {
         return TagKey.create(ForgeRegistries.BLOCKS.getRegistryKey(), new ResourceLocation("forge", name));
     }

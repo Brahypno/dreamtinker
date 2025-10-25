@@ -313,6 +313,15 @@
   "modifier.dreamtinker.fragile_but_bright": "Fragile But Bright",
   "modifier.dreamtinker.fragile_but_bright.flavor": "unusual",
   "modifier.dreamtinker.fragile_but_bright.description": "Decrease Armor and Toughness per level, but gain chance to dodge damage",
+  "modifier.dreamtinker.homunculus_life_curse": "Homunculus Curse",
+  "modifier.dreamtinker.homunculus_life_curse.flavor": "To Living Mortals",
+  "modifier.dreamtinker.homunculus_life_curse.description": "When health smaller than 1/(modifier level+1), increase damage dealt; otherwise decrease damage; The lower HP, higher damage; Max effective 4 levels, configurable",
+  "modifier.dreamtinker.anvil_hit": "Falling down",
+  "modifier.dreamtinker.anvil_hit.flavor": "Hail to you",
+  "modifier.dreamtinker.anvil_hit.description": "When attack living entity, summon falling anvil",
+  "modifier.dreamtinker.homunculus_gift": "Homunculus Gift",
+  "modifier.dreamtinker.homunculus_gift.flavor": "Bless my pre-life",
+  "modifier.dreamtinker.homunculus_gift.description": "Decrease Merchant price 3% per level; Configurable",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",
@@ -390,6 +399,7 @@
   "item.dreamtinker.amber": "Amber",
   "item.dreamtinker.despair_gem": "Despair Gem",
   "item.dreamtinker.desire_gem": "Desire Gem",
+  "item.dreamtinker.poisonous_homunculus": "Poisonous Homunculus",
 
   "block.dreamtinker.crying_obsidian_pane": "Crying Obsidian Pane",
   "block.dreamtinker.narcissus": "Narcissus",
@@ -444,6 +454,8 @@
   "material.dreamtinker.malum_malignant_lead.flavor": "Born from Gold, Live as Lead",
   "material.dreamtinker.amber": "Amber",
   "material.dreamtinker.amber.flavor": "The world, too, has known stillness — as amber does.",
+  "material.dreamtinker.half_rotten_homunculus": "Half Rotten Homunculus",
+  "material.dreamtinker.half_rotten_homunculus.flavor": "Born from a deadly joke and full of cured",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "Molten echo Alloy",
   "fluid.dreamtinker.molten_echo_alloy": "Molten echo Alloy",
@@ -571,6 +583,7 @@
   "jei.dreamtinker.category.item_out_of_world": "Trigger: Drop Item Out of World",
   "jei.dreamtinker.category.use_item_underwater": "Trigger: Use item Under Water",
   "jei.dreamtinker.category.fortune_looting": "Trigger: Loot with Fortune",
+  "jei.dreamtinker.category.hit_entity": "Trigger: hit entity on certain condition",
   "jei.dreamtinker.celestial_type.sun": "Day Time",
   "jei.dreamtinker.celestial_type.moon_phase": "Night with Moon Phase: ",
   "jei.dreamtinker.chance": "Chance"

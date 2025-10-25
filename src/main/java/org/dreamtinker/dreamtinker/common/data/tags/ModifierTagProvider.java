@@ -29,8 +29,9 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
                  broken_vessel.getId(), ewige_widerkunft.getId(), ouroboric_hourglass.getId(), burning_in_vain.getId(),
                  the_wolf_wonder.getId(), the_wolf_was.getId(), as_one.getId(), Ids.with_tears, isolde.getId(),
                  mei.getId(), ender_dodge.getId(), explosive_hit.getId(), ranged_shoot.getId(), Ids.wither_body,
-                 stone_heart.getId(), splendour_heart.getId(), Ids.why_i_cry, Ids.EULA, Ids.huge_ego, wait_until.getId(), Ids.FragileButBright)
-            .addOptional(cursed_ring_bound.getId(), evil_attack.getId(), Ids.malum_tyrving, eldritch_pan.getId(), malum_thirsty.getId(), Ids.thundering_curse,
+                 stone_heart.getId(), splendour_heart.getId(), Ids.why_i_cry, Ids.EULA, Ids.huge_ego, wait_until.getId(), Ids.FragileButBright,
+                 Ids.thundering_curse, Ids.homunculusLifeCurse)
+            .addOptional(cursed_ring_bound.getId(), evil_attack.getId(), Ids.malum_tyrving, eldritch_pan.getId(), malum_thirsty.getId(),
                          Ids.el_nemesis_curse, Ids.el_sorrow, Ids.el_eternal_binding);
         this.tag(DreamtinkerTagKeys.Modifiers.EL_CURSED_RELIEF)
             .addOptional(weapon_books.getId(), eldritch_pan.getId(), exiles_faulty.getId());

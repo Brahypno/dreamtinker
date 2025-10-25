@@ -19,6 +19,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.library.recipe.virtual.WorldRitualEntry;
@@ -159,15 +160,24 @@ public final class DTJeiPlugin implements IModPlugin {
                 false   // drowning
         ));
 
+        list.add(new WorldRitualEntry(
+                WorldRitualEntry.Trigger.HIT_ENTITY,
+                Ingredient.of(Dreamtinker.mcItemTag("anvil")),
+                null,
+                Ingredient.of(Tags.Items.GLASS),
+                new ItemStack(DreamtinkerCommon.poisonousHomunculus.get()),
+                null,
+                EntityIngredient.of(EntityType.VILLAGER),
+                null, null, null, null, null,
+                false,  // underwater
+                false   // drowning
+        ));
+
         reg.addRecipes(WORLD_RITUAL, list);
     }
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration reg) {
-        reg.addRecipeCatalyst(new ItemStack(Items.BLUE_ICE), WORLD_RITUAL);
-        reg.addRecipeCatalyst(new ItemStack(Items.FEATHER), WORLD_RITUAL);
-        reg.addRecipeCatalyst(new ItemStack(Items.ENDER_PEARL), WORLD_RITUAL);
-        reg.addRecipeCatalyst(new ItemStack(Items.FLINT_AND_STEEL), WORLD_RITUAL);
     }
 
     @SafeVarargs

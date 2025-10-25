@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.tools.modifiers.traits.material.amber;
+package org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;

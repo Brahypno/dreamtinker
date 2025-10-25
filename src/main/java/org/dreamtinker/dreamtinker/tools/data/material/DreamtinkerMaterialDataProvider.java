@@ -27,7 +27,8 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.star_regulus, 7, 50, true, false, null);
         addMaterial(DreamtinkerMaterialIds.crying_obsidian, 3, 30, false, false, null);
         addMaterial(DreamtinkerMaterialIds.larimar, 3, 20, true, false, null);
-        addMaterial(DreamtinkerMaterialIds.amber, 2, 20, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.amber, 2, 10, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.half_rotten_homunculus, 3, 20, true, false, null);
 
         addMaterial(DreamtinkerMaterialIds.etherium, 4, 40, false, false, modLoaded("enigmaticlegacy"));
         addMaterial(DreamtinkerMaterialIds.nefarious, 4, 40, false, false, modLoaded("enigmaticlegacy"));

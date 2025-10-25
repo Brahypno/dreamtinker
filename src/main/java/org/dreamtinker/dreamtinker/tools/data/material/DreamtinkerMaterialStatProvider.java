@@ -52,6 +52,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new HeadMaterialStats(1800, 1f, Tiers.IRON, 0.5f),
                          HandleMaterialStats.multipliers().durability(1.2f).miningSpeed(.9f).attackDamage(.9f).attackSpeed(.9f).build(),
                          StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.half_rotten_homunculus,
+                         HandleMaterialStats.multipliers().durability(.7f).miningSpeed(1f).attackDamage(1f).attackSpeed(1.3f).build(),
+                         StatlessMaterialStats.BINDING);
 
         addELMeleeHarvest();
         addMalumMeleeHarvest();
@@ -118,6 +121,8 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addMaterialStats(DreamtinkerMaterialIds.amber,
                          new LimbMaterialStats(1200, -0.1f, 0.2f, 0.2f),
                          new GripMaterialStats(1.0f, 0.1f, 2.0f));
+        addMaterialStats(DreamtinkerMaterialIds.half_rotten_homunculus,
+                         StatlessMaterialStats.BOWSTRING);
 
         addCompactRanged();
     }
@@ -165,6 +170,8 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addArmorShieldStats(DreamtinkerMaterialIds.amber,
                             PlatingMaterialStats.builder().durabilityFactor(15).armor(2f, 3f, 3f, 2f).toughness(0).knockbackResistance(0.2f),
                             StatlessMaterialStats.MAILLE);
+        addMaterialStats(DreamtinkerMaterialIds.half_rotten_homunculus,
+                         StatlessMaterialStats.MAILLE);
 
         addArmorShieldStats(DreamtinkerMaterialIds.etherium,
                             PlatingMaterialStats.builder().durabilityFactor(132).armor(4f, 9f, 7f, 4f).toughness(4).knockbackResistance(0f),

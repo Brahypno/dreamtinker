@@ -313,6 +313,15 @@
   "modifier.dreamtinker.fragile_but_bright": "脆弱但明亮",
   "modifier.dreamtinker.fragile_but_bright.flavor": "不寻常",
   "modifier.dreamtinker.fragile_but_bright.description": "每等级减少护甲和韧性，但获得一定的闪避率",
+  "modifier.dreamtinker.homunculus_life_curse": "瓶中人之咒",
+  "modifier.dreamtinker.homunculus_life_curse.flavor": "为何其他有终者尚未结束",
+  "modifier.dreamtinker.homunculus_life_curse.description": "生命越低造成的伤害越多。当剩余生命比例小于强化等级+1分之一时伤害降低。最多生效4级，可配置。",
+  "modifier.dreamtinker.anvil_hit": "将要坠下",
+  "modifier.dreamtinker.anvil_hit.flavor": "向你致意",
+  "modifier.dreamtinker.anvil_hit.description": "当攻击敌方时，召唤铁砧",
+  "modifier.dreamtinker.homunculus_gift": "瓶中人之礼",
+  "modifier.dreamtinker.homunculus_gift.flavor": "祝福前生",
+  "modifier.dreamtinker.homunculus_gift.description": "每等级减少3%村民交易价格。可配置",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
@@ -390,6 +399,7 @@
   "item.dreamtinker.amber": "琥珀",
   "item.dreamtinker.despair_gem": "绝望宝石",
   "item.dreamtinker.desire_gem": "渴望宝石",
+  "item.dreamtinker.poisonous_homunculus": "恶毒瓶中人",
 
   "block.dreamtinker.crying_obsidian_pane": "哭泣的黑曜石板",
   "block.dreamtinker.narcissus": "水仙",
@@ -444,6 +454,8 @@
   "material.dreamtinker.malum_malignant_lead.flavor": "生于金，长为铅",
   "material.dreamtinker.amber": "琥珀",
   "material.dreamtinker.amber.flavor": "世界亦曾凝固，犹如琥珀之块",
+  "material.dreamtinker.half_rotten_homunculus": "半腐坏瓶中小人",
+  "material.dreamtinker.half_rotten_homunculus.flavor": "由最恶劣的玩笑而诞生的诅咒之物",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "熔融回响合金",
   "fluid.dreamtinker.molten_echo_alloy": "熔融回响合金",
@@ -572,6 +584,7 @@
   "jei.dreamtinker.category.item_out_of_world": "触发：弃置世界之外",
   "jei.dreamtinker.category.use_item_underwater": "触发：水下使用物品",
   "jei.dreamtinker.category.fortune_looting": "触发：采掘（受时运影响）",
+  "jei.dreamtinker.category.hit_entity": "触发：特定情况下击中实体",
   "jei.dreamtinker.celestial_type.sun": "白日",
   "jei.dreamtinker.celestial_type.moon_phase": "夜与月相: ",
   "jei.dreamtinker.chance": "概率"

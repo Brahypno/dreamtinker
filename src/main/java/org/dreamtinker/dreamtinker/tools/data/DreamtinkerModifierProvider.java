@@ -145,6 +145,8 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.FragileButBright)
                 .addModule(StatBoostModule.add(ToolStats.ARMOR).eachLevel(-1.5f))
                 .addModule(StatBoostModule.add(ToolStats.ARMOR_TOUGHNESS).eachLevel(-1f));
+        buildModifier(Ids.homunculusLifeCurse).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
+        buildModifier(Ids.homunculusGift).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
 
         addELModifiers();
         addMalumModifiers();

@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "dreamtinker:poisonous_homunculus"
+  },
+  "material": "dreamtinker:half_rotten_homunculus",
+  "needed": 1,
+  "value": 1
+}

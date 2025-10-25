@@ -220,6 +220,13 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.DoubleValue FragileDodge =
             builder.comment("Doge rate provided by Fragile But Bright per level").defineInRange("FragileDodge", 0.03, 0, 100);
 
+    public static final ForgeConfigSpec.IntValue homunculusLifeCurseMaxEffectLevel =
+            builder.comment("Max level for homunculus Life Curse Be effective. Affective Level is sum of all equipment slots")
+                   .defineInRange("homunculusLifeCurseMaxEffectLevel", 4, 1, 64);
+
+    public static final ForgeConfigSpec.DoubleValue homunculusGiftDiscount =
+            builder.comment("Villager Merchant discount rate per level").defineInRange("homunculusGiftDiscount", 0.03, 0, 100);
+
     public static final ForgeConfigSpec specs = builder.pop().build();
 
     private static boolean isValidIdFormat(String s) {

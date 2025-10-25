@@ -31,5 +31,6 @@ public record WorldRitualEntry(
         ITEM_OUT_OF_WORLD,   // 物品出界/虚空（末影珍珠丢进虚空）
         USE_ITEM_UNDERWATER,  // 在水下使用物品（打火石点燃海带）
         FORTUNE_LOOTING,
+        HIT_ENTITY,
     }
 }

@@ -1,0 +1,24 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "dreamtinker:anvil_hit"
+    },
+    {
+      "level": 1,
+      "name": "tconstruct:necrotic"
+    }
+  ],
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "dreamtinker:homunculus_life_curse"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:homunculus_gift"
+      }
+    ]
+  }
+}

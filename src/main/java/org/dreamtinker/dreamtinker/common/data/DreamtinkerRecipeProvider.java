@@ -425,6 +425,9 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         materialMeltingCasting(consumer, DreamtinkerMaterialIds.amber, DreamtinkerFluids.liquid_amber, FluidValues.GEM, materials_folder);
         materialRecipe(consumer, DreamtinkerMaterialIds.amber, Ingredient.of(DreamtinkerCommon.amber.get()), 1, 1,
                        materials_folder + "amber");
+
+        materialRecipe(consumer, DreamtinkerMaterialIds.half_rotten_homunculus, Ingredient.of(DreamtinkerCommon.poisonousHomunculus.get()), 1, 1,
+                       materials_folder + "half_rotten_homunculus");
     }
 
     private void addCompactMaterialRecipes(Consumer<FinishedRecipe> consumer) {
