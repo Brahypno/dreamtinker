@@ -23,7 +23,8 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
         buildRenderInfo(DreamtinkerMaterialIds.metallivorous_stibium_lupus).color(0xFFFDF8EB).fallbacks("metal").luminosity(9);
         buildRenderInfo(DreamtinkerMaterialIds.star_regulus).color(0xFF8C1F1F).fallbacks("metal").luminosity(15);
         buildRenderInfo(DreamtinkerMaterialIds.crying_obsidian).color(0xFF3B2754).fallbacks("rock").luminosity(3);
-        buildRenderInfo(DreamtinkerMaterialIds.larimar).color(0xFF51BACE).fallbacks("rock").luminosity(8);
+        buildRenderInfo(DreamtinkerMaterialIds.larimar).color(0xFF51BACE).fallbacks("gem").luminosity(8);
+        buildRenderInfo(DreamtinkerMaterialIds.amber).color(0xFFFE9300).fallbacks("gem").luminosity(7);
 
         buildRenderInfo(DreamtinkerMaterialIds.etherium).color(0xFF96E8E0).fallbacks("metal", "crystal").luminosity(15);
         buildRenderInfo(DreamtinkerMaterialIds.nefarious).color(0xFF8513A0).fallbacks("metal", "crystal", "gem").luminosity(8);

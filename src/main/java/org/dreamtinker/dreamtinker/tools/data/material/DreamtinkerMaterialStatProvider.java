@@ -48,7 +48,16 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new HeadMaterialStats(600, 4f, Tiers.DIAMOND, 0.5f),
                          HandleMaterialStats.multipliers().durability(1.1f).miningSpeed(1.3f).attackDamage(0.5f).attackSpeed(1.1f).build(),
                          StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.amber,
+                         new HeadMaterialStats(1800, 1f, Tiers.IRON, 0.5f),
+                         HandleMaterialStats.multipliers().durability(1.2f).miningSpeed(.9f).attackDamage(.9f).attackSpeed(.9f).build(),
+                         StatlessMaterialStats.BINDING);
 
+        addELMeleeHarvest();
+        addMalumMeleeHarvest();
+    }
+
+    private void addELMeleeHarvest() {
         addMaterialStats(DreamtinkerMaterialIds.etherium,
                          new HeadMaterialStats(3000, 8f, EnigmaticMaterials.ETHERIUM, 5f),
                          HandleMaterialStats.multipliers().durability(1.0f).miningSpeed(1.2f).attackDamage(1.3f).attackSpeed(1.4f).build(),
@@ -61,7 +70,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new HeadMaterialStats(10, 6f, EnigmaticMaterials.ETHERIUM, 6f),
                          HandleMaterialStats.multipliers().durability(0.7f).miningSpeed(1.4f).attackDamage(1.6f).attackSpeed(0.7f).build(),
                          StatlessMaterialStats.BINDING);
+    }
 
+    private void addMalumMeleeHarvest() {
         addMaterialStats(DreamtinkerMaterialIds.spirit_fabric,
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.hallowed_gold,
@@ -104,7 +115,14 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addMaterialStats(DreamtinkerMaterialIds.larimar,
                          new LimbMaterialStats(900, 0.5f, 0.2f, 0.2f),
                          new GripMaterialStats(0.5f, 0.2f, 1.0f));
+        addMaterialStats(DreamtinkerMaterialIds.amber,
+                         new LimbMaterialStats(1200, -0.1f, 0.2f, 0.2f),
+                         new GripMaterialStats(1.0f, 0.1f, 2.0f));
 
+        addCompactRanged();
+    }
+
+    private void addCompactRanged() {
         addMaterialStats(DreamtinkerMaterialIds.etherium,
                          new LimbMaterialStats(3000, 0.7f, 0.7f, 0.6f),
                          new GripMaterialStats(0.0f, 0.6f, 1.0f),
@@ -143,6 +161,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                             StatlessMaterialStats.MAILLE);
         addArmorShieldStats(DreamtinkerMaterialIds.crying_obsidian,
                             PlatingMaterialStats.builder().durabilityFactor(12).armor(3f, 4f, 5f, 3f).toughness(0).knockbackResistance(0.65f),
+                            StatlessMaterialStats.MAILLE);
+        addArmorShieldStats(DreamtinkerMaterialIds.amber,
+                            PlatingMaterialStats.builder().durabilityFactor(15).armor(2f, 3f, 3f, 2f).toughness(0).knockbackResistance(0.2f),
                             StatlessMaterialStats.MAILLE);
 
         addArmorShieldStats(DreamtinkerMaterialIds.etherium,

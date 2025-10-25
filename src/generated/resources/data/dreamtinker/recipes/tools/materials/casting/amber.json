@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_fluid",
+  "fluid": {
+    "amount": 100,
+    "tag": "dreamtinker:liquid_amber"
+  },
+  "output": "dreamtinker:amber",
+  "temperature": 337
+}

@@ -77,7 +77,10 @@
     "morning_lord_eula": "#FFF4C9",
     "ykh_eula": "#D9B24A",
     "eula": "#51BACE",
-    "malum_catalyst_lobber": "#626477"
+    "malum_catalyst_lobber": "#626477",
+    "wait_until": "#FE9300",
+    "as_sand": "#FFDA25",
+    "fragile_but_bright": "#6D2901"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
@@ -97,7 +100,8 @@
     "malum_malignant_pewter": "#C9B7D6",
     "malum_malignant_gluttony": "#1FA60A",
     "larimar": "#B7A1C6",
-    "malum_soul_rock": "#262438"
+    "malum_soul_rock": "#262438",
+    "amber": "#FE9300"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873"

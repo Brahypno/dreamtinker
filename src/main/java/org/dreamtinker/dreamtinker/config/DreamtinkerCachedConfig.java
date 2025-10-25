@@ -50,6 +50,7 @@ public class DreamtinkerCachedConfig {
     public static final ConfigLazy<Double> EchoDefenceSpeed = lazDoubleInSpec(DreamtinkerConfig.EchoDefenceSpeed);
     public static final ConfigLazy<Double> flamingMemoryStatusBoost = lazDoubleInSpec(DreamtinkerConfig.flamingMemoryStatusBoost);
     public static final ConfigLazy<Double> thunderCurse = lazDoubleInSpec(DreamtinkerConfig.thunderCurse);
+    public static final ConfigLazy<Double> FragileDodge = lazDoubleInSpec(DreamtinkerConfig.FragileDodge);
 
     public static final ConfigLazy<java.util.List<Double>> TheSplendourHeart =
             lazDoubleList(DreamtinkerConfig.TheSplendourHeart,

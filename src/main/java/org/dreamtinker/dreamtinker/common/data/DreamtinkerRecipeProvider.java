@@ -421,6 +421,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                        materials_folder + "valentinite");
         materialRecipe(consumer, DreamtinkerMaterialIds.larimar, Ingredient.of(DreamtinkerCommon.larimar.get()), 1, 1,
                        materials_folder + "larimar");
+
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.amber, DreamtinkerFluids.liquid_amber, FluidValues.GEM, materials_folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.amber, Ingredient.of(DreamtinkerCommon.amber.get()), 1, 1,
+                       materials_folder + "amber");
     }
 
     private void addCompactMaterialRecipes(Consumer<FinishedRecipe> consumer) {

@@ -1,5 +1,6 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -14,6 +15,7 @@ import net.minecraftforge.network.PacketDistributor;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.network.Dnetwork;
 import org.dreamtinker.dreamtinker.network.PerfectOverlayMsg;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.GeneralInteractionModifierHook;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
@@ -29,6 +31,13 @@ import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.IsoLdeEaseTim
 public class isolde extends BattleModifier {
     private static final ResourceLocation TAG_ISOLDE_TIME = new ResourceLocation(MODID, "isolde_time");
     private static final ResourceLocation TAG_ISOLDE = new ResourceLocation(MODID, "isolde");
+
+    @Override
+    public Component onModifierRemoved(IToolStackView tool, Modifier modifier) {
+        tool.getPersistentData().remove(TAG_ISOLDE);
+        tool.getPersistentData().remove(TAG_ISOLDE_TIME);
+        return null;
+    }
 
     @Override
     public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {

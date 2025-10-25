@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "dreamtinker:amber",
+  "result": {
+    "amount": 100,
+    "fluid": "dreamtinker:liquid_amber"
+  },
+  "temperature": 337
+}

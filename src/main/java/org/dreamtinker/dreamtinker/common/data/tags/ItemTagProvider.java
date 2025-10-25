@@ -76,7 +76,7 @@ public class ItemTagProvider extends ItemTagsProvider {
         this.tag(Tags.Items.INGOTS)
             .add(metallivorous_stibium_lupus.get(), regulus.get(), soul_etherium.get());
         this.tag(Tags.Items.GEMS)
-            .add(valentinite.get(), nigrescence_antimony.get(), echo_alloy.get(), larimar.get());
+            .add(valentinite.get(), nigrescence_antimony.get(), echo_alloy.get(), larimar.get(), amber.get(), desire_gem.get(), despair_gem.get());
         this.tag(DreamtinkerTagkeys.Items.raw_stibnite).add(raw_stibnite.get());
         this.tag(Tags.Items.RAW_MATERIALS).add(raw_stibnite.get());
         this.tag(ItemTags.FOX_FOOD).add(white_peach.get());

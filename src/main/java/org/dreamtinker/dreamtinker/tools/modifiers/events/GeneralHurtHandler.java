@@ -1,6 +1,7 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.events;
 
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
@@ -16,6 +17,7 @@ import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.FragileDodge;
 import static org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.weapon_transformation.valueExpSoftCap;
 
 
@@ -45,8 +47,38 @@ public class GeneralHurtHandler {
                 event.getEntity().invulnerableTime = 0;
                 if (entity.level().random.nextFloat() < 0.1)
                     entity.hurt(entity.level().damageSources().fellOutOfWorld(), event.getAmount() * .1f);
+                why_i_cry_triggered = false;
             }
-            why_i_cry_triggered = false;
+            int sand_level = DTModifierCheck.getMainhandModifierlevel(entity, DreamtinkerModifiers.Ids.AsSand);
+            if (0 < sand_level)
+                applyWearToTarget(event.getEntity(), (int) (event.getAmount() / 10 * sand_level));
         }
+        int fragileButBright = DTModifierCheck.getEntityModifierNum(event.getEntity(), DreamtinkerModifiers.Ids.FragileButBright);
+        if (0 < fragileButBright && event.getEntity().level().random.nextFloat() < FragileDodge.get() * fragileButBright){
+            event.setAmount(0);
+            event.setCanceled(true);
+        }
+    }
+
+    private static void applyWearToTarget(LivingEntity target, int level) {
+        if (target.isDeadOrDying())
+            return;
+
+        for (EquipmentSlot slot : new EquipmentSlot[]{
+                EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET
+        }) {
+            damageStackInSlot(target, slot, level);
+        }
+        damageStackInSlot(target, EquipmentSlot.MAINHAND, level);
+        damageStackInSlot(target, EquipmentSlot.OFFHAND, level);
+    }
+
+    private static void damageStackInSlot(LivingEntity target, EquipmentSlot slot, int amount) {
+        if (amount <= 0)
+            return;
+        ItemStack stack = target.getItemBySlot(slot);
+        if (stack.isEmpty() || !stack.isDamageableItem())
+            return;
+        stack.hurtAndBreak(amount, target, e -> e.broadcastBreakEvent(slot));
     }
 }

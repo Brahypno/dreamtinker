@@ -109,7 +109,23 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFFC7F7F6)  // 近白高光
                                                 .addARGB(255, 0xFFFFFFFF)  // 纯白镜面
                                                 .build());
+        this.buildMaterial(DreamtinkerMaterialIds.amber)
+            .ranged().meleeHarvest().armor()
+            .fallbacks("gem")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(0, 0xFF6D2901)  // 深琥珀棕（最暗阴影）
+                                                .addARGB(63, 0xFFDA5200)  // 暗橙过渡
+                                                .addARGB(102, 0xFFED7000)  // 亮橙中深
+                                                .addARGB(140, 0xFFF27A00)  // 琥珀橙
+                                                .addARGB(178, 0xFFFE9300)  // 明亮琥珀
+                                                .addARGB(216, 0xFFFFAC00)  // 金琥珀高光
+                                                .addARGB(255, 0xFFFFDA25)  // 近金黄高光
+                                                .build());
+        addELMaterials();
+        addMalumMaterials();
+    }
 
+    protected void addELMaterials() {
         this.buildMaterial(DreamtinkerMaterialIds.etherium)
             .ranged().meleeHarvest().armor().statType(StatlessMaterialStats.BOWSTRING)
             .fallbacks("metal", "crystal")
@@ -146,6 +162,9 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFFF84CB7)  // 亮粉
                                                 .addARGB(255, 0xFFFFD5EC)  // 粉白高光
                                                 .build());
+    }
+
+    protected void addMalumMaterials() {
         this.buildMaterial(DreamtinkerMaterialIds.spirit_fabric)
             .statType(StatlessMaterialStats.BINDING).armor().statType(StatlessMaterialStats.BOWSTRING)
             .fallbacks("cloth")

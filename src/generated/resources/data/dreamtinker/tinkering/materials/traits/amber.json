@@ -1,0 +1,30 @@
+{
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "dreamtinker:fragile_but_bright"
+      }
+    ],
+    "tconstruct:melee_harvest": [
+      {
+        "level": 1,
+        "name": "dreamtinker:wait_until"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:as_sand"
+      }
+    ],
+    "tconstruct:ranged": [
+      {
+        "level": 1,
+        "name": "dreamtinker:wait_until"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:as_sand"
+      }
+    ]
+  }
+}

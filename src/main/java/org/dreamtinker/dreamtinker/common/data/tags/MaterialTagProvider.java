@@ -20,9 +20,10 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
             .add(moonlight_ice, nigrescence_antimony, metallivorous_stibium_lupus)
             .addOptional(etherium, nefarious, soul_etherium,
                          soul_stained_steel, malignant_pewter, malignant_gluttony);
-        this.tag(TinkerTags.Materials.NETHER).add(star_regulus, nefarious);
+        this.tag(TinkerTags.Materials.NETHER).add(nefarious, amber);
+        this.tag(TinkerTags.Materials.BARTERED).add(amber);
         this.tag(TinkerTags.Materials.MELEE)
-            .add(crying_obsidian, nigrescence_antimony, moonlight_ice, echo_alloy, metallivorous_stibium_lupus)
+            .add(crying_obsidian, nigrescence_antimony, moonlight_ice, echo_alloy, metallivorous_stibium_lupus, amber)
             .addOptional(nefarious, soul_etherium, spirit_fabric, soul_stained_steel, malignant_pewter, malignant_gluttony);
         this.tag(TinkerTags.Materials.HARVEST)
             .add(larimar)
@@ -36,7 +37,7 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
         this.tag(TinkerTags.Materials.BALANCED)
             .add(valentinite);
         this.tag(TinkerTags.Materials.HEAVY)
-            .add(crying_obsidian)
+            .add(crying_obsidian, amber)
             .addOptional(hallowed_gold);
     }
 

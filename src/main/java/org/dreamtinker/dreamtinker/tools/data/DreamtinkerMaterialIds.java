@@ -17,6 +17,7 @@ public class DreamtinkerMaterialIds {
     public static final MaterialId star_regulus = new MaterialId(new ResourceLocation(MODID, "star_regulus"));
     public static final MaterialId crying_obsidian = new MaterialId(new ResourceLocation(MODID, "crying_obsidian"));
     public static final MaterialId larimar = new MaterialId(new ResourceLocation(MODID, "larimar"));
+    public static final MaterialId amber = new MaterialId(new ResourceLocation(MODID, "amber"));
     //Compact-enigmatic legacy
     public static final MaterialId etherium = new MaterialId(new ResourceLocation(MODID, "etherium"));
     public static final MaterialId nefarious = new MaterialId(new ResourceLocation(MODID, "nefarious"));

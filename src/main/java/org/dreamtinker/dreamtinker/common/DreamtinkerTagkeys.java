@@ -54,6 +54,7 @@ public class DreamtinkerTagkeys {
         public static final TagKey<Fluid> molten_malignant_gluttony = dtTag("molten_malignant_gluttony");
         public static final TagKey<Fluid> liquid_concentrated_gluttony = dtTag("liquid_concentrated_gluttony");
         public static final TagKey<Fluid> liquid_arcana_juice = dtTag("liquid_arcana_juice");
+        public static final TagKey<Fluid> liquid_amber = dtTag("liquid_amber");
 
         public static final TagKey<Fluid> narcissus_wing_used = dtTag("narcissus_wing_used");
     }
@@ -76,7 +77,8 @@ public class DreamtinkerTagkeys {
         }
 
         public static final TagKey<Block> drop_peach = dreamtinkerTag("drops/peach");
-        public static final TagKey<Block> need_lupus = dreamtinkerTag("need_tool/lupus");
-        public static final TagKey<Block> larimarOre = dreamtinkerTag("ores/larimar");
+        public static final TagKey<Block> need_lupus = forgeTag("need_tool/lupus");
+        public static final TagKey<Block> larimarOre = forgeTag("ores/larimar");
+        public static final TagKey<Block> amberOre = forgeTag("ores/amber");
     }
 }

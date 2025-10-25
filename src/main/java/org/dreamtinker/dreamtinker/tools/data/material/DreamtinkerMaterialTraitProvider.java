@@ -53,6 +53,10 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.larimar, MELEE_HARVEST, Ids.ykhEULA, Ids.MorningLordEULA, Ids.EULA);
         addTraits(DreamtinkerMaterialIds.larimar, RANGED, Ids.why_i_cry, deep_sleep_with_roar.getId());
 
+        addTraits(DreamtinkerMaterialIds.amber, MELEE_HARVEST, wait_until.getId(), Ids.AsSand);
+        addTraits(DreamtinkerMaterialIds.amber, RANGED, wait_until.getId(), Ids.AsSand);
+        addTraits(DreamtinkerMaterialIds.amber, ARMOR, Ids.FragileButBright);
+
         callGetOrCreate(this, DreamtinkerMaterialIds.etherium).setTraits(MELEE_HARVEST, List.of(
                 new ModifierEntry(ModifierIds.smite, 2),
                 new ModifierEntry(explosive_hit.getId(), 1),

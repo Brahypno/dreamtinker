@@ -141,6 +141,10 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                                        .variable(MULTIPLIER).multiply() // * multiplier
                                                        .variable(VALUE).add() // + baseValue
                                                        .build());
+        buildModifier(Ids.AsSand).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
+        buildModifier(Ids.FragileButBright)
+                .addModule(StatBoostModule.add(ToolStats.ARMOR).eachLevel(-1.5f))
+                .addModule(StatBoostModule.add(ToolStats.ARMOR_TOUGHNESS).eachLevel(-1f));
 
         addELModifiers();
         addMalumModifiers();

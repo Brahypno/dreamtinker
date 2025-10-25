@@ -185,6 +185,8 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.DoubleValue LifeLootingBonus =
             builder.comment("Bonus for life looting").defineInRange("LifeLootingBonus", 0.5, 0, 100);
 
+    static {builder.comment("\nSoul etherium: ");}
+
     public static final ForgeConfigSpec.DoubleValue OpenSoulDeathCount =
             builder.comment("Count for Open Soul to reject death").defineInRange("OpenSoulDeathCount", 1000.0, 0, 100000);
     public static final ForgeConfigSpec.DoubleValue OpenSoulRepairCount =
@@ -204,12 +206,19 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.DoubleValue thunderCurse =
             builder.comment("Percentage of Change thunder hit").defineInRange("thunderCurse", 0.01, 0, 1);
 
+    static {builder.comment("\nmalignant_gluttony: ");}
+
     public static final ForgeConfigSpec.DoubleValue CancerousPredatorRate =
             builder.comment("Base rate for every level of CancerousPredator").defineInRange("CancerousPredatorRate", 3.0, 1, 100);
     public static final ForgeConfigSpec.DoubleValue CancerousPredatorFactor =
             builder.comment("Base factor for every level of CancerousPredator").defineInRange("CancerousPredatorFactor", 20.0, 1, 100);
     public static final ForgeConfigSpec.DoubleValue SpiritDefence =
             builder.comment("Soul Ward status from Spirit defence").defineInRange("SpiritDefence", 3.0, 1, 100);
+
+    static {builder.comment("\nAmber: ");}
+
+    public static final ForgeConfigSpec.DoubleValue FragileDodge =
+            builder.comment("Doge rate provided by Fragile But Bright per level").defineInRange("FragileDodge", 0.03, 0, 100);
 
     public static final ForgeConfigSpec specs = builder.pop().build();
 

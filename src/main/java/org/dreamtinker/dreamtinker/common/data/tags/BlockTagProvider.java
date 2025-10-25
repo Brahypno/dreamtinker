@@ -40,6 +40,7 @@ public class BlockTagProvider extends BlockTagsProvider {
                       forgeBlockTag("mineable/sword"), TinkerTags.Blocks.MINABLE_WITH_SHEARS);
         tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL, DreamtinkerCommon.larimarOre);
         tagBlocks(DreamtinkerTagkeys.Blocks.larimarOre, DreamtinkerCommon.larimarOre);
+        tagBlocks(DreamtinkerTagkeys.Blocks.amberOre, DreamtinkerCommon.amberOre);
     }
 
     private static TagKey<Block> mcBlockTag(String name) {

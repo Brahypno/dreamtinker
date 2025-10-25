@@ -16,6 +16,7 @@ import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifi
 import org.dreamtinker.dreamtinker.tools.modifiers.events.AdvCountEvents;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.tools.SlotType;
@@ -42,6 +43,12 @@ public class splendourHeart extends BattleModifier {
     @Override
     public int getPriority() {
         return Integer.MIN_VALUE;
+    }
+
+    @Override
+    public Component onModifierRemoved(IToolStackView tool, Modifier modifier) {
+        tool.getPersistentData().remove(TAG_ADV_PERCENTAGE);
+        return null;
     }
 
     @Override

@@ -43,6 +43,7 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.soul_blessing;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.stone_heart;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.common.fly;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.common.life_looting;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.amber.wait_until;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian.isolde;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian.sharpened_with;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.echo_shard.echoed_attack;
@@ -133,6 +134,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<life_looting> life_looting = MODIFIERS.register("life_looting", life_looting::new);
 
     public static final StaticModifier<deepSleepWithRoar> deep_sleep_with_roar = MODIFIERS.register("deep_sleep_with_roar", deepSleepWithRoar::new);
+    public static final StaticModifier<wait_until> wait_until = MODIFIERS.register("wait_until", wait_until::new);
 
 
     //etherium
@@ -201,6 +203,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId ykhEULA = id("ykh_eula");
         public static final ModifierId MorningLordEULA = id("morning_lord_eula");
         public static final ModifierId EULA = id("eula");
+        public static final ModifierId AsSand = id("as_sand");
+        public static final ModifierId FragileButBright = id("fragile_but_bright");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");

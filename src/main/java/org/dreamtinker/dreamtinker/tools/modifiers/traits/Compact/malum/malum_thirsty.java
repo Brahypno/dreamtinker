@@ -1,5 +1,6 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -14,6 +15,7 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.jetbrains.annotations.NotNull;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
@@ -47,6 +49,12 @@ public class malum_thirsty extends BattleModifier {
         m.put(EquipmentSlot.LEGS, UUID.fromString("2b6e4d1c-5f7a-4c3b-9172-58a6b7c8d9e0"));
         m.put(EquipmentSlot.FEET, UUID.fromString("9d1c3e5a-6b8d-4f0a-a283-69c7d8e9f0a1"));
         SLOT_UUIDS = new EnumMap<>(m);
+    }
+
+    @Override
+    public Component onModifierRemoved(IToolStackView tool, Modifier modifier) {
+        tool.getPersistentData().remove(TAG_GLU);
+        return null;
     }
 
     @Override

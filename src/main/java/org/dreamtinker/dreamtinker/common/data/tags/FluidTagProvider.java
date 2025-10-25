@@ -47,6 +47,7 @@ public class FluidTagProvider extends FluidTagsProvider {
         addFullTag(DreamtinkerFluids.molten_malignant_gluttony, DreamtinkerTagkeys.Fluids.molten_malignant_gluttony);
         addFullTag(DreamtinkerFluids.liquid_concentrated_gluttony, DreamtinkerTagkeys.Fluids.liquid_concentrated_gluttony);
         addFullTag(DreamtinkerFluids.liquid_arcana_juice, DreamtinkerTagkeys.Fluids.liquid_arcana_juice);
+        addFullTag(DreamtinkerFluids.liquid_amber, DreamtinkerTagkeys.Fluids.liquid_amber);
 
         addFullTag(DreamtinkerTagkeys.Fluids.narcissus_wing_used, DreamtinkerFluids.blood_soul, DreamtinkerFluids.liquid_arcana_juice);
 
