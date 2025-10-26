@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "item": "dreamtinker:malignant_gluttony"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_malignant_gluttony"
+  },
+  "temperature": 1900,
+  "time": 271
+}

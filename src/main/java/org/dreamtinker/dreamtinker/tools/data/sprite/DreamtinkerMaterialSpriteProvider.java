@@ -134,6 +134,18 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFFCF703E)  // 血色高光（偏棕橙）
                                                 .addARGB(255, 0xFFFBF2DA)  // 极亮高光/反光
                                                 .build());
+        this.buildMaterial(DreamtinkerMaterialIds.desire_gem)
+            .ranged().meleeHarvest().armor()
+            .fallbacks("gem")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(0, 0xFFA12065)  // 暗玫红
+                                                .addARGB(63, 0xFFDE59A2)  // 亮粉
+                                                .addARGB(102, 0xFF91B83D)  // 果绿中深
+                                                .addARGB(140, 0xFF7AB97B)  // 青绿
+                                                .addARGB(178, 0xFF7AB97B)  // 青绿（保持段）
+                                                .addARGB(216, 0xFF5BDE5F)  // 高亮嫩绿
+                                                .addARGB(255, 0xFFAFEFB1)  // 淡薄荷高光
+                                                .build());
         addELMaterials();
         addMalumMaterials();
     }

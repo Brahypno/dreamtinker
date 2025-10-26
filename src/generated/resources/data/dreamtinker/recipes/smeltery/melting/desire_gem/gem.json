@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "item": "dreamtinker:desire_gem"
+  },
+  "result": {
+    "amount": 100,
+    "fluid": "dreamtinker:molten_desire"
+  },
+  "temperature": 1300,
+  "time": 225
+}

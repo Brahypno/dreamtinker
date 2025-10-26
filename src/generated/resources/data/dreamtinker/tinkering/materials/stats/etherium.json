@@ -15,7 +15,7 @@
     },
     "tconstruct:head": {
       "durability": 3000,
-      "melee_attack": 5.0,
+      "melee_attack": 4.0,
       "mining_speed": 8.0,
       "mining_tier": "enigmaticlegacy:etherium"
     },

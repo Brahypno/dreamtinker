@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "item": "malum:block_of_malignant_pewter"
+  },
+  "result": {
+    "amount": 810,
+    "fluid": "dreamtinker:molten_malignant_pewter"
+  },
+  "temperature": 1500,
+  "time": 241
+}

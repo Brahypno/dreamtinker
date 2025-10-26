@@ -1,9 +1,0 @@
-{
-  "type": "tconstruct:casting_basin",
-  "cooling_time": 225,
-  "fluid": {
-    "amount": 810,
-    "tag": "dreamtinker:unstable_liquid_aether"
-  },
-  "result": "enigmaticlegacy:etherium_block"
-}

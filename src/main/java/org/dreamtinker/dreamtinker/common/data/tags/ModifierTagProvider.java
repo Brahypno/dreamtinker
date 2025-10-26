@@ -30,7 +30,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
                  the_wolf_wonder.getId(), the_wolf_was.getId(), as_one.getId(), Ids.with_tears, isolde.getId(),
                  mei.getId(), ender_dodge.getId(), explosive_hit.getId(), ranged_shoot.getId(), Ids.wither_body,
                  stone_heart.getId(), splendour_heart.getId(), Ids.why_i_cry, Ids.EULA, Ids.huge_ego, wait_until.getId(), Ids.FragileButBright,
-                 Ids.thundering_curse, Ids.homunculusLifeCurse)
+                 Ids.thundering_curse, Ids.homunculusLifeCurse, absorption_hit.getId(), absorption_defense.getId())
             .addOptional(cursed_ring_bound.getId(), evil_attack.getId(), Ids.malum_tyrving, eldritch_pan.getId(), malum_thirsty.getId(),
                          Ids.el_nemesis_curse, Ids.el_sorrow, Ids.el_eternal_binding);
         this.tag(DreamtinkerTagKeys.Modifiers.EL_CURSED_RELIEF)

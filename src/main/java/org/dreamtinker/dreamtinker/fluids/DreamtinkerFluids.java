@@ -15,8 +15,10 @@ import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
+import slimeknights.mantle.fluid.UnplaceableFluid;
 import slimeknights.mantle.registration.deferred.FluidDeferredRegister;
 import slimeknights.mantle.registration.object.FlowingFluidObject;
+import slimeknights.mantle.registration.object.FluidObject;
 import slimeknights.tconstruct.fluids.block.BurningLiquidBlock;
 
 import java.util.function.Function;
@@ -172,7 +174,6 @@ public class DreamtinkerFluids {
                                       living.addEffect(
                                               new MobEffectInstance(DreamtinkerEffects.unholy.get(), 1000));
                                   }
-
                               }
                           });
     public static final FlowingFluidObject<ForgeFlowingFluid> reversed_shadow =
@@ -203,5 +204,9 @@ public class DreamtinkerFluids {
     public static final FlowingFluidObject<ForgeFlowingFluid> liquid_amber =
             registerFluid(FLUIDS, "liquid_amber", 637, 100, 10, 7,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_YELLOW, 7), 0, 0) {});
+
+    public static final FluidObject<UnplaceableFluid> molten_desire =
+            FLUIDS.register("molten_desire").type(createFluidType(1600, 15, 200, -1000)).bucket().unplacable();
+    ;
 
 }

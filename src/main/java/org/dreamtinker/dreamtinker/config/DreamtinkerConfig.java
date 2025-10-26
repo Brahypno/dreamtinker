@@ -20,10 +20,10 @@ public class DreamtinkerConfig {
             builder.comment("Maximum Boost from Weapon transformation? default 10=1000%").defineInRange("UnderPlateBoostMax", 10.0, 1, 100);
     public static final ForgeConfigSpec.DoubleValue UnderPlateBoostArmorFactor =
             builder.comment("Armor factor for Weapon transformation, larger value means larger Boost")
-                   .defineInRange("UnderPlateBoostArmorFactor", 1.0, 0, 100);
+                   .defineInRange("UnderPlateBoostArmorFactor", 0.8, 0, 100);
     public static final ForgeConfigSpec.DoubleValue UnderPlateBoostToughnessFactor =
             builder.comment("ArmorToughness factor for Weapon transformation, larger value means larger Boost")
-                   .defineInRange("UnderPlateBoostToughnessFactor", 1.0, 0, 100);
+                   .defineInRange("UnderPlateBoostToughnessFactor", 0.8, 0, 100);
     public static final ForgeConfigSpec.ConfigValue<List<? extends Number>> TheSplendourHeart =
             builder.comment("The level range for The splendour heart. Must be exactly 5 between 0% and 100% otherwise omit!")
                    .defineList("splendour_heart", List.of(0.25d, 0.40d, 0.65d, .80d, 1.0d),
@@ -226,6 +226,11 @@ public class DreamtinkerConfig {
 
     public static final ForgeConfigSpec.DoubleValue homunculusGiftDiscount =
             builder.comment("Villager Merchant discount rate per level").defineInRange("homunculusGiftDiscount", 0.03, 0, 100);
+
+    public static final ForgeConfigSpec.DoubleValue AbsorptionDefenseRate =
+            builder.comment("How much extra damage boost/reduce when hit without/with Absorption").defineInRange("AbsorptionDefenseRate", 0.2, 0, 100);
+    public static final ForgeConfigSpec.DoubleValue AbsorptionHitRate =
+            builder.comment("How much extra damage boost/reduce when deal damage").defineInRange("AbsorptionHitRate", 0.3, 0, 100);
 
     public static final ForgeConfigSpec specs = builder.pop().build();
 

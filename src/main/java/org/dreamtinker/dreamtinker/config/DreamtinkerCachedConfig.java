@@ -53,6 +53,8 @@ public class DreamtinkerCachedConfig {
     public static final ConfigLazy<Double> FragileDodge = lazDoubleInSpec(DreamtinkerConfig.FragileDodge);
     public static final ConfigLazy<Integer> homunculusLifeCurseMaxEffectLevel = lazIntInSpec(DreamtinkerConfig.homunculusLifeCurseMaxEffectLevel);
     public static final ConfigLazy<Double> homunculusGiftDiscount = lazDoubleInSpec(DreamtinkerConfig.homunculusGiftDiscount);
+    public static final ConfigLazy<Double> AbsorptionDefenseRate = lazDoubleInSpec(DreamtinkerConfig.AbsorptionDefenseRate);
+    public static final ConfigLazy<Double> AbsorptionHitRate = lazDoubleInSpec(DreamtinkerConfig.AbsorptionHitRate);
 
     public static final ConfigLazy<java.util.List<Double>> TheSplendourHeart =
             lazDoubleList(DreamtinkerConfig.TheSplendourHeart,

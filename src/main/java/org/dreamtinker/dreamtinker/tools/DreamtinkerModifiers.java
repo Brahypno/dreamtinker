@@ -38,6 +38,7 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegac
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.evil.evil_attack;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.soul_aether.exiles_faulty;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum.*;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.absorption_defense;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.ender_dodge;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.soul_blessing;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.stone_heart;
@@ -88,9 +89,9 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<flamingMemory> flaming_memory = MODIFIERS.register("flaming_memory", flamingMemory::new);
     public static final StaticModifier<foundationWill> foundation_will = MODIFIERS.register("foundation_will", foundationWill::new);
     public static final StaticModifier<splendourHeart> splendour_heart = MODIFIERS.register("splendour_heart", splendourHeart::new);
-    //underplate
+    //underPlate
     public static final StaticModifier<weapon_transformation> weapon_transformation = MODIFIERS.register("weapon_transformation", weapon_transformation::new);
-    //echo shard
+    //echo Alloy
     public static final StaticModifier<echoed_attack> echoed_attack = MODIFIERS.register("echoed_attack", echoed_attack::new);
     public static final StaticModifier<echoed_defence> echoed_defence = MODIFIERS.register("echoed_defence", echoed_defence::new);
 
@@ -134,6 +135,9 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<deepSleepWithRoar> deep_sleep_with_roar = MODIFIERS.register("deep_sleep_with_roar", deepSleepWithRoar::new);
     public static final StaticModifier<wait_until> wait_until = MODIFIERS.register("wait_until", wait_until::new);
     public static final StaticModifier<anvil_hit> anvil_hit = MODIFIERS.register("anvil_hit", anvil_hit::new);
+    public static final StaticModifier<absorption_hit> absorption_hit = MODIFIERS.register("absorption_hit", absorption_hit::new);
+    public static final StaticModifier<absorption_defense> absorption_defense = MODIFIERS.register("absorption_defense", absorption_defense::new);
+
 
     //etherium
     public static final StaticModifier<astral_break> astral_break = EL_MODIFIERS.register("astral_break", astral_break::new);

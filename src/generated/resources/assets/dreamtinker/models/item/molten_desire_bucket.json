@@ -1,0 +1,6 @@
+{
+  "parent": "forge:item/bucket_drip",
+  "flip_gas": true,
+  "fluid": "dreamtinker:molten_desire",
+  "loader": "tconstruct:fluid_container"
+}

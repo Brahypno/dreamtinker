@@ -81,7 +81,7 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
         generateItemModel(DreamtinkerCommon.larimar, "materials");
         generateItemModel(DreamtinkerCommon.amber, "materials");
         generateItemModel(DreamtinkerCommon.despair_gem, "materials");
-        //generateItemModel(DreamtinkerCommon.desire_gem, "materials");
+        generateItemModel(DreamtinkerCommon.desire_gem, "materials");
         generateItemModel(DreamtinkerCommon.poisonousHomunculus, "materials");
         //generateBlockItemModel(object);
         generateBucketItemModel(DreamtinkerFluids.molten_echo_shard);

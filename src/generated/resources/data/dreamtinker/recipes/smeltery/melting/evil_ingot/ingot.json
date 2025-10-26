@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "item": "enigmaticlegacy:evil_ingot"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_evil"
+  },
+  "temperature": 1100,
+  "time": 208
+}

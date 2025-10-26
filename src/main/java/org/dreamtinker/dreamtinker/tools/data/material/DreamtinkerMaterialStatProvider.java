@@ -55,6 +55,10 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addMaterialStats(DreamtinkerMaterialIds.half_rotten_homunculus,
                          HandleMaterialStats.multipliers().durability(.7f).miningSpeed(1f).attackDamage(1f).attackSpeed(1.3f).build(),
                          StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.desire_gem,
+                         new HeadMaterialStats(600, 2f, Tiers.DIAMOND, 6f),
+                         HandleMaterialStats.multipliers().durability(1f).miningSpeed(.9f).attackDamage(.8f).attackSpeed(1.4f).build(),
+                         StatlessMaterialStats.BINDING);
 
         addELMeleeHarvest();
         addMalumMeleeHarvest();
@@ -62,11 +66,11 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
 
     private void addELMeleeHarvest() {
         addMaterialStats(DreamtinkerMaterialIds.etherium,
-                         new HeadMaterialStats(3000, 8f, EnigmaticMaterials.ETHERIUM, 5f),
+                         new HeadMaterialStats(3000, 8f, EnigmaticMaterials.ETHERIUM, 4f),
                          HandleMaterialStats.multipliers().durability(1.0f).miningSpeed(1.2f).attackDamage(1.3f).attackSpeed(1.4f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.nefarious,
-                         new HeadMaterialStats(3000, 4f, Tiers.NETHERITE, 8f),
+                         new HeadMaterialStats(3000, 4f, Tiers.NETHERITE, 7f),
                          HandleMaterialStats.multipliers().durability(1.2f).miningSpeed(1.4f).attackDamage(0.6f).attackSpeed(1.2f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.soul_etherium,
@@ -123,6 +127,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new GripMaterialStats(1.0f, 0.1f, 2.0f));
         addMaterialStats(DreamtinkerMaterialIds.half_rotten_homunculus,
                          StatlessMaterialStats.BOWSTRING);
+        addMaterialStats(DreamtinkerMaterialIds.desire_gem,
+                         new LimbMaterialStats(600, 0.7f, -0.3f, 0.3f),
+                         new GripMaterialStats(0.8f, 0.3f, 3.5f));
 
         addCompactRanged();
     }
@@ -172,6 +179,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                             StatlessMaterialStats.MAILLE);
         addMaterialStats(DreamtinkerMaterialIds.half_rotten_homunculus,
                          StatlessMaterialStats.MAILLE);
+        addArmorShieldStats(DreamtinkerMaterialIds.desire_gem,
+                            PlatingMaterialStats.builder().durabilityFactor(15).armor(4f, 6f, 4f, 3f).toughness(8).knockbackResistance(2f),
+                            StatlessMaterialStats.MAILLE);
 
         addArmorShieldStats(DreamtinkerMaterialIds.etherium,
                             PlatingMaterialStats.builder().durabilityFactor(132).armor(4f, 9f, 7f, 4f).toughness(4).knockbackResistance(0f),

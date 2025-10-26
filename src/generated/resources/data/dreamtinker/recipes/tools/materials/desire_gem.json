@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "dreamtinker:desire_gem"
+  },
+  "material": "dreamtinker:desire_gem",
+  "needed": 1,
+  "value": 1
+}

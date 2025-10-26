@@ -40,6 +40,8 @@
     "dreamtinker:fragile_but_bright",
     "dreamtinker:thundering_curse",
     "dreamtinker:homunculus_life_curse",
+    "dreamtinker:absorption_hit",
+    "dreamtinker:absorption_defense",
     {
       "id": "dreamtinker:cursed_ring_bound",
       "required": false

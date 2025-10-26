@@ -3,7 +3,7 @@
   "cooling_time": 221,
   "fluid": {
     "amount": 1000,
-    "tag": "dreamtinker:molten_crying_obsidian"
+    "fluid": "dreamtinker:molten_crying_obsidian"
   },
   "result": "minecraft:crying_obsidian"
 }

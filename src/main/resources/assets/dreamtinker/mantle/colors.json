@@ -83,7 +83,9 @@
     "fragile_but_bright": "#6D2901",
     "homunculus_life_curse": "#280000",
     "anvil_hit": "#360100",
-    "homunculus_gift": "#CF703E"
+    "homunculus_gift": "#CF703E",
+    "absorption_hit": "#1B83D",
+    "absorption_defense": "#7AB97B"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
@@ -105,7 +107,8 @@
     "larimar": "#B7A1C6",
     "malum_soul_rock": "#262438",
     "amber": "#FE9300",
-    "half_rotten_homunculus": "#550703"
+    "half_rotten_homunculus": "#550703",
+    "desire_gem": "#7AB97B"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873"

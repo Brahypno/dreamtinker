@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "item": "dreamtinker:amber"
+  },
+  "result": {
+    "amount": 100,
+    "fluid": "dreamtinker:liquid_amber"
+  },
+  "temperature": 337,
+  "time": 131
+}

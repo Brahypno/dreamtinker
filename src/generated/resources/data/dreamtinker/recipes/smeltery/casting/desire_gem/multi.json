@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/gem"
+  },
+  "cooling_time": 79,
+  "fluid": {
+    "amount": 100,
+    "fluid": "dreamtinker:molten_desire"
+  },
+  "result": "dreamtinker:desire_gem"
+}

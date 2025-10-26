@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "item": "minecraft:nether_star"
+  },
+  "cast_consumed": true,
+  "cooling_time": 250,
+  "fluid": {
+    "amount": 900,
+    "tag": "tconstruct:molten_diamond"
+  },
+  "result": "dreamtinker:desire_gem"
+}
