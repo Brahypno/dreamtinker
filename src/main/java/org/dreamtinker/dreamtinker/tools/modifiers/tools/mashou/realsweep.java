@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.tools.modifiers.tools.masu;
+package org.dreamtinker.dreamtinker.tools.modifiers.tools.mashou;
 
 
 import net.minecraft.core.BlockPos;
@@ -27,8 +27,6 @@ import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.NO_COO
 public class realsweep extends BattleModifier {
     public realsweep() {}
 
-    private int getLevel(IToolStackView tool) {return tool.getModifierLevel(this);}
-
     public void superSweep(IToolStackView tool, ModifierEntry entry, Player player, Level level, Entity entity) {
         if (!level.isClientSide && player.getAttackStrengthScale(0) > 0.8 && !tool.isBroken()){
             AttributeInstance reach = player.getAttribute(ForgeMod.ENTITY_REACH.get());
@@ -39,9 +37,8 @@ public class realsweep extends BattleModifier {
                 double rangeSq = range * range;
                 for (LivingEntity aoeTarget : level.getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(range, 0.25D, range))) {
                     if (aoeTarget != player && !player.isAlliedTo(aoeTarget) && !(aoeTarget instanceof ArmorStand stand && stand.isMarker()) &&
-                        player.distanceToSqr(aoeTarget) < rangeSq && aoeTarget != entity){
-                        ToolAttackUtil.attackEntity(tool, player, tool.getItem().equals(player.getMainHandItem().getItem()) ? InteractionHand.MAIN_HAND :
-                                                                  InteractionHand.OFF_HAND, aoeTarget, NO_COOLDOWN, 1 < getLevel(tool));
+                        player.distanceToSqr(aoeTarget) < rangeSq && aoeTarget != entity && entity != player.getRootVehicle()){
+                        ToolAttackUtil.attackEntity(tool, player, InteractionHand.MAIN_HAND, aoeTarget, NO_COOLDOWN, 1 == entry.getLevel());
                     }
                 }
                 level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, player.getSoundSource(), 1.0F, 1.0F);

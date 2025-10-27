@@ -4,7 +4,6 @@ import com.sammy.malum.registry.common.item.ItemTagRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ArmorItem;
@@ -13,7 +12,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
+import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
@@ -83,11 +82,18 @@ public class ItemTagProvider extends ItemTagsProvider {
         this.tag(ItemTags.ARROWS).add(DreamtinkerTools.tntarrow.get());
         addItemsTags(narcissus.asItem(), ItemTags.SMALL_FLOWERS, ItemTags.FLOWERS);
         this.tag(ItemTagRegistry.HIDDEN_UNTIL_BLACK_CRYSTAL).addOptional(malignant_gluttony.getId());
+        this.tag(Dreamtinker.forgeItemTag("gems/larimar"))
+            .add(larimar.get());
+        this.tag(Dreamtinker.forgeItemTag("ores/larimar"))
+            .add(larimarOre.asItem());
+        this.tag(Dreamtinker.forgeItemTag("gems/amber"))
+            .add(amber.get());
+        this.tag(Dreamtinker.forgeItemTag("ores/amber"))
+            .add(amberOre.asItem());
 
-    }
-
-    private static TagKey<Item> mcItemTag(String name) {
-        return TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("minecraft", name));
+        this.copy(Tags.Blocks.ORE_RATES_SINGULAR, Tags.Items.ORE_RATES_SINGULAR);
+        //this.copy(Tags.Blocks.ORES_IN_GROUND_NETHERRACK, Tags.Items.ORES_IN_GROUND_NETHERRACK);
+        this.copy(Tags.Blocks.ORE_RATES_SINGULAR, Tags.Items.ORE_RATES_SINGULAR);
     }
 
     private TagKey<Item> getArmorTag(ArmorItem.Type slotType) {

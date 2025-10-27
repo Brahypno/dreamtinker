@@ -2,14 +2,14 @@ package org.dreamtinker.dreamtinker.common.data.tags;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
+import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.jetbrains.annotations.NotNull;
@@ -35,16 +35,13 @@ public class BlockTagProvider extends BlockTagsProvider {
         this.tag(BlockTags.DRAGON_IMMUNE).add(DreamtinkerCommon.crying_obsidian_plane.get());
         tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_DIAMOND_TOOL, DreamtinkerCommon.crying_obsidian_plane);
         this.tag(DreamtinkerTagKeys.Blocks.drop_peach).add(Blocks.BIRCH_LEAVES);
-        addBlocksTags(DreamtinkerCommon.narcissus.get(), forgeBlockTag("mineable/shears"), TinkerTags.Blocks.SLIMY_FUNGUS_CAN_GROW_THROUGH,
+        addBlocksTags(DreamtinkerCommon.narcissus.get(), Dreamtinker.forgeBlockTag("mineable/shears"), TinkerTags.Blocks.SLIMY_FUNGUS_CAN_GROW_THROUGH,
                       TinkerTags.Blocks.MINABLE_WITH_DAGGER, FLOWERS, ENDERMAN_HOLDABLE, SMALL_FLOWERS, SWORD_EFFICIENT, TinkerTags.Blocks.MINABLE_WITH_SCYTHE,
-                      forgeBlockTag("mineable/sword"), TinkerTags.Blocks.MINABLE_WITH_SHEARS);
+                      Dreamtinker.forgeBlockTag("mineable/sword"), TinkerTags.Blocks.MINABLE_WITH_SHEARS);
         tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL, DreamtinkerCommon.larimarOre);
         tagBlocks(DreamtinkerTagKeys.Blocks.larimarOre, DreamtinkerCommon.larimarOre);
         tagBlocks(DreamtinkerTagKeys.Blocks.amberOre, DreamtinkerCommon.amberOre);
-    }
-
-    private static TagKey<Block> forgeBlockTag(String name) {
-        return TagKey.create(ForgeRegistries.BLOCKS.getRegistryKey(), new ResourceLocation("forge", name));
+        tagBlocks(Tags.Blocks.ORE_RATES_SINGULAR, DreamtinkerCommon.larimarOre, DreamtinkerCommon.amberOre);
     }
 
     @SafeVarargs

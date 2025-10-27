@@ -1,0 +1,14 @@
+{
+  "modifier_id": "dreamtinker:ender_slayer",
+  "text": [
+    {
+      "text": "Gain some abilities of Ender Slayer"
+    }
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable/melee",
+  "effects": [
+    "Requires 1 ability slot",
+    "Single level"
+  ]
+}

@@ -139,7 +139,8 @@ public final class DTJeiPlugin implements IModPlugin {
                 WorldRitualEntry.Trigger.FORTUNE_LOOTING,
                 null,
                 null,
-                anyOfBlockTags(Tags.Blocks.ORES_COPPER, Tags.Blocks.ORES_GOLD, forgeBlockTag("ores/lead"), forgeBlockTag("ores/silver")),
+                anyOfBlockTags(Tags.Blocks.ORES_COPPER, Tags.Blocks.ORES_GOLD, Dreamtinker.forgeBlockTag("ores/lead"),
+                               Dreamtinker.forgeBlockTag("ores/silver")),
                 new ItemStack(DreamtinkerCommon.raw_stibnite.get()),
                 null,
                 null,
@@ -191,14 +192,6 @@ public final class DTJeiPlugin implements IModPlugin {
                       .map(Ingredient::of)
                       .collect(Collectors.toList())
         );
-    }
-
-    private static TagKey<Item> forgeTag(String name) {
-        return TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("forge", name));
-    }
-
-    private static TagKey<Block> forgeBlockTag(String name) {
-        return TagKey.create(ForgeRegistries.BLOCKS.getRegistryKey(), new ResourceLocation("forge", name));
     }
 
     @SafeVarargs

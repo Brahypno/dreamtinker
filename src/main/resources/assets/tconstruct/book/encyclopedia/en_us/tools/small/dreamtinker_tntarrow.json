@@ -9,6 +9,6 @@
     "+3 Damage",
     "strong *Gravity*",
     "Deal damage to all within the range",
-    "one time use"
+    "one time use, unless with certain modifier"
   ]
 }

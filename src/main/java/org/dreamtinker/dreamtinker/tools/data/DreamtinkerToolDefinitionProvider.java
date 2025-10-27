@@ -17,6 +17,7 @@ import slimeknights.tconstruct.library.data.tinkering.AbstractToolDefinitionData
 import slimeknights.tconstruct.library.materials.RandomMaterial;
 import slimeknights.tconstruct.library.tools.SlotType;
 import slimeknights.tconstruct.library.tools.definition.module.ToolModule;
+import slimeknights.tconstruct.library.tools.definition.module.aoe.CircleAOEIterator;
 import slimeknights.tconstruct.library.tools.definition.module.build.*;
 import slimeknights.tconstruct.library.tools.definition.module.material.DefaultMaterialsModule;
 import slimeknights.tconstruct.library.tools.definition.module.material.PartStatsModule;
@@ -51,7 +52,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 IsEffectiveModule.tag(TinkerTags.Blocks.MINABLE_WITH_SWORD),
                 MiningSpeedModifierModule.blocks(7.5f, Blocks.COBWEB)
         };
-        define(DTtoolsDefinition.MASU)
+        define(DTtoolsDefinition.MASHOU)
                 // parts
                 .module(PartStatsModule.parts()
                                        .part(TinkerToolParts.broadBlade, 0.75f)
@@ -80,7 +81,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 // behavior
                 .module(ToolActionsModule.of(ToolActions.SWORD_DIG))
                 .module(swordHarvest)
-                .module(new CircleWeaponAttack(4));
+                .module(new CircleWeaponAttack(6));
         define(DTtoolsDefinition.TNTARROW)
                 // parts
                 .module(PartStatsModule.parts()
@@ -140,7 +141,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 // stats
                 .module(new SetStatsModule(StatsNBT.builder()
                                                    .set(ToolStats.ATTACK_DAMAGE, 2f)
-                                                   .set(ToolStats.ATTACK_SPEED, 1f)
+                                                   .set(ToolStats.ATTACK_SPEED, 2f)
                                                    .set(ToolStats.DRAW_SPEED, 2.5f).build()))
                 .module(new MultiplyStatsModule(MultiplierNBT.builder()
                                                              .set(ToolStats.DURABILITY, 0.8f).build()))
@@ -158,7 +159,10 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 .module(IsEffectiveModule.tag(BlockTags.MINEABLE_WITH_PICKAXE))
                 .module(new MiningSpeedModifierModule(1.5f, BlockPredicate.and(BlockPredicate.tag(BlockTags.MINEABLE_WITH_SHOVEL),
                                                                                BlockPredicate.set(Blocks.COBWEB))),
-                        MiningSpeedModifierModule.blocks(0.10f, Blocks.VINE, Blocks.GLOW_LICHEN), MiningSpeedModifierModule.tag(BlockTags.WOOL, 0.3f));
+                        MiningSpeedModifierModule.blocks(0.10f, Blocks.VINE, Blocks.GLOW_LICHEN), MiningSpeedModifierModule.tag(BlockTags.WOOL, 0.3f))
+                .module(new CircleAOEIterator(1, true))
+                .module(new CircleWeaponAttack(3));
+        ;
     }
 
     @Override

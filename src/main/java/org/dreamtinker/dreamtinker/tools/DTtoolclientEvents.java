@@ -23,7 +23,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.client.SlashOrbitRenderer;
 import org.dreamtinker.dreamtinker.tools.client.NarcissusFluidProjectileRenderer;
-import org.dreamtinker.dreamtinker.tools.items.TNTarrow.TNTarrow;
+import org.dreamtinker.dreamtinker.tools.items.TNTarrow.TNTArrow;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.ClientEventBase;
 import slimeknights.tconstruct.library.client.model.TinkerItemProperties;
@@ -45,12 +45,12 @@ public class DTtoolclientEvents extends ClientEventBase {
             Consumer<Item> brokenConsumer = TinkerItemProperties::registerBrokenProperty;
             DreamtinkerTools.underPlate.forEach(brokenConsumer);
             EntityRenderers.register(DreamtinkerModifiers.TNTARROW.get(),
-                                     (EntityRendererProvider.Context ctx) -> new EntityRenderer<TNTarrow.TNTArrowEntity>(ctx) {
+                                     (EntityRendererProvider.Context ctx) -> new EntityRenderer<TNTArrow.TNTArrowEntity>(ctx) {
                                          private final ItemRenderer itemRenderer = ctx.getItemRenderer();
 
                                          @Override
                                          public void render(
-                                                 TNTarrow.@NotNull TNTArrowEntity entity, float entityYaw, float partialTicks,
+                                                 TNTArrow.@NotNull TNTArrowEntity entity, float entityYaw, float partialTicks,
                                                  @NotNull PoseStack pose, @NotNull MultiBufferSource buffers, int packedLight) {
                                              ItemStack stack = entity.getToolStackSynced();
                                              if (stack.isEmpty())
@@ -86,7 +86,7 @@ public class DTtoolclientEvents extends ClientEventBase {
                                          }
 
                                          @Override
-                                         public @NotNull ResourceLocation getTextureLocation(@NotNull TNTarrow.TNTArrowEntity tntArrowEntity) {
+                                         public @NotNull ResourceLocation getTextureLocation(@NotNull TNTArrow.TNTArrowEntity tntArrowEntity) {
                                              return new ResourceLocation("minecraft", "textures/entity/projectiles/arrow.png");
                                          }
                                      });

@@ -130,6 +130,14 @@ public class Dreamtinker {
         return TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("minecraft", name));
     }
 
+    public static TagKey<Item> forgeItemTag(String name) {
+        return TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("forge", name));
+    }
+
+    public static TagKey<Block> forgeBlockTag(String name) {
+        return TagKey.create(ForgeRegistries.BLOCKS.getRegistryKey(), new ResourceLocation("forge", name));
+    }
+
     public void gatherData(final GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
         PackOutput output = generator.getPackOutput();

@@ -1,0 +1,14 @@
+{
+  "modifier_id": "dreamtinker:continuous_explode",
+  "text": [
+    {
+      "text": "伤害增加本强化等级倍数的伤害。可配置"
+    }
+  ],
+  "more_text_space": true,
+  "tool": "dreamtinker:tntarrow",
+  "effects": [
+    "第一级需要1能力槽，之后需要能力槽",
+    "最高3级"
+  ]
+}

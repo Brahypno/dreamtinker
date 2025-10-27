@@ -1,0 +1,14 @@
+{
+  "modifier_id": "dreamtinker:ender_slayer",
+  "text": [
+    {
+      "text": "获得一定末影之屠的能力"
+    }
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable/melee",
+  "effects": [
+    "每级需要1能力槽",
+    "最高1级"
+  ]
+}

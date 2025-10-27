@@ -46,7 +46,7 @@
       "type": "tconstruct:base_stats",
       "stats": {
         "tconstruct:attack_damage": 2.0,
-        "tconstruct:attack_speed": 1.0,
+        "tconstruct:attack_speed": 2.0,
         "tconstruct:draw_speed": 2.5
       }
     },
@@ -134,6 +134,15 @@
       "modifier": 0.3,
       "predicate_type": "mantle:tag",
       "tag": "minecraft:wool"
+    },
+    {
+      "type": "tconstruct:circle_aoe",
+      "3D": true,
+      "diameter": 1
+    },
+    {
+      "type": "tconstruct:circle_melee",
+      "diameter": 3.0
     }
   ]
 }

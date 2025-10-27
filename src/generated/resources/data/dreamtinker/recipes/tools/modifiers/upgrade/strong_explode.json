@@ -10,8 +10,7 @@
     }
   ],
   "level": {
-    "max": 4,
-    "min": 2
+    "max": 4
   },
   "result": "dreamtinker:strong_explode",
   "slots": {

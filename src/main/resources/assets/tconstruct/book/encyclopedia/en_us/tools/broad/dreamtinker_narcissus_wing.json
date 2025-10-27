@@ -1,0 +1,16 @@
+{
+  "tool": "dreamtinker:narcissus_wing",
+  "text": [
+  { "text": "Memory, Wish, Soul, Persona, Reason......This ritual blade that exists because of you.\nThis dream only meaning for you, before story ends" },
+  { "text": "Right Interaction of Narcissus wing could launch memory projectile;Left click with Tool Interaction pressed could mine massive blocks instantly", "paragraph": false }
+  ],
+  "properties": [
+    "+1 Damage",
+    "2 Attack Speed",
+    "2.5 Draw Speed",
+    "1.00 Arrow Velocity",
+    "0.75 Accuracy",
+    "80% Durability Multiplier",
+    "A set of Modifiers"
+  ]
+}

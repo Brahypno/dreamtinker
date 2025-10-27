@@ -1,16 +1,17 @@
 {
-  "type": "tconstruct:melting",
+  "type": "tconstruct:ore_melting",
   "byproducts": [
     {
-      "amount": 30,
+      "amount": 25,
       "fluid": "dreamtinker:molten_albedo_stibium"
     }
   ],
   "ingredient": {
     "item": "dreamtinker:nigrescence_antimony"
   },
+  "rate": "metal",
   "result": {
-    "amount": 100,
+    "amount": 75,
     "fluid": "dreamtinker:molten_nigrescence_antimony"
   },
   "temperature": 600,

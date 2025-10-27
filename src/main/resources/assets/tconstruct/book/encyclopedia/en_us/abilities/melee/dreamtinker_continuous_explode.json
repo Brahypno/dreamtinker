@@ -1,0 +1,14 @@
+{
+  "modifier_id": "dreamtinker:continuous_explode",
+  "text": [
+    {
+      "text": "Multiply tool damage based on modifier level;\n Configurable."
+    }
+  ],
+  "more_text_space": true,
+  "tool": "dreamtinker:tntarrow",
+  "effects": [
+    "Requires 1 ability slot on the first level. Then requires 1 upgrade slot",
+    "Triple Level"
+  ]
+}

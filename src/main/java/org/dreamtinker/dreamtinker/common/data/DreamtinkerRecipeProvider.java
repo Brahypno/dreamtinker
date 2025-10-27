@@ -255,13 +255,14 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.metallivorous_stibium_lupus.get()),
                                      DreamtinkerFluids.molten_lupi_antimony, FluidValues.INGOT, 2.0f)
                             .addByproduct(DreamtinkerFluids.molten_ascending_antimony.result(FluidValues.NUGGET))
-                            .save(consumer, location(folder + "metallivorous_stibium_lupus/foundry"));
+                            .save(consumer, location(folder + "foundry/metallivorous_stibium_lupus"));
         cast(DreamtinkerFluids.molten_lupi_antimony.get(), DreamtinkerCommon.metallivorous_stibium_lupus.get(), FluidValues.INGOT, consumer);
 
         MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.nigrescence_antimony.get()),
-                                     DreamtinkerFluids.molten_nigrescence_antimony, FluidValues.GEM, 2.0f)
-                            .addByproduct(DreamtinkerFluids.molten_albedo_stibium.result(FluidValues.NUGGET * 3))
-                            .save(consumer, location(folder + "nigrescence_antimony/foundry"));
+                                     DreamtinkerFluids.molten_nigrescence_antimony, 75, 2.0f)
+                            .addByproduct(DreamtinkerFluids.molten_albedo_stibium.result(25))
+                            .setOre(IMeltingContainer.OreRateType.METAL)
+                            .save(consumer, location(folder + "foundry/nigrescence_antimony"));
         cast(DreamtinkerFluids.molten_nigrescence_antimony.get(), DreamtinkerCommon.nigrescence_antimony.get(), FluidValues.GEM, consumer);
 
         meltCastBlock(DreamtinkerFluids.unstable_liquid_aether.get(), EnigmaticBlocks.ETHERIUM_BLOCK, FluidValues.METAL_BLOCK, consumer);
@@ -633,7 +634,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setTools(Ingredient.of(DreamtinkerTools.tntarrow.get()))
                              .addInput(TinkerGadgets.efln)
                              .addInput(Tags.Items.GUNPOWDER)
-                             .setLevelRange(2, 4)
+                             .setMaxLevel(4)
                              .setSlots(SlotType.UPGRADE, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.strong_explode, upgradeSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.strong_explode, upgradeFolder));

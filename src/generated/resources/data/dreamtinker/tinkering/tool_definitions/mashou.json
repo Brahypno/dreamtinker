@@ -113,7 +113,7 @@
     },
     {
       "type": "tconstruct:circle_melee",
-      "diameter": 4.0
+      "diameter": 6.0
     }
   ]
 }

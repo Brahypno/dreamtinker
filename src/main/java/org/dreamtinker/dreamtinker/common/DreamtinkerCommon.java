@@ -54,8 +54,7 @@ public class DreamtinkerCommon extends DreamtinkerModule {
     public static final RegistryObject<Item> metallivorous_stibium_lupus =
             ITEMS.register("metallivorous_stibium_lupus", () -> new Item(ITEM_PROPS.rarity(Rarity.RARE)));
     public static final RegistryObject<Item> regulus = ITEMS.register("star_regulus", () -> new star_regulus(ITEM_PROPS.rarity(Rarity.EPIC)));
-    public static final RegistryObject<Item> void_pearl = ITEMS.register("void_pearl", () -> new void_pearl((ITEM_PROPS.rarity(
-            Rarity.UNCOMMON)).stacksTo(16)));
+
 
     public static final RegistryObject<Item> twist_obsidian_pane =
             ITEMS.register("twist_obsidian_pane", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
@@ -151,6 +150,8 @@ public class DreamtinkerCommon extends DreamtinkerModule {
             super.appendHoverText(stack, level, tooltip, flag);
         }
     });
+    public static final RegistryObject<Item> void_pearl = ITEMS.register("void_pearl", () -> new void_pearl((ITEM_PROPS.rarity(
+            Rarity.UNCOMMON)).stacksTo(16)));
 
     public static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         output.accept(echo_alloy.get());

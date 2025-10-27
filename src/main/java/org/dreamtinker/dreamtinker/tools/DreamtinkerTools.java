@@ -25,7 +25,7 @@ import org.dreamtinker.dreamtinker.tools.items.DTtoolsDefinition;
 import org.dreamtinker.dreamtinker.tools.items.DtTiers;
 import org.dreamtinker.dreamtinker.tools.items.MaShuo.MaShou;
 import org.dreamtinker.dreamtinker.tools.items.NarcissusWing.NarcissusWing;
-import org.dreamtinker.dreamtinker.tools.items.TNTarrow.TNTarrow;
+import org.dreamtinker.dreamtinker.tools.items.TNTarrow.TNTArrow;
 import org.dreamtinker.dreamtinker.tools.items.UnderArmor.UnderArmorItem;
 import slimeknights.mantle.registration.object.EnumObject;
 import slimeknights.mantle.registration.object.ItemObject;
@@ -53,8 +53,8 @@ public class DreamtinkerTools extends DreamtinkerModule {
                                                                          .withTabsBefore(DreamtinkerCommon.ORE.getId()).withSearchBar().build());
 
     public static final ItemObject<ModifiableItem> tntarrow =
-            MODI_TOOLS.register("tntarrow", () -> new TNTarrow((new Item.Properties()).stacksTo(4), DTtoolsDefinition.TNTARROW, 4));
-    public static final ItemObject<ModifiableItem> mashou = MODI_TOOLS.register("mashou", () -> new MaShou(UNSTACKABLE_PROPS, DTtoolsDefinition.MASU));
+            MODI_TOOLS.register("tntarrow", () -> new TNTArrow((new Item.Properties()).stacksTo(4), DTtoolsDefinition.TNTARROW, 4));
+    public static final ItemObject<ModifiableItem> mashou = MODI_TOOLS.register("mashou", () -> new MaShou(UNSTACKABLE_PROPS, DTtoolsDefinition.MASHOU));
     public static final ItemObject<ModifiableItem> narcissus_wing =
             MODI_TOOLS.register("narcissus_wing", () -> new NarcissusWing(UNSTACKABLE_PROPS.rarity(Rarity.EPIC), DTtoolsDefinition.narcissus_wing));
     public static final EnumObject<ArmorItem.Type, UnderArmorItem> underPlate =

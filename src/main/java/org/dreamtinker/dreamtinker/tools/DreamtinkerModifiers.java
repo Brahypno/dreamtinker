@@ -21,10 +21,10 @@ import org.dreamtinker.dreamtinker.tools.data.DreamtinkerFluidEffectProvider;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerModifierProvider;
 import org.dreamtinker.dreamtinker.tools.entity.NarcissusFluidProjectile;
 import org.dreamtinker.dreamtinker.tools.entity.SlashOrbitEntity;
-import org.dreamtinker.dreamtinker.tools.items.TNTarrow.TNTarrow;
-import org.dreamtinker.dreamtinker.tools.modifiers.tools.masu.realsweep;
-import org.dreamtinker.dreamtinker.tools.modifiers.tools.masu.silvernamebee;
-import org.dreamtinker.dreamtinker.tools.modifiers.tools.masu.strong_heavy;
+import org.dreamtinker.dreamtinker.tools.items.TNTarrow.TNTArrow;
+import org.dreamtinker.dreamtinker.tools.modifiers.tools.mashou.realsweep;
+import org.dreamtinker.dreamtinker.tools.modifiers.tools.mashou.silvernamebee;
+import org.dreamtinker.dreamtinker.tools.modifiers.tools.mashou.strong_heavy;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.flamingMemory;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.foundationWill;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.memoryBase;
@@ -235,9 +235,9 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     }
 
 
-    public static final RegistryObject<EntityType<TNTarrow.TNTArrowEntity>> TNTARROW =
+    public static final RegistryObject<EntityType<TNTArrow.TNTArrowEntity>> TNTARROW =
             ENTITIES.register("tnt_arrow",
-                              () -> EntityType.Builder.<TNTarrow.TNTArrowEntity>of(TNTarrow.TNTArrowEntity::new, MobCategory.MISC)
+                              () -> EntityType.Builder.<TNTArrow.TNTArrowEntity>of(TNTArrow.TNTArrowEntity::new, MobCategory.MISC)
                                                       .sized(0.5F, 0.5F) // 确保箭矢有合适的 hitbox
                                                       .clientTrackingRange(4) // 追踪范围，避免箭矢丢失
                                                       .updateInterval(20)

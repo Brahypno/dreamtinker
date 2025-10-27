@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.tools.modifiers.tools.masu;
+package org.dreamtinker.dreamtinker.tools.modifiers.tools.mashou;
 
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
