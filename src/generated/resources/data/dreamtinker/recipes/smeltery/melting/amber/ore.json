@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:ore_melting",
+  "ingredient": {
+    "item": "dreamtinker:amber_ore"
+  },
+  "rate": "gem",
+  "result": {
+    "amount": 100,
+    "fluid": "dreamtinker:liquid_amber"
+  },
+  "temperature": 337,
+  "time": 44
+}

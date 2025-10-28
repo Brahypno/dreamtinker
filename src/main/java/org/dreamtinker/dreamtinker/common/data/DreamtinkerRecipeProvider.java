@@ -253,14 +253,15 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         meltCast(DreamtinkerFluids.molten_echo_alloy.get(), DreamtinkerCommon.echo_alloy.get(), FluidValues.GEM, consumer);
 
         MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.metallivorous_stibium_lupus.get()),
-                                     DreamtinkerFluids.molten_lupi_antimony, FluidValues.INGOT, 2.0f)
-                            .addByproduct(DreamtinkerFluids.molten_ascending_antimony.result(FluidValues.NUGGET))
+                                     DreamtinkerFluids.molten_lupi_antimony, FluidValues.INGOT / 2, 2.0f)
+                            .addByproduct(DreamtinkerFluids.molten_ascending_antimony.result(FluidValues.NUGGET * 3))
+                            .setOre(IMeltingContainer.OreRateType.GEM)
                             .save(consumer, location(folder + "foundry/metallivorous_stibium_lupus"));
         cast(DreamtinkerFluids.molten_lupi_antimony.get(), DreamtinkerCommon.metallivorous_stibium_lupus.get(), FluidValues.INGOT, consumer);
 
         MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.nigrescence_antimony.get()),
                                      DreamtinkerFluids.molten_nigrescence_antimony, 75, 2.0f)
-                            .addByproduct(DreamtinkerFluids.molten_albedo_stibium.result(25))
+                            .addByproduct(DreamtinkerFluids.molten_albedo_stibium.result(75))
                             .setOre(IMeltingContainer.OreRateType.METAL)
                             .save(consumer, location(folder + "foundry/nigrescence_antimony"));
         cast(DreamtinkerFluids.molten_nigrescence_antimony.get(), DreamtinkerCommon.nigrescence_antimony.get(), FluidValues.GEM, consumer);
@@ -351,6 +352,9 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         meltCast(DreamtinkerFluids.molten_malignant_gluttony.get(), DreamtinkerCommon.malignant_gluttony.get(), FluidValues.INGOT, consumer);
 
         meltCast(DreamtinkerFluids.liquid_amber.get(), DreamtinkerCommon.amber.get(), FluidValues.GEM, consumer);
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.amberOre), DreamtinkerFluids.liquid_amber.get(), FluidValues.GEM, 1.0f)
+                            .setOre(IMeltingContainer.OreRateType.GEM)
+                            .save(consumer, location(folder + "amber/ore"));
 
         meltCast(DreamtinkerFluids.molten_desire.get(), DreamtinkerCommon.desire_gem.get(), FluidValues.GEM, consumer);
     }
