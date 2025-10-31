@@ -126,7 +126,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                           .addCatalyst(FluidIngredient.of(DreamtinkerFluids.molten_lupi_antimony.getTag(), FluidValues.INGOT))
                           .addInput(TinkerTags.Fluids.METAL_TOOLTIPS, FluidValues.INGOT)
                           .save(consumer, location("currus_triumphalis_antimonii/lupi_to_albedo"));
-        AlloyRecipeBuilder.alloy(FluidOutput.fromStack(new FluidStack(DreamtinkerFluids.liquid_smoky_antimony.get(), FluidValues.INGOT * 2)), 6000)
+        AlloyRecipeBuilder.alloy(FluidOutput.fromStack(new FluidStack(DreamtinkerFluids.liquid_smoky_antimony.get(), FluidValues.INGOT * 2)), 4320)
                           .addInput(DreamtinkerFluids.molten_ascending_antimony.getTag(), FluidValues.INGOT)
                           .addInput(TinkerFluids.liquidSoul.getTag(), FluidValues.GLASS_BLOCK)
                           .save(consumer, location("currus_triumphalis_antimonii/ascending_to_smoky"));
