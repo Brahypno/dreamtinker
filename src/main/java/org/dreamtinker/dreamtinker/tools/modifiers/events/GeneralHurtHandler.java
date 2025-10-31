@@ -49,7 +49,7 @@ public class GeneralHurtHandler {
         RegistryAccess registryAccess = world.registryAccess();
         RandomSource rds = world.random;
 
-        if (null != dmg.getEntity() && dmg.getDirectEntity() instanceof Projectile)
+        if (null != dmg.getEntity() && (dmg.getDirectEntity() instanceof Projectile || dmg.is(IS_PROJECTILE)))
             for (ItemStack itemStack : dmg.getEntity().getArmorSlots()) {
                 if (itemStack.is(Tags.Items.ARMORS_LEGGINGS) && itemStack.is(TinkerTags.Items.LEGGINGS)){
                     ToolStack toolStack = ToolStack.from(itemStack);

@@ -1,5 +1,6 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -9,15 +10,20 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.Tags;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.jetbrains.annotations.NotNull;
+import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
+import slimeknights.tconstruct.shared.TinkerAttributes;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.function.BiConsumer;
@@ -26,6 +32,22 @@ import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.*;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.AsOneA;
 
 public class weapon_transformation extends BattleModifier {
+    @Override
+    public int getPriority() {
+        return -1000;
+    }
+
+    @Override
+    public void addTooltip(IToolStackView tool, @NotNull ModifierEntry modifier, @javax.annotation.Nullable Player player, List<Component> tooltip, TooltipKey tooltipKey, TooltipFlag tooltipFlag) {
+        if (tool.hasTag(Tags.Items.ARMORS_LEGGINGS)){
+            float armor = tool.getStats().get(ToolStats.ARMOR);
+            float toughness = tool.getStats().get(ToolStats.ARMOR_TOUGHNESS);
+            float multi = valueExpSoftCap(armor, toughness);
+            tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.weapon_transformation.legs").append(String.format("%.2f", multi * 100) + "%")
+                                 .withStyle(this.getDisplayName().getStyle()));
+        }
+    }
+
 
     @Override
     public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
@@ -33,44 +55,66 @@ public class weapon_transformation extends BattleModifier {
             return;
         float armor = tool.getStats().get(ToolStats.ARMOR);
         float toughness = tool.getStats().get(ToolStats.ARMOR_TOUGHNESS);
-        float muti = valueExpSoftCap(armor, toughness);
+        float multi = valueExpSoftCap(armor, toughness);
         if (modifier.getLevel() > 0){
-            String tool_attribute_uuid = "facdf7e8-4b20-4e2d-9aba-5c1b408e7c9d";
             switch (slot) {
-                case CHEST -> consumer.accept(Attributes.LUCK,
-                                              new AttributeModifier(UUID.fromString(tool_attribute_uuid),
-                                                                    Attributes.LUCK.getDescriptionId(),
-                                                                    muti,
-                                                                    AttributeModifier.Operation.MULTIPLY_TOTAL));
+                case CHEST -> {
+                    consumer.accept(Attributes.LUCK,
+                                    new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
+                                                          Attributes.LUCK.getDescriptionId(),
+                                                          multi,
+                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
+                    consumer.accept(TinkerAttributes.EXPERIENCE_MULTIPLIER.get(),
+                                    new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
+                                                          TinkerAttributes.EXPERIENCE_MULTIPLIER.get().getDescriptionId(),
+                                                          multi / 2,
+                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
+                    consumer.accept(TinkerAttributes.BAD_EFFECT_DURATION.get(),
+                                    new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
+                                                          TinkerAttributes.BAD_EFFECT_DURATION.get().getDescriptionId(),
+                                                          Math.min(0.4, multi / 4),
+                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
+                }
+
                 case LEGS -> {//see hurt event
+                    consumer.accept(TinkerAttributes.GOOD_EFFECT_DURATION.get(),
+                                    new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
+                                                          TinkerAttributes.BAD_EFFECT_DURATION.get().getDescriptionId(),
+                                                          -Math.min(0.35, multi / 4),
+                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
                 }
                 case FEET -> {
                     consumer.accept(Attributes.ATTACK_DAMAGE,
-                                    new AttributeModifier(UUID.fromString(tool_attribute_uuid),
+                                    new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
                                                           Attributes.ATTACK_DAMAGE.getDescriptionId(),
-                                                          muti,
+                                                          multi,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                     consumer.accept(Attributes.ATTACK_SPEED,
-                                    new AttributeModifier(UUID.fromString(tool_attribute_uuid),
+                                    new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
                                                           Attributes.ATTACK_SPEED.getDescriptionId(),
-                                                          muti,
+                                                          multi,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                     consumer.accept(Attributes.MOVEMENT_SPEED,
-                                    new AttributeModifier(UUID.fromString(tool_attribute_uuid),
+                                    new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
                                                           Attributes.MOVEMENT_SPEED.getDescriptionId(),
-                                                          -Math.min(muti, 0.15),
+                                                          -Math.min(multi, 0.15),
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                 }
                 case HEAD -> {
                     consumer.accept(Attributes.MAX_HEALTH,
-                                    new AttributeModifier(UUID.fromString(tool_attribute_uuid),
+                                    new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
                                                           Attributes.MAX_HEALTH.getDescriptionId(),
-                                                          muti / 2,
+                                                          multi,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                     consumer.accept(Attributes.KNOCKBACK_RESISTANCE,
-                                    new AttributeModifier(UUID.fromString(tool_attribute_uuid),
+                                    new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
                                                           Attributes.KNOCKBACK_RESISTANCE.getDescriptionId(),
-                                                          -muti,
+                                                          -multi,
+                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
+                    consumer.accept(ForgeMod.ENTITY_GRAVITY.get(),
+                                    new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
+                                                          ForgeMod.ENTITY_GRAVITY.get().getDescriptionId(),
+                                                          Math.min(.25f, multi),
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                 }
                 default -> {}
