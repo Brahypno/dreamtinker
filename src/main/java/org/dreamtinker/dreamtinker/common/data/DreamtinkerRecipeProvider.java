@@ -154,6 +154,13 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                           .addInput(DreamtinkerTagKeys.Fluids.molten_echo_shard, FluidValues.GEM)
                           .addInput(TinkerFluids.moltenEnder.getTag(), FluidValues.SLIMEBALL * 2)
                           .save(consumer, location("molten_echo_alloy"));
+        AlloyRecipeBuilder.alloy(DreamtinkerFluids.despair_essence, FluidValues.GEM)
+                          .addInput(DreamtinkerTagKeys.Fluids.molten_crying_obsidian, FluidValues.GLASS_BLOCK * 3)
+                          .addInput(DreamtinkerFluids.liquid_amber.getTag(), FluidValues.GEM * 4)
+                          .addInput(DreamtinkerFluids.molten_desire.get(), FluidValues.GEM * 9)
+                          .addInput(DreamtinkerFluids.reversed_shadow.getTag(), FluidValues.SLIMEBALL * 7)
+                          .addInput(DreamtinkerFluids.molten_lupi_antimony.getTag(), FluidValues.INGOT * 2)
+                          .save(consumer, location("despair_essence"));
     }
 
     private void addCastingRecipes(Consumer<FinishedRecipe> consumer) {
@@ -357,6 +364,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                             .save(consumer, location(folder + "amber/ore"));
 
         meltCast(DreamtinkerFluids.molten_desire.get(), DreamtinkerCommon.desire_gem.get(), FluidValues.GEM, consumer);
+
+        meltCast(DreamtinkerFluids.despair_essence.get(), DreamtinkerCommon.despair_gem.get(), FluidValues.GEM, consumer);
     }
 
     String materials_folder = "tools/materials/";
@@ -400,6 +409,11 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                materials_folder);
         materialRecipe(consumer, DreamtinkerMaterialIds.desire_gem, Ingredient.of(DreamtinkerCommon.desire_gem.get()), 1, 1,
                        materials_folder + "desire_gem");
+
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.despair_gem, DreamtinkerFluids.despair_essence, FluidValues.GEM,
+                               materials_folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.despair_gem, Ingredient.of(DreamtinkerCommon.despair_gem.get()), 1, 1,
+                       materials_folder + "despair_gem");
 
     }
 

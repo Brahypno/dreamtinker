@@ -12,6 +12,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.PacketDistributor;
+import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.network.Dnetwork;
 import org.dreamtinker.dreamtinker.network.PerfectOverlayMsg;
@@ -29,8 +30,8 @@ import static org.dreamtinker.dreamtinker.Dreamtinker.MODID;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.IsoLdeEaseTime;
 
 public class isolde extends BattleModifier {
-    private static final ResourceLocation TAG_ISOLDE_TIME = new ResourceLocation(MODID, "isolde_time");
-    private static final ResourceLocation TAG_ISOLDE = new ResourceLocation(MODID, "isolde");
+    private static final ResourceLocation TAG_ISOLDE_TIME = Dreamtinker.getLocation("isolde_time");
+    private static final ResourceLocation TAG_ISOLDE = Dreamtinker.getLocation("isolde");
 
     @Override
     public Component onModifierRemoved(IToolStackView tool, Modifier modifier) {

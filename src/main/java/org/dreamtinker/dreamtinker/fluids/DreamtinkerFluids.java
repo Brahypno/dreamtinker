@@ -207,6 +207,10 @@ public class DreamtinkerFluids {
 
     public static final FluidObject<UnplaceableFluid> molten_desire =
             FLUIDS.register("molten_desire").type(createFluidType(1600, 15, 200, -1000)).bucket().unplacable();
-    ;
+
+    public static final FlowingFluidObject<ForgeFlowingFluid> despair_essence =
+            registerFluid(FLUIDS, "despair_essence", 4637, 100, 1000000, 0,
+                          supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_BLACK, 0), 0, 0) {});
+
 
 }

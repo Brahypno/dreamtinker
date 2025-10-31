@@ -1,0 +1,32 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "dreamtinker:despair_mist"
+    },
+    {
+      "level": 1,
+      "name": "dreamtinker:despair_rain"
+    },
+    {
+      "level": 1,
+      "name": "dreamtinker:despair_wind"
+    }
+  ],
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "dreamtinker:ophelia"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:requiem"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:peaches_in_memory"
+      }
+    ]
+  }
+}

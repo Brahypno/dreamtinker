@@ -85,7 +85,13 @@
     "anvil_hit": "#360100",
     "homunculus_gift": "#CF703E",
     "absorption_hit": "#1B83D",
-    "absorption_defense": "#7AB97B"
+    "absorption_defense": "#7AB97B",
+    "despair_mist": "#430007",
+    "despair_rain": "#690A12",
+    "despair_wind": "#8B1526",
+    "ophelia": "#C24E5C",
+    "requiem": "#A92E3F",
+    "peaches_in_memory": "#AFEFB1"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
@@ -108,7 +114,8 @@
     "malum_soul_rock": "#262438",
     "amber": "#FE9300",
     "half_rotten_homunculus": "#550703",
-    "desire_gem": "#7AB97B"
+    "desire_gem": "#7AB97B",
+    "despair_gem": "#6D051A"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873"

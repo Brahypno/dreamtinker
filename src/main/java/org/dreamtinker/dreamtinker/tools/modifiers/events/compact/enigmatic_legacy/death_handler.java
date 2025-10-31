@@ -23,7 +23,7 @@ public class death_handler {
     public static void onLivingDeath(LivingDeathEvent event) {
         LivingEntity entity = event.getEntity();
         if (entity instanceof Player player && SuperpositionHandler.isTheWorthyOne(player))
-            if (3 <= DTModifierCheck.getMainhandModifierlevel(player, DreamtinkerModifiers.weapon_books.getId()))
+            if (3 <= DTModifierCheck.getMainhandModifierLevel(player, DreamtinkerModifiers.weapon_books.getId()))
                 if (Math.random() <= TheInfinitum.undeadProbability.getValue().asMultiplier(false)){
                     event.setCanceled(true);
                     player.setHealth(1);
@@ -31,7 +31,7 @@ public class death_handler {
         if (event.getSource().getDirectEntity() instanceof ServerPlayer attacker){
             ItemStack weapon = attacker.getMainHandItem();
 
-            if (0 < DTModifierCheck.getMainhandModifierlevel(attacker, DreamtinkerModifiers.eldritch_pan.getId())){
+            if (0 < DTModifierCheck.getMainhandModifierLevel(attacker, DreamtinkerModifiers.eldritch_pan.getId())){
                 ResourceLocation killedType = ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType());
 
                 if (EldritchPan.addKillIfNotPresent(weapon, killedType)){

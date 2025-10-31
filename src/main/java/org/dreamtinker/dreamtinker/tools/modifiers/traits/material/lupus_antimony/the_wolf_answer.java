@@ -17,7 +17,7 @@ import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 
 import javax.annotation.Nullable;
 
-import static org.dreamtinker.dreamtinker.utils.DTModifierCheck.getMainhandModifierlevel;
+import static org.dreamtinker.dreamtinker.utils.DTModifierCheck.getMainhandModifierLevel;
 
 public class the_wolf_answer extends BattleModifier {
 
@@ -54,13 +54,9 @@ public class the_wolf_answer extends BattleModifier {
     }
 
     public void LivingAttackEvent(LivingAttackEvent event) {
-        if (event.getSource()
-                 .getEntity() instanceof LivingEntity entity){
-            if (0 < getMainhandModifierlevel(entity,
-                                             this.getId())){
-                event.getEntity().invulnerableTime = 0;
-                //event.getSource().bypassArmor().bypassMagic().bypassEnchantments().bypassInvul();
-            }
+        if (event.getSource().getEntity() instanceof LivingEntity entity){
+            if (0 < getMainhandModifierLevel(entity, this.getId()))
+                event.getEntity().invulnerableTime = 0;//event.getSource().bypassArmor().bypassMagic().bypassEnchantments().bypassInvul();
         }
     }
 
@@ -68,10 +64,8 @@ public class the_wolf_answer extends BattleModifier {
     public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
         int types = 0;
         if (null != context.getLivingTarget())
-            types += context.getLivingTarget()
-                            .getActiveEffects().size();
-        return damage * Math.max(1,
-                                 types);
+            types += context.getLivingTarget().getActiveEffects().size();
+        return damage * Math.max(1, types);
     }
 
     @Override

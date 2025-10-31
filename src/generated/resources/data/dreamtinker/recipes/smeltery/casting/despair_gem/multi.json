@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/gem"
+  },
+  "cooling_time": 147,
+  "fluid": {
+    "amount": 100,
+    "fluid": "dreamtinker:despair_essence"
+  },
+  "result": "dreamtinker:despair_gem"
+}

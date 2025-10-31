@@ -315,7 +315,7 @@
   "modifier.dreamtinker.fragile_but_bright.description": "每等级减少护甲和韧性，但获得一定的闪避率",
   "modifier.dreamtinker.homunculus_life_curse": "瓶中人之咒",
   "modifier.dreamtinker.homunculus_life_curse.flavor": "为何其他有终者尚未结束",
-  "modifier.dreamtinker.homunculus_life_curse.description": "生命越低造成的伤害越多。当剩余生命比例小于强化等级+1分之一时伤害降低。最多生效4级，可配置。",
+  "modifier.dreamtinker.homunculus_life_curse.description": "生命越低造成的伤害越多。当已失去生命比例大于强化等级+1分之一时伤害增加。最多生效4级，可配置。",
   "modifier.dreamtinker.anvil_hit": "将要坠下",
   "modifier.dreamtinker.anvil_hit.flavor": "向你致意",
   "modifier.dreamtinker.anvil_hit.description": "当攻击敌方时，召唤铁砧",
@@ -328,6 +328,24 @@
   "modifier.dreamtinker.absorption_defense": "踏上前来",
   "modifier.dreamtinker.absorption_defense.flavor": "屈服于我，或证明你比我做的更好",
   "modifier.dreamtinker.absorption_defense.description": "当有黄心时减少受到伤，反之增加受到的伤害；黄心会被击破时对攻击者施加力量；可配置",
+  "modifier.dreamtinker.despair_mist": "绝望如雾",
+  "modifier.dreamtinker.despair_mist.flavor": "无意义，无价值，虚无，绝望",
+  "modifier.dreamtinker.despair_mist.description": "左击时将攻击范围内实体的负面效果传播给范围内所有实体并清除其正面效果；当传染、清除的数量足够时，对范围内群体造成伤害",
+  "modifier.dreamtinker.despair_rain": "绝望如雨",
+  "modifier.dreamtinker.despair_rain.flavor": "清澈，透明",
+  "modifier.dreamtinker.despair_rain.description": "减半非暴击伤害，获得500%暴击伤害加成并使血量固定为1；提升等级会提升加成数值",
+  "modifier.dreamtinker.despair_wind": "绝望如风",
+  "modifier.dreamtinker.despair_wind.flavor": "有些痛苦，是无法避免的",
+  "modifier.dreamtinker.despair_wind.description": "当攻击时，清除黄心并掉落装备，且清除护甲；并把伤害转化为绝望伤害。",
+  "modifier.dreamtinker.ophelia": "已死美人",
+  "modifier.dreamtinker.ophelia.flavor": "犹自袅袅婷婷",
+  "modifier.dreamtinker.ophelia.description": "将受到的伤害变成3倍，但转化为2*生效等级+1数量的不同类型的伤害。",
+  "modifier.dreamtinker.requiem": "镇魂曲",
+  "modifier.dreamtinker.requiem.flavor": "镇魂曲静静的流淌着",
+  "modifier.dreamtinker.requiem.description": "每等级减少负面效果数量/4的伤害，并增加对无来源伤害的保护",
+  "modifier.dreamtinker.peaches_in_memory": "记忆中的你",
+  "modifier.dreamtinker.peaches_in_memory.flavor": "汇聚了生命的喜悦与甜美，也同样脆弱易逝",
+  "modifier.dreamtinker.peaches_in_memory.description": "增加阅历和负面效果持续；减少耐久消耗",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
@@ -464,6 +482,9 @@
   "material.dreamtinker.half_rotten_homunculus.flavor": "由最恶劣的玩笑而诞生的诅咒之物",
   "material.dreamtinker.desire_gem": "渴望宝石",
   "material.dreamtinker.desire_gem.flavor": "与星同曜",
+  "material.dreamtinker.despair_gem": "绝望宝石",
+  "material.dreamtinker.despair_gem.flavor": "在渴望在泪水中淹没，时间被狼吞没……剩下的唯有绝望",
+
 
   "fluid_type.dreamtinker.molten_echo_alloy": "熔融回响合金",
   "fluid.dreamtinker.molten_echo_alloy": "熔融回响合金",
@@ -540,6 +561,9 @@
   "fluid_type.dreamtinker.molten_desire": "熔融渴望",
   "fluid.dreamtinker.molten_desire": "熔融渴望",
   "fluid.dreamtinker.molten_desire.fluid_effect": "熔融渴望",
+  "fluid_type.dreamtinker.despair_essence": "绝望元质",
+  "fluid.dreamtinker.despair_essence": "绝望元质",
+  "fluid.dreamtinker.despair_essence.fluid_effect": "绝望元质",
 
   "item.dreamtinker.molten_echo_shard_bucket": "熔融回响碎片桶",
   "item.dreamtinker.molten_nigrescence_antimony_bucket": "融化黑锑桶",
@@ -565,6 +589,7 @@
   "item.dreamtinker.liquid_arcana_juice_bucket": "奥术汁桶",
   "item.dreamtinker.liquid_amber_bucket": "时流浆桶",
   "item.dreamtinker.molten_desire_bucket": "熔融渴望桶",
+  "item.dreamtinker.despair_essence_bucket": "绝望元质桶",
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "流血",
   "fluid_effect.tconstruct.damage.explosion": "爆炸",
@@ -600,5 +625,7 @@
   "jei.dreamtinker.category.hit_entity": "触发：特定情况下击中实体",
   "jei.dreamtinker.celestial_type.sun": "白日",
   "jei.dreamtinker.celestial_type.moon_phase": "夜与月相: ",
-  "jei.dreamtinker.chance": "概率"
+  "jei.dreamtinker.chance": "概率",
+
+  "death.attack.dreamtinker.null_void": "被虚无吞没"
 }

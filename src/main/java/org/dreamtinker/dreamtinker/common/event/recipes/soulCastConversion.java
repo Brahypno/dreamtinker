@@ -106,7 +106,6 @@ public class soulCastConversion {
                             p.x + RADIUS, p.y + RADIUS, p.z + RADIUS);
 
         // 扫描范围内的掉落物实体，筛选出“羽毛”
-        System.out.println(child.position());
         for (ItemEntity ie : level.getEntitiesOfClass(ItemEntity.class, box,
                                                       e -> e.isAlive() && !e.getItem().isEmpty() && e.getItem().is(Tags.Items.FEATHERS))) {
             ItemStack feather = ie.getItem();

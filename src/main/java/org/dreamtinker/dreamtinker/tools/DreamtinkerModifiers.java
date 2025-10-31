@@ -46,6 +46,10 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.common.fly;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.common.life_looting;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian.isolde;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian.sharpened_with;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem.despair_mist;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem.despair_rain;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem.despair_wind;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem.requiem;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.echo_shard.echoed_attack;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.echo_shard.echoed_defence;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.lupus_antimony.the_wolf_answer;
@@ -137,7 +141,10 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<anvil_hit> anvil_hit = MODIFIERS.register("anvil_hit", anvil_hit::new);
     public static final StaticModifier<absorption_hit> absorption_hit = MODIFIERS.register("absorption_hit", absorption_hit::new);
     public static final StaticModifier<absorption_defense> absorption_defense = MODIFIERS.register("absorption_defense", absorption_defense::new);
-
+    public static final StaticModifier<despair_mist> despair_mist = MODIFIERS.register("despair_mist", despair_mist::new);
+    public static final StaticModifier<despair_rain> despair_rain = MODIFIERS.register("despair_rain", despair_rain::new);
+    public static final StaticModifier<despair_wind> despair_wind = MODIFIERS.register("despair_wind", despair_wind::new);
+    public static final StaticModifier<requiem> requiem = MODIFIERS.register("requiem", requiem::new);
 
     //etherium
     public static final StaticModifier<astral_break> astral_break = EL_MODIFIERS.register("astral_break", astral_break::new);
@@ -209,6 +216,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId FragileButBright = id("fragile_but_bright");
         public static final ModifierId homunculusLifeCurse = id("homunculus_life_curse");
         public static final ModifierId homunculusGift = id("homunculus_gift");
+        public static final ModifierId ophelia = id("ophelia");
+        public static final ModifierId peaches_in_memory = id("peaches_in_memory");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");

@@ -41,7 +41,7 @@ public class malum_events_handler {
                 ((ErosionScepterItem) ItemRegistry.EROSION_SCEPTER.get()).hurtEvent(event, player, event.getEntity(), stack);
             if (!(event.getSource().getEntity() instanceof LivingEntity attacker))
                 return;
-            int levels = DTModifierCheck.getMainhandModifierlevel(attacker, DreamtinkerModifiers.malum_sol_tiferet.getId());
+            int levels = DTModifierCheck.getMainhandModifierLevel(attacker, DreamtinkerModifiers.malum_sol_tiferet.getId());
             if (0 < levels && null != target && !target.level().isClientSide &&
                 crossedWhichN(target, event.getAmount() - target.getAbsorptionAmount(), levels + 1))
                 MalumLivingEntityDataCapability.getCapabilityOptional(target).ifPresent(c -> {
@@ -79,7 +79,7 @@ public class malum_events_handler {
     public static boolean crossedAfterHit(LivingEntity e, float dealtToHealth, int n, int x) {
         if (n <= 0 || n >= x || dealtToHealth <= 0f)
             return false;
-        System.out.println(e + "" + dealtToHealth);
+        //System.out.println(e + "" + dealtToHealth);
 
         final float max = e.getMaxHealth();
         final float threshold = max * ((float) n / (float) x);

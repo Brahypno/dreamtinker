@@ -17,6 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
+import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.utils.MaskService;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.ResourceColorManager;
@@ -44,8 +45,8 @@ public class mei extends BattleModifier {
     private final String mei_key_2 = "modifier.dreamtinker.mei_2";
     private final String mei_key_3 = "modifier.dreamtinker.mei_3";
     private final int max_level_second = RedTime.get();
-    private static final ResourceLocation TAG_MLT = new ResourceLocation(Dreamtinker.MODID, "mei_level_time");
-    private static final ResourceLocation TAG_MLL = new ResourceLocation(Dreamtinker.MODID, "mei_level");
+    private static final ResourceLocation TAG_MLT = Dreamtinker.getLocation("mei_level_time");
+    private static final ResourceLocation TAG_MLL = Dreamtinker.getLocation("mei_level");
     private final String tool_attribute_uuid = "1cbcb2dd-4df1-4fcf-a072-301ab051378d";
     private final String player_attribute_uuid = "548eef8b-d4db-44cc-9854-0063e4d2affb";
 
@@ -132,7 +133,7 @@ public class mei extends BattleModifier {
                             new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.ARMOR_TOUGHNESS.getDescriptionId(), mod,
                                                   AttributeModifier.Operation.MULTIPLY_BASE));
         }
-        if (130 <= level)
+        if (130 <= level && tool.getModifierLevel(DreamtinkerModifiers.despair_mist.getId()) < 1)
             consumer.accept(Attributes.MOVEMENT_SPEED, new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.MOVEMENT_SPEED.getDescriptionId(),
                                                                              2.0 * (level - 100) / 100 + .1, AttributeModifier.Operation.MULTIPLY_BASE));
     }
@@ -158,7 +159,7 @@ public class mei extends BattleModifier {
                 if (tool.getPersistentData().getInt(TAG_MLL) < level)
                     tool.getPersistentData().putInt(TAG_MLL, level);
             }
-            if (holder instanceof ServerPlayer player){
+            if (holder instanceof ServerPlayer player && tool.getModifierLevel(DreamtinkerModifiers.despair_mist.getId()) < 1){
                 double mod;
                 ArrayList<Attribute> attributes = new ArrayList<>(Arrays.asList(Attributes.ATTACK_DAMAGE, Attributes.ATTACK_SPEED));
                 if (100 <= level){

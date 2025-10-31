@@ -19,7 +19,7 @@ public class curio_hurt_handler {
     public static void LivingHurtEvent(LivingHurtEvent event) {
         DamageSource dmg = event.getSource();
         if (null != dmg.getEntity() && dmg.getEntity() instanceof LivingEntity entity){
-            int sand_level = DTModifierCheck.getMainhandModifierlevel(entity, DreamtinkerModifiers.Ids.AsSand);
+            int sand_level = DTModifierCheck.getMainhandModifierLevel(entity, DreamtinkerModifiers.Ids.AsSand);
             if (0 < sand_level)
                 damageAllCurios(event.getEntity(), (int) (event.getAmount() / 10 * sand_level), stack -> true);
         }

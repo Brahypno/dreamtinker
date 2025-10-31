@@ -16,14 +16,13 @@ import slimeknights.tconstruct.library.tools.context.EquipmentChangeContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 public class cursed_ring_bound extends ArmorModifier {
-    private static final ResourceLocation TAG_DEEP_CURSE = new ResourceLocation(Dreamtinker.MODID, "deeper_curse");
+    private static final ResourceLocation TAG_DEEP_CURSE = Dreamtinker.getLocation("deeper_curse");
 
     private boolean check(IToolStackView tool, ServerPlayer player) {
         boolean worthy_check = 20 <= tool.getModifierLevel(this.getId());
-        boolean pass = player.getAbilities().instabuild ||
-                       (SuperpositionHandler.isTheCursedOne(player) &&
-                        (!worthy_check || SuperpositionHandler.isTheWorthyOne(player)));
-        return pass;
+        return player.getAbilities().instabuild ||
+               (SuperpositionHandler.isTheCursedOne(player) &&
+                (!worthy_check || SuperpositionHandler.isTheWorthyOne(player)));
     }
 
     @Override

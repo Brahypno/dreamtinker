@@ -315,7 +315,7 @@
   "modifier.dreamtinker.fragile_but_bright.description": "Decrease Armor and Toughness per level, but gain chance to dodge damage",
   "modifier.dreamtinker.homunculus_life_curse": "Homunculus Curse",
   "modifier.dreamtinker.homunculus_life_curse.flavor": "To Living Mortals",
-  "modifier.dreamtinker.homunculus_life_curse.description": "When health smaller than 1/(modifier level+1), increase damage dealt; otherwise decrease damage; The lower HP, higher damage; Max effective 4 levels, configurable",
+  "modifier.dreamtinker.homunculus_life_curse.description": "When lost health larger than 1/(total modifier level+1), increase damage dealt; otherwise decrease damage; The lower HP, higher damage; Max effective 4 levels, configurable",
   "modifier.dreamtinker.anvil_hit": "Falling down",
   "modifier.dreamtinker.anvil_hit.flavor": "Hail to you",
   "modifier.dreamtinker.anvil_hit.description": "When attack living entity, summon falling anvil",
@@ -328,6 +328,24 @@
   "modifier.dreamtinker.absorption_defense": "Step Forth",
   "modifier.dreamtinker.absorption_defense.flavor": "Submit to me, or prove you can outdo me",
   "modifier.dreamtinker.absorption_defense.description": "Reduce damage taken with Absorption or increase if not, When the absorption would lost, apply Strength to attacker; Configurable",
+  "modifier.dreamtinker.despair_mist": "Despair Mist",
+  "modifier.dreamtinker.despair_mist.flavor": "Meaningless, Worthless, NULL, Despair",
+  "modifier.dreamtinker.despair_mist.description": "When Left click, share negative effects among entities in attack range and clear their positive effects. If shared or cleared effects are large enough, deal damage to all within range.",
+  "modifier.dreamtinker.despair_rain": "Despair Rain",
+  "modifier.dreamtinker.despair_rain.flavor": "pellucid and crystalline",
+  "modifier.dreamtinker.despair_rain.description": "Reduce not critical damage by half;Gain 500% critical damage rate;HP can only be 1; When level increase, all value increase.",
+  "modifier.dreamtinker.despair_wind": "Despair Wind",
+  "modifier.dreamtinker.despair_wind.flavor": "Inevitable",
+  "modifier.dreamtinker.despair_wind.description": "When attack, clear absorption, all armor and toughness and drop all items",
+  "modifier.dreamtinker.ophelia": "Ophelia",
+  "modifier.dreamtinker.ophelia.flavor": "Glided with the trembling water, lost to the slow green flow",
+  "modifier.dreamtinker.ophelia.description": "Triple Damage Received, But split to 2*total effective level +1 damages with random source",
+  "modifier.dreamtinker.requiem": "Requiem",
+  "modifier.dreamtinker.requiem.flavor": "The requiem flows on in silence.",
+  "modifier.dreamtinker.requiem.description": "Reduce number of harmful effect/4 damages and gain protection on non-source damage",
+  "modifier.dreamtinker.peaches_in_memory": "Peaches in Memory",
+  "modifier.dreamtinker.peaches_in_memory.flavor": "embody life's delights and pleasures, but are equally fragile and short-lived",
+  "modifier.dreamtinker.peaches_in_memory.description": "Increase experience gain and Bad Potion Time, decrease tool damage taken",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",
@@ -464,6 +482,8 @@
   "material.dreamtinker.half_rotten_homunculus.flavor": "Born from a deadly joke and full of cured",
   "material.dreamtinker.desire_gem": "Desire Gem",
   "material.dreamtinker.desire_gem.flavor": "As Shiny as Star",
+  "material.dreamtinker.despair_gem": "Despair Gem",
+  "material.dreamtinker.despair_gem.flavor": "After desire drown in tears, time devoted by wolves......only remain is despair",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "Molten echo Alloy",
   "fluid.dreamtinker.molten_echo_alloy": "Molten echo Alloy",
@@ -540,6 +560,9 @@
   "fluid_type.dreamtinker.molten_desire": "Molten Desire",
   "fluid.dreamtinker.molten_desire": "Molten Desire",
   "fluid.dreamtinker.molten_desire.fluid_effect": "Molten Desire",
+  "fluid_type.dreamtinker.despair_essence": "Despair Essence",
+  "fluid.dreamtinker.despair_essence": "Despair Essence",
+  "fluid.dreamtinker.despair_essence.fluid_effect": "Despair Essence",
 
   "item.dreamtinker.molten_echo_shard_bucket": "Molten echo shard Bucket",
   "item.dreamtinker.molten_nigrescence_antimony_bucket": "Molten Nigrescence of Antimon Bucket",
@@ -565,6 +588,7 @@
   "item.dreamtinker.liquid_arcana_juice_bucket": "Liquid Arcana Juice Bucket",
   "item.dreamtinker.liquid_amber_bucket": "Temporal Nectar Bucket",
   "item.dreamtinker.molten_desire_bucket": "Molten Desire Bucket",
+  "item.dreamtinker.despair_essence_bucket": "Despair Essence Bucket",
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "bleed",
   "fluid_effect.tconstruct.damage.explosion": "explosion",
@@ -599,5 +623,7 @@
   "jei.dreamtinker.category.hit_entity": "Trigger: hit entity on certain condition",
   "jei.dreamtinker.celestial_type.sun": "Day Time",
   "jei.dreamtinker.celestial_type.moon_phase": "Night with Moon Phase: ",
-  "jei.dreamtinker.chance": "Chance"
+  "jei.dreamtinker.chance": "Chance",
+
+  "death.attack.dreamtinker.null_void": "consumed by nothingness"
 }

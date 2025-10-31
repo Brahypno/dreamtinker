@@ -52,7 +52,7 @@ public class soul_blessing extends ArmorModifier {
     public void onLivingDeath(LivingDeathEvent event) {
         LivingEntity entity = event.getEntity();
         for (EquipmentSlot slot : DTModifierCheck.slots) {
-            if (0 < DTModifierCheck.getModifierlevel(entity, DreamtinkerModifiers.soul_blessing.getId(), slot)){
+            if (0 < DTModifierCheck.getModifierLevel(entity, DreamtinkerModifiers.soul_blessing.getId(), slot)){
                 ItemStack stack = entity.getItemBySlot(slot);
                 ToolStack ts = ToolStack.from(stack);
                 if (0 == ts.getPersistentData().getInt(TAG_SOUL_BOUND)){

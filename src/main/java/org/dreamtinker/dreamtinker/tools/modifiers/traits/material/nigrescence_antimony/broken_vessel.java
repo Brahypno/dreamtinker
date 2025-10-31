@@ -8,8 +8,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.LivingHealEvent;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.context.EquipmentChangeContext;
@@ -21,13 +19,9 @@ import java.util.UUID;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.BrokenVesselBoost;
 
 public class broken_vessel extends ArmorModifier {
-    private static final String TAG_BASE_HEALTH = "broken_vessel";
+    public static final String TAG_BASE_HEALTH = "broken_vessel";
     private static final UUID HEALTH_BOOST_ID = UUID.fromString("c8b28a17-d5ec-4fa4-b555-bb1e8f7de4c8");
     private static final int MAX_HEALTH_MULTIPLIER = BrokenVesselBoost.get();
-
-    {
-        MinecraftForge.EVENT_BUS.addListener(this::LivingHealEvent);
-    }
 
     @Override
     public void onEquip(IToolStackView tool, ModifierEntry modifier, EquipmentChangeContext context) {
@@ -84,35 +78,5 @@ public class broken_vessel extends ArmorModifier {
                 return true;
         }
         return false;
-    }
-
-    private void LivingHealEvent(LivingHealEvent event) {
-        LivingEntity entity = event.getEntity();
-        CompoundTag data = entity.getPersistentData();
-
-        if (!data.contains(TAG_BASE_HEALTH))
-            return;
-
-        // 读取记录的基础血量上限
-        float baseHealth = data.getFloat(TAG_BASE_HEALTH);
-        // 计算血量允许恢复到的一半
-        float cap = baseHealth / (1 + MAX_HEALTH_MULTIPLIER);
-
-        float current = entity.getHealth();
-        float heal = event.getAmount();
-
-        if (cap <= current){
-            event.setAmount(0f);
-            entity.setHealth(cap);
-        }else if (cap < current + heal){
-            event.setAmount(cap - current);
-            entity.setHealth(cap);
-        }
-        float currentAbs = entity.getAbsorptionAmount();
-        if (currentAbs < cap){
-            float toAbsorb = Math.min(cap - currentAbs, heal);
-            entity.setAbsorptionAmount(currentAbs + toAbsorb);
-        }
-
     }
 }

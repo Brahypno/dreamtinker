@@ -20,6 +20,7 @@ public class DreamtinkerMaterialIds {
     public static final MaterialId amber = new MaterialId(new ResourceLocation(MODID, "amber"));
     public static final MaterialId half_rotten_homunculus = new MaterialId(new ResourceLocation(MODID, "half_rotten_homunculus"));
     public static final MaterialId desire_gem = new MaterialId(new ResourceLocation(MODID, "desire_gem"));
+    public static final MaterialId despair_gem = new MaterialId(new ResourceLocation(MODID, "despair_gem"));
     //Compact-enigmatic legacy
     public static final MaterialId etherium = new MaterialId(new ResourceLocation(MODID, "etherium"));
     public static final MaterialId nefarious = new MaterialId(new ResourceLocation(MODID, "nefarious"));

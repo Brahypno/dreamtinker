@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "dreamtinker:despair_gem",
+  "result": {
+    "amount": 100,
+    "fluid": "dreamtinker:despair_essence"
+  },
+  "temperature": 4337
+}

@@ -33,7 +33,7 @@ import static org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers.as_one;
 import static org.dreamtinker.dreamtinker.utils.DTModifierCheck.haveModifierIn;
 
 public class malum_thirsty extends BattleModifier {
-    private static final ResourceLocation TAG_GLU = new ResourceLocation(Dreamtinker.MODID, "enhanced_glu");
+    private static final ResourceLocation TAG_GLU = Dreamtinker.getLocation("enhanced_glu");
     private static final ResourceLocation iron_spell_power = new ResourceLocation("irons_spellbooks", "spell_power");
 
     // 是否已注册

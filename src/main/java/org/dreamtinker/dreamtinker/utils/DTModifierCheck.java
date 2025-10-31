@@ -5,6 +5,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -18,54 +19,52 @@ public class DTModifierCheck {
     public static final EquipmentSlot[] slots =
             new EquipmentSlot[]{EquipmentSlot.FEET, EquipmentSlot.LEGS, EquipmentSlot.CHEST, EquipmentSlot.HEAD, EquipmentSlot.OFFHAND, EquipmentSlot.MAINHAND};
 
-    public static int getModifierlevel(LivingEntity entity, ModifierId id, EquipmentSlot slot) {
-        if (entity != null){
-            if (!entity.getItemBySlot(slot).is(TinkerTags.Items.MODIFIABLE))
-                return 0;
-            ToolStack toolStack = ToolStack.from(entity.getItemBySlot(slot));
-            if (!toolStack.isBroken())
-                return ModifierUtil.getModifierLevel(entity.getItemBySlot(slot), id);
-        }
+    public static int getModifierLevel(@NotNull LivingEntity entity, ModifierId id, EquipmentSlot slot) {
+        if (!entity.getItemBySlot(slot).is(TinkerTags.Items.MODIFIABLE))
+            return 0;
+        ToolStack toolStack = ToolStack.from(entity.getItemBySlot(slot));
+        if (!toolStack.isBroken())
+            return ModifierUtil.getModifierLevel(entity.getItemBySlot(slot), id);
         return 0;
     }
 
-    public static int getMainhandModifierlevel(LivingEntity entity, ModifierId modifierId) {
-        return getModifierlevel(entity, modifierId, EquipmentSlot.MAINHAND);
+    public static int getMainhandModifierLevel(LivingEntity entity, ModifierId modifierId) {
+        return getModifierLevel(entity, modifierId, EquipmentSlot.MAINHAND);
 
     }
 
-    public static int getOffhandModifierlevel(LivingEntity entity, ModifierId modifierId) {
-        return getModifierlevel(entity, modifierId, EquipmentSlot.OFFHAND);
+    public static int getOffhandModifierLevel(LivingEntity entity, ModifierId modifierId) {
+        return getModifierLevel(entity, modifierId, EquipmentSlot.OFFHAND);
     }
 
     public static boolean ModifierInHand(LivingEntity entity, ModifierId modifierId) {
-        return 0 < getMainhandModifierlevel(entity, modifierId) || 0 < getOffhandModifierlevel(entity, modifierId);
+        return 0 < getMainhandModifierLevel(entity, modifierId) || 0 < getOffhandModifierLevel(entity, modifierId);
     }
 
-    public static int getHeadModifierlevel(LivingEntity entity, ModifierId modifierId) {
-        return getModifierlevel(entity, modifierId, EquipmentSlot.HEAD);
+    public static int getHeadModifierLevel(LivingEntity entity, ModifierId modifierId) {
+        return getModifierLevel(entity, modifierId, EquipmentSlot.HEAD);
     }
 
-    public static int getChestModifierlevel(LivingEntity entity, ModifierId modifierId) {
-        return getModifierlevel(entity, modifierId, EquipmentSlot.CHEST);
+    public static int getChestModifierLevel(LivingEntity entity, ModifierId modifierId) {
+        return getModifierLevel(entity, modifierId, EquipmentSlot.CHEST);
     }
 
-    public static int getLegModifierlevel(LivingEntity entity, ModifierId modifierId) {
-        return getModifierlevel(entity, modifierId, EquipmentSlot.LEGS);
+    public static int getLegModifierLevel(LivingEntity entity, ModifierId modifierId) {
+        return getModifierLevel(entity, modifierId, EquipmentSlot.LEGS);
     }
 
-    public static int getFeetModifierlevel(LivingEntity entity, ModifierId modifierId) {
-        return getModifierlevel(entity, modifierId, EquipmentSlot.FEET);
+    public static int getFeetModifierLevel(LivingEntity entity, ModifierId modifierId) {
+        return getModifierLevel(entity, modifierId, EquipmentSlot.FEET);
     }
 
     public static boolean ModifierInBody(LivingEntity entity, ModifierId modifierId) {
-        return 0 < getHeadModifierlevel(entity, modifierId) || 0 < getChestModifierlevel(entity, modifierId) ||
-               0 < getLegModifierlevel(entity, modifierId) || 0 < getFeetModifierlevel(entity, modifierId);
+        return 0 < getHeadModifierLevel(entity, modifierId) || 0 < getChestModifierLevel(entity, modifierId) ||
+               0 < getLegModifierLevel(entity, modifierId) || 0 < getFeetModifierLevel(entity, modifierId);
     }
 
     public static boolean ModifierALLBody(LivingEntity entity, ModifierId modifierId) {
-        return 0 < getHeadModifierlevel(entity, modifierId) && 0 < getChestModifierlevel(entity, modifierId) &&
-               0 < getLegModifierlevel(entity, modifierId) && 0 < getFeetModifierlevel(entity, modifierId);
+        return 0 < getHeadModifierLevel(entity, modifierId) && 0 < getChestModifierLevel(entity, modifierId) &&
+               0 < getLegModifierLevel(entity, modifierId) && 0 < getFeetModifierLevel(entity, modifierId);
     }
 
     public static boolean haveModifierIn(LivingEntity entity, ModifierId modifierId) {
@@ -76,7 +75,7 @@ public class DTModifierCheck {
     @Nullable
     public static ToolStack getToolWithModifier(LivingEntity entity, ModifierId modifierId) {
         for (EquipmentSlot slot : slots)
-            if (0 < getModifierlevel(entity, modifierId, slot))
+            if (0 < getModifierLevel(entity, modifierId, slot))
                 return ToolStack.from(entity.getItemBySlot(slot));
 
         return null;
@@ -85,7 +84,7 @@ public class DTModifierCheck {
     @Nullable
     public static ToolStack getPossibleToolWithModifier(LivingEntity entity, ModifierId modifierId) {
         for (EquipmentSlot slot : slots)
-            if (0 < getModifierlevel(entity, modifierId, slot))
+            if (0 < getModifierLevel(entity, modifierId, slot))
                 return ToolStack.from(entity.getItemBySlot(slot));
         if (entity instanceof Player player)
             for (ItemStack item : player.getInventory().items)
@@ -115,14 +114,20 @@ public class DTModifierCheck {
         return matched;
     }
 
+    public static int getEntityBodyModifierNum(LivingEntity entity, ModifierId id) {
+        int matched = 0;
+        matched += getHeadModifierLevel(entity, id);
+        matched += getChestModifierLevel(entity, id);
+        matched += getLegModifierLevel(entity, id);
+        matched += getFeetModifierLevel(entity, id);
+        return matched;
+    }
+
     public static int getEntityModifierNum(LivingEntity entity, ModifierId id) {
         int matched = 0;
-        matched += getHeadModifierlevel(entity, id);
-        matched += getChestModifierlevel(entity, id);
-        matched += getLegModifierlevel(entity, id);
-        matched += getFeetModifierlevel(entity, id);
-        matched += getMainhandModifierlevel(entity, id);
-        matched += getOffhandModifierlevel(entity, id);
+        matched += getEntityBodyModifierNum(entity, id);
+        matched += getMainhandModifierLevel(entity, id);
+        matched += getOffhandModifierLevel(entity, id);
         return matched;
     }
 

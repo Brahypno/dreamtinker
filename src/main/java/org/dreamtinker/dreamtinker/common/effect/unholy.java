@@ -25,7 +25,6 @@ public class unholy extends MobEffect {
         int refresh = 40; // 2秒
         Player player = (Player) p_19467_;
         boolean isTheWorthyOne = SuperpositionHandler.isTheCursedOne(player) && EnigmaticItems.FORBIDDEN_FRUIT.haveConsumedFruit(player);
-        System.out.println(player);
         if (!isTheWorthyOne){
             p_19467_.addEffect(new MobEffectInstance(MobEffects.WITHER, refresh, (p_19468_ + 1) * 3 - 1, true, false, false));
             p_19467_.addEffect(new MobEffectInstance(MobEffects.POISON, refresh, (p_19468_ + 1) * 2 - 1, true, false, false));

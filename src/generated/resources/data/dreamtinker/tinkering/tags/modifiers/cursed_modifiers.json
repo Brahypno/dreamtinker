@@ -42,6 +42,8 @@
     "dreamtinker:homunculus_life_curse",
     "dreamtinker:absorption_hit",
     "dreamtinker:absorption_defense",
+    "dreamtinker:despair_rain",
+    "dreamtinker:despair_wind",
     {
       "id": "dreamtinker:cursed_ring_bound",
       "required": false

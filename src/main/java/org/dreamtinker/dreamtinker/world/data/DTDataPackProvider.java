@@ -7,6 +7,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.common.data.DamageTypeProvider;
 import org.dreamtinker.dreamtinker.world.worldgen.ModBiomeModifiers;
 import org.dreamtinker.dreamtinker.world.worldgen.ModWorldGen;
 
@@ -19,7 +20,8 @@ public class DTDataPackProvider extends DatapackBuiltinEntriesProvider {
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
             .add(Registries.CONFIGURED_FEATURE, ModWorldGen::bootstrapConfigured)
             .add(Registries.PLACED_FEATURE, ModWorldGen::bootstrapPlaced)
-            .add(ForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::bootstrap);
+            .add(ForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::bootstrap)
+            .add(Registries.DAMAGE_TYPE, new DamageTypeProvider());
 
     public DTDataPackProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, BUILDER, Set.of(Dreamtinker.MODID));

@@ -1,0 +1,30 @@
+{
+  "type": "tconstruct:alloy",
+  "inputs": [
+    {
+      "amount": 3000,
+      "tag": "forge:molten_crying_obsidian"
+    },
+    {
+      "amount": 400,
+      "tag": "dreamtinker:liquid_amber"
+    },
+    {
+      "amount": 900,
+      "fluid": "dreamtinker:molten_desire"
+    },
+    {
+      "amount": 1750,
+      "tag": "dreamtinker:reversed_shadow"
+    },
+    {
+      "amount": 180,
+      "tag": "dreamtinker:molten_lupi_antimony"
+    }
+  ],
+  "result": {
+    "amount": 100,
+    "fluid": "dreamtinker:despair_essence"
+  },
+  "temperature": 4337
+}

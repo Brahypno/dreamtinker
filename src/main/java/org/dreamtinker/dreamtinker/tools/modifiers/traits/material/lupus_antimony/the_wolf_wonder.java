@@ -11,6 +11,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
+import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
@@ -36,7 +37,7 @@ public class the_wolf_wonder extends BattleModifier {
         LivingEntity target = context.getLivingTarget();
         if (target == null)
             return knockback;
-        applyRandomEffects(target, context.getAttacker());
+        applyRandomEffects(target, context.getAttacker(), 1 < tool.getModifierLevel(DreamtinkerModifiers.despair_mist.getId()));
 
         return knockback;
     }
@@ -45,11 +46,11 @@ public class the_wolf_wonder extends BattleModifier {
     public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target) {
         if (target == null)
             return false;
-        applyRandomEffects(target, attacker);
+        applyRandomEffects(target, attacker, 1 < modifiers.getLevel(DreamtinkerModifiers.despair_mist.getId()));
         return false;
     }
 
-    private void applyRandomEffects(LivingEntity target, LivingEntity attacker) {
+    private void applyRandomEffects(LivingEntity target, LivingEntity attacker, boolean no_repeat) {
         RandomSource rand = target.getRandom();
         List<MobEffect> negatives =
                 ForgeRegistries.MOB_EFFECTS.getValues().stream()
@@ -63,11 +64,12 @@ public class the_wolf_wonder extends BattleModifier {
             Collections.swap(negatives, i, j);
         }
 
-        // 取前 N 项
         List<MobEffectInstance> selected_effects = new ArrayList<>();
         for (MobEffect effect : negatives) {
             if (TheWolfWonderEffectNum.get() <= selected_effects.size())
                 break;
+            if (no_repeat && target.hasEffect(effect))
+                continue;
             // 随机持续时长与等级
             int duration = minDuration + rand.nextInt(Math.max(1, maxDuration - minDuration + 1));
             int amplifier = rand.nextInt(TheWolfWonderEffectAmplifier.get());

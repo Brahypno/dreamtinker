@@ -1,0 +1,47 @@
+{
+  "stats": {
+    "tconstruct:binding": {},
+    "tconstruct:handle": {
+      "durability": -0.9,
+      "melee_damage": 0.8,
+      "melee_speed": 0.8,
+      "mining_speed": 0.8
+    },
+    "tconstruct:head": {
+      "durability": 300,
+      "melee_attack": 9.0,
+      "mining_speed": 4.0,
+      "mining_tier": "dreamtinker:lupus"
+    },
+    "tconstruct:maille": {},
+    "tconstruct:plating_boots": {
+      "armor": 7.0,
+      "durability": 2600,
+      "knockback_resistance": 7.0,
+      "toughness": 7.0
+    },
+    "tconstruct:plating_chestplate": {
+      "armor": 7.0,
+      "durability": 3200,
+      "knockback_resistance": 7.0,
+      "toughness": 7.0
+    },
+    "tconstruct:plating_helmet": {
+      "armor": 7.0,
+      "durability": 2200,
+      "knockback_resistance": 7.0,
+      "toughness": 7.0
+    },
+    "tconstruct:plating_leggings": {
+      "armor": 7.0,
+      "durability": 3000,
+      "knockback_resistance": 7.0,
+      "toughness": 7.0
+    },
+    "tconstruct:plating_shield": {
+      "durability": 3600,
+      "knockback_resistance": 7.0,
+      "toughness": 7.0
+    }
+  }
+}

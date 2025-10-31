@@ -39,8 +39,8 @@ public class as_one extends ArmorModifier {
     private final int as_one_life = AsOneRe.get();
     private static final int SECOND_THRESHOLD = AsOneT.get();
 
-    private static final ResourceLocation TAG_AS_ONE = new ResourceLocation(Dreamtinker.MODID, "as_one");
-    private static final ResourceLocation TAG_LAST = new ResourceLocation(Dreamtinker.MODID, "rev_b");
+    private static final ResourceLocation TAG_AS_ONE = Dreamtinker.getLocation("as_one");
+    private static final ResourceLocation TAG_LAST = Dreamtinker.getLocation("rev_b");
 
     {
         MinecraftForge.EVENT_BUS.addListener(this::onLivingDeath);

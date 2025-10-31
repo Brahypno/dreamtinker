@@ -22,6 +22,7 @@ public class FluidTagProvider extends FluidTagsProvider {
         super(p_255941_, p_256600_, modId, existingFileHelper);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     protected void addTags(HolderLookup.@NotNull Provider Provider) {
         fluidTag(DreamtinkerFluids.molten_echo_shard);
@@ -49,6 +50,7 @@ public class FluidTagProvider extends FluidTagsProvider {
         fluidTag(DreamtinkerFluids.liquid_arcana_juice);
         fluidTag(DreamtinkerFluids.liquid_amber);
         //fluidTag(DreamtinkerFluids.molten_desire);
+        fluidTag(DreamtinkerFluids.despair_essence);
 
         this.tag(DreamtinkerTagKeys.Fluids.narcissus_wing_used).addTags(DreamtinkerFluids.blood_soul.getTag())
             .addOptionalTags(DreamtinkerFluids.liquid_arcana_juice.getTag(), DreamtinkerFluids.liquid_concentrated_gluttony.getTag());

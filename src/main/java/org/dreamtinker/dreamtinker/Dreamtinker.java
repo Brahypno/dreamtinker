@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -30,6 +31,7 @@ import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
 import org.dreamtinker.dreamtinker.common.data.DreamtinkerRecipeProvider;
 import org.dreamtinker.dreamtinker.common.data.loot.DreamtinkerLootTableProvider;
 import org.dreamtinker.dreamtinker.common.data.tags.BlockTagProvider;
+import org.dreamtinker.dreamtinker.common.data.tags.DamageTypeTagProvider;
 import org.dreamtinker.dreamtinker.common.data.tags.FluidTagProvider;
 import org.dreamtinker.dreamtinker.common.data.tags.ItemTagProvider;
 import org.dreamtinker.dreamtinker.common.event.advancements.star_regulus_boost;
@@ -148,16 +150,20 @@ public class Dreamtinker {
         generator.addProvider(event.includeClient(), new FluidBucketModelProvider(output, Dreamtinker.MODID));
         generator.addProvider(event.includeClient(), new FluidTagProvider(output, lookupProvider, Dreamtinker.MODID, helper));
 
+
         BlockTagProvider blockTags = new BlockTagProvider(output, lookupProvider, Dreamtinker.MODID, helper);
         generator.addProvider(event.includeClient(), blockTags);
         generator.addProvider(event.includeServer(),
                               new ItemTagProvider(output, lookupProvider, blockTags.contentsGetter(), Dreamtinker.MODID, helper));
 
+
         generator.addProvider(event.includeClient(), new DreamtinkerRecipeProvider(output));
 
         generator.addProvider(event.includeServer(), new DreamtinkerLootTableProvider(output));
+        DatapackBuiltinEntriesProvider provider = new DTDataPackProvider(output, lookupProvider);
 
-        generator.addProvider(event.includeServer(), new DTDataPackProvider(output, lookupProvider));
+        generator.addProvider(event.includeServer(), provider);
+        generator.addProvider(event.includeServer(), new DamageTypeTagProvider(output, provider.getRegistryProvider(), helper));
     }
 
 }

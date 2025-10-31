@@ -10,6 +10,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
+import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.client.TooltipKey;
@@ -35,17 +36,15 @@ import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.*;
 import static org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds.metallivorous_stibium_lupus;
 
 public class the_wolf_was extends BattleModifier {
-    private static final ResourceLocation TAG_WOLF = new ResourceLocation(Dreamtinker.MODID, "twwc");
+    public static final ResourceLocation TAG_WOLF = new ResourceLocation(Dreamtinker.MODID, "twwc");
 
     @Override
     public int modifierDamageTool(IToolStackView tool, ModifierEntry modifier, int amount, @Nullable LivingEntity holder) {
-        if (!TheWolfWasEnable.get())
-            return amount;
         if (holder == null)
             return amount;
         ModDataNBT nbt = tool.getPersistentData();
         int count = nbt.getInt(TAG_WOLF);
-        nbt.putInt(TAG_WOLF, count + amount);
+        nbt.putInt(TAG_WOLF, Math.min(count + amount, Integer.MAX_VALUE));
         return amount;
     }
 
@@ -79,6 +78,10 @@ public class the_wolf_was extends BattleModifier {
         ModDataNBT nbt = toolstack.getPersistentData();
         int count = nbt.getInt(TAG_WOLF);
         if (count < TheWolfWasDamage.get())
+            return;
+        if (tool.getModifierLevel(DreamtinkerModifiers.despair_mist.getId()) < 1)
+            return;
+        if (!TheWolfWasEnable.get())
             return;
 
         // 2. 拿到原生 MaterialNBT

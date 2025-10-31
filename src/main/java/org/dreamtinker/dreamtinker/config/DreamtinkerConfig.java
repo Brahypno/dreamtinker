@@ -232,6 +232,9 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.DoubleValue AbsorptionHitRate =
             builder.comment("How much extra damage boost/reduce when deal damage").defineInRange("AbsorptionHitRate", 0.3, 0, 100);
 
+    public static final ForgeConfigSpec.DoubleValue DespairShade =
+            builder.comment("How often would the shade appears? ").defineInRange("DespairShade", 0.4, 0, 1);
+
     public static final ForgeConfigSpec specs = builder.pop().build();
 
     private static boolean isValidIdFormat(String s) {

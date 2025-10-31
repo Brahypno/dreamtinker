@@ -42,7 +42,7 @@ import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.EchoAtt
 import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.getAttributeAttackDamage;
 
 public class echoed_attack extends BattleModifier {
-    private static final ResourceLocation TAG_ECHO_ENERGY = new ResourceLocation(Dreamtinker.MODID, "echo_energy");
+    private static final ResourceLocation TAG_ECHO_ENERGY = Dreamtinker.getLocation("echo_energy");
     private static final int E_C = EchoAttackCharge.get();
     private static final double ChargingChance = EchoAttackChargingChance.get();
 

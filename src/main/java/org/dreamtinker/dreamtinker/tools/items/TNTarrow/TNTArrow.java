@@ -47,7 +47,7 @@ import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.ContinuousExp
 import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.NO_COOLDOWN;
 
 public class TNTArrow extends ModifiableItem {
-    public static final ResourceLocation TAG_CONTINUOUS = new ResourceLocation(Dreamtinker.MODID, "continuous_explode");
+    public static final ResourceLocation TAG_CONTINUOUS = Dreamtinker.getLocation("continuous_explode");
 
     public void appendHoverText(@NotNull ItemStack stack, Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
         super.appendHoverText(stack, level, tooltip, flag);
