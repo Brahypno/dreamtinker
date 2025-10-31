@@ -45,14 +45,16 @@
     {
       "type": "tconstruct:base_stats",
       "stats": {
-        "tconstruct:attack_damage": 2.0,
+        "tconstruct:attack_damage": 1.0,
         "tconstruct:attack_speed": 2.0,
-        "tconstruct:draw_speed": 2.5
+        "tconstruct:draw_speed": 3.0
       }
     },
     {
       "type": "tconstruct:multiply_stats",
       "multipliers": {
+        "tconstruct:attack_speed": 1.2,
+        "tconstruct:draw_speed": 1.5,
         "tconstruct:durability": 0.8
       }
     },

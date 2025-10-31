@@ -92,13 +92,13 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 .module(defaultThreeParts)
                 // stats
                 .module(new SetStatsModule(StatsNBT.builder()
-                                                   .set(ToolStats.ATTACK_DAMAGE, 3f)
+                                                   .set(ToolStats.ATTACK_DAMAGE, 5f)
                                                    .set(ToolStats.ATTACK_SPEED, -9999f).build()))
                 .module(new MultiplyStatsModule(MultiplierNBT.builder()
                                                              .set(ToolStats.ATTACK_DAMAGE, 1.5f)
                                                              .set(ToolStats.MINING_SPEED, 0f)
                                                              .set(ToolStats.ATTACK_SPEED, 0f)
-                                                             .set(ToolStats.DURABILITY, 1.1f).build()))
+                                                             .set(ToolStats.DURABILITY, 0.1f).build()))
                 .module(new ToolSlotsModule(ImmutableMap.of(SlotType.UPGRADE, 4, SlotType.ABILITY, 2)))
                 // traits
                 .module(ToolTraitsModule.builder()
@@ -140,11 +140,13 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 .module(defaultFiveParts)
                 // stats
                 .module(new SetStatsModule(StatsNBT.builder()
-                                                   .set(ToolStats.ATTACK_DAMAGE, 2f)
+                                                   .set(ToolStats.ATTACK_DAMAGE, 1f)
                                                    .set(ToolStats.ATTACK_SPEED, 2f)
-                                                   .set(ToolStats.DRAW_SPEED, 2.5f).build()))
+                                                   .set(ToolStats.DRAW_SPEED, 3f).build()))
                 .module(new MultiplyStatsModule(MultiplierNBT.builder()
-                                                             .set(ToolStats.DURABILITY, 0.8f).build()))
+                                                             .set(ToolStats.DRAW_SPEED, 1.5f)
+                                                             .set(ToolStats.ATTACK_SPEED, 1.2f)
+                                                             .set(ToolStats.DURABILITY, 0.6f).build()))
                 .module(new ToolSlotsModule(ImmutableMap.of(SlotType.SOUL, 6, SlotType.ABILITY, 2, SlotType.UPGRADE, 1)))
                 // traits
                 .module(ToolTraitsModule.builder()

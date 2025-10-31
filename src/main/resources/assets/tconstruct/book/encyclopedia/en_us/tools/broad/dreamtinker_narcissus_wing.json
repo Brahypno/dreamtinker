@@ -6,11 +6,10 @@
   ],
   "properties": [
     "+1 Damage",
-    "2 Attack Speed",
-    "2.5 Draw Speed",
-    "1.00 Arrow Velocity",
-    "0.75 Accuracy",
-    "80% Durability Multiplier",
+    "2 Attack Speed 120% Attacking Multiplier",
+    "2.5 Draw Speed 150% Drawing Multiplier",
+    "1.00 Arrow Velocity 0.75 Accuracy",
+    "60% Durability Multiplier",
     "A set of Modifiers"
   ]
 }
