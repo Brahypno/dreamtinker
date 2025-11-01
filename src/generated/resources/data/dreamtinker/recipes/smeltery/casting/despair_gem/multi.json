@@ -3,7 +3,7 @@
   "cast": {
     "tag": "tconstruct:casts/multi_use/gem"
   },
-  "cooling_time": 147,
+  "cooling_time": 133,
   "fluid": {
     "amount": 100,
     "fluid": "dreamtinker:despair_essence"

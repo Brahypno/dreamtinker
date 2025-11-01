@@ -126,7 +126,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                           .addCatalyst(FluidIngredient.of(DreamtinkerFluids.molten_lupi_antimony.getTag(), FluidValues.INGOT))
                           .addInput(TinkerTags.Fluids.METAL_TOOLTIPS, FluidValues.INGOT)
                           .save(consumer, location("currus_triumphalis_antimonii/lupi_to_albedo"));
-        AlloyRecipeBuilder.alloy(FluidOutput.fromStack(new FluidStack(DreamtinkerFluids.liquid_smoky_antimony.get(), FluidValues.INGOT * 2)), 4320)
+        AlloyRecipeBuilder.alloy(FluidOutput.fromStack(new FluidStack(DreamtinkerFluids.liquid_smoky_antimony.get(), FluidValues.INGOT * 2)), 3600)
                           .addInput(DreamtinkerFluids.molten_ascending_antimony.getTag(), FluidValues.INGOT)
                           .addInput(TinkerFluids.liquidSoul.getTag(), FluidValues.GLASS_BLOCK)
                           .save(consumer, location("currus_triumphalis_antimonii/ascending_to_smoky"));
@@ -244,7 +244,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
     private void addMeltingRecipes(Consumer<FinishedRecipe> consumer) {
         String folder = "smeltery/melting/";
-        MeltingFuelBuilder.fuel(DreamtinkerFluids.molten_lupi_antimony.ingredient(FluidValues.INGOT), 776, 7776)
+        MeltingFuelBuilder.fuel(DreamtinkerFluids.molten_lupi_antimony.ingredient(FluidValues.INGOT), 776, 3600)
                           .save(consumer, location(folder + "fuel/molten_lupi_antimony"));
         MeltingFuelBuilder.fuel(DreamtinkerFluids.reversed_shadow.ingredient(FluidValues.SLIMEBALL), 17, 2200)
                           .save(consumer, location(folder + "fuel/reversed_shadow"));

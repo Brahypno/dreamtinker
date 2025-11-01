@@ -158,7 +158,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(AttributeModule.builder(TinkerAttributes.EXPERIENCE_MULTIPLIER, AttributeModifier.Operation.MULTIPLY_TOTAL).amount(0.1f, 0.1f))
                 .addModule(ReduceToolDamageModule.builder().maxLevel(5).formula()
                                                  .constant(0.025f).variable(LEVEL).multiply() // 0.025 * level
-                                                 .constant(11).variable(LEVEL).subtract()     // 11 - level
+                                                 .constant(13).variable(LEVEL).subtract()     // 11 - level
                                                  .multiply().build());
         addELModifiers();
         addMalumModifiers();
