@@ -3,6 +3,11 @@
     "dreamtinker:moonlight_ice",
     "dreamtinker:nigrescence_antimony",
     "dreamtinker:metallivorous_stibium_lupus",
+    "dreamtinker:echo_alloy",
+    "dreamtinker:star_regulus",
+    "dreamtinker:half_rotten_homunculus",
+    "dreamtinker:desire_gem",
+    "dreamtinker:despair_gem",
     {
       "id": "dreamtinker:etherium",
       "required": false
@@ -25,6 +30,14 @@
     },
     {
       "id": "dreamtinker:malum_malignant_gluttony",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_mnemonic_auric",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_malignant_lead",
       "required": false
     }
   ]
