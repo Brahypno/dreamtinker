@@ -13,13 +13,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import org.dreamtinker.dreamtinker.library.modifiers.DreamtinkerHook;
-import org.dreamtinker.dreamtinker.library.modifiers.hook.LeftClickHook;
+import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
-import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.capability.inventory.ToolInventoryCapability;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
@@ -31,18 +28,12 @@ import java.util.OptionalInt;
 
 import static org.dreamtinker.dreamtinker.tools.modifiers.events.weaponDreamsEnsureEnds.startChosenDisplay;
 
-public class weapon_dreams extends Modifier implements LeftClickHook {
+public class weapon_dreams extends BattleModifier {
     private static final ThreadLocal<Boolean> IN_ATTACK = ThreadLocal.withInitial(() -> false);
 
     @Override
     public int getPriority() {
         return Integer.MAX_VALUE;
-    }
-
-    @Override
-    protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        hookBuilder.addHook(this, DreamtinkerHook.LEFT_CLICK);
-        super.registerHooks(hookBuilder);
     }
 
     @Override
@@ -69,6 +60,9 @@ public class weapon_dreams extends Modifier implements LeftClickHook {
             return;
         if (null != event)
             event.setCanceled(true); // 我们接管
+        ItemStack proxy = player.getMainHandItem();
+        if (player.getCooldowns().isOnCooldown(proxy.getItem()))
+            return;
 
         if (level.isClientSide){
             // ===== 客户端：拦截默认，临时换手后调用 player.attack()（只在客户端调！） =====
@@ -84,7 +78,6 @@ public class weapon_dreams extends Modifier implements LeftClickHook {
                 IN_ATTACK.set(false);
             }
         }else {
-            ItemStack proxy = player.getMainHandItem();
             // —— 按你的方式判断是否启用代理 & 取 InventoryModule —— //
             Selected selected = select_chosen(tool, level);
             ItemStack chosen = selected.stack;
@@ -180,7 +173,6 @@ public class weapon_dreams extends Modifier implements LeftClickHook {
     public static int computeProxyCooldownTicks(ItemStack chosen) {
         slimeknights.tconstruct.library.tools.nbt.ToolStack tool = slimeknights.tconstruct.library.tools.nbt.ToolStack.from(chosen);
         float chosenSpeed = tool.getStats().get(ToolStats.ATTACK_SPEED);
-        System.out.println(chosenSpeed);
         return Math.max(1, net.minecraft.util.Mth.ceil(20f / chosenSpeed));
     }
 

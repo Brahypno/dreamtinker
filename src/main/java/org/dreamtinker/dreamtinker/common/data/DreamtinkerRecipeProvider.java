@@ -58,6 +58,7 @@ import slimeknights.tconstruct.library.recipe.casting.ItemCastingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.casting.PotionCastingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.casting.material.CompositeCastingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.casting.material.MaterialCastingRecipeBuilder;
+import slimeknights.tconstruct.library.recipe.casting.material.PartSwapCastingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.entitymelting.EntityMeltingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.fuel.MeltingFuelBuilder;
 import slimeknights.tconstruct.library.recipe.melting.IMeltingContainer;
@@ -118,6 +119,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                                  .addExtraRequirement(Ingredient.of(TinkerModifiers.silkyCloth))
                                                  .addExtraRequirement(Ingredient.of(TinkerModifiers.silkyCloth))
                                                  .save(consumer, this.prefix(this.id(item), armorFolder)));
+
+        PartSwapCastingRecipeBuilder.tableRecipe(Ingredient.of(DreamtinkerTools.silence_glove), 4)
+                                    .index(2)
+                                    .save(consumer, location(folder + "silence_glove_leather"));
 
     }
 

@@ -374,7 +374,7 @@
   "item.dreamtinker.narcissus_wing.description": "记忆，愿望，灵魂，人格，理性……这柄仪式剑因你而在。\n 在故事结束之前，这幻梦只对你有意义。",
   "tooltip.narcissus_wing.desc1": "主角： ",
   "item.dreamtinker.silence_glove": "静默手套",
-  "item.dreamtinker.silence_glove.description": "一个具有五个工具栏位的特别工具。\n在栏位非空时，使用该工具会改为使用栏位中的随机工具",
+  "item.dreamtinker.silence_glove.description": "一个具有五个工具栏位的特别工具。\n在栏位非空时，使用该工具会改为使用栏位中的随机工具\n可发现于远古城市的战利品箱子",
 
   "item.dreamtinker.echo_alloy": "回响合金",
   "item.dreamtinker.raw_stibnite": "粗辉锑",

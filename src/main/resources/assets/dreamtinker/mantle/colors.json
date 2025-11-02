@@ -91,7 +91,9 @@
     "despair_wind": "#8B1526",
     "ophelia": "#C24E5C",
     "requiem": "#A92E3F",
-    "peaches_in_memory": "#AFEFB1"
+    "peaches_in_memory": "#AFEFB1",
+    "weapon_dreams": "#777B7E",
+    "weapon_slots": "#777B7E"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",

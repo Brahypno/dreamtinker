@@ -31,6 +31,7 @@ import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
 import org.dreamtinker.dreamtinker.common.data.DreamtinkerRecipeProvider;
 import org.dreamtinker.dreamtinker.common.data.loot.DreamtinkerLootTableProvider;
+import org.dreamtinker.dreamtinker.common.data.loot.LootTableInjectionProvider;
 import org.dreamtinker.dreamtinker.common.data.tags.BlockTagProvider;
 import org.dreamtinker.dreamtinker.common.data.tags.DamageTypeTagProvider;
 import org.dreamtinker.dreamtinker.common.data.tags.FluidTagProvider;
@@ -165,6 +166,7 @@ public class Dreamtinker {
 
         generator.addProvider(event.includeServer(), provider);
         generator.addProvider(event.includeServer(), new DamageTypeTagProvider(output, provider.getRegistryProvider(), helper));
+        generator.addProvider(event.includeServer(), new LootTableInjectionProvider(output));
     }
 
 }

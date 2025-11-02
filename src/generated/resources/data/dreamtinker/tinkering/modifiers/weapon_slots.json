@@ -45,5 +45,6 @@
       "on_key": "any"
     }
   ],
+  "priority": 1500,
   "tooltip_display": "always"
 }

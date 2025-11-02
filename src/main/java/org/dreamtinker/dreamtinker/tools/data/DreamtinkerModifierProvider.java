@@ -164,6 +164,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                                  .constant(13).variable(LEVEL).subtract()     // 11 - level
                                                  .multiply().build());
         buildModifier(Ids.weapon_slots)
+                .priority(1500)
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                 .addModule(InventoryModule.builder().toolItem(ItemPredicate.and(ItemPredicate.tag(MODIFIABLE), ItemPredicate.tag(ARMOR).inverted()))
                                           .filter(ItemPredicate.and(ItemPredicate.tag(MODIFIABLE), ItemPredicate.tag(ARMOR).inverted(),
