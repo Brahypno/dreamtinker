@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.FireBlock;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraftforge.fluids.FluidType;
+import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.data.predicate.IJsonPredicate;
 import slimeknights.mantle.data.predicate.block.BlockPropertiesPredicate;
@@ -40,6 +41,8 @@ import slimeknights.tconstruct.library.modifiers.modules.mining.ConditionalMinin
 import slimeknights.tconstruct.library.modifiers.util.ModifierLevelDisplay;
 import slimeknights.tconstruct.library.tools.SlotType;
 import slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHelper;
+import slimeknights.tconstruct.library.tools.capability.inventory.InventoryMenuModule;
+import slimeknights.tconstruct.library.tools.capability.inventory.InventoryModule;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.shared.TinkerAttributes;
 import slimeknights.tconstruct.tools.modules.MeltingModule;
@@ -160,6 +163,12 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                                  .constant(0.025f).variable(LEVEL).multiply() // 0.025 * level
                                                  .constant(13).variable(LEVEL).subtract()     // 11 - level
                                                  .multiply().build());
+        buildModifier(Ids.weapon_slots)
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(InventoryModule.builder().toolItem(ItemPredicate.and(ItemPredicate.tag(MODIFIABLE), ItemPredicate.tag(ARMOR).inverted()))
+                                          .filter(ItemPredicate.and(ItemPredicate.tag(MODIFIABLE), ItemPredicate.tag(ARMOR).inverted(),
+                                                                    ItemPredicate.tag(DreamtinkerTagKeys.Items.weapon_slot_excluded).inverted())).flatSlots(5))
+                .addModule(InventoryMenuModule.ANY);
         addELModifiers();
         addMalumModifiers();
 

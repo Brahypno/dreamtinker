@@ -36,6 +36,7 @@ public class ItemTagProvider extends ItemTagsProvider {
     @Override
     protected void addTags(HolderLookup.@NotNull Provider Provider) {
         //tools
+        this.tag(DreamtinkerTagKeys.Items.weapon_slot_excluded).add(DreamtinkerTools.silence_glove.get(), DreamtinkerTools.tntarrow.get());
         this.tag(TinkerTags.Items.TOOL_PARTS).add(DreamtinkerToolParts.explode_core.get());
         addItemsTags(DreamtinkerTools.mashou, MULTIPART_TOOL, DURABILITY, HARVEST, MELEE_PRIMARY, INTERACTABLE_RIGHT, SWORD, BROAD_TOOLS, BONUS_SLOTS,
                      ItemTags.SWORDS, AOE);
@@ -45,6 +46,7 @@ public class ItemTagProvider extends ItemTagsProvider {
         addItemsTags(DreamtinkerTools.tntarrow, MULTIPART_TOOL, DURABILITY, MELEE_WEAPON, SMALL_TOOLS, BONUS_SLOTS);
 
         this.tag(ItemTagRegistry.SCYTHE).add(TinkerTools.scythe.asItem(), TinkerTools.kama.asItem(), DreamtinkerTools.narcissus_wing.asItem());
+        addItemsTags(DreamtinkerTools.silence_glove, SMALL_TOOLS, DURABILITY, MELEE_PRIMARY, BONUS_SLOTS, ANCIENT_TOOLS, STAFFS);
         //parts
         this.tag(TinkerTags.Items.CASTS)
             .add(memory_cast.get(), wish_cast.get(), soul_cast.get(),

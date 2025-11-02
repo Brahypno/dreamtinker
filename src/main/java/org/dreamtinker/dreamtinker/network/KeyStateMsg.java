@@ -2,8 +2,11 @@ package org.dreamtinker.dreamtinker.network;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraftforge.network.NetworkEvent;
 import org.dreamtinker.dreamtinker.library.client.PlayerKeyStateProvider;
+import org.dreamtinker.dreamtinker.utils.DThelper;
+import slimeknights.mantle.client.TooltipKey;
 
 import java.util.function.Supplier;
 
@@ -36,6 +39,8 @@ public record KeyStateMsg(KeyKind kind, boolean down) {
             sp.getCapability(PlayerKeyStateProvider.PlayerKeyState.CAP).ifPresent(cap -> {
                 cap.set(m.kind(), m.down());   // 注意：KeyStateMsg 是 record -> 访问器是 kind()/down()
             });
+            if (KeyKind.TOOL_INTERACT == m.kind() && m.down())
+                DThelper.startToolInteract(sp, EquipmentSlot.MAINHAND, TooltipKey.UNKNOWN);
         });
 
         c.setPacketHandled(true);

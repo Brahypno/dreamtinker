@@ -9,6 +9,7 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -20,11 +21,14 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.EntityTeleportEvent;
 import net.minecraftforge.registries.ForgeRegistries;
+import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.materials.MaterialRegistry;
 import slimeknights.tconstruct.library.materials.definition.MaterialId;
 import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
 import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
+import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.part.ToolPartItem;
@@ -143,5 +147,21 @@ public class DThelper {
         if (rdm != null)
             part = Parts.get(rdm.nextInt(Parts.size()));
         return part.withMaterial(mli);
+    }
+
+    public static boolean startToolInteract(Player player, EquipmentSlot slotType, TooltipKey modifierKey) {
+        if (!player.isSpectator()){
+            ItemStack helmet = player.getItemBySlot(slotType);
+            if (!helmet.is(TinkerTags.Items.ARMOR) && helmet.is(TinkerTags.Items.MODIFIABLE)){
+                ToolStack tool = ToolStack.from(helmet);
+                for (ModifierEntry entry : tool.getModifierList()) {
+                    if (entry.getHook(ModifierHooks.ARMOR_INTERACT).startInteract(tool, entry, player, slotType, modifierKey)){
+                        break;
+                    }
+                }
+                return true;
+            }
+        }
+        return false;
     }
 }

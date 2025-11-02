@@ -21,7 +21,7 @@ import org.dreamtinker.dreamtinker.tools.data.DreamtinkerFluidEffectProvider;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerModifierProvider;
 import org.dreamtinker.dreamtinker.tools.entity.NarcissusFluidProjectile;
 import org.dreamtinker.dreamtinker.tools.entity.SlashOrbitEntity;
-import org.dreamtinker.dreamtinker.tools.items.TNTarrow.TNTArrow;
+import org.dreamtinker.dreamtinker.tools.items.TNTArrow;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.mashou.realsweep;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.mashou.silvernamebee;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.mashou.strong_heavy;
@@ -29,6 +29,7 @@ import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.flamingM
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.foundationWill;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.memoryBase;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.splendourHeart;
+import org.dreamtinker.dreamtinker.tools.modifiers.tools.silence_glove.weapon_dreams;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.tntarrow.strong_explode;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.weapon_transformation;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.*;
@@ -145,6 +146,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<despair_rain> despair_rain = MODIFIERS.register("despair_rain", despair_rain::new);
     public static final StaticModifier<despair_wind> despair_wind = MODIFIERS.register("despair_wind", despair_wind::new);
     public static final StaticModifier<requiem> requiem = MODIFIERS.register("requiem", requiem::new);
+    public static final StaticModifier<weapon_dreams> weapon_dreams = MODIFIERS.register("weapon_dreams", weapon_dreams::new);
 
     //etherium
     public static final StaticModifier<astral_break> astral_break = EL_MODIFIERS.register("astral_break", astral_break::new);
@@ -218,6 +220,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId homunculusGift = id("homunculus_gift");
         public static final ModifierId ophelia = id("ophelia");
         public static final ModifierId peaches_in_memory = id("peaches_in_memory");
+        public static final ModifierId weapon_slots = id("weapon_slots");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");

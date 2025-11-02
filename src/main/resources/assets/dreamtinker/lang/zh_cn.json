@@ -347,6 +347,12 @@
   "modifier.dreamtinker.peaches_in_memory": "记忆中的你",
   "modifier.dreamtinker.peaches_in_memory.flavor": "汇聚了生命的喜悦与甜美，也同样脆弱易逝",
   "modifier.dreamtinker.peaches_in_memory.description": "增加阅历和负面效果持续；减少耐久消耗",
+  "modifier.dreamtinker.weapon_slots": "工具槽位",
+  "modifier.dreamtinker.weapon_slots.flavor": "便携工具组",
+  "modifier.dreamtinker.weapon_slots.description": "具有一个只能装匠魂工具的小容器",
+  "modifier.dreamtinker.weapon_dreams": "工具艺术",
+  "modifier.dreamtinker.weapon_dreams.flavor": "代理人战争",
+  "modifier.dreamtinker.weapon_dreams.description": "使用工具槽位内的工具而不是自己来完成工具使用",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
@@ -367,6 +373,7 @@
   "item.dreamtinker.narcissus_wing": "水仙之羽",
   "item.dreamtinker.narcissus_wing.description": "记忆，愿望，灵魂，人格，理性……这柄仪式剑因你而在。\n 在故事结束之前，这幻梦只对你有意义。",
   "tooltip.narcissus_wing.desc1": "主角： ",
+  "item.dreamtinker.silence_glove": "静默手套",
 
   "item.dreamtinker.echo_alloy": "回响合金",
   "item.dreamtinker.raw_stibnite": "粗辉锑",

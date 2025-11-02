@@ -17,6 +17,7 @@ import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
@@ -92,9 +93,9 @@ public class Dreamtinker {
             forgeEventBus.addListener(malum_events_handler::MalumLivingDeathEvent);
         }
 
-        forgeEventBus.addListener(PlayerLeftClickEvent::onLeftClickBlock);
-        forgeEventBus.addListener(PlayerLeftClickEvent::onLeftClick);
-        forgeEventBus.addListener(PlayerLeftClickEvent::onLeftClickEntity);
+        forgeEventBus.addListener(EventPriority.HIGHEST, PlayerLeftClickEvent::onLeftClickBlock);
+        forgeEventBus.addListener(EventPriority.HIGHEST, PlayerLeftClickEvent::onLeftClick);
+        forgeEventBus.addListener(EventPriority.HIGHEST, PlayerLeftClickEvent::onLeftClickEntity);
         forgeEventBus.addListener(star_regulus_boost::onServerTick);
 
         Dnetwork.registerPackets();

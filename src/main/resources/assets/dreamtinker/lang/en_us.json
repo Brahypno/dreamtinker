@@ -347,6 +347,12 @@
   "modifier.dreamtinker.peaches_in_memory": "Peaches in Memory",
   "modifier.dreamtinker.peaches_in_memory.flavor": "embody life's delights and pleasures, but are equally fragile and short-lived",
   "modifier.dreamtinker.peaches_in_memory.description": "Increase experience gain and Bad Potion Time, decrease tool damage taken",
+  "modifier.dreamtinker.weapon_slots": "Weapon Slots",
+  "modifier.dreamtinker.weapon_slots.flavor": "Portable weapon toolkits",
+  "modifier.dreamtinker.weapon_slots.description": "have a small inventory for modifiable tools",
+  "modifier.dreamtinker.weapon_dreams": "Weapon Arts",
+  "modifier.dreamtinker.weapon_dreams.flavor": "proxy war",
+  "modifier.dreamtinker.weapon_dreams.description": "Special ability to use tools in weapon slots instead of itself",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",
@@ -367,6 +373,7 @@
   "item.dreamtinker.narcissus_wing": "Narcissus Wing",
   "item.dreamtinker.narcissus_wing.description": "Memory, Wish, Soul, Persona, Reason......This ritual blade that exists because of you.\n This dream only meaning for you, before story ends",
   "tooltip.narcissus_wing.desc1": "hero: ",
+  "item.dreamtinker.silence_glove": "Silence Glove",
 
   "item.dreamtinker.echo_alloy": "Echo Alloy",
   "item.dreamtinker.raw_stibnite": "Raw Stibnite",

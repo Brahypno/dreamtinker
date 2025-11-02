@@ -57,6 +57,18 @@
       "stat_type": "tconstruct:handle"
     },
     {
+      "path": "dreamtinker:item/tool/silence_glove/glove_hardware",
+      "stat_type": "tconstruct:head"
+    },
+    {
+      "path": "dreamtinker:item/tool/silence_glove/glove_wristband",
+      "stat_type": "tconstruct:binding"
+    },
+    {
+      "path": "dreamtinker:item/tool/silence_glove/glove_leather",
+      "stat_type": "tconstruct:cuirass"
+    },
+    {
       "path": "dreamtinker:item/tool/mashou/mashou_blade",
       "stat_type": "tconstruct:head"
     },

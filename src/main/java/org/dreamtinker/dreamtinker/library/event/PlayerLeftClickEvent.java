@@ -1,7 +1,6 @@
 package org.dreamtinker.dreamtinker.library.event;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -17,8 +16,7 @@ public class PlayerLeftClickEvent {
         if (player != null && player.level().isClientSide){
             ItemStack stack = player.getItemInHand(player.getUsedItemHand());
             if (stack.getItem() instanceof IModifiable)
-                LeftClickHook.handleLeftClick(stack, player,
-                                              InteractionHand.MAIN_HAND == player.getUsedItemHand() ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
+                LeftClickHook.handleLeftClick(stack, player, EquipmentSlot.MAINHAND);
         }
     }
 
@@ -29,8 +27,8 @@ public class PlayerLeftClickEvent {
             BlockState state = player.level().getBlockState(pos);
             ItemStack stack = player.getItemInHand(player.getUsedItemHand());
             if (stack.getItem() instanceof IModifiable)
-                LeftClickHook.handleLeftClickBlock(stack, player,
-                                                   InteractionHand.MAIN_HAND == player.getUsedItemHand() ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND,
+                LeftClickHook.handleLeftClickBlock(event, stack, player,
+                                                   EquipmentSlot.MAINHAND,
                                                    state, pos);
 
         }
@@ -41,8 +39,8 @@ public class PlayerLeftClickEvent {
         if (player != null){
             ItemStack stack = player.getItemInHand(player.getUsedItemHand());
             if (stack.getItem() instanceof IModifiable)
-                LeftClickHook.handleLeftClickEntity(stack, player,
-                                                    InteractionHand.MAIN_HAND == player.getUsedItemHand() ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND,
+                LeftClickHook.handleLeftClickEntity(event, stack, player,
+                                                    EquipmentSlot.MAINHAND,
                                                     event.getTarget());
 
         }

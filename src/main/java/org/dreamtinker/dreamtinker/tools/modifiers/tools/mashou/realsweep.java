@@ -15,6 +15,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeMod;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.entity.SlashOrbitEntity;
 import org.joml.Vector3f;
@@ -58,12 +60,12 @@ public class realsweep extends BattleModifier {
     }
 
     @Override
-    public void onLeftClickBlock(IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot, BlockState state, BlockPos pos) {
+    public void onLeftClickBlock(PlayerInteractEvent.LeftClickBlock event, IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot, BlockState state, BlockPos pos) {
         superSweep(tool, entry, player, level, null);
     }
 
     @Override
-    public void onLeftClickEntity(IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot, Entity target) {
+    public void onLeftClickEntity(AttackEntityEvent event, IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot, Entity target) {
         superSweep(tool, entry, player, level, target);
     }
 

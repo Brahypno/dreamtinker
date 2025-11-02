@@ -24,6 +24,7 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.TierSortingRegistry;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.library.client.PlayerKeyStateProvider;
 import org.dreamtinker.dreamtinker.library.modifiers.DreamtinkerHook;
@@ -76,7 +77,7 @@ public class foundationWill extends Modifier implements LeftClickHook, ProcessLo
     }
 
     @Override
-    public void onLeftClickBlock(IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot, BlockState state, BlockPos pos) {
+    public void onLeftClickBlock(PlayerInteractEvent.LeftClickBlock event, IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot, BlockState state, BlockPos pos) {
         foundationWillWrapper(entry, player, level, equipmentSlot);
     }
 

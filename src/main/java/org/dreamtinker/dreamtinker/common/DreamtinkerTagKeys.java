@@ -45,7 +45,12 @@ public class DreamtinkerTagKeys {
             return TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("forge", name));
         }
 
+        private static TagKey<Item> dtTag(String name) {
+            return TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation(Dreamtinker.MODID, name));
+        }
+
         public static final TagKey<Item> raw_stibnite = forgeTag("raw_materials/stibnite");
+        public static final TagKey<Item> weapon_slot_excluded = dtTag("modifiable/excluded_weapon_slot");
     }
 
     public static class Blocks {

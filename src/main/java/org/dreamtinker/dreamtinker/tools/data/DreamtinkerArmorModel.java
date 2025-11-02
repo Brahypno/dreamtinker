@@ -1,7 +1,7 @@
 package org.dreamtinker.dreamtinker.tools.data;
 
 import net.minecraft.data.PackOutput;
-import org.dreamtinker.dreamtinker.tools.items.DTtoolsDefinition;
+import org.dreamtinker.dreamtinker.tools.DTtoolsDefinition;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.client.armor.texture.ArmorTextureSupplier;
 import slimeknights.tconstruct.library.client.armor.texture.MaterialArmorTextureSupplier;

@@ -18,7 +18,7 @@ public class silvernamebee extends BattleModifier {
 
     @Override
     public void modifierOnInventoryTick(@NotNull IToolStackView tool, @NotNull ModifierEntry modifier, @NotNull Level world, @NotNull LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, @NotNull ItemStack stack) {
-        if (holder instanceof Player player && isCorrectSlot && !player.hasEffect(DreamtinkerEffects.SilverNameBee.get())){
+        if (holder instanceof Player player && isCorrectSlot && !player.hasEffect(DreamtinkerEffects.SilverNameBee.get()) && world.getGameTime() % 20 == 0){
             player.addEffect(new MobEffectInstance(DreamtinkerEffects.SilverNameBee.get(), 40, AsOneA.get(), false, false, false));
         }
     }

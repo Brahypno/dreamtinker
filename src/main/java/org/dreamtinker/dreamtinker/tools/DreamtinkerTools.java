@@ -21,12 +21,7 @@ import org.dreamtinker.dreamtinker.tools.data.material.DreamtinkerMaterialStatPr
 import org.dreamtinker.dreamtinker.tools.data.material.DreamtinkerMaterialTraitProvider;
 import org.dreamtinker.dreamtinker.tools.data.sprite.DreamtinkerMaterialSpriteProvider;
 import org.dreamtinker.dreamtinker.tools.data.sprite.DreamtinkerPartSpriteProvider;
-import org.dreamtinker.dreamtinker.tools.items.DTtoolsDefinition;
-import org.dreamtinker.dreamtinker.tools.items.DtTiers;
-import org.dreamtinker.dreamtinker.tools.items.MaShuo.MaShou;
-import org.dreamtinker.dreamtinker.tools.items.NarcissusWing.NarcissusWing;
-import org.dreamtinker.dreamtinker.tools.items.TNTarrow.TNTArrow;
-import org.dreamtinker.dreamtinker.tools.items.UnderArmor.UnderArmorItem;
+import org.dreamtinker.dreamtinker.tools.items.*;
 import slimeknights.mantle.registration.object.EnumObject;
 import slimeknights.mantle.registration.object.ItemObject;
 import slimeknights.tconstruct.library.client.data.material.GeneratorPartTextureJsonGenerator;
@@ -59,6 +54,8 @@ public class DreamtinkerTools extends DreamtinkerModule {
             MODI_TOOLS.register("narcissus_wing", () -> new NarcissusWing(UNSTACKABLE_PROPS.rarity(Rarity.EPIC), DTtoolsDefinition.narcissus_wing));
     public static final EnumObject<ArmorItem.Type, UnderArmorItem> underPlate =
             MODI_TOOLS.registerEnum("under_plate", ArmorItem.Type.values(), type -> new UnderArmorItem(DTtoolsDefinition.UNDER_PLATE, type, UNSTACKABLE_PROPS));
+    public static final ItemObject<ModifiableItem> silence_glove =
+            MODI_TOOLS.register("silence_glove", () -> new SilenceGlove(UNSTACKABLE_PROPS, DTtoolsDefinition.silence_glove));
 
     @SubscribeEvent
     void gatherData(final GatherDataEvent event) {
@@ -103,6 +100,7 @@ public class DreamtinkerTools extends DreamtinkerModule {
         // ranged tools
 
         // ancient tools
+        acceptTool(output, silence_glove);
 
         acceptTools(output, underPlate);
     }

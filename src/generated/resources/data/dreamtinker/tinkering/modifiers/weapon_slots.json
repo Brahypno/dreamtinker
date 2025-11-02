@@ -1,0 +1,49 @@
+{
+  "level_display": "tconstruct:no_levels",
+  "modules": [
+    {
+      "type": "tconstruct:inventory",
+      "filter": {
+        "type": "mantle:and",
+        "predicates": [
+          {
+            "type": "mantle:tag",
+            "tag": "tconstruct:modifiable"
+          },
+          {
+            "type": "mantle:inverted",
+            "inverted_type": "mantle:tag",
+            "tag": "tconstruct:modifiable/armor"
+          },
+          {
+            "type": "mantle:inverted",
+            "inverted_type": "mantle:tag",
+            "tag": "dreamtinker:modifiable/excluded_weapon_slot"
+          }
+        ]
+      },
+      "slots": {
+        "flat": 5
+      },
+      "tool": {
+        "type": "mantle:and",
+        "predicates": [
+          {
+            "type": "mantle:tag",
+            "tag": "tconstruct:modifiable"
+          },
+          {
+            "type": "mantle:inverted",
+            "inverted_type": "mantle:tag",
+            "tag": "tconstruct:modifiable/armor"
+          }
+        ]
+      }
+    },
+    {
+      "type": "tconstruct:inventory_menu",
+      "on_key": "any"
+    }
+  ],
+  "tooltip_display": "always"
+}

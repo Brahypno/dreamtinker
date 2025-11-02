@@ -1,0 +1,26 @@
+{
+  "loader": "tconstruct:tool",
+  "parent": "forge:item/default-tool",
+  "textures": {
+    "glove_hardware": "dreamtinker:item/tool/silence_glove/glove_hardware",
+    "glove_wristband": "dreamtinker:item/tool/silence_glove/glove_wristband",
+    "glove_leather": "dreamtinker:item/tool/silence_glove/glove_leather"
+  },
+  "modifier_roots": [
+    "dreamtinker:item/tool/silence_glove/modifiers/"
+  ],
+  "parts": [
+    {
+      "name": "glove_hardware",
+      "index": 0
+    },
+    {
+      "name": "glove_wristband",
+      "index": 1
+    },
+    {
+      "name": "glove_leather",
+      "index": 2
+    }
+  ]
+}

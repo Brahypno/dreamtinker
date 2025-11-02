@@ -29,6 +29,8 @@ public class DreamtinkerPartSpriteProvider extends AbstractPartSpriteProvider {
         addLimb("persona_orthant");
         addHead("reason_emanation");
         buildTool("tntarrow").addHead("explode_core").addHandle("arrow_handle").addHandle("arrow_wing");
+        buildTool("silence_glove").addHead("glove_hardware").addBinding("glove_wristband")
+                                  .addPart("glove_leather", StatlessMaterialStats.CUIRASS.getIdentifier());
         buildTool("mashou").withLarge()
                            .addBreakableHead("mashou_blade").addBreakableHead("mashou_line")
                            .addBreakablePart("mashou_binding", StatlessMaterialStats.BINDING.getIdentifier()).addHandle("mashou_handle")

@@ -7,19 +7,22 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.ToolActions;
 import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.tools.DTtoolsDefinition;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
-import org.dreamtinker.dreamtinker.tools.items.DTtoolsDefinition;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.data.predicate.block.BlockPredicate;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.data.tinkering.AbstractToolDefinitionDataProvider;
 import slimeknights.tconstruct.library.materials.RandomMaterial;
 import slimeknights.tconstruct.library.tools.SlotType;
+import slimeknights.tconstruct.library.tools.definition.module.ToolHooks;
 import slimeknights.tconstruct.library.tools.definition.module.ToolModule;
 import slimeknights.tconstruct.library.tools.definition.module.aoe.CircleAOEIterator;
 import slimeknights.tconstruct.library.tools.definition.module.build.*;
 import slimeknights.tconstruct.library.tools.definition.module.material.DefaultMaterialsModule;
+import slimeknights.tconstruct.library.tools.definition.module.material.MaterialStatsModule;
+import slimeknights.tconstruct.library.tools.definition.module.material.MaterialTraitsModule;
 import slimeknights.tconstruct.library.tools.definition.module.material.PartStatsModule;
 import slimeknights.tconstruct.library.tools.definition.module.mining.IsEffectiveModule;
 import slimeknights.tconstruct.library.tools.definition.module.mining.MiningSpeedModifierModule;
@@ -30,6 +33,8 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.tools.TinkerToolActions;
 import slimeknights.tconstruct.tools.TinkerToolParts;
 import slimeknights.tconstruct.tools.data.ModifierIds;
+import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
+import slimeknights.tconstruct.tools.stats.StatlessMaterialStats;
 
 public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDataProvider {
     public DreamtinkerToolDefinitionProvider(PackOutput packOutput) {
@@ -164,7 +169,25 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                         MiningSpeedModifierModule.blocks(0.10f, Blocks.VINE, Blocks.GLOW_LICHEN), MiningSpeedModifierModule.tag(BlockTags.WOOL, 0.3f))
                 .module(new CircleAOEIterator(1, true))
                 .module(new CircleWeaponAttack(3));
-        ;
+        define(DTtoolsDefinition.silence_glove)
+                .module(MaterialStatsModule.stats()
+                                           .stat(HeadMaterialStats.ID)
+                                           .stat(StatlessMaterialStats.BINDING)
+                                           .stat(StatlessMaterialStats.CUIRASS)
+                                           .build())
+                .module(ancientThreeParts)
+                // ancient tools when rebalanced get both heads
+                .module(new MaterialTraitsModule(HeadMaterialStats.ID, 2), ToolHooks.REBALANCED_TRAIT)
+                // stats
+                .module(new SetStatsModule(StatsNBT.builder()
+                                                   .set(ToolStats.ATTACK_SPEED, 1.5f).build()))
+                .smallToolStartingSlots()
+                // traits
+                .module(ToolTraitsModule.builder()
+                                        .trait(DreamtinkerModifiers.Ids.weapon_slots)
+                                        .trait(DreamtinkerModifiers.weapon_dreams)
+                                        .build());
+        // behavior;
     }
 
     @Override
