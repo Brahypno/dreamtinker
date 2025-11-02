@@ -6,7 +6,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -24,11 +23,11 @@ import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.capability.inventory.ToolInventoryCapability;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
+import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalInt;
-import java.util.UUID;
 
 import static org.dreamtinker.dreamtinker.tools.modifiers.events.weaponDreamsEnsureEnds.startChosenDisplay;
 
@@ -90,13 +89,7 @@ public class weapon_dreams extends Modifier implements LeftClickHook {
             Selected selected = select_chosen(tool, level);
             ItemStack chosen = selected.stack;
             ItemStack proxySnap = proxy.copy();
-            net.minecraft.world.entity.ai.attributes.AttributeInstance inst =
-                    player.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_SPEED);
-            net.minecraft.world.entity.ai.attributes.AttributeModifier boost =
-                    new net.minecraft.world.entity.ai.attributes.AttributeModifier(
-                            UUID.nameUUIDFromBytes((this.getId() + ".").getBytes()), "proxy_full_charge_once", 1024.0D,
-                            AttributeModifier.Operation.MULTIPLY_TOTAL);
-            boolean added = (inst != null && !inst.hasModifier(boost) && null == state);
+
 
             // ===== 服务端：不要再调用 player.attack()，直接执行业务逻辑（chosen → 钩子 → 回写 → 还原） =====
             ServerPlayer sp = (ServerPlayer) player;
@@ -106,8 +99,8 @@ public class weapon_dreams extends Modifier implements LeftClickHook {
                 // 1) 刚切换为 chosen 时，立即让客户端主手槽显示 chosen
                 startChosenDisplay(sp, chosen, proxySnap, null != state);
 
-                if (added)
-                    inst.addTransientModifier(boost);
+
+                player.attackStrengthTicker = (int) Math.ceil(player.getCurrentItemAttackStrengthDelay());
 
                 // 你的实际攻击逻辑（不要再调 player.attack）
                 if (null != target)
@@ -125,12 +118,8 @@ public class weapon_dreams extends Modifier implements LeftClickHook {
             }
             finally {
                 // 还原主手（服务端权威）
-                if (added)
-                    inst.removeModifier(UUID.nameUUIDFromBytes((this.getId() + ".").getBytes()));
 
-                if (null != state){
-
-                }else {
+                if (null == state){
                     int cooldownTicks = computeProxyCooldownTicks(proxySnap);
                     player.getCooldowns().addCooldown(proxySnap.getItem(), cooldownTicks);
                     update_hand(player, proxySnap);
@@ -189,10 +178,9 @@ public class weapon_dreams extends Modifier implements LeftClickHook {
     }
 
     public static int computeProxyCooldownTicks(ItemStack chosen) {
-        // 伪代码：按你项目里取 TiC 工具攻速的方式实现
-        slimeknights.tconstruct.library.tools.nbt.ToolStack t = slimeknights.tconstruct.library.tools.nbt.ToolStack.from(chosen);
-        // 假设你能得到一个每秒攻击数 chosenSpeed
-        float chosenSpeed = /* 从 t.getStats() 或 module 里拿 */ 4.0f;
+        slimeknights.tconstruct.library.tools.nbt.ToolStack tool = slimeknights.tconstruct.library.tools.nbt.ToolStack.from(chosen);
+        float chosenSpeed = tool.getStats().get(ToolStats.ATTACK_SPEED);
+        System.out.println(chosenSpeed);
         return Math.max(1, net.minecraft.util.Mth.ceil(20f / chosenSpeed));
     }
 

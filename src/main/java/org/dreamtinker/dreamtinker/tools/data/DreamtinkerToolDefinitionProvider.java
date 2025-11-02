@@ -180,7 +180,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 .module(new MaterialTraitsModule(HeadMaterialStats.ID, 2), ToolHooks.REBALANCED_TRAIT)
                 // stats
                 .module(new SetStatsModule(StatsNBT.builder()
-                                                   .set(ToolStats.ATTACK_SPEED, 1.5f).build()))
+                                                   .set(ToolStats.ATTACK_SPEED, 1.2f).build()))
                 .smallToolStartingSlots()
                 // traits
                 .module(ToolTraitsModule.builder()

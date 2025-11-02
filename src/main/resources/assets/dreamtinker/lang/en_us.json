@@ -352,7 +352,7 @@
   "modifier.dreamtinker.weapon_slots.description": "have a small inventory for modifiable tools",
   "modifier.dreamtinker.weapon_dreams": "Weapon Arts",
   "modifier.dreamtinker.weapon_dreams.flavor": "proxy war",
-  "modifier.dreamtinker.weapon_dreams.description": "Special ability to use tools in weapon slots instead of itself",
+  "modifier.dreamtinker.weapon_dreams.description": "Special ability to use tools in weapon slots instead of itself to perform left or right operation",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",
@@ -374,6 +374,7 @@
   "item.dreamtinker.narcissus_wing.description": "Memory, Wish, Soul, Persona, Reason......This ritual blade that exists because of you.\n This dream only meaning for you, before story ends",
   "tooltip.narcissus_wing.desc1": "hero: ",
   "item.dreamtinker.silence_glove": "Silence Glove",
+  "item.dreamtinker.silence_glove.description": "A special tool that have 5 inventory slots that capable for 5 tinkers construct tool.\n When the inventory is not empty, left/right operation with this tool would be transformed with random one of the inventory tool.",
 
   "item.dreamtinker.echo_alloy": "Echo Alloy",
   "item.dreamtinker.raw_stibnite": "Raw Stibnite",

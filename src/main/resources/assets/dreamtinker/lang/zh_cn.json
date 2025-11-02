@@ -352,7 +352,7 @@
   "modifier.dreamtinker.weapon_slots.description": "具有一个只能装匠魂工具的小容器",
   "modifier.dreamtinker.weapon_dreams": "工具艺术",
   "modifier.dreamtinker.weapon_dreams.flavor": "代理人战争",
-  "modifier.dreamtinker.weapon_dreams.description": "使用工具槽位内的工具而不是自己来完成工具使用",
+  "modifier.dreamtinker.weapon_dreams.description": "使用工具槽位内的工具而不是自己来完成工具左键或右键操作",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
@@ -374,6 +374,7 @@
   "item.dreamtinker.narcissus_wing.description": "记忆，愿望，灵魂，人格，理性……这柄仪式剑因你而在。\n 在故事结束之前，这幻梦只对你有意义。",
   "tooltip.narcissus_wing.desc1": "主角： ",
   "item.dreamtinker.silence_glove": "静默手套",
+  "item.dreamtinker.silence_glove.description": "一个具有五个工具栏位的特别工具。\n在栏位非空时，使用该工具会改为使用栏位中的随机工具",
 
   "item.dreamtinker.echo_alloy": "回响合金",
   "item.dreamtinker.raw_stibnite": "粗辉锑",
