@@ -29,6 +29,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
+import org.dreamtinker.dreamtinker.common.data.DTCurio;
 import org.dreamtinker.dreamtinker.common.data.DreamtinkerRecipeProvider;
 import org.dreamtinker.dreamtinker.common.data.loot.DreamtinkerLootTableProvider;
 import org.dreamtinker.dreamtinker.common.data.loot.LootTableInjectionProvider;
@@ -37,6 +38,7 @@ import org.dreamtinker.dreamtinker.common.data.tags.DamageTypeTagProvider;
 import org.dreamtinker.dreamtinker.common.data.tags.FluidTagProvider;
 import org.dreamtinker.dreamtinker.common.data.tags.ItemTagProvider;
 import org.dreamtinker.dreamtinker.common.event.advancements.star_regulus_boost;
+import org.dreamtinker.dreamtinker.common.event.compact.curio.addSilenceGloveCurio;
 import org.dreamtinker.dreamtinker.common.event.compact.enigmatic_legacy.addUnholyWater;
 import org.dreamtinker.dreamtinker.common.event.compact.malum.addConcentratedGluttonyBottle;
 import org.dreamtinker.dreamtinker.config.DreamtinkerConfig;
@@ -81,7 +83,8 @@ public class Dreamtinker {
         DreamtinkerModule.initRegisters(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
-        if (ModList.get().isLoaded("curio")){
+        if (ModList.get().isLoaded("curios")){
+            forgeEventBus.addGenericListener(ItemStack.class, addSilenceGloveCurio::attachCaps);
             forgeEventBus.addListener(curio_hurt_handler::LivingHurtEvent);
         }
         if (ModList.get().isLoaded("enigmaticlegacy")){
@@ -167,6 +170,8 @@ public class Dreamtinker {
         generator.addProvider(event.includeServer(), provider);
         generator.addProvider(event.includeServer(), new DamageTypeTagProvider(output, provider.getRegistryProvider(), helper));
         generator.addProvider(event.includeServer(), new LootTableInjectionProvider(output));
+
+        generator.addProvider(event.includeServer(), new DTCurio(output, helper, provider.getRegistryProvider()));
     }
 
 }

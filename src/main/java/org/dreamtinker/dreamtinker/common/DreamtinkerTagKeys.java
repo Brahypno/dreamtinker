@@ -1,5 +1,6 @@
 package org.dreamtinker.dreamtinker.common;
 
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -49,8 +50,14 @@ public class DreamtinkerTagKeys {
             return TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation(Dreamtinker.MODID, name));
         }
 
+        private static TagKey<Item> modTag(String path) {
+            return TagKey.create(Registries.ITEM, new ResourceLocation(path));
+        }
+
         public static final TagKey<Item> raw_stibnite = forgeTag("raw_materials/stibnite");
         public static final TagKey<Item> weapon_slot_excluded = dtTag("modifiable/excluded_weapon_slot");
+        public static final TagKey<Item> HANDS = modTag("curios:hands");
+
     }
 
     public static class Blocks {
