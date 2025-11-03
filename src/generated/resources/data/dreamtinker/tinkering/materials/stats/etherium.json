@@ -17,7 +17,7 @@
       "durability": 3000,
       "melee_attack": 4.0,
       "mining_speed": 8.0,
-      "mining_tier": "enigmaticlegacy:etherium"
+      "mining_tier": "minecraft:diamond"
     },
     "tconstruct:limb": {
       "accuracy": 0.6,
