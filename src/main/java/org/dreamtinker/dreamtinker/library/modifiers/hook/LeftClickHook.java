@@ -12,6 +12,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import org.dreamtinker.dreamtinker.library.modifiers.DreamtinkerHook;
 import org.dreamtinker.dreamtinker.network.Dnetwork;
 import org.dreamtinker.dreamtinker.network.LeftClickEmptyPacket;
+import org.dreamtinker.dreamtinker.utils.CuriosCompact;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
@@ -28,6 +29,8 @@ public interface LeftClickHook {
 
     static void handleLeftClick(ItemStack stack, Player player, EquipmentSlot slot) {
         Level level = player.level();
+        if (stack.isEmpty() && !level.isClientSide)
+            stack = CuriosCompact.findPreferredGlove(player);
         IToolStackView tool = ToolStack.from(stack);
         for (ModifierEntry entry : tool.getModifierList()) {
             entry.getHook(DreamtinkerHook.LEFT_CLICK).onLeftClickEmpty(tool, entry, player, level, slot);

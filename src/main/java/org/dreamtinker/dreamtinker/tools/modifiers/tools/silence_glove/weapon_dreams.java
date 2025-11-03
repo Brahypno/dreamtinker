@@ -15,7 +15,9 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import org.dreamtinker.dreamtinker.library.modifiers.DreamtinkerHook;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
+import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.jetbrains.annotations.Nullable;
+import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.capability.inventory.ToolInventoryCapability;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
@@ -61,7 +63,7 @@ public class weapon_dreams extends BattleModifier {
         if (null != event)
             event.setCanceled(true); // 我们接管
         ItemStack proxy = player.getMainHandItem();
-        if (player.getCooldowns().isOnCooldown(proxy.getItem()))
+        if (player.getCooldowns().isOnCooldown(DreamtinkerTools.silence_glove.asItem()))
             return;
 
         if (level.isClientSide){
@@ -82,7 +84,8 @@ public class weapon_dreams extends BattleModifier {
             Selected selected = select_chosen(tool, level);
             ItemStack chosen = selected.stack;
             ItemStack proxySnap = proxy.copy();
-
+            if (chosen.isEmpty() || !chosen.is(TinkerTags.Items.MODIFIABLE))
+                return;
 
             // ===== 服务端：不要再调用 player.attack()，直接执行业务逻辑（chosen → 钩子 → 回写 → 还原） =====
             ServerPlayer sp = (ServerPlayer) player;
@@ -113,7 +116,7 @@ public class weapon_dreams extends BattleModifier {
                 // 还原主手（服务端权威）
 
                 if (null == state){
-                    int cooldownTicks = computeProxyCooldownTicks(proxySnap);
+                    int cooldownTicks = computeProxyCooldownTicks(tool);
                     player.getCooldowns().addCooldown(proxySnap.getItem(), cooldownTicks);
                     update_hand(player, proxySnap);
                 }
@@ -170,9 +173,8 @@ public class weapon_dreams extends BattleModifier {
         return chosen >= 0 ? OptionalInt.of(chosen) : OptionalInt.empty();
     }
 
-    public static int computeProxyCooldownTicks(ItemStack chosen) {
-        slimeknights.tconstruct.library.tools.nbt.ToolStack tool = slimeknights.tconstruct.library.tools.nbt.ToolStack.from(chosen);
-        float chosenSpeed = tool.getStats().get(ToolStats.ATTACK_SPEED);
+    public static int computeProxyCooldownTicks(IToolStackView toolStackView) {
+        float chosenSpeed = toolStackView.getStats().get(ToolStats.ATTACK_SPEED);
         return Math.max(1, net.minecraft.util.Mth.ceil(20f / chosenSpeed));
     }
 

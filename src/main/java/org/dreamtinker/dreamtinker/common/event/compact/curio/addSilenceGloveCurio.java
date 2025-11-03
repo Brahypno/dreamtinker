@@ -55,11 +55,20 @@ public class addSilenceGloveCurio {
             return attributes;
         }
 
-
         @Override
         public ItemStack getStack() {
             return this.stack;
         }
+
+        @Override
+
+        public boolean canEquip(SlotContext slotContext) {
+            // 允许条件：该实体当前 Curios 中没有“同种物品”（按需要选择判等方式）
+            return top.theillusivec4.curios.api.CuriosApi.getCuriosInventory(slotContext.entity())
+                                                         .map(inv -> inv.findCurios(other -> other.is(stack.getItem())).isEmpty())
+                                                         .orElse(true);
+        }
+
     }
 
     private static int computeExtraRingsFromInternalTools(ItemStack stack) {

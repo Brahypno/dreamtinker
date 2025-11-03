@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import org.dreamtinker.dreamtinker.library.modifiers.hook.LeftClickHook;
+import org.dreamtinker.dreamtinker.utils.CuriosCompact;
 import slimeknights.tconstruct.library.tools.item.IModifiable;
 
 public class PlayerLeftClickEvent {
@@ -15,6 +16,8 @@ public class PlayerLeftClickEvent {
         Player player = event.getEntity();
         if (player != null && player.level().isClientSide){
             ItemStack stack = player.getItemInHand(player.getUsedItemHand());
+            if (stack.isEmpty())
+                stack = CuriosCompact.findPreferredGlove(player);
             if (stack.getItem() instanceof IModifiable)
                 LeftClickHook.handleLeftClick(stack, player, EquipmentSlot.MAINHAND);
         }
@@ -26,6 +29,8 @@ public class PlayerLeftClickEvent {
         if (player != null){
             BlockState state = player.level().getBlockState(pos);
             ItemStack stack = player.getItemInHand(player.getUsedItemHand());
+            if (stack.isEmpty())
+                stack = CuriosCompact.findPreferredGlove(player);
             if (stack.getItem() instanceof IModifiable)
                 LeftClickHook.handleLeftClickBlock(event, stack, player,
                                                    EquipmentSlot.MAINHAND,
@@ -38,6 +43,8 @@ public class PlayerLeftClickEvent {
         Player player = event.getEntity();
         if (player != null){
             ItemStack stack = player.getItemInHand(player.getUsedItemHand());
+            if (stack.isEmpty())
+                stack = CuriosCompact.findPreferredGlove(player);
             if (stack.getItem() instanceof IModifiable)
                 LeftClickHook.handleLeftClickEntity(event, stack, player,
                                                     EquipmentSlot.MAINHAND,

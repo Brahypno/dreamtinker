@@ -15,8 +15,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 
-import static org.dreamtinker.dreamtinker.tools.modifiers.tools.silence_glove.weapon_dreams.computeProxyCooldownTicks;
-
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class weaponDreamsEnsureEnds {
     // 保存每个玩家一个 pending
@@ -61,8 +59,6 @@ public class weaponDreamsEnsureEnds {
         if (p.isPlayerMining){
             sp.setItemInHand(InteractionHand.MAIN_HAND, p.proxySnap);
             sp.getInventory().setChanged();
-            int cooldownTicks = computeProxyCooldownTicks(p.proxySnap);
-            sp.getCooldowns().addCooldown(p.proxySnap.getItem(), cooldownTicks);
         }
         int slotId = 36 + sp.getInventory().selected;
         sp.connection.send(new ClientboundContainerSetSlotPacket(
