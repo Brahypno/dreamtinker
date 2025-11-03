@@ -1,9 +1,11 @@
 package org.dreamtinker.dreamtinker.common.event.compact.curio;
 
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
@@ -13,13 +15,17 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.tools.items.SilenceGlove;
+import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
 import javax.annotation.Nullable;
+import java.util.Map;
 import java.util.UUID;
+import java.util.function.BiConsumer;
 
 public class addSilenceGloveCurio {
     private static final ResourceLocation KEY = Dreamtinker.getLocation("curio_silence_glove");
@@ -47,11 +53,28 @@ public class addSilenceGloveCurio {
         @Override
         public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid) {
             Multimap<Attribute, AttributeModifier> attributes = HashMultimap.create();
-            int extraRings = computeExtraRingsFromInternalTools(stack); // ← 你已有的“按内部最高攻值换算”逻辑
+            ToolStack tool = ToolStack.from(stack);
+            int extraRings = 0; // ← 你已有的“按内部最高攻值换算”逻辑
+            if (!tool.isBroken())
+                extraRings = (int) (Math.ceil(tool.getStats().getInt(ToolStats.ATTACK_DAMAGE) / 2.0f) + 1);
             if (extraRings > 0){
                 top.theillusivec4.curios.api.CuriosApi.addSlotModifier(
                         attributes, "ring", UUID.nameUUIDFromBytes(stack.getItem().toString().getBytes()), extraRings, AttributeModifier.Operation.ADDITION);
+                ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+                BiConsumer<Attribute, AttributeModifier> attributeConsumer = builder::put;
+                for (ModifierEntry entry : tool.getModifierList()) {
+                    entry.getHook(ModifierHooks.ATTRIBUTES).addAttributes(tool, entry, EquipmentSlot.MAINHAND, attributeConsumer);
+                }
+                for (Map.Entry<Attribute, AttributeModifier> e : builder.build().entries()) {
+                    Attribute attr = e.getKey();
+                    AttributeModifier mod = e.getValue();
+                    AttributeModifier scaled = new AttributeModifier(
+                            UUID.nameUUIDFromBytes((stack + mod.getId().toString()).getBytes()), mod.getName(), mod.getAmount(), mod.getOperation()
+                    );
+                    attributes.put(attr, scaled);
+                }
             }
+
             return attributes;
         }
 
@@ -71,11 +94,4 @@ public class addSilenceGloveCurio {
 
     }
 
-    private static int computeExtraRingsFromInternalTools(ItemStack stack) {
-        if (stack.getItem() instanceof SilenceGlove){
-            ToolStack tool = ToolStack.from(stack);
-            return (int) (Math.ceil(tool.getStats().getInt(ToolStats.ATTACK_DAMAGE) / 2.0f) + 1);
-        }
-        return 0;
-    }
 }
