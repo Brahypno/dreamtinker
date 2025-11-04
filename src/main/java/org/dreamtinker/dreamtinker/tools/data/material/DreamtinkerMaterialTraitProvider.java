@@ -66,6 +66,8 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.despair_gem, despair_mist, despair_rain, despair_wind);
         addTraits(DreamtinkerMaterialIds.despair_gem, ARMOR, Ids.ophelia, requiem.getId(), Ids.peaches_in_memory);
 
+        addDefaultTraits(DreamtinkerMaterialIds.shadowskin, Ids.shadow_blessing, TinkerModifiers.overslime.getId());
+
         callGetOrCreate(this, DreamtinkerMaterialIds.etherium).setTraits(MELEE_HARVEST, List.of(
                 new ModifierEntry(ModifierIds.smite, 2),
                 new ModifierEntry(explosive_hit.getId(), 1),

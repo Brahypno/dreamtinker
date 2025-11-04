@@ -382,6 +382,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
     }
 
     String materials_folder = "tools/materials/";
+    String slimeskinFolder = materials_folder + "slimeskin/";
 
     private void addMaterialRecipes(Consumer<FinishedRecipe> consumer) {
 
@@ -427,6 +428,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                materials_folder);
         materialRecipe(consumer, DreamtinkerMaterialIds.despair_gem, Ingredient.of(DreamtinkerCommon.despair_gem.get()), 1, 1,
                        materials_folder + "despair_gem");
+        materialComposite(consumer, MaterialIds.leather, DreamtinkerMaterialIds.shadowskin, DreamtinkerFluids.reversed_shadow, FluidValues.SLIMEBALL,
+                          slimeskinFolder, "shadowskin");
+        materialComposite(consumer, DreamtinkerMaterialIds.shadowskin, MaterialIds.leather, TinkerFluids.venom, FluidValues.SIP, slimeskinFolder,
+                          "shadowskin_cleaning");
 
     }
 
@@ -822,7 +827,6 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.huge_ego, slotlessFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_rebound)
                              .setTools(IntersectionIngredient.of(Ingredient.of(ItemTagRegistry.SCYTHE), Ingredient.of(TinkerTags.Items.MELEE_WEAPON)))
-                             //.setTools(TinkerTags.Items.MELEE_WEAPON)
                              .addInput(ItemRegistry.CRUDE_SCYTHE.get())
                              .addInput(ItemRegistry.EARTHEN_SPIRIT.get())
                              .setMaxLevel(1)

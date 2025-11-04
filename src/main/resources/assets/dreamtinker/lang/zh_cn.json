@@ -355,6 +355,9 @@
   "modifier.dreamtinker.weapon_dreams": "工具艺术",
   "modifier.dreamtinker.weapon_dreams.flavor": "代理人战争",
   "modifier.dreamtinker.weapon_dreams.description": "使用工具槽位内的工具而不是自己来完成工具左键或右键操作",
+  "modifier.dreamtinker.shadow_blessing": "阴影祝福",
+  "modifier.dreamtinker.shadow_blessing.flavor": "藏于阴影",
+  "modifier.dreamtinker.shadow_blessing.description": "提高5%保护上限",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
@@ -495,7 +498,8 @@
   "material.dreamtinker.desire_gem.flavor": "与星同曜",
   "material.dreamtinker.despair_gem": "绝望宝石",
   "material.dreamtinker.despair_gem.flavor": "在渴望在泪水中淹没，时间被狼吞没……剩下的唯有绝望",
-
+  "material.dreamtinker.shadowskin": "阴影皮",
+  "material.dreamtinker.shadowskin.flavor": "阴影怎么会有皮？",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "熔融回响合金",
   "fluid.dreamtinker.molten_echo_alloy": "熔融回响合金",

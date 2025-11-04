@@ -1,0 +1,12 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "dreamtinker:shadow_blessing"
+    },
+    {
+      "level": 1,
+      "name": "tconstruct:overslime"
+    }
+  ]
+}

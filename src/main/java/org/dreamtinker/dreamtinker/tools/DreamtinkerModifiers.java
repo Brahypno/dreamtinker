@@ -221,6 +221,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId ophelia = id("ophelia");
         public static final ModifierId peaches_in_memory = id("peaches_in_memory");
         public static final ModifierId weapon_slots = id("weapon_slots");
+        public static final ModifierId shadow_blessing = id("shadow_blessing");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");

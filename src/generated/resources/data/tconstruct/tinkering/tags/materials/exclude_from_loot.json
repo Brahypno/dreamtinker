@@ -33,10 +33,6 @@
       "required": false
     },
     {
-      "id": "dreamtinker:malum_mnemonic_auric",
-      "required": false
-    },
-    {
       "id": "dreamtinker:malum_malignant_lead",
       "required": false
     }

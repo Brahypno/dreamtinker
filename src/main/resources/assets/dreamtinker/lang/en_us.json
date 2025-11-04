@@ -354,7 +354,10 @@
   "modifier.dreamtinker.weapon_slots.description": "have a small inventory for modifiable tools",
   "modifier.dreamtinker.weapon_dreams": "Weapon Arts",
   "modifier.dreamtinker.weapon_dreams.flavor": "proxy war",
-  "modifier.dreamtinker.weapon_dreams.description": "Special ability to use tools in weapon slots instead of itself to perform left or right operation",
+  "modifier.dreamtinker.weapon_dreams.description": "Special ability to use tools in weapon slots instead of itself to perform left or right use operation",
+  "modifier.dreamtinker.shadow_blessing": "Shadow Blessing",
+  "modifier.dreamtinker.shadow_blessing.flavor": "Hidden in shadow",
+  "modifier.dreamtinker.shadow_blessing.description": "Increase 5% protection cap",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",
@@ -495,6 +498,8 @@
   "material.dreamtinker.desire_gem.flavor": "As Shiny as Star",
   "material.dreamtinker.despair_gem": "Despair Gem",
   "material.dreamtinker.despair_gem.flavor": "After desire drown in tears, time devoted by wolves......only remain is despair",
+  "material.dreamtinker.shadowskin": "Shadow Skin",
+  "material.dreamtinker.shadowskin.flavor": "Why shadow have skin",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "Molten echo Alloy",
   "fluid.dreamtinker.molten_echo_alloy": "Molten echo Alloy",

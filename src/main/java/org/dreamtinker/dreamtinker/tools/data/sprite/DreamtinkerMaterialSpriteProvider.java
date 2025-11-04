@@ -4,6 +4,7 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.client.data.material.AbstractMaterialSpriteProvider;
+import slimeknights.tconstruct.library.client.data.spritetransformer.GreyToColorMapping;
 import slimeknights.tconstruct.library.client.data.spritetransformer.GreyToSpriteTransformer;
 import slimeknights.tconstruct.tools.stats.*;
 
@@ -158,6 +159,18 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFFA92E3F)
                                                 .addARGB(255, 0xFFC24E5C)
                                                 .build());
+
+        buildMaterial(DreamtinkerMaterialIds.shadowskin)
+                .fallbacks("cloth")
+                .cuirass().maille()
+                .colorMapper(GreyToColorMapping.builderFromBlack()
+                                               .addARGB(63, 0xFF050505)
+                                               .addARGB(102, 0xFF0A0A0A)
+                                               .addARGB(140, 0xFF111111)
+                                               .addARGB(178, 0xFF1A1A1A)
+                                               .addARGB(216, 0xFF262626)
+                                               .addARGB(255, 0xFF3A3A3A)
+                                               .build());
         addELMaterials();
         addMalumMaterials();
     }

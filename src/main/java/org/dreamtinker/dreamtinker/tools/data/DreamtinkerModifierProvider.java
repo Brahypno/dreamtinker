@@ -170,6 +170,9 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                           .filter(ItemPredicate.and(ItemPredicate.tag(MODIFIABLE), ItemPredicate.tag(ARMOR).inverted(),
                                                                     ItemPredicate.tag(DreamtinkerTagKeys.Items.weapon_slot_excluded).inverted())).flatSlots(5))
                 .addModule(InventoryMenuModule.ANY);
+        buildModifier(Ids.shadow_blessing).levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                                          .addModule(AttributeModule.builder(TinkerAttributes.PROTECTION_CAP, AttributeModifier.Operation.ADDITION)
+                                                                    .tooltipStyle(AttributeModule.TooltipStyle.PERCENT).flat(0.05f));
         addELModifiers();
         addMalumModifiers();
 

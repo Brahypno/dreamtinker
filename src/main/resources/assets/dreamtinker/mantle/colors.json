@@ -93,7 +93,8 @@
     "requiem": "#A92E3F",
     "peaches_in_memory": "#AFEFB1",
     "weapon_dreams": "#777B7E",
-    "weapon_slots": "#777B7E"
+    "weapon_slots": "#777B7E",
+    "shadow_blessing": "#050505"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
@@ -117,7 +118,8 @@
     "amber": "#FE9300",
     "half_rotten_homunculus": "#550703",
     "desire_gem": "#7AB97B",
-    "despair_gem": "#6D051A"
+    "despair_gem": "#6D051A",
+    "shadowskin": "#050505"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873"

@@ -188,6 +188,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addArmorShieldStats(DreamtinkerMaterialIds.despair_gem,
                             PlatingMaterialStats.builder().durabilityFactor(200).armor(7f, 7f, 7f, 7f).toughness(7).knockbackResistance(7f),
                             StatlessMaterialStats.MAILLE);
+        addMaterialStats(DreamtinkerMaterialIds.shadowskin, StatlessMaterialStats.MAILLE, StatlessMaterialStats.CUIRASS);
 
         addArmorShieldStats(DreamtinkerMaterialIds.etherium,
                             PlatingMaterialStats.builder().durabilityFactor(132).armor(4f, 9f, 7f, 4f).toughness(4).knockbackResistance(0f),
@@ -213,7 +214,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addMaterialStats(DreamtinkerMaterialIds.soul_rock, StatlessMaterialStats.SHIELD_CORE);
     }
 
-    private void addMisc() {}
+    private void addMisc() {
+        addMaterialStats(DreamtinkerMaterialIds.shadowskin, StatlessMaterialStats.REPAIR_KIT);
+    }
 
     @Override
     public @NotNull String getName() {
