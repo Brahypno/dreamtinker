@@ -126,6 +126,11 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         PartSwapCastingRecipeBuilder.tableRecipe(Ingredient.of(DreamtinkerTools.silence_glove), 6)
                                     .index(0)
                                     .save(consumer, location(folder + "silence_glove_hardware"));
+        PartBuilderToolRecycleBuilder.tool(DreamtinkerTools.silence_glove)
+                                     .part(TinkerToolParts.smallBlade)
+                                     .part(TinkerToolParts.toughBinding)
+                                     .part(TinkerToolParts.repairKit)
+                                     .save(consumer, location(recycle_folder + "silence_glove"));
 
     }
 

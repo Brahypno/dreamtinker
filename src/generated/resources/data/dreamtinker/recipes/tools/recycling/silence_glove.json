@@ -1,0 +1,14 @@
+{
+  "type": "tconstruct:part_builder_tool_recycling",
+  "parts": [
+    "tconstruct:small_blade",
+    "tconstruct:tough_binding",
+    "tconstruct:repair_kit"
+  ],
+  "pattern": {
+    "tag": "tconstruct:patterns/default"
+  },
+  "tools": {
+    "item": "dreamtinker:silence_glove"
+  }
+}
