@@ -1,49 +1,42 @@
 package org.dreamtinker.dreamtinker.tools.events;
 
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.util.RandomSource;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.UseOnContext;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
+import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.dreamtinker.dreamtinker.tools.items.SilenceGlove;
+import org.dreamtinker.dreamtinker.utils.CuriosCompact;
+import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.GeneralInteractionModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.InteractionSource;
 import slimeknights.tconstruct.library.tools.capability.inventory.ToolInventoryCapability;
+import slimeknights.tconstruct.library.tools.nbt.IModDataView;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalInt;
 
+import static org.dreamtinker.dreamtinker.tools.modifiers.events.weaponDreamsEnsureEnds.startChosenDisplay;
+import static org.dreamtinker.dreamtinker.tools.modifiers.tools.silence_glove.weapon_dreams.computeProxyCooldownTicks;
+import static slimeknights.tconstruct.library.tools.item.IModifiable.DEFER_OFFHAND;
+import static slimeknights.tconstruct.library.tools.item.IModifiable.NO_INTERACTION;
+
+@Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class SilenceGloveEvents {
     private static final ThreadLocal<Boolean> REENTRY = ThreadLocal.withInitial(() -> Boolean.FALSE);
-
-    // —— 挖掘期临时状态 —— //
-    private static final String KEY_ACTIVE = "tp_active";
-    private static final String KEY_ACTIVE_SLOT = "tp_active_slot";
-    private static final String KEY_PROXY_NBT = "tp_proxy_nbt";
-    private static final String KEY_LAST_POS = "tp_last_pos";
-    private static final String KEY_TIMEOUT = "tp_timeout";
-    private static final int CANCEL_GRACE_TICKS = 10;
-
-    private static CompoundTag pdata(Player p) {return p.getPersistentData();}
-
-    private static boolean isActive(Player p) {return pdata(p).getBoolean(KEY_ACTIVE);}
-
-    private static void clearActive(Player p) {
-        CompoundTag t = pdata(p);
-        t.remove(KEY_ACTIVE);
-        t.remove(KEY_ACTIVE_SLOT);
-        t.remove(KEY_PROXY_NBT);
-        t.remove(KEY_LAST_POS);
-        t.remove(KEY_TIMEOUT);
-    }
 
     /* ========== 右键空气/物品：随机 use ========== */
     @SubscribeEvent(priority = EventPriority.HIGHEST)
@@ -54,193 +47,97 @@ public class SilenceGloveEvents {
         if (player == null)
             return;
 
-        InteractionHand hand = event.getHand();
+        ItemStack tool;
         ItemStack proxy = player.getMainHandItem();
-        if (!(proxy.getItem() instanceof SilenceGlove))
-            return;
-        ToolStack silenceGlove = ToolStack.from(proxy);
-        ModifierEntry entry = silenceGlove.getModifier(DreamtinkerModifiers.Ids.weapon_slots);
-        if (entry.getLevel() < 1)
-            return;
-        ItemStack chosen;
+        if (proxy.isEmpty())
+            tool = CuriosCompact.findPreferredGlove(player);
+        else
+            tool = proxy.copy();
 
-        List<ItemStack> itemFrames = new ArrayList<>();
-        entry.getHook(ToolInventoryCapability.HOOK).getAllStacks(silenceGlove, entry, itemFrames);
-        OptionalInt idxOpt = pickNonAirIndex(itemFrames, RandomSource.create());
-        int slot;
-        if (idxOpt.isPresent()){
-            slot = idxOpt.getAsInt();
-            chosen = itemFrames.get(slot);
-        }else
+        if (!(tool.getItem() instanceof SilenceGlove))
+            return;
+        if (player.getCooldowns().isOnCooldown(DreamtinkerTools.silence_glove.asItem()))
             return;
 
-        event.setCanceled(true);
+        if (!player.level().isClientSide){
+            ToolStack silenceGlove = ToolStack.from(tool);
+            ModifierEntry entry = silenceGlove.getModifier(DreamtinkerModifiers.Ids.weapon_slots);
+            if (entry.getLevel() < 1)
+                return;
+            ItemStack chosen;
+            List<ItemStack> itemFrames = new ArrayList<>();
+            entry.getHook(ToolInventoryCapability.HOOK).getAllStacks(silenceGlove, entry, itemFrames);
 
-        ItemStack proxySnap = proxy.copy();
-        try {
-            REENTRY.set(true);
-            player.setItemInHand(hand, chosen.copy());
-            player.getInventory().setChanged();
+            OptionalInt idxOpt = pickUsable(itemFrames, player);
+            int slot;
+            if (idxOpt.isPresent()){
+                slot = idxOpt.getAsInt();
+                chosen = itemFrames.get(slot);
+            }else
+                return;
 
-            player.getMainHandItem().use(player.level(), player, hand);
+            if (chosen.isEmpty() || !chosen.is(TinkerTags.Items.MODIFIABLE))
+                return;
+            ItemStack proxySnap = proxy.copy();
 
-            ItemStack after = player.getMainHandItem().copy();
-            entry.getHook(ToolInventoryCapability.HOOK).setStack(silenceGlove, entry, slot, after);
-        }
-        finally {
-            player.setItemInHand(hand, proxySnap);
-            player.getInventory().setChanged();
-            REENTRY.set(false);
-        }
-    }
+            try {
+                REENTRY.set(true);
+                player.setItemInHand(InteractionHand.MAIN_HAND, chosen.copy());
+                player.getInventory().setChanged();
+                startChosenDisplay((ServerPlayer) player, chosen, proxySnap, computeProxyCooldownTicks(silenceGlove));
 
-    /* ========== 右键方块：随机 useOn ========== */
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-        if (Boolean.TRUE.equals(REENTRY.get()))
-            return;
-        Player player = event.getEntity();
-        if (player == null)
-            return;
-
-        InteractionHand hand = event.getHand();
-        ItemStack proxy = player.getMainHandItem();
-        if (!(proxy.getItem() instanceof SilenceGlove))
-            return;
-        ToolStack silenceGlove = ToolStack.from(proxy);
-        ModifierEntry entry = silenceGlove.getModifier(DreamtinkerModifiers.Ids.weapon_slots);
-        if (entry.getLevel() < 1)
-            return;
-        ItemStack chosen;
-
-        List<ItemStack> itemFrames = new ArrayList<>();
-        entry.getHook(ToolInventoryCapability.HOOK).getAllStacks(silenceGlove, entry, itemFrames);
-        OptionalInt idxOpt = pickNonAirIndex(itemFrames, RandomSource.create());
-        int slot;
-        if (idxOpt.isPresent()){
-            slot = idxOpt.getAsInt();
-            chosen = itemFrames.get(slot);
-        }else
-            return;
-
-        event.setCanceled(true);
-
-        ItemStack proxySnap = proxy.copy();
-        try {
-            REENTRY.set(true);
-            player.setItemInHand(hand, chosen.copy());
-            player.getInventory().setChanged();
-
-            var ctx = new UseOnContext(player, hand, event.getHitVec());
-            player.getMainHandItem().useOn(ctx);
-
-            ItemStack after = player.getMainHandItem().copy();
-            entry.getHook(ToolInventoryCapability.HOOK).setStack(silenceGlove, entry, slot, after);
-        }
-        finally {
-            player.setItemInHand(hand, proxySnap);
-            player.getInventory().setChanged();
-            REENTRY.set(false);
+                player.getMainHandItem().use(player.level(), player, InteractionHand.MAIN_HAND);
+                ItemStack after = player.getMainHandItem().copy();
+                entry.getHook(ToolInventoryCapability.HOOK).setStack(silenceGlove, entry, slot, after);
+            }
+            finally {
+                REENTRY.set(false);
+            }
         }
     }
 
-    /* ========== 左键挖掘：期间主手临时为内部工具，破坏成功后写回并还原 ========== */
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public static void onLeftClickBlock(PlayerInteractEvent.LeftClickBlock event) {
-        if (Boolean.TRUE.equals(REENTRY.get()))
-            return;
-        Player player = event.getEntity();
-        if (player == null)
-            return;
-
-        ItemStack proxy = player.getMainHandItem();
-        if (!(proxy.getItem() instanceof SilenceGlove))
-            return;
-        ToolStack silenceGlove = ToolStack.from(proxy);
-        ModifierEntry entry = silenceGlove.getModifier(DreamtinkerModifiers.Ids.weapon_slots);
-        if (entry.getLevel() < 1)
-            return;
-        ItemStack chosen;
-
-        List<ItemStack> itemFrames = new ArrayList<>();
-        entry.getHook(ToolInventoryCapability.HOOK).getAllStacks(silenceGlove, entry, itemFrames);
-        OptionalInt idxOpt = pickNonAirIndex(itemFrames, RandomSource.create());
-        int slot;
-        if (idxOpt.isPresent()){
-            slot = idxOpt.getAsInt();
-            chosen = itemFrames.get(slot);
-        }else
-            return;
-
-        // 记录快照 + 状态
-        CompoundTag snap = new CompoundTag();
-        proxy.save(snap);
-        CompoundTag pd = pdata(player);
-        pd.putBoolean(KEY_ACTIVE, true);
-        pd.putInt(KEY_ACTIVE_SLOT, slot);
-        pd.put(KEY_PROXY_NBT, snap);
-        pd.putLong(KEY_LAST_POS, event.getPos().asLong());
-        pd.putInt(KEY_TIMEOUT, 0);
-
-        try {
-            REENTRY.set(true);
-            player.setItemInHand(InteractionHand.MAIN_HAND, chosen.copy());
-            player.getInventory().setChanged();
-            // 放行：让原版开始破坏
-        }
-        finally {
-            REENTRY.set(false);
-        }
-    }
-
-    /* ========== 破坏成功：写回并还原 ========== */
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public static void onBlockBreak(BlockEvent.BreakEvent event) {
-        Player p = event.getPlayer();
-        if (p == null || !isActive(p))
-            return;
-        if (pdata(p).getLong(KEY_LAST_POS) != event.getPos().asLong())
-            return;
-        // restoreIfHoldingProxySnapshot(p, true);
-    }
-
-    /* ========== Tick：取消监控 ========== */
-    @SubscribeEvent
-    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END)
-            return;
-        Player p = event.player;
-        if (!isActive(p))
-            return;
-
-        // 如果主手又变回 Proxy（玩家手动切了），直接清理
-        if (!p.getMainHandItem().isEmpty() && p.getMainHandItem().getItem() instanceof SilenceGlove){
-            clearActive(p);
-            return;
-        }
-
-        int t = pdata(p).getInt(KEY_TIMEOUT) + 1;
-        if (t >= CANCEL_GRACE_TICKS){
-            // restoreIfHoldingProxySnapshot(p, false); // 未破坏成功不强制写回
-        }else {
-            pdata(p).putInt(KEY_TIMEOUT, t);
-        }
-    }
-
-
-    private static OptionalInt pickNonAirIndex(List<ItemStack> stacks, RandomSource random) {
+    private static OptionalInt pickUsable(List<ItemStack> stacks, Player player) {
         int chosen = -1;
         int seen = 0; // 已遇到的非空数量
         for (int i = 0; i < stacks.size(); i++) {
             ItemStack s = stacks.get(i);
+            ToolStack tool = ToolStack.from(s);
             if (!s.isEmpty()){ // 等价于“不是空气/空堆”
-                seen++;
-                // 以 1/seen 的概率替换当前选择
-                if (random.nextInt(seen) == 0){
-                    chosen = i;
+                boolean verify = false;
+                if (shouldInteract(player, tool, InteractionHand.MAIN_HAND)){
+                    for (ModifierEntry entry : tool.getModifierList()) {
+                        InteractionResult result =
+                                ((GeneralInteractionModifierHook) entry.getHook(ModifierHooks.GENERAL_INTERACT)).onToolUse(tool, entry, player,
+                                                                                                                           InteractionHand.MAIN_HAND,
+                                                                                                                           InteractionSource.RIGHT_CLICK);
+                        if (result.consumesAction()){
+                            verify = true;
+                            break;
+                        }
+                    }
+                }
+                InteractionResult res = s.use(player.level(), player, InteractionHand.MAIN_HAND).getResult();
+
+                if (InteractionResult.CONSUME == res || InteractionResult.SUCCESS == res || verify){
+                    seen++;
+                    // 以 1/seen 的概率替换当前选择
+                    if (player.level().random.nextInt(seen) == 0){
+                        chosen = i;
+                    }
                 }
             }
         }
         return chosen >= 0 ? OptionalInt.of(chosen) : OptionalInt.empty();
+    }
+
+    private static boolean shouldInteract(@Nullable LivingEntity player, ToolStack toolStack, InteractionHand hand) {
+        IModDataView volatileData = toolStack.getVolatileData();
+        if (volatileData.getBoolean(NO_INTERACTION)){
+            return false;
+        }else if (hand == InteractionHand.OFF_HAND){
+            return true;
+        }else {
+            return player == null || !volatileData.getBoolean(DEFER_OFFHAND) || player.getOffhandItem().isEmpty();
+        }
     }
 }

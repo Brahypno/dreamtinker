@@ -56,7 +56,7 @@ public class addSilenceGloveCurio {
             ToolStack tool = ToolStack.from(stack);
             int extraRings = 0; // ← 你已有的“按内部最高攻值换算”逻辑
             if (!tool.isBroken())
-                extraRings = (int) (Math.ceil(tool.getStats().getInt(ToolStats.ATTACK_DAMAGE) / 2.0f) + 1);
+                extraRings = Math.min(6, (int) (Math.ceil(tool.getStats().getInt(ToolStats.ATTACK_DAMAGE) / 2.0f) + 1));
             if (extraRings > 0){
                 top.theillusivec4.curios.api.CuriosApi.addSlotModifier(
                         attributes, "ring", UUID.nameUUIDFromBytes(stack.getItem().toString().getBytes()), extraRings, AttributeModifier.Operation.ADDITION);

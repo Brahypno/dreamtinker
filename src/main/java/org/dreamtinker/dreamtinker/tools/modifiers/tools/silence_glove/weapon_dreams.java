@@ -16,6 +16,7 @@ import org.dreamtinker.dreamtinker.library.modifiers.DreamtinkerHook;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
+import org.dreamtinker.dreamtinker.utils.CuriosCompact;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -34,8 +35,24 @@ public class weapon_dreams extends BattleModifier {
     private static final ThreadLocal<Boolean> IN_ATTACK = ThreadLocal.withInitial(() -> false);
 
     @Override
+    public int getUseDuration(IToolStackView tool, ModifierEntry modifier) {
+        return 72000;
+    }
+
+    @Override
     public int getPriority() {
         return Integer.MAX_VALUE;
+    }
+
+    @Override
+    public void onRightClickEmpty(IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot) {
+        if (IN_ATTACK.get())
+            return;
+        if (player instanceof ServerPlayer sp && !level.isClientSide && player.getMainHandItem().isEmpty() && !player.isUsingItem()){
+            IN_ATTACK.set(true);
+            sp.gameMode.useItem(sp, level, CuriosCompact.findPreferredGlove(player), InteractionHand.MAIN_HAND);
+            IN_ATTACK.set(false);
+        }
     }
 
     @Override
@@ -89,12 +106,12 @@ public class weapon_dreams extends BattleModifier {
 
             // ===== 服务端：不要再调用 player.attack()，直接执行业务逻辑（chosen → 钩子 → 回写 → 还原） =====
             ServerPlayer sp = (ServerPlayer) player;
+            int cooldownTicks = computeProxyCooldownTicks(tool);
             try {
                 // 临时换手仅为让某些钩子/附魔读取到正确主手；也可直接不用换手，仅把 chosen 传入钩子
                 update_hand(player, chosen.copy());
                 // 1) 刚切换为 chosen 时，立即让客户端主手槽显示 chosen
-                startChosenDisplay(sp, chosen, proxySnap, null != state);
-
+                startChosenDisplay(sp, chosen, proxySnap, cooldownTicks);
 
                 player.attackStrengthTicker = (int) Math.ceil(player.getCurrentItemAttackStrengthDelay());
 
@@ -114,12 +131,6 @@ public class weapon_dreams extends BattleModifier {
             }
             finally {
                 // 还原主手（服务端权威）
-
-                if (null == state){
-                    int cooldownTicks = computeProxyCooldownTicks(tool);
-                    player.getCooldowns().addCooldown(proxySnap.getItem(), cooldownTicks);
-                    update_hand(player, proxySnap);
-                }
             }
         }
     }

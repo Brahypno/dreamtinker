@@ -1,0 +1,17 @@
+{
+  "tool": "dreamtinker:silence_glove",
+  "text": [
+    { "text": "A special tool that have 5 inventory slots that is capable for tinkers` construct tool." },
+    { "text": "When the inventory is not empty, left operation and right use item operation with this tool would be transformed with random one of the inventory tool.", "paragraph": false },
+    { "text": "Found in loot chest of ancient city or trail ruins rare.\nWhen curio loaded, it can equip on hands slot and increase ring size based on tool melee damage and still trigger effects.", "paragraph": false }
+  ],
+  "properties": [
+      "+0 Attack Damage",
+      "1.2 Attack Speed",
+      "Weapon Slots",
+      "Weapon Arts",
+      "3 Upgrade Slots",
+      "1 Ability Slot",
+      "2 Soul Slot"
+    ]
+}

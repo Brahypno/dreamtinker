@@ -9,6 +9,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -26,19 +27,19 @@ public class weaponDreamsEnsureEnds {
         int ticks;                // 延迟计数
         final boolean waitCooldown;
         int selectedAtStart;
-        final boolean isPlayerMining;
+        final int cooldownTicks;
 
-        Pending(UUID s, ItemStack snap, int delay, boolean waitCd, int selected, boolean isMining) {
+        Pending(UUID s, ItemStack snap, int delay, boolean waitCd, int selected, int cooldownTicks) {
             session = s;
             proxySnap = snap.copy();
             ticks = delay;
             waitCooldown = waitCd;
             selectedAtStart = selected;
-            isPlayerMining = isMining;
+            this.cooldownTicks = cooldownTicks;
         }
     }
 
-    public static void startChosenDisplay(ServerPlayer sp, ItemStack chosen, ItemStack proxySnap, boolean isMining) {
+    public static void startChosenDisplay(ServerPlayer sp, ItemStack chosen, ItemStack proxySnap, int cooldownTicks) {
         // 若有旧的，先立即还原
         endChosen(sp);
 
@@ -49,17 +50,17 @@ public class weaponDreamsEnsureEnds {
                 slotId, chosen.copy()));
 
         UUID sid = UUID.randomUUID();
-        PENDING.put(sp.getUUID(), new Pending(sid, proxySnap, /*delay*/8, /*waitCd*/false, sp.getInventory().selected, isMining));
+        PENDING.put(sp.getUUID(), new Pending(sid, proxySnap, /*delay*/8, /*waitCd*/false, sp.getInventory().selected, cooldownTicks));
     }
 
     static void endChosen(ServerPlayer sp) {
         Pending p = PENDING.remove(sp.getUUID());
         if (p == null)
             return;
-        if (p.isPlayerMining){
-            sp.setItemInHand(InteractionHand.MAIN_HAND, p.proxySnap);
-            sp.getInventory().setChanged();
-        }
+
+        sp.setItemInHand(InteractionHand.MAIN_HAND, p.proxySnap);
+        sp.getInventory().setChanged();
+        sp.getCooldowns().addCooldown(DreamtinkerTools.silence_glove.get(), p.cooldownTicks);
         int slotId = 36 + sp.getInventory().selected;
         sp.connection.send(new ClientboundContainerSetSlotPacket(
                 sp.inventoryMenu.containerId,
@@ -84,6 +85,8 @@ public class weaponDreamsEnsureEnds {
                 continue;
             }
             Pending p = en.getValue();
+            if (sp.isUsingItem() && sp.getTicksUsingItem() < sp.getUseItemRemainingTicks())
+                sp.useItemRemaining = (int) (sp.getUseItem().getUseDuration() * 0.4);
 
             if (sp.getInventory().selected == p.selectedAtStart){
                 if (p.ticks > 0){
@@ -92,7 +95,7 @@ public class weaponDreamsEnsureEnds {
                 }
                 if (p.waitCooldown && sp.getAttackStrengthScale(0) < 1.0F)
                     continue;
-                if (isMining(sp))
+                if (isMining(sp) || sp.isUsingItem())
                     continue;
             }
             // 触发还原

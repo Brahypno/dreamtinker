@@ -57,6 +57,7 @@ public class DreamtinkerTagKeys {
         public static final TagKey<Item> raw_stibnite = forgeTag("raw_materials/stibnite");
         public static final TagKey<Item> weapon_slot_excluded = dtTag("modifiable/excluded_weapon_slot");
         public static final TagKey<Item> HANDS = modTag("curios:hands");
+        public static final TagKey<Item> CURIOS = dtTag("my_curios");
 
     }
 

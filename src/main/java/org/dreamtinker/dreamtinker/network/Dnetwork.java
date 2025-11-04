@@ -29,5 +29,7 @@ public class Dnetwork {
                                 Optional.of(NetworkDirection.PLAY_TO_CLIENT));
         CHANNEL.registerMessage(packetId++, KeyStateMsg.class, KeyStateMsg::encode, KeyStateMsg::decode, KeyStateMsg::handle,
                                 Optional.of(NetworkDirection.PLAY_TO_SERVER));
+        CHANNEL.registerMessage(packetId++, RightClickEmptyPacket.class, RightClickEmptyPacket::toBytes, RightClickEmptyPacket::new,
+                                RightClickEmptyPacket::handle);
     }
 }
