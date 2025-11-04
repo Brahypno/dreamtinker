@@ -789,6 +789,14 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setSlots(SlotType.UPGRADE, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.icy_memory, upgradeSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.icy_memory, upgradeFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.icy_memory)
+                             .setTools(TinkerTags.Items.MELEE_WEAPON)
+                             .addInput(DreamtinkerCommon.unborn_dragon_egg.get())
+                             .addInput(DreamtinkerCommon.despair_gem.get())
+                             .setLevelRange(3, 3)
+                             .setSlots(SlotType.SOUL, 1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.icy_memory, soulSalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.Ids.icy_memory, soulFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.hate_memory)
                              .setTools(TinkerTags.Items.MELEE_WEAPON)
                              .addInput(DreamtinkerCommon.unborn_egg.get())
@@ -796,9 +804,9 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(Items.IRON_AXE)
                              .addInput(Tags.Items.TOOLS_CROSSBOWS)
                              .setMaxLevel(3)
-                             .setSlots(SlotType.UPGRADE, 1)
-                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.hate_memory, upgradeSalvage))
-                             .save(consumer, prefix(DreamtinkerModifiers.Ids.hate_memory, upgradeFolder));
+                             .setSlots(SlotType.SOUL, 1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.hate_memory, soulSalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.Ids.hate_memory, soulFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.foundation_will)
                              .setTools(Ingredient.of(DreamtinkerTools.narcissus_wing))
                              .addInput(DreamtinkerCommon.unborn_turtle_egg.get())

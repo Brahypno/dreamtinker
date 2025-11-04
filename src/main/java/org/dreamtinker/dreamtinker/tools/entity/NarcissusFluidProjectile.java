@@ -1,6 +1,7 @@
 package org.dreamtinker.dreamtinker.tools.entity;
 
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
@@ -25,6 +26,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.fluids.TinkerFluids;
@@ -240,7 +242,10 @@ public class NarcissusFluidProjectile extends Projectile {
 
         Entity entity1 = this.getOwner();
         if (null != entity1){
-            DamageSource damagesource = null != toolStackView && 1 < toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) ?
+            DamageSource damagesource = null != toolStackView && 2 < toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) ?
+                                        new DamageSource(entity1.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE)
+                                                                .getHolderOrThrow(DreamtinkerDamageTypes.NULL_VOID), this, entity1) :
+                                        null != toolStackView && 1 < toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) ?
                                         this.damageSources().sonicBoom(entity1) :
                                         null != toolStackView && 0 < toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) ?
                                         this.damageSources().indirectMagic(this, entity1) :

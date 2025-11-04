@@ -108,7 +108,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(ModifierRequirementsModule.builder().requireModifier(memory_base.getId(), 1)
                                                      .modifierKey(Ids.soul_core).build());
         buildModifier(Ids.icy_memory)
-                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .levelDisplay(new ModifierLevelDisplay.UniqueForLevels(3))
                 .addModule(ModifierRequirementsModule.builder().requireModifier(memory_base.getId(), 1)
                                                      .modifierKey(Ids.icy_memory).build());
         buildModifier(Ids.hate_memory)
