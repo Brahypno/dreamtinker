@@ -65,6 +65,8 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
                          Ids.malum_animated, Ids.malum_rebound, Ids.malum_ascension, Ids.malum_haunted, Ids.malum_replenishing, Ids.malum_spirit_plunder,
                          malum_soul_attributes.getId(), malum_malignant_attributes.getId(), Ids.malum_edge_of_deliverance, Ids.malum_tyrving,
                          Ids.malum_world_of_weight, malum_magic_attack.getId(), malum_range_accelerator.getId(), malum_evolution.getId());
+        this.tag(TinkerTags.Modifiers.OVERSLIME_FRIEND)
+            .add(Ids.shadow_blessing);
     }
 
     @Override

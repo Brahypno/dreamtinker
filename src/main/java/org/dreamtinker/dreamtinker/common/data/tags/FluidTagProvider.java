@@ -63,6 +63,7 @@ public class FluidTagProvider extends FluidTagsProvider {
                              DreamtinkerFluids.molten_malignant_gluttony.getTag());
         this.tag(DreamtinkerTagKeys.Fluids.molten_echo_shard).addTags(DreamtinkerFluids.molten_echo_shard.getTag());
         this.tag(DreamtinkerTagKeys.Fluids.molten_crying_obsidian).addTags(DreamtinkerFluids.molten_crying_obsidian.getTag());
+        this.tag(TinkerTags.Fluids.SLIME_TOOLTIPS).addTags(DreamtinkerFluids.reversed_shadow.getTag());
     }
 
     /**
