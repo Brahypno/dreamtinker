@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "item": "dreamtinker:soul_steel"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_soul_steel"
+  },
+  "temperature": 1000,
+  "time": 199
+}

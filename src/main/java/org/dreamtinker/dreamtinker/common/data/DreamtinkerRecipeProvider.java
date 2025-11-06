@@ -174,6 +174,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                           .addInput(DreamtinkerFluids.reversed_shadow.getTag(), FluidValues.SLIMEBALL * 7)
                           .addInput(DreamtinkerFluids.molten_lupi_antimony.getTag(), FluidValues.INGOT * 2)
                           .save(consumer, location("despair_essence"));
+        AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_soul_steel, FluidValues.INGOT)
+                          .addInput(TinkerFluids.moltenSteel.getTag(), FluidValues.INGOT)
+                          .addInput(TinkerFluids.liquidSoul.getTag(), FluidValues.GLASS_BLOCK * 2)
+                          .save(consumer, location("molten_soul_steel"));
     }
 
     private void addCastingRecipes(Consumer<FinishedRecipe> consumer) {
@@ -377,8 +381,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                             .save(consumer, location(folder + "amber/ore"));
 
         meltCast(DreamtinkerFluids.molten_desire.get(), DreamtinkerCommon.desire_gem.get(), FluidValues.GEM, consumer);
-
         meltCast(DreamtinkerFluids.despair_essence.get(), DreamtinkerCommon.despair_gem.get(), FluidValues.GEM, consumer);
+        meltCast(DreamtinkerFluids.molten_soul_steel.get(), DreamtinkerCommon.soul_steel.get(), FluidValues.INGOT, consumer);
     }
 
     String materials_folder = "tools/materials/";
@@ -432,6 +436,11 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                           slimeskinFolder, "shadowskin");
         materialComposite(consumer, DreamtinkerMaterialIds.shadowskin, MaterialIds.leather, TinkerFluids.venom, FluidValues.SIP, slimeskinFolder,
                           "shadowskin_cleaning");
+
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.soul_steel, DreamtinkerFluids.molten_soul_steel, FluidValues.INGOT,
+                               materials_folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.soul_steel, Ingredient.of(DreamtinkerCommon.soul_steel.get()), 1, 1,
+                       materials_folder + "soul_steel");
 
     }
 

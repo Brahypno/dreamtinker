@@ -35,8 +35,8 @@ import java.util.function.Function;
 import static org.dreamtinker.dreamtinker.Dreamtinker.MODID;
 
 public class DreamtinkerCommon extends DreamtinkerModule {
-    public static final RegistryObject<CreativeModeTab> ORE =
-            TABS.register("ore", () -> CreativeModeTab.builder().title(Component.translatable("itemGroup." + MODID + ".ore")).icon(() -> new ItemStack(
+    public static final RegistryObject<CreativeModeTab> ITEM =
+            TABS.register("ore", () -> CreativeModeTab.builder().title(Component.translatable("itemGroup." + MODID + ".item")).icon(() -> new ItemStack(
                     DreamtinkerCommon.metallivorous_stibium_lupus.get())).displayItems(DreamtinkerCommon::addTabs).build());
     protected static final Item.Properties ITEM_PROPS = new Item.Properties();
     //star antimony
@@ -116,6 +116,9 @@ public class DreamtinkerCommon extends DreamtinkerModule {
             ITEMS.register("unborn_dragon_egg", () -> new Item(ITEM_PROPS.rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> unborn_spawn_egg = ITEMS.register("unborn_spawn_egg", () -> new Item(ITEM_PROPS.rarity(Rarity.EPIC)));
 
+    public static final RegistryObject<Item> soul_steel =
+            ITEMS.register("soul_steel", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
+
     public static final RegistryObject<Item> soul_etherium = EL_ITEMS.register(
             "soul_etherium",
             () -> new Item(new Item.Properties().rarity(Rarity.EPIC)) {
@@ -178,6 +181,7 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         output.accept(despair_gem.get());
         output.accept(desire_gem.get());
         output.accept(poisonousHomunculus.get());
+        output.accept(soul_steel.get());
         if (ModList.get().isLoaded("malum"))
             output.accept(malignant_gluttony.get());
         if (ModList.get().isLoaded("enigmaticlegacy"))

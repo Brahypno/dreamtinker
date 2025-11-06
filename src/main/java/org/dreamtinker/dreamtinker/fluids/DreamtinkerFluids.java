@@ -6,6 +6,8 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -14,7 +16,11 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.registries.RegistryObject;
+import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
+import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import slimeknights.mantle.fluid.UnplaceableFluid;
 import slimeknights.mantle.registration.deferred.FluidDeferredRegister;
 import slimeknights.mantle.registration.object.FlowingFluidObject;
@@ -27,6 +33,13 @@ import java.util.function.Supplier;
 import static org.dreamtinker.dreamtinker.DreamtinkerModule.*;
 
 public class DreamtinkerFluids {
+    public static final RegistryObject<CreativeModeTab> tabFluids = TABS.register(
+            "fluids", () -> CreativeModeTab.builder().title(Dreamtinker.makeTranslation("itemGroup", "fluids"))
+                                           .icon(() -> new ItemStack(DreamtinkerFluids.blood_soul))
+                                           .displayItems(DreamtinkerFluids::addTabItems)
+                                           .withTabsBefore(DreamtinkerToolParts.PART.getId())
+                                           .withSearchBar()
+                                           .build());
 
 
     public static FluidType.Properties createFluidType(int temperature, int lightLevel, int viscosity, int density) {
@@ -212,5 +225,43 @@ public class DreamtinkerFluids {
             registerFluid(FLUIDS, "despair_essence", 3900, 100, 1000000, 0,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_BLACK, 0), 0, 0) {});
 
+    public static final FlowingFluidObject<ForgeFlowingFluid> molten_soul_steel =
+            registerFluid(FLUIDS, "molten_soul_steel", 1300, 100, 1000, 14,
+                          supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.STONE, 14), 10, 6) {});
 
+    @SuppressWarnings("deprecation")
+    private static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
+        // containers
+        output.accept(molten_echo_alloy);
+        output.accept(molten_echo_shard);
+        output.accept(molten_albedo_stibium);
+        output.accept(molten_lupi_antimony);
+        output.accept(molten_ascending_antimony);
+        output.accept(liquid_smoky_antimony);
+        output.accept(molten_crying_obsidian);
+        output.accept(molten_void);
+        output.accept(liquid_trist);
+        if (ModList.get().isLoaded("enigmaticlegacy")){
+            output.accept(unstable_liquid_aether);
+            output.accept(liquid_pure_soul);
+            output.accept(molten_evil);
+            output.accept(molten_soul_aether);
+            output.accept(unholy_water);
+        }
+        if (ModList.get().isLoaded("malum")){
+            output.accept(molten_soul_stained_steel);
+            output.accept(molten_malignant_gluttony);
+            output.accept(molten_malignant_pewter);
+            output.accept(liquid_arcana_juice);
+            output.accept(liquid_concentrated_gluttony);
+        }
+
+        output.accept(reversed_shadow);
+        output.accept(blood_soul);
+
+        output.accept(liquid_amber);
+        output.accept(molten_desire);
+        output.accept(despair_essence);
+        output.accept(molten_soul_steel);
+    }
 }

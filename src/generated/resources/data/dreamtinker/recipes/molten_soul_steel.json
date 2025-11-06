@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:alloy",
+  "inputs": [
+    {
+      "amount": 90,
+      "tag": "forge:molten_steel"
+    },
+    {
+      "amount": 2000,
+      "tag": "tconstruct:liquid_soul"
+    }
+  ],
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_soul_steel"
+  },
+  "temperature": 1000
+}

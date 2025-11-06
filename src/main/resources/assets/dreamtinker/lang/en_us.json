@@ -362,7 +362,7 @@
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",
   "itemGroup.dreamtinker.item": "dreamtinker | item",
-  "itemGroup.dreamtinker.ore": "dreamtinker | item",
+  "itemGroup.dreamtinker.fluids": "dreamtinker | fluids",
 
   "item.dreamtinker.explode_core": "Explode Core",
   "item.dreamtinker.tntarrow": "TNT Arrow",
@@ -438,6 +438,7 @@
   "item.dreamtinker.despair_gem": "Despair Gem",
   "item.dreamtinker.desire_gem": "Desire Gem",
   "item.dreamtinker.poisonous_homunculus": "Poisonous Homunculus",
+  "item.dreamtinker.soul_steel": "Soul Steel",
 
   "block.dreamtinker.crying_obsidian_pane": "Crying Obsidian Pane",
   "block.dreamtinker.narcissus": "Narcissus",
@@ -500,6 +501,8 @@
   "material.dreamtinker.despair_gem.flavor": "After desire drown in tears, time devoted by wolves......only remain is despair",
   "material.dreamtinker.shadowskin": "Shadow Skin",
   "material.dreamtinker.shadowskin.flavor": "Why shadow have skin",
+  "material.dreamtinker.soul_steel": "Soul steel",
+  "material.dreamtinker.soul_steel.flavor": "Soul with Steel but another form",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "Molten echo Alloy",
   "fluid.dreamtinker.molten_echo_alloy": "Molten echo Alloy",
@@ -579,7 +582,11 @@
   "fluid_type.dreamtinker.despair_essence": "Despair Essence",
   "fluid.dreamtinker.despair_essence": "Despair Essence",
   "fluid.dreamtinker.despair_essence.fluid_effect": "Despair Essence",
+  "fluid_type.dreamtinker.molten_soul_steel": "Molten Soul Steel",
+  "fluid.dreamtinker.molten_soul_steel": "Molten Soul Steel",
+  "fluid.dreamtinker.molten_soul_steel.fluid_effect": "Molten Soul Steel",
 
+  "item.dreamtinker.molten_echo_alloy_bucket": "Molten echo alloy Bucket",
   "item.dreamtinker.molten_echo_shard_bucket": "Molten echo shard Bucket",
   "item.dreamtinker.molten_nigrescence_antimony_bucket": "Molten Nigrescence of Antimon Bucket",
   "item.dreamtinker.molten_albedo_stibium_bucket": "Molten albedo stibium Bucket",
@@ -588,7 +595,7 @@
   "item.dreamtinker.liquid_smoky_antimony_bucket": "Liquid Smoky Antimony Bucket",
   "item.dreamtinker.molten_crying_obsidian_bucket": "Molten Crying Obsidian Bucket",
   "item.dreamtinker.liquid_trist_bucket": "Liquid Trist Bucket",
-  "item.dreamtinker.molten_voidn_bucket": "Molten Void Pearl Bucket",
+  "item.dreamtinker.molten_void_bucket": "Molten Void Pearl Bucket",
   "item.dreamtinker.unstable_liquid_aether_bucket": "Unstable Liquid Aether Bucket",
   "item.dreamtinker.liquid_pure_soul_bucket": "Liquid Pure Soul Bucket",
   "item.dreamtinker.molten_nefariousness_bucket": "Molten Nefarious Essence Bucket",
@@ -605,6 +612,7 @@
   "item.dreamtinker.liquid_amber_bucket": "Temporal Nectar Bucket",
   "item.dreamtinker.molten_desire_bucket": "Molten Desire Bucket",
   "item.dreamtinker.despair_essence_bucket": "Despair Essence Bucket",
+  "item.dreamtinker.molten_soul_steel_bucket": "Molten Soul Steel Bucket",
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "bleed",
   "fluid_effect.tconstruct.damage.explosion": "explosion",

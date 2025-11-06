@@ -1,0 +1,56 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "tconstruct:soulbound"
+    },
+    {
+      "level": 1,
+      "name": "tconstruct:ductile"
+    }
+  ],
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "tconstruct:soulbound"
+      },
+      {
+        "level": 1,
+        "name": "tconstruct:ductile"
+      },
+      {
+        "level": 1,
+        "name": "tconstruct:magic_protection"
+      }
+    ],
+    "tconstruct:melee_harvest": [
+      {
+        "level": 1,
+        "name": "tconstruct:soulbound"
+      },
+      {
+        "level": 1,
+        "name": "tconstruct:ductile"
+      },
+      {
+        "level": 1,
+        "name": "tconstruct:swiftstrike"
+      }
+    ],
+    "tconstruct:ranged": [
+      {
+        "level": 1,
+        "name": "tconstruct:soulbound"
+      },
+      {
+        "level": 1,
+        "name": "tconstruct:ductile"
+      },
+      {
+        "level": 1,
+        "name": "tconstruct:pierce"
+      }
+    ]
+  }
+}

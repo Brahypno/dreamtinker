@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_fluid",
+  "fluid": {
+    "amount": 90,
+    "tag": "dreamtinker:molten_soul_steel"
+  },
+  "output": "dreamtinker:soul_steel",
+  "temperature": 1000
+}

@@ -171,6 +171,17 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                .addARGB(216, 0xFF262626)
                                                .addARGB(255, 0xFF3A3A3A)
                                                .build());
+        this.buildMaterial(DreamtinkerMaterialIds.soul_steel)
+            .meleeHarvest().armor().ranged()
+            .fallbacks("metal")
+            .colorMapper(GreyToColorMapping.builderFromBlack()
+                                           .addARGB(63, 0xFF1F3546)
+                                           .addARGB(102, 0xFF284054)
+                                           .addARGB(140, 0xFF334A5D)
+                                           .addARGB(178, 0xFF3E5568)
+                                           .addARGB(216, 0xFF476077)
+                                           .addARGB(255, 0xFF627D9A)
+                                           .build());
         addELMaterials();
         addMalumMaterials();
     }

@@ -362,7 +362,7 @@
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
   "itemGroup.dreamtinker.item": "工匠幻梦 | 道具",
-  "itemGroup.dreamtinker.ore": "工匠幻梦 | 杂项",
+  "itemGroup.dreamtinker.fluids": "工匠幻梦 | 流体",
 
   "item.dreamtinker.explode_core": "镇爆核心",
   "item.dreamtinker.tntarrow": "镇爆箭",
@@ -438,6 +438,7 @@
   "item.dreamtinker.despair_gem": "绝望宝石",
   "item.dreamtinker.desire_gem": "渴望宝石",
   "item.dreamtinker.poisonous_homunculus": "恶毒瓶中人",
+  "item.dreamtinker.soul_steel": "魂钢",
 
   "block.dreamtinker.crying_obsidian_pane": "哭泣的黑曜石板",
   "block.dreamtinker.narcissus": "水仙",
@@ -500,6 +501,8 @@
   "material.dreamtinker.despair_gem.flavor": "在渴望在泪水中淹没，时间被狼吞没……剩下的唯有绝望",
   "material.dreamtinker.shadowskin": "阴影皮",
   "material.dreamtinker.shadowskin.flavor": "阴影怎么会有皮？",
+  "material.dreamtinker.soul_steel": "魂钢",
+  "material.dreamtinker.soul_steel.flavor": "另一种魂钢",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "熔融回响合金",
   "fluid.dreamtinker.molten_echo_alloy": "熔融回响合金",
@@ -579,7 +582,11 @@
   "fluid_type.dreamtinker.despair_essence": "绝望元质",
   "fluid.dreamtinker.despair_essence": "绝望元质",
   "fluid.dreamtinker.despair_essence.fluid_effect": "绝望元质",
+  "fluid_type.dreamtinker.molten_soul_steel": "熔融魂钢",
+  "fluid.dreamtinker.molten_soul_steel": "熔融魂钢",
+  "fluid.dreamtinker.molten_soul_steel.fluid_effect": "熔融魂钢",
 
+  "item.dreamtinker.molten_echo_alloy_bucket": "熔融回响合金桶",
   "item.dreamtinker.molten_echo_shard_bucket": "熔融回响碎片桶",
   "item.dreamtinker.molten_nigrescence_antimony_bucket": "融化黑锑桶",
   "item.dreamtinker.molten_albedo_stibium_bucket": "熔融月光锑桶",
@@ -588,7 +595,7 @@
   "item.dreamtinker.liquid_smoky_antimony_bucket": "液态锑烟桶",
   "item.dreamtinker.molten_crying_obsidian_bucket": "熔融哭泣黑曜石桶",
   "item.dreamtinker.liquid_trist_bucket": "液态悲恸桶",
-  "item.dreamtinker.molten_voidn_bucket": "熔融虚空珍珠桶",
+  "item.dreamtinker.molten_void_bucket": "熔融虚空珍珠桶",
   "item.dreamtinker.unstable_liquid_aether_bucket": "不稳定液态以太桶",
   "item.dreamtinker.liquid_pure_soul_bucket": "液态纯净灵魂桶",
   "item.dreamtinker.molten_nefariousness_bucket": "熔融邪灵桶",
@@ -605,6 +612,7 @@
   "item.dreamtinker.liquid_amber_bucket": "时流浆桶",
   "item.dreamtinker.molten_desire_bucket": "熔融渴望桶",
   "item.dreamtinker.despair_essence_bucket": "绝望元质桶",
+  "item.dreamtinker.molten_soul_steel_bucket": "熔融魂钢桶",
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "流血",
   "fluid_effect.tconstruct.damage.explosion": "爆炸",

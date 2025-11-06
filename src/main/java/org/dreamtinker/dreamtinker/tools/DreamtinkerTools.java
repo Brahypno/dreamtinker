@@ -45,7 +45,7 @@ public class DreamtinkerTools extends DreamtinkerModule {
             DreamtinkerModule.TABS.register("tool", () -> CreativeModeTab.builder().title(Dreamtinker.makeTranslation("itemGroup", "tool"))
                                                                          .icon(() -> DreamtinkerTools.mashou.get().getRenderTool())
                                                                          .displayItems(DreamtinkerTools::addTabItems)
-                                                                         .withTabsBefore(DreamtinkerCommon.ORE.getId()).withSearchBar().build());
+                                                                         .withTabsBefore(DreamtinkerCommon.ITEM.getId()).withSearchBar().build());
 
     public static final ItemObject<ModifiableItem> tntarrow =
             MODI_TOOLS.register("tntarrow", () -> new TNTArrow((new Item.Properties()).stacksTo(4), DTtoolsDefinition.TNTARROW, 4));
