@@ -41,13 +41,12 @@ public class ItemTagProvider extends ItemTagsProvider {
         addItemsTags(DreamtinkerTools.mashou, MULTIPART_TOOL, DURABILITY, HARVEST, MELEE_PRIMARY, INTERACTABLE_RIGHT, SWORD, BROAD_TOOLS, BONUS_SLOTS,
                      ItemTags.SWORDS, AOE);
         addItemsTags(DreamtinkerTools.narcissus_wing, MULTIPART_TOOL, DURABILITY, HARVEST_PRIMARY, MELEE_PRIMARY, INTERACTABLE_RIGHT, SCYTHES, BROAD_TOOLS,
-                     BONUS_SLOTS,
-                     ItemTags.SWORDS, AOE, RANGED, ItemTags.PICKAXES);
+                     BONUS_SLOTS, ItemTags.SWORDS, AOE, RANGED, ItemTags.PICKAXES);
         addItemsTags(DreamtinkerTools.tntarrow, MULTIPART_TOOL, DURABILITY, MELEE_WEAPON, SMALL_TOOLS, BONUS_SLOTS);
 
         this.tag(ItemTagRegistry.SCYTHE).add(TinkerTools.scythe.asItem(), TinkerTools.kama.asItem(), DreamtinkerTools.narcissus_wing.asItem());
-        addItemsTags(DreamtinkerTools.silence_glove, DURABILITY, MELEE_PRIMARY, BONUS_SLOTS, ANCIENT_TOOLS, STAFFS, ARMOR, DreamtinkerTagKeys.Items.HANDS,
-                     DreamtinkerTagKeys.Items.CURIOS);
+        addItemsTags(DreamtinkerTools.silence_glove, DURABILITY, MELEE_PRIMARY, BONUS_SLOTS, ANCIENT_TOOLS, STAFFS, SHIELDS,
+                     DreamtinkerTagKeys.Items.HANDS, DreamtinkerTagKeys.Items.CURIOS);
         //parts
         this.tag(TinkerTags.Items.CASTS)
             .add(memory_cast.get(), wish_cast.get(), soul_cast.get(),
