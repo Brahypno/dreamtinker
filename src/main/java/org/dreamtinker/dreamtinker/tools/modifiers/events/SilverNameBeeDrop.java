@@ -28,6 +28,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
+import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
+import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.dreamtinker.dreamtinker.utils.LootEntryInspector;
 
 import java.util.ArrayList;
@@ -42,8 +44,8 @@ public class SilverNameBeeDrop {
 
     @SubscribeEvent
     public static void onSilverNameBeeDrops(LivingDropsEvent event) {
-        LivingEntity entity = event.getEntity();
-        Level level = entity.level();
+        LivingEntity victim = event.getEntity();
+        Level level = victim.level();
         DamageSource source = event.getSource();
 
         // 仅在服务端执行
@@ -58,11 +60,13 @@ public class SilverNameBeeDrop {
 
 
         // 如果攻击者是生物，则可以检查药水效果
-        if (!(attacker instanceof LivingEntity livingAttacker && livingAttacker.hasEffect(DreamtinkerEffects.SilverNameBee.get())))
+        if (!(attacker instanceof LivingEntity livingAttacker &&
+              (livingAttacker.hasEffect(DreamtinkerEffects.SilverNameBee.get()) || DTModifierCheck.ModifierInHand(livingAttacker,
+                                                                                                                  DreamtinkerModifiers.Ids.silver_name_bee))))
             return;
 
-        LootParams.Builder builder = new LootParams.Builder(serverLevel).withParameter(LootContextParams.THIS_ENTITY, entity)
-                                                                        .withParameter(LootContextParams.ORIGIN, entity.position())
+        LootParams.Builder builder = new LootParams.Builder(serverLevel).withParameter(LootContextParams.THIS_ENTITY, victim)
+                                                                        .withParameter(LootContextParams.ORIGIN, victim.position())
                                                                         .withParameter(LootContextParams.DAMAGE_SOURCE, event.getSource())
                                                                         .withOptionalParameter(LootContextParams.KILLER_ENTITY, attacker)
                                                                         .withOptionalParameter(LootContextParams.DIRECT_KILLER_ENTITY,
@@ -83,11 +87,11 @@ public class SilverNameBeeDrop {
 
         MinecraftServer server = serverLevel.getServer();
         LootParams params = builder.create(LootContextParamSets.ENTITY);
-        ResourceLocation tableId = entity.getLootTable();
+        ResourceLocation tableId = victim.getLootTable();
         LootTable table = server.getLootData().getLootTable(tableId);
 
         try {
-            rollRareEntries(table, entity, params, serverLevel);
+            rollRareEntries(table, victim, params, serverLevel);
         }
         catch (Exception ignored) {}
     }

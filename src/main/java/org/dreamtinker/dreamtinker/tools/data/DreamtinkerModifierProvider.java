@@ -173,6 +173,8 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.shadow_blessing).levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                                           .addModule(AttributeModule.builder(TinkerAttributes.PROTECTION_CAP, AttributeModifier.Operation.ADDITION)
                                                                     .tooltipStyle(AttributeModule.TooltipStyle.PERCENT).flat(0.05f));
+        buildModifier(Ids.silver_name_bee)
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
         addELModifiers();
         addMalumModifiers();
 

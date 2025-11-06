@@ -23,7 +23,6 @@ import org.dreamtinker.dreamtinker.tools.entity.NarcissusFluidProjectile;
 import org.dreamtinker.dreamtinker.tools.entity.SlashOrbitEntity;
 import org.dreamtinker.dreamtinker.tools.items.TNTArrow;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.mashou.realsweep;
-import org.dreamtinker.dreamtinker.tools.modifiers.tools.mashou.silvernamebee;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.mashou.strong_heavy;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.flamingMemory;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.foundationWill;
@@ -86,7 +85,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     //Mashuo
     public static final StaticModifier<realsweep> real_sweep = MODIFIERS.register("real_sweep", realsweep::new);
     public static final StaticModifier<strong_heavy> strong_heavy = MODIFIERS.register("strong_heavy", strong_heavy::new);
-    public static final StaticModifier<silvernamebee> silver_name_bee = MODIFIERS.register("silver_name_bee", silvernamebee::new);
     //tnt arrow
     public static final StaticModifier<strong_explode> strong_explode = MODIFIERS.register("strong_explode", strong_explode::new);
     //narcissus wing
@@ -222,6 +220,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId peaches_in_memory = id("peaches_in_memory");
         public static final ModifierId weapon_slots = id("weapon_slots");
         public static final ModifierId shadow_blessing = id("shadow_blessing");
+        public static final ModifierId silver_name_bee = id("silver_name_bee");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");

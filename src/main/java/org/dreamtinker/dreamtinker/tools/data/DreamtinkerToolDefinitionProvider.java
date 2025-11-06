@@ -82,7 +82,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                                         .trait(ModifierIds.reach, 6)
                                         .trait(DreamtinkerModifiers.real_sweep, 1)
                                         .trait(DreamtinkerModifiers.strong_heavy, 1)
-                                        .trait(DreamtinkerModifiers.silver_name_bee, 1).build())
+                                        .trait(DreamtinkerModifiers.Ids.silver_name_bee, 1).build())
                 // behavior
                 .module(ToolActionsModule.of(ToolActions.SWORD_DIG))
                 .module(swordHarvest)
