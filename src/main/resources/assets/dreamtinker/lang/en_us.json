@@ -632,6 +632,11 @@
 
   "adv.dreamtinker.eat_star_regulus.title": "Magnum Opus",
   "adv.dreamtinker.eat_star_regulus.desc": "Devour star regulus",
+  "advancements.dreamtinker.tools.silence_glove.title": "A Glove or A mystery Arts",
+  "advancements.dreamtinker.tools.silence_glove.description": "Obtain Silence Glove",
+  "advancements.dreamtinker.tools.six_finger.title": "Man with six finger hand",
+  "advancements.dreamtinker.tools.six_finger.description": "Obtain Silence Glove that provide 6 ring slots(Need Curio!)",
+
   "stat.tconstruct.harvest_tier.dreamtinker.lupus": "Lupus",
   "stat.tconstruct.harvest_tier.enigmaticlegacy.etherium": "Etherium",
 

@@ -1,0 +1,39 @@
+{
+  "criteria": {
+    "crafted_book": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dreamtinker:silence_glove"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "dreamtinker:textures/gui/advancement_background.png",
+    "description": {
+      "translate": "advancements.dreamtinker.tools.silence_glove.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "dreamtinker:silence_glove",
+      "nbt": "{Damage:0,tic_broken:0b}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.dreamtinker.tools.silence_glove.title"
+    }
+  },
+  "requirements": [
+    [
+      "crafted_book"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

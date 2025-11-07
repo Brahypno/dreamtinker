@@ -1,0 +1,41 @@
+{
+  "parent": "dreamtinker:tools/silence_glove",
+  "criteria": {
+    "damage": {
+      "conditions": {
+        "items": [
+          {
+            "type": "tconstruct:tool_stack",
+            "predicate": {
+              "type": "tconstruct:stat_in_range",
+              "min": 10.0,
+              "stat": "tconstruct:attack_damage"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.dreamtinker.tools.six_finger.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:zombie_head"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.dreamtinker.tools.six_finger.title"
+    }
+  },
+  "requirements": [
+    [
+      "damage"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

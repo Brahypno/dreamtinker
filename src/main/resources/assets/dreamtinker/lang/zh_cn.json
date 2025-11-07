@@ -632,6 +632,11 @@
 
   "adv.dreamtinker.eat_star_regulus.title": "大功业",
   "adv.dreamtinker.eat_star_regulus.desc": "品味星之锑",
+  "advancements.dreamtinker.tools.silence_glove.title": "手套，还是神秘技艺",
+  "advancements.dreamtinker.tools.silence_glove.description": "得到静默手套",
+  "advancements.dreamtinker.tools.six_finger.title": "六指琴魔",
+  "advancements.dreamtinker.tools.six_finger.description": "得到增加6个戒指槽位的静默手套（需要Curios模组！）",
+
   "stat.tconstruct.harvest_tier.dreamtinker.lupus": "狼",
   "stat.tconstruct.harvest_tier.enigmaticlegacy.etherium": "以太",
 

@@ -29,6 +29,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
+import org.dreamtinker.dreamtinker.common.data.AdvancementsProvider;
 import org.dreamtinker.dreamtinker.common.data.DTCurio;
 import org.dreamtinker.dreamtinker.common.data.DreamtinkerRecipeProvider;
 import org.dreamtinker.dreamtinker.common.data.loot.DreamtinkerLootTableProvider;
@@ -172,6 +173,7 @@ public class Dreamtinker {
         generator.addProvider(event.includeServer(), new LootTableInjectionProvider(output));
 
         generator.addProvider(event.includeServer(), new DTCurio(output, helper, provider.getRegistryProvider()));
+        generator.addProvider(event.includeServer(), new AdvancementsProvider(output));
     }
 
 }
