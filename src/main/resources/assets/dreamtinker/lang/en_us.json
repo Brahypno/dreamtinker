@@ -592,6 +592,9 @@
   "fluid_type.dreamtinker.festering_blood": "Festering Blood",
   "fluid.dreamtinker.festering_blood": "Festering Blood",
   "fluid.dreamtinker.festering_blood.fluid_effect": "Festering Blood",
+  "fluid_type.dreamtinker.rainbow_honey": "Rainbow Honey",
+  "fluid.dreamtinker.rainbow_honey": "Rainbow Honey",
+  "fluid.dreamtinker.rainbow_honey.fluid_effect": "Rainbow Honey",
 
   "item.dreamtinker.molten_echo_alloy_bucket": "Molten echo alloy Bucket",
   "item.dreamtinker.molten_echo_shard_bucket": "Molten echo shard Bucket",

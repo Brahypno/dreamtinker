@@ -1,11 +1,13 @@
 {
-  "type": "tconstruct:casting_table_potion",
-  "bottle": {
+  "type": "tconstruct:casting_table",
+  "cast": {
     "item": "minecraft:glass_bottle"
   },
+  "cast_consumed": true,
+  "cooling_time": 47,
   "fluid": {
     "amount": 250,
-    "fluid": "dreamtinker:festering_blood"
+    "tag": "dreamtinker:festering_blood"
   },
   "result": "dreamtinker:evil_homunculus"
 }

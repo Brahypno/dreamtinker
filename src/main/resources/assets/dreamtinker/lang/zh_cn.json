@@ -592,6 +592,9 @@
   "fluid_type.dreamtinker.festering_blood": "腐殖之血",
   "fluid.dreamtinker.festering_blood": "腐殖之血",
   "fluid.dreamtinker.festering_blood.fluid_effect": "腐殖之血",
+  "fluid_type.dreamtinker.rainbow_honey": "彩虹糖蜜",
+  "fluid.dreamtinker.rainbow_honey": "彩虹糖蜜",
+  "fluid.dreamtinker.rainbow_honey.fluid_effect": "彩虹糖蜜",
 
   "item.dreamtinker.molten_echo_alloy_bucket": "熔融回响合金桶",
   "item.dreamtinker.molten_echo_shard_bucket": "熔融回响碎片桶",

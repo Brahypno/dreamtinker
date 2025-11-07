@@ -236,6 +236,10 @@ public class DreamtinkerFluids {
             registerFluid(FLUIDS, "festering_blood", 305, 100, 100, 5,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.CRIMSON_NYLIUM, 5), 10, 0) {});
 
+    public static final FlowingFluidObject<ForgeFlowingFluid> rainbow_honey =
+            registerFluid(FLUIDS, "rainbow_honey", 305, 100, 100, 8,
+                          supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_LIGHT_BLUE, 5), 10, 0) {});
+
     private static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         // containers
         output.accept(molten_echo_alloy);
