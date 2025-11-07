@@ -51,6 +51,8 @@ public class soul_blessing extends ArmorModifier {
 
     public void onLivingDeath(LivingDeathEvent event) {
         LivingEntity entity = event.getEntity();
+        if (entity.level().isClientSide || event.isCanceled())
+            return;
         for (EquipmentSlot slot : DTModifierCheck.slots) {
             if (0 < DTModifierCheck.getModifierLevel(entity, DreamtinkerModifiers.soul_blessing.getId(), slot)){
                 ItemStack stack = entity.getItemBySlot(slot);
@@ -70,9 +72,13 @@ public class soul_blessing extends ArmorModifier {
                             livingEntity.setHealth(0.0F);
                             livingEntity.die(event.getSource());
                             event.setCanceled(true);
-                            entity.deathTime = -10;
+                            entity.deathTime = 0;
                             entity.setHealth(Math.max(entity.getMaxHealth() * 0.10F, entity.getHealth()));
                             entity.invulnerableTime = 40;
+                            entity.setRemainingFireTicks(0);     // 清火
+                            entity.fallDistance = 0.0F;          // 清坠落
+                            entity.setLastHurtByMob(null);       // 清仇恨，防止立刻被同一来源补刀
+                            entity.hurtMarked = true;            // 强制一次位置/生命同步
                             return;
                         }
                     }

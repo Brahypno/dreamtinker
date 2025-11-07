@@ -30,6 +30,8 @@ public class PoisonHomunculusConversion {
         Entity direct = event.getSource().getDirectEntity();
         if (!(direct instanceof FallingBlockEntity fb) || !fb.getBlockState().is(Dreamtinker.mcBlockTag("anvil")))
             return;
+        if (30 < victim.getHealth())
+            return;
 
         BlockPos under = victim.blockPosition().below();
         if (!victim.getBlockStateOn().is(Tags.Blocks.GLASS))

@@ -59,17 +59,23 @@ public class open_soul extends BattleModifier {
 
     public void onLivingDeath(LivingDeathEvent event) {
         LivingEntity entity = event.getEntity();
+        if (entity.level().isClientSide || event.isCanceled())
+            return;
         ToolStack tool = DTModifierCheck.getToolWithModifier(entity, this.getId());
         if (null != tool){
-            ModDataNBT tooldata = tool.getPersistentData();
-            float count = tooldata.getFloat(TAG_SOUL);
+            ModDataNBT toolData = tool.getPersistentData();
+            float count = toolData.getFloat(TAG_SOUL);
             if (OpenSoulDeathCount.get() <= count){
-                tooldata.putFloat(TAG_SOUL, (float) (count - OpenSoulDeathCount.get()));
+                toolData.putFloat(TAG_SOUL, (float) (count - OpenSoulDeathCount.get()));
                 event.setCanceled(true);
-                entity.deathTime = -10;
+                entity.deathTime = 0;
                 entity.setHealth(1);
-                entity.invulnerableTime = 1000;
+                entity.invulnerableTime = Math.max(entity.invulnerableTime, 1000);
                 entity.setAbsorptionAmount(entity.getAbsorptionAmount() + entity.getMaxHealth() * 0.5F);
+                entity.setRemainingFireTicks(0);     // 清火
+                entity.fallDistance = 0.0F;          // 清坠落
+                entity.setLastHurtByMob(null);       // 清仇恨，防止立刻被同一来源补刀
+                entity.hurtMarked = true;            // 强制一次位置/生命同步
             }
         }
     }

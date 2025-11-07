@@ -6,11 +6,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
+import slimeknights.tconstruct.library.tools.item.IModifiable;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
 import javax.annotation.Nullable;
@@ -20,7 +20,7 @@ public class DTModifierCheck {
             new EquipmentSlot[]{EquipmentSlot.FEET, EquipmentSlot.LEGS, EquipmentSlot.CHEST, EquipmentSlot.HEAD, EquipmentSlot.OFFHAND, EquipmentSlot.MAINHAND};
 
     public static int getModifierLevel(@NotNull LivingEntity entity, ModifierId id, EquipmentSlot slot) {
-        if (!entity.getItemBySlot(slot).is(TinkerTags.Items.MODIFIABLE))
+        if (!(entity.getItemBySlot(slot).getItem() instanceof IModifiable))
             return 0;
         ToolStack toolStack = ToolStack.from(entity.getItemBySlot(slot));
         if (!toolStack.isBroken())
@@ -96,7 +96,7 @@ public class DTModifierCheck {
 
     public static int getItemModifierNum(ItemStack stack, TagKey<Modifier> tag) {
         int matched = 0;
-        if (null != stack && !stack.isEmpty() && stack.is(TinkerTags.Items.MODIFIABLE)){
+        if (null != stack && !stack.isEmpty() && stack.getItem() instanceof IModifiable){
             ToolStack toolStack = ToolStack.from(stack);
             for (ModifierEntry modifier : toolStack.getModifiers()) {
                 matched += modifier.getModifier().is(tag) ? 1 : 0;
@@ -107,7 +107,7 @@ public class DTModifierCheck {
 
     public static int getItemModifierNum(ItemStack stack, ModifierId id) {
         int matched = 0;
-        if (null != stack && !stack.isEmpty() && stack.is(TinkerTags.Items.MODIFIABLE)){
+        if (null != stack && !stack.isEmpty() && stack.getItem() instanceof IModifiable){
             ToolStack toolStack = ToolStack.from(stack);
             matched += toolStack.getModifier(id).getLevel();
         }

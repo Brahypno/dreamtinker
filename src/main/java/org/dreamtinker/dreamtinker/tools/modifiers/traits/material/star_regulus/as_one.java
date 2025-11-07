@@ -13,7 +13,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
 import org.jetbrains.annotations.NotNull;
@@ -44,7 +43,6 @@ public class as_one extends ArmorModifier {
 
     {
         MinecraftForge.EVENT_BUS.addListener(this::onLivingDeath);
-        MinecraftForge.EVENT_BUS.addListener(this::onLivingHurtEvent);
     }
 
     @Override
@@ -56,29 +54,28 @@ public class as_one extends ArmorModifier {
 
     public void onLivingDeath(LivingDeathEvent event) {
         LivingEntity entity = event.getEntity();
+        if (entity.level().isClientSide || event.isCanceled())
+            return;
         ToolStack tool = getPossibleToolWithModifier(entity, this.getId());
-        if (null != tool){
-            ModDataNBT toolData = tool.getPersistentData();
-            int count = toolData.getInt(TAG_AS_ONE);
-            if (0 < count){
-                toolData.putInt(TAG_AS_ONE, --count);
-                event.setCanceled(true);
-                entity.deathTime = -10;
-                entity.setHealth((float) (entity.getMaxHealth() * 0.15));
-                entity.invulnerableTime = 1000;
-            }
-        }
-    }
-
-    public void onLivingHurtEvent(LivingHurtEvent event) {
-        LivingEntity entity = event.getEntity();
-        ToolStack tool = getPossibleToolWithModifier(entity, this.getId());
-        if (null != tool)
-            if (entity.getHealth() < event.getAmount()){
-                entity.setAbsorptionAmount(entity.getAbsorptionAmount() + event.getAmount());
-                event.setAmount(0);
-                event.setCanceled(true);
-            }
+        if (null == tool)
+            return;
+        ModDataNBT toolData = tool.getPersistentData();
+        int count = toolData.getInt(TAG_AS_ONE);
+        if (count <= 0)
+            return;
+        int newCount = count - 1;
+        if (newCount > 0)
+            toolData.putInt(TAG_AS_ONE, newCount);
+        else
+            toolData.remove(TAG_AS_ONE);
+        event.setCanceled(true);
+        entity.deathTime = 0;
+        entity.setHealth(Math.max(1F, entity.getMaxHealth() * 0.15F));
+        entity.invulnerableTime = Math.max(entity.invulnerableTime, 1000);
+        entity.setRemainingFireTicks(0);     // 清火
+        entity.fallDistance = 0.0F;          // 清坠落
+        entity.setLastHurtByMob(null);       // 清仇恨，防止立刻被同一来源补刀
+        entity.hurtMarked = true;            // 强制一次位置/生命同步
     }
 
     @Override

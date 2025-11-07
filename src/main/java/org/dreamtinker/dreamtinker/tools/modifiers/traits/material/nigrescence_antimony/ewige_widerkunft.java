@@ -2,7 +2,6 @@ package org.dreamtinker.dreamtinker.tools.modifiers.traits.material.nigrescence_
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -11,8 +10,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.jetbrains.annotations.NotNull;
@@ -30,18 +27,10 @@ import java.util.function.BiConsumer;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.CentralFlame;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.Prometheus;
-import static org.dreamtinker.dreamtinker.utils.DTModifierCheck.ModifierInHand;
 
 public class ewige_widerkunft extends BattleModifier {
-    private static final ResourceLocation TAG_TOMB = new ResourceLocation(Dreamtinker.MODID,
-                                                                          "ewige_widerkunft");
-
-    {
-        MinecraftForge.EVENT_BUS.addListener(this::LivingHurtEvent);
-    }
-
-    private final String tool_attribute_uuid = "3d1df7e8-4b20-4e2d-9d5f-5c1b2f8e7c9d";
-
+    private static final ResourceLocation TAG_TOMB = Dreamtinker.getLocation("ewige_widerkunft");
+    
     @Override
     public int modifierDamageTool(IToolStackView tool, ModifierEntry modifier, int amount, @Nullable LivingEntity holder) {
         int current = tool.getCurrentDurability();
@@ -70,15 +59,6 @@ public class ewige_widerkunft extends BattleModifier {
         return breaks * amount;
     }
 
-    private void LivingHurtEvent(LivingHurtEvent event) {
-        if (event.getSource()
-                 .is(DamageTypeTags.IS_EXPLOSION) && event.getEntity() != null && ModifierInHand(event.getEntity(),
-                                                                                                 this.getId())){
-            if (event.getEntity().getHealth() <= event.getAmount())
-                event.setCanceled(true);
-        }
-    }
-
     @Override
     public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
         if (!tool.isBroken() && modifier.getLevel() > 0 && EquipmentSlot.MAINHAND == slot){
@@ -86,19 +66,19 @@ public class ewige_widerkunft extends BattleModifier {
             int breaks = Math.min(nbt.getInt(TAG_TOMB), modifier.getLevel() * CentralFlame.get());
             if (breaks > 0){
                 consumer.accept(Attributes.ATTACK_DAMAGE,
-                                new AttributeModifier(UUID.fromString(tool_attribute_uuid),
+                                new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
                                                       Attributes.ATTACK_DAMAGE.getDescriptionId(),
                                                       Math.pow(1 + Prometheus.get(),
                                                                breaks) / 2,
                                                       AttributeModifier.Operation.MULTIPLY_TOTAL));
                 consumer.accept(Attributes.ATTACK_SPEED,
-                                new AttributeModifier(UUID.fromString(tool_attribute_uuid),
+                                new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
                                                       Attributes.ATTACK_SPEED.getDescriptionId(),
                                                       Math.pow(1 + Prometheus.get(),
                                                                breaks) / 2,
                                                       AttributeModifier.Operation.MULTIPLY_TOTAL));
                 consumer.accept(Attributes.ATTACK_KNOCKBACK,
-                                new AttributeModifier(UUID.fromString(tool_attribute_uuid),
+                                new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
                                                       Attributes.ATTACK_KNOCKBACK.getDescriptionId(),
                                                       Math.pow(1 + Prometheus.get(),
                                                                breaks) / 2,
