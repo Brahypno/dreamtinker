@@ -438,6 +438,7 @@
   "item.dreamtinker.despair_gem": "绝望宝石",
   "item.dreamtinker.desire_gem": "渴望宝石",
   "item.dreamtinker.poisonous_homunculus": "恶毒瓶中人",
+  "item.dreamtinker.evil_homunculus": "灾厄瓶中人",
   "item.dreamtinker.soul_steel": "魂钢",
 
   "block.dreamtinker.crying_obsidian_pane": "哭泣的黑曜石板",
@@ -585,6 +586,12 @@
   "fluid_type.dreamtinker.molten_soul_steel": "熔融魂钢",
   "fluid.dreamtinker.molten_soul_steel": "熔融魂钢",
   "fluid.dreamtinker.molten_soul_steel.fluid_effect": "熔融魂钢",
+  "fluid_type.dreamtinker.half_festering_blood": "半腐化之血",
+  "fluid.dreamtinker.half_festering_blood": "半腐化之血",
+  "fluid.dreamtinker.half_festering_blood.fluid_effect": "半腐化之血",
+  "fluid_type.dreamtinker.festering_blood": "腐殖之血",
+  "fluid.dreamtinker.festering_blood": "腐殖之血",
+  "fluid.dreamtinker.festering_blood.fluid_effect": "腐殖之血",
 
   "item.dreamtinker.molten_echo_alloy_bucket": "熔融回响合金桶",
   "item.dreamtinker.molten_echo_shard_bucket": "熔融回响碎片桶",
@@ -613,6 +620,8 @@
   "item.dreamtinker.molten_desire_bucket": "熔融渴望桶",
   "item.dreamtinker.despair_essence_bucket": "绝望元质桶",
   "item.dreamtinker.molten_soul_steel_bucket": "熔融魂钢桶",
+  "item.dreamtinker.half_festering_blood_bucket": "半腐化之血桶",
+  "item.dreamtinker.festering_blood_bucket": "腐殖之血桶",
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "流血",
   "fluid_effect.tconstruct.damage.explosion": "爆炸",

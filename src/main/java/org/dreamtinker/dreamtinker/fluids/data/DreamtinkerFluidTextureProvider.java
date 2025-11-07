@@ -46,6 +46,8 @@ public class DreamtinkerFluidTextureProvider extends AbstractFluidTextureProvide
         this.commonFluid(DreamtinkerFluids.molten_desire.getType());
         this.commonFluid(DreamtinkerFluids.despair_essence.getType());
         this.commonFluid(DreamtinkerFluids.molten_soul_steel.getType());
+        this.commonFluid(DreamtinkerFluids.half_festering_blood.getType());
+        this.commonFluid(DreamtinkerFluids.festering_blood.getType());
     }
 
     public void commonFluid(FluidType fluid) {

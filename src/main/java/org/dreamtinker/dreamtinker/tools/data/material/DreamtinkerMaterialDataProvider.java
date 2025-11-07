@@ -28,7 +28,7 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.crying_obsidian, 3, 30, false, false, null);
         addMaterial(DreamtinkerMaterialIds.larimar, 3, 20, true, false, null);
         addMaterial(DreamtinkerMaterialIds.amber, 2, 10, false, false, null);
-        addMaterial(DreamtinkerMaterialIds.half_rotten_homunculus, 3, 20, true, false, null);
+        addMaterial(DreamtinkerMaterialIds.half_rotten_homunculus, 3, 20, false, false, null);
         addMaterial(DreamtinkerMaterialIds.desire_gem, 4, 35, false, false, null);
         addMaterial(DreamtinkerMaterialIds.despair_gem, 6, 75, false, false, null);
         addMaterial(DreamtinkerMaterialIds.shadowskin, 4, 35, false, false, null);

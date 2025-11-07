@@ -58,6 +58,7 @@ import slimeknights.tconstruct.library.recipe.casting.ItemCastingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.casting.PotionCastingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.casting.material.CompositeCastingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.casting.material.MaterialCastingRecipeBuilder;
+import slimeknights.tconstruct.library.recipe.casting.material.MaterialFluidRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.casting.material.PartSwapCastingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.entitymelting.EntityMeltingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.fuel.MeltingFuelBuilder;
@@ -252,6 +253,18 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                   .save(consumer, location(folder + "filling/" +
                                                            Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(ItemRegistry.CONCENTRATED_GLUTTONY.get()))
                                                                   .getPath()));
+        PotionCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.poisonousHomunculus.get())
+                                  .setBottle(Items.GLASS_BOTTLE)
+                                  .setFluid(FluidIngredient.of(new FluidStack(DreamtinkerFluids.half_festering_blood.get(), FluidValues.BOTTLE)))
+                                  .save(consumer, location(folder + "filling/" +
+                                                           Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(DreamtinkerCommon.poisonousHomunculus.get()))
+                                                                  .getPath()));
+        PotionCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.evilHomunculus.get())
+                                  .setBottle(Items.GLASS_BOTTLE)
+                                  .setFluid(FluidIngredient.of(new FluidStack(DreamtinkerFluids.festering_blood.get(), FluidValues.BOTTLE)))
+                                  .save(consumer, location(folder + "filling/" +
+                                                           Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(DreamtinkerCommon.evilHomunculus.get()))
+                                                                  .getPath()));
 
         ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.desire_gem.get())
                                 .setFluidAndTime(TinkerFluids.moltenDiamond, FluidValues.LARGE_GEM_BLOCK)
@@ -420,6 +433,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         materialRecipe(consumer, DreamtinkerMaterialIds.amber, Ingredient.of(DreamtinkerCommon.amber.get()), 1, 1,
                        materials_folder + "amber");
 
+        MaterialFluidRecipeBuilder.material(DreamtinkerMaterialIds.half_rotten_homunculus)
+                                  .setFluid(DreamtinkerFluids.half_festering_blood.ingredient(FluidValues.BOTTLE))
+                                  .setTemperature(10).save(consumer, this.location(
+                                          materials_folder + "half_rotten_homunculus" + "casting/" + DreamtinkerMaterialIds.half_rotten_homunculus.getLocation('_').getPath()));
         materialRecipe(consumer, DreamtinkerMaterialIds.half_rotten_homunculus, Ingredient.of(DreamtinkerCommon.poisonousHomunculus.get()), 1, 1,
                        materials_folder + "half_rotten_homunculus");
 

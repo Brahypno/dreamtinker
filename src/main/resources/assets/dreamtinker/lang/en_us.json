@@ -438,6 +438,7 @@
   "item.dreamtinker.despair_gem": "Despair Gem",
   "item.dreamtinker.desire_gem": "Desire Gem",
   "item.dreamtinker.poisonous_homunculus": "Poisonous Homunculus",
+  "item.dreamtinker.evil_homunculus": "Evil Homunculus",
   "item.dreamtinker.soul_steel": "Soul Steel",
 
   "block.dreamtinker.crying_obsidian_pane": "Crying Obsidian Pane",
@@ -585,6 +586,12 @@
   "fluid_type.dreamtinker.molten_soul_steel": "Molten Soul Steel",
   "fluid.dreamtinker.molten_soul_steel": "Molten Soul Steel",
   "fluid.dreamtinker.molten_soul_steel.fluid_effect": "Molten Soul Steel",
+  "fluid_type.dreamtinker.half_festering_blood": "Half Festering Blood",
+  "fluid.dreamtinker.half_festering_blood": "Half Festering Blood",
+  "fluid.dreamtinker.half_festering_blood.fluid_effect": "Half Festering Blood",
+  "fluid_type.dreamtinker.festering_blood": "Festering Blood",
+  "fluid.dreamtinker.festering_blood": "Festering Blood",
+  "fluid.dreamtinker.festering_blood.fluid_effect": "Festering Blood",
 
   "item.dreamtinker.molten_echo_alloy_bucket": "Molten echo alloy Bucket",
   "item.dreamtinker.molten_echo_shard_bucket": "Molten echo shard Bucket",
@@ -613,6 +620,8 @@
   "item.dreamtinker.molten_desire_bucket": "Molten Desire Bucket",
   "item.dreamtinker.despair_essence_bucket": "Despair Essence Bucket",
   "item.dreamtinker.molten_soul_steel_bucket": "Molten Soul Steel Bucket",
+  "item.dreamtinker.half_festering_blood_bucket": "Half Festering Blood Bucket",
+  "item.dreamtinker.festering_blood_bucket": "Festering Blood Bucket",
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "bleed",
   "fluid_effect.tconstruct.damage.explosion": "explosion",

@@ -229,7 +229,13 @@ public class DreamtinkerFluids {
             registerFluid(FLUIDS, "molten_soul_steel", 1300, 100, 1000, 14,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.STONE, 14), 10, 6) {});
 
-    @SuppressWarnings("deprecation")
+    public static final FlowingFluidObject<ForgeFlowingFluid> half_festering_blood =
+            registerFluid(FLUIDS, "half_festering_blood", 305, 50, 100, 5,
+                          supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.CRIMSON_STEM, 5), 10, 0) {});
+    public static final FlowingFluidObject<ForgeFlowingFluid> festering_blood =
+            registerFluid(FLUIDS, "festering_blood", 305, 100, 100, 5,
+                          supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.CRIMSON_NYLIUM, 5), 10, 0) {});
+
     private static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         // containers
         output.accept(molten_echo_alloy);
@@ -258,10 +264,12 @@ public class DreamtinkerFluids {
 
         output.accept(reversed_shadow);
         output.accept(blood_soul);
-
         output.accept(liquid_amber);
         output.accept(molten_desire);
         output.accept(despair_essence);
         output.accept(molten_soul_steel);
+
+        output.accept(half_festering_blood);
+        output.accept(festering_blood);
     }
 }
