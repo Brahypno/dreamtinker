@@ -32,7 +32,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          HandleMaterialStats.multipliers().durability(0.9f).miningSpeed(1.1f).attackDamage(1.1f).attackSpeed(1.1f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.nigrescence_antimony,
-                         new HeadMaterialStats(3355, 3.36f, Tiers.NETHERITE, 1.13f),
+                         new HeadMaterialStats(3355, 3.36f, Tiers.DIAMOND, 1.13f),
                          HandleMaterialStats.multipliers().durability(0.5f).miningSpeed(1f).attackDamage(1f).attackSpeed(1f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.metallivorous_stibium_lupus,
