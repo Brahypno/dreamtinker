@@ -63,7 +63,7 @@ public class GeneralHurtHandler {
         }
         if (null != getPossibleToolWithModifier(victim, DreamtinkerModifiers.as_one.getId()))
             if (victim.getMaxHealth() < event.getAmount()){
-                victim.setAbsorptionAmount(victim.getAbsorptionAmount() + event.getAmount());
+                victim.setAbsorptionAmount(Math.min(victim.getAbsorptionAmount() + event.getAmount(), Integer.MAX_VALUE));
                 event.setAmount(0);
                 event.setCanceled(true);
             }

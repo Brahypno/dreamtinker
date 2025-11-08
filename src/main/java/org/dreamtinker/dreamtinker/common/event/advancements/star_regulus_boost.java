@@ -43,7 +43,7 @@ public class star_regulus_boost {
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
             AdvancementProgress progress = player.getAdvancements().getOrStartProgress(adv);
             // 如果该玩家已完成此进度
-            if (progress.isDone()){
+            if (progress.isDone() && player.isAlive()){
                 int minDuration = 20;
                 if (player.getEffect(MobEffects.NIGHT_VISION) == null
                     || Objects.requireNonNull(player.getEffect(MobEffects.NIGHT_VISION)).getDuration() <= minDuration * 11){
