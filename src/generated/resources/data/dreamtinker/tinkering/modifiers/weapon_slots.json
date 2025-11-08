@@ -26,18 +26,8 @@
         "flat": 5
       },
       "tool": {
-        "type": "mantle:and",
-        "predicates": [
-          {
-            "type": "mantle:tag",
-            "tag": "tconstruct:modifiable"
-          },
-          {
-            "type": "mantle:inverted",
-            "inverted_type": "mantle:tag",
-            "tag": "tconstruct:modifiable/armor"
-          }
-        ]
+        "type": "mantle:tag",
+        "tag": "tconstruct:modifiable/melee"
       }
     },
     {

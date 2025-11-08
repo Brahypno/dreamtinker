@@ -8,7 +8,10 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.network.PacketDistributor;
 import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.network.Dnetwork;
+import org.dreamtinker.dreamtinker.network.S2CUseRemainPacket;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 
 import java.util.HashMap;
@@ -87,6 +90,13 @@ public class weaponDreamsEnsureEnds {
             Pending p = en.getValue();
             if (sp.isUsingItem() && sp.getTicksUsingItem() < sp.getUseItemRemainingTicks()){
                 sp.useItemRemaining = (int) (sp.getUseItem().getUseDuration() * 0.4);
+                S2CUseRemainPacket pkt = new S2CUseRemainPacket(
+                        sp.getId(),
+                        0,
+                        sp.useItemRemaining,
+                        true
+                );
+                Dnetwork.CHANNEL.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> sp), pkt);
             }
 
             if (sp.getInventory().selected == p.selectedAtStart){

@@ -351,7 +351,7 @@
   "modifier.dreamtinker.peaches_in_memory.description": "Increase experience gain and Bad Potion Time, decrease tool damage taken",
   "modifier.dreamtinker.weapon_slots": "Weapon Slots",
   "modifier.dreamtinker.weapon_slots.flavor": "Portable weapon toolkits",
-  "modifier.dreamtinker.weapon_slots.description": "have a small inventory for modifiable tools",
+  "modifier.dreamtinker.weapon_slots.description": "have a small inventory for modifiable tools；Use Interactive key to open",
   "modifier.dreamtinker.weapon_dreams": "Weapon Arts",
   "modifier.dreamtinker.weapon_dreams.flavor": "proxy war",
   "modifier.dreamtinker.weapon_dreams.description": "Special ability to use tools in weapon slots instead of itself to perform left or right use operation",

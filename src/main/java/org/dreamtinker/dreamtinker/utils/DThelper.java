@@ -152,7 +152,7 @@ public class DThelper {
     public static boolean startToolInteract(Player player, EquipmentSlot slotType, TooltipKey modifierKey) {
         if (!player.isSpectator()){
             ItemStack helmet = player.getItemBySlot(slotType);
-            if (!helmet.is(TinkerTags.Items.ARMOR) && helmet.is(TinkerTags.Items.MODIFIABLE)){
+            if (helmet.is(TinkerTags.Items.MELEE) || helmet.is(TinkerTags.Items.RANGED)){
                 ToolStack tool = ToolStack.from(helmet);
                 for (ModifierEntry entry : tool.getModifierList()) {
                     if (entry.getHook(ModifierHooks.ARMOR_INTERACT).startInteract(tool, entry, player, slotType, modifierKey)){

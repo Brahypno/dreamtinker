@@ -351,7 +351,7 @@
   "modifier.dreamtinker.peaches_in_memory.description": "增加阅历和负面效果持续；减少耐久消耗",
   "modifier.dreamtinker.weapon_slots": "工具槽位",
   "modifier.dreamtinker.weapon_slots.flavor": "便携工具组",
-  "modifier.dreamtinker.weapon_slots.description": "具有一个只能装匠魂工具的小容器",
+  "modifier.dreamtinker.weapon_slots.description": "具有一个只能装匠魂工具的小容器；使用对应交互键以打开",
   "modifier.dreamtinker.weapon_dreams": "工具艺术",
   "modifier.dreamtinker.weapon_dreams.flavor": "代理人战争",
   "modifier.dreamtinker.weapon_dreams.description": "使用工具槽位内的工具而不是自己来完成工具左键或右键操作",

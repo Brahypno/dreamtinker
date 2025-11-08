@@ -166,7 +166,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.weapon_slots)
                 .priority(1500)
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
-                .addModule(InventoryModule.builder().toolItem(ItemPredicate.and(ItemPredicate.tag(MODIFIABLE), ItemPredicate.tag(ARMOR).inverted()))
+                .addModule(InventoryModule.builder().toolItem(ItemPredicate.tag(MELEE))
                                           .filter(ItemPredicate.and(ItemPredicate.tag(MODIFIABLE), ItemPredicate.tag(ARMOR).inverted(),
                                                                     ItemPredicate.tag(DreamtinkerTagKeys.Items.weapon_slot_excluded).inverted())).flatSlots(5))
                 .addModule(InventoryMenuModule.ANY);
