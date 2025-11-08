@@ -164,7 +164,7 @@ public class DreamtinkerCommon extends DreamtinkerModule {
             super.appendHoverText(stack, level, tooltip, flag);
         }
     });
-    public static final RegistryObject<Item> void_pearl = ITEMS.register("void_pearl", () -> new void_pearl((ITEM_PROPS.rarity(
+    public static final RegistryObject<Item> void_pearl = ITEMS.register("void_pearl", () -> new void_pearl((new Item.Properties().rarity(
             Rarity.UNCOMMON)).stacksTo(16)));
 
     public static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {

@@ -38,7 +38,7 @@ public class BlockTagProvider extends BlockTagsProvider {
         addBlocksTags(DreamtinkerCommon.narcissus.get(), Dreamtinker.forgeBlockTag("mineable/shears"), TinkerTags.Blocks.SLIMY_FUNGUS_CAN_GROW_THROUGH,
                       TinkerTags.Blocks.MINABLE_WITH_DAGGER, FLOWERS, ENDERMAN_HOLDABLE, SMALL_FLOWERS, SWORD_EFFICIENT, TinkerTags.Blocks.MINABLE_WITH_SCYTHE,
                       Dreamtinker.forgeBlockTag("mineable/sword"), TinkerTags.Blocks.MINABLE_WITH_SHEARS);
-        tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL, DreamtinkerCommon.larimarOre);
+        tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL, DreamtinkerCommon.larimarOre, DreamtinkerCommon.amberOre);
         tagBlocks(DreamtinkerTagKeys.Blocks.larimarOre, DreamtinkerCommon.larimarOre);
         tagBlocks(DreamtinkerTagKeys.Blocks.amberOre, DreamtinkerCommon.amberOre);
         tagBlocks(Tags.Blocks.ORE_RATES_SINGULAR, DreamtinkerCommon.larimarOre, DreamtinkerCommon.amberOre);
