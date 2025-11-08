@@ -2,13 +2,15 @@ package org.dreamtinker.dreamtinker.common.event.recipes;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.monster.AbstractIllager;
+import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -23,14 +25,22 @@ public class PoisonHomunculusConversion {
     public static void LivingHurtEvent(LivingHurtEvent event) {
         LivingEntity victim = event.getEntity();
         ServerLevel level = (ServerLevel) victim.level();
+        boolean is_illager = false, is_villager = false;
+        if (victim.getType().is(Tags.EntityTypes.BOSSES))
+            return;
 
-        if (victim.level().isClientSide || event.isCanceled() || !event.getSource().is(DamageTypes.FALLING_ANVIL) ||
-            !(victim instanceof Villager || victim.getType() == EntityType.VILLAGER))
+        if (victim.level().isClientSide || event.isCanceled() || !event.getSource().is(DamageTypes.FALLING_ANVIL))
+            return;
+        if (victim instanceof AbstractVillager || victim.getType() == EntityType.VILLAGER)
+            is_villager = true;
+        if (victim instanceof AbstractIllager || victim.getType().is(EntityTypeTags.RAIDERS))
+            is_illager = true;
+        if (!is_illager && !is_villager)
             return;
         Entity direct = event.getSource().getDirectEntity();
         if (!(direct instanceof FallingBlockEntity fb) || !fb.getBlockState().is(Dreamtinker.mcBlockTag("anvil")))
             return;
-        if (30 < victim.getHealth())
+        if (30 < victim.getHealth())// In case boss hit by this
             return;
 
         BlockPos under = victim.blockPosition().below();
@@ -44,8 +54,8 @@ public class PoisonHomunculusConversion {
         // 清除村民本体
         victim.discard();
 
-        // 生成掉落物A
-        ItemStack reward = new ItemStack(DreamtinkerCommon.poisonousHomunculus.get());
+        // 生成掉落物---illager first
+        ItemStack reward = new ItemStack(is_illager ? DreamtinkerCommon.evilHomunculus.get() : DreamtinkerCommon.poisonousHomunculus.get());
         ItemEntity item = new ItemEntity(level, victim.getX(), victim.getY(), victim.getZ(), reward);
         level.addFreshEntity(item);
 

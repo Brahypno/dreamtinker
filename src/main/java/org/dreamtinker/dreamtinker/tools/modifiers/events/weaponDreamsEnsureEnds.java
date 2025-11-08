@@ -85,8 +85,9 @@ public class weaponDreamsEnsureEnds {
                 continue;
             }
             Pending p = en.getValue();
-            if (sp.isUsingItem() && sp.getTicksUsingItem() < sp.getUseItemRemainingTicks())
+            if (sp.isUsingItem() && sp.getTicksUsingItem() < sp.getUseItemRemainingTicks()){
                 sp.useItemRemaining = (int) (sp.getUseItem().getUseDuration() * 0.4);
+            }
 
             if (sp.getInventory().selected == p.selectedAtStart){
                 if (p.ticks > 0){
