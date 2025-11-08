@@ -56,63 +56,70 @@ public class weapon_transformation extends BattleModifier {
         float armor = tool.getStats().get(ToolStats.ARMOR);
         float toughness = tool.getStats().get(ToolStats.ARMOR_TOUGHNESS);
         float multi = valueExpSoftCap(armor, toughness);
+        UUID uuid = UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes());
         if (modifier.getLevel() > 0){
             switch (slot) {
                 case CHEST -> {
                     consumer.accept(Attributes.LUCK,
-                                    new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
+                                    new AttributeModifier(uuid,
                                                           Attributes.LUCK.getDescriptionId(),
                                                           multi,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
-                    consumer.accept(TinkerAttributes.EXPERIENCE_MULTIPLIER.get(),
-                                    new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
-                                                          TinkerAttributes.EXPERIENCE_MULTIPLIER.get().getDescriptionId(),
-                                                          multi / 2,
-                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
+
                     consumer.accept(TinkerAttributes.BAD_EFFECT_DURATION.get(),
-                                    new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
+                                    new AttributeModifier(uuid,
                                                           TinkerAttributes.BAD_EFFECT_DURATION.get().getDescriptionId(),
                                                           Math.min(0.4, multi / 4),
+                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
+                    consumer.accept(TinkerAttributes.MINING_SPEED_MULTIPLIER.get(),
+                                    new AttributeModifier(uuid,
+                                                          TinkerAttributes.MINING_SPEED_MULTIPLIER.get().getDescriptionId(),
+                                                          multi / 2,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                 }
 
                 case LEGS -> {//see hurt event
                     consumer.accept(TinkerAttributes.GOOD_EFFECT_DURATION.get(),
-                                    new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
+                                    new AttributeModifier(uuid,
                                                           TinkerAttributes.BAD_EFFECT_DURATION.get().getDescriptionId(),
                                                           -Math.min(0.35, multi / 4),
+                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
+                    consumer.accept(TinkerAttributes.EXPERIENCE_MULTIPLIER.get(),
+                                    new AttributeModifier(uuid,
+                                                          TinkerAttributes.EXPERIENCE_MULTIPLIER.get().getDescriptionId(),
+                                                          multi * 4,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                 }
                 case FEET -> {
                     consumer.accept(Attributes.ATTACK_DAMAGE,
-                                    new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
+                                    new AttributeModifier(uuid,
                                                           Attributes.ATTACK_DAMAGE.getDescriptionId(),
                                                           multi,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                     consumer.accept(Attributes.ATTACK_SPEED,
-                                    new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
+                                    new AttributeModifier(uuid,
                                                           Attributes.ATTACK_SPEED.getDescriptionId(),
                                                           multi,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                     consumer.accept(Attributes.MOVEMENT_SPEED,
-                                    new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
+                                    new AttributeModifier(uuid,
                                                           Attributes.MOVEMENT_SPEED.getDescriptionId(),
                                                           -Math.min(multi, 0.15),
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                 }
                 case HEAD -> {
                     consumer.accept(Attributes.MAX_HEALTH,
-                                    new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
+                                    new AttributeModifier(uuid,
                                                           Attributes.MAX_HEALTH.getDescriptionId(),
                                                           multi,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                     consumer.accept(Attributes.KNOCKBACK_RESISTANCE,
-                                    new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
+                                    new AttributeModifier(uuid,
                                                           Attributes.KNOCKBACK_RESISTANCE.getDescriptionId(),
                                                           -multi,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                     consumer.accept(ForgeMod.ENTITY_GRAVITY.get(),
-                                    new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
+                                    new AttributeModifier(uuid,
                                                           ForgeMod.ENTITY_GRAVITY.get().getDescriptionId(),
                                                           Math.min(.25f, multi),
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
