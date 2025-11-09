@@ -6,7 +6,6 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.AbstractIllager;
@@ -18,6 +17,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
+import slimeknights.tconstruct.common.TinkerTags;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class PoisonHomunculusConversion {
@@ -33,7 +33,7 @@ public class PoisonHomunculusConversion {
             return;
         if (victim instanceof AbstractVillager || victim.getType() == EntityType.VILLAGER)
             is_villager = true;
-        if (victim instanceof AbstractIllager || victim.getMobType() == MobType.ILLAGER)
+        if (victim instanceof AbstractIllager || victim.getType().is(TinkerTags.EntityTypes.ILLAGERS))
             is_illager = true;
         if (!is_illager && !is_villager)
             return;

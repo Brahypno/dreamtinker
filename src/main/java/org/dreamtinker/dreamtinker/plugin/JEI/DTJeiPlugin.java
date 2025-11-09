@@ -26,6 +26,7 @@ import org.dreamtinker.dreamtinker.library.recipe.virtual.WorldRitualEntry;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.recipe.ingredient.EntityIngredient;
+import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.materials.MaterialRegistry;
 import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
 import slimeknights.tconstruct.library.tools.part.ToolPartItem;
@@ -180,7 +181,7 @@ public final class DTJeiPlugin implements IModPlugin {
                 Ingredient.of(Tags.Items.GLASS),
                 new ItemStack(DreamtinkerCommon.evilHomunculus.get()),
                 null,
-                EntityIngredient.of(EntityType.PILLAGER, EntityType.VINDICATOR, EntityType.ILLUSIONER, EntityType.EVOKER),
+                EntityIngredient.of(TinkerTags.EntityTypes.ILLAGERS),
                 null, null, null, null, null,
                 false,  // underwater
                 false   // drowning
