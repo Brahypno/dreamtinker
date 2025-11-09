@@ -1,0 +1,30 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "amount_needed": 2,
+      "tag": "forge:storage_blocks/gold"
+    },
+    {
+      "tag": "forge:storage_blocks/gold"
+    },
+    {
+      "amount_needed": 3,
+      "item": "tconstruct:silky_cloth"
+    },
+    {
+      "item": "tconstruct:silky_cloth"
+    }
+  ],
+  "level": {
+    "max": 5
+  },
+  "result": "dreamtinker:the_romantic",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/melee/primary"
+  }
+}

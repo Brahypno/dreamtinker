@@ -94,7 +94,9 @@
     "peaches_in_memory": "#AFEFB1",
     "weapon_dreams": "#777B7E",
     "weapon_slots": "#777B7E",
-    "shadow_blessing": "#050505"
+    "shadow_blessing": "#050505",
+    "el_etherium": "#96E8E0",
+    "the_romantic": "#F9C70F"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",

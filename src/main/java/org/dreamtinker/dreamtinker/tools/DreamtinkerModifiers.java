@@ -221,13 +221,15 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId weapon_slots = id("weapon_slots");
         public static final ModifierId shadow_blessing = id("shadow_blessing");
         public static final ModifierId silver_name_bee = id("silver_name_bee");
+        public static final ModifierId the_romantic = id("the_romantic");
+        public static final ModifierId all_slayer = id("all_slayer");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");
         public static final ModifierId el_eternal_binding = id("el_eternal_binding");
-        public static final ModifierId el_slayer = id("el_slayer");
         public static final ModifierId el_wrath = id("el_wrath");
         public static final ModifierId el_torrent = id("el_torrent");
+        public static final ModifierId el_etherium = id("el_etherium");
 
         public static final ModifierId malum_rebound = id("malum_rebound");
         public static final ModifierId malum_ascension = id("malum_ascension");

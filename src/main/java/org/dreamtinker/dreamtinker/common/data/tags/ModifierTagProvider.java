@@ -38,7 +38,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
         this.tag(TinkerTags.Modifiers.MELEE_UPGRADES)
             .add(strong_explode.getId())
             .addOptional(Ids.malum_haunted, Ids.malum_animated)
-            .addOptional(Ids.el_wrath, Ids.el_torrent, Ids.el_slayer);
+            .addOptional(Ids.el_wrath, Ids.el_torrent, Ids.all_slayer);
         this.tag(TinkerTags.Modifiers.RANGED_UPGRADES)
             .add(Ids.icy_memory, Ids.hate_memory);
         this.tag(TinkerTags.Modifiers.GENERAL_UPGRADES)

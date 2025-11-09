@@ -176,6 +176,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                           .save(consumer, location("despair_essence"));
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_soul_steel, FluidValues.INGOT)
                           .addInput(TinkerFluids.moltenSteel.getTag(), FluidValues.INGOT)
+                          .addInput(TinkerFluids.moltenCobalt.getTag(), FluidValues.INGOT)
                           .addInput(TinkerFluids.liquidSoul.getTag(), FluidValues.GLASS_BLOCK * 2)
                           .save(consumer, location("molten_soul_steel"));
     }
@@ -936,7 +937,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setSlots(SlotType.UPGRADE, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.el_wrath, upgradeSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.el_wrath, upgradeFolder));
-        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.el_slayer)
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.all_slayer)
                              .setTools(TinkerTags.Items.MELEE_PRIMARY)
                              .addInput(Items.IRON_SWORD)
                              .addInput(Items.IRON_SWORD)
@@ -945,8 +946,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(Items.IRON_AXE)
                              .setMaxLevel(4)
                              .setSlots(SlotType.UPGRADE, 1)
-                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.el_slayer, upgradeSalvage))
-                             .save(consumer, prefix(DreamtinkerModifiers.Ids.el_slayer, upgradeFolder));
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.all_slayer, upgradeSalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.Ids.all_slayer, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.el_eternal_binding)
                              .setTools(TinkerTags.Items.MODIFIABLE)
                              .addInput(Items.CHAIN, 10)
@@ -965,6 +966,16 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(Items.ENCHANTING_TABLE)
                              .setMaxLevel(1)
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.el_nemesis_curse, slotlessFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.the_romantic)
+                             .setTools(TinkerTags.Items.MELEE_PRIMARY)
+                             .addInput(Tags.Items.STORAGE_BLOCKS_GOLD, 2)
+                             .addInput(Tags.Items.STORAGE_BLOCKS_GOLD)
+                             .addInput(TinkerModifiers.silkyCloth, 3)
+                             .addInput(TinkerModifiers.silkyCloth)
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .setMaxLevel(5)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.the_romantic, upgradeSalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.Ids.the_romantic, upgradeFolder));
     }
 
     private void addEntityMeltingRecipes(Consumer<FinishedRecipe> consumer) {

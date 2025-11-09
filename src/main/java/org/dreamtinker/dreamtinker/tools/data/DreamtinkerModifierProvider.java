@@ -1,5 +1,6 @@
 package org.dreamtinker.dreamtinker.tools.data;
 
+import com.aizistral.enigmaticlegacy.api.materials.EnigmaticMaterials;
 import com.aizistral.enigmaticlegacy.registries.EnigmaticEnchantments;
 import com.sammy.malum.registry.common.item.EnchantmentRegistry;
 import net.minecraft.data.PackOutput;
@@ -20,6 +21,7 @@ import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.data.predicate.IJsonPredicate;
 import slimeknights.mantle.data.predicate.block.BlockPropertiesPredicate;
 import slimeknights.mantle.data.predicate.damage.DamageTypePredicate;
+import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
 import slimeknights.mantle.data.predicate.item.ItemPredicate;
 import slimeknights.tconstruct.library.data.tinkering.AbstractModifierProvider;
 import slimeknights.tconstruct.library.json.LevelingInt;
@@ -32,10 +34,8 @@ import slimeknights.tconstruct.library.modifiers.modules.armor.ProtectionModule;
 import slimeknights.tconstruct.library.modifiers.modules.armor.ReplaceBlockWalkerModule;
 import slimeknights.tconstruct.library.modifiers.modules.behavior.AttributeModule;
 import slimeknights.tconstruct.library.modifiers.modules.behavior.ReduceToolDamageModule;
-import slimeknights.tconstruct.library.modifiers.modules.build.EnchantmentModule;
-import slimeknights.tconstruct.library.modifiers.modules.build.ModifierRequirementsModule;
-import slimeknights.tconstruct.library.modifiers.modules.build.ModifierSlotModule;
-import slimeknights.tconstruct.library.modifiers.modules.build.StatBoostModule;
+import slimeknights.tconstruct.library.modifiers.modules.build.*;
+import slimeknights.tconstruct.library.modifiers.modules.combat.ConditionalMeleeDamageModule;
 import slimeknights.tconstruct.library.modifiers.modules.combat.LootingModule;
 import slimeknights.tconstruct.library.modifiers.modules.mining.ConditionalMiningSpeedModule;
 import slimeknights.tconstruct.library.modifiers.util.ModifierLevelDisplay;
@@ -175,6 +175,12 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                                                     .tooltipStyle(AttributeModule.TooltipStyle.PERCENT).flat(0.05f));
         buildModifier(Ids.silver_name_bee)
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+        buildModifier(Ids.the_romantic)
+                .addModule(StatBoostModule.add(ToolStats.ATTACK_SPEED).eachLevel(0.2f))
+                .addModule(StatBoostModule.add(ToolStats.ATTACK_DAMAGE).eachLevel(-0.4f));
+        buildModifier(Ids.all_slayer)
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(ConditionalMeleeDamageModule.builder().target(LivingEntityPredicate.ANY).eachLevel(1.5f));
         addELModifiers();
         addMalumModifiers();
 
@@ -191,9 +197,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.el_eternal_binding, modLoaded("enigmaticlegacy"))
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModule(EnchantmentModule.builder(EnigmaticEnchantments.ETERNAL_BINDING).level(1).constant());
-        buildModifier(Ids.el_slayer, modLoaded("enigmaticlegacy"))
-                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                .addModule(EnchantmentModule.builder(EnigmaticEnchantments.SLAYER).level(1).constant());
+
         buildModifier(Ids.el_wrath, modLoaded("enigmaticlegacy"))
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModule(EnchantmentModule.builder(EnigmaticEnchantments.WRATH).level(1).constant())
@@ -206,6 +210,9 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(ModifierRequirementsModule.builder()
                                                      .requirement(HasModifierPredicate.hasModifier(Ids.el_wrath, 1).inverted())
                                                      .modifierKey(Ids.el_torrent).build());
+        buildModifier(Ids.el_etherium, modLoaded("enigmaticlegacy"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(SetStatModule.set(ToolStats.HARVEST_TIER).value(EnigmaticMaterials.ETHERIUM));
     }
 
     private void addMalumModifiers() {

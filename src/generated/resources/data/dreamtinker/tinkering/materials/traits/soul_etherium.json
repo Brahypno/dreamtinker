@@ -38,6 +38,10 @@
       {
         "level": 1,
         "name": "dreamtinker:exiles_faulty"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:el_etherium"
       }
     ],
     "tconstruct:ranged": [

@@ -6,6 +6,10 @@
       "tag": "forge:molten_steel"
     },
     {
+      "amount": 90,
+      "tag": "forge:molten_cobalt"
+    },
+    {
       "amount": 2000,
       "tag": "tconstruct:liquid_soul"
     }

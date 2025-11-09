@@ -20,6 +20,13 @@ public class DreamtinkerEnchantmentToModifierProvider extends AbstractEnchantmen
         addOptional(new ResourceLocation("malum", "haunted"), DreamtinkerModifiers.Ids.malum_haunted, true);
         addOptional(new ResourceLocation("malum", "spirit_plunder"), DreamtinkerModifiers.Ids.malum_spirit_plunder, true);
 
+        addOptional(new ResourceLocation("enigmaticlegacy", "slayer"), DreamtinkerModifiers.Ids.all_slayer, true);
+        addOptional(new ResourceLocation("enigmaticlegacy", "nemesis"), DreamtinkerModifiers.Ids.el_nemesis_curse, true);
+        addOptional(new ResourceLocation("enigmaticlegacy", "sorrow"), DreamtinkerModifiers.Ids.el_sorrow, true);
+        addOptional(new ResourceLocation("enigmaticlegacy", "eternal_binding"), DreamtinkerModifiers.Ids.el_eternal_binding, true);
+        addOptional(new ResourceLocation("enigmaticlegacy", "wrath"), DreamtinkerModifiers.Ids.el_wrath, true);
+        addOptional(new ResourceLocation("enigmaticlegacy", "torrent"), DreamtinkerModifiers.Ids.el_torrent, true);
+
     }
 
     @Override

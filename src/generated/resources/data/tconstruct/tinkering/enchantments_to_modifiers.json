@@ -1,4 +1,10 @@
 {
+  "enigmaticlegacy:eternal_binding?": "dreamtinker:el_eternal_binding?",
+  "enigmaticlegacy:nemesis?": "dreamtinker:el_nemesis_curse?",
+  "enigmaticlegacy:slayer?": "dreamtinker:all_slayer?",
+  "enigmaticlegacy:sorrow?": "dreamtinker:el_sorrow?",
+  "enigmaticlegacy:torrent?": "dreamtinker:el_torrent?",
+  "enigmaticlegacy:wrath?": "dreamtinker:el_wrath?",
   "malum:animated?": "dreamtinker:malum_animated?",
   "malum:ascension?": "dreamtinker:malum_ascension?",
   "malum:haunted?": "dreamtinker:malum_haunted?",

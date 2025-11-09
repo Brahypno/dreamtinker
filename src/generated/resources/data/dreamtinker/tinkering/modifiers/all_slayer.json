@@ -1,0 +1,11 @@
+{
+  "level_display": "tconstruct:single_level",
+  "modules": [
+    {
+      "type": "tconstruct:conditional_melee_damage",
+      "each_level": 1.5,
+      "percent": false
+    }
+  ],
+  "tooltip_display": "always"
+}

@@ -76,6 +76,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         callGetOrCreate(this, DreamtinkerMaterialIds.etherium).setTraits(MELEE_HARVEST, List.of(
                 new ModifierEntry(ModifierIds.smite, 2),
                 new ModifierEntry(explosive_hit.getId(), 1),
+                new ModifierEntry(Ids.el_etherium, 1),
                 new ModifierEntry(astral_break.getId(), 1)));
         addTraits(DreamtinkerMaterialIds.etherium, RANGED, ranged_shoot, explosive_hit);
         callGetOrCreate(this, DreamtinkerMaterialIds.etherium).setTraits(ARMOR, List.of(
@@ -93,7 +94,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
 
 
         addTraits(DreamtinkerMaterialIds.soul_etherium, MELEE_HARVEST, cursed_ring_bound.getId(), ModifierIds.soulbound,
-                  Ids.soul_form, open_soul.getId(), exiles_faulty.getId());
+                  Ids.soul_form, open_soul.getId(), exiles_faulty.getId(), Ids.el_etherium);
         addTraits(DreamtinkerMaterialIds.soul_etherium, RANGED, cursed_ring_bound.getId(), ModifierIds.soulbound,
                   Ids.soul_form, open_soul.getId(), exiles_faulty.getId());
         addTraits(DreamtinkerMaterialIds.soul_etherium, ARMOR, cursed_ring_bound.getId(), ModifierIds.soulbound,
