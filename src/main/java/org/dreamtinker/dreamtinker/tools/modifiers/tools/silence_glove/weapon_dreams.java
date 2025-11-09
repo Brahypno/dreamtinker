@@ -2,7 +2,6 @@ package org.dreamtinker.dreamtinker.tools.modifiers.tools.silence_glove;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -16,19 +15,22 @@ import org.dreamtinker.dreamtinker.library.modifiers.DreamtinkerHook;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
+import org.dreamtinker.dreamtinker.tools.items.SilenceGlove;
 import org.dreamtinker.dreamtinker.utils.CuriosCompact;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.capability.inventory.ToolInventoryCapability;
+import slimeknights.tconstruct.library.tools.definition.module.mining.IsEffectiveToolHook;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.OptionalInt;
 
+import static org.dreamtinker.dreamtinker.tools.modifiers.events.weaponDreamsEnsureEnds.TAG_LAST_USE;
 import static org.dreamtinker.dreamtinker.tools.modifiers.events.weaponDreamsEnsureEnds.startChosenDisplay;
 
 public class weapon_dreams extends BattleModifier {
@@ -98,11 +100,32 @@ public class weapon_dreams extends BattleModifier {
             }
         }else {
             // —— 按你的方式判断是否启用代理 & 取 InventoryModule —— //
-            Selected selected = select_chosen(tool, level);
-            ItemStack chosen = selected.stack;
+            ModifierEntry weapon_slots = tool.getModifier(DreamtinkerModifiers.Ids.weapon_slots);
+            if (weapon_slots.getLevel() < 1)
+                return;
+
+            List<ItemStack> frames = new ArrayList<>();
+            weapon_slots.getHook(ToolInventoryCapability.HOOK).getAllStacks(tool, weapon_slots, frames);
+            boolean tool_filter = 1 <= tool.getModifier(DreamtinkerModifiers.Ids.weapon_dreams_filter).getLevel();
+            boolean natural_order = 1 <= tool.getModifier(DreamtinkerModifiers.Ids.weapon_dreams_order).getLevel();
+            int chosenIdx;
+            int last_idx = !tool.getPersistentData().contains(TAG_LAST_USE) ? -1 : tool.getPersistentData().getInt(TAG_LAST_USE);
+
+            chosenIdx = chooseIndex(level, frames, state, natural_order, tool_filter, last_idx);
+            if (chosenIdx < 0)
+                return;
+            ItemStack chosen = frames.get(chosenIdx);
             ItemStack proxySnap = proxy.copy();
             if (chosen.isEmpty() || !chosen.is(TinkerTags.Items.MODIFIABLE))
                 return;
+            if (natural_order){
+                if (proxySnap.getItem() instanceof SilenceGlove){
+                    ToolStack toolStack = ToolStack.from(proxySnap);
+                    toolStack.getPersistentData().putInt(TAG_LAST_USE, chosenIdx);
+                    toolStack.updateStack(proxySnap);
+                }else
+                    tool.getPersistentData().putInt(TAG_LAST_USE, chosenIdx);
+            }
 
             // ===== 服务端：不要再调用 player.attack()，直接执行业务逻辑（chosen → 钩子 → 回写 → 还原） =====
             ServerPlayer sp = (ServerPlayer) player;
@@ -127,7 +150,7 @@ public class weapon_dreams extends BattleModifier {
 
                 // 回写 chosen 的消耗到 InventoryModule
                 ItemStack after = player.getMainHandItem().copy();
-                set_back(tool, after, selected.slot);
+                set_back(tool, after, chosenIdx);
             }
             finally {
                 // 还原主手（服务端权威）
@@ -135,24 +158,9 @@ public class weapon_dreams extends BattleModifier {
         }
     }
 
-    record Selected(ItemStack stack, int slot) {}
-
     private void update_hand(Player player, ItemStack stack) {
         player.setItemInHand(InteractionHand.MAIN_HAND, stack);
         player.getInventory().setChanged();
-    }
-
-    private Selected select_chosen(IToolStackView tool, Level level) {
-        ModifierEntry weapon_slots = tool.getModifier(DreamtinkerModifiers.Ids.weapon_slots);
-        if (weapon_slots.getLevel() < 1)
-            return new Selected(ItemStack.EMPTY, -1);
-
-        List<ItemStack> frames = new ArrayList<>();
-        weapon_slots.getHook(ToolInventoryCapability.HOOK).getAllStacks(tool, weapon_slots, frames);
-        int chosenSlot = chooseRandomStack(frames, level.random);
-        if (chosenSlot < 0)
-            return new Selected(ItemStack.EMPTY, -1);
-        return new Selected(frames.get(chosenSlot), chosenSlot);
     }
 
     private void set_back(IToolStackView tool, ItemStack stack, int chosenSlot) {
@@ -160,33 +168,99 @@ public class weapon_dreams extends BattleModifier {
         weapon_slots.getHook(ToolInventoryCapability.HOOK).setStack(tool, weapon_slots, chosenSlot, stack);
     }
 
-    private int chooseRandomStack(List<ItemStack> itemFrames, RandomSource rdn) {
-        OptionalInt idxOpt = pickNonAirIndex(itemFrames, rdn);
-        if (idxOpt.isPresent()){
-            return idxOpt.getAsInt();
-        }else
-            return -1;
-    }
-
-    private static OptionalInt pickNonAirIndex(List<ItemStack> stacks, RandomSource random) {
-        int chosen = -1;
-        int seen = 0; // 已遇到的非空数量
-        for (int i = 0; i < stacks.size(); i++) {
-            ItemStack s = stacks.get(i);
-            if (!s.isEmpty()){ // 等价于“不是空气/空堆”
-                seen++;
-                // 以 1/seen 的概率替换当前选择
-                if (random.nextInt(seen) == 0){
-                    chosen = i;
-                }
-            }
-        }
-        return chosen >= 0 ? OptionalInt.of(chosen) : OptionalInt.empty();
-    }
-
     public static int computeProxyCooldownTicks(IToolStackView toolStackView) {
         float chosenSpeed = toolStackView.getStats().get(ToolStats.ATTACK_SPEED);
         return Math.max(1, net.minecraft.util.Mth.ceil(20f / chosenSpeed));
     }
+
+    public static int chooseIndex(
+            Level level,
+            List<ItemStack> frames,
+            @Nullable BlockState targetState,
+            boolean NoRandomCycle,
+            boolean RequireUsable,
+            int lastIndex) {
+
+        // 收集所有非空
+        List<Integer> nonEmpty = new ArrayList<>();
+        for (int i = 0; i < frames.size(); i++) {
+            if (!frames.get(i).isEmpty()){
+                nonEmpty.add(i);
+            }
+        }
+        if (nonEmpty.isEmpty())
+            return -1; // 没东西可选
+        lastIndex = (lastIndex) % nonEmpty.size();
+
+
+        // B 只有在有 targetState 时才有意义，否则直接当没开 B
+
+        List<Integer> usable = Collections.emptyList();
+        if (RequireUsable){
+            usable = new ArrayList<>();
+            for (int i : nonEmpty) {
+                ItemStack s = frames.get(i);
+                if (targetState != null && canHarvest(targetState, s) || s.is(TinkerTags.Items.MELEE_PRIMARY))
+                    usable.add(i);
+            }
+        }
+
+        // ========== 情况分发 ==========
+
+        if (RequireUsable && !usable.isEmpty()){
+            // 有 B 且存在可用工具
+            if (NoRandomCycle){
+                // A + B：在 usable 中自然循环
+                return naturalCycle(usable, lastIndex);
+            }else {
+                // 仅 B：在 usable 中随机
+                if (usable.size() == 1){
+                    return usable.get(0);
+                }
+                return usable.get(level.random.nextInt(usable.size()));
+            }
+        }
+
+        // 走到这里两种情况：
+        // 1) 没开 B
+        // 2) 开了 B 但 usable 为空，需要按你说的回退到“非空逻辑”，由 A 决定选法
+
+        if (NoRandomCycle){
+            // 无 B 或 A+B 但无 usable：在 nonEmpty 中自然循环
+            return naturalCycle(nonEmpty, lastIndex);
+        }else {
+            // 无 A：在 nonEmpty 中随机
+            if (nonEmpty.size() == 1)
+                return nonEmpty.get(0);
+            return nonEmpty.get(level.random.nextInt(nonEmpty.size()));
+        }
+    }
+
+    // 自然循环: 从 lastIndex 之后找下一个候选，没有就回到第一个
+    public static int naturalCycle(List<Integer> candidates, int lastIndex) {
+
+        if (candidates.isEmpty()){
+            return -1;
+        }
+        if (candidates.size() == 1){
+            return candidates.get(0);
+        }
+
+        int chosen = candidates.get(0);
+
+        for (int idx : candidates) {
+            if (idx > lastIndex){
+                chosen = idx;
+                break;
+            }
+        }
+        return chosen;
+    }
+
+    // 工具是否可用于该方块（只依赖 stack + state）
+    private static boolean canHarvest(BlockState state, ItemStack stack) {
+        return IsEffectiveToolHook.isEffective(ToolStack.from(stack), state);
+    }
+
 
 }

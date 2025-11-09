@@ -1,5 +1,7 @@
 {
   "values": [
-    "dreamtinker:soul_upgrade"
+    "dreamtinker:soul_upgrade",
+    "dreamtinker:weapon_dreams_order",
+    "dreamtinker:weapon_dreams_filter"
   ]
 }

@@ -2,8 +2,9 @@
   "tool": "dreamtinker:silence_glove",
   "text": [
     { "text": "A special tool that have 5 inventory slots that is capable for tinkers` construct tool." },
-    { "text": "When the inventory is not empty, left operation and right use item operation with this tool would be transformed with random one of the inventory tool. And they would be full charge by default", "paragraph": false },
-    { "text": "Found in loot chest of ancient city or trail ruins rare.\nWhen curio loaded, it can equip on hands slot and increase ring size based on tool melee damage and still trigger effects.", "paragraph": false }
+    { "text": "When the inventory is not empty, left operation and right use item operation with this tool would be transformed with random one of the inventory tool. And they would be full charge by default. Not support crossbow like item", "paragraph": false },
+    { "text": "Found in loot chest of ancient city or trail ruins rare.\nWhen curio loaded, it can equip on hands slot and increase ring size based on tool melee damage and still trigger effects.", "paragraph": false },
+    { "text": "Cooldown based on tool attack speed", "paragraph": false }
   ],
   "properties": [
       "+0 Attack Damage",

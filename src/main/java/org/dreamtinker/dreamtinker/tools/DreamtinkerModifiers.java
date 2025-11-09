@@ -223,6 +223,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId silver_name_bee = id("silver_name_bee");
         public static final ModifierId the_romantic = id("the_romantic");
         public static final ModifierId all_slayer = id("all_slayer");
+        public static final ModifierId weapon_dreams_filter = id("weapon_dreams_filter");
+        public static final ModifierId weapon_dreams_order = id("weapon_dreams_order");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");

@@ -42,7 +42,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
         this.tag(TinkerTags.Modifiers.RANGED_UPGRADES)
             .add(Ids.icy_memory, Ids.hate_memory);
         this.tag(TinkerTags.Modifiers.GENERAL_UPGRADES)
-            .add(Ids.soul_upgrade);
+            .add(Ids.soul_upgrade, Ids.weapon_dreams_order, Ids.weapon_dreams_filter);
         this.tag(TinkerTags.Modifiers.HARVEST_UPGRADES)
             .add(foundation_will.getId());
         this.tag(TinkerTags.Modifiers.GENERAL_SLOTLESS)

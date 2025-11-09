@@ -2,7 +2,7 @@
   "dreamtinker:continuous_explode":     ["minecraft:block/tnt_side"],
   "dreamtinker:el_eternal_binding":     ["enigmaticlegacy:item/soul_crystal","minecraft:item/chain"],
   "dreamtinker:el_nemesis_curse":     ["minecraft:block/cactus_side"],
-  "dreamtinker:el_slayer":     ["minecraft:item/iron_sword"],
+  "dreamtinker:all_slayer":     ["minecraft:item/iron_sword"],
   "dreamtinker:el_torrent":     ["minecraft:item/prismarine_shard","minecraft:item/trident"],
   "dreamtinker:el_wrath":     ["minecraft:block/prismarine","minecraft:item/trident"],
   "dreamtinker:desolation_ring":     ["enigmaticlegacy:item/desolation_ring"],

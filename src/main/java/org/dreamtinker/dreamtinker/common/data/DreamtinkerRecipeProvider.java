@@ -975,6 +975,24 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(5)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.the_romantic, upgradeSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.the_romantic, upgradeFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.weapon_dreams_order)
+                             .setTools(Ingredient.of(DreamtinkerTools.silence_glove.get()))
+                             .addInput(Items.COMPASS, 2)
+                             .addInput(Items.BELL)
+                             .addInput(Items.CLOCK)
+                             .setSlots(SlotType.SOUL, 1)
+                             .setMaxLevel(1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.weapon_dreams_order, soulSalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.Ids.weapon_dreams_order, soulFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.weapon_dreams_filter)
+                             .setTools(Ingredient.of(DreamtinkerTools.silence_glove.get()))
+                             .addInput(Items.REPEATER, 2)
+                             .addInput(Items.COMPARATOR)
+                             .addInput(Items.OBSERVER)
+                             .setSlots(SlotType.SOUL, 1)
+                             .setMaxLevel(1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.weapon_dreams_filter, soulSalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.Ids.weapon_dreams_filter, soulFolder));
     }
 
     private void addEntityMeltingRecipes(Consumer<FinishedRecipe> consumer) {

@@ -168,6 +168,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                 .addModule(InventoryModule.builder().toolItem(ItemPredicate.tag(MELEE))
                                           .filter(ItemPredicate.and(ItemPredicate.tag(MODIFIABLE), ItemPredicate.tag(ARMOR).inverted(),
+                                                                    ItemPredicate.tag(CROSSBOWS).inverted(),
                                                                     ItemPredicate.tag(DreamtinkerTagKeys.Items.weapon_slot_excluded).inverted())).flatSlots(5))
                 .addModule(InventoryMenuModule.ANY);
         buildModifier(Ids.shadow_blessing).levelDisplay(ModifierLevelDisplay.NO_LEVELS)
@@ -181,6 +182,16 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.all_slayer)
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModule(ConditionalMeleeDamageModule.builder().target(LivingEntityPredicate.ANY).eachLevel(1.5f));
+        buildModifier(Ids.weapon_dreams_filter)
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(ModifierRequirementsModule.builder()
+                                                     .requirement(HasModifierPredicate.hasModifier(weapon_dreams.getId(), 1))
+                                                     .modifierKey(Ids.el_wrath).build());
+        buildModifier(Ids.weapon_dreams_order)
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(ModifierRequirementsModule.builder()
+                                                     .requirement(HasModifierPredicate.hasModifier(weapon_dreams.getId(), 1))
+                                                     .modifierKey(Ids.el_wrath).build());
         addELModifiers();
         addMalumModifiers();
 

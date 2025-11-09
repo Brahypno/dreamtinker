@@ -96,7 +96,9 @@
     "weapon_slots": "#777B7E",
     "shadow_blessing": "#050505",
     "el_etherium": "#96E8E0",
-    "the_romantic": "#F9C70F"
+    "the_romantic": "#F9C70F",
+    "weapon_dreams_filter": "#777B7E",
+    "weapon_dreams_order": "#777B7E"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",

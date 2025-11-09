@@ -1,6 +1,7 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.events;
 
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
@@ -21,6 +22,7 @@ import java.util.UUID;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class weaponDreamsEnsureEnds {
+    public static final ResourceLocation TAG_LAST_USE = Dreamtinker.getLocation("weapon_dreams_last_use");
     // 保存每个玩家一个 pending
     static final Map<UUID, Pending> PENDING = new HashMap<>();
 
