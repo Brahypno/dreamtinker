@@ -173,6 +173,18 @@ public final class DTJeiPlugin implements IModPlugin {
                 false,  // underwater
                 false   // drowning
         ));
+        list.add(new WorldRitualEntry(
+                WorldRitualEntry.Trigger.HIT_ENTITY,
+                Ingredient.of(Dreamtinker.mcItemTag("anvil")),
+                null,
+                Ingredient.of(Tags.Items.GLASS),
+                new ItemStack(DreamtinkerCommon.evilHomunculus.get()),
+                null,
+                EntityIngredient.of(EntityType.PILLAGER, EntityType.VINDICATOR, EntityType.ILLUSIONER, EntityType.EVOKER),
+                null, null, null, null, null,
+                false,  // underwater
+                false   // drowning
+        ));
 
         reg.addRecipes(WORLD_RITUAL, list);
     }
