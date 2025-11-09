@@ -141,7 +141,6 @@ public class SilenceGloveEvents {
                 else if (s.getItem() instanceof ModifiableCrossbowItem)
                     res = bow_use(player.level(), player, InteractionHand.MAIN_HAND,
                                   s).getResult();//s.use(player.level(), player, InteractionHand.MAIN_HAND).getResult();
-                System.out.println(res);
                 if ((InteractionResult.CONSUME == res || InteractionResult.SUCCESS == res) &&
                     (!RequireUsable || 0 < s.getUseDuration() && 0 < tool.getStats().get(ToolStats.DRAW_SPEED)))
                     usable.add(i);
