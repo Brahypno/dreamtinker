@@ -372,6 +372,13 @@
   "modifier.dreamtinker.weapon_dreams_order.flavor": "Ordered Arts",
   "modifier.dreamtinker.weapon_dreams_order.description": "Weapon dreams would try best to follow the natural order of the tools",
   "modifier.dreamtinker.weapon_dreams_order.requirements": "Need 'Weapon Arts' to apply",
+  "modifier.dreamtinker.honey_tasty": "Honey Tasty",
+  "modifier.dreamtinker.honey_tasty.flavor": "Good sweet",
+  "modifier.dreamtinker.honey_tasty.description": "Smells so good, you cannot resist taking a few bites of your tool",
+  "modifier.dreamtinker.rainbow_catcher": "Rainbow Catcher",
+  "modifier.dreamtinker.rainbow_catcher.flavor": "After the rain, I would die",
+  "modifier.dreamtinker.rainbow_catcher.description": "When in rain, block damage and gain jump count boost;But after rain, receive 3 times more damage",
+  "modifier.dreamtinker.tooltip.rainbow_catcher": "The rainbow awaits: ",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",
@@ -454,6 +461,8 @@
   "item.dreamtinker.poisonous_homunculus": "Poisonous Homunculus",
   "item.dreamtinker.evil_homunculus": "Evil Homunculus",
   "item.dreamtinker.soul_steel": "Soul Steel",
+  "item.dreamtinker.rainbow_honey": "Rainbow Honey Bottle",
+  "item.dreamtinker.rainbow_honey_crystal": "Rainbow Honey Crystal",
 
   "block.dreamtinker.crying_obsidian_pane": "Crying Obsidian Pane",
   "block.dreamtinker.narcissus": "Narcissus",
@@ -518,6 +527,8 @@
   "material.dreamtinker.shadowskin.flavor": "Why shadow have skin",
   "material.dreamtinker.soul_steel": "Soul steel",
   "material.dreamtinker.soul_steel.flavor": "Soul with Steel but another form",
+  "material.dreamtinker.rainbow_honey_crystal": "Rainbow Honey Crystal",
+  "material.dreamtinker.rainbow_honey_crystal.flavor": "At the end of Rainbow",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "Molten echo Alloy",
   "fluid.dreamtinker.molten_echo_alloy": "Molten echo Alloy",
@@ -609,6 +620,9 @@
   "fluid_type.dreamtinker.rainbow_honey": "Rainbow Honey",
   "fluid.dreamtinker.rainbow_honey": "Rainbow Honey",
   "fluid.dreamtinker.rainbow_honey.fluid_effect": "Rainbow Honey",
+  "fluid_type.dreamtinker.molten_bee_gem": "Molten Rainbow Honey Crystal",
+  "fluid.dreamtinker.molten_bee_gem": "Molten Rainbow Honey Crystal",
+  "fluid.dreamtinker.molten_bee_gem.fluid_effect": "Molten Rainbow Honey Crystal",
 
   "item.dreamtinker.molten_echo_alloy_bucket": "Molten echo alloy Bucket",
   "item.dreamtinker.molten_echo_shard_bucket": "Molten echo shard Bucket",
@@ -639,6 +653,8 @@
   "item.dreamtinker.molten_soul_steel_bucket": "Molten Soul Steel Bucket",
   "item.dreamtinker.half_festering_blood_bucket": "Half Festering Blood Bucket",
   "item.dreamtinker.festering_blood_bucket": "Festering Blood Bucket",
+  "item.dreamtinker.rainbow_honey_bucket": "Rainbow Honey Bucket",
+  "item.dreamtinker.molten_bee_gem_bucket": "Molten Rainbow Honey Crystal Bucket",
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "bleed",
   "fluid_effect.tconstruct.damage.explosion": "explosion",
@@ -680,5 +696,6 @@
   "jei.dreamtinker.celestial_type.moon_phase": "Night with Moon Phase: ",
   "jei.dreamtinker.chance": "Chance",
 
-  "death.attack.dreamtinker.null_void": "consumed by nothingness"
+  "death.attack.dreamtinker.null_void": "consumed by nothingness",
+  "death.attack.dreamtinker.rain_bow": "vanished like rainbow"
 }

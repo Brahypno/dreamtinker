@@ -372,6 +372,14 @@
   "modifier.dreamtinker.weapon_dreams_order.flavor": "守序之艺",
   "modifier.dreamtinker.weapon_dreams_order.description": "工具艺术会尽量从可选择的范围内以自然顺序挑选结果",
   "modifier.dreamtinker.weapon_dreams_order.requirements": "需要工具艺术作为前置",
+  "modifier.dreamtinker.honey_tasty": "蜜之美味",
+  "modifier.dreamtinker.honey_tasty.flavor": "好吃",
+  "modifier.dreamtinker.honey_tasty.description": "闻起来真香，香得让你忍不住在这工具上添几道牙印",
+  "modifier.dreamtinker.rainbow_catcher": "彩虹捕手",
+  "modifier.dreamtinker.rainbow_catcher.flavor": "在大雨过后，我便会死去",
+  "modifier.dreamtinker.rainbow_catcher.description": "在雨中时，格挡伤害并获得跳跃次数提升；但雨停后受到之前格挡的三倍伤害",
+  "modifier.dreamtinker.tooltip.rainbow_catcher": "虹彩在等待: ",
+
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
@@ -454,6 +462,8 @@
   "item.dreamtinker.poisonous_homunculus": "恶毒瓶中人",
   "item.dreamtinker.evil_homunculus": "灾厄瓶中人",
   "item.dreamtinker.soul_steel": "魂钢",
+  "item.dreamtinker.rainbow_honey": "彩虹蜜瓶",
+  "item.dreamtinker.rainbow_honey_crystal": "虹彩晶",
 
   "block.dreamtinker.crying_obsidian_pane": "哭泣的黑曜石板",
   "block.dreamtinker.narcissus": "水仙",
@@ -518,6 +528,8 @@
   "material.dreamtinker.shadowskin.flavor": "阴影怎么会有皮？",
   "material.dreamtinker.soul_steel": "魂钢",
   "material.dreamtinker.soul_steel.flavor": "另一种魂钢",
+  "material.dreamtinker.rainbow_honey_crystal": "虹彩糖蜜晶",
+  "material.dreamtinker.rainbow_honey_crystal.flavor": "虹彩的尽头",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "熔融回响合金",
   "fluid.dreamtinker.molten_echo_alloy": "熔融回响合金",
@@ -609,6 +621,9 @@
   "fluid_type.dreamtinker.rainbow_honey": "彩虹糖蜜",
   "fluid.dreamtinker.rainbow_honey": "彩虹糖蜜",
   "fluid.dreamtinker.rainbow_honey.fluid_effect": "彩虹糖蜜",
+  "fluid_type.dreamtinker.molten_bee_gem": "熔融虹彩糖晶",
+  "fluid.dreamtinker.molten_bee_gem": "熔融虹彩糖晶",
+  "fluid.dreamtinker.molten_bee_gem.fluid_effect": "熔融虹彩糖晶",
 
   "item.dreamtinker.molten_echo_alloy_bucket": "熔融回响合金桶",
   "item.dreamtinker.molten_echo_shard_bucket": "熔融回响碎片桶",
@@ -639,6 +654,8 @@
   "item.dreamtinker.molten_soul_steel_bucket": "熔融魂钢桶",
   "item.dreamtinker.half_festering_blood_bucket": "半腐化之血桶",
   "item.dreamtinker.festering_blood_bucket": "腐殖之血桶",
+  "item.dreamtinker.rainbow_honey_bucket": "彩虹糖蜜桶",
+  "item.dreamtinker.molten_bee_gem_bucket": "熔融彩虹糖蜜宝石桶",
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "流血",
   "fluid_effect.tconstruct.damage.explosion": "爆炸",
@@ -681,5 +698,6 @@
   "jei.dreamtinker.celestial_type.moon_phase": "夜与月相: ",
   "jei.dreamtinker.chance": "概率",
 
-  "death.attack.dreamtinker.null_void": "被虚无吞没"
+  "death.attack.dreamtinker.null_void": "被虚无吞没",
+  "death.attack.dreamtinker.rain_bow": "消失，犹如彩虹一般"
 }

@@ -19,13 +19,13 @@ public class DamageTypeTagProvider extends DamageTypeTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider Provider) {
-        tag(BYPASSES_ARMOR).add(DreamtinkerDamageTypes.NULL_VOID);
+        tag(BYPASSES_ARMOR).add(DreamtinkerDamageTypes.NULL_VOID, DreamtinkerDamageTypes.rain_bow);
         tag(BYPASSES_SHIELD).add(DreamtinkerDamageTypes.NULL_VOID);
         tag(BYPASSES_INVULNERABILITY).add(DreamtinkerDamageTypes.NULL_VOID);
         tag(BYPASSES_COOLDOWN).add(DreamtinkerDamageTypes.NULL_VOID);
         tag(BYPASSES_EFFECTS).add(DreamtinkerDamageTypes.NULL_VOID);
         tag(BYPASSES_RESISTANCE).add(DreamtinkerDamageTypes.NULL_VOID);
-        tag(BYPASSES_ENCHANTMENTS).add(DreamtinkerDamageTypes.NULL_VOID);
+        tag(BYPASSES_ENCHANTMENTS).add(DreamtinkerDamageTypes.NULL_VOID, DreamtinkerDamageTypes.rain_bow);
         tag(AVOIDS_GUARDIAN_THORNS).add(DreamtinkerDamageTypes.NULL_VOID);
         tag(ALWAYS_HURTS_ENDER_DRAGONS).add(DreamtinkerDamageTypes.NULL_VOID);
 

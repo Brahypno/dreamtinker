@@ -4,6 +4,10 @@
   "inputs": [
     {
       "item": "dreamtinker:twist_obsidian_pane"
+    },
+    {
+      "amount_needed": 4,
+      "item": "minecraft:weeping_vines"
     }
   ],
   "level": {

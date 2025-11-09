@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "dreamtinker:rainbow_honey_crystal",
+  "result": {
+    "amount": 100,
+    "fluid": "dreamtinker:molten_bee_gem"
+  },
+  "temperature": 800
+}

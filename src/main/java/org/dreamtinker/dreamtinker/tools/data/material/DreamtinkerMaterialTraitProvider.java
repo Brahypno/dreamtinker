@@ -72,6 +72,8 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.soul_steel, MELEE_HARVEST, ModifierIds.soulbound, ModifierIds.ductile, ModifierIds.swiftstrike);
         addTraits(DreamtinkerMaterialIds.soul_steel, RANGED, ModifierIds.soulbound, ModifierIds.ductile, ModifierIds.pierce);
         addTraits(DreamtinkerMaterialIds.soul_steel, ARMOR, ModifierIds.soulbound, ModifierIds.ductile, ModifierIds.magicProtection);
+        addDefaultTraits(DreamtinkerMaterialIds.rainbow_honey_crystal, HoneyTastyModifier);
+        addTraits(DreamtinkerMaterialIds.rainbow_honey_crystal, ARMOR, HoneyTastyModifier, rainbowCatcher);
 
         callGetOrCreate(this, DreamtinkerMaterialIds.etherium).setTraits(MELEE_HARVEST, List.of(
                 new ModifierEntry(ModifierIds.smite, 2),

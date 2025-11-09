@@ -28,11 +28,12 @@ public class despair_rain extends BattleModifier {
 
     @Override
     public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
-        consumer.accept(TinkerAttributes.CRITICAL_DAMAGE.get(),
-                        new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
-                                              TinkerAttributes.CRITICAL_DAMAGE.get().getDescriptionId(),
-                                              4 + modifier.getLevel(),
-                                              AttributeModifier.Operation.MULTIPLY_TOTAL));
+        if (!tool.isBroken())
+            consumer.accept(TinkerAttributes.CRITICAL_DAMAGE.get(),
+                            new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
+                                                  TinkerAttributes.CRITICAL_DAMAGE.get().getDescriptionId(),
+                                                  4 + modifier.getLevel(),
+                                                  AttributeModifier.Operation.MULTIPLY_TOTAL));
     }
 
     @Override
@@ -60,7 +61,7 @@ public class despair_rain extends BattleModifier {
             return;
         if ((isCorrectSlot || isSelected) && world.getGameTime() % 20 == 0)
             holder.setHealth(modifier.getLevel());
-        
+
     }
 
 

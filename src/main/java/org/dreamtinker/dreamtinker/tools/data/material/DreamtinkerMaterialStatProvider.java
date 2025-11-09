@@ -66,6 +66,10 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new HeadMaterialStats(600, 8f, Tiers.DIAMOND, 3f),
                          HandleMaterialStats.multipliers().durability(.95f).miningSpeed(1.05f).attackDamage(1.05f).attackSpeed(1.05f).build(),
                          StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.rainbow_honey_crystal,
+                         new HeadMaterialStats(700, 7f, Tiers.DIAMOND, 3f),
+                         HandleMaterialStats.multipliers().durability(1.1f).miningSpeed(0.8f).attackDamage(1.2f).attackSpeed(1.1f).build(),
+                         StatlessMaterialStats.BINDING);
 
         addELMeleeHarvest();
         addMalumMeleeHarvest();
@@ -199,7 +203,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addArmorShieldStats(DreamtinkerMaterialIds.soul_steel,
                             PlatingMaterialStats.builder().durabilityFactor(29).armor(1, 4, 6, 1).toughness(1),
                             StatlessMaterialStats.MAILLE);
-
+        addArmorShieldStats(DreamtinkerMaterialIds.rainbow_honey_crystal,
+                            PlatingMaterialStats.builder().durabilityFactor(30).armor(2, 4, 3, 2).toughness(2),
+                            StatlessMaterialStats.MAILLE);
         addArmorShieldStats(DreamtinkerMaterialIds.etherium,
                             PlatingMaterialStats.builder().durabilityFactor(132).armor(4f, 9f, 7f, 4f).toughness(4).knockbackResistance(0f),
                             StatlessMaterialStats.MAILLE);

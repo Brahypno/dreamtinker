@@ -1,0 +1,22 @@
+{
+  "type": "tconstruct:alloy",
+  "inputs": [
+    {
+      "amount": 250,
+      "tag": "dreamtinker:rainbow_honey"
+    },
+    {
+      "amount": 500,
+      "tag": "tconstruct:meat_soup"
+    },
+    {
+      "amount": 100,
+      "tag": "tconstruct:molten_emerald"
+    }
+  ],
+  "result": {
+    "amount": 200,
+    "fluid": "dreamtinker:molten_bee_gem"
+  },
+  "temperature": 800
+}

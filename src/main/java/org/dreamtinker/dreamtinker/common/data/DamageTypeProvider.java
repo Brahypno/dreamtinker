@@ -9,6 +9,7 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import slimeknights.tconstruct.library.modifiers.fluid.entity.DamageFluidEffect;
 
 import static org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes.NULL_VOID;
+import static org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes.rain_bow;
 
 public class DamageTypeProvider implements RegistrySetBuilder.RegistryBootstrap<DamageType> {
     public DamageTypeProvider() {}
@@ -16,6 +17,7 @@ public class DamageTypeProvider implements RegistrySetBuilder.RegistryBootstrap<
     @Override
     public void run(BootstapContext<DamageType> context) {
         context.register(NULL_VOID, new DamageType(Dreamtinker.MODID + ".null_void", DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 1f, DamageEffects.HURT));
+        context.register(rain_bow, new DamageType(Dreamtinker.MODID + ".rain_bow", DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 1f, DamageEffects.THORNS));
     }
 
     /**

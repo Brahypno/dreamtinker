@@ -98,7 +98,9 @@
     "el_etherium": "#96E8E0",
     "the_romantic": "#F9C70F",
     "weapon_dreams_filter": "#777B7E",
-    "weapon_dreams_order": "#777B7E"
+    "weapon_dreams_order": "#777B7E",
+    "honey_tasty": "#B9C532",
+    "rainbow_catcher": "#D3E03B"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
@@ -124,7 +126,8 @@
     "desire_gem": "#7AB97B",
     "despair_gem": "#6D051A",
     "shadowskin": "#050505",
-    "soul_steel": "#3E5568"
+    "soul_steel": "#3E5568",
+    "rainbow_honey_crystal": "#B9C532"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873"

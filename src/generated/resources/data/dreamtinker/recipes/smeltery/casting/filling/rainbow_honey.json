@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "item": "minecraft:glass_bottle"
+  },
+  "cast_consumed": true,
+  "cooling_time": 47,
+  "fluid": {
+    "amount": 250,
+    "tag": "dreamtinker:rainbow_honey"
+  },
+  "result": "dreamtinker:rainbow_honey"
+}

@@ -182,6 +182,17 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                            .addARGB(216, 0xFF476077)
                                            .addARGB(255, 0xFF627D9A)
                                            .build());
+        this.buildMaterial(DreamtinkerMaterialIds.rainbow_honey_crystal)
+            .meleeHarvest().armor()
+            .fallbacks("gem")
+            .colorMapper(GreyToColorMapping.builderFromBlack()
+                                           .addARGB(63, 0xFF6A6A1A)
+                                           .addARGB(102, 0xFF848A1F)
+                                           .addARGB(140, 0xFF9CAA28)
+                                           .addARGB(178, 0xFFB9C532)
+                                           .addARGB(216, 0xFFD3E03B)
+                                           .addARGB(255, 0xFFEAF748)
+                                           .build());
         addELMaterials();
         addMalumMaterials();
     }

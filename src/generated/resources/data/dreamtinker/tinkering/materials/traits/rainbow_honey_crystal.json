@@ -1,0 +1,20 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "dreamtinker:honey_tasty"
+    }
+  ],
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "dreamtinker:honey_tasty"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:rainbow_catcher"
+      }
+    ]
+  }
+}

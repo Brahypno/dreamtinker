@@ -179,6 +179,11 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                           .addInput(TinkerFluids.moltenCobalt.getTag(), FluidValues.INGOT)
                           .addInput(TinkerFluids.liquidSoul.getTag(), FluidValues.GLASS_BLOCK * 2)
                           .save(consumer, location("molten_soul_steel"));
+        AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_bee_gem, FluidValues.GEM * 2)
+                          .addInput(DreamtinkerFluids.rainbow_honey.getTag(), FluidValues.BOTTLE)
+                          .addInput(TinkerFluids.meatSoup.getTag(), FluidValues.BOWL * 2)
+                          .addInput(TinkerFluids.moltenEmerald.getTag(), FluidValues.GEM)
+                          .save(consumer, location("molten_bee_gem"));
     }
 
     private void addCastingRecipes(Consumer<FinishedRecipe> consumer) {
@@ -265,7 +270,12 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                 .save(consumer, location(folder + "filling/" +
                                                          Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(DreamtinkerCommon.evilHomunculus.get()))
                                                                 .getPath()));
-
+        ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.rainbow_honey.get())
+                                .setCast(Items.GLASS_BOTTLE, true)
+                                .setFluidAndTime(DreamtinkerFluids.rainbow_honey, FluidValues.BOTTLE)
+                                .save(consumer, location(folder + "filling/" +
+                                                         Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(DreamtinkerCommon.rainbow_honey.get()))
+                                                                .getPath()));
         ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.desire_gem.get())
                                 .setFluidAndTime(TinkerFluids.moltenDiamond, FluidValues.LARGE_GEM_BLOCK)
                                 .setCast(Items.NETHER_STAR, true)
@@ -396,6 +406,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         meltCast(DreamtinkerFluids.molten_desire.get(), DreamtinkerCommon.desire_gem.get(), FluidValues.GEM, consumer);
         meltCast(DreamtinkerFluids.despair_essence.get(), DreamtinkerCommon.despair_gem.get(), FluidValues.GEM, consumer);
         meltCast(DreamtinkerFluids.molten_soul_steel.get(), DreamtinkerCommon.soul_steel.get(), FluidValues.INGOT, consumer);
+        meltCast(DreamtinkerFluids.molten_bee_gem.get(), DreamtinkerCommon.rainbow_honey_crystal.get(), FluidValues.GEM, consumer);
     }
 
     String materials_folder = "tools/materials/";
@@ -449,6 +460,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                materials_folder);
         materialRecipe(consumer, DreamtinkerMaterialIds.despair_gem, Ingredient.of(DreamtinkerCommon.despair_gem.get()), 1, 1,
                        materials_folder + "despair_gem");
+
         materialComposite(consumer, MaterialIds.leather, DreamtinkerMaterialIds.shadowskin, DreamtinkerFluids.reversed_shadow, FluidValues.SLIMEBALL,
                           slimeskinFolder, "shadowskin");
         materialComposite(consumer, DreamtinkerMaterialIds.shadowskin, MaterialIds.leather, TinkerFluids.venom, FluidValues.SIP, slimeskinFolder,
@@ -458,6 +470,11 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                materials_folder);
         materialRecipe(consumer, DreamtinkerMaterialIds.soul_steel, Ingredient.of(DreamtinkerCommon.soul_steel.get()), 1, 1,
                        materials_folder + "soul_steel");
+
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.rainbow_honey_crystal, DreamtinkerFluids.molten_bee_gem, FluidValues.GEM,
+                               materials_folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.rainbow_honey_crystal, Ingredient.of(DreamtinkerCommon.rainbow_honey_crystal.get()), 1, 1,
+                       materials_folder + "rainbow_honey_crystal");
 
     }
 
@@ -788,6 +805,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.soul_upgrade)
                              .setTools(TinkerTags.Items.MODIFIABLE)
                              .addInput(DreamtinkerCommon.twist_obsidian_pane.get(), 1)
+                             .addInput(Items.WEEPING_VINES, 4)
                              .setMaxLevel(3)
                              .setSlots(SlotType.UPGRADE, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.soul_upgrade, upgradeSalvage))

@@ -11,7 +11,7 @@
           "modifier": "dreamtinker:weapon_dreams"
         }
       },
-      "translation_key": "modifier.dreamtinker.el_wrath.requirements"
+      "translation_key": "modifier.dreamtinker.weapon_dreams_order.requirements"
     }
   ],
   "tooltip_display": "always"

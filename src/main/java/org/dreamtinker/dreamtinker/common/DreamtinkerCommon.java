@@ -147,6 +147,7 @@ public class DreamtinkerCommon extends DreamtinkerModule {
     public static final RegistryObject<Item> amber = ITEMS.register("amber", () -> new Item(ITEM_PROPS.rarity(Rarity.RARE)));
     public static final RegistryObject<Item> despair_gem = ITEMS.register("despair_gem", () -> new Item(ITEM_PROPS.rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> desire_gem = ITEMS.register("desire_gem", () -> new Item(ITEM_PROPS.rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> rainbow_honey_crystal = ITEMS.register("rainbow_honey_crystal", () -> new Item(ITEM_PROPS));
     public static final RegistryObject<Item> poisonousHomunculus =
             ITEMS.register("poisonous_homunculus", () -> new ContainerFoodItem.FluidContainerFoodItem(
                     new Item.Properties().craftRemainder(Items.GLASS_BOTTLE),
@@ -155,6 +156,10 @@ public class DreamtinkerCommon extends DreamtinkerModule {
             ITEMS.register("evil_homunculus", () -> new ContainerFoodItem.FluidContainerFoodItem(
                     new Item.Properties().craftRemainder(Items.GLASS_BOTTLE),
                     () -> new FluidStack(DreamtinkerFluids.festering_blood.get(), FluidValues.BOTTLE)));
+    public static final RegistryObject<Item> rainbow_honey =
+            ITEMS.register("rainbow_honey", () -> new ContainerFoodItem.FluidContainerFoodItem(
+                    new Item.Properties().craftRemainder(Items.GLASS_BOTTLE),
+                    () -> new FluidStack(DreamtinkerFluids.rainbow_honey.get(), FluidValues.BOTTLE)));
 
     protected static final Item.Properties FOOD_PROPS = new Item.Properties();
     public static final RegistryObject<Item> white_peach = ITEMS.register("white_peach", () -> new Item(
@@ -194,6 +199,8 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         output.accept(poisonousHomunculus.get());
         output.accept(evilHomunculus.get());
         output.accept(soul_steel.get());
+        output.accept(rainbow_honey.get());
+        output.accept(rainbow_honey_crystal.get());
         if (ModList.get().isLoaded("malum"))
             output.accept(malignant_gluttony.get());
         if (ModList.get().isLoaded("enigmaticlegacy"))

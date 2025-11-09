@@ -85,6 +85,8 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
         generateItemModel(DreamtinkerCommon.poisonousHomunculus, "materials");
         generateItemModel(DreamtinkerCommon.evilHomunculus, "materials");
         generateItemModel(DreamtinkerCommon.soul_steel, "materials");
+        generateItemModel(DreamtinkerCommon.rainbow_honey, "");
+        generateItemModel(DreamtinkerCommon.rainbow_honey_crystal, "materials");
         //generateBlockItemModel(object);
         generateBucketItemModel(DreamtinkerFluids.molten_echo_shard);
         generateBucketItemModel(DreamtinkerFluids.molten_albedo_stibium);

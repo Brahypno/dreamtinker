@@ -38,10 +38,8 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegac
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.evil.evil_attack;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.soul_aether.exiles_faulty;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum.*;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.absorption_defense;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.ender_dodge;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.soul_blessing;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.stone_heart;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.*;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.common.HoneyTastyModifier;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.common.fly;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.common.life_looting;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian.isolde;
@@ -145,6 +143,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<despair_wind> despair_wind = MODIFIERS.register("despair_wind", despair_wind::new);
     public static final StaticModifier<requiem> requiem = MODIFIERS.register("requiem", requiem::new);
     public static final StaticModifier<weapon_dreams> weapon_dreams = MODIFIERS.register("weapon_dreams", weapon_dreams::new);
+    public static final StaticModifier<HoneyTastyModifier> HoneyTastyModifier = MODIFIERS.register("honey_tasty", HoneyTastyModifier::new);
+    public static final StaticModifier<rainbowCatcher> rainbowCatcher = MODIFIERS.register("rainbow_catcher", rainbowCatcher::new);
 
     //etherium
     public static final StaticModifier<astral_break> astral_break = EL_MODIFIERS.register("astral_break", astral_break::new);

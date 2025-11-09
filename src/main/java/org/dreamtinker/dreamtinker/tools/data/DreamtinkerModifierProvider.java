@@ -185,12 +185,12 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                 .addModule(ModifierRequirementsModule.builder()
                                                      .requirement(HasModifierPredicate.hasModifier(weapon_dreams.getId(), 1))
-                                                     .modifierKey(Ids.el_wrath).build());
+                                                     .modifierKey(Ids.weapon_dreams_filter).build());
         buildModifier(Ids.weapon_dreams_order)
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                 .addModule(ModifierRequirementsModule.builder()
                                                      .requirement(HasModifierPredicate.hasModifier(weapon_dreams.getId(), 1))
-                                                     .modifierKey(Ids.el_wrath).build());
+                                                     .modifierKey(Ids.weapon_dreams_order).build());
         addELModifiers();
         addMalumModifiers();
 

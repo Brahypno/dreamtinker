@@ -17,6 +17,7 @@ public class DreamtinkerDamageTypes {
     private DreamtinkerDamageTypes() {}
 
     public static final ResourceKey<DamageType> NULL_VOID = create("null_void");
+    public static final ResourceKey<DamageType> rain_bow = create("rain_bow");
 
     private static ResourceKey<DamageType> create(String name) {
         return ResourceKey.create(Registries.DAMAGE_TYPE, Dreamtinker.getLocation(name));

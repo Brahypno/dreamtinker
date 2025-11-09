@@ -27,7 +27,7 @@ public class DreamtinkerFluidTextureProvider extends AbstractFluidTextureProvide
         this.commonFluid(DreamtinkerFluids.molten_crying_obsidian.getType());
         this.commonFluid(DreamtinkerFluids.molten_void.getType());
         this.commonFluid(DreamtinkerFluids.liquid_trist.getType());
-        
+
         this.commonFluid(DreamtinkerFluids.unstable_liquid_aether.getType());
         this.commonFluid(DreamtinkerFluids.liquid_pure_soul.getType());
         this.commonFluid(DreamtinkerFluids.molten_nefariousness.getType());
@@ -48,6 +48,7 @@ public class DreamtinkerFluidTextureProvider extends AbstractFluidTextureProvide
         this.commonFluid(DreamtinkerFluids.half_festering_blood.getType());
         this.commonFluid(DreamtinkerFluids.festering_blood.getType());
         this.commonFluid(DreamtinkerFluids.rainbow_honey.getType());
+        this.commonFluid(DreamtinkerFluids.molten_bee_gem.getType());
     }
 
     public void commonFluid(FluidType fluid) {
