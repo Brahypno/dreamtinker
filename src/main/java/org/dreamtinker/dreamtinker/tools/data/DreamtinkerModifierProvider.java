@@ -118,7 +118,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.huge_ego).tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
                                    .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                                    .addModules(ModifierSlotModule.slot(SlotType.UPGRADE).eachLevel(1))
-                                   .addModule(StatBoostModule.multiplyAll(ToolStats.DURABILITY).flat(-0.2f));
+                                   .addModule(StatBoostModule.multiplyAll(ToolStats.DURABILITY).flat(-0.25f));
         buildModifier(Ids.full_concentration).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
         buildModifier(Ids.thundering_curse).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
         buildModifier(Ids.why_i_cry).levelDisplay(ModifierLevelDisplay.NO_LEVELS);

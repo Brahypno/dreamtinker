@@ -8,7 +8,7 @@
     },
     {
       "type": "tconstruct:stat_boost",
-      "flat": -0.2,
+      "flat": -0.25,
       "operation": "multiply_all",
       "stat": "tconstruct:durability"
     }

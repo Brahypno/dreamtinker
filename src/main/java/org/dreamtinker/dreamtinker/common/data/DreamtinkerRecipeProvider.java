@@ -847,8 +847,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.foundation_will, upgradeSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.foundation_will, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.huge_ego)
-                             .addInput(DreamtinkerCommon.persona_cast.get())
-                             .addInput(DreamtinkerCommon.persona_cast.get())
+                             .addInput(DreamtinkerCommon.twist_obsidian_pane.get(), 10)
                              .setMaxLevel(3)
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.huge_ego, slotlessFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_rebound)

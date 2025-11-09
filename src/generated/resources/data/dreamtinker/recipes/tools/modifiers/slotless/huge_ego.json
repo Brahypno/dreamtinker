@@ -3,10 +3,8 @@
   "allow_crystal": true,
   "inputs": [
     {
-      "item": "dreamtinker:persona_cast"
-    },
-    {
-      "item": "dreamtinker:persona_cast"
+      "amount_needed": 10,
+      "item": "dreamtinker:twist_obsidian_pane"
     }
   ],
   "level": {
