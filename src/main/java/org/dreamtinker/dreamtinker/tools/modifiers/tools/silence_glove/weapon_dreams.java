@@ -132,9 +132,9 @@ public class weapon_dreams extends BattleModifier {
             int cooldownTicks = computeProxyCooldownTicks(tool);
             try {
                 // 临时换手仅为让某些钩子/附魔读取到正确主手；也可直接不用换手，仅把 chosen 传入钩子
-                update_hand(player, chosen.copy());
+                update_hand(player, chosen);
                 // 1) 刚切换为 chosen 时，立即让客户端主手槽显示 chosen
-                startChosenDisplay(sp, chosen, proxySnap, cooldownTicks);
+                startChosenDisplay(sp, chosenIdx, proxySnap, cooldownTicks);
 
                 player.attackStrengthTicker = (int) Math.ceil(player.getCurrentItemAttackStrengthDelay());
 
@@ -147,10 +147,6 @@ public class weapon_dreams extends BattleModifier {
                         chosen_entry.getHook(DreamtinkerHook.LEFT_CLICK).onLeftClickEmpty(chosen_tool, chosen_entry, player, level, equipmentSlot);
                     }
                 }
-
-                // 回写 chosen 的消耗到 InventoryModule
-                ItemStack after = player.getMainHandItem().copy();
-                set_back(tool, after, chosenIdx);
             }
             finally {
                 // 还原主手（服务端权威）
@@ -161,11 +157,6 @@ public class weapon_dreams extends BattleModifier {
     private void update_hand(Player player, ItemStack stack) {
         player.setItemInHand(InteractionHand.MAIN_HAND, stack);
         player.getInventory().setChanged();
-    }
-
-    private void set_back(IToolStackView tool, ItemStack stack, int chosenSlot) {
-        ModifierEntry weapon_slots = tool.getModifier(DreamtinkerModifiers.Ids.weapon_slots);
-        weapon_slots.getHook(ToolInventoryCapability.HOOK).setStack(tool, weapon_slots, chosenSlot, stack);
     }
 
     public static int computeProxyCooldownTicks(IToolStackView toolStackView) {

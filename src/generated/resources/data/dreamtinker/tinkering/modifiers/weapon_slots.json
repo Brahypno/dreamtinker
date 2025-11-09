@@ -18,11 +18,6 @@
           {
             "type": "mantle:inverted",
             "inverted_type": "mantle:tag",
-            "tag": "tconstruct:modifiable/ranged/crossbows"
-          },
-          {
-            "type": "mantle:inverted",
-            "inverted_type": "mantle:tag",
             "tag": "dreamtinker:modifiable/excluded_weapon_slot"
           }
         ]

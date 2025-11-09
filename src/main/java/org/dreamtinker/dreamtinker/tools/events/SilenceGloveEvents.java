@@ -3,9 +3,13 @@ package org.dreamtinker.dreamtinker.tools.events;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileWeaponItem;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,7 +24,10 @@ import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.InteractionSource;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.BowAmmoModifierHook;
 import slimeknights.tconstruct.library.tools.capability.inventory.ToolInventoryCapability;
+import slimeknights.tconstruct.library.tools.item.ranged.ModifiableBowItem;
+import slimeknights.tconstruct.library.tools.item.ranged.ModifiableCrossbowItem;
 import slimeknights.tconstruct.library.tools.nbt.IModDataView;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
@@ -48,7 +55,7 @@ public class SilenceGloveEvents {
         if (player == null)
             return;
 
-        ItemStack tool = player.getMainHandItem();
+        ItemStack tool = player.getMainHandItem().copy();
         if (tool.isEmpty())
             tool = CuriosCompact.findPreferredGlove(player);
 
@@ -81,17 +88,14 @@ public class SilenceGloveEvents {
                 silenceGlove.getPersistentData().putInt(TAG_LAST_USE, slot);
                 silenceGlove.updateStack(tool);
             }
-            ItemStack proxySnap = tool.copy();
 
             try {
                 REENTRY.set(true);
-                player.setItemInHand(InteractionHand.MAIN_HAND, chosen.copy());
+                player.setItemInHand(InteractionHand.MAIN_HAND, chosen);
                 player.getInventory().setChanged();
-                startChosenDisplay((ServerPlayer) player, chosen, proxySnap, computeProxyCooldownTicks(silenceGlove));
+                startChosenDisplay((ServerPlayer) player, slot, tool, computeProxyCooldownTicks(silenceGlove));
 
                 player.getMainHandItem().use(player.level(), player, InteractionHand.MAIN_HAND);
-                ItemStack after = player.getMainHandItem().copy();
-                entry.getHook(ToolInventoryCapability.HOOK).setStack(silenceGlove, entry, slot, after);
             }
             finally {
                 REENTRY.set(false);
@@ -129,10 +133,19 @@ public class SilenceGloveEvents {
                     }
                 }
             }
-            InteractionResult res = s.use(player.level(), player, InteractionHand.MAIN_HAND).getResult();
-            if ((InteractionResult.CONSUME == res || InteractionResult.SUCCESS == res) &&
-                (!RequireUsable || 0 < s.getUseDuration() && 0 < tool.getStats().get(ToolStats.DRAW_SPEED)))
-                usable.add(i);
+            if (!usable.contains(i)){
+                InteractionResult res = InteractionResult.FAIL;
+                if (s.getItem() instanceof ModifiableBowItem)
+                    res = bow_use(player.level(), player, InteractionHand.MAIN_HAND,
+                                  s).getResult();//s.use(player.level(), player, InteractionHand.MAIN_HAND).getResult();
+                else if (s.getItem() instanceof ModifiableCrossbowItem)
+                    res = bow_use(player.level(), player, InteractionHand.MAIN_HAND,
+                                  s).getResult();//s.use(player.level(), player, InteractionHand.MAIN_HAND).getResult();
+                System.out.println(res);
+                if ((InteractionResult.CONSUME == res || InteractionResult.SUCCESS == res) &&
+                    (!RequireUsable || 0 < s.getUseDuration() && 0 < tool.getStats().get(ToolStats.DRAW_SPEED)))
+                    usable.add(i);
+            }
         }
         if (NoRandomCycle && !usable.isEmpty())
             return weapon_dreams.naturalCycle(usable, lastIndex);
@@ -150,6 +163,28 @@ public class SilenceGloveEvents {
             return true;
         }else {
             return player == null || !volatileData.getBoolean(DEFER_OFFHAND) || player.getOffhandItem().isEmpty();
+        }
+    }
+
+    public static InteractionResultHolder<ItemStack> bow_use(Level level, Player player, InteractionHand hand, ItemStack bow) {
+        ToolStack tool = ToolStack.from(bow);
+        if (tool.isBroken()){
+            return InteractionResultHolder.fail(bow);
+        }else {
+            ItemStack ammo = BowAmmoModifierHook.getAmmo(tool, bow, player, ((ProjectileWeaponItem) bow.getItem()).getSupportedHeldProjectiles());
+            InteractionResultHolder<ItemStack> override = ForgeEventFactory.onArrowNock(bow, level, player, hand, !ammo.isEmpty());
+
+            if (override != null){
+                return override;
+            }else if (!player.getAbilities().instabuild && ammo.isEmpty() && !tool.getModifiers().has(TinkerTags.Modifiers.CHARGE_EMPTY_BOW_WITH_DRAWTIME)){
+                if (tool.getModifiers().has(TinkerTags.Modifiers.CHARGE_EMPTY_BOW_WITHOUT_DRAWTIME)){
+                    return InteractionResultHolder.consume(bow);
+                }else {
+                    return InteractionResultHolder.fail(bow);
+                }
+            }else {
+                return InteractionResultHolder.consume(bow);
+            }
         }
     }
 }

@@ -13,7 +13,11 @@ import net.minecraftforge.network.PacketDistributor;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.network.Dnetwork;
 import org.dreamtinker.dreamtinker.network.S2CUseRemainPacket;
+import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
+import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.tools.capability.inventory.ToolInventoryCapability;
+import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -33,18 +37,20 @@ public class weaponDreamsEnsureEnds {
         final boolean waitCooldown;
         int selectedAtStart;
         final int cooldownTicks;
+        final int slot;
 
-        Pending(UUID s, ItemStack snap, int delay, boolean waitCd, int selected, int cooldownTicks) {
+        Pending(UUID s, ItemStack snap, int delay, boolean waitCd, int selected, int cooldownTicks, int slot) {
             session = s;
             proxySnap = snap.copy();
             ticks = delay;
             waitCooldown = waitCd;
             selectedAtStart = selected;
             this.cooldownTicks = cooldownTicks;
+            this.slot = slot;
         }
     }
 
-    public static void startChosenDisplay(ServerPlayer sp, ItemStack chosen, ItemStack proxySnap, int cooldownTicks) {
+    public static void startChosenDisplay(ServerPlayer sp, int slot, ItemStack proxySnap, int cooldownTicks) {
         // 若有旧的，先立即还原
         endChosen(sp);
 
@@ -52,20 +58,25 @@ public class weaponDreamsEnsureEnds {
         sp.connection.send(new ClientboundContainerSetSlotPacket(
                 sp.inventoryMenu.containerId,
                 sp.inventoryMenu.incrementStateId(),
-                slotId, chosen.copy()));
+                slotId, sp.getMainHandItem()));
 
         UUID sid = UUID.randomUUID();
-        PENDING.put(sp.getUUID(), new Pending(sid, proxySnap, /*delay*/8, /*waitCd*/false, sp.getInventory().selected, cooldownTicks));
+        PENDING.put(sp.getUUID(), new Pending(sid, proxySnap, /*delay*/8, /*waitCd*/false, sp.getInventory().selected, cooldownTicks, slot));
     }
 
     static void endChosen(ServerPlayer sp) {
         Pending p = PENDING.remove(sp.getUUID());
         if (p == null)
             return;
+        ItemStack after = sp.getMainHandItem().copy();
+        ToolStack silenceGlove = ToolStack.from(p.proxySnap);
+        ModifierEntry entry = silenceGlove.getModifier(DreamtinkerModifiers.Ids.weapon_slots);
+        entry.getHook(ToolInventoryCapability.HOOK).setStack(silenceGlove, entry, p.slot, after);
 
         sp.setItemInHand(InteractionHand.MAIN_HAND, p.proxySnap);
         sp.getInventory().setChanged();
         sp.getCooldowns().addCooldown(DreamtinkerTools.silence_glove.get(), p.cooldownTicks);
+
         int slotId = 36 + sp.getInventory().selected;
         sp.connection.send(new ClientboundContainerSetSlotPacket(
                 sp.inventoryMenu.containerId,
