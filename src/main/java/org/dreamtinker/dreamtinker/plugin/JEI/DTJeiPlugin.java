@@ -125,7 +125,7 @@ public final class DTJeiPlugin implements IModPlugin {
 
         // E) 水下且“溺水”状态，用打火石点燃海带
         list.add(new WorldRitualEntry(
-                WorldRitualEntry.Trigger.USE_ITEM_UNDERWATER,
+                WorldRitualEntry.Trigger.USE_ITEM,
                 Ingredient.of(Items.FLINT_AND_STEEL),
                 null,
                 Ingredient.of(Items.KELP),
@@ -133,7 +133,7 @@ public final class DTJeiPlugin implements IModPlugin {
                 null,
                 null,
                 null, null, null, null, null,
-                true,  // underwater
+                "Under Water",  // underwater
                 true   // drowning
         ));
         list.add(new WorldRitualEntry(
@@ -146,7 +146,7 @@ public final class DTJeiPlugin implements IModPlugin {
                 null,
                 null,
                 null, null, null, null, AntimonyLootChance.get(),
-                false,  // underwater
+                null,  // underwater
                 false   // drowning
         ));
         list.add(new WorldRitualEntry(
@@ -158,7 +158,7 @@ public final class DTJeiPlugin implements IModPlugin {
                 null,
                 null,
                 null, null, null, null, WhitePeachLootChance.get(),
-                false,  // underwater
+                null,  // underwater
                 false   // drowning
         ));
 
@@ -171,7 +171,7 @@ public final class DTJeiPlugin implements IModPlugin {
                 null,
                 EntityIngredient.of(EntityType.VILLAGER),
                 null, null, null, null, null,
-                false,  // underwater
+                null,  // underwater
                 false   // drowning
         ));
         list.add(new WorldRitualEntry(
@@ -183,7 +183,19 @@ public final class DTJeiPlugin implements IModPlugin {
                 null,
                 EntityIngredient.of(TinkerTags.EntityTypes.ILLAGERS),
                 null, null, null, null, null,
-                false,  // underwater
+                null,  // underwater
+                false   // drowning
+        ));
+        list.add(new WorldRitualEntry(
+                WorldRitualEntry.Trigger.USE_ITEM,
+                Ingredient.of(Items.GLASS_BOTTLE),
+                null,
+                Ingredient.of(Items.BEEHIVE, Items.BEE_NEST),
+                new ItemStack(DreamtinkerCommon.rainbow_honey.get()),
+                null,
+                EntityIngredient.of(EntityType.PLAYER),
+                null, null, null, null, rainbowHoneyRate.get(),
+                "In rain",  // underwater
                 false   // drowning
         ));
 

@@ -689,7 +689,7 @@
   "jei.dreamtinker.category.kill_entity": "Trigger: Sacrifice",
   "jei.dreamtinker.category.breed_entity": "Trigger: New life",
   "jei.dreamtinker.category.item_out_of_world": "Trigger: Drop Item Out of World",
-  "jei.dreamtinker.category.use_item_underwater": "Trigger: Use item Under Water",
+  "jei.dreamtinker.category.use_item": "Trigger: Use item",
   "jei.dreamtinker.category.fortune_looting": "Trigger: Loot with Fortune",
   "jei.dreamtinker.category.hit_entity": "Trigger: hit entity on certain condition",
   "jei.dreamtinker.celestial_type.sun": "Day Time",

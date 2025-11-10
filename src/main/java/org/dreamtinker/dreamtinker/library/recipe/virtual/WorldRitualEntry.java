@@ -21,7 +21,7 @@ public record WorldRitualEntry(
         @Nullable Integer minY,                   // 最低高度（如 > build height）
         @Nullable Integer radius,                 // 搜索/影响半径
         @Nullable Double chance,                  // 成功概率（0~1）
-        @Nullable Boolean underwater,             // 是否需要水下环境
+        @Nullable String text,             // 是否需要水下环境
         @Nullable Boolean drowning                // 是否需要处于溺水状态
 ) {
     public enum Trigger {
@@ -29,7 +29,7 @@ public record WorldRitualEntry(
         KILL_ENTITY,         // 击杀实体（例：白天极限高度击杀凋零骷髅）
         BREED_ENTITY,        // 生物繁殖（周围有羽毛掉落物）
         ITEM_OUT_OF_WORLD,   // 物品出界/虚空（末影珍珠丢进虚空）
-        USE_ITEM_UNDERWATER,  // 在水下使用物品（打火石点燃海带）
+        USE_ITEM,  // 在水下使用物品（打火石点燃海带）
         FORTUNE_LOOTING,
         HIT_ENTITY,
     }

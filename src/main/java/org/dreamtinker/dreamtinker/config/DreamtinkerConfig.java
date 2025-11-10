@@ -72,6 +72,8 @@ public class DreamtinkerConfig {
             builder.comment("Base chance to get White Peach drop from birch").defineInRange("WhitePeachLootChance", 0.2, 0, 10);
     public static final ForgeConfigSpec.DoubleValue SoulCastLoveLootChance =
             builder.comment("Base chance to get Soul Cast from love`s path").defineInRange("SoulCastLoveLootChance", 0.1, 0, 1);
+    public static final ForgeConfigSpec.DoubleValue rainbowHoneyRate =
+            builder.comment("Base chance to get rainbow honey from a beehive").defineInRange("rainbowHoneyRate", 0.4, 0, 1);
 
     static {
         builder.pop();

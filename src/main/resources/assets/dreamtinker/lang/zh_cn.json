@@ -376,7 +376,7 @@
   "modifier.dreamtinker.honey_tasty.flavor": "好吃",
   "modifier.dreamtinker.honey_tasty.description": "闻起来真香，香得让你忍不住在这工具上添几道牙印",
   "modifier.dreamtinker.rainbow_catcher": "彩虹捕手",
-  "modifier.dreamtinker.rainbow_catcher.flavor": "在大雨过后，我便会死去",
+  "modifier.dreamtinker.rainbow_catcher.flavor": "雨停之后，我就会死.",
   "modifier.dreamtinker.rainbow_catcher.description": "在雨中时，格挡伤害并获得跳跃次数提升；但雨停后受到之前格挡的三倍伤害",
   "modifier.dreamtinker.tooltip.rainbow_catcher": "虹彩在等待: ",
 
@@ -691,7 +691,7 @@
   "jei.dreamtinker.category.kill_entity": "触发：献祭",
   "jei.dreamtinker.category.breed_entity": "触发：新生",
   "jei.dreamtinker.category.item_out_of_world": "触发：弃置世界之外",
-  "jei.dreamtinker.category.use_item_underwater": "触发：水下使用物品",
+  "jei.dreamtinker.category.use_item": "触发：使用物品",
   "jei.dreamtinker.category.fortune_looting": "触发：采掘（受时运影响）",
   "jei.dreamtinker.category.hit_entity": "触发：特定情况下击中实体",
   "jei.dreamtinker.celestial_type.sun": "白日",

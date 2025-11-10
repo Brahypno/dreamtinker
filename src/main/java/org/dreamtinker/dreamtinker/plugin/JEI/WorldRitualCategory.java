@@ -148,7 +148,10 @@ public final class WorldRitualCategory implements IRecipeCategory<WorldRitualEnt
         }
         if (Boolean.TRUE.equals(recipe.drowning())){
             graphics.drawString(font, "Drowning", 8, y, 0xFF6666, false);
+            y += 10;
         }
+        if (null != recipe.text())
+            graphics.drawString(font, recipe.text(), 8, y, 0xFF6666, false);
     }
 
     /**
@@ -301,5 +304,5 @@ public final class WorldRitualCategory implements IRecipeCategory<WorldRitualEnt
             public boolean isIngredientOnServer(CelestialIcon ingredient) {return true;}
         }
     }
-    
+
 }

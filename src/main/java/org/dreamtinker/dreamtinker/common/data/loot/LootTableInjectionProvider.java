@@ -1,8 +1,10 @@
 package org.dreamtinker.dreamtinker.common.data.loot;
 
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.data.predicate.IJsonPredicate;
@@ -37,6 +39,10 @@ public class LootTableInjectionProvider extends AbstractLootTableInjectionProvid
                 .addToPool("main", LootItem.lootTableItem(DreamtinkerTools.silence_glove.get())
                                            .setWeight(3)
                                            .apply(ancientToolData3)
+                                           .build());
+        inject("fishing_treasure", new ResourceLocation("gameplay/fishing/treasure"))
+                .addToPool("main", LootItem.lootTableItem(DreamtinkerCommon.rainbow_honey.get())
+                                           .setWeight(1) // all treasure from fishing is the same weight
                                            .build());
     }
 
