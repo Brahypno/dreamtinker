@@ -14,6 +14,7 @@ import net.minecraft.world.level.Level;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
+import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -41,10 +42,12 @@ public class rainbowCatcher extends ArmorModifier {
         boolean cur = holder.isInWaterOrRain() && !holder.isInWater();
         boolean prev = stat.contains(TAG_IN_RAIN) && stat.getBoolean(TAG_IN_RAIN);
         float blocked_dmg = stat.getFloat(TAG_RAIN_BLOCK);
+        boolean early_check =
+                (!isSelected && !isCorrectSlot) && DTModifierCheck.ModifierInBody(holder, this.getId());//unequipped but still have ability to block damage.
         if (0 < blocked_dmg)
             if (cur != prev && !cur || (!isSelected && !isCorrectSlot)){
                 holder.hurt(DreamtinkerDamageTypes.source(holder.level().registryAccess(), DreamtinkerDamageTypes.rain_bow, null, null),
-                            Math.min(Integer.MAX_VALUE, (blocked_dmg + 5) * 3));
+                            Math.min(Integer.MAX_VALUE, blocked_dmg * (early_check ? 1 : 3)));
                 stat.remove(TAG_RAIN_BLOCK);
 
             }
