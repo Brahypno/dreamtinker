@@ -11,6 +11,7 @@ import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.data.ModifierIds;
 
 import static org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers.*;
+import static slimeknights.tconstruct.common.TinkerTags.Modifiers.DAMAGE_UPGRADES;
 
 public class ModifierTagProvider extends AbstractModifierTagProvider {
     public ModifierTagProvider(PackOutput packOutput, ExistingFileHelper existingFileHelper) {
@@ -37,8 +38,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             .addOptional(weapon_books.getId(), eldritch_pan.getId(), exiles_faulty.getId());
         this.tag(TinkerTags.Modifiers.MELEE_UPGRADES)
             .add(strong_explode.getId())
-            .addOptional(Ids.malum_haunted, Ids.malum_animated)
-            .addOptional(Ids.el_wrath, Ids.el_torrent, Ids.all_slayer);
+            .addOptional(Ids.malum_haunted, Ids.malum_animated);
         this.tag(TinkerTags.Modifiers.RANGED_UPGRADES)
             .add(Ids.icy_memory, Ids.hate_memory);
         this.tag(TinkerTags.Modifiers.GENERAL_UPGRADES)
@@ -48,6 +48,9 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
         this.tag(TinkerTags.Modifiers.GENERAL_SLOTLESS)
             .add(mei.getId())
             .addOptional(Ids.el_eternal_binding, Ids.el_sorrow, Ids.el_nemesis_curse);
+        this.tag(DAMAGE_UPGRADES)
+            .add(Ids.all_slayer, Ids.the_romantic)
+            .addOptional(Ids.el_wrath, Ids.el_torrent);
         this.tag(TinkerTags.Modifiers.BONUS_SLOTLESS)
             .add(Ids.huge_ego);
         this.tag(TinkerTags.Modifiers.MELEE_ABILITIES)

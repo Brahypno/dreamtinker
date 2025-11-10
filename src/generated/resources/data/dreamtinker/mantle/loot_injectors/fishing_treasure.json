@@ -1,0 +1,14 @@
+{
+  "name": "minecraft:gameplay/fishing/treasure",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "dreamtinker:rainbow_honey"
+        }
+      ],
+      "name": "main"
+    }
+  ]
+}

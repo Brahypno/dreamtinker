@@ -1,0 +1,14 @@
+{
+  "values": [
+    "dreamtinker:all_slayer",
+    "dreamtinker:the_romantic",
+    {
+      "id": "dreamtinker:el_wrath",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:el_torrent",
+      "required": false
+    }
+  ]
+}
