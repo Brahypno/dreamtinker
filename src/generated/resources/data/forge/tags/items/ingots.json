@@ -2,7 +2,14 @@
   "values": [
     "dreamtinker:metallivorous_stibium_lupus",
     "dreamtinker:star_regulus",
-    "dreamtinker:soul_etherium",
-    "dreamtinker:soul_steel"
+    "dreamtinker:soul_steel",
+    {
+      "id": "dreamtinker:soul_etherium",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malignant_gluttony",
+      "required": false
+    }
   ]
 }

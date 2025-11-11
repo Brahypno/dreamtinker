@@ -75,7 +75,9 @@ public class ItemTagProvider extends ItemTagsProvider {
 
 
         this.tag(Tags.Items.INGOTS)
-            .add(metallivorous_stibium_lupus.get(), regulus.get(), soul_etherium.get(), soul_steel.get());
+            .add(metallivorous_stibium_lupus.get(), regulus.get(), soul_steel.get())
+            .addOptional(soul_etherium.getId())
+            .addOptional(malignant_gluttony.getId());
         this.tag(Tags.Items.GEMS)
             .add(valentinite.get(), nigrescence_antimony.get(), echo_alloy.get(), larimar.get(), amber.get(), desire_gem.get(), despair_gem.get(),
                  rainbow_honey_crystal.get());
@@ -84,7 +86,8 @@ public class ItemTagProvider extends ItemTagsProvider {
         this.tag(ItemTags.FOX_FOOD).add(white_peach.get());
         this.tag(ItemTags.ARROWS).add(DreamtinkerTools.tntarrow.get());
         addItemsTags(narcissus.asItem(), ItemTags.SMALL_FLOWERS, ItemTags.FLOWERS);
-        this.tag(ItemTagRegistry.HIDDEN_UNTIL_BLACK_CRYSTAL).addOptional(malignant_gluttony.getId());
+        this.tag(ItemTagRegistry.HIDDEN_UNTIL_BLACK_CRYSTAL)
+            .addOptional(malignant_gluttony.getId());
         this.tag(Dreamtinker.forgeItemTag("gems/larimar"))
             .add(larimar.get());
         this.tag(Dreamtinker.forgeItemTag("ores/larimar"))
