@@ -122,6 +122,8 @@ public class DreamtinkerCommon extends DreamtinkerModule {
 
     public static final RegistryObject<Item> soul_steel =
             ITEMS.register("soul_steel", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> black_corundum =
+            ITEMS.register("black_corundum", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
 
     public static final RegistryObject<Item> soul_etherium = EL_ITEMS.register(
             "soul_etherium",
@@ -201,6 +203,7 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         output.accept(soul_steel.get());
         output.accept(rainbow_honey.get());
         output.accept(rainbow_honey_crystal.get());
+        output.accept(black_corundum.get());
         if (ModList.get().isLoaded("malum"))
             output.accept(malignant_gluttony.get());
         if (ModList.get().isLoaded("enigmaticlegacy"))
