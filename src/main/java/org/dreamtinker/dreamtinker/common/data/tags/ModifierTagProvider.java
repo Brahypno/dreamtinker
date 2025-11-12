@@ -37,10 +37,9 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
         this.tag(DreamtinkerTagKeys.Modifiers.EL_CURSED_RELIEF)
             .addOptional(weapon_books.getId(), eldritch_pan.getId(), exiles_faulty.getId());
         this.tag(TinkerTags.Modifiers.MELEE_UPGRADES)
-            .add(strong_explode.getId())
             .addOptional(Ids.malum_haunted, Ids.malum_animated);
         this.tag(TinkerTags.Modifiers.RANGED_UPGRADES)
-            .add(Ids.icy_memory, Ids.hate_memory);
+            .add(memory_base.getId(), Ids.icy_memory, Ids.hate_memory);
         this.tag(TinkerTags.Modifiers.GENERAL_UPGRADES)
             .add(Ids.soul_upgrade, Ids.weapon_dreams_order, Ids.weapon_dreams_filter);
         this.tag(TinkerTags.Modifiers.HARVEST_UPGRADES)
@@ -49,7 +48,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             .add(mei.getId())
             .addOptional(Ids.el_eternal_binding, Ids.el_sorrow, Ids.el_nemesis_curse);
         this.tag(DAMAGE_UPGRADES)
-            .add(Ids.all_slayer, Ids.the_romantic)
+            .add(Ids.all_slayer, Ids.the_romantic, strong_explode.getId())
             .addOptional(Ids.el_wrath, Ids.el_torrent);
         this.tag(TinkerTags.Modifiers.BONUS_SLOTLESS)
             .add(Ids.huge_ego);
@@ -61,7 +60,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
         this.tag(TinkerTags.Modifiers.BLOCK_WHILE_CHARGING)
             .add(memory_base.getId());
         this.tag(TinkerTags.Modifiers.INTERACTION_ABILITIES)
-            .add(memory_base.getId())
+            //.add()
             .addOptional(Ids.malum_ascension, Ids.malum_rebound);
         this.tag(DreamtinkerTagKeys.Modifiers.MALUM_EXPOSE_SOUL)
             .addOptional(malum_hex_staff.getId(), malum_base.getId(), malum_distortion.getId(), malum_spirit_attributes.getId(),

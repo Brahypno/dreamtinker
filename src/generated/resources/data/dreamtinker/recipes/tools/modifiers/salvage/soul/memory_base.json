@@ -2,7 +2,7 @@
   "type": "tconstruct:modifier_salvage",
   "modifier": "dreamtinker:memory_base",
   "slots": {
-    "abilities": 1
+    "souls": 1
   },
   "tools": {
     "item": "dreamtinker:narcissus_wing"

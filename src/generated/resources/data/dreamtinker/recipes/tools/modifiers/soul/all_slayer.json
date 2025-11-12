@@ -23,9 +23,9 @@
   },
   "result": "dreamtinker:all_slayer",
   "slots": {
-    "upgrades": 1
+    "souls": 1
   },
   "tools": {
-    "tag": "tconstruct:modifiable/melee/primary"
+    "tag": "tconstruct:modifiable/melee"
   }
 }

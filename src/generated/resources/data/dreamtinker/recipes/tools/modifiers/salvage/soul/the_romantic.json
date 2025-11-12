@@ -1,8 +1,8 @@
 {
   "type": "tconstruct:modifier_salvage",
-  "modifier": "dreamtinker:all_slayer",
+  "modifier": "dreamtinker:the_romantic",
   "slots": {
-    "upgrades": 1
+    "souls": 1
   },
   "tools": {
     "tag": "tconstruct:modifiable/melee/primary"

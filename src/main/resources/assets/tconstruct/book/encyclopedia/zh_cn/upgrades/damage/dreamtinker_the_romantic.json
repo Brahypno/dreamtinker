@@ -1,0 +1,14 @@
+{
+  "modifier_id": "dreamtinker:the_romantic",
+  "text": [
+    {
+      "text": "每级增加0.2攻击攻速并减少0.4攻击伤害"
+    }
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable",
+  "effects": [
+    "需要1灵魂槽",
+    "最高5级"
+  ]
+}

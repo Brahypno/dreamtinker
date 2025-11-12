@@ -1,0 +1,14 @@
+{
+  "modifier_id": "dreamtinker:soul_upgrade",
+  "text": [
+    {
+      "text": "Grants +1 soul slot."
+    }
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable",
+  "effects": [
+    "Requires 1 upgrade slot",
+    "Maximum of 10 levels"
+  ]
+}

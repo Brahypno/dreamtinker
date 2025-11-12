@@ -3,15 +3,16 @@
   "allow_crystal": true,
   "inputs": [
     {
+      "amount_needed": 10,
       "item": "dreamtinker:twist_obsidian_pane"
     },
     {
-      "amount_needed": 4,
+      "amount_needed": 40,
       "item": "minecraft:weeping_vines"
     }
   ],
   "level": {
-    "max": 3
+    "max": 10
   },
   "result": "dreamtinker:soul_upgrade",
   "slots": {

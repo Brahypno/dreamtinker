@@ -1,0 +1,14 @@
+{
+  "modifier_id": "dreamtinker:soul_upgrade",
+  "text": [
+    {
+      "text": "获得一个灵魂槽"
+    }
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable",
+  "effects": [
+    "需要1升级槽",
+    "最高10级"
+  ]
+}

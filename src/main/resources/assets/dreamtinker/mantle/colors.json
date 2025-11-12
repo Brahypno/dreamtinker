@@ -100,7 +100,8 @@
     "weapon_dreams_filter": "#777B7E",
     "weapon_dreams_order": "#777B7E",
     "honey_tasty": "#B9C532",
-    "rainbow_catcher": "#D3E03B"
+    "rainbow_catcher": "#D3E03B",
+    "all_slayer": "#AA00AA"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",

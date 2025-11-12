@@ -1,9 +1,9 @@
 {
-  "level_display": "tconstruct:no_levels",
+  "level_display": "tconstruct:single_level",
   "modules": [
     {
       "type": "tconstruct:modifier_slot",
-      "flat": 1,
+      "each_level": 1,
       "name": "souls"
     }
   ],

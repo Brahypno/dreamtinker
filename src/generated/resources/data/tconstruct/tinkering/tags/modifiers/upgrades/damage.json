@@ -2,6 +2,7 @@
   "values": [
     "dreamtinker:all_slayer",
     "dreamtinker:the_romantic",
+    "dreamtinker:strong_explode",
     {
       "id": "dreamtinker:el_wrath",
       "required": false

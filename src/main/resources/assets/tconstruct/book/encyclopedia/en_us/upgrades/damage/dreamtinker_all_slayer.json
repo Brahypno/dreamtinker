@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:all_slayer",
+  "text": [
+    {
+      "text": "Deal 1.5 more damage per level to any Living entities"
+    }
+  ],
+  "more_text_space": true,
+  "effects": [
+    "Requires 1 soul slot",
+    "Maximum of 4 levels"
+  ]
+}
