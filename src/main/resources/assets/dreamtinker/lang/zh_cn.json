@@ -379,6 +379,9 @@
   "modifier.dreamtinker.rainbow_catcher.flavor": "雨停之后，我就会死.",
   "modifier.dreamtinker.rainbow_catcher.description": "在雨中时，格挡伤害并获得跳跃次数提升；但雨停后受到之前格挡的三倍伤害",
   "modifier.dreamtinker.tooltip.rainbow_catcher": "虹彩在等待: ",
+  "modifier.dreamtinker.not_like_was": "未若未建",
+  "modifier.dreamtinker.not_like_was.flavor": "未建之城永远比已建成的更加雄伟",
+  "modifier.dreamtinker.not_like_was.description": "-95% 全部工具数据，切换材料时会恢复1%",
 
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
@@ -464,6 +467,7 @@
   "item.dreamtinker.soul_steel": "魂钢",
   "item.dreamtinker.rainbow_honey": "彩虹蜜瓶",
   "item.dreamtinker.rainbow_honey_crystal": "虹彩晶",
+  "item.dreamtinker.black_corundum": "黑刚玉",
 
   "block.dreamtinker.crying_obsidian_pane": "哭泣的黑曜石板",
   "block.dreamtinker.narcissus": "水仙",
@@ -530,6 +534,8 @@
   "material.dreamtinker.soul_steel.flavor": "另一种魂钢",
   "material.dreamtinker.rainbow_honey_crystal": "虹彩糖蜜晶",
   "material.dreamtinker.rainbow_honey_crystal.flavor": "虹彩的尽头",
+  "material.dreamtinker.black_sapphire": "黑刚玉",
+  "material.dreamtinker.black_sapphire.flavor": "梦中城市的基石",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "熔融回响合金",
   "fluid.dreamtinker.molten_echo_alloy": "熔融回响合金",
@@ -624,6 +630,9 @@
   "fluid_type.dreamtinker.molten_bee_gem": "熔融虹彩糖晶",
   "fluid.dreamtinker.molten_bee_gem": "熔融虹彩糖晶",
   "fluid.dreamtinker.molten_bee_gem.fluid_effect": "熔融虹彩糖晶",
+  "fluid_type.dreamtinker.molten_black_corundum": "熔融黑刚玉",
+  "fluid.dreamtinker.molten_black_corundum": "熔融黑刚玉",
+  "fluid.dreamtinker.molten_black_corundum.fluid_effect": "熔融黑刚玉",
 
   "item.dreamtinker.molten_echo_alloy_bucket": "熔融回响合金桶",
   "item.dreamtinker.molten_echo_shard_bucket": "熔融回响碎片桶",
@@ -656,6 +665,7 @@
   "item.dreamtinker.festering_blood_bucket": "腐殖之血桶",
   "item.dreamtinker.rainbow_honey_bucket": "彩虹糖蜜桶",
   "item.dreamtinker.molten_bee_gem_bucket": "熔融彩虹糖蜜宝石桶",
+  "item.dreamtinker.molten_black_corundum_bucket": "熔融黑刚玉桶",
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "流血",
   "fluid_effect.tconstruct.damage.explosion": "爆炸",
@@ -681,6 +691,7 @@
   "advancements.dreamtinker.tools.six_finger.description": "得到增加6个戒指槽位的静默手套（需要Curios模组！）",
 
   "stat.tconstruct.harvest_tier.dreamtinker.lupus": "狼",
+  "stat.tconstruct.harvest_tier.dreamtinker.netheritte": "下界合全",
   "stat.tconstruct.harvest_tier.enigmaticlegacy.etherium": "以太",
 
   "key.categories.dreamtinker": "工匠幻梦",

@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "dreamtinker:black_sapphire",
+  "result": {
+    "amount": 100,
+    "fluid": "dreamtinker:molten_black_corundum"
+  },
+  "temperature": 1100
+}

@@ -71,6 +71,11 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          HandleMaterialStats.multipliers().durability(1.1f).miningSpeed(0.8f).attackDamage(1.2f).attackSpeed(1.1f).build(),
                          StatlessMaterialStats.BINDING);
 
+        addMaterialStats(DreamtinkerMaterialIds.black_sapphire,
+                         new HeadMaterialStats(2000, 50f, DtTiers.Netheritte, 10f),
+                         HandleMaterialStats.multipliers().durability(2.0f).miningSpeed(11.0f).attackDamage(11.0f).attackSpeed(11.0f).build(),
+                         StatlessMaterialStats.BINDING);
+
         addELMeleeHarvest();
         addMalumMeleeHarvest();
     }
@@ -144,6 +149,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addMaterialStats(DreamtinkerMaterialIds.soul_steel,
                          new LimbMaterialStats(600, -0.2f, 0.3f, 0f),
                          new GripMaterialStats(1.0f, -0.1f, 3f));
+        addMaterialStats(DreamtinkerMaterialIds.black_sapphire,
+                         new LimbMaterialStats(2000, 20f, 30f, 20f),
+                         new GripMaterialStats(1.0f, 1f, 10f));
 
         addCompactRanged();
     }
@@ -206,6 +214,11 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addArmorShieldStats(DreamtinkerMaterialIds.rainbow_honey_crystal,
                             PlatingMaterialStats.builder().durabilityFactor(30).armor(2, 4, 3, 2).toughness(2),
                             StatlessMaterialStats.MAILLE);
+        addArmorShieldStats(DreamtinkerMaterialIds.black_sapphire,
+                            PlatingMaterialStats.builder().durabilityFactor(100).armor(30, 40, 30, 30).toughness(30),
+                            StatlessMaterialStats.MAILLE);
+
+
         addArmorShieldStats(DreamtinkerMaterialIds.etherium,
                             PlatingMaterialStats.builder().durabilityFactor(132).armor(4f, 9f, 7f, 4f).toughness(4).knockbackResistance(0f),
                             StatlessMaterialStats.MAILLE);

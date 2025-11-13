@@ -34,6 +34,7 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.shadowskin, 4, 35, false, false, null);
         addMaterial(DreamtinkerMaterialIds.soul_steel, 3, 25, false, false, null);
         addMaterial(DreamtinkerMaterialIds.rainbow_honey_crystal, 3, 25, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.black_sapphire, 4, 25, false, false, null);
 
         addMaterial(DreamtinkerMaterialIds.etherium, 4, 40, false, false, modLoaded("enigmaticlegacy"));
         addMaterial(DreamtinkerMaterialIds.nefarious, 4, 40, false, false, modLoaded("enigmaticlegacy"));

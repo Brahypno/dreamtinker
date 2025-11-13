@@ -131,7 +131,8 @@
     "rainbow_honey_crystal": "#B9C532"
   },
     "harvest_tier.dreamtinker": {
-      "lupus":      "#E1B873"
+      "lupus":      "#E1B873",
+      "netheritte": "#555555"
     },
     "harvest_tier.enigmaticlegacy.etherium": "#96E8E0"
 }

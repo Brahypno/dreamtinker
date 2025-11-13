@@ -72,6 +72,7 @@ public class DreamtinkerTagKeys {
 
         public static final TagKey<Block> drop_peach = dreamtinkerTag("drops/peach");
         public static final TagKey<Block> need_lupus = forgeTag("need_tool/lupus");
+        public static final TagKey<Block> need_netheritte = forgeTag("need_tool/netheritte");
         public static final TagKey<Block> larimarOre = forgeTag("ores/larimar");
         public static final TagKey<Block> amberOre = forgeTag("ores/amber");
     }

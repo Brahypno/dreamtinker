@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "dreamtinker:black_corundum"
+  },
+  "material": "dreamtinker:black_sapphire",
+  "needed": 1,
+  "value": 1
+}

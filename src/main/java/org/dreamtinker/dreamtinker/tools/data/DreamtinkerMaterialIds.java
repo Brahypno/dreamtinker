@@ -24,6 +24,7 @@ public class DreamtinkerMaterialIds {
     public static final MaterialId shadowskin = new MaterialId(new ResourceLocation(MODID, "shadowskin"));
     public static final MaterialId soul_steel = new MaterialId(new ResourceLocation(MODID, "soul_steel"));
     public static final MaterialId rainbow_honey_crystal = new MaterialId(new ResourceLocation(MODID, "rainbow_honey_crystal"));
+    public static final MaterialId black_sapphire = new MaterialId(new ResourceLocation(MODID, "black_sapphire"));
     //Compact-enigmatic legacy
     public static final MaterialId etherium = new MaterialId(new ResourceLocation(MODID, "etherium"));
     public static final MaterialId nefarious = new MaterialId(new ResourceLocation(MODID, "nefarious"));

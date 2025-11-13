@@ -42,6 +42,7 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.*;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.common.HoneyTastyModifier;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.common.fly;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.common.life_looting;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.common.not_like_was;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian.isolde;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian.sharpened_with;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem.despair_mist;
@@ -145,6 +146,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<weapon_dreams> weapon_dreams = MODIFIERS.register("weapon_dreams", weapon_dreams::new);
     public static final StaticModifier<HoneyTastyModifier> HoneyTastyModifier = MODIFIERS.register("honey_tasty", HoneyTastyModifier::new);
     public static final StaticModifier<rainbowCatcher> rainbowCatcher = MODIFIERS.register("rainbow_catcher", rainbowCatcher::new);
+    public static final StaticModifier<not_like_was> not_like_was = MODIFIERS.register("not_like_was", not_like_was::new);
 
     //etherium
     public static final StaticModifier<astral_break> astral_break = EL_MODIFIERS.register("astral_break", astral_break::new);

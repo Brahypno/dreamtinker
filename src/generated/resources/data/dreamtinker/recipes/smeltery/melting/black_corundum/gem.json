@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "item": "dreamtinker:black_corundum"
+  },
+  "result": {
+    "amount": 100,
+    "fluid": "dreamtinker:molten_black_corundum"
+  },
+  "temperature": 1100,
+  "time": 208
+}
