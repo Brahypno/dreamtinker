@@ -3,6 +3,7 @@ package org.dreamtinker.dreamtinker.tools.modifiers.traits.common;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.Level;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
@@ -21,6 +22,10 @@ public class not_like_was extends BattleModifier {
         float value = 0.05f + context.getPersistentData().getInt(TAG_CHANGE_TIMES) * 0.01f;
         float armor_value = 0.1f + context.getPersistentData().getInt(TAG_CHANGE_TIMES) * 0.01f;
         float range_value = 0.02f + context.getPersistentData().getInt(TAG_CHANGE_TIMES) * 0.01f;
+        if (20 < context.getPersistentData().getInt(TAG_CHANGE_TIMES))
+            ToolStats.HARVEST_TIER.update(builder, Tiers.NETHERITE);
+        else if (10 < context.getPersistentData().getInt(TAG_CHANGE_TIMES))
+            ToolStats.HARVEST_TIER.update(builder, Tiers.DIAMOND);
         ToolStats.ATTACK_DAMAGE.multiply(builder, value);
         ToolStats.ATTACK_SPEED.multiply(builder, value);
         ToolStats.MINING_SPEED.multiply(builder, value / 5);
