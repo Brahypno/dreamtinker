@@ -26,6 +26,8 @@ public class ModBiomeModifiers {
             ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, Dreamtinker.getLocation("add_larimar_ore"));
     public static ResourceKey<BiomeModifier> spawnAmberOre =
             ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, Dreamtinker.getLocation("add_amber_ore"));
+    public static ResourceKey<BiomeModifier> spawnBlackSapphire =
+            ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, Dreamtinker.getLocation("add_black_sapphire_ore"));
 
     /**
      * 把上面的 PlacedFeature 加进目标群系（此处示例：平原 + 花林）
@@ -56,5 +58,9 @@ public class ModBiomeModifiers {
                                                                                      direct(placed.getOrThrow(placedSmallAmberOre),
                                                                                             placed.getOrThrow(placedLargeAmberOre)),
                                                                                      GenerationStep.Decoration.UNDERGROUND_DECORATION));
+        ctx.register(spawnBlackSapphire, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(HolderSet.direct(biomes.getOrThrow(Biomes.DEEP_DARK)),
+                                                                                          direct(placed.getOrThrow(placedSmallAmberOre),
+                                                                                                 placed.getOrThrow(placedLargeAmberOre)),
+                                                                                          GenerationStep.Decoration.UNDERGROUND_DECORATION));
     }
 }

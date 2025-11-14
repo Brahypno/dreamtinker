@@ -122,8 +122,8 @@ public class DreamtinkerCommon extends DreamtinkerModule {
 
     public static final RegistryObject<Item> soul_steel =
             ITEMS.register("soul_steel", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
-    public static final RegistryObject<Item> black_corundum =
-            ITEMS.register("black_corundum", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> black_sapphire =
+            ITEMS.register("black_sapphire", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
 
     public static final RegistryObject<Item> soul_etherium = EL_ITEMS.register(
             "soul_etherium",
@@ -203,14 +203,14 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         output.accept(soul_steel.get());
         output.accept(rainbow_honey.get());
         output.accept(rainbow_honey_crystal.get());
-        output.accept(black_corundum.get());
+        output.accept(black_sapphire.get());
         if (ModList.get().isLoaded("malum"))
             output.accept(malignant_gluttony.get());
         if (ModList.get().isLoaded("enigmaticlegacy"))
             output.accept(soul_etherium.get());
     }
 
-    protected static final Function<Block, ? extends BlockItem> BLOCK_ITEM = (b) -> new BlockItem(b, ITEM_PROPS);
+    protected static final Function<Block, ? extends BlockItem> BLOCK_ITEM = (b) -> new BlockItem(b, new Item.Properties());
     public static final ItemObject<BetterPaneBlock> crying_obsidian_plane = BLOCKS.register("crying_obsidian_pane", () -> new BetterPaneBlock(
             builder(MapColor.COLOR_BLACK, SoundType.STONE).requiresCorrectToolForDrops().instrument(NoteBlockInstrument.BASEDRUM).noOcclusion()
                                                           .strength(25.0F, 400.0F)), BLOCK_ITEM);
@@ -226,15 +226,28 @@ public class DreamtinkerCommon extends DreamtinkerModule {
                                                                                           .pushReaction(PushReaction.DESTROY)), BLOCK_ITEM);
     public static final ItemObject<Block> larimarOre = BLOCKS.register("larimar_ore", () -> new Block(
             builder(MapColor.LAPIS, SoundType.LODESTONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(5.0F)), BLOCK_ITEM);
+
     public static final ItemObject<RotatedPillarBlock> amberOre = BLOCKS.register("amber_ore", () -> new RotatedPillarBlock(
             BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
                                      .strength(1.25F, 4.2F).sound(SoundType.BASALT)), BLOCK_ITEM);
+    public static final ItemObject<Block> blackSapphireOre =
+            BLOCKS.register("black_sapphire_ore",
+                            () -> new Block(
+                                    builder(MapColor.STONE, SoundType.LODESTONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
+                                                                                .strength(9.0F)), BLOCK_ITEM);
+    public static final ItemObject<Block> DeepSlateBlackSapphireOre =
+            BLOCKS.register("deepslate_black_sapphire_ore",
+                            () -> new Block(
+                                    builder(MapColor.DEEPSLATE, SoundType.LODESTONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
+                                                                                    .strength(10.0F)), BLOCK_ITEM);
 
     public static void addTabBlocks(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         output.accept(crying_obsidian_plane.get());
         output.accept(narcissus.get());
         output.accept(larimarOre.get());
         output.accept(amberOre);
+        output.accept(blackSapphireOre);
+        output.accept(DeepSlateBlackSapphireOre);
     }
 
     protected static BlockBehaviour.Properties builder(SoundType soundType) {

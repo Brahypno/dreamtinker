@@ -467,7 +467,7 @@
   "item.dreamtinker.soul_steel": "魂钢",
   "item.dreamtinker.rainbow_honey": "彩虹蜜瓶",
   "item.dreamtinker.rainbow_honey_crystal": "虹彩晶",
-  "item.dreamtinker.black_corundum": "黑刚玉",
+  "item.dreamtinker.black_sapphire": "黑刚玉",
 
   "block.dreamtinker.crying_obsidian_pane": "哭泣的黑曜石板",
   "block.dreamtinker.narcissus": "水仙",
@@ -476,6 +476,8 @@
   "block.dreamtinker.potted_narcissus": "有水仙的花盆",
   "block.dreamtinker.larimar_ore": "海纹石原矿",
   "block.dreamtinker.amber_ore": "琥珀原矿",
+  "block.dreamtinker.black_sapphire_ore": "黑刚玉原矿",
+  "block.dreamtinker.deepslate_black_sapphire_ore": "深层黑刚玉原矿",
 
   "material.dreamtinker.echo_alloy": "回响合金",
   "material.dreamtinker.echo_alloy.flavor": "是神秘的回响，还是秘密的回响",
@@ -630,9 +632,9 @@
   "fluid_type.dreamtinker.molten_bee_gem": "熔融虹彩糖晶",
   "fluid.dreamtinker.molten_bee_gem": "熔融虹彩糖晶",
   "fluid.dreamtinker.molten_bee_gem.fluid_effect": "熔融虹彩糖晶",
-  "fluid_type.dreamtinker.molten_black_corundum": "熔融黑刚玉",
-  "fluid.dreamtinker.molten_black_corundum": "熔融黑刚玉",
-  "fluid.dreamtinker.molten_black_corundum.fluid_effect": "熔融黑刚玉",
+  "fluid_type.dreamtinker.molten_black_sapphire": "熔融黑刚玉",
+  "fluid.dreamtinker.molten_black_sapphire": "熔融黑刚玉",
+  "fluid.dreamtinker.molten_black_sapphire.fluid_effect": "熔融黑刚玉",
 
   "item.dreamtinker.molten_echo_alloy_bucket": "熔融回响合金桶",
   "item.dreamtinker.molten_echo_shard_bucket": "熔融回响碎片桶",
@@ -665,7 +667,7 @@
   "item.dreamtinker.festering_blood_bucket": "腐殖之血桶",
   "item.dreamtinker.rainbow_honey_bucket": "彩虹糖蜜桶",
   "item.dreamtinker.molten_bee_gem_bucket": "熔融彩虹糖蜜宝石桶",
-  "item.dreamtinker.molten_black_corundum_bucket": "熔融黑刚玉桶",
+  "item.dreamtinker.molten_black_sapphire_bucket": "熔融黑刚玉桶",
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "流血",
   "fluid_effect.tconstruct.damage.explosion": "爆炸",

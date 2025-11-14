@@ -10,7 +10,6 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -23,6 +22,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
 import static net.minecraft.tags.BlockTags.*;
+import static org.dreamtinker.dreamtinker.common.DreamtinkerCommon.*;
 
 public class BlockTagProvider extends BlockTagsProvider {
 
@@ -32,16 +32,20 @@ public class BlockTagProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        this.tag(BlockTags.DRAGON_IMMUNE).add(DreamtinkerCommon.crying_obsidian_plane.get());
-        tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_DIAMOND_TOOL, DreamtinkerCommon.crying_obsidian_plane);
+        this.tag(BlockTags.DRAGON_IMMUNE).add(crying_obsidian_plane.get());
+        tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_DIAMOND_TOOL, crying_obsidian_plane, blackSapphireOre, DeepSlateBlackSapphireOre);
         this.tag(DreamtinkerTagKeys.Blocks.drop_peach).add(Blocks.BIRCH_LEAVES);
-        addBlocksTags(DreamtinkerCommon.narcissus.get(), Dreamtinker.forgeBlockTag("mineable/shears"), TinkerTags.Blocks.SLIMY_FUNGUS_CAN_GROW_THROUGH,
+        addBlocksTags(narcissus.get(), Dreamtinker.forgeBlockTag("mineable/shears"), TinkerTags.Blocks.SLIMY_FUNGUS_CAN_GROW_THROUGH,
                       TinkerTags.Blocks.MINABLE_WITH_DAGGER, FLOWERS, ENDERMAN_HOLDABLE, SMALL_FLOWERS, SWORD_EFFICIENT, TinkerTags.Blocks.MINABLE_WITH_SCYTHE,
                       Dreamtinker.forgeBlockTag("mineable/sword"), TinkerTags.Blocks.MINABLE_WITH_SHEARS);
-        tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL, DreamtinkerCommon.larimarOre, DreamtinkerCommon.amberOre);
-        tagBlocks(DreamtinkerTagKeys.Blocks.larimarOre, DreamtinkerCommon.larimarOre);
-        tagBlocks(DreamtinkerTagKeys.Blocks.amberOre, DreamtinkerCommon.amberOre);
-        tagBlocks(Tags.Blocks.ORE_RATES_SINGULAR, DreamtinkerCommon.larimarOre, DreamtinkerCommon.amberOre);
+        tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL, larimarOre, amberOre);
+        tagBlocks(DreamtinkerTagKeys.Blocks.larimarOre, larimarOre);
+        tagBlocks(DreamtinkerTagKeys.Blocks.amberOre, amberOre);
+        this.tag(Tags.Blocks.ORES)
+            .add(blackSapphireOre.get(), DeepSlateBlackSapphireOre.get());
+        tagBlocks(Tags.Blocks.ORE_RATES_SINGULAR, larimarOre, amberOre, larimarOre, blackSapphireOre, DeepSlateBlackSapphireOre);
+        this.tag(Tags.Blocks.ORES_IN_GROUND_DEEPSLATE).add(DeepSlateBlackSapphireOre.get());
+        this.tag(Tags.Blocks.ORES_IN_GROUND_STONE).add(blackSapphireOre.get());
     }
 
     @SafeVarargs

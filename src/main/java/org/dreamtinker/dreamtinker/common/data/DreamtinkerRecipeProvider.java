@@ -407,7 +407,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         meltCast(DreamtinkerFluids.despair_essence.get(), DreamtinkerCommon.despair_gem.get(), FluidValues.GEM, consumer);
         meltCast(DreamtinkerFluids.molten_soul_steel.get(), DreamtinkerCommon.soul_steel.get(), FluidValues.INGOT, consumer);
         meltCast(DreamtinkerFluids.molten_bee_gem.get(), DreamtinkerCommon.rainbow_honey_crystal.get(), FluidValues.GEM, consumer);
-        meltCast(DreamtinkerFluids.molten_black_corundum.get(), DreamtinkerCommon.black_corundum.get(), FluidValues.GEM, consumer);
+        meltCast(DreamtinkerFluids.molten_black_corundum.get(), DreamtinkerCommon.black_sapphire.get(), FluidValues.GEM, consumer);
     }
 
     String materials_folder = "tools/materials/";
@@ -479,7 +479,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
         materialMeltingCasting(consumer, DreamtinkerMaterialIds.black_sapphire, DreamtinkerFluids.molten_black_corundum, FluidValues.GEM,
                                materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.black_sapphire, Ingredient.of(DreamtinkerCommon.black_corundum.get()), 1, 1,
+        materialRecipe(consumer, DreamtinkerMaterialIds.black_sapphire, Ingredient.of(DreamtinkerCommon.black_sapphire.get()), 1, 1,
                        materials_folder + "black_sapphire");
 
     }

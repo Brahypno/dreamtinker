@@ -80,7 +80,7 @@ public class ItemTagProvider extends ItemTagsProvider {
             .addOptional(malignant_gluttony.getId());
         this.tag(Tags.Items.GEMS)
             .add(valentinite.get(), nigrescence_antimony.get(), echo_alloy.get(), larimar.get(), amber.get(), desire_gem.get(), despair_gem.get(),
-                 rainbow_honey_crystal.get(), black_corundum.get());
+                 rainbow_honey_crystal.get(), black_sapphire.get());
         this.tag(DreamtinkerTagKeys.Items.raw_stibnite).add(raw_stibnite.get());
         this.tag(Tags.Items.RAW_MATERIALS).add(raw_stibnite.get());
         this.tag(ItemTags.FOX_FOOD).add(white_peach.get());

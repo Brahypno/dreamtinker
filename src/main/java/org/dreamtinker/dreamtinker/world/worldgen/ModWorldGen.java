@@ -8,6 +8,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
@@ -22,6 +23,7 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
+import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 
@@ -59,6 +61,12 @@ public class ModWorldGen {
             key(Registries.PLACED_FEATURE, "amber_ore_large");
 
 
+    public static ResourceKey<ConfiguredFeature<?, ?>> configuredSmallBlackSapphireOre =
+            key(Registries.CONFIGURED_FEATURE, "black_sapphire_ore");
+    public static ResourceKey<PlacedFeature> placedSmallBlackSapphireOre =
+            key(Registries.PLACED_FEATURE, "black_sapphire_ore");
+
+
     /**
      * ConfiguredFeature：一簇水仙（cross 小花），仅在能存活的位置尝试放置
      */
@@ -88,6 +96,15 @@ public class ModWorldGen {
         BlockState amberOre = DreamtinkerCommon.amberOre.get().defaultBlockState();
         register(ctx, configuredSmallAmberOre, Feature.ORE, new OreConfiguration(basalt, amberOre, 3));
         register(ctx, configuredLargeAmberOre, Feature.ORE, new OreConfiguration(basalt, amberOre, 5));
+
+        var stoneTest = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
+        var deepTest = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
+
+        var black_sapphire_targets = List.of(
+                OreConfiguration.target(stoneTest, DreamtinkerCommon.blackSapphireOre.get().defaultBlockState()),
+                OreConfiguration.target(deepTest, DreamtinkerCommon.DeepSlateBlackSapphireOre.get().defaultBlockState())
+        );
+        register(ctx, configuredSmallBlackSapphireOre, Feature.ORE, new OreConfiguration(black_sapphire_targets, 6, 0.1f));
     }
 
     /**
@@ -121,6 +138,12 @@ public class ModWorldGen {
                  CountPlacement.of(3),
                  InSquarePlacement.spread(),
                  HeightRangePlacement.uniform(VerticalAnchor.absolute(10), VerticalAnchor.absolute(120)),
+                 BiomeFilter.biome());
+
+        register(ctx, placedSmallBlackSapphireOre, configuredSmallBlackSapphireOre,
+                 CountPlacement.of(5),
+                 InSquarePlacement.spread(),
+                 HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(0)),
                  BiomeFilter.biome());
     }
 

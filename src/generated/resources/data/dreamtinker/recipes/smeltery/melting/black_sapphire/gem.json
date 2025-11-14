@@ -1,7 +1,7 @@
 {
   "type": "tconstruct:melting",
   "ingredient": {
-    "item": "dreamtinker:black_corundum"
+    "item": "dreamtinker:black_sapphire"
   },
   "result": {
     "amount": 100,
