@@ -1,0 +1,42 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "malum"
+    }
+  ],
+  "inputs": [
+    {
+      "amount_needed": 3,
+      "item": "malum:block_of_astral_weave"
+    },
+    {
+      "item": "malum:tophat"
+    },
+    {
+      "amount_needed": 16,
+      "item": "malum:wicked_spirited_glass"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:spiritual_weapon_transformation",
+  "slots": {
+    "souls": 1
+  },
+  "tools": [
+    {
+      "item": "dreamtinker:under_plate_helmet"
+    },
+    {
+      "item": "dreamtinker:under_plate_chestplate"
+    },
+    {
+      "item": "dreamtinker:under_plate_leggings"
+    },
+    {
+      "item": "dreamtinker:under_plate_boots"
+    }
+  ]
+}

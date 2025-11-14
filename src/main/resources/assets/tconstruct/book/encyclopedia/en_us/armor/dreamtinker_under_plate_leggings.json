@@ -1,7 +1,8 @@
 {
   "tool": "dreamtinker:under_plate_leggings",
   "text": [
-    { "text": "Pants and Leg band are defensive leggings, with less protection, and balance all slots and low defense slots." }
+    { "text": "Pants and Leg band are defensive leggings, with less protection, and balance all slots and low defense slots.\n" },
+    { "text": "Its unique weapon transformation Modifier on head could boost Projectile damage, experience multiplier but decrease Good effect duration" }
   ],
   "properties": [
   "Material controlled stats",

@@ -71,11 +71,12 @@ public class weapon_transformation extends BattleModifier {
                                                           TinkerAttributes.BAD_EFFECT_DURATION.get().getDescriptionId(),
                                                           Math.min(0.4, multi / 4),
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
-                    consumer.accept(TinkerAttributes.MINING_SPEED_MULTIPLIER.get(),
+                    consumer.accept(Attributes.ATTACK_SPEED,
                                     new AttributeModifier(uuid,
-                                                          TinkerAttributes.MINING_SPEED_MULTIPLIER.get().getDescriptionId(),
-                                                          multi / 2,
+                                                          Attributes.ATTACK_SPEED.getDescriptionId(),
+                                                          multi,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
+
                 }
 
                 case LEGS -> {//see hurt event
@@ -96,9 +97,10 @@ public class weapon_transformation extends BattleModifier {
                                                           Attributes.ATTACK_DAMAGE.getDescriptionId(),
                                                           multi,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
-                    consumer.accept(Attributes.ATTACK_SPEED,
+
+                    consumer.accept(TinkerAttributes.MINING_SPEED_MULTIPLIER.get(),
                                     new AttributeModifier(uuid,
-                                                          Attributes.ATTACK_SPEED.getDescriptionId(),
+                                                          TinkerAttributes.MINING_SPEED_MULTIPLIER.get().getDescriptionId(),
                                                           multi,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                     consumer.accept(Attributes.MOVEMENT_SPEED,

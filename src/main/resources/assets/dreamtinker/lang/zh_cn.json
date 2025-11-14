@@ -382,6 +382,10 @@
   "modifier.dreamtinker.not_like_was": "未若未建",
   "modifier.dreamtinker.not_like_was.flavor": "未建之城永远比已建成的更加雄伟",
   "modifier.dreamtinker.not_like_was.description": "-95% 全部工具数据，切换材料时会恢复1%",
+  "modifier.dreamtinker.spiritual_weapon_transformation": "精魂武器化",
+  "modifier.dreamtinker.spiritual_weapon_transformation.flavor": "是变身的时间了（精魂版）",
+  "modifier.dreamtinker.spiritual_weapon_transformation.description": "基于护甲和韧性获得一些效果",
+  "modifier.dreamtinker.spiritual_weapon_transformation.requirements": "需要武器化作为前置",
 
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",

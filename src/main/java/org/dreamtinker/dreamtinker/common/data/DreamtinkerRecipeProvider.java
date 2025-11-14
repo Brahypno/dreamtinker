@@ -13,6 +13,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -1017,6 +1018,19 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.weapon_dreams_filter, soulSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.weapon_dreams_filter, soulFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.spiritual_weapon_transformation)
+                             .setTools(Ingredient.of(DreamtinkerTools.underPlate.get(ArmorItem.Type.HELMET),
+                                                     DreamtinkerTools.underPlate.get(ArmorItem.Type.CHESTPLATE),
+                                                     DreamtinkerTools.underPlate.get(ArmorItem.Type.LEGGINGS),
+                                                     DreamtinkerTools.underPlate.get(ArmorItem.Type.BOOTS)))
+                             .addInput(BlockRegistry.BLOCK_OF_ASTRAL_WEAVE.get(), 3)
+                             .addInput(ItemRegistry.TOPHAT.get())
+                             .addInput(BlockRegistry.WICKED_SPIRITED_GLASS.get(), 16)
+                             .setSlots(SlotType.SOUL, 1)
+                             .setMaxLevel(1)
+                             .saveSalvage(withCondition(consumer, modLoaded("malum")),
+                                          prefix(DreamtinkerModifiers.spiritual_weapon_transformation, soulSalvage))
+                             .save(withCondition(consumer, modLoaded("malum")), prefix(DreamtinkerModifiers.spiritual_weapon_transformation, soulFolder));
     }
 
     private void addEntityMeltingRecipes(Consumer<FinishedRecipe> consumer) {

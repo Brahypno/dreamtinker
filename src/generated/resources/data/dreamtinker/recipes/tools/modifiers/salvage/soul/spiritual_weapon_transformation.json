@@ -1,0 +1,27 @@
+{
+  "type": "tconstruct:modifier_salvage",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "malum"
+    }
+  ],
+  "modifier": "dreamtinker:spiritual_weapon_transformation",
+  "slots": {
+    "souls": 1
+  },
+  "tools": [
+    {
+      "item": "dreamtinker:under_plate_helmet"
+    },
+    {
+      "item": "dreamtinker:under_plate_chestplate"
+    },
+    {
+      "item": "dreamtinker:under_plate_leggings"
+    },
+    {
+      "item": "dreamtinker:under_plate_boots"
+    }
+  ]
+}

@@ -30,6 +30,7 @@ import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.memoryBa
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.splendourHeart;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.silence_glove.weapon_dreams;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.tntarrow.strong_explode;
+import org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.spiritual_weapon_transformation;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.weapon_transformation;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.*;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.*;
@@ -93,6 +94,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<splendourHeart> splendour_heart = MODIFIERS.register("splendour_heart", splendourHeart::new);
     //underPlate
     public static final StaticModifier<weapon_transformation> weapon_transformation = MODIFIERS.register("weapon_transformation", weapon_transformation::new);
+    public static final StaticModifier<spiritual_weapon_transformation> spiritual_weapon_transformation =
+            MALUM_MODIFIERS.register("spiritual_weapon_transformation", spiritual_weapon_transformation::new);
     //echo Alloy
     public static final StaticModifier<echoed_attack> echoed_attack = MODIFIERS.register("echoed_attack", echoed_attack::new);
     public static final StaticModifier<echoed_defence> echoed_defence = MODIFIERS.register("echoed_defence", echoed_defence::new);

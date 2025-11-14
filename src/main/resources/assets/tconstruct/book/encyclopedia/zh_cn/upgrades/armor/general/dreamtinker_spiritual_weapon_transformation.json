@@ -1,0 +1,28 @@
+{
+  "modifier_id": "dreamtinker:spiritual_weapon_transformation",
+  "text": [
+    {"text": "在头部时，增加灵魂护盾容量但减少镰刀熟练度。\n"},
+    {"text": "\n在胸部时，增加魔法伤害但减少魔法抗性。\n"},
+    {"text": "\n在腿部时，增加奥术回响但减少恶念转化。\n"},
+    {"text": "\n在脚部时，增加灵魂护盾稳固但减少灵魂护盾回复。"}
+  ],
+  "more_text_space": true,
+  "tools": [
+      {
+        "item": "dreamtinker:under_plate_helmet"
+      },
+      {
+        "item": "dreamtinker:under_plate_chestplate"
+      },
+      {
+        "item": "dreamtinker:under_plate_leggings"
+      },
+      {
+        "item": "dreamtinker:under_plate_boots"
+      }
+    ],
+  "effects": [
+    "需要1灵魂槽",
+    "最高1级"
+  ]
+}
