@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "dreamtinker:scolecite",
+  "result": {
+    "amount": 100,
+    "fluid": "dreamtinker:molten_scolecite"
+  },
+  "temperature": 700
+}

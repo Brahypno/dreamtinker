@@ -386,6 +386,9 @@
   "modifier.dreamtinker.spiritual_weapon_transformation.flavor": "是变身的时间了（精魂版）",
   "modifier.dreamtinker.spiritual_weapon_transformation.description": "基于护甲和韧性获得一些效果",
   "modifier.dreamtinker.spiritual_weapon_transformation.requirements": "需要武器化作为前置",
+  "modifier.dreamtinker.light_in_dark": "点亮黑暗",
+  "modifier.dreamtinker.light_in_dark.flavor": "击碎黎明",
+  "modifier.dreamtinker.light_in_dark.description": "在0-3/4-11亮度提升近战伤害，弹射物初速度，保护值，受到伤害，反之减少",
 
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",

@@ -102,7 +102,8 @@
     "honey_tasty": "#B9C532",
     "rainbow_catcher": "#D3E03B",
     "all_slayer": "#AA00AA",
-    "spiritual_weapon_transformation": "#6E2CA3"
+    "spiritual_weapon_transformation": "#6E2CA3",
+    "light_in_dark": "#D5C9C1"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
@@ -129,7 +130,9 @@
     "despair_gem": "#6D051A",
     "shadowskin": "#050505",
     "soul_steel": "#3E5568",
-    "rainbow_honey_crystal": "#B9C532"
+    "rainbow_honey_crystal": "#B9C532",
+    "black_sapphire": "#1A1F26",
+    "scolecite": "#D5C9C1"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873",

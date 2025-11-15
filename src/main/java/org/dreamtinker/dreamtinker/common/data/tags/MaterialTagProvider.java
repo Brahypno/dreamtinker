@@ -21,11 +21,11 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
             .addOptional(etherium, nefarious, soul_etherium,
                          soul_stained_steel, malignant_pewter, malignant_gluttony, malignant_lead);
 
-        this.tag(TinkerTags.Materials.NETHER).add(nefarious, amber);
-        this.tag(TinkerTags.Materials.BARTERED).add(amber, rainbow_honey_crystal);
+        this.tag(TinkerTags.Materials.NETHER).add(nefarious, amber, scolecite);
+        this.tag(TinkerTags.Materials.BARTERED).add(amber, rainbow_honey_crystal, scolecite);
         this.tag(TinkerTags.Materials.MELEE)
             .add(crying_obsidian, nigrescence_antimony, moonlight_ice, echo_alloy, metallivorous_stibium_lupus, amber, half_rotten_homunculus, desire_gem,
-                 despair_gem)
+                 despair_gem, scolecite)
             .addOptional(nefarious, soul_etherium, spirit_fabric, soul_stained_steel, malignant_pewter, malignant_gluttony);
         this.tag(TinkerTags.Materials.HARVEST)
             .add(larimar, rainbow_honey_crystal)
@@ -37,7 +37,7 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
             .add(nigrescence_antimony, echo_alloy, larimar, half_rotten_homunculus, desire_gem)
             .addOptional(spirit_fabric, soul_stained_steel, nefarious, etherium, soul_etherium, metallivorous_stibium_lupus, star_regulus);
         this.tag(TinkerTags.Materials.BALANCED)
-            .add(valentinite, black_sapphire);
+            .add(valentinite, black_sapphire, scolecite);
         this.tag(TinkerTags.Materials.HEAVY)
             .add(crying_obsidian, amber)
             .addOptional(hallowed_gold);

@@ -493,6 +493,11 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         materialRecipe(consumer, DreamtinkerMaterialIds.black_sapphire, Ingredient.of(DreamtinkerCommon.black_sapphire.get()), 1, 1,
                        materials_folder + "black_sapphire");
 
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.scolecite, DreamtinkerFluids.molten_scolecite, FluidValues.GEM,
+                               materials_folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.scolecite, Ingredient.of(DreamtinkerCommon.scolecite.get()), 1, 1,
+                       materials_folder + "scolecite");
+
     }
 
     private void addCompactMaterialRecipes(Consumer<FinishedRecipe> consumer) {

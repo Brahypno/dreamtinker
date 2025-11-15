@@ -386,6 +386,9 @@
   "modifier.dreamtinker.spiritual_weapon_transformation.flavor": "Its time for transformation!(Spiritual version)",
   "modifier.dreamtinker.spiritual_weapon_transformation.description": "According to armor&toughness have different effects",
   "modifier.dreamtinker.spiritual_weapon_transformation.requirements": "Need Weapon transformation to apply",
+  "modifier.dreamtinker.light_in_dark": "Light the dark",
+  "modifier.dreamtinker.light_in_dark.flavor": "Break the Dawn",
+  "modifier.dreamtinker.light_in_dark.description": "Increase melee damage, projectile speed, protection and damage reduction, otherwise increase it",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",

@@ -76,6 +76,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.rainbow_honey_crystal, ARMOR, HoneyTastyModifier, rainbowCatcher);
 
         addDefaultTraits(DreamtinkerMaterialIds.black_sapphire, not_like_was);
+        addDefaultTraits(DreamtinkerMaterialIds.scolecite, light_in_dark);
 
         callGetOrCreate(this, DreamtinkerMaterialIds.etherium).setTraits(MELEE_HARVEST, List.of(
                 new ModifierEntry(ModifierIds.smite, 2),
