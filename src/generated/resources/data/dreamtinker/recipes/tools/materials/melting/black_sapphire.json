@@ -3,7 +3,7 @@
   "input": "dreamtinker:black_sapphire",
   "result": {
     "amount": 100,
-    "fluid": "dreamtinker:molten_black_corundum"
+    "fluid": "dreamtinker:molten_black_sapphire"
   },
   "temperature": 1100
 }

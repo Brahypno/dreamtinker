@@ -40,5 +40,6 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
         this.add(DreamtinkerCommon.amberOre.get(), block -> createOreDrop(block, DreamtinkerCommon.amber.get()));
         this.add(DreamtinkerCommon.blackSapphireOre.get(), block -> createOreDrop(block, DreamtinkerCommon.black_sapphire.get()));
         this.add(DreamtinkerCommon.DeepSlateBlackSapphireOre.get(), block -> createOreDrop(block, DreamtinkerCommon.black_sapphire.get()));
+        this.add(DreamtinkerCommon.scoleciteOre.get(), block -> createOreDrop(block, DreamtinkerCommon.scolecite.get()));
     }
 }

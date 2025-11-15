@@ -80,7 +80,7 @@ public class ItemTagProvider extends ItemTagsProvider {
             .addOptional(malignant_gluttony.getId());
         this.tag(Tags.Items.GEMS)
             .add(valentinite.get(), nigrescence_antimony.get(), echo_alloy.get(), larimar.get(), amber.get(), desire_gem.get(), despair_gem.get(),
-                 rainbow_honey_crystal.get(), black_sapphire.get());
+                 rainbow_honey_crystal.get(), black_sapphire.get(), scolecite.get());
         this.tag(DreamtinkerTagKeys.Items.raw_stibnite).add(raw_stibnite.get());
         this.tag(Tags.Items.RAW_MATERIALS).add(raw_stibnite.get());
         this.tag(ItemTags.FOX_FOOD).add(white_peach.get());
@@ -96,6 +96,10 @@ public class ItemTagProvider extends ItemTagsProvider {
             .add(amber.get());
         this.tag(Dreamtinker.forgeItemTag("ores/amber"))
             .add(amberOre.asItem());
+        this.tag(Dreamtinker.forgeItemTag("gems/scolecite"))
+            .add(scolecite.get());
+        this.tag(Dreamtinker.forgeItemTag("ores/scolecite"))
+            .add(scoleciteOre.asItem());
 
         this.copy(Tags.Blocks.ORE_RATES_SINGULAR, Tags.Items.ORE_RATES_SINGULAR);
         //this.copy(Tags.Blocks.ORES_IN_GROUND_NETHERRACK, Tags.Items.ORES_IN_GROUND_NETHERRACK);

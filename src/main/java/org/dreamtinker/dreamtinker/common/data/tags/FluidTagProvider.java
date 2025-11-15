@@ -56,7 +56,8 @@ public class FluidTagProvider extends FluidTagsProvider {
         fluidTag(DreamtinkerFluids.festering_blood);
         fluidTag(DreamtinkerFluids.rainbow_honey);
         fluidTag(DreamtinkerFluids.molten_bee_gem);
-        fluidTag(DreamtinkerFluids.molten_black_corundum);
+        fluidTag(DreamtinkerFluids.molten_black_sapphire);
+        fluidTag(DreamtinkerFluids.molten_scolecite);
 
         this.tag(DreamtinkerTagKeys.Fluids.narcissus_wing_used).addTags(DreamtinkerFluids.blood_soul.getTag())
             .addOptionalTags(DreamtinkerFluids.liquid_arcana_juice.getTag(), DreamtinkerFluids.liquid_concentrated_gluttony.getTag());

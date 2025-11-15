@@ -66,6 +66,11 @@ public class ModWorldGen {
     public static ResourceKey<PlacedFeature> placedSmallBlackSapphireOre =
             key(Registries.PLACED_FEATURE, "black_sapphire_ore");
 
+    public static ResourceKey<ConfiguredFeature<?, ?>> configuredLargeScoleciteOre =
+            key(Registries.CONFIGURED_FEATURE, "scolecite_ore_large");
+    public static ResourceKey<PlacedFeature> placedLargeScoleciteOre =
+            key(Registries.PLACED_FEATURE, "scolecite_ore_large");
+
 
     /**
      * ConfiguredFeature：一簇水仙（cross 小花），仅在能存活的位置尝试放置
@@ -105,6 +110,9 @@ public class ModWorldGen {
                 OreConfiguration.target(deepTest, DreamtinkerCommon.DeepSlateBlackSapphireOre.get().defaultBlockState())
         );
         register(ctx, configuredSmallBlackSapphireOre, Feature.ORE, new OreConfiguration(black_sapphire_targets, 6, 0.1f));
+
+        BlockState scoleciteOre = DreamtinkerCommon.scoleciteOre.get().defaultBlockState();
+        register(ctx, configuredLargeScoleciteOre, Feature.ORE, new OreConfiguration(basalt, scoleciteOre, 9));
     }
 
     /**
@@ -144,6 +152,12 @@ public class ModWorldGen {
                  CountPlacement.of(5),
                  InSquarePlacement.spread(),
                  HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(0)),
+                 BiomeFilter.biome());
+
+        register(ctx, placedLargeScoleciteOre, configuredLargeScoleciteOre,
+                 CountPlacement.of(9),
+                 InSquarePlacement.spread(),
+                 HeightRangePlacement.uniform(VerticalAnchor.absolute(50), VerticalAnchor.absolute(120)),
                  BiomeFilter.biome());
     }
 

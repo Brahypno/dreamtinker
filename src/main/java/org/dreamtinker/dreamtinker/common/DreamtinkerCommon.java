@@ -162,6 +162,8 @@ public class DreamtinkerCommon extends DreamtinkerModule {
             ITEMS.register("rainbow_honey", () -> new ContainerFoodItem.FluidContainerFoodItem(
                     new Item.Properties().craftRemainder(Items.GLASS_BOTTLE),
                     () -> new FluidStack(DreamtinkerFluids.rainbow_honey.get(), FluidValues.BOTTLE)));
+    public static final RegistryObject<Item> scolecite =
+            ITEMS.register("scolecite", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
 
     protected static final Item.Properties FOOD_PROPS = new Item.Properties();
     public static final RegistryObject<Item> white_peach = ITEMS.register("white_peach", () -> new Item(
@@ -204,6 +206,7 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         output.accept(rainbow_honey.get());
         output.accept(rainbow_honey_crystal.get());
         output.accept(black_sapphire.get());
+        output.accept(scolecite.get());
         if (ModList.get().isLoaded("malum"))
             output.accept(malignant_gluttony.get());
         if (ModList.get().isLoaded("enigmaticlegacy"))
@@ -240,6 +243,9 @@ public class DreamtinkerCommon extends DreamtinkerModule {
                             () -> new Block(
                                     builder(MapColor.DEEPSLATE, SoundType.LODESTONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
                                                                                     .strength(10.0F)), BLOCK_ITEM);
+    public static final ItemObject<RotatedPillarBlock> scoleciteOre = BLOCKS.register("scolecite_ore", () -> new RotatedPillarBlock(
+            BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
+                                     .strength(0.25F, 2.2F).sound(SoundType.BASALT).lightLevel(state -> 12)), BLOCK_ITEM);
 
     public static void addTabBlocks(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         output.accept(crying_obsidian_plane.get());
@@ -248,6 +254,7 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         output.accept(amberOre);
         output.accept(blackSapphireOre);
         output.accept(DeepSlateBlackSapphireOre);
+        output.accept(scoleciteOre);
     }
 
     protected static BlockBehaviour.Properties builder(SoundType soundType) {

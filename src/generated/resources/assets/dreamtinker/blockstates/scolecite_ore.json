@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "dreamtinker:block/scolecite_ore_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "dreamtinker:block/scolecite_ore"
+    },
+    "axis=z": {
+      "model": "dreamtinker:block/scolecite_ore_horizontal",
+      "x": 90
+    }
+  }
+}

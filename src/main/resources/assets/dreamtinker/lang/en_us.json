@@ -471,6 +471,7 @@
   "item.dreamtinker.rainbow_honey": "Rainbow Honey Bottle",
   "item.dreamtinker.rainbow_honey_crystal": "Rainbow Honey Crystal",
   "item.dreamtinker.black_sapphire": "Black Sapphire",
+  "item.dreamtinker.scolecite": "Scolecite",
 
   "block.dreamtinker.crying_obsidian_pane": "Crying Obsidian Pane",
   "block.dreamtinker.narcissus": "Narcissus",
@@ -481,6 +482,7 @@
   "block.dreamtinker.amber_ore": "Amber Ore",
   "block.dreamtinker.black_sapphire_ore": "Black Sapphire Ore",
   "block.dreamtinker.deepslate_black_sapphire_ore": "Deepslate Black Sapphire Ore",
+  "block.dreamtinker.scolecite_ore": "Scolecite Ore",
 
   "material.dreamtinker.echo_alloy": "Echo Alloy",
   "material.dreamtinker.echo_alloy.flavor": "Its echo of mystery, or echo of enigma",
@@ -541,6 +543,8 @@
   "material.dreamtinker.rainbow_honey_crystal.flavor": "At the end of Rainbow",
   "material.dreamtinker.black_sapphire": "Black Sapphire",
   "material.dreamtinker.black_sapphire.flavor": "Fashioned the city in dream",
+  "material.dreamtinker.scolecite": "Scolecite",
+  "material.dreamtinker.scolecite.flavor": "Shine in the darkness",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "Molten echo Alloy",
   "fluid.dreamtinker.molten_echo_alloy": "Molten echo Alloy",
@@ -638,6 +642,9 @@
   "fluid_type.dreamtinker.molten_black_sapphire": "Molten Black Sapphire",
   "fluid.dreamtinker.molten_black_sapphire": "Molten Black Sapphire",
   "fluid.dreamtinker.molten_black_sapphire.fluid_effect": "Molten Black Sapphire",
+  "fluid_type.dreamtinker.molten_scolecite": "Molten Scolecite",
+  "fluid.dreamtinker.molten_scolecite": "Molten Scolecite",
+  "fluid.dreamtinker.molten_scolecite.fluid_effect": "Molten Scolecite",
 
   "item.dreamtinker.molten_echo_alloy_bucket": "Molten echo alloy Bucket",
   "item.dreamtinker.molten_echo_shard_bucket": "Molten echo shard Bucket",
@@ -671,6 +678,7 @@
   "item.dreamtinker.rainbow_honey_bucket": "Rainbow Honey Bucket",
   "item.dreamtinker.molten_bee_gem_bucket": "Molten Rainbow Honey Crystal Bucket",
   "item.dreamtinker.molten_black_sapphire_bucket": "Molten Black Sapphire Bucket",
+  "item.dreamtinker.molten_scolecite_bucket": "Molten Scolecite Bucket",
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "bleed",
   "fluid_effect.tconstruct.damage.explosion": "explosion",

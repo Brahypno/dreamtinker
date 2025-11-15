@@ -2,7 +2,7 @@
   "type": "tconstruct:material_fluid",
   "fluid": {
     "amount": 100,
-    "tag": "dreamtinker:molten_black_corundum"
+    "tag": "dreamtinker:molten_black_sapphire"
   },
   "output": "dreamtinker:black_sapphire",
   "temperature": 1100

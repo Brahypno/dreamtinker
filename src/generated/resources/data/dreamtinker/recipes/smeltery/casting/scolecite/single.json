@@ -4,10 +4,10 @@
     "tag": "tconstruct:casts/single_use/gem"
   },
   "cast_consumed": true,
-  "cooling_time": 73,
+  "cooling_time": 60,
   "fluid": {
     "amount": 100,
-    "fluid": "dreamtinker:molten_black_sapphire"
+    "fluid": "dreamtinker:molten_scolecite"
   },
-  "result": "dreamtinker:black_sapphire"
+  "result": "dreamtinker:scolecite"
 }

@@ -49,7 +49,8 @@ public class DreamtinkerFluidTextureProvider extends AbstractFluidTextureProvide
         this.commonFluid(DreamtinkerFluids.festering_blood.getType());
         this.commonFluid(DreamtinkerFluids.rainbow_honey.getType());
         this.commonFluid(DreamtinkerFluids.molten_bee_gem.getType());
-        this.commonFluid(DreamtinkerFluids.molten_black_corundum.getType());
+        this.commonFluid(DreamtinkerFluids.molten_black_sapphire.getType());
+        this.commonFluid(DreamtinkerFluids.molten_scolecite.getType());
     }
 
     public void commonFluid(FluidType fluid) {

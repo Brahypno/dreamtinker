@@ -403,12 +403,22 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.amberOre), DreamtinkerFluids.liquid_amber.get(), FluidValues.GEM, 1.0f)
                             .setOre(IMeltingContainer.OreRateType.GEM)
                             .save(consumer, location(folder + "amber/ore"));
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.DeepSlateBlackSapphireOre, DreamtinkerCommon.blackSapphireOre),
+                                     DreamtinkerFluids.molten_black_sapphire.get(), FluidValues.GEM, 1.0f)
+                            .setOre(IMeltingContainer.OreRateType.GEM)
+                            .save(consumer, location(folder + "black_sapphire/ore"));
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.scoleciteOre),
+                                     DreamtinkerFluids.molten_scolecite.get(), FluidValues.GEM, 1.0f)
+                            .setOre(IMeltingContainer.OreRateType.GEM)
+                            .save(consumer, location(folder + "scolecite/ore"));
 
         meltCast(DreamtinkerFluids.molten_desire.get(), DreamtinkerCommon.desire_gem.get(), FluidValues.GEM, consumer);
         meltCast(DreamtinkerFluids.despair_essence.get(), DreamtinkerCommon.despair_gem.get(), FluidValues.GEM, consumer);
         meltCast(DreamtinkerFluids.molten_soul_steel.get(), DreamtinkerCommon.soul_steel.get(), FluidValues.INGOT, consumer);
         meltCast(DreamtinkerFluids.molten_bee_gem.get(), DreamtinkerCommon.rainbow_honey_crystal.get(), FluidValues.GEM, consumer);
-        meltCast(DreamtinkerFluids.molten_black_corundum.get(), DreamtinkerCommon.black_sapphire.get(), FluidValues.GEM, consumer);
+        meltCast(DreamtinkerFluids.molten_black_sapphire.get(), DreamtinkerCommon.black_sapphire.get(), FluidValues.GEM, consumer);
+        meltCast(DreamtinkerFluids.molten_scolecite.get(), DreamtinkerCommon.scolecite.get(), FluidValues.GEM, consumer);
+
     }
 
     String materials_folder = "tools/materials/";
@@ -478,7 +488,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         materialRecipe(consumer, DreamtinkerMaterialIds.rainbow_honey_crystal, Ingredient.of(DreamtinkerCommon.rainbow_honey_crystal.get()), 1, 1,
                        materials_folder + "rainbow_honey_crystal");
 
-        materialMeltingCasting(consumer, DreamtinkerMaterialIds.black_sapphire, DreamtinkerFluids.molten_black_corundum, FluidValues.GEM,
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.black_sapphire, DreamtinkerFluids.molten_black_sapphire, FluidValues.GEM,
                                materials_folder);
         materialRecipe(consumer, DreamtinkerMaterialIds.black_sapphire, Ingredient.of(DreamtinkerCommon.black_sapphire.get()), 1, 1,
                        materials_folder + "black_sapphire");

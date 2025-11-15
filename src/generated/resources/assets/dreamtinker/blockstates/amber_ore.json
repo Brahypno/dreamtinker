@@ -1,15 +1,15 @@
 {
   "variants": {
     "axis=x": {
-      "model": "dreamtinker:block/block_horizontal",
+      "model": "dreamtinker:block/amber_ore_horizontal",
       "x": 90,
       "y": 90
     },
     "axis=y": {
-      "model": "dreamtinker:block/block"
+      "model": "dreamtinker:block/amber_ore"
     },
     "axis=z": {
-      "model": "dreamtinker:block/block_horizontal",
+      "model": "dreamtinker:block/amber_ore_horizontal",
       "x": 90
     }
   }

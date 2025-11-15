@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:ore_melting",
+  "ingredient": [
+    {
+      "item": "dreamtinker:deepslate_black_sapphire_ore"
+    },
+    {
+      "item": "dreamtinker:black_sapphire_ore"
+    }
+  ],
+  "rate": "gem",
+  "result": {
+    "amount": 100,
+    "fluid": "dreamtinker:molten_black_sapphire"
+  },
+  "temperature": 1100,
+  "time": 69
+}

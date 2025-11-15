@@ -44,9 +44,10 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
                                     .texture("plant", blockTexture(DreamtinkerCommon.narcissus.get()))
                                     .renderType("cutout").guiLight(BlockModel.GuiLight.FRONT));
         simpleBlockWithItem(DreamtinkerCommon.larimarOre.get(), cubeAll(DreamtinkerCommon.larimarOre.get()));
-        this.axisBlock(DreamtinkerCommon.amberOre.get(), "block", modLoc("block/amber_ore"), true);
+        this.axisBlock(DreamtinkerCommon.amberOre.get(), "amber_ore", modLoc("block/amber_ore"), true);
         simpleBlockWithItem(DreamtinkerCommon.blackSapphireOre.get(), cubeAll(DreamtinkerCommon.blackSapphireOre.get()));
         simpleBlockWithItem(DreamtinkerCommon.DeepSlateBlackSapphireOre.get(), cubeAll(DreamtinkerCommon.DeepSlateBlackSapphireOre.get()));
+        this.axisBlock(DreamtinkerCommon.scoleciteOre.get(), "scolecite_ore", modLoc("block/scolecite_ore"), true);
     }
 
     public void axisBlock(Block block, String location, ResourceLocation texture, boolean horizontal) {

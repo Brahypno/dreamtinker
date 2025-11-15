@@ -28,6 +28,8 @@ public class ModBiomeModifiers {
             ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, Dreamtinker.getLocation("add_amber_ore"));
     public static ResourceKey<BiomeModifier> spawnBlackSapphire =
             ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, Dreamtinker.getLocation("add_black_sapphire_ore"));
+    public static ResourceKey<BiomeModifier> spawnScoleciteOre =
+            ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, Dreamtinker.getLocation("add_scolecite_ore"));
 
     /**
      * 把上面的 PlacedFeature 加进目标群系（此处示例：平原 + 花林）
@@ -53,14 +55,17 @@ public class ModBiomeModifiers {
         ctx.register(spawnLarimarOre, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(biomes.getOrThrow(BiomeTags.IS_BEACH),
                                                                                        direct(placed.getOrThrow(placedSmallLarimarOre),
                                                                                               placed.getOrThrow(placedLargeLarimarOre)),
-                                                                                       GenerationStep.Decoration.UNDERGROUND_DECORATION));
+                                                                                       GenerationStep.Decoration.UNDERGROUND_ORES));
         ctx.register(spawnAmberOre, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(biomes.getOrThrow(BiomeTags.IS_NETHER),
                                                                                      direct(placed.getOrThrow(placedSmallAmberOre),
                                                                                             placed.getOrThrow(placedLargeAmberOre)),
-                                                                                     GenerationStep.Decoration.UNDERGROUND_DECORATION));
+                                                                                     GenerationStep.Decoration.UNDERGROUND_ORES));
         ctx.register(spawnBlackSapphire, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(HolderSet.direct(biomes.getOrThrow(Biomes.DEEP_DARK)),
                                                                                           direct(placed.getOrThrow(placedSmallAmberOre),
                                                                                                  placed.getOrThrow(placedLargeAmberOre)),
-                                                                                          GenerationStep.Decoration.UNDERGROUND_DECORATION));
+                                                                                          GenerationStep.Decoration.UNDERGROUND_ORES));
+        ctx.register(spawnScoleciteOre, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(biomes.getOrThrow(BiomeTags.IS_NETHER),
+                                                                                         direct(placed.getOrThrow(placedLargeScoleciteOre)),
+                                                                                         GenerationStep.Decoration.UNDERGROUND_ORES));
     }
 }

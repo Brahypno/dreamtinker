@@ -88,6 +88,8 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
         generateItemModel(DreamtinkerCommon.rainbow_honey, "");
         generateItemModel(DreamtinkerCommon.rainbow_honey_crystal, "materials");
         generateItemModel(DreamtinkerCommon.black_sapphire, "materials");
+
+        generateItemModel(DreamtinkerCommon.scolecite, "materials");
         //generateBlockItemModel(object);
         generateBucketItemModel(DreamtinkerFluids.molten_echo_shard);
         generateBucketItemModel(DreamtinkerFluids.molten_albedo_stibium);
