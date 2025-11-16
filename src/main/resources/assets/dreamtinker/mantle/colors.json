@@ -103,7 +103,9 @@
     "rainbow_catcher": "#D3E03B",
     "all_slayer": "#AA00AA",
     "spiritual_weapon_transformation": "#6E2CA3",
-    "light_in_dark": "#D5C9C1"
+    "light_in_dark": "#D5C9C1",
+    "fiber_glass_fragments": "#3C96B9",
+    "light_emanation": "#A8D0D9"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",

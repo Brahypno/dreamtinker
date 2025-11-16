@@ -78,6 +78,10 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new HeadMaterialStats(600, 5f, Tiers.DIAMOND, 3f),
                          HandleMaterialStats.multipliers().durability(0.8f).miningSpeed(1.0f).attackDamage(1.05f).attackSpeed(1.05f).build(),
                          StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.shiningFlint,
+                         new HeadMaterialStats(300, 2f, Tiers.IRON, 1.50f),
+                         HandleMaterialStats.multipliers().durability(0.7f).miningSpeed(1.0f).attackDamage(1.1f).attackSpeed(1.05f).build(),
+                         StatlessMaterialStats.BINDING);
 
         addELMeleeHarvest();
         addMalumMeleeHarvest();
@@ -158,6 +162,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addMaterialStats(DreamtinkerMaterialIds.scolecite,
                          new LimbMaterialStats(600, 0.1f, 0.05f, 0.05f),
                          new GripMaterialStats(-0.02f, -0.05f, 3f));
+        addMaterialStats(DreamtinkerMaterialIds.shiningFlint,
+                         new LimbMaterialStats(300, -0.3f, 0.25f, -0.05f),
+                         new GripMaterialStats(-0.2f, -0.05f, 1.75f));
 
         addCompactRanged();
     }
@@ -191,8 +198,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addArmorShieldStats(DreamtinkerMaterialIds.echo_alloy,
                             PlatingMaterialStats.builder().durabilityFactor(65).armor(3, 4, 6.66f, 2).toughness(2).knockbackResistance(2.5f),
                             StatlessMaterialStats.MAILLE);
-        addMaterialStats(DreamtinkerMaterialIds.valentinite,
-                         StatlessMaterialStats.MAILLE);
+        addMaterialStats(DreamtinkerMaterialIds.valentinite, StatlessMaterialStats.MAILLE);
         addArmorShieldStats(DreamtinkerMaterialIds.nigrescence_antimony,
                             PlatingMaterialStats.builder().durabilityFactor(40).armor(1.08f, 2.46f, 4.31f, 2).toughness(3).knockbackResistance(6330f));
         addArmorShieldStats(DreamtinkerMaterialIds.star_regulus,
@@ -226,7 +232,6 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addArmorShieldStats(DreamtinkerMaterialIds.scolecite,
                             PlatingMaterialStats.builder().durabilityFactor(24).armor(1, 4, 6, 1).toughness(1.5f),
                             StatlessMaterialStats.MAILLE);
-
 
         addArmorShieldStats(DreamtinkerMaterialIds.etherium,
                             PlatingMaterialStats.builder().durabilityFactor(132).armor(4f, 9f, 7f, 4f).toughness(4).knockbackResistance(0f),

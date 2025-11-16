@@ -25,9 +25,11 @@ import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
 import slimeknights.mantle.data.predicate.item.ItemPredicate;
 import slimeknights.tconstruct.library.data.tinkering.AbstractModifierProvider;
 import slimeknights.tconstruct.library.json.LevelingInt;
+import slimeknights.tconstruct.library.json.RandomLevelingValue;
 import slimeknights.tconstruct.library.json.predicate.tool.HasModifierPredicate;
 import slimeknights.tconstruct.library.json.variable.mining.BlockLightVariable;
 import slimeknights.tconstruct.library.json.variable.mining.BlockTemperatureVariable;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.impl.BasicModifier;
 import slimeknights.tconstruct.library.modifiers.modules.armor.BlockDamageSourceModule;
 import slimeknights.tconstruct.library.modifiers.modules.armor.ProtectionModule;
@@ -37,6 +39,7 @@ import slimeknights.tconstruct.library.modifiers.modules.behavior.ReduceToolDama
 import slimeknights.tconstruct.library.modifiers.modules.build.*;
 import slimeknights.tconstruct.library.modifiers.modules.combat.ConditionalMeleeDamageModule;
 import slimeknights.tconstruct.library.modifiers.modules.combat.LootingModule;
+import slimeknights.tconstruct.library.modifiers.modules.combat.MobEffectModule;
 import slimeknights.tconstruct.library.modifiers.modules.mining.ConditionalMiningSpeedModule;
 import slimeknights.tconstruct.library.modifiers.util.ModifierLevelDisplay;
 import slimeknights.tconstruct.library.tools.SlotType;
@@ -45,6 +48,7 @@ import slimeknights.tconstruct.library.tools.capability.inventory.InventoryMenuM
 import slimeknights.tconstruct.library.tools.capability.inventory.InventoryModule;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.shared.TinkerAttributes;
+import slimeknights.tconstruct.shared.TinkerEffects;
 import slimeknights.tconstruct.tools.modules.MeltingModule;
 
 import static org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers.*;
@@ -191,6 +195,13 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(ModifierRequirementsModule.builder()
                                                      .requirement(HasModifierPredicate.hasModifier(weapon_dreams.getId(), 1))
                                                      .modifierKey(Ids.weapon_dreams_order).build());
+        buildModifier(Ids.fiber_glass_fragments)
+                .addModule(MobEffectModule.builder(TinkerEffects.bleeding.get())
+                                          .level(RandomLevelingValue.perLevel(1, 1))
+                                          .time(RandomLevelingValue.random(20, 10))
+                                          .target(LivingEntityPredicate.ANY)
+                                          .build(),
+                           ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT);
         addELModifiers();
         addMalumModifiers();
 

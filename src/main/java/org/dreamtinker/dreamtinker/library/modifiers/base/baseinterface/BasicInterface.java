@@ -22,15 +22,17 @@ import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ToolDataNBT;
+import slimeknights.tconstruct.library.tools.stat.FloatToolStat;
 import slimeknights.tconstruct.library.tools.stat.ModifierStatsBuilder;
 
 import java.util.List;
 import java.util.function.BiConsumer;
 
-public interface BasicInterface extends ToolDamageModifierHook, ModifierRemovalHook, TooltipModifierHook, ToolStatsModifierHook, AttributesModifierHook, ValidateModifierHook, ModifierTraitHook, VolatileDataModifierHook, RequirementsModifierHook {
+public interface BasicInterface extends ToolDamageModifierHook, ModifierRemovalHook, TooltipModifierHook, ToolStatsModifierHook, AttributesModifierHook, ValidateModifierHook, ModifierTraitHook, VolatileDataModifierHook, RequirementsModifierHook, ConditionalStatModifierHook {
     default void BasicInterfaceInit(ModuleHookMap.Builder hookBuilder) {
         hookBuilder.addHook(this, ModifierHooks.REMOVE, ModifierHooks.TOOLTIP, ModifierHooks.TOOL_DAMAGE, ModifierHooks.TOOL_STATS, ModifierHooks.ATTRIBUTES,
-                            ModifierHooks.VALIDATE, ModifierHooks.MODIFIER_TRAITS, ModifierHooks.VOLATILE_DATA, ModifierHooks.REQUIREMENTS);
+                            ModifierHooks.VALIDATE, ModifierHooks.MODIFIER_TRAITS, ModifierHooks.VOLATILE_DATA, ModifierHooks.REQUIREMENTS,
+                            ModifierHooks.CONDITIONAL_STAT);
     }
 
     default int onDamageTool(IToolStackView tool, ModifierEntry modifier, int amount, @javax.annotation.Nullable LivingEntity holder) {
@@ -62,4 +64,8 @@ public interface BasicInterface extends ToolDamageModifierHook, ModifierRemovalH
     default void addTraits(IToolContext var1, ModifierEntry var2, TraitBuilder var3, boolean var4) {}
 
     default void addVolatileData(IToolContext context, ModifierEntry modifier, ToolDataNBT volatileData) {}
+
+    default float modifyStat(IToolStackView tool, ModifierEntry modifier, LivingEntity living, FloatToolStat stat, float baseValue, float multiplier) {
+        return baseValue;
+    }
 }

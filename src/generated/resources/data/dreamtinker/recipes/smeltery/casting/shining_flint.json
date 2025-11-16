@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "item": "minecraft:flint"
+  },
+  "cast_consumed": true,
+  "cooling_time": 195,
+  "fluid": {
+    "amount": 1000,
+    "tag": "tconstruct:molten_glass"
+  },
+  "result": "dreamtinker:shining_flint"
+}

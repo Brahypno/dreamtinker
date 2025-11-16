@@ -162,8 +162,8 @@ public class DreamtinkerCommon extends DreamtinkerModule {
             ITEMS.register("rainbow_honey", () -> new ContainerFoodItem.FluidContainerFoodItem(
                     new Item.Properties().craftRemainder(Items.GLASS_BOTTLE),
                     () -> new FluidStack(DreamtinkerFluids.rainbow_honey.get(), FluidValues.BOTTLE)));
-    public static final RegistryObject<Item> scolecite =
-            ITEMS.register("scolecite", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> scolecite = ITEMS.register("scolecite", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> shiningFlint = ITEMS.register("shining_flint", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
 
     protected static final Item.Properties FOOD_PROPS = new Item.Properties();
     public static final RegistryObject<Item> white_peach = ITEMS.register("white_peach", () -> new Item(
@@ -207,6 +207,7 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         output.accept(rainbow_honey_crystal.get());
         output.accept(black_sapphire.get());
         output.accept(scolecite.get());
+        output.accept(shiningFlint.get());
         if (ModList.get().isLoaded("malum"))
             output.accept(malignant_gluttony.get());
         if (ModList.get().isLoaded("enigmaticlegacy"))

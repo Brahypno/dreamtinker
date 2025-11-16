@@ -389,7 +389,12 @@
   "modifier.dreamtinker.light_in_dark": "点亮黑暗",
   "modifier.dreamtinker.light_in_dark.flavor": "击碎黎明",
   "modifier.dreamtinker.light_in_dark.description": "在0-3/4-11亮度提升近战伤害，弹射物初速度，保护值，受到伤害，反之减少",
-
+  "modifier.dreamtinker.fiber_glass_fragments": "玻璃碎片",
+  "modifier.dreamtinker.fiber_glass_fragments.flavor": "像玻璃纤维一样致命",
+  "modifier.dreamtinker.fiber_glass_fragments.description": "当攻击时，施加流血效果",
+  "modifier.dreamtinker.light_emanation": "光流溢而下",
+  "modifier.dreamtinker.light_emanation.flavor": "黑暗消泯",
+  "modifier.dreamtinker.light_emanation.description": "当亮度足够高的时候，增加弹射物力量，拉弓速度和精确度。",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
@@ -476,6 +481,7 @@
   "item.dreamtinker.rainbow_honey_crystal": "虹彩晶",
   "item.dreamtinker.black_sapphire": "黑刚玉",
   "item.dreamtinker.scolecite": "钙沸石",
+  "item.dreamtinker.shining_flint": "闪耀燧石",
 
   "block.dreamtinker.crying_obsidian_pane": "哭泣的黑曜石板",
   "block.dreamtinker.narcissus": "水仙",
@@ -549,6 +555,8 @@
   "material.dreamtinker.black_sapphire.flavor": "梦中城市的基石",
   "material.dreamtinker.scolecite": "钙沸石",
   "material.dreamtinker.scolecite.flavor": "闪耀于黑暗之石",
+  "material.dreamtinker.shining_flint": "闪耀燧石",
+  "material.dreamtinker.shining_flint.flavor": "荣光终会降临",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "熔融回响合金",
   "fluid.dreamtinker.molten_echo_alloy": "熔融回响合金",

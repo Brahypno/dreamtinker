@@ -77,6 +77,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
 
         addDefaultTraits(DreamtinkerMaterialIds.black_sapphire, not_like_was);
         addDefaultTraits(DreamtinkerMaterialIds.scolecite, light_in_dark);
+        addDefaultTraits(DreamtinkerMaterialIds.shiningFlint, TinkerModifiers.jagged.getId(), Ids.fiber_glass_fragments, light_emanation.getId());
 
         callGetOrCreate(this, DreamtinkerMaterialIds.etherium).setTraits(MELEE_HARVEST, List.of(
                 new ModifierEntry(ModifierIds.smite, 2),

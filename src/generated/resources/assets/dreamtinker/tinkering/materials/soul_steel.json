@@ -21,40 +21,33 @@
       "tconstruct:grip"
     ],
     "transformer": {
-      "type": "tconstruct:recolor_sprite",
-      "color_mapping": {
-        "type": "tconstruct:grey_to_color",
-        "palette": [
-          {
-            "color": "FF000000",
-            "grey": 0
-          },
-          {
-            "color": "FF1F3546",
-            "grey": 63
-          },
-          {
-            "color": "FF284054",
-            "grey": 102
-          },
-          {
-            "color": "FF334A5D",
-            "grey": 140
-          },
-          {
-            "color": "FF3E5568",
-            "grey": 178
-          },
-          {
-            "color": "FF476077",
-            "grey": 216
-          },
-          {
-            "color": "FF627D9A",
-            "grey": 255
-          }
-        ]
-      }
+      "type": "tconstruct:grey_to_sprite",
+      "palette": [
+        {
+          "color": "FF1F3546",
+          "grey": 63
+        },
+        {
+          "color": "FF284054",
+          "grey": 102
+        },
+        {
+          "color": "FF334A5D",
+          "grey": 140
+        },
+        {
+          "color": "FF3E5568",
+          "grey": 178
+        },
+        {
+          "color": "FF476077",
+          "grey": 216
+        },
+        {
+          "color": "FF627D9A",
+          "grey": 255
+        }
+      ]
     }
   },
   "luminosity": 14

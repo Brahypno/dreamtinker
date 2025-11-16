@@ -281,6 +281,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                 .setFluidAndTime(TinkerFluids.moltenDiamond, FluidValues.LARGE_GEM_BLOCK)
                                 .setCast(Items.NETHER_STAR, true)
                                 .save(consumer, location(folder + "desire_gem"));
+        ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.shiningFlint.get())
+                                .setFluidAndTime(TinkerFluids.moltenGlass, FluidValues.GLASS_BLOCK)
+                                .setCast(Items.FLINT, true)
+                                .save(consumer, location(folder + "shining_flint"));
     }
 
     private void addMeltingRecipes(Consumer<FinishedRecipe> consumer) {
@@ -497,6 +501,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                materials_folder);
         materialRecipe(consumer, DreamtinkerMaterialIds.scolecite, Ingredient.of(DreamtinkerCommon.scolecite.get()), 1, 1,
                        materials_folder + "scolecite");
+        materialRecipe(consumer, DreamtinkerMaterialIds.shiningFlint, Ingredient.of(DreamtinkerCommon.shiningFlint.get()), 1, 1,
+                       materials_folder + "shining_flint");
 
     }
 

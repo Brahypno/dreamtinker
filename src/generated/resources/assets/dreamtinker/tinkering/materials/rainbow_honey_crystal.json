@@ -19,40 +19,33 @@
       "tconstruct:armor_maille"
     ],
     "transformer": {
-      "type": "tconstruct:recolor_sprite",
-      "color_mapping": {
-        "type": "tconstruct:grey_to_color",
-        "palette": [
-          {
-            "color": "FF000000",
-            "grey": 0
-          },
-          {
-            "color": "FF6A6A1A",
-            "grey": 63
-          },
-          {
-            "color": "FF848A1F",
-            "grey": 102
-          },
-          {
-            "color": "FF9CAA28",
-            "grey": 140
-          },
-          {
-            "color": "FFB9C532",
-            "grey": 178
-          },
-          {
-            "color": "FFD3E03B",
-            "grey": 216
-          },
-          {
-            "color": "FFEAF748",
-            "grey": 255
-          }
-        ]
-      }
+      "type": "tconstruct:grey_to_sprite",
+      "palette": [
+        {
+          "color": "FF6A6A1A",
+          "grey": 63
+        },
+        {
+          "color": "FF848A1F",
+          "grey": 102
+        },
+        {
+          "color": "FF9CAA28",
+          "grey": 140
+        },
+        {
+          "color": "FFB9C532",
+          "grey": 178
+        },
+        {
+          "color": "FFD3E03B",
+          "grey": 216
+        },
+        {
+          "color": "FFEAF748",
+          "grey": 255
+        }
+      ]
     }
   },
   "luminosity": 14

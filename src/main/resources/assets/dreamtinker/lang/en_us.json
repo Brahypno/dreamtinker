@@ -389,6 +389,12 @@
   "modifier.dreamtinker.light_in_dark": "Light the dark",
   "modifier.dreamtinker.light_in_dark.flavor": "Break the Dawn",
   "modifier.dreamtinker.light_in_dark.description": "Increase melee damage, projectile speed, protection and damage reduction, otherwise increase it",
+  "modifier.dreamtinker.fiber_glass_fragments": "Glass fragments",
+  "modifier.dreamtinker.fiber_glass_fragments.flavor": "As lethal as glass fiber",
+  "modifier.dreamtinker.fiber_glass_fragments.description": "When attack, apply bleed",
+  "modifier.dreamtinker.light_emanation": "Light Emanation",
+  "modifier.dreamtinker.light_emanation.flavor": "darkness vanish",
+  "modifier.dreamtinker.light_emanation.description": "When light level is large enough, boost projectile damage, draw speed and accuracy.",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",
@@ -475,6 +481,7 @@
   "item.dreamtinker.rainbow_honey_crystal": "Rainbow Honey Crystal",
   "item.dreamtinker.black_sapphire": "Black Sapphire",
   "item.dreamtinker.scolecite": "Scolecite",
+  "item.dreamtinker.shining_flint": "Shining Flint",
 
   "block.dreamtinker.crying_obsidian_pane": "Crying Obsidian Pane",
   "block.dreamtinker.narcissus": "Narcissus",
@@ -548,6 +555,8 @@
   "material.dreamtinker.black_sapphire.flavor": "Fashioned the city in dream",
   "material.dreamtinker.scolecite": "Scolecite",
   "material.dreamtinker.scolecite.flavor": "Shine in the darkness",
+  "material.dreamtinker.shining_flint": "Shining Flint",
+  "material.dreamtinker.shining_flint.flavor": "Glorious would be made",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "Molten echo Alloy",
   "fluid.dreamtinker.molten_echo_alloy": "Molten echo Alloy",

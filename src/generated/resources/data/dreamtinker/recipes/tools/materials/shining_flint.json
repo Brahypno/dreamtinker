@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "dreamtinker:shining_flint"
+  },
+  "material": "dreamtinker:shining_flint",
+  "needed": 1,
+  "value": 1
+}
