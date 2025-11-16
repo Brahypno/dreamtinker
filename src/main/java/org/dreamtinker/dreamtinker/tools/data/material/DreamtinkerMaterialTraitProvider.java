@@ -35,8 +35,8 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
                 new ModifierEntry(Ids.antimony_usage, 1)));
 
         addTraits(DreamtinkerMaterialIds.nigrescence_antimony, MELEE_HARVEST, ewige_widerkunft);
-        addTraits(DreamtinkerMaterialIds.nigrescence_antimony, RANGED, burning_in_vain);
         addTraits(DreamtinkerMaterialIds.nigrescence_antimony, ARMOR, broken_vessel, ouroboric_hourglass);
+        addTraits(DreamtinkerMaterialIds.nigrescence_string, RANGED, burning_in_vain);
 
         addTraits(DreamtinkerMaterialIds.metallivorous_stibium_lupus, MELEE_HARVEST,
                   the_wolf_wonder, the_wolf_answer, the_wolf_was);

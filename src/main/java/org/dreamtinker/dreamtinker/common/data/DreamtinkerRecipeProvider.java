@@ -447,8 +447,11 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                materials_folder);
         materialRecipe(consumer, DreamtinkerMaterialIds.nigrescence_antimony, Ingredient.of(DreamtinkerCommon.nigrescence_antimony.get()), 1, 1,
                        materials_folder + "nigrescence_antimony");
-        materialComposite(consumer, MaterialIds.string, DreamtinkerMaterialIds.nigrescence_antimony, DreamtinkerFluids.molten_nigrescence_antimony,
+
+        materialComposite(consumer, MaterialIds.string, DreamtinkerMaterialIds.nigrescence_string, DreamtinkerFluids.molten_nigrescence_antimony,
                           FluidValues.GEM, materials_folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.nigrescence_string, Ingredient.of(DreamtinkerCommon.nigrescence_antimony.get()), 1, 1,
+                       materials_folder + "nigrescence_string");
 
         materialRecipe(consumer, DreamtinkerMaterialIds.star_regulus, Ingredient.of(DreamtinkerCommon.regulus.get()), 1, 1,
                        materials_folder + "star_regulus");

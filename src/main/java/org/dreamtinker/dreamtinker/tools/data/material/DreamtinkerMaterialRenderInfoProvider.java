@@ -20,6 +20,7 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
         buildRenderInfo(DreamtinkerMaterialIds.moonlight_ice).color(0xFFFFFFFF).fallbacks("metal", "crystal").luminosity(15);
         buildRenderInfo(DreamtinkerMaterialIds.valentinite).color(0xFFF6E07E).fallbacks("crystal").luminosity(7);
         buildRenderInfo(DreamtinkerMaterialIds.nigrescence_antimony).color(0xFF332222).fallbacks("crystal").luminosity(0);
+        buildRenderInfo(DreamtinkerMaterialIds.nigrescence_string).color(0xFF332222).fallbacks("crystal").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.metallivorous_stibium_lupus).color(0xFFFDF8EB).fallbacks("metal").luminosity(9);
         buildRenderInfo(DreamtinkerMaterialIds.star_regulus).color(0xFF8C1F1F).fallbacks("metal").luminosity(15);
         buildRenderInfo(DreamtinkerMaterialIds.crying_obsidian).color(0xFF3B2754).fallbacks("rock").luminosity(3);

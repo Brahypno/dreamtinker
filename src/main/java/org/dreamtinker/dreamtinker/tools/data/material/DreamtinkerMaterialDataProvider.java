@@ -23,6 +23,7 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.moonlight_ice, 3, 35, false, false, null);
         addMaterial(DreamtinkerMaterialIds.valentinite, 2, 16, true, false, null);
         addMaterial(DreamtinkerMaterialIds.nigrescence_antimony, 3, 23, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.nigrescence_string, 3, 23, false, false, null);
         addMaterial(DreamtinkerMaterialIds.metallivorous_stibium_lupus, 5, 45, false, false, null);
         addMaterial(DreamtinkerMaterialIds.star_regulus, 6, 50, true, false, null);
         addMaterial(DreamtinkerMaterialIds.crying_obsidian, 3, 30, false, false, null);

@@ -133,8 +133,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new GripMaterialStats(-0.5f, 3.0f, 4.0f));
         addMaterialStats(DreamtinkerMaterialIds.valentinite,
                          new LimbMaterialStats(400, 0.1f, 0.1f, .15f));
-        addMaterialStats(DreamtinkerMaterialIds.nigrescence_antimony,
-                         StatlessMaterialStats.BOWSTRING);
+        addMaterialStats(DreamtinkerMaterialIds.nigrescence_string, StatlessMaterialStats.BOWSTRING);
         addMaterialStats(DreamtinkerMaterialIds.metallivorous_stibium_lupus,
                          new GripMaterialStats(-0.33f, 3.0f, 0.76f));
         addMaterialStats(DreamtinkerMaterialIds.star_regulus,

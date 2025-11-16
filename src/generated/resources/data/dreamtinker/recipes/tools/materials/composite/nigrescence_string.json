@@ -5,6 +5,6 @@
     "tag": "dreamtinker:molten_nigrescence_antimony"
   },
   "input": "tconstruct:string",
-  "output": "dreamtinker:nigrescence_antimony",
+  "output": "dreamtinker:nigrescence_string",
   "temperature": 600
 }
