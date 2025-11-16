@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:casting_basin",
+  "cooling_time": 199,
+  "fluid": {
+    "amount": 810,
+    "fluid": "dreamtinker:molten_soul_steel"
+  },
+  "result": "dreamtinker:soul_steel_block"
+}

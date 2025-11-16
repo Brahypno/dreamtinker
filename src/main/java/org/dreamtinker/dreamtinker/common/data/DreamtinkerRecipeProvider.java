@@ -419,6 +419,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         meltCast(DreamtinkerFluids.molten_desire.get(), DreamtinkerCommon.desire_gem.get(), FluidValues.GEM, consumer);
         meltCast(DreamtinkerFluids.despair_essence.get(), DreamtinkerCommon.despair_gem.get(), FluidValues.GEM, consumer);
         meltCast(DreamtinkerFluids.molten_soul_steel.get(), DreamtinkerCommon.soul_steel.get(), FluidValues.INGOT, consumer);
+        meltCastBlock(DreamtinkerFluids.molten_soul_steel.get(), DreamtinkerCommon.soulSteelBlock.get(), FluidValues.METAL_BLOCK, consumer);
         meltCast(DreamtinkerFluids.molten_bee_gem.get(), DreamtinkerCommon.rainbow_honey_crystal.get(), FluidValues.GEM, consumer);
         meltCast(DreamtinkerFluids.molten_black_sapphire.get(), DreamtinkerCommon.black_sapphire.get(), FluidValues.GEM, consumer);
         meltCast(DreamtinkerFluids.molten_scolecite.get(), DreamtinkerCommon.scolecite.get(), FluidValues.GEM, consumer);
@@ -486,6 +487,9 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                materials_folder);
         materialRecipe(consumer, DreamtinkerMaterialIds.soul_steel, Ingredient.of(DreamtinkerCommon.soul_steel.get()), 1, 1,
                        materials_folder + "soul_steel");
+
+        materialRecipe(consumer, DreamtinkerMaterialIds.soul_steel, Ingredient.of(DreamtinkerCommon.soulSteelBlock.get()), 9, 1,
+                       materials_folder + "soul_steel_block");
 
         materialMeltingCasting(consumer, DreamtinkerMaterialIds.rainbow_honey_crystal, DreamtinkerFluids.molten_bee_gem, FluidValues.GEM,
                                materials_folder);
@@ -585,7 +589,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                            .pattern("eee")
                            .pattern("eMe")
                            .pattern("eee")
-                           .unlockedBy("has_item", has(DreamtinkerCommon.unborn_egg.get()))
+                           .unlockedBy("has_unborn_egg", has(DreamtinkerCommon.unborn_egg.get()))
                            .save(consumer, location("casts/" + DreamtinkerCommon.reason_cast.get()));
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, DreamtinkerCommon.reason_cast.get())
                            .define('e', DreamtinkerCommon.narcissus.get())
@@ -593,8 +597,20 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                            .pattern("eee")
                            .pattern("eMe")
                            .pattern("eee")
-                           .unlockedBy("has_item", has(DreamtinkerCommon.unborn_egg.get()))
+                           .unlockedBy("has_unborn_egg", has(DreamtinkerCommon.unborn_egg.get()))
                            .save(consumer, location("casts/" + DreamtinkerCommon.wish_cast.get()));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, DreamtinkerCommon.soulSteelBlock)
+                           .define('e', DreamtinkerCommon.soul_steel.get())
+                           .pattern("eee")
+                           .pattern("eee")
+                           .pattern("eee")
+                           .unlockedBy("has_soul_steel", has(DreamtinkerCommon.soul_steel.get()))
+                           .save(consumer, location("soul_steel_block"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, DreamtinkerCommon.soul_steel.get(), 9)
+                              .requires(DreamtinkerCommon.soulSteelBlock.get())
+                              .unlockedBy("has_soul_steel", has(DreamtinkerCommon.soul_steel.get()))
+                              .save(consumer, location("soul_steel"));
+
         new SpiritInfusionRecipeBuilder(ItemRegistry.THE_VESSEL.get(), 1, new ItemStack(DreamtinkerCommon.malignant_gluttony.get()))
                 .addExtraItem(ItemRegistry.NULL_SLATE.get(), 4)
                 .addExtraItem(ItemRegistry.MALIGNANT_PEWTER_INGOT.get(), 1)

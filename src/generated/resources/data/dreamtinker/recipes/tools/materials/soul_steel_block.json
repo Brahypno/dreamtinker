@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "dreamtinker:soul_steel_block"
+  },
+  "material": "dreamtinker:soul_steel",
+  "needed": 1,
+  "value": 9
+}

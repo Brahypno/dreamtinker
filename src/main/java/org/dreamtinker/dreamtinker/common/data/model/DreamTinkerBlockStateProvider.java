@@ -48,6 +48,7 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
         simpleBlockWithItem(DreamtinkerCommon.blackSapphireOre.get(), cubeAll(DreamtinkerCommon.blackSapphireOre.get()));
         simpleBlockWithItem(DreamtinkerCommon.DeepSlateBlackSapphireOre.get(), cubeAll(DreamtinkerCommon.DeepSlateBlackSapphireOre.get()));
         this.axisBlock(DreamtinkerCommon.scoleciteOre.get(), "scolecite_ore", modLoc("block/scolecite_ore"), true);
+        simpleBlockWithItem(DreamtinkerCommon.soulSteelBlock.get(), cubeAll(DreamtinkerCommon.soulSteelBlock.get()));
     }
 
     public void axisBlock(Block block, String location, ResourceLocation texture, boolean horizontal) {

@@ -76,5 +76,6 @@ public class DreamtinkerTagKeys {
         public static final TagKey<Block> larimarOre = forgeTag("ores/larimar");
         public static final TagKey<Block> amberOre = forgeTag("ores/amber");
         public static final TagKey<Block> scoleciteOre = forgeTag("ores/scolecite");
+        public static final TagKey<Block> soulSteelBlock = dreamtinkerTag("storage_blocks/soul_steel");
     }
 }

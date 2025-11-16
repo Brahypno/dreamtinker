@@ -100,6 +100,8 @@ public class ItemTagProvider extends ItemTagsProvider {
             .add(scolecite.get());
         this.tag(Dreamtinker.forgeItemTag("ores/scolecite"))
             .add(scoleciteOre.asItem());
+        this.tag(ItemTags.BEACON_PAYMENT_ITEMS)
+            .add(soul_steel.get());
 
         this.copy(Tags.Blocks.ORE_RATES_SINGULAR, Tags.Items.ORE_RATES_SINGULAR);
         //this.copy(Tags.Blocks.ORES_IN_GROUND_NETHERRACK, Tags.Items.ORES_IN_GROUND_NETHERRACK);

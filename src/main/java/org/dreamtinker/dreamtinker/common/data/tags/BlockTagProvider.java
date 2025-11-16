@@ -22,6 +22,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
 import static net.minecraft.tags.BlockTags.*;
+import static net.minecraftforge.common.Tags.Blocks.STORAGE_BLOCKS;
 import static org.dreamtinker.dreamtinker.common.DreamtinkerCommon.*;
 
 public class BlockTagProvider extends BlockTagsProvider {
@@ -38,11 +39,14 @@ public class BlockTagProvider extends BlockTagsProvider {
         addBlocksTags(narcissus.get(), Dreamtinker.forgeBlockTag("mineable/shears"), TinkerTags.Blocks.SLIMY_FUNGUS_CAN_GROW_THROUGH,
                       TinkerTags.Blocks.MINABLE_WITH_DAGGER, FLOWERS, ENDERMAN_HOLDABLE, SMALL_FLOWERS, SWORD_EFFICIENT, TinkerTags.Blocks.MINABLE_WITH_SCYTHE,
                       Dreamtinker.forgeBlockTag("mineable/sword"), TinkerTags.Blocks.MINABLE_WITH_SHEARS);
-        tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL, larimarOre, amberOre, scoleciteOre);
+        tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL, larimarOre, amberOre, scoleciteOre, soulSteelBlock);
+        tagBlocks(BEACON_BASE_BLOCKS, soulSteelBlock);
+        tagBlocks(STORAGE_BLOCKS, soulSteelBlock);
 
         tagBlocks(DreamtinkerTagKeys.Blocks.larimarOre, larimarOre);
         tagBlocks(DreamtinkerTagKeys.Blocks.amberOre, amberOre);
         tagBlocks(DreamtinkerTagKeys.Blocks.scoleciteOre, scoleciteOre);
+        tagBlocks(DreamtinkerTagKeys.Blocks.soulSteelBlock, soulSteelBlock);
         this.tag(Tags.Blocks.ORES)
             .add(blackSapphireOre.get(), DeepSlateBlackSapphireOre.get());
         tagBlocks(Tags.Blocks.ORE_RATES_SINGULAR, larimarOre, amberOre, larimarOre, blackSapphireOre, DeepSlateBlackSapphireOre);

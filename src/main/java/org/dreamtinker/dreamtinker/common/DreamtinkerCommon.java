@@ -248,6 +248,9 @@ public class DreamtinkerCommon extends DreamtinkerModule {
             BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
                                      .strength(0.25F, 2.2F).sound(SoundType.BASALT).lightLevel(state -> 12)), BLOCK_ITEM);
 
+    public static final ItemObject<Block> soulSteelBlock = BLOCKS.register("soul_steel_block", () -> new Block(
+            builder(MapColor.COLOR_BLACK, SoundType.METAL).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()), BLOCK_ITEM);
+
     public static void addTabBlocks(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         output.accept(crying_obsidian_plane.get());
         output.accept(narcissus.get());
@@ -256,6 +259,7 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         output.accept(blackSapphireOre);
         output.accept(DeepSlateBlackSapphireOre);
         output.accept(scoleciteOre);
+        output.accept(soulSteelBlock);
     }
 
     protected static BlockBehaviour.Properties builder(SoundType soundType) {
