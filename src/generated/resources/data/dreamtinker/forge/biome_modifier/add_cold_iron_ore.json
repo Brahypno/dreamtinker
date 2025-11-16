@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:spawns_snow_foxes",
+  "features": "dreamtinker:cold_iron_ore",
+  "step": "underground_decoration"
+}

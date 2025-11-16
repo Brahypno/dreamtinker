@@ -72,6 +72,12 @@ public class ModWorldGen {
             key(Registries.PLACED_FEATURE, "scolecite_ore_large");
 
 
+    public static ResourceKey<ConfiguredFeature<?, ?>> configuredSmallColdIronOre =
+            key(Registries.CONFIGURED_FEATURE, "cold_iron_ore");
+    public static ResourceKey<PlacedFeature> placedSmallColdIronOre =
+            key(Registries.PLACED_FEATURE, "cold_iron_ore");
+
+
     /**
      * ConfiguredFeature：一簇水仙（cross 小花），仅在能存活的位置尝试放置
      */
@@ -113,6 +119,11 @@ public class ModWorldGen {
 
         BlockState scoleciteOre = DreamtinkerCommon.scoleciteOre.get().defaultBlockState();
         register(ctx, configuredLargeScoleciteOre, Feature.ORE, new OreConfiguration(basalt, scoleciteOre, 9));
+        var cold_iron = List.of(
+                OreConfiguration.target(new BlockMatchTest(Blocks.IRON_ORE), DreamtinkerCommon.coldIronOre.get().defaultBlockState()),
+                OreConfiguration.target(new BlockMatchTest(Blocks.DEEPSLATE_IRON_ORE), DreamtinkerCommon.DeepslateColdIronOre.get().defaultBlockState())
+        );
+        register(ctx, configuredSmallColdIronOre, Feature.ORE, new OreConfiguration(cold_iron, 4, 0.3f));
     }
 
     /**
@@ -158,6 +169,12 @@ public class ModWorldGen {
                  CountPlacement.of(9),
                  InSquarePlacement.spread(),
                  HeightRangePlacement.uniform(VerticalAnchor.absolute(50), VerticalAnchor.absolute(120)),
+                 BiomeFilter.biome());
+
+        register(ctx, placedSmallColdIronOre, configuredSmallColdIronOre,
+                 CountPlacement.of(4),
+                 InSquarePlacement.spread(),
+                 HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(384)),
                  BiomeFilter.biome());
     }
 

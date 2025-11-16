@@ -228,8 +228,10 @@ public class DreamtinkerCommon extends DreamtinkerModule {
                                                                                           .instabreak().sound(SoundType.STONE)
                                                                                           .offsetType(BlockBehaviour.OffsetType.XZ)
                                                                                           .pushReaction(PushReaction.DESTROY)), BLOCK_ITEM);
-    public static final ItemObject<Block> larimarOre = BLOCKS.register("larimar_ore", () -> new Block(
-            builder(MapColor.LAPIS, SoundType.LODESTONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(5.0F)), BLOCK_ITEM);
+    public static final ItemObject<Block> larimarOre =
+            BLOCKS.register("larimar_ore", () -> new Block(
+                                    builder(MapColor.LAPIS, SoundType.LODESTONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(5.0F, 4.0f)),
+                            BLOCK_ITEM);
 
     public static final ItemObject<RotatedPillarBlock> amberOre = BLOCKS.register("amber_ore", () -> new RotatedPillarBlock(
             BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
@@ -238,18 +240,27 @@ public class DreamtinkerCommon extends DreamtinkerModule {
             BLOCKS.register("black_sapphire_ore",
                             () -> new Block(
                                     builder(MapColor.STONE, SoundType.LODESTONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
-                                                                                .strength(9.0F)), BLOCK_ITEM);
+                                                                                .strength(9.0F, 9.0f)), BLOCK_ITEM);
     public static final ItemObject<Block> DeepSlateBlackSapphireOre =
             BLOCKS.register("deepslate_black_sapphire_ore",
                             () -> new Block(
                                     builder(MapColor.DEEPSLATE, SoundType.LODESTONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
-                                                                                    .strength(10.0F)), BLOCK_ITEM);
+                                                                                    .strength(10.0F, 10.0f)), BLOCK_ITEM);
     public static final ItemObject<RotatedPillarBlock> scoleciteOre = BLOCKS.register("scolecite_ore", () -> new RotatedPillarBlock(
             BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
                                      .strength(0.25F, 2.2F).sound(SoundType.BASALT).lightLevel(state -> 12)), BLOCK_ITEM);
 
-    public static final ItemObject<Block> soulSteelBlock = BLOCKS.register("soul_steel_block", () -> new Block(
-            builder(MapColor.COLOR_BLACK, SoundType.METAL).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()), BLOCK_ITEM);
+    public static final ItemObject<Block> soulSteelBlock =
+            BLOCKS.register("soul_steel_block", () -> new Block(
+                    builder(MapColor.COLOR_BLACK, SoundType.METAL).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
+                                                                  .strength(10.5f, 12.5f)), BLOCK_ITEM);
+
+    public static final ItemObject<Block> coldIronOre = BLOCKS.register("cold_iron_ore", () -> new Block(
+            builder(MapColor.STONE, SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(5, 6f)), BLOCK_ITEM);
+    public static final ItemObject<Block> DeepslateColdIronOre =
+            BLOCKS.register("deepslate_cold_iron_ore",
+                            () -> new Block(builder(MapColor.DEEPSLATE, SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
+                                                                                        .strength(6.5f, 7f)), BLOCK_ITEM);
 
     public static void addTabBlocks(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         output.accept(crying_obsidian_plane.get());
@@ -260,6 +271,8 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         output.accept(DeepSlateBlackSapphireOre);
         output.accept(scoleciteOre);
         output.accept(soulSteelBlock);
+        output.accept(coldIronOre);
+        output.accept(DeepslateColdIronOre);
     }
 
     protected static BlockBehaviour.Properties builder(SoundType soundType) {
