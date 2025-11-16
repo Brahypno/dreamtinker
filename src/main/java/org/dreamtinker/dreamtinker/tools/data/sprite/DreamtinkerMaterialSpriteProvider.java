@@ -61,7 +61,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(255, 0xFF888890)
                                                 .build());
         this.buildMaterial(DreamtinkerMaterialIds.nigrescence_string)
-            .statType(StatlessMaterialStats.BOWSTRING)
+            .statType(StatlessMaterialStats.BOWSTRING).repairKit()
             .fallbacks("crystal", "gem")
             .transformer(GreyToSpriteTransformer.builder()
                                                 .addARGB(0, 0xFF060606)
@@ -135,8 +135,19 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(255, 0xFFFFDA25)  // 近金黄高光
                                                 .build());
         this.buildMaterial(DreamtinkerMaterialIds.half_rotten_homunculus)
-            .statType(HandleMaterialStats.ID).statType(StatlessMaterialStats.BINDING.getIdentifier()).maille().statType(StatlessMaterialStats.BOWSTRING)
-            .repairKit()
+            .statType(HandleMaterialStats.ID).statType(StatlessMaterialStats.BINDING.getIdentifier()).maille().repairKit()
+            .fallbacks("bone")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(0, 0xFF000000)  // 最暗凝块
+                                                .addARGB(63, 0xFF220000)  // 深红黑
+                                                .addARGB(102, 0xFF280000)  // 暗红
+                                                .addARGB(140, 0xFF360100)  // 暗棕红
+                                                .addARGB(178, 0xFF550703)  // 浓血红
+                                                .addARGB(216, 0xFFCF703E)  // 血色高光（偏棕橙）
+                                                .addARGB(255, 0xFFFBF2DA)  // 极亮高光/反光
+                                                .build());
+        this.buildMaterial(DreamtinkerMaterialIds.half_rotten_string)
+            .statType(StatlessMaterialStats.BOWSTRING).repairKit()
             .fallbacks("bone")
             .transformer(GreyToSpriteTransformer.builder()
                                                 .addARGB(0, 0xFF000000)  // 最暗凝块

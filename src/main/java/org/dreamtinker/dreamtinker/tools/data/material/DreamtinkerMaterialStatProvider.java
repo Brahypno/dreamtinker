@@ -147,8 +147,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addMaterialStats(DreamtinkerMaterialIds.amber,
                          new LimbMaterialStats(1200, -0.1f, 0.2f, 0.2f),
                          new GripMaterialStats(1.0f, 0.1f, 2.0f));
-        addMaterialStats(DreamtinkerMaterialIds.half_rotten_homunculus,
-                         StatlessMaterialStats.BOWSTRING);
+        addMaterialStats(DreamtinkerMaterialIds.half_rotten_string, StatlessMaterialStats.BOWSTRING);
         addMaterialStats(DreamtinkerMaterialIds.desire_gem,
                          new LimbMaterialStats(600, 0.7f, -0.3f, 0.3f),
                          new GripMaterialStats(0.8f, 0.3f, 3.5f));

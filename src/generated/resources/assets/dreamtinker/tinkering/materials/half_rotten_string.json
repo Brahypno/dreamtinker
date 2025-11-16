@@ -1,7 +1,7 @@
 {
-  "color": "FF332222",
+  "color": "FF360100",
   "fallbacks": [
-    "crystal"
+    "bone"
   ],
   "generator": {
     "supported_stats": [
@@ -12,31 +12,31 @@
       "type": "tconstruct:grey_to_sprite",
       "palette": [
         {
-          "color": "FF060606",
+          "color": "FF000000",
           "grey": 0
         },
         {
-          "color": "FF0D0D0F",
+          "color": "FF220000",
           "grey": 63
         },
         {
-          "color": "FF1A1A1F",
+          "color": "FF280000",
           "grey": 102
         },
         {
-          "color": "FF26262B",
+          "color": "FF360100",
           "grey": 140
         },
         {
-          "color": "FF36363C",
+          "color": "FF550703",
           "grey": 178
         },
         {
-          "color": "FF51515A",
+          "color": "FFCF703E",
           "grey": 216
         },
         {
-          "color": "FF888890",
+          "color": "FFFBF2DA",
           "grey": 255
         }
       ]

@@ -34,7 +34,7 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
             .add(valentinite, black_sapphire)
             .addOptional(etherium, spirit_fabric);
         this.tag(TinkerTags.Materials.LIGHT)
-            .add(nigrescence_antimony, echo_alloy, larimar, half_rotten_homunculus, desire_gem)
+            .add(nigrescence_string, echo_alloy, larimar, half_rotten_string, desire_gem)
             .addOptional(spirit_fabric, soul_stained_steel, nefarious, etherium, soul_etherium, metallivorous_stibium_lupus, star_regulus);
         this.tag(TinkerTags.Materials.BALANCED)
             .add(valentinite, black_sapphire, scolecite, shiningFlint);

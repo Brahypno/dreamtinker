@@ -450,8 +450,6 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
         materialComposite(consumer, MaterialIds.string, DreamtinkerMaterialIds.nigrescence_string, DreamtinkerFluids.molten_nigrescence_antimony,
                           FluidValues.GEM, materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.nigrescence_string, Ingredient.of(DreamtinkerCommon.nigrescence_antimony.get()), 1, 1,
-                       materials_folder + "nigrescence_string");
 
         materialRecipe(consumer, DreamtinkerMaterialIds.star_regulus, Ingredient.of(DreamtinkerCommon.regulus.get()), 1, 1,
                        materials_folder + "star_regulus");
@@ -470,6 +468,9 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                           materials_folder + "half_rotten_homunculus" + "casting/" + DreamtinkerMaterialIds.half_rotten_homunculus.getLocation('_').getPath()));
         materialRecipe(consumer, DreamtinkerMaterialIds.half_rotten_homunculus, Ingredient.of(DreamtinkerCommon.poisonousHomunculus.get()), 1, 1,
                        materials_folder + "half_rotten_homunculus");
+
+        materialComposite(consumer, MaterialIds.string, DreamtinkerMaterialIds.half_rotten_string, DreamtinkerFluids.half_festering_blood,
+                          FluidValues.BOTTLE, materials_folder);
 
         materialMeltingCasting(consumer, DreamtinkerMaterialIds.desire_gem, DreamtinkerFluids.molten_desire, FluidValues.GEM,
                                materials_folder);

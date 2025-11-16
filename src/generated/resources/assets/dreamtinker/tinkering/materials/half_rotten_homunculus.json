@@ -9,7 +9,6 @@
       "tconstruct:binding",
       "tconstruct:maille",
       "tconstruct:armor_maille",
-      "tconstruct:bowstring",
       "tconstruct:repair_kit"
     ],
     "transformer": {

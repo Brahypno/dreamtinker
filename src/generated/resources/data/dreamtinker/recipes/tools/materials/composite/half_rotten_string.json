@@ -1,0 +1,10 @@
+{
+  "type": "tconstruct:material_fluid",
+  "fluid": {
+    "amount": 250,
+    "tag": "dreamtinker:half_festering_blood"
+  },
+  "input": "tconstruct:string",
+  "output": "dreamtinker:half_rotten_string",
+  "temperature": 5
+}
