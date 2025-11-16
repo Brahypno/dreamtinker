@@ -71,11 +71,15 @@ public class ModWorldGen {
     public static ResourceKey<PlacedFeature> placedLargeScoleciteOre =
             key(Registries.PLACED_FEATURE, "scolecite_ore_large");
 
-
     public static ResourceKey<ConfiguredFeature<?, ?>> configuredSmallColdIronOre =
             key(Registries.CONFIGURED_FEATURE, "cold_iron_ore");
     public static ResourceKey<PlacedFeature> placedSmallColdIronOre =
             key(Registries.PLACED_FEATURE, "cold_iron_ore");
+
+    public static ResourceKey<ConfiguredFeature<?, ?>> configuredSmallOrichalcumOre =
+            key(Registries.CONFIGURED_FEATURE, "orichalcum_ore");
+    public static ResourceKey<PlacedFeature> placedSmallOrichalcumOre =
+            key(Registries.PLACED_FEATURE, "orichalcum_ore");
 
 
     /**
@@ -124,6 +128,11 @@ public class ModWorldGen {
                 OreConfiguration.target(new BlockMatchTest(Blocks.DEEPSLATE_IRON_ORE), DreamtinkerCommon.DeepslateColdIronOre.get().defaultBlockState())
         );
         register(ctx, configuredSmallColdIronOre, Feature.ORE, new OreConfiguration(cold_iron, 4, 0.3f));
+        var orichalcum = List.of(
+                OreConfiguration.target(new BlockMatchTest(Blocks.COPPER_ORE), DreamtinkerCommon.OrichalcumOre.get().defaultBlockState()),
+                OreConfiguration.target(new BlockMatchTest(Blocks.DEEPSLATE_COPPER_ORE), DreamtinkerCommon.DeepslateOrichalcumOre.get().defaultBlockState())
+        );
+        register(ctx, configuredSmallOrichalcumOre, Feature.ORE, new OreConfiguration(orichalcum, 4, 0.3f));
     }
 
     /**
@@ -145,36 +154,36 @@ public class ModWorldGen {
         register(ctx, placedLargeLarimarOre, configuredLargeLarimarOre, CountPlacement.of(3), InSquarePlacement.spread(),
                  HeightRangePlacement.triangle(
                          VerticalAnchor.absolute(45), VerticalAnchor.absolute(70)), BiomeFilter.biome());
-
         register(ctx, placedSmallAmberOre, configuredSmallAmberOre,
                  CountPlacement.of(5),
                  InSquarePlacement.spread(),
                  HeightRangePlacement.uniform(VerticalAnchor.absolute(10), VerticalAnchor.absolute(120)),
                  BiomeFilter.biome());
-
         // 下界里替换玄武岩的大矿脉
         register(ctx, placedLargeAmberOre, configuredLargeAmberOre,
                  CountPlacement.of(3),
                  InSquarePlacement.spread(),
                  HeightRangePlacement.uniform(VerticalAnchor.absolute(10), VerticalAnchor.absolute(120)),
                  BiomeFilter.biome());
-
         register(ctx, placedSmallBlackSapphireOre, configuredSmallBlackSapphireOre,
                  CountPlacement.of(5),
                  InSquarePlacement.spread(),
                  HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(0)),
                  BiomeFilter.biome());
-
         register(ctx, placedLargeScoleciteOre, configuredLargeScoleciteOre,
                  CountPlacement.of(9),
                  InSquarePlacement.spread(),
                  HeightRangePlacement.uniform(VerticalAnchor.absolute(50), VerticalAnchor.absolute(120)),
                  BiomeFilter.biome());
-
         register(ctx, placedSmallColdIronOre, configuredSmallColdIronOre,
                  CountPlacement.of(4),
                  InSquarePlacement.spread(),
                  HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(384)),
+                 BiomeFilter.biome());
+        register(ctx, placedSmallOrichalcumOre, configuredSmallOrichalcumOre,
+                 CountPlacement.of(3),
+                 InSquarePlacement.spread(),
+                 HeightRangePlacement.uniform(VerticalAnchor.absolute(-12), VerticalAnchor.absolute(112)),
                  BiomeFilter.biome());
     }
 

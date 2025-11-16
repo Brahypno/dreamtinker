@@ -32,6 +32,8 @@ public class ModBiomeModifiers {
             ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, Dreamtinker.getLocation("add_scolecite_ore"));
     public static ResourceKey<BiomeModifier> spawnColdIronOre =
             ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, Dreamtinker.getLocation("add_cold_iron_ore"));
+    public static ResourceKey<BiomeModifier> spawnOrichalcumOre =
+            ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, Dreamtinker.getLocation("add_orichalcum_ore"));
 
     /**
      * 把上面的 PlacedFeature 加进目标群系（此处示例：平原 + 花林）
@@ -69,9 +71,11 @@ public class ModBiomeModifiers {
         ctx.register(spawnScoleciteOre, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(biomes.getOrThrow(BiomeTags.IS_NETHER),
                                                                                          direct(placed.getOrThrow(placedLargeScoleciteOre)),
                                                                                          GenerationStep.Decoration.UNDERGROUND_ORES));
-
         ctx.register(spawnColdIronOre, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(biomes.getOrThrow(BiomeTags.SPAWNS_SNOW_FOXES),
                                                                                         direct(placed.getOrThrow(placedSmallColdIronOre)),
                                                                                         GenerationStep.Decoration.UNDERGROUND_DECORATION));
+        ctx.register(spawnOrichalcumOre, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(biomes.getOrThrow(BiomeTags.IS_MOUNTAIN),
+                                                                                          direct(placed.getOrThrow(placedSmallOrichalcumOre)),
+                                                                                          GenerationStep.Decoration.UNDERGROUND_DECORATION));
     }
 }

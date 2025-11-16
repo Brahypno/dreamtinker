@@ -496,6 +496,8 @@
   "block.dreamtinker.soul_steel_block": "魂钢块",
   "block.dreamtinker.cold_iron_ore": "寒铁原矿",
   "block.dreamtinker.deepslate_cold_iron_ore": "深层寒铁原矿",
+  "block.dreamtinker.orichalcum_ore": "山铜原矿",
+  "block.dreamtinker.deepslate_orichalcum_ore": "深层山铜原矿",
 
   "material.dreamtinker.echo_alloy": "回响合金",
   "material.dreamtinker.echo_alloy.flavor": "是神秘的回响，还是秘密的回响",

@@ -261,6 +261,12 @@ public class DreamtinkerCommon extends DreamtinkerModule {
             BLOCKS.register("deepslate_cold_iron_ore",
                             () -> new Block(builder(MapColor.DEEPSLATE, SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
                                                                                         .strength(6.5f, 7f)), BLOCK_ITEM);
+    public static final ItemObject<Block> OrichalcumOre = BLOCKS.register("orichalcum_ore", () -> new Block(
+            builder(MapColor.STONE, SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(9, 9f)), BLOCK_ITEM);
+    public static final ItemObject<Block> DeepslateOrichalcumOre =
+            BLOCKS.register("deepslate_orichalcum_ore",
+                            () -> new Block(builder(MapColor.DEEPSLATE, SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
+                                                                                        .strength(13.5f, 13.5f)), BLOCK_ITEM);
 
     public static void addTabBlocks(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         output.accept(crying_obsidian_plane.get());
@@ -273,6 +279,8 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         output.accept(soulSteelBlock);
         output.accept(coldIronOre);
         output.accept(DeepslateColdIronOre);
+        output.accept(OrichalcumOre);
+        output.accept(DeepslateOrichalcumOre);
     }
 
     protected static BlockBehaviour.Properties builder(SoundType soundType) {

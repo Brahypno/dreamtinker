@@ -34,7 +34,8 @@ public class BlockTagProvider extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
         this.tag(BlockTags.DRAGON_IMMUNE).add(crying_obsidian_plane.get());
-        tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_DIAMOND_TOOL, crying_obsidian_plane, blackSapphireOre, DeepSlateBlackSapphireOre);
+        tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_DIAMOND_TOOL, crying_obsidian_plane, blackSapphireOre, DeepSlateBlackSapphireOre, OrichalcumOre,
+                  DeepslateOrichalcumOre);
         this.tag(DreamtinkerTagKeys.Blocks.drop_peach).add(Blocks.BIRCH_LEAVES);
         addBlocksTags(narcissus.get(), Dreamtinker.forgeBlockTag("mineable/shears"), TinkerTags.Blocks.SLIMY_FUNGUS_CAN_GROW_THROUGH,
                       TinkerTags.Blocks.MINABLE_WITH_DAGGER, FLOWERS, ENDERMAN_HOLDABLE, SMALL_FLOWERS, SWORD_EFFICIENT, TinkerTags.Blocks.MINABLE_WITH_SCYTHE,
@@ -48,8 +49,10 @@ public class BlockTagProvider extends BlockTagsProvider {
         tagBlocks(DreamtinkerTagKeys.Blocks.scoleciteOre, scoleciteOre);
         tagBlocks(DreamtinkerTagKeys.Blocks.soulSteelBlock, soulSteelBlock);
         this.tag(Tags.Blocks.ORES)
-            .add(blackSapphireOre.get(), DeepSlateBlackSapphireOre.get(), DeepslateColdIronOre.get(), coldIronOre.get());
-        tagBlocks(Tags.Blocks.ORE_RATES_SINGULAR, larimarOre, amberOre, larimarOre, blackSapphireOre, DeepSlateBlackSapphireOre);
+            .add(blackSapphireOre.get(), DeepSlateBlackSapphireOre.get(), DeepslateColdIronOre.get(), coldIronOre.get(), OrichalcumOre.get(),
+                 DeepslateOrichalcumOre.get());
+        tagBlocks(Tags.Blocks.ORE_RATES_SINGULAR, larimarOre, amberOre, larimarOre, blackSapphireOre, DeepSlateBlackSapphireOre, OrichalcumOre,
+                  DeepslateOrichalcumOre);
         tagBlocks(Tags.Blocks.ORE_RATES_DENSE, scoleciteOre, DeepslateColdIronOre, coldIronOre);
         this.tag(Tags.Blocks.ORES_IN_GROUND_DEEPSLATE).add(DeepSlateBlackSapphireOre.get(), DeepslateColdIronOre.get());
         this.tag(Tags.Blocks.ORES_IN_GROUND_STONE).add(blackSapphireOre.get(), coldIronOre.get());
