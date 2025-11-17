@@ -1,5 +1,6 @@
 {
   "values": [
-    "dreamtinker:orichalcum_nugget"
+    "#forge:nuggets/orichalcum",
+    "#forge:nuggets/cold_iron"
   ]
 }

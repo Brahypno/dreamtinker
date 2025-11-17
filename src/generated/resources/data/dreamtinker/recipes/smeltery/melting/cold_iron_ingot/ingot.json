@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "item": "dreamtinker:cold_iron_ingot"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_cold_iron"
+  },
+  "temperature": 800,
+  "time": 180
+}

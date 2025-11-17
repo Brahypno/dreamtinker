@@ -58,17 +58,23 @@ public class DreamtinkerTagKeys {
         public static final TagKey<Item> weapon_slot_excluded = dreamtinkerTag("modifiable/excluded_weapon_slot");
         public static final TagKey<Item> HANDS = modTag("curios:hands");
         public static final TagKey<Item> CURIOS = dreamtinkerTag("my_curios");
-        public static final TagKey<Item> raw_orichalcum = forgeTag("raw_materials/orichalcum");
         public static final TagKey<Item> larimarOre = forgeTag("ores/larimar");
         public static final TagKey<Item> amberOre = forgeTag("ores/amber");
         public static final TagKey<Item> scoleciteOre = forgeTag("ores/scolecite");
+        public static final TagKey<Item> blackSapphireOre = forgeTag("ores/black_sapphire");
         public static final TagKey<Item> soulSteelBlock = dreamtinkerTag("storage_blocks/soul_steel");
+        public static final TagKey<Item> raw_orichalcum = forgeTag("raw_materials/orichalcum");
         public static final TagKey<Item> OrichalcumNuggets = forgeTag("nuggets/orichalcum");
         public static final TagKey<Item> OrichalcumIngot = forgeTag("ingots/orichalcum");
         public static final TagKey<Item> OrichalcumOre = forgeTag("ores/orichalcum");
         public static final TagKey<Item> OrichalcumBlock = forgeTag("storage_blocks/orichalcum");
         public static final TagKey<Item> RawOrichalcumBlock = forgeTag("storage_blocks/raw_orichalcum");
-        public static final TagKey<Item> blackSapphireOre = forgeTag("ores/black_sapphire");
+        public static final TagKey<Item> coldIronNuggets = forgeTag("nuggets/cold_iron");
+        public static final TagKey<Item> coldIronIngot = forgeTag("ingots/cold_iron");
+        public static final TagKey<Item> raw_coldIron = forgeTag("raw_materials/cold_iron");
+        public static final TagKey<Item> coldIronOre = forgeTag("ores/cold_iron");
+        public static final TagKey<Item> coldIronBlock = forgeTag("storage_blocks/cold_iron");
+        public static final TagKey<Item> RawColdIronBlock = forgeTag("storage_blocks/raw_cold_iron");
 
     }
 
@@ -92,5 +98,8 @@ public class DreamtinkerTagKeys {
         public static final TagKey<Block> OrichalcumBlock = forgeTag("storage_blocks/orichalcum");
         public static final TagKey<Block> RawOrichalcumBlock = forgeTag("storage_blocks/raw_orichalcum");
         public static final TagKey<Block> blackSapphireOre = forgeTag("ores/black_sapphire");
+        public static final TagKey<Block> coldIronOre = forgeTag("ores/cold_iron");
+        public static final TagKey<Block> coldIronBlock = forgeTag("storage_blocks/cold_iron");
+        public static final TagKey<Block> RawColdIronBlock = forgeTag("storage_blocks/raw_cold_iron");
     }
 }

@@ -4,7 +4,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -44,6 +43,8 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
         this.dropPottedContents(DreamtinkerCommon.potted_narcissus.get());
         this.dropSelf(DreamtinkerCommon.RawOrichalcumBlock.get());
         this.dropSelf(DreamtinkerCommon.OrichalcumBlock.get());
+        this.dropSelf(DreamtinkerCommon.RawColdIronBlock.get());
+        this.dropSelf(DreamtinkerCommon.ColdIronBlock.get());
     }
 
     private void addWorld() {
@@ -52,8 +53,8 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
         this.add(DreamtinkerCommon.blackSapphireOre.get(), block -> createOreDrop(block, DreamtinkerCommon.black_sapphire.get()));
         this.add(DreamtinkerCommon.DeepSlateBlackSapphireOre.get(), block -> createOreDrop(block, DreamtinkerCommon.black_sapphire.get()));
         this.add(DreamtinkerCommon.scoleciteOre.get(), block -> createOreDrop(block, DreamtinkerCommon.scolecite.get()));
-        this.add(DreamtinkerCommon.coldIronOre.get(), block -> createCopperLikeOreDrops(block, Items.RAW_IRON));
-        this.add(DreamtinkerCommon.DeepslateColdIronOre.get(), block -> createCopperLikeOreDrops(block, Items.RAW_IRON));
+        this.add(DreamtinkerCommon.coldIronOre.get(), block -> createCopperLikeOreDrops(block, DreamtinkerCommon.raw_cold_iron.get()));
+        this.add(DreamtinkerCommon.DeepslateColdIronOre.get(), block -> createCopperLikeOreDrops(block, DreamtinkerCommon.raw_cold_iron.get()));
         this.add(DreamtinkerCommon.OrichalcumOre.get(), block -> createOreDrop(block, DreamtinkerCommon.raw_orichalcum.get()));
         this.add(DreamtinkerCommon.DeepslateOrichalcumOre.get(), block -> createOreDrop(block, DreamtinkerCommon.raw_orichalcum.get()));
     }

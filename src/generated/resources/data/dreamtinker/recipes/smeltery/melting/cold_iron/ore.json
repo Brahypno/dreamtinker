@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:ore_melting",
+  "ingredient": {
+    "tag": "forge:ores/cold_iron"
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 180,
+    "fluid": "dreamtinker:molten_cold_iron"
+  },
+  "temperature": 800,
+  "time": 60
+}

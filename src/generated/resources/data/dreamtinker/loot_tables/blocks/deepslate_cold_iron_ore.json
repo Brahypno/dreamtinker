@@ -47,7 +47,7 @@
                   "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "minecraft:raw_iron"
+              "name": "dreamtinker:raw_cold_iron"
             }
           ]
         }

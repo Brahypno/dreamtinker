@@ -1,7 +1,9 @@
 {
   "values": [
-    "dreamtinker:soul_steel_block",
-    "dreamtinker:raw_orichalcum_block",
-    "dreamtinker:orichalcum_block"
+    "#forge:storage_blocks/orichalcum",
+    "#forge:storage_blocks/raw_orichalcum",
+    "#forge:storage_blocks/raw_cold_iron",
+    "#forge:storage_blocks/cold_iron",
+    "#dreamtinker:storage_blocks/soul_steel"
   ]
 }

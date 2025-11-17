@@ -93,6 +93,9 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
         generateItemModel(DreamtinkerCommon.orichalcum, "materials");
         generateItemModel(DreamtinkerCommon.orichalcum_nugget, "materials");
         generateItemModel(DreamtinkerCommon.raw_orichalcum, "");
+        generateItemModel(DreamtinkerCommon.cold_iron_ingot, "materials");
+        generateItemModel(DreamtinkerCommon.cold_iron_nugget, "materials");
+        generateItemModel(DreamtinkerCommon.raw_cold_iron, "");
         //generateBlockItemModel(object);
         generateBucketItemModel(DreamtinkerFluids.molten_echo_shard);
         generateBucketItemModel(DreamtinkerFluids.molten_albedo_stibium);

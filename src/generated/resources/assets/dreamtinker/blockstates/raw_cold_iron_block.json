@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "dreamtinker:block/raw_cold_iron_block"
+    }
+  }
+}

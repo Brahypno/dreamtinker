@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:ore_melting",
+  "ingredient": {
+    "tag": "forge:raw_materials/orichalcum"
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_orichalcum"
+  },
+  "temperature": 900,
+  "time": 63
+}

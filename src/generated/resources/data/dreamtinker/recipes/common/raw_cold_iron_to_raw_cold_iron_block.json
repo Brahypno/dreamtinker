@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "e": {
+      "item": "dreamtinker:raw_cold_iron"
+    }
+  },
+  "pattern": [
+    "eee",
+    "eee",
+    "eee"
+  ],
+  "result": {
+    "item": "dreamtinker:raw_cold_iron_block"
+  },
+  "show_notification": true
+}

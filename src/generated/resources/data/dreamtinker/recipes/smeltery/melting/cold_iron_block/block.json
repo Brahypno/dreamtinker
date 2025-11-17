@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "item": "dreamtinker:cold_iron_block"
+  },
+  "result": {
+    "amount": 810,
+    "fluid": "dreamtinker:molten_cold_iron"
+  },
+  "temperature": 800,
+  "time": 180
+}

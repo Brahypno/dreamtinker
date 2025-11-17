@@ -167,6 +167,9 @@ public class DreamtinkerCommon extends DreamtinkerModule {
     public static final RegistryObject<Item> orichalcum = ITEMS.register("orichalcum_ingot", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> raw_orichalcum = ITEMS.register("raw_orichalcum", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> orichalcum_nugget = ITEMS.register("orichalcum_nugget", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> cold_iron_ingot = ITEMS.register("cold_iron_ingot", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> raw_cold_iron = ITEMS.register("raw_cold_iron", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> cold_iron_nugget = ITEMS.register("cold_iron_nugget", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
 
     protected static final Item.Properties FOOD_PROPS = new Item.Properties();
     public static final RegistryObject<Item> white_peach = ITEMS.register("white_peach", () -> new Item(
@@ -214,6 +217,9 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         output.accept(orichalcum_nugget.get());
         output.accept(orichalcum.get());
         output.accept(raw_orichalcum.get());
+        output.accept(cold_iron_nugget.get());
+        output.accept(cold_iron_ingot.get());
+        output.accept(raw_cold_iron.get());
         if (ModList.get().isLoaded("malum"))
             output.accept(malignant_gluttony.get());
         if (ModList.get().isLoaded("enigmaticlegacy"))
@@ -267,6 +273,12 @@ public class DreamtinkerCommon extends DreamtinkerModule {
             BLOCKS.register("deepslate_cold_iron_ore",
                             () -> new Block(builder(MapColor.DEEPSLATE, SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
                                                                                         .strength(6.5f, 7f)), BLOCK_ITEM);
+
+    public static final ItemObject<Block> RawColdIronBlock = BLOCKS.register("raw_cold_iron_block", () -> new Block(
+            builder(MapColor.METAL, SoundType.METAL).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(18f, 18f)), BLOCK_ITEM);
+    public static final ItemObject<Block> ColdIronBlock = BLOCKS.register("cold_iron_block", () -> new Block(
+            builder(MapColor.METAL, SoundType.METAL).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(20f, 20f)), BLOCK_ITEM);
+
     public static final ItemObject<Block> OrichalcumOre = BLOCKS.register("orichalcum_ore", () -> new Block(
             builder(MapColor.STONE, SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(9, 9f)), BLOCK_ITEM);
     public static final ItemObject<Block> DeepslateOrichalcumOre =
@@ -289,6 +301,8 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         output.accept(soulSteelBlock);
         output.accept(coldIronOre);
         output.accept(DeepslateColdIronOre);
+        output.accept(RawColdIronBlock);
+        output.accept(ColdIronBlock);
         output.accept(OrichalcumOre);
         output.accept(DeepslateOrichalcumOre);
         output.accept(RawOrichalcumBlock);

@@ -52,6 +52,7 @@ public class DreamtinkerFluidTextureProvider extends AbstractFluidTextureProvide
         this.commonFluid(DreamtinkerFluids.molten_black_sapphire.getType());
         this.commonFluid(DreamtinkerFluids.molten_scolecite.getType());
         this.commonFluid(DreamtinkerFluids.molten_orichalcum.getType());
+        this.commonFluid(DreamtinkerFluids.molten_cold_iron.getType());
     }
 
     public void commonFluid(FluidType fluid) {

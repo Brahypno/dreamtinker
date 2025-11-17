@@ -485,6 +485,9 @@
   "item.dreamtinker.orichalcum_nugget": "山铜粒",
   "item.dreamtinker.orichalcum_ingot": "山铜锭",
   "item.dreamtinker.raw_orichalcum": "粗山铜",
+  "item.dreamtinker.cold_iron_nugget": "寒铁粒",
+  "item.dreamtinker.cold_iron_ingot": "寒铁锭",
+  "item.dreamtinker.raw_cold_iron": "粗寒铁",
 
   "block.dreamtinker.crying_obsidian_pane": "哭泣的黑曜石板",
   "block.dreamtinker.narcissus": "水仙",
@@ -503,6 +506,8 @@
   "block.dreamtinker.deepslate_orichalcum_ore": "深层山铜矿石",
   "block.dreamtinker.orichalcum_block": "山铜块",
   "block.dreamtinker.raw_orichalcum_block": "粗山铜块",
+  "block.dreamtinker.cold_iron_block": "寒铁块",
+  "block.dreamtinker.raw_cold_iron_block": "粗寒铁块",
 
   "material.dreamtinker.echo_alloy": "回响合金",
   "material.dreamtinker.echo_alloy.flavor": "是神秘的回响，还是秘密的回响",
@@ -674,6 +679,9 @@
   "fluid_type.dreamtinker.molten_orichalcum": "熔融山铜",
   "fluid.dreamtinker.molten_orichalcum": "熔融山铜",
   "fluid.dreamtinker.molten_orichalcum.fluid_effect": "熔融山铜",
+  "fluid_type.dreamtinker.molten_cold_iron": "熔融寒铁",
+  "fluid.dreamtinker.molten_cold_iron": "熔融寒铁",
+  "fluid.dreamtinker.molten_cold_iron.fluid_effect": "熔融寒铁",
 
   "item.dreamtinker.molten_echo_alloy_bucket": "熔融回响合金桶",
   "item.dreamtinker.molten_echo_shard_bucket": "熔融回响碎片桶",
@@ -709,6 +717,7 @@
   "item.dreamtinker.molten_black_sapphire_bucket": "熔融黑刚玉桶",
   "item.dreamtinker.molten_scolecite_bucket": "熔融钙沸石桶",
   "item.dreamtinker.molten_orichalcum_bucket": "熔融山铜桶",
+  "item.dreamtinker.molten_cold_iron_bucket": "熔融寒铁桶",
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "流血",
   "fluid_effect.tconstruct.damage.explosion": "爆炸",
