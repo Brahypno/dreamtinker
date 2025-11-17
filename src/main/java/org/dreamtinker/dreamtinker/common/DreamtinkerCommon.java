@@ -164,6 +164,9 @@ public class DreamtinkerCommon extends DreamtinkerModule {
                     () -> new FluidStack(DreamtinkerFluids.rainbow_honey.get(), FluidValues.BOTTLE)));
     public static final RegistryObject<Item> scolecite = ITEMS.register("scolecite", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> shiningFlint = ITEMS.register("shining_flint", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> orichalcum = ITEMS.register("orichalcum_ingot", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> raw_orichalcum = ITEMS.register("raw_orichalcum", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> orichalcum_nugget = ITEMS.register("orichalcum_nugget", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
 
     protected static final Item.Properties FOOD_PROPS = new Item.Properties();
     public static final RegistryObject<Item> white_peach = ITEMS.register("white_peach", () -> new Item(
@@ -208,6 +211,9 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         output.accept(black_sapphire.get());
         output.accept(scolecite.get());
         output.accept(shiningFlint.get());
+        output.accept(orichalcum_nugget.get());
+        output.accept(orichalcum.get());
+        output.accept(raw_orichalcum.get());
         if (ModList.get().isLoaded("malum"))
             output.accept(malignant_gluttony.get());
         if (ModList.get().isLoaded("enigmaticlegacy"))
@@ -267,6 +273,10 @@ public class DreamtinkerCommon extends DreamtinkerModule {
             BLOCKS.register("deepslate_orichalcum_ore",
                             () -> new Block(builder(MapColor.DEEPSLATE, SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
                                                                                         .strength(13.5f, 13.5f)), BLOCK_ITEM);
+    public static final ItemObject<Block> RawOrichalcumBlock = BLOCKS.register("raw_orichalcum_block", () -> new Block(
+            builder(MapColor.METAL, SoundType.METAL).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(25f, 25f)), BLOCK_ITEM);
+    public static final ItemObject<Block> OrichalcumBlock = BLOCKS.register("orichalcum_block", () -> new Block(
+            builder(MapColor.METAL, SoundType.METAL).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(25f, 25f)), BLOCK_ITEM);
 
     public static void addTabBlocks(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         output.accept(crying_obsidian_plane.get());
@@ -281,6 +291,8 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         output.accept(DeepslateColdIronOre);
         output.accept(OrichalcumOre);
         output.accept(DeepslateOrichalcumOre);
+        output.accept(RawOrichalcumBlock);
+        output.accept(OrichalcumBlock);
     }
 
     protected static BlockBehaviour.Properties builder(SoundType soundType) {

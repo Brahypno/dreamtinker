@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "dreamtinker:common/casts/wish_cast"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_unborn_egg": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dreamtinker:unborn_egg"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_unborn_egg",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "dreamtinker:common/casts/wish_cast"
+    ]
+  },
+  "sends_telemetry_event": false
+}

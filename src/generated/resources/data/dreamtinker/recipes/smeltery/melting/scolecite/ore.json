@@ -1,7 +1,7 @@
 {
   "type": "tconstruct:ore_melting",
   "ingredient": {
-    "item": "dreamtinker:scolecite_ore"
+    "tag": "forge:ores/scolecite"
   },
   "rate": "gem",
   "result": {

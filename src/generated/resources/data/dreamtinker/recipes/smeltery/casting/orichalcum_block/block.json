@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:casting_basin",
+  "cooling_time": 190,
+  "fluid": {
+    "amount": 810,
+    "fluid": "dreamtinker:molten_orichalcum"
+  },
+  "result": "dreamtinker:orichalcum_block"
+}

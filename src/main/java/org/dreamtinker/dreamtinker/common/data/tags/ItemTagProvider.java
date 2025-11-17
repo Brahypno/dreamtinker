@@ -12,7 +12,6 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
@@ -75,37 +74,45 @@ public class ItemTagProvider extends ItemTagsProvider {
 
 
         this.tag(Tags.Items.INGOTS)
-            .add(metallivorous_stibium_lupus.get(), regulus.get(), soul_steel.get())
+            .add(metallivorous_stibium_lupus.get(), regulus.get(), soul_steel.get(), orichalcum.get())
             .addOptional(soul_etherium.getId())
             .addOptional(malignant_gluttony.getId());
+        this.tag(DreamtinkerTagKeys.Items.OrichalcumIngot).add(orichalcum.get());
+
         this.tag(Tags.Items.GEMS)
             .add(valentinite.get(), nigrescence_antimony.get(), echo_alloy.get(), larimar.get(), amber.get(), desire_gem.get(), despair_gem.get(),
                  rainbow_honey_crystal.get(), black_sapphire.get(), scolecite.get());
+
         this.tag(DreamtinkerTagKeys.Items.raw_stibnite).add(raw_stibnite.get());
-        this.tag(Tags.Items.RAW_MATERIALS).add(raw_stibnite.get());
+        this.tag(DreamtinkerTagKeys.Items.raw_orichalcum).add(raw_orichalcum.get());
+        this.tag(Tags.Items.RAW_MATERIALS)
+            .addTags(DreamtinkerTagKeys.Items.raw_stibnite, DreamtinkerTagKeys.Items.raw_orichalcum);
+
         this.tag(ItemTags.FOX_FOOD).add(white_peach.get());
         this.tag(ItemTags.ARROWS).add(DreamtinkerTools.tntarrow.get());
         addItemsTags(narcissus.asItem(), ItemTags.SMALL_FLOWERS, ItemTags.FLOWERS);
         this.tag(ItemTagRegistry.HIDDEN_UNTIL_BLACK_CRYSTAL)
             .addOptional(malignant_gluttony.getId());
-        this.tag(Dreamtinker.forgeItemTag("gems/larimar"))
-            .add(larimar.get());
-        this.tag(Dreamtinker.forgeItemTag("ores/larimar"))
-            .add(larimarOre.asItem());
-        this.tag(Dreamtinker.forgeItemTag("gems/amber"))
-            .add(amber.get());
-        this.tag(Dreamtinker.forgeItemTag("ores/amber"))
-            .add(amberOre.asItem());
-        this.tag(Dreamtinker.forgeItemTag("gems/scolecite"))
-            .add(scolecite.get());
-        this.tag(Dreamtinker.forgeItemTag("ores/scolecite"))
-            .add(scoleciteOre.asItem());
         this.tag(ItemTags.BEACON_PAYMENT_ITEMS)
-            .add(soul_steel.get());
+            .add(soul_steel.get(), orichalcum.get());
 
+        this.tag(Tags.Items.NUGGETS)
+            .add(orichalcum_nugget.get());
+        this.tag(DreamtinkerTagKeys.Items.OrichalcumNuggets).add(orichalcum_nugget.get());
+
+        this.copy(Tags.Blocks.STORAGE_BLOCKS, Tags.Items.STORAGE_BLOCKS);
         this.copy(Tags.Blocks.ORE_RATES_SINGULAR, Tags.Items.ORE_RATES_SINGULAR);
         //this.copy(Tags.Blocks.ORES_IN_GROUND_NETHERRACK, Tags.Items.ORES_IN_GROUND_NETHERRACK);
-        this.copy(Tags.Blocks.ORE_RATES_SINGULAR, Tags.Items.ORE_RATES_SINGULAR);
+        this.copy(Tags.Blocks.ORE_RATES_DENSE, Tags.Items.ORE_RATES_DENSE);
+        this.copy(DreamtinkerTagKeys.Blocks.larimarOre, DreamtinkerTagKeys.Items.larimarOre);
+        this.copy(DreamtinkerTagKeys.Blocks.amberOre, DreamtinkerTagKeys.Items.amberOre);
+        this.copy(DreamtinkerTagKeys.Blocks.scoleciteOre, DreamtinkerTagKeys.Items.scoleciteOre);
+        this.copy(DreamtinkerTagKeys.Blocks.soulSteelBlock, DreamtinkerTagKeys.Items.soulSteelBlock);
+        this.copy(DreamtinkerTagKeys.Blocks.OrichalcumBlock, DreamtinkerTagKeys.Items.OrichalcumBlock);
+        this.copy(DreamtinkerTagKeys.Blocks.OrichalcumOre, DreamtinkerTagKeys.Items.OrichalcumOre);
+        this.copy(DreamtinkerTagKeys.Blocks.RawOrichalcumBlock, DreamtinkerTagKeys.Items.RawOrichalcumBlock);
+        this.copy(DreamtinkerTagKeys.Blocks.blackSapphireOre, DreamtinkerTagKeys.Items.blackSapphireOre);
+        this.copy(Tags.Blocks.ORES, Tags.Items.ORES);
     }
 
     private TagKey<Item> getArmorTag(ArmorItem.Type slotType) {

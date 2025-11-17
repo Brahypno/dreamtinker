@@ -136,55 +136,56 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
     }
 
     private void addAlloyRecipes(Consumer<FinishedRecipe> consumer) {
-        AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_albedo_stibium, FluidValues.GEM)
+        String folder = "smeltery/alloy/";
+        AlloyRecipeBuilder.alloy(FluidOutput.fromFluid(DreamtinkerFluids.molten_albedo_stibium.get(), FluidValues.GEM), 1500)
                           .addCatalyst(FluidIngredient.of(DreamtinkerFluids.molten_lupi_antimony.getTag(), FluidValues.INGOT))
                           .addInput(TinkerTags.Fluids.METAL_TOOLTIPS, FluidValues.INGOT)
-                          .save(consumer, location("currus_triumphalis_antimonii/lupi_to_albedo"));
-        AlloyRecipeBuilder.alloy(FluidOutput.fromStack(new FluidStack(DreamtinkerFluids.liquid_smoky_antimony.get(), FluidValues.INGOT * 2)), 3600)
+                          .save(consumer, location(folder + "currus_triumphalis_antimonii/lupi_to_albedo"));
+        AlloyRecipeBuilder.alloy(FluidOutput.fromFluid(DreamtinkerFluids.liquid_smoky_antimony.get(), FluidValues.INGOT * 2), 3600)
                           .addInput(DreamtinkerFluids.molten_ascending_antimony.getTag(), FluidValues.INGOT)
                           .addInput(TinkerFluids.liquidSoul.getTag(), FluidValues.GLASS_BLOCK)
-                          .save(consumer, location("currus_triumphalis_antimonii/ascending_to_smoky"));
+                          .save(consumer, location(folder + "currus_triumphalis_antimonii/ascending_to_smoky"));
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_evil, FluidValues.INGOT * 2)
                           .addInput(DreamtinkerFluids.molten_nefariousness.getTag(), FluidValues.GEM * 4)
                           .addInput(DreamtinkerFluids.liquid_trist.getTag(), FluidValues.NUGGET * 4)
                           .addInput(TinkerFluids.moltenNetherite.getTag(), FluidValues.INGOT)
-                          .save(consumer, location("evil_ingot"));
-        AlloyRecipeBuilder.alloy(FluidOutput.fromStack(new FluidStack(DreamtinkerFluids.liquid_pure_soul.get(), FluidValues.GEM)), 1600)
+                          .save(consumer, location(folder + "evil_ingot"));
+        AlloyRecipeBuilder.alloy(FluidOutput.fromFluid(DreamtinkerFluids.liquid_pure_soul.get(), FluidValues.GEM), 1600)
                           .addInput(DreamtinkerFluids.liquid_trist.getTag(), FluidValues.NUGGET)
                           .addInput(TinkerFluids.liquidSoul.getTag(), FluidValues.GLASS_BLOCK * 10)
-                          .save(consumer, location("liquid_pure_soul"));
+                          .save(consumer, location(folder + "liquid_pure_soul"));
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_soul_aether, FluidValues.INGOT)
                           .addInput(DreamtinkerFluids.molten_nefariousness.getTag(), FluidValues.GEM)
                           .addInput(DreamtinkerFluids.liquid_pure_soul.getTag(), FluidValues.GEM)
                           .addInput(DreamtinkerFluids.unstable_liquid_aether.getTag(), FluidValues.INGOT)
                           .addInput(DreamtinkerFluids.molten_void.getTag(), FluidValues.SLIMEBALL)
                           .addInput(DreamtinkerTagKeys.Fluids.molten_echo_shard, FluidValues.GEM)
-                          .save(consumer, location("molten_soul_aether"));
+                          .save(consumer, location(folder + "molten_soul_aether"));
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.reversed_shadow, FluidValues.SLIMEBALL)
                           .addInput(DreamtinkerFluids.molten_void.getTag(), FluidValues.SLIMEBALL * 2)
                           .addInput(TinkerFluids.moltenEnder.getTag(), FluidValues.SLIMEBALL * 2)
-                          .save(consumer, location("reversed_shadow"));
+                          .save(consumer, location(folder + "reversed_shadow"));
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_echo_alloy, FluidValues.GEM)
                           .addInput(DreamtinkerTagKeys.Fluids.molten_echo_shard, FluidValues.GEM)
                           .addInput(TinkerFluids.moltenEnder.getTag(), FluidValues.SLIMEBALL * 2)
-                          .save(consumer, location("molten_echo_alloy"));
+                          .save(consumer, location(folder + "molten_echo_alloy"));
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.despair_essence, FluidValues.GEM)
                           .addInput(DreamtinkerTagKeys.Fluids.molten_crying_obsidian, FluidValues.GLASS_BLOCK * 3)
                           .addInput(DreamtinkerFluids.liquid_amber.getTag(), FluidValues.GEM * 4)
                           .addInput(DreamtinkerFluids.molten_desire.get(), FluidValues.GEM * 9)
                           .addInput(DreamtinkerFluids.reversed_shadow.getTag(), FluidValues.SLIMEBALL * 7)
                           .addInput(DreamtinkerFluids.molten_lupi_antimony.getTag(), FluidValues.INGOT * 2)
-                          .save(consumer, location("despair_essence"));
+                          .save(consumer, location(folder + "despair_essence"));
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_soul_steel, FluidValues.INGOT)
                           .addInput(TinkerFluids.moltenSteel.getTag(), FluidValues.INGOT)
                           .addInput(TinkerFluids.moltenCobalt.getTag(), FluidValues.INGOT)
                           .addInput(TinkerFluids.liquidSoul.getTag(), FluidValues.GLASS_BLOCK * 2)
-                          .save(consumer, location("molten_soul_steel"));
+                          .save(consumer, location(folder + "molten_soul_steel"));
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_bee_gem, FluidValues.GEM * 2)
                           .addInput(DreamtinkerFluids.rainbow_honey.getTag(), FluidValues.BOTTLE)
                           .addInput(TinkerFluids.meatSoup.getTag(), FluidValues.BOWL * 2)
                           .addInput(TinkerFluids.moltenEmerald.getTag(), FluidValues.GEM)
-                          .save(consumer, location("molten_bee_gem"));
+                          .save(consumer, location(folder + "molten_bee_gem"));
     }
 
     private void addCastingRecipes(Consumer<FinishedRecipe> consumer) {
@@ -206,7 +207,6 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                 .setCast(forgeItemTag("dusts/gold"), true)
                                 .save(withCondition(consumer, tagCondition("dusts/gold")),
                                       location(folder + "currus_triumphalis_antimonii/albedo_to_lupus_dust"));
-
 
         ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.crying_obsidian_plane)
                                 .setFluidAndTime(DreamtinkerFluids.molten_crying_obsidian, FluidValues.GLASS_PANE)
@@ -407,14 +407,22 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.amberOre), DreamtinkerFluids.liquid_amber.get(), FluidValues.GEM, 1.0f)
                             .setOre(IMeltingContainer.OreRateType.GEM)
                             .save(consumer, location(folder + "amber/ore"));
-        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.DeepSlateBlackSapphireOre, DreamtinkerCommon.blackSapphireOre),
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.blackSapphireOre),
                                      DreamtinkerFluids.molten_black_sapphire.get(), FluidValues.GEM, 1.0f)
                             .setOre(IMeltingContainer.OreRateType.GEM)
                             .save(consumer, location(folder + "black_sapphire/ore"));
-        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.scoleciteOre),
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.scoleciteOre),
                                      DreamtinkerFluids.molten_scolecite.get(), FluidValues.GEM, 1.0f)
                             .setOre(IMeltingContainer.OreRateType.GEM)
                             .save(consumer, location(folder + "scolecite/ore"));
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.OrichalcumOre),
+                                     DreamtinkerFluids.molten_orichalcum.get(), FluidValues.INGOT * 2, 1.0f)
+                            .setOre(IMeltingContainer.OreRateType.METAL)
+                            .save(consumer, location(folder + "orichalcum/ore"));
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.RawOrichalcumBlock),
+                                     DreamtinkerFluids.molten_orichalcum.get(), FluidValues.METAL_BLOCK, 1.0f)
+                            .setOre(IMeltingContainer.OreRateType.METAL)
+                            .save(consumer, location(folder + "orichalcum/raw_storage_blocks"));
 
         meltCast(DreamtinkerFluids.molten_desire.get(), DreamtinkerCommon.desire_gem.get(), FluidValues.GEM, consumer);
         meltCast(DreamtinkerFluids.despair_essence.get(), DreamtinkerCommon.despair_gem.get(), FluidValues.GEM, consumer);
@@ -423,6 +431,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         meltCast(DreamtinkerFluids.molten_bee_gem.get(), DreamtinkerCommon.rainbow_honey_crystal.get(), FluidValues.GEM, consumer);
         meltCast(DreamtinkerFluids.molten_black_sapphire.get(), DreamtinkerCommon.black_sapphire.get(), FluidValues.GEM, consumer);
         meltCast(DreamtinkerFluids.molten_scolecite.get(), DreamtinkerCommon.scolecite.get(), FluidValues.GEM, consumer);
+
+        meltCast(DreamtinkerFluids.molten_orichalcum.get(), DreamtinkerCommon.orichalcum_nugget.get(), FluidValues.NUGGET, consumer);
+        meltCast(DreamtinkerFluids.molten_orichalcum.get(), DreamtinkerCommon.orichalcum.get(), FluidValues.INGOT, consumer);
+        meltCastBlock(DreamtinkerFluids.molten_orichalcum.get(), DreamtinkerCommon.OrichalcumBlock.get(), FluidValues.METAL_BLOCK, consumer);
 
     }
 
@@ -509,6 +521,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                materials_folder);
         materialRecipe(consumer, DreamtinkerMaterialIds.scolecite, Ingredient.of(DreamtinkerCommon.scolecite.get()), 1, 1,
                        materials_folder + "scolecite");
+
         materialRecipe(consumer, DreamtinkerMaterialIds.shiningFlint, Ingredient.of(DreamtinkerCommon.shiningFlint.get()), 1, 1,
                        materials_folder + "shining_flint");
 
@@ -566,19 +579,67 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
     }
 
+    String common_folder = "common/";
+
+    private void night_one_receipts(Consumer<FinishedRecipe> consumer, Item ingotLike, Item BlockLike) {
+        String i2b = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(ingotLike)).getPath() + "_to_" +
+                     Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(BlockLike)).getPath();
+        String b2i = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(BlockLike)).getPath() + "_to_" +
+                     Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(ingotLike)).getPath();
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, BlockLike)
+                           .define('e', ingotLike)
+                           .pattern("eee")
+                           .pattern("eee")
+                           .pattern("eee")
+                           .unlockedBy("has_" + Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(ingotLike)).getPath(), has(ingotLike))
+                           .save(consumer, location(common_folder + i2b));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ingotLike, 9)
+                              .requires(BlockLike)
+                              .unlockedBy("has_" + Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(ingotLike)).getPath(), has(BlockLike))
+                              .save(consumer, location(common_folder + b2i));
+    }
+
     private void addCraftingRecipes(Consumer<FinishedRecipe> consumer) {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, DreamtinkerCommon.nigrescence_antimony.get(), 1)
                               .requires(DreamtinkerCommon.valentinite.get())
                               .requires(Items.ROTTEN_FLESH)
                               .unlockedBy("has_valentinite", has(DreamtinkerCommon.valentinite.get()))
-                              .save(consumer, location("currus_triumphalis_antimonii/valentinite_nigredo"));
+                              .save(consumer, location(common_folder + "currus_triumphalis_antimonii/valentinite_nigredo"));
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(DreamtinkerTagKeys.Items.raw_stibnite),
                                             RecipeCategory.MISC,
                                             DreamtinkerCommon.valentinite.get(),
                                             1.0f,
                                             100)
                                   .unlockedBy("has_stibnite", has(DreamtinkerTagKeys.Items.raw_stibnite))
-                                  .save(consumer, location("currus_triumphalis_antimonii/stibnite_to_valentinite"));
+                                  .save(consumer, location(common_folder + "currus_triumphalis_antimonii/stibnite_to_valentinite" + "_blast"));
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(DreamtinkerTagKeys.Items.raw_orichalcum),
+                                            RecipeCategory.MISC,
+                                            DreamtinkerCommon.orichalcum.get(),
+                                            3.0f,
+                                            100)
+                                  .unlockedBy("has_orichalcum", has(DreamtinkerTagKeys.Items.raw_orichalcum))
+                                  .save(consumer, location(common_folder + "raw_orichalcum" + "/blasting"));
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(DreamtinkerTagKeys.Items.OrichalcumOre),
+                                            RecipeCategory.MISC,
+                                            DreamtinkerCommon.orichalcum.get(),
+                                            3.0f,
+                                            200)
+                                  .unlockedBy("has_orichalcum", has(Dreamtinker.forgeItemTag("ores/orichalcum")))
+                                  .save(consumer, location(common_folder + "orichalcum_ore" + "/blasting"));
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(DreamtinkerTagKeys.Items.blackSapphireOre),
+                                            RecipeCategory.MISC,
+                                            DreamtinkerCommon.black_sapphire.get(),
+                                            3.0f,
+                                            200)
+                                  .unlockedBy("has_orichalcum", has(Dreamtinker.forgeItemTag("ores/black_sapphire")))
+                                  .save(consumer, location(common_folder + "black_sapphire_ore" + "/smelting"));
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(DreamtinkerTagKeys.Items.blackSapphireOre),
+                                            RecipeCategory.MISC,
+                                            DreamtinkerCommon.black_sapphire.get(),
+                                            3.0f,
+                                            100)
+                                  .unlockedBy("has_orichalcum", has(Dreamtinker.forgeItemTag("ores/black_sapphire")))
+                                  .save(consumer, location(common_folder + "black_sapphire_ore" + "/blasting"));
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, DreamtinkerCommon.persona_cast.get())
                            .define('e', Items.WEEPING_VINES)
                            .define('M', DreamtinkerCommon.twist_obsidian_pane.get())
@@ -586,7 +647,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                            .pattern("eMe")
                            .pattern(" e ")
                            .unlockedBy("has_item", has(DreamtinkerCommon.twist_obsidian_pane.get()))
-                           .save(consumer, location("casts/" + DreamtinkerCommon.persona_cast.get()));
+                           .save(consumer, location(common_folder + "casts/" + DreamtinkerCommon.persona_cast.get()));
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, DreamtinkerCommon.wish_cast.get())
                            .define('e', Tags.Items.GEMS_LAPIS)
                            .define('M', DreamtinkerCommon.unborn_egg.get())
@@ -594,7 +655,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                            .pattern("eMe")
                            .pattern("eee")
                            .unlockedBy("has_unborn_egg", has(DreamtinkerCommon.unborn_egg.get()))
-                           .save(consumer, location("casts/" + DreamtinkerCommon.reason_cast.get()));
+                           .save(consumer, location(common_folder + "casts/" + DreamtinkerCommon.reason_cast.get()));
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, DreamtinkerCommon.reason_cast.get())
                            .define('e', DreamtinkerCommon.narcissus.get())
                            .define('M', Items.CLOCK)
@@ -602,18 +663,11 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                            .pattern("eMe")
                            .pattern("eee")
                            .unlockedBy("has_unborn_egg", has(DreamtinkerCommon.unborn_egg.get()))
-                           .save(consumer, location("casts/" + DreamtinkerCommon.wish_cast.get()));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, DreamtinkerCommon.soulSteelBlock)
-                           .define('e', DreamtinkerCommon.soul_steel.get())
-                           .pattern("eee")
-                           .pattern("eee")
-                           .pattern("eee")
-                           .unlockedBy("has_soul_steel", has(DreamtinkerCommon.soul_steel.get()))
-                           .save(consumer, location("soul_steel_block"));
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, DreamtinkerCommon.soul_steel.get(), 9)
-                              .requires(DreamtinkerCommon.soulSteelBlock.get())
-                              .unlockedBy("has_soul_steel", has(DreamtinkerCommon.soul_steel.get()))
-                              .save(consumer, location("soul_steel"));
+                           .save(consumer, location(common_folder + "casts/" + DreamtinkerCommon.wish_cast.get()));
+        night_one_receipts(consumer, DreamtinkerCommon.soul_steel.get(), DreamtinkerCommon.soulSteelBlock.asItem());
+        night_one_receipts(consumer, DreamtinkerCommon.raw_orichalcum.get(), DreamtinkerCommon.RawOrichalcumBlock.asItem());
+        night_one_receipts(consumer, DreamtinkerCommon.orichalcum.get(), DreamtinkerCommon.OrichalcumBlock.asItem());
+        night_one_receipts(consumer, DreamtinkerCommon.orichalcum_nugget.get(), DreamtinkerCommon.orichalcum.get());
 
         new SpiritInfusionRecipeBuilder(ItemRegistry.THE_VESSEL.get(), 1, new ItemStack(DreamtinkerCommon.malignant_gluttony.get()))
                 .addExtraItem(ItemRegistry.NULL_SLATE.get(), 4)

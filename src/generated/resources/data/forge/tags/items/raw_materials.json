@@ -1,5 +1,6 @@
 {
   "values": [
-    "dreamtinker:raw_stibnite"
+    "#forge:raw_materials/stibnite",
+    "#forge:raw_materials/orichalcum"
   ]
 }

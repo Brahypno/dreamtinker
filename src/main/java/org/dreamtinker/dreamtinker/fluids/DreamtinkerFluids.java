@@ -252,6 +252,10 @@ public class DreamtinkerFluids {
             registerFluid(FLUIDS, "molten_scolecite", 1000, 100, 100, 14,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_GRAY, 10), 10, 2) {});
 
+    public static final FlowingFluidObject<ForgeFlowingFluid> molten_orichalcum =
+            registerFluid(FLUIDS, "molten_orichalcum", 1200, 1000, 1000, 15,
+                          supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_PURPLE, 10), 10, 2) {});
+
     private static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         // containers
         output.accept(molten_echo_alloy);

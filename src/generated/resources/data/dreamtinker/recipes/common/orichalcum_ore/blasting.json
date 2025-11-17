@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 3.0,
+  "ingredient": {
+    "tag": "forge:ores/orichalcum"
+  },
+  "result": "dreamtinker:orichalcum_ingot"
+}

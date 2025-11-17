@@ -1,13 +1,8 @@
 {
   "type": "tconstruct:ore_melting",
-  "ingredient": [
-    {
-      "item": "dreamtinker:deepslate_black_sapphire_ore"
-    },
-    {
-      "item": "dreamtinker:black_sapphire_ore"
-    }
-  ],
+  "ingredient": {
+    "tag": "forge:ores/black_sapphire"
+  },
   "rate": "gem",
   "result": {
     "amount": 100,

@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:alloy",
+  "inputs": [
+    {
+      "amount": 90,
+      "catalyst": true,
+      "tag": "dreamtinker:molten_lupi_antimony"
+    },
+    {
+      "amount": 90,
+      "tag": "tconstruct:tooltips/metal"
+    }
+  ],
+  "result": {
+    "amount": 100,
+    "fluid": "dreamtinker:molten_albedo_stibium"
+  },
+  "temperature": 1500
+}

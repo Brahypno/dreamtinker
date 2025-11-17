@@ -482,6 +482,9 @@
   "item.dreamtinker.black_sapphire": "Black Sapphire",
   "item.dreamtinker.scolecite": "Scolecite",
   "item.dreamtinker.shining_flint": "Shining Flint",
+  "item.dreamtinker.orichalcum_nugget": "Orichalcum Nugget",
+  "item.dreamtinker.orichalcum_ingot": "Orichalcum Ingot",
+  "item.dreamtinker.raw_orichalcum": "Raw Orichalcum",
 
   "block.dreamtinker.crying_obsidian_pane": "Crying Obsidian Pane",
   "block.dreamtinker.narcissus": "Narcissus",
@@ -498,6 +501,8 @@
   "block.dreamtinker.deepslate_cold_iron_ore": "Deepslate Cold Iron Ore",
   "block.dreamtinker.orichalcum_ore": "Orichalcum Ore",
   "block.dreamtinker.deepslate_orichalcum_ore": "Deepslate Orichalcum Ore",
+  "block.dreamtinker.orichalcum_block": "Orichalcum Block",
+  "block.dreamtinker.raw_orichalcum_block": "Raw Orichalcum Block",
 
   "material.dreamtinker.echo_alloy": "Echo Alloy",
   "material.dreamtinker.echo_alloy.flavor": "Its echo of mystery, or echo of enigma",
@@ -666,6 +671,9 @@
   "fluid_type.dreamtinker.molten_scolecite": "Molten Scolecite",
   "fluid.dreamtinker.molten_scolecite": "Molten Scolecite",
   "fluid.dreamtinker.molten_scolecite.fluid_effect": "Molten Scolecite",
+  "fluid_type.dreamtinker.molten_orichalcum": "Molten Orichalcum",
+  "fluid.dreamtinker.molten_orichalcum": "Molten Orichalcum",
+  "fluid.dreamtinker.molten_orichalcum.fluid_effect": "Molten Orichalcum",
 
   "item.dreamtinker.molten_echo_alloy_bucket": "Molten echo alloy Bucket",
   "item.dreamtinker.molten_echo_shard_bucket": "Molten echo shard Bucket",
@@ -700,6 +708,7 @@
   "item.dreamtinker.molten_bee_gem_bucket": "Molten Rainbow Honey Crystal Bucket",
   "item.dreamtinker.molten_black_sapphire_bucket": "Molten Black Sapphire Bucket",
   "item.dreamtinker.molten_scolecite_bucket": "Molten Scolecite Bucket",
+  "item.dreamtinker.molten_orichalcum_bucket": "Molten Orichalcum Bucket",
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "bleed",
   "fluid_effect.tconstruct.damage.explosion": "explosion",
