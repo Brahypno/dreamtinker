@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "dreamtinker:orichalcum",
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_orichalcum"
+  },
+  "temperature": 900
+}

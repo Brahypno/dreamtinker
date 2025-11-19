@@ -21,6 +21,7 @@ import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import slimeknights.tconstruct.common.TinkerTags;
+import slimeknights.tconstruct.library.json.predicate.TinkerPredicate;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
@@ -123,6 +124,9 @@ public class GeneralHurtHandler {
                             event.setAmount(damageAmount * (1 + valueExpSoftCap(armor, toughness)));
                         }
                 }
+                int lunarAttractive = DTModifierCheck.getMainhandModifierLevel(offender, DreamtinkerModifiers.Ids.lunarRejection);
+                if (0 < lunarAttractive)
+                    event.setAmount(event.getAmount() + (TinkerPredicate.AIRBORNE.matches(victim) ? 2.0f : -2.0f));
             }
 
             //DEAL DAMAGE

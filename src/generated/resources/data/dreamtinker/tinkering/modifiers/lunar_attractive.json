@@ -1,0 +1,44 @@
+{
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:mob_effect",
+      "effect": "minecraft:levitation",
+      "hooks": [
+        "tconstruct:melee_hit",
+        "tconstruct:projectile_hit"
+      ],
+      "level": {
+        "flat": 1.0,
+        "per_level": 1.0
+      },
+      "time": {
+        "flat": 20.0,
+        "random": 10.0
+      }
+    },
+    {
+      "type": "tconstruct:conditional_melee_damage",
+      "each_level": -2.0,
+      "percent": false,
+      "target": {
+        "type": "mantle:inverted",
+        "inverted_type": "tconstruct:airborne"
+      }
+    },
+    {
+      "type": "tconstruct:conditional_mining_speed",
+      "entity": {
+        "type": "mantle:inverted",
+        "inverted_type": "mantle:on_ground"
+      },
+      "flat": 1.0,
+      "hooks": [
+        "tconstruct:break_speed"
+      ],
+      "percent": true,
+      "require_effective": false
+    }
+  ],
+  "tooltip_display": "always"
+}

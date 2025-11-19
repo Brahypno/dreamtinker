@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "dreamtinker:orichalcum_nugget"
+  },
+  "material": "dreamtinker:orichalcum",
+  "needed": 9,
+  "value": 1
+}

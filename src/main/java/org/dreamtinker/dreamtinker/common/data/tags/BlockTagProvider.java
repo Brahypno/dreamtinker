@@ -34,7 +34,7 @@ public class BlockTagProvider extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
         this.tag(BlockTags.DRAGON_IMMUNE).add(crying_obsidian_plane.get());
-        tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_DIAMOND_TOOL, crying_obsidian_plane, blackSapphireOre, DeepSlateBlackSapphireOre, OrichalcumOre);
+        tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_DIAMOND_TOOL, crying_obsidian_plane, blackSapphireOre, DeepSlateBlackSapphireOre);
         this.tag(DreamtinkerTagKeys.Blocks.drop_peach).add(Blocks.BIRCH_LEAVES);
         addBlocksTags(narcissus.get(), Dreamtinker.forgeBlockTag("mineable/shears"), TinkerTags.Blocks.SLIMY_FUNGUS_CAN_GROW_THROUGH,
                       TinkerTags.Blocks.MINABLE_WITH_DAGGER, FLOWERS, ENDERMAN_HOLDABLE, SMALL_FLOWERS, SWORD_EFFICIENT, TinkerTags.Blocks.MINABLE_WITH_SCYTHE,

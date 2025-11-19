@@ -433,10 +433,12 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                             .save(consumer, location(folder + "cold_iron/ore"));
         MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.RawColdIronBlock),
                                      DreamtinkerFluids.molten_cold_iron.get(), FluidValues.METAL_BLOCK, 1.0f)
+                            .addByproduct(DreamtinkerFluids.molten_orichalcum.result(FluidValues.METAL_BLOCK))
                             .setOre(IMeltingContainer.OreRateType.METAL)
                             .save(consumer, location(folder + "cold_iron/raw_storage_blocks"));
         MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.raw_coldIron),
                                      DreamtinkerFluids.molten_cold_iron.get(), FluidValues.INGOT, 1.0f)
+                            .addByproduct(DreamtinkerFluids.molten_orichalcum.result(FluidValues.INGOT))
                             .setOre(IMeltingContainer.OreRateType.METAL)
                             .save(consumer, location(folder + "cold_iron/raw_materials"));
 
@@ -544,6 +546,15 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
         materialRecipe(consumer, DreamtinkerMaterialIds.shiningFlint, Ingredient.of(DreamtinkerCommon.shiningFlint.get()), 1, 1,
                        materials_folder + "shining_flint");
+
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.orichalcum, DreamtinkerFluids.molten_orichalcum, FluidValues.INGOT,
+                               materials_folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.orichalcum, Ingredient.of(DreamtinkerCommon.orichalcum.get()), 1, 1,
+                       materials_folder + "orichalcum/ingot");
+        materialRecipe(consumer, DreamtinkerMaterialIds.orichalcum, Ingredient.of(DreamtinkerCommon.orichalcum_nugget.get()), 1, 9,
+                       materials_folder + "orichalcum/nugget");
+        materialRecipe(consumer, DreamtinkerMaterialIds.orichalcum, Ingredient.of(DreamtinkerCommon.OrichalcumBlock.get()), 9, 1,
+                       materials_folder + "orichalcum/block");
 
     }
 

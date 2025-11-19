@@ -31,7 +31,7 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
             .add(larimar, rainbow_honey_crystal)
             .addOptional(hallowed_gold);
         this.tag(TinkerTags.Materials.GENERAL)
-            .add(valentinite, black_sapphire)
+            .add(valentinite, black_sapphire, orichalcum)
             .addOptional(etherium, spirit_fabric);
         this.tag(TinkerTags.Materials.LIGHT)
             .add(nigrescence_string, echo_alloy, larimar, half_rotten_string, desire_gem)

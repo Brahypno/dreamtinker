@@ -80,6 +80,9 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.scolecite, light_in_dark);
         addDefaultTraits(DreamtinkerMaterialIds.shiningFlint, TinkerModifiers.jagged.getId(), Ids.fiber_glass_fragments, light_emanation.getId());
 
+        addDefaultTraits(DreamtinkerMaterialIds.orichalcum, Ids.lunarAttractive, Ids.lunarRejection);
+        addTraits(DreamtinkerMaterialIds.orichalcum, ARMOR, Ids.lunarProtection, lunar_defense.getId());
+
         callGetOrCreate(this, DreamtinkerMaterialIds.etherium).setTraits(MELEE_HARVEST, List.of(
                 new ModifierEntry(ModifierIds.smite, 2),
                 new ModifierEntry(explosive_hit.getId(), 1),

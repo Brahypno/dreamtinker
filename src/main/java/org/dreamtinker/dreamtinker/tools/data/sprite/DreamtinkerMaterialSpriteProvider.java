@@ -241,12 +241,25 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
         this.buildMaterial(DreamtinkerMaterialIds.shiningFlint)
             .meleeHarvest().ranged()
             .fallbacks("crystal")
-            .colorMapper(GreyToColorMapping.builderFromBlack().
-                                           addARGB(63, 0xFF3C96B9)
+            .colorMapper(GreyToColorMapping.builderFromBlack()
+                                           .addARGB(63, 0xFF3C96B9)
                                            .addARGB(102, 0xFFA8D0D9)
                                            .addARGB(140, 0x00000000)
                                            .addARGB(216, 0x00000000)
                                            .addARGB(255, 0xFFD0EAE9).build());
+
+        this.buildMaterial(DreamtinkerMaterialIds.orichalcum)
+            .meleeHarvest().armor().ranged().shieldCore()
+            .fallbacks("metal")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(0, 0xFF552060) // 极暗深梅紫
+                                                .addARGB(63, 0xFF6D2975) // 暗紫阴影
+                                                .addARGB(102, 0xFF8A3FA8) // 中暗紫
+                                                .addARGB(140, 0xFFA25BCC) // 偏亮紫
+                                                .addARGB(178, 0xFF5EC97F) // 亮绿（主体高光起点）
+                                                .addARGB(216, 0xFFB872E8) // 明亮紫（略带粉光）
+                                                .addARGB(255, 0xFFCB9CFF) // 顶级高光：淡紫反光
+                                                .build());
         addELMaterials();
         addMalumMaterials();
     }

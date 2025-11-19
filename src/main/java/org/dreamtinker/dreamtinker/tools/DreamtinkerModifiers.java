@@ -149,6 +149,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<not_like_was> not_like_was = MODIFIERS.register("not_like_was", not_like_was::new);
     public static final StaticModifier<light_in_dark> light_in_dark = MODIFIERS.register("light_in_dark", light_in_dark::new);
     public static final StaticModifier<lightRangeBoost> light_emanation = MODIFIERS.register("light_emanation", lightRangeBoost::new);
+    public static final StaticModifier<LunarDurabilityDefense> lunar_defense = MODIFIERS.register("lunar_defense", LunarDurabilityDefense::new);
 
     //etherium
     public static final StaticModifier<astral_break> astral_break = EL_MODIFIERS.register("astral_break", astral_break::new);
@@ -230,6 +231,9 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId weapon_dreams_filter = id("weapon_dreams_filter");
         public static final ModifierId weapon_dreams_order = id("weapon_dreams_order");
         public static final ModifierId fiber_glass_fragments = id("fiber_glass_fragments");
+        public static final ModifierId lunarProtection = id("lunar_protection");
+        public static final ModifierId lunarAttractive = id("lunar_attractive");
+        public static final ModifierId lunarRejection = id("lunar_rejection");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");

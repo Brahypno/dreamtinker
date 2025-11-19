@@ -1,0 +1,28 @@
+{
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:depth_protection",
+      "baseline_height": 40.0,
+      "damage_source": "mantle:can_protect",
+      "each_level": -2.5,
+      "neutral_range": 0.0
+    },
+    {
+      "type": "tconstruct:attribute",
+      "attribute": "forge:entity_gravity",
+      "flat": -0.05,
+      "operation": "multiply_base",
+      "slots": [
+        "mainhand",
+        "offhand",
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ],
+      "tooltip_style": "percent"
+    }
+  ],
+  "tooltip_display": "always"
+}

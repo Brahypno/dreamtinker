@@ -29,6 +29,7 @@ public class DreamtinkerMaterialIds {
     public static final MaterialId black_sapphire = new MaterialId(new ResourceLocation(MODID, "black_sapphire"));
     public static final MaterialId scolecite = new MaterialId(new ResourceLocation(MODID, "scolecite"));
     public static final MaterialId shiningFlint = new MaterialId(new ResourceLocation(MODID, "shining_flint"));
+    public static final MaterialId cold_iron = new MaterialId(new ResourceLocation(MODID, "cold_iron"));
     public static final MaterialId orichalcum = new MaterialId(new ResourceLocation(MODID, "orichalcum"));
     //Compact-enigmatic legacy
     public static final MaterialId etherium = new MaterialId(new ResourceLocation(MODID, "etherium"));

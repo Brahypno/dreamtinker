@@ -5,6 +5,7 @@ import com.aizistral.enigmaticlegacy.registries.EnigmaticEnchantments;
 import com.sammy.malum.registry.common.item.EnchantmentRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -14,6 +15,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.FireBlock;
 import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraftforge.fluids.FluidType;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
@@ -26,6 +28,7 @@ import slimeknights.mantle.data.predicate.item.ItemPredicate;
 import slimeknights.tconstruct.library.data.tinkering.AbstractModifierProvider;
 import slimeknights.tconstruct.library.json.LevelingInt;
 import slimeknights.tconstruct.library.json.RandomLevelingValue;
+import slimeknights.tconstruct.library.json.predicate.TinkerPredicate;
 import slimeknights.tconstruct.library.json.predicate.tool.HasModifierPredicate;
 import slimeknights.tconstruct.library.json.variable.mining.BlockLightVariable;
 import slimeknights.tconstruct.library.json.variable.mining.BlockTemperatureVariable;
@@ -50,6 +53,7 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.shared.TinkerAttributes;
 import slimeknights.tconstruct.shared.TinkerEffects;
 import slimeknights.tconstruct.tools.modules.MeltingModule;
+import slimeknights.tconstruct.tools.modules.armor.DepthProtectionModule;
 
 import static org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers.*;
 import static slimeknights.tconstruct.common.TinkerTags.Items.*;
@@ -174,9 +178,10 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                           .filter(ItemPredicate.and(ItemPredicate.tag(MODIFIABLE), ItemPredicate.tag(ARMOR).inverted(),
                                                                     ItemPredicate.tag(DreamtinkerTagKeys.Items.weapon_slot_excluded).inverted())).flatSlots(5))
                 .addModule(InventoryMenuModule.ANY);
-        buildModifier(Ids.shadow_blessing).levelDisplay(ModifierLevelDisplay.NO_LEVELS)
-                                          .addModule(AttributeModule.builder(TinkerAttributes.PROTECTION_CAP, AttributeModifier.Operation.ADDITION)
-                                                                    .tooltipStyle(AttributeModule.TooltipStyle.PERCENT).flat(0.05f));
+        buildModifier(Ids.shadow_blessing)
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(AttributeModule.builder(TinkerAttributes.PROTECTION_CAP, AttributeModifier.Operation.ADDITION)
+                                          .tooltipStyle(AttributeModule.TooltipStyle.PERCENT).flat(0.05f));
         buildModifier(Ids.silver_name_bee)
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
         buildModifier(Ids.the_romantic)
@@ -202,6 +207,25 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                           .target(LivingEntityPredicate.ANY)
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT);
+        buildModifier(Ids.lunarProtection)
+                .addModule(DepthProtectionModule.builder().baselineHeight(40).neutralRange(0).eachLevel(-2.5f))
+                .addModule(AttributeModule.builder(ForgeMod.ENTITY_GRAVITY.get(), AttributeModifier.Operation.MULTIPLY_BASE)
+                                          .tooltipStyle(AttributeModule.TooltipStyle.PERCENT).flat(-0.05f));
+        buildModifier(Ids.lunarAttractive)
+                .addModule(MobEffectModule.builder(MobEffects.LEVITATION)
+                                          .level(RandomLevelingValue.perLevel(1, 1))
+                                          .time(RandomLevelingValue.random(20, 10))
+                                          .target(LivingEntityPredicate.ANY)
+                                          .build(),
+                           ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT)
+                .addModule(ConditionalMeleeDamageModule.builder().target(TinkerPredicate.AIRBORNE.inverted()).eachLevel(-2f))
+                .addModule(ConditionalMiningSpeedModule.builder().holder(LivingEntityPredicate.ON_GROUND.inverted()).percent().allowIneffective().flat(1),
+                           ModifierHooks.BREAK_SPEED);
+        buildModifier(Ids.lunarRejection)
+                .addModule(ConditionalMeleeDamageModule.builder().target(TinkerPredicate.AIRBORNE).eachLevel(2f))
+                .addModule(ConditionalMiningSpeedModule.builder().holder(LivingEntityPredicate.ON_GROUND.inverted()).percent().allowIneffective().flat(1),
+                           ModifierHooks.BREAK_SPEED);
+
         addELModifiers();
         addMalumModifiers();
 
