@@ -44,6 +44,11 @@
     "dreamtinker:absorption_defense",
     "dreamtinker:despair_rain",
     "dreamtinker:despair_wind",
+    "dreamtinker:rainbow_catcher",
+    "dreamtinker:not_like_was",
+    "dreamtinker:light_in_dark",
+    "dreamtinker:light_emanation",
+    "dreamtinker:lunar_attractive",
     {
       "id": "dreamtinker:cursed_ring_bound",
       "required": false

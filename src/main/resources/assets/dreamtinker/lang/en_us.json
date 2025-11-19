@@ -345,7 +345,7 @@
   "modifier.dreamtinker.ophelia.description": "Triple Damage Received, But split to 2*total effective level +1 damages with random source",
   "modifier.dreamtinker.requiem": "Requiem",
   "modifier.dreamtinker.requiem.flavor": "The requiem flows on in silence.",
-  "modifier.dreamtinker.requiem.description": "Reduce number of harmful effect/4 damages and gain protection on non-source damage",
+  "modifier.dreamtinker.requiem.description": "Reduce number of harmful effect/4 damages and immune to non-source damage",
   "modifier.dreamtinker.peaches_in_memory": "Peaches in Memory",
   "modifier.dreamtinker.peaches_in_memory.flavor": "embody life's delights and pleasures, but are equally fragile and short-lived",
   "modifier.dreamtinker.peaches_in_memory.description": "Increase experience gain and Bad Potion Time, decrease tool damage taken",

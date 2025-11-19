@@ -65,7 +65,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.desire_gem, ARMOR, absorption_defense.getId());
 
         addDefaultTraits(DreamtinkerMaterialIds.despair_gem, despair_mist, despair_rain, despair_wind);
-        addTraits(DreamtinkerMaterialIds.despair_gem, ARMOR, Ids.ophelia, requiem.getId(), Ids.peaches_in_memory);
+        addTraits(DreamtinkerMaterialIds.despair_gem, ARMOR, Ids.ophelia, Ids.requiem, Ids.peaches_in_memory);
 
         addDefaultTraits(DreamtinkerMaterialIds.shadowskin, Ids.shadow_blessing, TinkerModifiers.overslime.getId());
 

@@ -225,6 +225,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(ConditionalMeleeDamageModule.builder().target(TinkerPredicate.AIRBORNE).eachLevel(2f))
                 .addModule(ConditionalMiningSpeedModule.builder().holder(LivingEntityPredicate.ON_GROUND.inverted()).percent().allowIneffective().flat(1),
                            ModifierHooks.BREAK_SPEED);
+        buildModifier(Ids.requiem);
 
         addELModifiers();
         addMalumModifiers();

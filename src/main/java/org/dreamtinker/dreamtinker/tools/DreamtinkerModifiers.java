@@ -46,7 +46,6 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidi
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem.despair_mist;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem.despair_rain;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem.despair_wind;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem.requiem;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.echo_shard.echoed_attack;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.echo_shard.echoed_defence;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.lupus_antimony.the_wolf_answer;
@@ -142,7 +141,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<despair_mist> despair_mist = MODIFIERS.register("despair_mist", despair_mist::new);
     public static final StaticModifier<despair_rain> despair_rain = MODIFIERS.register("despair_rain", despair_rain::new);
     public static final StaticModifier<despair_wind> despair_wind = MODIFIERS.register("despair_wind", despair_wind::new);
-    public static final StaticModifier<requiem> requiem = MODIFIERS.register("requiem", requiem::new);
     public static final StaticModifier<weapon_dreams> weapon_dreams = MODIFIERS.register("weapon_dreams", weapon_dreams::new);
     public static final StaticModifier<HoneyTastyModifier> HoneyTastyModifier = MODIFIERS.register("honey_tasty", HoneyTastyModifier::new);
     public static final StaticModifier<rainbowCatcher> rainbowCatcher = MODIFIERS.register("rainbow_catcher", rainbowCatcher::new);
@@ -223,6 +221,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId homunculusGift = id("homunculus_gift");
         public static final ModifierId ophelia = id("ophelia");
         public static final ModifierId peaches_in_memory = id("peaches_in_memory");
+        public static final ModifierId requiem = id("requiem");
         public static final ModifierId weapon_slots = id("weapon_slots");
         public static final ModifierId shadow_blessing = id("shadow_blessing");
         public static final ModifierId silver_name_bee = id("silver_name_bee");

@@ -6,6 +6,7 @@ import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -43,7 +44,7 @@ public class GeneralHurtHandler {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void LivingHurtEvent(LivingHurtEvent event) {
         DamageSource dmg = event.getSource();
-        Entity dmgEntity = event.getEntity();
+        Entity dmgEntity = dmg.getEntity();
         float damageAmount = event.getAmount();
         LivingEntity victim = event.getEntity();
         if (0 == damageAmount || event.isCanceled())
@@ -61,17 +62,29 @@ public class GeneralHurtHandler {
         if (0 < fragileButBright && rds.nextFloat() < FragileDodge.get() * fragileButBright){
             event.setAmount(0);
             event.setCanceled(true);
+            return;
         }
         if (null != getPossibleToolWithModifier(victim, DreamtinkerModifiers.as_one.getId()))
             if (victim.getMaxHealth() < event.getAmount()){
                 victim.setAbsorptionAmount(Math.min(victim.getAbsorptionAmount() + event.getAmount(), Integer.MAX_VALUE));
                 event.setAmount(0);
                 event.setCanceled(true);
+                return;
             }
-        if (event.getSource().is(DamageTypeTags.IS_EXPLOSION))
+        if (event.getSource().is(DamageTypeTags.IS_EXPLOSION)){
             if (ModifierInHand(event.getEntity(), DreamtinkerModifiers.ewige_widerkunft.getId()))
-                if (event.getEntity().getHealth() <= event.getAmount())
+                if (event.getEntity().getHealth() <= event.getAmount()){
                     event.setCanceled(true);
+                    return;
+                }
+        }
+        if (null == dmgEntity){
+            if (DTModifierCheck.ModifierInBody(victim, DreamtinkerModifiers.Ids.requiem)){
+                event.setAmount(0);
+                event.setCanceled(true);
+                return;
+            }
+        }
 
 
         boolean Not_Tran = !data.contains(TAG_DamageSourceTransmission) || data.getLong(TAG_DamageSourceTransmission) < world.getGameTime();
@@ -99,7 +112,7 @@ public class GeneralHurtHandler {
                 for (int i = 0; i < 2 * ophelia + 1; i++) {
                     DamageSource source = DreamtinkerDamageTypes.randomSourceNotSame(registryAccess, dmg, rds);
                     victim.invulnerableTime = 0;
-                    if (victim.isAlive())
+                    if (victim.isAlive() && 0 <= victim.getHealth())
                         victim.hurt(source, amount / (2 * ophelia + 1));
                 }
                 victim.invulnerableTime = inv;
@@ -113,6 +126,19 @@ public class GeneralHurtHandler {
         }
 
         if (dmgEntity instanceof LivingEntity offender){
+            int requiem = DTModifierCheck.getEntityBodyModifierNum(offender, DreamtinkerModifiers.Ids.requiem);
+            if (0 < requiem){
+                float reduced = victim.getActiveEffects().stream()
+                                      .filter(e -> e.getEffect().getCategory() == MobEffectCategory.HARMFUL).count() / 4.0f * requiem;
+                reduced = event.getAmount() - reduced;
+                if (reduced <= 0){
+                    event.setAmount(0);
+                    event.setCanceled(true);
+                    return;
+                }else
+                    event.setAmount(reduced);
+            }
+
             if (dmg.getDirectEntity() instanceof Projectile || dmg.is(IS_PROJECTILE)){
                 ItemStack leg = offender.getItemBySlot(EquipmentSlot.LEGS);
                 if (leg.is(TinkerTags.Items.LEGGINGS)){

@@ -345,7 +345,7 @@
   "modifier.dreamtinker.ophelia.description": "将受到的伤害变成3倍，但转化为2*生效等级+1数量的不同类型的伤害。",
   "modifier.dreamtinker.requiem": "镇魂曲",
   "modifier.dreamtinker.requiem.flavor": "镇魂曲静静的流淌着",
-  "modifier.dreamtinker.requiem.description": "每等级减少负面效果数量/4的伤害，并增加对无来源伤害的保护",
+  "modifier.dreamtinker.requiem.description": "每等级减少负面效果数量/4的伤害，并免疫无来源伤害",
   "modifier.dreamtinker.peaches_in_memory": "记忆中的你",
   "modifier.dreamtinker.peaches_in_memory.flavor": "汇聚了生命的喜悦与甜美，也同样脆弱易逝",
   "modifier.dreamtinker.peaches_in_memory.description": "增加阅历和负面效果持续；减少耐久消耗",
