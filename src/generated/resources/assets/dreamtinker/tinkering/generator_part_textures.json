@@ -187,11 +187,6 @@
     },
     {
       "allow_animated": false,
-      "path": "dreamtinker:item/tool/armor/under_plate/chestplate/plating_broken",
-      "stat_type": "tconstruct:plating_chestplate"
-    },
-    {
-      "allow_animated": false,
       "path": "dreamtinker:item/tool/armor/under_plate/chestplate/maille",
       "stat_type": "tconstruct:maille"
     },
@@ -203,41 +198,6 @@
     {
       "allow_animated": false,
       "path": "dreamtinker:item/tool/armor/under_plate/chestplate/maille1",
-      "stat_type": "tconstruct:maille"
-    },
-    {
-      "allow_animated": false,
-      "path": "dreamtinker:item/tool/armor/under_plate/chestplate/maille1_broken",
-      "stat_type": "tconstruct:maille"
-    },
-    {
-      "allow_animated": false,
-      "path": "dreamtinker:item/tool/armor/under_plate/leggings/plating",
-      "stat_type": "tconstruct:plating_leggings"
-    },
-    {
-      "allow_animated": false,
-      "path": "dreamtinker:item/tool/armor/under_plate/leggings/plating_broken",
-      "stat_type": "tconstruct:plating_leggings"
-    },
-    {
-      "allow_animated": false,
-      "path": "dreamtinker:item/tool/armor/under_plate/leggings/maille",
-      "stat_type": "tconstruct:maille"
-    },
-    {
-      "allow_animated": false,
-      "path": "dreamtinker:item/tool/armor/under_plate/leggings/maille_broken",
-      "stat_type": "tconstruct:maille"
-    },
-    {
-      "allow_animated": false,
-      "path": "dreamtinker:item/tool/armor/under_plate/leggings/maille1",
-      "stat_type": "tconstruct:maille"
-    },
-    {
-      "allow_animated": false,
-      "path": "dreamtinker:item/tool/armor/under_plate/leggings/maille1_broken",
       "stat_type": "tconstruct:maille"
     },
     {
@@ -267,11 +227,6 @@
     },
     {
       "allow_animated": false,
-      "path": "dreamtinker:item/tool/armor/under_plate/boots/maille1_broken",
-      "stat_type": "tconstruct:maille"
-    },
-    {
-      "allow_animated": false,
       "path": "dreamtinker:item/tool/armor/under_plate/helmet/plating",
       "stat_type": "tconstruct:plating_helmet"
     },
@@ -283,6 +238,26 @@
     {
       "allow_animated": false,
       "path": "dreamtinker:item/tool/armor/under_plate/helmet/maille1",
+      "stat_type": "tconstruct:maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/leggings/plating",
+      "stat_type": "tconstruct:plating_leggings"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/leggings/plating_broken",
+      "stat_type": "tconstruct:plating_leggings"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/leggings/maille",
+      "stat_type": "tconstruct:maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/leggings/maille1",
       "stat_type": "tconstruct:maille"
     }
   ],
