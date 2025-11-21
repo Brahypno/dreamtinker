@@ -8,6 +8,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
@@ -148,6 +149,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<light_in_dark> light_in_dark = MODIFIERS.register("light_in_dark", light_in_dark::new);
     public static final StaticModifier<lightRangeBoost> light_emanation = MODIFIERS.register("light_emanation", lightRangeBoost::new);
     public static final StaticModifier<LunarDurabilityDefense> lunar_defense = MODIFIERS.register("lunar_defense", LunarDurabilityDefense::new);
+    public static final StaticModifier<blockViewer> OreViewer = MODIFIERS.register("ore_viewer", () -> new blockViewer(Tags.Blocks.ORES.location(), 0.2f));
 
     //etherium
     public static final StaticModifier<astral_break> astral_break = EL_MODIFIERS.register("astral_break", astral_break::new);
@@ -233,6 +235,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId lunarProtection = id("lunar_protection");
         public static final ModifierId lunarAttractive = id("lunar_attractive");
         public static final ModifierId lunarRejection = id("lunar_rejection");
+        public static final ModifierId slowness = id("ssss_slowness");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");

@@ -21,7 +21,7 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
     protected void addMaterials() {
         addMaterial(DreamtinkerMaterialIds.echo_alloy, 4, 35, false, false, null);
         addMaterial(DreamtinkerMaterialIds.moonlight_ice, 3, 35, false, false, null);
-        addMaterial(DreamtinkerMaterialIds.valentinite, 2, 16, true, false, null);
+        addMaterial(DreamtinkerMaterialIds.valentinite, 2, 5, true, false, null);
         addMaterial(DreamtinkerMaterialIds.nigrescence_antimony, 3, 23, false, false, null);
         addMaterial(DreamtinkerMaterialIds.nigrescence_string, 3, 23, false, false, null);
         addMaterial(DreamtinkerMaterialIds.metallivorous_stibium_lupus, 5, 45, false, false, null);
@@ -39,7 +39,8 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.black_sapphire, 4, 35, false, false, null);
         addMaterial(DreamtinkerMaterialIds.scolecite, 3, 20, false, false, null);
         addMaterial(DreamtinkerMaterialIds.shiningFlint, 3, 20, true, false, null);
-        addMaterial(DreamtinkerMaterialIds.orichalcum, 3, 20, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.orichalcum, 2, 5, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.cold_iron, 2, 6, false, false, null);
 
 
         addMaterial(DreamtinkerMaterialIds.etherium, 4, 40, false, false, modLoaded("enigmaticlegacy"));

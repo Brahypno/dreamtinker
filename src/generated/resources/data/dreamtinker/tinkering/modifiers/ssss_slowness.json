@@ -1,0 +1,22 @@
+{
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:mob_effect",
+      "effect": "minecraft:slowness",
+      "hooks": [
+        "tconstruct:melee_hit",
+        "tconstruct:projectile_hit"
+      ],
+      "level": {
+        "flat": 1.0,
+        "per_level": 1.0
+      },
+      "time": {
+        "flat": 10.0,
+        "random": 5.0
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

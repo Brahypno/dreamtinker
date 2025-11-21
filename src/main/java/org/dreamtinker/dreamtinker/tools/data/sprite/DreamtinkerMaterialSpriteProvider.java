@@ -260,6 +260,18 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFFB872E8) // 明亮紫（略带粉光）
                                                 .addARGB(255, 0xFFCB9CFF) // 顶级高光：淡紫反光
                                                 .build());
+        this.buildMaterial(DreamtinkerMaterialIds.cold_iron)
+            .meleeHarvest().armor().ranged().shieldCore()
+            .fallbacks("metal")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(0, 0xFF2C488F) // 最暗：偏深的冷蓝
+                                                .addARGB(63, 0xFF3B5B97) // 深蓝阴影
+                                                .addARGB(102, 0xFF4489CC) // 中亮冰蓝（主体色偏暗）
+                                                .addARGB(140, 0xFFA5E2E6) // 浅冰蓝高光
+                                                .addARGB(178, 0xFFAAEAEE) // 更亮的蓝白高光
+                                                .addARGB(216, 0xFFB0F1F5) // 接近白的冷光
+                                                .addARGB(255, 0xFFFDFDFD) // 几乎纯白的最强反光
+                                                .build());
         addELMaterials();
         addMalumMaterials();
     }

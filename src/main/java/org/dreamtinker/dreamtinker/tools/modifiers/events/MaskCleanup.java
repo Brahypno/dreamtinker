@@ -6,6 +6,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.utils.BlockViewerService;
 import org.dreamtinker.dreamtinker.utils.MaskService;
 
 // 监听登出并清理该玩家的遮罩状态
@@ -14,8 +15,7 @@ public final class MaskCleanup {
     @SubscribeEvent
     public static void onLogout(net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent e) {
         if (e.getEntity() instanceof net.minecraft.server.level.ServerPlayer sp){
-            MaskService.sendMaskOff(sp, 0);
-            MaskService.clear(sp); // 只在下线时清
+            clearServerPlayer(sp);
         }
     }
 
@@ -23,6 +23,7 @@ public final class MaskCleanup {
     @SubscribeEvent
     public static void onServerStopped(net.minecraftforge.event.server.ServerStoppedEvent e) {
         MaskService.clearAll();
+        BlockViewerService.clearAll();
     }
 
     @SubscribeEvent
@@ -31,9 +32,16 @@ public final class MaskCleanup {
         if (entity.level().isClientSide)
             return;
         if (entity instanceof ServerPlayer player){
-            MaskService.sendMaskOff(player, 0);
-            MaskService.clear(player);
+            clearServerPlayer(player);
         }
     }
+
+    private static void clearServerPlayer(ServerPlayer player) {
+        MaskService.sendMaskOff(player, 0);
+        MaskService.clear(player);
+        BlockViewerService.sendBlockViewOff(player);
+        BlockViewerService.clear(player);
+    }
 }
+
 

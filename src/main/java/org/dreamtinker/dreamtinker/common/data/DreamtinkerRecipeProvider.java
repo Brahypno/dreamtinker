@@ -556,6 +556,15 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         materialRecipe(consumer, DreamtinkerMaterialIds.orichalcum, Ingredient.of(DreamtinkerCommon.OrichalcumBlock.get()), 9, 1,
                        materials_folder + "orichalcum/block");
 
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.cold_iron, DreamtinkerFluids.molten_cold_iron, FluidValues.INGOT,
+                               materials_folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.cold_iron, Ingredient.of(DreamtinkerCommon.cold_iron_ingot.get()), 1, 1,
+                       materials_folder + "cold_iron/ingot");
+        materialRecipe(consumer, DreamtinkerMaterialIds.cold_iron, Ingredient.of(DreamtinkerCommon.cold_iron_nugget.get()), 1, 9,
+                       materials_folder + "cold_iron/nugget");
+        materialRecipe(consumer, DreamtinkerMaterialIds.cold_iron, Ingredient.of(DreamtinkerCommon.ColdIronBlock.get()), 9, 1,
+                       materials_folder + "cold_iron/block");
+
     }
 
     private void addCompactMaterialRecipes(Consumer<FinishedRecipe> consumer) {

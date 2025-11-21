@@ -37,6 +37,7 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
         buildRenderInfo(DreamtinkerMaterialIds.scolecite).color(0xFF12161A).fallbacks("gem").luminosity(12);
         buildRenderInfo(DreamtinkerMaterialIds.shiningFlint).color(0xFF3C96B9).fallbacks("crystal").luminosity(15);
         buildRenderInfo(DreamtinkerMaterialIds.orichalcum).color(0xFF51C272).fallbacks("metal").luminosity(0);
+        buildRenderInfo(DreamtinkerMaterialIds.cold_iron).color(0xFF2C488F).fallbacks("metal").luminosity(0);
 
         buildRenderInfo(DreamtinkerMaterialIds.etherium).color(0xFF96E8E0).fallbacks("metal", "crystal").luminosity(15);
         buildRenderInfo(DreamtinkerMaterialIds.nefarious).color(0xFF8513A0).fallbacks("metal", "crystal", "gem").luminosity(8);

@@ -83,8 +83,12 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          HandleMaterialStats.multipliers().durability(0.7f).miningSpeed(1.0f).attackDamage(1.1f).attackSpeed(1.05f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.orichalcum,
-                         new HeadMaterialStats(600, 7f, Tiers.IRON, 1.25f),
+                         new HeadMaterialStats(420, 7f, Tiers.IRON, 1.25f),
                          HandleMaterialStats.multipliers().durability(0.8f).miningSpeed(1.2f).attackDamage(1.1f).attackSpeed(1.05f).build(),
+                         StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.cold_iron,
+                         new HeadMaterialStats(400, 5f, Tiers.IRON, 1.5f),
+                         HandleMaterialStats.multipliers().durability(1.05f).miningSpeed(1.05f).attackDamage(1.05f).attackSpeed(0.90f).build(),
                          StatlessMaterialStats.BINDING);
 
         addELMeleeHarvest();
@@ -168,8 +172,11 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new LimbMaterialStats(300, -0.3f, 0.25f, -0.05f),
                          new GripMaterialStats(-0.2f, -0.05f, 1.75f));
         addMaterialStats(DreamtinkerMaterialIds.orichalcum,
-                         new LimbMaterialStats(600, 0.3f, 0.15f, 0f),
+                         new LimbMaterialStats(400, -0.1f, 0.15f, 0f),
                          new GripMaterialStats(-0.2f, 0.05f, 1.25f));
+        addMaterialStats(DreamtinkerMaterialIds.cold_iron,
+                         new LimbMaterialStats(500, -0.4f, 0.2f, 0f),
+                         new GripMaterialStats(0.2f, 0f, 1.5f));
 
         addCompactRanged();
     }
@@ -239,6 +246,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                             StatlessMaterialStats.MAILLE);
         addArmorShieldStats(DreamtinkerMaterialIds.orichalcum,
                             PlatingMaterialStats.builder().durabilityFactor(26).armor(2, 4, 6, 2).toughness(1f).knockbackResistance(2f),
+                            StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
+        addArmorShieldStats(DreamtinkerMaterialIds.cold_iron,
+                            PlatingMaterialStats.builder().durabilityFactor(17).armor(3, 5, 6, 2).toughness(1f).knockbackResistance(2f),
                             StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
 
         addArmorShieldStats(DreamtinkerMaterialIds.etherium,

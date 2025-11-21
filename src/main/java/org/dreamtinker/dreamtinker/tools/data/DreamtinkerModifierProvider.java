@@ -226,6 +226,13 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(ConditionalMiningSpeedModule.builder().holder(LivingEntityPredicate.ON_GROUND.inverted()).percent().allowIneffective().flat(1),
                            ModifierHooks.BREAK_SPEED);
         buildModifier(Ids.requiem);
+        buildModifier(Ids.slowness)
+                .addModule(MobEffectModule.builder(MobEffects.MOVEMENT_SLOWDOWN)
+                                          .level(RandomLevelingValue.perLevel(1, 1))
+                                          .time(RandomLevelingValue.random(10, 5))
+                                          .target(LivingEntityPredicate.ANY)
+                                          .build(),
+                           ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT);
 
         addELModifiers();
         addMalumModifiers();

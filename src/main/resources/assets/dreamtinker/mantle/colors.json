@@ -109,7 +109,9 @@
     "lunar_protection": "#552060",
     "lunar_defense": "#6D2975",
     "lunar_attractive": "#8A3FA8",
-    "lunar_rejection": "#8A3FA8"
+    "lunar_rejection": "#8A3FA8",
+    "ore_viewer": "#4489CC",
+    "ssss_slowness": "#A5E2E6"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
@@ -141,7 +143,8 @@
     "rainbow_honey_crystal": "#B9C532",
     "black_sapphire": "#1A1F26",
     "scolecite": "#D5C9C1",
-    "orichalcum": "#552060"
+    "orichalcum": "#552060",
+    "cold_iron": "#4489CC"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873",

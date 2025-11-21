@@ -32,5 +32,7 @@ public class Dnetwork {
                                 RightClickEmptyPacket::handle);
         CHANNEL.registerMessage(packetId++, S2CUseRemainPacket.class, S2CUseRemainPacket::encode, S2CUseRemainPacket::decode, S2CUseRemainPacket::handle,
                                 Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        CHANNEL.registerMessage(packetId++, WallVisionSyncPacket.class, WallVisionSyncPacket::toBytes, WallVisionSyncPacket::new, WallVisionSyncPacket::handle,
+                                Optional.of(NetworkDirection.PLAY_TO_CLIENT));
     }
 }

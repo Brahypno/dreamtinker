@@ -83,6 +83,9 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.orichalcum, Ids.lunarAttractive, Ids.lunarRejection);
         addTraits(DreamtinkerMaterialIds.orichalcum, ARMOR, Ids.lunarProtection, lunar_defense.getId());
 
+        addDefaultTraits(DreamtinkerMaterialIds.cold_iron, Ids.slowness);
+        addTraits(DreamtinkerMaterialIds.cold_iron, ARMOR, OreViewer.getId());
+
         callGetOrCreate(this, DreamtinkerMaterialIds.etherium).setTraits(MELEE_HARVEST, List.of(
                 new ModifierEntry(ModifierIds.smite, 2),
                 new ModifierEntry(explosive_hit.getId(), 1),
