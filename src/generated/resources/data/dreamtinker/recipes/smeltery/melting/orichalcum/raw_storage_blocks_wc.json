@@ -1,0 +1,25 @@
+{
+  "type": "tconstruct:ore_melting",
+  "byproducts": [
+    {
+      "amount": 810,
+      "fluid": "dreamtinker:molten_cold_iron"
+    }
+  ],
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:ingots/silver"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:storage_blocks/raw_orichalcum"
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 810,
+    "fluid": "dreamtinker:molten_orichalcum"
+  },
+  "temperature": 900,
+  "time": 63
+}

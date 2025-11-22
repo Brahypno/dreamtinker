@@ -24,8 +24,10 @@ import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
+import net.minecraftforge.common.Tags;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
+import org.dreamtinker.dreamtinker.world.TagAndTagRuleTest;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -81,6 +83,11 @@ public class ModWorldGen {
     public static ResourceKey<PlacedFeature> placedSmallOrichalcumOre =
             key(Registries.PLACED_FEATURE, "orichalcum_ore");
 
+    public static ResourceKey<ConfiguredFeature<?, ?>> configuredSmallShadowSilverOre =
+            key(Registries.CONFIGURED_FEATURE, "shadow_silver_ore");
+    public static ResourceKey<PlacedFeature> placedSmallShadowSilverOre =
+            key(Registries.PLACED_FEATURE, "shadow_silver_ore");
+
 
     /**
      * ConfiguredFeature：一簇水仙（cross 小花），仅在能存活的位置尝试放置
@@ -123,16 +130,27 @@ public class ModWorldGen {
 
         BlockState scoleciteOre = DreamtinkerCommon.scoleciteOre.get().defaultBlockState();
         register(ctx, configuredLargeScoleciteOre, Feature.ORE, new OreConfiguration(basalt, scoleciteOre, 9));
+
         var cold_iron = List.of(
                 OreConfiguration.target(new BlockMatchTest(Blocks.IRON_ORE), DreamtinkerCommon.coldIronOre.get().defaultBlockState()),
                 OreConfiguration.target(new BlockMatchTest(Blocks.DEEPSLATE_IRON_ORE), DreamtinkerCommon.DeepslateColdIronOre.get().defaultBlockState())
         );
         register(ctx, configuredSmallColdIronOre, Feature.ORE, new OreConfiguration(cold_iron, 4, 0.3f));
+
         var orichalcum = List.of(
                 OreConfiguration.target(new BlockMatchTest(Blocks.COPPER_ORE), DreamtinkerCommon.OrichalcumOre.get().defaultBlockState()),
                 OreConfiguration.target(new BlockMatchTest(Blocks.DEEPSLATE_COPPER_ORE), DreamtinkerCommon.DeepslateOrichalcumOre.get().defaultBlockState())
         );
         register(ctx, configuredSmallOrichalcumOre, Feature.ORE, new OreConfiguration(orichalcum, 4, 0.3f));
+
+
+        var shadowSilver = List.of(
+                OreConfiguration.target(new TagAndTagRuleTest(Dreamtinker.forgeBlockTag("ores/silver"), Tags.Blocks.ORES_IN_GROUND_STONE),
+                                        DreamtinkerCommon.ShadowSilverOre.get().defaultBlockState()),
+                OreConfiguration.target(new TagAndTagRuleTest(Dreamtinker.forgeBlockTag("ores/silver"), Tags.Blocks.ORES_IN_GROUND_DEEPSLATE),
+                                        DreamtinkerCommon.DeepslateShadowSilverOre.get().defaultBlockState())
+        );
+        register(ctx, configuredSmallShadowSilverOre, Feature.ORE, new OreConfiguration(shadowSilver, 2, 0.2f));
     }
 
     /**
@@ -184,6 +202,11 @@ public class ModWorldGen {
                  CountPlacement.of(3),
                  InSquarePlacement.spread(),
                  HeightRangePlacement.uniform(VerticalAnchor.absolute(-12), VerticalAnchor.absolute(112)),
+                 BiomeFilter.biome());
+        register(ctx, placedSmallShadowSilverOre, configuredSmallShadowSilverOre,
+                 CountPlacement.of(3),
+                 InSquarePlacement.spread(),
+                 HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128)),
                  BiomeFilter.biome());
     }
 

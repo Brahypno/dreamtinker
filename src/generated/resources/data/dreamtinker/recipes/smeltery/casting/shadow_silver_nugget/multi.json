@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/nugget"
+  },
+  "cooling_time": 22,
+  "fluid": {
+    "amount": 10,
+    "fluid": "dreamtinker:molten_shadow_silver"
+  },
+  "result": "dreamtinker:shadow_silver_nugget"
+}

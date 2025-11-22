@@ -75,6 +75,12 @@ public class DreamtinkerTagKeys {
         public static final TagKey<Item> coldIronOre = forgeTag("ores/cold_iron");
         public static final TagKey<Item> coldIronBlock = forgeTag("storage_blocks/cold_iron");
         public static final TagKey<Item> RawColdIronBlock = forgeTag("storage_blocks/raw_cold_iron");
+        public static final TagKey<Item> ShadowSilverNuggets = forgeTag("nuggets/shadow_silver");
+        public static final TagKey<Item> ShadowSilverIngot = forgeTag("ingots/shadow_silver");
+        public static final TagKey<Item> raw_ShadowSilver = forgeTag("raw_materials/shadow_silver");
+        public static final TagKey<Item> ShadowSilverOre = forgeTag("ores/shadow_silver");
+        public static final TagKey<Item> ShadowSilverBlock = forgeTag("storage_blocks/shadow_silver");
+        public static final TagKey<Item> RawShadowSilverBlock = forgeTag("storage_blocks/raw_shadow_silver");
 
     }
 
@@ -101,5 +107,8 @@ public class DreamtinkerTagKeys {
         public static final TagKey<Block> coldIronOre = forgeTag("ores/cold_iron");
         public static final TagKey<Block> coldIronBlock = forgeTag("storage_blocks/cold_iron");
         public static final TagKey<Block> RawColdIronBlock = forgeTag("storage_blocks/raw_cold_iron");
+        public static final TagKey<Block> ShadowSilverOre = forgeTag("ores/shadow_silver");
+        public static final TagKey<Block> ShadowSilverBlock = forgeTag("storage_blocks/shadow_silver");
+        public static final TagKey<Block> RawShadowSilverBlock = forgeTag("storage_blocks/raw_shadow_silver");
     }
 }

@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:ore_melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:ingots/silver"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:raw_materials/shadow_silver"
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_shadow_silver"
+  },
+  "temperature": 1000,
+  "time": 66
+}

@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "item": "dreamtinker:shadow_silver_nugget"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "dreamtinker:molten_shadow_silver"
+  },
+  "temperature": 1000,
+  "time": 199
+}

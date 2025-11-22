@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/ingot"
+  },
+  "cooling_time": 66,
+  "fluid": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_shadow_silver"
+  },
+  "result": "dreamtinker:shadow_silver_ingot"
+}

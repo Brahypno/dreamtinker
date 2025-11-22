@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:has_structure/stronghold",
+  "features": "dreamtinker:shadow_silver_ore",
+  "step": "underground_decoration"
+}

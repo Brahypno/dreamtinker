@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "dreamtinker:raw_shadow_silver_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "dreamtinker:raw_shadow_silver"
+  }
+}

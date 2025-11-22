@@ -1,5 +1,11 @@
 {
   "type": "tconstruct:ore_melting",
+  "byproducts": [
+    {
+      "amount": 180,
+      "fluid": "dreamtinker:molten_orichalcum"
+    }
+  ],
   "ingredient": {
     "tag": "forge:ores/cold_iron"
   },

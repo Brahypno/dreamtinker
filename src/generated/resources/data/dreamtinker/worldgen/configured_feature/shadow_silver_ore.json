@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:ore",
+  "config": {
+    "discard_chance_on_air_exposure": 0.2,
+    "size": 2,
+    "targets": [
+      {
+        "state": {
+          "Name": "dreamtinker:shadow_silver_ore"
+        },
+        "target": {
+          "predicate_type": "dreamtinker:tag_and_tag",
+          "tag1": "forge:ores/silver",
+          "tag2": "forge:ores_in_ground/stone"
+        }
+      },
+      {
+        "state": {
+          "Name": "dreamtinker:deepslate_shadow_silver_ore"
+        },
+        "target": {
+          "predicate_type": "dreamtinker:tag_and_tag",
+          "tag1": "forge:ores/silver",
+          "tag2": "forge:ores_in_ground/deepslate"
+        }
+      }
+    ]
+  }
+}

@@ -12,7 +12,8 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
+import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys.Blocks;
+import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys.Items;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.jetbrains.annotations.NotNull;
@@ -35,7 +36,7 @@ public class ItemTagProvider extends ItemTagsProvider {
     @Override
     protected void addTags(HolderLookup.@NotNull Provider Provider) {
         //tools
-        this.tag(DreamtinkerTagKeys.Items.weapon_slot_excluded).add(DreamtinkerTools.silence_glove.get(), DreamtinkerTools.tntarrow.get());
+        this.tag(Items.weapon_slot_excluded).add(DreamtinkerTools.silence_glove.get(), DreamtinkerTools.tntarrow.get());
         this.tag(TinkerTags.Items.TOOL_PARTS).add(DreamtinkerToolParts.explode_core.get());
         addItemsTags(DreamtinkerTools.mashou, MULTIPART_TOOL, DURABILITY, HARVEST, MELEE_PRIMARY, INTERACTABLE_RIGHT, SWORD, BROAD_TOOLS, BONUS_SLOTS,
                      ItemTags.SWORDS, AOE);
@@ -44,8 +45,10 @@ public class ItemTagProvider extends ItemTagsProvider {
         addItemsTags(DreamtinkerTools.tntarrow, MULTIPART_TOOL, DURABILITY, MELEE_WEAPON, SMALL_TOOLS, BONUS_SLOTS);
 
         this.tag(ItemTagRegistry.SCYTHE).add(TinkerTools.scythe.asItem(), TinkerTools.kama.asItem(), DreamtinkerTools.narcissus_wing.asItem());
+        this.tag(ItemTagRegistry.HIDDEN_UNTIL_BLACK_CRYSTAL)
+            .addOptional(malignant_gluttony.getId());
         addItemsTags(DreamtinkerTools.silence_glove, DURABILITY, MELEE_PRIMARY, BONUS_SLOTS, ANCIENT_TOOLS, STAFFS, SHIELDS,
-                     DreamtinkerTagKeys.Items.HANDS, DreamtinkerTagKeys.Items.CURIOS);
+                     Items.HANDS, Items.CURIOS);
         //parts
         this.tag(TinkerTags.Items.CASTS)
             .add(memory_cast.get(), wish_cast.get(), soul_cast.get(),
@@ -74,50 +77,55 @@ public class ItemTagProvider extends ItemTagsProvider {
 
 
         this.tag(Tags.Items.INGOTS)
-            .add(metallivorous_stibium_lupus.get(), regulus.get(), soul_steel.get(), orichalcum.get(), cold_iron_ingot.get())
+            .add(metallivorous_stibium_lupus.get(), regulus.get(), soul_steel.get(), orichalcum.get(), cold_iron_ingot.get(), shadow_silver_ingot.get())
             .addOptional(soul_etherium.getId())
             .addOptional(malignant_gluttony.getId());
-        this.tag(DreamtinkerTagKeys.Items.OrichalcumIngot).add(orichalcum.get());
-        this.tag(DreamtinkerTagKeys.Items.coldIronIngot).add(cold_iron_ingot.get());
+        this.tag(Items.OrichalcumIngot).add(orichalcum.get());
+        this.tag(Items.coldIronIngot).add(cold_iron_ingot.get());
+        this.tag(Items.ShadowSilverIngot).add(shadow_silver_ingot.get());
 
         this.tag(Tags.Items.GEMS)
             .add(valentinite.get(), nigrescence_antimony.get(), echo_alloy.get(), larimar.get(), amber.get(), desire_gem.get(), despair_gem.get(),
                  rainbow_honey_crystal.get(), black_sapphire.get(), scolecite.get());
 
-        this.tag(DreamtinkerTagKeys.Items.raw_stibnite).add(raw_stibnite.get());
-        this.tag(DreamtinkerTagKeys.Items.raw_orichalcum).add(raw_orichalcum.get());
-        this.tag(DreamtinkerTagKeys.Items.raw_coldIron).add(raw_cold_iron.get());
+        this.tag(Items.raw_stibnite).add(raw_stibnite.get());
+        this.tag(Items.raw_orichalcum).add(raw_orichalcum.get());
+        this.tag(Items.raw_coldIron).add(raw_cold_iron.get());
+        this.tag(Items.raw_ShadowSilver).add(raw_shadow_silver.get());
         this.tag(Tags.Items.RAW_MATERIALS)
-            .addTags(DreamtinkerTagKeys.Items.raw_stibnite, DreamtinkerTagKeys.Items.raw_orichalcum, DreamtinkerTagKeys.Items.raw_coldIron);
+            .addTags(Items.raw_stibnite, Items.raw_orichalcum, Items.raw_coldIron, Items.raw_ShadowSilver);
 
         this.tag(ItemTags.FOX_FOOD).add(white_peach.get());
         this.tag(ItemTags.ARROWS).add(DreamtinkerTools.tntarrow.get());
         addItemsTags(narcissus.asItem(), ItemTags.SMALL_FLOWERS, ItemTags.FLOWERS);
-        this.tag(ItemTagRegistry.HIDDEN_UNTIL_BLACK_CRYSTAL)
-            .addOptional(malignant_gluttony.getId());
-        this.tag(ItemTags.BEACON_PAYMENT_ITEMS)
-            .add(soul_steel.get(), orichalcum.get(), cold_iron_ingot.get());
 
-        this.tag(DreamtinkerTagKeys.Items.OrichalcumNuggets).add(orichalcum_nugget.get());
-        this.tag(DreamtinkerTagKeys.Items.coldIronNuggets).add(cold_iron_nugget.get());
+        this.tag(ItemTags.BEACON_PAYMENT_ITEMS)
+            .add(soul_steel.get(), orichalcum.get(), cold_iron_ingot.get(), shadow_silver_ingot.get());
+
+        this.tag(Items.OrichalcumNuggets).add(orichalcum_nugget.get());
+        this.tag(Items.coldIronNuggets).add(cold_iron_nugget.get());
+        this.tag(Items.ShadowSilverNuggets).add(shadow_silver_nugget.get());
         this.tag(Tags.Items.NUGGETS)
-            .addTags(DreamtinkerTagKeys.Items.OrichalcumNuggets, DreamtinkerTagKeys.Items.coldIronNuggets);
+            .addTags(Items.OrichalcumNuggets, Items.coldIronNuggets, Items.ShadowSilverNuggets);
 
         this.copy(Tags.Blocks.STORAGE_BLOCKS, Tags.Items.STORAGE_BLOCKS);
         this.copy(Tags.Blocks.ORE_RATES_SINGULAR, Tags.Items.ORE_RATES_SINGULAR);
         //this.copy(Tags.Blocks.ORES_IN_GROUND_NETHERRACK, Tags.Items.ORES_IN_GROUND_NETHERRACK);
         this.copy(Tags.Blocks.ORE_RATES_DENSE, Tags.Items.ORE_RATES_DENSE);
-        this.copy(DreamtinkerTagKeys.Blocks.larimarOre, DreamtinkerTagKeys.Items.larimarOre);
-        this.copy(DreamtinkerTagKeys.Blocks.amberOre, DreamtinkerTagKeys.Items.amberOre);
-        this.copy(DreamtinkerTagKeys.Blocks.scoleciteOre, DreamtinkerTagKeys.Items.scoleciteOre);
-        this.copy(DreamtinkerTagKeys.Blocks.soulSteelBlock, DreamtinkerTagKeys.Items.soulSteelBlock);
-        this.copy(DreamtinkerTagKeys.Blocks.blackSapphireOre, DreamtinkerTagKeys.Items.blackSapphireOre);
-        this.copy(DreamtinkerTagKeys.Blocks.OrichalcumBlock, DreamtinkerTagKeys.Items.OrichalcumBlock);
-        this.copy(DreamtinkerTagKeys.Blocks.OrichalcumOre, DreamtinkerTagKeys.Items.OrichalcumOre);
-        this.copy(DreamtinkerTagKeys.Blocks.RawOrichalcumBlock, DreamtinkerTagKeys.Items.RawOrichalcumBlock);
-        this.copy(DreamtinkerTagKeys.Blocks.coldIronBlock, DreamtinkerTagKeys.Items.coldIronBlock);
-        this.copy(DreamtinkerTagKeys.Blocks.coldIronOre, DreamtinkerTagKeys.Items.coldIronOre);
-        this.copy(DreamtinkerTagKeys.Blocks.RawColdIronBlock, DreamtinkerTagKeys.Items.RawColdIronBlock);
+        this.copy(Blocks.larimarOre, Items.larimarOre);
+        this.copy(Blocks.amberOre, Items.amberOre);
+        this.copy(Blocks.scoleciteOre, Items.scoleciteOre);
+        this.copy(Blocks.soulSteelBlock, Items.soulSteelBlock);
+        this.copy(Blocks.blackSapphireOre, Items.blackSapphireOre);
+        this.copy(Blocks.OrichalcumBlock, Items.OrichalcumBlock);
+        this.copy(Blocks.OrichalcumOre, Items.OrichalcumOre);
+        this.copy(Blocks.RawOrichalcumBlock, Items.RawOrichalcumBlock);
+        this.copy(Blocks.coldIronBlock, Items.coldIronBlock);
+        this.copy(Blocks.coldIronOre, Items.coldIronOre);
+        this.copy(Blocks.RawColdIronBlock, Items.RawColdIronBlock);
+        this.copy(Blocks.ShadowSilverBlock, Items.ShadowSilverBlock);
+        this.copy(Blocks.ShadowSilverOre, Items.ShadowSilverOre);
+        this.copy(Blocks.RawShadowSilverBlock, Items.RawShadowSilverBlock);
         this.copy(Tags.Blocks.ORES, Tags.Items.ORES);
     }
 

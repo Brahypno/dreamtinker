@@ -2,6 +2,7 @@
   "values": [
     "#forge:raw_materials/stibnite",
     "#forge:raw_materials/orichalcum",
-    "#forge:raw_materials/cold_iron"
+    "#forge:raw_materials/cold_iron",
+    "#forge:raw_materials/shadow_silver"
   ]
 }

@@ -22,7 +22,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
 import static net.minecraft.tags.BlockTags.*;
-import static net.minecraftforge.common.Tags.Blocks.STORAGE_BLOCKS;
 import static org.dreamtinker.dreamtinker.common.DreamtinkerCommon.*;
 
 public class BlockTagProvider extends BlockTagsProvider {
@@ -34,14 +33,18 @@ public class BlockTagProvider extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
         this.tag(BlockTags.DRAGON_IMMUNE).add(crying_obsidian_plane.get());
-        tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_DIAMOND_TOOL, crying_obsidian_plane, blackSapphireOre, DeepSlateBlackSapphireOre);
+
         this.tag(DreamtinkerTagKeys.Blocks.drop_peach).add(Blocks.BIRCH_LEAVES);
         addBlocksTags(narcissus.get(), Dreamtinker.forgeBlockTag("mineable/shears"), TinkerTags.Blocks.SLIMY_FUNGUS_CAN_GROW_THROUGH,
                       TinkerTags.Blocks.MINABLE_WITH_DAGGER, FLOWERS, ENDERMAN_HOLDABLE, SMALL_FLOWERS, SWORD_EFFICIENT, TinkerTags.Blocks.MINABLE_WITH_SCYTHE,
                       Dreamtinker.forgeBlockTag("mineable/sword"), TinkerTags.Blocks.MINABLE_WITH_SHEARS);
-        tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL, larimarOre, amberOre, scoleciteOre, soulSteelBlock, coldIronOre, DeepslateColdIronOre,
-                  DeepslateOrichalcumOre, OrichalcumBlock, RawOrichalcumBlock);
-        tagBlocks(BEACON_BASE_BLOCKS, soulSteelBlock, OrichalcumBlock, ColdIronBlock);
+
+        tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_DIAMOND_TOOL, crying_obsidian_plane, blackSapphireOre, DeepSlateBlackSapphireOre);
+        tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL, larimarOre, amberOre, scoleciteOre, soulSteelBlock,
+                  coldIronOre, DeepslateColdIronOre, ColdIronBlock, RawColdIronBlock,
+                  OrichalcumOre, DeepslateOrichalcumOre, OrichalcumBlock, RawOrichalcumBlock,
+                  ShadowSilverBlock, ShadowSilverOre, DeepslateShadowSilverOre, RawShadowSilverBlock);
+        tagBlocks(BEACON_BASE_BLOCKS, soulSteelBlock, OrichalcumBlock, ColdIronBlock, ShadowSilverBlock);
 
         tagBlocks(DreamtinkerTagKeys.Blocks.larimarOre, larimarOre);
         tagBlocks(DreamtinkerTagKeys.Blocks.amberOre, amberOre);
@@ -56,18 +59,25 @@ public class BlockTagProvider extends BlockTagsProvider {
         tagBlocks(DreamtinkerTagKeys.Blocks.coldIronBlock, ColdIronBlock);
         tagBlocks(DreamtinkerTagKeys.Blocks.RawColdIronBlock, RawColdIronBlock);
         tagBlocks(DreamtinkerTagKeys.Blocks.coldIronOre, coldIronOre, DeepslateColdIronOre);
-        this.tag(STORAGE_BLOCKS)
-            .addTags(DreamtinkerTagKeys.Blocks.OrichalcumBlock, DreamtinkerTagKeys.Blocks.RawOrichalcumBlock,
-                     DreamtinkerTagKeys.Blocks.RawColdIronBlock, DreamtinkerTagKeys.Blocks.coldIronBlock, DreamtinkerTagKeys.Blocks.soulSteelBlock);
+
+        tagBlocks(DreamtinkerTagKeys.Blocks.ShadowSilverBlock, ShadowSilverBlock);
+        tagBlocks(DreamtinkerTagKeys.Blocks.RawShadowSilverBlock, RawShadowSilverBlock);
+        tagBlocks(DreamtinkerTagKeys.Blocks.ShadowSilverOre, ShadowSilverOre, DeepslateShadowSilverOre);
+
+        tagBlocks(Tags.Blocks.STORAGE_BLOCKS, ColdIronBlock, RawColdIronBlock,
+                  OrichalcumOre, DeepslateOrichalcumOre, OrichalcumBlock, RawOrichalcumBlock,
+                  ShadowSilverBlock);
 
         this.tag(Tags.Blocks.ORES)
             .add(larimarOre.get(), amberOre.get(), blackSapphireOre.get(), DeepSlateBlackSapphireOre.get(), scoleciteOre.get(), DeepslateColdIronOre.get(),
                  coldIronOre.get(), OrichalcumOre.get(), DeepslateOrichalcumOre.get(), coldIronOre.get(), DeepslateColdIronOre.get());
+
         tagBlocks(Tags.Blocks.ORE_RATES_SINGULAR, larimarOre, amberOre, larimarOre, blackSapphireOre, DeepSlateBlackSapphireOre, OrichalcumOre,
-                  DeepslateOrichalcumOre);
+                  DeepslateOrichalcumOre, ShadowSilverOre, DeepslateShadowSilverOre);
         tagBlocks(Tags.Blocks.ORE_RATES_DENSE, scoleciteOre, DeepslateColdIronOre, coldIronOre);
-        this.tag(Tags.Blocks.ORES_IN_GROUND_DEEPSLATE).add(DeepSlateBlackSapphireOre.get(), DeepslateColdIronOre.get());
-        this.tag(Tags.Blocks.ORES_IN_GROUND_STONE).add(blackSapphireOre.get(), coldIronOre.get());
+
+        this.tag(Tags.Blocks.ORES_IN_GROUND_DEEPSLATE).add(DeepSlateBlackSapphireOre.get(), DeepslateColdIronOre.get(), DeepslateShadowSilverOre.get());
+        this.tag(Tags.Blocks.ORES_IN_GROUND_STONE).add(blackSapphireOre.get(), coldIronOre.get(), ShadowSilverOre.get());
     }
 
     @SafeVarargs

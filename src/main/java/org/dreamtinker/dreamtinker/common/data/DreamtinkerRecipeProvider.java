@@ -415,21 +415,55 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                      DreamtinkerFluids.molten_scolecite.get(), FluidValues.GEM, 1.0f)
                             .setOre(IMeltingContainer.OreRateType.GEM)
                             .save(consumer, location(folder + "scolecite/ore"));
+        Consumer<FinishedRecipe> wrapped;
+        wrapped = withCondition(consumer, tagCondition("ingots/silver"));
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.OrichalcumOre),
+                                     DreamtinkerFluids.molten_orichalcum.get(), FluidValues.INGOT * 2, 1.0f)
+                            .addByproduct(DreamtinkerFluids.molten_cold_iron.result(FluidValues.INGOT * 2))
+                            .setOre(IMeltingContainer.OreRateType.METAL)
+                            .save(wrapped, location(folder + "orichalcum/ore_wc"));
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.RawOrichalcumBlock),
+                                     DreamtinkerFluids.molten_orichalcum.get(), FluidValues.METAL_BLOCK, 1.0f)
+                            .addByproduct(DreamtinkerFluids.molten_cold_iron.result(FluidValues.METAL_BLOCK))
+                            .setOre(IMeltingContainer.OreRateType.METAL)
+                            .save(wrapped, location(folder + "orichalcum/raw_storage_blocks_wc"));
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.raw_orichalcum),
+                                     DreamtinkerFluids.molten_orichalcum.get(), FluidValues.INGOT, 1.0f)
+                            .addByproduct(DreamtinkerFluids.molten_cold_iron.result(FluidValues.INGOT))
+                            .setOre(IMeltingContainer.OreRateType.METAL)
+                            .save(wrapped, location(folder + "orichalcum/raw_materials_wc"));
+
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.ShadowSilverOre),
+                                     DreamtinkerFluids.molten_shadow_silver.get(), FluidValues.INGOT * 2, 1.0f)
+                            .setOre(IMeltingContainer.OreRateType.METAL)
+                            .save(wrapped, location(folder + "shadow_silver/ore_wc"));
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.RawShadowSilverBlock),
+                                     DreamtinkerFluids.molten_shadow_silver.get(), FluidValues.METAL_BLOCK, 1.0f)
+                            .setOre(IMeltingContainer.OreRateType.METAL)
+                            .save(wrapped, location(folder + "shadow_silver/raw_storage_blocks_wc"));
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.raw_ShadowSilver),
+                                     DreamtinkerFluids.molten_shadow_silver.get(), FluidValues.INGOT, 1.0f)
+                            .setOre(IMeltingContainer.OreRateType.METAL)
+                            .save(wrapped, location(folder + "shadow_silver/raw_materials_wc"));
+
+        wrapped = withCondition(consumer, not(tagCondition("ingots/silver")));
         MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.OrichalcumOre),
                                      DreamtinkerFluids.molten_orichalcum.get(), FluidValues.INGOT * 2, 1.0f)
                             .setOre(IMeltingContainer.OreRateType.METAL)
-                            .save(consumer, location(folder + "orichalcum/ore"));
+                            .save(wrapped, location(folder + "orichalcum/ore"));
         MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.RawOrichalcumBlock),
                                      DreamtinkerFluids.molten_orichalcum.get(), FluidValues.METAL_BLOCK, 1.0f)
                             .setOre(IMeltingContainer.OreRateType.METAL)
-                            .save(consumer, location(folder + "orichalcum/raw_storage_blocks"));
+                            .save(wrapped, location(folder + "orichalcum/raw_storage_blocks"));
         MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.raw_orichalcum),
                                      DreamtinkerFluids.molten_orichalcum.get(), FluidValues.INGOT, 1.0f)
                             .setOre(IMeltingContainer.OreRateType.METAL)
-                            .save(consumer, location(folder + "orichalcum/raw_materials"));
+                            .save(wrapped, location(folder + "orichalcum/raw_materials"));
+
         MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.coldIronOre),
                                      DreamtinkerFluids.molten_cold_iron.get(), FluidValues.INGOT * 2, 1.0f)
                             .setOre(IMeltingContainer.OreRateType.METAL)
+                            .addByproduct(DreamtinkerFluids.molten_orichalcum.result(FluidValues.INGOT * 2))
                             .save(consumer, location(folder + "cold_iron/ore"));
         MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.RawColdIronBlock),
                                      DreamtinkerFluids.molten_cold_iron.get(), FluidValues.METAL_BLOCK, 1.0f)
@@ -457,6 +491,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         meltCast(DreamtinkerFluids.molten_cold_iron.get(), DreamtinkerCommon.cold_iron_nugget.get(), FluidValues.NUGGET, consumer);
         meltCast(DreamtinkerFluids.molten_cold_iron.get(), DreamtinkerCommon.cold_iron_ingot.get(), FluidValues.INGOT, consumer);
         meltCastBlock(DreamtinkerFluids.molten_cold_iron.get(), DreamtinkerCommon.ColdIronBlock.get(), FluidValues.METAL_BLOCK, consumer);
+
+        meltCast(DreamtinkerFluids.molten_shadow_silver.get(), DreamtinkerCommon.shadow_silver_nugget.get(), FluidValues.NUGGET, consumer);
+        meltCast(DreamtinkerFluids.molten_shadow_silver.get(), DreamtinkerCommon.shadow_silver_ingot.get(), FluidValues.INGOT, consumer);
+        meltCastBlock(DreamtinkerFluids.molten_shadow_silver.get(), DreamtinkerCommon.ShadowSilverBlock.get(), FluidValues.METAL_BLOCK, consumer);
 
     }
 
@@ -712,12 +750,18 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                            .unlockedBy("has_unborn_egg", has(DreamtinkerCommon.unborn_egg.get()))
                            .save(consumer, location(common_folder + "casts/" + DreamtinkerCommon.wish_cast.get()));
         night_one_receipts(consumer, DreamtinkerCommon.soul_steel.get(), DreamtinkerCommon.soulSteelBlock.asItem());
+
         night_one_receipts(consumer, DreamtinkerCommon.raw_orichalcum.get(), DreamtinkerCommon.RawOrichalcumBlock.asItem());
         night_one_receipts(consumer, DreamtinkerCommon.orichalcum.get(), DreamtinkerCommon.OrichalcumBlock.asItem());
         night_one_receipts(consumer, DreamtinkerCommon.orichalcum_nugget.get(), DreamtinkerCommon.orichalcum.get());
+
         night_one_receipts(consumer, DreamtinkerCommon.raw_cold_iron.get(), DreamtinkerCommon.RawColdIronBlock.asItem());
         night_one_receipts(consumer, DreamtinkerCommon.cold_iron_ingot.get(), DreamtinkerCommon.ColdIronBlock.asItem());
         night_one_receipts(consumer, DreamtinkerCommon.cold_iron_nugget.get(), DreamtinkerCommon.cold_iron_ingot.get());
+
+        night_one_receipts(consumer, DreamtinkerCommon.raw_shadow_silver.get(), DreamtinkerCommon.RawShadowSilverBlock.asItem());
+        night_one_receipts(consumer, DreamtinkerCommon.shadow_silver_ingot.get(), DreamtinkerCommon.ShadowSilverBlock.asItem());
+        night_one_receipts(consumer, DreamtinkerCommon.shadow_silver_nugget.get(), DreamtinkerCommon.shadow_silver_ingot.get());
 
         new SpiritInfusionRecipeBuilder(ItemRegistry.THE_VESSEL.get(), 1, new ItemStack(DreamtinkerCommon.malignant_gluttony.get()))
                 .addExtraItem(ItemRegistry.NULL_SLATE.get(), 4)

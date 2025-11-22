@@ -45,6 +45,8 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
         this.dropSelf(DreamtinkerCommon.OrichalcumBlock.get());
         this.dropSelf(DreamtinkerCommon.RawColdIronBlock.get());
         this.dropSelf(DreamtinkerCommon.ColdIronBlock.get());
+        this.dropSelf(DreamtinkerCommon.RawShadowSilverBlock.get());
+        this.dropSelf(DreamtinkerCommon.ShadowSilverBlock.get());
     }
 
     private void addWorld() {
@@ -57,6 +59,8 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
         this.add(DreamtinkerCommon.DeepslateColdIronOre.get(), block -> createCopperLikeOreDrops(block, DreamtinkerCommon.raw_cold_iron.get()));
         this.add(DreamtinkerCommon.OrichalcumOre.get(), block -> createOreDrop(block, DreamtinkerCommon.raw_orichalcum.get()));
         this.add(DreamtinkerCommon.DeepslateOrichalcumOre.get(), block -> createOreDrop(block, DreamtinkerCommon.raw_orichalcum.get()));
+        this.add(DreamtinkerCommon.ShadowSilverOre.get(), block -> createOreDrop(block, DreamtinkerCommon.raw_shadow_silver.get()));
+        this.add(DreamtinkerCommon.DeepslateShadowSilverOre.get(), block -> createOreDrop(block, DreamtinkerCommon.raw_shadow_silver.get()));
     }
 
     protected LootTable.Builder createCopperLikeOreDrops(Block p_251306_, Item item) {

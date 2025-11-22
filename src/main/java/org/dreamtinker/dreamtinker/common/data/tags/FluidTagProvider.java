@@ -60,6 +60,7 @@ public class FluidTagProvider extends FluidTagsProvider {
         fluidTag(DreamtinkerFluids.molten_scolecite);
         fluidTag(DreamtinkerFluids.molten_orichalcum);
         fluidTag(DreamtinkerFluids.molten_cold_iron);
+        fluidTag(DreamtinkerFluids.molten_shadow_silver);
 
         this.tag(DreamtinkerTagKeys.Fluids.narcissus_wing_used).addTags(DreamtinkerFluids.blood_soul.getTag())
             .addOptionalTags(DreamtinkerFluids.liquid_arcana_juice.getTag(), DreamtinkerFluids.liquid_concentrated_gluttony.getTag());
@@ -67,7 +68,7 @@ public class FluidTagProvider extends FluidTagsProvider {
         tag(TinkerTags.Fluids.GLASS_TOOLTIPS).addTag(DreamtinkerFluids.molten_crying_obsidian.getTag());
         this.tag(TinkerTags.Fluids.METAL_TOOLTIPS)
             .addTags(DreamtinkerFluids.molten_lupi_antimony.getTag(), DreamtinkerFluids.molten_soul_steel.getTag(),
-                     DreamtinkerFluids.molten_orichalcum.getTag(), DreamtinkerFluids.molten_cold_iron.getTag())
+                     DreamtinkerFluids.molten_orichalcum.getTag(), DreamtinkerFluids.molten_cold_iron.getTag(), DreamtinkerFluids.molten_shadow_silver.getTag())
             .addOptionalTags(DreamtinkerFluids.molten_evil.getTag(), DreamtinkerFluids.molten_soul_aether.getTag(),
                              DreamtinkerFluids.molten_soul_stained_steel.getTag(), DreamtinkerFluids.molten_malignant_pewter.getTag(),
                              DreamtinkerFluids.molten_malignant_gluttony.getTag());
