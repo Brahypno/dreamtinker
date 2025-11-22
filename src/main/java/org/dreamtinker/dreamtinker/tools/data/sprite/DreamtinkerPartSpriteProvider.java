@@ -39,35 +39,35 @@ public class DreamtinkerPartSpriteProvider extends AbstractPartSpriteProvider {
                                    .addHandle("memory_orthant").addHandle("wish_orthant").addHandle("wish_orthant_1")
                                    .addLimb("soul_orthant").addLimb("persona_orthant")
                                    .addHead("reason_emanation");
-        for (ArmorItem.Type slot : new ArmorItem.Type[]{ArmorItem.Type.CHESTPLATE,}) {
-            buildTool("armor/under_plate/" + slot.getName()).disallowAnimated() // the armor model won't be animated, so don't animate the item
-                                                            .addPart("plating", PlatingMaterialStats.TYPES.get(slot.ordinal()).getId())
-                                                            .addBreakablePart("maille", StatlessMaterialStats.MAILLE.getIdentifier())
-                                                            .addPart("maille1", StatlessMaterialStats.MAILLE.getIdentifier());
-        }
-        buildTool("armor/under_plate/" + ArmorItem.Type.BOOTS.getName()).disallowAnimated() // the armor model won't be animated, so don't animate the item
-                                                                        .addBreakablePart("plating",
-                                                                                          PlatingMaterialStats.TYPES.get(ArmorItem.Type.BOOTS.ordinal())
-                                                                                                                    .getId())
-                                                                        .addBreakablePart("maille", StatlessMaterialStats.MAILLE.getIdentifier())
-                                                                        .addPart("maille1", StatlessMaterialStats.MAILLE.getIdentifier());
-        buildTool("armor/under_plate/" + ArmorItem.Type.HELMET.getName()).disallowAnimated() // the armor model won't be animated, so don't animate the item
-                                                                         .addPart("plating",
-                                                                                  PlatingMaterialStats.TYPES.get(ArmorItem.Type.HELMET.ordinal())
-                                                                                                            .getId())
-                                                                         .addPart("maille", StatlessMaterialStats.MAILLE.getIdentifier())
-                                                                         .addPart("maille1", StatlessMaterialStats.MAILLE.getIdentifier());
-        buildTool("armor/under_plate/" + ArmorItem.Type.LEGGINGS.getName()).disallowAnimated() // the armor model won't be animated, so don't animate the item
-                                                                           .addBreakablePart("plating",
-                                                                                             PlatingMaterialStats.TYPES.get(ArmorItem.Type.LEGGINGS.ordinal())
-                                                                                                                       .getId())
-                                                                           .addPart("maille", StatlessMaterialStats.MAILLE.getIdentifier())
-                                                                           .addPart("maille1", StatlessMaterialStats.MAILLE.getIdentifier());
+
+        buildTool("armor/under_plate/chestplate").disallowAnimated() // the armor model won't be animated, so don't animate the item
+                                                 .addPart("plating", PlatingMaterialStats.TYPES.get(ArmorItem.Type.CHESTPLATE.ordinal()).getId())
+                                                 .addBreakablePart("maille", StatlessMaterialStats.MAILLE.getIdentifier())
+                                                 .addBreakablePart("maille1", StatlessMaterialStats.MAILLE.getIdentifier());
+
+        buildTool("armor/under_plate/boots").disallowAnimated()
+                                            .addBreakablePart("plating",
+                                                              PlatingMaterialStats.TYPES.get(ArmorItem.Type.BOOTS.ordinal())
+                                                                                        .getId())
+                                            .addBreakablePart("maille", StatlessMaterialStats.MAILLE.getIdentifier())
+                                            .addPart("maille1", StatlessMaterialStats.MAILLE.getIdentifier());
+        buildTool("armor/under_plate/helmet").disallowAnimated()
+                                             .addPart("plating",
+                                                      PlatingMaterialStats.TYPES.get(ArmorItem.Type.HELMET.ordinal())
+                                                                                .getId())
+                                             .addPart("maille", StatlessMaterialStats.MAILLE.getIdentifier())
+                                             .addPart("maille1", StatlessMaterialStats.MAILLE.getIdentifier());
+        buildTool("armor/under_plate/leggings").disallowAnimated()
+                                               .addBreakablePart("plating",
+                                                                 PlatingMaterialStats.TYPES.get(ArmorItem.Type.LEGGINGS.ordinal())
+                                                                                           .getId())
+                                               .addPart("maille", StatlessMaterialStats.MAILLE.getIdentifier())
+                                               .addPart("maille1", StatlessMaterialStats.MAILLE.getIdentifier());
 
         addTexture("tinker_armor/under_plate/plating_armor", ARMOR_PLATING).disallowAnimated();
         addTexture("tinker_armor/under_plate/plating_leggings", ARMOR_PLATING).disallowAnimated();
         addTexture("tinker_armor/under_plate/maille_armor", ARMOR_MAILLE).disallowAnimated();
         addTexture("tinker_armor/under_plate/maille_leggings", ARMOR_MAILLE).disallowAnimated();
-        //addTexture("tinker_armor/plate/maille_wings", ARMOR_MAILLE).disallowAnimated();
+        addTexture("tinker_armor/under_plate/maille_wings", ARMOR_MAILLE).disallowAnimated();
     }
 }

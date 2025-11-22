@@ -45,6 +45,11 @@
       "stat_type": "tconstruct:armor_maille"
     },
     {
+      "allow_animated": false,
+      "path": "dreamtinker:tinker_armor/under_plate/maille_wings",
+      "stat_type": "tconstruct:armor_maille"
+    },
+    {
       "path": "dreamtinker:item/tool/tntarrow/explode_core",
       "stat_type": "tconstruct:head"
     },
@@ -198,6 +203,11 @@
     {
       "allow_animated": false,
       "path": "dreamtinker:item/tool/armor/under_plate/chestplate/maille1",
+      "stat_type": "tconstruct:maille"
+    },
+    {
+      "allow_animated": false,
+      "path": "dreamtinker:item/tool/armor/under_plate/chestplate/maille1_broken",
       "stat_type": "tconstruct:maille"
     },
     {
