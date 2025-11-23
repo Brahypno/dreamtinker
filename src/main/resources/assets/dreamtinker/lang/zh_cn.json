@@ -424,6 +424,9 @@
   "modifier.dreamtinker.knock_arts.flavor": "伤疤即是门扉",
   "modifier.dreamtinker.knock_arts.description": "每次受伤都会增加你的伤害，但死亡时重置",
   "modifier.dreamtinker.tooltip.knock_arts": "门扉计数: ",
+  "modifier.dreamtinker.the_end": "完",
+  "modifier.dreamtinker.the_end.flavor": "径复原初",
+  "modifier.dreamtinker.the_end.description": "跳过过程直接回归主世界出生点",
 
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",

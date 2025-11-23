@@ -424,6 +424,9 @@
   "modifier.dreamtinker.knock_arts.flavor": "Injury is a Path",
   "modifier.dreamtinker.knock_arts.description": "Every attacked increase your damage deal. But reset After death",
   "modifier.dreamtinker.tooltip.knock_arts": "Knock Counts: ",
+  "modifier.dreamtinker.the_end": "Fin",
+  "modifier.dreamtinker.the_end.flavor": "Back to Fons et Origo",
+  "modifier.dreamtinker.the_end.description": "Skip until return to the spawn point in Overworld",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",

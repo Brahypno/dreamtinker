@@ -19,6 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.CompoundIngredient;
@@ -1288,6 +1289,17 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .saveSalvage(withCondition(consumer, modLoaded("malum")),
                                           prefix(DreamtinkerModifiers.spiritual_weapon_transformation, soulSalvage))
                              .save(withCondition(consumer, modLoaded("malum")), prefix(DreamtinkerModifiers.spiritual_weapon_transformation, soulFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.TheEnd)
+                             .setTools(TinkerTags.Items.SPECIAL_TOOLS)
+                             .addInput(Blocks.DIRT, 2)
+                             .addInput(Blocks.DIRT, 2)
+                             .addInput(Blocks.DIRT, 2)
+                             .addInput(Blocks.GRASS_BLOCK, 3)
+                             .addInput(Blocks.GRASS_BLOCK, 3)
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .setMaxLevel(1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.TheEnd, upgradeSalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.TheEnd, upgradeFolder));
     }
 
     private void addEntityMeltingRecipes(Consumer<FinishedRecipe> consumer) {

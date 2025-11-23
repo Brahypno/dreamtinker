@@ -6,7 +6,7 @@
     }
   ],
   "more_text_space": true,
-  "tool_filter": "tconstruct:modifiable",
+  "tool_filter": "tconstruct:modifiable/melee/primary",
   "effects": [
     "Requires 1 soul slot",
     "Maximum of 5 levels"

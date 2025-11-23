@@ -113,7 +113,8 @@
     "ore_viewer": "#4489CC",
     "ssss_slowness": "#A5E2E6",
     "hidden_hit": "#987A2C",
-    "knock_arts": "#987A2C"
+    "knock_arts": "#987A2C",
+    "the_end": "#034150"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
