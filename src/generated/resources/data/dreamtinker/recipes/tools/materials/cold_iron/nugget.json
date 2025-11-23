@@ -1,7 +1,7 @@
 {
   "type": "tconstruct:material",
   "ingredient": {
-    "item": "dreamtinker:cold_iron_nugget"
+    "tag": "forge:nuggets/cold_iron"
   },
   "material": "dreamtinker:cold_iron",
   "needed": 9,

@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_fluid",
+  "fluid": {
+    "amount": 90,
+    "tag": "dreamtinker:molten_transmutation_gold"
+  },
+  "output": "dreamtinker:transmutation_gold",
+  "temperature": 1200
+}

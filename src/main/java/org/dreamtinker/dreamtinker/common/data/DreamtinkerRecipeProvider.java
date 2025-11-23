@@ -10,8 +10,6 @@ import com.sammy.malum.registry.common.item.ItemTagRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
@@ -488,6 +486,9 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                      DreamtinkerFluids.molten_transmutation_gold.get(), FluidValues.INGOT, 1.0f)
                             .setOre(IMeltingContainer.OreRateType.METAL)
                             .save(consumer, location(folder + "transmutation_gold/raw_materials"));
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.TransmutationGoldDusts),
+                                     DreamtinkerFluids.molten_transmutation_gold.get(), FluidValues.INGOT, 0.05f)
+                            .save(consumer, location(folder + "transmutation_gold/dust"));
 
         meltCast(DreamtinkerFluids.molten_desire.get(), DreamtinkerCommon.desire_gem.get(), FluidValues.GEM, consumer);
         meltCast(DreamtinkerFluids.despair_essence.get(), DreamtinkerCommon.despair_gem.get(), FluidValues.GEM, consumer);
@@ -604,30 +605,41 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
         materialMeltingCasting(consumer, DreamtinkerMaterialIds.orichalcum, DreamtinkerFluids.molten_orichalcum, FluidValues.INGOT,
                                materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.orichalcum, Ingredient.of(DreamtinkerCommon.orichalcum.get()), 1, 1,
+        materialRecipe(consumer, DreamtinkerMaterialIds.orichalcum, Ingredient.of(DreamtinkerTagKeys.Items.OrichalcumIngot), 1, 1,
                        materials_folder + "orichalcum/ingot");
-        materialRecipe(consumer, DreamtinkerMaterialIds.orichalcum, Ingredient.of(DreamtinkerCommon.orichalcum_nugget.get()), 1, 9,
+        materialRecipe(consumer, DreamtinkerMaterialIds.orichalcum, Ingredient.of(DreamtinkerTagKeys.Items.OrichalcumNuggets), 1, 9,
                        materials_folder + "orichalcum/nugget");
-        materialRecipe(consumer, DreamtinkerMaterialIds.orichalcum, Ingredient.of(DreamtinkerCommon.OrichalcumBlock.get()), 9, 1,
+        materialRecipe(consumer, DreamtinkerMaterialIds.orichalcum, Ingredient.of(DreamtinkerTagKeys.Items.OrichalcumBlock), 9, 1,
                        materials_folder + "orichalcum/block");
 
         materialMeltingCasting(consumer, DreamtinkerMaterialIds.cold_iron, DreamtinkerFluids.molten_cold_iron, FluidValues.INGOT,
                                materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.cold_iron, Ingredient.of(DreamtinkerCommon.cold_iron_ingot.get()), 1, 1,
+        materialRecipe(consumer, DreamtinkerMaterialIds.cold_iron, Ingredient.of(DreamtinkerTagKeys.Items.coldIronIngot), 1, 1,
                        materials_folder + "cold_iron/ingot");
-        materialRecipe(consumer, DreamtinkerMaterialIds.cold_iron, Ingredient.of(DreamtinkerCommon.cold_iron_nugget.get()), 1, 9,
+        materialRecipe(consumer, DreamtinkerMaterialIds.cold_iron, Ingredient.of(DreamtinkerTagKeys.Items.coldIronNuggets), 1, 9,
                        materials_folder + "cold_iron/nugget");
-        materialRecipe(consumer, DreamtinkerMaterialIds.cold_iron, Ingredient.of(DreamtinkerCommon.ColdIronBlock.get()), 9, 1,
+        materialRecipe(consumer, DreamtinkerMaterialIds.cold_iron, Ingredient.of(DreamtinkerTagKeys.Items.coldIronBlock), 9, 1,
                        materials_folder + "cold_iron/block");
 
         materialMeltingCasting(consumer, DreamtinkerMaterialIds.shadowSilver, DreamtinkerFluids.molten_shadow_silver, FluidValues.INGOT,
                                materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.shadowSilver, Ingredient.of(DreamtinkerCommon.shadow_silver_ingot.get()), 1, 1,
+        materialRecipe(consumer, DreamtinkerMaterialIds.shadowSilver, Ingredient.of(DreamtinkerTagKeys.Items.ShadowSilverIngot), 1, 1,
                        materials_folder + "shadow_silver/ingot");
-        materialRecipe(consumer, DreamtinkerMaterialIds.shadowSilver, Ingredient.of(DreamtinkerCommon.shadow_silver_nugget.get()), 1, 9,
+        materialRecipe(consumer, DreamtinkerMaterialIds.shadowSilver, Ingredient.of(DreamtinkerTagKeys.Items.ShadowSilverNuggets), 1, 9,
                        materials_folder + "shadow_silver/nugget");
-        materialRecipe(consumer, DreamtinkerMaterialIds.shadowSilver, Ingredient.of(DreamtinkerCommon.ShadowSilverBlock.get()), 9, 1,
+        materialRecipe(consumer, DreamtinkerMaterialIds.shadowSilver, Ingredient.of(DreamtinkerTagKeys.Items.ShadowSilverBlock), 9, 1,
                        materials_folder + "shadow_silver/block");
+
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.TransmutationGold, DreamtinkerFluids.molten_transmutation_gold, FluidValues.INGOT,
+                               materials_folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.TransmutationGold, Ingredient.of(DreamtinkerTagKeys.Items.TransmutationGoldIngot), 1, 1,
+                       materials_folder + "transmutation_gold/ingot");
+        materialRecipe(consumer, DreamtinkerMaterialIds.TransmutationGold, Ingredient.of(DreamtinkerTagKeys.Items.TransmutationGoldDusts), 1, 1,
+                       materials_folder + "transmutation_gold/dust");
+        materialRecipe(consumer, DreamtinkerMaterialIds.TransmutationGold, Ingredient.of(DreamtinkerTagKeys.Items.TransmutationGoldNuggets), 1, 9,
+                       materials_folder + "transmutation_gold/nugget");
+        materialRecipe(consumer, DreamtinkerMaterialIds.TransmutationGold, Ingredient.of(DreamtinkerTagKeys.Items.TransmutationGoldBlock), 9, 1,
+                       materials_folder + "transmutation_gold/block");
 
     }
 
@@ -1313,22 +1325,6 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
     @Override
     public @NotNull String getModId() {
         return Dreamtinker.MODID;
-    }
-
-    private static TagKey<Item> forgeItemTag(String name) {
-        return TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("forge", name));
-    }
-
-    private static TagKey<Fluid> forgeFluidTag(String name) {
-        return TagKey.create(ForgeRegistries.FLUIDS.getRegistryKey(), new ResourceLocation("forge", name));
-    }
-
-    private static TagKey<Item> tconItemTag(String name) {
-        return TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("tconstruct", name));
-    }
-
-    private static TagKey<Fluid> tconfluidTag(String name) {
-        return TagKey.create(ForgeRegistries.FLUIDS.getRegistryKey(), new ResourceLocation("tconstruct", name));
     }
 
     private void meltCast(Fluid fluid, ItemLike ingredient, int amount, Consumer<FinishedRecipe> consumer) {

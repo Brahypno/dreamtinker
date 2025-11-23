@@ -1,7 +1,7 @@
 {
   "type": "tconstruct:material",
   "ingredient": {
-    "item": "dreamtinker:orichalcum_nugget"
+    "tag": "forge:nuggets/orichalcum"
   },
   "material": "dreamtinker:orichalcum",
   "needed": 9,

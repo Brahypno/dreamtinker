@@ -1,7 +1,7 @@
 {
   "type": "tconstruct:material",
   "ingredient": {
-    "item": "dreamtinker:cold_iron_ingot"
+    "tag": "forge:ingots/cold_iron"
   },
   "material": "dreamtinker:cold_iron",
   "needed": 1,

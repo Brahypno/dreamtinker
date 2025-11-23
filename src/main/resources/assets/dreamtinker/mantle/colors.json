@@ -114,7 +114,8 @@
     "ssss_slowness": "#A5E2E6",
     "hidden_hit": "#987A2C",
     "knock_arts": "#987A2C",
-    "the_end": "#034150"
+    "the_end": "#034150",
+    "ore_multiplier": "#DE6428"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
@@ -148,11 +149,13 @@
     "scolecite": "#D5C9C1",
     "orichalcum": "#552060",
     "cold_iron": "#4489CC",
-    "shadow_silver": "#7C6220"
+    "shadow_silver": "#7C6220",
+    "transmutation_gold": "#DE6428"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873",
-      "netheritte": "#555555"
+      "netheritte": "#555555",
+      "transmutation_gold": "#DE6428"
     },
     "harvest_tier.enigmaticlegacy.etherium": "#96E8E0"
 }

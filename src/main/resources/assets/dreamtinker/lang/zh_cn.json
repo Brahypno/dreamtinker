@@ -427,6 +427,9 @@
   "modifier.dreamtinker.the_end": "完",
   "modifier.dreamtinker.the_end.flavor": "径复原初",
   "modifier.dreamtinker.the_end.description": "跳过过程直接回归主世界出生点",
+  "modifier.dreamtinker.ore_multiplier": "太阳之变化",
+  "modifier.dreamtinker.ore_multiplier.flavor": "阳为父",
+  "modifier.dreamtinker.ore_multiplier.description": "概率增加矿物产量，高强化等级会使概率及产物变多",
 
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
@@ -808,6 +811,7 @@
 
   "stat.tconstruct.harvest_tier.dreamtinker.lupus": "狼",
   "stat.tconstruct.harvest_tier.dreamtinker.netheritte": "下界合全",
+  "stat.tconstruct.harvest_tier.dreamtinker.transmutation_gold": "曜金",
   "stat.tconstruct.harvest_tier.enigmaticlegacy.etherium": "以太",
 
   "key.categories.dreamtinker": "工匠幻梦",

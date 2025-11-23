@@ -94,6 +94,10 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new HeadMaterialStats(360, 6f, Tiers.IRON, 2.5f),
                          HandleMaterialStats.multipliers().durability(0.8f).miningSpeed(1.15f).attackDamage(1.0f).attackSpeed(1.2f).build(),
                          StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.TransmutationGold,
+                         new HeadMaterialStats(150, 12f, DtTiers.TransmutationGold, 1f),
+                         HandleMaterialStats.multipliers().durability(0.6f).miningSpeed(1.10f).attackDamage(1.10f).attackSpeed(1.10f).build(),
+                         StatlessMaterialStats.BINDING);
 
         addELMeleeHarvest();
         addMalumMeleeHarvest();
@@ -185,6 +189,10 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new LimbMaterialStats(360, -0.1f, 0.05f, 0.2f),
                          new GripMaterialStats(-0.2f, -0.1f, 2.5f));
 
+        addMaterialStats(DreamtinkerMaterialIds.TransmutationGold,
+                         new LimbMaterialStats(150, 0.5f, -0.2f, 0.2f),
+                         new GripMaterialStats(-0.2f, 0.2f, 1.0f));
+
         addCompactRanged();
     }
 
@@ -259,6 +267,10 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                             StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
         addArmorShieldStats(DreamtinkerMaterialIds.shadowSilver,
                             PlatingMaterialStats.builder().durabilityFactor(22).armor(2, 4, 5, 3).toughness(1f).knockbackResistance(2f),
+                            StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
+
+        addArmorShieldStats(DreamtinkerMaterialIds.TransmutationGold,
+                            PlatingMaterialStats.builder().durabilityFactor(15).armor(2, 4, 6, 2).toughness(1f),
                             StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
 
         addArmorShieldStats(DreamtinkerMaterialIds.etherium,

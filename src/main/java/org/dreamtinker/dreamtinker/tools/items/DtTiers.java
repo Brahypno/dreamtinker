@@ -11,6 +11,8 @@ import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 
 import java.util.List;
 
+import static net.minecraft.tags.BlockTags.NEEDS_DIAMOND_TOOL;
+
 public class DtTiers {
     public static final Tier WOLF_TIER = TierSortingRegistry.registerTier(
             new ForgeTier(
@@ -39,6 +41,20 @@ public class DtTiers {
             Dreamtinker.getLocation("netheritte"),
             List.of(Tiers.IRON),
             List.of(Tiers.DIAMOND)
+    );
+    public static final Tier TransmutationGold = TierSortingRegistry.registerTier(
+            new ForgeTier(
+                    3,               // level：相对顺序值。钻石≈3，黑曜石/下界合金≈4，随需求
+                    150,            // 耐久（用于基于 Tier 的原版工具）
+                    12.0F,            // 挖掘速度
+                    3.0F,            // 额外攻击
+                    20,              // 附魔性
+                    NEEDS_DIAMOND_TOOL, // “需要此等级工具”的方块标签
+                    () -> Ingredient.of(DreamtinkerCommon.transmutation_gold_ingot.get())
+            ),
+            Dreamtinker.getLocation("transmutation_gold"),
+            List.of(Tiers.DIAMOND),
+            List.of(Tiers.NETHERITE)
     );
 
     public static void init() {}

@@ -1,7 +1,7 @@
 {
   "type": "tconstruct:material",
   "ingredient": {
-    "item": "dreamtinker:orichalcum_block"
+    "tag": "forge:storage_blocks/orichalcum"
   },
   "material": "dreamtinker:orichalcum",
   "needed": 1,

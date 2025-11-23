@@ -153,6 +153,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<hiddenHit> hiddenHit = MODIFIERS.register("hidden_hit", hiddenHit::new);
     public static final StaticModifier<knockArts> knockArts = MODIFIERS.register("knock_arts", knockArts::new);
     public static final StaticModifier<TheEnd> TheEnd = MODIFIERS.register("the_end", TheEnd::new);
+    public static final StaticModifier<BlockMultiplier> OreMultiplier =
+            MODIFIERS.register("ore_multiplier", () -> new BlockMultiplier(Tags.Blocks.ORES.location(), 0.4f, 3));
 
     //etherium
     public static final StaticModifier<astral_break> astral_break = EL_MODIFIERS.register("astral_break", astral_break::new);

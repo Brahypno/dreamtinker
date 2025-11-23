@@ -1,7 +1,7 @@
 {
   "type": "tconstruct:material",
   "ingredient": {
-    "item": "dreamtinker:orichalcum_ingot"
+    "tag": "forge:ingots/orichalcum"
   },
   "material": "dreamtinker:orichalcum",
   "needed": 1,

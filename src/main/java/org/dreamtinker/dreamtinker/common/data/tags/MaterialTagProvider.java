@@ -28,7 +28,7 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
                  despair_gem, scolecite, shiningFlint, cold_iron, shadowSilver)
             .addOptional(nefarious, soul_etherium, spirit_fabric, soul_stained_steel, malignant_pewter, malignant_gluttony);
         this.tag(TinkerTags.Materials.HARVEST)
-            .add(larimar, rainbow_honey_crystal)
+            .add(larimar, rainbow_honey_crystal, TransmutationGold)
             .addOptional(hallowed_gold);
         this.tag(TinkerTags.Materials.GENERAL)
             .add(valentinite, black_sapphire, orichalcum)
