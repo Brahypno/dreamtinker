@@ -1,5 +1,6 @@
 package org.dreamtinker.dreamtinker.utils;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -129,6 +130,30 @@ public class DTModifierCheck {
         matched += getMainhandModifierLevel(entity, id);
         matched += getOffhandModifierLevel(entity, id);
         return matched;
+    }
+
+    public static float getPersistentTagValue(LivingEntity entity, ModifierId modifierId, ResourceLocation tag) {
+        float value = 0;
+        for (EquipmentSlot slot : slots) {
+            int level = getModifierLevel(entity, modifierId, slot);
+            if (0 < level){
+                ToolStack tool = ToolStack.from(entity.getItemBySlot(slot));
+                value += tool.getPersistentData().getInt(tag) * level;
+            }
+        }
+        return value;
+    }
+
+    public static void resetPersistentTagValue(LivingEntity entity, ResourceLocation tag) {
+        for (EquipmentSlot slot : slots) {
+            ItemStack itemStack = entity.getItemBySlot(slot);
+            if (!(itemStack.getItem() instanceof IModifiable))
+                continue;
+
+            ToolStack toolStack = ToolStack.from(itemStack);
+            toolStack.getPersistentData().remove(tag);
+            toolStack.updateStack(itemStack);
+        }
     }
 
 

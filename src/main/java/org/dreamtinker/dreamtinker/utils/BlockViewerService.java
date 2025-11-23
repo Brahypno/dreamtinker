@@ -3,6 +3,7 @@ package org.dreamtinker.dreamtinker.utils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.PacketDistributor;
+import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.network.Dnetwork;
 import org.dreamtinker.dreamtinker.network.WallVisionSyncPacket;
 
@@ -69,6 +70,6 @@ public class BlockViewerService {
     }
 
     public static void sendBlockViewOff(ServerPlayer sp) {
-        Dnetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> sp), new WallVisionSyncPacket(false, null, 0));
+        Dnetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> sp), new WallVisionSyncPacket(false, Dreamtinker.getLocation("off"), 0));
     }
 }

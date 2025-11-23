@@ -416,6 +416,14 @@
   "modifier.dreamtinker.ssss_slowness": "ssss Slowness",
   "modifier.dreamtinker.ssss_slowness.flavor": "Slow",
   "modifier.dreamtinker.ssss_slowness.description": "Add slowness when attacked",
+  "modifier.dreamtinker.hidden_hit": "Hidden hit",
+  "modifier.dreamtinker.hidden_hit.flavor": "In shadow",
+  "modifier.dreamtinker.hidden_hit.description": "Deal more damage to mob that not set you as target;But deal less damage if they set you as target",
+  "modifier.dreamtinker.hidden_hit.attack_damage": "Damage to Mob not found you",
+  "modifier.dreamtinker.knock_arts": "Knock Arts",
+  "modifier.dreamtinker.knock_arts.flavor": "Injury is a Path",
+  "modifier.dreamtinker.knock_arts.description": "Every attacked increase your damage deal. But reset After death",
+  "modifier.dreamtinker.tooltip.knock_arts": "Knock Counts: ",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",
@@ -608,6 +616,8 @@
   "material.dreamtinker.orichalcum.flavor": "Forged by the Lunar Gravity",
   "material.dreamtinker.cold_iron": "Rose Cold Iron",
   "material.dreamtinker.cold_iron.flavor": "Destination would be seen",
+  "material.dreamtinker.shadow_silver": "Shadow Silver",
+  "material.dreamtinker.shadow_silver.flavor": "The shadow self of silver",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "Molten echo Alloy",
   "fluid.dreamtinker.molten_echo_alloy": "Molten echo Alloy",

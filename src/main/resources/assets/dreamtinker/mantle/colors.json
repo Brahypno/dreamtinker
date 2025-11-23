@@ -111,7 +111,9 @@
     "lunar_attractive": "#8A3FA8",
     "lunar_rejection": "#8A3FA8",
     "ore_viewer": "#4489CC",
-    "ssss_slowness": "#A5E2E6"
+    "ssss_slowness": "#A5E2E6",
+    "hidden_hit": "#987A2C",
+    "knock_arts": "#987A2C"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
@@ -144,7 +146,8 @@
     "black_sapphire": "#1A1F26",
     "scolecite": "#D5C9C1",
     "orichalcum": "#552060",
-    "cold_iron": "#4489CC"
+    "cold_iron": "#4489CC",
+    "shadow_silver": "#7C6220"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873",

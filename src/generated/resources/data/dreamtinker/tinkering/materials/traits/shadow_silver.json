@@ -1,0 +1,20 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "dreamtinker:hidden_hit"
+    },
+    {
+      "level": 1,
+      "name": "dreamtinker:knock_arts"
+    }
+  ],
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "dreamtinker:knock_arts"
+      }
+    ]
+  }
+}

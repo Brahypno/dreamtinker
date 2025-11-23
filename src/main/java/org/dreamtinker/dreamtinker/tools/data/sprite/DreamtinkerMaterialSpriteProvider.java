@@ -272,6 +272,18 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFFB0F1F5) // 接近白的冷光
                                                 .addARGB(255, 0xFFFDFDFD) // 几乎纯白的最强反光
                                                 .build());
+        this.buildMaterial(DreamtinkerMaterialIds.shadowSilver)
+            .meleeHarvest().armor().ranged().shieldCore()
+            .fallbacks("metal")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(0, 0xFF7C6220)  // 最深的暖金黄，偏暗月影
+                                                .addARGB(63, 0xFF987A2C)  // 稍亮一点的金黄
+                                                .addARGB(102, 0xFFB29444)  // 中等亮度的暖月黄
+                                                .addARGB(140, 0xFFCAAC60)  // 偏亮的浅金月光
+                                                .addARGB(178, 0xFFDCC484)  // 柔和的淡黄月辉
+                                                .addARGB(216, 0xFFEAD6A4)  // 乳黄色月白
+                                                .addARGB(255, 0xFFFCF4E8)  // 接近纯白的月光高光
+                                                .build());
         addELMaterials();
         addMalumMaterials();
     }

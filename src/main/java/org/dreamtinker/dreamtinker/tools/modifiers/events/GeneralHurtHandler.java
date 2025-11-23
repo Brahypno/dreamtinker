@@ -31,6 +31,7 @@ import static net.minecraft.tags.DamageTypeTags.*;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.FragileDodge;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.homunculusLifeCurseMaxEffectLevel;
 import static org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.weapon_transformation.valueExpSoftCap;
+import static org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.knockArts.TAG_KNOCK;
 import static org.dreamtinker.dreamtinker.utils.DTModifierCheck.ModifierInHand;
 import static org.dreamtinker.dreamtinker.utils.DTModifierCheck.getPossibleToolWithModifier;
 
@@ -50,7 +51,7 @@ public class GeneralHurtHandler {
         if (0 == damageAmount || event.isCanceled())
             return;
         Level world = victim.level();
-        if (world.isClientSide() || event.isCanceled())
+        if (world.isClientSide())
             return;
         CompoundTag data = victim.getPersistentData();
         RegistryAccess registryAccess = world.registryAccess();
@@ -164,6 +165,9 @@ public class GeneralHurtHandler {
                     offender.hurt(source, damageAmount * .1f);
                 why_i_cry_triggered = false;
             }
+            float del = DTModifierCheck.getPersistentTagValue(offender, DreamtinkerModifiers.knockArts.getId(), TAG_KNOCK);
+            if (0 < del)
+                event.setAmount(event.getAmount() + del);
 
             int sand_level = DTModifierCheck.getMainhandModifierLevel(offender, DreamtinkerModifiers.Ids.AsSand);
             if (0 < sand_level)

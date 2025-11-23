@@ -86,6 +86,9 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.cold_iron, Ids.slowness);
         addTraits(DreamtinkerMaterialIds.cold_iron, ARMOR, OreViewer.getId());
 
+        addDefaultTraits(DreamtinkerMaterialIds.shadowSilver, hiddenHit, knockArts);
+        addTraits(DreamtinkerMaterialIds.shadowSilver, ARMOR, knockArts);
+
         callGetOrCreate(this, DreamtinkerMaterialIds.etherium).setTraits(MELEE_HARVEST, List.of(
                 new ModifierEntry(ModifierIds.smite, 2),
                 new ModifierEntry(explosive_hit.getId(), 1),

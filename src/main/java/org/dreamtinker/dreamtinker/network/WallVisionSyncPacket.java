@@ -27,8 +27,7 @@ public class WallVisionSyncPacket {
 
     public void toBytes(FriendlyByteBuf buf) {
         buf.writeBoolean(enabled);
-        if (null != tag)
-            buf.writeResourceLocation(tag);
+        buf.writeResourceLocation(tag);
         buf.writeInt(radius);
     }
 

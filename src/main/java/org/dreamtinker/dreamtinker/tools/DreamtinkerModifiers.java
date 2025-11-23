@@ -150,6 +150,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<lightRangeBoost> light_emanation = MODIFIERS.register("light_emanation", lightRangeBoost::new);
     public static final StaticModifier<LunarDurabilityDefense> lunar_defense = MODIFIERS.register("lunar_defense", LunarDurabilityDefense::new);
     public static final StaticModifier<blockViewer> OreViewer = MODIFIERS.register("ore_viewer", () -> new blockViewer(Tags.Blocks.ORES.location(), 0.2f));
+    public static final StaticModifier<hiddenHit> hiddenHit = MODIFIERS.register("hidden_hit", hiddenHit::new);
+    public static final StaticModifier<knockArts> knockArts = MODIFIERS.register("knock_arts", knockArts::new);
 
     //etherium
     public static final StaticModifier<astral_break> astral_break = EL_MODIFIERS.register("astral_break", astral_break::new);

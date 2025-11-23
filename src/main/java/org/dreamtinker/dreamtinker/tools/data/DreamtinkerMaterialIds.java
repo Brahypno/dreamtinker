@@ -31,6 +31,7 @@ public class DreamtinkerMaterialIds {
     public static final MaterialId shiningFlint = new MaterialId(new ResourceLocation(MODID, "shining_flint"));
     public static final MaterialId cold_iron = new MaterialId(new ResourceLocation(MODID, "cold_iron"));
     public static final MaterialId orichalcum = new MaterialId(new ResourceLocation(MODID, "orichalcum"));
+    public static final MaterialId shadowSilver = new MaterialId(new ResourceLocation(MODID, "shadow_silver"));
     //Compact-enigmatic legacy
     public static final MaterialId etherium = new MaterialId(new ResourceLocation(MODID, "etherium"));
     public static final MaterialId nefarious = new MaterialId(new ResourceLocation(MODID, "nefarious"));

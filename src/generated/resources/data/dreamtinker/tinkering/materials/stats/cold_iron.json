@@ -21,7 +21,7 @@
     "tconstruct:limb": {
       "accuracy": 0.0,
       "draw_speed": -0.4,
-      "durability": 500,
+      "durability": 400,
       "velocity": 0.2
     },
     "tconstruct:maille": {},

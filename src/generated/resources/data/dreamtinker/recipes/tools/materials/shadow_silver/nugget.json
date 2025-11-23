@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "dreamtinker:shadow_silver_nugget"
+  },
+  "material": "dreamtinker:shadow_silver",
+  "needed": 9,
+  "value": 1
+}

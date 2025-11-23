@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_fluid",
+  "fluid": {
+    "amount": 90,
+    "tag": "dreamtinker:molten_shadow_silver"
+  },
+  "output": "dreamtinker:shadow_silver",
+  "temperature": 1000
+}

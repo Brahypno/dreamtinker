@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "dreamtinker:shadow_silver",
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_shadow_silver"
+  },
+  "temperature": 1000
+}

@@ -416,6 +416,14 @@
   "modifier.dreamtinker.ssss_slowness": "缓缓慢",
   "modifier.dreamtinker.ssss_slowness.flavor": "慢",
   "modifier.dreamtinker.ssss_slowness.description": "攻击时施加缓慢",
+  "modifier.dreamtinker.hidden_hit": "隐秘打击",
+  "modifier.dreamtinker.hidden_hit.flavor": "藏于阴影",
+  "modifier.dreamtinker.hidden_hit.description": "对不以你为目标的怪物造成更多伤害，但对以你为目标的怪物造成更少伤害",
+  "modifier.dreamtinker.hidden_hit.attack_damage": "对不以你为目标的怪物伤害",
+  "modifier.dreamtinker.knock_arts": "开启的艺术",
+  "modifier.dreamtinker.knock_arts.flavor": "伤疤即是门扉",
+  "modifier.dreamtinker.knock_arts.description": "每次受伤都会增加你的伤害，但死亡时重置",
+  "modifier.dreamtinker.tooltip.knock_arts": "门扉计数: ",
 
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
@@ -609,6 +617,8 @@
   "material.dreamtinker.orichalcum.flavor": "在月亮的引力中成型",
   "material.dreamtinker.cold_iron": "引寒铁",
   "material.dreamtinker.cold_iron.flavor": "目标会出现",
+  "material.dreamtinker.shadow_silver": "影银",
+  "material.dreamtinker.shadow_silver.flavor": "银的影中自我",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "熔融回响合金",
   "fluid.dreamtinker.molten_echo_alloy": "熔融回响合金",
