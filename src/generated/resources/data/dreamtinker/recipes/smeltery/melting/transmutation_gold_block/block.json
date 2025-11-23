@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "item": "dreamtinker:transmutation_gold_block"
+  },
+  "result": {
+    "amount": 810,
+    "fluid": "dreamtinker:molten_transmutation_gold"
+  },
+  "temperature": 1200,
+  "time": 216
+}

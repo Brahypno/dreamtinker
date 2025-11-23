@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": "dreamtinker:transmutation_gold_ore",
+  "step": "underground_decoration"
+}

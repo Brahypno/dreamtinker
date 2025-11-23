@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_orichalcum": {
+    "has_black_sapphire_ore": {
       "conditions": {
         "items": [
           {
@@ -20,7 +20,7 @@
   },
   "requirements": [
     [
-      "has_orichalcum",
+      "has_black_sapphire_ore",
       "has_the_recipe"
     ]
   ],

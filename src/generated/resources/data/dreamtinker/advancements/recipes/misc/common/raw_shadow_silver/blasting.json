@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_shadow_silver": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:raw_materials/shadow_silver"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "dreamtinker:common/raw_shadow_silver/blasting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_shadow_silver",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "dreamtinker:common/raw_shadow_silver/blasting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

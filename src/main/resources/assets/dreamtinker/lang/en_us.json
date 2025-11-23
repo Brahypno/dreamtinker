@@ -520,6 +520,10 @@
   "item.dreamtinker.shadow_silver_nugget": "Shadow Silver Nugget",
   "item.dreamtinker.shadow_silver_ingot": "Shadow Silver Ingot",
   "item.dreamtinker.raw_shadow_silver": "Raw Shadow Silver",
+  "item.dreamtinker.transmutation_gold_nugget": "Transmutation Gold Nugget",
+  "item.dreamtinker.transmutation_gold_dust": "Transmutation Gold Dust",
+  "item.dreamtinker.transmutation_gold_ingot": "Transmutation Gold Ingot",
+  "item.dreamtinker.raw_transmutation_gold": "Raw Transmutation Gold",
 
   "block.dreamtinker.crying_obsidian_pane": "Crying Obsidian Pane",
   "block.dreamtinker.narcissus": "Narcissus",
@@ -544,6 +548,10 @@
   "block.dreamtinker.deepslate_shadow_silver_ore": "Deepslate Shadow Silver Ore",
   "block.dreamtinker.shadow_silver_block": "Shadow Silver Block",
   "block.dreamtinker.raw_shadow_silver_block": "Raw Shadow Silver Block",
+  "block.dreamtinker.transmutation_gold_ore": "Transmutation Gold Ore",
+  "block.dreamtinker.deepslate_transmutation_gold_ore": "Deepslate Transmutation Gold Ore",
+  "block.dreamtinker.transmutation_gold_block": "Transmutation Gold Block",
+  "block.dreamtinker.raw_transmutation_gold_block": "Raw Transmutation Gold Block",
 
   "material.dreamtinker.echo_alloy": "Echo Alloy",
   "material.dreamtinker.echo_alloy.flavor": "Its echo of mystery, or echo of enigma",
@@ -618,6 +626,8 @@
   "material.dreamtinker.cold_iron.flavor": "Destination would be seen",
   "material.dreamtinker.shadow_silver": "Shadow Silver",
   "material.dreamtinker.shadow_silver.flavor": "The shadow self of silver",
+  "material.dreamtinker.transmutation_gold": "Transmutation Gold",
+  "material.dreamtinker.transmutation_gold.flavor": "With Solar power, This is rarely come from Gold",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "Molten echo Alloy",
   "fluid.dreamtinker.molten_echo_alloy": "Molten echo Alloy",
@@ -727,6 +737,9 @@
   "fluid_type.dreamtinker.molten_shadow_silver": "Molten Shadow Silver",
   "fluid.dreamtinker.molten_shadow_silver": "Molten Shadow Silver",
   "fluid.dreamtinker.molten_shadow_silver.fluid_effect": "Molten Shadow Silver",
+  "fluid_type.dreamtinker.molten_transmutation_gold": "Molten Transmutation Gold",
+  "fluid.dreamtinker.molten_transmutation_gold": "Molten Transmutation Gold",
+  "fluid.dreamtinker.molten_transmutation_gold.fluid_effect": "Molten Transmutation Gold",
 
   "item.dreamtinker.molten_echo_alloy_bucket": "Molten echo alloy Bucket",
   "item.dreamtinker.molten_echo_shard_bucket": "Molten echo shard Bucket",
@@ -764,6 +777,7 @@
   "item.dreamtinker.molten_orichalcum_bucket": "Molten Lunar Orichalcum Bucket",
   "item.dreamtinker.molten_cold_iron_bucket": "Molten Rose Cold Iron Bucket",
   "item.dreamtinker.molten_shadow_silver_bucket": "Molten Shadow Silver Bucket",
+  "item.dreamtinker.molten_transmutation_gold_bucket": "Molten Transmutation Gold Bucket",
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "bleed",
   "fluid_effect.tconstruct.damage.explosion": "explosion",

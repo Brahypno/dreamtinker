@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "e": {
+      "item": "dreamtinker:transmutation_gold_ingot"
+    }
+  },
+  "pattern": [
+    "eee",
+    "eee",
+    "eee"
+  ],
+  "result": {
+    "item": "dreamtinker:transmutation_gold_block"
+  },
+  "show_notification": true
+}

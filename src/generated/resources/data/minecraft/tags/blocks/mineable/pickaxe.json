@@ -18,6 +18,10 @@
     "dreamtinker:shadow_silver_block",
     "dreamtinker:shadow_silver_ore",
     "dreamtinker:deepslate_shadow_silver_ore",
-    "dreamtinker:raw_shadow_silver_block"
+    "dreamtinker:raw_shadow_silver_block",
+    "dreamtinker:transmutation_gold_block",
+    "dreamtinker:transmutation_gold_ore",
+    "dreamtinker:deepslate_transmutation_gold_ore",
+    "dreamtinker:raw_transmutation_gold_block"
   ]
 }

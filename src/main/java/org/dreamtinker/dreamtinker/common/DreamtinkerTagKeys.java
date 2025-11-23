@@ -63,24 +63,35 @@ public class DreamtinkerTagKeys {
         public static final TagKey<Item> scoleciteOre = forgeTag("ores/scolecite");
         public static final TagKey<Item> blackSapphireOre = forgeTag("ores/black_sapphire");
         public static final TagKey<Item> soulSteelBlock = dreamtinkerTag("storage_blocks/soul_steel");
+
         public static final TagKey<Item> raw_orichalcum = forgeTag("raw_materials/orichalcum");
         public static final TagKey<Item> OrichalcumNuggets = forgeTag("nuggets/orichalcum");
         public static final TagKey<Item> OrichalcumIngot = forgeTag("ingots/orichalcum");
         public static final TagKey<Item> OrichalcumOre = forgeTag("ores/orichalcum");
         public static final TagKey<Item> OrichalcumBlock = forgeTag("storage_blocks/orichalcum");
         public static final TagKey<Item> RawOrichalcumBlock = forgeTag("storage_blocks/raw_orichalcum");
+
         public static final TagKey<Item> coldIronNuggets = forgeTag("nuggets/cold_iron");
         public static final TagKey<Item> coldIronIngot = forgeTag("ingots/cold_iron");
         public static final TagKey<Item> raw_coldIron = forgeTag("raw_materials/cold_iron");
         public static final TagKey<Item> coldIronOre = forgeTag("ores/cold_iron");
         public static final TagKey<Item> coldIronBlock = forgeTag("storage_blocks/cold_iron");
         public static final TagKey<Item> RawColdIronBlock = forgeTag("storage_blocks/raw_cold_iron");
+
         public static final TagKey<Item> ShadowSilverNuggets = forgeTag("nuggets/shadow_silver");
         public static final TagKey<Item> ShadowSilverIngot = forgeTag("ingots/shadow_silver");
         public static final TagKey<Item> raw_ShadowSilver = forgeTag("raw_materials/shadow_silver");
         public static final TagKey<Item> ShadowSilverOre = forgeTag("ores/shadow_silver");
         public static final TagKey<Item> ShadowSilverBlock = forgeTag("storage_blocks/shadow_silver");
         public static final TagKey<Item> RawShadowSilverBlock = forgeTag("storage_blocks/raw_shadow_silver");
+
+        public static final TagKey<Item> TransmutationGoldDusts = forgeTag("dusts/transmutation_gold");
+        public static final TagKey<Item> TransmutationGoldNuggets = forgeTag("nuggets/transmutation_gold");
+        public static final TagKey<Item> TransmutationGoldIngot = forgeTag("ingots/transmutation_gold");
+        public static final TagKey<Item> raw_TransmutationGold = forgeTag("raw_materials/transmutation_gold");
+        public static final TagKey<Item> TransmutationGoldOre = forgeTag("ores/transmutation_gold");
+        public static final TagKey<Item> TransmutationGoldBlock = forgeTag("storage_blocks/transmutation_gold");
+        public static final TagKey<Item> RawTransmutationGoldBlock = forgeTag("storage_blocks/raw_transmutation_gold");
 
     }
 
@@ -110,5 +121,8 @@ public class DreamtinkerTagKeys {
         public static final TagKey<Block> ShadowSilverOre = forgeTag("ores/shadow_silver");
         public static final TagKey<Block> ShadowSilverBlock = forgeTag("storage_blocks/shadow_silver");
         public static final TagKey<Block> RawShadowSilverBlock = forgeTag("storage_blocks/raw_shadow_silver");
+        public static final TagKey<Block> TransmutationGoldOre = forgeTag("ores/transmutation_gold");
+        public static final TagKey<Block> TransmutationGoldBlock = forgeTag("storage_blocks/transmutation_gold");
+        public static final TagKey<Block> RawTransmutationGoldBlock = forgeTag("storage_blocks/raw_transmutation_gold");
     }
 }

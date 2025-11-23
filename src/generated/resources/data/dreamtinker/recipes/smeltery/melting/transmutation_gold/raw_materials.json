@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:ore_melting",
+  "ingredient": {
+    "tag": "forge:raw_materials/transmutation_gold"
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_transmutation_gold"
+  },
+  "temperature": 1200,
+  "time": 72
+}

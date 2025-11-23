@@ -61,6 +61,10 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
         simpleBlockWithItem(DreamtinkerCommon.DeepslateShadowSilverOre.get(), cubeAll(DreamtinkerCommon.DeepslateShadowSilverOre.get()));
         simpleBlockWithItem(DreamtinkerCommon.ShadowSilverBlock.get(), cubeAll(DreamtinkerCommon.ShadowSilverBlock.get()));
         simpleBlockWithItem(DreamtinkerCommon.RawShadowSilverBlock.get(), cubeAll(DreamtinkerCommon.RawShadowSilverBlock.get()));
+        simpleBlockWithItem(DreamtinkerCommon.TransmutationGoldOre.get(), cubeAll(DreamtinkerCommon.TransmutationGoldOre.get()));
+        simpleBlockWithItem(DreamtinkerCommon.DeepslateTransmutationGoldOre.get(), cubeAll(DreamtinkerCommon.DeepslateTransmutationGoldOre.get()));
+        simpleBlockWithItem(DreamtinkerCommon.TransmutationGoldBlock.get(), cubeAll(DreamtinkerCommon.TransmutationGoldBlock.get()));
+        simpleBlockWithItem(DreamtinkerCommon.RawTransmutationGoldBlock.get(), cubeAll(DreamtinkerCommon.RawTransmutationGoldBlock.get()));
     }
 
     public void axisBlock(Block block, String location, ResourceLocation texture, boolean horizontal) {

@@ -77,12 +77,14 @@ public class ItemTagProvider extends ItemTagsProvider {
 
 
         this.tag(Tags.Items.INGOTS)
-            .add(metallivorous_stibium_lupus.get(), regulus.get(), soul_steel.get(), orichalcum.get(), cold_iron_ingot.get(), shadow_silver_ingot.get())
+            .add(metallivorous_stibium_lupus.get(), regulus.get(), soul_steel.get(), orichalcum.get(), cold_iron_ingot.get(), shadow_silver_ingot.get(),
+                 transmutation_gold_ingot.get())
             .addOptional(soul_etherium.getId())
             .addOptional(malignant_gluttony.getId());
         this.tag(Items.OrichalcumIngot).add(orichalcum.get());
         this.tag(Items.coldIronIngot).add(cold_iron_ingot.get());
         this.tag(Items.ShadowSilverIngot).add(shadow_silver_ingot.get());
+        this.tag(Items.TransmutationGoldIngot).add(transmutation_gold_ingot.get());
 
         this.tag(Tags.Items.GEMS)
             .add(valentinite.get(), nigrescence_antimony.get(), echo_alloy.get(), larimar.get(), amber.get(), desire_gem.get(), despair_gem.get(),
@@ -92,8 +94,9 @@ public class ItemTagProvider extends ItemTagsProvider {
         this.tag(Items.raw_orichalcum).add(raw_orichalcum.get());
         this.tag(Items.raw_coldIron).add(raw_cold_iron.get());
         this.tag(Items.raw_ShadowSilver).add(raw_shadow_silver.get());
+        this.tag(Items.raw_TransmutationGold).add(raw_transmutation_gold.get());
         this.tag(Tags.Items.RAW_MATERIALS)
-            .addTags(Items.raw_stibnite, Items.raw_orichalcum, Items.raw_coldIron, Items.raw_ShadowSilver);
+            .addTags(Items.raw_stibnite, Items.raw_orichalcum, Items.raw_coldIron, Items.raw_ShadowSilver, Items.raw_TransmutationGold);
 
         this.tag(ItemTags.FOX_FOOD).add(white_peach.get());
         this.tag(ItemTags.ARROWS).add(DreamtinkerTools.tntarrow.get());
@@ -105,8 +108,13 @@ public class ItemTagProvider extends ItemTagsProvider {
         this.tag(Items.OrichalcumNuggets).add(orichalcum_nugget.get());
         this.tag(Items.coldIronNuggets).add(cold_iron_nugget.get());
         this.tag(Items.ShadowSilverNuggets).add(shadow_silver_nugget.get());
+        this.tag(Items.TransmutationGoldNuggets).add(transmutation_gold_nugget.get());
         this.tag(Tags.Items.NUGGETS)
-            .addTags(Items.OrichalcumNuggets, Items.coldIronNuggets, Items.ShadowSilverNuggets);
+            .addTags(Items.OrichalcumNuggets, Items.coldIronNuggets, Items.TransmutationGoldNuggets);
+
+        this.tag(Items.TransmutationGoldDusts).add(transmutation_gold_dust.get());
+        this.tag(Tags.Items.DUSTS)
+            .addTags(Items.TransmutationGoldDusts);
 
         this.copy(Tags.Blocks.STORAGE_BLOCKS, Tags.Items.STORAGE_BLOCKS);
         this.copy(Tags.Blocks.ORE_RATES_SINGULAR, Tags.Items.ORE_RATES_SINGULAR);
@@ -126,6 +134,9 @@ public class ItemTagProvider extends ItemTagsProvider {
         this.copy(Blocks.ShadowSilverBlock, Items.ShadowSilverBlock);
         this.copy(Blocks.ShadowSilverOre, Items.ShadowSilverOre);
         this.copy(Blocks.RawShadowSilverBlock, Items.RawShadowSilverBlock);
+        this.copy(Blocks.TransmutationGoldBlock, Items.TransmutationGoldBlock);
+        this.copy(Blocks.TransmutationGoldOre, Items.TransmutationGoldOre);
+        this.copy(Blocks.RawTransmutationGoldBlock, Items.RawTransmutationGoldBlock);
         this.copy(Tags.Blocks.ORES, Tags.Items.ORES);
     }
 

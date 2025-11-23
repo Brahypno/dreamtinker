@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "dreamtinker:block/deepslate_transmutation_gold_ore"
+  }
+}

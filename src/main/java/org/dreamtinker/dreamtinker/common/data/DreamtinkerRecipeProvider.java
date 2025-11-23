@@ -197,16 +197,15 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                 .setCast(Tags.Items.DUSTS_REDSTONE, true)
                                 .save(consumer, location(folder + "currus_triumphalis_antimonii/smoky_to_star"));
         ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.metallivorous_stibium_lupus.get())
-                                .setFluid(DreamtinkerFluids.molten_albedo_stibium.getLocalTag(), FluidValues.GEM)
-                                .setCoolingTime(100)
-                                .setCast(Tags.Items.STORAGE_BLOCKS_GOLD, true)
+                                .setFluid(DreamtinkerFluids.molten_albedo_stibium.getLocalTag(), FluidValues.GEM * 4)
+                                .setCoolingTime(70)
+                                .setCast(DreamtinkerTagKeys.Items.TransmutationGoldBlock, true)
                                 .save(consumer, location(folder + "currus_triumphalis_antimonii/albedo_to_lupus_block"));
         ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.metallivorous_stibium_lupus.get())
-                                .setFluid(DreamtinkerFluids.molten_albedo_stibium.getLocalTag(), FluidValues.GEM)
-                                .setCoolingTime(100)
-                                .setCast(forgeItemTag("dusts/gold"), true)
-                                .save(withCondition(consumer, tagCondition("dusts/gold")),
-                                      location(folder + "currus_triumphalis_antimonii/albedo_to_lupus_dust"));
+                                .setFluid(DreamtinkerFluids.molten_albedo_stibium.getLocalTag(), FluidValues.GEM * 4)
+                                .setCoolingTime(50)
+                                .setCast(DreamtinkerTagKeys.Items.TransmutationGoldDusts, true)
+                                .save(consumer, location(folder + "currus_triumphalis_antimonii/albedo_to_lupus_dust"));
 
         ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.crying_obsidian_plane)
                                 .setFluidAndTime(DreamtinkerFluids.molten_crying_obsidian, FluidValues.GLASS_PANE)
@@ -419,17 +418,17 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         wrapped = withCondition(consumer, tagCondition("ingots/silver"));
         MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.OrichalcumOre),
                                      DreamtinkerFluids.molten_orichalcum.get(), FluidValues.INGOT * 2, 1.0f)
-                            .addByproduct(DreamtinkerFluids.molten_cold_iron.result(FluidValues.INGOT * 2))
+                            .addByproduct(DreamtinkerFluids.molten_shadow_silver.result(FluidValues.INGOT * 2))
                             .setOre(IMeltingContainer.OreRateType.METAL)
                             .save(wrapped, location(folder + "orichalcum/ore_wc"));
         MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.RawOrichalcumBlock),
                                      DreamtinkerFluids.molten_orichalcum.get(), FluidValues.METAL_BLOCK, 1.0f)
-                            .addByproduct(DreamtinkerFluids.molten_cold_iron.result(FluidValues.METAL_BLOCK))
+                            .addByproduct(DreamtinkerFluids.molten_shadow_silver.result(FluidValues.METAL_BLOCK))
                             .setOre(IMeltingContainer.OreRateType.METAL)
                             .save(wrapped, location(folder + "orichalcum/raw_storage_blocks_wc"));
         MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.raw_orichalcum),
                                      DreamtinkerFluids.molten_orichalcum.get(), FluidValues.INGOT, 1.0f)
-                            .addByproduct(DreamtinkerFluids.molten_cold_iron.result(FluidValues.INGOT))
+                            .addByproduct(DreamtinkerFluids.molten_shadow_silver.result(FluidValues.INGOT))
                             .setOre(IMeltingContainer.OreRateType.METAL)
                             .save(wrapped, location(folder + "orichalcum/raw_materials_wc"));
 
@@ -476,6 +475,19 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                             .setOre(IMeltingContainer.OreRateType.METAL)
                             .save(consumer, location(folder + "cold_iron/raw_materials"));
 
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.TransmutationGoldOre),
+                                     DreamtinkerFluids.molten_transmutation_gold.get(), FluidValues.INGOT * 2, 1.0f)
+                            .setOre(IMeltingContainer.OreRateType.METAL)
+                            .save(consumer, location(folder + "transmutation_gold/ore"));
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.RawTransmutationGoldBlock),
+                                     DreamtinkerFluids.molten_transmutation_gold.get(), FluidValues.METAL_BLOCK, 1.0f)
+                            .setOre(IMeltingContainer.OreRateType.METAL)
+                            .save(consumer, location(folder + "transmutation_gold/raw_storage_blocks"));
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.raw_TransmutationGold),
+                                     DreamtinkerFluids.molten_transmutation_gold.get(), FluidValues.INGOT, 1.0f)
+                            .setOre(IMeltingContainer.OreRateType.METAL)
+                            .save(consumer, location(folder + "transmutation_gold/raw_materials"));
+
         meltCast(DreamtinkerFluids.molten_desire.get(), DreamtinkerCommon.desire_gem.get(), FluidValues.GEM, consumer);
         meltCast(DreamtinkerFluids.despair_essence.get(), DreamtinkerCommon.despair_gem.get(), FluidValues.GEM, consumer);
         meltCast(DreamtinkerFluids.molten_soul_steel.get(), DreamtinkerCommon.soul_steel.get(), FluidValues.INGOT, consumer);
@@ -495,6 +507,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         meltCast(DreamtinkerFluids.molten_shadow_silver.get(), DreamtinkerCommon.shadow_silver_nugget.get(), FluidValues.NUGGET, consumer);
         meltCast(DreamtinkerFluids.molten_shadow_silver.get(), DreamtinkerCommon.shadow_silver_ingot.get(), FluidValues.INGOT, consumer);
         meltCastBlock(DreamtinkerFluids.molten_shadow_silver.get(), DreamtinkerCommon.ShadowSilverBlock.get(), FluidValues.METAL_BLOCK, consumer);
+
+        meltCast(DreamtinkerFluids.molten_transmutation_gold.get(), DreamtinkerCommon.transmutation_gold_nugget.get(), FluidValues.NUGGET, consumer);
+        meltCast(DreamtinkerFluids.molten_transmutation_gold.get(), DreamtinkerCommon.transmutation_gold_ingot.get(), FluidValues.INGOT, consumer);
+        meltCastBlock(DreamtinkerFluids.molten_transmutation_gold.get(), DreamtinkerCommon.TransmutationGoldBlock.get(), FluidValues.METAL_BLOCK, consumer);
 
     }
 
@@ -706,6 +722,14 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                             100)
                                   .unlockedBy("has_orichalcum", has(DreamtinkerTagKeys.Items.raw_orichalcum))
                                   .save(consumer, location(common_folder + "raw_orichalcum" + "/blasting"));
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(DreamtinkerTagKeys.Items.OrichalcumOre),
+                                            RecipeCategory.MISC,
+                                            DreamtinkerCommon.orichalcum.get(),
+                                            3.0f,
+                                            200)
+                                  .unlockedBy("has_orichalcum_ore", has(DreamtinkerTagKeys.Items.OrichalcumOre))
+                                  .save(consumer, location(common_folder + "orichalcum_ore" + "/blasting"));
+
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(DreamtinkerTagKeys.Items.raw_coldIron),
                                             RecipeCategory.MISC,
                                             DreamtinkerCommon.cold_iron_ingot.get(),
@@ -713,26 +737,57 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                             100)
                                   .unlockedBy("has_cold_iron", has(DreamtinkerTagKeys.Items.raw_coldIron))
                                   .save(consumer, location(common_folder + "raw_cold_iron" + "/blasting"));
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(DreamtinkerTagKeys.Items.OrichalcumOre),
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(DreamtinkerTagKeys.Items.coldIronOre),
                                             RecipeCategory.MISC,
-                                            DreamtinkerCommon.orichalcum.get(),
+                                            DreamtinkerCommon.cold_iron_ingot.get(),
                                             3.0f,
-                                            200)
-                                  .unlockedBy("has_orichalcum", has(Dreamtinker.forgeItemTag("ores/orichalcum")))
-                                  .save(consumer, location(common_folder + "orichalcum_ore" + "/blasting"));
+                                            100)
+                                  .unlockedBy("has_cold_iron_ore", has(DreamtinkerTagKeys.Items.coldIronOre))
+                                  .save(consumer, location(common_folder + "cold_iron_ore" + "/blasting"));
+
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(DreamtinkerTagKeys.Items.raw_ShadowSilver),
+                                            RecipeCategory.MISC,
+                                            DreamtinkerCommon.shadow_silver_ingot.get(),
+                                            4.0f,
+                                            100)
+                                  .unlockedBy("has_shadow_silver", has(DreamtinkerTagKeys.Items.raw_ShadowSilver))
+                                  .save(consumer, location(common_folder + "raw_shadow_silver" + "/blasting"));
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(DreamtinkerTagKeys.Items.ShadowSilverOre),
+                                            RecipeCategory.MISC,
+                                            DreamtinkerCommon.shadow_silver_ingot.get(),
+                                            4.0f,
+                                            100)
+                                  .unlockedBy("has_shadow_silver_ore", has(DreamtinkerTagKeys.Items.ShadowSilverOre))
+                                  .save(consumer, location(common_folder + "shadow_silver_ore" + "/blasting"));
+
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(DreamtinkerTagKeys.Items.raw_TransmutationGold),
+                                            RecipeCategory.MISC,
+                                            DreamtinkerCommon.transmutation_gold_ingot.get(),
+                                            4.0f,
+                                            100)
+                                  .unlockedBy("has_transmutation_gold", has(DreamtinkerTagKeys.Items.raw_TransmutationGold))
+                                  .save(consumer, location(common_folder + "raw_transmutation_gold" + "/blasting"));
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(DreamtinkerTagKeys.Items.TransmutationGoldOre),
+                                            RecipeCategory.MISC,
+                                            DreamtinkerCommon.transmutation_gold_ingot.get(),
+                                            4.0f,
+                                            100)
+                                  .unlockedBy("has_transmutation_gold_ore", has(DreamtinkerTagKeys.Items.TransmutationGoldOre))
+                                  .save(consumer, location(common_folder + "transmutation_goldr_ore" + "/blasting"));
+
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(DreamtinkerTagKeys.Items.blackSapphireOre),
                                             RecipeCategory.MISC,
                                             DreamtinkerCommon.black_sapphire.get(),
                                             3.0f,
                                             200)
-                                  .unlockedBy("has_orichalcum", has(Dreamtinker.forgeItemTag("ores/black_sapphire")))
+                                  .unlockedBy("has_black_sapphire_ore", has(DreamtinkerTagKeys.Items.blackSapphireOre))
                                   .save(consumer, location(common_folder + "black_sapphire_ore" + "/smelting"));
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(DreamtinkerTagKeys.Items.blackSapphireOre),
                                             RecipeCategory.MISC,
                                             DreamtinkerCommon.black_sapphire.get(),
                                             3.0f,
                                             100)
-                                  .unlockedBy("has_orichalcum", has(Dreamtinker.forgeItemTag("ores/black_sapphire")))
+                                  .unlockedBy("has_black_sapphire_ore", has(DreamtinkerTagKeys.Items.blackSapphireOre))
                                   .save(consumer, location(common_folder + "black_sapphire_ore" + "/blasting"));
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, DreamtinkerCommon.persona_cast.get())
                            .define('e', Items.WEEPING_VINES)
@@ -771,6 +826,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         night_one_receipts(consumer, DreamtinkerCommon.raw_shadow_silver.get(), DreamtinkerCommon.RawShadowSilverBlock.asItem());
         night_one_receipts(consumer, DreamtinkerCommon.shadow_silver_ingot.get(), DreamtinkerCommon.ShadowSilverBlock.asItem());
         night_one_receipts(consumer, DreamtinkerCommon.shadow_silver_nugget.get(), DreamtinkerCommon.shadow_silver_ingot.get());
+
+        night_one_receipts(consumer, DreamtinkerCommon.raw_transmutation_gold.get(), DreamtinkerCommon.RawTransmutationGoldBlock.asItem());
+        night_one_receipts(consumer, DreamtinkerCommon.transmutation_gold_ingot.get(), DreamtinkerCommon.TransmutationGoldBlock.asItem());
+        night_one_receipts(consumer, DreamtinkerCommon.transmutation_gold_nugget.get(), DreamtinkerCommon.transmutation_gold_ingot.get());
 
         new SpiritInfusionRecipeBuilder(ItemRegistry.THE_VESSEL.get(), 1, new ItemStack(DreamtinkerCommon.malignant_gluttony.get()))
                 .addExtraItem(ItemRegistry.NULL_SLATE.get(), 4)

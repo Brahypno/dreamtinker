@@ -521,6 +521,10 @@
   "item.dreamtinker.shadow_silver_nugget": "影银粒",
   "item.dreamtinker.shadow_silver_ingot": "影银锭",
   "item.dreamtinker.raw_shadow_silver": "粗影银",
+  "item.dreamtinker.transmutation_gold_nugget": "曜金粒",
+  "item.dreamtinker.transmutation_gold_dust": "曜金粉",
+  "item.dreamtinker.transmutation_gold_ingot": "曜金锭",
+  "item.dreamtinker.raw_transmutation_gold": "粗曜金",
 
   "block.dreamtinker.crying_obsidian_pane": "哭泣的黑曜石板",
   "block.dreamtinker.narcissus": "水仙",
@@ -545,6 +549,10 @@
   "block.dreamtinker.deepslate_shadow_silver_ore": "深层影银矿石",
   "block.dreamtinker.shadow_silver_block": "影银块",
   "block.dreamtinker.raw_shadow_silver_block": "粗影银块",
+  "block.dreamtinker.transmutation_gold_ore": "曜金矿石",
+  "block.dreamtinker.deepslate_transmutation_gold_ore": "深层曜金矿石",
+  "block.dreamtinker.transmutation_gold_block": "曜金块",
+  "block.dreamtinker.raw_transmutation_gold_block": "粗曜金块",
 
   "material.dreamtinker.echo_alloy": "回响合金",
   "material.dreamtinker.echo_alloy.flavor": "是神秘的回响，还是秘密的回响",
@@ -619,6 +627,8 @@
   "material.dreamtinker.cold_iron.flavor": "目标会出现",
   "material.dreamtinker.shadow_silver": "影银",
   "material.dreamtinker.shadow_silver.flavor": "银的影中自我",
+  "material.dreamtinker.transmutation_gold": "曜金",
+  "material.dreamtinker.transmutation_gold.flavor": "这种转化需要太阳的力量，因而极其稀有",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "熔融回响合金",
   "fluid.dreamtinker.molten_echo_alloy": "熔融回响合金",
@@ -728,6 +738,9 @@
   "fluid_type.dreamtinker.molten_shadow_silver": "熔融影银",
   "fluid.dreamtinker.molten_shadow_silver": "熔融影银",
   "fluid.dreamtinker.molten_shadow_silver.fluid_effect": "熔融影银",
+  "fluid_type.dreamtinker.molten_transmutation_gold": "熔融曜金",
+  "fluid.dreamtinker.molten_transmutation_gold": "熔融曜金",
+  "fluid.dreamtinker.molten_transmutation_gold.fluid_effect": "熔融曜金",
 
   "item.dreamtinker.molten_echo_alloy_bucket": "熔融回响合金桶",
   "item.dreamtinker.molten_echo_shard_bucket": "熔融回响碎片桶",
@@ -765,6 +778,7 @@
   "item.dreamtinker.molten_orichalcum_bucket": "熔融月山铜桶",
   "item.dreamtinker.molten_cold_iron_bucket": "熔融引寒铁桶",
   "item.dreamtinker.molten_shadow_silver_bucket": "熔融影银桶",
+  "item.dreamtinker.molten_transmutation_gold_bucket": "熔融曜金桶",
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "流血",
   "fluid_effect.tconstruct.damage.explosion": "爆炸",

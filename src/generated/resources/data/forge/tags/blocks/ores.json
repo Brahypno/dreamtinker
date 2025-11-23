@@ -1,15 +1,12 @@
 {
   "values": [
-    "dreamtinker:larimar_ore",
-    "dreamtinker:amber_ore",
-    "dreamtinker:black_sapphire_ore",
-    "dreamtinker:deepslate_black_sapphire_ore",
-    "dreamtinker:scolecite_ore",
-    "dreamtinker:deepslate_cold_iron_ore",
-    "dreamtinker:cold_iron_ore",
-    "dreamtinker:orichalcum_ore",
-    "dreamtinker:deepslate_orichalcum_ore",
-    "dreamtinker:cold_iron_ore",
-    "dreamtinker:deepslate_cold_iron_ore"
+    "#forge:ores/larimar",
+    "#forge:ores/amber",
+    "#forge:ores/scolecite",
+    "#forge:ores/black_sapphire",
+    "#forge:ores/orichalcum",
+    "#forge:ores/cold_iron",
+    "#forge:ores/shadow_silver",
+    "#forge:ores/transmutation_gold"
   ]
 }

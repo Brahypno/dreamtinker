@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:casting_basin",
+  "cooling_time": 216,
+  "fluid": {
+    "amount": 810,
+    "fluid": "dreamtinker:molten_transmutation_gold"
+  },
+  "result": "dreamtinker:transmutation_gold_block"
+}

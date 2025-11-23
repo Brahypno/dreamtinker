@@ -6,6 +6,9 @@
     "dreamtinker:deepslate_orichalcum_ore",
     "dreamtinker:orichalcum_block",
     "dreamtinker:raw_orichalcum_block",
-    "dreamtinker:shadow_silver_block"
+    "dreamtinker:shadow_silver_block",
+    "dreamtinker:transmutation_gold_block",
+    "dreamtinker:raw_transmutation_gold_block",
+    "dreamtinker:soul_steel_block"
   ]
 }

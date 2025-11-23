@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "dreamtinker:block/raw_transmutation_gold_block"
+  }
+}

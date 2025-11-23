@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "dreamtinker:transmutation_gold_ingot"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "dreamtinker:transmutation_gold_nugget"
+  }
+}

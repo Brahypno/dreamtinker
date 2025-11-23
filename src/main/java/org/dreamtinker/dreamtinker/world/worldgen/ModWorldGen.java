@@ -88,6 +88,11 @@ public class ModWorldGen {
     public static ResourceKey<PlacedFeature> placedSmallShadowSilverOre =
             key(Registries.PLACED_FEATURE, "shadow_silver_ore");
 
+    public static ResourceKey<ConfiguredFeature<?, ?>> configuredSmallTransmutationGoldOre =
+            key(Registries.CONFIGURED_FEATURE, "transmutation_gold_ore");
+    public static ResourceKey<PlacedFeature> placedSmallTransmutationGoldOre =
+            key(Registries.PLACED_FEATURE, "transmutation_gold_ore");
+
 
     /**
      * ConfiguredFeature：一簇水仙（cross 小花），仅在能存活的位置尝试放置
@@ -143,7 +148,6 @@ public class ModWorldGen {
         );
         register(ctx, configuredSmallOrichalcumOre, Feature.ORE, new OreConfiguration(orichalcum, 4, 0.3f));
 
-
         var shadowSilver = List.of(
                 OreConfiguration.target(new TagAndTagRuleTest(Dreamtinker.forgeBlockTag("ores/silver"), Tags.Blocks.ORES_IN_GROUND_STONE),
                                         DreamtinkerCommon.ShadowSilverOre.get().defaultBlockState()),
@@ -151,6 +155,14 @@ public class ModWorldGen {
                                         DreamtinkerCommon.DeepslateShadowSilverOre.get().defaultBlockState())
         );
         register(ctx, configuredSmallShadowSilverOre, Feature.ORE, new OreConfiguration(shadowSilver, 2, 0.2f));
+
+
+        var TransmutationGold = List.of(
+                OreConfiguration.target(new BlockMatchTest(Blocks.GOLD_ORE), DreamtinkerCommon.TransmutationGoldOre.get().defaultBlockState()),
+                OreConfiguration.target(new BlockMatchTest(Blocks.DEEPSLATE_GOLD_ORE),
+                                        DreamtinkerCommon.DeepslateTransmutationGoldOre.get().defaultBlockState())
+        );
+        register(ctx, configuredSmallTransmutationGoldOre, Feature.ORE, new OreConfiguration(TransmutationGold, 4, 0.2f));
     }
 
     /**
@@ -207,6 +219,11 @@ public class ModWorldGen {
                  CountPlacement.of(3),
                  InSquarePlacement.spread(),
                  HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128)),
+                 BiomeFilter.biome());
+        register(ctx, placedSmallTransmutationGoldOre, configuredSmallTransmutationGoldOre,
+                 CountPlacement.of(4),
+                 InSquarePlacement.spread(),
+                 HeightRangePlacement.uniform(VerticalAnchor.absolute(16), VerticalAnchor.absolute(128)),
                  BiomeFilter.biome());
     }
 

@@ -43,8 +43,9 @@ public class BlockTagProvider extends BlockTagsProvider {
         tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL, larimarOre, amberOre, scoleciteOre, soulSteelBlock,
                   coldIronOre, DeepslateColdIronOre, ColdIronBlock, RawColdIronBlock,
                   OrichalcumOre, DeepslateOrichalcumOre, OrichalcumBlock, RawOrichalcumBlock,
-                  ShadowSilverBlock, ShadowSilverOre, DeepslateShadowSilverOre, RawShadowSilverBlock);
-        tagBlocks(BEACON_BASE_BLOCKS, soulSteelBlock, OrichalcumBlock, ColdIronBlock, ShadowSilverBlock);
+                  ShadowSilverBlock, ShadowSilverOre, DeepslateShadowSilverOre, RawShadowSilverBlock,
+                  TransmutationGoldBlock, TransmutationGoldOre, DeepslateTransmutationGoldOre, RawTransmutationGoldBlock);
+        tagBlocks(BEACON_BASE_BLOCKS, soulSteelBlock, OrichalcumBlock, ColdIronBlock, ShadowSilverBlock, TransmutationGoldBlock);
 
         tagBlocks(DreamtinkerTagKeys.Blocks.larimarOre, larimarOre);
         tagBlocks(DreamtinkerTagKeys.Blocks.amberOre, amberOre);
@@ -64,20 +65,26 @@ public class BlockTagProvider extends BlockTagsProvider {
         tagBlocks(DreamtinkerTagKeys.Blocks.RawShadowSilverBlock, RawShadowSilverBlock);
         tagBlocks(DreamtinkerTagKeys.Blocks.ShadowSilverOre, ShadowSilverOre, DeepslateShadowSilverOre);
 
+        tagBlocks(DreamtinkerTagKeys.Blocks.TransmutationGoldBlock, TransmutationGoldBlock);
+        tagBlocks(DreamtinkerTagKeys.Blocks.RawTransmutationGoldBlock, RawTransmutationGoldBlock);
+        tagBlocks(DreamtinkerTagKeys.Blocks.TransmutationGoldOre, TransmutationGoldOre, DeepslateTransmutationGoldOre);
+
         tagBlocks(Tags.Blocks.STORAGE_BLOCKS, ColdIronBlock, RawColdIronBlock,
                   OrichalcumOre, DeepslateOrichalcumOre, OrichalcumBlock, RawOrichalcumBlock,
-                  ShadowSilverBlock);
+                  ShadowSilverBlock, TransmutationGoldBlock, RawTransmutationGoldBlock, soulSteelBlock);
 
         this.tag(Tags.Blocks.ORES)
-            .add(larimarOre.get(), amberOre.get(), blackSapphireOre.get(), DeepSlateBlackSapphireOre.get(), scoleciteOre.get(), DeepslateColdIronOre.get(),
-                 coldIronOre.get(), OrichalcumOre.get(), DeepslateOrichalcumOre.get(), coldIronOre.get(), DeepslateColdIronOre.get());
+            .addTags(DreamtinkerTagKeys.Blocks.larimarOre, DreamtinkerTagKeys.Blocks.amberOre, DreamtinkerTagKeys.Blocks.scoleciteOre,
+                     DreamtinkerTagKeys.Blocks.blackSapphireOre, DreamtinkerTagKeys.Blocks.OrichalcumOre, DreamtinkerTagKeys.Blocks.coldIronOre,
+                     DreamtinkerTagKeys.Blocks.ShadowSilverOre, DreamtinkerTagKeys.Blocks.TransmutationGoldOre);
 
         tagBlocks(Tags.Blocks.ORE_RATES_SINGULAR, larimarOre, amberOre, larimarOre, blackSapphireOre, DeepSlateBlackSapphireOre, OrichalcumOre,
-                  DeepslateOrichalcumOre, ShadowSilverOre, DeepslateShadowSilverOre);
+                  DeepslateOrichalcumOre, ShadowSilverOre, DeepslateShadowSilverOre, TransmutationGoldOre, DeepslateTransmutationGoldOre);
         tagBlocks(Tags.Blocks.ORE_RATES_DENSE, scoleciteOre, DeepslateColdIronOre, coldIronOre);
 
-        this.tag(Tags.Blocks.ORES_IN_GROUND_DEEPSLATE).add(DeepSlateBlackSapphireOre.get(), DeepslateColdIronOre.get(), DeepslateShadowSilverOre.get());
-        this.tag(Tags.Blocks.ORES_IN_GROUND_STONE).add(blackSapphireOre.get(), coldIronOre.get(), ShadowSilverOre.get());
+        this.tag(Tags.Blocks.ORES_IN_GROUND_DEEPSLATE)
+            .add(DeepSlateBlackSapphireOre.get(), DeepslateColdIronOre.get(), DeepslateShadowSilverOre.get(), DeepslateTransmutationGoldOre.get());
+        this.tag(Tags.Blocks.ORES_IN_GROUND_STONE).add(blackSapphireOre.get(), coldIronOre.get(), ShadowSilverOre.get(), TransmutationGoldOre.get());
     }
 
     @SafeVarargs

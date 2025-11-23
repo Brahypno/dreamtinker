@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 4.0,
+  "ingredient": {
+    "tag": "forge:ores/transmutation_gold"
+  },
+  "result": "dreamtinker:transmutation_gold_ingot"
+}

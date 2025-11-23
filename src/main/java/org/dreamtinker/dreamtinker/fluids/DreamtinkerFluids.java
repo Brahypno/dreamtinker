@@ -258,11 +258,15 @@ public class DreamtinkerFluids {
 
     public static final FlowingFluidObject<ForgeFlowingFluid> molten_cold_iron =
             registerFluid(FLUIDS, "molten_cold_iron", 1100, 1000, 1000, 15,
-                          supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_PURPLE, 10), 10, 2) {});
+                          supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_BLUE, 10), 10, 2) {});
 
     public static final FlowingFluidObject<ForgeFlowingFluid> molten_shadow_silver =
             registerFluid(FLUIDS, "molten_shadow_silver", 1300, 1000, 1000, 15,
-                          supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_PURPLE, 10), 10, 2) {});
+                          supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_YELLOW, 10), 10, 2) {});
+
+    public static final FlowingFluidObject<ForgeFlowingFluid> molten_transmutation_gold =
+            registerFluid(FLUIDS, "molten_transmutation_gold", 1500, 1000, 1000, 15,
+                          supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_RED, 15), 10, 2) {});
 
     private static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         // containers
@@ -306,5 +310,6 @@ public class DreamtinkerFluids {
         output.accept(molten_orichalcum);
         output.accept(molten_cold_iron);
         output.accept(molten_shadow_silver);
+        output.accept(molten_transmutation_gold);
     }
 }

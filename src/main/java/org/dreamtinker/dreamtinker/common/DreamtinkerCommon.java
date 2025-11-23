@@ -173,6 +173,14 @@ public class DreamtinkerCommon extends DreamtinkerModule {
     public static final RegistryObject<Item> shadow_silver_ingot = ITEMS.register("shadow_silver_ingot", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> raw_shadow_silver = ITEMS.register("raw_shadow_silver", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> shadow_silver_nugget = ITEMS.register("shadow_silver_nugget", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> transmutation_gold_ingot =
+            ITEMS.register("transmutation_gold_ingot", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> raw_transmutation_gold =
+            ITEMS.register("raw_transmutation_gold", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> transmutation_gold_nugget =
+            ITEMS.register("transmutation_gold_nugget", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> transmutation_gold_dust =
+            ITEMS.register("transmutation_gold_dust", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
 
     protected static final Item.Properties FOOD_PROPS = new Item.Properties();
     public static final RegistryObject<Item> white_peach = ITEMS.register("white_peach", () -> new Item(
@@ -226,6 +234,10 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         output.accept(shadow_silver_nugget.get());
         output.accept(shadow_silver_ingot.get());
         output.accept(raw_shadow_silver.get());
+        output.accept(transmutation_gold_dust.get());
+        output.accept(transmutation_gold_nugget.get());
+        output.accept(transmutation_gold_ingot.get());
+        output.accept(raw_transmutation_gold.get());
         if (ModList.get().isLoaded("malum"))
             output.accept(malignant_gluttony.get());
         if (ModList.get().isLoaded("enigmaticlegacy"))
@@ -307,6 +319,17 @@ public class DreamtinkerCommon extends DreamtinkerModule {
     public static final ItemObject<Block> ShadowSilverBlock = BLOCKS.register("shadow_silver_block", () -> new Block(
             builder(MapColor.METAL, SoundType.METAL).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(30f, 30f)), BLOCK_ITEM);
 
+    public static final ItemObject<Block> TransmutationGoldOre = BLOCKS.register("transmutation_gold_ore", () -> new Block(
+            builder(MapColor.STONE, SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(16, 16f)), BLOCK_ITEM);
+    public static final ItemObject<Block> DeepslateTransmutationGoldOre =
+            BLOCKS.register("deepslate_transmutation_gold_ore",
+                            () -> new Block(builder(MapColor.DEEPSLATE, SoundType.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
+                                                                                        .strength(18f, 18f)), BLOCK_ITEM);
+    public static final ItemObject<Block> RawTransmutationGoldBlock = BLOCKS.register("raw_transmutation_gold_block", () -> new Block(
+            builder(MapColor.METAL, SoundType.METAL).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(36f, 36f)), BLOCK_ITEM);
+    public static final ItemObject<Block> TransmutationGoldBlock = BLOCKS.register("transmutation_gold_block", () -> new Block(
+            builder(MapColor.METAL, SoundType.METAL).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(36f, 36f)), BLOCK_ITEM);
+
     public static void addTabBlocks(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         output.accept(crying_obsidian_plane.get());
         output.accept(narcissus.get());
@@ -328,6 +351,10 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         output.accept(DeepslateShadowSilverOre);
         output.accept(RawShadowSilverBlock);
         output.accept(ShadowSilverBlock);
+        output.accept(TransmutationGoldOre);
+        output.accept(DeepslateTransmutationGoldOre);
+        output.accept(RawTransmutationGoldBlock);
+        output.accept(TransmutationGoldBlock);
     }
 
     protected static BlockBehaviour.Properties builder(SoundType soundType) {
