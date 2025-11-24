@@ -7,11 +7,10 @@ import net.minecraftforge.common.ForgeTier;
 import net.minecraftforge.common.TierSortingRegistry;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
-import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 
 import java.util.List;
 
-import static net.minecraft.tags.BlockTags.NEEDS_DIAMOND_TOOL;
+import static org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys.Blocks.*;
 
 public class DtTiers {
     public static final Tier WOLF_TIER = TierSortingRegistry.registerTier(
@@ -21,7 +20,7 @@ public class DtTiers {
                     9.0F,            // 挖掘速度
                     4.0F,            // 额外攻击
                     15,              // 附魔性
-                    DreamtinkerTagKeys.Blocks.need_lupus, // “需要此等级工具”的方块标签
+                    need_lupus, // “需要此等级工具”的方块标签
                     () -> Ingredient.of(DreamtinkerCommon.metallivorous_stibium_lupus.get()) // 修复材料（可随意）
             ),
             Dreamtinker.getLocation("lupus"),
@@ -35,7 +34,7 @@ public class DtTiers {
                     6.0F,            // 挖掘速度
                     2.0F,            // 额外攻击
                     14,              // 附魔性
-                    DreamtinkerTagKeys.Blocks.need_netheritte, // “需要此等级工具”的方块标签
+                    need_netheritte, // “需要此等级工具”的方块标签
                     () -> Ingredient.of(DreamtinkerCommon.metallivorous_stibium_lupus.get()) // 修复材料（可随意）
             ),
             Dreamtinker.getLocation("netheritte"),
@@ -49,7 +48,7 @@ public class DtTiers {
                     12.0F,            // 挖掘速度
                     3.0F,            // 额外攻击
                     20,              // 附魔性
-                    NEEDS_DIAMOND_TOOL, // “需要此等级工具”的方块标签
+                    need_transmutation_gold, // “需要此等级工具”的方块标签
                     () -> Ingredient.of(DreamtinkerCommon.transmutation_gold_ingot.get())
             ),
             Dreamtinker.getLocation("transmutation_gold"),

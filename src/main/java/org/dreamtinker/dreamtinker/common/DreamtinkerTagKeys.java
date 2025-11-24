@@ -104,9 +104,14 @@ public class DreamtinkerTagKeys {
             return TagKey.create(ForgeRegistries.BLOCKS.getRegistryKey(), new ResourceLocation(Dreamtinker.MODID, name));
         }
 
+        private static TagKey<Block> create(String p_203847_) {
+            return TagKey.create(Registries.BLOCK, new ResourceLocation(p_203847_));
+        }
+
         public static final TagKey<Block> drop_peach = dreamtinkerTag("drops/peach");
-        public static final TagKey<Block> need_lupus = forgeTag("need_tool/lupus");
-        public static final TagKey<Block> need_netheritte = forgeTag("need_tool/netheritte");
+        public static final TagKey<Block> need_lupus = create("needs_lupus_tool");
+        public static final TagKey<Block> need_netheritte = create("needs_netheritte_tool");
+        public static final TagKey<Block> need_transmutation_gold = create("needs_transmutation_gold_tool");
         public static final TagKey<Block> larimarOre = forgeTag("ores/larimar");
         public static final TagKey<Block> amberOre = forgeTag("ores/amber");
         public static final TagKey<Block> scoleciteOre = forgeTag("ores/scolecite");
