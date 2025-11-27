@@ -31,23 +31,26 @@ import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.entity.IEntityAdditionalSpawnData;
 import net.minecraftforge.network.NetworkHooks;
 import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.jetbrains.annotations.NotNull;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
 import slimeknights.tconstruct.library.tools.definition.ToolDefinition;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
 import slimeknights.tconstruct.library.tools.item.ModifiableItem;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
+import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 import java.util.List;
 
-import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.TNT_ARROW_GRAVITY;
-import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.TNT_ARROW_RADIUS;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.*;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.ContinuousExplodeTimes;
 import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.NO_COOLDOWN;
 
 public class TNTArrow extends ModifiableItem {
     public static final ResourceLocation TAG_CONTINUOUS = Dreamtinker.getLocation("continuous_explode");
+    public static final ResourceLocation TAG_EXPLODE_ALREADY = Dreamtinker.getLocation("already_explode");
 
     public void appendHoverText(@NotNull ItemStack stack, Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
         super.appendHoverText(stack, level, tooltip, flag);
@@ -56,6 +59,18 @@ public class TNTArrow extends ModifiableItem {
         if (currentTime < timeAllows)
             tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.continuous_explode").append(String.valueOf(timeAllows - currentTime))
                                  .withStyle(ChatFormatting.DARK_RED));
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, Level worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+        if (!worldIn.isClientSide){
+            ToolStack ts = ToolStack.from(stack);
+            if (ts.getPersistentData().contains(TAG_EXPLODE_ALREADY)){
+                ts.getPersistentData().remove(TAG_EXPLODE_ALREADY);
+                ts.updateStack(stack);
+            }
+        }
+        InventoryTickModifierHook.heldInventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
     }
 
     @Override
@@ -162,25 +177,43 @@ public class TNTArrow extends ModifiableItem {
         protected void onHit(@NotNull HitResult result) {
             super.onHit(result);
             if (!this.level().isClientSide){
-                float sound = 2.0F;
                 Vec3 hitPos = result.getLocation();
-                // 查找半径内的实体
-                int hitRadius = TNT_ARROW_RADIUS.get();
-                List<Entity> nearbyEntities =
-                        this.level().getEntities(null, new AABB(hitPos.subtract(hitRadius, hitRadius, hitRadius), hitPos.add(hitRadius, hitRadius, hitRadius)));
-
-                // 遍历实体列表
-                for (Entity entity : nearbyEntities) {
-                    if (entity instanceof LivingEntity livingEntity){
-                        hitEntity(livingEntity);
+                boolean explosion = 0 < ModifierUtil.getModifierLevel(tntarrow, DreamtinkerModifiers.Ids.force_to_explosion);
+                if (explosion){
+                    ToolStack ts = ToolStack.from(tntarrow);
+                    if (ts.getPersistentData().contains(TAG_EXPLODE_ALREADY))
+                        return;
+                    double explosionPower = Math.min((2.0f * Math.sqrt(ts.getStats().get(ToolStats.ATTACK_DAMAGE))), ForceExplosionPower.get());
+                    this.level().explode(
+                            this.getOwner(),
+                            DreamtinkerDamageTypes.source(this.level().registryAccess(), DreamtinkerDamageTypes.force_to_explosion, this, this.getOwner()),
+                            null,
+                            hitPos.x, hitPos.y, hitPos.z,
+                            (float) explosionPower, false,
+                            Level.ExplosionInteraction.TNT
+                    );
+                    ts.getPersistentData().putBoolean(TAG_EXPLODE_ALREADY, true);
+                    ts.updateStack(tntarrow);
+                }else {
+                    float sound = 2.0F;
+                    // 查找半径内的实体
+                    int hitRadius = TNT_ARROW_RADIUS.get();
+                    List<Entity> nearbyEntities =
+                            this.level()
+                                .getEntities(null, new AABB(hitPos.subtract(hitRadius, hitRadius, hitRadius), hitPos.add(hitRadius, hitRadius, hitRadius)));
+                    // 遍历实体列表
+                    for (Entity entity : nearbyEntities) {
+                        if (entity instanceof LivingEntity livingEntity){
+                            hitEntity(livingEntity);
+                            sound++;
+                        }
+                    }
+                    if (this.getOwner() != null && this.getOwner().position().distanceTo(hitPos) <= hitRadius){
+                        hitEntity(this.getOwner());
                         sound++;
                     }
+                    this.playSound(SoundEvents.GENERIC_EXPLODE, sound, (1.0F + (random.nextFloat() - random.nextFloat()) * 0.2F) * 0.7F);
                 }
-                if (this.getOwner() != null && this.getOwner().position().distanceTo(hitPos) <= hitRadius){
-                    hitEntity(this.getOwner());
-                    sound++;
-                }
-                this.playSound(SoundEvents.GENERIC_EXPLODE, sound, (1.0F + (random.nextFloat() - random.nextFloat()) * 0.2F) * 0.7F);
                 int timeAllows = ModifierUtil.getModifierLevel(tntarrow, DreamtinkerModifiers.Ids.continuous_explode) * ContinuousExplodeTimes.get();
                 int currentTime = ModifierUtil.getPersistentInt(tntarrow, TAG_CONTINUOUS, 0);
                 if (currentTime < timeAllows){
@@ -200,7 +233,7 @@ public class TNTArrow extends ModifiableItem {
         @Override
         public void tick() {
             super.tick();
-            if (!this.isNoGravity()){
+            if (!this.isNoGravity() && ModifierUtil.getModifierLevel(tntarrow, DreamtinkerModifiers.Ids.force_to_explosion) <= 0){
                 this.setDeltaMovement(this.getDeltaMovement().add(0.0, TNT_ARROW_GRAVITY.get(), 0.0));
             }
         }

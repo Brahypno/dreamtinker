@@ -236,6 +236,8 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
 
         buildModifier(Ids.soul_unchanged)
                 .addModules(ModifierSlotModule.slot(SlotType.SOUL).eachLevel(2));
+        buildModifier(Ids.force_to_explosion)
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
 
         addELModifiers();
         addMalumModifiers();

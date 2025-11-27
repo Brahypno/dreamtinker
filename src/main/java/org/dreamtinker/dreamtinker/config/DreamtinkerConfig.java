@@ -16,6 +16,8 @@ public class DreamtinkerConfig {
             builder.comment("Strong Explode Damage Boost").defineInRange("StrongExplodeDamageBoost", 10, 1, 1000);
     public static final ForgeConfigSpec.IntValue ContinuousExplodeTimes =
             builder.comment("how many times use per level for tnt Arrow").defineInRange("ContinuousExplodeTimes", 2, 0, 100);
+    public static final ForgeConfigSpec.DoubleValue ForceExplosionPower =
+            builder.comment("how many times use per level for tnt Arrow").defineInRange("ContinuousExplodeTimes", 12.0, 0, 30);
     public static final ForgeConfigSpec.DoubleValue UnderPlateBoostMax =
             builder.comment("Maximum Boost from Weapon transformation? default 10=1000%").defineInRange("UnderPlateBoostMax", 10.0, 1, 100);
     public static final ForgeConfigSpec.DoubleValue UnderPlateBoostArmorFactor =

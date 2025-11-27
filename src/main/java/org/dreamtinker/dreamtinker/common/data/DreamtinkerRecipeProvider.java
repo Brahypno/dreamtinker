@@ -1016,6 +1016,14 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setSlots(SlotType.UPGRADE, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.continuous_explode, upgradeSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.continuous_explode, upgradeFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.force_to_explosion)
+                             .setTools(Ingredient.of(DreamtinkerTools.tntarrow.get()))
+                             .addInput(Items.STONE_PICKAXE)
+                             .addInput(Tags.Items.GUNPOWDER)
+                             .setMaxLevel(1)
+                             .setSlots(SlotType.ABILITY, 1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.force_to_explosion, upgradeSalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.Ids.force_to_explosion, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.mei)
                              .setTools(TinkerTags.Items.MELEE)
                              .addInput(Items.POPPY).addInput(Items.POPPY)

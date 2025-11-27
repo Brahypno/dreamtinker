@@ -1,0 +1,20 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "minecraft:stone_pickaxe"
+    },
+    {
+      "tag": "forge:gunpowder"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:force_to_explosion",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "item": "dreamtinker:tntarrow"
+  }
+}

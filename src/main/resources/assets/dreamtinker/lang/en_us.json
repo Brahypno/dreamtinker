@@ -433,6 +433,9 @@
   "modifier.dreamtinker.soul_unchanged": "The unchanged",
   "modifier.dreamtinker.soul_unchanged.flavor": "The only unchanged is the change itself",
   "modifier.dreamtinker.soul_unchanged.description": "Give 2 soul slots per level",
+  "modifier.dreamtinker.force_to_explosion": "Force to explosion",
+  "modifier.dreamtinker.force_to_explosion.flavor": "Peace without force",
+  "modifier.dreamtinker.force_to_explosion.description": "TnT arrow lost the ability to range hit, but gain ability to explosion and not hit living entities",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",

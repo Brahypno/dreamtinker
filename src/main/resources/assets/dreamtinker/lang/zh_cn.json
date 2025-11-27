@@ -433,6 +433,9 @@
   "modifier.dreamtinker.soul_unchanged": "那不变的",
   "modifier.dreamtinker.soul_unchanged.flavor": "唯一不变的，只有变化本身",
   "modifier.dreamtinker.soul_unchanged.description": "每等级获得2个灵魂槽",
+  "modifier.dreamtinker.force_to_explosion": "以爆易暴",
+  "modifier.dreamtinker.force_to_explosion.flavor": "内心平静",
+  "modifier.dreamtinker.force_to_explosion.description": "镇爆箭失去范围攻击，但获得不会伤害活实体的爆炸能力",
 
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",

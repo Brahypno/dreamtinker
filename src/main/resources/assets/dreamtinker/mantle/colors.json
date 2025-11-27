@@ -115,7 +115,8 @@
     "hidden_hit": "#987A2C",
     "knock_arts": "#987A2C",
     "the_end": "#034150",
-    "ore_multiplier": "#DE6428"
+    "ore_multiplier": "#DE6428",
+    "force_to_explosion": "#55FFFF"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
