@@ -234,6 +234,9 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT);
 
+        buildModifier(Ids.soul_unchanged)
+                .addModules(ModifierSlotModule.slot(SlotType.SOUL).eachLevel(2));
+
         addELModifiers();
         addMalumModifiers();
 

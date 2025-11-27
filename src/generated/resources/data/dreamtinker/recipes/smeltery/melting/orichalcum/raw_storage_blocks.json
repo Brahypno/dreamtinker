@@ -4,13 +4,22 @@
     {
       "type": "forge:not",
       "value": {
-        "type": "mantle:tag_filled",
-        "tag": "forge:ingots/silver"
+        "type": "forge:or",
+        "values": [
+          {
+            "type": "tconstruct:config",
+            "prop": "force_integration_materials"
+          },
+          {
+            "type": "mantle:tag_filled",
+            "tag": "forge:ingots/silver"
+          }
+        ]
       }
     }
   ],
   "ingredient": {
-    "tag": "forge:storage_blocks/raw_orichalcum"
+    "item": "dreamtinker:raw_orichalcum_block"
   },
   "rate": "metal",
   "result": {

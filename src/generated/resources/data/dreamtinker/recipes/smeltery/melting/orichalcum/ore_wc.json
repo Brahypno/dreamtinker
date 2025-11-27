@@ -8,13 +8,27 @@
   ],
   "conditions": [
     {
-      "type": "mantle:tag_filled",
-      "tag": "forge:ingots/silver"
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "mantle:tag_filled",
+          "tag": "forge:ingots/silver"
+        }
+      ]
     }
   ],
-  "ingredient": {
-    "tag": "forge:ores/orichalcum"
-  },
+  "ingredient": [
+    {
+      "item": "dreamtinker:orichalcum_ore"
+    },
+    {
+      "item": "dreamtinker:deepslate_orichalcum_ore"
+    }
+  ],
   "rate": "metal",
   "result": {
     "amount": 180,

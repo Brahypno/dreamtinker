@@ -90,7 +90,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.shadowSilver, ARMOR, knockArts);
 
         addDefaultTraits(DreamtinkerMaterialIds.TransmutationGold, ModifierIds.enhanced);
-        addTraits(DreamtinkerMaterialIds.TransmutationGold, MELEE_HARVEST, OreMultiplier);
+        addTraits(DreamtinkerMaterialIds.TransmutationGold, MELEE_HARVEST, OreMultiplier.getId(), Ids.soul_unchanged);
 
         callGetOrCreate(this, DreamtinkerMaterialIds.etherium).setTraits(MELEE_HARVEST, List.of(
                 new ModifierEntry(ModifierIds.smite, 2),

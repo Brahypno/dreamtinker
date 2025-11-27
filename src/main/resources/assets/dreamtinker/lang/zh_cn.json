@@ -430,6 +430,9 @@
   "modifier.dreamtinker.ore_multiplier": "太阳之变化",
   "modifier.dreamtinker.ore_multiplier.flavor": "阳为父",
   "modifier.dreamtinker.ore_multiplier.description": "概率增加矿物产量，高强化等级会使概率及产物变多",
+  "modifier.dreamtinker.soul_unchanged": "那不变的",
+  "modifier.dreamtinker.soul_unchanged.flavor": "唯一不变的，只有变化本身",
+  "modifier.dreamtinker.soul_unchanged.description": "每等级获得2个灵魂槽",
 
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",

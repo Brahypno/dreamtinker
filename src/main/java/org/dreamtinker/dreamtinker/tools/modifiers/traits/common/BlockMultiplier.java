@@ -59,8 +59,6 @@ public class BlockMultiplier extends Modifier implements ProcessLootModifierHook
                     generatedLoot.addAll(extra);
                 }
                 in_progress = false;
-
-
             }
 
         }

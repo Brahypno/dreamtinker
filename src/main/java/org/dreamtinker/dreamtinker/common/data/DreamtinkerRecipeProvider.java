@@ -10,6 +10,7 @@ import com.sammy.malum.registry.common.item.ItemTagRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
@@ -22,8 +23,10 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.CompoundIngredient;
 import net.minecraftforge.common.crafting.IntersectionIngredient;
+import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraftforge.common.crafting.conditions.ItemExistsCondition;
+import net.minecraftforge.common.crafting.conditions.OrCondition;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Dreamtinker;
@@ -37,6 +40,7 @@ import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.dreamtinker.dreamtinker.utils.CastLookup;
 import org.dreamtinker.dreamtinker.utils.DThelper;
 import org.jetbrains.annotations.NotNull;
+import slimeknights.mantle.recipe.condition.TagFilledCondition;
 import slimeknights.mantle.recipe.data.IRecipeHelper;
 import slimeknights.mantle.recipe.helper.FluidOutput;
 import slimeknights.mantle.recipe.helper.ItemOutput;
@@ -44,6 +48,7 @@ import slimeknights.mantle.recipe.ingredient.EntityIngredient;
 import slimeknights.mantle.recipe.ingredient.FluidIngredient;
 import slimeknights.mantle.recipe.ingredient.SizedIngredient;
 import slimeknights.tconstruct.common.TinkerTags;
+import slimeknights.tconstruct.common.json.ConfigEnabledCondition;
 import slimeknights.tconstruct.common.registration.CastItemObject;
 import slimeknights.tconstruct.fluids.TinkerFluids;
 import slimeknights.tconstruct.gadgets.TinkerGadgets;
@@ -414,18 +419,18 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                             .setOre(IMeltingContainer.OreRateType.GEM)
                             .save(consumer, location(folder + "scolecite/ore"));
         Consumer<FinishedRecipe> wrapped;
-        wrapped = withCondition(consumer, tagCondition("ingots/silver"));
-        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.OrichalcumOre),
+        wrapped = withCondition(consumer, tagFilled(Dreamtinker.forgeItemTag("ingots/silver")));
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.OrichalcumOre, DreamtinkerCommon.DeepslateOrichalcumOre),
                                      DreamtinkerFluids.molten_orichalcum.get(), FluidValues.INGOT * 2, 1.0f)
                             .addByproduct(DreamtinkerFluids.molten_shadow_silver.result(FluidValues.INGOT * 2))
                             .setOre(IMeltingContainer.OreRateType.METAL)
                             .save(wrapped, location(folder + "orichalcum/ore_wc"));
-        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.RawOrichalcumBlock),
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.RawOrichalcumBlock),
                                      DreamtinkerFluids.molten_orichalcum.get(), FluidValues.METAL_BLOCK, 1.0f)
                             .addByproduct(DreamtinkerFluids.molten_shadow_silver.result(FluidValues.METAL_BLOCK))
                             .setOre(IMeltingContainer.OreRateType.METAL)
                             .save(wrapped, location(folder + "orichalcum/raw_storage_blocks_wc"));
-        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.raw_orichalcum),
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.raw_orichalcum.get()),
                                      DreamtinkerFluids.molten_orichalcum.get(), FluidValues.INGOT, 1.0f)
                             .addByproduct(DreamtinkerFluids.molten_shadow_silver.result(FluidValues.INGOT))
                             .setOre(IMeltingContainer.OreRateType.METAL)
@@ -444,16 +449,16 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                             .setOre(IMeltingContainer.OreRateType.METAL)
                             .save(wrapped, location(folder + "shadow_silver/raw_materials_wc"));
 
-        wrapped = withCondition(consumer, not(tagCondition("ingots/silver")));
-        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.OrichalcumOre),
+        wrapped = withCondition(consumer, not(tagFilled(Dreamtinker.forgeItemTag("ingots/silver"))));
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.OrichalcumOre, DreamtinkerCommon.DeepslateOrichalcumOre),
                                      DreamtinkerFluids.molten_orichalcum.get(), FluidValues.INGOT * 2, 1.0f)
                             .setOre(IMeltingContainer.OreRateType.METAL)
                             .save(wrapped, location(folder + "orichalcum/ore"));
-        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.RawOrichalcumBlock),
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.RawOrichalcumBlock),
                                      DreamtinkerFluids.molten_orichalcum.get(), FluidValues.METAL_BLOCK, 1.0f)
                             .setOre(IMeltingContainer.OreRateType.METAL)
                             .save(wrapped, location(folder + "orichalcum/raw_storage_blocks"));
-        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.raw_orichalcum),
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.raw_orichalcum.get()),
                                      DreamtinkerFluids.molten_orichalcum.get(), FluidValues.INGOT, 1.0f)
                             .setOre(IMeltingContainer.OreRateType.METAL)
                             .save(wrapped, location(folder + "orichalcum/raw_materials"));
@@ -1362,6 +1367,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                 .setFluid(FluidIngredient.of(new FluidStack(fluid, amount)))
                                 .setCast(cast.getMultiUseTag(), false).save(consumer, location(
                                         "smeltery/casting/" + Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(ingredient.asItem())).getPath() + "/multi"));
+    }
+
+    public static ICondition tagFilled(TagKey<Item> tagKey) {
+        return new OrCondition(ConfigEnabledCondition.FORCE_INTEGRATION_MATERIALS, new TagFilledCondition<>(tagKey));
     }
 }
 

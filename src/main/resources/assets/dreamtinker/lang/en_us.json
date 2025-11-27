@@ -430,6 +430,9 @@
   "modifier.dreamtinker.ore_multiplier": "Solar Transmutation",
   "modifier.dreamtinker.ore_multiplier.flavor": "Solar Father",
   "modifier.dreamtinker.ore_multiplier.description": "Have chance to have more Ore loots; Higher value means higher chance and more results",
+  "modifier.dreamtinker.soul_unchanged": "The unchanged",
+  "modifier.dreamtinker.soul_unchanged.flavor": "The only unchanged is the change itself",
+  "modifier.dreamtinker.soul_unchanged.description": "Give 2 soul slots per level",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",
