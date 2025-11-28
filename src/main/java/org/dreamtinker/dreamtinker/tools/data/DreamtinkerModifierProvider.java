@@ -45,6 +45,7 @@ import slimeknights.tconstruct.library.modifiers.modules.combat.LootingModule;
 import slimeknights.tconstruct.library.modifiers.modules.combat.MobEffectModule;
 import slimeknights.tconstruct.library.modifiers.modules.mining.ConditionalMiningSpeedModule;
 import slimeknights.tconstruct.library.modifiers.util.ModifierLevelDisplay;
+import slimeknights.tconstruct.library.tools.IndestructibleItemEntity;
 import slimeknights.tconstruct.library.tools.SlotType;
 import slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHelper;
 import slimeknights.tconstruct.library.tools.capability.inventory.InventoryMenuModule;
@@ -235,7 +236,8 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT);
 
         buildModifier(Ids.soul_unchanged)
-                .addModules(ModifierSlotModule.slot(SlotType.SOUL).eachLevel(2));
+                .addModules(ModifierSlotModule.slot(SlotType.SOUL).eachLevel(1))
+                .addModule(new VolatileFlagModule(IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY));
         buildModifier(Ids.force_to_explosion)
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
 

@@ -95,7 +95,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          HandleMaterialStats.multipliers().durability(0.8f).miningSpeed(1.15f).attackDamage(1.0f).attackSpeed(1.2f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.TransmutationGold,
-                         new HeadMaterialStats(150, 12f, DtTiers.TransmutationGold, 1f),
+                         new HeadMaterialStats(120, 12f, DtTiers.TransmutationGold, 1f),
                          HandleMaterialStats.multipliers().durability(0.6f).miningSpeed(1.10f).attackDamage(1.10f).attackSpeed(1.10f).build(),
                          StatlessMaterialStats.BINDING);
 
@@ -190,7 +190,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new GripMaterialStats(-0.2f, -0.1f, 2.5f));
 
         addMaterialStats(DreamtinkerMaterialIds.TransmutationGold,
-                         new LimbMaterialStats(150, 0.5f, -0.2f, 0.2f),
+                         new LimbMaterialStats(120, 0.5f, -0.2f, 0.2f),
                          new GripMaterialStats(-0.2f, 0.2f, 1.0f));
 
         addCompactRanged();
@@ -270,7 +270,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                             StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
 
         addArmorShieldStats(DreamtinkerMaterialIds.TransmutationGold,
-                            PlatingMaterialStats.builder().durabilityFactor(15).armor(2, 4, 6, 2).toughness(1f),
+                            PlatingMaterialStats.builder().durabilityFactor(12).armor(2, 4, 5, 2).toughness(1f),
                             StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
 
         addArmorShieldStats(DreamtinkerMaterialIds.etherium,

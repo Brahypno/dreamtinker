@@ -2,14 +2,28 @@
   "default": [
     {
       "level": 1,
-      "name": "tconstruct:enhanced"
+      "name": "dreamtinker:ore_multiplier"
+    },
+    {
+      "level": 1,
+      "name": "dreamtinker:soul_unchanged"
     }
   ],
   "perStat": {
-    "tconstruct:melee_harvest": [
+    "tconstruct:armor": [
       {
         "level": 1,
-        "name": "dreamtinker:ore_multiplier"
+        "name": "dreamtinker:solar_away"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:soul_unchanged"
+      }
+    ],
+    "tconstruct:ranged": [
+      {
+        "level": 1,
+        "name": "dreamtinker:sun_shine"
       },
       {
         "level": 1,

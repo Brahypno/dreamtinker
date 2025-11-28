@@ -432,10 +432,16 @@
   "modifier.dreamtinker.ore_multiplier.description": "概率增加矿物产量，高强化等级会使概率及产物变多",
   "modifier.dreamtinker.soul_unchanged": "那不变的",
   "modifier.dreamtinker.soul_unchanged.flavor": "唯一不变的，只有变化本身",
-  "modifier.dreamtinker.soul_unchanged.description": "每等级获得2个灵魂槽",
+  "modifier.dreamtinker.soul_unchanged.description": "每等级获得1个灵魂槽，并且不会被火焰摧毁",
   "modifier.dreamtinker.force_to_explosion": "以爆易暴",
   "modifier.dreamtinker.force_to_explosion.flavor": "内心平静",
   "modifier.dreamtinker.force_to_explosion.description": "镇爆箭失去范围攻击，但获得不会伤害活实体的爆炸能力",
+  "modifier.dreamtinker.sun_shine": "光之阳",
+  "modifier.dreamtinker.sun_shine.flavor": "光",
+  "modifier.dreamtinker.sun_shine.description": "命中目标时去除对方随机效果",
+  "modifier.dreamtinker.solar_away": "太阳之距",
+  "modifier.dreamtinker.solar_away.flavor": "不靠近我而是远离我吗",
+  "modifier.dreamtinker.solar_away.description": "受击时，对伤害者施加基于主手的击退",
 
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",

@@ -155,6 +155,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<TheEnd> TheEnd = MODIFIERS.register("the_end", TheEnd::new);
     public static final StaticModifier<BlockMultiplier> OreMultiplier =
             MODIFIERS.register("ore_multiplier", () -> new BlockMultiplier(Tags.Blocks.ORES.location(), 0.4f, 3));
+    public static final StaticModifier<effectRemover> effectRemover = MODIFIERS.register("sun_shine", effectRemover::new);
+    public static final StaticModifier<knockBacker> SunAway = MODIFIERS.register("solar_away", knockBacker::new);
 
     //etherium
     public static final StaticModifier<astral_break> astral_break = EL_MODIFIERS.register("astral_break", astral_break::new);
