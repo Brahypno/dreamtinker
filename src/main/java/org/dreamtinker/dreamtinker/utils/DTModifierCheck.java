@@ -21,7 +21,7 @@ public class DTModifierCheck {
             new EquipmentSlot[]{EquipmentSlot.FEET, EquipmentSlot.LEGS, EquipmentSlot.CHEST, EquipmentSlot.HEAD, EquipmentSlot.OFFHAND, EquipmentSlot.MAINHAND};
 
     public static int getModifierLevel(@NotNull LivingEntity entity, ModifierId id, EquipmentSlot slot) {
-        if (!(entity.getItemBySlot(slot).getItem() instanceof IModifiable))
+        if (null == entity.getItemBySlot(slot) || !(entity.getItemBySlot(slot).getItem() instanceof IModifiable))
             return 0;
         ToolStack toolStack = ToolStack.from(entity.getItemBySlot(slot));
         if (!toolStack.isBroken())
