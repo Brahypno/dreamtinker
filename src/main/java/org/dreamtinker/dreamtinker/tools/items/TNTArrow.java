@@ -16,6 +16,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -34,7 +35,11 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.jetbrains.annotations.NotNull;
+import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeDamageModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
+import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.definition.ToolDefinition;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
@@ -178,50 +183,66 @@ public class TNTArrow extends ModifiableItem {
             super.onHit(result);
             if (!this.level().isClientSide){
                 Vec3 hitPos = result.getLocation();
-                boolean explosion = 0 < ModifierUtil.getModifierLevel(tntarrow, DreamtinkerModifiers.Ids.force_to_explosion);
-                if (explosion){
-                    ToolStack ts = ToolStack.from(tntarrow);
-                    if (ts.getPersistentData().contains(TAG_EXPLODE_ALREADY))
-                        return;
-                    double explosionPower = Math.min((2.0f * Math.sqrt(ts.getStats().get(ToolStats.ATTACK_DAMAGE))), ForceExplosionPower.get());
-                    this.level().explode(
-                            this.getOwner(),
-                            DreamtinkerDamageTypes.source(this.level().registryAccess(), DreamtinkerDamageTypes.force_to_explosion, this, this.getOwner()),
-                            null,
-                            hitPos.x, hitPos.y, hitPos.z,
-                            (float) explosionPower, false,
-                            Level.ExplosionInteraction.TNT
-                    );
-                    ts.getPersistentData().putBoolean(TAG_EXPLODE_ALREADY, true);
-                    ts.updateStack(tntarrow);
-                }else {
-                    float sound = 2.0F;
-                    // 查找半径内的实体
-                    int hitRadius = TNT_ARROW_RADIUS.get();
-                    List<Entity> nearbyEntities =
-                            this.level()
-                                .getEntities(null, new AABB(hitPos.subtract(hitRadius, hitRadius, hitRadius), hitPos.add(hitRadius, hitRadius, hitRadius)));
-                    // 遍历实体列表
-                    for (Entity entity : nearbyEntities) {
-                        if (entity instanceof LivingEntity livingEntity){
-                            hitEntity(livingEntity);
+                if (this.getOwner() instanceof LivingEntity owner){//Nothing happened if no owner or not alive
+                    boolean explosion = 0 < ModifierUtil.getModifierLevel(tntarrow, DreamtinkerModifiers.Ids.force_to_explosion);
+                    if (explosion){
+                        ToolStack ts = ToolStack.from(tntarrow);
+                        if (ts.getPersistentData().contains(TAG_EXPLODE_ALREADY))
+                            return;
+                        float damage = ts.getStats().get(ToolStats.ATTACK_DAMAGE);
+                        ToolAttackContext
+                                context =
+                                new ToolAttackContext(owner, owner instanceof Player player ? player : null, InteractionHand.MAIN_HAND, EquipmentSlot.MAINHAND,
+                                                      owner, owner, this.isCritArrow(),
+                                                      1.0f, false);
+                        float baseDamage = damage;
+                        List<ModifierEntry> modifiers = ts.getModifierList();
+
+                        for (ModifierEntry entry : modifiers) {
+                            damage = ((MeleeDamageModifierHook) entry.getHook(ModifierHooks.MELEE_DAMAGE)).getMeleeDamage(ts, entry, context, baseDamage,
+                                                                                                                          damage);
+                        }
+                        double explosionPower =
+                                Math.min(Math.sqrt(damage) * 2, ForceExplosionPower.get());
+                        this.level().explode(
+                                this.getOwner(),
+                                DreamtinkerDamageTypes.source(this.level().registryAccess(), DreamtinkerDamageTypes.force_to_explosion, this, this.getOwner()),
+                                null,
+                                hitPos.x, hitPos.y, hitPos.z,
+                                (float) explosionPower, false,
+                                Level.ExplosionInteraction.TNT
+                        );
+                        ts.getPersistentData().putBoolean(TAG_EXPLODE_ALREADY, true);
+                        ts.updateStack(tntarrow);
+                    }else {
+                        float sound = 2.0F;
+                        // 查找半径内的实体
+                        int hitRadius = TNT_ARROW_RADIUS.get();
+                        List<Entity> nearbyEntities =
+                                this.level()
+                                    .getEntities(null, new AABB(hitPos.subtract(hitRadius, hitRadius, hitRadius), hitPos.add(hitRadius, hitRadius, hitRadius)));
+                        // 遍历实体列表
+                        for (Entity entity : nearbyEntities) {
+                            if (entity instanceof LivingEntity livingEntity){
+                                hitEntity(livingEntity);
+                                sound++;
+                            }
+                        }
+                        if (owner.position().distanceTo(hitPos) <= hitRadius){
+                            hitEntity(owner);
                             sound++;
                         }
+                        this.playSound(SoundEvents.GENERIC_EXPLODE, sound, (1.0F + (random.nextFloat() - random.nextFloat()) * 0.2F) * 0.7F);
                     }
-                    if (this.getOwner() != null && this.getOwner().position().distanceTo(hitPos) <= hitRadius){
-                        hitEntity(this.getOwner());
-                        sound++;
-                    }
-                    this.playSound(SoundEvents.GENERIC_EXPLODE, sound, (1.0F + (random.nextFloat() - random.nextFloat()) * 0.2F) * 0.7F);
+                    int timeAllows = ModifierUtil.getModifierLevel(tntarrow, DreamtinkerModifiers.Ids.continuous_explode) * ContinuousExplodeTimes.get();
+                    int currentTime = ModifierUtil.getPersistentInt(tntarrow, TAG_CONTINUOUS, 0);
+                    if (currentTime < timeAllows){
+                        ToolStack ts = ToolStack.from(tntarrow);
+                        ts.getPersistentData().putInt(TAG_CONTINUOUS, ++currentTime);
+                        ts.updateStack(tntarrow);
+                    }else
+                        this.discard();
                 }
-                int timeAllows = ModifierUtil.getModifierLevel(tntarrow, DreamtinkerModifiers.Ids.continuous_explode) * ContinuousExplodeTimes.get();
-                int currentTime = ModifierUtil.getPersistentInt(tntarrow, TAG_CONTINUOUS, 0);
-                if (currentTime < timeAllows){
-                    ToolStack ts = ToolStack.from(tntarrow);
-                    ts.getPersistentData().putInt(TAG_CONTINUOUS, ++currentTime);
-                    ts.updateStack(tntarrow);
-                }else
-                    this.discard();
             }
         }
 
