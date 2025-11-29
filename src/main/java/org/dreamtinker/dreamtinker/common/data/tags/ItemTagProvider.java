@@ -47,7 +47,7 @@ public class ItemTagProvider extends ItemTagsProvider {
         this.tag(ItemTagRegistry.SCYTHE).add(TinkerTools.scythe.asItem(), TinkerTools.kama.asItem(), DreamtinkerTools.narcissus_wing.asItem());
         this.tag(ItemTagRegistry.HIDDEN_UNTIL_BLACK_CRYSTAL)
             .addOptional(malignant_gluttony.getId());
-        addItemsTags(DreamtinkerTools.silence_glove, DURABILITY, MELEE_PRIMARY, BONUS_SLOTS, ANCIENT_TOOLS, STAFFS, SHIELDS,
+        addItemsTags(DreamtinkerTools.silence_glove, DURABILITY, MELEE, BONUS_SLOTS, ANCIENT_TOOLS, STAFFS, SHIELDS,
                      Items.HANDS, Items.CURIOS);
         //parts
         this.tag(TinkerTags.Items.CASTS)

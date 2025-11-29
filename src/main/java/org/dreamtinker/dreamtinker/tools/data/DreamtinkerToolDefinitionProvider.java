@@ -155,11 +155,11 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 .module(new ToolSlotsModule(ImmutableMap.of(SlotType.SOUL, 6, SlotType.ABILITY, 2, SlotType.UPGRADE, 1)))
                 // traits
                 .module(ToolTraitsModule.builder()
-                                        .trait(DreamtinkerModifiers.memory_base, 1)
-                                        .trait(DreamtinkerModifiers.foundation_will, 1)
-                                        .trait(DreamtinkerModifiers.splendour_heart, 1)
+                                        .trait(DreamtinkerModifiers.memory_base, 1)//malkuth
+                                        .trait(DreamtinkerModifiers.foundation_will, 1)//Yesod
+                                        .trait(DreamtinkerModifiers.splendour_heart, 1)//Hod
                                         .trait(ModifierIds.soulbound, 1)
-                                        .trait(DreamtinkerModifiers.malum_sol_tiferet)
+                                        .trait(DreamtinkerModifiers.malum_sol_tiferet)//Tiferet
                                         .build())
                 // behavior
                 .module(ToolActionsModule.of(ToolActions.SWORD_DIG, ToolActions.PICKAXE_DIG, ToolActions.SHOVEL_DIG, TinkerToolActions.SHIELD_DISABLE))

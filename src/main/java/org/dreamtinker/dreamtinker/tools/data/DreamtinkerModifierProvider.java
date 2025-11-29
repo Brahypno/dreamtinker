@@ -240,6 +240,8 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(new VolatileFlagModule(IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY));
         buildModifier(Ids.force_to_explosion)
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+        buildModifier(Ids.aggressiveFoxUsage)
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
 
         addELModifiers();
         addMalumModifiers();

@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.tools.entity;
+package org.dreamtinker.dreamtinker.Entity;
 
 import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
 import net.minecraft.nbt.CompoundTag;

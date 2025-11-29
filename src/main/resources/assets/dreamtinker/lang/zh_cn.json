@@ -842,5 +842,7 @@
   "jei.dreamtinker.chance": "概率",
 
   "death.attack.dreamtinker.null_void": "被虚无吞没",
-  "death.attack.dreamtinker.rain_bow": "消失，犹如彩虹一般"
+  "death.attack.dreamtinker.rain_bow": "消失，犹如彩虹一般",
+
+  "entity.dreamtinker.aggressive_fox": "武装狐狸"
 }

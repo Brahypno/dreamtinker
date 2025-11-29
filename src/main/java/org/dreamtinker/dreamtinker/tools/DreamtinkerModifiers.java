@@ -5,24 +5,18 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.DreamtinkerModule;
 import org.dreamtinker.dreamtinker.common.data.tags.ModifierTagProvider;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerEnchantmentToModifierProvider;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerFluidEffectProvider;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerModifierProvider;
-import org.dreamtinker.dreamtinker.tools.entity.NarcissusFluidProjectile;
-import org.dreamtinker.dreamtinker.tools.entity.SlashOrbitEntity;
-import org.dreamtinker.dreamtinker.tools.items.TNTArrow;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.mashou.realsweep;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.mashou.strong_heavy;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.flamingMemory;
@@ -245,6 +239,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId slowness = id("ssss_slowness");
         public static final ModifierId soul_unchanged = id("soul_unchanged");
         public static final ModifierId force_to_explosion = id("force_to_explosion");
+        public static final ModifierId aggressiveFoxUsage = id("aggressive_fox_usage");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");
@@ -269,26 +264,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             return new ModifierId(Dreamtinker.MODID, name);
         }
     }
-
-
-    public static final RegistryObject<EntityType<TNTArrow.TNTArrowEntity>> TNTARROW =
-            ENTITIES.register("tnt_arrow",
-                              () -> EntityType.Builder.<TNTArrow.TNTArrowEntity>of(TNTArrow.TNTArrowEntity::new, MobCategory.MISC)
-                                                      .sized(0.5F, 0.5F) // 确保箭矢有合适的 hitbox
-                                                      .clientTrackingRange(4) // 追踪范围，避免箭矢丢失
-                                                      .updateInterval(20)
-
-            );
-
-    public static final RegistryObject<EntityType<NarcissusFluidProjectile>> NarcissusSpitEntity =
-            ENTITIES.register("narcissus_fluid_spit",
-                              () -> EntityType.Builder.<NarcissusFluidProjectile>of(NarcissusFluidProjectile::new, MobCategory.MISC).sized(1F, 1F)
-                                                      .clientTrackingRange(4)
-                                                      .updateInterval(10));
-    public static final RegistryObject<EntityType<SlashOrbitEntity>> SLASH_ORBIT =
-            ENTITIES.register("slash_orbit",
-                              () -> EntityType.Builder.<SlashOrbitEntity>of(SlashOrbitEntity::new, MobCategory.MISC)
-                                                      .sized(0.5f, 0.5f).clientTrackingRange(64).updateInterval(2));
 
     @SubscribeEvent
     void gatherData(final GatherDataEvent event) {

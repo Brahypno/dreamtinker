@@ -9,6 +9,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.Entity.AggressiveFox;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.InteractionSource;
@@ -38,7 +39,7 @@ public class cursed_ring_bound extends ArmorModifier {
         if (entity.level().isClientSide)
             return;
 
-        boolean pass = entity instanceof ServerPlayer player && this.check(tool, player);
+        boolean pass = entity instanceof ServerPlayer player && this.check(tool, player) || entity instanceof AggressiveFox;
         if (!pass){
             if (entity instanceof Player p){
                 if (!p.getInventory().add(context.getReplacement().copy())){

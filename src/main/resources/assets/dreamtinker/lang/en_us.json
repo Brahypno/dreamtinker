@@ -840,5 +840,7 @@
   "jei.dreamtinker.chance": "Chance",
 
   "death.attack.dreamtinker.null_void": "consumed by nothingness",
-  "death.attack.dreamtinker.rain_bow": "vanished like rainbow"
+  "death.attack.dreamtinker.rain_bow": "vanished like rainbow",
+
+  "entity.dreamtinker.aggressive_fox": "Armed Fox"
 }

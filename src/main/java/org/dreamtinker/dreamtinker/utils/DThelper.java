@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
@@ -13,6 +14,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -21,6 +23,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.EntityTeleportEvent;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.tags.ITagManager;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.materials.MaterialRegistry;
@@ -29,6 +32,9 @@ import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
 import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.ModifierId;
+import slimeknights.tconstruct.library.tools.helper.ToolBuildHandler;
+import slimeknights.tconstruct.library.tools.item.IModifiable;
 import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.part.ToolPartItem;
@@ -163,5 +169,29 @@ public class DThelper {
             }
         }
         return false;
+    }
+
+    public static ItemStack randomTinkerTool(TagKey<Item> itemTag, boolean exclude_from_loot, RandomSource random, @Nullable ModifierId includedId) {
+        ITagManager<Item> ItemTags = ForgeRegistries.ITEMS.tags();
+        if (null != ItemTags){
+            List<Item> lists = ItemTags.getTag(itemTag).stream()
+                                       .filter(item -> item instanceof IModifiable)
+                                       .toList();
+            if (lists.isEmpty())
+                return ItemStack.EMPTY;
+            Item tool = lists.get(random.nextInt(lists.size()));
+
+            ToolStack ts = ToolBuildHandler.buildToolRandomMaterials((IModifiable) tool, random);
+            if (null != includedId)
+                ts.addModifier(includedId, 1);
+            return ts.createStack();
+        }
+        List<Item> lists = ForgeRegistries.ITEMS.getValues().stream()
+                                                // ①：有这个 tag
+                                                .filter(item -> item.getDefaultInstance().is(itemTag))
+                                                // ②：符合你定义的类别
+                                                .filter(item -> item instanceof IModifiable)
+                                                .toList();
+        return ItemStack.EMPTY;
     }
 }

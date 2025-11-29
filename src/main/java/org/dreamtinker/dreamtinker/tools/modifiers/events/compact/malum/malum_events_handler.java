@@ -18,6 +18,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
+import slimeknights.tconstruct.library.tools.item.IModifiable;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import team.lodestar.lodestone.helpers.RandomHelper;
 
@@ -29,6 +30,8 @@ public class malum_events_handler {
         DamageSource dmg = event.getSource();
         if (null != dmg.getEntity() && dmg.getEntity() instanceof Player player){
             ItemStack stack = player.getMainHandItem();
+            if (!(stack.getItem() instanceof IModifiable))
+                return;
             if (0 < ToolStack.from(stack).getModifierLevel(DreamtinkerModifiers.malum_base.getId()))
                 ((MalumScytheItem) ItemRegistry.CRUDE_SCYTHE.get()).hurtEvent(event, player, event.getEntity(), stack);
             if (0 < ToolStack.from(stack).getModifierLevel(DreamtinkerModifiers.Ids.malum_tyrving))

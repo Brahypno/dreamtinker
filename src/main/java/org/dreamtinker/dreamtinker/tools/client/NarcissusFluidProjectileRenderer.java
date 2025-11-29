@@ -18,7 +18,7 @@ import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import org.dreamtinker.dreamtinker.tools.entity.NarcissusFluidProjectile;
+import org.dreamtinker.dreamtinker.Entity.NarcissusFluidProjectile;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;

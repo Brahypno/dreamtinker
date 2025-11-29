@@ -4,10 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.entity.*;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -109,5 +106,6 @@ public class DTtoolclientEvents extends ClientEventBase {
     static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(DreamtinkerModifiers.NarcissusSpitEntity.get(), NarcissusFluidProjectileRenderer::new);
         event.registerEntityRenderer(DreamtinkerModifiers.SLASH_ORBIT.get(), SlashOrbitRenderer::new);
+        event.registerEntityRenderer(DreamtinkerModifiers.AggressiveFOX.get(), FoxRenderer::new);
     }
 }

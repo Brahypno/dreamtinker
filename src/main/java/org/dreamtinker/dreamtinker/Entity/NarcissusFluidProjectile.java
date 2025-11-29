@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.tools.entity;
+package org.dreamtinker.dreamtinker.Entity;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
