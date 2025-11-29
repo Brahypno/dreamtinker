@@ -210,7 +210,8 @@ public class AggressiveFox extends Fox implements NeutralMob {
     public static AttributeSupplier.@NotNull Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MOVEMENT_SPEED, (double) 0.3F).add(Attributes.MAX_HEALTH, (double) 20.0F)
                   .add(Attributes.FOLLOW_RANGE, (double) 32.0F).add(Attributes.ATTACK_DAMAGE, (double) 4.0F)
-                  .add(Attributes.ATTACK_KNOCKBACK, 1.0f);
+                  .add(Attributes.ATTACK_KNOCKBACK, 1.0f)
+                  .add(Attributes.ARMOR, 2.0f).add(Attributes.ARMOR_TOUGHNESS, 2.0f);
     }
 
     @Override
