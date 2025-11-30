@@ -4,6 +4,7 @@ import net.minecraft.world.item.ArmorItem;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.client.data.material.AbstractPartSpriteProvider;
+import slimeknights.tconstruct.tools.stats.HandleMaterialStats;
 import slimeknights.tconstruct.tools.stats.PlatingMaterialStats;
 import slimeknights.tconstruct.tools.stats.StatlessMaterialStats;
 
@@ -30,6 +31,7 @@ public class DreamtinkerPartSpriteProvider extends AbstractPartSpriteProvider {
         addHead("reason_emanation");
         addHead("chain_saw_core");
         addHandle("chain_saw_teeth");
+
         buildTool("tntarrow").addHead("explode_core").addHandle("arrow_handle").addHandle("arrow_wing");
         buildTool("silence_glove").addHead("glove_hardware").addBinding("glove_wristband")
                                   .addPart("glove_leather", StatlessMaterialStats.CUIRASS.getIdentifier());
@@ -41,6 +43,8 @@ public class DreamtinkerPartSpriteProvider extends AbstractPartSpriteProvider {
                                    .addHandle("memory_orthant").addHandle("wish_orthant").addHandle("wish_orthant_1")
                                    .addLimb("soul_orthant").addLimb("persona_orthant")
                                    .addHead("reason_emanation");
+        buildTool("chain_saw_blade").withLarge()
+                                    .addBreakableHead("teeth").addHead("head").addHandle("core").addBreakablePart("handle", HandleMaterialStats.ID);
 
         buildTool("armor/under_plate/chestplate").disallowAnimated() // the armor model won't be animated, so don't animate the item
                                                  .addPart("plating", PlatingMaterialStats.TYPES.get(ArmorItem.Type.CHESTPLATE.ordinal()).getId())
@@ -71,5 +75,6 @@ public class DreamtinkerPartSpriteProvider extends AbstractPartSpriteProvider {
         addTexture("tinker_armor/under_plate/maille_armor", ARMOR_MAILLE).disallowAnimated();
         addTexture("tinker_armor/under_plate/maille_leggings", ARMOR_MAILLE).disallowAnimated();
         addTexture("tinker_armor/under_plate/maille_wings", ARMOR_MAILLE).disallowAnimated();
+
     }
 }

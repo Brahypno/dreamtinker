@@ -1,0 +1,46 @@
+{
+  "icon": {
+    "item": "dreamtinker:chain_saw_blade",
+    "nbt": "{Damage:0,tic_broken:0b,tic_display:1b,tic_materials:[\"tconstruct:ui_render#head\",\"tconstruct:ui_render#handle\",\"tconstruct:ui_render#extra\",\"tconstruct:ui_render#large\",\"tconstruct:ui_render#extra_large\"]}"
+  },
+  "input_slots": [
+    {
+      "filter": {
+        "item": "tconstruct:broad_blade"
+      },
+      "icon": "tconstruct:broad_blade",
+      "translation_key": "item.tconstruct.broad_blade",
+      "x": 45,
+      "y": 26
+    },
+    {
+      "filter": {
+        "item": "dreamtinker:chain_saw_teeth"
+      },
+      "icon": "dreamtinker:chain_saw_teeth",
+      "translation_key": "item.dreamtinker.chain_saw_teeth",
+      "x": 7,
+      "y": 62
+    },
+    {
+      "filter": {
+        "item": "dreamtinker:chain_saw_core"
+      },
+      "icon": "dreamtinker:chain_saw_core",
+      "translation_key": "item.dreamtinker.chain_saw_core",
+      "x": 25,
+      "y": 46
+    },
+    {
+      "filter": {
+        "item": "tconstruct:tough_handle"
+      },
+      "icon": "tconstruct:tough_handle",
+      "translation_key": "item.tconstruct.tough_handle",
+      "x": 45,
+      "y": 46
+    }
+  ],
+  "sortIndex": 9,
+  "translation_key": "item.dreamtinker.chain_saw_blade"
+}

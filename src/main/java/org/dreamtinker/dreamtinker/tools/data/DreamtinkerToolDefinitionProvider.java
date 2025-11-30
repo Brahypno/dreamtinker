@@ -71,7 +71,8 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 // stats
                 .module(new SetStatsModule(StatsNBT.builder()
                                                    .set(ToolStats.ATTACK_DAMAGE, 3f)
-                                                   .set(ToolStats.ATTACK_SPEED, 0.8f).build()))
+                                                   .set(ToolStats.ATTACK_SPEED, 0.8f)
+                                                   .set(ToolStats.BLOCK_AMOUNT, 10).build()))
                 .module(new MultiplyStatsModule(MultiplierNBT.builder()
                                                              .set(ToolStats.ATTACK_DAMAGE, 1.5f)
                                                              .set(ToolStats.ATTACK_SPEED, 0.7f)
@@ -200,7 +201,8 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 // stats
                 .module(new SetStatsModule(StatsNBT.builder()
                                                    .set(ToolStats.ATTACK_DAMAGE, 5f)
-                                                   .set(ToolStats.ATTACK_SPEED, 0.4f).build()))
+                                                   .set(ToolStats.ATTACK_SPEED, 0.4f)
+                                                   .set(ToolStats.BLOCK_AMOUNT, 10).build()))
                 .module(new MultiplyStatsModule(MultiplierNBT.builder()
                                                              .set(ToolStats.ATTACK_DAMAGE, 1.7f)
                                                              .set(ToolStats.MINING_SPEED, 0.4f)
@@ -208,7 +210,8 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 .largeToolStartingSlots()
                 // traits
                 .module(ToolTraitsModule.builder()
-                                        .trait(TinkerModifiers.silkyShears).build())
+                                        .trait(TinkerModifiers.silkyShears)
+                                        .trait(ModifierIds.stripping).build())
                 // behavior
                 .module(ToolActionsModule.of(ToolActions.AXE_DIG, ToolActions.SWORD_DIG, TinkerToolActions.SHIELD_DISABLE))
                 .module(new ToolModule[]{

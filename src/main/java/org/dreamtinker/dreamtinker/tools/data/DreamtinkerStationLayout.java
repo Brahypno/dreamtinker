@@ -34,6 +34,13 @@ public class DreamtinkerStationLayout extends AbstractStationSlotLayoutProvider 
                 .addInputItem(TinkerToolParts.toolHandle, 12, 62)
                 .addInputItem(TinkerToolParts.toughHandle, 30, 44)
                 .build();
+        defineModifiable(DreamtinkerTools.chain_saw_blade)
+                .sortIndex(SORT_WEAPON + SORT_LARGE)
+                .addInputItem(TinkerToolParts.broadBlade, 45, 26)
+                .addInputItem(DreamtinkerToolParts.chainSawTeeth.get(), 7, 62)
+                .addInputItem(DreamtinkerToolParts.chainSawCore.get(), 25, 46)
+                .addInputItem(TinkerToolParts.toughHandle, 45, 46)
+                .build();
         define(Dreamtinker.getLocation("under_plate"))
                 .sortIndex(SORT_ARMOR * 2)
                 .translationKey(Dreamtinker.makeTranslationKey("item", "under_plate"))

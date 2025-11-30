@@ -116,6 +116,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                  .save(consumer, prefix(DreamtinkerTools.tntarrow, folder));
         toolBuilding(consumer, DreamtinkerTools.mashou, folder);
         toolBuilding(consumer, DreamtinkerTools.narcissus_wing, folder);
+        toolBuilding(consumer, DreamtinkerTools.chain_saw_blade, folder);
         String recycle_folder = "tools/recycling/";
         PartBuilderToolRecycleBuilder.tools(SizedIngredient.fromItems(4, DreamtinkerTools.tntarrow.get()))
                                      .save(consumer, location(recycle_folder + "tntarrow"));

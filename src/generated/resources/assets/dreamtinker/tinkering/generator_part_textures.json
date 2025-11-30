@@ -194,6 +194,54 @@
       "stat_type": "tconstruct:head"
     },
     {
+      "path": "dreamtinker:item/tool/chain_saw_blade/teeth",
+      "stat_type": "tconstruct:head"
+    },
+    {
+      "path": "dreamtinker:item/tool/chain_saw_blade/teeth_broken",
+      "stat_type": "tconstruct:head"
+    },
+    {
+      "path": "dreamtinker:item/tool/chain_saw_blade/head",
+      "stat_type": "tconstruct:head"
+    },
+    {
+      "path": "dreamtinker:item/tool/chain_saw_blade/core",
+      "stat_type": "tconstruct:handle"
+    },
+    {
+      "path": "dreamtinker:item/tool/chain_saw_blade/handle",
+      "stat_type": "tconstruct:handle"
+    },
+    {
+      "path": "dreamtinker:item/tool/chain_saw_blade/handle_broken",
+      "stat_type": "tconstruct:handle"
+    },
+    {
+      "path": "dreamtinker:item/tool/chain_saw_blade/large/teeth",
+      "stat_type": "tconstruct:head"
+    },
+    {
+      "path": "dreamtinker:item/tool/chain_saw_blade/large/teeth_broken",
+      "stat_type": "tconstruct:head"
+    },
+    {
+      "path": "dreamtinker:item/tool/chain_saw_blade/large/head",
+      "stat_type": "tconstruct:head"
+    },
+    {
+      "path": "dreamtinker:item/tool/chain_saw_blade/large/core",
+      "stat_type": "tconstruct:handle"
+    },
+    {
+      "path": "dreamtinker:item/tool/chain_saw_blade/large/handle",
+      "stat_type": "tconstruct:handle"
+    },
+    {
+      "path": "dreamtinker:item/tool/chain_saw_blade/large/handle_broken",
+      "stat_type": "tconstruct:handle"
+    },
+    {
       "allow_animated": false,
       "path": "dreamtinker:item/tool/armor/under_plate/chestplate/plating",
       "stat_type": "tconstruct:plating_chestplate"

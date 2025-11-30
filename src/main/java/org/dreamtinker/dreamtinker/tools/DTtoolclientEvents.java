@@ -41,7 +41,9 @@ public class DTtoolclientEvents extends ClientEventBase {
         // keybinds
         event.enqueueWork(() -> {
             TinkerItemProperties.registerToolProperties(DreamtinkerTools.mashou);
+            TinkerItemProperties.registerToolProperties(DreamtinkerTools.silence_glove);
             TinkerItemProperties.registerToolProperties(DreamtinkerTools.narcissus_wing);
+            TinkerItemProperties.registerToolProperties(DreamtinkerTools.chain_saw_blade);
 
             Consumer<Item> brokenConsumer = TinkerItemProperties::registerBrokenProperty;
             DreamtinkerTools.underPlate.forEach(brokenConsumer);
@@ -102,6 +104,8 @@ public class DTtoolclientEvents extends ClientEventBase {
         //
         registerItemColors(colors, DreamtinkerTools.mashou);
         registerItemColors(colors, DreamtinkerTools.narcissus_wing);
+        registerItemColors(colors, DreamtinkerTools.silence_glove);
+        registerItemColors(colors, DreamtinkerTools.chain_saw_blade);
         Consumer<Item> brokenConsumer = item -> event.register(ToolModel.COLOR_HANDLER, item);
         DreamtinkerTools.underPlate.forEach(brokenConsumer);
     }
