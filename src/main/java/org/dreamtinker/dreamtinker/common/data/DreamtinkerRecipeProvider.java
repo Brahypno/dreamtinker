@@ -893,6 +893,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                     .setCast(Items.SHIELD, true)
                                     .setItemCost(4)
                                     .save(consumer, location(partFolder + "shield_core_cast"));
+        partRecipes(consumer, DreamtinkerToolParts.chainSawTeeth, DreamtinkerToolParts.chainSawTeethCast, 6, partFolder, castFolder);
+        partRecipes(consumer, DreamtinkerToolParts.chainSawCore, DreamtinkerToolParts.chainSawCoreCast, 4, partFolder, castFolder);
         //partRecipes(consumer, DreamtinkerToolParts.memoryOrthant, TinkerSmeltery.pickHeadCast, 2, partFolder, castFolder);
         //five Orthant
         ToolPartItem[] tree_parts =
@@ -966,7 +968,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                     .addSpirit(SpiritTypeRegistry.AQUEOUS_SPIRIT, 2 * 4)
                     .addSpirit(SpiritTypeRegistry.ELDRITCH_SPIRIT, 2 * 4)
                     .addSpirit(SpiritTypeRegistry.INFERNAL_SPIRIT, 2 * 4)
-                    .build(consumer, id.getVariant() + "_" + part);
+                    .build(consumer, (id.getVariant().isBlank() || id.getVariant().isEmpty() ? id.getId().getPath() : id.getVariant()) + "_" + part);
         }
     }
 

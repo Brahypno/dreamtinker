@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "dreamtinker:item/red_sand_cast/chain_saw_core"
+  }
+}

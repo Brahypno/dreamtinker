@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "dreamtinker:item/casts/reason_cast"
+    "layer0": "dreamtinker:item/cast/reason_cast"
   }
 }

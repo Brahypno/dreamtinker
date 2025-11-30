@@ -1,5 +1,12 @@
 {
   "values": [
-    "dreamtinker:explode_core"
+    "dreamtinker:explode_core",
+    "dreamtinker:memory_orthant",
+    "dreamtinker:soul_orthant",
+    "dreamtinker:wish_orthant",
+    "dreamtinker:persona_orthant",
+    "dreamtinker:reason_emanation",
+    "dreamtinker:chain_saw_teeth",
+    "dreamtinker:chain_saw_core"
   ]
 }

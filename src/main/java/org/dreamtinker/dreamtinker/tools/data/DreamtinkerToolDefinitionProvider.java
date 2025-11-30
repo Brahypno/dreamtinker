@@ -30,6 +30,7 @@ import slimeknights.tconstruct.library.tools.definition.module.weapon.CircleWeap
 import slimeknights.tconstruct.library.tools.nbt.MultiplierNBT;
 import slimeknights.tconstruct.library.tools.nbt.StatsNBT;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
+import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.TinkerToolActions;
 import slimeknights.tconstruct.tools.TinkerToolParts;
 import slimeknights.tconstruct.tools.data.ModifierIds;
@@ -164,8 +165,8 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 // behavior
                 .module(ToolActionsModule.of(ToolActions.SWORD_DIG, ToolActions.PICKAXE_DIG, ToolActions.SHOVEL_DIG, TinkerToolActions.SHIELD_DISABLE))
                 .module(IsEffectiveModule.tag(BlockTags.MINEABLE_WITH_PICKAXE))
-                .module(new MiningSpeedModifierModule(1.5f, BlockPredicate.and(BlockPredicate.tag(BlockTags.MINEABLE_WITH_SHOVEL),
-                                                                               BlockPredicate.set(Blocks.COBWEB))),
+                .module(new MiningSpeedModifierModule(1.5f, BlockPredicate.or(BlockPredicate.tag(BlockTags.MINEABLE_WITH_SHOVEL),
+                                                                              BlockPredicate.set(Blocks.COBWEB))),
                         MiningSpeedModifierModule.blocks(0.10f, Blocks.VINE, Blocks.GLOW_LICHEN), MiningSpeedModifierModule.tag(BlockTags.WOOL, 0.3f))
                 .module(new CircleAOEIterator(1, true))
                 .module(new CircleWeaponAttack(3));
@@ -187,6 +188,34 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                                         .trait(DreamtinkerModifiers.Ids.weapon_slots)
                                         .trait(DreamtinkerModifiers.weapon_dreams)
                                         .build());
+        define(DTtoolsDefinition.chain_saw_blade)
+                // parts
+                .module(PartStatsModule.parts()
+                                       .part(TinkerToolParts.broadBlade, 0.45f)
+                                       .part(DreamtinkerToolParts.chainSawTeeth, 0.75f)
+                                       .part(DreamtinkerToolParts.chainSawCore, 0.75f)
+                                       .part(TinkerToolParts.toughHandle, 0.45f)
+                                       .build())
+                .module(defaultFourParts)
+                // stats
+                .module(new SetStatsModule(StatsNBT.builder()
+                                                   .set(ToolStats.ATTACK_DAMAGE, 5f)
+                                                   .set(ToolStats.ATTACK_SPEED, 0.4f).build()))
+                .module(new MultiplyStatsModule(MultiplierNBT.builder()
+                                                             .set(ToolStats.ATTACK_DAMAGE, 1.7f)
+                                                             .set(ToolStats.MINING_SPEED, 0.4f)
+                                                             .set(ToolStats.DURABILITY, 7.1f).build()))
+                .largeToolStartingSlots()
+                // traits
+                .module(ToolTraitsModule.builder()
+                                        .trait(TinkerModifiers.silkyShears).build())
+                // behavior
+                .module(ToolActionsModule.of(ToolActions.AXE_DIG, ToolActions.SWORD_DIG, TinkerToolActions.SHIELD_DISABLE))
+                .module(new ToolModule[]{
+                        new IsEffectiveModule(BlockPredicate.or(BlockPredicate.tag(TinkerTags.Blocks.MINABLE_WITH_SWORD),
+                                                                BlockPredicate.tag(BlockTags.MINEABLE_WITH_AXE)), false),
+                        MiningSpeedModifierModule.blocks(7.5f, Blocks.COBWEB)
+                });
         // behavior;
     }
 

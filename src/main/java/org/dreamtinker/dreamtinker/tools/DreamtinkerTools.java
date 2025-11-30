@@ -40,7 +40,7 @@ public class DreamtinkerTools extends DreamtinkerModule {
         DtTiers.init();
     }
 
-    private static final Item.Properties UNSTACKABLE_PROPS = (new Item.Properties()).stacksTo(1);
+    private static final Item.Properties UNSTACKABLE_PROPS = new Item.Properties().stacksTo(1);
     public static final RegistryObject<CreativeModeTab> TOOL =
             DreamtinkerModule.TABS.register("tool", () -> CreativeModeTab.builder().title(Dreamtinker.makeTranslation("itemGroup", "tool"))
                                                                          .icon(() -> DreamtinkerTools.mashou.get().getRenderTool())
@@ -56,6 +56,8 @@ public class DreamtinkerTools extends DreamtinkerModule {
             MODI_TOOLS.registerEnum("under_plate", ArmorItem.Type.values(), type -> new UnderArmorItem(DTtoolsDefinition.UNDER_PLATE, type, UNSTACKABLE_PROPS));
     public static final ItemObject<ModifiableItem> silence_glove =
             MODI_TOOLS.register("silence_glove", () -> new SilenceGlove(UNSTACKABLE_PROPS, DTtoolsDefinition.silence_glove));
+    public static final ItemObject<ChainSawBlade> chain_saw_blade =
+            MODI_TOOLS.register("chain_saw_blade", () -> new ChainSawBlade(UNSTACKABLE_PROPS, DTtoolsDefinition.chain_saw_blade));
 
     @SubscribeEvent
     void gatherData(final GatherDataEvent event) {
@@ -96,6 +98,7 @@ public class DreamtinkerTools extends DreamtinkerModule {
         // broad tools
         acceptTool(output, mashou);
         acceptTool(output, narcissus_wing);
+        acceptTool(output, chain_saw_blade);
 
         // ranged tools
 

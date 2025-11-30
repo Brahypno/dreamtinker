@@ -1,0 +1,8 @@
+{
+  "type": "tconstruct:item_part_builder",
+  "pattern": "dreamtinker:chain_saw_core",
+  "pattern_item": {
+    "tag": "tconstruct:casts/red_sand"
+  },
+  "result": "dreamtinker:chain_saw_core_red_sand_cast"
+}

@@ -1,0 +1,8 @@
+{
+  "type": "tconstruct:table_casting_material",
+  "cast": {
+    "tag": "dreamtinker:casts/multi_use/chain_saw_core"
+  },
+  "item_cost": 4,
+  "result": "dreamtinker:chain_saw_core"
+}

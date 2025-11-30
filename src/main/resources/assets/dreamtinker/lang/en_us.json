@@ -464,6 +464,8 @@
   "tooltip.narcissus_wing.desc1": "hero: ",
   "item.dreamtinker.silence_glove": "Silence Glove",
   "item.dreamtinker.silence_glove.description": "A special tool that have 5 inventory slots that is capable for tinkers` construct tool.\n When the inventory is not empty, left operation and right use item operation with this tool would be transformed with random one of the inventory tool.\n Found in loot chest of ancient city or trail ruins rare\nWhen curio loaded, it can equip on hands slot and increase ring size based on tool melee damage and still trigger effects",
+  "item.dreamtinker.chain_saw_blade": "ChainSaw Blade",
+  "item.dreamtinker.chain_saw_blade.description": "Show your loyalty!\n Need fill with fuel or electric to use\n",
 
   "item.dreamtinker.echo_alloy": "Echo Alloy",
   "item.dreamtinker.raw_stibnite": "Raw Stibnite",
@@ -542,6 +544,14 @@
   "item.dreamtinker.transmutation_gold_dust": "Transmutation Gold Dust",
   "item.dreamtinker.transmutation_gold_ingot": "Transmutation Gold Ingot",
   "item.dreamtinker.raw_transmutation_gold": "Raw Transmutation Gold",
+  "item.dreamtinker.chain_saw_core": "ChainSaw Core",
+  "item.dreamtinker.chain_saw_core_cast": "ChainSaw Core Gold Cast",
+  "item.dreamtinker.chain_saw_core_sand_cast": "ChainSaw Core Sand Cast",
+  "item.dreamtinker.chain_saw_core_red_sand_cast": "ChainSaw Core Red Sand Cast",
+  "item.dreamtinker.chain_saw_teeth": "ChainSaw Teeth",
+  "item.dreamtinker.chain_saw_teeth_cast": "ChainSaw Core Gold Cast",
+  "item.dreamtinker.chain_saw_teeth_sand_cast": "ChainSaw Core Sand Cast",
+  "item.dreamtinker.chain_saw_teeth_red_sand_cast": "ChainSaw Core Red Sand Cast",
 
   "block.dreamtinker.crying_obsidian_pane": "Crying Obsidian Pane",
   "block.dreamtinker.narcissus": "Narcissus",
@@ -806,6 +816,8 @@
   "pattern.dreamtinker.soul_orthant": "Soul Orthant",
   "pattern.dreamtinker.persona_orthant": "Persona Orthant",
   "pattern.dreamtinker.reason_emanation": "Reason Emanation",
+  "pattern.dreamtinker.chain_saw_core": "ChainSaw Core",
+  "pattern.dreamtinker.chain_saw_teeth": "ChainSaw Teeth",
 
   "effect.dreamtinker.silver_name_bee": "silver ledger",
   "effect.dreamtinker.real_darkness": "Real Darkness",

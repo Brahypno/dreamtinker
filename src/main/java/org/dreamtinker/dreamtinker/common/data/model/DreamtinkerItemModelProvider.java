@@ -1,6 +1,5 @@
 package org.dreamtinker.dreamtinker.common.data.model;
 
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -8,9 +7,11 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.loaders.DynamicFluidContainerModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
@@ -18,6 +19,7 @@ import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import slimeknights.mantle.registration.object.FluidObject;
 import slimeknights.mantle.registration.object.ItemObject;
 import slimeknights.tconstruct.common.data.model.MaterialModelBuilder;
+import slimeknights.tconstruct.common.registration.CastItemObject;
 import slimeknights.tconstruct.library.tools.part.MaterialItem;
 import slimeknights.tconstruct.library.tools.part.ToolPartItem;
 
@@ -32,6 +34,10 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
 
     public void generateItemModel(RegistryObject<Item> object, String typePath) {
         withExistingParent(object.getId().getPath(), parent_item).texture("layer0", getItemLocation(object.getId().getPath(), typePath));
+    }
+
+    public void generateItemModel(ResourceLocation rs, String typePath) {
+        withExistingParent(rs.getPath(), parent_item).texture("layer0", getItemLocation(rs.getPath(), typePath));
     }
 
     public void generateBlockItemModel(ItemObject<Block> object) {
@@ -64,11 +70,11 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
         generateItemModel(DreamtinkerCommon.void_pearl, "");
         generateItemModel(DreamtinkerCommon.soul_etherium, "materials");
         generateItemModel(DreamtinkerCommon.twist_obsidian_pane, "");
-        generateItemModel(DreamtinkerCommon.memory_cast, "casts");
-        generateItemModel(DreamtinkerCommon.wish_cast, "casts");
-        generateItemModel(DreamtinkerCommon.soul_cast, "casts");
-        generateItemModel(DreamtinkerCommon.persona_cast, "casts");
-        generateItemModel(DreamtinkerCommon.reason_cast, "casts");
+        generateItemModel(DreamtinkerCommon.memory_cast, "cast");
+        generateItemModel(DreamtinkerCommon.wish_cast, "cast");
+        generateItemModel(DreamtinkerCommon.soul_cast, "cast");
+        generateItemModel(DreamtinkerCommon.persona_cast, "cast");
+        generateItemModel(DreamtinkerCommon.reason_cast, "cast");
         generateItemModel(DreamtinkerCommon.white_peach, "");
         generateItemModel(DreamtinkerCommon.unborn_egg, "");
         generateItemModel(DreamtinkerCommon.unborn_turtle_egg, "");
@@ -109,12 +115,27 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
         part(DreamtinkerToolParts.soulOrthant.get());
         part(DreamtinkerToolParts.personaOrthant.get());
         part(DreamtinkerToolParts.reasonEmanation.get());
+        part(DreamtinkerToolParts.chainSawCore.get());
+        part(DreamtinkerToolParts.chainSawTeeth.get());
+
+        cast(DreamtinkerToolParts.chainSawTeethCast);
+        cast(DreamtinkerToolParts.chainSawCoreCast);
     }
 
     private MaterialModelBuilder<ItemModelBuilder> part(ResourceLocation part, String texture) {
         return withExistingParent(part.getPath(), "forge:item/default")
                 .texture("texture", Dreamtinker.getLocation("item/tool/" + texture))
                 .customLoader(MaterialModelBuilder::new);
+    }
+
+    /**
+     * Creates models for the given cast object
+     */
+    private void cast(CastItemObject cast) {
+        String name = cast.getName().getPath();
+        basicItem(cast.getId(), "cast/" + name);
+        basicItem(cast.getSand(), "sand_cast/" + name);
+        basicItem(cast.getRedSand(), "red_sand_cast/" + name);
     }
 
     /**
@@ -139,6 +160,38 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
     }
 
     private ResourceLocation id(ItemLike item) {
-        return BuiltInRegistries.ITEM.getKey(item.asItem());
+        return ForgeRegistries.ITEMS.getKey(item.asItem());
+    }
+
+    private ItemModelBuilder generated(ResourceLocation item, ResourceLocation texture) {
+        return getBuilder(item.toString()).parent(new ModelFile.UncheckedModelFile(parent_item)).texture("layer0", texture);
+    }
+
+    /**
+     * Generated item with a texture
+     */
+    private ItemModelBuilder generated(ResourceLocation item, String texture) {
+        return generated(item, new ResourceLocation(item.getNamespace(), texture));
+    }
+
+    /**
+     * Generated item with a texture
+     */
+    private ItemModelBuilder generated(ItemLike item, String texture) {
+        return generated(id(item), texture);
+    }
+
+    /**
+     * Generated item with a texture
+     */
+    private ItemModelBuilder basicItem(ResourceLocation item, String texture) {
+        return generated(item, "item/" + texture);
+    }
+
+    /**
+     * Generated item with a texture
+     */
+    private ItemModelBuilder basicItem(ItemLike item, String texture) {
+        return basicItem(id(item), texture);
     }
 }

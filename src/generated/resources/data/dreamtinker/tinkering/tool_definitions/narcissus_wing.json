@@ -108,7 +108,7 @@
     {
       "type": "tconstruct:mining_speed_modifier",
       "modifier": 1.5,
-      "predicate_type": "mantle:and",
+      "predicate_type": "mantle:or",
       "predicates": [
         {
           "type": "mantle:tag",

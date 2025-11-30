@@ -1,5 +1,7 @@
 {
   "values": [
+    "#dreamtinker:casts/single_use/chain_saw_teeth",
+    "#dreamtinker:casts/single_use/chain_saw_core",
     "dreamtinker:memory_cast",
     "dreamtinker:wish_cast",
     "dreamtinker:soul_cast",

@@ -1,0 +1,11 @@
+{
+  "type": "tconstruct:molding_table",
+  "material": {
+    "tag": "tconstruct:casts/sand"
+  },
+  "pattern": {
+    "type": "tconstruct:material",
+    "item": "dreamtinker:chain_saw_teeth"
+  },
+  "result": "dreamtinker:chain_saw_teeth_sand_cast"
+}

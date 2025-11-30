@@ -20,9 +20,11 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.registration.object.EnumObject;
 import slimeknights.tconstruct.common.TinkerTags;
+import slimeknights.tconstruct.common.registration.CastItemObject;
 import slimeknights.tconstruct.tools.TinkerTools;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 import static org.dreamtinker.dreamtinker.common.DreamtinkerCommon.*;
 import static slimeknights.tconstruct.common.TinkerTags.Items.*;
@@ -37,12 +39,19 @@ public class ItemTagProvider extends ItemTagsProvider {
     protected void addTags(HolderLookup.@NotNull Provider Provider) {
         //tools
         this.tag(Items.weapon_slot_excluded).add(DreamtinkerTools.silence_glove.get(), DreamtinkerTools.tntarrow.get());
-        this.tag(TinkerTags.Items.TOOL_PARTS).add(DreamtinkerToolParts.explode_core.get());
+        this.tag(TinkerTags.Items.TOOL_PARTS)
+            .add(DreamtinkerToolParts.explode_core.get(), DreamtinkerToolParts.memoryOrthant.get(), DreamtinkerToolParts.soulOrthant.get(),
+                 DreamtinkerToolParts.wishOrthant.get(), DreamtinkerToolParts.personaOrthant.get(), DreamtinkerToolParts.reasonEmanation.get(),
+                 DreamtinkerToolParts.chainSawTeeth.get(), DreamtinkerToolParts.chainSawCore.get());
+
         addItemsTags(DreamtinkerTools.mashou, MULTIPART_TOOL, DURABILITY, HARVEST, MELEE_PRIMARY, INTERACTABLE_RIGHT, SWORD, BROAD_TOOLS, BONUS_SLOTS,
                      ItemTags.SWORDS, AOE);
         addItemsTags(DreamtinkerTools.narcissus_wing, MULTIPART_TOOL, DURABILITY, HARVEST_PRIMARY, MELEE_PRIMARY, INTERACTABLE_RIGHT, SCYTHES, BROAD_TOOLS,
                      BONUS_SLOTS, ItemTags.SWORDS, AOE, RANGED, ItemTags.PICKAXES);
         addItemsTags(DreamtinkerTools.tntarrow, MULTIPART_TOOL, DURABILITY, MELEE_WEAPON, SMALL_TOOLS, BONUS_SLOTS);
+        addItemsTags(DreamtinkerTools.chain_saw_blade, MULTIPART_TOOL, DURABILITY, HARVEST_PRIMARY, MELEE_PRIMARY, INTERACTABLE_RIGHT, AOE, BROAD_TOOLS,
+                     BONUS_SLOTS,
+                     ItemTags.AXES, ItemTags.SWORDS);
 
         this.tag(ItemTagRegistry.SCYTHE).add(TinkerTools.scythe.asItem(), TinkerTools.kama.asItem(), DreamtinkerTools.narcissus_wing.asItem());
         this.tag(ItemTagRegistry.HIDDEN_UNTIL_BLACK_CRYSTAL)
@@ -50,6 +59,24 @@ public class ItemTagProvider extends ItemTagsProvider {
         addItemsTags(DreamtinkerTools.silence_glove, DURABILITY, MELEE, BONUS_SLOTS, ANCIENT_TOOLS, STAFFS, SHIELDS,
                      Items.HANDS, Items.CURIOS);
         //parts
+        IntrinsicTagAppender<Item> goldCasts = this.tag(TinkerTags.Items.GOLD_CASTS);
+        IntrinsicTagAppender<Item> sandCasts = this.tag(TinkerTags.Items.SAND_CASTS);
+        IntrinsicTagAppender<Item> redSandCasts = this.tag(TinkerTags.Items.RED_SAND_CASTS);
+        IntrinsicTagAppender<Item> singleUseCasts = this.tag(TinkerTags.Items.SINGLE_USE_CASTS);
+        IntrinsicTagAppender<Item> multiUseCasts = this.tag(TinkerTags.Items.MULTI_USE_CASTS);
+        Consumer<CastItemObject> addCast = cast -> {
+            // tag based on material
+            goldCasts.add(cast.get());
+            sandCasts.add(cast.getSand());
+            redSandCasts.add(cast.getRedSand());
+            // tag based on usage
+            singleUseCasts.addTag(cast.getSingleUseTag());
+            this.tag(cast.getSingleUseTag()).add(cast.getSand(), cast.getRedSand());
+            multiUseCasts.addTag(cast.getMultiUseTag());
+            this.tag(cast.getMultiUseTag()).add(cast.get());
+        };
+        addCast.accept(DreamtinkerToolParts.chainSawTeethCast);
+        addCast.accept(DreamtinkerToolParts.chainSawCoreCast);
         this.tag(TinkerTags.Items.CASTS)
             .add(memory_cast.get(), wish_cast.get(), soul_cast.get(),
                  persona_cast.get(),

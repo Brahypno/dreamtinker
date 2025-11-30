@@ -48,8 +48,7 @@ public class DreamtinkerCommon extends DreamtinkerModule {
     public static final RegistryObject<Item> valentinite = ITEMS.register("valentinite", () -> new valentinite(ITEM_PROPS.rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> nigrescence_antimony =
             ITEMS.register("nigrescence_antimony", () -> new Item(ITEM_PROPS.rarity(Rarity.UNCOMMON)) {
-
-                public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag flag) {
+                public void appendHoverText(@NotNull ItemStack stack, Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
                     tooltip.add(Component.translatable("tooltip.nigrescence_antimony.desc1").withStyle(ChatFormatting.DARK_GRAY));
                     tooltip.add(Component.translatable("tooltip.nigrescence_antimony.desc2").withStyle(ChatFormatting.BLACK));
                     super.appendHoverText(stack, level, tooltip, flag);

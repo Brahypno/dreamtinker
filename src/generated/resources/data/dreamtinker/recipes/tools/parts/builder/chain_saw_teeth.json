@@ -1,0 +1,16 @@
+{
+  "type": "tconstruct:part_builder",
+  "cost": 6,
+  "pattern": "dreamtinker:chain_saw_teeth",
+  "pattern_item": [
+    {
+      "tag": "tconstruct:patterns/default"
+    },
+    {
+      "item": "dreamtinker:chain_saw_teeth_cast"
+    }
+  ],
+  "result": {
+    "item": "dreamtinker:chain_saw_teeth"
+  }
+}
