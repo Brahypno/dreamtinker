@@ -89,7 +89,6 @@ public class GeneralHurtHandler {
 
 
         boolean Not_Tran = !data.contains(TAG_DamageSourceTransmission) || data.getLong(TAG_DamageSourceTransmission) < world.getGameTime();
-
         if (!damage_source_transmission && Not_Tran){
             damage_source_transmission = true;
             boolean transformed = false;

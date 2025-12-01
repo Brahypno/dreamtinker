@@ -33,6 +33,8 @@ public class DreamtinkerToolItemModelProvider extends AbstractToolItemModelProvi
         armor("under_plate", DreamtinkerTools.underPlate, "plating", "maille", "maille1");
         //shield("plate", TinkerTools.plateShield, readJson(getResource("base/shield_large_blocking")), "plating", "core");
         pulling_wo_broken(DreamtinkerTools.narcissus_wing, readJson(Dreamtinker.getLocation("base/narcissus_wing_blocking")), AmmoType.NONE, 1, "wish");
+
+        tool(DreamtinkerTools.chain_saw_blade, toolBlocking, "teeth", "handle");
     }
 
     private void pulling_wo_broken(IdAwareObject bow, JsonObject properties, AmmoHandler ammo, int pullingCount, String... pullingParts) throws IOException {

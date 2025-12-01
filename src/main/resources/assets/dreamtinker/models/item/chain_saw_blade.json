@@ -19,11 +19,12 @@
   "large": true,
   "large_offset": [-2, 2],
   "parts": [
-    { "name": "head", "index": 1 },
-    { "name": "teeth",   "index": 0 },
-    { "name": "core", "index": 3 },
-    { "name": "handle",  "index": 2 }
+    { "name": "head",  "index": 1 },
+    { "name": "teeth", "index": 0 },
+    { "name": "core",  "index": 3 },
+    { "name": "handle","index": 2 }
   ],
+  "first_modifiers": [{ "name": "tconstruct:tank", "forced": true }],
   "overrides": [
     {
       "predicate": { "tconstruct:charging": 2 },

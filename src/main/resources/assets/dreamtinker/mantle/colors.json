@@ -119,7 +119,8 @@
     "force_to_explosion": "#55FFFF",
     "sun_shine": "#F29A54",
     "solar_away": "#DE6428",
-    "soul_unchanged": "#EBB46D"
+    "soul_unchanged": "#EBB46D",
+    "death_shredder": "#AA0000"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",

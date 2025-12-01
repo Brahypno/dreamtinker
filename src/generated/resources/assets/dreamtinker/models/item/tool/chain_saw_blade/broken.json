@@ -1,0 +1,53 @@
+{
+  "loader": "tconstruct:tool",
+  "parent": "forge:item/default-tool",
+  "textures": {
+    "head": "dreamtinker:item/tool/chain_saw_blade/head",
+    "teeth": "dreamtinker:item/tool/chain_saw_blade/teeth_broken",
+    "core": "dreamtinker:item/tool/chain_saw_blade/core",
+    "handle": "dreamtinker:item/tool/chain_saw_blade/handle_broken",
+    "large_head": "dreamtinker:item/tool/chain_saw_blade/large/head",
+    "large_teeth": "dreamtinker:item/tool/chain_saw_blade/large/teeth_broken",
+    "large_core": "dreamtinker:item/tool/chain_saw_blade/large/core",
+    "large_handle": "dreamtinker:item/tool/chain_saw_blade/large/handle_broken"
+  },
+  "modifier_roots": {
+    "small": [
+      "dreamtinker:item/tool/chain_saw_blade/modifiers/broken/",
+      "dreamtinker:item/tool/chain_saw_blade/modifiers/"
+    ],
+    "large": [
+      "dreamtinker:item/tool/chain_saw_blade/large/modifiers/broken/",
+      "dreamtinker:item/tool/chain_saw_blade/large/modifiers/"
+    ]
+  },
+  "large": true,
+  "large_offset": [
+    -2,
+    2
+  ],
+  "parts": [
+    {
+      "name": "head",
+      "index": 1
+    },
+    {
+      "name": "teeth",
+      "index": 0
+    },
+    {
+      "name": "core",
+      "index": 3
+    },
+    {
+      "name": "handle",
+      "index": 2
+    }
+  ],
+  "first_modifiers": [
+    {
+      "name": "tconstruct:tank",
+      "forced": true
+    }
+  ]
+}

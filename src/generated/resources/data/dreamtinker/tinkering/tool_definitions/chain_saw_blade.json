@@ -71,7 +71,7 @@
       "traits": [
         {
           "level": 1,
-          "name": "tconstruct:silky_shears"
+          "name": "dreamtinker:death_shredder"
         },
         {
           "level": 1,
@@ -108,6 +108,33 @@
       ],
       "modifier": 7.5,
       "predicate_type": "mantle:set"
+    },
+    {
+      "type": "tconstruct:conditional_aoe",
+      "condition": {
+        "type": "mantle:tag",
+        "tag": "tconstruct:tree_log"
+      },
+      "if_false": {
+        "type": "tconstruct:box_aoe",
+        "bonus": {
+          "height": 3
+        },
+        "expansion_direction": "tconstruct:height",
+        "expansions": [
+          {
+            "width": 1
+          },
+          {
+            "depth": 1
+          }
+        ]
+      },
+      "if_true": {
+        "type": "tconstruct:tree_aoe",
+        "depth_bonus": 0,
+        "width_bonus": 0
+      }
     }
   ]
 }

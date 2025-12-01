@@ -442,6 +442,9 @@
   "modifier.dreamtinker.solar_away": "Solar Away",
   "modifier.dreamtinker.solar_away.flavor": "The one who won’t be getting closer, but running away from you",
   "modifier.dreamtinker.solar_away.description": "When on hit, apply knock back based on main hand weapon",
+  "modifier.dreamtinker.death_shredder": "Death Shredder",
+  "modifier.dreamtinker.death_shredder.flavor": "ZI-ZI-ZI-",
+  "modifier.dreamtinker.death_shredder.description": "When filled with fuel,right interaction would deal damage to living entities in front you",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",

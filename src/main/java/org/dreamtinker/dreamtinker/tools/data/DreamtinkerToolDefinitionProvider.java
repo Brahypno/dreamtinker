@@ -18,7 +18,7 @@ import slimeknights.tconstruct.library.materials.RandomMaterial;
 import slimeknights.tconstruct.library.tools.SlotType;
 import slimeknights.tconstruct.library.tools.definition.module.ToolHooks;
 import slimeknights.tconstruct.library.tools.definition.module.ToolModule;
-import slimeknights.tconstruct.library.tools.definition.module.aoe.CircleAOEIterator;
+import slimeknights.tconstruct.library.tools.definition.module.aoe.*;
 import slimeknights.tconstruct.library.tools.definition.module.build.*;
 import slimeknights.tconstruct.library.tools.definition.module.material.DefaultMaterialsModule;
 import slimeknights.tconstruct.library.tools.definition.module.material.MaterialStatsModule;
@@ -30,7 +30,6 @@ import slimeknights.tconstruct.library.tools.definition.module.weapon.CircleWeap
 import slimeknights.tconstruct.library.tools.nbt.MultiplierNBT;
 import slimeknights.tconstruct.library.tools.nbt.StatsNBT;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
-import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.TinkerToolActions;
 import slimeknights.tconstruct.tools.TinkerToolParts;
 import slimeknights.tconstruct.tools.data.ModifierIds;
@@ -210,7 +209,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 .largeToolStartingSlots()
                 // traits
                 .module(ToolTraitsModule.builder()
-                                        .trait(TinkerModifiers.silkyShears)
+                                        .trait(DreamtinkerModifiers.death_shredder)
                                         .trait(ModifierIds.stripping).build())
                 // behavior
                 .module(ToolActionsModule.of(ToolActions.AXE_DIG, ToolActions.SWORD_DIG, TinkerToolActions.SHIELD_DISABLE))
@@ -218,7 +217,10 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                         new IsEffectiveModule(BlockPredicate.or(BlockPredicate.tag(TinkerTags.Blocks.MINABLE_WITH_SWORD),
                                                                 BlockPredicate.tag(BlockTags.MINEABLE_WITH_AXE)), false),
                         MiningSpeedModifierModule.blocks(7.5f, Blocks.COBWEB)
-                });
+                })
+                .module(new ConditionalAOEIterator(
+                        BlockPredicate.tag(TinkerTags.Blocks.TREE_LOGS), new TreeAOEIterator(0, 0),
+                        BoxAOEIterator.builder(0, 3, 0).addWidth(1).addDepth(1).direction(IBoxExpansion.HEIGHT).build()));
         // behavior;
     }
 

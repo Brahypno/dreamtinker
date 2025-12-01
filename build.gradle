@@ -193,6 +193,9 @@ dependencies {
     // at runtime, use the full JEI jar
     runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
     runtimeOnly fg.deobf("curse.maven:tconjei-974154:6841685")
+    runtimeOnly fg.deobf("curse.maven:MoonlightLib-499980:6000197")
+    runtimeOnly fg.deobf("curse.maven:MmmMmmMmmMmm-225738:5737040")
+    runtimeOnly fg.deobf("curse.maven:jade-324717:6855440")
 
     implementation fg.deobf("curse.maven:curios-309927:6418456")
     implementation fg.deobf("curse.maven:patchouli-306770:6164575")
@@ -201,6 +204,7 @@ dependencies {
 
     implementation fg.deobf("curse.maven:lodestone-616457:6213794")
     implementation fg.deobf("curse.maven:malum-484064:6646111")
+
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

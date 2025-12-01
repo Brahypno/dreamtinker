@@ -442,6 +442,9 @@
   "modifier.dreamtinker.solar_away": "太阳之距",
   "modifier.dreamtinker.solar_away.flavor": "不靠近我而是远离我吗",
   "modifier.dreamtinker.solar_away.description": "受击时，对伤害者施加基于主手的击退",
+  "modifier.dreamtinker.death_shredder": "死亡绞肉",
+  "modifier.dreamtinker.death_shredder.flavor": "滋-滋-",
+  "modifier.dreamtinker.death_shredder.description": "当有燃料时，右键交互会对面前的生物造成多次伤害",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",

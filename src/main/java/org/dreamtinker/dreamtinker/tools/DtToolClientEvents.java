@@ -35,10 +35,9 @@ import java.util.function.Consumer;
 import static slimeknights.tconstruct.library.client.model.tools.ToolModel.registerItemColors;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class DTtoolclientEvents extends ClientEventBase {
+public class DtToolClientEvents extends ClientEventBase {
     @SubscribeEvent
     static void clientSetupEvent(FMLClientSetupEvent event) {
-        // keybinds
         event.enqueueWork(() -> {
             TinkerItemProperties.registerToolProperties(DreamtinkerTools.mashou);
             TinkerItemProperties.registerToolProperties(DreamtinkerTools.silence_glove);

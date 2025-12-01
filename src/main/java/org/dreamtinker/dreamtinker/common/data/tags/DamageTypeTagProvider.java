@@ -6,6 +6,7 @@ import net.minecraft.data.tags.DamageTypeTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
@@ -18,7 +19,8 @@ public class DamageTypeTagProvider extends DamageTypeTagsProvider {
     }
 
     @Override
-    protected void addTags(HolderLookup.Provider Provider) {
+    protected void addTags(HolderLookup.@NotNull Provider Provider) {
+        tag(DAMAGES_HELMET).add(DreamtinkerDamageTypes.NULL_VOID);
         tag(BYPASSES_ARMOR).add(DreamtinkerDamageTypes.NULL_VOID, DreamtinkerDamageTypes.rain_bow);
         tag(BYPASSES_SHIELD).add(DreamtinkerDamageTypes.NULL_VOID);
         tag(BYPASSES_INVULNERABILITY).add(DreamtinkerDamageTypes.NULL_VOID);
