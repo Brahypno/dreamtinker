@@ -857,5 +857,9 @@
   "death.attack.dreamtinker.null_void": "consumed by nothingness",
   "death.attack.dreamtinker.rain_bow": "vanished like rainbow",
 
-  "entity.dreamtinker.aggressive_fox": "Armed Fox"
+  "entity.dreamtinker.aggressive_fox": "Armed Fox",
+
+  "sound.dreamtinker.chainsaw_start": "ChainSaw Starting",
+  "sound.dreamtinker.chainsaw_loop": "ChainSaw Running",
+  "sound.dreamtinker.chainsaw_stop": "ChainSaw Stopping"
 }

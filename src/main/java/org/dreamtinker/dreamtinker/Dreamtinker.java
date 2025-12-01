@@ -32,6 +32,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Entity.AggressiveFox;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
+import org.dreamtinker.dreamtinker.common.DreamtinkerSounds;
 import org.dreamtinker.dreamtinker.common.data.AdvancementsProvider;
 import org.dreamtinker.dreamtinker.common.data.DTCurio;
 import org.dreamtinker.dreamtinker.common.data.DreamtinkerRecipeProvider;
@@ -83,6 +84,7 @@ public class Dreamtinker {
         modEventBus.register(new DreamtinkerToolParts());
         modEventBus.register(new DreamtinkerTools());
         modEventBus.register(new DreamtinkerCommon());
+        modEventBus.register(new DreamtinkerSounds());
         modEventBus.register(new DreamtinkerModifiers());
         DreamtinkerModule.initRegisters(modEventBus);
 

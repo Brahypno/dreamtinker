@@ -2,6 +2,7 @@ package org.dreamtinker.dreamtinker;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -46,6 +47,8 @@ public abstract class DreamtinkerModule {
             DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MODID);
     public static final SynchronizedDeferredRegister<CreativeModeTab> TABS = SynchronizedDeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
     public static final DeferredRegister<RuleTestType<?>> RULE_TESTS = DeferredRegister.create(Registries.RULE_TEST, MODID);
+    public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
+            DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MODID);
 
     public static final RegistryObject<RuleTestType<TagAndTagRuleTest>> TAG_AND_TAG =
             RULE_TESTS.register("tag_and_tag", () -> () -> TagAndTagRuleTest.CODEC);
@@ -100,6 +103,7 @@ public abstract class DreamtinkerModule {
         }
         TABS.register(bus);
         RULE_TESTS.register(bus);
+        SOUND_EVENTS.register(bus);
     }
 }
 

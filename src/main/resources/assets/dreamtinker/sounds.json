@@ -1,0 +1,29 @@
+{
+  "chainsaw.start": {
+    "sounds": [
+      {
+        "name": "dreamtinker:entity/chainsaw_start",
+        "stream": false
+      }
+    ],
+    "subtitle": "sound.dreamtinker.chainsaw_start"
+  },
+  "chainsaw.loop": {
+    "sounds": [
+      {
+        "name": "dreamtinker:entity/chainsaw_loop",
+        "stream": true
+      }
+    ],
+    "subtitle": "sound.dreamtinker.chainsaw_loop"
+  },
+  "chainsaw.stop": {
+    "sounds": [
+      {
+        "name": "dreamtinker:entity/chainsaw_stop",
+        "stream": false
+      }
+    ],
+    "subtitle": "sound.dreamtinker.chainsaw_stop"
+}
+}

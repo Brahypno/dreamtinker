@@ -1,6 +1,7 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.tools.chain_saw_blade;
 
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -12,6 +13,8 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
+import org.dreamtinker.dreamtinker.common.DreamtinkerSounds;
+import org.dreamtinker.dreamtinker.library.client.sound.ClientSoundChecker;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -83,6 +86,14 @@ public class death_shredder extends BattleModifier {
                 int amount = recipe.getAmount(fluid.getFluid());
                 if (fluid.getAmount() >= amount){
                     GeneralInteractionModifierHook.startUsingWithDrawtime(tool, modifier.getId(), player, hand, 1.5f);
+                    player.level().playSound(
+                            null,                      // 播给周围所有玩家
+                            player.getX(), player.getY(), player.getZ(),
+                            DreamtinkerSounds.CHAINSAW_START.get(),
+                            SoundSource.PLAYERS,
+                            1.0F,                      // 音量
+                            1.0F                       // 音高
+                    );
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -100,7 +111,7 @@ public class death_shredder extends BattleModifier {
         List<Entity> possibleList = entity.level().getEntities(entity, entity.getBoundingBox()
                                                                              .expandTowards(lookVec.x() * range, lookVec.y() * range, lookVec.z() * range)
                                                                              .inflate(var9, var9, var9));
-
+        ClientSoundChecker.playWorldSound(entity, (byte) 1);
         boolean flag = false;
         for (Entity victim : possibleList) {
             if (victim instanceof LivingEntity){
@@ -128,5 +139,19 @@ public class death_shredder extends BattleModifier {
             }
         }
     }
+
+    @Override
+    public void onStoppedUsing(IToolStackView tool, ModifierEntry modifier, LivingEntity entity, int timeLeft) {
+        ClientSoundChecker.clearSoundCacheFor(entity);
+        entity.level().playSound(
+                null,                      // 播给周围所有玩家
+                entity.getX(), entity.getY(), entity.getZ(),
+                DreamtinkerSounds.CHAINSAW_STOP.get(),
+                SoundSource.PLAYERS,
+                1.0F,                      // 音量
+                1.0F                       // 音高
+        );
+    }
+
 
 }
