@@ -11,6 +11,7 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ScatterReplaceOreFeature extends Feature<ScatterReplaceOreConfiguration> {
 
@@ -33,7 +34,7 @@ public class ScatterReplaceOreFeature extends Feature<ScatterReplaceOreConfigura
             return false;
         }
 
-        // 1. 收集扫描范围内所有“潜在可替换的矿”
+        // 1. 收集当前范围内「仍为原矿、可被替换」的格子
         Map<BlockPos, OreConfiguration.TargetBlockState> candidates = new HashMap<>();
         BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 
@@ -48,7 +49,7 @@ public class ScatterReplaceOreFeature extends Feature<ScatterReplaceOreConfigura
 
                     for (OreConfiguration.TargetBlockState target : cfg.targets()) {
                         if (target.target.test(current, random)){
-                            // 命中某个 target，就记录下来，并不继续匹配其它 target
+                            // 命中 RuleTest：这是「仍为原矿、可被替换」的位置
                             candidates.put(mutable.immutable(), target);
                             break;
                         }
@@ -61,7 +62,11 @@ public class ScatterReplaceOreFeature extends Feature<ScatterReplaceOreConfigura
             return false;
         }
 
-        // 2. 按相邻关系（6 方向）划分“矿脉”（连通块）
+        // 2. 目标矿 state 集合：用来判断「已经是我矿」的格子，作为连通性桥梁
+        Set<BlockState> targetStates = cfg.targets().stream()
+                                          .map(targetBlockState -> targetBlockState.state)
+                                          .collect(Collectors.toSet());
+
         Set<BlockPos> visited = new HashSet<>();
         int totalReplaced = 0;
 
@@ -70,43 +75,65 @@ public class ScatterReplaceOreFeature extends Feature<ScatterReplaceOreConfigura
                 continue;
             }
 
-            // BFS / flood fill 找出这一团 vein
-            List<BlockPos> veinPositions = new ArrayList<>();
+            // 这一条「矿脉」里的所有位置（包括原矿 + 已为目标矿）
+            List<BlockPos> veinAllPositions = new ArrayList<>();
+            // 这一条「矿脉」里真正「仍为原矿、可替换」的位置
+            List<BlockPos> veinReplaceCandidates = new ArrayList<>();
+
             Deque<BlockPos> queue = new ArrayDeque<>();
             visited.add(start);
             queue.add(start);
 
             while (!queue.isEmpty()) {
                 BlockPos currentPos = queue.removeFirst();
-                veinPositions.add(currentPos);
+                veinAllPositions.add(currentPos);
+
+                // 如果这一格在 candidates 里，说明它是「仍为原矿」
+                if (candidates.containsKey(currentPos)){
+                    veinReplaceCandidates.add(currentPos);
+                }
 
                 for (Direction dir : Direction.values()) {
-                    // 只用 6 方向邻接
                     BlockPos neighbor = currentPos.relative(dir);
-                    if (!visited.contains(neighbor) && candidates.containsKey(neighbor)){
+
+                    if (visited.contains(neighbor)){
+                        continue;
+                    }
+
+                    // 限制在 [-range, range] 立方体内，避免 BFS 突然跑出扫描范围
+                    if (Math.abs(neighbor.getX() - origin.getX()) > range
+                        || Math.abs(neighbor.getY() - origin.getY()) > range
+                        || Math.abs(neighbor.getZ() - origin.getZ()) > range){
+                        continue;
+                    }
+
+                    BlockState neighborState = level.getBlockState(neighbor);
+
+                    // 连通性的判定：候选原矿 或 已经是目标矿 均可视作「矿脉的一部分」
+                    boolean isReplaceCandidate = candidates.containsKey(neighbor);
+                    boolean isAlreadyTarget = targetStates.contains(neighborState);
+
+                    if (isReplaceCandidate || isAlreadyTarget){
                         visited.add(neighbor);
                         queue.add(neighbor);
                     }
                 }
             }
 
-            if (veinPositions.isEmpty()){
+            if (veinReplaceCandidates.isEmpty()){
                 continue;
             }
 
-            // 3. 对这一团矿脉进行随机化 + 按 maxPerVein 限制替换数量
-            // 为了随机选择 vein 内哪些位置被替换，我们先打乱顺序
-            // RandomSource 没有直接的 shuffle，用 JDK Random 包一下
-            Collections.shuffle(veinPositions, new Random(random.nextLong()));
+            // 3. 对这一条连通矿脉中的「可替换原矿」应用 maxPerVein + chance
+            Collections.shuffle(veinReplaceCandidates, new Random(random.nextLong()));
 
             int replacedInVein = 0;
 
-            for (BlockPos pos : veinPositions) {
+            for (BlockPos pos : veinReplaceCandidates) {
                 if (replacedInVein >= maxPerVein){
                     break;
                 }
 
-                // 再次确认这个位置还在 candidates 里（理论上在）
                 OreConfiguration.TargetBlockState target = candidates.get(pos);
                 if (target == null){
                     continue;
@@ -122,4 +149,5 @@ public class ScatterReplaceOreFeature extends Feature<ScatterReplaceOreConfigura
 
         return totalReplaced > 0;
     }
+
 }
