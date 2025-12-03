@@ -1,6 +1,13 @@
 {
   "type": "forge:add_features",
-  "biomes": "#minecraft:is_mountain",
+  "biomes": [
+    "minecraft:dripstone_caves",
+    "minecraft:grove",
+    "minecraft:snowy_slopes",
+    "minecraft:jagged_peaks",
+    "minecraft:frozen_peaks",
+    "minecraft:stony_peaks"
+  ],
   "features": "dreamtinker:orichalcum_ore",
   "step": "underground_decoration"
 }

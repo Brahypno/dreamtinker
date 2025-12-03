@@ -1,8 +1,9 @@
 {
-  "type": "minecraft:ore",
+  "type": "dreamtinker:scatter_replace",
   "config": {
-    "discard_chance_on_air_exposure": 0.2,
-    "size": 2,
+    "chance": 0.25,
+    "max_per_vein": 4,
+    "range": 8,
     "targets": [
       {
         "state": {

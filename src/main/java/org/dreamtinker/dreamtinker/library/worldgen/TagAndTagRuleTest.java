@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.world;
+package org.dreamtinker.dreamtinker.library.worldgen;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

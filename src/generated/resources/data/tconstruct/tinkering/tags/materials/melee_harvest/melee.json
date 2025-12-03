@@ -12,7 +12,6 @@
     "dreamtinker:scolecite",
     "dreamtinker:shining_flint",
     "dreamtinker:cold_iron",
-    "dreamtinker:shadow_silver",
     {
       "id": "dreamtinker:nefarious",
       "required": false
@@ -35,6 +34,10 @@
     },
     {
       "id": "dreamtinker:malum_malignant_gluttony",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:shadow_silver",
       "required": false
     }
   ]

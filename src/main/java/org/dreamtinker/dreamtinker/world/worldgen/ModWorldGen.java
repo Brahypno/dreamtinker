@@ -26,8 +26,10 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 import net.minecraftforge.common.Tags;
 import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.DreamtinkerModule;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
-import org.dreamtinker.dreamtinker.world.TagAndTagRuleTest;
+import org.dreamtinker.dreamtinker.library.worldgen.ScatterReplaceOreConfiguration;
+import org.dreamtinker.dreamtinker.library.worldgen.TagAndTagRuleTest;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -75,8 +77,10 @@ public class ModWorldGen {
 
     public static ResourceKey<ConfiguredFeature<?, ?>> configuredSmallColdIronOre =
             key(Registries.CONFIGURED_FEATURE, "cold_iron_ore");
-    public static ResourceKey<PlacedFeature> placedSmallColdIronOre =
-            key(Registries.PLACED_FEATURE, "cold_iron_ore");
+    public static ResourceKey<PlacedFeature> placedSmallColdIronOreUnder =
+            key(Registries.PLACED_FEATURE, "cold_iron_ore_under");
+    public static ResourceKey<PlacedFeature> placedSmallColdIronOreHigh =
+            key(Registries.PLACED_FEATURE, "cold_iron_ore_high");
 
     public static ResourceKey<ConfiguredFeature<?, ?>> configuredSmallOrichalcumOre =
             key(Registries.CONFIGURED_FEATURE, "orichalcum_ore");
@@ -121,8 +125,8 @@ public class ModWorldGen {
 
         RuleTest basalt = new BlockMatchTest(Blocks.BASALT);
         BlockState amberOre = DreamtinkerCommon.amberOre.get().defaultBlockState();
-        register(ctx, configuredSmallAmberOre, Feature.ORE, new OreConfiguration(basalt, amberOre, 3));
-        register(ctx, configuredLargeAmberOre, Feature.ORE, new OreConfiguration(basalt, amberOre, 5));
+        register(ctx, configuredSmallAmberOre, Feature.ORE, new OreConfiguration(basalt, amberOre, 5));
+        register(ctx, configuredLargeAmberOre, Feature.ORE, new OreConfiguration(basalt, amberOre, 7));
 
         var stoneTest = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
         var deepTest = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
@@ -134,19 +138,31 @@ public class ModWorldGen {
         register(ctx, configuredSmallBlackSapphireOre, Feature.ORE, new OreConfiguration(black_sapphire_targets, 6, 0.1f));
 
         BlockState scoleciteOre = DreamtinkerCommon.scoleciteOre.get().defaultBlockState();
-        register(ctx, configuredLargeScoleciteOre, Feature.ORE, new OreConfiguration(basalt, scoleciteOre, 9));
+        register(ctx, configuredLargeScoleciteOre, Feature.ORE, new OreConfiguration(basalt, scoleciteOre, 12));
 
         var cold_iron = List.of(
                 OreConfiguration.target(new BlockMatchTest(Blocks.IRON_ORE), DreamtinkerCommon.coldIronOre.get().defaultBlockState()),
                 OreConfiguration.target(new BlockMatchTest(Blocks.DEEPSLATE_IRON_ORE), DreamtinkerCommon.DeepslateColdIronOre.get().defaultBlockState())
         );
-        register(ctx, configuredSmallColdIronOre, Feature.ORE, new OreConfiguration(cold_iron, 4, 0.3f));
+        ScatterReplaceOreConfiguration ColdIronCfg = new ScatterReplaceOreConfiguration(
+                cold_iron,
+                12,
+                0.75F,
+                4
+        );
+        register(ctx, configuredSmallColdIronOre, DreamtinkerModule.SCATTER_REPLACE, ColdIronCfg);
 
         var orichalcum = List.of(
                 OreConfiguration.target(new BlockMatchTest(Blocks.COPPER_ORE), DreamtinkerCommon.OrichalcumOre.get().defaultBlockState()),
                 OreConfiguration.target(new BlockMatchTest(Blocks.DEEPSLATE_COPPER_ORE), DreamtinkerCommon.DeepslateOrichalcumOre.get().defaultBlockState())
         );
-        register(ctx, configuredSmallOrichalcumOre, Feature.ORE, new OreConfiguration(orichalcum, 4, 0.3f));
+        ScatterReplaceOreConfiguration orichalcumCfg = new ScatterReplaceOreConfiguration(
+                orichalcum,
+                12,
+                0.75F,
+                4
+        );
+        register(ctx, configuredSmallOrichalcumOre, DreamtinkerModule.SCATTER_REPLACE, orichalcumCfg);
 
         var shadowSilver = List.of(
                 OreConfiguration.target(new TagAndTagRuleTest(Dreamtinker.forgeBlockTag("ores/silver"), Tags.Blocks.ORES_IN_GROUND_STONE),
@@ -154,7 +170,13 @@ public class ModWorldGen {
                 OreConfiguration.target(new TagAndTagRuleTest(Dreamtinker.forgeBlockTag("ores/silver"), Tags.Blocks.ORES_IN_GROUND_DEEPSLATE),
                                         DreamtinkerCommon.DeepslateShadowSilverOre.get().defaultBlockState())
         );
-        register(ctx, configuredSmallShadowSilverOre, Feature.ORE, new OreConfiguration(shadowSilver, 2, 0.2f));
+        ScatterReplaceOreConfiguration shadowSilverCfg = new ScatterReplaceOreConfiguration(
+                shadowSilver,
+                8,
+                0.25F,
+                4
+        );
+        register(ctx, configuredSmallShadowSilverOre, DreamtinkerModule.SCATTER_REPLACE, shadowSilverCfg);
 
 
         var TransmutationGold = List.of(
@@ -162,7 +184,13 @@ public class ModWorldGen {
                 OreConfiguration.target(new BlockMatchTest(Blocks.DEEPSLATE_GOLD_ORE),
                                         DreamtinkerCommon.DeepslateTransmutationGoldOre.get().defaultBlockState())
         );
-        register(ctx, configuredSmallTransmutationGoldOre, Feature.ORE, new OreConfiguration(TransmutationGold, 4, 0.2f));
+        ScatterReplaceOreConfiguration TGCfg = new ScatterReplaceOreConfiguration(
+                TransmutationGold,
+                8,
+                0.25F,
+                4
+        );
+        register(ctx, configuredSmallTransmutationGoldOre, DreamtinkerModule.SCATTER_REPLACE, TGCfg);
     }
 
     /**
@@ -185,50 +213,55 @@ public class ModWorldGen {
                  HeightRangePlacement.triangle(
                          VerticalAnchor.absolute(45), VerticalAnchor.absolute(70)), BiomeFilter.biome());
         register(ctx, placedSmallAmberOre, configuredSmallAmberOre,
-                 CountPlacement.of(5),
+                 CountPlacement.of(7),
                  InSquarePlacement.spread(),
                  HeightRangePlacement.uniform(VerticalAnchor.absolute(10), VerticalAnchor.absolute(120)),
                  BiomeFilter.biome());
         // 下界里替换玄武岩的大矿脉
         register(ctx, placedLargeAmberOre, configuredLargeAmberOre,
-                 CountPlacement.of(3),
+                 CountPlacement.of(10),
                  InSquarePlacement.spread(),
                  HeightRangePlacement.uniform(VerticalAnchor.absolute(10), VerticalAnchor.absolute(120)),
                  BiomeFilter.biome());
         register(ctx, placedSmallBlackSapphireOre, configuredSmallBlackSapphireOre,
-                 CountPlacement.of(5),
+                 CountPlacement.of(12),
                  InSquarePlacement.spread(),
                  HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(0)),
                  BiomeFilter.biome());
         register(ctx, placedLargeScoleciteOre, configuredLargeScoleciteOre,
-                 CountPlacement.of(9),
+                 CountPlacement.of(20),
                  InSquarePlacement.spread(),
                  HeightRangePlacement.uniform(VerticalAnchor.absolute(50), VerticalAnchor.absolute(120)),
                  BiomeFilter.biome());
-        register(ctx, placedSmallColdIronOre, configuredSmallColdIronOre,
-                 CountPlacement.of(4),
+        register(ctx, placedSmallColdIronOreUnder, configuredSmallColdIronOre,
+                 CountPlacement.of(20),
                  InSquarePlacement.spread(),
-                 HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(384)),
+                 HeightRangePlacement.triangle(VerticalAnchor.absolute(-24), VerticalAnchor.absolute(56)),
+                 BiomeFilter.biome());
+        register(ctx, placedSmallColdIronOreHigh, configuredSmallColdIronOre,
+                 CountPlacement.of(20),
+                 InSquarePlacement.spread(),
+                 HeightRangePlacement.triangle(VerticalAnchor.absolute(120), VerticalAnchor.absolute(320)),
                  BiomeFilter.biome());
         register(ctx, placedSmallOrichalcumOre, configuredSmallOrichalcumOre,
-                 CountPlacement.of(3),
+                 CountPlacement.of(20),
                  InSquarePlacement.spread(),
-                 HeightRangePlacement.uniform(VerticalAnchor.absolute(-12), VerticalAnchor.absolute(112)),
+                 HeightRangePlacement.triangle(VerticalAnchor.absolute(32), VerticalAnchor.absolute(96)),
                  BiomeFilter.biome());
         register(ctx, placedSmallShadowSilverOre, configuredSmallShadowSilverOre,
-                 CountPlacement.of(3),
+                 CountPlacement.of(20),
                  InSquarePlacement.spread(),
-                 HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128)),
+                 HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(64)),
                  BiomeFilter.biome());
         register(ctx, placedSmallTransmutationGoldOre, configuredSmallTransmutationGoldOre,
-                 CountPlacement.of(4),
+                 CountPlacement.of(20),
                  InSquarePlacement.spread(),
-                 HeightRangePlacement.uniform(VerticalAnchor.absolute(16), VerticalAnchor.absolute(128)),
+                 HeightRangePlacement.uniform(VerticalAnchor.absolute(28), VerticalAnchor.absolute(64)),
                  BiomeFilter.biome());
     }
 
     private static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> key, F feature, FC config) {
-        context.register(key, new ConfiguredFeature(feature, config));
+        context.register(key, new ConfiguredFeature<>(feature, config));
     }
 
     private static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> key, Supplier<F> feature, FC config) {

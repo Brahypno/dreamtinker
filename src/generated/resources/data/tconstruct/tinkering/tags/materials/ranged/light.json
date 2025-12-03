@@ -6,7 +6,6 @@
     "dreamtinker:half_rotten_string",
     "dreamtinker:desire_gem",
     "dreamtinker:cold_iron",
-    "dreamtinker:shadow_silver",
     {
       "id": "dreamtinker:malum_spirit_fabric",
       "required": false
@@ -33,6 +32,10 @@
     },
     {
       "id": "dreamtinker:star_regulus",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:shadow_silver",
       "required": false
     }
   ]

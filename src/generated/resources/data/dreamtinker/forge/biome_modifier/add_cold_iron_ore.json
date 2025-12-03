@@ -1,6 +1,24 @@
 {
   "type": "forge:add_features",
-  "biomes": "#minecraft:spawns_snow_foxes",
-  "features": "dreamtinker:cold_iron_ore",
+  "biomes": [
+    "minecraft:frozen_river",
+    "minecraft:frozen_ocean",
+    "minecraft:frozen_peaks",
+    "minecraft:snowy_plains",
+    "minecraft:ice_spikes",
+    "minecraft:snowy_taiga",
+    "minecraft:grove",
+    "minecraft:snowy_slopes",
+    "minecraft:jagged_peaks",
+    "minecraft:stony_peaks",
+    "minecraft:cold_ocean",
+    "minecraft:deep_cold_ocean",
+    "minecraft:deep_frozen_ocean",
+    "minecraft:windswept_gravelly_hills"
+  ],
+  "features": [
+    "dreamtinker:cold_iron_ore_under",
+    "dreamtinker:cold_iron_ore_high"
+  ],
   "step": "underground_decoration"
 }

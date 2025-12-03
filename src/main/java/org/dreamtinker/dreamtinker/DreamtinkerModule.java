@@ -8,6 +8,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTestType;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -19,8 +20,10 @@ import org.dreamtinker.dreamtinker.Entity.AggressiveFox;
 import org.dreamtinker.dreamtinker.Entity.NarcissusFluidProjectile;
 import org.dreamtinker.dreamtinker.Entity.SlashOrbitEntity;
 import org.dreamtinker.dreamtinker.library.LootModifier.ExtraDropLootModifier;
+import org.dreamtinker.dreamtinker.library.worldgen.ScatterReplaceOreConfiguration;
+import org.dreamtinker.dreamtinker.library.worldgen.ScatterReplaceOreFeature;
+import org.dreamtinker.dreamtinker.library.worldgen.TagAndTagRuleTest;
 import org.dreamtinker.dreamtinker.tools.items.TNTArrow;
-import org.dreamtinker.dreamtinker.world.TagAndTagRuleTest;
 import slimeknights.mantle.registration.deferred.EntityTypeDeferredRegister;
 import slimeknights.mantle.registration.deferred.FluidDeferredRegister;
 import slimeknights.mantle.registration.deferred.SynchronizedDeferredRegister;
@@ -81,6 +84,11 @@ public abstract class DreamtinkerModule {
                     EntityType.Builder.<AggressiveFox>of(AggressiveFox::new, MobCategory.CREATURE)
                                       .sized(0.6F, 0.7F) // 和原版狐狸一样
             );
+    public static final DeferredRegister<Feature<?>> FEATURES =
+            DeferredRegister.create(ForgeRegistries.FEATURES, MODID);
+
+    public static final RegistryObject<Feature<ScatterReplaceOreConfiguration>> SCATTER_REPLACE =
+            FEATURES.register("scatter_replace", () -> new ScatterReplaceOreFeature(ScatterReplaceOreConfiguration.CODEC));
 
     @SuppressWarnings({"removal"})
     public static void initRegisters(IEventBus bus) {
@@ -104,6 +112,7 @@ public abstract class DreamtinkerModule {
         TABS.register(bus);
         RULE_TESTS.register(bus);
         SOUND_EVENTS.register(bus);
+        FEATURES.register(bus);
     }
 }
 

@@ -334,7 +334,7 @@
   "modifier.dreamtinker.despair_mist": "绝望如雾",
   "modifier.dreamtinker.despair_mist.flavor": "无意义，无价值，虚无，绝望",
   "modifier.dreamtinker.despair_mist.description": "左击时将攻击范围内实体的负面效果传播给范围内所有实体并清除其正面效果；当传染、清除的数量足够时，对范围内群体造成伤害",
-  "modifier.dreamtinker.despair_rain": "绝望如雨",
+  "modifier.dreamtinker.despair_rain": "充盈渡川",
   "modifier.dreamtinker.despair_rain.flavor": "清澈，透明",
   "modifier.dreamtinker.despair_rain.description": "减半非暴击伤害，获得500%暴击伤害加成并使血量固定为1；提升等级会提升加成数值",
   "modifier.dreamtinker.despair_wind": "绝望如风",

@@ -69,16 +69,46 @@ public class ModBiomeModifiers {
                                                                                             placed.getOrThrow(placedLargeAmberOre)),
                                                                                      GenerationStep.Decoration.UNDERGROUND_ORES));
         ctx.register(spawnBlackSapphire, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(HolderSet.direct(biomes.getOrThrow(Biomes.DEEP_DARK)),
-                                                                                          direct(placed.getOrThrow(placedSmallAmberOre),
-                                                                                                 placed.getOrThrow(placedLargeAmberOre)),
+                                                                                          direct(placed.getOrThrow(placedSmallBlackSapphireOre)),
                                                                                           GenerationStep.Decoration.UNDERGROUND_ORES));
         ctx.register(spawnScoleciteOre, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(biomes.getOrThrow(BiomeTags.IS_NETHER),
                                                                                          direct(placed.getOrThrow(placedLargeScoleciteOre)),
                                                                                          GenerationStep.Decoration.UNDERGROUND_ORES));
-        ctx.register(spawnColdIronOre, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(biomes.getOrThrow(BiomeTags.SPAWNS_SNOW_FOXES),
-                                                                                        direct(placed.getOrThrow(placedSmallColdIronOre)),
+
+
+        HolderSet<Biome> colds =
+                HolderSet.direct(biomes.getOrThrow(Biomes.FROZEN_RIVER), biomes.getOrThrow(Biomes.FROZEN_OCEAN), biomes.getOrThrow(Biomes.FROZEN_PEAKS),
+                                 // 常见冷平原 / 冰刺
+                                 biomes.getOrThrow(Biomes.SNOWY_PLAINS),
+                                 biomes.getOrThrow(Biomes.ICE_SPIKES),
+                                 // 冷针叶林系
+                                 biomes.getOrThrow(Biomes.SNOWY_TAIGA),
+                                 // 冷山体 / 高山草甸
+                                 biomes.getOrThrow(Biomes.GROVE),
+                                 biomes.getOrThrow(Biomes.SNOWY_SLOPES),
+                                 biomes.getOrThrow(Biomes.JAGGED_PEAKS),
+                                 biomes.getOrThrow(Biomes.STONY_PEAKS),
+                                 // 冷海洋系
+                                 biomes.getOrThrow(Biomes.COLD_OCEAN),
+                                 biomes.getOrThrow(Biomes.DEEP_COLD_OCEAN),
+                                 biomes.getOrThrow(Biomes.DEEP_FROZEN_OCEAN),
+                                 biomes.getOrThrow(Biomes.WINDSWEPT_GRAVELLY_HILLS));
+
+
+        ctx.register(spawnColdIronOre, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(colds,
+                                                                                        direct(placed.getOrThrow(placedSmallColdIronOreUnder),
+                                                                                               placed.getOrThrow(placedSmallColdIronOreHigh)),
                                                                                         GenerationStep.Decoration.UNDERGROUND_DECORATION));
-        ctx.register(spawnOrichalcumOre, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(biomes.getOrThrow(BiomeTags.IS_MOUNTAIN),
+
+        HolderSet<Biome> orichalcumOre_targets =
+                HolderSet.direct(biomes.getOrThrow(Biomes.DRIPSTONE_CAVES),
+                                 biomes.getOrThrow(Biomes.GROVE),
+                                 biomes.getOrThrow(Biomes.SNOWY_SLOPES),
+                                 biomes.getOrThrow(Biomes.JAGGED_PEAKS),
+                                 biomes.getOrThrow(Biomes.FROZEN_PEAKS),
+                                 biomes.getOrThrow(Biomes.STONY_PEAKS));
+
+        ctx.register(spawnOrichalcumOre, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(orichalcumOre_targets,
                                                                                           direct(placed.getOrThrow(placedSmallOrichalcumOre)),
                                                                                           GenerationStep.Decoration.UNDERGROUND_DECORATION));
         ctx.register(spawnShadowSilverOre, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(biomes.getOrThrow(BiomeTags.HAS_STRONGHOLD),
