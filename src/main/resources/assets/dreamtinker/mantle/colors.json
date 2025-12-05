@@ -120,7 +120,8 @@
     "sun_shine": "#F29A54",
     "solar_away": "#DE6428",
     "soul_unchanged": "#EBB46D",
-    "death_shredder": "#AA0000"
+    "death_shredder": "#AA0000",
+    "dead_heat": "#AA0000"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",

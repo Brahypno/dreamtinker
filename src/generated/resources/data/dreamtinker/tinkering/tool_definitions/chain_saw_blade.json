@@ -75,6 +75,10 @@
         },
         {
           "level": 1,
+          "name": "dreamtinker:dead_heat"
+        },
+        {
+          "level": 1,
           "name": "tconstruct:stripping"
         }
       ]

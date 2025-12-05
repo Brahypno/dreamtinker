@@ -37,7 +37,6 @@ import static slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHel
 import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.NO_COOLDOWN;
 
 public class death_shredder extends BattleModifier {
-
     @Nullable
     private MeltingFuel lastRecipe;
 
@@ -82,7 +81,7 @@ public class death_shredder extends BattleModifier {
             if (fluid.isEmpty())
                 return InteractionResult.PASS;
             MeltingFuel recipe = findRecipe(fluid.getFluid());
-            if (null != recipe){//life can transform to blood soul, and we leave 1 HP(half heart)
+            if (null != recipe){
                 int amount = recipe.getAmount(fluid.getFluid());
                 if (fluid.getAmount() >= amount){
                     GeneralInteractionModifierHook.startUsingWithDrawtime(tool, modifier.getId(), player, hand, 1.5f);
@@ -138,6 +137,20 @@ public class death_shredder extends BattleModifier {
                 }
             }
         }
+        if (!entity.level().isClientSide){
+            FluidStack fluid = TANK_HELPER.getFluid(tool);
+            if (fluid.isEmpty())
+                return;
+            MeltingFuel recipe = findRecipe(fluid.getFluid());
+            if (null != recipe){
+                int amount = recipe.getAmount(fluid.getFluid());
+                fluid.shrink(amount / 10);
+                TANK_HELPER.setFluid(tool, fluid);
+                if (fluid.isEmpty())
+                    entity.stopUsingItem();
+
+            }
+        }
     }
 
     @Override
@@ -152,6 +165,4 @@ public class death_shredder extends BattleModifier {
                 1.0F                       // 音高
         );
     }
-
-
 }

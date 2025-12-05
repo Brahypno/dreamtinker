@@ -17,6 +17,7 @@ import org.dreamtinker.dreamtinker.common.data.tags.ModifierTagProvider;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerEnchantmentToModifierProvider;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerFluidEffectProvider;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerModifierProvider;
+import org.dreamtinker.dreamtinker.tools.modifiers.tools.chain_saw_blade.dead_heat;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.chain_saw_blade.death_shredder;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.mashou.realsweep;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.mashou.strong_heavy;
@@ -153,6 +154,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<effectRemover> effectRemover = MODIFIERS.register("sun_shine", effectRemover::new);
     public static final StaticModifier<knockBacker> SunAway = MODIFIERS.register("solar_away", knockBacker::new);
     public static final StaticModifier<death_shredder> death_shredder = MODIFIERS.register("death_shredder", death_shredder::new);
+    public static final StaticModifier<dead_heat> dead_heat = MODIFIERS.register("dead_heat", dead_heat::new);
 
     //etherium
     public static final StaticModifier<astral_break> astral_break = EL_MODIFIERS.register("astral_break", astral_break::new);

@@ -445,6 +445,9 @@
   "modifier.dreamtinker.death_shredder": "Death Shredder",
   "modifier.dreamtinker.death_shredder.flavor": "ZI-ZI-ZI-",
   "modifier.dreamtinker.death_shredder.description": "When filled with fuel,right interaction would deal damage to living entities in front you",
+  "modifier.dreamtinker.dead_heat": "Dead Heat",
+  "modifier.dreamtinker.dead_heat.flavor": "chase and destroy",
+  "modifier.dreamtinker.dead_heat.description": "When filled with fuel, increase damage and decrease invulnerability time based on fuel rate",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",

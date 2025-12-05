@@ -445,6 +445,9 @@
   "modifier.dreamtinker.death_shredder": "死亡绞肉",
   "modifier.dreamtinker.death_shredder.flavor": "滋-滋-",
   "modifier.dreamtinker.death_shredder.description": "当有燃料时，右键交互会对面前的生物造成多次伤害",
+  "modifier.dreamtinker.dead_heat": "死火",
+  "modifier.dreamtinker.dead_heat.flavor": "追猎与剿灭",
+  "modifier.dreamtinker.dead_heat.description": "当装有燃料时，根据燃料的热效增伤并减少目标的无敌帧",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
