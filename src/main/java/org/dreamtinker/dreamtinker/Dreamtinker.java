@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
@@ -46,6 +47,7 @@ import org.dreamtinker.dreamtinker.common.event.advancements.star_regulus_boost;
 import org.dreamtinker.dreamtinker.common.event.compact.curio.addSilenceGloveCurio;
 import org.dreamtinker.dreamtinker.common.event.compact.enigmatic_legacy.addUnholyWater;
 import org.dreamtinker.dreamtinker.common.event.compact.malum.addConcentratedGluttonyBottle;
+import org.dreamtinker.dreamtinker.common.json.DTConfigEnabledCondition;
 import org.dreamtinker.dreamtinker.config.DreamtinkerConfig;
 import org.dreamtinker.dreamtinker.fluids.DreamtinkerFluids;
 import org.dreamtinker.dreamtinker.fluids.data.DreamtinkerFluidTextureProvider;
@@ -61,6 +63,7 @@ import org.dreamtinker.dreamtinker.world.data.DTDataPackProvider;
 import slimeknights.tconstruct.fluids.data.FluidBucketModelProvider;
 import slimeknights.tconstruct.library.utils.Util;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -70,15 +73,14 @@ public class Dreamtinker {
     // Define mod id in a common place for everything to reference
     public static final String MODID = "dreamtinker";
 
+    private static List<? extends String> compact_config;
+    private static Boolean compactRestriction;
+
     @SuppressWarnings({"removal"})
     public Dreamtinker() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, DreamtinkerConfig.specs, "DreamTinkerConfig.toml");
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
-
-        // Register the commonSetup method for modloading
-        modEventBus.addListener(this::commonSetup);
-        // Register ourselves for server and other game events we are interested in
         modEventBus.register(new DreamtinkerFluids());
         modEventBus.register(new DreamtinkerEffects());
         modEventBus.register(new DreamtinkerToolParts());
@@ -88,20 +90,12 @@ public class Dreamtinker {
         modEventBus.register(new DreamtinkerModifiers());
         DreamtinkerModule.initRegisters(modEventBus);
 
+        CraftingHelper.register(DTConfigEnabledCondition.SERIALIZER);
+        // Register the commonSetup method for modloading
+        modEventBus.addListener(this::commonSetup);
+        // Register ourselves for server and other game events we are interested in
+
         MinecraftForge.EVENT_BUS.register(this);
-        if (ModList.get().isLoaded("curios")){
-            forgeEventBus.addGenericListener(ItemStack.class, addSilenceGloveCurio::attachCaps);
-            forgeEventBus.addListener(curio_hurt_handler::LivingHurtEvent);
-        }
-        if (ModList.get().isLoaded("enigmaticlegacy")){
-            forgeEventBus.addGenericListener(ItemStack.class, addUnholyWater::attachCaps);
-            forgeEventBus.addListener(death_handler::onLivingDeath);
-        }
-        if (ModList.get().isLoaded("malum")){
-            forgeEventBus.addGenericListener(ItemStack.class, addConcentratedGluttonyBottle::attachCaps);
-            forgeEventBus.addListener(malum_events_handler::MalumLivingHurtEvent);
-            forgeEventBus.addListener(malum_events_handler::MalumLivingDeathEvent);
-        }
 
         forgeEventBus.addListener(EventPriority.HIGHEST, PlayerLeftClickEvent::onLeftClickBlock);
         forgeEventBus.addListener(EventPriority.HIGHEST, PlayerLeftClickEvent::onLeftClick);
@@ -113,8 +107,25 @@ public class Dreamtinker {
 
     }
 
+    @SuppressWarnings({"removal"})
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
+            IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
+            if (ModList.get().isLoaded("curios") && !configCompactDisabled("curios")){
+                forgeEventBus.addGenericListener(ItemStack.class, addSilenceGloveCurio::attachCaps);
+                forgeEventBus.addListener(curio_hurt_handler::LivingHurtEvent);
+            }
+            if (ModList.get().isLoaded("enigmaticlegacy") && !configCompactDisabled("enigmaticlegacy")){
+                forgeEventBus.addGenericListener(ItemStack.class, addUnholyWater::attachCaps);
+                forgeEventBus.addListener(death_handler::onLivingDeath);
+            }
+            if (ModList.get().isLoaded("malum") && !configCompactDisabled("malum")){
+                forgeEventBus.addGenericListener(ItemStack.class, addConcentratedGluttonyBottle::attachCaps);
+                forgeEventBus.addListener(malum_events_handler::MalumLivingHurtEvent);
+                forgeEventBus.addListener(malum_events_handler::MalumLivingDeathEvent);
+            }
+
+
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(DreamtinkerCommon.narcissus.getId(), DreamtinkerCommon.potted_narcissus);
             SpawnPlacements.register(DreamtinkerModifiers.AggressiveFOX.get(),
                                      SpawnPlacements.Type.ON_GROUND,
@@ -183,6 +194,13 @@ public class Dreamtinker {
 
         generator.addProvider(event.includeServer(), new DTCurio(output, helper, provider.getRegistryProvider()));
         generator.addProvider(event.includeServer(), new AdvancementsProvider(output));
+    }
+
+    public static boolean configCompactDisabled(String modId) {
+        if (null == compact_config)
+            compact_config = DreamtinkerConfig.ModCompactBlackList.get();
+        compactRestriction = DreamtinkerConfig.MOD_COMPACT_MATERIALS_CONFIG.get();
+        return compactRestriction && compact_config.contains(modId);
     }
 
 }

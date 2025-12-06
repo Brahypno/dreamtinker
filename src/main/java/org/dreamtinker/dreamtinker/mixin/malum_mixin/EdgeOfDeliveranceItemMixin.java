@@ -36,7 +36,7 @@ public class EdgeOfDeliveranceItemMixin {
                     target = "Lnet/minecraft/world/damagesource/DamageSource;is(Lnet/minecraft/tags/TagKey;)Z"
             ),
             remap = true,
-            require = 0 // 若此调用在发行版里不存在，不要让注入失败
+            require = 0
     )
     private boolean dreamtinker$redirectIsOnDamageSource(
             DamageSource instance, TagKey<DamageType> p_270890_) {

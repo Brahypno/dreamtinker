@@ -3,8 +3,26 @@
   "allow_crystal": true,
   "conditions": [
     {
-      "type": "forge:item_exists",
-      "item": "enigmaticlegacy:lore_inscriber"
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "enigmaticlegacy"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "enigmaticlegacy"
+            }
+          ]
+        }
+      ]
     }
   ],
   "inputs": [

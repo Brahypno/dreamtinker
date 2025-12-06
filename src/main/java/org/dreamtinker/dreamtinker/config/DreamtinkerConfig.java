@@ -6,7 +6,20 @@ import java.util.List;
 
 public class DreamtinkerConfig {
     public static final ForgeConfigSpec.Builder builder =
-            new ForgeConfigSpec.Builder().comment("Configuration to almost all data in this mod. Take your own risk modify it!!!").push("Tool Configuration");
+            new ForgeConfigSpec.Builder().comment("Configuration to almost all data in this mod. Take your own risk modify it!!!").push("Mod Compact");
+
+    public static final ForgeConfigSpec.BooleanValue MOD_COMPACT_MATERIALS_CONFIG =
+            builder.comment("Enable this means enable conditional mod compact config").define("MOD_COMPACT_MATERIALS_CONFIG", false);
+
+    public static final ForgeConfigSpec.ConfigValue<List<? extends String>> ModCompactBlackList =
+            builder.comment("Optional Blacklist for MOD Compact, not only for materials").defineList("ModCompactBlackList",
+                                                                                                     List.of(""),
+                                                                                                     o -> o instanceof String);
+
+    static {
+        builder.pop();
+        builder.push("Tool Configuration");
+    }
 
     public static final ForgeConfigSpec.IntValue tnt_arrow_gravity =
             builder.comment("vertical accelerator or tnt arrow").defineInRange("TNTArrowGravity", -5, Integer.MIN_VALUE, 0);
@@ -242,7 +255,6 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec specs = builder.pop().build();
 
     private static boolean isValidIdFormat(String s) {
-        // 只做基本校验：有冒号且不含空格。真正解析在读取阶段做。
         return s != null && s.indexOf(':') > 0 && !s.contains(" ");
     }
 }

@@ -1,7 +1,25 @@
 {
   "condition": {
-    "type": "forge:mod_loaded",
-    "modid": "malum"
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "malum"
+          },
+          {
+            "type": "dreamtinker:mod_compact_config",
+            "modid": "malum"
+          }
+        ]
+      }
+    ]
   },
   "level_display": "tconstruct:no_levels",
   "modules": [

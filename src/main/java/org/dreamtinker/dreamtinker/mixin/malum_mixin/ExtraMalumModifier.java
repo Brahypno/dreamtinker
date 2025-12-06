@@ -13,6 +13,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
+import static org.dreamtinker.dreamtinker.Dreamtinker.configCompactDisabled;
+
 @Mixin(value = ToolStack.class, remap = false)
 public abstract class ExtraMalumModifier {
 
@@ -29,7 +31,7 @@ public abstract class ExtraMalumModifier {
     @Inject(method = "rebuildStats", at = @At("TAIL"))
     private void dreamtinker$appendExtraModifierAtTail(CallbackInfo ci) {
         // 若已在递归中或 A 不存在，直接退出
-        if (AVOID_RECURSION.get() || !ModList.get().isLoaded("malum") ||
+        if (AVOID_RECURSION.get() || !ModList.get().isLoaded("malum") || configCompactDisabled("malum") ||
             !dreamtinker$self().hasTag(dreamtinker$malumTag("scythe"))){
             return;
         }

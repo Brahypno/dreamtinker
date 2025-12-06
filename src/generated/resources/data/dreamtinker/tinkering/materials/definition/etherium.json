@@ -7,8 +7,17 @@
         "prop": "force_integration_materials"
       },
       {
-        "type": "forge:mod_loaded",
-        "modid": "enigmaticlegacy"
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "enigmaticlegacy"
+          },
+          {
+            "type": "dreamtinker:mod_compact_config",
+            "modid": "enigmaticlegacy"
+          }
+        ]
       }
     ]
   },

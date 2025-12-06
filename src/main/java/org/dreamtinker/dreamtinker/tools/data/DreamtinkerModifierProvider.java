@@ -19,6 +19,7 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraftforge.fluids.FluidType;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
+import org.dreamtinker.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvider;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.data.predicate.IJsonPredicate;
 import slimeknights.mantle.data.predicate.block.BlockPropertiesPredicate;
@@ -250,70 +251,70 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
 
     private void addELModifiers() {
 
-        buildModifier(Ids.el_nemesis_curse, modLoaded("enigmaticlegacy"))
+        buildModifier(Ids.el_nemesis_curse, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModule(EnchantmentModule.builder(EnigmaticEnchantments.NEMESIS).level(1).constant());
-        buildModifier(Ids.el_sorrow, modLoaded("enigmaticlegacy"))
+        buildModifier(Ids.el_sorrow, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModule(EnchantmentModule.builder(EnigmaticEnchantments.SORROW).level(1).constant());
-        buildModifier(Ids.el_eternal_binding, modLoaded("enigmaticlegacy"))
+        buildModifier(Ids.el_eternal_binding, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModule(EnchantmentModule.builder(EnigmaticEnchantments.ETERNAL_BINDING).level(1).constant());
 
-        buildModifier(Ids.el_wrath, modLoaded("enigmaticlegacy"))
+        buildModifier(Ids.el_wrath, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModule(EnchantmentModule.builder(EnigmaticEnchantments.WRATH).level(1).constant())
                 .addModule(ModifierRequirementsModule.builder()
                                                      .requirement(HasModifierPredicate.hasModifier(Ids.el_torrent, 1).inverted())
                                                      .modifierKey(Ids.el_wrath).build());
-        buildModifier(Ids.el_torrent, modLoaded("enigmaticlegacy"))
+        buildModifier(Ids.el_torrent, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModule(EnchantmentModule.builder(EnigmaticEnchantments.TORRENT).level(1).constant())
                 .addModule(ModifierRequirementsModule.builder()
                                                      .requirement(HasModifierPredicate.hasModifier(Ids.el_wrath, 1).inverted())
                                                      .modifierKey(Ids.el_torrent).build());
-        buildModifier(Ids.el_etherium, modLoaded("enigmaticlegacy"))
+        buildModifier(Ids.el_etherium, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                 .addModule(SetStatModule.set(ToolStats.HARVEST_TIER).value(EnigmaticMaterials.ETHERIUM));
     }
 
     private void addMalumModifiers() {
-        buildModifier(Ids.malum_rebound, modLoaded("malum"))
+        buildModifier(Ids.malum_rebound, DreamtinkerMaterialDataProvider.modLoaded("malum"))
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModule(EnchantmentModule.builder(EnchantmentRegistry.REBOUND.get()).level(1).constant())
                 .addModule(ModifierRequirementsModule.builder().requireModifier(malum_base.getId(), 1)
                                                      .requirement(HasModifierPredicate.hasModifier(Ids.malum_ascension, 1).inverted())
                                                      .modifierKey(Ids.malum_rebound).build());
-        buildModifier(Ids.malum_ascension, modLoaded("malum"))
+        buildModifier(Ids.malum_ascension, DreamtinkerMaterialDataProvider.modLoaded("malum"))
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModule(EnchantmentModule.builder(EnchantmentRegistry.ASCENSION.get()).level(1).constant())
                 .addModule(ModifierRequirementsModule.builder().requireModifier(malum_base.getId(), 1)
                                                      .requirement(HasModifierPredicate.hasModifier(Ids.malum_rebound, 1).inverted())
                                                      .modifierKey(Ids.malum_ascension).build());
-        buildModifier(Ids.malum_animated, modLoaded("malum"))
+        buildModifier(Ids.malum_animated, DreamtinkerMaterialDataProvider.modLoaded("malum"))
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModule(EnchantmentModule.builder(EnchantmentRegistry.ANIMATED.get()).level(2).constant())
                 .addModule(ModifierRequirementsModule.builder()
                                                      .requirement(HasModifierPredicate.hasModifier(Ids.malum_haunted, 1).inverted())
                                                      .modifierKey(Ids.malum_animated).build());
-        buildModifier(Ids.malum_haunted, modLoaded("malum"))
+        buildModifier(Ids.malum_haunted, DreamtinkerMaterialDataProvider.modLoaded("malum"))
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModule(EnchantmentModule.builder(EnchantmentRegistry.HAUNTED.get()).level(2).constant())
                 .addModule(ModifierRequirementsModule.builder()
                                                      .requirement(HasModifierPredicate.hasModifier(Ids.malum_animated, 1).inverted())
                                                      .modifierKey(Ids.malum_haunted).build());
-        buildModifier(Ids.malum_spirit_plunder, modLoaded("malum"))
+        buildModifier(Ids.malum_spirit_plunder, DreamtinkerMaterialDataProvider.modLoaded("malum"))
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModule(EnchantmentModule.builder(EnchantmentRegistry.SPIRIT_PLUNDER.get()).level(2).constant());
 
-        buildModifier(Ids.malum_tyrving, modLoaded("malum"))
+        buildModifier(Ids.malum_tyrving, DreamtinkerMaterialDataProvider.modLoaded("malum"))
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                 .addModule(StatBoostModule.multiplyAll(ToolStats.ATTACK_DAMAGE).flat(-0.4f));
-        buildModifier(Ids.malum_world_of_weight, modLoaded("malum"))
+        buildModifier(Ids.malum_world_of_weight, DreamtinkerMaterialDataProvider.modLoaded("malum"))
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
-        buildModifier(Ids.malum_edge_of_deliverance, modLoaded("malum"))
+        buildModifier(Ids.malum_edge_of_deliverance, DreamtinkerMaterialDataProvider.modLoaded("malum"))
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
-        buildModifier(Ids.malum_sol_tiferet, not(modLoaded("malum")))
+        buildModifier(Ids.malum_sol_tiferet, not(DreamtinkerMaterialDataProvider.modLoaded("malum")))
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
     }
 

@@ -37,6 +37,7 @@ import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
+import org.dreamtinker.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvider;
 import org.dreamtinker.dreamtinker.utils.CastLookup;
 import org.dreamtinker.dreamtinker.utils.DThelper;
 import org.jetbrains.annotations.NotNull;
@@ -1051,7 +1052,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(1)
                              .setSlots(SlotType.ABILITY, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.life_looting, abilitySalvage))
-                             .save(withCondition(consumer, new ItemExistsCondition(ForgeRegistries.ITEMS.getKey(EnigmaticItems.LORE_INSCRIBER))),
+                             .save(withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy")),
                                    prefix(DreamtinkerModifiers.life_looting, abilityFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.life_looting)
                              .setTools(TinkerTags.Items.MODIFIABLE)
@@ -1172,7 +1173,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(1)
                              .setSlots(SlotType.ABILITY, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.malum_rebound, abilitySalvage))
-                             .save(withCondition(consumer, new ItemExistsCondition(ForgeRegistries.ITEMS.getKey(ItemRegistry.CRUDE_SCYTHE.get()))),
+                             .save(withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("malum")),
                                    prefix(DreamtinkerModifiers.Ids.malum_rebound, abilityFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_rebound)
                              .setTools(IntersectionIngredient.of(Ingredient.of(ItemTagRegistry.SCYTHE), Ingredient.of(TinkerTags.Items.MELEE_WEAPON)))
@@ -1180,7 +1181,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setLevelRange(2, 3)
                              .setSlots(SlotType.UPGRADE, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.malum_rebound, upgradeSalvage))
-                             .save(withCondition(consumer, new ItemExistsCondition(ForgeRegistries.ITEMS.getKey(ItemRegistry.CRUDE_SCYTHE.get()))),
+                             .save(withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("malum")),
                                    prefix(DreamtinkerModifiers.Ids.malum_rebound, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_ascension)
                              .setTools(IntersectionIngredient.of(Ingredient.of(ItemTagRegistry.SCYTHE), Ingredient.of(TinkerTags.Items.MELEE_WEAPON)))
@@ -1189,7 +1190,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(1)
                              .setSlots(SlotType.ABILITY, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.malum_ascension, abilitySalvage))
-                             .save(withCondition(consumer, new ItemExistsCondition(ForgeRegistries.ITEMS.getKey(ItemRegistry.CRUDE_SCYTHE.get()))),
+                             .save(withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("malum")),
                                    prefix(DreamtinkerModifiers.Ids.malum_ascension, abilityFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_ascension)
                              .setTools(IntersectionIngredient.of(Ingredient.of(ItemTagRegistry.SCYTHE), Ingredient.of(TinkerTags.Items.MELEE_WEAPON)))
@@ -1197,7 +1198,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setLevelRange(2, 3)
                              .setSlots(SlotType.UPGRADE, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.malum_ascension, upgradeSalvage))
-                             .save(withCondition(consumer, new ItemExistsCondition(ForgeRegistries.ITEMS.getKey(ItemRegistry.CRUDE_SCYTHE.get()))),
+                             .save(withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("malum")),
                                    prefix(DreamtinkerModifiers.Ids.malum_ascension, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_animated)
                              .setTools(IntersectionIngredient.of(Ingredient.of(ItemTagRegistry.SCYTHE), Ingredient.of(TinkerTags.Items.MELEE_WEAPON)))
@@ -1206,7 +1207,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(2)
                              .setSlots(SlotType.UPGRADE, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.malum_animated, upgradeSalvage))
-                             .save(withCondition(consumer, new ItemExistsCondition(ForgeRegistries.ITEMS.getKey(ItemRegistry.WICKED_SPIRIT.get()))),
+                             .save(withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("malum")),
                                    prefix(DreamtinkerModifiers.Ids.malum_animated, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_haunted)
                              .setTools(Ingredient.of(TinkerTags.Items.MELEE_WEAPON))
@@ -1215,7 +1216,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(2)
                              .setSlots(SlotType.UPGRADE, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.malum_haunted, upgradeSalvage))
-                             .save(withCondition(consumer, new ItemExistsCondition(ForgeRegistries.ITEMS.getKey(ItemRegistry.WICKED_SPIRIT.get()))),
+                             .save(withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("malum")),
                                    prefix(DreamtinkerModifiers.Ids.malum_haunted, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_spirit_plunder)
                              .setTools(IntersectionIngredient.of(Ingredient.of(ItemTagRegistry.SOUL_HUNTER_WEAPON),
@@ -1225,7 +1226,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(2)
                              .setSlots(SlotType.UPGRADE, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.malum_spirit_plunder, upgradeSalvage))
-                             .save(withCondition(consumer, new ItemExistsCondition(ForgeRegistries.ITEMS.getKey(ItemRegistry.WICKED_SPIRIT.get()))),
+                             .save(withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("malum")),
                                    prefix(DreamtinkerModifiers.Ids.malum_spirit_plunder, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.flaming_memory)
                              .setTools(Ingredient.of(DreamtinkerTools.narcissus_wing))
@@ -1318,9 +1319,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(BlockRegistry.WICKED_SPIRITED_GLASS.get(), 16)
                              .setSlots(SlotType.SOUL, 1)
                              .setMaxLevel(1)
-                             .saveSalvage(withCondition(consumer, modLoaded("malum")),
+                             .saveSalvage(withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("malum")),
                                           prefix(DreamtinkerModifiers.spiritual_weapon_transformation, soulSalvage))
-                             .save(withCondition(consumer, modLoaded("malum")), prefix(DreamtinkerModifiers.spiritual_weapon_transformation, soulFolder));
+                             .save(withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("malum")),
+                                   prefix(DreamtinkerModifiers.spiritual_weapon_transformation, soulFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.TheEnd)
                              .setTools(TinkerTags.Items.SPECIAL_TOOLS)
                              .addInput(Blocks.DIRT, 2)
