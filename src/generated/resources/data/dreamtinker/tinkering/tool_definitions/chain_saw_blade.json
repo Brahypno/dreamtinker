@@ -46,7 +46,7 @@
     {
       "type": "tconstruct:base_stats",
       "stats": {
-        "tconstruct:attack_damage": 5.0,
+        "tconstruct:attack_damage": 1.0,
         "tconstruct:attack_speed": 0.4,
         "tconstruct:block_amount": 10.0
       }
@@ -55,7 +55,8 @@
       "type": "tconstruct:multiply_stats",
       "multipliers": {
         "tconstruct:attack_damage": 1.7,
-        "tconstruct:durability": 7.1,
+        "tconstruct:attack_speed": 0.4,
+        "tconstruct:durability": 1.15,
         "tconstruct:mining_speed": 0.4
       }
     },
@@ -122,15 +123,15 @@
       "if_false": {
         "type": "tconstruct:box_aoe",
         "bonus": {
-          "height": 3
+          "height": 4
         },
         "expansion_direction": "tconstruct:height",
         "expansions": [
           {
-            "width": 1
+            "width": 2
           },
           {
-            "depth": 1
+            "depth": 2
           }
         ]
       },

@@ -294,9 +294,9 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
     private void addMeltingRecipes(Consumer<FinishedRecipe> consumer) {
         String folder = "smeltery/melting/";
-        MeltingFuelBuilder.fuel(DreamtinkerFluids.molten_lupi_antimony.ingredient(FluidValues.INGOT), 776, 3600)
+        MeltingFuelBuilder.fuel(DreamtinkerFluids.molten_lupi_antimony.ingredient(FluidValues.SIP), 360, 3600)
                           .save(consumer, location(folder + "fuel/molten_lupi_antimony"));
-        MeltingFuelBuilder.fuel(DreamtinkerFluids.reversed_shadow.ingredient(FluidValues.SLIMEBALL), 17, 2200)
+        MeltingFuelBuilder.fuel(DreamtinkerFluids.reversed_shadow.ingredient(FluidValues.SIP), 220, 2200)
                           .save(consumer, location(folder + "fuel/reversed_shadow"));
 
         meltCastBlock(DreamtinkerFluids.molten_crying_obsidian.get(), Items.CRYING_OBSIDIAN, FluidValues.GLASS_BLOCK, consumer);
@@ -895,8 +895,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                     .setCast(Items.SHIELD, true)
                                     .setItemCost(4)
                                     .save(consumer, location(partFolder + "shield_core_cast"));
-        partRecipes(consumer, DreamtinkerToolParts.chainSawTeeth, DreamtinkerToolParts.chainSawTeethCast, 6, partFolder, castFolder);
-        partRecipes(consumer, DreamtinkerToolParts.chainSawCore, DreamtinkerToolParts.chainSawCoreCast, 4, partFolder, castFolder);
+        partRecipes(consumer, DreamtinkerToolParts.chainSawTeeth, DreamtinkerToolParts.chainSawTeethCast, 12, partFolder, castFolder);
+        partRecipes(consumer, DreamtinkerToolParts.chainSawCore, DreamtinkerToolParts.chainSawCoreCast, 8, partFolder, castFolder);
         //partRecipes(consumer, DreamtinkerToolParts.memoryOrthant, TinkerSmeltery.pickHeadCast, 2, partFolder, castFolder);
         //five Orthant
         ToolPartItem[] tree_parts =

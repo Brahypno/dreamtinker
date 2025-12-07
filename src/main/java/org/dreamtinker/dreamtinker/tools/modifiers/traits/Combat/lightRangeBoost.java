@@ -11,7 +11,6 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 public class lightRangeBoost extends BattleModifier {
     @Override
     public float modifyStat(IToolStackView tool, ModifierEntry modifier, LivingEntity living, FloatToolStat stat, float baseValue, float multiplier) {
-        System.out.println(stat);
         if (ToolStats.ACCURACY == stat || ToolStats.DRAW_SPEED == stat || ToolStats.PROJECTILE_DAMAGE == stat){
             baseValue += 1 + lightCurve(living);
         }

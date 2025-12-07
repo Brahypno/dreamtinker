@@ -45,6 +45,8 @@ public class dead_heat extends BattleModifier {
 
     @Override
     public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
+        if (!context.getAttacker().isUsingItem())
+            return damage;
         FluidStack fluid = TANK_HELPER.getFluid(tool);
         if (fluid.isEmpty())
             return damage;
@@ -58,10 +60,12 @@ public class dead_heat extends BattleModifier {
 
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
+        if (!context.getAttacker().isUsingItem())
+            return;
         if (null != context.getLivingTarget()){
             Tier tier = tool.getStats().get(ToolStats.HARVEST_TIER);
             int idx = tiers.indexOf(tier);
-            context.getLivingTarget().invulnerableTime -= (int) (context.getLivingTarget().invulnerableTime * (idx - 1.0f) / idx);
+            context.getLivingTarget().invulnerableTime = Math.round((float) context.getLivingTarget().invulnerableTime / idx);
         }
     }
 }

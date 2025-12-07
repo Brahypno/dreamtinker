@@ -1,6 +1,6 @@
 {
   "type": "tconstruct:part_builder",
-  "cost": 6,
+  "cost": 12,
   "pattern": "dreamtinker:chain_saw_teeth",
   "pattern_item": [
     {

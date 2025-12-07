@@ -199,13 +199,13 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 .module(defaultFourParts)
                 // stats
                 .module(new SetStatsModule(StatsNBT.builder()
-                                                   .set(ToolStats.ATTACK_DAMAGE, 5f)
+                                                   .set(ToolStats.ATTACK_DAMAGE, 1f)
                                                    .set(ToolStats.ATTACK_SPEED, 0.4f)
                                                    .set(ToolStats.BLOCK_AMOUNT, 10).build()))
                 .module(new MultiplyStatsModule(MultiplierNBT.builder()
                                                              .set(ToolStats.ATTACK_DAMAGE, 1.7f)
                                                              .set(ToolStats.MINING_SPEED, 0.4f)
-                                                             .set(ToolStats.DURABILITY, 7.1f).build()))
+                                                             .set(ToolStats.DURABILITY, 1.15f).build()))
                 .largeToolStartingSlots()
                 // traits
                 .module(ToolTraitsModule.builder()
@@ -221,7 +221,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 })
                 .module(new ConditionalAOEIterator(
                         BlockPredicate.tag(TinkerTags.Blocks.TREE_LOGS), new TreeAOEIterator(0, 0),
-                        BoxAOEIterator.builder(0, 3, 0).addWidth(1).addDepth(1).direction(IBoxExpansion.HEIGHT).build()));
+                        BoxAOEIterator.builder(0, 4, 0).addWidth(2).addDepth(2).direction(IBoxExpansion.HEIGHT).build()));
         // behavior;
     }
 

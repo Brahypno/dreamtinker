@@ -4,6 +4,6 @@
     "tag": "dreamtinker:casts/single_use/chain_saw_core"
   },
   "cast_consumed": true,
-  "item_cost": 4,
+  "item_cost": 8,
   "result": "dreamtinker:chain_saw_core"
 }

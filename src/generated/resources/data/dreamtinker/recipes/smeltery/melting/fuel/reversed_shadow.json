@@ -1,8 +1,8 @@
 {
   "type": "tconstruct:melting_fuel",
-  "duration": 17,
+  "duration": 220,
   "fluid": {
-    "amount": 250,
+    "amount": 50,
     "tag": "dreamtinker:reversed_shadow"
   },
   "rate": 22,

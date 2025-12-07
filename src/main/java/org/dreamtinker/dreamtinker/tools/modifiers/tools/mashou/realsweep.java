@@ -33,8 +33,6 @@ public class realsweep extends BattleModifier {
         if (!level.isClientSide && player.getAttackStrengthScale(0) > 0.8 && !tool.isBroken()){
             AttributeInstance reach = player.getAttribute(ForgeMod.ENTITY_REACH.get());
             double range = null != reach ? reach.getValue() : 1;
-
-
             if (range > 0){
                 double rangeSq = range * range;
                 for (LivingEntity aoeTarget : level.getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(range, 0.25D, range))) {
