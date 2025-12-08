@@ -23,12 +23,16 @@ import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import team.lodestar.lodestone.helpers.RandomHelper;
 
 public class malum_events_handler {
+    private static boolean reEnter = false;
+
     public static void MalumLivingHurtEvent(LivingHurtEvent event) {
         if (event.isCanceled())
             return;
         LivingEntity target = event.getEntity();
         DamageSource dmg = event.getSource();
-        if (null != dmg.getEntity() && dmg.getEntity() instanceof Player player){
+
+        if (null != dmg.getEntity() && dmg.getEntity() instanceof Player player && !reEnter){
+            reEnter = true;
             ItemStack stack = player.getMainHandItem();
             if (!(stack.getItem() instanceof IModifiable))
                 return;
@@ -67,6 +71,7 @@ public class malum_events_handler {
                         c.watcherNecklaceCooldown = 100;
                     }
                 });
+            reEnter = false;
         }
     }
 

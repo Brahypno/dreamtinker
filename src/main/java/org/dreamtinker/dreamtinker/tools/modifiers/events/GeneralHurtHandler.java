@@ -27,7 +27,7 @@ import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
-import static net.minecraft.tags.DamageTypeTags.*;
+import static net.minecraft.tags.DamageTypeTags.IS_PROJECTILE;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.FragileDodge;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.homunculusLifeCurseMaxEffectLevel;
 import static org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.weapon_transformation.valueExpSoftCap;
@@ -39,8 +39,6 @@ import static org.dreamtinker.dreamtinker.utils.DTModifierCheck.getPossibleToolW
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class GeneralHurtHandler {
     static boolean why_i_cry_triggered = false;
-    static boolean damage_source_transmission = false;
-    private static final String TAG_DamageSourceTransmission = Dreamtinker.getLocation("damage_source_transmission").toString();
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void LivingHurtEvent(LivingHurtEvent event) {
@@ -86,44 +84,7 @@ public class GeneralHurtHandler {
                 return;
             }
         }
-
-
-        boolean Not_Tran = !data.contains(TAG_DamageSourceTransmission) || data.getLong(TAG_DamageSourceTransmission) < world.getGameTime();
-        if (!damage_source_transmission && Not_Tran){
-            damage_source_transmission = true;
-            boolean transformed = false;
-            if (dmgEntity instanceof LivingEntity offender)
-                if (DTModifierCheck.haveModifierIn(offender, DreamtinkerModifiers.despair_wind.getId()) ||
-                    2 < DTModifierCheck.getMainhandModifierLevel(offender, DreamtinkerModifiers.Ids.icy_memory))
-                    if (!(dmg.is(BYPASSES_ARMOR) && dmg.is(BYPASSES_SHIELD) && dmg.is(BYPASSES_INVULNERABILITY) && dmg.is(BYPASSES_COOLDOWN) &&
-                          dmg.is(BYPASSES_EFFECTS) &&
-                          dmg.is(BYPASSES_RESISTANCE) && dmg.is(BYPASSES_ENCHANTMENTS))){
-
-                        event.setCanceled(true);
-                        transformed = true;
-                        victim.hurt(DreamtinkerDamageTypes.source(registryAccess, DreamtinkerDamageTypes.NULL_VOID, dmg), damageAmount);
-                    }
-
-            int ophelia = DTModifierCheck.getEntityBodyModifierNum(victim, DreamtinkerModifiers.Ids.ophelia);
-            if (0 < ophelia && !dmg.is(DreamtinkerDamageTypes.NULL_VOID)){
-                float amount = damageAmount * 3;
-                event.setCanceled(true);
-                int inv = victim.invulnerableTime;
-                for (int i = 0; i < 2 * ophelia + 1 && victim.isAlive(); i++) {
-                    DamageSource source = DreamtinkerDamageTypes.randomSourceNotSame(registryAccess, dmg, rds);
-                    victim.invulnerableTime = 0;
-                    victim.hurt(source, amount / (2.0f * ophelia + 1.0f));
-                }
-                victim.invulnerableTime = inv;
-                transformed = true;
-            }
-            damage_source_transmission = false;
-            if (transformed){
-                data.putLong(TAG_DamageSourceTransmission, world.getGameTime());
-                return;//To avoid below buff multiple times
-            }
-        }
-
+        
         if (dmgEntity instanceof LivingEntity offender){
             int requiem = DTModifierCheck.getEntityBodyModifierNum(offender, DreamtinkerModifiers.Ids.requiem);
             if (0 < requiem){

@@ -34,9 +34,10 @@ public class the_wolf_answer extends BattleModifier {
         if (damageAttempted < curHP){
             target.setHealth(curHP - damageAttempted);
             if (target.getHealth() < curHP){
-                target.setLastHurtByMob(context.getAttacker());
                 if (context.getAttacker() instanceof Player player)
                     target.setLastHurtByPlayer(player);
+                else
+                    target.setLastHurtByMob(context.getAttacker());
             }
         }else {
             DamageSource dam;
@@ -50,6 +51,7 @@ public class the_wolf_answer extends BattleModifier {
                              .mobAttack(context.getAttacker());
             target.setHealth(0);
             target.die(dam);
+            target.dropAllDeathLoot(dam);
         }
     }
 
