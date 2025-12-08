@@ -18,6 +18,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
@@ -25,6 +26,7 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
+import net.minecraftforge.common.TierSortingRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 import org.dreamtinker.dreamtinker.Dreamtinker;
@@ -42,27 +44,34 @@ import slimeknights.tconstruct.library.modifiers.modules.build.StatBoostModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.recipe.fuel.MeltingFuel;
 import slimeknights.tconstruct.library.recipe.fuel.MeltingFuelLookup;
+import slimeknights.tconstruct.library.tools.capability.ToolEnergyCapability;
 import slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHelper;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
+import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.shared.TinkerEffects;
 import slimeknights.tconstruct.tools.modifiers.ability.interaction.BlockingModifier;
 
 import javax.annotation.Nullable;
 import java.util.*;
 
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.ChainSawEnergyCost;
 import static slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHelper.TANK_HELPER;
 import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.NO_COOLDOWN;
 
 public class death_shredder extends BattleModifier implements KeybindInteractModifierHook {
+    public death_shredder() {this.tiers = TierSortingRegistry.getSortedTiers();}
+
     private enum Modes {
         FUEL,
         ELECTRIC,
         MIX
     }
+
+    private final List<Tier> tiers;
 
     private final ResourceLocation TAG_MOD = Dreamtinker.getLocation("working_mode");
     private final ResourceLocation TAG_FUEL_DURATION = Dreamtinker.getLocation("fuel_duration");
@@ -83,8 +92,11 @@ public class death_shredder extends BattleModifier implements KeybindInteractMod
     public boolean startInteract(IToolStackView tool, ModifierEntry modifier, Player player, EquipmentSlot slot, TooltipKey keyModifier) {
         if (player.level().isClientSide)
             return false;
+        if (player.isUsingItem())
+            return false;
         ModDataNBT dataNBT = tool.getPersistentData();
         dataNBT.putInt(TAG_MOD, (dataNBT.getInt(TAG_MOD) + 1) % 3);
+        //ToolEnergyCapability.setEnergy(tool, 500000);
         return true;
     }
 
@@ -106,6 +118,8 @@ public class death_shredder extends BattleModifier implements KeybindInteractMod
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder builder) {
         builder.addModule(ToolTankHelper.TANK_HANDLER);
+        builder.addModule(ToolEnergyCapability.ENERGY_HANDLER);
+        builder.addModule(StatBoostModule.add(ToolEnergyCapability.MAX_STAT).flat(5000 * 10));
         builder.addModule(StatBoostModule.add(ToolTankHelper.CAPACITY_STAT).flat(FluidType.BUCKET_VOLUME * 10));
         builder.addHook(this, ModifierHooks.ARMOR_INTERACT);
         super.registerHooks(builder);
@@ -113,7 +127,7 @@ public class death_shredder extends BattleModifier implements KeybindInteractMod
 
     @Override
     public int getPriority() {
-        return 2700; // my custom splt, so should be earlier enough
+        return 2700;
     }
 
     @Override
@@ -130,29 +144,37 @@ public class death_shredder extends BattleModifier implements KeybindInteractMod
     public @NotNull InteractionResult onToolUse(IToolStackView tool, ModifierEntry modifier, Player player, InteractionHand hand, InteractionSource source) {
         if (!tool.isBroken() && source == InteractionSource.RIGHT_CLICK){
             int mode = tool.getPersistentData().getInt(TAG_MOD);
+            float heat = tool.getPersistentData().getFloat(TAG_HEAT);
+            if (0.8 < heat / MAX_HEAT_FUEL)
+                return InteractionResult.PASS;
+            boolean fluid_valid = false, energy_valid = false;
             if (Modes.ELECTRIC.ordinal() != mode){
-                float heat = tool.getPersistentData().getFloat(TAG_HEAT);
-                if (0.8 < heat / MAX_HEAT_FUEL)
-                    return InteractionResult.PASS;
                 FluidStack fluid = TANK_HELPER.getFluid(tool);
                 if (fluid.isEmpty())
                     return InteractionResult.PASS;
                 MeltingFuel recipe = findRecipe(fluid.getFluid());
                 if (null != recipe){
                     int amount = recipe.getAmount(fluid.getFluid());
-                    if (fluid.getAmount() >= amount){//even if we have duration
-                        GeneralInteractionModifierHook.startUsingWithDrawtime(tool, modifier.getId(), player, hand, 1.5f);
-                        player.level().playSound(
-                                null,                      // 播给周围所有玩家
-                                player.getX(), player.getY(), player.getZ(),
-                                DreamtinkerSounds.CHAINSAW_START.get(),
-                                SoundSource.PLAYERS,
-                                1.0F,                      // 音量
-                                1.0F                       // 音高
-                        );
-                        return InteractionResult.SUCCESS;
-                    }
+                    if (fluid.getAmount() >= amount)//even if we have duration
+                        fluid_valid = true;
                 }
+            }
+            if (Modes.FUEL.ordinal() != mode){
+                int energy = ToolEnergyCapability.getEnergy(tool);
+                if (ChainSawEnergyCost.get() * 10 <= energy)
+                    energy_valid = true;
+            }
+            if (Modes.MIX.ordinal() != mode && (fluid_valid || energy_valid) || (fluid_valid && energy_valid)){
+                GeneralInteractionModifierHook.startUsingWithDrawtime(tool, modifier.getId(), player, hand, 1.5f);
+                player.level().playSound(
+                        null,                      // 播给周围所有玩家
+                        player.getX(), player.getY(), player.getZ(),
+                        DreamtinkerSounds.CHAINSAW_START.get(),
+                        SoundSource.PLAYERS,
+                        1.0F,                      // 音量
+                        1.0F                       // 音高
+                );
+                return InteractionResult.SUCCESS;
             }
         }
         return InteractionResult.PASS;
@@ -169,33 +191,37 @@ public class death_shredder extends BattleModifier implements KeybindInteractMod
         List<Entity> possibleList = entity.level().getEntities(entity, entity.getBoundingBox()
                                                                              .expandTowards(lookVec.x() * range, lookVec.y() * range, lookVec.z() * range)
                                                                              .inflate(var9, var9, var9));
+        possibleList.sort(Comparator.comparingDouble(entity::distanceToSqr));
         ModDataNBT dataNBT = tool.getPersistentData();
         int mode = dataNBT.getInt(TAG_MOD);
         int rotation = dataNBT.getInt(TAG_ROTATIONAL_FORCE);
         float heat = dataNBT.getFloat(TAG_HEAT);
+        float max_heat = Modes.MIX.ordinal() == mode ? MAX_HEAT_MIX : Modes.FUEL.ordinal() == mode ? MAX_HEAT_FUEL : MAX_HEAT_ELECTRIC;
         int fuel_duration = tool.getPersistentData().getInt(TAG_FUEL_DURATION);
         boolean electric_valid = false;
         boolean fuel_valid = false;
-        int availables = Math.max(1, possibleList.size());
+        int fuel_availables = Math.max(1, possibleList.size());
+        int electric_availables = Math.max(1, possibleList.size());
+        int energy = ToolEnergyCapability.getEnergy(tool);
         if (!entity.level().isClientSide){
             if (Modes.ELECTRIC.ordinal() != mode){
                 FluidStack fluid = TANK_HELPER.getFluid(tool);
                 MeltingFuel recipe = findRecipe(fluid.getFluid());
                 if (null != recipe){// No Fuel, not working
                     int fuel_rate = recipe.getRate();
-                    if (fuel_duration <= fuel_rate * availables){
+                    if (fuel_duration <= fuel_rate * fuel_availables){
                         int amount = recipe.getAmount(fluid.getFluid());
                         while (amount <= fluid.getAmount()) {//in case fuel duration < fuel_rate
                             fluid.shrink(amount);
                             fuel_duration += recipe.getDuration();
-                            if (fuel_rate * availables < fuel_duration)
+                            if (fuel_rate * fuel_availables < fuel_duration)
                                 break;
                         }
                     }
-                    availables = Math.max(1, Math.floorDiv(fuel_duration, fuel_rate));
+                    fuel_availables = Math.max(1, Math.floorDiv(fuel_duration, fuel_rate));
                     if (0 < fuel_duration)
                         fuel_valid = true;
-                    fuel_duration -= availables * fuel_rate;
+                    fuel_duration -= fuel_availables * fuel_rate;
                     TANK_HELPER.setFluid(tool, fluid);
                     if (fuel_valid){
                         if (rotation < MAX_FORCE_FUEL)
@@ -206,20 +232,26 @@ public class death_shredder extends BattleModifier implements KeybindInteractMod
                 }
             }
             if (Modes.FUEL.ordinal() != mode){
-                //TODO Electric Mode
-                if (rotation < MAX_FORCE_ELECTRIC)
-                    rotation = MAX_FORCE_ELECTRIC;
+                electric_availables = Math.min(electric_availables, Math.round((float) energy / ChainSawEnergyCost.get()));
+                if (1 <= electric_availables){
+                    electric_valid = true;
+                    energy -= electric_availables * ChainSawEnergyCost.get();
+                    heat += entity.level().random.nextFloat();
+                    if (rotation < (Modes.ELECTRIC.ordinal() == mode ? MAX_FORCE_ELECTRIC : MAX_FORCE_MIX))
+                        rotation = (Modes.ELECTRIC.ordinal() == mode ? MAX_FORCE_ELECTRIC : MAX_FORCE_MIX);
+                    ToolEnergyCapability.setEnergy(tool, energy);
+                }
             }
-            dataNBT.putInt(TAG_ROTATIONAL_FORCE, Math.min(rotation, MAX_FORCE_FUEL));
+            dataNBT.putInt(TAG_ROTATIONAL_FORCE, rotation);
             if (!fuel_valid && !electric_valid)
                 entity.stopUsingItem();
-            if (rotation < 60)//Minimum starting one
+            if (rotation < MAX_FORCE_FUEL / 2)//Minimum starting one
                 return;
         }
 
         ClientSoundChecker.playWorldSound(entity, (byte) 1);
         boolean flag = false;
-        for (int i = 0; i < availables && i < possibleList.size(); i++) {
+        for (int i = 0; i < Math.min(fuel_availables, electric_availables) && i < possibleList.size(); i++) {
             Entity victim = possibleList.get(i);
             if (victim instanceof LivingEntity){
                 float borderSize = 0.5F;
@@ -233,14 +265,22 @@ public class death_shredder extends BattleModifier implements KeybindInteractMod
 
                 if (flag){
                     ToolAttackUtil.attackEntity(tool, entity, InteractionHand.MAIN_HAND, victim, NO_COOLDOWN, false);
-                    if (fuel_valid){
+                    if (fuel_valid || electric_valid){
                         heat += entity.level().random.nextFloat() / 5f;
                         AttributeInstance attr = ((LivingEntity) victim).getAttribute(Attributes.ARMOR);
                         if (null != attr)
                             heat += (float) (attr.getValue() * 0.01f);
-                        dataNBT.putFloat(TAG_HEAT, Math.min(heat, MAX_HEAT_FUEL));
-                        if (0.9 < heat / MAX_HEAT_FUEL){
+                        if (fuel_valid && Modes.FUEL.ordinal() == mode && ChainSawEnergyCost.get() * 0.5 < energy && 0.7 < heat / max_heat){
+                            energy -= Math.round(ChainSawEnergyCost.get() * 0.5f);
+                            heat -= entity.level().random.nextFloat() / 5f;
+                        }
+                        if (electric_valid)
+                            heat += entity.level().random.nextFloat() / 5f;
+                        if (0.9 < heat / max_heat){
                             entity.stopUsingItem();
+                            dataNBT.putFloat(TAG_HEAT, Math.min(heat, MAX_HEAT_FUEL));
+                            if (Modes.FUEL.ordinal() == mode)
+                                ToolEnergyCapability.setEnergy(tool, energy);
                             return;
                         }
                     }
@@ -269,6 +309,10 @@ public class death_shredder extends BattleModifier implements KeybindInteractMod
 
                 }
             }
+        }
+        if (!entity.level().isClientSide){
+            dataNBT.putFloat(TAG_HEAT, Math.min(heat, MAX_HEAT_FUEL));
+            ToolEnergyCapability.setEnergy(tool, energy);
         }
     }
 
@@ -338,6 +382,9 @@ public class death_shredder extends BattleModifier implements KeybindInteractMod
                 if (null != attr_instance)
                     attr_instance.removeModifier(uuid);
             }
+            Tier tier = tool.getStats().get(ToolStats.HARVEST_TIER);
+            int idx = tiers.indexOf(tier);
+            context.getLivingTarget().invulnerableTime = Math.round((float) context.getLivingTarget().invulnerableTime / idx);
         }
     }
 
@@ -349,8 +396,18 @@ public class death_shredder extends BattleModifier implements KeybindInteractMod
         int mode = dataNBT.getInt(TAG_MOD);
         int rotation = dataNBT.getInt(TAG_ROTATIONAL_FORCE);
         float heat = dataNBT.getFloat(TAG_HEAT) / MAX_HEAT_FUEL;
-        damage += damage * ((float) rotation / MAX_FORCE_FUEL - .6f);
+        damage += damage * ((float) rotation / MAX_FORCE_FUEL - .8f);
         damage *= computeHeatEfficiencyFromPercent(heat);
+        if (Modes.ELECTRIC.ordinal() != mode){
+            FluidStack fluid = TANK_HELPER.getFluid(tool);
+            if (fluid.isEmpty())
+                return damage;
+            MeltingFuel recipe = findRecipe(fluid.getFluid());
+            if (null != recipe){
+                float rate = recipe.getRate();
+                return damage * (1.0f + rate / 100.0f);
+            }
+        }
 
         return damage;
     }
@@ -363,6 +420,7 @@ public class death_shredder extends BattleModifier implements KeybindInteractMod
             int mod = nbt.getInt(TAG_MOD);
             int fuel_duration = nbt.getInt(TAG_FUEL_DURATION);
             float heat = nbt.getFloat(TAG_HEAT);
+            float max_heat = Modes.MIX.ordinal() == mod ? MAX_HEAT_MIX : Modes.FUEL.ordinal() == mod ? MAX_HEAT_FUEL : MAX_HEAT_ELECTRIC;
             tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.death_shredder")
                                  .append(Component.translatable("modifier.dreamtinker.mod.death_shredder" + "_" + mod))
                                  .withStyle(this.getDisplayName().getStyle()));
@@ -372,7 +430,7 @@ public class death_shredder extends BattleModifier implements KeybindInteractMod
                                      .withStyle(this.getDisplayName().getStyle()));
             }
             tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.death_shredder_heat")
-                                 .append(String.format("%.2f", heat / MAX_HEAT_FUEL * 100) + "%")
+                                 .append(String.format("%.2f", heat / max_heat * 100) + "%")
                                  .withStyle(this.getDisplayName().getStyle()));
 
 

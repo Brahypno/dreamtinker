@@ -210,7 +210,6 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 // traits
                 .module(ToolTraitsModule.builder()
                                         .trait(DreamtinkerModifiers.death_shredder)
-                                        .trait(DreamtinkerModifiers.dead_heat)
                                         .trait(ModifierIds.stripping).build())
                 // behavior
                 .module(ToolActionsModule.of(ToolActions.AXE_DIG, ToolActions.SWORD_DIG, TinkerToolActions.SHIELD_DISABLE))

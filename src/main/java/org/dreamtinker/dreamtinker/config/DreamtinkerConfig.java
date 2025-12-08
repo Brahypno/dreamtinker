@@ -48,6 +48,11 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.DoubleValue flamingMemoryStatusBoost =
             builder.comment("how would flamingMemory boost your tool status?").defineInRange("flamingMemoryStatusBoost", 0.05, 0, 100);
 
+    public static final ForgeConfigSpec.IntValue ChainSawEnergyCost =
+            builder.comment(
+                           "Unit of Energy used per attack in Electric Mode, Need 10x value to consider Energy is enough to start And 0.5x value to cooldown the saw")
+                   .defineInRange("ChainSawEnergyCost", 50, 0, 1000);
+
     static {
         builder.pop();
         builder.push("Item Configuration");

@@ -2,7 +2,7 @@
   "tool": "dreamtinker:chain_saw_blade",
   "text": [
   { "text": "Show your loyalty!\n Right Interaction Could deal Continuous damage to enemies; Have three modes and use Tool Interaction Key to change Mode\n" },
-  { "text": "Fuel Mode: Consume Fuel to Use; Its rational force would increase based on Fuel rate. Deal extra Bleed effect and decrease target armor\nElectric Mode: WIP\nMix Mode: WIP", "paragraph": false }
+  { "text": "Fuel Mode: Decrease target armor\nElectric Mode: quicker start\nMix Mode: make target slow", "paragraph": false }
   ],
   "properties": [
     "+1 Attack Damage",

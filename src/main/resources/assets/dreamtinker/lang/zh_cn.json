@@ -444,7 +444,7 @@
   "modifier.dreamtinker.solar_away.description": "受击时，对伤害者施加基于主手的击退",
   "modifier.dreamtinker.death_shredder": "死亡绞肉",
   "modifier.dreamtinker.death_shredder.flavor": "滋-滋-",
-  "modifier.dreamtinker.death_shredder.description": "当有燃料时，右键交互会对面前的生物造成多次伤害",
+  "modifier.dreamtinker.death_shredder.description": "当有燃料或能量且于正确的模式下， 右键交互会对面前的生物造成多次伤害； 受温度限制",
   "modifier.dreamtinker.tooltip.death_shredder": "链锯模式: ",
   "modifier.dreamtinker.mod.death_shredder_0": "燃料动力",
   "modifier.dreamtinker.mod.death_shredder_1": "电动力",
