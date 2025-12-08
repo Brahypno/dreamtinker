@@ -21,7 +21,7 @@ public class DreamtinkerStationLayout extends AbstractStationSlotLayoutProvider 
     @Override
     protected void addLayouts() {
         defineModifiable(DreamtinkerTools.mashou)
-                .sortIndex(SORT_WEAPON * 2 + SORT_LARGE)
+                .sortIndex(SORT_WEAPON + SORT_LARGE)
                 .addInputItem(TinkerToolParts.broadBlade, 45, 62)
                 .addInputItem(TinkerToolParts.broadBlade, 45, 26)
                 .addInputItem(TinkerToolParts.largePlate, 45, 46)
@@ -29,20 +29,20 @@ public class DreamtinkerStationLayout extends AbstractStationSlotLayoutProvider 
                 .addInputItem(TinkerToolParts.toughHandle, 25, 46)
                 .build();
         defineModifiable(DreamtinkerTools.tntarrow)
-                .sortIndex(SORT_WEAPON + SORT_RANGED)
+                .sortIndex(SORT_WEAPON)
                 .addInputItem(DreamtinkerToolParts.explode_core.get(), 48, 26)
                 .addInputItem(TinkerToolParts.toolHandle, 12, 62)
                 .addInputItem(TinkerToolParts.toughHandle, 30, 44)
                 .build();
         defineModifiable(DreamtinkerTools.chain_saw_blade)
-                .sortIndex(SORT_WEAPON + SORT_LARGE)
+                .sortIndex(SORT_WEAPON + SORT_LARGE - 1)
                 .addInputItem(TinkerToolParts.broadBlade, 45, 26)
                 .addInputItem(DreamtinkerToolParts.chainSawTeeth.get(), 7, 62)
                 .addInputItem(DreamtinkerToolParts.chainSawCore.get(), 25, 46)
                 .addInputItem(TinkerToolParts.toughHandle, 45, 46)
                 .build();
         define(Dreamtinker.getLocation("under_plate"))
-                .sortIndex(SORT_ARMOR * 2)
+                .sortIndex(SORT_ARMOR)
                 .translationKey(Dreamtinker.makeTranslationKey("item", "under_plate"))
                 .icon(new Pattern("dreamtinker:under_plate"))
                 .addInputPattern(Patterns.PLATING, 33, 29, Ingredient.of(TinkerToolParts.plating.values().toArray(new Item[0])))
