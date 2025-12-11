@@ -2,7 +2,6 @@ package org.dreamtinker.dreamtinker.tools.modifiers.events;
 
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -32,7 +31,6 @@ import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.Fragile
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.homunculusLifeCurseMaxEffectLevel;
 import static org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.weapon_transformation.valueExpSoftCap;
 import static org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.knockArts.TAG_KNOCK;
-import static org.dreamtinker.dreamtinker.utils.DTModifierCheck.ModifierInHand;
 import static org.dreamtinker.dreamtinker.utils.DTModifierCheck.getPossibleToolWithModifier;
 
 
@@ -70,13 +68,6 @@ public class GeneralHurtHandler {
                 event.setCanceled(true);
                 return;
             }
-        if (event.getSource().is(DamageTypeTags.IS_EXPLOSION)){
-            if (ModifierInHand(event.getEntity(), DreamtinkerModifiers.ewige_widerkunft.getId()))
-                if (event.getEntity().getHealth() <= event.getAmount()){
-                    event.setCanceled(true);
-                    return;
-                }
-        }
         if (null == dmgEntity){
             if (DTModifierCheck.ModifierInBody(victim, DreamtinkerModifiers.Ids.requiem)){
                 event.setAmount(0);
@@ -84,7 +75,7 @@ public class GeneralHurtHandler {
                 return;
             }
         }
-        
+
         if (dmgEntity instanceof LivingEntity offender){
             int requiem = DTModifierCheck.getEntityBodyModifierNum(offender, DreamtinkerModifiers.Ids.requiem);
             if (0 < requiem){

@@ -30,7 +30,7 @@ import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.Prometheus;
 
 public class ewige_widerkunft extends BattleModifier {
     private static final ResourceLocation TAG_TOMB = Dreamtinker.getLocation("ewige_widerkunft");
-    
+
     @Override
     public int modifierDamageTool(IToolStackView tool, ModifierEntry modifier, int amount, @Nullable LivingEntity holder) {
         int current = tool.getCurrentDurability();
@@ -50,7 +50,7 @@ public class ewige_widerkunft extends BattleModifier {
                                        holder.getX(),
                                        holder.getY(),
                                        holder.getZ(),
-                                       current,
+                                       breaks % 13,
                                        true,
                                        Level.ExplosionInteraction.MOB);
             }
