@@ -11,7 +11,7 @@
   "dreamtinker:flaming_memory":     ["dreamtinker:item/materials/nigrescence_antimony"],
   "dreamtinker:foundation_will":     ["dreamtinker:item/unborn_turtle_egg"],
   "dreamtinker:hate_memory":     ["dreamtinker:item/unborn_egg", "minecraft:item/iron_axe"],
-  "dreamtinker:huge_ego":     ["dreamtinker:item/casts/persona_cast", "tconstruct:gui/modifiers/plus"],
+  "dreamtinker:huge_ego":     ["dreamtinker:item/cast/persona_cast", "tconstruct:gui/modifiers/plus"],
   "dreamtinker:icy_memory":     ["minecraft:item/powder_snow_bucket","dreamtinker:item/unborn_egg"],
   "dreamtinker:life_looting":     ["minecraft:block/emerald_block"],
   "dreamtinker:malum_ascension":     ["malum:item/crude_scythe"],

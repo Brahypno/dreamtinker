@@ -1,0 +1,33 @@
+{
+  "type": "tconstruct:swappable_modifier",
+  "allow_crystal": false,
+  "inputs": [
+    {
+      "amount_needed": 5,
+      "item": "dreamtinker:nigrescence_antimony"
+    },
+    {
+      "amount_needed": 5,
+      "item": "dreamtinker:black_sapphire_ore"
+    },
+    {
+      "amount_needed": 16,
+      "item": "dreamtinker:void_pearl"
+    },
+    {
+      "amount_needed": 5,
+      "item": "dreamtinker:nigrescence_antimony"
+    },
+    {
+      "amount_needed": 5,
+      "item": "dreamtinker:black_sapphire_ore"
+    }
+  ],
+  "result": {
+    "name": "dreamtinker:five_creations",
+    "value": "souls"
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/bonus_slots"
+  }
+}

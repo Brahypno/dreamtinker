@@ -67,15 +67,18 @@ import slimeknights.tconstruct.library.recipe.casting.material.MaterialFluidReci
 import slimeknights.tconstruct.library.recipe.casting.material.PartSwapCastingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.entitymelting.EntityMeltingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.fuel.MeltingFuelBuilder;
+import slimeknights.tconstruct.library.recipe.ingredient.ToolHookIngredient;
 import slimeknights.tconstruct.library.recipe.melting.IMeltingContainer;
 import slimeknights.tconstruct.library.recipe.melting.IMeltingRecipe;
 import slimeknights.tconstruct.library.recipe.melting.MeltingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.modifiers.adding.ModifierRecipeBuilder;
+import slimeknights.tconstruct.library.recipe.modifiers.adding.SwappableModifierRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.partbuilder.ItemPartRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.partbuilder.PartRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.partbuilder.recycle.PartBuilderToolRecycleBuilder;
 import slimeknights.tconstruct.library.recipe.tinkerstation.building.ToolBuildingRecipeBuilder;
 import slimeknights.tconstruct.library.tools.SlotType;
+import slimeknights.tconstruct.library.tools.definition.module.ToolHooks;
 import slimeknights.tconstruct.library.tools.part.ToolPartItem;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 import slimeknights.tconstruct.tools.TinkerModifiers;
@@ -1095,7 +1098,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(EnigmaticItems.EVIL_ESSENCE, 2)
                              .addInput(Items.HEART_OF_THE_SEA, 2)
                              .addInput(Tags.Items.INGOTS_NETHERITE, 2)
-                             .addInput(EnigmaticItems.ABYSSAL_HEART, 2)
+                             .addInput(EnigmaticItems.ABYSSAL_HEART, 1)
                              .setMaxLevel(1)
                              .setSlots(SlotType.ABILITY, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.desolation_ring, abilitySalvage))
@@ -1334,6 +1337,34 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.TheEnd, upgradeSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.TheEnd, upgradeFolder));
+        SwappableModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.five_creations, SlotType.SOUL.getName())
+                                      .setTools(TinkerTags.Items.BONUS_SLOTS)
+                                      .addInput(DreamtinkerCommon.nigrescence_antimony.get(), 5)
+                                      .addInput(DreamtinkerCommon.blackSapphireOre.asItem(), 5)
+                                      .addInput(DreamtinkerCommon.void_pearl.get(), 16)
+                                      .addInput(DreamtinkerCommon.nigrescence_antimony.get(), 5)
+                                      .addInput(DreamtinkerCommon.blackSapphireOre.asItem(), 5)
+                                      .disallowCrystal()
+                                      .save(consumer, wrap(DreamtinkerModifiers.Ids.five_creations, slotlessFolder, "_" + SlotType.SOUL.getName()));
+        SwappableModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.five_creations, "traits")
+                                      .setTools(ToolHookIngredient.of(TinkerTags.Items.BONUS_SLOTS, ToolHooks.REBALANCED_TRAIT))
+                                      .addInput(TinkerTags.Items.ANCIENT_TOOLS)
+                                      .addInput(TinkerTags.Items.ANCIENT_TOOLS)
+                                      .addInput(TinkerTags.Items.ANCIENT_TOOLS)
+                                      .addInput(DreamtinkerCommon.echo_alloy.get(), 5)
+                                      .addInput(Items.CALIBRATED_SCULK_SENSOR, 5)
+                                      .disallowCrystal()
+                                      .save(consumer, wrap(DreamtinkerModifiers.Ids.five_creations, slotlessFolder, "_traits"));
+
+        SwappableModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.five_creations, "designs")
+                                      .setTools(TinkerTags.Items.HARVEST)
+                                      .addInput(DreamtinkerCommon.evilHomunculus.get(), 5)
+                                      .addInput(DreamtinkerCommon.poisonousHomunculus.get(), 5)
+                                      .addInput(DreamtinkerCommon.rainbow_honey_crystal.get(), 5)
+                                      .addInput(DreamtinkerCommon.unborn_spawn_egg.get(), 5)
+                                      .addInput(DreamtinkerCommon.shiningFlint.get(), 5)
+                                      .disallowCrystal()
+                                      .save(consumer, wrap(DreamtinkerModifiers.Ids.five_creations, slotlessFolder, "_design"));
     }
 
     private void addEntityMeltingRecipes(Consumer<FinishedRecipe> consumer) {

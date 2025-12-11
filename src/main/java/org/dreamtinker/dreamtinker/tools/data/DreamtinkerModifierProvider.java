@@ -4,6 +4,7 @@ import com.aizistral.enigmaticlegacy.api.materials.EnigmaticMaterials;
 import com.aizistral.enigmaticlegacy.registries.EnigmaticEnchantments;
 import com.sammy.malum.registry.common.item.EnchantmentRegistry;
 import net.minecraft.data.PackOutput;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -19,18 +20,22 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraftforge.fluids.FluidType;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
+import org.dreamtinker.dreamtinker.library.modifiers.modules.mining.SwappableIsEffectiveModule;
 import org.dreamtinker.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvider;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.data.predicate.IJsonPredicate;
+import slimeknights.mantle.data.predicate.block.BlockPredicate;
 import slimeknights.mantle.data.predicate.block.BlockPropertiesPredicate;
 import slimeknights.mantle.data.predicate.damage.DamageTypePredicate;
 import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
 import slimeknights.mantle.data.predicate.item.ItemPredicate;
+import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.data.tinkering.AbstractModifierProvider;
 import slimeknights.tconstruct.library.json.LevelingInt;
 import slimeknights.tconstruct.library.json.RandomLevelingValue;
 import slimeknights.tconstruct.library.json.predicate.TinkerPredicate;
 import slimeknights.tconstruct.library.json.predicate.tool.HasModifierPredicate;
+import slimeknights.tconstruct.library.json.predicate.tool.ToolContextPredicate;
 import slimeknights.tconstruct.library.json.variable.mining.BlockLightVariable;
 import slimeknights.tconstruct.library.json.variable.mining.BlockTemperatureVariable;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -45,12 +50,15 @@ import slimeknights.tconstruct.library.modifiers.modules.combat.ConditionalMelee
 import slimeknights.tconstruct.library.modifiers.modules.combat.LootingModule;
 import slimeknights.tconstruct.library.modifiers.modules.combat.MobEffectModule;
 import slimeknights.tconstruct.library.modifiers.modules.mining.ConditionalMiningSpeedModule;
+import slimeknights.tconstruct.library.modifiers.modules.util.ModifierCondition;
 import slimeknights.tconstruct.library.modifiers.util.ModifierLevelDisplay;
 import slimeknights.tconstruct.library.tools.IndestructibleItemEntity;
 import slimeknights.tconstruct.library.tools.SlotType;
 import slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHelper;
 import slimeknights.tconstruct.library.tools.capability.inventory.InventoryMenuModule;
 import slimeknights.tconstruct.library.tools.capability.inventory.InventoryModule;
+import slimeknights.tconstruct.library.tools.definition.module.ToolHooks;
+import slimeknights.tconstruct.library.tools.nbt.IToolContext;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.shared.TinkerAttributes;
 import slimeknights.tconstruct.shared.TinkerEffects;
@@ -243,6 +251,14 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
         buildModifier(Ids.aggressiveFoxUsage)
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+
+        IJsonPredicate<IToolContext> ancientTool = ToolContextPredicate.tag(TinkerTags.Items.ANCIENT_TOOLS);
+        buildModifier(Ids.five_creations)
+                .tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION).levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(new SwappableSlotModule(2))
+                .addModule(new SwappableSlotModule(null, 1, ModifierCondition.ANY_CONTEXT.with(ancientTool)), ModifierHooks.VOLATILE_DATA)
+                .addModule(new SwappableToolTraitsModule(null, "traits", ToolHooks.REBALANCED_TRAIT))
+                .addModule(new SwappableIsEffectiveModule(null, "designs", BlockPredicate.tag(BlockTags.MINEABLE_WITH_PICKAXE), false));
 
         addELModifiers();
         addMalumModifiers();

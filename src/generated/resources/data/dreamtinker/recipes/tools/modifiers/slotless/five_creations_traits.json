@@ -1,0 +1,32 @@
+{
+  "type": "tconstruct:swappable_modifier",
+  "allow_crystal": false,
+  "inputs": [
+    {
+      "tag": "tconstruct:modifiable/ancient"
+    },
+    {
+      "tag": "tconstruct:modifiable/ancient"
+    },
+    {
+      "tag": "tconstruct:modifiable/ancient"
+    },
+    {
+      "amount_needed": 5,
+      "item": "dreamtinker:echo_alloy"
+    },
+    {
+      "amount_needed": 5,
+      "item": "minecraft:calibrated_sculk_sensor"
+    }
+  ],
+  "result": {
+    "name": "dreamtinker:five_creations",
+    "value": "traits"
+  },
+  "tools": {
+    "type": "tconstruct:tool_hook",
+    "hook": "tconstruct:rebalanced_trait",
+    "tag": "tconstruct:modifiable/bonus_slots"
+  }
+}

@@ -41,8 +41,8 @@ public class desolation_ring extends ArmorModifier {
                             if (entity instanceof Piglin || entity instanceof ZombifiedPiglin || entity instanceof IronGolem
                                 || entity instanceof EnderMan){
                                 livingEntity.invulnerableTime = 0;
-                                livingEntity.setHealth(0.0F);
-                                livingEntity.die(world.damageSources().playerAttack(player));
+                                livingEntity.setHealth(1.0F);
+                                ;
                                 return;
                             }
                     }

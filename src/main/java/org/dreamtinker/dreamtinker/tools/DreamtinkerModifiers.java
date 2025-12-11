@@ -1,5 +1,6 @@
 package org.dreamtinker.dreamtinker.tools;
 
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -11,9 +12,11 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.RegisterEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.DreamtinkerModule;
 import org.dreamtinker.dreamtinker.common.data.tags.ModifierTagProvider;
+import org.dreamtinker.dreamtinker.library.modifiers.modules.mining.SwappableIsEffectiveModule;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerEnchantmentToModifierProvider;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerFluidEffectProvider;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerModifierProvider;
@@ -55,6 +58,7 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.star_regulus.
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.star_regulus.two_headed_seven;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
+import slimeknights.tconstruct.library.modifiers.modules.ModifierModule;
 import slimeknights.tconstruct.library.modifiers.util.ModifierDeferredRegister;
 import slimeknights.tconstruct.library.modifiers.util.StaticModifier;
 
@@ -242,6 +246,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId soul_unchanged = id("soul_unchanged");
         public static final ModifierId force_to_explosion = id("force_to_explosion");
         public static final ModifierId aggressiveFoxUsage = id("aggressive_fox_usage");
+        public static final ModifierId five_creations = id("five_creations");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");
@@ -277,6 +282,13 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         generator.addProvider(server, new DreamtinkerModifierProvider(packOutput));
         generator.addProvider(server, new DreamtinkerFluidEffectProvider(packOutput));
         generator.addProvider(server, new DreamtinkerEnchantmentToModifierProvider(packOutput));
+    }
+
+    @SubscribeEvent
+    void registerSerializers(RegisterEvent event) {
+        if (event.getRegistryKey() == Registries.RECIPE_SERIALIZER){
+            ModifierModule.LOADER.register(Dreamtinker.getLocation("swappable_is_effective"), SwappableIsEffectiveModule.LOADER);
+        }
     }
 
     private static TagKey<Item> malumTag(String name) {
