@@ -3,7 +3,6 @@ package org.dreamtinker.dreamtinker.tools.modifiers.events;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -17,6 +16,7 @@ import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.capability.inventory.ToolInventoryCapability;
+import slimeknights.tconstruct.library.tools.item.IModifiable;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
 import java.util.HashMap;
@@ -38,8 +38,9 @@ public class weaponDreamsEnsureEnds {
         int selectedAtStart;
         final int cooldownTicks;
         final int slot;
+        final boolean empty;
 
-        Pending(UUID s, ItemStack snap, int delay, boolean waitCd, int selected, int cooldownTicks, int slot) {
+        Pending(UUID s, ItemStack snap, int delay, boolean waitCd, int selected, int cooldownTicks, int slot, Boolean MainEmpty) {
             session = s;
             proxySnap = snap.copy();
             ticks = delay;
@@ -47,10 +48,11 @@ public class weaponDreamsEnsureEnds {
             selectedAtStart = selected;
             this.cooldownTicks = cooldownTicks;
             this.slot = slot;
+            this.empty = MainEmpty;
         }
     }
 
-    public static void startChosenDisplay(ServerPlayer sp, int slot, ItemStack proxySnap, int cooldownTicks) {
+    public static void startChosenDisplay(ServerPlayer sp, int slot, ItemStack proxySnap, int cooldownTicks, boolean MainEmpty) {
         // 若有旧的，先立即还原
         endChosen(sp);
 
@@ -61,23 +63,27 @@ public class weaponDreamsEnsureEnds {
                 slotId, sp.getMainHandItem()));
 
         UUID sid = UUID.randomUUID();
-        PENDING.put(sp.getUUID(), new Pending(sid, proxySnap, /*delay*/8, /*waitCd*/false, sp.getInventory().selected, cooldownTicks, slot));
+
+        PENDING.put(sp.getUUID(), new Pending(sid, proxySnap, /*delay*/16, /*waitCd*/false, sp.getInventory().selected, cooldownTicks, slot, MainEmpty));
     }
 
     static void endChosen(ServerPlayer sp) {
         Pending p = PENDING.remove(sp.getUUID());
         if (p == null)
             return;
-        ItemStack after = sp.getMainHandItem().copy();
-        ToolStack silenceGlove = ToolStack.from(p.proxySnap);
-        ModifierEntry entry = silenceGlove.getModifier(DreamtinkerModifiers.Ids.weapon_slots);
-        entry.getHook(ToolInventoryCapability.HOOK).setStack(silenceGlove, entry, p.slot, after);
+        ItemStack after = sp.getInventory().getItem(p.selectedAtStart).copy();
+        if (p.proxySnap.getItem() instanceof IModifiable){
+            ToolStack silenceGlove = ToolStack.from(p.proxySnap);
+            ModifierEntry entry = silenceGlove.getModifier(DreamtinkerModifiers.Ids.weapon_slots);
+            entry.getHook(ToolInventoryCapability.HOOK).setStack(silenceGlove, entry, p.slot, after);
+        }
 
-        sp.setItemInHand(InteractionHand.MAIN_HAND, p.proxySnap);
+        sp.getInventory().setItem(p.selectedAtStart, p.empty ? ItemStack.EMPTY : p.proxySnap);
         sp.getInventory().setChanged();
         sp.getCooldowns().addCooldown(DreamtinkerTools.silence_glove.get(), p.cooldownTicks);
 
-        int slotId = 36 + sp.getInventory().selected;
+        int slotId = 36 + p.selectedAtStart;
+
         sp.connection.send(new ClientboundContainerSetSlotPacket(
                 sp.inventoryMenu.containerId,
                 sp.inventoryMenu.incrementStateId(),

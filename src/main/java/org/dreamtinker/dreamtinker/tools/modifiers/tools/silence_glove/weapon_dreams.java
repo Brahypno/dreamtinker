@@ -134,7 +134,12 @@ public class weapon_dreams extends BattleModifier {
                 // 临时换手仅为让某些钩子/附魔读取到正确主手；也可直接不用换手，仅把 chosen 传入钩子
                 update_hand(player, chosen);
                 // 1) 刚切换为 chosen 时，立即让客户端主手槽显示 chosen
-                startChosenDisplay(sp, chosenIdx, proxySnap, cooldownTicks);
+                Boolean MainEmpty = false;
+                if (proxySnap.isEmpty()){
+                    MainEmpty = true;
+                    proxySnap = CuriosCompact.findPreferredGlove(player);
+                }
+                startChosenDisplay(sp, chosenIdx, proxySnap, cooldownTicks, MainEmpty);
 
                 player.attackStrengthTicker = (int) Math.ceil(player.getCurrentItemAttackStrengthDelay());
 

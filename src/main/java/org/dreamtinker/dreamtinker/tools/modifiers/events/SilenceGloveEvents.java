@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.tools.events;
+package org.dreamtinker.dreamtinker.tools.modifiers.events;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -54,10 +54,12 @@ public class SilenceGloveEvents {
         Player player = event.getEntity();
         if (player == null)
             return;
-
+        boolean MainEmpty = false;
         ItemStack tool = player.getMainHandItem().copy();
-        if (tool.isEmpty())
+        if (tool.isEmpty()){
+            MainEmpty = true;
             tool = CuriosCompact.findPreferredGlove(player);
+        }
 
         if (!(tool.getItem() instanceof SilenceGlove))
             return;
@@ -93,7 +95,7 @@ public class SilenceGloveEvents {
                 REENTRY.set(true);
                 player.setItemInHand(InteractionHand.MAIN_HAND, chosen);
                 player.getInventory().setChanged();
-                startChosenDisplay((ServerPlayer) player, slot, tool, computeProxyCooldownTicks(silenceGlove));
+                startChosenDisplay((ServerPlayer) player, slot, tool, computeProxyCooldownTicks(silenceGlove), MainEmpty);
 
                 player.getMainHandItem().use(player.level(), player, InteractionHand.MAIN_HAND);
             }
