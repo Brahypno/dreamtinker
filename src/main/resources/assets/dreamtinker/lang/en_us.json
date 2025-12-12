@@ -464,6 +464,12 @@
   "modifier.dreamtinker.five_creations.end": "Born from THE END",
   "modifier.dreamtinker.five_creations.nether": "Born from The Nether",
   "modifier.dreamtinker.five_creations.defense": "Don`t care where we from",
+  "modifier.dreamtinker.signal_axe": "Signal Axe",
+  "modifier.dreamtinker.signal_axe.flavor": "Not traffic Light",
+  "modifier.dreamtinker.signal_axe.description": "Dramatic reduce not full Attack Strength Damage; Attack at certain time to critical and get 20% critical modifier",
+  "modifier.dreamtinker.signal_axe.not_ready": "Please wait more",
+  "modifier.dreamtinker.signal_axe.ready": "Its the time!",
+  "modifier.dreamtinker.signal_axe.critical": "Farewell, my cowardice—may you never follow me again.",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",

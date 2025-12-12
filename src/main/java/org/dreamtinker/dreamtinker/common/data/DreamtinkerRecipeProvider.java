@@ -83,6 +83,7 @@ import slimeknights.tconstruct.library.tools.part.ToolPartItem;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.TinkerToolParts;
+import slimeknights.tconstruct.tools.TinkerTools;
 import slimeknights.tconstruct.tools.data.material.MaterialIds;
 import slimeknights.tconstruct.tools.stats.HandleMaterialStats;
 import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
@@ -1365,6 +1366,15 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                       .addInput(DreamtinkerCommon.shiningFlint.get(), 5)
                                       .disallowCrystal()
                                       .save(consumer, wrap(DreamtinkerModifiers.Ids.five_creations, slotlessFolder, SlotType.DEFENSE.getName()));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.signal_axe)
+                             .setTools(Ingredient.of(TinkerTools.broadAxe.get(), TinkerTools.handAxe.get()))
+                             .addInput(Blocks.RED_CANDLE, 2)
+                             .addInput(Blocks.GREEN_CANDLE, 2)
+                             .addInput(Blocks.BLUE_CANDLE, 2)
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .setMaxLevel(1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.signal_axe, upgradeSalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.signal_axe, upgradeFolder));
     }
 
     private void addEntityMeltingRecipes(Consumer<FinishedRecipe> consumer) {

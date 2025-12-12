@@ -135,12 +135,20 @@ public class DTModifierCheck {
     public static float getPersistentTagValue(LivingEntity entity, ModifierId modifierId, ResourceLocation tag) {
         float value = 0;
         for (EquipmentSlot slot : slots) {
-            int level = getModifierLevel(entity, modifierId, slot);
-            if (0 < level){
-                ToolStack tool = ToolStack.from(entity.getItemBySlot(slot));
-                value += tool.getPersistentData().getInt(tag) * level;
-            }
+            value += getPersistentTagValue(entity, modifierId, tag, slot);
         }
+        return value;
+    }
+
+    public static float getPersistentTagValue(LivingEntity entity, ModifierId modifierId, ResourceLocation tag, EquipmentSlot slot) {
+        float value = 0;
+
+        int level = getModifierLevel(entity, modifierId, slot);
+        if (0 < level){
+            ToolStack tool = ToolStack.from(entity.getItemBySlot(slot));
+            value += tool.getPersistentData().getInt(tag) * level;
+        }
+
         return value;
     }
 

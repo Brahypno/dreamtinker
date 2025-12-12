@@ -464,6 +464,12 @@
   "modifier.dreamtinker.five_creations.end": "生于末地",
   "modifier.dreamtinker.five_creations.nether": "生于下界",
   "modifier.dreamtinker.five_creations.defense": "生则无所谓",
+  "modifier.dreamtinker.signal_axe": "信号斧",
+  "modifier.dreamtinker.signal_axe.flavor": "并非红绿灯",
+  "modifier.dreamtinker.signal_axe.description": "大量削减非满蓄力伤害;在合适的时机进行攻击会暴击并获得20%爆伤",
+  "modifier.dreamtinker.signal_axe.not_ready": "请再等等！",
+  "modifier.dreamtinker.signal_axe.ready": "是时候了!",
+  "modifier.dreamtinker.signal_axe.critical": "别了，我的懦弱",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
