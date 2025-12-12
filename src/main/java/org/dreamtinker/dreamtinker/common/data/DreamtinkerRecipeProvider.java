@@ -582,7 +582,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         materialRecipe(consumer, DreamtinkerMaterialIds.despair_gem, Ingredient.of(DreamtinkerCommon.despair_gem.get()), 1, 1,
                        materials_folder + "despair_gem");
 
-        materialComposite(consumer, MaterialIds.leather, DreamtinkerMaterialIds.shadowskin, DreamtinkerFluids.reversed_shadow, FluidValues.SLIMEBALL,
+        materialComposite(consumer, MaterialIds.leather, DreamtinkerMaterialIds.shadowskin, DreamtinkerFluids.molten_void, FluidValues.SLIMEBALL,
                           slimeskinFolder, "shadowskin");
         materialComposite(consumer, DreamtinkerMaterialIds.shadowskin, MaterialIds.leather, TinkerFluids.venom, FluidValues.SIP, slimeskinFolder,
                           "shadowskin_cleaning");
@@ -1356,15 +1356,15 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                       .disallowCrystal()
                                       .save(consumer, wrap(DreamtinkerModifiers.Ids.five_creations, slotlessFolder, "_traits"));
 
-        SwappableModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.five_creations, "designs")
-                                      .setTools(TinkerTags.Items.HARVEST)
-                                      .addInput(DreamtinkerCommon.evilHomunculus.get(), 5)
-                                      .addInput(DreamtinkerCommon.poisonousHomunculus.get(), 5)
+        SwappableModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.five_creations, SlotType.DEFENSE.getName())
+                                      .setTools(TinkerTags.Items.BONUS_SLOTS)
+                                      .addInput(DreamtinkerCommon.cold_iron_ingot.get(), 5)
+                                      .addInput(DreamtinkerCommon.orichalcum.get(), 5)
                                       .addInput(DreamtinkerCommon.rainbow_honey_crystal.get(), 5)
-                                      .addInput(DreamtinkerCommon.unborn_spawn_egg.get(), 5)
+                                      .addInput(DreamtinkerCommon.transmutation_gold_ingot.get(), 5)
                                       .addInput(DreamtinkerCommon.shiningFlint.get(), 5)
                                       .disallowCrystal()
-                                      .save(consumer, wrap(DreamtinkerModifiers.Ids.five_creations, slotlessFolder, "_design"));
+                                      .save(consumer, wrap(DreamtinkerModifiers.Ids.five_creations, slotlessFolder, SlotType.DEFENSE.getName()));
     }
 
     private void addEntityMeltingRecipes(Consumer<FinishedRecipe> consumer) {

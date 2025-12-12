@@ -1,0 +1,33 @@
+{
+  "type": "tconstruct:swappable_modifier",
+  "allow_crystal": false,
+  "inputs": [
+    {
+      "amount_needed": 5,
+      "item": "dreamtinker:cold_iron_ingot"
+    },
+    {
+      "amount_needed": 5,
+      "item": "dreamtinker:orichalcum_ingot"
+    },
+    {
+      "amount_needed": 5,
+      "item": "dreamtinker:rainbow_honey_crystal"
+    },
+    {
+      "amount_needed": 5,
+      "item": "dreamtinker:transmutation_gold_ingot"
+    },
+    {
+      "amount_needed": 5,
+      "item": "dreamtinker:shining_flint"
+    }
+  ],
+  "result": {
+    "name": "dreamtinker:five_creations",
+    "value": "defense"
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/bonus_slots"
+  }
+}

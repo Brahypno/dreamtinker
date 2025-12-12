@@ -2,9 +2,9 @@
   "type": "tconstruct:material_fluid",
   "fluid": {
     "amount": 250,
-    "tag": "dreamtinker:reversed_shadow"
+    "tag": "dreamtinker:molten_void"
   },
   "input": "tconstruct:leather",
   "output": "dreamtinker:shadowskin",
-  "temperature": 1200
+  "temperature": 1000
 }

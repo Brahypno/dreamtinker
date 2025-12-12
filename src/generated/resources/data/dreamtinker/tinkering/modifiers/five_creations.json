@@ -3,7 +3,7 @@
   "modules": [
     {
       "type": "tconstruct:swappable_slot",
-      "slots": 2
+      "slots": 1
     },
     {
       "type": "tconstruct:swappable_slot",
@@ -15,6 +15,12 @@
         "type": "mantle:tag",
         "tag": "tconstruct:modifiable/ancient"
       }
+    },
+    {
+      "type": "tconstruct:swappable_bonus_slot",
+      "bonus": "souls",
+      "match": "souls",
+      "slots": 1
     },
     {
       "type": "tconstruct:swappable_tool_traits",

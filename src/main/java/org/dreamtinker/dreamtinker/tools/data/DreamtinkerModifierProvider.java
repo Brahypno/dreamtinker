@@ -255,8 +255,9 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         IJsonPredicate<IToolContext> ancientTool = ToolContextPredicate.tag(TinkerTags.Items.ANCIENT_TOOLS);
         buildModifier(Ids.five_creations)
                 .tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION).levelDisplay(ModifierLevelDisplay.NO_LEVELS)
-                .addModule(new SwappableSlotModule(2))
+                .addModule(new SwappableSlotModule(1))
                 .addModule(new SwappableSlotModule(null, 1, ModifierCondition.ANY_CONTEXT.with(ancientTool)), ModifierHooks.VOLATILE_DATA)
+                .addModule(new SwappableSlotModule.BonusSlot(null, SlotType.SOUL, SlotType.SOUL, 1, ModifierCondition.ANY_CONTEXT))
                 .addModule(new SwappableToolTraitsModule(null, "traits", ToolHooks.REBALANCED_TRAIT))
                 .addModule(new SwappableIsEffectiveModule(null, "designs", BlockPredicate.tag(BlockTags.MINEABLE_WITH_PICKAXE), false));
 

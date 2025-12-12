@@ -1,0 +1,19 @@
+{
+  "modifier_id": "dreamtinker:five_creations",
+  "text": [
+    {
+      "text": "Grants +1 modifier slot; type is determined by the recipe. If chose Soul, would get extra Soul slot"
+    },
+    {
+      "text": "Born from Sculk: Soul; Don`t care where we from: Defense"
+    },
+    {
+      "text": "Born from Ancient increases the level of one of the tool traits, typically the head trait.", "paragraph": true
+    }
+  ],
+  "more_text_space": true,
+  "effects": [
+    "Single use",
+    "Slotless"
+  ]
+}
