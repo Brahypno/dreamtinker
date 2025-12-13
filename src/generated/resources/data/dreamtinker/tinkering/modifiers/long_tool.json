@@ -1,0 +1,24 @@
+{
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:attribute",
+      "attribute": "forge:block_reach",
+      "each_level": 1.0,
+      "operation": "addition",
+      "slots": [
+        "mainhand"
+      ]
+    },
+    {
+      "type": "tconstruct:attribute",
+      "attribute": "forge:entity_reach",
+      "each_level": 1.0,
+      "operation": "addition",
+      "slots": [
+        "mainhand"
+      ]
+    }
+  ],
+  "tooltip_display": "always"
+}

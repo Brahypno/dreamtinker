@@ -21,7 +21,7 @@ import org.dreamtinker.dreamtinker.tools.data.DreamtinkerEnchantmentToModifierPr
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerFluidEffectProvider;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerModifierProvider;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.chain_saw_blade.death_shredder;
-import org.dreamtinker.dreamtinker.tools.modifiers.tools.mashou.realsweep;
+import org.dreamtinker.dreamtinker.tools.modifiers.tools.mashou.realSweep;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.mashou.strong_heavy;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.flamingMemory;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.foundationWill;
@@ -79,7 +79,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static ModifierDeferredRegister EL_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     public static ModifierDeferredRegister MALUM_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     //Mashuo
-    public static final StaticModifier<realsweep> real_sweep = MODIFIERS.register("real_sweep", realsweep::new);
+    public static final StaticModifier<realSweep> real_sweep = MODIFIERS.register("real_sweep", realSweep::new);
     public static final StaticModifier<strong_heavy> strong_heavy = MODIFIERS.register("strong_heavy", strong_heavy::new);
     //tnt arrow
     public static final StaticModifier<strong_explode> strong_explode = MODIFIERS.register("strong_explode", strong_explode::new);
@@ -208,6 +208,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             MALUM_MODIFIERS.register("malum_catalyst_lobber", malumCatalystLobber::new);
 
     public static class Ids {
+        public static final ModifierId long_tool = id("long_tool");
         public static final ModifierId antimony_usage = id("antimony_usage");
         public static final ModifierId with_tears = id("with_tears");
         public static final ModifierId in_rain = id("in_rain");

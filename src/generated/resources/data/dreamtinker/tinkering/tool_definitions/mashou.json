@@ -76,8 +76,8 @@
       "type": "tconstruct:traits",
       "traits": [
         {
-          "level": 6,
-          "name": "tconstruct:reach"
+          "level": 4,
+          "name": "dreamtinker:long_tool"
         },
         {
           "level": 1,

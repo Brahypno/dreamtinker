@@ -80,7 +80,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 .module(new ToolSlotsModule(ImmutableMap.of(SlotType.UPGRADE, 4, SlotType.ABILITY, 4)))
                 // traits
                 .module(ToolTraitsModule.builder()
-                                        .trait(ModifierIds.reach, 6)
+                                        .trait(DreamtinkerModifiers.Ids.long_tool, 4)
                                         .trait(DreamtinkerModifiers.real_sweep, 1)
                                         .trait(DreamtinkerModifiers.strong_heavy, 1)
                                         .trait(DreamtinkerModifiers.Ids.silver_name_bee, 1).build())

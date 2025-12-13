@@ -121,7 +121,8 @@
     "solar_away": "#DE6428",
     "soul_unchanged": "#EBB46D",
     "death_shredder": "#AA0000",
-    "dead_heat": "#AA0000"
+    "dead_heat": "#AA0000",
+    "long_tool": "#d37cff"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",

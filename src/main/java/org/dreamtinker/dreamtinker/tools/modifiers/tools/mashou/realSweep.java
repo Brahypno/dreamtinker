@@ -24,15 +24,16 @@ import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.realSweepRange;
 import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.NO_COOLDOWN;
 
-public class realsweep extends BattleModifier {
-    public realsweep() {}
+public class realSweep extends BattleModifier {
+    public realSweep() {}
 
     public void superSweep(IToolStackView tool, ModifierEntry entry, Player player, Level level, Entity entity) {
         if (!level.isClientSide && player.getAttackStrengthScale(0) > 0.8 && !tool.isBroken()){
             AttributeInstance reach = player.getAttribute(ForgeMod.ENTITY_REACH.get());
-            double range = null != reach ? reach.getValue() : 1;
+            double range = null != reach ? Math.min(realSweepRange.get(), reach.getValue()) : 1;
             if (range > 0){
                 double rangeSq = range * range;
                 for (LivingEntity aoeTarget : level.getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(range, 0.25D, range))) {

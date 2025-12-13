@@ -33,9 +33,10 @@ public class strong_heavy extends BattleModifier {
                      new Snapshot(player.getRootVehicle().getX(), player.getRootVehicle().getY(), player.getRootVehicle().getZ(), world.getGameTime()));
             if (world.getGameTime() % 20 != 0)
                 return;
+            boolean in_main = player.getMainHandItem().equals(stack);
             // 处理虚弱效果
-            if (player.hasEffect(MobEffects.DAMAGE_BOOST) || player.hasEffect(MobEffects.MOVEMENT_SPEED) ||
-                isAllowedVehicle(player, last) || haveModifierIn(holder, as_one.getId())){
+            if (in_main && (player.hasEffect(MobEffects.DAMAGE_BOOST) || player.hasEffect(MobEffects.MOVEMENT_SPEED) ||
+                            isAllowedVehicle(player, last) || haveModifierIn(holder, as_one.getId()))){
                 player.removeEffect(MobEffects.WEAKNESS);
             }else
                 player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 200, 2, true, false));

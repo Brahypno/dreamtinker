@@ -4,7 +4,7 @@
   "modifier.dreamtinker.real_sweep.description": "真实横扫，对攻击范围内所有实体造成伤害。如果词条等级大于1，则该伤害会触发匠魂词条。",
   "modifier.dreamtinker.strong_heavy": "超沉重",
   "modifier.dreamtinker.strong_heavy.flavor": "这工具可不好用啊",
-  "modifier.dreamtinker.strong_heavy.description": "如果使用者不具有力量、速度效果，或骑乘且速度大于一定值，则会获得虚弱效果；否则移除虚弱效果",
+  "modifier.dreamtinker.strong_heavy.description": "如果使用者不主手持握攻击且具有力量、速度效果，或骑乘且速度大于一定值，则会获得虚弱效果；否则移除虚弱效果",
   "modifier.dreamtinker.strong_explode": "强化镇爆",
   "modifier.dreamtinker.strong_explode.flavor": "左舷弹幕这下不薄了",
   "modifier.dreamtinker.strong_explode.description": "伤害增加本强化等级倍数的伤害",
@@ -470,6 +470,9 @@
   "modifier.dreamtinker.signal_axe.not_ready": "请再等等！",
   "modifier.dreamtinker.signal_axe.ready": "是时候了!",
   "modifier.dreamtinker.signal_axe.critical": "别了，我的懦弱",
+  "modifier.dreamtinker.long_tool": "长杆",
+  "modifier.dreamtinker.long_tool.flavor": "长柄武器",
+  "modifier.dreamtinker.long_tool.description": "主手持该工具时延伸触及距离，以便进行更远的采掘与攻击！",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",

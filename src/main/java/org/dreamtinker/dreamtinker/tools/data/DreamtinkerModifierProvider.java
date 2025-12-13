@@ -7,6 +7,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -77,6 +78,10 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
 
     @Override
     protected void addModifiers() {
+        buildModifier(Ids.long_tool)
+                .addModule(AttributeModule.builder(ForgeMod.BLOCK_REACH.get(), AttributeModifier.Operation.ADDITION).slots(EquipmentSlot.MAINHAND).eachLevel(1))
+                .addModule(
+                        AttributeModule.builder(ForgeMod.ENTITY_REACH.get(), AttributeModifier.Operation.ADDITION).slots(EquipmentSlot.MAINHAND).eachLevel(1));
         buildModifier(Ids.antimony_usage).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                                          .addModule(StatBoostModule.add(ToolStats.DURABILITY).eachLevel(0.1f))
                                          .addModule(StatBoostModule.add(ToolStats.ATTACK_DAMAGE).eachLevel(0.1f))

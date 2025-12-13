@@ -4,7 +4,7 @@
   "modifier.dreamtinker.real_sweep.description": "A easier and much supreme sweep attack; If level larger than 1, the modifiers on the weapon would be trigger as well",
   "modifier.dreamtinker.strong_heavy": "strong heavy",
   "modifier.dreamtinker.strong_heavy.flavor": "too heavy to be use",
-  "modifier.dreamtinker.strong_heavy.description": "if user not have speed/strength, or on a moving live entity, weakness is applied; Otherwise weakness is removed",
+  "modifier.dreamtinker.strong_heavy.description": "if user not holding tool with main hand, have speed/strength, or on a moving live entity, weakness is applied; Otherwise weakness is removed",
   "modifier.dreamtinker.strong_explode": "strong explode",
   "modifier.dreamtinker.strong_explode.flavor": "High-yield strike detected. Hope you brought your helmet!",
   "modifier.dreamtinker.strong_explode.description": "Multiply tool damage based on modifier level",
@@ -470,6 +470,9 @@
   "modifier.dreamtinker.signal_axe.not_ready": "Please wait more",
   "modifier.dreamtinker.signal_axe.ready": "Its the time!",
   "modifier.dreamtinker.signal_axe.critical": "Farewell, my cowardice—may you never follow me again.",
+  "modifier.dreamtinker.long_tool": "Long Tool",
+  "modifier.dreamtinker.long_tool.flavor": "Light",
+  "modifier.dreamtinker.long_tool.description": "Can reach further blocks and mobs while holding this tool with Main Hand!",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",
