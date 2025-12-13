@@ -142,7 +142,7 @@ public class death_shredder extends BattleModifier implements KeybindInteractMod
 
     @Override
     public @NotNull InteractionResult onToolUse(IToolStackView tool, ModifierEntry modifier, Player player, InteractionHand hand, InteractionSource source) {
-        if (!tool.isBroken() && source == InteractionSource.RIGHT_CLICK){
+        if (!tool.isBroken() && source == InteractionSource.RIGHT_CLICK && player.getOffhandItem().isEmpty() && hand == InteractionHand.MAIN_HAND){
             int mode = tool.getPersistentData().getInt(TAG_MOD);
             float heat = tool.getPersistentData().getFloat(TAG_HEAT);
             if (0.8 < heat / MAX_HEAT_FUEL)
