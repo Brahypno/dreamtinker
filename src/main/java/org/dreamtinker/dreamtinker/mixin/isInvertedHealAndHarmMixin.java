@@ -1,7 +1,6 @@
 package org.dreamtinker.dreamtinker.mixin;
 
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobType;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.spongepowered.asm.mixin.Mixin;
@@ -10,14 +9,14 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
-public abstract class LivingEntityGetMobTypeMixin {
+public abstract class isInvertedHealAndHarmMixin {
 
     // 在返回之前拿到原始返回值，并可替换
-    @Inject(method = "getMobType", at = @At("RETURN"), cancellable = true)
-    private void dreamtinker$overrideMobType(CallbackInfoReturnable<MobType> cir) {
+    @Inject(method = "isInvertedHealAndHarm", at = @At("RETURN"), cancellable = true)
+    private void dreamtinker$overrideMobType(CallbackInfoReturnable<Boolean> cir) {
         LivingEntity self = (LivingEntity) (Object) this;
-        MobType original = cir.getReturnValue();
-        if (DTModifierCheck.haveModifierIn(self, DreamtinkerModifiers.Ids.wither_body))
-            cir.setReturnValue(MobType.UNDEAD);
+        Boolean original = cir.getReturnValue();
+        if (!original && DTModifierCheck.haveModifierIn(self, DreamtinkerModifiers.Ids.wither_body))
+            cir.setReturnValue(true);
     }
 }

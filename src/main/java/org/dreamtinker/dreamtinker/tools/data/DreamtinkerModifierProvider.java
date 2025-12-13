@@ -42,6 +42,7 @@ import slimeknights.tconstruct.library.json.variable.mining.BlockTemperatureVari
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.impl.BasicModifier;
 import slimeknights.tconstruct.library.modifiers.modules.armor.BlockDamageSourceModule;
+import slimeknights.tconstruct.library.modifiers.modules.armor.EffectImmunityModule;
 import slimeknights.tconstruct.library.modifiers.modules.armor.ProtectionModule;
 import slimeknights.tconstruct.library.modifiers.modules.armor.ReplaceBlockWalkerModule;
 import slimeknights.tconstruct.library.modifiers.modules.behavior.AttributeModule;
@@ -122,7 +123,10 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                                 ModifierSlotModule.slot(SlotType.DEFENSE).flat(1),
                                                 ModifierSlotModule.slot(SlotType.SOUL).flat(1),
                                                 ModifierSlotModule.slot(SlotType.UPGRADE).flat(1));
-        buildModifier(Ids.wither_body).levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+        buildModifier(Ids.wither_body).levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                                      .addModule(new EffectImmunityModule(MobEffects.POISON))
+                                      .addModule(new EffectImmunityModule(MobEffects.WITHER))
+                                      .addModule(new EffectImmunityModule(MobEffects.REGENERATION));
         buildModifier(Ids.soul_upgrade).tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
                                        .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                                        .addModules(ModifierSlotModule.slot(SlotType.SOUL).eachLevel(1));

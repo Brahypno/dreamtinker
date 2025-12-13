@@ -7,7 +7,7 @@
   "mixins": [
     "BowItemMixin",
     "ModifiableBowItemMixin",
-    "LivingEntityGetMobTypeMixin",
+    "isInvertedHealAndHarmMixin",
     "malum_mixin.ExtraMalumModifier",
     "enigmatic_legacy_mixin.EnigmaticEventHandlerMixin",
     "enigmatic_legacy_mixin.SuperpositionHandlerMixin",

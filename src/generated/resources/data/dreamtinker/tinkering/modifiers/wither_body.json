@@ -1,4 +1,18 @@
 {
   "level_display": "tconstruct:no_levels",
+  "modules": [
+    {
+      "type": "tconstruct:effect_immunity",
+      "effect": "minecraft:poison"
+    },
+    {
+      "type": "tconstruct:effect_immunity",
+      "effect": "minecraft:wither"
+    },
+    {
+      "type": "tconstruct:effect_immunity",
+      "effect": "minecraft:regeneration"
+    }
+  ],
   "tooltip_display": "always"
 }

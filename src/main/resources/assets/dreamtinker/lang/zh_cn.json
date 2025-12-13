@@ -108,7 +108,7 @@
   "modifier.dreamtinker.wither_shoot.description": "发射凋零骷髅头并在落点召唤流血凋零龙息云",
   "modifier.dreamtinker.wither_body": "凋零之躯",
   "modifier.dreamtinker.wither_body.flavor": "此身不休",
-  "modifier.dreamtinker.wither_body.description": "你被视为亡灵生物",
+  "modifier.dreamtinker.wither_body.description": "对中毒，再生，凋灵效果免疫；并反转瞬间伤害与治疗",
   "modifier.dreamtinker.stone_heart": "石之心",
   "modifier.dreamtinker.stone_heart.flavor": "此心为石， 弗可转也",
   "modifier.dreamtinker.stone_heart.description": "免疫一定的环境伤害并对箭矢有抗性，但你会受到情感打击",
