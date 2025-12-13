@@ -249,6 +249,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId force_to_explosion = id("force_to_explosion");
         public static final ModifierId aggressiveFoxUsage = id("aggressive_fox_usage");
         public static final ModifierId five_creations = id("five_creations");
+        public static final ModifierId golden_face = id("golden_face");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");

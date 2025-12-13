@@ -6,9 +6,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
-import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
@@ -19,10 +16,6 @@ public class realDarkness extends MobEffect {
 
     public realDarkness() {
         super(MobEffectCategory.HARMFUL, 0x222222);
-    }
-
-    {
-        MinecraftForge.EVENT_BUS.addListener(this::onChangeTarget);
     }
 
     @Override
@@ -61,22 +54,6 @@ public class realDarkness extends MobEffect {
                 inst.removeModifier(mod);
         }
         super.removeAttributeModifiers(entity, map, amplifier);
-    }
-
-    public void onChangeTarget(LivingChangeTargetEvent event) {
-        LivingEntity changer = event.getEntity();
-        if (!(changer instanceof Mob mob))
-            return;
-
-        // 你注册的效果实例
-        if (mob.hasEffect(DreamtinkerEffects.RealDarkness.get())){
-            // 任何尝试设定新目标都阻止
-            if (event.getNewTarget() != null){
-                // 取消并清空目标
-                event.setCanceled(true);
-                mob.setTarget(null);
-            }
-        }
     }
 }
 

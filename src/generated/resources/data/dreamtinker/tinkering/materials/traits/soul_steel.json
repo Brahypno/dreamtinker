@@ -7,6 +7,10 @@
     {
       "level": 1,
       "name": "tconstruct:ductile"
+    },
+    {
+      "level": 1,
+      "name": "dreamtinker:golden_face"
     }
   ],
   "perStat": {
@@ -22,6 +26,10 @@
       {
         "level": 1,
         "name": "tconstruct:magic_protection"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:golden_face"
       }
     ],
     "tconstruct:melee_harvest": [
@@ -36,6 +44,10 @@
       {
         "level": 1,
         "name": "tconstruct:swiftstrike"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:golden_face"
       }
     ],
     "tconstruct:ranged": [
@@ -50,6 +62,10 @@
       {
         "level": 1,
         "name": "tconstruct:pierce"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:golden_face"
       }
     ]
   }

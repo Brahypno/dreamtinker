@@ -122,7 +122,8 @@
     "soul_unchanged": "#EBB46D",
     "death_shredder": "#AA0000",
     "dead_heat": "#AA0000",
-    "long_tool": "#d37cff"
+    "long_tool": "#d37cff",
+    "golden_face": "#F4D362"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",

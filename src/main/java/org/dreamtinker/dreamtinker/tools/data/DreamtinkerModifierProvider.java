@@ -266,6 +266,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(new SwappableToolTraitsModule(null, "traits", ToolHooks.REBALANCED_TRAIT))
                 .addModule(new SwappableIsEffectiveModule(null, "designs", BlockPredicate.tag(BlockTags.MINEABLE_WITH_PICKAXE), false));
 
+        buildModifier(Ids.golden_face);
         addELModifiers();
         addMalumModifiers();
 

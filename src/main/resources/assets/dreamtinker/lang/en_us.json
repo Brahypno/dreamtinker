@@ -29,7 +29,7 @@
   "modifier.dreamtinker.antimony_usage.description": "Increase durability,attack damage,attack speed,projectile damage, armor, toughness, knockBack resistance and block amount;Decrease draw speed. ",
   "modifier.dreamtinker.broken_vessel": "Long-Shattered Vessel",
   "modifier.dreamtinker.broken_vessel.flavor": "Darkest Deep",
-  "modifier.dreamtinker.broken_vessel.description": "Boost max HP in exchange of......",
+  "modifier.dreamtinker.broken_vessel.description": "Boost max HP in exchange of max recoverable HP",
   "modifier.dreamtinker.ouroboric_hourglass": "ouroboric hourglass",
   "modifier.dreamtinker.ouroboric_hourglass.flavor": "I know nothing......after all",
   "modifier.dreamtinker.ouroboric_hourglass.description": "Reduce damage, especially to the large number, but......",
@@ -473,6 +473,9 @@
   "modifier.dreamtinker.long_tool": "Long Tool",
   "modifier.dreamtinker.long_tool.flavor": "Light",
   "modifier.dreamtinker.long_tool.description": "Can reach further blocks and mobs while holding this tool with Main Hand!",
+  "modifier.dreamtinker.golden_face": "SoulSteel Face",
+  "modifier.dreamtinker.golden_face.flavor": "Seeing this, you have a feeling of hit on the face",
+  "modifier.dreamtinker.golden_face.description": "Increase Visibility of The one using it",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",
