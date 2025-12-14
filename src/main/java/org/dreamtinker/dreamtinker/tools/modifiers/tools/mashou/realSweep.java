@@ -31,7 +31,7 @@ public class realSweep extends BattleModifier {
     public realSweep() {}
 
     public void superSweep(IToolStackView tool, ModifierEntry entry, Player player, Level level, Entity entity) {
-        if (!level.isClientSide && player.getAttackStrengthScale(0) > 0.8 && !tool.isBroken()){
+        if (!level.isClientSide && player.getAttackStrengthScale(0) > 0.8 && !tool.isBroken() && player.getOffhandItem().isEmpty()){
             AttributeInstance reach = player.getAttribute(ForgeMod.ENTITY_REACH.get());
             double range = null != reach ? Math.min(realSweepRange.get(), reach.getValue()) : 1;
             if (range > 0){
