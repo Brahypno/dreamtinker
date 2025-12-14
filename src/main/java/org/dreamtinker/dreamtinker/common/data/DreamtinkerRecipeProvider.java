@@ -531,6 +531,11 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         meltCast(DreamtinkerFluids.molten_transmutation_gold.get(), DreamtinkerCommon.transmutation_gold_ingot.get(), FluidValues.INGOT, consumer);
         meltCastBlock(DreamtinkerFluids.molten_transmutation_gold.get(), DreamtinkerCommon.TransmutationGoldBlock.get(), FluidValues.METAL_BLOCK, consumer);
 
+        wrapped = withCondition(consumer, tagFilled(Dreamtinker.forgeItemTag("gems/cinnabar")));
+        MeltingRecipeBuilder.melting(Ingredient.of(Dreamtinker.forgeItemTag("gems/cinnabar")),//in case someone add molten cinnabar
+                                     DreamtinkerFluids.mercury.get(), FluidValues.GEM, 1.0f)
+                            .save(wrapped, location(folder + "mercury/gem"));
+
     }
 
     String materials_folder = "tools/materials/";
@@ -1373,7 +1378,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                       .disallowCrystal()
                                       .save(consumer, wrap(DreamtinkerModifiers.Ids.five_creations, slotlessFolder, SlotType.DEFENSE.getName()));
         SwappableModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.five_creations, "designs")
-                                      .setTools(ToolHookIngredient.of(TinkerTags.Items.BONUS_SLOTS, ToolHooks.MELEE_HIT))
+                                      .setTools(TinkerTags.Items.BONUS_SLOTS)
                                       .addInput(DreamtinkerCommon.unborn_dragon_egg.get(), 5)
                                       .addInput(DreamtinkerCommon.poisonousHomunculus.get(), 5)
                                       .addInput(DreamtinkerCommon.evilHomunculus.get(), 5)

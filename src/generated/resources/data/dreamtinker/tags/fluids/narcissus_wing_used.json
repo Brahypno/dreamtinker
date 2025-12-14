@@ -8,6 +8,14 @@
     {
       "id": "#dreamtinker:liquid_concentrated_gluttony",
       "required": false
+    },
+    {
+      "id": "#dreamtinker:mercury",
+      "required": false
+    },
+    {
+      "id": "#dreamtinker:unholy_water",
+      "required": false
     }
   ]
 }

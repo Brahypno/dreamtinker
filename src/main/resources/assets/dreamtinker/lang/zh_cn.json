@@ -839,6 +839,10 @@
   "fluid.dreamtinker.molten_transmutation_gold": "熔融曜金",
   "fluid.dreamtinker.molten_transmutation_gold.fluid_effect": "熔融曜金",
   "block.dreamtinker.molten_transmutation_gold_fluid": "熔融曜金",
+  "fluid_type.dreamtinker.mercury": "水银",
+  "fluid.dreamtinker.mercury": "水银",
+  "fluid.dreamtinker.mercury.fluid_effect": "水银",
+  "block.dreamtinker.mercury": "水银",
 
   "item.dreamtinker.molten_echo_alloy_bucket": "熔融回响合金桶",
   "item.dreamtinker.molten_echo_shard_bucket": "熔融回响碎片桶",
@@ -877,6 +881,7 @@
   "item.dreamtinker.molten_cold_iron_bucket": "熔融引寒铁桶",
   "item.dreamtinker.molten_shadow_silver_bucket": "熔融影银桶",
   "item.dreamtinker.molten_transmutation_gold_bucket": "熔融曜金桶",
+  "item.dreamtinker.mercury_bucket": "水银桶",
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "流血",
   "fluid_effect.tconstruct.damage.explosion": "爆炸",

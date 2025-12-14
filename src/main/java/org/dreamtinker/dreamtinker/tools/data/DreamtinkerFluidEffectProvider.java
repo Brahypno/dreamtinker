@@ -121,6 +121,9 @@ public class DreamtinkerFluidEffectProvider extends AbstractFluidEffectProvider 
                 .addBlockEffect(
                         new MobEffectCloudFluidEffect(
                                 FluidMobEffect.builder().effect(MobEffectRegistry.ECHOING_ARCANA.get(), 10 * 20, 3).buildCloud().effects()));
+        addFluid(DreamtinkerFluids.mercury, FluidValues.SIP)
+                .addEntityEffects(FluidMobEffect.builder().effect(MobEffects.DAMAGE_RESISTANCE, 100, 2).buildEntity(TimeAction.ADD))
+                .addEntityEffects(FluidMobEffect.builder().effect(MobEffects.MOVEMENT_SLOWDOWN, 100, 4).buildEntity(TimeAction.ADD));
     }
 
     @Override

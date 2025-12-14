@@ -839,6 +839,11 @@
   "fluid.dreamtinker.molten_transmutation_gold": "Molten Transmutation Gold",
   "fluid.dreamtinker.molten_transmutation_gold.fluid_effect": "Molten Transmutation Gold",
   "block.dreamtinker.molten_transmutation_gold_fluid": "Molten Transmutation Gold",
+  "fluid_type.dreamtinker.mercury": "Mercury",
+  "fluid.dreamtinker.mercury": "Mercury",
+  "fluid.dreamtinker.mercury.fluid_effect": "Mercury would bring damage Boost",
+  "block.dreamtinker.mercury": "Mercury",
+
 
   "item.dreamtinker.molten_echo_alloy_bucket": "Molten echo alloy Bucket",
   "item.dreamtinker.molten_echo_shard_bucket": "Molten echo shard Bucket",
@@ -877,6 +882,7 @@
   "item.dreamtinker.molten_cold_iron_bucket": "Molten Rose Cold Iron Bucket",
   "item.dreamtinker.molten_shadow_silver_bucket": "Molten Shadow Silver Bucket",
   "item.dreamtinker.molten_transmutation_gold_bucket": "Molten Transmutation Gold Bucket",
+  "item.dreamtinker.mercury_bucket": "Mercury Bucket",
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "bleed",
   "fluid_effect.tconstruct.damage.explosion": "explosion",

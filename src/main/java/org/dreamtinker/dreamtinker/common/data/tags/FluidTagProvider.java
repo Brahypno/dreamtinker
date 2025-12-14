@@ -62,9 +62,11 @@ public class FluidTagProvider extends FluidTagsProvider {
         fluidTag(DreamtinkerFluids.molten_cold_iron);
         fluidTag(DreamtinkerFluids.molten_shadow_silver);
         fluidTag(DreamtinkerFluids.molten_transmutation_gold);
+        fluidTag(DreamtinkerFluids.mercury);
 
         this.tag(DreamtinkerTagKeys.Fluids.narcissus_wing_used).addTags(DreamtinkerFluids.blood_soul.getTag())
-            .addOptionalTags(DreamtinkerFluids.liquid_arcana_juice.getTag(), DreamtinkerFluids.liquid_concentrated_gluttony.getTag());
+            .addOptionalTags(DreamtinkerFluids.liquid_arcana_juice.getTag(), DreamtinkerFluids.liquid_concentrated_gluttony.getTag(),
+                             DreamtinkerFluids.mercury.getTag(), DreamtinkerFluids.unholy_water.getTag());
 
         tag(TinkerTags.Fluids.GLASS_TOOLTIPS).addTag(DreamtinkerFluids.molten_crying_obsidian.getTag());
         this.tag(TinkerTags.Fluids.METAL_TOOLTIPS)
