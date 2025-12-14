@@ -123,7 +123,8 @@
     "death_shredder": "#AA0000",
     "dead_heat": "#AA0000",
     "long_tool": "#d37cff",
-    "golden_face": "#F4D362"
+    "golden_face": "#F4D362",
+    "love_shooting": "#D3B5CB"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",

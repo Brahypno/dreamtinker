@@ -1,0 +1,34 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "amount_needed": 11,
+      "item": "minecraft:budding_amethyst"
+    },
+    {
+      "amount_needed": 11,
+      "item": "tconstruct:earth_slime_crystal_block"
+    },
+    {
+      "amount_needed": 11,
+      "item": "tconstruct:sky_slime_crystal_block"
+    },
+    {
+      "amount_needed": 11,
+      "item": "tconstruct:ichor_slime_crystal_block"
+    },
+    {
+      "amount_needed": 11,
+      "item": "tconstruct:ender_slime_crystal_block"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:love_shooting",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/ranged"
+  }
+}

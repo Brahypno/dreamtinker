@@ -12,7 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
-import org.dreamtinker.dreamtinker.utils.DThelper;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.nbt.IToolContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
@@ -51,7 +51,7 @@ public class burning_in_vain extends BattleModifier {
         ServerLevel world = (ServerLevel) shooter.level();
 
         double px = shooter.getX(), pz = shooter.getZ();
-        DThelper.clearProjectile(world, px, pz);
+        DTHelper.clearProjectile(world, px, pz);
         if (!BurnInVainRandomProj.get())
             return;
         Vec3 motion = projectile.getDeltaMovement();

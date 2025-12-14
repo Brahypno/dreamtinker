@@ -158,6 +158,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<knockBacker> SunAway = MODIFIERS.register("solar_away", knockBacker::new);
     public static final StaticModifier<death_shredder> death_shredder = MODIFIERS.register("death_shredder", death_shredder::new);
     public static final StaticModifier<SignalAxe> signal_axe = MODIFIERS.register("signal_axe", SignalAxe::new);
+    public static final StaticModifier<loveShooting> love_shooting = MODIFIERS.register("love_shooting", loveShooting::new);
 
     //etherium
     public static final StaticModifier<astral_break> astral_break = EL_MODIFIERS.register("astral_break", astral_break::new);

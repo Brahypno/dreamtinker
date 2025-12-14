@@ -13,7 +13,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
-import org.dreamtinker.dreamtinker.utils.DThelper;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
 
 import java.util.HashMap;
@@ -66,7 +66,7 @@ public class moonlightConversion {
                     continue;
                 }
                 // 转换蓝冰
-                ItemStack result = DThelper.getPart(DreamtinkerMaterialIds.moonlight_ice.getId(), HeadMaterialStats.ID, level.random);
+                ItemStack result = DTHelper.getPart(DreamtinkerMaterialIds.moonlight_ice.getId(), HeadMaterialStats.ID, level.random);
                 if (!result.isEmpty()){
                     level.addFreshEntity(new ItemEntity(level, item.getX(), item.getY(), item.getZ(), result));
                 }

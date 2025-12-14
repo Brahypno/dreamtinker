@@ -18,7 +18,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import org.dreamtinker.dreamtinker.utils.DThelper;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -69,7 +69,7 @@ public class void_pearl extends EnderpearlItem {
             super.onHitEntity(p_37502_);
             if (p_37502_.getEntity() instanceof LivingEntity le)
                 for (int i = 0; i < 64; ++i)
-                    if (DThelper.teleport(le)){
+                    if (DTHelper.teleport(le)){
                         le.hurt(le.level().damageSources().fellOutOfWorld(), voidPearlDamage.get().floatValue());
                         return;
                     }

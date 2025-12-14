@@ -39,7 +39,7 @@ import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.dreamtinker.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvider;
 import org.dreamtinker.dreamtinker.utils.CastLookup;
-import org.dreamtinker.dreamtinker.utils.DThelper;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.recipe.condition.TagFilledCondition;
 import slimeknights.mantle.recipe.data.IRecipeHelper;
@@ -88,6 +88,7 @@ import slimeknights.tconstruct.tools.data.material.MaterialIds;
 import slimeknights.tconstruct.tools.stats.HandleMaterialStats;
 import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
 import slimeknights.tconstruct.tools.stats.StatlessMaterialStats;
+import slimeknights.tconstruct.world.TinkerWorld;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -960,7 +961,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
     }
 
     private void malumCompactMaterialBuilder(Consumer<FinishedRecipe> consumer, MaterialVariantId id, Item item, MaterialStatsId statsId) {
-        List<ToolPartItem> Parts = DThelper.getPartList(statsId);
+        List<ToolPartItem> Parts = DTHelper.getPartList(statsId);
         Map<ToolPartItem, CastLookup.CastTriple> map = CastLookup.findCastsForParts(Parts);
         for (ToolPartItem part : Parts) {
             Item castItem = map.get(part).cast(); // 可能为 null（没注册）
@@ -1395,6 +1396,17 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.signal_axe, upgradeSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.signal_axe, upgradeFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.love_shooting)
+                             .setTools(TinkerTags.Items.RANGED)
+                             .addInput(Blocks.BUDDING_AMETHYST, 11)
+                             .addInput(TinkerWorld.earthGeode.getBlock(), 11)
+                             .addInput(TinkerWorld.skyGeode.getBlock(), 11)
+                             .addInput(TinkerWorld.ichorGeode.getBlock(), 11)
+                             .addInput(TinkerWorld.enderGeode.getBlock(), 11)
+                             .setSlots(SlotType.ABILITY, 1)
+                             .setMaxLevel(1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.love_shooting, abilitySalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.love_shooting, abilityFolder));
     }
 
     private void addEntityMeltingRecipes(Consumer<FinishedRecipe> consumer) {

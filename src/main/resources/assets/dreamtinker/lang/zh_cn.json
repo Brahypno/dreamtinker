@@ -476,6 +476,9 @@
   "modifier.dreamtinker.golden_face": "魂钢之容",
   "modifier.dreamtinker.golden_face.flavor": "当看到这个时，你有一种一拳打过去的想法",
   "modifier.dreamtinker.golden_face.description": "增加使用者的能见度",
+  "modifier.dreamtinker.love_shooting": "爱，与一切生命",
+  "modifier.dreamtinker.love_shooting.flavor": "坚定些，目光要看向前方",
+  "modifier.dreamtinker.love_shooting.description": "使射出的弹射物具有追踪生命的能力",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",

@@ -476,6 +476,9 @@
   "modifier.dreamtinker.golden_face": "SoulSteel Face",
   "modifier.dreamtinker.golden_face.flavor": "Seeing this, you have a feeling of hit on the face",
   "modifier.dreamtinker.golden_face.description": "Increase Visibility of The one using it",
+  "modifier.dreamtinker.love_shooting": "Love for all Living",
+  "modifier.dreamtinker.love_shooting.flavor": "Stay Strong, eye forward, always-",
+  "modifier.dreamtinker.love_shooting.description": "Make projectile shoot could find itself target",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",

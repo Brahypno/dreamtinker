@@ -6,7 +6,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
-import org.dreamtinker.dreamtinker.utils.DThelper;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
@@ -23,7 +23,7 @@ public class ender_dodge extends ArmorModifier {
         Level level = holder.level();
         if (!level.isClientSide() && !(source.getEntity() instanceof LivingEntity) && holder.level().random.nextFloat() < EnderDodgeChance.get()){
             for (int i = 0; i < EnderDodgeTimes.get(); ++i) {
-                if (DThelper.teleport(holder)){
+                if (DTHelper.teleport(holder)){
                     return true;
                 }
             }

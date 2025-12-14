@@ -57,7 +57,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             .add(real_sweep.getId(), Ids.continuous_explode, flaming_memory.getId())
             .addOptional(ender_slayer.getId(), weapon_books.getId(), desolation_ring.getId(), eldritch_pan.getId());
         this.tag(TinkerTags.Modifiers.RANGED_ABILITIES)
-            .add(Ids.force_to_explosion);
+            .add(Ids.force_to_explosion, love_shooting.getId());
         this.tag(TinkerTags.Modifiers.GENERAL_ABILITIES)
             .add(life_looting.getId());
         this.tag(TinkerTags.Modifiers.BLOCK_WHILE_CHARGING)

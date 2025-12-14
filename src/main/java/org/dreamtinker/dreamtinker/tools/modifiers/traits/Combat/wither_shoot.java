@@ -15,7 +15,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
-import org.dreamtinker.dreamtinker.utils.DThelper;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
@@ -33,7 +33,7 @@ public class wither_shoot extends BattleModifier {
         ServerLevel world = (ServerLevel) shooter.level();
 
         double px = shooter.getX(), pz = shooter.getZ();
-        DThelper.clearProjectile(world, px, pz);
+        DTHelper.clearProjectile(world, px, pz);
 
         Vec3 motion = projectile.getDeltaMovement();
         WitherSkull newProj = EntityType.WITHER_SKULL.create(shooter.level());
