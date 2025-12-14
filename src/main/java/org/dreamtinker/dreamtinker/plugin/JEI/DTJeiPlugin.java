@@ -24,6 +24,7 @@ import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.library.recipe.virtual.WorldRitualEntry;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.recipe.ingredient.EntityIngredient;
 import slimeknights.tconstruct.common.TinkerTags;
@@ -69,21 +70,21 @@ public final class DTJeiPlugin implements IModPlugin {
         List<WorldRitualEntry> list = new ArrayList<>();
 
         // A) 蓝冰 + 水 + 月相 → 工具部件
-        List<ToolPartItem> headParts =
-                ForgeRegistries.ITEMS.getValues().stream().filter(item -> item instanceof ToolPartItem part && part.getStatType() == HeadMaterialStats.ID)
-                                     .map(item -> (ToolPartItem) item).toList();
-        MaterialVariantId mli = MaterialRegistry.getMaterial(DreamtinkerMaterialIds.moonlight_ice.getId()).getIdentifier();
-        for (ToolPartItem item : headParts) {
-            list.add(new WorldRitualEntry(
-                    WorldRitualEntry.Trigger.ITEM_IN_FLUID,
-                    Ingredient.of(Items.BLUE_ICE),
-                    new FluidStack(Fluids.WATER, 1000),
-                    null,
-                    item.withMaterial(mli),
-                    null,
-                    null,                                   // 没有实体条件
-                    java.util.List.of(0, 4), null, null, null, null, null, null
-            ));
+        List<ToolPartItem> headParts = DTHelper.getPartList(HeadMaterialStats.ID);
+        if (!MaterialRegistry.isFullyLoaded()){
+            MaterialVariantId mli = MaterialRegistry.getMaterial(DreamtinkerMaterialIds.moonlight_ice.getId()).getIdentifier();
+            for (ToolPartItem item : headParts) {
+                list.add(new WorldRitualEntry(
+                        WorldRitualEntry.Trigger.ITEM_IN_FLUID,
+                        Ingredient.of(Items.BLUE_ICE),
+                        new FluidStack(Fluids.WATER, 1000),
+                        null,
+                        item.withMaterial(mli),
+                        null,
+                        null,                                   // 没有实体条件
+                        java.util.List.of(0, 4), null, null, null, null, null, null
+                ));
+            }
         }
 
         // B) 白天 & 极限高度 击杀凋零骷髅，附近方块A → 替换为方块B（仅展示）

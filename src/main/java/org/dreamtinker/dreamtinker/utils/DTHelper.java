@@ -42,7 +42,9 @@ import slimeknights.tconstruct.library.tools.part.ToolPartItem;
 
 import javax.annotation.Nullable;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.ProjLimit;
@@ -138,14 +140,23 @@ public class DTHelper {
         }
     }
 
-    public static List<ToolPartItem> getPartList(MaterialStatsId statsId) {
-        return ForgeRegistries.ITEMS.getValues().stream().
-                                    filter(item -> item instanceof ToolPartItem part && part.getStatType() == statsId)
-                                    .map(item -> (ToolPartItem) item).toList();
+    private static final Map<MaterialStatsId, List<ToolPartItem>> CACHE = new HashMap<>();
 
+    public static List<ToolPartItem> getPartList(MaterialStatsId statsId) {
+        return CACHE.computeIfAbsent(statsId, DTHelper::scanParts);
+    }
+
+    private static List<ToolPartItem> scanParts(MaterialStatsId statsId) {
+        return ForgeRegistries.ITEMS.getValues().stream()
+                                    .filter(item -> item instanceof ToolPartItem part
+                                                    && part.getStatType() == statsId)
+                                    .map(item -> (ToolPartItem) item)
+                                    .toList();
     }
 
     public static ItemStack getPart(MaterialId id, MaterialStatsId statsId, @Nullable RandomSource rdm) {
+        if (!MaterialRegistry.isFullyLoaded())
+            return ItemStack.EMPTY;
         MaterialVariantId mli = MaterialRegistry.getMaterial(id).getIdentifier();
 
         List<ToolPartItem> Parts = getPartList(statsId);
