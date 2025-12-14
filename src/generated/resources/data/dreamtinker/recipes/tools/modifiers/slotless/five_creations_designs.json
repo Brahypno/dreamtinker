@@ -1,0 +1,35 @@
+{
+  "type": "tconstruct:swappable_modifier",
+  "allow_crystal": false,
+  "inputs": [
+    {
+      "amount_needed": 5,
+      "item": "dreamtinker:unborn_dragon_egg"
+    },
+    {
+      "amount_needed": 5,
+      "item": "dreamtinker:poisonous_homunculus"
+    },
+    {
+      "amount_needed": 5,
+      "item": "dreamtinker:evil_homunculus"
+    },
+    {
+      "amount_needed": 5,
+      "item": "dreamtinker:rainbow_honey_crystal"
+    },
+    {
+      "amount_needed": 5,
+      "item": "dreamtinker:shining_flint"
+    }
+  ],
+  "result": {
+    "name": "dreamtinker:five_creations",
+    "value": "designs"
+  },
+  "tools": {
+    "type": "tconstruct:tool_hook",
+    "hook": "tconstruct:after_melee_hit",
+    "tag": "tconstruct:modifiable/bonus_slots"
+  }
+}

@@ -4,7 +4,6 @@ import com.aizistral.enigmaticlegacy.api.materials.EnigmaticMaterials;
 import com.aizistral.enigmaticlegacy.registries.EnigmaticEnchantments;
 import com.sammy.malum.registry.common.item.EnchantmentRegistry;
 import net.minecraft.data.PackOutput;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -21,11 +20,10 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraftforge.fluids.FluidType;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
-import org.dreamtinker.dreamtinker.library.modifiers.modules.mining.SwappableIsEffectiveModule;
+import org.dreamtinker.dreamtinker.library.modifiers.modules.weapon.SwappableCircleWeaponAttack;
 import org.dreamtinker.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvider;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.data.predicate.IJsonPredicate;
-import slimeknights.mantle.data.predicate.block.BlockPredicate;
 import slimeknights.mantle.data.predicate.block.BlockPropertiesPredicate;
 import slimeknights.mantle.data.predicate.damage.DamageTypePredicate;
 import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
@@ -268,7 +266,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(new SwappableSlotModule(null, 1, ModifierCondition.ANY_CONTEXT.with(ancientTool)), ModifierHooks.VOLATILE_DATA)
                 .addModule(new SwappableSlotModule.BonusSlot(null, SlotType.SOUL, SlotType.SOUL, 1, ModifierCondition.ANY_CONTEXT))
                 .addModule(new SwappableToolTraitsModule(null, "traits", ToolHooks.REBALANCED_TRAIT))
-                .addModule(new SwappableIsEffectiveModule(null, "designs", BlockPredicate.tag(BlockTags.MINEABLE_WITH_PICKAXE), false));
+                .addModule(new SwappableCircleWeaponAttack(null, "designs", 6));
 
         buildModifier(Ids.golden_face);
         addELModifiers();

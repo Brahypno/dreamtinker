@@ -16,7 +16,7 @@ import net.minecraftforge.registries.RegisterEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.DreamtinkerModule;
 import org.dreamtinker.dreamtinker.common.data.tags.ModifierTagProvider;
-import org.dreamtinker.dreamtinker.library.modifiers.modules.mining.SwappableIsEffectiveModule;
+import org.dreamtinker.dreamtinker.library.modifiers.modules.weapon.SwappableCircleWeaponAttack;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerEnchantmentToModifierProvider;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerFluidEffectProvider;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerModifierProvider;
@@ -290,7 +290,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     @SubscribeEvent
     void registerSerializers(RegisterEvent event) {
         if (event.getRegistryKey() == Registries.RECIPE_SERIALIZER){
-            ModifierModule.LOADER.register(Dreamtinker.getLocation("swappable_is_effective"), SwappableIsEffectiveModule.LOADER);
+            ModifierModule.LOADER.register(Dreamtinker.getLocation("swappable_circle_weapon_attack"), SwappableCircleWeaponAttack.LOADER);
         }
     }
 

@@ -1366,6 +1366,15 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                       .addInput(DreamtinkerCommon.shiningFlint.get(), 5)
                                       .disallowCrystal()
                                       .save(consumer, wrap(DreamtinkerModifiers.Ids.five_creations, slotlessFolder, SlotType.DEFENSE.getName()));
+        SwappableModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.five_creations, "designs")
+                                      .setTools(ToolHookIngredient.of(TinkerTags.Items.BONUS_SLOTS, ToolHooks.MELEE_HIT))
+                                      .addInput(DreamtinkerCommon.unborn_dragon_egg.get(), 5)
+                                      .addInput(DreamtinkerCommon.poisonousHomunculus.get(), 5)
+                                      .addInput(DreamtinkerCommon.evilHomunculus.get(), 5)
+                                      .addInput(DreamtinkerCommon.rainbow_honey_crystal.get(), 5)
+                                      .addInput(DreamtinkerCommon.shiningFlint.get(), 5)
+                                      .disallowCrystal()
+                                      .save(consumer, wrap(DreamtinkerModifiers.Ids.five_creations, slotlessFolder, "_designs"));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.signal_axe)
                              .setTools(Ingredient.of(TinkerTools.broadAxe.get(), TinkerTools.handAxe.get()))
                              .addInput(Blocks.RED_CANDLE, 2)

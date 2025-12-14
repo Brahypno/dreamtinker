@@ -108,7 +108,7 @@
   "modifier.dreamtinker.wither_shoot.description": "Shoot wither skull and generate wither and bleeding dragon breath",
   "modifier.dreamtinker.wither_body": "Wither Body",
   "modifier.dreamtinker.wither_body.flavor": "Where does Pain from",
-  "modifier.dreamtinker.wither_body.description": "Immute to poison, wither and regeneration;Reverse instant damage and health",
+  "modifier.dreamtinker.wither_body.description": "Immune to poison, wither and regeneration;Reverse instant damage and health",
   "modifier.dreamtinker.stone_heart": "Stone Heart",
   "modifier.dreamtinker.stone_heart.flavor": "I have a stone heart, emotionless, solid, and unhappiness",
   "modifier.dreamtinker.stone_heart.description": "Immune to some environment and reduce range damage. Buf your regen is nerf",
@@ -460,7 +460,7 @@
   "modifier.dreamtinker.five_creations.description": "Have five different effects based on recipe",
   "modifier.dreamtinker.five_creations.souls": "Born from Sculk",
   "modifier.dreamtinker.five_creations.traits": "Born from Ancient",
-  "modifier.dreamtinker.five_creations.design": "Born BY DESIGN",
+  "modifier.dreamtinker.five_creations.designs": "Born BY DESIGN",
   "modifier.dreamtinker.five_creations.end": "Born from THE END",
   "modifier.dreamtinker.five_creations.nether": "Born from The Nether",
   "modifier.dreamtinker.five_creations.defense": "Don`t care where we from",
@@ -931,5 +931,5 @@
   "sound.dreamtinker.chainsaw_loop": "ChainSaw Running",
   "sound.dreamtinker.chainsaw_stop": "ChainSaw Stopping",
 
-  "stat.dreamtinker.tool.display.designs": "Harvest"
+  "stat.dreamtinker.tool.display.designs": "Circle Attack"
 }

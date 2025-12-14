@@ -460,7 +460,7 @@
   "modifier.dreamtinker.five_creations.description": "根据配方不同决定不同效果",
   "modifier.dreamtinker.five_creations.souls": "生于幽暗",
   "modifier.dreamtinker.five_creations.traits": "生于古械",
-  "modifier.dreamtinker.five_creations.design": "生于设计",
+  "modifier.dreamtinker.five_creations.designs": "生于设计",
   "modifier.dreamtinker.five_creations.end": "生于末地",
   "modifier.dreamtinker.five_creations.nether": "生于下界",
   "modifier.dreamtinker.five_creations.defense": "生则无所谓",
@@ -932,5 +932,5 @@
   "sound.dreamtinker.chainsaw_loop": "电锯运转",
   "sound.dreamtinker.chainsaw_stop": "电锯停机",
 
-  "stat.dreamtinker.tool.display.designs": "采掘"
+  "stat.dreamtinker.tool.display.designs": "范围攻击"
 }
