@@ -147,6 +147,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
     private void addAlloyRecipes(Consumer<FinishedRecipe> consumer) {
         String folder = "smeltery/alloy/";
+        Consumer<FinishedRecipe> wrapped;
         AlloyRecipeBuilder.alloy(FluidOutput.fromFluid(DreamtinkerFluids.molten_albedo_stibium.get(), FluidValues.GEM), 1500)
                           .addCatalyst(FluidIngredient.of(DreamtinkerFluids.molten_lupi_antimony.getTag(), FluidValues.INGOT))
                           .addInput(TinkerTags.Fluids.METAL_TOOLTIPS, FluidValues.INGOT)
@@ -196,6 +197,11 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                           .addInput(TinkerFluids.meatSoup.getTag(), FluidValues.BOWL * 2)
                           .addInput(TinkerFluids.moltenEmerald.getTag(), FluidValues.GEM)
                           .save(consumer, location(folder + "molten_bee_gem"));
+        wrapped = withCondition(consumer, tagCondition("ingots/silver"));
+        AlloyRecipeBuilder.alloy(TinkerFluids.moltenElectrum, FluidValues.INGOT * 2)
+                          .addInput(TinkerFluids.moltenGold.ingredient(FluidValues.INGOT))
+                          .addInput(DreamtinkerFluids.liquid_amber.ingredient(FluidValues.GEM))
+                          .save(wrapped, prefix(TinkerFluids.moltenElectrum, folder));
     }
 
     private void addCastingRecipes(Consumer<FinishedRecipe> consumer) {
