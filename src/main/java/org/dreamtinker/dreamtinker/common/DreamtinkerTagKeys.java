@@ -35,6 +35,7 @@ public class DreamtinkerTagKeys {
         public static final TagKey<Fluid> molten_echo_shard = forgeTag("molten_echo_shard");
         public static final TagKey<Fluid> molten_crying_obsidian = forgeTag("molten_crying_obsidian");
         public static final TagKey<Fluid> molten_orichalcum = forgeTag("molten_orichalcum");
+        public static final TagKey<Fluid> molten_arcane_gold = forgeTag("molten_arcane_gold");
 
         public static final TagKey<Fluid> narcissus_wing_used = dtTag("narcissus_wing_used");
     }
@@ -61,6 +62,11 @@ public class DreamtinkerTagKeys {
         public static final TagKey<Item> scoleciteOre = forgeTag("ores/scolecite");
         public static final TagKey<Item> blackSapphireOre = forgeTag("ores/black_sapphire");
         public static final TagKey<Item> soulSteelBlock = dreamtinkerTag("storage_blocks/soul_steel");
+        public static final TagKey<Item> sulfur_dust = forgeTag("dusts/sulfur");
+
+        public static final TagKey<Item> arcaneGoldNugget = forgeTag("nuggets/arcane_gold");
+        public static final TagKey<Item> arcaneGoldIngot = forgeTag("ingots/arcane_gold");
+        public static final TagKey<Item> arcaneGoldBlock = forgeTag("storage_blocks/arcane_gold");
 
         public static final TagKey<Item> raw_orichalcum = forgeTag("raw_materials/orichalcum");
         public static final TagKey<Item> OrichalcumNuggets = forgeTag("nuggets/orichalcum");

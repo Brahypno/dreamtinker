@@ -1,0 +1,27 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "mantle:tag_filled",
+          "tag": "forge:storage_blocks/arcane_gold"
+        }
+      ]
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:storage_blocks/arcane_gold"
+  },
+  "result": {
+    "amount": 810,
+    "fluid": "dreamtinker:molten_arcane_gold"
+  },
+  "temperature": 700,
+  "time": 3
+}

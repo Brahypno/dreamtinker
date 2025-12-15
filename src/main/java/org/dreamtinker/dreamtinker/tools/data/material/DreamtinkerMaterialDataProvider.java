@@ -8,6 +8,7 @@ import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
 import net.minecraftforge.common.crafting.conditions.OrCondition;
 import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.common.json.DTConfigEnabledCondition;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.jetbrains.annotations.NotNull;
@@ -44,8 +45,9 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.shiningFlint, 3, 20, true, false, null);
         addMaterial(DreamtinkerMaterialIds.orichalcum, 2, 5, false, false, null);
         addMaterial(DreamtinkerMaterialIds.cold_iron, 2, 6, false, false, null);
-        addMaterial(DreamtinkerMaterialIds.shadowSilver, 2, 6, false, false, tagFilled(Dreamtinker.forgeItemTag("ingots/silver")));
+        addMaterial(DreamtinkerMaterialIds.shadowSilver, 2, 10, false, false, tagFilled(Dreamtinker.forgeItemTag("ingots/silver")));
         addMaterial(DreamtinkerMaterialIds.TransmutationGold, 3, 7, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.ArcaneGold, 2, ORDER_REPAIR, false, false, tagFilled(DreamtinkerTagKeys.Items.arcaneGoldIngot));
 
         addMaterial(DreamtinkerMaterialIds.etherium, 4, 40, false, false, modLoaded("enigmaticlegacy"));
         addMaterial(DreamtinkerMaterialIds.nefarious, 4, 40, false, false, modLoaded("enigmaticlegacy"));

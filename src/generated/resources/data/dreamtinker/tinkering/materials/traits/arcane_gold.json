@@ -1,0 +1,28 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "tconstruct:golden"
+    },
+    {
+      "level": 1,
+      "name": "dreamtinker:arcane_hit"
+    }
+  ],
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "tconstruct:golden"
+      },
+      {
+        "level": 1,
+        "name": "tconstruct:magic_protection"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:arcane_protection"
+      }
+    ]
+  }
+}

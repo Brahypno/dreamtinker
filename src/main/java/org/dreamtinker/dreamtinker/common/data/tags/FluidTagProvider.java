@@ -63,6 +63,7 @@ public class FluidTagProvider extends FluidTagsProvider {
         fluidTag(DreamtinkerFluids.molten_shadow_silver);
         fluidTag(DreamtinkerFluids.molten_transmutation_gold);
         fluidTag(DreamtinkerFluids.mercury);
+        fluidTag(DreamtinkerFluids.molten_arcane_gold);
 
         this.tag(DreamtinkerTagKeys.Fluids.narcissus_wing_used).addTags(DreamtinkerFluids.blood_soul.getTag())
             .addOptionalTags(DreamtinkerFluids.liquid_arcana_juice.getTag(), DreamtinkerFluids.liquid_concentrated_gluttony.getTag(),
@@ -72,13 +73,14 @@ public class FluidTagProvider extends FluidTagsProvider {
         this.tag(TinkerTags.Fluids.METAL_TOOLTIPS)
             .addTags(DreamtinkerFluids.molten_lupi_antimony.getTag(), DreamtinkerFluids.molten_soul_steel.getTag(),
                      DreamtinkerFluids.molten_orichalcum.getTag(), DreamtinkerFluids.molten_cold_iron.getTag(), DreamtinkerFluids.molten_shadow_silver.getTag(),
-                     DreamtinkerFluids.molten_transmutation_gold.getTag())
+                     DreamtinkerFluids.molten_transmutation_gold.getTag(), DreamtinkerFluids.molten_arcane_gold.getTag())
             .addOptionalTags(DreamtinkerFluids.molten_evil.getTag(), DreamtinkerFluids.molten_soul_aether.getTag(),
                              DreamtinkerFluids.molten_soul_stained_steel.getTag(), DreamtinkerFluids.molten_malignant_pewter.getTag(),
                              DreamtinkerFluids.molten_malignant_gluttony.getTag());
         this.tag(DreamtinkerTagKeys.Fluids.molten_echo_shard).addTags(DreamtinkerFluids.molten_echo_shard.getTag());
         this.tag(DreamtinkerTagKeys.Fluids.molten_crying_obsidian).addTags(DreamtinkerFluids.molten_crying_obsidian.getTag());
         this.tag(DreamtinkerTagKeys.Fluids.molten_orichalcum).addTags(DreamtinkerFluids.molten_orichalcum.getTag());
+        this.tag(DreamtinkerTagKeys.Fluids.molten_arcane_gold).addTags(DreamtinkerFluids.molten_arcane_gold.getTag());
         this.tag(TinkerTags.Fluids.SLIME_TOOLTIPS).addTags(DreamtinkerFluids.reversed_shadow.getTag(), DreamtinkerFluids.molten_void.getTag());
     }
 

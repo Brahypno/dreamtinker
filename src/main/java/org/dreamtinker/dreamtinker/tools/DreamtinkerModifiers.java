@@ -251,6 +251,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId aggressiveFoxUsage = id("aggressive_fox_usage");
         public static final ModifierId five_creations = id("five_creations");
         public static final ModifierId golden_face = id("golden_face");
+        public static final ModifierId arcane_hit = id("arcane_hit");
+        public static final ModifierId arcane_protection = id("arcane_protection");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");

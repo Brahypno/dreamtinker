@@ -93,6 +93,8 @@ import slimeknights.tconstruct.world.TinkerWorld;
 import java.util.*;
 import java.util.function.Consumer;
 
+import static elucent.eidolon.registries.Registry.*;
+
 public class DreamtinkerRecipeProvider extends RecipeProvider implements IMaterialRecipeHelper, IToolRecipeHelper, IConditionBuilder, IRecipeHelper {
 
     public DreamtinkerRecipeProvider(PackOutput p_248933_) {
@@ -152,61 +154,67 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         AlloyRecipeBuilder.alloy(FluidOutput.fromFluid(DreamtinkerFluids.molten_albedo_stibium.get(), FluidValues.GEM), 1500)
                           .addCatalyst(FluidIngredient.of(DreamtinkerFluids.molten_lupi_antimony.getTag(), FluidValues.INGOT))
                           .addInput(TinkerTags.Fluids.METAL_TOOLTIPS, FluidValues.INGOT)
-                          .save(consumer, location(folder + "currus_triumphalis_antimonii/lupi_to_albedo"));
+                          .save(consumer, prefix(DreamtinkerFluids.molten_albedo_stibium, folder));
         AlloyRecipeBuilder.alloy(FluidOutput.fromFluid(DreamtinkerFluids.liquid_smoky_antimony.get(), FluidValues.INGOT * 2), 3600)
                           .addInput(DreamtinkerFluids.molten_ascending_antimony.getTag(), FluidValues.INGOT)
                           .addInput(TinkerFluids.liquidSoul.getTag(), FluidValues.GLASS_BLOCK)
-                          .save(consumer, location(folder + "currus_triumphalis_antimonii/ascending_to_smoky"));
+                          .save(consumer, prefix(DreamtinkerFluids.liquid_smoky_antimony, folder));
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_evil, FluidValues.INGOT * 2)
                           .addInput(DreamtinkerFluids.molten_nefariousness.getTag(), FluidValues.GEM * 4)
                           .addInput(DreamtinkerFluids.liquid_trist.getTag(), FluidValues.NUGGET * 4)
                           .addInput(TinkerFluids.moltenNetherite.getTag(), FluidValues.INGOT)
-                          .save(consumer, location(folder + "evil_ingot"));
+                          .save(consumer, prefix(DreamtinkerFluids.molten_evil, folder));
         AlloyRecipeBuilder.alloy(FluidOutput.fromFluid(DreamtinkerFluids.liquid_pure_soul.get(), FluidValues.GEM), 1600)
                           .addInput(DreamtinkerFluids.liquid_trist.getTag(), FluidValues.NUGGET)
                           .addInput(TinkerFluids.liquidSoul.getTag(), FluidValues.GLASS_BLOCK * 10)
-                          .save(consumer, location(folder + "liquid_pure_soul"));
+                          .save(consumer, prefix(DreamtinkerFluids.liquid_pure_soul, folder));
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_soul_aether, FluidValues.INGOT)
                           .addInput(DreamtinkerFluids.molten_nefariousness.getTag(), FluidValues.GEM)
                           .addInput(DreamtinkerFluids.liquid_pure_soul.getTag(), FluidValues.GEM)
                           .addInput(DreamtinkerFluids.unstable_liquid_aether.getTag(), FluidValues.INGOT)
                           .addInput(DreamtinkerFluids.molten_void.getTag(), FluidValues.SLIMEBALL)
                           .addInput(DreamtinkerTagKeys.Fluids.molten_echo_shard, FluidValues.GEM)
-                          .save(consumer, location(folder + "molten_soul_aether"));
+                          .save(consumer, prefix(DreamtinkerFluids.molten_soul_aether, folder));
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.reversed_shadow, FluidValues.SLIMEBALL)
                           .addInput(DreamtinkerFluids.molten_void.getTag(), FluidValues.SLIMEBALL * 2)
                           .addInput(TinkerFluids.moltenEnder.getTag(), FluidValues.SLIMEBALL * 2)
-                          .save(consumer, location(folder + "reversed_shadow"));
+                          .save(consumer, prefix(DreamtinkerFluids.reversed_shadow, folder));
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_echo_alloy, FluidValues.GEM)
                           .addInput(DreamtinkerTagKeys.Fluids.molten_echo_shard, FluidValues.GEM)
                           .addInput(TinkerFluids.moltenEnder.getTag(), FluidValues.SLIMEBALL * 2)
-                          .save(consumer, location(folder + "molten_echo_alloy"));
+                          .save(consumer, prefix(DreamtinkerFluids.molten_echo_alloy, folder));
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.despair_essence, FluidValues.GEM)
                           .addInput(DreamtinkerTagKeys.Fluids.molten_crying_obsidian, FluidValues.GLASS_BLOCK * 3)
                           .addInput(DreamtinkerFluids.liquid_amber.getTag(), FluidValues.GEM * 4)
                           .addInput(DreamtinkerFluids.molten_desire.get(), FluidValues.GEM * 9)
                           .addInput(DreamtinkerFluids.reversed_shadow.getTag(), FluidValues.SLIMEBALL * 7)
                           .addInput(DreamtinkerFluids.molten_lupi_antimony.getTag(), FluidValues.INGOT * 2)
-                          .save(consumer, location(folder + "despair_essence"));
+                          .save(consumer, prefix(DreamtinkerFluids.despair_essence, folder));
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_soul_steel, FluidValues.INGOT)
                           .addInput(TinkerFluids.moltenSteel.getTag(), FluidValues.INGOT)
                           .addInput(TinkerFluids.moltenCobalt.getTag(), FluidValues.INGOT)
                           .addInput(TinkerFluids.liquidSoul.getTag(), FluidValues.GLASS_BLOCK * 2)
-                          .save(consumer, location(folder + "molten_soul_steel"));
+                          .save(consumer, prefix(DreamtinkerFluids.molten_soul_steel, folder));
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_bee_gem, FluidValues.GEM * 2)
                           .addInput(DreamtinkerFluids.rainbow_honey.getTag(), FluidValues.BOTTLE)
                           .addInput(TinkerFluids.meatSoup.getTag(), FluidValues.BOWL * 2)
                           .addInput(TinkerFluids.moltenEmerald.getTag(), FluidValues.GEM)
-                          .save(consumer, location(folder + "molten_bee_gem"));
-        wrapped = withCondition(consumer, tagCondition("ingots/silver"));
+                          .save(consumer, prefix(DreamtinkerFluids.molten_bee_gem, folder));
+        wrapped = withCondition(consumer, tagFilled(Dreamtinker.forgeItemTag("ingots/silver")));
         AlloyRecipeBuilder.alloy(TinkerFluids.moltenElectrum, FluidValues.INGOT * 2)
                           .addInput(TinkerFluids.moltenGold.ingredient(FluidValues.INGOT))
                           .addInput(DreamtinkerFluids.liquid_amber.ingredient(FluidValues.GEM))
                           .save(wrapped, prefix(TinkerFluids.moltenElectrum, folder));
+        wrapped = withCondition(consumer, tagFilled(DreamtinkerTagKeys.Items.arcaneGoldIngot));
+        AlloyRecipeBuilder.alloy(FluidOutput.fromFluid(DreamtinkerFluids.molten_transmutation_gold.get(), FluidValues.INGOT * 2), 1200)
+                          .addInput(DreamtinkerTagKeys.Fluids.molten_arcane_gold, FluidValues.INGOT)
+                          .addInput(DreamtinkerFluids.mercury.ingredient(FluidValues.GEM))
+                          .save(wrapped, prefix(DreamtinkerFluids.molten_transmutation_gold, folder));
     }
 
     private void addCastingRecipes(Consumer<FinishedRecipe> consumer) {
         // Pure Fluid Recipes
+        Consumer<FinishedRecipe> wrapped;
         String folder = "smeltery/casting/";
         ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.regulus.get())
                                 .setFluid(DreamtinkerFluids.liquid_smoky_antimony.getLocalTag(), FluidValues.INGOT)
@@ -301,6 +309,11 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                 .setFluidAndTime(TinkerFluids.moltenGlass, FluidValues.GLASS_BLOCK)
                                 .setCast(Items.FLINT, true)
                                 .save(consumer, location(folder + "shining_flint"));
+
+        wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("eidolon"));
+        cast(DreamtinkerFluids.molten_arcane_gold.get(), ARCANE_GOLD_NUGGET.get(), FluidValues.NUGGET, wrapped);
+        cast(DreamtinkerFluids.molten_arcane_gold.get(), ARCANE_GOLD_INGOT.get(), FluidValues.INGOT, wrapped);
+        cast(DreamtinkerFluids.molten_arcane_gold.get(), ARCANE_GOLD_BLOCK.get(), FluidValues.METAL_BLOCK, wrapped);
     }
 
     private void addMeltingRecipes(Consumer<FinishedRecipe> consumer) {
@@ -536,6 +549,32 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         MeltingRecipeBuilder.melting(Ingredient.of(Dreamtinker.forgeItemTag("gems/cinnabar")),//in case someone add molten cinnabar
                                      DreamtinkerFluids.mercury.get(), FluidValues.GEM, 1.0f)
                             .save(wrapped, location(folder + "mercury/gem"));
+        MeltingRecipeBuilder.melting(Ingredient.of(Dreamtinker.forgeItemTag("ingots/mercury")),
+                                     DreamtinkerFluids.mercury.get(), FluidValues.GEM, 1.0f)
+                            .save(wrapped, location(folder + "mercury/ingot"));
+
+        wrapped = withCondition(consumer, tagFilled(DreamtinkerTagKeys.Items.arcaneGoldNugget));
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.arcaneGoldNugget),
+                                     DreamtinkerFluids.molten_arcane_gold.get(), FluidValues.NUGGET, 0.05f)
+                            .save(wrapped, location(folder + "arcane_gold/nugget"));
+
+        wrapped = withCondition(consumer, tagFilled(DreamtinkerTagKeys.Items.arcaneGoldIngot));
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.arcaneGoldIngot),
+                                     DreamtinkerFluids.molten_arcane_gold.get(), FluidValues.INGOT, 0.05f)
+                            .save(wrapped, location(folder + "arcane_gold/ingot"));
+        wrapped = withCondition(consumer, tagFilled(DreamtinkerTagKeys.Items.arcaneGoldBlock));
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.arcaneGoldBlock),
+                                     DreamtinkerFluids.molten_arcane_gold.get(), FluidValues.METAL_BLOCK, 0.05f)
+                            .save(wrapped, location(folder + "arcane_gold/block"));
+
+        wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("eidolon"));
+        MeltingRecipeBuilder.melting(Ingredient.of(GOLD_INLAY.get()),
+                                     DreamtinkerFluids.molten_arcane_gold.get(), FluidValues.INGOT * 2, 0.05f)
+                            .save(wrapped, location(folder + "arcane_gold/inlay"));
+        MeltingRecipeBuilder.melting(Ingredient.of(PEWTER_INLAY.get()),
+                                     TinkerFluids.moltenPewter, FluidValues.INGOT * 2, 0.05f)
+                            .save(wrapped, location(folder + "pewter/inlay"));
+
 
     }
 
@@ -663,6 +702,15 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                        materials_folder + "transmutation_gold/nugget");
         materialRecipe(consumer, DreamtinkerMaterialIds.TransmutationGold, Ingredient.of(DreamtinkerTagKeys.Items.TransmutationGoldBlock), 9, 1,
                        materials_folder + "transmutation_gold/block");
+
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.ArcaneGold, DreamtinkerFluids.molten_arcane_gold, FluidValues.INGOT,
+                               materials_folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.ArcaneGold, Ingredient.of(DreamtinkerTagKeys.Items.arcaneGoldIngot), 1, 1,
+                       materials_folder + "arcane_gold/ingot");
+        materialRecipe(consumer, DreamtinkerMaterialIds.TransmutationGold, Ingredient.of(DreamtinkerTagKeys.Items.arcaneGoldNugget), 1, 9,
+                       materials_folder + "arcane_gold/nugget");
+        materialRecipe(consumer, DreamtinkerMaterialIds.TransmutationGold, Ingredient.of(DreamtinkerTagKeys.Items.arcaneGoldBlock), 9, 1,
+                       materials_folder + "arcane_gold/block");
 
     }
 

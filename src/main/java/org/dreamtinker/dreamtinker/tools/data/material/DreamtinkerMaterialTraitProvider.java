@@ -73,7 +73,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.soul_steel, MELEE_HARVEST, ModifierIds.soulbound, ModifierIds.ductile, ModifierIds.swiftstrike, Ids.golden_face);
         addTraits(DreamtinkerMaterialIds.soul_steel, RANGED, ModifierIds.soulbound, ModifierIds.ductile, ModifierIds.pierce, Ids.golden_face);
         addTraits(DreamtinkerMaterialIds.soul_steel, ARMOR, ModifierIds.soulbound, ModifierIds.ductile, ModifierIds.magicProtection, Ids.golden_face);
-        
+
         addDefaultTraits(DreamtinkerMaterialIds.rainbow_honey_crystal, HoneyTastyModifier);
         addTraits(DreamtinkerMaterialIds.rainbow_honey_crystal, ARMOR, HoneyTastyModifier, rainbowCatcher);
 
@@ -94,6 +94,10 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.TransmutationGold, RANGED, effectRemover.getId(), Ids.soul_unchanged);
         addTraits(DreamtinkerMaterialIds.TransmutationGold, ARMOR, SunAway.getId(), Ids.soul_unchanged);
 
+        addDefaultTraits(DreamtinkerMaterialIds.ArcaneGold, TinkerModifiers.golden.getId(), Ids.arcane_hit);
+        addTraits(DreamtinkerMaterialIds.ArcaneGold, ARMOR, TinkerModifiers.golden.getId(), ModifierIds.magicProtection, Ids.arcane_protection);
+
+
         callGetOrCreate(this, DreamtinkerMaterialIds.etherium).setTraits(MELEE_HARVEST, List.of(
                 new ModifierEntry(ModifierIds.smite, 2),
                 new ModifierEntry(explosive_hit.getId(), 1),
@@ -112,7 +116,6 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
                   Ids.wither_body, evil_attack.getId());
         addTraits(DreamtinkerMaterialIds.nefarious, ARMOR, cursed_ring_bound.getId(), Ids.wither_body,
                   stone_heart.getId());
-
 
         addTraits(DreamtinkerMaterialIds.soul_etherium, MELEE_HARVEST, cursed_ring_bound.getId(), ModifierIds.soulbound,
                   Ids.soul_form, open_soul.getId(), exiles_faulty.getId(), Ids.el_etherium);

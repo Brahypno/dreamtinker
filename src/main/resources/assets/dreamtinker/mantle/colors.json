@@ -124,7 +124,9 @@
     "dead_heat": "#AA0000",
     "long_tool": "#d37cff",
     "golden_face": "#F4D362",
-    "love_shooting": "#D3B5CB"
+    "love_shooting": "#D3B5CB",
+    "arcane_hit": "#EDAE66",
+    "arcane_protection": "#EDAE66"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
@@ -159,7 +161,8 @@
     "orichalcum": "#552060",
     "cold_iron": "#4489CC",
     "shadow_silver": "#7C6220",
-    "transmutation_gold": "#DE6428"
+    "transmutation_gold": "#DE6428",
+    "arcane_gold": "#EDAE66"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873",

@@ -288,7 +288,7 @@
   "modifier.dreamtinker.malum_sol_tiferet_fulfill.description": "When targets`s health drop down certain level, trigger Pneuma Void; Share cooldown with Necklace of the Watcher",
   "modifier.dreamtinker.why_i_cry": "You Ask Why Hearts Cry",
   "modifier.dreamtinker.why_i_cry.flavor": "I know this is love, yet it pains me; I know this is pain, yet I love it.",
-  "modifier.dreamtinker.why_i_cry.description": "deal 10% out of world damage to target;The extra damage would be deal to attacker sometimes ",
+  "modifier.dreamtinker.why_i_cry.description": "deal 5% * level out of world damage to target;The extra damage would be deal to attacker sometimes ",
   "modifier.dreamtinker.deep_sleep_with_roar": "Deep Sleep With Roar",
   "modifier.dreamtinker.deep_sleep_with_roar.flavor": "Do not awake/dream with me",
   "modifier.dreamtinker.deep_sleep_with_roar.description": "When attack/arrow hit, apply harmful mob effect of attacker to the target",
@@ -479,6 +479,13 @@
   "modifier.dreamtinker.love_shooting": "Love for all Living",
   "modifier.dreamtinker.love_shooting.flavor": "Stay Strong, eye forward, always-",
   "modifier.dreamtinker.love_shooting.description": "Make projectile shoot could find itself target",
+  "modifier.dreamtinker.arcane_hit": "Arcane Arts",
+  "modifier.dreamtinker.arcane_hit.flavor": "Mystery, Arcane",
+  "modifier.dreamtinker.arcane_hit.description": "Convert 10%*level of damage dealt to by pass enchantment",
+  "modifier.dreamtinker.arcane_protection": "Arcane Protection",
+  "modifier.dreamtinker.arcane_protection.flavor": "Arcane mystery",
+  "modifier.dreamtinker.arcane_protection.description": "Protects against damage from bypass Enchantment sources",
+  "modifier.dreamtinker.arcane_protection.resistance": "ByPass Enchantment Resistance",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",
@@ -693,6 +700,8 @@
   "material.dreamtinker.shadow_silver.flavor": "The shadow self of silver",
   "material.dreamtinker.transmutation_gold": "Transmutation Gold",
   "material.dreamtinker.transmutation_gold.flavor": "With Solar power, This is rarely come from Gold",
+  "material.dreamtinker.arcane_gold": "Arcane Gold",
+  "material.dreamtinker.arcane_gold.flavor": "Its a symbol of Arcane other than just Gold",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "Molten echo Alloy",
   "fluid.dreamtinker.molten_echo_alloy": "Molten echo Alloy",
@@ -846,6 +855,10 @@
   "fluid.dreamtinker.mercury": "Mercury",
   "fluid.dreamtinker.mercury.fluid_effect": "Mercury would bring damage Boost",
   "block.dreamtinker.mercury": "Mercury",
+  "fluid_type.dreamtinker.molten_arcane_gold": "Molten Arcane Gold",
+  "fluid.dreamtinker.molten_arcane_gold": "Molten Arcane Gold",
+  "fluid.dreamtinker.molten_arcane_gold.fluid_effect": "Molten Arcane Gold",
+  "block.dreamtinker.molten_arcane_gold_fluid": "Molten Arcane Gold",
 
 
   "item.dreamtinker.molten_echo_alloy_bucket": "Molten echo alloy Bucket",
@@ -886,6 +899,7 @@
   "item.dreamtinker.molten_shadow_silver_bucket": "Molten Shadow Silver Bucket",
   "item.dreamtinker.molten_transmutation_gold_bucket": "Molten Transmutation Gold Bucket",
   "item.dreamtinker.mercury_bucket": "Mercury Bucket",
+  "item.dreamtinker.molten_arcane_gold_bucket": "Molten Arcane Gold Bucket",
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "bleed",
   "fluid_effect.tconstruct.damage.explosion": "explosion",
@@ -933,6 +947,7 @@
 
   "death.attack.dreamtinker.null_void": "consumed by nothingness",
   "death.attack.dreamtinker.rain_bow": "vanished like rainbow",
+  "death.attack.dreamtinker.arcane_damage": "Cursed by Arcane Arts",
 
   "entity.dreamtinker.aggressive_fox": "Armed Fox",
 

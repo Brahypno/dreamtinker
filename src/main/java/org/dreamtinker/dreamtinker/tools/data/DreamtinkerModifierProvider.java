@@ -25,6 +25,7 @@ import org.dreamtinker.dreamtinker.tools.data.material.DreamtinkerMaterialDataPr
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.data.predicate.IJsonPredicate;
 import slimeknights.mantle.data.predicate.block.BlockPropertiesPredicate;
+import slimeknights.mantle.data.predicate.damage.DamageSourcePredicate;
 import slimeknights.mantle.data.predicate.damage.DamageTypePredicate;
 import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
 import slimeknights.mantle.data.predicate.item.ItemPredicate;
@@ -39,10 +40,7 @@ import slimeknights.tconstruct.library.json.variable.mining.BlockLightVariable;
 import slimeknights.tconstruct.library.json.variable.mining.BlockTemperatureVariable;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.impl.BasicModifier;
-import slimeknights.tconstruct.library.modifiers.modules.armor.BlockDamageSourceModule;
-import slimeknights.tconstruct.library.modifiers.modules.armor.EffectImmunityModule;
-import slimeknights.tconstruct.library.modifiers.modules.armor.ProtectionModule;
-import slimeknights.tconstruct.library.modifiers.modules.armor.ReplaceBlockWalkerModule;
+import slimeknights.tconstruct.library.modifiers.modules.armor.*;
 import slimeknights.tconstruct.library.modifiers.modules.behavior.AttributeModule;
 import slimeknights.tconstruct.library.modifiers.modules.behavior.ReduceToolDamageModule;
 import slimeknights.tconstruct.library.modifiers.modules.build.*;
@@ -65,6 +63,7 @@ import slimeknights.tconstruct.shared.TinkerEffects;
 import slimeknights.tconstruct.tools.modules.MeltingModule;
 import slimeknights.tconstruct.tools.modules.armor.DepthProtectionModule;
 
+import static net.minecraft.tags.DamageTypeTags.BYPASSES_ENCHANTMENTS;
 import static org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers.*;
 import static slimeknights.tconstruct.common.TinkerTags.Items.*;
 import static slimeknights.tconstruct.library.json.math.ModifierFormula.*;
@@ -146,7 +145,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                    .addModule(StatBoostModule.multiplyAll(ToolStats.DURABILITY).flat(-0.25f));
         buildModifier(Ids.full_concentration).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
         buildModifier(Ids.thundering_curse).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
-        buildModifier(Ids.why_i_cry).levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+        buildModifier(Ids.why_i_cry);
         buildModifier(Ids.MorningLordEULA).addModule(
                 ConditionalMiningSpeedModule.builder()
                                             .customVariable("light", new BlockLightVariable(LightLayer.BLOCK, 15))
@@ -267,8 +266,16 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(new SwappableSlotModule.BonusSlot(null, SlotType.SOUL, SlotType.SOUL, 1, ModifierCondition.ANY_CONTEXT))
                 .addModule(new SwappableToolTraitsModule(null, "traits", ToolHooks.REBALANCED_TRAIT))
                 .addModule(new SwappableCircleWeaponAttack(null, "designs", 6));
-
         buildModifier(Ids.golden_face);
+        buildModifier(Ids.arcane_hit);
+        buildModifier(Ids.arcane_protection)
+                .addModule(MaxArmorAttributeModule.builder(TinkerAttributes.GOOD_EFFECT_DURATION, AttributeModifier.Operation.MULTIPLY_BASE)
+                                                  .heldTag(TinkerTags.Items.HELD)
+                                                  .eachLevel(0.05f))
+                .addModule(ProtectionModule.builder()
+                                           .sources(DamageSourcePredicate.ANY, DamageSourcePredicate.tag(BYPASSES_ENCHANTMENTS))
+                                           .eachLevel(2.0f));
+
         addELModifiers();
         addMalumModifiers();
 

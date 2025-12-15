@@ -1,0 +1,6 @@
+{
+  "parent": "forge:item/bucket_drip",
+  "flip_gas": false,
+  "fluid": "dreamtinker:molten_arcane_gold",
+  "loader": "tconstruct:fluid_container"
+}

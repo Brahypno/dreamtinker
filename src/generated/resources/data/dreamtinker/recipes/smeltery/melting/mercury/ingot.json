@@ -1,0 +1,27 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "mantle:tag_filled",
+          "tag": "forge:gems/cinnabar"
+        }
+      ]
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:ingots/mercury"
+  },
+  "result": {
+    "amount": 100,
+    "fluid": "dreamtinker:mercury"
+  },
+  "temperature": 1200,
+  "time": 72
+}

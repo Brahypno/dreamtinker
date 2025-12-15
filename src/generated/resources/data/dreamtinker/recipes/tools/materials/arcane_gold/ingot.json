@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:ingots/arcane_gold"
+  },
+  "material": "dreamtinker:arcane_gold",
+  "needed": 1,
+  "value": 1
+}

@@ -15,10 +15,12 @@ public class DamageTypeProvider implements RegistrySetBuilder.RegistryBootstrap<
 
     @Override
     public void run(BootstapContext<DamageType> context) {
-        context.register(NULL_VOID, new DamageType(Dreamtinker.MODID + ".null_void", DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 1f, DamageEffects.HURT));
+        context.register(NULL_VOID, new DamageType(Dreamtinker.MODID + ".null_void", DamageScaling.ALWAYS, 1f, DamageEffects.HURT));
         context.register(rain_bow, new DamageType(Dreamtinker.MODID + ".rain_bow", DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 1f, DamageEffects.THORNS));
         context.register(force_to_explosion,
-                         new DamageType(Dreamtinker.MODID + ".rain_bow", DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 1f, DamageEffects.HURT));
+                         new DamageType(Dreamtinker.MODID + ".force_to_explosion", DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 1f, DamageEffects.HURT));
+        context.register(arcane_damage,
+                         new DamageType(Dreamtinker.MODID + ".arcane_damage", DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 1f, DamageEffects.HURT));
     }
 
     /**

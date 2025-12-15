@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "dreamtinker:arcane_gold",
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_arcane_gold"
+  },
+  "temperature": 700
+}

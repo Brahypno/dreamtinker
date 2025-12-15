@@ -1,0 +1,36 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/ingot"
+  },
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "eidolon"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "eidolon"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "cooling_time": 57,
+  "fluid": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_arcane_gold"
+  },
+  "result": "eidolon:arcane_gold_ingot"
+}

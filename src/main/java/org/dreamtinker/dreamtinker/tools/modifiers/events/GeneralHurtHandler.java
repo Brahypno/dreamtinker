@@ -26,6 +26,7 @@ import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
+import static net.minecraft.tags.DamageTypeTags.BYPASSES_ENCHANTMENTS;
 import static net.minecraft.tags.DamageTypeTags.IS_PROJECTILE;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.FragileDodge;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.homunculusLifeCurseMaxEffectLevel;
@@ -37,6 +38,7 @@ import static org.dreamtinker.dreamtinker.utils.DTModifierCheck.getPossibleToolW
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class GeneralHurtHandler {
     static boolean why_i_cry_triggered = false;
+    static boolean arcane_hit = false;
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void LivingHurtEvent(LivingHurtEvent event) {
@@ -107,13 +109,16 @@ public class GeneralHurtHandler {
             }
 
             //DEAL DAMAGE
-            if (0 < DTModifierCheck.getMainhandModifierLevel(offender, DreamtinkerModifiers.Ids.why_i_cry) && !why_i_cry_triggered){
+            int drown_level = DTModifierCheck.getMainhandModifierLevel(offender, DreamtinkerModifiers.Ids.why_i_cry);
+            if (0 < drown_level && !why_i_cry_triggered){
                 DamageSource source = DreamtinkerDamageTypes.source(registryAccess, DamageTypes.FELL_OUT_OF_WORLD, dmg);
                 why_i_cry_triggered = true;
-                victim.hurt(source, damageAmount * .1f);
-                victim.invulnerableTime = 0;
-                if (rds.nextFloat() < 0.1)
-                    offender.hurt(source, damageAmount * .1f);
+                float extra = damageAmount * .05f * drown_level;
+                if (0.5f <= extra){
+                    victim.hurt(source, extra);
+                    if (rds.nextFloat() < 0.1)
+                        offender.hurt(source, extra);
+                }
                 why_i_cry_triggered = false;
             }
             float del = DTModifierCheck.getPersistentTagValue(offender, DreamtinkerModifiers.knockArts.getId(), TAG_KNOCK);
@@ -128,6 +133,17 @@ public class GeneralHurtHandler {
             if (0 < homunculusLifeCurse)
                 event.setAmount(damageAmount * (1 - offender.getHealth() / offender.getMaxHealth()) *
                                 Math.min(homunculusLifeCurseMaxEffectLevel.get() + 1, homunculusLifeCurse + 1));
+            int arcane_hit_level = DTModifierCheck.getMainhandModifierLevel(offender, DreamtinkerModifiers.Ids.arcane_hit);
+            if (!dmg.is(BYPASSES_ENCHANTMENTS) && 0 < arcane_hit_level && !arcane_hit){
+                DamageSource source = DreamtinkerDamageTypes.source(registryAccess, DreamtinkerDamageTypes.arcane_damage, dmg);
+                arcane_hit = true;
+                float extra = damageAmount * .1f * arcane_hit_level;
+                if (0.5f <= extra){
+                    victim.hurt(source, extra);
+                    event.setAmount(Math.max(0f, damageAmount - extra));
+                }
+                arcane_hit = false;
+            }
         }
 
     }

@@ -19,6 +19,7 @@ public class DreamtinkerDamageTypes {
     public static final ResourceKey<DamageType> NULL_VOID = create("null_void");
     public static final ResourceKey<DamageType> rain_bow = create("rain_bow");
     public static final ResourceKey<DamageType> force_to_explosion = create("force_to_explosion");
+    public static final ResourceKey<DamageType> arcane_damage = create("arcane_damage");//This is extra damage, don`t use as full otherwise may be too powerful
 
     private static ResourceKey<DamageType> create(String name) {
         return ResourceKey.create(Registries.DAMAGE_TYPE, Dreamtinker.getLocation(name));

@@ -26,7 +26,7 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
         this.tag(TinkerTags.Materials.MELEE)
             .add(crying_obsidian, nigrescence_antimony, moonlight_ice, echo_alloy, metallivorous_stibium_lupus, amber, half_rotten_homunculus, desire_gem,
                  despair_gem, scolecite, shiningFlint, cold_iron)
-            .addOptional(nefarious, soul_etherium, spirit_fabric, soul_stained_steel, malignant_pewter, malignant_gluttony, shadowSilver);
+            .addOptional(nefarious, soul_etherium, spirit_fabric, soul_stained_steel, malignant_pewter, malignant_gluttony, shadowSilver, ArcaneGold);
         this.tag(TinkerTags.Materials.HARVEST)
             .add(larimar, rainbow_honey_crystal, TransmutationGold)
             .addOptional(hallowed_gold);
@@ -41,7 +41,7 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
             .add(valentinite, black_sapphire, scolecite, shiningFlint);
         this.tag(TinkerTags.Materials.HEAVY)
             .add(crying_obsidian, amber)
-            .addOptional(hallowed_gold);
+            .addOptional(hallowed_gold, ArcaneGold);
     }
 
     @Override

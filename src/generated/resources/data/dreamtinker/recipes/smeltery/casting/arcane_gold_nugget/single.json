@@ -1,0 +1,37 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/single_use/nugget"
+  },
+  "cast_consumed": true,
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "eidolon"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "eidolon"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "cooling_time": 19,
+  "fluid": {
+    "amount": 10,
+    "fluid": "dreamtinker:molten_arcane_gold"
+  },
+  "result": "eidolon:arcane_gold_nugget"
+}

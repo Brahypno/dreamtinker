@@ -1,0 +1,33 @@
+{
+  "type": "tconstruct:alloy",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "mantle:tag_filled",
+          "tag": "forge:ingots/arcane_gold"
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "amount": 90,
+      "tag": "forge:molten_arcane_gold"
+    },
+    {
+      "amount": 100,
+      "tag": "dreamtinker:mercury"
+    }
+  ],
+  "result": {
+    "amount": 180,
+    "fluid": "dreamtinker:molten_transmutation_gold"
+  },
+  "temperature": 1200
+}

@@ -98,6 +98,10 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new HeadMaterialStats(120, 12f, DtTiers.TransmutationGold, 1f),
                          HandleMaterialStats.multipliers().durability(0.6f).miningSpeed(1.10f).attackDamage(1.10f).attackSpeed(1.10f).build(),
                          StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.ArcaneGold,
+                         new HeadMaterialStats(66, 9f, Tiers.GOLD, 0.75f),
+                         HandleMaterialStats.multipliers().durability(0.7f).attackDamage(0.90f).miningSpeed(1.25f).attackSpeed(1.20f).build(),
+                         StatlessMaterialStats.BINDING);
 
         addELMeleeHarvest();
         addMalumMeleeHarvest();
@@ -188,10 +192,12 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addMaterialStats(DreamtinkerMaterialIds.shadowSilver,
                          new LimbMaterialStats(360, -0.1f, 0.05f, 0.2f),
                          new GripMaterialStats(-0.2f, -0.1f, 2.5f));
-
         addMaterialStats(DreamtinkerMaterialIds.TransmutationGold,
                          new LimbMaterialStats(120, 0.5f, -0.2f, 0.2f),
                          new GripMaterialStats(-0.2f, 0.2f, 1.0f));
+        addMaterialStats(DreamtinkerMaterialIds.ArcaneGold,
+                         new LimbMaterialStats(32, 0.15f, 0.15f, 0.1f),
+                         new GripMaterialStats(-0.2f, 0.15f, 0f));
 
         addCompactRanged();
     }
@@ -268,10 +274,12 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addArmorShieldStats(DreamtinkerMaterialIds.shadowSilver,
                             PlatingMaterialStats.builder().durabilityFactor(22).armor(2, 4, 5, 3).toughness(1f).knockbackResistance(2f),
                             StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
-
         addArmorShieldStats(DreamtinkerMaterialIds.TransmutationGold,
                             PlatingMaterialStats.builder().durabilityFactor(12).armor(2, 4, 5, 2).toughness(1f),
                             StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
+        addArmorShieldStats(DreamtinkerMaterialIds.ArcaneGold,
+                            PlatingMaterialStats.builder().durabilityFactor(6).armor(1, 3, 4, 1), StatlessMaterialStats.MAILLE);
+
 
         addArmorShieldStats(DreamtinkerMaterialIds.etherium,
                             PlatingMaterialStats.builder().durabilityFactor(132).armor(4f, 9f, 7f, 4f).toughness(4).knockbackResistance(0f),

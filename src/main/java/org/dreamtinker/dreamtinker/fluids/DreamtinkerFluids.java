@@ -271,6 +271,10 @@ public class DreamtinkerFluids {
             registerFluid(FLUIDS, "mercury", 1500, 1000, 10000, 15,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.METAL, 15), 10, 4) {});
 
+    public static final FlowingFluidObject<ForgeFlowingFluid> molten_arcane_gold =
+            registerFluid(FLUIDS, "molten_arcane_gold", 1000, 1000, 10000, 10,
+                          supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.METAL, 10), 10, 4) {});
+
     private static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         // containers
         output.accept(molten_echo_alloy);
@@ -315,5 +319,6 @@ public class DreamtinkerFluids {
         output.accept(molten_shadow_silver);
         output.accept(molten_transmutation_gold);
         output.accept(mercury);
+        output.accept(molten_arcane_gold);
     }
 }
