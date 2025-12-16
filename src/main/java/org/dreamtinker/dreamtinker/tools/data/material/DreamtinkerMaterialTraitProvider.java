@@ -9,6 +9,7 @@ import slimeknights.tconstruct.library.materials.traits.MaterialTraits;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.data.ModifierIds;
+import slimeknights.tconstruct.tools.stats.PlatingMaterialStats;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -94,8 +95,9 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.TransmutationGold, RANGED, effectRemover.getId(), Ids.soul_unchanged);
         addTraits(DreamtinkerMaterialIds.TransmutationGold, ARMOR, SunAway.getId(), Ids.soul_unchanged);
 
-        addDefaultTraits(DreamtinkerMaterialIds.ArcaneGold, TinkerModifiers.golden.getId(), Ids.arcane_hit);
+        addDefaultTraits(DreamtinkerMaterialIds.ArcaneGold, Ids.arcane_hit);
         addTraits(DreamtinkerMaterialIds.ArcaneGold, ARMOR, TinkerModifiers.golden.getId(), ModifierIds.magicProtection, Ids.arcane_protection);
+        addTraits(DreamtinkerMaterialIds.ArcaneGold, PlatingMaterialStats.SHIELD.getId(), ModifierIds.magicProtection, Ids.arcane_protection);
 
 
         callGetOrCreate(this, DreamtinkerMaterialIds.etherium).setTraits(MELEE_HARVEST, List.of(

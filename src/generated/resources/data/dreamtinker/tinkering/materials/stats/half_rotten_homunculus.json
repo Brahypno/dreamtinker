@@ -2,9 +2,9 @@
   "stats": {
     "tconstruct:binding": {},
     "tconstruct:handle": {
-      "durability": -0.3,
+      "durability": -0.1,
       "melee_damage": 0.0,
-      "melee_speed": 0.3,
+      "melee_speed": 0.2,
       "mining_speed": 0.0
     },
     "tconstruct:maille": {}

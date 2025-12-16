@@ -8,9 +8,9 @@
       "mining_speed": 0.1
     },
     "tconstruct:limb": {
-      "accuracy": 0.15,
+      "accuracy": -0.1,
       "draw_speed": 0.1,
-      "durability": 400,
+      "durability": 200,
       "velocity": 0.1
     },
     "tconstruct:maille": {}

@@ -2,7 +2,7 @@
   "stats": {
     "tconstruct:binding": {},
     "tconstruct:grip": {
-      "accuracy": 0.1,
+      "accuracy": 0.15,
       "durability": 1.0,
       "melee_damage": 2.0
     },
@@ -19,10 +19,10 @@
       "mining_tier": "minecraft:iron"
     },
     "tconstruct:limb": {
-      "accuracy": 0.2,
-      "draw_speed": -0.1,
+      "accuracy": 0.1,
+      "draw_speed": -0.2,
       "durability": 1200,
-      "velocity": 0.2
+      "velocity": 0.1
     },
     "tconstruct:maille": {},
     "tconstruct:plating_boots": {
