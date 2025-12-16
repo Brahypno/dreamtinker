@@ -105,6 +105,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
 
         addELMeleeHarvest();
         addMalumMeleeHarvest();
+        addEidolonMeleeHarvest();
     }
 
     private void addELMeleeHarvest() {
@@ -145,6 +146,12 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new HeadMaterialStats(1200, 3.0f, Tiers.NETHERITE, 0f),
                          HandleMaterialStats.multipliers().durability(0.5f).miningSpeed(1.3f).attackDamage(1.2f).attackSpeed(1.2f).build(),
                          StatlessMaterialStats.BINDING);
+    }
+
+    private void addEidolonMeleeHarvest() {
+        addMaterialStats(DreamtinkerMaterialIds.TatteredCloth, StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.WickedWeave, StatlessMaterialStats.BINDING);
+
     }
 
     private void addRanged() {
@@ -225,6 +232,11 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addMaterialStats(DreamtinkerMaterialIds.soul_stained_steel,
                          new LimbMaterialStats(1200, 0.1f, -0.2f, 0.5f),
                          new GripMaterialStats(-0.3f, 0.35f, 0.1f));
+
+        addMaterialStats(DreamtinkerMaterialIds.TatteredCloth,
+                         StatlessMaterialStats.BOWSTRING);
+        addMaterialStats(DreamtinkerMaterialIds.WickedWeave,
+                         StatlessMaterialStats.BOWSTRING);
     }
 
     private void addArmor() {
@@ -290,6 +302,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addArmorShieldStats(DreamtinkerMaterialIds.soul_etherium,
                             PlatingMaterialStats.builder().durabilityFactor(150).armor(10f, 5f, 17f, 6f).toughness(10).knockbackResistance(5f),
                             StatlessMaterialStats.MAILLE);
+
         addArmorShieldStats(DreamtinkerMaterialIds.spirit_fabric,
                             PlatingMaterialStats.builder().durabilityFactor(16).armor(1f, 3f, 4f, 2f).toughness(0).knockbackResistance(0f),
                             StatlessMaterialStats.MAILLE);
@@ -303,6 +316,11 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                             PlatingMaterialStats.builder().durabilityFactor(27).armor(3f, 5f, 6f, 3f).toughness(3).knockbackResistance(2f),
                             StatlessMaterialStats.MAILLE);
         addMaterialStats(DreamtinkerMaterialIds.soul_rock, StatlessMaterialStats.SHIELD_CORE);
+
+
+        addArmorShieldStats(DreamtinkerMaterialIds.WickedWeave,
+                            PlatingMaterialStats.builder().durabilityFactor(21).armor(1f, 0f, 4f, 1f).toughness(0).knockbackResistance(0f),
+                            StatlessMaterialStats.MAILLE);
     }
 
     private void addMisc() {

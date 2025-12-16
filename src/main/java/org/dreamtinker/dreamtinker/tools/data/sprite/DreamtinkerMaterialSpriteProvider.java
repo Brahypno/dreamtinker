@@ -309,6 +309,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .build());
         addELMaterials();
         addMalumMaterials();
+        addEidolonMaterials();
     }
 
     protected void addELMaterials() {
@@ -352,7 +353,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
 
     protected void addMalumMaterials() {
         this.buildMaterial(DreamtinkerMaterialIds.spirit_fabric)
-            .statType(StatlessMaterialStats.BINDING).armor().statType(StatlessMaterialStats.BOWSTRING)
+            .statType(StatlessMaterialStats.BINDING).armor().statType(StatlessMaterialStats.BOWSTRING).repairKit()
             .fallbacks("cloth")
             .transformer(GreyToSpriteTransformer.builder()
                                                 .addARGB(0, 0xFF0D0E0F)
@@ -482,6 +483,31 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(178, 0xFF9A39A3)  // 亮紫/洋红      (154,57,163)
                                                 .addARGB(216, 0xFFAE3CB5)  // 高亮过渡       (~174,60,181)
                                                 .addARGB(255, 0xFFC13FC7)  // 高光：亮洋红紫 (193,63,199)
+                                                .build());
+    }
+
+    protected void addEidolonMaterials() {
+        this.buildMaterial(DreamtinkerMaterialIds.TatteredCloth)
+            .statType(StatlessMaterialStats.BINDING).statType(StatlessMaterialStats.BOWSTRING).repairKit()
+            .fallbacks("cloth")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(63, 0xFF313237)
+                                                .addARGB(102, 0xFF424446)
+                                                .addARGB(140, 0xFF5B5957)
+                                                .addARGB(178, 0xFF74706D)
+                                                .addARGB(216, 0xFF9A9290)
+                                                .addARGB(255, 0xFFC2B7B5)
+                                                .build());
+        this.buildMaterial(DreamtinkerMaterialIds.WickedWeave)
+            .statType(StatlessMaterialStats.BINDING).armor().statType(StatlessMaterialStats.BOWSTRING).repairKit()
+            .fallbacks("cloth")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(63, 0xFF112035)
+                                                .addARGB(102, 0xFF22294C)
+                                                .addARGB(140, 0xFF384185)
+                                                .addARGB(178, 0xFF4A4EA4)
+                                                .addARGB(216, 0xFF756FCC)
+                                                .addARGB(255, 0xFFBDA4DD)
                                                 .build());
     }
 }

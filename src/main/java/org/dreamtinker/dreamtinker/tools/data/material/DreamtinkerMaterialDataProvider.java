@@ -61,6 +61,9 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.malignant_pewter, 4, 45, false, true, modLoaded("malum"));
         addMaterial(DreamtinkerMaterialIds.malignant_gluttony, 5, 50, false, true, modLoaded("malum"));
         addMaterial(DreamtinkerMaterialIds.soul_rock, 2, 10, true, false, modLoaded("malum"));
+
+        addMaterial(DreamtinkerMaterialIds.TatteredCloth, 2, 10, true, false, modLoaded("eidolon"));
+        addMaterial(DreamtinkerMaterialIds.WickedWeave, 3, 10, true, false, modLoaded("eidolon"));
     }
 
     @Override

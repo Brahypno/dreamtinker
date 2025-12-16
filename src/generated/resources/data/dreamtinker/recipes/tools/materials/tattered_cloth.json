@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "eidolon:tattered_cloth"
+  },
+  "material": "dreamtinker:tattered_cloth",
+  "needed": 2,
+  "value": 1
+}

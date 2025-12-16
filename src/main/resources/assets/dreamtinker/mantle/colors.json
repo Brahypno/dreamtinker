@@ -126,7 +126,10 @@
     "golden_face": "#F4D362",
     "love_shooting": "#D3B5CB",
     "arcane_hit": "#EDAE66",
-    "arcane_protection": "#EDAE66"
+    "arcane_protection": "#EDAE66",
+    "eidolon_vulnerable": "#5B5957",
+    "eidolon_warlock": "#384185",
+    "drink_magic": "#384185"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
@@ -162,7 +165,9 @@
     "cold_iron": "#4489CC",
     "shadow_silver": "#7C6220",
     "transmutation_gold": "#DE6428",
-    "arcane_gold": "#EDAE66"
+    "arcane_gold": "#EDAE66",
+    "tattered_cloth": "#5B5957",
+    "wicked_wave": "#384185"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873",

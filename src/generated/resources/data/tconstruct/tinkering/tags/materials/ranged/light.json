@@ -37,6 +37,10 @@
     {
       "id": "dreamtinker:shadow_silver",
       "required": false
+    },
+    {
+      "id": "dreamtinker:wicked_wave",
+      "required": false
     }
   ]
 }

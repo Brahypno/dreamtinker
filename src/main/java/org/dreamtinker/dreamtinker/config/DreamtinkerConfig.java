@@ -160,7 +160,8 @@ public class DreamtinkerConfig {
             builder.comment("Enable this means The wolf wonder would only apply Potion effects").define("TheWolfWonderPotionEffectOnly", false);
     public static final ForgeConfigSpec.ConfigValue<List<? extends String>> TheWolfBlackList =
             builder.comment("Blacklist for the wolf").defineList("wolf_blacklist",
-                                                                 List.of("tconstruct:self_destructing", "minecraft:hero_of_the_village"), // 默认例子（可换）
+                                                                 List.of("tconstruct:self_destructing", "minecraft:hero_of_the_village",
+                                                                         "xaeroworldmap:no_world_map"), // 默认例子（可换）
                                                                  o -> o instanceof String s && isValidIdFormat(s));
 
     public static final ForgeConfigSpec.BooleanValue TheWolfWasEnable = builder.comment("Enable the Wolf Was modifier").define("TheWolfWasEnable", true);

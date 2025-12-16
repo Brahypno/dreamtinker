@@ -126,6 +126,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.soul_etherium, ARMOR, cursed_ring_bound.getId(), ModifierIds.soulbound,
                   Ids.soul_form, soul_blessing.getId());
 
+
         addDefaultTraits(DreamtinkerMaterialIds.spirit_fabric, malum_distortion);
         addTraits(DreamtinkerMaterialIds.spirit_fabric, ARMOR, malum_spirit_attributes);
 
@@ -155,6 +156,11 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.malignant_gluttony, ARMOR, Ids.thundering_curse, malum_thirsty.getId(), malum_spirit_defense.getId());
         addDefaultTraits(DreamtinkerMaterialIds.soul_rock, Ids.malum_spirit_plunder);
 
+
+        addDefaultTraits(DreamtinkerMaterialIds.TatteredCloth, Ids.eidolon_vulnerable);
+
+        addDefaultTraits(DreamtinkerMaterialIds.WickedWeave, Ids.drinker_magic);
+        addTraits(DreamtinkerMaterialIds.WickedWeave, ARMOR, Ids.eidolon_warlock, Ids.drinker_magic);
 
     }
 

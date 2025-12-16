@@ -23,10 +23,7 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.CompoundIngredient;
 import net.minecraftforge.common.crafting.IntersectionIngredient;
-import net.minecraftforge.common.crafting.conditions.ICondition;
-import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
-import net.minecraftforge.common.crafting.conditions.ItemExistsCondition;
-import net.minecraftforge.common.crafting.conditions.OrCondition;
+import net.minecraftforge.common.crafting.conditions.*;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Dreamtinker;
@@ -205,7 +202,9 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                           .addInput(TinkerFluids.moltenGold.ingredient(FluidValues.INGOT))
                           .addInput(DreamtinkerFluids.liquid_amber.ingredient(FluidValues.GEM))
                           .save(wrapped, prefix(TinkerFluids.moltenElectrum, folder));
-        wrapped = withCondition(consumer, tagFilled(DreamtinkerTagKeys.Items.arcaneGoldIngot));
+        wrapped =
+                withCondition(consumer,
+                              new AndCondition(tagFilled(DreamtinkerTagKeys.Items.arcaneGoldIngot), tagFilled(Dreamtinker.forgeItemTag("gems/cinnabar"))));
         AlloyRecipeBuilder.alloy(FluidOutput.fromFluid(DreamtinkerFluids.molten_transmutation_gold.get(), FluidValues.INGOT * 2), 1200)
                           .addInput(DreamtinkerTagKeys.Fluids.molten_arcane_gold, FluidValues.INGOT)
                           .addInput(DreamtinkerFluids.mercury.ingredient(FluidValues.GEM))
@@ -574,6 +573,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         MeltingRecipeBuilder.melting(Ingredient.of(PEWTER_INLAY.get()),
                                      TinkerFluids.moltenPewter, FluidValues.INGOT * 2, 0.05f)
                             .save(wrapped, location(folder + "pewter/inlay"));
+        MeltingRecipeBuilder.melting(Ingredient.of(PEWTER_BLEND.get()),
+                                     TinkerFluids.moltenPewter, FluidValues.INGOT, 0.05f)
+                            .setOre(IMeltingContainer.OreRateType.METAL)
+                            .save(wrapped, location(folder + "pewter/blend"));
 
 
     }
@@ -717,6 +720,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
     private void addCompactMaterialRecipes(Consumer<FinishedRecipe> consumer) {
         addELMaterialRecipes(consumer);
         addMalumMaterialRecipes(consumer);
+        addEidolonMaterialRecipes(consumer);
     }
 
     private void addELMaterialRecipes(Consumer<FinishedRecipe> consumer) {
@@ -764,6 +768,13 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         materialRecipe(consumer, DreamtinkerMaterialIds.refined, Ingredient.of(ItemRegistry.PROCESSED_SOULSTONE.get()), 1, 1,
                        materials_folder + "soul_rock/refined");
 
+    }
+
+    private void addEidolonMaterialRecipes(Consumer<FinishedRecipe> consumer) {
+        materialRecipe(consumer, DreamtinkerMaterialIds.TatteredCloth, Ingredient.of(TATTERED_CLOTH.get()), 1, 2,
+                       materials_folder + "tattered_cloth");
+        materialRecipe(consumer, DreamtinkerMaterialIds.WickedWeave, Ingredient.of(WICKED_WEAVE.get()), 1, 2,
+                       materials_folder + "wicked_wave");
     }
 
     String common_folder = "common/";
@@ -945,6 +956,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         //armor
         armorPlatingBuilder(consumer, DreamtinkerMaterialIds.star_regulus);
         armorPlatingBuilder(consumer, DreamtinkerMaterialIds.spirit_fabric);
+        armorPlatingBuilder(consumer, DreamtinkerMaterialIds.WickedWeave);
         //explode_core
         PartRecipeBuilder.partRecipe(DreamtinkerToolParts.explode_core.get()).setPattern(this.id(DreamtinkerToolParts.explode_core.get()))
                          .setPatternItem(Ingredient.of(DreamtinkerToolParts.explode_core.get())).setCost(8)

@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "eidolon:wicked_weave"
+  },
+  "material": "dreamtinker:wicked_wave",
+  "needed": 2,
+  "value": 1
+}

@@ -133,16 +133,26 @@ public class GeneralHurtHandler {
             if (0 < homunculusLifeCurse)
                 event.setAmount(damageAmount * (1 - offender.getHealth() / offender.getMaxHealth()) *
                                 Math.min(homunculusLifeCurseMaxEffectLevel.get() + 1, homunculusLifeCurse + 1));
-            int arcane_hit_level = DTModifierCheck.getMainhandModifierLevel(offender, DreamtinkerModifiers.Ids.arcane_hit);
-            if (!dmg.is(BYPASSES_ENCHANTMENTS) && 0 < arcane_hit_level && !arcane_hit){
-                DamageSource source = DreamtinkerDamageTypes.source(registryAccess, DreamtinkerDamageTypes.arcane_damage, dmg);
-                arcane_hit = true;
-                float extra = damageAmount * .1f * arcane_hit_level;
-                if (0.5f <= extra){
-                    victim.hurt(source, extra);
-                    event.setAmount(Math.max(0f, damageAmount - extra));
+
+            if (!dmg.is(BYPASSES_ENCHANTMENTS)){
+                int arcane_hit_level = DTModifierCheck.getMainhandModifierLevel(offender, DreamtinkerModifiers.Ids.arcane_hit);
+                if (0 < arcane_hit_level && !arcane_hit){
+                    DamageSource source = DreamtinkerDamageTypes.source(registryAccess, DreamtinkerDamageTypes.arcane_damage, dmg);
+                    arcane_hit = true;
+                    float extra = damageAmount * .1f * arcane_hit_level;
+                    if (0.5f <= extra){
+                        victim.hurt(source, extra);
+                        event.setAmount(Math.max(0f, damageAmount - extra));
+                    }
+                    arcane_hit = false;
                 }
-                arcane_hit = false;
+            }
+            if (dmg.is(TinkerTags.DamageTypes.MAGIC_PROTECTION)){
+                int drink_magic = DTModifierCheck.getEntityModifierNum(offender, DreamtinkerModifiers.Ids.drinker_magic);
+                if (0 < drink_magic){
+                    event.setAmount(event.getAmount() * (1 + drink_magic * 0.05f));
+                    offender.heal(event.getAmount() * drink_magic * 0.05f);
+                }
             }
         }
 

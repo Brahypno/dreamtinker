@@ -1,0 +1,20 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "dreamtinker:drinker_magic"
+    }
+  ],
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "dreamtinker:eidolon_warlock"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:drinker_magic"
+      }
+    ]
+  }
+}

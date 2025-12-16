@@ -3,6 +3,9 @@ package org.dreamtinker.dreamtinker.tools.data;
 import com.aizistral.enigmaticlegacy.api.materials.EnigmaticMaterials;
 import com.aizistral.enigmaticlegacy.registries.EnigmaticEnchantments;
 import com.sammy.malum.registry.common.item.EnchantmentRegistry;
+import elucent.eidolon.registries.EidolonAttributes;
+import elucent.eidolon.registries.EidolonPotions;
+import elucent.eidolon.registries.Registry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffects;
@@ -274,10 +277,11 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                                   .eachLevel(0.05f))
                 .addModule(ProtectionModule.builder()
                                            .sources(DamageSourcePredicate.ANY, DamageSourcePredicate.tag(BYPASSES_ENCHANTMENTS))
-                                           .eachLevel(2.0f));
-
+                                           .eachLevel(3.0f));
+        buildModifier(Ids.drinker_magic);
         addELModifiers();
         addMalumModifiers();
+        addEidolonModifiers();
 
     }
 
@@ -348,6 +352,26 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
         buildModifier(Ids.malum_sol_tiferet, not(DreamtinkerMaterialDataProvider.modLoaded("malum")))
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+    }
+
+    private void addEidolonModifiers() {
+        buildModifier(Ids.eidolon_vulnerable, DreamtinkerMaterialDataProvider.modLoaded("eidolon"))
+                .addModule(MobEffectModule.builder(EidolonPotions.VULNERABLE_EFFECT.get())
+                                          .level(RandomLevelingValue.flat(1))
+                                          .time(RandomLevelingValue.random(20, 10))
+                                          .target(LivingEntityPredicate.ANY)
+                                          .build(),
+                           ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT)
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+        buildModifier(Ids.eidolon_warlock, DreamtinkerMaterialDataProvider.modLoaded("eidolon"))
+                .addModule(AttributeModule.builder(EidolonAttributes.MAGIC_POWER, AttributeModifier.Operation.MULTIPLY_BASE)
+                                          .eachLevel(0.25f))
+                .addModule(new EffectImmunityModule(MobEffects.MOVEMENT_SLOWDOWN))
+                .addModule(ProtectionModule.builder()
+                                           .sources(DamageSourcePredicate.ANY,
+                                                    DamageSourcePredicate.or(DamageSourcePredicate.tag(Registry.FORGE_MAGIC),
+                                                                             DamageSourcePredicate.tag(Registry.FORGE_WITHER)))
+                                           .eachLevel(3.0f));
     }
 
     @Override
