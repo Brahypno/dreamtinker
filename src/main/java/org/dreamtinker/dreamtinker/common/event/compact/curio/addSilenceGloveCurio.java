@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -15,8 +16,10 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.tools.items.SilenceGlove;
+import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.tools.nbt.StatsNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import top.theillusivec4.curios.api.SlotContext;
@@ -26,6 +29,8 @@ import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.UUID;
 import java.util.function.BiConsumer;
+
+import static slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifierHook.HELD_ARMOR_UUID;
 
 public class addSilenceGloveCurio {
     private static final ResourceLocation KEY = Dreamtinker.getLocation("curio_silence_glove");
@@ -62,6 +67,26 @@ public class addSilenceGloveCurio {
                         attributes, "ring", UUID.nameUUIDFromBytes(stack.getItem().toString().getBytes()), extraRings, AttributeModifier.Operation.ADDITION);
                 ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
                 BiConsumer<Attribute, AttributeModifier> attributeConsumer = builder::put;
+                StatsNBT statsNBT = tool.getStats();
+                if (tool.hasTag(TinkerTags.Items.ARMOR)){
+                    UUID tuuid = HELD_ARMOR_UUID[EquipmentSlot.MAINHAND.getIndex()];
+                    double value = (double) (Float) statsNBT.get(ToolStats.ARMOR);
+                    if (value != (double) 0.0F){
+                        builder.put(Attributes.ARMOR, new AttributeModifier(tuuid, "tconstruct.held.armor", value, AttributeModifier.Operation.ADDITION));
+                    }
+
+                    value = (double) (Float) statsNBT.get(ToolStats.ARMOR_TOUGHNESS);
+                    if (value != (double) 0.0F){
+                        builder.put(Attributes.ARMOR_TOUGHNESS,
+                                    new AttributeModifier(tuuid, "tconstruct.held.toughness", value, AttributeModifier.Operation.ADDITION));
+                    }
+
+                    value = (double) (Float) statsNBT.get(ToolStats.KNOCKBACK_RESISTANCE);
+                    if (value != (double) 0.0F){
+                        builder.put(Attributes.KNOCKBACK_RESISTANCE,
+                                    new AttributeModifier(tuuid, "tconstruct.held.knockback_resistance", value, AttributeModifier.Operation.ADDITION));
+                    }
+                }
                 for (ModifierEntry entry : tool.getModifierList()) {
                     entry.getHook(ModifierHooks.ATTRIBUTES).addAttributes(tool, entry, EquipmentSlot.MAINHAND, attributeConsumer);
                 }

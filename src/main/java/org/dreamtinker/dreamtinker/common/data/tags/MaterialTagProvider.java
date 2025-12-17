@@ -19,7 +19,7 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
         this.tag(TinkerTags.Materials.EXCLUDE_FROM_LOOT)
             .add(moonlight_ice, nigrescence_antimony, metallivorous_stibium_lupus, echo_alloy, star_regulus, half_rotten_homunculus, desire_gem, despair_gem)
             .addOptional(etherium, nefarious, soul_etherium,
-                         soul_stained_steel, malignant_pewter, malignant_gluttony, malignant_lead);
+                         soul_stained_steel, malignant_pewter, malignant_gluttony, malignant_lead, PaladinBone);
 
         this.tag(TinkerTags.Materials.NETHER).add(nefarious, amber, scolecite);
         this.tag(TinkerTags.Materials.BARTERED).add(amber, rainbow_honey_crystal, scolecite);

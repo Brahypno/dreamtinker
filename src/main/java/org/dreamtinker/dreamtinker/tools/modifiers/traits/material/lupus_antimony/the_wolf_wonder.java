@@ -19,7 +19,10 @@ import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.*;
@@ -30,6 +33,7 @@ public class the_wolf_wonder extends BattleModifier {
     private static final Set<ResourceLocation> BAD_CACHE = new HashSet<>();
     private static final Set<ResourceLocation> CONFIG_BLACKLIST = new HashSet<>();
     private boolean Blacklist_inited = false;
+    private static List<MobEffect> negatives = List.of();
 
 
     @Override
@@ -37,7 +41,9 @@ public class the_wolf_wonder extends BattleModifier {
         LivingEntity target = context.getLivingTarget();
         if (target == null)
             return knockback;
-        applyRandomEffects(target, context.getAttacker(), 1 < tool.getModifierLevel(DreamtinkerModifiers.despair_mist.getId()));
+        long types = target.getActiveEffects().stream().filter(e -> e.getEffect().getCategory() == MobEffectCategory.HARMFUL).count();
+        if (types < (long) TheWolfWonderEffectNum.get() * modifier.getLevel())
+            applyRandomEffects(target, context.getAttacker(), 1 < tool.getModifierLevel(DreamtinkerModifiers.despair_mist.getId()));
 
         return knockback;
     }
@@ -46,16 +52,18 @@ public class the_wolf_wonder extends BattleModifier {
     public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target) {
         if (target == null)
             return false;
-        applyRandomEffects(target, attacker, 1 < modifiers.getLevel(DreamtinkerModifiers.despair_mist.getId()));
+        long types = target.getActiveEffects().stream().filter(e -> e.getEffect().getCategory() == MobEffectCategory.HARMFUL).count();
+        if (types < (long) TheWolfWonderEffectNum.get() * modifier.getLevel())
+            applyRandomEffects(target, attacker, 1 < modifiers.getLevel(DreamtinkerModifiers.despair_mist.getId()));
         return false;
     }
 
     private void applyRandomEffects(LivingEntity target, LivingEntity attacker, boolean no_repeat) {
         RandomSource rand = target.getRandom();
-        List<MobEffect> negatives =
-                ForgeRegistries.MOB_EFFECTS.getValues().stream()
-                                           .filter(this::filterMobEffects)
-                                           .collect(Collectors.toList());
+        if (negatives.isEmpty())
+            negatives = ForgeRegistries.MOB_EFFECTS.getValues().stream()
+                                                   .filter(this::filterMobEffects)
+                                                   .collect(Collectors.toList());
         if (negatives.isEmpty())
             return;
 
@@ -64,7 +72,8 @@ public class the_wolf_wonder extends BattleModifier {
             Collections.swap(negatives, i, j);
         }
 
-        List<MobEffectInstance> selected_effects = new ArrayList<>();
+        List<MobEffectInstance> selected_effects =
+                new java.util.ArrayList<>(target.getActiveEffects().stream().filter(e -> e.getEffect().getCategory() == MobEffectCategory.HARMFUL).toList());
         for (MobEffect effect : negatives) {
             if (TheWolfWonderEffectNum.get() <= selected_effects.size())
                 break;
