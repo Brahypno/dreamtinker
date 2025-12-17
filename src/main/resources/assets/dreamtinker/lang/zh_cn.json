@@ -496,6 +496,9 @@
   "modifier.dreamtinker.drinker_magic": "饮魔者",
   "modifier.dreamtinker.drinker_magic.flavor": "灵之血",
   "modifier.dreamtinker.drinker_magic.description": "每等级造成额外5%魔法伤害，并恢复造成伤害的一定生命",
+  "modifier.dreamtinker.eidolon_soul_hearts": "骸骨圣骑",
+  "modifier.dreamtinker.eidolon_soul_hearts.flavor": "魂灵之心",
+  "modifier.dreamtinker.eidolon_soul_hearts.description": "免疫中毒，凋灵；每等级获得10持久魂灵之心",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
@@ -716,6 +719,8 @@
   "material.dreamtinker.tattered_cloth.flavor": "谁会穿？",
   "material.dreamtinker.wicked_wave": "邪恶织物",
   "material.dreamtinker.wicked_wave.flavor": "术法之织物",
+  "material.dreamtinker.paladin_bone": "圣骑之骨",
+  "material.dreamtinker.paladin_bone.flavor": "神圣的骨头",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "熔融回响合金",
   "fluid.dreamtinker.molten_echo_alloy": "熔融回响合金",

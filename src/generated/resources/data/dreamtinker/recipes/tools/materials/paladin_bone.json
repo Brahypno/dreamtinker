@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "eidolon:imbued_bones"
+  },
+  "material": "dreamtinker:paladin_bone",
+  "needed": 2,
+  "value": 1
+}

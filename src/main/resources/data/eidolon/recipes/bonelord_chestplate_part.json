@@ -1,0 +1,36 @@
+{
+  "type": "eidolon:worktable",
+  "pattern": [
+    "svs",
+    "bwb",
+    "sbs"
+  ],
+  "reagents": "htlt",
+  "key": {
+    "b": {
+      "item": "eidolon:imbued_bones"
+    },
+    "v": {
+      "item": "tconstruct:chestplate_plating_cast"
+    },
+    "w": {
+      "item": "eidolon:wraith_heart"
+    },
+    "s": {
+      "item": "eidolon:silver_ingot"
+    },
+    "t": {
+      "item": "eidolon:tattered_cloth"
+    },
+    "h": {
+      "item": "eidolon:holy_symbol"
+    },
+    "l": {
+      "item": "eidolon:lesser_soul_gem"
+    }
+  },
+  "result": {
+    "item": "tconstruct:chestplate_plating",
+    "nbt": "{Material:\"dreamtinker:paladin_bone\"}"
+  }
+}

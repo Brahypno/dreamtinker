@@ -319,7 +319,10 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
 
 
         addArmorShieldStats(DreamtinkerMaterialIds.WickedWeave,
-                            PlatingMaterialStats.builder().durabilityFactor(21).armor(1f, 0f, 4f, 1f).toughness(0).knockbackResistance(0f),
+                            PlatingMaterialStats.builder().durabilityFactor(21).armor(1f, 1f, 4f, 1f).toughness(0).knockbackResistance(0f),
+                            StatlessMaterialStats.MAILLE);
+        addArmorShieldStats(DreamtinkerMaterialIds.PaladinBone,
+                            PlatingMaterialStats.builder().durabilityFactor(38).armor(2f, 3.5f, 7f, 2f).toughness(2).knockbackResistance(0f),
                             StatlessMaterialStats.MAILLE);
     }
 

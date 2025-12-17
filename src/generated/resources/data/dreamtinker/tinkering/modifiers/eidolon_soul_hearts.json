@@ -1,0 +1,50 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "eidolon"
+          },
+          {
+            "type": "dreamtinker:mod_compact_config",
+            "modid": "eidolon"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:attribute",
+      "attribute": "eidolon:persistent_soul_hearts",
+      "each_level": 10.0,
+      "operation": "addition",
+      "slots": [
+        "mainhand",
+        "offhand",
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ]
+    },
+    {
+      "type": "tconstruct:effect_immunity",
+      "effect": "minecraft:poison"
+    },
+    {
+      "type": "tconstruct:effect_immunity",
+      "effect": "minecraft:wither"
+    }
+  ],
+  "tooltip_display": "always"
+}

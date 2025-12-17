@@ -372,6 +372,11 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                                     DamageSourcePredicate.or(DamageSourcePredicate.tag(Registry.FORGE_MAGIC),
                                                                              DamageSourcePredicate.tag(Registry.FORGE_WITHER)))
                                            .eachLevel(3.0f));
+        buildModifier(Ids.eidolon_soul_hearts, DreamtinkerMaterialDataProvider.modLoaded("eidolon"))
+                .addModule(AttributeModule.builder(EidolonAttributes.PERSISTENT_SOUL_HEARTS, AttributeModifier.Operation.ADDITION)
+                                          .eachLevel(10f))
+                .addModule(new EffectImmunityModule(MobEffects.POISON))
+                .addModule(new EffectImmunityModule(MobEffects.WITHER));
     }
 
     @Override

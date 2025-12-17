@@ -1,0 +1,33 @@
+{
+  "type": "eidolon:worktable",
+  "pattern": [
+    "bsb",
+    "sws",
+    "s s"
+  ],
+  "reagents": "hlal",
+  "key": {
+    "s": {
+      "item": "eidolon:silver_ingot"
+    },
+    "b": {
+      "item": "eidolon:imbued_bones"
+    },
+    "w": {
+      "item": "tconstruct:leggings_plating_cast"
+    },
+    "h": {
+      "item": "eidolon:holy_symbol"
+    },
+    "a": {
+      "item": "eidolon:enchanted_ash"
+    },
+    "l": {
+      "item": "eidolon:lesser_soul_gem"
+    }
+  },
+  "result": {
+    "item": "tconstruct:leggings_plating",
+    "nbt": "{Material:\"dreamtinker:paladin_bone\"}"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "type": "eidolon:worktable",
+  "pattern": [
+    "bsb",
+    "sws",
+    "   "
+  ],
+  "reagents": "ht t",
+  "key": {
+    "b": {
+      "item": "eidolon:imbued_bones"
+    },
+    "w": {
+      "item": "tconstruct:helmet_plating_cast"
+    },
+    "s": {
+      "item": "eidolon:silver_ingot"
+    },
+    "t": {
+      "item": "eidolon:tattered_cloth"
+    },
+    "h": {
+      "item": "eidolon:holy_symbol"
+    }
+  },
+  "result": {
+    "item": "tconstruct:helmet_plating",
+    "nbt": "{Material:\"dreamtinker:paladin_bone\"}"
+  }
+}

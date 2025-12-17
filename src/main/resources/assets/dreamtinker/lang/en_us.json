@@ -496,6 +496,9 @@
   "modifier.dreamtinker.drinker_magic": "Drinker Magic",
   "modifier.dreamtinker.drinker_magic.flavor": "Spiritual Blood",
   "modifier.dreamtinker.drinker_magic.description": "Deal extra 5% magic damage per level and heal you half of it",
+  "modifier.dreamtinker.eidolon_soul_hearts": "Bone Paladin",
+  "modifier.dreamtinker.eidolon_soul_hearts.flavor": "Cold Heart",
+  "modifier.dreamtinker.eidolon_soul_hearts.description": "Immune to Poison and wither;Gain 10 PERSISTENT SOUL HEARTS per level",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",
@@ -716,6 +719,8 @@
   "material.dreamtinker.tattered_cloth.flavor": "Who will wear this?",
   "material.dreamtinker.wicked_wave": "Wicked Wave",
   "material.dreamtinker.wicked_wave.flavor": "Special wave",
+  "material.dreamtinker.paladin_bone": "Paladin Bone",
+  "material.dreamtinker.paladin_bone.flavor": "Holy Bones",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "Molten echo Alloy",
   "fluid.dreamtinker.molten_echo_alloy": "Molten echo Alloy",

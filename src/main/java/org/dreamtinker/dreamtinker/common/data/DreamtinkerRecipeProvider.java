@@ -775,6 +775,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                        materials_folder + "tattered_cloth");
         materialRecipe(consumer, DreamtinkerMaterialIds.WickedWeave, Ingredient.of(WICKED_WEAVE.get()), 1, 2,
                        materials_folder + "wicked_wave");
+        materialRecipe(consumer, DreamtinkerMaterialIds.PaladinBone, Ingredient.of(IMBUED_BONES.get()), 1, 2,
+                       materials_folder + "paladin_bone");
     }
 
     String common_folder = "common/";
@@ -973,7 +975,6 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                     .save(consumer, location(partFolder + "shield_core_cast"));
         partRecipes(consumer, DreamtinkerToolParts.chainSawTeeth, DreamtinkerToolParts.chainSawTeethCast, 12, partFolder, castFolder);
         partRecipes(consumer, DreamtinkerToolParts.chainSawCore, DreamtinkerToolParts.chainSawCoreCast, 8, partFolder, castFolder);
-        //partRecipes(consumer, DreamtinkerToolParts.memoryOrthant, TinkerSmeltery.pickHeadCast, 2, partFolder, castFolder);
         //five Orthant
         ToolPartItem[] tree_parts =
                 new ToolPartItem[]{DreamtinkerToolParts.memoryOrthant.get(), DreamtinkerToolParts.wishOrthant.get(), DreamtinkerToolParts.soulOrthant.get(), DreamtinkerToolParts.personaOrthant.get(), DreamtinkerToolParts.reasonEmanation.get()};
@@ -998,6 +999,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         malumCompactMaterialBuilder(consumer, DreamtinkerMaterialIds.auric, ItemRegistry.AURIC_EMBERS.get(), StatlessMaterialStats.BINDING.getIdentifier());
 
         malumCompactMaterialBuilder(consumer, DreamtinkerMaterialIds.malignant_lead, ItemRegistry.MALIGNANT_LEAD.get(), HandleMaterialStats.ID);
+
 
     }
 
