@@ -35,6 +35,10 @@
     {
       "id": "dreamtinker:malum_malignant_lead",
       "required": false
+    },
+    {
+      "id": "dreamtinker:paladin_bone",
+      "required": false
     }
   ]
 }

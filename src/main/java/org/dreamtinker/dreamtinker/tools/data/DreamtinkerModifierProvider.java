@@ -45,6 +45,7 @@ import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.impl.BasicModifier;
 import slimeknights.tconstruct.library.modifiers.modules.armor.*;
 import slimeknights.tconstruct.library.modifiers.modules.behavior.AttributeModule;
+import slimeknights.tconstruct.library.modifiers.modules.behavior.MaterialRepairModule;
 import slimeknights.tconstruct.library.modifiers.modules.behavior.ReduceToolDamageModule;
 import slimeknights.tconstruct.library.modifiers.modules.build.*;
 import slimeknights.tconstruct.library.modifiers.modules.combat.ConditionalMeleeDamageModule;
@@ -377,6 +378,8 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                           .eachLevel(10f))
                 .addModule(new EffectImmunityModule(MobEffects.POISON))
                 .addModule(new EffectImmunityModule(MobEffects.WITHER));
+        buildModifier(Ids.eidolon_paladin_bone, DreamtinkerMaterialDataProvider.modLoaded("eidolon"))
+                .addModule(MaterialRepairModule.material(DreamtinkerMaterialIds.PaladinBoneTool).constant(200));
     }
 
     @Override

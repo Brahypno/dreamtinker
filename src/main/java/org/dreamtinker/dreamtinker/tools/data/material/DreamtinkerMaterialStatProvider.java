@@ -151,6 +151,10 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
     private void addEidolonMeleeHarvest() {
         addMaterialStats(DreamtinkerMaterialIds.TatteredCloth, StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.WickedWeave, StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.PaladinBoneTool,
+                         new HeadMaterialStats(200, 3.0f, Tiers.STONE, 1.5f),
+                         HandleMaterialStats.multipliers().durability(0.75f).miningSpeed(0.95f).attackDamage(1.05f).attackSpeed(1.10f).build(),
+                         StatlessMaterialStats.BINDING);
 
     }
 
@@ -237,6 +241,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          StatlessMaterialStats.BOWSTRING);
         addMaterialStats(DreamtinkerMaterialIds.WickedWeave,
                          StatlessMaterialStats.BOWSTRING);
+        addMaterialStats(DreamtinkerMaterialIds.PaladinBoneTool,
+                         new LimbMaterialStats(150, 0.05f, -0.1f, 0.1f),
+                         new GripMaterialStats(-0.15f, 0.10f, 1.5f));
     }
 
     private void addArmor() {

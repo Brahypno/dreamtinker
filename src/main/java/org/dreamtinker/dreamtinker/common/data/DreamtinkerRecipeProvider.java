@@ -775,8 +775,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                        materials_folder + "tattered_cloth");
         materialRecipe(consumer, DreamtinkerMaterialIds.WickedWeave, Ingredient.of(WICKED_WEAVE.get()), 1, 2,
                        materials_folder + "wicked_wave");
-        materialRecipe(consumer, DreamtinkerMaterialIds.PaladinBone, Ingredient.of(IMBUED_BONES.get()), 1, 2,
-                       materials_folder + "paladin_bone");
+        materialRecipe(consumer, DreamtinkerMaterialIds.PaladinBoneTool, Ingredient.of(IMBUED_BONES.get()), 1, 1,
+                       materials_folder + "paladin_bone_tool");
     }
 
     String common_folder = "common/";

@@ -56,6 +56,7 @@ public class DreamtinkerMaterialIds {
     public static final MaterialId TatteredCloth = new MaterialId(new ResourceLocation(MODID, "tattered_cloth"));
     public static final MaterialId WickedWeave = new MaterialId(new ResourceLocation(MODID, "wicked_wave"));
     public static final MaterialId PaladinBone = new MaterialId(new ResourceLocation(MODID, "paladin_bone"));
+    public static final MaterialId PaladinBoneTool = new MaterialId(new ResourceLocation(MODID, "paladin_bone_tool"));
 
 
 }

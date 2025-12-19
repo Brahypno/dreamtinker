@@ -3,7 +3,7 @@
   "ingredient": {
     "item": "eidolon:imbued_bones"
   },
-  "material": "dreamtinker:paladin_bone",
-  "needed": 2,
+  "material": "dreamtinker:paladin_bone_tool",
+  "needed": 1,
   "value": 1
 }

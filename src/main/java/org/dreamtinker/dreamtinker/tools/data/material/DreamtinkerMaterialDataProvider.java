@@ -65,6 +65,7 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.TatteredCloth, 2, 10, true, false, modLoaded("eidolon"));
         addMaterial(DreamtinkerMaterialIds.WickedWeave, 3, 10, true, false, modLoaded("eidolon"));
         addMaterial(DreamtinkerMaterialIds.PaladinBone, 3, 15, false, false, modLoaded("eidolon"));
+        addMaterial(DreamtinkerMaterialIds.PaladinBoneTool, 2, 10, true, false, modLoaded("eidolon"));
     }
 
     @Override

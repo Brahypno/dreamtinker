@@ -1,0 +1,12 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "tconstruct:smite"
+    },
+    {
+      "level": 1,
+      "name": "tconstruct:pierce"
+    }
+  ]
+}

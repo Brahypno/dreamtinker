@@ -501,6 +501,9 @@
   "modifier.dreamtinker.eidolon_soul_hearts": "骸骨圣骑",
   "modifier.dreamtinker.eidolon_soul_hearts.flavor": "魂灵之心",
   "modifier.dreamtinker.eidolon_soul_hearts.description": "免疫中毒，凋灵；每等级获得10持久魂灵之心",
+  "modifier.dreamtinker.eidolon_paladin_bone": "注染之骨",
+  "modifier.dreamtinker.eidolon_paladin_bone.flavor": "骨骨",
+  "modifier.dreamtinker.eidolon_paladin_bone.description": "工具可用注染之骨进行修复",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
@@ -723,6 +726,8 @@
   "material.dreamtinker.wicked_wave.flavor": "术法之织物",
   "material.dreamtinker.paladin_bone": "圣骑之骨",
   "material.dreamtinker.paladin_bone.flavor": "神圣的骨头",
+  "material.dreamtinker.paladin_bone_tool": "圣骑之骨",
+  "material.dreamtinker.paladin_bone_tool.flavor": "神圣的骨头",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "熔融回响合金",
   "fluid.dreamtinker.molten_echo_alloy": "熔融回响合金",

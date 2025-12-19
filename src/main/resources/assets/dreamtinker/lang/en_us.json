@@ -501,6 +501,9 @@
   "modifier.dreamtinker.eidolon_soul_hearts": "Bone Paladin",
   "modifier.dreamtinker.eidolon_soul_hearts.flavor": "Cold Heart",
   "modifier.dreamtinker.eidolon_soul_hearts.description": "Immune to Poison and wither;Gain 10 PERSISTENT SOUL HEARTS per level",
+  "modifier.dreamtinker.eidolon_paladin_bone": "Infused Bone",
+  "modifier.dreamtinker.eidolon_paladin_bone.flavor": "Booon",
+  "modifier.dreamtinker.eidolon_paladin_bone.description": "Tool can be repaired using infused bone",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",
@@ -723,6 +726,8 @@
   "material.dreamtinker.wicked_wave.flavor": "Special wave",
   "material.dreamtinker.paladin_bone": "Paladin Bone",
   "material.dreamtinker.paladin_bone.flavor": "Holy Bones",
+  "material.dreamtinker.paladin_bone_tool": "Paladin Bone",
+  "material.dreamtinker.paladin_bone_tool.flavor": "Holy Bones",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "Molten echo Alloy",
   "fluid.dreamtinker.molten_echo_alloy": "Molten echo Alloy",

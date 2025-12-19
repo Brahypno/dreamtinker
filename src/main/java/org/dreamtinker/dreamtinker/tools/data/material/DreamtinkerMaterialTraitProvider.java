@@ -162,7 +162,8 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.WickedWeave, Ids.drinker_magic);
         addTraits(DreamtinkerMaterialIds.WickedWeave, ARMOR, Ids.eidolon_warlock, Ids.drinker_magic);
 
-        addDefaultTraits(DreamtinkerMaterialIds.PaladinBone, Ids.eidolon_soul_hearts);
+        addDefaultTraits(DreamtinkerMaterialIds.PaladinBone, Ids.eidolon_soul_hearts, Ids.eidolon_paladin_bone);
+        addDefaultTraits(DreamtinkerMaterialIds.PaladinBoneTool, ModifierIds.smite, ModifierIds.pierce);
 
     }
 

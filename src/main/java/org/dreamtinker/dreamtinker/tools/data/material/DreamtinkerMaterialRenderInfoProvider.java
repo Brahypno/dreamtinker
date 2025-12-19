@@ -63,6 +63,7 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
         buildRenderInfo(DreamtinkerMaterialIds.TatteredCloth).color(0xFF5B5957).fallbacks("cloth").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.WickedWeave).color(0xFF384185).fallbacks("cloth").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.PaladinBone).color(0xFF46514F).fallbacks("bone").luminosity(0);
+        buildRenderInfo(DreamtinkerMaterialIds.PaladinBoneTool).color(0xFF46514F).fallbacks("bone").luminosity(0);
 
     }
 

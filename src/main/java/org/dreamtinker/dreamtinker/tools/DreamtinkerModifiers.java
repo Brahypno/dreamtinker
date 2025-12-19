@@ -276,6 +276,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId eidolon_vulnerable = id("eidolon_vulnerable");
         public static final ModifierId eidolon_warlock = id("eidolon_warlock");
         public static final ModifierId eidolon_soul_hearts = id("eidolon_soul_hearts");
+        public static final ModifierId eidolon_paladin_bone = id("eidolon_paladin_bone");
 
 
         private static ModifierId id(String name) {
