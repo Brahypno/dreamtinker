@@ -47,9 +47,7 @@ public class GeneralAttackHandler {
                     if (!(dmg.is(BYPASSES_ARMOR) && dmg.is(BYPASSES_SHIELD) && dmg.is(BYPASSES_INVULNERABILITY) && dmg.is(BYPASSES_COOLDOWN) &&
                           dmg.is(BYPASSES_EFFECTS) &&
                           dmg.is(BYPASSES_RESISTANCE) && dmg.is(BYPASSES_ENCHANTMENTS))){
-
-                        event.setCanceled(true);
-                        transformed = true;
+                        
                         victim.hurt(DreamtinkerDamageTypes.source(registryAccess, DreamtinkerDamageTypes.NULL_VOID, dmg), damageAmount);
                     }
 

@@ -8,15 +8,20 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.utils.MaskService;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
+import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
+import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
@@ -54,6 +59,7 @@ public class despair_wind extends BattleModifier {
                 }
             }
             livingEntity.setAbsorptionAmount(0);
+            livingEntity.invulnerableTime = 0;
             if (livingEntity instanceof ServerPlayer sp){
                 if (sp.isCreative() || sp.isSpectator())
                     return knockback;
@@ -75,8 +81,9 @@ public class despair_wind extends BattleModifier {
 
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        if (null != context.getLivingTarget() && !context.getLivingTarget().level().isClientSide)
+        if (null != context.getLivingTarget() && !context.getLivingTarget().level().isClientSide){
             remove_attributes(context.getLivingTarget());
+        }
     }
 
     @Override
@@ -94,6 +101,13 @@ public class despair_wind extends BattleModifier {
                 attr_instance.removeModifier(uuid);
             }
         }
+    }
+
+    @Override
+    public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target) {
+        if (null != target)
+            target.invulnerableTime = 0;
+        return false;
     }
 
     private static void dropAllEquipmentLikeDeath(LivingEntity e) {

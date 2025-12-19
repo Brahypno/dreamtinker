@@ -32,7 +32,7 @@ public class the_wolf_wonder extends BattleModifier {
     private static final int maxDuration = TheWolfWonderEffectMaxTime.get() * 20;
     private static final Set<ResourceLocation> BAD_CACHE = new HashSet<>();
     private static final Set<ResourceLocation> CONFIG_BLACKLIST = new HashSet<>();
-    private boolean Blacklist_inited = false;
+    private static boolean Blacklist_inited = false;
     private static List<MobEffect> negatives = List.of();
 
 
@@ -62,7 +62,7 @@ public class the_wolf_wonder extends BattleModifier {
         RandomSource rand = target.getRandom();
         if (negatives.isEmpty())
             negatives = ForgeRegistries.MOB_EFFECTS.getValues().stream()
-                                                   .filter(this::filterMobEffects)
+                                                   .filter(the_wolf_wonder::filterMobEffects)
                                                    .collect(Collectors.toList());
         if (negatives.isEmpty())
             return;
@@ -110,7 +110,7 @@ public class the_wolf_wonder extends BattleModifier {
         }
     }
 
-    private boolean filterMobEffects(MobEffect effect) {
+    public static boolean filterMobEffects(MobEffect effect) {
         if (!Blacklist_inited){
             Blacklist_inited = true;
             loadConfigBlacklist(TheWolfBlackList.get());

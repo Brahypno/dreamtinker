@@ -5,8 +5,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,6 +17,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.ForgeMod;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -28,6 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.dreamtinker.dreamtinker.tools.modifiers.traits.material.lupus_antimony.the_wolf_wonder.filterMobEffects;
 import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.NO_COOLDOWN;
 
 public class despair_mist extends BattleModifier {
@@ -46,12 +49,12 @@ public class despair_mist extends BattleModifier {
             InfectDespair(tool, player, entry.getLevel());
     }
 
-    public void onLeftClickBlock(IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot, BlockState state, BlockPos pos) {
+    public void onLeftClickBlock(PlayerInteractEvent.LeftClickBlock event, IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot, BlockState state, BlockPos pos) {
         if (!level.isClientSide)
             InfectDespair(tool, player, entry.getLevel());
     }
 
-    public void onLeftClickEntity(IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot, Entity target) {
+    public void onLeftClickEntity(AttackEntityEvent event, IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot, Entity target) {
         if (!level.isClientSide)
             InfectDespair(tool, player, entry.getLevel());
     }
@@ -65,6 +68,7 @@ public class despair_mist extends BattleModifier {
         List<LivingEntity> nearby = player.level().getEntitiesOfClass(
                 LivingEntity.class, box, LivingEntity::isAlive);
         Map<MobEffect, MobEffectInstance> best = collectBestNegatives(nearby, level);
+        System.out.println(best);
         for (LivingEntity livingEntity : nearby) {
             if (player.isAlliedTo(livingEntity) || livingEntity instanceof ArmorStand || livingEntity.is(player) ||
                 null != livingEntity.getTeam() && player.isAlliedTo(livingEntity.getTeam()))
@@ -102,8 +106,8 @@ public class despair_mist extends BattleModifier {
         for (LivingEntity e : nearby) {
             for (MobEffectInstance inst : e.getActiveEffects()) {
                 MobEffect eff = inst.getEffect();
-                if (eff.getCategory() != MobEffectCategory.HARMFUL)
-                    continue; // 只要负面
+                if (!filterMobEffects(eff))
+                    continue;
 
                 MobEffectInstance cur = best.get(eff);
                 if (cur == null
@@ -113,7 +117,7 @@ public class despair_mist extends BattleModifier {
                     best.put(eff, new MobEffectInstance(
                             eff,
                             inst.getDuration() + level * 20,
-                            inst.getAmplifier() + level,
+                            inst.getAmplifier() + e.level().random.nextFloat() < 0.1 ? (eff.equals(MobEffects.HARM) ? 0 : 1) : 0,
                             inst.isAmbient(),
                             inst.isVisible(),
                             inst.showIcon()
