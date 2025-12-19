@@ -68,7 +68,6 @@ public class despair_mist extends BattleModifier {
         List<LivingEntity> nearby = player.level().getEntitiesOfClass(
                 LivingEntity.class, box, LivingEntity::isAlive);
         Map<MobEffect, MobEffectInstance> best = collectBestNegatives(nearby, level);
-        System.out.println(best);
         for (LivingEntity livingEntity : nearby) {
             if (player.isAlliedTo(livingEntity) || livingEntity instanceof ArmorStand || livingEntity.is(player) ||
                 null != livingEntity.getTeam() && player.isAlliedTo(livingEntity.getTeam()))

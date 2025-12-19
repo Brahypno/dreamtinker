@@ -3,10 +3,12 @@ package org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
@@ -14,6 +16,7 @@ import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -24,34 +27,67 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.TierSortingRegistry;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.dreamtinker.dreamtinker.library.client.PlayerKeyStateProvider;
+import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.modifiers.DreamtinkerHook;
 import org.dreamtinker.dreamtinker.library.modifiers.hook.LeftClickHook;
-import org.dreamtinker.dreamtinker.network.KeyStateMsg;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.jetbrains.annotations.NotNull;
+import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.behavior.ProcessLootModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.LootingModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.KeybindInteractModifierHook;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
+import slimeknights.tconstruct.library.tools.context.LootingContext;
 import slimeknights.tconstruct.library.tools.helper.ToolHarvestLogic;
 import slimeknights.tconstruct.library.tools.item.ModifiableItem;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
+import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
+import javax.annotation.Nullable;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class foundationWill extends Modifier implements LeftClickHook, ProcessLootModifierHook {
+public class foundationWill extends Modifier implements LeftClickHook, ProcessLootModifierHook, KeybindInteractModifierHook, TooltipModifierHook, LootingModifierHook {
+    private final ResourceLocation TAG_MOD = Dreamtinker.getLocation("foundation_mode");
+
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        hookBuilder.addHook(this, ModifierHooks.PROCESS_LOOT, DreamtinkerHook.LEFT_CLICK);
+        hookBuilder.addHook(this, ModifierHooks.PROCESS_LOOT, DreamtinkerHook.LEFT_CLICK, ModifierHooks.ARMOR_INTERACT, ModifierHooks.TOOLTIP,
+                            ModifierHooks.WEAPON_LOOTING);
         super.registerHooks(hookBuilder);
+    }
+
+    @Override
+    public boolean startInteract(IToolStackView tool, ModifierEntry modifier, Player player, EquipmentSlot slot, TooltipKey keyModifier) {
+        if (player.level().isClientSide)
+            return false;
+        if (player.isUsingItem())
+            return false;
+        ModDataNBT dataNBT = tool.getPersistentData();
+        dataNBT.putInt(TAG_MOD, (dataNBT.getInt(TAG_MOD) + 1) % 2);
+        return true;
+    }
+
+    @Override
+    public void addTooltip(IToolStackView tool, @NotNull ModifierEntry modifier, @Nullable Player player, List<Component> tooltip, TooltipKey tooltipKey, TooltipFlag tooltipFlag) {
+        if (tool instanceof ToolStack && tooltipKey.isShiftOrUnknown()){
+            ModDataNBT nbt = tool.getPersistentData();
+            int mod = nbt.getInt(TAG_MOD);
+            tooltip.add(Component.translatable("modifier.dreamtinker.mod.foundation_will" + "_" + mod)
+                                 .withStyle(this.getDisplayName().getStyle()));
+
+
+        }
     }
 
     @Override
@@ -72,21 +108,41 @@ public class foundationWill extends Modifier implements LeftClickHook, ProcessLo
     }
 
     @Override
+    public int updateLooting(IToolStackView iToolStackView, ModifierEntry modifierEntry, LootingContext lootingContext, int i) {
+        ModDataNBT dataNBT = iToolStackView.getPersistentData();
+        if (1 == dataNBT.getInt(TAG_MOD))
+            return i + 3 * modifierEntry.getLevel();
+        return i;
+    }
+
+    @Override
+    public void onLeftClickEntity(AttackEntityEvent event, IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot, Entity target) {
+        ModDataNBT dataNBT = tool.getPersistentData();
+        if (1 == dataNBT.getInt(TAG_MOD)){
+
+        }
+
+    }
+
+    @Override
     public void onLeftClickEmpty(IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot) {
-        foundationWillWrapper(entry, player, level, equipmentSlot);
+        ModDataNBT dataNBT = tool.getPersistentData();
+        if (0 == dataNBT.getInt(TAG_MOD))
+            foundationWillWrapper(entry, player, level, equipmentSlot);
     }
 
     @Override
     public void onLeftClickBlock(PlayerInteractEvent.LeftClickBlock event, IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot, BlockState state, BlockPos pos) {
-        foundationWillWrapper(entry, player, level, equipmentSlot);
+        ModDataNBT dataNBT = tool.getPersistentData();
+        if (0 == dataNBT.getInt(TAG_MOD))
+            foundationWillWrapper(entry, player, level, equipmentSlot);
     }
 
+
     private void foundationWillWrapper(ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot) {
-        boolean weapon_interact = player.getCapability(PlayerKeyStateProvider.PlayerKeyState.CAP)
-                                        .map(cap -> cap.isDown(KeyStateMsg.KeyKind.TOOL_INTERACT))
-                                        .orElse(false);
-        if (!level.isClientSide && EquipmentSlot.MAINHAND == equipmentSlot && weapon_interact){
+        if (!level.isClientSide && EquipmentSlot.MAINHAND == equipmentSlot){
             List<BlockPos> cluster = pickSameBlocksAlongLook(player, /*每节点最多扩展*/ 3 * entry.getLevel(), /*最大总数*/ 16 * entry.getLevel());
+            int dig = 0;
             for (BlockPos pos : cluster)
                 if (!ToolStack.from(player.getMainHandItem()).isBroken()){
                     if (entry.getLevel() < player.totalExperience && ToolHarvestLogic.handleBlockBreak(player.getMainHandItem(), pos, player)){
@@ -96,9 +152,10 @@ public class foundationWill extends Modifier implements LeftClickHook, ProcessLo
                                                                      0.01, 0.01, 0.01,     // dx, dy, dz（随机扩散）
                                                                      0.0                   // speed（0 表示静止；想要缓慢前进的观感可以设 0.02）
                         );
-                        player.giveExperiencePoints(-entry.getLevel());
+                        dig++;
                     }
                 }
+            player.giveExperiencePoints(-entry.getLevel() * dig / 10);
         }
     }
 
