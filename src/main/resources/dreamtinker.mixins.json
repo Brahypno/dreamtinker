@@ -8,7 +8,7 @@
     "BowItemMixin",
     "ModifiableBowItemMixin",
     "isInvertedHealAndHarmMixin",
-    "malum_mixin.ExtraMalumModifier",
+    "GeneralCompact.ExtraSCYTHEModifier",
     "enigmatic_legacy_mixin.EnigmaticEventHandlerMixin",
     "enigmatic_legacy_mixin.SuperpositionHandlerMixin",
     "malum_mixin.HiddenTagRegistryMixin",

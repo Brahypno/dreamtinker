@@ -83,7 +83,7 @@ public class foundationWill extends Modifier implements LeftClickHook, ProcessLo
         if (tool instanceof ToolStack && tooltipKey.isShiftOrUnknown()){
             ModDataNBT nbt = tool.getPersistentData();
             int mod = nbt.getInt(TAG_MOD);
-            tooltip.add(Component.translatable("modifier.dreamtinker.mod.foundation_will" + "_" + mod)
+            tooltip.add(Component.translatable("modifier.dreamtinker.foundation_will" + "_" + mod)
                                  .withStyle(this.getDisplayName().getStyle()));
 
 
@@ -110,7 +110,7 @@ public class foundationWill extends Modifier implements LeftClickHook, ProcessLo
     @Override
     public int updateLooting(IToolStackView iToolStackView, ModifierEntry modifierEntry, LootingContext lootingContext, int i) {
         ModDataNBT dataNBT = iToolStackView.getPersistentData();
-        if (1 == dataNBT.getInt(TAG_MOD))
+        if (0 == dataNBT.getInt(TAG_MOD))
             return i + 3 * modifierEntry.getLevel();
         return i;
     }
@@ -118,7 +118,7 @@ public class foundationWill extends Modifier implements LeftClickHook, ProcessLo
     @Override
     public void onLeftClickEntity(AttackEntityEvent event, IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot, Entity target) {
         ModDataNBT dataNBT = tool.getPersistentData();
-        if (1 == dataNBT.getInt(TAG_MOD)){
+        if (0 == dataNBT.getInt(TAG_MOD)){
 
         }
 
@@ -127,14 +127,14 @@ public class foundationWill extends Modifier implements LeftClickHook, ProcessLo
     @Override
     public void onLeftClickEmpty(IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot) {
         ModDataNBT dataNBT = tool.getPersistentData();
-        if (0 == dataNBT.getInt(TAG_MOD))
+        if (1 == dataNBT.getInt(TAG_MOD))
             foundationWillWrapper(entry, player, level, equipmentSlot);
     }
 
     @Override
     public void onLeftClickBlock(PlayerInteractEvent.LeftClickBlock event, IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot, BlockState state, BlockPos pos) {
         ModDataNBT dataNBT = tool.getPersistentData();
-        if (0 == dataNBT.getInt(TAG_MOD))
+        if (1 == dataNBT.getInt(TAG_MOD))
             foundationWillWrapper(entry, player, level, equipmentSlot);
     }
 

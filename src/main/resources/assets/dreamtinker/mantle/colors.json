@@ -131,7 +131,8 @@
     "eidolon_warlock": "#384185",
     "drink_magic": "#384185",
     "eidolon_soul_hearts": "#46514F",
-    "eidolon_paladin_bone": "#46514F"
+    "eidolon_paladin_bone": "#46514F",
+    "eidolon_reaper": "#5B8A72"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",

@@ -23,10 +23,7 @@ public class BlockViewerService {
     private static final java.util.Map<java.util.UUID, BlockViewerService.State> STATES = new java.util.HashMap<>();
 
     private static long now(ServerPlayer sp) {return sp.serverLevel().getGameTime();}
-
-    /**
-     * 只在“未开”或“颜色改变”时发送；否则不动（去重）
-     */
+    
     public static void ensureOn(ServerPlayer sp, ResourceLocation loc, int Redius) {
         var s = STATES.get(sp.getUUID());
         if (s != null && s.enabled && s.location == loc)

@@ -32,6 +32,7 @@ import org.dreamtinker.dreamtinker.tools.modifiers.tools.tntarrow.strong_explode
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.spiritual_weapon_transformation;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.weapon_transformation;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.*;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.eidolon.EidolonReaper;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.*;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.etherium.astral_break;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.etherium.etherium_protection;
@@ -73,11 +74,15 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         if (ModList.get().isLoaded("malum")){
             MALUM_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         }
+        if (ModList.get().isLoaded("eidolon")){
+            EIDOLON_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        }
     }
 
     public static ModifierDeferredRegister MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     public static ModifierDeferredRegister EL_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     public static ModifierDeferredRegister MALUM_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
+    public static ModifierDeferredRegister EIDOLON_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     //Mashuo
     public static final StaticModifier<realSweep> real_sweep = MODIFIERS.register("real_sweep", realSweep::new);
     public static final StaticModifier<strong_heavy> strong_heavy = MODIFIERS.register("strong_heavy", strong_heavy::new);
@@ -207,6 +212,9 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             MALUM_MODIFIERS.register("malum_sol_tiferet", MalumSolTiferet::new);
     public static final StaticModifier<malumCatalystLobber> malum_catalyst_lobber =
             MALUM_MODIFIERS.register("malum_catalyst_lobber", malumCatalystLobber::new);
+
+    public static final StaticModifier<EidolonReaper> eidolon_reaper =
+            EIDOLON_MODIFIERS.register("eidolon_reaper", EidolonReaper::new);
 
     public static class Ids {
         public static final ModifierId long_tool = id("long_tool");

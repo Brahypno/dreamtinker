@@ -53,6 +53,7 @@ public class DreamtinkerTagKeys {
             return TagKey.create(Registries.ITEM, new ResourceLocation(path));
         }
 
+        public static final TagKey<Item> dt_scythe = dreamtinkerTag("tools/scythe");
         public static final TagKey<Item> raw_stibnite = forgeTag("raw_materials/stibnite");
         public static final TagKey<Item> weapon_slot_excluded = dreamtinkerTag("modifiable/excluded_weapon_slot");
         public static final TagKey<Item> HANDS = modTag("curios:hands");

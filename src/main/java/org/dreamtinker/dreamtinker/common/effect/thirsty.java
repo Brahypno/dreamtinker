@@ -21,6 +21,9 @@ public class thirsty extends MobEffect {
             new ResourceLocation("malum", "silenced");
     private static final ResourceLocation Deliverance =
             new ResourceLocation("malum", "imminent_deliverance");
+    private static MobEffect gluttony;
+    private static MobEffect silenced;
+    private static MobEffect deliverance;
 
     @Override
     public boolean isDurationEffectTick(int duration, int amplifier) {
@@ -59,9 +62,9 @@ public class thirsty extends MobEffect {
 
             }
         }else {
-            if (null == silenced)
+            if (null != Silenced() && null == silenced)
                 entity.addEffect(new MobEffectInstance(Silenced(), 200, amplifier, true, false));
-            else if (silenced.getAmplifier() < amplifier)
+            else if (null != silenced && silenced.getAmplifier() < amplifier)
                 EntityHelper.amplifyEffect(silenced, entity, amplifier, amplifier);
             if (null == deliverance)
                 entity.addEffect(new MobEffectInstance(Deliverance(), 200, amplifier, true, false));
@@ -70,21 +73,28 @@ public class thirsty extends MobEffect {
         }
     }
 
+
     public static MobEffect Gluttony() {
         if (!ModList.get().isLoaded("malum"))
             return null;
-        return ForgeRegistries.MOB_EFFECTS.getValue(Gluttony);
+        if (null == gluttony)
+            gluttony = ForgeRegistries.MOB_EFFECTS.getValue(Gluttony);
+        return gluttony;
     }
 
     private static MobEffect Silenced() {
         if (!ModList.get().isLoaded("malum"))
             return null;
-        return ForgeRegistries.MOB_EFFECTS.getValue(Silenced);
+        if (null == silenced)
+            silenced = ForgeRegistries.MOB_EFFECTS.getValue(Silenced);
+        return silenced;
     }
 
     private static MobEffect Deliverance() {
         if (!ModList.get().isLoaded("malum"))
             return null;
-        return ForgeRegistries.MOB_EFFECTS.getValue(Deliverance);
+        if (null == deliverance)
+            deliverance = ForgeRegistries.MOB_EFFECTS.getValue(Deliverance);
+        return deliverance;
     }
 }
