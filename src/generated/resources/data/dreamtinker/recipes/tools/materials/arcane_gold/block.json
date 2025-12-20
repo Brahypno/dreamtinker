@@ -3,7 +3,7 @@
   "ingredient": {
     "tag": "forge:storage_blocks/arcane_gold"
   },
-  "material": "dreamtinker:transmutation_gold",
+  "material": "dreamtinker:arcane_gold",
   "needed": 1,
   "value": 9
 }

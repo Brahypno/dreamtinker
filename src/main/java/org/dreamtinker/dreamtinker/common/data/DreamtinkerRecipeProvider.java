@@ -710,9 +710,9 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                materials_folder);
         materialRecipe(consumer, DreamtinkerMaterialIds.ArcaneGold, Ingredient.of(DreamtinkerTagKeys.Items.arcaneGoldIngot), 1, 1,
                        materials_folder + "arcane_gold/ingot");
-        materialRecipe(consumer, DreamtinkerMaterialIds.TransmutationGold, Ingredient.of(DreamtinkerTagKeys.Items.arcaneGoldNugget), 1, 9,
+        materialRecipe(consumer, DreamtinkerMaterialIds.ArcaneGold, Ingredient.of(DreamtinkerTagKeys.Items.arcaneGoldNugget), 1, 9,
                        materials_folder + "arcane_gold/nugget");
-        materialRecipe(consumer, DreamtinkerMaterialIds.TransmutationGold, Ingredient.of(DreamtinkerTagKeys.Items.arcaneGoldBlock), 9, 1,
+        materialRecipe(consumer, DreamtinkerMaterialIds.ArcaneGold, Ingredient.of(DreamtinkerTagKeys.Items.arcaneGoldBlock), 9, 1,
                        materials_folder + "arcane_gold/block");
 
     }
