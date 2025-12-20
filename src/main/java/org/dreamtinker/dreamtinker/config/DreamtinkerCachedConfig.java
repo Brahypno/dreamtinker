@@ -60,6 +60,7 @@ public class DreamtinkerCachedConfig {
     public static final ConfigLazy<Double> DespairShade = lazDoubleInSpec(DreamtinkerConfig.DespairShade);
     public static final ConfigLazy<Double> rainbowHoneyRate = lazDoubleInSpec(DreamtinkerConfig.rainbowHoneyRate);
     public static final ConfigLazy<Integer> ChainSawEnergyCost = lazIntInSpec(DreamtinkerConfig.ChainSawEnergyCost);
+    public static final ConfigLazy<Boolean> RedShadeEnable = lazBoolInSpec(DreamtinkerConfig.RedShadeEnable);
 
     public static final ConfigLazy<java.util.List<Double>> TheSplendourHeart =
             lazDoubleList(DreamtinkerConfig.TheSplendourHeart,

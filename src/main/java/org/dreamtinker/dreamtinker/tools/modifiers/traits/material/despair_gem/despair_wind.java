@@ -27,6 +27,7 @@ import java.util.Arrays;
 import java.util.UUID;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.DespairShade;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.RedShadeEnable;
 
 public class despair_wind extends BattleModifier {
     @Override
@@ -36,7 +37,7 @@ public class despair_wind extends BattleModifier {
         if (holder instanceof ServerPlayer player){
             if ((isCorrectSlot || isSelected) && world.getGameTime() % 20 == 0)
                 if (DespairShade.get() < world.random.nextFloat())
-                    MaskService.ensureOn(player, 0xAC8A221C, 100);
+                    MaskService.ensureOn(player, RedShadeEnable.get() ? 0xAC8A221C : 0xDC3D3A3A, 100);
             MaskService.ensureOff(player, 100);
         }
     }

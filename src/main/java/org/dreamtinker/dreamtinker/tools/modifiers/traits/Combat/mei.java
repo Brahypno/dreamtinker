@@ -39,6 +39,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.RedShadeEnable;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.RedTime;
 
 public class mei extends BattleModifier {
@@ -182,7 +183,7 @@ public class mei extends BattleModifier {
                         }
                     }
                 }
-                if (250 <= level)
+                if (250 <= level || !RedShadeEnable.get())
                     MaskService.ensureOn(player, 0xDC3D3A3A, -1);
                 else if (200 <= level)
                     MaskService.ensureOn(player, 0xAC8A221C, -1);

@@ -114,7 +114,7 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.IntValue glacialRiverRange =
             builder.comment("Range that glacial river effect").defineInRange("GlacialRiverRange", 5, 1, 1000);
     public static final ForgeConfigSpec.BooleanValue glacialRiverKillPlayer =
-            builder.comment("Does Glacial river kill player? 0=no").define("GlacialRiverKillPlayer", false);
+            builder.comment("Does Glacial river kill player? False will not kill").define("GlacialRiverKillPlayer", false);
 
     static {builder.comment("\nEcho Shard: ");}
 
@@ -138,6 +138,9 @@ public class DreamtinkerConfig {
             builder.comment("status boot everytime for ewige_widerkunft").defineInRange("Prometheus", 0.13, 0, 1);
     public static final ForgeConfigSpec.IntValue CentralFlame =
             builder.comment("How many Spins can ewige_widerkunft do?").defineInRange("CentralFlame", 12, 1, Integer.MAX_VALUE);
+
+    public static final ForgeConfigSpec.BooleanValue RedShadeEnable =
+            builder.comment("Change to false if you think the red shade hurt your eyes, then Dark one would be instead").define("RedShadeEnable", true);
 
     public static final ForgeConfigSpec.BooleanValue BurnInVainRandomProj =
             builder.comment("Allow Burn in Vain Modifier summon random Projectile when shooting").define("BurnInVainRandomProj", true);
