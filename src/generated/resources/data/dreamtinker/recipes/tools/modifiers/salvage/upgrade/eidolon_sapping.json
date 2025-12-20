@@ -13,22 +13,22 @@
           "values": [
             {
               "type": "forge:mod_loaded",
-              "modid": "enigmaticlegacy"
+              "modid": "eidolon"
             },
             {
               "type": "dreamtinker:mod_compact_config",
-              "modid": "enigmaticlegacy"
+              "modid": "eidolon"
             }
           ]
         }
       ]
     }
   ],
-  "modifier": "dreamtinker:eldritch_pan",
+  "modifier": "dreamtinker:eidolon_sapping",
   "slots": {
-    "abilities": 1
+    "upgrades": 1
   },
   "tools": {
-    "tag": "tconstruct:modifiable/melee/primary"
+    "tag": "tconstruct:modifiable/melee"
   }
 }

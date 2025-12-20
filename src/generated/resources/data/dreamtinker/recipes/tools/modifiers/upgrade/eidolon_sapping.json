@@ -1,5 +1,6 @@
 {
-  "type": "tconstruct:modifier_salvage",
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
   "conditions": [
     {
       "type": "forge:or",
@@ -13,22 +14,30 @@
           "values": [
             {
               "type": "forge:mod_loaded",
-              "modid": "enigmaticlegacy"
+              "modid": "eidolon"
             },
             {
               "type": "dreamtinker:mod_compact_config",
-              "modid": "enigmaticlegacy"
+              "modid": "eidolon"
             }
           ]
         }
       ]
     }
   ],
-  "modifier": "dreamtinker:eldritch_pan",
+  "inputs": [
+    {
+      "item": "eidolon:sapping_sword"
+    }
+  ],
+  "level": {
+    "max": 3
+  },
+  "result": "dreamtinker:eidolon_sapping",
   "slots": {
-    "abilities": 1
+    "upgrades": 1
   },
   "tools": {
-    "tag": "tconstruct:modifiable/melee/primary"
+    "tag": "tconstruct:modifiable/melee"
   }
 }

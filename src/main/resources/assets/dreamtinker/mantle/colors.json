@@ -132,7 +132,10 @@
     "drink_magic": "#384185",
     "eidolon_soul_hearts": "#46514F",
     "eidolon_paladin_bone": "#46514F",
-    "eidolon_reaper": "#5B8A72"
+    "eidolon_reaper": "#5B8A72",
+    "eidolon_sapping": "#D12943",
+    "eidolon_death_bringer": "#B0D2B2",
+    "eidolon_bone_chill": "#69B5DB"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",

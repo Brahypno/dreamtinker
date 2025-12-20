@@ -14,11 +14,11 @@
           "values": [
             {
               "type": "forge:mod_loaded",
-              "modid": "enigmaticlegacy"
+              "modid": "eidolon"
             },
             {
               "type": "dreamtinker:mod_compact_config",
-              "modid": "enigmaticlegacy"
+              "modid": "eidolon"
             }
           ]
         }
@@ -27,16 +27,29 @@
   ],
   "inputs": [
     {
-      "amount_needed": 10,
-      "item": "minecraft:weeping_vines"
+      "tag": "forge:gems/shadow_gem"
     },
     {
-      "item": "minecraft:enchanting_table"
+      "amount_needed": 6,
+      "tag": "forge:bones"
+    },
+    {
+      "item": "minecraft:skeleton_skull"
+    },
+    {
+      "item": "minecraft:wither_skeleton_skull"
+    },
+    {
+      "amount_needed": 2,
+      "item": "eidolon:death_essence"
     }
   ],
   "level": 1,
-  "result": "dreamtinker:el_sorrow",
+  "result": "dreamtinker:eidolon_death_bringer",
+  "slots": {
+    "upgrades": 1
+  },
   "tools": {
-    "tag": "tconstruct:modifiable/armor"
+    "tag": "dreamtinker:tools/scythe"
   }
 }

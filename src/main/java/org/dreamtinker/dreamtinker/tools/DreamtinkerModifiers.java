@@ -32,7 +32,9 @@ import org.dreamtinker.dreamtinker.tools.modifiers.tools.tntarrow.strong_explode
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.spiritual_weapon_transformation;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.weapon_transformation;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.*;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.eidolon.EidolonDeathBringer;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.eidolon.EidolonReaper;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.eidolon.EidolonSapping;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.*;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.etherium.astral_break;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.etherium.etherium_protection;
@@ -215,6 +217,10 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
 
     public static final StaticModifier<EidolonReaper> eidolon_reaper =
             EIDOLON_MODIFIERS.register("eidolon_reaper", EidolonReaper::new);
+    public static final StaticModifier<EidolonSapping> eidolon_sapping =
+            EIDOLON_MODIFIERS.register("eidolon_sapping", EidolonSapping::new);
+    public static final StaticModifier<EidolonDeathBringer> eidolon_death_bringer =
+            EIDOLON_MODIFIERS.register("eidolon_death_bringer", EidolonDeathBringer::new);
 
     public static class Ids {
         public static final ModifierId long_tool = id("long_tool");
@@ -285,6 +291,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId eidolon_warlock = id("eidolon_warlock");
         public static final ModifierId eidolon_soul_hearts = id("eidolon_soul_hearts");
         public static final ModifierId eidolon_paladin_bone = id("eidolon_paladin_bone");
+        public static final ModifierId eidolon_bone_chill = id("eidolon_bone_chill");
 
 
         private static ModifierId id(String name) {

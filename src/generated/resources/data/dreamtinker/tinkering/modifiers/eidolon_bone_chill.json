@@ -1,0 +1,43 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "eidolon"
+          },
+          {
+            "type": "dreamtinker:mod_compact_config",
+            "modid": "eidolon"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:no_levels",
+  "modules": [
+    {
+      "type": "tconstruct:mob_effect",
+      "effect": "eidolon:chilled",
+      "hooks": [
+        "tconstruct:melee_hit",
+        "tconstruct:projectile_hit"
+      ],
+      "level": {
+        "flat": 1.0
+      },
+      "time": {
+        "flat": 20.0,
+        "random": 10.0
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}
