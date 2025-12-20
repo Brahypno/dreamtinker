@@ -22,6 +22,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -34,6 +35,7 @@ import net.minecraftforge.network.NetworkHooks;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
+import org.dreamtinker.dreamtinker.utils.DirectionalResistanceExplosionDamageCalculator;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -180,6 +182,7 @@ public class TNTArrow extends ModifiableItem {
 
         @Override
         protected void onHit(@NotNull HitResult result) {
+            Vec3 impactVel = this.getDeltaMovement();
             super.onHit(result);
             if (!this.level().isClientSide){
                 Vec3 hitPos = result.getLocation();
@@ -204,10 +207,12 @@ public class TNTArrow extends ModifiableItem {
                         }
                         double explosionPower =
                                 Math.min(Math.sqrt(damage) * 2, ForceExplosionPower.get());
+                        ExplosionDamageCalculator calc =
+                                new DirectionalResistanceExplosionDamageCalculator(hitPos, impactVel, 35, 0.65f, 2.2f);
                         this.level().explode(
                                 this.getOwner(),
                                 DreamtinkerDamageTypes.source(this.level().registryAccess(), DreamtinkerDamageTypes.force_to_explosion, this, this.getOwner()),
-                                null,
+                                calc,
                                 hitPos.x, hitPos.y, hitPos.z,
                                 (float) explosionPower, false,
                                 Level.ExplosionInteraction.TNT

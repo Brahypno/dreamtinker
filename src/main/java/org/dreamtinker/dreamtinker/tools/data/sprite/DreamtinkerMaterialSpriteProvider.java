@@ -520,5 +520,16 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFFB0D2B2)
                                                 .addARGB(255, 0xFFF3F6DD)
                                                 .build());
+        this.buildMaterial(DreamtinkerMaterialIds.PaladinBoneTool)
+            .meleeHarvest()
+            .fallbacks("bone")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(63, 0xFF161C18)
+                                                .addARGB(102, 0xFF29372F)
+                                                .addARGB(140, 0xFF3E5B4B)
+                                                .addARGB(178, 0xFF5B8A72)
+                                                .addARGB(216, 0xFFB0D2B2)
+                                                .addARGB(255, 0xFFF3F6DD)
+                                                .build());
     }
 }

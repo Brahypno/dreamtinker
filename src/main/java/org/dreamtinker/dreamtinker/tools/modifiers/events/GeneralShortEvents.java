@@ -32,8 +32,8 @@ public class GeneralShortEvents {
         if (event.isCanceled())
             return;
         Explosion exp = event.getExplosion();
-        if (exp.getDamageSource().is(DreamtinkerDamageTypes.force_to_explosion) && null != exp.getDirectSourceEntity() &&
-            exp.getDirectSourceEntity() instanceof TNTArrow.TNTArrowEntity){
+        if (exp.getDamageSource().is(DreamtinkerDamageTypes.force_to_explosion) && null != exp.getDamageSource().getDirectEntity() &&
+            exp.getDamageSource().getDirectEntity() instanceof TNTArrow.TNTArrowEntity){
             event.getAffectedEntities().removeIf(Entity::isAlive);
         }
         if (null != exp.getDamageSource().getEntity())
