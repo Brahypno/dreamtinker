@@ -4,6 +4,30 @@
     "item": "minecraft:glass_bottle"
   },
   "cast_consumed": true,
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "malum"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "malum"
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "cooling_time": 47,
   "fluid": {
     "amount": 250,

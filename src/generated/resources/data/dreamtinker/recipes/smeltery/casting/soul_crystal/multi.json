@@ -3,6 +3,30 @@
   "cast": {
     "tag": "tconstruct:casts/multi_use/gem"
   },
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "enigmaticlegacy"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "enigmaticlegacy"
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "cooling_time": 44,
   "fluid": {
     "amount": 100,

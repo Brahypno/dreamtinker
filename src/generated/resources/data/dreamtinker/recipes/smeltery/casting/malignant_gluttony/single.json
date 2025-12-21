@@ -4,6 +4,30 @@
     "tag": "tconstruct:casts/single_use/ingot"
   },
   "cast_consumed": true,
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "malum"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "malum"
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "cooling_time": 90,
   "fluid": {
     "amount": 90,

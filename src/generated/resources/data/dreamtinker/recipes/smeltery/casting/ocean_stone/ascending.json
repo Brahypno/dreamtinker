@@ -6,8 +6,26 @@
   "cast_consumed": true,
   "conditions": [
     {
-      "type": "forge:item_exists",
-      "item": "enigmaticlegacy:ocean_stone"
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "enigmaticlegacy"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "enigmaticlegacy"
+            }
+          ]
+        }
+      ]
     }
   ],
   "cooling_time": 31,

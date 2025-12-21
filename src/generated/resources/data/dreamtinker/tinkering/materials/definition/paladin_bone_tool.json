@@ -21,8 +21,8 @@
       }
     ]
   },
-  "craftable": true,
+  "craftable": false,
   "hidden": false,
-  "sortOrder": 10,
-  "tier": 2
+  "sortOrder": 20,
+  "tier": 4
 }
