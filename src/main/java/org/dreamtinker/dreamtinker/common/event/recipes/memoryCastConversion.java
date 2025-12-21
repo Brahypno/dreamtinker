@@ -28,7 +28,7 @@ public class memoryCastConversion {
 
         Player player = event.getEntity();
         ItemStack held = player.getItemInHand(event.getHand());
-        if (!(held.getItem() instanceof FlintAndSteelItem || held.getItem().equals(TinkerTools.flintAndBrick.asItem())) || held.is(ItemTags.CREEPER_IGNITERS))
+        if (!(held.getItem() instanceof FlintAndSteelItem || held.getItem().equals(TinkerTools.flintAndBrick.asItem()) || held.is(ItemTags.CREEPER_IGNITERS)))
             return;
 
         BlockPos clicked = event.getPos();
