@@ -20,6 +20,7 @@ import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -172,59 +173,70 @@ public class NarcissusFluidProjectile extends Projectile {
     private record ResultTOI(EntityHitResult hit, double t) {
     }
 
-    // 连续扫描 + 二分逼近，只做“实体碰撞”检测
     private ResultTOI sweepToFirstEntityHit(Vec3 from, Vec3 vel) {
-        // 快速粗采样：4~6次通常够定位
         final int SAMPLES = 6;
-        final double inflate = 1.0;          // 与你原来保持一致
-        final double EPS = 1e-4;             // 二分收敛阈值
-        final int MAX_BISECT = 12;           // 二分次数上限
+        final double inflate = 1.0;
+        final double EPS = 1e-4;
+        final int MAX_BISECT = 12;
 
         double tLo = 0.0;
-        EntityHitResult hitAt = null;
 
-        // 先做均匀采样找到第一次命中出现的采样点
         for (int i = 1; i <= SAMPLES; i++) {
             double t = (double) i / (double) SAMPLES;
+
             Vec3 midFrom = from.add(vel.scale(tLo));
             Vec3 midTo = from.add(vel.scale(t));
             Vec3 seg = midTo.subtract(midFrom);
 
+            // 关键：把 AABB 移到本段起点 midFrom 再 expandTowards
+            AABB boxAtSegStart = this.getBoundingBox().move(
+                    midFrom.x - this.getX(),
+                    midFrom.y - this.getY(),
+                    midFrom.z - this.getZ()
+            );
+            AABB sweepBox = boxAtSegStart.expandTowards(seg).inflate(inflate);
+
             EntityHitResult hr = ProjectileUtil.getEntityHitResult(
-                    this.level(), this, midFrom, midTo,
-                    this.getBoundingBox().expandTowards(seg).inflate(inflate),
-                    this::canHitEntity
+                    this.level(), this, midFrom, midTo, sweepBox, this::canHitEntity
             );
 
             if (hr != null && hr.getType() != HitResult.Type.MISS){
-                // 命中出现在(tLo, t] 区间，进入二分
                 double lo = tLo, hi = t;
                 EntityHitResult best = hr;
+
                 for (int k = 0; k < MAX_BISECT && hi - lo > EPS; k++) {
                     double midT = (lo + hi) * 0.5;
+
                     Vec3 a = from.add(vel.scale(lo));
                     Vec3 b = from.add(vel.scale(midT));
                     Vec3 d = b.subtract(a);
 
+                    // 同样：AABB 移到 a 再 expandTowards
+                    AABB boxAtA = this.getBoundingBox().move(
+                            a.x - this.getX(),
+                            a.y - this.getY(),
+                            a.z - this.getZ()
+                    );
+                    AABB sweepBox2 = boxAtA.expandTowards(d).inflate(inflate);
+
                     EntityHitResult test = ProjectileUtil.getEntityHitResult(
-                            this.level(), this, a, b,
-                            this.getBoundingBox().expandTowards(d).inflate(inflate),
-                            this::canHitEntity
+                            this.level(), this, a, b, sweepBox2, this::canHitEntity
                     );
 
                     if (test != null && test.getType() != HitResult.Type.MISS){
                         best = test;
-                        hi = midT;     // 命中在前半段，收缩到更早
+                        hi = midT;
                     }else {
-                        lo = midT;     // 未命中，向后探
+                        lo = midT;
                     }
                 }
-                hitAt = best;
-                return new ResultTOI(hitAt, hi);
+
+                return new ResultTOI(best, hi);
             }
+
             tLo = t;
         }
-        // 完全未命中
+
         return new ResultTOI(null, 1.0);
     }
 

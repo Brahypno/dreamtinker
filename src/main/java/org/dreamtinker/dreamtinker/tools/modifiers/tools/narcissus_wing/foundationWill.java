@@ -8,8 +8,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
@@ -85,8 +88,6 @@ public class foundationWill extends Modifier implements LeftClickHook, ProcessLo
             int mod = nbt.getInt(TAG_MOD);
             tooltip.add(Component.translatable("modifier.dreamtinker.foundation_will" + "_" + mod)
                                  .withStyle(this.getDisplayName().getStyle()));
-
-
         }
     }
 
@@ -118,9 +119,7 @@ public class foundationWill extends Modifier implements LeftClickHook, ProcessLo
     @Override
     public void onLeftClickEntity(AttackEntityEvent event, IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot, Entity target) {
         ModDataNBT dataNBT = tool.getPersistentData();
-        if (0 == dataNBT.getInt(TAG_MOD)){
-
-        }
+        addGlow(player, level, equipmentSlot);
 
     }
 
@@ -129,6 +128,8 @@ public class foundationWill extends Modifier implements LeftClickHook, ProcessLo
         ModDataNBT dataNBT = tool.getPersistentData();
         if (1 == dataNBT.getInt(TAG_MOD))
             foundationWillWrapper(entry, player, level, equipmentSlot);
+        else
+            addGlow(player, level, equipmentSlot);
     }
 
     @Override
@@ -136,6 +137,17 @@ public class foundationWill extends Modifier implements LeftClickHook, ProcessLo
         ModDataNBT dataNBT = tool.getPersistentData();
         if (1 == dataNBT.getInt(TAG_MOD))
             foundationWillWrapper(entry, player, level, equipmentSlot);
+    }
+
+    private void addGlow(Player player, Level level, EquipmentSlot equipmentSlot) {
+        if (!level.isClientSide && EquipmentSlot.MAINHAND == equipmentSlot){
+            double reach = getReach(player) * 2;
+            for (LivingEntity aoeTarget : level.getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(reach, 0.25D, reach))) {
+                if (aoeTarget instanceof Monster && !aoeTarget.hasEffect(MobEffects.GLOWING) && !aoeTarget.isAlliedTo(player)){
+                    aoeTarget.addEffect(new MobEffectInstance(MobEffects.GLOWING, 200, 0, false, false));
+                }
+            }
+        }
     }
 
 
