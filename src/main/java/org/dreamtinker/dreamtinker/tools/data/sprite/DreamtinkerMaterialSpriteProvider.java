@@ -174,13 +174,13 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
             .meleeHarvest().armor()
             .fallbacks("gem")
             .transformer(GreyToSpriteTransformer.builder()
-                                                .addARGB(0, 0xFF060000)
-                                                .addARGB(63, 0xFF200004)
-                                                .addARGB(102, 0xFF430007)
-                                                .addARGB(140, 0xFF690A12)
-                                                .addARGB(178, 0xFF8B1526)
-                                                .addARGB(216, 0xFFA92E3F)
-                                                .addARGB(255, 0xFFC24E5C)
+                                                .addARGB(0, 0x00000000)
+                                                .addARGB(63, 0xFF120001)  // 近黑红
+                                                .addARGB(102, 0xFF2B0003)  // 深血红
+                                                .addARGB(140, 0xFF5A000B)  // 深红主体
+                                                .addARGB(178, 0xFF8F0018)  // 鲜红
+                                                .addARGB(216, 0xFFC70022)  // 高饱和亮红
+                                                .addARGB(255, 0xFFFF1A1A)  // 极亮纯红高光（仍是红，不偏橙）
                                                 .build());
 
         buildMaterial(DreamtinkerMaterialIds.shadowskin)
@@ -240,7 +240,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .build());
         this.buildMaterial(DreamtinkerMaterialIds.shiningFlint)
             .meleeHarvest().ranged()
-            .fallbacks("crystal")
+            .fallbacks("crystal", "rock", "stick")
             .colorMapper(GreyToColorMapping.builderFromBlack()
                                            .addARGB(63, 0xFF3C96B9)
                                            .addARGB(102, 0xFFA8D0D9)
