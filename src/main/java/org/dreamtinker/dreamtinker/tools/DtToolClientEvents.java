@@ -17,13 +17,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
+import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.DreamtinkerModule;
 import org.dreamtinker.dreamtinker.library.client.AggressiveFoxRender;
 import org.dreamtinker.dreamtinker.library.client.NarcissusFluidProjectileRenderer;
 import org.dreamtinker.dreamtinker.library.client.SlashOrbitRenderer;
+import org.dreamtinker.dreamtinker.library.client.particle.VibeBarParticle;
 import org.dreamtinker.dreamtinker.tools.items.TNTArrow;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.ClientEventBase;
@@ -114,5 +117,10 @@ public class DtToolClientEvents extends ClientEventBase {
         event.registerEntityRenderer(DreamtinkerModifiers.NarcissusSpitEntity.get(), NarcissusFluidProjectileRenderer::new);
         event.registerEntityRenderer(DreamtinkerModifiers.SLASH_ORBIT.get(), SlashOrbitRenderer::new);
         event.registerEntityRenderer(DreamtinkerModifiers.AggressiveFOX.get(), AggressiveFoxRender::new);
+    }
+
+    @SubscribeEvent
+    public static void onRegisterParticleProviders(RegisterParticleProvidersEvent e) {
+        e.registerSpriteSet(DreamtinkerModule.VIBE_BAR.get(), VibeBarParticle.Provider::new);
     }
 }

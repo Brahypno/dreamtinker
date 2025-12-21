@@ -5,7 +5,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.dreamtinker.dreamtinker.library.modifiers.DreamtinkerHook;
-import org.dreamtinker.dreamtinker.network.Dnetwork;
+import org.dreamtinker.dreamtinker.network.DNetwork;
 import org.dreamtinker.dreamtinker.network.RightClickEmptyPacket;
 import org.dreamtinker.dreamtinker.utils.CuriosCompact;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -26,7 +26,7 @@ public interface RightClickHook {
             entry.getHook(DreamtinkerHook.RIGHT_CLICK).onRightClickEmpty(tool, entry, player, level, slot);
         }
         if (level.isClientSide){
-            Dnetwork.CHANNEL.sendToServer(new RightClickEmptyPacket());
+            DNetwork.CHANNEL.sendToServer(new RightClickEmptyPacket());
         }
     }
 

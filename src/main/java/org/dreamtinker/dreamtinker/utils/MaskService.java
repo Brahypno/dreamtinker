@@ -2,7 +2,7 @@ package org.dreamtinker.dreamtinker.utils;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.PacketDistributor;
-import org.dreamtinker.dreamtinker.network.Dnetwork;
+import org.dreamtinker.dreamtinker.network.DNetwork;
 import org.dreamtinker.dreamtinker.network.S2CColorMaskToggle;
 
 // MaskService.java  (server-side)
@@ -65,11 +65,11 @@ public final class MaskService {
     public static void clearAll() {STATES.clear();}
 
     public static void sendMaskOn(ServerPlayer sp, int argb, int fadeIn) {
-        Dnetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> sp), new S2CColorMaskToggle(true, argb, fadeIn, 0));
+        DNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> sp), new S2CColorMaskToggle(true, argb, fadeIn, 0));
     }
 
     public static void sendMaskOff(ServerPlayer sp, int fadeOut) {
-        Dnetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> sp), new S2CColorMaskToggle(false, 0, 0, fadeOut));
+        DNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> sp), new S2CColorMaskToggle(false, 0, 0, fadeOut));
     }
 }
 

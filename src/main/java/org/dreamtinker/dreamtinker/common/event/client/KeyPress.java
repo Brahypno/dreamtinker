@@ -6,7 +6,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.network.Dnetwork;
+import org.dreamtinker.dreamtinker.network.DNetwork;
 import org.dreamtinker.dreamtinker.network.KeyStateMsg;
 
 import static org.dreamtinker.dreamtinker.common.event.client.KeyBindings.KEY_MODE;
@@ -29,22 +29,22 @@ public class KeyPress {
         boolean mode = KEY_MODE.isDown();
 
         if (weapon_interact != lastToolInteract){
-            Dnetwork.CHANNEL.sendToServer(new KeyStateMsg(KeyStateMsg.KeyKind.TOOL_INTERACT, weapon_interact));
+            DNetwork.CHANNEL.sendToServer(new KeyStateMsg(KeyStateMsg.KeyKind.TOOL_INTERACT, weapon_interact));
             lastToolInteract = weapon_interact;
         }
         if (mode != lastMode){
-            Dnetwork.CHANNEL.sendToServer(new KeyStateMsg(KeyStateMsg.KeyKind.MODE, mode));
+            DNetwork.CHANNEL.sendToServer(new KeyStateMsg(KeyStateMsg.KeyKind.MODE, mode));
             lastMode = mode;
         }
 
         // 可选：窗口失焦时清空（避免卡住“按下”状态）
         if (!mc.isWindowActive()){
             if (lastToolInteract){
-                Dnetwork.CHANNEL.sendToServer(new KeyStateMsg(KeyStateMsg.KeyKind.TOOL_INTERACT, false));
+                DNetwork.CHANNEL.sendToServer(new KeyStateMsg(KeyStateMsg.KeyKind.TOOL_INTERACT, false));
                 lastToolInteract = false;
             }
             if (lastMode){
-                Dnetwork.CHANNEL.sendToServer(new KeyStateMsg(KeyStateMsg.KeyKind.MODE, false));
+                DNetwork.CHANNEL.sendToServer(new KeyStateMsg(KeyStateMsg.KeyKind.MODE, false));
                 lastMode = false;
             }
         }

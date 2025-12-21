@@ -4,7 +4,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.PacketDistributor;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.network.Dnetwork;
+import org.dreamtinker.dreamtinker.network.DNetwork;
 import org.dreamtinker.dreamtinker.network.WallVisionSyncPacket;
 
 public class BlockViewerService {
@@ -23,7 +23,7 @@ public class BlockViewerService {
     private static final java.util.Map<java.util.UUID, BlockViewerService.State> STATES = new java.util.HashMap<>();
 
     private static long now(ServerPlayer sp) {return sp.serverLevel().getGameTime();}
-    
+
     public static void ensureOn(ServerPlayer sp, ResourceLocation loc, int Redius) {
         var s = STATES.get(sp.getUUID());
         if (s != null && s.enabled && s.location == loc)
@@ -63,10 +63,10 @@ public class BlockViewerService {
     public static void clearAll() {STATES.clear();}
 
     public static void sendBlockView(ServerPlayer sp, ResourceLocation location, int radius) {
-        Dnetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> sp), new WallVisionSyncPacket(true, location, radius));
+        DNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> sp), new WallVisionSyncPacket(true, location, radius));
     }
 
     public static void sendBlockViewOff(ServerPlayer sp) {
-        Dnetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> sp), new WallVisionSyncPacket(false, Dreamtinker.getLocation("off"), 0));
+        DNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> sp), new WallVisionSyncPacket(false, Dreamtinker.getLocation("off"), 0));
     }
 }

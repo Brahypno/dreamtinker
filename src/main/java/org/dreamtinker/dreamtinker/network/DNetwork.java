@@ -10,7 +10,7 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import java.util.Optional;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
-public class Dnetwork {
+public class DNetwork {
     // Unique channel name (use your mod id)
     public static final String PROTOCOL_VERSION = "1";
     public static final SimpleChannel CHANNEL =
@@ -33,6 +33,8 @@ public class Dnetwork {
         CHANNEL.registerMessage(packetId++, S2CUseRemainPacket.class, S2CUseRemainPacket::encode, S2CUseRemainPacket::decode, S2CUseRemainPacket::handle,
                                 Optional.of(NetworkDirection.PLAY_TO_CLIENT));
         CHANNEL.registerMessage(packetId++, WallVisionSyncPacket.class, WallVisionSyncPacket::toBytes, WallVisionSyncPacket::new, WallVisionSyncPacket::handle,
+                                Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        CHANNEL.registerMessage(packetId++, S2CVibeBarFx.class, S2CVibeBarFx::encode, S2CVibeBarFx::decode, S2CVibeBarFx::handle,
                                 Optional.of(NetworkDirection.PLAY_TO_CLIENT));
     }
 }

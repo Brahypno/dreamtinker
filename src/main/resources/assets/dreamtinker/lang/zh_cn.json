@@ -341,7 +341,7 @@
   "modifier.dreamtinker.despair_rain.description": "减半非暴击伤害，获得500%暴击伤害加成并使血量固定为1；提升等级会提升加成数值",
   "modifier.dreamtinker.despair_wind": "绝望如风",
   "modifier.dreamtinker.despair_wind.flavor": "有些痛苦，是无法避免的",
-  "modifier.dreamtinker.despair_wind.description": "当攻击时，清除黄心并掉落装备，且清除护甲；并把伤害转化为绝望伤害。",
+  "modifier.dreamtinker.despair_wind.description": "当攻击时，清除黄心并掉落装备，且清除护甲；并造成额外绝望伤害。",
   "modifier.dreamtinker.ophelia": "已死美人",
   "modifier.dreamtinker.ophelia.flavor": "犹自袅袅婷婷",
   "modifier.dreamtinker.ophelia.description": "将受到的伤害变成3倍，但转化为2*生效等级+1数量的不同类型的伤害。",

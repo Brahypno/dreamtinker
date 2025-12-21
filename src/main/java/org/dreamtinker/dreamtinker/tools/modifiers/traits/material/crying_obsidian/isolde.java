@@ -14,7 +14,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.network.PacketDistributor;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
-import org.dreamtinker.dreamtinker.network.Dnetwork;
+import org.dreamtinker.dreamtinker.network.DNetwork;
 import org.dreamtinker.dreamtinker.network.PerfectOverlayMsg;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -64,7 +64,7 @@ public class isolde extends BattleModifier {
             int target = nbt.getInt(TAG_ISOLDE_TIME);
             if (IsoLdeEaseTime.get() == target - useDuration + timeLeft){
                 if (entity instanceof ServerPlayer sp){
-                    Dnetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> sp),
+                    DNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> sp),
                                           new PerfectOverlayMsg(new ResourceLocation(MODID, "textures/gui/perfect_release.png"), 2 * IsoLdeEaseTime.get()));
                     sp.playNotifySound(
                             SoundEvents.EXPERIENCE_ORB_PICKUP,

@@ -16,8 +16,6 @@ import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 
-import static net.minecraft.tags.DamageTypeTags.*;
-
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class GeneralAttackHandler {
     static boolean damage_source_transmission = false;
@@ -38,17 +36,6 @@ public class GeneralAttackHandler {
         CompoundTag data = victim.getPersistentData();
         RegistryAccess registryAccess = world.registryAccess();
         RandomSource rds = world.random;
-        if (dmgEntity instanceof LivingEntity offender)
-            if (data.getLong(TAG_extra_hit) < world.getGameTime()){
-                if (DTModifierCheck.haveModifierIn(offender, DreamtinkerModifiers.despair_wind.getId()) ||
-                    2 < DTModifierCheck.getMainhandModifierLevel(offender, DreamtinkerModifiers.Ids.icy_memory))
-                    if (!(dmg.is(BYPASSES_ARMOR) && dmg.is(BYPASSES_SHIELD) && dmg.is(BYPASSES_INVULNERABILITY) && dmg.is(BYPASSES_COOLDOWN) &&
-                          dmg.is(BYPASSES_EFFECTS) &&
-                          dmg.is(BYPASSES_RESISTANCE) && dmg.is(BYPASSES_ENCHANTMENTS))){
-                        victim.hurt(DreamtinkerDamageTypes.source(registryAccess, DreamtinkerDamageTypes.NULL_VOID, dmg), damageAmount);
-                        data.putLong(TAG_extra_hit, world.getGameTime());
-                    }
-            }
 
         boolean Not_Tran = !data.contains(TAG_DamageSourceTransmission) || data.getLong(TAG_DamageSourceTransmission) < world.getGameTime();
         if (!damage_source_transmission && Not_Tran){

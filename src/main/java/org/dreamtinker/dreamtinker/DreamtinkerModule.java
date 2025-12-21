@@ -1,6 +1,7 @@
 package org.dreamtinker.dreamtinker;
 
 import com.mojang.serialization.Codec;
+import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
@@ -20,6 +21,8 @@ import org.dreamtinker.dreamtinker.Entity.AggressiveFox;
 import org.dreamtinker.dreamtinker.Entity.NarcissusFluidProjectile;
 import org.dreamtinker.dreamtinker.Entity.SlashOrbitEntity;
 import org.dreamtinker.dreamtinker.library.LootModifier.ExtraDropLootModifier;
+import org.dreamtinker.dreamtinker.library.client.particle.VibeBarParticleOptions;
+import org.dreamtinker.dreamtinker.library.client.particle.VibeBarParticleType;
 import org.dreamtinker.dreamtinker.library.worldgen.ScatterReplaceOreConfiguration;
 import org.dreamtinker.dreamtinker.library.worldgen.ScatterReplaceOreFeature;
 import org.dreamtinker.dreamtinker.library.worldgen.TagAndTagRuleTest;
@@ -52,6 +55,11 @@ public abstract class DreamtinkerModule {
     public static final DeferredRegister<RuleTestType<?>> RULE_TESTS = DeferredRegister.create(Registries.RULE_TEST, MODID);
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MODID);
+    public static final DeferredRegister<ParticleType<?>> PARTICLES =
+            DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, MODID);
+
+    public static final RegistryObject<ParticleType<VibeBarParticleOptions>> VIBE_BAR =
+            PARTICLES.register("vibe_bar", VibeBarParticleType::new);
 
     public static final RegistryObject<RuleTestType<TagAndTagRuleTest>> TAG_AND_TAG =
             RULE_TESTS.register("tag_and_tag", () -> () -> TagAndTagRuleTest.CODEC);
@@ -99,6 +107,7 @@ public abstract class DreamtinkerModule {
         ENTITIES.register(bus);
         EFFECT.register(bus);
         LOOT_MODIFIERS.register(bus);
+        PARTICLES.register(bus);
         if (ModList.get().isLoaded("enigmaticlegacy")){
             EL_FLUIDS.register(bus);
             EL_ITEMS.register(bus);

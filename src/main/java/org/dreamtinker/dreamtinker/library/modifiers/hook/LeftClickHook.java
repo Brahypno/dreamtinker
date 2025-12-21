@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import org.dreamtinker.dreamtinker.library.modifiers.DreamtinkerHook;
-import org.dreamtinker.dreamtinker.network.Dnetwork;
+import org.dreamtinker.dreamtinker.network.DNetwork;
 import org.dreamtinker.dreamtinker.network.LeftClickEmptyPacket;
 import org.dreamtinker.dreamtinker.utils.CuriosCompact;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -36,7 +36,7 @@ public interface LeftClickHook {
             entry.getHook(DreamtinkerHook.LEFT_CLICK).onLeftClickEmpty(tool, entry, player, level, slot);
         }
         if (level.isClientSide){
-            Dnetwork.CHANNEL.sendToServer(new LeftClickEmptyPacket());
+            DNetwork.CHANNEL.sendToServer(new LeftClickEmptyPacket());
         }
     }
 

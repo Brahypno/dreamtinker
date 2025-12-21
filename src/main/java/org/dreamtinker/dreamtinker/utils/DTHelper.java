@@ -23,8 +23,11 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.EntityTeleportEvent;
+import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.tags.ITagManager;
+import org.dreamtinker.dreamtinker.network.DNetwork;
+import org.dreamtinker.dreamtinker.network.S2CVibeBarFx;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.materials.MaterialRegistry;
@@ -237,5 +240,27 @@ public class DTHelper {
             Vec3 newMotion = entity.getDeltaMovement().add(diff.normalize()).scale(0.75);
             entity.setDeltaMovement(newMotion);
         }
+    }
+
+    public static void sendVibeBarFx(
+            ServerLevel level, LivingEntity attacker, LivingEntity target,
+            int argb /*0xAARRGGBB*/) {
+        Vec3 d = target.position().subtract(attacker.position());
+        Vec3 flat = new Vec3(d.x, 0, d.z);
+        if (flat.lengthSqr() < 1.0e-6)
+            return;
+
+        Vec3 attackDir = flat.normalize();
+        Vec3 barDir = new Vec3(-attackDir.z, 0, attackDir.x); // 水平且垂直于 attacker->target
+
+        int life = 8;          // 0.4s
+        float amp = 0.05f;      // 抖幅
+        float hz = 26.0f;       // 频率
+        float yFrac = 0.60f;    // 位置（胸口）
+
+        DNetwork.CHANNEL.send(
+                PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> target),
+                new S2CVibeBarFx(target.getId(), (float) barDir.x, (float) barDir.z, argb, life, amp, hz, yFrac)
+        );
     }
 }

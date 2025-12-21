@@ -18,6 +18,7 @@ import java.util.UUID;
 import java.util.function.BiConsumer;
 
 public class despair_rain extends BattleModifier {
+
     @Override
     public boolean isNoLevels() {return false;}
 
@@ -52,8 +53,10 @@ public class despair_rain extends BattleModifier {
                         new AttributeModifier(uuid, Attributes.MAX_HEALTH.getDescriptionId(), debuff - damageDealt * 0.1f * modifier.getLevel(),
                                               AttributeModifier.Operation.ADDITION));
             }
+
         }
     }
+
 
     @Override
     public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
@@ -63,6 +66,4 @@ public class despair_rain extends BattleModifier {
             holder.setHealth(modifier.getLevel());
 
     }
-
-
 }

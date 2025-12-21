@@ -251,7 +251,9 @@ public class NarcissusFluidProjectile extends Projectile {
             if (entity1 instanceof LivingEntity){
                 ((LivingEntity) entity1).setLastHurtMob(target);
             }
-            if (target instanceof LivingEntity livingentity && target.hurt(damagesource, (float) i)){
+            if (target instanceof LivingEntity livingentity &&
+                target.hurt(damagesource,
+                            null != toolStackView && 2 < toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) ? 2 * i : i)){
                 if (this.knock_back > 0){
                     double d0 = Math.max(0.0F, (double) 1.0F - livingentity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
                     Vec3 vec3 =

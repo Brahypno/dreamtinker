@@ -90,7 +90,7 @@ public class memoryBase extends BattleModifier {
             if (ForgeRegistries.FLUIDS.getHolder(fluid.getFluid()).map(h -> h.is(DreamtinkerTagKeys.Fluids.narcissus_wing_used)).orElse(false) &&
                 FluidEffectManager.INSTANCE.find(fluid.getFluid()).hasEffects() &&
                 1 + 2 * (modifier.getLevel() - 1) < fluid.getAmount()){//life can transform to blood soul, and we leave 1 HP(half heart)
-                GeneralInteractionModifierHook.startUsingWithDrawtime(tool, modifier.getId(), player, hand, 1.5f);
+                GeneralInteractionModifierHook.startUsingWithDrawtime(tool, modifier.getId(), player, hand, 2.5f);
                 return InteractionResult.SUCCESS;
             }
         }

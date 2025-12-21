@@ -52,7 +52,7 @@ import org.dreamtinker.dreamtinker.config.DreamtinkerConfig;
 import org.dreamtinker.dreamtinker.fluids.DreamtinkerFluids;
 import org.dreamtinker.dreamtinker.fluids.data.DreamtinkerFluidTextureProvider;
 import org.dreamtinker.dreamtinker.library.event.PlayerLeftClickEvent;
-import org.dreamtinker.dreamtinker.network.Dnetwork;
+import org.dreamtinker.dreamtinker.network.DNetwork;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
@@ -102,7 +102,7 @@ public class Dreamtinker {
         forgeEventBus.addListener(EventPriority.HIGHEST, PlayerLeftClickEvent::onLeftClickEntity);
         forgeEventBus.addListener(star_regulus_boost::onServerTick);
 
-        Dnetwork.registerPackets();
+        DNetwork.registerPackets();
         modEventBus.addListener(this::gatherData);
 
     }
