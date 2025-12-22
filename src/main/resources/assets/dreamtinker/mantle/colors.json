@@ -135,7 +135,10 @@
     "eidolon_reaper": "#5B8A72",
     "eidolon_sapping": "#D12943",
     "eidolon_death_bringer": "#B0D2B2",
-    "eidolon_bone_chill": "#69B5DB"
+    "eidolon_bone_chill": "#69B5DB",
+    "bic_dark_defense": "#66646E",
+    "bic_dark_blade": "#66646E",
+    "bic_nightmare_defense": "#534E63"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
@@ -172,10 +175,12 @@
     "shadow_silver": "#7C6220",
     "transmutation_gold": "#DE6428",
     "arcane_gold": "#EDAE66",
-    "tattered_cloth": "#5B5957",
-    "wicked_wave": "#384185",
-    "paladin_bone": "#46514F",
-    "paladin_bone_tool": "#46514F"
+    "eidolon_tattered_cloth": "#5B5957",
+    "eidolon_wicked_wave": "#384185",
+    "eidolon_paladin_bone": "#B0D2B2",
+    "eidolon_paladin_bone_tool": "#B0D2B2",
+    "bic_dark_metal": "#66646E",
+    "bic_monster_skin": "#534E63"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873",

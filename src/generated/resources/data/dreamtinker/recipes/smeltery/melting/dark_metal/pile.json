@@ -1,0 +1,37 @@
+{
+  "type": "tconstruct:ore_melting",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "born_in_chaos_v1"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "born_in_chaos_v1"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ingredient": {
+    "item": "born_in_chaos_v1:pileof_dark_metal"
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 10,
+    "fluid": "dreamtinker:molten_dark_metal"
+  },
+  "temperature": 900,
+  "time": 3
+}

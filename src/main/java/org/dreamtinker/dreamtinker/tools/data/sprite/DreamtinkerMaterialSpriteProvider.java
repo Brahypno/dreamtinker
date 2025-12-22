@@ -310,6 +310,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
         addELMaterials();
         addMalumMaterials();
         addEidolonMaterials();
+        addBICMaterials();
     }
 
     protected void addELMaterials() {
@@ -530,6 +531,31 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(178, 0xFF5B8A72)
                                                 .addARGB(216, 0xFFB0D2B2)
                                                 .addARGB(255, 0xFFF3F6DD)
+                                                .build());
+    }
+
+    protected void addBICMaterials() {
+        this.buildMaterial(DreamtinkerMaterialIds.DarkMetal)
+            .meleeHarvest().armor().shieldCore()
+            .fallbacks("metal")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(63, 0xFF0B0B0C)
+                                                .addARGB(102, 0xFF211E27)
+                                                .addARGB(140, 0xFF2C2934)
+                                                .addARGB(178, 0xFF494550)
+                                                .addARGB(216, 0xFF66646E)
+                                                .addARGB(255, 0xFF9899A1)
+                                                .build());
+        this.buildMaterial(DreamtinkerMaterialIds.MonsterSkin)
+            .statType(StatlessMaterialStats.BINDING).armor().statType(StatlessMaterialStats.BOWSTRING).armor().cuirass()
+            .fallbacks("cloth")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(63, 0xFF18161B)
+                                                .addARGB(102, 0xFF2A262D)
+                                                .addARGB(140, 0xFF3A3340)
+                                                .addARGB(178, 0xFF4C4255)
+                                                .addARGB(216, 0xFF534E63)
+                                                .addARGB(255, 0xFF605D78)
                                                 .build());
     }
 }

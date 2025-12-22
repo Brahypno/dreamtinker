@@ -1,0 +1,42 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "dreamtinker:bic_dark_defense"
+    },
+    {
+      "level": 1,
+      "name": "tconstruct:melee_protection"
+    },
+    {
+      "level": 1,
+      "name": "tconstruct:worldbound"
+    }
+  ],
+  "perStat": {
+    "tconstruct:melee_harvest": [
+      {
+        "level": 1,
+        "name": "dreamtinker:bic_dark_blade"
+      },
+      {
+        "level": 1,
+        "name": "tconstruct:worldbound"
+      }
+    ],
+    "tconstruct:plating_shield": [
+      {
+        "level": 1,
+        "name": "tconstruct:melee_protection"
+      },
+      {
+        "level": 1,
+        "name": "tconstruct:projectile_protection"
+      },
+      {
+        "level": 1,
+        "name": "tconstruct:worldbound"
+      }
+    ]
+  }
+}

@@ -65,6 +65,9 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
         buildRenderInfo(DreamtinkerMaterialIds.PaladinBone).color(0xFF46514F).fallbacks("bone").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.PaladinBoneTool).color(0xFF46514F).fallbacks("bone").luminosity(0);
 
+        buildRenderInfo(DreamtinkerMaterialIds.DarkMetal).color(0xFF777883).fallbacks("metal").luminosity(0);
+        buildRenderInfo(DreamtinkerMaterialIds.MonsterSkin).color(0xFF534E63).fallbacks("cloth").luminosity(0);
+
     }
 
     @Override

@@ -1,0 +1,15 @@
+{
+  "type": "tconstruct:entity_melting",
+  "damage": 5,
+  "entity": {
+    "types": [
+      "born_in_chaos_v1:fallen_chaos_knight",
+      "born_in_chaos_v1:skeleton_thrasher",
+      "born_in_chaos_v1:diamond_termite"
+    ]
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "dreamtinker:molten_dark_metal"
+  }
+}

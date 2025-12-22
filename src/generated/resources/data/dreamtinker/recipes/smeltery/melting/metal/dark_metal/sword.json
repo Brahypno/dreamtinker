@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "ingredient": [
+    {
+      "item": "born_in_chaos_v1:sharpened_dark_metal_sword"
+    },
+    {
+      "item": "born_in_chaos_v1:spider_bite_sword"
+    }
+  ],
+  "result": {
+    "amount": 190,
+    "fluid": "dreamtinker:molten_dark_metal",
+    "unit_size": 10
+  },
+  "temperature": 900,
+  "time": 92
+}

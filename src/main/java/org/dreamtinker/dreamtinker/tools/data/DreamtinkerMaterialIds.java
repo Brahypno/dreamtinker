@@ -54,9 +54,12 @@ public class DreamtinkerMaterialIds {
     //Compact-eidolon
     public static final MaterialId ArcaneGold = new MaterialId(new ResourceLocation(MODID, "arcane_gold"));
     public static final MaterialId TatteredCloth = new MaterialId(new ResourceLocation(MODID, "tattered_cloth"));
-    public static final MaterialId WickedWeave = new MaterialId(new ResourceLocation(MODID, "wicked_wave"));
-    public static final MaterialId PaladinBone = new MaterialId(new ResourceLocation(MODID, "paladin_bone"));
-    public static final MaterialId PaladinBoneTool = new MaterialId(new ResourceLocation(MODID, "paladin_bone_tool"));
+    public static final MaterialId WickedWeave = new MaterialId(new ResourceLocation(MODID, "eidolon_wicked_wave"));
+    public static final MaterialId PaladinBone = new MaterialId(new ResourceLocation(MODID, "eidolon_paladin_bone"));
+    public static final MaterialId PaladinBoneTool = new MaterialId(new ResourceLocation(MODID, "eidolon_paladin_bone_tool"));
+    //burn-in-chaos-v1
+    public static final MaterialId DarkMetal = new MaterialId(new ResourceLocation(MODID, "bic_dark_metal"));
+    public static final MaterialId MonsterSkin = new MaterialId(new ResourceLocation(MODID, "bic_monster_skin"));
 
 
 }

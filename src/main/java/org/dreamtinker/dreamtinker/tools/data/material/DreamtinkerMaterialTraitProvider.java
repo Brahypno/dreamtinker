@@ -165,6 +165,13 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.PaladinBone, Ids.eidolon_soul_hearts, Ids.eidolon_paladin_bone);
         addDefaultTraits(DreamtinkerMaterialIds.PaladinBoneTool, ModifierIds.smite, ModifierIds.pierce);
 
+        addDefaultTraits(DreamtinkerMaterialIds.DarkMetal, bic_dark_defense.getId(), ModifierIds.meleeProtection, ModifierIds.worldbound);
+        addTraits(DreamtinkerMaterialIds.DarkMetal, PlatingMaterialStats.SHIELD.getId(), ModifierIds.meleeProtection,
+                  ModifierIds.projectileProtection, ModifierIds.worldbound);
+        addTraits(DreamtinkerMaterialIds.DarkMetal, MELEE_HARVEST, bic_dark_blade.getId(), ModifierIds.worldbound);
+
+        addDefaultTraits(DreamtinkerMaterialIds.MonsterSkin, TinkerModifiers.tanned.getId(), bic_nightmare_defense.getId());
+
     }
 
     @Override

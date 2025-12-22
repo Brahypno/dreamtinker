@@ -1,0 +1,45 @@
+{
+  "type": "tconstruct:item_part_builder",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "eidolon"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "eidolon"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "cost": 2,
+  "material": "dreamtinker:eidolon_wicked_wave",
+  "pattern": "tconstruct:boots_plating",
+  "pattern_item": [
+    {
+      "tag": "tconstruct:patterns/default"
+    },
+    {
+      "item": "tconstruct:boots_plating_cast"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "tconstruct:boots_plating",
+    "nbt": {
+      "Material": "dreamtinker:eidolon_wicked_wave"
+    }
+  }
+}

@@ -26,7 +26,7 @@
     {
       "type": "tconstruct:material_repair",
       "durability": 200,
-      "material": "dreamtinker:paladin_bone_tool"
+      "material": "dreamtinker:eidolon_paladin_bone_tool"
     }
   ],
   "tooltip_display": "always"

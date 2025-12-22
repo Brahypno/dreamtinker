@@ -1,5 +1,29 @@
 {
   "type": "tconstruct:material_fluid",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "enigmaticlegacy"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "enigmaticlegacy"
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "fluid": {
     "amount": 90,
     "tag": "dreamtinker:unstable_liquid_aether"

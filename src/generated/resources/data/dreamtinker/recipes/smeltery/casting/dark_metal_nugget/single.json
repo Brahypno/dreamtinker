@@ -1,0 +1,37 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/single_use/nugget"
+  },
+  "cast_consumed": true,
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "born_in_chaos_v1"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "born_in_chaos_v1"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "cooling_time": 21,
+  "fluid": {
+    "amount": 10,
+    "fluid": "dreamtinker:molten_dark_metal"
+  },
+  "result": "born_in_chaos_v1:dark_metal_nugget"
+}

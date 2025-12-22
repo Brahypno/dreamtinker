@@ -1,5 +1,29 @@
 {
   "type": "tconstruct:material_melting",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "malum"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "malum"
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "input": "dreamtinker:malum_malignant_gluttony",
   "result": {
     "amount": 90,

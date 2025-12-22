@@ -1,0 +1,15 @@
+{
+  "type": "tconstruct:entity_melting",
+  "damage": 10,
+  "entity": {
+    "types": [
+      "born_in_chaos_v1:missioner",
+      "born_in_chaos_v1:lifestealer",
+      "born_in_chaos_v1:krampus"
+    ]
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "dreamtinker:molten_dark_metal"
+  }
+}

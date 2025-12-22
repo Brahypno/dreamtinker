@@ -32,6 +32,9 @@ import org.dreamtinker.dreamtinker.tools.modifiers.tools.tntarrow.strong_explode
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.spiritual_weapon_transformation;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.weapon_transformation;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.*;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.bic.darkBlade;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.bic.dark_defense;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.bic.nightmare_defense;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.eidolon.EidolonDeathBringer;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.eidolon.EidolonReaper;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.eidolon.EidolonSapping;
@@ -79,12 +82,16 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         if (ModList.get().isLoaded("eidolon")){
             EIDOLON_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         }
+        if (ModList.get().isLoaded("born_in_chaos_v1")){
+            BIC_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        }
     }
 
     public static ModifierDeferredRegister MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     public static ModifierDeferredRegister EL_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     public static ModifierDeferredRegister MALUM_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     public static ModifierDeferredRegister EIDOLON_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
+    public static ModifierDeferredRegister BIC_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     //Mashuo
     public static final StaticModifier<realSweep> real_sweep = MODIFIERS.register("real_sweep", realSweep::new);
     public static final StaticModifier<strong_heavy> strong_heavy = MODIFIERS.register("strong_heavy", strong_heavy::new);
@@ -221,6 +228,13 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             EIDOLON_MODIFIERS.register("eidolon_sapping", EidolonSapping::new);
     public static final StaticModifier<EidolonDeathBringer> eidolon_death_bringer =
             EIDOLON_MODIFIERS.register("eidolon_death_bringer", EidolonDeathBringer::new);
+
+    public static final StaticModifier<dark_defense> bic_dark_defense =
+            BIC_MODIFIERS.register("bic_dark_defense", dark_defense::new);
+    public static final StaticModifier<darkBlade> bic_dark_blade =
+            BIC_MODIFIERS.register("bic_dark_blade", darkBlade::new);
+    public static final StaticModifier<nightmare_defense> bic_nightmare_defense =
+            BIC_MODIFIERS.register("bic_nightmare_defense", nightmare_defense::new);
 
     public static class Ids {
         public static final ModifierId long_tool = id("long_tool");

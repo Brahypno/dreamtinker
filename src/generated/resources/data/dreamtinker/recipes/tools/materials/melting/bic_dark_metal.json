@@ -1,0 +1,33 @@
+{
+  "type": "tconstruct:material_melting",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "born_in_chaos_v1"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "born_in_chaos_v1"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "input": "dreamtinker:bic_dark_metal",
+  "result": {
+    "amount": 450,
+    "fluid": "dreamtinker:molten_dark_metal"
+  },
+  "temperature": 900
+}

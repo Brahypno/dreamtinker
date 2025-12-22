@@ -1,0 +1,45 @@
+{
+  "type": "tconstruct:item_part_builder",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "born_in_chaos_v1"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "born_in_chaos_v1"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "cost": 5,
+  "material": "dreamtinker:bic_monster_skin",
+  "pattern": "tconstruct:leggings_plating",
+  "pattern_item": [
+    {
+      "tag": "tconstruct:patterns/default"
+    },
+    {
+      "item": "tconstruct:leggings_plating_cast"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "tconstruct:leggings_plating",
+    "nbt": {
+      "Material": "dreamtinker:bic_monster_skin"
+    }
+  }
+}

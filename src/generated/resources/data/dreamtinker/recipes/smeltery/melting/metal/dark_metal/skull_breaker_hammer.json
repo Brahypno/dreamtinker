@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "ingredient": {
+    "item": "born_in_chaos_v1:skullbreaker_hammer"
+  },
+  "result": {
+    "amount": 830,
+    "fluid": "dreamtinker:molten_dark_metal",
+    "unit_size": 90
+  },
+  "temperature": 900,
+  "time": 192
+}

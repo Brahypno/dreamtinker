@@ -64,6 +64,7 @@ public class FluidTagProvider extends FluidTagsProvider {
         fluidTag(DreamtinkerFluids.molten_transmutation_gold);
         fluidTag(DreamtinkerFluids.mercury);
         fluidTag(DreamtinkerFluids.molten_arcane_gold);
+        fluidTag(DreamtinkerFluids.molten_dark_metal);
 
         this.tag(DreamtinkerTagKeys.Fluids.narcissus_wing_used).addTags(DreamtinkerFluids.blood_soul.getTag())
             .addOptionalTags(DreamtinkerFluids.liquid_arcana_juice.getTag(), DreamtinkerFluids.liquid_concentrated_gluttony.getTag(),
@@ -76,7 +77,8 @@ public class FluidTagProvider extends FluidTagsProvider {
                      DreamtinkerFluids.molten_transmutation_gold.getTag(), DreamtinkerFluids.molten_arcane_gold.getTag())
             .addOptionalTags(DreamtinkerFluids.molten_evil.getTag(), DreamtinkerFluids.molten_soul_aether.getTag(),
                              DreamtinkerFluids.molten_soul_stained_steel.getTag(), DreamtinkerFluids.molten_malignant_pewter.getTag(),
-                             DreamtinkerFluids.molten_malignant_gluttony.getTag());
+                             DreamtinkerFluids.molten_malignant_gluttony.getTag(),
+                             DreamtinkerFluids.molten_dark_metal.getTag());
         this.tag(DreamtinkerTagKeys.Fluids.molten_echo_shard).addTags(DreamtinkerFluids.molten_echo_shard.getTag());
         this.tag(DreamtinkerTagKeys.Fluids.molten_crying_obsidian).addTags(DreamtinkerFluids.molten_crying_obsidian.getTag());
         this.tag(DreamtinkerTagKeys.Fluids.molten_orichalcum).addTags(DreamtinkerFluids.molten_orichalcum.getTag());

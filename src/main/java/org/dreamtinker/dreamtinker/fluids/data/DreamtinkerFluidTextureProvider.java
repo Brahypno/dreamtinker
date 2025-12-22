@@ -57,6 +57,7 @@ public class DreamtinkerFluidTextureProvider extends AbstractFluidTextureProvide
         this.commonFluid(DreamtinkerFluids.molten_transmutation_gold.getType());
         this.commonFluid(DreamtinkerFluids.mercury.getType());
         this.commonFluid(DreamtinkerFluids.molten_arcane_gold.getType());
+        this.commonFluid(DreamtinkerFluids.molten_dark_metal.getType());
     }
 
     public void commonFluid(FluidType fluid) {

@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "ingredient": [
+    {
+      "item": "born_in_chaos_v1:soul_cutlass"
+    },
+    {
+      "item": "born_in_chaos_v1:nightmare_scythe"
+    }
+  ],
+  "result": {
+    "amount": 110,
+    "fluid": "dreamtinker:molten_dark_metal",
+    "unit_size": 10
+  },
+  "temperature": 900,
+  "time": 70
+}

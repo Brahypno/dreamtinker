@@ -106,6 +106,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addELMeleeHarvest();
         addMalumMeleeHarvest();
         addEidolonMeleeHarvest();
+        addBICMeleeHarvest();
     }
 
     private void addELMeleeHarvest() {
@@ -154,6 +155,15 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addMaterialStats(DreamtinkerMaterialIds.PaladinBoneTool,
                          new HeadMaterialStats(200, 3.0f, Tiers.STONE, 1.5f),
                          HandleMaterialStats.multipliers().durability(0.75f).miningSpeed(0.95f).attackDamage(1.05f).attackSpeed(1.10f).build(),
+                         StatlessMaterialStats.BINDING);
+
+    }
+
+    private void addBICMeleeHarvest() {
+        addMaterialStats(DreamtinkerMaterialIds.MonsterSkin, StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.DarkMetal,
+                         new HeadMaterialStats(1100, 2f, Tiers.NETHERITE, 3f),
+                         HandleMaterialStats.multipliers().durability(1.15f).miningSpeed(0.95f).attackDamage(1.15f).attackSpeed(1.05f).build(),
                          StatlessMaterialStats.BINDING);
 
     }
@@ -244,6 +254,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addMaterialStats(DreamtinkerMaterialIds.PaladinBoneTool,
                          new LimbMaterialStats(150, 0.05f, -0.1f, 0.1f),
                          new GripMaterialStats(-0.15f, 0.10f, 1.5f));
+
+        addMaterialStats(DreamtinkerMaterialIds.MonsterSkin,
+                         StatlessMaterialStats.BOWSTRING);
     }
 
     private void addArmor() {
@@ -331,6 +344,13 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addArmorShieldStats(DreamtinkerMaterialIds.PaladinBone,
                             PlatingMaterialStats.builder().durabilityFactor(38).armor(2f, 3.5f, 7f, 2f).toughness(2).knockbackResistance(0f),
                             StatlessMaterialStats.MAILLE);
+
+        addArmorShieldStats(DreamtinkerMaterialIds.DarkMetal,
+                            PlatingMaterialStats.builder().durabilityFactor(40).armor(2f, 4f, 6f, 2f).toughness(2).knockbackResistance(0f),
+                            StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
+        addArmorShieldStats(DreamtinkerMaterialIds.MonsterSkin,
+                            PlatingMaterialStats.builder().durabilityFactor(25).armor(2f, 4f, 5f, 2f).toughness(1).knockbackResistance(0f),
+                            StatlessMaterialStats.MAILLE, StatlessMaterialStats.CUIRASS);
     }
 
     private void addMisc() {

@@ -31,7 +31,7 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.metallivorous_stibium_lupus, 5, 45, false, false, null);
         addMaterial(DreamtinkerMaterialIds.star_regulus, 6, 50, true, false, null);
         addMaterial(DreamtinkerMaterialIds.crying_obsidian, 3, 30, false, false, null);
-        addMaterial(DreamtinkerMaterialIds.larimar, 3, 20, true, false, null);
+        addMaterial(DreamtinkerMaterialIds.larimar, 2, 10, true, false, null);
         addMaterial(DreamtinkerMaterialIds.amber, 2, 10, false, false, null);
         addMaterial(DreamtinkerMaterialIds.half_rotten_homunculus, 3, 20, false, false, null);
         addMaterial(DreamtinkerMaterialIds.half_rotten_string, 3, 20, false, false, null);
@@ -41,8 +41,8 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.soul_steel, 3, 25, false, false, null);
         addMaterial(DreamtinkerMaterialIds.rainbow_honey_crystal, 3, 25, false, false, null);
         addMaterial(DreamtinkerMaterialIds.black_sapphire, 4, 35, false, false, null);
-        addMaterial(DreamtinkerMaterialIds.scolecite, 3, 20, false, false, null);
-        addMaterial(DreamtinkerMaterialIds.shiningFlint, 3, 20, true, false, null);
+        addMaterial(DreamtinkerMaterialIds.scolecite, 2, 5, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.shiningFlint, 2, 5, true, false, null);
         addMaterial(DreamtinkerMaterialIds.orichalcum, 2, 5, false, false, null);
         addMaterial(DreamtinkerMaterialIds.cold_iron, 2, 6, false, false, null);
         addMaterial(DreamtinkerMaterialIds.shadowSilver, 2, 10, false, false, tagFilled(Dreamtinker.forgeItemTag("ingots/silver")));
@@ -62,10 +62,13 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.malignant_gluttony, 5, 50, false, true, modLoaded("malum"));
         addMaterial(DreamtinkerMaterialIds.soul_rock, 2, 10, true, false, modLoaded("malum"));
 
-        addMaterial(DreamtinkerMaterialIds.TatteredCloth, 2, 10, true, false, modLoaded("eidolon"));
-        addMaterial(DreamtinkerMaterialIds.WickedWeave, 3, 10, true, false, modLoaded("eidolon"));
+        addMaterial(DreamtinkerMaterialIds.TatteredCloth, 2, 5, true, false, modLoaded("eidolon"));
+        addMaterial(DreamtinkerMaterialIds.WickedWeave, 3, 7, true, false, modLoaded("eidolon"));
         addMaterial(DreamtinkerMaterialIds.PaladinBone, 3, 15, false, false, modLoaded("eidolon"));
         addMaterial(DreamtinkerMaterialIds.PaladinBoneTool, 2, 10, true, false, modLoaded("eidolon"));
+
+        addMaterial(DreamtinkerMaterialIds.DarkMetal, 3, 15, false, false, modLoaded("born_in_chaos_v1"));
+        addMaterial(DreamtinkerMaterialIds.MonsterSkin, 2, 5, true, false, modLoaded("born_in_chaos_v1"));
     }
 
     @Override

@@ -197,6 +197,9 @@ dependencies {
     implementation fg.deobf("curse.maven:malum-484064:6646111")
 
     implementation fg.deobf("com.alexthw.eidolon_repraised:eidolon_repraised-${minecraft_version}:${edidolon_version}") { transitive = false }
+    
+    implementation fg.deobf("curse.maven:geckolib-388172:7025129")
+    implementation fg.deobf("curse.maven:born-in-chaos-686437:7150209")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

@@ -26,6 +26,10 @@
     {
       "id": "#dreamtinker:molten_malignant_gluttony",
       "required": false
+    },
+    {
+      "id": "#dreamtinker:molten_dark_metal",
+      "required": false
     }
   ]
 }

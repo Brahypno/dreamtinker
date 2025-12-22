@@ -1,0 +1,33 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "eidolon"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "eidolon"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ingredient": {
+    "item": "eidolon:wicked_weave"
+  },
+  "material": "dreamtinker:eidolon_wicked_wave",
+  "needed": 2,
+  "value": 1
+}

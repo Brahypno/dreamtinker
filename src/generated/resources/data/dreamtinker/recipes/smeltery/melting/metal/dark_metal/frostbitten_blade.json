@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "ingredient": [
+    {
+      "item": "born_in_chaos_v1:frostbitten_blade"
+    },
+    {
+      "item": "born_in_chaos_v1:intoxicating_dagger"
+    }
+  ],
+  "result": {
+    "amount": 100,
+    "fluid": "dreamtinker:molten_dark_metal",
+    "unit_size": 10
+  },
+  "temperature": 900,
+  "time": 67
+}

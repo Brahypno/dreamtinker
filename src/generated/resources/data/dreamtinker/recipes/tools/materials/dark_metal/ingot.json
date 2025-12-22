@@ -1,0 +1,33 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "born_in_chaos_v1"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "born_in_chaos_v1"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ingredient": {
+    "item": "born_in_chaos_v1:dark_metal_ingot"
+  },
+  "material": "dreamtinker:bic_dark_metal",
+  "needed": 5,
+  "value": 1
+}

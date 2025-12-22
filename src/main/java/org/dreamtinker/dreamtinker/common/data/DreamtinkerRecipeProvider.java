@@ -94,8 +94,8 @@ import java.util.*;
 import java.util.function.Consumer;
 
 import static elucent.eidolon.registries.Registry.*;
-import static net.mcreator.borninchaosv.init.BornInChaosV1ModItems.ARMOR_PLATE_FROM_DARK_METAL;
-import static net.mcreator.borninchaosv.init.BornInChaosV1ModItems.DARK_METAL_INGOT;
+import static net.mcreator.borninchaosv.init.BornInChaosV1ModEntities.*;
+import static net.mcreator.borninchaosv.init.BornInChaosV1ModItems.*;
 
 public class DreamtinkerRecipeProvider extends RecipeProvider implements IMaterialRecipeHelper, IToolRecipeHelper, IConditionBuilder, IRecipeHelper {
 
@@ -118,6 +118,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         this.addModifierRecipes(consumer);
         this.addEntityMeltingRecipes(consumer);
     }
+
+    String Entity_Melting_folder = "smeltery/entity_melting/";
 
     private void addToolBuildingRecipes(Consumer<FinishedRecipe> consumer) {
         String folder = "tools/building/";
@@ -305,6 +307,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
     }
 
     String Melting_folder = "smeltery/melting/";
+    String metalFolder = Melting_folder + "metal/";
 
     private void addMeltingRecipes(Consumer<FinishedRecipe> consumer) {
         MeltingFuelBuilder.fuel(DreamtinkerFluids.molten_lupi_antimony.ingredient(FluidValues.SIP), 360, 3600)
@@ -485,6 +488,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         addCompactELMeltingCastingRecipes(consumer);
         addCompactMalumMeltingCastingRecipes(consumer);
         addCompactEidolonMeltingCastingRecipes(consumer);
+        addCompactBICMeltingCastingRecipes(consumer);
     }
 
     private void addCompactELMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
@@ -594,6 +598,96 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         cast(DreamtinkerFluids.molten_arcane_gold.get(), ARCANE_GOLD_NUGGET.get(), FluidValues.NUGGET, wrapped);
         cast(DreamtinkerFluids.molten_arcane_gold.get(), ARCANE_GOLD_INGOT.get(), FluidValues.INGOT, wrapped);
         cast(DreamtinkerFluids.molten_arcane_gold.get(), ARCANE_GOLD_BLOCK.get(), FluidValues.METAL_BLOCK, wrapped);
+    }
+
+    private void addCompactBICMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
+        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"));
+        MeltingRecipeBuilder.melting(Ingredient.of(DARK_METAL_DEPOSIT.get()),
+                                     DreamtinkerFluids.molten_dark_metal.get(), FluidValues.INGOT, 0.05f)
+                            .setOre(IMeltingContainer.OreRateType.METAL)
+                            .save(wrapped, location(Melting_folder + "dark_metal/ore"));
+        MeltingRecipeBuilder.melting(Ingredient.of(PIECEOFDARKMETAL.get()),
+                                     DreamtinkerFluids.molten_dark_metal.get(), FluidValues.NUGGET, 0.05f)
+                            .setOre(IMeltingContainer.OreRateType.METAL)
+                            .save(wrapped, location(Melting_folder + "dark_metal/piece"));
+        MeltingRecipeBuilder.melting(Ingredient.of(PILEOF_DARK_METAL.get()),
+                                     DreamtinkerFluids.molten_dark_metal.get(), FluidValues.NUGGET, 0.05f)
+                            .setOre(IMeltingContainer.OreRateType.METAL)
+                            .save(wrapped, location(Melting_folder + "dark_metal/pile"));
+        MeltingRecipeBuilder.melting(Ingredient.of(ARMOR_PLATE_FROM_DARK_METAL.get()),
+                                     DreamtinkerFluids.molten_dark_metal.get(), FluidValues.INGOT * 5, 0.05f)
+                            .save(wrapped, location(Melting_folder + "dark_metal/plate"));
+        MeltingRecipeBuilder.melting(Ingredient.of(DARK_GRID.get()),
+                                     DreamtinkerFluids.molten_dark_metal.get(), FluidValues.INGOT / 4, 0.05f)
+                            .save(wrapped, location(Melting_folder + "dark_metal/grid"));
+        MeltingRecipeBuilder.melting(Ingredient.of(INFECTED_DIAMOND_ORE.get(), INFECTED_DEEPSLATE_DIAMOND_ORE.get()),
+                                     TinkerFluids.moltenDiamond, FluidValues.GEM, 0.05f)
+                            .setOre(IMeltingContainer.OreRateType.GEM)
+                            .addByproduct(TinkerFluids.moltenDebris.result(FluidValues.GEM / 2))
+                            .addByproduct(DreamtinkerFluids.molten_dark_metal.result(FluidValues.INGOT / 2))
+                            .save(wrapped, location(Melting_folder + "diamond/infected"));
+        meltCast(DreamtinkerFluids.molten_dark_metal.get(), DARK_METAL_NUGGET.get(), FluidValues.NUGGET, wrapped);
+        meltCast(DreamtinkerFluids.molten_dark_metal.get(), DARK_METAL_INGOT.get(), FluidValues.INGOT, wrapped);
+        meltCastBlock(DreamtinkerFluids.molten_dark_metal.get(), DARK_METAL_BLOCK.get(), FluidValues.METAL_BLOCK, wrapped);
+        int[] darkMetalArmorSizes = {FluidValues.NUGGET, FluidValues.SLIME_DROP, FluidValues.GEM_SHARD};
+        MeltingRecipeBuilder.melting(Ingredient.of(DARK_METAL_ARMOR_HELMET.get()), DreamtinkerFluids.molten_dark_metal.get(), FluidValues.INGOT * 5)
+                            .setDamagable(darkMetalArmorSizes)
+                            .addByproduct(TinkerFluids.moltenNetherite.result(FluidValues.INGOT))
+                            .addByproduct(TinkerFluids.moltenDiamond.result(FluidValues.GEM * 5))
+                            .save(consumer, location(metalFolder + "dark_metal/helmet"));
+        MeltingRecipeBuilder.melting(Ingredient.of(DARK_METAL_ARMOR_CHESTPLATE.get()), DreamtinkerFluids.molten_dark_metal.get(), FluidValues.INGOT * 5)
+                            .setDamagable(darkMetalArmorSizes)
+                            .addByproduct(TinkerFluids.moltenNetherite.result(FluidValues.INGOT))
+                            .addByproduct(TinkerFluids.moltenDiamond.result(FluidValues.GEM * 8))
+                            .save(consumer, location(metalFolder + "dark_metal/chestplate"));
+        MeltingRecipeBuilder.melting(Ingredient.of(DARK_METAL_ARMOR_LEGGINGS.get()), DreamtinkerFluids.molten_dark_metal.get(), FluidValues.INGOT * 5)
+                            .setDamagable(darkMetalArmorSizes)
+                            .addByproduct(TinkerFluids.moltenNetherite.result(FluidValues.INGOT))
+                            .addByproduct(TinkerFluids.moltenDiamond.result(FluidValues.GEM * 7))
+                            .save(consumer, location(metalFolder + "dark_metal/leggings"));
+        MeltingRecipeBuilder.melting(Ingredient.of(DARK_METAL_ARMOR_BOOTS.get()), DreamtinkerFluids.molten_dark_metal.get(), FluidValues.INGOT * 5)
+                            .setDamagable(darkMetalArmorSizes)
+                            .addByproduct(TinkerFluids.moltenNetherite.result(FluidValues.INGOT))
+                            .addByproduct(TinkerFluids.moltenDiamond.result(FluidValues.GEM * 4))
+                            .save(consumer, location(metalFolder + "dark_metal/boots"));
+        MeltingRecipeBuilder.melting(Ingredient.of(DARKWARBLADE.get()), DreamtinkerFluids.molten_dark_metal.get(),
+                                     FluidValues.METAL_BLOCK * 2 + FluidValues.NUGGET)
+                            .setDamagable(FluidValues.INGOT)
+                            .save(consumer, location(metalFolder + "dark_metal/warblade"));
+        MeltingRecipeBuilder.melting(Ingredient.of(DARK_RITUAL_DAGGER.get(), SPIRITUAL_SWORD.get(), BONESCALLER_STAFF.get(), SHELL_MACE.get()),
+                                     DreamtinkerFluids.molten_dark_metal.get(),
+                                     FluidValues.NUGGET * 3)
+                            .setDamagable(FluidValues.NUGGET / 2)
+                            .save(consumer, location(metalFolder + "dark_metal/dagger"));
+        MeltingRecipeBuilder.melting(Ingredient.of(SHARPENED_DARK_METAL_SWORD.get(), SPIDER_BITE_SWORD.get()), DreamtinkerFluids.molten_dark_metal.get(),
+                                     FluidValues.INGOT * 2 + FluidValues.NUGGET)
+                            .setDamagable(FluidValues.NUGGET)
+                            .save(consumer, location(metalFolder + "dark_metal/sword"));
+        MeltingRecipeBuilder.melting(Ingredient.of(FROSTBITTEN_BLADE.get(), INTOXICATING_DAGGER.get()), DreamtinkerFluids.molten_dark_metal.get(),
+                                     FluidValues.INGOT + FluidValues.NUGGET)
+                            .setDamagable(FluidValues.NUGGET)
+                            .save(consumer, location(metalFolder + "dark_metal/frostbitten_blade"));
+        MeltingRecipeBuilder.melting(Ingredient.of(SOUL_CUTLASS.get(), NIGHTMARE_SCYTHE.get()), DreamtinkerFluids.molten_dark_metal.get(),
+                                     FluidValues.INGOT + FluidValues.NUGGET * 2)
+                            .setDamagable(FluidValues.NUGGET)
+                            .save(consumer, location(metalFolder + "dark_metal/soul_cutlass"));
+        MeltingRecipeBuilder.melting(Ingredient.of(GREAT_REAPER_AXE.get()), DreamtinkerFluids.molten_dark_metal.get(),
+                                     FluidValues.INGOT * 4 + FluidValues.NUGGET * 2)
+                            .setDamagable(FluidValues.NUGGET)
+                            .save(consumer, location(metalFolder + "dark_metal/greater_axe"));
+        MeltingRecipeBuilder.melting(Ingredient.of(SKULLBREAKER_HAMMER.get()), DreamtinkerFluids.molten_dark_metal.get(),
+                                     FluidValues.METAL_BLOCK + FluidValues.NUGGET * 2)
+                            .setDamagable(FluidValues.INGOT)
+                            .save(consumer, location(metalFolder + "dark_metal/skull_breaker_hammer"));
+
+        EntityMeltingRecipeBuilder.melting(
+                                          EntityIngredient.of(FALLEN_CHAOS_KNIGHT.get(), SKELETON_THRASHER.get(), DIAMOND_TERMITE.get()),
+                                          DreamtinkerFluids.molten_dark_metal.result(FluidValues.NUGGET), 5)
+                                  .save(consumer, location(Entity_Melting_folder + "molten_dark_metal/elite"));
+        EntityMeltingRecipeBuilder.melting(
+                                          EntityIngredient.of(MISSIONER.get(), LIFESTEALER.get(), KRAMPUS.get()),
+                                          DreamtinkerFluids.molten_dark_metal.result(FluidValues.NUGGET), 10)
+                                  .save(consumer, location(Entity_Melting_folder + "molten_dark_metal/boss"));
     }
 
     String materials_folder = "tools/materials/";
@@ -736,72 +830,80 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         addELMaterialRecipes(consumer);
         addMalumMaterialRecipes(consumer);
         addEidolonMaterialRecipes(consumer);
-        //addBICMaterialRecipes(consumer);
+        addBICMaterialRecipes(consumer);
     }
 
     private void addELMaterialRecipes(Consumer<FinishedRecipe> consumer) {
-
-        materialMeltingCasting(consumer, DreamtinkerMaterialIds.etherium, DreamtinkerFluids.unstable_liquid_aether, FluidValues.INGOT, materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.etherium, Ingredient.of(EnigmaticItems.ETHERIUM_INGOT), 1, 1,
+        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"));
+        materialMeltingCasting(wrapped, DreamtinkerMaterialIds.etherium, DreamtinkerFluids.unstable_liquid_aether, FluidValues.INGOT, materials_folder);
+        materialRecipe(wrapped, DreamtinkerMaterialIds.etherium, Ingredient.of(EnigmaticItems.ETHERIUM_INGOT), 1, 1,
                        materials_folder + "etherium");
-        materialComposite(consumer, MaterialIds.string, DreamtinkerMaterialIds.etherium, DreamtinkerFluids.unstable_liquid_aether,
+        materialComposite(wrapped, MaterialIds.string, DreamtinkerMaterialIds.etherium, DreamtinkerFluids.unstable_liquid_aether,
                           FluidValues.INGOT, materials_folder);
-        materialMeltingCasting(consumer, DreamtinkerMaterialIds.nefarious, DreamtinkerFluids.molten_evil, FluidValues.INGOT, materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.nefarious, Ingredient.of(EnigmaticItems.EVIL_INGOT), 1, 1,
+        materialMeltingCasting(wrapped, DreamtinkerMaterialIds.nefarious, DreamtinkerFluids.molten_evil, FluidValues.INGOT, materials_folder);
+        materialRecipe(wrapped, DreamtinkerMaterialIds.nefarious, Ingredient.of(EnigmaticItems.EVIL_INGOT), 1, 1,
                        materials_folder + "nefarious");
-        materialComposite(consumer, MaterialIds.string, DreamtinkerMaterialIds.nefarious, DreamtinkerFluids.molten_evil,
+        materialComposite(wrapped, MaterialIds.string, DreamtinkerMaterialIds.nefarious, DreamtinkerFluids.molten_evil,
                           FluidValues.INGOT, materials_folder);
-        materialMeltingCasting(consumer, DreamtinkerMaterialIds.soul_etherium, DreamtinkerFluids.molten_soul_aether, FluidValues.INGOT, materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.soul_etherium, Ingredient.of(DreamtinkerCommon.soul_etherium.get()), 1, 1,
+        materialMeltingCasting(wrapped, DreamtinkerMaterialIds.soul_etherium, DreamtinkerFluids.molten_soul_aether, FluidValues.INGOT, materials_folder);
+        materialRecipe(wrapped, DreamtinkerMaterialIds.soul_etherium, Ingredient.of(DreamtinkerCommon.soul_etherium.get()), 1, 1,
                        materials_folder + "soul_etherium");
-        materialComposite(consumer, MaterialIds.string, DreamtinkerMaterialIds.soul_etherium, DreamtinkerFluids.molten_soul_aether,
+        materialComposite(wrapped, MaterialIds.string, DreamtinkerMaterialIds.soul_etherium, DreamtinkerFluids.molten_soul_aether,
                           FluidValues.INGOT, materials_folder);
     }
 
     private void addMalumMaterialRecipes(Consumer<FinishedRecipe> consumer) {
-        materialRecipe(consumer, DreamtinkerMaterialIds.spirit_fabric, Ingredient.of(ItemRegistry.SPIRIT_FABRIC.get()), 1, 3,
+        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("malum"));
+        materialRecipe(wrapped, DreamtinkerMaterialIds.spirit_fabric, Ingredient.of(ItemRegistry.SPIRIT_FABRIC.get()), 1, 3,
                        materials_folder + "spirit_fabric");
-        materialRecipe(consumer, DreamtinkerMaterialIds.hallowed_gold, Ingredient.of(ItemRegistry.HALLOWED_GOLD_INGOT.get()), 1, 1,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.hallowed_gold, Ingredient.of(ItemRegistry.HALLOWED_GOLD_INGOT.get()), 1, 1,
                        materials_folder + "hallowed_gold");
-        materialRecipe(consumer, DreamtinkerMaterialIds.mnemonic, Ingredient.of(ItemRegistry.MNEMONIC_FRAGMENT.get()), 1, 4,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.mnemonic, Ingredient.of(ItemRegistry.MNEMONIC_FRAGMENT.get()), 1, 4,
                        materials_folder + "mnemonic_fragment/mnemonic");
-        materialRecipe(consumer, DreamtinkerMaterialIds.auric, Ingredient.of(ItemRegistry.AURIC_EMBERS.get()), 1, 4,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.auric, Ingredient.of(ItemRegistry.AURIC_EMBERS.get()), 1, 4,
                        materials_folder + "mnemonic_fragment/auric");
-        materialRecipe(consumer, DreamtinkerMaterialIds.soul_stained_steel, Ingredient.of(ItemRegistry.SOUL_STAINED_STEEL_PLATING.get()), 1, 2,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.soul_stained_steel, Ingredient.of(ItemRegistry.SOUL_STAINED_STEEL_PLATING.get()), 1, 2,
                        materials_folder + "soul_stained_steel");
-        materialMeltingCasting(consumer, DreamtinkerMaterialIds.soul_stained_steel, DreamtinkerFluids.molten_soul_stained_steel, 130,
+        materialMeltingCasting(wrapped, DreamtinkerMaterialIds.soul_stained_steel, DreamtinkerFluids.molten_soul_stained_steel, 130,
                                materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.malignant_pewter, Ingredient.of(ItemRegistry.MALIGNANT_PEWTER_PLATING.get()), 1, 2,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.malignant_pewter, Ingredient.of(ItemRegistry.MALIGNANT_PEWTER_PLATING.get()), 1, 2,
                        materials_folder + "malignant_pewter");
-        materialMeltingCasting(consumer, DreamtinkerMaterialIds.malignant_pewter, DreamtinkerFluids.molten_malignant_pewter, 130,
+        materialMeltingCasting(wrapped, DreamtinkerMaterialIds.malignant_pewter, DreamtinkerFluids.molten_malignant_pewter, 130,
                                materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.malignant_gluttony, Ingredient.of(DreamtinkerCommon.malignant_gluttony.get()), 1, 1,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.malignant_gluttony, Ingredient.of(DreamtinkerCommon.malignant_gluttony.get()), 1, 1,
                        materials_folder + "malignant_gluttony");
-        materialMeltingCasting(consumer, DreamtinkerMaterialIds.malignant_gluttony, DreamtinkerFluids.molten_malignant_gluttony, FluidValues.INGOT,
+        materialMeltingCasting(wrapped, DreamtinkerMaterialIds.malignant_gluttony, DreamtinkerFluids.molten_malignant_gluttony, FluidValues.INGOT,
                                materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.tainted, Ingredient.of(ItemTagRegistry.TAINTED_BLOCKS), 1, 1, materials_folder + "soul_rock/tainted");
-        materialRecipe(consumer, DreamtinkerMaterialIds.twisted, Ingredient.of(ItemTagRegistry.TWISTED_BLOCKS), 1, 1, materials_folder + "soul_rock/twisted");
-        materialRecipe(consumer, DreamtinkerMaterialIds.refined, Ingredient.of(ItemRegistry.PROCESSED_SOULSTONE.get()), 1, 1,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.tainted, Ingredient.of(ItemTagRegistry.TAINTED_BLOCKS), 1, 1, materials_folder + "soul_rock/tainted");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.twisted, Ingredient.of(ItemTagRegistry.TWISTED_BLOCKS), 1, 1, materials_folder + "soul_rock/twisted");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.refined, Ingredient.of(ItemRegistry.PROCESSED_SOULSTONE.get()), 1, 1,
                        materials_folder + "soul_rock/refined");
 
     }
 
     private void addEidolonMaterialRecipes(Consumer<FinishedRecipe> consumer) {
-        materialRecipe(consumer, DreamtinkerMaterialIds.TatteredCloth, Ingredient.of(TATTERED_CLOTH.get()), 1, 2,
+        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("eidolon"));
+        materialRecipe(wrapped, DreamtinkerMaterialIds.TatteredCloth, Ingredient.of(TATTERED_CLOTH.get()), 1, 2,
                        materials_folder + "tattered_cloth");
-        materialRecipe(consumer, DreamtinkerMaterialIds.WickedWeave, Ingredient.of(WICKED_WEAVE.get()), 1, 2,
-                       materials_folder + "wicked_wave");
-        materialRecipe(consumer, DreamtinkerMaterialIds.PaladinBoneTool, Ingredient.of(IMBUED_BONES.get()), 1, 1,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.WickedWeave, Ingredient.of(WICKED_WEAVE.get()), 1, 2,
+                       materials_folder + "wicked_weave");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.PaladinBoneTool, Ingredient.of(IMBUED_BONES.get()), 1, 1,
                        materials_folder + "paladin_bone_tool");
     }
 
     private void addBICMaterialRecipes(Consumer<FinishedRecipe> consumer) {
-        materialMeltingCasting(consumer, DreamtinkerMaterialIds.DarkMetal, DreamtinkerFluids.molten_dark_metal, FluidValues.INGOT * 5,
+        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"));
+        materialMeltingCasting(wrapped, DreamtinkerMaterialIds.DarkMetal, DreamtinkerFluids.molten_dark_metal, FluidValues.INGOT * 5,
                                materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.DarkMetal, Ingredient.of(DARK_METAL_INGOT.get()), 1, 5,
-                       materials_folder + "dark_metal");
-        materialRecipe(consumer, DreamtinkerMaterialIds.DarkMetal, Ingredient.of(ARMOR_PLATE_FROM_DARK_METAL.get()), 1, 1,
-                       materials_folder + "dark_metal");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.DarkMetal, Ingredient.of(DARK_METAL_INGOT.get()), 1, 5,
+                       materials_folder + "dark_metal/ingot");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.DarkMetal, Ingredient.of(ARMOR_PLATE_FROM_DARK_METAL.get()), 1, 1,
+                       materials_folder + "dark_metal/armor_plate");
+
+        materialRecipe(wrapped, DreamtinkerMaterialIds.MonsterSkin, Ingredient.of(MONSTER_SKIN.get()), 1, 1,
+                       materials_folder + "monster_skin");
+        materialComposite(consumer, DreamtinkerMaterialIds.MonsterSkin, MaterialIds.leather, TinkerFluids.venom, FluidValues.SIP, slimeskinFolder,
+                          "monsterskin_cleaning");
     }
 
     String common_folder = "common/";
@@ -981,9 +1083,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
     private void addPartRecipes(Consumer<FinishedRecipe> consumer) {
         //armor
+
+        Consumer<FinishedRecipe> wrapped;
         armorPlatingBuilder(consumer, DreamtinkerMaterialIds.star_regulus);
-        armorPlatingBuilder(consumer, DreamtinkerMaterialIds.spirit_fabric);
-        armorPlatingBuilder(consumer, DreamtinkerMaterialIds.WickedWeave);
+
         //explode_core
         PartRecipeBuilder.partRecipe(DreamtinkerToolParts.explode_core.get()).setPattern(this.id(DreamtinkerToolParts.explode_core.get()))
                          .setPatternItem(Ingredient.of(DreamtinkerToolParts.explode_core.get())).setCost(8)
@@ -1015,16 +1118,23 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
             CompositeCastingRecipeBuilder.table(tree_parts[i], tree_costs[i])
                                          .save(consumer, this.location(castFolder + this.id(tree_parts[i]).getPath() + "_composite"));
         }
-        malumCompactMaterialBuilder(consumer, DreamtinkerMaterialIds.mnemonic, ItemRegistry.MNEMONIC_FRAGMENT.get(), HeadMaterialStats.ID);
-        malumCompactMaterialBuilder(consumer, DreamtinkerMaterialIds.mnemonic, ItemRegistry.MNEMONIC_FRAGMENT.get(), HandleMaterialStats.ID);
-        malumCompactMaterialBuilder(consumer, DreamtinkerMaterialIds.mnemonic, ItemRegistry.MNEMONIC_FRAGMENT.get(),
+        wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("malum"));
+        armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.spirit_fabric);
+
+        malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.mnemonic, ItemRegistry.MNEMONIC_FRAGMENT.get(), HeadMaterialStats.ID);
+        malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.mnemonic, ItemRegistry.MNEMONIC_FRAGMENT.get(), HandleMaterialStats.ID);
+        malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.mnemonic, ItemRegistry.MNEMONIC_FRAGMENT.get(),
                                     StatlessMaterialStats.BINDING.getIdentifier());
-        malumCompactMaterialBuilder(consumer, DreamtinkerMaterialIds.auric, ItemRegistry.AURIC_EMBERS.get(), HeadMaterialStats.ID);
-        malumCompactMaterialBuilder(consumer, DreamtinkerMaterialIds.auric, ItemRegistry.AURIC_EMBERS.get(), HandleMaterialStats.ID);
-        malumCompactMaterialBuilder(consumer, DreamtinkerMaterialIds.auric, ItemRegistry.AURIC_EMBERS.get(), StatlessMaterialStats.BINDING.getIdentifier());
+        malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.auric, ItemRegistry.AURIC_EMBERS.get(), HeadMaterialStats.ID);
+        malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.auric, ItemRegistry.AURIC_EMBERS.get(), HandleMaterialStats.ID);
+        malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.auric, ItemRegistry.AURIC_EMBERS.get(), StatlessMaterialStats.BINDING.getIdentifier());
+        malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.malignant_lead, ItemRegistry.MALIGNANT_LEAD.get(), HandleMaterialStats.ID);
 
-        malumCompactMaterialBuilder(consumer, DreamtinkerMaterialIds.malignant_lead, ItemRegistry.MALIGNANT_LEAD.get(), HandleMaterialStats.ID);
+        wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("eidolon"));
+        armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.WickedWeave);
 
+        wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"));
+        armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.MonsterSkin);
 
     }
 
@@ -1529,11 +1639,11 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
     }
 
     private void addEntityMeltingRecipes(Consumer<FinishedRecipe> consumer) {
-        String folder = "smeltery/entity_melting/";
+
         String headFolder = "smeltery/entity_melting/heads/";
 
         EntityMeltingRecipeBuilder.melting(EntityIngredient.of(EntityType.WARDEN), DreamtinkerFluids.molten_echo_shard.result(FluidValues.GEM_SHARD), 5)
-                                  .save(consumer, location(folder + "molten_echo_shard"));
+                                  .save(consumer, location(Entity_Melting_folder + "molten_echo_shard"));
     }
 
     @Override

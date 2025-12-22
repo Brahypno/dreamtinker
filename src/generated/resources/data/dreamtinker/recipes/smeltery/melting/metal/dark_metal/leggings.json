@@ -1,0 +1,25 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "byproducts": [
+    {
+      "amount": 90,
+      "tag": "forge:molten_netherite",
+      "unit_size": 50
+    },
+    {
+      "amount": 700,
+      "fluid": "tconstruct:molten_diamond",
+      "unit_size": 25
+    }
+  ],
+  "ingredient": {
+    "item": "born_in_chaos_v1:dark_metal_armor_leggings"
+  },
+  "result": {
+    "amount": 450,
+    "fluid": "dreamtinker:molten_dark_metal",
+    "unit_size": 10
+  },
+  "temperature": 900,
+  "time": 142
+}

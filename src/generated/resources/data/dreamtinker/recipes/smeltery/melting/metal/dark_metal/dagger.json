@@ -1,0 +1,24 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "ingredient": [
+    {
+      "item": "born_in_chaos_v1:dark_ritual_dagger"
+    },
+    {
+      "item": "born_in_chaos_v1:spiritual_sword"
+    },
+    {
+      "item": "born_in_chaos_v1:bonescaller_staff"
+    },
+    {
+      "item": "born_in_chaos_v1:shell_mace"
+    }
+  ],
+  "result": {
+    "amount": 30,
+    "fluid": "dreamtinker:molten_dark_metal",
+    "unit_size": 5
+  },
+  "temperature": 900,
+  "time": 37
+}

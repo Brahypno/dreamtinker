@@ -1,0 +1,10 @@
+{
+  "type": "tconstruct:material_fluid",
+  "fluid": {
+    "amount": 50,
+    "tag": "tconstruct:venom"
+  },
+  "input": "dreamtinker:bic_monster_skin",
+  "output": "tconstruct:leather",
+  "temperature": 10
+}

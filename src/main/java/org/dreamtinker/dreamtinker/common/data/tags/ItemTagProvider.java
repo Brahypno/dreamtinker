@@ -55,6 +55,7 @@ public class ItemTagProvider extends ItemTagsProvider {
 
         this.tag(Items.dt_scythe).add(TinkerTools.scythe.asItem(), TinkerTools.kama.asItem(), DreamtinkerTools.narcissus_wing.asItem());
         this.tag(ItemTagRegistry.SCYTHE).addTags(Items.dt_scythe);
+        this.tag(Items.dt_hammer).add(TinkerTools.veinHammer.asItem(), TinkerTools.sledgeHammer.asItem());
         this.tag(ItemTagRegistry.HIDDEN_UNTIL_BLACK_CRYSTAL)
             .addOptional(malignant_gluttony.getId());
         addItemsTags(DreamtinkerTools.silence_glove, DURABILITY, MELEE, BONUS_SLOTS, ANCIENT_TOOLS, STAFFS, SHIELDS,
