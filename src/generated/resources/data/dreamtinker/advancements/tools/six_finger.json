@@ -5,6 +5,11 @@
       "conditions": {
         "items": [
           {
+            "items": [
+              "dreamtinker:silence_glove"
+            ]
+          },
+          {
             "type": "tconstruct:tool_stack",
             "predicate": {
               "type": "tconstruct:stat_in_range",

@@ -56,6 +56,7 @@ public class AdvancementsProvider extends GenericDataProvider {
 
         builder(Items.ZOMBIE_HEAD, resource("tools/six_finger"), getSilenceGlove, FrameType.GOAL, builder ->
                 builder.addCriterion("damage", InventoryChangeTrigger.TriggerInstance.hasItems(
+                        ItemPredicate.Builder.item().of(DreamtinkerTools.silence_glove).build(),
                         ToolStackItemPredicate.ofTool(StatInRangePredicate.min(ToolStats.ATTACK_DAMAGE, 10)))));
     }
 
