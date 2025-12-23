@@ -1,0 +1,86 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "born_in_chaos_v1"
+          },
+          {
+            "type": "dreamtinker:mod_compact_config",
+            "modid": "born_in_chaos_v1"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:no_levels",
+  "modules": [
+    {
+      "type": "tconstruct:rarity",
+      "rarity": "rare"
+    },
+    {
+      "type": "tconstruct:stat_boost",
+      "flat": 0.3,
+      "operation": "multiply_base",
+      "stat": "tconstruct:durability"
+    },
+    {
+      "type": "tconstruct:stat_boost",
+      "flat": 2.0,
+      "operation": "add",
+      "stat": "tconstruct:armor_toughness"
+    },
+    {
+      "type": "tconstruct:stat_boost",
+      "flat": 0.05,
+      "operation": "add",
+      "stat": "tconstruct:knockback_resistance"
+    },
+    {
+      "type": "tconstruct:stat_boost",
+      "flat": 0.25,
+      "operation": "multiply_base",
+      "stat": "tconstruct:attack_damage"
+    },
+    {
+      "type": "tconstruct:stat_boost",
+      "flat": -0.1,
+      "operation": "multiply_base",
+      "stat": "tconstruct:attack_speed"
+    },
+    {
+      "type": "tconstruct:stat_boost",
+      "flat": -0.25,
+      "operation": "multiply_base",
+      "stat": "tconstruct:mining_speed"
+    },
+    {
+      "type": "tconstruct:requirements",
+      "display_modifiers": [
+        {
+          "level": 1,
+          "name": "tconstruct:netherite"
+        }
+      ],
+      "requirement": {
+        "type": "tconstruct:has_modifier",
+        "check": "all",
+        "modifier": {
+          "type": "tconstruct:single",
+          "modifier": "tconstruct:netherite"
+        }
+      },
+      "translation_key": "modifier.dreamtinker.bic_dark_armor_plate.requirements"
+    }
+  ],
+  "tooltip_display": "always"
+}

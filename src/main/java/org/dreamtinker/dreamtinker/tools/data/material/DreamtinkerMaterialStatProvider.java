@@ -349,7 +349,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                             PlatingMaterialStats.builder().durabilityFactor(40).armor(2f, 4f, 6f, 2f).toughness(2).knockbackResistance(0f),
                             StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
         addArmorShieldStats(DreamtinkerMaterialIds.MonsterSkin,
-                            PlatingMaterialStats.builder().durabilityFactor(25).armor(2f, 4f, 5f, 2f).toughness(1).knockbackResistance(0f),
+                            PlatingMaterialStats.builder().durabilityFactor(20).armor(2f, 2f, 3f, 1f).toughness(1).knockbackResistance(0f),
                             StatlessMaterialStats.MAILLE, StatlessMaterialStats.CUIRASS);
     }
 

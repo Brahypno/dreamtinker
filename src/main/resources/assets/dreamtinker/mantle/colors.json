@@ -138,7 +138,11 @@
     "eidolon_bone_chill": "#69B5DB",
     "bic_dark_defense": "#66646E",
     "bic_dark_blade": "#66646E",
-    "bic_nightmare_defense": "#534E63"
+    "bic_nightmare_defense": "#534E63",
+    "monster_blood": "#534E63",
+    "bic_dark_armor_plate": "#534E63",
+    "bic_frostbitten": "#DF59B8",
+    "bic_intoxicating": "#CFFBFC"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",

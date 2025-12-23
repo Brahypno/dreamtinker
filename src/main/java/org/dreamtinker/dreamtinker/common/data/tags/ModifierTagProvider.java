@@ -38,11 +38,12 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
         this.tag(DreamtinkerTagKeys.Modifiers.EL_CURSED_RELIEF)
             .addOptional(weapon_books.getId(), eldritch_pan.getId(), exiles_faulty.getId());
         this.tag(TinkerTags.Modifiers.MELEE_UPGRADES)
-            .addOptional(Ids.malum_haunted, Ids.malum_animated);
+            .addOptional(Ids.malum_haunted, Ids.malum_animated, Ids.bic_frostbitten, Ids.bic_intoxicating);
         this.tag(TinkerTags.Modifiers.RANGED_UPGRADES)
             .add(memory_base.getId(), Ids.icy_memory, Ids.hate_memory);
         this.tag(TinkerTags.Modifiers.GENERAL_UPGRADES)
-            .add(Ids.soul_upgrade, Ids.weapon_dreams_order, Ids.weapon_dreams_filter, TheEnd.getId());
+            .add(Ids.soul_upgrade, Ids.weapon_dreams_order, Ids.weapon_dreams_filter, TheEnd.getId())
+            .addOptional(Ids.bic_dark_armor_plate);
         this.tag(TinkerTags.Modifiers.HARVEST_UPGRADES)
             .add(foundation_will.getId());
         this.tag(TinkerTags.Modifiers.GENERAL_SLOTLESS)

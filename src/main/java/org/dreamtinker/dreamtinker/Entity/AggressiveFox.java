@@ -25,7 +25,6 @@ import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal;
 import net.minecraft.world.entity.animal.Fox;
-import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -33,7 +32,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -314,28 +312,6 @@ public class AggressiveFox extends Fox implements NeutralMob {
 
         public boolean shouldPanic() {
             return !AggressiveFox.this.isDefending() && (this.mob.isFreezing() || this.mob.isOnFire());
-        }
-    }
-
-    @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
-    public static class WolfAIModifier {
-
-        @SubscribeEvent
-        public static void onEntityJoinLevel(EntityJoinLevelEvent event) {
-            if (!(event.getEntity() instanceof Wolf wolf))
-                return;
-            if (wolf.level().isClientSide)
-                return;
-
-            // 防止重复添加（读档 / 重新进入区块时事件会再触发）
-            CompoundTag data = wolf.getPersistentData();
-            String key = "dreamtinker_add_wolf_battle";
-            if (data.getBoolean(key)){
-                return;
-            }
-            data.putBoolean(key, true);
-
-            wolf.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(wolf, AggressiveFox.class, 10, true, true, null));
         }
     }
 

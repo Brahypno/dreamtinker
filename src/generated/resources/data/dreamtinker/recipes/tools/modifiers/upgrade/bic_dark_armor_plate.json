@@ -1,0 +1,44 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "born_in_chaos_v1"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "born_in_chaos_v1"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "item": "born_in_chaos_v1:armor_plate_from_dark_metal"
+    },
+    {
+      "item": "born_in_chaos_v1:dark_upgrade"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:bic_dark_armor_plate",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/durability"
+  }
+}

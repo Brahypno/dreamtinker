@@ -1,0 +1,48 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "born_in_chaos_v1"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "born_in_chaos_v1"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "amount_needed": 3,
+      "item": "born_in_chaos_v1:intoxicating_decoction"
+    },
+    {
+      "item": "born_in_chaos_v1:dark_metal_ingot"
+    },
+    {
+      "item": "born_in_chaos_v1:bone_handle"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:bic_intoxicating",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/melee"
+  }
+}

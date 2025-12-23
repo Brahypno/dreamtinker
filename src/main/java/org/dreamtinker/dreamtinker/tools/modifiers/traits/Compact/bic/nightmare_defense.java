@@ -7,8 +7,10 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
+import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
@@ -25,8 +27,9 @@ public class nightmare_defense extends ArmorModifier {
     public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         if (world.isClientSide)
             return;
-        if (null != MAGIC_DEPLETION && holder.hasEffect(MAGIC_DEPLETION))
-            holder.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 30, 1, false, false));
+        if (2 == itemSlot && isCorrectSlot && stack.is(Tags.Items.ARMORS_CHESTPLATES) && DTModifierCheck.ModifierALLBody(holder, this.getId()))
+            if (null != MAGIC_DEPLETION && holder.hasEffect(MAGIC_DEPLETION))
+                holder.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 30, 1, false, false));
 
     }
 }

@@ -7,6 +7,14 @@
     {
       "id": "dreamtinker:malum_animated",
       "required": false
+    },
+    {
+      "id": "dreamtinker:bic_frostbitten",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:bic_intoxicating",
+      "required": false
     }
   ]
 }

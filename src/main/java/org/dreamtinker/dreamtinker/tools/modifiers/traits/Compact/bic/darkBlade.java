@@ -238,7 +238,7 @@ public class darkBlade extends BattleModifier {
         }
         if (!rest && !tool.hasTag(Dreamtinker.mcItemTag("axes"))){
             if (null != INFERNAL_FLAME)
-                target.addEffect(new MobEffectInstance(INFERNAL_FLAME, 2 * 20, 0));
+                target.addEffect(new MobEffectInstance(INFERNAL_FLAME, 4 * 20, 0));
         }
         return knockback;
     }

@@ -170,7 +170,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
                   ModifierIds.projectileProtection, ModifierIds.worldbound);
         addTraits(DreamtinkerMaterialIds.DarkMetal, MELEE_HARVEST, bic_dark_blade.getId(), ModifierIds.worldbound);
 
-        addDefaultTraits(DreamtinkerMaterialIds.MonsterSkin, TinkerModifiers.tanned.getId(), bic_nightmare_defense.getId());
+        addDefaultTraits(DreamtinkerMaterialIds.MonsterSkin, TinkerModifiers.tanned.getId(), bic_nightmare_defense.getId(), Ids.monster_blood);
 
     }
 

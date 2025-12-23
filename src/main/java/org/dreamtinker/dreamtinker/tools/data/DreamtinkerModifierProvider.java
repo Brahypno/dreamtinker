@@ -6,6 +6,7 @@ import com.sammy.malum.registry.common.item.EnchantmentRegistry;
 import elucent.eidolon.registries.EidolonAttributes;
 import elucent.eidolon.registries.EidolonPotions;
 import elucent.eidolon.registries.Registry;
+import net.mcreator.borninchaosv.init.BornInChaosV1ModMobEffects;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffects;
@@ -13,6 +14,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.Blocks;
@@ -64,6 +66,7 @@ import slimeknights.tconstruct.library.tools.nbt.IToolContext;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.shared.TinkerAttributes;
 import slimeknights.tconstruct.shared.TinkerEffects;
+import slimeknights.tconstruct.tools.data.ModifierIds;
 import slimeknights.tconstruct.tools.modules.MeltingModule;
 import slimeknights.tconstruct.tools.modules.armor.DepthProtectionModule;
 
@@ -280,9 +283,11 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                            .sources(DamageSourcePredicate.ANY, DamageSourcePredicate.tag(BYPASSES_ENCHANTMENTS))
                                            .eachLevel(3.0f));
         buildModifier(Ids.drinker_magic);
+        buildModifier(Ids.monster_blood).levelDisplay(ModifierLevelDisplay.NO_LEVELS);
         addELModifiers();
         addMalumModifiers();
         addEidolonModifiers();
+        addBICModifiers();
 
     }
 
@@ -387,6 +392,43 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                           .target(LivingEntityPredicate.ANY)
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT).levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+    }
+
+    private void addBICModifiers() {
+        buildModifier(Ids.bic_dark_armor_plate, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(new RarityModule(Rarity.RARE))
+                .addModule(StatBoostModule.multiplyBase(ToolStats.DURABILITY).flat(0.3f))
+                // armor
+                .addModule(StatBoostModule.add(ToolStats.ARMOR_TOUGHNESS).flat(2))
+                .addModule(StatBoostModule.add(ToolStats.KNOCKBACK_RESISTANCE).flat(0.05f))
+                // melee harvest
+                .addModule(StatBoostModule.multiplyBase(ToolStats.ATTACK_DAMAGE).flat(0.25f))
+                .addModule(StatBoostModule.multiplyBase(ToolStats.ATTACK_SPEED).flat(-0.10f))
+                .addModule(StatBoostModule.multiplyBase(ToolStats.MINING_SPEED).flat(-0.25f))
+                .addModule(ModifierRequirementsModule.builder().requireModifier(ModifierIds.netherite, 1)
+                                                     .modifierKey(Ids.bic_dark_armor_plate).build());
+
+        buildModifier(Ids.bic_frostbitten, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"))
+                .addModule(MobEffectModule.builder(BornInChaosV1ModMobEffects.BONE_CHILLING.get())
+                                          .level(RandomLevelingValue.perLevel(0, 2))
+                                          .time(RandomLevelingValue.random(180, 10))
+                                          .target(LivingEntityPredicate.ANY)
+                                          .build(),
+                           ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT);
+        buildModifier(Ids.bic_intoxicating, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"))
+                .addModule(MobEffectModule.builder(BornInChaosV1ModMobEffects.INTOXICATION.get())
+                                          .level(RandomLevelingValue.flat(1))
+                                          .time(RandomLevelingValue.random(110, 10))
+                                          .target(LivingEntityPredicate.ANY)
+                                          .build(),
+                           ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT)
+                .addModule(MobEffectModule.builder(MobEffects.POISON)
+                                          .level(RandomLevelingValue.perLevel(0, 2))
+                                          .time(RandomLevelingValue.random(60, 10))
+                                          .target(LivingEntityPredicate.ANY)
+                                          .build(),
+                           ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT);
     }
 
     @Override

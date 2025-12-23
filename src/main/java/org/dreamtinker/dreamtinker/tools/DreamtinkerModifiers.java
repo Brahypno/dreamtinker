@@ -282,6 +282,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId arcane_hit = id("arcane_hit");
         public static final ModifierId arcane_protection = id("arcane_protection");
         public static final ModifierId drinker_magic = id("drinker_magic");
+        public static final ModifierId monster_blood = id("monster_blood");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");
@@ -306,6 +307,10 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId eidolon_soul_hearts = id("eidolon_soul_hearts");
         public static final ModifierId eidolon_paladin_bone = id("eidolon_paladin_bone");
         public static final ModifierId eidolon_bone_chill = id("eidolon_bone_chill");
+
+        public static final ModifierId bic_dark_armor_plate = id("bic_dark_armor_plate");
+        public static final ModifierId bic_frostbitten = id("bic_frostbitten");
+        public static final ModifierId bic_intoxicating = id("bic_intoxicating");
 
 
         private static ModifierId id(String name) {

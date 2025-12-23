@@ -1607,6 +1607,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .saveSalvage(wrapped, prefix(DreamtinkerModifiers.Ids.malum_spirit_plunder, upgradeSalvage))
                              .save(wrapped, prefix(DreamtinkerModifiers.Ids.malum_spirit_plunder, upgradeFolder));
 
+
         wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("eidolon"));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.eidolon_sapping)
                              .setTools(TinkerTags.Items.MELEE)
@@ -1636,6 +1637,34 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(1)
                              .saveSalvage(wrapped, prefix(DreamtinkerModifiers.Ids.eidolon_bone_chill, upgradeSalvage))
                              .save(wrapped, prefix(DreamtinkerModifiers.Ids.eidolon_bone_chill, upgradeFolder));
+
+        wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.bic_dark_armor_plate)
+                             .setTools(TinkerTags.Items.DURABILITY)
+                             .addInput(ARMOR_PLATE_FROM_DARK_METAL.get(), 1)
+                             .addInput(DARK_UPGRADE.get(), 1)
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .setMaxLevel(1)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.Ids.bic_dark_armor_plate, upgradeSalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.Ids.bic_dark_armor_plate, upgradeFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.bic_frostbitten)
+                             .setTools(TinkerTags.Items.MELEE)
+                             .addInput(PERMAFROST_SHARD.get(), 5)
+                             .addInput(DARK_METAL_INGOT.get(), 1)
+                             .addInput(BONE_HANDLE.get(), 1)
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .setMaxLevel(3)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.Ids.bic_frostbitten, upgradeSalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.Ids.bic_frostbitten, upgradeFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.bic_intoxicating)
+                             .setTools(TinkerTags.Items.MELEE)
+                             .addInput(INTOXICATING_DECOCTION.get(), 3)
+                             .addInput(DARK_METAL_INGOT.get(), 1)
+                             .addInput(BONE_HANDLE.get(), 1)
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .setMaxLevel(1)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.Ids.bic_intoxicating, upgradeSalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.Ids.bic_intoxicating, upgradeFolder));
     }
 
     private void addEntityMeltingRecipes(Consumer<FinishedRecipe> consumer) {

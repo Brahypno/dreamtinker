@@ -6,26 +6,26 @@
     "tconstruct:maille": {},
     "tconstruct:plating_boots": {
       "armor": 2.0,
-      "durability": 325,
+      "durability": 260,
       "toughness": 1.0
     },
     "tconstruct:plating_chestplate": {
-      "armor": 5.0,
-      "durability": 400,
+      "armor": 3.0,
+      "durability": 320,
       "toughness": 1.0
     },
     "tconstruct:plating_helmet": {
-      "armor": 2.0,
-      "durability": 275,
+      "armor": 1.0,
+      "durability": 220,
       "toughness": 1.0
     },
     "tconstruct:plating_leggings": {
-      "armor": 4.0,
-      "durability": 375,
+      "armor": 2.0,
+      "durability": 300,
       "toughness": 1.0
     },
     "tconstruct:plating_shield": {
-      "durability": 450,
+      "durability": 360,
       "toughness": 1.0
     }
   }

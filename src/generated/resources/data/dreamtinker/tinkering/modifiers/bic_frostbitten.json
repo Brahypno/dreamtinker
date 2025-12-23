@@ -1,0 +1,43 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "born_in_chaos_v1"
+          },
+          {
+            "type": "dreamtinker:mod_compact_config",
+            "modid": "born_in_chaos_v1"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:mob_effect",
+      "effect": "born_in_chaos_v1:bone_chilling",
+      "hooks": [
+        "tconstruct:melee_hit",
+        "tconstruct:projectile_hit"
+      ],
+      "level": {
+        "per_level": 2.0
+      },
+      "time": {
+        "flat": 180.0,
+        "random": 10.0
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}
