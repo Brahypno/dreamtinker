@@ -165,6 +165,10 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new HeadMaterialStats(1100, 2f, Tiers.NETHERITE, 3f),
                          HandleMaterialStats.multipliers().durability(1.15f).miningSpeed(0.95f).attackDamage(1.15f).attackSpeed(1.05f).build(),
                          StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.SpinyShell,
+                         new HeadMaterialStats(400, 2f, Tiers.IRON, 1.5f),
+                         HandleMaterialStats.multipliers().durability(0.85f).attackDamage(1.10f).attackSpeed(0.85f).build(),
+                         StatlessMaterialStats.BINDING);
 
     }
 
@@ -351,6 +355,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addArmorShieldStats(DreamtinkerMaterialIds.MonsterSkin,
                             PlatingMaterialStats.builder().durabilityFactor(20).armor(2f, 2f, 3f, 1f).toughness(1).knockbackResistance(0f),
                             StatlessMaterialStats.MAILLE, StatlessMaterialStats.CUIRASS);
+        addArmorShieldStats(DreamtinkerMaterialIds.SpinyShell,
+                            PlatingMaterialStats.builder().durabilityFactor(20).armor(2f, 4f, 7f, 3f).toughness(0).knockbackResistance(0f),
+                            StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
     }
 
     private void addMisc() {

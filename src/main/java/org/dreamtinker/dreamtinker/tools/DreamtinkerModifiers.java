@@ -283,6 +283,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId arcane_protection = id("arcane_protection");
         public static final ModifierId drinker_magic = id("drinker_magic");
         public static final ModifierId monster_blood = id("monster_blood");
+        public static final ModifierId deeper_water_killer = id("deeper_water_killer");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");

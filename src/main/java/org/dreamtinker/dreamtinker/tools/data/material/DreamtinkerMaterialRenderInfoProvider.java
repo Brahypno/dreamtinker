@@ -67,6 +67,7 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
 
         buildRenderInfo(DreamtinkerMaterialIds.DarkMetal).color(0xFF777883).fallbacks("metal").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.MonsterSkin).color(0xFF534E63).fallbacks("cloth").luminosity(0);
+        buildRenderInfo(DreamtinkerMaterialIds.SpinyShell).color(0xFF738A99).fallbacks("bone").luminosity(4);
 
     }
 

@@ -1,0 +1,28 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "born_in_chaos_v1"
+          },
+          {
+            "type": "dreamtinker:mod_compact_config",
+            "modid": "born_in_chaos_v1"
+          }
+        ]
+      }
+    ]
+  },
+  "craftable": true,
+  "hidden": false,
+  "sortOrder": 5,
+  "tier": 2
+}

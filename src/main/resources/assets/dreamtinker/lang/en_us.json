@@ -546,6 +546,9 @@
   "modifier.dreamtinker.bic_intoxicating": "Intoxicating",
   "modifier.dreamtinker.bic_intoxicating.flavor": "Too drunk to live",
   "modifier.dreamtinker.bic_intoxicating.description": "Attack applies intoxicating(born in chaos) effect",
+  "modifier.dreamtinker.deeper_water_killer": "Deeper anti aquatic",
+  "modifier.dreamtinker.deeper_water_killer.flavor": "Crab power",
+  "modifier.dreamtinker.deeper_water_killer.description": "Deal more damage and apply weakness to aquatic and those in water or rain",
 
   "itemGroup.dreamtinker.tool": "dreamtinker | tool",
   "itemGroup.dreamtinker.part": "dreamtinker | part",
@@ -774,6 +777,8 @@
   "material.dreamtinker.bic_dark_metal.flavor": "Deep Dark Monster Metal",
   "material.dreamtinker.bic_monster_skin": "Monster Skin",
   "material.dreamtinker.bic_monster_skin.flavor": "Brutal Cruel",
+  "material.dreamtinker.bic_spiny_shell": "Spiny Shell",
+  "material.dreamtinker.bic_spiny_shell.flavor": "Spiny Spiny",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "Molten echo Alloy",
   "fluid.dreamtinker.molten_echo_alloy": "Molten echo Alloy",

@@ -11,6 +11,8 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -33,6 +35,7 @@ import slimeknights.mantle.data.predicate.block.BlockPropertiesPredicate;
 import slimeknights.mantle.data.predicate.damage.DamageSourcePredicate;
 import slimeknights.mantle.data.predicate.damage.DamageTypePredicate;
 import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
+import slimeknights.mantle.data.predicate.entity.MobTypePredicate;
 import slimeknights.mantle.data.predicate.item.ItemPredicate;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.data.tinkering.AbstractModifierProvider;
@@ -284,6 +287,14 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                            .eachLevel(3.0f));
         buildModifier(Ids.drinker_magic);
         buildModifier(Ids.monster_blood).levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+        IJsonPredicate<LivingEntity> deep_water = LivingEntityPredicate.or(LivingEntityPredicate.EYES_IN_WATER, LivingEntityPredicate.FEET_IN_WATER,
+                                                                           LivingEntityPredicate.UNDERWATER, LivingEntityPredicate.RAINING,
+                                                                           new MobTypePredicate(MobType.WATER));
+        buildModifier(Ids.deeper_water_killer)
+                .addModule(ConditionalMeleeDamageModule.builder().target(deep_water).eachLevel(2.0f))
+                .addModule(MobEffectModule.builder(MobEffects.WEAKNESS).level(RandomLevelingValue.flat(4)).time(RandomLevelingValue.random(20, 10))
+                                          .target(deep_water).build(),
+                           ModifierHooks.MELEE_HIT);
         addELModifiers();
         addMalumModifiers();
         addEidolonModifiers();

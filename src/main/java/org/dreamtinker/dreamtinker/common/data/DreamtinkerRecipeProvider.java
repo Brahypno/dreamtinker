@@ -904,6 +904,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                        materials_folder + "monster_skin");
         materialComposite(consumer, DreamtinkerMaterialIds.MonsterSkin, MaterialIds.leather, TinkerFluids.venom, FluidValues.SIP, slimeskinFolder,
                           "monsterskin_cleaning");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.SpinyShell, Ingredient.of(SPINY_SHELL.get()), 1, 1,
+                       materials_folder + "bic_spiny_shell");
     }
 
     String common_folder = "common/";
@@ -1135,6 +1137,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
         wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"));
         armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.MonsterSkin);
+        armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.SpinyShell);
 
     }
 
