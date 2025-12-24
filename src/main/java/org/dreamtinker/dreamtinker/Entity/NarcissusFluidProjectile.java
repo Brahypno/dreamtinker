@@ -9,6 +9,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -28,6 +29,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.jetbrains.annotations.NotNull;
+import slimeknights.tconstruct.common.TinkerDamageTypes;
 import slimeknights.tconstruct.fluids.TinkerFluids;
 import slimeknights.tconstruct.library.modifiers.fluid.FluidEffectContext;
 import slimeknights.tconstruct.library.modifiers.fluid.FluidEffectManager;
@@ -251,12 +253,12 @@ public class NarcissusFluidProjectile extends Projectile {
         Entity entity1 = this.getOwner();
         if (null != entity1){
             DamageSource damagesource = null != toolStackView && 2 < toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) ?
-                                        DreamtinkerDamageTypes.source(entity1.level().registryAccess(), DreamtinkerDamageTypes.NULL_VOID, this, entity1) :
+                                        DreamtinkerDamageTypes.source(entity1.level().registryAccess(), DreamtinkerDamageTypes.NULL_VOID, null, entity1) :
                                         null != toolStackView && 1 < toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) ?
-                                        this.damageSources().sonicBoom(entity1) :
+                                        DreamtinkerDamageTypes.source(entity1.level().registryAccess(), DamageTypes.SONIC_BOOM, null, entity1) :
                                         null != toolStackView && 0 < toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) ?
-                                        this.damageSources().indirectMagic(this, entity1) :
-                                        this.damageSources().mobProjectile(this, (LivingEntity) entity1);
+                                        DreamtinkerDamageTypes.source(entity1.level().registryAccess(), TinkerDamageTypes.FLUID_COLD.melee(), null, entity1) :
+                                        DreamtinkerDamageTypes.source(entity1.level().registryAccess(), DamageTypes.MOB_PROJECTILE, null, entity1);
             if (entity1 instanceof LivingEntity){
                 ((LivingEntity) entity1).setLastHurtMob(target);
             }

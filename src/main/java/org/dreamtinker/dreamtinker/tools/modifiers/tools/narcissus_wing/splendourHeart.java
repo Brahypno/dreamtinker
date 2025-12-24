@@ -81,12 +81,12 @@ public class splendourHeart extends BattleModifier {
             int level = java.util.Arrays.binarySearch(TheSplendourHeart.get().toArray(), (double) Math.nextUp(per));
             level = level <= 0 ? -(level) - 1 : level;
 
-            ToolStats.DURABILITY.add(builder, builder.getStat(ToolStats.DURABILITY) * value);
-            ToolStats.DRAW_SPEED.add(builder, builder.getStat(ToolStats.DRAW_SPEED) * value);
-            ToolStats.PROJECTILE_DAMAGE.add(builder, builder.getStat(ToolStats.PROJECTILE_DAMAGE) * value);
-            ToolStats.VELOCITY.add(builder, builder.getStat(ToolStats.VELOCITY) * value);
-            ToolStats.ATTACK_DAMAGE.add(builder, builder.getStat(ToolStats.ATTACK_DAMAGE) * value);
-            ToolStats.ATTACK_SPEED.add(builder, builder.getStat(ToolStats.ATTACK_SPEED) * value);
+            ToolStats.DURABILITY.multiply(builder, value);
+            ToolStats.DRAW_SPEED.multiply(builder, value);
+            ToolStats.PROJECTILE_DAMAGE.multiply(builder, value);
+            ToolStats.VELOCITY.multiply(builder, value);
+            ToolStats.ATTACK_DAMAGE.multiply(builder, value);
+            ToolStats.ATTACK_SPEED.multiply(builder, value);
 
             if (1 <= level){
                 Tier tier = builder.getStat(ToolStats.HARVEST_TIER);
@@ -154,15 +154,15 @@ public class splendourHeart extends BattleModifier {
         int level = java.util.Arrays.binarySearch(TheSplendourHeart.get().toArray(), (double) Math.nextUp(d));
         level = level <= 0 ? -(level) - 1 : level;
         switch (level) {
-            case 0 -> {return (float) ((d - TheSplendourHeart.get().get(0)) / TheSplendourHeart.get().get(0));}//map to -100%-0
+            case 0 -> {return (float) ((d - TheSplendourHeart.get().get(0)) / TheSplendourHeart.get().get(0)) + 1;}//map to -100%-0
             case 1 -> {
-                return (float) ((TheSplendourHeart.get().get(1) - d) / (TheSplendourHeart.get().get(1) - TheSplendourHeart.get().get(0)));
+                return (float) ((TheSplendourHeart.get().get(1) - d) / (TheSplendourHeart.get().get(1) - TheSplendourHeart.get().get(0)) + 1);
             }//map to 0-100%
             case 2 -> {
-                return 1 + 2 * (float) ((TheSplendourHeart.get().get(2) - d) / (TheSplendourHeart.get().get(2) - TheSplendourHeart.get().get(1)));
+                return 1 + 2 * (float) ((TheSplendourHeart.get().get(2) - d) / (TheSplendourHeart.get().get(2) - TheSplendourHeart.get().get(1)) + 1);
             }//map to 100%-
-            case 3 -> {return (float) (d - TheSplendourHeart.get().get(2)) * 100;}
-            default -> {return d * 100;}//highest tier, should show respect to that do such lots of advancements-----and this is not enough
+            case 3 -> {return (float) (d - TheSplendourHeart.get().get(2)) * 100 + 1;}
+            default -> {return d * 100 + 1.0f;}//highest tier, should show respect to that do such lots of advancements-----and this is not enough
         }
     }
 }

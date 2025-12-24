@@ -187,7 +187,7 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
     // at runtime, use the full JEI jar
     runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
-    runtimeOnly fg.deobf("curse.maven:tconjei-974154:6841685")
+    //runtimeOnly fg.deobf("curse.maven:tconjei-974154:7372437") buggy one, dont use!
     runtimeOnly fg.deobf("curse.maven:MoonlightLib-499980:6000197")
     runtimeOnly fg.deobf("curse.maven:MmmMmmMmmMmm-225738:5737040")
     runtimeOnly fg.deobf("curse.maven:jade-324717:6855440")

@@ -2,8 +2,8 @@ package org.dreamtinker.dreamtinker.library.recipe.virtual;
 
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.fluids.FluidStack;
 import slimeknights.mantle.recipe.ingredient.EntityIngredient;
+import slimeknights.mantle.recipe.ingredient.FluidIngredient;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
 public record WorldRitualEntry(
         Trigger trigger,                          // 触发类型（仅用于显示）
         @Nullable Ingredient catalyst,            // 催化物（如 蓝冰 / 羽毛 / 末影珍珠 / 打火石）
-        @Nullable FluidStack fluid,               // 需要的流体（如 水 1000mB）
+        @Nullable FluidIngredient fluid,               // 需要的流体（如 水 1000mB）
         @Nullable Ingredient needBlocksAsItems, // 需要附近存在/被替换的方块（用物品图标展示）
         @Nullable ItemStack resultItem,           // 产物（物品）
         @Nullable ItemStack resultBlockIcon,      // 产物（方块，用图标展示）

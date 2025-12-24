@@ -17,16 +17,17 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.library.recipe.virtual.WorldRitualEntry;
+import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.recipe.ingredient.EntityIngredient;
+import slimeknights.mantle.recipe.ingredient.FluidIngredient;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.materials.MaterialRegistry;
 import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
@@ -77,7 +78,7 @@ public final class DTJeiPlugin implements IModPlugin {
                 list.add(new WorldRitualEntry(
                         WorldRitualEntry.Trigger.ITEM_IN_FLUID,
                         Ingredient.of(Items.BLUE_ICE),
-                        new FluidStack(Fluids.WATER, 1000),
+                        FluidIngredient.of(Fluids.WATER, 1000),
                         null,
                         item.withMaterial(mli),
                         null,
@@ -197,6 +198,19 @@ public final class DTJeiPlugin implements IModPlugin {
                 EntityIngredient.of(EntityType.PLAYER),
                 null, null, null, null, rainbowHoneyRate.get(),
                 "In rain",  // underwater
+                false   // drowning
+        ));
+
+        list.add(new WorldRitualEntry(
+                WorldRitualEntry.Trigger.USE_ITEM,
+                Ingredient.of(DreamtinkerTools.narcissus_wing),
+                FluidIngredient.of(DreamtinkerTagKeys.Fluids.narcissus_wing_used, 50),
+                null,
+                null,
+                null,
+                null,
+                null, null, null, null, null,
+                "Available Fluids",  // underwater
                 false   // drowning
         ));
 

@@ -76,10 +76,10 @@ public final class WorldRitualCategory implements IRecipeCategory<WorldRitualEnt
             x += 33;
         }
         // 流体
-        if (r.fluid() != null && !r.fluid().isEmpty()){
+        if (r.fluid() != null && !r.fluid().getFluids().isEmpty()){
             b.addSlot(RecipeIngredientRole.INPUT, x, y)
-             .addIngredients(ForgeTypes.FLUID_STACK, List.of(r.fluid()))
-             .setFluidRenderer(Math.max(1000, r.fluid().getAmount()), false, 16, 16);
+             .addIngredients(ForgeTypes.FLUID_STACK, r.fluid().getFluids())
+             .setFluidRenderer(Math.max(1000, r.fluid().getAmount(r.fluid().getFluids().get(0).getFluid())), false, 16, 16);
             x += 33;
         }
         List<CelestialTypes.CelestialIcon> icons = new ArrayList<>();
