@@ -1,12 +1,10 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.armors;
 
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -26,10 +24,7 @@ public class knockBacker extends ArmorModifier {
             if (mainhand.getItem() instanceof IModifiable){
                 ToolStack ts = ToolStack.from(mainhand);
                 float baseKnockback = knockback;
-                ToolAttackContext
-                        aContext =
-                        new ToolAttackContext(context.getEntity(), context.getEntity() instanceof Player player ? player : null, InteractionHand.MAIN_HAND,
-                                              EquipmentSlot.MAINHAND, offender, offender, true, 0, false);
+                ToolAttackContext aContext = ToolAttackContext.attacker(context.getEntity()).target(offender).cooldown(1).applyAttributes().build();
 
 
                 for (ModifierEntry entry : ts.getModifierList()) {

@@ -5,7 +5,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustColorTransitionOptions;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,11 +20,11 @@ import org.dreamtinker.dreamtinker.Entity.SlashOrbitEntity;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.joml.Vector3f;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.realSweepRange;
-import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.NO_COOLDOWN;
 
 public class realSweep extends BattleModifier {
     public realSweep() {}
@@ -39,7 +38,7 @@ public class realSweep extends BattleModifier {
                 for (LivingEntity aoeTarget : level.getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(range, 0.25D, range))) {
                     if (aoeTarget != player && !player.isAlliedTo(aoeTarget) && !(aoeTarget instanceof ArmorStand stand && stand.isMarker()) &&
                         player.distanceToSqr(aoeTarget) < rangeSq && aoeTarget != entity && entity != player.getRootVehicle()){
-                        ToolAttackUtil.attackEntity(tool, player, InteractionHand.MAIN_HAND, aoeTarget, NO_COOLDOWN, 1 == entry.getLevel());
+                        ToolAttackUtil.performAttack(tool, ToolAttackContext.attacker(player).target(aoeTarget).cooldown(1).applyAttributes().build());
                     }
                 }
                 level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, player.getSoundSource(), 1.0F, 1.0F);

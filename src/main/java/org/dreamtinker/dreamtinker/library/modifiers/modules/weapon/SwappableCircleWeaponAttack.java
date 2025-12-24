@@ -65,33 +65,32 @@ public class SwappableCircleWeaponAttack implements ModifierModule, MeleeHitModi
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
         if (!(this.match.equals(tool.getPersistentData().getString(this.getKey(modifier.getModifier())))))
             return;
-        double range = (double) (this.diameter + (float) tool.getModifierLevel(TinkerModifiers.expanded.getId()));
-        if (range > (double) 0.0F){
+        // no need for fully charged for scythe sweep, easier than sword sweep
+        // basically sword sweep logic, just deals full damage to all entities (and full effects)
+        // but also takes more durability loss
+        double range = diameter + tool.getModifierLevel(TinkerModifiers.expanded.getId());
+        // allow having no range until modified with range
+        if (range > 0){
             double rangeSq = range * range;
             LivingEntity attacker = context.getAttacker();
             Entity target = context.getTarget();
             Level level = attacker.level();
-
-            for (LivingEntity aoeTarget : level.getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(range, (double) 0.25F, range))) {
-                if (aoeTarget != attacker && aoeTarget != target && !attacker.isAlliedTo(aoeTarget)){
-                    if (aoeTarget instanceof ArmorStand){
-                        ArmorStand stand = (ArmorStand) aoeTarget;
-                        if (stand.isMarker()){
-                            continue;
-                        }
-                    }
-
-                    if (target.distanceToSqr(aoeTarget) < rangeSq){
-                        float angle = attacker.getYRot() * ((float) Math.PI / 180F);
-                        aoeTarget.knockback((double) 0.4F, (double) Mth.sin(angle), (double) (-Mth.cos(angle)));
-                        ToolAttackUtil.extraEntityAttack(tool, attacker, context.getHand(), aoeTarget);
-                    }
+            for (LivingEntity aoeTarget : level.getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(range, 0.25D, range))) {
+                if (tool.isBroken()){
+                    break;
+                }
+                if (aoeTarget != attacker && aoeTarget != target && !attacker.isAlliedTo(aoeTarget) && ToolAttackUtil.isAttackable(attacker, aoeTarget)
+                    && !(aoeTarget instanceof ArmorStand stand && stand.isMarker()) && target.distanceToSqr(aoeTarget) < rangeSq){
+                    float angle = attacker.getYRot() * ((float) Math.PI / 180F);
+                    aoeTarget.knockback(0.4F, Mth.sin(angle), -Mth.cos(angle));
+                    // TODO: do we want to bring back the behavior where circle returns success if any AOE target is hit?
+                    ToolAttackUtil.performAttack(tool, context.withAOETarget(aoeTarget));
                 }
             }
 
-            level.playSound((Player) null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, attacker.getSoundSource(), 1.0F,
-                            1.0F);
-            if (attacker instanceof Player player){
+            level.playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, attacker.getSoundSource(), 1.0F, 1.0F);
+            Player player = context.getPlayerAttacker();
+            if (!context.isProjectile() && player != null){
                 player.sweepAttack();
             }
         }

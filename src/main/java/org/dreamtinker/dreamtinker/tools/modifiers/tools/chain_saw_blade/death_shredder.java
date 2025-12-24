@@ -60,7 +60,6 @@ import java.util.*;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.ChainSawEnergyCost;
 import static slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHelper.TANK_HELPER;
-import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.NO_COOLDOWN;
 
 public class death_shredder extends BattleModifier implements KeybindInteractModifierHook {
     public death_shredder() {this.tiers = TierSortingRegistry.getSortedTiers();}
@@ -264,7 +263,9 @@ public class death_shredder extends BattleModifier implements KeybindInteractMod
                 }
 
                 if (flag){
-                    ToolAttackUtil.attackEntity(tool, entity, InteractionHand.MAIN_HAND, victim, NO_COOLDOWN, false);
+                    ToolAttackUtil.performAttack(tool, ToolAttackContext.attacker(entity).target(victim).cooldown(1).applyAttributes()
+                                                                        .build());
+
                     if (fuel_valid || electric_valid){
                         heat += entity.level().random.nextFloat() / 5f;
                         AttributeInstance attr = ((LivingEntity) victim).getAttribute(Attributes.ARMOR);

@@ -80,7 +80,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
 
         addDefaultTraits(DreamtinkerMaterialIds.black_sapphire, not_like_was);
         addDefaultTraits(DreamtinkerMaterialIds.scolecite, light_in_dark);
-        addDefaultTraits(DreamtinkerMaterialIds.shiningFlint, TinkerModifiers.jagged.getId(), Ids.fiber_glass_fragments, light_emanation.getId());
+        addDefaultTraits(DreamtinkerMaterialIds.shiningFlint, ModifierIds.jagged, Ids.fiber_glass_fragments, light_emanation.getId());
 
         addDefaultTraits(DreamtinkerMaterialIds.orichalcum, Ids.lunarAttractive, Ids.lunarRejection);
         addTraits(DreamtinkerMaterialIds.orichalcum, ARMOR, Ids.lunarProtection, lunar_defense.getId());

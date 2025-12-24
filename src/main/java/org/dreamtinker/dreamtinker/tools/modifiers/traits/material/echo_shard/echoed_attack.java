@@ -29,7 +29,6 @@ import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
-import slimeknights.tconstruct.library.utils.Util;
 
 import javax.annotation.Nullable;
 import java.util.HashSet;
@@ -39,7 +38,6 @@ import java.util.Set;
 import static net.minecraft.nbt.Tag.TAG_INT;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.EchoAttackCharge;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.EchoAttackChargingChance;
-import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.getAttributeAttackDamage;
 
 public class echoed_attack extends BattleModifier {
     private static final ResourceLocation TAG_ECHO_ENERGY = Dreamtinker.getLocation("echo_energy");
@@ -122,8 +120,8 @@ public class echoed_attack extends BattleModifier {
     }
 
     private void shortCutDamage(IToolStackView tool, ToolAttackContext context) {
-        float damage = getAttributeAttackDamage(tool, context.getAttacker(), Util.getSlotType(context.getHand()));
-        float baseDamage = damage;
+        float baseDamage = context.getBaseDamage();
+        float damage = baseDamage;
         List<ModifierEntry> modifiers = tool.getModifierList();
         for (ModifierEntry entry : modifiers) {
             damage = entry.getHook(ModifierHooks.MELEE_DAMAGE).getMeleeDamage(tool, entry, context, baseDamage, damage);

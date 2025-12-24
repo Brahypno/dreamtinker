@@ -13,10 +13,8 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -47,13 +45,11 @@ import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
 import slimeknights.tconstruct.library.tools.item.ModifiableItem;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
-import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 import java.util.List;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.*;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.ContinuousExplodeTimes;
-import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.NO_COOLDOWN;
 
 public class TNTArrow extends ModifiableItem {
     public static final ResourceLocation TAG_CONTINUOUS = Dreamtinker.getLocation("continuous_explode");
@@ -163,16 +159,24 @@ public class TNTArrow extends ModifiableItem {
             entity.invulnerableTime = 0;
             ToolStack toolStack = ToolStack.from(this.tntarrow);
             if (entity.getUUID() != this.getOwner().getUUID()){
-                ToolAttackUtil.attackEntity(toolStack, (LivingEntity) this.getOwner(), InteractionHand.OFF_HAND, entity, NO_COOLDOWN, false);
+                ToolAttackUtil.performAttack(toolStack,
+                                             ToolAttackContext.attacker((LivingEntity) this.getOwner()).target(entity).cooldown(1).toolAttributes(toolStack)
+                                                              .build());
+                //ToolAttackUtil.attackEntity(toolStack, (LivingEntity) this.getOwner(), InteractionHand.OFF_HAND, entity, NO_COOLDOWN, false);
+
             }else {
                 try {
                     ServerLevel serverLevel = (ServerLevel) this.level();
                     FakePlayer fakeAttacker = FakePlayerFactory.getMinecraft(serverLevel);
-                    ToolAttackUtil.attackEntity(toolStack, fakeAttacker, InteractionHand.MAIN_HAND, entity, NO_COOLDOWN, false);
+                    ToolAttackUtil.performAttack(toolStack,
+                                                 ToolAttackContext.attacker(fakeAttacker).target(entity).cooldown(1).toolAttributes(toolStack)
+                                                                  .build());
                 }
                 catch (SecurityException e) {
                     // 捕获异常，说明 FakePlayer 被禁用
-                    ToolAttackUtil.attackEntity(toolStack, (LivingEntity) this.getOwner(), InteractionHand.MAIN_HAND, entity, NO_COOLDOWN, false);
+                    ToolAttackUtil.performAttack(toolStack,
+                                                 ToolAttackContext.attacker((LivingEntity) this.getOwner()).target(entity).cooldown(1).toolAttributes(toolStack)
+                                                                  .build());
                 }
                 catch (Exception ignored) {
                 }
@@ -192,13 +196,10 @@ public class TNTArrow extends ModifiableItem {
                         ToolStack ts = ToolStack.from(tntarrow);
                         if (ts.getPersistentData().contains(TAG_EXPLODE_ALREADY))
                             return;
-                        float damage = ts.getStats().get(ToolStats.ATTACK_DAMAGE);
-                        ToolAttackContext
-                                context =
-                                new ToolAttackContext(owner, owner instanceof Player player ? player : null, InteractionHand.MAIN_HAND, EquipmentSlot.MAINHAND,
-                                                      owner, owner, this.isCritArrow(),
-                                                      1.0f, false);
-                        float baseDamage = damage;
+                        ToolAttackContext context = ToolAttackContext.attacker(owner).target(owner).cooldown(0).toolAttributes(ts).build();
+                        
+                        float baseDamage = context.getBaseDamage();
+                        float damage = baseDamage;
                         List<ModifierEntry> modifiers = ts.getModifierList();
 
                         for (ModifierEntry entry : modifiers) {

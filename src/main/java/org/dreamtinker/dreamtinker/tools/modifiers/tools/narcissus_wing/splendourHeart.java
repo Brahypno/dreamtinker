@@ -26,12 +26,10 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ToolDataNBT;
 import slimeknights.tconstruct.library.tools.stat.ModifierStatsBuilder;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
-import slimeknights.tconstruct.library.utils.Util;
 
 import java.util.List;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.TheSplendourHeart;
-import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.getAttributeAttackDamage;
 
 public class splendourHeart extends BattleModifier {
     //According to PS5 achievement, 83 bronze, 36 silver 14 gold, 1 pla=>83 easy, 36 normal, 15 hard
@@ -123,8 +121,8 @@ public class splendourHeart extends BattleModifier {
             int level = java.util.Arrays.binarySearch(TheSplendourHeart.get().toArray(), (double) Math.nextUp(per));
             level = level <= 0 ? -(level) - 1 : level;
             if (1 < level){
-                float damage = getAttributeAttackDamage(tool, context.getAttacker(), Util.getSlotType(context.getHand()));
-                float baseDamage = damage;
+                float baseDamage = context.getBaseDamage();
+                float damage = baseDamage;
                 List<ModifierEntry> modifiers = tool.getModifierList();
                 for (ModifierEntry entry : modifiers) {
                     damage = entry.getHook(ModifierHooks.MELEE_DAMAGE).getMeleeDamage(tool, entry, context, baseDamage, damage);

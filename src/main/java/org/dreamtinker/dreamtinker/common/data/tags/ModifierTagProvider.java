@@ -22,9 +22,9 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
     protected void addTags() {
         this.tag(DreamtinkerTagKeys.Modifiers.EL_CURSED_MODIFIERS)
             .add(ModifierIds.blindshot, ModifierIds.vintage, ModifierIds.flamestance, ModifierIds.entangled,
-                 ModifierIds.crystalbound, ModifierIds.crystalstrike, ModifierIds.dense, ModifierIds.sharpweight,
+                 ModifierIds.crystalbound, ModifierIds.crystalstrike, ModifierIds.dense,
                  ModifierIds.heavy, /*Ids.solid,*/
-                 TinkerModifiers.jagged.getId(), TinkerModifiers.stonebound.getId(), TinkerModifiers.decay.getId(),
+                 ModifierIds.jagged, ModifierIds.stonebound, TinkerModifiers.decay.getId(),
                  TinkerModifiers.selfDestructive.getId())
             .add(strong_heavy.getId(), echoed_attack.getId(), echoed_defence.getId(), glacial_river.getId(),
                  broken_vessel.getId(), ewige_widerkunft.getId(), ouroboric_hourglass.getId(), burning_in_vain.getId(),

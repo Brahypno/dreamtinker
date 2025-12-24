@@ -8,7 +8,6 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -33,14 +32,12 @@ import slimeknights.tconstruct.fluids.TinkerFluids;
 import slimeknights.tconstruct.library.modifiers.fluid.FluidEffectContext;
 import slimeknights.tconstruct.library.modifiers.fluid.FluidEffectManager;
 import slimeknights.tconstruct.library.modifiers.fluid.FluidEffects;
+import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
-import slimeknights.tconstruct.library.utils.Util;
 
 import java.util.Comparator;
 import java.util.List;
-
-import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.NO_COOLDOWN;
 
 public class NarcissusFluidProjectile extends Projectile {
     private IToolStackView toolStackView;
@@ -306,8 +303,9 @@ public class NarcissusFluidProjectile extends Projectile {
                         this.setFluid(fluid);
                     }
                     target.invulnerableTime = 0;
-                    ToolAttackUtil.attackEntity(toolStackView, (LivingEntity) this.getOwner(), InteractionHand.MAIN_HAND, target, NO_COOLDOWN, false,
-                                                Util.getSlotType(InteractionHand.MAIN_HAND));
+                    ToolAttackUtil.performAttack(toolStackView,
+                                                 ToolAttackContext.attacker((LivingEntity) this.getOwner()).target(target).cooldown(1).applyAttributes()
+                                                                  .build());
 
 
                 }

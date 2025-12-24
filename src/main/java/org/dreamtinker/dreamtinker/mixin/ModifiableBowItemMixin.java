@@ -1,5 +1,7 @@
 package org.dreamtinker.dreamtinker.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ArrowItem;
@@ -14,6 +16,19 @@ import slimeknights.tconstruct.library.tools.item.ranged.ModifiableBowItem;
 
 @Mixin(ModifiableBowItem.class)
 public class ModifiableBowItemMixin {
+
+    @ModifyExpressionValue(
+            method = "releaseUsing",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/tags/TagKey;)Z",
+                    ordinal = 1
+            )
+    )
+    private boolean dt$redirectIsTag(boolean original, @Local(name = "ammo") ItemStack ammo) {
+        return original && !(ammo.getItem() instanceof TNTArrow);
+    }
+
     @Redirect(method = "releaseUsing",
             at = @At(value = "INVOKE",
                     target = "Lnet/minecraft/world/item/ArrowItem;createArrow(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/LivingEntity;)Lnet/minecraft/world/entity/projectile/AbstractArrow;"))

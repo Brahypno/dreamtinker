@@ -3,7 +3,6 @@ package org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -22,6 +21,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
@@ -31,7 +31,6 @@ import java.util.List;
 import java.util.Map;
 
 import static org.dreamtinker.dreamtinker.tools.modifiers.traits.material.lupus_antimony.the_wolf_wonder.filterMobEffects;
-import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.NO_COOLDOWN;
 
 public class despair_mist extends BattleModifier {
     private final ResourceLocation TAG_MIST = Dreamtinker.getLocation("despair_mist");
@@ -90,7 +89,7 @@ public class despair_mist extends BattleModifier {
                 if (player.isAlliedTo(livingEntity) || livingEntity instanceof ArmorStand || livingEntity.is(player) ||
                     null != livingEntity.getTeam() && player.isAlliedTo(livingEntity.getTeam()))
                     continue;
-                ToolAttackUtil.attackEntity(tool, player, InteractionHand.MAIN_HAND, livingEntity, NO_COOLDOWN, false);
+                ToolAttackUtil.performAttack(tool, ToolAttackContext.attacker(player).target(livingEntity).cooldown(1).applyAttributes().build());
             }
             player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, player.getSoundSource(), 1.0F, 1.0F);
             player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_CRIT, player.getSoundSource(), 1.0F, 1.0F);
