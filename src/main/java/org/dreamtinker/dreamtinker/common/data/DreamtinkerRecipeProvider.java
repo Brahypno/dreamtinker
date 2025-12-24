@@ -902,6 +902,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
         materialRecipe(wrapped, DreamtinkerMaterialIds.MonsterSkin, Ingredient.of(MONSTER_SKIN.get()), 1, 1,
                        materials_folder + "monster_skin");
+        materialComposite(wrapped, MaterialIds.leather, DreamtinkerMaterialIds.MonsterSkin, DreamtinkerFluids.molten_dark_metal, FluidValues.INGOT,
+                          slimeskinFolder, "monsterskin");
         materialComposite(consumer, DreamtinkerMaterialIds.MonsterSkin, MaterialIds.leather, TinkerFluids.venom, FluidValues.SIP, slimeskinFolder,
                           "monsterskin_cleaning");
         materialRecipe(wrapped, DreamtinkerMaterialIds.SpinyShell, Ingredient.of(SPINY_SHELL.get()), 1, 1,

@@ -2,7 +2,7 @@
   "type": "tconstruct:material_fluid",
   "fluid": {
     "amount": 100,
-    "fluid": "dreamtinker:molten_desire"
+    "tag": "dreamtinker:molten_desire"
   },
   "output": "dreamtinker:desire_gem",
   "temperature": 1300

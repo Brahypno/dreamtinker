@@ -21,10 +21,9 @@ import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
-import slimeknights.mantle.fluid.UnplaceableFluid;
+import slimeknights.mantle.fluid.InvertedFluid;
 import slimeknights.mantle.registration.deferred.FluidDeferredRegister;
 import slimeknights.mantle.registration.object.FlowingFluidObject;
-import slimeknights.mantle.registration.object.FluidObject;
 import slimeknights.tconstruct.fluids.block.BurningLiquidBlock;
 
 import java.util.function.Function;
@@ -218,8 +217,8 @@ public class DreamtinkerFluids {
             registerFluid(FLUIDS, "liquid_amber", 637, 100, 10, 7,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_YELLOW, 7), 0, 0) {});
 
-    public static final FluidObject<UnplaceableFluid> molten_desire =
-            FLUIDS.register("molten_desire").type(createFluidType(1600, 15, 200, -1000)).bucket().unplacable();
+    public static final FlowingFluidObject<InvertedFluid> molten_desire =
+            FLUIDS.register("molten_desire").type(createFluidType(1600, 15, 200, -1000)).bucket().invertedFlowing();
 
     public static final FlowingFluidObject<ForgeFlowingFluid> despair_essence =
             registerFluid(FLUIDS, "despair_essence", 3900, 100, 1000000, 0,

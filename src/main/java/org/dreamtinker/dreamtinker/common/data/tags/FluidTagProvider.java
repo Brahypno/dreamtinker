@@ -49,7 +49,7 @@ public class FluidTagProvider extends FluidTagsProvider {
         fluidTag(DreamtinkerFluids.liquid_concentrated_gluttony);
         fluidTag(DreamtinkerFluids.liquid_arcana_juice);
         fluidTag(DreamtinkerFluids.liquid_amber);
-        //fluidTag(DreamtinkerFluids.molten_desire);
+        fluidTag(DreamtinkerFluids.molten_desire);
         fluidTag(DreamtinkerFluids.despair_essence);
         fluidTag(DreamtinkerFluids.molten_soul_steel);
         fluidTag(DreamtinkerFluids.half_festering_blood);
