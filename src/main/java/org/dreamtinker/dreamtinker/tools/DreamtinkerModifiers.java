@@ -293,12 +293,12 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId light_arrow = id("light_arrow");
         public static final ModifierId null_void = id("null_void");
         public static final ModifierId hidden_shape = id("hidden_shape");
+        public static final ModifierId wrath = id("wrath");
+        public static final ModifierId torrent = id("torrent");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");
         public static final ModifierId el_eternal_binding = id("el_eternal_binding");
-        public static final ModifierId el_wrath = id("el_wrath");
-        public static final ModifierId el_torrent = id("el_torrent");
         public static final ModifierId el_etherium = id("el_etherium");
 
         public static final ModifierId malum_rebound = id("malum_rebound");

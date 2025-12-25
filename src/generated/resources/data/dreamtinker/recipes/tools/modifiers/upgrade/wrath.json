@@ -1,0 +1,37 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "amount_needed": 4,
+      "item": "minecraft:prismarine"
+    },
+    {
+      "amount_needed": 15,
+      "tag": "forge:gems/prismarine"
+    }
+  ],
+  "level": {
+    "max": 4
+  },
+  "result": "dreamtinker:wrath",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": [
+    {
+      "type": "forge:intersection",
+      "children": [
+        {
+          "tag": "forge:tools/tridents"
+        },
+        {
+          "tag": "tconstruct:modifiable/melee/weapon"
+        }
+      ]
+    },
+    {
+      "tag": "tconstruct:modifiable/ammo/thrown"
+    }
+  ]
+}

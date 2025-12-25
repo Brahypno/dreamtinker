@@ -1,0 +1,49 @@
+{
+  "level_display": "tconstruct:single_level",
+  "modules": [
+    {
+      "type": "tconstruct:conditional_melee_damage",
+      "each_level": 2.5,
+      "percent": false,
+      "target": {
+        "type": "mantle:or",
+        "predicates": [
+          "mantle:fire_immune",
+          {
+            "type": "mantle:mob_type",
+            "mobs": "minecraft:water"
+          }
+        ]
+      }
+    },
+    {
+      "type": "tconstruct:conditional_power",
+      "each_level": 2.5,
+      "percent": false,
+      "target": {
+        "type": "mantle:or",
+        "predicates": [
+          "mantle:fire_immune",
+          {
+            "type": "mantle:mob_type",
+            "mobs": "minecraft:water"
+          }
+        ]
+      }
+    },
+    {
+      "type": "tconstruct:requirements",
+      "requirement": {
+        "type": "tconstruct:has_modifier",
+        "check": "all",
+        "level": 0,
+        "modifier": {
+          "type": "tconstruct:single",
+          "modifier": "dreamtinker:torrent"
+        }
+      },
+      "translation_key": "modifier.dreamtinker.wrath.requirements"
+    }
+  ],
+  "tooltip_display": "always"
+}

@@ -3,7 +3,7 @@
   "allow_crystal": true,
   "inputs": [
     {
-      "item": "tconstruct:efln_ball"
+      "item": "tconstruct:shuriken"
     },
     {
       "tag": "forge:gunpowder"

@@ -4,14 +4,8 @@
     "dreamtinker:the_romantic",
     "dreamtinker:strong_explode",
     "dreamtinker:signal_axe",
-    {
-      "id": "dreamtinker:el_wrath",
-      "required": false
-    },
-    {
-      "id": "dreamtinker:el_torrent",
-      "required": false
-    },
+    "dreamtinker:wrath",
+    "dreamtinker:torrent",
     {
       "id": "dreamtinker:ender_slayer",
       "required": false

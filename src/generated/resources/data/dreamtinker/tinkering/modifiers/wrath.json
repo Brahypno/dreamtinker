@@ -1,0 +1,31 @@
+{
+  "level_display": "tconstruct:single_level",
+  "modules": [
+    {
+      "type": "tconstruct:stat_boost",
+      "each_level": 1.25,
+      "operation": "add",
+      "stat": "tconstruct:attack_damage"
+    },
+    {
+      "type": "tconstruct:stat_boost",
+      "each_level": 1.25,
+      "operation": "add",
+      "stat": "tconstruct:projectile_damage"
+    },
+    {
+      "type": "tconstruct:requirements",
+      "requirement": {
+        "type": "tconstruct:has_modifier",
+        "check": "all",
+        "level": 0,
+        "modifier": {
+          "type": "tconstruct:single",
+          "modifier": "dreamtinker:wrath"
+        }
+      },
+      "translation_key": "modifier.dreamtinker.torrent.requirements"
+    }
+  ],
+  "tooltip_display": "always"
+}

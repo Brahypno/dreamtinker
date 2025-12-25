@@ -24,8 +24,8 @@ public class DreamtinkerEnchantmentToModifierProvider extends AbstractEnchantmen
         addOptional(new ResourceLocation("enigmaticlegacy", "nemesis"), DreamtinkerModifiers.Ids.el_nemesis_curse, true);
         addOptional(new ResourceLocation("enigmaticlegacy", "sorrow"), DreamtinkerModifiers.Ids.el_sorrow, true);
         addOptional(new ResourceLocation("enigmaticlegacy", "eternal_binding"), DreamtinkerModifiers.Ids.el_eternal_binding, true);
-        addOptional(new ResourceLocation("enigmaticlegacy", "wrath"), DreamtinkerModifiers.Ids.el_wrath, true);
-        addOptional(new ResourceLocation("enigmaticlegacy", "torrent"), DreamtinkerModifiers.Ids.el_torrent, true);
+        addOptional(new ResourceLocation("enigmaticlegacy", "wrath"), DreamtinkerModifiers.Ids.wrath, true);
+        addOptional(new ResourceLocation("enigmaticlegacy", "torrent"), DreamtinkerModifiers.Ids.torrent, true);
 
     }
 

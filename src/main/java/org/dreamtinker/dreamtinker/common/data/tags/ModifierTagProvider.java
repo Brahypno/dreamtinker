@@ -50,8 +50,8 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             .add(mei.getId())
             .addOptional(Ids.el_eternal_binding, Ids.el_sorrow, Ids.el_nemesis_curse);
         this.tag(DAMAGE_UPGRADES)
-            .add(Ids.all_slayer, Ids.the_romantic, strong_explode.getId(), signal_axe.getId())
-            .addOptional(Ids.el_wrath, Ids.el_torrent, ender_slayer.getId());
+            .add(Ids.all_slayer, Ids.the_romantic, strong_explode.getId(), signal_axe.getId(), Ids.wrath, Ids.torrent)
+            .addOptional(ender_slayer.getId());
         this.tag(TinkerTags.Modifiers.BONUS_SLOTLESS)
             .add(Ids.huge_ego, Ids.five_creations);
         this.tag(TinkerTags.Modifiers.MELEE_ABILITIES)

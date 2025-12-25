@@ -53,7 +53,6 @@ import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.common.json.ConfigEnabledCondition;
 import slimeknights.tconstruct.common.registration.CastItemObject;
 import slimeknights.tconstruct.fluids.TinkerFluids;
-import slimeknights.tconstruct.gadgets.TinkerGadgets;
 import slimeknights.tconstruct.library.data.recipe.IMaterialRecipeHelper;
 import slimeknights.tconstruct.library.data.recipe.IToolRecipeHelper;
 import slimeknights.tconstruct.library.materials.definition.MaterialId;
@@ -1249,7 +1248,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .save(consumer, prefix(DreamtinkerModifiers.real_sweep, abilityFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.strong_explode)
                              .setTools(Ingredient.of(DreamtinkerTools.tntarrow.get()))
-                             .addInput(TinkerGadgets.efln)
+                             .addInput(TinkerTools.shuriken.get())
                              .addInput(Tags.Items.GUNPOWDER)
                              .setMaxLevel(4)
                              .setSlots(SlotType.UPGRADE, 1)
@@ -1257,7 +1256,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .save(consumer, prefix(DreamtinkerModifiers.strong_explode, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.continuous_explode)
                              .setTools(Ingredient.of(DreamtinkerTools.tntarrow.get()))
-                             .addInput(TinkerGadgets.efln)
+                             .addInput(TinkerTools.shuriken.get())
                              .addInput(Items.TNT)
                              .setMaxLevel(1)
                              .setSlots(SlotType.ABILITY, 1)
@@ -1490,8 +1489,6 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.love_shooting, abilitySalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.love_shooting, abilityFolder));
-
-
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.ender_slayer)//2 Modifier share same id so This should be fine
                              .setTools(TinkerTags.Items.MELEE_WEAPON)
                              .addInput(Tags.Items.OBSIDIAN, 2)
@@ -1501,6 +1498,25 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setSlots(SlotType.UPGRADE, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.ender_slayer, upgradeSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.ender_slayer, upgradeFolder));
+        Ingredient throwss = CompoundIngredient.of(IntersectionIngredient.of(Ingredient.of(Dreamtinker.forgeItemTag("tools/tridents")),
+                                                                             Ingredient.of(TinkerTags.Items.MELEE_WEAPON)),
+                                                   Ingredient.of(TinkerTags.Items.THROWN_AMMO));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.torrent)
+                             .setTools(throwss)
+                             .addInput(Tags.Items.DUSTS_PRISMARINE, 15)
+                             .addInput(Tags.Items.GEMS_PRISMARINE, 15)
+                             .setMaxLevel(5)
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.torrent, upgradeSalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.Ids.torrent, upgradeFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.wrath)
+                             .setTools(throwss)
+                             .addInput(Items.PRISMARINE, 4)
+                             .addInput(Tags.Items.GEMS_PRISMARINE, 15)
+                             .setMaxLevel(4)
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.wrath, upgradeSalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.Ids.wrath, upgradeFolder));
         // Start of enigmaticlegacy modifiers
         wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.life_looting)
@@ -1549,22 +1565,6 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .saveSalvage(wrapped, prefix(DreamtinkerModifiers.desolation_ring, abilitySalvage))
                              .save(wrapped, prefix(DreamtinkerModifiers.desolation_ring, abilityFolder));
 
-        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.el_torrent)
-                             .setTools(Ingredient.of(DreamtinkerTools.mashou))
-                             .addInput(Tags.Items.DUSTS_PRISMARINE, 15)
-                             .addInput(Tags.Items.GEMS_PRISMARINE, 15)
-                             .setMaxLevel(5)
-                             .setSlots(SlotType.UPGRADE, 1)
-                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.Ids.el_torrent, upgradeSalvage))
-                             .save(wrapped, prefix(DreamtinkerModifiers.Ids.el_torrent, upgradeFolder));
-        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.el_wrath)
-                             .setTools(Ingredient.of(DreamtinkerTools.mashou))
-                             .addInput(Items.PRISMARINE, 4)
-                             .addInput(Tags.Items.GEMS_PRISMARINE, 15)
-                             .setMaxLevel(4)
-                             .setSlots(SlotType.UPGRADE, 1)
-                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.Ids.el_wrath, upgradeSalvage))
-                             .save(wrapped, prefix(DreamtinkerModifiers.Ids.el_wrath, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.el_eternal_binding)
                              .setTools(TinkerTags.Items.MODIFIABLE)
                              .addInput(Items.CHAIN, 10)

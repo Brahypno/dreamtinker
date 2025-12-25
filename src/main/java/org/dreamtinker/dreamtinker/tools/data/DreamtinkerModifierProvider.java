@@ -58,6 +58,7 @@ import slimeknights.tconstruct.library.modifiers.modules.behavior.MaterialRepair
 import slimeknights.tconstruct.library.modifiers.modules.behavior.ReduceToolDamageModule;
 import slimeknights.tconstruct.library.modifiers.modules.build.*;
 import slimeknights.tconstruct.library.modifiers.modules.combat.ConditionalMeleeDamageModule;
+import slimeknights.tconstruct.library.modifiers.modules.combat.ConditionalPowerModule;
 import slimeknights.tconstruct.library.modifiers.modules.combat.LootingModule;
 import slimeknights.tconstruct.library.modifiers.modules.combat.MobEffectModule;
 import slimeknights.tconstruct.library.modifiers.modules.mining.ConditionalMiningSpeedModule;
@@ -325,6 +326,21 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
         buildModifier(Ids.hidden_shape);
+        IJsonPredicate<LivingEntity> wrath = LivingEntityPredicate.or(LivingEntityPredicate.FIRE_IMMUNE, new MobTypePredicate(MobType.WATER));
+        buildModifier(Ids.torrent)
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(ConditionalMeleeDamageModule.builder().target(wrath).eachLevel(2.5f))
+                .addModule(ConditionalPowerModule.builder().target(wrath).eachLevel(2.5f))
+                .addModule(ModifierRequirementsModule.builder()
+                                                     .requirement(HasModifierPredicate.hasModifier(Ids.torrent, 1).inverted())
+                                                     .modifierKey(Ids.wrath).build());
+        buildModifier(Ids.wrath)
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(StatBoostModule.add(ToolStats.ATTACK_DAMAGE).eachLevel(1.25f))
+                .addModule(StatBoostModule.add(ToolStats.PROJECTILE_DAMAGE).eachLevel(1.25f))
+                .addModule(ModifierRequirementsModule.builder()
+                                                     .requirement(HasModifierPredicate.hasModifier(Ids.wrath, 1).inverted())
+                                                     .modifierKey(Ids.torrent).build());
 
         addELModifiers();
         addMalumModifiers();
@@ -344,19 +360,6 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.el_eternal_binding, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModule(EnchantmentModule.builder(EnigmaticEnchantments.ETERNAL_BINDING).level(1).constant());
-
-        buildModifier(Ids.el_wrath, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
-                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                .addModule(EnchantmentModule.builder(EnigmaticEnchantments.WRATH).level(1).constant())
-                .addModule(ModifierRequirementsModule.builder()
-                                                     .requirement(HasModifierPredicate.hasModifier(Ids.el_torrent, 1).inverted())
-                                                     .modifierKey(Ids.el_wrath).build());
-        buildModifier(Ids.el_torrent, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
-                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                .addModule(EnchantmentModule.builder(EnigmaticEnchantments.TORRENT).level(1).constant())
-                .addModule(ModifierRequirementsModule.builder()
-                                                     .requirement(HasModifierPredicate.hasModifier(Ids.el_wrath, 1).inverted())
-                                                     .modifierKey(Ids.el_torrent).build());
         buildModifier(Ids.el_etherium, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                 .addModule(SetStatModule.set(ToolStats.HARVEST_TIER).value(EnigmaticMaterials.ETHERIUM));
