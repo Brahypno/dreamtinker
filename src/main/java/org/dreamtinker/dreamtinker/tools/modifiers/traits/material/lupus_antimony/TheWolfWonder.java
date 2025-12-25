@@ -1,0 +1,141 @@
+package org.dreamtinker.dreamtinker.tools.modifiers.traits.material.lupus_antimony;
+
+import com.mojang.logging.LogUtils;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraftforge.registries.ForgeRegistries;
+import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
+import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
+import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
+import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
+import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
+import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
+
+import javax.annotation.Nullable;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.*;
+
+public class TheWolfWonder extends BattleModifier {
+    private static final int minDuration = TheWolfWonderEffectMinTime.get() * 20;
+    private static final int maxDuration = TheWolfWonderEffectMaxTime.get() * 20;
+    private static final Set<ResourceLocation> BAD_CACHE = new HashSet<>();
+    private static final Set<ResourceLocation> CONFIG_BLACKLIST = new HashSet<>();
+    private static boolean Blacklist_inited = false;
+    private static List<MobEffect> negatives = List.of();
+
+
+    @Override
+    public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
+        onMonsterMeleeHit(tool, modifier, context, damage);
+        return knockback;
+    }
+
+    @Override
+    public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
+        LivingEntity target = context.getLivingTarget();
+        if (target == null)
+            return;
+        long types = target.getActiveEffects().stream().filter(e -> e.getEffect().getCategory() == MobEffectCategory.HARMFUL).count();
+        if (types < (long) TheWolfWonderEffectNum.get() * modifier.getLevel())
+            applyRandomEffects(target, context.getAttacker(), 1 < tool.getModifierLevel(DreamtinkerModifiers.despair_mist.getId()));
+    }
+
+    @Override
+    public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target) {
+        if (target == null)
+            return false;
+        long types = target.getActiveEffects().stream().filter(e -> e.getEffect().getCategory() == MobEffectCategory.HARMFUL).count();
+        if (types < (long) TheWolfWonderEffectNum.get() * modifier.getLevel())
+            applyRandomEffects(target, attacker, 1 < modifiers.getLevel(DreamtinkerModifiers.despair_mist.getId()));
+        return false;
+    }
+
+    private void applyRandomEffects(LivingEntity target, LivingEntity attacker, boolean no_repeat) {
+        RandomSource rand = target.getRandom();
+        if (negatives.isEmpty())
+            negatives = ForgeRegistries.MOB_EFFECTS.getValues().stream()
+                                                   .filter(TheWolfWonder::filterMobEffects)
+                                                   .collect(Collectors.toList());
+        if (negatives.isEmpty())
+            return;
+
+        for (int i = negatives.size() - 1; i > 0; i--) {
+            int j = rand.nextInt(i + 1);
+            Collections.swap(negatives, i, j);
+        }
+
+        List<MobEffectInstance> selected_effects =
+                new java.util.ArrayList<>(target.getActiveEffects().stream().filter(e -> e.getEffect().getCategory() == MobEffectCategory.HARMFUL).toList());
+        for (MobEffect effect : negatives) {
+            if (TheWolfWonderEffectNum.get() <= selected_effects.size())
+                break;
+            if (no_repeat && target.hasEffect(effect))
+                continue;
+            // 随机持续时长与等级
+            int duration = minDuration + rand.nextInt(Math.max(1, maxDuration - minDuration + 1));
+            int amplifier = rand.nextInt(TheWolfWonderEffectAmplifier.get());
+            try {
+                MobEffectInstance inst = new MobEffectInstance(effect, duration, amplifier, false, true);
+                target.forceAddEffect(inst, target);
+                selected_effects.add(inst);
+            }
+            catch (Throwable t) {
+                // 该效果在当前环境不安全：记入 BAD_CACHE，继续尝试下一个
+                BAD_CACHE.add(ForgeRegistries.MOB_EFFECTS.getKey(effect));
+                LogUtils.getLogger().warn("Random harmful effect {} failed on {} ({}). Blacklisting for this session.",
+                                          ForgeRegistries.MOB_EFFECTS.getKey(effect), target.getType(), target.level().dimension().location(), t);
+            }
+
+
+        }
+        if (attacker != null && rand.nextInt(6666) < TheWolfWonderSurpriseNumber.get()){
+            for (MobEffectInstance inst : selected_effects) {
+                attacker.addEffect(new MobEffectInstance(inst.getEffect(), inst.getDuration(), inst.getAmplifier(), inst.isAmbient(), inst.isVisible()));
+            }
+        }
+    }
+
+    public static void loadConfigBlacklist(List<? extends String> ids) {
+        CONFIG_BLACKLIST.clear();
+        for (String s : ids) {
+            try {CONFIG_BLACKLIST.add(new ResourceLocation(s));} catch (Exception ignored) {}
+        }
+    }
+
+    public static boolean filterMobEffects(MobEffect effect) {
+        if (!Blacklist_inited){
+            Blacklist_inited = true;
+            loadConfigBlacklist(TheWolfBlackList.get());
+        }
+        if (effect.getCategory() != MobEffectCategory.HARMFUL)
+            return false;
+        if (TheWolfWonderPotionEffectOnly.get() && !isPotionEffectCached(effect))
+            return false;
+
+        ResourceLocation key = ForgeRegistries.MOB_EFFECTS.getKey(effect);
+        return null != key && !BAD_CACHE.contains(key) &&
+               !CONFIG_BLACKLIST.contains(key) && !key.getPath().contains("test") && !key.getPath().contains("ceshi");//exclude testing effect as well
+    }
+
+    private static final java.util.Set<MobEffect> BrewAble =
+            ForgeRegistries.POTIONS.getValues().stream()
+                                   .flatMap(p -> p.getEffects().stream())
+                                   .map(MobEffectInstance::getEffect)
+                                   .collect(java.util.stream.Collectors.toUnmodifiableSet());
+
+    public static boolean isPotionEffectCached(MobEffect effect) {
+        return BrewAble.contains(effect);
+    }
+}

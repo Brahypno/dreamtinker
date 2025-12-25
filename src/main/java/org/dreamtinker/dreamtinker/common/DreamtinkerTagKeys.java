@@ -3,11 +3,13 @@ package org.dreamtinker.dreamtinker.common;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Dreamtinker;
+import slimeknights.mantle.Mantle;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierManager;
 
@@ -135,5 +137,17 @@ public class DreamtinkerTagKeys {
         public static final TagKey<Block> TransmutationGoldOre = forgeTag("ores/transmutation_gold");
         public static final TagKey<Block> TransmutationGoldBlock = forgeTag("storage_blocks/transmutation_gold");
         public static final TagKey<Block> RawTransmutationGoldBlock = forgeTag("storage_blocks/raw_transmutation_gold");
+    }
+
+    public static class EntityTypes {
+        public static final TagKey<EntityType<?>> ENDER_ENTITY = common("ender_entity");
+
+        private static TagKey<EntityType<?>> local(String name) {
+            return TagKey.create(Registries.ENTITY_TYPE, Dreamtinker.getLocation(name));
+        }
+
+        private static TagKey<EntityType<?>> common(String name) {
+            return TagKey.create(Registries.ENTITY_TYPE, Mantle.commonResource(name));
+        }
     }
 }

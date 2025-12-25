@@ -1,0 +1,27 @@
+{
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "dreamtinker:effects_remover",
+      "level": {
+        "per_level": 1.0
+      },
+      "mob_effect_category": "beneficial"
+    },
+    {
+      "type": "dreamtinker:effects_remover",
+      "level": {
+        "per_level": 1.0
+      },
+      "mob_effect_category": "harmful"
+    },
+    {
+      "type": "dreamtinker:effects_remover",
+      "level": {
+        "per_level": 1.0
+      },
+      "mob_effect_category": "neutral"
+    }
+  ],
+  "tooltip_display": "always"
+}

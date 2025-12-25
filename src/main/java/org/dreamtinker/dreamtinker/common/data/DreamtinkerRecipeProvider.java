@@ -191,7 +191,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.despair_essence, FluidValues.GEM)
                           .addInput(DreamtinkerTagKeys.Fluids.molten_crying_obsidian, FluidValues.GLASS_BLOCK * 3)
                           .addInput(DreamtinkerFluids.liquid_amber.getTag(), FluidValues.GEM * 4)
-                          .addInput(DreamtinkerFluids.molten_desire.get(), FluidValues.GEM * 9)
+                          .addInput(DreamtinkerFluids.molten_desire.getTag(), FluidValues.GEM * 9)
                           .addInput(DreamtinkerFluids.reversed_shadow.getTag(), FluidValues.SLIMEBALL * 7)
                           .addInput(DreamtinkerFluids.molten_lupi_antimony.getTag(), FluidValues.INGOT * 2)
                           .save(consumer, prefix(DreamtinkerFluids.despair_essence, folder));
@@ -1462,17 +1462,18 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.love_shooting, abilitySalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.love_shooting, abilityFolder));
 
-        // Start of enigmaticlegacy modifiers
-        wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"));
-        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.ender_slayer)
-                             .setTools(TinkerTags.Items.MELEE)
+
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.ender_slayer)//2 Modifier share same id so This should be fine
+                             .setTools(TinkerTags.Items.MELEE_WEAPON)
                              .addInput(Tags.Items.OBSIDIAN, 2)
                              .addInput(Items.GHAST_TEAR, 2)
                              .addInput(Items.ENDER_EYE, 2)
                              .setMaxLevel(1)
-                             .setSlots(SlotType.ABILITY, 1)
-                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.ender_slayer, abilitySalvage))
-                             .save(wrapped, prefix(DreamtinkerModifiers.ender_slayer, abilityFolder));
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.ender_slayer, upgradeSalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.ender_slayer, upgradeFolder));
+        // Start of enigmaticlegacy modifiers
+        wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.life_looting)
                              .setTools(TinkerTags.Items.MODIFIABLE)
                              .addInput(EnigmaticItems.LORE_INSCRIBER, 1)

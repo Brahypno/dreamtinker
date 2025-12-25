@@ -28,7 +28,8 @@
       "effect": "born_in_chaos_v1:intoxication",
       "hooks": [
         "tconstruct:melee_hit",
-        "tconstruct:projectile_hit"
+        "tconstruct:projectile_hit",
+        "tconstruct:monster_melee_hit"
       ],
       "level": {
         "flat": 1.0
@@ -43,7 +44,8 @@
       "effect": "minecraft:poison",
       "hooks": [
         "tconstruct:melee_hit",
-        "tconstruct:projectile_hit"
+        "tconstruct:projectile_hit",
+        "tconstruct:monster_melee_hit"
       ],
       "level": {
         "per_level": 2.0

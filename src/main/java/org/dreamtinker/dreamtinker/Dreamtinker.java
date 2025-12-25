@@ -39,10 +39,7 @@ import org.dreamtinker.dreamtinker.common.data.DTCurio;
 import org.dreamtinker.dreamtinker.common.data.DreamtinkerRecipeProvider;
 import org.dreamtinker.dreamtinker.common.data.loot.DreamtinkerLootTableProvider;
 import org.dreamtinker.dreamtinker.common.data.loot.LootTableInjectionProvider;
-import org.dreamtinker.dreamtinker.common.data.tags.BlockTagProvider;
-import org.dreamtinker.dreamtinker.common.data.tags.DamageTypeTagProvider;
-import org.dreamtinker.dreamtinker.common.data.tags.FluidTagProvider;
-import org.dreamtinker.dreamtinker.common.data.tags.ItemTagProvider;
+import org.dreamtinker.dreamtinker.common.data.tags.*;
 import org.dreamtinker.dreamtinker.common.event.advancements.star_regulus_boost;
 import org.dreamtinker.dreamtinker.common.event.compact.curio.addSilenceGloveCurio;
 import org.dreamtinker.dreamtinker.common.event.compact.enigmatic_legacy.addUnholyWater;
@@ -175,6 +172,7 @@ public class Dreamtinker {
         generator.addProvider(event.includeClient(), new DreamtinkerFluidTextureProvider(output));
         generator.addProvider(event.includeClient(), new FluidBucketModelProvider(output, Dreamtinker.MODID));
         generator.addProvider(event.includeClient(), new FluidTagProvider(output, lookupProvider, Dreamtinker.MODID, helper));
+        generator.addProvider(event.includeServer(), new EntityTypeTagProvider(output, lookupProvider, helper));
 
 
         BlockTagProvider blockTags = new BlockTagProvider(output, lookupProvider, Dreamtinker.MODID, helper);

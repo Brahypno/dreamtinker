@@ -1,14 +1,12 @@
 {
-  "perStat": {
-    "tconstruct:melee_harvest": [
-      {
-        "level": 2,
-        "name": "dreamtinker:malum_haunted"
-      },
-      {
-        "level": 1,
-        "name": "dreamtinker:malum_hex_staff"
-      }
-    ]
-  }
+  "default": [
+    {
+      "level": 2,
+      "name": "dreamtinker:malum_haunted"
+    },
+    {
+      "level": 1,
+      "name": "dreamtinker:malum_hex_staff"
+    }
+  ]
 }

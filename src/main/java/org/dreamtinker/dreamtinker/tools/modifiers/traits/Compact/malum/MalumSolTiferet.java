@@ -2,17 +2,15 @@ package org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.ResourceColorManager;
+import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.utils.RomanNumeralHelper;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class MalumSolTiferet extends BattleModifier {
-    @Override
-    public boolean isNoLevels() {return false;}
+public class MalumSolTiferet extends NoLevelsModifier {
 
     @Override
     public @NotNull Component getDisplayName(int level) {

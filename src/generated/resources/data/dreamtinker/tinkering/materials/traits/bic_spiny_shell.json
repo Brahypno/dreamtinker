@@ -1,11 +1,11 @@
 {
+  "default": [
+    {
+      "level": 2,
+      "name": "tconstruct:thorns"
+    }
+  ],
   "perStat": {
-    "tconstruct:armor": [
-      {
-        "level": 2,
-        "name": "tconstruct:thorns"
-      }
-    ],
     "tconstruct:melee_harvest": [
       {
         "level": 1,

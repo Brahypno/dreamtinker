@@ -4,10 +4,6 @@
     "dreamtinker:continuous_explode",
     "dreamtinker:flaming_memory",
     {
-      "id": "dreamtinker:ender_slayer",
-      "required": false
-    },
-    {
       "id": "dreamtinker:weapon_books",
       "required": false
     },

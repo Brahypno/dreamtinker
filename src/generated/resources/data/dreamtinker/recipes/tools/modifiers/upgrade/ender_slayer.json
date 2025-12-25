@@ -1,0 +1,26 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "amount_needed": 2,
+      "tag": "forge:obsidian"
+    },
+    {
+      "amount_needed": 2,
+      "item": "minecraft:ghast_tear"
+    },
+    {
+      "amount_needed": 2,
+      "item": "minecraft:ender_eye"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:ender_slayer",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/melee/weapon"
+  }
+}

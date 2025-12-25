@@ -16,52 +16,53 @@ import net.minecraftforge.registries.RegisterEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.DreamtinkerModule;
 import org.dreamtinker.dreamtinker.common.data.tags.ModifierTagProvider;
+import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.MobEffectsRemoverModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.weapon.SwappableCircleWeaponAttack;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerEnchantmentToModifierProvider;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerFluidEffectProvider;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerModifierProvider;
-import org.dreamtinker.dreamtinker.tools.modifiers.tools.chain_saw_blade.death_shredder;
-import org.dreamtinker.dreamtinker.tools.modifiers.tools.mashou.realSweep;
-import org.dreamtinker.dreamtinker.tools.modifiers.tools.mashou.strong_heavy;
-import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.flamingMemory;
+import org.dreamtinker.dreamtinker.tools.modifiers.tools.chain_saw_blade.DeathShredder;
+import org.dreamtinker.dreamtinker.tools.modifiers.tools.mashou.RealSweep;
+import org.dreamtinker.dreamtinker.tools.modifiers.tools.mashou.StrongHeavy;
+import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.FlamingMemory;
+import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.MemoryBase;
+import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.SplendourHeart;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.foundationWill;
-import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.memoryBase;
-import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.splendourHeart;
-import org.dreamtinker.dreamtinker.tools.modifiers.tools.silence_glove.weapon_dreams;
-import org.dreamtinker.dreamtinker.tools.modifiers.tools.tntarrow.strong_explode;
-import org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.spiritual_weapon_transformation;
-import org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.weapon_transformation;
+import org.dreamtinker.dreamtinker.tools.modifiers.tools.silence_glove.WeaponDreams;
+import org.dreamtinker.dreamtinker.tools.modifiers.tools.tntarrow.StrongExplode;
+import org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.SpiritualWeaponTransformation;
+import org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.WeaponTransformation;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.*;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.bic.darkBlade;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.bic.DarkBlade;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.bic.dark_defense;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.bic.nightmare_defense;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.eidolon.EidolonDeathBringer;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.eidolon.EidolonReaper;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.eidolon.EidolonSapping;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.*;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.etherium.astral_break;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.etherium.ELAstralBreak;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.etherium.etherium_protection;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.evil.evil_attack;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.soul_aether.exiles_faulty;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.evil.EvilAttack;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.soul_aether.ExilesFaulty;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum.*;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.*;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.common.*;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian.isolde;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian.sharpened_with;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem.despair_mist;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem.despair_rain;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem.despair_wind;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.echo_shard.echoed_attack;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian.Isolde;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian.SharpenedWith;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem.DespairMist;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem.DespairRain;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem.DespairWind;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.echo_shard.EchoedAttack;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.echo_shard.echoed_defence;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.lupus_antimony.the_wolf_answer;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.lupus_antimony.the_wolf_was;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.lupus_antimony.the_wolf_wonder;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.lupus_antimony.TheWolfAnswer;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.lupus_antimony.TheWolfWas;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.lupus_antimony.TheWolfWonder;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.nigrescence_antimony.BurningInVain;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.nigrescence_antimony.EwigeEiderkunft;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.nigrescence_antimony.broken_vessel;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.nigrescence_antimony.burning_in_vain;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.nigrescence_antimony.ewige_widerkunft;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.nigrescence_antimony.ouroboric_hourglass;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.star_regulus.TwoHeadedSeven;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.star_regulus.as_one;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.star_regulus.two_headed_seven;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
 import slimeknights.tconstruct.library.modifiers.modules.ModifierModule;
@@ -93,109 +94,108 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static ModifierDeferredRegister EIDOLON_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     public static ModifierDeferredRegister BIC_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     //Mashuo
-    public static final StaticModifier<realSweep> real_sweep = MODIFIERS.register("real_sweep", realSweep::new);
-    public static final StaticModifier<strong_heavy> strong_heavy = MODIFIERS.register("strong_heavy", strong_heavy::new);
+    public static final StaticModifier<RealSweep> real_sweep = MODIFIERS.register("real_sweep", RealSweep::new);
+    public static final StaticModifier<StrongHeavy> strong_heavy = MODIFIERS.register("strong_heavy", StrongHeavy::new);
     //tnt arrow
-    public static final StaticModifier<strong_explode> strong_explode = MODIFIERS.register("strong_explode", strong_explode::new);
+    public static final StaticModifier<StrongExplode> strong_explode = MODIFIERS.register("strong_explode", StrongExplode::new);
     //narcissus wing
-    public static final StaticModifier<memoryBase> memory_base = MODIFIERS.register("memory_base", memoryBase::new);
-    public static final StaticModifier<flamingMemory> flaming_memory = MODIFIERS.register("flaming_memory", flamingMemory::new);
+    public static final StaticModifier<MemoryBase> memory_base = MODIFIERS.register("memory_base", MemoryBase::new);
+    public static final StaticModifier<FlamingMemory> flaming_memory = MODIFIERS.register("flaming_memory", FlamingMemory::new);
     public static final StaticModifier<foundationWill> foundation_will = MODIFIERS.register("foundation_will", foundationWill::new);
-    public static final StaticModifier<splendourHeart> splendour_heart = MODIFIERS.register("splendour_heart", splendourHeart::new);
+    public static final StaticModifier<SplendourHeart> splendour_heart = MODIFIERS.register("splendour_heart", SplendourHeart::new);
     //underPlate
-    public static final StaticModifier<weapon_transformation> weapon_transformation = MODIFIERS.register("weapon_transformation", weapon_transformation::new);
-    public static final StaticModifier<spiritual_weapon_transformation> spiritual_weapon_transformation =
-            MALUM_MODIFIERS.register("spiritual_weapon_transformation", spiritual_weapon_transformation::new);
+    public static final StaticModifier<WeaponTransformation> weapon_transformation = MODIFIERS.register("weapon_transformation", WeaponTransformation::new);
+    public static final StaticModifier<SpiritualWeaponTransformation> spiritual_weapon_transformation =
+            MALUM_MODIFIERS.register("spiritual_weapon_transformation", SpiritualWeaponTransformation::new);
     //echo Alloy
-    public static final StaticModifier<echoed_attack> echoed_attack = MODIFIERS.register("echoed_attack", echoed_attack::new);
+    public static final StaticModifier<EchoedAttack> echoed_attack = MODIFIERS.register("echoed_attack", EchoedAttack::new);
     public static final StaticModifier<echoed_defence> echoed_defence = MODIFIERS.register("echoed_defence", echoed_defence::new);
 
     //moonlight ice
-    public static final StaticModifier<glacialriver> glacial_river = MODIFIERS.register("glacial_river", glacialriver::new);
+    public static final StaticModifier<GlacialRiver> glacial_river = MODIFIERS.register("glacial_river", GlacialRiver::new);
     //nigrescence antimony
     public static final StaticModifier<broken_vessel> broken_vessel = MODIFIERS.register("broken_vessel", broken_vessel::new);
-    public static final StaticModifier<ewige_widerkunft> ewige_widerkunft = MODIFIERS.register("ewige_widerkunft", ewige_widerkunft::new);
+    public static final StaticModifier<EwigeEiderkunft> ewige_widerkunft = MODIFIERS.register("ewige_widerkunft", EwigeEiderkunft::new);
     public static final StaticModifier<ouroboric_hourglass> ouroboric_hourglass = MODIFIERS.register("ouroboric_hourglass", ouroboric_hourglass::new);
-    public static final StaticModifier<burning_in_vain> burning_in_vain = MODIFIERS.register("burning_in_vain", burning_in_vain::new);
+    public static final StaticModifier<BurningInVain> burning_in_vain = MODIFIERS.register("burning_in_vain", BurningInVain::new);
     //lupi
-    public static final StaticModifier<the_wolf_wonder> the_wolf_wonder = MODIFIERS.register("the_wolf_wonder", the_wolf_wonder::new);
-    public static final StaticModifier<the_wolf_answer> the_wolf_answer = MODIFIERS.register("the_wolf_answer", the_wolf_answer::new);
-    public static final StaticModifier<the_wolf_was> the_wolf_was = MODIFIERS.register("the_wolf_was", the_wolf_was::new);
+    public static final StaticModifier<TheWolfWonder> the_wolf_wonder = MODIFIERS.register("the_wolf_wonder", TheWolfWonder::new);
+    public static final StaticModifier<TheWolfAnswer> the_wolf_answer = MODIFIERS.register("the_wolf_answer", TheWolfAnswer::new);
+    public static final StaticModifier<TheWolfWas> the_wolf_was = MODIFIERS.register("the_wolf_was", TheWolfWas::new);
     // star regulus
     public static final StaticModifier<as_one> as_one = MODIFIERS.register("as_one", as_one::new);
-    public static final StaticModifier<two_headed_seven> two_headed_seven = MODIFIERS.register("two_headed_seven", two_headed_seven::new);
+    public static final StaticModifier<TwoHeadedSeven> two_headed_seven = MODIFIERS.register("two_headed_seven", TwoHeadedSeven::new);
     //crying obsidian
-    public static final StaticModifier<sharpened_with> sharpened_with = MODIFIERS.register("sharpened_with", sharpened_with::new);
-    public static final StaticModifier<isolde> isolde = MODIFIERS.register("isolde", isolde::new);
+    public static final StaticModifier<SharpenedWith> sharpened_with = MODIFIERS.register("sharpened_with", SharpenedWith::new);
+    public static final StaticModifier<Isolde> isolde = MODIFIERS.register("isolde", Isolde::new);
 
     public static final StaticModifier<org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.mei> mei = MODIFIERS.register("mei", mei::new);
     public static final StaticModifier<fly> fly = MODIFIERS.register("fly", fly::new);
-    public static final StaticModifier<org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.open_soul> open_soul =
-            MODIFIERS.register("open_soul", open_soul::new);
+    public static final StaticModifier<OpenSoul> open_soul =
+            MODIFIERS.register("open_soul", OpenSoul::new);
     public static final StaticModifier<soul_blessing> soul_blessing = MODIFIERS.register("soul_blessing", soul_blessing::new);
-    public static final StaticModifier<random_hit> malum_distortion = MODIFIERS.register("malum_distortion", () -> new random_hit(0.9f, 1.2f));
+    public static final StaticModifier<RandomHit> malum_distortion = MODIFIERS.register("malum_distortion", () -> new RandomHit(0.9f, 1.2f));
 
     //etherium
     public static final StaticModifier<ender_dodge> ender_dodge = MODIFIERS.register("ender_dodge", ender_dodge::new);
-    public static final StaticModifier<org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.explosive_hit> explosive_hit =
-            MODIFIERS.register("explosive_hit", explosive_hit::new);
-    public static final StaticModifier<org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.ranged_shoot> ranged_shoot =
-            MODIFIERS.register("ranged_shoot", ranged_shoot::new);
+    public static final StaticModifier<ExplosiveHit> explosive_hit =
+            MODIFIERS.register("explosive_hit", ExplosiveHit::new);
+    public static final StaticModifier<RangedShoot> ranged_shoot =
+            MODIFIERS.register("ranged_shoot", RangedShoot::new);
 
-    public static final StaticModifier<org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.wither_shoot> wither_shoot =
-            MODIFIERS.register("wither_shoot", wither_shoot::new);
+    public static final StaticModifier<WitherShoot> wither_shoot =
+            MODIFIERS.register("wither_shoot", WitherShoot::new);
     public static final StaticModifier<stone_heart> stone_heart = MODIFIERS.register("stone_heart", stone_heart::new);
     public static final StaticModifier<life_looting> life_looting = MODIFIERS.register("life_looting", life_looting::new);
 
-    public static final StaticModifier<deepSleepWithRoar> deep_sleep_with_roar = MODIFIERS.register("deep_sleep_with_roar", deepSleepWithRoar::new);
-    public static final StaticModifier<wait_until> wait_until = MODIFIERS.register("wait_until", wait_until::new);
-    public static final StaticModifier<anvil_hit> anvil_hit = MODIFIERS.register("anvil_hit", anvil_hit::new);
-    public static final StaticModifier<absorption_hit> absorption_hit = MODIFIERS.register("absorption_hit", absorption_hit::new);
+    public static final StaticModifier<DeepSleepWithRoar> deep_sleep_with_roar = MODIFIERS.register("deep_sleep_with_roar", DeepSleepWithRoar::new);
+    public static final StaticModifier<WaitUntil> wait_until = MODIFIERS.register("wait_until", WaitUntil::new);
+    public static final StaticModifier<AnvilHit> anvil_hit = MODIFIERS.register("anvil_hit", AnvilHit::new);
+    public static final StaticModifier<AbsorptionHit> absorption_hit = MODIFIERS.register("absorption_hit", AbsorptionHit::new);
     public static final StaticModifier<absorption_defense> absorption_defense = MODIFIERS.register("absorption_defense", absorption_defense::new);
-    public static final StaticModifier<despair_mist> despair_mist = MODIFIERS.register("despair_mist", despair_mist::new);
-    public static final StaticModifier<despair_rain> despair_rain = MODIFIERS.register("despair_rain", despair_rain::new);
-    public static final StaticModifier<despair_wind> despair_wind = MODIFIERS.register("despair_wind", despair_wind::new);
-    public static final StaticModifier<weapon_dreams> weapon_dreams = MODIFIERS.register("weapon_dreams", weapon_dreams::new);
+    public static final StaticModifier<DespairMist> despair_mist = MODIFIERS.register("despair_mist", DespairMist::new);
+    public static final StaticModifier<DespairRain> despair_rain = MODIFIERS.register("despair_rain", DespairRain::new);
+    public static final StaticModifier<DespairWind> despair_wind = MODIFIERS.register("despair_wind", DespairWind::new);
+    public static final StaticModifier<WeaponDreams> weapon_dreams = MODIFIERS.register("weapon_dreams", WeaponDreams::new);
     public static final StaticModifier<HoneyTastyModifier> HoneyTastyModifier = MODIFIERS.register("honey_tasty", HoneyTastyModifier::new);
     public static final StaticModifier<rainbowCatcher> rainbowCatcher = MODIFIERS.register("rainbow_catcher", rainbowCatcher::new);
     public static final StaticModifier<not_like_was> not_like_was = MODIFIERS.register("not_like_was", not_like_was::new);
-    public static final StaticModifier<light_in_dark> light_in_dark = MODIFIERS.register("light_in_dark", light_in_dark::new);
+    public static final StaticModifier<LightInDark> light_in_dark = MODIFIERS.register("light_in_dark", LightInDark::new);
     public static final StaticModifier<lightRangeBoost> light_emanation = MODIFIERS.register("light_emanation", lightRangeBoost::new);
     public static final StaticModifier<LunarDurabilityDefense> lunar_defense = MODIFIERS.register("lunar_defense", LunarDurabilityDefense::new);
     public static final StaticModifier<blockViewer> OreViewer = MODIFIERS.register("ore_viewer", () -> new blockViewer(Tags.Blocks.ORES.location(), 0.2f));
-    public static final StaticModifier<hiddenHit> hiddenHit = MODIFIERS.register("hidden_hit", hiddenHit::new);
+    public static final StaticModifier<HiddenHit> hiddenHit = MODIFIERS.register("hidden_hit", HiddenHit::new);
     public static final StaticModifier<knockArts> knockArts = MODIFIERS.register("knock_arts", knockArts::new);
     public static final StaticModifier<TheEnd> TheEnd = MODIFIERS.register("the_end", TheEnd::new);
     public static final StaticModifier<BlockMultiplier> OreMultiplier =
             MODIFIERS.register("ore_multiplier", () -> new BlockMultiplier(Tags.Blocks.ORES.location(), 0.4f, 3));
-    public static final StaticModifier<effectRemover> effectRemover = MODIFIERS.register("sun_shine", effectRemover::new);
     public static final StaticModifier<knockBacker> SunAway = MODIFIERS.register("solar_away", knockBacker::new);
-    public static final StaticModifier<death_shredder> death_shredder = MODIFIERS.register("death_shredder", death_shredder::new);
+    public static final StaticModifier<DeathShredder> death_shredder = MODIFIERS.register("death_shredder", DeathShredder::new);
     public static final StaticModifier<SignalAxe> signal_axe = MODIFIERS.register("signal_axe", SignalAxe::new);
-    public static final StaticModifier<loveShooting> love_shooting = MODIFIERS.register("love_shooting", loveShooting::new);
+    public static final StaticModifier<LoveShooting> love_shooting = MODIFIERS.register("love_shooting", LoveShooting::new);
 
     //etherium
-    public static final StaticModifier<astral_break> astral_break = EL_MODIFIERS.register("astral_break", astral_break::new);
+    public static final StaticModifier<ELAstralBreak> astral_break = EL_MODIFIERS.register("astral_break", ELAstralBreak::new);
     public static final StaticModifier<etherium_protection> etherium_protection = EL_MODIFIERS.register("etherium_protection", etherium_protection::new);
 
     public static final StaticModifier<org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.cursed_ring_bound> cursed_ring_bound =
             EL_MODIFIERS.register("cursed_ring_bound", cursed_ring_bound::new);
     //evil
-    public static final StaticModifier<evil_attack> evil_attack = EL_MODIFIERS.register("evil_attack", evil_attack::new);
-    public static final StaticModifier<org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.ender_slayer> ender_slayer =
-            EL_MODIFIERS.register("ender_slayer", ender_slayer::new);
-    public static final StaticModifier<org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.weapon_books> weapon_books =
-            EL_MODIFIERS.register("weapon_books", weapon_books::new);
-    public static final StaticModifier<org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.eldritch_pan> eldritch_pan =
-            EL_MODIFIERS.register("eldritch_pan", eldritch_pan::new);
+    public static final StaticModifier<EvilAttack> evil_attack = EL_MODIFIERS.register("evil_attack", EvilAttack::new);
+    public static final StaticModifier<ELEnderSlayer> ender_slayer =
+            EL_MODIFIERS.register("ender_slayer", ELEnderSlayer::new);
+    public static final StaticModifier<WeaponBooks> weapon_books =
+            EL_MODIFIERS.register("weapon_books", WeaponBooks::new);
+    public static final StaticModifier<EldritchPan> eldritch_pan =
+            EL_MODIFIERS.register("eldritch_pan", EldritchPan::new);
     public static final StaticModifier<Modifier> by_pass_worthy = EL_MODIFIERS.register("by_pass_worthy", Modifier::new);
-    public static final StaticModifier<exiles_faulty> exiles_faulty = EL_MODIFIERS.register("exiles_faulty", exiles_faulty::new);
+    public static final StaticModifier<ExilesFaulty> exiles_faulty = EL_MODIFIERS.register("exiles_faulty", ExilesFaulty::new);
     public static final StaticModifier<org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.desolation_ring> desolation_ring =
             EL_MODIFIERS.register("desolation_ring", desolation_ring::new);
 
     //Malum modifiers
-    public static final StaticModifier<malum_base> malum_base =
-            MALUM_MODIFIERS.register("malum_base", malum_base::new);
+    public static final StaticModifier<MalumBase> malum_base =
+            MALUM_MODIFIERS.register("malum_base", MalumBase::new);
     public static final StaticModifier<malum_attributes> malum_spirit_attributes =
             MALUM_MODIFIERS.register("malum_spirit_attributes", () -> new malum_attributes(1));
     public static final StaticModifier<malum_attributes> malum_soul_attributes =
@@ -207,14 +207,14 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             MALUM_MODIFIERS.register("malum_hex_staff", () -> new MalumHexStaff(false));
     public static final StaticModifier<range_accelerator> malum_range_accelerator =
             MALUM_MODIFIERS.register("malum_spirit_accelerator", () -> new range_accelerator(malumTag("spirit")));
-    public static final StaticModifier<malum_magic_attack> malum_magic_attack =
-            MALUM_MODIFIERS.register("malum_magic_attack", malum_magic_attack::new);
+    public static final StaticModifier<MalumMagicAttack> malum_magic_attack =
+            MALUM_MODIFIERS.register("malum_magic_attack", MalumMagicAttack::new);
     public static final StaticModifier<MalumHexStaff> malum_erosion =
             MALUM_MODIFIERS.register("malum_erosion", () -> new MalumHexStaff(true));
-    public static final StaticModifier<malum_thirsty> malum_thirsty =
-            MALUM_MODIFIERS.register("malum_thirsty", malum_thirsty::new);
-    public static final StaticModifier<malum_evolution> malum_evolution =
-            MALUM_MODIFIERS.register("malum_evolution", malum_evolution::new);
+    public static final StaticModifier<MalumThirsty> malum_thirsty =
+            MALUM_MODIFIERS.register("malum_thirsty", MalumThirsty::new);
+    public static final StaticModifier<MalumEvolution> malum_evolution =
+            MALUM_MODIFIERS.register("malum_evolution", MalumEvolution::new);
     public static final StaticModifier<malum_spirit_defense> malum_spirit_defense =
             MALUM_MODIFIERS.register("malum_spirit_defense", malum_spirit_defense::new);
     public static final StaticModifier<MalumSolTiferet> malum_sol_tiferet =
@@ -231,8 +231,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
 
     public static final StaticModifier<dark_defense> bic_dark_defense =
             BIC_MODIFIERS.register("bic_dark_defense", dark_defense::new);
-    public static final StaticModifier<darkBlade> bic_dark_blade =
-            BIC_MODIFIERS.register("bic_dark_blade", darkBlade::new);
+    public static final StaticModifier<DarkBlade> bic_dark_blade =
+            BIC_MODIFIERS.register("bic_dark_blade", DarkBlade::new);
     public static final StaticModifier<nightmare_defense> bic_nightmare_defense =
             BIC_MODIFIERS.register("bic_nightmare_defense", nightmare_defense::new);
 
@@ -284,6 +284,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId drinker_magic = id("drinker_magic");
         public static final ModifierId monster_blood = id("monster_blood");
         public static final ModifierId deeper_water_killer = id("deeper_water_killer");
+        public static final ModifierId sun_shine = id("sun_shine");
+        public static final ModifierId ender_slayer = id("ender_slayer");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");
@@ -335,6 +337,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     void registerSerializers(RegisterEvent event) {
         if (event.getRegistryKey() == Registries.RECIPE_SERIALIZER){
             ModifierModule.LOADER.register(Dreamtinker.getLocation("swappable_circle_weapon_attack"), SwappableCircleWeaponAttack.LOADER);
+            ModifierModule.LOADER.register(Dreamtinker.getLocation("effects_remover"), MobEffectsRemoverModule.LOADER);
         }
     }
 

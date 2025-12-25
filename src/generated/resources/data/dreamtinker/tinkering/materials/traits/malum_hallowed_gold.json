@@ -1,11 +1,5 @@
 {
   "perStat": {
-    "tconstruct:melee_harvest": [
-      {
-        "level": 2,
-        "name": "tconstruct:luck"
-      }
-    ],
     "tconstruct:ranged": [
       {
         "level": 1,

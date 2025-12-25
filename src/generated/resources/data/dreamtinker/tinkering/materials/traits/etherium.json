@@ -1,4 +1,22 @@
 {
+  "default": [
+    {
+      "level": 2,
+      "name": "tconstruct:smite"
+    },
+    {
+      "level": 1,
+      "name": "dreamtinker:explosive_hit"
+    },
+    {
+      "level": 1,
+      "name": "dreamtinker:el_etherium"
+    },
+    {
+      "level": 1,
+      "name": "dreamtinker:astral_break"
+    }
+  ],
   "perStat": {
     "tconstruct:armor": [
       {
@@ -16,24 +34,6 @@
       {
         "level": 1,
         "name": "dreamtinker:fly"
-      }
-    ],
-    "tconstruct:melee_harvest": [
-      {
-        "level": 2,
-        "name": "tconstruct:smite"
-      },
-      {
-        "level": 1,
-        "name": "dreamtinker:explosive_hit"
-      },
-      {
-        "level": 1,
-        "name": "dreamtinker:el_etherium"
-      },
-      {
-        "level": 1,
-        "name": "dreamtinker:astral_break"
       }
     ],
     "tconstruct:ranged": [

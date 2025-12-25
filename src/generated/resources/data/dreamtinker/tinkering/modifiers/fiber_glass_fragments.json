@@ -6,7 +6,8 @@
       "effect": "tconstruct:bleeding",
       "hooks": [
         "tconstruct:melee_hit",
-        "tconstruct:projectile_hit"
+        "tconstruct:projectile_hit",
+        "tconstruct:monster_melee_hit"
       ],
       "level": {
         "flat": 1.0,

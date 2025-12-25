@@ -24,15 +24,14 @@ public class EidolonDeathBringer extends BattleModifier {
             unDeath = ForgeRegistries.MOB_EFFECTS.getValue(unDeathEffect);
     }
 
-    @Override
-    public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
+    private void applyEffect(ToolAttackContext context) {
         LivingEntity target = context.getLivingTarget();
+        LivingEntity attacker = context.getAttacker();
         if (null == target)
-            return knockback;
+            return;
         if (target.getMobType() != MobType.UNDEAD && null != unDeath){
             target.addEffect(new MobEffectInstance(unDeath, 900));
         }
-        LivingEntity attacker = context.getAttacker();
         if (!attacker.level().isClientSide)
             Networking.sendToTracking(attacker.level(), attacker.blockPosition(), new DeathbringerSlashEffectPacket(
                     attacker.getX(), attacker.getY() + target.getBbHeight() / 2, attacker.getZ(),
@@ -42,6 +41,16 @@ public class EidolonDeathBringer extends BattleModifier {
                     ColorUtil.packColor(255, 161, 255, 123),
                     ColorUtil.packColor(255, 194, 171, 70)
             ));
+    }
+
+    @Override
+    public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
+        applyEffect(context);
         return knockback;
+    }
+
+    @Override
+    public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
+        applyEffect(context);
     }
 }

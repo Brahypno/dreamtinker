@@ -18,9 +18,19 @@ public class EidolonSapping extends BattleModifier {
 
     @Override
     public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
+        sapping(context, modifier.getLevel());
+        return knockback;
+    }
+
+    @Override
+    public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
+        sapping(context, modifier.getLevel());
+    }
+
+    private void sapping(ToolAttackContext context, int level) {
         LivingEntity target = context.getLivingTarget();
         if (null == target || target.level().isClientSide)
-            return knockback;
+            return;
         LivingEntity attacker = context.getAttacker();
         if (target.invulnerableTime > 0){
             target.invulnerableTime = 0;
@@ -28,7 +38,7 @@ public class EidolonSapping extends BattleModifier {
             long cur_time = target.level().getGameTime();
             CompoundTag data = target.getPersistentData();
             if (data.getLong(sap_time) < cur_time){
-                target.hurt(DamageTypeData.source(target.level(), DamageTypes.WITHER, attacker, null), 2.0f * modifier.getLevel());
+                target.hurt(DamageTypeData.source(target.level(), DamageTypes.WITHER, attacker, null), 2.0f * level);
                 data.putLong(sap_time, cur_time);
 
                 float healing = before - target.getHealth();
@@ -40,6 +50,5 @@ public class EidolonSapping extends BattleModifier {
                 }
             }
         }
-        return knockback;
     }
 }

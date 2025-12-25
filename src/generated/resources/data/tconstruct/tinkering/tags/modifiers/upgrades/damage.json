@@ -11,6 +11,10 @@
     {
       "id": "dreamtinker:el_torrent",
       "required": false
+    },
+    {
+      "id": "dreamtinker:ender_slayer",
+      "required": false
     }
   ]
 }

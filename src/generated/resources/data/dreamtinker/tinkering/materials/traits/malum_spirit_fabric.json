@@ -3,6 +3,10 @@
     {
       "level": 1,
       "name": "dreamtinker:malum_distortion"
+    },
+    {
+      "level": 2,
+      "name": "tconstruct:luck"
     }
   ],
   "perStat": {

@@ -28,7 +28,8 @@
       "effect": "born_in_chaos_v1:bone_chilling",
       "hooks": [
         "tconstruct:melee_hit",
-        "tconstruct:projectile_hit"
+        "tconstruct:projectile_hit",
+        "tconstruct:monster_melee_hit"
       ],
       "level": {
         "per_level": 2.0

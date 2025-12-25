@@ -1,19 +1,19 @@
 {
+  "default": [
+    {
+      "level": 2,
+      "name": "dreamtinker:malum_haunted"
+    },
+    {
+      "level": 1,
+      "name": "dreamtinker:malum_tyrving"
+    }
+  ],
   "perStat": {
     "tconstruct:armor": [
       {
         "level": 1,
         "name": "dreamtinker:malum_soul_attributes"
-      }
-    ],
-    "tconstruct:melee_harvest": [
-      {
-        "level": 2,
-        "name": "dreamtinker:malum_haunted"
-      },
-      {
-        "level": 1,
-        "name": "dreamtinker:malum_tyrving"
       }
     ],
     "tconstruct:ranged": [

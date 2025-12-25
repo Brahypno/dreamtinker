@@ -18,7 +18,7 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.dreamtinker.dreamtinker.tools.items.SilenceGlove;
-import org.dreamtinker.dreamtinker.tools.modifiers.tools.silence_glove.weapon_dreams;
+import org.dreamtinker.dreamtinker.tools.modifiers.tools.silence_glove.WeaponDreams;
 import org.dreamtinker.dreamtinker.utils.CuriosCompact;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -38,7 +38,7 @@ import java.util.List;
 
 import static org.dreamtinker.dreamtinker.tools.modifiers.events.weaponDreamsEnsureEnds.TAG_LAST_USE;
 import static org.dreamtinker.dreamtinker.tools.modifiers.events.weaponDreamsEnsureEnds.startChosenDisplay;
-import static org.dreamtinker.dreamtinker.tools.modifiers.tools.silence_glove.weapon_dreams.computeProxyCooldownTicks;
+import static org.dreamtinker.dreamtinker.tools.modifiers.tools.silence_glove.WeaponDreams.computeProxyCooldownTicks;
 import static slimeknights.tconstruct.library.tools.item.IModifiable.DEFER_OFFHAND;
 import static slimeknights.tconstruct.library.tools.item.IModifiable.NO_INTERACTION;
 
@@ -149,7 +149,7 @@ public class SilenceGloveEvents {
             }
         }
         if (NoRandomCycle && !usable.isEmpty())
-            return weapon_dreams.naturalCycle(usable, lastIndex);
+            return WeaponDreams.naturalCycle(usable, lastIndex);
         if (usable.isEmpty())
             return -1;
         else
