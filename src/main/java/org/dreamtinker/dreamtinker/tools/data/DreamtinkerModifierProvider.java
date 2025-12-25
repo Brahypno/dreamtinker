@@ -412,7 +412,8 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(new EffectImmunityModule(MobEffects.POISON))
                 .addModule(new EffectImmunityModule(MobEffects.WITHER));
         buildModifier(Ids.eidolon_paladin_bone, DreamtinkerMaterialDataProvider.modLoaded("eidolon"))
-                .addModule(MaterialRepairModule.material(DreamtinkerMaterialIds.PaladinBoneTool).constant(200));
+                .addModule(MaterialRepairModule.material(DreamtinkerMaterialIds.PaladinBoneTool).constant(200))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
         buildModifier(Ids.eidolon_bone_chill, DreamtinkerMaterialDataProvider.modLoaded("eidolon"))
                 .addModule(MobEffectModule.builder(EidolonPotions.CHILLED_EFFECT.get())
                                           .level(RandomLevelingValue.flat(1))

@@ -307,6 +307,18 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFFF7D88E)
                                                 .addARGB(255, 0xFFFBFCF2)
                                                 .build());
+
+        this.buildMaterial(DreamtinkerMaterialIds.SpikyShard)
+            .meleeHarvest().armor().shieldCore()
+            .fallbacks("bone")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(63, 0xFF3A4859)
+                                                .addARGB(102, 0xFF3E4B5B)
+                                                .addARGB(140, 0xFF4D5B6D)
+                                                .addARGB(178, 0xFF596D7B)
+                                                .addARGB(216, 0xFF738A99)
+                                                .addARGB(255, 0xFF9FB5BF)
+                                                .build());
         addELMaterials();
         addMalumMaterials();
         addEidolonMaterials();
@@ -556,17 +568,6 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(178, 0xFF4C4255)
                                                 .addARGB(216, 0xFF534E63)
                                                 .addARGB(255, 0xFF605D78)
-                                                .build());
-        this.buildMaterial(DreamtinkerMaterialIds.SpinyShell)
-            .meleeHarvest().armor().shieldCore()
-            .fallbacks("bone")
-            .transformer(GreyToSpriteTransformer.builder()
-                                                .addARGB(63, 0xFF3A4859)
-                                                .addARGB(102, 0xFF3E4B5B)
-                                                .addARGB(140, 0xFF4D5B6D)
-                                                .addARGB(178, 0xFF596D7B)
-                                                .addARGB(216, 0xFF738A99)
-                                                .addARGB(255, 0xFF9FB5BF)
                                                 .build());
     }
 }

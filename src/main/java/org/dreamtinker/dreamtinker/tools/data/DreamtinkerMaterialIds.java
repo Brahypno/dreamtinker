@@ -60,7 +60,7 @@ public class DreamtinkerMaterialIds {
     //burn-in-chaos-v1
     public static final MaterialId DarkMetal = new MaterialId(new ResourceLocation(MODID, "bic_dark_metal"));
     public static final MaterialId MonsterSkin = new MaterialId(new ResourceLocation(MODID, "bic_monster_skin"));
-    public static final MaterialId SpinyShell = new MaterialId(new ResourceLocation(MODID, "bic_spiny_shell"));
+    public static final MaterialId SpikyShard = new MaterialId(new ResourceLocation(MODID, "spiky_shard"));
 
 
 }

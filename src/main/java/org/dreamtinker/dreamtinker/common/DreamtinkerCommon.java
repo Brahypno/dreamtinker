@@ -124,6 +124,8 @@ public class DreamtinkerCommon extends DreamtinkerModule {
     public static final RegistryObject<Item> black_sapphire =
             ITEMS.register("black_sapphire", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
 
+    public static final RegistryObject<Item> deep_prismarine_shard = ITEMS.register("deep_prismarine_shard", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
+
     public static final RegistryObject<Item> soul_etherium = EL_ITEMS.register(
             "soul_etherium",
             () -> new Item(new Item.Properties().rarity(Rarity.EPIC)) {

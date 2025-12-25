@@ -18,5 +18,4 @@ public class DreamtinkerEffects {
     public static final RegistryObject<MobEffect> unholy = EL_EFFECT.register("unholy", unholy::new);
     public static final RegistryObject<MobEffect> cursed = EFFECT.register("cursed", () -> new MobEffect(MobEffectCategory.HARMFUL, 0xA64DFF) {});
     public static final RegistryObject<thirsty> thirsty = MALUM_EFFECT.register("thirsty", thirsty::new);
-
 }

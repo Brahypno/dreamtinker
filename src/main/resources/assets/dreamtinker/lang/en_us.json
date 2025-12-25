@@ -660,6 +660,7 @@
   "item.dreamtinker.chain_saw_teeth_cast": "ChainSaw Core Gold Cast",
   "item.dreamtinker.chain_saw_teeth_sand_cast": "ChainSaw Core Sand Cast",
   "item.dreamtinker.chain_saw_teeth_red_sand_cast": "ChainSaw Core Red Sand Cast",
+  "item.dreamtinker.deep_prismarine_shard": "DeepOcean prismarine Shard",
 
   "block.dreamtinker.crying_obsidian_pane": "Crying Obsidian Pane",
   "block.dreamtinker.narcissus": "Narcissus",
@@ -778,8 +779,8 @@
   "material.dreamtinker.bic_dark_metal.flavor": "Deep Dark Monster Metal",
   "material.dreamtinker.bic_monster_skin": "Monster Skin",
   "material.dreamtinker.bic_monster_skin.flavor": "Brutal Cruel",
-  "material.dreamtinker.bic_spiny_shell": "Spiny Shell",
-  "material.dreamtinker.bic_spiny_shell.flavor": "Spiny Spiny",
+  "material.dreamtinker.spiky_shard": "Spiky shard",
+  "material.dreamtinker.spiky_shard.flavor": "Spiny Spiny",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "Molten echo Alloy",
   "fluid.dreamtinker.molten_echo_alloy": "Molten echo Alloy",

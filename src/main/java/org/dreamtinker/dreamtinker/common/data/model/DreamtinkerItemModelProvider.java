@@ -108,6 +108,7 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
         generateItemModel(DreamtinkerCommon.transmutation_gold_nugget, "materials");
         generateItemModel(DreamtinkerCommon.transmutation_gold_dust, "materials");
         generateItemModel(DreamtinkerCommon.raw_transmutation_gold, "");
+        generateItemModel(DreamtinkerCommon.deep_prismarine_shard, "materials");
         //generateBlockItemModel(object);
         part(DreamtinkerToolParts.explode_core.get());
         part(DreamtinkerToolParts.memoryOrthant.get());

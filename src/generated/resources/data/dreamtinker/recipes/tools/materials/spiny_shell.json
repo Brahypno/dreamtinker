@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "dreamtinker:deep_prismarine_shard"
+  },
+  "material": "dreamtinker:spiky_shard",
+  "needed": 1,
+  "value": 1
+}

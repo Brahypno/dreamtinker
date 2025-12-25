@@ -48,6 +48,7 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.shadowSilver, 2, 10, false, false, tagFilled(Dreamtinker.forgeItemTag("ingots/silver")));
         addMaterial(DreamtinkerMaterialIds.TransmutationGold, 3, 7, false, false, null);
         addMaterial(DreamtinkerMaterialIds.ArcaneGold, 2, ORDER_REPAIR, false, false, tagFilled(DreamtinkerTagKeys.Items.arcaneGoldIngot));
+        addMaterial(DreamtinkerMaterialIds.SpikyShard, 2, 5, true, false, null);
 
         addMaterial(DreamtinkerMaterialIds.etherium, 4, 40, false, false, modLoaded("enigmaticlegacy"));
         addMaterial(DreamtinkerMaterialIds.nefarious, 4, 40, false, false, modLoaded("enigmaticlegacy"));
@@ -69,7 +70,6 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
 
         addMaterial(DreamtinkerMaterialIds.DarkMetal, 3, 15, false, false, modLoaded("born_in_chaos_v1"));
         addMaterial(DreamtinkerMaterialIds.MonsterSkin, 2, 5, true, false, modLoaded("born_in_chaos_v1"));
-        addMaterial(DreamtinkerMaterialIds.SpinyShell, 2, 5, true, false, modLoaded("born_in_chaos_v1"));
     }
 
     @Override

@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "forge:dusts/prismarine"
+  },
+  "cast_consumed": true,
+  "cooling_time": 143,
+  "fluid": {
+    "amount": 2250,
+    "tag": "tconstruct:sky_slime"
+  },
+  "result": "dreamtinker:deep_prismarine_shard"
+}

@@ -24,22 +24,22 @@
       ]
     }
   ],
-  "cost": 5,
-  "material": "dreamtinker:bic_spiny_shell",
-  "pattern": "tconstruct:leggings_plating",
+  "cost": 3,
+  "material": "dreamtinker:spiky_shard",
+  "pattern": "tconstruct:helmet_plating",
   "pattern_item": [
     {
       "tag": "tconstruct:patterns/default"
     },
     {
-      "item": "tconstruct:leggings_plating_cast"
+      "item": "tconstruct:helmet_plating_cast"
     }
   ],
   "result": {
     "count": 1,
-    "item": "tconstruct:leggings_plating",
+    "item": "tconstruct:helmet_plating",
     "nbt": {
-      "Material": "dreamtinker:bic_spiny_shell"
+      "Material": "dreamtinker:spiky_shard"
     }
   }
 }

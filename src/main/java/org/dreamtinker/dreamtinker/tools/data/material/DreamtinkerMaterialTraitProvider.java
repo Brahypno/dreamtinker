@@ -160,9 +160,9 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
 
         addDefaultTraits(DreamtinkerMaterialIds.MonsterSkin, TinkerModifiers.tanned.getId(), bic_nightmare_defense.getId(), Ids.monster_blood);
 
-        addDefaultTraits(DreamtinkerMaterialIds.SpinyShell, new ModifierEntry(ModifierIds.thorns, 2));
+        addDefaultTraits(DreamtinkerMaterialIds.SpikyShard, new ModifierEntry(ModifierIds.thorns, 2));
 
-        addTraits(DreamtinkerMaterialIds.SpinyShell, MELEE_HARVEST, Ids.deeper_water_killer);
+        addTraits(DreamtinkerMaterialIds.SpikyShard, MELEE_HARVEST, Ids.deeper_water_killer);
 
     }
 

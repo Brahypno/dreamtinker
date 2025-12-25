@@ -1,5 +1,5 @@
 {
-  "type": "tconstruct:material",
+  "type": "tconstruct:item_part_builder",
   "conditions": [
     {
       "type": "forge:or",
@@ -24,10 +24,22 @@
       ]
     }
   ],
-  "ingredient": {
-    "item": "born_in_chaos_v1:spiny_shell"
-  },
-  "material": "dreamtinker:bic_spiny_shell",
-  "needed": 1,
-  "value": 1
+  "cost": 2,
+  "material": "dreamtinker:spiky_shard",
+  "pattern": "tconstruct:boots_plating",
+  "pattern_item": [
+    {
+      "tag": "tconstruct:patterns/default"
+    },
+    {
+      "item": "tconstruct:boots_plating_cast"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "tconstruct:boots_plating",
+    "nbt": {
+      "Material": "dreamtinker:spiky_shard"
+    }
+  }
 }

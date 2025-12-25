@@ -660,6 +660,7 @@
   "item.dreamtinker.chain_saw_teeth_cast": "链锯刃齿金质铸模",
   "item.dreamtinker.chain_saw_teeth_sand_cast": "链锯刃齿沙子铸模",
   "item.dreamtinker.chain_saw_teeth_red_sand_cast": "链锯刃齿红沙铸模",
+  "item.dreamtinker.deep_prismarine_shard": "深海晶碎片",
 
   "block.dreamtinker.crying_obsidian_pane": "哭泣的黑曜石板",
   "block.dreamtinker.narcissus": "水仙",
@@ -778,8 +779,8 @@
   "material.dreamtinker.bic_dark_metal.flavor": "深暗怪物金属",
   "material.dreamtinker.bic_monster_skin": "怪物皮",
   "material.dreamtinker.bic_monster_skin.flavor": "野蛮而残忍",
-  "material.dreamtinker.bic_spiny_shell": "刺壳",
-  "material.dreamtinker.bic_spiny_shell.flavor": "刺刺的",
+  "material.dreamtinker.spiky_shard": "刺晶片",
+  "material.dreamtinker.spiky_shard.flavor": "刺刺的",
 
   "fluid_type.dreamtinker.molten_echo_alloy": "熔融回响合金",
   "fluid.dreamtinker.molten_echo_alloy": "熔融回响合金",

@@ -304,6 +304,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                 .setFluidAndTime(TinkerFluids.moltenGlass, FluidValues.GLASS_BLOCK)
                                 .setCast(Items.FLINT, true)
                                 .save(consumer, location(Casting_folder + "shining_flint"));
+        ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.deep_prismarine_shard.get())
+                                .setFluidAndTime(TinkerFluids.skySlime, FluidValues.SLIME_BLOCK)
+                                .setCast(Tags.Items.DUSTS_PRISMARINE, true)
+                                .save(consumer, location(Casting_folder + "deep_prismarine_shard"));
     }
 
     String Melting_folder = "smeltery/melting/";
@@ -824,6 +828,9 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         materialRecipe(consumer, DreamtinkerMaterialIds.ArcaneGold, Ingredient.of(DreamtinkerTagKeys.Items.arcaneGoldBlock), 9, 1,
                        materials_folder + "arcane_gold/block");
 
+        materialRecipe(consumer, DreamtinkerMaterialIds.SpikyShard, Ingredient.of(DreamtinkerCommon.deep_prismarine_shard.get()), 1, 1,
+                       materials_folder + "spiny_shell");
+
     }
 
     private void addCompactMaterialRecipes(Consumer<FinishedRecipe> consumer) {
@@ -904,10 +911,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                        materials_folder + "monster_skin");
         materialComposite(wrapped, MaterialIds.leather, DreamtinkerMaterialIds.MonsterSkin, DreamtinkerFluids.molten_dark_metal, FluidValues.INGOT,
                           slimeskinFolder, "monsterskin");
-        materialComposite(consumer, DreamtinkerMaterialIds.MonsterSkin, MaterialIds.leather, TinkerFluids.venom, FluidValues.SIP, slimeskinFolder,
+        materialComposite(wrapped, DreamtinkerMaterialIds.MonsterSkin, MaterialIds.leather, TinkerFluids.venom, FluidValues.SIP, slimeskinFolder,
                           "monsterskin_cleaning");
-        materialRecipe(wrapped, DreamtinkerMaterialIds.SpinyShell, Ingredient.of(SPINY_SHELL.get()), 1, 1,
-                       materials_folder + "bic_spiny_shell");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.SpikyShard, Ingredient.of(SPINY_SHELL.get()), 1, 1,
+                       materials_folder + "spiny_shell_bic");
     }
 
     String common_folder = "common/";
@@ -1139,7 +1146,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
         wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"));
         armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.MonsterSkin);
-        armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.SpinyShell);
+        armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.SpikyShard);
 
     }
 

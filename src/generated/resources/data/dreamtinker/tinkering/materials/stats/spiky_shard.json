@@ -19,15 +19,15 @@
       "durability": 260
     },
     "tconstruct:plating_chestplate": {
-      "armor": 7.0,
+      "armor": 5.0,
       "durability": 320
     },
     "tconstruct:plating_helmet": {
-      "armor": 3.0,
+      "armor": 2.0,
       "durability": 220
     },
     "tconstruct:plating_leggings": {
-      "armor": 4.0,
+      "armor": 3.0,
       "durability": 300
     },
     "tconstruct:plating_shield": {
