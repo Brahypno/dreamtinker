@@ -51,6 +51,8 @@ public class DreamtinkerMaterialIds {
     public static final MaterialVariantId twisted = create(soul_rock, "twisted");
     public static final MaterialVariantId tainted = create(soul_rock, "tainted");
     public static final MaterialVariantId refined = create(soul_rock, "refined");
+    public static final MaterialId spirits = new MaterialId(new ResourceLocation(MODID, "malum_spirits"));
+    public static final MaterialId blazing_quartz = new MaterialId(new ResourceLocation(MODID, "malum_blazing_quartz"));
     //Compact-eidolon
     public static final MaterialId ArcaneGold = new MaterialId(new ResourceLocation(MODID, "arcane_gold"));
     public static final MaterialId TatteredCloth = new MaterialId(new ResourceLocation(MODID, "eidolon_tattered_cloth"));

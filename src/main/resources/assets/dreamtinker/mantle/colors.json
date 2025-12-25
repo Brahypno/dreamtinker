@@ -56,6 +56,7 @@
     "malum_animated": "#2ED3C7",
     "malum_haunted": "#2ED3C7",
     "malum_spirit_plunder": "#D9822B",
+    "malum_expose_soul": "#D9822B",
     "malum_spirit_attributes": "#D9822B",
     "malum_distortion": "#6E2CA3",
     "malum_hex_staff": "#7F08FC",
@@ -186,7 +187,8 @@
     "eidolon_paladin_bone_tool": "#B0D2B2",
     "bic_dark_metal": "#66646E",
     "bic_monster_skin": "#534E63",
-    "spiny_shell": "#738A99"
+    "spiny_shell": "#738A99",
+    "malum_blazing_quartz": "#FCE35C"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873",

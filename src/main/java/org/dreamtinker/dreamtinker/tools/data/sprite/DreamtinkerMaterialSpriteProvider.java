@@ -1,11 +1,14 @@
 package org.dreamtinker.dreamtinker.tools.data.sprite;
 
+import com.sammy.malum.core.systems.spirit.MalumSpiritType;
+import com.sammy.malum.registry.common.SpiritTypeRegistry;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.client.data.material.AbstractMaterialSpriteProvider;
 import slimeknights.tconstruct.library.client.data.spritetransformer.GreyToColorMapping;
 import slimeknights.tconstruct.library.client.data.spritetransformer.GreyToSpriteTransformer;
+import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
 import slimeknights.tconstruct.tools.stats.*;
 
 public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpriteProvider {
@@ -497,6 +500,31 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFFAE3CB5)  // 高亮过渡       (~174,60,181)
                                                 .addARGB(255, 0xFFC13FC7)  // 高光：亮洋红紫 (193,63,199)
                                                 .build());
+        for (MalumSpiritType types : SpiritTypeRegistry.SPIRITS.values()) {
+            String name = types.identifier;
+            MaterialSpriteInfoBuilder builder = buildMaterial(MaterialVariantId.create(DreamtinkerMaterialIds.spirits, name));
+            builder.arrowHead().transformer(GreyToSpriteTransformer.builder()
+                                                                   .addARGB(0, types.getPrimaryColor().darker().darker().darker().getRGB())
+                                                                   .addARGB(63, types.getPrimaryColor().darker().darker().getRGB())
+                                                                   .addARGB(102, types.getPrimaryColor().darker().getRGB())
+                                                                   .addARGB(140, types.getPrimaryColor().getRGB())
+                                                                   .addARGB(178, types.getPrimaryColor().getRGB())
+                                                                   .addARGB(216, types.getPrimaryColor().brighter().getRGB())
+                                                                   .addARGB(255, types.getPrimaryColor().brighter().brighter().getRGB())
+                                                                   .build()
+            );
+            builder.variant(true);
+        }
+        buildMaterial(DreamtinkerMaterialIds.blazing_quartz)
+                .arrowHead()
+                .colorMapper(GreyToColorMapping.builderFromBlack()
+                                               .addARGB(63, 0xFF7D1A35)
+                                               .addARGB(102, 0xFFA9254A)
+                                               .addARGB(140, 0xFFE99432)
+                                               .addARGB(178, 0xFFFCB236)
+                                               .addARGB(216, 0xFFFCE35C)
+                                               .addARGB(255, 0xFFFCEEA5)
+                                               .build());
     }
 
     protected void addEidolonMaterials() {

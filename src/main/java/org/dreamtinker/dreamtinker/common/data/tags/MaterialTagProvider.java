@@ -21,8 +21,11 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
             .addOptional(etherium, nefarious, soul_etherium,
                          soul_stained_steel, malignant_pewter, malignant_gluttony, malignant_lead, PaladinBoneTool);
 
-        this.tag(TinkerTags.Materials.NETHER).add(nefarious, amber, scolecite);
+        this.tag(TinkerTags.Materials.NETHER)
+            .add(amber, scolecite)
+            .addOptional(nefarious);
         this.tag(TinkerTags.Materials.BARTERED).add(amber, rainbow_honey_crystal, scolecite);
+        tag(TinkerTags.Materials.NETHER_GATED).add(amber, scolecite);
         this.tag(TinkerTags.Materials.MELEE)
             .add(crying_obsidian, nigrescence_antimony, moonlight_ice, echo_alloy, metallivorous_stibium_lupus, amber, half_rotten_homunculus, desire_gem,
                  despair_gem, scolecite, shiningFlint, cold_iron, SpikyShard)
@@ -45,6 +48,7 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
         this.tag(TinkerTags.Materials.HEAVY)
             .add(crying_obsidian, amber, soul_steel)
             .addOptional(hallowed_gold, ArcaneGold, WickedWeave);
+
     }
 
     @Override

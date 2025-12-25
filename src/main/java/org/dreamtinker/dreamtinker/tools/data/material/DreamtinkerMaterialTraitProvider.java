@@ -144,6 +144,9 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.malignant_gluttony, ARMOR, Ids.thundering_curse, malum_thirsty.getId(), malum_spirit_defense.getId());
         addDefaultTraits(DreamtinkerMaterialIds.soul_rock, Ids.malum_spirit_plunder);
 
+        addTraits(DreamtinkerMaterialIds.spirits, AMMO, ModifierIds.spike, malum_expose_soul.getId());
+        addTraits(DreamtinkerMaterialIds.blazing_quartz, AMMO, ModifierIds.keen, ModifierIds.fiery);
+
 
         addDefaultTraits(DreamtinkerMaterialIds.TatteredCloth, Ids.eidolon_vulnerable);
 

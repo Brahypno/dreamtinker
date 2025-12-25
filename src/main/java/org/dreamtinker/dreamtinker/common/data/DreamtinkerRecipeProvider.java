@@ -2,6 +2,7 @@ package org.dreamtinker.dreamtinker.common.data;
 
 import com.aizistral.enigmaticlegacy.registries.EnigmaticBlocks;
 import com.aizistral.enigmaticlegacy.registries.EnigmaticItems;
+import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import com.sammy.malum.data.recipe.builder.SpiritInfusionRecipeBuilder;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
 import com.sammy.malum.registry.common.block.BlockRegistry;
@@ -885,6 +886,15 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         materialRecipe(wrapped, DreamtinkerMaterialIds.twisted, Ingredient.of(ItemTagRegistry.TWISTED_BLOCKS), 1, 1, materials_folder + "soul_rock/twisted");
         materialRecipe(wrapped, DreamtinkerMaterialIds.refined, Ingredient.of(ItemRegistry.PROCESSED_SOULSTONE.get()), 1, 1,
                        materials_folder + "soul_rock/refined");
+
+        materialRecipe(consumer, DreamtinkerMaterialIds.blazing_quartz, Ingredient.of(ItemRegistry.BLAZING_QUARTZ.get()), 1, 1,
+                       materials_folder + "blazing_quartz");
+        for (MalumSpiritType types : SpiritTypeRegistry.SPIRITS.values()) {
+            String name = types.identifier;
+            materialRecipe(wrapped, MaterialVariantId.create(DreamtinkerMaterialIds.spirits, name), Ingredient.of(types.spiritShard.get()), 1, 1,
+                           materials_folder + "spirits/" + name);
+        }
+
 
     }
 

@@ -1,7 +1,10 @@
 {
   "values": [
-    "dreamtinker:nefarious",
     "dreamtinker:amber",
-    "dreamtinker:scolecite"
+    "dreamtinker:scolecite",
+    {
+      "id": "dreamtinker:nefarious",
+      "required": false
+    }
   ]
 }

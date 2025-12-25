@@ -1,11 +1,14 @@
 package org.dreamtinker.dreamtinker.tools.data.material;
 
+import com.sammy.malum.core.systems.spirit.MalumSpiritType;
+import com.sammy.malum.registry.common.SpiritTypeRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.client.data.material.AbstractMaterialRenderInfoProvider;
 import slimeknights.tconstruct.library.client.data.material.AbstractMaterialSpriteProvider;
+import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
 
 import javax.annotation.Nullable;
 
@@ -59,6 +62,13 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
         buildRenderInfo(DreamtinkerMaterialIds.tainted).color(0x534C58);
         buildRenderInfo(DreamtinkerMaterialIds.twisted);
         buildRenderInfo(DreamtinkerMaterialIds.refined);
+        buildRenderInfo(DreamtinkerMaterialIds.blazing_quartz).color(0xFFFCE35C).fallbacks("gem");
+        MaterialVariantId sacred_spirit = MaterialVariantId.create(DreamtinkerMaterialIds.spirits, SpiritTypeRegistry.SACRED_SPIRIT.identifier);
+        redirect(DreamtinkerMaterialIds.spirits, sacred_spirit);
+        for (MalumSpiritType types : SpiritTypeRegistry.SPIRITS.values()) {
+            String name = types.identifier;
+            buildRenderInfo(MaterialVariantId.create(DreamtinkerMaterialIds.spirits, name));
+        }
 
         buildRenderInfo(DreamtinkerMaterialIds.TatteredCloth).color(0xFF5B5957).fallbacks("cloth").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.WickedWeave).color(0xFF384185).fallbacks("cloth").luminosity(0);

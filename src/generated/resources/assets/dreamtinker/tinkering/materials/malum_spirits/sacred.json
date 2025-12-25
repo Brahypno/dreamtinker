@@ -1,0 +1,42 @@
+{
+  "color": "FFFF3EC2",
+  "generator": {
+    "supported_stats": [
+      "tconstruct:arrow_head"
+    ],
+    "transformer": {
+      "type": "tconstruct:grey_to_sprite",
+      "palette": [
+        {
+          "color": "FF510E2E",
+          "grey": 0
+        },
+        {
+          "color": "FF741542",
+          "grey": 63
+        },
+        {
+          "color": "FFA61E5F",
+          "grey": 102
+        },
+        {
+          "color": "FFEE2C88",
+          "grey": 140
+        },
+        {
+          "color": "FFEE2C88",
+          "grey": 178
+        },
+        {
+          "color": "FFFF3EC2",
+          "grey": 216
+        },
+        {
+          "color": "FFFF58FF",
+          "grey": 255
+        }
+      ]
+    },
+    "variant": true
+  }
+}

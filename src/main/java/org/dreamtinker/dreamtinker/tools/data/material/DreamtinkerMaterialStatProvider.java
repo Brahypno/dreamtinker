@@ -363,6 +363,8 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
 
     private void addAmmo() {
 
+        this.addMaterialStats(DreamtinkerMaterialIds.spirits, StatlessMaterialStats.ARROW_HEAD);
+        this.addMaterialStats(DreamtinkerMaterialIds.blazing_quartz, StatlessMaterialStats.ARROW_HEAD);
     }
 
     private void addMisc() {

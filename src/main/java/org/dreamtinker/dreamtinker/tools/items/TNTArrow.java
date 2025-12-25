@@ -197,7 +197,7 @@ public class TNTArrow extends ModifiableItem {
                         if (ts.getPersistentData().contains(TAG_EXPLODE_ALREADY))
                             return;
                         ToolAttackContext context = ToolAttackContext.attacker(owner).target(owner).cooldown(0).toolAttributes(ts).build();
-                        
+
                         float baseDamage = context.getBaseDamage();
                         float damage = baseDamage;
                         List<ModifierEntry> modifiers = ts.getModifierList();
@@ -253,7 +253,7 @@ public class TNTArrow extends ModifiableItem {
         }
 
         @Override
-        protected @NotNull ItemStack getPickupItem() {
+        public @NotNull ItemStack getPickupItem() {
             return tntarrow;
         }
 

@@ -1,0 +1,14 @@
+{
+  "perStat": {
+    "tconstruct:ammo": [
+      {
+        "level": 1,
+        "name": "tconstruct:keen"
+      },
+      {
+        "level": 1,
+        "name": "tconstruct:fiery"
+      }
+    ]
+  }
+}

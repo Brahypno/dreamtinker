@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "malum:blazing_quartz"
+  },
+  "material": "dreamtinker:malum_blazing_quartz",
+  "needed": 1,
+  "value": 1
+}

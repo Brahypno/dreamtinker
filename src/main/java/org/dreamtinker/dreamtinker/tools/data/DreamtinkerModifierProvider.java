@@ -2,6 +2,7 @@ package org.dreamtinker.dreamtinker.tools.data;
 
 import com.aizistral.enigmaticlegacy.api.materials.EnigmaticMaterials;
 import com.aizistral.enigmaticlegacy.registries.EnigmaticEnchantments;
+import com.sammy.malum.registry.common.AttributeRegistry;
 import com.sammy.malum.registry.common.item.EnchantmentRegistry;
 import elucent.eidolon.registries.EidolonAttributes;
 import elucent.eidolon.registries.EidolonPotions;
@@ -374,7 +375,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                                      .modifierKey(Ids.malum_haunted).build());
         buildModifier(Ids.malum_spirit_plunder, DreamtinkerMaterialDataProvider.modLoaded("malum"))
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                .addModule(EnchantmentModule.builder(EnchantmentRegistry.SPIRIT_PLUNDER.get()).level(2).constant());
+                .addModule(AttributeModule.builder(AttributeRegistry.SPIRIT_SPOILS, AttributeModifier.Operation.ADDITION).eachLevel(2.0f));
 
         buildModifier(Ids.malum_tyrving, DreamtinkerMaterialDataProvider.modLoaded("malum"))
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)

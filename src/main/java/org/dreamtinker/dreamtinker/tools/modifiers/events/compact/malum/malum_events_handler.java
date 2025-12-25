@@ -31,23 +31,22 @@ public class malum_events_handler {
         LivingEntity target = event.getEntity();
         DamageSource dmg = event.getSource();
 
-        if (null != dmg.getEntity() && dmg.getEntity() instanceof Player player && !reEnter){
+        if (null != dmg.getEntity() && dmg.getEntity() instanceof LivingEntity attacker && !reEnter){
             reEnter = true;
-            ItemStack stack = player.getMainHandItem();
+            ItemStack stack = attacker.getMainHandItem();
             if (!(stack.getItem() instanceof IModifiable))
                 return;
             if (0 < ToolStack.from(stack).getModifierLevel(DreamtinkerModifiers.malum_base.getId()))
-                ((MalumScytheItem) ItemRegistry.CRUDE_SCYTHE.get()).hurtEvent(event, player, event.getEntity(), stack);
+                ((MalumScytheItem) ItemRegistry.CRUDE_SCYTHE.get()).hurtEvent(event, attacker, event.getEntity(), stack);
             if (0 < ToolStack.from(stack).getModifierLevel(DreamtinkerModifiers.Ids.malum_tyrving))
-                ((TyrvingItem) ItemRegistry.TYRVING.get()).hurtEvent(event, player, event.getEntity(), stack);
+                ((TyrvingItem) ItemRegistry.TYRVING.get()).hurtEvent(event, attacker, event.getEntity(), stack);
             if (0 < ToolStack.from(stack).getModifierLevel(DreamtinkerModifiers.Ids.malum_world_of_weight))
-                ((WeightOfWorldsItem) ItemRegistry.WEIGHT_OF_WORLDS.get()).hurtEvent(event, player, event.getEntity(), stack);
+                ((WeightOfWorldsItem) ItemRegistry.WEIGHT_OF_WORLDS.get()).hurtEvent(event, attacker, event.getEntity(), stack);
             if (0 < ToolStack.from(stack).getModifierLevel(DreamtinkerModifiers.Ids.malum_edge_of_deliverance))
-                ((EdgeOfDeliveranceItem) ItemRegistry.EDGE_OF_DELIVERANCE.get()).hurtEvent(event, player, event.getEntity(), stack);
+                ((EdgeOfDeliveranceItem) ItemRegistry.EDGE_OF_DELIVERANCE.get()).hurtEvent(event, attacker, event.getEntity(), stack);
             if (0 < ToolStack.from(stack).getModifierLevel(DreamtinkerModifiers.malum_erosion.getId()))
-                ((ErosionScepterItem) ItemRegistry.EROSION_SCEPTER.get()).hurtEvent(event, player, event.getEntity(), stack);
-            if (!(event.getSource().getEntity() instanceof LivingEntity attacker))
-                return;
+                ((ErosionScepterItem) ItemRegistry.EROSION_SCEPTER.get()).hurtEvent(event, attacker, event.getEntity(), stack);
+
             int levels = DTModifierCheck.getMainhandModifierLevel(attacker, DreamtinkerModifiers.malum_sol_tiferet.getId());
             if (0 < levels && null != target && !target.level().isClientSide &&
                 crossedWhichN(target, event.getAmount() - target.getAbsorptionAmount(), levels + 1))

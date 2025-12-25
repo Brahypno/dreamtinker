@@ -1,0 +1,47 @@
+{
+  "color": "FFFCE35C",
+  "fallbacks": [
+    "gem"
+  ],
+  "generator": {
+    "supported_stats": [
+      "tconstruct:arrow_head"
+    ],
+    "transformer": {
+      "type": "tconstruct:recolor_sprite",
+      "color_mapping": {
+        "type": "tconstruct:grey_to_color",
+        "palette": [
+          {
+            "color": "FF000000",
+            "grey": 0
+          },
+          {
+            "color": "FF7D1A35",
+            "grey": 63
+          },
+          {
+            "color": "FFA9254A",
+            "grey": 102
+          },
+          {
+            "color": "FFE99432",
+            "grey": 140
+          },
+          {
+            "color": "FFFCB236",
+            "grey": 178
+          },
+          {
+            "color": "FFFCE35C",
+            "grey": 216
+          },
+          {
+            "color": "FFFCEEA5",
+            "grey": 255
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "malum"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "malum"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ingredient": {
+    "item": "malum:eldritch_spirit"
+  },
+  "material": "dreamtinker:malum_spirits#eldritch",
+  "needed": 1,
+  "value": 1
+}
