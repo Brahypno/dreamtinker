@@ -33,7 +33,7 @@ public class AnvilHit extends BattleModifier {
 
 
     @Override
-    public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target) {
+    public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target, boolean notBlocked) {
         if (null != target && target.level() instanceof ServerLevel level && !level.isClientSide){
             String anvil_hit = "dreamtinker_anvil_hit_range";
             if (!ProjectileHitMemory.hasTriggered(anvil_hit, projectile, target.getUUID())){

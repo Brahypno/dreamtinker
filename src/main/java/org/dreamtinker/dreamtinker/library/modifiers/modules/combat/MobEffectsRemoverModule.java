@@ -68,11 +68,11 @@ public record MobEffectsRemoverModule(IJsonPredicate<LivingEntity> target, Rando
         if (target != null && this.target.matches(target)){
             int level = Math.round(this.level.computeValue(scaledLevel)) - 1;
             List<MobEffectInstance> all =
-                    target.getActiveEffects().stream().filter(e -> e.getEffect().getCategory() == this.category).toList();
+                    new java.util.ArrayList<>(target.getActiveEffects().stream().filter(e -> e.getEffect().getCategory() == this.category).toList());
             if (all.isEmpty()){
                 return;
             }
-            Collections.shuffle(all, new java.util.Random(target.level().random.nextLong()));
+            Collections.shuffle(all, TConstruct.RANDOM);
 
             int removeCount = Math.min(level, all.size());
             for (int i = 0; i < removeCount; i++) {
@@ -118,7 +118,7 @@ public record MobEffectsRemoverModule(IJsonPredicate<LivingEntity> target, Rando
 
     }
 
-    public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target) {
+    public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target, boolean notBlocked) {
         if (this.condition.modifierLevel().test(modifier.getLevel())){
             this.removeEffects(this.removeOwner ? attacker : target, modifier.getEffectiveLevel());
         }
@@ -162,7 +162,7 @@ public record MobEffectsRemoverModule(IJsonPredicate<LivingEntity> target, Rando
                 RandomLevelingValue.LOADABLE.requiredField("level", MobEffectsRemoverModule::level),
                 LevelingValue.LOADABLE.defaultField("chance", LevelingValue.eachLevel(0.25F), false,
                                                     MobEffectsRemoverModule::chance),
-                BooleanLoadable.INSTANCE.defaultField("apply_before_melee", false, false,
+                BooleanLoadable.INSTANCE.defaultField("apply_before_melee", true, true,
                                                       MobEffectsRemoverModule::removeBeforeMelee),
                 ModifierCondition.TOOL_FIELD,
                 BooleanLoadable.INSTANCE.defaultField("remove_effect_on_attacker", false, false,
@@ -188,7 +188,7 @@ public record MobEffectsRemoverModule(IJsonPredicate<LivingEntity> target, Rando
             this.target = LivingEntityPredicate.ANY;
             this.level = RandomLevelingValue.flat(1.0F);
             this.chance = LevelingValue.eachLevel(0.25F);
-            this.removeBeforeMelee = false;
+            this.removeBeforeMelee = true;
             this.removeOwner = false;
             this.category = MobEffectCategory.BENEFICIAL;
         }

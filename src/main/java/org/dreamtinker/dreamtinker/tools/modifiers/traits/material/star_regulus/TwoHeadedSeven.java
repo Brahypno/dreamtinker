@@ -50,7 +50,7 @@ public class TwoHeadedSeven extends BattleModifier {//TODO This is too weak, nee
     }
 
     @Override
-    public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target) {
+    public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target, boolean notBlocked) {
         if (null == target)
             return false;
         AttributeModifier neg = new AttributeModifier(UUID.nameUUIDFromBytes(modifier.getId().toString().getBytes()), "def_suppress", Integer.MIN_VALUE,

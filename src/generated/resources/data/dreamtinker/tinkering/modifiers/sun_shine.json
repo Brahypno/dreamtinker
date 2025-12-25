@@ -3,6 +3,7 @@
   "modules": [
     {
       "type": "dreamtinker:effects_remover",
+      "apply_before_melee": true,
       "level": {
         "per_level": 1.0
       },
@@ -10,6 +11,7 @@
     },
     {
       "type": "dreamtinker:effects_remover",
+      "apply_before_melee": true,
       "level": {
         "per_level": 1.0
       },
@@ -17,6 +19,7 @@
     },
     {
       "type": "dreamtinker:effects_remover",
+      "apply_before_melee": true,
       "level": {
         "per_level": 1.0
       },

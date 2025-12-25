@@ -42,7 +42,7 @@ public class HiddenHit extends BattleModifier {
     }
 
     @Override
-    public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target) {
+    public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target, boolean notBlocked) {
         if (target instanceof Mob mob && projectile instanceof AbstractArrow arr)
             if (attacker != null && (null == mob.getTarget() || !mob.getTarget().is(attacker)))
                 arr.setBaseDamage(arr.getBaseDamage() + 0.3 * modifier.getLevel());

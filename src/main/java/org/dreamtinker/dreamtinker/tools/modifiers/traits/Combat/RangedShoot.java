@@ -28,7 +28,7 @@ public class RangedShoot extends NoLevelsModifier implements ArrowInterface {
         super.registerHooks(hookBuilder);
     }
 
-    public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target) {
+    public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target, boolean notBlocked) {
         if (null != attacker && null != target && !ProjectileHitMemory.hasTriggered(mark, projectile, target.getUUID())){
             if (rangedHit.get() <= 1e-6)
                 return false;
