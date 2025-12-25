@@ -894,6 +894,18 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
             materialRecipe(wrapped, MaterialVariantId.create(DreamtinkerMaterialIds.spirits, name), Ingredient.of(types.spiritShard.get()), 1, 1,
                            materials_folder + "spirits/" + name);
         }
+        materialRecipe(wrapped, DreamtinkerMaterialIds.grim_talc, Ingredient.of(ItemRegistry.GRIM_TALC.get()), 1, 1, materials_folder + "grim_talc/item");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.grim_talc, Ingredient.of(BlockRegistry.BLOCK_OF_GRIM_TALC.get()), 9, 1,
+                       materials_folder + "grim_talc/block");
+
+        materialRecipe(wrapped, DreamtinkerMaterialIds.astral_weave, Ingredient.of(ItemRegistry.ASTRAL_WEAVE.get()), 1, 1,
+                       materials_folder + "astral_weave/item");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.astral_weave, Ingredient.of(BlockRegistry.BLOCK_OF_ASTRAL_WEAVE.get()), 9, 1,
+                       materials_folder + "astral_weave/block");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.null_slate, Ingredient.of(ItemRegistry.NULL_SLATE.get()), 1, 1,
+                       materials_folder + "null_slate/item");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.null_slate, Ingredient.of(BlockRegistry.BLOCK_OF_NULL_SLATE.get()), 9, 1,
+                       materials_folder + "null_slate/block");
 
 
     }

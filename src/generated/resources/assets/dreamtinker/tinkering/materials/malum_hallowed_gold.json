@@ -9,7 +9,8 @@
       "tconstruct:limb",
       "tconstruct:grip",
       "tconstruct:repair_kit",
-      "tconstruct:bowstring"
+      "tconstruct:bowstring",
+      "tconstruct:arrow_head"
     ],
     "transformer": {
       "type": "tconstruct:grey_to_sprite",

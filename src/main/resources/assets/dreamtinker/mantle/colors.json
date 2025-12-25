@@ -144,7 +144,8 @@
     "bic_dark_armor_plate": "#534E63",
     "bic_frostbitten": "#DF59B8",
     "bic_intoxicating": "#CFFBFC",
-    "deeper_water_killer": "#738A99"
+    "deeper_water_killer": "#738A99",
+    "teleport_shooting": "#E85BE1"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
@@ -188,7 +189,10 @@
     "bic_dark_metal": "#66646E",
     "bic_monster_skin": "#534E63",
     "spiny_shell": "#738A99",
-    "malum_blazing_quartz": "#FCE35C"
+    "malum_blazing_quartz": "#FCE35C",
+    "malum_grim_talc": "#D6D3A1",
+    "malum_astral_weave": "#7BCBC5",
+    "malum_null_slate": "#E85BE1"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873",

@@ -152,6 +152,8 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new HeadMaterialStats(1200, 3.0f, Tiers.NETHERITE, 0f),
                          HandleMaterialStats.multipliers().durability(0.5f).miningSpeed(1.3f).attackDamage(1.2f).attackSpeed(1.2f).build(),
                          StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.astral_weave,
+                         StatlessMaterialStats.BINDING);
     }
 
     private void addEidolonMeleeHarvest() {
@@ -199,7 +201,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new GripMaterialStats(0.8f, 0.3f, 3.5f));
         addMaterialStats(DreamtinkerMaterialIds.soul_steel,
                          new LimbMaterialStats(600, 0.10f, 0.05f, 0f),
-                         new GripMaterialStats(1.05f, 0.05f, 2.75f));
+                         new GripMaterialStats(.05f, 0.05f, 2.75f));
         addMaterialStats(DreamtinkerMaterialIds.black_sapphire,
                          new LimbMaterialStats(2000, 20f, 30f, 20f),
                          new GripMaterialStats(1.0f, 1f, 10f));
@@ -251,6 +253,8 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addMaterialStats(DreamtinkerMaterialIds.soul_stained_steel,
                          new LimbMaterialStats(1200, 0.1f, -0.2f, 0.5f),
                          new GripMaterialStats(-0.3f, 0.35f, 0.1f));
+        addMaterialStats(DreamtinkerMaterialIds.astral_weave,
+                         StatlessMaterialStats.BOWSTRING);
 
         addMaterialStats(DreamtinkerMaterialIds.TatteredCloth,
                          StatlessMaterialStats.BOWSTRING);
@@ -343,6 +347,8 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                             PlatingMaterialStats.builder().durabilityFactor(27).armor(3f, 5f, 6f, 3f).toughness(3).knockbackResistance(2f),
                             StatlessMaterialStats.MAILLE);
         addMaterialStats(DreamtinkerMaterialIds.soul_rock, StatlessMaterialStats.SHIELD_CORE);
+        addMaterialStats(DreamtinkerMaterialIds.astral_weave,
+                         StatlessMaterialStats.MAILLE);
 
 
         addArmorShieldStats(DreamtinkerMaterialIds.WickedWeave,
@@ -362,9 +368,12 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
     }
 
     private void addAmmo() {
-
+        this.addMaterialStats(DreamtinkerMaterialIds.hallowed_gold, StatlessMaterialStats.ARROW_HEAD);
         this.addMaterialStats(DreamtinkerMaterialIds.spirits, StatlessMaterialStats.ARROW_HEAD);
         this.addMaterialStats(DreamtinkerMaterialIds.blazing_quartz, StatlessMaterialStats.ARROW_HEAD);
+        this.addMaterialStats(DreamtinkerMaterialIds.grim_talc, StatlessMaterialStats.ARROW_SHAFT);
+        this.addMaterialStats(DreamtinkerMaterialIds.astral_weave, StatlessMaterialStats.FLETCHING);
+        this.addMaterialStats(DreamtinkerMaterialIds.null_slate, StatlessMaterialStats.ARROW_SHAFT);
     }
 
     private void addMisc() {

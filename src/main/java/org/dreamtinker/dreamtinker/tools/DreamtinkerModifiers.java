@@ -173,6 +173,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<DeathShredder> death_shredder = MODIFIERS.register("death_shredder", DeathShredder::new);
     public static final StaticModifier<SignalAxe> signal_axe = MODIFIERS.register("signal_axe", SignalAxe::new);
     public static final StaticModifier<LoveShooting> love_shooting = MODIFIERS.register("love_shooting", LoveShooting::new);
+    public static final StaticModifier<TeleportShoot> teleport_shooting = MODIFIERS.register("teleport_shooting", TeleportShoot::new);
 
     //etherium
     public static final StaticModifier<ELAstralBreak> astral_break = EL_MODIFIERS.register("astral_break", ELAstralBreak::new);
@@ -288,6 +289,10 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId deeper_water_killer = id("deeper_water_killer");
         public static final ModifierId sun_shine = id("sun_shine");
         public static final ModifierId ender_slayer = id("ender_slayer");
+        public static final ModifierId heavy_arrow = id("heavy_arrow");
+        public static final ModifierId light_arrow = id("light_arrow");
+        public static final ModifierId null_void = id("null_void");
+        public static final ModifierId hidden_shape = id("hidden_shape");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");

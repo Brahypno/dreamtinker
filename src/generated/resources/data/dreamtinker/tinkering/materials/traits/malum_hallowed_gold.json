@@ -1,5 +1,11 @@
 {
   "perStat": {
+    "tconstruct:ammo": [
+      {
+        "level": 1,
+        "name": "dreamtinker:light_arrow"
+      }
+    ],
     "tconstruct:ranged": [
       {
         "level": 1,

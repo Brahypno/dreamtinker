@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraftforge.fluids.FluidType;
+import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.MobEffectsRemoverModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.weapon.SwappableCircleWeaponAttack;
@@ -311,6 +312,19 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                           .time(RandomLevelingValue.random(20, 10))
                                           .target(ender).build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
+        buildModifier(Ids.heavy_arrow)
+                .addModule(StatBoostModule.add(ToolStats.ACCURACY).eachLevel(-0.5f))
+                .addModule(StatBoostModule.add(ToolStats.PROJECTILE_DAMAGE).eachLevel(0.5f));
+        buildModifier(Ids.light_arrow)
+                .addModule(StatBoostModule.add(ToolStats.VELOCITY).eachLevel(0.5f))
+                .addModule(StatBoostModule.add(ToolStats.PROJECTILE_DAMAGE).eachLevel(-0.25f));
+        buildModifier(Ids.null_void)
+                .addModule(MobEffectModule.builder(MobEffects.DARKNESS).level(RandomLevelingValue.flat(1)).time(RandomLevelingValue.random(20, 10)).build(),
+                           ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT)
+                .addModule(MobEffectModule.builder(DreamtinkerEffects.RealDarkness).level(RandomLevelingValue.flat(1)).time(RandomLevelingValue.random(20, 10))
+                                          .build(),
+                           ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
+        buildModifier(Ids.hidden_shape);
 
         addELModifiers();
         addMalumModifiers();

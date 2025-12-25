@@ -67,9 +67,10 @@ public class WitherShoot extends NoLevelsModifier implements ArrowInterface {
     }
 
     @Override
-    public void onProjectileHitBlock(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, BlockHitResult hit, @Nullable LivingEntity attacker) {
-        if (null != attacker)
-            generateCloud(hit.getBlockPos().getCenter(), attacker);
+    public boolean onProjectileHitsBlock(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, BlockHitResult hit, @Nullable LivingEntity owner) {
+        if (null != owner)
+            generateCloud(hit.getBlockPos().getCenter(), owner);
+        return false;
     }
 
     private void generateCloud(Vec3 pos, LivingEntity owner) {

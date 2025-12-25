@@ -126,6 +126,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
 
         addDefaultTraits(DreamtinkerMaterialIds.spirit_fabric, new ModifierEntry(ModifierIds.luck, 2));
         addTraits(DreamtinkerMaterialIds.hallowed_gold, RANGED, TinkerModifiers.golden);
+        addTraits(DreamtinkerMaterialIds.hallowed_gold, AMMO, Ids.light_arrow);
 
         addDefaultTraits(DreamtinkerMaterialIds.mnemonic_auric, new ModifierEntry(Ids.malum_haunted, 2), new ModifierEntry(malum_hex_staff, 1));
 
@@ -146,6 +147,10 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
 
         addTraits(DreamtinkerMaterialIds.spirits, AMMO, ModifierIds.spike, malum_expose_soul.getId());
         addTraits(DreamtinkerMaterialIds.blazing_quartz, AMMO, ModifierIds.keen, ModifierIds.fiery);
+        addTraits(DreamtinkerMaterialIds.grim_talc, AMMO, Ids.heavy_arrow);
+        addDefaultTraits(DreamtinkerMaterialIds.astral_weave, Ids.hidden_shape);
+        addTraits(DreamtinkerMaterialIds.astral_weave, AMMO, ModifierIds.power);
+        addTraits(DreamtinkerMaterialIds.null_slate, AMMO, Ids.null_void);
 
 
         addDefaultTraits(DreamtinkerMaterialIds.TatteredCloth, Ids.eidolon_vulnerable);

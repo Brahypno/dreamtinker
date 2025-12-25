@@ -69,6 +69,9 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
             String name = types.identifier;
             buildRenderInfo(MaterialVariantId.create(DreamtinkerMaterialIds.spirits, name));
         }
+        buildRenderInfo(DreamtinkerMaterialIds.grim_talc).color(0xFFD6D3A1).fallbacks("bone");
+        buildRenderInfo(DreamtinkerMaterialIds.astral_weave).color(0xFF7BCBC5).fallbacks("cloth");
+        buildRenderInfo(DreamtinkerMaterialIds.null_slate).color(0xFFE85BE1).fallbacks("stone");
 
         buildRenderInfo(DreamtinkerMaterialIds.TatteredCloth).color(0xFF5B5957).fallbacks("cloth").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.WickedWeave).color(0xFF384185).fallbacks("cloth").luminosity(0);

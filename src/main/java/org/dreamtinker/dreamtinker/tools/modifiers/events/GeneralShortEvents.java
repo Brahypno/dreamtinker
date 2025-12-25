@@ -50,6 +50,9 @@ public class GeneralShortEvents {
         int multi = DTModifierCheck.getEntityModifierNum(event.getEntity(), DreamtinkerModifiers.Ids.golden_face);
         if (0 < multi)
             event.modifyVisibility(Mth.clamp(0.5 * multi + 1.5, 1.0, 4.0));
+        int hidden_multi = DTModifierCheck.getEntityModifierNum(event.getEntity(), DreamtinkerModifiers.Ids.hidden_shape);
+        if (0 < hidden_multi)
+            event.modifyVisibility(0.25 + 0.75 * Math.pow(0.60, hidden_multi));
     }
 
     @SubscribeEvent

@@ -28,16 +28,16 @@ import java.util.UUID;
 public class TwoHeadedSeven extends BattleModifier {//TODO This is too weak, need total conversion
 
     @Override
-    public void onProjectileHitBlock(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, BlockHitResult hit, @Nullable LivingEntity attacker) {
+    public boolean onProjectileHitsBlock(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, BlockHitResult hit, @Nullable LivingEntity attacker) {
         if (null == attacker)
-            return;
+            return false;
         if (attacker.level().isClientSide)
-            return;
+            return false;
         ServerLevel level = (ServerLevel) attacker.level();
 
         LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(level);
         if (bolt == null)
-            return;
+            return false;
         BlockPos ep = attacker.getOnPos();
         BlockPos pos = hit.getBlockPos();
         attacker.teleportToWithTicket(pos.getX(), pos.getY() + 1, pos.getZ());
@@ -47,6 +47,7 @@ public class TwoHeadedSeven extends BattleModifier {//TODO This is too weak, nee
             bolt.setCause(player);
         bolt.setVisualOnly(false);
         level.addFreshEntity(bolt);
+        return false;
     }
 
     @Override
