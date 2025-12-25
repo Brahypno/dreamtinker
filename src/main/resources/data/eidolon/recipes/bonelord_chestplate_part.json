@@ -31,6 +31,6 @@
   },
   "result": {
     "item": "tconstruct:chestplate_plating",
-    "nbt": "{Material:\"dreamtinker:paladin_bone\"}"
+    "nbt": "{Material:\"dreamtinker:eidolon_paladin_bone\"}"
   }
 }
