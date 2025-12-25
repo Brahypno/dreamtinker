@@ -12,6 +12,7 @@
     "dreamtinker:scolecite",
     "dreamtinker:shining_flint",
     "dreamtinker:cold_iron",
+    "dreamtinker:bic_spiny_shell",
     {
       "id": "dreamtinker:nefarious",
       "required": false
@@ -42,6 +43,18 @@
     },
     {
       "id": "dreamtinker:arcane_gold",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:eidolon_wicked_wave",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:bic_dark_metal",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:bic_monster_skin",
       "required": false
     }
   ]

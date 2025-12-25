@@ -2,12 +2,17 @@
   "values": [
     "dreamtinker:crying_obsidian",
     "dreamtinker:amber",
+    "dreamtinker:soul_steel",
     {
       "id": "dreamtinker:malum_hallowed_gold",
       "required": false
     },
     {
       "id": "dreamtinker:arcane_gold",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:eidolon_wicked_wave",
       "required": false
     }
   ]

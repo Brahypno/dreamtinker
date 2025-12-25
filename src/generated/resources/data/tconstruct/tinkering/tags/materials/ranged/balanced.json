@@ -3,6 +3,10 @@
     "dreamtinker:valentinite",
     "dreamtinker:black_sapphire",
     "dreamtinker:scolecite",
-    "dreamtinker:shining_flint"
+    "dreamtinker:shining_flint",
+    {
+      "id": "dreamtinker:bic_monster_skin",
+      "required": false
+    }
   ]
 }
