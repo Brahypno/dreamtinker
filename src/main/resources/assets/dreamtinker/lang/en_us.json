@@ -161,7 +161,7 @@
   "modifier.dreamtinker.memory_base.description": "Gain ability to launch Memory Projectile which can use HP to refill. When hit entity, Memory Projectile would apply an extra hit with shooter`s tool and apply fluid effect on shooter; Memory Projectile would ignore Block hit",
   "modifier.dreamtinker.soul_core": "Despair Memory",
   "modifier.dreamtinker.soul_core.flavor": "Hate of unborn",
-  "modifier.dreamtinker.soul_core.description": "Add filter only hit live living entity and exclude Armor Stand;\n Starting from Level 2, Memory Projectile would chase the mortals, higher level means higher speed",
+  "modifier.dreamtinker.soul_core.description": "Memory Projectile would chase the mortals, higher level means higher speed",
   "modifier.dreamtinker.soul_core.requirements": "Despair Memory requires 'Memory, Gate of the Kingdom' to apply",
   "modifier.dreamtinker.flaming_memory": "Flaming, kind of Oblivion",
   "modifier.dreamtinker.flaming_memory.flavor": "The RED Memory",

@@ -511,7 +511,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(255, 0xFFBDA4DD)
                                                 .build());
         this.buildMaterial(DreamtinkerMaterialIds.PaladinBone)
-            .armor().repairKit()
+            .armor()
             .fallbacks("bone")
             .transformer(GreyToSpriteTransformer.builder()
                                                 .addARGB(63, 0xFF161C18)

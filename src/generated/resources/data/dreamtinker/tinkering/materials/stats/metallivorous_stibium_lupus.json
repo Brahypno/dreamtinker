@@ -4,7 +4,7 @@
     "tconstruct:grip": {
       "accuracy": 0.5,
       "durability": -0.33,
-      "melee_damage": 0.76
+      "melee_damage": 7.6
     },
     "tconstruct:handle": {
       "durability": -0.33,
@@ -14,7 +14,7 @@
     },
     "tconstruct:head": {
       "durability": 1600,
-      "melee_attack": 0.76,
+      "melee_attack": 7.6,
       "mining_speed": 7.6,
       "mining_tier": "dreamtinker:lupus"
     }

@@ -36,7 +36,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          HandleMaterialStats.multipliers().durability(1.0f).miningSpeed(1f).attackDamage(1f).attackSpeed(1f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.metallivorous_stibium_lupus,
-                         new HeadMaterialStats(1600, 7.6f, DtTiers.WOLF_TIER, 0.76f),
+                         new HeadMaterialStats(1600, 7.6f, DtTiers.WOLF_TIER, 7.6f),
                          HandleMaterialStats.multipliers().durability(0.67f).miningSpeed(0.34f).attackDamage(0.76f).attackSpeed(1.76f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.crying_obsidian,
@@ -180,7 +180,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new LimbMaterialStats(200, 0.1f, 0.1f, -.1f));
         addMaterialStats(DreamtinkerMaterialIds.nigrescence_string, StatlessMaterialStats.BOWSTRING);
         addMaterialStats(DreamtinkerMaterialIds.metallivorous_stibium_lupus,
-                         new GripMaterialStats(-0.33f, 0.5f, 0.76f));
+                         new GripMaterialStats(-0.33f, 0.5f, 7.6f));
         addMaterialStats(DreamtinkerMaterialIds.star_regulus,
                          new LimbMaterialStats(777, 7.7f, 0.7f, .7f));
         addMaterialStats(DreamtinkerMaterialIds.crying_obsidian,

@@ -161,7 +161,7 @@
   "modifier.dreamtinker.memory_base.description": "获得发射记忆弹的能力。记忆弹命中实体时，造成一次发射者造成的额外的近战攻击，并对发射者施加流体效果。\n当流体不足时，用生命补足。记忆弹会忽略方块碰撞",
   "modifier.dreamtinker.soul_core": "绝望的记忆",
   "modifier.dreamtinker.soul_core.flavor": "未生者的遗恨",
-  "modifier.dreamtinker.soul_core.description": "使记忆弹忽略非活着的实体和盔甲架\n;从二级开始，记忆弹会试图追击最近的活体。等级越高，追击越快",
+  "modifier.dreamtinker.soul_core.description": "记忆弹会试图追击最近的活体。等级越高，追击越快",
   "modifier.dreamtinker.soul_core.requirements": "绝望的记忆需要”记忆，王国之门“作为前置",
   "modifier.dreamtinker.flaming_memory": "烧却，亦是遗忘",
   "modifier.dreamtinker.flaming_memory.flavor": "一抹赤红",

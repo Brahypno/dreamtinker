@@ -1274,14 +1274,14 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.soul_upgrade, upgradeSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.soul_upgrade, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.soul_core)
-                             .setTools(TinkerTags.Items.MELEE_WEAPON)
+                             .setTools(Ingredient.of(DreamtinkerTools.narcissus_wing.get()))
                              .addInput(DreamtinkerCommon.unborn_turtle_egg.get(), 1)
                              .setMaxLevel(1)
                              .setSlots(SlotType.SOUL, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.soul_core, soulSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.soul_core, soulFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.soul_core)
-                             .setTools(TinkerTags.Items.MELEE_WEAPON)
+                             .setTools(Ingredient.of(DreamtinkerTools.narcissus_wing.get()))
                              .addInput(DreamtinkerCommon.unborn_turtle_egg.get(), 1)
                              .addInput(DreamtinkerCommon.unborn_sniffer_egg.get(), 1)
                              .setMaxLevel(3)
@@ -1302,7 +1302,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.icy_memory, upgradeSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.icy_memory, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.icy_memory)
-                             .setTools(TinkerTags.Items.MELEE_WEAPON)
+                             .setTools(Ingredient.of(DreamtinkerTools.narcissus_wing.get()))
                              .addInput(DreamtinkerCommon.unborn_dragon_egg.get())
                              .addInput(DreamtinkerCommon.despair_gem.get())
                              .setLevelRange(3, 3)
@@ -1310,7 +1310,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.icy_memory, soulSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.icy_memory, soulFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.hate_memory)
-                             .setTools(TinkerTags.Items.MELEE_WEAPON)
+                             .setTools(Ingredient.of(DreamtinkerTools.narcissus_wing.get()))
                              .addInput(DreamtinkerCommon.unborn_egg.get())
                              .addInput(Items.WHITE_BANNER)
                              .addInput(Items.IRON_AXE)

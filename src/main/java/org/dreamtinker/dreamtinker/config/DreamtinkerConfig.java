@@ -150,7 +150,8 @@ public class DreamtinkerConfig {
     static {builder.comment("\nMetallivorous Stibium Lupus: ");}
 
     public static final ForgeConfigSpec.IntValue TheWolfWonderEffectNum =
-            builder.comment("Number of effective that applied on target").defineInRange("TheWolfWonderEffectNum", 5, 0, 100);
+            builder.comment("Number of effective that applied on target; This is also the damage boost of The wolf answer(base on effects number)")
+                   .defineInRange("TheWolfWonderEffectNum", 5, 0, 100);
     public static final ForgeConfigSpec.IntValue TheWolfWonderEffectMinTime =
             builder.comment("Min time effective last in second").defineInRange("TheWolfWonderEffectMinTime", 10, 0, 100);
     public static final ForgeConfigSpec.IntValue TheWolfWonderEffectMaxTime =

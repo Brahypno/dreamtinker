@@ -392,7 +392,7 @@ public class NarcissusFluidProjectile extends Projectile {
 
     public void setTool(@NotNull IToolStackView tool) {
         this.toolStackView = tool;
-        this.entityData.set(CHASE_LIVING, tool.getModifierLevel(DreamtinkerModifiers.Ids.soul_core));
+        this.entityData.set(CHASE_LIVING, tool.getModifierLevel(DreamtinkerModifiers.Ids.soul_core) + 1);
     }
 
     public IToolStackView getTool() {

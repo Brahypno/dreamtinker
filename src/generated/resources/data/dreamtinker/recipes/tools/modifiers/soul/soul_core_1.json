@@ -17,6 +17,6 @@
     "souls": 1
   },
   "tools": {
-    "tag": "tconstruct:modifiable/melee/weapon"
+    "item": "dreamtinker:narcissus_wing"
   }
 }
