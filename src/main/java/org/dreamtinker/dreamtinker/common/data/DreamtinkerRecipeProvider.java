@@ -1203,6 +1203,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                 castItem = DreamtinkerToolParts.explode_core.get();
             if (part == DreamtinkerToolParts.wishOrthant.get())
                 castItem = DreamtinkerCommon.wish_cast.get();
+            if (part == DreamtinkerToolParts.chainSawCore.get())
+                castItem = DreamtinkerToolParts.chainSawCoreCast.get();
+            if (part == DreamtinkerToolParts.chainSawTeeth.get())
+                castItem = DreamtinkerToolParts.chainSawTeethCast.get();
             CompoundTag nbt = new CompoundTag();
             nbt.putString("Material", id.toString());
             ItemStack stack = new ItemStack(part);

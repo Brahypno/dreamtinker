@@ -40,7 +40,7 @@
   ],
   "input": {
     "count": 1,
-    "ingredient_list": []
+    "item": "dreamtinker:chain_saw_teeth_cast"
   },
   "output": {
     "item": "dreamtinker:chain_saw_teeth",
