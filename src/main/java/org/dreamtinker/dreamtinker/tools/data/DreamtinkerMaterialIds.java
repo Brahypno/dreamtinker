@@ -33,6 +33,7 @@ public class DreamtinkerMaterialIds {
     public static final MaterialId orichalcum = new MaterialId(new ResourceLocation(MODID, "orichalcum"));
     public static final MaterialId shadowSilver = new MaterialId(new ResourceLocation(MODID, "shadow_silver"));
     public static final MaterialId TransmutationGold = new MaterialId(new ResourceLocation(MODID, "transmutation_gold"));
+    public static final MaterialId SpikyShard = new MaterialId(new ResourceLocation(MODID, "spiky_shard"));
     //Compact-enigmatic legacy
     public static final MaterialId etherium = new MaterialId(new ResourceLocation(MODID, "etherium"));
     public static final MaterialId nefarious = new MaterialId(new ResourceLocation(MODID, "nefarious"));
@@ -68,7 +69,12 @@ public class DreamtinkerMaterialIds {
     //burn-in-chaos-v1
     public static final MaterialId DarkMetal = new MaterialId(new ResourceLocation(MODID, "bic_dark_metal"));
     public static final MaterialId MonsterSkin = new MaterialId(new ResourceLocation(MODID, "bic_monster_skin"));
-    public static final MaterialId SpikyShard = new MaterialId(new ResourceLocation(MODID, "spiky_shard"));
+    public static final MaterialId LifeStealerBone = new MaterialId(new ResourceLocation(MODID, "bic_life_steal_bone"));
+    public static final MaterialId KrampusHorn = new MaterialId(new ResourceLocation(MODID, "bic_krampus_horn"));
+    public static final MaterialId NightMareClaw = new MaterialId(new ResourceLocation(MODID, "bic_nightmare_claw"));
+    public static final MaterialId InfernalEmber = new MaterialId(new ResourceLocation(MODID, "bic_infernal_ember"));
+    public static final MaterialId SpiderMandible = new MaterialId(new ResourceLocation(MODID, "bic_spider_mandible"));
+    public static final MaterialId HoundFang = new MaterialId(new ResourceLocation(MODID, "bic_hound_fang"));
 
 
 }

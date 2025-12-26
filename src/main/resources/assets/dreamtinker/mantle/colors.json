@@ -146,7 +146,13 @@
     "bic_intoxicating": "#CFFBFC",
     "deeper_water_killer": "#738A99",
     "teleport_shooting": "#E85BE1",
-    "malum_magic_hit": "#285052"
+    "malum_magic_hit": "#285052",
+    "bic_life_stealer": "#353E41",
+    "bic_krampus_horn": "#7C192E",
+    "bic_nightmare_claw": "#30273C",
+    "bic_infernal_ember": "#42A42A",
+    "poison": "#353B3A",
+    "bic_hound_fang": "#A7B7C3"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
@@ -193,7 +199,13 @@
     "malum_blazing_quartz": "#FCE35C",
     "malum_grim_talc": "#D6D3A1",
     "malum_astral_weave": "#7BCBC5",
-    "malum_null_slate": "#E85BE1"
+    "malum_null_slate": "#E85BE1",
+    "bic_life_steal_bone": "#353E41",
+    "bic_krampus_horn": "#7C192E",
+    "bic_nightmare_claw": "#30273C",
+    "bic_infernal_ember": "#42A42A",
+    "bic_spider_mandible": "#353B3A",
+    "bic_hound_fang": "#A7B7C3"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873",

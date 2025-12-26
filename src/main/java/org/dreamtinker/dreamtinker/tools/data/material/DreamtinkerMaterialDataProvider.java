@@ -78,6 +78,11 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
 
         addMaterial(DreamtinkerMaterialIds.DarkMetal, 3, 15, false, false, modLoaded("born_in_chaos_v1"));
         addMaterial(DreamtinkerMaterialIds.MonsterSkin, 2, 5, true, false, modLoaded("born_in_chaos_v1"));
+        addMaterial(DreamtinkerMaterialIds.LifeStealerBone, 2, 10, true, false, modLoaded("born_in_chaos_v1"));
+        addMaterial(DreamtinkerMaterialIds.KrampusHorn, 2, 10, true, false, modLoaded("born_in_chaos_v1"));
+        addMaterial(DreamtinkerMaterialIds.NightMareClaw, 2, 10, true, false, modLoaded("born_in_chaos_v1"));
+        addMaterial(DreamtinkerMaterialIds.InfernalEmber, 2, 10, true, false, modLoaded("born_in_chaos_v1"));
+        addMaterial(DreamtinkerMaterialIds.HoundFang, 2, 10, true, false, modLoaded("born_in_chaos_v1"));
     }
 
     @Override

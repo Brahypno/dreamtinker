@@ -1,0 +1,108 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "born_in_chaos_v1"
+          },
+          {
+            "type": "dreamtinker:mod_compact_config",
+            "modid": "born_in_chaos_v1"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:no_levels",
+  "modules": [
+    {
+      "type": "tconstruct:mob_effect",
+      "effect": "minecraft:blindness",
+      "hooks": [
+        "tconstruct:melee_hit",
+        "tconstruct:projectile_hit",
+        "tconstruct:monster_melee_hit"
+      ],
+      "level": {
+        "flat": 1.0
+      },
+      "time": {
+        "flat": 20.0,
+        "random": 10.0
+      }
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "effect": "minecraft:darkness",
+      "hooks": [
+        "tconstruct:melee_hit",
+        "tconstruct:projectile_hit",
+        "tconstruct:monster_melee_hit"
+      ],
+      "level": {
+        "flat": 1.0
+      },
+      "time": {
+        "flat": 20.0,
+        "random": 10.0
+      }
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "effect": "minecraft:wither",
+      "hooks": [
+        "tconstruct:melee_hit",
+        "tconstruct:projectile_hit",
+        "tconstruct:monster_melee_hit"
+      ],
+      "level": {
+        "flat": 3.0
+      },
+      "time": {
+        "flat": 20.0,
+        "random": 10.0
+      }
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "effect": "born_in_chaos_v1:gaze_of_terror",
+      "hooks": [
+        "tconstruct:melee_hit",
+        "tconstruct:projectile_hit",
+        "tconstruct:monster_melee_hit"
+      ],
+      "level": {
+        "flat": 1.0
+      },
+      "time": {
+        "flat": 20.0,
+        "random": 10.0
+      }
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "effect": "born_in_chaos_v1:magic_depletion",
+      "hooks": [
+        "tconstruct:melee_hit",
+        "tconstruct:projectile_hit",
+        "tconstruct:monster_melee_hit"
+      ],
+      "level": {
+        "flat": 1.0
+      },
+      "time": {
+        "flat": 20.0,
+        "random": 10.0
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

@@ -88,6 +88,9 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.TransmutationGold, RANGED, Ids.sun_shine, Ids.soul_unchanged);
         addTraits(DreamtinkerMaterialIds.TransmutationGold, ARMOR, SunAway.getId(), Ids.soul_unchanged);
 
+        addDefaultTraits(DreamtinkerMaterialIds.SpikyShard, new ModifierEntry(ModifierIds.thorns, 2));
+        addTraits(DreamtinkerMaterialIds.SpikyShard, MELEE_HARVEST, Ids.deeper_water_killer);
+
         addDefaultTraits(DreamtinkerMaterialIds.ArcaneGold, Ids.arcane_hit);
         addTraits(DreamtinkerMaterialIds.ArcaneGold, ARMOR, TinkerModifiers.golden.getId(), ModifierIds.magicProtection, Ids.arcane_protection);
         addTraits(DreamtinkerMaterialIds.ArcaneGold, PlatingMaterialStats.SHIELD.getId(), ModifierIds.magicProtection, Ids.arcane_protection);
@@ -170,9 +173,13 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.DarkMetal, MELEE_HARVEST, bic_dark_blade.getId(), ModifierIds.worldbound);
 
         addDefaultTraits(DreamtinkerMaterialIds.MonsterSkin, TinkerModifiers.tanned.getId(), bic_nightmare_defense.getId(), Ids.monster_blood);
+        addDefaultTraits(DreamtinkerMaterialIds.LifeStealerBone, Ids.bic_life_stealer);
+        addDefaultTraits(DreamtinkerMaterialIds.KrampusHorn, Ids.bic_krampus_horn);
+        addDefaultTraits(DreamtinkerMaterialIds.NightMareClaw, Ids.bic_nightmare_claw);
+        addDefaultTraits(DreamtinkerMaterialIds.InfernalEmber, Ids.bic_infernal_ember);
+        addDefaultTraits(DreamtinkerMaterialIds.SpiderMandible, Ids.poison);
+        addDefaultTraits(DreamtinkerMaterialIds.HoundFang, Ids.bic_hound_fang);
 
-        addDefaultTraits(DreamtinkerMaterialIds.SpikyShard, new ModifierEntry(ModifierIds.thorns, 2));
-        addTraits(DreamtinkerMaterialIds.SpikyShard, MELEE_HARVEST, Ids.deeper_water_killer);
 
     }
 

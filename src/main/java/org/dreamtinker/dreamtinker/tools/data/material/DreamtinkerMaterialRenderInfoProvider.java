@@ -44,6 +44,7 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
         buildRenderInfo(DreamtinkerMaterialIds.shadowSilver).color(0xFF987A2C).fallbacks("metal").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.TransmutationGold).color(0xFFCC641A).fallbacks("metal").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.ArcaneGold).color(0xFFEDAE66).fallbacks("metal").luminosity(0);
+        buildRenderInfo(DreamtinkerMaterialIds.SpikyShard).color(0xFF738A99).fallbacks("bone").luminosity(4);
 
         buildRenderInfo(DreamtinkerMaterialIds.etherium).color(0xFF96E8E0).fallbacks("metal", "crystal").luminosity(15);
         buildRenderInfo(DreamtinkerMaterialIds.nefarious).color(0xFF8513A0).fallbacks("metal", "crystal", "gem").luminosity(8);
@@ -83,7 +84,12 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
 
         buildRenderInfo(DreamtinkerMaterialIds.DarkMetal).color(0xFF777883).fallbacks("metal").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.MonsterSkin).color(0xFF534E63).fallbacks("cloth").luminosity(0);
-        buildRenderInfo(DreamtinkerMaterialIds.SpikyShard).color(0xFF738A99).fallbacks("bone").luminosity(4);
+        buildRenderInfo(DreamtinkerMaterialIds.LifeStealerBone).color(0xFF353E41).fallbacks("bone").luminosity(4);
+        buildRenderInfo(DreamtinkerMaterialIds.KrampusHorn).color(0xFF7C192E).fallbacks("bone").luminosity(4);
+        buildRenderInfo(DreamtinkerMaterialIds.NightMareClaw).color(0xFF30273C).fallbacks("bone").luminosity(4);
+        buildRenderInfo(DreamtinkerMaterialIds.InfernalEmber).color(0xFF42A42A).fallbacks("bone").luminosity(4);
+        buildRenderInfo(DreamtinkerMaterialIds.SpiderMandible).color(0xFF353B3A).fallbacks("bone").luminosity(4);
+        buildRenderInfo(DreamtinkerMaterialIds.HoundFang).color(0xFFA7B7C3).fallbacks("bone").luminosity(4);
 
     }
 

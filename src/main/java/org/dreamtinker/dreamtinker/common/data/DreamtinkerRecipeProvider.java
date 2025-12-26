@@ -944,6 +944,22 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                           "monsterskin_cleaning");
         materialRecipe(wrapped, DreamtinkerMaterialIds.SpikyShard, Ingredient.of(SPINY_SHELL.get()), 1, 1,
                        materials_folder + "spiny_shell_bic");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.LifeStealerBone, Ingredient.of(LIFESTEALER_BONE.get()), 1, 1,
+                       materials_folder + "life_stealer");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.KrampusHorn, Ingredient.of(KRAMPUS_HORN.get()), 1, 1,
+                       materials_folder + "krampus_horn");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.NightMareClaw, Ingredient.of(NIGHTMARE_CLAW.get()), 1, 1,
+                       materials_folder + "nightmare_claw/claw");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.NightMareClaw, Ingredient.of(NIGHTMARE_STALKER_SKULL.get()), 4, 1,
+                       materials_folder + "nightmare_claw/head");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.InfernalEmber, Ingredient.of(SMOLDERING_INFERNAL_EMBER.get()), 1, 1,
+                       materials_folder + "infernal_ember/item");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.InfernalEmber, Ingredient.of(FEL_SOIL.get()), 4, 1,
+                       materials_folder + "infernal_ember/block");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.SpiderMandible, Ingredient.of(SPIDER_MANDIBLE.get()), 1, 1,
+                       materials_folder + "spider_mandible");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.HoundFang, Ingredient.of(FANGOFTHE_HOUND_LEADER.get()), 1, 1,
+                       materials_folder + "hound_fang");
     }
 
     String common_folder = "common/";

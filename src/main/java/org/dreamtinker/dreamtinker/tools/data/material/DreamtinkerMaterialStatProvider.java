@@ -380,6 +380,14 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         this.addMaterialStats(DreamtinkerMaterialIds.CrimsonGem, StatlessMaterialStats.ARROW_HEAD);
         this.addMaterialStats(DreamtinkerMaterialIds.ShadowGem, StatlessMaterialStats.ARROW_HEAD);
 
+
+        this.addMaterialStats(DreamtinkerMaterialIds.LifeStealerBone, StatlessMaterialStats.ARROW_SHAFT);
+        this.addMaterialStats(DreamtinkerMaterialIds.KrampusHorn, StatlessMaterialStats.ARROW_SHAFT);
+        this.addMaterialStats(DreamtinkerMaterialIds.NightMareClaw, StatlessMaterialStats.ARROW_HEAD);
+        this.addMaterialStats(DreamtinkerMaterialIds.InfernalEmber, StatlessMaterialStats.ARROW_HEAD);
+        this.addMaterialStats(DreamtinkerMaterialIds.SpiderMandible, StatlessMaterialStats.ARROW_HEAD);
+        this.addMaterialStats(DreamtinkerMaterialIds.HoundFang, StatlessMaterialStats.ARROW_HEAD);
+
     }
 
     private void addMisc() {

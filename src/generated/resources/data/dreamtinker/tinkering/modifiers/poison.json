@@ -1,9 +1,9 @@
 {
-  "level_display": "tconstruct:default",
+  "level_display": "tconstruct:no_levels",
   "modules": [
     {
       "type": "tconstruct:mob_effect",
-      "effect": "minecraft:slowness",
+      "effect": "minecraft:poison",
       "hooks": [
         "tconstruct:melee_hit",
         "tconstruct:projectile_hit",
@@ -15,7 +15,7 @@
       },
       "time": {
         "flat": 20.0,
-        "random": 5.0
+        "random": 10.0
       }
     }
   ],

@@ -297,6 +297,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId hidden_shape = id("hidden_shape");
         public static final ModifierId wrath = id("wrath");
         public static final ModifierId torrent = id("torrent");
+        public static final ModifierId poison = id("poison");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");
@@ -323,6 +324,11 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId bic_dark_armor_plate = id("bic_dark_armor_plate");
         public static final ModifierId bic_frostbitten = id("bic_frostbitten");
         public static final ModifierId bic_intoxicating = id("bic_intoxicating");
+        public static final ModifierId bic_life_stealer = id("bic_life_stealer");
+        public static final ModifierId bic_krampus_horn = id("bic_krampus_horn");
+        public static final ModifierId bic_nightmare_claw = id("bic_nightmare_claw");
+        public static final ModifierId bic_infernal_ember = id("bic_infernal_ember");
+        public static final ModifierId bic_hound_fang = id("bic_hound_fang");
 
 
         private static ModifierId id(String name) {
