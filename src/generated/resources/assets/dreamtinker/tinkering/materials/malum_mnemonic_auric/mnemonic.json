@@ -6,7 +6,8 @@
   "generator": {
     "supported_stats": [
       "tconstruct:binding",
-      "tconstruct:repair_kit"
+      "tconstruct:repair_kit",
+      "tconstruct:arrow_head"
     ],
     "transformer": {
       "type": "tconstruct:grey_to_sprite",

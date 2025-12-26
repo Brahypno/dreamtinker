@@ -393,7 +393,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(255, 0xFFFFFAC2)  // 最亮反光白
                                                 .build());
         this.buildMaterial(DreamtinkerMaterialIds.mnemonic)
-            .statType(StatlessMaterialStats.BINDING).repairKit()
+            .statType(StatlessMaterialStats.BINDING).repairKit().arrowHead()
             .fallbacks("gem")
             .transformer(GreyToSpriteTransformer.builder()
                                                 .addARGB(0, 0xFF3B2542)  // 深紫黑（阴影）
@@ -405,7 +405,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(255, 0xFFFCF4D3)  // 乳白反光
                                                 .build());
         this.buildMaterial(DreamtinkerMaterialIds.auric)
-            .statType(StatlessMaterialStats.BINDING).repairKit()
+            .statType(StatlessMaterialStats.BINDING).repairKit().arrowHead()
             .fallbacks("gem")
             .transformer(GreyToSpriteTransformer.builder()
                                                 .addARGB(0, 0xFF582F55)  // 深紫外缘

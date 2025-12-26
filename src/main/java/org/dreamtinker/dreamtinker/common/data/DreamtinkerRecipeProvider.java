@@ -1153,14 +1153,18 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("malum"));
         armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.spirit_fabric);
 
-        malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.mnemonic, ItemRegistry.MNEMONIC_FRAGMENT.get(), HeadMaterialStats.ID);
-        malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.mnemonic, ItemRegistry.MNEMONIC_FRAGMENT.get(), HandleMaterialStats.ID);
+        malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.mnemonic, ItemRegistry.MNEMONIC_FRAGMENT.get(), HeadMaterialStats.ID, 1);
+        malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.mnemonic, ItemRegistry.MNEMONIC_FRAGMENT.get(), HandleMaterialStats.ID, 1);
         malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.mnemonic, ItemRegistry.MNEMONIC_FRAGMENT.get(),
-                                    StatlessMaterialStats.BINDING.getIdentifier());
-        malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.auric, ItemRegistry.AURIC_EMBERS.get(), HeadMaterialStats.ID);
-        malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.auric, ItemRegistry.AURIC_EMBERS.get(), HandleMaterialStats.ID);
-        malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.auric, ItemRegistry.AURIC_EMBERS.get(), StatlessMaterialStats.BINDING.getIdentifier());
-        malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.malignant_lead, ItemRegistry.MALIGNANT_LEAD.get(), HandleMaterialStats.ID);
+                                    StatlessMaterialStats.BINDING.getIdentifier(), 1);
+        malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.mnemonic, ItemRegistry.MNEMONIC_FRAGMENT.get(),
+                                    StatlessMaterialStats.ARROW_HEAD.getIdentifier(), 4);
+        malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.auric, ItemRegistry.AURIC_EMBERS.get(), HeadMaterialStats.ID, 1);
+        malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.auric, ItemRegistry.AURIC_EMBERS.get(), HandleMaterialStats.ID, 1);
+        malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.auric, ItemRegistry.AURIC_EMBERS.get(), StatlessMaterialStats.BINDING.getIdentifier(), 1);
+        malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.auric, ItemRegistry.AURIC_EMBERS.get(), StatlessMaterialStats.ARROW_HEAD.getIdentifier(),
+                                    4);
+        malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.malignant_lead, ItemRegistry.MALIGNANT_LEAD.get(), HandleMaterialStats.ID, 1);
 
         wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("eidolon"));
         armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.WickedWeave);
@@ -1190,7 +1194,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         }
     }
 
-    private void malumCompactMaterialBuilder(Consumer<FinishedRecipe> consumer, MaterialVariantId id, Item item, MaterialStatsId statsId) {
+    private void malumCompactMaterialBuilder(Consumer<FinishedRecipe> consumer, MaterialVariantId id, Item item, MaterialStatsId statsId, int count) {
         List<ToolPartItem> Parts = DTHelper.getPartList(statsId);
         Map<ToolPartItem, CastLookup.CastTriple> map = CastLookup.findCastsForParts(Parts);
         for (ToolPartItem part : Parts) {
@@ -1207,9 +1211,11 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                 castItem = DreamtinkerToolParts.chainSawCoreCast.get();
             if (part == DreamtinkerToolParts.chainSawTeeth.get())
                 castItem = DreamtinkerToolParts.chainSawTeethCast.get();
+            if (part == TinkerToolParts.arrowHead.get())
+                castItem = TinkerSmeltery.arrowCast.get();
             CompoundTag nbt = new CompoundTag();
             nbt.putString("Material", id.toString());
-            ItemStack stack = new ItemStack(part);
+            ItemStack stack = new ItemStack(part, count);
             stack.getOrCreateTag().merge(nbt);
             new SpiritInfusionRecipeBuilder(castItem, 1, stack)
                     .addExtraItem(item, 2 * 4)

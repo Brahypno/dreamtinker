@@ -129,6 +129,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.hallowed_gold, AMMO, Ids.light_arrow);
 
         addDefaultTraits(DreamtinkerMaterialIds.mnemonic_auric, new ModifierEntry(Ids.malum_haunted, 2), new ModifierEntry(malum_hex_staff, 1));
+        addTraits(DreamtinkerMaterialIds.mnemonic_auric, AMMO, teleport_shooting);
 
         addDefaultTraits(DreamtinkerMaterialIds.soul_stained_steel, new ModifierEntry(Ids.malum_haunted, 2), new ModifierEntry(Ids.malum_tyrving, 1));
         addTraits(DreamtinkerMaterialIds.soul_stained_steel, ARMOR, malum_soul_attributes);

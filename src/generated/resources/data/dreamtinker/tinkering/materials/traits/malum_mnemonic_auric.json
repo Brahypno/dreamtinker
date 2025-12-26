@@ -8,5 +8,13 @@
       "level": 1,
       "name": "dreamtinker:malum_hex_staff"
     }
-  ]
+  ],
+  "perStat": {
+    "tconstruct:ammo": [
+      {
+        "level": 1,
+        "name": "dreamtinker:teleport_shooting"
+      }
+    ]
+  }
 }

@@ -369,6 +369,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
 
     private void addAmmo() {
         this.addMaterialStats(DreamtinkerMaterialIds.hallowed_gold, StatlessMaterialStats.ARROW_HEAD);
+        this.addMaterialStats(DreamtinkerMaterialIds.mnemonic_auric, StatlessMaterialStats.ARROW_HEAD);
         this.addMaterialStats(DreamtinkerMaterialIds.spirits, StatlessMaterialStats.ARROW_HEAD);
         this.addMaterialStats(DreamtinkerMaterialIds.blazing_quartz, StatlessMaterialStats.ARROW_HEAD);
         this.addMaterialStats(DreamtinkerMaterialIds.grim_talc, StatlessMaterialStats.ARROW_SHAFT);
