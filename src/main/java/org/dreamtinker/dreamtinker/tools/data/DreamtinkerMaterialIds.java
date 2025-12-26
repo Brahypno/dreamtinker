@@ -62,6 +62,9 @@ public class DreamtinkerMaterialIds {
     public static final MaterialId WickedWeave = new MaterialId(new ResourceLocation(MODID, "eidolon_wicked_wave"));
     public static final MaterialId PaladinBone = new MaterialId(new ResourceLocation(MODID, "eidolon_paladin_bone"));
     public static final MaterialId PaladinBoneTool = new MaterialId(new ResourceLocation(MODID, "eidolon_paladin_bone_tool"));
+    public static final MaterialId SoulGem = new MaterialId(new ResourceLocation(MODID, "eidolon_soul_gem"));
+    public static final MaterialId ShadowGem = new MaterialId(new ResourceLocation(MODID, "eidolon_shadow_gem"));
+    public static final MaterialId CrimsonGem = new MaterialId(new ResourceLocation(MODID, "eidolon_crimson_gem"));
     //burn-in-chaos-v1
     public static final MaterialId DarkMetal = new MaterialId(new ResourceLocation(MODID, "bic_dark_metal"));
     public static final MaterialId MonsterSkin = new MaterialId(new ResourceLocation(MODID, "bic_monster_skin"));

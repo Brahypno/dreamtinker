@@ -1,0 +1,18 @@
+{
+  "perStat": {
+    "tconstruct:ammo": [
+      {
+        "level": 1,
+        "name": "tconstruct:spike"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:eidolon_bone_chill"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:eidolon_vulnerable"
+      }
+    ]
+  }
+}

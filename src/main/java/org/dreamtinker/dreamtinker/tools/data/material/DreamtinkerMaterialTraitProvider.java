@@ -129,7 +129,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.hallowed_gold, AMMO, Ids.light_arrow);
 
         addDefaultTraits(DreamtinkerMaterialIds.mnemonic_auric, new ModifierEntry(Ids.malum_haunted, 2), new ModifierEntry(malum_hex_staff, 1));
-        addTraits(DreamtinkerMaterialIds.mnemonic_auric, AMMO, teleport_shooting);
+        addTraits(DreamtinkerMaterialIds.mnemonic_auric, AMMO, teleport_shooting, malum_magic_hit);
 
         addDefaultTraits(DreamtinkerMaterialIds.soul_stained_steel, new ModifierEntry(Ids.malum_haunted, 2), new ModifierEntry(Ids.malum_tyrving, 1));
         addTraits(DreamtinkerMaterialIds.soul_stained_steel, ARMOR, malum_soul_attributes);
@@ -155,12 +155,14 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
 
 
         addDefaultTraits(DreamtinkerMaterialIds.TatteredCloth, Ids.eidolon_vulnerable);
-
         addDefaultTraits(DreamtinkerMaterialIds.WickedWeave, Ids.drinker_magic);
         addTraits(DreamtinkerMaterialIds.WickedWeave, ARMOR, Ids.eidolon_warlock, Ids.drinker_magic);
-
         addDefaultTraits(DreamtinkerMaterialIds.PaladinBone, Ids.eidolon_soul_hearts, Ids.eidolon_paladin_bone);
         addDefaultTraits(DreamtinkerMaterialIds.PaladinBoneTool, ModifierIds.smite, ModifierIds.pierce);
+        addTraits(DreamtinkerMaterialIds.SoulGem, AMMO, ModifierIds.spike, ModifierIds.smite);
+        addTraits(DreamtinkerMaterialIds.CrimsonGem, AMMO, teleport_shooting.getId(), Ids.heavy_arrow, Ids.light_arrow, TinkerModifiers.necrotic.getId());
+        addTraits(DreamtinkerMaterialIds.ShadowGem, AMMO, ModifierIds.spike, Ids.eidolon_bone_chill, Ids.eidolon_vulnerable);
+
 
         addDefaultTraits(DreamtinkerMaterialIds.DarkMetal, bic_dark_defense.getId(), ModifierIds.meleeProtection, ModifierIds.worldbound);
         addTraits(DreamtinkerMaterialIds.DarkMetal, PlatingMaterialStats.SHIELD.getId(), ModifierIds.meleeProtection,
@@ -170,7 +172,6 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.MonsterSkin, TinkerModifiers.tanned.getId(), bic_nightmare_defense.getId(), Ids.monster_blood);
 
         addDefaultTraits(DreamtinkerMaterialIds.SpikyShard, new ModifierEntry(ModifierIds.thorns, 2));
-
         addTraits(DreamtinkerMaterialIds.SpikyShard, MELEE_HARVEST, Ids.deeper_water_killer);
 
     }

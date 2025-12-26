@@ -77,6 +77,9 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
         buildRenderInfo(DreamtinkerMaterialIds.WickedWeave).color(0xFF384185).fallbacks("cloth").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.PaladinBone).color(0xFF46514F).fallbacks("bone").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.PaladinBoneTool).color(0xFF46514F).fallbacks("bone").luminosity(0);
+        buildRenderInfo(DreamtinkerMaterialIds.SoulGem).color(0xFFD2A4E6).fallbacks("gem").luminosity(0);
+        buildRenderInfo(DreamtinkerMaterialIds.ShadowGem).color(0xFFE28BFF).fallbacks("gem").luminosity(0);
+        buildRenderInfo(DreamtinkerMaterialIds.CrimsonGem).color(0xFFFF7C2B).fallbacks("gem").luminosity(0);
 
         buildRenderInfo(DreamtinkerMaterialIds.DarkMetal).color(0xFF777883).fallbacks("metal").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.MonsterSkin).color(0xFF534E63).fallbacks("cloth").luminosity(0);

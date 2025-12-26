@@ -1,0 +1,28 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "eidolon"
+          },
+          {
+            "type": "dreamtinker:mod_compact_config",
+            "modid": "eidolon"
+          }
+        ]
+      }
+    ]
+  },
+  "craftable": true,
+  "hidden": false,
+  "sortOrder": 15,
+  "tier": 3
+}

@@ -14,6 +14,10 @@
       {
         "level": 1,
         "name": "dreamtinker:teleport_shooting"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:malum_magic_hit"
       }
     ]
   }

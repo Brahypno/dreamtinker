@@ -606,6 +606,39 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFFB0D2B2)
                                                 .addARGB(255, 0xFFF3F6DD)
                                                 .build());
+        this.buildMaterial(DreamtinkerMaterialIds.SoulGem)
+            .arrowHead()
+            .fallbacks("gem")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(63, 0xFF2A0F24)
+                                                .addARGB(102, 0xFF4A153A)
+                                                .addARGB(140, 0xFF7A2E6C)
+                                                .addARGB(178, 0xFFB35AA6)
+                                                .addARGB(216, 0xFFE5A8D9)
+                                                .addARGB(255, 0xFFFFF0FA)
+                                                .build());
+        this.buildMaterial(DreamtinkerMaterialIds.CrimsonGem)
+            .arrowHead()
+            .fallbacks("gem")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(63, 0xFF1A0506)
+                                                .addARGB(102, 0xFF4A0D12)
+                                                .addARGB(140, 0xFF8A1D1B)
+                                                .addARGB(178, 0xFFD43B21)
+                                                .addARGB(216, 0xFFFF7C2B)
+                                                .addARGB(255, 0xFFFFE7B6)
+                                                .build());
+        this.buildMaterial(DreamtinkerMaterialIds.ShadowGem)
+            .arrowHead()
+            .fallbacks("gem")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(63, 0xFF090014)
+                                                .addARGB(102, 0xFF2A0B3A)
+                                                .addARGB(140, 0xFF5A1880)
+                                                .addARGB(178, 0xFF9A4AD7)
+                                                .addARGB(216, 0xFFE28BFF)
+                                                .addARGB(255, 0xFFFFE8FF)
+                                                .build());
     }
 
     protected void addBICMaterials() {

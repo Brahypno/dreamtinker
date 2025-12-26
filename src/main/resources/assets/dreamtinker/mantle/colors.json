@@ -145,7 +145,8 @@
     "bic_frostbitten": "#DF59B8",
     "bic_intoxicating": "#CFFBFC",
     "deeper_water_killer": "#738A99",
-    "teleport_shooting": "#E85BE1"
+    "teleport_shooting": "#E85BE1",
+    "malum_magic_hit": "#285052"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",

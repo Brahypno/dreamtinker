@@ -1,0 +1,22 @@
+{
+  "perStat": {
+    "tconstruct:ammo": [
+      {
+        "level": 1,
+        "name": "dreamtinker:teleport_shooting"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:heavy_arrow"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:light_arrow"
+      },
+      {
+        "level": 1,
+        "name": "tconstruct:necrotic"
+      }
+    ]
+  }
+}

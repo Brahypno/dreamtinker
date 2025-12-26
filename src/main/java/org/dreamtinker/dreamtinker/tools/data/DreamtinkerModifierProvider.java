@@ -314,7 +314,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                           .target(ender).build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
         buildModifier(Ids.heavy_arrow)
-                .addModule(StatBoostModule.add(ToolStats.ACCURACY).eachLevel(-0.5f))
+                .addModule(StatBoostModule.add(ToolStats.ACCURACY).eachLevel(-0.25f))
                 .addModule(StatBoostModule.add(ToolStats.PROJECTILE_DAMAGE).eachLevel(0.5f));
         buildModifier(Ids.light_arrow)
                 .addModule(StatBoostModule.add(ToolStats.VELOCITY).eachLevel(0.5f))

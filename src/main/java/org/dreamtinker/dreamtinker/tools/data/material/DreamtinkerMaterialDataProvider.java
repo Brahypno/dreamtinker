@@ -72,6 +72,9 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.WickedWeave, 3, 7, true, false, modLoaded("eidolon"));
         addMaterial(DreamtinkerMaterialIds.PaladinBone, 3, 15, false, false, modLoaded("eidolon"));
         addMaterial(DreamtinkerMaterialIds.PaladinBoneTool, 2, 10, true, false, modLoaded("eidolon"));
+        addMaterial(DreamtinkerMaterialIds.SoulGem, 2, 10, true, false, modLoaded("eidolon"));
+        addMaterial(DreamtinkerMaterialIds.CrimsonGem, 3, 15, true, false, modLoaded("eidolon"));
+        addMaterial(DreamtinkerMaterialIds.ShadowGem, 3, 15, true, false, modLoaded("eidolon"));
 
         addMaterial(DreamtinkerMaterialIds.DarkMetal, 3, 15, false, false, modLoaded("born_in_chaos_v1"));
         addMaterial(DreamtinkerMaterialIds.MonsterSkin, 2, 5, true, false, modLoaded("born_in_chaos_v1"));

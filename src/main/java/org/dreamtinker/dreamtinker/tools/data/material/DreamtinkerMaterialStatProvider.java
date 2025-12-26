@@ -375,6 +375,11 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         this.addMaterialStats(DreamtinkerMaterialIds.grim_talc, StatlessMaterialStats.ARROW_SHAFT);
         this.addMaterialStats(DreamtinkerMaterialIds.astral_weave, StatlessMaterialStats.FLETCHING);
         this.addMaterialStats(DreamtinkerMaterialIds.null_slate, StatlessMaterialStats.ARROW_SHAFT);
+
+        this.addMaterialStats(DreamtinkerMaterialIds.SoulGem, StatlessMaterialStats.ARROW_HEAD);
+        this.addMaterialStats(DreamtinkerMaterialIds.CrimsonGem, StatlessMaterialStats.ARROW_HEAD);
+        this.addMaterialStats(DreamtinkerMaterialIds.ShadowGem, StatlessMaterialStats.ARROW_HEAD);
+
     }
 
     private void addMisc() {

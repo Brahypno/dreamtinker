@@ -917,6 +917,14 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                        materials_folder + "wicked_weave");
         materialRecipe(wrapped, DreamtinkerMaterialIds.PaladinBoneTool, Ingredient.of(IMBUED_BONES.get()), 1, 1,
                        materials_folder + "paladin_bone_tool");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.SoulGem, Ingredient.of(SOUL_SHARD.get()), 1, 4,
+                       materials_folder + "soul_gem");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.CrimsonGem, Ingredient.of(CRIMSON_GEM.get()), 1, 1,
+                       materials_folder + "crimson_gem");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.ShadowGem, Ingredient.of(Dreamtinker.forgeItemTag("gems/shadow_gem")), 1, 1,
+                       materials_folder + "shadow_gem/gem");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.ShadowGem, Ingredient.of(Dreamtinker.forgeItemTag("storage_blocks/shadow_gem")), 9, 1,
+                       materials_folder + "shadow_gem/block");
     }
 
     private void addBICMaterialRecipes(Consumer<FinishedRecipe> consumer) {
@@ -1673,7 +1681,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .saveSalvage(wrapped, prefix(DreamtinkerModifiers.eidolon_death_bringer, upgradeSalvage))
                              .save(wrapped, prefix(DreamtinkerModifiers.eidolon_death_bringer, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.eidolon_bone_chill)
-                             .setTools(TinkerTags.Items.MODIFIABLE)
+                             .setTools(TinkerTags.Items.MELEE)
                              .addInput(WRAITH_HEART.get(), 1)
                              .addInput(PEWTER_INLAY.get(), 2)
                              .addInput(LESSER_SOUL_GEM.get(), 2)

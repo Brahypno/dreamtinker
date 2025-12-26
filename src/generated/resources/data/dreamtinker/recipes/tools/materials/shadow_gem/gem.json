@@ -1,6 +1,5 @@
 {
-  "type": "tconstruct:modifier",
-  "allow_crystal": true,
+  "type": "tconstruct:material",
   "conditions": [
     {
       "type": "forge:or",
@@ -25,28 +24,10 @@
       ]
     }
   ],
-  "inputs": [
-    {
-      "item": "eidolon:wraith_heart"
-    },
-    {
-      "amount_needed": 2,
-      "item": "eidolon:pewter_inlay"
-    },
-    {
-      "amount_needed": 2,
-      "item": "eidolon:lesser_soul_gem"
-    },
-    {
-      "tag": "forge:gems/shadow_gem"
-    }
-  ],
-  "level": 1,
-  "result": "dreamtinker:eidolon_bone_chill",
-  "slots": {
-    "upgrades": 1
+  "ingredient": {
+    "tag": "forge:gems/shadow_gem"
   },
-  "tools": {
-    "tag": "tconstruct:modifiable/melee"
-  }
+  "material": "dreamtinker:eidolon_shadow_gem",
+  "needed": 1,
+  "value": 1
 }

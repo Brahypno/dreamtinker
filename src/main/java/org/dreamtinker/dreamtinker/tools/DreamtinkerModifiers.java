@@ -224,6 +224,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             MALUM_MODIFIERS.register("malum_catalyst_lobber", malumCatalystLobber::new);
     public static final StaticModifier<MalumSoulExposer> malum_expose_soul =
             MALUM_MODIFIERS.register("malum_expose_soul", MalumSoulExposer::new);
+    public static final StaticModifier<MalumMagicHit> malum_magic_hit =
+            MALUM_MODIFIERS.register("malum_magic_hit", MalumMagicHit::new);
 
     public static final StaticModifier<EidolonReaper> eidolon_reaper =
             EIDOLON_MODIFIERS.register("eidolon_reaper", EidolonReaper::new);

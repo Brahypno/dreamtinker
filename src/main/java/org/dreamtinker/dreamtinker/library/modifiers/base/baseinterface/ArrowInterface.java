@@ -18,10 +18,11 @@ import slimeknights.tconstruct.library.utils.Schedule;
 import javax.annotation.Nullable;
 import java.util.function.Predicate;
 
-public interface ArrowInterface extends ProjectileHitModifierHook, ProjectileLaunchModifierHook, BowAmmoModifierHook, ScheduledProjectileTaskModifierHook, ProjectileShootModifierHook {
+public interface ArrowInterface extends ProjectileHitModifierHook, ProjectileLaunchModifierHook, BowAmmoModifierHook, ScheduledProjectileTaskModifierHook, ProjectileShootModifierHook, ProjectileFuseModifierHook {
     default void ArrowInterfaceInit(ModuleHookMap.Builder hookBuilder) {
         hookBuilder.addHook(this, ModifierHooks.PROJECTILE_HIT, ModifierHooks.PROJECTILE_LAUNCH, ModifierHooks.BOW_AMMO,
-                            ModifierHooks.SCHEDULE_PROJECTILE_TASK, ModifierHooks.PROJECTILE_SHOT, ModifierHooks.PROJECTILE_THROWN);
+                            ModifierHooks.SCHEDULE_PROJECTILE_TASK, ModifierHooks.PROJECTILE_SHOT, ModifierHooks.PROJECTILE_THROWN,
+                            ModifierHooks.PROJECTILE_FUSE);
     }
 
     default boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target, boolean notBlocked) {
@@ -44,4 +45,7 @@ public interface ArrowInterface extends ProjectileHitModifierHook, ProjectileLau
     default void onScheduledProjectileTask(IToolStackView tool, ModifierEntry modifier, ItemStack ammo, Projectile projectile, @Nullable AbstractArrow arrow, ModDataNBT persistentData, int task) {}
 
     default void onProjectileShoot(IToolStackView tool, ModifierEntry modifier, @Nullable LivingEntity shooter, ItemStack ammo, Projectile projectile, @Nullable AbstractArrow arrow, ModDataNBT persistentData, boolean primary) {}
+
+    default void onProjectileFuseFinish(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, ItemStack ammo, Projectile projectile, @Nullable AbstractArrow arrow) {
+    }
 }
