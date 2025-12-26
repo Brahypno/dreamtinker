@@ -74,6 +74,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.black_sapphire, not_like_was);
         addDefaultTraits(DreamtinkerMaterialIds.scolecite, light_in_dark);
         addDefaultTraits(DreamtinkerMaterialIds.shiningFlint, ModifierIds.jagged, Ids.fiber_glass_fragments, light_emanation.getId());
+        addTraits(DreamtinkerMaterialIds.shiningFlint, AMMO, ModifierIds.keen, ModifierIds.spike);
 
         addDefaultTraits(DreamtinkerMaterialIds.orichalcum, Ids.lunarAttractive, Ids.lunarRejection);
         addTraits(DreamtinkerMaterialIds.orichalcum, ARMOR, Ids.lunarProtection, lunar_defense.getId());
@@ -88,8 +89,8 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.TransmutationGold, RANGED, Ids.sun_shine, Ids.soul_unchanged);
         addTraits(DreamtinkerMaterialIds.TransmutationGold, ARMOR, SunAway.getId(), Ids.soul_unchanged);
 
-        addDefaultTraits(DreamtinkerMaterialIds.SpikyShard, new ModifierEntry(ModifierIds.thorns, 2));
-        addTraits(DreamtinkerMaterialIds.SpikyShard, MELEE_HARVEST, Ids.deeper_water_killer);
+        addDefaultTraits(DreamtinkerMaterialIds.SpikyShard, Ids.deeper_water_killer);
+        addTraits(DreamtinkerMaterialIds.SpikyShard, ARMOR, new ModifierEntry(ModifierIds.thorns, 2));
 
         addDefaultTraits(DreamtinkerMaterialIds.ArcaneGold, Ids.arcane_hit);
         addTraits(DreamtinkerMaterialIds.ArcaneGold, ARMOR, TinkerModifiers.golden.getId(), ModifierIds.magicProtection, Ids.arcane_protection);

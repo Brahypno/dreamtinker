@@ -7,6 +7,10 @@
     {
       "id": "dreamtinker:bic_monster_skin",
       "required": false
+    },
+    {
+      "id": "dreamtinker:malum_astral_weave",
+      "required": false
     }
   ]
 }

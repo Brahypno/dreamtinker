@@ -1,15 +1,15 @@
 {
   "default": [
     {
-      "level": 2,
-      "name": "tconstruct:thorns"
+      "level": 1,
+      "name": "dreamtinker:deeper_water_killer"
     }
   ],
   "perStat": {
-    "tconstruct:melee_harvest": [
+    "tconstruct:armor": [
       {
-        "level": 1,
-        "name": "dreamtinker:deeper_water_killer"
+        "level": 2,
+        "name": "tconstruct:thorns"
       }
     ]
   }

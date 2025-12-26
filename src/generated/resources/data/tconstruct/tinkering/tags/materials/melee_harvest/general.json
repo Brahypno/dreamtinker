@@ -10,6 +10,10 @@
     {
       "id": "dreamtinker:malum_spirit_fabric",
       "required": false
+    },
+    {
+      "id": "dreamtinker:malum_astral_weave",
+      "required": false
     }
   ]
 }

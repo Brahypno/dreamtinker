@@ -242,7 +242,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(255, 0xFFE3D8D6)
                                                 .build());
         this.buildMaterial(DreamtinkerMaterialIds.shiningFlint)
-            .meleeHarvest().ranged()
+            .meleeHarvest().ranged().arrowHead()
             .fallbacks("crystal", "rock", "stick")
             .colorMapper(GreyToColorMapping.builderFromBlack()
                                            .addARGB(63, 0xFF3C96B9)
@@ -312,7 +312,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .build());
 
         this.buildMaterial(DreamtinkerMaterialIds.SpikyShard)
-            .meleeHarvest().armor().shieldCore()
+            .meleeHarvest().armor().shieldCore().arrowHead()
             .fallbacks("bone")
             .transformer(GreyToSpriteTransformer.builder()
                                                 .addARGB(63, 0xFF3A4859)

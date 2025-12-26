@@ -12,5 +12,17 @@
       "level": 1,
       "name": "dreamtinker:light_emanation"
     }
-  ]
+  ],
+  "perStat": {
+    "tconstruct:ammo": [
+      {
+        "level": 1,
+        "name": "tconstruct:keen"
+      },
+      {
+        "level": 1,
+        "name": "tconstruct:spike"
+      }
+    ]
+  }
 }

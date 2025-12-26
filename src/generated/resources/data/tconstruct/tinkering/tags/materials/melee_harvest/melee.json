@@ -13,16 +13,13 @@
     "dreamtinker:shining_flint",
     "dreamtinker:cold_iron",
     "dreamtinker:spiky_shard",
+    "dreamtinker:soul_steel",
     {
       "id": "dreamtinker:nefarious",
       "required": false
     },
     {
       "id": "dreamtinker:soul_etherium",
-      "required": false
-    },
-    {
-      "id": "dreamtinker:malum_spirit_fabric",
       "required": false
     },
     {
@@ -55,6 +52,14 @@
     },
     {
       "id": "dreamtinker:bic_monster_skin",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:eidolon_paladin_bone_tool",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:eidolon_tattered_cloth",
       "required": false
     }
   ]
