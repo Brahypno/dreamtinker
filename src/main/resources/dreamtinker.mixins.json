@@ -7,6 +7,7 @@
   "mixins": [
     "BowItemMixin",
     "ModifiableBowItemMixin",
+    "ModifiableCrossbowItemMixin",
     "isInvertedHealAndHarmMixin",
     "GeneralCompact.ExtraSCYTHEModifier",
     "enigmatic_legacy_mixin.EnigmaticEventHandlerMixin",
@@ -15,7 +16,9 @@
     "malum_mixin.SpiritInfusionRecipeBuilderAccessor",
     "malum_mixin.SpiritInfusionRecipeBuilderResultMixin",
     "malum_mixin.SoulHandlerMixin",
-    "malum_mixin.EdgeOfDeliveranceItemMixin","malum_mixin.MalumScytheItemMixin","ProjectileMixin"],
+    "malum_mixin.EdgeOfDeliveranceItemMixin",
+    "malum_mixin.MalumScytheItemMixin",
+    "ProjectileMixin","malum_mixin.CrossbowItemMixin"],
   "client": [
   ],
   "injectors": {
