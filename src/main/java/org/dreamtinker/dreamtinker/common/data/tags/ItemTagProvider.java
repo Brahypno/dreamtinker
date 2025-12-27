@@ -12,6 +12,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys.Blocks;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys.Items;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
@@ -23,6 +24,7 @@ import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.common.registration.CastItemObject;
 import slimeknights.tconstruct.tools.TinkerTools;
 
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
@@ -42,7 +44,9 @@ public class ItemTagProvider extends ItemTagsProvider {
         this.tag(TinkerTags.Items.TOOL_PARTS)
             .add(DreamtinkerToolParts.explode_core.get(), DreamtinkerToolParts.memoryOrthant.get(), DreamtinkerToolParts.soulOrthant.get(),
                  DreamtinkerToolParts.wishOrthant.get(), DreamtinkerToolParts.personaOrthant.get(), DreamtinkerToolParts.reasonEmanation.get(),
-                 DreamtinkerToolParts.chainSawTeeth.get(), DreamtinkerToolParts.chainSawCore.get());
+                 DreamtinkerToolParts.chainSawTeeth.get(), DreamtinkerToolParts.chainSawCore.get(),
+                 DreamtinkerToolParts.NovaRostrum.get(), DreamtinkerToolParts.NovaMisc.get(), DreamtinkerToolParts.NovaWrapper.get(),
+                 DreamtinkerToolParts.NovaCover.get());
 
         addItemsTags(DreamtinkerTools.mashou, MULTIPART_TOOL, DURABILITY, HARVEST, MELEE_PRIMARY, INTERACTABLE_RIGHT, SWORD, BROAD_TOOLS, BONUS_SLOTS,
                      ItemTags.SWORDS, AOE);
@@ -51,6 +55,7 @@ public class ItemTagProvider extends ItemTagsProvider {
         addItemsTags(DreamtinkerTools.tntarrow, MULTIPART_TOOL, DURABILITY, MELEE_WEAPON, SMALL_TOOLS, BONUS_SLOTS);
         addItemsTags(DreamtinkerTools.chain_saw_blade, MULTIPART_TOOL, DURABILITY, HARVEST_PRIMARY, MELEE_PRIMARY, INTERACTABLE_RIGHT, AOE, BROAD_TOOLS,
                      BONUS_SLOTS, ItemTags.AXES);
+        addItemsOptionalTags(DreamtinkerTools.per_aspera_scriptum, MULTIPART_TOOL, MELEE_WEAPON, BROAD_RANGED, BONUS_SLOTS);
 
         this.tag(Items.dt_scythe).add(TinkerTools.scythe.asItem(), TinkerTools.kama.asItem(), DreamtinkerTools.narcissus_wing.asItem());
         this.tag(ItemTagRegistry.SCYTHE).addTags(Items.dt_scythe);
@@ -78,6 +83,10 @@ public class ItemTagProvider extends ItemTagsProvider {
         };
         addCast.accept(DreamtinkerToolParts.chainSawTeethCast);
         addCast.accept(DreamtinkerToolParts.chainSawCoreCast);
+        addCast.accept(DreamtinkerToolParts.NovaWrapperCast);
+        addCast.accept(DreamtinkerToolParts.NovaCoverCast);
+        addCast.accept(DreamtinkerToolParts.NovaRostrumCast);
+        addCast.accept(DreamtinkerToolParts.NovaMiscCast);
         this.tag(TinkerTags.Items.CASTS)
             .add(memory_cast.get(), wish_cast.get(), soul_cast.get(),
                  persona_cast.get(),
@@ -202,6 +211,14 @@ public class ItemTagProvider extends ItemTagsProvider {
         Item item = tool.asItem();
         for (TagKey<Item> tag : tags) {
             this.tag(tag).add(item);
+        }
+    }
+
+    @SafeVarargs
+    private void addItemsOptionalTags(ItemLike tool, TagKey<Item>... tags) {
+        Item item = tool.asItem();
+        for (TagKey<Item> tag : tags) {
+            this.tag(tag).addOptional(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(item)));
         }
     }
 

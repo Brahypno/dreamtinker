@@ -1,0 +1,70 @@
+{
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "ars_nouveau"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "ars_nouveau"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "icon": {
+    "item": "dreamtinker:per_aspera_scriptum",
+    "nbt": "{tic_display:1b,tic_materials:[\"tconstruct:ui_render#head\",\"tconstruct:ui_render#handle\",\"tconstruct:ui_render#extra\",\"tconstruct:ui_render#large\",\"tconstruct:ui_render#extra_large\"]}"
+  },
+  "input_slots": [
+    {
+      "filter": {
+        "item": "dreamtinker:nova_misc"
+      },
+      "icon": "dreamtinker:nova_misc",
+      "translation_key": "item.dreamtinker.nova_misc",
+      "x": 7,
+      "y": 26
+    },
+    {
+      "filter": {
+        "item": "dreamtinker:nova_wrapper"
+      },
+      "icon": "dreamtinker:nova_wrapper",
+      "translation_key": "item.dreamtinker.nova_wrapper",
+      "x": 25,
+      "y": 26
+    },
+    {
+      "filter": {
+        "item": "dreamtinker:nova_rostrum"
+      },
+      "icon": "dreamtinker:nova_rostrum",
+      "translation_key": "item.dreamtinker.nova_rostrum",
+      "x": 45,
+      "y": 26
+    },
+    {
+      "filter": {
+        "item": "dreamtinker:nova_cover"
+      },
+      "icon": "dreamtinker:nova_cover",
+      "translation_key": "item.dreamtinker.nova_cover",
+      "x": 25,
+      "y": 62
+    }
+  ],
+  "sortIndex": 11,
+  "translation_key": "item.dreamtinker.per_aspera_scriptum"
+}

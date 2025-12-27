@@ -1,6 +1,10 @@
 {
   "values": [
     "#dreamtinker:casts/multi_use/chain_saw_teeth",
-    "#dreamtinker:casts/multi_use/chain_saw_core"
+    "#dreamtinker:casts/multi_use/chain_saw_core",
+    "#dreamtinker:casts/multi_use/nova_wrapper",
+    "#dreamtinker:casts/multi_use/nova_cover",
+    "#dreamtinker:casts/multi_use/nova_rostrum",
+    "#dreamtinker:casts/multi_use/nova_misc"
   ]
 }

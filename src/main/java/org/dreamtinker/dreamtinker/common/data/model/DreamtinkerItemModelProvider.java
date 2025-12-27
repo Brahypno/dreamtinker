@@ -118,9 +118,17 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
         part(DreamtinkerToolParts.reasonEmanation.get());
         part(DreamtinkerToolParts.chainSawCore.get());
         part(DreamtinkerToolParts.chainSawTeeth.get());
+        part(DreamtinkerToolParts.NovaCover.get());
+        part(DreamtinkerToolParts.NovaMisc.get());
+        part(DreamtinkerToolParts.NovaWrapper.get());
+        part(DreamtinkerToolParts.NovaRostrum.get());
 
         cast(DreamtinkerToolParts.chainSawTeethCast);
         cast(DreamtinkerToolParts.chainSawCoreCast);
+        cast(DreamtinkerToolParts.NovaCoverCast);
+        cast(DreamtinkerToolParts.NovaMiscCast);
+        cast(DreamtinkerToolParts.NovaRostrumCast);
+        cast(DreamtinkerToolParts.NovaWrapperCast);
     }
 
     private MaterialModelBuilder<ItemModelBuilder> part(ResourceLocation part, String texture) {

@@ -33,6 +33,22 @@
       "stat_type": "tconstruct:handle"
     },
     {
+      "path": "dreamtinker:item/tool/parts/nova_cover",
+      "stat_type": "tconstruct:limb"
+    },
+    {
+      "path": "dreamtinker:item/tool/parts/nova_rostrum",
+      "stat_type": "tconstruct:limb"
+    },
+    {
+      "path": "dreamtinker:item/tool/parts/nova_wrapper",
+      "stat_type": "tconstruct:grip"
+    },
+    {
+      "path": "dreamtinker:item/tool/parts/nova_misc",
+      "stat_type": "tconstruct:handle"
+    },
+    {
       "allow_animated": false,
       "path": "dreamtinker:tinker_armor/under_plate/plating_armor",
       "stat_type": "tconstruct:armor_plating"
@@ -240,6 +256,22 @@
     {
       "path": "dreamtinker:item/tool/chain_saw_blade/large/handle_broken",
       "stat_type": "tconstruct:handle"
+    },
+    {
+      "path": "dreamtinker:item/tool/per_aspera_scriptum/nova_misc",
+      "stat_type": "tconstruct:handle"
+    },
+    {
+      "path": "dreamtinker:item/tool/per_aspera_scriptum/nova_wrapper",
+      "stat_type": "tconstruct:grip"
+    },
+    {
+      "path": "dreamtinker:item/tool/per_aspera_scriptum/nova_rostrum",
+      "stat_type": "tconstruct:limb"
+    },
+    {
+      "path": "dreamtinker:item/tool/per_aspera_scriptum/nova_cover",
+      "stat_type": "tconstruct:limb"
     },
     {
       "allow_animated": false,

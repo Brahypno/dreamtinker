@@ -19,6 +19,7 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
@@ -46,7 +47,9 @@ public class DtToolClientEvents extends ClientEventBase {
             TinkerItemProperties.registerToolProperties(DreamtinkerTools.silence_glove);
             TinkerItemProperties.registerToolProperties(DreamtinkerTools.narcissus_wing);
             TinkerItemProperties.registerToolProperties(DreamtinkerTools.chain_saw_blade);
-
+            if (ModList.get().isLoaded("ars_nouveau")){
+                TinkerItemProperties.registerToolProperties(DreamtinkerTools.per_aspera_scriptum);
+            }
             Consumer<Item> brokenConsumer = TinkerItemProperties::registerBrokenProperty;
             DreamtinkerTools.underPlate.forEach(brokenConsumer);
             EntityRenderers.register(DreamtinkerModifiers.TNTARROW.get(),
@@ -108,6 +111,9 @@ public class DtToolClientEvents extends ClientEventBase {
         registerItemColors(colors, DreamtinkerTools.narcissus_wing);
         registerItemColors(colors, DreamtinkerTools.silence_glove);
         registerItemColors(colors, DreamtinkerTools.chain_saw_blade);
+        if (ModList.get().isLoaded("ars_nouveau")){
+            registerItemColors(colors, DreamtinkerTools.per_aspera_scriptum);
+        }
         Consumer<Item> brokenConsumer = item -> event.register(ToolModel.COLOR_HANDLER, item);
         DreamtinkerTools.underPlate.forEach(brokenConsumer);
     }

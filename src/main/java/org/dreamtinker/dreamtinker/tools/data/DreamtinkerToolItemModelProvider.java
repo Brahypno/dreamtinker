@@ -35,6 +35,7 @@ public class DreamtinkerToolItemModelProvider extends AbstractToolItemModelProvi
         pulling_wo_broken(DreamtinkerTools.narcissus_wing, readJson(Dreamtinker.getLocation("base/narcissus_wing_blocking")), AmmoType.NONE, 1, "wish");
 
         tool(DreamtinkerTools.chain_saw_blade, toolBlocking, "teeth", "handle");
+        tool(DreamtinkerTools.per_aspera_scriptum, toolBlocking);
     }
 
     private void pulling_wo_broken(IdAwareObject bow, JsonObject properties, AmmoHandler ammo, int pullingCount, String... pullingParts) throws IOException {

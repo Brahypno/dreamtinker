@@ -4,6 +4,7 @@ import net.minecraft.world.item.ArmorItem;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.client.data.material.AbstractPartSpriteProvider;
+import slimeknights.tconstruct.tools.stats.GripMaterialStats;
 import slimeknights.tconstruct.tools.stats.HandleMaterialStats;
 import slimeknights.tconstruct.tools.stats.PlatingMaterialStats;
 import slimeknights.tconstruct.tools.stats.StatlessMaterialStats;
@@ -31,6 +32,10 @@ public class DreamtinkerPartSpriteProvider extends AbstractPartSpriteProvider {
         addHead("reason_emanation");
         addHead("chain_saw_core");
         addHandle("chain_saw_teeth");
+        addLimb("nova_cover");
+        addLimb("nova_rostrum");
+        addPart("nova_wrapper", GripMaterialStats.ID);
+        addHandle("nova_misc");
 
         buildTool("tntarrow").addHead("explode_core").addHandle("arrow_handle").addHandle("arrow_wing");
         buildTool("silence_glove").addHead("glove_hardware").addBinding("glove_wristband")
@@ -45,6 +50,7 @@ public class DreamtinkerPartSpriteProvider extends AbstractPartSpriteProvider {
                                    .addHead("reason_emanation");
         buildTool("chain_saw_blade").withLarge()
                                     .addBreakableHead("teeth").addHead("head").addHandle("core").addBreakablePart("handle", HandleMaterialStats.ID);
+        buildTool("per_aspera_scriptum").addHandle("nova_misc").addGrip("nova_wrapper").addLimb("nova_rostrum").addLimb("nova_cover");
 
         for (ArmorItem.Type slot : ArmorItem.Type.values()) {//have to like this since armor dont like partial breakable one
             if (slot != ArmorItem.Type.HELMET)

@@ -331,6 +331,10 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId bic_hound_fang = id("bic_hound_fang");
 
 
+        public static final ModifierId nova_spell_tiers = id("nova_spell_tiers");
+        public static final ModifierId nova_creative_tiers = id("nova_creative_tiers");
+
+
         private static ModifierId id(String name) {
             return new ModifierId(Dreamtinker.MODID, name);
         }

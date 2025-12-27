@@ -1,0 +1,8 @@
+{
+  "type": "tconstruct:table_casting_material",
+  "cast": {
+    "tag": "dreamtinker:casts/multi_use/nova_misc"
+  },
+  "item_cost": 3,
+  "result": "dreamtinker:nova_misc"
+}

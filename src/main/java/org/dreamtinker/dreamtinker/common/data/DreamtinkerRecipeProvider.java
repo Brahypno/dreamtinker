@@ -2,6 +2,7 @@ package org.dreamtinker.dreamtinker.common.data;
 
 import com.aizistral.enigmaticlegacy.registries.EnigmaticBlocks;
 import com.aizistral.enigmaticlegacy.registries.EnigmaticItems;
+import com.hollingsworth.arsnouveau.setup.registry.ItemsRegistry;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import com.sammy.malum.data.recipe.builder.SpiritInfusionRecipeBuilder;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
@@ -124,12 +125,16 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
     private void addToolBuildingRecipes(Consumer<FinishedRecipe> consumer) {
         String folder = "tools/building/";
         String armorFolder = "tools/armor/";
+        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"));
         ToolBuildingRecipeBuilder.toolBuildingRecipe(DreamtinkerTools.tntarrow.get())
                                  .outputSize(4)
                                  .save(consumer, prefix(DreamtinkerTools.tntarrow, folder));
         toolBuilding(consumer, DreamtinkerTools.mashou, folder);
         toolBuilding(consumer, DreamtinkerTools.narcissus_wing, folder);
         toolBuilding(consumer, DreamtinkerTools.chain_saw_blade, folder);
+
+        toolBuilding(wrapped, DreamtinkerTools.per_aspera_scriptum, folder);
+
         String recycle_folder = "tools/recycling/";
         PartBuilderToolRecycleBuilder.tools(SizedIngredient.fromItems(4, DreamtinkerTools.tntarrow.get()))
                                      .save(consumer, location(recycle_folder + "tntarrow"));
@@ -1159,6 +1164,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                     .save(consumer, location(partFolder + "shield_core_cast"));
         partRecipes(consumer, DreamtinkerToolParts.chainSawTeeth, DreamtinkerToolParts.chainSawTeethCast, 12, partFolder, castFolder);
         partRecipes(consumer, DreamtinkerToolParts.chainSawCore, DreamtinkerToolParts.chainSawCoreCast, 8, partFolder, castFolder);
+        partRecipes(consumer, DreamtinkerToolParts.NovaCover, DreamtinkerToolParts.NovaCoverCast, 2, partFolder, castFolder);
+        partRecipes(consumer, DreamtinkerToolParts.NovaMisc, DreamtinkerToolParts.NovaMiscCast, 3, partFolder, castFolder);
+        partRecipes(consumer, DreamtinkerToolParts.NovaWrapper, DreamtinkerToolParts.NovaWrapperCast, 2, partFolder, castFolder);
+        partRecipes(consumer, DreamtinkerToolParts.NovaRostrum, DreamtinkerToolParts.NovaRostrumCast, 2, partFolder, castFolder);
         //five Orthant
         ToolPartItem[] tree_parts =
                 new ToolPartItem[]{DreamtinkerToolParts.memoryOrthant.get(), DreamtinkerToolParts.wishOrthant.get(), DreamtinkerToolParts.soulOrthant.get(), DreamtinkerToolParts.personaOrthant.get(), DreamtinkerToolParts.reasonEmanation.get()};
@@ -1356,7 +1365,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.memory_base, soulSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.memory_base, soulFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.icy_memory)
-                             .setTools(TinkerTags.Items.MELEE_WEAPON)
+                             .setTools(Ingredient.of(DreamtinkerTools.narcissus_wing.get()))
                              .addInput(DreamtinkerCommon.unborn_egg.get())
                              .addInput(Items.POWDER_SNOW_BUCKET)
                              .setMaxLevel(2)
@@ -1486,7 +1495,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                       .save(consumer, wrap(DreamtinkerModifiers.Ids.five_creations, slotlessFolder, "_traits"));
 
         SwappableModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.five_creations, SlotType.DEFENSE.getName())
-                                      .setTools(TinkerTags.Items.BONUS_SLOTS)
+                                      .setTools(IntersectionIngredient.of(ingredientFromTags(TinkerTags.Items.ARMOR, TinkerTags.Items.HELD),
+                                                                          Ingredient.of(TinkerTags.Items.BONUS_SLOTS)))
                                       .addInput(DreamtinkerCommon.cold_iron_ingot.get(), 5)
                                       .addInput(DreamtinkerCommon.orichalcum.get(), 5)
                                       .addInput(DreamtinkerCommon.rainbow_honey_crystal.get(), 5)
@@ -1734,6 +1744,26 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(1)
                              .saveSalvage(wrapped, prefix(DreamtinkerModifiers.Ids.bic_intoxicating, upgradeSalvage))
                              .save(wrapped, prefix(DreamtinkerModifiers.Ids.bic_intoxicating, upgradeFolder));
+
+
+        wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.nova_spell_tiers)
+                             .setTools(Ingredient.of(DreamtinkerTools.per_aspera_scriptum.get()))
+                             .addInput(Tags.Items.OBSIDIAN, 1)
+                             .addInput(Tags.Items.GEMS_DIAMOND, 3)
+                             .addInput(Tags.Items.STORAGE_BLOCKS_QUARTZ, 3)
+                             .addInput(Tags.Items.RODS_BLAZE, 2)
+                             .setMaxLevel(1)
+                             .save(wrapped, wrap(DreamtinkerModifiers.Ids.nova_spell_tiers, slotlessFolder, "mage"));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.nova_spell_tiers)
+                             .setTools(Ingredient.of(DreamtinkerTools.per_aspera_scriptum.get()))
+                             .addInput(Tags.Items.NETHER_STARS, 1)
+                             .addInput(Tags.Items.GEMS_EMERALD, 2)
+                             .addInput(Tags.Items.ENDER_PEARLS, 3)
+                             .addInput(Items.TOTEM_OF_UNDYING, 1)
+                             .addInput(ItemsRegistry.WILDEN_TRIBUTE, 1)
+                             .setLevelRange(2, 2)
+                             .save(wrapped, wrap(DreamtinkerModifiers.Ids.nova_spell_tiers, slotlessFolder, "archmage"));
     }
 
     private void addEntityMeltingRecipes(Consumer<FinishedRecipe> consumer) {
@@ -1788,6 +1818,15 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
     public static ICondition tagFilled(TagKey<Item> tagKey) {
         return new OrCondition(ConfigEnabledCondition.FORCE_INTEGRATION_MATERIALS, new TagFilledCondition<>(tagKey));
+    }
+
+    @SafeVarargs
+    private static Ingredient ingredientFromTags(TagKey<Item>... tags) {
+        Ingredient[] tagIngredients = new Ingredient[tags.length];
+        for (int i = 0; i < tags.length; i++) {
+            tagIngredients[i] = Ingredient.of(tags[i]);
+        }
+        return CompoundIngredient.of(tagIngredients);
     }
 }
 

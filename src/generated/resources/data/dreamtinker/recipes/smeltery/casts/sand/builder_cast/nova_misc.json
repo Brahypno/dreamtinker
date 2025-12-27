@@ -1,0 +1,8 @@
+{
+  "type": "tconstruct:item_part_builder",
+  "pattern": "dreamtinker:nova_misc",
+  "pattern_item": {
+    "tag": "tconstruct:casts/sand"
+  },
+  "result": "dreamtinker:nova_misc_sand_cast"
+}

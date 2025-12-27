@@ -3,15 +3,22 @@ package org.dreamtinker.dreamtinker.tools.data;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraftforge.common.crafting.conditions.ICondition;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
+import org.dreamtinker.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvider;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.data.tinkering.AbstractStationSlotLayoutProvider;
 import slimeknights.tconstruct.library.recipe.partbuilder.Pattern;
+import slimeknights.tconstruct.library.tools.item.IModifiableDisplay;
 import slimeknights.tconstruct.library.tools.layout.Patterns;
+import slimeknights.tconstruct.library.tools.layout.StationSlotLayout;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.TinkerToolParts;
+
+import java.util.Objects;
 
 public class DreamtinkerStationLayout extends AbstractStationSlotLayoutProvider {
     public DreamtinkerStationLayout(PackOutput packOutput) {
@@ -52,14 +59,26 @@ public class DreamtinkerStationLayout extends AbstractStationSlotLayoutProvider 
                 .addInputItem(new Pattern("dreamtinker:silky_cloth"), TinkerModifiers.silkyCloth, 33, 53)
                 .build();
         defineModifiable(DreamtinkerTools.narcissus_wing)
-                .sortIndex(SORT_WEAPON + SORT_RANGED + SORT_LARGE)
+                .sortIndex(SORT_RANGED + SORT_LARGE)
                 .addInputItem(DreamtinkerToolParts.memoryOrthant.get(), 7, 26)
                 .addInputItem(DreamtinkerToolParts.wishOrthant.get(), 25, 26)
                 .addInputItem(DreamtinkerToolParts.soulOrthant.get(), 45, 26)
                 .addInputItem(DreamtinkerToolParts.personaOrthant.get(), 25, 62)
                 .addInputItem(DreamtinkerToolParts.reasonEmanation.get(), 25, 46)
                 .build();
+        defineModifiable(DreamtinkerTools.per_aspera_scriptum.get(), DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"))
+                .sortIndex(SORT_WEAPON + SORT_RANGED)
+                .addInputItem(DreamtinkerToolParts.NovaMisc.get(), 7, 26)
+                .addInputItem(DreamtinkerToolParts.NovaWrapper.get(), 25, 26)
+                .addInputItem(DreamtinkerToolParts.NovaRostrum.get(), 45, 26)
+                .addInputItem(DreamtinkerToolParts.NovaCover.get(), 25, 62)
+                .build();
 
+    }
+
+    protected StationSlotLayout.Builder defineModifiable(IModifiableDisplay item, ICondition... conditions) {
+        return this.define(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(item.asItem())), conditions).translationKey(item.asItem().getDescriptionId())
+                   .icon(item.getRenderTool());
     }
 
     @Override

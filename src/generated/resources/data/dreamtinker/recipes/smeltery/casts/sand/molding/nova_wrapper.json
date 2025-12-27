@@ -1,0 +1,11 @@
+{
+  "type": "tconstruct:molding_table",
+  "material": {
+    "tag": "tconstruct:casts/sand"
+  },
+  "pattern": {
+    "type": "tconstruct:material",
+    "item": "dreamtinker:nova_wrapper"
+  },
+  "result": "dreamtinker:nova_wrapper_sand_cast"
+}

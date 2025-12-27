@@ -4,6 +4,10 @@
     "dreamtinker:narcissus_wing",
     "dreamtinker:tntarrow",
     "dreamtinker:chain_saw_blade",
+    {
+      "id": "dreamtinker:per_aspera_scriptum",
+      "required": false
+    },
     "dreamtinker:silence_glove",
     "dreamtinker:under_plate_helmet",
     "dreamtinker:under_plate_chestplate",

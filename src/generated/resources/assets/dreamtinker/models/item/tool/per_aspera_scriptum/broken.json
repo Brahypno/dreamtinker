@@ -1,0 +1,32 @@
+{
+  "loader": "tconstruct:tool",
+  "parent": "forge:item/default-tool",
+  "textures": {
+    "nova_misc": "dreamtinker:item/tool/per_aspera_scriptum/nova_misc",
+    "nova_wrapper": "dreamtinker:item/tool/per_aspera_scriptum/nova_wrapper",
+    "nova_rostrum": "dreamtinker:item/tool/per_aspera_scriptum/nova_rostrum",
+    "nova_cover": "dreamtinker:item/tool/per_aspera_scriptum/nova_cover"
+  },
+  "modifier_roots": [
+    "dreamtinker:item/tool/per_aspera_scriptum/modifiers/broken/",
+    "dreamtinker:item/tool/per_aspera_scriptum/modifiers/"
+  ],
+  "parts": [
+    {
+      "name": "nova_misc",
+      "index": 0
+    },
+    {
+      "name": "nova_wrapper",
+      "index": 1
+    },
+    {
+      "name": "nova_rostrum",
+      "index": 2
+    },
+    {
+      "name": "nova_cover",
+      "index": 3
+    }
+  ]
+}

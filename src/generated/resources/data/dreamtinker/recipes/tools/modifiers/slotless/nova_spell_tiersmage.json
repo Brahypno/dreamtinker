@@ -1,0 +1,50 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "ars_nouveau"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "ars_nouveau"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "tag": "forge:obsidian"
+    },
+    {
+      "amount_needed": 3,
+      "tag": "forge:gems/diamond"
+    },
+    {
+      "amount_needed": 3,
+      "tag": "forge:storage_blocks/quartz"
+    },
+    {
+      "amount_needed": 2,
+      "tag": "forge:rods/blaze"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:nova_spell_tiers",
+  "tools": {
+    "item": "dreamtinker:per_aspera_scriptum"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "tconstruct:item_part_builder",
+  "pattern": "dreamtinker:nova_rostrum",
+  "pattern_item": {
+    "tag": "tconstruct:casts/red_sand"
+  },
+  "result": "dreamtinker:nova_rostrum_red_sand_cast"
+}

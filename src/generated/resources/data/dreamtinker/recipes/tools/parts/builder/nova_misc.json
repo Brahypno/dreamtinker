@@ -1,0 +1,16 @@
+{
+  "type": "tconstruct:part_builder",
+  "cost": 3,
+  "pattern": "dreamtinker:nova_misc",
+  "pattern_item": [
+    {
+      "tag": "tconstruct:patterns/default"
+    },
+    {
+      "item": "dreamtinker:nova_misc_cast"
+    }
+  ],
+  "result": {
+    "item": "dreamtinker:nova_misc"
+  }
+}

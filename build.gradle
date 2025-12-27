@@ -157,6 +157,14 @@ repositories {
         name 'BlameJared Maven'
         url 'https://maven.blamejared.com'
     }
+    maven {
+        name = 'GeckoLib'
+        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        content {
+            includeGroupByRegex("software\\.bernie.*")
+            includeGroup("com.eliotlash.mclib")
+        }
+    }
 }
 
 dependencies {
@@ -202,8 +210,11 @@ dependencies {
 
     implementation fg.deobf("com.alexthw.eidolon_repraised:eidolon_repraised-${minecraft_version}:${edidolon_version}") { transitive = false }
 
-    implementation fg.deobf("curse.maven:geckolib-388172:7025129")
+    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")
+    implementation("com.eliotlash.mclib:mclib:20")
     implementation fg.deobf("curse.maven:born-in-chaos-686437:7150209")
+
+    implementation fg.deobf("com.hollingsworth.ars_nouveau:ars_nouveau-${minecraft_version}:${arts_version}")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

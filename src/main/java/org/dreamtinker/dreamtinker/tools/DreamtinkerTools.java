@@ -6,6 +6,7 @@ import net.minecraft.world.item.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.DreamtinkerModule;
@@ -22,6 +23,7 @@ import org.dreamtinker.dreamtinker.tools.data.material.DreamtinkerMaterialTraitP
 import org.dreamtinker.dreamtinker.tools.data.sprite.DreamtinkerMaterialSpriteProvider;
 import org.dreamtinker.dreamtinker.tools.data.sprite.DreamtinkerPartSpriteProvider;
 import org.dreamtinker.dreamtinker.tools.items.*;
+import org.dreamtinker.dreamtinker.tools.items.NovaBook.ModifiableSpellBook;
 import slimeknights.mantle.registration.object.EnumObject;
 import slimeknights.mantle.registration.object.ItemObject;
 import slimeknights.tconstruct.library.client.data.material.GeneratorPartTextureJsonGenerator;
@@ -51,13 +53,15 @@ public class DreamtinkerTools extends DreamtinkerModule {
             MODI_TOOLS.register("tntarrow", () -> new TNTArrow((new Item.Properties()).stacksTo(4), DTtoolsDefinition.TNTARROW, 4));
     public static final ItemObject<ModifiableItem> mashou = MODI_TOOLS.register("mashou", () -> new MaShou(UNSTACKABLE_PROPS, DTtoolsDefinition.MASHOU));
     public static final ItemObject<ModifiableItem> narcissus_wing =
-            MODI_TOOLS.register("narcissus_wing", () -> new NarcissusWing(UNSTACKABLE_PROPS.rarity(Rarity.EPIC), DTtoolsDefinition.narcissus_wing));
+            MODI_TOOLS.register("narcissus_wing", () -> new NarcissusWing(UNSTACKABLE_PROPS.rarity(Rarity.EPIC), DTtoolsDefinition.NarcissusWing));
     public static final EnumObject<ArmorItem.Type, UnderArmorItem> underPlate =
             MODI_TOOLS.registerEnum("under_plate", ArmorItem.Type.values(), type -> new UnderArmorItem(DTtoolsDefinition.UNDER_PLATE, type, UNSTACKABLE_PROPS));
     public static final ItemObject<ModifiableItem> silence_glove =
-            MODI_TOOLS.register("silence_glove", () -> new SilenceGlove(UNSTACKABLE_PROPS, DTtoolsDefinition.silence_glove));
+            MODI_TOOLS.register("silence_glove", () -> new SilenceGlove(UNSTACKABLE_PROPS, DTtoolsDefinition.SilenceGlove));
     public static final ItemObject<ChainSawBlade> chain_saw_blade =
-            MODI_TOOLS.register("chain_saw_blade", () -> new ChainSawBlade(UNSTACKABLE_PROPS, DTtoolsDefinition.chain_saw_blade));
+            MODI_TOOLS.register("chain_saw_blade", () -> new ChainSawBlade(UNSTACKABLE_PROPS, DTtoolsDefinition.ChainSawBlade));
+    public static final ItemObject<ModifiableSpellBook> per_aspera_scriptum =
+            NOVA_MODI_TOOLS.register("per_aspera_scriptum", () -> new ModifiableSpellBook(UNSTACKABLE_PROPS, DTtoolsDefinition.PerAsperaScriptum));
 
     @SubscribeEvent
     void gatherData(final GatherDataEvent event) {
@@ -106,6 +110,9 @@ public class DreamtinkerTools extends DreamtinkerModule {
         acceptTool(output, silence_glove);
 
         acceptTools(output, underPlate);
+        if (ModList.get().isLoaded("ars_nouveau")){
+            acceptTool(output, per_aspera_scriptum);
+        }
     }
 
     /**

@@ -354,6 +354,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         addMalumModifiers();
         addEidolonModifiers();
         addBICModifiers();
+        addNovaModifiers();
 
     }
 
@@ -573,6 +574,11 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                           .target(LivingEntityPredicate.ANY)
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
+    }
+
+    private void addNovaModifiers() {
+        buildModifier(Ids.nova_spell_tiers, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau")).levelDisplay(new ModifierLevelDisplay.UniqueForLevels(3));
+        buildModifier(Ids.nova_creative_tiers, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau")).levelDisplay(ModifierLevelDisplay.NO_LEVELS);
     }
 
     @Override

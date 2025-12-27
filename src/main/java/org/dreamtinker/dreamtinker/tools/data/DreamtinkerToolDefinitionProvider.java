@@ -134,7 +134,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 .module(ToolTraitsModule.builder()
                                         .trait(DreamtinkerModifiers.weapon_transformation, 1).build())
                 .module(plateSlots);
-        define(DTtoolsDefinition.narcissus_wing)
+        define(DTtoolsDefinition.NarcissusWing)
                 // parts
                 .module(PartStatsModule.parts()
                                        .part(DreamtinkerToolParts.memoryOrthant, 0.75f)
@@ -170,7 +170,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                         MiningSpeedModifierModule.blocks(0.10f, Blocks.VINE, Blocks.GLOW_LICHEN), MiningSpeedModifierModule.tag(BlockTags.WOOL, 0.3f))
                 .module(new CircleAOEIterator(1, true))
                 .module(new CircleWeaponAttack(3));
-        define(DTtoolsDefinition.silence_glove)
+        define(DTtoolsDefinition.SilenceGlove)
                 .module(MaterialStatsModule.stats()
                                            .stat(HeadMaterialStats.ID)
                                            .stat(StatlessMaterialStats.BINDING)
@@ -188,7 +188,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                                         .trait(DreamtinkerModifiers.Ids.weapon_slots)
                                         .trait(DreamtinkerModifiers.weapon_dreams)
                                         .build());
-        define(DTtoolsDefinition.chain_saw_blade)
+        define(DTtoolsDefinition.ChainSawBlade)
                 // parts
                 .module(PartStatsModule.parts()
                                        .part(TinkerToolParts.broadBlade, 0.45f)
@@ -221,6 +221,23 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 .module(new ConditionalAOEIterator(
                         BlockPredicate.tag(TinkerTags.Blocks.TREE_LOGS), new TreeAOEIterator(0, 0),
                         BoxAOEIterator.builder(0, 4, 0).addWidth(2).addDepth(2).direction(IBoxExpansion.HEIGHT).build()));
+        define(DTtoolsDefinition.PerAsperaScriptum)
+                // parts
+                .module(PartStatsModule.parts()
+                                       .part(DreamtinkerToolParts.NovaMisc)
+                                       .part(DreamtinkerToolParts.NovaWrapper)
+                                       .part(DreamtinkerToolParts.NovaRostrum)
+                                       .part(DreamtinkerToolParts.NovaCover).build())
+                .module(defaultFourParts)
+                // stats
+                .module(new SetStatsModule(StatsNBT.builder()
+                                                   .set(ToolStats.ATTACK_DAMAGE, 1f)
+                                                   .set(ToolStats.ATTACK_SPEED, 1.0f).build()))
+                .module(new MultiplyStatsModule(MultiplierNBT.builder()
+                                                             .set(ToolStats.DURABILITY, 1.5f).build())) // gets effectively 2x durability from having 2 heads
+                .module(ToolTraitsModule.builder()
+                                        .trait(DreamtinkerModifiers.Ids.nova_spell_tiers).build())
+                .largeToolStartingSlots();
         // behavior;
     }
 

@@ -53,6 +53,7 @@ import org.dreamtinker.dreamtinker.network.DNetwork;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
+import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.ars_nouveau.ArsPlayerCraftEvent;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.curio.curio_hurt_handler;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.enigmatic_legacy.death_handler;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.malum.malum_events_handler;
@@ -120,6 +121,9 @@ public class Dreamtinker {
                 forgeEventBus.addGenericListener(ItemStack.class, addConcentratedGluttonyBottle::attachCaps);
                 forgeEventBus.addListener(malum_events_handler::MalumLivingHurtEvent);
                 forgeEventBus.addListener(malum_events_handler::MalumLivingDeathEvent);
+            }
+            if (ModList.get().isLoaded("ars_nouveau") && !configCompactDisabled("ars_nouveau")){
+                forgeEventBus.addListener(ArsPlayerCraftEvent::PlayerCraftEvent);
             }
 
 

@@ -1,0 +1,52 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "ars_nouveau"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "ars_nouveau"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "tag": "forge:nether_stars"
+    },
+    {
+      "amount_needed": 2,
+      "tag": "forge:gems/emerald"
+    },
+    {
+      "amount_needed": 3,
+      "tag": "forge:ender_pearls"
+    },
+    {
+      "item": "minecraft:totem_of_undying"
+    },
+    {
+      "item": "ars_nouveau:wilden_tribute"
+    }
+  ],
+  "level": 2,
+  "result": "dreamtinker:nova_spell_tiers",
+  "tools": {
+    "item": "dreamtinker:per_aspera_scriptum"
+  }
+}

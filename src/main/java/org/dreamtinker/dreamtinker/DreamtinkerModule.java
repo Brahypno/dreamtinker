@@ -41,6 +41,7 @@ public abstract class DreamtinkerModule {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
     public static final DeferredRegister<Item> MALUM_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
     public static final ItemDeferredRegisterExtension MODI_TOOLS = new ItemDeferredRegisterExtension(MODID);
+    public static final ItemDeferredRegisterExtension NOVA_MODI_TOOLS = new ItemDeferredRegisterExtension(MODID);
     public static final EntityTypeDeferredRegister ENTITIES = new EntityTypeDeferredRegister(MODID);
     public static final BlockDeferredRegisterExtension BLOCKS = new BlockDeferredRegisterExtension(MODID);
     public static final DeferredRegister<MobEffect> EFFECT = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, MODID);
@@ -117,6 +118,9 @@ public abstract class DreamtinkerModule {
             MALUM_FLUIDS.register(bus);
             MALUM_ITEMS.register(bus);
             MALUM_EFFECT.register(bus);
+        }
+        if (ModList.get().isLoaded("ars_nouveau")){
+            NOVA_MODI_TOOLS.register(bus);
         }
         TABS.register(bus);
         RULE_TESTS.register(bus);
