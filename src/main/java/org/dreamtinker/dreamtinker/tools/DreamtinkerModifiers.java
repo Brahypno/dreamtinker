@@ -333,6 +333,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
 
         public static final ModifierId nova_spell_tiers = id("nova_spell_tiers");
         public static final ModifierId nova_creative_tiers = id("nova_creative_tiers");
+        public static final ModifierId nova_spell_slots = id("nova_nova_spell_slot");
 
 
         private static ModifierId id(String name) {

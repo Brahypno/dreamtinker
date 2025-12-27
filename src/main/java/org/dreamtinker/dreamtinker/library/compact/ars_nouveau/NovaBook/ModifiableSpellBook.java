@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.tools.items.NovaBook;
+package org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaBook;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
@@ -267,7 +267,7 @@ public class ModifiableSpellBook extends SpellBook implements IModifiableDisplay
         return InteractionResult.PASS;
     }
 
-    public InteractionResult useOn(UseOnContext context) {
+    public @NotNull InteractionResult useOn(UseOnContext context) {
         ItemStack stack = context.getItemInHand();
         if (stack.getCount() == 1){
             ToolStack tool = ToolStack.from(stack);
@@ -286,7 +286,7 @@ public class ModifiableSpellBook extends SpellBook implements IModifiableDisplay
         return InteractionResult.PASS;
     }
 
-    public InteractionResult interactLivingEntity(ItemStack stack, Player playerIn, LivingEntity target, InteractionHand hand) {
+    public @NotNull InteractionResult interactLivingEntity(ItemStack stack, Player playerIn, LivingEntity target, InteractionHand hand) {
         ToolStack tool = ToolStack.from(stack);
         if (shouldInteract(playerIn, tool, hand)){
             for (ModifierEntry entry : tool.getModifierList()) {
@@ -303,24 +303,25 @@ public class ModifiableSpellBook extends SpellBook implements IModifiableDisplay
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
+    public @NotNull InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
         ItemStack stack = playerIn.getItemInHand(handIn);
         ToolStack tool = ToolStack.from(stack);
         SpellTier tier = getTier(stack);
+        if (tier != SpellTier.CREATIVE){
+            CapabilityRegistry.getMana(playerIn).ifPresent(iMana -> {
+                if (iMana.getBookTier() < tier.value){
+                    iMana.setBookTier(tier.value);
+                }
+                IPlayerCap cap = CapabilityRegistry.getPlayerDataCap(playerIn).orElse(new ANPlayerDataCap());
+                if (iMana.getGlyphBonus() < cap.getKnownGlyphs().size()){
+                    iMana.setGlyphBonus(cap.getKnownGlyphs().size());
+                }
+            });
+        }
         if (tool.isBroken()){
             return InteractionResultHolder.fail(stack);
         }else {
-            if (tier != SpellTier.CREATIVE){
-                CapabilityRegistry.getMana(playerIn).ifPresent(iMana -> {
-                    if (iMana.getBookTier() < tier.value){
-                        iMana.setBookTier(tier.value);
-                    }
-                    IPlayerCap cap = CapabilityRegistry.getPlayerDataCap(playerIn).orElse(new ANPlayerDataCap());
-                    if (iMana.getGlyphBonus() < cap.getKnownGlyphs().size()){
-                        iMana.setGlyphBonus(cap.getKnownGlyphs().size());
-                    }
-                });
-            }
+
         }
         ISpellCaster caster = getSpellCaster(stack);
         playerIn.startUsingItem(handIn);

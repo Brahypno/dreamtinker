@@ -12,6 +12,7 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.DreamtinkerModule;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.common.data.tags.MaterialTagProvider;
+import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaBook.ModifiableSpellBook;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerArmorModel;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerStationLayout;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerToolDefinitionProvider;
@@ -23,7 +24,6 @@ import org.dreamtinker.dreamtinker.tools.data.material.DreamtinkerMaterialTraitP
 import org.dreamtinker.dreamtinker.tools.data.sprite.DreamtinkerMaterialSpriteProvider;
 import org.dreamtinker.dreamtinker.tools.data.sprite.DreamtinkerPartSpriteProvider;
 import org.dreamtinker.dreamtinker.tools.items.*;
-import org.dreamtinker.dreamtinker.tools.items.NovaBook.ModifiableSpellBook;
 import slimeknights.mantle.registration.object.EnumObject;
 import slimeknights.mantle.registration.object.ItemObject;
 import slimeknights.tconstruct.library.client.data.material.GeneratorPartTextureJsonGenerator;
