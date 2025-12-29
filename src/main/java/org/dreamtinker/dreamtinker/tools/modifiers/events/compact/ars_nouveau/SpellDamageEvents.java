@@ -8,7 +8,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaBook.ModifiableSpellBook;
-import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.Spell.AugmentTinker;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
 import static org.dreamtinker.dreamtinker.utils.CompactUtils.arsNova.*;
@@ -16,8 +15,7 @@ import static org.dreamtinker.dreamtinker.utils.CompactUtils.arsNova.*;
 public class SpellDamageEvents {
     public static void PreSpellDamageEvent(SpellDamageEvent.Pre event) {
         SpellContext context = event.context;
-        if (null != context && context.getCasterTool().getItem() instanceof ModifiableSpellBook &&
-            context.getSpell().recipe.contains(AugmentTinker.INSTANCE)){
+        if (null != context && context.getCasterTool().getItem() instanceof ModifiableSpellBook && isTinker(context)){
             LivingEntity shooter = event.caster;
             ItemStack casterTool = context.getCasterTool();
             ToolStack tool = ToolStack.from(casterTool);
@@ -33,8 +31,7 @@ public class SpellDamageEvents {
 
     public static void PostSpellDamageEvent(SpellDamageEvent.Post event) {
         SpellContext context = event.context;
-        if (null != context && context.getCasterTool().getItem() instanceof ModifiableSpellBook &&
-            context.getSpell().recipe.contains(AugmentTinker.INSTANCE)){
+        if (null != context && context.getCasterTool().getItem() instanceof ModifiableSpellBook && isTinker(context)){
             LivingEntity shooter = event.caster;
             ItemStack casterTool = context.getCasterTool();
             ToolStack tool = ToolStack.from(casterTool);

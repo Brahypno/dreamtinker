@@ -1,7 +1,7 @@
 {
   "color": "FF51BACE",
   "fallbacks": [
-    "rock"
+    "gem"
   ],
   "generator": {
     "supported_stats": [

@@ -1,5 +1,9 @@
 {
   "values": [
-    "dreamtinker:mashou"
+    "dreamtinker:mashou",
+    {
+      "id": "dreamtinker:per_aspera_scriptum",
+      "required": false
+    }
   ]
 }

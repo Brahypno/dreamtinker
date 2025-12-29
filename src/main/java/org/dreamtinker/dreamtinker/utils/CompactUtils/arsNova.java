@@ -8,6 +8,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.Spell.AugmentTinker;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
@@ -67,6 +68,16 @@ public class arsNova {
         SpellContext local = context;
         while (null != local) {
             if (local.getSpell().recipe.contains(MethodTouch.INSTANCE) || local.getSpell().recipe.contains(MethodSelf.INSTANCE))
+                return true;
+            local = local.getPreviousContext();
+        }
+        return false;
+    }
+
+    public static boolean isTinker(SpellContext context) {
+        SpellContext local = context;
+        while (null != local) {
+            if (local.getSpell().recipe.contains(AugmentTinker.INSTANCE))
                 return true;
             local = local.getPreviousContext();
         }

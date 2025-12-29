@@ -13,7 +13,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaBook.ModifiableSpellBook;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaCast.ModifiableSpellResolver;
-import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.Spell.AugmentTinker;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -32,12 +31,14 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.dreamtinker.dreamtinker.utils.CompactUtils.arsNova.isTinker;
+
 @Mixin(value = MethodProjectile.class, remap = false)
 public class MethodProjectileMixin {
     @Inject(method = "summonProjectiles(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;Lcom/hollingsworth/arsnouveau/api/spell/SpellStats;Lcom/hollingsworth/arsnouveau/api/spell/SpellResolver;)V", at = @At("HEAD"), cancellable = true)
     public void dreamtinker$summonProjectiles(Level world, LivingEntity shooter, SpellStats stats, SpellResolver resolver, CallbackInfo ci) {
         if (resolver instanceof ModifiableSpellResolver && resolver.spellContext.getCasterTool().getItem() instanceof ModifiableSpellBook &&
-            resolver.spell.recipe.contains(AugmentTinker.INSTANCE)){
+            isTinker(resolver.spellContext)){
             ToolStack toolStack = ToolStack.from(resolver.spellContext.getCasterTool());
             int numSplits = 1 + stats.getBuffCount(AugmentSplit.INSTANCE);
             List<EntityProjectileSpell> projectiles = new ArrayList<>();
@@ -73,7 +74,7 @@ public class MethodProjectileMixin {
     @Inject(method = "summonProjectiles(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/LivingEntity;Lcom/hollingsworth/arsnouveau/api/spell/SpellStats;Lcom/hollingsworth/arsnouveau/api/spell/SpellResolver;)V", at = @At("HEAD"), cancellable = true)
     public void dreamtinker$summonProjectiles(Level world, BlockPos pos, LivingEntity shooter, SpellStats stats, SpellResolver resolver, CallbackInfo ci) {
         if (resolver instanceof ModifiableSpellResolver && resolver.spellContext.getCasterTool().getItem() instanceof ModifiableSpellBook &&
-            resolver.spell.recipe.contains(AugmentTinker.INSTANCE)){
+            isTinker(resolver.spellContext)){
             ToolStack toolStack = ToolStack.from(resolver.spellContext.getCasterTool());
             ArrayList<EntityProjectileSpell> projectiles = new ArrayList<>();
             EntityProjectileSpell projectileSpell = new EntityProjectileSpell(world, resolver);

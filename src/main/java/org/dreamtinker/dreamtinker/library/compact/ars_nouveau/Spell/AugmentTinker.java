@@ -37,7 +37,7 @@ public class AugmentTinker extends AbstractAugment {
 
     @Override
     public int getDefaultManaCost() {
-        return 5;
+        return 10;
     }
 
     public SpellStats.Builder applyModifiers(SpellStats.Builder builder, AbstractSpellPart spellPart, HitResult rayTraceResult, Level world, LivingEntity shooter, SpellContext spellContext) {

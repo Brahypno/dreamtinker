@@ -129,7 +129,7 @@ public class ModifiableSpellBook extends SpellBook implements IModifiableDisplay
         return ModifierUtil.checkVolatileFlag(stack, SHINY);
     }
 
-    public Rarity getRarity(ItemStack stack) {
+    public @NotNull Rarity getRarity(ItemStack stack) {
         return RarityModule.getRarity(stack);
     }
 
@@ -166,7 +166,6 @@ public class ModifiableSpellBook extends SpellBook implements IModifiableDisplay
         if (this.canBeDepleted()){
             ToolStack.from(stack).setDamage(damage);
         }
-
     }
 
     public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T damager, Consumer<T> onBroken) {
@@ -218,7 +217,7 @@ public class ModifiableSpellBook extends SpellBook implements IModifiableDisplay
     }
 
     public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, Player player) {
-        return stack.getCount() > 1 || ToolHarvestLogic.handleBlockBreak(stack, pos, player);
+        return false;
     }
 
     public void inventoryTick(ItemStack stack, Level worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
