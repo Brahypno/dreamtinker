@@ -1,0 +1,18 @@
+{
+  "type": "ars_nouveau:glyph",
+  "count": 1,
+  "exp": 55,
+  "inputItems": [
+    {
+      "item": {
+        "item": "tconstruct:pattern"
+      }
+    },
+    {
+      "item": {
+        "item": "tconstruct:blank_sand_cast"
+      }
+    }
+  ],
+  "output": "dreamtinker:glyph_tinker"
+}

@@ -597,6 +597,9 @@
   "modifier.dreamtinker.nova_creative_tiers": "Creative Spell Book",
   "modifier.dreamtinker.nova_creative_tiers.flavor": "Creative only",
   "modifier.dreamtinker.nova_creative_tiers.description": "",
+  "modifier.dreamtinker.nova_spell_slots": "Spell slots Upgrade",
+  "modifier.dreamtinker.nova_spell_slots.flavor": "",
+  "modifier.dreamtinker.nova_spell_slots.description": "Add additional cast recipe slot on the book",
 
 
   "material.dreamtinker.echo_alloy": "Echo Alloy",
@@ -1148,5 +1151,9 @@
   "sound.dreamtinker.chainsaw_loop": "ChainSaw Running",
   "sound.dreamtinker.chainsaw_stop": "ChainSaw Stopping",
 
-  "stat.dreamtinker.tool.display.designs": "Circle Attack"
+  "stat.dreamtinker.tool.display.designs": "Circle Attack",
+
+  "dreamtinker.glyph_name.glyph_tinker": "Tinker ability",
+  "dreamtinker.glyph_desc.glyph_tinker": "Only working in the Per Aspera Scriptum and allow tinkers` modifiers being used. Like amplify but not triggered continuously"
+
 }

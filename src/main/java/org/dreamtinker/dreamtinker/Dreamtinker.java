@@ -48,12 +48,14 @@ import org.dreamtinker.dreamtinker.common.json.DTConfigEnabledCondition;
 import org.dreamtinker.dreamtinker.config.DreamtinkerConfig;
 import org.dreamtinker.dreamtinker.fluids.DreamtinkerFluids;
 import org.dreamtinker.dreamtinker.fluids.data.DreamtinkerFluidTextureProvider;
+import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
 import org.dreamtinker.dreamtinker.library.event.PlayerLeftClickEvent;
 import org.dreamtinker.dreamtinker.network.DNetwork;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.ars_nouveau.ArsPlayerCraftEvent;
+import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.ars_nouveau.SpellDamageEvents;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.curio.curio_hurt_handler;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.enigmatic_legacy.death_handler;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.malum.malum_events_handler;
@@ -87,6 +89,9 @@ public class Dreamtinker {
         modEventBus.register(new DreamtinkerSounds());
         modEventBus.register(new DreamtinkerModifiers());
         DreamtinkerModule.initRegisters(modEventBus);
+        if (ModList.get().isLoaded("ars_nouveau")){
+            new NovaRegistry();
+        }
 
         CraftingHelper.register(DTConfigEnabledCondition.SERIALIZER);
         // Register the commonSetup method for modloading
@@ -124,6 +129,8 @@ public class Dreamtinker {
             }
             if (ModList.get().isLoaded("ars_nouveau") && !configCompactDisabled("ars_nouveau")){
                 forgeEventBus.addListener(ArsPlayerCraftEvent::PlayerCraftEvent);
+                forgeEventBus.addListener(EventPriority.HIGHEST, SpellDamageEvents::PreSpellDamageEvent);
+                forgeEventBus.addListener(EventPriority.HIGHEST, SpellDamageEvents::PostSpellDamageEvent);
             }
 
 

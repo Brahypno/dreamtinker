@@ -15,6 +15,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
+import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.Spell.AugmentTinker;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import slimeknights.mantle.registration.object.FluidObject;
 import slimeknights.mantle.registration.object.ItemObject;
@@ -109,6 +110,7 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
         generateItemModel(DreamtinkerCommon.transmutation_gold_dust, "materials");
         generateItemModel(DreamtinkerCommon.raw_transmutation_gold, "");
         generateItemModel(DreamtinkerCommon.deep_prismarine_shard, "materials");
+        generateItemModel(AugmentTinker.INSTANCE.getRegistryName(), "");
         //generateBlockItemModel(object);
         part(DreamtinkerToolParts.explode_core.get());
         part(DreamtinkerToolParts.memoryOrthant.get());

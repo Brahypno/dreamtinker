@@ -597,6 +597,9 @@
   "modifier.dreamtinker.nova_creative_tiers": "创造模式法术书",
   "modifier.dreamtinker.nova_creative_tiers.flavor": "创造模式专用",
   "modifier.dreamtinker.nova_creative_tiers.description": "",
+  "modifier.dreamtinker.nova_spell_slots": "法术位升级",
+  "modifier.dreamtinker.nova_spell_slots.flavor": "",
+  "modifier.dreamtinker.nova_spell_slots.description": "每等级增加额外法术位",
 
   "material.dreamtinker.echo_alloy": "回响合金",
   "material.dreamtinker.echo_alloy.flavor": "是神秘的回响，还是秘密的回响",
@@ -1146,5 +1149,8 @@
   "sound.dreamtinker.chainsaw_loop": "电锯运转",
   "sound.dreamtinker.chainsaw_stop": "电锯停机",
 
-  "stat.dreamtinker.tool.display.designs": "范围攻击"
+  "stat.dreamtinker.tool.display.designs": "范围攻击",
+
+  "dreamtinker.glyph_name.glyph_tinker": "匠魂之力",
+  "dreamtinker.glyph_desc.glyph_tinker": "仅在历艰成书上有效，容许弹射物，法术效果触发部分匠魂的材料与词条。类似强化但连续使用仅生效一次。"
 }

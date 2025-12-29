@@ -1,0 +1,16 @@
+{
+  "category": "ars_nouveau:glyphs_1",
+  "icon": "dreamtinker:glyph_tinker",
+  "name": "dreamtinker.glyph_name.glyph_tinker",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "dreamtinker.glyph_desc.glyph_tinker"
+    },
+    {
+      "type": "ars_nouveau:glyph_recipe",
+      "recipe": "dreamtinker:glyph_tinker"
+    }
+  ],
+  "sortnum": 10
+}

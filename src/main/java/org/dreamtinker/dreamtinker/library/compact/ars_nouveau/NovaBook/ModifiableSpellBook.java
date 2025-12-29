@@ -2,16 +2,11 @@ package org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaBook;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import com.hollingsworth.arsnouveau.api.spell.ISpellCaster;
-import com.hollingsworth.arsnouveau.api.spell.SpellCaster;
-import com.hollingsworth.arsnouveau.api.spell.SpellTier;
+import com.hollingsworth.arsnouveau.api.spell.*;
 import com.hollingsworth.arsnouveau.api.util.StackUtil;
 import com.hollingsworth.arsnouveau.client.registry.ModKeyBindings;
-import com.hollingsworth.arsnouveau.common.capability.ANPlayerDataCap;
-import com.hollingsworth.arsnouveau.common.capability.IPlayerCap;
 import com.hollingsworth.arsnouveau.common.items.SpellBook;
 import com.hollingsworth.arsnouveau.setup.config.ServerConfig;
-import com.hollingsworth.arsnouveau.setup.registry.CapabilityRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
@@ -21,7 +16,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -46,6 +40,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaCast.ModifiableSpellResolver;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.SafeClientAccess;
@@ -302,33 +297,6 @@ public class ModifiableSpellBook extends SpellBook implements IModifiableDisplay
         return InteractionResult.PASS;
     }
 
-    @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
-        ItemStack stack = playerIn.getItemInHand(handIn);
-        ToolStack tool = ToolStack.from(stack);
-        SpellTier tier = getTier(stack);
-        if (tier != SpellTier.CREATIVE){
-            CapabilityRegistry.getMana(playerIn).ifPresent(iMana -> {
-                if (iMana.getBookTier() < tier.value){
-                    iMana.setBookTier(tier.value);
-                }
-                IPlayerCap cap = CapabilityRegistry.getPlayerDataCap(playerIn).orElse(new ANPlayerDataCap());
-                if (iMana.getGlyphBonus() < cap.getKnownGlyphs().size()){
-                    iMana.setGlyphBonus(cap.getKnownGlyphs().size());
-                }
-            });
-        }
-        if (tool.isBroken()){
-            return InteractionResultHolder.fail(stack);
-        }else {
-
-        }
-        ISpellCaster caster = getSpellCaster(stack);
-        playerIn.startUsingItem(handIn);
-
-        return caster.castSpell(worldIn, (LivingEntity) playerIn, handIn, Component.translatable("ars_nouveau.invalid_spell"));
-    }
-
     public void onUseTick(Level pLevel, LivingEntity entityLiving, ItemStack stack, int timeLeft) {
         ToolStack tool = ToolStack.from(stack);
         ModifierEntry activeModifier = GeneralInteractionModifierHook.getActiveModifier(tool);
@@ -408,7 +376,7 @@ public class ModifiableSpellBook extends SpellBook implements IModifiableDisplay
         TooltipUtil.addInformation(this, stack, level, tooltip, SafeClientAccess.getTooltipKey(), flag);
     }
 
-    public int getDefaultTooltipHideFlags(ItemStack stack) {
+    public int getDefaultTooltipHideFlags(@NotNull ItemStack stack) {
         return TooltipUtil.getModifierHideFlags(this.getToolDefinition());
     }
 
@@ -500,17 +468,17 @@ public class ModifiableSpellBook extends SpellBook implements IModifiableDisplay
     @NotNull
     @Override
     public ISpellCaster getSpellCaster(ItemStack stack) {
-        return new BookCaster(stack);
+        return new ModifiableBookCaster(stack);
     }
 
     @Override
     public ISpellCaster getSpellCaster() {
-        return new BookCaster(new CompoundTag());
+        return new ModifiableBookCaster(new CompoundTag());
     }
 
     @Override
     public ISpellCaster getSpellCaster(CompoundTag tag) {
-        return new BookCaster(tag);
+        return new ModifiableBookCaster(tag);
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -529,19 +497,24 @@ public class ModifiableSpellBook extends SpellBook implements IModifiableDisplay
         return true;
     }
 
-    public static class BookCaster extends SpellCaster {
+    public static class ModifiableBookCaster extends SpellCaster {
 
-        public BookCaster(ItemStack stack) {
+        public ModifiableBookCaster(ItemStack stack) {
             super(stack);
         }
 
-        public BookCaster(CompoundTag tag) {
+        public ModifiableBookCaster(CompoundTag tag) {
             super(tag);
         }
 
         @Override
         public int getMaxSlots() {
             return 10;
+        }
+
+        @Override
+        public SpellResolver getSpellResolver(SpellContext context, Level worldIn, LivingEntity playerIn, InteractionHand handIn) {
+            return new ModifiableSpellResolver(context);
         }
     }
 }
