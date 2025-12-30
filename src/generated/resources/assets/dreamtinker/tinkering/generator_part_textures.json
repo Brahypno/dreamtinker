@@ -38,11 +38,11 @@
     },
     {
       "path": "dreamtinker:item/tool/parts/nova_rostrum",
-      "stat_type": "tconstruct:limb"
+      "stat_type": "tconstruct:head"
     },
     {
       "path": "dreamtinker:item/tool/parts/nova_wrapper",
-      "stat_type": "tconstruct:grip"
+      "stat_type": "tconstruct:limb"
     },
     {
       "path": "dreamtinker:item/tool/parts/nova_misc",
@@ -263,11 +263,11 @@
     },
     {
       "path": "dreamtinker:item/tool/per_aspera_scriptum/nova_wrapper",
-      "stat_type": "tconstruct:grip"
+      "stat_type": "tconstruct:limb"
     },
     {
       "path": "dreamtinker:item/tool/per_aspera_scriptum/nova_rostrum",
-      "stat_type": "tconstruct:limb"
+      "stat_type": "tconstruct:head"
     },
     {
       "path": "dreamtinker:item/tool/per_aspera_scriptum/nova_cover",

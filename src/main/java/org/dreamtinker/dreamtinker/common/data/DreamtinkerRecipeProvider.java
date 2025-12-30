@@ -1167,7 +1167,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         partRecipes(consumer, DreamtinkerToolParts.NovaCover, DreamtinkerToolParts.NovaCoverCast, 2, partFolder, castFolder);
         partRecipes(consumer, DreamtinkerToolParts.NovaMisc, DreamtinkerToolParts.NovaMiscCast, 3, partFolder, castFolder);
         partRecipes(consumer, DreamtinkerToolParts.NovaWrapper, DreamtinkerToolParts.NovaWrapperCast, 2, partFolder, castFolder);
-        partRecipes(consumer, DreamtinkerToolParts.NovaRostrum, DreamtinkerToolParts.NovaRostrumCast, 2, partFolder, castFolder);
+        partRecipes(consumer, DreamtinkerToolParts.NovaRostrum, DreamtinkerToolParts.NovaRostrumCast, 4, partFolder, castFolder);
         //five Orthant
         ToolPartItem[] tree_parts =
                 new ToolPartItem[]{DreamtinkerToolParts.memoryOrthant.get(), DreamtinkerToolParts.wishOrthant.get(), DreamtinkerToolParts.soulOrthant.get(), DreamtinkerToolParts.personaOrthant.get(), DreamtinkerToolParts.reasonEmanation.get()};

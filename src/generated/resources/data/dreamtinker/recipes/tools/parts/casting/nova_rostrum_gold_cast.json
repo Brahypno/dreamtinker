@@ -3,6 +3,6 @@
   "cast": {
     "tag": "dreamtinker:casts/multi_use/nova_rostrum"
   },
-  "item_cost": 2,
+  "item_cost": 4,
   "result": "dreamtinker:nova_rostrum"
 }
