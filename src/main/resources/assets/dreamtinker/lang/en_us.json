@@ -601,6 +601,9 @@
   "modifier.dreamtinker.nova_spell_slots": "Spell slots Upgrade",
   "modifier.dreamtinker.nova_spell_slots.flavor": "",
   "modifier.dreamtinker.nova_spell_slots.description": "Add additional cast recipe slot on the book",
+  "modifier.dreamtinker.nova_scriptum_attributes": "The Path of Scriptum",
+  "modifier.dreamtinker.nova_scriptum_attributes.flavor": "Per aspera ad astra",
+  "modifier.dreamtinker.nova_scriptum_attributes.description": "Increase Mana Regeneration based on attack speed and Max Mana based on mining speed and draw speed",
 
 
   "material.dreamtinker.echo_alloy": "Echo Alloy",

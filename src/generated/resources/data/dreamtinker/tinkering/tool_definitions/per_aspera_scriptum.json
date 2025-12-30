@@ -50,6 +50,10 @@
         {
           "level": 1,
           "name": "dreamtinker:nova_spell_tiers"
+        },
+        {
+          "level": 1,
+          "name": "dreamtinker:nova_scriptum_attributes"
         }
       ]
     },

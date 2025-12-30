@@ -236,7 +236,8 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 .module(new MultiplyStatsModule(MultiplierNBT.builder()
                                                              .set(ToolStats.DURABILITY, 1.5f).build())) // gets effectively 2x durability from having 2 heads
                 .module(ToolTraitsModule.builder()
-                                        .trait(DreamtinkerModifiers.Ids.nova_spell_tiers).build())
+                                        .trait(DreamtinkerModifiers.Ids.nova_spell_tiers)
+                                        .trait(DreamtinkerModifiers.nova_scriptum_attributes).build())
                 .largeToolStartingSlots();
         // behavior;
     }

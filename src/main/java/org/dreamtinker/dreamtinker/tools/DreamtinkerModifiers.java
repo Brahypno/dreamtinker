@@ -33,6 +33,7 @@ import org.dreamtinker.dreamtinker.tools.modifiers.tools.tntarrow.StrongExplode;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.SpiritualWeaponTransformation;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.WeaponTransformation;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.*;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.ars.ScriptumAttributes;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.bic.DarkBlade;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.bic.dark_defense;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.bic.nightmare_defense;
@@ -86,6 +87,9 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         if (ModList.get().isLoaded("born_in_chaos_v1")){
             BIC_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         }
+        if (ModList.get().isLoaded("ars_nouveau")){
+            ARS_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        }
     }
 
     public static ModifierDeferredRegister MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
@@ -93,6 +97,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static ModifierDeferredRegister MALUM_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     public static ModifierDeferredRegister EIDOLON_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     public static ModifierDeferredRegister BIC_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
+    public static ModifierDeferredRegister ARS_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     //Mashuo
     public static final StaticModifier<RealSweep> real_sweep = MODIFIERS.register("real_sweep", RealSweep::new);
     public static final StaticModifier<StrongHeavy> strong_heavy = MODIFIERS.register("strong_heavy", StrongHeavy::new);
@@ -240,6 +245,9 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             BIC_MODIFIERS.register("bic_dark_blade", DarkBlade::new);
     public static final StaticModifier<nightmare_defense> bic_nightmare_defense =
             BIC_MODIFIERS.register("bic_nightmare_defense", nightmare_defense::new);
+
+    public static final StaticModifier<ScriptumAttributes> nova_scriptum_attributes =
+            ARS_MODIFIERS.register("nova_scriptum_attributes", ScriptumAttributes::new);
 
     public static class Ids {
         public static final ModifierId long_tool = id("long_tool");

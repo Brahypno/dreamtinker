@@ -263,6 +263,10 @@ public class DreamtinkerConfig {
 
     public static final ForgeConfigSpec.DoubleValue DespairShade =
             builder.comment("How often would the shade appears? ").defineInRange("DespairShade", 0.4, 0, 1);
+    public static final ForgeConfigSpec.DoubleValue ArtsRegenBonus =
+            builder.comment("Ars Nova compact: Max mana regen gain from Per Aspera Scriptum").defineInRange("ArtsRegenBonus", 6.0, 0, 100);
+    public static final ForgeConfigSpec.DoubleValue ArtsMaxManaBonus =
+            builder.comment("Ars Nova compact: Max mana gain from Per Aspera Scriptum").defineInRange("ArtsMaxManaBonus", 120.0, 0, 1000);
 
     public static final ForgeConfigSpec specs = builder.pop().build();
 
