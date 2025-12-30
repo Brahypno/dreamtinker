@@ -49,7 +49,7 @@ public class DreamtinkerTools extends DreamtinkerModule {
                                                                          .displayItems(DreamtinkerTools::addTabItems)
                                                                          .withTabsBefore(DreamtinkerCommon.ITEM.getId()).withSearchBar().build());
 
-    public static final ItemObject<ModifiableItem> tntarrow =
+    public static final ItemObject<TNTArrow> tntarrow =
             MODI_TOOLS.register("tntarrow", () -> new TNTArrow((new Item.Properties()).stacksTo(4), DTtoolsDefinition.TNTARROW, 4));
     public static final ItemObject<ModifiableItem> mashou = MODI_TOOLS.register("mashou", () -> new MaShou(UNSTACKABLE_PROPS, DTtoolsDefinition.MASHOU));
     public static final ItemObject<ModifiableItem> narcissus_wing =

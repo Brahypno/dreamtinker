@@ -142,7 +142,9 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.soul_upgrade).tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
                                        .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                                        .addModules(ModifierSlotModule.slot(SlotType.SOUL).eachLevel(1));
-        buildModifier(Ids.continuous_explode).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
+        buildModifier(Ids.continuous_explode)
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(new VolatileFlagModule(IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY));
         buildModifier(Ids.soul_core)
                 .addModule(ModifierRequirementsModule.builder().requireModifier(memory_base.getId(), 1)
                                                      .modifierKey(Ids.soul_core).build());

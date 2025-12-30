@@ -40,7 +40,7 @@ public class ItemTagProvider extends ItemTagsProvider {
     @Override
     protected void addTags(HolderLookup.@NotNull Provider Provider) {
         //tools
-        this.tag(Items.weapon_slot_excluded).add(DreamtinkerTools.silence_glove.get(), DreamtinkerTools.tntarrow.get());
+        this.tag(Items.weapon_slot_excluded).add(DreamtinkerTools.silence_glove.get());
         this.tag(TinkerTags.Items.TOOL_PARTS)
             .add(DreamtinkerToolParts.explode_core.get(), DreamtinkerToolParts.memoryOrthant.get(), DreamtinkerToolParts.soulOrthant.get(),
                  DreamtinkerToolParts.wishOrthant.get(), DreamtinkerToolParts.personaOrthant.get(), DreamtinkerToolParts.reasonEmanation.get(),
@@ -52,18 +52,17 @@ public class ItemTagProvider extends ItemTagsProvider {
                      ItemTags.SWORDS, AOE);
         addItemsTags(DreamtinkerTools.narcissus_wing, MULTIPART_TOOL, DURABILITY, HARVEST_PRIMARY, MELEE_PRIMARY, INTERACTABLE_RIGHT, SCYTHES, BROAD_TOOLS,
                      BONUS_SLOTS, AOE, RANGED, ItemTags.PICKAXES);
-        addItemsTags(DreamtinkerTools.tntarrow, MULTIPART_TOOL, DURABILITY, MELEE_WEAPON, SMALL_TOOLS, BONUS_SLOTS);
+        addItemsTags(DreamtinkerTools.tntarrow, MULTIPART_TOOL, AMMO, UNSALVAGABLE, UNSWAPPABLE, SINGLE_USE, MELEE, ItemTags.ARROWS, BONUS_SLOTS);
         addItemsTags(DreamtinkerTools.chain_saw_blade, MULTIPART_TOOL, DURABILITY, HARVEST_PRIMARY, MELEE_PRIMARY, INTERACTABLE_RIGHT, AOE, BROAD_TOOLS,
                      BONUS_SLOTS, ItemTags.AXES);
         addItemsOptionalTags(DreamtinkerTools.per_aspera_scriptum, MULTIPART_TOOL, MELEE_WEAPON, BROAD_RANGED, BONUS_SLOTS, HARVEST, LAUNCHERS);
+        addItemsTags(DreamtinkerTools.silence_glove, DURABILITY, MELEE, BONUS_SLOTS, ANCIENT_TOOLS, STAFFS, SHIELDS, Items.HANDS, Items.CURIOS);
 
         this.tag(Items.dt_scythe).add(TinkerTools.scythe.asItem(), TinkerTools.kama.asItem(), DreamtinkerTools.narcissus_wing.asItem());
         this.tag(ItemTagRegistry.SCYTHE).addTags(Items.dt_scythe);
         this.tag(Items.dt_hammer).add(TinkerTools.veinHammer.asItem(), TinkerTools.sledgeHammer.asItem());
         this.tag(ItemTagRegistry.HIDDEN_UNTIL_BLACK_CRYSTAL)
             .addOptional(malignant_gluttony.getId());
-        addItemsTags(DreamtinkerTools.silence_glove, DURABILITY, MELEE, BONUS_SLOTS, ANCIENT_TOOLS, STAFFS, SHIELDS,
-                     Items.HANDS, Items.CURIOS);
         //parts
         IntrinsicTagAppender<Item> goldCasts = this.tag(TinkerTags.Items.GOLD_CASTS);
         IntrinsicTagAppender<Item> sandCasts = this.tag(TinkerTags.Items.SAND_CASTS);
@@ -136,7 +135,6 @@ public class ItemTagProvider extends ItemTagsProvider {
             .addTags(Items.raw_stibnite, Items.raw_orichalcum, Items.raw_coldIron, Items.raw_ShadowSilver, Items.raw_TransmutationGold);
 
         this.tag(ItemTags.FOX_FOOD).add(white_peach.get());
-        this.tag(ItemTags.ARROWS).add(DreamtinkerTools.tntarrow.get());
         addItemsTags(narcissus.asItem(), ItemTags.SMALL_FLOWERS, ItemTags.FLOWERS);
 
         this.tag(ItemTags.BEACON_PAYMENT_ITEMS)

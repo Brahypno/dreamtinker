@@ -1,155 +1,75 @@
 package org.dreamtinker.dreamtinker.tools.items;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.FakePlayerFactory;
-import net.minecraftforge.entity.IEntityAdditionalSpawnData;
-import net.minecraftforge.network.NetworkHooks;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.dreamtinker.dreamtinker.utils.DirectionalResistanceExplosionDamageCalculator;
 import org.jetbrains.annotations.NotNull;
+import slimeknights.mantle.client.SafeClientAccess;
+import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
-import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeDamageModifierHook;
-import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.definition.ToolDefinition;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
-import slimeknights.tconstruct.library.tools.item.ModifiableItem;
+import slimeknights.tconstruct.library.tools.item.ModifiableArrowItem;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
+import slimeknights.tconstruct.tools.entity.ModifiableArrow;
 
 import java.util.List;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.*;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.ContinuousExplodeTimes;
 
-public class TNTArrow extends ModifiableItem {
+public class TNTArrow extends ModifiableArrowItem {
     public static final ResourceLocation TAG_CONTINUOUS = Dreamtinker.getLocation("continuous_explode");
-    public static final ResourceLocation TAG_EXPLODE_ALREADY = Dreamtinker.getLocation("already_explode");
+    public static final String TAG_TRIGGERED_ALREADY = Dreamtinker.getLocation("already_explode").toString();
 
     public void appendHoverText(@NotNull ItemStack stack, Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
+        if (TooltipKey.SHIFT == SafeClientAccess.getTooltipKey())
+            tooltip = DTHelper.getMeleeStats(ToolStack.from(stack), tooltip);
         super.appendHoverText(stack, level, tooltip, flag);
-        int timeAllows = ModifierUtil.getModifierLevel(stack, DreamtinkerModifiers.Ids.continuous_explode) * ContinuousExplodeTimes.get();
-        int currentTime = ModifierUtil.getPersistentInt(stack, TAG_CONTINUOUS, 0);
-        if (currentTime < timeAllows)
-            tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.continuous_explode").append(String.valueOf(timeAllows - currentTime))
-                                 .withStyle(ChatFormatting.DARK_RED));
-    }
-
-    @Override
-    public void inventoryTick(ItemStack stack, Level worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-        if (!worldIn.isClientSide){
-            ToolStack ts = ToolStack.from(stack);
-            if (ts.getPersistentData().contains(TAG_EXPLODE_ALREADY)){
-                ts.getPersistentData().remove(TAG_EXPLODE_ALREADY);
-                ts.updateStack(stack);
-            }
+        if (TooltipKey.SHIFT == SafeClientAccess.getTooltipKey()){
+            int timeAllows = ModifierUtil.getModifierLevel(stack, DreamtinkerModifiers.Ids.continuous_explode) * ContinuousExplodeTimes.get();
+            int currentTime = ModifierUtil.getPersistentInt(stack, TAG_CONTINUOUS, 0);
+            if (currentTime < timeAllows)
+                tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.continuous_explode").append(String.valueOf(timeAllows - currentTime))
+                                     .withStyle(ChatFormatting.DARK_RED));
         }
-        InventoryTickModifierHook.heldInventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
-    }
-
-    @Override
-    public boolean onLeftClickEntity(ItemStack stack, Player player, Entity target) {
-        return false;
-    }
-
-    @Override
-    public boolean mineBlock(ItemStack stack, Level worldIn, BlockState state, BlockPos pos, LivingEntity entityLiving) {
-        return false;
     }
 
     public TNTArrow(Properties properties, ToolDefinition toolDefinition, int maxStackSize) {
-        super(properties, toolDefinition, maxStackSize);
+        super(properties, toolDefinition);
     }
 
     public @NotNull AbstractArrow createArrow(Level world, ItemStack stack, LivingEntity shooter) {
-        return new TNTArrowEntity(world, shooter, stack);
+        TNTArrowEntity arrow = new TNTArrowEntity(world, shooter);
+        arrow.onCreate(stack, shooter);
+        return arrow;
     }
 
-    public static class TNTArrowEntity extends AbstractArrow implements IEntityAdditionalSpawnData {
-
-
-        public TNTArrowEntity(EntityType<? extends AbstractArrow> type, Level world) {
-            super(type, world);
-        }
-
-        public ItemStack tntarrow = ItemStack.EMPTY;
-        private static final EntityDataAccessor<ItemStack> DATA_TOOL =
-                SynchedEntityData.defineId(TNTArrowEntity.class, EntityDataSerializers.ITEM_STACK);
-
-        public TNTArrowEntity(Level world, LivingEntity shooter, ItemStack stack) {
-            super(DreamtinkerModifiers.TNTARROW.get(), shooter, world);
-            this.tntarrow = stack;
-            setToolStack(stack.copy());
-        }
-
-        @Override
-        protected void defineSynchedData() {
-            super.defineSynchedData();
-            this.entityData.define(DATA_TOOL, ItemStack.EMPTY);
-        }
-
-        public void setToolStack(ItemStack stack) {
-            this.entityData.set(DATA_TOOL, stack.copy());
-        }
-
-        public ItemStack getToolStackSynced() {
-            return this.entityData.get(DATA_TOOL);
-        }
-
-        @Override
-        public void addAdditionalSaveData(CompoundTag tag) {
-            super.addAdditionalSaveData(tag);
-            ItemStack s = getToolStackSynced();
-            if (!s.isEmpty())
-                tag.put("Tool", s.save(new CompoundTag()));
-        }
-
-        @Override
-        public void readAdditionalSaveData(CompoundTag tag) {
-            super.readAdditionalSaveData(tag);
-            if (tag.contains("Tool"))
-                setToolStack(ItemStack.of(tag.getCompound("Tool")));
-        }
-
-        // —— 初次生成时下发到客户端（关键） —— //
-        @Override
-        public void writeSpawnData(FriendlyByteBuf buf) {buf.writeItem(getToolStackSynced());}
-
-        @Override
-        public void readSpawnData(FriendlyByteBuf buf) {setToolStack(buf.readItem());}
-
-        @Override
-        public @NotNull Packet<ClientGamePacketListener> getAddEntityPacket() {
-            return NetworkHooks.getEntitySpawningPacket(this);
+    public static class TNTArrowEntity extends ModifiableArrow {
+        public TNTArrowEntity(Level world, LivingEntity shooter) {
+            super(world, shooter);
         }
 
         protected void hitEntity(Entity entity) {
@@ -157,7 +77,7 @@ public class TNTArrow extends ModifiableItem {
                 return;
             entity.setInvulnerable(false);
             entity.invulnerableTime = 0;
-            ToolStack toolStack = ToolStack.from(this.tntarrow);
+            ToolStack toolStack = ToolStack.from(this.getRawPickupItem());
             if (entity.getUUID() != this.getOwner().getUUID()){
                 ToolAttackUtil.performAttack(toolStack,
                                              ToolAttackContext.attacker((LivingEntity) this.getOwner()).target(entity).cooldown(1).toolAttributes(toolStack)
@@ -191,11 +111,11 @@ public class TNTArrow extends ModifiableItem {
             if (!this.level().isClientSide){
                 Vec3 hitPos = result.getLocation();
                 if (this.getOwner() instanceof LivingEntity owner){//Nothing happened if no owner or not alive
-                    boolean explosion = 0 < ModifierUtil.getModifierLevel(tntarrow, DreamtinkerModifiers.Ids.force_to_explosion);
+                    if (this.getPersistentData().contains(TAG_TRIGGERED_ALREADY))
+                        return;
+                    boolean explosion = 0 < ModifierUtil.getModifierLevel(this.getRawPickupItem(), DreamtinkerModifiers.Ids.force_to_explosion);
                     if (explosion){
-                        ToolStack ts = ToolStack.from(tntarrow);
-                        if (ts.getPersistentData().contains(TAG_EXPLODE_ALREADY))
-                            return;
+                        ToolStack ts = ToolStack.from(this.getRawPickupItem());
                         ToolAttackContext context = ToolAttackContext.attacker(owner).target(owner).cooldown(0).toolAttributes(ts).build();
 
                         float baseDamage = context.getBaseDamage();
@@ -203,8 +123,7 @@ public class TNTArrow extends ModifiableItem {
                         List<ModifierEntry> modifiers = ts.getModifierList();
 
                         for (ModifierEntry entry : modifiers) {
-                            damage = ((MeleeDamageModifierHook) entry.getHook(ModifierHooks.MELEE_DAMAGE)).getMeleeDamage(ts, entry, context, baseDamage,
-                                                                                                                          damage);
+                            damage = (entry.getHook(ModifierHooks.MELEE_DAMAGE)).getMeleeDamage(ts, entry, context, baseDamage, damage);
                         }
                         double explosionPower =
                                 Math.min(Math.sqrt(damage) * 2, ForceExplosionPower.get());
@@ -218,8 +137,6 @@ public class TNTArrow extends ModifiableItem {
                                 (float) explosionPower, false,
                                 Level.ExplosionInteraction.TNT
                         );
-                        ts.getPersistentData().putBoolean(TAG_EXPLODE_ALREADY, true);
-                        ts.updateStack(tntarrow);
                     }else {
                         float sound = 2.0F;
                         // 查找半径内的实体
@@ -240,27 +157,37 @@ public class TNTArrow extends ModifiableItem {
                         }
                         this.playSound(SoundEvents.GENERIC_EXPLODE, sound, (1.0F + (random.nextFloat() - random.nextFloat()) * 0.2F) * 0.7F);
                     }
-                    int timeAllows = ModifierUtil.getModifierLevel(tntarrow, DreamtinkerModifiers.Ids.continuous_explode) * ContinuousExplodeTimes.get();
-                    int currentTime = ModifierUtil.getPersistentInt(tntarrow, TAG_CONTINUOUS, 0);
-                    if (currentTime < timeAllows){
-                        ToolStack ts = ToolStack.from(tntarrow);
-                        ts.getPersistentData().putInt(TAG_CONTINUOUS, ++currentTime);
-                        ts.updateStack(tntarrow);
+                    int timeAllows =
+                            ModifierUtil.getModifierLevel(this.getRawPickupItem(), DreamtinkerModifiers.Ids.continuous_explode) * ContinuousExplodeTimes.get();
+                    int currentTimes = ModifierUtil.getPersistentInt(this.getRawPickupItem(), TAG_CONTINUOUS, 0);
+                    if (++currentTimes < timeAllows){
+                        this.getPersistentData().putInt(String.valueOf(TAG_CONTINUOUS), currentTimes);
+                        this.getPersistentData().putBoolean(TAG_TRIGGERED_ALREADY, true);
                     }else
                         this.discard();
                 }
             }
         }
 
+        public @NotNull ItemStack getRawPickupItem() {
+            return super.getPickupItem();
+        }
+
         @Override
         public @NotNull ItemStack getPickupItem() {
-            return tntarrow;
+            ItemStack stack = super.getPickupItem();
+            ToolStack ts = ToolStack.from(stack);
+            int continous = this.getPersistentData().getInt(String.valueOf(TAG_CONTINUOUS));
+            ts.getPersistentData().putInt(TAG_CONTINUOUS, continous);
+            ts.updateStack(stack);
+            return stack;
         }
+
 
         @Override
         public void tick() {
             super.tick();
-            if (!this.isNoGravity() && ModifierUtil.getModifierLevel(tntarrow, DreamtinkerModifiers.Ids.force_to_explosion) <= 0){
+            if (!this.isNoGravity() && ModifierUtil.getModifierLevel(this.getPickupItem(), DreamtinkerModifiers.Ids.force_to_explosion) <= 0){
                 this.setDeltaMovement(this.getDeltaMovement().add(0.0, TNT_ARROW_GRAVITY.get(), 0.0));
             }
         }

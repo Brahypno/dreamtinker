@@ -26,7 +26,6 @@ import org.dreamtinker.dreamtinker.library.client.particle.VibeBarParticleType;
 import org.dreamtinker.dreamtinker.library.worldgen.ScatterReplaceOreConfiguration;
 import org.dreamtinker.dreamtinker.library.worldgen.ScatterReplaceOreFeature;
 import org.dreamtinker.dreamtinker.library.worldgen.TagAndTagRuleTest;
-import org.dreamtinker.dreamtinker.tools.items.TNTArrow;
 import slimeknights.mantle.registration.deferred.EntityTypeDeferredRegister;
 import slimeknights.mantle.registration.deferred.FluidDeferredRegister;
 import slimeknights.mantle.registration.deferred.SynchronizedDeferredRegister;
@@ -68,16 +67,6 @@ public abstract class DreamtinkerModule {
 
     public static final RegistryObject<Codec<? extends IGlobalLootModifier>> ANTIMONY_LOOT =
             LOOT_MODIFIERS.register("extra_drop_loot", () -> ExtraDropLootModifier.CODEC);
-
-
-    public static final RegistryObject<EntityType<TNTArrow.TNTArrowEntity>> TNTARROW =
-            ENTITIES.register("tnt_arrow",
-                              () -> EntityType.Builder.<TNTArrow.TNTArrowEntity>of(TNTArrow.TNTArrowEntity::new, MobCategory.MISC)
-                                                      .sized(0.5F, 0.5F) // 确保箭矢有合适的 hitbox
-                                                      .clientTrackingRange(4) // 追踪范围，避免箭矢丢失
-                                                      .updateInterval(20)
-
-            );
 
     public static final RegistryObject<EntityType<NarcissusFluidProjectile>> NarcissusSpitEntity =
             ENTITIES.register("narcissus_fluid_spit",

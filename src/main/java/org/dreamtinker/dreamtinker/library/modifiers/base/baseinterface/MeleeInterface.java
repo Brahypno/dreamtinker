@@ -12,7 +12,7 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 public interface MeleeInterface extends MeleeHitModifierHook, MeleeDamageModifierHook, MonsterMeleeHitModifierHook {
     default void MeleeInterfaceInit(ModuleHookMap.Builder hookBuilder) {
-        hookBuilder.addHook(this, ModifierHooks.MELEE_DAMAGE, ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
+        hookBuilder.addHook(this, ModifierHooks.MELEE_DAMAGE, ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT, ModifierHooks.MONSTER_MELEE_DAMAGE);
     }
 
     default float getMeleeDamage(@NotNull IToolStackView tool, @NotNull ModifierEntry modifier, @NotNull ToolAttackContext context, float baseDamage, float damage) {

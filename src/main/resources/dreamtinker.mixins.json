@@ -5,9 +5,6 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "dreamtinker.refmap.json",
   "mixins": [
-    "BowItemMixin",
-    "ModifiableBowItemMixin",
-    "ModifiableCrossbowItemMixin",
     "isInvertedHealAndHarmMixin",
     "GeneralCompact.ExtraSCYTHEModifier",
     "enigmatic_legacy_mixin.EnigmaticEventHandlerMixin",

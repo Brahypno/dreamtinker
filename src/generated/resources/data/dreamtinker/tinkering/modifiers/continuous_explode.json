@@ -1,4 +1,10 @@
 {
   "level_display": "tconstruct:single_level",
+  "modules": [
+    {
+      "type": "tconstruct:volatile_flag",
+      "flag": "tconstruct:indestructible"
+    }
+  ],
   "tooltip_display": "always"
 }
