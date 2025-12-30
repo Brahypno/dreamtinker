@@ -61,7 +61,7 @@ public class AugmentTinker extends AbstractAugment {
             }else {
                 float velocity = ConditionalStatModifierHook.getModifiedStat(tool, shooter, ToolStats.VELOCITY);
                 float proj_damage = tool.getStats().get(ToolStats.PROJECTILE_DAMAGE);
-                builder.addAccelerationModifier(velocity);
+                builder.addAccelerationModifier(velocity * 6);
                 damage = Mth.ceil(Mth.clamp((double) velocity * 3 * proj_damage, (double) 0.0F, (double) Integer.MAX_VALUE));
             }
             builder.addDamageModifier(damage);

@@ -1158,6 +1158,6 @@
   "stat.dreamtinker.tool.display.designs": "Circle Attack",
 
   "dreamtinker.glyph_name.glyph_tinker": "Tinker ability",
-  "dreamtinker.glyph_desc.glyph_tinker": "Only working in the Per Aspera Scriptum and allow tinkers` modifiers being used. Like amplify but not triggered continuously"
+  "dreamtinker.glyph_desc.glyph_tinker": "Only working in the Per Aspera Scriptum and allow tinkers` modifiers&tool status being used. Like amplify but not triggered continuously and mostly limited on glyph that deal damage."
 
 }

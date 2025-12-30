@@ -34,8 +34,8 @@
       },
       "icon": "dreamtinker:nova_misc",
       "translation_key": "item.dreamtinker.nova_misc",
-      "x": 7,
-      "y": 26
+      "x": 45,
+      "y": 45
     },
     {
       "filter": {
@@ -43,8 +43,8 @@
       },
       "icon": "dreamtinker:nova_wrapper",
       "translation_key": "item.dreamtinker.nova_wrapper",
-      "x": 25,
-      "y": 26
+      "x": 26,
+      "y": 62
     },
     {
       "filter": {
@@ -52,8 +52,8 @@
       },
       "icon": "dreamtinker:nova_rostrum",
       "translation_key": "item.dreamtinker.nova_rostrum",
-      "x": 45,
-      "y": 26
+      "x": 7,
+      "y": 45
     },
     {
       "filter": {
@@ -61,10 +61,10 @@
       },
       "icon": "dreamtinker:nova_cover",
       "translation_key": "item.dreamtinker.nova_cover",
-      "x": 25,
-      "y": 62
+      "x": 26,
+      "y": 26
     }
   ],
-  "sortIndex": 11,
+  "sortIndex": 14,
   "translation_key": "item.dreamtinker.per_aspera_scriptum"
 }

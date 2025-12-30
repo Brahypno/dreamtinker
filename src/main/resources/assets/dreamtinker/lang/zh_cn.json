@@ -1156,5 +1156,5 @@
   "stat.dreamtinker.tool.display.designs": "范围攻击",
 
   "dreamtinker.glyph_name.glyph_tinker": "匠魂之力",
-  "dreamtinker.glyph_desc.glyph_tinker": "仅在历艰成书上有效，容许弹射物，法术效果触发部分匠魂的材料与词条。类似强化但连续使用仅生效一次。"
+  "dreamtinker.glyph_desc.glyph_tinker": "仅在历艰成书上有效，容许弹射物，法术效果触发部分匠魂的词条与属性。类似强化但连续使用仅生效一次。效果部分限定在伤害相关类型上"
 }

@@ -59,7 +59,7 @@ public class DreamtinkerStationLayout extends AbstractStationSlotLayoutProvider 
                 .addInputItem(new Pattern("dreamtinker:silky_cloth"), TinkerModifiers.silkyCloth, 33, 53)
                 .build();
         defineModifiable(DreamtinkerTools.narcissus_wing)
-                .sortIndex(SORT_RANGED + SORT_LARGE)
+                .sortIndex(SORT_LARGE)
                 .addInputItem(DreamtinkerToolParts.memoryOrthant.get(), 7, 26)
                 .addInputItem(DreamtinkerToolParts.wishOrthant.get(), 25, 26)
                 .addInputItem(DreamtinkerToolParts.soulOrthant.get(), 45, 26)
@@ -67,11 +67,11 @@ public class DreamtinkerStationLayout extends AbstractStationSlotLayoutProvider 
                 .addInputItem(DreamtinkerToolParts.reasonEmanation.get(), 25, 46)
                 .build();
         defineModifiable(DreamtinkerTools.per_aspera_scriptum.get(), DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"))
-                .sortIndex(SORT_WEAPON + SORT_RANGED)
-                .addInputItem(DreamtinkerToolParts.NovaMisc.get(), 7, 26)
-                .addInputItem(DreamtinkerToolParts.NovaWrapper.get(), 25, 26)
-                .addInputItem(DreamtinkerToolParts.NovaRostrum.get(), 45, 26)
-                .addInputItem(DreamtinkerToolParts.NovaCover.get(), 25, 62)
+                .sortIndex(SORT_RANGED + SORT_LARGE)
+                .addInputItem(DreamtinkerToolParts.NovaMisc.get(), 45, 45)
+                .addInputItem(DreamtinkerToolParts.NovaWrapper.get(), 26, 62)
+                .addInputItem(DreamtinkerToolParts.NovaRostrum.get(), 7, 45)
+                .addInputItem(DreamtinkerToolParts.NovaCover.get(), 26, 26)
                 .build();
 
     }

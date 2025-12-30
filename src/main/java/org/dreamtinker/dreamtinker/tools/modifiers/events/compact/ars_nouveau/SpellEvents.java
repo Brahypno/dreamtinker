@@ -36,11 +36,7 @@ public class SpellEvents {
             ToolStack tool = ToolStack.from(casterTool);
             Entity target = event.target;
             InteractionHand hand = shooter.getMainHandItem().equals(casterTool) ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
-            if (isMelee(context)){
-                MeleeSpellDamagePre(shooter, target, hand, tool, event.damage);
-            }else {
-
-            }
+            MeleeSpellDamagePre(shooter, target, hand, tool, event.damage);
         }
     }
 
@@ -52,11 +48,7 @@ public class SpellEvents {
             ToolStack tool = ToolStack.from(casterTool);
             Entity target = event.target;
             InteractionHand hand = shooter.getMainHandItem().equals(casterTool) ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
-            if (isMelee(context)){
-                MeleeSpellDamagePost(shooter, target, hand, tool, event.damage);
-            }else {
-
-            }
+            MeleeSpellDamagePost(shooter, target, hand, tool, event.damage);
         }
     }
 
