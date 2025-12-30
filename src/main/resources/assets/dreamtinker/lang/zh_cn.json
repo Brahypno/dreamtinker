@@ -550,6 +550,7 @@
   "modifier.dreamtinker.deeper_water_killer": "深水生杀手",
   "modifier.dreamtinker.deeper_water_killer.flavor": "横行霸道",
   "modifier.dreamtinker.deeper_water_killer.description": "对水生生物，沾水生物施加虚弱,造成更多伤害",
+  "modifier.dreamtinker.deeper_water_killer.attack_damage": "对水生或沾水生物伤害",
   "modifier.dreamtinker.malum_expose_soul": "击碎灵魂",
   "modifier.dreamtinker.malum_expose_soul.flavor": "强制破坏",
   "modifier.dreamtinker.malum_expose_soul.description": "击碎目标灵魂并使其可以掉落精魂",
