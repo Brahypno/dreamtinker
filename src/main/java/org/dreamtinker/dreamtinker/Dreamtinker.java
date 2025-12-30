@@ -55,7 +55,7 @@ import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.ars_nouveau.ArsPlayerCraftEvent;
-import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.ars_nouveau.SpellDamageEvents;
+import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.ars_nouveau.SpellEvents;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.curio.curio_hurt_handler;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.enigmatic_legacy.death_handler;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.malum.malum_events_handler;
@@ -129,8 +129,9 @@ public class Dreamtinker {
             }
             if (ModList.get().isLoaded("ars_nouveau") && !configCompactDisabled("ars_nouveau")){
                 forgeEventBus.addListener(ArsPlayerCraftEvent::PlayerCraftEvent);
-                forgeEventBus.addListener(EventPriority.HIGHEST, SpellDamageEvents::PreSpellDamageEvent);
-                forgeEventBus.addListener(EventPriority.HIGHEST, SpellDamageEvents::PostSpellDamageEvent);
+                forgeEventBus.addListener(EventPriority.HIGHEST, SpellEvents::PreSpellDamageEvent);
+                forgeEventBus.addListener(EventPriority.HIGHEST, SpellEvents::PostSpellDamageEvent);
+                forgeEventBus.addListener(EventPriority.HIGHEST, SpellEvents::SpellProjectileHitEvent);
             }
 
 
