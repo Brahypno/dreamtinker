@@ -24,7 +24,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
 
     private void addMeleeHarvest() {
         addMaterialStats(DreamtinkerMaterialIds.echo_alloy,
-                         new HeadMaterialStats(400, 3.5f, Tiers.DIAMOND, 4.3f),
+                         new HeadMaterialStats(400, 3.5f, Tiers.DIAMOND, 3f),
                          HandleMaterialStats.multipliers().durability(0.5f).miningSpeed(0.5f).attackDamage(1.5f).attackSpeed(0.5f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.moonlight_ice,
@@ -84,7 +84,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          HandleMaterialStats.multipliers().durability(0.7f).miningSpeed(1.0f).attackDamage(1.1f).attackSpeed(1.05f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.orichalcum,
-                         new HeadMaterialStats(420, 7f, Tiers.IRON, 0.75f),
+                         new HeadMaterialStats(420, 7f, Tiers.IRON, 1.0f),
                          HandleMaterialStats.multipliers().durability(0.8f).miningSpeed(1.2f).attackDamage(1.1f).attackSpeed(1.05f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.cold_iron,
@@ -100,7 +100,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          HandleMaterialStats.multipliers().durability(0.6f).miningSpeed(1.10f).attackDamage(1.10f).attackSpeed(1.10f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.ArcaneGold,
-                         new HeadMaterialStats(66, 9f, Tiers.GOLD, 0.75f),
+                         new HeadMaterialStats(66, 9f, Tiers.GOLD, 1f),
                          HandleMaterialStats.multipliers().durability(0.7f).attackDamage(0.90f).miningSpeed(1.25f).attackSpeed(1.20f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.SpikyShard,
@@ -178,7 +178,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
     private void addRanged() {
         addMaterialStats(DreamtinkerMaterialIds.echo_alloy,
                          new LimbMaterialStats(400, -1f, 2.0f, 1.0f),
-                         new GripMaterialStats(-0.5f, 1.0f, 4.0f));
+                         new GripMaterialStats(-0.5f, 1.0f, 3.0f));
         addMaterialStats(DreamtinkerMaterialIds.valentinite,
                          new LimbMaterialStats(200, 0.1f, 0.1f, -.1f));
         addMaterialStats(DreamtinkerMaterialIds.nigrescence_string, StatlessMaterialStats.BOWSTRING);
@@ -188,32 +188,32 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new LimbMaterialStats(777, 7.7f, 0.7f, .7f));
         addMaterialStats(DreamtinkerMaterialIds.crying_obsidian,
                          new LimbMaterialStats(800, 0.3f, -0.2f, 0.3f),
-                         new GripMaterialStats(0.8f, -0.2f, 1.0f));
+                         new GripMaterialStats(0.8f, -0.2f, 1.5f));
         addMaterialStats(DreamtinkerMaterialIds.larimar,
                          new LimbMaterialStats(900, -0.2f, 0.2f, 0.2f),
-                         new GripMaterialStats(0.5f, 0.2f, 1.0f));
+                         new GripMaterialStats(0.5f, 0.2f, 0.5f));
         addMaterialStats(DreamtinkerMaterialIds.amber,
                          new LimbMaterialStats(1200, -0.2f, 0.1f, 0.1f),
-                         new GripMaterialStats(1.0f, 0.15f, 2.0f));
+                         new GripMaterialStats(1.0f, 0.15f, 0.5f));
         addMaterialStats(DreamtinkerMaterialIds.half_rotten_string, StatlessMaterialStats.BOWSTRING);
         addMaterialStats(DreamtinkerMaterialIds.desire_gem,
                          new LimbMaterialStats(600, 0.7f, -0.3f, 0.3f),
-                         new GripMaterialStats(0.8f, 0.3f, 3.5f));
+                         new GripMaterialStats(0.8f, 0.3f, 6f));
         addMaterialStats(DreamtinkerMaterialIds.soul_steel,
                          new LimbMaterialStats(600, 0.10f, 0.05f, 0f),
-                         new GripMaterialStats(.05f, 0.05f, 2.75f));
+                         new GripMaterialStats(.05f, 0.05f, 2.5f));
         addMaterialStats(DreamtinkerMaterialIds.black_sapphire,
                          new LimbMaterialStats(2000, 20f, 30f, 20f),
                          new GripMaterialStats(1.0f, 1f, 10f));
         addMaterialStats(DreamtinkerMaterialIds.scolecite,
                          new LimbMaterialStats(600, 0.05f, 0.05f, 0.05f),
-                         new GripMaterialStats(0.05f, 0.05f, 3f));
+                         new GripMaterialStats(0.05f, 0.05f, 1.5f));
         addMaterialStats(DreamtinkerMaterialIds.shiningFlint,
                          new LimbMaterialStats(300, -0.3f, 0.25f, -0.05f),
-                         new GripMaterialStats(-0.2f, -0.05f, 1.75f));
+                         new GripMaterialStats(-0.2f, -0.05f, 1.50f));
         addMaterialStats(DreamtinkerMaterialIds.orichalcum,
                          new LimbMaterialStats(400, -0.1f, 0.15f, 0f),
-                         new GripMaterialStats(-0.2f, 0.05f, 1.05f));
+                         new GripMaterialStats(-0.2f, 0.05f, 1.0f));
         addMaterialStats(DreamtinkerMaterialIds.cold_iron,
                          new LimbMaterialStats(400, -0.4f, 0.2f, 0f),
                          new GripMaterialStats(0.2f, 0f, 1.5f));
@@ -225,7 +225,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new GripMaterialStats(-0.2f, 0.2f, 1.0f));
         addMaterialStats(DreamtinkerMaterialIds.ArcaneGold,
                          new LimbMaterialStats(32, 0.1f, 0.15f, -0.2f),
-                         new GripMaterialStats(-0.2f, 0.15f, 0f));
+                         new GripMaterialStats(-0.2f, 0.15f, 1f));
 
         addCompactRanged();
     }
@@ -233,15 +233,15 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
     private void addCompactRanged() {
         addMaterialStats(DreamtinkerMaterialIds.etherium,
                          new LimbMaterialStats(3000, 0.7f, 0.7f, 0.6f),
-                         new GripMaterialStats(0.0f, 0.6f, 1.0f),
+                         new GripMaterialStats(0.0f, 0.6f, 4f),
                          StatlessMaterialStats.BOWSTRING);
         addMaterialStats(DreamtinkerMaterialIds.nefarious,
                          new LimbMaterialStats(2000, 0.9f, 0.9f, -0.6f),
-                         new GripMaterialStats(0.2f, 0.6f, 1.0f),
+                         new GripMaterialStats(0.2f, 0.6f, 7f),
                          StatlessMaterialStats.BOWSTRING);
         addMaterialStats(DreamtinkerMaterialIds.soul_etherium,
                          new LimbMaterialStats(10, 1.6f, -0.1f, 0.6f),
-                         new GripMaterialStats(0.2f, -0.6f, 7.0f),
+                         new GripMaterialStats(0.2f, -0.6f, 6f),
                          StatlessMaterialStats.BOWSTRING);
 
         addMaterialStats(DreamtinkerMaterialIds.spirit_fabric,

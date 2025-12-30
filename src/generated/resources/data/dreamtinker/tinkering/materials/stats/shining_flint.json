@@ -5,7 +5,7 @@
     "tconstruct:grip": {
       "accuracy": -0.05,
       "durability": -0.2,
-      "melee_damage": 1.75
+      "melee_damage": 1.5
     },
     "tconstruct:handle": {
       "durability": -0.3,
