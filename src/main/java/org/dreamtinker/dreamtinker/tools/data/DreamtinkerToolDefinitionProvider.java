@@ -50,6 +50,15 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
             DefaultMaterialsModule.builder().material(tier1Material, tier1Material, tier1Material, tier1Material, tier1Material).build();
     DefaultMaterialsModule ancientTwoParts = DefaultMaterialsModule.builder().material(randomMaterial, randomMaterial).build();
     DefaultMaterialsModule ancientThreeParts = DefaultMaterialsModule.builder().material(randomMaterial, randomMaterial, randomMaterial).build();
+    ToolModule large_soul_weapon_slots = ToolSlotsModule.builder()
+                                                        .slots(SlotType.SOUL, 1)
+                                                        .slots(SlotType.ABILITY, 1)
+                                                        .slots(SlotType.UPGRADE, 2).build();
+
+    ToolModule small_soul_weapon_slots = ToolSlotsModule.builder()
+                                                        .slots(SlotType.SOUL, 2)
+                                                        .slots(SlotType.ABILITY, 1)
+                                                        .slots(SlotType.UPGRADE, 3).build();
 
     @Override
     protected void addToolDefinitions() {
@@ -77,7 +86,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                                                              .set(ToolStats.ATTACK_SPEED, 0.7f)
                                                              .set(ToolStats.MINING_SPEED, 0.25f)
                                                              .set(ToolStats.DURABILITY, 1.1f).build()))
-                .module(new ToolSlotsModule(ImmutableMap.of(SlotType.UPGRADE, 4, SlotType.ABILITY, 4)))
+                .module(new ToolSlotsModule(ImmutableMap.of(SlotType.UPGRADE, 4, SlotType.ABILITY, 2)))
                 // traits
                 .module(ToolTraitsModule.builder()
                                         .trait(DreamtinkerModifiers.Ids.long_tool, 4)
@@ -115,7 +124,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
         DefaultMaterialsModule underPlateMaterials = DefaultMaterialsModule.builder().material(tier2Material, tier2Material, tier2Material).build();
         ToolModule plateSlots =
                 ToolSlotsModule.builder()
-                               .slots(SlotType.SOUL, 3)
+                               .slots(SlotType.SOUL, 2)
                                .slots(SlotType.ABILITY, 2)
                                .slots(SlotType.UPGRADE, 1)
                                .slots(SlotType.DEFENSE, 1).build();
@@ -183,7 +192,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 // stats
                 .module(new SetStatsModule(StatsNBT.builder()
                                                    .set(ToolStats.ATTACK_SPEED, 1.2f).build()))
-                .module(new ToolSlotsModule(ImmutableMap.of(SlotType.SOUL, 2, SlotType.ABILITY, 1, SlotType.UPGRADE, 3)))
+                .module(small_soul_weapon_slots)
                 // traits
                 .module(ToolTraitsModule.builder()
                                         .trait(DreamtinkerModifiers.Ids.weapon_slots)
@@ -239,7 +248,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 .module(ToolTraitsModule.builder()
                                         .trait(DreamtinkerModifiers.Ids.nova_spell_tiers)
                                         .trait(DreamtinkerModifiers.nova_scriptum_attributes).build())
-                .largeToolStartingSlots();
+                .module(large_soul_weapon_slots);
         // behavior;
     }
 
