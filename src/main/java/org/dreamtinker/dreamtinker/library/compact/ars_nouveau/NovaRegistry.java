@@ -1,9 +1,17 @@
 package org.dreamtinker.dreamtinker.library.compact.ars_nouveau;
 
+import com.hollingsworth.arsnouveau.api.enchanting_apparatus.EnchantmentRecipe;
 import com.hollingsworth.arsnouveau.api.perk.PerkSlot;
 import com.hollingsworth.arsnouveau.api.registry.GlyphRegistry;
 import com.hollingsworth.arsnouveau.api.registry.PerkRegistry;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
+import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.DreamtinkerModule;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaBook.ModifiableSpellBook;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.Spell.AugmentTinker;
@@ -21,6 +29,14 @@ public class NovaRegistry extends DreamtinkerModule {
     public static final ItemObject<ModifiableSpellBook> per_aspera_scriptum =
             NOVA_MODI_TOOLS.register("per_aspera_scriptum", () -> new ModifiableSpellBook(UNSTACKABLE_PROPS, NovaRegistry.PerAsperaScriptum));
     public static final ToolDefinition PerAsperaScriptum = ToolDefinition.create(NovaRegistry.per_aspera_scriptum);
+
+    public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS =
+            DeferredRegister.create(ForgeRegistries.Keys.RECIPE_SERIALIZERS, Dreamtinker.MODID);
+    public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(ForgeRegistries.Keys.RECIPE_TYPES, Dreamtinker.MODID);
+    public static final RegistryObject<RecipeType<EnchantmentRecipe>> MODIFIABLE_ENCHANTMENT_TYPE =
+            RECIPE_TYPES.register("modifier_enchantment", () -> new ModRecipeType<>());
+    public static final RegistryObject<RecipeSerializer<EnchantmentRecipe>> MODIFIABLE_ENCHANTMENT_SERIALIZER =
+            RECIPE_SERIALIZERS.register("modifier_enchantment", () -> new EnchantmentRecipe.Serializer());
 
     public NovaRegistry() {
         NovaInit();
@@ -75,5 +91,14 @@ public class NovaRegistry extends DreamtinkerModule {
         PerkRegistry.registerPerkProvider(DreamtinkerTools.underPlate.get(ArmorItem.Type.LEGGINGS), stack -> new ModifiableArmorPekHolder(stack, large_slots));
 
         PerkRegistry.registerPerkProvider(DreamtinkerTools.underPlate.get(ArmorItem.Type.HELMET), stack -> new ModifiableArmorPekHolder(stack, small_slots));
+    }
+
+    private static class ModRecipeType<T extends Recipe<?>> implements RecipeType<T> {
+        private ModRecipeType() {
+        }
+
+        public String toString() {
+            return ForgeRegistries.RECIPE_TYPES.getKey(this).toString();
+        }
     }
 }
