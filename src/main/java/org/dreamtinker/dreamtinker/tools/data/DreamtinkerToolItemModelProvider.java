@@ -5,6 +5,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.registration.object.IdAwareObject;
@@ -35,7 +36,7 @@ public class DreamtinkerToolItemModelProvider extends AbstractToolItemModelProvi
         pulling_wo_broken(DreamtinkerTools.narcissus_wing, readJson(Dreamtinker.getLocation("base/narcissus_wing_blocking")), AmmoType.NONE, 1, "wish");
 
         tool(DreamtinkerTools.chain_saw_blade, toolBlocking, "teeth", "handle");
-        tool(DreamtinkerTools.per_aspera_scriptum, toolBlocking);
+        tool(NovaRegistry.per_aspera_scriptum, toolBlocking);
     }
 
     private void pulling_wo_broken(IdAwareObject bow, JsonObject properties, AmmoHandler ammo, int pullingCount, String... pullingParts) throws IOException {

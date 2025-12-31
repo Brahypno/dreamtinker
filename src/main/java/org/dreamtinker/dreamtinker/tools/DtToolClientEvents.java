@@ -16,6 +16,7 @@ import org.dreamtinker.dreamtinker.library.client.AggressiveFoxRender;
 import org.dreamtinker.dreamtinker.library.client.NarcissusFluidProjectileRenderer;
 import org.dreamtinker.dreamtinker.library.client.SlashOrbitRenderer;
 import org.dreamtinker.dreamtinker.library.client.particle.VibeBarParticle;
+import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
 import slimeknights.tconstruct.common.ClientEventBase;
 import slimeknights.tconstruct.library.client.model.TinkerItemProperties;
 import slimeknights.tconstruct.library.client.model.tools.ToolModel;
@@ -34,7 +35,7 @@ public class DtToolClientEvents extends ClientEventBase {
             TinkerItemProperties.registerToolProperties(DreamtinkerTools.narcissus_wing);
             TinkerItemProperties.registerToolProperties(DreamtinkerTools.chain_saw_blade);
             if (ModList.get().isLoaded("ars_nouveau")){
-                TinkerItemProperties.registerToolProperties(DreamtinkerTools.per_aspera_scriptum);
+                TinkerItemProperties.registerToolProperties(NovaRegistry.per_aspera_scriptum);
             }
             Consumer<Item> brokenConsumer = TinkerItemProperties::registerBrokenProperty;
             DreamtinkerTools.underPlate.forEach(brokenConsumer);
@@ -52,7 +53,7 @@ public class DtToolClientEvents extends ClientEventBase {
         registerItemColors(colors, DreamtinkerTools.silence_glove);
         registerItemColors(colors, DreamtinkerTools.chain_saw_blade);
         if (ModList.get().isLoaded("ars_nouveau")){
-            registerItemColors(colors, DreamtinkerTools.per_aspera_scriptum);
+            registerItemColors(colors, NovaRegistry.per_aspera_scriptum);
         }
         Consumer<Item> brokenConsumer = item -> event.register(ToolModel.COLOR_HANDLER, item);
         DreamtinkerTools.underPlate.forEach(brokenConsumer);

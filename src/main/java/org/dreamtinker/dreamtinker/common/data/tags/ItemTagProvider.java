@@ -15,6 +15,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys.Blocks;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys.Items;
+import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.jetbrains.annotations.NotNull;
@@ -55,7 +56,7 @@ public class ItemTagProvider extends ItemTagsProvider {
         addItemsTags(DreamtinkerTools.tntarrow, MULTIPART_TOOL, AMMO, UNSALVAGABLE, UNSWAPPABLE, SINGLE_USE, MELEE, ItemTags.ARROWS, BONUS_SLOTS);
         addItemsTags(DreamtinkerTools.chain_saw_blade, MULTIPART_TOOL, DURABILITY, HARVEST_PRIMARY, MELEE_PRIMARY, INTERACTABLE_RIGHT, AOE, BROAD_TOOLS,
                      BONUS_SLOTS, ItemTags.AXES);
-        addItemsOptionalTags(DreamtinkerTools.per_aspera_scriptum, MULTIPART_TOOL, MELEE_WEAPON, BROAD_RANGED, BONUS_SLOTS, HARVEST, LAUNCHERS);
+        addItemsOptionalTags(NovaRegistry.per_aspera_scriptum, MULTIPART_TOOL, MELEE_WEAPON, BROAD_RANGED, BONUS_SLOTS, HARVEST, LAUNCHERS);
         addItemsTags(DreamtinkerTools.silence_glove, DURABILITY, MELEE, BONUS_SLOTS, ANCIENT_TOOLS, STAFFS, SHIELDS, Items.HANDS, Items.CURIOS);
 
         this.tag(Items.dt_scythe).add(TinkerTools.scythe.asItem(), TinkerTools.kama.asItem(), DreamtinkerTools.narcissus_wing.asItem());

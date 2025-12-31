@@ -7,6 +7,7 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.ToolActions;
 import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
 import org.dreamtinker.dreamtinker.tools.DTtoolsDefinition;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
@@ -231,7 +232,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 .module(new ConditionalAOEIterator(
                         BlockPredicate.tag(TinkerTags.Blocks.TREE_LOGS), new TreeAOEIterator(0, 0),
                         BoxAOEIterator.builder(0, 4, 0).addWidth(2).addDepth(2).direction(IBoxExpansion.HEIGHT).build()));
-        define(DTtoolsDefinition.PerAsperaScriptum)
+        define(NovaRegistry.PerAsperaScriptum)
                 // parts
                 .module(PartStatsModule.parts()
                                        .part(DreamtinkerToolParts.NovaMisc)

@@ -36,6 +36,8 @@ import static org.dreamtinker.dreamtinker.Dreamtinker.MODID;
 
 
 public abstract class DreamtinkerModule {
+    protected static final Item.Properties UNSTACKABLE_PROPS = new Item.Properties().stacksTo(1);
+
     public static final DeferredRegister<Item> EL_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
     public static final DeferredRegister<Item> MALUM_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);

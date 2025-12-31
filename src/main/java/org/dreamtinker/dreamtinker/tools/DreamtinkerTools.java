@@ -12,7 +12,7 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.DreamtinkerModule;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.common.data.tags.MaterialTagProvider;
-import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaBook.ModifiableSpellBook;
+import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerArmorModel;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerStationLayout;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerToolDefinitionProvider;
@@ -42,7 +42,6 @@ public class DreamtinkerTools extends DreamtinkerModule {
         DtTiers.init();
     }
 
-    private static final Item.Properties UNSTACKABLE_PROPS = new Item.Properties().stacksTo(1);
     public static final RegistryObject<CreativeModeTab> TOOL =
             DreamtinkerModule.TABS.register("tool", () -> CreativeModeTab.builder().title(Dreamtinker.makeTranslation("itemGroup", "tool"))
                                                                          .icon(() -> DreamtinkerTools.mashou.get().getRenderTool())
@@ -60,8 +59,6 @@ public class DreamtinkerTools extends DreamtinkerModule {
             MODI_TOOLS.register("silence_glove", () -> new SilenceGlove(UNSTACKABLE_PROPS, DTtoolsDefinition.SilenceGlove));
     public static final ItemObject<ChainSawBlade> chain_saw_blade =
             MODI_TOOLS.register("chain_saw_blade", () -> new ChainSawBlade(UNSTACKABLE_PROPS, DTtoolsDefinition.ChainSawBlade));
-    public static final ItemObject<ModifiableSpellBook> per_aspera_scriptum =
-            NOVA_MODI_TOOLS.register("per_aspera_scriptum", () -> new ModifiableSpellBook(UNSTACKABLE_PROPS, DTtoolsDefinition.PerAsperaScriptum));
 
     @SubscribeEvent
     void gatherData(final GatherDataEvent event) {
@@ -111,7 +108,7 @@ public class DreamtinkerTools extends DreamtinkerModule {
 
         acceptTools(output, underPlate);
         if (ModList.get().isLoaded("ars_nouveau")){
-            acceptTool(output, per_aspera_scriptum);
+            acceptTool(output, NovaRegistry.per_aspera_scriptum);
         }
     }
 

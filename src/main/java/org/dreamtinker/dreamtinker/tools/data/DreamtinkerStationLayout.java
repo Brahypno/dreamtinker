@@ -6,6 +6,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.dreamtinker.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvider;
@@ -66,7 +67,7 @@ public class DreamtinkerStationLayout extends AbstractStationSlotLayoutProvider 
                 .addInputItem(DreamtinkerToolParts.personaOrthant.get(), 25, 62)
                 .addInputItem(DreamtinkerToolParts.reasonEmanation.get(), 25, 46)
                 .build();
-        defineModifiable(DreamtinkerTools.per_aspera_scriptum.get(), DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"))
+        defineModifiable(NovaRegistry.per_aspera_scriptum.get(), DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"))
                 .sortIndex(SORT_RANGED + SORT_LARGE)
                 .addInputItem(DreamtinkerToolParts.NovaMisc.get(), 45, 45)
                 .addInputItem(DreamtinkerToolParts.NovaWrapper.get(), 26, 62)

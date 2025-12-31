@@ -35,6 +35,7 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.fluids.DreamtinkerFluids;
+import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
@@ -133,7 +134,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         toolBuilding(consumer, DreamtinkerTools.narcissus_wing, folder);
         toolBuilding(consumer, DreamtinkerTools.chain_saw_blade, folder);
 
-        toolBuilding(wrapped, DreamtinkerTools.per_aspera_scriptum, folder);
+        toolBuilding(wrapped, NovaRegistry.per_aspera_scriptum, folder);
 
         String recycle_folder = "tools/recycling/";
         PartBuilderToolRecycleBuilder.tools(SizedIngredient.fromItems(4, DreamtinkerTools.tntarrow.get()))
@@ -1749,7 +1750,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
         wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.nova_spell_tiers)
-                             .setTools(Ingredient.of(DreamtinkerTools.per_aspera_scriptum.get()))
+                             .setTools(Ingredient.of(NovaRegistry.per_aspera_scriptum.get()))
                              .addInput(Tags.Items.OBSIDIAN, 1)
                              .addInput(Tags.Items.GEMS_DIAMOND, 3)
                              .addInput(Tags.Items.STORAGE_BLOCKS_QUARTZ, 3)
@@ -1757,7 +1758,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(1)
                              .save(wrapped, wrap(DreamtinkerModifiers.Ids.nova_spell_tiers, slotlessFolder, "_mage"));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.nova_spell_tiers)
-                             .setTools(Ingredient.of(DreamtinkerTools.per_aspera_scriptum.get()))
+                             .setTools(Ingredient.of(NovaRegistry.per_aspera_scriptum.get()))
                              .addInput(Tags.Items.NETHER_STARS, 1)
                              .addInput(Tags.Items.GEMS_EMERALD, 2)
                              .addInput(Tags.Items.ENDER_PEARLS, 3)
