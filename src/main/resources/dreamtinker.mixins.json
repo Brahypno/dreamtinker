@@ -6,6 +6,7 @@
   "refmap": "dreamtinker.refmap.json",
   "mixins": [
     "isInvertedHealAndHarmMixin",
+    "ProjectileMixin",
     "GeneralCompact.ExtraSCYTHEModifier",
     "enigmatic_legacy_mixin.EnigmaticEventHandlerMixin",
     "enigmatic_legacy_mixin.SuperpositionHandlerMixin",
@@ -15,7 +16,10 @@
     "malum_mixin.SoulHandlerMixin",
     "malum_mixin.EdgeOfDeliveranceItemMixin",
     "malum_mixin.MalumScytheItemMixin",
-    "ProjectileMixin","malum_mixin.CrossbowItemMixin","NovaMixin.MethodProjectileMixin","NovaMixin.AugmentCompatibilityValidatorMixin","NovaMixin.ArmorUpgradeRecipeCategoryMixin","NovaMixin.AlterationTableRendererMixin"],
+    "NovaMixin.MethodProjectileMixin",
+    "NovaMixin.AugmentCompatibilityValidatorMixin",
+    "NovaMixin.ArmorUpgradeRecipeCategoryMixin",
+    "NovaMixin.AlterationTableRendererMixin"],
   "client": [
   ],
   "injectors": {

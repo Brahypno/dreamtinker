@@ -12,6 +12,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import static org.dreamtinker.dreamtinker.Dreamtinker.configCompactDisabled;
+
 @Mixin(value = SoulDataHandler.class, remap = false)
 public abstract class SoulHandlerMixin {
     @Inject(
@@ -19,7 +21,7 @@ public abstract class SoulHandlerMixin {
             at = @At("TAIL")
     )
     private static void dreamtinker$extraSoulCheck(LivingHurtEvent event, CallbackInfo ci) {
-        if (event.isCanceled() || event.getAmount() <= 0)
+        if (event.isCanceled() || event.getAmount() <= 0 || configCompactDisabled("malum"))
             return;
 
         DamageSource source = event.getSource();

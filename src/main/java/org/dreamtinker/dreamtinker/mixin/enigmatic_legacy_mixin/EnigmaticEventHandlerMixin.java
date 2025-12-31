@@ -10,6 +10,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Slice;
 
+import static org.dreamtinker.dreamtinker.Dreamtinker.configCompactDisabled;
+
 @Mixin(value = EnigmaticEventHandler.class, remap = false)
 public abstract class EnigmaticEventHandlerMixin {
     @ModifyVariable(
@@ -27,7 +29,8 @@ public abstract class EnigmaticEventHandlerMixin {
     )
 
     private boolean dreamtinker$adjustBypassBeforeCheck(boolean bypass, LivingHurtEvent event) {
-        if (!bypass && null != event.getSource().getDirectEntity() && event.getSource().getDirectEntity() instanceof LivingEntity entity)
+        if (!configCompactDisabled("enigmaticlegacy") &&
+            !bypass && null != event.getSource().getDirectEntity() && event.getSource().getDirectEntity() instanceof LivingEntity entity)
             return 0 < DTModifierCheck.getItemModifierNum(entity.getMainHandItem(), DreamtinkerTagKeys.Modifiers.EL_CURSED_RELIEF);
 
         return bypass;

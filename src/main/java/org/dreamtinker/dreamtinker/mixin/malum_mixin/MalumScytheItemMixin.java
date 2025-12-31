@@ -17,6 +17,8 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 
+import static org.dreamtinker.dreamtinker.Dreamtinker.configCompactDisabled;
+
 @Mixin(value = MalumScytheItem.class, remap = false)
 public class MalumScytheItemMixin {
     @Unique
@@ -41,7 +43,8 @@ public class MalumScytheItemMixin {
     private boolean dreamtinker$redirectIsOnDamageSource(
             DamageSource instance, ResourceKey<DamageType> p_276108_) {
         boolean base = instance.is(p_276108_);
-        return base || null != TL_STACK.get() && 0 < ModifierUtil.getModifierLevel(TL_STACK.get(), DreamtinkerModifiers.malum_base.getId());
+        return base || !configCompactDisabled("malum") &&
+                       null != TL_STACK.get() && 0 < ModifierUtil.getModifierLevel(TL_STACK.get(), DreamtinkerModifiers.malum_base.getId());
     }
 
     @Inject(method = "hurtEvent(Lnet/minecraftforge/event/entity/living/LivingHurtEvent;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;)V",

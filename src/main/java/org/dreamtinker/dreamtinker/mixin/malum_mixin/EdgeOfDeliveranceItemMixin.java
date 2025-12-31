@@ -17,6 +17,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import static org.dreamtinker.dreamtinker.Dreamtinker.configCompactDisabled;
+
 @Mixin(value = EdgeOfDeliveranceItem.class, remap = false)
 public class EdgeOfDeliveranceItemMixin {
     @Unique
@@ -41,7 +43,8 @@ public class EdgeOfDeliveranceItemMixin {
     private boolean dreamtinker$redirectIsOnDamageSource(
             DamageSource instance, TagKey<DamageType> p_270890_) {
         boolean base = instance.is(p_270890_);
-        return base || 0 < DTModifierCheck.getItemModifierNum(TL_STACK.get(), DreamtinkerTagKeys.Modifiers.MALUM_EXPOSE_SOUL);
+        return base ||
+               !configCompactDisabled("malum") && 0 < DTModifierCheck.getItemModifierNum(TL_STACK.get(), DreamtinkerTagKeys.Modifiers.MALUM_EXPOSE_SOUL);
     }
 
     @Inject(method = "hurtEvent(Lnet/minecraftforge/event/entity/living/LivingHurtEvent;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;)V",
