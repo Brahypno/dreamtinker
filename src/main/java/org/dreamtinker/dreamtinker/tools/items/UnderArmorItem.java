@@ -1,23 +1,40 @@
 package org.dreamtinker.dreamtinker.tools.items;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.Model;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.minecraftforge.fml.ModList;
+import org.dreamtinker.dreamtinker.utils.CompactUtils.arsNovaUtils;
 import org.dreamtinker.dreamtinker.utils.model.SideAwareArmorModel;
+import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.client.armor.ArmorModelManager;
 import slimeknights.tconstruct.library.tools.definition.ModifiableArmorMaterial;
 import slimeknights.tconstruct.library.tools.helper.ArmorUtil;
 import slimeknights.tconstruct.library.tools.item.armor.ModifiableArmorItem;
+import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
+import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.function.Consumer;
+
+import static org.dreamtinker.dreamtinker.Dreamtinker.configCompactDisabled;
 
 public class UnderArmorItem extends ModifiableArmorItem {
     private final ResourceLocation name;
@@ -49,4 +66,23 @@ public class UnderArmorItem extends ModifiableArmorItem {
         });
     }
 
+    public @NotNull Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
+        CompoundTag nbt = stack.getTag();
+        Multimap<Attribute, AttributeModifier> tinker_map = slot == this.getEquipmentSlot() && nbt != null ?
+                                                            this.getAttributeModifiers((IToolStackView) ToolStack.from(stack), (EquipmentSlot) slot) :
+                                                            ImmutableMultimap.of();
+        Multimap<Attribute, AttributeModifier> mutable = HashMultimap.create(tinker_map);
+        if (ModList.get().isLoaded("ars_nouveau") && !configCompactDisabled("ars_nouveau")){
+            mutable.putAll(arsNovaUtils.getAttributeModifiers(slot, stack, this.type));
+        }
+        return mutable;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
+        super.appendHoverText(stack, level, tooltip, flag);
+        if (ModList.get().isLoaded("ars_nouveau") && !configCompactDisabled("ars_nouveau")){
+            arsNovaUtils.appendHoverText(stack, level, tooltip, flag);
+        }
+    }
 }

@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Set;
 
 import static org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry.AugmentTinkerID;
-import static org.dreamtinker.dreamtinker.utils.CompactUtils.arsNova.isMelee;
+import static org.dreamtinker.dreamtinker.utils.CompactUtils.arsNovaUtils.isMelee;
 
 public class AugmentTinker extends AbstractAugment {
     public static AugmentTinker INSTANCE = new AugmentTinker();

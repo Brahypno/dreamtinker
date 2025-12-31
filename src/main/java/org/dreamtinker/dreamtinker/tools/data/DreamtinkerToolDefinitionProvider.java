@@ -115,7 +115,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
         DefaultMaterialsModule underPlateMaterials = DefaultMaterialsModule.builder().material(tier2Material, tier2Material, tier2Material).build();
         ToolModule plateSlots =
                 ToolSlotsModule.builder()
-                               .slots(SlotType.SOUL, 4)
+                               .slots(SlotType.SOUL, 3)
                                .slots(SlotType.ABILITY, 2)
                                .slots(SlotType.UPGRADE, 1)
                                .slots(SlotType.DEFENSE, 1).build();
@@ -132,7 +132,8 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                                                              .set(ToolStats.DURABILITY, 0.8f)
                                                              .set(ToolStats.ARMOR, 0.5f).build()))
                 .module(ToolTraitsModule.builder()
-                                        .trait(DreamtinkerModifiers.weapon_transformation, 1).build())
+                                        .trait(DreamtinkerModifiers.weapon_transformation, 1)
+                                        .trait(DreamtinkerModifiers.nova_magic_armor, 1).build())
                 .module(plateSlots);
         define(DTtoolsDefinition.NarcissusWing)
                 // parts

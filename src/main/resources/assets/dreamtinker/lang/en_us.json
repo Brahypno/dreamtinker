@@ -604,6 +604,13 @@
   "modifier.dreamtinker.nova_scriptum_attributes": "The Path of Scriptum",
   "modifier.dreamtinker.nova_scriptum_attributes.flavor": "Per aspera ad astra",
   "modifier.dreamtinker.nova_scriptum_attributes.description": "Increase Mana Regeneration based on attack speed and Max Mana based on mining speed and draw speed",
+  "modifier.dreamtinker.nova_magic_armor": "Armor without mana",
+  "modifier.dreamtinker.nova_magic_armor.1": "Novice Suits",
+  "modifier.dreamtinker.nova_magic_armor.2": "Mage Suits",
+  "modifier.dreamtinker.nova_magic_armor.3": "Archmage Suits",
+  "modifier.dreamtinker.nova_magic_armor.flavor": "Nova ars!",
+  "modifier.dreamtinker.nova_magic_armor_fulfill.description": "Gain Ars Nova armor ability",
+  "modifier.dreamtinker.nova_magic_armor.description": "In era of Ars Vetus, nothing we can do",
 
 
   "material.dreamtinker.echo_alloy": "Echo Alloy",

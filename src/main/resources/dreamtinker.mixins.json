@@ -15,7 +15,7 @@
     "malum_mixin.SoulHandlerMixin",
     "malum_mixin.EdgeOfDeliveranceItemMixin",
     "malum_mixin.MalumScytheItemMixin",
-    "ProjectileMixin","malum_mixin.CrossbowItemMixin","NovaMixin.MethodProjectileMixin","NovaMixin.AugmentCompatibilityValidatorMixin"],
+    "ProjectileMixin","malum_mixin.CrossbowItemMixin","NovaMixin.MethodProjectileMixin","NovaMixin.AugmentCompatibilityValidatorMixin","NovaMixin.ArmorUpgradeRecipeCategoryMixin","NovaMixin.AlterationTableRendererMixin"],
   "client": [
   ],
   "injectors": {

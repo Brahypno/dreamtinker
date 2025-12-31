@@ -308,7 +308,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(MobEffectsRemoverModule.builder().level(RandomLevelingValue.perLevel(0, 1)).category(MobEffectCategory.NEUTRAL).build());
 
         IJsonPredicate<net.minecraft.world.entity.LivingEntity> ender = LivingEntityPredicate.tag(DreamtinkerTagKeys.EntityTypes.ENDER_ENTITY);
-        buildModifier(Ids.ender_slayer, not(DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy")))
+        buildModifier(ender_slayer.getId(), not(DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy")))
                 .addModule(ConditionalMeleeDamageModule.builder().target(ender).eachLevel(2.0f))
                 .addModule(MobEffectModule.builder(MobEffects.WEAKNESS)
                                           .level(RandomLevelingValue.perLevel(1, 1))
@@ -582,6 +582,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.nova_spell_tiers, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau")).levelDisplay(new ModifierLevelDisplay.UniqueForLevels(3));
         buildModifier(Ids.nova_creative_tiers, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau")).levelDisplay(ModifierLevelDisplay.NO_LEVELS);
         buildModifier(Ids.nova_spell_slots, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"));
+        buildModifier(nova_magic_armor.getId(), not(DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"))).levelDisplay(ModifierLevelDisplay.NO_LEVELS);
     }
 
     @Override

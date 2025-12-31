@@ -249,6 +249,9 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<ScriptumAttributes> nova_scriptum_attributes =
             ARS_MODIFIERS.register("nova_scriptum_attributes", ScriptumAttributes::new);
 
+    public static final StaticModifier<NovaMagicArmor> nova_magic_armor =
+            ARS_MODIFIERS.register("nova_magic_armor", NovaMagicArmor::new);
+
     public static class Ids {
         public static final ModifierId long_tool = id("long_tool");
         public static final ModifierId antimony_usage = id("antimony_usage");
@@ -298,7 +301,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId monster_blood = id("monster_blood");
         public static final ModifierId deeper_water_killer = id("deeper_water_killer");
         public static final ModifierId sun_shine = id("sun_shine");
-        public static final ModifierId ender_slayer = id("ender_slayer");
         public static final ModifierId heavy_arrow = id("heavy_arrow");
         public static final ModifierId light_arrow = id("light_arrow");
         public static final ModifierId null_void = id("null_void");

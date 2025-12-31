@@ -132,8 +132,8 @@ public class Dreamtinker {
                 forgeEventBus.addListener(EventPriority.HIGHEST, SpellEvents::PreSpellDamageEvent);
                 forgeEventBus.addListener(EventPriority.HIGHEST, SpellEvents::PostSpellDamageEvent);
                 forgeEventBus.addListener(EventPriority.HIGHEST, SpellEvents::SpellProjectileHitEvent);
+                NovaRegistry.postInit();
             }
-
 
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(DreamtinkerCommon.narcissus.getId(), DreamtinkerCommon.potted_narcissus);
             SpawnPlacements.register(DreamtinkerModifiers.AggressiveFOX.get(),

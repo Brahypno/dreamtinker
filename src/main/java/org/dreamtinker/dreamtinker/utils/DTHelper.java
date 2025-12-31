@@ -1,6 +1,7 @@
 package org.dreamtinker.dreamtinker.utils;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -273,5 +274,39 @@ public class DTHelper {
         TooltipBuilder builder = new TooltipBuilder(tool, tooltip);
         builder.addWithAttribute(ToolStats.ATTACK_DAMAGE, Attributes.ATTACK_DAMAGE);
         return builder.getTooltips();
+    }
+
+    public static void showOnlySlotParts(HumanoidModel<?> model, EquipmentSlot slot, boolean includeHatForHead) {
+        if (model == null || slot == null)
+            return;
+
+        // Hide everything first
+        model.setAllVisible(false);
+
+        // Show only what this slot should display
+        switch (slot) {
+            case HEAD -> {
+                model.head.visible = true;
+                model.hat.visible = includeHatForHead;
+            }
+            case CHEST -> {
+                model.body.visible = true;
+                model.rightArm.visible = true;
+                model.leftArm.visible = true;
+            }
+            case LEGS -> {
+                // Vanilla legs layer typically includes body + legs (pelvis/upper area)
+                model.body.visible = true;
+                model.rightLeg.visible = true;
+                model.leftLeg.visible = true;
+            }
+            case FEET -> {
+                model.rightLeg.visible = true;
+                model.leftLeg.visible = true;
+            }
+            default -> {
+                // MAINHAND/OFFHAND not relevant for armor parts; keep all hidden
+            }
+        }
     }
 }

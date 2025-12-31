@@ -1450,11 +1450,12 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.weapon_dreams_filter, soulSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.weapon_dreams_filter, soulFolder));
+        Ingredient under_plates = Ingredient.of(DreamtinkerTools.underPlate.get(ArmorItem.Type.HELMET),
+                                                DreamtinkerTools.underPlate.get(ArmorItem.Type.CHESTPLATE),
+                                                DreamtinkerTools.underPlate.get(ArmorItem.Type.LEGGINGS),
+                                                DreamtinkerTools.underPlate.get(ArmorItem.Type.BOOTS));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.spiritual_weapon_transformation)
-                             .setTools(Ingredient.of(DreamtinkerTools.underPlate.get(ArmorItem.Type.HELMET),
-                                                     DreamtinkerTools.underPlate.get(ArmorItem.Type.CHESTPLATE),
-                                                     DreamtinkerTools.underPlate.get(ArmorItem.Type.LEGGINGS),
-                                                     DreamtinkerTools.underPlate.get(ArmorItem.Type.BOOTS)))
+                             .setTools(under_plates)
                              .addInput(BlockRegistry.BLOCK_OF_ASTRAL_WEAVE.get(), 3)
                              .addInput(ItemRegistry.TOPHAT.get())
                              .addInput(BlockRegistry.WICKED_SPIRITED_GLASS.get(), 16)
@@ -1533,7 +1534,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.love_shooting, abilitySalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.love_shooting, abilityFolder));
-        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.ender_slayer)//2 Modifier share same id so This should be fine
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.ender_slayer)//2 Modifier share same id so This should be fine
                              .setTools(TinkerTags.Items.MELEE_WEAPON)
                              .addInput(Tags.Items.OBSIDIAN, 2)
                              .addInput(Items.GHAST_TEAR, 2)
@@ -1542,11 +1543,11 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setSlots(SlotType.UPGRADE, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.ender_slayer, upgradeSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.ender_slayer, upgradeFolder));
-        Ingredient throwss = CompoundIngredient.of(IntersectionIngredient.of(Ingredient.of(Dreamtinker.forgeItemTag("tools/tridents")),
-                                                                             Ingredient.of(TinkerTags.Items.MELEE_WEAPON)),
-                                                   Ingredient.of(TinkerTags.Items.THROWN_AMMO));
+        Ingredient throw_weapon = CompoundIngredient.of(IntersectionIngredient.of(Ingredient.of(Dreamtinker.forgeItemTag("tools/tridents")),
+                                                                                  Ingredient.of(TinkerTags.Items.MELEE_WEAPON)),
+                                                        Ingredient.of(TinkerTags.Items.THROWN_AMMO));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.torrent)
-                             .setTools(throwss)
+                             .setTools(throw_weapon)
                              .addInput(Tags.Items.DUSTS_PRISMARINE, 15)
                              .addInput(Tags.Items.GEMS_PRISMARINE, 15)
                              .setMaxLevel(5)
@@ -1554,7 +1555,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.torrent, upgradeSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.torrent, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.wrath)
-                             .setTools(throwss)
+                             .setTools(throw_weapon)
                              .addInput(Items.PRISMARINE, 4)
                              .addInput(Tags.Items.GEMS_PRISMARINE, 15)
                              .setMaxLevel(4)
@@ -1754,7 +1755,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(Tags.Items.STORAGE_BLOCKS_QUARTZ, 3)
                              .addInput(Tags.Items.RODS_BLAZE, 2)
                              .setMaxLevel(1)
-                             .save(wrapped, wrap(DreamtinkerModifiers.Ids.nova_spell_tiers, slotlessFolder, "mage"));
+                             .save(wrapped, wrap(DreamtinkerModifiers.Ids.nova_spell_tiers, slotlessFolder, "_mage"));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.nova_spell_tiers)
                              .setTools(Ingredient.of(DreamtinkerTools.per_aspera_scriptum.get()))
                              .addInput(Tags.Items.NETHER_STARS, 1)
@@ -1763,7 +1764,19 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(Items.TOTEM_OF_UNDYING, 1)
                              .addInput(ItemsRegistry.WILDEN_TRIBUTE, 1)
                              .setLevelRange(2, 2)
-                             .save(wrapped, wrap(DreamtinkerModifiers.Ids.nova_spell_tiers, slotlessFolder, "archmage"));
+                             .save(wrapped, wrap(DreamtinkerModifiers.Ids.nova_spell_tiers, slotlessFolder, "_archmage"));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.nova_magic_armor)
+                             .setTools(under_plates)
+                             .addInput(ItemsRegistry.MAGE_FIBER, 4)
+                             .addInput(Tags.Items.INGOTS_GOLD, 8)
+                             .setMaxLevel(1)
+                             .save(wrapped, wrap(DreamtinkerModifiers.nova_magic_armor, slotlessFolder, "_mage"));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.nova_magic_armor)
+                             .setTools(under_plates)
+                             .addInput(ItemsRegistry.MAGE_FIBER, 4)
+                             .addInput(Tags.Items.GEMS_DIAMOND, 8)
+                             .setLevelRange(2, 2)
+                             .save(wrapped, wrap(DreamtinkerModifiers.nova_magic_armor, slotlessFolder, "_archmage"));
     }
 
     private void addEntityMeltingRecipes(Consumer<FinishedRecipe> consumer) {

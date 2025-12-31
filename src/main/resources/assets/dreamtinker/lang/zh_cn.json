@@ -604,6 +604,13 @@
   "modifier.dreamtinker.nova_scriptum_attributes": "命路",
   "modifier.dreamtinker.nova_scriptum_attributes.flavor": "循此苦旅 终抵群星",
   "modifier.dreamtinker.nova_scriptum_attributes.description": "基于攻击速度增加魔力回复，拉弓速度和挖掘速度增加最大魔力",
+  "modifier.dreamtinker.nova_magic_armor": "无魔之甲",
+  "modifier.dreamtinker.nova_magic_armor.1": "初学者衣装",
+  "modifier.dreamtinker.nova_magic_armor.2": "法师衣装",
+  "modifier.dreamtinker.nova_magic_armor.3": "大法师衣装",
+  "modifier.dreamtinker.nova_magic_armor.flavor": "魔艺新生！",
+  "modifier.dreamtinker.nova_magic_armor_fulfill.description": "获得新生魔艺法师套装的能力",
+  "modifier.dreamtinker.nova_magic_armor.description": "在无魔的旧纪元，我们什么也无法做到",
 
   "material.dreamtinker.echo_alloy": "回响合金",
   "material.dreamtinker.echo_alloy.flavor": "是神秘的回响，还是秘密的回响",

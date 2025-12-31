@@ -25,7 +25,7 @@ import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
-import static org.dreamtinker.dreamtinker.utils.CompactUtils.arsNova.*;
+import static org.dreamtinker.dreamtinker.utils.CompactUtils.arsNovaUtils.*;
 
 public class SpellEvents {
     public static void PreSpellDamageEvent(SpellDamageEvent.Pre event) {

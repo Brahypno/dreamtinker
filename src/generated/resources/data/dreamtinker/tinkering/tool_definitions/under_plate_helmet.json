@@ -63,6 +63,10 @@
         {
           "level": 1,
           "name": "dreamtinker:weapon_transformation"
+        },
+        {
+          "level": 1,
+          "name": "dreamtinker:nova_magic_armor"
         }
       ]
     },
@@ -71,7 +75,7 @@
       "slots": {
         "abilities": 2,
         "defense": 1,
-        "souls": 4,
+        "souls": 3,
         "upgrades": 1
       }
     }

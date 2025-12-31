@@ -5,12 +5,16 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.renderer.LightTexture;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
+import slimeknights.tconstruct.library.client.armor.AbstractArmorModel;
 import slimeknights.tconstruct.library.client.armor.ArmorModelManager.ArmorModel;
 import slimeknights.tconstruct.library.client.armor.MultilayerArmorModel;
 import slimeknights.tconstruct.library.client.armor.texture.ArmorTextureSupplier;
+import slimeknights.tconstruct.library.client.armor.texture.TintedArmorTexture;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +59,12 @@ public class SideAwareArmorModel extends MultilayerArmorModel {
         return out;
     }
 
+    private MultiBufferSource secondary_buffer;
+
+    public void setBuffer(MultiBufferSource buffer) {
+        secondary_buffer = buffer;
+    }
+
     @Override
     public Model setup(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel<?> base, ArmorModel model) {
         this.currentSlot = slot;
@@ -65,24 +75,28 @@ public class SideAwareArmorModel extends MultilayerArmorModel {
 
     @Override
     public void renderToBuffer(PoseStack pose, VertexConsumer vc, int light, int overlay, float r, float g, float b, float a) {
-        if (this.base == null || buffer == null)
+        if (this.base == null)
             return;
+        MultiBufferSource local_buffer = null != buffer ? buffer : null != secondary_buffer ? secondary_buffer : null;
+
 
         boolean armorGlint = hasGlint;
         boolean wingGlint = hasGlint;
+
 
         final boolean isLegSlot = (currentSlot == EquipmentSlot.LEGS && textureType == ArmorTextureSupplier.TextureType.LEGGINGS);
         final boolean isFeetSlot = (currentSlot == EquipmentSlot.FEET && textureType == ArmorTextureSupplier.TextureType.ARMOR);
 
         // 这里必须是 HumanoidModel —— 不要再换成自定义 Model 了
         final HumanoidModel<?> hmodel = this.base;
+        if (null == buffer && null != secondary_buffer){
+            DTHelper.showOnlySlotParts(hmodel, currentSlot, true);
+        }
 
         for (int i = 0; i < model.layers().size(); i++) {
             ArmorTextureSupplier sup = model.layers().get(i);
             ArmorTextureSupplier.ArmorTexture tex = sup.getArmorTexture(armorStack, textureType, registryAccess);
             if (tex != ArmorTextureSupplier.ArmorTexture.EMPTY){
-                // 默认不改（对头/胸槽位）
-                HumanoidModel<?> target = hmodel;
 
                 // 仅在腿/脚槽位做左右过滤
                 boolean oldL = hmodel.leftLeg.visible, oldR = hmodel.rightLeg.visible;
@@ -103,14 +117,18 @@ public class SideAwareArmorModel extends MultilayerArmorModel {
                     hmodel.leftLeg.visible = showL;
                     hmodel.rightLeg.visible = showR;
                     try {
-                        tex.renderTexture(target, pose, buffer, light, overlay, r, g, b, a, armorGlint);
+                        if (local_buffer != null){
+                            tex.renderTexture(hmodel, pose, local_buffer, light, overlay, r, g, b, a, armorGlint);
+                        }else {
+                            AbstractArmorModel.renderColored(hmodel, pose, vc, light, overlay, ((TintedArmorTexture) tex).color(), r, g, b, a);
+                        }
                     }
                     finally {
                         hmodel.leftLeg.visible = oldL;
                         hmodel.rightLeg.visible = oldR;
                     }
                 }else if (currentSlot == EquipmentSlot.HEAD && textureType == ArmorTextureSupplier.TextureType.ARMOR){
-                    var head = target.head;
+                    var head = hmodel.head;
 
                     // 备份原状态（一定要恢复，不然会影响后续层/其他槽位）
                     float ox = head.x, oy = head.y, oz = head.z;
@@ -125,7 +143,11 @@ public class SideAwareArmorModel extends MultilayerArmorModel {
                     head.xScale *= k;
                     head.yScale *= k;
                     head.zScale *= k;
-                    tex.renderTexture(target, pose, buffer, LightTexture.FULL_BRIGHT, overlay, r, g, b, a, armorGlint);
+                    if (local_buffer != null){
+                        tex.renderTexture(hmodel, pose, local_buffer, LightTexture.FULL_BRIGHT, overlay, r, g, b, a, armorGlint);
+                    }else {
+                        AbstractArmorModel.renderColored(hmodel, pose, vc, light, overlay, ((TintedArmorTexture) tex).color(), r, g, b, a);
+                    }
                     head.x = ox;
                     head.y = oy;
                     head.z = oz;
@@ -134,7 +156,11 @@ public class SideAwareArmorModel extends MultilayerArmorModel {
                     head.zScale = sz;
                 }else {
                     // 非腿/脚槽位，直接渲染
-                    tex.renderTexture(target, pose, buffer, light, overlay, r, g, b, a, armorGlint);
+                    if (local_buffer != null){
+                        tex.renderTexture(hmodel, pose, local_buffer, light, overlay, r, g, b, a, armorGlint);
+                    }else {
+                        AbstractArmorModel.renderColored(hmodel, pose, vc, light, overlay, ((TintedArmorTexture) tex).color(), r, g, b, a);
+                    }
                 }
                 armorGlint = false;
             }
@@ -149,6 +175,7 @@ public class SideAwareArmorModel extends MultilayerArmorModel {
             }
         }
     }
+
 }
 
 

@@ -29,7 +29,7 @@ import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.dreamtinker.dreamtinker.utils.CompactUtils.arsNova.isTinker;
+import static org.dreamtinker.dreamtinker.utils.CompactUtils.arsNovaUtils.isTinker;
 
 @Mixin(value = MethodProjectile.class, remap = false)
 public class MethodProjectileMixin {

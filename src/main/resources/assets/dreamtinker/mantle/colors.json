@@ -155,7 +155,9 @@
     "bic_hound_fang": "#A7B7C3",
     "nova_spell_tiers": "#AB5EC3",
     "nova_spell_tiers.2": "#4D0A89",
-    "nova_creative_tiers": "#F7D349"
+    "nova_creative_tiers": "#F7D349",
+    "nova_scriptum_attributes": "#F7D349",
+    "nova_magic_armor": "#F7D349"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",

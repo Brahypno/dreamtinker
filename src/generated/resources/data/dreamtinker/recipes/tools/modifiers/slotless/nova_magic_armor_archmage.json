@@ -1,0 +1,54 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "ars_nouveau"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "ars_nouveau"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "amount_needed": 4,
+      "item": "ars_nouveau:magebloom_fiber"
+    },
+    {
+      "amount_needed": 8,
+      "tag": "forge:gems/diamond"
+    }
+  ],
+  "level": 2,
+  "result": "dreamtinker:nova_magic_armor",
+  "tools": [
+    {
+      "item": "dreamtinker:under_plate_helmet"
+    },
+    {
+      "item": "dreamtinker:under_plate_chestplate"
+    },
+    {
+      "item": "dreamtinker:under_plate_leggings"
+    },
+    {
+      "item": "dreamtinker:under_plate_boots"
+    }
+  ]
+}
