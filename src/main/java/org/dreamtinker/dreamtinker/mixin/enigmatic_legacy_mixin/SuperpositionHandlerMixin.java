@@ -31,7 +31,7 @@ public abstract class SuperpositionHandlerMixin {
     private static void dreamtinker$injectBeforeWorthyReturn(Player player, CallbackInfoReturnable<Boolean> cir) {
         if (!configCompactDisabled("enigmaticlegacy") &&
             !cir.getReturnValue())
-            cir.setReturnValue(DTModifierCheck.haveModifierIn(player, DreamtinkerModifiers.by_pass_worthy.getId()));
+            cir.setReturnValue(DTModifierCheck.haveModifierIn(player, DreamtinkerModifiers.Ids.el_by_pass_worthy));
 
     }
 }

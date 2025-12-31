@@ -49,7 +49,7 @@ public final class DTJeiPlugin implements IModPlugin {
     public @NotNull ResourceLocation getPluginUid() {return WorldRitualCategory.UID;}
 
     @Override
-    public void registerIngredients(IModIngredientRegistration reg) {
+    public void registerIngredients(@NotNull IModIngredientRegistration reg) {
         // 供 JEI 索引的一组“样本”成分（可以很小的集合）
         List<WorldRitualCategory.CelestialTypes.CelestialIcon> samples = new ArrayList<>();
         samples.add(WorldRitualCategory.CelestialTypes.CelestialIcon.sun());
@@ -97,7 +97,7 @@ public final class DTJeiPlugin implements IModPlugin {
                 Ingredient.of(TinkerCommons.soulGlass),    // A 方块图标
                 hate,
                 null,
-                EntityIngredient.of(EntityType.WITHER_SKELETON, EntityType.PLAYER, EntityType.WITHER, EntityType.PHANTOM), // ✅ 一组实体（这里只有凋零骷髅）
+                EntityIngredient.of(EntityType.WITHER_SKELETON, EntityType.PLAYER, EntityType.WITHER, EntityType.PHANTOM),
                 null, true, 320, 6, null, null, null
         ));
         ItemStack love = new ItemStack(DreamtinkerCommon.soul_cast.get(), 1);

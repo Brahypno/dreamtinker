@@ -12,6 +12,10 @@
     {
       "id": "dreamtinker:el_nemesis_curse",
       "required": false
+    },
+    {
+      "id": "dreamtinker:nova_spell_tiers",
+      "required": false
     }
   ]
 }

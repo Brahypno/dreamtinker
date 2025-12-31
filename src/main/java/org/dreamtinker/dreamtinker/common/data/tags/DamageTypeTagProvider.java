@@ -12,6 +12,7 @@ import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 import static net.minecraft.tags.DamageTypeTags.*;
+import static slimeknights.tconstruct.common.TinkerTags.DamageTypes.MELEE_PROTECTION;
 
 public class DamageTypeTagProvider extends DamageTypeTagsProvider {
     public DamageTypeTagProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookup, @Nullable ExistingFileHelper existingFileHelper) {
@@ -31,6 +32,7 @@ public class DamageTypeTagProvider extends DamageTypeTagsProvider {
         tag(AVOIDS_GUARDIAN_THORNS).add(DreamtinkerDamageTypes.NULL_VOID);
         tag(ALWAYS_HURTS_ENDER_DRAGONS).add(DreamtinkerDamageTypes.NULL_VOID);
         tag(WITCH_RESISTANT_TO).add(DreamtinkerDamageTypes.arcane_damage);
+        tag(MELEE_PROTECTION).add(DreamtinkerDamageTypes.tnt_arrow_force);
 
     }
 }

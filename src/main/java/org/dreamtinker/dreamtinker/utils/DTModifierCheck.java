@@ -2,6 +2,7 @@ package org.dreamtinker.dreamtinker.utils;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -9,12 +10,16 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
+import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.item.IModifiable;
+import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class DTModifierCheck {
     public static final EquipmentSlot[] slots =
@@ -164,5 +169,16 @@ public class DTModifierCheck {
         }
     }
 
+    public static float getMeleeDamage(LivingEntity attacker, Entity entity, IToolStackView toolStack) {
+        ToolAttackContext context = ToolAttackContext.attacker((LivingEntity) attacker).target(entity).cooldown(1).toolAttributes(toolStack)
+                                                     .build();
+        float baseDamage = context.getBaseDamage();
+        float damage = baseDamage;
+        List<ModifierEntry> modifiers = toolStack.getModifierList();
 
+        for (ModifierEntry entry : modifiers) {
+            damage = (entry.getHook(ModifierHooks.MELEE_DAMAGE)).getMeleeDamage(toolStack, entry, context, baseDamage, damage);
+        }
+        return damage;
+    }
 }

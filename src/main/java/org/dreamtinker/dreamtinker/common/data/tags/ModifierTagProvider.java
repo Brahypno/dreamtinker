@@ -48,7 +48,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             .add(foundation_will.getId());
         this.tag(TinkerTags.Modifiers.GENERAL_SLOTLESS)
             .add(mei.getId())
-            .addOptional(Ids.el_eternal_binding, Ids.el_sorrow, Ids.el_nemesis_curse);
+            .addOptional(Ids.el_eternal_binding, Ids.el_sorrow, Ids.el_nemesis_curse, Ids.nova_spell_tiers);
         this.tag(DAMAGE_UPGRADES)
             .add(Ids.all_slayer, Ids.the_romantic, strong_explode.getId(), signal_axe.getId(), Ids.wrath, Ids.torrent)
             .addOptional(ender_slayer.getId());

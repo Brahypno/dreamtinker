@@ -593,11 +593,11 @@
   "modifier.dreamtinker.nova_spell_tiers": "Novice Spell Book",
   "modifier.dreamtinker.nova_spell_tiers.2": "Mage's Spell Book",
   "modifier.dreamtinker.nova_spell_tiers.3": "Archmage Spell Book",
-  "modifier.dreamtinker.nova_spell_tiers.flavor": "Arts Nova!",
+  "modifier.dreamtinker.nova_spell_tiers.flavor": "Arts Nouveau!",
   "modifier.dreamtinker.nova_spell_tiers.description": "Show current level of the Spell Book",
   "modifier.dreamtinker.nova_creative_tiers": "Creative Spell Book",
   "modifier.dreamtinker.nova_creative_tiers.flavor": "Creative only",
-  "modifier.dreamtinker.nova_creative_tiers.description": "",
+  "modifier.dreamtinker.nova_creative_tiers.description": "Show current tier of Spell book",
   "modifier.dreamtinker.nova_spell_slots": "Spell slots Upgrade",
   "modifier.dreamtinker.nova_spell_slots.flavor": "",
   "modifier.dreamtinker.nova_spell_slots.description": "Add additional cast recipe slot on the book",
@@ -1155,6 +1155,7 @@
   "death.attack.dreamtinker.null_void": "consumed by nothingness",
   "death.attack.dreamtinker.rain_bow": "vanished like rainbow",
   "death.attack.dreamtinker.arcane_damage": "Cursed by Arcane Arts",
+  "death.attack.dreamtinker.tnt_arrow_force": "Suicide By not safely using TnT Arrow",
 
   "entity.dreamtinker.aggressive_fox": "Armed Fox",
 

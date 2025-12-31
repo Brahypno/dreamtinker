@@ -361,7 +361,8 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
     }
 
     private void addELModifiers() {
-
+        buildModifier(Ids.el_by_pass_worthy, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
         buildModifier(Ids.el_nemesis_curse, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModule(EnchantmentModule.builder(EnigmaticEnchantments.NEMESIS).level(1).constant());

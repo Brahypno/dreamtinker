@@ -3,7 +3,6 @@ package org.dreamtinker.dreamtinker.tools.items;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -15,18 +14,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.util.FakePlayer;
-import net.minecraftforge.common.util.FakePlayerFactory;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.utils.DTHelper;
+import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.dreamtinker.dreamtinker.utils.DirectionalResistanceExplosionDamageCalculator;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.SafeClientAccess;
 import slimeknights.mantle.client.TooltipKey;
-import slimeknights.tconstruct.library.modifiers.ModifierEntry;
-import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.definition.ToolDefinition;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
@@ -85,22 +81,9 @@ public class TNTArrow extends ModifiableArrowItem {
                 //ToolAttackUtil.attackEntity(toolStack, (LivingEntity) this.getOwner(), InteractionHand.OFF_HAND, entity, NO_COOLDOWN, false);
 
             }else {
-                try {
-                    ServerLevel serverLevel = (ServerLevel) this.level();
-                    FakePlayer fakeAttacker = FakePlayerFactory.getMinecraft(serverLevel);
-                    ToolAttackUtil.performAttack(toolStack,
-                                                 ToolAttackContext.attacker(fakeAttacker).target(entity).cooldown(1).toolAttributes(toolStack)
-                                                                  .build());
-                }
-                catch (SecurityException e) {
-                    // 捕获异常，说明 FakePlayer 被禁用
-                    ToolAttackUtil.performAttack(toolStack,
-                                                 ToolAttackContext.attacker((LivingEntity) this.getOwner()).target(entity).cooldown(1).toolAttributes(toolStack)
-                                                                  .build());
-                }
-                catch (Exception ignored) {
-                }
-
+                float damage = DTModifierCheck.getMeleeDamage((LivingEntity) this.getOwner(), entity, toolStack);
+                entity.hurt(DreamtinkerDamageTypes.source(this.level().registryAccess(), DreamtinkerDamageTypes.tnt_arrow_force, null, this.getOwner()),
+                            damage);
             }
         }
 
@@ -116,15 +99,8 @@ public class TNTArrow extends ModifiableArrowItem {
                     boolean explosion = 0 < ModifierUtil.getModifierLevel(this.getRawPickupItem(), DreamtinkerModifiers.Ids.force_to_explosion);
                     if (explosion){
                         ToolStack ts = ToolStack.from(this.getRawPickupItem());
-                        ToolAttackContext context = ToolAttackContext.attacker(owner).target(owner).cooldown(0).toolAttributes(ts).build();
 
-                        float baseDamage = context.getBaseDamage();
-                        float damage = baseDamage;
-                        List<ModifierEntry> modifiers = ts.getModifierList();
-
-                        for (ModifierEntry entry : modifiers) {
-                            damage = (entry.getHook(ModifierHooks.MELEE_DAMAGE)).getMeleeDamage(ts, entry, context, baseDamage, damage);
-                        }
+                        float damage = DTModifierCheck.getMeleeDamage(owner, owner, ts);
                         double explosionPower =
                                 Math.min(Math.sqrt(damage) * 2, ForceExplosionPower.get());
                         ExplosionDamageCalculator calc =

@@ -64,7 +64,6 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.nigrescence_a
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.nigrescence_antimony.ouroboric_hourglass;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.star_regulus.TwoHeadedSeven;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.star_regulus.as_one;
-import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
 import slimeknights.tconstruct.library.modifiers.modules.ModifierModule;
 import slimeknights.tconstruct.library.modifiers.util.ModifierDeferredRegister;
@@ -194,7 +193,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             EL_MODIFIERS.register("weapon_books", WeaponBooks::new);
     public static final StaticModifier<EldritchPan> eldritch_pan =
             EL_MODIFIERS.register("eldritch_pan", EldritchPan::new);
-    public static final StaticModifier<Modifier> by_pass_worthy = EL_MODIFIERS.register("by_pass_worthy", Modifier::new);
     public static final StaticModifier<ExilesFaulty> exiles_faulty = EL_MODIFIERS.register("exiles_faulty", ExilesFaulty::new);
     public static final StaticModifier<org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.desolation_ring> desolation_ring =
             EL_MODIFIERS.register("desolation_ring", desolation_ring::new);
@@ -313,6 +311,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId el_sorrow = id("el_sorrow");
         public static final ModifierId el_eternal_binding = id("el_eternal_binding");
         public static final ModifierId el_etherium = id("el_etherium");
+        public static final ModifierId el_by_pass_worthy = id("el_by_pass_worthy");
 
         public static final ModifierId malum_rebound = id("malum_rebound");
         public static final ModifierId malum_ascension = id("malum_ascension");
