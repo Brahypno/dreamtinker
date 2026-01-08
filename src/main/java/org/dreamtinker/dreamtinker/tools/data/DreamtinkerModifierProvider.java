@@ -584,6 +584,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.nova_creative_tiers, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau")).levelDisplay(ModifierLevelDisplay.NO_LEVELS);
         buildModifier(Ids.nova_spell_slots, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"));
         buildModifier(nova_magic_armor.getId(), not(DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"))).levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+        buildModifier(Ids.nova_caster_tool, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"));
     }
 
     @Override
