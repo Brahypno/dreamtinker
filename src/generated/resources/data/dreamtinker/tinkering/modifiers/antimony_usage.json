@@ -4,55 +4,55 @@
     {
       "type": "tconstruct:stat_boost",
       "each_level": 0.1,
-      "operation": "add",
+      "operation": "multiply_base",
       "stat": "tconstruct:durability"
     },
     {
       "type": "tconstruct:stat_boost",
       "each_level": 0.1,
-      "operation": "add",
+      "operation": "multiply_base",
       "stat": "tconstruct:attack_damage"
     },
     {
       "type": "tconstruct:stat_boost",
       "each_level": 0.05,
-      "operation": "add",
+      "operation": "multiply_base",
       "stat": "tconstruct:attack_speed"
     },
     {
       "type": "tconstruct:stat_boost",
       "each_level": 0.1,
-      "operation": "add",
+      "operation": "multiply_base",
       "stat": "tconstruct:projectile_damage"
     },
     {
       "type": "tconstruct:stat_boost",
       "each_level": -0.1,
-      "operation": "add",
+      "operation": "multiply_base",
       "stat": "tconstruct:draw_speed"
     },
     {
       "type": "tconstruct:stat_boost",
       "each_level": 0.1,
-      "operation": "add",
+      "operation": "multiply_base",
       "stat": "tconstruct:armor"
     },
     {
       "type": "tconstruct:stat_boost",
       "each_level": 0.1,
-      "operation": "add",
+      "operation": "multiply_base",
       "stat": "tconstruct:armor_toughness"
     },
     {
       "type": "tconstruct:stat_boost",
       "each_level": 0.1,
-      "operation": "add",
+      "operation": "multiply_base",
       "stat": "tconstruct:knockback_resistance"
     },
     {
       "type": "tconstruct:stat_boost",
       "each_level": 0.1,
-      "operation": "add",
+      "operation": "multiply_base",
       "stat": "tconstruct:block_amount"
     }
   ],

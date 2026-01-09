@@ -181,6 +181,14 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.SpiderMandible, Ids.poison);
         addDefaultTraits(DreamtinkerMaterialIds.HoundFang, Ids.bic_hound_fang);
 
+        addDefaultTraits(DreamtinkerMaterialIds.AbjurationEssence, Ids.nova_abjuration_essence);
+        addDefaultTraits(DreamtinkerMaterialIds.ConjurationEssence, nova_conjuration_essence);
+        addDefaultTraits(DreamtinkerMaterialIds.AirEssence, Ids.nova_air_essence);
+        addDefaultTraits(DreamtinkerMaterialIds.EarthEssence, Ids.nova_earth_essence);
+        addDefaultTraits(DreamtinkerMaterialIds.FireEssence, Ids.nova_fire_essence);
+        addDefaultTraits(DreamtinkerMaterialIds.ManipulationEssence, Ids.nova_manipulation_essence);
+        addDefaultTraits(DreamtinkerMaterialIds.WaterEssence, Ids.nova_water_essence);
+
 
     }
 

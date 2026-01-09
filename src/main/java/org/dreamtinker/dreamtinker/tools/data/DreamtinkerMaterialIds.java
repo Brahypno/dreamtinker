@@ -75,6 +75,12 @@ public class DreamtinkerMaterialIds {
     public static final MaterialId InfernalEmber = new MaterialId(new ResourceLocation(MODID, "bic_infernal_ember"));
     public static final MaterialId SpiderMandible = new MaterialId(new ResourceLocation(MODID, "bic_spider_mandible"));
     public static final MaterialId HoundFang = new MaterialId(new ResourceLocation(MODID, "bic_hound_fang"));
-
-
+    //ars nouveau
+    public static final MaterialId AbjurationEssence = new MaterialId(new ResourceLocation(MODID, "nova_abjuration_essence"));
+    public static final MaterialId ConjurationEssence = new MaterialId(new ResourceLocation(MODID, "nova_conjuration_essence"));
+    public static final MaterialId AirEssence = new MaterialId(new ResourceLocation(MODID, "nova_air_essence"));
+    public static final MaterialId EarthEssence = new MaterialId(new ResourceLocation(MODID, "nova_earth_essence"));
+    public static final MaterialId FireEssence = new MaterialId(new ResourceLocation(MODID, "nova_fire_essence"));
+    public static final MaterialId ManipulationEssence = new MaterialId(new ResourceLocation(MODID, "nova_manipulation_essence"));
+    public static final MaterialId WaterEssence = new MaterialId(new ResourceLocation(MODID, "nova_water_essence"));
 }

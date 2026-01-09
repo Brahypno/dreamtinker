@@ -157,7 +157,14 @@
     "nova_spell_tiers.2": "#4D0A89",
     "nova_creative_tiers": "#F7D349",
     "nova_scriptum_attributes": "#F7D349",
-    "nova_magic_armor": "#F7D349"
+    "nova_magic_armor": "#F7D349",
+    "nova_abjuration_essence": "#E1BFFA",
+    "nova_conjuration_essence": "#95D1DB",
+    "nova_air_essence": "#D5F25B",
+    "nova_earth_essence": "#8BFF9C",
+    "nova_fire_essence": "#E07A6B",
+    "nova_manipulation_essence": "#EAA032",
+    "nova_water_essence": "#AA8BEA"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
@@ -210,7 +217,14 @@
     "bic_nightmare_claw": "#30273C",
     "bic_infernal_ember": "#42A42A",
     "bic_spider_mandible": "#353B3A",
-    "bic_hound_fang": "#A7B7C3"
+    "bic_hound_fang": "#A7B7C3",
+    "nova_abjuration_essence": "#E1BFFA",
+    "nova_conjuration_essence": "#95D1DB",
+    "nova_air_essence": "#D5F25B",
+    "nova_earth_essence": "#8BFF9C",
+    "nova_fire_essence": "#E07A6B",
+    "nova_manipulation_essence": "#EAA032",
+    "nova_water_essence": "#AA8BEA"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873",

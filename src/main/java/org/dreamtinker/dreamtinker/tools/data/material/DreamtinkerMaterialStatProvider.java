@@ -112,6 +112,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addMalumMeleeHarvest();
         addEidolonMeleeHarvest();
         addBICMeleeHarvest();
+        addNovaMeleeHarvest();
     }
 
     private void addELMeleeHarvest() {
@@ -172,6 +173,21 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new HeadMaterialStats(1100, 2f, Tiers.NETHERITE, 3f),
                          HandleMaterialStats.multipliers().durability(1.15f).miningSpeed(0.95f).attackDamage(1.15f).attackSpeed(1.05f).build(),
                          StatlessMaterialStats.BINDING);
+
+    }
+    private void addNovaMeleeHarvest() {
+        addMaterialStats(DreamtinkerMaterialIds.FireEssence,
+                new HeadMaterialStats(300, 2f, Tiers.IRON, 2.75f),
+                HandleMaterialStats.multipliers().durability(1.15f).miningSpeed(0.95f).attackDamage(1.10f).build(),
+                StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.ManipulationEssence,
+                new HeadMaterialStats(400, 6f, Tiers.IRON, 1f),
+                HandleMaterialStats.multipliers().durability(1.15f).miningSpeed(1.20f).attackSpeed(1.10f).build(),
+                StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.WaterEssence,
+                new HeadMaterialStats(300, 4f, Tiers.IRON, 1.75f),
+                HandleMaterialStats.multipliers().durability(1.05f).miningSpeed(1.05f).attackDamage(1.05f).attackSpeed(1.05f).build(),
+                StatlessMaterialStats.BINDING);
 
     }
 
@@ -266,6 +282,15 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
 
         addMaterialStats(DreamtinkerMaterialIds.MonsterSkin,
                          StatlessMaterialStats.BOWSTRING);
+
+        addMaterialStats(DreamtinkerMaterialIds.ConjurationEssence,
+                new LimbMaterialStats(300, 0.05f, 0.1f, -0.1f),
+                new GripMaterialStats(-0.05f, 0.05f, 1.5f),
+                StatlessMaterialStats.BOWSTRING);
+        addMaterialStats(DreamtinkerMaterialIds.AirEssence,
+                new LimbMaterialStats(300, 0.05f, 0.1f, 0.1f),
+                new GripMaterialStats(-0.05f, 0.10f, 1.5f),
+                StatlessMaterialStats.BOWSTRING);
     }
 
     private void addArmor() {
@@ -365,6 +390,13 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                             PlatingMaterialStats.builder().durabilityFactor(20).armor(2f, 2f, 3f, 1f).toughness(1).knockbackResistance(0f),
                             StatlessMaterialStats.MAILLE, StatlessMaterialStats.CUIRASS);
 
+        addArmorShieldStats(DreamtinkerMaterialIds.AbjurationEssence,
+                PlatingMaterialStats.builder().durabilityFactor(16).armor(2, 5, 4, 2).toughness(0f).knockbackResistance(0f),
+                StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
+
+        addArmorShieldStats(DreamtinkerMaterialIds.EarthEssence,
+                PlatingMaterialStats.builder().durabilityFactor(16).armor(2, 5, 4, 2).toughness(0f).knockbackResistance(0f),
+                StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
     }
 
     private void addAmmo() {
@@ -390,6 +422,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         this.addMaterialStats(DreamtinkerMaterialIds.InfernalEmber, StatlessMaterialStats.ARROW_HEAD);
         this.addMaterialStats(DreamtinkerMaterialIds.SpiderMandible, StatlessMaterialStats.ARROW_HEAD);
         this.addMaterialStats(DreamtinkerMaterialIds.HoundFang, StatlessMaterialStats.ARROW_HEAD);
+
+        this.addMaterialStats(DreamtinkerMaterialIds.ConjurationEssence, StatlessMaterialStats.ARROW_HEAD);
+        this.addMaterialStats(DreamtinkerMaterialIds.AirEssence, StatlessMaterialStats.ARROW_HEAD);
 
     }
 

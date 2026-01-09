@@ -83,6 +83,14 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.NightMareClaw, 2, 10, true, false, modLoaded("born_in_chaos_v1"));
         addMaterial(DreamtinkerMaterialIds.InfernalEmber, 2, 10, true, false, modLoaded("born_in_chaos_v1"));
         addMaterial(DreamtinkerMaterialIds.HoundFang, 2, 10, true, false, modLoaded("born_in_chaos_v1"));
+
+        addMaterial(DreamtinkerMaterialIds.AbjurationEssence, 2, 10, true, false, modLoaded("ars_nouveau"));
+        addMaterial(DreamtinkerMaterialIds.ConjurationEssence, 2, 10, true, false, modLoaded("ars_nouveau"));
+        addMaterial(DreamtinkerMaterialIds.AirEssence, 2, 10, true, false, modLoaded("ars_nouveau"));
+        addMaterial(DreamtinkerMaterialIds.EarthEssence, 2, 10, true, false, modLoaded("ars_nouveau"));
+        addMaterial(DreamtinkerMaterialIds.FireEssence, 2, 10, true, false, modLoaded("ars_nouveau"));
+        addMaterial(DreamtinkerMaterialIds.ManipulationEssence, 2, 10, true, false, modLoaded("ars_nouveau"));
+        addMaterial(DreamtinkerMaterialIds.WaterEssence, 2, 10, true, false, modLoaded("ars_nouveau"));
     }
 
     @Override
