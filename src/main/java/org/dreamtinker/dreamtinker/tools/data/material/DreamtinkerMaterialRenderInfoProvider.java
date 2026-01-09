@@ -91,6 +91,17 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
         buildRenderInfo(DreamtinkerMaterialIds.SpiderMandible).color(0xFF353B3A).fallbacks("bone").luminosity(4);
         buildRenderInfo(DreamtinkerMaterialIds.HoundFang).color(0xFFA7B7C3).fallbacks("bone").luminosity(4);
 
+        buildRenderInfo(DreamtinkerMaterialIds.AbjurationEssence).color(0xFFE1BFFA).fallbacks("gem").luminosity(4);
+        buildRenderInfo(DreamtinkerMaterialIds.ConjurationEssence).color(0xFF95D1DB).fallbacks("gem").luminosity(4);
+        buildRenderInfo(DreamtinkerMaterialIds.AirEssence).color(0xFFD5F25B).fallbacks("gem").luminosity(4);
+        buildRenderInfo(DreamtinkerMaterialIds.EarthEssence).color(0xFF8BFF9C).fallbacks("gem").luminosity(4);
+        buildRenderInfo(DreamtinkerMaterialIds.FireEssence).color(0xFFE07A6B).fallbacks("gem").luminosity(4);
+        buildRenderInfo(DreamtinkerMaterialIds.ManipulationEssence).color(0xFFEAA032).fallbacks("gem").luminosity(4);
+        buildRenderInfo(DreamtinkerMaterialIds.WaterEssence).color(0xFFAA8BEA).fallbacks("gem").luminosity(4);
+        buildRenderInfo(DreamtinkerMaterialIds.WildenHorn).color(0xFFE0E5D5).fallbacks("bone").luminosity(4);
+        buildRenderInfo(DreamtinkerMaterialIds.WildenWing).color(0xFFD0B595).fallbacks("bone").luminosity(4);
+        buildRenderInfo(DreamtinkerMaterialIds.WildenSpike).color(0xFFE09A55).fallbacks("bone").luminosity(4);
+
     }
 
     @Override

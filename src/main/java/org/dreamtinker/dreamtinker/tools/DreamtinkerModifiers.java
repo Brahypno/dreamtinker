@@ -33,6 +33,7 @@ import org.dreamtinker.dreamtinker.tools.modifiers.tools.tntarrow.StrongExplode;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.SpiritualWeaponTransformation;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.WeaponTransformation;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.*;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.ars.NovaConjurationEssence;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.ars.ScriptumAttributes;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.bic.DarkBlade;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.bic.dark_defense;
@@ -246,9 +247,10 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
 
     public static final StaticModifier<ScriptumAttributes> nova_scriptum_attributes =
             ARS_MODIFIERS.register("nova_scriptum_attributes", ScriptumAttributes::new);
-
     public static final StaticModifier<NovaMagicArmor> nova_magic_armor =
             ARS_MODIFIERS.register("nova_magic_armor", NovaMagicArmor::new);
+    public static final StaticModifier<NovaConjurationEssence> nova_conjuration_essence =
+            ARS_MODIFIERS.register("nova_conjuration_essence", NovaConjurationEssence::new);
 
     public static class Ids {
         public static final ModifierId long_tool = id("long_tool");
@@ -301,11 +303,13 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId sun_shine = id("sun_shine");
         public static final ModifierId heavy_arrow = id("heavy_arrow");
         public static final ModifierId light_arrow = id("light_arrow");
+        public static final ModifierId balanced_arrow = id("balanced_arrow");
         public static final ModifierId null_void = id("null_void");
         public static final ModifierId hidden_shape = id("hidden_shape");
         public static final ModifierId wrath = id("wrath");
         public static final ModifierId torrent = id("torrent");
         public static final ModifierId poison = id("poison");
+        public static final ModifierId weakness = id("weakness");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");
@@ -343,7 +347,12 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId nova_spell_tiers = id("nova_spell_tiers");
         public static final ModifierId nova_creative_tiers = id("nova_creative_tiers");
         public static final ModifierId nova_spell_slots = id("nova_spell_slots");
-
+        public static final ModifierId nova_abjuration_essence = id("nova_abjuration_essence");
+        public static final ModifierId nova_air_essence = id("nova_air_essence");
+        public static final ModifierId nova_earth_essence = id("nova_earth_essence");
+        public static final ModifierId nova_fire_essence = id("nova_fire_essence");
+        public static final ModifierId nova_manipulation_essence = id("nova_manipulation_essence");
+        public static final ModifierId nova_water_essence = id("nova_water_essence");
 
         private static ModifierId id(String name) {
             return new ModifierId(Dreamtinker.MODID, name);

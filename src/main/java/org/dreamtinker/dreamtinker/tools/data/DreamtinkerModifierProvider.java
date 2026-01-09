@@ -2,6 +2,7 @@ package org.dreamtinker.dreamtinker.tools.data;
 
 import com.aizistral.enigmaticlegacy.api.materials.EnigmaticMaterials;
 import com.aizistral.enigmaticlegacy.registries.EnigmaticEnchantments;
+import com.hollingsworth.arsnouveau.setup.registry.ModPotions;
 import com.sammy.malum.registry.common.AttributeRegistry;
 import com.sammy.malum.registry.common.item.EnchantmentRegistry;
 import elucent.eidolon.registries.EidolonAttributes;
@@ -38,12 +39,14 @@ import slimeknights.mantle.data.predicate.IJsonPredicate;
 import slimeknights.mantle.data.predicate.block.BlockPropertiesPredicate;
 import slimeknights.mantle.data.predicate.damage.DamageSourcePredicate;
 import slimeknights.mantle.data.predicate.damage.DamageTypePredicate;
+import slimeknights.mantle.data.predicate.entity.HasMobEffectPredicate;
 import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
 import slimeknights.mantle.data.predicate.entity.MobTypePredicate;
 import slimeknights.mantle.data.predicate.item.ItemPredicate;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.data.tinkering.AbstractModifierProvider;
 import slimeknights.tconstruct.library.json.LevelingInt;
+import slimeknights.tconstruct.library.json.LevelingValue;
 import slimeknights.tconstruct.library.json.RandomLevelingValue;
 import slimeknights.tconstruct.library.json.predicate.TinkerPredicate;
 import slimeknights.tconstruct.library.json.predicate.tool.HasModifierPredicate;
@@ -96,15 +99,15 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(
                         AttributeModule.builder(ForgeMod.ENTITY_REACH.get(), AttributeModifier.Operation.ADDITION).slots(EquipmentSlot.MAINHAND).eachLevel(1));
         buildModifier(Ids.antimony_usage).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                                         .addModule(StatBoostModule.add(ToolStats.DURABILITY).eachLevel(0.1f))
-                                         .addModule(StatBoostModule.add(ToolStats.ATTACK_DAMAGE).eachLevel(0.1f))
-                                         .addModule(StatBoostModule.add(ToolStats.ATTACK_SPEED).eachLevel(0.05f))
-                                         .addModule(StatBoostModule.add(ToolStats.PROJECTILE_DAMAGE).eachLevel(0.1f))
-                                         .addModule(StatBoostModule.add(ToolStats.DRAW_SPEED).eachLevel(-0.1f))
-                                         .addModule(StatBoostModule.add(ToolStats.ARMOR).eachLevel(0.1f))
-                                         .addModule(StatBoostModule.add(ToolStats.ARMOR_TOUGHNESS).eachLevel(0.1f))
-                                         .addModule(StatBoostModule.add(ToolStats.KNOCKBACK_RESISTANCE).eachLevel(0.1f))
-                                         .addModule(StatBoostModule.add(ToolStats.BLOCK_AMOUNT).eachLevel(0.1f));
+                                         .addModule(StatBoostModule.multiplyBase(ToolStats.DURABILITY).eachLevel(0.1f))
+                                         .addModule(StatBoostModule.multiplyBase(ToolStats.ATTACK_DAMAGE).eachLevel(0.1f))
+                                         .addModule(StatBoostModule.multiplyBase(ToolStats.ATTACK_SPEED).eachLevel(0.05f))
+                                         .addModule(StatBoostModule.multiplyBase(ToolStats.PROJECTILE_DAMAGE).eachLevel(0.1f))
+                                         .addModule(StatBoostModule.multiplyBase(ToolStats.DRAW_SPEED).eachLevel(-0.1f))
+                                         .addModule(StatBoostModule.multiplyBase(ToolStats.ARMOR).eachLevel(0.1f))
+                                         .addModule(StatBoostModule.multiplyBase(ToolStats.ARMOR_TOUGHNESS).eachLevel(0.1f))
+                                         .addModule(StatBoostModule.multiplyBase(ToolStats.KNOCKBACK_RESISTANCE).eachLevel(0.1f))
+                                         .addModule(StatBoostModule.multiplyBase(ToolStats.BLOCK_AMOUNT).eachLevel(0.1f));
         buildModifier(Ids.in_rain)
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                 .addModule(BlockDamageSourceModule.source(new DamageTypePredicate(DamageTypes.HOT_FLOOR)).build())
@@ -321,6 +324,9 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.light_arrow)
                 .addModule(StatBoostModule.add(ToolStats.VELOCITY).eachLevel(0.5f))
                 .addModule(StatBoostModule.add(ToolStats.PROJECTILE_DAMAGE).eachLevel(-0.25f));
+        buildModifier(Ids.balanced_arrow)
+                .addModule(StatBoostModule.add(ToolStats.VELOCITY).eachLevel(0.25f))
+                .addModule(StatBoostModule.add(ToolStats.PROJECTILE_DAMAGE).eachLevel(0.25f));
         buildModifier(Ids.null_void)
                 .addModule(MobEffectModule.builder(MobEffects.DARKNESS).level(RandomLevelingValue.flat(1)).time(RandomLevelingValue.random(20, 10)).build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT)
@@ -348,9 +354,13 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(MobEffectModule.builder(MobEffects.POISON)
                                           .level(RandomLevelingValue.perLevel(1, 1))
                                           .time(RandomLevelingValue.random(20, 10))
-                                          .target(LivingEntityPredicate.ANY)
                                           .build(),
-                           ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT).levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+                           ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
+        buildModifier(Ids.weakness)
+                .addModule(MobEffectModule.builder(MobEffects.WEAKNESS)
+                                          .level(RandomLevelingValue.perLevel(1, 1))
+                                          .time(RandomLevelingValue.random(20, 10))
+                                          .build());
 
         addELModifiers();
         addMalumModifiers();
@@ -584,6 +594,43 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.nova_creative_tiers, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau")).levelDisplay(ModifierLevelDisplay.NO_LEVELS);
         buildModifier(Ids.nova_spell_slots, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"));
         buildModifier(nova_magic_armor.getId(), not(DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"))).levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+        buildModifier(Ids.nova_abjuration_essence, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"))
+                .addModule(StatBoostModule.add(ToolStats.ARMOR_TOUGHNESS).eachLevel(1));
+        buildModifier(Ids.nova_air_essence, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"))
+                .addModule(StatBoostModule.add(ToolStats.VELOCITY).eachLevel(0.02f))
+                .addModule(StatBoostModule.add(ToolStats.DRAW_SPEED).eachLevel(0.02f));
+        buildModifier(Ids.nova_earth_essence, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"))
+                .addModule(StatBoostModule.add(ToolStats.ARMOR).eachLevel(3));
+        IJsonPredicate<LivingEntity> fire_blast =
+                LivingEntityPredicate.or(new HasMobEffectPredicate(ModPotions.BLAST_EFFECT.get()), LivingEntityPredicate.ON_FIRE);
+        buildModifier(Ids.nova_fire_essence, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"))
+                .addModule(ConditionalMeleeDamageModule.builder().target(fire_blast).eachLevel(2f))
+                .addModule(ConditionalPowerModule.builder().target(fire_blast).eachLevel(0.1f))
+                .addModule(MobEffectModule.builder(ModPotions.BLAST_EFFECT.get())
+                                          .level(RandomLevelingValue.perLevel(1, 1))
+                                          .time(RandomLevelingValue.random(20, 10))
+                                          .chance(LevelingValue.eachLevel(0.3f))
+                                          .target(LivingEntityPredicate.FIRE_IMMUNE.inverted())
+                                          .build());
+        buildModifier(Ids.nova_manipulation_essence, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"))
+                .addModule(ConditionalMeleeDamageModule.builder().target(new HasMobEffectPredicate(ModPotions.GRAVITY_EFFECT.get())).eachLevel(2f))
+                .addModule(ConditionalPowerModule.builder().target(new HasMobEffectPredicate(ModPotions.GRAVITY_EFFECT.get())).eachLevel(0.1f))
+                .addModule(MobEffectModule.builder(ModPotions.GRAVITY_EFFECT.get())
+                                          .level(RandomLevelingValue.perLevel(1, 1))
+                                          .time(RandomLevelingValue.random(20, 10))
+                                          .chance(LevelingValue.eachLevel(0.5f))
+                                          .build());
+        IJsonPredicate<LivingEntity> cold_snap =
+                LivingEntityPredicate.or(new HasMobEffectPredicate(MobEffects.MOVEMENT_SLOWDOWN), LivingEntityPredicate.IS_FREEZING,
+                                         LivingEntityPredicate.FEET_IN_WATER, LivingEntityPredicate.RAINING);
+        buildModifier(Ids.nova_water_essence, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"))
+                .addModule(ConditionalMeleeDamageModule.builder().target(cold_snap).eachLevel(2f))
+                .addModule(ConditionalPowerModule.builder().target(cold_snap).eachLevel(0.1f))
+                .addModule(MobEffectModule.builder(ModPotions.SNARE_EFFECT.get())
+                                          .level(RandomLevelingValue.perLevel(1, 1))
+                                          .time(RandomLevelingValue.random(20, 10))
+                                          .chance(LevelingValue.eachLevel(0.3f))
+                                          .build());
     }
 
     @Override
