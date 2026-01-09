@@ -1,0 +1,33 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "ars_nouveau"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "ars_nouveau"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ingredient": {
+    "item": "ars_nouveau:conjuration_essence"
+  },
+  "material": "dreamtinker:nova_conjuration_essence",
+  "needed": 1,
+  "value": 1
+}

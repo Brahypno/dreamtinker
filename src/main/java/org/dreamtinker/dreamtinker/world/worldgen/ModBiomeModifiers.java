@@ -39,9 +39,7 @@ public class ModBiomeModifiers {
     public static ResourceKey<BiomeModifier> spawnTransmutationGoldOre =
             ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, Dreamtinker.getLocation("add_transmutation_gold_ore"));
 
-    /**
-     * 把上面的 PlacedFeature 加进目标群系（此处示例：平原 + 花林）
-     */
+
     public static void bootstrap(BootstapContext<BiomeModifier> ctx) {
         HolderGetter<Biome> biomes = ctx.lookup(Registries.BIOME);
         HolderGetter<PlacedFeature> placed = ctx.lookup(Registries.PLACED_FEATURE);

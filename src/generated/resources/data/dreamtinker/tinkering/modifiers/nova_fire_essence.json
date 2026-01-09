@@ -1,0 +1,77 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "ars_nouveau"
+          },
+          {
+            "type": "dreamtinker:mod_compact_config",
+            "modid": "ars_nouveau"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:conditional_melee_damage",
+      "each_level": 2.0,
+      "percent": false,
+      "target": {
+        "type": "mantle:or",
+        "predicates": [
+          {
+            "type": "mantle:has_effect",
+            "effect": "ars_nouveau:blasting"
+          },
+          "mantle:on_fire"
+        ]
+      }
+    },
+    {
+      "type": "tconstruct:conditional_power",
+      "each_level": 0.1,
+      "percent": false,
+      "target": {
+        "type": "mantle:or",
+        "predicates": [
+          {
+            "type": "mantle:has_effect",
+            "effect": "ars_nouveau:blasting"
+          },
+          "mantle:on_fire"
+        ]
+      }
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "chance": {
+        "each_level": 0.3
+      },
+      "effect": "ars_nouveau:blasting",
+      "level": {
+        "flat": 1.0,
+        "per_level": 1.0
+      },
+      "target": {
+        "type": "mantle:inverted",
+        "inverted_type": "mantle:fire_immune"
+      },
+      "time": {
+        "flat": 20.0,
+        "random": 10.0
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

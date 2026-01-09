@@ -326,6 +326,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
         addMalumMaterials();
         addEidolonMaterials();
         addBICMaterials();
+        addNovaMaterials();
     }
 
     protected void addELMaterials() {
@@ -733,5 +734,117 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFFA7B7C3)
                                                 .addARGB(255, 0xFFCED9E2)
                                                 .build());
+    }
+    protected void addNovaMaterials() {
+        this.buildMaterial(DreamtinkerMaterialIds.AbjurationEssence)
+                .armor().shieldCore()
+                .fallbacks("gem")
+                .transformer(GreyToSpriteTransformer.builder()
+                        .addARGB(63, 0xFF8A3FAF)    // 最深紫色（暗部）
+                        .addARGB(102, 0xFFA25AC2)   // 深紫色
+                        .addARGB(140, 0xFFB97ED5)   // 中紫色
+                        .addARGB(178, 0xFFCE9FE8)   // 浅紫色
+                        .addARGB(216, 0xFFE1BFFA)   // 更浅紫色
+                        .addARGB(255, 0xFFF0D8FD)   // 最浅紫色（亮部）
+                        .build());
+        this.buildMaterial(DreamtinkerMaterialIds.ConjurationEssence)
+                .ranged().arrowHead()
+                .fallbacks("gem")
+                .transformer(GreyToSpriteTransformer.builder()
+                        .addARGB(63, 0xFF2A5A6F)    // 最深蓝绿（暗部）
+                        .addARGB(102, 0xFF3D7A93)   // 深蓝绿
+                        .addARGB(140, 0xFF579CB3)   // 中蓝绿
+                        .addARGB(178, 0xFF72BCCC)   // 浅蓝绿
+                        .addARGB(216, 0xFF95D1DB)   // 更浅蓝绿
+                        .addARGB(255, 0xFFBCE1E8)   // 最浅蓝绿（亮部）
+                        .build());
+        this.buildMaterial(DreamtinkerMaterialIds.AirEssence)
+                .ranged().arrowHead()
+                .fallbacks("gem")
+                .transformer(GreyToSpriteTransformer.builder()
+                        .addARGB(63, 0xFF4B6B1F)    // 最深黄绿（暗部）
+                        .addARGB(102, 0xFF6B912E)   // 深黄绿
+                        .addARGB(140, 0xFF8DB83D)   // 中黄绿
+                        .addARGB(178, 0xFFB1D54C)   // 浅黄绿
+                        .addARGB(216, 0xFFD5F25B)   // 更浅黄绿
+                        .addARGB(255, 0xFFF9FF6A)   // 最浅黄绿（亮部
+                        .build());
+        this.buildMaterial(DreamtinkerMaterialIds.EarthEssence)
+                .armor().shieldCore()
+                .fallbacks("gem")
+                .transformer(GreyToSpriteTransformer.builder()
+                        .addARGB(63, 0xFF1A5325)    // 最深墨绿（暗部）
+                        .addARGB(102, 0xFF2A7A38)   // 深翠绿
+                        .addARGB(140, 0xFF3AB14B)   // 中鲜绿
+                        .addARGB(178, 0xFF5AD96E)   // 浅亮绿
+                        .addARGB(216, 0xFF8BFF9C)   // 更浅荧光绿
+                        .addARGB(255, 0xFFB6FFC1)   // 最浅淡绿（亮部）
+                        .build());
+        this.buildMaterial(DreamtinkerMaterialIds.FireEssence)
+                .meleeHarvest().arrowHead()
+                .fallbacks("gem")
+                .transformer(GreyToSpriteTransformer.builder()
+                        .addARGB(63, 0xFF2C0A0F)     // 最深暗红（暗部）
+                        .addARGB(102, 0xFF5C1A21)    // 深酒红
+                        .addARGB(140, 0xFF8C2A33)    // 中红棕
+                        .addARGB(178, 0xFFB64A4F)    // 浅红橙
+                        .addARGB(216, 0xFFE07A6B)    // 亮橙红
+                        .addARGB(255, 0xFFFFA087)    // 最浅亮橙（高光）
+                        .build());
+        this.buildMaterial(DreamtinkerMaterialIds.ManipulationEssence)
+                .meleeHarvest()
+                .fallbacks("gem")
+                .transformer(GreyToSpriteTransformer.builder()
+                        .addARGB(63, 0xFF4A350A)     // 最深暗金（暗部）
+                        .addARGB(102, 0xFF7A5514)    // 深棕金
+                        .addARGB(140, 0xFFAA751E)    // 中黄铜色
+                        .addARGB(178, 0xFFD09528)    // 浅金棕
+                        .addARGB(216, 0xFFEAA032)    // 亮金色
+                        .addARGB(255, 0xFFFFCF46)    // 最浅亮金（高光）
+                        .build());
+        this.buildMaterial(DreamtinkerMaterialIds.WaterEssence)
+                .meleeHarvest().arrowHead()
+                .fallbacks("gem")
+                .transformer(GreyToSpriteTransformer.builder()
+                        .addARGB(63, 0xFF2A1A4A)     // 最深暗紫（暗部）
+                        .addARGB(102, 0xFF4A357A)    // 深紫棕
+                        .addARGB(140, 0xFF6A50AA)    // 中紫晶色
+                        .addARGB(178, 0xFF8A6BD0)    // 浅紫灰
+                        .addARGB(216, 0xFFAA8BEA)    // 亮浅紫
+                        .addARGB(255, 0xFFCAAFFF)    // 最浅淡紫（高光）
+                        .build());
+        this.buildMaterial(DreamtinkerMaterialIds.WildenHorn)
+                .arrowShaft()
+                .fallbacks("bone")
+                .transformer(GreyToSpriteTransformer.builder()
+                        .addARGB(63, 0xFF3A4A35)     // 最深暗灰绿（暗部）
+                        .addARGB(102, 0xFF6A7A65)    // 深灰绿
+                        .addARGB(140, 0xFF9AA095)    // 中浅灰绿
+                        .addARGB(178, 0xFFC0C5B5)    // 浅灰绿
+                        .addARGB(216, 0xFFE0E5D5)    // 亮浅灰
+                        .addARGB(255, 0xFFF0F5E5)    // 最浅灰白（高光）
+                        .build());
+        this.buildMaterial(DreamtinkerMaterialIds.WildenWing)
+                .arrowShaft()
+                .fallbacks("bone")
+                .transformer(GreyToSpriteTransformer.builder()
+                        .addARGB(63, 0xFF2A2015)     // 最深暗棕（暗部）
+                        .addARGB(102, 0xFF5A4A35)    // 深棕褐
+                        .addARGB(140, 0xFF8A7A55)    // 中棕黄
+                        .addARGB(178, 0xFFB09A75)    // 浅棕灰
+                        .addARGB(216, 0xFFD0B595)    // 亮浅棕
+                        .addARGB(255, 0xFFE0C5A5)    // 最浅棕黄（高光）
+                        .build());
+        this.buildMaterial(DreamtinkerMaterialIds.WildenSpike)
+                .arrowShaft()
+                .fallbacks("bone")
+                .transformer(GreyToSpriteTransformer.builder()
+                        .addARGB(63, 0xFF3A1A15)     // 最深暗红棕（暗部）
+                        .addARGB(102, 0xFF6A3A25)    // 深酒红棕
+                        .addARGB(140, 0xFF9A5A35)    // 中红棕
+                        .addARGB(178, 0xFFC07A45)    // 浅橙棕
+                        .addARGB(216, 0xFFE09A55)    // 亮红橙
+                        .addARGB(255, 0xFFF0B565)    // 最浅橙黄（高光）
+                        .build());
     }
 }

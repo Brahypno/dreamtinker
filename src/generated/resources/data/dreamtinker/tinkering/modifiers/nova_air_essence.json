@@ -1,0 +1,40 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "ars_nouveau"
+          },
+          {
+            "type": "dreamtinker:mod_compact_config",
+            "modid": "ars_nouveau"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:stat_boost",
+      "each_level": 0.02,
+      "operation": "add",
+      "stat": "tconstruct:velocity"
+    },
+    {
+      "type": "tconstruct:stat_boost",
+      "each_level": 0.02,
+      "operation": "add",
+      "stat": "tconstruct:draw_speed"
+    }
+  ],
+  "tooltip_display": "always"
+}

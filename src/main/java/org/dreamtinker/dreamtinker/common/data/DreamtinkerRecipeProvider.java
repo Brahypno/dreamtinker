@@ -844,6 +844,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         addMalumMaterialRecipes(consumer);
         addEidolonMaterialRecipes(consumer);
         addBICMaterialRecipes(consumer);
+        addNovaMaterialRecipes(consumer);
     }
 
     private void addELMaterialRecipes(Consumer<FinishedRecipe> consumer) {
@@ -967,8 +968,31 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         materialRecipe(wrapped, DreamtinkerMaterialIds.HoundFang, Ingredient.of(FANGOFTHE_HOUND_LEADER.get()), 1, 1,
                        materials_folder + "hound_fang");
     }
+    private void addNovaMaterialRecipes(Consumer<FinishedRecipe> consumer) {
+        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"));
+        materialRecipe(wrapped, DreamtinkerMaterialIds.AbjurationEssence, Ingredient.of(ItemsRegistry.ABJURATION_ESSENCE.get()), 1, 1,
+                materials_folder + "abjuration_essence");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.ConjurationEssence, Ingredient.of(ItemsRegistry.CONJURATION_ESSENCE.get()), 1, 1,
+                materials_folder + "conjuration_essence");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.AirEssence, Ingredient.of(ItemsRegistry.AIR_ESSENCE.get()), 1, 1,
+                materials_folder + "air_essence");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.EarthEssence, Ingredient.of(ItemsRegistry.EARTH_ESSENCE.get()), 1, 1,
+                materials_folder + "earth_essence");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.FireEssence, Ingredient.of(ItemsRegistry.FIRE_ESSENCE.get()), 1, 1,
+                materials_folder + "fire_essence");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.ManipulationEssence, Ingredient.of(ItemsRegistry.MANIPULATION_ESSENCE.get()), 1, 1,
+                materials_folder + "manipulation_essence");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.WaterEssence, Ingredient.of(ItemsRegistry.WATER_ESSENCE.get()), 1, 1,
+                materials_folder + "water_essence");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.WildenHorn, Ingredient.of(ItemsRegistry.WILDEN_HORN.get()), 1, 1,
+                materials_folder + "wilden_horn");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.WildenWing, Ingredient.of(ItemsRegistry.WILDEN_WING.get()), 1, 1,
+                materials_folder + "wilden_wing");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.WildenSpike, Ingredient.of(ItemsRegistry.WILDEN_SPIKE.get()), 1, 1,
+                materials_folder + "wilden_spikr");
+    }
 
-    String common_folder = "common/";
+        String common_folder = "common/";
 
     private void night_one_receipts(Consumer<FinishedRecipe> consumer, Item ingotLike, Item BlockLike) {
         String i2b = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(ingotLike)).getPath() + "_to_" +
@@ -1206,6 +1230,11 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"));
         armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.MonsterSkin);
         armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.SpikyShard);
+
+        wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"));
+        armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.AbjurationEssence);
+        armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.EarthEssence);
+
 
     }
 

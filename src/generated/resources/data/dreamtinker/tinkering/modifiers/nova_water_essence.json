@@ -1,0 +1,77 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "ars_nouveau"
+          },
+          {
+            "type": "dreamtinker:mod_compact_config",
+            "modid": "ars_nouveau"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:conditional_melee_damage",
+      "each_level": 2.0,
+      "percent": false,
+      "target": {
+        "type": "mantle:or",
+        "predicates": [
+          {
+            "type": "mantle:has_effect",
+            "effect": "minecraft:slowness"
+          },
+          "mantle:is_freezing",
+          "mantle:feet_in_water",
+          "mantle:raining_at"
+        ]
+      }
+    },
+    {
+      "type": "tconstruct:conditional_power",
+      "each_level": 0.1,
+      "percent": false,
+      "target": {
+        "type": "mantle:or",
+        "predicates": [
+          {
+            "type": "mantle:has_effect",
+            "effect": "minecraft:slowness"
+          },
+          "mantle:is_freezing",
+          "mantle:feet_in_water",
+          "mantle:raining_at"
+        ]
+      }
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "chance": {
+        "each_level": 0.3
+      },
+      "effect": "ars_nouveau:snared",
+      "level": {
+        "flat": 1.0,
+        "per_level": 1.0
+      },
+      "time": {
+        "flat": 20.0,
+        "random": 10.0
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

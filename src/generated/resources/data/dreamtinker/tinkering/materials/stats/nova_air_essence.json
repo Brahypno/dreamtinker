@@ -1,0 +1,17 @@
+{
+  "stats": {
+    "tconstruct:arrow_head": {},
+    "tconstruct:bowstring": {},
+    "tconstruct:grip": {
+      "accuracy": 0.1,
+      "durability": -0.05,
+      "melee_damage": 1.5
+    },
+    "tconstruct:limb": {
+      "accuracy": 0.1,
+      "draw_speed": 0.05,
+      "durability": 300,
+      "velocity": 0.1
+    }
+  }
+}

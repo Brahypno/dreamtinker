@@ -61,6 +61,18 @@
     {
       "id": "dreamtinker:eidolon_tattered_cloth",
       "required": false
+    },
+    {
+      "id": "dreamtinker:nova_water_essence",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:nova_fire_essence",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:nova_manipulation_essence",
+      "required": false
     }
   ]
 }

@@ -1,0 +1,45 @@
+{
+  "type": "tconstruct:item_part_builder",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "ars_nouveau"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "ars_nouveau"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "cost": 5,
+  "material": "dreamtinker:nova_abjuration_essence",
+  "pattern": "tconstruct:leggings_plating",
+  "pattern_item": [
+    {
+      "tag": "tconstruct:patterns/default"
+    },
+    {
+      "item": "tconstruct:leggings_plating_cast"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "item": "tconstruct:leggings_plating",
+    "nbt": {
+      "Material": "dreamtinker:nova_abjuration_essence"
+    }
+  }
+}
