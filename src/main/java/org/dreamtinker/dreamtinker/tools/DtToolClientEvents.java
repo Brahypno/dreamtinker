@@ -1,6 +1,8 @@
 package org.dreamtinker.dreamtinker.tools;
 
 import net.minecraft.client.color.item.ItemColors;
+import net.minecraft.client.renderer.entity.LightningBoltRenderer;
+import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -12,6 +14,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.DreamtinkerModule;
+import org.dreamtinker.dreamtinker.Entity.WiserLightBolt;
 import org.dreamtinker.dreamtinker.library.client.AggressiveFoxRender;
 import org.dreamtinker.dreamtinker.library.client.NarcissusFluidProjectileRenderer;
 import org.dreamtinker.dreamtinker.library.client.SlashOrbitRenderer;
@@ -64,6 +67,7 @@ public class DtToolClientEvents extends ClientEventBase {
         event.registerEntityRenderer(DreamtinkerModifiers.NarcissusSpitEntity.get(), NarcissusFluidProjectileRenderer::new);
         event.registerEntityRenderer(DreamtinkerModifiers.SLASH_ORBIT.get(), SlashOrbitRenderer::new);
         event.registerEntityRenderer(DreamtinkerModifiers.AggressiveFOX.get(), AggressiveFoxRender::new);
+        event.registerEntityRenderer(DreamtinkerModifiers.LIGHTNING_ENTITY.get(), LightningBoltRenderer::new);
     }
 
     @SubscribeEvent

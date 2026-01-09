@@ -14,6 +14,9 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.DreamtinkerModule;
+import org.dreamtinker.dreamtinker.Entity.WiserLightBolt;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.nbt.IToolContext;
@@ -25,7 +28,7 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class TwoHeadedSeven extends BattleModifier {//TODO This is too weak, need total conversion
+public class TwoHeadedSeven extends BattleModifier {
 
     @Override
     public boolean onProjectileHitsBlock(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, BlockHitResult hit, @Nullable LivingEntity attacker) {
@@ -35,14 +38,10 @@ public class TwoHeadedSeven extends BattleModifier {//TODO This is too weak, nee
             return false;
         ServerLevel level = (ServerLevel) attacker.level();
 
-        LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(level);
-        if (bolt == null)
-            return false;
-        BlockPos ep = attacker.getOnPos();
+        WiserLightBolt bolt = new WiserLightBolt(DreamtinkerModule.LIGHTNING_ENTITY.get(),level);
         BlockPos pos = hit.getBlockPos();
-        attacker.teleportToWithTicket(pos.getX(), pos.getY() + 1, pos.getZ());
 
-        bolt.moveTo(ep.getX(), ep.getY() + 1, ep.getZ());
+        bolt.setPos(pos.getX(), pos.getY(), pos.getZ());
         if (attacker instanceof ServerPlayer player)
             bolt.setCause(player);
         bolt.setVisualOnly(false);
