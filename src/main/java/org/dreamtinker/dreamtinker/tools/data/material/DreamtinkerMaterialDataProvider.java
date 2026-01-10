@@ -91,6 +91,9 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.FireEssence, 2, 10, true, false, modLoaded("ars_nouveau"));
         addMaterial(DreamtinkerMaterialIds.ManipulationEssence, 2, 10, true, false, modLoaded("ars_nouveau"));
         addMaterial(DreamtinkerMaterialIds.WaterEssence, 2, 10, true, false, modLoaded("ars_nouveau"));
+        addMaterial(DreamtinkerMaterialIds.WildenHorn, 1, 10, true, false, modLoaded("ars_nouveau"));
+        addMaterial(DreamtinkerMaterialIds.WildenWing, 1, 10, true, false, modLoaded("ars_nouveau"));
+        addMaterial(DreamtinkerMaterialIds.WildenSpike, 1, 10, true, false, modLoaded("ars_nouveau"));
     }
 
     @Override

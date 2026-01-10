@@ -8,7 +8,6 @@ import static org.dreamtinker.dreamtinker.Dreamtinker.MODID;
 import static slimeknights.tconstruct.library.materials.definition.MaterialVariantId.create;
 
 public class DreamtinkerMaterialIds {
-
     public static final MaterialId echo_alloy = new MaterialId(new ResourceLocation(MODID, "echo_alloy"));
     public static final MaterialId moonlight_ice = new MaterialId(new ResourceLocation(MODID, "moonlight_ice"));
     public static final MaterialId valentinite = new MaterialId(new ResourceLocation(MODID, "valentinite"));
@@ -83,4 +82,7 @@ public class DreamtinkerMaterialIds {
     public static final MaterialId FireEssence = new MaterialId(new ResourceLocation(MODID, "nova_fire_essence"));
     public static final MaterialId ManipulationEssence = new MaterialId(new ResourceLocation(MODID, "nova_manipulation_essence"));
     public static final MaterialId WaterEssence = new MaterialId(new ResourceLocation(MODID, "nova_water_essence"));
+    public static final MaterialId WildenHorn = new MaterialId(new ResourceLocation(MODID, "nova_wilden_horn"));
+    public static final MaterialId WildenWing = new MaterialId(new ResourceLocation(MODID, "nova_wilden_wing"));
+    public static final MaterialId WildenSpike = new MaterialId(new ResourceLocation(MODID, "nova_wilden_spike"));
 }

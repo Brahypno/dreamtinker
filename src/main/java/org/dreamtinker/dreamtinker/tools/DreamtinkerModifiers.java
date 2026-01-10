@@ -304,11 +304,13 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId sun_shine = id("sun_shine");
         public static final ModifierId heavy_arrow = id("heavy_arrow");
         public static final ModifierId light_arrow = id("light_arrow");
+        public static final ModifierId balanced_arrow = id("balanced_arrow");
         public static final ModifierId null_void = id("null_void");
         public static final ModifierId hidden_shape = id("hidden_shape");
         public static final ModifierId wrath = id("wrath");
         public static final ModifierId torrent = id("torrent");
         public static final ModifierId poison = id("poison");
+        public static final ModifierId weakness = id("weakness");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");

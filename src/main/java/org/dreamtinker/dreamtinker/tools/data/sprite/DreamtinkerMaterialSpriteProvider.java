@@ -813,5 +813,38 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                         .addARGB(216, 0xFFAA8BEA)    // 亮浅紫
                         .addARGB(255, 0xFFCAAFFF)    // 最浅淡紫（高光）
                         .build());
+        this.buildMaterial(DreamtinkerMaterialIds.WildenHorn)
+                .arrowShaft()
+                .fallbacks("bone")
+                .transformer(GreyToSpriteTransformer.builder()
+                        .addARGB(63, 0xFF3A4A35)     // 最深暗灰绿（暗部）
+                        .addARGB(102, 0xFF6A7A65)    // 深灰绿
+                        .addARGB(140, 0xFF9AA095)    // 中浅灰绿
+                        .addARGB(178, 0xFFC0C5B5)    // 浅灰绿
+                        .addARGB(216, 0xFFE0E5D5)    // 亮浅灰
+                        .addARGB(255, 0xFFF0F5E5)    // 最浅灰白（高光）
+                        .build());
+        this.buildMaterial(DreamtinkerMaterialIds.WildenWing)
+                .arrowShaft()
+                .fallbacks("bone")
+                .transformer(GreyToSpriteTransformer.builder()
+                        .addARGB(63, 0xFF2A2015)     // 最深暗棕（暗部）
+                        .addARGB(102, 0xFF5A4A35)    // 深棕褐
+                        .addARGB(140, 0xFF8A7A55)    // 中棕黄
+                        .addARGB(178, 0xFFB09A75)    // 浅棕灰
+                        .addARGB(216, 0xFFD0B595)    // 亮浅棕
+                        .addARGB(255, 0xFFE0C5A5)    // 最浅棕黄（高光）
+                        .build());
+        this.buildMaterial(DreamtinkerMaterialIds.WildenSpike)
+                .arrowShaft()
+                .fallbacks("bone")
+                .transformer(GreyToSpriteTransformer.builder()
+                        .addARGB(63, 0xFF3A1A15)     // 最深暗红棕（暗部）
+                        .addARGB(102, 0xFF6A3A25)    // 深酒红棕
+                        .addARGB(140, 0xFF9A5A35)    // 中红棕
+                        .addARGB(178, 0xFFC07A45)    // 浅橙棕
+                        .addARGB(216, 0xFFE09A55)    // 亮红橙
+                        .addARGB(255, 0xFFF0B565)    // 最浅橙黄（高光）
+                        .build());
     }
 }

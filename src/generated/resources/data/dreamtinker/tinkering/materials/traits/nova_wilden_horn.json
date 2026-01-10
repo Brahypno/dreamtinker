@@ -1,0 +1,12 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "dreamtinker:heavy_arrow"
+    },
+    {
+      "level": 1,
+      "name": "dreamtinker:balanced_arrow"
+    }
+  ]
+}

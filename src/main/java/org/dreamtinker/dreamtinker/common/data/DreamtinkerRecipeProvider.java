@@ -984,6 +984,12 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                 materials_folder + "manipulation_essence");
         materialRecipe(wrapped, DreamtinkerMaterialIds.WaterEssence, Ingredient.of(ItemsRegistry.WATER_ESSENCE.get()), 1, 1,
                 materials_folder + "water_essence");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.WildenHorn, Ingredient.of(ItemsRegistry.WILDEN_HORN.get()), 1, 1,
+                materials_folder + "wilden_horn");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.WildenWing, Ingredient.of(ItemsRegistry.WILDEN_WING.get()), 1, 1,
+                materials_folder + "wilden_wing");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.WildenSpike, Ingredient.of(ItemsRegistry.WILDEN_SPIKE.get()), 1, 1,
+                materials_folder + "wilden_spikr");
     }
 
         String common_folder = "common/";

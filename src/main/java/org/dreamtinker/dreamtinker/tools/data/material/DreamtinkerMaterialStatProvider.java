@@ -425,6 +425,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
 
         this.addMaterialStats(DreamtinkerMaterialIds.ConjurationEssence, StatlessMaterialStats.ARROW_HEAD);
         this.addMaterialStats(DreamtinkerMaterialIds.AirEssence, StatlessMaterialStats.ARROW_HEAD);
+        this.addMaterialStats(DreamtinkerMaterialIds.WildenHorn, StatlessMaterialStats.ARROW_SHAFT);
+        this.addMaterialStats(DreamtinkerMaterialIds.WildenSpike, StatlessMaterialStats.ARROW_SHAFT);
+        this.addMaterialStats(DreamtinkerMaterialIds.WildenWing, StatlessMaterialStats.ARROW_SHAFT);
 
     }
 

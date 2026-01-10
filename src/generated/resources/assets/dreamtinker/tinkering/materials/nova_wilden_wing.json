@@ -1,0 +1,41 @@
+{
+  "color": "FFD0B595",
+  "fallbacks": [
+    "bone"
+  ],
+  "generator": {
+    "supported_stats": [
+      "tconstruct:arrow_shaft"
+    ],
+    "transformer": {
+      "type": "tconstruct:grey_to_sprite",
+      "palette": [
+        {
+          "color": "FF2A2015",
+          "grey": 63
+        },
+        {
+          "color": "FF5A4A35",
+          "grey": 102
+        },
+        {
+          "color": "FF8A7A55",
+          "grey": 140
+        },
+        {
+          "color": "FFB09A75",
+          "grey": 178
+        },
+        {
+          "color": "FFD0B595",
+          "grey": 216
+        },
+        {
+          "color": "FFE0C5A5",
+          "grey": 255
+        }
+      ]
+    }
+  },
+  "luminosity": 4
+}

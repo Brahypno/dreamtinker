@@ -324,6 +324,9 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.light_arrow)
                 .addModule(StatBoostModule.add(ToolStats.VELOCITY).eachLevel(0.5f))
                 .addModule(StatBoostModule.add(ToolStats.PROJECTILE_DAMAGE).eachLevel(-0.25f));
+        buildModifier(Ids.balanced_arrow)
+                .addModule(StatBoostModule.add(ToolStats.VELOCITY).eachLevel(0.25f))
+                .addModule(StatBoostModule.add(ToolStats.PROJECTILE_DAMAGE).eachLevel(0.25f));
         buildModifier(Ids.null_void)
                 .addModule(MobEffectModule.builder(MobEffects.DARKNESS).level(RandomLevelingValue.flat(1)).time(RandomLevelingValue.random(20, 10)).build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT)
@@ -351,9 +354,13 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(MobEffectModule.builder(MobEffects.POISON)
                                           .level(RandomLevelingValue.perLevel(1, 1))
                                           .time(RandomLevelingValue.random(20, 10))
-                                          .target(LivingEntityPredicate.ANY)
                                           .build(),
-                           ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT).levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+                           ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
+        buildModifier(Ids.weakness)
+                .addModule(MobEffectModule.builder(MobEffects.WEAKNESS)
+                                .level(RandomLevelingValue.perLevel(1, 1))
+                                .time(RandomLevelingValue.random(20, 10))
+                                .build());
 
         addELModifiers();
         addMalumModifiers();

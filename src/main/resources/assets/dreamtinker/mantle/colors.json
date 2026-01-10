@@ -224,7 +224,10 @@
     "nova_earth_essence": "#8BFF9C",
     "nova_fire_essence": "#E07A6B",
     "nova_manipulation_essence": "#EAA032",
-    "nova_water_essence": "#AA8BEA"
+    "nova_water_essence": "#AA8BEA",
+    "nova_wilden_horn": "#E0E5D5",
+    "nova_wilden_wing": "#D0B595",
+    "nova_wilden_spike": "#E09A55"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873",
