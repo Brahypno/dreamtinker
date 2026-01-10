@@ -1,6 +1,6 @@
 {
   "type": "tconstruct:modifier",
-  "allow_crystal": false,
+  "allow_crystal": true,
   "conditions": [
     {
       "type": "forge:or",
@@ -27,28 +27,27 @@
   ],
   "inputs": [
     {
-      "tag": "forge:nether_stars"
-    },
-    {
-      "amount_needed": 2,
-      "tag": "forge:gems/emerald"
-    },
-    {
-      "amount_needed": 3,
-      "tag": "forge:ender_pearls"
+      "amount_needed": 6,
+      "item": "ars_nouveau:wilden_tribute"
     },
     {
       "item": "minecraft:totem_of_undying"
     },
     {
-      "item": "ars_nouveau:wilden_tribute"
+      "amount_needed": 3,
+      "item": "ars_nouveau:magebloom"
+    },
+    {
+      "amount_needed": 2,
+      "item": "ars_nouveau:blank_parchment"
     }
   ],
-  "level": {
-    "max": 2
+  "level": 1,
+  "result": "dreamtinker:nova_magic_armor",
+  "slots": {
+    "abilities": 1
   },
-  "result": "dreamtinker:nova_spell_tiers",
   "tools": {
-    "item": "dreamtinker:per_aspera_scriptum"
+    "tag": "tconstruct:modifiable/armor"
   }
 }

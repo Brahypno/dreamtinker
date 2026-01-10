@@ -35,7 +35,9 @@
       "tag": "forge:gems/diamond"
     }
   ],
-  "level": 2,
+  "level": {
+    "max": 2
+  },
   "result": "dreamtinker:nova_magic_armor",
   "tools": [
     {

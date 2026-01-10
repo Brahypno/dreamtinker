@@ -68,6 +68,8 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             .addOptional(Ids.malum_ascension, Ids.malum_rebound);
         this.tag(TinkerTags.Modifiers.GENERAL_ARMOR_UPGRADES)
             .addOptional(spiritual_weapon_transformation.getId());
+        this.tag(TinkerTags.Modifiers.GENERAL_ARMOR_ABILITIES)
+            .addOptional(nova_magic_armor.getId());
         this.tag(DreamtinkerTagKeys.Modifiers.MALUM_EXPOSE_SOUL)
             .addOptional(malum_hex_staff.getId(), malum_base.getId(), malum_distortion.getId(), malum_spirit_attributes.getId(),
                          Ids.malum_animated, Ids.malum_rebound, Ids.malum_ascension, Ids.malum_haunted, Ids.malum_replenishing, Ids.malum_spirit_plunder,

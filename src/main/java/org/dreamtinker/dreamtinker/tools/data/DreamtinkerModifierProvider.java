@@ -358,9 +358,9 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
         buildModifier(Ids.weakness)
                 .addModule(MobEffectModule.builder(MobEffects.WEAKNESS)
-                                .level(RandomLevelingValue.perLevel(1, 1))
-                                .time(RandomLevelingValue.random(20, 10))
-                                .build());
+                                          .level(RandomLevelingValue.perLevel(1, 1))
+                                          .time(RandomLevelingValue.random(20, 10))
+                                          .build());
 
         addELModifiers();
         addMalumModifiers();
@@ -601,35 +601,36 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(StatBoostModule.add(ToolStats.DRAW_SPEED).eachLevel(0.02f));
         buildModifier(Ids.nova_earth_essence, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"))
                 .addModule(StatBoostModule.add(ToolStats.ARMOR).eachLevel(3));
-        IJsonPredicate<LivingEntity> fire_blast=LivingEntityPredicate.or(new HasMobEffectPredicate(ModPotions.BLAST_EFFECT.get()),LivingEntityPredicate.ON_FIRE);
+        IJsonPredicate<LivingEntity> fire_blast =
+                LivingEntityPredicate.or(new HasMobEffectPredicate(ModPotions.BLAST_EFFECT.get()), LivingEntityPredicate.ON_FIRE);
         buildModifier(Ids.nova_fire_essence, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"))
                 .addModule(ConditionalMeleeDamageModule.builder().target(fire_blast).eachLevel(2f))
                 .addModule(ConditionalPowerModule.builder().target(fire_blast).eachLevel(0.1f))
                 .addModule(MobEffectModule.builder(ModPotions.BLAST_EFFECT.get())
-                        .level(RandomLevelingValue.perLevel(1, 1))
-                        .time(RandomLevelingValue.random(20, 10))
-                        .chance(LevelingValue.eachLevel(0.3f))
-                        .target(LivingEntityPredicate.FIRE_IMMUNE.inverted())
-                        .build());
+                                          .level(RandomLevelingValue.perLevel(1, 1))
+                                          .time(RandomLevelingValue.random(20, 10))
+                                          .chance(LevelingValue.eachLevel(0.3f))
+                                          .target(LivingEntityPredicate.FIRE_IMMUNE.inverted())
+                                          .build());
         buildModifier(Ids.nova_manipulation_essence, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"))
                 .addModule(ConditionalMeleeDamageModule.builder().target(new HasMobEffectPredicate(ModPotions.GRAVITY_EFFECT.get())).eachLevel(2f))
                 .addModule(ConditionalPowerModule.builder().target(new HasMobEffectPredicate(ModPotions.GRAVITY_EFFECT.get())).eachLevel(0.1f))
                 .addModule(MobEffectModule.builder(ModPotions.GRAVITY_EFFECT.get())
-                        .level(RandomLevelingValue.perLevel(1, 1))
-                        .time(RandomLevelingValue.random(20, 10))
-                        .chance(LevelingValue.eachLevel(0.5f))
-                        .build());
-        IJsonPredicate<LivingEntity> cold_snap=LivingEntityPredicate.or(new HasMobEffectPredicate(MobEffects.MOVEMENT_SLOWDOWN),LivingEntityPredicate.IS_FREEZING,LivingEntityPredicate.FEET_IN_WATER,LivingEntityPredicate.RAINING);
+                                          .level(RandomLevelingValue.perLevel(1, 1))
+                                          .time(RandomLevelingValue.random(20, 10))
+                                          .chance(LevelingValue.eachLevel(0.5f))
+                                          .build());
+        IJsonPredicate<LivingEntity> cold_snap =
+                LivingEntityPredicate.or(new HasMobEffectPredicate(MobEffects.MOVEMENT_SLOWDOWN), LivingEntityPredicate.IS_FREEZING,
+                                         LivingEntityPredicate.FEET_IN_WATER, LivingEntityPredicate.RAINING);
         buildModifier(Ids.nova_water_essence, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"))
                 .addModule(ConditionalMeleeDamageModule.builder().target(cold_snap).eachLevel(2f))
                 .addModule(ConditionalPowerModule.builder().target(cold_snap).eachLevel(0.1f))
                 .addModule(MobEffectModule.builder(ModPotions.SNARE_EFFECT.get())
-                        .level(RandomLevelingValue.perLevel(1, 1))
-                        .time(RandomLevelingValue.random(20, 10))
-                        .chance(LevelingValue.eachLevel(0.3f))
-                        .build());
-
-        buildModifier(Ids.nova_caster_tool, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"));
+                                          .level(RandomLevelingValue.perLevel(1, 1))
+                                          .time(RandomLevelingValue.random(20, 10))
+                                          .chance(LevelingValue.eachLevel(0.3f))
+                                          .build());
     }
 
     @Override

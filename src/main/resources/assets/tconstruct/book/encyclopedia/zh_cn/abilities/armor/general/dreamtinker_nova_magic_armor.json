@@ -1,0 +1,16 @@
+{
+  "modifier_id": "dreamtinker:nova_magic_armor",
+  "text": [
+    {
+      "text": "仅第一级需要能力槽；贴身护甲自带一级且有更便宜的配方。让护甲具备新生魔艺法袍的能力"
+    },
+    {
+      "text": "注意：仅贴身护甲在改衣台上能够显示相对正确的模型，但功能均正常。你仍然需要使用新生魔艺的方法提升护甲阶级",
+      "paragraph": true
+    }
+  ],
+  "more_text_space": true,
+  "effects": [
+    "Multi-use"
+  ]
+}

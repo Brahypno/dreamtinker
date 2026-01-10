@@ -1,0 +1,16 @@
+{
+  "modifier_id": "dreamtinker:nova_magic_armor",
+  "text": [
+    {
+      "text": "First level need one ability slot; Under armor set have a different and cheeper recipe. Make armor have magic armor ability in Ars Nouveau"
+    },
+    {
+      "text": "Note: Though Alteration Table could be used, only model of under plate armor may be displayed. And you still need to upgrade armor in Ars Nouveau method",
+      "paragraph": true
+    }
+  ],
+  "more_text_space": true,
+  "effects": [
+    "Multi-use"
+  ]
+}

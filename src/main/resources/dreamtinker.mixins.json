@@ -7,19 +7,21 @@
   "mixins": [
     "isInvertedHealAndHarmMixin",
     "ProjectileMixin",
-    "GeneralCompact.ExtraSCYTHEModifier",
     "enigmatic_legacy_mixin.EnigmaticEventHandlerMixin",
     "enigmatic_legacy_mixin.SuperpositionHandlerMixin",
+    "GeneralCompact.ExtraSCYTHEModifier",
+    "malum_mixin.EdgeOfDeliveranceItemMixin",
     "malum_mixin.HiddenTagRegistryMixin",
+    "malum_mixin.MalumScytheItemMixin",
+    "malum_mixin.SoulHandlerMixin",
     "malum_mixin.SpiritInfusionRecipeBuilderAccessor",
     "malum_mixin.SpiritInfusionRecipeBuilderResultMixin",
-    "malum_mixin.SoulHandlerMixin",
-    "malum_mixin.EdgeOfDeliveranceItemMixin",
-    "malum_mixin.MalumScytheItemMixin",
-    "NovaMixin.MethodProjectileMixin",
-    "NovaMixin.AugmentCompatibilityValidatorMixin",
+    "NovaMixin.AlterationTableRendererMixin",
     "NovaMixin.ArmorUpgradeRecipeCategoryMixin",
-    "NovaMixin.AlterationTableRendererMixin"],
+    "NovaMixin.AugmentCompatibilityValidatorMixin",
+    "NovaMixin.MethodProjectileMixin",
+    "NovaMixin.PerkUtilMixin"
+  ],
   "client": [
   ],
   "injectors": {
