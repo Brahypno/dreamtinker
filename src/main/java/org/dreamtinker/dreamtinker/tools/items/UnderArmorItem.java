@@ -65,24 +65,4 @@ public class UnderArmorItem extends ModifiableArmorItem {
             }
         });
     }
-
-    public @NotNull Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
-        CompoundTag nbt = stack.getTag();
-        Multimap<Attribute, AttributeModifier> tinker_map = slot == this.getEquipmentSlot() && nbt != null ?
-                                                            this.getAttributeModifiers((IToolStackView) ToolStack.from(stack), (EquipmentSlot) slot) :
-                                                            ImmutableMultimap.of();
-        Multimap<Attribute, AttributeModifier> mutable = HashMultimap.create(tinker_map);
-        if (ModList.get().isLoaded("ars_nouveau") && !configCompactDisabled("ars_nouveau")){
-            mutable.putAll(arsNovaUtils.getAttributeModifiers(slot, stack, this.type));
-        }
-        return mutable;
-    }
-
-    @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-        super.appendHoverText(stack, level, tooltip, flag);
-        if (ModList.get().isLoaded("ars_nouveau") && !configCompactDisabled("ars_nouveau")){
-            arsNovaUtils.appendHoverText(stack, level, tooltip, flag);
-        }
-    }
 }
