@@ -968,31 +968,32 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         materialRecipe(wrapped, DreamtinkerMaterialIds.HoundFang, Ingredient.of(FANGOFTHE_HOUND_LEADER.get()), 1, 1,
                        materials_folder + "hound_fang");
     }
+
     private void addNovaMaterialRecipes(Consumer<FinishedRecipe> consumer) {
         Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"));
         materialRecipe(wrapped, DreamtinkerMaterialIds.AbjurationEssence, Ingredient.of(ItemsRegistry.ABJURATION_ESSENCE.get()), 1, 1,
-                materials_folder + "abjuration_essence");
+                       materials_folder + "abjuration_essence");
         materialRecipe(wrapped, DreamtinkerMaterialIds.ConjurationEssence, Ingredient.of(ItemsRegistry.CONJURATION_ESSENCE.get()), 1, 1,
-                materials_folder + "conjuration_essence");
+                       materials_folder + "conjuration_essence");
         materialRecipe(wrapped, DreamtinkerMaterialIds.AirEssence, Ingredient.of(ItemsRegistry.AIR_ESSENCE.get()), 1, 1,
-                materials_folder + "air_essence");
+                       materials_folder + "air_essence");
         materialRecipe(wrapped, DreamtinkerMaterialIds.EarthEssence, Ingredient.of(ItemsRegistry.EARTH_ESSENCE.get()), 1, 1,
-                materials_folder + "earth_essence");
+                       materials_folder + "earth_essence");
         materialRecipe(wrapped, DreamtinkerMaterialIds.FireEssence, Ingredient.of(ItemsRegistry.FIRE_ESSENCE.get()), 1, 1,
-                materials_folder + "fire_essence");
+                       materials_folder + "fire_essence");
         materialRecipe(wrapped, DreamtinkerMaterialIds.ManipulationEssence, Ingredient.of(ItemsRegistry.MANIPULATION_ESSENCE.get()), 1, 1,
-                materials_folder + "manipulation_essence");
+                       materials_folder + "manipulation_essence");
         materialRecipe(wrapped, DreamtinkerMaterialIds.WaterEssence, Ingredient.of(ItemsRegistry.WATER_ESSENCE.get()), 1, 1,
-                materials_folder + "water_essence");
+                       materials_folder + "water_essence");
         materialRecipe(wrapped, DreamtinkerMaterialIds.WildenHorn, Ingredient.of(ItemsRegistry.WILDEN_HORN.get()), 1, 1,
-                materials_folder + "wilden_horn");
+                       materials_folder + "wilden_horn");
         materialRecipe(wrapped, DreamtinkerMaterialIds.WildenWing, Ingredient.of(ItemsRegistry.WILDEN_WING.get()), 1, 1,
-                materials_folder + "wilden_wing");
+                       materials_folder + "wilden_wing");
         materialRecipe(wrapped, DreamtinkerMaterialIds.WildenSpike, Ingredient.of(ItemsRegistry.WILDEN_SPIKE.get()), 1, 1,
-                materials_folder + "wilden_spikr");
+                       materials_folder + "wilden_spike");
     }
 
-        String common_folder = "common/";
+    String common_folder = "common/";
 
     private void night_one_receipts(Consumer<FinishedRecipe> consumer, Item ingotLike, Item BlockLike) {
         String i2b = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(ingotLike)).getPath() + "_to_" +
@@ -1784,6 +1785,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(Tags.Items.GEMS_DIAMOND, 3)
                              .addInput(Tags.Items.STORAGE_BLOCKS_QUARTZ, 3)
                              .addInput(Tags.Items.RODS_BLAZE, 2)
+                             .disallowCrystal()
                              .setMaxLevel(1)
                              .save(wrapped, wrap(DreamtinkerModifiers.Ids.nova_spell_tiers, slotlessFolder, "_mage"));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.nova_spell_tiers)
@@ -1793,7 +1795,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(Tags.Items.ENDER_PEARLS, 3)
                              .addInput(Items.TOTEM_OF_UNDYING, 1)
                              .addInput(ItemsRegistry.WILDEN_TRIBUTE, 1)
-                             .setLevelRange(2, 2)
+                             .disallowCrystal()
+                             .setMaxLevel(2)
                              .save(wrapped, wrap(DreamtinkerModifiers.Ids.nova_spell_tiers, slotlessFolder, "_archmage"));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.nova_magic_armor)
                              .setTools(under_plates)
@@ -1805,8 +1808,32 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setTools(under_plates)
                              .addInput(ItemsRegistry.MAGE_FIBER, 4)
                              .addInput(Tags.Items.GEMS_DIAMOND, 8)
-                             .setLevelRange(2, 2)
+                             .setMaxLevel(2)
                              .save(wrapped, wrap(DreamtinkerModifiers.nova_magic_armor, slotlessFolder, "_archmage"));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.nova_magic_armor)
+                             .setTools(TinkerTags.Items.ARMOR)
+                             .addInput(ItemsRegistry.WILDEN_TRIBUTE, 6)
+                             .addInput(Items.TOTEM_OF_UNDYING, 1)
+                             .addInput(ItemsRegistry.MAGE_BLOOM, 3)
+                             .addInput(ItemsRegistry.BLANK_PARCHMENT, 2)
+                             .setSlots(SlotType.ABILITY, 1)
+                             .setMaxLevel(1)
+                             .saveSalvage(wrapped, wrap(DreamtinkerModifiers.nova_magic_armor, abilitySalvage, "_1"))
+                             .save(wrapped, wrap(DreamtinkerModifiers.nova_magic_armor, abilityFolder, "_1"));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.nova_magic_armor)
+                             .setTools(TinkerTags.Items.ARMOR)
+                             .addInput(ItemsRegistry.MAGE_FIBER, 8)
+                             .addInput(Tags.Items.INGOTS_GOLD, 8)
+                             .addInput(Tags.Items.INGOTS_GOLD, 8)
+                             .setLevelRange(2, 2)
+                             .save(wrapped, wrap(DreamtinkerModifiers.nova_magic_armor, slotlessFolder, "_general_mage"));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.nova_magic_armor)
+                             .setTools(TinkerTags.Items.ARMOR)
+                             .addInput(ItemsRegistry.MAGE_FIBER, 8)
+                             .addInput(Tags.Items.GEMS_DIAMOND, 8)
+                             .addInput(Tags.Items.GEMS_DIAMOND, 8)
+                             .setLevelRange(3, 3)
+                             .save(wrapped, wrap(DreamtinkerModifiers.nova_magic_armor, slotlessFolder, "_general_archmage"));
     }
 
     private void addEntityMeltingRecipes(Consumer<FinishedRecipe> consumer) {

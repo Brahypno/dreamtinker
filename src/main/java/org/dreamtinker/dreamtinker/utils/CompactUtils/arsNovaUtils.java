@@ -22,6 +22,9 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.Spell.AugmentTinker;
+import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
+import slimeknights.mantle.client.SafeClientAccess;
+import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
@@ -120,10 +123,12 @@ public class arsNovaUtils {
 
     public static void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag flag) {
         IPerkProvider<ItemStack> perkProvider = PerkRegistry.getPerkProvider(stack.getItem());
-        if (perkProvider != null){
-            IPerkHolder var7 = perkProvider.getPerkHolder(stack);
-            if (var7 instanceof ArmorPerkHolder){
-                ArmorPerkHolder armorPerkHolder = (ArmorPerkHolder) var7;
+        if (perkProvider == null && stack.getItem() instanceof ArmorItem armorItem){
+            perkProvider = PerkRegistry.getPerkProvider(DreamtinkerTools.underPlate.get(armorItem.getType()));
+        }
+        if (perkProvider != null && SafeClientAccess.getTooltipKey().equals(TooltipKey.NORMAL)){
+            IPerkHolder<ItemStack> var7 = perkProvider.getPerkHolder(stack);
+            if (var7 instanceof ArmorPerkHolder armorPerkHolder){
                 tooltip.add(Component.translatable("ars_nouveau.tier", new Object[]{armorPerkHolder.getTier() + 1}).withStyle(ChatFormatting.GOLD));
             }
 

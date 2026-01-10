@@ -34,6 +34,7 @@ import org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.SpiritualWea
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.WeaponTransformation;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.*;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.ars.NovaConjurationEssence;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.ars.NovaMagicArmor;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.ars.ScriptumAttributes;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.bic.DarkBlade;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.bic.dark_defense;
