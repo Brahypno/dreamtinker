@@ -69,8 +69,7 @@ public class TheWolfWas extends BattleModifier {
 
     @Override
     public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
-        if (!(tool instanceof ToolStack toolstack))
-            return;
+        ToolStack toolstack =ToolStack.from(stack);
         if (holder == null)
             return;
         if (stack.isEmpty())
@@ -79,7 +78,7 @@ public class TheWolfWas extends BattleModifier {
         int count = nbt.getInt(TAG_WOLF);
         if (count < TheWolfWasDamage.get())
             return;
-        if (tool.getModifierLevel(DreamtinkerModifiers.despair_mist.getId()) < 1)
+        if (1 < tool.getModifierLevel(DreamtinkerModifiers.despair_mist.getId()))
             return;
         if (!TheWolfWasEnable.get())
             return;
