@@ -2,7 +2,6 @@ package org.dreamtinker.dreamtinker.tools;
 
 import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.renderer.entity.LightningBoltRenderer;
-import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -14,8 +13,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.DreamtinkerModule;
-import org.dreamtinker.dreamtinker.Entity.WiserLightBolt;
 import org.dreamtinker.dreamtinker.library.client.AggressiveFoxRender;
+import org.dreamtinker.dreamtinker.library.client.DTItemProperties;
 import org.dreamtinker.dreamtinker.library.client.NarcissusFluidProjectileRenderer;
 import org.dreamtinker.dreamtinker.library.client.SlashOrbitRenderer;
 import org.dreamtinker.dreamtinker.library.client.particle.VibeBarParticle;
@@ -33,6 +32,7 @@ public class DtToolClientEvents extends ClientEventBase {
     @SubscribeEvent
     static void clientSetupEvent(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
+            DTItemProperties.register();
             TinkerItemProperties.registerToolProperties(DreamtinkerTools.mashou);
             TinkerItemProperties.registerToolProperties(DreamtinkerTools.silence_glove);
             TinkerItemProperties.registerToolProperties(DreamtinkerTools.narcissus_wing);

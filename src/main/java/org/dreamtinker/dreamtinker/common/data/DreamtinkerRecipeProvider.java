@@ -1593,6 +1593,12 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setSlots(SlotType.UPGRADE, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.wrath, upgradeSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.wrath, upgradeFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.fox_blessing)
+                             .setTools(TinkerTags.Items.HELD)
+                             .addInput(DreamtinkerCommon.fox_fur.get(), 2)
+                             .addInput(Tags.Items.GEMS_PRISMARINE, 15)
+                             .setMaxLevel(1)
+                             .save(consumer, prefix(DreamtinkerModifiers.fox_blessing, slotlessFolder));
         // Start of enigmaticlegacy modifiers
         wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.life_looting)

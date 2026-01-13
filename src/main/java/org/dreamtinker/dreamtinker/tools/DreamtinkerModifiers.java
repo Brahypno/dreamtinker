@@ -180,6 +180,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<SignalAxe> signal_axe = MODIFIERS.register("signal_axe", SignalAxe::new);
     public static final StaticModifier<LoveShooting> love_shooting = MODIFIERS.register("love_shooting", LoveShooting::new);
     public static final StaticModifier<TeleportShoot> teleport_shooting = MODIFIERS.register("teleport_shooting", TeleportShoot::new);
+    public static final StaticModifier<FoxBlessing> fox_blessing = MODIFIERS.register("fox_blessing", FoxBlessing::new);
 
     //etherium
     public static final StaticModifier<ELAstralBreak> astral_break = EL_MODIFIERS.register("astral_break", ELAstralBreak::new);

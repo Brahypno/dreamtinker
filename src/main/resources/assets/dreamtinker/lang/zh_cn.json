@@ -639,6 +639,9 @@
   "modifier.dreamtinker.nova_water_essence.flavor": "水是冷的",
   "modifier.dreamtinker.nova_water_essence.description": "对在水中或冻结的目标造成更多伤害，概率施加冻结",
   "modifier.dreamtinker.nova_water_essence.attack_damage": "伤害对雨中水中冻结",
+  "modifier.dreamtinker.fox_blessing": "狐狸的祝福",
+  "modifier.dreamtinker.fox_blessin.flavor": "以食物为交易",
+  "modifier.dreamtinker.fox_blessin.description": "当攻击/受击时，召唤有数量限制的武装狐狸帮你",
 
   "material.dreamtinker.echo_alloy": "回响合金",
   "material.dreamtinker.echo_alloy.flavor": "是神秘的回响，还是秘密的回响",
@@ -918,6 +921,8 @@
   "item.dreamtinker.nova_misc_cast": "新生纹饰金质铸模",
   "item.dreamtinker.nova_misc_sand_cast": "新生纹饰沙子铸模",
   "item.dreamtinker.nova_misc_red_sand_cast": "新生纹饰红沙铸模",
+  "item.dreamtinker.fox_fur": "狐毛团",
+  "tooltip.dreamtinker.fox_fur_1": "仅在武装狐狸吃过东西后掉落",
 
   "block.dreamtinker.crying_obsidian_pane": "哭泣的黑曜石板",
   "block.dreamtinker.narcissus": "水仙",
