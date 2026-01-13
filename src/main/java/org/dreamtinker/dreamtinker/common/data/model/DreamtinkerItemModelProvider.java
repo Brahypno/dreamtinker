@@ -111,6 +111,7 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
         generateItemModel(DreamtinkerCommon.raw_transmutation_gold, "");
         generateItemModel(DreamtinkerCommon.deep_prismarine_shard, "materials");
         generateItemModel(AugmentTinker.INSTANCE.getRegistryName(), "");
+        generateItemModel(DreamtinkerCommon.fox_fur, "");
         //generateBlockItemModel(object);
         part(DreamtinkerToolParts.explode_core.get());
         part(DreamtinkerToolParts.memoryOrthant.get());

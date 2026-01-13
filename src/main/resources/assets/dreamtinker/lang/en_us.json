@@ -639,6 +639,9 @@
   "modifier.dreamtinker.nova_water_essence.flavor": "water could be cold",
   "modifier.dreamtinker.nova_water_essence.description": "deal more damage to entity that is freezing, in water or slow; apply snare effect with chance",
   "modifier.dreamtinker.nova_water_essence.attack_damage": "Damage to Entity in water or slowdown",
+  "modifier.dreamtinker.fox_blessing": "Fox Blessing",
+  "modifier.dreamtinker.fox_blessin.flavor": "A trade for food",
+  "modifier.dreamtinker.fox_blessin.description": "When hit entity/on hit, summon limited number of weapon fox to help you",
 
   "material.dreamtinker.echo_alloy": "Echo Alloy",
   "material.dreamtinker.echo_alloy.flavor": "Its echo of mystery, or echo of enigma",
@@ -918,6 +921,8 @@
   "item.dreamtinker.nova_misc_cast": "Nova Decoration Gold Cast",
   "item.dreamtinker.nova_misc_sand_cast": "Nova Decoration Sand Cast",
   "item.dreamtinker.nova_misc_red_sand_cast": "Nova Decoration Red Sand Cast",
+  "item.dreamtinker.fox_fur": "Fox fur",
+  "tooltip.dreamtinker.fox_fur_1": "Only Obtainable when weapon fox finish eating!",
 
   "block.dreamtinker.crying_obsidian_pane": "Crying Obsidian Pane",
   "block.dreamtinker.narcissus": "Narcissus",

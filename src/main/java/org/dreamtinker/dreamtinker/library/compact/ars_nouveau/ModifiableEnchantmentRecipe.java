@@ -83,7 +83,7 @@ public class ModifiableEnchantmentRecipe extends EnchantingApparatusRecipe {
     public @NotNull ItemStack assemble(EnchantingApparatusTile inv, RegistryAccess p_267165_) {
         ItemStack stack = inv.getStack().getItem() == Items.BOOK ? new ItemStack(Items.ENCHANTED_BOOK) : inv.getStack().copy();
         ToolStack toolStack = ToolStack.from(stack);
-        toolStack.addModifier(Modifierid, modifier_level);
+        toolStack.addModifier(Modifierid, 1);
         toolStack.updateStack(stack);
         return stack;
     }
