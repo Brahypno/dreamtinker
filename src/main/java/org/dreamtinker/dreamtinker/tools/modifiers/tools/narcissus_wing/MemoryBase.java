@@ -42,6 +42,7 @@ import slimeknights.tconstruct.library.tools.item.ranged.ModifiableLauncherItem;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
+import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.modifiers.ability.interaction.BlockingModifier;
 
 import javax.annotation.Nullable;
@@ -50,6 +51,10 @@ import static slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHel
 
 public class MemoryBase extends BattleModifier {
     private final Fluid fallback_fluid = DreamtinkerFluids.blood_soul.get();
+
+    private int getLevel(IToolStackView toolStackView) {
+        return toolStackView.getModifierLevel(this.getId()) + toolStackView.getModifierLevel(TinkerModifiers.expanded.get()) * 2;
+    }
 
     @Override
     public @NotNull Component getDisplayName(@NotNull IToolStackView tool, ModifierEntry entry, @Nullable RegistryAccess access) {
@@ -89,7 +94,7 @@ public class MemoryBase extends BattleModifier {
                 fluid = new FluidStack(fallback_fluid, (int) (player.getAbilities().instabuild ? Integer.MAX_VALUE : Math.max(0, player.getHealth() - 1) * 5));
             if (ForgeRegistries.FLUIDS.getHolder(fluid.getFluid()).map(h -> h.is(DreamtinkerTagKeys.Fluids.narcissus_wing_used)).orElse(false) &&
                 FluidEffectManager.INSTANCE.find(fluid.getFluid()).hasEffects() &&
-                1 + 2 * (modifier.getLevel() - 1) < fluid.getAmount()){//life can transform to blood soul, and we leave 1 HP(half heart)
+                1 + 2 * (getLevel(tool) - 1) < fluid.getAmount()){//life can transform to blood soul, and we leave 1 HP(half heart)
                 GeneralInteractionModifierHook.startUsingWithDrawtime(tool, modifier.getId(), player, hand, 2.5f);
                 return InteractionResult.SUCCESS;
             }
@@ -117,7 +122,7 @@ public class MemoryBase extends BattleModifier {
                     // power - size of each individual projectile
                     float power = charge * ConditionalStatModifierHook.getModifiedStat(tool, entity, ToolStats.PROJECTILE_DAMAGE);
                     // level acts like multishot level, meaning higher produces more projectiles
-                    int level = modifier.intEffectiveLevel();
+                    int level = getLevel(tool);
                     // amount is the amount per projectile, total cost is amount times level (every other shot is free)
                     // if its 0, that means we have only a couple mb left
                     int max_possible_amount = (int) (fluid.getAmount() + ((fluid.getFluid().equals(fallback_fluid)) ? 0 : possible_amount));

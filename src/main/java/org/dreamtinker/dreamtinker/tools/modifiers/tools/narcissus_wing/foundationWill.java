@@ -39,13 +39,13 @@ import org.dreamtinker.dreamtinker.library.modifiers.hook.LeftClickHook;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
-import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.behavior.ProcessLootModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.combat.LootingModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.KeybindInteractModifierHook;
+import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.LootingContext;
 import slimeknights.tconstruct.library.tools.helper.ToolHarvestLogic;
@@ -54,6 +54,7 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
+import slimeknights.tconstruct.tools.TinkerModifiers;
 
 import javax.annotation.Nullable;
 import java.util.ArrayDeque;
@@ -61,13 +62,18 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class foundationWill extends Modifier implements LeftClickHook, ProcessLootModifierHook, KeybindInteractModifierHook, TooltipModifierHook, LootingModifierHook {
+public class foundationWill extends NoLevelsModifier implements LeftClickHook, ProcessLootModifierHook, KeybindInteractModifierHook, TooltipModifierHook, LootingModifierHook {
     private final ResourceLocation TAG_MOD = Dreamtinker.getLocation("foundation_mode");
 
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
         hookBuilder.addHook(this, ModifierHooks.PROCESS_LOOT, DreamtinkerHook.LEFT_CLICK, ModifierHooks.ARMOR_INTERACT, ModifierHooks.TOOLTIP,
                             ModifierHooks.WEAPON_LOOTING);
         super.registerHooks(hookBuilder);
+    }
+
+    private static int getLevel(IToolStackView toolStackView) {
+        return toolStackView.getModifierLevel(DreamtinkerModifiers.foundation_will.getId()) +
+               toolStackView.getModifierLevel(TinkerModifiers.expanded.get()) * 2;
     }
 
     @Override
@@ -112,7 +118,7 @@ public class foundationWill extends Modifier implements LeftClickHook, ProcessLo
     public int updateLooting(IToolStackView iToolStackView, ModifierEntry modifierEntry, LootingContext lootingContext, int i) {
         ModDataNBT dataNBT = iToolStackView.getPersistentData();
         if (0 == dataNBT.getInt(TAG_MOD))
-            return i + 3 * modifierEntry.getLevel();
+            return i + 3 * getLevel(iToolStackView);
         return i;
     }
 
@@ -127,7 +133,7 @@ public class foundationWill extends Modifier implements LeftClickHook, ProcessLo
     public void onLeftClickEmpty(IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot) {
         ModDataNBT dataNBT = tool.getPersistentData();
         if (1 == dataNBT.getInt(TAG_MOD))
-            foundationWillWrapper(entry, player, level, equipmentSlot);
+            foundationWillWrapper(tool, player, level, equipmentSlot);
         else
             addGlow(player, level, equipmentSlot);
     }
@@ -136,7 +142,7 @@ public class foundationWill extends Modifier implements LeftClickHook, ProcessLo
     public void onLeftClickBlock(PlayerInteractEvent.LeftClickBlock event, IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot, BlockState state, BlockPos pos) {
         ModDataNBT dataNBT = tool.getPersistentData();
         if (1 == dataNBT.getInt(TAG_MOD))
-            foundationWillWrapper(entry, player, level, equipmentSlot);
+            foundationWillWrapper(tool, player, level, equipmentSlot);
     }
 
     private void addGlow(Player player, Level level, EquipmentSlot equipmentSlot) {
@@ -151,13 +157,14 @@ public class foundationWill extends Modifier implements LeftClickHook, ProcessLo
     }
 
 
-    private void foundationWillWrapper(ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot) {
+    private void foundationWillWrapper(IToolStackView iToolStackView, Player player, Level level, EquipmentSlot equipmentSlot) {
         if (!level.isClientSide && EquipmentSlot.MAINHAND == equipmentSlot){
-            List<BlockPos> cluster = pickSameBlocksAlongLook(player, /*每节点最多扩展*/ 3 * entry.getLevel(), /*最大总数*/ 16 * entry.getLevel());
+            List<BlockPos> cluster =
+                    pickSameBlocksAlongLook(player, /*每节点最多扩展*/ 3 * getLevel(iToolStackView), /*最大总数*/ 16 * getLevel(iToolStackView));
             int dig = 0;
             for (BlockPos pos : cluster)
                 if (!ToolStack.from(player.getMainHandItem()).isBroken()){
-                    if (entry.getLevel() < player.totalExperience && ToolHarvestLogic.handleBlockBreak(player.getMainHandItem(), pos, player)){
+                    if (getLevel(iToolStackView) < player.totalExperience && ToolHarvestLogic.handleBlockBreak(player.getMainHandItem(), pos, player)){
                         ((ServerLevel) player.level()).sendParticles(ParticleTypes.SOUL_FIRE_FLAME,
                                                                      pos.getX(), pos.getY(), pos.getZ(),
                                                                      1,                    // count
@@ -167,7 +174,7 @@ public class foundationWill extends Modifier implements LeftClickHook, ProcessLo
                         dig++;
                     }
                 }
-            player.giveExperiencePoints(-entry.getLevel() * dig / 10);
+            player.giveExperiencePoints(-getLevel(iToolStackView) * dig / 10);
         }
     }
 
@@ -183,8 +190,8 @@ public class foundationWill extends Modifier implements LeftClickHook, ProcessLo
         ToolStack tool = ToolStack.from(itemStack);
         if (tool.isBroken())
             return false;
-        //1)filter the block--we don`t care ores right
-        if (state.is(Tags.Blocks.ORES) || state.is(Tags.Blocks.STORAGE_BLOCKS)){
+        //1)filter the block--thoses not ores or storage blocks need to be filtered.
+        if (!state.is(Tags.Blocks.ORES) && !state.is(Tags.Blocks.STORAGE_BLOCKS)){
             Item block = state.getBlock().asItem();
             ResourceLocation rs = ForgeRegistries.ITEMS.getKey(block);
             if (null == rs || avoid_path.stream().anyMatch(e -> rs.getPath().contains(e)) ||
@@ -192,7 +199,7 @@ public class foundationWill extends Modifier implements LeftClickHook, ProcessLo
                 return false;
         }
 
-        int extra_tiers = tool.getModifierLevel(DreamtinkerModifiers.Ids.full_concentration);
+        int extra_tiers = tool.getModifierLevel(DreamtinkerModifiers.Ids.full_concentration) + getLevel(tool);
 
         // 2) harvest tier
         Tier tier = tool.getStats().get(ToolStats.HARVEST_TIER);
