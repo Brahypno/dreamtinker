@@ -1389,12 +1389,6 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(3)
                              .setSlots(SlotType.SOUL, 1)
                              .save(consumer, wrap(DreamtinkerModifiers.Ids.soul_core, soulFolder, "_1"));
-        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.memory_base)
-                             .setTools(Ingredient.of(DreamtinkerTools.narcissus_wing.get()))
-                             .addInput(DreamtinkerTools.narcissus_wing)
-                             .setSlots(SlotType.SOUL, 1)
-                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.memory_base, soulSalvage))
-                             .save(consumer, prefix(DreamtinkerModifiers.memory_base, soulFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.icy_memory)
                              .setTools(Ingredient.of(DreamtinkerTools.narcissus_wing.get()))
                              .addInput(DreamtinkerCommon.unborn_egg.get())
@@ -1421,14 +1415,6 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setSlots(SlotType.SOUL, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.hate_memory, soulSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.hate_memory, soulFolder));
-        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.foundation_will)
-                             .setTools(Ingredient.of(DreamtinkerTools.narcissus_wing))
-                             .addInput(DreamtinkerCommon.unborn_turtle_egg.get())
-                             .addInput(DreamtinkerCommon.unborn_turtle_egg.get())
-                             .addInput(TinkerTags.Items.HARVEST_PRIMARY)
-                             .setSlots(SlotType.SOUL, 1)
-                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.foundation_will, soulSalvage))
-                             .save(consumer, prefix(DreamtinkerModifiers.foundation_will, soulFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.huge_ego)
                              .addInput(DreamtinkerCommon.twist_obsidian_pane.get(), 10)
                              .setMaxLevel(3)

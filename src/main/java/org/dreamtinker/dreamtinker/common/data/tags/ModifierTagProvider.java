@@ -40,12 +40,10 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
         this.tag(TinkerTags.Modifiers.MELEE_UPGRADES)
             .addOptional(Ids.malum_haunted, Ids.malum_animated, Ids.bic_frostbitten, Ids.bic_intoxicating);
         this.tag(TinkerTags.Modifiers.RANGED_UPGRADES)
-            .add(memory_base.getId(), Ids.icy_memory, Ids.hate_memory, Ids.soul_core);
+            .add(Ids.icy_memory, Ids.hate_memory, Ids.soul_core);
         this.tag(TinkerTags.Modifiers.GENERAL_UPGRADES)
             .add(Ids.soul_upgrade, Ids.weapon_dreams_order, Ids.weapon_dreams_filter, TheEnd.getId())
             .addOptional(Ids.bic_dark_armor_plate);
-        this.tag(TinkerTags.Modifiers.HARVEST_UPGRADES)
-            .add(foundation_will.getId());
         this.tag(TinkerTags.Modifiers.GENERAL_SLOTLESS)
             .add(mei.getId(), fox_blessing.getId())
             .addOptional(Ids.el_eternal_binding, Ids.el_sorrow, Ids.el_nemesis_curse, Ids.nova_spell_tiers);
