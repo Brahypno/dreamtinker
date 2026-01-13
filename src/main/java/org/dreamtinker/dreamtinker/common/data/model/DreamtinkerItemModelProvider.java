@@ -111,6 +111,7 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
         generateItemModel(DreamtinkerCommon.raw_transmutation_gold, "");
         generateItemModel(DreamtinkerCommon.deep_prismarine_shard, "materials");
         generateItemModel(AugmentTinker.INSTANCE.getRegistryName(), "");
+        booleanItem("red_fur", DreamtinkerCommon.fox_fur.getId(), getItemLocation("white_fur", ""), getItemLocation("red_fur", ""));
         //generateBlockItemModel(object);
         part(DreamtinkerToolParts.explode_core.get());
         part(DreamtinkerToolParts.memoryOrthant.get());
@@ -204,5 +205,23 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
      */
     private ItemModelBuilder basicItem(ItemLike item, String texture) {
         return basicItem(id(item), texture);
+    }
+
+    private void booleanItem(
+            String predicate,
+            ResourceLocation id,
+            ResourceLocation offTex,
+            ResourceLocation onTex) {
+
+        // base / false
+        withExistingParent(id.getPath(), "item/generated")
+                .texture("layer0", offTex)
+                .override()
+                .predicate(new ResourceLocation(Dreamtinker.MODID, predicate), 1.0F)
+                .model(
+                        withExistingParent(id.getPath() + "_on", "item/generated")
+                                .texture("layer0", onTex)
+                )
+                .end();
     }
 }

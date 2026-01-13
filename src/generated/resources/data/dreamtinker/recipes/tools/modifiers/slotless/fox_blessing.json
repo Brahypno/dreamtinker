@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "amount_needed": 2,
+      "item": "dreamtinker:fox_fur"
+    },
+    {
+      "amount_needed": 15,
+      "tag": "forge:gems/prismarine"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:fox_blessing",
+  "tools": {
+    "tag": "tconstruct:modifiable/held"
+  }
+}

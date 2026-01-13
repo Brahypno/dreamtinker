@@ -182,6 +182,13 @@ public class DreamtinkerCommon extends DreamtinkerModule {
             ITEMS.register("transmutation_gold_nugget", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> transmutation_gold_dust =
             ITEMS.register("transmutation_gold_dust", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> fox_fur =
+            ITEMS.register("fox_fur", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)) {
+                public void appendHoverText(@NotNull ItemStack stack, Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.dreamtinker.fox_fur_1").withStyle(s -> s.withColor(TextColor.fromRgb(0xFFB6C1))));
+                    super.appendHoverText(stack, level, tooltip, flag);
+                }
+            });
 
     protected static final Item.Properties FOOD_PROPS = new Item.Properties();
     public static final RegistryObject<Item> white_peach = ITEMS.register("white_peach", () -> new Item(

@@ -36,6 +36,7 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
@@ -48,7 +49,7 @@ import java.util.UUID;
 import java.util.function.Predicate;
 
 public class AggressiveFox extends Fox implements NeutralMob {
-    private ItemStack storedWeapon;
+    private ItemStack storedWeapon = ItemStack.EMPTY;
     @Nullable
     private UUID persistentAngerTarget;
     private static final EntityDataAccessor<Integer> DATA_REMAINING_ANGER_TIME;
@@ -152,12 +153,23 @@ public class AggressiveFox extends Fox implements NeutralMob {
 
     @Override
     public void aiStep() {
+        ItemStack itemstack = this.getItemBySlot(EquipmentSlot.MAINHAND);
+        if (this.canEat(itemstack)){
+            if (this.ticksSinceEaten >= 600){
+                ItemStack fox_fur = new ItemStack(DreamtinkerCommon.fox_fur.get(), 1);
+                if (this.getVariant().equals(Type.RED)){
+                    CompoundTag tag = fox_fur.getOrCreateTag();
+                    tag.putBoolean("red_fur", true);
+                }
+                ItemEntity drop = new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), fox_fur);
+                this.level().addFreshEntity(drop);
+            }
+        }
         super.aiStep();
-
         if (!this.level().isClientSide){
             checkStoredWeaponDropped();
             if (this.isAlive() && this.isEffectiveAi()){
-                ItemStack itemstack = this.getItemBySlot(EquipmentSlot.MAINHAND);
+                itemstack = this.getItemBySlot(EquipmentSlot.MAINHAND);
                 if (!this.canEat(itemstack) && !isInternalWeapon(itemstack)){
                     tryEquipStoredWeapon();
                 }
