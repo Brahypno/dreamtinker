@@ -21,6 +21,8 @@ public class GeneralAttackHandler {
     static boolean damage_source_transmission = false;
     private static final String TAG_DamageSourceTransmission = Dreamtinker.getLocation("damage_source_transmission").toString();
     private static final String TAG_extra_hit = Dreamtinker.getLocation("extra_hit").toString();
+    private static final int allowed_extra_times = 2;
+    private static final ThreadLocal<Integer> extra_attack_depth = ThreadLocal.withInitial(() -> 0);
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void LivingAttackEvent(LivingAttackEvent event) {
@@ -59,6 +61,20 @@ public class GeneralAttackHandler {
             if (transformed){
                 data.putLong(TAG_DamageSourceTransmission, world.getGameTime());
                 return;//To avoid below buff multiple times
+            }
+        }
+        if (dmgEntity instanceof LivingEntity attacker){
+            if (DTModifierCheck.haveModifierIn(attacker, DreamtinkerModifiers.despair_wind.getId())){
+                int depth = extra_attack_depth.get();
+                if (depth < allowed_extra_times){
+                    try {
+                        extra_attack_depth.set(depth + 1);
+                        victim.hurt(DreamtinkerDamageTypes.source(registryAccess, DreamtinkerDamageTypes.NULL_VOID, null, attacker), damageAmount);
+                    }
+                    finally {
+                        extra_attack_depth.set(depth);
+                    }
+                }
             }
         }
     }

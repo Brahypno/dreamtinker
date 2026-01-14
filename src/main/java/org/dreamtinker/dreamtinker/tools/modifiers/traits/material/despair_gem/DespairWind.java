@@ -36,8 +36,6 @@ import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.Despair
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.RedShadeEnable;
 
 public class DespairWind extends BattleModifier {
-    private static final String TAG_extra_hit = Dreamtinker.getLocation("extra_hit").toString();
-
     @Override
     public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         if (world.isClientSide)
@@ -74,7 +72,6 @@ public class DespairWind extends BattleModifier {
             if (target instanceof ServerPlayer sp){
                 if (sp.isCreative() || sp.isSpectator())
                     return knockback;
-
                 boolean keepInv = sp.serverLevel().getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY);
                 if (!keepInv){
                     // 尽量贴近死亡掉落
@@ -93,12 +90,6 @@ public class DespairWind extends BattleModifier {
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
         LivingEntity victim = context.getLivingTarget();
         if (null != victim && !victim.level().isClientSide){
-            CompoundTag data = victim.getPersistentData();
-            if (data.getLong(TAG_extra_hit) < victim.level().getGameTime()){
-                RegistryAccess registryAccess = victim.level().registryAccess();
-                victim.hurt(DreamtinkerDamageTypes.source(registryAccess, DreamtinkerDamageTypes.NULL_VOID, null, context.getAttacker()), damageDealt);
-                data.putLong(TAG_extra_hit, victim.level().getGameTime());
-            }
             remove_attributes(context.getLivingTarget());
         }
     }
