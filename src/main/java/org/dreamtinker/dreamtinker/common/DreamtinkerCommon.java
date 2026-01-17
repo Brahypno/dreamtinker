@@ -279,11 +279,6 @@ public class DreamtinkerCommon extends DreamtinkerModule {
                             () -> new Block(
                                     builder(MapColor.STONE, SoundType.LODESTONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
                                                                                 .strength(9.0F, 9.0f)), BLOCK_ITEM);
-    public static final ItemObject<Block> DeepSlateBlackSapphireOre =
-            BLOCKS.register("deepslate_black_sapphire_ore",
-                            () -> new Block(
-                                    builder(MapColor.DEEPSLATE, SoundType.LODESTONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
-                                                                                    .strength(10.0F, 10.0f)), BLOCK_ITEM);
     public static final ItemObject<RotatedPillarBlock> scoleciteOre = BLOCKS.register("scolecite_ore", () -> new RotatedPillarBlock(
             BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
                                      .strength(0.25F, 2.2F).sound(SoundType.BASALT).lightLevel(state -> 12)), BLOCK_ITEM);
@@ -344,7 +339,6 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         output.accept(larimarOre.get());
         output.accept(amberOre);
         output.accept(blackSapphireOre);
-        output.accept(DeepSlateBlackSapphireOre);
         output.accept(scoleciteOre);
         output.accept(soulSteelBlock);
         output.accept(coldIronOre);
