@@ -386,6 +386,7 @@
   "modifier.dreamtinker.not_like_was.flavor": "The City unbuilt can always be greater than one that exists.",
   "modifier.dreamtinker.not_like_was.description": "-95% all tool stats, When tool crafted again, decrease this drawback by 1%",
   "modifier.dreamtinker.tooltip.not_like_was": "UnBuilt Times: ",
+  "modifier.dreamtinker.tooltip.not_like_was_1": "The city can still be rebuilt, but higher reality refuse to ehance it: ",
   "modifier.dreamtinker.spiritual_weapon_transformation": "Spiritual Weapon transformation",
   "modifier.dreamtinker.spiritual_weapon_transformation.flavor": "Its time for transformation!(Spiritual version)",
   "modifier.dreamtinker.spiritual_weapon_transformation.description": "According to armor&toughness have different effects",

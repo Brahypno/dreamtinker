@@ -252,7 +252,6 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.IntValue homunculusLifeCurseMaxEffectLevel =
             builder.comment("Max level for homunculus Life Curse Be effective. Affective Level is sum of all equipment slots")
                    .defineInRange("homunculusLifeCurseMaxEffectLevel", 4, 1, 64);
-
     public static final ForgeConfigSpec.DoubleValue homunculusGiftDiscount =
             builder.comment("Villager Merchant discount rate per level").defineInRange("homunculusGiftDiscount", 0.03, 0, 100);
 
@@ -267,6 +266,8 @@ public class DreamtinkerConfig {
             builder.comment("Ars Nova compact: Max mana regen gain from Per Aspera Scriptum").defineInRange("ArtsRegenBonus", 6.0, 0, 100);
     public static final ForgeConfigSpec.DoubleValue ArtsMaxManaBonus =
             builder.comment("Ars Nova compact: Max mana gain from Per Aspera Scriptum").defineInRange("ArtsMaxManaBonus", 120.0, 0, 1000);
+    public static final ForgeConfigSpec.IntValue UnbuildLimits =
+            builder.comment("The stats limit for black sapphire not like was").defineInRange("UnbuildLimits", 36, 0, 200);
 
     public static final ForgeConfigSpec specs = builder.pop().build();
 

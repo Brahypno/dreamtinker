@@ -131,11 +131,8 @@ public class ModWorldGen {
         var stoneTest = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
         var deepTest = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
 
-        var black_sapphire_targets = List.of(
-                OreConfiguration.target(stoneTest, DreamtinkerCommon.blackSapphireOre.get().defaultBlockState()),
-                OreConfiguration.target(deepTest, DreamtinkerCommon.DeepSlateBlackSapphireOre.get().defaultBlockState())
-        );
-        register(ctx, configuredSmallBlackSapphireOre, Feature.ORE, new OreConfiguration(black_sapphire_targets, 6, 0.1f));
+        register(ctx, configuredSmallBlackSapphireOre, Feature.ORE,
+                 new OreConfiguration(new BlockMatchTest(Blocks.END_STONE), DreamtinkerCommon.blackSapphireOre.get().defaultBlockState(), 6));
 
         BlockState scoleciteOre = DreamtinkerCommon.scoleciteOre.get().defaultBlockState();
         register(ctx, configuredLargeScoleciteOre, Feature.ORE, new OreConfiguration(basalt, scoleciteOre, 12));
@@ -226,7 +223,7 @@ public class ModWorldGen {
         register(ctx, placedSmallBlackSapphireOre, configuredSmallBlackSapphireOre,
                  CountPlacement.of(12),
                  InSquarePlacement.spread(),
-                 HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(0)),
+                 HeightRangePlacement.uniform(VerticalAnchor.absolute(30), VerticalAnchor.absolute(56)),
                  BiomeFilter.biome());
         register(ctx, placedLargeScoleciteOre, configuredLargeScoleciteOre,
                  CountPlacement.of(20),
