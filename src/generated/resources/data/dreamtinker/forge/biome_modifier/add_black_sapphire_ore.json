@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "minecraft:deep_dark",
+  "biomes": "minecraft:the_end",
   "features": "dreamtinker:black_sapphire_ore",
   "step": "underground_ores"
 }

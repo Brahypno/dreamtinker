@@ -66,7 +66,7 @@ public class ModBiomeModifiers {
                                                                                      direct(placed.getOrThrow(placedSmallAmberOre),
                                                                                             placed.getOrThrow(placedLargeAmberOre)),
                                                                                      GenerationStep.Decoration.UNDERGROUND_ORES));
-        ctx.register(spawnBlackSapphire, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(HolderSet.direct(biomes.getOrThrow(Biomes.DEEP_DARK)),
+        ctx.register(spawnBlackSapphire, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(HolderSet.direct(biomes.getOrThrow(Biomes.THE_END)),
                                                                                           direct(placed.getOrThrow(placedSmallBlackSapphireOre)),
                                                                                           GenerationStep.Decoration.UNDERGROUND_ORES));
         ctx.register(spawnScoleciteOre, new ForgeBiomeModifiers.AddFeaturesBiomeModifier(biomes.getOrThrow(BiomeTags.IS_NETHER),
