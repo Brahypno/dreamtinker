@@ -43,7 +43,7 @@ public class DreamtinkerConfig {
                    .defineInRange("UnderPlateBoostToughnessFactor", 0.8, 0, 100);
     public static final ForgeConfigSpec.ConfigValue<List<? extends Number>> TheSplendourHeart =
             builder.comment("The level range for The splendour heart. Must be exactly 5 between 0% and 100% otherwise omit!")
-                   .defineList("splendour_heart", List.of(0.25d, 0.40d, 0.65d, .80d, 1.0d),
+                   .defineList("splendour_heart", List.of(0.10d, 0.25d, 0.45d, .60d, 1.0d),
                                o -> o instanceof Number d && 0 < d.doubleValue() && d.doubleValue() <= 1);
     public static final ForgeConfigSpec.DoubleValue flamingMemoryLifeDrain =
             builder.comment("how many life you want drain?").defineInRange("flamingMemoryLifeDrain", 0.05, 0, 100);
