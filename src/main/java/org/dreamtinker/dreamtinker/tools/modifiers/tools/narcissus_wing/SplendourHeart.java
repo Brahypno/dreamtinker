@@ -1,20 +1,29 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.TierSortingRegistry;
 import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.AdvCountEvents;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -26,8 +35,11 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ToolDataNBT;
 import slimeknights.tconstruct.library.tools.stat.ModifierStatsBuilder;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
+import slimeknights.tconstruct.shared.TinkerAttributes;
 
 import java.util.List;
+import java.util.UUID;
+import java.util.function.BiConsumer;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.TheSplendourHeart;
 
@@ -72,6 +84,26 @@ public class SplendourHeart extends BattleModifier {
                                  .withStyle(this.getDisplayName().getStyle()));
         }
     }
+    @Override
+    public int modifierDamageTool(IToolStackView tool, ModifierEntry modifier, int amount, @Nullable LivingEntity holder) {
+        float per = tool.getPersistentData().getFloat(TAG_ADV_PERCENTAGE);
+        float value = rangeToValue(per);
+        return (int) (amount/value);
+    }
+    @Override
+    public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
+        if (!tool.isBroken()){
+            float per = tool.getPersistentData().getFloat(TAG_ADV_PERCENTAGE);
+            int level = java.util.Arrays.binarySearch(TheSplendourHeart.get().toArray(), (double) Math.nextUp(per));
+            level = level <= 0 ? -(level) - 1 : level;
+            consumer.accept(ForgeMod.ENTITY_REACH.get(),
+                    new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
+                            ForgeMod.ENTITY_REACH.get().getDescriptionId(),
+                            level*2,
+                            AttributeModifier.Operation.ADDITION));
+        }
+
+    }
 
     @Override
     public void addToolStats(IToolContext context, ModifierEntry modifier, ModifierStatsBuilder builder) {
@@ -113,26 +145,29 @@ public class SplendourHeart extends BattleModifier {
             }
         }
     }
-
+    private static boolean in_progress = false;
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
         if (tool.getPersistentData().contains(TAG_ADV_PERCENTAGE)){
             float per = tool.getPersistentData().getFloat(TAG_ADV_PERCENTAGE);
             int level = java.util.Arrays.binarySearch(TheSplendourHeart.get().toArray(), (double) Math.nextUp(per));
             level = level <= 0 ? -(level) - 1 : level;
-            if (1 < level){
-                float baseDamage = context.getBaseDamage();
-                float damage = baseDamage;
-                List<ModifierEntry> modifiers = tool.getModifierList();
-                for (ModifierEntry entry : modifiers) {
-                    damage = entry.getHook(ModifierHooks.MELEE_DAMAGE).getMeleeDamage(tool, entry, context, baseDamage, damage);
-                }
-                if (null != context.getLivingTarget() && null != context.getPlayerAttacker()){
+            if (null != context.getLivingTarget()&&1 <= level&&!in_progress){
+                    in_progress=true;
+                    float baseDamage = context.getBaseDamage();
+                    float damage = baseDamage;
+                    List<ModifierEntry> modifiers = tool.getModifierList();
+                    for (ModifierEntry entry : modifiers) {
+                        damage = entry.getHook(ModifierHooks.MELEE_DAMAGE).getMeleeDamage(tool, entry, context, baseDamage, damage);
+                    }
                     context.getLivingTarget().setInvulnerable(false);
+                    int invu=context.getLivingTarget().invulnerableTime;
                     context.getLivingTarget().invulnerableTime = 0;
-                    DamageSource dam = context.getLivingTarget().level().damageSources().playerAttack(context.getPlayerAttacker());
+                    ResourceKey<DamageType> dmt=1==level?context.getAttacker() instanceof Player?DamageTypes.PLAYER_ATTACK:DamageTypes.MOB_ATTACK:2==level?DreamtinkerDamageTypes.rain_bow:3==level?DamageTypes.SONIC_BOOM:DreamtinkerDamageTypes.NULL_VOID;
+                    DamageSource dam = DreamtinkerDamageTypes.source(context.getAttacker().level().registryAccess(), dmt,null, context.getAttacker());
                     context.getLivingTarget().hurt(dam, damage);
-                }
+                    context.getLivingTarget().invulnerableTime= (int) (invu/rangeToValue(per));
+                    in_progress=false;
             }
         }
     }
