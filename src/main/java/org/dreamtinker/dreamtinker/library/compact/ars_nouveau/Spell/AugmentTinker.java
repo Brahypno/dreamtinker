@@ -7,9 +7,11 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraftforge.common.TierSortingRegistry;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaBook.ModifiableSpellBook;
 import org.jetbrains.annotations.NotNull;
@@ -65,6 +67,9 @@ public class AugmentTinker extends AbstractAugment {
                 damage = Mth.ceil(Mth.clamp((double) velocity * 3 * proj_damage, (double) 0.0F, (double) Integer.MAX_VALUE));
             }
             builder.addDamageModifier(damage);
+            Tier tier = tool.getStats().get(ToolStats.HARVEST_TIER);
+            int idx = Math.min(TierSortingRegistry.getSortedTiers().indexOf(tier) - 1, TierSortingRegistry.getSortedTiers().size() - 1);
+            builder.addAmplification(idx);
         }
 
         return super.applyModifiers(builder, spellPart, rayTraceResult, world, shooter, spellContext);

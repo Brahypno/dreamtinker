@@ -631,6 +631,9 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                           .time(RandomLevelingValue.random(20, 10))
                                           .chance(LevelingValue.eachLevel(0.3f))
                                           .build());
+
+        buildModifier(Ids.nova_mana_reduce, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"));
+        buildModifier(Ids.nova_caster_tool, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"));
     }
 
     @Override
