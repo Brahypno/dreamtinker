@@ -1,5 +1,7 @@
 {
-  "type": "tconstruct:modifier_salvage",
+  "type": "tconstruct:incremental_modifier",
+  "allow_crystal": true,
+  "amount_per_item": 1,
   "conditions": [
     {
       "type": "forge:or",
@@ -24,11 +26,18 @@
       ]
     }
   ],
-  "modifier": "dreamtinker:nova_magic_armor",
+  "input": {
+    "item": "ars_nouveau:source_gem_block"
+  },
+  "level": {
+    "max": 10
+  },
+  "needed_per_level": 64,
+  "result": "dreamtinker:nova_spell_slots",
   "slots": {
-    "abilities": 1
+    "upgrades": 1
   },
   "tools": {
-    "tag": "tconstruct:modifiable/armor"
+    "item": "dreamtinker:per_aspera_scriptum"
   }
 }

@@ -1,6 +1,5 @@
 {
-  "type": "tconstruct:modifier",
-  "allow_crystal": true,
+  "type": "tconstruct:modifier_salvage",
   "conditions": [
     {
       "type": "forge:or",
@@ -25,29 +24,11 @@
       ]
     }
   ],
-  "inputs": [
-    {
-      "amount_needed": 6,
-      "item": "ars_nouveau:wilden_tribute"
-    },
-    {
-      "item": "minecraft:totem_of_undying"
-    },
-    {
-      "amount_needed": 3,
-      "item": "ars_nouveau:magebloom"
-    },
-    {
-      "amount_needed": 2,
-      "item": "ars_nouveau:blank_parchment"
-    }
-  ],
-  "level": 1,
-  "result": "dreamtinker:nova_magic_armor",
+  "modifier": "dreamtinker:nova_spell_slots",
   "slots": {
-    "abilities": 1
+    "upgrades": 1
   },
   "tools": {
-    "tag": "tconstruct:modifiable/armor"
+    "item": "dreamtinker:per_aspera_scriptum"
   }
 }
