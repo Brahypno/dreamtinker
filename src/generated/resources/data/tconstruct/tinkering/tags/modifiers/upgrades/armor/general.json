@@ -3,6 +3,10 @@
     {
       "id": "dreamtinker:spiritual_weapon_transformation",
       "required": false
+    },
+    {
+      "id": "dreamtinker:nova_mana_reduce",
+      "required": false
     }
   ]
 }

@@ -1,5 +1,6 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.events.compact.ars_nouveau;
 
+import com.hollingsworth.arsnouveau.api.event.SpellCostCalcEvent;
 import com.hollingsworth.arsnouveau.api.event.SpellDamageEvent;
 import com.hollingsworth.arsnouveau.api.event.SpellProjectileHitEvent;
 import com.hollingsworth.arsnouveau.api.spell.SpellContext;
@@ -12,8 +13,12 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaBook.ModifiableSpellBook;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaCast.ModifiableSpellResolver;
+import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
+import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileHitModifierHook;
@@ -102,5 +107,11 @@ public class SpellEvents {
                 }
             }
         }
+    }
+    public static void SpellCostCalcEvent(SpellCostCalcEvent event){
+        if(event.isCanceled())
+            return;
+        LivingEntity caster=event.context.getUnwrappedCaster();
+        event.currentCost-=10* DTModifierCheck.getEntityModifierNum(caster, DreamtinkerModifiers.Ids.nova_mana_reduce);
     }
 }

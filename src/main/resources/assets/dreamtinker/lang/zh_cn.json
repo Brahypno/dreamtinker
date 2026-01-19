@@ -643,6 +643,9 @@
   "modifier.dreamtinker.fox_blessing": "狐狸的祝福",
   "modifier.dreamtinker.fox_blessin.flavor": "以食物为交易",
   "modifier.dreamtinker.fox_blessin.description": "当攻击/受击时，召唤有数量限制的武装狐狸帮你",
+  "modifier.dreamtinker.nova_mana_reduce": "魔力舒缓",
+  "modifier.dreamtinker.nova_mana_reduce.flavor": "寻得软化魔力的方法",
+  "modifier.dreamtinker.nova_mana_reduce.description": "减少10*强化等级的魔力消耗",
 
   "material.dreamtinker.echo_alloy": "回响合金",
   "material.dreamtinker.echo_alloy.flavor": "是神秘的回响，还是秘密的回响",

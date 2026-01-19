@@ -1,0 +1,53 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "ars_nouveau"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "ars_nouveau"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "amount_needed": 6,
+      "item": "ars_nouveau:wilden_tribute"
+    },
+    {
+      "item": "minecraft:totem_of_undying"
+    },
+    {
+      "amount_needed": 3,
+      "item": "ars_nouveau:magebloom"
+    },
+    {
+      "amount_needed": 2,
+      "item": "ars_nouveau:blank_parchment"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:nova_magic_armor",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/armor"
+  }
+}

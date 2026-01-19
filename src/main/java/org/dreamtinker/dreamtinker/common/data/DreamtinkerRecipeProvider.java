@@ -73,6 +73,7 @@ import slimeknights.tconstruct.library.recipe.ingredient.ToolHookIngredient;
 import slimeknights.tconstruct.library.recipe.melting.IMeltingContainer;
 import slimeknights.tconstruct.library.recipe.melting.IMeltingRecipe;
 import slimeknights.tconstruct.library.recipe.melting.MeltingRecipeBuilder;
+import slimeknights.tconstruct.library.recipe.modifiers.adding.IncrementalModifierRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.modifiers.adding.ModifierRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.modifiers.adding.SwappableModifierRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.partbuilder.ItemPartRecipeBuilder;
@@ -1826,6 +1827,23 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(Tags.Items.GEMS_DIAMOND, 8)
                              .setLevelRange(3, 3)
                              .save(wrapped, wrap(DreamtinkerModifiers.nova_magic_armor, slotlessFolder, "_general_archmage"));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.nova_mana_reduce)
+                             .setTools(TinkerTags.Items.ARMOR)
+                             .addInput(ItemsRegistry.GREATER_EXPERIENCE_GEM, 6)
+                             .addInput(ItemsRegistry.BLANK_THREAD, 1)
+                             .addInput(ItemsRegistry.MAGE_BLOOM, 3)
+                             .addInput(ItemsRegistry.BLANK_PARCHMENT, 2)
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .setMaxLevel(1)
+                             .saveSalvage(wrapped, wrap(DreamtinkerModifiers.Ids.nova_mana_reduce, upgradeSalvage, "_1"))
+                             .save(wrapped, wrap(DreamtinkerModifiers.Ids.nova_mana_reduce, upgradeFolder, "_1"));
+        IncrementalModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.nova_spell_slots)
+                                        .setTools(Ingredient.of(NovaRegistry.per_aspera_scriptum.get()))
+                                        .setInput(com.hollingsworth.arsnouveau.setup.registry.BlockRegistry.SOURCE_GEM_BLOCK.asItem(), 64, 64 * 64)
+                                        .setSlots(SlotType.UPGRADE, 1)
+                                        .setMaxLevel(10)
+                                        .saveSalvage(wrapped, prefix(DreamtinkerModifiers.Ids.nova_spell_slots, upgradeSalvage))
+                                        .save(wrapped, prefix(DreamtinkerModifiers.Ids.nova_spell_slots, upgradeFolder));
     }
 
     private void addEntityMeltingRecipes(Consumer<FinishedRecipe> consumer) {

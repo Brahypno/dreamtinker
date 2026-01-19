@@ -643,6 +643,9 @@
   "modifier.dreamtinker.fox_blessing": "Fox Blessing",
   "modifier.dreamtinker.fox_blessin.flavor": "A trade for food",
   "modifier.dreamtinker.fox_blessin.description": "When hit entity/on hit, summon limited number of weapon fox to help you",
+  "modifier.dreamtinker.nova_mana_reduce": "Mana relief",
+  "modifier.dreamtinker.nova_mana_reduce.flavor": "Found way to soften mana",
+  "modifier.dreamtinker.nova_mana_reduce.description": "Reduce 10 * modifier level mana cost",
 
   "material.dreamtinker.echo_alloy": "Echo Alloy",
   "material.dreamtinker.echo_alloy.flavor": "Its echo of mystery, or echo of enigma",
