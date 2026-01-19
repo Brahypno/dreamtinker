@@ -1839,11 +1839,12 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .save(wrapped, wrap(DreamtinkerModifiers.Ids.nova_mana_reduce, upgradeFolder, "_1"));
         IncrementalModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.nova_spell_slots)
                                         .setTools(Ingredient.of(NovaRegistry.per_aspera_scriptum.get()))
-                                        .setInput(com.hollingsworth.arsnouveau.setup.registry.BlockRegistry.SOURCE_GEM_BLOCK.asItem(), 64, 64 * 64)
+                                        .setInput(com.hollingsworth.arsnouveau.setup.registry.BlockRegistry.SOURCE_GEM_BLOCK.asItem(), 1, 64)
                                         .setSlots(SlotType.UPGRADE, 1)
                                         .setMaxLevel(10)
                                         .saveSalvage(wrapped, prefix(DreamtinkerModifiers.Ids.nova_spell_slots, upgradeSalvage))
                                         .save(wrapped, prefix(DreamtinkerModifiers.Ids.nova_spell_slots, upgradeFolder));
+
     }
 
     private void addEntityMeltingRecipes(Consumer<FinishedRecipe> consumer) {

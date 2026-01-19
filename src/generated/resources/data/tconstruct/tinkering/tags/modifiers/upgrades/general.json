@@ -7,6 +7,10 @@
     {
       "id": "dreamtinker:bic_dark_armor_plate",
       "required": false
+    },
+    {
+      "id": "dreamtinker:nova_spell_slots",
+      "required": false
     }
   ]
 }
