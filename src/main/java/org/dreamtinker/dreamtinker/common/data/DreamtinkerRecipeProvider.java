@@ -127,14 +127,18 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
     private void addToolBuildingRecipes(Consumer<FinishedRecipe> consumer) {
         String folder = "tools/building/";
         String armorFolder = "tools/armor/";
-        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"));
         ToolBuildingRecipeBuilder.toolBuildingRecipe(DreamtinkerTools.tntarrow.get())
                                  .outputSize(4)
                                  .save(consumer, prefix(DreamtinkerTools.tntarrow, folder));
         toolBuilding(consumer, DreamtinkerTools.mashou, folder);
         toolBuilding(consumer, DreamtinkerTools.narcissus_wing, folder);
         toolBuilding(consumer, DreamtinkerTools.chain_saw_blade, folder);
+        ToolBuildingRecipeBuilder.toolBuildingRecipe(DreamtinkerTools.ritual_blade.get())
+                                 .addExtraRequirement(Ingredient.of(TinkerModifiers.silkyCloth))
+                                 .addExtraRequirement(Ingredient.of(Blocks.GLASS))
+                                 .save(consumer, prefix(id(DreamtinkerTools.ritual_blade), folder));
 
+        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"));
         toolBuilding(wrapped, NovaRegistry.per_aspera_scriptum, folder);
 
         String recycle_folder = "tools/recycling/";

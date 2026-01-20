@@ -58,6 +58,7 @@ public class ItemTagProvider extends ItemTagsProvider {
                      BONUS_SLOTS, ItemTags.AXES);
         addItemsOptionalTags(NovaRegistry.per_aspera_scriptum, MULTIPART_TOOL, MELEE_WEAPON, BROAD_RANGED, BONUS_SLOTS, HARVEST, LAUNCHERS, HELD);
         addItemsTags(DreamtinkerTools.silence_glove, DURABILITY, MELEE, BONUS_SLOTS, ANCIENT_TOOLS, STAFFS, SHIELDS, Items.HANDS, Items.CURIOS);
+        addItemsTags(DreamtinkerTools.ritual_blade,  MULTIPART_TOOL, DURABILITY, HARVEST, MELEE_PRIMARY, INTERACTABLE_RIGHT, SMALL_TOOLS, BONUS_SLOTS, ItemTags.SWORDS);
 
         this.tag(Items.dt_scythe).add(TinkerTools.scythe.asItem(), TinkerTools.kama.asItem(), DreamtinkerTools.narcissus_wing.asItem());
         this.tag(ItemTagRegistry.SCYTHE).addTags(Items.dt_scythe);

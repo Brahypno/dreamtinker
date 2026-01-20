@@ -646,6 +646,9 @@
   "modifier.dreamtinker.nova_mana_reduce": "魔力舒缓",
   "modifier.dreamtinker.nova_mana_reduce.flavor": "寻得软化魔力的方法",
   "modifier.dreamtinker.nova_mana_reduce.description": "减少10*强化等级的魔力消耗",
+  "modifier.dreamtinker.self_sacrifice": "自我献祭",
+  "modifier.dreamtinker.self_sacrifice.flavor": "灵与血",
+  "modifier.dreamtinker.self_sacrifice.description": "对自己造成伤害并获得活魂血，类似熔炼。并获得伤害抗性，力量和急迫",
 
   "material.dreamtinker.echo_alloy": "回响合金",
   "material.dreamtinker.echo_alloy.flavor": "是神秘的回响，还是秘密的回响",
@@ -822,6 +825,8 @@
   "item.dreamtinker.chain_saw_blade.description": "展示忠诚\n需要加入燃料或充电以使用\n",
   "item.dreamtinker.per_aspera_scriptum": "历艰成书",
   "item.dreamtinker.per_aspera_scriptum.description": "一座丰碑.",
+  "item.dreamtinker.ritual_blade": "仪式匕首",
+  "item.dreamtinker.ritual_blade.description": "犹如秘密婚礼",
 
   "item.dreamtinker.echo_alloy": "回响合金",
   "item.dreamtinker.raw_stibnite": "粗辉锑",

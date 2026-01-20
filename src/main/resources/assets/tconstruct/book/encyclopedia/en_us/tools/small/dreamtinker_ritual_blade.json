@@ -1,0 +1,17 @@
+{
+  "tool": "dreamtinker:ritual_blade",
+  "text": [
+    {
+      "text": "A weapon that suitable for entity melting results. Right click deal damage to self, gain buffs and blood soul\n"
+    }
+  ],
+  "properties": [
+    "+4 Damage",
+    "75% Attack Modifier",
+    "1.0 Attack Speed",
+    "75% Durability Multiplier",
+    "Silky Silky Shear",
+    "Spilling melting",
+    "Self sacrifice"
+  ]
+}
