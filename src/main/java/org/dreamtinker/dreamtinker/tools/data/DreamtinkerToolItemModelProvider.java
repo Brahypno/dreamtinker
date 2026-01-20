@@ -36,6 +36,7 @@ public class DreamtinkerToolItemModelProvider extends AbstractToolItemModelProvi
         pulling_wo_broken(DreamtinkerTools.narcissus_wing, readJson(Dreamtinker.getLocation("base/narcissus_wing_blocking")), AmmoType.NONE, 1, "wish");
 
         tool(DreamtinkerTools.chain_saw_blade, toolBlocking, "teeth", "handle");
+        tool(DreamtinkerTools.ritual_blade, toolBlocking, "blade");
         tool(NovaRegistry.per_aspera_scriptum, toolBlocking);
     }
 

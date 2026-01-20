@@ -1,0 +1,22 @@
+{
+  "loader": "tconstruct:tool",
+  "parent": "forge:item/default-tool",
+  "textures": {
+    "blade": "dreamtinker:item/tool/ritual_blade/blade",
+    "handle": "dreamtinker:item/tool/ritual_blade/handle"
+  },
+  "modifier_roots": [
+    "dreamtinker:item/tool/ritual_blade/modifiers/"
+  ],
+  "parts": [
+    {
+      "name": "blade",
+      "index": 0
+    },
+    {
+      "name": "handle",
+      "index": 1
+    }
+  ],
+     "first_modifiers": [{ "name": "tconstruct:tank", "forced": true }]
+}

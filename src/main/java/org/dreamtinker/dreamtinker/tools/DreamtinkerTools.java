@@ -59,6 +59,8 @@ public class DreamtinkerTools extends DreamtinkerModule {
             MODI_TOOLS.register("silence_glove", () -> new SilenceGlove(UNSTACKABLE_PROPS, DTtoolsDefinition.SilenceGlove));
     public static final ItemObject<ChainSawBlade> chain_saw_blade =
             MODI_TOOLS.register("chain_saw_blade", () -> new ChainSawBlade(UNSTACKABLE_PROPS, DTtoolsDefinition.ChainSawBlade));
+    public static final ItemObject<ModifiableItem> ritual_blade =
+            MODI_TOOLS.register("ritual_blade", () -> new ModifiableItem(UNSTACKABLE_PROPS, DTtoolsDefinition.RitualBlade));
 
     @SubscribeEvent
     void gatherData(final GatherDataEvent event) {
@@ -96,6 +98,7 @@ public class DreamtinkerTools extends DreamtinkerModule {
 
         // small tools
         acceptTool(output, tntarrow);
+        acceptTool(output, ritual_blade);
         // broad tools
         acceptTool(output, mashou);
         acceptTool(output, narcissus_wing);

@@ -646,6 +646,9 @@
   "modifier.dreamtinker.nova_mana_reduce": "Mana relief",
   "modifier.dreamtinker.nova_mana_reduce.flavor": "Found way to soften mana",
   "modifier.dreamtinker.nova_mana_reduce.description": "Reduce 10 * modifier level mana cost",
+  "modifier.dreamtinker.self_sacrifice": "Self Sacrifice",
+  "modifier.dreamtinker.self_sacrifice.flavor": "Soul and blood",
+  "modifier.dreamtinker.self_sacrifice.description": "Deal damage to self, and gain Blood Soul like melting. Also Gain strength, haste and damage resistance depending on damage got",
 
   "material.dreamtinker.echo_alloy": "Echo Alloy",
   "material.dreamtinker.echo_alloy.flavor": "Its echo of mystery, or echo of enigma",
@@ -821,7 +824,9 @@
   "item.dreamtinker.chain_saw_blade": "ChainSaw Blade",
   "item.dreamtinker.chain_saw_blade.description": "Show your loyalty!\n Need fill with fuel or electric to use\n",
   "item.dreamtinker.per_aspera_scriptum": "Per Aspera Scriptum",
-  "item.dreamtinker.per_aspera_scriptum.description": "A Scriptum as a Spell Book.",
+  "item.dreamtinker.per_aspera_scriptum.description": "A Scriptum.",
+  "item.dreamtinker.ritual_blade": "Ritual Blade",
+  "item.dreamtinker.ritual_blade.description": "Like secret wedding",
 
   "item.dreamtinker.echo_alloy": "Echo Alloy",
   "item.dreamtinker.raw_stibnite": "Raw Stibnite",

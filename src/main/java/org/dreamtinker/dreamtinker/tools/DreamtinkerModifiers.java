@@ -28,6 +28,7 @@ import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.FlamingM
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.MemoryBase;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.SplendourHeart;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.foundationWill;
+import org.dreamtinker.dreamtinker.tools.modifiers.tools.ritual_blade.SelfSacrifice;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.silence_glove.WeaponDreams;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.tntarrow.StrongExplode;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.SpiritualWeaponTransformation;
@@ -181,6 +182,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<LoveShooting> love_shooting = MODIFIERS.register("love_shooting", LoveShooting::new);
     public static final StaticModifier<TeleportShoot> teleport_shooting = MODIFIERS.register("teleport_shooting", TeleportShoot::new);
     public static final StaticModifier<FoxBlessing> fox_blessing = MODIFIERS.register("fox_blessing", FoxBlessing::new);
+    public static final StaticModifier<SelfSacrifice> self_sacrifice = MODIFIERS.register("self_sacrifice", SelfSacrifice::new);
 
     //etherium
     public static final StaticModifier<ELAstralBreak> astral_break = EL_MODIFIERS.register("astral_break", ELAstralBreak::new);

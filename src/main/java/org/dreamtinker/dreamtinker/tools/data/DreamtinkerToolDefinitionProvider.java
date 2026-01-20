@@ -21,6 +21,7 @@ import slimeknights.tconstruct.library.tools.definition.module.ToolHooks;
 import slimeknights.tconstruct.library.tools.definition.module.ToolModule;
 import slimeknights.tconstruct.library.tools.definition.module.aoe.*;
 import slimeknights.tconstruct.library.tools.definition.module.build.*;
+import slimeknights.tconstruct.library.tools.definition.module.display.FixedMaterialToolName;
 import slimeknights.tconstruct.library.tools.definition.module.material.DefaultMaterialsModule;
 import slimeknights.tconstruct.library.tools.definition.module.material.MaterialStatsModule;
 import slimeknights.tconstruct.library.tools.definition.module.material.MaterialTraitsModule;
@@ -31,11 +32,16 @@ import slimeknights.tconstruct.library.tools.definition.module.weapon.CircleWeap
 import slimeknights.tconstruct.library.tools.nbt.MultiplierNBT;
 import slimeknights.tconstruct.library.tools.nbt.StatsNBT;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
+import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.TinkerToolActions;
 import slimeknights.tconstruct.tools.TinkerToolParts;
+import slimeknights.tconstruct.tools.ToolDefinitions;
 import slimeknights.tconstruct.tools.data.ModifierIds;
 import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
 import slimeknights.tconstruct.tools.stats.StatlessMaterialStats;
+
+import static slimeknights.tconstruct.tools.TinkerToolParts.smallBlade;
+import static slimeknights.tconstruct.tools.TinkerToolParts.toolHandle;
 
 public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDataProvider {
     public DreamtinkerToolDefinitionProvider(PackOutput packOutput) {
@@ -159,7 +165,8 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 .module(new SetStatsModule(StatsNBT.builder()
                                                    .set(ToolStats.ATTACK_DAMAGE, 1f)
                                                    .set(ToolStats.ATTACK_SPEED, 2f)
-                                                   .set(ToolStats.DRAW_SPEED, 3f).build()))
+                                                   .set(ToolStats.DRAW_SPEED, 3f)
+                                                    .set(ToolStats.BLOCK_AMOUNT, 10).build()))
                 .module(new MultiplyStatsModule(MultiplierNBT.builder()
                                                              .set(ToolStats.DRAW_SPEED, 1.5f)
                                                              .set(ToolStats.ATTACK_SPEED, 1.2f)
@@ -251,6 +258,36 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                                         .trait(DreamtinkerModifiers.nova_scriptum_attributes).build())
                 .module(large_soul_weapon_slots);
         // behavior;
+        define(DTtoolsDefinition.RitualBlade)
+                // parts
+                .module(PartStatsModule.parts()
+                        .part(smallBlade)
+                        .part(toolHandle).build())
+                .module(defaultTwoParts)
+                // stats
+                .module(new SetStatsModule(StatsNBT.builder()
+                        .set(ToolStats.ATTACK_DAMAGE, 4f)
+                        .set(ToolStats.ATTACK_SPEED, 1.0f)
+                        .set(ToolStats.BLOCK_AMOUNT, 10)
+                        .set(ToolStats.USE_ITEM_SPEED, 1.0f).build()))
+                .module(new MultiplyStatsModule(MultiplierNBT.builder()
+                        .set(ToolStats.ATTACK_DAMAGE, 0.75f)
+                        .set(ToolStats.MINING_SPEED, 0.75f)
+                        .set(ToolStats.DURABILITY, 0.75f).build()))
+                .smallToolStartingSlots()
+                // traits
+                .module(ToolTraitsModule.builder()
+                        .trait(TinkerModifiers.silky, 1)
+                        .trait(ModifierIds.spilling)
+                        .trait(DreamtinkerModifiers.self_sacrifice)
+                        .trait(TinkerModifiers.melting)
+                        .trait(TinkerModifiers.silkyShears).build())
+                // behavior
+                .module(ToolActionsModule.of(ToolActions.SWORD_DIG, ToolActions.HOE_DIG))
+                .module(IsEffectiveModule.tag(TinkerTags.Blocks.MINABLE_WITH_DAGGER))
+                .module(MiningSpeedModifierModule.blocks(7.5f, Blocks.COBWEB))
+                // faster tool name logic
+                .module(FixedMaterialToolName.FIRST);
     }
 
     @Override

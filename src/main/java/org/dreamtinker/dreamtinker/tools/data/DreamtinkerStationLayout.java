@@ -3,6 +3,7 @@ package org.dreamtinker.dreamtinker.tools.data;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Dreamtinker;
@@ -73,6 +74,13 @@ public class DreamtinkerStationLayout extends AbstractStationSlotLayoutProvider 
                 .addInputItem(DreamtinkerToolParts.NovaWrapper.get(), 26, 62)
                 .addInputItem(DreamtinkerToolParts.NovaRostrum.get(), 7, 45)
                 .addInputItem(DreamtinkerToolParts.NovaCover.get(), 26, 26)
+                .build();
+        defineModifiable(DreamtinkerTools.ritual_blade)
+                .sortIndex(SORT_WEAPON)
+                .addInputItem(TinkerToolParts.smallBlade, 39, 35)
+                .addInputItem(TinkerToolParts.toolHandle, 21, 53)
+                .addInputItem(new Pattern("dreamtinker:silky_cloth"), TinkerModifiers.silkyCloth, 39, 53)
+                .addInputItem(new Pattern("tconstruct:pattern"), Blocks.GLASS, 53, 21)
                 .build();
 
     }

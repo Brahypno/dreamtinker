@@ -37,6 +37,7 @@ public class DtToolClientEvents extends ClientEventBase {
             TinkerItemProperties.registerToolProperties(DreamtinkerTools.silence_glove);
             TinkerItemProperties.registerToolProperties(DreamtinkerTools.narcissus_wing);
             TinkerItemProperties.registerToolProperties(DreamtinkerTools.chain_saw_blade);
+            TinkerItemProperties.registerToolProperties(DreamtinkerTools.ritual_blade);
             if (ModList.get().isLoaded("ars_nouveau")){
                 TinkerItemProperties.registerToolProperties(NovaRegistry.per_aspera_scriptum);
             }
@@ -55,6 +56,7 @@ public class DtToolClientEvents extends ClientEventBase {
         registerItemColors(colors, DreamtinkerTools.narcissus_wing);
         registerItemColors(colors, DreamtinkerTools.silence_glove);
         registerItemColors(colors, DreamtinkerTools.chain_saw_blade);
+        registerItemColors(colors, DreamtinkerTools.ritual_blade);
         if (ModList.get().isLoaded("ars_nouveau")){
             registerItemColors(colors, NovaRegistry.per_aspera_scriptum);
         }

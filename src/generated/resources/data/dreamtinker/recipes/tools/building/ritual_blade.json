@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:tool_building",
+  "extra_requirements": [
+    {
+      "item": "tconstruct:silky_cloth"
+    },
+    {
+      "item": "minecraft:glass"
+    }
+  ],
+  "result": "dreamtinker:ritual_blade",
+  "result_count": 1
+}
