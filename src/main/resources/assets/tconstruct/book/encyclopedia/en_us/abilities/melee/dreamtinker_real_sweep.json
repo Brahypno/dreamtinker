@@ -2,13 +2,13 @@
   "modifier_id": "dreamtinker:real_sweep",
   "text": [
     {
-      "text": "An easier and much supreme sweep attack; If level larger than 1, the modifiers on the weapon would be trigger as well"
+      "text": "Only for Mashou. An easier and much supreme sweep attack; If level larger than 1, the modifiers on the weapon would be trigger as well"
     }
   ],
   "more_text_space": true,
   "tool": "dreamtinker:mashou",
   "effects": [
     "Requires 1 ability slot",
-    "Double level"
+    "Single level"
   ]
 }
