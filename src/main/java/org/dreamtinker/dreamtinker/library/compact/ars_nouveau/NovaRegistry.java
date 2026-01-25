@@ -1,6 +1,7 @@
 package org.dreamtinker.dreamtinker.library.compact.ars_nouveau;
 
 import com.hollingsworth.arsnouveau.api.enchanting_apparatus.EnchantmentRecipe;
+import com.hollingsworth.arsnouveau.api.item.ICasterTool;
 import com.hollingsworth.arsnouveau.api.perk.PerkSlot;
 import com.hollingsworth.arsnouveau.api.registry.GlyphRegistry;
 import com.hollingsworth.arsnouveau.api.registry.PerkRegistry;
@@ -8,6 +9,9 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -37,6 +41,7 @@ public class NovaRegistry extends DreamtinkerModule {
             RECIPE_TYPES.register("modifier_enchantment", () -> new ModRecipeType<>());
     public static final RegistryObject<RecipeSerializer<EnchantmentRecipe>> MODIFIABLE_ENCHANTMENT_SERIALIZER =
             RECIPE_SERIALIZERS.register("modifier_enchantment", () -> new EnchantmentRecipe.Serializer());
+    public static final Capability<ICasterTool> Caster_CAP = CapabilityManager.get(new CapabilityToken<>(){});
 
     public NovaRegistry() {
         NovaInit();
