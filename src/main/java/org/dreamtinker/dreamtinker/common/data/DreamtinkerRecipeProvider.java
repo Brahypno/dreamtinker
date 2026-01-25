@@ -1848,6 +1848,35 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                         .setMaxLevel(10)
                                         .saveSalvage(wrapped, prefix(DreamtinkerModifiers.Ids.nova_spell_slots, upgradeSalvage))
                                         .save(wrapped, prefix(DreamtinkerModifiers.Ids.nova_spell_slots, upgradeFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.nova_enchanter_sword)
+                             .setTools(TinkerTags.Items.MELEE_PRIMARY)
+                             .addInput(com.hollingsworth.arsnouveau.setup.registry.BlockRegistry.SOURCE_GEM_BLOCK.asItem(), 2)
+                             .addInput(Tags.Items.STORAGE_BLOCKS_GOLD, 2)
+                             .addInput(Tags.Items.GEMS_DIAMOND, 1)
+                             .addInput(Items.DIAMOND_SWORD, 1)
+                             .setSlots(SlotType.ABILITY, 1)
+                             .setMaxLevel(1)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.nova_enchanter_sword, abilitySalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.nova_enchanter_sword, abilityFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.nova_wand)
+                             .setTools(TinkerTags.Items.SPECIAL_TOOLS)
+                             .addInput(ItemsRegistry.SOURCE_GEM, 4)
+                             .addInput(Tags.Items.INGOTS_GOLD, 2)
+                             .addInput(ItemsRegistry.AIR_ESSENCE, 1)
+                             .addInput(ItemsRegistry.MANIPULATION_ESSENCE, 1)
+                             .setSlots(SlotType.ABILITY, 1)
+                             .setMaxLevel(1)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.nova_wand, abilitySalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.nova_wand, abilityFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.nova_spell_bow)
+                             .setTools(TinkerTags.Items.BOWS)
+                             .addInput(ItemsRegistry.SOURCE_GEM, 1)
+                             .addInput(Tags.Items.STORAGE_BLOCKS_GOLD, 1)
+                             .addInput(ItemsRegistry.MANIPULATION_ESSENCE, 1)
+                             .setSlots(SlotType.ABILITY, 1)
+                             .setMaxLevel(1)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.nova_spell_bow, abilitySalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.nova_spell_bow, abilityFolder));
 
     }
 

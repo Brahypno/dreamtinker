@@ -633,7 +633,6 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                           .build());
 
         buildModifier(Ids.nova_mana_reduce, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"));
-        buildModifier(Ids.nova_caster_tool, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"));
     }
 
     @Override

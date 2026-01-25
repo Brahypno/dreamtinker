@@ -15,10 +15,10 @@ import slimeknights.tconstruct.library.modifiers.hook.interaction.*;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
-public interface InteractionInterface extends LeftClickHook, EntityInteractionModifierHook, InventoryTickModifierHook, UsingToolModifierHook, GeneralInteractionModifierHook, RightClickHook {
+public interface InteractionInterface extends LeftClickHook, EntityInteractionModifierHook, InventoryTickModifierHook, UsingToolModifierHook, GeneralInteractionModifierHook, BlockInteractionModifierHook, RightClickHook {
     default void InteractionInterfaceInit(ModuleHookMap.Builder hookBuilder) {
         hookBuilder.addHook(this, DreamtinkerHook.LEFT_CLICK, ModifierHooks.ENTITY_INTERACT, ModifierHooks.INVENTORY_TICK, ModifierHooks.TOOL_USING,
-                            ModifierHooks.GENERAL_INTERACT, DreamtinkerHook.RIGHT_CLICK);
+                            ModifierHooks.GENERAL_INTERACT, ModifierHooks.BLOCK_INTERACT, DreamtinkerHook.RIGHT_CLICK);
     }
 
     default void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {

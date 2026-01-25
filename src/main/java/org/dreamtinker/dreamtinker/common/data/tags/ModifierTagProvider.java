@@ -54,9 +54,11 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             .add(Ids.huge_ego, Ids.five_creations);
         this.tag(TinkerTags.Modifiers.MELEE_ABILITIES)
             .add(real_sweep.getId(), Ids.continuous_explode, flaming_memory.getId())
-            .addOptional(weapon_books.getId(), desolation_ring.getId(), eldritch_pan.getId());
+            .addOptional(weapon_books.getId(), desolation_ring.getId(), eldritch_pan.getId(), nova_enchanter_sword.getId());
         this.tag(TinkerTags.Modifiers.RANGED_ABILITIES)
-            .add(Ids.force_to_explosion, love_shooting.getId());
+            .add(Ids.force_to_explosion, love_shooting.getId())
+            .addOptional(nova_spell_bow.getId(), nova_wand.getId());
+
         this.tag(TinkerTags.Modifiers.GENERAL_ABILITIES)
             .add(life_looting.getId());
         this.tag(TinkerTags.Modifiers.BLOCK_WHILE_CHARGING)

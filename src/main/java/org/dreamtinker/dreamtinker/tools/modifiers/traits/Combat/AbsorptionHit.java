@@ -35,11 +35,7 @@ public class AbsorptionHit extends BattleModifier {
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
         if (context.isCritical() && !context.getAttacker().level().isClientSide){
-            float absorption = context.getAttacker().getAbsorptionAmount();
-            if (absorption < context.getAttacker().getMaxHealth() * 2)
-                context.getAttacker()
-                       .setAbsorptionAmount(
-                               Math.min(absorption + damageDealt * absorption_buff(modifier.getLevel(), true), context.getAttacker().getMaxHealth() * 2));
+            onMonsterMeleeHit(tool, modifier, context, damageDealt);
         }
     }
 

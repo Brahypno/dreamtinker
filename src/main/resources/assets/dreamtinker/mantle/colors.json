@@ -164,7 +164,10 @@
     "nova_earth_essence": "#8BFF9C",
     "nova_fire_essence": "#E07A6B",
     "nova_manipulation_essence": "#EAA032",
-    "nova_water_essence": "#AA8BEA"
+    "nova_cast_tool": "#7B2CBF",
+    "nova_enchanter_sword": "#3A86FF",
+    "nova_wand": "#00B4D8",
+    "nova_spell_bow": "#FFB703"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",

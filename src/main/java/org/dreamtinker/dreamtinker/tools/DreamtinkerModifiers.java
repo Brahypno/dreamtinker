@@ -34,9 +34,7 @@ import org.dreamtinker.dreamtinker.tools.modifiers.tools.tntarrow.StrongExplode;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.SpiritualWeaponTransformation;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.WeaponTransformation;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.*;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.ars.NovaConjurationEssence;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.ars.NovaMagicArmor;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.ars.ScriptumAttributes;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.ars.*;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.bic.DarkBlade;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.bic.dark_defense;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.bic.nightmare_defense;
@@ -255,6 +253,14 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             ARS_MODIFIERS.register("nova_magic_armor", NovaMagicArmor::new);
     public static final StaticModifier<NovaConjurationEssence> nova_conjuration_essence =
             ARS_MODIFIERS.register("nova_conjuration_essence", NovaConjurationEssence::new);
+    public static final StaticModifier<NovaCastTool> nova_cast_tool =
+            ARS_MODIFIERS.register("nova_cast_tool", NovaCastTool::new);
+    public static final StaticModifier<NovaEnchanterSword> nova_enchanter_sword =
+            ARS_MODIFIERS.register("nova_enchanter_sword", NovaEnchanterSword::new);
+    public static final StaticModifier<NovaWand> nova_wand =
+            ARS_MODIFIERS.register("nova_wand", NovaWand::new);
+    public static final StaticModifier<NovaSpellBow> nova_spell_bow =
+            ARS_MODIFIERS.register("nova_spell_bow", NovaSpellBow::new);
 
     public static class Ids {
         public static final ModifierId long_tool = id("long_tool");
@@ -358,7 +364,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId nova_manipulation_essence = id("nova_manipulation_essence");
         public static final ModifierId nova_water_essence = id("nova_water_essence");
         public static final ModifierId nova_mana_reduce = id("nova_mana_reduce");
-
+        
         private static ModifierId id(String name) {
             return new ModifierId(Dreamtinker.MODID, name);
         }

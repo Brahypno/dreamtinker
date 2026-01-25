@@ -1,6 +1,14 @@
 {
   "values": [
     "dreamtinker:force_to_explosion",
-    "dreamtinker:love_shooting"
+    "dreamtinker:love_shooting",
+    {
+      "id": "dreamtinker:nova_spell_bow",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:nova_wand",
+      "required": false
+    }
   ]
 }

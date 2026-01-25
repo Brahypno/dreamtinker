@@ -1,0 +1,52 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "ars_nouveau"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "ars_nouveau"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "amount_needed": 2,
+      "item": "ars_nouveau:source_gem_block"
+    },
+    {
+      "amount_needed": 2,
+      "tag": "forge:storage_blocks/gold"
+    },
+    {
+      "tag": "forge:gems/diamond"
+    },
+    {
+      "item": "minecraft:diamond_sword"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:nova_enchanter_sword",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/melee/primary"
+  }
+}

@@ -5,6 +5,8 @@ import com.hollingsworth.arsnouveau.api.event.SpellDamageEvent;
 import com.hollingsworth.arsnouveau.api.event.SpellProjectileHitEvent;
 import com.hollingsworth.arsnouveau.api.spell.SpellContext;
 import com.hollingsworth.arsnouveau.common.entity.EntityProjectileSpell;
+import com.hollingsworth.arsnouveau.common.spell.augment.AugmentAmplify;
+import com.hollingsworth.arsnouveau.common.spell.method.MethodProjectile;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,11 +15,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaBook.ModifiableSpellBook;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaCast.ModifiableSpellResolver;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
-import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -108,10 +108,16 @@ public class SpellEvents {
             }
         }
     }
-    public static void SpellCostCalcEvent(SpellCostCalcEvent event){
-        if(event.isCanceled())
+
+    public static void SpellCostCalcEvent(SpellCostCalcEvent event) {
+        if (event.isCanceled())
             return;
-        LivingEntity caster=event.context.getUnwrappedCaster();
-        event.currentCost-=10* DTModifierCheck.getEntityModifierNum(caster, DreamtinkerModifiers.Ids.nova_mana_reduce);
+        LivingEntity caster = event.context.getUnwrappedCaster();
+        event.currentCost -= 10 * DTModifierCheck.getEntityModifierNum(caster, DreamtinkerModifiers.Ids.nova_mana_reduce);
+        event.currentCost -= 0 < DTModifierCheck.getItemModifierNum(event.context.getCasterTool(), DreamtinkerModifiers.nova_enchanter_sword.getId()) ?
+                             AugmentAmplify.INSTANCE.getCastingCost() : 0;
+        event.currentCost -= 0 < DTModifierCheck.getItemModifierNum(event.context.getCasterTool(), DreamtinkerModifiers.nova_spell_bow.getId()) ?
+                             MethodProjectile.INSTANCE.getCastingCost() : 0;
+
     }
 }

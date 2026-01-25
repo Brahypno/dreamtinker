@@ -14,6 +14,10 @@
     {
       "id": "dreamtinker:eldritch_pan",
       "required": false
+    },
+    {
+      "id": "dreamtinker:nova_enchanter_sword",
+      "required": false
     }
   ]
 }
