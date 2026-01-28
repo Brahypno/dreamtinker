@@ -2,7 +2,7 @@
   "tool": "dreamtinker:tntarrow",
   "text": [
     {
-      "text": "a consumable, special melee weapon\nlaunch with any vanilla or tconstruct BOW\nrange less than exploding range！！\n"
+      "text": "a consumable, special arrow deal range damage\nEffect range less than exploding range！！\n"
     }
   ],
   "properties": [
