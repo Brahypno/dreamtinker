@@ -819,7 +819,7 @@
 
   "item.dreamtinker.explode_core": "Explode Core",
   "item.dreamtinker.tntarrow": "TNT Arrow",
-  "item.dreamtinker.tntarrow.description": "a consumable, special melee weapon.range less than exploding range！",
+  "item.dreamtinker.tntarrow.description": "a consumable, special arrow deal range damage\nEffect range less than exploding range！！",
   "item.dreamtinker.mashou": "Ma Shuo",
   "item.dreamtinker.mashou.description": "Composing poetry while wielding a spear—truly a hero of his time!----a special heave spear that slow and sweep. Need to ride something or with strength effect otherwise apply weakness to self",
   "item.dreamtinker.under_plate": "UnderWear Plate",
