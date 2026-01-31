@@ -202,16 +202,14 @@ public class mei extends BattleModifier {
             DamageSource dam =
                     new DamageSource(attacker.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.GENERIC_KILL),
                                      attacker, attacker);
-            target.hurt(dam, 200 <= level ? Integer.MAX_VALUE : damage);
+            target.hurt(dam, 200 <= level ? level * 2 : damage);
         }
         return knockback;
     }
 
     @Override
     public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
-        if (170 <= tool.getModifierLevel(this.getId()))
-            return Integer.MAX_VALUE;
-        return damage;
+        return damage * 170 <= tool.getModifierLevel(this.getId()) ? 10 : 1;
     }
 
     @Override
