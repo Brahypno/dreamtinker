@@ -14,7 +14,7 @@ public class KeyBindings {
     public static final String CAT = "key.categories.dreamtinker";
 
     public static final KeyMapping TOOL_INTERACT =
-            new KeyMapping(Dreamtinker.makeTranslationKey("key", "tool_interact"), KeyConflictContext.IN_GAME, InputConstants.getKey("key.keyboard.g"),
+            new KeyMapping(Dreamtinker.makeTranslationKey("key", "tool_interact"), KeyConflictContext.IN_GAME, InputConstants.getKey("key.keyboard.h"),
                            CAT);
     public static KeyMapping KEY_MODE = new KeyMapping(
             "key.dreamtinker.mode",

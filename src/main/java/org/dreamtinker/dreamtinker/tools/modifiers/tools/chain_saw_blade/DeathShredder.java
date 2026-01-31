@@ -94,8 +94,12 @@ public class DeathShredder extends BattleModifier implements KeybindInteractModi
         if (player.isUsingItem())
             return false;
         ModDataNBT dataNBT = tool.getPersistentData();
-        dataNBT.putInt(TAG_MOD, (dataNBT.getInt(TAG_MOD) + 1) % 3);
+        int mod = (dataNBT.getInt(TAG_MOD) + 1) % 3;
+        dataNBT.putInt(TAG_MOD, mod);
         //ToolEnergyCapability.setEnergy(tool, 500000);
+        player.sendSystemMessage(Component.translatable("modifier.dreamtinker.tooltip.death_shredder")
+                                          .append(Component.translatable("modifier.dreamtinker.mod.death_shredder" + "_" + mod))
+                                          .withStyle(this.getDisplayName().getStyle()));
         return true;
     }
 
