@@ -661,6 +661,12 @@
   "modifier.dreamtinker.nova_spell_bow": "法术之弓",
   "modifier.dreamtinker.nova_spell_bow.flavor": "不太一样的法术之弓",
   "modifier.dreamtinker.nova_spell_bow.description": "法术总是以弹射物开头。在射出时，如果魔力足够，会额外释放法术箭。可以消耗物品栏中的增强箭以强化法术，但无法以增强箭作为弹药",
+  "modifier.dreamtinker.nova_enchanter_shield": "巫师之盾",
+  "modifier.dreamtinker.nova_enchanter_shield.flavor": "较弱的防护",
+  "modifier.dreamtinker.nova_enchanter_shield.description": "在使用该盾阻挡伤害时，使用者会得到短时间的魔力再生和法术伤害提升状态。这面盾牌会消耗使用者的魔力慢慢进行自我修复",
+  "modifier.dreamtinker.nova_mana_shield": "法力护盾",
+  "modifier.dreamtinker.nova_mana_shield.flavor": "强大法力护盾",
+  "modifier.dreamtinker.nova_mana_shield.description": "受伤时使用魔力减伤。高魔力数量和等级会更容易减伤。",
 
   "material.dreamtinker.echo_alloy": "回响合金",
   "material.dreamtinker.echo_alloy.flavor": "是神秘的回响，还是秘密的回响",

@@ -270,6 +270,8 @@ public class DreamtinkerConfig {
             builder.comment("Ars Nova compact: Max mana gain from Per Aspera Scriptum").defineInRange("ArtsMaxManaBonus", 120.0, 0, 1000);
     public static final ForgeConfigSpec.IntValue UnbuildLimits =
             builder.comment("The stats limit for black sapphire not like was").defineInRange("UnbuildLimits", 36, 0, 200);
+    public static final ForgeConfigSpec.DoubleValue ArtsManaShieldBase =
+            builder.comment("How much damage reduction per level provided in %").defineInRange("ArtsManaShieldBase", 0.80, 0, 1);
 
     public static final ForgeConfigSpec specs = builder.pop().build();
 

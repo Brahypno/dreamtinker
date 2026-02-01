@@ -5,8 +5,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -14,11 +12,14 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
-import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.DreamtinkerModule;
 import org.dreamtinker.dreamtinker.Entity.WiserLightBolt;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
+import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.modules.build.VolatileFlagModule;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
+import slimeknights.tconstruct.library.tools.IndestructibleItemEntity;
 import slimeknights.tconstruct.library.tools.nbt.IToolContext;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
@@ -29,6 +30,11 @@ import javax.annotation.Nullable;
 import java.util.UUID;
 
 public class TwoHeadedSeven extends BattleModifier {
+    @Override
+    protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addModule(new VolatileFlagModule(IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY));
+        super.registerHooks(hookBuilder);
+    }
 
     @Override
     public boolean onProjectileHitsBlock(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, BlockHitResult hit, @Nullable LivingEntity attacker) {
@@ -38,7 +44,7 @@ public class TwoHeadedSeven extends BattleModifier {
             return false;
         ServerLevel level = (ServerLevel) attacker.level();
 
-        WiserLightBolt bolt = new WiserLightBolt(DreamtinkerModule.LIGHTNING_ENTITY.get(),level);
+        WiserLightBolt bolt = new WiserLightBolt(DreamtinkerModule.LIGHTNING_ENTITY.get(), level);
         BlockPos pos = hit.getBlockPos();
 
         bolt.setPos(pos.getX(), pos.getY(), pos.getZ());

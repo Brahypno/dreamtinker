@@ -1,0 +1,52 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "ars_nouveau"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "ars_nouveau"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "amount_needed": 16,
+      "item": "ars_nouveau:source_gem_block"
+    },
+    {
+      "amount_needed": 16,
+      "item": "ars_nouveau:source_gem_block"
+    },
+    {
+      "amount_needed": 9,
+      "item": "ars_nouveau:abjuration_essence"
+    }
+  ],
+  "level": {
+    "max": 3
+  },
+  "result": "dreamtinker:nova_mana_shield",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/armor"
+  }
+}

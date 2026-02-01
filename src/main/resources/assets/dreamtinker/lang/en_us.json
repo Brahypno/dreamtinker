@@ -661,6 +661,12 @@
   "modifier.dreamtinker.nova_spell_bow": "Spell Bow",
   "modifier.dreamtinker.nova_spell_bow.flavor": "Different Spell bow",
   "modifier.dreamtinker.nova_spell_bow.description": "Always starts with Projectile, and MUST be inscribed with a spell that does not have another method. When launch arrow, send extra Spell arrow. Could Spend extra spell arrow to enhance spell. But cannot use spell arrow as ammo,",
+  "modifier.dreamtinker.nova_enchanter_shield": "Enchanter Shield",
+  "modifier.dreamtinker.nova_enchanter_shield.flavor": "Weaker defense",
+  "modifier.dreamtinker.nova_enchanter_shield.description": "When blocking damage, gain mana regen and spell damage",
+  "modifier.dreamtinker.nova_mana_shield": "Mana Shield",
+  "modifier.dreamtinker.nova_mana_shield.flavor": "Strong Mana defense",
+  "modifier.dreamtinker.nova_mana_shield.description": "When taking damage, use Mana(ars nouveau) reduce damage. Higher level would spend more mana for more defense",
 
   "material.dreamtinker.echo_alloy": "Echo Alloy",
   "material.dreamtinker.echo_alloy.flavor": "Its echo of mystery, or echo of enigma",

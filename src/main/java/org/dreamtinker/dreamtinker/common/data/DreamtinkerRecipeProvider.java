@@ -1888,6 +1888,24 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(1)
                              .saveSalvage(wrapped, prefix(DreamtinkerModifiers.nova_spell_bow, abilitySalvage))
                              .save(wrapped, prefix(DreamtinkerModifiers.nova_spell_bow, abilityFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.nova_enchanter_shield)
+                             .setTools(TinkerTags.Items.SHIELDS)
+                             .addInput(com.hollingsworth.arsnouveau.setup.registry.BlockRegistry.SOURCE_GEM_BLOCK.asItem(), 2)
+                             .addInput(com.hollingsworth.arsnouveau.setup.registry.BlockRegistry.SOURCE_GEM_BLOCK.asItem(), 2)
+                             .addInput(Items.SHIELD, 1)
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .setMaxLevel(1)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.nova_enchanter_shield, upgradeSalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.nova_enchanter_shield, upgradeFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.nova_mana_shield)
+                             .setTools(TinkerTags.Items.ARMOR)
+                             .addInput(com.hollingsworth.arsnouveau.setup.registry.BlockRegistry.SOURCE_GEM_BLOCK.asItem(), 16)
+                             .addInput(com.hollingsworth.arsnouveau.setup.registry.BlockRegistry.SOURCE_GEM_BLOCK.asItem(), 16)
+                             .addInput(ItemsRegistry.ABJURATION_ESSENCE, 9)
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .setMaxLevel(3)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.nova_mana_shield, upgradeSalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.nova_mana_shield, upgradeFolder));
 
     }
 

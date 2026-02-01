@@ -144,10 +144,10 @@ public class as_one extends ArmorModifier {
     public float modifyDamageTaken(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount, boolean isDirectDamage) {
         int level = SlotInChargeModule.getLevel(context.getTinkerData(), SLOT_KEY, slotType);
         if (0 < level){
-            if (context.getEntity().getMaxHealth() < amount * AsOneS.get().floatValue())
+            amount *= AsOneS.get().floatValue();
+            if (context.getEntity().getMaxHealth() < amount)
                 context.getEntity().setAbsorptionAmount((float) (Math.min(amount, AsOneAB.get()) * 2.0f));
-            System.out.println(context.getEntity().getAbsorptionAmount());
-            return amount * AsOneS.get().floatValue();
+            return amount;
         }
         return amount;
     }
