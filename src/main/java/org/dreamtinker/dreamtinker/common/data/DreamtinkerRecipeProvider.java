@@ -1429,7 +1429,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(DreamtinkerToolParts.memoryOrthant.get(), 1)
                              .addInput(DreamtinkerCommon.nigrescence_antimony.get(), 6)
                              .setMaxLevel(1)
-                             .setSlots(SlotType.ABILITY, 2)
+                             .setSlots(SlotType.ABILITY, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.flaming_memory, abilitySalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.flaming_memory, abilityFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.all_slayer)

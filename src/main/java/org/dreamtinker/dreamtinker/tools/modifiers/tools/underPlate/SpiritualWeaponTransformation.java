@@ -1,48 +1,39 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate;
 
 import com.sammy.malum.registry.common.AttributeRegistry;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
+import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.BasicInterface;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
+import slimeknights.tconstruct.library.modifiers.modules.build.ModifierRequirementsModule;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import team.lodestar.lodestone.registry.common.LodestoneAttributeRegistry;
 
-import java.util.List;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
+import static org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers.weapon_transformation;
 import static org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.WeaponTransformation.valueExpSoftCap;
 
-public class SpiritualWeaponTransformation extends BattleModifier {
-    private final Component errorMessage =
-            Component.translatable("modifier.dreamtinker.spiritual_weapon_transformation.requirements");
+public class SpiritualWeaponTransformation extends NoLevelsModifier implements BasicInterface {
+
+    @Override
+    protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addModule(ModifierRequirementsModule.builder().requireModifier(weapon_transformation.getId(), 1)
+                                                        .modifierKey(DreamtinkerModifiers.spiritual_weapon_transformation.getId()).build());
+        this.BasicInterfaceInit(hookBuilder);
+        super.registerHooks(hookBuilder);
+    }
 
     @Override
     public int getPriority() {
         return -1000;
-    }
-
-    @Override
-    public Component validate(IToolStackView tool, ModifierEntry modifier) {
-        if (0 < modifier.getLevel() && tool.getModifierLevel(DreamtinkerModifiers.weapon_transformation.getId()) < 1)
-            return errorMessage;
-        return null;
-    }
-
-    @Override
-    public Component requirementsError(ModifierEntry entry) {
-        return errorMessage;
-    }
-
-    @Override
-    public @NotNull List<ModifierEntry> displayModifiers(ModifierEntry entry) {
-        return List.of(new ModifierEntry(DreamtinkerModifiers.weapon_transformation.getId(), 1));
     }
 
     @Override

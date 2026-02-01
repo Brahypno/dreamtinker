@@ -6,6 +6,7 @@ import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.json.LevelingValue;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.modules.build.ModifierRequirementsModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolContext;
@@ -14,10 +15,9 @@ import slimeknights.tconstruct.library.tools.stat.ModifierStatsBuilder;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.tools.modules.combat.FieryAttackModule;
 
-import java.util.List;
-
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.flamingMemoryStatusBoost;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.flamingMemoryLifeDrain;
+import static org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers.memory_base;
 
 public class FlamingMemory extends BattleModifier {
     private final Component errorMessage =
@@ -26,24 +26,9 @@ public class FlamingMemory extends BattleModifier {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
         hookBuilder.addModule(new FieryAttackModule(LevelingValue.eachLevel(5)));
+        hookBuilder.addModule(ModifierRequirementsModule.builder().requireModifier(memory_base.getId(), 1)
+                                                        .modifierKey(DreamtinkerModifiers.flaming_memory.getId()).build());
         super.registerHooks(hookBuilder);
-    }
-
-    @Override
-    public Component validate(IToolStackView tool, ModifierEntry modifier) {
-        if (0 < modifier.getLevel() && tool.getModifierLevel(DreamtinkerModifiers.memory_base.getId()) < 1)
-            return errorMessage;
-        return null;
-    }
-
-    @Override
-    public Component requirementsError(ModifierEntry entry) {
-        return errorMessage;
-    }
-
-    @Override
-    public @NotNull List<ModifierEntry> displayModifiers(ModifierEntry entry) {
-        return List.of(new ModifierEntry(DreamtinkerModifiers.memory_base.getId(), 1));
     }
 
     private int levels(IToolContext tool) {
