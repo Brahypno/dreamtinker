@@ -80,6 +80,7 @@ public class FluidTagProvider extends FluidTagsProvider {
                              DreamtinkerFluids.molten_malignant_gluttony.getTag(),
                              DreamtinkerFluids.molten_dark_metal.getTag());
         this.tag(DreamtinkerTagKeys.Fluids.molten_echo_shard).addTags(DreamtinkerFluids.molten_echo_shard.getTag());
+        this.tag(DreamtinkerTagKeys.Fluids.molten_echo).addTags(DreamtinkerFluids.molten_echo_shard.getTag());//Maybe someone like name of molten echo? IDK
         this.tag(DreamtinkerTagKeys.Fluids.molten_crying_obsidian).addTags(DreamtinkerFluids.molten_crying_obsidian.getTag());
         this.tag(DreamtinkerTagKeys.Fluids.molten_orichalcum).addTags(DreamtinkerFluids.molten_orichalcum.getTag());
         this.tag(DreamtinkerTagKeys.Fluids.molten_arcane_gold).addTags(DreamtinkerFluids.molten_arcane_gold.getTag());
