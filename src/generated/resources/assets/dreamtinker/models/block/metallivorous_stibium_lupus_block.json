@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "dreamtinker:block/metallivorous_stibium_lupus_block"
+  }
+}

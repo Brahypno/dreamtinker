@@ -16,8 +16,7 @@
       "tconstruct:plating_boots",
       "tconstruct:plating_shield",
       "tconstruct:maille",
-      "tconstruct:armor_maille",
-      "tconstruct:storage_block"
+      "tconstruct:armor_maille"
     ],
     "transformer": {
       "type": "tconstruct:grey_to_sprite",

@@ -253,6 +253,9 @@ public class DreamtinkerCommon extends DreamtinkerModule {
     }
 
     protected static final Function<Block, ? extends BlockItem> BLOCK_ITEM = (b) -> new BlockItem(b, new Item.Properties());
+    public static final ItemObject<Block> metallivorous_stibium_lupus_block = BLOCKS.register("metallivorous_stibium_lupus_block", () -> new Block(
+            builder(MapColor.METAL, SoundType.METAL).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(30f, 35f)), BLOCK_ITEM);
+
     public static final ItemObject<BetterPaneBlock> crying_obsidian_plane = BLOCKS.register("crying_obsidian_pane", () -> new BetterPaneBlock(
             builder(MapColor.COLOR_BLACK, SoundType.STONE).requiresCorrectToolForDrops().instrument(NoteBlockInstrument.BASEDRUM).noOcclusion()
                                                           .strength(25.0F, 400.0F)), BLOCK_ITEM);
@@ -334,6 +337,7 @@ public class DreamtinkerCommon extends DreamtinkerModule {
             builder(MapColor.METAL, SoundType.METAL).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(36f, 36f)), BLOCK_ITEM);
 
     public static void addTabBlocks(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
+        output.accept(metallivorous_stibium_lupus_block.get());
         output.accept(crying_obsidian_plane.get());
         output.accept(narcissus.get());
         output.accept(larimarOre.get());

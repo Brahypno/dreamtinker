@@ -49,7 +49,7 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
             .add(crying_obsidian, amber, soul_steel)
             .addOptional(hallowed_gold, ArcaneGold, WickedWeave);
         tag(TinkerTags.Materials.COMPATABILITY_BLOCKS)
-                .add(echo_alloy, amber, metallivorous_stibium_lupus, black_sapphire)
+                .add(echo_alloy, amber, black_sapphire)
                 .addOptional();
         tag(TinkerTags.Materials.COMPATABILITY_ALLOYS)
                 .addOptional(soul_etherium, malignant_gluttony);

@@ -33,6 +33,7 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
+        simpleBlockWithItem(DreamtinkerCommon.metallivorous_stibium_lupus_block.get(), cubeAll(DreamtinkerCommon.metallivorous_stibium_lupus_block.get()));
         ResourceLocation crying_obsidian = new ResourceLocation("block/crying_obsidian");
         paneBlock(DreamtinkerCommon.crying_obsidian_plane.get(), "crying_obsidian_pane/", crying_obsidian, crying_obsidian, false, -1, false,
                   RenderType.solid());

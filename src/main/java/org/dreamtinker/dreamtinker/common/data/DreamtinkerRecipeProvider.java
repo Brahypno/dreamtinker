@@ -359,15 +359,17 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                             .setOre(IMeltingContainer.OreRateType.GEM)
                             .save(consumer, location(Melting_folder + "foundry/metallivorous_stibium_lupus/ingot"));
         cast(DreamtinkerFluids.molten_lupi_antimony.get(), DreamtinkerCommon.metallivorous_stibium_lupus.get(), FluidValues.INGOT, consumer);
-        fake_block_to_ingot(consumer, DreamtinkerMaterialIds.metallivorous_stibium_lupus, DreamtinkerCommon.metallivorous_stibium_lupus.get());
-        /* Not working
-        MeltingRecipeBuilder.melting(StrictNBTIngredient.of(fake_block(DreamtinkerMaterialIds.metallivorous_stibium_lupus)),
-                                     DreamtinkerFluids.molten_lupi_antimony.result(FluidValues.METAL_BLOCK / 2), 2300, 2.0f)
+
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.metallivorous_stibium_lupus_block.get()),
+                                     DreamtinkerFluids.molten_lupi_antimony, FluidValues.METAL_BLOCK / 2, 2.0f)
                             .addByproduct(DreamtinkerFluids.molten_ascending_antimony.result(FluidValues.INGOT * 3))
                             .setOre(IMeltingContainer.OreRateType.GEM)
                             .save(consumer, location(Melting_folder + "foundry/metallivorous_stibium_lupus/block"));
+        ItemCastingRecipeBuilder.basinRecipe(DreamtinkerCommon.metallivorous_stibium_lupus_block.get())
+                                .setFluidAndTime(DreamtinkerFluids.molten_lupi_antimony, FluidValues.METAL_BLOCK)
+                                .save(consumer, location(Casting_folder + "metallivorous_stibium_lupus/block"));
 
-         */
+
         MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.nigrescence_antimony.get()),
                                      DreamtinkerFluids.molten_nigrescence_antimony, 75, 2.0f)
                             .addByproduct(DreamtinkerFluids.molten_albedo_stibium.result(75))
@@ -1188,6 +1190,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         night_one_receipts(consumer, DreamtinkerCommon.raw_transmutation_gold.get(), DreamtinkerCommon.RawTransmutationGoldBlock.asItem());
         night_one_receipts(consumer, DreamtinkerCommon.transmutation_gold_ingot.get(), DreamtinkerCommon.TransmutationGoldBlock.asItem());
         night_one_receipts(consumer, DreamtinkerCommon.transmutation_gold_nugget.get(), DreamtinkerCommon.transmutation_gold_ingot.get());
+        night_one_receipts(consumer, DreamtinkerCommon.metallivorous_stibium_lupus.get(), DreamtinkerCommon.metallivorous_stibium_lupus_block.asItem());
 
         new SpiritInfusionRecipeBuilder(ItemRegistry.THE_VESSEL.get(), 1, new ItemStack(DreamtinkerCommon.malignant_gluttony.get()))
                 .addExtraItem(ItemRegistry.NULL_SLATE.get(), 4)

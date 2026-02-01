@@ -3,10 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "type": "forge:nbt",
-      "count": 1,
-      "item": "tconstruct:fake_storage_block",
-      "nbt": "{Material:\"dreamtinker:metallivorous_stibium_lupus\"}"
+      "item": "dreamtinker:metallivorous_stibium_lupus_block"
     }
   ],
   "result": {

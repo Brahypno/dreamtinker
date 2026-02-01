@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_item": {
+    "has_metallivorous_stibium_lupus": {
       "conditions": {
         "items": [
           {
             "items": [
-              "tconstruct:fake_storage_block"
+              "dreamtinker:metallivorous_stibium_lupus"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "dreamtinker:tools/parts/fake_block_to_ingots/metallivorous_stibium_lupus"
+        "recipe": "dreamtinker:common/metallivorous_stibium_lupus_to_metallivorous_stibium_lupus_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_item",
+      "has_metallivorous_stibium_lupus",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "dreamtinker:tools/parts/fake_block_to_ingots/metallivorous_stibium_lupus"
+      "dreamtinker:common/metallivorous_stibium_lupus_to_metallivorous_stibium_lupus_block"
     ]
   },
   "sends_telemetry_event": false

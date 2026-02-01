@@ -37,6 +37,7 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
     }
 
     private void addDecorative() {
+        this.dropSelf(DreamtinkerCommon.metallivorous_stibium_lupus_block.get());
         this.dropSelf(DreamtinkerCommon.crying_obsidian_plane.get());
         this.dropSelf(DreamtinkerCommon.narcissus.get());
         this.dropSelf(DreamtinkerCommon.soulSteelBlock.get());

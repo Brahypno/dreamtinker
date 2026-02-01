@@ -4,6 +4,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
@@ -45,8 +46,9 @@ public class BlockTagProvider extends BlockTagsProvider {
                   OrichalcumOre, DeepslateOrichalcumOre, OrichalcumBlock, RawOrichalcumBlock,
                   ShadowSilverBlock, ShadowSilverOre, DeepslateShadowSilverOre, RawShadowSilverBlock,
                   TransmutationGoldBlock, TransmutationGoldOre, DeepslateTransmutationGoldOre, RawTransmutationGoldBlock);
-        tagBlocks(BEACON_BASE_BLOCKS, soulSteelBlock, OrichalcumBlock, ColdIronBlock, ShadowSilverBlock, TransmutationGoldBlock);
-
+        tagBlocks(BEACON_BASE_BLOCKS, soulSteelBlock, OrichalcumBlock, ColdIronBlock, ShadowSilverBlock, TransmutationGoldBlock,
+                  metallivorous_stibium_lupus_block);
+        tagBlocks(MINEABLE_WITH_PICKAXE, Tiers.NETHERITE.getTag(), metallivorous_stibium_lupus_block);
         tagBlocks(DreamtinkerTagKeys.Blocks.larimarOre, larimarOre);
         tagBlocks(DreamtinkerTagKeys.Blocks.amberOre, amberOre);
         tagBlocks(DreamtinkerTagKeys.Blocks.scoleciteOre, scoleciteOre);
@@ -71,7 +73,7 @@ public class BlockTagProvider extends BlockTagsProvider {
 
         tagBlocks(Tags.Blocks.STORAGE_BLOCKS, ColdIronBlock, RawColdIronBlock,
                   OrichalcumOre, DeepslateOrichalcumOre, OrichalcumBlock, RawOrichalcumBlock,
-                  ShadowSilverBlock, TransmutationGoldBlock, RawTransmutationGoldBlock, soulSteelBlock);
+                  ShadowSilverBlock, TransmutationGoldBlock, RawTransmutationGoldBlock, soulSteelBlock, metallivorous_stibium_lupus_block);
 
         this.tag(Tags.Blocks.ORES)
             .addTags(DreamtinkerTagKeys.Blocks.larimarOre, DreamtinkerTagKeys.Blocks.amberOre, DreamtinkerTagKeys.Blocks.scoleciteOre,

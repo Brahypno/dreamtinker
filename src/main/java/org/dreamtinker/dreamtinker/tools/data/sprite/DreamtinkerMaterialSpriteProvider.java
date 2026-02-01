@@ -458,7 +458,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(255, 0xFFF3EAF7)  // 最亮高光（近白紫）
                                                 .build());
         this.buildMaterial(DreamtinkerMaterialIds.malignant_gluttony)
-            .meleeHarvest().armor().statType(STORAGE_BLOCK)
+            .meleeHarvest().armor()
             .fallbacks("metal")
             .transformer(GreyToSpriteTransformer.builder()
                                                 .addARGB(0, 0xFF142728)  // 最暗：墨青黑（阴影边）

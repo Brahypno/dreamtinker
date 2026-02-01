@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:casting_basin",
+  "cooling_time": 292,
+  "fluid": {
+    "amount": 810,
+    "tag": "dreamtinker:molten_lupi_antimony"
+  },
+  "result": "dreamtinker:metallivorous_stibium_lupus_block"
+}
