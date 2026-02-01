@@ -1,5 +1,7 @@
 package org.dreamtinker.dreamtinker.utils;
 
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
@@ -28,10 +30,8 @@ public class DTModifierCheck {
     public static int getModifierLevel(@NotNull LivingEntity entity, ModifierId id, EquipmentSlot slot) {
         if (null == entity.getItemBySlot(slot) || !(entity.getItemBySlot(slot).getItem() instanceof IModifiable))
             return 0;
-        ToolStack toolStack = ToolStack.from(entity.getItemBySlot(slot));
-        if (!toolStack.isBroken())
-            return ModifierUtil.getModifierLevel(entity.getItemBySlot(slot), id);
-        return 0;
+        ItemStack stack = entity.getItemBySlot(slot);
+        return ModifierUtil.getModifierLevel(entity.getItemBySlot(slot), id);
     }
 
     public static int getMainhandModifierLevel(LivingEntity entity, ModifierId modifierId) {
@@ -100,6 +100,19 @@ public class DTModifierCheck {
         return null;
     }
 
+    @Nullable
+    public static ToolStack getPossibleToolWithModifierTag(LivingEntity entity, ModifierId modifierId, ResourceLocation flag) {
+        for (EquipmentSlot slot : slots)
+            if (0 < getModifierLevel(entity, modifierId, slot) && 0 < ModifierUtil.getPersistentInt(entity.getItemBySlot(slot), flag, 0))
+                return ToolStack.from(entity.getItemBySlot(slot));
+        if (entity instanceof Player player)
+            for (ItemStack itemStack : player.getInventory().items)
+                if (0 < getItemModifierNum(itemStack, modifierId) && 0 < ModifierUtil.getPersistentInt(itemStack, flag, 0))
+                    return ToolStack.from(itemStack);
+
+        return null;
+    }
+
     public static int getItemModifierNum(ItemStack stack, TagKey<Modifier> tag) {
         int matched = 0;
         if (null != stack && !stack.isEmpty() && stack.getItem() instanceof IModifiable){
@@ -114,8 +127,7 @@ public class DTModifierCheck {
     public static int getItemModifierNum(ItemStack stack, ModifierId id) {
         int matched = 0;
         if (null != stack && !stack.isEmpty() && stack.getItem() instanceof IModifiable){
-            ToolStack toolStack = ToolStack.from(stack);
-            matched += toolStack.getModifier(id).getLevel();
+            matched += ModifierUtil.getModifierLevel(stack, id);
         }
         return matched;
     }
@@ -147,12 +159,9 @@ public class DTModifierCheck {
 
     public static float getPersistentTagValue(LivingEntity entity, ModifierId modifierId, ResourceLocation tag, EquipmentSlot slot) {
         float value = 0;
-
         int level = getModifierLevel(entity, modifierId, slot);
-        if (0 < level){
-            ToolStack tool = ToolStack.from(entity.getItemBySlot(slot));
-            value += tool.getPersistentData().getInt(tag) * level;
-        }
+        if (0 < level)
+            value += ModifierUtil.getPersistentInt(entity.getItemBySlot(slot), tag, 0) * level;
 
         return value;
     }
@@ -162,10 +171,14 @@ public class DTModifierCheck {
             ItemStack itemStack = entity.getItemBySlot(slot);
             if (!(itemStack.getItem() instanceof IModifiable))
                 continue;
-
-            ToolStack toolStack = ToolStack.from(itemStack);
-            toolStack.getPersistentData().remove(tag);
-            toolStack.updateStack(itemStack);
+            CompoundTag nbt = itemStack.getTag();
+            if (nbt != null && nbt.contains(ToolStack.TAG_PERSISTENT_MOD_DATA, Tag.TAG_COMPOUND)){
+                CompoundTag persistent = nbt.getCompound(ToolStack.TAG_PERSISTENT_MOD_DATA);
+                String flagString = tag.toString();
+                if (persistent.contains(flagString)){
+                    persistent.remove(flagString);
+                }
+            }
         }
     }
 

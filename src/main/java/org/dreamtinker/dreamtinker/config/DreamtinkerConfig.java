@@ -177,10 +177,12 @@ public class DreamtinkerConfig {
 
     static {builder.comment("\nstar_regulus: ");}
 
-    public static final ForgeConfigSpec.IntValue AsOneRe = builder.comment("Initial Revive count of As one").defineInRange("AsOneRe", 2, 0, 10000);
+    public static final ForgeConfigSpec.IntValue AsOneRe = builder.comment("Initial Revive count of As one").defineInRange("AsOneRe", 9, 0, 10000);
     public static final ForgeConfigSpec.IntValue AsOneT = builder.comment("Time counter for gaining revive counts").defineInRange("AsOneT", 777, 1, 10000);
     public static final ForgeConfigSpec.IntValue AsOneA = builder.comment("Max amp of effect that would be clear").defineInRange("AsOneA", 3, 1, 10000);
     public static final ForgeConfigSpec.DoubleValue AsOneS = builder.comment("Percentage damage taken").defineInRange("AsOneS", 0.33, 0, 1);
+    public static final ForgeConfigSpec.DoubleValue AsOneAB =
+            builder.comment("Max Absorption value get when damage larger than max health").defineInRange("AsOneAB", 1000.0, 0, 2000);
 
     static {builder.comment("\ncrying_obsidian: ");}
 

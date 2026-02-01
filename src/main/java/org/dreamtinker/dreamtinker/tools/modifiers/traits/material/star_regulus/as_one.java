@@ -19,6 +19,11 @@ import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.modules.build.VolatileFlagModule;
+import slimeknights.tconstruct.library.modifiers.modules.technical.SlotInChargeModule;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
+import slimeknights.tconstruct.library.tools.IndestructibleItemEntity;
+import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability;
 import slimeknights.tconstruct.library.tools.context.EquipmentChangeContext;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
@@ -31,15 +36,24 @@ import java.util.List;
 
 import static net.minecraft.nbt.Tag.TAG_INT;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.*;
-import static org.dreamtinker.dreamtinker.utils.DTModifierCheck.getPossibleToolWithModifier;
+import static org.dreamtinker.dreamtinker.utils.DTModifierCheck.getPossibleToolWithModifierTag;
 
 
 public class as_one extends ArmorModifier {
     private final int as_one_life = AsOneRe.get();
     private static final int SECOND_THRESHOLD = AsOneT.get();
+    private static final TinkerDataCapability.TinkerDataKey<SlotInChargeModule.SlotInCharge> SLOT_KEY =
+            TinkerDataCapability.TinkerDataKey.of(Dreamtinker.getLocation("as_one"));
 
     private static final ResourceLocation TAG_AS_ONE = Dreamtinker.getLocation("as_one");
     private static final ResourceLocation TAG_LAST = Dreamtinker.getLocation("rev_b");
+
+    @Override
+    protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addModule(new SlotInChargeModule(SLOT_KEY));
+        hookBuilder.addModule(new VolatileFlagModule(IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY));
+        super.registerHooks(hookBuilder);
+    }
 
     {
         MinecraftForge.EVENT_BUS.addListener(this::onLivingDeath);
@@ -56,22 +70,18 @@ public class as_one extends ArmorModifier {
         LivingEntity entity = event.getEntity();
         if (entity.level().isClientSide || event.isCanceled())
             return;
-        ToolStack tool = getPossibleToolWithModifier(entity, this.getId());
+        ToolStack tool = getPossibleToolWithModifierTag(entity, this.getId(), TAG_AS_ONE);
         if (null == tool)
             return;
         ModDataNBT toolData = tool.getPersistentData();
         int count = toolData.getInt(TAG_AS_ONE);
         if (count <= 0)
             return;
-        int newCount = count - 1;
-        if (newCount > 0)
-            toolData.putInt(TAG_AS_ONE, newCount);
-        else
-            toolData.remove(TAG_AS_ONE);
+        toolData.putInt(TAG_AS_ONE, --count);
         event.setCanceled(true);
         entity.deathTime = 0;
         entity.setHealth(Math.max(1F, entity.getMaxHealth() * 0.15F));
-        entity.invulnerableTime = Math.max(entity.invulnerableTime, 1000);
+        entity.invulnerableTime = Math.max(entity.invulnerableTime, 360);
         entity.setRemainingFireTicks(0);     // 清火
         entity.fallDistance = 0.0F;          // 清坠落
         entity.setLastHurtByMob(null);       // 清仇恨，防止立刻被同一来源补刀
@@ -94,15 +104,21 @@ public class as_one extends ArmorModifier {
     public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         if (world.isClientSide)
             return;
+        if (!isCorrectSlot && !isSelected)
+            return;
         if (world.getGameTime() % 20 == 0){
             ModDataNBT toolData = tool.getPersistentData();
-            int last_second = toolData.getInt(TAG_LAST);
-            int as_one_cnt = toolData.getInt(TAG_AS_ONE);
-            if (SECOND_THRESHOLD <= last_second + 1){
-                toolData.putInt(TAG_LAST, last_second + 1 - SECOND_THRESHOLD);
-                toolData.putInt(TAG_AS_ONE, ++as_one_cnt);
-            }else
-                toolData.putInt(TAG_LAST, last_second + 1);
+            int as_one_cnt = Math.min(toolData.getInt(TAG_AS_ONE) + 1, 99);
+            if (as_one_cnt < 99){
+                int last_second = toolData.getInt(TAG_LAST);
+                if (SECOND_THRESHOLD <= last_second + 1){
+                    toolData.putInt(TAG_LAST, last_second + 1 - SECOND_THRESHOLD);
+                    toolData.putInt(TAG_AS_ONE, as_one_cnt);
+                }else
+                    toolData.putInt(TAG_LAST, last_second + 1);
+            }
+            if (tool.isBroken())
+                tool.setDamage(0);
         }
         List<MobEffectInstance> snapshot = new ArrayList<>(holder.getActiveEffects());
         for (MobEffectInstance inst : snapshot) {
@@ -115,8 +131,8 @@ public class as_one extends ArmorModifier {
                 boolean icon = inst.showIcon();
 
                 holder.removeEffect(type);
-                if (0 <= amp - 2)
-                    holder.addEffect(new MobEffectInstance(type, duration, amp - 2, ambient, particles, icon));
+                //if (0 <= amp - 2)
+                //  holder.addEffect(new MobEffectInstance(type, duration, amp - 2, ambient, particles, icon));
             }
         }
     }
@@ -126,7 +142,14 @@ public class as_one extends ArmorModifier {
 
     @Override
     public float modifyDamageTaken(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount, boolean isDirectDamage) {
-        return (float) (amount * AsOneS.get());
+        int level = SlotInChargeModule.getLevel(context.getTinkerData(), SLOT_KEY, slotType);
+        if (0 < level){
+            if (context.getEntity().getMaxHealth() < amount * AsOneS.get().floatValue())
+                context.getEntity().setAbsorptionAmount((float) (Math.min(amount, AsOneAB.get()) * 2.0f));
+            System.out.println(context.getEntity().getAbsorptionAmount());
+            return amount * AsOneS.get().floatValue();
+        }
+        return amount;
     }
 
     @Override

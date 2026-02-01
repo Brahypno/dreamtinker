@@ -32,7 +32,6 @@ import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.Fragile
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.homunculusLifeCurseMaxEffectLevel;
 import static org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.WeaponTransformation.valueExpSoftCap;
 import static org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.knockArts.TAG_KNOCK;
-import static org.dreamtinker.dreamtinker.utils.DTModifierCheck.getPossibleToolWithModifier;
 
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
@@ -63,13 +62,7 @@ public class GeneralHurtHandler {
             event.setCanceled(true);
             return;
         }
-        if (null != getPossibleToolWithModifier(victim, DreamtinkerModifiers.as_one.getId()))
-            if (victim.getMaxHealth() < event.getAmount()){
-                victim.setAbsorptionAmount(Math.min(victim.getAbsorptionAmount() + event.getAmount(), Integer.MAX_VALUE));
-                event.setAmount(0);
-                event.setCanceled(true);
-                return;
-            }
+
         if (null == dmgEntity){
             if (DTModifierCheck.ModifierInBody(victim, DreamtinkerModifiers.Ids.requiem)){
                 event.setAmount(0);
