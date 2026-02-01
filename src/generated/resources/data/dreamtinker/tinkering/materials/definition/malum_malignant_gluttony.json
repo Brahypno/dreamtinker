@@ -22,7 +22,7 @@
     ]
   },
   "craftable": false,
-  "hidden": true,
+  "hidden": false,
   "sortOrder": 50,
   "tier": 5
 }
