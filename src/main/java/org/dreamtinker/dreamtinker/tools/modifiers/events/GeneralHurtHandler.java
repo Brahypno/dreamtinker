@@ -75,7 +75,7 @@ public class GeneralHurtHandler {
             int requiem = DTModifierCheck.getEntityBodyModifierNum(offender, DreamtinkerModifiers.Ids.requiem);
             if (0 < requiem){
                 float reduced = victim.getActiveEffects().stream()
-                                      .filter(e -> e.getEffect().getCategory() == MobEffectCategory.HARMFUL).count() / 4.0f * requiem;
+                                      .filter(e -> e.getEffect().getCategory() == MobEffectCategory.HARMFUL).count() * requiem;
                 reduced = event.getAmount() - reduced;
                 if (reduced <= 0){
                     event.setAmount(0);
