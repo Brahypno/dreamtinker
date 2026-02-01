@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "type": "forge:nbt",
+      "count": 1,
+      "item": "tconstruct:fake_storage_block",
+      "nbt": "{Material:\"dreamtinker:metallivorous_stibium_lupus\"}"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "dreamtinker:metallivorous_stibium_lupus"
+  }
+}

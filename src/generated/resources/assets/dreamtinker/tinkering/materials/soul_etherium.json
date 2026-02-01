@@ -21,7 +21,8 @@
       "tconstruct:plating_shield",
       "tconstruct:maille",
       "tconstruct:armor_maille",
-      "tconstruct:bowstring"
+      "tconstruct:bowstring",
+      "tconstruct:storage_block"
     ],
     "transformer": {
       "type": "tconstruct:grey_to_sprite",

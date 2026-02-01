@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "dreamtinker:soul_etherium",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_malignant_gluttony",
+      "required": false
+    }
+  ]
+}

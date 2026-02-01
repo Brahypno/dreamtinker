@@ -18,7 +18,8 @@
       "tconstruct:maille",
       "tconstruct:armor_maille",
       "tconstruct:limb",
-      "tconstruct:grip"
+      "tconstruct:grip",
+      "tconstruct:storage_block"
     ],
     "transformer": {
       "type": "tconstruct:grey_to_sprite",

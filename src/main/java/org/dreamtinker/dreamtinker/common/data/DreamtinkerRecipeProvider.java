@@ -25,6 +25,7 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.CompoundIngredient;
 import net.minecraftforge.common.crafting.IntersectionIngredient;
+import net.minecraftforge.common.crafting.StrictNBTIngredient;
 import net.minecraftforge.common.crafting.conditions.AndCondition;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
@@ -350,19 +351,28 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         meltCast(DreamtinkerFluids.molten_echo_shard.get(), Items.ECHO_SHARD, FluidValues.GEM, consumer);
 
         meltCast(DreamtinkerFluids.molten_echo_alloy.get(), DreamtinkerCommon.echo_alloy.get(), FluidValues.GEM, consumer);
+        fake_block_to_ingot(consumer, DreamtinkerMaterialIds.echo_alloy, DreamtinkerCommon.echo_alloy.get());
 
         MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.metallivorous_stibium_lupus.get()),
                                      DreamtinkerFluids.molten_lupi_antimony, FluidValues.INGOT / 2, 2.0f)
                             .addByproduct(DreamtinkerFluids.molten_ascending_antimony.result(FluidValues.NUGGET * 3))
                             .setOre(IMeltingContainer.OreRateType.GEM)
-                            .save(consumer, location(Melting_folder + "foundry/metallivorous_stibium_lupus"));
+                            .save(consumer, location(Melting_folder + "foundry/metallivorous_stibium_lupus/ingot"));
         cast(DreamtinkerFluids.molten_lupi_antimony.get(), DreamtinkerCommon.metallivorous_stibium_lupus.get(), FluidValues.INGOT, consumer);
+        fake_block_to_ingot(consumer, DreamtinkerMaterialIds.metallivorous_stibium_lupus, DreamtinkerCommon.metallivorous_stibium_lupus.get());
+        /* Not working
+        MeltingRecipeBuilder.melting(StrictNBTIngredient.of(fake_block(DreamtinkerMaterialIds.metallivorous_stibium_lupus)),
+                                     DreamtinkerFluids.molten_lupi_antimony.result(FluidValues.METAL_BLOCK / 2), 2300, 2.0f)
+                            .addByproduct(DreamtinkerFluids.molten_ascending_antimony.result(FluidValues.INGOT * 3))
+                            .setOre(IMeltingContainer.OreRateType.GEM)
+                            .save(consumer, location(Melting_folder + "foundry/metallivorous_stibium_lupus/block"));
 
+         */
         MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.nigrescence_antimony.get()),
                                      DreamtinkerFluids.molten_nigrescence_antimony, 75, 2.0f)
                             .addByproduct(DreamtinkerFluids.molten_albedo_stibium.result(75))
                             .setOre(IMeltingContainer.OreRateType.METAL)
-                            .save(consumer, location(Melting_folder + "foundry/nigrescence_antimony"));
+                            .save(consumer, location(Melting_folder + "foundry/nigrescence_antimony/gem"));
         cast(DreamtinkerFluids.molten_nigrescence_antimony.get(), DreamtinkerCommon.nigrescence_antimony.get(), FluidValues.GEM, consumer);
 
         meltCast(DreamtinkerFluids.liquid_trist.get(), Items.GHAST_TEAR, FluidValues.NUGGET, consumer);
@@ -382,6 +392,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                      DreamtinkerFluids.molten_black_sapphire.get(), FluidValues.GEM, 1.0f)
                             .setOre(IMeltingContainer.OreRateType.GEM)
                             .save(consumer, location(Melting_folder + "black_sapphire/ore"));
+        fake_block_to_ingot(consumer, DreamtinkerMaterialIds.black_sapphire, DreamtinkerCommon.black_sapphire.get());
         MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.scoleciteOre),
                                      DreamtinkerFluids.molten_scolecite.get(), FluidValues.GEM, 1.0f)
                             .setOre(IMeltingContainer.OreRateType.GEM)
@@ -568,6 +579,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
         meltCast(DreamtinkerFluids.liquid_pure_soul.get(), EnigmaticItems.SOUL_CRYSTAL, FluidValues.GEM, wrapped);
         meltCast(DreamtinkerFluids.molten_soul_aether.get(), DreamtinkerCommon.soul_etherium.get(), FluidValues.INGOT, wrapped);
+        fake_block_to_ingot(wrapped, DreamtinkerMaterialIds.soul_etherium, DreamtinkerCommon.soul_etherium.get());
 
         ItemCastingRecipeBuilder.tableRecipe(EnigmaticItems.VOID_PEARL)
                                 .setCoolingTime(2000, 10)
@@ -600,6 +612,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         meltCast(DreamtinkerFluids.molten_malignant_pewter.get(), ItemRegistry.MALIGNANT_PEWTER_NUGGET.get(), FluidValues.NUGGET, wrapped);
 
         meltCast(DreamtinkerFluids.molten_malignant_gluttony.get(), DreamtinkerCommon.malignant_gluttony.get(), FluidValues.INGOT, wrapped);
+        fake_block_to_ingot(wrapped, DreamtinkerMaterialIds.malignant_gluttony, DreamtinkerCommon.malignant_gluttony.get());
         ItemCastingRecipeBuilder.tableRecipe(ItemRegistry.CONCENTRATED_GLUTTONY.get())
                                 .setCast(Items.GLASS_BOTTLE, true)
                                 .setFluidAndTime(DreamtinkerFluids.liquid_concentrated_gluttony, FluidValues.BOTTLE)
@@ -1027,6 +1040,24 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                               .requires(BlockLike)
                               .unlockedBy("has_" + Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(ingotLike)).getPath(), has(BlockLike))
                               .save(consumer, location(common_folder + b2i));
+    }
+
+    private ItemStack fake_block(MaterialVariantId id) {
+        ItemStack fake_block = new ItemStack(TinkerToolParts.fakeStorageBlock.get());
+        CompoundTag nbt = new CompoundTag();
+        nbt.putString("Material", id.toString());
+        fake_block.getOrCreateTag().merge(nbt);
+        return fake_block;
+    }
+
+    private void fake_block_to_ingot(Consumer<FinishedRecipe> consumer, MaterialVariantId id, Item ingotLike) {
+        ItemStack fake_block = fake_block(id);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ingotLike, 9)
+                              .requires(StrictNBTIngredient.of(fake_block))
+                              .unlockedBy("has_item", has(TinkerToolParts.fakeStorageBlock))
+                              .save(consumer, location(
+                                      partFolder + "fake_block_to_ingots/" +
+                                      (id.getVariant().isBlank() || id.getVariant().isEmpty() ? id.getId().getPath() : id.getVariant())));
     }
 
     private void addCraftingRecipes(Consumer<FinishedRecipe> consumer) {
