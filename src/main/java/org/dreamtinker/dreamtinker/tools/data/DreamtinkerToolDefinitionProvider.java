@@ -35,7 +35,6 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.TinkerToolActions;
 import slimeknights.tconstruct.tools.TinkerToolParts;
-import slimeknights.tconstruct.tools.ToolDefinitions;
 import slimeknights.tconstruct.tools.data.ModifierIds;
 import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
 import slimeknights.tconstruct.tools.stats.StatlessMaterialStats;
@@ -149,7 +148,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                                                              .set(ToolStats.ARMOR, 0.5f).build()))
                 .module(ToolTraitsModule.builder()
                                         .trait(DreamtinkerModifiers.weapon_transformation, 1)
-                                        .trait(DreamtinkerModifiers.nova_magic_armor, 1).build())
+                                        .trait(NovaRegistry.nova_magic_armor, 1).build())
                 .module(plateSlots);
         define(DTtoolsDefinition.NarcissusWing)
                 // parts
@@ -166,7 +165,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                                                    .set(ToolStats.ATTACK_DAMAGE, 1f)
                                                    .set(ToolStats.ATTACK_SPEED, 2f)
                                                    .set(ToolStats.DRAW_SPEED, 3f)
-                                                    .set(ToolStats.BLOCK_AMOUNT, 10).build()))
+                                                   .set(ToolStats.BLOCK_AMOUNT, 10).build()))
                 .module(new MultiplyStatsModule(MultiplierNBT.builder()
                                                              .set(ToolStats.DRAW_SPEED, 1.5f)
                                                              .set(ToolStats.ATTACK_SPEED, 1.2f)
@@ -255,33 +254,33 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                                                              .set(ToolStats.DURABILITY, 1.5f).build())) // gets effectively 2x durability from having 2 heads
                 .module(ToolTraitsModule.builder()
                                         .trait(DreamtinkerModifiers.Ids.nova_spell_tiers)
-                                        .trait(DreamtinkerModifiers.nova_scriptum_attributes).build())
+                                        .trait(NovaRegistry.nova_scriptum_attributes).build())
                 .module(large_soul_weapon_slots);
         // behavior;
         define(DTtoolsDefinition.RitualBlade)
                 // parts
                 .module(PartStatsModule.parts()
-                        .part(smallBlade)
-                        .part(toolHandle).build())
+                                       .part(smallBlade)
+                                       .part(toolHandle).build())
                 .module(defaultTwoParts)
                 // stats
                 .module(new SetStatsModule(StatsNBT.builder()
-                        .set(ToolStats.ATTACK_DAMAGE, 4f)
-                        .set(ToolStats.ATTACK_SPEED, 1.0f)
-                        .set(ToolStats.BLOCK_AMOUNT, 10)
-                        .set(ToolStats.USE_ITEM_SPEED, 1.0f).build()))
+                                                   .set(ToolStats.ATTACK_DAMAGE, 4f)
+                                                   .set(ToolStats.ATTACK_SPEED, 1.0f)
+                                                   .set(ToolStats.BLOCK_AMOUNT, 10)
+                                                   .set(ToolStats.USE_ITEM_SPEED, 1.0f).build()))
                 .module(new MultiplyStatsModule(MultiplierNBT.builder()
-                        .set(ToolStats.ATTACK_DAMAGE, 0.75f)
-                        .set(ToolStats.MINING_SPEED, 0.75f)
-                        .set(ToolStats.DURABILITY, 0.75f).build()))
+                                                             .set(ToolStats.ATTACK_DAMAGE, 0.75f)
+                                                             .set(ToolStats.MINING_SPEED, 0.75f)
+                                                             .set(ToolStats.DURABILITY, 0.75f).build()))
                 .smallToolStartingSlots()
                 // traits
                 .module(ToolTraitsModule.builder()
-                        .trait(TinkerModifiers.silky, 1)
-                        .trait(ModifierIds.spilling)
-                        .trait(DreamtinkerModifiers.self_sacrifice)
-                        .trait(TinkerModifiers.melting)
-                        .trait(TinkerModifiers.silkyShears).build())
+                                        .trait(TinkerModifiers.silky, 1)
+                                        .trait(ModifierIds.spilling)
+                                        .trait(DreamtinkerModifiers.self_sacrifice)
+                                        .trait(TinkerModifiers.melting)
+                                        .trait(TinkerModifiers.silkyShears).build())
                 // behavior
                 .module(ToolActionsModule.of(ToolActions.SWORD_DIG, ToolActions.HOE_DIG))
                 .module(IsEffectiveModule.tag(TinkerTags.Blocks.MINABLE_WITH_DAGGER))

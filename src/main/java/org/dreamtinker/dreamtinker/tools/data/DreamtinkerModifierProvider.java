@@ -82,6 +82,7 @@ import slimeknights.tconstruct.tools.modules.MeltingModule;
 import slimeknights.tconstruct.tools.modules.armor.DepthProtectionModule;
 
 import static net.minecraft.tags.DamageTypeTags.BYPASSES_ENCHANTMENTS;
+import static org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry.nova_magic_armor;
 import static org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers.*;
 import static slimeknights.tconstruct.common.TinkerTags.Items.*;
 import static slimeknights.tconstruct.library.json.math.ModifierFormula.*;

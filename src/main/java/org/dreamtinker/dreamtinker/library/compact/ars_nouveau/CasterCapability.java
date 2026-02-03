@@ -6,7 +6,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaCast.ModifiableSpellCaster;
-import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.modules.ModifierModule;
 import slimeknights.tconstruct.library.modifiers.modules.build.ModifierTraitModule;
@@ -17,7 +16,7 @@ import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import java.util.function.Supplier;
 
 public record CasterCapability(Supplier<? extends IToolStackView> tool) implements ICasterTool {
-    public static final ModifierModule CAST_HANDLER = new ModifierTraitModule(DreamtinkerModifiers.nova_cast_tool.getId(), 1, true);
+    public static final ModifierModule CAST_HANDLER = new ModifierTraitModule(NovaRegistry.nova_cast_tool.getId(), 1, true);
 
     public static @NotNull ISpellCaster getSpellCaster(IToolStackView tool) {
         return new ModifiableSpellCaster(tool);

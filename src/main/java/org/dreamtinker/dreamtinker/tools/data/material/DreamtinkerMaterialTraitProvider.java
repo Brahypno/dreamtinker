@@ -9,6 +9,7 @@ import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.data.ModifierIds;
 import slimeknights.tconstruct.tools.stats.PlatingMaterialStats;
 
+import static org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry.nova_conjuration_essence;
 import static org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers.*;
 import static slimeknights.tconstruct.library.materials.MaterialRegistry.*;
 
@@ -188,7 +189,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.FireEssence, Ids.nova_fire_essence);
         addDefaultTraits(DreamtinkerMaterialIds.ManipulationEssence, Ids.nova_manipulation_essence);
         addDefaultTraits(DreamtinkerMaterialIds.WaterEssence, Ids.nova_water_essence);
-        addDefaultTraits(DreamtinkerMaterialIds.WildenHorn, Ids.heavy_arrow,Ids.balanced_arrow);
+        addDefaultTraits(DreamtinkerMaterialIds.WildenHorn, Ids.heavy_arrow, Ids.balanced_arrow);
         addDefaultTraits(DreamtinkerMaterialIds.WildenSpike, Ids.weakness);
         addDefaultTraits(DreamtinkerMaterialIds.WildenWing, Ids.balanced_arrow);
 

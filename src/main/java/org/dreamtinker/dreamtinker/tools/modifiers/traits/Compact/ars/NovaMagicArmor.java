@@ -14,8 +14,8 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.fml.ModList;
+import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
-import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.items.UnderArmorItem;
 import org.dreamtinker.dreamtinker.utils.CompactUtils.arsNovaUtils;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
@@ -59,7 +59,7 @@ public class NovaMagicArmor extends ArmorModifier {
     private void NovaWearAttributes(ItemAttributeModifierEvent event) {
         ItemStack stack = event.getItemStack();
         if (stack.getItem() instanceof ArmorItem armorItem && ModList.get().isLoaded("ars_nouveau") && !configCompactDisabled("ars_nouveau")){
-            if (stack.is(TinkerTags.Items.ARMOR) && 0 < DTModifierCheck.getItemModifierNum(stack, DreamtinkerModifiers.nova_magic_armor.getId())){
+            if (stack.is(TinkerTags.Items.ARMOR) && 0 < DTModifierCheck.getItemModifierNum(stack, NovaRegistry.nova_magic_armor.getId())){
                 if (!(stack.getItem() instanceof UnderArmorItem) && null != PerkRegistry.getPerkProvider(stack.getItem()))
                     return;//They would have their own ones.
                 EquipmentSlot slot = event.getSlotType();

@@ -10,6 +10,7 @@ import slimeknights.tconstruct.library.data.tinkering.AbstractModifierTagProvide
 import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.data.ModifierIds;
 
+import static org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry.*;
 import static org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers.*;
 import static slimeknights.tconstruct.common.TinkerTags.Modifiers.DAMAGE_UPGRADES;
 
