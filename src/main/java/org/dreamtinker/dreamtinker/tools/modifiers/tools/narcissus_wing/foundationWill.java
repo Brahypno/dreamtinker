@@ -83,7 +83,11 @@ public class foundationWill extends NoLevelsModifier implements LeftClickHook, P
         if (player.isUsingItem())
             return false;
         ModDataNBT dataNBT = tool.getPersistentData();
-        dataNBT.putInt(TAG_MOD, (dataNBT.getInt(TAG_MOD) + 1) % 2);
+        int mod = (dataNBT.getInt(TAG_MOD) + 1) % 2;
+        dataNBT.putInt(TAG_MOD, mod);
+        player.sendSystemMessage(Component.translatable("modifier.dreamtinker.tooltip.death_shredder")
+                                          .append(Component.translatable("modifier.dreamtinker.foundation_will" + "_" + mod))
+                                          .withStyle(this.getDisplayName().getStyle()));
         return true;
     }
 
