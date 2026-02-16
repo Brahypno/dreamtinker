@@ -36,22 +36,23 @@ public class not_like_was extends NoLevelsModifier implements BasicInterface {
 
     public void addToolStats(IToolContext context, ModifierEntry modifier, ModifierStatsBuilder builder) {
         int times = Math.min(UnbuildLimits.get(), context.getPersistentData().getInt(TAG_CHANGE_TIMES));
-        float value = 0.05f + times * 0.01f;
-        float armor_value = 0.1f + times * 0.01f;
-        float range_value = 0.02f + times * 0.01f;
-        if (20 < times && context.hasTag(TinkerTags.Items.HARVEST))
+
+        float armor_value = times * 0.5714f;
+        float range_value = times * 0.23f;
+        if (21 < times && context.hasTag(TinkerTags.Items.HARVEST))
             ToolStats.HARVEST_TIER.update(builder, Tiers.NETHERITE);
-        else if (10 < times && context.hasTag(TinkerTags.Items.HARVEST))
+        else if (12 < times && context.hasTag(TinkerTags.Items.HARVEST))
             ToolStats.HARVEST_TIER.update(builder, Tiers.DIAMOND);
-        ToolStats.ATTACK_DAMAGE.multiply(builder, value);
-        ToolStats.ATTACK_SPEED.multiply(builder, value);
-        ToolStats.MINING_SPEED.multiply(builder, value / 5);
-        ToolStats.ARMOR.multiply(builder, armor_value);
-        ToolStats.ARMOR_TOUGHNESS.multiply(builder, armor_value);
-        ToolStats.KNOCKBACK_RESISTANCE.multiply(builder, value);
-        ToolStats.DRAW_SPEED.multiply(builder, range_value);
-        ToolStats.VELOCITY.multiply(builder, range_value);
-        ToolStats.ACCURACY.multiply(builder, range_value);
+
+        ToolStats.ATTACK_DAMAGE.add(builder, times * 0.792f);
+        ToolStats.ATTACK_SPEED.add(builder, times * 0.05f);
+        ToolStats.MINING_SPEED.add(builder, times * 0.555f);
+        ToolStats.ARMOR.add(builder, armor_value);
+        ToolStats.ARMOR_TOUGHNESS.add(builder, armor_value);
+        ToolStats.KNOCKBACK_RESISTANCE.add(builder, armor_value);
+        ToolStats.DRAW_SPEED.add(builder, range_value);
+        ToolStats.VELOCITY.add(builder, range_value);
+        ToolStats.ACCURACY.add(builder, range_value);
     }
 
     @Override

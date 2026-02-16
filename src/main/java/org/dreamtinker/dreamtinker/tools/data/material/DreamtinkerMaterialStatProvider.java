@@ -72,8 +72,8 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          HandleMaterialStats.multipliers().durability(1.1f).miningSpeed(0.8f).attackDamage(1.2f).attackSpeed(1.1f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.black_sapphire,
-                         new HeadMaterialStats(2000, 50f, DtTiers.Netheritte, 10f),
-                         HandleMaterialStats.multipliers().durability(2.0f).miningSpeed(11.0f).attackDamage(11.0f).attackSpeed(11.0f).build(),
+                         new HeadMaterialStats(2000, 5f, DtTiers.Netheritte, 0.6f),
+                         HandleMaterialStats.multipliers().durability(2.0f).miningSpeed(0.6f).attackDamage(0.6f).attackSpeed(0.6f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.scolecite,
                          new HeadMaterialStats(600, 5f, Tiers.DIAMOND, 1.5f),
@@ -175,19 +175,20 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          StatlessMaterialStats.BINDING);
 
     }
+
     private void addNovaMeleeHarvest() {
         addMaterialStats(DreamtinkerMaterialIds.FireEssence,
-                new HeadMaterialStats(300, 2f, Tiers.IRON, 2.75f),
-                HandleMaterialStats.multipliers().durability(1.15f).miningSpeed(0.95f).attackDamage(1.10f).build(),
-                StatlessMaterialStats.BINDING);
+                         new HeadMaterialStats(300, 2f, Tiers.IRON, 2.75f),
+                         HandleMaterialStats.multipliers().durability(1.15f).miningSpeed(0.95f).attackDamage(1.10f).build(),
+                         StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.ManipulationEssence,
-                new HeadMaterialStats(400, 6f, Tiers.IRON, 1f),
-                HandleMaterialStats.multipliers().durability(1.15f).miningSpeed(1.20f).attackSpeed(1.10f).build(),
-                StatlessMaterialStats.BINDING);
+                         new HeadMaterialStats(400, 6f, Tiers.IRON, 1f),
+                         HandleMaterialStats.multipliers().durability(1.15f).miningSpeed(1.20f).attackSpeed(1.10f).build(),
+                         StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.WaterEssence,
-                new HeadMaterialStats(300, 4f, Tiers.IRON, 1.75f),
-                HandleMaterialStats.multipliers().durability(1.05f).miningSpeed(1.05f).attackDamage(1.05f).attackSpeed(1.05f).build(),
-                StatlessMaterialStats.BINDING);
+                         new HeadMaterialStats(300, 4f, Tiers.IRON, 1.75f),
+                         HandleMaterialStats.multipliers().durability(1.05f).miningSpeed(1.05f).attackDamage(1.05f).attackSpeed(1.05f).build(),
+                         StatlessMaterialStats.BINDING);
 
     }
 
@@ -219,8 +220,8 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new LimbMaterialStats(600, 0.10f, 0.05f, 0f),
                          new GripMaterialStats(.05f, 0.05f, 2.5f));
         addMaterialStats(DreamtinkerMaterialIds.black_sapphire,
-                         new LimbMaterialStats(2000, 20f, 30f, 20f),
-                         new GripMaterialStats(1.0f, 1f, 10f));
+                         new LimbMaterialStats(2000, -0.6f, -0.6f, -0.6f),
+                         new GripMaterialStats(1.0f, -0.6f, 1f));
         addMaterialStats(DreamtinkerMaterialIds.scolecite,
                          new LimbMaterialStats(600, 0.05f, 0.05f, 0.05f),
                          new GripMaterialStats(0.05f, 0.05f, 1.5f));
@@ -284,13 +285,13 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          StatlessMaterialStats.BOWSTRING);
 
         addMaterialStats(DreamtinkerMaterialIds.ConjurationEssence,
-                new LimbMaterialStats(300, 0.05f, 0.1f, -0.1f),
-                new GripMaterialStats(-0.05f, 0.05f, 1.5f),
-                StatlessMaterialStats.BOWSTRING);
+                         new LimbMaterialStats(300, 0.05f, 0.1f, -0.1f),
+                         new GripMaterialStats(-0.05f, 0.05f, 1.5f),
+                         StatlessMaterialStats.BOWSTRING);
         addMaterialStats(DreamtinkerMaterialIds.AirEssence,
-                new LimbMaterialStats(300, 0.05f, 0.1f, 0.1f),
-                new GripMaterialStats(-0.05f, 0.10f, 1.5f),
-                StatlessMaterialStats.BOWSTRING);
+                         new LimbMaterialStats(300, 0.05f, 0.1f, 0.1f),
+                         new GripMaterialStats(-0.05f, 0.10f, 1.5f),
+                         StatlessMaterialStats.BOWSTRING);
     }
 
     private void addArmor() {
@@ -326,7 +327,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                             PlatingMaterialStats.builder().durabilityFactor(30).armor(2, 4, 3, 2).toughness(2),
                             StatlessMaterialStats.MAILLE);
         addArmorShieldStats(DreamtinkerMaterialIds.black_sapphire,
-                            PlatingMaterialStats.builder().durabilityFactor(100).armor(30, 40, 30, 30).toughness(30),
+                            PlatingMaterialStats.builder().durabilityFactor(100).armor(2, 2, 2, 2).toughness(0),
                             StatlessMaterialStats.MAILLE);
         addArmorShieldStats(DreamtinkerMaterialIds.scolecite,
                             PlatingMaterialStats.builder().durabilityFactor(24).armor(1, 4, 6, 1).toughness(1.5f),
@@ -391,12 +392,12 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                             StatlessMaterialStats.MAILLE, StatlessMaterialStats.CUIRASS);
 
         addArmorShieldStats(DreamtinkerMaterialIds.AbjurationEssence,
-                PlatingMaterialStats.builder().durabilityFactor(16).armor(2, 5, 4, 2).toughness(0f).knockbackResistance(0f),
-                StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
+                            PlatingMaterialStats.builder().durabilityFactor(16).armor(2, 5, 4, 2).toughness(0f).knockbackResistance(0f),
+                            StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
 
         addArmorShieldStats(DreamtinkerMaterialIds.EarthEssence,
-                PlatingMaterialStats.builder().durabilityFactor(16).armor(2, 5, 4, 2).toughness(0f).knockbackResistance(0f),
-                StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
+                            PlatingMaterialStats.builder().durabilityFactor(16).armor(2, 5, 4, 2).toughness(0f).knockbackResistance(0f),
+                            StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
     }
 
     private void addAmmo() {
