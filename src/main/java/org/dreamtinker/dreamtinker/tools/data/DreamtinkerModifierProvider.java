@@ -608,7 +608,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(ConditionalMeleeDamageModule.builder().target(fire_blast).eachLevel(2f))
                 .addModule(ConditionalPowerModule.builder().target(fire_blast).eachLevel(0.1f))
                 .addModule(MobEffectModule.builder(ModPotions.BLAST_EFFECT.get())
-                                          .level(RandomLevelingValue.perLevel(1, 1))
+                                          .level(RandomLevelingValue.flat(1))
                                           .time(RandomLevelingValue.random(20, 10))
                                           .chance(LevelingValue.eachLevel(0.3f))
                                           .target(LivingEntityPredicate.FIRE_IMMUNE.inverted())
