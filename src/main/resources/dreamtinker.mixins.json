@@ -13,7 +13,6 @@
     "malum_mixin.EdgeOfDeliveranceItemMixin",
     "malum_mixin.HiddenTagRegistryMixin",
     "malum_mixin.MalumScytheItemMixin",
-    "malum_mixin.SoulHandlerMixin",
     "malum_mixin.SpiritInfusionRecipeBuilderAccessor",
     "malum_mixin.SpiritInfusionRecipeBuilderResultMixin",
     "NovaMixin.AlterationTableRendererMixin",
