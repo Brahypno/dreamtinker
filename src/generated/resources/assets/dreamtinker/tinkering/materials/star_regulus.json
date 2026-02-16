@@ -20,31 +20,39 @@
       "type": "tconstruct:grey_to_sprite",
       "palette": [
         {
-          "color": "FF4B0000",
+          "color": "FF000000",
           "grey": 0
         },
         {
-          "color": "FF8C1F1F",
-          "grey": 63
+          "color": "FF2B0000",
+          "grey": 25
         },
         {
-          "color": "FFB33A3A",
+          "grey": 26,
+          "path": "dreamtinker:material/star_regulus"
+        },
+        {
+          "grey": 63,
+          "path": "dreamtinker:material/star_regulus"
+        },
+        {
+          "color": "FF6F0000",
           "grey": 102
         },
         {
-          "color": "FFD75C5C",
+          "color": "FFD10000",
           "grey": 140
         },
         {
-          "color": "FFF08080",
+          "color": "FFFF1A1A",
           "grey": 178
         },
         {
-          "color": "FFFABBBB",
+          "color": "FFFF8080",
           "grey": 216
         },
         {
-          "color": "FFFFEDED",
+          "color": "FFFFE6E6",
           "grey": 255
         }
       ]
