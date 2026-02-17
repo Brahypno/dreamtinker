@@ -1,16 +1,22 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.events.compact.ars_nouveau;
 
+import com.hollingsworth.arsnouveau.api.event.EffectResolveEvent;
 import com.hollingsworth.arsnouveau.api.event.SpellCostCalcEvent;
 import com.hollingsworth.arsnouveau.api.event.SpellDamageEvent;
 import com.hollingsworth.arsnouveau.api.event.SpellProjectileHitEvent;
 import com.hollingsworth.arsnouveau.api.spell.SpellContext;
+import com.hollingsworth.arsnouveau.common.block.tile.MobJarTile;
 import com.hollingsworth.arsnouveau.common.entity.EntityProjectileSpell;
 import com.hollingsworth.arsnouveau.common.spell.augment.AugmentAmplify;
+import com.hollingsworth.arsnouveau.common.spell.effect.EffectHarm;
+import com.hollingsworth.arsnouveau.common.spell.effect.EffectHeal;
 import com.hollingsworth.arsnouveau.common.spell.method.MethodProjectile;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -119,6 +125,25 @@ public class SpellEvents {
                              AugmentAmplify.INSTANCE.getCastingCost() : 0;
         event.currentCost -= 0 < DTModifierCheck.getItemModifierNum(event.context.getCasterTool(), NovaRegistry.nova_spell_bow.getId()) ?
                              MethodProjectile.INSTANCE.getCastingCost() : 0;
+
+    }
+
+    public static void EffectResolveEvent(EffectResolveEvent event) {
+        if (event.isCanceled() || event.world.isClientSide)
+            return;
+        if (event.rayTraceResult instanceof BlockHitResult br){
+            BlockEntity be = event.world.getBlockEntity(br.getBlockPos());
+            if (be instanceof MobJarTile tile && tile.getEntity() instanceof LivingEntity le && le.getHealth() < le.getMaxHealth()){
+                if ((le.isInvertedHealAndHarm() && event.resolveEffect.equals(EffectHarm.INSTANCE)) ||
+                    (!le.isInvertedHealAndHarm() && event.resolveEffect.equals(EffectHeal.INSTANCE))){
+                    float healVal =
+                            (float) (EffectHeal.INSTANCE.GENERIC_DOUBLE.get() + EffectHeal.INSTANCE.AMP_VALUE.get() * event.spellStats.getAmpMultiplier());
+                    if (event.spellStats.isRandomized())
+                        healVal += EffectHeal.INSTANCE.randomRolls(event.spellStats, (ServerLevel) event.world);
+                    le.heal(healVal);
+                }
+            }
+        }
 
     }
 }

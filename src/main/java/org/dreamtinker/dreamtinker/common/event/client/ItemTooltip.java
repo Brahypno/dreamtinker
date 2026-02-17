@@ -1,6 +1,7 @@
 package org.dreamtinker.dreamtinker.common.event.client;
 
 import com.hollingsworth.arsnouveau.api.registry.PerkRegistry;
+import com.hollingsworth.arsnouveau.setup.registry.BlockRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
@@ -32,6 +33,9 @@ public class ItemTooltip {
                 if (!(e.getItemStack().getItem() instanceof UnderArmorItem) && null != PerkRegistry.getPerkProvider(e.getItemStack().getItem()))
                     return;//They would have their own ones.
                 arsNovaUtils.appendHoverText(e.getItemStack(), e.getEntity().level(), e.getToolTip(), e.getFlags());
+            }
+            if (e.getItemStack().getItem().equals(BlockRegistry.MOB_JAR.get().asItem())){
+                e.getToolTip().add(Component.translatable("tooltip.dreamtinker.mob_jar").withStyle(ChatFormatting.GREEN));
             }
         }
     }

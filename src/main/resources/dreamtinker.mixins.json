@@ -20,7 +20,7 @@
     "NovaMixin.AugmentCompatibilityValidatorMixin",
     "NovaMixin.MethodProjectileMixin",
     "NovaMixin.PerkUtilMixin"
-  ],
+  ,"NovaMixin.EntityMeltingModuleMixin"],
   "client": [
   ],
   "injectors": {
