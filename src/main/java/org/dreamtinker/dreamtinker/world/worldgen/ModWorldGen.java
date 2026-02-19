@@ -1,9 +1,6 @@
 package org.dreamtinker.dreamtinker.world.worldgen;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
-import net.minecraft.core.HolderGetter;
-import net.minecraft.core.Registry;
+import net.minecraft.core.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
@@ -200,7 +197,14 @@ public class ModWorldGen {
         ctx.register(NARCISSUS_PATCH_PLACED, new PlacedFeature(cf, List.of(
                 RarityFilter.onAverageOnceEvery(2),              // 稀有度（改大更稀有；或换成 CountPlacement）
                 InSquarePlacement.spread(),
-                PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                // 选“实体可站立的地表”，比 WORLD_SURFACE 更不容易落在水面
+                PlacementUtils.HEIGHTMAP,
+
+                // 只允许：当前位置是空气，且脚下是草方块
+                BlockPredicateFilter.forPredicate(BlockPredicate.allOf(
+                        BlockPredicate.matchesBlocks(Blocks.AIR),
+                        BlockPredicate.matchesBlocks(Vec3i.ZERO.below(), Blocks.GRASS_BLOCK)
+                )),
                 BiomeFilter.biome()
         )));
         register(ctx, placedSmallLarimarOre, configuredSmallLarimarOre, CountPlacement.of(5), InSquarePlacement.spread(),
