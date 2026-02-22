@@ -24,6 +24,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.CompoundIngredient;
+import net.minecraftforge.common.crafting.DifferenceIngredient;
 import net.minecraftforge.common.crafting.IntersectionIngredient;
 import net.minecraftforge.common.crafting.StrictNBTIngredient;
 import net.minecraftforge.common.crafting.conditions.AndCondition;
@@ -31,12 +32,14 @@ import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraftforge.common.crafting.conditions.OrCondition;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.fluids.DreamtinkerFluids;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
+import org.dreamtinker.dreamtinker.smeltery.DreamTinkerSmeltery;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
@@ -46,6 +49,8 @@ import org.dreamtinker.dreamtinker.utils.CastLookup;
 import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.recipe.condition.TagFilledCondition;
+import slimeknights.mantle.recipe.crafting.ShapedRetexturedRecipeBuilder;
+import slimeknights.mantle.recipe.data.ICommonRecipeHelper;
 import slimeknights.mantle.recipe.data.IRecipeHelper;
 import slimeknights.mantle.recipe.helper.FluidOutput;
 import slimeknights.mantle.recipe.helper.ItemOutput;
@@ -64,12 +69,14 @@ import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
 import slimeknights.tconstruct.library.recipe.FluidValues;
 import slimeknights.tconstruct.library.recipe.alloying.AlloyRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.casting.ItemCastingRecipeBuilder;
+import slimeknights.tconstruct.library.recipe.casting.container.ContainerFillingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.casting.material.CompositeCastingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.casting.material.MaterialCastingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.casting.material.MaterialFluidRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.casting.material.PartSwapCastingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.entitymelting.EntityMeltingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.fuel.MeltingFuelBuilder;
+import slimeknights.tconstruct.library.recipe.ingredient.NoContainerIngredient;
 import slimeknights.tconstruct.library.recipe.ingredient.ToolHookIngredient;
 import slimeknights.tconstruct.library.recipe.melting.IMeltingContainer;
 import slimeknights.tconstruct.library.recipe.melting.IMeltingRecipe;
@@ -84,7 +91,11 @@ import slimeknights.tconstruct.library.recipe.tinkerstation.building.ToolBuildin
 import slimeknights.tconstruct.library.tools.SlotType;
 import slimeknights.tconstruct.library.tools.definition.module.ToolHooks;
 import slimeknights.tconstruct.library.tools.part.ToolPartItem;
+import slimeknights.tconstruct.shared.TinkerCommons;
+import slimeknights.tconstruct.shared.TinkerMaterials;
+import slimeknights.tconstruct.shared.block.SlimeType;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
+import slimeknights.tconstruct.smeltery.block.component.SearedTankBlock;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.TinkerToolParts;
 import slimeknights.tconstruct.tools.TinkerTools;
@@ -101,7 +112,7 @@ import static elucent.eidolon.registries.Registry.*;
 import static net.mcreator.borninchaosv.init.BornInChaosV1ModEntities.*;
 import static net.mcreator.borninchaosv.init.BornInChaosV1ModItems.*;
 
-public class DreamtinkerRecipeProvider extends RecipeProvider implements IMaterialRecipeHelper, IToolRecipeHelper, IConditionBuilder, IRecipeHelper {
+public class DreamtinkerRecipeProvider extends RecipeProvider implements IMaterialRecipeHelper, IToolRecipeHelper, IConditionBuilder, IRecipeHelper, ICommonRecipeHelper {
 
     public DreamtinkerRecipeProvider(PackOutput p_248933_) {
         super(p_248933_);
@@ -121,6 +132,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         this.addToolBuildingRecipes(consumer);
         this.addModifierRecipes(consumer);
         this.addEntityMeltingRecipes(consumer);
+        this.addTransmuteRecipes(consumer);
     }
 
     String Entity_Melting_folder = "smeltery/entity_melting/";
@@ -331,6 +343,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                 .setFluidAndTime(TinkerFluids.skySlime, FluidValues.SLIME_BLOCK)
                                 .setCast(Tags.Items.DUSTS_PRISMARINE, true)
                                 .save(consumer, location(Casting_folder + "deep_prismarine_shard"));
+
     }
 
     String Melting_folder = "smeltery/melting/";
@@ -1238,12 +1251,12 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                     .setCast(Items.SHIELD, true)
                                     .setItemCost(4)
                                     .save(consumer, location(partFolder + "shield_core_cast"));
-        partRecipes(consumer, DreamtinkerToolParts.chainSawTeeth, DreamtinkerToolParts.chainSawTeethCast, 12, partFolder, castFolder);
-        partRecipes(consumer, DreamtinkerToolParts.chainSawCore, DreamtinkerToolParts.chainSawCoreCast, 8, partFolder, castFolder);
-        partRecipes(consumer, DreamtinkerToolParts.NovaCover, DreamtinkerToolParts.NovaCoverCast, 2, partFolder, castFolder);
-        partRecipes(consumer, DreamtinkerToolParts.NovaMisc, DreamtinkerToolParts.NovaMiscCast, 3, partFolder, castFolder);
-        partRecipes(consumer, DreamtinkerToolParts.NovaWrapper, DreamtinkerToolParts.NovaWrapperCast, 2, partFolder, castFolder);
-        partRecipes(consumer, DreamtinkerToolParts.NovaRostrum, DreamtinkerToolParts.NovaRostrumCast, 4, partFolder, castFolder);
+        partRecipes(consumer, DreamtinkerToolParts.chainSawTeeth, DreamTinkerSmeltery.chainSawTeethCast, 12, partFolder, castFolder);
+        partRecipes(consumer, DreamtinkerToolParts.chainSawCore, DreamTinkerSmeltery.chainSawCoreCast, 8, partFolder, castFolder);
+        partRecipes(consumer, DreamtinkerToolParts.NovaCover, DreamTinkerSmeltery.NovaCoverCast, 2, partFolder, castFolder);
+        partRecipes(consumer, DreamtinkerToolParts.NovaMisc, DreamTinkerSmeltery.NovaMiscCast, 3, partFolder, castFolder);
+        partRecipes(consumer, DreamtinkerToolParts.NovaWrapper, DreamTinkerSmeltery.NovaWrapperCast, 2, partFolder, castFolder);
+        partRecipes(consumer, DreamtinkerToolParts.NovaRostrum, DreamTinkerSmeltery.NovaRostrumCast, 4, partFolder, castFolder);
         //five Orthant
         ToolPartItem[] tree_parts =
                 new ToolPartItem[]{DreamtinkerToolParts.memoryOrthant.get(), DreamtinkerToolParts.wishOrthant.get(), DreamtinkerToolParts.soulOrthant.get(), DreamtinkerToolParts.personaOrthant.get(), DreamtinkerToolParts.reasonEmanation.get()};
@@ -1269,7 +1282,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.auric, ItemRegistry.AURIC_EMBERS.get(), HeadMaterialStats.ID, 1);
         malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.auric, ItemRegistry.AURIC_EMBERS.get(), HandleMaterialStats.ID, 1);
         malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.auric, ItemRegistry.AURIC_EMBERS.get(), StatlessMaterialStats.BINDING.getIdentifier(), 1);
-        
+
         malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.malignant_lead, ItemRegistry.MALIGNANT_LEAD.get(), HandleMaterialStats.ID, 1);
 
         wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("eidolon"));
@@ -1319,9 +1332,9 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
             if (part == DreamtinkerToolParts.wishOrthant.get())
                 castItem = DreamtinkerCommon.wish_cast.get();
             if (part == DreamtinkerToolParts.chainSawCore.get())
-                castItem = DreamtinkerToolParts.chainSawCoreCast.get();
+                castItem = DreamTinkerSmeltery.chainSawCoreCast.get();
             if (part == DreamtinkerToolParts.chainSawTeeth.get())
-                castItem = DreamtinkerToolParts.chainSawTeethCast.get();
+                castItem = DreamTinkerSmeltery.chainSawTeethCast.get();
             if (part == TinkerToolParts.arrowHead.get())
                 castItem = TinkerSmeltery.arrowCast.get();
             CompoundTag nbt = new CompoundTag();
@@ -1948,6 +1961,251 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                   .save(consumer, location(Entity_Melting_folder + "molten_echo_shard"));
     }
 
+    private void addTransmuteRecipes(Consumer<FinishedRecipe> consumer) {
+        String folder = "smeltery/ashen/";
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, DreamTinkerSmeltery.enderMortar, 2)
+                              .requires(TinkerCommons.slimeball.get(SlimeType.ENDER))
+                              .requires(Items.POPPED_CHORUS_FRUIT)
+                              .requires(Tags.Items.GRAVEL)
+                              .unlockedBy("has_item", has(TinkerCommons.slimeball.get(SlimeType.ENDER)))
+                              .save(consumer, prefix(DreamTinkerSmeltery.enderMortar, folder));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, DreamTinkerSmeltery.enderMortar, 8)
+                              .requires(TinkerWorld.congealedSlime.get(SlimeType.ENDER))
+                              .requires(Items.POPPED_CHORUS_FRUIT).requires(Items.POPPED_CHORUS_FRUIT).requires(Items.POPPED_CHORUS_FRUIT)
+                              .requires(Items.POPPED_CHORUS_FRUIT)
+                              .requires(Tags.Items.GRAVEL).requires(Tags.Items.GRAVEL).requires(Tags.Items.GRAVEL).requires(Tags.Items.GRAVEL)
+                              .unlockedBy("has_item", has(TinkerCommons.slimeball.get(SlimeType.ENDER)))
+                              .save(consumer, wrap(DreamTinkerSmeltery.enderMortar, folder, "_multiple"));
+
+        // scorched bricks from grout
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(DreamTinkerSmeltery.enderMortar), RecipeCategory.BUILDING_BLOCKS,
+                                            DreamTinkerSmeltery.ashenBrick.get(), 0.3f,
+                                            200)
+                                  .unlockedBy("has_item", has(DreamTinkerSmeltery.enderMortar))
+                                  .save(consumer, prefix(DreamTinkerSmeltery.ashenBrick, folder));
+        Consumer<Consumer<FinishedRecipe>> fastMortar = c ->
+                SimpleCookingRecipeBuilder.blasting(Ingredient.of(DreamTinkerSmeltery.enderMortar), RecipeCategory.BUILDING_BLOCKS,
+                                                    DreamTinkerSmeltery.ashenBrick.get(),
+                                                    0.3f, 100)
+                                          .unlockedBy("has_item", has(DreamTinkerSmeltery.enderMortar)).save(c);
+        // block from bricks
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, DreamTinkerSmeltery.ashenBricks)
+                           .define('b', DreamTinkerSmeltery.ashenBrick.get())
+                           .pattern("bb")
+                           .pattern("bb")
+                           .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenBrick.get()))
+                           .save(consumer, wrap(DreamTinkerSmeltery.ashenBricks, folder, "_from_brick"));
+        /*
+        // ladder from bricks
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, DreamTinkerSmeltery.ashenLadder, 4)
+                           .define('b', DreamTinkerSmeltery.ashenBrick.get())
+                           .define('B', TinkerTags.Items.ASHEN_BLOCKS)
+                           .pattern("b b")
+                           .pattern("b b")
+                           .pattern("BBB")
+                           .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenBrick.get()))
+                           .save(consumer, prefix(DreamTinkerSmeltery.ashenLadder, folder));
+*/
+        // stone -> polished
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, DreamTinkerSmeltery.polishedAshenStone, 4)
+                           .define('b', DreamTinkerSmeltery.ashenStone)
+                           .pattern("bb")
+                           .pattern("bb")
+                           .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenStone))
+                           .save(consumer, wrap(DreamTinkerSmeltery.polishedAshenStone, folder, "_crafting"));
+        // polished -> bricks
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, DreamTinkerSmeltery.ashenBricks, 4)
+                           .define('b', DreamTinkerSmeltery.polishedAshenStone)
+                           .pattern("bb")
+                           .pattern("bb")
+                           .unlockedBy("has_item", has(DreamTinkerSmeltery.polishedAshenStone))
+                           .save(consumer, wrap(DreamTinkerSmeltery.ashenBricks, folder, "_crafting"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, DreamTinkerSmeltery.ashenDrain)
+                           .define('#', DreamTinkerSmeltery.ashenBrick.get())
+                           .define('C', TinkerMaterials.knightmetal.getIngotTag())
+                           .pattern("# #")
+                           .pattern("C C")
+                           .pattern("# #")
+                           .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenBrick.get()))
+                           .save(consumer, location(folder + "drain"));
+        ShapedRetexturedRecipeBuilder.fromShaped(
+                                             ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, DreamTinkerSmeltery.ashenDrain)
+                                                                .define('#', DreamtinkerTagKeys.Items.TRANSMUTE)
+                                                                .define('C', TinkerMaterials.knightmetal.getIngotTag())
+                                                                .pattern("C#C")
+                                                                .unlockedBy("has_item", has(DreamtinkerTagKeys.Items.TRANSMUTE_BLOCKS)))
+                                     .setSource(DreamtinkerTagKeys.Items.TRANSMUTE_BLOCKS)
+                                     .build(consumer, location(folder + "drain_retextured"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, DreamTinkerSmeltery.ashenChute)
+                           .define('#', DreamTinkerSmeltery.ashenBrick.get())
+                           .define('C', TinkerMaterials.knightmetal.getIngotTag())
+                           .pattern("#C#")
+                           .pattern("   ")
+                           .pattern("#C#")
+                           .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenBrick.get()))
+                           .save(consumer, location(folder + "chute"));
+        ShapedRetexturedRecipeBuilder.fromShaped(
+                                             ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, DreamTinkerSmeltery.ashenChute)
+                                                                .define('#', DreamtinkerTagKeys.Items.TRANSMUTE_BLOCKS)
+                                                                .define('C', TinkerMaterials.knightmetal.getIngotTag())
+                                                                .pattern("C")
+                                                                .pattern("#")
+                                                                .pattern("C")
+                                                                .unlockedBy("has_item", has(DreamtinkerTagKeys.Items.TRANSMUTE_BLOCKS)))
+                                     .setSource(DreamtinkerTagKeys.Items.TRANSMUTE_BLOCKS)
+                                     .build(consumer, location(folder + "chute_retextured"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, DreamTinkerSmeltery.ashenDuct)
+                           .define('#', DreamTinkerSmeltery.ashenBrick.get())
+                           .define('C', Tags.Items.INGOTS_GOLD)
+                           .pattern("# #")
+                           .pattern("C C")
+                           .pattern("# #")
+                           .unlockedBy("has_item", has(Tags.Items.INGOTS_GOLD))
+                           .save(consumer, location(folder + "duct"));
+        ShapedRetexturedRecipeBuilder.fromShaped(
+                                             ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, DreamTinkerSmeltery.ashenDuct)
+                                                                .define('#', DreamtinkerTagKeys.Items.TRANSMUTE_BLOCKS)
+                                                                .define('C', Tags.Items.INGOTS_GOLD)
+                                                                .pattern("C#C")
+                                                                .unlockedBy("has_item", has(DreamtinkerTagKeys.Items.TRANSMUTE_BLOCKS)))
+                                     .setSource(DreamtinkerTagKeys.Items.TRANSMUTE_BLOCKS)
+                                     .build(consumer, location(folder + "duct_retextured"));
+        // stone -> road
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(DreamTinkerSmeltery.ashenStone), RecipeCategory.BUILDING_BLOCKS, DreamTinkerSmeltery.ashenRoad, 0.1f,
+                                            200)
+                                  .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenStone))
+                                  .save(consumer, wrap(DreamTinkerSmeltery.ashenRoad, folder, "_smelting"));
+        // brick slabs -> chiseled
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, DreamTinkerSmeltery.chiseledAshenBricks)
+                           .define('s', DreamTinkerSmeltery.ashenBricks.getSlab())
+                           .pattern("s")
+                           .pattern("s")
+                           .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenBricks.getSlab()))
+                           .save(consumer, wrap(DreamTinkerSmeltery.chiseledAshenBricks, folder, "_crafting"));
+        // stonecutting
+        this.ashenStonecutter(consumer, DreamTinkerSmeltery.polishedAshenStone, folder);
+        this.ashenStonecutter(consumer, DreamTinkerSmeltery.ashenBricks, folder);
+        this.ashenStonecutter(consumer, DreamTinkerSmeltery.chiseledAshenBricks, folder);
+        // tanks
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, DreamTinkerSmeltery.ashenTank.get(SearedTankBlock.TankType.FUEL_TANK))
+                           .define('#', DreamTinkerSmeltery.ashenBrick.get())
+                           .define('B', Tags.Items.GEMS_QUARTZ)
+                           .pattern("###")
+                           .pattern("#B#")
+                           .pattern("###")
+                           .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenBrick.get()))
+                           .save(consumer, location(folder + "fuel_tank"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, DreamTinkerSmeltery.ashenTank.get(SearedTankBlock.TankType.FUEL_GAUGE))
+                           .define('#', DreamTinkerSmeltery.ashenBrick.get())
+                           .define('B', Tags.Items.GEMS_QUARTZ)
+                           .pattern("#B#")
+                           .pattern("BBB")
+                           .pattern("#B#")
+                           .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenBrick.get()))
+                           .save(consumer, location(folder + "fuel_gauge"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, DreamTinkerSmeltery.ashenTank.get(SearedTankBlock.TankType.INGOT_TANK))
+                           .define('#', DreamTinkerSmeltery.ashenBrick.get())
+                           .define('B', Tags.Items.GEMS_QUARTZ)
+                           .pattern("#B#")
+                           .pattern("#B#")
+                           .pattern("#B#")
+                           .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenBrick.get()))
+                           .save(consumer, location(folder + "ingot_tank"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, DreamTinkerSmeltery.ashenTank.get(SearedTankBlock.TankType.INGOT_GAUGE))
+                           .define('#', DreamTinkerSmeltery.ashenBrick.get())
+                           .define('B', Tags.Items.GEMS_QUARTZ)
+                           .pattern("B#B")
+                           .pattern("#B#")
+                           .pattern("B#B")
+                           .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenBrick.get()))
+                           .save(consumer, location(folder + "ingot_gauge"));
+
+        // stone
+        ashenCasting(consumer, DreamTinkerSmeltery.ashenStone, Ingredient.of(Blocks.BASALT, Blocks.GRAVEL), Casting_folder + "stone_from_ender");
+        ashenCasting(consumer, DreamTinkerSmeltery.polishedAshenStone, Ingredient.of(Blocks.POLISHED_BASALT), Casting_folder + "polished_from_ender");
+        // foundry controller
+        ItemCastingRecipeBuilder.retexturedBasinRecipe(ItemOutput.fromItem(DreamTinkerSmeltery.transmuteController))
+                                .setCast(DreamtinkerTagKeys.Items.TRANSMUTE_BLOCKS, true)
+                                .setFluidAndTime(TinkerFluids.moltenKnightmetal, FluidValues.INGOT * 4)
+                                .save(consumer, prefix(DreamTinkerSmeltery.transmuteController, Casting_folder));
+        // stairs, slabs, and fences
+        this.slabStairsCrafting(consumer, DreamTinkerSmeltery.ashenBricks, folder, true);
+        this.slabStairsCrafting(consumer, DreamTinkerSmeltery.ashenRoad, folder, true);
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, DreamTinkerSmeltery.ashenBricks.getFence(), 6)
+                           .define('B', DreamTinkerSmeltery.ashenBricks)
+                           .define('b', DreamTinkerSmeltery.ashenBrick.get())
+                           .pattern("BbB")
+                           .pattern("BbB")
+                           .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenBricks))
+                           .save(consumer, prefix(id(DreamTinkerSmeltery.ashenBricks.getFence()), folder));
+
+        // casting
+        String castingFolder = "smeltery/casting/ashen/";
+        ItemCastingRecipeBuilder.basinRecipe(DreamTinkerSmeltery.ashenStone)
+                                .setFluidAndTime(DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK_BLOCK)
+                                .save(consumer, location(castingFolder + "stone_from_ashen"));
+        cast(DreamtinkerFluids.molten_ender_ash.get(), DreamTinkerSmeltery.ashenBrick.get(), FluidValues.BRICK, consumer);
+
+
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamTinkerSmeltery.enderMortar), DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK * 2, 1.5f)
+                            .save(consumer, location(Melting_folder + "transmute/martar"));
+
+        MeltingRecipeBuilder.melting(CompoundIngredient.of(Ingredient.of(DreamtinkerTagKeys.Items.ASHEN_BLOCKS),
+                                                           Ingredient.of(/*DreamTinkerSmeltery.ashenLadder,*/ DreamTinkerSmeltery.ashenBricks.getStairs(),
+                                                                                                              DreamTinkerSmeltery.ashenRoad.getStairs())),
+                                     DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK_BLOCK, 2.0f)
+                            .save(consumer, location(Melting_folder + "block"));
+        MeltingRecipeBuilder.melting(
+                                    Ingredient.of(DreamTinkerSmeltery.ashenBricks.getSlab(), DreamTinkerSmeltery.ashenBricks.getSlab(), DreamTinkerSmeltery.ashenRoad.getSlab()),
+                                    DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK_BLOCK / 2, 1.5f)
+                            .save(consumer, location(Melting_folder + "slab"));
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamTinkerSmeltery.ashenBrick.get()), DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK, 1.0f)
+                            .save(consumer, location(Melting_folder + "brick"));
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamTinkerSmeltery.ashenBricks.getFence()), DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK * 3, 1.0f)
+                            .save(consumer, location(Melting_folder + "fence"));
+
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamTinkerSmeltery.transmuteController), TinkerFluids.moltenKnightmetal, FluidValues.INGOT * 4, 3.5f)
+                            .addByproduct(DreamtinkerFluids.molten_ender_ash.result(FluidValues.BRICK * 4))
+                            .save(consumer, location(Melting_folder + "knightmetal/transmute_controller"));
+
+        ItemCastingRecipeBuilder.basinRecipe(DreamTinkerSmeltery.ashenLamp)
+                                .setFluidAndTime(DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK_BLOCK)
+                                .setCast(Blocks.GLOWSTONE, true)
+                                .save(consumer, location(castingFolder + "lamp"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, DreamTinkerSmeltery.ashenLamp)
+                           .define('b', DreamTinkerSmeltery.ashenBrick.get())
+                           .define('G', Blocks.GLOWSTONE)
+                           .pattern(" b ")
+                           .pattern("bGb")
+                           .pattern(" b ")
+                           .unlockedBy("has_item", has(Blocks.GLOWSTONE))
+                           .save(consumer, prefix(DreamTinkerSmeltery.ashenLamp, folder));
+        // tanks
+        MeltingRecipeBuilder.melting(NoContainerIngredient.of(DreamTinkerSmeltery.ashenTank.get(SearedTankBlock.TankType.FUEL_TANK)),
+                                     DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK * 8, 3f)
+                            .addByproduct(TinkerFluids.moltenQuartz.result(FluidValues.GEM))
+                            .save(consumer, location(Melting_folder + "fuel_tank"));
+        MeltingRecipeBuilder.melting(NoContainerIngredient.of(DreamTinkerSmeltery.ashenTank.get(SearedTankBlock.TankType.INGOT_TANK)),
+                                     DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK * 6, 2.5f)
+                            .addByproduct(TinkerFluids.moltenQuartz.result(FluidValues.GEM * 3))
+                            .save(consumer, location(Melting_folder + "ingot_tank"));
+        MeltingRecipeBuilder.melting(
+                                    NoContainerIngredient.of(DreamTinkerSmeltery.ashenTank.get(SearedTankBlock.TankType.FUEL_GAUGE), DreamTinkerSmeltery.ashenTank.get(
+                                            SearedTankBlock.TankType.INGOT_GAUGE)), DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK * 4, 2f)
+                            .addByproduct(TinkerFluids.moltenQuartz.result(FluidValues.GEM * 5))
+                            .save(consumer, location(Melting_folder + "gauge"));
+        // tank filling - scorched
+        ContainerFillingRecipeBuilder.basinRecipe(DreamTinkerSmeltery.ashenTank.get(SearedTankBlock.TankType.INGOT_TANK), FluidValues.INGOT)
+                                     .save(consumer, location(folder + "filling/ashen_ingot_tank"));
+        ContainerFillingRecipeBuilder.basinRecipe(DreamTinkerSmeltery.ashenTank.get(SearedTankBlock.TankType.INGOT_GAUGE), FluidValues.INGOT)
+                                     .save(consumer, location(folder + "filling/ashen_ingot_gauge"));
+        ContainerFillingRecipeBuilder.basinRecipe(DreamTinkerSmeltery.ashenTank.get(SearedTankBlock.TankType.FUEL_TANK), FluidType.BUCKET_VOLUME / 4)
+                                     .save(consumer, location(folder + "filling/ashen_fuel_tank"));
+        ContainerFillingRecipeBuilder.basinRecipe(DreamTinkerSmeltery.ashenTank.get(SearedTankBlock.TankType.FUEL_GAUGE), FluidType.BUCKET_VOLUME / 4)
+                                     .save(consumer, location(folder + "filling/ashen_fuel_gauge"));
+    }
+
     @Override
     public @NotNull String getModId() {
         return Dreamtinker.MODID;
@@ -1978,7 +2236,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
     private void cast(Fluid fluid, ItemLike ingredient, int amount, Consumer<FinishedRecipe> consumer) {
         CastItemObject cast =
-                FluidValues.GEM == amount ? TinkerSmeltery.gemCast : FluidValues.INGOT == amount ? TinkerSmeltery.ingotCast : TinkerSmeltery.nuggetCast;
+                FluidValues.GEM == amount ? TinkerSmeltery.gemCast :
+                FluidValues.INGOT == amount || FluidValues.BRICK == amount ? TinkerSmeltery.ingotCast : TinkerSmeltery.nuggetCast;
         ItemCastingRecipeBuilder.tableRecipe(ingredient).setCoolingTime(IMeltingRecipe.getTemperature(fluid), amount)
                                 .setFluid(FluidIngredient.of(new FluidStack(fluid, amount)))
                                 .setCast(cast.getSingleUseTag(), true)
@@ -2001,6 +2260,58 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
             tagIngredients[i] = Ingredient.of(tags[i]);
         }
         return CompoundIngredient.of(tagIngredients);
+    }
+
+    private void ashenStonecutter(Consumer<FinishedRecipe> consumer, ItemLike output, String folder) {
+        SingleItemRecipeBuilder.stonecutting(
+                                       CompoundIngredient.of(
+                                               Ingredient.of(DreamTinkerSmeltery.ashenStone),
+                                               DifferenceIngredient.of(Ingredient.of(DreamtinkerTagKeys.Items.ASHEN_BLOCKS), Ingredient.of(output))), RecipeCategory.BUILDING_BLOCKS,
+                                       output,
+                                       1)
+                               .unlockedBy("has_stone", has(DreamTinkerSmeltery.ashenStone))
+                               .unlockedBy("has_bricks", has(DreamtinkerTagKeys.Items.ASHEN_BLOCKS))
+                               .save(consumer, wrap(id(output), folder, "_stonecutting"));
+    }
+
+    /**
+     * Adds a recipe to create the given seared block using molten clay on stone
+     *
+     * @param consumer Recipe consumer
+     * @param block    Output block
+     * @param cast     Cast item
+     * @param location Recipe location
+     */
+    private void ashenCasting(Consumer<FinishedRecipe> consumer, ItemLike block, Ingredient cast, String location) {
+        ashenCasting(consumer, block, cast, FluidValues.SLIMEBALL * 2, location);
+    }
+
+    /**
+     * Adds a recipe to create the given seared slab block using molten clay on stone
+     *
+     * @param consumer Recipe consumer
+     * @param block    Output block
+     * @param cast     Cast item
+     * @param location Recipe location
+     */
+    private void ashenSlabCasting(Consumer<FinishedRecipe> consumer, ItemLike block, Ingredient cast, String location) {
+        ashenCasting(consumer, block, cast, FluidValues.SLIMEBALL, location);
+    }
+
+    /**
+     * Adds a recipe to create the given seared block using molten clay on stone
+     *
+     * @param consumer Recipe consumer
+     * @param block    Output block
+     * @param cast     Cast item
+     * @param amount   Amount of fluid needed
+     * @param location Recipe location
+     */
+    private void ashenCasting(Consumer<FinishedRecipe> consumer, ItemLike block, Ingredient cast, int amount, String location) {
+        ItemCastingRecipeBuilder.basinRecipe(block)
+                                .setFluidAndTime(TinkerFluids.enderSlime, amount)
+                                .setCast(cast, true)
+                                .save(consumer, location(location));
     }
 }
 

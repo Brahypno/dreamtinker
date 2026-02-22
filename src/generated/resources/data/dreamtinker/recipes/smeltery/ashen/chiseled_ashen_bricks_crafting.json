@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "s": {
+      "item": "dreamtinker:ashen_bricks_slab"
+    }
+  },
+  "pattern": [
+    "s",
+    "s"
+  ],
+  "result": {
+    "item": "dreamtinker:chiseled_ashen_bricks"
+  },
+  "show_notification": true
+}

@@ -12,6 +12,7 @@ import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
+import org.dreamtinker.dreamtinker.smeltery.DreamTinkerSmeltery;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.registration.object.BuildingBlockObject;
@@ -24,6 +25,7 @@ import java.util.function.Supplier;
 
 import static net.minecraft.tags.BlockTags.*;
 import static org.dreamtinker.dreamtinker.common.DreamtinkerCommon.*;
+import static slimeknights.tconstruct.common.TinkerTags.Blocks.MINEABLE_MELTING_BLACKLIST;
 
 public class BlockTagProvider extends BlockTagsProvider {
 
@@ -33,22 +35,22 @@ public class BlockTagProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        this.tag(BlockTags.DRAGON_IMMUNE).add(crying_obsidian_plane.get());
+        addCommon(provider);
+        addWorld(provider);
+        addHarvest(provider);
+        addSmeltery(provider);
+    }
 
+    private void addCommon(HolderLookup.@NotNull Provider provider) {
+
+    }
+
+    private void addWorld(HolderLookup.@NotNull Provider provider) {
         this.tag(DreamtinkerTagKeys.Blocks.drop_peach).add(Blocks.BIRCH_LEAVES);
         addBlocksTags(narcissus.get(), Dreamtinker.forgeBlockTag("mineable/shears"), TinkerTags.Blocks.SLIMY_FUNGUS_CAN_GROW_THROUGH,
                       TinkerTags.Blocks.MINABLE_WITH_DAGGER, FLOWERS, ENDERMAN_HOLDABLE, SMALL_FLOWERS, SWORD_EFFICIENT, TinkerTags.Blocks.MINABLE_WITH_SCYTHE,
                       Dreamtinker.forgeBlockTag("mineable/sword"), TinkerTags.Blocks.MINABLE_WITH_SHEARS);
 
-        tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_DIAMOND_TOOL, crying_obsidian_plane, blackSapphireOre);
-        tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL, larimarOre, amberOre, scoleciteOre, soulSteelBlock,
-                  coldIronOre, DeepslateColdIronOre, ColdIronBlock, RawColdIronBlock,
-                  OrichalcumOre, DeepslateOrichalcumOre, OrichalcumBlock, RawOrichalcumBlock,
-                  ShadowSilverBlock, ShadowSilverOre, DeepslateShadowSilverOre, RawShadowSilverBlock,
-                  TransmutationGoldBlock, TransmutationGoldOre, DeepslateTransmutationGoldOre, RawTransmutationGoldBlock);
-        tagBlocks(BEACON_BASE_BLOCKS, soulSteelBlock, OrichalcumBlock, ColdIronBlock, ShadowSilverBlock, TransmutationGoldBlock,
-                  metallivorous_stibium_lupus_block);
-        tagBlocks(MINEABLE_WITH_PICKAXE, Tiers.NETHERITE.getTag(), metallivorous_stibium_lupus_block);
         tagBlocks(DreamtinkerTagKeys.Blocks.larimarOre, larimarOre);
         tagBlocks(DreamtinkerTagKeys.Blocks.amberOre, amberOre);
         tagBlocks(DreamtinkerTagKeys.Blocks.scoleciteOre, scoleciteOre);
@@ -87,7 +89,66 @@ public class BlockTagProvider extends BlockTagsProvider {
         this.tag(Tags.Blocks.ORES_IN_GROUND_DEEPSLATE)
             .add(DeepslateColdIronOre.get(), DeepslateShadowSilverOre.get(), DeepslateTransmutationGoldOre.get());
         this.tag(Tags.Blocks.ORES_IN_GROUND_STONE).add(blackSapphireOre.get(), coldIronOre.get(), ShadowSilverOre.get(), TransmutationGoldOre.get());
+
+
+        this.tag(BlockTags.ENDERMAN_HOLDABLE).
+            add(DreamTinkerSmeltery.enderMortar.get());
     }
+
+    private void addSmeltery(HolderLookup.@NotNull Provider provider) {
+        this.tag(BlockTags.DRAGON_IMMUNE).add(crying_obsidian_plane.get());
+
+        this.tag(DreamtinkerTagKeys.Blocks.ASHEN_BLOCKS)
+            .add(DreamTinkerSmeltery.ashenStone.get(), DreamTinkerSmeltery.polishedAshenStone.get(), DreamTinkerSmeltery.ashenBricks.get(),
+                 DreamTinkerSmeltery.ashenRoad.get(), DreamTinkerSmeltery.chiseledAshenBricks.get());
+        //this.tag(DreamtinkerTagKeys.Blocks.TRANSMUTE_BRICKS).addTag(TinkerTags.Blocks.ASHEN_BLOCKS);
+        this.tag(BlockTags.FENCES).add(DreamTinkerSmeltery.ashenBricks.getFence());
+
+        IntrinsicTagAppender<Block> scorchedTankTagAppender = this.tag(DreamtinkerTagKeys.Blocks.TRANSMUTE_TANKS);
+        DreamTinkerSmeltery.ashenTank.values().forEach(scorchedTankTagAppender::add);
+
+        this.tag(DreamtinkerTagKeys.Blocks.TRANSMUTE_WALL)
+            .addTags(DreamtinkerTagKeys.Blocks.ASHEN_BLOCKS)
+            .add(DreamTinkerSmeltery.ashenLamp.get(), DreamTinkerSmeltery.ashenDrain.get(), DreamTinkerSmeltery.ashenChute.get(),
+                 DreamTinkerSmeltery.ashenDuct.get());
+        this.tag(DreamtinkerTagKeys.Blocks.TRANSMUTE_FLOOR)
+            .addTags(DreamtinkerTagKeys.Blocks.ASHEN_BLOCKS)
+            .add(DreamTinkerSmeltery.ashenLamp.get(), DreamTinkerSmeltery.ashenDrain.get(), DreamTinkerSmeltery.ashenChute.get(),
+                 DreamTinkerSmeltery.ashenDuct.get());
+        this.tag(DreamtinkerTagKeys.Blocks.TRANSMUTE)
+            .addTags(DreamtinkerTagKeys.Blocks.TRANSMUTE_WALL)
+            .addTags(DreamtinkerTagKeys.Blocks.TRANSMUTE_FLOOR)
+            .addTags(DreamtinkerTagKeys.Blocks.TRANSMUTE_TANKS);
+        this.tag(DreamtinkerTagKeys.Blocks.TRANSMUTE_BLOCKS).addTag(DreamtinkerTagKeys.Blocks.ASHEN_BLOCKS);
+
+
+    }
+
+    private void addHarvest(HolderLookup.@NotNull Provider provider) {
+        tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_DIAMOND_TOOL, crying_obsidian_plane, blackSapphireOre);
+        tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_IRON_TOOL, larimarOre, amberOre, scoleciteOre, soulSteelBlock,
+                  coldIronOre, DeepslateColdIronOre, ColdIronBlock, RawColdIronBlock,
+                  OrichalcumOre, DeepslateOrichalcumOre, OrichalcumBlock, RawOrichalcumBlock,
+                  ShadowSilverBlock, ShadowSilverOre, DeepslateShadowSilverOre, RawShadowSilverBlock,
+                  TransmutationGoldBlock, TransmutationGoldOre, DeepslateTransmutationGoldOre, RawTransmutationGoldBlock);
+        tagBlocks(BEACON_BASE_BLOCKS, soulSteelBlock, OrichalcumBlock, ColdIronBlock, ShadowSilverBlock, TransmutationGoldBlock,
+                  metallivorous_stibium_lupus_block);
+        tagBlocks(MINEABLE_WITH_PICKAXE, Tiers.NETHERITE.getTag(), metallivorous_stibium_lupus_block);
+
+        tagBlocks(MINEABLE_WITH_SHOVEL, DreamTinkerSmeltery.enderMortar);
+        tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_DIAMOND_TOOL, DreamTinkerSmeltery.ashenBricks, DreamTinkerSmeltery.ashenRoad);
+        tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_DIAMOND_TOOL, DreamTinkerSmeltery.ashenStone, DreamTinkerSmeltery.polishedAshenStone/*,
+                  DreamTinkerSmeltery.chiseledScorchedBricks, DreamTinkerSmeltery.ashenLadder, DreamTinkerSmeltery.ashenLamp, DreamTinkerSmeltery.ashenGlass,
+                  DreamTinkerSmeltery.ashenSoulGlass, DreamTinkerSmeltery.ashenTintedGlass, DreamTinkerSmeltery.ashenGlassPane,
+                  DreamTinkerSmeltery.ashenSoulGlassPane*/);
+
+        tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_DIAMOND_TOOL, DreamTinkerSmeltery.ashenDrain, DreamTinkerSmeltery.ashenChute,
+                  DreamTinkerSmeltery.transmuteController);
+        tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_DIAMOND_TOOL, DreamTinkerSmeltery.ashenTank);
+        tagBlocks(MINEABLE_MELTING_BLACKLIST, DreamTinkerSmeltery.transmuteController);
+        tagBlocks(MINEABLE_MELTING_BLACKLIST, DreamTinkerSmeltery.ashenTank);
+    }
+
 
     @SafeVarargs
     private void tagBlocks(TagKey<Block> tag, Supplier<? extends Block>... blocks) {

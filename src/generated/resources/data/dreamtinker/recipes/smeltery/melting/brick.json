@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "item": "dreamtinker:ashen_brick"
+  },
+  "result": {
+    "amount": 250,
+    "fluid": "dreamtinker:molten_ender_ash"
+  },
+  "temperature": 1500,
+  "time": 80
+}

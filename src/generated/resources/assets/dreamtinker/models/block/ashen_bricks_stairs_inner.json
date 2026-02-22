@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "dreamtinker:block/transmute/ashen/ashen_bricks",
+    "side": "dreamtinker:block/transmute/ashen/ashen_bricks",
+    "top": "dreamtinker:block/transmute/ashen/ashen_bricks"
+  }
+}

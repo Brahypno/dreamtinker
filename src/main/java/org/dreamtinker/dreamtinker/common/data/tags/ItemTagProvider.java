@@ -13,9 +13,11 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys.Blocks;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys.Items;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
+import org.dreamtinker.dreamtinker.smeltery.DreamTinkerSmeltery;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.jetbrains.annotations.NotNull;
@@ -58,7 +60,8 @@ public class ItemTagProvider extends ItemTagsProvider {
                      BONUS_SLOTS, ItemTags.AXES);
         addItemsOptionalTags(NovaRegistry.per_aspera_scriptum, MULTIPART_TOOL, MELEE_WEAPON, BROAD_RANGED, BONUS_SLOTS, HARVEST, LAUNCHERS, HELD);
         addItemsTags(DreamtinkerTools.silence_glove, DURABILITY, MELEE, BONUS_SLOTS, ANCIENT_TOOLS, STAFFS, SHIELDS, Items.HANDS, Items.CURIOS);
-        addItemsTags(DreamtinkerTools.ritual_blade,  MULTIPART_TOOL, DURABILITY, HARVEST, MELEE_PRIMARY, INTERACTABLE_RIGHT, SMALL_TOOLS, BONUS_SLOTS, ItemTags.SWORDS);
+        addItemsTags(DreamtinkerTools.ritual_blade, MULTIPART_TOOL, DURABILITY, HARVEST, MELEE_PRIMARY, INTERACTABLE_RIGHT, SMALL_TOOLS, BONUS_SLOTS,
+                     ItemTags.SWORDS);
 
         this.tag(Items.dt_scythe).add(TinkerTools.scythe.asItem(), TinkerTools.kama.asItem(), DreamtinkerTools.narcissus_wing.asItem());
         this.tag(ItemTagRegistry.SCYTHE).addTags(Items.dt_scythe);
@@ -82,12 +85,12 @@ public class ItemTagProvider extends ItemTagsProvider {
             multiUseCasts.addTag(cast.getMultiUseTag());
             this.tag(cast.getMultiUseTag()).add(cast.get());
         };
-        addCast.accept(DreamtinkerToolParts.chainSawTeethCast);
-        addCast.accept(DreamtinkerToolParts.chainSawCoreCast);
-        addCast.accept(DreamtinkerToolParts.NovaWrapperCast);
-        addCast.accept(DreamtinkerToolParts.NovaCoverCast);
-        addCast.accept(DreamtinkerToolParts.NovaRostrumCast);
-        addCast.accept(DreamtinkerToolParts.NovaMiscCast);
+        addCast.accept(DreamTinkerSmeltery.chainSawTeethCast);
+        addCast.accept(DreamTinkerSmeltery.chainSawCoreCast);
+        addCast.accept(DreamTinkerSmeltery.NovaWrapperCast);
+        addCast.accept(DreamTinkerSmeltery.NovaCoverCast);
+        addCast.accept(DreamTinkerSmeltery.NovaRostrumCast);
+        addCast.accept(DreamTinkerSmeltery.NovaMiscCast);
         this.tag(TinkerTags.Items.CASTS)
             .add(memory_cast.get(), wish_cast.get(), soul_cast.get(),
                  persona_cast.get(),
@@ -116,7 +119,7 @@ public class ItemTagProvider extends ItemTagsProvider {
 
         this.tag(Tags.Items.INGOTS)
             .add(metallivorous_stibium_lupus.get(), regulus.get(), soul_steel.get(), orichalcum.get(), cold_iron_ingot.get(), shadow_silver_ingot.get(),
-                 transmutation_gold_ingot.get())
+                 transmutation_gold_ingot.get(), DreamTinkerSmeltery.ashenBrick.get())
             .addOptional(soul_etherium.getId())
             .addOptional(malignant_gluttony.getId());
         this.tag(Items.OrichalcumIngot).add(orichalcum.get());
@@ -175,7 +178,23 @@ public class ItemTagProvider extends ItemTagsProvider {
         this.copy(Blocks.TransmutationGoldOre, Items.TransmutationGoldOre);
         this.copy(Blocks.RawTransmutationGoldBlock, Items.RawTransmutationGoldBlock);
         this.copy(Tags.Blocks.ORES, Tags.Items.ORES);
+
+        addSmeltery();
     }
+
+    private void addSmeltery() {
+        this.copy(DreamtinkerTagKeys.Blocks.ASHEN_BLOCKS, DreamtinkerTagKeys.Items.ASHEN_BLOCKS);
+        this.copy(Blocks.TRANSMUTE_BLOCKS, Items.TRANSMUTE_BLOCKS);
+        this.tag(Items.TRANSMUTE)
+            .addTag(Items.ASHEN_BLOCKS)
+            .addTag(TinkerTags.Items.SCORCHED_TANKS)
+            .add(DreamTinkerSmeltery.transmuteController.asItem(), //DreamTinkerSmeltery.ashenLadder.asItem(),
+                 DreamTinkerSmeltery.ashenDrain.asItem(), DreamTinkerSmeltery.ashenChute.asItem(), DreamTinkerSmeltery.ashenDuct.asItem());//,
+        //DreamTinkerSmeltery.ashenGlass.asItem(), DreamTinkerSmeltery.ashenSoulGlass.asItem(), DreamTinkerSmeltery.ashenTintedGlass.asItem());
+
+
+    }
+
 
     private TagKey<Item> getArmorTag(ArmorItem.Type slotType) {
         return switch (slotType) {

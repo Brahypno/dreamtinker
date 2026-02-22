@@ -1,0 +1,23 @@
+{
+  "type": "mantle:crafting_shaped_retextured",
+  "category": "redstone",
+  "key": {
+    "#": {
+      "tag": "dreamtinker:transmute"
+    },
+    "C": {
+      "tag": "forge:ingots/knightmetal"
+    }
+  },
+  "match_all": false,
+  "pattern": [
+    "C#C"
+  ],
+  "result": {
+    "item": "dreamtinker:ashen_drain"
+  },
+  "show_notification": true,
+  "texture": {
+    "tag": "dreamtinker:transmute_blocks"
+  }
+}

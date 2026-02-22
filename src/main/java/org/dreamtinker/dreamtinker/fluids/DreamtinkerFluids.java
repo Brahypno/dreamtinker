@@ -29,12 +29,13 @@ import slimeknights.tconstruct.fluids.block.BurningLiquidBlock;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import static org.dreamtinker.dreamtinker.Dreamtinker.configCompactDisabled;
 import static org.dreamtinker.dreamtinker.DreamtinkerModule.*;
 
 public class DreamtinkerFluids {
     public static final RegistryObject<CreativeModeTab> tabFluids = TABS.register(
             "fluids", () -> CreativeModeTab.builder().title(Dreamtinker.makeTranslation("itemGroup", "fluids"))
-                                           .icon(() -> new ItemStack(DreamtinkerFluids.blood_soul))
+                                           .icon(() -> new ItemStack(DreamtinkerFluids.liquid_amber))
                                            .displayItems(DreamtinkerFluids::addTabItems)
                                            .withTabsBefore(DreamtinkerToolParts.PART.getId())
                                            .withSearchBar()
@@ -278,6 +279,10 @@ public class DreamtinkerFluids {
             registerFluid(FLUIDS, "molten_dark_metal", 1200, 1000, 10000, 10,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.METAL, 10), 10, 4) {});
 
+    public static final FlowingFluidObject<ForgeFlowingFluid> molten_ender_ash =
+            registerFluid(FLUIDS, "molten_ender_ash", 1800, 1000, 10000, 10,
+                          supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_PURPLE, 2), 0, 0) {});
+
     private static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         // containers
         output.accept(molten_echo_alloy);
@@ -289,14 +294,14 @@ public class DreamtinkerFluids {
         output.accept(molten_crying_obsidian);
         output.accept(molten_void);
         output.accept(liquid_trist);
-        if (ModList.get().isLoaded("enigmaticlegacy")){
+        if (ModList.get().isLoaded("enigmaticlegacy") && !configCompactDisabled("enigmaticlegacy")){
             output.accept(unstable_liquid_aether);
             output.accept(liquid_pure_soul);
             output.accept(molten_evil);
             output.accept(molten_soul_aether);
             output.accept(unholy_water);
         }
-        if (ModList.get().isLoaded("malum")){
+        if (ModList.get().isLoaded("malum") && !configCompactDisabled("malum")){
             output.accept(molten_soul_stained_steel);
             output.accept(molten_malignant_gluttony);
             output.accept(molten_malignant_pewter);
@@ -323,6 +328,9 @@ public class DreamtinkerFluids {
         output.accept(molten_transmutation_gold);
         output.accept(mercury);
         output.accept(molten_arcane_gold);
-        output.accept(molten_dark_metal);
+        if (ModList.get().isLoaded("born_in_chaos_v1") && !configCompactDisabled("born_in_chaos_v1")){
+            output.accept(molten_dark_metal);
+        }
+        output.accept(molten_ender_ash);
     }
 }

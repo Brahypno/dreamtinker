@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:casting_basin",
+  "cast": [
+    {
+      "item": "minecraft:basalt"
+    },
+    {
+      "item": "minecraft:gravel"
+    }
+  ],
+  "cast_consumed": true,
+  "cooling_time": 75,
+  "fluid": {
+    "amount": 500,
+    "tag": "tconstruct:ender_slime"
+  },
+  "result": "dreamtinker:ashen_stone"
+}

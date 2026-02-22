@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,in_structure=false": {
+      "model": "dreamtinker:block/transmute/io/drain_inactive",
+      "y": 270
+    },
+    "facing=east,in_structure=true": {
+      "model": "dreamtinker:block/transmute/io/drain_active",
+      "y": 270
+    },
+    "facing=north,in_structure=false": {
+      "model": "dreamtinker:block/transmute/io/drain_inactive",
+      "y": 180
+    },
+    "facing=north,in_structure=true": {
+      "model": "dreamtinker:block/transmute/io/drain_active",
+      "y": 180
+    },
+    "facing=south,in_structure=false": {
+      "model": "dreamtinker:block/transmute/io/drain_inactive"
+    },
+    "facing=south,in_structure=true": {
+      "model": "dreamtinker:block/transmute/io/drain_active"
+    },
+    "facing=west,in_structure=false": {
+      "model": "dreamtinker:block/transmute/io/drain_inactive",
+      "y": 90
+    },
+    "facing=west,in_structure=true": {
+      "model": "dreamtinker:block/transmute/io/drain_active",
+      "y": 90
+    }
+  }
+}

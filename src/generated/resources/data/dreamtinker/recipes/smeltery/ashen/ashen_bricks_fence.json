@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "B": {
+      "item": "dreamtinker:ashen_bricks"
+    },
+    "b": {
+      "item": "dreamtinker:ashen_brick"
+    }
+  },
+  "pattern": [
+    "BbB",
+    "BbB"
+  ],
+  "result": {
+    "count": 6,
+    "item": "dreamtinker:ashen_bricks_fence"
+  },
+  "show_notification": true
+}

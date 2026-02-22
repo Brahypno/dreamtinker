@@ -1,7 +1,5 @@
 package org.dreamtinker.dreamtinker;
 
-import com.hollingsworth.arsnouveau.common.entity.LightningEntity;
-import com.hollingsworth.arsnouveau.common.lib.LibEntityNames;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.Registries;
@@ -9,10 +7,16 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTestType;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModList;
@@ -29,11 +33,17 @@ import org.dreamtinker.dreamtinker.library.client.particle.VibeBarParticleType;
 import org.dreamtinker.dreamtinker.library.worldgen.ScatterReplaceOreConfiguration;
 import org.dreamtinker.dreamtinker.library.worldgen.ScatterReplaceOreFeature;
 import org.dreamtinker.dreamtinker.library.worldgen.TagAndTagRuleTest;
+import slimeknights.mantle.item.BlockTooltipItem;
+import slimeknights.mantle.registration.deferred.BlockEntityTypeDeferredRegister;
 import slimeknights.mantle.registration.deferred.EntityTypeDeferredRegister;
 import slimeknights.mantle.registration.deferred.FluidDeferredRegister;
 import slimeknights.mantle.registration.deferred.SynchronizedDeferredRegister;
+import slimeknights.mantle.registration.object.BuildingBlockObject;
 import slimeknights.tconstruct.common.registration.BlockDeferredRegisterExtension;
+import slimeknights.tconstruct.common.registration.CastItemObject;
 import slimeknights.tconstruct.common.registration.ItemDeferredRegisterExtension;
+
+import java.util.function.Function;
 
 import static org.dreamtinker.dreamtinker.Dreamtinker.MODID;
 
@@ -44,10 +54,15 @@ public abstract class DreamtinkerModule {
     public static final DeferredRegister<Item> EL_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
     public static final DeferredRegister<Item> MALUM_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
+
     public static final ItemDeferredRegisterExtension MODI_TOOLS = new ItemDeferredRegisterExtension(MODID);
     public static final ItemDeferredRegisterExtension NOVA_MODI_TOOLS = new ItemDeferredRegisterExtension(MODID);
+
     public static final EntityTypeDeferredRegister ENTITIES = new EntityTypeDeferredRegister(MODID);
     public static final BlockDeferredRegisterExtension BLOCKS = new BlockDeferredRegisterExtension(MODID);
+    protected static final BlockEntityTypeDeferredRegister BLOCK_ENTITIES = new BlockEntityTypeDeferredRegister(MODID);
+
+
     public static final DeferredRegister<MobEffect> EFFECT = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, MODID);
     public static final DeferredRegister<MobEffect> EL_EFFECT = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, MODID);
     public static final DeferredRegister<MobEffect> MALUM_EFFECT = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, MODID);
@@ -90,15 +105,18 @@ public abstract class DreamtinkerModule {
     public static final RegistryObject<EntityType<WiserLightBolt>> LIGHTNING_ENTITY =
             ENTITIES.register("wiser_lightning", () ->
                     EntityType.Builder.<WiserLightBolt>of(WiserLightBolt::new, MobCategory.MISC)
-            .sized(0.0F, 0.0F)
-            .clientTrackingRange(16)
-            .updateInterval(Integer.MAX_VALUE
-            ).setShouldReceiveVelocityUpdates(true).setUpdateInterval(60));
+                                      .sized(0.0F, 0.0F)
+                                      .clientTrackingRange(16)
+                                      .updateInterval(Integer.MAX_VALUE
+                                      ).setShouldReceiveVelocityUpdates(true).setUpdateInterval(60));
     public static final DeferredRegister<Feature<?>> FEATURES =
             DeferredRegister.create(ForgeRegistries.FEATURES, MODID);
 
     public static final RegistryObject<Feature<ScatterReplaceOreConfiguration>> SCATTER_REPLACE =
             FEATURES.register("scatter_replace", () -> new ScatterReplaceOreFeature(ScatterReplaceOreConfiguration.CODEC));
+
+
+    protected static final Function<Block, ? extends BlockItem> TOOLTIP_BLOCK_ITEM = (b) -> new BlockTooltipItem(b, new Item.Properties());
 
     @SuppressWarnings({"removal"})
     public static void initRegisters(IEventBus bus) {
@@ -110,6 +128,7 @@ public abstract class DreamtinkerModule {
         EFFECT.register(bus);
         LOOT_MODIFIERS.register(bus);
         PARTICLES.register(bus);
+        BLOCK_ENTITIES.register(bus);
         if (ModList.get().isLoaded("enigmaticlegacy")){
             EL_FLUIDS.register(bus);
             EL_ITEMS.register(bus);
@@ -129,6 +148,26 @@ public abstract class DreamtinkerModule {
         FEATURES.register(bus);
 
 
+    }
+
+    protected static BlockBehaviour.Properties builder(SoundType soundType) {
+        return Block.Properties.of().sound(soundType);
+    }
+
+    protected static BlockBehaviour.Properties builder(MapColor color, SoundType soundType) {
+        return builder(soundType).mapColor(color);
+    }
+
+    protected static void accept(CreativeModeTab.Output output, BuildingBlockObject object) {
+        accept(output, object, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+    }
+
+    protected static void accept(CreativeModeTab.Output output, BuildingBlockObject object, CreativeModeTab.TabVisibility visibility) {
+        object.forEach(item -> output.accept(item, visibility));
+    }
+
+    protected static void accept(CreativeModeTab.Output output, Function<CastItemObject, ItemLike> getter, CastItemObject cast) {
+        output.accept(getter.apply(cast));
     }
 }
 

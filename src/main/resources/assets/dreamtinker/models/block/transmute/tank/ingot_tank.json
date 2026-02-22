@@ -1,0 +1,7 @@
+{
+  "parent": "tconstruct:block/template/tank_knob",
+  "textures": {
+    "top":  "dreamtinker:block/transmute/tank/tank_top",
+    "side": "dreamtinker:block/transmute/tank/ingot_tank"
+  }
+}

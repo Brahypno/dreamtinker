@@ -1,0 +1,9 @@
+{
+  "parent": "tconstruct:block/template/chute",
+  "textures": {
+    "top": "dreamtinker:block/transmute/io/chute_top_inactive",
+    "back": "dreamtinker:block/transmute/io/back",
+    "bricks": "dreamtinker:block/transmute/ashen/ashen_bricks",
+    "side": "dreamtinker:block/transmute/io/chute_side_inactive"
+  }
+}

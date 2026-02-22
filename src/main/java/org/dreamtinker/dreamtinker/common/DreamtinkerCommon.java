@@ -26,6 +26,7 @@ import org.dreamtinker.dreamtinker.common.Items.valentinite;
 import org.dreamtinker.dreamtinker.common.Items.void_pearl;
 import org.dreamtinker.dreamtinker.common.data.model.DreamTinkerBlockStateProvider;
 import org.dreamtinker.dreamtinker.common.data.model.DreamtinkerItemModelProvider;
+import org.dreamtinker.dreamtinker.common.data.render.RenderFluidProvider;
 import org.dreamtinker.dreamtinker.fluids.DreamtinkerFluids;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.item.ContainerFoodItem;
@@ -363,13 +364,6 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         output.accept(TransmutationGoldBlock);
     }
 
-    protected static BlockBehaviour.Properties builder(SoundType soundType) {
-        return Block.Properties.of().sound(soundType);
-    }
-
-    protected static BlockBehaviour.Properties builder(MapColor color, SoundType soundType) {
-        return builder(soundType).mapColor(color);
-    }
 
     public static void addTabs(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         addTabItems(itemDisplayParameters, output);
@@ -385,5 +379,6 @@ public class DreamtinkerCommon extends DreamtinkerModule {
 
         generator.addProvider(client, new DreamtinkerItemModelProvider(output, existingFileHelper));
         generator.addProvider(client, new DreamTinkerBlockStateProvider(output, existingFileHelper));
+        generator.addProvider(client, new RenderFluidProvider(output));
     }
 }

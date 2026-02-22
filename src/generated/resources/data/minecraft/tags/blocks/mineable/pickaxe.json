@@ -22,6 +22,22 @@
     "dreamtinker:transmutation_gold_ore",
     "dreamtinker:deepslate_transmutation_gold_ore",
     "dreamtinker:raw_transmutation_gold_block",
-    "dreamtinker:metallivorous_stibium_lupus_block"
+    "dreamtinker:metallivorous_stibium_lupus_block",
+    "dreamtinker:ashen_bricks",
+    "dreamtinker:ashen_bricks_slab",
+    "dreamtinker:ashen_bricks_stairs",
+    "dreamtinker:ashen_bricks_fence",
+    "dreamtinker:ashen_road",
+    "dreamtinker:ashen_road_slab",
+    "dreamtinker:ashen_road_stairs",
+    "dreamtinker:ashen_stone",
+    "dreamtinker:polished_ashen_stone",
+    "dreamtinker:ashen_drain",
+    "dreamtinker:ashen_chute",
+    "dreamtinker:transmute_controller",
+    "dreamtinker:ashen_fuel_tank",
+    "dreamtinker:ashen_fuel_gauge",
+    "dreamtinker:ashen_ingot_tank",
+    "dreamtinker:ashen_ingot_gauge"
   ]
 }

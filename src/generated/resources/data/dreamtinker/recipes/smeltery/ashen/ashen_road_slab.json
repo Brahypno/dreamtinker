@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "dreamtinker:ashen_road_slab",
+  "key": {
+    "B": {
+      "item": "dreamtinker:ashen_road"
+    }
+  },
+  "pattern": [
+    "BBB"
+  ],
+  "result": {
+    "count": 6,
+    "item": "dreamtinker:ashen_road_slab"
+  },
+  "show_notification": true
+}

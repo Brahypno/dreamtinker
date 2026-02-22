@@ -1,5 +1,6 @@
 package org.dreamtinker.dreamtinker.fluids.data;
 
+import com.mojang.blaze3d.shaders.FogShape;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -7,8 +8,12 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.fluids.DreamtinkerFluids;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.fluid.texture.AbstractFluidTextureProvider;
+import slimeknights.mantle.fluid.texture.FluidTexture;
+import slimeknights.mantle.registration.object.FluidObject;
 
 import java.util.Objects;
+
+import static slimeknights.tconstruct.TConstruct.getResource;
 
 public class DreamtinkerFluidTextureProvider extends AbstractFluidTextureProvider {
     public DreamtinkerFluidTextureProvider(PackOutput packOutput) {
@@ -58,12 +63,23 @@ public class DreamtinkerFluidTextureProvider extends AbstractFluidTextureProvide
         this.commonFluid(DreamtinkerFluids.mercury.getType());
         this.commonFluid(DreamtinkerFluids.molten_arcane_gold.getType());
         this.commonFluid(DreamtinkerFluids.molten_dark_metal.getType());
+        //this.commonFluid(DreamtinkerFluids.molten_ender_ash.getType());
+        tintedStone(DreamtinkerFluids.molten_ender_ash).color(0xFFAA87CD);
     }
 
     public void commonFluid(FluidType fluid) {
         super.texture(fluid)
              .textures(Dreamtinker.getLocation("fluid/" + Objects.requireNonNull(ForgeRegistries.FLUID_TYPES.get().getKey(fluid)).getPath() + "/"), false,
                        false);
+    }
+
+    private FluidTexture.Builder tintedStone(FluidObject<?> fluid) {
+        return named(fluid, "molten/stone");
+    }
+
+    private FluidTexture.Builder named(FluidObject<?> fluid, String name) {
+        return texture(fluid).root(getResource("fluid/" + name + "/"))
+                             .still().flowing().camera().calculateFogColor(true).fog(FogShape.SPHERE, 0.25f, 2);
     }
 
     @Override

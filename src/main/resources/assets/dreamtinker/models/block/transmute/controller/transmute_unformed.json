@@ -1,0 +1,8 @@
+{
+  "parent": "tconstruct:block/template/controller",
+  "textures": {
+    "front": "dreamtinker:block/transmute/controller/transmute_unformed",
+    "bricks": "dreamtinker:block/transmute/ashen/ashen_bricks",
+    "back": "dreamtinker:block/transmute/io/back"
+  }
+}

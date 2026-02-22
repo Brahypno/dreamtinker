@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "dreamtinker:block/ashen_bricks_slab"
+    },
+    "type=double": {
+      "model": "dreamtinker:block/ashen_bricks"
+    },
+    "type=top": {
+      "model": "dreamtinker:block/ashen_bricks_slab_top"
+    }
+  }
+}

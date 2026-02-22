@@ -1,0 +1,7 @@
+{
+  "parent": "tconstruct:block/template/tank",
+  "textures": {
+    "top":  "dreamtinker:block/transmute/tank/gauge_top",
+    "side": "dreamtinker:block/transmute/tank/ingot_gauge"
+  }
+}

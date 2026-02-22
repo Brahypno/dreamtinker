@@ -1,16 +1,14 @@
 package org.dreamtinker.dreamtinker.tools;
 
-import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
-import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.RegistryObject;
+import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.jetbrains.annotations.NotNull;
-import slimeknights.tconstruct.common.registration.CastItemObject;
 import slimeknights.tconstruct.library.materials.MaterialRegistry;
 import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
 import slimeknights.tconstruct.library.tools.helper.ToolBuildHandler;
@@ -21,11 +19,11 @@ import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
 import slimeknights.tconstruct.tools.stats.LimbMaterialStats;
 
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
-import static org.dreamtinker.dreamtinker.Dreamtinker.MODID;
-import static org.dreamtinker.dreamtinker.DreamtinkerModule.*;
+import static org.dreamtinker.dreamtinker.Dreamtinker.configCompactDisabled;
+import static org.dreamtinker.dreamtinker.DreamtinkerModule.ITEMS;
+import static org.dreamtinker.dreamtinker.DreamtinkerModule.TABS;
 
 
 public class DreamtinkerToolParts {
@@ -34,7 +32,7 @@ public class DreamtinkerToolParts {
     private static final Item.Properties ITEM_DROPS = (new Item.Properties()).stacksTo(64);
 
     public static final RegistryObject<CreativeModeTab> PART =
-            TABS.register("part", () -> CreativeModeTab.builder().title(Component.translatable("itemGroup." + MODID + ".part"))
+            TABS.register("part", () -> CreativeModeTab.builder().title(Dreamtinker.makeTranslation("itemGroup", "part"))
                                                        .icon(() -> {
                                                            MaterialVariantId material;
                                                            if (MaterialRegistry.isFullyLoaded()){
@@ -55,8 +53,6 @@ public class DreamtinkerToolParts {
             ITEMS.register("chain_saw_core", () -> new ToolPartItem(ITEM_DROPS, HandleMaterialStats.ID));
     public static final RegistryObject<ToolPartItem> chainSawTeeth =
             ITEMS.register("chain_saw_teeth", () -> new ToolPartItem(ITEM_DROPS, HeadMaterialStats.ID));
-    public static final CastItemObject chainSawCoreCast = MODI_TOOLS.registerCast(chainSawCore.getId().getPath(), ITEM_DROPS);
-    public static final CastItemObject chainSawTeethCast = MODI_TOOLS.registerCast(chainSawTeeth.getId().getPath(), ITEM_DROPS);
 
     public static final RegistryObject<ToolPartItem> wishOrthant =
             ITEMS.register("wish_orthant", () -> new ToolPartItem(ITEM_DROPS, HandleMaterialStats.ID) {
@@ -66,16 +62,12 @@ public class DreamtinkerToolParts {
 
     public static final RegistryObject<ToolPartItem> NovaCover =
             ITEMS.register("nova_cover", () -> new ToolPartItem(ITEM_DROPS, LimbMaterialStats.ID));
-    public static final CastItemObject NovaCoverCast = MODI_TOOLS.registerCast(NovaCover.getId().getPath(), ITEM_DROPS);
     public static final RegistryObject<ToolPartItem> NovaRostrum =
             ITEMS.register("nova_rostrum", () -> new ToolPartItem(ITEM_DROPS, HeadMaterialStats.ID));
-    public static final CastItemObject NovaRostrumCast = MODI_TOOLS.registerCast(NovaRostrum.getId().getPath(), ITEM_DROPS);
     public static final RegistryObject<ToolPartItem> NovaWrapper =
             ITEMS.register("nova_wrapper", () -> new ToolPartItem(ITEM_DROPS, LimbMaterialStats.ID));
-    public static final CastItemObject NovaWrapperCast = MODI_TOOLS.registerCast(NovaWrapper.getId().getPath(), ITEM_DROPS);
     public static final RegistryObject<ToolPartItem> NovaMisc =
             ITEMS.register("nova_misc", () -> new ToolPartItem(ITEM_DROPS, HandleMaterialStats.ID));
-    public static final CastItemObject NovaMiscCast = MODI_TOOLS.registerCast(NovaMisc.getId().getPath(), ITEM_DROPS);
 
     public static final RegistryObject<ToolPartItem> soulOrthant =
             ITEMS.register("soul_orthant", () -> new ToolPartItem(ITEM_DROPS, LimbMaterialStats.ID));
@@ -98,23 +90,16 @@ public class DreamtinkerToolParts {
         accept(output, chainSawCore);
         accept(output, chainSawTeeth);
 
-        if (ModList.get().isLoaded("ars_nouveau")){
+        if (ModList.get().isLoaded("ars_nouveau") && configCompactDisabled("ars_nouveau")){
             accept(output, NovaCover);
             accept(output, NovaMisc);
             accept(output, NovaRostrum);
             accept(output, NovaWrapper);
         }
 
-        // casts
-        addCasts(tab, CastItemObject::get);
-        addCasts(tab, CastItemObject::getSand);
-        addCasts(tab, CastItemObject::getRedSand);
+
     }
 
-    private static void addCasts(CreativeModeTab.Output output, Function<CastItemObject, ItemLike> getter) {
-        accept(output, getter, chainSawCoreCast);
-        accept(output, getter, chainSawTeethCast);
-    }
 
     /**
      * Adds a tool part to the tab
@@ -126,8 +111,6 @@ public class DreamtinkerToolParts {
     /**
      * Adds a cast to the tab
      */
-    private static void accept(CreativeModeTab.Output output, Function<CastItemObject, ItemLike> getter, CastItemObject cast) {
-        output.accept(getter.apply(cast));
-    }
+
 
 }

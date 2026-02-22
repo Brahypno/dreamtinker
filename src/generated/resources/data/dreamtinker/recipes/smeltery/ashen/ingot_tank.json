@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": {
+      "item": "dreamtinker:ashen_brick"
+    },
+    "B": {
+      "tag": "forge:gems/quartz"
+    }
+  },
+  "pattern": [
+    "#B#",
+    "#B#",
+    "#B#"
+  ],
+  "result": {
+    "item": "dreamtinker:ashen_ingot_tank"
+  },
+  "show_notification": true
+}

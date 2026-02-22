@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": {
+      "item": "dreamtinker:ashen_brick"
+    },
+    "C": {
+      "tag": "forge:ingots/knightmetal"
+    }
+  },
+  "pattern": [
+    "#C#",
+    "   ",
+    "#C#"
+  ],
+  "result": {
+    "item": "dreamtinker:ashen_chute"
+  },
+  "show_notification": true
+}

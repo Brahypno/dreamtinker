@@ -16,6 +16,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.Spell.AugmentTinker;
+import org.dreamtinker.dreamtinker.smeltery.DreamTinkerSmeltery;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import slimeknights.mantle.registration.object.FluidObject;
 import slimeknights.mantle.registration.object.ItemObject;
@@ -111,6 +112,7 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
         generateItemModel(DreamtinkerCommon.raw_transmutation_gold, "");
         generateItemModel(DreamtinkerCommon.deep_prismarine_shard, "materials");
         generateItemModel(AugmentTinker.INSTANCE.getRegistryName(), "");
+
         booleanItem("red_fur", DreamtinkerCommon.fox_fur.getId(), getItemLocation("white_fur", ""), getItemLocation("red_fur", ""));
         //generateBlockItemModel(object);
         part(DreamtinkerToolParts.explode_core.get());
@@ -126,12 +128,13 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
         part(DreamtinkerToolParts.NovaWrapper.get());
         part(DreamtinkerToolParts.NovaRostrum.get());
 
-        cast(DreamtinkerToolParts.chainSawTeethCast);
-        cast(DreamtinkerToolParts.chainSawCoreCast);
-        cast(DreamtinkerToolParts.NovaCoverCast);
-        cast(DreamtinkerToolParts.NovaMiscCast);
-        cast(DreamtinkerToolParts.NovaRostrumCast);
-        cast(DreamtinkerToolParts.NovaWrapperCast);
+        cast(DreamTinkerSmeltery.chainSawTeethCast);
+        cast(DreamTinkerSmeltery.chainSawCoreCast);
+        cast(DreamTinkerSmeltery.NovaCoverCast);
+        cast(DreamTinkerSmeltery.NovaMiscCast);
+        cast(DreamTinkerSmeltery.NovaRostrumCast);
+        cast(DreamTinkerSmeltery.NovaWrapperCast);
+        generateItemModel(DreamTinkerSmeltery.ashenBrick, "transmute");
     }
 
     private MaterialModelBuilder<ItemModelBuilder> part(ResourceLocation part, String texture) {

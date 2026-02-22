@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": [
+    {
+      "type": "forge:difference",
+      "base": {
+        "tag": "dreamtinker:ashen_blocks"
+      },
+      "subtracted": {
+        "item": "dreamtinker:polished_ashen_stone"
+      }
+    },
+    {
+      "item": "dreamtinker:ashen_stone"
+    }
+  ],
+  "result": "dreamtinker:polished_ashen_stone"
+}

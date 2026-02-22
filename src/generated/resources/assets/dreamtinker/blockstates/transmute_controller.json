@@ -1,0 +1,49 @@
+{
+  "variants": {
+    "active=false,facing=east,in_structure=true": {
+      "model": "dreamtinker:block/transmute/controller/transmute_inactive",
+      "y": 90
+    },
+    "active=false,facing=north,in_structure=true": {
+      "model": "dreamtinker:block/transmute/controller/transmute_inactive"
+    },
+    "active=false,facing=south,in_structure=true": {
+      "model": "dreamtinker:block/transmute/controller/transmute_inactive",
+      "y": 180
+    },
+    "active=false,facing=west,in_structure=true": {
+      "model": "dreamtinker:block/transmute/controller/transmute_inactive",
+      "y": 270
+    },
+    "active=true,facing=east,in_structure=true": {
+      "model": "dreamtinker:block/transmute/controller/transmute_active",
+      "y": 90
+    },
+    "active=true,facing=north,in_structure=true": {
+      "model": "dreamtinker:block/transmute/controller/transmute_active"
+    },
+    "active=true,facing=south,in_structure=true": {
+      "model": "dreamtinker:block/transmute/controller/transmute_active",
+      "y": 180
+    },
+    "active=true,facing=west,in_structure=true": {
+      "model": "dreamtinker:block/transmute/controller/transmute_active",
+      "y": 270
+    },
+    "facing=east,in_structure=false": {
+      "model": "dreamtinker:block/transmute/controller/transmute_unformed",
+      "y": 90
+    },
+    "facing=north,in_structure=false": {
+      "model": "dreamtinker:block/transmute/controller/transmute_unformed"
+    },
+    "facing=south,in_structure=false": {
+      "model": "dreamtinker:block/transmute/controller/transmute_unformed",
+      "y": 180
+    },
+    "facing=west,in_structure=false": {
+      "model": "dreamtinker:block/transmute/controller/transmute_unformed",
+      "y": 270
+    }
+  }
+}

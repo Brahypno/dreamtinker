@@ -102,6 +102,10 @@ public class DreamtinkerTagKeys {
         public static final TagKey<Item> TransmutationGoldBlock = forgeTag("storage_blocks/transmutation_gold");
         public static final TagKey<Item> RawTransmutationGoldBlock = forgeTag("storage_blocks/raw_transmutation_gold");
 
+        public static final TagKey<Item> ASHEN_BLOCKS = dreamtinkerTag("ashen_blocks");
+        public static final TagKey<Item> TRANSMUTE_BLOCKS = dreamtinkerTag("transmute_blocks");
+        public static final TagKey<Item> TRANSMUTE = dreamtinkerTag("transmute");
+
     }
 
     public static class Blocks {
@@ -138,6 +142,30 @@ public class DreamtinkerTagKeys {
         public static final TagKey<Block> TransmutationGoldOre = forgeTag("ores/transmutation_gold");
         public static final TagKey<Block> TransmutationGoldBlock = forgeTag("storage_blocks/transmutation_gold");
         public static final TagKey<Block> RawTransmutationGoldBlock = forgeTag("storage_blocks/raw_transmutation_gold");
+
+        public static final TagKey<Block> ASHEN_BLOCKS = dreamtinkerTag("ashen_blocks");
+        public static final TagKey<Block> TRANSMUTE_BLOCKS = dreamtinkerTag("transmute_blocks");
+        public static final TagKey<Block> ASHEN_TANKS = dreamtinkerTag("ashen_tanks");
+        /**
+         * Blocks that make up the transmute structure
+         */
+        public static final TagKey<Block> TRANSMUTE = dreamtinkerTag("transmute");
+        /**
+         * Blocks valid as a transmute tank, required for fuel
+         */
+        public static final TagKey<Block> TRANSMUTE_TANKS = dreamtinkerTag("transmute/tanks");
+        /**
+         * Blocks valid as a transmute floor
+         */
+        public static final TagKey<Block> TRANSMUTE_FLOOR = dreamtinkerTag("transmute/floor");
+        /**
+         * Blocks valid in the transmute wall
+         */
+        public static final TagKey<Block> TRANSMUTE_WALL = dreamtinkerTag("transmute/wall");
+        /**
+         * Blocks valid in the transmute wall
+         */
+        public static final TagKey<Block> TRANSMUTE_CEILING = dreamtinkerTag("transmute/ceiling");
     }
 
     public static class EntityTypes {

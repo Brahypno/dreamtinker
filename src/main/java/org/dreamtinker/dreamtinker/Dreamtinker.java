@@ -51,6 +51,7 @@ import org.dreamtinker.dreamtinker.fluids.data.DreamtinkerFluidTextureProvider;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
 import org.dreamtinker.dreamtinker.library.event.PlayerLeftClickEvent;
 import org.dreamtinker.dreamtinker.network.DNetwork;
+import org.dreamtinker.dreamtinker.smeltery.DreamTinkerSmeltery;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
@@ -85,6 +86,7 @@ public class Dreamtinker {
         modEventBus.register(new DreamtinkerEffects());
         modEventBus.register(new DreamtinkerToolParts());
         modEventBus.register(new DreamtinkerTools());
+        modEventBus.register(new DreamTinkerSmeltery());
         modEventBus.register(new DreamtinkerCommon());
         modEventBus.register(new DreamtinkerSounds());
         modEventBus.register(new DreamtinkerModifiers());

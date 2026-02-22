@@ -7,6 +7,7 @@
     "dreamtinker:cold_iron_ingot",
     "dreamtinker:shadow_silver_ingot",
     "dreamtinker:transmutation_gold_ingot",
+    "dreamtinker:ashen_brick",
     {
       "id": "dreamtinker:soul_etherium",
       "required": false

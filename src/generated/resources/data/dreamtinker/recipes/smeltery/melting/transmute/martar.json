@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "item": "dreamtinker:ender_mortar"
+  },
+  "result": {
+    "amount": 500,
+    "fluid": "dreamtinker:molten_ender_ash"
+  },
+  "temperature": 1500,
+  "time": 120
+}

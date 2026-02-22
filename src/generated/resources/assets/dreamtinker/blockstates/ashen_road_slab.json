@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "dreamtinker:block/ashen_road_slab"
+    },
+    "type=double": {
+      "model": "dreamtinker:block/ashen_road"
+    },
+    "type=top": {
+      "model": "dreamtinker:block/ashen_road_slab_top"
+    }
+  }
+}
