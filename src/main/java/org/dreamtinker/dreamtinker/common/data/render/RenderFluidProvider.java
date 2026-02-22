@@ -3,6 +3,7 @@ package org.dreamtinker.dreamtinker.common.data.render;
 import net.minecraft.data.PackOutput;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.smeltery.DreamTinkerSmeltery;
+import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.render.FluidCuboid;
 import slimeknights.mantle.data.datamap.BlockStateDataMapProvider;
 import slimeknights.tconstruct.TConstruct;
@@ -33,7 +34,7 @@ public class RenderFluidProvider extends BlockStateDataMapProvider<List<FluidCub
     }
 
     @Override
-    public String getName() {
+    public @NotNull String getName() {
         return "Dream Tinkers' block render fluid provider";
     }
 }

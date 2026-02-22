@@ -21,7 +21,9 @@ import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.DreamtinkerModule;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
+import org.dreamtinker.dreamtinker.smeltery.block.component.AshenTankBlock;
 import org.dreamtinker.dreamtinker.smeltery.block.controller.TransmuteControllerBlock;
+import org.dreamtinker.dreamtinker.smeltery.block.entity.component.AshenTankBlockEntity;
 import org.dreamtinker.dreamtinker.smeltery.block.entity.controller.TransmuteBlockEntity;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import slimeknights.mantle.registration.object.BuildingBlockObject;
@@ -95,14 +97,18 @@ public class DreamTinkerSmeltery extends DreamtinkerModule {
                                      TOOLTIP_BLOCK_ITEM);
     }
 
-    public static final EnumObject<SearedTankBlock.TankType, SearedTankBlock> ashenTank;
+    public static final EnumObject<SearedTankBlock.TankType, AshenTankBlock> ashenTank;
 
     static {
         Properties ashen = ashenNonSolidProps(SoundType.BASALT).lightLevel(SearedTankBlock.LIGHT_GETTER);
         ashenTank = BLOCKS.registerEnum("ashen", SearedTankBlock.TankType.values(),
-                                        type -> new SearedTankBlock(ashen, type.getCapacity(), PushReaction.DESTROY),
+                                        type -> new AshenTankBlock(ashen, type.getCapacity(), PushReaction.DESTROY),
                                         b -> new TankItem(b, ITEM_PROPS, true));
     }
+
+    public static final RegistryObject<BlockEntityType<AshenTankBlockEntity>> tank = BLOCK_ENTITIES.register("tank", AshenTankBlockEntity::new, set -> {
+        set.addAll(ashenTank.values());
+    });
 
     // controllers
     public static final ItemObject<TransmuteControllerBlock> transmuteController =

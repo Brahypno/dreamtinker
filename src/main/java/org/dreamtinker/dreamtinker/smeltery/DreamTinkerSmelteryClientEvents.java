@@ -6,12 +6,15 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import slimeknights.tconstruct.smeltery.client.render.HeatingStructureBlockEntityRenderer;
+import slimeknights.tconstruct.smeltery.client.render.TankBlockEntityRenderer;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DreamTinkerSmelteryClientEvents {
 
     @SubscribeEvent
     static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(DreamTinkerSmeltery.tank.get(), TankBlockEntityRenderer::new);
         event.registerBlockEntityRenderer(DreamTinkerSmeltery.Transmute.get(), HeatingStructureBlockEntityRenderer::new);
     }
+
 }
