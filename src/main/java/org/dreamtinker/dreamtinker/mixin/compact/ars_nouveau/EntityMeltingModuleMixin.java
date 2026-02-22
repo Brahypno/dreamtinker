@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.mixin.NovaMixin;
+package org.dreamtinker.dreamtinker.mixin.compact.ars_nouveau;
 
 import com.hollingsworth.arsnouveau.common.block.tile.MobJarTile;
 import net.minecraft.core.BlockPos;
@@ -59,7 +59,7 @@ public abstract class EntityMeltingModuleMixin {
 
     @Inject(method = "interactWithEntities", at = @At("TAIL"), cancellable = true)
     public void dreamtinker$interactWithEntities(CallbackInfoReturnable<Boolean> cir) {
-        if (ModList.get().isLoaded("ars_nouveau") && configCompactDisabled("ars_nouveau"))
+        if (!(ModList.get().isLoaded("ars_nouveau") && !configCompactDisabled("ars_nouveau")))
             return;
         int minX = Mth.floor(bounds.get().minX);
         int minY = Mth.floor(bounds.get().minY);

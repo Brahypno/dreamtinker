@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.mixin.NovaMixin;
+package org.dreamtinker.dreamtinker.mixin.compact.ars_nouveau;
 
 import com.hollingsworth.arsnouveau.common.spell.validation.AugmentCompatibilityValidator;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;

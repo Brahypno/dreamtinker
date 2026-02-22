@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.mixin.enigmatic_legacy_mixin;
+package org.dreamtinker.dreamtinker.mixin.compact.enigmaticlegacy;
 
 import com.aizistral.enigmaticlegacy.handlers.SuperpositionHandler;
 import net.minecraft.world.entity.player.Player;

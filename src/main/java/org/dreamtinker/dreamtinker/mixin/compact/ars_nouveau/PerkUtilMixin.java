@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.mixin.NovaMixin;
+package org.dreamtinker.dreamtinker.mixin.compact.ars_nouveau;
 
 import com.hollingsworth.arsnouveau.api.perk.IPerkHolder;
 import com.hollingsworth.arsnouveau.api.perk.IPerkProvider;
@@ -22,7 +22,7 @@ import static org.dreamtinker.dreamtinker.Dreamtinker.configCompactDisabled;
 public class PerkUtilMixin {
     @Inject(method = "getPerkHolder", at = @At("RETURN"), cancellable = true)
     private static void dreamtinker$getPerkHolder(ItemStack stack, CallbackInfoReturnable<IPerkHolder<ItemStack>> cir) {
-        if (null == cir.getReturnValue()){
+        if (!configCompactDisabled("ars_nouveau") && null == cir.getReturnValue()){
             if (stack.getItem() instanceof ArmorItem armorItem && ModList.get().isLoaded("ars_nouveau") && !configCompactDisabled("ars_nouveau")){
                 if (stack.is(TinkerTags.Items.ARMOR) && 0 < DTModifierCheck.getItemModifierNum(stack, NovaRegistry.nova_magic_armor.getId())){
                     IPerkProvider<ItemStack> holder = PerkRegistry.getPerkProvider(DreamtinkerTools.underPlate.get(armorItem.getType()));

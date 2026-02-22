@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.mixin.malum_mixin;
+package org.dreamtinker.dreamtinker.mixin.compact.malum;
 
 
 import com.google.gson.JsonElement;

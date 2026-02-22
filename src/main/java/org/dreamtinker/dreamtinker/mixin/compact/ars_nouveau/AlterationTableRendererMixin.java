@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.mixin.NovaMixin;
+package org.dreamtinker.dreamtinker.mixin.compact.ars_nouveau;
 
 import com.hollingsworth.arsnouveau.client.renderer.tile.AlterationTableRenderer;
 import com.mojang.blaze3d.vertex.PoseStack;

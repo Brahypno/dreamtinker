@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.mixin.NovaMixin;
+package org.dreamtinker.dreamtinker.mixin.compact.ars_nouveau;
 
 import com.hollingsworth.arsnouveau.api.spell.SpellResolver;
 import com.hollingsworth.arsnouveau.api.spell.SpellStats;
@@ -29,13 +29,15 @@ import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.dreamtinker.dreamtinker.Dreamtinker.configCompactDisabled;
 import static org.dreamtinker.dreamtinker.utils.CompactUtils.arsNovaUtils.isTinker;
 
 @Mixin(value = MethodProjectile.class, remap = false)
 public class MethodProjectileMixin {
     @Inject(method = "summonProjectiles(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/LivingEntity;Lcom/hollingsworth/arsnouveau/api/spell/SpellStats;Lcom/hollingsworth/arsnouveau/api/spell/SpellResolver;)V", at = @At("HEAD"), cancellable = true)
     public void dreamtinker$summonProjectiles(Level world, LivingEntity shooter, SpellStats stats, SpellResolver resolver, CallbackInfo ci) {
-        if (resolver instanceof ModifiableSpellResolver && resolver.spellContext.getCasterTool().getItem() instanceof ModifiableSpellBook &&
+        if (!configCompactDisabled("ars_nouveau") && resolver instanceof ModifiableSpellResolver &&
+            resolver.spellContext.getCasterTool().getItem() instanceof ModifiableSpellBook &&
             isTinker(resolver.spellContext)){
             ToolStack toolStack = ToolStack.from(resolver.spellContext.getCasterTool());
             int numSplits = 1 + stats.getBuffCount(AugmentSplit.INSTANCE);
@@ -70,7 +72,8 @@ public class MethodProjectileMixin {
 
     @Inject(method = "summonProjectiles(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/LivingEntity;Lcom/hollingsworth/arsnouveau/api/spell/SpellStats;Lcom/hollingsworth/arsnouveau/api/spell/SpellResolver;)V", at = @At("HEAD"), cancellable = true)
     public void dreamtinker$summonProjectiles(Level world, BlockPos pos, LivingEntity shooter, SpellStats stats, SpellResolver resolver, CallbackInfo ci) {
-        if (resolver instanceof ModifiableSpellResolver && resolver.spellContext.getCasterTool().getItem() instanceof ModifiableSpellBook &&
+        if (!configCompactDisabled("ars_nouveau") && resolver instanceof ModifiableSpellResolver &&
+            resolver.spellContext.getCasterTool().getItem() instanceof ModifiableSpellBook &&
             isTinker(resolver.spellContext)){
             ToolStack toolStack = ToolStack.from(resolver.spellContext.getCasterTool());
             ArrayList<EntityProjectileSpell> projectiles = new ArrayList<>();

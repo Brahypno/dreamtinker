@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.mixin.malum_mixin;
+package org.dreamtinker.dreamtinker.mixin.compact.malum;
 
 import com.sammy.malum.registry.client.HiddenTagRegistry;
 import net.minecraft.client.Minecraft;
