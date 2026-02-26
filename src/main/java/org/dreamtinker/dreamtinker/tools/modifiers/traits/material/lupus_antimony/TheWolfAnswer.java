@@ -21,7 +21,7 @@ public class TheWolfAnswer extends BattleModifier {
     @Override
     public void failedMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageAttempted) {
         LivingEntity target = context.getLivingTarget();
-        if (target == null)
+        if (target == null || target.level().isClientSide)
             return;
         float curHP = target.getHealth();
         if (damageAttempted < curHP){
