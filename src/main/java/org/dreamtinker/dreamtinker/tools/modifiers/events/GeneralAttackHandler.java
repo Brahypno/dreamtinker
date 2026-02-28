@@ -52,6 +52,7 @@ public class GeneralAttackHandler {
                 for (int i = 0; i < 2 * ophelia + 1 && victim.isAlive(); i++) {
                     DamageSource source = DreamtinkerDamageTypes.randomSourceNotSame(registryAccess, dmg, rds);
                     victim.invulnerableTime = 0;
+                    victim.hurtDuration = 0;
                     victim.hurt(source, amount / (2.0f * ophelia + 1.0f));
                 }
                 victim.invulnerableTime = inv;
