@@ -35,6 +35,15 @@ public class GeneralPlayerCraftEvent {
                                                                  .withStyle(DreamtinkerModifiers.not_like_was.get().getDisplayName().getStyle()));
                 }
             }
+            int mei_level = tool.getModifiers().getLevel(DreamtinkerModifiers.mei.getId());
+            if (0 < mei_level &&
+                !event.getEntity().level().getLevelData().isHardcore()){
+                tool.removeModifier(DreamtinkerModifiers.mei.getId(), mei_level);
+                tool.addModifier(DreamtinkerModifiers.acheron.getId(), mei_level);
+                event.getEntity().sendSystemMessage(Component.translatable("modifier.dreamtinker.acheron.flavor")
+                                                             .withStyle(DreamtinkerModifiers.acheron.get().getDisplayName().getStyle()));
+                tool.updateStack(item);
+            }
         }
 
     }

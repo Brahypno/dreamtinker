@@ -667,6 +667,10 @@
   "modifier.dreamtinker.nova_mana_shield": "Mana Shield",
   "modifier.dreamtinker.nova_mana_shield.flavor": "Strong Mana defense",
   "modifier.dreamtinker.nova_mana_shield.description": "When taking damage, use Mana(ars nouveau) reduce damage. Higher level would spend more mana for more defense",
+  "modifier.dreamtinker.acheron": "Acheron",
+  "modifier.dreamtinker.acheron.flavor": "Salute to the despairing.",
+  "modifier.dreamtinker.acheron.description": "Only Obtainable Through hardcode mode. Gain Absorption after attack",
+  "modifier.dreamtinker.acheron.salvage": "Salute to the despairing.",
 
   "material.dreamtinker.echo_alloy": "Echo Alloy",
   "material.dreamtinker.echo_alloy.flavor": "Its echo of mystery, or echo of enigma",

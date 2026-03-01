@@ -129,7 +129,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<SharpenedWith> sharpened_with = MODIFIERS.register("sharpened_with", SharpenedWith::new);
     public static final StaticModifier<Isolde> isolde = MODIFIERS.register("isolde", Isolde::new);
 
-    public static final StaticModifier<org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.mei> mei = MODIFIERS.register("mei", mei::new);
+    public static final StaticModifier<mei> mei = MODIFIERS.register("mei", mei::new);
+    public static final StaticModifier<acheron> acheron = MODIFIERS.register("acheron", acheron::new);
     public static final StaticModifier<fly> fly = MODIFIERS.register("fly", fly::new);
     public static final StaticModifier<OpenSoul> open_soul =
             MODIFIERS.register("open_soul", OpenSoul::new);
