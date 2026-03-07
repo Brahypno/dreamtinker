@@ -209,7 +209,7 @@ public class mei extends BattleModifier {
 
     @Override
     public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
-        return damage * 170 <= tool.getModifierLevel(this.getId()) ? 10 : 1;
+        return damage * (170 <= tool.getModifierLevel(this.getId()) ? 10 : 1);
     }
 
     @Override
