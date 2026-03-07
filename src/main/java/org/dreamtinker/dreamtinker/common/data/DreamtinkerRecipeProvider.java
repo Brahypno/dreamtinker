@@ -733,6 +733,9 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                      FluidValues.METAL_BLOCK + FluidValues.NUGGET * 2)
                             .setDamagable(FluidValues.INGOT)
                             .save(consumer, location(metalFolder + "dark_metal/skull_breaker_hammer"));
+        MeltingRecipeBuilder.melting(Ingredient.of(DIAMOND_TERMITE_SHARD.get()), TinkerFluids.moltenDiamond,
+                                     FluidValues.NUGGET)
+                            .save(consumer, location(metalFolder + "diamond/melting_termite"));
 
         EntityMeltingRecipeBuilder.melting(
                                           EntityIngredient.of(FALLEN_CHAOS_KNIGHT.get(), SKELETON_THRASHER.get(), DIAMOND_TERMITE.get()),

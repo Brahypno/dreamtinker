@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "item": "born_in_chaos_v1:diamond_termite_shard"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "tconstruct:molten_diamond"
+  },
+  "temperature": 1450,
+  "time": 26
+}
