@@ -111,8 +111,6 @@ public class ItemTagProvider extends ItemTagsProvider {
         for (ArmorItem.Type slotType : ArmorItem.Type.values()) {
             bookArmor.add(DreamtinkerTools.underPlate.get(slotType));
         }
-        tag(MIGHTY_ARMOR);
-        tag(FANTASTIC_ARMOR);
         tag(BOOK_ARMOR).addTags(BASIC_ARMOR, PUNY_ARMOR, MIGHTY_ARMOR, FANTASTIC_ARMOR, GADGETRY_ARMOR);
         //items
 

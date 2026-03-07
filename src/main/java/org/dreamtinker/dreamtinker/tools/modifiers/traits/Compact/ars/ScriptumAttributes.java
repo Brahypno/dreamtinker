@@ -15,8 +15,8 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.ArtsMaxManaBonus;
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.ArtsRegenBonus;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.ArtsMaxManaBonus;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.ArtsRegenBonus;
 
 public class ScriptumAttributes extends NoLevelsModifier implements BasicInterface {
     @Override

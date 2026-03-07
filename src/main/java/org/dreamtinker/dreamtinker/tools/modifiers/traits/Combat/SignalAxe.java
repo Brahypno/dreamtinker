@@ -49,7 +49,6 @@ public class SignalAxe extends BattleModifier {
             double g = Mth.clamp(level.random.nextGaussian(), -1.0, 1.0); // ~N(0,0.35^2)
             double t01 = (g + 1.0) * 0.5;                                  // 映射到 [0,1]
             float time = attack_time + 1 + (int) Math.round(t01 * (2 * attack_time));
-            System.out.println(time);
             tag.putLong(TAG_ATTACK_TIME.getPath(), level.getGameTime() + (long) time);
             dataNBT.put(TAG_ATTACK_TIME, tag);
             dataNBT.putInt(TAG_RIGHT_TIME, dataNBT.getInt(TAG_RIGHT_TIME) - 1);
