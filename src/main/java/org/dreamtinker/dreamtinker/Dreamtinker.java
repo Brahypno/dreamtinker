@@ -47,7 +47,6 @@ import org.dreamtinker.dreamtinker.common.event.compact.malum.addConcentratedGlu
 import org.dreamtinker.dreamtinker.common.json.DTConfigEnabledCondition;
 import org.dreamtinker.dreamtinker.config.DreamtinkerConfig;
 import org.dreamtinker.dreamtinker.fluids.DreamtinkerFluids;
-import org.dreamtinker.dreamtinker.fluids.data.DreamtinkerFluidTextureProvider;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
 import org.dreamtinker.dreamtinker.library.event.PlayerLeftClickEvent;
 import org.dreamtinker.dreamtinker.network.DNetwork;
@@ -61,7 +60,6 @@ import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.curio.curio_hu
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.enigmatic_legacy.death_handler;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.malum.malum_events_handler;
 import org.dreamtinker.dreamtinker.world.data.DTDataPackProvider;
-import slimeknights.tconstruct.fluids.data.FluidBucketModelProvider;
 import slimeknights.tconstruct.library.utils.Util;
 
 import java.util.List;
@@ -185,8 +183,6 @@ public class Dreamtinker {
         ExistingFileHelper helper = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
-        generator.addProvider(event.includeClient(), new DreamtinkerFluidTextureProvider(output));
-        generator.addProvider(event.includeClient(), new FluidBucketModelProvider(output, Dreamtinker.MODID));
         generator.addProvider(event.includeClient(), new FluidTagProvider(output, lookupProvider, Dreamtinker.MODID, helper));
         generator.addProvider(event.includeServer(), new EntityTypeTagProvider(output, lookupProvider, helper));
 

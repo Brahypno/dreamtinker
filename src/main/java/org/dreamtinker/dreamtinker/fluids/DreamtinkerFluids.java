@@ -1,6 +1,8 @@
 package org.dreamtinker.dreamtinker.fluids;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -14,17 +16,23 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.common.SoundActions;
+import net.minecraftforge.data.event.GatherDataEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
+import org.dreamtinker.dreamtinker.fluids.data.DreamtinkerFluidTextureProvider;
+import org.dreamtinker.dreamtinker.fluids.data.FluidTooltipProvider;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import slimeknights.mantle.fluid.InvertedFluid;
 import slimeknights.mantle.registration.deferred.FluidDeferredRegister;
 import slimeknights.mantle.registration.object.FlowingFluidObject;
 import slimeknights.tconstruct.fluids.block.BurningLiquidBlock;
+import slimeknights.tconstruct.fluids.data.FluidBlockstateModelProvider;
+import slimeknights.tconstruct.fluids.data.FluidBucketModelProvider;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -332,5 +340,19 @@ public class DreamtinkerFluids {
             output.accept(molten_dark_metal);
         }
         output.accept(molten_ender_ash);
+    }
+
+    @SubscribeEvent
+    void gatherData(final GatherDataEvent event) {
+        DataGenerator generator = event.getGenerator();
+        PackOutput packOutput = generator.getPackOutput();
+        boolean client = event.includeClient();
+        generator.addProvider(client, new FluidTooltipProvider(packOutput));
+        DreamtinkerFluidTextureProvider textureProvider = new DreamtinkerFluidTextureProvider(packOutput);
+        generator.addProvider(client, textureProvider);
+        generator.addProvider(client, new FluidBucketModelProvider(packOutput, Dreamtinker.MODID));
+        //generator.addProvider(client, new FluidTextureCameraProvider(packOutput, event.getExistingFileHelper(), textureProvider));
+
+        generator.addProvider(client, new FluidBlockstateModelProvider(packOutput, Dreamtinker.MODID));
     }
 }
