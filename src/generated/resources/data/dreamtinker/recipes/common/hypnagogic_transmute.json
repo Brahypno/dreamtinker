@@ -4,9 +4,9 @@
     "item": "minecraft:book"
   },
   "cast_consumed": true,
-  "cooling_time": 53,
+  "cooling_time": 56,
   "fluid": {
-    "amount": 90,
+    "amount": 100,
     "tag": "dreamtinker:molten_nigrescence_antimony"
   },
   "result": "dreamtinker:hypnagogic_transmute"
