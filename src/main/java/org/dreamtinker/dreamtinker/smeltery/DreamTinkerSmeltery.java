@@ -128,16 +128,21 @@ public class DreamTinkerSmeltery extends DreamtinkerModule {
     private static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, Output output) {
         output.accept(enderMortar);
         output.accept(ashenBrick.get());
+
+        output.accept(transmuteController);
+
+        output.accept(ashenDrain);
+        output.accept(ashenDuct);
+        output.accept(ashenChute);
+        
+        ashenTank.forEach((searedTankBlock) -> output.accept(searedTankBlock));
+
         output.accept(ashenStone);
         output.accept(polishedAshenStone);
         accept(output, ashenBricks);
         accept(output, ashenRoad);
-        ashenTank.forEach((searedTankBlock) -> output.accept(searedTankBlock));
         output.accept(ashenLamp);
         output.accept(chiseledAshenBricks);
-        output.accept(ashenDrain);
-        output.accept(ashenDuct);
-        output.accept(ashenChute);
 
         Predicate<ItemStack> variant = stack -> {
             output.accept(stack);

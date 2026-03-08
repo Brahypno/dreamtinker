@@ -1,0 +1,10 @@
+{
+  "coverTexture": "dreamtinker:book/images/covers/hypnagogic_transmute_cover.png",
+  "coverColor": -1,
+  "bookTexture": "dreamtinker:book/images/covers/hypnagogic_transmute_pages.png",
+  "arrowColor": -1,
+  "slotColor": 0xFDF500,
+  "drawSectionListText": true,
+  "centerPageTitles": true,
+  "drawFourColumnIndex": true
+}

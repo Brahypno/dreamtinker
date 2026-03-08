@@ -1,0 +1,10 @@
+{
+  "title": "烬灰滑槽",
+  "item": "dreamtinker:ashen_chute",
+  "text": [
+    {
+      "text": "烬灰滑槽是向烬灰炉输入或从烬灰炉输出物品的设备。最好是放在能连上漏斗的地方。",
+      "paragraph": true
+    }
+	]
+}

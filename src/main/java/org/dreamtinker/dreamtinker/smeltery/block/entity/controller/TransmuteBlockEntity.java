@@ -23,7 +23,7 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
     /**
      * Fluid capacity per internal block
      */
-    private static final int CAPACITY_PER_BLOCK = FluidValues.INGOT * 12;
+    private static final int CAPACITY_PER_BLOCK = FluidValues.INGOT * 15;
     /**
      * GUI name
      */
@@ -32,7 +32,7 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
      * Number of wall blocks needed to increase the fuel cost by 1
      * this is a bit higher than the smeltery as the structure uses more blocks, balances out in larger structures
      */
-    private static final int BLOCKS_PER_FUEL = 18;
+    private static final int BLOCKS_PER_FUEL = 20;
 
     public TransmuteBlockEntity(BlockPos pos, BlockState state) {
         super(DreamTinkerSmeltery.Transmute.get(), pos, state, NAME);

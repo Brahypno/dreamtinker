@@ -343,6 +343,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                 .setFluidAndTime(TinkerFluids.skySlime, FluidValues.SLIME_BLOCK)
                                 .setCast(Tags.Items.DUSTS_PRISMARINE, true)
                                 .save(consumer, location(Casting_folder + "deep_prismarine_shard"));
+        ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.hypnagogic_transmute.get())
+                                .setFluidAndTime(DreamtinkerFluids.molten_nigrescence_antimony, FluidValues.INGOT)
+                                .setCast(Items.BOOK, true)
+                                .save(consumer, prefix(DreamtinkerCommon.hypnagogic_transmute, "common/"));
 
     }
 

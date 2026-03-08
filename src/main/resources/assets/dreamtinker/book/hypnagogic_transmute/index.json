@@ -1,0 +1,16 @@
+[
+  {
+    "name": "intro",
+    "data": "sections/intro.json",
+    "icon": {
+      "item": "dreamtinker:star_regulus"
+    }
+  },
+  {
+    "name": "transmute",
+    "data": "sections/transmute.json",
+    "icon": {
+      "item": "dreamtinker:transmute_controller"
+    }
+  }
+ ]

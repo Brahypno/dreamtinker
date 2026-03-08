@@ -21,6 +21,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.DreamtinkerModule;
+import org.dreamtinker.dreamtinker.common.Items.DTBookItem;
 import org.dreamtinker.dreamtinker.common.Items.star_regulus;
 import org.dreamtinker.dreamtinker.common.Items.valentinite;
 import org.dreamtinker.dreamtinker.common.Items.void_pearl;
@@ -191,6 +192,9 @@ public class DreamtinkerCommon extends DreamtinkerModule {
                 }
             });
 
+    public static final RegistryObject<DTBookItem> hypnagogic_transmute =
+            ITEMS.register("hypnagogic_transmute", () -> new DTBookItem(UNSTACKABLE_PROPS, DTBookItem.BookType.HYPNAGOGIC_TRANSMUTE));
+
     protected static final Item.Properties FOOD_PROPS = new Item.Properties();
     public static final RegistryObject<Item> white_peach = ITEMS.register("white_peach", () -> new Item(
             FOOD_PROPS.rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(2).saturationMod(6F).build())) {
@@ -203,6 +207,7 @@ public class DreamtinkerCommon extends DreamtinkerModule {
             Rarity.UNCOMMON)).stacksTo(16)));
 
     public static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
+        output.accept(hypnagogic_transmute.get());
         output.accept(echo_alloy.get());
         output.accept(raw_stibnite.get());
         output.accept(valentinite.get());

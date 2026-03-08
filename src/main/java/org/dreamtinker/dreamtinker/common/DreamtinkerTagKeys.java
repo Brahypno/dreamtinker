@@ -103,6 +103,7 @@ public class DreamtinkerTagKeys {
         public static final TagKey<Item> RawTransmutationGoldBlock = forgeTag("storage_blocks/raw_transmutation_gold");
 
         public static final TagKey<Item> ASHEN_BLOCKS = dreamtinkerTag("ashen_blocks");
+        public static final TagKey<Item> ASHEN_TANKS = dreamtinkerTag("ashen_tanks");
         public static final TagKey<Item> TRANSMUTE_BLOCKS = dreamtinkerTag("transmute_blocks");
         public static final TagKey<Item> TRANSMUTE = dreamtinkerTag("transmute");
 

@@ -104,8 +104,8 @@ public class BlockTagProvider extends BlockTagsProvider {
         //this.tag(DreamtinkerTagKeys.Blocks.TRANSMUTE_BRICKS).addTag(TinkerTags.Blocks.ASHEN_BLOCKS);
         this.tag(BlockTags.FENCES).add(DreamTinkerSmeltery.ashenBricks.getFence());
 
-        IntrinsicTagAppender<Block> scorchedTankTagAppender = this.tag(DreamtinkerTagKeys.Blocks.TRANSMUTE_TANKS);
-        DreamTinkerSmeltery.ashenTank.values().forEach(scorchedTankTagAppender::add);
+        IntrinsicTagAppender<Block> ashenTankTagAppender = this.tag(DreamtinkerTagKeys.Blocks.ASHEN_TANKS);
+        DreamTinkerSmeltery.ashenTank.values().forEach(ashenTankTagAppender::add);
 
         this.tag(DreamtinkerTagKeys.Blocks.TRANSMUTE_WALL)
             .addTags(DreamtinkerTagKeys.Blocks.ASHEN_BLOCKS)
@@ -115,11 +115,17 @@ public class BlockTagProvider extends BlockTagsProvider {
             .addTags(DreamtinkerTagKeys.Blocks.ASHEN_BLOCKS)
             .add(DreamTinkerSmeltery.ashenLamp.get(), DreamTinkerSmeltery.ashenDrain.get(), DreamTinkerSmeltery.ashenChute.get(),
                  DreamTinkerSmeltery.ashenDuct.get());
+        this.tag(DreamtinkerTagKeys.Blocks.TRANSMUTE_TANKS).addTag(DreamtinkerTagKeys.Blocks.ASHEN_TANKS);
         this.tag(DreamtinkerTagKeys.Blocks.TRANSMUTE)
             .addTags(DreamtinkerTagKeys.Blocks.TRANSMUTE_WALL)
             .addTags(DreamtinkerTagKeys.Blocks.TRANSMUTE_FLOOR)
             .addTags(DreamtinkerTagKeys.Blocks.TRANSMUTE_TANKS);
         this.tag(DreamtinkerTagKeys.Blocks.TRANSMUTE_BLOCKS).addTag(DreamtinkerTagKeys.Blocks.ASHEN_BLOCKS);
+
+        this.tag(TinkerTags.Blocks.FUEL_TANKS)
+            .addTag(DreamtinkerTagKeys.Blocks.ASHEN_TANKS);
+        this.tag(TinkerTags.Blocks.ALLOYER_TANKS)
+            .addTag(DreamtinkerTagKeys.Blocks.ASHEN_TANKS);
 
 
     }

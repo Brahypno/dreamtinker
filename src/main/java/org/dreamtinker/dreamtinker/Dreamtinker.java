@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
@@ -23,6 +24,7 @@ import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -47,6 +49,7 @@ import org.dreamtinker.dreamtinker.common.event.compact.malum.addConcentratedGlu
 import org.dreamtinker.dreamtinker.common.json.DTConfigEnabledCondition;
 import org.dreamtinker.dreamtinker.config.DreamtinkerConfig;
 import org.dreamtinker.dreamtinker.fluids.DreamtinkerFluids;
+import org.dreamtinker.dreamtinker.library.client.DreamtinkerClient;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
 import org.dreamtinker.dreamtinker.library.event.PlayerLeftClickEvent;
 import org.dreamtinker.dreamtinker.network.DNetwork;
@@ -88,6 +91,7 @@ public class Dreamtinker {
         modEventBus.register(new DreamtinkerCommon());
         modEventBus.register(new DreamtinkerSounds());
         modEventBus.register(new DreamtinkerModifiers());
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> DreamtinkerClient::onConstruct);
         DreamtinkerModule.initRegisters(modEventBus);
         if (ModList.get().isLoaded("ars_nouveau")){
             new NovaRegistry();

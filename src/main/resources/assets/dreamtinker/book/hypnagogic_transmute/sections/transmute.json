@@ -1,0 +1,69 @@
+[
+  {
+    "name": "index",
+    "type": "mantle:index",
+    "data": "transmute/index.json"
+  },
+
+  {
+    "name": "features",
+    "type": "mantle:text",
+    "data": "transmute/features.json"
+  },
+  {
+    "name": "byproducts",
+    "type": "mantle:text",
+    "data": "transmute/byproducts.json"
+  },
+  {
+    "name": "controller",
+    "type": "mantle:image_text",
+    "data": "transmute/controller.json"
+  },
+  {
+    "name": "structure",
+    "type": "mantle:structure",
+    "data": "transmute/multiblock.json"
+  },
+  {
+    "name": "structurereq",
+    "type": "mantle:text",
+    "data": "transmute/structurerequirements.json"
+  },
+  {
+    "name": "fgui1",
+    "type": "mantle:image_text",
+    "data": "transmute/gui1.json"
+  },
+  {
+    "name": "fgui2",
+    "type": "mantle:text",
+    "data": "transmute/gui2.json"
+  },
+
+  {
+    "name": "ashen_tanks",
+    "type": "mantle:showcase",
+    "data": "transmute/tanks.json"
+  },
+  {
+    "name": "ashen_blocks",
+    "type": "mantle:showcase",
+    "data": "transmute/ashenblocks.json"
+  },
+  {
+    "name": "ashen_drain",
+    "type": "mantle:showcase",
+    "data": "transmute/ashen_drain.json"
+  },
+  {
+    "name": "ashen_duct",
+    "type": "mantle:showcase",
+    "data": "transmute/ashen_duct.json"
+  },
+  {
+    "name": "ashen_chute",
+    "type": "mantle:showcase",
+    "data": "transmute/ashen_chute.json"
+  }
+]

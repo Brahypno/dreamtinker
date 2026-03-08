@@ -1,0 +1,20 @@
+{
+  "title": "Structure Requirements",
+  "text": [
+    {
+      "text": "Your Transmute has its own constraints. Don’t assume bigger is better."
+    },
+    {
+      "text": "The Transmute accepts only certain stones for its foundation—glass is forbidden. The sanctioned blocks will be revealed across the next few pages. Also, keep it rectangular.",
+      "paragraph": true
+    },
+    {
+      "text": "The max size of your transmute is 16x16x65 external. or 14x14x64 internal.",
+      "paragraph": true
+    },
+    {
+      "text": "The transmute must have corners, edges and ceiling in order to function correctly.",
+      "paragraph": true
+    }
+  ]
+}

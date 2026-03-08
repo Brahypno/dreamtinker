@@ -1,0 +1,12 @@
+{
+  "title": "烬灰方块",
+  "item": {
+    "tag": "dreamtinker:ashen_blocks"
+  },
+  "text": [
+    {
+      "text": "这些方块可以搭建嬗变炉，例如底板和侧壁。它们也能装饰你的基地。",
+      "paragraph": true
+    }
+  ]
+}

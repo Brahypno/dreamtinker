@@ -1,0 +1,12 @@
+{
+  "title": "Ashen Blocks",
+  "item": {
+    "tag": "dreamtinker:ashen_blocks"
+  },
+  "text": [
+    {
+      "text": "These blocks can be used for any part of the transmute, as floors or walls. They are also useful for decorating your base.",
+      "paragraph": true
+    }
+  ]
+}

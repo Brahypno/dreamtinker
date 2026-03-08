@@ -178,14 +178,17 @@ public class ItemTagProvider extends ItemTagsProvider {
         this.copy(Tags.Blocks.ORES, Tags.Items.ORES);
 
         addSmeltery();
+        this.tag(TinkerTags.Items.TINKERS_GUIDES)
+            .add(hypnagogic_transmute.get());
     }
 
     private void addSmeltery() {
         this.copy(DreamtinkerTagKeys.Blocks.ASHEN_BLOCKS, DreamtinkerTagKeys.Items.ASHEN_BLOCKS);
+        this.copy(Blocks.ASHEN_TANKS, Items.ASHEN_TANKS);
         this.copy(Blocks.TRANSMUTE_BLOCKS, Items.TRANSMUTE_BLOCKS);
         this.tag(Items.TRANSMUTE)
             .addTag(Items.ASHEN_BLOCKS)
-            .addTag(TinkerTags.Items.SCORCHED_TANKS)
+            .addTag(Items.ASHEN_TANKS)
             .add(DreamTinkerSmeltery.transmuteController.asItem(), //DreamTinkerSmeltery.ashenLadder.asItem(),
                  DreamTinkerSmeltery.ashenDrain.asItem(), DreamTinkerSmeltery.ashenChute.asItem(), DreamTinkerSmeltery.ashenDuct.asItem());//,
         //DreamTinkerSmeltery.ashenGlass.asItem(), DreamTinkerSmeltery.ashenSoulGlass.asItem(), DreamTinkerSmeltery.ashenTintedGlass.asItem());

@@ -1,0 +1,10 @@
+{
+  "title": "嬗变炉",
+  "subText": "罕有事物能在辉光之上与嬗变炉相匹敌。",
+  "hidden": ["structurereq", "fgui2"],
+  "operations": [
+    { "before": "features",       "action": "add_group", "data": "详细信息" },
+    { "before": "ashen_tanks", "action": "column_break" },
+    { "before": "ashen_tanks", "action": "add_group", "data": "方块" }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "title": "Ashen Chute",
+  "item": "dreamtinker:ashen_chute",
+  "text": [
+    {
+      "text": "The ashen chute is your way to input/output items in and out of the transmute. Best placed somewhere easily accessible by a hopper.",
+      "paragraph": true
+    }
+	]
+}
