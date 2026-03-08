@@ -19,8 +19,11 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.data.GenericDataProvider;
+import slimeknights.mantle.data.predicate.IJsonPredicate;
 import slimeknights.tconstruct.library.json.predicate.tool.StatInRangePredicate;
 import slimeknights.tconstruct.library.json.predicate.tool.ToolStackItemPredicate;
+import slimeknights.tconstruct.library.json.predicate.tool.ToolStackPredicate;
+import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 import javax.annotation.Nullable;
@@ -53,11 +56,10 @@ public class AdvancementsProvider extends GenericDataProvider {
                 builder(DreamtinkerTools.silence_glove, resource("tools/silence_glove"), resource("textures/gui/advancement_background.png"), FrameType.TASK,
                         builder ->
                                 builder.addCriterion("crafted_book", hasItem(DreamtinkerTools.silence_glove)));
-
+        IJsonPredicate<IToolStackView> six_hand_predicate = ToolStackPredicate.and(StatInRangePredicate.min(ToolStats.ATTACK_DAMAGE, 9f),
+                                                                                   ToolStackPredicate.set(DreamtinkerTools.silence_glove.get()));
         builder(Items.ZOMBIE_HEAD, resource("tools/six_finger"), getSilenceGlove, FrameType.GOAL, builder ->
-                builder.addCriterion("damage", InventoryChangeTrigger.TriggerInstance.hasItems(
-                        ItemPredicate.Builder.item().of(DreamtinkerTools.silence_glove).build(),
-                        ToolStackItemPredicate.ofTool(StatInRangePredicate.min(ToolStats.ATTACK_DAMAGE, 10)))));
+                builder.addCriterion("damage", InventoryChangeTrigger.TriggerInstance.hasItems(ToolStackItemPredicate.ofTool(six_hand_predicate))));
     }
 
     @Override

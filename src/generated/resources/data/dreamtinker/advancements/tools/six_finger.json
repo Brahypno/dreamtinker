@@ -5,16 +5,22 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "dreamtinker:silence_glove"
-            ]
-          },
-          {
             "type": "tconstruct:tool_stack",
             "predicate": {
-              "type": "tconstruct:stat_in_range",
-              "min": 10.0,
-              "stat": "tconstruct:attack_damage"
+              "type": "mantle:and",
+              "predicates": [
+                {
+                  "type": "tconstruct:stat_in_range",
+                  "min": 9.0,
+                  "stat": "tconstruct:attack_damage"
+                },
+                {
+                  "type": "mantle:set",
+                  "items": [
+                    "dreamtinker:silence_glove"
+                  ]
+                }
+              ]
             }
           }
         ]
