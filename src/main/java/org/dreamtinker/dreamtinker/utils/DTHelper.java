@@ -11,6 +11,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -50,10 +51,9 @@ import slimeknights.tconstruct.library.tools.part.ToolPartItem;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 import javax.annotation.Nullable;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.*;
 import java.util.function.Predicate;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.ProjLimit;
@@ -308,5 +308,70 @@ public class DTHelper {
                 // MAINHAND/OFFHAND not relevant for armor parts; keep all hidden
             }
         }
+    }
+
+    private static volatile Method DROP_ALL_DEATH_LOOT;
+
+    public static void invokeDropAllDeathLoot(LivingEntity entity, DamageSource source) {
+        try {
+            Method m = DROP_ALL_DEATH_LOOT;
+            if (m == null){
+                m = findMethod(
+                        LivingEntity.class,
+                        // 1) 首选：你当前映射下的名字（official/parchment）
+                        "dropAllDeathLoot",
+                        // 2) 备用：如果你确实在旧版，可把 SRG/obf 名字放这里
+                        "m_6668_",  // 示例：自己填你查到的别名
+                        new Class<?>[]{DamageSource.class},
+                        void.class,
+                        /* mustBeInstance */ true
+                );
+                m.setAccessible(true); // 允许访问 protected/private
+                DROP_ALL_DEATH_LOOT = m;
+            }
+            m.invoke(entity, source);
+        }
+        catch (ReflectiveOperationException e) {
+            throw new RuntimeException("Failed to invoke dropAllDeathLoot via reflection", e);
+        }
+    }
+
+    private static Method findMethod(
+            Class<?> owner,
+            String primaryName,
+            String alias,
+            Class<?>[] paramTypes,
+            Class<?> returnType,
+            boolean mustBeInstance
+    ) throws NoSuchMethodException {
+
+        // 1) primary name
+        try {
+            return owner.getDeclaredMethod(primaryName, paramTypes);
+        }
+        catch (NoSuchMethodException ignored) {}
+
+        // 2) aliases (SRG/obf/旧名)
+        try {
+            return owner.getDeclaredMethod(alias, paramTypes);
+        }
+        catch (NoSuchMethodException ignored) {}
+
+        // 3) signature scan fallback (1.20+ 最实用)
+        for (Method m : owner.getDeclaredMethods()) {
+            if (m.getParameterCount() != paramTypes.length)
+                continue;
+            if (!Arrays.equals(m.getParameterTypes(), paramTypes))
+                continue;
+            if (returnType != null && m.getReturnType() != returnType)
+                continue;
+            if (mustBeInstance && Modifier.isStatic(m.getModifiers()))
+                continue;
+            return m;
+        }
+
+        throw new NoSuchMethodException(owner.getName() + " method not found: " + primaryName
+                                        + " / alias=" + alias
+                                        + " params=" + Arrays.toString(paramTypes));
     }
 }
