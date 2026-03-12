@@ -109,11 +109,15 @@ public class BlockTagProvider extends BlockTagsProvider {
 
         this.tag(DreamtinkerTagKeys.Blocks.TRANSMUTE_WALL)
             .addTags(DreamtinkerTagKeys.Blocks.ASHEN_BLOCKS)
-            .add(DreamTinkerSmeltery.ashenLamp.get(), DreamTinkerSmeltery.ashenDrain.get(), DreamTinkerSmeltery.ashenChute.get(),
-                 DreamTinkerSmeltery.ashenDuct.get());
+            .addTag(DreamtinkerTagKeys.Blocks.ASHEN_TANKS)
+            .add(DreamTinkerSmeltery.ashenGlass.get(), DreamTinkerSmeltery.ashenSoulGlass.get(), DreamTinkerSmeltery.ashenTintedGlass.get(),
+                 DreamTinkerSmeltery.ashenLadder.get(), DreamTinkerSmeltery.ashenLamp.get(), DreamTinkerSmeltery.ashenDrain.get(),
+                 DreamTinkerSmeltery.ashenChute.get(), DreamTinkerSmeltery.ashenDuct.get());
         this.tag(DreamtinkerTagKeys.Blocks.TRANSMUTE_FLOOR)
             .addTags(DreamtinkerTagKeys.Blocks.ASHEN_BLOCKS)
-            .add(DreamTinkerSmeltery.ashenLamp.get(), DreamTinkerSmeltery.ashenDrain.get(), DreamTinkerSmeltery.ashenChute.get(),
+            .add(DreamTinkerSmeltery.ashenGlass.get(), DreamTinkerSmeltery.ashenSoulGlass.get(), DreamTinkerSmeltery.ashenTintedGlass.get(),
+                 DreamTinkerSmeltery.ashenLadder.get(), DreamTinkerSmeltery.ashenLamp.get(),
+                 DreamTinkerSmeltery.ashenLamp.get(), DreamTinkerSmeltery.ashenDrain.get(), DreamTinkerSmeltery.ashenChute.get(),
                  DreamTinkerSmeltery.ashenDuct.get());
         this.tag(DreamtinkerTagKeys.Blocks.TRANSMUTE_TANKS).addTag(DreamtinkerTagKeys.Blocks.ASHEN_TANKS);
         this.tag(DreamtinkerTagKeys.Blocks.TRANSMUTE)
@@ -126,6 +130,9 @@ public class BlockTagProvider extends BlockTagsProvider {
             .addTag(DreamtinkerTagKeys.Blocks.ASHEN_TANKS);
         this.tag(TinkerTags.Blocks.ALLOYER_TANKS)
             .addTag(DreamtinkerTagKeys.Blocks.ASHEN_TANKS);
+        this.tag(BlockTags.CLIMBABLE).add(DreamTinkerSmeltery.ashenLadder.get());
+        IntrinsicTagAppender<Block> impermeable = tag(BlockTags.IMPERMEABLE);
+        impermeable.add(DreamTinkerSmeltery.ashenGlass.get(), DreamTinkerSmeltery.ashenSoulGlass.get(), DreamTinkerSmeltery.ashenTintedGlass.get());
 
 
     }
@@ -143,16 +150,17 @@ public class BlockTagProvider extends BlockTagsProvider {
 
         tagBlocks(MINEABLE_WITH_SHOVEL, DreamTinkerSmeltery.enderMortar);
         tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_DIAMOND_TOOL, DreamTinkerSmeltery.ashenBricks, DreamTinkerSmeltery.ashenRoad);
-        tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_DIAMOND_TOOL, DreamTinkerSmeltery.ashenStone, DreamTinkerSmeltery.polishedAshenStone/*,
-                  DreamTinkerSmeltery.chiseledScorchedBricks, DreamTinkerSmeltery.ashenLadder, DreamTinkerSmeltery.ashenLamp, DreamTinkerSmeltery.ashenGlass,
+        tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_DIAMOND_TOOL, DreamTinkerSmeltery.ashenStone, DreamTinkerSmeltery.polishedAshenStone,
+                  DreamTinkerSmeltery.ashenLadder, DreamTinkerSmeltery.ashenLamp, DreamTinkerSmeltery.ashenGlass,
                   DreamTinkerSmeltery.ashenSoulGlass, DreamTinkerSmeltery.ashenTintedGlass, DreamTinkerSmeltery.ashenGlassPane,
-                  DreamTinkerSmeltery.ashenSoulGlassPane*/);
+                  DreamTinkerSmeltery.ashenSoulGlassPane);
 
         tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_DIAMOND_TOOL, DreamTinkerSmeltery.ashenDrain, DreamTinkerSmeltery.ashenChute,
                   DreamTinkerSmeltery.transmuteController);
         tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_DIAMOND_TOOL, DreamTinkerSmeltery.ashenTank);
         tagBlocks(MINEABLE_MELTING_BLACKLIST, DreamTinkerSmeltery.transmuteController);
         tagBlocks(MINEABLE_MELTING_BLACKLIST, DreamTinkerSmeltery.ashenTank);
+
     }
 
 

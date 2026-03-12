@@ -108,6 +108,13 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
                             models().getExistingFile(modLoc("block/transmute/tank/ingot_tank")));
         simpleBlockWithItem(DreamTinkerSmeltery.ashenTank.get(SearedTankBlock.TankType.INGOT_GAUGE),
                             models().getExistingFile(modLoc("block/transmute/tank/ingot_gauge")));
+
+        RenderType translucent = RenderType.translucent();
+        glassBlock(DreamTinkerSmeltery.ashenGlass.get(), DreamTinkerSmeltery.ashenGlassPane.get(), "transmute/glass/",
+                   Dreamtinker.getLocation("block/transmute/glass"), -1,
+                   true, null);
+        glassBlock(DreamTinkerSmeltery.ashenSoulGlass.get(), DreamTinkerSmeltery.ashenSoulGlassPane.get(), "transmute/soul_glass/",
+                   Dreamtinker.getLocation("block/transmute/soul_glass"), Dreamtinker.getLocation("block/transmute/glass_top"), -1, true, translucent);
     }
 
     protected void slabWithItem(SlabBlock slab, ResourceLocation doubleSlabModel, ResourceLocation texture) {
@@ -281,6 +288,35 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
               .addModels(new ConfiguredModel(active, 0, y, false));
         }
         itemModels().withExistingParent(itemKey(block).getPath(), inactive.getLocation());
+    }
+
+    /**
+     * Adds models for a glass block with a glass pane
+     */
+    public void glassBlock(Block glass, IronBarsBlock pane, String baseName, ResourceLocation front, int tint, boolean solidEdge, @Nullable RenderType renderType) {
+        glassBlock(glass, pane, baseName, front, front.withSuffix("_top"), tint, solidEdge, renderType);
+    }
+
+    /**
+     * Adds models for a glass block with a glass pane
+     */
+    public void glassBlock(Block glass, IronBarsBlock pane, String baseName, ResourceLocation front, ResourceLocation edge, int tint, boolean solidEdge, @Nullable RenderType renderType) {
+        // make block model
+        BlockModelBuilder block = models().cubeAll(BLOCK_FOLDER + "/" + baseName + "block", front);
+        ConnectedModelBuilder<BlockModelBuilder> cBuilder = block.customLoader(ConnectedModelBuilder::new);
+        cBuilder.connected("all", "cornerless_full");
+        if (tint != -1){
+            cBuilder.color(tint);
+        }
+        if (renderType != null){
+            block.renderType(renderType.name);
+        }else {
+            // glass generally wants cutout
+            block.renderType(RenderType.cutout().name);
+        }
+        simpleBlockWithItem(glass, block);
+        // make pane models
+        paneBlock(pane, baseName + "pane_", front, edge, true, tint, solidEdge, renderType);
     }
 }
 

@@ -1,9 +1,9 @@
 {
-  "title": "Scorched Ladder",
-  "item": "tconstruct:scorched_ladder",
+  "title": "Ashen Ladder",
+  "item": "dreamtinker:ashen_ladder",
   "text": [
     {
-      "text": "The scorched ladder can be used to easily climb up or out of your foundry without invalidating the structure, useful for if you plan to build it bigger later!",
+      "text": "By the Ashen Ladder, you may rise from—or descend into—your Transmute without marring its rite. A wise choice, should you intend to enlarge it in time.",
       "paragraph": true
     }
   ]

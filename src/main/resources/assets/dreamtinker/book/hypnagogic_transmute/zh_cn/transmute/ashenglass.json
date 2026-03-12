@@ -1,13 +1,13 @@
 {
-  "title": "焦褐玻璃",
-  "item": "tconstruct:scorched_glass",
+  "title": "烬灰玻璃",
+  "item": "dreamtinker:ashen_glass",
   "text": [
     {
-      "text": "这种玻璃能让你在不破坏熔铸炉结构的情况下，欣赏你那由熔融材料构成的伟大奇迹。注意，它不能像储罐那样储存流体。",
+      "text": "以此玻璃为界，你得以在不扰动嬗变炉之仪的情况下，窥见熔融材料所铸成的壮丽奇迹。惟须谨记：它不承载流体，无法替代储罐。",
       "paragraph": true
     },
 	{
-      "text": "焦褐玻璃不能用于搭建熔铸炉底板。",
+      "text": "烬灰玻璃不能用于搭建嬗变炉底板。",
       "paragraph": true
     }
   ]

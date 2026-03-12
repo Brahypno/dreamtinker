@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "G": {
+      "tag": "forge:gems/quartz"
+    },
+    "b": {
+      "item": "dreamtinker:ashen_brick"
+    }
+  },
+  "pattern": [
+    " b ",
+    "bGb",
+    " b "
+  ],
+  "result": {
+    "item": "dreamtinker:ashen_glass"
+  },
+  "show_notification": true
+}

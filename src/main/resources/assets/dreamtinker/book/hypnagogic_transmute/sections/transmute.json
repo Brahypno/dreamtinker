@@ -52,6 +52,26 @@
     "data": "transmute/ashenblocks.json"
   },
   {
+    "name": "ashen_ladder",
+    "type": "mantle:showcase",
+    "data": "transmute/ashenladder.json"
+  },
+  {
+    "name": "ashen_glass",
+    "type": "mantle:showcase",
+    "data": "transmute/ashenglass.json"
+  },
+  {
+    "name": "tinted_glass",
+    "type": "mantle:showcase",
+    "data": "transmute/tinted_glass.json"
+  },
+  {
+    "name": "soul_glass",
+    "type": "mantle:showcase",
+    "data": "transmute/soul_glass.json"
+  },
+  {
     "name": "ashen_drain",
     "type": "mantle:showcase",
     "data": "transmute/ashen_drain.json"

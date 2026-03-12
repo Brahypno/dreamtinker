@@ -90,15 +90,13 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
         this.registerFenceBuildingLootTables(DreamTinkerSmeltery.ashenBricks);
         this.dropSelf(DreamTinkerSmeltery.chiseledAshenBricks.get());
         this.registerBuildingLootTables(DreamTinkerSmeltery.ashenRoad);
-        /*
-        this.registerBuildingLootTables(DreamTinkerSmeltery.AshenRoad);
-        this.dropSelf(DreamTinkerSmeltery.AshenLamp.get());
-        this.dropSelf(DreamTinkerSmeltery.AshenLadder.get());
-        this.dropSelf(DreamTinkerSmeltery.AshenGlass.get());
-        this.dropSelf(DreamTinkerSmeltery.AshenSoulGlass.get());
-        this.dropSelf(DreamTinkerSmeltery.AshenTintedGlass.get());
-        this.dropSelf(DreamTinkerSmeltery.AshenGlassPane.get());
-        this.dropSelf(DreamTinkerSmeltery.AshenSoulGlassPane.get()); */
+
+        this.dropSelf(DreamTinkerSmeltery.ashenLadder.get());
+        this.dropSelf(DreamTinkerSmeltery.ashenGlass.get());
+        this.dropSelf(DreamTinkerSmeltery.ashenSoulGlass.get());
+        this.dropSelf(DreamTinkerSmeltery.ashenTintedGlass.get());
+        this.dropSelf(DreamTinkerSmeltery.ashenGlassPane.get());
+        this.dropSelf(DreamTinkerSmeltery.ashenSoulGlassPane.get());
         this.dropTable(DreamTinkerSmeltery.ashenDrain.get());
         this.dropTable(DreamTinkerSmeltery.ashenChute.get());
         this.dropTable(DreamTinkerSmeltery.ashenDuct.get());

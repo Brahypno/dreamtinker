@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "B": {
+      "tag": "dreamtinker:ashen_blocks"
+    },
+    "b": {
+      "item": "dreamtinker:ashen_brick"
+    }
+  },
+  "pattern": [
+    "b b",
+    "b b",
+    "BBB"
+  ],
+  "result": {
+    "count": 4,
+    "item": "dreamtinker:ashen_ladder"
+  },
+  "show_notification": true
+}

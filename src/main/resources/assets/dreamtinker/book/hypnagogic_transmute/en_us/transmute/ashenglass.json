@@ -1,13 +1,13 @@
 {
-  "title": "Scorched Glass",
-  "item": "tconstruct:scorched_glass",
+  "title": "Ashen Glass",
+  "item": "dreamtinker:ashen_glass",
   "text": [
     {
-      "text": "Looking at your mighty marvels of molten materials without invalidating your fantastic foundry can be done with this glass. Do note it doesn't store fluid unlike tanks.",
+      "text": "Through this pane, behold the marvels of molten matter—without marring your magnificent Transmute. Yet take heed: it bears no fluid, as tanks do.",
       "paragraph": true
     },
 	{
-      "text": "Glass cannot be used for the floor of the foundry.",
+      "text": "Glass cannot be used for the floor of the transmute.",
       "paragraph": true
     }
   ]

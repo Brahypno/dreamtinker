@@ -1,9 +1,9 @@
 {
-  "title": "焦褐梯子",
-  "item": "tconstruct:scorched_ladder",
+  "title": "烬灰梯子",
+  "item": "dreamtinker:ashen_ladder",
   "text": [
     {
-      "text": "焦褐梯子可以让你很容易地爬上熔铸炉或从里面爬出来，这对后续加盖熔铸炉十分有用！",
+      "text": "借烬灰梯子之助，你可自如登临嬗变炉、亦可从炉心脱身，而仪式结构仍保持完备。若你意欲日后加盖扩造，此物尤为合宜。",
       "paragraph": true
     }
   ]
