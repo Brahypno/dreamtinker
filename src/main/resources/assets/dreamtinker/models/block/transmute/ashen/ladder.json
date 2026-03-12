@@ -1,0 +1,9 @@
+{
+  "parent": "tconstruct:block/template/ladder",
+  "textures": {
+    "particle": "dreamtinker:block/transmute/ashen/ladder",
+    "top":      "dreamtinker:block/transmute/ashen/ashen_road",
+    "side":     "dreamtinker:block/transmute/ashen/ladder",
+    "bottom":   "dreamtinker:block/transmute/ashen/ladder"
+  }
+}

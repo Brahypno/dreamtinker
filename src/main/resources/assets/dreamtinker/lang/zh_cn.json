@@ -1296,6 +1296,20 @@
   "block.dreamtinker.ashen_ingot_tank.tooltip": "理想的液态金属容器，能存储相当于48锭量的流体\n被破坏后仍能保留其中的流体",
   "block.dreamtinker.ashen_ingot_gauge": "烬灰材料量器",
   "block.dreamtinker.ashen_ingot_gauge.tooltip": "理想的液态金属容器，能存储相当于48锭量的流体\n被破坏后仍能保留其中的流体",
+
+  "block.dreamtinker.ashen_ladder": "烬灰梯子",
+  "block.dreamtinker.ashen_ladder.tooltip": "可供攀爬的嬗变炉建材",
   "block.dreamtinker.ashen_lamp": "烬灰灯",
-  "block.dreamtinker.ashen_lamp.tooltip": "可供照明的嬗变炉建材"
+  "block.dreamtinker.ashen_lamp.tooltip": "可供照明的嬗变炉建材",
+
+  "block.dreamtinker.ashen_glass": "烬灰玻璃",
+  "block.dreamtinker.ashen_glass.tooltip": "搭建嬗变炉的建材\n无法储存流体",
+  "block.dreamtinker.ashen_soul_glass": "烬灰灵魂玻璃",
+  "block.dreamtinker.ashen_soul_glass.tooltip": "搭建嬗变炉的建材\n无法储存流体，但可以从中穿过。",
+  "block.dreamtinker.ashen_tinted_glass": "烬灰遮光玻璃",
+  "block.dreamtinker.ashen_tinted_glass.tooltip": "搭建嬗变炉的建材\n无法存储流体，且无法透光。",
+  "block.dreamtinker.ashen_glass_pane": "烬灰玻璃板",
+  "block.dreamtinker.ashen_glass_pane.tooltip": "无法用于搭建嬗变炉",
+  "block.dreamtinker.ashen_soul_glass_pane": "烬灰灵魂玻璃板",
+  "block.dreamtinker.ashen_soul_glass_pane.tooltip": "无法用于搭建嬗变炉，但可以从中穿过。"
 }

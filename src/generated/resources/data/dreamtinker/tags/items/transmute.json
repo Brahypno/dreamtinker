@@ -3,8 +3,12 @@
     "#dreamtinker:ashen_blocks",
     "#dreamtinker:ashen_tanks",
     "dreamtinker:transmute_controller",
+    "dreamtinker:ashen_ladder",
     "dreamtinker:ashen_drain",
     "dreamtinker:ashen_chute",
-    "dreamtinker:ashen_duct"
+    "dreamtinker:ashen_duct",
+    "dreamtinker:ashen_glass",
+    "dreamtinker:ashen_soul_glass",
+    "dreamtinker:ashen_tinted_glass"
   ]
 }

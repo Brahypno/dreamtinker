@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "G": {
+      "tag": "forge:glass/tinted"
+    },
+    "b": {
+      "item": "dreamtinker:ashen_brick"
+    }
+  },
+  "pattern": [
+    " b ",
+    "bGb",
+    " b "
+  ],
+  "result": {
+    "item": "dreamtinker:ashen_tinted_glass"
+  },
+  "show_notification": true
+}

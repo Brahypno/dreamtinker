@@ -1,0 +1,15 @@
+{
+  "parent": "tconstruct:block/template/pane/post",
+  "connection": {
+    "predicate": "pane",
+    "textures": {
+      "pane": "cornerless_full"
+    }
+  },
+  "loader": "mantle:connected",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "edge": "dreamtinker:block/transmute/glass_top",
+    "pane": "dreamtinker:block/transmute/soul_glass"
+  }
+}

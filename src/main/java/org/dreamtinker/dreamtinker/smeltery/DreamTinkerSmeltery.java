@@ -32,7 +32,9 @@ import slimeknights.mantle.registration.object.FenceBuildingBlockObject;
 import slimeknights.mantle.registration.object.ItemObject;
 import slimeknights.mantle.util.RetexturedHelper;
 import slimeknights.tconstruct.common.registration.CastItemObject;
+import slimeknights.tconstruct.shared.block.ClearGlassPaneBlock;
 import slimeknights.tconstruct.shared.block.PlaceBlockDispenserBehavior;
+import slimeknights.tconstruct.shared.block.SoulGlassPaneBlock;
 import slimeknights.tconstruct.smeltery.block.component.*;
 import slimeknights.tconstruct.smeltery.block.controller.ControllerBlock;
 import slimeknights.tconstruct.smeltery.block.entity.component.SmelteryInputOutputBlockEntity;
@@ -68,6 +70,8 @@ public class DreamTinkerSmeltery extends DreamtinkerModule {
 
     public static final RegistryObject<Item> ashenBrick = ITEMS.register("ashen_brick", () -> new Item(ITEM_PROPS));
 
+    public static final ItemObject<Block> ashenLamp =
+            BLOCKS.register("ashen_lamp", () -> new SearedBlock(ashenSolidProps(1).lightLevel(state -> 15), false), TOOLTIP_BLOCK_ITEM);
 
     // ashen blocks
     public static final ItemObject<Block> ashenStone, polishedAshenStone, chiseledAshenBricks;
@@ -85,8 +89,28 @@ public class DreamTinkerSmeltery extends DreamtinkerModule {
         chiseledAshenBricks = BLOCKS.register("chiseled_ashen_bricks", block, TOOLTIP_BLOCK_ITEM);
     }
 
-    public static final ItemObject<Block> ashenLamp =
-            BLOCKS.register("ashen_lamp", () -> new SearedBlock(ashenSolidProps(1).lightLevel(state -> 15), false), TOOLTIP_BLOCK_ITEM);
+    // glass
+    public static final ItemObject<SearedGlassBlock> ashenGlass;
+    public static final ItemObject<ClearGlassPaneBlock> ashenGlassPane;
+    public static final ItemObject<SearedTintedGlassBlock> ashenTintedGlass;
+
+    static {
+        Properties ashen = ashenNonSolidProps(SoundType.GLASS);
+        ashenGlass = BLOCKS.register("ashen_glass", () -> new SearedGlassBlock(ashen), TOOLTIP_BLOCK_ITEM);
+        ashenTintedGlass = BLOCKS.register("ashen_tinted_glass", () -> new SearedTintedGlassBlock(ashen), TOOLTIP_BLOCK_ITEM);
+        ashenGlassPane = BLOCKS.register("ashen_glass_pane", () -> new ClearGlassPaneBlock(ashen), TOOLTIP_BLOCK_ITEM);
+    }
+
+    // soul glass
+    public static final ItemObject<SearedSoulGlassBlock> ashenSoulGlass;
+    public static final ItemObject<SoulGlassPaneBlock> ashenSoulGlassPane;
+
+    static {
+        Properties ashen = ashenNonSolidProps(SoundType.GLASS).noCollission().speedFactor(0.1f).isViewBlocking((state, getter, pos) -> true);
+        ashenSoulGlass = BLOCKS.register("ashen_soul_glass", () -> new SearedSoulGlassBlock(ashen), TOOLTIP_BLOCK_ITEM);
+        ashenSoulGlassPane = BLOCKS.register("ashen_soul_glass_pane", () -> new SoulGlassPaneBlock(ashen), TOOLTIP_BLOCK_ITEM);
+    }
+
     public static final ItemObject<Block> ashenDrain, ashenDuct, ashenChute;
 
     static {
@@ -95,6 +119,13 @@ public class DreamTinkerSmeltery extends DreamtinkerModule {
         ashenDuct = BLOCKS.register("ashen_duct", () -> new SearedDuctBlock(ashen), TOOLTIP_BLOCK_ITEM);
         ashenChute = BLOCKS.register("ashen_chute", () -> new RetexturedOrientableSmelteryBlock(ashen, SmelteryInputOutputBlockEntity.ChuteBlockEntity::new),
                                      TOOLTIP_BLOCK_ITEM);
+    }
+
+    public static final ItemObject<SearedLadderBlock> ashenLadder;
+
+    static {
+        Properties ashen = ashenNonSolidProps(SoundType.BASALT);
+        ashenLadder = BLOCKS.register("ashen_ladder", () -> new SearedLadderBlock(ashen), TOOLTIP_BLOCK_ITEM);
     }
 
     public static final EnumObject<SearedTankBlock.TankType, AshenTankBlock> ashenTank;
@@ -134,7 +165,7 @@ public class DreamTinkerSmeltery extends DreamtinkerModule {
         output.accept(ashenDrain);
         output.accept(ashenDuct);
         output.accept(ashenChute);
-        
+
         ashenTank.forEach((searedTankBlock) -> output.accept(searedTankBlock));
 
         output.accept(ashenStone);
@@ -144,6 +175,18 @@ public class DreamTinkerSmeltery extends DreamtinkerModule {
         output.accept(ashenLamp);
         output.accept(chiseledAshenBricks);
 
+
+        output.accept(ashenLadder);
+        output.accept(ashenGlass);
+        output.accept(ashenTintedGlass);
+        output.accept(ashenSoulGlass);
+        output.accept(ashenGlassPane);
+        output.accept(ashenSoulGlassPane);
+
+        // casts
+        addCasts(output, CastItemObject::get);
+        addCasts(output, CastItemObject::getSand);
+        addCasts(output, CastItemObject::getRedSand);
         Predicate<ItemStack> variant = stack -> {
             output.accept(stack);
             return false;
@@ -153,10 +196,6 @@ public class DreamTinkerSmeltery extends DreamtinkerModule {
         RetexturedHelper.addTagVariants(variant, ashenDuct, DreamtinkerTagKeys.Items.ASHEN_BLOCKS);
         RetexturedHelper.addTagVariants(variant, ashenChute, DreamtinkerTagKeys.Items.ASHEN_BLOCKS);
 
-        // casts
-        addCasts(output, CastItemObject::get);
-        addCasts(output, CastItemObject::getSand);
-        addCasts(output, CastItemObject::getRedSand);
 
     }
 

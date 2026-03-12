@@ -189,9 +189,9 @@ public class ItemTagProvider extends ItemTagsProvider {
         this.tag(Items.TRANSMUTE)
             .addTag(Items.ASHEN_BLOCKS)
             .addTag(Items.ASHEN_TANKS)
-            .add(DreamTinkerSmeltery.transmuteController.asItem(), //DreamTinkerSmeltery.ashenLadder.asItem(),
-                 DreamTinkerSmeltery.ashenDrain.asItem(), DreamTinkerSmeltery.ashenChute.asItem(), DreamTinkerSmeltery.ashenDuct.asItem());//,
-        //DreamTinkerSmeltery.ashenGlass.asItem(), DreamTinkerSmeltery.ashenSoulGlass.asItem(), DreamTinkerSmeltery.ashenTintedGlass.asItem());
+            .add(DreamTinkerSmeltery.transmuteController.asItem(), DreamTinkerSmeltery.ashenLadder.asItem(),
+                 DreamTinkerSmeltery.ashenDrain.asItem(), DreamTinkerSmeltery.ashenChute.asItem(), DreamTinkerSmeltery.ashenDuct.asItem(),
+                 DreamTinkerSmeltery.ashenGlass.asItem(), DreamTinkerSmeltery.ashenSoulGlass.asItem(), DreamTinkerSmeltery.ashenTintedGlass.asItem());
 
 
     }

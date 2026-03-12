@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "byproducts": [
+    {
+      "amount": 25,
+      "fluid": "tconstruct:molten_quartz"
+    }
+  ],
+  "ingredient": {
+    "item": "dreamtinker:ashen_glass_pane"
+  },
+  "result": {
+    "amount": 250,
+    "fluid": "dreamtinker:molten_ender_ash"
+  },
+  "temperature": 1500,
+  "time": 80
+}

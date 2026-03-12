@@ -1299,7 +1299,20 @@
   "block.dreamtinker.ashen_ingot_tank.tooltip": "Ideal for metals, holding 48 ingots of fluid.\nRetains liquid when broken.",
   "block.dreamtinker.ashen_ingot_gauge": "Ashen Ingot Gauge",
   "block.dreamtinker.ashen_ingot_gauge.tooltip": "Ideal for metals, holding 48 ingots of fluid.\nRetains liquid when broken.",
+  
+  "block.dreamtinker.ashen_ladder": "Ashen Ladder",
+  "block.dreamtinker.ashen_ladder.tooltip": "Climbable Transmute block.",
   "block.dreamtinker.ashen_lamp": "Ashen Lamp",
-  "block.dreamtinker.ashen_lamp.tooltip": "Transmute block that emits light."
+  "block.dreamtinker.ashen_lamp.tooltip": "Transmute block that emits light.",
 
+  "block.dreamtinker.ashen_glass": "Ashen Glass",
+  "block.dreamtinker.ashen_glass.tooltip": "Part of the Transmute.\nCannot store liquids.",
+  "block.dreamtinker.ashen_soul_glass": "Ashen Soul Glass",
+  "block.dreamtinker.ashen_soul_glass.tooltip": "Part of the Transmute.\nCannot store liquids, and can be walked through.",
+  "block.dreamtinker.ashen_tinted_glass": "Tinted Ashen Glass",
+  "block.dreamtinker.ashen_tinted_glass.tooltip": "Part of the Transmute.\nCannot store liquids, and does not let light through.",
+  "block.dreamtinker.ashen_glass_pane": "Ashen Glass Pane",
+  "block.dreamtinker.ashen_glass_pane.tooltip": "Cannot be used in a Transmute.",
+  "block.dreamtinker.ashen_soul_glass_pane": "Ashen Soul Glass Pane",
+  "block.dreamtinker.ashen_soul_glass_pane.tooltip": "Cannot be used in a Transmute, but can be walked through."
 }
