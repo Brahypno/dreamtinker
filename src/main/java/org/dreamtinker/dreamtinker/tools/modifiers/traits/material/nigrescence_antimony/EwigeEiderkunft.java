@@ -50,7 +50,7 @@ public class EwigeEiderkunft extends BattleModifier {
                                        holder.getX(),
                                        holder.getY(),
                                        holder.getZ(),
-                                       breaks % CentralFlame.get(),
+                                       (float) Math.sqrt(breaks % CentralFlame.get()),
                                        true,
                                        Level.ExplosionInteraction.MOB);
             }
