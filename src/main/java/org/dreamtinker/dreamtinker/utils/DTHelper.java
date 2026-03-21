@@ -5,6 +5,8 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentContents;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -373,5 +375,37 @@ public class DTHelper {
         throw new NoSuchMethodException(owner.getName() + " method not found: " + primaryName
                                         + " / alias=" + alias
                                         + " params=" + Arrays.toString(paramTypes));
+    }
+
+    public static boolean containsTranslationKey(Component root, String targetKey) {
+        if (root == null || targetKey == null){
+            return false;
+        }
+
+        if (hasTranslationKey(root, targetKey)){
+            return true;
+        }
+
+        ComponentContents contents = root.getContents();
+        if (contents instanceof TranslatableContents translatable){
+            for (Object arg : translatable.getArgs()) {
+                if (arg instanceof Component argComponent && containsTranslationKey(argComponent, targetKey)){
+                    return true;
+                }
+            }
+        }
+
+        for (Component sibling : root.getSiblings()) {
+            if (containsTranslationKey(sibling, targetKey)){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static boolean hasTranslationKey(Component component, String targetKey) {
+        return component.getContents() instanceof TranslatableContents translatable
+               && targetKey.equals(translatable.getKey());
     }
 }

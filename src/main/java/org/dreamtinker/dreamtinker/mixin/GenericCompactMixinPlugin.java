@@ -15,14 +15,6 @@ public class GenericCompactMixinPlugin implements IMixinConfigPlugin {
      */
     private static final String COMPACT_SEGMENT = ".compact.";
 
-    /**
-     * 可选：别名映射（写错/习惯写法 -> 真实modid）
-     * 例如 Ars Nouveau 的真实 modid 常见是 "ars_nouveau"
-     */
-    private static final Map<String, String> MOD_ID_ALIASES = Map.of(
-            "ars_nouveau", "malum"
-    );
-
     private final Map<String, Boolean> cache = new HashMap<>();
     private Set<String> loadedModIds = Collections.emptySet();
 
@@ -37,7 +29,7 @@ public class GenericCompactMixinPlugin implements IMixinConfigPlugin {
             loadedModIds = Collections.unmodifiableSet(ids);
         }
         catch (Throwable t) {
-            // 极端情况下兜底：保持空集合，意味着所有 compat mixin 都不会应用（宁可少应用也别崩）
+            // 极端情况下兜底：保持空集合，意味着所有 compact mixin 都不会应用（宁可少应用也别崩）
             loadedModIds = Collections.emptySet();
         }
     }
@@ -50,7 +42,6 @@ public class GenericCompactMixinPlugin implements IMixinConfigPlugin {
         }
 
         // alias -> real modid
-        modid = MOD_ID_ALIASES.getOrDefault(modid, modid);
 
         return cache.computeIfAbsent(modid, id -> loadedModIds.contains(id));
     }
