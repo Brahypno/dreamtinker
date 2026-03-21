@@ -17,6 +17,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
@@ -127,12 +128,13 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         IJsonPredicate<Item> armor = ItemPredicate.tag(WORN_ARMOR);
         EnchantmentModule CONSTANT_FORTUNE = EnchantmentModule.builder(Enchantments.BLOCK_FORTUNE).toolItem(harvest).constant();
         EnchantmentModule ARMOR_FORTUNE = EnchantmentModule.builder(Enchantments.BLOCK_FORTUNE).toolItem(armor).armorHarvest(ARMOR_SLOTS);
-        // note chestplates will have both modules, but will get ignored due to setting the looting slot
-        // the air check on weapon looting is for projectiles which use an item of air in their tool context
+        AttributeModule ARMOR_LUCK =
+                AttributeModule.builder(Attributes.LUCK, AttributeModifier.Operation.ADDITION).toolTag(TinkerTags.Items.ARMOR).eachLevel(1);
+        StatBoostModule SEA_LUCK = StatBoostModule.add(ToolStats.SEA_LUCK).eachLevel(1);
         LootingModule WEAPON_LOOTING = LootingModule.builder().toolItem(ItemPredicate.or(ItemPredicate.set(Items.AIR), ItemPredicate.tag(MELEE))).weapon();
         LootingModule ARMOR_LOOTING = LootingModule.builder().toolItem(armor).armor(ARMOR_SLOTS);
         buildModifier(Ids.with_tears)
-                .addModules(CONSTANT_FORTUNE, ARMOR_FORTUNE, WEAPON_LOOTING, ARMOR_LOOTING)
+                .addModules(CONSTANT_FORTUNE, ARMOR_FORTUNE, WEAPON_LOOTING, ARMOR_LOOTING, SEA_LUCK, ARMOR_LUCK)
                 .addModule(ProtectionModule.builder().eachLevel(-5f));
         buildModifier(Ids.soul_form).levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                                     .addModules(ModifierSlotModule.slot(SlotType.ABILITY).flat(1),

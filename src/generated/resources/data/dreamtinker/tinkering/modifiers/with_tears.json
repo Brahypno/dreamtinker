@@ -59,6 +59,30 @@
       }
     },
     {
+      "type": "tconstruct:stat_boost",
+      "each_level": 1.0,
+      "operation": "add",
+      "stat": "tconstruct:sea_luck"
+    },
+    {
+      "type": "tconstruct:attribute",
+      "attribute": "minecraft:generic.luck",
+      "each_level": 1.0,
+      "operation": "addition",
+      "slots": [
+        "mainhand",
+        "offhand",
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ],
+      "tool": {
+        "type": "mantle:tag",
+        "tag": "tconstruct:modifiable/armor"
+      }
+    },
+    {
       "type": "tconstruct:protection",
       "damage_source": "mantle:can_protect",
       "each_level": -5.0
