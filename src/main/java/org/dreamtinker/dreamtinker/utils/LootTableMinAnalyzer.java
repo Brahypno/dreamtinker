@@ -16,7 +16,10 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import javax.annotation.Nullable;
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * LootTable 白箱分析器（带 System.out 调试输出）—— Forge/Mojmap 1.20.1
@@ -108,7 +111,7 @@ public final class LootTableMinAnalyzer {
     public static TableMinReport analyze(ServerLevel level, LootTable table, float luck) {
         ResourceLocation tid = getTableId(table);
         log("Analyze table id=%s luck=%.2f", tid, luck);
-
+/*
         List<LootPool> pools = table.pools;
         log("  pools.size=%d", pools.size());
 
@@ -159,9 +162,10 @@ public final class LootTableMinAnalyzer {
             if (best == null || r.perRollQIncludingEmpty < best.perRollQIncludingEmpty)
                 best = r;
         }
-
-        log("Global min = %s", best);
-        return new TableMinReport(tid, results, best);
+*/
+        List<PoolMinResult> results = List.of(); // TODO
+        //log("Global min = %s", best);
+        return new TableMinReport(tid, results, null);
     }
 
   /* ===========================
@@ -222,7 +226,7 @@ public final class LootTableMinAnalyzer {
             return List.of();
         }
     }
-    
+
     /**
      * 展开一个 pool 为 {ItemKey -> 有效权重} 与 empty 权重（忽略所有 conditions/functions）
      */
