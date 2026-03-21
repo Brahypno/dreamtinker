@@ -60,6 +60,9 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
         this.dropSelf(DreamtinkerCommon.ShadowSilverBlock.get());
         this.dropSelf(DreamtinkerCommon.RawTransmutationGoldBlock.get());
         this.dropSelf(DreamtinkerCommon.TransmutationGoldBlock.get());
+        this.dropSelf(DreamtinkerCommon.UnbornDragonEgg.get());
+        this.dropSelf(DreamtinkerCommon.UnbornSnifferEgg.get());
+        this.dropSelf(DreamtinkerCommon.UnbornTurtleEgg.get());
     }
 
     private void addWorld() {

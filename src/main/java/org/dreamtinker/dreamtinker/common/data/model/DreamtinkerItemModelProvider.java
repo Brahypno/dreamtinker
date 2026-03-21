@@ -79,9 +79,6 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
         generateItemModel(DreamtinkerCommon.reason_cast, "cast");
         generateItemModel(DreamtinkerCommon.white_peach, "");
         generateItemModel(DreamtinkerCommon.unborn_egg, "");
-        generateItemModel(DreamtinkerCommon.unborn_turtle_egg, "");
-        generateItemModel(DreamtinkerCommon.unborn_sniffer_egg, "");
-        generateItemModel(DreamtinkerCommon.unborn_dragon_egg, "");
         generateItemModel(DreamtinkerCommon.unborn_spawn_egg, "");
         generateItemModel(DreamtinkerCommon.echo_alloy, "materials");
         generateItemModel(DreamtinkerCommon.malignant_gluttony, "materials");

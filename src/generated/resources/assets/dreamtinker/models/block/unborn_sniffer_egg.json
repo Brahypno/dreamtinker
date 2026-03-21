@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/sniffer_egg",
+  "textures": {
+    "bottom": "dreamtinker:block/unborn_sniffer_egg_bottom",
+    "east": "dreamtinker:block/unborn_sniffer_egg_east",
+    "north": "dreamtinker:block/unborn_sniffer_egg_north",
+    "particle": "dreamtinker:block/unborn_sniffer_egg_north",
+    "south": "dreamtinker:block/unborn_sniffer_egg_south",
+    "top": "dreamtinker:block/unborn_sniffer_egg_top",
+    "west": "dreamtinker:block/unborn_sniffer_egg_west"
+  }
+}

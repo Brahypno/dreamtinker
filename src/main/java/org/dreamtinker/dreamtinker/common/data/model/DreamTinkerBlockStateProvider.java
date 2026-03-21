@@ -67,6 +67,9 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
         simpleBlockWithItem(DreamtinkerCommon.DeepslateTransmutationGoldOre.get(), cubeAll(DreamtinkerCommon.DeepslateTransmutationGoldOre.get()));
         simpleBlockWithItem(DreamtinkerCommon.TransmutationGoldBlock.get(), cubeAll(DreamtinkerCommon.TransmutationGoldBlock.get()));
         simpleBlockWithItem(DreamtinkerCommon.RawTransmutationGoldBlock.get(), cubeAll(DreamtinkerCommon.RawTransmutationGoldBlock.get()));
+        singleTextureParentBlock(DreamtinkerCommon.UnbornDragonEgg.get(), "unborn_dragon_egg", mcLoc("block/dragon_egg"), "all");
+        snifferEggBlock(DreamtinkerCommon.UnbornSnifferEgg.get(), "unborn_sniffer_egg");
+        singleTextureParentBlock(DreamtinkerCommon.UnbornTurtleEgg.get(), "unborn_turtle_egg", mcLoc("block/template_turtle_egg"), "all");
 
         simpleBlockWithItem(DreamTinkerSmeltery.enderMortar.get(), cubeAll(DreamTinkerSmeltery.enderMortar.get()));
         simpleBlockWithItem(DreamTinkerSmeltery.ashenBricks.get(),
@@ -317,6 +320,33 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
         simpleBlockWithItem(glass, block);
         // make pane models
         paneBlock(pane, baseName + "pane_", front, edge, true, tint, solidEdge, renderType);
+    }
+
+    private void singleTextureParentBlock(Block block, String name, ResourceLocation parent, String name2) {
+        simpleBlock(block,
+                    models().withExistingParent(name, parent)
+                            .texture(name2, modLoc("block/" + name))
+                            .texture("particle", modLoc("block/" + name)));
+        generatedItem(name);
+
+    }
+
+    private void snifferEggBlock(Block block, String name) {
+        simpleBlock(block,
+                    models().withExistingParent(name, mcLoc("block/sniffer_egg"))
+                            .texture("bottom", modLoc("block/" + name + "_bottom"))
+                            .texture("east", modLoc("block/" + name + "_east"))
+                            .texture("north", modLoc("block/" + name + "_north"))
+                            .texture("south", modLoc("block/" + name + "_south"))
+                            .texture("top", modLoc("block/" + name + "_top"))
+                            .texture("west", modLoc("block/" + name + "_west"))
+                            .texture("particle", modLoc("block/" + name + "_north")));
+        generatedItem(name);
+    }
+
+    private void generatedItem(String name) {
+        itemModels().withExistingParent(name, mcLoc("item/generated"))
+                    .texture("layer0", modLoc("item/" + name));
     }
 }
 

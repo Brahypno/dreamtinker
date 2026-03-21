@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_turtle_egg",
+  "textures": {
+    "all": "dreamtinker:block/unborn_turtle_egg",
+    "particle": "dreamtinker:block/unborn_turtle_egg"
+  }
+}

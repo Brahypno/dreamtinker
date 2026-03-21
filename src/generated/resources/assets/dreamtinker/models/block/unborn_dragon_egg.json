@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/dragon_egg",
+  "textures": {
+    "all": "dreamtinker:block/unborn_dragon_egg",
+    "particle": "dreamtinker:block/unborn_dragon_egg"
+  }
+}

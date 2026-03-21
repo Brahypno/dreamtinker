@@ -294,17 +294,17 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                 .setFluid(FluidIngredient.of(DreamtinkerFluids.molten_nigrescence_antimony.getTag(), FluidValues.GEM * 3))
                                 .setCoolingTime(10)
                                 .save(consumer, location(Casting_folder + "unborn_egg"));
-        ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.unborn_turtle_egg.get())
+        ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.UnbornTurtleEgg.get())
                                 .setCast(Items.TURTLE_EGG, true)
                                 .setFluid(FluidIngredient.of(DreamtinkerFluids.molten_nigrescence_antimony.getTag(), FluidValues.GEM * 3))
                                 .setCoolingTime(10)
                                 .save(consumer, location(Casting_folder + "unborn_turtle_egg"));
-        ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.unborn_sniffer_egg.get())
+        ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.UnbornSnifferEgg.get())
                                 .setCast(Items.SNIFFER_EGG, true)
                                 .setFluid(FluidIngredient.of(DreamtinkerFluids.molten_nigrescence_antimony.getTag(), FluidValues.GEM * 3))
                                 .setCoolingTime(10)
                                 .save(consumer, location(Casting_folder + "unborn_sniffer_egg"));
-        ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.unborn_dragon_egg.get())
+        ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.UnbornDragonEgg.get())
                                 .setCast(Items.DRAGON_EGG, true)
                                 .setFluid(FluidIngredient.of(DreamtinkerFluids.molten_albedo_stibium.getTag(), FluidValues.GEM * 3))
                                 .setCoolingTime(10)
@@ -1444,15 +1444,15 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.soul_upgrade, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.soul_core)
                              .setTools(Ingredient.of(DreamtinkerTools.narcissus_wing.get()))
-                             .addInput(DreamtinkerCommon.unborn_turtle_egg.get(), 1)
+                             .addInput(DreamtinkerCommon.UnbornTurtleEgg.get(), 1)
                              .setMaxLevel(1)
                              .setSlots(SlotType.SOUL, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.soul_core, soulSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.soul_core, soulFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.soul_core)
                              .setTools(Ingredient.of(DreamtinkerTools.narcissus_wing.get()))
-                             .addInput(DreamtinkerCommon.unborn_turtle_egg.get(), 1)
-                             .addInput(DreamtinkerCommon.unborn_sniffer_egg.get(), 1)
+                             .addInput(DreamtinkerCommon.UnbornTurtleEgg.get(), 1)
+                             .addInput(DreamtinkerCommon.UnbornSnifferEgg.get(), 1)
                              .setMaxLevel(3)
                              .setSlots(SlotType.SOUL, 1)
                              .save(consumer, wrap(DreamtinkerModifiers.Ids.soul_core, soulFolder, "_1"));
@@ -1466,7 +1466,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.icy_memory, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.icy_memory)
                              .setTools(Ingredient.of(DreamtinkerTools.narcissus_wing.get()))
-                             .addInput(DreamtinkerCommon.unborn_dragon_egg.get())
+                             .addInput(DreamtinkerCommon.UnbornDragonEgg.get())
                              .addInput(DreamtinkerCommon.despair_gem.get())
                              .setLevelRange(3, 3)
                              .setSlots(SlotType.SOUL, 1)
@@ -1591,7 +1591,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                       .save(consumer, wrap(DreamtinkerModifiers.Ids.five_creations, slotlessFolder, SlotType.DEFENSE.getName()));
         SwappableModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.five_creations, "designs")
                                       .setTools(TinkerTags.Items.BONUS_SLOTS)
-                                      .addInput(DreamtinkerCommon.unborn_dragon_egg.get(), 5)
+                                      .addInput(DreamtinkerCommon.UnbornDragonEgg.get(), 5)
                                       .addInput(DreamtinkerCommon.poisonousHomunculus.get(), 5)
                                       .addInput(DreamtinkerCommon.evilHomunculus.get(), 5)
                                       .addInput(DreamtinkerCommon.rainbow_honey_crystal.get(), 5)

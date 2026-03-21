@@ -113,12 +113,6 @@ public class DreamtinkerCommon extends DreamtinkerModule {
     });
 
     public static final RegistryObject<Item> unborn_egg = ITEMS.register("unborn_egg", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
-    public static final RegistryObject<Item> unborn_turtle_egg =
-            ITEMS.register("unborn_turtle_egg", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
-    public static final RegistryObject<Item> unborn_sniffer_egg =
-            ITEMS.register("unborn_sniffer_egg", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
-    public static final RegistryObject<Item> unborn_dragon_egg =
-            ITEMS.register("unborn_dragon_egg", () -> new Item(ITEM_PROPS.rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> unborn_spawn_egg = ITEMS.register("unborn_spawn_egg", () -> new Item(ITEM_PROPS.rarity(Rarity.EPIC)));
 
     public static final RegistryObject<Item> soul_steel =
@@ -223,9 +217,9 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         output.accept(reason_cast.get());
         output.accept(white_peach.get());
         output.accept(unborn_egg.get());
-        output.accept(unborn_turtle_egg.get());
-        output.accept(unborn_dragon_egg.get());
-        output.accept(unborn_sniffer_egg.get());
+        output.accept(UnbornTurtleEgg.get());
+        output.accept(UnbornDragonEgg.get());
+        output.accept(UnbornSnifferEgg.get());
         output.accept(unborn_spawn_egg.get());
         output.accept(larimar.get());
         output.accept(amber.get());
@@ -341,6 +335,16 @@ public class DreamtinkerCommon extends DreamtinkerModule {
             builder(MapColor.METAL, SoundType.METAL).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(36f, 36f)), BLOCK_ITEM);
     public static final ItemObject<Block> TransmutationGoldBlock = BLOCKS.register("transmutation_gold_block", () -> new Block(
             builder(MapColor.METAL, SoundType.METAL).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(36f, 36f)), BLOCK_ITEM);
+
+
+    public static final ItemObject<Block> UnbornTurtleEgg = BLOCKS.register("unborn_turtle_egg", () -> new Block(
+            BlockBehaviour.Properties.of().mapColor(MapColor.SAND).forceSolidOn().strength(0.5F).sound(SoundType.METAL).randomTicks().noOcclusion()
+                                     .pushReaction(PushReaction.DESTROY)), TOOLTIP_BLOCK_ITEM);
+    public static final ItemObject<Block> UnbornSnifferEgg = BLOCKS.register("unborn_sniffer_egg", () -> new Block(
+            BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED).strength(0.5F).sound(SoundType.METAL).noOcclusion()), TOOLTIP_BLOCK_ITEM);
+    public static final ItemObject<Block> UnbornDragonEgg = BLOCKS.register("unborn_dragon_egg", () -> new DragonEggBlock(
+            BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).strength(3.0F, 9.0F).lightLevel((p_50840_) -> 1).noOcclusion()
+                                     .pushReaction(PushReaction.DESTROY)), TOOLTIP_BLOCK_ITEM);
 
     public static void addTabBlocks(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         output.accept(metallivorous_stibium_lupus_block.get());
