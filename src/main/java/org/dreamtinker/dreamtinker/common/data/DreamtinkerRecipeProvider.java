@@ -2290,6 +2290,15 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                      .save(consumer, location(folder + "filling/ashen_fuel_tank"));
         ContainerFillingRecipeBuilder.basinRecipe(DreamTinkerSmeltery.ashenTank.get(SearedTankBlock.TankType.FUEL_GAUGE), FluidType.BUCKET_VOLUME / 4)
                                      .save(consumer, location(folder + "filling/ashen_fuel_gauge"));
+        ItemCastingRecipeBuilder.basinRecipe(DreamTinkerSmeltery.ashenHeater)
+                                .setCast(DreamtinkerCommon.UnbornDragonEgg, true)
+                                .setFluidAndTime(DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK_BLOCK * 9)
+                                .save(consumer, location(Casting_folder + "ashen_heater"));
+        ItemCastingRecipeBuilder.basinRecipe(DreamTinkerSmeltery.ashenAccel)
+                                .setCast(DreamtinkerCommon.UnbornSnifferEgg, true)
+                                .setFluidAndTime(DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK_BLOCK * 9)
+                                .save(consumer, location(Casting_folder + "ashen_accelerator"));
+
     }
 
     @Override

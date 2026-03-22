@@ -1314,5 +1314,12 @@
   "block.dreamtinker.ashen_glass_pane": "Ashen Glass Pane",
   "block.dreamtinker.ashen_glass_pane.tooltip": "Cannot be used in a Transmute.",
   "block.dreamtinker.ashen_soul_glass_pane": "Ashen Soul Glass Pane",
-  "block.dreamtinker.ashen_soul_glass_pane.tooltip": "Cannot be used in a Transmute, but can be walked through."
+  "block.dreamtinker.ashen_soul_glass_pane.tooltip": "Cannot be used in a Transmute, but can be walked through.",
+
+  "block.dreamtinker.ashen_heater": "Ashen Heater",
+  "block.dreamtinker.ashen_heater.tooltip": "Convert undead hate into heat for the Transmute.\nCan only be used for the floor of the transmute.",
+  "tooltip.dreamtinker.transmute_heater": "Increase %d temperature for the Transmute when put in structure",
+  "block.dreamtinker.ashen_accelerator": "Ashen Accelerator",
+  "block.dreamtinker.ashen_accelerator.tooltip": "Use preservation wish to increase fuel rate for the Transmute.\nCan only be used for the wall of the transmute.",
+  "tooltip.dreamtinker.transmute_accel": "Increase %d fuel rate for the Transmute when put in structure"
 }

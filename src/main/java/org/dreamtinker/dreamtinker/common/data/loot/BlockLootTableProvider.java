@@ -93,6 +93,8 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
         this.registerFenceBuildingLootTables(DreamTinkerSmeltery.ashenBricks);
         this.dropSelf(DreamTinkerSmeltery.chiseledAshenBricks.get());
         this.registerBuildingLootTables(DreamTinkerSmeltery.ashenRoad);
+        this.dropSelf(DreamTinkerSmeltery.ashenHeater.get());
+        this.dropSelf(DreamTinkerSmeltery.ashenAccel.get());
 
         this.dropSelf(DreamTinkerSmeltery.ashenLadder.get());
         this.dropSelf(DreamTinkerSmeltery.ashenGlass.get());

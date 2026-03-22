@@ -11,6 +11,8 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
+import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
+import org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
 import org.dreamtinker.dreamtinker.tools.items.UnderArmorItem;
 import org.dreamtinker.dreamtinker.utils.CompactUtils.arsNovaUtils;
@@ -37,6 +39,12 @@ public class ItemTooltip {
             if (e.getItemStack().getItem().equals(BlockRegistry.MOB_JAR.get().asItem())){
                 e.getToolTip().add(Component.translatable("tooltip.dreamtinker.mob_jar").withStyle(ChatFormatting.GREEN));
             }
+        }
+        if (e.getItemStack().is(DreamtinkerTagKeys.Items.TRANSMUTE_HEATER)){
+            e.getToolTip().add(Component.translatable("tooltip.dreamtinker.transmute_heater", DreamtinkerCachedConfig.TransmuteHeaterTemperature.get()));
+        }
+        if (e.getItemStack().is(DreamtinkerTagKeys.Items.TRANSMUTE_ACCEL)){
+            e.getToolTip().add(Component.translatable("tooltip.dreamtinker.transmute_accel", DreamtinkerCachedConfig.TransmuteAcceleratorTemperature.get()));
         }
     }
 }

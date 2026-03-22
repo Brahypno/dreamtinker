@@ -106,15 +106,22 @@ public class BlockTagProvider extends BlockTagsProvider {
 
         IntrinsicTagAppender<Block> ashenTankTagAppender = this.tag(DreamtinkerTagKeys.Blocks.ASHEN_TANKS);
         DreamTinkerSmeltery.ashenTank.values().forEach(ashenTankTagAppender::add);
+        this.tag(DreamtinkerTagKeys.Blocks.TRANSMUTE_ACCEL)
+            .add(DreamTinkerSmeltery.ashenAccel.get());
+
+        this.tag(DreamtinkerTagKeys.Blocks.TRANSMUTE_HEATER)
+            .add(DreamTinkerSmeltery.ashenHeater.get());
 
         this.tag(DreamtinkerTagKeys.Blocks.TRANSMUTE_WALL)
             .addTags(DreamtinkerTagKeys.Blocks.ASHEN_BLOCKS)
+            .addTags(DreamtinkerTagKeys.Blocks.TRANSMUTE_ACCEL)
             .addTag(DreamtinkerTagKeys.Blocks.ASHEN_TANKS)
             .add(DreamTinkerSmeltery.ashenGlass.get(), DreamTinkerSmeltery.ashenSoulGlass.get(), DreamTinkerSmeltery.ashenTintedGlass.get(),
                  DreamTinkerSmeltery.ashenLadder.get(), DreamTinkerSmeltery.ashenLamp.get(), DreamTinkerSmeltery.ashenDrain.get(),
                  DreamTinkerSmeltery.ashenChute.get(), DreamTinkerSmeltery.ashenDuct.get());
         this.tag(DreamtinkerTagKeys.Blocks.TRANSMUTE_FLOOR)
             .addTags(DreamtinkerTagKeys.Blocks.ASHEN_BLOCKS)
+            .addTags(DreamtinkerTagKeys.Blocks.TRANSMUTE_HEATER)
             .add(DreamTinkerSmeltery.ashenGlass.get(), DreamTinkerSmeltery.ashenSoulGlass.get(), DreamTinkerSmeltery.ashenTintedGlass.get(),
                  DreamTinkerSmeltery.ashenLadder.get(), DreamTinkerSmeltery.ashenLamp.get(),
                  DreamTinkerSmeltery.ashenLamp.get(), DreamTinkerSmeltery.ashenDrain.get(), DreamTinkerSmeltery.ashenChute.get(),
@@ -152,7 +159,8 @@ public class BlockTagProvider extends BlockTagsProvider {
         tagBlocks(MINEABLE_WITH_PICKAXE, Tiers.NETHERITE.getTag(), metallivorous_stibium_lupus_block);
 
         tagBlocks(MINEABLE_WITH_SHOVEL, DreamTinkerSmeltery.enderMortar);
-        tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_DIAMOND_TOOL, DreamTinkerSmeltery.ashenBricks, DreamTinkerSmeltery.ashenRoad);
+        tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_DIAMOND_TOOL, DreamTinkerSmeltery.ashenBricks, DreamTinkerSmeltery.ashenRoad, DreamTinkerSmeltery.ashenHeater,
+                  DreamTinkerSmeltery.ashenAccel);
         tagBlocks(MINEABLE_WITH_PICKAXE, NEEDS_DIAMOND_TOOL, DreamTinkerSmeltery.ashenStone, DreamTinkerSmeltery.polishedAshenStone,
                   DreamTinkerSmeltery.ashenLadder, DreamTinkerSmeltery.ashenLamp, DreamTinkerSmeltery.ashenGlass,
                   DreamTinkerSmeltery.ashenSoulGlass, DreamTinkerSmeltery.ashenTintedGlass, DreamTinkerSmeltery.ashenGlassPane,

@@ -129,3 +129,4 @@ runs/
 !gradle-wrapper.jar
 /run-data/
 src/generated/resources/.cache
+/AGENTS.md

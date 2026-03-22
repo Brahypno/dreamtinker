@@ -3,8 +3,12 @@ package org.dreamtinker.dreamtinker.smeltery.block.entity.controller;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.items.ItemHandlerHelper;
 import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.smeltery.DreamTinkerSmeltery;
 import org.dreamtinker.dreamtinker.smeltery.block.entity.module.ReverseByproductMeltingModuleInventory;
 import org.dreamtinker.dreamtinker.smeltery.block.entity.multiblock.TransmuteMultiblock;
@@ -14,10 +18,14 @@ import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.library.recipe.FluidValues;
 import slimeknights.tconstruct.smeltery.block.controller.ControllerBlock;
 import slimeknights.tconstruct.smeltery.block.entity.controller.HeatingStructureBlockEntity;
+import slimeknights.tconstruct.smeltery.block.entity.module.EntityMeltingModule;
 import slimeknights.tconstruct.smeltery.block.entity.module.MeltingModuleInventory;
 import slimeknights.tconstruct.smeltery.block.entity.multiblock.HeatingStructureMultiblock;
 
 import javax.annotation.Nullable;
+
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.TransmuteAcceleratorTemperature;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.TransmuteHeaterTemperature;
 
 public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
     /**
@@ -33,6 +41,13 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
      * this is a bit higher than the smeltery as the structure uses more blocks, balances out in larger structures
      */
     private static final int BLOCKS_PER_FUEL = 20;
+    private int heater = 0;
+    private int accelerator = 1;
+    private boolean heaterUpdateQueue = false;
+    protected final EntityMeltingModule
+            entityModule =
+            new EntityMeltingModule(this, tank, this::canMeltEntities, this::insertIntoInventory, () -> structure == null ? null : structure.getBounds());
+
 
     public TransmuteBlockEntity(BlockPos pos, BlockState state) {
         super(DreamTinkerSmeltery.Transmute.get(), pos, state, NAME);
@@ -50,11 +65,9 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
 
     @Override
     protected void heat() {
-
         if (structure == null || level == null){
             return;
         }
-
         // the next set of behaviors all require fuel, skip if no tanks
         if (structure.hasTanks()){
             // every second, interact with entities, will consume fuel if needed
@@ -69,11 +82,12 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
                 case 0:
                     if (!fuelModule.hasFuel()){
                         // if we melted something already, we need fuel
-                        if (entityMelted){
+                        if (entityMelted && getHeatTemperatureBuff() <= 0){
                             fuelModule.findFuel(true);
                         }else {
                             // both alloying and melting need to know the temperature
-                            if (meltingInventory.canHeat(fuelModule.findFuel(false) + getHeatTemperatureBuff())){
+                            if (!meltingInventory.canHeat(getHeatTemperatureBuff()) &&
+                                meltingInventory.canHeat(fuelModule.findFuel(false) + getHeatTemperatureBuff())){
                                 fuelModule.findFuel(true);
                             }
                         }
@@ -81,8 +95,9 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
                     break;
                 // second tick: melt items
                 case 1:
-                    if (fuelModule.hasFuel()){
-                        meltingInventory.heatItems(fuelModule.getTemperature(), fuelModule.getRate() * getHeatTimeMultiplier());
+                    if (fuelModule.hasFuel() || 0 < getHeatTemperatureBuff()){
+                        meltingInventory.heatItems(fuelModule.getTemperature() + getHeatTemperatureBuff(),
+                                                   getHeatRate() + fuelModule.getRate() + getHeatTimeMultiplier());
                     }else {
                         meltingInventory.coolItems();
                     }
@@ -90,12 +105,13 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
                 // fourth tick: consume fuel, update fluids
                 case 3: {
                     // update the active state
-                    boolean hasFuel = fuelModule.hasFuel();
+                    boolean hasFuel = fuelModule.hasFuel() || 0 < getHeatTemperatureBuff();
                     BlockState state = getBlockState();
                     if (state.getValue(ControllerBlock.ACTIVE) != hasFuel){
                         level.setBlockAndUpdate(worldPosition, state.setValue(ControllerBlock.ACTIVE, hasFuel));
                     }
-                    fuelModule.decreaseFuel(fuelRate);
+                    if (fuelModule.hasFuel())
+                        fuelModule.decreaseFuel(fuelRate);
                     break;
                 }
             }
@@ -116,6 +132,7 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
             // fuel rate: every 20 blocks in the wall makes the fuel cost 1 more
             // perimeter: to prevent double counting, frame just added on X and floor
             fuelRate = 1 + (2 * ((dx + 2) * dy) + 2 * (dy * dz) + ((dx + 2) * (dz + 2))) / BLOCKS_PER_FUEL;
+            updateHeatBuff();
         }
     }
 
@@ -125,10 +142,92 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
     }
 
     protected int getHeatTimeMultiplier() {
-        return 1;
+        return 0 < fuelModule.getRate() ? accelerator * TransmuteAcceleratorTemperature.get() : 0;
     }
 
-    protected int getHeatTemperatureBuff() {
-        return 0;
+    protected int getHeatRate() {
+        return getHeatTemperatureBuff() / 100;
+    }
+
+    @SuppressWarnings("deprecation")
+    protected boolean isHeaterBlock(Block block) {
+        return block.builtInRegistryHolder().is(DreamtinkerTagKeys.Blocks.TRANSMUTE_HEATER);
+    }
+
+    @SuppressWarnings("deprecation")
+    protected boolean isAccelBlock(Block block) {
+        return block.builtInRegistryHolder().is(DreamtinkerTagKeys.Blocks.TRANSMUTE_ACCEL);
+    }
+
+    public int getHeatTemperatureBuff() {
+        return heater * TransmuteHeaterTemperature.get();
+    }
+
+    protected void updateHeatBuff() {
+        heaterUpdateQueue = true;
+    }
+
+    @Override
+    protected void serverTick(Level level, BlockPos pos, BlockState state) {
+        super.serverTick(level, pos, state);
+        if (heaterUpdateQueue){
+            checkHeatBuff();
+            heaterUpdateQueue = false;
+        }
+    }
+
+    @Override
+    protected void clientTick(Level level, BlockPos pos, BlockState state) {
+        super.clientTick(level, pos, state);
+        if (state.hasProperty(ControllerBlock.IN_STRUCTURE) && heaterUpdateQueue){
+            checkHeatBuff();
+            heaterUpdateQueue = false;
+        }
+    }
+
+    protected void checkHeatBuff() {
+        accelerator = 0;
+        heater = 0;
+        if (structure != null && level != null){
+            BlockPos min = structure.getMinPos();
+            BlockPos max = structure.getMaxPos();
+            for (int x = min.getX(); x <= max.getX(); x++) {
+                for (int y = min.getY(); y <= max.getY(); y++) {
+                    for (int z = min.getZ(); z <= max.getZ(); z++) {
+                        BlockPos pos = new BlockPos(x, y, z);
+                        BlockState state = level.getBlockState(pos);
+                        if (!state.hasProperty(ControllerBlock.IN_STRUCTURE) || !state.getValue(ControllerBlock.IN_STRUCTURE))
+                            continue;
+                        if (isHeaterBlock(state.getBlock())){
+                            heater++;
+                        }
+                        if (isAccelBlock(state.getBlock())){
+                            accelerator++;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Checks if we can melt entities
+     *
+     * @return True if we can melt entities
+     */
+    private boolean canMeltEntities() {
+        if (fuelModule.hasFuel() || 0 < getHeatTemperatureBuff()){
+            return true;
+        }
+        return fuelModule.findFuel(false) > 0;
+    }
+
+    /**
+     * Inserts an item into the inventory
+     *
+     * @param stack Stack to insert
+     */
+    private ItemStack insertIntoInventory(ItemStack stack) {
+        return ItemHandlerHelper.insertItem(meltingInventory, stack, false);
     }
 }

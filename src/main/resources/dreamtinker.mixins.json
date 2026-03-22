@@ -20,7 +20,7 @@
     "compact.ars_nouveau.AugmentCompatibilityValidatorMixin",
     "compact.ars_nouveau.MethodProjectileMixin",
     "compact.ars_nouveau.PerkUtilMixin"],
-  "client": [
+  "client": ["HeatingStructureScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

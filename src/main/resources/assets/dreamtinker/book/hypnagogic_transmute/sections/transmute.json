@@ -85,5 +85,15 @@
     "name": "ashen_chute",
     "type": "mantle:showcase",
     "data": "transmute/ashen_chute.json"
+  },
+  {
+    "name": "ashen_heater",
+    "type": "mantle:showcase",
+    "data": "transmute/ashen_heater.json"
+  },
+  {
+    "name": "ashen_accelerator",
+    "type": "mantle:showcase",
+    "data": "transmute/ashen_accelerator.json"
   }
 ]

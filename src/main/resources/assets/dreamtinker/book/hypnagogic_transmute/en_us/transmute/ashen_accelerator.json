@@ -1,0 +1,18 @@
+{
+  "title": "Ashen Accelerator",
+  "item": "dreamtinker:ashen_accelerator",
+  "text": [
+    {
+      "text": "With subjective design, Brahypno combined Ashen with the Sniffer Egg of Perpetual Desire, twisting Perpetual Desire into a kind of passionate force, thus creating the Ashen Accelerator. This passion would increase the fuel rate.",
+      "paragraph": true
+    },
+	{
+      "text": "Rate per block could be config",
+      "paragraph": true
+    },
+	{
+      "text": "Accelerator can only be used for the wall of the transmute.",
+      "paragraph": true
+    }
+  ]
+}

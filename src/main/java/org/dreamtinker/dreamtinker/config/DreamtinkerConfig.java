@@ -18,6 +18,17 @@ public class DreamtinkerConfig {
 
     static {
         builder.pop();
+        builder.push("Transmute Configuration");
+    }
+
+    public static final ForgeConfigSpec.IntValue TransmuteHeaterTemperature =
+            builder.comment("The default temperature provided by each heater block").defineInRange("TransmuteHeaterTemperature", 500, 0, 10000);
+    public static final ForgeConfigSpec.IntValue TransmuteFuelAccelerator =
+            builder.comment("The accelerator fuel rate provided by each block").defineInRange("TransmuteFuelAccelerator", 15, 0, 20000);
+
+
+    static {
+        builder.pop();
         builder.push("Tool Configuration");
     }
 
@@ -187,7 +198,7 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.DoubleValue AsOneAB =
             builder.comment("Max Absorption value get when damage larger than max health").defineInRange("AsOneAB", 1000.0, 0, 2000);
     public static final ForgeConfigSpec.ConfigValue<List<? extends String>> TheAsOneBlackList =
-            builder.comment("Effect in this black would not be removed").defineList("asone_blacklist", List.of("modid:effect"),
+            builder.comment("Effect in this black would not be removed").defineList("as_one_blacklist", List.of("modid:effect"),
                                                                                     o -> o instanceof String s && isValidIdFormat(s));
 
 

@@ -186,8 +186,13 @@ public class ItemTagProvider extends ItemTagsProvider {
         this.copy(DreamtinkerTagKeys.Blocks.ASHEN_BLOCKS, DreamtinkerTagKeys.Items.ASHEN_BLOCKS);
         this.copy(Blocks.ASHEN_TANKS, Items.ASHEN_TANKS);
         this.copy(Blocks.TRANSMUTE_BLOCKS, Items.TRANSMUTE_BLOCKS);
+        this.copy(Blocks.TRANSMUTE_HEATER, Items.TRANSMUTE_HEATER);
+        this.copy(Blocks.TRANSMUTE_ACCEL, Items.TRANSMUTE_ACCEL);
         this.tag(Items.TRANSMUTE)
             .addTag(Items.ASHEN_BLOCKS)
+            .addTag(Items.ASHEN_TANKS)
+            .addTag(Items.TRANSMUTE_HEATER)
+            .addTag(Items.TRANSMUTE_ACCEL)
             .addTag(Items.ASHEN_TANKS)
             .add(DreamTinkerSmeltery.transmuteController.asItem(), DreamTinkerSmeltery.ashenLadder.asItem(),
                  DreamTinkerSmeltery.ashenDrain.asItem(), DreamTinkerSmeltery.ashenChute.asItem(), DreamTinkerSmeltery.ashenDuct.asItem(),

@@ -74,7 +74,7 @@ public class DreamTinkerSmeltery extends DreamtinkerModule {
             BLOCKS.register("ashen_lamp", () -> new SearedBlock(ashenSolidProps(1).lightLevel(state -> 15), false), TOOLTIP_BLOCK_ITEM);
 
     // ashen blocks
-    public static final ItemObject<Block> ashenStone, polishedAshenStone, chiseledAshenBricks;
+    public static final ItemObject<Block> ashenStone, polishedAshenStone, chiseledAshenBricks, ashenHeater, ashenAccel;
     public static final FenceBuildingBlockObject ashenBricks;
     public static final BuildingBlockObject ashenRoad;
 
@@ -87,6 +87,10 @@ public class DreamTinkerSmeltery extends DreamtinkerModule {
         ashenBricks = BLOCKS.registerFenceBuilding("ashen_bricks", block, TOOLTIP_BLOCK_ITEM);
         ashenRoad = BLOCKS.registerBuilding("ashen_road", block, TOOLTIP_BLOCK_ITEM);
         chiseledAshenBricks = BLOCKS.register("chiseled_ashen_bricks", block, TOOLTIP_BLOCK_ITEM);
+
+        ashenHeater = BLOCKS.register("ashen_heater", pillar, TOOLTIP_BLOCK_ITEM);
+
+        ashenAccel = BLOCKS.register("ashen_accelerator", pillar, TOOLTIP_BLOCK_ITEM);
     }
 
     // glass
@@ -174,6 +178,8 @@ public class DreamTinkerSmeltery extends DreamtinkerModule {
         accept(output, ashenRoad);
         output.accept(ashenLamp);
         output.accept(chiseledAshenBricks);
+        output.accept(ashenHeater);
+        output.accept(ashenAccel);
 
 
         output.accept(ashenLadder);

@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:casting_basin",
+  "cast": {
+    "item": "dreamtinker:unborn_dragon_egg"
+  },
+  "cast_consumed": true,
+  "cooling_time": 802,
+  "fluid": {
+    "amount": 9000,
+    "tag": "dreamtinker:molten_ender_ash"
+  },
+  "result": "dreamtinker:ashen_heater"
+}

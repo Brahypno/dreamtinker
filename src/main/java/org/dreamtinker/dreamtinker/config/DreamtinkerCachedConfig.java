@@ -65,6 +65,8 @@ public class DreamtinkerCachedConfig {
     public static final ConfigLazy<Double> ArtsMaxManaBonus = lazDoubleInSpec(DreamtinkerConfig.ArtsMaxManaBonus);
     public static final ConfigLazy<Integer> UnbuildLimits = lazIntInSpec(DreamtinkerConfig.UnbuildLimits);
     public static final ConfigLazy<Double> AsOneTT = lazDoubleInSpec(DreamtinkerConfig.AsOneTT);
+    public static final ConfigLazy<Integer> TransmuteHeaterTemperature = lazIntInSpec(DreamtinkerConfig.TransmuteHeaterTemperature);
+    public static final ConfigLazy<Integer> TransmuteAcceleratorTemperature = lazIntInSpec(DreamtinkerConfig.TransmuteFuelAccelerator);
 
     public static final ConfigLazy<java.util.List<Double>> TheSplendourHeart =
             lazDoubleList(DreamtinkerConfig.TheSplendourHeart,

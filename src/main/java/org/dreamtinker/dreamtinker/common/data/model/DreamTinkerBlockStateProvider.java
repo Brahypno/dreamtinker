@@ -118,6 +118,12 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
                    true, null);
         glassBlock(DreamTinkerSmeltery.ashenSoulGlass.get(), DreamTinkerSmeltery.ashenSoulGlassPane.get(), "transmute/soul_glass/",
                    Dreamtinker.getLocation("block/transmute/soul_glass"), Dreamtinker.getLocation("block/transmute/glass_top"), -1, true, translucent);
+        
+        simpleBlockWithItem(DreamTinkerSmeltery.ashenHeater.get(),
+                            models().cubeAll(itemKey(DreamTinkerSmeltery.ashenHeater.get()).getPath(), modLoc("block/transmute/ashen/ashen_heater")));
+
+        simpleBlockWithItem(DreamTinkerSmeltery.ashenAccel.get(),
+                            models().cubeAll(itemKey(DreamTinkerSmeltery.ashenAccel.get()).getPath(), modLoc("block/transmute/ashen/ashen_accelerator")));
     }
 
     protected void slabWithItem(SlabBlock slab, ResourceLocation doubleSlabModel, ResourceLocation texture) {
