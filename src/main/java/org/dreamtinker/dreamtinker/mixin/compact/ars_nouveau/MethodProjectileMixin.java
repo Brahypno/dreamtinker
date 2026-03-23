@@ -19,12 +19,14 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.build.ConditionalStatModifierHook;
 import slimeknights.tconstruct.library.tools.capability.EntityModifierCapability;
 import slimeknights.tconstruct.library.tools.capability.PersistentDataCapability;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
+import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +50,8 @@ public class MethodProjectileMixin {
                 projectiles.add(spell);
             }
             float inaccuracy = ModifierUtil.getInaccuracy(toolStack, shooter);
-            float velocity = Math.max(0.1F, stats.getAccMultiplier() / 2.0F);
+            float velocity =
+                    Math.max(0.1F, ConditionalStatModifierHook.getModifiedStat(toolStack, shooter, ToolStats.VELOCITY) + stats.getAccMultiplier() / 2.0F);
             int opposite = -1;
             int counter = 0;
 
