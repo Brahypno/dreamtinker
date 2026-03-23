@@ -1,6 +1,7 @@
 package org.dreamtinker.dreamtinker.mixin.compact.ars_nouveau;
 
 import com.hollingsworth.arsnouveau.api.spell.AbstractAugment;
+import com.hollingsworth.arsnouveau.api.spell.AbstractCastMethod;
 import com.hollingsworth.arsnouveau.api.spell.SpellValidationError;
 import com.hollingsworth.arsnouveau.common.spell.validation.AugmentCompatibilityValidator;
 import com.hollingsworth.arsnouveau.common.spell.validation.SpellPhraseValidator;
@@ -49,6 +50,9 @@ public class AugmentCompatibilityValidatorMixin {
     private void dt$removeError(SpellPhraseValidator.SpellPhrase phrase, List<SpellValidationError> validationErrors, CallbackInfo ci) {
         validationErrors.removeIf(error ->
                                   {
+                                      if (error.getSpellPart() instanceof AbstractCastMethod){
+                                          return false;
+                                      }
                                       List<SpellPhraseValidator.SpellPhrase.SpellPartPosition<AbstractAugment>> spells =
                                               phrase.getAugmentPositionMap().get(AugmentTinker.INSTANCE.getRegistryName());
 
