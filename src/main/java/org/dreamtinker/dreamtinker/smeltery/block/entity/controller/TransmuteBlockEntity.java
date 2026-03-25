@@ -6,6 +6,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
@@ -20,6 +21,8 @@ import slimeknights.tconstruct.smeltery.block.controller.ControllerBlock;
 import slimeknights.tconstruct.smeltery.block.entity.controller.HeatingStructureBlockEntity;
 import slimeknights.tconstruct.smeltery.block.entity.module.EntityMeltingModule;
 import slimeknights.tconstruct.smeltery.block.entity.module.MeltingModuleInventory;
+import slimeknights.tconstruct.smeltery.block.entity.module.alloying.MultiAlloyingModule;
+import slimeknights.tconstruct.smeltery.block.entity.module.alloying.SmelteryAlloyTank;
 import slimeknights.tconstruct.smeltery.block.entity.multiblock.HeatingStructureMultiblock;
 
 import javax.annotation.Nullable;
@@ -44,10 +47,14 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
     private int heater = 0;
     private int accelerator = 1;
     private boolean heaterUpdateQueue = false;
-    protected final EntityMeltingModule
-            entityModule =
+    protected final EntityMeltingModule entityModule =
             new EntityMeltingModule(this, tank, this::canMeltEntities, this::insertIntoInventory, () -> structure == null ? null : structure.getBounds());
-
+    /**
+     * Module handling alloys
+     */
+    private final SmelteryAlloyTank alloyTank = new SmelteryAlloyTank(tank);
+    private final MultiAlloyingModule alloyingModule = new MultiAlloyingModule(this, alloyTank);
+    private boolean allowAlloying = false;
 
     public TransmuteBlockEntity(BlockPos pos, BlockState state) {
         super(DreamTinkerSmeltery.Transmute.get(), pos, state, NAME);
@@ -86,8 +93,11 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
                             fuelModule.findFuel(true);
                         }else {
                             // both alloying and melting need to know the temperature
-                            if (!meltingInventory.canHeat(getHeatTemperatureBuff()) &&
-                                meltingInventory.canHeat(fuelModule.findFuel(false) + getHeatTemperatureBuff())){
+                            int fuelTemp = fuelModule.findFuel(false);
+                            boolean meltingNeedFuel = !meltingInventory.canHeat(getHeatTemperatureBuff()) &&
+                                                      meltingInventory.canHeat(fuelTemp + getHeatTemperatureBuff());
+                            boolean alloyingNeedFuel = alloyingModuleCanAlloy(fuelTemp);
+                            if (meltingNeedFuel || alloyingNeedFuel){
                                 fuelModule.findFuel(true);
                             }
                         }
@@ -100,6 +110,12 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
                                                    getHeatRate() + fuelModule.getRate() + getHeatTimeMultiplier());
                     }else {
                         meltingInventory.coolItems();
+                    }
+                    break;
+                case 2:
+                    if (allowAlloying && (fuelModule.hasFuel() || 0 < getHeatTemperatureBuff())){
+                        alloyTank.setTemperature(fuelModule.getTemperature() + getHeatTemperatureBuff());
+                        alloyingModule.doAlloy();
                     }
                     break;
                 // fourth tick: consume fuel, update fluids
@@ -185,6 +201,12 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
         }
     }
 
+    protected void updateAlloyFunction(boolean enable) {
+        if (allowAlloying != enable){
+            allowAlloying = enable;
+        }
+    }
+
     protected void checkHeatBuff() {
         accelerator = 0;
         heater = 0;
@@ -229,5 +251,29 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
      */
     private ItemStack insertIntoInventory(ItemStack stack) {
         return ItemHandlerHelper.insertItem(meltingInventory, stack, false);
+    }
+
+    private boolean alloyingModuleCanAlloy(int fuelTemp) {
+        if (!allowAlloying)
+            return false;
+        if (0 < getHeatTemperatureBuff()){
+            alloyTank.setTemperature(getHeatTemperatureBuff());
+            if (!alloyingModule.canAlloy()){
+                alloyTank.setTemperature(fuelTemp + getHeatTemperatureBuff());
+                return alloyingModule.canAlloy();
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void notifyFluidsChanged(FluidChange type, FluidStack fluid) {
+        super.notifyFluidsChanged(type, fluid);
+
+        // adding a new fluid means recipes that previously did not match might match now
+        // can ignore removing a fluid as that is handled internally by the module
+        if (allowAlloying && type == FluidChange.ADDED){
+            alloyingModule.clearCachedRecipes();
+        }
     }
 }
