@@ -106,8 +106,8 @@ public class mei extends BattleModifier {
     @Override
     public void addToolStats(IToolContext context, ModifierEntry modifier, ModifierStatsBuilder builder) {
         int level = context.getModifierLevel(this);
-        ToolStats.ATTACK_DAMAGE.add(builder, level * 1.3);
-        ToolStats.ATTACK_SPEED.add(builder, level * 0.3);
+        ToolStats.ATTACK_DAMAGE.add(builder, level * 0.13);
+        ToolStats.ATTACK_SPEED.add(builder, level * 0.13);
     }
 
     @Override
@@ -116,12 +116,12 @@ public class mei extends BattleModifier {
             return;
         int level = modifier.getLevel();
         double mod;
-        if (200 <= level){
-            mod = Math.pow(level - 200, 2) / 100 + 4.2;
+        if (200 < level){
+            mod = Math.pow(level - 200, 1.5) / 100 + 3.15;
         }else if (100 <= level){
-            mod = 4.0 * (level - 100) / 100 + .2;
+            mod = 3.0 * (level - 100) / 100 + .15;
         }else {
-            mod = 0.2 * level / 100;
+            mod = 0.15 * level / 100;
         }
         consumer.accept(Attributes.ATTACK_DAMAGE, new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.ATTACK_DAMAGE.getDescriptionId(), mod,
                                                                         AttributeModifier.Operation.MULTIPLY_BASE));
@@ -134,7 +134,7 @@ public class mei extends BattleModifier {
                             new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.ARMOR_TOUGHNESS.getDescriptionId(), mod,
                                                   AttributeModifier.Operation.MULTIPLY_BASE));
         }
-        if (130 <= level && tool.getModifierLevel(DreamtinkerModifiers.despair_mist.getId()) < 1)
+        if (120 <= level && tool.getModifierLevel(DreamtinkerModifiers.despair_mist.getId()) < 1)
             consumer.accept(Attributes.MOVEMENT_SPEED, new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.MOVEMENT_SPEED.getDescriptionId(),
                                                                              2.0 * (level - 100) / 100 + .1, AttributeModifier.Operation.MULTIPLY_BASE));
     }
@@ -148,7 +148,7 @@ public class mei extends BattleModifier {
             ModDataNBT toolData = tool.getPersistentData();
             int last_second = toolData.getInt(TAG_MLT);
             int cur_exp_cap = (int) Math.ceil(
-                    Math.max(1, max_level_second / Math.max(1.0, level / 100.0)));//MAYBE SHOULDNT this fast or this is super slow......i dont know
+                    Math.max(1, max_level_second / Math.max(1.0, level / 100.0)));//MAYBE SHOULDN'T this fast or this is super slow......i dont know
             if (cur_exp_cap <= last_second + 1){
                 ToolStack ts = ToolStack.from(stack);
                 ts.addModifier(this.getId(), 1);
@@ -170,7 +170,7 @@ public class mei extends BattleModifier {
                 }
                 if (100 <= level)
                     attributes.addAll(Arrays.asList(Attributes.ARMOR, Attributes.ARMOR_TOUGHNESS));
-                if (130 <= level)
+                if (120 <= level)
                     attributes.add(Attributes.MOVEMENT_SPEED);
                 for (Attribute attr : attributes) {
                     AttributeInstance attr_instance = player.getAttribute(attr);
@@ -183,9 +183,9 @@ public class mei extends BattleModifier {
                         }
                     }
                 }
-                if (250 <= level || !RedShadeEnable.get())
+                if (150 <= level || !RedShadeEnable.get())
                     MaskService.ensureOn(player, 0xDC3D3A3A, -1);
-                else if (200 <= level)
+                else if (100 <= level)
                     MaskService.ensureOn(player, 0xAC8A221C, -1);
             }
         }
@@ -198,11 +198,11 @@ public class mei extends BattleModifier {
         if (attacker.level().isClientSide || null == target)
             return knockback;
         int level = tool.getModifierLevel(this.getId());
-        if (150 <= level){
+        if (200 <= level){
             DamageSource dam =
                     new DamageSource(attacker.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.GENERIC_KILL),
                                      attacker, attacker);
-            target.hurt(dam, 200 <= level ? level * 2 : damage);
+            target.hurt(dam, level * 2);
         }
         return knockback;
     }
