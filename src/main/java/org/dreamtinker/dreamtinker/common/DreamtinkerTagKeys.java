@@ -152,6 +152,7 @@ public class DreamtinkerTagKeys {
         public static final TagKey<Block> TRANSMUTE_HEATER = dreamtinkerTag("transmute_heater");
         public static final TagKey<Block> TRANSMUTE_ACCEL = dreamtinkerTag("transmute_accelerator");
         public static final TagKey<Block> TRANSMUTE_ALLOY_SWITCH = dreamtinkerTag("transmute_alloyer_switch");
+        public static final TagKey<Block> TRANSMUTE_MELTING_SWITCH = dreamtinkerTag("transmute_melting_switch");
         /**
          * Blocks that make up the transmute structure
          */

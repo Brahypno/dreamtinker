@@ -1323,5 +1323,10 @@
   "block.dreamtinker.ashen_alloy_switch": "烬灰合金开关",
   "block.dreamtinker.ashen_alloy_switch.tooltip": "右键开启、关闭嬗变合金功能。每结构只容许一个\n搭建嬗变炉的建材",
   "message.dreamtinker.ashen_alloy_switch.mode_0": "嬗变炉合金功能：关闭",
-  "message.dreamtinker.ashen_alloy_switch.mode_1": "嬗变炉合金功能：开启"
+  "message.dreamtinker.ashen_alloy_switch.mode_1": "嬗变炉合金功能：开启",
+  "block.dreamtinker.ashen_melt_switch": "烬灰熔炼开关",
+  "block.dreamtinker.ashen_melt_switch.tooltip": "右键点击切换熔炼模式。 每结构只容许一个\n搭建嬗变炉的建材",
+  "message.dreamtinker.ashen_melt_switch.mode_0": "嬗变炉熔炼功能：嬗变炉（默认）",
+  "message.dreamtinker.ashen_melt_switch.mode_1": "嬗变炉熔炼功能：冶炼炉",
+  "message.dreamtinker.ashen_melt_switch.mode_2": "嬗变炉熔炼功能：熔铸炉"
 }

@@ -100,5 +100,10 @@
     "name": "ashen_alloy_switch",
     "type": "mantle:showcase",
     "data": "transmute/ashen_alloy_switch.json"
+  },
+  {
+    "name": "ashen_melt_switch",
+    "type": "mantle:showcase",
+    "data": "transmute/ashen_melt_switch.json"
   }
 ]

@@ -5,6 +5,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.dreamtinker.dreamtinker.smeltery.block.entity.controller.TransmuteBlockEntity;
+import slimeknights.tconstruct.common.config.Config;
 import slimeknights.tconstruct.library.recipe.melting.IMeltingContainer;
 import slimeknights.tconstruct.library.recipe.melting.IMeltingRecipe;
 import slimeknights.tconstruct.smeltery.block.entity.controller.HeatingStructureBlockEntity;
@@ -13,18 +14,50 @@ import slimeknights.tconstruct.smeltery.block.entity.module.MeltingModuleInvento
 import slimeknights.tconstruct.smeltery.block.entity.tank.SmelteryTank;
 
 import javax.annotation.Nonnull;
+import java.util.Arrays;
+import java.util.function.Consumer;
 
-public class ReverseByproductMeltingModuleInventory extends MeltingModuleInventory {
+public class SuperByproductMeltingModuleInventory extends MeltingModuleInventory {
     private final TransmuteBlockEntity parent;
+    private MeltingModule[] smeltery_modules;//Just using oreRate for smeltery one
+    private MeltType meltType = MeltType.Transmute;
 
-    public ReverseByproductMeltingModuleInventory(TransmuteBlockEntity parent, IFluidHandler fluidHandler, IMeltingContainer.IOreRate oreRate, int size) {
+    public SuperByproductMeltingModuleInventory(TransmuteBlockEntity parent, IFluidHandler fluidHandler, IMeltingContainer.IOreRate oreRate, int size) {
         super(parent, fluidHandler, oreRate, size);
         this.parent = parent;
+        this.smeltery_modules = new MeltingModule[size];
     }
 
-    public ReverseByproductMeltingModuleInventory(TransmuteBlockEntity parent, IFluidHandler fluidHandler, IMeltingContainer.IOreRate oreRate) {
-        super(parent, fluidHandler, oreRate);
-        this.parent = parent;
+    public SuperByproductMeltingModuleInventory(TransmuteBlockEntity parent, IFluidHandler fluidHandler, IMeltingContainer.IOreRate oreRate) {
+        this(parent, fluidHandler, oreRate, 0);
+    }
+
+    public void updateMeltType(MeltType meltType) {
+        this.meltType = meltType;
+    }
+
+    public void resize(int newSize, Consumer<ItemStack> stackConsumer) {
+        super.resize(newSize, stackConsumer);
+        smeltery_modules = Arrays.copyOf(smeltery_modules, getSlots());
+    }
+
+    @Nonnull
+    @Override
+    public ItemStack extractItem(int slot, int amount, boolean simulate) {
+        if (0 == amount || !validSlot(slot))
+            return ItemStack.EMPTY;
+
+
+        ItemStack existing = getStackInSlot(slot);
+        if (existing.isEmpty())
+            return ItemStack.EMPTY;
+
+        if (simulate){
+            return existing.copy();
+        }else {
+            setStackInSlot(slot, ItemStack.EMPTY);
+            return existing;
+        }
     }
 
     @Override
@@ -67,32 +100,43 @@ public class ReverseByproductMeltingModuleInventory extends MeltingModuleInvento
         return canInsert ? ItemHandlerHelper.copyStackWithSize(stack, stack.getCount() - (getSlotLimit(slot) - module.getStack().getCount())) : stack;
     }
 
-    @Nonnull
-    @Override
-    public ItemStack extractItem(int slot, int amount, boolean simulate) {
-        if (amount == 0){
-            return ItemStack.EMPTY;
-        }
-        if (!validSlot(slot)){
-            return ItemStack.EMPTY;
-        }
-
-        ItemStack existing = getStackInSlot(slot);
-        if (existing.isEmpty()){
-            return ItemStack.EMPTY;
-        }
-
-        if (simulate){
-            return existing.copy();
-        }else {
-            setStackInSlot(slot, ItemStack.EMPTY);
-            return existing;
-        }
-    }
-
-
     @Override
     protected boolean tryFillTank(int index, IMeltingRecipe recipe) {
+        return switch (meltType) {
+            case SMELTERY -> tryFillTankSmeltery(index, recipe);
+            case Foundry -> tryFillTankFoundry(index, recipe);
+            default -> tryFillFluidTransmute(index, recipe);
+        };
+    }
+
+    private boolean tryFillTankFoundry(int index, IMeltingRecipe recipe) {
+        if (super.tryFillTank(index, recipe)){
+            recipe.handleByproducts(getModule(index), fluidHandler);
+            return true;
+        }
+        return false;
+    }
+
+    private MeltingModule getSmelteryModule(int slot) {
+        if (!validSlot(slot)){
+            throw new IndexOutOfBoundsException();
+        }
+        if (smeltery_modules[slot] == null){
+            smeltery_modules[slot] = new MeltingModule(parent, recipe -> tryFillTank(slot, recipe), Config.COMMON.smelteryOreRate, slot);
+        }
+        return smeltery_modules[slot];
+    }
+
+    private boolean tryFillTankSmeltery(int index, IMeltingRecipe recipe) {
+        FluidStack fluid = recipe.getOutput(getSmelteryModule(index));
+        if (fluidHandler.fill(fluid.copy(), IFluidHandler.FluidAction.SIMULATE) == fluid.getAmount()){
+            fluidHandler.fill(fluid, IFluidHandler.FluidAction.EXECUTE);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean tryFillFluidTransmute(int index, IMeltingRecipe recipe) {
         IMeltingContainer inv = getModule(index);
 
         // 1) 主产物
@@ -176,6 +220,24 @@ public class ReverseByproductMeltingModuleInventory extends MeltingModuleInvento
             }
         }
         return true;
+    }
+
+    public enum MeltType {
+        Transmute,
+        SMELTERY,
+        Foundry,
+        Transmute_v2;
+
+        public static MeltType toMeltType(int i) {
+            return switch (i) {
+                case 0 -> Transmute;
+                case 1 -> SMELTERY;
+                case 2 -> Foundry;
+                case 3 -> Transmute_v2;
+                default -> throw new IllegalArgumentException("Invalid melt type: " + i);
+            };
+        }
+
     }
 
     private static java.util.List<FluidStack> collectNonEmptyFluids(IFluidHandler handler) {

@@ -80,9 +80,14 @@ public class TransmuteMultiblock extends HeatingStructureMultiblock<TransmuteBlo
         return block.builtInRegistryHolder().is(DreamtinkerTagKeys.Blocks.TRANSMUTE_ALLOY_SWITCH);
     }
 
+    @SuppressWarnings("deprecation")
+    protected boolean isValidMeltingSwitch(Block block) {
+        return block.builtInRegistryHolder().is(DreamtinkerTagKeys.Blocks.TRANSMUTE_MELTING_SWITCH);
+    }
+
     @Override
     public boolean shouldUpdate(Level world, MultiblockStructureData structure, BlockPos pos, BlockState state) {
-        return isValidAlloySwitch(state.getBlock()) || super.shouldUpdate(world, structure, pos, state);
+        return isValidAlloySwitch(state.getBlock()) || isValidMeltingSwitch(state.getBlock()) || super.shouldUpdate(world, structure, pos, state);
     }
 
     @Nullable
@@ -90,7 +95,9 @@ public class TransmuteMultiblock extends HeatingStructureMultiblock<TransmuteBlo
     public StructureData detectMultiblock(Level world, BlockPos master, Direction facing) {
         StructureData data = super.detectMultiblock(world, master, facing);
         if (null != data && hasAtMostOneMatchingBlockOnBorder(world, data.getMinPos(), data.getMaxPos(),
-                                                              state -> isValidAlloySwitch(state.getBlock()))){
+                                                              state -> isValidAlloySwitch(state.getBlock())) &&
+            hasAtMostOneMatchingBlockOnBorder(world, data.getMinPos(), data.getMaxPos(),
+                                              state -> isValidMeltingSwitch(state.getBlock()))){
             return data;
         }else
             return null;

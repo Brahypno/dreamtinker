@@ -1325,5 +1325,11 @@
   "block.dreamtinker.ashen_alloy_switch": "Ashen Alloy Switch",
   "block.dreamtinker.ashen_alloy_switch.tooltip": "Right click to allow alloy for transmute. Only one allowed per structure\nPart of the Transmute",
   "message.dreamtinker.ashen_alloy_switch.mode_0": "Transmute alloy feature disabled.",
-  "message.dreamtinker.ashen_alloy_switch.mode_1": "Transmute alloy feature enabled."
+  "message.dreamtinker.ashen_alloy_switch.mode_1": "Transmute alloy feature enabled.",
+
+  "block.dreamtinker.ashen_melt_switch": "Ashen Melt Switch",
+  "block.dreamtinker.ashen_melt_switch.tooltip": "Right click to change melting method. Only one allowed per structure\nPart of the Transmute",
+  "message.dreamtinker.ashen_melt_switch.mode_0": "Transmute melting mode changed to: Transmute.",
+  "message.dreamtinker.ashen_melt_switch.mode_1": "Transmute melting mode changed to: Smeltery.",
+  "message.dreamtinker.ashen_melt_switch.mode_2": "Transmute melting mode changed to: Foundry."
 }

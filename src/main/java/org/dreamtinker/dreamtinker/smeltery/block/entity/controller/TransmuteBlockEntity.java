@@ -12,7 +12,7 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.smeltery.DreamTinkerSmeltery;
 import org.dreamtinker.dreamtinker.smeltery.block.component.AshenButtonBlock;
-import org.dreamtinker.dreamtinker.smeltery.block.entity.module.ReverseByproductMeltingModuleInventory;
+import org.dreamtinker.dreamtinker.smeltery.block.entity.module.SuperByproductMeltingModuleInventory;
 import org.dreamtinker.dreamtinker.smeltery.block.entity.multiblock.TransmuteMultiblock;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.TinkerTags;
@@ -68,7 +68,7 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
 
     @Override
     protected @NotNull MeltingModuleInventory createMeltingInventory() {
-        return new ReverseByproductMeltingModuleInventory(this, tank, Config.COMMON.foundryOreRate);
+        return new SuperByproductMeltingModuleInventory(this, tank, Config.COMMON.foundryOreRate);
     }
 
     @Override
@@ -176,6 +176,16 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
         return block.builtInRegistryHolder().is(DreamtinkerTagKeys.Blocks.TRANSMUTE_ACCEL);
     }
 
+    @SuppressWarnings("deprecation")
+    protected boolean isAlloySwitchBlock(Block block) {
+        return block.builtInRegistryHolder().is(DreamtinkerTagKeys.Blocks.TRANSMUTE_ALLOY_SWITCH);
+    }
+
+    @SuppressWarnings("deprecation")
+    protected boolean isMeltSwitchBlock(Block block) {
+        return block.builtInRegistryHolder().is(DreamtinkerTagKeys.Blocks.TRANSMUTE_MELTING_SWITCH);
+    }
+
     public int getHeatTemperatureBuff() {
         return heater * TransmuteHeaterTemperature.get();
     }
@@ -223,8 +233,16 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
                         if (isAccelBlock(state.getBlock())){
                             accelerator++;
                         }
-                        if (!allowAlloying && state.hasProperty(AshenButtonBlock.Function_Set) && state.getValue(AshenButtonBlock.Function_Set) == 1)
+                        if (!allowAlloying && isAlloySwitchBlock(state.getBlock()) &&
+                            state.hasProperty(AshenButtonBlock.Function_Set) && state.getValue(AshenButtonBlock.Function_Set) == 1)
                             allowAlloying = true;
+
+                        if (isMeltSwitchBlock(state.getBlock()) &&
+                            state.hasProperty(AshenButtonBlock.Function_Set) &&
+                            meltingInventory instanceof SuperByproductMeltingModuleInventory meltingModuleInventory){
+                            meltingModuleInventory.updateMeltType(
+                                    SuperByproductMeltingModuleInventory.MeltType.toMeltType(state.getValue(AshenButtonBlock.Function_Set)));
+                        }
                     }
                 }
             }

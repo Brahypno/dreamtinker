@@ -114,6 +114,7 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
         this.dropSelf(DreamTinkerSmeltery.enderMortar.get());
         this.dropTable(DreamTinkerSmeltery.transmuteController.get());
         this.dropSelf(DreamTinkerSmeltery.ashenAlloySwitch.get());
+        this.dropSelf(DreamTinkerSmeltery.ashenMeltSwitch.get());
 
 
     }

@@ -76,7 +76,7 @@ public class DreamTinkerSmeltery extends DreamtinkerModule {
             BLOCKS.register("ashen_lamp", () -> new SearedBlock(ashenSolidProps(1).lightLevel(state -> 15), false), TOOLTIP_BLOCK_ITEM);
 
     // ashen blocks
-    public static final ItemObject<Block> ashenStone, polishedAshenStone, chiseledAshenBricks, ashenHeater, ashenAccel, ashenAlloySwitch;
+    public static final ItemObject<Block> ashenStone, polishedAshenStone, chiseledAshenBricks, ashenHeater, ashenAccel, ashenAlloySwitch, ashenMeltSwitch;
     public static final FenceBuildingBlockObject ashenBricks;
     public static final BuildingBlockObject ashenRoad;
 
@@ -96,6 +96,7 @@ public class DreamTinkerSmeltery extends DreamtinkerModule {
 
 
         ashenAlloySwitch = BLOCKS.register("ashen_alloy_switch", () -> new AshenButtonBlock(properties, false, 1), TOOLTIP_BLOCK_ITEM);
+        ashenMeltSwitch = BLOCKS.register("ashen_melt_switch", () -> new AshenButtonBlock(properties, false, 2), TOOLTIP_BLOCK_ITEM);
     }
 
     // glass
@@ -171,6 +172,7 @@ public class DreamTinkerSmeltery extends DreamtinkerModule {
         output.accept(ashenHeater);
         output.accept(ashenAccel);
         output.accept(ashenAlloySwitch);
+        output.accept(ashenMeltSwitch);
 
 
         output.accept(ashenLadder);
@@ -202,8 +204,8 @@ public class DreamTinkerSmeltery extends DreamtinkerModule {
                         ashenSoulGlass.get(), ashenTintedGlass.get());
                 set.addAll(ashenBricks.values());
                 set.addAll(ashenRoad.values());
-                // scorched
                 set.add(ashenAlloySwitch.get());
+                set.add(ashenMeltSwitch.get());
             });
 
     // controllers

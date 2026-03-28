@@ -1,0 +1,14 @@
+{
+  "title": "Ashen Melt Switch",
+  "item": "dreamtinker:ashen_melt_switch",
+  "text": [
+    {
+      "text": "Adding Ashen Melt Switch to Transmute will change the melting method of the Transmute. Each Transmute Furnace can only have one switch.",
+      "paragraph": true
+    },
+	{
+      "text": "—Look on my Works, ye Mighty, and despair!—",
+      "paragraph": true
+    }
+  ]
+}
