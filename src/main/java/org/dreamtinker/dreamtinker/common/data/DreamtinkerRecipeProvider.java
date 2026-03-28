@@ -186,7 +186,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                           .save(consumer, prefix(DreamtinkerFluids.molten_albedo_stibium, folder));
         AlloyRecipeBuilder.alloy(FluidOutput.fromFluid(DreamtinkerFluids.liquid_smoky_antimony.get(), FluidValues.INGOT * 2), 3600)
                           .addInput(DreamtinkerFluids.molten_ascending_antimony.getTag(), FluidValues.INGOT)
-                          .addInput(TinkerFluids.liquidSoul.getTag(), FluidValues.GLASS_BLOCK)
+                          .addInput(DreamtinkerFluids.liquid_pure_soul.getTag(), FluidValues.GLASS_BLOCK)
                           .save(consumer, prefix(DreamtinkerFluids.liquid_smoky_antimony, folder));
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_evil, FluidValues.INGOT * 2)
                           .addInput(DreamtinkerFluids.molten_nefariousness.getTag(), FluidValues.GEM * 4)
@@ -204,13 +204,6 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                           .addInput(DreamtinkerFluids.molten_void.getTag(), FluidValues.SLIMEBALL)
                           .addInput(DreamtinkerTagKeys.Fluids.molten_echo_shard, FluidValues.GEM)
                           .save(consumer, prefix(DreamtinkerFluids.molten_soul_aether, folder));
-        AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_soul_aether, FluidValues.INGOT)
-                          .addInput(DreamtinkerFluids.molten_nefariousness.getTag(), FluidValues.GEM)
-                          .addInput(DreamtinkerFluids.liquid_pure_soul.getTag(), FluidValues.GEM)
-                          .addInput(DreamtinkerFluids.unstable_liquid_aether.getTag(), FluidValues.INGOT)
-                          .addInput(DreamtinkerFluids.molten_void.getTag(), FluidValues.SLIMEBALL)
-                          .addInput(DreamtinkerTagKeys.Fluids.molten_echo, FluidValues.GEM)
-                          .save(consumer, wrap(DreamtinkerFluids.molten_soul_aether, folder, "_1"));
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.reversed_shadow, FluidValues.SLIMEBALL)
                           .addInput(DreamtinkerFluids.molten_void.getTag(), FluidValues.SLIMEBALL * 2)
                           .addInput(TinkerFluids.moltenEnder.getTag(), FluidValues.SLIMEBALL * 2)

@@ -174,7 +174,7 @@ public class DreamtinkerFluids {
             registerFluid(EL_FLUIDS, "unstable_liquid_aether", 1600, 400, 10, 15,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.SNOW, 15), 10, 0) {});
     public static final FlowingFluidObject<ForgeFlowingFluid> liquid_pure_soul =
-            registerFluid(EL_FLUIDS, "liquid_pure_soul", 600, 400, 10, 15,
+            registerFluid(FLUIDS, "liquid_pure_soul", 600, 400, 10, 15,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.LAPIS, 15), 10, 0) {});
     public static final FlowingFluidObject<ForgeFlowingFluid> molten_nefariousness =
             registerFluid(EL_FLUIDS, "molten_nefariousness", 1200, 400, 10, 6,
