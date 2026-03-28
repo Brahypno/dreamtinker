@@ -95,5 +95,10 @@
     "name": "ashen_accelerator",
     "type": "mantle:showcase",
     "data": "transmute/ashen_accelerator.json"
+  },
+  {
+    "name": "ashen_alloy_switch",
+    "type": "mantle:showcase",
+    "data": "transmute/ashen_alloy_switch.json"
   }
 ]

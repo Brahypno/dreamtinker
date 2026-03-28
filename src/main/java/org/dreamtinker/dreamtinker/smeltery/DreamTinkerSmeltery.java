@@ -21,9 +21,11 @@ import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.DreamtinkerModule;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
+import org.dreamtinker.dreamtinker.smeltery.block.component.AshenButtonBlock;
 import org.dreamtinker.dreamtinker.smeltery.block.component.AshenTankBlock;
 import org.dreamtinker.dreamtinker.smeltery.block.controller.TransmuteControllerBlock;
 import org.dreamtinker.dreamtinker.smeltery.block.entity.component.AshenTankBlockEntity;
+import org.dreamtinker.dreamtinker.smeltery.block.entity.component.TransmuteComponentBlockEntity;
 import org.dreamtinker.dreamtinker.smeltery.block.entity.controller.TransmuteBlockEntity;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import slimeknights.mantle.registration.object.BuildingBlockObject;
@@ -74,7 +76,7 @@ public class DreamTinkerSmeltery extends DreamtinkerModule {
             BLOCKS.register("ashen_lamp", () -> new SearedBlock(ashenSolidProps(1).lightLevel(state -> 15), false), TOOLTIP_BLOCK_ITEM);
 
     // ashen blocks
-    public static final ItemObject<Block> ashenStone, polishedAshenStone, chiseledAshenBricks, ashenHeater, ashenAccel;
+    public static final ItemObject<Block> ashenStone, polishedAshenStone, chiseledAshenBricks, ashenHeater, ashenAccel, ashenAlloySwitch;
     public static final FenceBuildingBlockObject ashenBricks;
     public static final BuildingBlockObject ashenRoad;
 
@@ -88,9 +90,12 @@ public class DreamTinkerSmeltery extends DreamtinkerModule {
         ashenRoad = BLOCKS.registerBuilding("ashen_road", block, TOOLTIP_BLOCK_ITEM);
         chiseledAshenBricks = BLOCKS.register("chiseled_ashen_bricks", block, TOOLTIP_BLOCK_ITEM);
 
-        ashenHeater = BLOCKS.register("ashen_heater", pillar, TOOLTIP_BLOCK_ITEM);
+        ashenHeater = BLOCKS.register("ashen_heater", block, TOOLTIP_BLOCK_ITEM);
 
-        ashenAccel = BLOCKS.register("ashen_accelerator", pillar, TOOLTIP_BLOCK_ITEM);
+        ashenAccel = BLOCKS.register("ashen_accelerator", block, TOOLTIP_BLOCK_ITEM);
+
+
+        ashenAlloySwitch = BLOCKS.register("ashen_alloy_switch", () -> new AshenButtonBlock(properties, false, 1), TOOLTIP_BLOCK_ITEM);
     }
 
     // glass
@@ -145,21 +150,6 @@ public class DreamTinkerSmeltery extends DreamtinkerModule {
         set.addAll(ashenTank.values());
     });
 
-    // controllers
-    public static final ItemObject<TransmuteControllerBlock> transmuteController =
-            BLOCKS.register("transmute_controller", () -> new TransmuteControllerBlock(ashen.get()), TOOLTIP_BLOCK_ITEM);
-    public static final RegistryObject<BlockEntityType<TransmuteBlockEntity>>
-            Transmute = BLOCK_ENTITIES.register("transmute", TransmuteBlockEntity::new, transmuteController);
-
-
-    public static final CastItemObject chainSawCoreCast = MODI_TOOLS.registerCast(DreamtinkerToolParts.chainSawCore.getId().getPath(), ITEM_PROPS);
-    public static final CastItemObject chainSawTeethCast = MODI_TOOLS.registerCast(DreamtinkerToolParts.chainSawTeeth.getId().getPath(), ITEM_PROPS);
-
-    public static final CastItemObject NovaCoverCast = MODI_TOOLS.registerCast(DreamtinkerToolParts.NovaCover.getId().getPath(), ITEM_PROPS);
-    public static final CastItemObject NovaRostrumCast = MODI_TOOLS.registerCast(DreamtinkerToolParts.NovaRostrum.getId().getPath(), ITEM_PROPS);
-    public static final CastItemObject NovaWrapperCast = MODI_TOOLS.registerCast(DreamtinkerToolParts.NovaWrapper.getId().getPath(), ITEM_PROPS);
-    public static final CastItemObject NovaMiscCast = MODI_TOOLS.registerCast(DreamtinkerToolParts.NovaMisc.getId().getPath(), ITEM_PROPS);
-
     private static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, Output output) {
         output.accept(enderMortar);
         output.accept(ashenBrick.get());
@@ -180,6 +170,7 @@ public class DreamTinkerSmeltery extends DreamtinkerModule {
         output.accept(chiseledAshenBricks);
         output.accept(ashenHeater);
         output.accept(ashenAccel);
+        output.accept(ashenAlloySwitch);
 
 
         output.accept(ashenLadder);
@@ -204,6 +195,32 @@ public class DreamTinkerSmeltery extends DreamtinkerModule {
 
 
     }
+
+    public static final RegistryObject<BlockEntityType<TransmuteComponentBlockEntity>> transmuteComponent =
+            BLOCK_ENTITIES.register("transmute_component", TransmuteComponentBlockEntity::new, set -> {
+                set.add(ashenStone.get(), polishedAshenStone.get(), chiseledAshenBricks.get(), ashenLadder.get(), ashenLamp.get(), ashenGlass.get(),
+                        ashenSoulGlass.get(), ashenTintedGlass.get());
+                set.addAll(ashenBricks.values());
+                set.addAll(ashenRoad.values());
+                // scorched
+                set.add(ashenAlloySwitch.get());
+            });
+
+    // controllers
+    public static final ItemObject<TransmuteControllerBlock> transmuteController =
+            BLOCKS.register("transmute_controller", () -> new TransmuteControllerBlock(ashen.get()), TOOLTIP_BLOCK_ITEM);
+    public static final RegistryObject<BlockEntityType<TransmuteBlockEntity>>
+            Transmute = BLOCK_ENTITIES.register("transmute", TransmuteBlockEntity::new, transmuteController);
+
+
+    public static final CastItemObject chainSawCoreCast = MODI_TOOLS.registerCast(DreamtinkerToolParts.chainSawCore.getId().getPath(), ITEM_PROPS);
+    public static final CastItemObject chainSawTeethCast = MODI_TOOLS.registerCast(DreamtinkerToolParts.chainSawTeeth.getId().getPath(), ITEM_PROPS);
+
+    public static final CastItemObject NovaCoverCast = MODI_TOOLS.registerCast(DreamtinkerToolParts.NovaCover.getId().getPath(), ITEM_PROPS);
+    public static final CastItemObject NovaRostrumCast = MODI_TOOLS.registerCast(DreamtinkerToolParts.NovaRostrum.getId().getPath(), ITEM_PROPS);
+    public static final CastItemObject NovaWrapperCast = MODI_TOOLS.registerCast(DreamtinkerToolParts.NovaWrapper.getId().getPath(), ITEM_PROPS);
+    public static final CastItemObject NovaMiscCast = MODI_TOOLS.registerCast(DreamtinkerToolParts.NovaMisc.getId().getPath(), ITEM_PROPS);
+
 
     @SubscribeEvent
     void commonSetup(FMLCommonSetupEvent event) {

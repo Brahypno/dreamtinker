@@ -1,0 +1,14 @@
+{
+  "title": "烬灰合金开关",
+  "item": "dreamtinker:ashen_alloy_switch",
+  "text": [
+    {
+      "text": "在烬灰炉中加入烬灰合金开关可以开启关闭嬗变炉的合金功能。每个嬗变炉只能有一个开关。",
+      "paragraph": true
+    },
+    {
+      "text": "——现在你知道我的嬗变炉功能齐全了吧？——",
+      "paragraph": true
+    }
+	]
+}

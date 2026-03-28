@@ -11,6 +11,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.smeltery.DreamTinkerSmeltery;
+import org.dreamtinker.dreamtinker.smeltery.block.component.AshenButtonBlock;
 import org.dreamtinker.dreamtinker.smeltery.block.entity.module.ReverseByproductMeltingModuleInventory;
 import org.dreamtinker.dreamtinker.smeltery.block.entity.multiblock.TransmuteMultiblock;
 import org.jetbrains.annotations.NotNull;
@@ -201,15 +202,11 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
         }
     }
 
-    protected void updateAlloyFunction(boolean enable) {
-        if (allowAlloying != enable){
-            allowAlloying = enable;
-        }
-    }
-
     protected void checkHeatBuff() {
+        boolean previous_allowAlloying = allowAlloying;
         accelerator = 0;
         heater = 0;
+        allowAlloying = false;
         if (structure != null && level != null){
             BlockPos min = structure.getMinPos();
             BlockPos max = structure.getMaxPos();
@@ -226,9 +223,13 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
                         if (isAccelBlock(state.getBlock())){
                             accelerator++;
                         }
+                        if (!allowAlloying && state.hasProperty(AshenButtonBlock.Function_Set) && state.getValue(AshenButtonBlock.Function_Set) == 1)
+                            allowAlloying = true;
                     }
                 }
             }
+            if (!previous_allowAlloying && allowAlloying)
+                alloyingModule.clearCachedRecipes();
         }
     }
 

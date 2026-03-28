@@ -8,12 +8,14 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.smeltery.DreamTinkerSmeltery;
+import org.dreamtinker.dreamtinker.smeltery.block.component.AshenButtonBlock;
 import slimeknights.mantle.client.model.builder.ColoredModelBuilder;
 import slimeknights.mantle.client.model.builder.ConnectedModelBuilder;
 import slimeknights.mantle.client.model.builder.MantleItemLayerBuilder;
@@ -118,12 +120,14 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
                    true, null);
         glassBlock(DreamTinkerSmeltery.ashenSoulGlass.get(), DreamTinkerSmeltery.ashenSoulGlassPane.get(), "transmute/soul_glass/",
                    Dreamtinker.getLocation("block/transmute/soul_glass"), Dreamtinker.getLocation("block/transmute/glass_top"), -1, true, translucent);
-        
+
         simpleBlockWithItem(DreamTinkerSmeltery.ashenHeater.get(),
                             models().cubeAll(itemKey(DreamTinkerSmeltery.ashenHeater.get()).getPath(), modLoc("block/transmute/ashen/ashen_heater")));
 
         simpleBlockWithItem(DreamTinkerSmeltery.ashenAccel.get(),
                             models().cubeAll(itemKey(DreamTinkerSmeltery.ashenAccel.get()).getPath(), modLoc("block/transmute/ashen/ashen_accelerator")));
+
+        cubeAllIntTextureBlock(DreamTinkerSmeltery.ashenAlloySwitch.get(), "transmute/ashen_alloy_switch", AshenButtonBlock.Function_Set, 1);
     }
 
     protected void slabWithItem(SlabBlock slab, ResourceLocation doubleSlabModel, ResourceLocation texture) {
@@ -255,6 +259,7 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
         return BuiltInRegistries.ITEM.getKey(item.asItem());
     }
 
+
     private void controllerStates(Block block, ModelFile unformed, ModelFile inactive, ModelFile active) {
         var vb = getVariantBuilder(block);
 
@@ -297,6 +302,23 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
               .addModels(new ConfiguredModel(active, 0, y, false));
         }
         itemModels().withExistingParent(itemKey(block).getPath(), inactive.getLocation());
+    }
+
+    protected void cubeAllIntTextureBlock(Block block, String name, IntegerProperty textureProperty, int maxValue) {
+        BlockModelBuilder[] builtModels = new BlockModelBuilder[maxValue + 1];
+
+        for (int i = 0; i <= maxValue; i++) {
+            builtModels[i] = models().cubeAll(name + "_" + i, modLoc("block/" + name + "_" + i));
+        }
+
+        getVariantBuilder(block).forAllStates(state -> {
+            int textureIndex = state.getValue(textureProperty);
+            int clamped = Math.max(0, Math.min(textureIndex, maxValue));
+
+            return ConfiguredModel.builder().modelFile(builtModels[clamped]).build();
+        });
+
+        simpleBlockItem(block, builtModels[0]);
     }
 
     /**

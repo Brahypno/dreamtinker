@@ -1321,5 +1321,9 @@
   "tooltip.dreamtinker.transmute_heater": "Increase %d temperature for the Transmute when put in structure",
   "block.dreamtinker.ashen_accelerator": "Ashen Accelerator",
   "block.dreamtinker.ashen_accelerator.tooltip": "Use preservation wish to increase fuel rate for the Transmute.\nCan only be used for the wall of the transmute.",
-  "tooltip.dreamtinker.transmute_accel": "Increase %d fuel rate for the Transmute when put in structure"
+  "tooltip.dreamtinker.transmute_accel": "Increase %d fuel rate for the Transmute when put in structure",
+  "block.dreamtinker.ashen_alloy_switch": "Ashen Alloy Switch",
+  "block.dreamtinker.ashen_alloy_switch.tooltip": "Right click to allow alloy for transmute. Only one allowed per structure\nPart of the Transmute",
+  "message.dreamtinker.ashen_alloy_switch.mode_0": "Transmute alloy feature disabled.",
+  "message.dreamtinker.ashen_alloy_switch.mode_1": "Transmute alloy feature enabled."
 }
