@@ -39,7 +39,7 @@ public class AugmentTinker extends AbstractAugment {
 
     @Override
     public int getDefaultManaCost() {
-        return 10;
+        return AugmentAmplify.INSTANCE.getDefaultManaCost();
     }
 
     public SpellStats.Builder applyModifiers(SpellStats.Builder builder, AbstractSpellPart spellPart, HitResult rayTraceResult, Level world, LivingEntity shooter, SpellContext spellContext) {
@@ -47,7 +47,7 @@ public class AugmentTinker extends AbstractAugment {
         if (casterTool.getItem() instanceof ModifiableSpellBook){
             ToolStack tool = ToolStack.from(casterTool);
             InteractionHand hand = shooter.getMainHandItem().equals(casterTool) ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
-            float damage = 0;
+            float damage;
             if (isMelee(spellContext)){
                 Entity target = rayTraceResult instanceof EntityHitResult er ? er.getEntity() : shooter;
                 ToolAttackContext context =

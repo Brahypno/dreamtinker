@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum;
+package org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.ars;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -9,8 +9,7 @@ import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import java.util.Arrays;
 import java.util.List;
 
-public class MalumSolTiferet extends NoLevelsModifier {
-
+public class NovaAshenResolve extends NoLevelsModifier {
     @Override
     public @NotNull Component getDisplayName(int level) {
         final String fulfill = this.getTranslationKey() + "_fulfill";

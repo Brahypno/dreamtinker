@@ -346,6 +346,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId nova_manipulation_essence = id("nova_manipulation_essence");
         public static final ModifierId nova_water_essence = id("nova_water_essence");
         public static final ModifierId nova_mana_reduce = id("nova_mana_reduce");
+        public static final ModifierId nova_ashen_resolve = id("nova_ashen_resolve");
 
         private static ModifierId id(String name) {
             return new ModifierId(Dreamtinker.MODID, name);

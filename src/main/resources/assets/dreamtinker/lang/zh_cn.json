@@ -670,7 +670,13 @@
   "modifier.dreamtinker.acheron": "忘川",
   "modifier.dreamtinker.acheron.flavor": "向绝望者致敬",
   "modifier.dreamtinker.acheron.description": "仅对极限模式下的玩家生效。攻击后获得等同伤害数量的伤害吸收，最大为五倍生命上限。",
-  "modifier.dreamtinker.acheron.salvage": "Salute to the despairing.",
+  "modifier.dreamtinker.acheron.salvage": "向绝望者致敬",
+  "modifier.dreamtinker.nova_ashen_resolve": "✶",
+  "modifier.dreamtinker.nova_ashen_resolve.flavor": "持久的等待，崭新的艺术",
+  "modifier.dreamtinker.nova_ashen_resolve.description": "",
+  "modifier.dreamtinker.nova_ashen_resolve_fulfill": "灰烬定志",
+  "modifier.dreamtinker.nova_ashen_resolve_fulfill.flavor": "定要掀起燎原之火",
+  "modifier.dreamtinker.nova_ashen_resolve_fulfill.description": "按失去血量比例，减少法术消耗。低于半血时，获得额外的法术强度。允许消耗全部魔力来释放法术。",
 
   "material.dreamtinker.echo_alloy": "回响合金",
   "material.dreamtinker.echo_alloy.flavor": "是神秘的回响，还是秘密的回响",
@@ -1259,7 +1265,7 @@
   "stat.dreamtinker.tool.display.designs": "范围攻击",
 
   "dreamtinker.glyph_name.glyph_tinker": "匠魂之力",
-  "dreamtinker.glyph_desc.glyph_tinker": "仅在历艰成书上有效，容许弹射物，法术效果触发部分匠魂的词条与属性。类似强化但连续使用仅生效一次。效果部分限定在伤害相关类型上",
+  "dreamtinker.glyph_desc.glyph_tinker": "仅在本模组提供的历艰成书和施法强化上有效，容许弹射物，法术效果触发部分匠魂的词条与属性。类似强化但连续使用仅生效一次。效果部分限定在伤害相关类型上。用工匠的挖掘等级提高强化数值。",
 
   "tooltip.dreamtinker.mob_jar": "现在它可以被摆放在熔炼炉内部以熔炼内部实体。\n可以用法术治愈内部实体",
 

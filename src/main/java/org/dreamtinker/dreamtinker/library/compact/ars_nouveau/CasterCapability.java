@@ -36,7 +36,7 @@ public record CasterCapability(Supplier<? extends IToolStackView> tool) implemen
         }
 
         @Override
-        public <T> LazyOptional<T> getCapability(IToolStackView tool, Capability<T> cap) {
+        public <T> @NotNull LazyOptional<T> getCapability(IToolStackView tool, Capability<T> cap) {
             if (cap == NovaRegistry.Caster_CAP){
                 return toolCaster.cast();
             }

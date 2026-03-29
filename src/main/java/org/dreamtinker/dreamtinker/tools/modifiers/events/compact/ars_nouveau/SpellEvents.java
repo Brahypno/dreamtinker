@@ -116,16 +116,30 @@ public class SpellEvents {
         }
     }
 
+    public static void PreEffectResolveEvent(EffectResolveEvent.Pre event) {
+        LivingEntity caster = event.shooter;
+        if (DTModifierCheck.ModifierInHand(caster, DreamtinkerModifiers.Ids.nova_ashen_resolve)){
+            float lost = (.5f - caster.getHealth() / caster.getMaxHealth()) * 10;
+            if (0.0f < lost)
+                event.spellStats.setAmpMultiplier(event.spellStats.getAmpMultiplier() + lost);
+        }
+    }
+
     public static void SpellCostCalcEvent(SpellCostCalcEvent event) {
         if (event.isCanceled())
             return;
+
         LivingEntity caster = event.context.getUnwrappedCaster();
+        if (DTModifierCheck.ModifierInHand(caster, DreamtinkerModifiers.Ids.nova_ashen_resolve)){
+            float lost = (1 - caster.getHealth() / caster.getMaxHealth()) * .5f;
+            if (0.0f < lost)
+                event.currentCost *= (1 - lost);
+        }
         event.currentCost -= 10 * DTModifierCheck.getEntityModifierNum(caster, DreamtinkerModifiers.Ids.nova_mana_reduce);
         event.currentCost -= 0 < DTModifierCheck.getItemModifierNum(event.context.getCasterTool(), NovaRegistry.nova_enchanter_sword.getId()) ?
                              AugmentAmplify.INSTANCE.getCastingCost() : 0;
         event.currentCost -= 0 < DTModifierCheck.getItemModifierNum(event.context.getCasterTool(), NovaRegistry.nova_spell_bow.getId()) ?
                              MethodProjectile.INSTANCE.getCastingCost() : 0;
-
     }
 
     public static void EffectResolveEvent(EffectResolveEvent event) {

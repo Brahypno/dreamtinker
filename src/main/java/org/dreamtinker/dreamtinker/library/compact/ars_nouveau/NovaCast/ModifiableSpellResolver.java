@@ -2,11 +2,21 @@ package org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaCast;
 
 import com.hollingsworth.arsnouveau.api.event.EffectResolveEvent;
 import com.hollingsworth.arsnouveau.api.event.SpellResolveEvent;
+import com.hollingsworth.arsnouveau.api.mana.IManaCap;
 import com.hollingsworth.arsnouveau.api.spell.*;
+import com.hollingsworth.arsnouveau.common.network.Networking;
+import com.hollingsworth.arsnouveau.common.network.NotEnoughManaPacket;
+import com.hollingsworth.arsnouveau.common.util.PortUtil;
+import com.hollingsworth.arsnouveau.setup.registry.CapabilityRegistry;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.Spell.AugmentTinker;
+import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
+import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 
 import java.util.HashSet;
 import java.util.List;
@@ -15,6 +25,22 @@ import java.util.Set;
 public class ModifiableSpellResolver extends SpellResolver {
     public ModifiableSpellResolver(SpellContext spellContext) {
         super(spellContext);
+    }
+
+    @Override
+    protected boolean enoughMana(LivingEntity entity) {
+        int totalCost = getResolveCost();
+        IManaCap manaCap = CapabilityRegistry.getMana(entity).orElse(null);
+        if (manaCap == null)
+            return false;
+        boolean canCast = totalCost <= manaCap.getCurrentMana() || (entity instanceof Player player && player.isCreative());
+        canCast |= DTModifierCheck.ModifierInHand(entity, DreamtinkerModifiers.Ids.nova_ashen_resolve);
+        if (!canCast && !entity.getCommandSenderWorld().isClientSide && !silent){
+            PortUtil.sendMessageNoSpam(entity, Component.translatable("ars_nouveau.spell.no_mana"));
+            if (entity instanceof ServerPlayer serverPlayer)
+                Networking.sendToPlayerClient(new NotEnoughManaPacket(totalCost), serverPlayer);
+        }
+        return canCast;
     }
 
     @Override

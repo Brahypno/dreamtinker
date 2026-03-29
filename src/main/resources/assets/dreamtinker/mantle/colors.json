@@ -170,7 +170,8 @@
     "nova_wand": "#00B4D8",
     "nova_spell_bow": "#FFB703",
     "nova_enchanter_shield": "#E056FD",
-    "nova_mana_shield": "#4C1D95"
+    "nova_mana_shield": "#4C1D95",
+    "nova_ashen_resolve": "#6E6274"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",

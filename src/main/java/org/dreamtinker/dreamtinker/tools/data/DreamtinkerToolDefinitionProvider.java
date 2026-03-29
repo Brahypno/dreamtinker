@@ -170,7 +170,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                                                              .set(ToolStats.DRAW_SPEED, 1.5f)
                                                              .set(ToolStats.ATTACK_SPEED, 1.2f)
                                                              .set(ToolStats.DURABILITY, 0.6f).build()))
-                .module(new ToolSlotsModule(ImmutableMap.of(SlotType.SOUL, 6, SlotType.ABILITY, 2, SlotType.UPGRADE, 1)))
+                .module(new ToolSlotsModule(ImmutableMap.of(SlotType.SOUL, 4, SlotType.ABILITY, 2, SlotType.UPGRADE, 1)))
                 // traits
                 .module(ToolTraitsModule.builder()
                                         .trait(DreamtinkerModifiers.memory_base, 1)//malkuth
@@ -178,6 +178,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                                         .trait(DreamtinkerModifiers.splendour_heart, 1)//Hod
                                         .trait(ModifierIds.soulbound, 1)
                                         .trait(DreamtinkerModifiers.malum_sol_tiferet)//Tiferet
+                                        .trait(DreamtinkerModifiers.Ids.nova_ashen_resolve)//Netzach
                                         .build())
                 // behavior
                 .module(ToolActionsModule.of(ToolActions.SWORD_DIG, ToolActions.PICKAXE_DIG, ToolActions.SHOVEL_DIG, TinkerToolActions.SHIELD_DISABLE))

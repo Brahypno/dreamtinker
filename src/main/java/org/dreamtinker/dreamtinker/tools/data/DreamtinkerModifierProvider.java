@@ -636,6 +636,8 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                           .build());
 
         buildModifier(Ids.nova_mana_reduce, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"));
+        buildModifier(Ids.nova_ashen_resolve, not(DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau")))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
     }
 
     @Override

@@ -137,6 +137,7 @@ public class Dreamtinker {
                 forgeEventBus.addListener(EventPriority.HIGHEST, SpellEvents::PostSpellDamageEvent);
                 forgeEventBus.addListener(EventPriority.HIGHEST, SpellEvents::SpellProjectileHitEvent);
                 forgeEventBus.addListener(EventPriority.HIGHEST, SpellEvents::SpellCostCalcEvent);
+                forgeEventBus.addListener(EventPriority.HIGHEST, SpellEvents::PreEffectResolveEvent);
                 forgeEventBus.addListener(SpellEvents::EffectResolveEvent);
                 NovaRegistry.postInit();
             }

@@ -671,6 +671,12 @@
   "modifier.dreamtinker.acheron.flavor": "Salute to the despairing.",
   "modifier.dreamtinker.acheron.description": "Only Obtainable Through hardcode mode. Gain Absorption after attack",
   "modifier.dreamtinker.acheron.salvage": "Salute to the despairing.",
+  "modifier.dreamtinker.nova_ashen_resolve": "✶",
+  "modifier.dreamtinker.nova_ashen_resolve.flavor": "The endurance of living hidden in nouveau arts",
+  "modifier.dreamtinker.nova_ashen_resolve.description": "",
+  "modifier.dreamtinker.nova_ashen_resolve_fulfill": "Ashen Resolve",
+  "modifier.dreamtinker.nova_ashen_resolve_fulfill.flavor": "We've made a choice against your fate!",
+  "modifier.dreamtinker.nova_ashen_resolve_fulfill.description": "Reduce spell cost based on lost health percentage. When lower than half health, gain extra spell amplify. And allow users cast at cost of entire mana bar",
 
   "material.dreamtinker.echo_alloy": "Echo Alloy",
   "material.dreamtinker.echo_alloy.flavor": "Its echo of mystery, or echo of enigma",
@@ -1258,7 +1264,7 @@
   "stat.dreamtinker.tool.display.designs": "Circle Attack",
 
   "dreamtinker.glyph_name.glyph_tinker": "Tinker ability",
-  "dreamtinker.glyph_desc.glyph_tinker": "Only working in the Per Aspera Scriptum and allow tinkers` modifiers&tool status being used. Like amplify but not triggered continuously and mostly limited on glyph that deal damage.",
+  "dreamtinker.glyph_desc.glyph_tinker": "Only working in the Per Aspera Scriptum other casting modifier and allow tinkers` modifiers&tool status being used. Like amplify but not triggered continuously and mostly limited on glyph that deal damage. Use tool harvest tier to increase amplify",
 
   "tooltip.dreamtinker.mob_jar": "Now This jar block can be put inside any Transmute and melt entity inside\n Use spell to heal entity inside.",
 

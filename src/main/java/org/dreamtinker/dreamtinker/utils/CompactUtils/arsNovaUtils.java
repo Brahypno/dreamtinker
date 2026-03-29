@@ -134,6 +134,5 @@ public class arsNovaUtils {
 
             perkProvider.getPerkHolder(stack).appendPerkTooltip(tooltip, stack);
         }
-
     }
 }
