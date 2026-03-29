@@ -6,12 +6,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
+import org.dreamtinker.dreamtinker.smeltery.block.component.AshenButtonBlock;
 import org.dreamtinker.dreamtinker.smeltery.block.entity.controller.TransmuteBlockEntity;
 import slimeknights.tconstruct.smeltery.block.entity.multiblock.HeatingStructureMultiblock;
 import slimeknights.tconstruct.smeltery.block.entity.multiblock.MultiblockStructureData;
 
 import javax.annotation.Nullable;
-import java.util.function.Predicate;
 
 public class TransmuteMultiblock extends HeatingStructureMultiblock<TransmuteBlockEntity> {
     public TransmuteMultiblock(TransmuteBlockEntity parent) {
@@ -42,7 +42,7 @@ public class TransmuteMultiblock extends HeatingStructureMultiblock<TransmuteBlo
         return block.builtInRegistryHolder().is(DreamtinkerTagKeys.Blocks.TRANSMUTE_WALL);
     }
 
-    public static boolean hasAtMostOneMatchingBlockOnBorder(Level level, BlockPos minPos, BlockPos maxPos, Predicate<BlockState> predicate) {
+    private boolean hasAtMostOneMatching(Level level, BlockPos minPos, BlockPos maxPos) {
         int minX = minPos.getX();
         int minY = minPos.getY();
         int minZ = minPos.getZ();
@@ -50,7 +50,8 @@ public class TransmuteMultiblock extends HeatingStructureMultiblock<TransmuteBlo
         int maxY = maxPos.getY();
         int maxZ = maxPos.getZ();
 
-        int count = 0;
+        int alloy_switch_count = 0;
+        int melt_switch_count = 0;
 
         for (int x = minX; x <= maxX; x++) {
             for (int y = minY; y <= maxY; y++) {
@@ -62,11 +63,15 @@ public class TransmuteMultiblock extends HeatingStructureMultiblock<TransmuteBlo
                     BlockPos pos = new BlockPos(x, y, z);
                     BlockState state = level.getBlockState(pos);
 
-                    if (predicate.test(state)){
-                        count++;
-                        if (count > 1){
+                    if (isValidAlloySwitch(state)){
+                        alloy_switch_count++;
+                        if (alloy_switch_count > 1)
                             return false;
-                        }
+                    }
+                    if (isValidMeltingSwitch(state)){
+                        melt_switch_count++;
+                        if (melt_switch_count > 1)
+                            return false;
                     }
                 }
             }
@@ -76,28 +81,27 @@ public class TransmuteMultiblock extends HeatingStructureMultiblock<TransmuteBlo
     }
 
     @SuppressWarnings("deprecation")
-    protected boolean isValidAlloySwitch(Block block) {
-        return block.builtInRegistryHolder().is(DreamtinkerTagKeys.Blocks.TRANSMUTE_ALLOY_SWITCH);
+    protected boolean isValidAlloySwitch(BlockState state) {
+        return state.hasProperty(AshenButtonBlock.Function_Set) &&
+               state.getBlock().builtInRegistryHolder().is(DreamtinkerTagKeys.Blocks.TRANSMUTE_ALLOY_SWITCH);
     }
 
     @SuppressWarnings("deprecation")
-    protected boolean isValidMeltingSwitch(Block block) {
-        return block.builtInRegistryHolder().is(DreamtinkerTagKeys.Blocks.TRANSMUTE_MELTING_SWITCH);
+    protected boolean isValidMeltingSwitch(BlockState state) {
+        return state.hasProperty(AshenButtonBlock.Function_Set) &&
+               state.getBlock().builtInRegistryHolder().is(DreamtinkerTagKeys.Blocks.TRANSMUTE_MELTING_SWITCH);
     }
 
     @Override
     public boolean shouldUpdate(Level world, MultiblockStructureData structure, BlockPos pos, BlockState state) {
-        return isValidAlloySwitch(state.getBlock()) || isValidMeltingSwitch(state.getBlock()) || super.shouldUpdate(world, structure, pos, state);
+        return isValidAlloySwitch(state) || isValidMeltingSwitch(state) || super.shouldUpdate(world, structure, pos, state);
     }
 
     @Nullable
     @Override
     public StructureData detectMultiblock(Level world, BlockPos master, Direction facing) {
         StructureData data = super.detectMultiblock(world, master, facing);
-        if (null != data && hasAtMostOneMatchingBlockOnBorder(world, data.getMinPos(), data.getMaxPos(),
-                                                              state -> isValidAlloySwitch(state.getBlock())) &&
-            hasAtMostOneMatchingBlockOnBorder(world, data.getMinPos(), data.getMaxPos(),
-                                              state -> isValidMeltingSwitch(state.getBlock()))){
+        if (null != data && hasAtMostOneMatching(world, data.getMinPos(), data.getMaxPos())){
             return data;
         }else
             return null;
