@@ -159,7 +159,7 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
     }
 
     protected int getHeatTimeMultiplier() {
-        return 0 < fuelModule.getRate() ? accelerator * TransmuteAcceleratorTemperature.get() : 0;
+        return accelerator * TransmuteAcceleratorTemperature.get();
     }
 
     protected int getHeatRate() {

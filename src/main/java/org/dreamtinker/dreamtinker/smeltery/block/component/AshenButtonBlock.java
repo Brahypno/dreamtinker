@@ -45,7 +45,7 @@ public class AshenButtonBlock extends SearedBlock {
                 String path = id.getPath().replace('/', '.');
                 String key = "message." + id.getNamespace() + "." + path + ".mode_";
                 player.sendSystemMessage(Component.translatable(key + next));
-                SmelteryComponentBlockEntity.updateNeighbors(level, pos, state);
+                SmelteryComponentBlockEntity.updateNeighbors(level, pos, newState);
             }
 
             return InteractionResult.sidedSuccess(level.isClientSide);
