@@ -118,7 +118,7 @@ public class WeaponTransformation extends BattleModifier {
                     consumer.accept(Attributes.KNOCKBACK_RESISTANCE,
                                     new AttributeModifier(uuid,
                                                           Attributes.KNOCKBACK_RESISTANCE.getDescriptionId(),
-                                                          -multi,
+                                                          -Math.min(.50f, multi),
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                     consumer.accept(ForgeMod.ENTITY_GRAVITY.get(),
                                     new AttributeModifier(uuid,
