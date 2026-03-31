@@ -1,6 +1,10 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraftforge.common.ForgeMod;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.jetbrains.annotations.NotNull;
@@ -14,6 +18,9 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.stat.ModifierStatsBuilder;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.tools.modules.combat.FieryAttackModule;
+
+import java.util.UUID;
+import java.util.function.BiConsumer;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.flamingMemoryStatusBoost;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.flamingMemoryLifeDrain;
@@ -46,6 +53,16 @@ public class FlamingMemory extends BattleModifier {
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
         context.getAttacker().heal((float) (damageDealt * levels(tool) * flamingMemoryLifeDrain.get()));
+    }
+
+    @Override
+    public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
+        if (!tool.isBroken())
+            consumer.accept(ForgeMod.ENTITY_REACH.get(),
+                            new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
+                                                  ForgeMod.ENTITY_REACH.get().getDescriptionId(),
+                                                  3 + modifier.getLevel(),
+                                                  AttributeModifier.Operation.ADDITION));
     }
 
     @Override

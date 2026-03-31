@@ -164,13 +164,13 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 .module(new SetStatsModule(StatsNBT.builder()
                                                    .set(ToolStats.ATTACK_DAMAGE, 1f)
                                                    .set(ToolStats.ATTACK_SPEED, 2f)
-                                                   .set(ToolStats.DRAW_SPEED, 3f)
+                                                   .set(ToolStats.DRAW_SPEED, 3.7f)
                                                    .set(ToolStats.BLOCK_AMOUNT, 10).build()))
                 .module(new MultiplyStatsModule(MultiplierNBT.builder()
                                                              .set(ToolStats.DRAW_SPEED, 1.5f)
                                                              .set(ToolStats.ATTACK_SPEED, 1.2f)
-                                                             .set(ToolStats.DURABILITY, 0.6f).build()))
-                .module(new ToolSlotsModule(ImmutableMap.of(SlotType.SOUL, 4, SlotType.ABILITY, 2, SlotType.UPGRADE, 1)))
+                                                             .set(ToolStats.DURABILITY, 4.07f).build()))
+                .module(new ToolSlotsModule(ImmutableMap.of(SlotType.SOUL, 3, SlotType.ABILITY, 1, SlotType.UPGRADE, 2)))
                 // traits
                 .module(ToolTraitsModule.builder()
                                         .trait(DreamtinkerModifiers.memory_base, 1)//malkuth

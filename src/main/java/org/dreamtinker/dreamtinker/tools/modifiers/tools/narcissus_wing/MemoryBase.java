@@ -52,8 +52,8 @@ import static slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHel
 public class MemoryBase extends BattleModifier {
     private final Fluid fallback_fluid = DreamtinkerFluids.blood_soul.get();
 
-    private int getLevel(IToolStackView toolStackView) {
-        return toolStackView.getModifierLevel(this.getId()) + toolStackView.getModifierLevel(TinkerModifiers.expanded.get()) * 2;
+    public static int getLevel(IToolStackView toolStackView) {
+        return toolStackView.getModifierLevel(DreamtinkerModifiers.memory_base.getId()) + toolStackView.getModifierLevel(TinkerModifiers.expanded.get()) * 2;
     }
 
     @Override
@@ -81,12 +81,12 @@ public class MemoryBase extends BattleModifier {
     }
 
     @Override
-    public UseAnim getUseAction(IToolStackView tool, ModifierEntry modifier) {
+    public @NotNull UseAnim getUseAction(IToolStackView tool, ModifierEntry modifier) {
         return BlockingModifier.blockWhileCharging(tool, UseAnim.BOW);
     }
 
     @Override
-    public InteractionResult onToolUse(IToolStackView tool, ModifierEntry modifier, Player player, InteractionHand hand, InteractionSource source) {
+    public @NotNull InteractionResult onToolUse(IToolStackView tool, ModifierEntry modifier, Player player, InteractionHand hand, InteractionSource source) {
         if (!tool.isBroken() && source == InteractionSource.RIGHT_CLICK && tool.getModifierLevel(DreamtinkerModifiers.flaming_memory.getId()) < 1){
             // launch if the fluid has effects, cannot simulate as we don't know the target yet
             FluidStack fluid = TANK_HELPER.getFluid(tool);

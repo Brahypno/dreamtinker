@@ -13,7 +13,6 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
@@ -62,11 +61,19 @@ public class NarcissusFluidProjectileRenderer<T extends NarcissusFluidProjectile
         // 让火苗更像“实体”：朝运动方向&轻微自转（可按需保留/删掉）
         Vec3 d = e.getDeltaMovement();
         if (d.lengthSqr() > 1.0E-4){
-            float yRot = (float) (Mth.atan2(d.z, d.x) * (180F / Math.PI)) - 90f;
-            pose.mulPose(Axis.YP.rotationDegrees(yRot));
+            double h = Math.sqrt(d.x * d.x + d.z * d.z);
+
+            // 水平朝向
+            float yawRot = (float) (Math.atan2(d.z, d.x) * 180.0 / Math.PI) - 90.0F;
+
+            // 俯仰：向上飞时负角，向下飞时正角（通常这样更像原版弹射物）
+            float pitchRot = (float) (-(Math.atan2(d.y, h) * 180.0 / Math.PI));
+
+            pose.mulPose(Axis.YP.rotationDegrees(yawRot));
+            pose.mulPose(Axis.ZP.rotationDegrees(pitchRot));
+            // 让“贴图朝上”改成“箭头朝前”
+            pose.mulPose(Axis.ZP.rotationDegrees(90.0F));
         }
-        float spin = (e.tickCount + pt) * 6.0f;        // 6°/tick 的小转动
-        pose.mulPose(Axis.YP.rotationDegrees(spin));
 
         // 用实体渲染管线绑定“方块图集”；不剔除背面
         //VertexConsumer vc = buf.getBuffer(RenderType.entityCutoutNoCull(InventoryMenu.BLOCK_ATLAS));

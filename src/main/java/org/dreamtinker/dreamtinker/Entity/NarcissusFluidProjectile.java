@@ -28,6 +28,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
+import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.MemoryBase;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.TinkerDamageTypes;
 import slimeknights.tconstruct.fluids.TinkerFluids;
@@ -139,7 +140,7 @@ public class NarcissusFluidProjectile extends Projectile {
             // 未命中：推进到完整终点
             Vec3 to = from.add(vel);
             this.setPos(to.x, to.y, to.z);
-            if (level().isClientSide){
+            if (level().isClientSide && life <= 590){
                 level().addParticle(ParticleTypes.SOUL_FIRE_FLAME, getX(), getY(), getZ(), 0, 0, 0);
             }
         }
@@ -243,11 +244,11 @@ public class NarcissusFluidProjectile extends Projectile {
     protected void onHitEntity(@NotNull EntityHitResult result) {
         Entity target = result.getEntity();
         float f = (float) this.getDeltaMovement().length();
-        int i = Mth.ceil(Mth.clamp((double) f * this.power, 0.0F, Integer.MAX_VALUE));
+        int dmg = Mth.ceil(Mth.clamp((double) f * this.power, 0.0F, Integer.MAX_VALUE));
 
         if (this.isCritArrow()){
-            long j = this.random.nextInt(i / 2 + 2);
-            i = (int) Math.min(j + (long) i, 2147483647L);
+            long j = this.random.nextInt(dmg / 2 + 2);
+            dmg = (int) Math.min(j + (long) dmg, 2147483647L);
         }
 
         Entity entity1 = this.getOwner();
@@ -264,7 +265,7 @@ public class NarcissusFluidProjectile extends Projectile {
             }
             if (target instanceof LivingEntity livingentity &&
                 target.hurt(damagesource,
-                            null != toolStackView && 2 < toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) ? 2 * i : i)){
+                            null != toolStackView && 2 < toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) ? 2 * dmg : dmg)){
                 if (this.knock_back > 0){
                     double d0 = Math.max(0.0F, (double) 1.0F - livingentity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
                     Vec3 vec3 =
@@ -283,7 +284,6 @@ public class NarcissusFluidProjectile extends Projectile {
                     if (this.isOnFire()){
                         target.setSecondsOnFire(5 * Math.max(1, this.level().random.nextInt(3)));
                     }
-
             }
         }
 
@@ -304,12 +304,16 @@ public class NarcissusFluidProjectile extends Projectile {
                     }else {
                         this.setFluid(fluid);
                     }
-                    target.invulnerableTime = 0;
-                    ToolAttackUtil.performAttack(toolStackView,
-                                                 ToolAttackContext.attacker((LivingEntity) this.getOwner()).target(target).cooldown(1).applyAttributes()
-                                                                  .build());
+                    int times = null != toolStackView ? Math.max(1, MemoryBase.getLevel(toolStackView) / 3) : 1;
+                    for (int i = 0; i < times; i++) {
+                        target.invulnerableTime = 0;
+                        if (toolStackView != null){
+                            ToolAttackUtil.performAttack(toolStackView,
+                                                         ToolAttackContext.attacker((LivingEntity) this.getOwner()).target(target).cooldown(1).applyAttributes()
+                                                                          .build());
+                        }
 
-
+                    }
                 }
             }
 
@@ -343,7 +347,7 @@ public class NarcissusFluidProjectile extends Projectile {
         double z = packet.getZa();
 
         for (int i = 0; i < 7; ++i) {
-            double offset = 0.4 + 0.1 * (double) i;
+            double offset = 1.4 + 0.1 * (double) i;
             this.level().addParticle(ParticleTypes.SOUL_FIRE_FLAME, this.getX(), this.getY() * .4 - 1, this.getZ(), x * offset, y, z * offset);
         }
 

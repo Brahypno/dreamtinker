@@ -2,14 +2,13 @@
   "tool": "dreamtinker:narcissus_wing",
   "text": [
   { "text": "Memory, Wish, Soul, Persona, Reason......This ritual blade that exists because of you.\nThis dream only meaning for you, before story ends" },
-  { "text": "Right Interaction of Narcissus wing could launch memory projectile;Left click have 2 Modes. Use Tool Interaction button to change Mode. Harvest Will could do large harvest, Looting Will increase Loot and apply Glow to enemies ", "paragraph": true }
+  { "text": "Right Interaction of Narcissus wing could launch memory projectile; Expanded is effective for this tool", "paragraph": true }
   ],
   "properties": [
-    "+1 Damage",
     "2 Attack Speed 120% Attacking Multiplier",
-    "2.5 Draw Speed 150% Drawing Multiplier",
+    "3.7 Draw Speed 150% Drawing Multiplier",
     "1.00 Arrow Velocity 0.75 Accuracy",
-    "60% Durability Multiplier",
+    "407% Durability Multiplier",
     "A set of Modifiers"
   ]
 }
