@@ -69,8 +69,11 @@ public class GeneralAttackHandler {
                 int depth = extra_attack_depth.get();
                 if (depth < allowed_extra_times){
                     try {
+                        int inv = victim.invulnerableTime;
+                        victim.invulnerableTime = 0;
                         extra_attack_depth.set(depth + 1);
                         victim.hurt(DreamtinkerDamageTypes.source(registryAccess, DreamtinkerDamageTypes.NULL_VOID, null, attacker), damageAmount);
+                        victim.invulnerableTime = inv;
                     }
                     finally {
                         extra_attack_depth.set(depth);

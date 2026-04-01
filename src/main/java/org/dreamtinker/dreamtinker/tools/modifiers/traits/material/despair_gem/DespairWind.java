@@ -1,7 +1,5 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem;
 
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -16,8 +14,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
-import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.dreamtinker.dreamtinker.utils.MaskService;
@@ -62,22 +58,25 @@ public class DespairWind extends BattleModifier {
                     AttributeModifier cur = attr_instance.getModifier(uuid);
                     if ((cur == null)){
                         attr_instance.removeModifier(uuid);
-                        attr_instance.addPermanentModifier(new AttributeModifier(uuid, attr.getDescriptionId(), attr_instance.getValue(),
-                                                                                 AttributeModifier.Operation.ADDITION));
+                        attr_instance.addPermanentModifier(new AttributeModifier(uuid, attr.getDescriptionId(), -1,
+                                                                                 AttributeModifier.Operation.MULTIPLY_TOTAL));
                     }
                 }
             }
             target.setAbsorptionAmount(0);
             target.invulnerableTime = 0;
             if (target instanceof ServerPlayer sp){
-                if (sp.isCreative() || sp.isSpectator())
-                    return knockback;
-                boolean keepInv = sp.serverLevel().getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY);
-                if (!keepInv){
-                    // 尽量贴近死亡掉落
-                    sp.getInventory().dropAll();
-                    sp.getInventory().clearContent();
-                }
+                if (false){
+                    if (sp.isCreative() || sp.isSpectator())
+                        return knockback;
+                    boolean keepInv = sp.serverLevel().getGameRules().getBoolean(GameRules.RULE_KEEPINVENTORY);
+                    if (!keepInv){
+                        // 尽量贴近死亡掉落
+                        sp.getInventory().dropAll();
+                        sp.getInventory().clearContent();
+                    }
+                }else
+                    dropAllEquipmentLikeDeath(target);
             }else {
                 dropAllEquipmentLikeDeath(target);
             }
