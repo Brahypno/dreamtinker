@@ -25,7 +25,7 @@ public class DamageTypeTagProvider extends DamageTypeTagsProvider {
         tag(BYPASSES_ARMOR).add(DreamtinkerDamageTypes.NULL_VOID, DreamtinkerDamageTypes.rain_bow);
         tag(BYPASSES_SHIELD).add(DreamtinkerDamageTypes.NULL_VOID);
         tag(BYPASSES_INVULNERABILITY).add(DreamtinkerDamageTypes.NULL_VOID, DreamtinkerDamageTypes.arcane_damage);
-        tag(BYPASSES_COOLDOWN).add(DreamtinkerDamageTypes.NULL_VOID);
+        tag(BYPASSES_COOLDOWN).add(DreamtinkerDamageTypes.NULL_VOID, DreamtinkerDamageTypes.arcane_damage);
         tag(BYPASSES_EFFECTS).add(DreamtinkerDamageTypes.NULL_VOID);
         tag(BYPASSES_RESISTANCE).add(DreamtinkerDamageTypes.NULL_VOID);
         tag(BYPASSES_ENCHANTMENTS).add(DreamtinkerDamageTypes.NULL_VOID, DreamtinkerDamageTypes.rain_bow, DreamtinkerDamageTypes.arcane_damage);

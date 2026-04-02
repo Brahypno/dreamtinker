@@ -4,7 +4,6 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -36,8 +35,9 @@ import static org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.knockArt
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class GeneralHurtHandler {
-    static boolean why_i_cry_triggered = false;
-    static boolean arcane_hit = false;
+    private static final int allowed_extra_times = 1;
+    private static final ThreadLocal<Integer> cry_extra_attack_depth = ThreadLocal.withInitial(() -> 0);
+    private static final ThreadLocal<Integer> arcane_extra_attack_depth = ThreadLocal.withInitial(() -> 0);
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void LivingHurtEvent(LivingHurtEvent event) {
@@ -103,16 +103,22 @@ public class GeneralHurtHandler {
 
             //DEAL DAMAGE
             int drown_level = DTModifierCheck.getMainhandModifierLevel(offender, DreamtinkerModifiers.Ids.why_i_cry);
-            if (0 < drown_level && !why_i_cry_triggered){
-                DamageSource source = DreamtinkerDamageTypes.source(registryAccess, DamageTypes.FELL_OUT_OF_WORLD, dmg);
-                why_i_cry_triggered = true;
-                float extra = damageAmount * .05f * drown_level;
-                if (0.5f <= extra){
-                    victim.hurt(source, extra);
-                    if (rds.nextFloat() < 0.1)
-                        offender.hurt(source, extra);
+            if (0 < drown_level){
+                int depth = cry_extra_attack_depth.get();
+                if (depth < allowed_extra_times){
+                    try {
+                        DamageSource source = DreamtinkerDamageTypes.source(registryAccess, DreamtinkerDamageTypes.NULL_VOID, dmg);
+                        float extra = damageAmount * .05f * drown_level;
+                        if (0.1f <= extra){
+                            victim.hurt(source, extra);
+                            if (rds.nextFloat() < 0.1)
+                                offender.hurt(source, extra);
+                        }
+                    }
+                    finally {
+                        cry_extra_attack_depth.set(depth);
+                    }
                 }
-                why_i_cry_triggered = false;
             }
             float del = DTModifierCheck.getPersistentTagValue(offender, DreamtinkerModifiers.knockArts.getId(), TAG_KNOCK);
             if (0 < del)
@@ -129,15 +135,19 @@ public class GeneralHurtHandler {
 
             if (!dmg.is(BYPASSES_ENCHANTMENTS)){
                 int arcane_hit_level = DTModifierCheck.getMainhandModifierLevel(offender, DreamtinkerModifiers.Ids.arcane_hit);
-                if (0 < arcane_hit_level && !arcane_hit){
-                    DamageSource source = DreamtinkerDamageTypes.source(registryAccess, DreamtinkerDamageTypes.arcane_damage, dmg);
-                    arcane_hit = true;
-                    float extra = damageAmount * .1f * arcane_hit_level;
-                    if (0.5f <= extra){
-                        victim.hurt(source, extra);
-                        event.setAmount(Math.max(0f, damageAmount - extra));
+                int depth = arcane_extra_attack_depth.get();
+                if (0 < arcane_hit_level && depth < allowed_extra_times){
+                    try {
+                        DamageSource source = DreamtinkerDamageTypes.source(registryAccess, DreamtinkerDamageTypes.arcane_damage, dmg);
+                        float extra = damageAmount * .1f * arcane_hit_level;
+                        if (0.1f <= extra){
+                            victim.hurt(source, extra);
+                            event.setAmount(Math.max(0f, damageAmount - extra));
+                        }
                     }
-                    arcane_hit = false;
+                    finally {
+                        arcane_extra_attack_depth.set(depth);
+                    }
                 }
             }
             if (dmg.is(TinkerTags.DamageTypes.MAGIC_PROTECTION)){
