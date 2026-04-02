@@ -4,7 +4,7 @@
     "tag": "tconstruct:casts/single_use/gem"
   },
   "cast_consumed": true,
-  "cooling_time": 79,
+  "cooling_time": 73,
   "fluid": {
     "amount": 100,
     "fluid": "dreamtinker:molten_desire"
