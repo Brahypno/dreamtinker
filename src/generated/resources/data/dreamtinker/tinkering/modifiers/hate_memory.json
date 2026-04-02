@@ -2,6 +2,112 @@
   "level_display": "tconstruct:single_level",
   "modules": [
     {
+      "type": "tconstruct:freezing_attack",
+      "seconds": {
+        "each_level": 4.0,
+        "flat": 8.0
+      }
+    },
+    {
+      "type": "tconstruct:stat_boost",
+      "each_level": 0.5,
+      "flat": 1.0,
+      "operation": "add",
+      "stat": "tconstruct:projectile_damage"
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "effect": "minecraft:poison",
+      "level": {
+        "per_level": 1.0
+      },
+      "time": {
+        "flat": 260.0
+      }
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "effect": "minecraft:regeneration",
+      "level": {
+        "flat": 1.0,
+        "per_level": 1.0
+      },
+      "time": {
+        "flat": 260.0
+      }
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "effect": "minecraft:wither",
+      "level": {
+        "per_level": 1.0
+      },
+      "time": {
+        "flat": 260.0
+      }
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "effect": "minecraft:weakness",
+      "level": {
+        "per_level": 1.0
+      },
+      "time": {
+        "flat": 260.0
+      }
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "effect": "minecraft:strength",
+      "level": {
+        "flat": 1.0,
+        "per_level": 1.0
+      },
+      "time": {
+        "flat": 260.0
+      }
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "effect": "minecraft:slowness",
+      "level": {
+        "flat": 3.0
+      },
+      "time": {
+        "flat": 260.0
+      }
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "effect": "minecraft:speed",
+      "level": {
+        "flat": 2.0
+      },
+      "time": {
+        "flat": 260.0
+      }
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "effect": "minecraft:luck",
+      "level": {
+        "flat": 3.0
+      },
+      "time": {
+        "flat": 260.0
+      }
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "effect": "minecraft:unluck",
+      "level": {
+        "flat": 2.0
+      },
+      "time": {
+        "flat": 260.0
+      }
+    },
+    {
       "type": "tconstruct:requirements",
       "display_modifiers": [
         {
