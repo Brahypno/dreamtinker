@@ -298,7 +298,7 @@ public class NarcissusFluidProjectile extends Projectile {
                     int hate = 1;
                     if (null != toolStackView)
                         hate = Math.max(1, toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.hate_memory) + 1);
-                    fluid.shrink(consumed / hate);
+                    fluid.shrink(Math.max(1, consumed / hate));
                     if (fluid.isEmpty()){
                         this.discard();
                     }else {
