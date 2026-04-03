@@ -85,9 +85,9 @@ public class SpiritualWeaponTransformation extends NoLevelsModifier implements B
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                 }
                 case HEAD -> {
-                    consumer.accept(AttributeRegistry.SOUL_WARD_CAP.get(),
+                    consumer.accept(AttributeRegistry.SCYTHE_PROFICIENCY.get(),
                                     new AttributeModifier(uuid,
-                                                          AttributeRegistry.SOUL_WARD_RECOVERY_RATE.get().getDescriptionId(),
+                                                          AttributeRegistry.SCYTHE_PROFICIENCY.get().getDescriptionId(),
                                                           multi,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                     consumer.accept(AttributeRegistry.SCYTHE_PROFICIENCY.get(),
