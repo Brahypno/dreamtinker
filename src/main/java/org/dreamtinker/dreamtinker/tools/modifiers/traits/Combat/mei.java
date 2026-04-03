@@ -6,7 +6,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -16,6 +15,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.utils.MaskService;
@@ -55,12 +55,12 @@ public class mei extends BattleModifier {
     public @NotNull Component getDisplayName(int level) {
         if (level <= 9)
             return ModifierLevelDisplay.DEFAULT.nameForLevel(this, level);
-        else if (level < 50)
+        else if (level < 100)
             return ModifierLevelDisplay.DEFAULT.nameForLevel(this, 9);
-        else if (level <= 100)
+        else if (level <= 200)
             return Component.translatable(this.getTranslationKey()).append(" ").append(RomanNumeralHelper.getNumeral(9))
                             .withStyle((style) -> style.withColor(ResourceColorManager.getTextColor(mei_key_2)));
-        else if (level <= 130)//mei_2
+        else if (level <= 300)//mei_2
             return Component.translatable(this.getTranslationKey()).withStyle((style) -> style.withColor(ResourceColorManager.getTextColor(mei_key_2)));
         else//mei.3
             return Component.translatable(mei_key_3).withStyle((style) -> style.withColor(ResourceColorManager.getTextColor(mei_key_3)));
@@ -68,9 +68,9 @@ public class mei extends BattleModifier {
 
     @Override
     public @NotNull List<Component> getDescriptionList(int level) {
-        if (level < 130)
+        if (level < 200)
             return this.getDescriptionList();
-        else if (level <= 150)//mei.2
+        else if (level <= 300)//mei.2
             return Arrays.asList(Component.translatable(mei_key_2 + ".flavor").withStyle(ChatFormatting.ITALIC),
                                  Component.translatable(mei_key_2 + ".description").withStyle(ChatFormatting.GRAY));
         else//mei.3
@@ -95,9 +95,9 @@ public class mei extends BattleModifier {
 
     private Component refuseRemoveMessage(IToolStackView tool) {
         int level = tool.getModifierLevel(this);
-        if (level < 100)
+        if (level < 200)
             return Component.translatable(this.getTranslationKey() + ".salvage");
-        else if (level < 130)//mei_2
+        else if (level < 300)//mei_2
             return Component.translatable(mei_key_2 + ".salvage").withStyle((style) -> style.withColor(ResourceColorManager.getTextColor(mei_key_2)));
         else//mei_3
             return Component.translatable(mei_key_3 + ".salvage").withStyle((style) -> style.withColor(ResourceColorManager.getTextColor(mei_key_3)));
@@ -106,8 +106,18 @@ public class mei extends BattleModifier {
     @Override
     public void addToolStats(IToolContext context, ModifierEntry modifier, ModifierStatsBuilder builder) {
         int level = context.getModifierLevel(this);
-        ToolStats.ATTACK_DAMAGE.add(builder, level * 1.3);
-        ToolStats.ATTACK_SPEED.add(builder, level * 0.13);
+        float amt = 0;
+        if (level < 50){
+            amt += level * 1.3f;
+        }else if (level < 100){
+            amt += 65 + (level - 50) * 0.9f;
+        }else if (level < 200){
+            amt += 110 + (level - 100) * 0.3f;
+        }else {
+            amt += 140 + (level - 200) * 0.1f;
+        }
+        ToolStats.ATTACK_DAMAGE.add(builder, amt);
+        ToolStats.ATTACK_SPEED.add(builder, amt * .1f);
     }
 
     @Override
@@ -116,25 +126,25 @@ public class mei extends BattleModifier {
             return;
         int level = modifier.getLevel();
         double mod;
-        if (200 < level){
-            mod = 1.3 * (level - 200) / 100 + 3.15;
-        }else if (100 <= level){
-            mod = 3.0 * (level - 100) / 100 + .15;
+        if (400 < level){
+            mod = Math.pow(level - 400, 1.5) / 100 + 4.26;
+        }else if (200 <= level){
+            mod = 2.0 * (level - 200) / 100 + .26;
         }else {
-            mod = 0.15 * level / 100;
+            mod = 0.13 * level / 100;
         }
         consumer.accept(Attributes.ATTACK_DAMAGE, new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.ATTACK_DAMAGE.getDescriptionId(), mod,
                                                                         AttributeModifier.Operation.MULTIPLY_BASE));
         consumer.accept(Attributes.ATTACK_SPEED, new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.ATTACK_SPEED.getDescriptionId(), mod,
                                                                        AttributeModifier.Operation.MULTIPLY_BASE));
-        if (100 <= level){
+        if (200 <= level){
             consumer.accept(Attributes.ARMOR, new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.ARMOR.getDescriptionId(), mod,
                                                                     AttributeModifier.Operation.MULTIPLY_BASE));
             consumer.accept(Attributes.ARMOR_TOUGHNESS,
                             new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.ARMOR_TOUGHNESS.getDescriptionId(), mod,
                                                   AttributeModifier.Operation.MULTIPLY_BASE));
         }
-        if (120 <= level && tool.getModifierLevel(DreamtinkerModifiers.despair_mist.getId()) < 1)
+        if (300 <= level && tool.getModifierLevel(DreamtinkerModifiers.despair_mist.getId()) < 1)
             consumer.accept(Attributes.MOVEMENT_SPEED, new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.MOVEMENT_SPEED.getDescriptionId(),
                                                                              2.0 * (level - 100) / 100 + .1, AttributeModifier.Operation.MULTIPLY_BASE));
     }
@@ -147,8 +157,8 @@ public class mei extends BattleModifier {
             int level = tool.getModifierLevel(this);
             ModDataNBT toolData = tool.getPersistentData();
             int last_second = toolData.getInt(TAG_MLT);
-            int cur_exp_cap = (int) Math.ceil(
-                    Math.max(1, max_level_second / Math.max(1.0, level / 100.0)));//MAYBE SHOULDN'T this fast or this is super slow......i dont know
+            double cap_speed = Math.min(10, Math.max(1.0, level / 100.0));
+            int cur_exp_cap = (int) Math.ceil(Math.max(1, max_level_second / cap_speed));//MAYBE SHOULDN'T this fast or this is super slow......i dont know
             if (cur_exp_cap <= last_second + 1){
                 ToolStack ts = ToolStack.from(stack);
                 ts.addModifier(this.getId(), 1);
@@ -163,14 +173,14 @@ public class mei extends BattleModifier {
             if (holder instanceof ServerPlayer player && tool.getModifierLevel(DreamtinkerModifiers.despair_mist.getId()) < 1){
                 double mod;
                 ArrayList<Attribute> attributes = new ArrayList<>(Arrays.asList(Attributes.ATTACK_DAMAGE, Attributes.ATTACK_SPEED));
-                if (100 <= level){
-                    mod = -2.0 * (level - 100) / 100 - .1;
+                if (200 <= level){
+                    mod = -1.5 * (level - 100) / 100 - .1;
                 }else {
                     mod = -0.1 * level / 100;
                 }
-                if (100 <= level)
+                if (200 <= level)
                     attributes.addAll(Arrays.asList(Attributes.ARMOR, Attributes.ARMOR_TOUGHNESS));
-                if (120 <= level)
+                if (300 <= level)
                     attributes.add(Attributes.MOVEMENT_SPEED);
                 for (Attribute attr : attributes) {
                     AttributeInstance attr_instance = player.getAttribute(attr);
@@ -198,10 +208,11 @@ public class mei extends BattleModifier {
         if (attacker.level().isClientSide || null == target)
             return knockback;
         int level = tool.getModifierLevel(this.getId());
-        if (200 <= level){
+        if (400 <= level){
             DamageSource dam =
-                    new DamageSource(attacker.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DamageTypes.GENERIC_KILL),
-                                     attacker, attacker);
+                    new DamageSource(
+                            attacker.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DreamtinkerDamageTypes.NULL_VOID),
+                            attacker, attacker);
             target.hurt(dam, level * 2);
         }
         return knockback;
@@ -209,7 +220,7 @@ public class mei extends BattleModifier {
 
     @Override
     public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
-        return damage * (170 <= tool.getModifierLevel(this.getId()) ? 10 : 1);
+        return damage * (500 <= tool.getModifierLevel(this.getId()) ? 10 : 1);
     }
 
     @Override
