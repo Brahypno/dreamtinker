@@ -293,17 +293,6 @@ public class NarcissusFluidProjectile extends Projectile {
             FluidEffects recipe = FluidEffectManager.INSTANCE.find(fluid.getFluid());
             if (null != this.getOwner()){
                 if (recipe.hasEntityEffects()){
-                    FluidEffectContext.Entity context = this.buildContext().location(result.getLocation()).target(this.getOwner());
-                    int consumed = recipe.applyToEntity(fluid, this.power, context, IFluidHandler.FluidAction.EXECUTE);
-                    int hate = 1;
-                    if (null != toolStackView)
-                        hate = Math.max(1, toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.hate_memory) + 1);
-                    fluid.shrink(Math.max(1, consumed / hate));
-                    if (fluid.isEmpty()){
-                        this.discard();
-                    }else {
-                        this.setFluid(fluid);
-                    }
                     int times = null != toolStackView ? Math.max(1, MemoryBase.getLevel(toolStackView) / 3) : 1;
                     for (int i = 0; i < times; i++) {
                         target.invulnerableTime = 0;
@@ -313,6 +302,18 @@ public class NarcissusFluidProjectile extends Projectile {
                                                                           .build());
                         }
 
+                    }
+                    FluidEffectContext.Entity context = this.buildContext().location(result.getLocation()).target(this.getOwner());
+                    int hate = 1;
+                    if (null != toolStackView)
+                        hate = Math.max(1, toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.hate_memory) + 1);
+
+                    int consumed = recipe.applyToEntity(fluid, this.power / hate, context, IFluidHandler.FluidAction.EXECUTE);
+                    fluid.shrink(consumed);
+                    if (fluid.isEmpty()){
+                        this.discard();
+                    }else {
+                        this.setFluid(fluid);
                     }
                 }
             }
