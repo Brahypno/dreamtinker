@@ -379,7 +379,7 @@ public class NarcissusFluidProjectile extends Projectile {
     }
 
     public int getChaseLiving() {
-        return this.entityData.get(CHASE_LIVING);
+        return this.entityData.get(CHASE_LIVING) + 1;
     }
 
     public void setFluid(FluidStack fluid) {
