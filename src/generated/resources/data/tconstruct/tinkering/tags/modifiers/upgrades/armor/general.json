@@ -1,5 +1,6 @@
 {
   "values": [
+    "dreamtinker:virtual_dodge",
     {
       "id": "dreamtinker:spiritual_weapon_transformation",
       "required": false

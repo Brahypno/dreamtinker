@@ -291,6 +291,9 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.DoubleValue ArtsManaShieldBase =
             builder.comment("How much damage reduction per level provided in %").defineInRange("ArtsManaShieldBase", 0.80, 0, 1);
 
+    public static final ForgeConfigSpec.DoubleValue VirtualDodge =
+            builder.comment("The dodge rate of Virtual Dodge per level").defineInRange("VirtualDodge", 0.05, 0, 0.95);
+
     public static final ForgeConfigSpec specs = builder.pop().build();
 
     private static boolean isValidIdFormat(String s) {

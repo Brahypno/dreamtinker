@@ -69,6 +69,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             //.add()
             .addOptional(Ids.malum_ascension, Ids.malum_rebound);
         this.tag(TinkerTags.Modifiers.GENERAL_ARMOR_UPGRADES)
+            .add(virtual_dodge.getId())
             .addOptional(spiritual_weapon_transformation.getId(), Ids.nova_mana_reduce);
         this.tag(TinkerTags.Modifiers.GENERAL_ARMOR_ABILITIES)
             .addOptional(nova_magic_armor.getId());

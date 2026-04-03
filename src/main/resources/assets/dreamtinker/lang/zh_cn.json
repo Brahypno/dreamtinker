@@ -699,6 +699,9 @@
   "modifier.dreamtinker.cosmogony_tetrad": "四元创世论",
   "modifier.dreamtinker.cosmogony_tetrad.flavor": "四元之流溢",
   "modifier.dreamtinker.cosmogony_tetrad.description": "这份流溢使你获得一个额外的灵魂槽",
+  "modifier.dreamtinker.virtual_dodge": "帷幕之下",
+  "modifier.dreamtinker.virtual_dodge.flavor": "一线未落",
+  "modifier.dreamtinker.virtual_dodge.description": "每级获得 %s%% 闪避率，但失去相同比例的护甲、韧性。",
 
   "material.dreamtinker.echo_alloy": "回响合金",
   "material.dreamtinker.echo_alloy.flavor": "是神秘的回响，还是秘密的回响",

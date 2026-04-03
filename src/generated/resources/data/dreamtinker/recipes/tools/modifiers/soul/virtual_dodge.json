@@ -1,0 +1,24 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "amount_needed": 4,
+      "item": "dreamtinker:void_pearl"
+    },
+    {
+      "amount_needed": 8,
+      "item": "minecraft:ender_eye"
+    }
+  ],
+  "level": {
+    "max": 3
+  },
+  "result": "dreamtinker:virtual_dodge",
+  "slots": {
+    "souls": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/armor/worn"
+  }
+}
