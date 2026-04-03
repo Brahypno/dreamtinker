@@ -106,7 +106,7 @@ public class mei extends BattleModifier {
     @Override
     public void addToolStats(IToolContext context, ModifierEntry modifier, ModifierStatsBuilder builder) {
         int level = context.getModifierLevel(this);
-        ToolStats.ATTACK_DAMAGE.add(builder, level * 0.13);
+        ToolStats.ATTACK_DAMAGE.add(builder, level * 1.3);
         ToolStats.ATTACK_SPEED.add(builder, level * 0.13);
     }
 
@@ -117,7 +117,7 @@ public class mei extends BattleModifier {
         int level = modifier.getLevel();
         double mod;
         if (200 < level){
-            mod = Math.pow(level - 200, 1.5) / 100 + 3.15;
+            mod = 1.3 * (level - 200) / 100 + 3.15;
         }else if (100 <= level){
             mod = 3.0 * (level - 100) / 100 + .15;
         }else {
