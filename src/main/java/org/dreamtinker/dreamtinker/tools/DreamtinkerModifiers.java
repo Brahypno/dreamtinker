@@ -245,13 +245,21 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
 
 
     public static class Ids {
+        public static final ModifierId soul_upgrade = id("soul_upgrade");
+        public static final ModifierId abyss_inside = id("abyss_inside");
+        public static final ModifierId meta_morphosis = id("meta_morphosis");
+        public static final ModifierId blighted_sigil = id("blighted_sigil");
+        public static final ModifierId many_us = id("many_us");
+        public static final ModifierId ashen_soul = id("ashen_soul");
+        public static final ModifierId naughty_chaos = id("naughty_chaos");
+        public static final ModifierId cosmogony_tetrad = id("cosmogony_tetrad");
+
         public static final ModifierId long_tool = id("long_tool");
         public static final ModifierId antimony_usage = id("antimony_usage");
         public static final ModifierId with_tears = id("with_tears");
         public static final ModifierId in_rain = id("in_rain");
         public static final ModifierId soul_form = id("soul_form");
         public static final ModifierId wither_body = id("wither_body");
-        public static final ModifierId soul_upgrade = id("soul_upgrade");
         public static final ModifierId continuous_explode = id("continuous_explode");
         public static final ModifierId soul_core = id("soul_core");
         public static final ModifierId icy_memory = id("icy_memory");

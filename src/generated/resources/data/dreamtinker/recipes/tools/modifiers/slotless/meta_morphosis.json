@@ -1,0 +1,17 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "minecraft:chorus_flower"
+    },
+    {
+      "item": "minecraft:shulker_shell"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:meta_morphosis",
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

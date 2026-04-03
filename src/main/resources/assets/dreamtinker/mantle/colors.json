@@ -171,7 +171,16 @@
     "nova_spell_bow": "#FFB703",
     "nova_enchanter_shield": "#E056FD",
     "nova_mana_shield": "#4C1D95",
-    "nova_ashen_resolve": "#6E6274"
+    "nova_ashen_resolve": "#6E6274",
+    "soul_upgrade": "#034150",
+    "abyss_inside": "#0D1B2A",
+    "meta_morphosis": "#8A7F6B",
+    "blighted_sigil": "#2C2438",
+    "many_us": "#101820",
+    "ashen_soul": "#D2A4E6",
+    "naughty_chaos": "#A7B7C3",
+    "cosmogony_tetrad": "#B7A98A"
+
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
@@ -212,6 +221,9 @@
     "eidolon_wicked_wave": "#384185",
     "eidolon_paladin_bone": "#B0D2B2",
     "eidolon_paladin_bone_tool": "#B0D2B2",
+    "eidolon_soul_gem": "#D2A4E6",
+    "eidolon_shadow_gem": "#E28BFF",
+    "eidolon_crimson_gem": "#FF7C2B",
     "bic_dark_metal": "#66646E",
     "bic_monster_skin": "#534E63",
     "spiny_shell": "#738A99",

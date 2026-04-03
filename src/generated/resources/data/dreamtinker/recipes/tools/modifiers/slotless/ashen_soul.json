@@ -1,0 +1,44 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "eidolon"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "eidolon"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "item": "eidolon:soul_shard"
+    },
+    {
+      "item": "eidolon:soul_shard"
+    },
+    {
+      "item": "eidolon:soul_shard"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:ashen_soul",
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

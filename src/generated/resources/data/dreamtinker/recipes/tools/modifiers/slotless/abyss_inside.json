@@ -1,0 +1,20 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "minecraft:amethyst_shard"
+    },
+    {
+      "tag": "forge:gems/prismarine"
+    },
+    {
+      "item": "minecraft:bone_meal"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:abyss_inside",
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

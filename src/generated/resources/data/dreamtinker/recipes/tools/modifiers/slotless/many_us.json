@@ -1,0 +1,50 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "malum"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "malum"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "tag": "malum:aspected_spirits"
+    },
+    {
+      "tag": "malum:aspected_spirits"
+    },
+    {
+      "tag": "malum:aspected_spirits"
+    },
+    {
+      "tag": "malum:aspected_spirits"
+    },
+    {
+      "tag": "malum:aspected_spirits"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:many_us",
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

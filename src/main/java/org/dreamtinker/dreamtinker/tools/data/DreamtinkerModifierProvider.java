@@ -149,6 +149,12 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.soul_upgrade).tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
                                        .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                                        .addModules(ModifierSlotModule.slot(SlotType.SOUL).eachLevel(1));
+        buildModifier(Ids.abyss_inside).tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
+                                       .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                                       .addModules(ModifierSlotModule.slot(SlotType.SOUL).eachLevel(1));
+        buildModifier(Ids.meta_morphosis).tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
+                                         .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                                         .addModules(ModifierSlotModule.slot(SlotType.SOUL).eachLevel(1));
         buildModifier(Ids.continuous_explode)
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModule(new VolatileFlagModule(IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY));
@@ -213,7 +219,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.huge_ego).tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
                                    .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                                    .addModules(ModifierSlotModule.slot(SlotType.UPGRADE).eachLevel(1))
-                                   .addModule(StatBoostModule.multiplyAll(ToolStats.DURABILITY).flat(-0.25f));
+                                   .addModule(StatBoostModule.multiplyAll(ToolStats.DURABILITY).amount(0, -0.25f));
         buildModifier(Ids.full_concentration).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
         buildModifier(Ids.thundering_curse).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
         buildModifier(Ids.why_i_cry);
@@ -436,6 +442,11 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.el_etherium, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                 .addModule(SetStatModule.set(ToolStats.HARVEST_TIER).value(EnigmaticMaterials.ETHERIUM));
+
+        buildModifier(Ids.blighted_sigil, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
+                .tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModules(ModifierSlotModule.slot(SlotType.SOUL).eachLevel(1));
     }
 
     private void addMalumModifiers() {
@@ -477,6 +488,11 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.malum_sol_tiferet, not(DreamtinkerMaterialDataProvider.modLoaded("malum")))
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
 
+        buildModifier(Ids.many_us, DreamtinkerMaterialDataProvider.modLoaded("malum"))
+                .tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModules(ModifierSlotModule.slot(SlotType.SOUL).eachLevel(1));
+
 
     }
 
@@ -513,6 +529,11 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                           .target(LivingEntityPredicate.ANY)
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT).levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+
+        buildModifier(Ids.ashen_soul, DreamtinkerMaterialDataProvider.modLoaded("eidolon"))
+                .tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModules(ModifierSlotModule.slot(SlotType.SOUL).eachLevel(1));
     }
 
     private void addBICModifiers() {
@@ -638,6 +659,11 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                           .target(LivingEntityPredicate.ANY)
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
+
+        buildModifier(Ids.naughty_chaos, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"))
+                .tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModules(ModifierSlotModule.slot(SlotType.SOUL).eachLevel(1));
     }
 
     private void addNovaModifiers() {
@@ -686,6 +712,11 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.nova_mana_reduce, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"));
         buildModifier(Ids.nova_ashen_resolve, not(DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau")))
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+
+        buildModifier(Ids.cosmogony_tetrad, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"))
+                .tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModules(ModifierSlotModule.slot(SlotType.SOUL).eachLevel(1));
     }
 
     @Override

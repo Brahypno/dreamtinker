@@ -1,0 +1,33 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "ars_nouveau"
+          },
+          {
+            "type": "dreamtinker:mod_compact_config",
+            "modid": "ars_nouveau"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:single_level",
+  "modules": [
+    {
+      "type": "tconstruct:modifier_slot",
+      "each_level": 1,
+      "name": "souls"
+    }
+  ],
+  "tooltip_display": "tinker_station"
+}

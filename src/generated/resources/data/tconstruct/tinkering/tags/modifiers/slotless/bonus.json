@@ -1,6 +1,29 @@
 {
   "values": [
     "dreamtinker:huge_ego",
-    "dreamtinker:five_creations"
+    "dreamtinker:five_creations",
+    "dreamtinker:soul_upgrade",
+    "dreamtinker:abyss_inside",
+    "dreamtinker:meta_morphosis",
+    {
+      "id": "dreamtinker:many_us",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:blighted_sigil",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:ashen_soul",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:naughty_chaos",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:cosmogony_tetrad",
+      "required": false
+    }
   ]
 }

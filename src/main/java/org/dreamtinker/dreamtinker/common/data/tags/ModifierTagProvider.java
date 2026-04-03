@@ -43,7 +43,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
         this.tag(TinkerTags.Modifiers.RANGED_UPGRADES)
             .add(Ids.icy_memory, Ids.hate_memory, Ids.soul_core);
         this.tag(TinkerTags.Modifiers.GENERAL_UPGRADES)
-            .add(Ids.soul_upgrade, Ids.weapon_dreams_order, Ids.weapon_dreams_filter, TheEnd.getId())
+            .add(Ids.weapon_dreams_order, Ids.weapon_dreams_filter, TheEnd.getId())
             .addOptional(Ids.bic_dark_armor_plate);
         this.tag(TinkerTags.Modifiers.GENERAL_SLOTLESS)
             .add(mei.getId(), fox_blessing.getId())
@@ -52,7 +52,8 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             .add(Ids.all_slayer, Ids.the_romantic, strong_explode.getId(), signal_axe.getId(), Ids.wrath, Ids.torrent)
             .addOptional(ender_slayer.getId());
         this.tag(TinkerTags.Modifiers.BONUS_SLOTLESS)
-            .add(Ids.huge_ego, Ids.five_creations);
+            .add(Ids.huge_ego, Ids.five_creations, Ids.soul_upgrade, Ids.abyss_inside, Ids.meta_morphosis)
+            .addOptional(Ids.many_us, Ids.blighted_sigil, Ids.ashen_soul, Ids.naughty_chaos, Ids.cosmogony_tetrad);
         this.tag(TinkerTags.Modifiers.MELEE_ABILITIES)
             .add(real_sweep.getId(), Ids.continuous_explode, flaming_memory.getId())
             .addOptional(weapon_books.getId(), desolation_ring.getId(), eldritch_pan.getId(), nova_enchanter_sword.getId());

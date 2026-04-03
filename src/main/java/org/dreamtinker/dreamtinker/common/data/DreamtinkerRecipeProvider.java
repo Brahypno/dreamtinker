@@ -1426,15 +1426,25 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(1)
                              .setSlots(SlotType.ABILITY, 1)
                              .save(consumer, wrap(DreamtinkerModifiers.life_looting, abilityFolder, "_1"));
-
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.soul_upgrade)
                              .setTools(TinkerTags.Items.MODIFIABLE)
-                             .addInput(DreamtinkerCommon.twist_obsidian_pane.get(), 10)
-                             .addInput(Items.WEEPING_VINES, 40)
-                             .setMaxLevel(10)
-                             .setSlots(SlotType.UPGRADE, 1)
-                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.soul_upgrade, upgradeSalvage))
-                             .save(consumer, prefix(DreamtinkerModifiers.Ids.soul_upgrade, upgradeFolder));
+                             .addInput(DreamtinkerCommon.twist_obsidian_pane.get(), 1)
+                             .setMaxLevel(1)
+                             .save(consumer, prefix(DreamtinkerModifiers.Ids.soul_upgrade, slotlessFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.abyss_inside)
+                             .setTools(TinkerTags.Items.MODIFIABLE)
+                             .addInput(Items.AMETHYST_SHARD, 1)
+                             .addInput(Tags.Items.GEMS_PRISMARINE, 1)
+                             .addInput(Items.BONE_MEAL, 1)
+                             .setMaxLevel(1)
+                             .save(consumer, prefix(DreamtinkerModifiers.Ids.abyss_inside, slotlessFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.meta_morphosis)
+                             .setTools(TinkerTags.Items.MODIFIABLE)
+                             .addInput(Items.CHORUS_FLOWER, 1)
+                             .addInput(Items.SHULKER_SHELL, 1)
+                             .setMaxLevel(1)
+                             .save(consumer, prefix(DreamtinkerModifiers.Ids.meta_morphosis, slotlessFolder));
+
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.soul_core)
                              .setTools(Ingredient.of(DreamtinkerTools.narcissus_wing.get()))
                              .addInput(DreamtinkerCommon.UnbornTurtleEgg.get(), 1)
@@ -1712,6 +1722,14 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(1)
                              .save(wrapped, prefix(DreamtinkerModifiers.Ids.el_nemesis_curse, slotlessFolder));
 
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.blighted_sigil)
+                             .setTools(TinkerTags.Items.MODIFIABLE)
+                             .addInput(EnigmaticItems.EVIL_ESSENCE)
+                             .addInput(EnigmaticItems.EVIL_ESSENCE)
+                             .addInput(EnigmaticItems.THICC_SCROLL)
+                             .setMaxLevel(1)
+                             .save(wrapped, prefix(DreamtinkerModifiers.Ids.blighted_sigil, slotlessFolder));
+
         // Start of malum modifiers
         wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("malum"));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.malum_rebound)
@@ -1770,6 +1788,16 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .saveSalvage(wrapped, prefix(DreamtinkerModifiers.Ids.malum_spirit_plunder, upgradeSalvage))
                              .save(wrapped, prefix(DreamtinkerModifiers.Ids.malum_spirit_plunder, upgradeFolder));
 
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.many_us)
+                             .setTools(TinkerTags.Items.MODIFIABLE)
+                             .addInput(ItemTagRegistry.ASPECTED_SPIRITS)
+                             .addInput(ItemTagRegistry.ASPECTED_SPIRITS)
+                             .addInput(ItemTagRegistry.ASPECTED_SPIRITS)
+                             .addInput(ItemTagRegistry.ASPECTED_SPIRITS)
+                             .addInput(ItemTagRegistry.ASPECTED_SPIRITS)
+                             .setMaxLevel(1)
+                             .save(wrapped, prefix(DreamtinkerModifiers.Ids.many_us, slotlessFolder));
+
 
         wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("eidolon"));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.eidolon_sapping)
@@ -1801,6 +1829,14 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .saveSalvage(wrapped, prefix(DreamtinkerModifiers.Ids.eidolon_bone_chill, upgradeSalvage))
                              .save(wrapped, prefix(DreamtinkerModifiers.Ids.eidolon_bone_chill, upgradeFolder));
 
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.ashen_soul)
+                             .setTools(TinkerTags.Items.MODIFIABLE)
+                             .addInput(SOUL_SHARD.get(), 1)
+                             .addInput(SOUL_SHARD.get(), 1)
+                             .addInput(SOUL_SHARD.get(), 1)
+                             .setMaxLevel(1)
+                             .save(wrapped, prefix(DreamtinkerModifiers.Ids.ashen_soul, slotlessFolder));
+
         wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.bic_dark_armor_plate)
                              .setTools(TinkerTags.Items.DURABILITY)
@@ -1828,6 +1864,15 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(1)
                              .saveSalvage(wrapped, prefix(DreamtinkerModifiers.Ids.bic_intoxicating, upgradeSalvage))
                              .save(wrapped, prefix(DreamtinkerModifiers.Ids.bic_intoxicating, upgradeFolder));
+
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.naughty_chaos)
+                             .setTools(TinkerTags.Items.MODIFIABLE)
+                             .addInput(SEEDOF_CHAOS.get(), 1)
+                             .addInput(MARIGOLDS.get(), 1)
+                             .addInput(ETHEREAL_SPIRIT.get(), 1)
+                             .addInput(ORBOFTHE_SUMMONER.get(), 1)
+                             .setMaxLevel(1)
+                             .save(wrapped, prefix(DreamtinkerModifiers.Ids.naughty_chaos, slotlessFolder));
 
 
         wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"));
@@ -1950,6 +1995,15 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(3)
                              .saveSalvage(wrapped, prefix(NovaRegistry.nova_mana_shield, upgradeSalvage))
                              .save(wrapped, prefix(NovaRegistry.nova_mana_shield, upgradeFolder));
+
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.cosmogony_tetrad)
+                             .setTools(TinkerTags.Items.MODIFIABLE)
+                             .addInput(ItemsRegistry.EARTH_ESSENCE, 1)
+                             .addInput(ItemsRegistry.WATER_ESSENCE, 1)
+                             .addInput(ItemsRegistry.AIR_ESSENCE, 1)
+                             .addInput(ItemsRegistry.FIRE_ESSENCE, 1)
+                             .setMaxLevel(1)
+                             .save(wrapped, prefix(DreamtinkerModifiers.Ids.cosmogony_tetrad, slotlessFolder));
 
     }
 
