@@ -1,7 +1,6 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.events;
 
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -21,7 +20,9 @@ import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.json.predicate.TinkerPredicate;
+import slimeknights.tconstruct.library.tools.capability.EntityModifierCapability;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
+import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
@@ -50,9 +51,10 @@ public class GeneralHurtHandler {
         Level world = victim.level();
         if (world.isClientSide())
             return;
-        CompoundTag data = victim.getPersistentData();
         RegistryAccess registryAccess = world.registryAccess();
         RandomSource rds = world.random;
+        Entity direct = dmg.getDirectEntity();
+        ModifierNBT modifiers = direct instanceof Projectile ? EntityModifierCapability.getOrEmpty(direct) : null;
 
         //System.out.println(dmg + "" + damageAmount);
         //CANCEL DAMAGE--need victim but not offender
@@ -85,7 +87,7 @@ public class GeneralHurtHandler {
                     event.setAmount(reduced);
             }
 
-            if (dmg.getDirectEntity() instanceof Projectile || dmg.is(IS_PROJECTILE)){
+            if (direct instanceof Projectile || dmg.is(IS_PROJECTILE)){
                 ItemStack leg = offender.getItemBySlot(EquipmentSlot.LEGS);
                 if (leg.is(TinkerTags.Items.LEGGINGS)){
                     ToolStack toolStack = ToolStack.from(leg);
@@ -96,9 +98,10 @@ public class GeneralHurtHandler {
                             event.setAmount(damageAmount * (1 + valueExpSoftCap(armor, toughness)));
                         }
                 }
-                int lunarAttractive = DTModifierCheck.getMainhandModifierLevel(offender, DreamtinkerModifiers.Ids.lunarRejection);
+                int lunarAttractive = Math.max(DTModifierCheck.getMainhandModifierLevel(offender, DreamtinkerModifiers.Ids.lunarRejection),
+                                               null != modifiers ? modifiers.getLevel(DreamtinkerModifiers.Ids.lunarRejection) : 0);
                 if (0 < lunarAttractive)
-                    event.setAmount(event.getAmount() + (TinkerPredicate.AIRBORNE.matches(victim) ? 2.0f : -2.0f));
+                    event.setAmount(event.getAmount() + (TinkerPredicate.AIRBORNE.matches(victim) ? 2.0f : -2.0f) * lunarAttractive);
             }
 
             //DEAL DAMAGE
