@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:sweet_death",
+  "text": [
+    {"text": "每级增加格挡值与格挡角度，但减少使用时移速和30%击退。如果本次格挡时间不足3秒，则进行每级25%的反伤。反伤区间随等级增加。\n"}
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable/shields",
+    "effects": [
+      "可以逐级强化",
+      "最高3级",
+      "每级需要1个灵魂槽"
+    ]
+}

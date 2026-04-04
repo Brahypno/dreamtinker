@@ -1,0 +1,26 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "minecraft:skeleton_skull"
+    },
+    {
+      "item": "minecraft:wither_skeleton_skull"
+    },
+    {
+      "amount_needed": 8,
+      "item": "minecraft:honey_block"
+    }
+  ],
+  "level": {
+    "max": 2
+  },
+  "result": "dreamtinker:sweet_death",
+  "slots": {
+    "souls": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/shields"
+  }
+}

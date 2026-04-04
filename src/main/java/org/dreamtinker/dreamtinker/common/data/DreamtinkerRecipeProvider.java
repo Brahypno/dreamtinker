@@ -1534,6 +1534,15 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(3)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.virtual_dodge, soulSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.virtual_dodge, soulFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.sweet_death)
+                             .setTools(TinkerTags.Items.SHIELDS)
+                             .addInput(Items.SKELETON_SKULL, 1)
+                             .addInput(Items.WITHER_SKELETON_SKULL, 1)
+                             .addInput(Items.HONEY_BLOCK, 8)
+                             .setSlots(SlotType.SOUL, 1)
+                             .setMaxLevel(2)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.sweet_death, soulSalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.Ids.sweet_death, soulFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.weapon_dreams_order)
                              .setTools(Ingredient.of(DreamtinkerTools.silence_glove.get()))
                              .addInput(Items.COMPASS, 2)

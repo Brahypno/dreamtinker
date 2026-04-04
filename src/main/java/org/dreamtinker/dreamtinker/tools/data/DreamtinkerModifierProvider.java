@@ -61,10 +61,7 @@ import slimeknights.tconstruct.library.modifiers.modules.behavior.AttributeModul
 import slimeknights.tconstruct.library.modifiers.modules.behavior.MaterialRepairModule;
 import slimeknights.tconstruct.library.modifiers.modules.behavior.ReduceToolDamageModule;
 import slimeknights.tconstruct.library.modifiers.modules.build.*;
-import slimeknights.tconstruct.library.modifiers.modules.combat.ConditionalMeleeDamageModule;
-import slimeknights.tconstruct.library.modifiers.modules.combat.ConditionalPowerModule;
-import slimeknights.tconstruct.library.modifiers.modules.combat.LootingModule;
-import slimeknights.tconstruct.library.modifiers.modules.combat.MobEffectModule;
+import slimeknights.tconstruct.library.modifiers.modules.combat.*;
 import slimeknights.tconstruct.library.modifiers.modules.mining.ConditionalMiningSpeedModule;
 import slimeknights.tconstruct.library.modifiers.modules.util.ModifierCondition;
 import slimeknights.tconstruct.library.modifiers.util.ModifierLevelDisplay;
@@ -369,6 +366,17 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
 
         buildModifier(Ids.four_warning)
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+        buildModifier(Ids.sweet_death)
+                .addModule(StatBoostModule.add(ToolStats.BLOCK_AMOUNT).eachLevel(40.0f))
+                .addModule(StatBoostModule.add(ToolStats.BLOCK_ANGLE).eachLevel(30f))
+                .addModule(StatBoostModule.multiplyBase(ToolStats.BLOCK_ANGLE).eachLevel(0.35f))
+                .addModule(StatBoostModule.multiplyBase(ToolStats.USE_ITEM_SPEED).eachLevel(-0.25f))
+                .addModule(KnockbackModule.builder().formula()
+                                          .variable(VALUE)
+                                          .constant(3).variable(LEVEL).power() // 3^LEVEL
+                                          .divide().build()); // KNOCKBACK / 3^LEVEL;
+
+
         IJsonPredicate<net.minecraft.world.entity.LivingEntity> ender = LivingEntityPredicate.tag(DreamtinkerTagKeys.EntityTypes.ENDER_ENTITY);
         buildModifier(ender_slayer.getId(), not(DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy")))
                 .addModule(ConditionalMeleeDamageModule.builder().target(ender).eachLevel(2.0f))

@@ -708,6 +708,9 @@
   "modifier.dreamtinker.four_warning": "Fifth Mark",
   "modifier.dreamtinker.four_warning.flavor": "All fourth are warning, but the fifth is the end",
   "modifier.dreamtinker.four_warning.description": "Fifth damage to same entity deal much more, but the other four damage deal less",
+  "modifier.dreamtinker.sweet_death": "Sweet Death",
+  "modifier.dreamtinker.sweet_death.flavor": "We Will Be Reunited",
+  "modifier.dreamtinker.sweet_death.description": "Increase 40 block amount and block angle, but decrease use item speed and 30% knockback. If block in 2s, deal counter attack which is 25% per level.",
 
   "material.dreamtinker.echo_alloy": "Echo Alloy",
   "material.dreamtinker.echo_alloy.flavor": "Its echo of mystery, or echo of enigma",

@@ -1,15 +1,19 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.events;
 
 import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.RangedAttackMob;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.ShieldBlockEvent;
 import net.minecraftforge.event.level.ExplosionEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,6 +24,7 @@ import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.items.TNTArrow;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
+import slimeknights.tconstruct.common.TinkerTags;
 
 import java.util.List;
 
@@ -79,6 +84,28 @@ public class GeneralShortEvents {
                 return;
             event.setNewTarget(best);
         }
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void ShieldBlockEventEvent(ShieldBlockEvent event) {
+        LivingEntity blocker = event.getEntity();
+        if (event.isCanceled() || blocker.level().isClientSide)
+            return;
+        DamageSource source = event.getDamageSource();
+        float damage = event.getBlockedDamage();
+        float originalDamage = event.getOriginalBlockedDamage();
+        if (0 < damage && source.getEntity() instanceof LivingEntity attacker){
+            ItemStack activeStack = blocker.getUseItem();
+            if (!activeStack.isEmpty() && activeStack.is(TinkerTags.Items.MODIFIABLE)){//Block amount already handled
+                int amp = DTModifierCheck.getItemModifierNum(activeStack, DreamtinkerModifiers.Ids.sweet_death);
+                if (0 < amp && (/*originalDamage <= damage ||*/ activeStack.getUseDuration() - blocker.getUseItemRemainingTicks() <= 20 * 3 * amp)){
+                    // 伤害被完全格挡，或格挡持续时间不足2秒，则触发反伤
+                    attacker.hurt(DreamtinkerDamageTypes.source(attacker.level().registryAccess(), DamageTypes.INDIRECT_MAGIC, null, blocker),
+                                  damage * (0.25F * amp));
+                }
+            }
+        }
+
     }
 
     private static double getDetectionRadius(Mob mob) {
