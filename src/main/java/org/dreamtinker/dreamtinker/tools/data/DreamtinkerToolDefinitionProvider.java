@@ -199,6 +199,8 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 .module(new MaterialTraitsModule(HeadMaterialStats.ID, 2), ToolHooks.REBALANCED_TRAIT)
                 // stats
                 .module(new SetStatsModule(StatsNBT.builder()
+                                                   .set(ToolStats.BLOCK_AMOUNT, 6)
+                                                   .set(ToolStats.BLOCK_ANGLE, 60)
                                                    .set(ToolStats.ATTACK_SPEED, 1.2f).build()))
                 .module(small_soul_weapon_slots)
                 // traits
