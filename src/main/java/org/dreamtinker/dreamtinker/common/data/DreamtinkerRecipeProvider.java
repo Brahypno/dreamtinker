@@ -2359,6 +2359,11 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                 .setFluidAndTime(DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK_BLOCK * 9)
                                 .save(consumer, location(Casting_folder + "ashen_alloy_switch"));
 
+        ItemCastingRecipeBuilder.basinRecipe(DreamTinkerSmeltery.ashenMeltSwitch)
+                                .setCast(TinkerSmeltery.foundryController, true)
+                                .setFluidAndTime(DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK_BLOCK * 9)
+                                .save(consumer, location(Casting_folder + "ashen_melt_switch"));
+
     }
 
     @Override
