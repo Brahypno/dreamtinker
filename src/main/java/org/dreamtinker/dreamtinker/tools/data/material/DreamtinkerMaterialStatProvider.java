@@ -61,7 +61,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.despair_gem,
                          new HeadMaterialStats(300, 4f, DtTiers.WOLF_TIER, 9f),
-                         HandleMaterialStats.multipliers().durability(.1f).miningSpeed(1.8f).attackDamage(1.8f).attackSpeed(1.8f).build(),
+                         HandleMaterialStats.multipliers().durability(.1f).miningSpeed(2.3f).attackDamage(2.3f).attackSpeed(2.3f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.soul_steel,
                          new HeadMaterialStats(600, 8f, Tiers.DIAMOND, 2.50f),
@@ -317,7 +317,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                             PlatingMaterialStats.builder().durabilityFactor(15).armor(4f, 6f, 4f, 3f).toughness(8).knockbackResistance(2f),
                             StatlessMaterialStats.MAILLE);
         addArmorShieldStats(DreamtinkerMaterialIds.despair_gem,
-                            PlatingMaterialStats.builder().durabilityFactor(200).armor(9f, 9f, 9f, 9f).toughness(9).knockbackResistance(7f),
+                            PlatingMaterialStats.builder().durabilityFactor(200).armor(13f, 13f, 13f, 13f).toughness(13).knockbackResistance(13f),
                             StatlessMaterialStats.MAILLE);
         addMaterialStats(DreamtinkerMaterialIds.shadowskin, StatlessMaterialStats.MAILLE, StatlessMaterialStats.CUIRASS);
         addArmorShieldStats(DreamtinkerMaterialIds.soul_steel,
