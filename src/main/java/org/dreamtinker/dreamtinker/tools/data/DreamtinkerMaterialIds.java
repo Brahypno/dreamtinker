@@ -33,6 +33,7 @@ public class DreamtinkerMaterialIds {
     public static final MaterialId shadowSilver = new MaterialId(new ResourceLocation(MODID, "shadow_silver"));
     public static final MaterialId TransmutationGold = new MaterialId(new ResourceLocation(MODID, "transmutation_gold"));
     public static final MaterialId SpikyShard = new MaterialId(new ResourceLocation(MODID, "spiky_shard"));
+    public static final MaterialId FifthStone = new MaterialId(new ResourceLocation(MODID, "fifth_stone"));
     //Compact-enigmatic legacy
     public static final MaterialId etherium = new MaterialId(new ResourceLocation(MODID, "etherium"));
     public static final MaterialId nefarious = new MaterialId(new ResourceLocation(MODID, "nefarious"));

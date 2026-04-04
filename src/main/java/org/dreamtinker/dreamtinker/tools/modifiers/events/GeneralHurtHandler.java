@@ -1,6 +1,7 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.events;
 
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -17,6 +18,7 @@ import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.GoliathDamage;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.json.predicate.TinkerPredicate;
@@ -28,8 +30,7 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 import static net.minecraft.tags.DamageTypeTags.BYPASSES_ENCHANTMENTS;
 import static net.minecraft.tags.DamageTypeTags.IS_PROJECTILE;
-import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.FragileDodge;
-import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.homunculusLifeCurseMaxEffectLevel;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.*;
 import static org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.WeaponTransformation.valueExpSoftCap;
 import static org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.knockArts.TAG_KNOCK;
 
@@ -51,6 +52,7 @@ public class GeneralHurtHandler {
         Level world = victim.level();
         if (world.isClientSide())
             return;
+        CompoundTag data = victim.getPersistentData();
         RegistryAccess registryAccess = world.registryAccess();
         RandomSource rds = world.random;
         Entity direct = dmg.getDirectEntity();
@@ -102,6 +104,23 @@ public class GeneralHurtHandler {
                                                null != modifiers ? modifiers.getLevel(DreamtinkerModifiers.Ids.lunarRejection) : 0);
                 if (0 < lunarAttractive)
                     event.setAmount(event.getAmount() + (TinkerPredicate.AIRBORNE.matches(victim) ? 2.0f : -2.0f) * lunarAttractive);
+
+                int goliath = Math.max(DTModifierCheck.getMainhandModifierLevel(offender, DreamtinkerModifiers.goliath_damage.getId()),
+                                       null != modifiers ? modifiers.getLevel(DreamtinkerModifiers.goliath_damage.getId()) : 0);
+                if (0 < goliath)
+                    event.setAmount(event.getAmount() * GoliathDamage.goliathPercentage(offender, victim) * goliath);
+                int fifth_mark = Math.max(DTModifierCheck.getMainhandModifierLevel(offender, DreamtinkerModifiers.Ids.four_warning),
+                                          null != modifiers ? modifiers.getLevel(DreamtinkerModifiers.Ids.four_warning) : 0);
+                if (0 < fifth_mark){
+                    final String tag = "dt_fifth_mark";
+                    int times = (data.getInt(tag) + 1) % 5;
+                    if (0 != times){
+                        event.setAmount(event.getAmount() * (1 - FirthMark.get().floatValue()));
+                    }else {
+                        event.setAmount(event.getAmount() * (1 + FirthMark.get().floatValue() * 5));
+                    }
+                    data.putInt(tag, times);
+                }
             }
 
             //DEAL DAMAGE

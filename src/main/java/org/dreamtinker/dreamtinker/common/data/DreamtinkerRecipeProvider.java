@@ -340,6 +340,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                 .setFluidAndTime(DreamtinkerFluids.molten_nigrescence_antimony, FluidValues.GEM)
                                 .setCast(Items.BOOK, true)
                                 .save(consumer, prefix(DreamtinkerCommon.hypnagogic_transmute, "common/"));
+        ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.fifth_stone.get())
+                                .setFluidAndTime(TinkerFluids.moltenCobalt, FluidValues.INGOT)
+                                .setCast(Items.FLINT, true)
+                                .save(consumer, location(Casting_folder + "fifth_stone"));
 
     }
 
@@ -880,6 +884,9 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
         materialRecipe(consumer, DreamtinkerMaterialIds.SpikyShard, Ingredient.of(DreamtinkerCommon.deep_prismarine_shard.get()), 1, 1,
                        materials_folder + "spiny_shell");
+
+        materialRecipe(consumer, DreamtinkerMaterialIds.FifthStone, Ingredient.of(DreamtinkerCommon.fifth_stone.get()), 1, 1,
+                       materials_folder + "fifth_stone");
 
     }
 

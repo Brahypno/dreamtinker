@@ -186,6 +186,9 @@ public class DreamtinkerCommon extends DreamtinkerModule {
                 }
             });
 
+    public static final RegistryObject<Item> fifth_stone =
+            ITEMS.register("fifth_stone", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
+
     public static final RegistryObject<DTBookItem> hypnagogic_transmute =
             ITEMS.register("hypnagogic_transmute", () -> new DTBookItem(UNSTACKABLE_PROPS, DTBookItem.BookType.HYPNAGOGIC_TRANSMUTE));
 
@@ -246,6 +249,7 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         output.accept(transmutation_gold_nugget.get());
         output.accept(transmutation_gold_ingot.get());
         output.accept(raw_transmutation_gold.get());
+        output.accept(fifth_stone.get());
         if (ModList.get().isLoaded("malum"))
             output.accept(malignant_gluttony.get());
         if (ModList.get().isLoaded("enigmaticlegacy"))

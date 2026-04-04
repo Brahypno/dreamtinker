@@ -108,6 +108,11 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          HandleMaterialStats.multipliers().durability(0.85f).attackDamage(1.10f).attackSpeed(0.85f).build(),
                          StatlessMaterialStats.BINDING);
 
+        addMaterialStats(DreamtinkerMaterialIds.FifthStone,
+                         new HeadMaterialStats(800, 4.5f, Tiers.DIAMOND, 2f),
+                         HandleMaterialStats.multipliers().durability(0.85f).attackDamage(1.15f).attackSpeed(0.85f).build(),
+                         StatlessMaterialStats.BINDING);
+
         addELMeleeHarvest();
         addMalumMeleeHarvest();
         addEidolonMeleeHarvest();
@@ -243,6 +248,10 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addMaterialStats(DreamtinkerMaterialIds.ArcaneGold,
                          new LimbMaterialStats(32, 0.1f, 0.15f, -0.2f),
                          new GripMaterialStats(-0.2f, 0.15f, 1f));
+
+        addMaterialStats(DreamtinkerMaterialIds.FifthStone,
+                         new LimbMaterialStats(800, 0.2f, 0.10f, 0.2f),
+                         new GripMaterialStats(-0.2f, 0.15f, 2.5f));
 
         addCompactRanged();
     }
@@ -403,6 +412,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
     private void addAmmo() {
         this.addMaterialStats(DreamtinkerMaterialIds.shiningFlint, StatlessMaterialStats.ARROW_HEAD);
         this.addMaterialStats(DreamtinkerMaterialIds.SpikyShard, StatlessMaterialStats.ARROW_HEAD);
+        this.addMaterialStats(DreamtinkerMaterialIds.FifthStone, StatlessMaterialStats.ARROW_HEAD);
 
         this.addMaterialStats(DreamtinkerMaterialIds.hallowed_gold, StatlessMaterialStats.ARROW_HEAD);
         this.addMaterialStats(DreamtinkerMaterialIds.mnemonic_auric, StatlessMaterialStats.ARROW_HEAD);

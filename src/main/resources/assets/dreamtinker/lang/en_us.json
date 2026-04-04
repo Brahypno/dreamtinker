@@ -383,7 +383,7 @@
   "modifier.dreamtinker.not_like_was": "Not like was",
   "modifier.dreamtinker.not_like_was.flavor": "The City unbuilt can always be greater than one that exists.",
   "modifier.dreamtinker.not_like_was.description": "Every craft enhance this tool",
-  "modifier.dreamtinker.tooltip.not_like_was": "UnBuilt Times: ",
+  "modifier.dreamtinker.tooltip.not_like_was": "Unbuilt Times: ",
   "modifier.dreamtinker.tooltip.not_like_was_1": "The city can still be rebuilt, but higher reality refuse to enhance it: ",
   "modifier.dreamtinker.spiritual_weapon_transformation": "Spiritual Weapon transformation",
   "modifier.dreamtinker.spiritual_weapon_transformation.flavor": "Its time for transformation!(Spiritual version)",
@@ -702,6 +702,12 @@
   "modifier.dreamtinker.virtual_dodge": "Under a veil",
   "modifier.dreamtinker.virtual_dodge.flavor": "The Liminal",
   "modifier.dreamtinker.virtual_dodge.description": "Gain %s%% dodge chance per level but lose same percentage of armor&toughness",
+  "modifier.dreamtinker.goliath_damage": "Goliath",
+  "modifier.dreamtinker.goliath_damage.flavor": "Not with Sword",
+  "modifier.dreamtinker.goliath_damage.description": "Deal more damage to that larger than you, but deal less damage to that smaller than you.",
+  "modifier.dreamtinker.four_warning": "Fifth Mark",
+  "modifier.dreamtinker.four_warning.flavor": "All fourth are warning, but the fifth is the end",
+  "modifier.dreamtinker.four_warning.description": "Fifth damage to same entity deal much more, but the other four damage deal less",
 
   "material.dreamtinker.echo_alloy": "Echo Alloy",
   "material.dreamtinker.echo_alloy.flavor": "Its echo of mystery, or echo of enigma",
@@ -852,6 +858,8 @@
   "material.dreamtinker.nova_wild_wing.flavor": " ",
   "material.dreamtinker.nova_wild_spike": "Wild Spike",
   "material.dreamtinker.nova_wild_spike.flavor": " ",
+  "material.dreamtinker.fifth_stone": "Fifth Stone",
+  "material.dreamtinker.fifth_stone.flavor": " ",
 
   "itemGroup.dreamtinker.tool": "Dreamtinker | tool",
   "itemGroup.dreamtinker.part": "Dreamtinker | part",
@@ -985,6 +993,7 @@
   "item.dreamtinker.nova_misc_red_sand_cast": "Nova Decoration Red Sand Cast",
   "item.dreamtinker.fox_fur": "Fox fur",
   "tooltip.dreamtinker.fox_fur_1": "Only Obtainable when weapon fox finish eating!",
+  "item.dreamtinker.fifth_stone": "Fifth Stone",
 
   "block.dreamtinker.metallivorous_stibium_lupus_block": "Stibium Metallivorum Lupi Block",
   "block.dreamtinker.crying_obsidian_pane": "Crying Obsidian Pane",

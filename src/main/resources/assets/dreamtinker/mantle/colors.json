@@ -180,7 +180,9 @@
     "ashen_soul": "#D2A4E6",
     "naughty_chaos": "#A7B7C3",
     "cosmogony_tetrad": "#B7A98A",
-    "virtual_dodge": "#B7A98A"
+    "virtual_dodge": "#B7A98A",
+    "goliath_damage": "#1A2028",
+    "four_warning": "#D7F1F0"
 
 },
   "material.dreamtinker": {
@@ -247,7 +249,8 @@
     "nova_water_essence": "#AA8BEA",
     "nova_wilden_horn": "#E0E5D5",
     "nova_wilden_wing": "#D0B595",
-    "nova_wilden_spike": "#E09A55"
+    "nova_wilden_spike": "#E09A55",
+    "fifth_stone": "#5F8D96"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873",

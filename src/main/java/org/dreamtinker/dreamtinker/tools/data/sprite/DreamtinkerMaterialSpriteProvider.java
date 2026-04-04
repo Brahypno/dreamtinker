@@ -327,6 +327,17 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFF738A99)
                                                 .addARGB(255, 0xFF9FB5BF)
                                                 .build());
+        this.buildMaterial(DreamtinkerMaterialIds.FifthStone)
+            .meleeHarvest().ranged().arrowHead()
+            .fallbacks("stone")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(63, 0xFF1A2028)
+                                                .addARGB(102, 0xFF243840)
+                                                .addARGB(140, 0xFF3E5C63)
+                                                .addARGB(178, 0xFF5F8D96)
+                                                .addARGB(216, 0xFF93CBD0)
+                                                .addARGB(255, 0xFFD7F1F0)
+                                                .build());
         addELMaterials();
         addMalumMaterials();
         addEidolonMaterials();

@@ -367,6 +367,8 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(MobEffectsRemoverModule.builder().level(RandomLevelingValue.perLevel(0, 1)).category(MobEffectCategory.HARMFUL).build())
                 .addModule(MobEffectsRemoverModule.builder().level(RandomLevelingValue.perLevel(0, 1)).category(MobEffectCategory.NEUTRAL).build());
 
+        buildModifier(Ids.four_warning)
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
         IJsonPredicate<net.minecraft.world.entity.LivingEntity> ender = LivingEntityPredicate.tag(DreamtinkerTagKeys.EntityTypes.ENDER_ENTITY);
         buildModifier(ender_slayer.getId(), not(DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy")))
                 .addModule(ConditionalMeleeDamageModule.builder().target(ender).eachLevel(2.0f))

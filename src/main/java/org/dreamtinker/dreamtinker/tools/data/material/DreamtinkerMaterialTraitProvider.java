@@ -93,6 +93,10 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.SpikyShard, Ids.deeper_water_killer);
         addTraits(DreamtinkerMaterialIds.SpikyShard, ARMOR, new ModifierEntry(ModifierIds.thorns, 2));
 
+        addDefaultTraits(DreamtinkerMaterialIds.FifthStone, goliath_damage);
+        addTraits(DreamtinkerMaterialIds.FifthStone, RANGED, Ids.four_warning);
+        addTraits(DreamtinkerMaterialIds.FifthStone, AMMO, Ids.four_warning);
+
         addDefaultTraits(DreamtinkerMaterialIds.ArcaneGold, Ids.arcane_hit);
         addTraits(DreamtinkerMaterialIds.ArcaneGold, ARMOR, TinkerModifiers.golden.getId(), ModifierIds.magicProtection, Ids.arcane_protection);
         addTraits(DreamtinkerMaterialIds.ArcaneGold, PlatingMaterialStats.SHIELD.getId(), ModifierIds.magicProtection, Ids.arcane_protection);

@@ -178,6 +178,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<FoxBlessing> fox_blessing = MODIFIERS.register("fox_blessing", FoxBlessing::new);
     public static final StaticModifier<SelfSacrifice> self_sacrifice = MODIFIERS.register("self_sacrifice", SelfSacrifice::new);
     public static final StaticModifier<VirtualDodge> virtual_dodge = MODIFIERS.register("virtual_dodge", VirtualDodge::new);
+    public static final StaticModifier<GoliathDamage> goliath_damage = MODIFIERS.register("goliath_damage", GoliathDamage::new);
 
     //etherium
     public static final StaticModifier<ELAstralBreak> astral_break = EL_MODIFIERS.register("astral_break", ELAstralBreak::new);
@@ -311,6 +312,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId torrent = id("torrent");
         public static final ModifierId poison = id("poison");
         public static final ModifierId weakness = id("weakness");
+        public static final ModifierId four_warning = id("four_warning");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");
