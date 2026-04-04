@@ -4,12 +4,9 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
 import org.jetbrains.annotations.NotNull;
@@ -66,8 +63,11 @@ public class VirtualDodge extends ArmorModifier {
             ServerLevel world = (ServerLevel) context.getLevel();
             if (world.random.nextFloat() < buffRate){
                 LivingEntity entity = context.getEntity();
+                /*
                 world.playSound(null, context.getEntity(), SoundEvents.ILLUSIONER_MIRROR_MOVE,
                                 entity instanceof Player ? SoundSource.PLAYERS : SoundSource.HOSTILE, 3.0F, 1.0F);
+
+                 */
                 world.sendParticles(
                         ParticleTypes.REVERSE_PORTAL,
                         entity.getX(),
