@@ -3,7 +3,12 @@
   "allow_crystal": true,
   "inputs": [
     {
-      "amount_needed": 10,
+      "item": "dreamtinker:twist_obsidian_pane"
+    },
+    {
+      "tag": "forge:gems/emerald"
+    },
+    {
       "item": "dreamtinker:twist_obsidian_pane"
     }
   ],

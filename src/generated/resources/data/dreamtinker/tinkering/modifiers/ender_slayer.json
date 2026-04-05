@@ -28,7 +28,7 @@
   "modules": [
     {
       "type": "tconstruct:conditional_melee_damage",
-      "each_level": 2.0,
+      "each_level": 5.0,
       "percent": false,
       "target": {
         "type": "mantle:tag",
@@ -51,7 +51,7 @@
         "tag": "forge:ender_entity"
       },
       "time": {
-        "flat": 20.0,
+        "flat": 40.0,
         "random": 10.0
       }
     }

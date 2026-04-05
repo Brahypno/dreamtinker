@@ -1,0 +1,15 @@
+{
+  "modifier_id": "dreamtinker:hate_memory",
+  "text": [
+    {
+      "text": "冰冻击中的生物，并且额外施加一系列对立效果，包括中毒，凋灵，再生，虚弱，力量，缓慢，速度，幸运，霉运，概率施加瞬间治疗，瞬间伤害"
+    }
+  ],
+  "more_text_space": true,
+  "tools": "dreamtinker:narcissus_wing",
+    "effects": [
+      "最高3级",
+      "每级需要1个灵魂槽",
+      "需要记忆，王国之门作为前置"
+    ]
+}

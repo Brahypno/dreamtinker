@@ -27,7 +27,10 @@
   ],
   "inputs": [
     {
-      "item": "enigmaticlegacy:the_infinitum"
+      "item": "enigmaticlegacy:the_twist"
+    },
+    {
+      "item": "enigmaticlegacy:the_twist"
     }
   ],
   "level": 3,

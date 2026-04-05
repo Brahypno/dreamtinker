@@ -1493,7 +1493,9 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.hate_memory, soulSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.hate_memory, soulFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.huge_ego)
-                             .addInput(DreamtinkerCommon.twist_obsidian_pane.get(), 10)
+                             .addInput(DreamtinkerCommon.twist_obsidian_pane.get(), 1)
+                             .addInput(Tags.Items.GEMS_EMERALD, 1)
+                             .addInput(DreamtinkerCommon.twist_obsidian_pane.get(), 1)
                              .setMaxLevel(3)
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.huge_ego, slotlessFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.flaming_memory)
@@ -1690,21 +1692,22 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .save(wrapped, prefix(DreamtinkerModifiers.life_looting, abilityFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.weapon_books)
                              .setTools(TinkerTags.Items.MELEE_PRIMARY)
-                             .addInput(EnigmaticItems.THE_ACKNOWLEDGMENT, 1)
+                             .addInput(EnigmaticItems.THE_TWIST, 1)
                              .setMaxLevel(1)
                              .setSlots(SlotType.ABILITY, 1)
                              .saveSalvage(wrapped, prefix(DreamtinkerModifiers.weapon_books, abilitySalvage))
                              .save(wrapped, prefix(DreamtinkerModifiers.weapon_books, abilityFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.weapon_books)
                              .setTools(TinkerTags.Items.MELEE_PRIMARY)
-                             .addInput(EnigmaticItems.THE_TWIST, 1)
+                             .addInput(EnigmaticItems.THE_INFINITUM, 1)
                              .setLevelRange(2, 2)
                              .setSlots(SlotType.UPGRADE, 1)
                              .saveSalvage(wrapped, prefix(DreamtinkerModifiers.weapon_books, upgradeSalvage))
                              .save(wrapped, prefix(DreamtinkerModifiers.weapon_books, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.weapon_books)
                              .setTools(TinkerTags.Items.MELEE_PRIMARY)
-                             .addInput(EnigmaticItems.THE_INFINITUM, 1)
+                             .addInput(EnigmaticItems.THE_TWIST, 1)
+                             .addInput(EnigmaticItems.THE_TWIST, 1)
                              .setLevelRange(3, 3)
                              .setSlots(SlotType.SOUL, 1)
                              .saveSalvage(wrapped, prefix(DreamtinkerModifiers.weapon_books, soulSalvage))

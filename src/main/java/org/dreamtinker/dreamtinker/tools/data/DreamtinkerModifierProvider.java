@@ -156,6 +156,8 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModule(new VolatileFlagModule(IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY));
         buildModifier(Ids.soul_core)
+                .addModule(StatBoostModule.add(ToolStats.PROJECTILE_DAMAGE).amount(0f, 0.5f))
+                .addModule(StatBoostModule.add(ToolStats.DRAW_SPEED).amount(0.5f, 0.5f))
                 .addModule(ModifierRequirementsModule.builder().requireModifier(memory_base.getId(), 1)
                                                      .modifierKey(Ids.soul_core).build());
         buildModifier(Ids.icy_memory)
@@ -165,15 +167,15 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.hate_memory)
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModule(new FreezingAttackModule(new LevelingValue(8, 4)))
-                .addModule(StatBoostModule.add(ToolStats.PROJECTILE_DAMAGE).amount(1.0f, 0.5f))
                 .addModule(MobEffectModule.builder(MobEffects.POISON)
                                           .level(RandomLevelingValue.perLevel(0, 1))
                                           .time(RandomLevelingValue.flat(13 * 20))
                                           .target(LivingEntityPredicate.ANY)
                                           .build())
                 .addModule(MobEffectModule.builder(MobEffects.REGENERATION)
-                                          .level(RandomLevelingValue.perLevel(1, 1))
+                                          .level(RandomLevelingValue.perLevel(0, 1))
                                           .time(RandomLevelingValue.flat(13 * 20))
+                                          .chance(LevelingValue.eachLevel(0.99f))
                                           .target(LivingEntityPredicate.ANY)
                                           .build())
                 .addModule(MobEffectModule.builder(MobEffects.WITHER)
@@ -209,6 +211,12 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(MobEffectModule.builder(MobEffects.UNLUCK)
                                           .level(RandomLevelingValue.flat(2))
                                           .time(RandomLevelingValue.flat(13 * 20))
+                                          .target(LivingEntityPredicate.ANY)
+                                          .build())
+                .addModule(MobEffectModule.builder(MobEffects.HARM)
+                                          .level(RandomLevelingValue.perLevel(0, 1))
+                                          .time(RandomLevelingValue.flat(4 * 20))
+                                          .chance(LevelingValue.eachLevel(0.30f))
                                           .target(LivingEntityPredicate.ANY)
                                           .build())
                 .addModule(ModifierRequirementsModule.builder().requireModifier(memory_base.getId(), 1)
@@ -368,8 +376,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
         buildModifier(Ids.sweet_death)
                 .addModule(StatBoostModule.add(ToolStats.BLOCK_AMOUNT).eachLevel(40.0f))
-                .addModule(StatBoostModule.add(ToolStats.BLOCK_ANGLE).eachLevel(30f))
-                .addModule(StatBoostModule.multiplyBase(ToolStats.BLOCK_ANGLE).eachLevel(0.35f))
+                .addModule(StatBoostModule.add(ToolStats.BLOCK_ANGLE).eachLevel(90f))
                 .addModule(StatBoostModule.multiplyBase(ToolStats.USE_ITEM_SPEED).eachLevel(-0.25f))
                 .addModule(KnockbackModule.builder().formula()
                                           .variable(VALUE)
@@ -379,10 +386,10 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
 
         IJsonPredicate<net.minecraft.world.entity.LivingEntity> ender = LivingEntityPredicate.tag(DreamtinkerTagKeys.EntityTypes.ENDER_ENTITY);
         buildModifier(ender_slayer.getId(), not(DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy")))
-                .addModule(ConditionalMeleeDamageModule.builder().target(ender).eachLevel(2.0f))
+                .addModule(ConditionalMeleeDamageModule.builder().target(ender).eachLevel(5.0f))
                 .addModule(MobEffectModule.builder(MobEffects.WEAKNESS)
                                           .level(RandomLevelingValue.perLevel(1, 1))
-                                          .time(RandomLevelingValue.random(20, 10))
+                                          .time(RandomLevelingValue.random(20 * 2, 10))
                                           .target(ender).build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
         buildModifier(Ids.heavy_arrow)

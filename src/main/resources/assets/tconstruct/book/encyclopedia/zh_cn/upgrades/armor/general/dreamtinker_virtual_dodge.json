@@ -6,7 +6,6 @@
   "more_text_space": true,
   "tool_filter": "tconstruct:modifiable/armor/worn",
     "effects": [
-      "可以逐级强化",
       "最高3级",
       "每级需要1个灵魂槽"
     ]

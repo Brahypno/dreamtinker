@@ -139,6 +139,9 @@ public class MemoryBase extends BattleModifier {
                         int primaryIndex = shots / 2;
                         for (int shotIndex = 0; shotIndex < shots; shotIndex++) {
                             NarcissusFluidProjectile spit = new NarcissusFluidProjectile(world, entity, new FluidStack(fluid, amount), power, tool);
+                            if (charge == 1.0F){
+                                spit.setCrit(true);
+                            }
 
                             // setup projectile target
                             Vec3 upVector = entity.getUpVector(1.0f);

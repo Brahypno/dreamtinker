@@ -9,14 +9,8 @@
     },
     {
       "type": "tconstruct:stat_boost",
-      "each_level": 30.0,
+      "each_level": 90.0,
       "operation": "add",
-      "stat": "tconstruct:block_angle"
-    },
-    {
-      "type": "tconstruct:stat_boost",
-      "each_level": 0.35,
-      "operation": "multiply_base",
       "stat": "tconstruct:block_angle"
     },
     {

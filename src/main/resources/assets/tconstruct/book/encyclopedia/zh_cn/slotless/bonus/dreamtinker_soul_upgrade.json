@@ -6,9 +6,8 @@
     }
   ],
   "more_text_space": true,
-  "tool_filter": "tconstruct:modifiable",
   "effects": [
-    "需要1升级槽",
-    "最高10级"
+	  "单次使用",
+    "无需槽位"
   ]
 }

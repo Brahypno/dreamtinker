@@ -1,0 +1,17 @@
+{
+  "modifier_id": "dreamtinker:ender_slayer",
+  "text": [
+    {
+      "text": "Grants +5 damage per level against ender creatures"
+    },
+    {
+      "text": "If 'enigmatic legacy' is loaded, then only the one who has 'Ring of the Seven Curses' can use this upgrade. Deals the same damage increase and knockback as ender slayer has.",
+      "paragraph": true
+    }
+  ],
+  "more_text_space": true,
+  "effects": [
+    "Requires 1 upgrade slot",
+    "Maximum of 1 levels"
+  ]
+}

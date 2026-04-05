@@ -7,6 +7,6 @@
   "tool_filter": "tconstruct:modifiable/shields",
   "effects": [
     "Requires 1 soul slot",
-    "Maximum of 3 levels"
+    "Maximum of 2 levels"
   ]
 }

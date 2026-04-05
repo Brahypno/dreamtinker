@@ -49,6 +49,7 @@ public class NarcissusFluidProjectile extends Projectile {
     private float power;
     private int life = 30 * 20;
     private int knock_back;
+    private boolean crit;
 
 
     public NarcissusFluidProjectile(EntityType<? extends NarcissusFluidProjectile> type, Level level) {
@@ -265,7 +266,7 @@ public class NarcissusFluidProjectile extends Projectile {
             }
             if (target instanceof LivingEntity livingentity &&
                 target.hurt(damagesource,
-                            null != toolStackView && 2 < toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) ? 2 * dmg : dmg)){
+                            null != toolStackView ? (toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) + 1) * dmg : dmg)){
                 if (this.knock_back > 0){
                     double d0 = Math.max(0.0F, (double) 1.0F - livingentity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
                     Vec3 vec3 =
@@ -324,7 +325,10 @@ public class NarcissusFluidProjectile extends Projectile {
 
     }
 
-    private boolean isCritArrow() {return false;}
+
+    public boolean isCritArrow() {return this.crit;}
+
+    public void setCrit(boolean crit) {this.crit = crit;}
 
     @Override
     protected void onHit(HitResult p_37260_) {
@@ -359,6 +363,7 @@ public class NarcissusFluidProjectile extends Projectile {
         super.addAdditionalSaveData(nbt);
         nbt.putFloat("power", this.power);
         nbt.putInt("knock_back", this.knock_back);
+        nbt.putBoolean("nas_crit", this.crit);
 
         FluidStack fluid = this.getFluid();
         if (!fluid.isEmpty()){
@@ -371,6 +376,7 @@ public class NarcissusFluidProjectile extends Projectile {
         super.readAdditionalSaveData(nbt);
         this.power = nbt.getFloat("power");
         this.knock_back = nbt.getInt("knock_back");
+        this.crit = nbt.getBoolean("nas_crit");
 
         this.setFluid(FluidStack.loadFluidStackFromNBT(nbt.getCompound("fluid")));
     }

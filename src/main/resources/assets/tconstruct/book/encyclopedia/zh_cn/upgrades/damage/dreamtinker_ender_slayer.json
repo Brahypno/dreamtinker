@@ -1,0 +1,17 @@
+{
+  "modifier_id": "dreamtinker:ender_slayer",
+  "text": [
+    {
+      "text": "每级对末地生物增加5点伤害；并且施加缓慢效果\n"
+    },
+    {
+      "text": "若加载神秘遗物模组，则只有承受七咒之人才能使用该强化。对末地生物造成等同末影之屠所具备的伤害加深与击退\n",
+      "paragraph": true
+    }
+  ],
+  "more_text_space": true,
+  "effects": [
+    "需要1升级槽",
+    "最高1级"
+  ]
+}

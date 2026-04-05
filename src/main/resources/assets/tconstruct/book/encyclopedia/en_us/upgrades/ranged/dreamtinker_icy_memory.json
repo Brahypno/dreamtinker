@@ -1,0 +1,15 @@
+{
+  "modifier_id": "dreamtinker:icy_memory",
+  "text": [
+    {
+      "text": "Change Memory Projectile damage type to magic, sonic boom, null void. And increase damage deal by Memory Projectile by 100% per level."
+    }
+  ],
+  "more_text_space": true,
+  "tools": "dreamtinker:narcissus_wing",
+  "effects": [
+    "Maximum of 3 levels",
+    "Requires 1 soul slot per level",
+    "Requires 'Memory, Gate of the Kingdom' to apply"
+  ]
+}
