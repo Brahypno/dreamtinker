@@ -17,6 +17,7 @@ import slimeknights.tconstruct.library.tools.nbt.IToolContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.stat.ModifierStatsBuilder;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
+import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.modules.combat.FieryAttackModule;
 
 import java.util.UUID;
@@ -41,7 +42,7 @@ public class FlamingMemory extends BattleModifier {
     private int levels(IToolContext tool) {
         return tool.getModifierLevel(this.getId()) + tool.getModifierLevel(DreamtinkerModifiers.memory_base.getId()) +
                tool.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) + tool.getModifierLevel(DreamtinkerModifiers.Ids.hate_memory) +
-               tool.getModifierLevel(DreamtinkerModifiers.Ids.soul_core);
+               tool.getModifierLevel(DreamtinkerModifiers.Ids.soul_core) + tool.getModifierLevel(TinkerModifiers.expanded.get()) * 2;
     }
 
     @Override
@@ -61,7 +62,7 @@ public class FlamingMemory extends BattleModifier {
             consumer.accept(ForgeMod.ENTITY_REACH.get(),
                             new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
                                                   ForgeMod.ENTITY_REACH.get().getDescriptionId(),
-                                                  3 + modifier.getLevel(),
+                                                  3 + levels(tool),
                                                   AttributeModifier.Operation.ADDITION));
     }
 
@@ -71,16 +72,8 @@ public class FlamingMemory extends BattleModifier {
         float velocity = builder.getStat(ToolStats.VELOCITY);
         float accuracy = builder.getStat(ToolStats.ACCURACY);
         float draw_speed = builder.getStat(ToolStats.DRAW_SPEED);
-        float attack_damage = builder.getStat(ToolStats.ATTACK_DAMAGE);
-        float attack_speed = builder.getStat(ToolStats.ATTACK_SPEED);
 
-        if (attack_damage < proj_damage * velocity)
-            ToolStats.ATTACK_DAMAGE.add(builder, proj_damage * velocity - attack_damage);
-        else
-            ToolStats.ATTACK_DAMAGE.multiply(builder, proj_damage * velocity * levels(context) * flamingMemoryStatusBoost.get());
-        if (attack_speed < draw_speed * accuracy)
-            ToolStats.ATTACK_SPEED.add(builder, draw_speed * accuracy - attack_speed);
-        else
-            ToolStats.ATTACK_SPEED.multiply(builder, draw_speed * accuracy * levels(context) * flamingMemoryStatusBoost.get());
+        ToolStats.ATTACK_DAMAGE.multiply(builder, proj_damage * velocity * levels(context) * flamingMemoryStatusBoost.get());
+        ToolStats.ATTACK_SPEED.multiply(builder, draw_speed * accuracy * levels(context) * flamingMemoryStatusBoost.get());
     }
 }
