@@ -3,6 +3,7 @@ package org.dreamtinker.dreamtinker.common;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -184,6 +185,14 @@ public class DreamtinkerTagKeys {
 
         private static TagKey<EntityType<?>> common(String name) {
             return TagKey.create(Registries.ENTITY_TYPE, Mantle.commonResource(name));
+        }
+    }
+
+    public static class MobEffects {
+        public static final TagKey<MobEffect> EDICTS = DreamtinkerTag("edicts");
+
+        private static TagKey<MobEffect> DreamtinkerTag(String name) {
+            return TagKey.create(ForgeRegistries.MOB_EFFECTS.getRegistryKey(), Dreamtinker.getLocation(name));
         }
     }
 }

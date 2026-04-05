@@ -209,6 +209,7 @@ public class Dreamtinker {
 
         generator.addProvider(event.includeServer(), new DTCurio(output, helper, provider.getRegistryProvider()));
         generator.addProvider(event.includeServer(), new AdvancementsProvider(output));
+        generator.addProvider(event.includeServer(), new DTMobEffectTagsProvider(output, event.getLookupProvider(), event.getExistingFileHelper()));
     }
 
     public static boolean configCompactDisabled(String modId) {

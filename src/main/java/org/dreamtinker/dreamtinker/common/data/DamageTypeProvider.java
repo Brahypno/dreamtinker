@@ -23,6 +23,8 @@ public class DamageTypeProvider implements RegistrySetBuilder.RegistryBootstrap<
                          new DamageType(Dreamtinker.MODID + ".arcane_damage", DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 1f, DamageEffects.HURT));
         context.register(tnt_arrow_force,
                          new DamageType(Dreamtinker.MODID + ".tnt_arrow_force", DamageScaling.ALWAYS, 1f, DamageEffects.HURT));
+        context.register(edict_punishments,
+                         new DamageType(Dreamtinker.MODID + ".edict_punishments", DamageScaling.ALWAYS, 1f, DamageEffects.HURT));
     }
 
     /**

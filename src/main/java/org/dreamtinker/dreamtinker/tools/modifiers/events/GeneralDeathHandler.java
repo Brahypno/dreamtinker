@@ -7,17 +7,21 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 
 import static org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.knockArts.TAG_KNOCK;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class GeneralDeathHandler {
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void LivingDeathEvent(LivingDeathEvent event) {
         LivingEntity victim = event.getEntity();
-        if (event.isCanceled())
+        if (event.isCanceled()){
+            if (victim.hasEffect(DreamtinkerEffects.cursed.get()))
+                event.setCanceled(false);
             return;
+        }
         Level world = victim.level();
         if (world.isClientSide() || event.isCanceled())
             return;

@@ -1264,6 +1264,14 @@
   "effect.dreamtinker.unholy": "Unholy",
   "effect.dreamtinker.cursed": "Blood cursed",
   "effect.dreamtinker.thirsty": "Cancerous Thirsty",
+  "effect.dreamtinker.ahimsa": "Ahimsa",
+  "effect.dreamtinker.edict_of_stillness": "Edict of Stillness",
+  "effect.dreamtinker.law_of_the_silent_step": "Law of the Silent Step",
+  "effect.dreamtinker.interdict_of_ascent": "Interdict of Ascent",
+  "effect.dreamtinker.interdict_of_guard": "Interdict of Guard",
+  "effect.dreamtinker.interdict_of_restoration": "Interdict of Restoration",
+  "effect.dreamtinker.edict_of_untouched": "Edict of the Untouched",
+  "effect.dreamtinker.law_of_the_lowered_eyes": "Law of the Lowered Eyes",
 
   "adv.dreamtinker.eat_star_regulus.title": "Magnum Opus",
   "adv.dreamtinker.eat_star_regulus.desc": "Devour star regulus",
@@ -1295,6 +1303,7 @@
   "death.attack.dreamtinker.rain_bow": "vanished like rainbow",
   "death.attack.dreamtinker.arcane_damage": "Cursed by Arcane Arts",
   "death.attack.dreamtinker.tnt_arrow_force": "Suicide By not safely using TnT Arrow",
+  "death.attack.dreamtinker.edict_punishments": "Suicide By against the edict",
 
   "entity.dreamtinker.aggressive_fox": "Armed Fox",
 

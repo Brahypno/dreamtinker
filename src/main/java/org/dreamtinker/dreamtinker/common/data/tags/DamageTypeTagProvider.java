@@ -22,15 +22,15 @@ public class DamageTypeTagProvider extends DamageTypeTagsProvider {
     @Override
     protected void addTags(HolderLookup.@NotNull Provider Provider) {
         tag(DAMAGES_HELMET).add(DreamtinkerDamageTypes.NULL_VOID);
-        tag(BYPASSES_ARMOR).add(DreamtinkerDamageTypes.NULL_VOID, DreamtinkerDamageTypes.rain_bow);
-        tag(BYPASSES_SHIELD).add(DreamtinkerDamageTypes.NULL_VOID);
-        tag(BYPASSES_INVULNERABILITY).add(DreamtinkerDamageTypes.NULL_VOID, DreamtinkerDamageTypes.arcane_damage);
-        tag(BYPASSES_COOLDOWN).add(DreamtinkerDamageTypes.NULL_VOID, DreamtinkerDamageTypes.arcane_damage);
+        tag(BYPASSES_ARMOR).add(DreamtinkerDamageTypes.NULL_VOID, DreamtinkerDamageTypes.rain_bow, DreamtinkerDamageTypes.edict_punishments);
+        tag(BYPASSES_SHIELD).add(DreamtinkerDamageTypes.NULL_VOID, DreamtinkerDamageTypes.edict_punishments);
+        tag(BYPASSES_INVULNERABILITY).add(DreamtinkerDamageTypes.NULL_VOID, DreamtinkerDamageTypes.arcane_damage/*, DreamtinkerDamageTypes.edict_punishments*/);
+        tag(BYPASSES_COOLDOWN).add(DreamtinkerDamageTypes.NULL_VOID, DreamtinkerDamageTypes.arcane_damage, DreamtinkerDamageTypes.edict_punishments);
         tag(BYPASSES_EFFECTS).add(DreamtinkerDamageTypes.NULL_VOID);
         tag(BYPASSES_RESISTANCE).add(DreamtinkerDamageTypes.NULL_VOID);
         tag(BYPASSES_ENCHANTMENTS).add(DreamtinkerDamageTypes.NULL_VOID, DreamtinkerDamageTypes.rain_bow, DreamtinkerDamageTypes.arcane_damage);
         tag(AVOIDS_GUARDIAN_THORNS).add(DreamtinkerDamageTypes.NULL_VOID);
-        tag(ALWAYS_HURTS_ENDER_DRAGONS).add(DreamtinkerDamageTypes.NULL_VOID);
+        tag(ALWAYS_HURTS_ENDER_DRAGONS).add(DreamtinkerDamageTypes.NULL_VOID, DreamtinkerDamageTypes.edict_punishments);
         tag(WITCH_RESISTANT_TO).add(DreamtinkerDamageTypes.arcane_damage);
         tag(MELEE_PROTECTION).add(DreamtinkerDamageTypes.tnt_arrow_force);
 
