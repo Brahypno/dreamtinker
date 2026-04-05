@@ -27,7 +27,7 @@ public class thirsty extends MobEffect {
 
     @Override
     public boolean isDurationEffectTick(int duration, int amplifier) {
-        return true; // 每 tick 调用 applyEffectTick
+        return 1 == duration || duration % 20 == 0; // 每 tick 调用 applyEffectTick
     }
 
     @Override
