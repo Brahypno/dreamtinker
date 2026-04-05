@@ -2,6 +2,7 @@
   "values": [
     "dreamtinker:virtual_dodge",
     "dreamtinker:sweet_death",
+    "dreamtinker:last_kiss",
     {
       "id": "dreamtinker:spiritual_weapon_transformation",
       "required": false

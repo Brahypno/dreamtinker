@@ -710,7 +710,11 @@
   "modifier.dreamtinker.four_warning.description": "对目标的第五击造成更多伤害，但其他四击造成更少伤害",
   "modifier.dreamtinker.sweet_death": "甜蜜的死亡",
   "modifier.dreamtinker.sweet_death.flavor": "我们终将重逢",
-  "modifier.dreamtinker.sweet_death.description": "每级增加40格挡值与90格挡角度，但减少使用时移速和30%击退。如果本次格挡时间不足每级3秒，则进行每级25%的反伤",
+  "modifier.dreamtinker.sweet_death.description": "每级增加40格挡值与90格挡角度，但减少0.15使用时移速和30%击退。如果本次格挡时间不足每级3秒，则进行每级25%的反伤",
+  "modifier.dreamtinker.sweet_death.requirements": "'甜蜜的死亡' 与 '最后一吻' 互斥",
+  "modifier.dreamtinker.last_kiss": "最后一吻",
+  "modifier.dreamtinker.last_kiss.flavor": "向着明天",
+  "modifier.dreamtinker.last_kiss.description": "每级增加0.4使用时移速，但减少25%格挡值和35%格挡角度。如果本次格挡时间不足每级3秒，则获得每级2s，与级别相同的生命回复",
 
 
   "material.dreamtinker.echo_alloy": "回响合金",

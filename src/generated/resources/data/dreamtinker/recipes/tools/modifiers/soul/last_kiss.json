@@ -3,20 +3,22 @@
   "allow_crystal": true,
   "inputs": [
     {
-      "item": "minecraft:skeleton_skull"
+      "item": "minecraft:clock"
     },
     {
-      "item": "minecraft:wither_skeleton_skull"
+      "item": "minecraft:disc_fragment_5"
     },
     {
-      "amount_needed": 4,
-      "item": "minecraft:honey_block"
+      "item": "minecraft:white_tulip"
+    },
+    {
+      "item": "minecraft:cherry_sapling"
     }
   ],
   "level": {
     "max": 2
   },
-  "result": "dreamtinker:sweet_death",
+  "result": "dreamtinker:last_kiss",
   "slots": {
     "souls": 1
   },

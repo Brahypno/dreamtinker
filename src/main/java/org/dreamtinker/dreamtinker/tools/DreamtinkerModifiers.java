@@ -314,6 +314,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId weakness = id("weakness");
         public static final ModifierId four_warning = id("four_warning");
         public static final ModifierId sweet_death = id("sweet_death");
+        public static final ModifierId last_kiss = id("last_kiss");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");

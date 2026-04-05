@@ -377,11 +377,23 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.sweet_death)
                 .addModule(StatBoostModule.add(ToolStats.BLOCK_AMOUNT).eachLevel(40.0f))
                 .addModule(StatBoostModule.add(ToolStats.BLOCK_ANGLE).eachLevel(90f))
-                .addModule(StatBoostModule.multiplyBase(ToolStats.USE_ITEM_SPEED).eachLevel(-0.25f))
+                .addModule(StatBoostModule.add(ToolStats.USE_ITEM_SPEED).eachLevel(-0.1f))
                 .addModule(KnockbackModule.builder().formula()
                                           .variable(VALUE)
                                           .constant(3).variable(LEVEL).power() // 3^LEVEL
-                                          .divide().build()); // KNOCKBACK / 3^LEVEL;
+                                          .divide().build()) // KNOCKBACK / 3^LEVEL;
+                .addModule(ModifierRequirementsModule.builder()
+                                                     .requirement(HasModifierPredicate.hasModifier(Ids.last_kiss, 1).inverted())
+                                                     .modifierKey(Ids.sweet_death).build());
+        buildModifier(Ids.last_kiss)
+                .addModule(StatBoostModule.multiplyBase(ToolStats.BLOCK_AMOUNT).eachLevel(-0.20f))
+                .addModule(StatBoostModule.multiplyBase(ToolStats.BLOCK_ANGLE).eachLevel(-0.35f))
+                .addModule(StatBoostModule.add(ToolStats.USE_ITEM_SPEED).eachLevel(0.4f))
+                .addModule(AttributeModule.builder(TinkerAttributes.USE_ITEM_SPEED, AttributeModifier.Operation.ADDITION).slots(ARMOR_SLOTS).tooltipStyle(
+                        AttributeModule.TooltipStyle.PERCENT).toolItem(ItemPredicate.tag(SHIELDS)).eachLevel(0.1f))
+                .addModule(ModifierRequirementsModule.builder()
+                                                     .requirement(HasModifierPredicate.hasModifier(Ids.sweet_death, 1).inverted())
+                                                     .modifierKey(Ids.sweet_death).build());
 
 
         IJsonPredicate<net.minecraft.world.entity.LivingEntity> ender = LivingEntityPredicate.tag(DreamtinkerTagKeys.EntityTypes.ENDER_ENTITY);

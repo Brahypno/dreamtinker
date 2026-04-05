@@ -1,7 +1,7 @@
 {
   "modifier_id": "dreamtinker:sweet_death",
   "text": [
-    {"text": "每级增加格挡值与格挡角度，但减少使用时移速和30%击退。如果本次格挡时间不足每级3秒，则进行每级25%的反伤。\n"}
+    {"text": "每级增加40格挡值与90格挡角度，但减少使用时移速和30%击退。如果本次格挡时间不足每级3秒，则进行每级25%的魔法伤害反伤。\n"}
   ],
   "more_text_space": true,
   "tool_filter": "tconstruct:modifiable/shields",

@@ -3,12 +3,16 @@ package org.dreamtinker.dreamtinker.tools.modifiers.events;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
@@ -27,6 +31,7 @@ import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import slimeknights.tconstruct.common.TinkerTags;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.dreamtinker.dreamtinker.utils.DTModifierCheck.ModifierInHand;
 
@@ -97,11 +102,18 @@ public class GeneralShortEvents {
         if (0 < damage && source.getEntity() instanceof LivingEntity attacker){
             ItemStack activeStack = blocker.getUseItem();
             if (!activeStack.isEmpty() && activeStack.is(TinkerTags.Items.MODIFIABLE)){//Block amount already handled
-                int amp = DTModifierCheck.getItemModifierNum(activeStack, DreamtinkerModifiers.Ids.sweet_death);
-                if (0 < amp && (/*originalDamage <= damage ||*/ activeStack.getUseDuration() - blocker.getUseItemRemainingTicks() <= 20 * 3 * amp)){
+                int sweet = DTModifierCheck.getItemModifierNum(activeStack, DreamtinkerModifiers.Ids.sweet_death);
+                if (0 < sweet && (/*originalDamage <= damage ||*/ activeStack.getUseDuration() - blocker.getUseItemRemainingTicks() <= 20 * 3 * sweet)){
                     // 伤害被完全格挡，或格挡持续时间不足2秒，则触发反伤
                     attacker.hurt(DreamtinkerDamageTypes.source(attacker.level().registryAccess(), DamageTypes.INDIRECT_MAGIC, null, blocker),
-                                  damage * (0.25F * amp));
+                                  damage * (0.25F * sweet));
+                }
+                int kiss = DTModifierCheck.getItemModifierNum(activeStack, DreamtinkerModifiers.Ids.last_kiss);
+                if (0 < kiss && (activeStack.getUseDuration() - blocker.getUseItemRemainingTicks() <= 20 * 3 * kiss)){
+                    AtomicInteger i = new AtomicInteger();
+                    blocker.getActiveEffects().removeIf(effect -> effect.getEffect().getCategory() == MobEffectCategory.HARMFUL &&
+                                                                  effect.isCurativeItem(new ItemStack(Items.MILK_BUCKET)) && i.getAndIncrement() < 2);
+                    blocker.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 20 * 2 * kiss, kiss - 1, false, false));
                 }
             }
         }
