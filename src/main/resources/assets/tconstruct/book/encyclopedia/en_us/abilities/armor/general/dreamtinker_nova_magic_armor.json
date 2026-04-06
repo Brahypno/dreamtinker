@@ -11,6 +11,8 @@
   ],
   "more_text_space": true,
   "effects": [
-    "Multi-use"
+    "Requires 1 ability slot for first level",
+    "Consecutive levels slotless",
+    "Maximum of 3 levels"
   ]
 }

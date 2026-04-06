@@ -8,7 +8,8 @@
   "more_text_space": true,
   "tool": "dreamtinker:tntarrow",
   "effects": [
-    "第一级需要1能力槽，之后需要能力槽",
+    "第1级需要1个能力槽",
+    "后续每级需1个升级槽",
     "最高3级"
   ]
 }
