@@ -1,0 +1,39 @@
+{
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:mob_effect",
+      "effect": "dreamtinker:soul_fire",
+      "level": {
+        "per_level": 1.0
+      },
+      "time": {
+        "flat": 80.0,
+        "random": 10.0
+      }
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "effect": "dreamtinker:cursed",
+      "level": {
+        "per_level": 1.0
+      },
+      "time": {
+        "flat": 80.0,
+        "random": 10.0
+      }
+    },
+    {
+      "type": "dreamtinker:self_mob_effect",
+      "effect_tag": "dreamtinker:edicts",
+      "level": {
+        "per_level": 1.0
+      },
+      "time": {
+        "flat": 80.0,
+        "random": 10.0
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

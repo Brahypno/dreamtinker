@@ -1,0 +1,22 @@
+{
+  "modifier_id": "dreamtinker:curse_fire",
+  "text": [
+    {
+      "text": "When on Attacked, apply Cursed fire and curse effect to target; Apply one of Edict effect to self. Edict effect is a series of Mob effect, do controversial would gain negative/positive effects."
+    },
+    {
+      "text": "Cursed fire would deal arcane damage to target per second. The source would be the last attacker and the damage would equal to the attacker`s attack damage.",
+      "paragraph": true
+    },
+    {
+      "text": "Cursed would forbid entity being healed. ",
+      "paragraph": true
+    }
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable/armor",
+  "effects": [
+    "Requires 1 ability slot",
+    "Maximum of 1 levels"
+  ]
+}

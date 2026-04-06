@@ -54,15 +54,19 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
         this.tag(TinkerTags.Modifiers.BONUS_SLOTLESS)
             .add(Ids.huge_ego, Ids.five_creations, Ids.soul_upgrade, Ids.abyss_inside, Ids.meta_morphosis)
             .addOptional(Ids.many_us, Ids.blighted_sigil, Ids.ashen_soul, Ids.naughty_chaos, Ids.cosmogony_tetrad);
+
         this.tag(TinkerTags.Modifiers.MELEE_ABILITIES)
-            .add(real_sweep.getId(), Ids.continuous_explode, flaming_memory.getId())
+            .add(real_sweep.getId(), Ids.continuous_explode, flaming_memory.getId(), Ids.curse_fire)
             .addOptional(weapon_books.getId(), desolation_ring.getId(), eldritch_pan.getId(), nova_enchanter_sword.getId());
         this.tag(TinkerTags.Modifiers.RANGED_ABILITIES)
-            .add(Ids.force_to_explosion, love_shooting.getId())
+            .add(Ids.force_to_explosion, love_shooting.getId(), Ids.curse_fire)
             .addOptional(nova_spell_bow.getId(), nova_wand.getId());
-
+        this.tag(TinkerTags.Modifiers.GENERAL_ARMOR_ABILITIES)
+            .add(Ids.curse_fire)
+            .addOptional(nova_magic_armor.getId());
         this.tag(TinkerTags.Modifiers.GENERAL_ABILITIES)
             .add(life_looting.getId());
+
         this.tag(TinkerTags.Modifiers.BLOCK_WHILE_CHARGING)
             .add(memory_base.getId());
         this.tag(TinkerTags.Modifiers.INTERACTION_ABILITIES)
@@ -71,8 +75,6 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
         this.tag(TinkerTags.Modifiers.GENERAL_ARMOR_UPGRADES)
             .add(virtual_dodge.getId(), Ids.sweet_death, Ids.last_kiss)
             .addOptional(spiritual_weapon_transformation.getId(), Ids.nova_mana_reduce);
-        this.tag(TinkerTags.Modifiers.GENERAL_ARMOR_ABILITIES)
-            .addOptional(nova_magic_armor.getId());
         this.tag(DreamtinkerTagKeys.Modifiers.MALUM_EXPOSE_SOUL)
             .addOptional(malum_hex_staff.getId(), malum_base.getId(), malum_distortion.getId(), malum_spirit_attributes.getId(),
                          Ids.malum_animated, Ids.malum_rebound, Ids.malum_ascension, Ids.malum_haunted, Ids.malum_replenishing, Ids.malum_spirit_plunder,

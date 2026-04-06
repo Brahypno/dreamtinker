@@ -2,6 +2,7 @@
   "values": [
     "dreamtinker:force_to_explosion",
     "dreamtinker:love_shooting",
+    "dreamtinker:curse_fire",
     {
       "id": "dreamtinker:nova_spell_bow",
       "required": false

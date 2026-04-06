@@ -1,0 +1,43 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "amount_needed": 3,
+      "item": "minecraft:blue_ice"
+    },
+    {
+      "amount_needed": 2,
+      "item": "dreamtinker:soul_steel_block"
+    },
+    {
+      "item": "dreamtinker:soul_cast"
+    },
+    {
+      "amount_needed": 3,
+      "item": "dreamtinker:poisonous_homunculus"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:curse_fire",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": [
+    {
+      "tag": "tconstruct:modifiable/melee"
+    },
+    {
+      "tag": "tconstruct:modifiable/ranged/bows"
+    },
+    {
+      "tag": "tconstruct:modifiable/fishing_rods"
+    },
+    {
+      "tag": "tconstruct:modifiable/armor/worn"
+    },
+    {
+      "tag": "tconstruct:modifiable/shields"
+    }
+  ]
+}

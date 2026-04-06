@@ -1,0 +1,22 @@
+{
+  "modifier_id": "dreamtinker:curse_fire",
+  "text": [
+    {
+      "text": "远程击中目标时，施加咒火和诅咒效果，并对自己施加一项禁忌效果。禁忌是一系列实体效果，违背会获得一定的减益和增益。"
+    },
+    {
+      "text": "咒火会每秒造成最后攻击者来源的秘仪伤害，数值等同于最后攻击者的攻击。",
+      "paragraph": true
+    },
+    {
+      "text": "诅咒效果会阻止拥有它的人回复生命。",
+      "paragraph": true
+    }
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable/ranged",
+  "effects": [
+    "需要1个能力槽",
+    "最高1级"
+  ]
+}

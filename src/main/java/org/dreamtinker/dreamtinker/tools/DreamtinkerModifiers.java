@@ -17,6 +17,7 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.DreamtinkerModule;
 import org.dreamtinker.dreamtinker.common.data.tags.ModifierTagProvider;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.MobEffectsRemoverModule;
+import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.SelfMobEffectModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.weapon.SwappableCircleWeaponAttack;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerEnchantmentToModifierProvider;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerFluidEffectProvider;
@@ -246,6 +247,27 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             BIC_MODIFIERS.register("bic_nightmare_defense", nightmare_defense::new);
 
 
+    @SubscribeEvent
+    void registerSerializers(RegisterEvent event) {
+        if (event.getRegistryKey() == Registries.RECIPE_SERIALIZER){
+            ModifierModule.LOADER.register(Dreamtinker.getLocation("swappable_circle_weapon_attack"), SwappableCircleWeaponAttack.LOADER);
+            ModifierModule.LOADER.register(Dreamtinker.getLocation("effects_remover"), MobEffectsRemoverModule.LOADER);
+            ModifierModule.LOADER.register(Dreamtinker.getLocation("self_mob_effect"), SelfMobEffectModule.LOADER);
+        }
+    }
+
+    @SubscribeEvent
+    void gatherData(final GatherDataEvent event) {
+        DataGenerator generator = event.getGenerator();
+        PackOutput packOutput = generator.getPackOutput();
+        boolean server = event.includeServer();
+
+        generator.addProvider(server, new ModifierTagProvider(packOutput, event.getExistingFileHelper()));
+        generator.addProvider(server, new DreamtinkerModifierProvider(packOutput));
+        generator.addProvider(server, new DreamtinkerFluidEffectProvider(packOutput));
+        generator.addProvider(server, new DreamtinkerEnchantmentToModifierProvider(packOutput));
+    }
+
     public static class Ids {
         public static final ModifierId soul_upgrade = id("soul_upgrade");
         public static final ModifierId abyss_inside = id("abyss_inside");
@@ -315,6 +337,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId four_warning = id("four_warning");
         public static final ModifierId sweet_death = id("sweet_death");
         public static final ModifierId last_kiss = id("last_kiss");
+        public static final ModifierId curse_fire = id("curse_fire");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");
@@ -363,26 +386,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
 
         private static ModifierId id(String name) {
             return new ModifierId(Dreamtinker.MODID, name);
-        }
-    }
-
-    @SubscribeEvent
-    void gatherData(final GatherDataEvent event) {
-        DataGenerator generator = event.getGenerator();
-        PackOutput packOutput = generator.getPackOutput();
-        boolean server = event.includeServer();
-
-        generator.addProvider(server, new ModifierTagProvider(packOutput, event.getExistingFileHelper()));
-        generator.addProvider(server, new DreamtinkerModifierProvider(packOutput));
-        generator.addProvider(server, new DreamtinkerFluidEffectProvider(packOutput));
-        generator.addProvider(server, new DreamtinkerEnchantmentToModifierProvider(packOutput));
-    }
-
-    @SubscribeEvent
-    void registerSerializers(RegisterEvent event) {
-        if (event.getRegistryKey() == Registries.RECIPE_SERIALIZER){
-            ModifierModule.LOADER.register(Dreamtinker.getLocation("swappable_circle_weapon_attack"), SwappableCircleWeaponAttack.LOADER);
-            ModifierModule.LOADER.register(Dreamtinker.getLocation("effects_remover"), MobEffectsRemoverModule.LOADER);
         }
     }
 

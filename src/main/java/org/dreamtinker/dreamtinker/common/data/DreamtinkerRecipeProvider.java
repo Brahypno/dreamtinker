@@ -1657,6 +1657,17 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.love_shooting, abilitySalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.love_shooting, abilityFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.curse_fire)
+                             .setTools(ingredientFromTags(TinkerTags.Items.MELEE, TinkerTags.Items.BOWS, TinkerTags.Items.FISHING_RODS,
+                                                          TinkerTags.Items.WORN_ARMOR, TinkerTags.Items.SHIELDS))
+                             .addInput(Blocks.BLUE_ICE, 3)
+                             .addInput(DreamtinkerCommon.soulSteelBlock, 2)
+                             .addInput(DreamtinkerCommon.soul_cast.get(), 1)
+                             .addInput(DreamtinkerCommon.poisonousHomunculus.get(), 3)
+                             .setSlots(SlotType.ABILITY, 1)
+                             .setMaxLevel(1)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.curse_fire, abilitySalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.Ids.curse_fire, abilityFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.ender_slayer)//2 Modifier share same id so This should be fine
                              .setTools(TinkerTags.Items.MELEE_WEAPON)
                              .addInput(Tags.Items.OBSIDIAN, 2)

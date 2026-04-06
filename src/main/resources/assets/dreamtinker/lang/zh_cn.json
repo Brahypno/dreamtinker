@@ -715,7 +715,9 @@
   "modifier.dreamtinker.last_kiss": "最后一吻",
   "modifier.dreamtinker.last_kiss.flavor": "向着明天",
   "modifier.dreamtinker.last_kiss.description": "每级增加0.4使用时移速，但减少25%格挡值和35%格挡角度。如果本次格挡时间不足每级3秒，则获得每级2s，与级别相同的生命回复",
-
+  "modifier.dreamtinker.curse_fire": "受咒魔焰",
+  "modifier.dreamtinker.curse_fire.flavor": "",
+  "modifier.dreamtinker.curse_fire.description": "施加诅咒与咒火效果，并且获得一项戒律实体效果。",
 
   "material.dreamtinker.echo_alloy": "回响合金",
   "material.dreamtinker.echo_alloy.flavor": "是神秘的回响，还是秘密的回响",
@@ -1200,7 +1202,6 @@
   "fluid.dreamtinker.molten_scolecite": "熔融钙沸石",
   "fluid.dreamtinker.molten_scolecite.fluid_effect": "熔融钙沸石",
   "block.dreamtinker.molten_scolecite_fluid": "熔融钙沸石",
-
   "item.dreamtinker.molten_scolecite_bucket": "熔融钙沸石桶",
   "fluid_type.dreamtinker.molten_orichalcum": "熔融月山铜",
   "fluid.dreamtinker.molten_orichalcum": "熔融月山铜",

@@ -9,7 +9,7 @@
         "per_level": 1.0
       },
       "time": {
-        "flat": 20.0,
+        "flat": 40.0,
         "random": 10.0
       }
     }

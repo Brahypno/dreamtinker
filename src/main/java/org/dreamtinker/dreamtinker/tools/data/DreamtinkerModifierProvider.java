@@ -33,6 +33,7 @@ import net.minecraftforge.fluids.FluidType;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.MobEffectsRemoverModule;
+import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.SelfMobEffectModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.weapon.SwappableCircleWeaponAttack;
 import org.dreamtinker.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvider;
 import org.jetbrains.annotations.NotNull;
@@ -439,14 +440,27 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.poison)
                 .addModule(MobEffectModule.builder(MobEffects.POISON)
                                           .level(RandomLevelingValue.perLevel(1, 1))
-                                          .time(RandomLevelingValue.random(20, 10))
+                                          .time(RandomLevelingValue.random(20 * 2, 10))
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
         buildModifier(Ids.weakness)
                 .addModule(MobEffectModule.builder(MobEffects.WEAKNESS)
                                           .level(RandomLevelingValue.perLevel(1, 1))
-                                          .time(RandomLevelingValue.random(20, 10))
+                                          .time(RandomLevelingValue.random(20 * 2, 10))
                                           .build());
+        buildModifier(Ids.curse_fire)
+                .addModule(MobEffectModule.builder(DreamtinkerEffects.SoulFire)
+                                          .level(RandomLevelingValue.perLevel(0, 1))
+                                          .time(RandomLevelingValue.random(20 * 4, 10))
+                                          .build())
+                .addModule(MobEffectModule.builder(DreamtinkerEffects.cursed)
+                                          .level(RandomLevelingValue.perLevel(0, 1))
+                                          .time(RandomLevelingValue.random(20 * 4, 10))
+                                          .build())
+                .addModule(SelfMobEffectModule.builder(DreamtinkerTagKeys.MobEffects.EDICTS)
+                                              .level(RandomLevelingValue.perLevel(0, 1))
+                                              .time(RandomLevelingValue.random(20 * 4, 10))
+                                              .build());
 
         addELModifiers();
         addMalumModifiers();

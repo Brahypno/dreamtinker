@@ -715,6 +715,9 @@
   "modifier.dreamtinker.last_kiss": "Last Kiss",
   "modifier.dreamtinker.last_kiss.flavor": "And on the Eighth Day",
   "modifier.dreamtinker.last_kiss.description": "Increase 0.5 use item speed and decrease 20% block amount and 25% block angle. If block in 3s per level, gain regeneration 2s per level with amplify same as modifier level",
+  "modifier.dreamtinker.curse_fire": "Accursed Demonflame",
+  "modifier.dreamtinker.curse_fire.flavor": "",
+  "modifier.dreamtinker.curse_fire.description": "Apply curse and soul fire to target; and apply one of Edict mob effect to self",
 
   "material.dreamtinker.echo_alloy": "Echo Alloy",
   "material.dreamtinker.echo_alloy.flavor": "Its echo of mystery, or echo of enigma",
@@ -1199,8 +1202,6 @@
   "fluid.dreamtinker.molten_scolecite": "Molten Scolecite",
   "fluid.dreamtinker.molten_scolecite.fluid_effect": "Molten Scolecite",
   "block.dreamtinker.molten_scolecite_fluid": "Molten Scolecite",
-
-
   "item.dreamtinker.molten_scolecite_bucket": "Molten Scolecite Bucket",
   "fluid_type.dreamtinker.molten_orichalcum": "Molten Lunar Orichalcum",
   "fluid.dreamtinker.molten_orichalcum": "Molten Lunar Orichalcum",

@@ -3,6 +3,7 @@
     "dreamtinker:real_sweep",
     "dreamtinker:continuous_explode",
     "dreamtinker:flaming_memory",
+    "dreamtinker:curse_fire",
     {
       "id": "dreamtinker:weapon_books",
       "required": false
