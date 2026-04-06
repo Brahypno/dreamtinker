@@ -1379,14 +1379,6 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         String compatSalvage = salvageFolder + "compat/";
         String soulSalvage = salvageFolder + "soul/";
         Consumer<FinishedRecipe> wrapped;
-        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.real_sweep)
-                             .setTools(Ingredient.of(DreamtinkerTools.mashou.get()))
-                             .addInput(Items.ECHO_SHARD)
-                             .addInput(Items.ECHO_SHARD)
-                             .setMaxLevel(2)
-                             .setSlots(SlotType.ABILITY, 1)
-                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.real_sweep, abilitySalvage))
-                             .save(consumer, prefix(DreamtinkerModifiers.real_sweep, abilityFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.strong_explode)
                              .setTools(Ingredient.of(DreamtinkerTools.tntarrow.get()))
                              .addInput(TinkerTools.shuriken.get())

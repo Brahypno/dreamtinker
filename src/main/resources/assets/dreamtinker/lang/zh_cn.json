@@ -1,7 +1,7 @@
 {
   "modifier.dreamtinker.real_sweep": "超级横扫",
   "modifier.dreamtinker.real_sweep.flavor": "超级横扫",
-  "modifier.dreamtinker.real_sweep.description": "真实横扫，对攻击范围内所有实体造成伤害。如果词条等级大于1，则该伤害会触发匠魂词条。",
+  "modifier.dreamtinker.real_sweep.description": "真实横扫，对攻击范围内所有实体造成伤害。",
   "modifier.dreamtinker.strong_heavy": "超沉重",
   "modifier.dreamtinker.strong_heavy.flavor": "这工具可不好用啊",
   "modifier.dreamtinker.strong_heavy.description": "如果使用者不仅主手持握，且具有力量、速度效果，或骑乘且速度大于一定值，则会获得虚弱效果；否则移除虚弱效果",

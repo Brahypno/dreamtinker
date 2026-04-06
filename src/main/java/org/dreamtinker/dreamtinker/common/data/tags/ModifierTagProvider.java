@@ -56,7 +56,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             .addOptional(Ids.many_us, Ids.blighted_sigil, Ids.ashen_soul, Ids.naughty_chaos, Ids.cosmogony_tetrad);
 
         this.tag(TinkerTags.Modifiers.MELEE_ABILITIES)
-            .add(real_sweep.getId(), Ids.continuous_explode, flaming_memory.getId(), Ids.curse_fire)
+            .add(Ids.continuous_explode, flaming_memory.getId(), Ids.curse_fire)
             .addOptional(weapon_books.getId(), desolation_ring.getId(), eldritch_pan.getId(), nova_enchanter_sword.getId());
         this.tag(TinkerTags.Modifiers.RANGED_ABILITIES)
             .add(Ids.force_to_explosion, love_shooting.getId(), Ids.curse_fire)
