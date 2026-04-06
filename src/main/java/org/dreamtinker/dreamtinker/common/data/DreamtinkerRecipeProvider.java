@@ -1648,7 +1648,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .save(consumer, prefix(DreamtinkerModifiers.signal_axe, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.love_shooting)
                              .setTools(TinkerTags.Items.RANGED)
-                             .addInput(Blocks.BUDDING_AMETHYST, 11)
+                             .addInput(Blocks.AMETHYST_BLOCK, 11)
                              .addInput(TinkerWorld.earthGeode.getBlock(), 11)
                              .addInput(TinkerWorld.skyGeode.getBlock(), 11)
                              .addInput(TinkerWorld.ichorGeode.getBlock(), 11)
