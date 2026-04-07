@@ -284,8 +284,8 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.silver_name_bee)
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
         buildModifier(Ids.the_romantic)
-                .addModule(StatBoostModule.add(ToolStats.ATTACK_SPEED).eachLevel(0.2f))
-                .addModule(StatBoostModule.add(ToolStats.ATTACK_DAMAGE).eachLevel(-0.4f));
+                .addModule(StatBoostModule.add(ToolStats.ATTACK_SPEED).eachLevel(0.3f))
+                .addModule(StatBoostModule.add(ToolStats.ATTACK_DAMAGE).eachLevel(-0.2f));
         buildModifier(Ids.all_slayer)
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModule(ConditionalMeleeDamageModule.builder().target(LivingEntityPredicate.ANY).eachLevel(1.5f));

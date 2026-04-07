@@ -3,13 +3,13 @@
   "modules": [
     {
       "type": "tconstruct:stat_boost",
-      "each_level": 0.2,
+      "each_level": 0.3,
       "operation": "add",
       "stat": "tconstruct:attack_speed"
     },
     {
       "type": "tconstruct:stat_boost",
-      "each_level": -0.4,
+      "each_level": -0.2,
       "operation": "add",
       "stat": "tconstruct:attack_damage"
     }
