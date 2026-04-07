@@ -36,13 +36,14 @@ public class ELEnderSlayer extends BattleModifier {
     @Override
     public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
         if (context.getAttacker() instanceof Player player && SuperpositionHandler.isTheCursedOne(player)){
-            if (EnigmaticItems.ENDER_SLAYER.isEndDweller((LivingEntity) context.getTarget())){
-                if (player.level().dimension().equals(EnigmaticLegacy.PROXY.getEndKey())){
-                    if (context.getTarget() instanceof EnderMan
+            LivingEntity target = context.getLivingTarget();
+            if (null != target && EnigmaticItems.ENDER_SLAYER.isEndDweller(target)){
+                if (player.level().dimension().equals(EnigmaticLegacy.PROXY.getEndKey()) && player.level() == target.level()){
+                    if (target instanceof EnderMan
                         && RegisteredMeleeAttack.getRegisteredAttackStregth(player) >= 1F){
                         damage = (damage + 100F) * 10F;
                     }
-                    context.getTarget().getPersistentData().putBoolean("EnderSlayerVictim", true);
+                    target.getPersistentData().putBoolean("EnderSlayerVictim", true);
                 }
                 damage += damage * EnderSlayer.endDamageBonus.getValue().asModifier(false) * modifier.getEffectiveLevel();
             }

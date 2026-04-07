@@ -44,7 +44,7 @@ public class ExplosiveHit extends BattleModifier {
         target.level().explode(target, target.getX(),
                                target.getY(),
                                target.getZ(),
-                               range,
+                               Math.min(4, range),
                                ExplodeHitFire.get(),
                                Level.ExplosionInteraction.NONE);
     }

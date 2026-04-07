@@ -21,13 +21,13 @@ public class AnvilHit extends BattleModifier {
 
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        if (null != context.getLivingTarget() && context.getAttacker().level() instanceof ServerLevel level && !level.isClientSide)
+        if (null != context.getLivingTarget() && context.getLivingTarget().level() instanceof ServerLevel level && !level.isClientSide)
             spawnAnvilSmash(level, context.getLivingTarget(), modifier.getLevel(), 3, (int) damageDealt);
     }
 
     @Override
     public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
-        if (null != context.getLivingTarget() && context.getAttacker().level() instanceof ServerLevel level && !level.isClientSide)
+        if (null != context.getLivingTarget() && context.getLivingTarget().level() instanceof ServerLevel level && !level.isClientSide)
             spawnAnvilSmash(level, context.getLivingTarget(), modifier.getLevel(), 3, (int) damage);
     }
 

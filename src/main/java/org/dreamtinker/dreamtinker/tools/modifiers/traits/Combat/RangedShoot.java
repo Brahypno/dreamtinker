@@ -32,12 +32,12 @@ public class RangedShoot extends NoLevelsModifier implements ArrowInterface {
         if (null != attacker && null != target && !ProjectileHitMemory.hasTriggered(mark, projectile, target.getUUID())){
             if (rangedHit.get() <= 1e-6)
                 return false;
-            double dis = attacker.position().distanceTo(target.position());
+            double dis = attacker.level() == target.level() ? attacker.position().distanceTo(target.position()) : 3 * rangedHit.get();
             double ratio = Math.max(dis / rangedHit.get(), 0.25);
             Vec3 vel = projectile.getDeltaMovement().scale(ratio);
             projectile.setDeltaMovement(vel);
             if (projectile instanceof AbstractArrow arrow){
-                arrow.setCritArrow(rangedHit.get() < dis);
+                arrow.setCritArrow(1 < ratio);
                 arrow.setBaseDamage(arrow.getBaseDamage() * ratio);
             }
             ProjectileHitMemory.markTriggered(mark, projectile, target.getUUID());

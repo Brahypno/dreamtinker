@@ -7,8 +7,10 @@ import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -24,6 +26,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
@@ -131,7 +134,7 @@ public class NarcissusFluidProjectile extends Projectile {
             Vec3 hitPos = from.add(vel.scale(t));
             this.setPos(hitPos.x, hitPos.y, hitPos.z);
 
-            if (!net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, toi.hit)){
+            if (!ForgeEventFactory.onProjectileImpact(this, toi.hit)){
                 this.onHit(toi.hit); // 只实体命中
             }
             impacted = true;
@@ -241,6 +244,20 @@ public class NarcissusFluidProjectile extends Projectile {
         return new ResultTOI(null, 1.0);
     }
 
+    private DamageSource dmg(Entity target, Entity entity1) {
+        Entity causingEntity = target.level() == entity1.level() ? entity1 : null;
+        Entity direct = null == causingEntity ? this : null;
+        ResourceKey<DamageType> type =
+                null != toolStackView && 2 < toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) ?
+                DreamtinkerDamageTypes.NULL_VOID :
+                null != toolStackView && 1 < toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) ?
+                DamageTypes.SONIC_BOOM :
+                null != toolStackView && 0 < toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) ?
+                TinkerDamageTypes.FLUID_COLD.melee() :
+                DamageTypes.MOB_PROJECTILE;
+        return DreamtinkerDamageTypes.source(target.level().registryAccess(), type, direct, causingEntity);
+    }
+
     @Override
     protected void onHitEntity(@NotNull EntityHitResult result) {
         Entity target = result.getEntity();
@@ -254,18 +271,12 @@ public class NarcissusFluidProjectile extends Projectile {
 
         Entity entity1 = this.getOwner();
         if (null != entity1){
-            DamageSource damagesource = null != toolStackView && 2 < toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) ?
-                                        DreamtinkerDamageTypes.source(entity1.level().registryAccess(), DreamtinkerDamageTypes.NULL_VOID, null, entity1) :
-                                        null != toolStackView && 1 < toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) ?
-                                        DreamtinkerDamageTypes.source(entity1.level().registryAccess(), DamageTypes.SONIC_BOOM, null, entity1) :
-                                        null != toolStackView && 0 < toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) ?
-                                        DreamtinkerDamageTypes.source(entity1.level().registryAccess(), TinkerDamageTypes.FLUID_COLD.melee(), null, entity1) :
-                                        DreamtinkerDamageTypes.source(entity1.level().registryAccess(), DamageTypes.MOB_PROJECTILE, null, entity1);
+
             if (entity1 instanceof LivingEntity){
                 ((LivingEntity) entity1).setLastHurtMob(target);
             }
             if (target instanceof LivingEntity livingentity &&
-                target.hurt(damagesource,
+                target.hurt(dmg(livingentity, entity1),
                             null != toolStackView ? (toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) + 1) * dmg : dmg)){
                 if (this.knock_back > 0){
                     double d0 = Math.max(0.0F, (double) 1.0F - livingentity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
@@ -292,16 +303,19 @@ public class NarcissusFluidProjectile extends Projectile {
         Level level = this.level();
         if (!level.isClientSide && !fluid.isEmpty()){
             FluidEffects recipe = FluidEffectManager.INSTANCE.find(fluid.getFluid());
-            if (null != this.getOwner()){
+            if (null != entity1){
                 if (recipe.hasEntityEffects()){
                     int times = null != toolStackView ? Math.max(1, MemoryBase.getLevel(toolStackView) / 3) : 1;
+                    DamageSource damagesource = dmg(target, entity1);
                     for (int i = 0; i < times; i++) {
                         target.invulnerableTime = 0;
-                        if (toolStackView != null){
+                        if (toolStackView != null && entity1.level() == target.level()){
                             ToolAttackUtil.performAttack(toolStackView,
                                                          ToolAttackContext.attacker((LivingEntity) this.getOwner()).target(target).cooldown(1).applyAttributes()
                                                                           .build());
-                        }
+                        }else
+                            target.hurt(damagesource,
+                                        null != toolStackView ? (toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) + 1) * dmg : dmg);
 
                     }
                     FluidEffectContext.Entity context = this.buildContext().location(result.getLocation()).target(this.getOwner());
@@ -318,8 +332,6 @@ public class NarcissusFluidProjectile extends Projectile {
                     }
                 }
             }
-
-
         }
 
 

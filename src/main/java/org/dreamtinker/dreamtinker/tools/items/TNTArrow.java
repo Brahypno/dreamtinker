@@ -127,7 +127,7 @@ public class TNTArrow extends ModifiableArrowItem {
                                 sound++;
                             }
                         }
-                        if (owner.position().distanceTo(hitPos) <= hitRadius){
+                        if (owner.level() == this.level() && owner.position().distanceTo(hitPos) <= hitRadius){
                             hitEntity(owner);
                             sound++;
                         }

@@ -81,11 +81,11 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         public void appendHoverText(@NotNull ItemStack stack, Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
             tooltip.add(Component.translatable("tooltip.dreamtinker.soul_cast_1").withStyle(ChatFormatting.DARK_RED));
             tooltip.add(Component.translatable("tooltip.dreamtinker.soul_cast_2").withStyle(ChatFormatting.DARK_RED));
-            if (!(null != stack.getTag() && stack.getTag().getBoolean("love"))){
+            if ((null != stack.getTag() && stack.getTag().getBoolean("desire"))){
                 tooltip.add(Component.translatable("tooltip.dreamtinker.soul_cast_3").withStyle(ChatFormatting.DARK_GRAY));
                 tooltip.add(Component.translatable("tooltip.dreamtinker.soul_cast_4").withStyle(ChatFormatting.GOLD));
             }
-            if (!(null != stack.getTag() && stack.getTag().getBoolean("desire"))){
+            if ((null != stack.getTag() && stack.getTag().getBoolean("love"))){
                 tooltip.add(Component.translatable("tooltip.dreamtinker.soul_cast_5").withStyle(ChatFormatting.GREEN));
                 //tooltip.add(Component.translatable("tooltip.dreamtinker.soul_cast_6").withStyle(ChatFormatting.DARK_RED));
             }
