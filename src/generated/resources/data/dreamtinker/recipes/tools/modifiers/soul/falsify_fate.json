@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:incremental_modifier",
+  "allow_crystal": true,
+  "amount_per_item": 1,
+  "input": {
+    "item": "dreamtinker:amber"
+  },
+  "level": {
+    "max": 3
+  },
+  "needed_per_level": 40,
+  "result": "dreamtinker:falsify_fate",
+  "slots": {
+    "souls": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/harvest/primary"
+  }
+}

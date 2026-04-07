@@ -1,0 +1,18 @@
+{
+  "modifier_id": "dreamtinker:falsify_fate",
+  "text": [
+    {
+      "text": "对于硬度高的方块，极大加强挖掘速度，反之减少挖掘速度"
+    },
+    {
+      "text": "最大增加250%挖掘速度\n",
+      "paragraph": true
+    }
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable/harvest/primary",
+  "effects": [
+    "需要1灵魂槽",
+    "最高3级"
+  ]
+}

@@ -53,7 +53,9 @@ import slimeknights.tconstruct.library.json.RandomLevelingValue;
 import slimeknights.tconstruct.library.json.predicate.TinkerPredicate;
 import slimeknights.tconstruct.library.json.predicate.tool.HasModifierPredicate;
 import slimeknights.tconstruct.library.json.predicate.tool.ToolContextPredicate;
+import slimeknights.tconstruct.library.json.variable.block.BlockVariable;
 import slimeknights.tconstruct.library.json.variable.mining.BlockLightVariable;
+import slimeknights.tconstruct.library.json.variable.mining.BlockMiningSpeedVariable;
 import slimeknights.tconstruct.library.json.variable.mining.BlockTemperatureVariable;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.impl.BasicModifier;
@@ -461,6 +463,22 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                               .level(RandomLevelingValue.perLevel(0, 1))
                                               .time(RandomLevelingValue.random(20 * 4, 10))
                                               .build());
+        buildModifier(Ids.falsify_fate)
+                .priority(-300)//make sure late enough
+                .addModule(ConditionalMiningSpeedModule.builder()
+                                                       .customVariable("hardness", new BlockMiningSpeedVariable(BlockVariable.HARDNESS, 3))
+                                                       .percent()
+                                                       .formula()
+                                                       .constant(24.0f).customVariable("hardness").multiply() // 24*hardness
+                                                       .variable(VALUE).divide()//above/current speed
+                                                       .constant(1.0f).subtract().constant(0.35f).multiply()//(above-1)*0.35
+                                                       .variable(LEVEL).multiply() // above * level
+                                                       //.variable(MULTIPLIER).multiply() // above * multiplier
+                                                       .constant(1).add()
+                                                       .constant(0.7f).max()
+                                                       .constant(2.5f).min()
+                                                       .variable(VALUE).multiply()
+                                                       .build());
 
         addELModifiers();
         addMalumModifiers();
