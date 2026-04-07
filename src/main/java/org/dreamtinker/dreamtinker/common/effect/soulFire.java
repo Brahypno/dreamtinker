@@ -102,15 +102,17 @@ public class soulFire extends MobEffect {
         }
 
         MobEffectInstance ent = entity.getEffect(this);
-        for (LivingEntity aoeTarget : sl.getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(0.25, 0.25D, 0.25D))) {
-            if (aoeTarget != entity){
-                MobEffectInstance ins = entity.getEffect(this);
-                if (null == ins || ins.getAmplifier() < amplifier){
-                    aoeTarget.addEffect(
-                            new MobEffectInstance(this, Math.max(null != ent ? ent.getDuration() : 1, null != ins ? ins.getDuration() : 1), amplifier));
+        if (null != ent && entity.tickCount % 10 == 0)
+            for (LivingEntity aoeTarget : sl.getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(0.4, 0.25D, 0.4))) {
+                if (aoeTarget != entity){
+                    MobEffectInstance ins = aoeTarget.getEffect(this);
+                    if (null == ins || ins.getAmplifier() < amplifier || ins.getAmplifier() == amplifier && ins.getDuration() < ent.getDuration()){
+                        aoeTarget.addEffect(
+                                new MobEffectInstance(this, Math.max(ent.getDuration(), null != ins ? ins.getDuration() : 1),
+                                                      Math.max(null != ins ? ins.getAmplifier() : 0, amplifier)));
+                    }
                 }
             }
-        }
     }
 
 }
