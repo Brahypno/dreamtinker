@@ -13,24 +13,24 @@
         "-",
         0.35,
         "*",
-        "$level",
-        "*",
         1.0,
         "+",
         0.7,
         "max",
-        2.5,
+        1.5,
+        "$level",
+        "+",
         "min",
         "$speed",
         "*"
       ],
       "percent": true,
-      "require_effective": true,
+      "require_effective": false,
       "variables": {
         "hardness": {
           "type": "tconstruct:block",
           "block_type": "tconstruct:hardness",
-          "fallback": 3.0
+          "fallback": 10.0
         }
       }
     }
