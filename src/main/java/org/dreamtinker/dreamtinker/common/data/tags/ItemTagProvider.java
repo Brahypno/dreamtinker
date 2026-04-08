@@ -4,6 +4,7 @@ import com.sammy.malum.registry.common.item.ItemTagRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ArmorItem;
@@ -68,6 +69,8 @@ public class ItemTagProvider extends ItemTagsProvider {
         this.tag(Items.dt_hammer).add(TinkerTools.veinHammer.asItem(), TinkerTools.sledgeHammer.asItem());
         this.tag(ItemTagRegistry.HIDDEN_UNTIL_BLACK_CRYSTAL)
             .addOptional(malignant_gluttony.getId());
+        this.tag(Items.utheriumNugget)
+            .addOptional(new ResourceLocation("undergarden", "utheric_shard"));
         //parts
         IntrinsicTagAppender<Item> goldCasts = this.tag(TinkerTags.Items.GOLD_CASTS);
         IntrinsicTagAppender<Item> sandCasts = this.tag(TinkerTags.Items.SAND_CASTS);

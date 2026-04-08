@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:nuggets/utherium"
+  },
+  "material": "dreamtinker:utherium",
+  "needed": 9,
+  "value": 1
+}

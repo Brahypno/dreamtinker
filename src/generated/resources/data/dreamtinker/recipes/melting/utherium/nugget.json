@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:nuggets/utherium"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:nuggets/utherium"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "dreamtinker:molten_utherium"
+  },
+  "temperature": 1500,
+  "time": 27
+}

@@ -215,6 +215,9 @@ dependencies {
     implementation fg.deobf("curse.maven:born-in-chaos-686437:7150209")
 
     implementation fg.deobf("com.hollingsworth.ars_nouveau:ars_nouveau-${minecraft_version}:${arts_version}")
+
+    implementation fg.deobf("curse.maven:the-undergarden-379849:5182632")
+//may not necessary, but should be helpful during development
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

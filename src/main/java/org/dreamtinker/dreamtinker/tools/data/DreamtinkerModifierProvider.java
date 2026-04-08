@@ -37,6 +37,7 @@ import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.SelfMobEffec
 import org.dreamtinker.dreamtinker.library.modifiers.modules.weapon.SwappableCircleWeaponAttack;
 import org.dreamtinker.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvider;
 import org.jetbrains.annotations.NotNull;
+import quek.undergarden.registry.UGTags;
 import slimeknights.mantle.data.predicate.IJsonPredicate;
 import slimeknights.mantle.data.predicate.block.BlockPropertiesPredicate;
 import slimeknights.mantle.data.predicate.damage.DamageSourcePredicate;
@@ -485,6 +486,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         addEidolonModifiers();
         addBICModifiers();
         addNovaModifiers();
+        addUGModifiers();
 
     }
 
@@ -778,6 +780,25 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModules(ModifierSlotModule.slot(SlotType.SOUL).eachLevel(1));
+    }
+
+    private void addUGModifiers() {
+        buildModifier(Ids.undergarden_rot_killer, DreamtinkerMaterialDataProvider.modLoaded("undergarden"))
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(ConditionalMeleeDamageModule.builder().target(LivingEntityPredicate.tag(UGTags.Entities.ROTSPAWN)).percent()
+                                                       .formula()
+                                                       .variable(LEVEL).constant(0.5f).multiply()
+                                                       .constant(1f).add()
+                                                       .variable(VALUE).multiply().build())
+                .addModule(ConditionalPowerModule.builder().target(LivingEntityPredicate.tag(UGTags.Entities.ROTSPAWN)).percent()
+                                                 .formula()
+                                                 .variable(LEVEL).constant(0.5f).multiply()
+                                                 .constant(1f).add()
+                                                 .variable(VALUE).multiply().build());
+
+        buildModifier(Ids.undergarden_rot_protection, DreamtinkerMaterialDataProvider.modLoaded("undergarden"))
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(ProtectionModule.builder().attacker(LivingEntityPredicate.tag(UGTags.Entities.ROTSPAWN)).eachLevel(1.75f));
     }
 
     @Override

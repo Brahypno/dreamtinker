@@ -1,0 +1,37 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "undergarden"
+          },
+          {
+            "type": "dreamtinker:mod_compact_config",
+            "modid": "undergarden"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:single_level",
+  "modules": [
+    {
+      "type": "tconstruct:protection",
+      "attacker": {
+        "type": "mantle:tag",
+        "tag": "undergarden:rotspawn"
+      },
+      "damage_source": "mantle:can_protect",
+      "each_level": 1.75
+    }
+  ],
+  "tooltip_display": "always"
+}

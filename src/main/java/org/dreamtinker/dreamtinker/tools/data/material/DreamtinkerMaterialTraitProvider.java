@@ -101,6 +101,8 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.ArcaneGold, ARMOR, TinkerModifiers.golden.getId(), ModifierIds.magicProtection, Ids.arcane_protection);
         addTraits(DreamtinkerMaterialIds.ArcaneGold, PlatingMaterialStats.SHIELD.getId(), ModifierIds.magicProtection, Ids.arcane_protection);
 
+        addDefaultTraits(DreamtinkerMaterialIds.Utherium, Ids.undergarden_rot_killer);
+        addTraits(DreamtinkerMaterialIds.Utherium, ARMOR, Ids.undergarden_rot_protection);
 
         addDefaultTraits(DreamtinkerMaterialIds.etherium,
                          new ModifierEntry(ModifierIds.smite, 2),

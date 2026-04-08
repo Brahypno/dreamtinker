@@ -1,0 +1,16 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "dreamtinker:undergarden_rot_killer"
+    }
+  ],
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "dreamtinker:undergarden_rot_protection"
+      }
+    ]
+  }
+}

@@ -57,12 +57,15 @@ import slimeknights.mantle.recipe.helper.ItemOutput;
 import slimeknights.mantle.recipe.ingredient.EntityIngredient;
 import slimeknights.mantle.recipe.ingredient.FluidIngredient;
 import slimeknights.mantle.recipe.ingredient.SizedIngredient;
+import slimeknights.mantle.registration.object.FluidObject;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.common.json.ConfigEnabledCondition;
 import slimeknights.tconstruct.common.registration.CastItemObject;
 import slimeknights.tconstruct.fluids.TinkerFluids;
 import slimeknights.tconstruct.library.data.recipe.IMaterialRecipeHelper;
+import slimeknights.tconstruct.library.data.recipe.ISmelteryRecipeHelper;
 import slimeknights.tconstruct.library.data.recipe.IToolRecipeHelper;
+import slimeknights.tconstruct.library.data.recipe.SmelteryRecipeBuilder;
 import slimeknights.tconstruct.library.materials.definition.MaterialId;
 import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
 import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
@@ -112,7 +115,7 @@ import static elucent.eidolon.registries.Registry.*;
 import static net.mcreator.borninchaosv.init.BornInChaosV1ModEntities.*;
 import static net.mcreator.borninchaosv.init.BornInChaosV1ModItems.*;
 
-public class DreamtinkerRecipeProvider extends RecipeProvider implements IMaterialRecipeHelper, IToolRecipeHelper, IConditionBuilder, IRecipeHelper, ICommonRecipeHelper {
+public class DreamtinkerRecipeProvider extends RecipeProvider implements IMaterialRecipeHelper, IToolRecipeHelper, IConditionBuilder, IRecipeHelper, ICommonRecipeHelper, ISmelteryRecipeHelper {
 
     public DreamtinkerRecipeProvider(PackOutput p_248933_) {
         super(p_248933_);
@@ -535,6 +538,27 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.arcaneGoldBlock),
                                      DreamtinkerFluids.molten_arcane_gold.get(), FluidValues.METAL_BLOCK, 0.05f)
                             .save(wrapped, location(Melting_folder + "arcane_gold/block"));
+
+
+        wrapped = withCondition(consumer, tagFilled(DreamtinkerTagKeys.Items.utheriumNugget));
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.utheriumNugget),
+                                     DreamtinkerFluids.molten_utherium.get(), FluidValues.NUGGET, 0.05f)
+                            .save(wrapped, location(Melting_folder + "utherium/nugget"));
+
+        wrapped = withCondition(consumer, tagFilled(DreamtinkerTagKeys.Items.utheriumIngot));
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.utheriumIngot),
+                                     DreamtinkerFluids.molten_utherium.get(), FluidValues.INGOT, 0.05f)
+                            .save(wrapped, location(Melting_folder + "utherium/ingot"));
+        wrapped = withCondition(consumer, tagFilled(DreamtinkerTagKeys.Items.utheriumBlock));
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.utheriumBlock),
+                                     DreamtinkerFluids.molten_utherium.get(), FluidValues.METAL_BLOCK, 0.05f)
+                            .save(wrapped, location(Melting_folder + "utherium/block"));
+
+        wrapped = withCondition(consumer, tagFilled(DreamtinkerTagKeys.Items.utheriumOre));
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.utheriumOre),
+                                     DreamtinkerFluids.molten_utherium.get(), FluidValues.INGOT, 0.05f)
+                            .setOre(IMeltingContainer.OreRateType.METAL)
+                            .save(wrapped, location(Melting_folder + "utherium/ore"));
     }
 
     private void addCompactMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
@@ -542,6 +566,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         addCompactMalumMeltingCastingRecipes(consumer);
         addCompactEidolonMeltingCastingRecipes(consumer);
         addCompactBICMeltingCastingRecipes(consumer);
+        addCompactUGMeltingCastingRecipes(consumer);
     }
 
     private void addCompactELMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
@@ -748,6 +773,20 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                   .save(wrapped, location(Entity_Melting_folder + "molten_dark_metal/boss"));
     }
 
+    public static SmelteryRecipeBuilder.CommonRecipe[] armorAndToolsBySuffix(String modid) {
+        return new SmelteryRecipeBuilder.CommonRecipe[]{
+                new SmelteryRecipeBuilder.ToolItemMelting(5, modid, "helmet"),
+                new SmelteryRecipeBuilder.ToolItemMelting(8, modid, "chestplate"),
+                new SmelteryRecipeBuilder.ToolItemMelting(7, modid, "leggings"),
+                new SmelteryRecipeBuilder.ToolItemMelting(4, modid, "boots"),
+
+                new SmelteryRecipeBuilder.ToolItemMelting(2, modid, "sword"),
+                new SmelteryRecipeBuilder.ToolItemMelting(3, modid, "pickaxe"),
+                new SmelteryRecipeBuilder.ToolItemMelting(3, modid, "axe"),
+                new SmelteryRecipeBuilder.ToolItemMelting(1, modid, "shovel")
+        };
+    }
+
     String materials_folder = "tools/materials/";
     String slimeskinFolder = materials_folder + "slimeskin/";
 
@@ -887,6 +926,16 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
         materialRecipe(consumer, DreamtinkerMaterialIds.FifthStone, Ingredient.of(DreamtinkerCommon.fifth_stone.get()), 1, 1,
                        materials_folder + "fifth_stone");
+
+
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.Utherium, DreamtinkerFluids.molten_utherium, FluidValues.INGOT,
+                               materials_folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.Utherium, Ingredient.of(DreamtinkerTagKeys.Items.utheriumIngot), 1, 1,
+                       materials_folder + "utherium/ingot");
+        materialRecipe(consumer, DreamtinkerMaterialIds.Utherium, Ingredient.of(DreamtinkerTagKeys.Items.utheriumNugget), 1, 9,
+                       materials_folder + "utherium/nugget");
+        materialRecipe(consumer, DreamtinkerMaterialIds.Utherium, Ingredient.of(DreamtinkerTagKeys.Items.utheriumBlock), 9, 1,
+                       materials_folder + "utherium/block");
 
     }
 
@@ -2511,6 +2560,20 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                 .setFluidAndTime(TinkerFluids.enderSlime, amount)
                                 .setCast(cast, true)
                                 .save(consumer, location(location));
+    }
+
+    public SmelteryRecipeBuilder metal(Consumer<FinishedRecipe> consumer, FluidObject<?> fluid) {
+        return molten(consumer, fluid).castingFolder("smeltery/casting/metal").meltingFolder("smeltery/melting/metal");
+    }
+
+    private void addCompactUGMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
+        String undergarden = "undergarden";
+        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(undergarden));
+        fluid(consumer, "utherium", DreamtinkerFluids.molten_utherium).optional()
+                                                                      .baseUnit(FluidValues.INGOT).damageUnit(FluidValues.NUGGET)
+                                                                      .metal().dust().plate().gear().coin().sheetmetal().geore().oreberry()
+                                                                      .common(armorAndToolsBySuffix(undergarden));
+
     }
 }
 

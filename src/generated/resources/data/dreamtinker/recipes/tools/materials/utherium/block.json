@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:storage_blocks/utherium"
+  },
+  "material": "dreamtinker:utherium",
+  "needed": 1,
+  "value": 9
+}

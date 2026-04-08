@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:ore_melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:geore_clusters/utherium"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:geore_clusters/utherium"
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 360,
+    "fluid": "dreamtinker:molten_utherium"
+  },
+  "temperature": 1500,
+  "time": 201
+}

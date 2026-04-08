@@ -186,7 +186,9 @@
     "sweet_death": "#F28C28",
     "last_kiss": "#C96A88",
     "curse_fire": "#6A7BFF",
-    "falsify_fate": "#4B3F72"
+    "falsify_fate": "#4B3F72",
+    "undergarden_rot_killer": "#C3434C",
+    "undergarden_rot_protection": "#C3434C"
 
 },
   "material.dreamtinker": {
@@ -254,7 +256,8 @@
     "nova_wilden_horn": "#E0E5D5",
     "nova_wilden_wing": "#D0B595",
     "nova_wilden_spike": "#E09A55",
-    "fifth_stone": "#5F8D96"
+    "fifth_stone": "#5F8D96",
+    "utherium": "#C3434C"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873",

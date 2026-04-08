@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "dreamtinker:utherium",
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_utherium"
+  },
+  "temperature": 1500
+}

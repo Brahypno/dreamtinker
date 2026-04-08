@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:geore_blocks/utherium"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:geore_blocks/utherium"
+  },
+  "result": {
+    "amount": 360,
+    "fluid": "dreamtinker:molten_utherium"
+  },
+  "temperature": 1500,
+  "time": 160
+}

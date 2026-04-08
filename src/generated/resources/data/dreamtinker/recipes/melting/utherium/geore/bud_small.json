@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:ore_melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:geore_small_buds/utherium"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:geore_small_buds/utherium"
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_utherium"
+  },
+  "temperature": 1500,
+  "time": 80
+}

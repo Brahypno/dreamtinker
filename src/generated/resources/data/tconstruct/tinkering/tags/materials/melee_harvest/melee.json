@@ -74,6 +74,10 @@
     {
       "id": "dreamtinker:nova_manipulation_essence",
       "required": false
+    },
+    {
+      "id": "dreamtinker:utherium",
+      "required": false
     }
   ]
 }

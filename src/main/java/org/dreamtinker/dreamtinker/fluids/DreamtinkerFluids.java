@@ -1,15 +1,21 @@
 package org.dreamtinker.dreamtinker.fluids;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -30,15 +36,19 @@ import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import slimeknights.mantle.fluid.InvertedFluid;
 import slimeknights.mantle.registration.deferred.FluidDeferredRegister;
 import slimeknights.mantle.registration.object.FlowingFluidObject;
+import slimeknights.mantle.registration.object.FluidObject;
 import slimeknights.tconstruct.fluids.block.BurningLiquidBlock;
 import slimeknights.tconstruct.fluids.data.FluidBlockstateModelProvider;
 import slimeknights.tconstruct.fluids.data.FluidBucketModelProvider;
 
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static org.dreamtinker.dreamtinker.Dreamtinker.configCompactDisabled;
 import static org.dreamtinker.dreamtinker.DreamtinkerModule.*;
+import static slimeknights.mantle.Mantle.commonResource;
+import static slimeknights.tconstruct.fluids.TinkerFluids.withoutMolten;
 
 public class DreamtinkerFluids {
     public static final RegistryObject<CreativeModeTab> tabFluids = TABS.register(
@@ -291,6 +301,10 @@ public class DreamtinkerFluids {
             registerFluid(FLUIDS, "molten_ender_ash", 1800, 1000, 10000, 10,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_PURPLE, 2), 0, 0) {});
 
+    public static final FlowingFluidObject<ForgeFlowingFluid> molten_utherium =
+            registerFluid(FLUIDS, "molten_utherium", 1800, 100, 100, 10,
+                          supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.METAL, 12), 10, 4) {});
+
     private static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         // containers
         output.accept(molten_echo_alloy);
@@ -334,12 +348,18 @@ public class DreamtinkerFluids {
         output.accept(molten_cold_iron);
         output.accept(molten_shadow_silver);
         output.accept(molten_transmutation_gold);
-        output.accept(mercury);
-        output.accept(molten_arcane_gold);
+
         if (ModList.get().isLoaded("born_in_chaos_v1") && !configCompactDisabled("born_in_chaos_v1")){
             output.accept(molten_dark_metal);
         }
         output.accept(molten_ender_ash);
+
+        //output.accept(mercury);
+        //output.accept(molten_arcane_gold);
+        acceptCompat(output, mercury, "cinnabar");
+        acceptMolten(output, molten_arcane_gold);
+        acceptMolten(output, molten_utherium);
+
     }
 
     @SubscribeEvent
@@ -354,5 +374,46 @@ public class DreamtinkerFluids {
         //generator.addProvider(client, new FluidTextureCameraProvider(packOutput, event.getExistingFileHelper(), textureProvider));
 
         generator.addProvider(client, new FluidBlockstateModelProvider(packOutput, Dreamtinker.MODID));
+    }
+
+    /**
+     * Accepts the given item if any of the listed ingots are present
+     */
+    private static void acceptCompat(CreativeModeTab.Output output, ItemLike item, String... ingots) {
+        for (String ingot : ingots) {
+            if (acceptIfTag(output, item, ItemTags.create(commonResource("ingots/" + ingot)))){
+                break;
+            }
+        }
+    }
+
+    /**
+     * Accepts the given item if the ingot named after the fluid is present
+     */
+    private static void acceptMolten(CreativeModeTab.Output output, FluidObject<?> fluid) {
+        acceptCompat(output, fluid, withoutMolten(fluid));
+    }
+
+    /**
+     * Accepts the given item if the ingot named after the fluid or the passed ingot name is present
+     */
+    private static void acceptMolten(CreativeModeTab.Output output, FluidObject<?> fluid, String ingot) {
+        acceptCompat(output, fluid, withoutMolten(fluid), ingot);
+    }
+
+    protected static boolean acceptIfTag(CreativeModeTab.Output output, ItemLike item, CreativeModeTab.TabVisibility visibility, TagKey<Item> tagCondition) {
+        Optional<HolderSet.Named<Item>> tag = BuiltInRegistries.ITEM.getTag(tagCondition);
+        if (tag.isPresent() && tag.get().size() > 0){
+            output.accept(item, visibility);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Accepts the given item if the passed tag has items
+     */
+    protected static boolean acceptIfTag(CreativeModeTab.Output output, ItemLike item, TagKey<Item> tagCondition) {
+        return acceptIfTag(output, item, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS, tagCondition);
     }
 }

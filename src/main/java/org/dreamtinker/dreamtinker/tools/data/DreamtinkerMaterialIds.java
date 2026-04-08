@@ -34,6 +34,9 @@ public class DreamtinkerMaterialIds {
     public static final MaterialId TransmutationGold = new MaterialId(new ResourceLocation(MODID, "transmutation_gold"));
     public static final MaterialId SpikyShard = new MaterialId(new ResourceLocation(MODID, "spiky_shard"));
     public static final MaterialId FifthStone = new MaterialId(new ResourceLocation(MODID, "fifth_stone"));
+    //Compact tag
+    public static final MaterialId ArcaneGold = new MaterialId(new ResourceLocation(MODID, "arcane_gold"));//eidolon
+    public static final MaterialId Utherium = new MaterialId(new ResourceLocation(MODID, "utherium"));//undergarden
     //Compact-enigmatic legacy
     public static final MaterialId etherium = new MaterialId(new ResourceLocation(MODID, "etherium"));
     public static final MaterialId nefarious = new MaterialId(new ResourceLocation(MODID, "nefarious"));
@@ -58,7 +61,6 @@ public class DreamtinkerMaterialIds {
     public static final MaterialId astral_weave = new MaterialId(new ResourceLocation(MODID, "malum_astral_weave"));
     public static final MaterialId null_slate = new MaterialId(new ResourceLocation(MODID, "malum_null_slate"));
     //Compact-eidolon
-    public static final MaterialId ArcaneGold = new MaterialId(new ResourceLocation(MODID, "arcane_gold"));
     public static final MaterialId TatteredCloth = new MaterialId(new ResourceLocation(MODID, "eidolon_tattered_cloth"));
     public static final MaterialId WickedWeave = new MaterialId(new ResourceLocation(MODID, "eidolon_wicked_wave"));
     public static final MaterialId PaladinBone = new MaterialId(new ResourceLocation(MODID, "eidolon_paladin_bone"));

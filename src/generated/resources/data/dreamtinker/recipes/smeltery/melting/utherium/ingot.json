@@ -1,0 +1,27 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "mantle:tag_filled",
+          "tag": "forge:ingots/utherium"
+        }
+      ]
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:ingots/utherium"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_utherium"
+  },
+  "temperature": 1500,
+  "time": 4
+}

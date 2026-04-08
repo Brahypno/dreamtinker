@@ -48,6 +48,10 @@
     {
       "id": "dreamtinker:eidolon_paladin_bone_tool",
       "required": false
+    },
+    {
+      "id": "dreamtinker:utherium",
+      "required": false
     }
   ]
 }

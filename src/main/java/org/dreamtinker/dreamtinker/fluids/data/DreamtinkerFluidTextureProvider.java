@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.fluid.texture.AbstractFluidTextureProvider;
 import slimeknights.mantle.fluid.texture.FluidTexture;
 import slimeknights.mantle.registration.object.FluidObject;
+import slimeknights.tconstruct.fluids.TinkerFluids;
 
 import java.util.Objects;
 
@@ -65,6 +66,7 @@ public class DreamtinkerFluidTextureProvider extends AbstractFluidTextureProvide
         this.commonFluid(DreamtinkerFluids.molten_dark_metal.getType());
         //this.commonFluid(DreamtinkerFluids.molten_ender_ash.getType());
         tintedStone(DreamtinkerFluids.molten_ender_ash).color(0xFFAA87CD);
+        tintedMolten(DreamtinkerFluids.molten_utherium).color(0xFFC3434C);
     }
 
     public void commonFluid(FluidType fluid) {
@@ -75,6 +77,18 @@ public class DreamtinkerFluidTextureProvider extends AbstractFluidTextureProvide
 
     private FluidTexture.Builder tintedStone(FluidObject<?> fluid) {
         return named(fluid, "molten/stone");
+    }
+
+    private FluidTexture.Builder tintedMolten(FluidObject<?> fluid) {
+        return named(fluid, "molten");
+    }
+
+    private FluidTexture.Builder compatOre(FluidObject<?> fluid) {
+        return moltenFolder(fluid, "compat_ore");
+    }
+
+    private FluidTexture.Builder moltenFolder(FluidObject<?> fluid, String folder) {
+        return named(fluid, "molten/" + folder + "/" + TinkerFluids.withoutMolten(fluid));
     }
 
     private FluidTexture.Builder named(FluidObject<?> fluid, String name) {

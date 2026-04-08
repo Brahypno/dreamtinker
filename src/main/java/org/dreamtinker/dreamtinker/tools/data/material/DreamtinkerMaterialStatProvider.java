@@ -99,10 +99,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new HeadMaterialStats(120, 12f, DtTiers.TransmutationGold, 1f),
                          HandleMaterialStats.multipliers().durability(0.6f).miningSpeed(1.10f).attackDamage(1.10f).attackSpeed(1.10f).build(),
                          StatlessMaterialStats.BINDING);
-        addMaterialStats(DreamtinkerMaterialIds.ArcaneGold,
-                         new HeadMaterialStats(66, 9f, Tiers.GOLD, 1f),
-                         HandleMaterialStats.multipliers().durability(0.7f).attackDamage(0.90f).miningSpeed(1.25f).attackSpeed(1.20f).build(),
-                         StatlessMaterialStats.BINDING);
+
         addMaterialStats(DreamtinkerMaterialIds.SpikyShard,
                          new HeadMaterialStats(400, 2f, Tiers.IRON, 1.5f),
                          HandleMaterialStats.multipliers().durability(0.85f).attackDamage(1.10f).attackSpeed(0.85f).build(),
@@ -111,6 +108,11 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addMaterialStats(DreamtinkerMaterialIds.FifthStone,
                          new HeadMaterialStats(800, 4.5f, Tiers.DIAMOND, 2f),
                          HandleMaterialStats.multipliers().durability(0.85f).attackDamage(1.15f).attackSpeed(0.85f).build(),
+                         StatlessMaterialStats.BINDING);
+
+        addMaterialStats(DreamtinkerMaterialIds.Utherium,
+                         new HeadMaterialStats(1000, 8.5f, Tiers.DIAMOND, 4f),
+                         HandleMaterialStats.multipliers().durability(1.2f).attackDamage(1.15f).attackSpeed(1.05f).build(),
                          StatlessMaterialStats.BINDING);
 
         addELMeleeHarvest();
@@ -248,6 +250,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addMaterialStats(DreamtinkerMaterialIds.ArcaneGold,
                          new LimbMaterialStats(32, 0.1f, 0.15f, -0.2f),
                          new GripMaterialStats(-0.2f, 0.15f, 1f));
+        addMaterialStats(DreamtinkerMaterialIds.Utherium,
+                         new LimbMaterialStats(800, 0.1f, 0.05f, -0.2f),
+                         new GripMaterialStats(0.2f, 0.05f, 4f));
 
         addMaterialStats(DreamtinkerMaterialIds.FifthStone,
                          new LimbMaterialStats(800, 0.2f, 0.10f, 0.2f),
@@ -359,6 +364,11 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                             PlatingMaterialStats.builder().durabilityFactor(20).armor(2f, 3f, 5f, 2f).toughness(0).knockbackResistance(0f),
                             StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
 
+        addArmorShieldStats(DreamtinkerMaterialIds.Utherium,
+                            PlatingMaterialStats.builder().durabilityFactor(30).armor(3f, 6f, 8f, 3f).toughness(3).knockbackResistance(0f),
+                            StatlessMaterialStats.MAILLE);
+
+
         addArmorShieldStats(DreamtinkerMaterialIds.etherium,
                             PlatingMaterialStats.builder().durabilityFactor(132).armor(4f, 9f, 7f, 4f).toughness(4).knockbackResistance(0f),
                             StatlessMaterialStats.MAILLE);
@@ -413,6 +423,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         this.addMaterialStats(DreamtinkerMaterialIds.shiningFlint, StatlessMaterialStats.ARROW_HEAD);
         this.addMaterialStats(DreamtinkerMaterialIds.SpikyShard, StatlessMaterialStats.ARROW_HEAD);
         this.addMaterialStats(DreamtinkerMaterialIds.FifthStone, StatlessMaterialStats.ARROW_HEAD);
+        this.addMaterialStats(DreamtinkerMaterialIds.Utherium, StatlessMaterialStats.ARROW_HEAD);
 
         this.addMaterialStats(DreamtinkerMaterialIds.hallowed_gold, StatlessMaterialStats.ARROW_HEAD);
         this.addMaterialStats(DreamtinkerMaterialIds.mnemonic_auric, StatlessMaterialStats.ARROW_HEAD);
