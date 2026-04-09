@@ -84,11 +84,12 @@ public class WeaponBooks extends BattleModifier {
 
     @Override
     public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
+        float bonus = 0;
         if (context.getAttacker() instanceof Player player)
             if (1 == tool.getModifierLevel(this.getId())){
                 if (SuperpositionHandler.isTheCursedOne(player) || player instanceof ServerPlayer sp && sp.getAbilities().instabuild){
                     if (null != context.getLivingTarget() && OmniconfigHandler.isBossOrPlayer(context.getLivingTarget()))
-                        damage *= TheTwist.bossDamageBonus.getValue().asModifier(false);
+                        bonus += damage * TheTwist.bossDamageBonus.getValue().asModifier(false);
 
                 }else
                     damage = 0;
@@ -96,8 +97,8 @@ public class WeaponBooks extends BattleModifier {
                 if (SuperpositionHandler.isTheWorthyOne(player) || player instanceof ServerPlayer sp && sp.getAbilities().instabuild){
                     if (null != context.getLivingTarget() && OmniconfigHandler.isBossOrPlayer(context.getLivingTarget())){
                         if (3 <= tool.getModifierLevel(this.getId()))
-                            damage *= TheTwist.bossDamageBonus.getValue().asModifier(false);
-                        damage *= TheInfinitum.bossDamageBonus.getValue().asModifier(false);
+                            bonus += damage * TheTwist.bossDamageBonus.getValue().asModifier(false);
+                        bonus += damage * TheInfinitum.bossDamageBonus.getValue().asModifier(false);
 
                     }
                 }else {
@@ -110,7 +111,7 @@ public class WeaponBooks extends BattleModifier {
                     player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 100, 3, false, true));
                 }
             }
-        return damage;
+        return damage + bonus;
     }
 
     @Override
