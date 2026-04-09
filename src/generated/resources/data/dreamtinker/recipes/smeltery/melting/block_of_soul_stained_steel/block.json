@@ -13,11 +13,11 @@
           "values": [
             {
               "type": "forge:mod_loaded",
-              "modid": "enigmaticlegacy"
+              "modid": "malum"
             },
             {
               "type": "dreamtinker:mod_compact_config",
-              "modid": "enigmaticlegacy"
+              "modid": "malum"
             }
           ]
         }
@@ -25,12 +25,12 @@
     }
   ],
   "ingredient": {
-    "item": "enigmaticlegacy:etherium_block"
+    "item": "malum:block_of_soul_stained_steel"
   },
   "result": {
     "amount": 810,
-    "fluid": "dreamtinker:unstable_liquid_aether"
+    "fluid": "dreamtinker:molten_soul_stained_steel"
   },
-  "temperature": 1300,
-  "time": 225
+  "temperature": 900,
+  "time": 190
 }

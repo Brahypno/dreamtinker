@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "conditions": [
+    {
+      "type": "forge:item_exists",
+      "item": "enigmaticlegacy:etherium_helmet"
+    }
+  ],
+  "ingredient": {
+    "item": "enigmaticlegacy:etherium_helmet"
+  },
+  "result": {
+    "amount": 450,
+    "fluid": "dreamtinker:unstable_liquid_aether",
+    "unit_size": 10
+  },
+  "temperature": 1300,
+  "time": 167
+}

@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "conditions": [
+    {
+      "type": "forge:item_exists",
+      "item": "malum:soul_stained_steel_shovel"
+    }
+  ],
+  "ingredient": {
+    "item": "malum:soul_stained_steel_shovel"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_soul_stained_steel",
+    "unit_size": 10
+  },
+  "temperature": 900,
+  "time": 63
+}

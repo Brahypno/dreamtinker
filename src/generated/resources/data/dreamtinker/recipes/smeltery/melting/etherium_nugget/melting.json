@@ -25,12 +25,12 @@
     }
   ],
   "ingredient": {
-    "item": "enigmaticlegacy:etherium_block"
+    "item": "enigmaticlegacy:etherium_nugget"
   },
   "result": {
-    "amount": 810,
+    "amount": 10,
     "fluid": "dreamtinker:unstable_liquid_aether"
   },
   "temperature": 1300,
-  "time": 225
+  "time": 75
 }

@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:nuggets/arcane_gold"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:nuggets/arcane_gold"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "dreamtinker:molten_arcane_gold"
+  },
+  "temperature": 700,
+  "time": 19
+}

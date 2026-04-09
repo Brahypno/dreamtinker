@@ -13,24 +13,35 @@
           "values": [
             {
               "type": "forge:mod_loaded",
-              "modid": "enigmaticlegacy"
+              "modid": "malum"
             },
             {
               "type": "dreamtinker:mod_compact_config",
-              "modid": "enigmaticlegacy"
+              "modid": "malum"
             }
           ]
         }
       ]
     }
   ],
-  "ingredient": {
-    "item": "enigmaticlegacy:etherium_block"
-  },
+  "ingredient": [
+    {
+      "item": "malum:soul_stained_steel_helmet"
+    },
+    {
+      "item": "malum:soul_stained_steel_chestplate"
+    },
+    {
+      "item": "malum:soul_stained_steel_leggings"
+    },
+    {
+      "item": "malum:soul_stained_steel_boots"
+    }
+  ],
   "result": {
-    "amount": 810,
-    "fluid": "dreamtinker:unstable_liquid_aether"
+    "amount": 390,
+    "fluid": "dreamtinker:molten_soul_stained_steel"
   },
-  "temperature": 1300,
-  "time": 225
+  "temperature": 900,
+  "time": 127
 }

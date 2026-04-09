@@ -1,6 +1,5 @@
 package org.dreamtinker.dreamtinker.common.data;
 
-import com.aizistral.enigmaticlegacy.registries.EnigmaticBlocks;
 import com.aizistral.enigmaticlegacy.registries.EnigmaticItems;
 import com.hollingsworth.arsnouveau.setup.registry.ItemsRegistry;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
@@ -12,6 +11,7 @@ import com.sammy.malum.registry.common.item.ItemTagRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ArmorItem;
@@ -108,6 +108,7 @@ import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
 import slimeknights.tconstruct.tools.stats.StatlessMaterialStats;
 import slimeknights.tconstruct.world.TinkerWorld;
 
+import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Consumer;
 
@@ -305,9 +306,6 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                 .setFluid(FluidIngredient.of(DreamtinkerFluids.molten_albedo_stibium.getTag(), FluidValues.GEM * 3))
                                 .setCoolingTime(10)
                                 .save(consumer, location(Casting_folder + "unborn_dragon_egg"));
-        ItemCastingRecipeBuilder.basinRecipe(BlockRegistry.BLOCK_OF_SOUL_STAINED_STEEL.get())
-                                .setFluidAndTime(DreamtinkerFluids.molten_soul_stained_steel, FluidValues.METAL_BLOCK)
-                                .save(consumer, location(Casting_folder + "soul_stained_steel/block"));
 
         ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.poisonousHomunculus.get())
                                 .setCast(Items.GLASS_BOTTLE, true)
@@ -352,6 +350,32 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
     String Melting_folder = "smeltery/melting/";
     String metalFolder = Melting_folder + "metal/";
+
+    public static SmelteryRecipeBuilder.CommonRecipe[] armorBySuffix(String modid) {
+        return new SmelteryRecipeBuilder.CommonRecipe[]{
+                new SmelteryRecipeBuilder.ToolItemMelting(5, modid, "helmet"),
+                new SmelteryRecipeBuilder.ToolItemMelting(8, modid, "chestplate"),
+                new SmelteryRecipeBuilder.ToolItemMelting(7, modid, "leggings"),
+                new SmelteryRecipeBuilder.ToolItemMelting(4, modid, "boots"),
+        };
+    }
+
+    private void addCompactMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
+        addCompactELMeltingCastingRecipes(consumer);
+        addCompactMalumMeltingCastingRecipes(consumer);
+        addCompactEidolonMeltingCastingRecipes(consumer);
+        addCompactBICMeltingCastingRecipes(consumer);
+        addCompactUGMeltingCastingRecipes(consumer);
+    }
+
+    public static SmelteryRecipeBuilder.CommonRecipe[] ToolsBySuffix(String modid) {
+        return new SmelteryRecipeBuilder.CommonRecipe[]{
+                new SmelteryRecipeBuilder.ToolItemMelting(2, modid, "sword"),
+                new SmelteryRecipeBuilder.ToolItemMelting(3, modid, "pickaxe"),
+                new SmelteryRecipeBuilder.ToolItemMelting(3, modid, "axe"),
+                new SmelteryRecipeBuilder.ToolItemMelting(1, modid, "shovel")
+        };
+    }
 
     private void addMeltingRecipes(Consumer<FinishedRecipe> consumer) {
         MeltingFuelBuilder.fuel(DreamtinkerFluids.molten_lupi_antimony.ingredient(FluidValues.SIP), 360, 3600)
@@ -525,141 +549,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                      DreamtinkerFluids.mercury.get(), FluidValues.GEM, 1.0f)
                             .save(wrapped, location(Melting_folder + "mercury/ingot"));
 
-        wrapped = withCondition(consumer, tagFilled(DreamtinkerTagKeys.Items.arcaneGoldNugget));
-        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.arcaneGoldNugget),
-                                     DreamtinkerFluids.molten_arcane_gold.get(), FluidValues.NUGGET, 0.05f)
-                            .save(wrapped, location(Melting_folder + "arcane_gold/nugget"));
+        fluid(consumer, "arcane_gold", DreamtinkerFluids.molten_arcane_gold).optional()
+                                                                            .baseUnit(FluidValues.INGOT).damageUnit(FluidValues.NUGGET)
+                                                                            .metal().dust().plate().gear().coin().sheetmetal().geore().oreberry();
 
-        wrapped = withCondition(consumer, tagFilled(DreamtinkerTagKeys.Items.arcaneGoldIngot));
-        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.arcaneGoldIngot),
-                                     DreamtinkerFluids.molten_arcane_gold.get(), FluidValues.INGOT, 0.05f)
-                            .save(wrapped, location(Melting_folder + "arcane_gold/ingot"));
-        wrapped = withCondition(consumer, tagFilled(DreamtinkerTagKeys.Items.arcaneGoldBlock));
-        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.arcaneGoldBlock),
-                                     DreamtinkerFluids.molten_arcane_gold.get(), FluidValues.METAL_BLOCK, 0.05f)
-                            .save(wrapped, location(Melting_folder + "arcane_gold/block"));
-
-
-        wrapped = withCondition(consumer, tagFilled(DreamtinkerTagKeys.Items.utheriumNugget));
-        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.utheriumNugget),
-                                     DreamtinkerFluids.molten_utherium.get(), FluidValues.NUGGET, 0.05f)
-                            .save(wrapped, location(Melting_folder + "utherium/nugget"));
-
-        wrapped = withCondition(consumer, tagFilled(DreamtinkerTagKeys.Items.utheriumIngot));
-        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.utheriumIngot),
-                                     DreamtinkerFluids.molten_utherium.get(), FluidValues.INGOT, 0.05f)
-                            .save(wrapped, location(Melting_folder + "utherium/ingot"));
-        wrapped = withCondition(consumer, tagFilled(DreamtinkerTagKeys.Items.utheriumBlock));
-        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.utheriumBlock),
-                                     DreamtinkerFluids.molten_utherium.get(), FluidValues.METAL_BLOCK, 0.05f)
-                            .save(wrapped, location(Melting_folder + "utherium/block"));
-
-        wrapped = withCondition(consumer, tagFilled(DreamtinkerTagKeys.Items.utheriumOre));
-        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.utheriumOre),
-                                     DreamtinkerFluids.molten_utherium.get(), FluidValues.INGOT, 0.05f)
-                            .setOre(IMeltingContainer.OreRateType.METAL)
-                            .save(wrapped, location(Melting_folder + "utherium/ore"));
-    }
-
-    private void addCompactMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
-        addCompactELMeltingCastingRecipes(consumer);
-        addCompactMalumMeltingCastingRecipes(consumer);
-        addCompactEidolonMeltingCastingRecipes(consumer);
-        addCompactBICMeltingCastingRecipes(consumer);
-        addCompactUGMeltingCastingRecipes(consumer);
-    }
-
-    private void addCompactELMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
-        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"));
-        meltCastBlock(DreamtinkerFluids.unstable_liquid_aether.get(), EnigmaticBlocks.ETHERIUM_BLOCK, FluidValues.METAL_BLOCK, consumer);
-        MeltingRecipeBuilder.melting(Ingredient.of(EnigmaticItems.ETHERIUM_ORE), DreamtinkerFluids.unstable_liquid_aether, FluidValues.INGOT, 4.0F)
-                            .addByproduct(DreamtinkerFluids.reversed_shadow.result(30))
-                            .setOre(IMeltingContainer.OreRateType.METAL)
-                            .save(wrapped, location(Melting_folder + "etherium/ore"));
-        //I am sure it's not the best way, but who cares
-        int[] etherium_damage = {FluidValues.NUGGET, FluidValues.SLIME_DROP};
-        MeltingRecipeBuilder.melting(Ingredient.of(EnigmaticItems.ETHERIUM_AXE), DreamtinkerFluids.unstable_liquid_aether, FluidValues.INGOT * 4, 4.0f)
-                            .setDamagable(etherium_damage)
-                            .addByproduct(TinkerFluids.moltenEnder.result(FluidValues.SLIMEBALL * 2))
-                            .save(wrapped, location(Melting_folder + "etherium/axe"));
-        MeltingRecipeBuilder.melting(Ingredient.of(EnigmaticItems.ETHERIUM_SWORD), DreamtinkerFluids.unstable_liquid_aether, FluidValues.INGOT * 2, 4.0f)
-                            .setDamagable(FluidValues.NUGGET, FluidValues.SLIME_DROP, FluidValues.GEM_SHARD)
-                            .addByproduct(TinkerFluids.moltenEnder.result(FluidValues.SLIMEBALL))
-                            .addByproduct(TinkerFluids.moltenDiamond.result(FluidValues.GEM * 2))
-                            .save(wrapped, location(Melting_folder + "etherium/sword"));
-        MeltingRecipeBuilder.melting(Ingredient.of(EnigmaticItems.ETHERIUM_SCYTHE), DreamtinkerFluids.unstable_liquid_aether, FluidValues.INGOT * 2, 4.0f)
-                            .setDamagable(etherium_damage)
-                            .addByproduct(TinkerFluids.moltenEnder.result(FluidValues.SLIMEBALL * 2))
-                            .save(wrapped, location(Melting_folder + "etherium/scythe"));
-        MeltingRecipeBuilder.melting(Ingredient.of(EnigmaticItems.ETHERIUM_PICKAXE), DreamtinkerFluids.unstable_liquid_aether, FluidValues.INGOT * 3, 4.0f)
-                            .setDamagable(etherium_damage)
-                            .addByproduct(TinkerFluids.moltenEnder.result(FluidValues.SLIMEBALL * 2))
-                            .save(wrapped, location(Melting_folder + "etherium/pickaxe"));
-        MeltingRecipeBuilder.melting(Ingredient.of(EnigmaticItems.ETHERIUM_SHOVEL), DreamtinkerFluids.unstable_liquid_aether, FluidValues.INGOT, 4.0f)
-                            .setDamagable(etherium_damage)
-                            .addByproduct(TinkerFluids.moltenEnder.result(FluidValues.SLIMEBALL * 2))
-                            .save(wrapped, location(Melting_folder + "etherium/shovel"));
-        MeltingRecipeBuilder.melting(Ingredient.of(EnigmaticItems.ETHERIUM_HELMET), DreamtinkerFluids.unstable_liquid_aether, FluidValues.INGOT * 5, 4.0f)
-                            .setDamagable(FluidValues.NUGGET)
-                            .save(wrapped, location(Melting_folder + "etherium/helmet"));
-        MeltingRecipeBuilder.melting(Ingredient.of(EnigmaticItems.ETHERIUM_CHESTPLATE), DreamtinkerFluids.unstable_liquid_aether, FluidValues.INGOT * 8, 4.0f)
-                            .setDamagable(FluidValues.NUGGET)
-                            .save(wrapped, location(Melting_folder + "etherium/chestplate"));
-        MeltingRecipeBuilder.melting(Ingredient.of(EnigmaticItems.ETHERIUM_LEGGINGS), DreamtinkerFluids.unstable_liquid_aether, FluidValues.INGOT * 7, 4.0f)
-                            .setDamagable(FluidValues.NUGGET)
-                            .save(wrapped, location(Melting_folder + "etherium/leggings"));
-        MeltingRecipeBuilder.melting(Ingredient.of(EnigmaticItems.ETHERIUM_BOOTS), DreamtinkerFluids.unstable_liquid_aether, FluidValues.INGOT * 4, 4.0f)
-                            .setDamagable(FluidValues.NUGGET)
-                            .save(wrapped, location(Melting_folder + "etherium/boots"));
-        meltCast(DreamtinkerFluids.unstable_liquid_aether.get(), EnigmaticItems.ETHERIUM_INGOT, FluidValues.INGOT, wrapped);
-        meltCast(DreamtinkerFluids.unstable_liquid_aether.get(), EnigmaticItems.ETHERIUM_NUGGET, FluidValues.NUGGET, wrapped);
-
-        meltCast(DreamtinkerFluids.molten_evil.get(), EnigmaticItems.EVIL_INGOT, FluidValues.INGOT, wrapped);
-
-        meltCast(DreamtinkerFluids.molten_nefariousness.get(), EnigmaticItems.EVIL_ESSENCE, FluidValues.GEM, wrapped);
-
-        meltCast(DreamtinkerFluids.liquid_pure_soul.get(), EnigmaticItems.SOUL_CRYSTAL, FluidValues.GEM, wrapped);
-        meltCast(DreamtinkerFluids.molten_soul_aether.get(), DreamtinkerCommon.soul_etherium.get(), FluidValues.INGOT, wrapped);
-        fake_block_to_ingot(wrapped, DreamtinkerMaterialIds.soul_etherium, DreamtinkerCommon.soul_etherium.get());
-
-        ItemCastingRecipeBuilder.tableRecipe(EnigmaticItems.VOID_PEARL)
-                                .setCoolingTime(2000, 10)
-                                .setCast(DreamtinkerCommon.void_pearl.get(), true)
-                                .setFluid(FluidIngredient.of(new FluidStack(DreamtinkerFluids.molten_ascending_antimony.get(), FluidValues.METAL_BLOCK)))
-                                .save(wrapped, location(Casting_folder + "void_pearl/ascending"));
-        ItemCastingRecipeBuilder.tableRecipe(EnigmaticItems.OCEAN_STONE)
-                                .setCoolingTime(2000, 10)
-                                .setCast(Items.HEART_OF_THE_SEA, true)
-                                .setFluid(FluidIngredient.of(new FluidStack(DreamtinkerFluids.molten_ascending_antimony.get(), FluidValues.METAL_BLOCK)))
-                                .save(wrapped, location(Casting_folder + "ocean_stone/ascending"));
-    }
-
-    private void addCompactMalumMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
-        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("malum"));
-        MeltingRecipeBuilder.melting(Ingredient.of(BlockRegistry.BLOCK_OF_SOUL_STAINED_STEEL.get()), DreamtinkerFluids.molten_soul_stained_steel,
-                                     FluidValues.METAL_BLOCK, 2.0f)
-                            .save(wrapped, location(Melting_folder + "soul_stained_steel/block"));
-        MeltingRecipeBuilder.melting(Ingredient.of(ItemRegistry.SOUL_STAINED_STEEL_PLATING.get()), DreamtinkerFluids.molten_soul_stained_steel,
-                                     65,//FluidValues.NUGGET * 6.5,
-                                     2.0f)
-                            .save(wrapped, location(Melting_folder + "soul_stained_steel/plating"));
-        meltCast(DreamtinkerFluids.molten_soul_stained_steel.get(), ItemRegistry.SOUL_STAINED_STEEL_INGOT.get(), FluidValues.INGOT, wrapped);
-        meltCast(DreamtinkerFluids.molten_soul_stained_steel.get(), ItemRegistry.SOUL_STAINED_STEEL_NUGGET.get(), FluidValues.NUGGET, wrapped);
-
-        meltCastBlock(DreamtinkerFluids.molten_malignant_pewter.get(), BlockRegistry.BLOCK_OF_MALIGNANT_PEWTER.get(), FluidValues.METAL_BLOCK, wrapped);
-        MeltingRecipeBuilder.melting(Ingredient.of(ItemRegistry.MALIGNANT_PEWTER_PLATING.get()), DreamtinkerFluids.molten_malignant_pewter, 65, 2.0f)
-                            .save(wrapped, location(Melting_folder + "malignant_pewter/plating"));
-        meltCast(DreamtinkerFluids.molten_malignant_pewter.get(), ItemRegistry.MALIGNANT_PEWTER_INGOT.get(), FluidValues.INGOT, wrapped);
-        meltCast(DreamtinkerFluids.molten_malignant_pewter.get(), ItemRegistry.MALIGNANT_PEWTER_NUGGET.get(), FluidValues.NUGGET, wrapped);
-
-        meltCast(DreamtinkerFluids.molten_malignant_gluttony.get(), DreamtinkerCommon.malignant_gluttony.get(), FluidValues.INGOT, wrapped);
-        fake_block_to_ingot(wrapped, DreamtinkerMaterialIds.malignant_gluttony, DreamtinkerCommon.malignant_gluttony.get());
-        ItemCastingRecipeBuilder.tableRecipe(ItemRegistry.CONCENTRATED_GLUTTONY.get())
-                                .setCast(Items.GLASS_BOTTLE, true)
-                                .setFluidAndTime(DreamtinkerFluids.liquid_concentrated_gluttony, FluidValues.BOTTLE)
-                                .save(wrapped, location(Casting_folder + "filling/" +
-                                                        Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(ItemRegistry.CONCENTRATED_GLUTTONY.get()))
-                                                               .getPath()));
     }
 
     private void addCompactEidolonMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
@@ -674,10 +567,6 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                      TinkerFluids.moltenPewter, FluidValues.INGOT, 0.05f)
                             .setOre(IMeltingContainer.OreRateType.METAL)
                             .save(wrapped, location(Melting_folder + "pewter/blend"));
-
-        cast(DreamtinkerFluids.molten_arcane_gold.get(), ARCANE_GOLD_NUGGET.get(), FluidValues.NUGGET, wrapped);
-        cast(DreamtinkerFluids.molten_arcane_gold.get(), ARCANE_GOLD_INGOT.get(), FluidValues.INGOT, wrapped);
-        cast(DreamtinkerFluids.molten_arcane_gold.get(), ARCANE_GOLD_BLOCK.get(), FluidValues.METAL_BLOCK, wrapped);
     }
 
     private void addCompactBICMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
@@ -773,18 +662,102 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                   .save(wrapped, location(Entity_Melting_folder + "molten_dark_metal/boss"));
     }
 
-    public static SmelteryRecipeBuilder.CommonRecipe[] armorAndToolsBySuffix(String modid) {
-        return new SmelteryRecipeBuilder.CommonRecipe[]{
-                new SmelteryRecipeBuilder.ToolItemMelting(5, modid, "helmet"),
-                new SmelteryRecipeBuilder.ToolItemMelting(8, modid, "chestplate"),
-                new SmelteryRecipeBuilder.ToolItemMelting(7, modid, "leggings"),
-                new SmelteryRecipeBuilder.ToolItemMelting(4, modid, "boots"),
+    private void addCompactELMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
+        String el = "enigmaticlegacy";
+        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(el));
+        metalBySuffix(el, "etherium", DreamtinkerFluids.unstable_liquid_aether.get(), wrapped);
+        MeltingRecipeBuilder.melting(Ingredient.of(EnigmaticItems.ETHERIUM_ORE), DreamtinkerFluids.unstable_liquid_aether, FluidValues.INGOT, 4.0F)
+                            .addByproduct(DreamtinkerFluids.reversed_shadow.result(30))
+                            .setOre(IMeltingContainer.OreRateType.METAL)
+                            .save(wrapped, location(Melting_folder + "etherium/ore"));
+        //I am sure it's not the best way, but who cares
+        int[] etherium_damage = {FluidValues.NUGGET, FluidValues.SLIME_DROP};
+        MeltingRecipeBuilder.melting(Ingredient.of(EnigmaticItems.ETHERIUM_AXE), DreamtinkerFluids.unstable_liquid_aether, FluidValues.INGOT * 4, 4.0f)
+                            .setDamagable(etherium_damage)
+                            .addByproduct(TinkerFluids.moltenEnder.result(FluidValues.SLIMEBALL * 2))
+                            .save(wrapped, location(Melting_folder + "etherium/axe"));
+        MeltingRecipeBuilder.melting(Ingredient.of(EnigmaticItems.ETHERIUM_SWORD), DreamtinkerFluids.unstable_liquid_aether, FluidValues.INGOT * 2, 4.0f)
+                            .setDamagable(FluidValues.NUGGET, FluidValues.SLIME_DROP, FluidValues.GEM_SHARD)
+                            .addByproduct(TinkerFluids.moltenEnder.result(FluidValues.SLIMEBALL))
+                            .addByproduct(TinkerFluids.moltenDiamond.result(FluidValues.GEM * 2))
+                            .save(wrapped, location(Melting_folder + "etherium/sword"));
+        MeltingRecipeBuilder.melting(Ingredient.of(EnigmaticItems.ETHERIUM_SCYTHE), DreamtinkerFluids.unstable_liquid_aether, FluidValues.INGOT * 2, 4.0f)
+                            .setDamagable(etherium_damage)
+                            .addByproduct(TinkerFluids.moltenEnder.result(FluidValues.SLIMEBALL * 2))
+                            .save(wrapped, location(Melting_folder + "etherium/scythe"));
+        MeltingRecipeBuilder.melting(Ingredient.of(EnigmaticItems.ETHERIUM_PICKAXE), DreamtinkerFluids.unstable_liquid_aether, FluidValues.INGOT * 3, 4.0f)
+                            .setDamagable(etherium_damage)
+                            .addByproduct(TinkerFluids.moltenEnder.result(FluidValues.SLIMEBALL * 2))
+                            .save(wrapped, location(Melting_folder + "etherium/pickaxe"));
+        MeltingRecipeBuilder.melting(Ingredient.of(EnigmaticItems.ETHERIUM_SHOVEL), DreamtinkerFluids.unstable_liquid_aether, FluidValues.INGOT, 4.0f)
+                            .setDamagable(etherium_damage)
+                            .addByproduct(TinkerFluids.moltenEnder.result(FluidValues.SLIMEBALL * 2))
+                            .save(wrapped, location(Melting_folder + "etherium/shovel"));
+        fluid(consumer, "etherium", DreamtinkerFluids.unstable_liquid_aether)
+                .optional()
+                .baseUnit(FluidValues.INGOT).damageUnit(FluidValues.NUGGET)
+                .common(armorBySuffix(el));
 
-                new SmelteryRecipeBuilder.ToolItemMelting(2, modid, "sword"),
-                new SmelteryRecipeBuilder.ToolItemMelting(3, modid, "pickaxe"),
-                new SmelteryRecipeBuilder.ToolItemMelting(3, modid, "axe"),
-                new SmelteryRecipeBuilder.ToolItemMelting(1, modid, "shovel")
-        };
+        meltCast(DreamtinkerFluids.molten_evil.get(), EnigmaticItems.EVIL_INGOT, FluidValues.INGOT, wrapped);
+
+        meltCast(DreamtinkerFluids.molten_nefariousness.get(), EnigmaticItems.EVIL_ESSENCE, FluidValues.GEM, wrapped);
+
+        meltCast(DreamtinkerFluids.liquid_pure_soul.get(), EnigmaticItems.SOUL_CRYSTAL, FluidValues.GEM, wrapped);
+        meltCast(DreamtinkerFluids.molten_soul_aether.get(), DreamtinkerCommon.soul_etherium.get(), FluidValues.INGOT, wrapped);
+        fake_block_to_ingot(wrapped, DreamtinkerMaterialIds.soul_etherium, DreamtinkerCommon.soul_etherium.get());
+
+        ItemCastingRecipeBuilder.tableRecipe(EnigmaticItems.VOID_PEARL)
+                                .setCoolingTime(2000, 10)
+                                .setCast(DreamtinkerCommon.void_pearl.get(), true)
+                                .setFluid(FluidIngredient.of(new FluidStack(DreamtinkerFluids.molten_ascending_antimony.get(), FluidValues.METAL_BLOCK)))
+                                .save(wrapped, location(Casting_folder + "void_pearl/ascending"));
+        ItemCastingRecipeBuilder.tableRecipe(EnigmaticItems.OCEAN_STONE)
+                                .setCoolingTime(2000, 10)
+                                .setCast(Items.HEART_OF_THE_SEA, true)
+                                .setFluid(FluidIngredient.of(new FluidStack(DreamtinkerFluids.molten_ascending_antimony.get(), FluidValues.METAL_BLOCK)))
+                                .save(wrapped, location(Casting_folder + "ocean_stone/ascending"));
+    }
+
+    private void addCompactMalumMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
+        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("malum"));
+        MeltingRecipeBuilder.melting(Ingredient.of(ItemRegistry.SOUL_STAINED_STEEL_PLATING.get()), DreamtinkerFluids.molten_soul_stained_steel,
+                                     65,//FluidValues.NUGGET * 6.5,
+                                     2.0f)
+                            .save(wrapped, location(Melting_folder + "soul_stained_steel/plating"));
+        MeltingRecipeBuilder.melting(Ingredient.of(ItemRegistry.SOUL_STAINED_STEEL_HELMET.get(), ItemRegistry.SOUL_STAINED_STEEL_CHESTPLATE.get(),
+                                                   ItemRegistry.SOUL_STAINED_STEEL_LEGGINGS.get(), ItemRegistry.SOUL_STAINED_STEEL_BOOTS.get()),
+                                     DreamtinkerFluids.molten_soul_stained_steel, 6 * 65, 2.0f)
+                            .save(wrapped, location(Melting_folder + "soul_stained_steel/armors"));
+        metalBySuffix("malum", "soul_stained_steel", DreamtinkerFluids.molten_soul_stained_steel.get(), wrapped);
+        meltCastBlock(DreamtinkerFluids.molten_soul_stained_steel.get(), BlockRegistry.BLOCK_OF_SOUL_STAINED_STEEL.get(), FluidValues.METAL_BLOCK, wrapped);
+
+        meltCastBlock(DreamtinkerFluids.molten_malignant_pewter.get(), BlockRegistry.BLOCK_OF_MALIGNANT_PEWTER.get(), FluidValues.METAL_BLOCK, wrapped);
+        MeltingRecipeBuilder.melting(Ingredient.of(ItemRegistry.MALIGNANT_PEWTER_PLATING.get()), DreamtinkerFluids.molten_malignant_pewter, 65, 2.0f)
+                            .save(wrapped, location(Melting_folder + "malignant_pewter/plating"));
+        metalBySuffix("malum", "malignant_pewter", DreamtinkerFluids.molten_malignant_pewter.get(), wrapped);
+
+        meltCast(DreamtinkerFluids.molten_malignant_gluttony.get(), DreamtinkerCommon.malignant_gluttony.get(), FluidValues.INGOT, wrapped);
+        fake_block_to_ingot(wrapped, DreamtinkerMaterialIds.malignant_gluttony, DreamtinkerCommon.malignant_gluttony.get());
+        ItemCastingRecipeBuilder.tableRecipe(ItemRegistry.CONCENTRATED_GLUTTONY.get())
+                                .setCast(Items.GLASS_BOTTLE, true)
+                                .setFluidAndTime(DreamtinkerFluids.liquid_concentrated_gluttony, FluidValues.BOTTLE)
+                                .save(wrapped, location(Casting_folder + "filling/" +
+                                                        Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(ItemRegistry.CONCENTRATED_GLUTTONY.get()))
+                                                               .getPath()));
+        fluid(consumer, "soul_stained_steel", DreamtinkerFluids.molten_soul_stained_steel)
+                .optional()
+                .baseUnit(FluidValues.INGOT).damageUnit(FluidValues.NUGGET)
+                .common(ToolsBySuffix("malum"));
+    }
+
+    private void addCompactUGMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
+        String undergarden = "undergarden";
+        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(undergarden));
+        fluid(consumer, "utherium", DreamtinkerFluids.molten_utherium).optional()
+                                                                      .baseUnit(FluidValues.INGOT).damageUnit(FluidValues.NUGGET)
+                                                                      .metal().dust().plate().gear().coin().sheetmetal().geore().oreberry()
+                                                                      .common(ToolsBySuffix(undergarden))
+                                                                      .common(armorBySuffix(undergarden));
     }
 
     String materials_folder = "tools/materials/";
@@ -2566,14 +2539,38 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         return molten(consumer, fluid).castingFolder("smeltery/casting/metal").meltingFolder("smeltery/melting/metal");
     }
 
-    private void addCompactUGMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
-        String undergarden = "undergarden";
-        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(undergarden));
-        fluid(consumer, "utherium", DreamtinkerFluids.molten_utherium).optional()
-                                                                      .baseUnit(FluidValues.INGOT).damageUnit(FluidValues.NUGGET)
-                                                                      .metal().dust().plate().gear().coin().sheetmetal().geore().oreberry()
-                                                                      .common(armorAndToolsBySuffix(undergarden));
-
+    private @Nullable Item item(String modid, String path) {
+        ResourceLocation id = new ResourceLocation(modid, path);
+        Item item = ForgeRegistries.ITEMS.getValue(id);
+        return item == null || item == Items.AIR ? null : item;
     }
+
+    private void meltCastIfPresent(String modid, String path, Fluid fluid, int amount, Consumer<FinishedRecipe> consumer) {
+        Item item = item(modid, path);
+        if (item == null){
+            return;
+        }
+
+        if (amount == FluidValues.INGOT * 9 || amount == FluidValues.GEM * 9 || amount == FluidValues.GEM * 4){
+            meltCastBlock(fluid, item, amount, consumer);
+        }else {
+            MeltingRecipeBuilder.melting(Ingredient.of(item), fluid, amount, (float) Math.sqrt((double) amount / FluidValues.NUGGET))
+                                .save(consumer, location(
+                                        Melting_folder + Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(item)).getPath() + "/melting"));
+            cast(fluid, item, amount, consumer);
+        }
+    }
+
+    private void metalBySuffix(String modid, String key, Fluid fluid, Consumer<FinishedRecipe> consumer) {
+        meltCastIfPresent(modid, key + "_block", fluid, FluidValues.INGOT * 9, consumer);
+        meltCastIfPresent(modid, key + "_ingot", fluid, FluidValues.INGOT, consumer);
+        meltCastIfPresent(modid, key + "_nugget", fluid, FluidValues.NUGGET, consumer);
+    }
+
+    private void gemBySuffix(String modid, String key, Fluid fluid, int storageSize, Consumer<FinishedRecipe> consumer) {
+        meltCastIfPresent(modid, key + "_block", fluid, FluidValues.GEM * storageSize, consumer);
+        meltCastIfPresent(modid, key, fluid, FluidValues.GEM, consumer);
+    }
+
 }
 
