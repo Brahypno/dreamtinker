@@ -463,7 +463,8 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(SelfMobEffectModule.builder(DreamtinkerTagKeys.MobEffects.EDICTS)
                                               .level(RandomLevelingValue.perLevel(0, 1))
                                               .time(RandomLevelingValue.random(20 * 4, 10))
-                                              .build());
+                                              .build())
+                .addModule(new EffectImmunityModule(DreamtinkerEffects.SoulFire.get()));
         buildModifier(Ids.falsify_fate)
                 .priority(-300)//make sure late enough
                 .addModule(ConditionalMiningSpeedModule.builder()

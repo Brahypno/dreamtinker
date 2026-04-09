@@ -33,6 +33,10 @@
         "flat": 80.0,
         "random": 10.0
       }
+    },
+    {
+      "type": "tconstruct:effect_immunity",
+      "effect": "dreamtinker:soul_fire"
     }
   ],
   "tooltip_display": "always"
