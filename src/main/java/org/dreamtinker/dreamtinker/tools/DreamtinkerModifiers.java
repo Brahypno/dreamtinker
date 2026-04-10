@@ -387,6 +387,9 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
 
         public static final ModifierId undergarden_rot_killer = id("undergarden_rot_killer");
         public static final ModifierId undergarden_rot_protection = id("undergarden_rot_protection");
+        public static final ModifierId undergarden_killer = id("undergarden_killer");
+        public static final ModifierId undergarden_miner = id("undergarden_miner");
+        public static final ModifierId undergarden_protection = id("undergarden_protection");
 
         private static ModifierId id(String name) {
             return new ModifierId(Dreamtinker.MODID, name);

@@ -52,6 +52,7 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
 
         addMaterial(DreamtinkerMaterialIds.ArcaneGold, 2, ORDER_REPAIR, false, false, tagFilled(DreamtinkerTagKeys.Items.arcaneGoldIngot));
         addMaterial(DreamtinkerMaterialIds.Utherium, 4, 45, false, false, tagFilled(DreamtinkerTagKeys.Items.utheriumIngot));
+        addMaterial(DreamtinkerMaterialIds.forgotten_metal, 4, 50, false, false, tagFilled(DreamtinkerTagKeys.Items.forgottenMetalIngot));
 
         addMaterial(DreamtinkerMaterialIds.etherium, 4, 40, false, false, modLoaded("enigmaticlegacy"));
         addMaterial(DreamtinkerMaterialIds.nefarious, 4, 40, false, false, modLoaded("enigmaticlegacy"));

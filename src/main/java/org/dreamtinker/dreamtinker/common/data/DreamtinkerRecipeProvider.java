@@ -12,6 +12,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ArmorItem;
@@ -33,6 +34,7 @@ import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraftforge.common.crafting.conditions.OrCondition;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
+import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
@@ -52,20 +54,19 @@ import slimeknights.mantle.recipe.condition.TagFilledCondition;
 import slimeknights.mantle.recipe.crafting.ShapedRetexturedRecipeBuilder;
 import slimeknights.mantle.recipe.data.ICommonRecipeHelper;
 import slimeknights.mantle.recipe.data.IRecipeHelper;
+import slimeknights.mantle.recipe.data.ItemNameIngredient;
 import slimeknights.mantle.recipe.helper.FluidOutput;
 import slimeknights.mantle.recipe.helper.ItemOutput;
 import slimeknights.mantle.recipe.ingredient.EntityIngredient;
 import slimeknights.mantle.recipe.ingredient.FluidIngredient;
 import slimeknights.mantle.recipe.ingredient.SizedIngredient;
+import slimeknights.mantle.registration.object.FlowingFluidObject;
 import slimeknights.mantle.registration.object.FluidObject;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.common.json.ConfigEnabledCondition;
 import slimeknights.tconstruct.common.registration.CastItemObject;
 import slimeknights.tconstruct.fluids.TinkerFluids;
-import slimeknights.tconstruct.library.data.recipe.IMaterialRecipeHelper;
-import slimeknights.tconstruct.library.data.recipe.ISmelteryRecipeHelper;
-import slimeknights.tconstruct.library.data.recipe.IToolRecipeHelper;
-import slimeknights.tconstruct.library.data.recipe.SmelteryRecipeBuilder;
+import slimeknights.tconstruct.library.data.recipe.*;
 import slimeknights.tconstruct.library.materials.definition.MaterialId;
 import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
 import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
@@ -373,7 +374,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                 new SmelteryRecipeBuilder.ToolItemMelting(2, modid, "sword"),
                 new SmelteryRecipeBuilder.ToolItemMelting(3, modid, "pickaxe"),
                 new SmelteryRecipeBuilder.ToolItemMelting(3, modid, "axe"),
-                new SmelteryRecipeBuilder.ToolItemMelting(1, modid, "shovel")
+                new SmelteryRecipeBuilder.ToolItemMelting(1, modid, "shovel"),
+                new SmelteryRecipeBuilder.ToolItemMelting(2, modid, "hoe")
         };
     }
 
@@ -750,166 +752,24 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                 .common(ToolsBySuffix("malum"));
     }
 
-    private void addCompactUGMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
-        String undergarden = "undergarden";
-        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(undergarden));
-        fluid(consumer, "utherium", DreamtinkerFluids.molten_utherium).optional()
-                                                                      .baseUnit(FluidValues.INGOT).damageUnit(FluidValues.NUGGET)
-                                                                      .metal().dust().plate().gear().coin().sheetmetal().geore().oreberry()
-                                                                      .common(ToolsBySuffix(undergarden))
-                                                                      .common(armorBySuffix(undergarden));
+    private static TagKey<Item> forgeTag(String category, String name) {
+        return ItemTags.create(new ResourceLocation("forge", category + "/" + name));
     }
 
     String materials_folder = "tools/materials/";
     String slimeskinFolder = materials_folder + "slimeskin/";
 
-    private void addMaterialRecipes(Consumer<FinishedRecipe> consumer) {
+    public static SmelteryRecipeBuilder.CommonRecipe[] armorBySuffix(String modid, IByproduct... byproducts) {
+        if (byproducts == null || byproducts.length == 0){
+            return armorBySuffix(modid);
+        }
 
-        materialMeltingCasting(consumer, DreamtinkerMaterialIds.crying_obsidian, DreamtinkerFluids.molten_crying_obsidian, FluidValues.GLASS_BLOCK,
-                               materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.crying_obsidian, Ingredient.of(Items.CRYING_OBSIDIAN), 1, 1, materials_folder + "crying_obsidian");
-
-        materialMeltingCasting(consumer, DreamtinkerMaterialIds.echo_alloy, DreamtinkerFluids.molten_echo_alloy, FluidValues.GEM, materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.echo_alloy, Ingredient.of(DreamtinkerCommon.echo_alloy.get()), 1, 1, materials_folder + "echo_alloy");
-
-        materialMeltingCasting(consumer, DreamtinkerMaterialIds.metallivorous_stibium_lupus, DreamtinkerFluids.molten_lupi_antimony, FluidValues.INGOT,
-                               materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.metallivorous_stibium_lupus, Ingredient.of(DreamtinkerCommon.metallivorous_stibium_lupus.get()), 1, 1,
-                       materials_folder + "metallivorous_stibium_lupus");
-
-        materialMeltingCasting(consumer, DreamtinkerMaterialIds.nigrescence_antimony, DreamtinkerFluids.molten_nigrescence_antimony, FluidValues.GEM,
-                               materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.nigrescence_antimony, Ingredient.of(DreamtinkerCommon.nigrescence_antimony.get()), 1, 1,
-                       materials_folder + "nigrescence_antimony");
-
-        materialComposite(consumer, MaterialIds.string, DreamtinkerMaterialIds.nigrescence_string, DreamtinkerFluids.molten_nigrescence_antimony,
-                          FluidValues.GEM, materials_folder);
-
-        materialRecipe(consumer, DreamtinkerMaterialIds.star_regulus, Ingredient.of(DreamtinkerCommon.regulus.get()), 1, 1,
-                       materials_folder + "star_regulus");
-        materialRecipe(consumer, DreamtinkerMaterialIds.valentinite, Ingredient.of(DreamtinkerCommon.valentinite.get()), 1, 1,
-                       materials_folder + "valentinite");
-        materialRecipe(consumer, DreamtinkerMaterialIds.larimar, Ingredient.of(DreamtinkerCommon.larimar.get()), 1, 1,
-                       materials_folder + "larimar");
-
-        materialMeltingCasting(consumer, DreamtinkerMaterialIds.amber, DreamtinkerFluids.liquid_amber, FluidValues.GEM, materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.amber, Ingredient.of(DreamtinkerCommon.amber.get()), 1, 1,
-                       materials_folder + "amber");
-
-        MaterialFluidRecipeBuilder.material(DreamtinkerMaterialIds.half_rotten_homunculus)
-                                  .setFluid(DreamtinkerFluids.half_festering_blood.ingredient(FluidValues.BOTTLE))
-                                  .setTemperature(10).save(consumer, this.location(
-                                          materials_folder + "half_rotten_homunculus" + "casting/" + DreamtinkerMaterialIds.half_rotten_homunculus.getLocation('_').getPath()));
-        materialRecipe(consumer, DreamtinkerMaterialIds.half_rotten_homunculus, Ingredient.of(DreamtinkerCommon.poisonousHomunculus.get()), 1, 1,
-                       materials_folder + "half_rotten_homunculus");
-
-        materialComposite(consumer, MaterialIds.string, DreamtinkerMaterialIds.half_rotten_string, DreamtinkerFluids.half_festering_blood,
-                          FluidValues.BOTTLE, materials_folder);
-
-        materialMeltingCasting(consumer, DreamtinkerMaterialIds.desire_gem, DreamtinkerFluids.molten_desire, FluidValues.GEM,
-                               materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.desire_gem, Ingredient.of(DreamtinkerCommon.desire_gem.get()), 1, 1,
-                       materials_folder + "desire_gem");
-
-        materialMeltingCasting(consumer, DreamtinkerMaterialIds.despair_gem, DreamtinkerFluids.despair_essence, FluidValues.GEM,
-                               materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.despair_gem, Ingredient.of(DreamtinkerCommon.despair_gem.get()), 1, 1,
-                       materials_folder + "despair_gem");
-
-        materialComposite(consumer, MaterialIds.leather, DreamtinkerMaterialIds.shadowskin, DreamtinkerFluids.molten_void, FluidValues.SLIMEBALL,
-                          slimeskinFolder, "shadowskin");
-        materialComposite(consumer, DreamtinkerMaterialIds.shadowskin, MaterialIds.leather, TinkerFluids.venom, FluidValues.SIP, slimeskinFolder,
-                          "shadowskin_cleaning");
-
-        materialMeltingCasting(consumer, DreamtinkerMaterialIds.soul_steel, DreamtinkerFluids.molten_soul_steel, FluidValues.INGOT,
-                               materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.soul_steel, Ingredient.of(DreamtinkerCommon.soul_steel.get()), 1, 1,
-                       materials_folder + "soul_steel");
-
-        materialRecipe(consumer, DreamtinkerMaterialIds.soul_steel, Ingredient.of(DreamtinkerCommon.soulSteelBlock.get()), 9, 1,
-                       materials_folder + "soul_steel_block");
-
-        materialMeltingCasting(consumer, DreamtinkerMaterialIds.rainbow_honey_crystal, DreamtinkerFluids.molten_bee_gem, FluidValues.GEM,
-                               materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.rainbow_honey_crystal, Ingredient.of(DreamtinkerCommon.rainbow_honey_crystal.get()), 1, 1,
-                       materials_folder + "rainbow_honey_crystal");
-
-        materialMeltingCasting(consumer, DreamtinkerMaterialIds.black_sapphire, DreamtinkerFluids.molten_black_sapphire, FluidValues.GEM,
-                               materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.black_sapphire, Ingredient.of(DreamtinkerCommon.black_sapphire.get()), 1, 1,
-                       materials_folder + "black_sapphire");
-
-        materialMeltingCasting(consumer, DreamtinkerMaterialIds.scolecite, DreamtinkerFluids.molten_scolecite, FluidValues.GEM,
-                               materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.scolecite, Ingredient.of(DreamtinkerCommon.scolecite.get()), 1, 1,
-                       materials_folder + "scolecite");
-
-        materialRecipe(consumer, DreamtinkerMaterialIds.shiningFlint, Ingredient.of(DreamtinkerCommon.shiningFlint.get()), 1, 1,
-                       materials_folder + "shining_flint");
-
-        materialMeltingCasting(consumer, DreamtinkerMaterialIds.orichalcum, DreamtinkerFluids.molten_orichalcum, FluidValues.INGOT,
-                               materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.orichalcum, Ingredient.of(DreamtinkerTagKeys.Items.OrichalcumIngot), 1, 1,
-                       materials_folder + "orichalcum/ingot");
-        materialRecipe(consumer, DreamtinkerMaterialIds.orichalcum, Ingredient.of(DreamtinkerTagKeys.Items.OrichalcumNuggets), 1, 9,
-                       materials_folder + "orichalcum/nugget");
-        materialRecipe(consumer, DreamtinkerMaterialIds.orichalcum, Ingredient.of(DreamtinkerTagKeys.Items.OrichalcumBlock), 9, 1,
-                       materials_folder + "orichalcum/block");
-
-        materialMeltingCasting(consumer, DreamtinkerMaterialIds.cold_iron, DreamtinkerFluids.molten_cold_iron, FluidValues.INGOT,
-                               materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.cold_iron, Ingredient.of(DreamtinkerTagKeys.Items.coldIronIngot), 1, 1,
-                       materials_folder + "cold_iron/ingot");
-        materialRecipe(consumer, DreamtinkerMaterialIds.cold_iron, Ingredient.of(DreamtinkerTagKeys.Items.coldIronNuggets), 1, 9,
-                       materials_folder + "cold_iron/nugget");
-        materialRecipe(consumer, DreamtinkerMaterialIds.cold_iron, Ingredient.of(DreamtinkerTagKeys.Items.coldIronBlock), 9, 1,
-                       materials_folder + "cold_iron/block");
-
-        materialMeltingCasting(consumer, DreamtinkerMaterialIds.shadowSilver, DreamtinkerFluids.molten_shadow_silver, FluidValues.INGOT,
-                               materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.shadowSilver, Ingredient.of(DreamtinkerTagKeys.Items.ShadowSilverIngot), 1, 1,
-                       materials_folder + "shadow_silver/ingot");
-        materialRecipe(consumer, DreamtinkerMaterialIds.shadowSilver, Ingredient.of(DreamtinkerTagKeys.Items.ShadowSilverNuggets), 1, 9,
-                       materials_folder + "shadow_silver/nugget");
-        materialRecipe(consumer, DreamtinkerMaterialIds.shadowSilver, Ingredient.of(DreamtinkerTagKeys.Items.ShadowSilverBlock), 9, 1,
-                       materials_folder + "shadow_silver/block");
-
-        materialMeltingCasting(consumer, DreamtinkerMaterialIds.TransmutationGold, DreamtinkerFluids.molten_transmutation_gold, FluidValues.INGOT,
-                               materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.TransmutationGold, Ingredient.of(DreamtinkerTagKeys.Items.TransmutationGoldIngot), 1, 1,
-                       materials_folder + "transmutation_gold/ingot");
-        materialRecipe(consumer, DreamtinkerMaterialIds.TransmutationGold, Ingredient.of(DreamtinkerTagKeys.Items.TransmutationGoldDusts), 1, 1,
-                       materials_folder + "transmutation_gold/dust");
-        materialRecipe(consumer, DreamtinkerMaterialIds.TransmutationGold, Ingredient.of(DreamtinkerTagKeys.Items.TransmutationGoldNuggets), 1, 9,
-                       materials_folder + "transmutation_gold/nugget");
-        materialRecipe(consumer, DreamtinkerMaterialIds.TransmutationGold, Ingredient.of(DreamtinkerTagKeys.Items.TransmutationGoldBlock), 9, 1,
-                       materials_folder + "transmutation_gold/block");
-
-        materialMeltingCasting(consumer, DreamtinkerMaterialIds.ArcaneGold, DreamtinkerFluids.molten_arcane_gold, FluidValues.INGOT,
-                               materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.ArcaneGold, Ingredient.of(DreamtinkerTagKeys.Items.arcaneGoldIngot), 1, 1,
-                       materials_folder + "arcane_gold/ingot");
-        materialRecipe(consumer, DreamtinkerMaterialIds.ArcaneGold, Ingredient.of(DreamtinkerTagKeys.Items.arcaneGoldNugget), 1, 9,
-                       materials_folder + "arcane_gold/nugget");
-        materialRecipe(consumer, DreamtinkerMaterialIds.ArcaneGold, Ingredient.of(DreamtinkerTagKeys.Items.arcaneGoldBlock), 9, 1,
-                       materials_folder + "arcane_gold/block");
-
-        materialRecipe(consumer, DreamtinkerMaterialIds.SpikyShard, Ingredient.of(DreamtinkerCommon.deep_prismarine_shard.get()), 1, 1,
-                       materials_folder + "spiny_shell");
-
-        materialRecipe(consumer, DreamtinkerMaterialIds.FifthStone, Ingredient.of(DreamtinkerCommon.fifth_stone.get()), 1, 1,
-                       materials_folder + "fifth_stone");
-
-
-        materialMeltingCasting(consumer, DreamtinkerMaterialIds.Utherium, DreamtinkerFluids.molten_utherium, FluidValues.INGOT,
-                               materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.Utherium, Ingredient.of(DreamtinkerTagKeys.Items.utheriumIngot), 1, 1,
-                       materials_folder + "utherium/ingot");
-        materialRecipe(consumer, DreamtinkerMaterialIds.Utherium, Ingredient.of(DreamtinkerTagKeys.Items.utheriumNugget), 1, 9,
-                       materials_folder + "utherium/nugget");
-        materialRecipe(consumer, DreamtinkerMaterialIds.Utherium, Ingredient.of(DreamtinkerTagKeys.Items.utheriumBlock), 9, 1,
-                       materials_folder + "utherium/block");
-
+        return new SmelteryRecipeBuilder.CommonRecipe[]{
+                new ToolItemMeltingWithByproduct(5, modid, "helmet", byproducts),
+                new ToolItemMeltingWithByproduct(8, modid, "chestplate", byproducts),
+                new ToolItemMeltingWithByproduct(7, modid, "leggings", byproducts),
+                new ToolItemMeltingWithByproduct(4, modid, "boots", byproducts),
+        };
     }
 
     private void addCompactMaterialRecipes(Consumer<FinishedRecipe> consumer) {
@@ -2571,6 +2431,195 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         meltCastIfPresent(modid, key + "_block", fluid, FluidValues.GEM * storageSize, consumer);
         meltCastIfPresent(modid, key, fluid, FluidValues.GEM, consumer);
     }
+
+    private void addCompactUGMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
+        String undergarden = "undergarden";
+        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(undergarden));
+
+        fluid(consumer, "utherium", DreamtinkerFluids.molten_utherium)
+                .optional()
+                .baseUnit(FluidValues.INGOT).damageUnit(FluidValues.NUGGET).ore()
+                .metal().dust().plate().gear().coin().sheetmetal().geore().oreberry()
+                .common(ToolsBySuffix(undergarden))
+                .common(armorBySuffix(undergarden));
+        fluid(consumer, "forgotten_metal", DreamtinkerFluids.molten_forgotten_metal)
+                .optional()
+                .baseUnit(FluidValues.INGOT).damageUnit(FluidValues.NUGGET)
+                .metal().dust().plate().gear().coin().sheetmetal().geore().oreberry();
+
+        ToolsBySuffix(wrapped, DreamtinkerFluids.molten_forgotten_metal, DreamtinkerFluids.molten_cloggrum, undergarden, "forgotten", 1);
+        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(undergarden, "forgotten_battleaxe")),
+                                     DreamtinkerFluids.molten_forgotten_metal, FluidValues.INGOT, 4.0f)
+                            .setDamagable(FluidValues.NUGGET)
+                            .addByproduct(DreamtinkerFluids.molten_cloggrum.result(FluidValues.INGOT * 6))
+                            .save(wrapped, location(Melting_folder + "forgotten/undergarden_battleaxe"));
+    }
+
+    private void addMaterialRecipes(Consumer<FinishedRecipe> consumer) {
+
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.crying_obsidian, DreamtinkerFluids.molten_crying_obsidian, FluidValues.GLASS_BLOCK,
+                               materials_folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.crying_obsidian, Ingredient.of(Items.CRYING_OBSIDIAN), 1, 1, materials_folder + "crying_obsidian");
+
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.echo_alloy, DreamtinkerFluids.molten_echo_alloy, FluidValues.GEM, materials_folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.echo_alloy, Ingredient.of(DreamtinkerCommon.echo_alloy.get()), 1, 1, materials_folder + "echo_alloy");
+
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.metallivorous_stibium_lupus, DreamtinkerFluids.molten_lupi_antimony, FluidValues.INGOT,
+                               materials_folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.metallivorous_stibium_lupus, Ingredient.of(DreamtinkerCommon.metallivorous_stibium_lupus.get()), 1, 1,
+                       materials_folder + "metallivorous_stibium_lupus");
+
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.nigrescence_antimony, DreamtinkerFluids.molten_nigrescence_antimony, FluidValues.GEM,
+                               materials_folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.nigrescence_antimony, Ingredient.of(DreamtinkerCommon.nigrescence_antimony.get()), 1, 1,
+                       materials_folder + "nigrescence_antimony");
+
+        materialComposite(consumer, MaterialIds.string, DreamtinkerMaterialIds.nigrescence_string, DreamtinkerFluids.molten_nigrescence_antimony,
+                          FluidValues.GEM, materials_folder);
+
+        materialRecipe(consumer, DreamtinkerMaterialIds.star_regulus, Ingredient.of(DreamtinkerCommon.regulus.get()), 1, 1,
+                       materials_folder + "star_regulus");
+        materialRecipe(consumer, DreamtinkerMaterialIds.valentinite, Ingredient.of(DreamtinkerCommon.valentinite.get()), 1, 1,
+                       materials_folder + "valentinite");
+        materialRecipe(consumer, DreamtinkerMaterialIds.larimar, Ingredient.of(DreamtinkerCommon.larimar.get()), 1, 1,
+                       materials_folder + "larimar");
+
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.amber, DreamtinkerFluids.liquid_amber, FluidValues.GEM, materials_folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.amber, Ingredient.of(DreamtinkerCommon.amber.get()), 1, 1,
+                       materials_folder + "amber");
+
+        MaterialFluidRecipeBuilder.material(DreamtinkerMaterialIds.half_rotten_homunculus)
+                                  .setFluid(DreamtinkerFluids.half_festering_blood.ingredient(FluidValues.BOTTLE))
+                                  .setTemperature(10).save(consumer, this.location(
+                                          materials_folder + "half_rotten_homunculus" + "casting/" + DreamtinkerMaterialIds.half_rotten_homunculus.getLocation('_').getPath()));
+        materialRecipe(consumer, DreamtinkerMaterialIds.half_rotten_homunculus, Ingredient.of(DreamtinkerCommon.poisonousHomunculus.get()), 1, 1,
+                       materials_folder + "half_rotten_homunculus");
+
+        materialComposite(consumer, MaterialIds.string, DreamtinkerMaterialIds.half_rotten_string, DreamtinkerFluids.half_festering_blood,
+                          FluidValues.BOTTLE, materials_folder);
+
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.desire_gem, DreamtinkerFluids.molten_desire, FluidValues.GEM,
+                               materials_folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.desire_gem, Ingredient.of(DreamtinkerCommon.desire_gem.get()), 1, 1,
+                       materials_folder + "desire_gem");
+
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.despair_gem, DreamtinkerFluids.despair_essence, FluidValues.GEM,
+                               materials_folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.despair_gem, Ingredient.of(DreamtinkerCommon.despair_gem.get()), 1, 1,
+                       materials_folder + "despair_gem");
+
+        materialComposite(consumer, MaterialIds.leather, DreamtinkerMaterialIds.shadowskin, DreamtinkerFluids.molten_void, FluidValues.SLIMEBALL,
+                          slimeskinFolder, "shadowskin");
+        materialComposite(consumer, DreamtinkerMaterialIds.shadowskin, MaterialIds.leather, TinkerFluids.venom, FluidValues.SIP, slimeskinFolder,
+                          "shadowskin_cleaning");
+
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.soul_steel, DreamtinkerFluids.molten_soul_steel, FluidValues.INGOT,
+                               materials_folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.soul_steel, Ingredient.of(DreamtinkerCommon.soul_steel.get()), 1, 1,
+                       materials_folder + "soul_steel");
+
+        materialRecipe(consumer, DreamtinkerMaterialIds.soul_steel, Ingredient.of(DreamtinkerCommon.soulSteelBlock.get()), 9, 1,
+                       materials_folder + "soul_steel_block");
+
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.rainbow_honey_crystal, DreamtinkerFluids.molten_bee_gem, FluidValues.GEM,
+                               materials_folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.rainbow_honey_crystal, Ingredient.of(DreamtinkerCommon.rainbow_honey_crystal.get()), 1, 1,
+                       materials_folder + "rainbow_honey_crystal");
+
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.black_sapphire, DreamtinkerFluids.molten_black_sapphire, FluidValues.GEM,
+                               materials_folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.black_sapphire, Ingredient.of(DreamtinkerCommon.black_sapphire.get()), 1, 1,
+                       materials_folder + "black_sapphire");
+
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.scolecite, DreamtinkerFluids.molten_scolecite, FluidValues.GEM,
+                               materials_folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.scolecite, Ingredient.of(DreamtinkerCommon.scolecite.get()), 1, 1,
+                       materials_folder + "scolecite");
+
+        materialRecipe(consumer, DreamtinkerMaterialIds.shiningFlint, Ingredient.of(DreamtinkerCommon.shiningFlint.get()), 1, 1,
+                       materials_folder + "shining_flint");
+
+        standardMetalMaterial(consumer, DreamtinkerMaterialIds.orichalcum, DreamtinkerFluids.molten_orichalcum, "orichalcum", materials_folder);
+
+        standardMetalMaterial(consumer, DreamtinkerMaterialIds.cold_iron, DreamtinkerFluids.molten_cold_iron, "cold_iron", materials_folder);
+
+        standardMetalMaterial(consumer, DreamtinkerMaterialIds.shadowSilver, DreamtinkerFluids.molten_shadow_silver, "shadow_silver", materials_folder);
+
+        standardMetalMaterial(consumer, DreamtinkerMaterialIds.ArcaneGold, DreamtinkerFluids.molten_arcane_gold, "arcane_gold", materials_folder);
+
+        standardMetalMaterial(consumer, DreamtinkerMaterialIds.TransmutationGold, DreamtinkerFluids.molten_transmutation_gold, "transmutation_gold",
+                              materials_folder);
+
+        materialRecipe(consumer, DreamtinkerMaterialIds.SpikyShard, Ingredient.of(DreamtinkerCommon.deep_prismarine_shard.get()), 1, 1,
+                       materials_folder + "spiny_shell");
+
+        materialRecipe(consumer, DreamtinkerMaterialIds.FifthStone, Ingredient.of(DreamtinkerCommon.fifth_stone.get()), 1, 1,
+                       materials_folder + "fifth_stone");
+
+        standardMetalMaterial(consumer, DreamtinkerMaterialIds.Utherium, DreamtinkerFluids.molten_utherium, "utherium", materials_folder);
+        standardMetalMaterial(consumer, DreamtinkerMaterialIds.forgotten_metal, DreamtinkerFluids.molten_forgotten_metal, "forgotten_metal", materials_folder);
+
+    }
+
+    private void standardMetalMaterial(
+            Consumer<FinishedRecipe> consumer,
+            MaterialId materialId,
+            FlowingFluidObject<ForgeFlowingFluid> fluid,
+            String name,
+            String folder) {
+        materialMeltingCasting(consumer, materialId, fluid, FluidValues.INGOT, folder);
+
+        materialRecipe(consumer, materialId, Ingredient.of(forgeTag("ingots", name)), 1, 1,
+                       folder + name + "/ingot");
+        materialRecipe(consumer, materialId, Ingredient.of(forgeTag("nuggets", name)), 1, 9,
+                       folder + name + "/nugget");
+        materialRecipe(consumer, materialId, Ingredient.of(forgeTag("storage_blocks", name)), 9, 1,
+                       folder + name + "/block");
+    }
+
+    private void standardGemMaterial(
+            Consumer<FinishedRecipe> consumer,
+            MaterialId materialId,
+            FluidObject<?> fluid,
+            String name,
+            String folder) {
+        materialMeltingCasting(consumer, materialId, fluid, FluidValues.GEM, folder);
+
+        materialRecipe(consumer, materialId, Ingredient.of(forgeTag("gems", name)), 1, 1,
+                       folder + name + "/gem");
+        materialRecipe(consumer, materialId, Ingredient.of(forgeTag("storage_blocks", name)), 9, 1,
+                       folder + name + "/block");
+    }
+
+    public void ToolsBySuffix(
+            Consumer<FinishedRecipe> consumer, FlowingFluidObject<ForgeFlowingFluid> main, FlowingFluidObject<ForgeFlowingFluid> byproduct, String modid, String prefix,
+            int main_scale) {
+
+        itemMeltingWithProduct(consumer, main, byproduct, modid, prefix, "sword", main_scale, 2);
+        itemMeltingWithProduct(consumer, main, byproduct, modid, prefix, "pickaxe", main_scale, 3);
+        itemMeltingWithProduct(consumer, main, byproduct, modid, prefix, "axe", main_scale, 3);
+        itemMeltingWithProduct(consumer, main, byproduct, modid, prefix, "shovel", main_scale, 1);
+        itemMeltingWithProduct(consumer, main, byproduct, modid, prefix, "hoe", main_scale, 2);
+    }
+
+    private void itemMeltingWithProduct(Consumer<FinishedRecipe> consumer, FlowingFluidObject<ForgeFlowingFluid> main, FlowingFluidObject<ForgeFlowingFluid> byproduct, String modid, String prefix, String suffix, int main_scale, int byproduct_scale) {
+        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(modid, prefix + "_" + suffix)),
+                                     main, FluidValues.INGOT * main_scale, 4.0f)
+                            .setDamagable(FluidValues.NUGGET)
+                            .addByproduct(byproduct.result(FluidValues.INGOT * byproduct_scale))
+                            .save(consumer, location(Melting_folder + prefix + "/" + modid + "_" + suffix));
+    }
+
+    public record ToolItemMeltingWithByproduct(int cost, String domain, String name, IByproduct... byproducts)
+            implements SmelteryRecipeBuilder.CommonRecipe {
+        @Override
+        public void accept(SmelteryRecipeBuilder builder) {
+            builder.unitByproducts(byproducts)
+                   .toolItemMelting(cost, domain, name)
+                   .unitByproducts(); // 清空，避免影响后面的 recipe
+        }
+    }
+
 
 }
 

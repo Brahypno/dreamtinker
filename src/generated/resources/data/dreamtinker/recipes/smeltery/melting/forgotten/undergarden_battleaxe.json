@@ -1,0 +1,43 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "byproducts": [
+    {
+      "amount": 540,
+      "fluid": "dreamtinker:molten_cloggrum"
+    }
+  ],
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "undergarden"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "undergarden"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ingredient": {
+    "item": "undergarden:forgotten_battleaxe"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_forgotten_metal",
+    "unit_size": 10
+  },
+  "temperature": 1500,
+  "time": 321
+}

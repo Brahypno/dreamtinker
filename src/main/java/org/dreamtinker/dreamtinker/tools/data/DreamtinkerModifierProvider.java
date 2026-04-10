@@ -37,7 +37,6 @@ import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.SelfMobEffec
 import org.dreamtinker.dreamtinker.library.modifiers.modules.weapon.SwappableCircleWeaponAttack;
 import org.dreamtinker.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvider;
 import org.jetbrains.annotations.NotNull;
-import quek.undergarden.registry.UGTags;
 import slimeknights.mantle.data.predicate.IJsonPredicate;
 import slimeknights.mantle.data.predicate.block.BlockPropertiesPredicate;
 import slimeknights.mantle.data.predicate.damage.DamageSourcePredicate;
@@ -85,6 +84,8 @@ import slimeknights.tconstruct.tools.modules.armor.DepthProtectionModule;
 import slimeknights.tconstruct.tools.modules.combat.FreezingAttackModule;
 
 import static net.minecraft.tags.DamageTypeTags.BYPASSES_ENCHANTMENTS;
+import static org.dreamtinker.dreamtinker.common.DreamtinkerCommon.BLOCK_OF_UNDER_GARDEN;
+import static org.dreamtinker.dreamtinker.common.DreamtinkerCommon.LIVING_OF_UNDER_GARDEN;
 import static org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry.nova_magic_armor;
 import static org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers.*;
 import static slimeknights.tconstruct.common.TinkerTags.Items.*;
@@ -786,12 +787,12 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
     private void addUGModifiers() {
         buildModifier(Ids.undergarden_rot_killer, DreamtinkerMaterialDataProvider.modLoaded("undergarden"))
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                .addModule(ConditionalMeleeDamageModule.builder().target(LivingEntityPredicate.tag(UGTags.Entities.ROTSPAWN)).percent()
+                .addModule(ConditionalMeleeDamageModule.builder().target(LivingEntityPredicate.tag(DreamtinkerTagKeys.EntityTypes.ROTSPAWN)).percent()
                                                        .formula()
                                                        .variable(LEVEL).constant(0.5f).multiply()
                                                        .constant(1f).add()
                                                        .variable(VALUE).multiply().build())
-                .addModule(ConditionalPowerModule.builder().target(LivingEntityPredicate.tag(UGTags.Entities.ROTSPAWN)).percent()
+                .addModule(ConditionalPowerModule.builder().target(LivingEntityPredicate.tag(DreamtinkerTagKeys.EntityTypes.ROTSPAWN)).percent()
                                                  .formula()
                                                  .variable(LEVEL).constant(0.5f).multiply()
                                                  .constant(1f).add()
@@ -799,7 +800,32 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
 
         buildModifier(Ids.undergarden_rot_protection, DreamtinkerMaterialDataProvider.modLoaded("undergarden"))
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                .addModule(ProtectionModule.builder().attacker(LivingEntityPredicate.tag(UGTags.Entities.ROTSPAWN)).eachLevel(1.75f));
+                .addModule(ProtectionModule.builder().attacker(LivingEntityPredicate.tag(DreamtinkerTagKeys.EntityTypes.ROTSPAWN)).eachLevel(1.75f));
+
+        buildModifier(Ids.undergarden_killer, DreamtinkerMaterialDataProvider.modLoaded("undergarden"))
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(ConditionalMeleeDamageModule.builder().target(LIVING_OF_UNDER_GARDEN).percent()
+                                                       .formula()
+                                                       .variable(LEVEL).constant(0.5f).multiply()
+                                                       .constant(1f).add()
+                                                       .variable(VALUE).multiply().build())
+                .addModule(ConditionalPowerModule.builder().target(LIVING_OF_UNDER_GARDEN).percent()
+                                                 .formula()
+                                                 .variable(LEVEL).constant(0.5f).multiply()
+                                                 .constant(1f).add()
+                                                 .variable(VALUE).multiply().build());
+
+        buildModifier(Ids.undergarden_protection, DreamtinkerMaterialDataProvider.modLoaded("undergarden"))
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(ProtectionModule.builder().attacker(LIVING_OF_UNDER_GARDEN).eachLevel(1.75f));
+
+        buildModifier(Ids.undergarden_miner, DreamtinkerMaterialDataProvider.modLoaded("undergarden"))
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(ConditionalMiningSpeedModule.builder().allowIneffective().blocks(BLOCK_OF_UNDER_GARDEN).percent()
+                                                       .formula()
+                                                       .variable(LEVEL).constant(0.5f).multiply()
+                                                       .constant(1f).add()
+                                                       .variable(VALUE).multiply().build());
     }
 
     @Override

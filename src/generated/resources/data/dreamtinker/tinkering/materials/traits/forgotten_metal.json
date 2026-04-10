@@ -1,0 +1,20 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "dreamtinker:undergarden_killer"
+    },
+    {
+      "level": 1,
+      "name": "dreamtinker:undergarden_miner"
+    }
+  ],
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "dreamtinker:undergarden_protection"
+      }
+    ]
+  }
+}

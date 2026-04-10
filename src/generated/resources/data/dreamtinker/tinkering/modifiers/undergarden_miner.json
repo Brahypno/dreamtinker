@@ -1,0 +1,43 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "undergarden"
+          },
+          {
+            "type": "dreamtinker:mod_compact_config",
+            "modid": "undergarden"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:single_level",
+  "modules": [
+    {
+      "type": "tconstruct:conditional_mining_speed",
+      "blocks": "dreamtinker:block_of_undergarden",
+      "formula": [
+        "$level",
+        0.5,
+        "*",
+        1.0,
+        "+",
+        "$speed",
+        "*"
+      ],
+      "percent": true,
+      "require_effective": false
+    }
+  ],
+  "tooltip_display": "always"
+}

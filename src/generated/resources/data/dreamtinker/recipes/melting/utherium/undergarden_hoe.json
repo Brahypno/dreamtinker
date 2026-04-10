@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "conditions": [
+    {
+      "type": "forge:item_exists",
+      "item": "undergarden:utherium_hoe"
+    }
+  ],
+  "ingredient": {
+    "item": "undergarden:utherium_hoe"
+  },
+  "result": {
+    "amount": 180,
+    "fluid": "dreamtinker:molten_utherium",
+    "unit_size": 10
+  },
+  "temperature": 1500,
+  "time": 113
+}

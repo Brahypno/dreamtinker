@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "dreamtinker:forgotten_metal",
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_forgotten_metal"
+  },
+  "temperature": 1500
+}

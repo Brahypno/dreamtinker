@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "conditions": [
+    {
+      "type": "forge:item_exists",
+      "item": "malum:soul_stained_steel_hoe"
+    }
+  ],
+  "ingredient": {
+    "item": "malum:soul_stained_steel_hoe"
+  },
+  "result": {
+    "amount": 180,
+    "fluid": "dreamtinker:molten_soul_stained_steel",
+    "unit_size": 10
+  },
+  "temperature": 900,
+  "time": 90
+}

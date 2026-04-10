@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:dusts/forgotten_metal"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:dusts/forgotten_metal"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_forgotten_metal"
+  },
+  "temperature": 1500,
+  "time": 60
+}

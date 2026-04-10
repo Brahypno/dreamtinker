@@ -78,6 +78,7 @@ public class DreamtinkerTagKeys {
         public static final TagKey<Item> arcaneGoldNugget = forgeTag("nuggets/arcane_gold");
         public static final TagKey<Item> arcaneGoldIngot = forgeTag("ingots/arcane_gold");
         public static final TagKey<Item> arcaneGoldBlock = forgeTag("storage_blocks/arcane_gold");
+        public static final TagKey<Item> forgottenMetalIngot = forgeTag("ingots/forgotten_metal");
 
         public static final TagKey<Item> raw_orichalcum = forgeTag("raw_materials/orichalcum");
         public static final TagKey<Item> OrichalcumNuggets = forgeTag("nuggets/orichalcum");
@@ -183,6 +184,8 @@ public class DreamtinkerTagKeys {
 
     public static class EntityTypes {
         public static final TagKey<EntityType<?>> ENDER_ENTITY = common("ender_entity");
+        public static final TagKey<EntityType<?>> ROTSPAWN = common("undergarden", "rotspawn");
+        public static final TagKey<EntityType<?>> CAVERN_CREATURE = common("undergarden", "cavern_creature");
 
         private static TagKey<EntityType<?>> local(String name) {
             return TagKey.create(Registries.ENTITY_TYPE, Dreamtinker.getLocation(name));
@@ -190,6 +193,10 @@ public class DreamtinkerTagKeys {
 
         private static TagKey<EntityType<?>> common(String name) {
             return TagKey.create(Registries.ENTITY_TYPE, Mantle.commonResource(name));
+        }
+
+        private static TagKey<EntityType<?>> common(String modid, String name) {
+            return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(modid, name));
         }
     }
 

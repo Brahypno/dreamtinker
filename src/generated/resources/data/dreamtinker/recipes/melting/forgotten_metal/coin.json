@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:coins/forgotten_metal"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:coins/forgotten_metal"
+  },
+  "result": {
+    "amount": 30,
+    "fluid": "dreamtinker:molten_forgotten_metal"
+  },
+  "temperature": 1500,
+  "time": 53
+}

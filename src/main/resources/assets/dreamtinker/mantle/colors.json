@@ -188,7 +188,10 @@
     "curse_fire": "#6A7BFF",
     "falsify_fate": "#4B3F72",
     "undergarden_rot_killer": "#C3434C",
-    "undergarden_rot_protection": "#C3434C"
+    "undergarden_rot_protection": "#C3434C",
+    "undergarden_killer": "#2F4C4C",
+    "undergarden_protection": "#2F4C4C",
+    "undergarden_miner": "#2F4C4C"
 
 },
   "material.dreamtinker": {
@@ -257,7 +260,8 @@
     "nova_wilden_wing": "#D0B595",
     "nova_wilden_spike": "#E09A55",
     "fifth_stone": "#5F8D96",
-    "utherium": "#C3434C"
+    "utherium": "#C3434C",
+    "forgotten_metal": "#2F4C4C"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873",

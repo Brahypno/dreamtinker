@@ -115,6 +115,11 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          HandleMaterialStats.multipliers().durability(1.2f).attackDamage(1.15f).attackSpeed(1.05f).build(),
                          StatlessMaterialStats.BINDING);
 
+        addMaterialStats(DreamtinkerMaterialIds.forgotten_metal,
+                         new HeadMaterialStats(1400, 8.0f, Tiers.NETHERITE, 3.5f),
+                         HandleMaterialStats.multipliers().durability(1.1f).attackDamage(1.15f).attackSpeed(1.1f).build(),
+                         StatlessMaterialStats.BINDING);
+
         addELMeleeHarvest();
         addMalumMeleeHarvest();
         addEidolonMeleeHarvest();
@@ -247,16 +252,19 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addMaterialStats(DreamtinkerMaterialIds.TransmutationGold,
                          new LimbMaterialStats(120, 0.25f, -0.3f, 0.2f),
                          new GripMaterialStats(-0.2f, 0.2f, 1.0f));
+        addMaterialStats(DreamtinkerMaterialIds.FifthStone,
+                         new LimbMaterialStats(800, 0.2f, 0.10f, 0.2f),
+                         new GripMaterialStats(-0.2f, 0.15f, 2.5f));
+
         addMaterialStats(DreamtinkerMaterialIds.ArcaneGold,
                          new LimbMaterialStats(32, 0.1f, 0.15f, -0.2f),
                          new GripMaterialStats(-0.2f, 0.15f, 1f));
         addMaterialStats(DreamtinkerMaterialIds.Utherium,
                          new LimbMaterialStats(800, 0.1f, 0.05f, -0.2f),
                          new GripMaterialStats(0.2f, 0.05f, 4f));
-
-        addMaterialStats(DreamtinkerMaterialIds.FifthStone,
-                         new LimbMaterialStats(800, 0.2f, 0.10f, 0.2f),
-                         new GripMaterialStats(-0.2f, 0.15f, 2.5f));
+        addMaterialStats(DreamtinkerMaterialIds.forgotten_metal,
+                         new LimbMaterialStats(1000, 0.2f, -0.05f, -0.1f),
+                         new GripMaterialStats(0.2f, 0.05f, 3.5f));
 
         addCompactRanged();
     }
@@ -365,6 +373,10 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                             StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
 
         addArmorShieldStats(DreamtinkerMaterialIds.Utherium,
+                            PlatingMaterialStats.builder().durabilityFactor(30).armor(3f, 6f, 8f, 3f).toughness(3).knockbackResistance(0f),
+                            StatlessMaterialStats.MAILLE);
+
+        addArmorShieldStats(DreamtinkerMaterialIds.forgotten_metal,
                             PlatingMaterialStats.builder().durabilityFactor(30).armor(3f, 6f, 8f, 3f).toughness(3).knockbackResistance(0f),
                             StatlessMaterialStats.MAILLE);
 

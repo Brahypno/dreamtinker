@@ -1,0 +1,56 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "undergarden"
+          },
+          {
+            "type": "dreamtinker:mod_compact_config",
+            "modid": "undergarden"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:single_level",
+  "modules": [
+    {
+      "type": "tconstruct:conditional_melee_damage",
+      "formula": [
+        "$level",
+        0.5,
+        "*",
+        1.0,
+        "+",
+        "$damage",
+        "*"
+      ],
+      "percent": true,
+      "target": "dreamtinker:living_of_undergarden"
+    },
+    {
+      "type": "tconstruct:conditional_power",
+      "formula": [
+        "$level",
+        0.5,
+        "*",
+        1.0,
+        "+",
+        "$damage",
+        "*"
+      ],
+      "percent": true,
+      "target": "dreamtinker:living_of_undergarden"
+    }
+  ],
+  "tooltip_display": "always"
+}
