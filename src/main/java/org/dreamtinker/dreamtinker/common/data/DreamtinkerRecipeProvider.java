@@ -346,6 +346,26 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                 .setFluidAndTime(TinkerFluids.moltenCobalt, FluidValues.INGOT)
                                 .setCast(Items.FLINT, true)
                                 .save(consumer, location(Casting_folder + "fifth_stone"));
+        ItemCastingRecipeBuilder.basinRecipe(Items.BUDDING_AMETHYST)
+                                .setFluidAndTime(DreamtinkerFluids.molten_ascending_antimony, FluidValues.METAL_BLOCK)
+                                .setCast(Items.AMETHYST_BLOCK, true)
+                                .save(consumer, location(Casting_folder + "budding/amethyst"));
+        ItemCastingRecipeBuilder.basinRecipe(TinkerWorld.earthGeode.getBudding())
+                                .setFluidAndTime(DreamtinkerFluids.molten_ascending_antimony, FluidValues.METAL_BLOCK)
+                                .setCast(TinkerWorld.earthGeode.getBlock(), true)
+                                .save(consumer, location(Casting_folder + "budding/earth"));
+        ItemCastingRecipeBuilder.basinRecipe(TinkerWorld.skyGeode.getBudding())
+                                .setFluidAndTime(DreamtinkerFluids.molten_ascending_antimony, FluidValues.METAL_BLOCK)
+                                .setCast(TinkerWorld.skyGeode.getBlock(), true)
+                                .save(consumer, location(Casting_folder + "budding/sky"));
+        ItemCastingRecipeBuilder.basinRecipe(TinkerWorld.ichorGeode.getBudding())
+                                .setFluidAndTime(DreamtinkerFluids.molten_ascending_antimony, FluidValues.METAL_BLOCK)
+                                .setCast(TinkerWorld.ichorGeode.getBlock(), true)
+                                .save(consumer, location(Casting_folder + "budding/ichor"));
+        ItemCastingRecipeBuilder.basinRecipe(TinkerWorld.enderGeode.getBudding())
+                                .setFluidAndTime(DreamtinkerFluids.molten_ascending_antimony, FluidValues.METAL_BLOCK)
+                                .setCast(TinkerWorld.enderGeode.getBlock(), true)
+                                .save(consumer, location(Casting_folder + "budding/end"));
 
     }
 
@@ -1529,11 +1549,11 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .save(consumer, prefix(DreamtinkerModifiers.signal_axe, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.love_shooting)
                              .setTools(TinkerTags.Items.RANGED)
-                             .addInput(Blocks.AMETHYST_BLOCK, 11)
-                             .addInput(TinkerWorld.earthGeode.getBlock(), 11)
-                             .addInput(TinkerWorld.skyGeode.getBlock(), 11)
-                             .addInput(TinkerWorld.ichorGeode.getBlock(), 11)
-                             .addInput(TinkerWorld.enderGeode.getBlock(), 11)
+                             .addInput(Items.BUDDING_AMETHYST, 11)
+                             .addInput(TinkerWorld.earthGeode.getBudding(), 11)
+                             .addInput(TinkerWorld.skyGeode.getBudding(), 11)
+                             .addInput(TinkerWorld.ichorGeode.getBudding(), 11)
+                             .addInput(TinkerWorld.enderGeode.getBudding(), 11)
                              .setSlots(SlotType.ABILITY, 1)
                              .setMaxLevel(1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.love_shooting, abilitySalvage))
