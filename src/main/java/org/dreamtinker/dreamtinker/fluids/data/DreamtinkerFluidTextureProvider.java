@@ -69,6 +69,7 @@ public class DreamtinkerFluidTextureProvider extends AbstractFluidTextureProvide
         tintedMolten(DreamtinkerFluids.molten_utherium).color(0xFFC3434C);
         tintedMolten(DreamtinkerFluids.molten_forgotten_metal).color(0xFF28AB8A);
         tintedStone(DreamtinkerFluids.molten_cloggrum).color(0xFF564137);
+        tintedMolten(DreamtinkerFluids.molten_froststeel).color(0xFF4E557C);
     }
 
     public void commonFluid(FluidType fluid) {

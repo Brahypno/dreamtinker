@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "conditions": [
+    {
+      "type": "forge:item_exists",
+      "item": "undergarden:froststeel_chestplate"
+    }
+  ],
+  "ingredient": {
+    "item": "undergarden:froststeel_chestplate"
+  },
+  "result": {
+    "amount": 720,
+    "fluid": "dreamtinker:molten_froststeel",
+    "unit_size": 10
+  },
+  "temperature": 600,
+  "time": 151
+}

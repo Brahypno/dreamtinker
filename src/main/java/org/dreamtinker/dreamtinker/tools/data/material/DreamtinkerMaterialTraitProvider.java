@@ -110,6 +110,9 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.Cloggrum, TinkerModifiers.knockback);
         addTraits(DreamtinkerMaterialIds.Cloggrum, ARMOR, ModifierIds.projectileProtection);
 
+        addDefaultTraits(DreamtinkerMaterialIds.Froststeel, Ids.slowness);
+        addTraits(DreamtinkerMaterialIds.Froststeel, ARMOR, Ids.frost_steel_shell);
+
         addDefaultTraits(DreamtinkerMaterialIds.etherium,
                          new ModifierEntry(ModifierIds.smite, 2),
                          new ModifierEntry(explosive_hit.getId(), 1),

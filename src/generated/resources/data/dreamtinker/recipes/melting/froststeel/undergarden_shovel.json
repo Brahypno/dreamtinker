@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "conditions": [
+    {
+      "type": "forge:item_exists",
+      "item": "undergarden:froststeel_shovel"
+    }
+  ],
+  "ingredient": {
+    "item": "undergarden:froststeel_shovel"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_froststeel",
+    "unit_size": 10
+  },
+  "temperature": 600,
+  "time": 53
+}

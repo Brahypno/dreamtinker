@@ -751,6 +751,9 @@
   "modifier.dreamtinker.undergarden_miner.flavor": "被遗忘的，未完全被遗忘",
   "modifier.dreamtinker.undergarden_miner.description": "每级增加50%对深园方块的挖掘速度",
   "modifier.dreamtinker.undergarden_miner.mining_speed": "对深园方块的挖掘速度 ",
+  "modifier.dreamtinker.frost_steel_shell": "寒铁入骨",
+  "modifier.dreamtinker.frost_steel_shell.flavor": "被遗忘的，未完全被遗忘",
+  "modifier.dreamtinker.frost_steel_shell.description": "免疫缓慢，但减少5%移动速度",
 
   "material.dreamtinker.echo_alloy": "回响合金",
   "material.dreamtinker.echo_alloy.flavor": "是神秘的回响，还是秘密的回响",
@@ -909,6 +912,8 @@
   "material.dreamtinker.forgotten_metal.flavor": " ",
   "material.dreamtinker.cloggrum": "扼塞",
   "material.dreamtinker.cloggrum.flavor": " ",
+  "material.dreamtinker.froststeel": "霜钢",
+  "material.dreamtinker.froststeel.flavor": " ",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
@@ -1297,6 +1302,11 @@
   "fluid.dreamtinker.molten_cloggrum.fluid_effect": "熔融扼塞",
   "block.dreamtinker.molten_cloggrum": "熔融扼塞",
   "item.dreamtinker.molten_cloggrum_bucket": "熔融扼塞桶",
+  "fluid_type.dreamtinker.molten_froststeel": "熔融霜钢",
+  "fluid.dreamtinker.molten_froststeel": "熔融霜钢",
+  "fluid.dreamtinker.molten_froststeel.fluid_effect": "熔融霜钢",
+  "block.dreamtinker.molten_froststeel": "熔融霜钢",
+  "item.dreamtinker.molten_froststeel_bucket": "熔融霜钢桶",
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "流血",
   "fluid_effect.tconstruct.damage.explosion": "爆炸",

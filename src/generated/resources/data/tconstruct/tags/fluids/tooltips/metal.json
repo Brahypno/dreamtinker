@@ -45,6 +45,10 @@
     {
       "id": "#dreamtinker:molten_cloggrum",
       "required": false
+    },
+    {
+      "id": "#dreamtinker:molten_froststeel",
+      "required": false
     }
   ]
 }

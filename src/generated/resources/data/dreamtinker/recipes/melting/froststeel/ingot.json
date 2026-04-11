@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:ingots/froststeel"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:ingots/froststeel"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_froststeel"
+  },
+  "temperature": 600,
+  "time": 53
+}

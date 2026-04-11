@@ -75,6 +75,7 @@ public class DreamtinkerTagKeys {
         public static final TagKey<Item> utheriumIngot = forgeTag("ingots/utherium");
         public static final TagKey<Item> forgottenMetalIngot = forgeTag("ingots/forgotten_metal");
         public static final TagKey<Item> CloggrumIngot = forgeTag("ingots/cloggrum");
+        public static final TagKey<Item> FroststeelIngot = forgeTag("ingots/froststeel");
 
         public static final TagKey<Item> arcaneGoldNugget = forgeTag("nuggets/arcane_gold");
         public static final TagKey<Item> arcaneGoldIngot = forgeTag("ingots/arcane_gold");

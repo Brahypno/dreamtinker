@@ -39,6 +39,7 @@ public class DreamtinkerMaterialIds {
     public static final MaterialId Utherium = new MaterialId(new ResourceLocation(MODID, "utherium"));//undergarden
     public static final MaterialId forgotten_metal = new MaterialId(new ResourceLocation(MODID, "forgotten_metal"));//undergarden
     public static final MaterialId Cloggrum = new MaterialId(new ResourceLocation(MODID, "cloggrum"));//undergarden
+    public static final MaterialId Froststeel = new MaterialId(new ResourceLocation(MODID, "froststeel"));//undergarden
     //Compact-enigmatic legacy
     public static final MaterialId etherium = new MaterialId(new ResourceLocation(MODID, "etherium"));
     public static final MaterialId nefarious = new MaterialId(new ResourceLocation(MODID, "nefarious"));

@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:ore_melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:geore_medium_buds/froststeel"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:geore_medium_buds/froststeel"
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 180,
+    "fluid": "dreamtinker:molten_froststeel"
+  },
+  "temperature": 600,
+  "time": 80
+}

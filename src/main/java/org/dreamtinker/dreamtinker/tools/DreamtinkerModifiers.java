@@ -339,6 +339,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId last_kiss = id("last_kiss");
         public static final ModifierId curse_fire = id("curse_fire");
         public static final ModifierId falsify_fate = id("falsify_fate");
+        public static final ModifierId frost_steel_shell = id("frost_steel_shell");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");

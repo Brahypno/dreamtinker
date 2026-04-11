@@ -86,6 +86,10 @@
     {
       "id": "dreamtinker:cloggrum",
       "required": false
+    },
+    {
+      "id": "dreamtinker:froststeel",
+      "required": false
     }
   ]
 }

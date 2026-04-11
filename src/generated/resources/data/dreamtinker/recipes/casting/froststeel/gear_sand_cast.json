@@ -1,0 +1,21 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/single_use/gear"
+  },
+  "cast_consumed": true,
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:gears/froststeel"
+    }
+  ],
+  "cooling_time": 107,
+  "fluid": {
+    "amount": 360,
+    "tag": "dreamtinker:molten_froststeel"
+  },
+  "result": {
+    "tag": "forge:gears/froststeel"
+  }
+}

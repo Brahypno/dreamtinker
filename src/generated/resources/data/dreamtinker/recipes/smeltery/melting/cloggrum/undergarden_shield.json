@@ -1,0 +1,37 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "undergarden"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "undergarden"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ingredient": {
+    "item": "undergarden:cloggrum_shield"
+  },
+  "result": {
+    "amount": 540,
+    "fluid": "dreamtinker:molten_cloggrum",
+    "unit_size": 10
+  },
+  "temperature": 600,
+  "time": 214
+}

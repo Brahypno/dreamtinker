@@ -2456,7 +2456,18 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
         fluid(consumer, "cloggrum", DreamtinkerFluids.molten_cloggrum)
                 .optional()
-                .baseUnit(FluidValues.INGOT).damageUnit(FluidValues.NUGGET)
+                .baseUnit(FluidValues.INGOT).damageUnit(FluidValues.NUGGET).ore()
+                .metal().dust().plate().gear().coin().sheetmetal().geore().oreberry()
+                .common(ToolsBySuffix(undergarden))
+                .common(armorBySuffix(undergarden));
+        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(undergarden, "cloggrum_shield")),
+                                     DreamtinkerFluids.molten_cloggrum, FluidValues.INGOT * 6, 4.0f)
+                            .setDamagable(FluidValues.NUGGET)
+                            .save(wrapped, location(Melting_folder + "cloggrum/undergarden_shield"));
+
+        fluid(consumer, "froststeel", DreamtinkerFluids.molten_froststeel)
+                .optional()
+                .baseUnit(FluidValues.INGOT).damageUnit(FluidValues.NUGGET).ore()
                 .metal().dust().plate().gear().coin().sheetmetal().geore().oreberry()
                 .common(ToolsBySuffix(undergarden))
                 .common(armorBySuffix(undergarden));
@@ -2566,6 +2577,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         standardMetalMaterial(consumer, DreamtinkerMaterialIds.Utherium, DreamtinkerFluids.molten_utherium, "utherium", materials_folder);
         standardMetalMaterial(consumer, DreamtinkerMaterialIds.forgotten_metal, DreamtinkerFluids.molten_forgotten_metal, "forgotten_metal", materials_folder);
         standardMetalMaterial(consumer, DreamtinkerMaterialIds.Cloggrum, DreamtinkerFluids.molten_cloggrum, "cloggrum", materials_folder);
+        standardMetalMaterial(consumer, DreamtinkerMaterialIds.Froststeel, DreamtinkerFluids.molten_froststeel, "froststeel", materials_folder);
 
     }
 

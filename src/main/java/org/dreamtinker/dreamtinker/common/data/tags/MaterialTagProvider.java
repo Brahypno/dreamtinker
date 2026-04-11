@@ -31,7 +31,7 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
                  despair_gem, scolecite, shiningFlint, cold_iron, SpikyShard, soul_steel, FifthStone)
             .addOptional(nefarious, soul_etherium, soul_stained_steel, malignant_pewter, malignant_gluttony, shadowSilver, ArcaneGold,
                          WickedWeave, DarkMetal, MonsterSkin, PaladinBoneTool, TatteredCloth, WaterEssence, FireEssence, ManipulationEssence, Utherium,
-                         forgotten_metal, Cloggrum);
+                         forgotten_metal, Cloggrum, Froststeel);
         this.tag(TinkerTags.Materials.HARVEST)
             .add(larimar, rainbow_honey_crystal, TransmutationGold)
             .addOptional(hallowed_gold);

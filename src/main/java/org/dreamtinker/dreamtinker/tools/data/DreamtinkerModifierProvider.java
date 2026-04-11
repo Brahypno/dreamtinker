@@ -332,7 +332,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.slowness)
                 .addModule(MobEffectModule.builder(MobEffects.MOVEMENT_SLOWDOWN)
                                           .level(RandomLevelingValue.perLevel(1, 1))
-                                          .time(RandomLevelingValue.random(20, 5))
+                                          .time(RandomLevelingValue.perLevel(20 * 10, 20 * 5))
                                           .target(LivingEntityPredicate.ANY)
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
@@ -482,6 +482,10 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                                        .variable(LEVEL).add().min()
                                                        .variable(VALUE).multiply()
                                                        .build());
+        buildModifier(Ids.frost_steel_shell)
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(new EffectImmunityModule(MobEffects.MOVEMENT_SLOWDOWN))
+                .addModule(AttributeModule.builder(Attributes.MOVEMENT_SPEED, AttributeModifier.Operation.MULTIPLY_BASE).flat(-0.05f));
 
         addELModifiers();
         addMalumModifiers();
