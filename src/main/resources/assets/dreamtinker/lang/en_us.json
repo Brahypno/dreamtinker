@@ -754,6 +754,12 @@
   "modifier.dreamtinker.frost_steel_shell": "Frost body",
   "modifier.dreamtinker.frost_steel_shell.flavor": "In bone",
   "modifier.dreamtinker.frost_steel_shell.description": "Inmate to movement slowness, but decrease 5% movement speed ",
+  "modifier.dreamtinker.silky_crystal": "Silky Crystal",
+  "modifier.dreamtinker.silky_crystal.flavor": "Seven colors, unite to one",
+  "modifier.dreamtinker.silky_crystal.description": "A better silk touch, can mine budding",
+  "modifier.dreamtinker.arrow_harvest": "Harvest touch",
+  "modifier.dreamtinker.arrow_harvest.flavor": "Abundance",
+  "modifier.dreamtinker.arrow_harvest.description": "Trigger an explode like harvest that fortune level decide by velocity and projectile damage",
 
   "material.dreamtinker.echo_alloy": "Echo Alloy",
   "material.dreamtinker.echo_alloy.flavor": "Its echo of mystery, or echo of enigma",
@@ -914,6 +920,8 @@
   "material.dreamtinker.cloggrum.flavor": " ",
   "material.dreamtinker.froststeel": "Frost Steel",
   "material.dreamtinker.froststeel.flavor": " ",
+  "material.dreamtinker.regalium": "Regalium",
+  "material.dreamtinker.regalium.flavor": "From Sun to rainbow",
 
   "itemGroup.dreamtinker.tool": "Dreamtinker | tool",
   "itemGroup.dreamtinker.part": "Dreamtinker | part",
@@ -1307,6 +1315,11 @@
   "fluid.dreamtinker.molten_froststeel.fluid_effect": "Molten Frost steel",
   "block.dreamtinker.molten_froststeel": "Molten Frost Steel",
   "item.dreamtinker.molten_froststeel_bucket": "Molten Frost Steel Bucket",
+  "fluid_type.dreamtinker.molten_regalium": "Molten Regalium",
+  "fluid.dreamtinker.molten_regalium": "Molten Regalium",
+  "fluid.dreamtinker.molten_regalium.fluid_effect": "Molten Regalium",
+  "block.dreamtinker.molten_regalium": "Molten Regalium",
+  "item.dreamtinker.molten_regalium_bucket": "Molten Regalium Bucket",
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "bleed",
   "fluid_effect.tconstruct.damage.explosion": "explosion",

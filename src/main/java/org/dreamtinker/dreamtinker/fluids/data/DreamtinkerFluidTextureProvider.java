@@ -64,12 +64,12 @@ public class DreamtinkerFluidTextureProvider extends AbstractFluidTextureProvide
         this.commonFluid(DreamtinkerFluids.mercury.getType());
         this.commonFluid(DreamtinkerFluids.molten_arcane_gold.getType());
         this.commonFluid(DreamtinkerFluids.molten_dark_metal.getType());
-        //this.commonFluid(DreamtinkerFluids.molten_ender_ash.getType());
         tintedStone(DreamtinkerFluids.molten_ender_ash).color(0xFFAA87CD);
         tintedMolten(DreamtinkerFluids.molten_utherium).color(0xFFC3434C);
         tintedMolten(DreamtinkerFluids.molten_forgotten_metal).color(0xFF28AB8A);
         tintedStone(DreamtinkerFluids.molten_cloggrum).color(0xFF564137);
         tintedMolten(DreamtinkerFluids.molten_froststeel).color(0xFF4E557C);
+        tintedMolten(DreamtinkerFluids.molten_regalium).color(0xFFD8964A);
     }
 
     public void commonFluid(FluidType fluid) {

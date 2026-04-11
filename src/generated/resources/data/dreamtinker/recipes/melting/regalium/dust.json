@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:dusts/regalium"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:dusts/regalium"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_regalium"
+  },
+  "temperature": 900,
+  "time": 47
+}

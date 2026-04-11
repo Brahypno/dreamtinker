@@ -124,10 +124,13 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new HeadMaterialStats(100, 6.0f, Tiers.IRON, 3.5f),
                          HandleMaterialStats.multipliers().durability(1.1f).attackDamage(1.05f).attackSpeed(1.05f).build(),
                          StatlessMaterialStats.BINDING);
-
         addMaterialStats(DreamtinkerMaterialIds.Froststeel,
                          new HeadMaterialStats(300, 7.0f, Tiers.IRON, 2.5f),
                          HandleMaterialStats.multipliers().durability(1.2f).attackDamage(1.00f).attackSpeed(1.10f).build(),
+                         StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.Regalium,
+                         new HeadMaterialStats(600, 20.0f, Tiers.DIAMOND, 2.5f),
+                         HandleMaterialStats.multipliers().durability(1.05f).miningSpeed(1.20f).build(),
                          StatlessMaterialStats.BINDING);
 
         addELMeleeHarvest();
@@ -450,6 +453,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         this.addMaterialStats(DreamtinkerMaterialIds.SpikyShard, StatlessMaterialStats.ARROW_HEAD);
         this.addMaterialStats(DreamtinkerMaterialIds.FifthStone, StatlessMaterialStats.ARROW_HEAD);
         this.addMaterialStats(DreamtinkerMaterialIds.Utherium, StatlessMaterialStats.ARROW_HEAD);
+        this.addMaterialStats(DreamtinkerMaterialIds.Regalium, StatlessMaterialStats.ARROW_HEAD);
 
         this.addMaterialStats(DreamtinkerMaterialIds.hallowed_gold, StatlessMaterialStats.ARROW_HEAD);
         this.addMaterialStats(DreamtinkerMaterialIds.mnemonic_auric, StatlessMaterialStats.ARROW_HEAD);

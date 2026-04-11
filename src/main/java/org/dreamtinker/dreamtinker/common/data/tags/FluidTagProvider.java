@@ -70,6 +70,7 @@ public class FluidTagProvider extends FluidTagsProvider {
         fluidTag(DreamtinkerFluids.molten_forgotten_metal);
         fluidTag(DreamtinkerFluids.molten_cloggrum);
         fluidTag(DreamtinkerFluids.molten_froststeel);
+        fluidTag(DreamtinkerFluids.molten_regalium);
 
         this.tag(DreamtinkerTagKeys.Fluids.narcissus_wing_used).addTags(DreamtinkerFluids.blood_soul.getTag())
             .addOptionalTags(DreamtinkerFluids.liquid_arcana_juice.getTag(), DreamtinkerFluids.liquid_concentrated_gluttony.getTag(),
@@ -85,7 +86,8 @@ public class FluidTagProvider extends FluidTagsProvider {
                              DreamtinkerFluids.molten_malignant_gluttony.getTag(),
                              DreamtinkerFluids.molten_dark_metal.getTag(), DreamtinkerFluids.molten_arcane_gold.getTag(),
                              DreamtinkerFluids.molten_utherium.getTag(), DreamtinkerFluids.molten_forgotten_metal.getTag(),
-                             DreamtinkerFluids.molten_cloggrum.getTag(), DreamtinkerFluids.molten_froststeel.getTag());
+                             DreamtinkerFluids.molten_cloggrum.getTag(), DreamtinkerFluids.molten_froststeel.getTag(),
+                             DreamtinkerFluids.molten_regalium.getTag());
         this.tag(TinkerTags.Fluids.LARGE_GEM_TOOLTIPS)
             .addTags(DreamtinkerFluids.molten_echo_alloy.getTag(), DreamtinkerFluids.molten_black_sapphire.getTag());
         this.tag(TinkerTags.Fluids.CLAY_TOOLTIPS)

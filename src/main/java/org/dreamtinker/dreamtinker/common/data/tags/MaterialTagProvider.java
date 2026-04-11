@@ -34,7 +34,7 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
                          forgotten_metal, Cloggrum, Froststeel);
         this.tag(TinkerTags.Materials.HARVEST)
             .add(larimar, rainbow_honey_crystal, TransmutationGold)
-            .addOptional(hallowed_gold);
+            .addOptional(hallowed_gold, Regalium);
         this.tag(TinkerTags.Materials.GENERAL)
             .add(valentinite, black_sapphire, orichalcum)
             .addOptional(etherium, spirit_fabric, astral_weave);

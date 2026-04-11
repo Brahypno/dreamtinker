@@ -113,6 +113,9 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.Froststeel, Ids.slowness);
         addTraits(DreamtinkerMaterialIds.Froststeel, ARMOR, Ids.frost_steel_shell);
 
+        addDefaultTraits(DreamtinkerMaterialIds.Regalium, silky_crystal);
+        addTraits(DreamtinkerMaterialIds.Regalium, AMMO, arrow_harvest);
+
         addDefaultTraits(DreamtinkerMaterialIds.etherium,
                          new ModifierEntry(ModifierIds.smite, 2),
                          new ModifierEntry(explosive_hit.getId(), 1),

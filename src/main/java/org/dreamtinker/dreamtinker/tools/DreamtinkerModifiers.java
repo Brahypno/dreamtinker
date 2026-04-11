@@ -180,6 +180,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<SelfSacrifice> self_sacrifice = MODIFIERS.register("self_sacrifice", SelfSacrifice::new);
     public static final StaticModifier<VirtualDodge> virtual_dodge = MODIFIERS.register("virtual_dodge", VirtualDodge::new);
     public static final StaticModifier<GoliathDamage> goliath_damage = MODIFIERS.register("goliath_damage", GoliathDamage::new);
+    public static final StaticModifier<SilkyCrystal> silky_crystal = MODIFIERS.register("silky_crystal", SilkyCrystal::new);
+    public static final StaticModifier<ArrowHarvest> arrow_harvest = MODIFIERS.register("arrow_harvest", ArrowHarvest::new);
 
     //etherium
     public static final StaticModifier<ELAstralBreak> astral_break = EL_MODIFIERS.register("astral_break", ELAstralBreak::new);

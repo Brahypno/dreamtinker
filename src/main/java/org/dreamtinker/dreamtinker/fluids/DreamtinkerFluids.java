@@ -313,6 +313,9 @@ public class DreamtinkerFluids {
     public static final FlowingFluidObject<ForgeFlowingFluid> molten_froststeel =
             registerFluid(FLUIDS, "molten_froststeel", 900, 100, 100, 10,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.METAL, 12), 10, 4) {});
+    public static final FlowingFluidObject<ForgeFlowingFluid> molten_regalium =
+            registerFluid(FLUIDS, "molten_regalium", 1200, 100, 100, 10,
+                          supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.METAL, 12), 10, 4) {});
 
     private static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         // containers

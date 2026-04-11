@@ -191,7 +191,9 @@
     "undergarden_rot_protection": "#C3434C",
     "undergarden_killer": "#2F4C4C",
     "undergarden_protection": "#2F4C4C",
-    "undergarden_miner": "#2F4C4C"
+    "undergarden_miner": "#2F4C4C",
+    "silky_crystal": "#6D4516",
+    "arrow_harvest": "#6D4516"
 
 },
   "material.dreamtinker": {
@@ -263,7 +265,8 @@
     "utherium": "#C3434C",
     "forgotten_metal": "#2F4C4C",
     "cloggrum": "#342926",
-    "froststeel": "#4E557C"
+    "froststeel": "#4E557C",
+    "regalium": "#D8964A"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873",

@@ -1,0 +1,16 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "dreamtinker:silky_crystal"
+    }
+  ],
+  "perStat": {
+    "tconstruct:ammo": [
+      {
+        "level": 1,
+        "name": "dreamtinker:arrow_harvest"
+      }
+    ]
+  }
+}

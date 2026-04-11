@@ -754,6 +754,12 @@
   "modifier.dreamtinker.frost_steel_shell": "寒铁入骨",
   "modifier.dreamtinker.frost_steel_shell.flavor": "被遗忘的，未完全被遗忘",
   "modifier.dreamtinker.frost_steel_shell.description": "免疫缓慢，但减少5%移动速度",
+  "modifier.dreamtinker.silky_crystal": "晶质丝触",
+  "modifier.dreamtinker.silky_crystal.flavor": "七色虹光，终归为一",
+  "modifier.dreamtinker.silky_crystal.description": "更强的，能挖掘母岩的精准采集",
+  "modifier.dreamtinker.arrow_harvest": "富饶之触",
+  "modifier.dreamtinker.arrow_harvest.flavor": "丰饶",
+  "modifier.dreamtinker.arrow_harvest.description": "命中方块时，触发一个类似爆炸的范围挖掘，其效果与弹射物力量和速度相关。",
 
   "material.dreamtinker.echo_alloy": "回响合金",
   "material.dreamtinker.echo_alloy.flavor": "是神秘的回响，还是秘密的回响",
@@ -914,6 +920,8 @@
   "material.dreamtinker.cloggrum.flavor": " ",
   "material.dreamtinker.froststeel": "霜钢",
   "material.dreamtinker.froststeel.flavor": " ",
+  "material.dreamtinker.regalium": "贵豪",
+  "material.dreamtinker.regalium.flavor": "从日光到彩虹",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
@@ -1307,6 +1315,11 @@
   "fluid.dreamtinker.molten_froststeel.fluid_effect": "熔融霜钢",
   "block.dreamtinker.molten_froststeel": "熔融霜钢",
   "item.dreamtinker.molten_froststeel_bucket": "熔融霜钢桶",
+  "fluid_type.dreamtinker.molten_regalium": "熔融贵豪",
+  "fluid.dreamtinker.molten_regalium": "熔融贵豪",
+  "fluid.dreamtinker.molten_regalium.fluid_effect": "熔融贵豪",
+  "block.dreamtinker.molten_regalium": "熔融贵豪",
+  "item.dreamtinker.molten_regalium_bucket": "熔融贵豪桶",
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "流血",
   "fluid_effect.tconstruct.damage.explosion": "爆炸",

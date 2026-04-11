@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:ore_melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:geore_large_buds/regalium"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:geore_large_buds/regalium"
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 270,
+    "fluid": "dreamtinker:molten_regalium"
+  },
+  "temperature": 900,
+  "time": 127
+}

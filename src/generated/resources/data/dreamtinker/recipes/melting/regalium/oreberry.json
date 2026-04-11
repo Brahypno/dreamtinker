@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "forge:item_exists",
+      "item": "oreberriesreplanted:regalium_oreberry"
+    }
+  ],
+  "ingredient": {
+    "item": "oreberriesreplanted:regalium_oreberry"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "dreamtinker:molten_regalium"
+  },
+  "temperature": 900,
+  "time": 21
+}

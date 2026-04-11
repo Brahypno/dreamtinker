@@ -6,6 +6,10 @@
     {
       "id": "dreamtinker:malum_hallowed_gold",
       "required": false
+    },
+    {
+      "id": "dreamtinker:regalium",
+      "required": false
     }
   ]
 }

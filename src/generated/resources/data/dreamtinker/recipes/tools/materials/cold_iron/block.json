@@ -1,5 +1,20 @@
 {
   "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "mantle:tag_filled",
+          "tag": "forge:storage_blocks/cold_iron"
+        }
+      ]
+    }
+  ],
   "ingredient": {
     "tag": "forge:storage_blocks/cold_iron"
   },

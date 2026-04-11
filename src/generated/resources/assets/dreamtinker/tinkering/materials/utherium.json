@@ -1,7 +1,8 @@
 {
   "color": "FF451B1F",
   "fallbacks": [
-    "gem"
+    "gem",
+    "metal"
   ],
   "generator": {
     "supported_stats": [

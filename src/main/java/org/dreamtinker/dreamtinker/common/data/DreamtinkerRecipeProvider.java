@@ -2491,6 +2491,11 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                 .metal().dust().plate().gear().coin().sheetmetal().geore().oreberry()
                 .common(ToolsBySuffix(undergarden))
                 .common(armorBySuffix(undergarden));
+
+        fluid(consumer, "regalium", DreamtinkerFluids.molten_regalium)
+                .optional()
+                .baseUnit(FluidValues.INGOT).damageUnit(FluidValues.NUGGET)
+                .metal().dust().plate().gear().coin().sheetmetal().geore().oreberry();
     }
 
     private void addMaterialRecipes(Consumer<FinishedRecipe> consumer) {
@@ -2598,37 +2603,32 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         standardMetalMaterial(consumer, DreamtinkerMaterialIds.forgotten_metal, DreamtinkerFluids.molten_forgotten_metal, "forgotten_metal", materials_folder);
         standardMetalMaterial(consumer, DreamtinkerMaterialIds.Cloggrum, DreamtinkerFluids.molten_cloggrum, "cloggrum", materials_folder);
         standardMetalMaterial(consumer, DreamtinkerMaterialIds.Froststeel, DreamtinkerFluids.molten_froststeel, "froststeel", materials_folder);
+        standardMetalMaterial(consumer, DreamtinkerMaterialIds.Regalium, DreamtinkerFluids.molten_regalium, "regalium", materials_folder);
 
     }
 
-    private void standardMetalMaterial(
-            Consumer<FinishedRecipe> consumer,
-            MaterialId materialId,
-            FlowingFluidObject<ForgeFlowingFluid> fluid,
-            String name,
-            String folder) {
+    private void standardMetalMaterial(Consumer<FinishedRecipe> consumer, MaterialId materialId, FlowingFluidObject<ForgeFlowingFluid> fluid, String name, String folder) {
         materialMeltingCasting(consumer, materialId, fluid, FluidValues.INGOT, folder);
 
-        materialRecipe(consumer, materialId, Ingredient.of(forgeTag("ingots", name)), 1, 1,
-                       folder + name + "/ingot");
-        materialRecipe(consumer, materialId, Ingredient.of(forgeTag("nuggets", name)), 1, 9,
-                       folder + name + "/nugget");
-        materialRecipe(consumer, materialId, Ingredient.of(forgeTag("storage_blocks", name)), 9, 1,
-                       folder + name + "/block");
+        TagKey<Item> ingots = forgeTag("ingots", name);
+        Consumer<FinishedRecipe> wrapped = withCondition(consumer, tagFilled(ingots));
+        materialRecipe(wrapped, materialId, Ingredient.of(ingots), 1, 1, folder + name + "/ingot");
+        TagKey<Item> nuggets = forgeTag("nuggets", name);
+        wrapped = withCondition(consumer, tagFilled(nuggets));
+        materialRecipe(wrapped, materialId, Ingredient.of(nuggets), 1, 9, folder + name + "/nugget");
+        TagKey<Item> sb = forgeTag("storage_blocks", name);
+        wrapped = withCondition(consumer, tagFilled(sb));
+        materialRecipe(wrapped, materialId, Ingredient.of(sb), 9, 1, folder + name + "/block");
     }
 
-    private void standardGemMaterial(
-            Consumer<FinishedRecipe> consumer,
-            MaterialId materialId,
-            FluidObject<?> fluid,
-            String name,
-            String folder) {
+    private void standardGemMaterial(Consumer<FinishedRecipe> consumer, MaterialId materialId, FluidObject<?> fluid, String name, String folder) {
         materialMeltingCasting(consumer, materialId, fluid, FluidValues.GEM, folder);
-
-        materialRecipe(consumer, materialId, Ingredient.of(forgeTag("gems", name)), 1, 1,
-                       folder + name + "/gem");
-        materialRecipe(consumer, materialId, Ingredient.of(forgeTag("storage_blocks", name)), 9, 1,
-                       folder + name + "/block");
+        TagKey<Item> gems = forgeTag("gems", name);
+        Consumer<FinishedRecipe> wrapped = withCondition(consumer, tagFilled(gems));
+        materialRecipe(wrapped, materialId, Ingredient.of(gems), 1, 1, folder + name + "/gem");
+        TagKey<Item> sb = forgeTag("storage_blocks", name);
+        wrapped = withCondition(consumer, tagFilled(sb));
+        materialRecipe(wrapped, materialId, Ingredient.of(forgeTag("storage_blocks", name)), 9, 1, folder + name + "/block");
     }
 
     public void ToolsBySuffix(
