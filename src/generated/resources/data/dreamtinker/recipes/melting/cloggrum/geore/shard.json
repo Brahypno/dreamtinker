@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:geore_shards/cloggrum"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:geore_shards/cloggrum"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_cloggrum"
+  },
+  "temperature": 600,
+  "time": 53
+}

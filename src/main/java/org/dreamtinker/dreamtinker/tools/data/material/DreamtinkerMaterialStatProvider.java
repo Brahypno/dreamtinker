@@ -120,6 +120,11 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          HandleMaterialStats.multipliers().durability(1.1f).attackDamage(1.15f).attackSpeed(1.1f).build(),
                          StatlessMaterialStats.BINDING);
 
+        addMaterialStats(DreamtinkerMaterialIds.Cloggrum,
+                         new HeadMaterialStats(100, 6.0f, Tiers.IRON, 3.5f),
+                         HandleMaterialStats.multipliers().durability(1.1f).attackDamage(1.05f).attackSpeed(1.05f).build(),
+                         StatlessMaterialStats.BINDING);
+
         addELMeleeHarvest();
         addMalumMeleeHarvest();
         addEidolonMeleeHarvest();
@@ -375,10 +380,12 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addArmorShieldStats(DreamtinkerMaterialIds.Utherium,
                             PlatingMaterialStats.builder().durabilityFactor(30).armor(3f, 6f, 8f, 3f).toughness(3).knockbackResistance(0f),
                             StatlessMaterialStats.MAILLE);
-
         addArmorShieldStats(DreamtinkerMaterialIds.forgotten_metal,
                             PlatingMaterialStats.builder().durabilityFactor(30).armor(3f, 6f, 8f, 3f).toughness(3).knockbackResistance(0f),
                             StatlessMaterialStats.MAILLE);
+        addArmorShieldStats(DreamtinkerMaterialIds.Cloggrum,
+                            PlatingMaterialStats.builder().durabilityFactor(20).armor(1f, 5f, 6f, 2f).toughness(1).knockbackResistance(0f)
+                                                .shieldDurability(672), StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
 
 
         addArmorShieldStats(DreamtinkerMaterialIds.etherium,

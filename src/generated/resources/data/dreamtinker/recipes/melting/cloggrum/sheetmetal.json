@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:sheetmetals/cloggrum"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:sheetmetals/cloggrum"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_cloggrum"
+  },
+  "temperature": 600,
+  "time": 53
+}

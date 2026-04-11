@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "conditions": [
+    {
+      "type": "forge:item_exists",
+      "item": "undergarden:cloggrum_axe"
+    }
+  ],
+  "ingredient": {
+    "item": "undergarden:cloggrum_axe"
+  },
+  "result": {
+    "amount": 270,
+    "fluid": "dreamtinker:molten_cloggrum",
+    "unit_size": 10
+  },
+  "temperature": 600,
+  "time": 93
+}

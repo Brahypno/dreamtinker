@@ -82,6 +82,10 @@
     {
       "id": "dreamtinker:forgotten_metal",
       "required": false
+    },
+    {
+      "id": "dreamtinker:cloggrum",
+      "required": false
     }
   ]
 }

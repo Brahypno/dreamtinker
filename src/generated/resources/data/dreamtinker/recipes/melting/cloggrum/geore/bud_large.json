@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:ore_melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:geore_large_buds/cloggrum"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:geore_large_buds/cloggrum"
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 270,
+    "fluid": "dreamtinker:molten_cloggrum"
+  },
+  "temperature": 600,
+  "time": 107
+}

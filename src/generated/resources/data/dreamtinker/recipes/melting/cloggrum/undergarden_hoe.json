@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "conditions": [
+    {
+      "type": "forge:item_exists",
+      "item": "undergarden:cloggrum_hoe"
+    }
+  ],
+  "ingredient": {
+    "item": "undergarden:cloggrum_hoe"
+  },
+  "result": {
+    "amount": 180,
+    "fluid": "dreamtinker:molten_cloggrum",
+    "unit_size": 10
+  },
+  "temperature": 600,
+  "time": 76
+}

@@ -342,6 +342,19 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(222, 0xFF7BFFBD)
                                                 .build());
 
+        this.buildMaterial(DreamtinkerMaterialIds.Cloggrum)
+            .meleeHarvest().armor().shieldCore()
+            .fallbacks("metal")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(0, 0xFF342926)
+                                                .addARGB(63, 0xFF483832)
+                                                .addARGB(102, 0xFF564137)
+                                                .addARGB(140, 0xFF635043)
+                                                .addARGB(178, 0xFF7A6858)
+                                                .addARGB(216, 0xFF947F67)
+                                                .addARGB(255, 0xFFB89B7A)
+                                                .build());
+
         this.buildMaterial(DreamtinkerMaterialIds.SpikyShard)
             .meleeHarvest().armor().shieldCore().arrowHead()
             .fallbacks("bone")

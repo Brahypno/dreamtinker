@@ -49,6 +49,7 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
         buildRenderInfo(DreamtinkerMaterialIds.ArcaneGold).color(0xFFEDAE66).fallbacks("metal").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.Utherium).color(0xFF451B1F).fallbacks("gem").luminosity(11);
         buildRenderInfo(DreamtinkerMaterialIds.forgotten_metal).color(0xFF28AB8A).fallbacks("metal").luminosity(15);
+        buildRenderInfo(DreamtinkerMaterialIds.Cloggrum).color(0xFF483832).fallbacks("metal").luminosity(4);
 
         buildRenderInfo(DreamtinkerMaterialIds.etherium).color(0xFF96E8E0).fallbacks("metal", "crystal").luminosity(15);
         buildRenderInfo(DreamtinkerMaterialIds.nefarious).color(0xFF8513A0).fallbacks("metal", "crystal", "gem").luminosity(8);

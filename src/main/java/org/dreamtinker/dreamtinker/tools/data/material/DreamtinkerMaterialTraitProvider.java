@@ -107,6 +107,9 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.forgotten_metal, Ids.undergarden_killer, Ids.undergarden_miner);
         addTraits(DreamtinkerMaterialIds.forgotten_metal, ARMOR, Ids.undergarden_protection);
 
+        addDefaultTraits(DreamtinkerMaterialIds.Cloggrum, TinkerModifiers.knockback);
+        addTraits(DreamtinkerMaterialIds.Cloggrum, ARMOR, ModifierIds.projectileProtection);
+
         addDefaultTraits(DreamtinkerMaterialIds.etherium,
                          new ModifierEntry(ModifierIds.smite, 2),
                          new ModifierEntry(explosive_hit.getId(), 1),

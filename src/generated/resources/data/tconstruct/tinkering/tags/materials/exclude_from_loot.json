@@ -39,6 +39,10 @@
     {
       "id": "dreamtinker:eidolon_paladin_bone",
       "required": false
+    },
+    {
+      "id": "dreamtinker:forgotten_metal",
+      "required": false
     }
   ]
 }

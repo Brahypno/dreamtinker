@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "tag": "forge:storage_blocks/cloggrum"
+  },
+  "material": "dreamtinker:cloggrum",
+  "needed": 1,
+  "value": 9
+}

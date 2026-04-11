@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:gears/cloggrum"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:gears/cloggrum"
+  },
+  "result": {
+    "amount": 360,
+    "fluid": "dreamtinker:molten_cloggrum"
+  },
+  "temperature": 600,
+  "time": 107
+}

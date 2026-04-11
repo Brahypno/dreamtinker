@@ -2453,6 +2453,13 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                             .setDamagable(FluidValues.NUGGET)
                             .addByproduct(DreamtinkerFluids.molten_cloggrum.result(FluidValues.INGOT * 6))
                             .save(wrapped, location(Melting_folder + "forgotten/undergarden_battleaxe"));
+
+        fluid(consumer, "cloggrum", DreamtinkerFluids.molten_cloggrum)
+                .optional()
+                .baseUnit(FluidValues.INGOT).damageUnit(FluidValues.NUGGET)
+                .metal().dust().plate().gear().coin().sheetmetal().geore().oreberry()
+                .common(ToolsBySuffix(undergarden))
+                .common(armorBySuffix(undergarden));
     }
 
     private void addMaterialRecipes(Consumer<FinishedRecipe> consumer) {
@@ -2558,6 +2565,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
         standardMetalMaterial(consumer, DreamtinkerMaterialIds.Utherium, DreamtinkerFluids.molten_utherium, "utherium", materials_folder);
         standardMetalMaterial(consumer, DreamtinkerMaterialIds.forgotten_metal, DreamtinkerFluids.molten_forgotten_metal, "forgotten_metal", materials_folder);
+        standardMetalMaterial(consumer, DreamtinkerMaterialIds.Cloggrum, DreamtinkerFluids.molten_cloggrum, "cloggrum", materials_folder);
 
     }
 
