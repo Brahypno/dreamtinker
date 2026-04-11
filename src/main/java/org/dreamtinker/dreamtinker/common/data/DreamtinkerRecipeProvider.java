@@ -1157,7 +1157,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         CompositeCastingRecipeBuilder.table(DreamtinkerToolParts.explode_core.get(), 8)
                                      .save(consumer, this.location(castFolder + "explode_core_composite"));
         MaterialCastingRecipeBuilder.tableRecipe(TinkerToolParts.shieldCore.get())
-                                    .setCast(Items.SHIELD, true)
+                                    .setCast(DreamtinkerTagKeys.Items.modTag("doors"), true)
                                     .setItemCost(4)
                                     .save(consumer, location(partFolder + "shield_core_cast"));
         partRecipes(consumer, DreamtinkerToolParts.chainSawTeeth, DreamTinkerSmeltery.chainSawTeethCast, 12, partFolder, castFolder);

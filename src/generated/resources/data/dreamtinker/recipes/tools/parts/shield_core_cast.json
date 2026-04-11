@@ -1,7 +1,7 @@
 {
   "type": "tconstruct:table_casting_material",
   "cast": {
-    "item": "minecraft:shield"
+    "tag": "minecraft:doors"
   },
   "cast_consumed": true,
   "item_cost": 4,

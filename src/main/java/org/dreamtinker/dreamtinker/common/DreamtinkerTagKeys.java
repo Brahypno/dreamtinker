@@ -53,7 +53,7 @@ public class DreamtinkerTagKeys {
             return TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation(Dreamtinker.MODID, name));
         }
 
-        private static TagKey<Item> modTag(String path) {
+        public static TagKey<Item> modTag(String path) {
             return TagKey.create(Registries.ITEM, new ResourceLocation(path));
         }
 
