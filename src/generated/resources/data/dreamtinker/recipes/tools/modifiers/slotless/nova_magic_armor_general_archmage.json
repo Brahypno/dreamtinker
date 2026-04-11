@@ -42,6 +42,6 @@
   "level": 3,
   "result": "dreamtinker:nova_magic_armor",
   "tools": {
-    "tag": "tconstruct:modifiable/armor"
+    "tag": "tconstruct:modifiable/armor/worn"
   }
 }

@@ -40,7 +40,17 @@
   ],
   "input": {
     "count": 1,
-    "item": "tconstruct:large_plate_cast"
+    "ingredient_list": [
+      {
+        "item": "tconstruct:large_plate_cast"
+      },
+      {
+        "item": "tconstruct:large_plate_sand_cast"
+      },
+      {
+        "item": "tconstruct:large_plate_red_sand_cast"
+      }
+    ]
   },
   "output": {
     "item": "tconstruct:large_plate",

@@ -90,7 +90,7 @@ public class DreamtinkerToolParts {
         accept(output, chainSawCore);
         accept(output, chainSawTeeth);
 
-        if (ModList.get().isLoaded("ars_nouveau") && configCompactDisabled("ars_nouveau")){
+        if (ModList.get().isLoaded("ars_nouveau") && !configCompactDisabled("ars_nouveau")){
             accept(output, NovaCover);
             accept(output, NovaMisc);
             accept(output, NovaRostrum);

@@ -1231,21 +1231,27 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         List<ToolPartItem> Parts = DTHelper.getPartList(statsId);
         Map<ToolPartItem, CastLookup.CastTriple> map = CastLookup.findCastsForParts(Parts);
         for (ToolPartItem part : Parts) {
-            Item castItem = map.get(part).cast(); // 可能为 null（没注册）
+            Ingredient castItem = Ingredient.of(map.get(part).asListPresent().toArray(new ItemLike[0])); // 可能为 null（没注册）
             if (part == DreamtinkerToolParts.memoryOrthant.get())
-                castItem = DreamtinkerCommon.memory_cast.get();
+                castItem = Ingredient.of(DreamtinkerCommon.memory_cast.get());
             if (part == DreamtinkerToolParts.reasonEmanation.get())
-                castItem = DreamtinkerCommon.reason_cast.get();
+                castItem = Ingredient.of(DreamtinkerCommon.reason_cast.get());
             if (part == DreamtinkerToolParts.explode_core.get())
-                castItem = DreamtinkerToolParts.explode_core.get();
+                castItem = Ingredient.of(DreamtinkerToolParts.explode_core.get());
             if (part == DreamtinkerToolParts.wishOrthant.get())
-                castItem = DreamtinkerCommon.wish_cast.get();
+                castItem = Ingredient.of(DreamtinkerCommon.wish_cast.get());
             if (part == DreamtinkerToolParts.chainSawCore.get())
-                castItem = DreamTinkerSmeltery.chainSawCoreCast.get();
+                castItem = Ingredient.of(DreamTinkerSmeltery.chainSawCoreCast.values().toArray(new ItemLike[0]));
             if (part == DreamtinkerToolParts.chainSawTeeth.get())
-                castItem = DreamTinkerSmeltery.chainSawTeethCast.get();
-            if (part == TinkerToolParts.arrowHead.get())
-                castItem = TinkerSmeltery.arrowCast.get();
+                castItem = Ingredient.of(DreamTinkerSmeltery.chainSawTeethCast.values().toArray(new ItemLike[0]));
+            if (part == DreamtinkerToolParts.NovaMisc.get())
+                castItem = Ingredient.of(DreamTinkerSmeltery.NovaMiscCast.values().toArray(new ItemLike[0]));
+            if (part == DreamtinkerToolParts.NovaRostrum.get())
+                castItem = Ingredient.of(DreamTinkerSmeltery.NovaRostrumCast.values().toArray(new ItemLike[0]));
+            if (part == DreamtinkerToolParts.NovaCover.get())
+                castItem = Ingredient.of(DreamTinkerSmeltery.NovaCoverCast.values().toArray(new ItemLike[0]));
+            if (part == DreamtinkerToolParts.NovaWrapper.get())
+                castItem = Ingredient.of(DreamTinkerSmeltery.NovaWrapperCast.values().toArray(new ItemLike[0]));
             CompoundTag nbt = new CompoundTag();
             nbt.putString("Material", id.toString());
             ItemStack stack = new ItemStack(part, count);
@@ -1857,7 +1863,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(2)
                              .save(wrapped, wrap(NovaRegistry.nova_magic_armor, slotlessFolder, "_archmage"));
         ModifierRecipeBuilder.modifier(NovaRegistry.nova_magic_armor)
-                             .setTools(TinkerTags.Items.ARMOR)
+                             .setTools(TinkerTags.Items.WORN_ARMOR)
                              .addInput(ItemsRegistry.WILDEN_TRIBUTE, 6)
                              .addInput(Items.TOTEM_OF_UNDYING, 1)
                              .addInput(ItemsRegistry.MAGE_BLOOM, 3)
@@ -1867,14 +1873,14 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .saveSalvage(wrapped, wrap(NovaRegistry.nova_magic_armor, abilitySalvage, "_1"))
                              .save(wrapped, wrap(NovaRegistry.nova_magic_armor, abilityFolder, "_1"));
         ModifierRecipeBuilder.modifier(NovaRegistry.nova_magic_armor)
-                             .setTools(TinkerTags.Items.ARMOR)
+                             .setTools(TinkerTags.Items.WORN_ARMOR)
                              .addInput(ItemsRegistry.MAGE_FIBER, 8)
                              .addInput(Tags.Items.INGOTS_GOLD, 8)
                              .addInput(Tags.Items.INGOTS_GOLD, 8)
                              .setLevelRange(2, 2)
                              .save(wrapped, wrap(NovaRegistry.nova_magic_armor, slotlessFolder, "_general_mage"));
         ModifierRecipeBuilder.modifier(NovaRegistry.nova_magic_armor)
-                             .setTools(TinkerTags.Items.ARMOR)
+                             .setTools(TinkerTags.Items.WORN_ARMOR)
                              .addInput(ItemsRegistry.MAGE_FIBER, 8)
                              .addInput(Tags.Items.GEMS_DIAMOND, 8)
                              .addInput(Tags.Items.GEMS_DIAMOND, 8)

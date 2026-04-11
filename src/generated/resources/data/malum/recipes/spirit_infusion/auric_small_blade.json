@@ -40,7 +40,17 @@
   ],
   "input": {
     "count": 1,
-    "item": "tconstruct:small_blade_cast"
+    "ingredient_list": [
+      {
+        "item": "tconstruct:small_blade_cast"
+      },
+      {
+        "item": "tconstruct:small_blade_sand_cast"
+      },
+      {
+        "item": "tconstruct:small_blade_red_sand_cast"
+      }
+    ]
   },
   "output": {
     "item": "tconstruct:small_blade",

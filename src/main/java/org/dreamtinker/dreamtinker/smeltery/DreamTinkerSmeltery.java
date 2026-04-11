@@ -235,7 +235,7 @@ public class DreamTinkerSmeltery extends DreamtinkerModule {
     private static void addCasts(CreativeModeTab.Output output, Function<CastItemObject, ItemLike> getter) {
         accept(output, getter, chainSawCoreCast);
         accept(output, getter, chainSawTeethCast);
-        if (ModList.get().isLoaded("ars_nouveau") && configCompactDisabled("ars_nouveau")){
+        if (ModList.get().isLoaded("ars_nouveau") && !configCompactDisabled("ars_nouveau")){
             accept(output, getter, NovaCoverCast);
             accept(output, getter, NovaRostrumCast);
             accept(output, getter, NovaWrapperCast);

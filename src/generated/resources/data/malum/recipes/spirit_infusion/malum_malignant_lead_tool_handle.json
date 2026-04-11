@@ -40,7 +40,17 @@
   ],
   "input": {
     "count": 1,
-    "item": "tconstruct:tool_handle_cast"
+    "ingredient_list": [
+      {
+        "item": "tconstruct:tool_handle_cast"
+      },
+      {
+        "item": "tconstruct:tool_handle_sand_cast"
+      },
+      {
+        "item": "tconstruct:tool_handle_red_sand_cast"
+      }
+    ]
   },
   "output": {
     "item": "tconstruct:tool_handle",

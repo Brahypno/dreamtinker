@@ -40,7 +40,17 @@
   ],
   "input": {
     "count": 1,
-    "ingredient_list": []
+    "ingredient_list": [
+      {
+        "item": "dreamtinker:nova_misc_cast"
+      },
+      {
+        "item": "dreamtinker:nova_misc_sand_cast"
+      },
+      {
+        "item": "dreamtinker:nova_misc_red_sand_cast"
+      }
+    ]
   },
   "output": {
     "item": "dreamtinker:nova_misc",
