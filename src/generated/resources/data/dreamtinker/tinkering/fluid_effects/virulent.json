@@ -1,8 +1,33 @@
 {
+  "block_effects": [
+    {
+      "type": "tconstruct:mob_effect_cloud",
+      "effects": [
+        {
+          "effect": "undergarden:virulence",
+          "level": 3,
+          "time": 200
+        }
+      ]
+    }
+  ],
   "conditions": [
     {
       "type": "forge:mod_loaded",
       "modid": "undergarden"
+    },
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:mod_loaded",
+          "modid": "undergarden"
+        }
+      ]
     }
   ],
   "entity_effects": [
@@ -11,11 +36,11 @@
       "action": "add",
       "effect": "undergarden:virulence",
       "level": 1,
-      "time": 100
+      "time": 200
     }
   ],
   "fluid": {
     "amount": 50,
-    "tag": "forge:virulent"
+    "tag": "undergarden:virulent"
   }
 }

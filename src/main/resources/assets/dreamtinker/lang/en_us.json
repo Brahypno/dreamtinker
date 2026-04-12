@@ -1323,6 +1323,7 @@
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "bleed",
   "fluid_effect.tconstruct.damage.explosion": "explosion",
+  "fluid.dreamtinker.virulent.fluid_effect": "This Virulent Mix is very dangerous",
 
   "pattern.dreamtinker.explode_core": "explode core",
   "pattern.dreamtinker.memory_orthant": "Memory Orthant",

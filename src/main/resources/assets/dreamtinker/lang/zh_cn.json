@@ -1323,6 +1323,7 @@
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "流血",
   "fluid_effect.tconstruct.damage.explosion": "爆炸",
+  "fluid.dreamtinker.virulent.fluid_effect": "这份致毒混合物十分危险",
 
   "pattern.dreamtinker.explode_core": "镇爆核心",
   "pattern.dreamtinker.memory_orthant": "记忆象限",
