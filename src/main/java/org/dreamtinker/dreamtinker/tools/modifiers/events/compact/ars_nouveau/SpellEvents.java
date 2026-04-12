@@ -70,7 +70,6 @@ public class SpellEvents {
             resolver.spellContext.getCasterTool().getItem() instanceof ModifiableSpellBook && isTinker(resolver.spellContext)){
             ModifierNBT modifiers = EntityModifierCapability.getOrEmpty(projectile);
             if (modifiers.isEmpty()){//if its not empty then it could be tracked by tinker events
-                System.out.println("happened?");
                 ToolStack tool = ToolStack.from(resolver.spellContext.getCasterTool());
                 ModifierNBT new_modifiers = tool.getModifiers();
                 EntityModifierCapability.getCapability(projectile).addModifiers(new_modifiers);

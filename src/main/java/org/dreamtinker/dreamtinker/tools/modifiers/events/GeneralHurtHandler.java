@@ -58,7 +58,6 @@ public class GeneralHurtHandler {
         Entity direct = dmg.getDirectEntity();
         ModifierNBT modifiers = direct instanceof Projectile ? EntityModifierCapability.getOrEmpty(direct) : null;
 
-        //System.out.println(dmg + "" + damageAmount);
         //CANCEL DAMAGE--need victim but not offender
         int fragileButBright = DTModifierCheck.getEntityModifierNum(victim, DreamtinkerModifiers.Ids.FragileButBright);
         if (0 < fragileButBright && rds.nextFloat() < FragileDodge.get() * fragileButBright){

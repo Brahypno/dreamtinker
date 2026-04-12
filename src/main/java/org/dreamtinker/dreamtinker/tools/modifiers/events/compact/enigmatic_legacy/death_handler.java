@@ -25,7 +25,7 @@ public class death_handler {
         if (entity.level().isClientSide || event.isCanceled())
             return;
         if (entity instanceof Player player && SuperpositionHandler.isTheWorthyOne(player))
-            if (3 <= DTModifierCheck.getMainhandModifierLevel(player, DreamtinkerModifiers.weapon_books.getId()))
+            if (2 <= DTModifierCheck.getMainhandModifierLevel(player, DreamtinkerModifiers.weapon_books.getId()))
                 if (Math.random() <= TheInfinitum.undeadProbability.getValue().asMultiplier(false)){
                     event.setCanceled(true);
                     player.setHealth(1);

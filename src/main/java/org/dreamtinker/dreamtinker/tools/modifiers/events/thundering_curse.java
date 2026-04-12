@@ -57,6 +57,8 @@ public class thundering_curse {
             stormBias += DTModifierCheck.getEntityModifierNum(p, DreamtinkerModifiers.Ids.thundering_curse);
         }
         stormBias = (float) Math.min(stormBias * thunderCurse.get(), 1.0f);
+        if (0 == stormBias)
+            return;
 
         // 2) 读取当前天气状态
         ServerLevelData data = (ServerLevelData) level.getLevelData();
