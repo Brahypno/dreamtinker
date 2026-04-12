@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "forge:item_exists",
+      "item": "undergarden:cloggrum_bars"
+    }
+  ],
+  "ingredient": {
+    "item": "undergarden:cloggrum_bars"
+  },
+  "result": {
+    "amount": 30,
+    "fluid": "dreamtinker:molten_cloggrum"
+  },
+  "temperature": 600,
+  "time": 31
+}

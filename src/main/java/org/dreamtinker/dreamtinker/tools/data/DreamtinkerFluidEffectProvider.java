@@ -2,8 +2,6 @@ package org.dreamtinker.dreamtinker.tools.data;
 
 import com.sammy.malum.registry.common.MobEffectRegistry;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Tiers;
@@ -12,7 +10,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
 import net.minecraftforge.common.crafting.conditions.OrCondition;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
@@ -127,6 +124,7 @@ public class DreamtinkerFluidEffectProvider extends AbstractFluidEffectProvider 
         addFluid(DreamtinkerFluids.mercury, FluidValues.SIP)
                 .addEntityEffects(FluidMobEffect.builder().effect(MobEffects.DAMAGE_RESISTANCE, 100, 2).buildEntity(TimeAction.ADD))
                 .addEntityEffects(FluidMobEffect.builder().effect(MobEffects.MOVEMENT_SLOWDOWN, 100, 4).buildEntity(TimeAction.ADD));
+        /*
         compatFluid("undergarden", FluidTags.create(new ResourceLocation("undergarden", "virulent")), FluidValues.SIP)
                 .addCondition(modLoaded("undergarden"))
                 .addEntityEffects(FluidMobEffect.builder()
@@ -141,6 +139,8 @@ public class DreamtinkerFluidEffectProvider extends AbstractFluidEffectProvider 
                                                 .buildEntity(TimeAction.ADD))
                 .addBlockEffect(new MobEffectCloudFluidEffect(FluidMobEffect.builder().effect(ForgeRegistries.MOB_EFFECTS.getValue(
                         new ResourceLocation("undergarden", "gooey")), 10 * 20, 3).buildCloud().effects()));
+
+         */
     }
 
     @Override

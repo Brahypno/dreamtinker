@@ -88,7 +88,6 @@ import slimeknights.tconstruct.library.recipe.melting.MeltingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.modifiers.adding.IncrementalModifierRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.modifiers.adding.ModifierRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.modifiers.adding.SwappableModifierRecipeBuilder;
-import slimeknights.tconstruct.library.recipe.modifiers.severing.SeveringRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.partbuilder.ItemPartRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.partbuilder.PartRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.partbuilder.recycle.PartBuilderToolRecycleBuilder;
@@ -2498,7 +2497,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                 .baseUnit(FluidValues.INGOT).damageUnit(FluidValues.NUGGET).ore()
                 .metal().dust().plate().gear().coin().sheetmetal().geore().oreberry()
                 .common(ToolsBySuffix(undergarden))
-                .common(armorBySuffix(undergarden));
+                .common(armorBySuffix(undergarden))
+                .metalMelting(1.0f / 3.0f, "undergarden", "bars", false);
         MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(undergarden, "cloggrum_shield")),
                                      DreamtinkerFluids.molten_cloggrum, FluidValues.INGOT * 6, 4.0f)
                             .setDamagable(FluidValues.NUGGET)
@@ -2514,11 +2514,15 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         fluid(consumer, "regalium", DreamtinkerFluids.molten_regalium)
                 .optional()
                 .baseUnit(FluidValues.INGOT).damageUnit(FluidValues.NUGGET)
-
                 .metal().dust().plate().gear().coin().sheetmetal().geore().oreberry();
         EntityMeltingRecipeBuilder.melting(EntityIngredient.of(DreamtinkerTagKeys.EntityTypes.ROTSPAWN),
                                            DreamtinkerFluids.molten_utherium.result(FluidValues.NUGGET))
                                   .save(wrapped, location(Entity_Melting_folder + "molten_utherium/entity"));
+
+        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(undergarden, "goo_ball")),
+                                     DreamtinkerFluids.gooey_slime, FluidValues.SLIMEBALL, 4.0f)
+                            .save(wrapped, location(Melting_folder + "gooey_slime/ball"));
+        /*
         SeveringRecipeBuilder.severing(EntityIngredient.of(DreamtinkerTagKeys.EntityTypes.ROTSPAWN),
                                        ForgeRegistries.ITEMS.getValue(new ResourceLocation(undergarden, "utheric_shard")))
                              .save(consumer, location(serving_folder + "utherium_shard"));
@@ -2536,16 +2540,11 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                 .setCoolingTime(IMeltingRecipe.getTemperature(DreamtinkerFluids.gooey_slime), FluidValues.SLIMEBALL)
                                 .setFluid(FluidIngredient.of(new FluidStack(DreamtinkerFluids.gooey_slime.get(), FluidValues.SLIMEBALL)))
                                 .save(consumer, location(Casting_folder + "gooey_slime"));
-        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(undergarden, "goo_ball")),
-                                     DreamtinkerFluids.gooey_slime, FluidValues.SLIMEBALL, 4.0f)
-                            .save(wrapped, location(Melting_folder + "gooey_slime/ball"));
-        ItemCastingRecipeBuilder.tableRecipe(ForgeRegistries.ITEMS.getValue(new ResourceLocation(undergarden, "goo_ball")))
+        ItemCastingRecipeBuilder.tableRecipe(ForgeRegistries.ITEMS.getValue(new ResourceLocation(undergarden, "cloggrum_bars")))
                                 .setCoolingTime(IMeltingRecipe.getTemperature(DreamtinkerFluids.molten_cloggrum), FluidValues.NUGGET * 3)
                                 .setFluid(FluidIngredient.of(new FluidStack(DreamtinkerFluids.molten_cloggrum.get(), FluidValues.NUGGET * 3)))
                                 .save(consumer, location(Casting_folder + "cloggrum/bars"));
-        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(undergarden, "cloggrum_bars")),
-                                     DreamtinkerFluids.molten_cloggrum, FluidValues.NUGGET * 3, 4.0f)
-                            .save(wrapped, location(Melting_folder + "cloggrum/bars"));
+         */
     }
 
     private void addMaterialRecipes(Consumer<FinishedRecipe> consumer) {
