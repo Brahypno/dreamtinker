@@ -1,0 +1,7 @@
+{
+  "type": "tconstruct:severing",
+  "entity": {
+    "tag": "undergarden:rotspawn"
+  },
+  "result": "undergarden:utheric_shard"
+}

@@ -1,0 +1,7 @@
+{
+  "type": "tconstruct:severing",
+  "entity": {
+    "type": "undergarden:forgotten_guardian"
+  },
+  "result": "undergarden:forgotten_nugget"
+}

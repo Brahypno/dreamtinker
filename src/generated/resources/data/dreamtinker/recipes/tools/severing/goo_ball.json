@@ -1,0 +1,7 @@
+{
+  "type": "tconstruct:severing",
+  "entity": {
+    "type": "undergarden:scintling"
+  },
+  "result": "undergarden:goo_ball"
+}

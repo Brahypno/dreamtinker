@@ -88,6 +88,7 @@ import slimeknights.tconstruct.library.recipe.melting.MeltingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.modifiers.adding.IncrementalModifierRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.modifiers.adding.ModifierRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.modifiers.adding.SwappableModifierRecipeBuilder;
+import slimeknights.tconstruct.library.recipe.modifiers.severing.SeveringRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.partbuilder.ItemPartRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.partbuilder.PartRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.partbuilder.recycle.PartBuilderToolRecycleBuilder;
@@ -2458,6 +2459,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         meltCastIfPresent(modid, key, fluid, FluidValues.GEM, consumer);
     }
 
+    String serving_folder = "tools/severing/";
+
     private void addCompactUGMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
         String undergarden = "undergarden";
         Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(undergarden));
@@ -2501,7 +2504,24 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         fluid(consumer, "regalium", DreamtinkerFluids.molten_regalium)
                 .optional()
                 .baseUnit(FluidValues.INGOT).damageUnit(FluidValues.NUGGET)
+
                 .metal().dust().plate().gear().coin().sheetmetal().geore().oreberry();
+        EntityMeltingRecipeBuilder.melting(EntityIngredient.of(DreamtinkerTagKeys.EntityTypes.ROTSPAWN),
+                                           DreamtinkerFluids.molten_utherium.result(FluidValues.NUGGET))
+                                  .save(wrapped, location(Entity_Melting_folder + "molten_utherium/entity"));
+        SeveringRecipeBuilder.severing(EntityIngredient.of(DreamtinkerTagKeys.EntityTypes.ROTSPAWN),
+                                       ForgeRegistries.ITEMS.getValue(new ResourceLocation("undergarden", "utheric_shard")))
+                             .save(consumer, location(serving_folder + "utherium_shard"));
+        EntityMeltingRecipeBuilder.melting(EntityIngredient.of(ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(undergarden, "forgotten_guardian"))),
+                                           DreamtinkerFluids.molten_forgotten_metal.result(FluidValues.NUGGET))
+                                  .save(wrapped, location(Entity_Melting_folder + "molten_forgotten_metal/entity"));
+        SeveringRecipeBuilder.severing(EntityIngredient.of(ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(undergarden, "forgotten_guardian"))),
+                                       ForgeRegistries.ITEMS.getValue(new ResourceLocation("undergarden", "forgotten_nugget")))
+                             .save(consumer, location(serving_folder + "forgetten_metal"));
+        ;
+        SeveringRecipeBuilder.severing(EntityIngredient.of(ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(undergarden, "scintling"))),
+                                       ForgeRegistries.ITEMS.getValue(new ResourceLocation("undergarden", "goo_ball")))
+                             .save(consumer, location(serving_folder + "goo_ball"));
     }
 
     private void addMaterialRecipes(Consumer<FinishedRecipe> consumer) {
