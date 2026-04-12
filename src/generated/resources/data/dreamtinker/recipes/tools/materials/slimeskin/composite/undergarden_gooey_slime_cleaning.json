@@ -1,0 +1,34 @@
+{
+  "type": "tconstruct:material_fluid",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "undergarden"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "undergarden"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "fluid": {
+    "amount": 50,
+    "tag": "tconstruct:venom"
+  },
+  "input": "dreamtinker:undergarden_gooey_slime",
+  "output": "tconstruct:leather",
+  "temperature": 10
+}

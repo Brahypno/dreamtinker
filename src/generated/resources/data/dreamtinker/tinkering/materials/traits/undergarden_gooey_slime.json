@@ -1,0 +1,20 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "dreamtinker:over_sticky"
+    },
+    {
+      "level": 1,
+      "name": "tconstruct:overslime"
+    }
+  ],
+  "perStat": {
+    "tconstruct:ranged": [
+      {
+        "level": 1,
+        "name": "dreamtinker:sticky_string"
+      }
+    ]
+  }
+}

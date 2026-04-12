@@ -487,6 +487,10 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(new EffectImmunityModule(MobEffects.MOVEMENT_SLOWDOWN))
                 .addModule(AttributeModule.builder(Attributes.MOVEMENT_SPEED, AttributeModifier.Operation.MULTIPLY_BASE).flat(-0.05f));
 
+        buildModifier(Ids.sticky_string)
+                .addModule(StatBoostModule.add(ToolStats.PROJECTILE_DAMAGE).eachLevel(0.5f))
+                .addModule(StatBoostModule.add(ToolStats.DRAW_SPEED).eachLevel(-0.2f));
+
         addELModifiers();
         addMalumModifiers();
         addEidolonModifiers();

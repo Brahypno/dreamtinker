@@ -45,7 +45,7 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
                          TatteredCloth, PaladinBoneTool, Utherium, forgotten_metal);
         this.tag(TinkerTags.Materials.BALANCED)
             .add(valentinite, black_sapphire, scolecite, shiningFlint)
-            .addOptional(MonsterSkin, astral_weave);
+            .addOptional(MonsterSkin, astral_weave, GooeySlimeSkin);
         this.tag(TinkerTags.Materials.HEAVY)
             .add(crying_obsidian, amber, soul_steel)
             .addOptional(hallowed_gold, ArcaneGold, WickedWeave);

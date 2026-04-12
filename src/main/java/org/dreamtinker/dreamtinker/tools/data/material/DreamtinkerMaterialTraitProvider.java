@@ -116,6 +116,9 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.Regalium, silky_crystal);
         addTraits(DreamtinkerMaterialIds.Regalium, AMMO, arrow_harvest);
 
+        addDefaultTraits(DreamtinkerMaterialIds.GooeySlimeSkin, over_sticky, TinkerModifiers.overslime);
+        addTraits(DreamtinkerMaterialIds.GooeySlimeSkin, RANGED, Ids.sticky_string);
+
         addDefaultTraits(DreamtinkerMaterialIds.etherium,
                          new ModifierEntry(ModifierIds.smite, 2),
                          new ModifierEntry(explosive_hit.getId(), 1),

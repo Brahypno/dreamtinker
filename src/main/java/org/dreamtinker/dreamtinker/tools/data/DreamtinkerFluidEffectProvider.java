@@ -134,6 +134,13 @@ public class DreamtinkerFluidEffectProvider extends AbstractFluidEffectProvider 
                                                 .buildEntity(TimeAction.ADD))
                 .addBlockEffect(new MobEffectCloudFluidEffect(FluidMobEffect.builder().effect(ForgeRegistries.MOB_EFFECTS.getValue(
                         new ResourceLocation("undergarden", "virulence")), 10 * 20, 3).buildCloud().effects()));
+        compatFluid("undergarden", DreamtinkerFluids.gooey_slime.getTag(), FluidValues.SIP)
+                .addCondition(modLoaded("undergarden"))
+                .addEntityEffects(FluidMobEffect.builder()
+                                                .effect(ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("undergarden", "gooey")), 10 * 20, 1)
+                                                .buildEntity(TimeAction.ADD))
+                .addBlockEffect(new MobEffectCloudFluidEffect(FluidMobEffect.builder().effect(ForgeRegistries.MOB_EFFECTS.getValue(
+                        new ResourceLocation("undergarden", "gooey")), 10 * 20, 3).buildCloud().effects()));
     }
 
     @Override

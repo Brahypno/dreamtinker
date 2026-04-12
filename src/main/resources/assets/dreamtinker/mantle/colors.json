@@ -193,7 +193,9 @@
     "undergarden_protection": "#2F4C4C",
     "undergarden_miner": "#2F4C4C",
     "silky_crystal": "#6D4516",
-    "arrow_harvest": "#6D4516"
+    "arrow_harvest": "#6D4516",
+    "sticky_string": "#645842",
+    "over_sticky": "#645842"
 
 },
   "material.dreamtinker": {
@@ -266,7 +268,8 @@
     "forgotten_metal": "#2F4C4C",
     "cloggrum": "#342926",
     "froststeel": "#4E557C",
-    "regalium": "#D8964A"
+    "regalium": "#D8964A",
+    "undergarden_gooey_slime": "#645842"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873",

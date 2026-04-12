@@ -182,6 +182,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<GoliathDamage> goliath_damage = MODIFIERS.register("goliath_damage", GoliathDamage::new);
     public static final StaticModifier<SilkyCrystal> silky_crystal = MODIFIERS.register("silky_crystal", SilkyCrystal::new);
     public static final StaticModifier<ArrowHarvest> arrow_harvest = MODIFIERS.register("arrow_harvest", ArrowHarvest::new);
+    public static final StaticModifier<OverSticky> over_sticky = MODIFIERS.register("over_sticky", OverSticky::new);
 
     //etherium
     public static final StaticModifier<ELAstralBreak> astral_break = EL_MODIFIERS.register("astral_break", ELAstralBreak::new);
@@ -342,6 +343,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId curse_fire = id("curse_fire");
         public static final ModifierId falsify_fate = id("falsify_fate");
         public static final ModifierId frost_steel_shell = id("frost_steel_shell");
+        public static final ModifierId sticky_string = id("sticky_string");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");

@@ -282,8 +282,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.void_pearl.get())
                                 .setCoolingTime(IMeltingRecipe.getTemperature(DreamtinkerFluids.molten_void), FluidValues.SLIMEBALL)
                                 .setFluid(FluidIngredient.of(new FluidStack(DreamtinkerFluids.molten_void.get(), FluidValues.SLIMEBALL)))
-                                .save(consumer, location(
-                                        Casting_folder + "void_pearl/slime"));
+                                .save(consumer, location(Casting_folder + "void_pearl/slime"));
         ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.twist_obsidian_pane.get())
                                 .setFluidAndTime(DreamtinkerFluids.liquid_trist, FluidValues.NUGGET * 3)
                                 .setCast(DreamtinkerCommon.crying_obsidian_plane.get(), true)
@@ -799,6 +798,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         addEidolonMaterialRecipes(consumer);
         addBICMaterialRecipes(consumer);
         addNovaMaterialRecipes(consumer);
+        addUGMaterialRecipes(consumer);
+
     }
 
     private void addELMaterialRecipes(Consumer<FinishedRecipe> consumer) {
@@ -945,6 +946,15 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                        materials_folder + "wilden_wing");
         materialRecipe(wrapped, DreamtinkerMaterialIds.WildenSpike, Ingredient.of(ItemsRegistry.WILDEN_SPIKE.get()), 1, 1,
                        materials_folder + "wilden_spike");
+    }
+
+    private void addUGMaterialRecipes(Consumer<FinishedRecipe> consumer) {
+        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("undergarden"));
+
+        materialComposite(wrapped, MaterialIds.leather, DreamtinkerMaterialIds.GooeySlimeSkin, DreamtinkerFluids.gooey_slime, FluidValues.SLIMEBALL,
+                          slimeskinFolder, "undergarden_gooey_slime");
+        materialComposite(wrapped, DreamtinkerMaterialIds.GooeySlimeSkin, MaterialIds.leather, TinkerFluids.venom, FluidValues.SIP, slimeskinFolder,
+                          "undergarden_gooey_slime_cleaning");
     }
 
     String common_folder = "common/";
@@ -2510,18 +2520,32 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                            DreamtinkerFluids.molten_utherium.result(FluidValues.NUGGET))
                                   .save(wrapped, location(Entity_Melting_folder + "molten_utherium/entity"));
         SeveringRecipeBuilder.severing(EntityIngredient.of(DreamtinkerTagKeys.EntityTypes.ROTSPAWN),
-                                       ForgeRegistries.ITEMS.getValue(new ResourceLocation("undergarden", "utheric_shard")))
+                                       ForgeRegistries.ITEMS.getValue(new ResourceLocation(undergarden, "utheric_shard")))
                              .save(consumer, location(serving_folder + "utherium_shard"));
         EntityMeltingRecipeBuilder.melting(EntityIngredient.of(ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(undergarden, "forgotten_guardian"))),
                                            DreamtinkerFluids.molten_forgotten_metal.result(FluidValues.NUGGET))
                                   .save(wrapped, location(Entity_Melting_folder + "molten_forgotten_metal/entity"));
         SeveringRecipeBuilder.severing(EntityIngredient.of(ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(undergarden, "forgotten_guardian"))),
-                                       ForgeRegistries.ITEMS.getValue(new ResourceLocation("undergarden", "forgotten_nugget")))
+                                       ForgeRegistries.ITEMS.getValue(new ResourceLocation(undergarden, "forgotten_nugget")))
                              .save(consumer, location(serving_folder + "forgetten_metal"));
-        ;
+
         SeveringRecipeBuilder.severing(EntityIngredient.of(ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(undergarden, "scintling"))),
-                                       ForgeRegistries.ITEMS.getValue(new ResourceLocation("undergarden", "goo_ball")))
+                                       ForgeRegistries.ITEMS.getValue(new ResourceLocation(undergarden, "goo_ball")))
                              .save(consumer, location(serving_folder + "goo_ball"));
+        ItemCastingRecipeBuilder.tableRecipe(ForgeRegistries.ITEMS.getValue(new ResourceLocation(undergarden, "goo_ball")))
+                                .setCoolingTime(IMeltingRecipe.getTemperature(DreamtinkerFluids.gooey_slime), FluidValues.SLIMEBALL)
+                                .setFluid(FluidIngredient.of(new FluidStack(DreamtinkerFluids.gooey_slime.get(), FluidValues.SLIMEBALL)))
+                                .save(consumer, location(Casting_folder + "gooey_slime"));
+        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(undergarden, "goo_ball")),
+                                     DreamtinkerFluids.gooey_slime, FluidValues.SLIMEBALL, 4.0f)
+                            .save(wrapped, location(Melting_folder + "gooey_slime/ball"));
+        ItemCastingRecipeBuilder.tableRecipe(ForgeRegistries.ITEMS.getValue(new ResourceLocation(undergarden, "goo_ball")))
+                                .setCoolingTime(IMeltingRecipe.getTemperature(DreamtinkerFluids.molten_cloggrum), FluidValues.NUGGET * 3)
+                                .setFluid(FluidIngredient.of(new FluidStack(DreamtinkerFluids.molten_cloggrum.get(), FluidValues.NUGGET * 3)))
+                                .save(consumer, location(Casting_folder + "cloggrum/bars"));
+        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(undergarden, "cloggrum_bars")),
+                                     DreamtinkerFluids.molten_cloggrum, FluidValues.NUGGET * 3, 4.0f)
+                            .save(wrapped, location(Melting_folder + "cloggrum/bars"));
     }
 
     private void addMaterialRecipes(Consumer<FinishedRecipe> consumer) {

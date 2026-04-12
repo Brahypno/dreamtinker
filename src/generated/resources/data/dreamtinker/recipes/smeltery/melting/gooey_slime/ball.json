@@ -1,0 +1,36 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "undergarden"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "undergarden"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ingredient": {
+    "item": "undergarden:goo_ball"
+  },
+  "result": {
+    "amount": 250,
+    "fluid": "dreamtinker:gooey_slime"
+  },
+  "temperature": 50,
+  "time": 123
+}

@@ -6,6 +6,7 @@
   "generator": {
     "supported_stats": [
       "tconstruct:binding",
+      "tconstruct:bowstring",
       "tconstruct:armor_plating",
       "tconstruct:plating_helmet",
       "tconstruct:plating_chestplate",
@@ -15,7 +16,6 @@
       "tconstruct:repair_kit",
       "tconstruct:maille",
       "tconstruct:armor_maille",
-      "tconstruct:bowstring",
       "tconstruct:cuirass",
       "tconstruct:armor_cuirass"
     ],

@@ -760,6 +760,12 @@
   "modifier.dreamtinker.arrow_harvest": "富饶之触",
   "modifier.dreamtinker.arrow_harvest.flavor": "丰饶",
   "modifier.dreamtinker.arrow_harvest.description": "命中方块时，触发一个类似爆炸的范围挖掘，其效果与弹射物力量和速度相关。",
+  "modifier.dreamtinker.sticky_string": "黏黏的弦",
+  "modifier.dreamtinker.sticky_string.flavor": "太黏了，用力拉",
+  "modifier.dreamtinker.sticky_string.description": "每级增加0.5弹射物力量，但减少0.2拉弓速度",
+  "modifier.dreamtinker.over_sticky": "过黏质",
+  "modifier.dreamtinker.over_sticky.flavor": "",
+  "modifier.dreamtinker.over_sticky.description": "受击时少量增加黏液覆层数量；如果受到非魔法、火焰伤害，装备会变硬来抵挡伤害。",
 
   "material.dreamtinker.echo_alloy": "回响合金",
   "material.dreamtinker.echo_alloy.flavor": "是神秘的回响，还是秘密的回响",
@@ -922,6 +928,8 @@
   "material.dreamtinker.froststeel.flavor": " ",
   "material.dreamtinker.regalium": "贵豪",
   "material.dreamtinker.regalium.flavor": "从日光到彩虹",
+  "material.dreamtinker.undergarden_gooey_slime": "蚙蜒黏浆",
+  "material.dreamtinker.undergarden_gooey_slime.flavor": " ",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
@@ -1320,9 +1328,15 @@
   "fluid.dreamtinker.molten_regalium.fluid_effect": "熔融贵豪",
   "block.dreamtinker.molten_regalium": "熔融贵豪",
   "item.dreamtinker.molten_regalium_bucket": "熔融贵豪桶",
+  "fluid_type.dreamtinker.gooey_slime": "蚙蜒黏浆",
+  "fluid.dreamtinker.gooey_slime": "蚙蜒黏浆",
+  "fluid.dreamtinker.gooey_slime.fluid_effect": "蚙蜒黏浆",
+  "block.dreamtinker.gooey_slime": "蚙蜒黏浆",
+  "item.dreamtinker.gooey_slime_bucket": "蚙蜒黏浆桶",
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "流血",
   "fluid_effect.tconstruct.damage.explosion": "爆炸",
+  "fluid.dreamtinker.virulent": "致毒混合物",
   "fluid.dreamtinker.virulent.fluid_effect": "这份致毒混合物十分危险",
 
   "pattern.dreamtinker.explode_core": "镇爆核心",

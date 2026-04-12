@@ -316,8 +316,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new LimbMaterialStats(150, 0.05f, -0.1f, 0.1f),
                          new GripMaterialStats(-0.15f, 0.10f, 1.5f));
 
-        addMaterialStats(DreamtinkerMaterialIds.MonsterSkin,
-                         StatlessMaterialStats.BOWSTRING);
+        addMaterialStats(DreamtinkerMaterialIds.MonsterSkin, StatlessMaterialStats.BOWSTRING);
 
         addMaterialStats(DreamtinkerMaterialIds.ConjurationEssence,
                          new LimbMaterialStats(300, 0.05f, 0.1f, -0.1f),
@@ -327,6 +326,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new LimbMaterialStats(300, 0.05f, 0.1f, 0.1f),
                          new GripMaterialStats(-0.05f, 0.10f, 1.5f),
                          StatlessMaterialStats.BOWSTRING);
+        addMaterialStats(DreamtinkerMaterialIds.GooeySlimeSkin, StatlessMaterialStats.BOWSTRING);
     }
 
     private void addArmor() {
@@ -446,6 +446,8 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addArmorShieldStats(DreamtinkerMaterialIds.EarthEssence,
                             PlatingMaterialStats.builder().durabilityFactor(16).armor(2, 5, 4, 2).toughness(0f).knockbackResistance(0f),
                             StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
+
+        addMaterialStats(DreamtinkerMaterialIds.GooeySlimeSkin, StatlessMaterialStats.CUIRASS);
     }
 
     private void addAmmo() {

@@ -40,6 +40,7 @@ import slimeknights.mantle.registration.object.FluidObject;
 import slimeknights.tconstruct.fluids.block.BurningLiquidBlock;
 import slimeknights.tconstruct.fluids.data.FluidBlockstateModelProvider;
 import slimeknights.tconstruct.fluids.data.FluidBucketModelProvider;
+import slimeknights.tconstruct.fluids.fluids.SlimeFluid;
 
 import java.util.Optional;
 import java.util.function.Function;
@@ -73,6 +74,10 @@ public class DreamtinkerFluids {
     private static FlowingFluidObject<ForgeFlowingFluid> registerFluid(FluidDeferredRegister register, String name, int temp, int viscosity, int density, int lightLevel, Function<Supplier<? extends FlowingFluid>, LiquidBlock> blockFunction) {
         return register.register(name).type(createFluidType(temp, lightLevel, viscosity, density)).block(blockFunction).bucket().flowing();
     }
+
+    public static final FlowingFluidObject<SlimeFluid> gooey_slime =
+            registerSlime(FLUIDS, "gooey_slime", 350, 100, 100, 15,
+                          supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.WATER, 12), 10, 4) {});
 
     public static final FlowingFluidObject<ForgeFlowingFluid> molten_echo_shard =
             registerFluid(FLUIDS, "molten_echo_shard", 900, 200, 1000, 0,
@@ -317,6 +322,11 @@ public class DreamtinkerFluids {
             registerFluid(FLUIDS, "molten_regalium", 1200, 100, 100, 10,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.METAL, 12), 10, 4) {});
 
+    private static FlowingFluidObject<SlimeFluid> registerSlime(FluidDeferredRegister register, String name, int temp, int viscosity, int density, int lightLevel, Function<Supplier<? extends FlowingFluid>, LiquidBlock> blockFunction) {
+        return register.register(name).tickRate(50).type(createFluidType(temp, lightLevel, viscosity, density)).block(blockFunction).bucket()
+                       .flowing(SlimeFluid.Source::new, SlimeFluid.Flowing::new);
+    }
+
     private static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         // containers
         output.accept(molten_echo_alloy);
@@ -374,6 +384,8 @@ public class DreamtinkerFluids {
         acceptMolten(output, molten_forgotten_metal);
         acceptMolten(output, molten_cloggrum);
         acceptMolten(output, molten_froststeel);
+        acceptMolten(output, molten_regalium);
+        acceptMolten(output, gooey_slime);
 
     }
 

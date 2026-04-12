@@ -735,7 +735,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(255, 0xFF9899A1)
                                                 .build());
         this.buildMaterial(DreamtinkerMaterialIds.MonsterSkin)
-            .statType(StatlessMaterialStats.BINDING).armor().statType(StatlessMaterialStats.BOWSTRING).armor().cuirass()
+            .statType(StatlessMaterialStats.BINDING).statType(StatlessMaterialStats.BOWSTRING).armor().cuirass()
             .fallbacks("cloth")
             .transformer(GreyToSpriteTransformer.builder()
                                                 .addARGB(63, 0xFF18161B)
@@ -926,6 +926,20 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(178, 0xFFC07A45)    // 浅橙棕
                                                 .addARGB(216, 0xFFE09A55)    // 亮红橙
                                                 .addARGB(255, 0xFFF0B565)    // 最浅橙黄（高光）
+                                                .build());
+
+
+        this.buildMaterial(DreamtinkerMaterialIds.GooeySlimeSkin)
+            .statType(StatlessMaterialStats.BOWSTRING).cuirass()
+            .fallbacks("cloth")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(0, 0xFF493F30)
+                                                .addARGB(63, 0xFF5A4D38)
+                                                .addARGB(102, 0xFF645842)
+                                                .addARGB(140, 0xFF665F4A)
+                                                .addARGB(178, 0xFF6E694F)
+                                                .addARGB(216, 0xFF7C7960)
+                                                .addARGB(255, 0xFF999E7F)
                                                 .build());
     }
 }

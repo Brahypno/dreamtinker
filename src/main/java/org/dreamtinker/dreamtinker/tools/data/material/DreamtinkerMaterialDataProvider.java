@@ -56,6 +56,7 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.Cloggrum, 2, 20, false, false, tagFilled(DreamtinkerTagKeys.Items.CloggrumIngot));
         addMaterial(DreamtinkerMaterialIds.Froststeel, 2, 25, false, false, tagFilled(DreamtinkerTagKeys.Items.FroststeelIngot));
         addMaterial(DreamtinkerMaterialIds.Regalium, 3, 25, false, false, tagFilled(DreamtinkerTagKeys.Items.RegaliumIngot));
+        addMaterial(DreamtinkerMaterialIds.GooeySlimeSkin, 2, 35, false, false, modLoaded("undergarden"));
 
         addMaterial(DreamtinkerMaterialIds.etherium, 4, 40, false, false, modLoaded("enigmaticlegacy"));
         addMaterial(DreamtinkerMaterialIds.nefarious, 4, 40, false, false, modLoaded("enigmaticlegacy"));

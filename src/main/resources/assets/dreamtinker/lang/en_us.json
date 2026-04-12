@@ -760,6 +760,12 @@
   "modifier.dreamtinker.arrow_harvest": "Harvest touch",
   "modifier.dreamtinker.arrow_harvest.flavor": "Abundance",
   "modifier.dreamtinker.arrow_harvest.description": "Trigger an explode like harvest that fortune level decide by velocity and projectile damage",
+  "modifier.dreamtinker.sticky_string": "Sticky String",
+  "modifier.dreamtinker.sticky_string.flavor": "Too sticky, use force",
+  "modifier.dreamtinker.sticky_string.description": "Increase 0.5 projectile damage but decrease 0.2 draw speed Per Level",
+  "modifier.dreamtinker.over_sticky": "Over sticky",
+  "modifier.dreamtinker.over_sticky.flavor": "",
+  "modifier.dreamtinker.over_sticky.description": "Increase Over Slime amount when attacked; When receiving non-fire/magic damage, start become hardness",
 
   "material.dreamtinker.echo_alloy": "Echo Alloy",
   "material.dreamtinker.echo_alloy.flavor": "Its echo of mystery, or echo of enigma",
@@ -922,6 +928,8 @@
   "material.dreamtinker.froststeel.flavor": " ",
   "material.dreamtinker.regalium": "Regalium",
   "material.dreamtinker.regalium.flavor": "From Sun to rainbow",
+  "material.dreamtinker.undergarden_gooey_slime": "Gooey Slime",
+  "material.dreamtinker.undergarden_gooey_slime.flavor": " ",
 
   "itemGroup.dreamtinker.tool": "Dreamtinker | tool",
   "itemGroup.dreamtinker.part": "Dreamtinker | part",
@@ -1320,9 +1328,15 @@
   "fluid.dreamtinker.molten_regalium.fluid_effect": "Molten Regalium",
   "block.dreamtinker.molten_regalium": "Molten Regalium",
   "item.dreamtinker.molten_regalium_bucket": "Molten Regalium Bucket",
+  "fluid_type.dreamtinker.gooey_slime": "Molten Gooey Slime",
+  "fluid.dreamtinker.gooey_slime": "Molten Gooey Slime",
+  "fluid.dreamtinker.gooey_slime.fluid_effect": "Molten Gooey Slime",
+  "block.dreamtinker.gooey_slime": "Molten Gooey Slime",
+  "item.dreamtinker.gooey_slime_bucket": "Molten Gooey Slime Bucket",
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "bleed",
   "fluid_effect.tconstruct.damage.explosion": "explosion",
+  "fluid.dreamtinker.virulent": "Virulent Mix",
   "fluid.dreamtinker.virulent.fluid_effect": "This Virulent Mix is very dangerous",
 
   "pattern.dreamtinker.explode_core": "explode core",

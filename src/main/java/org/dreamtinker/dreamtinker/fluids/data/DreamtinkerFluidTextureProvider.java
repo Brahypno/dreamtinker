@@ -70,6 +70,7 @@ public class DreamtinkerFluidTextureProvider extends AbstractFluidTextureProvide
         tintedStone(DreamtinkerFluids.molten_cloggrum).color(0xFF564137);
         tintedMolten(DreamtinkerFluids.molten_froststeel).color(0xFF4E557C);
         tintedMolten(DreamtinkerFluids.molten_regalium).color(0xFFD8964A);
+        tintedSlime(DreamtinkerFluids.gooey_slime, "earth").color(0xFF5A4D38);
     }
 
     public void commonFluid(FluidType fluid) {
@@ -78,12 +79,17 @@ public class DreamtinkerFluidTextureProvider extends AbstractFluidTextureProvide
                        false);
     }
 
+
     private FluidTexture.Builder tintedStone(FluidObject<?> fluid) {
         return named(fluid, "molten/stone");
     }
 
     private FluidTexture.Builder tintedMolten(FluidObject<?> fluid) {
         return named(fluid, "molten");
+    }
+
+    private FluidTexture.Builder tintedSlime(FluidObject<?> fluid, String id) {
+        return named(fluid, "slime/" + id);
     }
 
     private FluidTexture.Builder compatOre(FluidObject<?> fluid) {
