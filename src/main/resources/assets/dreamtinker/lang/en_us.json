@@ -8,6 +8,7 @@
   "modifier.dreamtinker.strong_explode": "strong explode",
   "modifier.dreamtinker.strong_explode.flavor": "High-yield strike detected. Hope you brought your helmet!",
   "modifier.dreamtinker.strong_explode.description": "Multiply tool damage based on modifier level",
+  "modifier.dreamtinker.strong_explode.attack_damage": "Damage when shooting out",
   "modifier.dreamtinker.echoed_attack": "echoed attack",
   "modifier.dreamtinker.echoed_attack.flavor": "The Deep Dark will bury you.",
   "modifier.dreamtinker.echoed_attack.description": "deal a follow-up attack on melee, or double damage on ranged; When triggered, echo energy is gathered and would trigger a sonic beam",

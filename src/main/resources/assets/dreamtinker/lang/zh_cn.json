@@ -8,6 +8,7 @@
   "modifier.dreamtinker.strong_explode": "强化镇爆",
   "modifier.dreamtinker.strong_explode.flavor": "左舷弹幕这下不薄了",
   "modifier.dreamtinker.strong_explode.description": "伤害增加本强化等级倍数的伤害",
+  "modifier.dreamtinker.strong_explode.attack_damage": "伤害当被射出",
   "modifier.dreamtinker.echoed_attack": "回响打击",
   "modifier.dreamtinker.echoed_attack.flavor": "深暗将埋葬你们",
   "modifier.dreamtinker.echoed_attack.description": "近战时，50% 进行一次追加攻击；拉弓时，50%伤害增加50%；每次触发时充能，计数达到9时进行一次强大的攻击",

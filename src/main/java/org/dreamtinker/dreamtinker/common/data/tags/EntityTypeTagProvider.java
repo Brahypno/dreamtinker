@@ -3,6 +3,7 @@ package org.dreamtinker.dreamtinker.common.data.tags;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.dreamtinker.dreamtinker.Dreamtinker;
@@ -21,7 +22,10 @@ public class EntityTypeTagProvider extends EntityTypeTagsProvider {
     @Override
     protected void addTags(@NotNull Provider provider) {
         this.tag(DreamtinkerTagKeys.EntityTypes.ENDER_ENTITY)
-            .add(TinkerWorld.enderSlimeEntity.get(), EntityType.ENDER_DRAGON, EntityType.ENDERMAN, EntityType.ENDERMITE, EntityType.SHULKER);
+            .add(TinkerWorld.enderSlimeEntity.get(), EntityType.ENDER_DRAGON, EntityType.ENDERMAN, EntityType.ENDERMITE, EntityType.SHULKER)
+            .addOptional(new ResourceLocation("cataclysm", "ender_guardian"))
+            .addOptional(new ResourceLocation("goety", "ender_keeper"))
+            .addOptionalTag(DreamtinkerTagKeys.EntityTypes.common("farlanders", "endermen"));
     }
 
     @Override

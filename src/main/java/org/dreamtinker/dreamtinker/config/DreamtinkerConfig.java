@@ -36,8 +36,6 @@ public class DreamtinkerConfig {
             builder.comment("vertical accelerator or tnt arrow").defineInRange("TNTArrowGravity", -5, Integer.MIN_VALUE, 0);
     public static final ForgeConfigSpec.IntValue tnt_arrow_radius = builder.comment("tnt arrow effect range")
                                                                            .defineInRange("TNTArrowRadius", 5, 0, 100);
-    public static final ForgeConfigSpec.IntValue StrongExplodeDamageBoost =
-            builder.comment("Strong Explode Damage Boost").defineInRange("StrongExplodeDamageBoost", 10, 1, 1000);
     public static final ForgeConfigSpec.IntValue ContinuousExplodeTimes =
             builder.comment("how many times use per level for tnt Arrow").defineInRange("ContinuousExplodeTimes", 2, 0, 100);
     public static final ForgeConfigSpec.DoubleValue ForceExplosionPower =

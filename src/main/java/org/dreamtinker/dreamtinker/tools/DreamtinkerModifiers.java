@@ -31,7 +31,6 @@ import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.Splendou
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.foundationWill;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.ritual_blade.SelfSacrifice;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.silence_glove.WeaponDreams;
-import org.dreamtinker.dreamtinker.tools.modifiers.tools.tntarrow.StrongExplode;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.SpiritualWeaponTransformation;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.WeaponTransformation;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.*;
@@ -97,8 +96,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     //Mashuo
     public static final StaticModifier<RealSweep> real_sweep = MODIFIERS.register("real_sweep", RealSweep::new);
     public static final StaticModifier<StrongHeavy> strong_heavy = MODIFIERS.register("strong_heavy", StrongHeavy::new);
-    //tnt arrow
-    public static final StaticModifier<StrongExplode> strong_explode = MODIFIERS.register("strong_explode", StrongExplode::new);
     //narcissus wing
     public static final StaticModifier<MemoryBase> memory_base = MODIFIERS.register("memory_base", MemoryBase::new);
     public static final StaticModifier<FlamingMemory> flaming_memory = MODIFIERS.register("flaming_memory", FlamingMemory::new);
@@ -133,20 +130,16 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<mei> mei = MODIFIERS.register("mei", mei::new);
     public static final StaticModifier<acheron> acheron = MODIFIERS.register("acheron", acheron::new);
     public static final StaticModifier<fly> fly = MODIFIERS.register("fly", fly::new);
-    public static final StaticModifier<OpenSoul> open_soul =
-            MODIFIERS.register("open_soul", OpenSoul::new);
+    public static final StaticModifier<OpenSoul> open_soul = MODIFIERS.register("open_soul", OpenSoul::new);
     public static final StaticModifier<soul_blessing> soul_blessing = MODIFIERS.register("soul_blessing", soul_blessing::new);
     public static final StaticModifier<RandomHit> malum_distortion = MODIFIERS.register("malum_distortion", () -> new RandomHit(0.9f, 1.2f));
 
     //etherium
     public static final StaticModifier<ender_dodge> ender_dodge = MODIFIERS.register("ender_dodge", ender_dodge::new);
-    public static final StaticModifier<ExplosiveHit> explosive_hit =
-            MODIFIERS.register("explosive_hit", ExplosiveHit::new);
-    public static final StaticModifier<RangedShoot> ranged_shoot =
-            MODIFIERS.register("ranged_shoot", RangedShoot::new);
+    public static final StaticModifier<ExplosiveHit> explosive_hit = MODIFIERS.register("explosive_hit", ExplosiveHit::new);
+    public static final StaticModifier<RangedShoot> ranged_shoot = MODIFIERS.register("ranged_shoot", RangedShoot::new);
 
-    public static final StaticModifier<WitherShoot> wither_shoot =
-            MODIFIERS.register("wither_shoot", WitherShoot::new);
+    public static final StaticModifier<WitherShoot> wither_shoot = MODIFIERS.register("wither_shoot", WitherShoot::new);
     public static final StaticModifier<stone_heart> stone_heart = MODIFIERS.register("stone_heart", stone_heart::new);
     public static final StaticModifier<life_looting> life_looting = MODIFIERS.register("life_looting", life_looting::new);
 
@@ -282,6 +275,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId cosmogony_tetrad = id("cosmogony_tetrad");
 
         public static final ModifierId long_tool = id("long_tool");
+        public static final ModifierId strong_explode = id("strong_explode");
+
         public static final ModifierId antimony_usage = id("antimony_usage");
         public static final ModifierId with_tears = id("with_tears");
         public static final ModifierId in_rain = id("in_rain");

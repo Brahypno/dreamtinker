@@ -195,7 +195,7 @@ public class DreamtinkerTagKeys {
             return TagKey.create(Registries.ENTITY_TYPE, Mantle.commonResource(name));
         }
 
-        private static TagKey<EntityType<?>> common(String modid, String name) {
+        public static TagKey<EntityType<?>> common(String modid, String name) {
             return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(modid, name));
         }
     }

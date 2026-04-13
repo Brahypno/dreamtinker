@@ -123,7 +123,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 .module(new ToolSlotsModule(ImmutableMap.of(SlotType.UPGRADE, 4, SlotType.ABILITY, 2)))
                 // traits
                 .module(ToolTraitsModule.builder()
-                                        .trait(DreamtinkerModifiers.strong_explode, 1).build());
+                                        .trait(DreamtinkerModifiers.Ids.strong_explode, 1).build());
 
         // plate armor
         RandomMaterial tier2Material = RandomMaterial.random().tier(1, 2).build();

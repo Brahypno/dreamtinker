@@ -4,6 +4,18 @@
     "minecraft:ender_dragon",
     "minecraft:enderman",
     "minecraft:endermite",
-    "minecraft:shulker"
+    "minecraft:shulker",
+    {
+      "id": "cataclysm:ender_guardian",
+      "required": false
+    },
+    {
+      "id": "goety:ender_keeper",
+      "required": false
+    },
+    {
+      "id": "#farlanders:endermen",
+      "required": false
+    }
   ]
 }

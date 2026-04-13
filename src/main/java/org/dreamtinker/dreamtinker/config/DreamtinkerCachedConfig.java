@@ -29,7 +29,6 @@ public class DreamtinkerCachedConfig {
 
     public static final ConfigLazy<Integer> TNT_ARROW_GRAVITY = lazIntInSpec(DreamtinkerConfig.tnt_arrow_gravity);
     public static final ConfigLazy<Integer> TNT_ARROW_RADIUS = lazIntInSpec(DreamtinkerConfig.tnt_arrow_radius);
-    public static final ConfigLazy<Integer> StrongExplodeDamageBoost = lazIntInSpec(DreamtinkerConfig.StrongExplodeDamageBoost);
     public static final ConfigLazy<Double> ForceExplosionPower = lazDoubleInSpec(DreamtinkerConfig.ForceExplosionPower);
     public static final ConfigLazy<Double> realSweepRange = lazDoubleInSpec(DreamtinkerConfig.realSweepRange);
     public static final ConfigLazy<Double> UnderPlateBoostMax = lazDoubleInSpec(DreamtinkerConfig.UnderPlateBoostMax);

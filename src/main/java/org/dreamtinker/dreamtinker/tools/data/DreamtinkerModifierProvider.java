@@ -103,6 +103,12 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(AttributeModule.builder(ForgeMod.BLOCK_REACH.get(), AttributeModifier.Operation.ADDITION).slots(EquipmentSlot.MAINHAND).eachLevel(1))
                 .addModule(
                         AttributeModule.builder(ForgeMod.ENTITY_REACH.get(), AttributeModifier.Operation.ADDITION).slots(EquipmentSlot.MAINHAND).eachLevel(1));
+        buildModifier(Ids.strong_explode)
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(ConditionalMeleeDamageModule.builder().target(LivingEntityPredicate.ANY).percent()
+                                                       .formula()
+                                                       .variable(LEVEL).constant(5f).multiply()
+                                                       .variable(VALUE).multiply().build());
         buildModifier(Ids.antimony_usage).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                                          .addModule(StatBoostModule.multiplyBase(ToolStats.DURABILITY).eachLevel(0.1f))
                                          .addModule(StatBoostModule.multiplyBase(ToolStats.ATTACK_DAMAGE).eachLevel(0.1f))
@@ -403,7 +409,10 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
 
         IJsonPredicate<net.minecraft.world.entity.LivingEntity> ender = LivingEntityPredicate.tag(DreamtinkerTagKeys.EntityTypes.ENDER_ENTITY);
         buildModifier(ender_slayer.getId(), not(DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy")))
-                .addModule(ConditionalMeleeDamageModule.builder().target(ender).eachLevel(5.0f))
+                .addModule(ConditionalMeleeDamageModule.builder().target(ender).percent()
+                                                       .formula()
+                                                       .variable(LEVEL).constant(.5f).multiply()
+                                                       .variable(VALUE).multiply().build())
                 .addModule(MobEffectModule.builder(MobEffects.WEAKNESS)
                                           .level(RandomLevelingValue.perLevel(1, 1))
                                           .time(RandomLevelingValue.random(20 * 2, 10))
