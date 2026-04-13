@@ -21,6 +21,8 @@
         "$level",
         "+",
         "min",
+        "$multiplier",
+        "*",
         "$speed",
         "*"
       ],

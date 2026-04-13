@@ -105,9 +105,10 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                         AttributeModule.builder(ForgeMod.ENTITY_REACH.get(), AttributeModifier.Operation.ADDITION).slots(EquipmentSlot.MAINHAND).eachLevel(1));
         buildModifier(Ids.strong_explode)
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                .addModule(ConditionalMeleeDamageModule.builder().target(LivingEntityPredicate.ANY).percent()
+                .addModule(ConditionalMeleeDamageModule.builder().percent()
                                                        .formula()
                                                        .variable(LEVEL).constant(5f).multiply()
+                                                       .variable(MULTIPLIER).multiply()
                                                        .variable(VALUE).multiply().build());
         buildModifier(Ids.antimony_usage).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                                          .addModule(StatBoostModule.multiplyBase(ToolStats.DURABILITY).eachLevel(0.1f))
@@ -181,54 +182,44 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(MobEffectModule.builder(MobEffects.POISON)
                                           .level(RandomLevelingValue.perLevel(0, 1))
                                           .time(RandomLevelingValue.flat(13 * 20))
-                                          .target(LivingEntityPredicate.ANY)
                                           .build())
                 .addModule(MobEffectModule.builder(MobEffects.REGENERATION)
                                           .level(RandomLevelingValue.perLevel(0, 1))
                                           .time(RandomLevelingValue.flat(13 * 20))
                                           .chance(LevelingValue.eachLevel(0.99f))
-                                          .target(LivingEntityPredicate.ANY)
                                           .build())
                 .addModule(MobEffectModule.builder(MobEffects.WITHER)
                                           .level(RandomLevelingValue.perLevel(0, 1))
                                           .time(RandomLevelingValue.flat(13 * 20))
-                                          .target(LivingEntityPredicate.ANY)
                                           .build())
                 .addModule(MobEffectModule.builder(MobEffects.WEAKNESS)
                                           .level(RandomLevelingValue.perLevel(0, 1))
                                           .time(RandomLevelingValue.flat(13 * 20))
-                                          .target(LivingEntityPredicate.ANY)
                                           .build())
                 .addModule(MobEffectModule.builder(MobEffects.DAMAGE_BOOST)
                                           .level(RandomLevelingValue.perLevel(1, 1))
                                           .time(RandomLevelingValue.flat(13 * 20))
-                                          .target(LivingEntityPredicate.ANY)
                                           .build())
                 .addModule(MobEffectModule.builder(MobEffects.MOVEMENT_SLOWDOWN)
                                           .level(RandomLevelingValue.flat(3))
                                           .time(RandomLevelingValue.flat(13 * 20))
-                                          .target(LivingEntityPredicate.ANY)
                                           .build())
                 .addModule(MobEffectModule.builder(MobEffects.MOVEMENT_SPEED)
                                           .level(RandomLevelingValue.flat(2))
                                           .time(RandomLevelingValue.flat(13 * 20))
-                                          .target(LivingEntityPredicate.ANY)
                                           .build())
                 .addModule(MobEffectModule.builder(MobEffects.LUCK)
                                           .level(RandomLevelingValue.flat(3))
                                           .time(RandomLevelingValue.flat(13 * 20))
-                                          .target(LivingEntityPredicate.ANY)
                                           .build())
                 .addModule(MobEffectModule.builder(MobEffects.UNLUCK)
                                           .level(RandomLevelingValue.flat(2))
                                           .time(RandomLevelingValue.flat(13 * 20))
-                                          .target(LivingEntityPredicate.ANY)
                                           .build())
                 .addModule(MobEffectModule.builder(MobEffects.HARM)
                                           .level(RandomLevelingValue.perLevel(0, 1))
                                           .time(RandomLevelingValue.flat(4 * 20))
                                           .chance(LevelingValue.eachLevel(0.30f))
-                                          .target(LivingEntityPredicate.ANY)
                                           .build())
                 .addModule(ModifierRequirementsModule.builder().requireModifier(memory_base.getId(), 1)
                                                      .modifierKey(Ids.hate_memory).build());
@@ -279,6 +270,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(ReduceToolDamageModule.builder().maxLevel(5).formula()
                                                  .constant(0.025f).variable(LEVEL).multiply() // 0.025 * level
                                                  .constant(13).variable(LEVEL).subtract()     // 11 - level
+                                                 .variable(MULTIPLIER).multiply()
                                                  .multiply().build());
         buildModifier(Ids.weapon_slots)
                 .priority(1500)
@@ -298,7 +290,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(StatBoostModule.add(ToolStats.ATTACK_DAMAGE).eachLevel(-0.2f));
         buildModifier(Ids.all_slayer)
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                .addModule(ConditionalMeleeDamageModule.builder().target(LivingEntityPredicate.ANY).eachLevel(1.5f));
+                .addModule(ConditionalMeleeDamageModule.builder().eachLevel(1.5f));
         buildModifier(Ids.weapon_dreams_filter)
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                 .addModule(ModifierRequirementsModule.builder()
@@ -313,7 +305,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(MobEffectModule.builder(TinkerEffects.bleeding.get())
                                           .level(RandomLevelingValue.perLevel(1, 1))
                                           .time(RandomLevelingValue.random(20, 10))
-                                          .target(LivingEntityPredicate.ANY)
+
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
         buildModifier(Ids.lunarProtection)
@@ -324,7 +316,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(MobEffectModule.builder(MobEffects.LEVITATION)
                                           .level(RandomLevelingValue.perLevel(1, 1))
                                           .time(RandomLevelingValue.random(20, 10))
-                                          .target(LivingEntityPredicate.ANY)
+
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT)
                 .addModule(ConditionalMeleeDamageModule.builder().target(TinkerPredicate.AIRBORNE.inverted()).eachLevel(-2f))
@@ -339,7 +331,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(MobEffectModule.builder(MobEffects.MOVEMENT_SLOWDOWN)
                                           .level(RandomLevelingValue.perLevel(1, 1))
                                           .time(RandomLevelingValue.perLevel(20 * 10, 20 * 5))
-                                          .target(LivingEntityPredicate.ANY)
+
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
 
@@ -412,7 +404,12 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(ConditionalMeleeDamageModule.builder().target(ender).percent()
                                                        .formula()
                                                        .variable(LEVEL).constant(.5f).multiply()
+                                                       .variable(MULTIPLIER).multiply()
                                                        .variable(VALUE).multiply().build())
+                .addModule(KnockbackModule.builder().entity(ender)
+                                          .formula()
+                                          .variable(LEVEL).constant(5f).multiply()
+                                          .variable(VALUE).multiply().build())
                 .addModule(MobEffectModule.builder(MobEffects.WEAKNESS)
                                           .level(RandomLevelingValue.perLevel(1, 1))
                                           .time(RandomLevelingValue.random(20 * 2, 10))
@@ -489,6 +486,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                                        .constant(0.7f).max()
                                                        .constant(1.5f)
                                                        .variable(LEVEL).add().min()
+                                                       .variable(MULTIPLIER).multiply()
                                                        .variable(VALUE).multiply()
                                                        .build());
         buildModifier(Ids.frost_steel_shell)
@@ -583,7 +581,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(MobEffectModule.builder(EidolonPotions.VULNERABLE_EFFECT.get())
                                           .level(RandomLevelingValue.flat(1))
                                           .time(RandomLevelingValue.random(20, 10))
-                                          .target(LivingEntityPredicate.ANY)
+
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT)
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
@@ -608,7 +606,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(MobEffectModule.builder(EidolonPotions.CHILLED_EFFECT.get())
                                           .level(RandomLevelingValue.flat(1))
                                           .time(RandomLevelingValue.random(20, 10))
-                                          .target(LivingEntityPredicate.ANY)
+
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT).levelDisplay(ModifierLevelDisplay.NO_LEVELS);
 
@@ -637,20 +635,20 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(MobEffectModule.builder(BornInChaosV1ModMobEffects.BONE_CHILLING.get())
                                           .level(RandomLevelingValue.perLevel(0, 2))
                                           .time(RandomLevelingValue.random(180, 10))
-                                          .target(LivingEntityPredicate.ANY)
+
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
         buildModifier(Ids.bic_intoxicating, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"))
                 .addModule(MobEffectModule.builder(BornInChaosV1ModMobEffects.INTOXICATION.get())
                                           .level(RandomLevelingValue.flat(1))
                                           .time(RandomLevelingValue.random(110, 10))
-                                          .target(LivingEntityPredicate.ANY)
+
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT)
                 .addModule(MobEffectModule.builder(MobEffects.POISON)
                                           .level(RandomLevelingValue.perLevel(0, 2))
                                           .time(RandomLevelingValue.random(60, 10))
-                                          .target(LivingEntityPredicate.ANY)
+
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
         buildModifier(Ids.bic_life_stealer, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"))
@@ -658,19 +656,19 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(MobEffectModule.builder(BornInChaosV1ModMobEffects.LIFESTEAL.get())
                                           .level(RandomLevelingValue.flat(1))
                                           .time(RandomLevelingValue.random(20, 10))
-                                          .target(LivingEntityPredicate.ANY)
+
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT)
                 .addModule(MobEffectModule.builder(BornInChaosV1ModMobEffects.STUN.get())
                                           .level(RandomLevelingValue.flat(1))
                                           .time(RandomLevelingValue.random(20, 10))
-                                          .target(LivingEntityPredicate.ANY)
+
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT)
                 .addModule(MobEffectModule.builder(MobEffects.WITHER)
                                           .level(RandomLevelingValue.flat(1))
                                           .time(RandomLevelingValue.random(20, 10))
-                                          .target(LivingEntityPredicate.ANY)
+
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
         buildModifier(Ids.bic_krampus_horn, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"))
@@ -678,7 +676,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(MobEffectModule.builder(BornInChaosV1ModMobEffects.BONE_CHILLING.get())
                                           .level(RandomLevelingValue.flat(6))
                                           .time(RandomLevelingValue.random(20, 10))
-                                          .target(LivingEntityPredicate.ANY)
+
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
         buildModifier(Ids.bic_nightmare_claw, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"))
@@ -686,31 +684,31 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(MobEffectModule.builder(MobEffects.BLINDNESS)
                                           .level(RandomLevelingValue.flat(1))
                                           .time(RandomLevelingValue.random(20, 10))
-                                          .target(LivingEntityPredicate.ANY)
+
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT)
                 .addModule(MobEffectModule.builder(MobEffects.DARKNESS)
                                           .level(RandomLevelingValue.flat(1))
                                           .time(RandomLevelingValue.random(20, 10))
-                                          .target(LivingEntityPredicate.ANY)
+
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT)
                 .addModule(MobEffectModule.builder(MobEffects.WITHER)
                                           .level(RandomLevelingValue.flat(3))
                                           .time(RandomLevelingValue.random(20, 10))
-                                          .target(LivingEntityPredicate.ANY)
+
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT)
                 .addModule(MobEffectModule.builder(BornInChaosV1ModMobEffects.GAZE_OF_TERROR.get())
                                           .level(RandomLevelingValue.flat(1))
                                           .time(RandomLevelingValue.random(20, 10))
-                                          .target(LivingEntityPredicate.ANY)
+
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT)
                 .addModule(MobEffectModule.builder(BornInChaosV1ModMobEffects.MAGIC_DEPLETION.get())
                                           .level(RandomLevelingValue.flat(1))
                                           .time(RandomLevelingValue.random(20, 10))
-                                          .target(LivingEntityPredicate.ANY)
+
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
 
@@ -718,7 +716,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(MobEffectModule.builder(BornInChaosV1ModMobEffects.INFERNAL_FLAME.get())
                                           .level(RandomLevelingValue.perLevel(1, 1))
                                           .time(RandomLevelingValue.random(30, 10))
-                                          .target(LivingEntityPredicate.ANY)
+
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
         buildModifier(Ids.bic_hound_fang, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"))
@@ -726,19 +724,19 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(MobEffectModule.builder(BornInChaosV1ModMobEffects.BONE_FRACTURE.get())
                                           .level(RandomLevelingValue.flat(1))
                                           .time(RandomLevelingValue.random(20, 10))
-                                          .target(LivingEntityPredicate.ANY)
+
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT)
                 .addModule(MobEffectModule.builder(MobEffects.WEAKNESS)
                                           .level(RandomLevelingValue.flat(1))
                                           .time(RandomLevelingValue.random(20, 10))
-                                          .target(LivingEntityPredicate.ANY)
+
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT)
                 .addModule(MobEffectModule.builder(MobEffects.MOVEMENT_SLOWDOWN)
                                           .level(RandomLevelingValue.flat(2))
                                           .time(RandomLevelingValue.random(20, 10))
-                                          .target(LivingEntityPredicate.ANY)
+
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
 
@@ -808,11 +806,13 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                                        .formula()
                                                        .variable(LEVEL).constant(0.5f).multiply()
                                                        .constant(1f).add()
+                                                       .variable(MULTIPLIER).multiply()
                                                        .variable(VALUE).multiply().build())
                 .addModule(ConditionalPowerModule.builder().target(LivingEntityPredicate.tag(DreamtinkerTagKeys.EntityTypes.ROTSPAWN)).percent()
                                                  .formula()
                                                  .variable(LEVEL).constant(0.5f).multiply()
                                                  .constant(1f).add()
+                                                 .variable(MULTIPLIER).multiply()
                                                  .variable(VALUE).multiply().build());
 
         buildModifier(Ids.undergarden_rot_protection, DreamtinkerMaterialDataProvider.modLoaded("undergarden"))
@@ -825,11 +825,13 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                                        .formula()
                                                        .variable(LEVEL).constant(0.5f).multiply()
                                                        .constant(1f).add()
+                                                       .variable(MULTIPLIER).multiply()
                                                        .variable(VALUE).multiply().build())
                 .addModule(ConditionalPowerModule.builder().target(LIVING_OF_UNDER_GARDEN).percent()
                                                  .formula()
                                                  .variable(LEVEL).constant(0.5f).multiply()
                                                  .constant(1f).add()
+                                                 .variable(MULTIPLIER).multiply()
                                                  .variable(VALUE).multiply().build());
 
         buildModifier(Ids.undergarden_protection, DreamtinkerMaterialDataProvider.modLoaded("undergarden"))
@@ -842,6 +844,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                                        .formula()
                                                        .variable(LEVEL).constant(0.5f).multiply()
                                                        .constant(1f).add()
+                                                       .variable(MULTIPLIER).multiply()
                                                        .variable(VALUE).multiply().build());
     }
 

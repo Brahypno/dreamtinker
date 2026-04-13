@@ -32,6 +32,8 @@
         "$level",
         0.5,
         "*",
+        "$multiplier",
+        "*",
         "$damage",
         "*"
       ],
@@ -40,6 +42,20 @@
         "type": "mantle:tag",
         "tag": "forge:ender_entity"
       }
+    },
+    {
+      "type": "tconstruct:knockback",
+      "entity": {
+        "type": "mantle:tag",
+        "tag": "forge:ender_entity"
+      },
+      "formula": [
+        "$level",
+        5.0,
+        "*",
+        "$knockback",
+        "*"
+      ]
     },
     {
       "type": "tconstruct:mob_effect",

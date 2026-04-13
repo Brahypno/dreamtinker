@@ -18,6 +18,7 @@ import slimeknights.mantle.data.predicate.IJsonPredicate;
 import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.modules.combat.ConditionalMeleeDamageModule;
+import slimeknights.tconstruct.library.modifiers.modules.combat.KnockbackModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolContext;
@@ -26,8 +27,7 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import java.util.Arrays;
 import java.util.List;
 
-import static slimeknights.tconstruct.library.json.math.ModifierFormula.LEVEL;
-import static slimeknights.tconstruct.library.json.math.ModifierFormula.VALUE;
+import static slimeknights.tconstruct.library.json.math.ModifierFormula.*;
 
 public class ELEnderSlayer extends BattleModifier {
     private static final IJsonPredicate<LivingEntity> ender = LivingEntityPredicate.tag(DreamtinkerTagKeys.EntityTypes.ENDER_ENTITY);
@@ -37,7 +37,12 @@ public class ELEnderSlayer extends BattleModifier {
         hookBuilder.addModule(ConditionalMeleeDamageModule.builder().target(ender).percent()
                                                           .formula()
                                                           .variable(LEVEL).constant(EnderSlayer.endDamageBonus.getValue().asModifier(false)).multiply()
+                                                          .variable(MULTIPLIER).multiply()
                                                           .variable(VALUE).multiply().build());
+        hookBuilder.addModule(KnockbackModule.builder().entity(ender)
+                                             .formula()
+                                             .variable(LEVEL).constant(5f).multiply()
+                                             .variable(VALUE).multiply().build());
         super.registerHooks(hookBuilder);
     }
 

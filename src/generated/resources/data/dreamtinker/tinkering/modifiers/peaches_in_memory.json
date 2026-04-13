@@ -40,6 +40,8 @@
         13.0,
         "$level",
         "-",
+        "$multiplier",
+        "*",
         "*"
       ],
       "modifier_level": {
