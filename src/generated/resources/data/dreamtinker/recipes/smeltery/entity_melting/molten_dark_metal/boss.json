@@ -26,11 +26,7 @@
   ],
   "damage": 1,
   "entity": {
-    "types": [
-      "born_in_chaos_v1:missioner",
-      "born_in_chaos_v1:lifestealer",
-      "born_in_chaos_v1:krampus"
-    ]
+    "tag": "forge:bic_dark_metal_normal"
   },
   "result": {
     "amount": 10,

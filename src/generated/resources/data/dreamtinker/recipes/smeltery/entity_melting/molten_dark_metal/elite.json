@@ -26,11 +26,7 @@
   ],
   "damage": 1,
   "entity": {
-    "types": [
-      "born_in_chaos_v1:fallen_chaos_knight",
-      "born_in_chaos_v1:skeleton_thrasher",
-      "born_in_chaos_v1:diamond_termite"
-    ]
+    "tag": "forge:bic_dark_metal_elite"
   },
   "result": {
     "amount": 10,

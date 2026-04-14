@@ -1,7 +1,5 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.bic;
 
-import net.mcreator.borninchaosv.entity.*;
-import net.mcreator.borninchaosv.init.BornInChaosV1ModParticleTypes;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.core.particles.ParticleTypes;
@@ -161,8 +159,9 @@ public class DarkBlade extends BattleModifier {
                 if (null != BARBED_ATTACK){
                     target.addEffect(new MobEffectInstance(BARBED_ATTACK, 10, 0, false, false));
                 }
-                ((ServerLevel) level).sendParticles((SimpleParticleType) BornInChaosV1ModParticleTypes.SRIRST_PART.get(), target.getX(),
-                                                    target.getY() + (double) 0.5F, target.getZ(), 8, 0.6, 0.6, 0.6, 0.2);
+                ((ServerLevel) level).sendParticles(
+                        (SimpleParticleType) ForgeRegistries.PARTICLE_TYPES.getValue(new ResourceLocation("born_in_chaos_v1:srirst_part")), target.getX(),
+                        target.getY() + (double) 0.5F, target.getZ(), 8, 0.6, 0.6, 0.6, 0.2);
 
             }
 
@@ -193,17 +192,18 @@ public class DarkBlade extends BattleModifier {
                                     (SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("born_in_chaos_v1:dark_warlblade_atak")),
                                     SoundSource.NEUTRAL, 1.3F, 0.9F);
                     ((ServerLevel) level).sendParticles(ParticleTypes.CRIT, target.getX(), target.getY() + (double) 1.0F, target.getZ(), 9, 0.3, 0.3, 0.3, 0.2);
-                    ((ServerLevel) level).sendParticles((SimpleParticleType) BornInChaosV1ModParticleTypes.STUNSTARS.get(), target.getX(),
-                                                        target.getY() + (double) 1.0F, target.getZ(), 9, 0.3,
-                                                        0.3, 0.3, 0.2);
+                    ((ServerLevel) level).sendParticles(
+                            (SimpleParticleType) ForgeRegistries.PARTICLE_TYPES.getValue(new ResourceLocation("born_in_chaos_v1:stunstars")), target.getX(),
+                            target.getY() + (double) 1.0F, target.getZ(), 9, 0.3,
+                            0.3, 0.3, 0.2);
                     target.addEffect(new MobEffectInstance(BONE_FRACTURE, 200, 0, false, false));
-                    if (null != BLOCK_BREAK &&
+                    if (null != BLOCK_BREAK /*&&
                         (target instanceof DoorKnightEntity || target instanceof DoorKnightNotDespawnEntity || target instanceof SkeletonThrasherEntity ||
-                         target instanceof SkeletonThrasherNotDespawnEntity)){
+                         target instanceof SkeletonThrasherNotDespawnEntity)*/){
                         target.addEffect(new MobEffectInstance(BLOCK_BREAK, 360, 0, false, false));
                     }
                 }
-                if (null != RAMPANT_RAMPAGE && target instanceof CorpseFlyEntity && attacker instanceof ServerPlayer sp && sp.hasEffect(RAMPANT_RAMPAGE)){
+                if (null != RAMPANT_RAMPAGE /*&& target instanceof CorpseFlyEntity*/ && attacker instanceof ServerPlayer sp && sp.hasEffect(RAMPANT_RAMPAGE)){
                     Advancement _adv = sp.server.getAdvancements().getAdvancement(new ResourceLocation("born_in_chaos_v1:excessive_fly_swatter"));
                     AdvancementProgress _ap = null;
                     if (_adv != null){
@@ -223,14 +223,11 @@ public class DarkBlade extends BattleModifier {
                 target.addEffect(new MobEffectInstance(GAZE_OF_TERROR, 100, 0));
             target.addEffect(new MobEffectInstance(MobEffects.WITHER, 60, 1));
             attacker.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 20, 2, false, false));
-            if (!(target instanceof LordPumpkinheadEntity) && !(target instanceof PumpkinheadEntity) && !(target instanceof SirPumpkinheadEntity) &&
-                !(target instanceof SirPumpkinheadWithoutHorseEntity) && !(target instanceof SirTheHeadlessEntity) && !(target instanceof FelsteedEntity) &&
-                !(target instanceof LordPumpkinheadHeadEntity) && !(target instanceof LordPumpkinheadWithoutaHorseEntity) &&
-                !(target instanceof LordTheHeadlessEntity) && !(target instanceof LordsFelsteedEntity) && target instanceof LivingEntity){
-                if (SOUL_STRATIFICATION != null){
+
+            if (!target.getType().is(DreamtinkerTagKeys.EntityTypes.CHAOS_HEAD) && target instanceof LivingEntity)
+                if (SOUL_STRATIFICATION != null)
                     target.addEffect(new MobEffectInstance(SOUL_STRATIFICATION, 120 / modifier.getLevel(), 0));
-                }
-            }
+
         }
         if (tool.hasTag(DreamtinkerTagKeys.Items.dt_hammer)){
             rest = true;
@@ -304,13 +301,12 @@ public class DarkBlade extends BattleModifier {
     }
 
     @Override
-    public InteractionResult beforeEntityUse(IToolStackView tool, ModifierEntry modifier, Player player, Entity target, InteractionHand hand, InteractionSource source) {
+    public @NotNull InteractionResult beforeEntityUse(IToolStackView tool, ModifierEntry modifier, Player player, Entity target, InteractionHand hand, InteractionSource source) {
         Level level = target.level();
         if (level instanceof ServerLevel sl)
             if (tool.hasTag(TinkerTags.Items.PARRY)){
                 if (InteractionHand.MAIN_HAND == hand && InteractionSource.RIGHT_CLICK == source && null != SACRIFICE && !player.hasEffect(SACRIFICE)){
-                    if (target instanceof ControlledBabySkeletonEntity || target instanceof MrPumpkinControlledEntity ||
-                        target instanceof ControlledSpiritualAssistantEntity || (target instanceof Animal && ((Animal) target).getHealth() < 15f)){
+                    if (target.getType().is(DreamtinkerTagKeys.EntityTypes.CHAOS_MINOR) || (target instanceof Animal && ((Animal) target).getHealth() < 15f)){
                         target.hurt(DreamtinkerDamageTypes.source(level.registryAccess(), DamageTypes.GENERIC, null, player), 100f);
                         player.addEffect(
                                 new MobEffectInstance(MobEffects.REGENERATION, (target instanceof Animal && ((Animal) target).getHealth() < 15f) ? 1000 : 1500,
@@ -319,9 +315,11 @@ public class DarkBlade extends BattleModifier {
                                 new MobEffectInstance(MobEffects.DAMAGE_BOOST, (target instanceof Animal && ((Animal) target).getHealth() < 15f) ? 1000 : 1500,
                                                       1));
                         player.addEffect(new MobEffectInstance(SACRIFICE, 30, 0, false, false));
-                        sl.sendParticles((SimpleParticleType) BornInChaosV1ModParticleTypes.RITUAL.get(), target.getX() + (double) 0.5F,
+                        sl.sendParticles((SimpleParticleType) ForgeRegistries.PARTICLE_TYPES.getValue(new ResourceLocation("born_in_chaos_v1:ritual")),
+                                         target.getX() + (double) 0.5F,
                                          target.getY() + (double) 0.5F, target.getZ() + (double) 0.5F, 15, 0.3, 0.3, 0.3, 0.3);
-                        sl.sendParticles((SimpleParticleType) BornInChaosV1ModParticleTypes.SWAP.get(), target.getX() + (double) 0.5F,
+                        sl.sendParticles((SimpleParticleType) ForgeRegistries.PARTICLE_TYPES.getValue(new ResourceLocation("born_in_chaos_v1:swap")),
+                                         target.getX() + (double) 0.5F,
                                          target.getY() + (double) 0.5F, target.getZ() + (double) 0.5F, 1, 0.1, 0.1, 0.1, 0.1);
                         sl.playSound((Player) null, target.blockPosition(),
                                      (SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.iron_golem.damage")), SoundSource.NEUTRAL,

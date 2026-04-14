@@ -80,6 +80,10 @@ public class DreamtinkerTagKeys {
 
         public static final TagKey<Item> arcaneGoldIngot = forgeTag("ingots/arcane_gold");
 
+        public static final TagKey<Item> DarkMetalNuggets = forgeTag("nuggets/dark_metal");
+        public static final TagKey<Item> DarkMetalIngot = forgeTag("ingots/dark_metal");
+        public static final TagKey<Item> DarkMetalBlock = forgeTag("storage_blocks/dark_metal");
+
         public static final TagKey<Item> raw_orichalcum = forgeTag("raw_materials/orichalcum");
         public static final TagKey<Item> OrichalcumNuggets = forgeTag("nuggets/orichalcum");
         public static final TagKey<Item> OrichalcumIngot = forgeTag("ingots/orichalcum");
@@ -185,7 +189,10 @@ public class DreamtinkerTagKeys {
     public static class EntityTypes {
         public static final TagKey<EntityType<?>> ENDER_ENTITY = common("ender_entity");
         public static final TagKey<EntityType<?>> ROTSPAWN = common("undergarden", "rotspawn");
-        public static final TagKey<EntityType<?>> CAVERN_CREATURE = common("undergarden", "cavern_creature");
+        public static final TagKey<EntityType<?>> CHAOS_ELITE = common("bic_dark_metal_elite");
+        public static final TagKey<EntityType<?>> CHAOS_BOSS = common("bic_dark_metal_normal");
+        public static final TagKey<EntityType<?>> CHAOS_MINOR = common("bic_dark_metal_minor");
+        public static final TagKey<EntityType<?>> CHAOS_HEAD = common("bic_dark_metal_head");
 
         private static TagKey<EntityType<?>> local(String name) {
             return TagKey.create(Registries.ENTITY_TYPE, Dreamtinker.getLocation(name));

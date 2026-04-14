@@ -114,8 +114,6 @@ import java.util.*;
 import java.util.function.Consumer;
 
 import static elucent.eidolon.registries.Registry.*;
-import static net.mcreator.borninchaosv.init.BornInChaosV1ModEntities.*;
-import static net.mcreator.borninchaosv.init.BornInChaosV1ModItems.*;
 
 public class DreamtinkerRecipeProvider extends RecipeProvider implements IMaterialRecipeHelper, IToolRecipeHelper, IConditionBuilder, IRecipeHelper, ICommonRecipeHelper, ISmelteryRecipeHelper {
 
@@ -797,37 +795,38 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
     }
 
     private void addBICMaterialRecipes(Consumer<FinishedRecipe> consumer) {
+        String BIC = "born_in_chaos_v1";
         Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"));
         materialMeltingCasting(wrapped, DreamtinkerMaterialIds.DarkMetal, DreamtinkerFluids.molten_dark_metal, FluidValues.INGOT * 5,
                                materials_folder);
-        materialRecipe(wrapped, DreamtinkerMaterialIds.DarkMetal, Ingredient.of(DARK_METAL_INGOT.get()), 1, 5,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.DarkMetal, ItemNameIngredient.from(new ResourceLocation(BIC, "dark_metal_ingot")), 1, 5,
                        materials_folder + "dark_metal/ingot");
-        materialRecipe(wrapped, DreamtinkerMaterialIds.DarkMetal, Ingredient.of(ARMOR_PLATE_FROM_DARK_METAL.get()), 1, 1,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.DarkMetal, ItemNameIngredient.from(new ResourceLocation(BIC, "armor_plate_from_dark_metal")), 1, 1,
                        materials_folder + "dark_metal/armor_plate");
 
-        materialRecipe(wrapped, DreamtinkerMaterialIds.MonsterSkin, Ingredient.of(MONSTER_SKIN.get()), 1, 1,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.MonsterSkin, ItemNameIngredient.from(new ResourceLocation(BIC, "monster_skin")), 1, 1,
                        materials_folder + "monster_skin");
         materialComposite(wrapped, MaterialIds.leather, DreamtinkerMaterialIds.MonsterSkin, DreamtinkerFluids.molten_dark_metal, FluidValues.INGOT,
                           slimeskinFolder, "monsterskin");
         materialComposite(wrapped, DreamtinkerMaterialIds.MonsterSkin, MaterialIds.leather, TinkerFluids.venom, FluidValues.SIP, slimeskinFolder,
                           "monsterskin_cleaning");
-        materialRecipe(wrapped, DreamtinkerMaterialIds.SpikyShard, Ingredient.of(SPINY_SHELL.get()), 1, 1,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.SpikyShard, ItemNameIngredient.from(new ResourceLocation(BIC, "spiny_shell")), 1, 1,
                        materials_folder + "spiny_shell_bic");
-        materialRecipe(wrapped, DreamtinkerMaterialIds.LifeStealerBone, Ingredient.of(LIFESTEALER_BONE.get()), 1, 1,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.LifeStealerBone, ItemNameIngredient.from(new ResourceLocation(BIC, "lifestealer_bone")), 1, 1,
                        materials_folder + "life_stealer");
-        materialRecipe(wrapped, DreamtinkerMaterialIds.KrampusHorn, Ingredient.of(KRAMPUS_HORN.get()), 1, 1,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.KrampusHorn, ItemNameIngredient.from(new ResourceLocation(BIC, "krampus_horn")), 1, 1,
                        materials_folder + "krampus_horn");
-        materialRecipe(wrapped, DreamtinkerMaterialIds.NightMareClaw, Ingredient.of(NIGHTMARE_CLAW.get()), 1, 1,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.NightMareClaw, ItemNameIngredient.from(new ResourceLocation(BIC, "nightmare_claw")), 1, 1,
                        materials_folder + "nightmare_claw/claw");
-        materialRecipe(wrapped, DreamtinkerMaterialIds.NightMareClaw, Ingredient.of(NIGHTMARE_STALKER_SKULL.get()), 4, 1,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.NightMareClaw, ItemNameIngredient.from(new ResourceLocation(BIC, "nightmare_stalker_skull")), 4, 1,
                        materials_folder + "nightmare_claw/head");
-        materialRecipe(wrapped, DreamtinkerMaterialIds.InfernalEmber, Ingredient.of(SMOLDERING_INFERNAL_EMBER.get()), 1, 1,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.InfernalEmber, ItemNameIngredient.from(new ResourceLocation(BIC, "smoldering_infernal_ember")), 1, 1,
                        materials_folder + "infernal_ember/item");
-        materialRecipe(wrapped, DreamtinkerMaterialIds.InfernalEmber, Ingredient.of(FEL_SOIL.get()), 4, 1,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.InfernalEmber, ItemNameIngredient.from(new ResourceLocation(BIC, "fel_soil")), 4, 1,
                        materials_folder + "infernal_ember/block");
-        materialRecipe(wrapped, DreamtinkerMaterialIds.SpiderMandible, Ingredient.of(SPIDER_MANDIBLE.get()), 1, 1,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.SpiderMandible, ItemNameIngredient.from(new ResourceLocation(BIC, "spider_mandible")), 1, 1,
                        materials_folder + "spider_mandible");
-        materialRecipe(wrapped, DreamtinkerMaterialIds.HoundFang, Ingredient.of(FANGOFTHE_HOUND_LEADER.get()), 1, 1,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.HoundFang, ItemNameIngredient.from(new ResourceLocation(BIC, "fangofthe_hound_leader")), 1, 1,
                        materials_folder + "hound_fang");
     }
 
@@ -1713,26 +1712,26 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.bic_dark_armor_plate)
                              .setTools(TinkerTags.Items.DURABILITY)
-                             .addInput(ARMOR_PLATE_FROM_DARK_METAL.get(), 1)
-                             .addInput(DARK_UPGRADE.get(), 1)
+                             .addInput(ItemNameIngredient.from(new ResourceLocation("born_in_chaos_v1", "armor_plate_from_dark_metal")))
+                             .addInput(ItemNameIngredient.from(new ResourceLocation("born_in_chaos_v1", "dark_upgrade")))
                              .setSlots(SlotType.UPGRADE, 1)
                              .setMaxLevel(1)
                              .saveSalvage(wrapped, prefix(DreamtinkerModifiers.Ids.bic_dark_armor_plate, upgradeSalvage))
                              .save(wrapped, prefix(DreamtinkerModifiers.Ids.bic_dark_armor_plate, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.bic_frostbitten)
                              .setTools(TinkerTags.Items.MELEE)
-                             .addInput(PERMAFROST_SHARD.get(), 5)
-                             .addInput(DARK_METAL_INGOT.get(), 1)
-                             .addInput(BONE_HANDLE.get(), 1)
+                             .addInput(SizedIngredient.of(ItemNameIngredient.from(new ResourceLocation("born_in_chaos_v1", "permafrost_shard")), 5))
+                             .addInput(ItemNameIngredient.from(new ResourceLocation("born_in_chaos_v1", "dark_metal_ingot")))
+                             .addInput(ItemNameIngredient.from(new ResourceLocation("born_in_chaos_v1", "bone_handle")))
                              .setSlots(SlotType.UPGRADE, 1)
                              .setMaxLevel(3)
                              .saveSalvage(wrapped, prefix(DreamtinkerModifiers.Ids.bic_frostbitten, upgradeSalvage))
                              .save(wrapped, prefix(DreamtinkerModifiers.Ids.bic_frostbitten, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.bic_intoxicating)
                              .setTools(TinkerTags.Items.MELEE)
-                             .addInput(INTOXICATING_DECOCTION.get(), 3)
-                             .addInput(DARK_METAL_INGOT.get(), 1)
-                             .addInput(BONE_HANDLE.get(), 1)
+                             .addInput(SizedIngredient.of(ItemNameIngredient.from(new ResourceLocation("born_in_chaos_v1", "intoxicating_decoction")), 3))
+                             .addInput(ItemNameIngredient.from(new ResourceLocation("born_in_chaos_v1", "dark_metal_ingot")))
+                             .addInput(ItemNameIngredient.from(new ResourceLocation("born_in_chaos_v1", "bone_handle")))
                              .setSlots(SlotType.UPGRADE, 1)
                              .setMaxLevel(1)
                              .saveSalvage(wrapped, prefix(DreamtinkerModifiers.Ids.bic_intoxicating, upgradeSalvage))
@@ -1740,10 +1739,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.naughty_chaos)
                              .setTools(TinkerTags.Items.MODIFIABLE)
-                             .addInput(SEEDOF_CHAOS.get(), 1)
-                             .addInput(MARIGOLDS.get(), 1)
-                             .addInput(ETHEREAL_SPIRIT.get(), 1)
-                             .addInput(ORBOFTHE_SUMMONER.get(), 1)
+                             .addInput(ItemNameIngredient.from(new ResourceLocation("born_in_chaos_v1", "seedof_chaos")))
+                             .addInput(ItemNameIngredient.from(new ResourceLocation("born_in_chaos_v1", "marigolds")))
+                             .addInput(ItemNameIngredient.from(new ResourceLocation("born_in_chaos_v1", "ethereal_spirit")))
+                             .addInput(ItemNameIngredient.from(new ResourceLocation("born_in_chaos_v1", "orbofthe_summoner")))
                              .setMaxLevel(1)
                              .save(wrapped, prefix(DreamtinkerModifiers.Ids.naughty_chaos, slotlessFolder));
 
@@ -2378,6 +2377,114 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
     String serving_folder = "tools/severing/";
 
+    private void addCompactBICMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
+        String BIC = "born_in_chaos_v1";
+        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(BIC));
+        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "dark_metal_deposit")),
+                                     DreamtinkerFluids.molten_dark_metal.get(), FluidValues.INGOT, 0.05f)
+                            .setOre(IMeltingContainer.OreRateType.METAL)
+                            .save(wrapped, location(Melting_folder + "dark_metal/ore"));
+        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "pieceofdarkmetal")),
+                                     DreamtinkerFluids.molten_dark_metal.get(), FluidValues.NUGGET, 0.05f)
+                            .setOre(IMeltingContainer.OreRateType.METAL)
+                            .save(wrapped, location(Melting_folder + "dark_metal/piece"));
+        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "pileof_dark_metal")),
+                                     DreamtinkerFluids.molten_dark_metal.get(), FluidValues.INGOT, 0.05f)
+                            .setOre(IMeltingContainer.OreRateType.METAL)
+                            .save(wrapped, location(Melting_folder + "dark_metal/pile"));
+        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "armor_plate_from_dark_metal")),
+                                     DreamtinkerFluids.molten_dark_metal.get(), FluidValues.INGOT * 5, 0.05f)
+                            .save(wrapped, location(Melting_folder + "dark_metal/plate"));
+        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "dark_grid")),
+                                     DreamtinkerFluids.molten_dark_metal.get(), FluidValues.INGOT / 4, 0.05f)
+                            .save(wrapped, location(Melting_folder + "dark_metal/grid"));
+        MeltingRecipeBuilder.melting(CompoundIngredient.of(ItemNameIngredient.from(new ResourceLocation(BIC, "infected_diamond_ore")),
+                                                           ItemNameIngredient.from(new ResourceLocation(BIC, "infected_deepslate_diamond_ore"))),
+                                     TinkerFluids.moltenDiamond, FluidValues.GEM, 0.05f)
+                            .setOre(IMeltingContainer.OreRateType.GEM)
+                            .addByproduct(TinkerFluids.moltenDebris.result(FluidValues.GEM / 2))
+                            .addByproduct(DreamtinkerFluids.molten_dark_metal.result(FluidValues.INGOT / 2))
+                            .save(wrapped, location(Melting_folder + "diamond/infected"));
+        fluid(consumer, "dark_metal", DreamtinkerFluids.molten_dark_metal)
+                .optional()
+                .baseUnit(FluidValues.INGOT).damageUnit(FluidValues.NUGGET).metal();
+        int[] darkMetalArmorSizes = {FluidValues.NUGGET, FluidValues.SLIME_DROP, FluidValues.GEM_SHARD};
+        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "dark_metal_armor_helmet")), DreamtinkerFluids.molten_dark_metal.get(),
+                                     FluidValues.INGOT * 5)
+                            .setDamagable(darkMetalArmorSizes)
+                            .addByproduct(TinkerFluids.moltenNetherite.result(FluidValues.INGOT))
+                            .addByproduct(TinkerFluids.moltenDiamond.result(FluidValues.GEM * 5))
+                            .save(wrapped, location(metalFolder + "dark_metal/helmet"));
+        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "dark_metal_armor_chestplate")),
+                                     DreamtinkerFluids.molten_dark_metal.get(), FluidValues.INGOT * 5)
+                            .setDamagable(darkMetalArmorSizes)
+                            .addByproduct(TinkerFluids.moltenNetherite.result(FluidValues.INGOT))
+                            .addByproduct(TinkerFluids.moltenDiamond.result(FluidValues.GEM * 8))
+                            .save(wrapped, location(metalFolder + "dark_metal/chestplate"));
+        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "dark_metal_armor_leggings")), DreamtinkerFluids.molten_dark_metal.get(),
+                                     FluidValues.INGOT * 5)
+                            .setDamagable(darkMetalArmorSizes)
+                            .addByproduct(TinkerFluids.moltenNetherite.result(FluidValues.INGOT))
+                            .addByproduct(TinkerFluids.moltenDiamond.result(FluidValues.GEM * 7))
+                            .save(wrapped, location(metalFolder + "dark_metal/leggings"));
+        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "dark_metal_armor_boots")), DreamtinkerFluids.molten_dark_metal.get(),
+                                     FluidValues.INGOT * 5)
+                            .setDamagable(darkMetalArmorSizes)
+                            .addByproduct(TinkerFluids.moltenNetherite.result(FluidValues.INGOT))
+                            .addByproduct(TinkerFluids.moltenDiamond.result(FluidValues.GEM * 4))
+                            .save(consumer, location(metalFolder + "dark_metal/boots"));
+        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "darkwarblade")), DreamtinkerFluids.molten_dark_metal.get(),
+                                     FluidValues.METAL_BLOCK * 2 + FluidValues.NUGGET)
+                            .setDamagable(FluidValues.INGOT)
+                            .save(wrapped, location(metalFolder + "dark_metal/warblade"));
+        MeltingRecipeBuilder.melting(CompoundIngredient.of(ItemNameIngredient.from(new ResourceLocation(BIC, "dark_ritual_dagger")),
+                                                           ItemNameIngredient.from(new ResourceLocation(BIC, "spiritual_sword")),
+                                                           ItemNameIngredient.from(new ResourceLocation(BIC, "bonescaller_staff")),
+                                                           ItemNameIngredient.from(new ResourceLocation(BIC, "shell_mace"))),
+                                     DreamtinkerFluids.molten_dark_metal.get(),
+                                     FluidValues.NUGGET * 3)
+                            .setDamagable(FluidValues.NUGGET / 2)
+                            .save(consumer, location(metalFolder + "dark_metal/dagger"));
+        MeltingRecipeBuilder.melting(CompoundIngredient.of(ItemNameIngredient.from(new ResourceLocation(BIC, "sharpened_dark_metal_sword")),
+                                                           ItemNameIngredient.from(new ResourceLocation(BIC, "spider_bite_sword"))),
+                                     DreamtinkerFluids.molten_dark_metal.get(),
+                                     FluidValues.INGOT * 2 + FluidValues.NUGGET)
+                            .setDamagable(FluidValues.NUGGET)
+                            .save(wrapped, location(metalFolder + "dark_metal/sword"));
+        MeltingRecipeBuilder.melting(CompoundIngredient.of(ItemNameIngredient.from(new ResourceLocation(BIC, "frostbitten_blade")),
+                                                           ItemNameIngredient.from(new ResourceLocation(BIC, "intoxicating_dagger"))),
+                                     DreamtinkerFluids.molten_dark_metal.get(),
+                                     FluidValues.INGOT + FluidValues.NUGGET)
+                            .setDamagable(FluidValues.NUGGET)
+                            .save(wrapped, location(metalFolder + "dark_metal/frostbitten_blade"));
+        MeltingRecipeBuilder.melting(CompoundIngredient.of(ItemNameIngredient.from(new ResourceLocation(BIC, "soul_cutlass")),
+                                                           ItemNameIngredient.from(new ResourceLocation(BIC, "nightmare_scythe"))),
+                                     DreamtinkerFluids.molten_dark_metal.get(),
+                                     FluidValues.INGOT + FluidValues.NUGGET * 2)
+                            .setDamagable(FluidValues.NUGGET)
+                            .save(wrapped, location(metalFolder + "dark_metal/soul_cutlass"));
+        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "great_reaper_axe")), DreamtinkerFluids.molten_dark_metal.get(),
+                                     FluidValues.INGOT * 4 + FluidValues.NUGGET * 2)
+                            .setDamagable(FluidValues.NUGGET)
+                            .save(consumer, location(metalFolder + "dark_metal/greater_axe"));
+        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "skullbreaker_hammer")), DreamtinkerFluids.molten_dark_metal.get(),
+                                     FluidValues.METAL_BLOCK + FluidValues.NUGGET * 2)
+                            .setDamagable(FluidValues.INGOT)
+                            .save(wrapped, location(metalFolder + "dark_metal/skull_breaker_hammer"));
+        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "diamond_termite_shard")), TinkerFluids.moltenDiamond,
+                                     FluidValues.NUGGET)
+                            .save(wrapped, location(metalFolder + "diamond/melting_termite"));
+
+        EntityMeltingRecipeBuilder.melting(
+                                          EntityIngredient.of(DreamtinkerTagKeys.EntityTypes.CHAOS_ELITE),
+                                          DreamtinkerFluids.molten_dark_metal.result(FluidValues.NUGGET), 1)
+                                  .save(wrapped, location(Entity_Melting_folder + "molten_dark_metal/elite"));
+        EntityMeltingRecipeBuilder.melting(
+                                          EntityIngredient.of(DreamtinkerTagKeys.EntityTypes.CHAOS_BOSS),
+                                          DreamtinkerFluids.molten_dark_metal.result(FluidValues.NUGGET), 1)
+                                  .save(wrapped, location(Entity_Melting_folder + "molten_dark_metal/boss"));
+    }
+
     private void addCompactUGMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
         String undergarden = "undergarden";
         Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(undergarden));
@@ -2616,115 +2723,6 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                    .unitByproducts(); // 清空，避免影响后面的 recipe
         }
     }
-
-    private void addCompactBICMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
-        String BIC = "born_in_chaos_v1";
-        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(BIC));
-        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "dark_metal_deposit")),
-                                     DreamtinkerFluids.molten_dark_metal.get(), FluidValues.INGOT, 0.05f)
-                            .setOre(IMeltingContainer.OreRateType.METAL)
-                            .save(wrapped, location(Melting_folder + "dark_metal/ore"));
-        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "pieceofdarkmetal")),
-                                     DreamtinkerFluids.molten_dark_metal.get(), FluidValues.NUGGET, 0.05f)
-                            .setOre(IMeltingContainer.OreRateType.METAL)
-                            .save(wrapped, location(Melting_folder + "dark_metal/piece"));
-        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "pileof_dark_metal")),
-                                     DreamtinkerFluids.molten_dark_metal.get(), FluidValues.INGOT, 0.05f)
-                            .setOre(IMeltingContainer.OreRateType.METAL)
-                            .save(wrapped, location(Melting_folder + "dark_metal/pile"));
-        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "armor_plate_from_dark_metal")),
-                                     DreamtinkerFluids.molten_dark_metal.get(), FluidValues.INGOT * 5, 0.05f)
-                            .save(wrapped, location(Melting_folder + "dark_metal/plate"));
-        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "dark_grid")),
-                                     DreamtinkerFluids.molten_dark_metal.get(), FluidValues.INGOT / 4, 0.05f)
-                            .save(wrapped, location(Melting_folder + "dark_metal/grid"));
-        MeltingRecipeBuilder.melting(CompoundIngredient.of(ItemNameIngredient.from(new ResourceLocation(BIC, "infected_diamond_ore")),
-                                                           ItemNameIngredient.from(new ResourceLocation(BIC, "infected_deepslate_diamond_ore"))),
-                                     TinkerFluids.moltenDiamond, FluidValues.GEM, 0.05f)
-                            .setOre(IMeltingContainer.OreRateType.GEM)
-                            .addByproduct(TinkerFluids.moltenDebris.result(FluidValues.GEM / 2))
-                            .addByproduct(DreamtinkerFluids.molten_dark_metal.result(FluidValues.INGOT / 2))
-                            .save(wrapped, location(Melting_folder + "diamond/infected"));
-        meltCast(DreamtinkerFluids.molten_dark_metal.get(), DARK_METAL_NUGGET.get(), FluidValues.NUGGET, wrapped);
-        meltCast(DreamtinkerFluids.molten_dark_metal.get(), DARK_METAL_INGOT.get(), FluidValues.INGOT, wrapped);
-        meltCastBlock(DreamtinkerFluids.molten_dark_metal.get(), DARK_METAL_BLOCK.get(), FluidValues.METAL_BLOCK, wrapped);
-        int[] darkMetalArmorSizes = {FluidValues.NUGGET, FluidValues.SLIME_DROP, FluidValues.GEM_SHARD};
-        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "dark_metal_armor_helmet")), DreamtinkerFluids.molten_dark_metal.get(),
-                                     FluidValues.INGOT * 5)
-                            .setDamagable(darkMetalArmorSizes)
-                            .addByproduct(TinkerFluids.moltenNetherite.result(FluidValues.INGOT))
-                            .addByproduct(TinkerFluids.moltenDiamond.result(FluidValues.GEM * 5))
-                            .save(wrapped, location(metalFolder + "dark_metal/helmet"));
-        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "dark_metal_armor_chestplate")),
-                                     DreamtinkerFluids.molten_dark_metal.get(), FluidValues.INGOT * 5)
-                            .setDamagable(darkMetalArmorSizes)
-                            .addByproduct(TinkerFluids.moltenNetherite.result(FluidValues.INGOT))
-                            .addByproduct(TinkerFluids.moltenDiamond.result(FluidValues.GEM * 8))
-                            .save(wrapped, location(metalFolder + "dark_metal/chestplate"));
-        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "dark_metal_armor_leggings")), DreamtinkerFluids.molten_dark_metal.get(),
-                                     FluidValues.INGOT * 5)
-                            .setDamagable(darkMetalArmorSizes)
-                            .addByproduct(TinkerFluids.moltenNetherite.result(FluidValues.INGOT))
-                            .addByproduct(TinkerFluids.moltenDiamond.result(FluidValues.GEM * 7))
-                            .save(wrapped, location(metalFolder + "dark_metal/leggings"));
-        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "dark_metal_armor_boots")), DreamtinkerFluids.molten_dark_metal.get(),
-                                     FluidValues.INGOT * 5)
-                            .setDamagable(darkMetalArmorSizes)
-                            .addByproduct(TinkerFluids.moltenNetherite.result(FluidValues.INGOT))
-                            .addByproduct(TinkerFluids.moltenDiamond.result(FluidValues.GEM * 4))
-                            .save(consumer, location(metalFolder + "dark_metal/boots"));
-        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "darkwarblade")), DreamtinkerFluids.molten_dark_metal.get(),
-                                     FluidValues.METAL_BLOCK * 2 + FluidValues.NUGGET)
-                            .setDamagable(FluidValues.INGOT)
-                            .save(wrapped, location(metalFolder + "dark_metal/warblade"));
-        MeltingRecipeBuilder.melting(CompoundIngredient.of(ItemNameIngredient.from(new ResourceLocation(BIC, "dark_ritual_dagger")),
-                                                           ItemNameIngredient.from(new ResourceLocation(BIC, "spiritual_sword")),
-                                                           ItemNameIngredient.from(new ResourceLocation(BIC, "bonescaller_staff")),
-                                                           ItemNameIngredient.from(new ResourceLocation(BIC, "shell_mace"))),
-                                     DreamtinkerFluids.molten_dark_metal.get(),
-                                     FluidValues.NUGGET * 3)
-                            .setDamagable(FluidValues.NUGGET / 2)
-                            .save(consumer, location(metalFolder + "dark_metal/dagger"));
-        MeltingRecipeBuilder.melting(CompoundIngredient.of(ItemNameIngredient.from(new ResourceLocation(BIC, "sharpened_dark_metal_sword")),
-                                                           ItemNameIngredient.from(new ResourceLocation(BIC, "spider_bite_sword"))),
-                                     DreamtinkerFluids.molten_dark_metal.get(),
-                                     FluidValues.INGOT * 2 + FluidValues.NUGGET)
-                            .setDamagable(FluidValues.NUGGET)
-                            .save(wrapped, location(metalFolder + "dark_metal/sword"));
-        MeltingRecipeBuilder.melting(CompoundIngredient.of(ItemNameIngredient.from(new ResourceLocation(BIC, "frostbitten_blade")),
-                                                           ItemNameIngredient.from(new ResourceLocation(BIC, "intoxicating_dagger"))),
-                                     DreamtinkerFluids.molten_dark_metal.get(),
-                                     FluidValues.INGOT + FluidValues.NUGGET)
-                            .setDamagable(FluidValues.NUGGET)
-                            .save(wrapped, location(metalFolder + "dark_metal/frostbitten_blade"));
-        MeltingRecipeBuilder.melting(CompoundIngredient.of(ItemNameIngredient.from(new ResourceLocation(BIC, "soul_cutlass")),
-                                                           ItemNameIngredient.from(new ResourceLocation(BIC, "nightmare_scythe"))),
-                                     DreamtinkerFluids.molten_dark_metal.get(),
-                                     FluidValues.INGOT + FluidValues.NUGGET * 2)
-                            .setDamagable(FluidValues.NUGGET)
-                            .save(wrapped, location(metalFolder + "dark_metal/soul_cutlass"));
-        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "great_reaper_axe")), DreamtinkerFluids.molten_dark_metal.get(),
-                                     FluidValues.INGOT * 4 + FluidValues.NUGGET * 2)
-                            .setDamagable(FluidValues.NUGGET)
-                            .save(consumer, location(metalFolder + "dark_metal/greater_axe"));
-        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "skullbreaker_hammer")), DreamtinkerFluids.molten_dark_metal.get(),
-                                     FluidValues.METAL_BLOCK + FluidValues.NUGGET * 2)
-                            .setDamagable(FluidValues.INGOT)
-                            .save(wrapped, location(metalFolder + "dark_metal/skull_breaker_hammer"));
-        MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "diamond_termite_shard")), TinkerFluids.moltenDiamond,
-                                     FluidValues.NUGGET)
-                            .save(wrapped, location(metalFolder + "diamond/melting_termite"));
-
-        EntityMeltingRecipeBuilder.melting(
-                                          EntityIngredient.of(FALLEN_CHAOS_KNIGHT.get(), SKELETON_THRASHER.get(), DIAMOND_TERMITE.get()),
-                                          DreamtinkerFluids.molten_dark_metal.result(FluidValues.NUGGET), 1)
-                                  .save(wrapped, location(Entity_Melting_folder + "molten_dark_metal/elite"));
-        EntityMeltingRecipeBuilder.melting(
-                                          EntityIngredient.of(MISSIONER.get(), LIFESTEALER.get(), KRAMPUS.get()),
-                                          DreamtinkerFluids.molten_dark_metal.result(FluidValues.NUGGET), 1)
-                                  .save(wrapped, location(Entity_Melting_folder + "molten_dark_metal/boss"));
-    }
-
 
 }
 

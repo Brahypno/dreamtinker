@@ -1,0 +1,21 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/single_use/ingot"
+  },
+  "cast_consumed": true,
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:ingots/dark_metal"
+    }
+  ],
+  "cooling_time": 63,
+  "fluid": {
+    "amount": 90,
+    "tag": "dreamtinker:molten_dark_metal"
+  },
+  "result": {
+    "tag": "forge:ingots/dark_metal"
+  }
+}

@@ -122,11 +122,19 @@ public class ItemTagProvider extends ItemTagsProvider {
             .add(metallivorous_stibium_lupus.get(), regulus.get(), soul_steel.get(), orichalcum.get(), cold_iron_ingot.get(), shadow_silver_ingot.get(),
                  transmutation_gold_ingot.get(), DreamTinkerSmeltery.ashenBrick.get())
             .addOptional(soul_etherium.getId())
-            .addOptional(malignant_gluttony.getId());
+            .addOptional(malignant_gluttony.getId())
+            .addOptional(new ResourceLocation("born_in_chaos_v1", "dark_metal_ingot"));
         this.tag(Items.OrichalcumIngot).add(orichalcum.get());
         this.tag(Items.coldIronIngot).add(cold_iron_ingot.get());
         this.tag(Items.ShadowSilverIngot).add(shadow_silver_ingot.get());
         this.tag(Items.TransmutationGoldIngot).add(transmutation_gold_ingot.get());
+
+        this.tag(Items.DarkMetalNuggets)
+            .addOptional(new ResourceLocation("born_in_chaos_v1", "dark_metal_nugget"));
+        this.tag(Items.DarkMetalIngot)
+            .addOptional(new ResourceLocation("born_in_chaos_v1", "dark_metal_ingot"));
+        this.tag(Items.DarkMetalBlock)
+            .addOptional(new ResourceLocation("born_in_chaos_v1", "dark_metal_block"));
 
         this.tag(Tags.Items.GEMS)
             .add(valentinite.get(), nigrescence_antimony.get(), echo_alloy.get(), larimar.get(), amber.get(), desire_gem.get(), despair_gem.get(),

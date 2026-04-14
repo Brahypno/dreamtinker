@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:ingots/dark_metal"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:ingots/dark_metal"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_dark_metal"
+  },
+  "temperature": 900,
+  "time": 63
+}

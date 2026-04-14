@@ -15,6 +15,10 @@
     {
       "id": "dreamtinker:malignant_gluttony",
       "required": false
+    },
+    {
+      "id": "born_in_chaos_v1:dark_metal_ingot",
+      "required": false
     }
   ]
 }

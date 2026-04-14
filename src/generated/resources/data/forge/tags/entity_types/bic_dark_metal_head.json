@@ -1,0 +1,44 @@
+{
+  "values": [
+    {
+      "id": "born_in_chaos_v1:lord_pumpkinhead",
+      "required": false
+    },
+    {
+      "id": "born_in_chaos_v1:pumpkinhead",
+      "required": false
+    },
+    {
+      "id": "born_in_chaos_v1:sir_pumpkinhead",
+      "required": false
+    },
+    {
+      "id": "born_in_chaos_v1:sir_pumpkinhead_without_horse",
+      "required": false
+    },
+    {
+      "id": "born_in_chaos_v1:sir_the_headless",
+      "required": false
+    },
+    {
+      "id": "born_in_chaos_v1:felsteed",
+      "required": false
+    },
+    {
+      "id": "born_in_chaos_v1:lord_pumpkinhead",
+      "required": false
+    },
+    {
+      "id": "born_in_chaos_v1:lord_pumpkinhead_withouta_horse",
+      "required": false
+    },
+    {
+      "id": "born_in_chaos_v1:lord_the_headless",
+      "required": false
+    },
+    {
+      "id": "born_in_chaos_v1:lords_felsteed",
+      "required": false
+    }
+  ]
+}

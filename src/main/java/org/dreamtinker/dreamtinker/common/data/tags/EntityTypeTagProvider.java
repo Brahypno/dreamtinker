@@ -26,6 +26,32 @@ public class EntityTypeTagProvider extends EntityTypeTagsProvider {
             .addOptional(new ResourceLocation("cataclysm", "ender_guardian"))
             .addOptional(new ResourceLocation("goety", "ender_keeper"))
             .addOptionalTag(DreamtinkerTagKeys.EntityTypes.common("farlanders", "endermen"));
+        this.tag(DreamtinkerTagKeys.EntityTypes.CHAOS_ELITE)
+            .addOptional(new ResourceLocation("born_in_chaos_v1", "fallen_chaos_knight"))
+            .addOptional(new ResourceLocation("born_in_chaos_v1", "nightmare_stalker"))
+            .addOptional(new ResourceLocation("born_in_chaos_v1", "skeleton_thrasher"))
+            .addOptional(new ResourceLocation("born_in_chaos_v1", "diamond_termite"));
+        ;
+        this.tag(DreamtinkerTagKeys.EntityTypes.CHAOS_BOSS)
+            .addOptional(new ResourceLocation("born_in_chaos_v1", "missioner"))
+            .addOptional(new ResourceLocation("born_in_chaos_v1", "lifestealer"))
+            .addOptional(new ResourceLocation("born_in_chaos_v1", "krampus"));
+        this.tag(DreamtinkerTagKeys.EntityTypes.CHAOS_MINOR)
+            .addOptional(new ResourceLocation("born_in_chaos_v1", "controlled_baby_skeleton"))
+            .addOptional(new ResourceLocation("born_in_chaos_v1", "mr_pumpkin_controlled"))
+            .addOptional(new ResourceLocation("born_in_chaos_v1", "controlled_spiritual_assistant"));
+        this.tag(DreamtinkerTagKeys.EntityTypes.CHAOS_HEAD)
+            .addOptional(new ResourceLocation("born_in_chaos_v1", "lord_pumpkinhead"))
+            .addOptional(new ResourceLocation("born_in_chaos_v1", "pumpkinhead"))
+            .addOptional(new ResourceLocation("born_in_chaos_v1", "sir_pumpkinhead"))
+            .addOptional(new ResourceLocation("born_in_chaos_v1", "sir_pumpkinhead_without_horse"))
+            .addOptional(new ResourceLocation("born_in_chaos_v1", "sir_the_headless"))
+            .addOptional(new ResourceLocation("born_in_chaos_v1", "felsteed"))
+            .addOptional(new ResourceLocation("born_in_chaos_v1", "lord_pumpkinhead"))
+            .addOptional(new ResourceLocation("born_in_chaos_v1", "lord_pumpkinhead_withouta_horse"))
+            .addOptional(new ResourceLocation("born_in_chaos_v1", "lord_the_headless"))
+            .addOptional(new ResourceLocation("born_in_chaos_v1", "lords_felsteed"));
+
     }
 
     @Override

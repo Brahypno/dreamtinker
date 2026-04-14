@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:storage_blocks/dark_metal"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:storage_blocks/dark_metal"
+  },
+  "result": {
+    "amount": 810,
+    "fluid": "dreamtinker:molten_dark_metal"
+  },
+  "temperature": 900,
+  "time": 190
+}
