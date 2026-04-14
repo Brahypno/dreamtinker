@@ -36,7 +36,7 @@
       },
       "time": {
         "flat": 110.0,
-        "random": 10.0
+        "per_level": 20.0
       }
     },
     {
@@ -52,7 +52,7 @@
       },
       "time": {
         "flat": 60.0,
-        "random": 10.0
+        "per_level": 20.0
       }
     }
   ],

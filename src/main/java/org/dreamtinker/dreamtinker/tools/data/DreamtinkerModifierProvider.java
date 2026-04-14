@@ -8,7 +8,6 @@ import com.sammy.malum.registry.common.item.EnchantmentRegistry;
 import elucent.eidolon.registries.EidolonAttributes;
 import elucent.eidolon.registries.EidolonPotions;
 import elucent.eidolon.registries.Registry;
-import net.mcreator.borninchaosv.init.BornInChaosV1ModMobEffects;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -617,6 +616,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
     }
 
     private void addBICModifiers() {
+
         buildModifier(Ids.bic_dark_armor_plate, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"))
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                 .addModule(new RarityModule(Rarity.RARE))
@@ -630,116 +630,100 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(StatBoostModule.multiplyBase(ToolStats.MINING_SPEED).flat(-0.25f))
                 .addModule(ModifierRequirementsModule.builder().requireModifier(ModifierIds.netherite, 1)
                                                      .modifierKey(Ids.bic_dark_armor_plate).build());
-
+/*
         buildModifier(Ids.bic_frostbitten, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"))
                 .addModule(MobEffectModule.builder(BornInChaosV1ModMobEffects.BONE_CHILLING.get())
                                           .level(RandomLevelingValue.perLevel(0, 2))
-                                          .time(RandomLevelingValue.random(180, 10))
-
+                                          .time(RandomLevelingValue.perLevel(180, 10))
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
         buildModifier(Ids.bic_intoxicating, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"))
                 .addModule(MobEffectModule.builder(BornInChaosV1ModMobEffects.INTOXICATION.get())
                                           .level(RandomLevelingValue.flat(1))
-                                          .time(RandomLevelingValue.random(110, 10))
-
+                                          .time(RandomLevelingValue.perLevel(110, 20))
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT)
                 .addModule(MobEffectModule.builder(MobEffects.POISON)
                                           .level(RandomLevelingValue.perLevel(0, 2))
-                                          .time(RandomLevelingValue.random(60, 10))
-
+                                          .time(RandomLevelingValue.perLevel(60, 20))
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
         buildModifier(Ids.bic_life_stealer, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"))
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                 .addModule(MobEffectModule.builder(BornInChaosV1ModMobEffects.LIFESTEAL.get())
                                           .level(RandomLevelingValue.flat(1))
-                                          .time(RandomLevelingValue.random(20, 10))
-
+                                          .time(RandomLevelingValue.perLevel(20 * 2, 20))
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT)
                 .addModule(MobEffectModule.builder(BornInChaosV1ModMobEffects.STUN.get())
                                           .level(RandomLevelingValue.flat(1))
-                                          .time(RandomLevelingValue.random(20, 10))
-
+                                          .time(RandomLevelingValue.perLevel(20 * 2, 10))
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT)
                 .addModule(MobEffectModule.builder(MobEffects.WITHER)
                                           .level(RandomLevelingValue.flat(1))
-                                          .time(RandomLevelingValue.random(20, 10))
-
+                                          .time(RandomLevelingValue.perLevel(20 * 2, 10))
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
         buildModifier(Ids.bic_krampus_horn, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"))
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                 .addModule(MobEffectModule.builder(BornInChaosV1ModMobEffects.BONE_CHILLING.get())
                                           .level(RandomLevelingValue.flat(6))
-                                          .time(RandomLevelingValue.random(20, 10))
-
+                                          .time(RandomLevelingValue.perLevel(20 * 2, 10))
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
         buildModifier(Ids.bic_nightmare_claw, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"))
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                 .addModule(MobEffectModule.builder(MobEffects.BLINDNESS)
                                           .level(RandomLevelingValue.flat(1))
-                                          .time(RandomLevelingValue.random(20, 10))
-
+                                          .time(RandomLevelingValue.perLevel(20 * 2, 10))
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT)
                 .addModule(MobEffectModule.builder(MobEffects.DARKNESS)
                                           .level(RandomLevelingValue.flat(1))
-                                          .time(RandomLevelingValue.random(20, 10))
-
+                                          .time(RandomLevelingValue.perLevel(20 * 2, 10))
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT)
                 .addModule(MobEffectModule.builder(MobEffects.WITHER)
                                           .level(RandomLevelingValue.flat(3))
-                                          .time(RandomLevelingValue.random(20, 10))
-
+                                          .time(RandomLevelingValue.perLevel(20 * 2, 10))
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT)
                 .addModule(MobEffectModule.builder(BornInChaosV1ModMobEffects.GAZE_OF_TERROR.get())
                                           .level(RandomLevelingValue.flat(1))
-                                          .time(RandomLevelingValue.random(20, 10))
-
+                                          .time(RandomLevelingValue.perLevel(20 * 2, 10))
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT)
                 .addModule(MobEffectModule.builder(BornInChaosV1ModMobEffects.MAGIC_DEPLETION.get())
                                           .level(RandomLevelingValue.flat(1))
-                                          .time(RandomLevelingValue.random(20, 10))
-
+                                          .time(RandomLevelingValue.perLevel(20 * 2, 10))
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
 
         buildModifier(Ids.bic_infernal_ember, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"))
                 .addModule(MobEffectModule.builder(BornInChaosV1ModMobEffects.INFERNAL_FLAME.get())
                                           .level(RandomLevelingValue.perLevel(1, 1))
-                                          .time(RandomLevelingValue.random(30, 10))
-
+                                          .time(RandomLevelingValue.perLevel(3 * 20, 10))
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
         buildModifier(Ids.bic_hound_fang, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"))
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                 .addModule(MobEffectModule.builder(BornInChaosV1ModMobEffects.BONE_FRACTURE.get())
                                           .level(RandomLevelingValue.flat(1))
-                                          .time(RandomLevelingValue.random(20, 10))
-
+                                          .time(RandomLevelingValue.perLevel(20 * 2, 10))
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT)
                 .addModule(MobEffectModule.builder(MobEffects.WEAKNESS)
                                           .level(RandomLevelingValue.flat(1))
-                                          .time(RandomLevelingValue.random(20, 10))
-
+                                          .time(RandomLevelingValue.perLevel(20 * 2, 10))
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT)
                 .addModule(MobEffectModule.builder(MobEffects.MOVEMENT_SLOWDOWN)
                                           .level(RandomLevelingValue.flat(2))
-                                          .time(RandomLevelingValue.random(20, 10))
-
+                                          .time(RandomLevelingValue.perLevel(20 * 2, 10))
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
-
+*/
         buildModifier(Ids.naughty_chaos, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"))
                 .tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)

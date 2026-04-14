@@ -21,7 +21,7 @@
       }
     ]
   },
-  "level_display": "tconstruct:default",
+  "level_display": "tconstruct:no_levels",
   "modules": [
     {
       "type": "tconstruct:mob_effect",
@@ -32,11 +32,11 @@
         "tconstruct:monster_melee_hit"
       ],
       "level": {
-        "per_level": 2.0
+        "flat": 6.0
       },
       "time": {
-        "flat": 180.0,
-        "random": 10.0
+        "flat": 40.0,
+        "per_level": 10.0
       }
     }
   ],
