@@ -6,11 +6,35 @@
     "minecraft:endermite",
     "minecraft:shulker",
     {
+      "id": "tconstruct:end_slime",
+      "required": false
+    },
+    {
       "id": "cataclysm:ender_guardian",
       "required": false
     },
     {
       "id": "goety:ender_keeper",
+      "required": false
+    },
+    {
+      "id": "grimoireofgaia:ender_dragon_girl",
+      "required": false
+    },
+    {
+      "id": "betterendforge:shadow_walker",
+      "required": false
+    },
+    {
+      "id": "betterendforge:end_slime",
+      "required": false
+    },
+    {
+      "id": "stalwart_dungeons:propulk",
+      "required": false
+    },
+    {
+      "id": "stalwart_dungeons:shelterer",
       "required": false
     },
     {

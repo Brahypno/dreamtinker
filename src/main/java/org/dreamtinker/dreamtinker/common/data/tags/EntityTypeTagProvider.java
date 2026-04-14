@@ -23,8 +23,14 @@ public class EntityTypeTagProvider extends EntityTypeTagsProvider {
     protected void addTags(@NotNull Provider provider) {
         this.tag(DreamtinkerTagKeys.EntityTypes.ENDER_ENTITY)
             .add(TinkerWorld.enderSlimeEntity.get(), EntityType.ENDER_DRAGON, EntityType.ENDERMAN, EntityType.ENDERMITE, EntityType.SHULKER)
+            .addOptional(new ResourceLocation("tconstruct", "end_slime"))
             .addOptional(new ResourceLocation("cataclysm", "ender_guardian"))
             .addOptional(new ResourceLocation("goety", "ender_keeper"))
+            .addOptional(new ResourceLocation("grimoireofgaia", "ender_dragon_girl"))
+            .addOptional(new ResourceLocation("betterendforge", "shadow_walker"))
+            .addOptional(new ResourceLocation("betterendforge", "end_slime"))
+            .addOptional(new ResourceLocation("stalwart_dungeons", "propulk"))
+            .addOptional(new ResourceLocation("stalwart_dungeons", "shelterer"))
             .addOptionalTag(DreamtinkerTagKeys.EntityTypes.common("farlanders", "endermen"));
         this.tag(DreamtinkerTagKeys.EntityTypes.CHAOS_ELITE)
             .addOptional(new ResourceLocation("born_in_chaos_v1", "fallen_chaos_knight"))
