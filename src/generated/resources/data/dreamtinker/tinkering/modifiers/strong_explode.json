@@ -5,14 +5,20 @@
       "type": "tconstruct:conditional_melee_damage",
       "formula": [
         "$level",
-        5.0,
+        4.0,
         "*",
         "$multiplier",
         "*",
         "$damage",
         "*"
       ],
-      "percent": true
+      "percent": true,
+      "tool": {
+        "type": "mantle:set",
+        "items": [
+          "dreamtinker:tntarrow"
+        ]
+      }
     }
   ],
   "tooltip_display": "always"

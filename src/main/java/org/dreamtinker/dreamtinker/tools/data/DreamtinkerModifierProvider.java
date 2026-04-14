@@ -34,6 +34,7 @@ import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.MobEffectsRemoverModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.SelfMobEffectModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.weapon.SwappableCircleWeaponAttack;
+import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.dreamtinker.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvider;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.data.predicate.IJsonPredicate;
@@ -104,9 +105,9 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                         AttributeModule.builder(ForgeMod.ENTITY_REACH.get(), AttributeModifier.Operation.ADDITION).slots(EquipmentSlot.MAINHAND).eachLevel(1));
         buildModifier(Ids.strong_explode)
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                .addModule(ConditionalMeleeDamageModule.builder().percent()
+                .addModule(ConditionalMeleeDamageModule.builder().toolItem(ItemPredicate.set(DreamtinkerTools.tntarrow.asItem())).percent()
                                                        .formula()
-                                                       .variable(LEVEL).constant(5f).multiply()
+                                                       .variable(LEVEL).constant(4f).multiply()
                                                        .variable(MULTIPLIER).multiply()
                                                        .variable(VALUE).multiply().build());
         buildModifier(Ids.antimony_usage).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
