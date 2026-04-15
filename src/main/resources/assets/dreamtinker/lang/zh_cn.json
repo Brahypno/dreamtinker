@@ -336,7 +336,7 @@
   "modifier.dreamtinker.absorption_hit.description": "在有伤害吸收时增伤，否则减伤；当暴击时获得一定的伤害吸收；可配置",
   "modifier.dreamtinker.absorption_defense": "踏上前来",
   "modifier.dreamtinker.absorption_defense.flavor": "屈服于我，或证明你比我做的更好",
-  "modifier.dreamtinker.absorption_defense.description": "当有伤害吸收时减少受到伤，反之增加受到的伤害；伤害吸收会被击破时对攻击者施加力量；可配置",
+  "modifier.dreamtinker.absorption_defense.description": "当有伤害吸收时，每级减少%s%%受到伤害，最多减少90%；伤害吸收会被击破时对攻击者施加力量；",
   "modifier.dreamtinker.despair_mist": "薄暮冥冥",
   "modifier.dreamtinker.despair_mist.flavor": "无意义，无价值，虚无，绝望",
   "modifier.dreamtinker.despair_mist.description": "左击时将攻击范围内实体的负面效果传播给范围内所有实体并清除其正面效果；当传染、清除的数量足够时，对范围内群体造成伤害",

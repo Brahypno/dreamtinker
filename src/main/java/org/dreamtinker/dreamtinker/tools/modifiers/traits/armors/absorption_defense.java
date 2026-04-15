@@ -1,5 +1,7 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.armors;
 
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -14,6 +16,9 @@ import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.AbsorptionDefenseRate;
 
@@ -33,15 +38,19 @@ public class absorption_defense extends ArmorModifier {
         if (0 < level){
             float absorption = context.getEntity().getAbsorptionAmount();
             if (0 < absorption){
-                amount *= (1 - level * AbsorptionDefenseRate.get().floatValue());
+                amount *= Math.max(0.1f, 1 - level * AbsorptionDefenseRate.get().floatValue());
                 if (absorption < amount && source.getEntity() instanceof LivingEntity entity)
                     entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, level * 20, level));
-            }else
-                amount *= (1 + level * AbsorptionDefenseRate.get().floatValue());
+            }
         }
-
-
         return amount;
+    }
+
+    @Override
+    public @NotNull List<Component> getDescriptionList(int level) {
+        return Arrays.asList(Component.translatable(this.getTranslationKey() + ".flavor").withStyle(ChatFormatting.ITALIC),
+                             Component.translatable(this.getTranslationKey() + ".description", AbsorptionDefenseRate.get().floatValue() * 100)
+                                      .withStyle(ChatFormatting.GRAY));
     }
 
     @Override
