@@ -68,6 +68,8 @@ public class DreamtinkerCachedConfig {
     public static final ConfigLazy<Integer> TransmuteAcceleratorTemperature = lazIntInSpec(DreamtinkerConfig.TransmuteFuelAccelerator);
     public static final ConfigLazy<Double> VirtualDodge = lazDoubleInSpec(DreamtinkerConfig.VirtualDodge);
     public static final ConfigLazy<Double> FirthMark = lazDoubleInSpec(DreamtinkerConfig.FirthMark);
+    public static final ConfigLazy<Double> BaseExplodeDefenseRate = lazDoubleInSpec(DreamtinkerConfig.BaseExplodeDefenseRate);
+    public static final ConfigLazy<Double> ExplodeDefenseRatePerLevel = lazDoubleInSpec(DreamtinkerConfig.ExplodeDefenseRatePerLevel);
 
     public static final ConfigLazy<java.util.List<Double>> TheSplendourHeart =
             lazDoubleList(DreamtinkerConfig.TheSplendourHeart,

@@ -135,7 +135,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<RandomHit> malum_distortion = MODIFIERS.register("malum_distortion", () -> new RandomHit(0.9f, 1.2f));
 
     //etherium
-    public static final StaticModifier<ender_dodge> ender_dodge = MODIFIERS.register("ender_dodge", ender_dodge::new);
+    public static final StaticModifier<ExplosiveDefense> explosive_defense = MODIFIERS.register("explosive_defense", ExplosiveDefense::new);
     public static final StaticModifier<ExplosiveHit> explosive_hit = MODIFIERS.register("explosive_hit", ExplosiveHit::new);
     public static final StaticModifier<RangedShoot> ranged_shoot = MODIFIERS.register("ranged_shoot", RangedShoot::new);
 

@@ -30,7 +30,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             .add(strong_heavy.getId(), echoed_attack.getId(), echoed_defence.getId(), glacial_river.getId(),
                  broken_vessel.getId(), ewige_widerkunft.getId(), ouroboric_hourglass.getId(), burning_in_vain.getId(),
                  the_wolf_wonder.getId(), the_wolf_was.getId(), as_one.getId(), Ids.with_tears, isolde.getId(),
-                 mei.getId(), ender_dodge.getId(), explosive_hit.getId(), ranged_shoot.getId(), Ids.wither_body,
+                 mei.getId(), explosive_hit.getId(), ranged_shoot.getId(), Ids.wither_body,
                  stone_heart.getId(), splendour_heart.getId(), Ids.why_i_cry, Ids.EULA, Ids.huge_ego, wait_until.getId(), Ids.FragileButBright,
                  Ids.thundering_curse, Ids.homunculusLifeCurse, absorption_hit.getId(), absorption_defense.getId(), despair_rain.getId(), despair_wind.getId(),
                  rainbowCatcher.getId(), not_like_was.getId(), light_in_dark.getId(), light_emanation.getId(), Ids.lunarAttractive)

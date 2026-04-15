@@ -129,7 +129,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.etherium, ARMOR,
                   new ModifierEntry(ModifierIds.magicProtection, 2),
                   new ModifierEntry(etherium_protection.getId(), 1),
-                  new ModifierEntry(ender_dodge.getId(), 1),
+                  new ModifierEntry(explosive_defense.getId(), 1),
                   new ModifierEntry(fly.getId(), 1));
 
         addTraits(DreamtinkerMaterialIds.nefarious, MELEE_HARVEST, cursed_ring_bound.getId(), Ids.wither_body,

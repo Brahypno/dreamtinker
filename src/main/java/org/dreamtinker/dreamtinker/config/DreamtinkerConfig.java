@@ -213,10 +213,10 @@ public class DreamtinkerConfig {
 
     static {builder.comment("\netherium: ");}
 
-    public static final ForgeConfigSpec.DoubleValue EnderDodgeChance =
-            builder.comment("Can I dance?").defineInRange("EnderDodgeChance", 0.1, 0, 1);
-    public static final ForgeConfigSpec.IntValue EnderDodgeTimes =
-            builder.comment("how many times trying to dodge?").defineInRange("EnderDodgeTimes", 1, 0, 64);
+    public static final ForgeConfigSpec.DoubleValue BaseExplodeDefenseRate =
+            builder.comment("Base Explode Defense pay back damage").defineInRange("BaseExplodeDefenseRate", 0.25, 0, 100);
+    public static final ForgeConfigSpec.DoubleValue ExplodeDefenseRatePerLevel =
+            builder.comment("Explode Defense pay back bonus per level").defineInRange("ExplodeDefenseRatePerLevel", 0.12, 0, 100);
 
     public static final ForgeConfigSpec.BooleanValue ExplodeHitFire =
             builder.comment("Do you want fire in explode hit?").define("ExplodeHitFire", true);
