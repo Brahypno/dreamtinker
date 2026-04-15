@@ -37,8 +37,7 @@ public class TeleportShoot extends Modifier implements ArrowInterface {
 
     private void CrimsonPort(Projectile projectile, int level) {
         Vec3 v = projectile.getDeltaMovement();          // blocks / tick
-        double tTicks = level;// * 20.0 * .5;
-        Vec3 futurePos = projectile.position().add(v.scale(tTicks));
+        Vec3 futurePos = projectile.position().add(v.scale(level));
 
         projectile.setPos(futurePos.x, futurePos.y, futurePos.z);
         projectile.hasImpulse = true;

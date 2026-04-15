@@ -24,7 +24,7 @@
   "modifier.dreamtinker.moonlight_ice_info.description": "This modifier is only use to describe how to get this material",
   "modifier.dreamtinker.glacial_river": "Glacial River",
   "modifier.dreamtinker.glacial_river.flavor": "...in lunar flame!",
-  "modifier.dreamtinker.glacial_river.description": "in exchange of HP, deal extra damage",
+  "modifier.dreamtinker.glacial_river.description": "Drain %s%% health of nearby living entities include self to increase damage deal",
   "modifier.dreamtinker.antimony_usage": "antimony usage",
   "modifier.dreamtinker.antimony_usage.flavor": "This is STEM",
   "modifier.dreamtinker.antimony_usage.description": "Increase durability,attack damage,attack speed,projectile damage, armor, toughness, knockBack resistance and block amount;Decrease draw speed. ",
