@@ -11,11 +11,8 @@ import net.minecraft.world.phys.EntityHitResult;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
-import slimeknights.tconstruct.library.json.LevelingValue;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
-import slimeknights.tconstruct.library.modifiers.modules.combat.ConditionalMeleeDamageModule;
-import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
@@ -32,23 +29,31 @@ public class HiddenHit extends BattleModifier {
     public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
         if (context.getLivingTarget() instanceof Mob mob)
             if (null == mob.getTarget() || !mob.getTarget().is(context.getAttacker()))
-                return damage + 3 * modifier.getLevel();
+                return damage + 3 * modifier.getLevel() * tool.getMultiplier(ToolStats.ATTACK_DAMAGE);
             else
-                return damage - modifier.getLevel();
+                return damage - modifier.getLevel() * tool.getMultiplier(ToolStats.ATTACK_DAMAGE);
         return damage;
     }
 
     @Override
     public void addTooltip(IToolStackView tool, @NotNull ModifierEntry modifier, @javax.annotation.Nullable Player player, List<Component> tooltip, TooltipKey tooltipKey, TooltipFlag tooltipFlag) {
         Component statName = TooltipModifierHook.statName(modifier.getModifier(), ToolStats.ATTACK_DAMAGE);
-        TooltipModifierHook.addFlatBoost(modifier.getModifier(), statName, (double) 3 * modifier.getLevel(), tooltip);
+        if (ToolStats.ATTACK_DAMAGE.supports(tool.getItem()))
+            TooltipModifierHook.addFlatBoost(modifier.getModifier(), statName, (double) 3 * modifier.getLevel() * tool.getMultiplier(ToolStats.ATTACK_DAMAGE),
+                                             tooltip);
+
+        statName = TooltipModifierHook.statName(modifier.getModifier(), ToolStats.PROJECTILE_DAMAGE);
+        if (ToolStats.PROJECTILE_DAMAGE.supports(tool.getItem()))
+            TooltipModifierHook.addFlatBoost(modifier.getModifier(), statName,
+                                             (double) modifier.getLevel() * tool.getMultiplier(ToolStats.PROJECTILE_DAMAGE),
+                                             tooltip);
     }
 
     @Override
     public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target, boolean notBlocked) {
         if (target instanceof Mob mob && projectile instanceof AbstractArrow arr)
             if (attacker != null && (null == mob.getTarget() || !mob.getTarget().is(attacker)))
-                arr.setBaseDamage(arr.getBaseDamage() + 0.3 * modifier.getLevel());
+                arr.setBaseDamage(arr.getBaseDamage() + modifier.getLevel());
             else
                 arr.setBaseDamage(arr.getBaseDamage() - modifier.getLevel());
         return false;
