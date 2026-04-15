@@ -54,14 +54,14 @@ public class TheWolfAnswer extends BattleModifier {
         int types = 0;
         if (null != context.getLivingTarget())
             types += context.getLivingTarget().getActiveEffects().size();
-        return damage * (1 + types * TheWolfWonderEffectNum.get() * 0.1f);
+        return damage * (1 + types * TheWolfWonderEffectNum.get());
     }
 
     @Override
     public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target, boolean notBlocked) {
         if (null != target && !target.level().isClientSide){
             int types = target.getActiveEffects().size();
-            projectile.setDeltaMovement(projectile.getDeltaMovement().scale((1 + types * TheWolfWonderEffectNum.get() * 0.1f)));
+            projectile.setDeltaMovement(projectile.getDeltaMovement().scale((1 + types * TheWolfWonderEffectNum.get())));
             target.invulnerableTime = 0;
         }
         return false;
