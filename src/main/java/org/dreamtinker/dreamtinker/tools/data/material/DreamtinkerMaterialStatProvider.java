@@ -111,21 +111,21 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          StatlessMaterialStats.BINDING);
 
         addMaterialStats(DreamtinkerMaterialIds.Utherium,
-                         new HeadMaterialStats(1000, 8.5f, Tiers.DIAMOND, 4f),
+                         new HeadMaterialStats(1000, 8.5f, Tiers.DIAMOND, 3.5f),
                          HandleMaterialStats.multipliers().durability(1.2f).attackDamage(1.15f).attackSpeed(1.05f).build(),
                          StatlessMaterialStats.BINDING);
 
         addMaterialStats(DreamtinkerMaterialIds.forgotten_metal,
-                         new HeadMaterialStats(1400, 8.0f, Tiers.NETHERITE, 3.5f),
+                         new HeadMaterialStats(1400, 8.0f, Tiers.NETHERITE, 6f),
                          HandleMaterialStats.multipliers().durability(1.1f).attackDamage(1.15f).attackSpeed(1.1f).build(),
                          StatlessMaterialStats.BINDING);
 
         addMaterialStats(DreamtinkerMaterialIds.Cloggrum,
-                         new HeadMaterialStats(100, 6.0f, Tiers.IRON, 3.5f),
+                         new HeadMaterialStats(100, 6.0f, Tiers.IRON, 4f),
                          HandleMaterialStats.multipliers().durability(1.1f).attackDamage(1.05f).attackSpeed(1.05f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.Froststeel,
-                         new HeadMaterialStats(300, 7.0f, Tiers.IRON, 2.5f),
+                         new HeadMaterialStats(300, 7.0f, Tiers.IRON, 3f),
                          HandleMaterialStats.multipliers().durability(1.2f).attackDamage(1.00f).attackSpeed(1.10f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.Regalium,
@@ -386,16 +386,16 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                             StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
 
         addArmorShieldStats(DreamtinkerMaterialIds.Utherium,
-                            PlatingMaterialStats.builder().durabilityFactor(30).armor(3f, 6f, 8f, 3f).toughness(3).knockbackResistance(0f),
+                            PlatingMaterialStats.builder().durabilityFactor(30).armor(2f, 5f, 7f, 2f).toughness(3).knockbackResistance(0f),
                             StatlessMaterialStats.MAILLE);
         addArmorShieldStats(DreamtinkerMaterialIds.forgotten_metal,
-                            PlatingMaterialStats.builder().durabilityFactor(30).armor(3f, 6f, 8f, 3f).toughness(3).knockbackResistance(0f),
+                            PlatingMaterialStats.builder().durabilityFactor(30).armor(3f, 6f, 8f, 3f).toughness(5).knockbackResistance(0f),
                             StatlessMaterialStats.MAILLE);
         addArmorShieldStats(DreamtinkerMaterialIds.Cloggrum,
-                            PlatingMaterialStats.builder().durabilityFactor(20).armor(1f, 5f, 6f, 2f).toughness(1).knockbackResistance(0.05f)
+                            PlatingMaterialStats.builder().durabilityFactor(20).armor(1f, 4f, 5f, 1f).toughness(1).knockbackResistance(0.05f)
                                                 .shieldDurability(672), StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
         addArmorShieldStats(DreamtinkerMaterialIds.Froststeel,
-                            PlatingMaterialStats.builder().durabilityFactor(25).armor(2f, 6f, 7f, 3f).toughness(4).knockbackResistance(0f),
+                            PlatingMaterialStats.builder().durabilityFactor(25).armor(1f, 5f, 6f, 2f).toughness(4).knockbackResistance(0f),
                             StatlessMaterialStats.MAILLE);
 
         addArmorShieldStats(DreamtinkerMaterialIds.etherium,
