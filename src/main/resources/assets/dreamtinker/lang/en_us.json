@@ -112,7 +112,7 @@
   "modifier.dreamtinker.wither_body.description": "Immune to poison, wither and regeneration;Reverse instant damage and health",
   "modifier.dreamtinker.stone_heart": "Stone Heart",
   "modifier.dreamtinker.stone_heart.flavor": "I have a stone heart, emotionless, solid, and unhappiness",
-  "modifier.dreamtinker.stone_heart.description": "Immune to some environment and reduce range damage. Buf your regen is nerf",
+  "modifier.dreamtinker.stone_heart.description": "Immune to fire, fall, drown and starve, reduce %s%% range damage per level. Can also increase food data when attacked, Buf nerf heal to 20%% and lose food data quickly",
   "modifier.dreamtinker.evil_attack": "Evil Attack",
   "modifier.dreamtinker.evil_attack.flavor": "Thousand curses forge me",
   "modifier.dreamtinker.evil_attack.description": "Boost damage according to the number of curses",

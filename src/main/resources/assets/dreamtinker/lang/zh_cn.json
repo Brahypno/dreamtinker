@@ -112,7 +112,7 @@
   "modifier.dreamtinker.wither_body.description": "对中毒，再生，凋零效果免疫；并反转瞬间伤害与治疗",
   "modifier.dreamtinker.stone_heart": "石之心",
   "modifier.dreamtinker.stone_heart.flavor": "此心为石， 弗可转也",
-  "modifier.dreamtinker.stone_heart.description": "免疫一定的环境伤害并对箭矢有抗性，但你会受到情感打击",
+  "modifier.dreamtinker.stone_heart.description": "免疫火焰，摔落，溺水和饥饿伤害，每级减少%s%%受到的远程伤害，并根据受到的伤害恢复饱食度，但生命回复只生效20%%且饱食度会快速消耗。",
   "modifier.dreamtinker.evil_attack": "咒刃",
   "modifier.dreamtinker.evil_attack.flavor": "千咒重塑了我",
   "modifier.dreamtinker.evil_attack.description": "根据诅咒大幅提升攻击，但相应减少防御",

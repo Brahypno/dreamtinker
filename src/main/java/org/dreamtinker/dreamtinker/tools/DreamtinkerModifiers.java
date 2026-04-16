@@ -140,7 +140,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<RangedShoot> ranged_shoot = MODIFIERS.register("ranged_shoot", RangedShoot::new);
 
     public static final StaticModifier<WitherShoot> wither_shoot = MODIFIERS.register("wither_shoot", WitherShoot::new);
-    public static final StaticModifier<stone_heart> stone_heart = MODIFIERS.register("stone_heart", stone_heart::new);
+    public static final StaticModifier<stoneHeart> stone_heart = MODIFIERS.register("stone_heart", stoneHeart::new);
     public static final StaticModifier<life_looting> life_looting = MODIFIERS.register("life_looting", life_looting::new);
 
     public static final StaticModifier<DeepSleepWithRoar> deep_sleep_with_roar = MODIFIERS.register("deep_sleep_with_roar", DeepSleepWithRoar::new);

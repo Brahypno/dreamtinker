@@ -1,5 +1,7 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.armors;
 
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -13,15 +15,27 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
+import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
+import org.jetbrains.annotations.NotNull;
+import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.modules.technical.SlotInChargeModule;
+import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.StoneHeartProjReduce;
+import java.util.Arrays;
+import java.util.List;
 
-public class stone_heart extends ArmorModifier {
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.StoneHeartProjReduce;
+
+public class stoneHeart extends ArmorModifier {
+
+    private static final TinkerDataCapability.TinkerDataKey<SlotInChargeModule.SlotInCharge> SLOT_KEY =
+            TinkerDataCapability.TinkerDataKey.of(Dreamtinker.getLocation("stone_heart"));
+
     {
         MinecraftForge.EVENT_BUS.addListener(this::LivingHealEvent);
         MinecraftForge.EVENT_BUS.addListener(this::onEat);
@@ -48,7 +62,7 @@ public class stone_heart extends ArmorModifier {
         LivingEntity holder = context.getEntity();
         Level level = holder.level();
         if (!level.isClientSide() && !(source.getEntity() instanceof LivingEntity))
-            return source.is(DamageTypes.DROWN) || source.is(DamageTypes.FALL) || source.is(DamageTypes.DROWN) || source.is(DamageTypes.ON_FIRE) ||
+            return source.is(DamageTypes.DROWN) || source.is(DamageTypes.FALL) || source.is(DamageTypes.IN_FIRE) || source.is(DamageTypes.ON_FIRE) ||
                    source.is(DamageTypes.STARVE);
 
         return false;
@@ -56,20 +70,23 @@ public class stone_heart extends ArmorModifier {
 
     @Override
     public float modifyDamageTaken(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount, boolean isDirectDamage) {
-        if (context.getEntity().level().isClientSide){
-            if (source.is(DamageTypes.ARROW) || source.is(DamageTypes.FIREWORKS) || source.is(DamageTypes.FIREBALL) ||
-                source.getEntity() instanceof Projectile || source.getDirectEntity() instanceof Projectile)
-                amount *= StoneHeartProjReduce.get();
-            if (context.getEntity() instanceof ServerPlayer player){
-                FoodData fd = player.getFoodData();
-                int newFood = (int) Math.min(20, amount + fd.getFoodLevel());
-                fd.setFoodLevel(newFood);
-                if (20 < amount + fd.getFoodLevel()){
-                    float newSat = Math.min(fd.getSaturationLevel() + amount + fd.getFoodLevel() - 20, 20);
-                    fd.setSaturation(newSat);
+        int level = SlotInChargeModule.getLevel(context.getTinkerData(), SLOT_KEY, slotType);
+        if (0 < level)
+            if (context.getEntity().level().isClientSide){
+                if (context.getEntity() instanceof ServerPlayer player){
+                    FoodData fd = player.getFoodData();
+                    int newFood = (int) Math.min(20, amount + fd.getFoodLevel());
+                    fd.setFoodLevel(newFood);
+                    if (20 < amount + fd.getFoodLevel()){
+                        float newSat = Math.min(fd.getSaturationLevel() + amount + fd.getFoodLevel() - 20, 20);
+                        fd.setSaturation(newSat);
+                    }
                 }
+                if (source.is(DamageTypes.ARROW) || source.is(DamageTypes.FIREWORKS) || source.is(DamageTypes.FIREBALL) ||
+                    source.is(TinkerTags.DamageTypes.PROJECTILE_PROTECTION) ||
+                    source.getEntity() instanceof Projectile || source.getDirectEntity() instanceof Projectile)
+                    amount *= (float) Math.max(0.05f, 1 - StoneHeartProjReduce.get() * level);
             }
-        }
         return amount;
     }
 
@@ -81,5 +98,10 @@ public class stone_heart extends ArmorModifier {
 
     }
 
-
+    @Override
+    public @NotNull List<Component> getDescriptionList(int level) {
+        return Arrays.asList(Component.translatable(this.getTranslationKey() + ".flavor").withStyle(ChatFormatting.ITALIC),
+                             Component.translatable(this.getTranslationKey() + ".description", StoneHeartProjReduce.get() * 100)
+                                      .withStyle(ChatFormatting.GRAY));
+    }
 }
