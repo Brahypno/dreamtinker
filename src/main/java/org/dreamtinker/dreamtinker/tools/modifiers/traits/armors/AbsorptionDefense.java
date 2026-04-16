@@ -22,7 +22,7 @@ import java.util.List;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.AbsorptionDefenseRate;
 
-public class absorption_defense extends ArmorModifier {
+public class AbsorptionDefense extends ArmorModifier {
     private static final TinkerDataCapability.TinkerDataKey<SlotInChargeModule.SlotInCharge> SLOT_KEY =
             TinkerDataCapability.TinkerDataKey.of(Dreamtinker.getLocation("absorption_defense"));
 

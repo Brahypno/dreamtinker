@@ -30,7 +30,7 @@ import static net.minecraft.nbt.Tag.TAG_INT;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.SoulBoundCoolDown;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.SoulBoundRange;
 
-public class soul_blessing extends ArmorModifier {
+public class SoulBlessing extends ArmorModifier {
     public static final ResourceLocation TAG_SOUL_BOUND = new ResourceLocation(Dreamtinker.MODID, "soul_blessing");
 
     {

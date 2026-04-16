@@ -18,7 +18,7 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 import java.util.List;
 
-public class desolation_ring extends ArmorModifier {
+public class DesolationRing extends ArmorModifier {
     @Override
     public void addTraits(IToolContext var1, ModifierEntry var2, TraitBuilder var3, boolean var4) {
         if (var4 && var1.getModifierLevel(DreamtinkerModifiers.cursed_ring_bound.getId()) < 20)

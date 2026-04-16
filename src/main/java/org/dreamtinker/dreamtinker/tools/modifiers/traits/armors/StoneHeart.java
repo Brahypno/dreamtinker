@@ -31,7 +31,7 @@ import java.util.List;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.StoneHeartProjReduce;
 
-public class stoneHeart extends ArmorModifier {
+public class StoneHeart extends ArmorModifier {
 
     private static final TinkerDataCapability.TinkerDataKey<SlotInChargeModule.SlotInCharge> SLOT_KEY =
             TinkerDataCapability.TinkerDataKey.of(Dreamtinker.getLocation("stone_heart"));

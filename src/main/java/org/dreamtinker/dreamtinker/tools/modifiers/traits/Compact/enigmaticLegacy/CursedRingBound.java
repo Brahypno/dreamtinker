@@ -16,7 +16,7 @@ import slimeknights.tconstruct.library.modifiers.hook.interaction.InteractionSou
 import slimeknights.tconstruct.library.tools.context.EquipmentChangeContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
-public class cursed_ring_bound extends ArmorModifier {
+public class CursedRingBound extends ArmorModifier {
     private static final ResourceLocation TAG_DEEP_CURSE = Dreamtinker.getLocation("deeper_curse");
 
     private boolean check(IToolStackView tool, ServerPlayer player) {

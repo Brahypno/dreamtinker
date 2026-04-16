@@ -30,7 +30,7 @@ import java.util.function.BiConsumer;
 import static net.minecraft.nbt.Tag.TAG_FLOAT;
 import static net.minecraft.tags.DamageTypeTags.ALWAYS_HURTS_ENDER_DRAGONS;
 
-public class rainbowCatcher extends ArmorModifier {
+public class RainbowCatcher extends ArmorModifier {
     private final ResourceLocation TAG_IN_RAIN = Dreamtinker.getLocation("rainbow_catcher");
     private final ResourceLocation TAG_RAIN_BLOCK = Dreamtinker.getLocation("rainbow_catcher_blocker");
 

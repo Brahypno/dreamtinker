@@ -15,7 +15,7 @@ import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
-public class etherium_protection extends ArmorModifier {
+public class EtheriumProtection extends ArmorModifier {
 
     private boolean has_shield(Player player) {
         return DTModifierCheck.ModifierALLBody(player, this.getId()) &&

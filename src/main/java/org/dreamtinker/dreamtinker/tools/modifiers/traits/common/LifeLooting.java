@@ -1,5 +1,6 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.common;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -18,11 +19,13 @@ import slimeknights.tconstruct.library.tools.context.LootingContext;
 import slimeknights.tconstruct.library.tools.context.ToolHarvestContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.LifeLootingBonus;
 
-public class life_looting extends Modifier implements LootingModifierHook, ArmorLootingModifierHook, HarvestEnchantmentsModifierHook {
+public class LifeLooting extends Modifier implements LootingModifierHook, ArmorLootingModifierHook, HarvestEnchantmentsModifierHook {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
         hookBuilder.addHook(this, ModifierHooks.WEAPON_LOOTING, ModifierHooks.ARMOR_LOOTING, ModifierHooks.HARVEST_ENCHANTMENTS);
@@ -49,6 +52,13 @@ public class life_looting extends Modifier implements LootingModifierHook, Armor
     private int life_looting_bonus(LivingEntity entity, int i) {
         i += (int) ((20 - entity.getMaxHealth()) * LifeLootingBonus.get());
         return i;
+    }
+
+    @Override
+    public @NotNull List<Component> getDescriptionList(int level) {
+        return Arrays.asList(Component.translatable(this.getTranslationKey() + ".flavor").withStyle(ChatFormatting.ITALIC),
+                             Component.translatable(this.getTranslationKey() + ".description", LifeLootingBonus.get().floatValue() * 100)
+                                      .withStyle(ChatFormatting.GRAY));
     }
 
     public @NotNull Component getDisplayName(int level) {

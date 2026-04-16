@@ -14,11 +14,11 @@ import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
-public class nightmare_defense extends ArmorModifier {
+public class NightmareDefense extends ArmorModifier {
     private static MobEffect MAGIC_DEPLETION;
     private static final ResourceLocation magic_depletion = new ResourceLocation("born_in_chaos_v1", "magic_depletion");
 
-    public nightmare_defense() {
+    public NightmareDefense() {
         if (null == MAGIC_DEPLETION)
             MAGIC_DEPLETION = ForgeRegistries.MOB_EFFECTS.getValue(magic_depletion);
     }

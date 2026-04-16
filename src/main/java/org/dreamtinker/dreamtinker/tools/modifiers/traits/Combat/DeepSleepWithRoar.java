@@ -8,10 +8,9 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
+import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.ArmorInterface;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.MeleeInterface;
 import org.jetbrains.annotations.NotNull;
-import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
@@ -22,10 +21,9 @@ import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 
 import javax.annotation.Nullable;
 
-public class DeepSleepWithRoar extends Modifier implements MeleeInterface, ArmorInterface {
+public class DeepSleepWithRoar extends BattleModifier implements ArmorInterface {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        this.MeleeInterfaceInit(hookBuilder);
         this.ArmorInterfaceInit(hookBuilder);
         super.registerHooks(hookBuilder);
     }
@@ -37,6 +35,7 @@ public class DeepSleepWithRoar extends Modifier implements MeleeInterface, Armor
                     target.addEffect(mobs);
     }
 
+    @Override
     public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target) {
         effectSender(attacker, target);
         return false;

@@ -1,17 +1,26 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.TooltipFlag;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
+import org.jetbrains.annotations.NotNull;
+import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
+import slimeknights.tconstruct.library.tools.stat.ToolStats;
+import slimeknights.tconstruct.library.utils.Util;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class RandomHit extends BattleModifier {
     private float lower = 1f, higher = 1f;
@@ -39,4 +48,23 @@ public class RandomHit extends BattleModifier {
             return 2.0f;
         return Mth.nextFloat(rs, lower * (1.1f - level * 0.1f), Math.nextUp((higher * (level + 1)) / 2));
     }
+
+    @Override
+    public void addTooltip(IToolStackView tool, @NotNull ModifierEntry modifier, @javax.annotation.Nullable Player player, List<Component> tooltip, TooltipKey tooltipKey, TooltipFlag tooltipFlag) {
+        Component statName = TooltipModifierHook.statName(modifier.getModifier(), ToolStats.ATTACK_DAMAGE);
+        if (ToolStats.ATTACK_DAMAGE.supports(tool.getItem())){
+            tooltip.add(
+                    this.applyStyle(
+                            Component.literal(Util.PERCENT_BOOST_FORMAT.format(lower * (1.1f - modifier.getLevel() * 0.1f)) + "--" +
+                                              Util.PERCENT_BOOST_FORMAT.format(Math.nextUp((higher * (modifier.getLevel() + 1)) / 2))).append(statName)));
+        }
+
+        statName = TooltipModifierHook.statName(modifier.getModifier(), ToolStats.VELOCITY);
+        if (ToolStats.VELOCITY.supports(tool.getItem()))
+            tooltip.add(
+                    this.applyStyle(
+                            Component.literal(Util.PERCENT_BOOST_FORMAT.format(lower * (1.1f - modifier.getLevel() * 0.1f)) + "--" +
+                                              Util.PERCENT_BOOST_FORMAT.format(Math.nextUp((higher * (modifier.getLevel() + 1)) / 2))).append(statName)));
+    }
+
 }

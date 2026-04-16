@@ -9,9 +9,11 @@ import org.dreamtinker.dreamtinker.utils.TargetTracker;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
+import slimeknights.tconstruct.library.modifiers.modules.build.ModifierTraitModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
+import slimeknights.tconstruct.tools.TinkerModifiers;
 
 import javax.annotation.Nullable;
 
@@ -19,6 +21,7 @@ public class LoveShooting extends NoLevelsModifier implements ArrowInterface {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
         this.ArrowInterfaceInit(hookBuilder);
+        hookBuilder.addModule(new ModifierTraitModule(TinkerModifiers.multishot.getId(), 1, false));
         super.registerHooks(hookBuilder);
     }
 
@@ -28,4 +31,5 @@ public class LoveShooting extends NoLevelsModifier implements ArrowInterface {
             mode.dreamtinker$setMode(target -> target instanceof LivingEntity && !(target instanceof Player));
         }
     }
+
 }

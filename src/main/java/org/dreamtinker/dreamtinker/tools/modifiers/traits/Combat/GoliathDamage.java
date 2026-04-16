@@ -11,6 +11,7 @@ import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
+import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 public class GoliathDamage extends NoLevelsModifier implements MeleeInterface {
     public static float goliathPercentage(LivingEntity attacker, Entity target) {
@@ -30,7 +31,7 @@ public class GoliathDamage extends NoLevelsModifier implements MeleeInterface {
 
     @Override
     public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
-        return damage * goliathPercentage(context.getAttacker(), context.getTarget());
+        return damage * goliathPercentage(context.getAttacker(), context.getTarget()) * tool.getMultiplier(ToolStats.ATTACK_DAMAGE);
     }
 
 }

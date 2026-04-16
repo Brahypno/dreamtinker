@@ -1,5 +1,7 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat;
 
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -16,6 +18,8 @@ import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 
 import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.rangedHit;
 
@@ -53,5 +57,13 @@ public class RangedShoot extends NoLevelsModifier implements ArrowInterface {
     public void onProjectileLaunch(IToolStackView tool, ModifierEntry modifier, LivingEntity shooter, Projectile projectile, @Nullable AbstractArrow arrow, ModDataNBT persistentData, boolean primary) {
         if (null != arrow)
             arrow.setPierceLevel((byte) ((arrow.getPierceLevel() + 1) * 2));
+    }
+
+    @Override
+    public @NotNull List<Component> getDescriptionList(int level) {
+        return Arrays.asList(Component.translatable(this.getTranslationKey() + ".flavor").withStyle(ChatFormatting.ITALIC),
+                             Component.translatable(this.getTranslationKey() + ".description",
+                                                    String.format("%s", rangedHit.get()))
+                                      .withStyle(ChatFormatting.GRAY));
     }
 }

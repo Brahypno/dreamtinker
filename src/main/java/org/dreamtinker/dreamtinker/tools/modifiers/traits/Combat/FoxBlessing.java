@@ -1,6 +1,5 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat;
 
-import io.netty.channel.unix.DomainSocketReadMode;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -33,37 +32,40 @@ public class FoxBlessing extends Modifier implements ArrowInterface, MeleeInterf
         this.ArmorInterfaceInit(hookBuilder);
         super.registerHooks(hookBuilder);
     }
-    private void SpawnWeaponFox(@NotNull LivingEntity spawner, LivingEntity target){
-        if(spawner.level().isClientSide)
+
+    private void SpawnWeaponFox(@NotNull LivingEntity spawner, LivingEntity target) {
+        if (spawner.level().isClientSide)
             return;
-        List<AggressiveFox> foxes=spawner.level().getEntitiesOfClass(AggressiveFox.class, spawner.getBoundingBox().inflate(5, 0.25D, 5));
-        if(foxes.size()<=3){
+        List<AggressiveFox> foxes = spawner.level().getEntitiesOfClass(AggressiveFox.class, spawner.getBoundingBox().inflate(5, 0.25D, 5));
+        if (foxes.size() <= 3){
             AggressiveFox fox = DreamtinkerModule.AggressiveFOX.get().create(spawner.level());
-            if (fox != null) {
-                fox.moveTo(spawner.blockPosition(),spawner.getYRot(),spawner.getXRot());
-                if(null!=target)
+            if (fox != null){
+                fox.moveTo(spawner.blockPosition(), spawner.getYRot(), spawner.getXRot());
+                if (null != target)
                     fox.setTarget(target);
                 spawner.level().addFreshEntity(fox);
             }
         }
     }
+
     public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target, boolean notBlocked) {
-        LivingEntity spawner=null!=target?target:attacker;
-        if(null!=spawner)
-            SpawnWeaponFox(spawner,target);
+        LivingEntity spawner = null != target ? target : attacker;
+        if (null != spawner)
+            SpawnWeaponFox(spawner, target);
         return false;
     }
+
     public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
-        LivingEntity spawner=null!=context.getLivingTarget()?context.getLivingTarget():context.getAttacker();
-        if(null!=spawner)
-            SpawnWeaponFox(spawner,context.getLivingTarget());
+        LivingEntity spawner = null != context.getLivingTarget() ? context.getLivingTarget() : context.getAttacker();
+        if (null != spawner)
+            SpawnWeaponFox(spawner, context.getLivingTarget());
         return knockback;
     }
+
     public void onAttacked(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount, boolean isDirectDamage) {
-        LivingEntity target= source.getEntity() instanceof LivingEntity le?le:null;
-        LivingEntity spawner=null!=target?target: context.getEntity();
-        if(null!=spawner)
-            SpawnWeaponFox(spawner,target);
+        LivingEntity target = source.getEntity() instanceof LivingEntity le ? le : null;
+        LivingEntity spawner = null != target ? target : context.getEntity();
+        SpawnWeaponFox(spawner, target);
     }
 
 }

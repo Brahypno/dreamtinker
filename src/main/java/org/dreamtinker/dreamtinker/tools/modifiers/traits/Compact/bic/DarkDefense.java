@@ -21,11 +21,11 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 import static slimeknights.tconstruct.library.modifiers.modules.armor.EffectImmunityModule.EFFECT_IMMUNITY;
 
-public class dark_defense extends ArmorModifier {
+public class DarkDefense extends ArmorModifier {
     private static MobEffect rampahe = null;
     private static final ResourceLocation rampahe_location = new ResourceLocation("born_in_chaos_v1", "rampant_rampage");
 
-    public dark_defense() {
+    public DarkDefense() {
         rampahe = ForgeRegistries.MOB_EFFECTS.getValue(rampahe_location);
     }
 
