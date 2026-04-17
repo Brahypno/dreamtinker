@@ -5,6 +5,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,6 +22,8 @@ import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.KeybindInteractModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.build.VolatileFlagModule;
 import slimeknights.tconstruct.library.modifiers.modules.technical.SlotInChargeModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
@@ -33,16 +36,14 @@ import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
 import javax.annotation.Nullable;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static net.minecraft.nbt.Tag.TAG_INT;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.*;
 import static org.dreamtinker.dreamtinker.utils.DTModifierCheck.getPossibleToolWithModifierTag;
 
 
-public class as_one extends ArmorModifier {
+public class as_one extends ArmorModifier implements KeybindInteractModifierHook {
     private final int as_one_life = AsOneRe.get();
     private static final int SECOND_THRESHOLD = AsOneT.get();
     private static final TinkerDataCapability.TinkerDataKey<SlotInChargeModule.SlotInCharge> SLOT_KEY =
@@ -53,15 +54,58 @@ public class as_one extends ArmorModifier {
     private static final Set<ResourceLocation> CONFIG_BLACKLIST = new HashSet<>();
     private static boolean Blacklist_inited = false;
 
+    private static final Map<Modes, Set<MobEffectCategory>> EFFECTS = Map.of(
+            Modes.ALL, EnumSet.allOf(MobEffectCategory.class),
+            Modes.NEG, EnumSet.of(MobEffectCategory.HARMFUL),
+            Modes.NEU, EnumSet.of(MobEffectCategory.NEUTRAL),
+            Modes.BEN, EnumSet.of(MobEffectCategory.BENEFICIAL),
+            Modes.NEG_NEU, EnumSet.of(MobEffectCategory.HARMFUL, MobEffectCategory.NEUTRAL),
+            Modes.NEU_BEN, EnumSet.of(MobEffectCategory.NEUTRAL, MobEffectCategory.BENEFICIAL),
+            Modes.NEG_BEN, EnumSet.of(MobEffectCategory.HARMFUL, MobEffectCategory.BENEFICIAL)
+    );
+    private final ResourceLocation TAG_MOD = Dreamtinker.getLocation("as_one_mode");
+
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
         hookBuilder.addModule(new SlotInChargeModule(SLOT_KEY));
         hookBuilder.addModule(new VolatileFlagModule(IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY));
+        hookBuilder.addHook(this, ModifierHooks.ARMOR_INTERACT);
         super.registerHooks(hookBuilder);
+    }
+
+    @Override
+    public boolean startInteract(IToolStackView tool, ModifierEntry modifier, Player player, EquipmentSlot slot, TooltipKey keyModifier) {
+        if (player.level().isClientSide || EquipmentSlot.MAINHAND != slot)
+            return false;
+        if (player.isUsingItem())
+            return false;
+        ModDataNBT dataNBT = tool.getPersistentData();
+        int mod = (dataNBT.getInt(TAG_MOD) + 1) % (Modes.values().length);
+        dataNBT.putInt(TAG_MOD, mod);
+        player.sendSystemMessage(Component.translatable("modifier.dreamtinker.tooltip.as_one_mode"
+                                                  , Component.translatable("modifier.dreamtinker.tooltip.as_one" + "_" + mod))
+                                          .withStyle(this.getDisplayName().getStyle()));
+        return true;
     }
 
     {
         MinecraftForge.EVENT_BUS.addListener(this::onLivingDeath);
+    }
+
+    @Override
+    public void addTooltip(IToolStackView tool, @NotNull ModifierEntry modifier, @Nullable Player player, List<Component> tooltip, TooltipKey tooltipKey, TooltipFlag tooltipFlag) {
+        if (tool instanceof ToolStack && tooltipKey.isShiftOrUnknown()){
+            ModDataNBT nbt = tool.getPersistentData();
+            int count = nbt.getInt(TAG_AS_ONE);
+            if (count > 0){
+                tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.as_one").append(String.valueOf(count))
+                                     .withStyle(this.getDisplayName().getStyle()));
+            }
+            int mod = nbt.getInt(TAG_MOD);
+            tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.as_one_mode"
+                                         , Component.translatable("modifier.dreamtinker.tooltip.as_one" + "_" + mod))
+                                 .withStyle(this.getDisplayName().getStyle()));
+        }
     }
 
     @Override
@@ -94,22 +138,8 @@ public class as_one extends ArmorModifier {
     }
 
     @Override
-    public void addTooltip(IToolStackView tool, @NotNull ModifierEntry modifier, @Nullable Player player, List<Component> tooltip, TooltipKey tooltipKey, TooltipFlag tooltipFlag) {
-        if (tool instanceof ToolStack && tooltipKey.isShiftOrUnknown()){
-            ModDataNBT nbt = tool.getPersistentData();
-            int count = nbt.getInt(TAG_AS_ONE);
-            if (count > 0){
-                tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.as_one").append(String.valueOf(count))
-                                     .withStyle(this.getDisplayName().getStyle()));
-            }
-        }
-    }
-
-    @Override
     public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         if (world.isClientSide)
-            return;
-        if (!isCorrectSlot && !isSelected)
             return;
         long this_time;
         if ((this_time = world.getGameTime()) % 20 == 0){
@@ -128,14 +158,47 @@ public class as_one extends ArmorModifier {
                 tool.setDamage(0);
         }
         List<MobEffectInstance> snapshot = holder.getActiveEffects().stream().filter(as_one::filterMobEffects).toList();
+        Modes mode = Modes.fromInt(tool.getPersistentData().getInt(TAG_MOD));
         for (MobEffectInstance inst : snapshot) {
             int amp = inst.getAmplifier();
             if (amp < AsOneA.get()){
                 MobEffect type = inst.getEffect();
                 int duration = inst.getDuration();
-                if (AsOneTT.get() < duration)
+                if (AsOneTT.get() < duration && EFFECTS.get(mode).contains(type.getCategory()))
                     holder.removeEffect(type);
             }
+        }
+    }
+
+    private enum Modes {
+        ALL(0),
+        NEG(1),
+        NEU(2),
+        BEN(3),
+        NEG_NEU(4),
+        NEU_BEN(5),
+        NEG_BEN(6);
+        private final int id;
+
+        Modes(int id) {
+            this.id = id;
+        }
+
+        public static Modes fromInt(int id) {
+            return switch (id) {
+                case 0 -> ALL;
+                case 1 -> NEG;
+                case 2 -> NEU;
+                case 3 -> BEN;
+                case 4 -> NEG_NEU;
+                case 5 -> NEU_BEN;
+                case 6 -> NEG_BEN;
+                default -> ALL; // 或抛异常
+            };
+        }
+
+        public int getId() {
+            return id;
         }
     }
 
