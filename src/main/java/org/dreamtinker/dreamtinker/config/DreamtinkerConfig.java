@@ -158,13 +158,15 @@ public class DreamtinkerConfig {
 
     static {builder.comment("\nMetallivorous Stibium Lupus: ");}
 
+    public static final ForgeConfigSpec.DoubleValue TheWolfWasDevoter =
+            builder.comment("Damage boost of the wolf was;").defineInRange("TheWolfWasDevoter", 6.66, 0, 100);
     public static final ForgeConfigSpec.IntValue TheWolfWonderEffectNum =
-            builder.comment("Number of effective that applied on target; This is also the damage boost of The wolf answer(base on effects number)")
-                   .defineInRange("TheWolfWonderEffectNum", 5, 0, 100);
+            builder.comment("Number of effective that applied on target;")
+                   .defineInRange("TheWolfWonderEffectNum", 6, 0, 100);
     public static final ForgeConfigSpec.IntValue TheWolfWonderEffectMinTime =
-            builder.comment("Min time effective last in second").defineInRange("TheWolfWonderEffectMinTime", 10, 0, 100);
+            builder.comment("Min time effective last in second").defineInRange("TheWolfWonderEffectMinTime", 5, 0, 100);
     public static final ForgeConfigSpec.IntValue TheWolfWonderEffectMaxTime =
-            builder.comment("Max time effective last in second").defineInRange("TheWolfWonderEffectMaxTime", 10, 0, 100);
+            builder.comment("Max time effective last in second").defineInRange("TheWolfWonderEffectMaxTime", 20, 0, 100);
     public static final ForgeConfigSpec.IntValue TheWolfWonderEffectAmplifier =
             builder.comment("Max Amplifier of effects").defineInRange("TheWolfWonderEffectAmplifier", 10, 0, 100);
     public static final ForgeConfigSpec.IntValue TheWolfWonderSurpriseNumber =

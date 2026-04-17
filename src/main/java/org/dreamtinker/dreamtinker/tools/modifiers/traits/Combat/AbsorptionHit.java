@@ -36,14 +36,14 @@ public class AbsorptionHit extends BattleModifier {
         hookBuilder.addModule(ConditionalMeleeDamageModule.builder().attacker(absorption).percent()
                                                           .formula()
                                                           .variable(LEVEL).constant(AbsorptionHitRate.get().floatValue()).multiply()
-                                                          .constant(1).add()
                                                           .variable(MULTIPLIER).multiply()
+                                                          .constant(1).add()
                                                           .variable(VALUE).multiply().build());
         hookBuilder.addModule(ConditionalPowerModule.builder().holder(absorption).percent()
                                                     .formula()
                                                     .variable(LEVEL).constant(AbsorptionHitRate.get().floatValue()).multiply()
-                                                    .constant(1).add()
                                                     .variable(MULTIPLIER).multiply()
+                                                    .constant(1).add()
                                                     .variable(VALUE).multiply().build());
         super.registerHooks(hookBuilder);
     }

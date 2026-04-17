@@ -37,8 +37,8 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          HandleMaterialStats.multipliers().durability(1.0f).miningSpeed(1f).attackDamage(1f).attackSpeed(1f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.metallivorous_stibium_lupus,
-                         new HeadMaterialStats(1600, 7.6f, DtTiers.WOLF_TIER, 7.6f),
-                         HandleMaterialStats.multipliers().durability(0.67f).miningSpeed(0.34f).attackDamage(0.76f).attackSpeed(1.76f).build(),
+                         new HeadMaterialStats(1600, 7.6f, DtTiers.WOLF_TIER, 6.6f),
+                         HandleMaterialStats.multipliers().durability(1.66f).miningSpeed(1.66f).attackDamage(1.66f).attackSpeed(1.66f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.crying_obsidian,
                          new HeadMaterialStats(700, 6f, Tiers.DIAMOND, 1.5f),

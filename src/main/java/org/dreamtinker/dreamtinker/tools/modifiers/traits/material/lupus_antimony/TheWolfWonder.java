@@ -49,7 +49,7 @@ public class TheWolfWonder extends BattleModifier {
             return;
         long types = target.getActiveEffects().stream().filter(e -> e.getEffect().getCategory() == MobEffectCategory.HARMFUL).count();
         if (types < (long) TheWolfWonderEffectNum.get() * modifier.getLevel())
-            applyRandomEffects(target, context.getAttacker(), 1 < tool.getModifierLevel(DreamtinkerModifiers.despair_mist.getId()));
+            applyRandomEffects(target, context.getAttacker(), 1 < tool.getModifierLevel(DreamtinkerModifiers.despair_mist.getId()), 1);
     }
 
     @Override
@@ -58,11 +58,11 @@ public class TheWolfWonder extends BattleModifier {
             return false;
         long types = target.getActiveEffects().stream().filter(e -> e.getEffect().getCategory() == MobEffectCategory.HARMFUL).count();
         if (types < (long) TheWolfWonderEffectNum.get() * modifier.getLevel())
-            applyRandomEffects(target, attacker, 1 < modifiers.getLevel(DreamtinkerModifiers.despair_mist.getId()));
+            applyRandomEffects(target, attacker, 1 < modifiers.getLevel(DreamtinkerModifiers.despair_mist.getId()), 1);
         return false;
     }
 
-    private void applyRandomEffects(LivingEntity target, LivingEntity attacker, boolean no_repeat) {
+    private void applyRandomEffects(LivingEntity target, LivingEntity attacker, boolean no_repeat, int mutiply) {
         RandomSource rand = target.getRandom();
         if (negatives.isEmpty())
             negatives = ForgeRegistries.MOB_EFFECTS.getValues().stream()
@@ -79,7 +79,7 @@ public class TheWolfWonder extends BattleModifier {
         List<MobEffectInstance> selected_effects =
                 new java.util.ArrayList<>(target.getActiveEffects().stream().filter(e -> e.getEffect().getCategory() == MobEffectCategory.HARMFUL).toList());
         for (MobEffect effect : negatives) {
-            if (TheWolfWonderEffectNum.get() <= selected_effects.size())
+            if (TheWolfWonderEffectNum.get() * mutiply <= selected_effects.size())
                 break;
             if (no_repeat && target.hasEffect(effect))
                 continue;
@@ -100,7 +100,7 @@ public class TheWolfWonder extends BattleModifier {
 
 
         }
-        if (attacker != null && rand.nextInt(6666) < TheWolfWonderSurpriseNumber.get()){
+        if (attacker != null && rand.nextInt(66666) < TheWolfWonderSurpriseNumber.get()){
             for (MobEffectInstance inst : selected_effects) {
                 attacker.addEffect(new MobEffectInstance(inst.getEffect(), inst.getDuration(), inst.getAmplifier(), inst.isAmbient(), inst.isVisible()));
             }

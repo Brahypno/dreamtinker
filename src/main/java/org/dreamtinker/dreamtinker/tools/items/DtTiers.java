@@ -19,7 +19,7 @@ public class DtTiers {
                     2031,            // 耐久（用于基于 Tier 的原版工具）
                     9.0F,            // 挖掘速度
                     4.0F,            // 额外攻击
-                    15,              // 附魔性
+                    0,              // 附魔性
                     need_lupus, // “需要此等级工具”的方块标签
                     () -> Ingredient.of(DreamtinkerCommon.metallivorous_stibium_lupus.get()) // 修复材料（可随意）
             ),
@@ -47,7 +47,7 @@ public class DtTiers {
                     150,            // 耐久（用于基于 Tier 的原版工具）
                     12.0F,            // 挖掘速度
                     3.0F,            // 额外攻击
-                    20,              // 附魔性
+                    10000,              // 附魔性
                     need_transmutation_gold, // “需要此等级工具”的方块标签
                     () -> Ingredient.of(DreamtinkerCommon.transmutation_gold_ingot.get())
             ),
