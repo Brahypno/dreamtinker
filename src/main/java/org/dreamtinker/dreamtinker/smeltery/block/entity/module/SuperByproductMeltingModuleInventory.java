@@ -110,11 +110,23 @@ public class SuperByproductMeltingModuleInventory extends MeltingModuleInventory
     }
 
     private boolean tryFillTankFoundry(int index, IMeltingRecipe recipe) {
-        if (super.tryFillTank(index, recipe)){
-            recipe.handleByproducts(getModule(index), fluidHandler);
-            return true;
+        IMeltingContainer inv = getModule(index);
+        // 1) 主产物
+        FluidStack main = recipe.getOutput(inv);
+        if (main.isEmpty() || main.getAmount() <= 0)
+            return false;
+        int count = 0;
+
+        if (fluidHandler.fill(main.copy(), IFluidHandler.FluidAction.SIMULATE) != main.getAmount())
+            return false;
+
+        fluidHandler.fill(main, IFluidHandler.FluidAction.EXECUTE);
+        while (count < inv.getStack().getCount()) {
+            // 4) 让配方把副产物灌进临时 tank（空间等同于真实罐子在灌完主产物后的剩余空间）
+            recipe.handleByproducts(inv, fluidHandler);
+            ++count;
         }
-        return false;
+        return true;
     }
 
     private MeltingModule getSmelteryModule(int slot) {
@@ -129,6 +141,8 @@ public class SuperByproductMeltingModuleInventory extends MeltingModuleInventory
 
     private boolean tryFillTankSmeltery(int index, IMeltingRecipe recipe) {
         FluidStack fluid = recipe.getOutput(getSmelteryModule(index));
+        IMeltingContainer inv = getModule(index);
+        fluid.setAmount(fluid.getAmount() * inv.getStack().getCount());
         if (fluidHandler.fill(fluid.copy(), IFluidHandler.FluidAction.SIMULATE) == fluid.getAmount()){
             fluidHandler.fill(fluid, IFluidHandler.FluidAction.EXECUTE);
             return true;
@@ -144,81 +158,73 @@ public class SuperByproductMeltingModuleInventory extends MeltingModuleInventory
         if (main.isEmpty() || main.getAmount() <= 0)
             return false;
         int count = 0;
-        while (count < inv.getStack().getCount()) {
-            ++count;
-            main.setAmount(main.getAmount());
-            // 2) 先判断主产物能否完整灌入（保持 super 的语义）
-            int canFillMain = fluidHandler.fill(main.copy(), IFluidHandler.FluidAction.SIMULATE);
-            if (canFillMain != main.getAmount()){
-                return false;
-            }
-            int remainingBefore = getRemainingSpace(fluidHandler);
-            int remainingAfterMain = Math.max(0, remainingBefore - main.getAmount());
+        main.setAmount(main.getAmount() * inv.getStack().getCount());
 
-            SmelteryTank<HeatingStructureBlockEntity> tank = new SmelteryTank<>(parent);
-            //tank.setCapacity(fluidHandler.getTankCapacity(fluidHandler.getTanks()));
-            tank.setCapacity(remainingAfterMain);
+        if (fluidHandler.fill(main.copy(), IFluidHandler.FluidAction.SIMULATE) != main.getAmount())
+            return false;
+
+        SmelteryTank<HeatingStructureBlockEntity> tank = new SmelteryTank<>(parent);
+        tank.setCapacity(Math.max(0, main.getAmount() * 10));
+        while (count < inv.getStack().getCount()) {
             // 4) 让配方把副产物灌进临时 tank（空间等同于真实罐子在灌完主产物后的剩余空间）
             recipe.handleByproducts(inv, tank);
+            ++count;
+        }
+        // 5) 读取副产物列表与总量
+        java.util.List<FluidStack> bys = collectNonEmptyFluids(tank);
 
-            // 5) 读取副产物列表与总量
-            java.util.List<FluidStack> bys = collectNonEmptyFluids(tank);
-            if (bys.isEmpty()){
-                // 没有副产物：直接正常灌主产物
-                fluidHandler.fill(main, IFluidHandler.FluidAction.EXECUTE);
-                return true;
+        long M = main.getAmount();
+        long B = 0L;
+        FluidStack largest = FluidStack.EMPTY;
+        long largestAmt = 0L;
+
+        for (FluidStack by : bys) {
+            long amt = by.getAmount();
+            if (amt <= 0){
+                continue;
             }
 
-            long M = main.getAmount();
-            long B = 0;
-            for (FluidStack b : bys)
-                B += b.getAmount();
-
-            // 副产物总量为 0：不交换
-            if (B <= 0){
-                fluidHandler.fill(main, IFluidHandler.FluidAction.EXECUTE);
-                // byproducts 都是 0，不用灌
-                return true;
-            }
-
-            // 6) 交换规则：
-            // 新主产物量 = B
-            // 新副产物总量 = M，按 bys 原比例分配
-            FluidStack newMain = main.copy();
-            newMain.setAmount((int) Math.min(Integer.MAX_VALUE, B));
-            fluidHandler.fill(newMain, IFluidHandler.FluidAction.EXECUTE);
-
-            long remaining = M;
-
-            // 找占比最大的副产物，用来吃掉整数除法的余数
-            int maxIdx = 0;
-            long maxAmt = bys.get(0).getAmount();
-            for (int i = 1; i < bys.size(); i++) {
-                long a = bys.get(i).getAmount();
-                if (a > maxAmt){
-                    maxAmt = a;
-                    maxIdx = i;
-                }
-            }
-
-            for (FluidStack b : bys) {
-                long share = (M * (long) b.getAmount()) / B; // floor
-                remaining -= share;
-
-                if (share > 0){
-                    FluidStack nb = b.copy();
-                    nb.setAmount((int) Math.min(Integer.MAX_VALUE, share));
-                    fluidHandler.fill(nb, IFluidHandler.FluidAction.EXECUTE);
-                }
-            }
-
-            // 余数补给最大项，保证总量尽量守恒（若 fill 装不下则自然丢失）
-            if (remaining > 0){
-                FluidStack bonus = bys.get(maxIdx).copy();
-                bonus.setAmount((int) Math.min(Integer.MAX_VALUE, remaining));
-                fluidHandler.fill(bonus, IFluidHandler.FluidAction.EXECUTE);
+            B += amt;
+            if (amt > largestAmt){
+                largestAmt = amt;
+                largest = by;
             }
         }
+
+        if (B <= 0L){
+            fluidHandler.fill(main.copy(), IFluidHandler.FluidAction.EXECUTE);
+            return true;
+        }
+
+        FluidStack swappedMain = main.copy();
+        swappedMain.setAmount((int) Math.min(Integer.MAX_VALUE, B));
+        fluidHandler.fill(swappedMain, IFluidHandler.FluidAction.EXECUTE);
+
+        long remainder = M;
+        for (FluidStack by : bys) {
+            long amt = by.getAmount();
+            if (amt <= 0){
+                continue;
+            }
+
+            long share = M * amt / B;
+            if (share <= 0L){
+                continue;
+            }
+
+            remainder -= share;
+
+            FluidStack out = by.copy();
+            out.setAmount((int) Math.min(Integer.MAX_VALUE, share));
+            fluidHandler.fill(out, IFluidHandler.FluidAction.EXECUTE);
+        }
+
+        if (remainder > 0L && !largest.isEmpty()){
+            FluidStack extra = largest.copy();
+            extra.setAmount((int) Math.min(Integer.MAX_VALUE, remainder));
+            fluidHandler.fill(extra, IFluidHandler.FluidAction.EXECUTE);
+        }
+
         return true;
     }
 
@@ -248,18 +254,5 @@ public class SuperByproductMeltingModuleInventory extends MeltingModuleInventory
                 list.add(fs.copy());
         }
         return list;
-    }
-
-    private static int getRemainingSpace(IFluidHandler handler) {
-        int remaining = 0;
-        int tanks = handler.getTanks();
-        for (int i = 0; i < tanks; i++) {
-            FluidStack in = handler.getFluidInTank(i);
-            int cap = handler.getTankCapacity(i);
-            int amt = in.isEmpty() ? 0 : in.getAmount();
-            if (cap > amt)
-                remaining += (cap - amt);
-        }
-        return remaining;
     }
 }
