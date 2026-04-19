@@ -64,7 +64,7 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
 
-        generateItemModel(DreamtinkerCommon.raw_stibnite, "materials");
+        generateItemModel(DreamtinkerCommon.raw_stibnite, "");
         generateItemModel(DreamtinkerCommon.valentinite, "materials");
         generateItemModel(DreamtinkerCommon.nigrescence_antimony, "materials");
         generateItemModel(DreamtinkerCommon.metallivorous_stibium_lupus, "materials");

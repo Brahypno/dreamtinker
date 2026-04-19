@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "dreamtinker:item/materials/raw_stibnite"
+    "layer0": "dreamtinker:item/raw_stibnite"
   }
 }
