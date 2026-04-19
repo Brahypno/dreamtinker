@@ -142,9 +142,7 @@ public class DreamtinkerConfig {
             builder.comment("HP boost from BrokenBessel").defineInRange("BrokenVesselBoost", 1, 0, 1000);
     public static final ForgeConfigSpec.DoubleValue OuroboricHourglassMultiply =
             builder.comment("increase damage reducer from OuroboricHourglass").defineInRange("OuroboricHourglassMultiply", 10.0, 0, 1000);
-
-    public static final ForgeConfigSpec.DoubleValue Prometheus =
-            builder.comment("status boot everytime for ewige_widerkunft").defineInRange("Prometheus", 0.13, 0, 1);
+    
     public static final ForgeConfigSpec.BooleanValue RedShadeEnable =
             builder.comment("Change to false if you think the red shade hurt your eyes, then Dark one would be instead").define("RedShadeEnable", true);
 

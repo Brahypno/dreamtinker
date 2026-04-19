@@ -25,9 +25,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.CentralFlame;
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.Prometheus;
-
 public class EwigeEiderkunft extends BattleModifier {
     private static final ResourceLocation TAG_TOMB = Dreamtinker.getLocation("ewige_widerkunft");
 
@@ -37,9 +34,9 @@ public class EwigeEiderkunft extends BattleModifier {
         ModDataNBT nbt = tool.getPersistentData();
         int breaks = nbt.getInt(TAG_TOMB) + 1;
 
-        if (current - breaks * amount <= 1){
-            nbt.putInt(TAG_TOMB,
-                       breaks);
+        long tomb_number = amount * Math.round(Math.log1p(breaks));
+        if (current - tomb_number <= 1){
+            nbt.putInt(TAG_TOMB, breaks);
             tool.setDamage(0);
             if (holder != null){
                 holder.sendSystemMessage(Component.literal("13=1").withStyle(this.getDisplayName()
@@ -50,38 +47,36 @@ public class EwigeEiderkunft extends BattleModifier {
                                        holder.getX(),
                                        holder.getY(),
                                        holder.getZ(),
-                                       (float) Math.sqrt(breaks % CentralFlame.get()),
+                                       (float) Math.sqrt(breaks % 13),
                                        true,
                                        Level.ExplosionInteraction.MOB);
             }
             return 0;
         }
-        return breaks * amount;
+        return Math.toIntExact(tomb_number);
     }
 
     @Override
     public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
         if (!tool.isBroken() && modifier.getLevel() > 0 && EquipmentSlot.MAINHAND == slot){
             ModDataNBT nbt = tool.getPersistentData();
-            int breaks = Math.min(nbt.getInt(TAG_TOMB), modifier.getLevel() * CentralFlame.get());
+            int breaks = nbt.getInt(TAG_TOMB);
             if (breaks > 0){
+                double buff = 13 * Math.log1p(breaks);
                 consumer.accept(Attributes.ATTACK_DAMAGE,
                                 new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
                                                       Attributes.ATTACK_DAMAGE.getDescriptionId(),
-                                                      Math.pow(1 + Prometheus.get(),
-                                                               breaks) / 2,
+                                                      buff,
                                                       AttributeModifier.Operation.MULTIPLY_TOTAL));
                 consumer.accept(Attributes.ATTACK_SPEED,
                                 new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
                                                       Attributes.ATTACK_SPEED.getDescriptionId(),
-                                                      Math.pow(1 + Prometheus.get(),
-                                                               breaks) / 2,
+                                                      buff,
                                                       AttributeModifier.Operation.MULTIPLY_TOTAL));
                 consumer.accept(Attributes.ATTACK_KNOCKBACK,
                                 new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
                                                       Attributes.ATTACK_KNOCKBACK.getDescriptionId(),
-                                                      Math.pow(1 + Prometheus.get(),
-                                                               breaks) / 2,
+                                                      buff,
                                                       AttributeModifier.Operation.MULTIPLY_TOTAL));
             }
         }
@@ -100,10 +95,8 @@ public class EwigeEiderkunft extends BattleModifier {
             ModDataNBT nbt = tool.getPersistentData();
             int count = nbt.getInt(TAG_TOMB);
             if (count > 0){
-                tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.ewige_widerkunft")
-                                     .append(String.valueOf(count))
-                                     .withStyle(this.getDisplayName()
-                                                    .getStyle()));
+                tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.ewige_widerkunft").append(String.valueOf(count))
+                                     .withStyle(this.getDisplayName().getStyle()));
             }
         }
     }
