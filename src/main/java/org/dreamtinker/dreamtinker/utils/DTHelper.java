@@ -13,7 +13,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -312,33 +311,7 @@ public class DTHelper {
         }
     }
 
-    private static volatile Method DROP_ALL_DEATH_LOOT;
-
-    public static void invokeDropAllDeathLoot(LivingEntity entity, DamageSource source) {
-        try {
-            Method m = DROP_ALL_DEATH_LOOT;
-            if (m == null){
-                m = findMethod(
-                        LivingEntity.class,
-                        // 1) 首选：你当前映射下的名字（official/parchment）
-                        "dropAllDeathLoot",
-                        // 2) 备用：如果你确实在旧版，可把 SRG/obf 名字放这里
-                        "m_6668_",  // 示例：自己填你查到的别名
-                        new Class<?>[]{DamageSource.class},
-                        void.class,
-                        /* mustBeInstance */ true
-                );
-                m.setAccessible(true); // 允许访问 protected/private
-                DROP_ALL_DEATH_LOOT = m;
-            }
-            m.invoke(entity, source);
-        }
-        catch (ReflectiveOperationException e) {
-            throw new RuntimeException("Failed to invoke dropAllDeathLoot via reflection", e);
-        }
-    }
-
-    private static Method findMethod(
+    public static Method findMethod(
             Class<?> owner,
             String primaryName,
             String alias,
