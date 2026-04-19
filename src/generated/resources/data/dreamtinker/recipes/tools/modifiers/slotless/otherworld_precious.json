@@ -1,0 +1,43 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "occultism"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "occultism"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "amount_needed": 3,
+      "item": "occultism:spirit_attuned_gem"
+    },
+    {
+      "amount_needed": 6,
+      "item": "occultism:awakened_feather"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:otherworld_precious",
+  "tools": {
+    "tag": "tconstruct:modifiable/armor/helmets"
+  }
+}

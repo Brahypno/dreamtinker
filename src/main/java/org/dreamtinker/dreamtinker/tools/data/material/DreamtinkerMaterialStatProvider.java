@@ -133,6 +133,11 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          HandleMaterialStats.multipliers().durability(1.05f).miningSpeed(1.20f).build(),
                          StatlessMaterialStats.BINDING);
 
+        addMaterialStats(DreamtinkerMaterialIds.Iesnium,
+                         new HeadMaterialStats(600, 8.0f, Tiers.DIAMOND, 3f),
+                         HandleMaterialStats.multipliers().durability(1.05f).miningSpeed(1.20f).build(),
+                         StatlessMaterialStats.BINDING);
+
         addELMeleeHarvest();
         addMalumMeleeHarvest();
         addEidolonMeleeHarvest();

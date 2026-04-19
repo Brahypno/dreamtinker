@@ -12,6 +12,7 @@ import slimeknights.tconstruct.tools.data.ModifierIds;
 
 import static org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry.*;
 import static org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers.*;
+import static slimeknights.tconstruct.common.TinkerTags.Modifiers.COSMETIC_SLOTLESS;
 import static slimeknights.tconstruct.common.TinkerTags.Modifiers.DAMAGE_UPGRADES;
 
 public class ModifierTagProvider extends AbstractModifierTagProvider {
@@ -56,7 +57,9 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             .addOptional(ender_slayer.getId());
         this.tag(TinkerTags.Modifiers.BONUS_SLOTLESS)
             .add(Ids.huge_ego, Ids.five_creations, Ids.soul_upgrade, Ids.abyss_inside, Ids.meta_morphosis)
-            .addOptional(Ids.many_us, Ids.blighted_sigil, Ids.ashen_soul, Ids.naughty_chaos, Ids.cosmogony_tetrad);
+            .addOptional(Ids.many_us, Ids.blighted_sigil, Ids.ashen_soul, Ids.naughty_chaos, Ids.cosmogony_tetrad, Ids.otherworld_precious);
+        this.tag(COSMETIC_SLOTLESS)
+            .addOptional(occ_view.getId());
 
         this.tag(TinkerTags.Modifiers.MELEE_ABILITIES)
             .add(Ids.continuous_explode, flaming_memory.getId(), Ids.curse_fire)

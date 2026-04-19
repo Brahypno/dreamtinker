@@ -24,6 +24,10 @@
     {
       "id": "dreamtinker:cosmogony_tetrad",
       "required": false
+    },
+    {
+      "id": "dreamtinker:otherworld_precious",
+      "required": false
     }
   ]
 }

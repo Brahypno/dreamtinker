@@ -384,6 +384,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         addCompactEidolonMeltingCastingRecipes(consumer);
         addCompactBICMeltingCastingRecipes(consumer);
         addCompactUGMeltingCastingRecipes(consumer);
+        addCompactOCMeltingCastingRecipes(consumer);
+
     }
 
 
@@ -1876,6 +1878,19 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(ItemsRegistry.FIRE_ESSENCE, 1)
                              .setMaxLevel(1)
                              .save(wrapped, prefix(DreamtinkerModifiers.Ids.cosmogony_tetrad, slotlessFolder));
+        String OCC = "occultism";
+        wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(OCC));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.occ_view)
+                             .setTools(Ingredient.of(TinkerTags.Items.HELMETS))
+                             .addInput(ItemNameIngredient.from(new ResourceLocation(OCC, "otherworld_goggles")))
+                             .setMaxLevel(1)
+                             .save(wrapped, prefix(DreamtinkerModifiers.occ_view, slotlessFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.otherworld_precious)
+                             .setTools(Ingredient.of(TinkerTags.Items.HELMETS))
+                             .addInput(SizedIngredient.of(ItemNameIngredient.from(new ResourceLocation(OCC, "spirit_attuned_gem")), 3))
+                             .addInput(SizedIngredient.of(ItemNameIngredient.from(new ResourceLocation(OCC, "awakened_feather")), 6))
+                             .setMaxLevel(1)
+                             .save(wrapped, prefix(DreamtinkerModifiers.Ids.otherworld_precious, slotlessFolder));
 
     }
 
@@ -2562,6 +2577,18 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
          */
     }
 
+    private void addCompactOCMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
+        String occultism = "occultism";
+        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(occultism));
+
+        fluid(consumer, "iesnium", DreamtinkerFluids.molten_iesnium)
+                .optional()
+                .baseUnit(FluidValues.INGOT).damageUnit(FluidValues.NUGGET).ore()
+                .metal().dust().plate().gear().coin().sheetmetal().geore().oreberry()
+                .common(ToolsBySuffix(occultism))
+                .common(armorBySuffix(occultism));
+    }
+
     private void addMaterialRecipes(Consumer<FinishedRecipe> consumer) {
 
         materialMeltingCasting(consumer, DreamtinkerMaterialIds.crying_obsidian, DreamtinkerFluids.molten_crying_obsidian, FluidValues.GLASS_BLOCK,
@@ -2668,6 +2695,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         standardMetalMaterial(consumer, DreamtinkerMaterialIds.Cloggrum, DreamtinkerFluids.molten_cloggrum, "cloggrum", materials_folder);
         standardMetalMaterial(consumer, DreamtinkerMaterialIds.Froststeel, DreamtinkerFluids.molten_froststeel, "froststeel", materials_folder);
         standardMetalMaterial(consumer, DreamtinkerMaterialIds.Regalium, DreamtinkerFluids.molten_regalium, "regalium", materials_folder);
+        standardMetalMaterial(consumer, DreamtinkerMaterialIds.Iesnium, DreamtinkerFluids.molten_iesnium, "iesnium", materials_folder);
 
     }
 

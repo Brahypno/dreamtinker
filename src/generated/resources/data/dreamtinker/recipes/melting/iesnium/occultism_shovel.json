@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "conditions": [
+    {
+      "type": "forge:item_exists",
+      "item": "occultism:iesnium_shovel"
+    }
+  ],
+  "ingredient": {
+    "item": "occultism:iesnium_shovel"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_iesnium",
+    "unit_size": 10
+  },
+  "temperature": 900,
+  "time": 63
+}

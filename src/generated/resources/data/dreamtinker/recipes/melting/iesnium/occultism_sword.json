@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "conditions": [
+    {
+      "type": "forge:item_exists",
+      "item": "occultism:iesnium_sword"
+    }
+  ],
+  "ingredient": {
+    "item": "occultism:iesnium_sword"
+  },
+  "result": {
+    "amount": 180,
+    "fluid": "dreamtinker:molten_iesnium",
+    "unit_size": 10
+  },
+  "temperature": 900,
+  "time": 90
+}

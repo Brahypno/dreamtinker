@@ -504,6 +504,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         addBICModifiers();
         addNovaModifiers();
         addUGModifiers();
+        addOCCModifiers();
 
     }
 
@@ -831,6 +832,13 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                                        .constant(1f).add()
                                                        .variable(MULTIPLIER).multiply()
                                                        .variable(VALUE).multiply().build());
+    }
+
+    private void addOCCModifiers() {
+        buildModifier(Ids.otherworld_precious, DreamtinkerMaterialDataProvider.modLoaded("occultism1"))
+                .tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModules(ModifierSlotModule.slot(SlotType.SOUL).eachLevel(1));
     }
 
     @Override

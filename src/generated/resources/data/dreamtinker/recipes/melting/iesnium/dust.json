@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:dusts/iesnium"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:dusts/iesnium"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_iesnium"
+  },
+  "temperature": 900,
+  "time": 47
+}

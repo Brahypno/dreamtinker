@@ -1,0 +1,38 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "occultism"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "occultism"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "item": "occultism:otherworld_goggles"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:occ_view",
+  "tools": {
+    "tag": "tconstruct:modifiable/armor/helmets"
+  }
+}

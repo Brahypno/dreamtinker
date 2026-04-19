@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:ore_melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:geore_large_buds/iesnium"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:geore_large_buds/iesnium"
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 270,
+    "fluid": "dreamtinker:molten_iesnium"
+  },
+  "temperature": 900,
+  "time": 127
+}

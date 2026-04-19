@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:coins/iesnium"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:coins/iesnium"
+  },
+  "result": {
+    "amount": 30,
+    "fluid": "dreamtinker:molten_iesnium"
+  },
+  "temperature": 900,
+  "time": 42
+}

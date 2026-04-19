@@ -53,6 +53,10 @@
     {
       "id": "#dreamtinker:molten_regalium",
       "required": false
+    },
+    {
+      "id": "#dreamtinker:molten_iesnium",
+      "required": false
     }
   ]
 }

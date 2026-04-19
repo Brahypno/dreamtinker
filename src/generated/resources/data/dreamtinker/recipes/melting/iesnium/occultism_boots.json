@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "conditions": [
+    {
+      "type": "forge:item_exists",
+      "item": "occultism:iesnium_boots"
+    }
+  ],
+  "ingredient": {
+    "item": "occultism:iesnium_boots"
+  },
+  "result": {
+    "amount": 360,
+    "fluid": "dreamtinker:molten_iesnium",
+    "unit_size": 10
+  },
+  "temperature": 900,
+  "time": 127
+}

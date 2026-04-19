@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "forge:item_exists",
+      "item": "oreberriesreplanted:iesnium_oreberry"
+    }
+  ],
+  "ingredient": {
+    "item": "oreberriesreplanted:iesnium_oreberry"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "dreamtinker:molten_iesnium"
+  },
+  "temperature": 900,
+  "time": 21
+}

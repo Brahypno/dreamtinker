@@ -46,8 +46,11 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegac
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.evil.EvilAttack;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.soul_aether.ExilesFaulty;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum.*;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.occ.OtherWorldView;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.occ.OtherworldHarvest;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.*;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.common.*;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.harvest.*;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian.Isolde;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian.SharpenedWith;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem.DespairMist;
@@ -71,28 +74,15 @@ import slimeknights.tconstruct.library.modifiers.util.StaticModifier;
 
 
 public final class DreamtinkerModifiers extends DreamtinkerModule {
-    @SuppressWarnings({"removal"})
-    public DreamtinkerModifiers() {
-        MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        if (ModList.get().isLoaded("enigmaticlegacy")){
-            EL_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        }
-        if (ModList.get().isLoaded("malum")){
-            MALUM_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        }
-        if (ModList.get().isLoaded("eidolon")){
-            EIDOLON_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        }
-        if (ModList.get().isLoaded("born_in_chaos_v1")){
-            BIC_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        }
-    }
+    public static ModifierDeferredRegister OCC_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
 
     public static ModifierDeferredRegister MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     public static ModifierDeferredRegister EL_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     public static ModifierDeferredRegister MALUM_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     public static ModifierDeferredRegister EIDOLON_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     public static ModifierDeferredRegister BIC_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
+    public static final StaticModifier<OtherworldHarvest> occ_harvest =
+            OCC_MODIFIERS.register("occ_harvest", OtherworldHarvest::new);
     //Mashuo
     public static final StaticModifier<RealSweep> real_sweep = MODIFIERS.register("real_sweep", RealSweep::new);
     public static final StaticModifier<StrongHeavy> strong_heavy = MODIFIERS.register("strong_heavy", StrongHeavy::new);
@@ -241,6 +231,28 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             BIC_MODIFIERS.register("bic_dark_blade", DarkBlade::new);
     public static final StaticModifier<NightmareDefense> bic_nightmare_defense =
             BIC_MODIFIERS.register("bic_nightmare_defense", NightmareDefense::new);
+    public static final StaticModifier<OtherWorldView> occ_view =
+            OCC_MODIFIERS.register("occ_view", OtherWorldView::new);
+
+    @SuppressWarnings({"removal"})
+    public DreamtinkerModifiers() {
+        MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        if (ModList.get().isLoaded("enigmaticlegacy")){
+            EL_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        }
+        if (ModList.get().isLoaded("malum")){
+            MALUM_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        }
+        if (ModList.get().isLoaded("eidolon")){
+            EIDOLON_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        }
+        if (ModList.get().isLoaded("born_in_chaos_v1")){
+            BIC_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        }
+        if (ModList.get().isLoaded("occultism")){
+            OCC_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        }
+    }
 
 
     @SubscribeEvent
@@ -273,6 +285,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId ashen_soul = id("ashen_soul");
         public static final ModifierId naughty_chaos = id("naughty_chaos");
         public static final ModifierId cosmogony_tetrad = id("cosmogony_tetrad");
+        public static final ModifierId otherworld_precious = id("otherworld_precious");
 
         public static final ModifierId long_tool = id("long_tool");
         public static final ModifierId strong_explode = id("strong_explode");
@@ -371,7 +384,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId bic_nightmare_claw = id("bic_nightmare_claw");
         public static final ModifierId bic_infernal_ember = id("bic_infernal_ember");
         public static final ModifierId bic_hound_fang = id("bic_hound_fang");
-
 
         public static final ModifierId nova_spell_tiers = id("nova_spell_tiers");
         public static final ModifierId nova_creative_tiers = id("nova_creative_tiers");

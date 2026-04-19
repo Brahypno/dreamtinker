@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "dreamtinker:iesnium",
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_iesnium"
+  },
+  "temperature": 900
+}

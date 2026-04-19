@@ -57,6 +57,8 @@ public class DreamtinkerTagKeys {
             return TagKey.create(Registries.ITEM, new ResourceLocation(path));
         }
 
+        public static final TagKey<Item> IesniumIngot = forgeTag("ingots/iesnium");
+
         public static final TagKey<Item> dt_scythe = dreamtinkerTag("tools/scythe");
         public static final TagKey<Item> dt_hammer = dreamtinkerTag("tools/hammer");
         public static final TagKey<Item> raw_stibnite = forgeTag("raw_materials/stibnite");
@@ -77,6 +79,10 @@ public class DreamtinkerTagKeys {
         public static final TagKey<Item> CloggrumIngot = forgeTag("ingots/cloggrum");
         public static final TagKey<Item> FroststeelIngot = forgeTag("ingots/froststeel");
         public static final TagKey<Item> RegaliumIngot = forgeTag("ingots/regalium");
+
+        public static TagKey<Item> modTag(String modid, String path) {
+            return TagKey.create(Registries.ITEM, new ResourceLocation(modid, path));
+        }
 
         public static final TagKey<Item> arcaneGoldIngot = forgeTag("ingots/arcane_gold");
 

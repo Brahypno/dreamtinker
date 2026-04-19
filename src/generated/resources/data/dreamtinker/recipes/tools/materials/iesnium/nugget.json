@@ -1,0 +1,24 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "mantle:tag_filled",
+          "tag": "forge:nuggets/iesnium"
+        }
+      ]
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:nuggets/iesnium"
+  },
+  "material": "dreamtinker:iesnium",
+  "needed": 9,
+  "value": 1
+}

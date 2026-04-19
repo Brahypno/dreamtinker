@@ -79,6 +79,7 @@ public class DreamtinkerFluids {
             registerSlime(FLUIDS, "gooey_slime", 350, 100, 100, 15,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.WATER, 12), 10, 4) {});
 
+
     public static final FlowingFluidObject<ForgeFlowingFluid> molten_echo_shard =
             registerFluid(FLUIDS, "molten_echo_shard", 900, 200, 1000, 0,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_BLACK, 0), 0, 8) {
@@ -321,11 +322,15 @@ public class DreamtinkerFluids {
     public static final FlowingFluidObject<ForgeFlowingFluid> molten_regalium =
             registerFluid(FLUIDS, "molten_regalium", 1200, 100, 100, 10,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.METAL, 12), 10, 4) {});
+    public static final FlowingFluidObject<ForgeFlowingFluid> molten_iesnium =
+            registerFluid(FLUIDS, "molten_iesnium", 1200, 100, 100, 15,
+                          supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.METAL, 15), 10, 4) {});
 
     private static FlowingFluidObject<SlimeFluid> registerSlime(FluidDeferredRegister register, String name, int temp, int viscosity, int density, int lightLevel, Function<Supplier<? extends FlowingFluid>, LiquidBlock> blockFunction) {
         return register.register(name).tickRate(50).type(createFluidType(temp, lightLevel, viscosity, density)).block(blockFunction).bucket()
                        .flowing(SlimeFluid.Source::new, SlimeFluid.Flowing::new);
     }
+
 
     private static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         // containers

@@ -63,6 +63,8 @@ public class ItemTagProvider extends ItemTagsProvider {
         addItemsTags(DreamtinkerTools.silence_glove, DURABILITY, MELEE, BONUS_SLOTS, ANCIENT_TOOLS, STAFFS, SHIELDS, Items.HANDS, Items.CURIOS);
         addItemsTags(DreamtinkerTools.ritual_blade, MULTIPART_TOOL, DURABILITY, HARVEST, MELEE_PRIMARY, INTERACTABLE_RIGHT, SMALL_TOOLS, BONUS_SLOTS,
                      ItemTags.SWORDS);
+        this.tag(DreamtinkerTagKeys.Items.modTag("occultism", "tools/knives"))
+            .add(TinkerTools.cleaver.get());
 
         this.tag(Items.dt_scythe).add(TinkerTools.scythe.asItem(), TinkerTools.kama.asItem(), DreamtinkerTools.narcissus_wing.asItem());
         this.tag(ItemTagRegistry.SCYTHE).addTags(Items.dt_scythe);
