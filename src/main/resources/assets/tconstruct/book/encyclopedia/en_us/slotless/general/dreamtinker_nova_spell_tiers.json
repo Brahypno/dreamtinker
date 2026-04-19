@@ -1,0 +1,15 @@
+{
+  "modifier_id": "dreamtinker:nova_spell_tiers",
+  "text": [
+    {
+      "text": "On Per Aspera Scriptum Show current level of the Spell Book"
+    }
+  ],
+  "tools":  "dreamtinker:per_aspera_scriptum",
+  "more_text_space": true,
+  "effects": [
+    "Maximum of 2 levels",
+    "Only on Per Aspera Scriptum",
+    "Slotless"
+  ]
+}
