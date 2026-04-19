@@ -109,15 +109,11 @@ public class ItemTagProvider extends ItemTagsProvider {
                  persona_cast.get(),
                  reason_cast.get(), DreamtinkerToolParts.explode_core.get());
         //armor
-        addArmorTags(DreamtinkerTools.underPlate, MULTIPART_TOOL, DURABILITY, TinkerTags.Items.BONUS_SLOTS,
-                     TinkerTags.Items.TRIM);
-        tag(BASIC_ARMOR);
+        addArmorTags(DreamtinkerTools.underPlate, MULTIPART_TOOL, DURABILITY, TinkerTags.Items.BONUS_SLOTS, TinkerTags.Items.TRIM);
         IntrinsicTagAppender<Item> bookArmor = tag(PUNY_ARMOR);
         for (ArmorItem.Type slotType : ArmorItem.Type.values()) {
             bookArmor.add(DreamtinkerTools.underPlate.get(slotType));
         }
-        tag(BOOK_ARMOR).addTags(BASIC_ARMOR, PUNY_ARMOR, MIGHTY_ARMOR, FANTASTIC_ARMOR, GADGETRY_ARMOR);
-        //items
 
 
         this.tag(Tags.Items.INGOTS)
