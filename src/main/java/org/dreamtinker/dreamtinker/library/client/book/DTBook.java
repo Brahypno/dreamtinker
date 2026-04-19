@@ -1,13 +1,11 @@
 package org.dreamtinker.dreamtinker.library.client.book;
 
 import net.minecraft.resources.ResourceLocation;
-import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.Items.DTBookItem;
 import slimeknights.mantle.client.book.BookLoader;
 import slimeknights.mantle.client.book.data.BookData;
 import slimeknights.mantle.client.book.repository.FileRepository;
 import slimeknights.mantle.client.book.transformer.BookTransformer;
-import slimeknights.tconstruct.library.client.book.TinkerBook;
 import slimeknights.tconstruct.library.client.book.sectiontransformer.ModifierTagInjectorTransformer;
 import slimeknights.tconstruct.library.client.book.sectiontransformer.ToolTagInjectorTransformer;
 import slimeknights.tconstruct.library.client.book.sectiontransformer.materials.TierRangeMaterialSectionTransformer;
@@ -23,7 +21,7 @@ public class DTBook {
         HYPNAGOGIC_TRANSMUTE.addTransformer(ToolTagInjectorTransformer.INSTANCE);
         HYPNAGOGIC_TRANSMUTE.addTransformer(ModifierTagInjectorTransformer.INSTANCE);
         addStandardData(HYPNAGOGIC_TRANSMUTE, TRANSMUTE_BOOK_ID);
-        addStandardData(TinkerBook.PUNY_SMELTING, Dreamtinker.getLocation("puny_smelting"));
+        //addSpecialData(TinkerBook.PUNY_SMELTING, Dreamtinker.getLocation("puny_smelting"));
     }
 
     /**
@@ -57,5 +55,10 @@ public class DTBook {
 
         // padding needs to be last to ensure page counts are right
         book.addTransformer(BookTransformer.paddingTransformer());
+    }
+
+    private static void addSpecialData(BookData book, ResourceLocation id, BookTransformer... extraTransformers) {
+        book.addRepository(new FileRepository(new ResourceLocation(id.getNamespace(), "book/" + id.getPath())));
+
     }
 }
