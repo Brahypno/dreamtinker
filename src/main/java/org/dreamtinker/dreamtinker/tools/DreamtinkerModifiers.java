@@ -18,6 +18,8 @@ import org.dreamtinker.dreamtinker.DreamtinkerModule;
 import org.dreamtinker.dreamtinker.common.data.tags.ModifierTagProvider;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.MobEffectsRemoverModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.SelfMobEffectModule;
+import org.dreamtinker.dreamtinker.library.modifiers.modules.harvest.BlockLootMultiplierModule;
+import org.dreamtinker.dreamtinker.library.modifiers.modules.harvest.EntityLootMultiplierModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.weapon.SwappableCircleWeaponAttack;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerEnchantmentToModifierProvider;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerFluidEffectProvider;
@@ -50,7 +52,10 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.occ.OtherWorld
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.occ.OtherworldHarvest;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.*;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.common.*;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.harvest.*;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.harvest.ArrowHarvest;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.harvest.HoneyTastyModifier;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.harvest.LifeLooting;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.harvest.SilkyCrystal;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian.Isolde;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian.SharpenedWith;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem.DespairMist;
@@ -152,8 +157,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<HiddenHit> hiddenHit = MODIFIERS.register("hidden_hit", HiddenHit::new);
     public static final StaticModifier<knockArts> knockArts = MODIFIERS.register("knock_arts", knockArts::new);
     public static final StaticModifier<TheEnd> TheEnd = MODIFIERS.register("the_end", TheEnd::new);
-    public static final StaticModifier<BlockMultiplier> OreMultiplier =
-            MODIFIERS.register("ore_multiplier", () -> new BlockMultiplier(Tags.Blocks.ORES.location(), 0.4f, 3));
     public static final StaticModifier<knockBacker> SunAway = MODIFIERS.register("solar_away", knockBacker::new);
     public static final StaticModifier<DeathShredder> death_shredder = MODIFIERS.register("death_shredder", DeathShredder::new);
     public static final StaticModifier<SignalAxe> signal_axe = MODIFIERS.register("signal_axe", SignalAxe::new);
@@ -261,6 +264,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             ModifierModule.LOADER.register(Dreamtinker.getLocation("swappable_circle_weapon_attack"), SwappableCircleWeaponAttack.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("effects_remover"), MobEffectsRemoverModule.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("self_mob_effect"), SelfMobEffectModule.LOADER);
+            ModifierModule.LOADER.register(Dreamtinker.getLocation("block_loot_multiplier"), BlockLootMultiplierModule.LOADER);
+            ModifierModule.LOADER.register(Dreamtinker.getLocation("entity_loot_multiplier"), EntityLootMultiplierModule.LOADER);
         }
     }
 
@@ -326,6 +331,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId lunarRejection = id("lunar_rejection");
         public static final ModifierId slowness = id("ssss_slowness");
         public static final ModifierId soul_unchanged = id("soul_unchanged");
+        public static final ModifierId sun_changed = id("sun_changed");
         public static final ModifierId force_to_explosion = id("force_to_explosion");
         public static final ModifierId aggressiveFoxUsage = id("aggressive_fox_usage");
         public static final ModifierId five_creations = id("five_creations");

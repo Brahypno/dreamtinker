@@ -27,17 +27,21 @@ import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.FireBlock;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraftforge.common.ForgeMod;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraftforge.fluids.FluidType;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.MobEffectsRemoverModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.SelfMobEffectModule;
+import org.dreamtinker.dreamtinker.library.modifiers.modules.harvest.BlockLootMultiplierModule;
+import org.dreamtinker.dreamtinker.library.modifiers.modules.harvest.EntityLootMultiplierModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.weapon.SwappableCircleWeaponAttack;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.dreamtinker.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvider;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.data.predicate.IJsonPredicate;
+import slimeknights.mantle.data.predicate.block.BlockPredicate;
 import slimeknights.mantle.data.predicate.block.BlockPropertiesPredicate;
 import slimeknights.mantle.data.predicate.damage.DamageSourcePredicate;
 import slimeknights.mantle.data.predicate.damage.DamageTypePredicate;
@@ -284,7 +288,9 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(AttributeModule.builder(TinkerAttributes.PROTECTION_CAP, AttributeModifier.Operation.ADDITION)
                                           .tooltipStyle(AttributeModule.TooltipStyle.PERCENT).flat(0.05f));
         buildModifier(Ids.silver_name_bee)
-                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(EntityLootMultiplierModule.builder().chance(LevelingValue.flat(1)).build());
+
         buildModifier(Ids.the_romantic)
                 .addModule(StatBoostModule.add(ToolStats.ATTACK_SPEED).eachLevel(0.3f))
                 .addModule(StatBoostModule.add(ToolStats.ATTACK_DAMAGE).eachLevel(-0.2f));
@@ -338,6 +344,11 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.soul_unchanged)
                 .addModules(ModifierSlotModule.slot(SlotType.SOUL).eachLevel(1))
                 .addModule(new VolatileFlagModule(IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY));
+        buildModifier(Ids.sun_changed)
+                .addModule(BlockLootMultiplierModule.builder()
+                                                    .blocks(BlockPredicate.tag(Tags.Blocks.ORES)).items(ItemPredicate.tag(Tags.Items.ORES))
+                                                    .times(RandomLevelingValue.perLevel(0.5f, 0.5f))
+                                                    .chance(LevelingValue.flat(1)).build());
         buildModifier(Ids.force_to_explosion)
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
         buildModifier(Ids.aggressiveFoxUsage)

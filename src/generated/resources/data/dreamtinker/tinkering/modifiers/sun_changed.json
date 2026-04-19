@@ -1,0 +1,24 @@
+{
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "dreamtinker:block_loot_multiplier",
+      "blocks": {
+        "type": "mantle:tag",
+        "tag": "forge:ores"
+      },
+      "chance": {
+        "flat": 1.0
+      },
+      "items": {
+        "type": "mantle:tag",
+        "tag": "forge:ores"
+      },
+      "times": {
+        "flat": 0.5,
+        "per_level": 0.5
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

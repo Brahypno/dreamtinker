@@ -44,7 +44,7 @@ public class ouroboric_hourglass extends ArmorModifier {
                 final_amount = Base + (amount - Base) * slope;
             }else {
                 // 超过 X 倍：对数压制
-                final_amount = (Base * (float) Math.log(amount / Base / X));
+                final_amount = ((float) Math.log(amount / Base / X));
             }
             return final_amount;
         }

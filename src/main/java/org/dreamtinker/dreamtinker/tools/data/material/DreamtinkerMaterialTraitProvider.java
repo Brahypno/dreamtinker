@@ -86,7 +86,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.shadowSilver, hiddenHit, knockArts);
         addTraits(DreamtinkerMaterialIds.shadowSilver, ARMOR, knockArts);
 
-        addDefaultTraits(DreamtinkerMaterialIds.TransmutationGold, OreMultiplier.getId(), Ids.soul_unchanged);
+        addDefaultTraits(DreamtinkerMaterialIds.TransmutationGold, Ids.sun_changed, Ids.soul_unchanged);
         addTraits(DreamtinkerMaterialIds.TransmutationGold, RANGED, Ids.sun_shine, Ids.soul_unchanged);
         addTraits(DreamtinkerMaterialIds.TransmutationGold, ARMOR, SunAway.getId(), Ids.soul_unchanged);
 
