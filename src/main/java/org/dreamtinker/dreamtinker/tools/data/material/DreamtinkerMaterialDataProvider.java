@@ -49,6 +49,7 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.TransmutationGold, 3, 7, false, false, null);
         addMaterial(DreamtinkerMaterialIds.SpikyShard, 2, 5, true, false, null);
         addMaterial(DreamtinkerMaterialIds.FifthStone, 2, 15, true, false, null);
+        addMaterial(DreamtinkerMaterialIds.SpiralSpin, 3, 25, true, false, null);
 
         addMaterial(DreamtinkerMaterialIds.ArcaneGold, 2, ORDER_REPAIR, false, false, tagFilled(DreamtinkerTagKeys.Items.arcaneGoldIngot));
         addMaterial(DreamtinkerMaterialIds.Utherium, 4, 45, false, false, tagFilled(DreamtinkerTagKeys.Items.utheriumIngot));

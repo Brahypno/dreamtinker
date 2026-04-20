@@ -10,6 +10,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
+import org.dreamtinker.dreamtinker.Entity.NarcissusFluidProjectile;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.utils.DTDeathLoots;
 import org.jetbrains.annotations.NotNull;
@@ -77,7 +78,9 @@ public class TheWolfAnswer extends BattleModifier {
 
     @Override
     public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target, boolean notBlocked) {
-        if (null != target && !target.level().isClientSide){
+        ResourceLocation key = modifier.getId();
+        if (null != target && !target.level().isClientSide && !persistentData.getBoolean(key)){
+            persistentData.putBoolean(key, true);
             float multiplier = 1;
             if (persistentData.contains(AMMO_MULTIPLIER, Tag.TAG_ANY_NUMERIC)){
                 multiplier *= persistentData.getFloat(AMMO_MULTIPLIER);
@@ -88,8 +91,10 @@ public class TheWolfAnswer extends BattleModifier {
             int types = target.getActiveEffects().size();
             if (projectile instanceof AbstractArrow arrow){
                 arrow.setBaseDamage(arrow.getBaseDamage() * (1 + types * TheWolfWasDevoter.get().floatValue() * multiplier));
+            }else if (projectile instanceof NarcissusFluidProjectile withPower){
+                withPower.setPower(withPower.getPower() * (1 + types * TheWolfWasDevoter.get().floatValue() * multiplier));
             }else if (projectile instanceof ProjectileWithPower withPower){
-                withPower.setPower(withPower.getDamage() * (1 + types * TheWolfWasDevoter.get().floatValue() * multiplier));
+                withPower.setPower(withPower.getPower() * (1 + types * TheWolfWasDevoter.get().floatValue() * multiplier));
             }else
                 projectile.setDeltaMovement(projectile.getDeltaMovement().scale((1 + types * TheWolfWasDevoter.get())));
             target.invulnerableTime = 0;

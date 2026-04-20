@@ -197,7 +197,8 @@
     "sticky_string": "#645842",
     "over_sticky": "#645842",
     "occ_harvest": "#79A7AF",
-    "occ_view": "#79A7AF"
+    "occ_view": "#79A7AF",
+    "side_attack": "#444857"
 
 },
   "material.dreamtinker": {
@@ -272,7 +273,8 @@
     "froststeel": "#4E557C",
     "regalium": "#D8964A",
     "undergarden_gooey_slime": "#645842",
-    "iesnium": "#79A7AF"
+    "iesnium": "#79A7AF",
+    "spiral_spin": "#444857"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873",

@@ -789,6 +789,14 @@
   "modifier.dreamtinker.otherworld_precious": "异界珍宝",
   "modifier.dreamtinker.otherworld_precious.flavor": "觉醒",
   "modifier.dreamtinker.otherworld_precious.description": "来自异界的珍宝为你带来一份额外的灵魂槽",
+  "modifier.dreamtinker.side_attack": "飞旋舞步",
+  "modifier.dreamtinker.side_attack.flavor": "未曾预料的圆舞曲",
+  "modifier.dreamtinker.side_attack.description": "根据你和敌人间的角度增加伤害或弹射物力量",
+  "modifier.dreamtinker.side_attack.attack_damage": " 攻击力基于你和敌人间的角度",
+  "modifier.dreamtinker.side_attack.projectile_damage": " 弹射物力量基于你和敌人间的角度",
+  "modifier.dreamtinker.view_tracing": "追踪视界",
+  "modifier.dreamtinker.view_tracing.flavor": "马格努斯效应",
+  "modifier.dreamtinker.view_tracing.description": "发射的弹射物会追踪你看到的实体",
 
   "material.dreamtinker.echo_alloy": "回响合金",
   "material.dreamtinker.echo_alloy.flavor": "是神秘的回响，还是秘密的回响",
@@ -956,6 +964,9 @@
   "material.dreamtinker.undergarden_gooey_slime.flavor": " ",
   "material.dreamtinker.iesnium": "艾瑟金属",
   "material.dreamtinker.iesnium.flavor": " ",
+  "material.dreamtinker.spiral_spin": "螺旋",
+  "material.dreamtinker.spiral_spin.flavor": " ",
+  "material.dreamtinker.spiral_spin.encyclopedia": "人类种的第三魔法，旋转",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
@@ -1090,6 +1101,7 @@
   "item.dreamtinker.fox_fur": "狐毛团",
   "tooltip.dreamtinker.fox_fur_1": "仅在武装狐狸吃过东西后掉落",
   "item.dreamtinker.fifth_stone": "第五石",
+  "item.dreamtinker.spiral_spin": "螺旋",
 
   "block.dreamtinker.metallivorous_stibium_lupus_block": "狼锑块",
   "block.dreamtinker.crying_obsidian_pane": "哭泣的黑曜石板",

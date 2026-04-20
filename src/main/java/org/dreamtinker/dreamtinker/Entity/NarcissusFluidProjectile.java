@@ -409,6 +409,10 @@ public class NarcissusFluidProjectile extends Projectile {
         this.power = power;
     }
 
+    public float getPower() {
+        return this.power;
+    }
+
     protected @NotNull Component getTypeName() {
         return this.getFluid().getDisplayName();
     }

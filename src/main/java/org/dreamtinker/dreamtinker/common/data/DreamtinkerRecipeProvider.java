@@ -363,6 +363,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                 .setFluidAndTime(DreamtinkerFluids.molten_ascending_antimony, FluidValues.METAL_BLOCK)
                                 .setCast(TinkerWorld.enderGeode.getBlock(), true)
                                 .save(consumer, location(Casting_folder + "budding/end"));
+        ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.spiral_spin.get())
+                                .setFluidAndTime(TinkerFluids.moltenSteel, FluidValues.INGOT)
+                                .setCast(Items.NAUTILUS_SHELL, true)
+                                .save(consumer, location(Casting_folder + "spiral_spin"));
 
     }
 
@@ -2689,6 +2693,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
         materialRecipe(consumer, DreamtinkerMaterialIds.FifthStone, Ingredient.of(DreamtinkerCommon.fifth_stone.get()), 1, 1,
                        materials_folder + "fifth_stone");
+        materialRecipe(consumer, DreamtinkerMaterialIds.SpiralSpin, Ingredient.of(DreamtinkerCommon.spiral_spin.get()), 1, 1,
+                       materials_folder + "spiral_spin");
 
         standardMetalMaterial(consumer, DreamtinkerMaterialIds.Utherium, DreamtinkerFluids.molten_utherium, "utherium", materials_folder);
         standardMetalMaterial(consumer, DreamtinkerMaterialIds.forgotten_metal, DreamtinkerFluids.molten_forgotten_metal, "forgotten_metal", materials_folder);

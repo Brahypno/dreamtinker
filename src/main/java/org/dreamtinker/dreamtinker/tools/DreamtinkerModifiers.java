@@ -169,6 +169,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<SilkyCrystal> silky_crystal = MODIFIERS.register("silky_crystal", SilkyCrystal::new);
     public static final StaticModifier<ArrowHarvest> arrow_harvest = MODIFIERS.register("arrow_harvest", ArrowHarvest::new);
     public static final StaticModifier<OverSticky> over_sticky = MODIFIERS.register("over_sticky", OverSticky::new);
+    public static final StaticModifier<SideAttack> side_attack = MODIFIERS.register("side_attack", SideAttack::new);
+    public static final StaticModifier<ViewTracing> view_tracing = MODIFIERS.register("view_tracing", ViewTracing::new);
 
     //etherium
     public static final StaticModifier<ELAstralBreak> astral_break = EL_MODIFIERS.register("astral_break", ELAstralBreak::new);

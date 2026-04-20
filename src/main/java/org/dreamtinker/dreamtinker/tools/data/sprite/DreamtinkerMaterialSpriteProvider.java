@@ -416,6 +416,17 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFF93CBD0)
                                                 .addARGB(255, 0xFFD7F1F0)
                                                 .build());
+        this.buildMaterial(DreamtinkerMaterialIds.SpiralSpin)
+            .meleeHarvest().ranged().fletching()
+            .fallbacks("mental")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(63, 0xFF2B2E3A)
+                                                .addARGB(102, 0xFF444857)
+                                                .addARGB(140, 0xFF666A78)
+                                                .addARGB(178, 0xFF9294A0)
+                                                .addARGB(216, 0xFFC8C9CF)
+                                                .addARGB(255, 0xFFFFFFFF)
+                                                .build());
         addELMaterials();
         addMalumMaterials();
         addEidolonMaterials();

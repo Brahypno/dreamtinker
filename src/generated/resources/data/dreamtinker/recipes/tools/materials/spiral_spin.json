@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "dreamtinker:spiral_spin"
+  },
+  "material": "dreamtinker:spiral_spin",
+  "needed": 1,
+  "value": 1
+}

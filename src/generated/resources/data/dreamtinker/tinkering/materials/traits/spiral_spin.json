@@ -1,0 +1,42 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "tconstruct:pierce"
+    },
+    {
+      "level": 1,
+      "name": "dreamtinker:side_attack"
+    }
+  ],
+  "perStat": {
+    "tconstruct:ammo": [
+      {
+        "level": 1,
+        "name": "tconstruct:pierce"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:side_attack"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:view_tracing"
+      }
+    ],
+    "tconstruct:ranged": [
+      {
+        "level": 1,
+        "name": "tconstruct:pierce"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:side_attack"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:view_tracing"
+      }
+    ]
+  }
+}

@@ -97,6 +97,10 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.FifthStone, RANGED, Ids.four_warning);
         addTraits(DreamtinkerMaterialIds.FifthStone, AMMO, Ids.four_warning);
 
+        addDefaultTraits(DreamtinkerMaterialIds.SpiralSpin, ModifierIds.pierce, side_attack.getId());
+        addTraits(DreamtinkerMaterialIds.SpiralSpin, RANGED, ModifierIds.pierce, side_attack.getId(), view_tracing.getId());
+        addTraits(DreamtinkerMaterialIds.SpiralSpin, AMMO, ModifierIds.pierce, side_attack.getId(), view_tracing.getId());
+
         addDefaultTraits(DreamtinkerMaterialIds.ArcaneGold, Ids.arcane_hit);
         addTraits(DreamtinkerMaterialIds.ArcaneGold, ARMOR, TinkerModifiers.golden.getId(), ModifierIds.magicProtection, Ids.arcane_protection);
         addTraits(DreamtinkerMaterialIds.ArcaneGold, PlatingMaterialStats.SHIELD.getId(), ModifierIds.magicProtection, Ids.arcane_protection);
