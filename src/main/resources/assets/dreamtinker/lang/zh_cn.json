@@ -151,7 +151,7 @@
   "modifier.dreamtinker.tooltip.soul_blessing": "替罪羊冷却: ",
   "modifier.dreamtinker.exiles_faulty": "驱除错误",
   "modifier.dreamtinker.exiles_faulty.flavor": "透彻灵魂",
-  "modifier.dreamtinker.exiles_faulty.description": "击中时根据诅咒层数减少血量上限；并在击中时获得伤害吸收",
+  "modifier.dreamtinker.exiles_faulty.description": "击中时根据诅咒层数减少血量上限；并在击中时获得伤害吸收；同时修正第四诅咒，能够对敌人造成全额伤害",
   "modifier.dreamtinker.desolation_ring": "荒芜之戒",
   "modifier.dreamtinker.desolation_ring.flavor": "荒芜不失为一种选择",
   "modifier.dreamtinker.desolation_ring.description": "将荒芜之负会阻止生成的实体血量降低为1",

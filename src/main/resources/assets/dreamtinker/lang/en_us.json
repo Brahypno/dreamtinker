@@ -152,7 +152,7 @@
   "modifier.dreamtinker.tooltip.soul_blessing": "Scapegoat Falling Down: ",
   "modifier.dreamtinker.exiles_faulty": "Exiles Faulty",
   "modifier.dreamtinker.exiles_faulty.flavor": "Completely through Soul",
-  "modifier.dreamtinker.exiles_faulty.description": "When Hit, Reduce max HP according curse; And gain absorption",
+  "modifier.dreamtinker.exiles_faulty.description": "When Hit, Reduce max HP according curse; And gain absorption. Alteration to the fourth curse and able to deal full damage.",
   "modifier.dreamtinker.desolation_ring": "Desolation Ring",
   "modifier.dreamtinker.desolation_ring.flavor": "Desolation is a Choice",
   "modifier.dreamtinker.desolation_ring.description": "Set nearby entities health to 1 that matches original desolation ring",
