@@ -31,7 +31,8 @@ public class EntityTypeTagProvider extends EntityTypeTagsProvider {
             .addOptional(new ResourceLocation("betterendforge", "end_slime"))
             .addOptional(new ResourceLocation("stalwart_dungeons", "propulk"))
             .addOptional(new ResourceLocation("stalwart_dungeons", "shelterer"))
-            .addOptionalTag(DreamtinkerTagKeys.EntityTypes.common("farlanders", "endermen"));
+            .addOptionalTag(DreamtinkerTagKeys.EntityTypes.common("farlanders", "endermen"))
+            .addOptional(new ResourceLocation("hmag", "entities/ender_executor"));
         this.tag(DreamtinkerTagKeys.EntityTypes.CHAOS_ELITE)
             .addOptional(new ResourceLocation("born_in_chaos_v1", "fallen_chaos_knight"))
             .addOptional(new ResourceLocation("born_in_chaos_v1", "nightmare_stalker"))

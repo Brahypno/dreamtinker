@@ -40,6 +40,10 @@
     {
       "id": "#farlanders:endermen",
       "required": false
+    },
+    {
+      "id": "hmag:entities/ender_executor",
+      "required": false
     }
   ]
 }
