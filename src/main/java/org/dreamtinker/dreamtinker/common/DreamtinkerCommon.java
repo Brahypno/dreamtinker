@@ -26,10 +26,7 @@ import net.minecraftforge.registries.RegisterEvent;
 import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.DreamtinkerModule;
-import org.dreamtinker.dreamtinker.common.Items.DTBookItem;
-import org.dreamtinker.dreamtinker.common.Items.star_regulus;
-import org.dreamtinker.dreamtinker.common.Items.valentinite;
-import org.dreamtinker.dreamtinker.common.Items.void_pearl;
+import org.dreamtinker.dreamtinker.common.Items.*;
 import org.dreamtinker.dreamtinker.common.data.model.DreamTinkerBlockStateProvider;
 import org.dreamtinker.dreamtinker.common.data.model.DreamtinkerItemModelProvider;
 import org.dreamtinker.dreamtinker.common.data.render.RenderFluidProvider;
@@ -195,8 +192,8 @@ public class DreamtinkerCommon extends DreamtinkerModule {
 
     public static final RegistryObject<Item> fifth_stone =
             ITEMS.register("fifth_stone", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
-    public static final RegistryObject<Item> spiral_spin =
-            ITEMS.register("spiral_spin", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
+    public static final RegistryObject<IronBallItem> spiral_spin =
+            ITEMS.register("spiral_spin", () -> new IronBallItem(ITEM_PROPS.rarity(Rarity.COMMON)));
 
     public static final RegistryObject<DTBookItem> hypnagogic_transmute =
             ITEMS.register("hypnagogic_transmute", () -> new DTBookItem(UNSTACKABLE_PROPS, DTBookItem.BookType.HYPNAGOGIC_TRANSMUTE));

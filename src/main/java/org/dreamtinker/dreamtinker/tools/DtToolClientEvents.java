@@ -2,6 +2,7 @@ package org.dreamtinker.dreamtinker.tools;
 
 import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.renderer.entity.LightningBoltRenderer;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -70,6 +71,7 @@ public class DtToolClientEvents extends ClientEventBase {
         event.registerEntityRenderer(DreamtinkerModifiers.SLASH_ORBIT.get(), SlashOrbitRenderer::new);
         event.registerEntityRenderer(DreamtinkerModifiers.AggressiveFOX.get(), AggressiveFoxRender::new);
         event.registerEntityRenderer(DreamtinkerModifiers.LIGHTNING_ENTITY.get(), LightningBoltRenderer::new);
+        event.registerEntityRenderer(DreamtinkerModifiers.ThrownIronBall.get(), ThrownItemRenderer::new);
     }
 
     @SubscribeEvent

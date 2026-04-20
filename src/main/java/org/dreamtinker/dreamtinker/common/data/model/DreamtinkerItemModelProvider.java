@@ -110,7 +110,7 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
         generateItemModel(DreamtinkerCommon.deep_prismarine_shard, "materials");
         generateItemModel(AugmentTinker.INSTANCE.getRegistryName(), "");
         generateItemModel(DreamtinkerCommon.fifth_stone, "materials");
-        generateItemModel(DreamtinkerCommon.spiral_spin, "materials");
+        generateItemModel(DreamtinkerCommon.spiral_spin.getId(), "materials");
 
         booleanItem("red_fur", DreamtinkerCommon.fox_fur.getId(), getItemLocation("white_fur", ""), getItemLocation("red_fur", ""));
         //generateBlockItemModel(object);

@@ -27,6 +27,7 @@ import org.dreamtinker.dreamtinker.Entity.AggressiveFox;
 import org.dreamtinker.dreamtinker.Entity.NarcissusFluidProjectile;
 import org.dreamtinker.dreamtinker.Entity.SlashOrbitEntity;
 import org.dreamtinker.dreamtinker.Entity.WiserLightBolt;
+import org.dreamtinker.dreamtinker.common.Items.IronBallItem;
 import org.dreamtinker.dreamtinker.library.LootModifier.ExtraDropLootModifier;
 import org.dreamtinker.dreamtinker.library.client.particle.VibeBarParticleOptions;
 import org.dreamtinker.dreamtinker.library.client.particle.VibeBarParticleType;
@@ -102,6 +103,12 @@ public abstract class DreamtinkerModule {
                     EntityType.Builder.<AggressiveFox>of(AggressiveFox::new, MobCategory.CREATURE)
                                       .sized(0.6F, 0.7F) // 和原版狐狸一样
             );
+    public static final RegistryObject<EntityType<IronBallItem.ThrownIronBall>> ThrownIronBall =
+            ENTITIES.register("ironball",
+                              () -> EntityType.Builder.<IronBallItem.ThrownIronBall>of(IronBallItem.ThrownIronBall::new, MobCategory.MISC).sized(0.25F, 0.25F)
+                                                      .clientTrackingRange(4)
+                                                      .updateInterval(10));
+
     public static final RegistryObject<EntityType<WiserLightBolt>> LIGHTNING_ENTITY =
             ENTITIES.register("wiser_lightning", () ->
                     EntityType.Builder.<WiserLightBolt>of(WiserLightBolt::new, MobCategory.MISC)
