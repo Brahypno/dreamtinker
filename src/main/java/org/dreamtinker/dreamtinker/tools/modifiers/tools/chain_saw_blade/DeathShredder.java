@@ -389,7 +389,7 @@ public class DeathShredder extends BattleModifier implements KeybindInteractModi
             }
             Tier tier = tool.getStats().get(ToolStats.HARVEST_TIER);
             int idx = tiers.indexOf(tier);
-            context.getLivingTarget().invulnerableTime = Math.round((float) context.getLivingTarget().invulnerableTime / idx);
+            context.getLivingTarget().invulnerableTime -= 2 * (idx + 1);
         }
     }
 
