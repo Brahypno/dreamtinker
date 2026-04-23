@@ -1,0 +1,41 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "tinkers_thinking"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "tinkers_thinking"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "item": "tinkers_thinking:chromatic_crystal"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:rainbow_lights",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/melee/primary"
+  }
+}

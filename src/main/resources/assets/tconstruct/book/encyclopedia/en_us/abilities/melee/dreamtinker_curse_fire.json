@@ -14,7 +14,7 @@
     }
   ],
   "more_text_space": true,
-  "tool_filter": "tconstruct:modifiable/armor",
+  "tool_filter": "tconstruct:modifiable/melee",
   "effects": [
     "Requires 1 ability slot",
     "Maximum of 1 levels"

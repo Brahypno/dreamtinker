@@ -1378,6 +1378,13 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(2)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.last_kiss, soulSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.last_kiss, soulFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.born_with_me)
+                             .setTools(TinkerTags.Items.MELEE_PRIMARY)
+                             .addInput(Items.BLADE_POTTERY_SHERD, 1)
+                             .setSlots(SlotType.SOUL, 1)
+                             .setMaxLevel(3)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.born_with_me, soulSalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.born_with_me, soulFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.weapon_dreams_order)
                              .setTools(Ingredient.of(DreamtinkerTools.silence_glove.get()))
                              .addInput(Items.COMPASS, 2)
@@ -1895,6 +1902,27 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(SizedIngredient.of(ItemNameIngredient.from(new ResourceLocation(OCC, "awakened_feather")), 6))
                              .setMaxLevel(1)
                              .save(wrapped, prefix(DreamtinkerModifiers.Ids.otherworld_precious, slotlessFolder));
+
+        String tinkersThinking = "tinkers_thinking";
+        wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(tinkersThinking));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.rainbow_lights)
+                             .setTools(Ingredient.of(TinkerTags.Items.MELEE_PRIMARY))
+                             .addInput(ItemNameIngredient.from(new ResourceLocation(tinkersThinking, "chromatic_crystal")))
+                             .setSlots(SlotType.ABILITY, 1)
+                             .setMaxLevel(1)
+                             .saveSalvage(wrapped, wrap(DreamtinkerModifiers.rainbow_lights, abilitySalvage, tinkersThinking))
+                             .save(wrapped, wrap(DreamtinkerModifiers.rainbow_lights, abilityFolder, tinkersThinking));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.rainbow_lights)
+                             .setTools(Ingredient.of(TinkerTags.Items.MELEE_PRIMARY))
+                             .addInput(Items.RECOVERY_COMPASS)
+                             .addInput(Items.END_CRYSTAL)
+                             .addInput(Items.AXOLOTL_BUCKET)
+                             .addInput(Blocks.WAXED_OXIDIZED_CUT_COPPER)
+                             .addInput(DreamtinkerCommon.rainbow_honey_crystal.get())
+                             .setSlots(SlotType.ABILITY, 1)
+                             .setMaxLevel(1)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.rainbow_lights, abilitySalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.rainbow_lights, abilityFolder));
 
     }
 

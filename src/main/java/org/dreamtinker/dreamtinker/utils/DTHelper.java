@@ -381,4 +381,26 @@ public class DTHelper {
         return component.getContents() instanceof TranslatableContents translatable
                && targetKey.equals(translatable.getKey());
     }
+
+    public static double distanceToAABBSqr(AABB a, AABB b) {
+        double dx = 0.0D;
+        if (a.maxX < b.minX)
+            dx = b.minX - a.maxX;
+        else if (b.maxX < a.minX)
+            dx = a.minX - b.maxX;
+
+        double dy = 0.0D;
+        if (a.maxY < b.minY)
+            dy = b.minY - a.maxY;
+        else if (b.maxY < a.minY)
+            dy = a.minY - b.maxY;
+
+        double dz = 0.0D;
+        if (a.maxZ < b.minZ)
+            dz = b.minZ - a.maxZ;
+        else if (b.maxZ < a.minZ)
+            dz = a.minZ - b.maxZ;
+
+        return dx * dx + dy * dy + dz * dz;
+    }
 }

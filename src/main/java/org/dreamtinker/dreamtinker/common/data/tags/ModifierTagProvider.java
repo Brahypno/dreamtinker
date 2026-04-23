@@ -41,6 +41,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
         this.tag(DreamtinkerTagKeys.Modifiers.EL_CURSED_RELIEF)
             .addOptional(weapon_books.getId(), eldritch_pan.getId(), exiles_faulty.getId());
         this.tag(TinkerTags.Modifiers.MELEE_UPGRADES)
+            .add(born_with_me.getId())
             .addOptional(Ids.malum_haunted, Ids.malum_animated, Ids.bic_frostbitten, Ids.bic_intoxicating);
         this.tag(TinkerTags.Modifiers.RANGED_UPGRADES)
             .add(Ids.icy_memory, Ids.hate_memory, Ids.soul_core);
@@ -63,7 +64,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             .addOptional(occ_view.getId());
 
         this.tag(TinkerTags.Modifiers.MELEE_ABILITIES)
-            .add(Ids.continuous_explode, flaming_memory.getId(), Ids.curse_fire)
+            .add(Ids.continuous_explode, flaming_memory.getId(), Ids.curse_fire, rainbow_lights.getId())
             .addOptional(weapon_books.getId(), desolation_ring.getId(), eldritch_pan.getId(), nova_enchanter_sword.getId());
         this.tag(TinkerTags.Modifiers.RANGED_ABILITIES)
             .add(Ids.force_to_explosion, love_shooting.getId(), Ids.curse_fire)

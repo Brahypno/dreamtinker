@@ -1,0 +1,29 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "inputs": [
+    {
+      "item": "minecraft:recovery_compass"
+    },
+    {
+      "item": "minecraft:end_crystal"
+    },
+    {
+      "item": "minecraft:axolotl_bucket"
+    },
+    {
+      "item": "minecraft:waxed_oxidized_cut_copper"
+    },
+    {
+      "item": "dreamtinker:rainbow_honey_crystal"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:rainbow_lights",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/melee/primary"
+  }
+}

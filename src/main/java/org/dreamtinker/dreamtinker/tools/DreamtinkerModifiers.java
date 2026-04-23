@@ -171,28 +171,25 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<OverSticky> over_sticky = MODIFIERS.register("over_sticky", OverSticky::new);
     public static final StaticModifier<SideAttack> side_attack = MODIFIERS.register("side_attack", SideAttack::new);
     public static final StaticModifier<ViewTracing> view_tracing = MODIFIERS.register("view_tracing", ViewTracing::new);
+    public static final StaticModifier<BornWithMe> born_with_me = MODIFIERS.register("born_with_me", BornWithMe::new);
+    public static final StaticModifier<RainbowLights> rainbow_lights = MODIFIERS.register("rainbow_lights", RainbowLights::new);
+    public static final StaticModifier<AutoRefill> auto_refill = MODIFIERS.register("auto_refill", AutoRefill::new);
 
     //etherium
     public static final StaticModifier<ELAstralBreak> astral_break = EL_MODIFIERS.register("astral_break", ELAstralBreak::new);
     public static final StaticModifier<EtheriumProtection> etherium_protection = EL_MODIFIERS.register("etherium_protection", EtheriumProtection::new);
 
-    public static final StaticModifier<CursedRingBound> cursed_ring_bound =
-            EL_MODIFIERS.register("cursed_ring_bound", CursedRingBound::new);
+    public static final StaticModifier<CursedRingBound> cursed_ring_bound = EL_MODIFIERS.register("cursed_ring_bound", CursedRingBound::new);
     //evil
     public static final StaticModifier<EvilAttack> evil_attack = EL_MODIFIERS.register("evil_attack", EvilAttack::new);
-    public static final StaticModifier<ELEnderSlayer> ender_slayer =
-            EL_MODIFIERS.register("ender_slayer", ELEnderSlayer::new);
-    public static final StaticModifier<WeaponBooks> weapon_books =
-            EL_MODIFIERS.register("weapon_books", WeaponBooks::new);
-    public static final StaticModifier<EldritchPan> eldritch_pan =
-            EL_MODIFIERS.register("eldritch_pan", EldritchPan::new);
+    public static final StaticModifier<ELEnderSlayer> ender_slayer = EL_MODIFIERS.register("ender_slayer", ELEnderSlayer::new);
+    public static final StaticModifier<WeaponBooks> weapon_books = EL_MODIFIERS.register("weapon_books", WeaponBooks::new);
+    public static final StaticModifier<EldritchPan> eldritch_pan = EL_MODIFIERS.register("eldritch_pan", EldritchPan::new);
     public static final StaticModifier<ExilesFaulty> exiles_faulty = EL_MODIFIERS.register("exiles_faulty", ExilesFaulty::new);
-    public static final StaticModifier<DesolationRing> desolation_ring =
-            EL_MODIFIERS.register("desolation_ring", DesolationRing::new);
+    public static final StaticModifier<DesolationRing> desolation_ring = EL_MODIFIERS.register("desolation_ring", DesolationRing::new);
 
     //Malum modifiers
-    public static final StaticModifier<MalumBase> malum_base =
-            MALUM_MODIFIERS.register("malum_base", MalumBase::new);
+    public static final StaticModifier<MalumBase> malum_base = MALUM_MODIFIERS.register("malum_base", MalumBase::new);
     public static final StaticModifier<malum_attributes> malum_spirit_attributes =
             MALUM_MODIFIERS.register("malum_spirit_attributes", () -> new malum_attributes(1));
     public static final StaticModifier<malum_attributes> malum_soul_attributes =

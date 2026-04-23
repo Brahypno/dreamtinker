@@ -105,7 +105,7 @@ public class SideAttack extends BattleModifier {
         if (ToolStats.ATTACK_DAMAGE.supports(tool.getItem())){
             tooltip.add(
                     this.applyStyle(
-                                Component.literal(Util.PERCENT_BOOST_FORMAT.format(0) + "--" +
+                                Component.literal(Util.PERCENT_BOOST_FORMAT.format(0) + " -- " +
                                                   Util.PERCENT_BOOST_FORMAT.format(Math.nextUp(
                                                           (1.4f + (modifier.getEffectiveLevel() - 1) * 0.4f) * tool.getMultiplier(ToolStats.ATTACK_DAMAGE)))))
                         .append(statName));
@@ -115,7 +115,7 @@ public class SideAttack extends BattleModifier {
         if (ToolStats.PROJECTILE_DAMAGE.supports(tool.getItem()))
             tooltip.add(
                     this.applyStyle(
-                            Component.literal(Util.PERCENT_BOOST_FORMAT.format(0) + "--" +
+                            Component.literal(Util.PERCENT_BOOST_FORMAT.format(0) + " -- " +
                                               Util.PERCENT_BOOST_FORMAT.format((1.4f + (modifier.getEffectiveLevel() - 1) * 0.4f))).append(statName)));
     }
 

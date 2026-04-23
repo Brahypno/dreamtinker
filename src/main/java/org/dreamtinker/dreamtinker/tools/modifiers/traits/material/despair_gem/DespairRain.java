@@ -24,7 +24,7 @@ public class DespairRain extends BattleModifier {
 
     @Override
     public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
-        return damage * (context.isCritical() ? 1 : 1.0f / modifier.getLevel());
+        return damage * (context.isCritical() ? modifier.getLevel() + 1 : 1.0f / modifier.getLevel());
     }
 
     @Override

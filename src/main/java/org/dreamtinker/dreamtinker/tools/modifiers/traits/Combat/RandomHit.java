@@ -55,7 +55,7 @@ public class RandomHit extends BattleModifier {
         if (ToolStats.ATTACK_DAMAGE.supports(tool.getItem())){
             tooltip.add(
                     this.applyStyle(
-                            Component.literal(Util.PERCENT_BOOST_FORMAT.format(lower * (1.1f - modifier.getLevel() * 0.1f)) + "--" +
+                            Component.literal(Util.PERCENT_BOOST_FORMAT.format(lower * (1.1f - modifier.getLevel() * 0.1f)) + " -- " +
                                               Util.PERCENT_BOOST_FORMAT.format(Math.nextUp((higher * (modifier.getLevel() + 1)) / 2))).append(statName)));
         }
 
@@ -63,7 +63,7 @@ public class RandomHit extends BattleModifier {
         if (ToolStats.VELOCITY.supports(tool.getItem()))
             tooltip.add(
                     this.applyStyle(
-                            Component.literal(Util.PERCENT_BOOST_FORMAT.format(lower * (1.1f - modifier.getLevel() * 0.1f)) + "--" +
+                            Component.literal(Util.PERCENT_BOOST_FORMAT.format(lower * (1.1f - modifier.getLevel() * 0.1f)) + " -- " +
                                               Util.PERCENT_BOOST_FORMAT.format(Math.nextUp((higher * (modifier.getLevel() + 1)) / 2))).append(statName)));
     }
 

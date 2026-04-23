@@ -13,6 +13,7 @@ import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -33,20 +34,25 @@ public class RealSweep extends BattleModifier {
             AttributeInstance reach = player.getAttribute(ForgeMod.ENTITY_REACH.get());
             double range = null != reach ? Math.min(realSweepRange.get(), reach.getValue()) : 1;
             if (range > 0){
-                double rangeSq = range * range;
-                for (LivingEntity aoeTarget : level.getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(range, 0.25D, range))) {
-                    if (aoeTarget != player && !player.isAlliedTo(aoeTarget) && !(aoeTarget instanceof ArmorStand stand && stand.isMarker()) &&
-                        player.distanceToSqr(aoeTarget) < rangeSq && aoeTarget != entity && entity != player.getRootVehicle()){
-                        ToolAttackUtil.performAttack(tool, ToolAttackContext.attacker(player).target(aoeTarget).cooldown(1).applyAttributes().build());
-                    }
-                }
-                level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, player.getSoundSource(), 1.0F, 1.0F);
-                //sweepArcRightToLeft((ServerLevel) level, player, range - 3, range, 360.0, 2000);
                 SlashOrbitEntity e = new SlashOrbitEntity((ServerLevel) level, player, 6, 15, 0.35f, 6, 0, 4);
                 e.setSolidColor(0xFF000000)
                  .setHueShift(0.02f);
                 level.addFreshEntity(e);
-
+                AABB playerBox = player.getBoundingBox();
+                AABB searchBox = playerBox.inflate(range, 0.75D, range);
+                Entity rootVehicle = player.getRootVehicle();
+                for (LivingEntity aoeTarget : level.getEntitiesOfClass(LivingEntity.class, searchBox,
+                                                                       aoeTarget -> aoeTarget != player
+                                                                                    && aoeTarget != rootVehicle
+                                                                                    && !aoeTarget.isDeadOrDying()
+                                                                                    && !player.isAlliedTo(aoeTarget)
+                                                                                    && (!(aoeTarget instanceof ArmorStand stand) || !stand.isMarker())
+                )) {
+                    if (aoeTarget.isAlive() && !aoeTarget.isRemoved())
+                        ToolAttackUtil.performAttack(tool, ToolAttackContext.attacker(player).target(aoeTarget).cooldown(1).applyAttributes().build());
+                }
+                level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, player.getSoundSource(), 1.0F, 1.0F);
+                //sweepArcRightToLeft((ServerLevel) level, player, range - 3, range, 360.0, 2000);
             }
         }
     }
