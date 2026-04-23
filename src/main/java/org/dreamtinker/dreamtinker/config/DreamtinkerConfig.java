@@ -142,7 +142,7 @@ public class DreamtinkerConfig {
             builder.comment("HP boost from BrokenBessel").defineInRange("BrokenVesselBoost", 1, 0, 1000);
     public static final ForgeConfigSpec.DoubleValue OuroboricHourglassMultiply =
             builder.comment("increase damage reducer from OuroboricHourglass").defineInRange("OuroboricHourglassMultiply", 10.0, 0, 1000);
-    
+
     public static final ForgeConfigSpec.BooleanValue RedShadeEnable =
             builder.comment("Change to false if you think the red shade hurt your eyes, then Dark one would be instead").define("RedShadeEnable", true);
 
@@ -260,9 +260,6 @@ public class DreamtinkerConfig {
             builder.comment("Soul Ward status from Spirit defence").defineInRange("SpiritDefence", 3.0, 1, 100);
 
     static {builder.comment("\nAmber: ");}
-
-    public static final ForgeConfigSpec.DoubleValue FragileDodge =
-            builder.comment("Doge rate provided by Fragile But Bright per level").defineInRange("FragileDodge", 0.03, 0, 100);
 
     public static final ForgeConfigSpec.IntValue homunculusLifeCurseMaxEffectLevel =
             builder.comment("Max level for homunculus Life Curse Be effective. Affective Level is sum of all equipment slots")

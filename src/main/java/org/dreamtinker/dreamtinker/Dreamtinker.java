@@ -33,6 +33,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Entity.AggressiveFox;
+import org.dreamtinker.dreamtinker.common.DreamtinkerAttributes;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
 import org.dreamtinker.dreamtinker.common.DreamtinkerSounds;
@@ -83,6 +84,7 @@ public class Dreamtinker {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, DreamtinkerConfig.specs, "DreamTinkerConfig.toml");
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
+        modEventBus.register(new DreamtinkerAttributes());
         modEventBus.register(new DreamtinkerFluids());
         modEventBus.register(new DreamtinkerEffects());
         modEventBus.register(new DreamtinkerToolParts());

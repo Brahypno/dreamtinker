@@ -12,6 +12,21 @@
       "each_level": -1.0,
       "operation": "add",
       "stat": "tconstruct:armor_toughness"
+    },
+    {
+      "type": "tconstruct:attribute",
+      "attribute": "dreamtinker:generic.fate_veil",
+      "each_level": 0.03,
+      "operation": "addition",
+      "slots": [
+        "mainhand",
+        "offhand",
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ],
+      "tooltip_style": "percent"
     }
   ],
   "tooltip_display": "always"

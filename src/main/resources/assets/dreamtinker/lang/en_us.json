@@ -331,7 +331,7 @@
   "modifier.dreamtinker.as_sand.description": "When hit target, increase durability lose of target Armors",
   "modifier.dreamtinker.fragile_but_bright": "Fragile But Bright",
   "modifier.dreamtinker.fragile_but_bright.flavor": "unusual",
-  "modifier.dreamtinker.fragile_but_bright.description": "Decrease Armor and Toughness per level, but gain chance to dodge damage",
+  "modifier.dreamtinker.fragile_but_bright.description": "Decrease Armor and Toughness per level, but gain 3% chance to dodge damage per level",
   "modifier.dreamtinker.homunculus_life_curse": "Homunculus Curse",
   "modifier.dreamtinker.homunculus_life_curse.flavor": "To Living Mortals",
   "modifier.dreamtinker.homunculus_life_curse.description": "When lost health larger than 1/(total modifier level+1), increase damage dealt; otherwise decrease damage; The lower HP, higher damage; Max effective 4 levels, configurable",
@@ -1532,5 +1532,7 @@
   "block.dreamtinker.ashen_melt_switch.tooltip": "Right click to change melting method. Only one allowed per structure\nPart of the Transmute",
   "message.dreamtinker.ashen_melt_switch.mode_0": "Transmute melting mode changed to: Transmute.",
   "message.dreamtinker.ashen_melt_switch.mode_1": "Transmute melting mode changed to: Smeltery.",
-  "message.dreamtinker.ashen_melt_switch.mode_2": "Transmute melting mode changed to: Foundry."
+  "message.dreamtinker.ashen_melt_switch.mode_2": "Transmute melting mode changed to: Foundry.",
+
+  "attribute.name.dreamtinker.generic.fate_veil": "Fate Veil"
 }

@@ -30,7 +30,8 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 import static net.minecraft.tags.DamageTypeTags.BYPASSES_ENCHANTMENTS;
 import static net.minecraft.tags.DamageTypeTags.IS_PROJECTILE;
-import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.*;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.FirthMark;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.homunculusLifeCurseMaxEffectLevel;
 import static org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.WeaponTransformation.valueExpSoftCap;
 import static org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.knockArts.TAG_KNOCK;
 
@@ -57,14 +58,6 @@ public class GeneralHurtHandler {
         RandomSource rds = world.random;
         Entity direct = dmg.getDirectEntity();
         ModifierNBT modifiers = direct instanceof Projectile ? EntityModifierCapability.getOrEmpty(direct) : null;
-
-        //CANCEL DAMAGE--need victim but not offender
-        int fragileButBright = DTModifierCheck.getEntityModifierNum(victim, DreamtinkerModifiers.Ids.FragileButBright);
-        if (0 < fragileButBright && rds.nextFloat() < FragileDodge.get() * fragileButBright){
-            event.setAmount(0);
-            event.setCanceled(true);
-            return;
-        }
 
         if (null == dmgEntity){
             if (DTModifierCheck.ModifierInBody(victim, DreamtinkerModifiers.Ids.requiem)){

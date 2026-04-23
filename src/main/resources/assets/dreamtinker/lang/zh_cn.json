@@ -331,7 +331,7 @@
   "modifier.dreamtinker.as_sand.description": "当击中目标时，额外消耗对方全身的耐久",
   "modifier.dreamtinker.fragile_but_bright": "脆弱但明亮",
   "modifier.dreamtinker.fragile_but_bright.flavor": "不寻常",
-  "modifier.dreamtinker.fragile_but_bright.description": "每等级减少护甲和韧性，但获得一定的闪避率",
+  "modifier.dreamtinker.fragile_but_bright.description": "每等级减少护甲和韧性，但获得每等级3%命运的眷顾，能够闪避伤害，",
   "modifier.dreamtinker.homunculus_life_curse": "瓶中人之咒",
   "modifier.dreamtinker.homunculus_life_curse.flavor": "为何其他有终者尚未结束",
   "modifier.dreamtinker.homunculus_life_curse.description": "生命越低造成的伤害越多。当已失去生命比例大于强化等级+1分之一时伤害增加。最多生效4级，可配置。",
@@ -1528,5 +1528,7 @@
   "block.dreamtinker.ashen_melt_switch.tooltip": "右键点击切换熔炼模式。 每结构只容许一个\n搭建嬗变炉的建材",
   "message.dreamtinker.ashen_melt_switch.mode_0": "嬗变炉熔炼功能：嬗变炉（默认）",
   "message.dreamtinker.ashen_melt_switch.mode_1": "嬗变炉熔炼功能：冶炼炉",
-  "message.dreamtinker.ashen_melt_switch.mode_2": "嬗变炉熔炼功能：熔铸炉"
+  "message.dreamtinker.ashen_melt_switch.mode_2": "嬗变炉熔炼功能：熔铸炉",
+
+  "attribute.name.dreamtinker.generic.fate_veil": "命运面纱"
 }
