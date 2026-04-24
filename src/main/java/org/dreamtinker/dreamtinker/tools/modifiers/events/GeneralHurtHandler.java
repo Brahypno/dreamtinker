@@ -4,7 +4,6 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -59,28 +58,7 @@ public class GeneralHurtHandler {
         Entity direct = dmg.getDirectEntity();
         ModifierNBT modifiers = direct instanceof Projectile ? EntityModifierCapability.getOrEmpty(direct) : null;
 
-        if (null == dmgEntity){
-            if (DTModifierCheck.ModifierInBody(victim, DreamtinkerModifiers.Ids.requiem)){
-                event.setAmount(0);
-                event.setCanceled(true);
-                return;
-            }
-        }
-
         if (dmgEntity instanceof LivingEntity offender){
-            int requiem = DTModifierCheck.getEntityBodyModifierNum(offender, DreamtinkerModifiers.Ids.requiem);
-            if (0 < requiem){
-                float reduced = victim.getActiveEffects().stream()
-                                      .filter(e -> e.getEffect().getCategory() == MobEffectCategory.HARMFUL).count() * requiem;
-                reduced = event.getAmount() - reduced;
-                if (reduced <= 0){
-                    event.setAmount(0);
-                    event.setCanceled(true);
-                    return;
-                }else
-                    event.setAmount(reduced);
-            }
-
             if (direct instanceof Projectile || dmg.is(IS_PROJECTILE)){
                 ItemStack leg = offender.getItemBySlot(EquipmentSlot.LEGS);
                 if (leg.is(TinkerTags.Items.LEGGINGS)){
