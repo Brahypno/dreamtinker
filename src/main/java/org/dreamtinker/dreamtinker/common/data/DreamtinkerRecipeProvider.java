@@ -367,6 +367,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                 .setFluidAndTime(TinkerFluids.moltenSteel, FluidValues.INGOT)
                                 .setCast(Items.NAUTILUS_SHELL, true)
                                 .save(consumer, location(Casting_folder + "spiral_spin"));
+        ItemCastingRecipeBuilder.tableRecipe(Items.MOURNER_POTTERY_SHERD)
+                                .setFluidAndTime(DreamtinkerFluids.liquid_trist, FluidValues.INGOT)
+                                .setCast(DreamtinkerTagKeys.Items.modTag("decorated_pot_sherds"), true)
+                                .save(consumer, location(Casting_folder + "mourner_pottery"));
 
     }
 

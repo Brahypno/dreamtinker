@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "minecraft:decorated_pot_sherds"
+  },
+  "cast_consumed": true,
+  "cooling_time": 38,
+  "fluid": {
+    "amount": 90,
+    "tag": "dreamtinker:liquid_trist"
+  },
+  "result": "minecraft:mourner_pottery_sherd"
+}
