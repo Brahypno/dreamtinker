@@ -272,11 +272,12 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.peaches_in_memory)
                 .addModule(AttributeModule.builder(TinkerAttributes.BAD_EFFECT_DURATION, AttributeModifier.Operation.MULTIPLY_TOTAL).amount(0.1f, 0.1f))
                 .addModule(AttributeModule.builder(TinkerAttributes.EXPERIENCE_MULTIPLIER, AttributeModifier.Operation.MULTIPLY_TOTAL).amount(0.1f, 0.1f))
-                .addModule(ReduceToolDamageModule.builder().maxLevel(5).formula()
-                                                 .constant(0.025f).variable(LEVEL).multiply() // 0.025 * level
-                                                 .constant(13).variable(LEVEL).subtract()     // 13 - level
+                .addModule(ReduceToolDamageModule.builder().maxLevel(2).reinforcedTooltip().formula()
+                                                 .variable(LEVEL).constant(1).subtract()
+                                                 .constant(0.5283f).multiply()
+                                                 .constant(0.413f).add()
                                                  .variable(MULTIPLIER).multiply()
-                                                 .multiply().build());
+                                                 .build());
         buildModifier(Ids.weapon_slots)
                 .priority(1500)
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)

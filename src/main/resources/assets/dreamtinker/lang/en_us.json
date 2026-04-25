@@ -367,6 +367,7 @@
   "modifier.dreamtinker.peaches_in_memory": "Peaches in Memory",
   "modifier.dreamtinker.peaches_in_memory.flavor": "embody life's delights and pleasures, but are equally fragile and short-lived",
   "modifier.dreamtinker.peaches_in_memory.description": "Increase experience gain and Bad Potion Time, decrease tool damage taken",
+  "modifier.dreamtinker.peaches_in_memory.reinforced": "Ephemeral as dew, yet unworn by time",
   "modifier.dreamtinker.weapon_slots": "Weapon Slots",
   "modifier.dreamtinker.weapon_slots.flavor": "Portable weapon toolkits",
   "modifier.dreamtinker.weapon_slots.description": "have a small inventory for modifiable tools；Use Interactive key to open",

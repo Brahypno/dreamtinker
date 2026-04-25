@@ -34,19 +34,20 @@
     {
       "type": "tconstruct:reduce_tool_damage",
       "formula": [
-        0.025,
         "$level",
-        "*",
-        13.0,
-        "$level",
+        1.0,
         "-",
-        "$multiplier",
+        0.5283,
         "*",
+        0.413,
+        "+",
+        "$multiplier",
         "*"
       ],
       "modifier_level": {
-        "max": 5
-      }
+        "max": 2
+      },
+      "reinforced_tooltip": true
     }
   ],
   "tooltip_display": "always"

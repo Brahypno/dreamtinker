@@ -367,6 +367,7 @@
   "modifier.dreamtinker.peaches_in_memory": "记忆中的你",
   "modifier.dreamtinker.peaches_in_memory.flavor": "汇聚了生命的喜悦与甜美，也同样脆弱易逝",
   "modifier.dreamtinker.peaches_in_memory.description": "增加阅历和负面效果持续；减少耐久消耗",
+  "modifier.dreamtinker.peaches_in_memory.reinforced": "如露水般短暂，然而不会磨损",
   "modifier.dreamtinker.weapon_slots": "工具槽位",
   "modifier.dreamtinker.weapon_slots.flavor": "便携工具组",
   "modifier.dreamtinker.weapon_slots.description": "具有一个只能装匠魂工具的小容器；使用对应交互键以打开",
