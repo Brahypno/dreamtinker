@@ -24,35 +24,31 @@
           "grey": 0
         },
         {
-          "color": "FF2B0000",
+          "color": "FF2A0204",
           "grey": 25
         },
         {
           "grey": 26,
-          "path": "dreamtinker:material/star_regulus"
+          "path": "dreamtinker:generator/star_regulus"
         },
         {
           "grey": 63,
-          "path": "dreamtinker:material/star_regulus"
+          "path": "dreamtinker:generator/star_regulus"
         },
         {
-          "color": "FF6F0000",
-          "grey": 102
-        },
-        {
-          "color": "FFD10000",
+          "color": "FF3A0105",
           "grey": 140
         },
         {
-          "color": "FFFF1A1A",
+          "color": "FFA30B13",
           "grey": 178
         },
         {
-          "color": "FFFF8080",
+          "color": "FFFF3442",
           "grey": 216
         },
         {
-          "color": "FFFFE6E6",
+          "color": "FFFFD8DD",
           "grey": 255
         }
       ]
