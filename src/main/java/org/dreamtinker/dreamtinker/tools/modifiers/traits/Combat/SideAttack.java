@@ -12,7 +12,6 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import org.dreamtinker.dreamtinker.Entity.NarcissusFluidProjectile;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
@@ -90,8 +89,6 @@ public class SideAttack extends BattleModifier {
 
             if (projectile instanceof AbstractArrow arrow){
                 arrow.setBaseDamage(arrow.getBaseDamage() * (1 + multi));
-            }else if (projectile instanceof NarcissusFluidProjectile withPower){
-                withPower.setPower(withPower.getPower() * (1 + multi));
             }else if (projectile instanceof ProjectileWithPower withPower){
                 withPower.setPower(withPower.getPower() * (1 + multi));
             }

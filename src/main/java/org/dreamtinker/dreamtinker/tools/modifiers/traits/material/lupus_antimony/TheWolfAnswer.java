@@ -10,7 +10,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
-import org.dreamtinker.dreamtinker.Entity.NarcissusFluidProjectile;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.utils.DTDeathLoots;
 import org.jetbrains.annotations.NotNull;
@@ -91,8 +90,6 @@ public class TheWolfAnswer extends BattleModifier {
             int types = target.getActiveEffects().size();
             if (projectile instanceof AbstractArrow arrow){
                 arrow.setBaseDamage(arrow.getBaseDamage() * (1 + types * TheWolfWasDevoter.get().floatValue() * multiplier));
-            }else if (projectile instanceof NarcissusFluidProjectile withPower){
-                withPower.setPower(withPower.getPower() * (1 + types * TheWolfWasDevoter.get().floatValue() * multiplier));
             }else if (projectile instanceof ProjectileWithPower withPower){
                 withPower.setPower(withPower.getPower() * (1 + types * TheWolfWasDevoter.get().floatValue() * multiplier));
             }else

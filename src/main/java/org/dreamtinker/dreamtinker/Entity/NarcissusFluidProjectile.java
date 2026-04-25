@@ -35,6 +35,7 @@ import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.MemoryBa
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.TinkerDamageTypes;
 import slimeknights.tconstruct.fluids.TinkerFluids;
+import slimeknights.tconstruct.library.modifiers.entity.ProjectileWithPower;
 import slimeknights.tconstruct.library.modifiers.fluid.FluidEffectContext;
 import slimeknights.tconstruct.library.modifiers.fluid.FluidEffectManager;
 import slimeknights.tconstruct.library.modifiers.fluid.FluidEffects;
@@ -45,7 +46,7 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import java.util.Comparator;
 import java.util.List;
 
-public class NarcissusFluidProjectile extends Projectile {
+public class NarcissusFluidProjectile extends Projectile implements ProjectileWithPower {
     private IToolStackView toolStackView;
     private static final EntityDataAccessor<FluidStack> FLUID;
     private static final EntityDataAccessor<Integer> CHASE_LIVING;
@@ -261,8 +262,7 @@ public class NarcissusFluidProjectile extends Projectile {
     @Override
     protected void onHitEntity(@NotNull EntityHitResult result) {
         Entity target = result.getEntity();
-        float f = (float) this.getDeltaMovement().length();
-        int dmg = Mth.ceil(Mth.clamp((double) f * this.power, 0.0F, Integer.MAX_VALUE));
+        int dmg = (int) this.getDamage();
 
         if (this.isCritArrow()){
             long j = this.random.nextInt(dmg / 2 + 2);
@@ -405,12 +405,19 @@ public class NarcissusFluidProjectile extends Projectile {
         this.entityData.set(FLUID, fluid);
     }
 
+    @Override
+    public float getPower() {
+        return this.power;
+    }
+
+    @Override
     public void setPower(float power) {
         this.power = power;
     }
 
-    public float getPower() {
-        return this.power;
+    @Override
+    public float getDamage() {
+        return Mth.ceil(Mth.clamp(this.getDeltaMovement().length() * this.power, 0.0F, Integer.MAX_VALUE));
     }
 
     protected @NotNull Component getTypeName() {
