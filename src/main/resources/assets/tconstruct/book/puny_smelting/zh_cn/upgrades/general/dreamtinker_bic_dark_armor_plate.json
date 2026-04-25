@@ -1,0 +1,17 @@
+{
+  "modifier_id": "dreamtinker:bic_dark_armor_plate",
+  "text": [
+    {
+      "text": "工具耐久度+30%，攻击力+25%，攻击速度-10%,挖掘速度-25%，初速度+10%；盔甲击退抗性+5%，盔甲韧性+2。"
+    },
+    {
+      "text": "工具和盔甲只会获得适用于自身的数值加成。",
+      "paragraph": true
+    }
+  ],
+  "more_text_space": true,
+  "effects": [
+    "最高1级",
+    "需要1个升级槽"
+  ]
+}

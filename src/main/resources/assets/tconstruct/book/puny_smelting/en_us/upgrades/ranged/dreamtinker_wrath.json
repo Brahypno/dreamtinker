@@ -1,0 +1,15 @@
+{
+  "modifier_id": "dreamtinker:wrath",
+  "text": [
+    {
+      "text": "+1.25 projectile damage and attack damage per level; Can also applied on Javalin"
+    }
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable/ammo/thrown",
+  "effects": [
+    "Maximum of 4 levels",
+    "Requires 1 upgrade slot per level",
+    "Wrath exclude with Torrent"
+  ]
+}

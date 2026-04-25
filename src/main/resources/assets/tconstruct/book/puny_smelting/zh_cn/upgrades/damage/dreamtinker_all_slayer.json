@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:all_slayer",
+  "text": [
+    {
+      "text": "对活物增加伤害，每级1.5"
+    }
+  ],
+  "more_text_space": true,
+  "effects": [
+    "需要1灵魂槽",
+    "最高4级"
+  ]
+}

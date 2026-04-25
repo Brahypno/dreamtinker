@@ -1,0 +1,12 @@
+{
+  "modifier_id": "dreamtinker:virtual_dodge",
+  "text": [
+    {"text": "获得百分比闪避率，但失去同比例的护甲和韧性。\n"}
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable/armor/worn",
+    "effects": [
+      "最高3级",
+      "每级需要1个灵魂槽"
+    ]
+}

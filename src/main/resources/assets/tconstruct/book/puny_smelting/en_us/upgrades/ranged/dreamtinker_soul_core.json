@@ -1,0 +1,15 @@
+{
+  "modifier_id": "dreamtinker:soul_core",
+  "text": [
+    {
+      "text": "+0.5 projectile damage and draw speed per level; Increase the speed for memory projectile trace target."
+    }
+  ],
+  "more_text_space": true,
+  "tools": "dreamtinker:narcissus_wing",
+  "effects": [
+    "Maximum of 3 levels",
+    "Requires 1 soul slot per level",
+    "Requires 'Memory, Gate of the Kingdom' to apply"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:the_end",
+  "text": [
+    {
+      "text": "跳过过程直接回归主世界出生点。\n警告：会触发终末之诗！！！"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/special",
+  "effects": [
+    "需要1升级槽",
+    "最高1级"
+  ]
+}

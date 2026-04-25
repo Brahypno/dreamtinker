@@ -14,5 +14,6 @@
       "stat": "tconstruct:attack_damage"
     }
   ],
+  "priority": 1000,
   "tooltip_display": "always"
 }

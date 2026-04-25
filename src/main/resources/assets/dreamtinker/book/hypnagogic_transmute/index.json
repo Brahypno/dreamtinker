@@ -7,6 +7,13 @@
     }
   },
   {
+    "name": "modifiers",
+    "data": "sections/modifiers.json",
+    "icon": {
+      "item": "minecraft:redstone"
+    }
+  },
+  {
     "name": "transmute",
     "data": "sections/transmute.json",
     "icon": {

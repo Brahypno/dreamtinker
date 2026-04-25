@@ -1,0 +1,15 @@
+{
+  "modifier_id": "dreamtinker:hate_memory",
+  "text": [
+    {
+      "text": "Apply freezing, and a serials of opposite effects to targets, include poison, wither, regeneration, weakness, strength, slowness, speed, luck, unluck, with a chance to apply instant health and instant damage"
+    }
+  ],
+  "more_text_space": true,
+  "tools": "dreamtinker:narcissus_wing",
+  "effects": [
+    "Maximum of 3 levels",
+    "Requires 1 soul slot per level",
+    "Requires 'Memory, Gate of the Kingdom' to apply"
+  ]
+}

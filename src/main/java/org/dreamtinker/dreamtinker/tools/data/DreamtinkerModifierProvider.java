@@ -109,11 +109,13 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(
                         AttributeModule.builder(ForgeMod.ENTITY_REACH.get(), AttributeModifier.Operation.ADDITION).slots(EquipmentSlot.MAINHAND).eachLevel(1));
         buildModifier(Ids.strong_explode)
+                .priority(-100)
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModule(ConditionalMeleeDamageModule.builder().toolItem(ItemPredicate.set(DreamtinkerTools.tntarrow.asItem())).percent()
                                                        .formula()
                                                        .variable(LEVEL).constant(4f).multiply()
                                                        .variable(MULTIPLIER).multiply()
+                                                       .constant(1f).add()
                                                        .variable(VALUE).multiply().build());
         buildModifier(Ids.antimony_usage).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                                          .addModule(StatBoostModule.multiplyBase(ToolStats.DURABILITY).eachLevel(0.1f))
@@ -294,6 +296,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(EntityLootMultiplierModule.builder().chance(LevelingValue.flat(1)).build());
 
         buildModifier(Ids.the_romantic)
+                .priority(1000)
                 .addModule(StatBoostModule.add(ToolStats.ATTACK_SPEED).eachLevel(0.3f))
                 .addModule(StatBoostModule.add(ToolStats.ATTACK_DAMAGE).eachLevel(-0.2f));
         buildModifier(Ids.all_slayer)
@@ -441,6 +444,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.hidden_shape);
         IJsonPredicate<LivingEntity> wrath = LivingEntityPredicate.or(LivingEntityPredicate.FIRE_IMMUNE, new MobTypePredicate(MobType.WATER));
         buildModifier(Ids.torrent)
+                .priority(1000)
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModule(ConditionalMeleeDamageModule.builder().target(wrath).eachLevel(2.5f))
                 .addModule(ConditionalPowerModule.builder().target(wrath).eachLevel(2.5f))
@@ -448,6 +452,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                                      .requirement(HasModifierPredicate.hasModifier(Ids.torrent, 1).inverted())
                                                      .modifierKey(Ids.wrath).build());
         buildModifier(Ids.wrath)
+                .priority(1000)
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModule(StatBoostModule.add(ToolStats.ATTACK_DAMAGE).eachLevel(1.25f))
                 .addModule(StatBoostModule.add(ToolStats.PROJECTILE_DAMAGE).eachLevel(1.25f))

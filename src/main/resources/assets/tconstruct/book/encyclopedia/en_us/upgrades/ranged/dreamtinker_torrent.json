@@ -1,0 +1,15 @@
+{
+  "modifier_id": "dreamtinker:torrent",
+  "text": [
+    {
+      "text": "+2.5 projectile damage and attack damage per level to fire immune and water born entity; Can also applied on Javalin"
+    }
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable/ammo/thrown",
+  "effects": [
+    "Maximum of 5 levels",
+    "Requires 1 upgrade slot per level",
+    "Torrent exclude with Wrath"
+  ]
+}

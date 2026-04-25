@@ -9,6 +9,8 @@
         "*",
         "$multiplier",
         "*",
+        1.0,
+        "+",
         "$damage",
         "*"
       ],
@@ -21,5 +23,6 @@
       }
     }
   ],
+  "priority": -100,
   "tooltip_display": "always"
 }

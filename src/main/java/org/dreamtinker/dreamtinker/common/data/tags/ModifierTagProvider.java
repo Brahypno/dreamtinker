@@ -44,7 +44,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             .add(born_with_me.getId())
             .addOptional(Ids.malum_haunted, Ids.malum_animated, Ids.bic_frostbitten, Ids.bic_intoxicating);
         this.tag(TinkerTags.Modifiers.RANGED_UPGRADES)
-            .add(Ids.icy_memory, Ids.hate_memory, Ids.soul_core);
+            .add(Ids.icy_memory, Ids.hate_memory, Ids.soul_core, Ids.wrath, Ids.torrent);
         this.tag(TinkerTags.Modifiers.GENERAL_UPGRADES)
             .add(Ids.weapon_dreams_order, Ids.weapon_dreams_filter, TheEnd.getId())
             .addOptional(Ids.bic_dark_armor_plate);
@@ -55,7 +55,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             .add(mei.getId(), fox_blessing.getId())
             .addOptional(Ids.el_eternal_binding, Ids.el_sorrow, Ids.el_nemesis_curse, Ids.nova_spell_tiers);
         this.tag(DAMAGE_UPGRADES)
-            .add(Ids.all_slayer, Ids.the_romantic, Ids.strong_explode, signal_axe.getId(), Ids.wrath, Ids.torrent)
+            .add(Ids.all_slayer, Ids.the_romantic, Ids.strong_explode, signal_axe.getId())
             .addOptional(ender_slayer.getId());
         this.tag(TinkerTags.Modifiers.BONUS_SLOTLESS)
             .add(Ids.huge_ego, Ids.five_creations, Ids.soul_upgrade, Ids.abyss_inside, Ids.meta_morphosis)

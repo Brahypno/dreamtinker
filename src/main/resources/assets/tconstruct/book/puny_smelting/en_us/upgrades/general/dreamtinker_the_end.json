@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:soul_upgrade",
+  "text": [
+    {
+      "text": "Skip until return to the spawn point in Overworld.\n Alert:End Poem would be shown!!"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/special",
+  "effects": [
+    "Requires 1 upgrade slot",
+    "Maximum of 1 levels"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "modifier_id": "dreamtinker:wrath",
+  "text": [
+    {
+      "text": "每级增加1.25弹射物力量和1.25近战伤害。也可以施加在标枪上。"
+    }
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable/ammo/thrown",
+    "effects": [
+      "最高4级",
+      "每级需要1个升级槽",
+      "与‘洪流’互斥"
+    ]
+}

@@ -18,10 +18,15 @@ import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifi
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.common.TinkerTags;
+import slimeknights.tconstruct.library.json.predicate.tool.ToolContextPredicate;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.modules.build.ModifierTraitModule;
+import slimeknights.tconstruct.library.modifiers.modules.util.ModifierCondition;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.shared.TinkerAttributes;
+import slimeknights.tconstruct.tools.data.ModifierIds;
 
 import java.util.List;
 import java.util.Objects;
@@ -35,6 +40,13 @@ public class WeaponTransformation extends BattleModifier {
     @Override
     public int getPriority() {
         return -1000;
+    }
+
+    @Override
+    protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addModule(
+                new ModifierTraitModule(ModifierIds.thorns, 1, true, ModifierCondition.ANY_CONTEXT.with(ToolContextPredicate.tag(TinkerTags.Items.HELMETS))));
+        super.registerHooks(hookBuilder);
     }
 
     @Override

@@ -1,0 +1,12 @@
+{
+  "modifier_id": "dreamtinker:sweet_death",
+  "text": [
+    {"text": "Increase 40 block amount and 90 block angle, but decrease use item speed and 30% knockback per level. If block in 3s per level, deal 25% counter magic damage per level. " }
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable/shields",
+  "effects": [
+    "Requires 1 soul slot",
+    "Maximum of 2 levels"
+  ]
+}

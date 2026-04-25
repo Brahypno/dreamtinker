@@ -1,0 +1,25 @@
+{
+  "type": "tconstruct:showcase",
+  "title": "灵魂强化",
+  "item": {
+    "type": "forge:nbt",
+    "item": "tconstruct:creative_slot",
+    "nbt": {
+      "slot": "souls"
+    }
+  },
+  "tooltip": [ "灵魂槽图标" ],
+  "text": [
+    {
+      "text": "灵魂是工具的风险强化。它们像升级一样，但在一个方面更强大，但在另一个方面带来负面效果。例如，“浪漫的垂迹”使工具攻击速度更快，但造成的伤害更少。"
+    },
+    {
+      "text": "大多数工具没有灵魂槽，虽然通过其他类型的强化可以获得更多槽位。",
+      "paragraph": true
+    },
+    {
+      "text": "当在其他书籍中显示时，灵魂总是显示在升级部分。",
+      "paragraph": true
+    }
+  ]
+}

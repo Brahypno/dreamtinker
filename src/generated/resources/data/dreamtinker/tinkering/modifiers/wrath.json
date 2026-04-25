@@ -27,5 +27,6 @@
       "translation_key": "modifier.dreamtinker.torrent.requirements"
     }
   ],
+  "priority": 1000,
   "tooltip_display": "always"
 }

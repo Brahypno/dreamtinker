@@ -3,7 +3,6 @@ package org.dreamtinker.dreamtinker.tools.data;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.ToolActions;
 import org.dreamtinker.dreamtinker.Dreamtinker;
@@ -141,7 +140,6 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 .module(underPlateMaterials)
                 .module(new SetStatsModule(StatsNBT.builder()
                                                    .set(ToolStats.ARMOR_TOUGHNESS, 2f).build()))
-                .module(ArmorItem.Type.HELMET, ToolTraitsModule.builder().trait(ModifierIds.thorns, 1).build())
                 .module(new MultiplyStatsModule(MultiplierNBT.builder()
                                                              .set(ToolStats.DURABILITY, 0.8f)
                                                              .set(ToolStats.ARMOR, 0.5f).build()))

@@ -1,0 +1,7 @@
+[
+  {
+    "name": "soul",
+    "type": "mantle:text",
+    "data": "modifiers/soul.json"
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "modifier_id": "dreamtinker:bic_dark_armor_plate",
+  "text": [
+    {
+      "text": "Grants +30% durability, +25% attack damage, -10% attacking speed, -25% mining speed, +5% knockback resistance, and +2 armor toughness."
+    },
+    {
+      "text": "Tools and armor will only receive applicable stat boosts.",
+      "paragraph": true
+    }
+  ],
+  "more_text_space": true,
+  "effects": [
+    "Maximum of 1 level",
+    "Requires 1 upgrade slot"
+  ]
+}
