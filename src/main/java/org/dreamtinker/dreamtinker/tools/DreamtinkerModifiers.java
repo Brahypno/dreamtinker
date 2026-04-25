@@ -58,10 +58,7 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.harvest.LifeLooting;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.harvest.SilkyCrystal;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian.Isolde;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian.SharpenedWith;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem.DespairMist;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem.DespairRain;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem.DespairWind;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem.Requiem;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem.*;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.echo_shard.EchoedAttack;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.echo_shard.echoed_defence;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.lupus_antimony.TheWolfAnswer;
@@ -148,6 +145,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<DespairRain> despair_rain = MODIFIERS.register("despair_rain", DespairRain::new);
     public static final StaticModifier<DespairWind> despair_wind = MODIFIERS.register("despair_wind", DespairWind::new);
     public static final StaticModifier<Requiem> requiem = MODIFIERS.register("requiem", Requiem::new);
+    public static final StaticModifier<Ophelia> ophelia = MODIFIERS.register("ophelia", Ophelia::new);
     public static final StaticModifier<WeaponDreams> weapon_dreams = MODIFIERS.register("weapon_dreams", WeaponDreams::new);
     public static final StaticModifier<HoneyTastyModifier> HoneyTastyModifier = MODIFIERS.register("honey_tasty", HoneyTastyModifier::new);
     public static final StaticModifier<RainbowCatcher> rainbowCatcher = MODIFIERS.register("rainbow_catcher", RainbowCatcher::new);
@@ -316,7 +314,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId FragileButBright = id("fragile_but_bright");
         public static final ModifierId homunculusLifeCurse = id("homunculus_life_curse");
         public static final ModifierId homunculusGift = id("homunculus_gift");
-        public static final ModifierId ophelia = id("ophelia");
         public static final ModifierId peaches_in_memory = id("peaches_in_memory");
         public static final ModifierId weapon_slots = id("weapon_slots");
         public static final ModifierId shadow_blessing = id("shadow_blessing");

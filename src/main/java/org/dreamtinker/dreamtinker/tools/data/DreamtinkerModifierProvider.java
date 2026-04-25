@@ -269,14 +269,12 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                           .tooltipStyle(AttributeModule.TooltipStyle.PERCENT).eachLevel(0.03f));
         buildModifier(Ids.homunculusLifeCurse).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
         buildModifier(Ids.homunculusGift).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
-        buildModifier(Ids.ophelia)
-                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
         buildModifier(Ids.peaches_in_memory)
                 .addModule(AttributeModule.builder(TinkerAttributes.BAD_EFFECT_DURATION, AttributeModifier.Operation.MULTIPLY_TOTAL).amount(0.1f, 0.1f))
                 .addModule(AttributeModule.builder(TinkerAttributes.EXPERIENCE_MULTIPLIER, AttributeModifier.Operation.MULTIPLY_TOTAL).amount(0.1f, 0.1f))
                 .addModule(ReduceToolDamageModule.builder().maxLevel(5).formula()
                                                  .constant(0.025f).variable(LEVEL).multiply() // 0.025 * level
-                                                 .constant(13).variable(LEVEL).subtract()     // 11 - level
+                                                 .constant(13).variable(LEVEL).subtract()     // 13 - level
                                                  .variable(MULTIPLIER).multiply()
                                                  .multiply().build());
         buildModifier(Ids.weapon_slots)
