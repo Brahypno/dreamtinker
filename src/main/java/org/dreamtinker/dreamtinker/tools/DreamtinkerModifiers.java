@@ -327,7 +327,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId weapon_dreams_order = id("weapon_dreams_order");
         public static final ModifierId fiber_glass_fragments = id("fiber_glass_fragments");
         public static final ModifierId lunarProtection = id("lunar_protection");
-        public static final ModifierId lunarAttractive = id("lunar_attractive");
         public static final ModifierId lunarRejection = id("lunar_rejection");
         public static final ModifierId slowness = id("ssss_slowness");
         public static final ModifierId soul_unchanged = id("soul_unchanged");

@@ -320,18 +320,15 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(DepthProtectionModule.builder().baselineHeight(40).neutralRange(0).eachLevel(-2.5f))
                 .addModule(AttributeModule.builder(ForgeMod.ENTITY_GRAVITY.get(), AttributeModifier.Operation.MULTIPLY_BASE)
                                           .tooltipStyle(AttributeModule.TooltipStyle.PERCENT).flat(-0.05f));
-        buildModifier(Ids.lunarAttractive)
+
+        buildModifier(Ids.lunarRejection)
                 .addModule(MobEffectModule.builder(MobEffects.LEVITATION)
                                           .level(RandomLevelingValue.perLevel(1, 1))
                                           .time(RandomLevelingValue.random(20, 10))
-
-                                          .build(),
-                           ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT)
-                .addModule(ConditionalMeleeDamageModule.builder().target(TinkerPredicate.AIRBORNE.inverted()).eachLevel(-2f))
-                .addModule(ConditionalMiningSpeedModule.builder().holder(LivingEntityPredicate.ON_GROUND.inverted()).percent().allowIneffective().flat(1),
-                           ModifierHooks.BREAK_SPEED);
-        buildModifier(Ids.lunarRejection)
+                                          .applyBeforeMelee(true)
+                                          .build())
                 .addModule(ConditionalMeleeDamageModule.builder().target(TinkerPredicate.AIRBORNE).eachLevel(2f))
+                .addModule(ConditionalPowerModule.builder().target(TinkerPredicate.AIRBORNE).eachLevel(2f))
                 .addModule(ConditionalMiningSpeedModule.builder().holder(LivingEntityPredicate.ON_GROUND.inverted()).percent().allowIneffective().flat(1),
                            ModifierHooks.BREAK_SPEED);
         buildModifier(Ids.slowness)

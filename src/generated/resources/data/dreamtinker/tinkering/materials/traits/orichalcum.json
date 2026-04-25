@@ -2,10 +2,6 @@
   "default": [
     {
       "level": 1,
-      "name": "dreamtinker:lunar_attractive"
-    },
-    {
-      "level": 1,
       "name": "dreamtinker:lunar_rejection"
     }
   ],

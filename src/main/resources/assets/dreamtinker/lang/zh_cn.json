@@ -430,6 +430,7 @@
   "modifier.dreamtinker.lunar_rejection.flavor": "神秘引力",
   "modifier.dreamtinker.lunar_rejection.description": "对在空中的目标造成更多伤害；少量抵消在空中的挖掘速度减少。",
   "modifier.dreamtinker.lunar_rejection.attack_damage": "对浮空生物伤害",
+  "modifier.dreamtinker.lunar_rejection.projectile_damage": "对浮空生物的弹射物力量",
   "modifier.dreamtinker.ore_viewer": "矿石罗盘",
   "modifier.dreamtinker.ore_viewer.flavor": "这也是一种重点",
   "modifier.dreamtinker.ore_viewer.description": "装备时，概率发现周围的矿石；等级越高范围越大，概率越高",

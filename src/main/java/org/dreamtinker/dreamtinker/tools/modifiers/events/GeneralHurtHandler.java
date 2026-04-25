@@ -20,7 +20,6 @@ import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.GoliathDamage;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import slimeknights.tconstruct.common.TinkerTags;
-import slimeknights.tconstruct.library.json.predicate.TinkerPredicate;
 import slimeknights.tconstruct.library.tools.capability.EntityModifierCapability;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
@@ -70,10 +69,6 @@ public class GeneralHurtHandler {
                             event.setAmount(damageAmount * (1 + valueExpSoftCap(armor, toughness)));
                         }
                 }
-                int lunarAttractive = Math.max(DTModifierCheck.getMainhandModifierLevel(offender, DreamtinkerModifiers.Ids.lunarRejection),
-                                               null != modifiers ? modifiers.getLevel(DreamtinkerModifiers.Ids.lunarRejection) : 0);
-                if (0 < lunarAttractive)
-                    event.setAmount(event.getAmount() + (TinkerPredicate.AIRBORNE.matches(victim) ? 2.0f : -2.0f) * lunarAttractive);
 
                 int goliath = Math.max(DTModifierCheck.getMainhandModifierLevel(offender, DreamtinkerModifiers.goliath_damage.getId()),
                                        null != modifiers ? modifiers.getLevel(DreamtinkerModifiers.goliath_damage.getId()) : 0);

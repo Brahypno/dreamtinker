@@ -2,7 +2,26 @@
   "level_display": "tconstruct:default",
   "modules": [
     {
+      "type": "tconstruct:mob_effect",
+      "apply_before_melee": true,
+      "effect": "minecraft:levitation",
+      "level": {
+        "flat": 1.0,
+        "per_level": 1.0
+      },
+      "time": {
+        "flat": 20.0,
+        "random": 10.0
+      }
+    },
+    {
       "type": "tconstruct:conditional_melee_damage",
+      "each_level": 2.0,
+      "percent": false,
+      "target": "tconstruct:airborne"
+    },
+    {
+      "type": "tconstruct:conditional_power",
       "each_level": 2.0,
       "percent": false,
       "target": "tconstruct:airborne"
