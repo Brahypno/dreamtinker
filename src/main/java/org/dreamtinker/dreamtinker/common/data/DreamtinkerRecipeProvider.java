@@ -372,6 +372,12 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                 .setCast(DreamtinkerTagKeys.Items.modTag("decorated_pot_sherds"), true)
                                 .save(consumer, location(Casting_folder + "mourner_pottery"));
 
+        wrapped = withCondition(consumer, tagFilled(DreamtinkerTagKeys.Items.CursedDroplet));
+        ItemCastingRecipeBuilder.tableRecipe(DreamtinkerTagKeys.Items.CursedDroplet)
+                                .setFluidAndTime(DreamtinkerFluids.liquid_trist, FluidValues.LARGE_GEM_BLOCK)
+                                .setCast(TinkerSmeltery.gemCast, true)
+                                .save(wrapped, location(Casting_folder + "cursed_droplet"));
+
     }
 
     String Melting_folder = "smeltery/melting/";

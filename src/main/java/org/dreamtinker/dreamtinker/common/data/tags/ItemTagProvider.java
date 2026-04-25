@@ -189,6 +189,9 @@ public class ItemTagProvider extends ItemTagsProvider {
         addSmeltery();
         this.tag(TinkerTags.Items.TINKERS_GUIDES)
             .add(hypnagogic_transmute.get());
+
+        this.tag(Items.CursedDroplet)
+            .addOptional(new ResourceLocation("l2complements", "cursed_droplet"));
     }
 
     private void addSmeltery() {

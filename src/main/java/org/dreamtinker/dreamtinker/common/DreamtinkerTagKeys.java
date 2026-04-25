@@ -57,6 +57,8 @@ public class DreamtinkerTagKeys {
             return TagKey.create(Registries.ITEM, new ResourceLocation(path));
         }
 
+        public static final TagKey<Item> CursedDroplet = dreamtinkerTag("cursed_droplet");
+
         public static final TagKey<Item> IesniumIngot = forgeTag("ingots/iesnium");
 
         public static final TagKey<Item> dt_scythe = dreamtinkerTag("tools/scythe");
