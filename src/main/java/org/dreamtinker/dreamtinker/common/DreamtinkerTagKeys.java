@@ -24,6 +24,7 @@ public class DreamtinkerTagKeys {
         public static final TagKey<Modifier> EL_CURSED_MODIFIERS = DreamtinkerTag("cursed_modifiers");
         public static final TagKey<Modifier> EL_CURSED_RELIEF = DreamtinkerTag("cursed_relief");
         public static final TagKey<Modifier> MALUM_EXPOSE_SOUL = DreamtinkerTag("malum_expose_soul");
+        public static final TagKey<Modifier> ArmorWorkingWhenUnequipped = DreamtinkerTag("armor_working_when_unequipped");
     }
 
     public static class Fluids {

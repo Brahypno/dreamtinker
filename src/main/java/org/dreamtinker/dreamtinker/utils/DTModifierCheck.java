@@ -4,16 +4,22 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.jetbrains.annotations.NotNull;
+import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
+import slimeknights.tconstruct.library.modifiers.hook.armor.ModifyDamageModifierHook;
+import slimeknights.tconstruct.library.module.ModuleHook;
+import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.item.IModifiable;
@@ -193,5 +199,43 @@ public class DTModifierCheck {
             damage = (entry.getHook(ModifierHooks.MELEE_DAMAGE)).getMeleeDamage(toolStack, entry, context, baseDamage, damage);
         }
         return damage;
+    }
+
+    public static float modifyDamageTakenInventory(ModuleHook<ModifyDamageModifierHook> hook, EquipmentContext context, DamageSource source, float amount, boolean isDirectDamage, EquipmentSlot slotType, IToolStackView toolStack) {
+        if (toolStack != null && !toolStack.isBroken()){
+            for (ModifierEntry entry : toolStack.getModifierList()) {
+                if (entry.getModifier().is(DreamtinkerTagKeys.Modifiers.ArmorWorkingWhenUnequipped)){
+                    amount = entry.getHook(hook).modifyDamageTaken(toolStack, entry, context, slotType, source, amount, isDirectDamage);
+                    if (amount < 0){
+                        return 0;
+                    }
+                }
+            }
+        }
+        return amount;
+    }
+
+    public static EquipmentSlot toSlot(ItemStack stack) {
+        if (stack.is(TinkerTags.Items.HELMETS))
+            return EquipmentSlot.HEAD;
+        else if (stack.is(TinkerTags.Items.CHESTPLATES))
+            return EquipmentSlot.CHEST;
+        else if (stack.is(TinkerTags.Items.LEGGINGS))
+            return EquipmentSlot.LEGS;
+        else if (stack.is(TinkerTags.Items.BOOTS))
+            return EquipmentSlot.FEET;
+        else if (stack.is(TinkerTags.Items.HELD_ARMOR))
+            return EquipmentSlot.MAINHAND;
+        else
+            return EquipmentSlot.OFFHAND;
+
+    }
+
+    public static boolean verifyIfOffArmor(@NotNull IToolStackView tool, EquipmentContext context) {
+        for (EquipmentSlot slot : slots) {
+            if (tool.equals(context.getToolInSlot(slot)))
+                return false;
+        }
+        return true;
     }
 }

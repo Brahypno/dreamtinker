@@ -7,6 +7,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -20,8 +21,13 @@ import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.GoliathDamage;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import slimeknights.tconstruct.common.TinkerTags;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.armor.OnAttackedModifierHook;
 import slimeknights.tconstruct.library.tools.capability.EntityModifierCapability;
+import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
+import slimeknights.tconstruct.library.tools.item.IModifiable;
+import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
@@ -39,6 +45,35 @@ public class GeneralHurtHandler {
     private static final int allowed_extra_times = 1;
     private static final ThreadLocal<Integer> cry_extra_attack_depth = ThreadLocal.withInitial(() -> 0);
     private static final ThreadLocal<Integer> arcane_extra_attack_depth = ThreadLocal.withInitial(() -> 0);
+
+    @SubscribeEvent(priority = EventPriority.LOW)
+    static void SecondaryNoneEquipmentHurtHandler(LivingHurtEvent event) {
+        LivingEntity entity = event.getEntity();
+        DamageSource source = event.getSource();
+        EquipmentContext context = new EquipmentContext(entity);
+        float originalDamage = event.getAmount();
+
+        // for our own armor, we have boosts from modifiers to consider
+        if (entity instanceof Player player){
+            for (ItemStack stack : player.getInventory().items) {
+                if (null == stack || stack.isEmpty() || !stack.is(TinkerTags.Items.ARMOR) || stack.equals(player.getMainHandItem()))
+                    continue;
+                if (stack.getItem() instanceof IModifiable){
+                    IToolStackView toolStackView = ToolStack.from(stack);
+                    originalDamage = DTModifierCheck.modifyDamageTakenInventory(ModifierHooks.MODIFY_HURT, context, source, originalDamage,
+                                                                                OnAttackedModifierHook.isDirectDamage(source), DTModifierCheck.toSlot(stack),
+                                                                                toolStackView);
+                    if (originalDamage <= 0)
+                        break;
+                }
+            }
+            event.setAmount(originalDamage);
+            if (originalDamage <= 0){
+                event.setCanceled(true);
+            }
+        }
+    }
+
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void LivingHurtEvent(LivingHurtEvent event) {

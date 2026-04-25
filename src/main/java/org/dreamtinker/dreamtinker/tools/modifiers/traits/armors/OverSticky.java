@@ -9,6 +9,7 @@ import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifie
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.modules.capacity.OverslimeModule;
 import slimeknights.tconstruct.library.modifiers.modules.technical.SlotInChargeModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
@@ -25,6 +26,7 @@ public class OverSticky extends ArmorModifier {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
         hookBuilder.addModule(new SlotInChargeModule(SLOT_KEY));
+        hookBuilder.addHook(this, ModifierHooks.MODIFY_DAMAGE);
         super.registerHooks(hookBuilder);
     }
 

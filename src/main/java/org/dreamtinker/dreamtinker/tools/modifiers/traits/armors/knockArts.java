@@ -11,6 +11,8 @@ import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifie
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
@@ -24,6 +26,12 @@ public class knockArts extends ArmorModifier {
     public boolean isNoLevels() {return false;}
 
     public static final ResourceLocation TAG_KNOCK = Dreamtinker.getLocation("knock");
+
+    @Override
+    protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.MODIFY_HURT);
+        super.registerHooks(hookBuilder);
+    }
 
     @Override
     public float modifyDamageTaken(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount, boolean isDirectDamage) {

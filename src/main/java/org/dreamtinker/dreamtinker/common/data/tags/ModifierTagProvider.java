@@ -22,6 +22,8 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
 
     @Override
     protected void addTags() {
+        tag(DreamtinkerTagKeys.Modifiers.ArmorWorkingWhenUnequipped)
+                .add(as_one.getId());
         this.tag(DreamtinkerTagKeys.Modifiers.EL_CURSED_MODIFIERS)
             .add(ModifierIds.blindshot, ModifierIds.vintage, ModifierIds.flamestance, ModifierIds.entangled,
                  ModifierIds.crystalbound, ModifierIds.crystalstrike, ModifierIds.dense,

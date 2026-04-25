@@ -9,8 +9,14 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
+import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.modules.technical.SlotInChargeModule;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
+import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
@@ -22,6 +28,8 @@ import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.SpiritDefence
 
 public class malum_spirit_defense extends ArmorModifier {
     public static final EnumMap<EquipmentSlot, UUID> ARMOR_SLOT_UUIDS = new EnumMap<>(EquipmentSlot.class);
+    private static final TinkerDataCapability.TinkerDataKey<SlotInChargeModule.SlotInCharge> SLOT_KEY =
+            TinkerDataCapability.TinkerDataKey.of(Dreamtinker.getLocation("malum_spirit_defense"));
 
     static {
         ARMOR_SLOT_UUIDS.put(EquipmentSlot.HEAD, UUID.fromString("c3e9b4a2-7f1d-4a68-8e72-1b5f9a7c2d10"));
@@ -31,11 +39,21 @@ public class malum_spirit_defense extends ArmorModifier {
     }
 
     @Override
+    protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addModule(new SlotInChargeModule(SLOT_KEY));
+        hookBuilder.addHook(this, ModifierHooks.MODIFY_DAMAGE);
+        super.registerHooks(hookBuilder);
+    }
+
+    @Override
     public float modifyDamageTaken(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount, boolean isDirectDamage) {
-        if (source.getEntity() instanceof LivingEntity entity && !entity.level().isClientSide)
-            amount -= SpiritHarvestHandler.getSpiritData(entity).map((d) -> d.totalSpirits).orElse(0) * modifier.getLevel();
-        amount -= Mth.ceil(context.getEntity().getAttributeValue(AttributeRegistry.SPIRIT_SPOILS.get()));
-        amount -= context.getEntity().getMainHandItem().getEnchantmentLevel(EnchantmentRegistry.SPIRIT_PLUNDER.get());
+        int level = SlotInChargeModule.getLevel(context.getTinkerData(), SLOT_KEY, slotType);
+        if (0 < level){
+            if (source.getEntity() instanceof LivingEntity entity && !entity.level().isClientSide)
+                amount -= SpiritHarvestHandler.getSpiritData(entity).map((d) -> d.totalSpirits).orElse(0) * modifier.getLevel();
+            amount -= Mth.ceil(context.getEntity().getAttributeValue(AttributeRegistry.SPIRIT_SPOILS.get()));
+            amount -= context.getEntity().getMainHandItem().getEnchantmentLevel(EnchantmentRegistry.SPIRIT_PLUNDER.get());
+        }
         return amount;
     }
 

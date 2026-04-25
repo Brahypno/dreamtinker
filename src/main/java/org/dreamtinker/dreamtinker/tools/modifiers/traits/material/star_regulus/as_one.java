@@ -18,6 +18,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
+import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -70,6 +71,7 @@ public class as_one extends ArmorModifier implements KeybindInteractModifierHook
         hookBuilder.addModule(new SlotInChargeModule(SLOT_KEY));
         hookBuilder.addModule(new VolatileFlagModule(IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY));
         hookBuilder.addHook(this, ModifierHooks.ARMOR_INTERACT);
+        hookBuilder.addHook(this, ModifierHooks.MODIFY_HURT);
         super.registerHooks(hookBuilder);
     }
 
@@ -205,11 +207,14 @@ public class as_one extends ArmorModifier implements KeybindInteractModifierHook
     @Override
     public int modifierDamageTool(IToolStackView tool, ModifierEntry modifier, int amount, @org.jetbrains.annotations.Nullable LivingEntity holder) {return 0;}
 
+
     @Override
     public float modifyDamageTaken(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount, boolean isDirectDamage) {
         int level = SlotInChargeModule.getLevel(context.getTinkerData(), SLOT_KEY, slotType);
-        if (0 < level){
-            amount *= AsOneS.get().floatValue();
+
+        if (0 < level || DTModifierCheck.verifyIfOffArmor(tool, context)){
+            level = Math.max(modifier.getLevel(), level);
+            amount *= AsOneS.get().floatValue() / level;
             if (context.getEntity().getMaxHealth() < amount)
                 context.getEntity().setAbsorptionAmount((float) (Math.min(amount, AsOneAB.get()) * 2.0f));
             return amount;

@@ -14,8 +14,8 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 public interface ArmorInterface extends OnAttackedModifierHook, DamageBlockModifierHook, EquipmentChangeModifierHook, ModifyDamageModifierHook, ProtectionModifierHook, ArmorWalkModifierHook {
     default void ArmorInterfaceInit(ModuleHookMap.Builder hookBuilder) {
-        hookBuilder.addHook(this, ModifierHooks.ON_ATTACKED, ModifierHooks.DAMAGE_BLOCK, ModifierHooks.EQUIPMENT_CHANGE, ModifierHooks.MODIFY_DAMAGE,
-                            ModifierHooks.PROTECTION, ModifierHooks.BOOT_WALK);
+        hookBuilder.addHook(this, ModifierHooks.ON_ATTACKED, ModifierHooks.DAMAGE_BLOCK, ModifierHooks.EQUIPMENT_CHANGE, ModifierHooks.PROTECTION,
+                            ModifierHooks.BOOT_WALK);
     }
 
     default void onAttacked(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount, boolean isDirectDamage) {}

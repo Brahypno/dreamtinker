@@ -14,6 +14,7 @@ import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.MeleeInt
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
@@ -28,6 +29,7 @@ public class EvilAttack extends Modifier implements MeleeInterface, ArmorInterfa
         this.ArmorInterfaceInit(hookBuilder);
         this.MeleeInterfaceInit(hookBuilder);
         this.ArrowInterfaceInit(hookBuilder);
+        hookBuilder.addHook(this, ModifierHooks.MODIFY_HURT);
         super.registerHooks(hookBuilder);
     }
 
