@@ -2,8 +2,17 @@ package org.dreamtinker.dreamtinker.common;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.event.entity.living.MobEffectEvent;
+import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
+import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.effect.realDarkness;
 import org.dreamtinker.dreamtinker.common.effect.soulFire;
 import org.dreamtinker.dreamtinker.common.effect.thirsty;
@@ -13,6 +22,7 @@ import java.util.List;
 
 import static org.dreamtinker.dreamtinker.DreamtinkerModule.*;
 
+@Mod.EventBusSubscriber(modid = Dreamtinker.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class DreamtinkerEffects {
     public DreamtinkerEffects() {}
 
@@ -64,4 +74,17 @@ public class DreamtinkerEffects {
             });
     public static final RegistryObject<MobEffect> SoulFire =
             EFFECT.register("soul_fire", soulFire::new);
+
+
+    @SubscribeEvent
+    public static void allowBossEffects(MobEffectEvent.Applicable event) {
+        LivingEntity entity = event.getEntity();
+        MobEffectInstance instance = event.getEffectInstance();
+
+        if (instance.getEffect() == DreamtinkerEffects.SoulFire.get()){
+            if (entity instanceof EnderDragon || entity instanceof WitherBoss){
+                event.setResult(Event.Result.ALLOW);
+            }
+        }
+    }
 }
