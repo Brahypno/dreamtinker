@@ -1,0 +1,99 @@
+{
+  "color": "FFFFF0B0",
+  "fallbacks": [
+    "metal"
+  ],
+  "generator": {
+    "supported_stats": [
+      "tconstruct:head",
+      "tconstruct:handle",
+      "tconstruct:binding",
+      "tconstruct:repair_kit",
+      "tconstruct:limb",
+      "tconstruct:grip",
+      "tconstruct:fletching",
+      "tconstruct:ingot"
+    ],
+    "transformer": {
+      "type": "tconstruct:frames",
+      "frames": [
+        {
+          "type": "tconstruct:grey_to_sprite",
+          "palette": [
+            {
+              "color": "FF000000",
+              "grey": 0
+            },
+            {
+              "color": "FF120904",
+              "grey": 25
+            },
+            {
+              "grey": 26,
+              "path": "dreamtinker:generator/ruin_steel"
+            },
+            {
+              "grey": 102,
+              "path": "dreamtinker:generator/ruin_steel"
+            },
+            {
+              "color": "FF865016",
+              "grey": 140
+            },
+            {
+              "color": "FF5A1808",
+              "grey": 178
+            },
+            {
+              "color": "FF331108",
+              "grey": 216
+            },
+            {
+              "color": "FF160A04",
+              "grey": 255
+            }
+          ]
+        },
+        {
+          "type": "tconstruct:grey_to_sprite",
+          "palette": [
+            {
+              "color": "FF000000",
+              "grey": 0
+            },
+            {
+              "color": "FF120904",
+              "grey": 25
+            },
+            {
+              "grey": 26,
+              "path": "dreamtinker:generator/ruin_steel"
+            },
+            {
+              "grey": 102,
+              "path": "dreamtinker:generator/ruin_steel"
+            },
+            {
+              "color": "FFFFF0B0",
+              "grey": 140
+            },
+            {
+              "color": "FFFFC957",
+              "grey": 178
+            },
+            {
+              "color": "FFD18A22",
+              "grey": 216
+            },
+            {
+              "color": "FF865016",
+              "grey": 255
+            }
+          ]
+        }
+      ],
+      "meta": "dreamtinker:generator/ruin_steel"
+    }
+  },
+  "luminosity": 9
+}

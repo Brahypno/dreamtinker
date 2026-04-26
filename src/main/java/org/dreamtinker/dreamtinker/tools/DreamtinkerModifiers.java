@@ -174,6 +174,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<BornWithMe> born_with_me = MODIFIERS.register("born_with_me", BornWithMe::new);
     public static final StaticModifier<RainbowLights> rainbow_lights = MODIFIERS.register("rainbow_lights", RainbowLights::new);
     public static final StaticModifier<AutoRefill> auto_refill = MODIFIERS.register("auto_refill", AutoRefill::new);
+    public static final StaticModifier<DoomTrack> doom_track = MODIFIERS.register("doom_track", DoomTrack::new);
+    public static final StaticModifier<RayAttack> doom_ray = MODIFIERS.register("doom_ray", RayAttack::new);
 
     //etherium
     public static final StaticModifier<ELAstralBreak> astral_break = EL_MODIFIERS.register("astral_break", ELAstralBreak::new);
@@ -354,6 +356,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId falsify_fate = id("falsify_fate");
         public static final ModifierId frost_steel_shell = id("frost_steel_shell");
         public static final ModifierId sticky_string = id("sticky_string");
+        public static final ModifierId pressing_front = id("pressing_front");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");

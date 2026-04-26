@@ -37,6 +37,7 @@ import static net.minecraft.tags.DamageTypeTags.IS_PROJECTILE;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.FirthMark;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.homunculusLifeCurseMaxEffectLevel;
 import static org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.WeaponTransformation.valueExpSoftCap;
+import static org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.DoomTrack.proofByResistanceMultiplier;
 import static org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.knockArts.TAG_KNOCK;
 
 
@@ -45,6 +46,7 @@ public class GeneralHurtHandler {
     private static final int allowed_extra_times = 1;
     private static final ThreadLocal<Integer> cry_extra_attack_depth = ThreadLocal.withInitial(() -> 0);
     private static final ThreadLocal<Integer> arcane_extra_attack_depth = ThreadLocal.withInitial(() -> 0);
+    private static final ThreadLocal<Integer> ruin_extra_attack_depth = ThreadLocal.withInitial(() -> 0);
 
     @SubscribeEvent(priority = EventPriority.LOW)
     static void SecondaryNoneEquipmentHurtHandler(LivingHurtEvent event) {
@@ -101,25 +103,44 @@ public class GeneralHurtHandler {
                         if (0 < ModifierUtil.getModifierLevel(leg, DreamtinkerModifiers.weapon_transformation.getId())){
                             float armor = toolStack.getStats().get(ToolStats.ARMOR);
                             float toughness = toolStack.getStats().get(ToolStats.ARMOR_TOUGHNESS);
-                            event.setAmount(damageAmount * (1 + valueExpSoftCap(armor, toughness)));
+                            damageAmount *= (1 + valueExpSoftCap(armor, toughness));
                         }
                 }
 
                 int goliath = Math.max(DTModifierCheck.getMainhandModifierLevel(offender, DreamtinkerModifiers.goliath_damage.getId()),
                                        null != modifiers ? modifiers.getLevel(DreamtinkerModifiers.goliath_damage.getId()) : 0);
                 if (0 < goliath)
-                    event.setAmount(event.getAmount() * GoliathDamage.goliathPercentage(offender, victim) * goliath);
+                    damageAmount *= GoliathDamage.goliathPercentage(offender, victim) * goliath;
                 int fifth_mark = Math.max(DTModifierCheck.getMainhandModifierLevel(offender, DreamtinkerModifiers.Ids.four_warning),
                                           null != modifiers ? modifiers.getLevel(DreamtinkerModifiers.Ids.four_warning) : 0);
                 if (0 < fifth_mark){
                     final String tag = "dt_fifth_mark";
                     int times = (data.getInt(tag) + 1) % 5;
                     if (0 != times){
-                        event.setAmount(event.getAmount() * (1 - FirthMark.get().floatValue()));
+                        damageAmount *= (1 - FirthMark.get().floatValue());
                     }else {
-                        event.setAmount(event.getAmount() * (1 + FirthMark.get().floatValue() * 5));
+                        damageAmount *= (1 + FirthMark.get().floatValue() * 5);
                     }
                     data.putInt(tag, times);
+                }
+
+                int doom = Math.max(DTModifierCheck.getMainhandModifierLevel(offender, DreamtinkerModifiers.doom_track.getId()),
+                                    null != modifiers ? modifiers.getLevel(DreamtinkerModifiers.doom_track.getId()) : 0);
+                if (0 < doom){
+                    int depth = ruin_extra_attack_depth.get();
+                    if (depth < allowed_extra_times){
+                        try {
+                            ruin_extra_attack_depth.set(depth + 1);
+                            DamageSource ruin_dmg =
+                                    DreamtinkerDamageTypes.source(victim.level().registryAccess(), DreamtinkerDamageTypes.ruin_wheel, dmg);
+                            float damage = damageAmount *
+                                           proofByResistanceMultiplier(offender, victim, ruin_dmg, doom, true);
+                            victim.hurt(ruin_dmg, damage);
+                        }
+                        finally {
+                            ruin_extra_attack_depth.set(depth);
+                        }
+                    }
                 }
             }
 
@@ -131,6 +152,7 @@ public class GeneralHurtHandler {
                     try {
                         DamageSource source = DreamtinkerDamageTypes.source(registryAccess, DreamtinkerDamageTypes.NULL_VOID, dmg);
                         float extra = damageAmount * .05f * drown_level;
+                        cry_extra_attack_depth.set(depth + 1);
                         if (0.1f <= extra){
                             victim.hurt(source, extra);
                             if (rds.nextFloat() < 0.1)
@@ -144,7 +166,7 @@ public class GeneralHurtHandler {
             }
             float del = DTModifierCheck.getPersistentTagValue(offender, DreamtinkerModifiers.knockArts.getId(), TAG_KNOCK);
             if (0 < del)
-                event.setAmount(event.getAmount() + del);
+                damageAmount += del;
 
             int sand_level = DTModifierCheck.getMainhandModifierLevel(offender, DreamtinkerModifiers.Ids.AsSand);
             if (0 < sand_level)
@@ -152,8 +174,8 @@ public class GeneralHurtHandler {
 
             int homunculusLifeCurse = DTModifierCheck.getEntityModifierNum(offender, DreamtinkerModifiers.Ids.homunculusLifeCurse);
             if (0 < homunculusLifeCurse)
-                event.setAmount(damageAmount * (1 - offender.getHealth() / offender.getMaxHealth()) *
-                                Math.min(homunculusLifeCurseMaxEffectLevel.get() + 1, homunculusLifeCurse + 1));
+                damageAmount *= (1 - offender.getHealth() / offender.getMaxHealth()) *
+                                Math.min(homunculusLifeCurseMaxEffectLevel.get() + 1, homunculusLifeCurse + 1);
 
             if (!dmg.is(BYPASSES_ENCHANTMENTS)){
                 int arcane_hit_level = DTModifierCheck.getMainhandModifierLevel(offender, DreamtinkerModifiers.Ids.arcane_hit);
@@ -164,7 +186,7 @@ public class GeneralHurtHandler {
                         float extra = damageAmount * .1f * arcane_hit_level;
                         if (0.1f <= extra){
                             victim.hurt(source, extra);
-                            event.setAmount(Math.max(0f, damageAmount - extra));
+                            damageAmount = Math.max(0f, damageAmount - extra);
                         }
                     }
                     finally {
@@ -175,10 +197,11 @@ public class GeneralHurtHandler {
             if (dmg.is(TinkerTags.DamageTypes.MAGIC_PROTECTION)){
                 int drink_magic = DTModifierCheck.getEntityModifierNum(offender, DreamtinkerModifiers.Ids.drinker_magic);
                 if (0 < drink_magic){
-                    event.setAmount(event.getAmount() * (1 + drink_magic * 0.05f));
-                    offender.heal(event.getAmount() * drink_magic * 0.05f);
+                    damageAmount *= (1 + drink_magic * 0.05f);
+                    offender.heal(damageAmount * drink_magic * 0.05f);
                 }
             }
+            event.setAmount(damageAmount);
         }
 
     }

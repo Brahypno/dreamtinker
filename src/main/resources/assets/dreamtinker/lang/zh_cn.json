@@ -806,6 +806,15 @@
   "modifier.dreamtinker.born_with_me.flavor": "万相化灰",
   "modifier.dreamtinker.born_with_me.description": "当杀死一个生物时，对攻击范围内的生物额外进行一次攻击。每级增加额外攻击伤害。额外攻击会点燃自身与目标并对自身造成相当于此次额外攻击所造成伤害每级5%的伤害",
   "modifier.dreamtinker.born_with_me.attack_damage": "伤害如果它是额外攻击",
+  "modifier.dreamtinker.doom_track": "宿轨",
+  "modifier.dreamtinker.doom_track.flavor": "凡被它命中的，都只是被历史补完了毁灭",
+  "modifier.dreamtinker.doom_track.description": "当命中后，基于造成的伤害造成额外的宿毁伤害。并根据目标的护甲，韧性，体型，是否举盾，是否是boss，是否有抗性提升增加宿轨伤害",
+  "modifier.dreamtinker.doom_ray": "末日之线",
+  "modifier.dreamtinker.doom_ray.flavor": "判决已下",
+  "modifier.dreamtinker.doom_ray.description": "击中目标后对其身后的敌人造成伤害",
+  "modifier.dreamtinker.pressing_front": "压境",
+  "modifier.dreamtinker.pressing_front.flavor": "螳臂当车",
+  "modifier.dreamtinker.pressing_front.description": "命中施加压境效果，使敌人护甲减少并受到重力效果",
 
   "material.dreamtinker.echo_alloy": "回响合金",
   "material.dreamtinker.echo_alloy.flavor": "是神秘的回响，还是秘密的回响",
@@ -976,6 +985,9 @@
   "material.dreamtinker.spiral_spin": "螺旋",
   "material.dreamtinker.spiral_spin.flavor": " ",
   "material.dreamtinker.spiral_spin.encyclopedia": "人类种的第三魔法，旋转",
+  "material.dreamtinker.ruin_wheel_steel": "宿灭轮钢",
+  "material.dreamtinker.ruin_wheel_steel.flavor": "石块离手，火种入膛，车轮碾过大地。它昔在，今在，永在，并命定会摧毁一切",
+  "material.dreamtinker.ruin_wheel_steel.encyclopedia": "石块离手，火种入膛，车轮碾过大地。它昔在，今在，永在，并命定会摧毁一切",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
@@ -1422,6 +1434,7 @@
   "effect.dreamtinker.edict_of_untouched": "无触敕令",
   "effect.dreamtinker.law_of_the_lowered_eyes": "垂目之律",
   "effect.dreamtinker.soul_fire": "咒火",
+  "effect.dreamtinker.pressing_front": "压境",
 
   "adv.dreamtinker.eat_star_regulus.title": "大功业",
   "adv.dreamtinker.eat_star_regulus.desc": "品味星之锑",
@@ -1455,6 +1468,7 @@
   "death.attack.dreamtinker.arcane_damage": "被秘仪咒杀",
   "death.attack.dreamtinker.tnt_arrow_force": "因不安全使用镇爆箭而自杀了",
   "death.attack.dreamtinker.edict_punishments": "因违背戒律而死",
+  "death.attack.dreamtinker.ruin_wheel": "被命运的车轮碾压",
 
   "entity.dreamtinker.aggressive_fox": "武装狐狸",
 

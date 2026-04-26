@@ -81,7 +81,7 @@ public class TNTArrow extends ModifiableArrowItem {
                 //ToolAttackUtil.attackEntity(toolStack, (LivingEntity) this.getOwner(), InteractionHand.OFF_HAND, entity, NO_COOLDOWN, false);
 
             }else {
-                float damage = DTModifierCheck.getMeleeDamage((LivingEntity) this.getOwner(), entity, toolStack);
+                float damage = DTModifierCheck.getMeleeDamage((LivingEntity) this.getOwner(), entity, toolStack, false);
                 entity.hurt(DreamtinkerDamageTypes.source(this.level().registryAccess(), DreamtinkerDamageTypes.tnt_arrow_force, null, this.getOwner()),
                             damage);
             }
@@ -100,7 +100,7 @@ public class TNTArrow extends ModifiableArrowItem {
                     if (explosion){
                         ToolStack ts = ToolStack.from(this.getRawPickupItem());
 
-                        float damage = DTModifierCheck.getMeleeDamage(owner, owner, ts);
+                        float damage = DTModifierCheck.getMeleeDamage(owner, owner, ts, false);
                         double explosionPower =
                                 Math.min(Math.sqrt(damage) * 2, ForceExplosionPower.get());
                         ExplosionDamageCalculator calc =

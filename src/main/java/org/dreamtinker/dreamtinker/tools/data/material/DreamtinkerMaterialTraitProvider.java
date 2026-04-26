@@ -101,6 +101,8 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.SpiralSpin, RANGED, ModifierIds.pierce, side_attack.getId(), view_tracing.getId());
         addTraits(DreamtinkerMaterialIds.SpiralSpin, AMMO, ModifierIds.pierce, side_attack.getId(), view_tracing.getId());
 
+        addDefaultTraits(DreamtinkerMaterialIds.RuinWheelSteel, doom_track.getId(), doom_ray.getId(), Ids.pressing_front);
+
         addDefaultTraits(DreamtinkerMaterialIds.ArcaneGold, Ids.arcane_hit);
         addTraits(DreamtinkerMaterialIds.ArcaneGold, ARMOR, TinkerModifiers.golden.getId(), ModifierIds.magicProtection, Ids.arcane_protection);
         addTraits(DreamtinkerMaterialIds.ArcaneGold, PlatingMaterialStats.SHIELD.getId(), ModifierIds.magicProtection, Ids.arcane_protection);

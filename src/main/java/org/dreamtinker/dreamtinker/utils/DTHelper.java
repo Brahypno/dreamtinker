@@ -12,13 +12,18 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -42,6 +47,7 @@ import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
+import slimeknights.tconstruct.library.modifiers.entity.ProjectileWithPower;
 import slimeknights.tconstruct.library.tools.helper.ToolBuildHandler;
 import slimeknights.tconstruct.library.tools.helper.TooltipBuilder;
 import slimeknights.tconstruct.library.tools.item.IModifiable;
@@ -402,5 +408,54 @@ public class DTHelper {
             dz = a.minZ - b.maxZ;
 
         return dx * dx + dy * dy + dz * dz;
+    }
+
+    public static float getPositiveAttributeBonus(LivingEntity entity, Attribute attribute) {
+        AttributeInstance instance = entity.getAttribute(attribute);
+        if (instance == null){
+            return 0.0f;
+        }
+
+        double base = instance.getBaseValue();
+
+        double addition = 0.0D;
+        double multiplyBase = 0.0D;
+        double multiplyTotalFactor = 1.0D;
+
+        for (AttributeModifier modifier : instance.getModifiers()) {
+            double amount = modifier.getAmount();
+
+            // 只统计正向 modifier，忽略 debuff / 负数 modifier
+            if (amount <= 0.0D){
+                continue;
+            }
+
+            switch (modifier.getOperation()) {
+                case ADDITION -> {
+                    addition += amount;
+                }
+                case MULTIPLY_BASE -> {
+                    multiplyBase += base * amount;
+                }
+                case MULTIPLY_TOTAL -> {
+                    multiplyTotalFactor *= 1.0D + amount;
+                }
+            }
+        }
+
+        double valueBeforeTotalMultiplier = base + addition + multiplyBase;
+        double positiveOnlyValue = valueBeforeTotalMultiplier * multiplyTotalFactor;
+
+        return (float) Math.max(0.0D, positiveOnlyValue);
+    }
+
+    public static float getDamage(Projectile projectile) {
+        if (projectile instanceof ProjectileWithPower withPower){
+            return withPower.getDamage();
+        }
+        if (projectile instanceof AbstractArrow arrow){
+            return (float) Mth.ceil(Mth.clamp(arrow.getBaseDamage() * projectile.getDeltaMovement().length(), 0, Integer.MAX_VALUE));
+        }
+        return 0;
     }
 }

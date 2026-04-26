@@ -1,6 +1,8 @@
 {
   "values": [
     "dreamtinker:null_void",
-    "dreamtinker:edict_punishments"
+    "dreamtinker:arcane_damage",
+    "dreamtinker:edict_punishments",
+    "dreamtinker:ruin_wheel"
   ]
 }

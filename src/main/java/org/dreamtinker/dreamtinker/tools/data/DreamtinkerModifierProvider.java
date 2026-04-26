@@ -510,6 +510,12 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.sticky_string)
                 .addModule(StatBoostModule.add(ToolStats.PROJECTILE_DAMAGE).eachLevel(0.5f))
                 .addModule(StatBoostModule.add(ToolStats.DRAW_SPEED).eachLevel(-0.2f));
+        buildModifier(Ids.pressing_front)
+                .addModule(MobEffectModule.builder(DreamtinkerEffects.PressingFront.get())
+                                          .applyBeforeMelee(true)
+                                          .level(RandomLevelingValue.perLevel(0, 1))
+                                          .time(RandomLevelingValue.random(20 * 4, 10))
+                                          .build());
 
         addELModifiers();
         addMalumModifiers();

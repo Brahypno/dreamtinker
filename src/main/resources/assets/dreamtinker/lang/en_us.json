@@ -806,7 +806,15 @@
   "modifier.dreamtinker.born_with_me.flavor": "All born and ashen",
   "modifier.dreamtinker.born_with_me.description": "When kill an entity, perform a full extra attack to nearby entity. Each level increases the extra attack damage. Extra attack would light self and target, and deals damage to the attacker equal to 5% per level of the damage dealt by this extra attack.",
   "modifier.dreamtinker.born_with_me.attack_damage": "damage if its extra attack",
-
+  "modifier.dreamtinker.doom_track": "Doom Track",
+  "modifier.dreamtinker.doom_track.flavor": "To advance, To crush, To declare, and to ruin all things.",
+  "modifier.dreamtinker.doom_track.description": "After hit an entity, deal extra ruin wheel damage based on damage dealt and boost by target armor, toughness, size, resistance, shield and if its a boss",
+  "modifier.dreamtinker.doom_ray": "Doom Ray",
+  "modifier.dreamtinker.doom_ray.flavor": "a sentence carved through the barrel",
+  "modifier.dreamtinker.doom_ray.description": "After hit an entity, deal damage to entities behind it",
+  "modifier.dreamtinker.pressing_front": "Pressing Front",
+  "modifier.dreamtinker.pressing_front.flavor": "No way pass",
+  "modifier.dreamtinker.pressing_front.description": "Hit apply 'pressing front' effect, which decrease armor and apply gravity effect",
 
   "material.dreamtinker.echo_alloy": "Echo Alloy",
   "material.dreamtinker.echo_alloy.flavor": "Its echo of mystery, or echo of enigma",
@@ -977,6 +985,9 @@
   "material.dreamtinker.spiral_spin": "Spiral Spin",
   "material.dreamtinker.spiral_spin.flavor": "The third magic of homo sapiens",
   "material.dreamtinker.spiral_spin.encyclopedia": "The third magic of homo sapiens",
+  "material.dreamtinker.ruin_wheel_steel": "Ruin Wheel Steel",
+  "material.dreamtinker.ruin_wheel_steel.flavor": "Stone left the hand, fire entered the barrel, and the wheel passed over the earth. It was, it is, and it ever shall be—ordained to ruin all things.",
+  "material.dreamtinker.ruin_wheel_steel.encyclopedia": "Stone left the hand, fire entered the barrel, and the wheel passed over the earth. It was, it is, and it ever shall be—ordained to ruin all things.",
 
   "itemGroup.dreamtinker.tool": "Dreamtinker | tool",
   "itemGroup.dreamtinker.part": "Dreamtinker | part",
@@ -1423,6 +1434,7 @@
   "effect.dreamtinker.edict_of_untouched": "Edict of the Untouched",
   "effect.dreamtinker.law_of_the_lowered_eyes": "Law of the Lowered Eyes",
   "effect.dreamtinker.soul_fire": "Cursed fire",
+  "effect.dreamtinker.pressing_front": "Pressing Front",
 
   "adv.dreamtinker.eat_star_regulus.title": "Magnum Opus",
   "adv.dreamtinker.eat_star_regulus.desc": "Devour star regulus",
@@ -1455,6 +1467,7 @@
   "death.attack.dreamtinker.arcane_damage": "Cursed by Arcane Arts",
   "death.attack.dreamtinker.tnt_arrow_force": "Suicide By not safely using TnT Arrow",
   "death.attack.dreamtinker.edict_punishments": "Suicide By against the edict",
+  "death.attack.dreamtinker.ruin_wheel": "Cursed by The Falling fate wheel",
 
   "entity.dreamtinker.aggressive_fox": "Armed Fox",
 

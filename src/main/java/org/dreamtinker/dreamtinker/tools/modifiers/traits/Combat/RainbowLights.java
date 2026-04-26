@@ -21,7 +21,7 @@ public class RainbowLights extends BattleModifier {
     }
 
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        float Theoretical_damage = Math.max(0.5f, DTModifierCheck.getMeleeDamage(context.getAttacker(), context.getTarget(), tool));
+        float Theoretical_damage = Math.max(0.5f, DTModifierCheck.getMeleeDamage(context.getAttacker(), context.getTarget(), tool, false));
         Theoretical_damage = Math.max(Theoretical_damage, damageDealt);
         LivingEntity victim = context.getLivingTarget();
         if (null != victim && !victim.level().isClientSide){

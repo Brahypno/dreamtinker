@@ -53,7 +53,7 @@ public class SideAttack extends BattleModifier {
         bh = bh.normalize();
 
         double dot = Mth.clamp(ah.dot(bh), -1.0D, 1.0D);
-        return (float) Math.toDegrees(Math.acos(dot)) / 180.0f;
+        return (float) Math.abs(dot);
     }
 
     public boolean isNoLevels() {return false;}

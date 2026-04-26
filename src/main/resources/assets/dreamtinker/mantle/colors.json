@@ -199,7 +199,10 @@
     "occ_harvest": "#79A7AF",
     "occ_view": "#79A7AF",
     "side_attack": "#444857",
-    "born_with_me": "#CD3F47"
+    "born_with_me": "#CD3F47",
+    "doom_track": "#FFF0B0",
+    "doom_ray": "#FFF0B0",
+    "pressing_front": "#FFF0B0"
 
 },
   "material.dreamtinker": {
@@ -275,7 +278,8 @@
     "regalium": "#D8964A",
     "undergarden_gooey_slime": "#645842",
     "iesnium": "#79A7AF",
-    "spiral_spin": "#444857"
+    "spiral_spin": "#444857",
+    "ruin_wheel_steel": "#FFF0B0"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873",

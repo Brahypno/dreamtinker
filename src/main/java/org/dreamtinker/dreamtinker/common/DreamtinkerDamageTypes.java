@@ -22,6 +22,7 @@ public class DreamtinkerDamageTypes {
     public static final ResourceKey<DamageType> arcane_damage = create("arcane_damage");//This is extra damage, don`t use as full otherwise may be too powerful
     public static final ResourceKey<DamageType> tnt_arrow_force = create("tnt_arrow_force");
     public static final ResourceKey<DamageType> edict_punishments = create("edict_punishments");
+    public static final ResourceKey<DamageType> ruin_wheel = create("ruin_wheel");
 
     private static ResourceKey<DamageType> create(String name) {
         return ResourceKey.create(Registries.DAMAGE_TYPE, Dreamtinker.getLocation(name));

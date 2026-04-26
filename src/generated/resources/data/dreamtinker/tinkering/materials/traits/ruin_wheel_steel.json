@@ -1,0 +1,16 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "dreamtinker:doom_track"
+    },
+    {
+      "level": 1,
+      "name": "dreamtinker:doom_ray"
+    },
+    {
+      "level": 1,
+      "name": "dreamtinker:pressing_front"
+    }
+  ]
+}

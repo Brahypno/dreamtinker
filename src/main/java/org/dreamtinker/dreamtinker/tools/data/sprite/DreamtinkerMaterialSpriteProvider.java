@@ -2,15 +2,18 @@ package org.dreamtinker.dreamtinker.tools.data.sprite;
 
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
+import net.minecraft.resources.ResourceLocation;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.client.data.material.AbstractMaterialSpriteProvider;
+import slimeknights.tconstruct.library.client.data.spritetransformer.FramesSpriteTransformer;
 import slimeknights.tconstruct.library.client.data.spritetransformer.GreyToColorMapping;
 import slimeknights.tconstruct.library.client.data.spritetransformer.GreyToSpriteTransformer;
 import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
 import slimeknights.tconstruct.tools.stats.*;
 
+import static slimeknights.tconstruct.tools.data.sprite.TinkerPartSpriteProvider.INGOT;
 import static slimeknights.tconstruct.tools.data.sprite.TinkerPartSpriteProvider.STORAGE_BLOCK;
 
 public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpriteProvider {
@@ -426,6 +429,31 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFFC8C9CF)
                                                 .addARGB(255, 0xFFFFFFFF)
                                                 .build());
+        ResourceLocation ruin_steel = Dreamtinker.getLocation("generator/ruin_steel");
+        this.buildMaterial(DreamtinkerMaterialIds.RuinWheelSteel)
+            .meleeHarvest().ranged().fletching().statType(INGOT)
+            .fallbacks("mental")
+            .transformer(new FramesSpriteTransformer(
+                    ruin_steel,
+                    GreyToSpriteTransformer.builderFromBlack()
+                                           .addARGB(25, 0xFF120904)
+                                           .addTexture(26, ruin_steel)
+                                           .addTexture(102, ruin_steel)
+                                           .addARGB(140, 0xFF865016)
+                                           .addARGB(178, 0xFF5A1808)
+                                           .addARGB(216, 0xFF331108)
+                                           .addARGB(255, 0xFF160A04)
+                                           .build(),
+                    GreyToSpriteTransformer.builderFromBlack()
+                                           .addARGB(25, 0xFF120904)
+                                           .addTexture(26, ruin_steel)
+                                           .addTexture(102, ruin_steel)
+                                           .addARGB(140, 0xFFFFF0B0)
+                                           .addARGB(178, 0xFFFFC957)
+                                           .addARGB(216, 0xFFD18A22)
+                                           .addARGB(255, 0xFF865016)
+                                           .build()
+            ));
         addELMaterials();
         addMalumMaterials();
         addEidolonMaterials();

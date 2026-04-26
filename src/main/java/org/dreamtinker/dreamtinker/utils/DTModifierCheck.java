@@ -188,7 +188,7 @@ public class DTModifierCheck {
         }
     }
 
-    public static float getMeleeDamage(LivingEntity attacker, Entity entity, IToolStackView toolStack) {
+    public static float getMeleeDamage(LivingEntity attacker, Entity entity, IToolStackView toolStack, boolean withCritical) {
         ToolAttackContext context = ToolAttackContext.attacker((LivingEntity) attacker).target(entity).cooldown(1).toolAttributes(toolStack)
                                                      .build();
         float baseDamage = context.getBaseDamage();
@@ -197,6 +197,12 @@ public class DTModifierCheck {
 
         for (ModifierEntry entry : modifiers) {
             damage = (entry.getHook(ModifierHooks.MELEE_DAMAGE)).getMeleeDamage(toolStack, entry, context, baseDamage, damage);
+        }
+        if (withCritical){
+            float criticalModifier = context.getCriticalModifier();
+            if (criticalModifier != 1){
+                damage += baseDamage * (criticalModifier - 1);
+            }
         }
         return damage;
     }
@@ -237,5 +243,30 @@ public class DTModifierCheck {
                 return false;
         }
         return true;
+    }
+
+    public static boolean getExpectedMaterialPart(ItemStack stack, ResourceLocation resourceLocation) {
+        CompoundTag tag = stack.getTag();
+        if (tag != null && tag.contains("Material", Tag.TAG_STRING)){
+            String material = tag.getString("Material");
+            String targetId = resourceLocation.toString();
+            return material.equals(targetId);
+        }
+        return false;
+    }
+
+    public static int getExpectedMaterial(ItemStack stack, ResourceLocation resourceLocation) {
+        CompoundTag tag = stack.getTag();
+        if (tag != null && tag.contains(ToolStack.TAG_MATERIALS, Tag.TAG_LIST)){
+            var list = tag.getList(ToolStack.TAG_MATERIALS, Tag.TAG_STRING);
+            String targetId = resourceLocation.toString();
+            for (int i = 0; i < list.size(); i++) {
+                if (list.getString(i).equals(targetId)){
+                    return i;
+                }
+            }
+            return -1;
+        }
+        return -1;
     }
 }

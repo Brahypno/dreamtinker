@@ -113,6 +113,10 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new HeadMaterialStats(1200, 6f, Tiers.DIAMOND, 3.5f),
                          HandleMaterialStats.multipliers().durability(1.35f).attackDamage(1.15f).attackSpeed(0.85f).build(),
                          StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.RuinWheelSteel,
+                         new HeadMaterialStats(1945, 12.7f, Tiers.NETHERITE, 7.28f),
+                         HandleMaterialStats.multipliers().durability(3.13f).attackDamage(1.86f).attackSpeed(1.91f).miningSpeed(1.66f).build(),
+                         StatlessMaterialStats.BINDING);
 
         addMaterialStats(DreamtinkerMaterialIds.Utherium,
                          new HeadMaterialStats(1000, 8.5f, Tiers.DIAMOND, 3.5f),
@@ -281,6 +285,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addMaterialStats(DreamtinkerMaterialIds.SpiralSpin,
                          new LimbMaterialStats(1200, -0.2f, 0.30f, 0.4f),
                          new GripMaterialStats(-0.1f, 0.4f, 3f));
+        addMaterialStats(DreamtinkerMaterialIds.RuinWheelSteel,
+                         new LimbMaterialStats(1945, 12.7f, 0.91f, 0.66f),
+                         new GripMaterialStats(2.13f, 0.86f, 7.28f));
 
         addMaterialStats(DreamtinkerMaterialIds.ArcaneGold,
                          new LimbMaterialStats(32, 0.1f, 0.15f, -0.2f),
@@ -468,6 +475,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         this.addMaterialStats(DreamtinkerMaterialIds.SpikyShard, StatlessMaterialStats.ARROW_HEAD);
         this.addMaterialStats(DreamtinkerMaterialIds.FifthStone, StatlessMaterialStats.ARROW_HEAD);
         this.addMaterialStats(DreamtinkerMaterialIds.SpiralSpin, StatlessMaterialStats.FLETCHING);
+        this.addMaterialStats(DreamtinkerMaterialIds.RuinWheelSteel, StatlessMaterialStats.FLETCHING);
         this.addMaterialStats(DreamtinkerMaterialIds.Utherium, StatlessMaterialStats.ARROW_HEAD);
         this.addMaterialStats(DreamtinkerMaterialIds.Regalium, StatlessMaterialStats.ARROW_HEAD);
 

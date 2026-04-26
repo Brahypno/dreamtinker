@@ -35,6 +35,7 @@ public class DreamtinkerMaterialIds {
     public static final MaterialId SpikyShard = new MaterialId(new ResourceLocation(MODID, "spiky_shard"));
     public static final MaterialId FifthStone = new MaterialId(new ResourceLocation(MODID, "fifth_stone"));
     public static final MaterialId SpiralSpin = new MaterialId(new ResourceLocation(MODID, "spiral_spin"));
+    public static final MaterialId RuinWheelSteel = new MaterialId(new ResourceLocation(MODID, "ruin_wheel_steel"));
     //Compact tag
     public static final MaterialId ArcaneGold = new MaterialId(new ResourceLocation(MODID, "arcane_gold"));//eidolon
     public static final MaterialId Utherium = new MaterialId(new ResourceLocation(MODID, "utherium"));//undergarden

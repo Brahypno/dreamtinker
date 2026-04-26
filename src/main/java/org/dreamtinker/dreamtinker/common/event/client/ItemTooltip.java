@@ -4,6 +4,7 @@ import com.hollingsworth.arsnouveau.api.registry.PerkRegistry;
 import com.hollingsworth.arsnouveau.setup.registry.BlockRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -14,10 +15,12 @@ import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
+import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.dreamtinker.dreamtinker.tools.items.UnderArmorItem;
 import org.dreamtinker.dreamtinker.utils.CompactUtils.arsNovaUtils;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import slimeknights.tconstruct.common.TinkerTags;
+import slimeknights.tconstruct.tools.TinkerToolParts;
 
 import static org.dreamtinker.dreamtinker.Dreamtinker.configCompactDisabled;
 
@@ -45,6 +48,12 @@ public class ItemTooltip {
         }
         if (e.getItemStack().is(DreamtinkerTagKeys.Items.TRANSMUTE_ACCEL)){
             e.getToolTip().add(Component.translatable("tooltip.dreamtinker.transmute_accel", DreamtinkerCachedConfig.TransmuteAcceleratorTemperature.get()));
+        }
+        if (e.getItemStack().getItem().equals(TinkerToolParts.fakeIngot.asItem()) &&
+            DTModifierCheck.getExpectedMaterialPart(e.getItemStack(), DreamtinkerMaterialIds.RuinWheelSteel)){
+            e.getToolTip()
+             .add(Component.translatable("material.dreamtinker.ruin_wheel_steel.encyclopedia").withStyle(ChatFormatting.ITALIC)
+                           .withStyle(Style.EMPTY.withColor(0xFFF0B0)));
         }
     }
 }

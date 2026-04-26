@@ -13,10 +13,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.common.effect.realDarkness;
-import org.dreamtinker.dreamtinker.common.effect.soulFire;
-import org.dreamtinker.dreamtinker.common.effect.thirsty;
-import org.dreamtinker.dreamtinker.common.effect.unholy;
+import org.dreamtinker.dreamtinker.common.effect.*;
 
 import java.util.List;
 
@@ -72,8 +69,8 @@ public class DreamtinkerEffects {
                 @Override
                 public List<ItemStack> getCurativeItems() {return List.of();}
             });
-    public static final RegistryObject<MobEffect> SoulFire =
-            EFFECT.register("soul_fire", soulFire::new);
+    public static final RegistryObject<MobEffect> SoulFire = EFFECT.register("soul_fire", soulFire::new);
+    public static final RegistryObject<PressingFrontEffect> PressingFront = EFFECT.register("pressing_front", PressingFrontEffect::new);
 
 
     @SubscribeEvent
