@@ -4,10 +4,10 @@
     "item": "minecraft:flint"
   },
   "cast_consumed": true,
-  "cooling_time": 65,
+  "cooling_time": 80,
   "fluid": {
-    "amount": 90,
-    "tag": "forge:molten_cobalt"
+    "amount": 250,
+    "tag": "tconstruct:molten_clay"
   },
   "result": "dreamtinker:fifth_stone"
 }

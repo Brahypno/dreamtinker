@@ -340,7 +340,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                 .setCast(Items.BOOK, true)
                                 .save(consumer, prefix(DreamtinkerCommon.hypnagogic_transmute, "common/"));
         ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.fifth_stone.get())
-                                .setFluidAndTime(TinkerFluids.moltenCobalt, FluidValues.INGOT)
+                                .setFluidAndTime(TinkerFluids.moltenClay, FluidValues.BRICK)
                                 .setCast(Items.FLINT, true)
                                 .save(consumer, location(Casting_folder + "fifth_stone"));
         ItemCastingRecipeBuilder.basinRecipe(Items.BUDDING_AMETHYST)
