@@ -1,0 +1,11 @@
+{
+  "title": "黑刚玉矿石",
+  "item": "dreamtinker:black_sapphire_ore",
+  "text": [
+    {
+      "text": "黑刚玉矿石是一种稀有矿石，生成在末地的Y=30到Y=56之间。",
+      "paragraph": true
+    }
+  ]
+}
+

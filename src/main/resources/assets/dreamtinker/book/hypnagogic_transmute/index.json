@@ -10,7 +10,14 @@
     "name": "modifiers",
     "data": "sections/modifiers.json",
     "icon": {
-      "item": "minecraft:redstone"
+      "item": "dreamtinker:transmutation_gold_dust"
+    }
+  },
+  {
+    "name": "exploration",
+    "data": "sections/exploration.json",
+    "icon": {
+      "item": "dreamtinker:soul_cast"
     }
   },
   {

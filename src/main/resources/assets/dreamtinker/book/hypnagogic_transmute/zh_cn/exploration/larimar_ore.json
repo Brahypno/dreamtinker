@@ -1,0 +1,10 @@
+{
+  "title": "海纹石原矿",
+  "item": "dreamtinker:larimar_ore",
+  "text": [
+    {
+      "text": "海纹石原矿是一种不常见的矿石，生成在海拔45到70之间的沙滩上。",
+      "paragraph": true
+    }
+  ]
+}

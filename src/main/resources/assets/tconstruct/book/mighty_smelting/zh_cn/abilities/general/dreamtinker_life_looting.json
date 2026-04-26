@@ -1,0 +1,14 @@
+{
+  "modifier_id": "dreamtinker:life_looting",
+  "text": [
+    {
+      "text": "在血量上限低于20时，提高时运，抢夺；反之降低。可配置"
+    }
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable",
+  "effects": [
+    "第一级需要1能力槽，之后需要能力槽",
+    "最高1级"
+  ]
+}

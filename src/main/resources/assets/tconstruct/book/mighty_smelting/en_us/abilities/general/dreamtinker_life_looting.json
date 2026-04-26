@@ -1,0 +1,14 @@
+{
+  "modifier_id": "dreamtinker:life_looting",
+  "text": [
+    {
+      "text": "In crease loot&fortune when max health is smaller than 20;Otherwise increase it;\n Configurable."
+    }
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable",
+  "effects": [
+    "Requires 1 ability slot",
+    "Single Level"
+  ]
+}

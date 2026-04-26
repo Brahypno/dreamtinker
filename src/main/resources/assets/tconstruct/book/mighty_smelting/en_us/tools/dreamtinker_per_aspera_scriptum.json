@@ -1,0 +1,13 @@
+{
+  "tool": "dreamtinker:per_aspera_scriptum",
+  "text": [
+    { "text": "Per Aspera Scriptum is a book with Arts nova Spell book ability and provide extra max mana and mana regeneration " },
+    { "text": "Allow Tinker ability to be effective. Touch and self would trigger melee stats, others would trigger ranged stats.", "paragraph": true }
+  ],
+  "properties": [
+    "+1 Attack Damage",
+    "1.00 Arrow Velocity",
+    "0.75 Accuracy",
+    "Sums stats of four parts"
+  ]
+}

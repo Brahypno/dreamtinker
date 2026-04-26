@@ -1,0 +1,17 @@
+{
+  "modifier_id": "dreamtinker:weapon_books",
+  "text": [
+    {
+      "text": "第一级获得倒转之启的能力。\n第二级获得无止之言的能力，近战攻击对boss和玩家造成更多伤害和击退, 吸血和额外负面效果。\n第三级额外获得第二级的效果。"
+    }
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable/melee",
+  "effects": [
+    "第1级需要1个能力槽",
+    "第2级需要1个升级槽",
+    "第3级需要1个灵魂槽",
+    "承受七咒之人才能使用此物品",
+    "修正第四诅咒: 始终造成全额伤害"
+  ]
+}

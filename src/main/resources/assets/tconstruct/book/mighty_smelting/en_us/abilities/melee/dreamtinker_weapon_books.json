@@ -1,0 +1,17 @@
+{
+  "modifier_id": "dreamtinker:weapon_books",
+  "text": [
+    {
+      "text": "For first level, gain the ability of The Twist.\nFor second level, gain the ability of The Infinitum, deal extra damage and knockback to boss and player, lifesteal and extra negative effects.\nFor third&last level, gain the second level's effect additionally."
+    }
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable/melee",
+  "effects": [
+    "Requires 1 ability slot for first level",
+    "Requires 1 upgrade slot for second level",
+    "Requires 1 soul slot for third level",
+    "Only items that can be affected by the Ring of the Seven Curses can have this modifier",
+    "Alteration of the §6Fourth Curse: Always deal full damage"
+  ]
+}
