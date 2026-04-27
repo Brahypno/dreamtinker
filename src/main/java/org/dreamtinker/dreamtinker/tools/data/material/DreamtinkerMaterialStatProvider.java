@@ -99,6 +99,10 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new HeadMaterialStats(120, 12f, DtTiers.TransmutationGold, 1f),
                          HandleMaterialStats.multipliers().durability(0.6f).miningSpeed(1.10f).attackDamage(1.10f).attackSpeed(1.10f).build(),
                          StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.ArcaneGold,
+                         new HeadMaterialStats(66, 9f, Tiers.GOLD, 0.75f),
+                         HandleMaterialStats.multipliers().durability(0.7f).attackDamage(0.90f).miningSpeed(1.25f).attackSpeed(1.20f).build(),
+                         StatlessMaterialStats.BINDING);
 
         addMaterialStats(DreamtinkerMaterialIds.SpikyShard,
                          new HeadMaterialStats(400, 2f, Tiers.IRON, 1.5f),
