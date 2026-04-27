@@ -988,6 +988,7 @@
   "material.dreamtinker.ruin_wheel_steel": "Ruin Wheel Steel",
   "material.dreamtinker.ruin_wheel_steel.flavor": "Stone left the hand, fire entered the barrel, and the wheel passed over the earth. It was, it is, and it ever shall be—ordained to ruin all things.",
   "material.dreamtinker.ruin_wheel_steel.encyclopedia": "Stone left the hand, fire entered the barrel, and the wheel passed over the earth. It was, it is, and it ever shall be—ordained to ruin all things.",
+  "material.dreamtinker.ruin_wheel_steel_transform": "The first stone, the first flame, and the first wheel bear witness in this moment",
 
   "itemGroup.dreamtinker.tool": "Dreamtinker | tool",
   "itemGroup.dreamtinker.part": "Dreamtinker | part",
@@ -1442,6 +1443,8 @@
   "advancements.dreamtinker.tools.silence_glove.description": "Obtain Silence Glove",
   "advancements.dreamtinker.tools.six_finger.title": "Man with six finger hand",
   "advancements.dreamtinker.tools.six_finger.description": "Obtain Silence Glove that provide 6 ring slots(Need Curio!)",
+  "advancements.dreamtinker.tools.ruin_wheel.title": "Ruin Rekindled",
+  "advancements.dreamtinker.tools.ruin_wheel.description": "Let the cast stone, the kindled fire, and the turning wheel return as one within a single strike",
 
   "stat.tconstruct.harvest_tier.dreamtinker.lupus": "Lupus",
   "stat.tconstruct.harvest_tier.dreamtinker.netheritte": "Netheritte",

@@ -8,6 +8,7 @@ import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.PackOutput;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -17,14 +18,17 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.crafting.ConditionalAdvancement;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
+import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.data.GenericDataProvider;
 import slimeknights.mantle.data.predicate.IJsonPredicate;
+import slimeknights.tconstruct.library.json.predicate.tool.HasMaterialPredicate;
 import slimeknights.tconstruct.library.json.predicate.tool.StatInRangePredicate;
 import slimeknights.tconstruct.library.json.predicate.tool.ToolStackItemPredicate;
 import slimeknights.tconstruct.library.json.predicate.tool.ToolStackPredicate;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
+import slimeknights.tconstruct.tools.TinkerToolParts;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -60,6 +64,15 @@ public class AdvancementsProvider extends GenericDataProvider {
                                                                                    ToolStackPredicate.set(DreamtinkerTools.silence_glove.get()));
         builder(Items.ZOMBIE_HEAD, resource("tools/six_finger"), getSilenceGlove, FrameType.GOAL, builder ->
                 builder.addCriterion("damage", InventoryChangeTrigger.TriggerInstance.hasItems(ToolStackItemPredicate.ofTool(six_hand_predicate))));
+
+        CompoundTag nbt = new CompoundTag();
+        nbt.putString("Material", DreamtinkerMaterialIds.RuinWheelSteel.toString());
+        ItemStack ruinSteel = new ItemStack(TinkerToolParts.fakeIngot.get());
+        ruinSteel.setTag(nbt);
+        builder(ruinSteel, resource("tools/ruin_wheel"), resource("textures/gui/advancement_background.png"),
+                FrameType.CHALLENGE, builder ->
+                        builder.addCriterion("material", InventoryChangeTrigger.TriggerInstance.hasItems(
+                                ToolStackItemPredicate.ofContext(new HasMaterialPredicate(DreamtinkerMaterialIds.RuinWheelSteel)))));
     }
 
     @Override

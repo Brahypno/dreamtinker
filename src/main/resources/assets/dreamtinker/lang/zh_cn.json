@@ -988,6 +988,7 @@
   "material.dreamtinker.ruin_wheel_steel": "宿灭轮钢",
   "material.dreamtinker.ruin_wheel_steel.flavor": "石块离手，火种入膛，车轮碾过大地。它昔在，今在，永在，并命定会摧毁一切",
   "material.dreamtinker.ruin_wheel_steel.encyclopedia": "石块离手，火种入膛，车轮碾过大地。它昔在，今在，永在，并命定会摧毁一切",
+  "material.dreamtinker.ruin_wheel_steel_transform": "第一块石、第一缕火、第一只轮，在此刻共同作证",
 
   "itemGroup.dreamtinker.tool": "工匠幻梦 | 工具",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",
@@ -1442,6 +1443,8 @@
   "advancements.dreamtinker.tools.silence_glove.description": "得到静默手套",
   "advancements.dreamtinker.tools.six_finger.title": "六指琴魔",
   "advancements.dreamtinker.tools.six_finger.description": "得到增加6个戒指槽位的静默手套（需要Curios模组！）",
+  "advancements.dreamtinker.tools.ruin_wheel.title": "烬灭再现",
+  "advancements.dreamtinker.tools.ruin_wheel.description": "投掷、点火、转动，然后毁灭抵达",
 
   "stat.tconstruct.harvest_tier.dreamtinker.lupus": "狼",
   "stat.tconstruct.harvest_tier.dreamtinker.netheritte": "下界合全",

@@ -7,9 +7,12 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
+import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.item.IModifiable;
+import slimeknights.tconstruct.library.tools.nbt.MaterialNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
+import slimeknights.tconstruct.tools.data.material.MaterialIds;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.UnbuildLimits;
 import static org.dreamtinker.dreamtinker.tools.modifiers.traits.common.not_like_was.TAG_CHANGE_TIMES;
@@ -43,6 +46,28 @@ public class GeneralPlayerCraftEvent {
                 event.getEntity().sendSystemMessage(Component.translatable("modifier.dreamtinker.acheron.flavor")
                                                              .withStyle(DreamtinkerModifiers.acheron.get().getDisplayName().getStyle()));
                 tool.updateStack(item);
+            }
+            MaterialNBT mats = tool.getMaterials();
+            if (3 <= mats.size()){
+                int thrown = -1, fire = -1, spiral = -1;
+                for (int i = 0; i < mats.size(); i++) {
+                    if (-1 == thrown && mats.get(i).sameVariant(DreamtinkerMaterialIds.FifthStone)){
+                        thrown = i;
+                    }else if (-1 == fire && mats.get(i).sameVariant(MaterialIds.blazingBone)){
+                        fire = i;
+                    }else if (-1 == spiral && mats.get(i).sameVariant(DreamtinkerMaterialIds.SpiralSpin)){
+                        spiral = i;
+                    }
+                }
+                if (-1 != thrown && -1 != fire && -1 != spiral){
+                    mats = mats.replaceMaterial(thrown, DreamtinkerMaterialIds.RuinWheelSteel);
+                    mats = mats.replaceMaterial(fire, MaterialIds.wood);
+                    mats = mats.replaceMaterial(spiral, MaterialIds.stone);
+                    tool.setMaterials(mats);
+                    tool.updateStack(item);
+                    event.getEntity().sendSystemMessage(Component.translatable("material.dreamtinker.ruin_wheel_steel_transform")
+                                                                 .withStyle(DreamtinkerModifiers.doom_track.get().getDisplayName().getStyle()));
+                }
             }
         }
 

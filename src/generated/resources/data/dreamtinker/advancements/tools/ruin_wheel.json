@@ -1,0 +1,41 @@
+{
+  "criteria": {
+    "material": {
+      "conditions": {
+        "items": [
+          {
+            "type": "tconstruct:tool_stack",
+            "predicate": {
+              "type": "tconstruct:has_material",
+              "material": "dreamtinker:ruin_wheel_steel"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "dreamtinker:textures/gui/advancement_background.png",
+    "description": {
+      "translate": "advancements.dreamtinker.tools.ruin_wheel.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "tconstruct:fake_ingot",
+      "nbt": "{Material:\"dreamtinker:ruin_wheel_steel\"}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.dreamtinker.tools.ruin_wheel.title"
+    }
+  },
+  "requirements": [
+    [
+      "material"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
