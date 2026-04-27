@@ -1,6 +1,7 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.soul_aether;
 
 import com.aizistral.enigmaticlegacy.handlers.SuperpositionHandler;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -10,9 +11,13 @@ import net.minecraft.world.phys.EntityHitResult;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.CursedRingBound;
+import org.jetbrains.annotations.NotNull;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.modules.build.ModifierTraitModule;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
-import slimeknights.tconstruct.library.tools.nbt.IToolContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
@@ -24,9 +29,21 @@ import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.ExilesFaultyC
 
 public class ExilesFaulty extends BattleModifier {
     @Override
-    public void addTraits(IToolContext var1, ModifierEntry var2, TraitBuilder var3, boolean var4) {
-        if (var4 && var1.getModifierLevel(DreamtinkerModifiers.cursed_ring_bound.getId()) < 20)
-            var3.add(DreamtinkerModifiers.cursed_ring_bound.getId(), 20);
+    protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addModule(new ModifierTraitModule(DreamtinkerModifiers.cursed_ring_bound.getId(), 1, true));
+        super.registerHooks(hookBuilder);
+    }
+
+    @Override
+    public Component onModifierRemoved(IToolStackView tool, Modifier modifier) {
+        tool.getPersistentData().remove(CursedRingBound.TAG_DEEP_CURSE);
+        return null;
+    }
+
+    @Override
+    public Component validate(IToolStackView tool, ModifierEntry modifier) {
+        tool.getPersistentData().putBoolean(CursedRingBound.TAG_DEEP_CURSE, true);
+        return null;
     }
 
     @Override

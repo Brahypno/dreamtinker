@@ -17,11 +17,11 @@ import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.data.predicate.IJsonPredicate;
 import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.modules.build.ModifierTraitModule;
 import slimeknights.tconstruct.library.modifiers.modules.combat.ConditionalMeleeDamageModule;
 import slimeknights.tconstruct.library.modifiers.modules.combat.KnockbackModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
-import slimeknights.tconstruct.library.tools.nbt.IToolContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 import java.util.Arrays;
@@ -34,6 +34,7 @@ public class ELEnderSlayer extends BattleModifier {
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addModule(new ModifierTraitModule(DreamtinkerModifiers.cursed_ring_bound.getId(), 1, true));
         hookBuilder.addModule(ConditionalMeleeDamageModule.builder().target(ender).percent()
                                                           .formula()
                                                           .variable(LEVEL).constant(EnderSlayer.endDamageBonus.getValue().asModifier(false)).multiply()
@@ -71,12 +72,6 @@ public class ELEnderSlayer extends BattleModifier {
             }
         }
         return damage;
-    }
-
-    @Override
-    public void addTraits(IToolContext var1, ModifierEntry var2, TraitBuilder var3, boolean var4) {
-        if (var4 && 0 == var1.getModifierLevel(DreamtinkerModifiers.cursed_ring_bound.getId()))
-            var3.add(DreamtinkerModifiers.cursed_ring_bound.getId(), 1);
     }
 
     @Override

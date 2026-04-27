@@ -8,9 +8,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
@@ -19,7 +21,7 @@ import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
 import static org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.EldritchPan.TAG_PAN;
 
-public class death_handler {
+public class EL_events {
     public static void onLivingDeath(LivingDeathEvent event) {
         LivingEntity entity = event.getEntity();
         if (entity.level().isClientSide || event.isCanceled())
@@ -44,6 +46,18 @@ public class death_handler {
                     nbt.putInt(TAG_PAN, EldritchPan.getKillCount(weapon));
                     toolstack.updateStack(weapon);
                 }
+            }
+        }
+    }
+
+    public static void onLivingDrops(LivingDropsEvent event) {
+        if (event.isRecentlyHit() && event.getSource() != null && event.getSource().getEntity() instanceof Player &&
+            SuperpositionHandler.isTheCursedOne((Player) event.getSource().getEntity())){
+            Player player = (Player) event.getSource().getEntity();
+            LivingEntity killed = event.getEntity();
+
+            if (killed instanceof EnderDragon && SuperpositionHandler.isTheWorthyOne(player)){
+                SuperpositionHandler.setPersistentInteger(player, "AbyssalHeartsGained", 0);
             }
         }
     }

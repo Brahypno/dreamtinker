@@ -61,7 +61,7 @@ import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.ars_nouveau.ArsPlayerCraftEvent;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.ars_nouveau.SpellEvents;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.curio.curio_hurt_handler;
-import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.enigmatic_legacy.death_handler;
+import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.enigmatic_legacy.EL_events;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.malum.malum_events_handler;
 import org.dreamtinker.dreamtinker.world.data.DTDataPackProvider;
 import slimeknights.tconstruct.library.utils.Util;
@@ -126,7 +126,8 @@ public class Dreamtinker {
             }
             if (ModList.get().isLoaded("enigmaticlegacy") && !configCompactDisabled("enigmaticlegacy")){
                 forgeEventBus.addGenericListener(ItemStack.class, addUnholyWater::attachCaps);
-                forgeEventBus.addListener(death_handler::onLivingDeath);
+                forgeEventBus.addListener(EL_events::onLivingDeath);
+                forgeEventBus.addListener(EL_events::onLivingDrops);
             }
             if (ModList.get().isLoaded("malum") && !configCompactDisabled("malum")){
                 forgeEventBus.addGenericListener(ItemStack.class, addConcentratedGluttonyBottle::attachCaps);

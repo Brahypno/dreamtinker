@@ -18,9 +18,11 @@ import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifi
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.modules.build.ModifierTraitModule;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
-import slimeknights.tconstruct.library.tools.nbt.IToolContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 import java.util.Arrays;
@@ -29,6 +31,24 @@ import java.util.List;
 import static org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.EldritchPan.getBloodlust;
 
 public class WeaponBooks extends BattleModifier {
+    @Override
+    protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addModule(new ModifierTraitModule(DreamtinkerModifiers.cursed_ring_bound.getId(), 1, true));
+        super.registerHooks(hookBuilder);
+    }
+
+    @Override
+    public Component onModifierRemoved(IToolStackView tool, Modifier modifier) {
+        tool.getPersistentData().remove(CursedRingBound.TAG_DEEP_CURSE);
+        return null;
+    }
+
+    @Override
+    public Component validate(IToolStackView tool, ModifierEntry modifier) {
+        if (1 < modifier.getLevel())
+            tool.getPersistentData().putBoolean(CursedRingBound.TAG_DEEP_CURSE, true);
+        return null;
+    }
 
     {
         MinecraftForge.EVENT_BUS.addListener(this::onLivingDeath);
@@ -45,22 +65,17 @@ public class WeaponBooks extends BattleModifier {
 
     }
 
+
     @Override
     public @NotNull List<Component> getDescriptionList(int level) {
         if (1 == level)
-            return Arrays.asList(Component.translatable("tooltip.enigmaticlegacy.theTwist1").withStyle(ChatFormatting.ITALIC),
-                                 Component.translatable("tooltip.enigmaticlegacy.theTwist2").withStyle(ChatFormatting.GRAY));
+            return Arrays.asList(Component.translatable("tooltip.enigmaticlegacy.theTwist1").withStyle(ChatFormatting.ITALIC).append(
+                                         Component.translatable("tooltip.enigmaticlegacy.theTwist2").withStyle(ChatFormatting.GRAY)),
+                                 Component.translatable(getTranslationKey() + ".description").withStyle(ChatFormatting.GRAY));
         else
-            return Arrays.asList(Component.translatable("tooltip.enigmaticlegacy.theInfinitum1").withStyle(ChatFormatting.ITALIC),
-                                 Component.translatable("tooltip.enigmaticlegacy.worthyOnesOnly2").withStyle(ChatFormatting.GRAY));
-    }
-
-    @Override
-    public void addTraits(IToolContext var1, ModifierEntry var2, TraitBuilder var3, boolean var4) {
-        if (var4 && var2.getLevel() < 2 && 0 == var1.getModifierLevel(DreamtinkerModifiers.cursed_ring_bound.getId()))
-            var3.add(DreamtinkerModifiers.cursed_ring_bound.getId(), 1);
-        if (var4 && 2 <= var2.getLevel() && var1.getModifierLevel(DreamtinkerModifiers.cursed_ring_bound.getId()) < 20)
-            var3.add(DreamtinkerModifiers.cursed_ring_bound.getId(), 20);
+            return Arrays.asList(Component.translatable("tooltip.enigmaticlegacy.theInfinitum1").withStyle(ChatFormatting.ITALIC).append(
+                                         Component.translatable("tooltip.enigmaticlegacy.worthyOnesOnly2").withStyle(ChatFormatting.GRAY)),
+                                 Component.translatable(getTranslationKey() + ".description").withStyle(ChatFormatting.GRAY));
     }
 
     @Override
