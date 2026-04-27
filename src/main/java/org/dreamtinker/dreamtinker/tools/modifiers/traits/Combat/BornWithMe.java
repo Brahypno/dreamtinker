@@ -24,7 +24,7 @@ import java.util.List;
 
 public class BornWithMe extends BattleModifier {
     private float buff(int level) {
-        return .5f * .2f * level;
+        return .5f + .2f * level;
     }
 
     @Override
