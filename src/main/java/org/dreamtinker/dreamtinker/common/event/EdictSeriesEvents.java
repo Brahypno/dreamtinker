@@ -10,10 +10,10 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.VanillaGameEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
@@ -54,54 +54,101 @@ public class EdictSeriesEvents {
         }
     }
 
+    private static boolean isStillnessMovementEvent(GameEvent event) {
+        return event == GameEvent.STEP
+               || event == GameEvent.SWIM
+               || event == GameEvent.FLAP
+               || event == GameEvent.ELYTRA_GLIDE;
+    }
+
     @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public static void PlayerTickEvent(TickEvent.PlayerTickEvent event) {
-        net.minecraft.world.entity.player.Player player = event.player;
-        if (event.isCanceled() || null == player)
+    public static void onVanillaGameEventStillness(VanillaGameEvent event) {
+        if (event.isCanceled()){
             return;
-        Level world = player.level();
-        if (world.isClientSide() || player.isPassenger() || player.isFallFlying() || player.isSleeping() || player.isInWaterOrBubble())
+        }
+
+        if (!isStillnessMovementEvent(event.getVanillaEvent())){
             return;
+        }
+
+        if (!(event.getCause() instanceof Player player)){
+            return;
+        }
+
+        Level world = event.getLevel();
+        if (world.isClientSide()
+            || player.isPassenger()
+            || player.isSleeping()){
+            return;
+        }
 
         CompoundTag data = player.getPersistentData();
-        if (player.hasEffect(DreamtinkerEffects.EdictOfStillness.get())){
-            MobEffectInstance EdictOfStillness = player.getEffect(DreamtinkerEffects.EdictOfStillness.get());
-            if (null != EdictOfStillness){
-                boolean moved = player.getDeltaMovement().horizontalDistanceSqr() > 1.0E-4;
 
-                int movingTicks = data.getInt("dreamtinker:stillness_moving_ticks");
-                int cooldown = data.getInt("dreamtinker:stillness_cd");
+        MobEffectInstance edict = player.getEffect(DreamtinkerEffects.EdictOfStillness.get());
+        if (edict == null){
+            data.remove("dreamtinker:stillness_move_start");
+            data.remove("dreamtinker:stillness_last_move");
+            data.remove("dreamtinker:stillness_cd_until");
+            return;
+        }
 
-                if (cooldown > 0){
-                    data.putInt("dreamtinker:stillness_cd", cooldown - 1);
-                }
+        long now = world.getGameTime();
 
-                if (moved){
-                    movingTicks++;
-                }else {
-                    movingTicks = 0;
-                }
+        long cdUntil = data.getLong("dreamtinker:stillness_cd_until");
+        if (now < cdUntil){
+            return;
+        }
 
-                if (cooldown <= 0 && movingTicks >= 15){
+        long lastMove = data.getLong("dreamtinker:stillness_last_move");
+        long moveStart = data.getLong("dreamtinker:stillness_move_start");
 
-                    int level = EdictOfStillness.getAmplifier() + 1;
+        /*
+         * 不同 GameEvent 的触发频率不同：
+         * STEP 通常比较稳定；
+         * SWIM / FLAP / ELYTRA_GLIDE 可能间隔略大。
+         * 所以这里用 10 tick 容错，避免主动移动被误判为中断。
+         */
+        if (moveStart <= 0L || lastMove <= 0L || now - lastMove > 10L){
+            moveStart = now;
+            data.putLong("dreamtinker:stillness_move_start", moveStart);
+        }
 
-                    float self_damage = 0.25f + 0.25f * level;
-                    player.hurt(DreamtinkerDamageTypes.source(world.registryAccess(), DreamtinkerDamageTypes.edict_punishments, null, null), self_damage);
-                    player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 + 10 * level, level - 1));
-                    player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 10 * level, level - 1));
+        data.putLong("dreamtinker:stillness_last_move", now);
 
-                    movingTicks = 0;
-                    data.putInt("dreamtinker:stillness_cd", 40);
-                }
+        if (now - moveStart >= 15L){
+            int level = edict.getAmplifier() + 1;
 
-                data.putInt("dreamtinker:stillness_moving_ticks", movingTicks);
-            }
-        }else {
-            data.remove("dreamtinker:stillness_cd");
-            data.remove("dreamtinker:stillness_moving_ticks");
+            float selfDamage = 0.25f + 0.25f * level;
+
+            player.hurt(
+                    DreamtinkerDamageTypes.source(
+                            world.registryAccess(),
+                            DreamtinkerDamageTypes.edict_punishments,
+                            null,
+                            null
+                    ),
+                    selfDamage
+            );
+
+            player.addEffect(new MobEffectInstance(
+                    MobEffects.MOVEMENT_SLOWDOWN,
+                    20 + 10 * level,
+                    level - 1
+            ));
+
+            player.addEffect(new MobEffectInstance(
+                    MobEffects.DAMAGE_RESISTANCE,
+                    10 * level,
+                    level - 1
+            ));
+
+            data.remove("dreamtinker:stillness_move_start");
+            data.remove("dreamtinker:stillness_last_move");
+
+            data.putLong("dreamtinker:stillness_cd_until", now + 40L);
         }
     }
+
 
     private static final String NBT_LAST_SILENT_STEP = "dreamtinker_last_silent_step";
     private static final String TAG_ASCENT_LAST_JUMP = "dreamtinker_ascent_last_jump";
