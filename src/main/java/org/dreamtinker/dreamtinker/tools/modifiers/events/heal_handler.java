@@ -38,21 +38,12 @@ public class heal_handler {
                 event.setAmount(cap - current);
                 entity.setHealth(cap);
             }
-            float currentAbs = entity.getAbsorptionAmount();
-            if (currentAbs < cap){
-                float toAbsorb = Math.min(cap - currentAbs, heal);
-                entity.setAbsorptionAmount(currentAbs + toAbsorb);
-            }
         }
         int rain_cap = DTModifierCheck.getMainhandModifierLevel(entity, DreamtinkerModifiers.despair_rain.getId());
         if (0 < rain_cap){
-            if (rain_cap <= current){
-                event.setAmount(0f);
-                entity.setHealth(rain_cap);
-            }else if (rain_cap < current + heal){
-                event.setAmount(1);
-                entity.setHealth(rain_cap);
-            }
+            event.setAmount(0f);
+            entity.setHealth(rain_cap);
+            entity.setAbsorptionAmount(entity.getAbsorptionAmount() + current - rain_cap);
         }
 
     }

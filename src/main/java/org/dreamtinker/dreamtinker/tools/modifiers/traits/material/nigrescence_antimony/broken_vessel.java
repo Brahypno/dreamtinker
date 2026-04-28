@@ -8,6 +8,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import org.dreamtinker.dreamtinker.common.DreamtinkerAttributes;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.context.EquipmentChangeContext;
@@ -38,6 +39,14 @@ public class broken_vessel extends ArmorModifier {
             attr.removeModifier(HEALTH_BOOST_ID);
             attr.addPermanentModifier(new AttributeModifier(HEALTH_BOOST_ID, TAG_BASE_HEALTH, attr.getBaseValue() * MAX_HEALTH_MULTIPLIER,  // 加 baseValue，即翻倍
                                                             AttributeModifier.Operation.ADDITION));
+
+            AttributeInstance attr2 = entity.getAttribute(DreamtinkerAttributes.BLOOD_IN_SHELL.get());
+            if (attr2 != null){
+                attr2.removeModifier(HEALTH_BOOST_ID);
+                attr2.addPermanentModifier(
+                        new AttributeModifier(HEALTH_BOOST_ID, TAG_BASE_HEALTH, attr.getBaseValue() * MAX_HEALTH_MULTIPLIER,  // 加 baseValue，即翻倍
+                                              AttributeModifier.Operation.ADDITION));
+            }
         }
     }
 
@@ -58,6 +67,11 @@ public class broken_vessel extends ArmorModifier {
         // 移除 boost
         if (attr.getModifier(HEALTH_BOOST_ID) != null)
             attr.removeModifier(HEALTH_BOOST_ID);
+
+        AttributeInstance attr2 = entity.getAttribute(DreamtinkerAttributes.BLOOD_IN_SHELL.get());
+        if (attr2 != null){
+            attr2.removeModifier(HEALTH_BOOST_ID);
+        }
 
         // 恢复原始基础血量
         float original = data.getFloat(TAG_BASE_HEALTH);

@@ -1556,5 +1556,6 @@
   "message.dreamtinker.ashen_melt_switch.mode_1": "Transmute melting mode changed to: Smeltery.",
   "message.dreamtinker.ashen_melt_switch.mode_2": "Transmute melting mode changed to: Foundry.",
 
-  "attribute.name.dreamtinker.generic.fate_veil": "Fate Veil"
+  "attribute.name.dreamtinker.generic.fate_veil": "Fate Veil",
+  "attribute.name.dreamtinker.generic.blood_in_shell": "Shell Heart"
 }

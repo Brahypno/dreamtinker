@@ -1553,5 +1553,6 @@
   "message.dreamtinker.ashen_melt_switch.mode_1": "嬗变炉熔炼功能：冶炼炉",
   "message.dreamtinker.ashen_melt_switch.mode_2": "嬗变炉熔炼功能：熔铸炉",
 
-  "attribute.name.dreamtinker.generic.fate_veil": "命运面纱"
+  "attribute.name.dreamtinker.generic.fate_veil": "命运面纱",
+  "attribute.name.dreamtinker.generic.blood_in_shell": "壳中心"
 }
