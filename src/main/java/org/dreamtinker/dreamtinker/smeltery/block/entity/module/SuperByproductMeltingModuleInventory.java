@@ -47,16 +47,17 @@ public class SuperByproductMeltingModuleInventory extends MeltingModuleInventory
         if (0 == amount || !validSlot(slot))
             return ItemStack.EMPTY;
 
-
         ItemStack existing = getStackInSlot(slot);
         if (existing.isEmpty())
             return ItemStack.EMPTY;
 
+        int extractSize = Math.min(amount, existing.getCount());
         if (simulate){
-            return existing.copy();
+            return ItemHandlerHelper.copyStackWithSize(existing, extractSize);
         }else {
-            setStackInSlot(slot, ItemStack.EMPTY);
-            return existing;
+            ItemStack extracted = ItemHandlerHelper.copyStackWithSize(existing, extractSize);
+            setStackInSlot(slot, ItemHandlerHelper.copyStackWithSize(existing, existing.getCount() - extractSize));
+            return extracted;
         }
     }
 
@@ -91,13 +92,24 @@ public class SuperByproductMeltingModuleInventory extends MeltingModuleInventory
             return stack;
         }
 
-        // if the slot is empty, we can insert. Ignores stack sizes at this time, assuming always 1
         MeltingModule module = getModule(slot);
-        boolean canInsert = module.getStack().isEmpty() || module.getStack().getCount() < getSlotLimit(slot) && module.getStack().equals(stack);
-        if (!simulate && canInsert){
-            setStackInSlot(slot, ItemHandlerHelper.copyStackWithSize(stack, getSlotLimit(slot) - module.getStack().getCount()));
+        ItemStack existing = module.getStack();
+
+        // Check if slot is empty or contains same item with room
+        boolean isSameItem = !existing.isEmpty() && ItemStack.isSameItemSameTags(existing, stack);
+        boolean canInsert = existing.isEmpty() || (isSameItem && existing.getCount() < getSlotLimit(slot));
+
+        int insertSize = canInsert ? Math.min(stack.getCount(), getSlotLimit(slot) - existing.getCount()) : 0;
+
+        if (!simulate && canInsert && insertSize > 0){
+            ItemStack toInsert = ItemHandlerHelper.copyStackWithSize(stack, insertSize);
+            if (existing.isEmpty()){
+                setStackInSlot(slot, toInsert);
+            }else {
+                existing.grow(insertSize);
+            }
         }
-        return canInsert ? ItemHandlerHelper.copyStackWithSize(stack, stack.getCount() - (getSlotLimit(slot) - module.getStack().getCount())) : stack;
+        return insertSize > 0 ? ItemHandlerHelper.copyStackWithSize(stack, stack.getCount() - insertSize) : stack;
     }
 
     @Override
