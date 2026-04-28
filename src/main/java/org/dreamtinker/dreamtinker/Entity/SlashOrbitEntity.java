@@ -12,7 +12,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -68,7 +67,7 @@ public class SlashOrbitEntity extends Entity {
             ServerLevel s, LivingEntity owner,
             float radius, int life, float omega,
             int blades, float damage, float thickness) {
-        this(DreamtinkerModifiers.SLASH_ORBIT.get(), s);
+        this(DreamtinkerEntityTypes.SLASH_ORBIT.get(), s);
         this.owner = owner;
         setRadius(radius);
         setLife(life);

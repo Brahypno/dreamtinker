@@ -15,7 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import org.dreamtinker.dreamtinker.DreamtinkerModule;
+import org.dreamtinker.dreamtinker.Entity.DreamtinkerEntityTypes;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.jetbrains.annotations.NotNull;
 
@@ -51,11 +51,11 @@ public class IronBallItem extends Item {
         }
 
         public ThrownIronBall(Level p_37499_, LivingEntity p_37500_) {
-            super(DreamtinkerModule.ThrownIronBall.get(), p_37500_, p_37499_);
+            super(DreamtinkerEntityTypes.ThrownIronBall.get(), p_37500_, p_37499_);
         }
 
         public ThrownIronBall(Level p_37394_, double p_37395_, double p_37396_, double p_37397_) {
-            super(DreamtinkerModule.ThrownIronBall.get(), p_37395_, p_37396_, p_37397_, p_37394_);
+            super(DreamtinkerEntityTypes.ThrownIronBall.get(), p_37395_, p_37396_, p_37397_, p_37394_);
         }
 
 

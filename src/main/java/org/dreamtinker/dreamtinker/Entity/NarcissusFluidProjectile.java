@@ -64,7 +64,7 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
 
 
     public NarcissusFluidProjectile(Level level) {
-        this(DreamtinkerModifiers.NarcissusSpitEntity.get(), level);
+        this(DreamtinkerEntityTypes.NarcissusSpitEntity.get(), level);
     }
 
     public NarcissusFluidProjectile(Level level, LivingEntity owner, FluidStack fluid, float power, IToolStackView tool) {

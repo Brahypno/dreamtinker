@@ -390,7 +390,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                             StatlessMaterialStats.MAILLE);
         addArmorShieldStats(DreamtinkerMaterialIds.scolecite,
                             PlatingMaterialStats.builder().durabilityFactor(24).armor(1, 4, 6, 1).toughness(1.5f),
-                            StatlessMaterialStats.MAILLE);
+                            StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
         addArmorShieldStats(DreamtinkerMaterialIds.orichalcum,
                             PlatingMaterialStats.builder().durabilityFactor(26).armor(2, 4, 6, 2).toughness(1f).knockbackResistance(2f),
                             StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);

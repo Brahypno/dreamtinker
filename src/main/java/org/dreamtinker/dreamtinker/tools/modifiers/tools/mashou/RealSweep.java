@@ -18,16 +18,24 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import org.dreamtinker.dreamtinker.Entity.SlashOrbitEntity;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
+import org.dreamtinker.dreamtinker.library.modifiers.DreamtinkerHook;
+import org.dreamtinker.dreamtinker.library.modifiers.hook.LeftClickHook;
 import org.joml.Vector3f;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.realSweepRange;
 
-public class RealSweep extends BattleModifier {
+public class RealSweep extends NoLevelsModifier implements LeftClickHook {
+    @Override
+    public void registerHooks(ModuleHookMap.Builder hookBuilder) {
+        hookBuilder.addHook(this, DreamtinkerHook.LEFT_CLICK);
+        super.registerHooks(hookBuilder);
+    }
 
     public void superSweep(IToolStackView tool, ModifierEntry entry, Player player, Level level, Entity entity) {
         if (!level.isClientSide && player.getAttackStrengthScale(0) > 0.8 && !tool.isBroken() && player.getOffhandItem().isEmpty()){

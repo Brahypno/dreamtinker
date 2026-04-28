@@ -238,7 +238,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(255, 0xFF596678)
                                                 .build());
         this.buildMaterial(DreamtinkerMaterialIds.scolecite)
-            .meleeHarvest().armor().ranged()
+            .meleeHarvest().armor().ranged().shieldCore()
             .fallbacks("gem")
             .transformer(GreyToSpriteTransformer.builder()
                                                 .addARGB(63, 0xFF6C6E73)

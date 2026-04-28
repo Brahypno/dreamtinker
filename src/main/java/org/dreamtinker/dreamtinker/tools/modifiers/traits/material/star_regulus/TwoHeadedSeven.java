@@ -12,7 +12,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
-import org.dreamtinker.dreamtinker.DreamtinkerModule;
+import org.dreamtinker.dreamtinker.Entity.DreamtinkerEntityTypes;
 import org.dreamtinker.dreamtinker.Entity.WiserLightBolt;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.jetbrains.annotations.NotNull;
@@ -44,7 +44,7 @@ public class TwoHeadedSeven extends BattleModifier {
             return false;
         ServerLevel level = (ServerLevel) attacker.level();
 
-        WiserLightBolt bolt = new WiserLightBolt(DreamtinkerModule.LIGHTNING_ENTITY.get(), level);
+        WiserLightBolt bolt = new WiserLightBolt(DreamtinkerEntityTypes.LIGHTNING_ENTITY.get(), level);
         BlockPos pos = hit.getBlockPos();
 
         bolt.setPos(pos.getX(), pos.getY(), pos.getZ());

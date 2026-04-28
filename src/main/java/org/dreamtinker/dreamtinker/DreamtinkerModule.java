@@ -5,8 +5,6 @@ import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -23,11 +21,6 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import org.dreamtinker.dreamtinker.Entity.AggressiveFox;
-import org.dreamtinker.dreamtinker.Entity.NarcissusFluidProjectile;
-import org.dreamtinker.dreamtinker.Entity.SlashOrbitEntity;
-import org.dreamtinker.dreamtinker.Entity.WiserLightBolt;
-import org.dreamtinker.dreamtinker.common.Items.IronBallItem;
 import org.dreamtinker.dreamtinker.library.LootModifier.ExtraDropLootModifier;
 import org.dreamtinker.dreamtinker.library.client.particle.VibeBarParticleOptions;
 import org.dreamtinker.dreamtinker.library.client.particle.VibeBarParticleType;
@@ -89,33 +82,6 @@ public abstract class DreamtinkerModule {
     public static final RegistryObject<Codec<? extends IGlobalLootModifier>> ANTIMONY_LOOT =
             LOOT_MODIFIERS.register("extra_drop_loot", () -> ExtraDropLootModifier.CODEC);
 
-    public static final RegistryObject<EntityType<NarcissusFluidProjectile>> NarcissusSpitEntity =
-            ENTITIES.register("narcissus_fluid_spit",
-                              () -> EntityType.Builder.<NarcissusFluidProjectile>of(NarcissusFluidProjectile::new, MobCategory.MISC).sized(1F, 1F)
-                                                      .clientTrackingRange(4)
-                                                      .updateInterval(10));
-    public static final RegistryObject<EntityType<SlashOrbitEntity>> SLASH_ORBIT =
-            ENTITIES.register("slash_orbit",
-                              () -> EntityType.Builder.<SlashOrbitEntity>of(SlashOrbitEntity::new, MobCategory.MISC)
-                                                      .sized(0.5f, 0.5f).clientTrackingRange(64).updateInterval(2));
-    public static final RegistryObject<EntityType<AggressiveFox>> AggressiveFOX =
-            ENTITIES.register("aggressive_fox", () ->
-                    EntityType.Builder.<AggressiveFox>of(AggressiveFox::new, MobCategory.CREATURE)
-                                      .sized(0.6F, 0.7F) // 和原版狐狸一样
-            );
-    public static final RegistryObject<EntityType<IronBallItem.ThrownIronBall>> ThrownIronBall =
-            ENTITIES.register("ironball",
-                              () -> EntityType.Builder.<IronBallItem.ThrownIronBall>of(IronBallItem.ThrownIronBall::new, MobCategory.MISC).sized(0.25F, 0.25F)
-                                                      .clientTrackingRange(4)
-                                                      .updateInterval(10));
-
-    public static final RegistryObject<EntityType<WiserLightBolt>> LIGHTNING_ENTITY =
-            ENTITIES.register("wiser_lightning", () ->
-                    EntityType.Builder.<WiserLightBolt>of(WiserLightBolt::new, MobCategory.MISC)
-                                      .sized(0.0F, 0.0F)
-                                      .clientTrackingRange(16)
-                                      .updateInterval(Integer.MAX_VALUE
-                                      ).setShouldReceiveVelocityUpdates(true).setUpdateInterval(60));
     public static final DeferredRegister<Feature<?>> FEATURES =
             DeferredRegister.create(ForgeRegistries.FEATURES, MODID);
 

@@ -5,8 +5,8 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
-import org.dreamtinker.dreamtinker.DreamtinkerModule;
 import org.dreamtinker.dreamtinker.Entity.AggressiveFox;
+import org.dreamtinker.dreamtinker.Entity.DreamtinkerEntityTypes;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.ArmorInterface;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.ArrowInterface;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.MeleeInterface;
@@ -38,7 +38,7 @@ public class FoxBlessing extends Modifier implements ArrowInterface, MeleeInterf
             return;
         List<AggressiveFox> foxes = spawner.level().getEntitiesOfClass(AggressiveFox.class, spawner.getBoundingBox().inflate(5, 0.25D, 5));
         if (foxes.size() <= 3){
-            AggressiveFox fox = DreamtinkerModule.AggressiveFOX.get().create(spawner.level());
+            AggressiveFox fox = DreamtinkerEntityTypes.AggressiveFOX.get().create(spawner.level());
             if (fox != null){
                 fox.moveTo(spawner.blockPosition(), spawner.getYRot(), spawner.getXRot());
                 if (null != target)

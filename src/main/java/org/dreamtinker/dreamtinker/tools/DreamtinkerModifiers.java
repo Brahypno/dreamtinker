@@ -176,6 +176,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<AutoRefill> auto_refill = MODIFIERS.register("auto_refill", AutoRefill::new);
     public static final StaticModifier<DoomTrack> doom_track = MODIFIERS.register("doom_track", DoomTrack::new);
     public static final StaticModifier<RayAttack> doom_ray = MODIFIERS.register("doom_ray", RayAttack::new);
+    public static final StaticModifier<AsWing> as_wing = MODIFIERS.register("as_wing", AsWing::new);
 
     //etherium
     public static final StaticModifier<ELAstralBreak> astral_break = EL_MODIFIERS.register("astral_break", ELAstralBreak::new);
