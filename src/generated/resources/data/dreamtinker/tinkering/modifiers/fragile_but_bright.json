@@ -16,7 +16,7 @@
     {
       "type": "tconstruct:attribute",
       "attribute": "dreamtinker:generic.fate_veil",
-      "each_level": 0.03,
+      "each_level": 0.06,
       "operation": "addition",
       "slots": [
         "mainhand",

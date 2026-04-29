@@ -7,7 +7,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -28,9 +28,12 @@ public class DreamtinkerAttributes {
         ATTRIBUTES.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
-    public static float getEvadeChance(LivingEntity target) {
-        AttributeInstance attr = target.getAttribute(DreamtinkerAttributes.FATE_VEIL.get());
-        return attr == null ? 0.0f : Mth.clamp((float) attr.getValue(), 0.0f, 0.98f);
+
+    @SubscribeEvent
+    void addAttributes(EntityAttributeModificationEvent event) {
+        // general attributes
+        addToAll(event, FATE_VEIL);
+        addToAll(event, BLOOD_IN_SHELL);
     }
 
 
@@ -51,24 +54,26 @@ public class DreamtinkerAttributes {
         addToAll(event, attribute, attribute.get().getDefaultValue());
     }
 
-    @SubscribeEvent(priority = EventPriority.LOW)
-    static void livingAttack(LivingAttackEvent event) {
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    static void livingAttack(LivingDamageEvent event) {
         LivingEntity entity = event.getEntity();
-        // client side always returns false, so this should be fine?
         if (entity.level().isClientSide() || entity.isDeadOrDying()){
             return;
         }
-        // I cannot think of a reason to run when invulnerable
         DamageSource source = event.getSource();
         if (entity.isInvulnerableTo(source)){
             return;
         }
-        float evadeChance = getEvadeChance(entity);
-        if (evadeChance <= 0)
+        AttributeInstance attr = entity.getAttribute(DreamtinkerAttributes.FATE_VEIL.get());
+        float veil = attr == null ? 0.0f : Mth.clamp((float) attr.getValue(), 0.0f, 0.98f);
+        if (veil <= 0)
             return;
-
-        if (entity.level().getRandom().nextFloat() < evadeChance){
-            event.setCanceled(true);
+        float damage = event.getAmount();
+        float pool = entity.getHealth();
+        if (damage > 0.0F && pool > 0.0F){
+            float reduction = (veil * pool + veil * veil * damage) / (pool + damage);
+            event.setAmount(damage * (1.0F - reduction));
         }
     }
 
@@ -77,7 +82,6 @@ public class DreamtinkerAttributes {
         if (event.isCanceled()){
             return;
         }
-
         LivingEntity entity = event.getEntity();
 
         if (entity.level().isClientSide){
@@ -105,12 +109,5 @@ public class DreamtinkerAttributes {
 
         float added = Math.min(healAmount, cap - currentAbsorption);
         entity.setAbsorptionAmount(currentAbsorption + added);
-    }
-
-    @SubscribeEvent
-    void addAttributes(EntityAttributeModificationEvent event) {
-        // general attributes
-        addToAll(event, FATE_VEIL);
-        addToAll(event, BLOOD_IN_SHELL);
     }
 }

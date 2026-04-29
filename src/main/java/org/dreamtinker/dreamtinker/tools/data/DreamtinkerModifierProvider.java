@@ -268,7 +268,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(StatBoostModule.add(ToolStats.ARMOR).eachLevel(-1.5f))
                 .addModule(StatBoostModule.add(ToolStats.ARMOR_TOUGHNESS).eachLevel(-1f))
                 .addModule(AttributeModule.builder(DreamtinkerAttributes.FATE_VEIL.get(), AttributeModifier.Operation.ADDITION)
-                                          .tooltipStyle(AttributeModule.TooltipStyle.PERCENT).eachLevel(0.03f));
+                                          .tooltipStyle(AttributeModule.TooltipStyle.PERCENT).eachLevel(0.06f));
         buildModifier(Ids.homunculusLifeCurse).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
         buildModifier(Ids.homunculusGift).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
         buildModifier(Ids.peaches_in_memory)
