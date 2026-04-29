@@ -1,31 +1,27 @@
 {
   "values": [
+    "tconstruct:weak",
     "tconstruct:blindshot",
+    "tconstruct:erratic",
     "tconstruct:vintage",
     "tconstruct:flamestance",
-    "tconstruct:entangled",
     "tconstruct:crystalbound",
     "tconstruct:crystalstrike",
     "tconstruct:dense",
-    "tconstruct:heavy",
-    "tconstruct:jagged",
-    "tconstruct:stonebound",
+    "tconstruct:spiny",
     "tconstruct:decay",
     "tconstruct:self_destructive",
     "dreamtinker:strong_heavy",
-    "dreamtinker:echoed_attack",
     "dreamtinker:glacial_river",
     "dreamtinker:broken_vessel",
     "dreamtinker:ewige_widerkunft",
     "dreamtinker:ouroboric_hourglass",
     "dreamtinker:burning_in_vain",
-    "dreamtinker:the_wolf_wonder",
     "dreamtinker:the_wolf_was",
     "dreamtinker:with_tears",
     "dreamtinker:isolde",
     "dreamtinker:mei",
     "dreamtinker:explosive_hit",
-    "dreamtinker:ranged_shoot",
     "dreamtinker:wither_body",
     "dreamtinker:stone_heart",
     "dreamtinker:splendour_heart",
@@ -38,8 +34,6 @@
     "dreamtinker:absorption_defense",
     "dreamtinker:despair_rain",
     "dreamtinker:despair_wind",
-    "dreamtinker:rainbow_catcher",
-    "dreamtinker:not_like_was",
     "dreamtinker:light_in_dark",
     "dreamtinker:light_emanation",
     "dreamtinker:hidden_hit",
@@ -51,10 +45,6 @@
     },
     {
       "id": "dreamtinker:evil_attack",
-      "required": false
-    },
-    {
-      "id": "dreamtinker:malum_tyrving",
       "required": false
     },
     {
@@ -75,6 +65,22 @@
     },
     {
       "id": "dreamtinker:el_eternal_binding",
+      "required": false
+    },
+    {
+      "id": "tinkers_advanced:fragile",
+      "required": false
+    },
+    {
+      "id": "tinkers_advanced:disintegrate",
+      "required": false
+    },
+    {
+      "id": "tinkers_advanced:heavy_material",
+      "required": false
+    },
+    {
+      "id": "tinkers_advanced:blazing",
       "required": false
     }
   ]

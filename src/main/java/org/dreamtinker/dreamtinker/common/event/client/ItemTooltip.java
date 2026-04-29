@@ -1,8 +1,10 @@
 package org.dreamtinker.dreamtinker.common.event.client;
 
+import com.aizistral.enigmaticlegacy.registries.EnigmaticItems;
 import com.hollingsworth.arsnouveau.api.registry.PerkRegistry;
 import com.hollingsworth.arsnouveau.setup.registry.BlockRegistry;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraftforge.api.distmarker.Dist;
@@ -41,6 +43,11 @@ public class ItemTooltip {
             }
             if (e.getItemStack().getItem().equals(BlockRegistry.MOB_JAR.get().asItem())){
                 e.getToolTip().add(Component.translatable("tooltip.dreamtinker.mob_jar").withStyle(ChatFormatting.GREEN));
+            }
+        }
+        if (ModList.get().isLoaded("enigmaticlegacy") && !configCompactDisabled("enigmaticlegacy")){
+            if (Screen.hasShiftDown() && e.getItemStack().getItem().equals(EnigmaticItems.CURSED_SCROLL.asItem())){
+                e.getToolTip().add(Component.translatable("tooltip.dreamtinker.cursed_scroll").withStyle(ChatFormatting.RED));
             }
         }
         if (e.getItemStack().is(DreamtinkerTagKeys.Items.TRANSMUTE_HEATER)){

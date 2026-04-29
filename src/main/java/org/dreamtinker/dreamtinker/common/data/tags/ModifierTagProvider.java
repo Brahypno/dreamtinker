@@ -1,6 +1,7 @@
 package org.dreamtinker.dreamtinker.common.data.tags;
 
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
@@ -22,24 +23,24 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
 
     @Override
     protected void addTags() {
+        final String TIAC = "tinkers_advanced";
         tag(DreamtinkerTagKeys.Modifiers.ArmorWorkingWhenUnequipped)
                 .add(as_one.getId());
         this.tag(DreamtinkerTagKeys.Modifiers.EL_CURSED_MODIFIERS)
-            .add(ModifierIds.blindshot, ModifierIds.vintage, ModifierIds.flamestance, ModifierIds.entangled,
-                 ModifierIds.crystalbound, ModifierIds.crystalstrike, ModifierIds.dense,
-                 ModifierIds.heavy, /*Ids.solid,*/
-                 ModifierIds.jagged, ModifierIds.stonebound, TinkerModifiers.decay.getId(),
+            .add(ModifierIds.weak, ModifierIds.blindshot, ModifierIds.erratic, ModifierIds.vintage, ModifierIds.flamestance,
+                 ModifierIds.crystalbound, ModifierIds.crystalstrike, ModifierIds.dense, ModifierIds.spiny,
+                 TinkerModifiers.decay.getId(),
                  TinkerModifiers.selfDestructive.getId())
-            .add(strong_heavy.getId(), echoed_attack.getId(), glacial_river.getId(),
+            .add(strong_heavy.getId(), glacial_river.getId(),
                  broken_vessel.getId(), ewige_widerkunft.getId(), ouroboric_hourglass.getId(), burning_in_vain.getId(),
-                 the_wolf_wonder.getId(), the_wolf_was.getId(), Ids.with_tears, isolde.getId(),
-                 mei.getId(), explosive_hit.getId(), ranged_shoot.getId(), Ids.wither_body,
+                 the_wolf_was.getId(), Ids.with_tears, isolde.getId(), mei.getId(), explosive_hit.getId(), Ids.wither_body,
                  stone_heart.getId(), splendour_heart.getId(), Ids.why_i_cry, Ids.huge_ego, wait_until.getId(), Ids.FragileButBright,
                  Ids.thundering_curse, Ids.homunculusLifeCurse, absorption_defense.getId(), despair_rain.getId(), despair_wind.getId(),
-                 rainbowCatcher.getId(), not_like_was.getId(), light_in_dark.getId(), light_emanation.getId(), hiddenHit.getId(),
-                 signal_axe.getId(), Ids.golden_face)
-            .addOptional(cursed_ring_bound.getId(), evil_attack.getId(), Ids.malum_tyrving, eldritch_pan.getId(), malum_thirsty.getId(),
-                         Ids.el_nemesis_curse, Ids.el_sorrow, Ids.el_eternal_binding);
+                 light_in_dark.getId(), light_emanation.getId(), hiddenHit.getId(), signal_axe.getId(), Ids.golden_face)
+            .addOptional(cursed_ring_bound.getId(), evil_attack.getId(), eldritch_pan.getId(), malum_thirsty.getId(),
+                         Ids.el_nemesis_curse, Ids.el_sorrow, Ids.el_eternal_binding)
+            .addOptional(new ResourceLocation(TIAC, "fragile"), new ResourceLocation(TIAC, "disintegrate"), new ResourceLocation(TIAC, "heavy_material"),
+                         new ResourceLocation(TIAC, "blazing"));
         this.tag(DreamtinkerTagKeys.Modifiers.EL_CURSED_RELIEF)
             .addOptional(weapon_books.getId(), eldritch_pan.getId(), exiles_faulty.getId());
         this.tag(TinkerTags.Modifiers.MELEE_UPGRADES)
