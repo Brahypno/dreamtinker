@@ -1,6 +1,7 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.events;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -8,14 +9,19 @@ import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
+import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.tools.definition.module.ToolHooks;
 import slimeknights.tconstruct.library.tools.item.IModifiable;
 import slimeknights.tconstruct.library.tools.nbt.MaterialNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.tools.data.material.MaterialIds;
 
+import java.util.List;
+
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.UnbuildLimits;
 import static org.dreamtinker.dreamtinker.tools.modifiers.traits.common.not_like_was.TAG_CHANGE_TIMES;
+import static org.dreamtinker.dreamtinker.utils.DTModifierCheck.getMaterialForTier;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class GeneralPlayerCraftEvent {
@@ -59,10 +65,12 @@ public class GeneralPlayerCraftEvent {
                         spiral = i;
                     }
                 }
+                List<MaterialStatsId> statList = tool.getDefinition().getHook(ToolHooks.TOOL_MATERIALS).getStatTypes(tool.getDefinition());
                 if (-1 != thrown && -1 != fire && -1 != spiral){
+                    RandomSource rand = event.getEntity().getRandom();
                     mats = mats.replaceMaterial(thrown, DreamtinkerMaterialIds.RuinWheelSteel);
-                    mats = mats.replaceMaterial(fire, MaterialIds.wood);
-                    mats = mats.replaceMaterial(spiral, MaterialIds.stone);
+                    mats = mats.replaceMaterial(fire, getMaterialForTier(1, rand, statList.get(fire)));
+                    mats = mats.replaceMaterial(spiral, getMaterialForTier(2, rand, statList.get(spiral)));
                     tool.setMaterials(mats);
                     tool.updateStack(item);
                     event.getEntity().sendSystemMessage(Component.translatable("material.dreamtinker.ruin_wheel_steel_transform")

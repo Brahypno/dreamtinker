@@ -11,6 +11,7 @@ import net.minecraft.world.level.Level;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
+import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.client.TooltipKey;
@@ -30,10 +31,10 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.MaterialNBT;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
+import slimeknights.tconstruct.tools.data.material.MaterialIds;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.*;
 import static org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds.metallivorous_stibium_lupus;
@@ -127,22 +128,11 @@ public class TheWolfWas extends BattleModifier {
         int tier = mat.getTier();
         int possible_tier = Math.min(tier + 1, TheWolfWasMaxTier.get());
 
-        // 5. 从 Registry 中筛选同 tier 的所有材料变体
-        int finalPossible_tier = possible_tier;
-        List<MaterialVariantId> candidates =
-                MaterialRegistry.getInstance().getAllMaterials().stream().filter(m -> finalPossible_tier <= m.getTier()).map(IMaterial::getIdentifier)
-                                .filter(statsId::canUseMaterial).filter(id -> !id.equals(mat.getIdentifier())).collect(Collectors.toList());
-        if (candidates.isEmpty()){
-            possible_tier = Math.min(possible_tier, 6);//6 is metallivorous_stibium_lupus
-            int finalPossible_tier1 = possible_tier;
-            candidates =
-                    MaterialRegistry.getInstance().getAllMaterials().stream().filter(m -> finalPossible_tier1 <= m.getTier()).map(IMaterial::getIdentifier)
-                                    .filter(statsId::canUseMaterial).filter(id -> !id.equals(mat.getIdentifier())).collect(Collectors.toList());
-        }
-        if (candidates.isEmpty())
-            return;
         // 6. 随机挑一个新的 MaterialVariantId
-        MaterialVariantId choice = candidates.get(rand.nextInt(candidates.size()));
+        MaterialVariantId choice = DTModifierCheck.getMaterialForTier(possible_tier, rand, statsId);
+        while (choice == MaterialIds.wood && 0 <= possible_tier) {
+            choice = DTModifierCheck.getMaterialForTier(--possible_tier, rand, statsId);
+        }
         nbt.putInt(TAG_WOLF, count - TheWolfWasDamage.get());
 
         // 7. 使用 replaceMaterial 生成新的 MaterialNBT

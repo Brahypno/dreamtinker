@@ -4,6 +4,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -13,6 +14,10 @@ import net.minecraft.world.item.ItemStack;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.TinkerTags;
+import slimeknights.tconstruct.library.materials.MaterialRegistry;
+import slimeknights.tconstruct.library.materials.definition.IMaterial;
+import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
+import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -25,9 +30,12 @@ import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.item.IModifiable;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
+import slimeknights.tconstruct.tools.data.material.MaterialIds;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 public class DTModifierCheck {
     public static final EquipmentSlot[] slots =
@@ -268,5 +276,29 @@ public class DTModifierCheck {
             return -1;
         }
         return -1;
+    }
+
+    private static final ConcurrentHashMap<Integer, List<MaterialVariantId>> MATERIALS_FOR_TIER_CACHE = new ConcurrentHashMap<>();
+
+    public static MaterialVariantId getMaterialForTier(int tier, RandomSource rand, MaterialStatsId statsId) {
+        int clampedTier = Math.max(0, tier);
+        List<MaterialVariantId> candidates =
+                MATERIALS_FOR_TIER_CACHE.computeIfAbsent(clampedTier, DTModifierCheck::computeMaterialsForTier).stream()
+                                        .filter(m -> statsId.canUseMaterial(m.getId())).toList();
+        return candidates.get(rand.nextInt(candidates.size()));
+    }
+
+    private static List<MaterialVariantId> computeMaterialsForTier(int tier) {
+
+        // Best-effort: gather materials with exact tier. Prefer tconstruct namespace for predictability.
+        var registry = MaterialRegistry.getInstance();
+        List<MaterialVariantId> allChoices = registry.getAllMaterials().stream()
+                                                     .filter(m -> m.getTier() == tier)
+                                                     .map(IMaterial::getIdentifier)
+                                                     .collect(Collectors.toList());
+        if (!allChoices.isEmpty())
+            return allChoices;
+        // Last resort: never empty/null.
+        return List.of(MaterialIds.wood);
     }
 }
