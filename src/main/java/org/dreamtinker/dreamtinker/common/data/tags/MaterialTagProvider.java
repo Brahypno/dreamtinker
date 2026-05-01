@@ -6,7 +6,9 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.data.tinkering.AbstractMaterialTagProvider;
+import slimeknights.tconstruct.tools.data.material.MaterialIds;
 
+import static org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys.Materials.*;
 import static org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds.*;
 
 public class MaterialTagProvider extends AbstractMaterialTagProvider {
@@ -56,6 +58,13 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
                 .addOptional();
         tag(TinkerTags.Materials.COMPATABILITY_ALLOYS)
                 .addOptional(soul_etherium, malignant_gluttony);
+        this.tag(THROW_STONE)
+            .add(FifthStone);
+        this.tag(FIRE_FLAME)//must be man made, not natural.
+            .add(MaterialIds.blazingBone, MaterialIds.blazewood)
+            .addOptional(FireEssence);
+        this.tag(ROTATING_WHEEL)
+            .add(SpiralSpin);
 
     }
 

@@ -11,10 +11,21 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import slimeknights.mantle.Mantle;
+import slimeknights.tconstruct.library.materials.definition.IMaterial;
+import slimeknights.tconstruct.library.materials.definition.MaterialManager;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierManager;
 
 public class DreamtinkerTagKeys {
+    public static class Materials {
+        public static final TagKey<IMaterial> THROW_STONE = DreamtinkerTag("thrown_stone");
+        public static final TagKey<IMaterial> FIRE_FLAME = DreamtinkerTag("fire_flame");
+        public static final TagKey<IMaterial> ROTATING_WHEEL = DreamtinkerTag("rotating_wheel");
+
+        private static TagKey<IMaterial> DreamtinkerTag(String name) {
+            return MaterialManager.getTag(new ResourceLocation(Dreamtinker.MODID, name));
+        }
+    }
 
     public static class Modifiers {
         private static TagKey<Modifier> DreamtinkerTag(String name) {

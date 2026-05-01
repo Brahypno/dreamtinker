@@ -9,16 +9,17 @@ import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
+import slimeknights.tconstruct.library.materials.MaterialRegistry;
 import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.definition.module.ToolHooks;
 import slimeknights.tconstruct.library.tools.item.IModifiable;
 import slimeknights.tconstruct.library.tools.nbt.MaterialNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
-import slimeknights.tconstruct.tools.data.material.MaterialIds;
 
 import java.util.List;
 
+import static org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys.Materials.*;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.UnbuildLimits;
 import static org.dreamtinker.dreamtinker.tools.modifiers.traits.common.not_like_was.TAG_CHANGE_TIMES;
 import static org.dreamtinker.dreamtinker.utils.DTModifierCheck.getMaterialForTier;
@@ -57,11 +58,11 @@ public class GeneralPlayerCraftEvent {
             if (3 <= mats.size()){
                 int thrown = -1, fire = -1, spiral = -1;
                 for (int i = 0; i < mats.size(); i++) {
-                    if (-1 == thrown && mats.get(i).sameVariant(DreamtinkerMaterialIds.FifthStone)){
+                    if (-1 == thrown && MaterialRegistry.getInstance().isInTag(mats.get(i).getId(), THROW_STONE)){
                         thrown = i;
-                    }else if (-1 == fire && mats.get(i).sameVariant(MaterialIds.blazingBone)){
+                    }else if (-1 == fire && MaterialRegistry.getInstance().isInTag(mats.get(i).getId(), FIRE_FLAME)){
                         fire = i;
-                    }else if (-1 == spiral && mats.get(i).sameVariant(DreamtinkerMaterialIds.SpiralSpin)){
+                    }else if (-1 == spiral && MaterialRegistry.getInstance().isInTag(mats.get(i).getId(), ROTATING_WHEEL)){
                         spiral = i;
                     }
                 }

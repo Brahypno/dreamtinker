@@ -274,6 +274,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                            .addARGB(255, 0xFFC0AD76)
                                            .build()
             ));
+
         this.buildMaterial(DreamtinkerMaterialIds.shiningFlint)
             .meleeHarvest().ranged().arrowHead()
             .fallbacks("crystal", "rock", "stick")

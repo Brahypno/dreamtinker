@@ -1,0 +1,10 @@
+{
+  "values": [
+    "tconstruct:blazing_bone",
+    "tconstruct:blazewood",
+    {
+      "id": "dreamtinker:nova_fire_essence",
+      "required": false
+    }
+  ]
+}

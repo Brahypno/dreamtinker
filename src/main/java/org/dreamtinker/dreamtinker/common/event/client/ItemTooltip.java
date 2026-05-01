@@ -59,7 +59,7 @@ public class ItemTooltip {
         if (e.getItemStack().getItem().equals(TinkerToolParts.fakeIngot.asItem()) &&
             DTModifierCheck.getExpectedMaterialPart(e.getItemStack(), DreamtinkerMaterialIds.RuinWheelSteel)){
             e.getToolTip()
-             .add(Component.translatable("material.dreamtinker.ruin_wheel_steel.encyclopedia").withStyle(ChatFormatting.ITALIC)
+             .add(Component.translatable("material.dreamtinker.ruin_wheel_steel.hint").withStyle(ChatFormatting.ITALIC)
                            .withStyle(Style.EMPTY.withColor(0xFFF0B0)));
         }
     }
