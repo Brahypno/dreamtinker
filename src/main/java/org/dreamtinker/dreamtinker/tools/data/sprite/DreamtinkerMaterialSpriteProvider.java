@@ -248,6 +248,32 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFFE6E7E5)
                                                 .addARGB(255, 0xFFFCFCFA)
                                                 .build());
+        this.buildMaterial(DreamtinkerMaterialIds.PermanenceScale)
+            .meleeHarvest().armor().ranged().shieldCore()
+            .fallbacks("gem")
+            .transformer(new FramesSpriteTransformer(
+                    Dreamtinker.getLocation("generator/ruin_steel"),//This seems could be generic
+                    GreyToSpriteTransformer.builderFromBlack()
+                                           .addARGB(25, 0xFF0B0503)
+                                           .addARGB(26, 0xFF120804)
+                                           .addARGB(102, 0xFF3A2410)
+                                           .addARGB(140, 0xFF553817)
+                                           .addARGB(178, 0xFF6B4F25)
+                                           .addARGB(216, 0xFF88733E)
+                                           .addARGB(255, 0xFFA89561)
+                                           .build(),
+
+                    // Frame 2
+                    GreyToSpriteTransformer.builderFromBlack()
+                                           .addARGB(25, 0xFF100704)
+                                           .addARGB(26, 0xFF1B0D06)
+                                           .addARGB(102, 0xFF4B3115)
+                                           .addARGB(140, 0xFF6B4B20)
+                                           .addARGB(178, 0xFF84622F)
+                                           .addARGB(216, 0xFFA28A4B)
+                                           .addARGB(255, 0xFFC0AD76)
+                                           .build()
+            ));
         this.buildMaterial(DreamtinkerMaterialIds.shiningFlint)
             .meleeHarvest().ranged().arrowHead()
             .fallbacks("crystal", "rock", "stick")

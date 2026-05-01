@@ -4,12 +4,15 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.jetbrains.annotations.NotNull;
@@ -22,6 +25,7 @@ import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
+import slimeknights.tconstruct.library.modifiers.entity.ProjectileWithPower;
 import slimeknights.tconstruct.library.modifiers.hook.armor.ModifyDamageModifierHook;
 import slimeknights.tconstruct.library.module.ModuleHook;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
@@ -300,5 +304,15 @@ public class DTModifierCheck {
             return allChoices;
         // Last resort: never empty/null.
         return List.of(MaterialIds.wood);
+    }
+
+    public static float getDamage(Projectile projectile) {
+        if (projectile instanceof ProjectileWithPower withPower){
+            return withPower.getDamage();
+        }
+        if (projectile instanceof AbstractArrow arrow){
+            return (float) Mth.ceil(Mth.clamp(arrow.getBaseDamage() * projectile.getDeltaMovement().length(), 0, Integer.MAX_VALUE));
+        }
+        return 0;
     }
 }

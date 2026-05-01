@@ -27,6 +27,8 @@ public class DreamtinkerMaterialIds {
     public static final MaterialId rainbow_honey_crystal = new MaterialId(new ResourceLocation(MODID, "rainbow_honey_crystal"));
     public static final MaterialId black_sapphire = new MaterialId(new ResourceLocation(MODID, "black_sapphire"));
     public static final MaterialId scolecite = new MaterialId(new ResourceLocation(MODID, "scolecite"));
+    public static final MaterialId PermanenceScale = new MaterialId(new ResourceLocation(MODID, "permanence_scale"));
+    public static final MaterialId PermanenceWing = new MaterialId(new ResourceLocation(MODID, "permanence_wing"));
     public static final MaterialId shiningFlint = new MaterialId(new ResourceLocation(MODID, "shining_flint"));
     public static final MaterialId cold_iron = new MaterialId(new ResourceLocation(MODID, "cold_iron"));
     public static final MaterialId orichalcum = new MaterialId(new ResourceLocation(MODID, "orichalcum"));

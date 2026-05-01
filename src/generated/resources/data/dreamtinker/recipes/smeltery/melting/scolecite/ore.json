@@ -1,5 +1,11 @@
 {
   "type": "tconstruct:ore_melting",
+  "byproducts": [
+    {
+      "amount": 20,
+      "fluid": "dreamtinker:liquid_trist"
+    }
+  ],
   "ingredient": {
     "tag": "forge:ores/scolecite"
   },

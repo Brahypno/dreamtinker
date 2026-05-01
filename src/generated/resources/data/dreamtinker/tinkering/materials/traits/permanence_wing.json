@@ -1,0 +1,12 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "dreamtinker:as_wing"
+    },
+    {
+      "level": 1,
+      "name": "dreamtinker:with_wing_with_scale"
+    }
+  ]
+}

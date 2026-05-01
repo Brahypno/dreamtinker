@@ -73,7 +73,12 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.rainbow_honey_crystal, ARMOR, HoneyTastyModifier, rainbowCatcher);
 
         addDefaultTraits(DreamtinkerMaterialIds.black_sapphire, not_like_was);
-        addDefaultTraits(DreamtinkerMaterialIds.scolecite, light_in_dark);
+
+        addDefaultTraits(DreamtinkerMaterialIds.scolecite, awaiting_hour);
+        addTraits(DreamtinkerMaterialIds.scolecite, ARMOR, pupal_omen);
+        addDefaultTraits(DreamtinkerMaterialIds.PermanenceScale, Ids.with_wing_with_scale);
+        addDefaultTraits(DreamtinkerMaterialIds.PermanenceWing, as_wing.getId(), Ids.with_wing_with_scale);
+
         addDefaultTraits(DreamtinkerMaterialIds.shiningFlint, ModifierIds.jagged, Ids.fiber_glass_fragments, light_emanation.getId(), light_in_dark.getId());
         addTraits(DreamtinkerMaterialIds.shiningFlint, AMMO, ModifierIds.keen, ModifierIds.spike);
 

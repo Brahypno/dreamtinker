@@ -516,6 +516,8 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                           .level(RandomLevelingValue.perLevel(0, 1))
                                           .time(RandomLevelingValue.random(20 * 4, 10))
                                           .build());
+        buildModifier(Ids.with_wing_with_scale)
+                .addModule(MaterialRepairModule.material(DreamtinkerMaterialIds.scolecite).constant(140));
 
         addELModifiers();
         addMalumModifiers();

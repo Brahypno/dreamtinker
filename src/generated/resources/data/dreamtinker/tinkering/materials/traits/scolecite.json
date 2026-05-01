@@ -2,7 +2,15 @@
   "default": [
     {
       "level": 1,
-      "name": "dreamtinker:light_in_dark"
+      "name": "dreamtinker:awaiting_hour"
     }
-  ]
+  ],
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "dreamtinker:pupal_omen"
+      }
+    ]
+  }
 }

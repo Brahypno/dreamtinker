@@ -12,7 +12,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
@@ -23,7 +22,6 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -47,7 +45,6 @@ import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
-import slimeknights.tconstruct.library.modifiers.entity.ProjectileWithPower;
 import slimeknights.tconstruct.library.tools.helper.ToolBuildHandler;
 import slimeknights.tconstruct.library.tools.helper.TooltipBuilder;
 import slimeknights.tconstruct.library.tools.item.IModifiable;
@@ -447,15 +444,5 @@ public class DTHelper {
         double positiveOnlyValue = valueBeforeTotalMultiplier * multiplyTotalFactor;
 
         return (float) Math.max(0.0D, positiveOnlyValue);
-    }
-
-    public static float getDamage(Projectile projectile) {
-        if (projectile instanceof ProjectileWithPower withPower){
-            return withPower.getDamage();
-        }
-        if (projectile instanceof AbstractArrow arrow){
-            return (float) Mth.ceil(Mth.clamp(arrow.getBaseDamage() * projectile.getDeltaMovement().length(), 0, Integer.MAX_VALUE));
-        }
-        return 0;
     }
 }

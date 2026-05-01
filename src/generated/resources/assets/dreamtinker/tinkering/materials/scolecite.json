@@ -1,5 +1,5 @@
 {
-  "color": "FF12161A",
+  "color": "FF6C6E73",
   "fallbacks": [
     "gem"
   ],
@@ -18,7 +18,8 @@
       "tconstruct:maille",
       "tconstruct:armor_maille",
       "tconstruct:limb",
-      "tconstruct:grip"
+      "tconstruct:grip",
+      "tconstruct:shield_core"
     ],
     "transformer": {
       "type": "tconstruct:grey_to_sprite",

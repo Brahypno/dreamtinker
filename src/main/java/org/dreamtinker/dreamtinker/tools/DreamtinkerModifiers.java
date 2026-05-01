@@ -68,6 +68,10 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.nigrescence_a
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.nigrescence_antimony.EwigeEiderkunft;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.nigrescence_antimony.broken_vessel;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.nigrescence_antimony.ouroboric_hourglass;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.ruin_wheel.DoomTrack;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.ruin_wheel.RayAttack;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.scolecite.AwaitingHour;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.scolecite.pupalOmen;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.star_regulus.TwoHeadedSeven;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.star_regulus.as_one;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
@@ -177,6 +181,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<DoomTrack> doom_track = MODIFIERS.register("doom_track", DoomTrack::new);
     public static final StaticModifier<RayAttack> doom_ray = MODIFIERS.register("doom_ray", RayAttack::new);
     public static final StaticModifier<AsWing> as_wing = MODIFIERS.register("as_wing", AsWing::new);
+    public static final StaticModifier<pupalOmen> pupal_omen = MODIFIERS.register("pupal_omen", pupalOmen::new);
+    public static final StaticModifier<AwaitingHour> awaiting_hour = MODIFIERS.register("awaiting_hour", AwaitingHour::new);
 
     //etherium
     public static final StaticModifier<ELAstralBreak> astral_break = EL_MODIFIERS.register("astral_break", ELAstralBreak::new);
@@ -358,6 +364,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId frost_steel_shell = id("frost_steel_shell");
         public static final ModifierId sticky_string = id("sticky_string");
         public static final ModifierId pressing_front = id("pressing_front");
+        public static final ModifierId with_wing_with_scale = id("with_wing_with_scale");
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");

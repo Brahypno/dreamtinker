@@ -38,6 +38,8 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
         buildRenderInfo(DreamtinkerMaterialIds.rainbow_honey_crystal).color(0xFFB9C532).fallbacks("gem").luminosity(14);
         buildRenderInfo(DreamtinkerMaterialIds.black_sapphire).color(0xFF1A1F26).fallbacks("gem").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.scolecite).color(0xFF6C6E73).fallbacks("gem").luminosity(15);
+        buildRenderInfo(DreamtinkerMaterialIds.PermanenceScale).color(0xFF1F1712).fallbacks("gem").luminosity(15);
+        buildRenderInfo(DreamtinkerMaterialIds.PermanenceWing).color(0xFF6C6E73).fallbacks("gem").luminosity(15);
         buildRenderInfo(DreamtinkerMaterialIds.shiningFlint).color(0xFF3C96B9).fallbacks("crystal").luminosity(15);
         buildRenderInfo(DreamtinkerMaterialIds.orichalcum).color(0xFF51C272).fallbacks("metal").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.cold_iron).color(0xFF2C488F).fallbacks("metal").luminosity(0);

@@ -465,6 +465,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerTagKeys.Items.scoleciteOre),
                                      DreamtinkerFluids.molten_scolecite.get(), FluidValues.GEM, 1.0f)
                             .setOre(IMeltingContainer.OreRateType.GEM)
+                            .addByproduct(DreamtinkerFluids.liquid_trist.result(FluidValues.NUGGET * 2))
                             .save(consumer, location(Melting_folder + "scolecite/ore"));
         Consumer<FinishedRecipe> wrapped;
         wrapped = withCondition(consumer, tagFilled(Dreamtinker.forgeItemTag("ingots/silver")));

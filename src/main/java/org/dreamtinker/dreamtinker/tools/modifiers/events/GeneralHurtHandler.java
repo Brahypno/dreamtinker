@@ -37,8 +37,8 @@ import static net.minecraft.tags.DamageTypeTags.IS_PROJECTILE;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.FirthMark;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.homunculusLifeCurseMaxEffectLevel;
 import static org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.WeaponTransformation.valueExpSoftCap;
-import static org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.DoomTrack.proofByResistanceMultiplier;
 import static org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.knockArts.TAG_KNOCK;
+import static org.dreamtinker.dreamtinker.tools.modifiers.traits.material.ruin_wheel.DoomTrack.proofByResistanceMultiplier;
 
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)

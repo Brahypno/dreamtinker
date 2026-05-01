@@ -11,6 +11,10 @@
     {
       "level": 1,
       "name": "dreamtinker:light_emanation"
+    },
+    {
+      "level": 1,
+      "name": "dreamtinker:light_in_dark"
     }
   ],
   "perStat": {

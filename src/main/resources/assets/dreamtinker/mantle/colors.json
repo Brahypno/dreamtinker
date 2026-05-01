@@ -202,7 +202,8 @@
     "born_with_me": "#CD3F47",
     "doom_track": "#FFF0B0",
     "doom_ray": "#FFF0B0",
-    "pressing_front": "#FFF0B0"
+    "pressing_front": "#FFF0B0",
+    "pupal_omen": "#6C6E73"
 
 },
   "material.dreamtinker": {
@@ -234,7 +235,7 @@
     "soul_steel": "#3E5568",
     "rainbow_honey_crystal": "#B9C532",
     "black_sapphire": "#1A1F26",
-    "scolecite": "#D5C9C1",
+    "scolecite": "#6C6E73",
     "orichalcum": "#552060",
     "cold_iron": "#4489CC",
     "shadow_silver": "#7C6220",
