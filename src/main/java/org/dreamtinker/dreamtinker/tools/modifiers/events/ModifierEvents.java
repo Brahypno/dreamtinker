@@ -9,6 +9,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
+import org.dreamtinker.dreamtinker.utils.DTMessages;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 
 import static org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.SignalAxe.TAG_RIGHT_TIME;
@@ -21,8 +22,8 @@ public class ModifierEvents {
             LivingEntity living = event.getEntity();
             if (0 < ModifierUtil.getPersistentInt(living.getItemBySlot(EquipmentSlot.MAINHAND), TAG_RIGHT_TIME, 0)){
                 if (event.getResult() != Event.Result.ALLOW){
-                    living.sendSystemMessage(Component.translatable("modifier.dreamtinker.signal_axe.critical")
-                                                      .withStyle(DreamtinkerModifiers.signal_axe.get().getDisplayName().getStyle()));
+                    DTMessages.clientChat(Component.translatable("modifier.dreamtinker.signal_axe.critical")
+                                                   .withStyle(DreamtinkerModifiers.signal_axe.get().getDisplayName().getStyle()), false);
                     event.setResult(Event.Result.ALLOW);
                 }
                 event.setDamageModifier(event.getDamageModifier() + 0.4f);

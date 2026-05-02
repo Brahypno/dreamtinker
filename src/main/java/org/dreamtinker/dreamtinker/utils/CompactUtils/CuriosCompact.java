@@ -16,6 +16,12 @@ import java.util.Optional;
 public class CuriosCompact {
     private CuriosCompact() {}
 
+    public static ItemStack findItemStackWithTag(Player player) {
+        if (!ModList.get().isLoaded("curios"))
+            return ItemStack.EMPTY;
+        return doFindPreferredGlove(player).orElse(ItemStack.EMPTY);
+    }
+
     /**
      * 优先从 Curios 的 hands/hand 槽找“静默手套”，找不到返回 ItemStack.EMPTY
      */

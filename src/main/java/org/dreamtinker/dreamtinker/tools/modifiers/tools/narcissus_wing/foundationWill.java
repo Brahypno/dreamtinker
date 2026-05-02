@@ -37,6 +37,7 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.modifiers.DreamtinkerHook;
 import org.dreamtinker.dreamtinker.library.modifiers.hook.LeftClickHook;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
+import org.dreamtinker.dreamtinker.utils.DTMessages;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -85,9 +86,9 @@ public class foundationWill extends NoLevelsModifier implements LeftClickHook, P
         ModDataNBT dataNBT = tool.getPersistentData();
         int mod = (dataNBT.getInt(TAG_MOD) + 1) % 2;
         dataNBT.putInt(TAG_MOD, mod);
-        player.sendSystemMessage(Component.translatable("modifier.dreamtinker.tooltip.foundation_will")
-                                          .append(Component.translatable("modifier.dreamtinker.foundation_will" + "_" + mod))
-                                          .withStyle(this.getDisplayName().getStyle()));
+        DTMessages.clientChat(Component.translatable("modifier.dreamtinker.tooltip.foundation_will")
+                                       .append(Component.translatable("modifier.dreamtinker.foundation_will" + "_" + mod))
+                                       .withStyle(this.getDisplayName().getStyle()), false);
         return true;
     }
 

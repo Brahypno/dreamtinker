@@ -33,6 +33,7 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerSounds;
 import org.dreamtinker.dreamtinker.library.client.sound.ClientSoundChecker;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
+import org.dreamtinker.dreamtinker.utils.DTMessages;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -97,9 +98,9 @@ public class DeathShredder extends BattleModifier implements KeybindInteractModi
         int mod = (dataNBT.getInt(TAG_MOD) + 1) % 3;
         dataNBT.putInt(TAG_MOD, mod);
         //ToolEnergyCapability.setEnergy(tool, 500000);
-        player.sendSystemMessage(Component.translatable("modifier.dreamtinker.tooltip.death_shredder")
-                                          .append(Component.translatable("modifier.dreamtinker.mod.death_shredder" + "_" + mod))
-                                          .withStyle(this.getDisplayName().getStyle()));
+        DTMessages.clientChat(Component.translatable("modifier.dreamtinker.tooltip.death_shredder")
+                                       .append(Component.translatable("modifier.dreamtinker.mod.death_shredder" + "_" + mod))
+                                       .withStyle(this.getDisplayName().getStyle()), false);
         return true;
     }
 

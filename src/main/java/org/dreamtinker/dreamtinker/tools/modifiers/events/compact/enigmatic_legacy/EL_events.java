@@ -15,6 +15,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
+import org.dreamtinker.dreamtinker.utils.DTMessages;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
@@ -39,8 +40,8 @@ public class EL_events {
                 ResourceLocation killedType = ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType());
 
                 if (EldritchPan.addKillIfNotPresent(weapon, killedType)){
-                    attacker.sendSystemMessage(Component.translatable("message.enigmaticlegacy.eldritch_pan_buff")
-                                                        .withStyle(ChatFormatting.GOLD));
+                    DTMessages.clientChat(Component.translatable("message.enigmaticlegacy.eldritch_pan_buff")
+                                                   .withStyle(ChatFormatting.GOLD), false);
                     ToolStack toolstack = ToolStack.from(weapon);
                     ModDataNBT nbt = toolstack.getPersistentData();
                     nbt.putInt(TAG_PAN, EldritchPan.getKillCount(weapon));

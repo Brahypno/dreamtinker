@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import org.dreamtinker.dreamtinker.utils.DTMessages;
 import slimeknights.tconstruct.smeltery.block.component.SearedBlock;
 import slimeknights.tconstruct.smeltery.block.entity.component.SmelteryComponentBlockEntity;
 
@@ -44,7 +45,7 @@ public class AshenButtonBlock extends SearedBlock {
                 ResourceLocation id = BuiltInRegistries.BLOCK.getKey(state.getBlock());
                 String path = id.getPath().replace('/', '.');
                 String key = "message." + id.getNamespace() + "." + path + ".mode_";
-                player.sendSystemMessage(Component.translatable(key + next));
+                DTMessages.clientChat(Component.translatable(key + next), false);
                 SmelteryComponentBlockEntity.updateNeighbors(level, pos, newState);
             }
 

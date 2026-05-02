@@ -12,6 +12,7 @@ import net.minecraft.world.level.Level;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
+import org.dreamtinker.dreamtinker.utils.DTMessages;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
@@ -136,10 +137,10 @@ public class AwaitingHour extends BattleModifier {
         toolStack.setMaterials(mats);
         toolStack.updateStack(stack);
         if (holder instanceof Player player){
-            player.sendSystemMessage(
+            DTMessages.clientChat(
                     Component.translatable(
                                      OmenInSight <= scale ? "modifier.dreamtinker.pupal_omen.success_scale" : "modifier.dreamtinker.pupal_omen.success_wing")
-                             .withStyle(this.getDisplayName().getStyle()));
+                             .withStyle(this.getDisplayName().getStyle()), false);
         }
     }
 

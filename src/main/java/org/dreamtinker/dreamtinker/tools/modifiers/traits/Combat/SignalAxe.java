@@ -13,6 +13,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
+import org.dreamtinker.dreamtinker.utils.DTMessages;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
@@ -67,7 +68,7 @@ public class SignalAxe extends BattleModifier {
 
             if (nbt.getInt(TAG_RIGHT_TIME) < 2 &&
                 attack_time * world.random.nextFloat() * (world.random.nextInt(2) + 1) < world.getGameTime() - tag.getLong(TAG_ATTACK_TIME.getPath())){
-                holder.sendSystemMessage(Component.translatable("modifier.dreamtinker.signal_axe.ready").withStyle(this.getDisplayName().getStyle()));
+                DTMessages.clientChat(Component.translatable("modifier.dreamtinker.signal_axe.ready").withStyle(this.getDisplayName().getStyle()), false);
                 nbt.putInt(TAG_RIGHT_TIME, 2);
             }
         }

@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
+import org.dreamtinker.dreamtinker.utils.DTMessages;
 import slimeknights.tconstruct.library.materials.MaterialRegistry;
 import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -74,8 +75,8 @@ public class GeneralPlayerCraftEvent {
                     mats = mats.replaceMaterial(spiral, getMaterialForTier(2, rand, statList.get(spiral)));
                     tool.setMaterials(mats);
                     tool.updateStack(item);
-                    event.getEntity().sendSystemMessage(Component.translatable("material.dreamtinker.ruin_wheel_steel_transform")
-                                                                 .withStyle(DreamtinkerModifiers.doom_track.get().getDisplayName().getStyle()));
+                    DTMessages.clientChat(Component.translatable("material.dreamtinker.ruin_wheel_steel_transform")
+                                                   .withStyle(DreamtinkerModifiers.doom_track.get().getDisplayName().getStyle()), false);
                 }
             }
         }

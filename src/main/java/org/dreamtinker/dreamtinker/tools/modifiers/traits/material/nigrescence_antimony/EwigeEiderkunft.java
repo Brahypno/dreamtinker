@@ -12,6 +12,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
+import org.dreamtinker.dreamtinker.utils.DTMessages;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.client.TooltipKey;
@@ -39,8 +40,8 @@ public class EwigeEiderkunft extends BattleModifier {
             nbt.putInt(TAG_TOMB, breaks);
             tool.setDamage(0);
             if (holder != null){
-                holder.sendSystemMessage(Component.literal("13=1").withStyle(this.getDisplayName()
-                                                                                 .getStyle()));
+                DTMessages.clientChat(Component.literal("13=1").withStyle(this.getDisplayName()
+                                                                              .getStyle()), false);
                 holder.level().explode(holder,
                                        holder.level().damageSources().explosion(holder, holder),
                                        null,

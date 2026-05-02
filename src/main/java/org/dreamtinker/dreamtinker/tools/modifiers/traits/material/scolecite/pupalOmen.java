@@ -16,6 +16,7 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerAttributes;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
+import org.dreamtinker.dreamtinker.utils.DTMessages;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.common.TinkerTags;
@@ -101,10 +102,10 @@ public class pupalOmen extends ArmorModifier {
         toolStack.setMaterials(mats);
         toolStack.updateStack(stack);
         if (holder instanceof Player player){
-            player.sendSystemMessage(
+            DTMessages.clientChat(
                     Component.translatable(
                                      OmenInSight <= scale ? "modifier.dreamtinker.pupal_omen.success_scale" : "modifier.dreamtinker.pupal_omen.success_wing")
-                             .withStyle(this.getDisplayName().getStyle()));
+                             .withStyle(this.getDisplayName().getStyle()), false);
         }
     }
 
