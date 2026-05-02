@@ -294,5 +294,8 @@
       "netheritte": "#555555",
       "transmutation_gold": "#DE6428"
     },
-    "harvest_tier.enigmaticlegacy.etherium": "#96E8E0"
+    "harvest_tier.enigmaticlegacy.etherium": "#96E8E0",
+  "stat.tconstruct.slot": {
+    "delusions": "#C8A0F0"
+  }
 }

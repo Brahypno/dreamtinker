@@ -9,7 +9,7 @@
   "tools": "dreamtinker:narcissus_wing",
   "effects": [
     "Maximum of 3 levels",
-    "Requires 1 soul slot per level",
+    "Requires 1 delusion slot per level",
     "Requires 'Memory, Gate of the Kingdom' to apply"
   ]
 }

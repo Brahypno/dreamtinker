@@ -40,6 +40,7 @@ import java.util.function.Supplier;
 public class DreamtinkerTools extends DreamtinkerModule {
     public DreamtinkerTools() {
         DtTiers.init();
+        //DTSlotType.init();
     }
 
     public static final RegistryObject<CreativeModeTab> TOOL =

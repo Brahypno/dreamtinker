@@ -36,7 +36,7 @@
   "level": 3,
   "result": "dreamtinker:weapon_books",
   "slots": {
-    "souls": 1
+    "delusions": 1
   },
   "tools": {
     "tag": "tconstruct:modifiable/melee/primary"

@@ -54,6 +54,7 @@ import org.dreamtinker.dreamtinker.fluids.DreamtinkerFluids;
 import org.dreamtinker.dreamtinker.library.client.DreamtinkerClient;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
 import org.dreamtinker.dreamtinker.library.event.PlayerLeftClickEvent;
+import org.dreamtinker.dreamtinker.library.tools.DTSlotType;
 import org.dreamtinker.dreamtinker.network.DNetwork;
 import org.dreamtinker.dreamtinker.smeltery.DreamTinkerSmeltery;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
@@ -153,6 +154,7 @@ public class Dreamtinker {
                                      SpawnPlacements.Type.ON_GROUND,
                                      Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                                      AggressiveFox::checkAggressiveFoxSpawnRules);
+            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> DTSlotType::init);
         });
     }
 

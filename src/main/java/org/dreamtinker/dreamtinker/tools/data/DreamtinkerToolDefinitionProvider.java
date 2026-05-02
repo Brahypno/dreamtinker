@@ -7,6 +7,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.ToolActions;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
+import org.dreamtinker.dreamtinker.library.tools.DTSlotType;
 import org.dreamtinker.dreamtinker.tools.DTtoolsDefinition;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
@@ -56,12 +57,12 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
     DefaultMaterialsModule ancientTwoParts = DefaultMaterialsModule.builder().material(randomMaterial, randomMaterial).build();
     DefaultMaterialsModule ancientThreeParts = DefaultMaterialsModule.builder().material(randomMaterial, randomMaterial, randomMaterial).build();
     ToolModule large_soul_weapon_slots = ToolSlotsModule.builder()
-                                                        .slots(SlotType.SOUL, 1)
+                                                        .slots(DTSlotType.DELUSION, 1)
                                                         .slots(SlotType.ABILITY, 1)
                                                         .slots(SlotType.UPGRADE, 2).build();
 
     ToolModule small_soul_weapon_slots = ToolSlotsModule.builder()
-                                                        .slots(SlotType.SOUL, 2)
+                                                        .slots(DTSlotType.DELUSION, 2)
                                                         .slots(SlotType.ABILITY, 1)
                                                         .slots(SlotType.UPGRADE, 3).build();
 
@@ -128,7 +129,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
         DefaultMaterialsModule underPlateMaterials = DefaultMaterialsModule.builder().material(tier2Material, tier2Material, tier2Material).build();
         ToolModule plateSlots =
                 ToolSlotsModule.builder()
-                               .slots(SlotType.SOUL, 2)
+                               .slots(DTSlotType.DELUSION, 2)
                                .slots(SlotType.ABILITY, 2)
                                .slots(SlotType.UPGRADE, 1)
                                .slots(SlotType.DEFENSE, 1).build();
@@ -167,7 +168,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                                                              .set(ToolStats.DRAW_SPEED, 1.5f)
                                                              .set(ToolStats.ATTACK_SPEED, 1.2f)
                                                              .set(ToolStats.DURABILITY, 4.07f).build()))
-                .module(new ToolSlotsModule(ImmutableMap.of(SlotType.SOUL, 3, SlotType.ABILITY, 1, SlotType.UPGRADE, 2)))
+                .module(new ToolSlotsModule(ImmutableMap.of(DTSlotType.DELUSION, 3, SlotType.ABILITY, 1, SlotType.UPGRADE, 2)))
                 // traits
                 .module(ToolTraitsModule.builder()
                                         .trait(DreamtinkerModifiers.memory_base, 1)//malkuth

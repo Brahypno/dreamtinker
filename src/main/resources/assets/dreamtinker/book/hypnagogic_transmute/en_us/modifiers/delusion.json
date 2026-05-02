@@ -1,0 +1,25 @@
+{
+  "type": "tconstruct:showcase",
+  "title": "Delunsions",
+  "item": {
+    "type": "forge:nbt",
+    "item": "tconstruct:creative_slot",
+    "nbt": {
+      "slot": "delusions"
+    }
+  },
+  "tooltip": [ "Delusion Slot Icon" ],
+  "text": [
+    {
+      "text": "Delusions are risky improvements to a tool. They act like upgrade, but much stronger on one aspect but bring negative effect on another aspect. For example, 'The romantic' make tools faster but deal less damage."
+    },
+    {
+      "text": "Most tools not start with delusion slots, though it's possible to get more slots through other types of modifiers.",
+      "paragraph": true
+    },
+    {
+      "text": "Delusions are always shows in Upgrades section when displayed in other books",
+      "paragraph": true
+    }
+  ]
+}

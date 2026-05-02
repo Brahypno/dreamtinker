@@ -18,8 +18,8 @@
     },
     {
       "type": "tconstruct:swappable_bonus_slot",
-      "bonus": "souls",
-      "match": "souls",
+      "bonus": "delusions",
+      "match": "delusions",
       "slots": 1
     },
     {

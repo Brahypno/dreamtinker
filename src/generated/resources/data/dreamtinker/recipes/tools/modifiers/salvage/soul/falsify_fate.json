@@ -2,7 +2,7 @@
   "type": "tconstruct:modifier_salvage",
   "modifier": "dreamtinker:falsify_fate",
   "slots": {
-    "souls": 1
+    "delusions": 1
   },
   "tools": {
     "tag": "tconstruct:modifiable/harvest/primary"

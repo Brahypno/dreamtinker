@@ -12,7 +12,7 @@
   "more_text_space": true,
   "tool_filter": "tconstruct:modifiable/melee/primary",
   "effects": [
-    "Requires 1 Soul slot",
+    "Requires 1 Delusion slot",
     "Maximum of 3 levels"
   ]
 }

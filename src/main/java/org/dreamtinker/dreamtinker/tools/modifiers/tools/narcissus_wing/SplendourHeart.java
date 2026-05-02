@@ -21,6 +21,7 @@ import net.minecraftforge.common.TierSortingRegistry;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
+import org.dreamtinker.dreamtinker.library.tools.DTSlotType;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.AdvCountEvents;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -35,7 +36,6 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ToolDataNBT;
 import slimeknights.tconstruct.library.tools.stat.ModifierStatsBuilder;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
-import slimeknights.tconstruct.shared.TinkerAttributes;
 
 import java.util.List;
 import java.util.UUID;
@@ -84,12 +84,14 @@ public class SplendourHeart extends BattleModifier {
                                  .withStyle(this.getDisplayName().getStyle()));
         }
     }
+
     @Override
     public int modifierDamageTool(IToolStackView tool, ModifierEntry modifier, int amount, @Nullable LivingEntity holder) {
         float per = tool.getPersistentData().getFloat(TAG_ADV_PERCENTAGE);
         float value = rangeToValue(per);
-        return (int) (amount/value);
+        return (int) (amount / value);
     }
+
     @Override
     public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
         if (!tool.isBroken()){
@@ -97,10 +99,10 @@ public class SplendourHeart extends BattleModifier {
             int level = java.util.Arrays.binarySearch(TheSplendourHeart.get().toArray(), (double) Math.nextUp(per));
             level = level <= 0 ? -(level) - 1 : level;
             consumer.accept(ForgeMod.ENTITY_REACH.get(),
-                    new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
-                            ForgeMod.ENTITY_REACH.get().getDescriptionId(),
-                            level*2,
-                            AttributeModifier.Operation.ADDITION));
+                            new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
+                                                  ForgeMod.ENTITY_REACH.get().getDescriptionId(),
+                                                  level * 2,
+                                                  AttributeModifier.Operation.ADDITION));
         }
 
     }
@@ -137,7 +139,7 @@ public class SplendourHeart extends BattleModifier {
             level = level <= 0 ? -(level) - 1 : level;
             if (1 < level){
                 volatileData.addSlots(SlotType.UPGRADE, (int) Math.pow(level, 2));
-                volatileData.addSlots(SlotType.SOUL, (int) Math.pow(level, 2));
+                volatileData.addSlots(DTSlotType.DELUSION, (int) Math.pow(level, 2));
             }
             if (2 < level){
                 volatileData.addSlots(SlotType.ABILITY, (int) Math.pow(level, 1));
@@ -145,29 +147,33 @@ public class SplendourHeart extends BattleModifier {
             }
         }
     }
+
     private static boolean in_progress = false;
+
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
         if (tool.getPersistentData().contains(TAG_ADV_PERCENTAGE)){
             float per = tool.getPersistentData().getFloat(TAG_ADV_PERCENTAGE);
             int level = java.util.Arrays.binarySearch(TheSplendourHeart.get().toArray(), (double) Math.nextUp(per));
             level = level <= 0 ? -(level) - 1 : level;
-            if (null != context.getLivingTarget()&&1 <= level&&!in_progress){
-                    in_progress=true;
-                    float baseDamage = context.getBaseDamage();
-                    float damage = baseDamage;
-                    List<ModifierEntry> modifiers = tool.getModifierList();
-                    for (ModifierEntry entry : modifiers) {
-                        damage = entry.getHook(ModifierHooks.MELEE_DAMAGE).getMeleeDamage(tool, entry, context, baseDamage, damage);
-                    }
-                    context.getLivingTarget().setInvulnerable(false);
-                    int invu=context.getLivingTarget().invulnerableTime;
-                    context.getLivingTarget().invulnerableTime = 0;
-                    ResourceKey<DamageType> dmt=1==level?context.getAttacker() instanceof Player?DamageTypes.PLAYER_ATTACK:DamageTypes.MOB_ATTACK:2==level?DreamtinkerDamageTypes.rain_bow:3==level?DamageTypes.SONIC_BOOM:DreamtinkerDamageTypes.NULL_VOID;
-                    DamageSource dam = DreamtinkerDamageTypes.source(context.getAttacker().level().registryAccess(), dmt,null, context.getAttacker());
-                    context.getLivingTarget().hurt(dam, damage);
-                    context.getLivingTarget().invulnerableTime= (int) (invu/rangeToValue(per));
-                    in_progress=false;
+            if (null != context.getLivingTarget() && 1 <= level && !in_progress){
+                in_progress = true;
+                float baseDamage = context.getBaseDamage();
+                float damage = baseDamage;
+                List<ModifierEntry> modifiers = tool.getModifierList();
+                for (ModifierEntry entry : modifiers) {
+                    damage = entry.getHook(ModifierHooks.MELEE_DAMAGE).getMeleeDamage(tool, entry, context, baseDamage, damage);
+                }
+                context.getLivingTarget().setInvulnerable(false);
+                int invu = context.getLivingTarget().invulnerableTime;
+                context.getLivingTarget().invulnerableTime = 0;
+                ResourceKey<DamageType> dmt = 1 == level ? context.getAttacker() instanceof Player ? DamageTypes.PLAYER_ATTACK : DamageTypes.MOB_ATTACK :
+                                              2 == level ? DreamtinkerDamageTypes.rain_bow :
+                                              3 == level ? DamageTypes.SONIC_BOOM : DreamtinkerDamageTypes.NULL_VOID;
+                DamageSource dam = DreamtinkerDamageTypes.source(context.getAttacker().level().registryAccess(), dmt, null, context.getAttacker());
+                context.getLivingTarget().hurt(dam, damage);
+                context.getLivingTarget().invulnerableTime = (int) (invu / rangeToValue(per));
+                in_progress = false;
             }
         }
     }

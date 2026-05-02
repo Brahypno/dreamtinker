@@ -2,7 +2,7 @@
   "type": "tconstruct:modifier_salvage",
   "modifier": "dreamtinker:soul_core",
   "slots": {
-    "souls": 1
+    "delusions": 1
   },
   "tools": {
     "item": "dreamtinker:narcissus_wing"
