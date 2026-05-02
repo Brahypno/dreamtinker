@@ -518,7 +518,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.pressing_front)
                 .addModule(MobEffectModule.builder(DreamtinkerEffects.PressingFront.get())
                                           .applyBeforeMelee(true)
-                                          .level(RandomLevelingValue.perLevel(0, 1))
+                                          .level(RandomLevelingValue.perLevel(1, 1))
                                           .time(RandomLevelingValue.random(20 * 4, 10))
                                           .build());
         buildModifier(Ids.with_wing_with_scale)
