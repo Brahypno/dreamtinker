@@ -6,6 +6,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.ModList;
 import org.dreamtinker.dreamtinker.tools.items.SilenceGlove;
+import slimeknights.tconstruct.library.modifiers.ModifierId;
+import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
@@ -16,10 +18,22 @@ import java.util.Optional;
 public class CuriosCompact {
     private CuriosCompact() {}
 
-    public static ItemStack findItemStackWithTag(Player player) {
+    public static ItemStack findFirstItemWithModifier(Player player, ModifierId id) {
         if (!ModList.get().isLoaded("curios"))
             return ItemStack.EMPTY;
-        return doFindPreferredGlove(player).orElse(ItemStack.EMPTY);
+        return doFindModifierItem(player, id).orElse(ItemStack.EMPTY);
+    }
+
+    private static Optional<ItemStack> doFindModifierItem(Player player, ModifierId id) {
+        LazyOptional<ICuriosItemHandler> opt = CuriosApi.getCuriosInventory(player);
+        return Optional.of(opt.map(h -> {
+            for (String ids : h.getCurios().keySet()) {
+                ItemStack st = getFirstFromSlot(h, ids);
+                if (0 < ModifierUtil.getModifierLevel(st, id))
+                    return st;
+            }
+            return ItemStack.EMPTY;
+        }).orElse(ItemStack.EMPTY));
     }
 
     /**

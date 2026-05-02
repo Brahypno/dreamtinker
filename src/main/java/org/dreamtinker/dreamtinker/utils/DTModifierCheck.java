@@ -15,6 +15,7 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
+import org.dreamtinker.dreamtinker.utils.CompactUtils.CuriosCompact;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.materials.MaterialRegistry;
@@ -92,7 +93,8 @@ public class DTModifierCheck {
     }
 
     public static boolean haveModifierIn(LivingEntity entity, ModifierId modifierId) {
-        return ModifierInBody(entity, modifierId) || ModifierInHand(entity, modifierId);
+        return ModifierInBody(entity, modifierId) || ModifierInHand(entity, modifierId) ||
+               entity instanceof Player player && ItemStack.EMPTY != CuriosCompact.findFirstItemWithModifier(player, modifierId);
     }
 
 
