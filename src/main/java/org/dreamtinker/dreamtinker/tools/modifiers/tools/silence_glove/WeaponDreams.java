@@ -16,7 +16,7 @@ import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.Interact
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.dreamtinker.dreamtinker.tools.items.SilenceGlove;
-import org.dreamtinker.dreamtinker.utils.CuriosCompact;
+import org.dreamtinker.dreamtinker.utils.CompactUtils.CuriosCompact;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.tconstruct.common.TinkerTags;

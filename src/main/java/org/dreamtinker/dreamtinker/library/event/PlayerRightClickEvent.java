@@ -9,7 +9,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.modifiers.hook.RightClickHook;
-import org.dreamtinker.dreamtinker.utils.CuriosCompact;
+import org.dreamtinker.dreamtinker.utils.CompactUtils.CuriosCompact;
 import slimeknights.tconstruct.library.tools.item.IModifiable;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)

@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import org.dreamtinker.dreamtinker.library.modifiers.hook.LeftClickHook;
-import org.dreamtinker.dreamtinker.utils.CuriosCompact;
+import org.dreamtinker.dreamtinker.utils.CompactUtils.CuriosCompact;
 import slimeknights.tconstruct.library.tools.item.IModifiable;
 
 public class PlayerLeftClickEvent {

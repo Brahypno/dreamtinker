@@ -7,7 +7,7 @@ import net.minecraft.world.level.Level;
 import org.dreamtinker.dreamtinker.library.modifiers.DreamtinkerHook;
 import org.dreamtinker.dreamtinker.network.DNetwork;
 import org.dreamtinker.dreamtinker.network.RightClickEmptyPacket;
-import org.dreamtinker.dreamtinker.utils.CuriosCompact;
+import org.dreamtinker.dreamtinker.utils.CompactUtils.CuriosCompact;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;

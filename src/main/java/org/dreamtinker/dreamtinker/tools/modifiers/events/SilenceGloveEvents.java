@@ -19,7 +19,7 @@ import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.dreamtinker.dreamtinker.tools.items.SilenceGlove;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.silence_glove.WeaponDreams;
-import org.dreamtinker.dreamtinker.utils.CuriosCompact;
+import org.dreamtinker.dreamtinker.utils.CompactUtils.CuriosCompact;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;

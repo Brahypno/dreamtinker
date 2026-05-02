@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.utils;
+package org.dreamtinker.dreamtinker.utils.CompactUtils;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
