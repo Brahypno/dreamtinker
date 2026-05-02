@@ -129,7 +129,8 @@ public class Dreamtinker {
             if (ModList.get().isLoaded("enigmaticlegacy") && !configCompactDisabled("enigmaticlegacy")){
                 forgeEventBus.addGenericListener(ItemStack.class, addUnholyWater::attachCaps);
                 forgeEventBus.addListener(EL_events::onLivingDeath);
-                forgeEventBus.addListener(EL_events::onLivingDrops);
+                forgeEventBus.addListener(EventPriority.LOWEST, EL_events::onLivingDrops);
+                forgeEventBus.addListener(EL_events::onEntityJoinLevel);
             }
             if (ModList.get().isLoaded("malum") && !configCompactDisabled("malum")){
                 forgeEventBus.addGenericListener(ItemStack.class, addConcentratedGluttonyBottle::attachCaps);

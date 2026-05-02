@@ -47,10 +47,10 @@ public class DTModifierCheck {
             new EquipmentSlot[]{EquipmentSlot.FEET, EquipmentSlot.LEGS, EquipmentSlot.CHEST, EquipmentSlot.HEAD, EquipmentSlot.OFFHAND, EquipmentSlot.MAINHAND};
 
     public static int getModifierLevel(@NotNull LivingEntity entity, ModifierId id, EquipmentSlot slot) {
-        if (null == entity.getItemBySlot(slot) || !(entity.getItemBySlot(slot).getItem() instanceof IModifiable))
+        if (null == entity.getItemBySlot(slot))
             return 0;
         ItemStack stack = entity.getItemBySlot(slot);
-        return ModifierUtil.getModifierLevel(entity.getItemBySlot(slot), id);
+        return stack.getItem() instanceof IModifiable ? ModifierUtil.getModifierLevel(entity.getItemBySlot(slot), id) : 0;
     }
 
     public static int getMainhandModifierLevel(LivingEntity entity, ModifierId modifierId) {

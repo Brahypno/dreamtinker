@@ -27,22 +27,7 @@
   ],
   "inputs": [
     {
-      "amount_needed": 2,
-      "item": "enigmaticlegacy:evil_essence"
-    },
-    {
-      "amount_needed": 2,
-      "item": "minecraft:heart_of_the_sea"
-    },
-    {
-      "amount_needed": 2,
-      "tag": "forge:ingots/netherite"
-    },
-    {
-      "item": "enigmaticlegacy:abyssal_heart"
-    },
-    {
-      "item": "enigmaticlegacy:void_pearl"
+      "item": "enigmaticlegacy:desolation_ring"
     }
   ],
   "level": 1,

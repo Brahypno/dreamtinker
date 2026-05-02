@@ -1590,11 +1590,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .save(wrapped, prefix(DreamtinkerModifiers.eldritch_pan, abilityFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.desolation_ring)
                              .setTools(TinkerTags.Items.MODIFIABLE)
-                             .addInput(EnigmaticItems.EVIL_ESSENCE, 2)
-                             .addInput(Items.HEART_OF_THE_SEA, 2)
-                             .addInput(Tags.Items.INGOTS_NETHERITE, 2)
-                             .addInput(EnigmaticItems.ABYSSAL_HEART, 1)
-                             .addInput(EnigmaticItems.VOID_PEARL, 1)
+                             .addInput(EnigmaticItems.DESOLATION_RING, 1)
                              .setMaxLevel(1)
                              .setSlots(SlotType.ABILITY, 1)
                              .saveSalvage(wrapped, prefix(DreamtinkerModifiers.desolation_ring, abilitySalvage))

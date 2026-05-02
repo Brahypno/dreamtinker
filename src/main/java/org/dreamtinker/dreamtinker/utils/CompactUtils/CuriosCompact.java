@@ -6,6 +6,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.ModList;
 import org.dreamtinker.dreamtinker.tools.items.SilenceGlove;
+import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import top.theillusivec4.curios.api.CuriosApi;
@@ -29,7 +30,7 @@ public class CuriosCompact {
         return Optional.of(opt.map(h -> {
             for (String ids : h.getCurios().keySet()) {
                 ItemStack st = getFirstFromSlot(h, ids);
-                if (0 < ModifierUtil.getModifierLevel(st, id))
+                if (st.is(TinkerTags.Items.MODIFIABLE) && 0 < ModifierUtil.getModifierLevel(st, id))
                     return st;
             }
             return ItemStack.EMPTY;
