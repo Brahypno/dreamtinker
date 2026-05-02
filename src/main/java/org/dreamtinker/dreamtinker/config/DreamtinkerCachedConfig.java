@@ -70,6 +70,8 @@ public class DreamtinkerCachedConfig {
     public static final ConfigLazy<Double> BaseExplodeDefenseRate = lazDoubleInSpec(DreamtinkerConfig.BaseExplodeDefenseRate);
     public static final ConfigLazy<Double> ExplodeDefenseRatePerLevel = lazDoubleInSpec(DreamtinkerConfig.ExplodeDefenseRatePerLevel);
     public static final ConfigLazy<Double> StoneHeartProjReduce = lazDoubleInSpec(DreamtinkerConfig.StoneHeartProjReduce);
+    public static final ConfigLazy<Integer> SilenceGloveMaxRings = lazIntInSpec(DreamtinkerConfig.SilenceGloveMaxRings);
+    public static final ConfigLazy<Double> SilenceGloveBaseLineAttackSpeed = lazDoubleInSpec(DreamtinkerConfig.SilenceGloveBaseLineAttackSpeed);
 
     public static final ConfigLazy<java.util.List<Double>> TheSplendourHeart =
             lazDoubleList(DreamtinkerConfig.TheSplendourHeart,

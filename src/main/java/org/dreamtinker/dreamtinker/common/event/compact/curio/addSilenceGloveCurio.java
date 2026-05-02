@@ -1,7 +1,6 @@
 package org.dreamtinker.dreamtinker.common.event.compact.curio;
 
 import com.google.common.collect.HashMultimap;
-import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -16,10 +15,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.tools.items.SilenceGlove;
-import slimeknights.tconstruct.common.TinkerTags;
-import slimeknights.tconstruct.library.modifiers.ModifierEntry;
-import slimeknights.tconstruct.library.modifiers.ModifierHooks;
-import slimeknights.tconstruct.library.tools.nbt.StatsNBT;
+import slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifierHook;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import top.theillusivec4.curios.api.SlotContext;
@@ -28,9 +24,9 @@ import top.theillusivec4.curios.api.type.capability.ICurio;
 import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.UUID;
-import java.util.function.BiConsumer;
 
-import static slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifierHook.HELD_ARMOR_UUID;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.SilenceGloveBaseLineAttackSpeed;
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.SilenceGloveMaxRings;
 
 public class addSilenceGloveCurio {
     private static final ResourceLocation KEY = Dreamtinker.getLocation("curio_silence_glove");
@@ -61,44 +57,28 @@ public class addSilenceGloveCurio {
             ToolStack tool = ToolStack.from(stack);
             int extraRings = 0; // ← 你已有的“按内部最高攻值换算”逻辑
             if (!tool.isBroken())
-                extraRings = Math.min(6, (int) (Math.ceil(tool.getStats().getInt(ToolStats.ATTACK_DAMAGE) / 2.0f) + 1));
+                extraRings = Math.min(SilenceGloveMaxRings.get(), (int) (Math.ceil(tool.getStats().getInt(ToolStats.ATTACK_DAMAGE) / 2.0f) + 1));
             if (extraRings > 0){
                 top.theillusivec4.curios.api.CuriosApi.addSlotModifier(
                         attributes, "ring", UUID.nameUUIDFromBytes(stack.getItem().toString().getBytes()), extraRings, AttributeModifier.Operation.ADDITION);
-                ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-                BiConsumer<Attribute, AttributeModifier> attributeConsumer = builder::put;
-                StatsNBT statsNBT = tool.getStats();
-                if (tool.hasTag(TinkerTags.Items.ARMOR)){
-                    UUID tuuid = HELD_ARMOR_UUID[EquipmentSlot.MAINHAND.getIndex()];
-                    double value = (double) (Float) statsNBT.get(ToolStats.ARMOR);
-                    if (value != (double) 0.0F){
-                        builder.put(Attributes.ARMOR, new AttributeModifier(tuuid, "tconstruct.held.armor", value, AttributeModifier.Operation.ADDITION));
-                    }
-
-                    value = (double) (Float) statsNBT.get(ToolStats.ARMOR_TOUGHNESS);
-                    if (value != (double) 0.0F){
-                        builder.put(Attributes.ARMOR_TOUGHNESS,
-                                    new AttributeModifier(tuuid, "tconstruct.held.toughness", value, AttributeModifier.Operation.ADDITION));
-                    }
-
-                    value = (double) (Float) statsNBT.get(ToolStats.KNOCKBACK_RESISTANCE);
-                    if (value != (double) 0.0F){
-                        builder.put(Attributes.KNOCKBACK_RESISTANCE,
-                                    new AttributeModifier(tuuid, "tconstruct.held.knockback_resistance", value, AttributeModifier.Operation.ADDITION));
-                    }
-                }
-                for (ModifierEntry entry : tool.getModifierList()) {
-                    entry.getHook(ModifierHooks.ATTRIBUTES).addAttributes(tool, entry, EquipmentSlot.MAINHAND, attributeConsumer);
-                }
-                for (Map.Entry<Attribute, AttributeModifier> e : builder.build().entries()) {
-                    Attribute attr = e.getKey();
-                    AttributeModifier mod = e.getValue();
-                    AttributeModifier scaled = new AttributeModifier(
-                            UUID.nameUUIDFromBytes((stack + mod.getId().toString()).getBytes()), mod.getName(), mod.getAmount(), mod.getOperation()
-                    );
-                    attributes.put(attr, scaled);
-                }
             }
+            Multimap<Attribute, AttributeModifier> attrs = AttributesModifierHook.getHeldAttributeModifiers(tool, EquipmentSlot.MAINHAND);
+            for (Map.Entry<Attribute, AttributeModifier> e : attrs.entries()) {
+                Attribute attr = e.getKey();
+                AttributeModifier mod = e.getValue();
+                if (mod.getId() == UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CF") ||
+                    mod.getId() == UUID.fromString("FA233E1C-4180-4865-B01B-BCCE9785ACA3"))
+                    continue;
+                AttributeModifier scaled = new AttributeModifier(
+                        UUID.nameUUIDFromBytes((stack + mod.getId().toString()).getBytes()), mod.getName(), mod.getAmount(), mod.getOperation()
+                );
+                attributes.put(attr, scaled);
+            }
+            attributes.put(Attributes.ATTACK_SPEED,
+                           new AttributeModifier(UUID.nameUUIDFromBytes((stack + "silence_attack_speed").getBytes()),
+                                                 Attributes.ATTACK_SPEED.getDescriptionId(),
+                                                 tool.getStats().get(ToolStats.ATTACK_SPEED) - SilenceGloveBaseLineAttackSpeed.get(),
+                                                 AttributeModifier.Operation.ADDITION));
 
             return attributes;
         }

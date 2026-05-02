@@ -64,6 +64,12 @@ public class DreamtinkerConfig {
                            "Unit of Energy used per attack in Electric Mode, Need 10x value to consider Energy is enough to start And 0.5x value to cooldown the saw")
                    .defineInRange("ChainSawEnergyCost", 50, 0, 1000);
 
+    public static final ForgeConfigSpec.IntValue SilenceGloveMaxRings =
+            builder.comment("Default number of ring slots given by silence glove. Need curios").defineInRange("SilenceGloveMaxRings", 6, 0, 1000);
+    public static final ForgeConfigSpec.DoubleValue SilenceGloveBaseLineAttackSpeed =
+            builder.comment("Still need Curios; Glove attack speed above this line would bring basic attack speed buff?")
+                   .defineInRange("SilenceGloveBaseLineAttackSpeed", 1.2, -10, 10);
+
     static {
         builder.pop();
         builder.push("Item Configuration");
