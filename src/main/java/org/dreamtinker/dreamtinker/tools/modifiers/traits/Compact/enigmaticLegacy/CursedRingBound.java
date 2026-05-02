@@ -28,7 +28,7 @@ public class CursedRingBound extends ArmorModifier {
     public static final ResourceLocation TAG_DEEP_CURSE = Dreamtinker.getLocation("deeper_curse");
 
     private boolean check(IToolStackView tool, ServerPlayer player) {
-        boolean worthy_check = tool.getPersistentData().getBoolean(TAG_DEEP_CURSE);
+        boolean worthy_check = 0 < tool.getPersistentData().getInt(TAG_DEEP_CURSE);
         return player.getAbilities().instabuild ||
                (SuperpositionHandler.isTheCursedOne(player) &&
                 (!worthy_check || SuperpositionHandler.isTheWorthyOne(player)));
@@ -62,10 +62,10 @@ public class CursedRingBound extends ArmorModifier {
 
     @Override
     public void addTooltip(IToolStackView tool, @NotNull ModifierEntry modifier, @Nullable Player player, List<Component> tooltip, TooltipKey tooltipKey, TooltipFlag tooltipFlag) {
-        if (!tool.getPersistentData().getBoolean(TAG_DEEP_CURSE)){
-            ItemLoreHelper.indicateCursedOnesOnly(tooltip);
-        }else if (tooltipKey.isShiftOrUnknown()){
+        if (0 < tool.getPersistentData().getInt(TAG_DEEP_CURSE) && tooltipKey.isShiftOrUnknown()){
             ItemLoreHelper.indicateWorthyOnesOnly(tooltip);
+        }else {
+            ItemLoreHelper.indicateCursedOnesOnly(tooltip);
         }
     }
 }

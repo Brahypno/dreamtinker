@@ -57,13 +57,13 @@ public class EldritchPan extends BattleModifier {
 
     @Override
     public Component onModifierRemoved(IToolStackView tool, Modifier modifier) {
-        tool.getPersistentData().remove(CursedRingBound.TAG_DEEP_CURSE);
+        tool.getPersistentData().putInt(CursedRingBound.TAG_DEEP_CURSE, Math.max(0, tool.getPersistentData().getInt(CursedRingBound.TAG_DEEP_CURSE) - 1));
         return null;
     }
 
     @Override
     public Component validate(IToolStackView tool, ModifierEntry modifier) {
-        tool.getPersistentData().putBoolean(CursedRingBound.TAG_DEEP_CURSE, true);
+        tool.getPersistentData().putInt(CursedRingBound.TAG_DEEP_CURSE, 1);
         return null;
     }
 

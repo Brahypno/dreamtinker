@@ -7,6 +7,7 @@ import com.aizistral.enigmaticlegacy.items.TheInfinitum;
 import com.aizistral.enigmaticlegacy.items.TheTwist;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -14,11 +15,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
-import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.modules.build.ModifierTraitModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
@@ -31,22 +32,24 @@ import java.util.List;
 import static org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.EldritchPan.getBloodlust;
 
 public class WeaponBooks extends BattleModifier {
+
+    public static final ResourceLocation TAG_SEC = Dreamtinker.getLocation("deeper_curse_actived");
+
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        hookBuilder.addModule(new ModifierTraitModule(DreamtinkerModifiers.cursed_ring_bound.getId(), 1, true));
+        hookBuilder.addModule(new ModifierTraitModule(DreamtinkerModifiers.cursed_ring_bound.getId(), 1, false));
         super.registerHooks(hookBuilder);
     }
 
     @Override
-    public Component onModifierRemoved(IToolStackView tool, Modifier modifier) {
-        tool.getPersistentData().remove(CursedRingBound.TAG_DEEP_CURSE);
-        return null;
-    }
-
-    @Override
     public Component validate(IToolStackView tool, ModifierEntry modifier) {
-        if (1 < modifier.getLevel())
-            tool.getPersistentData().putBoolean(CursedRingBound.TAG_DEEP_CURSE, true);
+        if (2 <= modifier.getLevel()){
+            tool.getPersistentData().putInt(CursedRingBound.TAG_DEEP_CURSE, 1);
+            tool.getPersistentData().putBoolean(TAG_SEC, true);
+        }else if (tool.getPersistentData().getBoolean(TAG_SEC)){
+            tool.getPersistentData().putInt(CursedRingBound.TAG_DEEP_CURSE, Math.max(0, tool.getPersistentData().getInt(CursedRingBound.TAG_DEEP_CURSE) - 1));
+            tool.getPersistentData().remove(TAG_SEC);
+        }
         return null;
     }
 
