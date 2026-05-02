@@ -13,8 +13,7 @@
         "legs",
         "chest",
         "head"
-      ],
-      "tooltip_style": "percent"
+      ]
     }
   ],
   "tooltip_display": "always"

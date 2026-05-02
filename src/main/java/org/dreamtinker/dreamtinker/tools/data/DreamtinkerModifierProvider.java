@@ -272,8 +272,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.FragileButBright)
                 .addModule(StatBoostModule.add(ToolStats.ARMOR).eachLevel(-1.5f))
                 .addModule(StatBoostModule.add(ToolStats.ARMOR_TOUGHNESS).eachLevel(-1f))
-                .addModule(AttributeModule.builder(DreamtinkerAttributes.FATE_VEIL.get(), AttributeModifier.Operation.ADDITION)
-                                          .tooltipStyle(AttributeModule.TooltipStyle.PERCENT).eachLevel(0.06f));
+                .addModule(AttributeModule.builder(DreamtinkerAttributes.FATE_VEIL.get(), AttributeModifier.Operation.ADDITION).eachLevel(0.06f));
         buildModifier(Ids.homunculusLifeCurse).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
         buildModifier(Ids.homunculusGift).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
         buildModifier(Ids.peaches_in_memory)
@@ -295,7 +294,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.shadow_blessing)
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                 .addModule(AttributeModule.builder(TinkerAttributes.PROTECTION_CAP, AttributeModifier.Operation.ADDITION)
-                                          .tooltipStyle(AttributeModule.TooltipStyle.PERCENT).flat(0.05f));
+                                          .tooltipStyle(AttributeModule.TooltipStyle.ATTRIBUTE).flat(0.05f));
         buildModifier(Ids.silver_name_bee)
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                 .addModule(EntityLootMultiplierModule.builder().chance(LevelingValue.flat(1)).build());
