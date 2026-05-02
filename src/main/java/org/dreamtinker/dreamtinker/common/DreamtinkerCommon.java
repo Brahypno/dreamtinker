@@ -8,6 +8,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
@@ -36,6 +38,7 @@ import slimeknights.mantle.data.predicate.block.BlockPredicate;
 import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
 import slimeknights.mantle.item.ContainerFoodItem;
 import slimeknights.mantle.registration.object.ItemObject;
+import slimeknights.tconstruct.library.json.variable.entity.EntityVariable;
 import slimeknights.tconstruct.library.recipe.FluidValues;
 import slimeknights.tconstruct.shared.block.BetterPaneBlock;
 
@@ -410,6 +413,14 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(le.getType());
         return id != null && id.getNamespace().matches("undergarden");
     });
+    public static EntityVariable ARMOR = EntityVariable.simple(le -> {
+        AttributeInstance armor = le.getAttribute(Attributes.ARMOR);
+        return null != armor ? (float) armor.getValue() : 0;
+    });
+    public static EntityVariable ARMOR_TOUGHNESS = EntityVariable.simple(le -> {
+        AttributeInstance armor_toughness = le.getAttribute(Attributes.ARMOR_TOUGHNESS);
+        return null != armor_toughness ? (float) armor_toughness.getValue() : 0;
+    });
 
 
     @SubscribeEvent
@@ -418,6 +429,10 @@ public class DreamtinkerCommon extends DreamtinkerModule {
 
             LivingEntityPredicate.LOADER.register(Dreamtinker.getLocation("living_of_undergarden"), LIVING_OF_UNDER_GARDEN.getLoader());
             BlockPredicate.LOADER.register(Dreamtinker.getLocation("block_of_undergarden"), BLOCK_OF_UNDER_GARDEN.getLoader());
+
+            EntityVariable.LOADER.register(Dreamtinker.getLocation("armor"), ARMOR.getLoader());
+
+            EntityVariable.LOADER.register(Dreamtinker.getLocation("armor_toughness"), ARMOR_TOUGHNESS.getLoader());
         }
     }
 }

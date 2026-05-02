@@ -2,7 +2,23 @@
   "default": [
     {
       "level": 1,
+      "name": "dreamtinker:carapace_fall"
+    },
+    {
+      "level": 1,
       "name": "dreamtinker:with_wing_with_scale"
     }
-  ]
+  ],
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "dreamtinker:scale_within"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:with_wing_with_scale"
+      }
+    ]
+  }
 }

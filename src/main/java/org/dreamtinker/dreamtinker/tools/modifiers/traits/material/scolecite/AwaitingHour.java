@@ -15,7 +15,6 @@ import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
-import slimeknights.tconstruct.library.json.predicate.TinkerPredicate;
 import slimeknights.tconstruct.library.materials.definition.MaterialId;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
@@ -27,7 +26,6 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 import static net.minecraft.util.Mth.clamp;
-import static slimeknights.tconstruct.library.modifiers.modules.armor.ProtectionModule.addResistanceTooltip;
 
 public class AwaitingHour extends BattleModifier {
     public static final ResourceLocation TAG_SCALE = Dreamtinker.getLocation("scale_worm_tool");
@@ -41,12 +39,12 @@ public class AwaitingHour extends BattleModifier {
         if (moth < scale){
             if (ToolStats.PROJECTILE_DAMAGE.supports(context.getItem()))
                 ToolStats.PROJECTILE_DAMAGE.add(builder, (scale - moth) * 0.03);
-            ToolStats.ATTACK_DAMAGE.multiplyAll(builder, (scale - moth) * 0.0025);
+            ToolStats.ATTACK_DAMAGE.multiplyAll(builder, 1 + (scale - moth) * 0.0025);
         }else if (moth > scale){
             if (ToolStats.DRAW_SPEED.supports(context.getItem()))
-                ToolStats.DRAW_SPEED.multiplyAll(builder, (moth - scale) * 0.003);
+                ToolStats.DRAW_SPEED.multiplyAll(builder, 1 + (moth - scale) * 0.003);
             if (ToolStats.VELOCITY.supports(context.getItem()))
-                ToolStats.VELOCITY.multiplyAll(builder, (moth - scale) * 0.003);
+                ToolStats.VELOCITY.multiplyAll(builder, 1 + (moth - scale) * 0.003);
             ToolStats.ATTACK_SPEED.add(builder, (moth - scale) * 0.015);
         }
     }
@@ -68,7 +66,7 @@ public class AwaitingHour extends BattleModifier {
             return;
         ModDataNBT data = tool.getPersistentData();
         ResourceLocation resourceLocation;
-        if (context.isFullyCharged() || TinkerPredicate.AIRBORNE.inverted().matches(context.getAttacker()) && !context.isCritical()){
+        if (context.isFullyCharged() && context.isCritical()){
             resourceLocation = TAG_SCALE;
         }else {
             resourceLocation = TAG_MOTH;
@@ -84,7 +82,7 @@ public class AwaitingHour extends BattleModifier {
             return;
         ModDataNBT data = tool.getPersistentData();
         ResourceLocation resourceLocation;
-        if (null != arrow && arrow.isCritArrow() || TinkerPredicate.AIRBORNE.inverted().matches(shooter)){
+        if (null != arrow && arrow.isCritArrow()){
             resourceLocation = TAG_SCALE;
         }else {
             resourceLocation = TAG_MOTH;
@@ -154,11 +152,6 @@ public class AwaitingHour extends BattleModifier {
                 tooltip.add(Component.translatable("modifier.dreamtinker.pupal_omen_moth.tooltip", moth, OmenInSight));
             if (0 < scale)
                 tooltip.add(Component.translatable("modifier.dreamtinker.pupal_omen_scale.tooltip", scale, OmenInSight));
-            if (scale < moth){
-                float value = (moth - scale) * 0.125F / 4;
-                if (value > 0.25f)
-                    addResistanceTooltip(tool, modifier.getModifier(), value, player, tooltip);
-            }
         }
     }
 }

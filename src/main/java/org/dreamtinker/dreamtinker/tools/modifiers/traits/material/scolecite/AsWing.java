@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat;
+package org.dreamtinker.dreamtinker.tools.modifiers.traits.material.scolecite;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
@@ -40,9 +40,9 @@ public class AsWing extends Modifier implements LeftClickHook {
     }
 
     private void ShootWing(IToolStackView tool, Player player, Level world, int modifierLevel) {
-        if (!world.isClientSide){
+        if (!world.isClientSide && 0.6 < player.getAttackStrengthScale(0)){
             float damageAmount = (float) player.getAttributeValue(Attributes.ATTACK_DAMAGE);//TODO!
-            float power = damageAmount * (0.45F + 0.15F * modifierLevel);
+            float power = damageAmount * (0.6F + 0.15F * modifierLevel);
             int maxLife = 40 + 10 * modifierLevel;
             byte pierce = (byte) modifierLevel;
             double speed = 1.25D + 0.15D * modifierLevel;

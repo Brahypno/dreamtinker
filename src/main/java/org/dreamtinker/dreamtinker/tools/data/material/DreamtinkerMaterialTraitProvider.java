@@ -76,8 +76,11 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
 
         addDefaultTraits(DreamtinkerMaterialIds.scolecite, awaiting_hour);
         addTraits(DreamtinkerMaterialIds.scolecite, ARMOR, pupal_omen);
-        addDefaultTraits(DreamtinkerMaterialIds.PermanenceScale, Ids.with_wing_with_scale);
+        addDefaultTraits(DreamtinkerMaterialIds.PermanenceScale, Ids.carapace_fall, Ids.with_wing_with_scale);
+        addTraits(DreamtinkerMaterialIds.PermanenceScale, ARMOR, Ids.scale_within, Ids.with_wing_with_scale);
         addDefaultTraits(DreamtinkerMaterialIds.PermanenceWing, as_wing.getId(), Ids.with_wing_with_scale);
+        addTraits(DreamtinkerMaterialIds.PermanenceWing, RANGED, feather_wake.getId(), Ids.with_wing_with_scale);
+        addTraits(DreamtinkerMaterialIds.PermanenceWing, ARMOR, Ids.wing_without, Ids.with_wing_with_scale);
 
         addDefaultTraits(DreamtinkerMaterialIds.shiningFlint, ModifierIds.jagged, Ids.fiber_glass_fragments, light_emanation.getId(), light_in_dark.getId());
         addTraits(DreamtinkerMaterialIds.shiningFlint, AMMO, ModifierIds.keen, ModifierIds.spike);

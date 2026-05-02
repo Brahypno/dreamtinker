@@ -31,8 +31,11 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraftforge.fluids.FluidType;
 import org.dreamtinker.dreamtinker.common.DreamtinkerAttributes;
+import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
+import org.dreamtinker.dreamtinker.library.modifiers.modules.armor.RepeatedArmorModule;
+import org.dreamtinker.dreamtinker.library.modifiers.modules.armor.RepeatedProtectionModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.MobEffectsRemoverModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.SelfMobEffectModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.harvest.BlockLootMultiplierModule;
@@ -59,9 +62,11 @@ import slimeknights.tconstruct.library.json.predicate.TinkerPredicate;
 import slimeknights.tconstruct.library.json.predicate.tool.HasModifierPredicate;
 import slimeknights.tconstruct.library.json.predicate.tool.ToolContextPredicate;
 import slimeknights.tconstruct.library.json.variable.block.BlockVariable;
+import slimeknights.tconstruct.library.json.variable.melee.EntityMeleeVariable;
 import slimeknights.tconstruct.library.json.variable.mining.BlockLightVariable;
 import slimeknights.tconstruct.library.json.variable.mining.BlockMiningSpeedVariable;
 import slimeknights.tconstruct.library.json.variable.mining.BlockTemperatureVariable;
+import slimeknights.tconstruct.library.json.variable.power.EntityPowerVariable;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.impl.BasicModifier;
 import slimeknights.tconstruct.library.modifiers.modules.armor.*;
@@ -517,7 +522,54 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                           .time(RandomLevelingValue.random(20 * 4, 10))
                                           .build());
         buildModifier(Ids.with_wing_with_scale)
-                .addModule(MaterialRepairModule.material(DreamtinkerMaterialIds.scolecite).constant(140));
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(MaterialRepairModule.material(DreamtinkerMaterialIds.scolecite).constant(500));
+        buildModifier(Ids.scale_within)
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(new RepeatedArmorModule.Builder().percentage(LevelingValue.flat(0.4f)).build())
+                .addModule(AttributeModule.builder(DreamtinkerAttributes.BLOOD_IN_SHELL, AttributeModifier.Operation.ADDITION).flat(6f));
+        buildModifier(Ids.wing_without)
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(new RepeatedProtectionModule.Builder().percentage(LevelingValue.flat(0.5f)).build())
+                .addModule(ProtectionModule.builder()
+                                           .sources(DamageSourcePredicate.ANY, DamageSourcePredicate.ANY)
+                                           .flat(3.0f))
+                .addModule(AttributeModule.builder(DreamtinkerAttributes.FATE_VEIL, AttributeModifier.Operation.ADDITION).flat(.2f));
+
+
+        buildModifier(Ids.carapace_fall)
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(ConditionalMeleeDamageModule.builder().percent()
+                                                       .formula()
+                                                       .customVariable("armor", new EntityMeleeVariable(DreamtinkerCommon.ARMOR,
+                                                                                                        EntityMeleeVariable.WhichEntity.ATTACKER, 0.0f))
+                                                       .customVariable("armor_toughness", new EntityMeleeVariable(DreamtinkerCommon.ARMOR_TOUGHNESS,
+                                                                                                                  EntityMeleeVariable.WhichEntity.ATTACKER,
+                                                                                                                  0.0f))
+                                                       .constant(2).multiply().add()
+                                                       .constant(1).max()
+                                                       .constant(60).divideFlipped()
+                                                       .constant(1).add()
+                                                       .constant(1).divideFlipped()
+                                                       .variable(LEVEL).multiply()
+                                                       .constant(1f).add()
+                                                       .variable(VALUE).multiply().build())
+                .addModule(ConditionalPowerModule.builder().percent()
+                                                 .formula()
+                                                 .customVariable("armor", new EntityPowerVariable(DreamtinkerCommon.ARMOR,
+                                                                                                  EntityMeleeVariable.WhichEntity.ATTACKER, 0.0f))
+                                                 .customVariable("armor_toughness", new EntityPowerVariable(DreamtinkerCommon.ARMOR_TOUGHNESS,
+                                                                                                            EntityMeleeVariable.WhichEntity.ATTACKER,
+                                                                                                            0.0f))
+                                                 .constant(2).multiply().add()
+                                                 .constant(1).max()
+                                                 .constant(60).divideFlipped()
+                                                 .constant(1).add()
+                                                 .constant(1).divideFlipped()
+                                                 .variable(LEVEL).multiply()
+                                                 .constant(1f).add()
+                                                 .variable(MULTIPLIER).multiply()
+                                                 .variable(VALUE).multiply().build());
 
         addELModifiers();
         addMalumModifiers();

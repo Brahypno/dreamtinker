@@ -274,6 +274,33 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                            .addARGB(255, 0xFFC0AD76)
                                            .build()
             ));
+        this.buildMaterial(DreamtinkerMaterialIds.PermanenceWing)
+            .meleeHarvest().armor().ranged().shieldCore()
+            .fallbacks("gem")
+            .transformer(new FramesSpriteTransformer(
+                    Dreamtinker.getLocation("generator/ruin_steel"),//This seems could be generic
+                    // Frame 1：敛羽，深青、冷暗
+                    GreyToSpriteTransformer.builderFromBlack()
+                                           .addARGB(25, 0xFF030A0D)
+                                           .addARGB(26, 0xFF061417)
+                                           .addARGB(102, 0xFF123F47)
+                                           .addARGB(140, 0xFF2E6E75)
+                                           .addARGB(178, 0xFF6FA19E)
+                                           .addARGB(216, 0xFFAFC7BC)
+                                           .addARGB(255, 0xFFD9DCCB)
+                                           .build(),
+
+                    // Frame 2：展翼，青白翻光、月白明显抬起
+                    GreyToSpriteTransformer.builderFromBlack()
+                                           .addARGB(25, 0xFF0A1D20)
+                                           .addARGB(26, 0xFF164047)
+                                           .addARGB(102, 0xFF3A8C92)
+                                           .addARGB(140, 0xFF8CC3BA)
+                                           .addARGB(178, 0xFFCFE2D2)
+                                           .addARGB(216, 0xFFF0EEDC)
+                                           .addARGB(255, 0xFFFFF8E8)
+                                           .build()
+            ));
 
         this.buildMaterial(DreamtinkerMaterialIds.shiningFlint)
             .meleeHarvest().ranged().arrowHead()

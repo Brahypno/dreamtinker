@@ -203,7 +203,14 @@
     "doom_track": "#FFF0B0",
     "doom_ray": "#FFF0B0",
     "pressing_front": "#FFF0B0",
-    "pupal_omen": "#6C6E73"
+    "pupal_omen": "#6C6E73",
+    "awaiting_hour": "#6C6E73",
+    "with_wing_with_scale": "#6C6E73",
+    "scale_within": "#531B0B",
+    "wing_without": "#D9DCCB",
+    "as_wing": "#D9DCCB",
+    "feather_wake": "#D9DCCB",
+    "carapace_fall": "#531B0B"
 
 },
   "material.dreamtinker": {

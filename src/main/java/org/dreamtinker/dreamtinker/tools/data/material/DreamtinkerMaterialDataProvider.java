@@ -42,8 +42,8 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.rainbow_honey_crystal, 3, 25, false, false, null);
         addMaterial(DreamtinkerMaterialIds.black_sapphire, 4, 35, false, false, null);
         addMaterial(DreamtinkerMaterialIds.scolecite, 2, 5, false, false, null);
-        addMaterial(DreamtinkerMaterialIds.PermanenceScale, 4, 5, false, false, null);
-        addMaterial(DreamtinkerMaterialIds.PermanenceWing, 4, 5, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.PermanenceScale, 4, 5, false, true, null);
+        addMaterial(DreamtinkerMaterialIds.PermanenceWing, 4, 5, false, true, null);
         addMaterial(DreamtinkerMaterialIds.shiningFlint, 2, 5, true, false, null);
         addMaterial(DreamtinkerMaterialIds.orichalcum, 2, 5, false, false, null);
         addMaterial(DreamtinkerMaterialIds.cold_iron, 2, 6, false, false, null);

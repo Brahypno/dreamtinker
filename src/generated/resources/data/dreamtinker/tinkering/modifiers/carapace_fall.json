@@ -1,0 +1,86 @@
+{
+  "level_display": "tconstruct:single_level",
+  "modules": [
+    {
+      "type": "tconstruct:conditional_melee_damage",
+      "formula": [
+        "$armor",
+        "$armor_toughness",
+        2.0,
+        "*",
+        "+",
+        1.0,
+        "max",
+        60.0,
+        "!/",
+        1.0,
+        "+",
+        1.0,
+        "!/",
+        "$level",
+        "*",
+        1.0,
+        "+",
+        "$damage",
+        "*"
+      ],
+      "percent": true,
+      "variables": {
+        "armor": {
+          "type": "tconstruct:entity",
+          "entity_type": "dreamtinker:armor",
+          "fallback": 0.0,
+          "which": "attacker"
+        },
+        "armor_toughness": {
+          "type": "tconstruct:entity",
+          "entity_type": "dreamtinker:armor_toughness",
+          "fallback": 0.0,
+          "which": "attacker"
+        }
+      }
+    },
+    {
+      "type": "tconstruct:conditional_power",
+      "formula": [
+        "$armor",
+        "$armor_toughness",
+        2.0,
+        "*",
+        "+",
+        1.0,
+        "max",
+        60.0,
+        "!/",
+        1.0,
+        "+",
+        1.0,
+        "!/",
+        "$level",
+        "*",
+        1.0,
+        "+",
+        "$multiplier",
+        "*",
+        "$damage",
+        "*"
+      ],
+      "percent": true,
+      "variables": {
+        "armor": {
+          "type": "tconstruct:entity",
+          "entity_type": "dreamtinker:armor",
+          "fallback": 0.0,
+          "which": "attacker"
+        },
+        "armor_toughness": {
+          "type": "tconstruct:entity",
+          "entity_type": "dreamtinker:armor_toughness",
+          "fallback": 0.0,
+          "which": "attacker"
+        }
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

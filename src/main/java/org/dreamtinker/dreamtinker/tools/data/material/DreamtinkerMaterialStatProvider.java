@@ -80,12 +80,12 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          HandleMaterialStats.multipliers().durability(0.8f).miningSpeed(1.0f).attackDamage(1.05f).attackSpeed(1.05f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.PermanenceScale,
-                         new HeadMaterialStats(1200, 5f, Tiers.DIAMOND, 3f),
-                         HandleMaterialStats.multipliers().durability(0.8f).miningSpeed(1.0f).attackDamage(1.05f).attackSpeed(1.05f).build(),
+                         new HeadMaterialStats(1200, 9f, Tiers.DIAMOND, 3f),
+                         HandleMaterialStats.multipliers().durability(1.6f).miningSpeed(1.3f).attackDamage(1.15f).attackSpeed(1.05f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.PermanenceWing,
-                         new HeadMaterialStats(1200, 5f, Tiers.DIAMOND, 3f),
-                         HandleMaterialStats.multipliers().durability(0.8f).miningSpeed(1.0f).attackDamage(1.05f).attackSpeed(1.05f).build(),
+                         new HeadMaterialStats(1200, 5f, Tiers.DIAMOND, 2f),
+                         HandleMaterialStats.multipliers().durability(1.2f).miningSpeed(1.0f).attackDamage(1.05f).attackSpeed(1.20f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.shiningFlint,
                          new HeadMaterialStats(300, 2f, Tiers.IRON, 1.50f),
@@ -276,11 +276,11 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new LimbMaterialStats(600, 0.05f, 0.05f, 0.05f),
                          new GripMaterialStats(0.05f, 0.05f, 1.5f));
         addMaterialStats(DreamtinkerMaterialIds.PermanenceScale,
-                         new LimbMaterialStats(1200, 0.05f, 0.05f, 0.05f),
-                         new GripMaterialStats(0.05f, 0.05f, 3f));
+                         new LimbMaterialStats(1200, 0.05f, 0.05f, 0.1f),
+                         new GripMaterialStats(0.2f, 0.1f, 3f));
         addMaterialStats(DreamtinkerMaterialIds.PermanenceWing,
-                         new LimbMaterialStats(1200, 0.4f, 0.3f, 0.25f),
-                         new GripMaterialStats(0.15f, 0.2f, 3f));
+                         new LimbMaterialStats(1200, 0.4f, 0.3f, 0.05f),
+                         new GripMaterialStats(0.15f, 0.05f, 2f));
         addMaterialStats(DreamtinkerMaterialIds.shiningFlint,
                          new LimbMaterialStats(300, -0.3f, 0.25f, -0.05f),
                          new GripMaterialStats(-0.2f, -0.05f, 1.50f));
@@ -403,13 +403,13 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                             PlatingMaterialStats.builder().durabilityFactor(100).armor(2, 2, 2, 2).toughness(0),
                             StatlessMaterialStats.MAILLE);
         addArmorShieldStats(DreamtinkerMaterialIds.scolecite,
-                            PlatingMaterialStats.builder().durabilityFactor(24).armor(1, 4, 6, 1).toughness(1.5f),
+                            PlatingMaterialStats.builder().durabilityFactor(28).armor(1, 4, 6, 1).toughness(1.5f),
                             StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
         addArmorShieldStats(DreamtinkerMaterialIds.PermanenceScale,
-                            PlatingMaterialStats.builder().durabilityFactor(36).armor(4, 8, 10, 5).toughness(6f),
+                            PlatingMaterialStats.builder().durabilityFactor(48).armor(4, 8, 10, 5).toughness(6f),
                             StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
         addArmorShieldStats(DreamtinkerMaterialIds.PermanenceWing,
-                            PlatingMaterialStats.builder().durabilityFactor(36).armor(1, 4, 6, 1).toughness(1.5f),
+                            PlatingMaterialStats.builder().durabilityFactor(42).armor(2, 5, 7, 2).toughness(2f),
                             StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
         addArmorShieldStats(DreamtinkerMaterialIds.orichalcum,
                             PlatingMaterialStats.builder().durabilityFactor(26).armor(2, 4, 6, 2).toughness(1f).knockbackResistance(2f),

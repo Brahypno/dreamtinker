@@ -8,5 +8,27 @@
       "level": 1,
       "name": "dreamtinker:with_wing_with_scale"
     }
-  ]
+  ],
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "dreamtinker:wing_without"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:with_wing_with_scale"
+      }
+    ],
+    "tconstruct:ranged": [
+      {
+        "level": 1,
+        "name": "dreamtinker:feather_wake"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:with_wing_with_scale"
+      }
+    ]
+  }
 }

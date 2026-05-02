@@ -1,0 +1,37 @@
+{
+  "level_display": "tconstruct:no_levels",
+  "modules": [
+    {
+      "type": "dreamtinker:repeated_protection_module",
+      "percentage": {
+        "flat": 0.5
+      }
+    },
+    {
+      "type": "tconstruct:protection",
+      "damage_source": {
+        "type": "mantle:and",
+        "predicates": [
+          "mantle:any",
+          "mantle:any"
+        ]
+      },
+      "flat": 3.0
+    },
+    {
+      "type": "tconstruct:attribute",
+      "attribute": "dreamtinker:generic.fate_veil",
+      "flat": 0.2,
+      "operation": "addition",
+      "slots": [
+        "mainhand",
+        "offhand",
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ]
+    }
+  ],
+  "tooltip_display": "always"
+}

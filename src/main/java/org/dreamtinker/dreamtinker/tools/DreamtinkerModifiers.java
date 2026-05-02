@@ -16,6 +16,8 @@ import net.minecraftforge.registries.RegisterEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.DreamtinkerModule;
 import org.dreamtinker.dreamtinker.common.data.tags.ModifierTagProvider;
+import org.dreamtinker.dreamtinker.library.modifiers.modules.armor.RepeatedArmorModule;
+import org.dreamtinker.dreamtinker.library.modifiers.modules.armor.RepeatedProtectionModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.MobEffectsRemoverModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.SelfMobEffectModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.harvest.BlockLootMultiplierModule;
@@ -70,7 +72,9 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.nigrescence_a
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.nigrescence_antimony.ouroboric_hourglass;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.ruin_wheel.DoomTrack;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.ruin_wheel.RayAttack;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.scolecite.AsWing;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.scolecite.AwaitingHour;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.scolecite.FeatherWake;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.scolecite.pupalOmen;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.star_regulus.TwoHeadedSeven;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.star_regulus.as_one;
@@ -183,6 +187,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<AsWing> as_wing = MODIFIERS.register("as_wing", AsWing::new);
     public static final StaticModifier<pupalOmen> pupal_omen = MODIFIERS.register("pupal_omen", pupalOmen::new);
     public static final StaticModifier<AwaitingHour> awaiting_hour = MODIFIERS.register("awaiting_hour", AwaitingHour::new);
+    public static final StaticModifier<FeatherWake> feather_wake = MODIFIERS.register("feather_wake", FeatherWake::new);
 
     //etherium
     public static final StaticModifier<ELAstralBreak> astral_break = EL_MODIFIERS.register("astral_break", ELAstralBreak::new);
@@ -274,6 +279,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             ModifierModule.LOADER.register(Dreamtinker.getLocation("self_mob_effect"), SelfMobEffectModule.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("block_loot_multiplier"), BlockLootMultiplierModule.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("entity_loot_multiplier"), EntityLootMultiplierModule.LOADER);
+            ModifierModule.LOADER.register(Dreamtinker.getLocation("repeated_armor_module"), RepeatedArmorModule.LOADER);
+            ModifierModule.LOADER.register(Dreamtinker.getLocation("repeated_protection_module"), RepeatedProtectionModule.LOADER);
         }
     }
 
@@ -365,6 +372,10 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId sticky_string = id("sticky_string");
         public static final ModifierId pressing_front = id("pressing_front");
         public static final ModifierId with_wing_with_scale = id("with_wing_with_scale");
+        public static final ModifierId scale_within = id("scale_within");
+        public static final ModifierId wing_without = id("wing_without");
+        public static final ModifierId carapace_fall = id("carapace_fall");
+
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
         public static final ModifierId el_sorrow = id("el_sorrow");

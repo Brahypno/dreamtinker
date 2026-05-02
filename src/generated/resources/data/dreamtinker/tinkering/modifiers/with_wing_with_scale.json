@@ -1,9 +1,9 @@
 {
-  "level_display": "tconstruct:default",
+  "level_display": "tconstruct:no_levels",
   "modules": [
     {
       "type": "tconstruct:material_repair",
-      "durability": 140,
+      "durability": 500,
       "material": "dreamtinker:scolecite"
     }
   ],
