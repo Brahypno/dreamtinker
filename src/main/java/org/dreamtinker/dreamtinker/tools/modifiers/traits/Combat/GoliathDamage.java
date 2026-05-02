@@ -1,6 +1,5 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat;
 
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.AABB;
@@ -20,7 +19,7 @@ public class GoliathDamage extends NoLevelsModifier implements MeleeInterface {
         AABB target_box = target.getBoundingBox();
         double target_volume = target_box.getXsize() * target_box.getYsize() * target_box.getZsize();
         double multi = 1.0 + 0.35D * Math.log((target_volume / attacker_volume));
-        return (float) Mth.clamp(multi, 0.70D, 1.90D);
+        return (float) Math.max(multi, 0.70D);
     }
 
     @Override
