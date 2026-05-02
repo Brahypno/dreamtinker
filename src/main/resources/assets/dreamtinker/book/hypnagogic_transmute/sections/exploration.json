@@ -43,5 +43,10 @@
     "name": "transmutation_gold_ore",
     "type": "mantle:showcase",
     "data": "exploration/transmutation_gold_ore.json"
+  },
+  {
+    "name": "void_pear",
+    "type": "mantle:showcase",
+    "data": "exploration/void_pearl.json"
   }
 ]
