@@ -1,6 +1,8 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy;
 
 import com.aizistral.enigmaticlegacy.handlers.SuperpositionHandler;
+import com.aizistral.enigmaticlegacy.helpers.ItemLoreHelper;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -8,13 +10,19 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.Entity.AggressiveFox;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
+import org.jetbrains.annotations.NotNull;
+import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.InteractionSource;
 import slimeknights.tconstruct.library.tools.context.EquipmentChangeContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class CursedRingBound extends ArmorModifier {
     public static final ResourceLocation TAG_DEEP_CURSE = Dreamtinker.getLocation("deeper_curse");
@@ -49,6 +57,15 @@ public class CursedRingBound extends ArmorModifier {
                 entity.spawnAtLocation(context.getReplacement().copy());
             }
             entity.setItemSlot(context.getChangedSlot(), ItemStack.EMPTY);
+        }
+    }
+
+    @Override
+    public void addTooltip(IToolStackView tool, @NotNull ModifierEntry modifier, @Nullable Player player, List<Component> tooltip, TooltipKey tooltipKey, TooltipFlag tooltipFlag) {
+        if (!tool.getPersistentData().getBoolean(TAG_DEEP_CURSE)){
+            ItemLoreHelper.indicateCursedOnesOnly(tooltip);
+        }else if (tooltipKey.isShiftOrUnknown()){
+            ItemLoreHelper.indicateWorthyOnesOnly(tooltip);
         }
     }
 }

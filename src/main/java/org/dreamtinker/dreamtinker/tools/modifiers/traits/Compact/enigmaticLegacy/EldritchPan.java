@@ -2,6 +2,8 @@ package org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLega
 
 import com.aizistral.enigmaticlegacy.effects.GrowingBloodlustEffect;
 import com.aizistral.enigmaticlegacy.handlers.SuperpositionHandler;
+import com.aizistral.enigmaticlegacy.helpers.ItemLoreHelper;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -15,6 +17,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -22,6 +25,7 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.jetbrains.annotations.NotNull;
+import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.modules.build.ModifierTraitModule;
@@ -29,9 +33,14 @@ import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
+import slimeknights.tconstruct.tools.TinkerModifiers;
 
+import javax.annotation.Nullable;
+import java.util.List;
 import java.util.UUID;
 import java.util.function.BiConsumer;
+
+import static com.aizistral.enigmaticlegacy.items.EldritchPan.uniqueGainLimit;
 
 public class EldritchPan extends BattleModifier {
     public static final ResourceLocation BLOODLUST_ID =
@@ -42,6 +51,7 @@ public class EldritchPan extends BattleModifier {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
         hookBuilder.addModule(new ModifierTraitModule(DreamtinkerModifiers.cursed_ring_bound.getId(), 1, true));
+        hookBuilder.addModule(new ModifierTraitModule(TinkerModifiers.blocking.getId(), 1, true));
         super.registerHooks(hookBuilder);
     }
 
@@ -57,11 +67,6 @@ public class EldritchPan extends BattleModifier {
         return null;
     }
 
-    @Override
-    public int getPriority() {
-        return Integer.MAX_VALUE;
-    }
-
     public static final ResourceLocation TAG_PAN = new ResourceLocation(Dreamtinker.MODID, "eldritch_pan");
     private static final ResourceLocation TAG_PAN_TICKS = new ResourceLocation(Dreamtinker.MODID, "eldritch_tick");
 
@@ -75,6 +80,17 @@ public class EldritchPan extends BattleModifier {
         if (!ModList.get().isLoaded("enigmaticlegacy"))
             return null;
         return ForgeRegistries.MOB_EFFECTS.getValue(HUNGER_ID);
+    }
+
+    @Override
+    public void addTooltip(IToolStackView tool, @NotNull ModifierEntry modifier, @Nullable Player player, List<Component> tooltip, TooltipKey tooltipKey, TooltipFlag tooltipFlag) {
+        if (tooltipKey.isShiftOrUnknown()){
+            int kills = tool.getPersistentData().getInt(TAG_PAN);
+            ItemLoreHelper.addLocalizedString(tooltip, "tooltip.enigmaticlegacy.eldritchPanKills1", ChatFormatting.GOLD, new Object[]{kills});
+            if (kills >= uniqueGainLimit.getValue()){
+                ItemLoreHelper.addLocalizedString(tooltip, "tooltip.enigmaticlegacy.eldritchPanKillsMax");
+            }
+        }
     }
 
     @Override
@@ -173,7 +189,7 @@ public class EldritchPan extends BattleModifier {
                                                       AttributeModifier.Operation.ADDITION));
                 consumer.accept(Attributes.ARMOR,
                                 new AttributeModifier(UUID.fromString(tool_attribute_uuid),
-                                                      Attributes.ATTACK_KNOCKBACK.getDescriptionId(),
+                                                      Attributes.ARMOR.getDescriptionId(),
                                                       com.aizistral.enigmaticlegacy.items.EldritchPan.uniqueArmorGain.getValue() * kills,
                                                       AttributeModifier.Operation.ADDITION));
             }

@@ -36,9 +36,20 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
+import static com.aizistral.enigmaticlegacy.items.EldritchPan.*;
 import static org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.EldritchPan.TAG_PAN;
 
 public class EL_events {
+    private static boolean addKillIfNotPresent(ItemStack pan, ResourceLocation mob) {
+        List<ResourceLocation> kills = getUniqueKills(pan);
+        if (kills.size() < uniqueGainLimit.getValue() && !kills.contains(mob)){
+            addUniqueKill(pan, mob);
+            return true;
+        }else {
+            return false;
+        }
+    }
+
     public static void onLivingDeath(LivingDeathEvent event) {
         LivingEntity entity = event.getEntity();
         if (entity.level().isClientSide || event.isCanceled())
@@ -55,7 +66,7 @@ public class EL_events {
             if (0 < DTModifierCheck.getMainhandModifierLevel(attacker, DreamtinkerModifiers.eldritch_pan.getId())){
                 ResourceLocation killedType = ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType());
 
-                if (EldritchPan.addKillIfNotPresent(weapon, killedType)){
+                if (addKillIfNotPresent(weapon, killedType)){
                     DTMessages.clientChat(Component.translatable("message.enigmaticlegacy.eldritch_pan_buff")
                                                    .withStyle(ChatFormatting.GOLD), false);
                     ToolStack toolstack = ToolStack.from(weapon);
