@@ -360,7 +360,7 @@
   "modifier.dreamtinker.despair_wind.description": "当攻击时，清除伤害吸收并掉落装备，且清除护甲；并造成额外绝望伤害。",
   "modifier.dreamtinker.ophelia": "已死美人",
   "modifier.dreamtinker.ophelia.flavor": "犹自袅袅婷婷",
-  "modifier.dreamtinker.ophelia.description": "将受到的伤害变成3倍，但转化为2*生效等级+1数量的不同类型的伤害。",
+  "modifier.dreamtinker.ophelia.description": "将受到的伤害转化为2*生效等级+1数量的不同类型的伤害。",
   "modifier.dreamtinker.requiem": "镇魂曲",
   "modifier.dreamtinker.requiem.flavor": "镇魂曲静静的流淌着",
   "modifier.dreamtinker.requiem.description": "受到的伤害减少，数值等同于自身和攻击者当前药水效果数量*强化等级。免疫无来源、非生物来源与自身造成的伤害。",

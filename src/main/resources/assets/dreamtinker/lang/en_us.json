@@ -360,7 +360,7 @@
   "modifier.dreamtinker.despair_wind.description": "When attack, clear absorption, all armor and toughness and drop all items;Deal extra despair damage",
   "modifier.dreamtinker.ophelia": "Ophelia",
   "modifier.dreamtinker.ophelia.flavor": "Glided with the trembling water, lost to the slow green flow",
-  "modifier.dreamtinker.ophelia.description": "Triple Damage Received, But split to 2*total effective level +1 damages with random source",
+  "modifier.dreamtinker.ophelia.description": "Split damage received to 2*total effective level +1 damages with random source",
   "modifier.dreamtinker.requiem": "Requiem",
   "modifier.dreamtinker.requiem.flavor": "The requiem flows on in silence.",
   "modifier.dreamtinker.requiem.description": "Reduces damage taken by the number of active potion effects on you and attacker * modifier level. Immune to sourceless, non-living, and self-inflicted damage.",
