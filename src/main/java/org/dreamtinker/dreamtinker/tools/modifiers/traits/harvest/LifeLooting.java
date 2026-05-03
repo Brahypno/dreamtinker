@@ -57,7 +57,7 @@ public class LifeLooting extends Modifier implements LootingModifierHook, ArmorL
     @Override
     public @NotNull List<Component> getDescriptionList(int level) {
         return Arrays.asList(Component.translatable(this.getTranslationKey() + ".flavor").withStyle(ChatFormatting.ITALIC),
-                             Component.translatable(this.getTranslationKey() + ".description", LifeLootingBonus.get().floatValue() * 100)
+                             Component.translatable(this.getTranslationKey() + ".description", LifeLootingBonus.get().floatValue())
                                       .withStyle(ChatFormatting.GRAY));
     }
 

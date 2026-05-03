@@ -233,7 +233,7 @@ public class DreamtinkerConfig {
             builder.comment("Amount percentage reduced of stone heart").defineInRange("StoneHeartProjReduce", 0.2, 0, 100);
 
     public static final ForgeConfigSpec.DoubleValue LifeLootingBonus =
-            builder.comment("Bonus for life looting").defineInRange("LifeLootingBonus", 0.5, 0, 100);
+            builder.comment("Bonus for life looting").defineInRange("LifeLootingBonus", 1.0, 0, 100);
 
     static {builder.comment("\nSoul etherium: ");}
 
