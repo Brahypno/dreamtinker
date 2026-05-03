@@ -29,6 +29,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.entity.PartEntity;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.EntityTeleportEvent;
 import net.minecraftforge.network.PacketDistributor;
@@ -444,5 +445,39 @@ public class DTHelper {
         double positiveOnlyValue = valueBeforeTotalMultiplier * multiplyTotalFactor;
 
         return (float) Math.max(0.0D, positiveOnlyValue);
+    }
+
+    public static AABB getFullBoundingBox(Entity target) {
+        if (target instanceof PartEntity<?> part){
+            Entity parent = part.getParent();
+
+            AABB fullBox = parent.getBoundingBox();
+            PartEntity<?>[] parts = parent.getParts();
+
+            if (parts != null){
+                for (PartEntity<?> p : parts) {
+                    if (p != null){
+                        fullBox = fullBox.minmax(p.getBoundingBox());
+                    }
+                }
+            }
+
+            return fullBox;
+        }
+
+        PartEntity<?>[] parts = target.getParts();
+        if (parts != null){
+            AABB fullBox = target.getBoundingBox();
+
+            for (PartEntity<?> part : parts) {
+                if (part != null){
+                    fullBox = fullBox.minmax(part.getBoundingBox());
+                }
+            }
+
+            return fullBox;
+        }
+
+        return target.getBoundingBox();
     }
 }

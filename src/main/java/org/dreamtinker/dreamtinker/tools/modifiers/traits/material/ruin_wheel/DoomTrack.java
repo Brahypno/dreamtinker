@@ -5,16 +5,15 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.Tags;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.GoliathDamage;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
@@ -66,24 +65,9 @@ public class DoomTrack extends BattleModifier {
     }
 
     private static float sizeProof(LivingEntity attacker, LivingEntity target, int level) {
-        AABB attackerBox = attacker.getBoundingBox();
-        AABB targetBox = target.getBoundingBox();
+        float boost = GoliathDamage.goliathPercentage(attacker, target);
 
-        double attackerVolume = attackerBox.getXsize() * attackerBox.getYsize() * attackerBox.getZsize();
-        double targetVolume = targetBox.getXsize() * targetBox.getYsize() * targetBox.getZsize();
-
-        if (attackerVolume <= 0.0D || targetVolume <= 0.0D){
-            return 0.0F;
-        }
-
-        double ratio = targetVolume / attackerVolume;
-        if (ratio <= 1.0D){
-            return 0.0F;
-        }
-
-        float normalized = (float) Mth.clamp(Math.log(ratio) / Math.log(16.0D), 0.0D, 1.0D);
-
-        return normalized * (1.00F + 0.20F * level);
+        return boost * (1.00F + 0.20F * level);
     }
 
     private static float resistanceProof(LivingEntity target, int level) {
