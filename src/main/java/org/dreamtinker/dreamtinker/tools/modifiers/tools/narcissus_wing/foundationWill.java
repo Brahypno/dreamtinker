@@ -179,7 +179,6 @@ public class foundationWill extends NoLevelsModifier implements LeftClickHook, P
                         dig++;
                     }
                 }
-            player.giveExperiencePoints(-getLevel(iToolStackView) * dig / 10);
         }
     }
 
