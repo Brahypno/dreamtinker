@@ -1270,7 +1270,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .save(consumer, wrap(DreamtinkerModifiers.life_looting, abilityFolder, "_1"));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.soul_upgrade)
                              .setTools(TinkerTags.Items.MODIFIABLE)
-                             .addInput(DreamtinkerCommon.twist_obsidian_pane.get(), 1)
+                             .addInput(DreamtinkerCommon.persona_cast.get(), 1)
                              .setMaxLevel(1)
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.soul_upgrade, slotlessFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.abyss_inside)
@@ -1620,7 +1620,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setTools(TinkerTags.Items.MODIFIABLE)
                              .addInput(EnigmaticItems.EVIL_ESSENCE)
                              .addInput(EnigmaticItems.EVIL_ESSENCE)
-                             .addInput(EnigmaticItems.THICC_SCROLL)
+                             .addInput(EnigmaticItems.DARKEST_SCROLL)
                              .setMaxLevel(1)
                              .save(wrapped, prefix(DreamtinkerModifiers.Ids.blighted_sigil, slotlessFolder));
 
@@ -1725,9 +1725,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.ashen_soul)
                              .setTools(TinkerTags.Items.MODIFIABLE)
-                             .addInput(SOUL_SHARD.get(), 1)
-                             .addInput(SOUL_SHARD.get(), 1)
-                             .addInput(SOUL_SHARD.get(), 1)
+                             .addInput(LESSER_SOUL_GEM.get(), 2)
                              .setMaxLevel(1)
                              .save(wrapped, prefix(DreamtinkerModifiers.Ids.ashen_soul, slotlessFolder));
 

@@ -27,13 +27,8 @@
   ],
   "inputs": [
     {
-      "item": "eidolon:soul_shard"
-    },
-    {
-      "item": "eidolon:soul_shard"
-    },
-    {
-      "item": "eidolon:soul_shard"
+      "amount_needed": 2,
+      "item": "eidolon:lesser_soul_gem"
     }
   ],
   "level": 1,
