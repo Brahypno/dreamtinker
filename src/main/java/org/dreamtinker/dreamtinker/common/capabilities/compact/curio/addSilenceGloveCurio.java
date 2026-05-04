@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.common.event.compact.curio;
+package org.dreamtinker.dreamtinker.common.capabilities.compact.curio;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;

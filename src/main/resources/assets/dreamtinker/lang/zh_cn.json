@@ -1600,5 +1600,10 @@
 
   "item.tconstruct.creative_slot.delusions": "创造妄见槽",
   "stat.tconstruct.slot.prefix.delusions": "妄见槽：",
-  "stat.tconstruct.slot.display.delusions": "妄见"
+  "stat.tconstruct.slot.display.delusions": "妄见",
+
+  "command.dreamtinker.shellheart.set": "已将 %2$s 名玩家的壳心值设为 %1$s。",
+  "command.dreamtinker.shellheart.add": "已为 %2$s 名玩家增加 %1$s 点壳心。",
+  "command.dreamtinker.shellheart.color": "已将 %2$s 名玩家的壳心颜色设为 %1$s。",
+  "command.dreamtinker.shellheart.invalid_colour": "无效的壳心颜色：%s"
 }

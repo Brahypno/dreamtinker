@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.common.event.compact.malum;
+package org.dreamtinker.dreamtinker.common.capabilities.compact.malum;
 
 import com.sammy.malum.registry.common.item.ItemRegistry;
 import net.minecraft.core.Direction;

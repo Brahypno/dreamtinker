@@ -1603,5 +1603,10 @@
 
   "item.tconstruct.creative_slot.delusions": "Creative Delusion Slot",
   "stat.tconstruct.slot.prefix.delusions": "Delusion Slots: ",
-  "stat.tconstruct.slot.display.delusions": "delusion"
+  "stat.tconstruct.slot.display.delusions": "delusion",
+
+  "command.dreamtinker.shellheart.set": "Set shell heart to %s for %s player(s).",
+  "command.dreamtinker.shellheart.add": "Added %s shell heart to %s player(s).",
+  "command.dreamtinker.shellheart.color": "Set shell heart colour to %s for %s player(s).",
+  "command.dreamtinker.shellheart.invalid_colour": "Invalid shell heart colour: %s"
 }

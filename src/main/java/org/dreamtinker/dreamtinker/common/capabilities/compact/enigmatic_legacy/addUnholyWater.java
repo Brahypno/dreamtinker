@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.common.event.compact.enigmatic_legacy;
+package org.dreamtinker.dreamtinker.common.capabilities.compact.enigmatic_legacy;
 
 import com.aizistral.enigmaticlegacy.registries.EnigmaticItems;
 import net.minecraft.core.Direction;

@@ -6,7 +6,7 @@ import net.minecraft.world.entity.LivingEntity;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
-import org.dreamtinker.dreamtinker.utils.RainbowTextUtil;
+import org.dreamtinker.dreamtinker.utils.model.RainbowTextUtil;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;

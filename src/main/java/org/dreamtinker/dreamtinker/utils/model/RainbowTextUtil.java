@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.utils;
+package org.dreamtinker.dreamtinker.utils.model;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;

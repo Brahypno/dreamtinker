@@ -36,5 +36,8 @@ public class DNetwork {
                                 Optional.of(NetworkDirection.PLAY_TO_CLIENT));
         CHANNEL.registerMessage(packetId++, S2CVibeBarFx.class, S2CVibeBarFx::encode, S2CVibeBarFx::decode, S2CVibeBarFx::handle,
                                 Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        CHANNEL.registerMessage(packetId++, ShellHeartSyncPacket.class, ShellHeartSyncPacket::encode, ShellHeartSyncPacket::decode,
+                                ShellHeartSyncPacket::handle,
+                                Optional.of(NetworkDirection.PLAY_TO_CLIENT));
     }
 }

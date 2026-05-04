@@ -8,7 +8,6 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
-import net.minecraftforge.event.entity.living.LivingHealEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -56,7 +55,7 @@ public class DreamtinkerAttributes {
 
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
-    static void livingAttack(LivingDamageEvent event) {
+    static void FateVeilDamageReduction(LivingDamageEvent event) {
         LivingEntity entity = event.getEntity();
         if (entity.level().isClientSide() || entity.isDeadOrDying()){
             return;
@@ -75,39 +74,5 @@ public class DreamtinkerAttributes {
             float reduction = (veil * pool + veil * veil * damage) / (pool + damage);
             event.setAmount(damage * (1.0F - reduction));
         }
-    }
-
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public static void onLivingHeal(LivingHealEvent event) {
-        if (event.isCanceled()){
-            return;
-        }
-        LivingEntity entity = event.getEntity();
-
-        if (entity.level().isClientSide){
-            return;
-        }
-
-        AttributeInstance attr = entity.getAttribute(DreamtinkerAttributes.BLOOD_IN_SHELL.get());
-        if (attr == null){
-            return;
-        }
-
-        float cap = (float) attr.getValue();
-        if (cap <= 0.0F){
-            return;
-        }
-
-        float healAmount = event.getAmount();
-        if (healAmount <= 0.0F){
-            return;
-        }
-        float currentAbsorption = entity.getAbsorptionAmount();
-        if (currentAbsorption >= cap){
-            return;
-        }
-
-        float added = Math.min(healAmount, cap - currentAbsorption);
-        entity.setAbsorptionAmount(currentAbsorption + added);
     }
 }

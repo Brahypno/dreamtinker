@@ -84,7 +84,7 @@ public class DreamtinkerConfig {
     }
 
     public static final ForgeConfigSpec.BooleanValue StarRegulusAdvancement =
-            builder.comment("Enable star regulus advancement effect").define("StarRegulusAdvancement", true);
+            builder.comment("Enable star Regulus advancement effect").define("StarRegulusAdvancement", true);
 
     static {
         builder.pop();

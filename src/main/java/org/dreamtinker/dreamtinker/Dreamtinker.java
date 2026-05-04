@@ -38,6 +38,9 @@ import org.dreamtinker.dreamtinker.common.DreamtinkerAttributes;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
 import org.dreamtinker.dreamtinker.common.DreamtinkerSounds;
+import org.dreamtinker.dreamtinker.common.capabilities.compact.curio.addSilenceGloveCurio;
+import org.dreamtinker.dreamtinker.common.capabilities.compact.enigmatic_legacy.addUnholyWater;
+import org.dreamtinker.dreamtinker.common.capabilities.compact.malum.addConcentratedGluttonyBottle;
 import org.dreamtinker.dreamtinker.common.data.AdvancementsProvider;
 import org.dreamtinker.dreamtinker.common.data.DTCurio;
 import org.dreamtinker.dreamtinker.common.data.DreamtinkerRecipeProvider;
@@ -45,10 +48,8 @@ import org.dreamtinker.dreamtinker.common.data.loot.DreamtinkerLootTableProvider
 import org.dreamtinker.dreamtinker.common.data.loot.LootTableInjectionProvider;
 import org.dreamtinker.dreamtinker.common.data.tags.*;
 import org.dreamtinker.dreamtinker.common.event.advancements.star_regulus_boost;
-import org.dreamtinker.dreamtinker.common.event.compact.curio.addSilenceGloveCurio;
-import org.dreamtinker.dreamtinker.common.event.compact.enigmatic_legacy.addUnholyWater;
-import org.dreamtinker.dreamtinker.common.event.compact.malum.addConcentratedGluttonyBottle;
 import org.dreamtinker.dreamtinker.common.json.DTConfigEnabledCondition;
+import org.dreamtinker.dreamtinker.config.DreamtinkerClientConfig;
 import org.dreamtinker.dreamtinker.config.DreamtinkerConfig;
 import org.dreamtinker.dreamtinker.fluids.DreamtinkerFluids;
 import org.dreamtinker.dreamtinker.library.client.DreamtinkerClient;
@@ -84,6 +85,7 @@ public class Dreamtinker {
     @SuppressWarnings({"removal"})
     public Dreamtinker() {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, DreamtinkerConfig.specs, "DreamTinkerConfig.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, DreamtinkerClientConfig.specs, "DreamTinkerClientConfig.toml");
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
         modEventBus.register(new DreamtinkerEntityTypes());
