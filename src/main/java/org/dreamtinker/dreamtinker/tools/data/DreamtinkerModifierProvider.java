@@ -77,7 +77,6 @@ import slimeknights.tconstruct.library.modifiers.modules.behavior.ReduceToolDama
 import slimeknights.tconstruct.library.modifiers.modules.build.*;
 import slimeknights.tconstruct.library.modifiers.modules.combat.*;
 import slimeknights.tconstruct.library.modifiers.modules.mining.ConditionalMiningSpeedModule;
-import slimeknights.tconstruct.library.modifiers.modules.util.ModifierCondition;
 import slimeknights.tconstruct.library.modifiers.util.ModifierLevelDisplay;
 import slimeknights.tconstruct.library.tools.IndestructibleItemEntity;
 import slimeknights.tconstruct.library.tools.SlotType;
@@ -362,9 +361,6 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         IJsonPredicate<IToolContext> ancientTool = ToolContextPredicate.tag(TinkerTags.Items.ANCIENT_TOOLS);
         buildModifier(Ids.five_creations)
                 .tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION).levelDisplay(ModifierLevelDisplay.NO_LEVELS)
-                .addModule(new SwappableSlotModule(1))
-                .addModule(new SwappableSlotModule(null, 1, ModifierCondition.ANY_CONTEXT.with(ancientTool)), ModifierHooks.VOLATILE_DATA)
-                .addModule(new SwappableSlotModule.BonusSlot(null, DTSlotType.DELUSION, DTSlotType.DELUSION, 1, ModifierCondition.ANY_CONTEXT))
                 .addModule(new SwappableToolTraitsModule(null, "traits", ToolHooks.REBALANCED_TRAIT))
                 .addModule(new SwappableCircleWeaponAttack(null, "designs", 6));
         buildModifier(Ids.golden_face);

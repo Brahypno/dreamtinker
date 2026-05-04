@@ -3,28 +3,23 @@
   "allow_crystal": false,
   "inputs": [
     {
-      "amount_needed": 5,
-      "item": "dreamtinker:nigrescence_antimony"
-    },
-    {
-      "amount_needed": 5,
-      "item": "dreamtinker:black_sapphire_ore"
-    },
-    {
-      "amount_needed": 16,
       "item": "dreamtinker:void_pearl"
     },
     {
-      "amount_needed": 5,
-      "item": "dreamtinker:nigrescence_antimony"
+      "item": "minecraft:end_crystal"
     },
     {
-      "amount_needed": 5,
-      "item": "dreamtinker:black_sapphire_ore"
+      "item": "dreamtinker:void_pearl"
+    },
+    {
+      "item": "minecraft:amethyst_block"
+    },
+    {
+      "item": "minecraft:amethyst_block"
     }
   ],
   "result": {
-    "name": "dreamtinker:five_creations",
+    "name": "tconstruct:rebalanced",
     "value": "delusions"
   },
   "tools": {

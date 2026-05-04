@@ -104,6 +104,7 @@ import slimeknights.tconstruct.smeltery.block.component.SearedTankBlock;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.TinkerToolParts;
 import slimeknights.tconstruct.tools.TinkerTools;
+import slimeknights.tconstruct.tools.data.ModifierIds;
 import slimeknights.tconstruct.tools.data.material.MaterialIds;
 import slimeknights.tconstruct.tools.stats.HandleMaterialStats;
 import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
@@ -1448,13 +1449,13 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.TheEnd, upgradeSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.TheEnd, upgradeFolder));
-        SwappableModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.five_creations, DTSlotType.DELUSION.getName())
+        SwappableModifierRecipeBuilder.modifier(ModifierIds.rebalanced, DTSlotType.DELUSION.getName())
                                       .setTools(TinkerTags.Items.BONUS_SLOTS)
-                                      .addInput(DreamtinkerCommon.nigrescence_antimony.get(), 5)
-                                      .addInput(DreamtinkerCommon.blackSapphireOre.asItem(), 5)
-                                      .addInput(DreamtinkerCommon.void_pearl.get(), 16)
-                                      .addInput(DreamtinkerCommon.nigrescence_antimony.get(), 5)
-                                      .addInput(DreamtinkerCommon.blackSapphireOre.asItem(), 5)
+                                      .addInput(DreamtinkerCommon.void_pearl.get(), 1)
+                                      .addInput(Items.END_CRYSTAL, 1)
+                                      .addInput(DreamtinkerCommon.void_pearl.get(), 1)
+                                      .addInput(Items.AMETHYST_BLOCK, 1)
+                                      .addInput(Items.AMETHYST_BLOCK, 1)
                                       .disallowCrystal()
                                       .save(consumer, wrap(DreamtinkerModifiers.Ids.five_creations, slotlessFolder, "_" + DTSlotType.DELUSION.getName()));
         SwappableModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.five_creations, "traits")
@@ -1467,16 +1468,6 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                       .disallowCrystal()
                                       .save(consumer, wrap(DreamtinkerModifiers.Ids.five_creations, slotlessFolder, "_traits"));
 
-        SwappableModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.five_creations, SlotType.DEFENSE.getName())
-                                      .setTools(IntersectionIngredient.of(ingredientFromTags(TinkerTags.Items.ARMOR, TinkerTags.Items.HELD),
-                                                                          Ingredient.of(TinkerTags.Items.BONUS_SLOTS)))
-                                      .addInput(DreamtinkerCommon.cold_iron_ingot.get(), 5)
-                                      .addInput(DreamtinkerCommon.orichalcum.get(), 5)
-                                      .addInput(DreamtinkerCommon.rainbow_honey_crystal.get(), 5)
-                                      .addInput(DreamtinkerCommon.transmutation_gold_ingot.get(), 5)
-                                      .addInput(DreamtinkerCommon.shiningFlint.get(), 5)
-                                      .disallowCrystal()
-                                      .save(consumer, wrap(DreamtinkerModifiers.Ids.five_creations, slotlessFolder, SlotType.DEFENSE.getName()));
         SwappableModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.five_creations, "designs")
                                       .setTools(TinkerTags.Items.BONUS_SLOTS)
                                       .addInput(DreamtinkerCommon.UnbornDragonEgg.get(), 5)
