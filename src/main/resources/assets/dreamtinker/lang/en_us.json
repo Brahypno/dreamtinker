@@ -54,7 +54,7 @@
   "modifier.dreamtinker.tooltip.the_wolf_was": "§kThe wolf devoured§r: ",
   "modifier.dreamtinker.as_one": "As Above, So Below",
   "modifier.dreamtinker.as_one.flavor": "Only antimony harbors its radiance in silence; only through descent does the path of rebirth emerge.",
-  "modifier.dreamtinker.as_one.description": "Gain ability to reduce damage, resist death and clear effects. This material would not broken. Use Tool interaction key to change buff mode while in mainhand",
+  "modifier.dreamtinker.as_one.description": "Gain ability to reduce damage, resist death and clear effects. This material would not broken. Use Tool interaction key to change buff mode while in mainhand. Its effective in inventory",
   "modifier.dreamtinker.tooltip.as_one": "Revive times: ",
   "modifier.dreamtinker.tooltip.as_one_mode": "Now clear %s buff",
   "modifier.dreamtinker.tooltip.as_one_0": "all",
