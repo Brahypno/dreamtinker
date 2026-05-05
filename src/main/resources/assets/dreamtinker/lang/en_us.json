@@ -70,6 +70,8 @@
   "modifier.dreamtinker.sharpened_with": "Sharpen With T......",
   "modifier.dreamtinker.sharpened_with.flavor": "Despair, my best friends",
   "modifier.dreamtinker.sharpened_with.description": "Summon rain when hit entities;Boost damage when in rain",
+  "modifier.dreamtinker.sharpened_with.attack_damage": "Attack damage when target in rain",
+  "modifier.dreamtinker.sharpened_with.mining_speed": "Mining Speed when in Rain",
   "modifier.dreamtinker.isolde": "Tristan! Isolde!",
   "modifier.dreamtinker.isolde.flavor": "Black Sails, Or White Sails",
   "modifier.dreamtinker.isolde.description": "Buff arrow ability when release in specify time, otherwise nerf it",

@@ -70,6 +70,8 @@
   "modifier.dreamtinker.sharpened_with": "盈泪",
   "modifier.dreamtinker.sharpened_with.flavor": "虚幻的雨……",
   "modifier.dreamtinker.sharpened_with.description": "攻击敌人时召唤雨，在雨中时增伤。",
+  "modifier.dreamtinker.sharpened_with.attack_damage": "攻击伤害当目标在雨中时",
+  "modifier.dreamtinker.sharpened_with.mining_speed": "挖掘速度当在雨中",
   "modifier.dreamtinker.isolde": "伊索尔德！",
   "modifier.dreamtinker.isolde.flavor": "来的是黑帆，还是白帆",
   "modifier.dreamtinker.isolde.description": "在适当时候松开弓弦可以加强箭矢，否则会削弱",

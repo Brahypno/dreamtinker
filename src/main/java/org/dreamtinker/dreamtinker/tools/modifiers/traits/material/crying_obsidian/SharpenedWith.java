@@ -1,23 +1,42 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.phys.AABB;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
+import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.MeleeInterface;
+import org.jetbrains.annotations.NotNull;
+import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.modules.combat.ConditionalMeleeDamageModule;
+import slimeknights.tconstruct.library.modifiers.modules.mining.ConditionalMiningSpeedModule;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.CryingDamageBoost;
-import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.CryingParticles;
+import static slimeknights.tconstruct.library.json.math.ModifierFormula.*;
 
-public class SharpenedWith extends BattleModifier {
+public class SharpenedWith extends Modifier implements MeleeInterface {
+    @Override
+    protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        this.MeleeInterfaceInit(hookBuilder);
+        hookBuilder.addModule(ConditionalMeleeDamageModule.builder().target(LivingEntityPredicate.RAINING).percent()
+                                                          .formula()
+                                                          .constant(0.16f).variable(LEVEL).multiply()
+                                                          .variable(MULTIPLIER).multiply()
+                                                          .constant(1f).add()
+                                                          .variable(VALUE).multiply().build())
+                   .addModule(ConditionalMiningSpeedModule.builder()
+                                                          .holder(LivingEntityPredicate.RAINING)
+                                                          .formula()
+                                                          .variable(MULTIPLIER).constant(16).multiply()
+                                                          .variable(LEVEL).multiply()
+                                                          .variable(VALUE).add().build());
+        ;
+        super.registerHooks(hookBuilder);
+    }
+
     @Override
     public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
         onMonsterMeleeHit(tool, modifier, context, damage);
@@ -32,22 +51,7 @@ public class SharpenedWith extends BattleModifier {
         if (canRainAt(level, pos)){
             if (!level.isRaining())
                 level.setWeatherParameters(0, 6000, true, level.random.nextBoolean());
-        }else {
-            AABB box = new AABB(pos).inflate(8, 6, 8); // 半径8、向上6
-            for (int i = 0; i < 120 * CryingParticles.get(); i++) {
-                double x = Mth.nextDouble(level.random, box.minX, box.maxX);
-                double z = Mth.nextDouble(level.random, box.minZ, box.maxZ);
-                double yTop = box.maxY;
-                level.sendParticles(ParticleTypes.FALLING_WATER, x, yTop, z, 1, 0, 0, 0, 0);
-            }
-            // 播放雨声（广播）
-            level.playSound(null, pos, SoundEvents.WEATHER_RAIN, SoundSource.WEATHER, 0.6F, 1.0F);
         }
-    }
-
-    @Override
-    public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
-        return (float) (damage * (1 + CryingDamageBoost.get()));
     }
 
     private static boolean canRainAt(ServerLevel level, BlockPos pos) {
