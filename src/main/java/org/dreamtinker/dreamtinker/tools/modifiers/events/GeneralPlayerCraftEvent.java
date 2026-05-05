@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
+import org.dreamtinker.dreamtinker.tools.items.NarcissusWing;
 import org.dreamtinker.dreamtinker.utils.DTMessages;
 import slimeknights.tconstruct.library.materials.MaterialRegistry;
 import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
@@ -78,6 +79,9 @@ public class GeneralPlayerCraftEvent {
                     DTMessages.clientChat(Component.translatable("material.dreamtinker.ruin_wheel_steel_transform")
                                                    .withStyle(DreamtinkerModifiers.doom_track.get().getDisplayName().getStyle()), false);
                 }
+            }
+            if (item.getItem() instanceof NarcissusWing){
+                NarcissusWing.isOwnerOrBypass(item, event.getEntity());
             }
         }
 

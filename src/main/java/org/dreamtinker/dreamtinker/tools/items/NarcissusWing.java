@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class NarcissusWing extends ModifiableItem {
-    private static final String TAG_OWNER = Dreamtinker.MODID + "owner_uuid";
+    public static final String TAG_OWNER = Dreamtinker.MODID + "owner_uuid";
     public static final String TAG_OWNER_NAME = Dreamtinker.MODID + "OwnerName";
 
     public NarcissusWing(Properties properties, ToolDefinition toolDefinition) {
