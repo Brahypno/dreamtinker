@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTestType;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModList;
@@ -22,6 +23,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.library.LootModifier.ExtraDropLootModifier;
+import org.dreamtinker.dreamtinker.library.LootModifier.KillerIsEnemyCondition;
 import org.dreamtinker.dreamtinker.library.client.particle.VibeBarParticleOptions;
 import org.dreamtinker.dreamtinker.library.client.particle.VibeBarParticleType;
 import org.dreamtinker.dreamtinker.library.worldgen.ScatterReplaceOreConfiguration;
@@ -82,6 +84,15 @@ public abstract class DreamtinkerModule {
     public static final RegistryObject<Codec<? extends IGlobalLootModifier>> ANTIMONY_LOOT =
             LOOT_MODIFIERS.register("extra_drop_loot", () -> ExtraDropLootModifier.CODEC);
 
+    public static final DeferredRegister<LootItemConditionType> LOOT_CONDITION_TYPES =
+            DeferredRegister.create(Registries.LOOT_CONDITION_TYPE, Dreamtinker.MODID);
+
+    public static final RegistryObject<LootItemConditionType> KILLER_IS_ENEMY =
+            LOOT_CONDITION_TYPES.register(
+                    "killer_is_enemy",
+                    () -> new LootItemConditionType(new KillerIsEnemyCondition.Serializer())
+            );
+
     public static final DeferredRegister<Feature<?>> FEATURES =
             DeferredRegister.create(ForgeRegistries.FEATURES, MODID);
 
@@ -100,6 +111,7 @@ public abstract class DreamtinkerModule {
         ENTITIES.register(bus);
         EFFECT.register(bus);
         LOOT_MODIFIERS.register(bus);
+        LOOT_CONDITION_TYPES.register(bus);
         PARTICLES.register(bus);
         BLOCK_ENTITIES.register(bus);
         if (ModList.get().isLoaded("enigmaticlegacy")){

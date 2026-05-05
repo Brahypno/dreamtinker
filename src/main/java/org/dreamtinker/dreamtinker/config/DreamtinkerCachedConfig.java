@@ -37,10 +37,8 @@ public class DreamtinkerCachedConfig {
     public static final ConfigLazy<Integer> StarRegulusMaxHP = lazIntInSpec(DreamtinkerConfig.StarRegulusMaxHP);
     public static final ConfigLazy<Boolean> StarRegulusAdvancement = lazBoolInSpec(DreamtinkerConfig.StarRegulusAdvancement);
     public static final ConfigLazy<Integer> SilverNameBeeNum = lazIntInSpec(DreamtinkerConfig.SilverNameBeeNum);
-    public static final ConfigLazy<Double> AntimonyLootChance = lazDoubleInSpec(DreamtinkerConfig.AntimonyLootChance);
     public static final ConfigLazy<Double> voidPearlDropRate = lazDoubleInSpec(DreamtinkerConfig.voidPearlDropRate);
     public static final ConfigLazy<Double> voidPearlDamage = lazDoubleInSpec(DreamtinkerConfig.voidPearlDamage);
-    public static final ConfigLazy<Double> WhitePeachLootChance = lazDoubleInSpec(DreamtinkerConfig.WhitePeachLootChance);
     public static final ConfigLazy<Double> SoulCastLoveLootChance = lazDoubleInSpec(DreamtinkerConfig.SoulCastLoveLootChance);
     public static final ConfigLazy<Double> glacialRiverPortion = lazDoubleInSpec(DreamtinkerConfig.glacialRiverPortion);
     public static final ConfigLazy<Integer> glacialRiverRange = lazIntInSpec(DreamtinkerConfig.glacialRiverRange);

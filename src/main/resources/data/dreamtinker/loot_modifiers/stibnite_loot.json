@@ -1,6 +1,0 @@
-{
-  "type": "dreamtinker:extra_drop_loot",
-  "conditions": [],
-  "result": "dreamtinker:raw_stibnite",
-  "target_tags": ["forge:ores/gold", "forge:ores/copper","forge:ores/lead","forge:ores/silver"]
-}

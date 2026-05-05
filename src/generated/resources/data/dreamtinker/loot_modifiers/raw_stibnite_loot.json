@@ -1,0 +1,52 @@
+{
+  "type": "dreamtinker:extra_drop_loot",
+  "conditions": [
+    {
+      "condition": "minecraft:inverted",
+      "term": {
+        "condition": "minecraft:match_tool",
+        "predicate": {
+          "enchantments": [
+            {
+              "enchantment": "minecraft:silk_touch",
+              "levels": {
+                "min": 1
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "drop": {
+    "base_chance": 0.05,
+    "loot_bonus_count_bonus": 1,
+    "max_count": 16
+  },
+  "result": {
+    "item": "dreamtinker:raw_stibnite"
+  },
+  "source": {
+    "blocks": {
+      "type": "mantle:or",
+      "predicates": [
+        {
+          "type": "mantle:tag",
+          "tag": "minecraft:gold_ores"
+        },
+        {
+          "type": "mantle:tag",
+          "tag": "minecraft:copper_ores"
+        },
+        {
+          "type": "mantle:tag",
+          "tag": "forge:lead"
+        },
+        {
+          "type": "mantle:tag",
+          "tag": "forge:silver"
+        }
+      ]
+    }
+  }
+}

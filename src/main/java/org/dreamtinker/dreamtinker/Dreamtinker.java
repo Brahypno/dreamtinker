@@ -44,6 +44,7 @@ import org.dreamtinker.dreamtinker.common.capabilities.compact.malum.addConcentr
 import org.dreamtinker.dreamtinker.common.data.AdvancementsProvider;
 import org.dreamtinker.dreamtinker.common.data.DTCurio;
 import org.dreamtinker.dreamtinker.common.data.DreamtinkerRecipeProvider;
+import org.dreamtinker.dreamtinker.common.data.loot.DreamtinkerGlobalLootModifierProvider;
 import org.dreamtinker.dreamtinker.common.data.loot.DreamtinkerLootTableProvider;
 import org.dreamtinker.dreamtinker.common.data.loot.LootTableInjectionProvider;
 import org.dreamtinker.dreamtinker.common.data.tags.*;
@@ -220,6 +221,7 @@ public class Dreamtinker {
         generator.addProvider(event.includeServer(), new DTCurio(output, helper, provider.getRegistryProvider()));
         generator.addProvider(event.includeServer(), new AdvancementsProvider(output));
         generator.addProvider(event.includeServer(), new DTMobEffectTagsProvider(output, event.getLookupProvider(), event.getExistingFileHelper()));
+        generator.addProvider(event.includeServer(), new DreamtinkerGlobalLootModifierProvider(output));
     }
 
     public static boolean configCompactDisabled(String modId) {

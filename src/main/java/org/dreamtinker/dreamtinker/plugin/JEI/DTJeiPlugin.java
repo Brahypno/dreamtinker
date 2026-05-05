@@ -147,7 +147,7 @@ public final class DTJeiPlugin implements IModPlugin {
                 new ItemStack(DreamtinkerCommon.raw_stibnite.get()),
                 null,
                 null,
-                null, null, null, null, AntimonyLootChance.get(),
+                null, null, null, null, 0.05,
                 null,  // underwater
                 false   // drowning
         ));
@@ -159,7 +159,7 @@ public final class DTJeiPlugin implements IModPlugin {
                 new ItemStack(DreamtinkerCommon.white_peach.get()),
                 null,
                 null,
-                null, null, null, null, WhitePeachLootChance.get(),
+                null, null, null, null, 0.2,
                 null,  // underwater
                 false   // drowning
         ));

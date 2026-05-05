@@ -1,0 +1,35 @@
+{
+  "type": "dreamtinker:extra_drop_loot",
+  "conditions": [
+    {
+      "condition": "minecraft:inverted",
+      "term": {
+        "condition": "minecraft:match_tool",
+        "predicate": {
+          "enchantments": [
+            {
+              "enchantment": "minecraft:silk_touch",
+              "levels": {
+                "min": 1
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "drop": {
+    "base_chance": 0.2,
+    "loot_bonus_count_bonus": 1,
+    "max_count": 16
+  },
+  "result": {
+    "item": "dreamtinker:white_peach"
+  },
+  "source": {
+    "blocks": {
+      "type": "mantle:tag",
+      "tag": "dreamtinker:drops/peach"
+    }
+  }
+}

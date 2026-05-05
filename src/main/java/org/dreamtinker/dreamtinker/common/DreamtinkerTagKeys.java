@@ -143,7 +143,7 @@ public class DreamtinkerTagKeys {
     }
 
     public static class Blocks {
-        private static TagKey<Block> forgeTag(String name) {
+        public static TagKey<Block> forgeTag(String name) {
             return TagKey.create(ForgeRegistries.BLOCKS.getRegistryKey(), new ResourceLocation("forge", name));
         }
 
