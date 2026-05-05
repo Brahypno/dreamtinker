@@ -19,7 +19,8 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
     @Override
     protected void addTags() {
         this.tag(TinkerTags.Materials.EXCLUDE_FROM_LOOT)
-            .add(moonlight_ice, nigrescence_antimony, metallivorous_stibium_lupus, echo_alloy, star_regulus, half_rotten_homunculus, desire_gem, despair_gem)
+            .add(moonlight_ice, nigrescence_antimony, metallivorous_stibium_lupus, echo_alloy, star_regulus, half_rotten_homunculus, desire_gem, despair_gem,
+                 RuinWheelSteel, PermanenceScale, PermanenceWing, scolecite, SpiralSpin)
             .addOptional(etherium, nefarious, soul_etherium,
                          soul_stained_steel, malignant_pewter, malignant_gluttony, malignant_lead, PaladinBone, forgotten_metal);
 

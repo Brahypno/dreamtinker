@@ -8,6 +8,11 @@
     "dreamtinker:half_rotten_homunculus",
     "dreamtinker:desire_gem",
     "dreamtinker:despair_gem",
+    "dreamtinker:ruin_wheel_steel",
+    "dreamtinker:permanence_scale",
+    "dreamtinker:permanence_wing",
+    "dreamtinker:scolecite",
+    "dreamtinker:spiral_spin",
     {
       "id": "dreamtinker:etherium",
       "required": false
