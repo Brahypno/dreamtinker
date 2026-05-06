@@ -1,0 +1,38 @@
+{
+  "parent": "dreamtinker:root",
+  "criteria": {
+    "has_transmutation_gold_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dreamtinker:transmutation_gold_ingot"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.dreamtinker.materials.transmutation_gold_ingot.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "dreamtinker:transmutation_gold_ingot"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.dreamtinker.materials.transmutation_gold_ingot.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_transmutation_gold_ingot"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,38 @@
+{
+  "parent": "dreamtinker:materials/raw_stibnite",
+  "criteria": {
+    "has_valentinite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dreamtinker:valentinite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.dreamtinker.materials.valentinite.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "dreamtinker:valentinite"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.dreamtinker.materials.valentinite.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_valentinite"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,38 @@
+{
+  "parent": "dreamtinker:root",
+  "criteria": {
+    "has_raw_stibnite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dreamtinker:raw_stibnite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.dreamtinker.materials.raw_stibnite.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "dreamtinker:raw_stibnite"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.dreamtinker.materials.raw_stibnite.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_raw_stibnite"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

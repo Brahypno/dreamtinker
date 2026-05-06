@@ -1,0 +1,38 @@
+{
+  "parent": "dreamtinker:materials/valentinite",
+  "criteria": {
+    "has_nigrescence_antimony": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dreamtinker:nigrescence_antimony"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.dreamtinker.materials.nigrescence_antimony.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "dreamtinker:nigrescence_antimony"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.dreamtinker.materials.nigrescence_antimony.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_nigrescence_antimony"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

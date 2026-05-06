@@ -36,7 +36,8 @@
     "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "minecraft:zombie_head"
+      "item": "dreamtinker:silence_glove",
+      "nbt": "{tic_materials:[\"tconstruct:iron\",\"dreamtinker:black_sapphire\",\"dreamtinker:shadowskin\"]}"
     },
     "show_toast": true,
     "title": {

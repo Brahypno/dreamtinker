@@ -1,0 +1,38 @@
+{
+  "parent": "dreamtinker:root",
+  "criteria": {
+    "has_orichalcum_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dreamtinker:orichalcum_ingot"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.dreamtinker.materials.orichalcum_ingot.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "dreamtinker:orichalcum_ingot"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.dreamtinker.materials.orichalcum_ingot.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_orichalcum_ingot"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

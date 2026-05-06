@@ -1,0 +1,38 @@
+{
+  "parent": "dreamtinker:materials/liquid_smoky_antimony",
+  "criteria": {
+    "has_star_regulus": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dreamtinker:star_regulus"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.dreamtinker.materials.star_regulus.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "dreamtinker:star_regulus"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.dreamtinker.materials.star_regulus.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_star_regulus"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

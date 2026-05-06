@@ -1,0 +1,38 @@
+{
+  "parent": "dreamtinker:materials/molten_albedo_stibium",
+  "criteria": {
+    "has_metallivorous_stibium_lupus": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dreamtinker:metallivorous_stibium_lupus"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.dreamtinker.materials.metallivorous_stibium_lupus.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "dreamtinker:metallivorous_stibium_lupus"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.dreamtinker.materials.metallivorous_stibium_lupus.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_metallivorous_stibium_lupus"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

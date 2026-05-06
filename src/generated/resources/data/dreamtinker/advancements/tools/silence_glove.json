@@ -1,6 +1,7 @@
 {
+  "parent": "dreamtinker:root",
   "criteria": {
-    "crafted_book": {
+    "crafted_silence_glove": {
       "conditions": {
         "items": [
           {
@@ -15,7 +16,6 @@
   },
   "display": {
     "announce_to_chat": false,
-    "background": "dreamtinker:textures/gui/advancement_background.png",
     "description": {
       "translate": "advancements.dreamtinker.tools.silence_glove.description"
     },
@@ -23,7 +23,7 @@
     "hidden": false,
     "icon": {
       "item": "dreamtinker:silence_glove",
-      "nbt": "{Damage:0,tic_broken:0b}"
+      "nbt": "{Damage:0,tic_broken:0b,tic_display:1b,tic_materials:[\"tconstruct:ui_render#head\",\"tconstruct:ui_render#handle\",\"tconstruct:ui_render#extra\",\"tconstruct:ui_render#large\",\"tconstruct:ui_render#extra_large\"]}"
     },
     "show_toast": true,
     "title": {
@@ -32,7 +32,7 @@
   },
   "requirements": [
     [
-      "crafted_book"
+      "crafted_silence_glove"
     ]
   ],
   "sends_telemetry_event": true

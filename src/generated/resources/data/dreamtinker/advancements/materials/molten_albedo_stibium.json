@@ -1,0 +1,38 @@
+{
+  "parent": "dreamtinker:materials/nigrescence_antimony",
+  "criteria": {
+    "has_molten_albedo_stibium": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dreamtinker:molten_albedo_stibium_bucket"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.dreamtinker.materials.molten_albedo_stibium.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "dreamtinker:molten_albedo_stibium_bucket"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.dreamtinker.materials.molten_albedo_stibium.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_molten_albedo_stibium"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

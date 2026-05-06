@@ -1,0 +1,38 @@
+{
+  "parent": "dreamtinker:root",
+  "criteria": {
+    "has_cold_iron_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dreamtinker:cold_iron_ingot"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.dreamtinker.materials.cold_iron_ingot.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "dreamtinker:cold_iron_ingot"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.dreamtinker.materials.cold_iron_ingot.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_cold_iron_ingot"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

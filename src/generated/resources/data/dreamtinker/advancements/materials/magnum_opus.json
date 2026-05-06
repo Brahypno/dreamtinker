@@ -1,0 +1,36 @@
+{
+  "parent": "dreamtinker:materials/star_regulus",
+  "criteria": {
+    "star_regulus": {
+      "conditions": {
+        "item": {
+          "items": [
+            "dreamtinker:star_regulus"
+          ]
+        }
+      },
+      "trigger": "minecraft:using_item"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.dreamtinker.materials.magnum_opus.description"
+    },
+    "frame": "task",
+    "hidden": true,
+    "icon": {
+      "item": "dreamtinker:star_regulus"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.dreamtinker.materials.magnum_opus.title"
+    }
+  },
+  "requirements": [
+    [
+      "star_regulus"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,38 @@
+{
+  "parent": "dreamtinker:materials/metallivorous_stibium_lupus",
+  "criteria": {
+    "has_molten_ascending_antimony": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dreamtinker:molten_ascending_antimony_bucket"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.dreamtinker.materials.molten_ascending_antimony.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "dreamtinker:molten_ascending_antimony_bucket"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.dreamtinker.materials.molten_ascending_antimony.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_molten_ascending_antimony"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

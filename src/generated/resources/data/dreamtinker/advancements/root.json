@@ -1,0 +1,30 @@
+{
+  "criteria": {
+    "tick": {
+      "conditions": {},
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "dreamtinker:textures/block/transmute/ashen/ashen_road_back.png",
+    "description": {
+      "translate": "advancements.dreamtinker.root.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "dreamtinker:hypnagogic_transmute"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.dreamtinker.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "tick"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

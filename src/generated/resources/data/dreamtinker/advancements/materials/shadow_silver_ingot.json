@@ -1,0 +1,38 @@
+{
+  "parent": "dreamtinker:root",
+  "criteria": {
+    "has_shadow_silver_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dreamtinker:shadow_silver_ingot"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.dreamtinker.materials.shadow_silver_ingot.description"
+    },
+    "frame": "task",
+    "hidden": true,
+    "icon": {
+      "item": "dreamtinker:shadow_silver_ingot"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.dreamtinker.materials.shadow_silver_ingot.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_shadow_silver_ingot"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
