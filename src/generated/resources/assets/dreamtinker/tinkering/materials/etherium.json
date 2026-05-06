@@ -23,37 +23,142 @@
       "tconstruct:bowstring"
     ],
     "transformer": {
-      "type": "tconstruct:grey_to_sprite",
-      "palette": [
+      "type": "tconstruct:frames",
+      "frames": [
         {
-          "color": "FF8FE7E7",
-          "grey": 0
+          "type": "tconstruct:grey_to_sprite",
+          "palette": [
+            {
+              "color": "FF000000",
+              "grey": 0
+            },
+            {
+              "color": "FF1E5656",
+              "grey": 63
+            },
+            {
+              "color": "FF2F8A8A",
+              "grey": 102
+            },
+            {
+              "color": "FF55CACA",
+              "grey": 140
+            },
+            {
+              "color": "FF9AF5EA",
+              "grey": 178
+            },
+            {
+              "color": "FFE8FFFF",
+              "grey": 216
+            },
+            {
+              "color": "FFFFFFFF",
+              "grey": 255
+            }
+          ]
         },
         {
-          "color": "FF98EEEE",
-          "grey": 63
+          "type": "tconstruct:grey_to_sprite",
+          "palette": [
+            {
+              "color": "FF000000",
+              "grey": 0
+            },
+            {
+              "color": "FF55CACA",
+              "grey": 63
+            },
+            {
+              "color": "FF9AF5EA",
+              "grey": 102
+            },
+            {
+              "color": "FFD8FFFF",
+              "grey": 140
+            },
+            {
+              "color": "FFF4FFFF",
+              "grey": 178
+            },
+            {
+              "color": "FFFFFFFF",
+              "grey": 216
+            },
+            {
+              "color": "FFFFFFFF",
+              "grey": 255
+            }
+          ]
         },
         {
-          "color": "FF9CF0F0",
-          "grey": 102
+          "type": "tconstruct:grey_to_sprite",
+          "palette": [
+            {
+              "color": "FF000000",
+              "grey": 0
+            },
+            {
+              "color": "FF102020",
+              "grey": 63
+            },
+            {
+              "color": "FF1E5656",
+              "grey": 102
+            },
+            {
+              "color": "FF2F8A8A",
+              "grey": 140
+            },
+            {
+              "color": "FF55CACA",
+              "grey": 178
+            },
+            {
+              "color": "FFB8FFF2",
+              "grey": 216
+            },
+            {
+              "color": "FFF4FFFF",
+              "grey": 255
+            }
+          ]
         },
         {
-          "color": "FF96E8E0",
-          "grey": 140
-        },
-        {
-          "color": "FFB5F5ED",
-          "grey": 178
-        },
-        {
-          "color": "FFC8FDF5",
-          "grey": 216
-        },
-        {
-          "color": "FFCEFFF8",
-          "grey": 255
+          "type": "tconstruct:grey_to_sprite",
+          "palette": [
+            {
+              "color": "FF000000",
+              "grey": 0
+            },
+            {
+              "color": "FF081010",
+              "grey": 63
+            },
+            {
+              "color": "FF102020",
+              "grey": 102
+            },
+            {
+              "color": "FF183838",
+              "grey": 140
+            },
+            {
+              "color": "FF1E5656",
+              "grey": 178
+            },
+            {
+              "color": "FF3E9A9A",
+              "grey": 216
+            },
+            {
+              "color": "FF7FE0D8",
+              "grey": 255
+            }
+          ]
         }
-      ]
+      ],
+      "meta": "dreamtinker:generator/etherium"
     }
   },
   "luminosity": 15
