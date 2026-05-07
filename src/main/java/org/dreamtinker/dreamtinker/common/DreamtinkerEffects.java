@@ -7,10 +7,12 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.Potion;
 import net.minecraftforge.event.entity.living.MobEffectEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.effect.*;
@@ -72,6 +74,10 @@ public class DreamtinkerEffects {
     public static final RegistryObject<MobEffect> SoulFire = EFFECT.register("soul_fire", soulFire::new);
     public static final RegistryObject<PressingFrontEffect> PressingFront = EFFECT.register("pressing_front", PressingFrontEffect::new);
 
+    public static final RegistryObject<MobEffect> ParadoxWound =
+            EFFECT.register("paradox_wound", () -> new MobEffect(MobEffectCategory.NEUTRAL, 0xD8D4E8) {});
+    public static final RegistryObject<Potion> ParadoxWoundPotion =
+            POTIONS.register("paradox_wound", () -> new Potion(new MobEffectInstance(DreamtinkerEffects.ParadoxWound.get(), 20 * 45)));
 
     @SubscribeEvent
     public static void allowBossEffects(MobEffectEvent.Applicable event) {
@@ -84,4 +90,27 @@ public class DreamtinkerEffects {
             }
         }
     }
+
+    @SubscribeEvent
+    void commonSetup(FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            //brewing(experiencedPotion, Potions.AWKWARD, Ingredient.of(TinkerWorld.congealedSlime.get(SlimeType.EARTH)));
+        });
+    }
+
+    /**
+     * Registers recipes for brewing, longer and stronger potions for the given object
+
+     private static void brewing(EnumObject<PotionType, Potion> potion, Potion base, Ingredient ingredient) {
+     Potion normal = potion.get(PotionType.NORMAL);
+     PotionBrewing.POTION_MIXES.add(new PotionBrewing.Mix<>(ForgeRegistries.POTIONS, base, ingredient, normal));
+     Potion longer = potion.getOrNull(PotionType.LONG);
+     if (longer != null){
+     PotionBrewing.addMix(normal, Items.REDSTONE, longer);
+     }
+     Potion strong = potion.getOrNull(PotionType.STRONG);
+     if (strong != null){
+     PotionBrewing.addMix(normal, Items.GLOWSTONE_DUST, strong);
+     }
+     }     */
 }

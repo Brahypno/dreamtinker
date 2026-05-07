@@ -8,6 +8,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -62,6 +63,7 @@ public abstract class DreamtinkerModule {
     public static final DeferredRegister<MobEffect> EFFECT = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, MODID);
     public static final DeferredRegister<MobEffect> EL_EFFECT = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, MODID);
     public static final DeferredRegister<MobEffect> MALUM_EFFECT = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, MODID);
+    public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTIONS, Dreamtinker.MODID);
     public static final FluidDeferredRegister FLUIDS = new FluidDeferredRegister(MODID);
     public static final FluidDeferredRegister EL_FLUIDS = new FluidDeferredRegister(MODID);
     public static final FluidDeferredRegister MALUM_FLUIDS = new FluidDeferredRegister(MODID);
@@ -110,6 +112,7 @@ public abstract class DreamtinkerModule {
         FLUIDS.register(bus);
         ENTITIES.register(bus);
         EFFECT.register(bus);
+        POTIONS.register(bus);
         LOOT_MODIFIERS.register(bus);
         LOOT_CONDITION_TYPES.register(bus);
         PARTICLES.register(bus);
