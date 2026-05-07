@@ -569,15 +569,41 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
         this.buildMaterial(DreamtinkerMaterialIds.soul_etherium)
             .ranged().meleeHarvest().armor().statType(StatlessMaterialStats.BOWSTRING).statType(STORAGE_BLOCK)
             .fallbacks("gem", "metal")
-            .transformer(GreyToSpriteTransformer.builder()
-                                                .addARGB(0, 0xFF062E31)  // 深青
-                                                .addARGB(63, 0xFF0C6D79)  // 深青→中青
-                                                .addARGB(102, 0xFF1098AA)  // 中青
-                                                .addARGB(140, 0xFF15BFCF)  // 亮青
-                                                .addARGB(178, 0xFF8656DF)  // 高饱和紫
-                                                .addARGB(216, 0xFFF84CB7)  // 亮粉
-                                                .addARGB(255, 0xFFFFD5EC)  // 粉白高光
-                                                .build());
+            .transformer(new FramesSpriteTransformer(
+                    Dreamtinker.getLocation("generator/etherium"),
+                    GreyToSpriteTransformer.builderFromBlack()
+                                           .addARGB(63, 0xFF8BB5BE)
+                                           .addARGB(102, 0xFFD0C1D0)
+                                           .addARGB(140, 0xFFC9E8E1)
+                                           .addARGB(178, 0xFFB8F1EA)
+                                           .addARGB(216, 0xFFF7E5F7)
+                                           .addARGB(255, 0xFFCBFEF6)
+                                           .build(),
+                    GreyToSpriteTransformer.builderFromBlack()
+                                           .addARGB(63, 0xFFA3FFF9)
+                                           .addARGB(102, 0xFFD8FFFF)
+                                           .addARGB(140, 0xFFE0FFFF)
+                                           .addARGB(178, 0xFFF4FFFF)
+                                           .addARGB(216, 0xFFFFFFFF)
+                                           .addARGB(255, 0xFFFFFFFF)
+                                           .build(),
+                    GreyToSpriteTransformer.builderFromBlack()
+                                           .addARGB(63, 0xFF7E90A1)
+                                           .addARGB(102, 0xFFB9A3B9)
+                                           .addARGB(140, 0xFFADDDD3)
+                                           .addARGB(178, 0xFFA7E9DF)
+                                           .addARGB(216, 0xFFF3D9F3)
+                                           .addARGB(255, 0xFFBEFDF2)
+                                           .build(),
+                    GreyToSpriteTransformer.builderFromBlack()
+                                           .addARGB(63, 0xFF664666)
+                                           .addARGB(102, 0xFF8A658A)
+                                           .addARGB(140, 0xFF77C6B5)
+                                           .addARGB(178, 0xFFE4B9E4)
+                                           .addARGB(216, 0xFF8BE1CF)
+                                           .addARGB(255, 0xFFA4FCE9)
+                                           .build()
+            ));
     }
 
     protected void addMalumMaterials() {
