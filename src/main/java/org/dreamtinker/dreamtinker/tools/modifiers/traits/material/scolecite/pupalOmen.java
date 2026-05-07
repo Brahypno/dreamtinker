@@ -35,8 +35,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
-import static slimeknights.tconstruct.library.modifiers.modules.armor.ProtectionModule.addResistanceTooltip;
-
 public class pupalOmen extends ArmorModifier {
     public static final ResourceLocation TAG_SCALE = Dreamtinker.getLocation("scale_worm_armor");
     public static final ResourceLocation TAG_MOTH = Dreamtinker.getLocation("moth_wing_armor");
@@ -73,9 +71,10 @@ public class pupalOmen extends ArmorModifier {
         int scale = data.getInt(TAG_SCALE);
         int moth = data.getInt(TAG_MOTH);
         MaterialId id;
-        if (scale < OmenInSight && moth < OmenInSight)
+        int threshold = Math.max(tool.getCurrentDurability() + tool.getDamage(), OmenInSight);
+        if (scale < threshold && moth < threshold)
             return;
-        else if (OmenInSight <= scale){
+        else if (threshold <= scale){
             id = DreamtinkerMaterialIds.PermanenceScale;
         }else {
             id = DreamtinkerMaterialIds.PermanenceWing;
@@ -104,7 +103,7 @@ public class pupalOmen extends ArmorModifier {
         if (holder instanceof Player player){
             DTMessages.clientChat(
                     Component.translatable(
-                                     OmenInSight <= scale ? "modifier.dreamtinker.pupal_omen.success_scale" : "modifier.dreamtinker.pupal_omen.success_wing")
+                                     threshold <= scale ? "modifier.dreamtinker.pupal_omen.success_scale" : "modifier.dreamtinker.pupal_omen.success_wing")
                              .withStyle(this.getDisplayName().getStyle()), false);
         }
     }
@@ -114,7 +113,7 @@ public class pupalOmen extends ArmorModifier {
         int scale = tool.getPersistentData().getInt(TAG_SCALE);
         int moth = tool.getPersistentData().getInt(TAG_MOTH);
         if (scale < moth){
-            modifierValue += (moth - scale) * 0.125F / 4;
+            modifierValue += Math.min(OmenInSight, Math.abs(scale - moth)) * 0.125F / 4;
         }
 
         return modifierValue;
@@ -125,15 +124,11 @@ public class pupalOmen extends ArmorModifier {
         if (tooltipKey.isShiftOrUnknown()){
             int scale = tool.getPersistentData().getInt(TAG_SCALE);
             int moth = tool.getPersistentData().getInt(TAG_MOTH);
+            int threshold = Math.max(tool.getCurrentDurability() + tool.getDamage(), OmenInSight);
             if (0 < moth)
-                tooltip.add(Component.translatable("modifier.dreamtinker.pupal_omen_moth.tooltip", moth, OmenInSight));
+                tooltip.add(Component.translatable("modifier.dreamtinker.pupal_omen_moth.tooltip", moth, threshold));
             if (0 < scale)
-                tooltip.add(Component.translatable("modifier.dreamtinker.pupal_omen_scale.tooltip", scale, OmenInSight));
-            if (scale < moth){
-                float value = (moth - scale) * 0.125F / 4;
-                if (value > 0.25f)
-                    addResistanceTooltip(tool, modifier.getModifier(), value, player, tooltip);
-            }
+                tooltip.add(Component.translatable("modifier.dreamtinker.pupal_omen_scale.tooltip", scale, threshold));
         }
     }
 
@@ -155,32 +150,33 @@ public class pupalOmen extends ArmorModifier {
     public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
         int scale = tool.getPersistentData().getInt(TAG_SCALE);
         int moth = tool.getPersistentData().getInt(TAG_MOTH);
+        int buff = Math.min(OmenInSight, Math.abs(scale - moth));
         if (moth < scale){
             consumer.accept(Attributes.ARMOR,
                             new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
                                                   Attributes.ARMOR.getDescriptionId(),
-                                                  (scale - moth) * 0.04,
+                                                  buff * 0.04,
                                                   AttributeModifier.Operation.ADDITION));
             consumer.accept(Attributes.ARMOR_TOUGHNESS,
                             new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
                                                   Attributes.ARMOR_TOUGHNESS.getDescriptionId(),
-                                                  (scale - moth) * 0.02,
+                                                  buff * 0.02,
                                                   AttributeModifier.Operation.ADDITION));
             consumer.accept(Attributes.KNOCKBACK_RESISTANCE,
                             new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
                                                   Attributes.KNOCKBACK_RESISTANCE.getDescriptionId(),
-                                                  (scale - moth) * 0.04,
+                                                  buff * 0.04,
                                                   AttributeModifier.Operation.ADDITION));
             consumer.accept(DreamtinkerAttributes.BLOOD_IN_SHELL.get(),
                             new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
                                                   DreamtinkerAttributes.BLOOD_IN_SHELL.get().getDescriptionId(),
-                                                  (scale - moth) * 0.04,
+                                                  buff * 0.04,
                                                   AttributeModifier.Operation.ADDITION));
         }else if (scale < moth){
             consumer.accept(DreamtinkerAttributes.FATE_VEIL.get(),
                             new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
                                                   DreamtinkerAttributes.FATE_VEIL.get().getDescriptionId(),
-                                                  (moth - scale) * 0.15,
+                                                  buff * 0.15,
                                                   AttributeModifier.Operation.ADDITION));
         }
     }
