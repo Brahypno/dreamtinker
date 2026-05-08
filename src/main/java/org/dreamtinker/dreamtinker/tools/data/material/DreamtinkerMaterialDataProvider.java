@@ -39,6 +39,7 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.despair_gem, 6, 75, false, false, null);
         addMaterial(DreamtinkerMaterialIds.shadowskin, 4, 35, false, false, null);
         addMaterial(DreamtinkerMaterialIds.soul_steel, 3, 25, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.OathGuardPaleSteel, 3, 25, false, false, null);
         addMaterial(DreamtinkerMaterialIds.rainbow_honey_crystal, 3, 25, false, false, null);
         addMaterial(DreamtinkerMaterialIds.black_sapphire, 4, 35, false, false, null);
         addMaterial(DreamtinkerMaterialIds.scolecite, 2, 5, false, false, null);

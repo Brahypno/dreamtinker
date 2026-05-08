@@ -130,6 +130,11 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          HandleMaterialStats.multipliers().durability(3.13f).attackDamage(1.86f).attackSpeed(1.91f).miningSpeed(1.66f).build(),
                          StatlessMaterialStats.BINDING);
 
+        addMaterialStats(DreamtinkerMaterialIds.OathGuardPaleSteel,
+                         new HeadMaterialStats(400, 8f, Tiers.DIAMOND, 1f),
+                         HandleMaterialStats.multipliers().durability(1.5f).attackDamage(1.05f).attackSpeed(1.05f).miningSpeed(1.05f).build(),
+                         StatlessMaterialStats.BINDING);
+
         addMaterialStats(DreamtinkerMaterialIds.Utherium,
                          new HeadMaterialStats(1000, 8.5f, Tiers.DIAMOND, 3.5f),
                          HandleMaterialStats.multipliers().durability(1.2f).attackDamage(1.15f).attackSpeed(1.05f).build(),
@@ -306,6 +311,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addMaterialStats(DreamtinkerMaterialIds.RuinWheelSteel,
                          new LimbMaterialStats(1945, 12.7f, 0.91f, 0.66f),
                          new GripMaterialStats(2.13f, 0.86f, 7.28f));
+        addMaterialStats(DreamtinkerMaterialIds.OathGuardPaleSteel,
+                         new LimbMaterialStats(300, 0.1f, 0.2f, 0.1f),
+                         new GripMaterialStats(1.5f, 0.1f, 1f));
 
         addMaterialStats(DreamtinkerMaterialIds.ArcaneGold,
                          new LimbMaterialStats(32, 0.1f, 0.15f, -0.2f),
@@ -427,6 +435,10 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                             PlatingMaterialStats.builder().durabilityFactor(6).armor(1, 3, 4, 1), StatlessMaterialStats.MAILLE);
         addArmorShieldStats(DreamtinkerMaterialIds.SpikyShard,
                             PlatingMaterialStats.builder().durabilityFactor(20).armor(2f, 3f, 5f, 2f).toughness(0).knockbackResistance(0f),
+                            StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
+
+        addArmorShieldStats(DreamtinkerMaterialIds.OathGuardPaleSteel,
+                            PlatingMaterialStats.builder().durabilityFactor(35).armor(2f, 3f, 4f, 3f).toughness(2).knockbackResistance(0f),
                             StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
 
         addArmorShieldStats(DreamtinkerMaterialIds.Utherium,

@@ -49,6 +49,7 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
         buildRenderInfo(DreamtinkerMaterialIds.FifthStone).color(0xFF5F8D96).fallbacks("stone").luminosity(6);
         buildRenderInfo(DreamtinkerMaterialIds.SpiralSpin).color(0xFF444857).fallbacks("metal").luminosity(6);
         buildRenderInfo(DreamtinkerMaterialIds.RuinWheelSteel).color(0xFFFFF0B0).fallbacks("metal").luminosity(9);
+        buildRenderInfo(DreamtinkerMaterialIds.OathGuardPaleSteel).color(0xFF2A2C38).fallbacks("metal").luminosity(10);
 
         buildRenderInfo(DreamtinkerMaterialIds.ArcaneGold).color(0xFFEDAE66).fallbacks("metal").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.Utherium).color(0xFF451B1F).fallbacks("gem", "metal").luminosity(11);

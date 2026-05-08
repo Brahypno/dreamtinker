@@ -14,6 +14,8 @@ import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
 import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class CuriosCompact {
@@ -23,6 +25,44 @@ public class CuriosCompact {
         if (!ModList.get().isLoaded("curios"))
             return ItemStack.EMPTY;
         return doFindModifierItem(player, id).orElse(ItemStack.EMPTY);
+    }
+
+    public static int getCurioModifierNumber(Player player, ModifierId id) {
+        if (!ModList.get().isLoaded("curios"))
+            return 0;
+        return doFindModifierNum(player, id);
+    }
+
+    public static List<ItemStack> getCurioStacks(Player player) {
+        if (!ModList.get().isLoaded("curios"))
+            return List.of();
+        return doFindListItemStack(player);
+    }
+
+    private static int doFindModifierNum(Player player, ModifierId id) {
+        CuriosApi.getCuriosInventory(player).map(h -> {
+            int result = 0;
+            for (String ids : h.getCurios().keySet()) {
+                ItemStack st = getFirstFromSlot(h, ids);
+                if (st.is(TinkerTags.Items.MODIFIABLE))
+                    result += ModifierUtil.getModifierLevel(st, id);
+            }
+            return result;
+        });
+        return 0;
+    }
+
+    private static List<ItemStack> doFindListItemStack(Player player) {
+        CuriosApi.getCuriosInventory(player).map(h -> {
+            List<ItemStack> result = new ArrayList<>();
+            for (String ids : h.getCurios().keySet()) {
+                ItemStack st = getFirstFromSlot(h, ids);
+                if (st.is(TinkerTags.Items.MODIFIABLE))
+                    result.add(st);
+            }
+            return result;
+        });
+        return List.of();
     }
 
     private static Optional<ItemStack> doFindModifierItem(Player player, ModifierId id) {

@@ -1,0 +1,24 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "dreamtinker:pale_oath"
+    },
+    {
+      "level": 1,
+      "name": "dreamtinker:for_oath"
+    }
+  ],
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "dreamtinker:pale_oath"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:heal_oath"
+      }
+    ]
+  }
+}

@@ -325,6 +325,9 @@ public class DreamtinkerFluids {
     public static final FlowingFluidObject<ForgeFlowingFluid> molten_iesnium =
             registerFluid(FLUIDS, "molten_iesnium", 1200, 100, 100, 15,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.METAL, 15), 10, 4) {});
+    public static final FlowingFluidObject<ForgeFlowingFluid> molten_iron_heart =
+            registerFluid(FLUIDS, "molten_iron_heart", 1500, 100, 100, 15,
+                          supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.METAL, 15), 10, 4) {});
 
     private static FlowingFluidObject<SlimeFluid> registerSlime(FluidDeferredRegister register, String name, int temp, int viscosity, int density, int lightLevel, Function<Supplier<? extends FlowingFluid>, LiquidBlock> blockFunction) {
         return register.register(name).tickRate(50).type(createFluidType(temp, lightLevel, viscosity, density)).block(blockFunction).bucket()

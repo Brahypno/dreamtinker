@@ -508,6 +508,20 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                            .addARGB(255, 0xFF865016)
                                            .build()
             ));
+
+        this.buildMaterial(DreamtinkerMaterialIds.OathGuardPaleSteel)
+            .meleeHarvest().ranged().armor().statType(INGOT).statType(STORAGE_BLOCK)
+            .fallbacks("mental")
+            .transformer(GreyToSpriteTransformer.builderFromBlack()
+                                                .addARGB(63, 0xFF272534)
+                                                .addARGB(102, 0xFF4D5068)
+                                                .addARGB(140, 0xFF8087A6)
+                                                .addARGB(178, 0xFFC2CCE5)
+                                                .addARGB(216, 0xFFF0F5FF)
+                                                .addARGB(255, 0xFFFFFFFF)
+                                                .build());
+
+
         addELMaterials();
         addMalumMaterials();
         addEidolonMaterials();

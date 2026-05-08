@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "dreamtinker:oath_guard_pale_steel",
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_iron_heart"
+  },
+  "temperature": 1200
+}

@@ -58,6 +58,9 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.harvest.ArrowHarvest;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.harvest.HoneyTastyModifier;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.harvest.LifeLooting;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.harvest.SilkyCrystal;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.OathSteel.ForOath;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.OathSteel.HealOath;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.OathSteel.PaleOath;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian.Isolde;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian.SharpenedWith;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem.*;
@@ -188,6 +191,9 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<pupalOmen> pupal_omen = MODIFIERS.register("pupal_omen", pupalOmen::new);
     public static final StaticModifier<AwaitingHour> awaiting_hour = MODIFIERS.register("awaiting_hour", AwaitingHour::new);
     public static final StaticModifier<FeatherWake> feather_wake = MODIFIERS.register("feather_wake", FeatherWake::new);
+    public static final StaticModifier<PaleOath> pale_oath = MODIFIERS.register("pale_oath", PaleOath::new);
+    public static final StaticModifier<HealOath> heal_oath = MODIFIERS.register("heal_oath", HealOath::new);
+    public static final StaticModifier<ForOath> for_oath = MODIFIERS.register("for_oath", ForOath::new);
 
     //etherium
     public static final StaticModifier<ELAstralBreak> astral_break = EL_MODIFIERS.register("astral_break", ELAstralBreak::new);

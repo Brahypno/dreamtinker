@@ -166,8 +166,11 @@ public class DTModifierCheck {
         matched += getEntityBodyModifierNum(entity, id);
         matched += getMainhandModifierLevel(entity, id);
         matched += getOffhandModifierLevel(entity, id);
+        if (entity instanceof Player player)
+            matched += CuriosCompact.getCurioModifierNumber(player, id);
         return matched;
     }
+
 
     public static float getPersistentTagValue(LivingEntity entity, ModifierId modifierId, ResourceLocation tag) {
         float value = 0;

@@ -1,0 +1,15 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "type": "forge:nbt",
+    "count": 1,
+    "item": "minecraft:iron_block",
+    "nbt": "{display:{Name:'{\"italic\":false,\"translate\":\"item.dreamtinker.iron_golem_heart\"}'}}"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_iron_heart"
+  },
+  "temperature": 1200,
+  "time": 36
+}

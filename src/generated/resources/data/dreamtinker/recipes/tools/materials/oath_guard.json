@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "type": "forge:nbt",
+    "count": 1,
+    "item": "minecraft:iron_block",
+    "nbt": "{display:{Name:'{\"italic\":false,\"translate\":\"item.dreamtinker.iron_golem_heart\"}'}}"
+  },
+  "material": "dreamtinker:oath_guard_pale_steel",
+  "needed": 1,
+  "value": 1
+}

@@ -11,6 +11,7 @@ import com.sammy.malum.registry.common.item.ItemTagRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -582,6 +583,16 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                                                             .baseUnit(FluidValues.INGOT).damageUnit(FluidValues.NUGGET)
                                                                             .metal().dust().plate().gear().coin().sheetmetal().geore().oreberry();
 
+        MeltingRecipeBuilder.melting(StrictNBTIngredient.of(ironHeart()),
+                                     DreamtinkerFluids.molten_iron_heart, FluidValues.INGOT, 0.5f)
+                            .save(consumer, location(Melting_folder + "iron_heart"));
+
+    }
+
+    private ItemStack ironHeart() {
+        ItemStack ironHeart = new ItemStack(Items.IRON_BLOCK);
+        ironHeart.setHoverName(Component.translatable("item.dreamtinker.iron_golem_heart").withStyle(style -> style.withItalic(false)));
+        return ironHeart;
     }
 
     private void addCompactEidolonMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
@@ -2719,6 +2730,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
         materialRecipe(consumer, DreamtinkerMaterialIds.FifthStone, Ingredient.of(DreamtinkerCommon.fifth_stone.get()), 1, 1,
                        materials_folder + "fifth_stone");
+
         materialRecipe(consumer, DreamtinkerMaterialIds.SpiralSpin, Ingredient.of(DreamtinkerCommon.spiral_spin.get()), 1, 1,
                        materials_folder + "spiral_spin");
 
@@ -2728,6 +2740,9 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         standardMetalMaterial(consumer, DreamtinkerMaterialIds.Froststeel, DreamtinkerFluids.molten_froststeel, "froststeel", materials_folder);
         standardMetalMaterial(consumer, DreamtinkerMaterialIds.Regalium, DreamtinkerFluids.molten_regalium, "regalium", materials_folder);
         standardMetalMaterial(consumer, DreamtinkerMaterialIds.Iesnium, DreamtinkerFluids.molten_iesnium, "iesnium", materials_folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.OathGuardPaleSteel, StrictNBTIngredient.of(ironHeart()), 1, 1,
+                       materials_folder + "oath_guard");
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.OathGuardPaleSteel, DreamtinkerFluids.molten_iron_heart, FluidValues.INGOT, materials_folder);
 
     }
 
