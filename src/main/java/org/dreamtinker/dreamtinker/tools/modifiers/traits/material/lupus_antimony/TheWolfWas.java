@@ -133,6 +133,8 @@ public class TheWolfWas extends BattleModifier {
         while (choice == MaterialIds.wood && 0 <= possible_tier) {
             choice = DTModifierCheck.getMaterialForTier(--possible_tier, rand, statsId);
         }
+        if (MaterialRegistry.getMaterial(choice.getId()).getTier() < tier)
+            return;
         nbt.putInt(TAG_WOLF, count - TheWolfWasDamage.get());
 
         // 7. 使用 replaceMaterial 生成新的 MaterialNBT
