@@ -649,7 +649,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.eidolon_vulnerable, DreamtinkerMaterialDataProvider.modLoaded("eidolon"))
                 .addModule(MobEffectModule.builder(EidolonPotions.VULNERABLE_EFFECT.get())
                                           .level(RandomLevelingValue.flat(1))
-                                          .time(RandomLevelingValue.random(20, 10))
+                                          .time(RandomLevelingValue.perLevel(20 * 3, 10))
 
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT)
@@ -674,7 +674,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.eidolon_bone_chill, DreamtinkerMaterialDataProvider.modLoaded("eidolon"))
                 .addModule(MobEffectModule.builder(EidolonPotions.CHILLED_EFFECT.get())
                                           .level(RandomLevelingValue.flat(1))
-                                          .time(RandomLevelingValue.random(20, 10))
+                                          .time(RandomLevelingValue.perLevel(20 * 3, 10))
 
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT).levelDisplay(ModifierLevelDisplay.NO_LEVELS);

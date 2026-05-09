@@ -35,8 +35,8 @@
         "flat": 1.0
       },
       "time": {
-        "flat": 20.0,
-        "random": 10.0
+        "flat": 60.0,
+        "per_level": 10.0
       }
     }
   ],
