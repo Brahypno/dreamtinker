@@ -130,7 +130,7 @@ public class TheWolfWas extends BattleModifier {
 
         // 6. 随机挑一个新的 MaterialVariantId
         MaterialVariantId choice = DTModifierCheck.getMaterialForTier(possible_tier, rand, statsId);
-        while (choice == MaterialIds.wood && 0 <= possible_tier) {
+        while (choice == MaterialIds.wood && tier <= possible_tier) {
             choice = DTModifierCheck.getMaterialForTier(--possible_tier, rand, statsId);
         }
         if (MaterialRegistry.getMaterial(choice.getId()).getTier() < tier)
