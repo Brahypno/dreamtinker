@@ -543,7 +543,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
 
     protected void addELMaterials() {
         this.buildMaterial(DreamtinkerMaterialIds.etherium)
-            .ranged().meleeHarvest().armor().statType(StatlessMaterialStats.BOWSTRING)
+            .ranged().meleeHarvest().armor().statType(StatlessMaterialStats.BOWSTRING).shieldCore()
             .fallbacks("metal", "crystal")
             .transformer(new FramesSpriteTransformer(
                     Dreamtinker.getLocation("generator/etherium"),
@@ -592,7 +592,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFFC77FCA)
                                                 .addARGB(255, 0xFFC77FCA)
                                                 .build());
-        this.buildMaterial(DreamtinkerMaterialIds.soul_etherium)
+        this.buildMaterial(DreamtinkerMaterialIds.soul_etherium).shieldCore()
             .ranged().meleeHarvest().armor().statType(StatlessMaterialStats.BOWSTRING).statType(STORAGE_BLOCK)
             .fallbacks("gem", "metal")
             .transformer(new FramesSpriteTransformer(

@@ -467,13 +467,13 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
 
         addArmorShieldStats(DreamtinkerMaterialIds.etherium,
                             PlatingMaterialStats.builder().durabilityFactor(132).armor(4f, 9f, 7f, 4f).toughness(4).knockbackResistance(0f),
-                            StatlessMaterialStats.MAILLE);
+                            StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
         addArmorShieldStats(DreamtinkerMaterialIds.nefarious,
                             PlatingMaterialStats.builder().durabilityFactor(126).armor(6f, 9f, 4f, 7f).toughness(6).knockbackResistance(5f),
                             StatlessMaterialStats.MAILLE);
         addArmorShieldStats(DreamtinkerMaterialIds.soul_etherium,
                             PlatingMaterialStats.builder().durabilityFactor(150).armor(10f, 5f, 17f, 6f).toughness(10).knockbackResistance(5f),
-                            StatlessMaterialStats.MAILLE);
+                            StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
 
         addArmorShieldStats(DreamtinkerMaterialIds.spirit_fabric,
                             PlatingMaterialStats.builder().durabilityFactor(16).armor(1f, 3f, 4f, 2f).toughness(0).knockbackResistance(0f),

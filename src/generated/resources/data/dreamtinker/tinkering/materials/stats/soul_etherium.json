@@ -54,6 +54,7 @@
       "durability": 2700,
       "knockback_resistance": 5.0,
       "toughness": 10.0
-    }
+    },
+    "tconstruct:shield_core": {}
   }
 }
