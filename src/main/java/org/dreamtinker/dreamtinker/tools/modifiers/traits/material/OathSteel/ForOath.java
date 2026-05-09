@@ -9,6 +9,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.EntityHitResult;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
+import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.entity.ProjectileWithPower;
@@ -43,16 +44,24 @@ public class ForOath extends BattleModifier {
         }
     }
 
-    private static float applyOathEvilDamageBonus(LivingEntity target, ServerPlayer player, int level, float damage) {
+    private float applyOathEvilDamageBonus(LivingEntity target, ServerPlayer player, int level, float damage) {
         float evil = getOathEvil(target, player);
         if (evil <= 0.0F)
             return damage;
+        if (this.getId().equals(DreamtinkerModifiers.for_oath.getId())){
 
-        float scale = 140.0F - 20.0F * level;
-        float cap = 0.20F + 0.10F * level;
-        float bonusRate = Mth.clamp(evil / scale, 0.0F, cap);
+            float scale = 140.0F - 20.0F * level;
+            float cap = 0.20F + 0.10F * level;
+            float bonusRate = Mth.clamp(evil / scale, 0.0F, cap);
+            return damage * (1.0F + bonusRate);
+        }else {
+            float scale = 120.0F - 15.0F * level;
+            float cap = 0.35F + 0.15F * level;
+            float bonusRate = Mth.clamp(evil / scale, 0.0F, cap);
+            return damage * (1.0F + bonusRate);
+        }
 
-        return damage * (1.0F + bonusRate);
+
     }
 
     private static void consumeOathEvil(LivingEntity target, ServerPlayer player, int level) {

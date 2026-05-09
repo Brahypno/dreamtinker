@@ -23,6 +23,7 @@ import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.utils.CompactUtils.CuriosCompact;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import slimeknights.tconstruct.common.TinkerTags;
+import slimeknights.tconstruct.library.modifiers.ModifierId;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
 import java.util.Comparator;
@@ -33,9 +34,104 @@ public class OathGuardPaleSteelEvents {
     private static final ThreadLocal<Boolean> GUARDIAN_TRANSFER =
             ThreadLocal.withInitial(() -> false);
     public static ResourceLocation oathPaleSteelId = new ResourceLocation("oath_holder");
+    public static final ResourceLocation oathBrokenSteelId = Dreamtinker.getLocation("broken_oath_despair");
 
     private static final String PALE_OATH_EVIL = "dreamtinker_pale_oath_evil";
     private static final float MAX_PALE_OATH_EVIL = 100.0F;
+
+
+    @SubscribeEvent
+    public static void onProtectedTargetHurt(LivingHurtEvent event) {
+        if (GUARDIAN_TRANSFER.get()){
+            return;
+        }
+
+        LivingEntity target = event.getEntity();
+
+        if (target.level().isClientSide()){
+            return;
+        }
+
+        ServerLevel level = (ServerLevel) target.level();
+
+        float damage = event.getAmount();
+        if (damage <= 0.0F){
+            return;
+        }
+
+        List<ServerPlayer> guardians = findOathGuardians(level, target, DreamtinkerModifiers.pale_oath.getId());
+
+        List<ServerPlayer> des = findOathGuardians(level, target, DreamtinkerModifiers.broken_oath.getId());
+        if (!guardians.isEmpty()){
+            addEvilToOffenderIfPresent(target, event.getSource(), guardians, event.getAmount());
+
+            guardians.sort(Comparator.comparingDouble(player -> player.distanceToSqr(target)));
+
+            float remaining = damage;
+            float totalTransferred = 0.0F;
+
+            GUARDIAN_TRANSFER.set(true);
+            try {
+                for (ServerPlayer guardian : guardians) {
+                    if (remaining <= 0.0F){
+                        break;
+                    }
+
+                    float transfer = remaining * 0.10F;
+                    remaining -= transfer;
+                    totalTransferred += transfer;
+
+                    guardian.hurt(event.getSource(), transfer);
+                }
+            }
+            finally {
+                GUARDIAN_TRANSFER.set(false);
+            }
+
+            event.setAmount(remaining);
+
+            if (totalTransferred > 0.0F){
+                changeFracture(guardians, (int) (-Math.max(1, totalTransferred * 0.5F))); // 守护成功
+            }
+        }
+
+        if (!des.isEmpty()){
+            addEvilToOffenderIfPresent(target, event.getSource(), des, event.getAmount());
+            changeDespair(des, (int) (Math.max(1, damage * 0.5F)));
+        }
+
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOW)
+    public static void onProtectedTargetDeath(LivingDeathEvent event) {
+        LivingEntity target = event.getEntity();
+
+        if (target.level().isClientSide()){
+            return;
+        }
+
+        ServerLevel level = (ServerLevel) target.level();
+        float amount = 25.0F;
+
+        if (target instanceof Villager){
+            amount += 15.0F;
+        }
+        List<ServerPlayer> guardians = findOathGuardians(level, target, DreamtinkerModifiers.pale_oath.getId());
+
+        // 死亡时附近也没有白誓钢守护者，那就没人承担“失败”
+        if (!guardians.isEmpty()){
+            addEvilToOffenderIfPresent(target, event.getSource(), guardians, 25);
+            changeFracture(guardians, (int) amount);
+        }
+        List<ServerPlayer> des = findOathGuardians(level, target, DreamtinkerModifiers.broken_oath.getId());
+
+        // 死亡时附近也没有白誓钢守护者，那就没人承担“失败”
+        if (!des.isEmpty()){
+            addEvilToOffenderIfPresent(target, event.getSource(), des, 25);
+            changeDespair(des, (int) amount);
+        }
+
+    }
 
     public static boolean isGuardianProtectedTarget(ServerPlayer holder, LivingEntity target) {
         if (target == holder){
@@ -70,7 +166,7 @@ public class OathGuardPaleSteelEvents {
         return false;
     }
 
-    private static List<ServerPlayer> findWhiteOathGuardians(ServerLevel level, LivingEntity target) {
+    private static List<ServerPlayer> findOathGuardians(ServerLevel level, LivingEntity target, ModifierId modifierId) {
         return level.getEntitiesOfClass(
                 ServerPlayer.class,
                 target.getBoundingBox().inflate(16.0D),
@@ -78,29 +174,38 @@ public class OathGuardPaleSteelEvents {
                           && !player.isSpectator()
                           && !player.isCreative()
                           && player != target
-                          && DTModifierCheck.haveModifierIn(player, DreamtinkerModifiers.pale_oath.getId())
+                          && DTModifierCheck.haveModifierIn(player, modifierId)
                           && isGuardianProtectedTarget(player, target)
         );
     }
 
     private static void changeFracture(List<ServerPlayer> guardians, int amount) {
-        for (ServerPlayer guardian : guardians) {
-            applyPaleOathValue(guardian.getArmorSlots(), amount);
-            applyPaleOathValue(guardian.getHandSlots(), amount);
-            List<ItemStack> extraStacks = CuriosCompact.getCurioStacks(guardian);
+        changeOathValue(guardians, amount, DreamtinkerModifiers.pale_oath.getId(), oathPaleSteelId);
+    }
+
+    private static void changeDespair(List<ServerPlayer> despairPlayers, int amount) {
+        changeOathValue(despairPlayers, amount, DreamtinkerModifiers.broken_oath.getId(), oathBrokenSteelId);
+    }
+
+    private static void changeOathValue(List<ServerPlayer> players, int amount, ModifierId modifierId, ResourceLocation dataKey) {
+        for (ServerPlayer player : players) {
+            applyOathValue(player.getArmorSlots(), amount, modifierId, dataKey);
+            applyOathValue(player.getHandSlots(), amount, modifierId, dataKey);
+
+            List<ItemStack> extraStacks = CuriosCompact.getCurioStacks(player);
             if (extraStacks != null){
-                applyPaleOathValue(extraStacks, amount);
+                applyOathValue(extraStacks, amount, modifierId, dataKey);
             }
         }
     }
 
-    private static void applyPaleOathValue(Iterable<ItemStack> stacks, int amount) {
+    private static void applyOathValue(Iterable<ItemStack> stacks, int amount, ModifierId modifierId, ResourceLocation dataKey) {
         for (ItemStack stack : stacks) {
-            applyPaleOathValue(stack, amount);
+            applyOathValue(stack, amount, modifierId, dataKey);
         }
     }
 
-    private static void applyPaleOathValue(ItemStack stack, int amount) {
+    private static void applyOathValue(ItemStack stack, int amount, ModifierId modifierId, ResourceLocation dataKey) {
         if (stack.isEmpty()){
             return;
         }
@@ -110,96 +215,12 @@ public class OathGuardPaleSteelEvents {
         }
 
         ToolStack tool = ToolStack.from(stack);
-
-        if (tool.getModifierLevel(DreamtinkerModifiers.pale_oath.getId()) <= 0){
+        if (tool.getModifierLevel(modifierId) <= 0){
             return;
         }
 
-        int oldValue = tool.getPersistentData().getInt(oathPaleSteelId);
-        tool.getPersistentData().putInt(oathPaleSteelId, oldValue + amount);
-    }
-
-    @SubscribeEvent
-    public static void onProtectedTargetHurt(LivingHurtEvent event) {
-        if (GUARDIAN_TRANSFER.get()){
-            return;
-        }
-
-        LivingEntity target = event.getEntity();
-
-        if (target.level().isClientSide()){
-            return;
-        }
-
-        ServerLevel level = (ServerLevel) target.level();
-
-        float damage = event.getAmount();
-        if (damage <= 0.0F){
-            return;
-        }
-
-        List<ServerPlayer> guardians = findWhiteOathGuardians(level, target);
-
-        if (guardians.isEmpty()){
-            return;
-        }
-        addEvilToOffenderIfPresent(target, event.getSource(), guardians, event.getAmount());
-
-        guardians.sort(Comparator.comparingDouble(player -> player.distanceToSqr(target)));
-
-        float remaining = damage;
-        float totalTransferred = 0.0F;
-
-        GUARDIAN_TRANSFER.set(true);
-        try {
-            for (ServerPlayer guardian : guardians) {
-                if (remaining <= 0.0F){
-                    break;
-                }
-
-                float transfer = remaining * 0.10F;
-                remaining -= transfer;
-                totalTransferred += transfer;
-
-                guardian.hurt(event.getSource(), transfer);
-            }
-        }
-        finally {
-            GUARDIAN_TRANSFER.set(false);
-        }
-
-        event.setAmount(remaining);
-
-        if (totalTransferred > 0.0F){
-            changeFracture(guardians, (int) (-Math.max(1, totalTransferred * 0.5F))); // 守护成功
-        }
-    }
-
-    @SubscribeEvent(priority = EventPriority.LOW)
-    public static void onProtectedTargetDeath(LivingDeathEvent event) {
-        LivingEntity target = event.getEntity();
-
-        if (target.level().isClientSide()){
-            return;
-        }
-
-        ServerLevel level = (ServerLevel) target.level();
-
-        List<ServerPlayer> guardians = findWhiteOathGuardians(level, target);
-
-        // 死亡时附近也没有白誓钢守护者，那就没人承担“失败”
-        if (guardians.isEmpty()){
-            return;
-        }
-        addEvilToOffenderIfPresent(target, event.getSource(), guardians, 25);
-
-        float amount = 25.0F;
-
-        if (target instanceof Villager){
-            amount += 15.0F;
-        }
-
-        changeFracture(guardians, (int) amount);
+        int value = tool.getPersistentData().getInt(dataKey) + amount;
+        tool.getPersistentData().putInt(dataKey, value);
     }
 
     private static String oathKey(ServerPlayer guardian) {

@@ -20,7 +20,7 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
     protected void addTags() {
         this.tag(TinkerTags.Materials.EXCLUDE_FROM_LOOT)
             .add(moonlight_ice, nigrescence_antimony, metallivorous_stibium_lupus, echo_alloy, star_regulus, half_rotten_homunculus, desire_gem, despair_gem,
-                 RuinWheelSteel, PermanenceScale, PermanenceWing, scolecite, SpiralSpin)
+                 RuinWheelSteel, PermanenceScale, PermanenceWing, scolecite, SpiralSpin, ForlornOathSteel)
             .addOptional(etherium, nefarious, soul_etherium,
                          soul_stained_steel, malignant_pewter, malignant_gluttony, malignant_lead, PaladinBone, forgotten_metal);
 
@@ -53,9 +53,9 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
             .add(crying_obsidian, amber, soul_steel)
             .addOptional(hallowed_gold, ArcaneGold, WickedWeave);
         tag(TinkerTags.Materials.COMPATABILITY_METALS)
-                .add(RuinWheelSteel);
+                .add(RuinWheelSteel, ForlornOathSteel);
         tag(TinkerTags.Materials.COMPATABILITY_BLOCKS)
-                .add(echo_alloy, amber, black_sapphire)
+                .add(echo_alloy, amber, black_sapphire, ForlornOathSteel)
                 .addOptional();
         tag(TinkerTags.Materials.COMPATABILITY_ALLOYS)
                 .addOptional(soul_etherium, malignant_gluttony);

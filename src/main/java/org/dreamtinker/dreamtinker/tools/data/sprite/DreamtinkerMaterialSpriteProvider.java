@@ -510,7 +510,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
             ));
 
         this.buildMaterial(DreamtinkerMaterialIds.OathGuardPaleSteel)
-            .meleeHarvest().ranged().armor().statType(INGOT).statType(STORAGE_BLOCK)
+            .meleeHarvest().ranged().armor().statType(INGOT).statType(STORAGE_BLOCK).shieldCore()
             .fallbacks("mental")
             .transformer(GreyToSpriteTransformer.builderFromBlack()
                                                 .addARGB(63, 0xFF272534)
@@ -518,6 +518,18 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(140, 0xFF8087A6)
                                                 .addARGB(178, 0xFFC2CCE5)
                                                 .addARGB(216, 0xFFF0F5FF)
+                                                .addARGB(255, 0xFFFFFFFF)
+                                                .build());
+
+        this.buildMaterial(DreamtinkerMaterialIds.ForlornOathSteel)
+            .meleeHarvest().ranged().armor().statType(INGOT).statType(STORAGE_BLOCK).shieldCore()
+            .fallbacks("mental")
+            .transformer(GreyToSpriteTransformer.builderFromBlack()
+                                                .addARGB(63, 0xFF151926)
+                                                .addARGB(102, 0xFF2B344A)
+                                                .addARGB(140, 0xFF4E5F7D)
+                                                .addARGB(178, 0xFF8299BD)
+                                                .addARGB(216, 0xFFD3E4F6)
                                                 .addARGB(255, 0xFFFFFFFF)
                                                 .build());
 

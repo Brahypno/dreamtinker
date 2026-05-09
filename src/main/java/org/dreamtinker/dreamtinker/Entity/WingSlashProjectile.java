@@ -95,13 +95,7 @@ public class WingSlashProjectile extends Projectile implements ProjectileWithPow
     /**
      * 生成并发射剑气的便捷方法。
      */
-    public static WingSlashProjectile shootFrom(
-            Level level,
-            LivingEntity owner,
-            float power,
-            int maxLife,
-            byte pierceLevel,
-            double speed
+    public static WingSlashProjectile shootFrom(Level level, LivingEntity owner, float power, int maxLife, byte pierceLevel, double speed
     ) {
         return shootFrom(
                 level,
@@ -118,23 +112,34 @@ public class WingSlashProjectile extends Projectile implements ProjectileWithPow
         );
     }
 
-    public static WingSlashProjectile shootFrom(
-            Level level,
-            LivingEntity owner,
-            float power,
-            int maxLife,
-            byte pierceLevel,
-            double speed,
-            int rgb,
-            int alpha,
-            float lengthScale,
-            float widthScale,
-            float spinSpeed
-    ) {
+    public static WingSlashProjectile shootFrom(Level level, LivingEntity owner, float power, int maxLife, byte pierceLevel, double speed, int rgb, int alpha, float lengthScale, float widthScale, float spinSpeed) {
         WingSlashProjectile projectile = new WingSlashProjectile(
                 DreamtinkerEntityTypes.WING_SLASH.get(), level, owner);
 
         Vec3 look = owner.getLookAngle().normalize();
+        Vec3 spawnPos = owner.getEyePosition().add(look.scale(0.65D));
+
+        projectile.setPos(spawnPos.x, spawnPos.y - 0.1D, spawnPos.z);
+        projectile.setOwner(owner);
+
+        projectile.setPower(power);
+        projectile.setMaxLife(maxLife);
+        projectile.setPierceLevel(pierceLevel);
+
+        projectile.setRenderColor(rgb, alpha);
+        projectile.setRenderScale(lengthScale, widthScale);
+        projectile.setSpinSpeed(spinSpeed);
+
+        projectile.shoot(look.x, look.y, look.z, (float) speed, 0.0F);
+
+        level.addFreshEntity(projectile);
+        return projectile;
+    }
+
+    public static WingSlashProjectile shootFrom(Level level, LivingEntity owner, Vec3 direction, float power, int maxLife, byte pierceLevel, double speed, int rgb, int alpha, float lengthScale, float widthScale, float spinSpeed) {
+        WingSlashProjectile projectile = new WingSlashProjectile(DreamtinkerEntityTypes.WING_SLASH.get(), level, owner);
+
+        Vec3 look = direction.normalize();
         Vec3 spawnPos = owner.getEyePosition().add(look.scale(0.65D));
 
         projectile.setPos(spawnPos.x, spawnPos.y - 0.1D, spawnPos.z);

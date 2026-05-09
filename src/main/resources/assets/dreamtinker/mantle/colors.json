@@ -210,7 +210,10 @@
     "wing_without": "#D9DCCB",
     "as_wing": "#D9DCCB",
     "feather_wake": "#D9DCCB",
-    "carapace_fall": "#531B0B"
+    "carapace_fall": "#531B0B",
+    "broken_oath": "#D3E4F6",
+    "forlorn_judgment": "#D3E4F6",
+    "last_body": "#4E5F7D"
 
 },
   "material.dreamtinker": {
@@ -287,7 +290,8 @@
     "undergarden_gooey_slime": "#645842",
     "iesnium": "#79A7AF",
     "spiral_spin": "#444857",
-    "ruin_wheel_steel": "#FFF0B0"
+    "ruin_wheel_steel": "#FFF0B0",
+    "forlorn_oath_steel": "#151926"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873",

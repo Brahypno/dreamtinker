@@ -8,9 +8,12 @@ import com.sammy.malum.registry.common.SpiritTypeRegistry;
 import com.sammy.malum.registry.common.block.BlockRegistry;
 import com.sammy.malum.registry.common.item.ItemRegistry;
 import com.sammy.malum.registry.common.item.ItemTagRegistry;
+import net.minecraft.ChatFormatting;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
@@ -589,10 +592,23 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
     }
 
-    private ItemStack ironHeart() {
-        ItemStack ironHeart = new ItemStack(Items.IRON_BLOCK);
-        ironHeart.setHoverName(Component.translatable("item.dreamtinker.iron_golem_heart").withStyle(style -> style.withItalic(false)));
-        return ironHeart;
+    public static ItemStack ironHeart() {
+        ItemStack stack = new ItemStack(Items.IRON_BLOCK);
+
+        stack.setHoverName(
+                Component.translatable("item.dreamtinker.iron_golem_heart")
+                         .withStyle(style -> style.withItalic(false))
+        );
+
+        CompoundTag display = stack.getOrCreateTagElement("display");
+
+        ListTag lore = new ListTag();
+        lore.add(StringTag.valueOf(Component.Serializer.toJson(Component.translatable("tooltip.dreamtinker.iron_golem_heart")
+                                                                        .withStyle(style -> style.withItalic(false).withColor(ChatFormatting.GRAY)))));
+
+        display.put("Lore", lore);
+
+        return stack;
     }
 
     private void addCompactEidolonMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {

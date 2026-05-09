@@ -2,12 +2,9 @@ package org.dreamtinker.dreamtinker.common.data.loot;
 
 import net.minecraft.advancements.critereon.*;
 import net.minecraft.data.PackOutput;
-import net.minecraft.network.chat.Component;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.state.BlockState;
@@ -28,6 +25,8 @@ import slimeknights.mantle.data.predicate.block.BlockPredicate;
 import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
 
 import java.util.Optional;
+
+import static org.dreamtinker.dreamtinker.common.data.DreamtinkerRecipeProvider.ironHeart;
 
 public class DreamtinkerGlobalLootModifierProvider extends GlobalLootModifierProvider {
     public DreamtinkerGlobalLootModifierProvider(PackOutput output) {
@@ -83,14 +82,11 @@ public class DreamtinkerGlobalLootModifierProvider extends GlobalLootModifierPro
     }
 
     private void addIronHeartFromIronGolemKilledByHostileMob() {
-        ItemStack ironHeart = new ItemStack(Items.IRON_BLOCK);
-        ironHeart.setHoverName(Component.translatable("item.dreamtinker.iron_golem_heart").withStyle(style -> style.withItalic(false)));
-
         add("iron_heart_from_iron_golem",
-            ExtraDropBuilder.create(StrictNBTIngredient.of(ironHeart))
+            ExtraDropBuilder.create(StrictNBTIngredient.of(ironHeart()))
                             .condition(KillerIsEnemyCondition.INSTANCE)
                             .entities(LivingEntityPredicate.set(EntityType.IRON_GOLEM))
-                            .drop(0.05D, 0.0D, 1, 0)
+                            .drop(0.15D, 0.0D, 1, 0)
                             .build()
         );
     }

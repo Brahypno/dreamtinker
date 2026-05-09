@@ -6,14 +6,14 @@
     }
   ],
   "drop": {
-    "base_chance": 0.05,
+    "base_chance": 0.15,
     "loot_bonus_chance_bonus": 0.0
   },
   "result": {
     "type": "forge:nbt",
     "count": 1,
     "item": "minecraft:iron_block",
-    "nbt": "{display:{Name:'{\"italic\":false,\"translate\":\"item.dreamtinker.iron_golem_heart\"}'}}"
+    "nbt": "{display:{Lore:['{\"italic\":false,\"color\":\"gray\",\"translate\":\"tooltip.dreamtinker.iron_golem_heart\"}'],Name:'{\"italic\":false,\"translate\":\"item.dreamtinker.iron_golem_heart\"}'}}"
   },
   "source": {
     "entities": {

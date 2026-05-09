@@ -60,7 +60,7 @@ public class PaleOath extends Modifier implements ProtectionModifierHook, Invent
 
         ModDataNBT data = tool.getPersistentData();
         int pale = data.getInt(oathPaleSteelId);
-        MaterialId id = DreamtinkerMaterialIds.OathGuardPaleSteel;
+        MaterialId id = DreamtinkerMaterialIds.ForlornOathSteel;
         int threshold = Math.max(tool.getCurrentDurability() + tool.getDamage(), 500);
         if (pale < threshold)
             return;

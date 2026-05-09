@@ -1,0 +1,24 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "dreamtinker:broken_oath"
+    },
+    {
+      "level": 1,
+      "name": "dreamtinker:forlorn_judgment"
+    }
+  ],
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "dreamtinker:broken_oath"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:last_body"
+      }
+    ]
+  }
+}
