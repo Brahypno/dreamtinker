@@ -194,6 +194,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<PaleOath> pale_oath = MODIFIERS.register("pale_oath", PaleOath::new);
     public static final StaticModifier<HealOath> heal_oath = MODIFIERS.register("heal_oath", HealOath::new);
     public static final StaticModifier<ForOath> for_oath = MODIFIERS.register("for_oath", ForOath::new);
+    public static final StaticModifier<ReturningArrow> returning_arrow = MODIFIERS.register("returning_arrow", ReturningArrow::new);
 
     //etherium
     public static final StaticModifier<ELAstralBreak> astral_break = EL_MODIFIERS.register("astral_break", ELAstralBreak::new);
