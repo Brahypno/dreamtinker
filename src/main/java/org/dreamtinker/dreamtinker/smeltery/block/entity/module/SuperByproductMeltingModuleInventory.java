@@ -1,5 +1,6 @@
 package org.dreamtinker.dreamtinker.smeltery.block.entity.module;
 
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -15,6 +16,7 @@ import slimeknights.tconstruct.smeltery.block.entity.tank.SmelteryTank;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.function.Consumer;
 
 public class SuperByproductMeltingModuleInventory extends MeltingModuleInventory {
@@ -133,7 +135,7 @@ public class SuperByproductMeltingModuleInventory extends MeltingModuleInventory
             return false;
 
         fluidHandler.fill(main, IFluidHandler.FluidAction.EXECUTE);
-        while (count < inv.getStack().getCount()) {
+        while (count < inv.getStack().getCount() * 2) {
             // 4) 让配方把副产物灌进临时 tank（空间等同于真实罐子在灌完主产物后的剩余空间）
             recipe.handleByproducts(inv, fluidHandler);
             ++count;
@@ -154,7 +156,9 @@ public class SuperByproductMeltingModuleInventory extends MeltingModuleInventory
     private boolean tryFillTankSmeltery(int index, IMeltingRecipe recipe) {
         FluidStack fluid = recipe.getOutput(getSmelteryModule(index));
         IMeltingContainer inv = getModule(index);
-        fluid.setAmount(fluid.getAmount() * inv.getStack().getCount());
+        Random defaultRand = new Random();
+        float value = 1.2F + defaultRand.nextFloat() * 0.2F;
+        fluid.setAmount((Mth.ceil(fluid.getAmount() * inv.getStack().getCount() * value)));
         if (fluidHandler.fill(fluid.copy(), IFluidHandler.FluidAction.SIMULATE) == fluid.getAmount()){
             fluidHandler.fill(fluid, IFluidHandler.FluidAction.EXECUTE);
             return true;
