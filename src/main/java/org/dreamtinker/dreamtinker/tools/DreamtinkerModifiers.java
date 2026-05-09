@@ -54,10 +54,7 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.occ.OtherWorld
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.occ.OtherworldHarvest;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.*;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.common.*;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.harvest.ArrowHarvest;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.harvest.HoneyTastyModifier;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.harvest.LifeLooting;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.harvest.SilkyCrystal;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.harvest.*;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.OathSteel.*;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian.Isolde;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian.SharpenedWith;
@@ -196,6 +193,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<BrokenOath> broken_oath = MODIFIERS.register("broken_oath", BrokenOath::new);
     public static final StaticModifier<ForOath> forlorn_judgment = MODIFIERS.register("forlorn_judgment", ForOath::new);
     public static final StaticModifier<LastBody> last_body = MODIFIERS.register("last_body", LastBody::new);
+    public static final StaticModifier<ForceDrop> force_drop = MODIFIERS.register("force_drop", ForceDrop::new);
 
     //etherium
     public static final StaticModifier<ELAstralBreak> astral_break = EL_MODIFIERS.register("astral_break", ELAstralBreak::new);
