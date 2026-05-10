@@ -82,6 +82,18 @@
     {
       "id": "tinkers_advanced:blazing",
       "required": false
+    },
+    {
+      "id": "tinkers_thinking:nonsense",
+      "required": false
+    },
+    {
+      "id": "tinkers_thinking:nocturnal",
+      "required": false
+    },
+    {
+      "id": "minecraft:mushroom_daydream.arrogant",
+      "required": false
     }
   ]
 }

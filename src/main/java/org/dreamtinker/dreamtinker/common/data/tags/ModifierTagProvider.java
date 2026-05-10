@@ -24,6 +24,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
     @Override
     protected void addTags() {
         final String TIAC = "tinkers_advanced";
+        final String TIT = "tinkers_thinking";
         tag(DreamtinkerTagKeys.Modifiers.ArmorWorkingWhenUnequipped)
                 .add(as_one.getId());
         this.tag(DreamtinkerTagKeys.Modifiers.EL_CURSED_MODIFIERS)
@@ -40,7 +41,9 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             .addOptional(cursed_ring_bound.getId(), evil_attack.getId(), eldritch_pan.getId(), malum_thirsty.getId(),
                          Ids.el_nemesis_curse, Ids.el_sorrow, Ids.el_eternal_binding)
             .addOptional(new ResourceLocation(TIAC, "fragile"), new ResourceLocation(TIAC, "disintegrate"), new ResourceLocation(TIAC, "heavy_material"),
-                         new ResourceLocation(TIAC, "blazing"));
+                         new ResourceLocation(TIAC, "blazing"))
+            .addOptional(new ResourceLocation(TIT, "nonsense"), new ResourceLocation(TIT, "nocturnal"))
+            .addOptional(new ResourceLocation("mushroom_daydream.arrogant"));
         this.tag(DreamtinkerTagKeys.Modifiers.EL_CURSED_RELIEF)
             .addOptional(weapon_books.getId(), eldritch_pan.getId(), exiles_faulty.getId());
         this.tag(TinkerTags.Modifiers.MELEE_UPGRADES)
