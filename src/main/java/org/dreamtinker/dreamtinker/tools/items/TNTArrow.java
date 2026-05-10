@@ -17,8 +17,8 @@ import net.minecraft.world.phys.Vec3;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
-import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
+import org.dreamtinker.dreamtinker.utils.DTToolsPartsHelper;
 import org.dreamtinker.dreamtinker.utils.DirectionalResistanceExplosionDamageCalculator;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.SafeClientAccess;
@@ -42,7 +42,7 @@ public class TNTArrow extends ModifiableArrowItem {
 
     public void appendHoverText(@NotNull ItemStack stack, Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
         if (TooltipKey.SHIFT == SafeClientAccess.getTooltipKey())
-            tooltip = DTHelper.getMeleeStats(ToolStack.from(stack), tooltip);
+            tooltip = DTToolsPartsHelper.getMeleeStats(ToolStack.from(stack), tooltip);
         super.appendHoverText(stack, level, tooltip, flag);
         if (TooltipKey.SHIFT == SafeClientAccess.getTooltipKey()){
             int timeAllows = ModifierUtil.getModifierLevel(stack, DreamtinkerModifiers.Ids.continuous_explode) * ContinuousExplodeTimes.get();

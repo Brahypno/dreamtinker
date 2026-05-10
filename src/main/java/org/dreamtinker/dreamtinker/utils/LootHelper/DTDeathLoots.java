@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.utils;
+package org.dreamtinker.dreamtinker.utils.LootHelper;
 
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static org.dreamtinker.dreamtinker.utils.DTHelper.findMethod;
+import static org.dreamtinker.dreamtinker.utils.DTMethodHandler.findMethod;
 
 public class DTDeathLoots {
 

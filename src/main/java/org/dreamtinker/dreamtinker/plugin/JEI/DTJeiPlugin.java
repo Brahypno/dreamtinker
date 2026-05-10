@@ -24,7 +24,7 @@ import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.library.recipe.virtual.WorldRitualEntry;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
-import org.dreamtinker.dreamtinker.utils.DTHelper;
+import org.dreamtinker.dreamtinker.utils.DTToolsPartsHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.recipe.ingredient.EntityIngredient;
 import slimeknights.mantle.recipe.ingredient.FluidIngredient;
@@ -71,7 +71,7 @@ public final class DTJeiPlugin implements IModPlugin {
         List<WorldRitualEntry> list = new ArrayList<>();
 
         // A) 蓝冰 + 水 + 月相 → 工具部件
-        List<ToolPartItem> headParts = DTHelper.getPartList(HeadMaterialStats.ID);
+        List<ToolPartItem> headParts = DTToolsPartsHelper.getPartList(HeadMaterialStats.ID);
         if (!MaterialRegistry.isFullyLoaded()){
             MaterialVariantId mli = MaterialRegistry.getMaterial(DreamtinkerMaterialIds.moonlight_ice.getId()).getIdentifier();
             for (ToolPartItem item : headParts) {

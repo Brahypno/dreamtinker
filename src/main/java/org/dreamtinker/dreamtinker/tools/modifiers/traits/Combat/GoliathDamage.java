@@ -2,7 +2,6 @@ package org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.phys.AABB;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.MeleeInterface;
 import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.jetbrains.annotations.NotNull;
@@ -15,10 +14,8 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 public class GoliathDamage extends NoLevelsModifier implements MeleeInterface {
     public static float goliathPercentage(LivingEntity attacker, Entity target) {
-        AABB attacker_box = DTHelper.getFullBoundingBox(attacker);
-        double attacker_volume = attacker_box.getXsize() * attacker_box.getYsize() * attacker_box.getZsize();
-        AABB target_box = DTHelper.getFullBoundingBox(target);
-        double target_volume = target_box.getXsize() * target_box.getYsize() * target_box.getZsize();
+        double attacker_volume = DTHelper.getMultipartVolume(attacker);
+        double target_volume = DTHelper.getMultipartVolume(target);
         double multi = 1.0 + 0.35D * Math.log((target_volume / attacker_volume));
         return (float) Math.max(multi, 0.70D);
     }

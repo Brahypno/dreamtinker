@@ -53,7 +53,7 @@ import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.dreamtinker.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvider;
 import org.dreamtinker.dreamtinker.utils.CastLookup;
-import org.dreamtinker.dreamtinker.utils.DTHelper;
+import org.dreamtinker.dreamtinker.utils.DTToolsPartsHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.recipe.condition.TagFilledCondition;
 import slimeknights.mantle.recipe.crafting.ShapedRetexturedRecipeBuilder;
@@ -1191,7 +1191,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
     }
 
     private void malumCompactMaterialBuilder(Consumer<FinishedRecipe> consumer, MaterialVariantId id, Item item, MaterialStatsId statsId, int count) {
-        List<ToolPartItem> Parts = DTHelper.getPartList(statsId);
+        List<ToolPartItem> Parts = DTToolsPartsHelper.getPartList(statsId);
         Map<ToolPartItem, CastLookup.CastTriple> map = CastLookup.findCastsForParts(Parts);
         for (ToolPartItem part : Parts) {
             Ingredient castItem = Ingredient.of(map.get(part).asListPresent().toArray(new ItemLike[0])); // 可能为 null（没注册）

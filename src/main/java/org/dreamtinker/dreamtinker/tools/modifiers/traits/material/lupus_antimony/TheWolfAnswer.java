@@ -11,7 +11,7 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
-import org.dreamtinker.dreamtinker.utils.DTDeathLoots;
+import org.dreamtinker.dreamtinker.utils.LootHelper.DTDeathLoots;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.entity.ProjectileWithPower;

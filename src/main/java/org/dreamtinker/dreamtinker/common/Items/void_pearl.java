@@ -1,11 +1,14 @@
 package org.dreamtinker.dreamtinker.common.Items;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EntityType;
@@ -17,10 +20,14 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.event.entity.EntityTeleportEvent;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
-import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -58,6 +65,50 @@ public class void_pearl extends EnderpearlItem {
         return InteractionResultHolder.sidedSuccess($$3, p_41190_.isClientSide());
     }
 
+    private static boolean teleport(LivingEntity entity) {
+        if (!entity.level().isClientSide() && entity.isAlive()){
+            double d0 = entity.getX() + (entity.level().random.nextDouble() - (double) 0.5F) * (double) 64.0F;
+            double d1 = entity.getY() + (double) (entity.level().random.nextInt(64) - 32);
+            double d2 = entity.getZ() + (entity.level().random.nextDouble() - (double) 0.5F) * (double) 64.0F;
+            return teleport(entity, d0, d1, d2);
+        }else {
+            return false;
+        }
+    }
+
+    private static boolean teleport(LivingEntity entity, double p_32544_, double p_32545_, double p_32546_) {
+        BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos(p_32544_, p_32545_, p_32546_);
+
+        while (blockpos$mutableblockpos.getY() > entity.level().getMinBuildHeight() && !entity.level().getBlockState(blockpos$mutableblockpos).blocksMotion()) {
+            blockpos$mutableblockpos.move(Direction.DOWN);
+        }
+
+        BlockState blockstate = entity.level().getBlockState(blockpos$mutableblockpos);
+        boolean flag = blockstate.blocksMotion();
+        boolean flag1 = blockstate.getFluidState().is(FluidTags.WATER);
+        if (flag && !flag1){
+            EntityTeleportEvent.EnderEntity event = ForgeEventFactory.onEnderTeleport(entity, p_32544_, p_32545_, p_32546_);
+            if (event.isCanceled()){
+                return false;
+            }else {
+                Vec3 vec3 = entity.position();
+                boolean flag2 = entity.randomTeleport(event.getTargetX(), event.getTargetY(), event.getTargetZ(), true);
+                if (flag2){
+                    entity.level().gameEvent(GameEvent.TELEPORT, vec3, GameEvent.Context.of(entity));
+                    if (!entity.isSilent()){
+                        entity.level()
+                              .playSound(null, entity.xo, entity.yo, entity.zo, SoundEvents.ENDERMAN_TELEPORT, entity.getSoundSource(), 1.0F, 1.0F);
+                        entity.playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0F, 1.0F);
+                    }
+                }
+
+                return flag2;
+            }
+        }else {
+            return false;
+        }
+    }
+
     private static class ThrownVoidPearl extends ThrownEnderpearl {
         public ThrownVoidPearl(EntityType<? extends ThrownEnderpearl> p_37491_, Level p_37492_) {
             super(p_37491_, p_37492_);
@@ -68,7 +119,7 @@ public class void_pearl extends EnderpearlItem {
         }
 
         @Override
-        protected Item getDefaultItem() {
+        protected @NotNull Item getDefaultItem() {
             return DreamtinkerCommon.void_pearl.get();
         }
 
@@ -76,7 +127,7 @@ public class void_pearl extends EnderpearlItem {
             super.onHitEntity(p_37502_);
             if (p_37502_.getEntity() instanceof LivingEntity le)
                 for (int i = 0; i < 64; ++i)
-                    if (DTHelper.teleport(le)){
+                    if (teleport(le)){
                         le.hurt(le.level().damageSources().fellOutOfWorld(), voidPearlDamage.get().floatValue());
                         return;
                     }

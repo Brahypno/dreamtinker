@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.utils;
+package org.dreamtinker.dreamtinker.utils.LootHelper;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;

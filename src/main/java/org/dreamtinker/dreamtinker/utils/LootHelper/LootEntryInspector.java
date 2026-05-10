@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.utils;
+package org.dreamtinker.dreamtinker.utils.LootHelper;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -137,7 +137,8 @@ public class LootEntryInspector {
         ResourceLocation typeId = BuiltInRegistries.LOOT_CONDITION_TYPE.getKey(condition.getType());
         String key = (typeId != null ? typeId.getPath() : condition.getClass().getName().toLowerCase(Locale.ROOT));
 
-        return key.contains("match_tool") || key.contains("entity") || key.contains("damage_source") || key.contains("survives_explosion") || key.contains("location") || key.contains("time") || key.contains("weather") || key.contains("value_check");
+        return key.contains("match_tool") || key.contains("entity") || key.contains("damage_source") || key.contains("survives_explosion") ||
+               key.contains("location") || key.contains("time") || key.contains("weather") || key.contains("value_check");
     }
 
 

@@ -30,7 +30,7 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
-import org.dreamtinker.dreamtinker.utils.LootEntryInspector;
+import org.dreamtinker.dreamtinker.utils.LootHelper.LootEntryInspector;
 
 import java.util.ArrayList;
 import java.util.HashMap;

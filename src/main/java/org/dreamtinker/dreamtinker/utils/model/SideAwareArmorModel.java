@@ -9,7 +9,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import org.dreamtinker.dreamtinker.utils.DTHelper;
 import slimeknights.tconstruct.library.client.armor.AbstractArmorModel;
 import slimeknights.tconstruct.library.client.armor.ArmorModelManager.ArmorModel;
 import slimeknights.tconstruct.library.client.armor.MultilayerArmorModel;
@@ -73,6 +72,40 @@ public class SideAwareArmorModel extends MultilayerArmorModel {
         return super.setup(living, stack, slot, base, model);
     }
 
+    private static void showOnlySlotParts(HumanoidModel<?> model, EquipmentSlot slot, boolean includeHatForHead) {
+        if (model == null || slot == null)
+            return;
+
+        // Hide everything first
+        model.setAllVisible(false);
+
+        // Show only what this slot should display
+        switch (slot) {
+            case HEAD -> {
+                model.head.visible = true;
+                model.hat.visible = includeHatForHead;
+            }
+            case CHEST -> {
+                model.body.visible = true;
+                model.rightArm.visible = true;
+                model.leftArm.visible = true;
+            }
+            case LEGS -> {
+                // Vanilla legs layer typically includes body + legs (pelvis/upper area)
+                model.body.visible = true;
+                model.rightLeg.visible = true;
+                model.leftLeg.visible = true;
+            }
+            case FEET -> {
+                model.rightLeg.visible = true;
+                model.leftLeg.visible = true;
+            }
+            default -> {
+                // MAINHAND/OFFHAND not relevant for armor parts; keep all hidden
+            }
+        }
+    }
+
     @Override
     public void renderToBuffer(PoseStack pose, VertexConsumer vc, int light, int overlay, float r, float g, float b, float a) {
         if (this.base == null)
@@ -90,7 +123,7 @@ public class SideAwareArmorModel extends MultilayerArmorModel {
         // 这里必须是 HumanoidModel —— 不要再换成自定义 Model 了
         final HumanoidModel<?> hmodel = this.base;
         if (null == buffer && null != secondary_buffer){
-            DTHelper.showOnlySlotParts(hmodel, currentSlot, true);
+            showOnlySlotParts(hmodel, currentSlot, true);
         }
 
         for (int i = 0; i < model.layers().size(); i++) {
@@ -175,7 +208,6 @@ public class SideAwareArmorModel extends MultilayerArmorModel {
             }
         }
     }
-
 }
 
 

@@ -1,6 +1,6 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.harvest;
 
-import org.dreamtinker.dreamtinker.utils.DTDeathLoots;
+import org.dreamtinker.dreamtinker.utils.LootHelper.DTDeathLoots;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -18,6 +18,13 @@ public class ForceDrop extends Modifier implements MeleeHitModifierHook {
 
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
+        if (null != context.getLivingTarget()){
+            DTDeathLoots.dropAllDeathLootVanilla(context.getLivingTarget(), context.makeDamageSource());
+        }
+    }
+
+    @Override
+    public void failedMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageAttempted) {
         if (null != context.getLivingTarget()){
             DTDeathLoots.dropAllDeathLootVanilla(context.getLivingTarget(), context.makeDamageSource());
         }

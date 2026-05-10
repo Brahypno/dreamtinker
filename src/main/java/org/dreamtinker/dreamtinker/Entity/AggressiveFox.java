@@ -38,8 +38,8 @@ import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
-import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
+import org.dreamtinker.dreamtinker.utils.DTToolsPartsHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.TinkerTags;
 
@@ -63,7 +63,8 @@ public class AggressiveFox extends Fox implements NeutralMob {
     private long lastStoredWeaponCheckGameTime = 0L;
 
     private void reRollStoredWeapon() {
-        this.storedWeapon = DTHelper.randomTinkerTool(TinkerTags.Items.MELEE_PRIMARY, false, this.level().random, DreamtinkerModifiers.Ids.aggressiveFoxUsage);
+        this.storedWeapon =
+                DTToolsPartsHelper.randomTinkerTool(TinkerTags.Items.MELEE_PRIMARY, false, this.level().random, DreamtinkerModifiers.Ids.aggressiveFoxUsage);
     }
 
 
