@@ -53,6 +53,8 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             .addOptional(Ids.bic_dark_armor_plate);
         this.tag(TinkerTags.Modifiers.HARVEST_UPGRADES)
             .add(Ids.falsify_fate);
+        this.tag(TinkerTags.Modifiers.SPECIAL_DEFENSE)
+            .add(Ids.reprise_protection);
 
         this.tag(TinkerTags.Modifiers.GENERAL_SLOTLESS)
             .add(mei.getId(), fox_blessing.getId())

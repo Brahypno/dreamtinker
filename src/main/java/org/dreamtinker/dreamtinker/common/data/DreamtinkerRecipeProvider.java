@@ -1264,6 +1264,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(Items.TNT)
                              .setMaxLevel(1)
                              .setSlots(SlotType.ABILITY, 1)
+                             .disallowCrystal()
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.continuous_explode, abilitySalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.continuous_explode, abilityFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.continuous_explode)
@@ -1273,6 +1274,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMinLevel(2)
                              .setMaxLevel(3)
                              .setSlots(SlotType.UPGRADE, 1)
+                             .disallowCrystal()
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.continuous_explode, upgradeSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.continuous_explode, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.force_to_explosion)
@@ -1335,6 +1337,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(Items.POWDER_SNOW_BUCKET)
                              .setMaxLevel(2)
                              .setSlots(SlotType.UPGRADE, 1)
+                             .disallowCrystal()
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.icy_memory, upgradeSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.icy_memory, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.icy_memory)
@@ -1343,6 +1346,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(DreamtinkerCommon.despair_gem.get())
                              .setLevelRange(3, 3)
                              .setSlots(DTSlotType.DELUSION, 1)
+                             .disallowCrystal()
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.icy_memory, soulSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.icy_memory, soulFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.hate_memory)
@@ -1569,6 +1573,13 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(Tags.Items.GEMS_PRISMARINE, 15)
                              .setMaxLevel(1)
                              .save(consumer, prefix(DreamtinkerModifiers.fox_blessing, slotlessFolder));
+        Ingredient protectableTools = ingredientFromTags(TinkerTags.Items.ARMOR, TinkerTags.Items.HELD);
+        IncrementalModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.reprise_protection)
+                                        .setInput(DreamtinkerCommon.twist_obsidian_pane.get(), 1, 6)
+                                        .setSlots(SlotType.DEFENSE, 1)
+                                        .setTools(protectableTools)
+                                        .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.reprise_protection, defenseSalvage))
+                                        .save(consumer, prefix(DreamtinkerModifiers.Ids.reprise_protection, defenseFolder));
         // Start of enigmaticlegacy modifiers
         wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.life_looting)
@@ -1583,6 +1594,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(EnigmaticItems.THE_TWIST, 1)
                              .setMaxLevel(1)
                              .setSlots(SlotType.ABILITY, 1)
+                             .disallowCrystal()
                              .saveSalvage(wrapped, prefix(DreamtinkerModifiers.weapon_books, abilitySalvage))
                              .save(wrapped, prefix(DreamtinkerModifiers.weapon_books, abilityFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.weapon_books)
@@ -1590,6 +1602,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(EnigmaticItems.THE_INFINITUM, 1)
                              .setLevelRange(2, 2)
                              .setSlots(SlotType.UPGRADE, 1)
+                             .disallowCrystal()
                              .saveSalvage(wrapped, prefix(DreamtinkerModifiers.weapon_books, upgradeSalvage))
                              .save(wrapped, prefix(DreamtinkerModifiers.weapon_books, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.weapon_books)
@@ -1597,6 +1610,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(EnigmaticItems.THE_TWIST, 1)
                              .addInput(EnigmaticItems.ABYSSAL_HEART, 1)
                              .setLevelRange(3, 3)
+                             .disallowCrystal()
                              .setSlots(DTSlotType.DELUSION, 1)
                              .saveSalvage(wrapped, prefix(DreamtinkerModifiers.weapon_books, soulSalvage))
                              .save(wrapped, prefix(DreamtinkerModifiers.weapon_books, soulFolder));

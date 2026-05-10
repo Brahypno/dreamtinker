@@ -3,6 +3,9 @@
   "modules": [
     {
       "type": "dreamtinker:reprise_protection_module",
+      "hooks": [
+        "tconstruct:modify_hurt"
+      ],
       "percentage": {
         "flat": 0.5
       }

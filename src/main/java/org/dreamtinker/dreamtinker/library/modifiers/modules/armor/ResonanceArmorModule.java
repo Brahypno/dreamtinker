@@ -45,7 +45,7 @@ public record ResonanceArmorModule(
             TinkerDataCapability.TinkerDataKey.of(Dreamtinker.getLocation("armor_resonance"));
 
     private static final List<ModuleHook<?>> DEFAULT_HOOKS =
-            HookProvider.<ResonanceArmorModule>defaultHooks(ModifierHooks.MODIFY_DAMAGE, ModifierHooks.TOOLTIP);
+            HookProvider.<ResonanceArmorModule>defaultHooks(ModifierHooks.TOOLTIP);
 
     public static ResonanceArmorModule.Builder builder() {
         return new ResonanceArmorModule.Builder();

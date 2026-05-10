@@ -3,6 +3,9 @@
   "modules": [
     {
       "type": "dreamtinker:armor_resonance_module",
+      "hooks": [
+        "tconstruct:modify_hurt"
+      ],
       "percentage": {
         "flat": 0.4
       }

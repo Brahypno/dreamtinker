@@ -46,10 +46,10 @@ public record RepriseProtectionModule(
             RepriseProtectionModule::new);
 
     private static final List<ModuleHook<?>> DEFAULT_HOOKS =
-            HookProvider.<RepriseProtectionModule>defaultHooks(ModifierHooks.MODIFY_DAMAGE, ModifierHooks.TOOLTIP);
+            HookProvider.<RepriseProtectionModule>defaultHooks(ModifierHooks.TOOLTIP);
 
     private static final TinkerDataCapability.TinkerDataKey<SlotInChargeModule.SlotInCharge> SLOT_KEY =
-            TinkerDataCapability.TinkerDataKey.of(Dreamtinker.getLocation("repeated_protection"));
+            TinkerDataCapability.TinkerDataKey.of(Dreamtinker.getLocation("reprise_protection"));
 
     public static RepriseProtectionModule.Builder builder() {
         return new RepriseProtectionModule.Builder();
@@ -57,7 +57,7 @@ public record RepriseProtectionModule(
 
     @Override
     public float modifyDamageTaken(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount, boolean isDirectDamage) {
-        if (DamageSourcePredicate.CAN_PROTECT.matches(source) && condition.matches(tool, modifier) &&
+        if (condition.matches(tool, modifier) &&
             SlotInChargeModule.isInCharge(context.getTinkerData(), SLOT_KEY, slotType)){
             float modifierValue = 0;
             LivingEntity entity = context.getEntity();
@@ -79,7 +79,7 @@ public record RepriseProtectionModule(
                 if (entity.getType().is(TinkerTags.EntityTypes.SMALL_ARMOR)){
                     modifierValue *= 4;
                 }
-            }else if (DamageSourcePredicate.CAN_PROTECT.matches(source) && entity.getType().is(TinkerTags.EntityTypes.SMALL_ARMOR)){
+            }else if (entity.getType().is(TinkerTags.EntityTypes.SMALL_ARMOR)){
                 modifierValue = EnchantmentHelper.getDamageProtection(entity.getArmorSlots(), source) * 4;
             }
             float scaledLevel = modifier.getEffectiveLevel();

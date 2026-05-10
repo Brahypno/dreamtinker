@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:reprise_protection",
+  "text": [
+    {
+      "text": "Gain +25% Protection Reprise Per level. Protection Reprise would reduce damage based on uncapped protection value of current damage. This one reduce before aromor/protection"
+    }
+  ],
+  "more_text_space": true,
+  "effects": [
+    "Can apply levels incrementally",
+    "Requires 1 defense slot per level"
+  ]
+}

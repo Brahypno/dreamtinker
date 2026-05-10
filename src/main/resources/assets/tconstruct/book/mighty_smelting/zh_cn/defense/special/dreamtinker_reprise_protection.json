@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:reprise_protection",
+  "text": [
+    {
+      "text": "每级获得25%保护复演。保护复演会根据已有对该伤害的未封顶的保护值进行一定比例的减伤。本强化的时点在保护、护甲前"
+    }
+  ],
+  "more_text_space": true,
+  "effects": [
+    "可以逐级强化",
+    "每级需要1个防御槽"
+  ]
+}
