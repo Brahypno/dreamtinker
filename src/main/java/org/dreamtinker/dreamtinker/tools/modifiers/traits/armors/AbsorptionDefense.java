@@ -57,4 +57,9 @@ public class AbsorptionDefense extends ArmorModifier {
 
     @Override
     public boolean isNoLevels() {return false;}
+
+    @Override
+    public int getPriority() {
+        return -DEFAULT_PRIORITY;
+    }
 }
