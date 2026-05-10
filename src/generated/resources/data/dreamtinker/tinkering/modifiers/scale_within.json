@@ -2,7 +2,7 @@
   "level_display": "tconstruct:no_levels",
   "modules": [
     {
-      "type": "dreamtinker:repeated_armor_module",
+      "type": "dreamtinker:armor_resonance_module",
       "percentage": {
         "flat": 0.4
       }

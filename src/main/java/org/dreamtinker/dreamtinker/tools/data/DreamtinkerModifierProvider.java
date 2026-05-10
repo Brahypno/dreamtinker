@@ -34,8 +34,8 @@ import org.dreamtinker.dreamtinker.common.DreamtinkerAttributes;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
-import org.dreamtinker.dreamtinker.library.modifiers.modules.armor.RepeatedArmorModule;
-import org.dreamtinker.dreamtinker.library.modifiers.modules.armor.RepeatedProtectionModule;
+import org.dreamtinker.dreamtinker.library.modifiers.modules.armor.RepriseProtectionModule;
+import org.dreamtinker.dreamtinker.library.modifiers.modules.armor.ResonanceArmorModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.MobEffectsRemoverModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.SelfMobEffectModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.harvest.BlockLootMultiplierModule;
@@ -523,11 +523,11 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(MaterialRepairModule.material(DreamtinkerMaterialIds.scolecite).constant(500));
         buildModifier(Ids.scale_within)
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
-                .addModule(new RepeatedArmorModule.Builder().percentage(LevelingValue.flat(0.4f)).build())
+                .addModule(new ResonanceArmorModule.Builder().percentage(LevelingValue.flat(0.4f)).build())
                 .addModule(AttributeModule.builder(DreamtinkerAttributes.BLOOD_IN_SHELL, AttributeModifier.Operation.ADDITION).flat(6f));
         buildModifier(Ids.wing_without)
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
-                .addModule(new RepeatedProtectionModule.Builder().percentage(LevelingValue.flat(0.5f)).build())
+                .addModule(new RepriseProtectionModule.Builder().percentage(LevelingValue.flat(0.5f)).build())
                 .addModule(ProtectionModule.builder()
                                            .sources(DamageSourcePredicate.ANY, DamageSourcePredicate.ANY)
                                            .flat(3.0f))

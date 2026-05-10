@@ -32,22 +32,23 @@ import java.util.List;
 
 import static net.minecraft.world.damagesource.CombatRules.getDamageAfterAbsorb;
 
-public record RepeatedArmorModule(
+public record ResonanceArmorModule(
         LevelingValue percentage,
         ModifierCondition<IToolStackView> condition) implements ModifyDamageModifierHook, TooltipModifierHook, ModifierModule, ModifierCondition.ConditionalModule<IToolStackView> {
 
-    public static final RecordLoadable<RepeatedArmorModule> LOADER = RecordLoadable.create(
-            LevelingValue.LOADABLE.defaultField("percentage", LevelingValue.eachLevel(0.25f), false, RepeatedArmorModule::percentage),
+    public static final RecordLoadable<ResonanceArmorModule> LOADER = RecordLoadable.create(
+            LevelingValue.LOADABLE.defaultField("percentage", LevelingValue.eachLevel(0.25f), false, ResonanceArmorModule::percentage),
             ModifierCondition.TOOL_FIELD,
-            RepeatedArmorModule::new);
+            ResonanceArmorModule::new);
 
     private static final TinkerDataCapability.TinkerDataKey<SlotInChargeModule.SlotInCharge> SLOT_KEY =
-            TinkerDataCapability.TinkerDataKey.of(Dreamtinker.getLocation("repeated_armor"));
+            TinkerDataCapability.TinkerDataKey.of(Dreamtinker.getLocation("armor_resonance"));
 
-    private static final List<ModuleHook<?>> DEFAULT_HOOKS = HookProvider.<RepeatedArmorModule>defaultHooks(ModifierHooks.MODIFY_DAMAGE, ModifierHooks.TOOLTIP);
+    private static final List<ModuleHook<?>> DEFAULT_HOOKS =
+            HookProvider.<ResonanceArmorModule>defaultHooks(ModifierHooks.MODIFY_DAMAGE, ModifierHooks.TOOLTIP);
 
-    public static RepeatedArmorModule.Builder builder() {
-        return new RepeatedArmorModule.Builder();
+    public static ResonanceArmorModule.Builder builder() {
+        return new ResonanceArmorModule.Builder();
     }
 
     @Override
@@ -70,7 +71,7 @@ public record RepeatedArmorModule(
             float scaledLevel = modifier.getEffectiveLevel();
             float percentage = this.percentage.compute(scaledLevel);
             Component.literal(Util.PERCENT_BOOST_FORMAT.format(percentage))
-                     .append(" ").append(Component.translatable(modifier.getModifier().getTranslationKey() + ".repeated_armor"));
+                     .append(" ").append(Component.translatable(modifier.getModifier().getTranslationKey() + ".armor_resonance"));
         }
     }
 
@@ -85,17 +86,17 @@ public record RepeatedArmorModule(
     }
 
     @Override
-    public RecordLoadable<RepeatedArmorModule> getLoader() {
+    public RecordLoadable<ResonanceArmorModule> getLoader() {
         return LOADER;
     }
 
     /**
      * Builder for this modifier in datagen
      */
-    public static class Builder extends ModuleBuilder.Stack<RepeatedArmorModule.Builder> {
+    public static class Builder extends ModuleBuilder.Stack<ResonanceArmorModule.Builder> {
         private LevelingValue percentage = LevelingValue.eachLevel(0.25f);
 
-        public RepeatedArmorModule.Builder percentage(LevelingValue percentage) {
+        public ResonanceArmorModule.Builder percentage(LevelingValue percentage) {
             this.percentage = percentage;
             return this;
         }
@@ -103,8 +104,8 @@ public record RepeatedArmorModule(
         /**
          * Builds the finished modifier
          */
-        public RepeatedArmorModule build() {
-            return new RepeatedArmorModule(percentage, condition);
+        public ResonanceArmorModule build() {
+            return new ResonanceArmorModule(percentage, condition);
         }
     }
 }

@@ -36,23 +36,23 @@ import java.util.List;
 
 import static slimeknights.tconstruct.library.tools.helper.ArmorUtil.getDamageAfterMagicAbsorb;
 
-public record RepeatedProtectionModule(
+public record RepriseProtectionModule(
         LevelingValue percentage,
         ModifierCondition<IToolStackView> condition) implements ModifyDamageModifierHook, TooltipModifierHook, ModifierModule, ModifierCondition.ConditionalModule<IToolStackView> {
 
-    public static final RecordLoadable<RepeatedProtectionModule> LOADER = RecordLoadable.create(
-            LevelingValue.LOADABLE.defaultField("percentage", LevelingValue.eachLevel(0.25f), false, RepeatedProtectionModule::percentage),
+    public static final RecordLoadable<RepriseProtectionModule> LOADER = RecordLoadable.create(
+            LevelingValue.LOADABLE.defaultField("percentage", LevelingValue.eachLevel(0.25f), false, RepriseProtectionModule::percentage),
             ModifierCondition.TOOL_FIELD,
-            RepeatedProtectionModule::new);
+            RepriseProtectionModule::new);
 
     private static final List<ModuleHook<?>> DEFAULT_HOOKS =
-            HookProvider.<RepeatedProtectionModule>defaultHooks(ModifierHooks.MODIFY_DAMAGE, ModifierHooks.TOOLTIP);
+            HookProvider.<RepriseProtectionModule>defaultHooks(ModifierHooks.MODIFY_DAMAGE, ModifierHooks.TOOLTIP);
 
     private static final TinkerDataCapability.TinkerDataKey<SlotInChargeModule.SlotInCharge> SLOT_KEY =
             TinkerDataCapability.TinkerDataKey.of(Dreamtinker.getLocation("repeated_protection"));
 
-    public static RepeatedProtectionModule.Builder builder() {
-        return new RepeatedProtectionModule.Builder();
+    public static RepriseProtectionModule.Builder builder() {
+        return new RepriseProtectionModule.Builder();
     }
 
     @Override
@@ -100,7 +100,7 @@ public record RepeatedProtectionModule(
             float scaledLevel = modifier.getEffectiveLevel();
             float percentage = this.percentage.compute(scaledLevel);
             Component.literal(Util.PERCENT_BOOST_FORMAT.format(percentage))
-                     .append(" ").append(Component.translatable(modifier.getModifier().getTranslationKey() + ".repeated_protection"));
+                     .append(" ").append(Component.translatable(modifier.getModifier().getTranslationKey() + ".reprise_protection"));
         }
     }
 
@@ -115,17 +115,17 @@ public record RepeatedProtectionModule(
     }
 
     @Override
-    public RecordLoadable<RepeatedProtectionModule> getLoader() {
+    public RecordLoadable<RepriseProtectionModule> getLoader() {
         return LOADER;
     }
 
     /**
      * Builder for this modifier in datagen
      */
-    public static class Builder extends ModuleBuilder.Stack<RepeatedProtectionModule.Builder> {
+    public static class Builder extends ModuleBuilder.Stack<RepriseProtectionModule.Builder> {
         private LevelingValue percentage = LevelingValue.eachLevel(0.25f);
 
-        public RepeatedProtectionModule.Builder percentage(LevelingValue percentage) {
+        public RepriseProtectionModule.Builder percentage(LevelingValue percentage) {
             this.percentage = percentage;
             return this;
         }
@@ -133,8 +133,8 @@ public record RepeatedProtectionModule(
         /**
          * Builds the finished modifier
          */
-        public RepeatedProtectionModule build() {
-            return new RepeatedProtectionModule(percentage, condition);
+        public RepriseProtectionModule build() {
+            return new RepriseProtectionModule(percentage, condition);
         }
     }
 }

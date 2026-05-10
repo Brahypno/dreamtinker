@@ -2,7 +2,7 @@
   "level_display": "tconstruct:no_levels",
   "modules": [
     {
-      "type": "dreamtinker:repeated_protection_module",
+      "type": "dreamtinker:reprise_protection_module",
       "percentage": {
         "flat": 0.5
       }

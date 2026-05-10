@@ -16,8 +16,8 @@ import net.minecraftforge.registries.RegisterEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.DreamtinkerModule;
 import org.dreamtinker.dreamtinker.common.data.tags.ModifierTagProvider;
-import org.dreamtinker.dreamtinker.library.modifiers.modules.armor.RepeatedArmorModule;
-import org.dreamtinker.dreamtinker.library.modifiers.modules.armor.RepeatedProtectionModule;
+import org.dreamtinker.dreamtinker.library.modifiers.modules.armor.RepriseProtectionModule;
+import org.dreamtinker.dreamtinker.library.modifiers.modules.armor.ResonanceArmorModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.MobEffectsRemoverModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.SelfMobEffectModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.harvest.BlockLootMultiplierModule;
@@ -285,8 +285,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             ModifierModule.LOADER.register(Dreamtinker.getLocation("self_mob_effect"), SelfMobEffectModule.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("block_loot_multiplier"), BlockLootMultiplierModule.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("entity_loot_multiplier"), EntityLootMultiplierModule.LOADER);
-            ModifierModule.LOADER.register(Dreamtinker.getLocation("repeated_armor_module"), RepeatedArmorModule.LOADER);
-            ModifierModule.LOADER.register(Dreamtinker.getLocation("repeated_protection_module"), RepeatedProtectionModule.LOADER);
+            ModifierModule.LOADER.register(Dreamtinker.getLocation("armor_resonance_module"), ResonanceArmorModule.LOADER);
+            ModifierModule.LOADER.register(Dreamtinker.getLocation("reprise_protection_module"), RepriseProtectionModule.LOADER);
         }
     }
 
