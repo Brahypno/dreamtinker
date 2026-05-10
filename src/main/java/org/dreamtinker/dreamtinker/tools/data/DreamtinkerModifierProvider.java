@@ -162,6 +162,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                     .addModules(ModifierSlotModule.slot(SlotType.ABILITY).flat(1),
                                                 ModifierSlotModule.slot(SlotType.DEFENSE).flat(1),
                                                 ModifierSlotModule.slot(DTSlotType.DELUSION).flat(1),
+                                                ModifierSlotModule.slot(SlotType.SOUL).flat(1),
                                                 ModifierSlotModule.slot(SlotType.UPGRADE).flat(1));
         buildModifier(Ids.wither_body).levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                                       .addModule(new EffectImmunityModule(MobEffects.POISON))

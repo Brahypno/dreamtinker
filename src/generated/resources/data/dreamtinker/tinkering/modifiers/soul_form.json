@@ -19,6 +19,11 @@
     {
       "type": "tconstruct:modifier_slot",
       "flat": 1,
+      "name": "souls"
+    },
+    {
+      "type": "tconstruct:modifier_slot",
+      "flat": 1,
       "name": "upgrades"
     }
   ],
