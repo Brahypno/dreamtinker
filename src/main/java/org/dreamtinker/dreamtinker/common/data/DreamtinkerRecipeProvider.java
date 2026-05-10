@@ -410,9 +410,9 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
 
     private void addMeltingRecipes(Consumer<FinishedRecipe> consumer) {
-        MeltingFuelBuilder.fuel(DreamtinkerFluids.molten_lupi_antimony.ingredient(FluidValues.SIP), 360, 3600)
+        MeltingFuelBuilder.fuel(DreamtinkerFluids.molten_lupi_antimony.ingredient(FluidValues.SIP), 666, 6666)
                           .save(consumer, location(Melting_folder + "fuel/molten_lupi_antimony"));
-        MeltingFuelBuilder.fuel(DreamtinkerFluids.reversed_shadow.ingredient(FluidValues.SIP), 220, 2200)
+        MeltingFuelBuilder.fuel(DreamtinkerFluids.reversed_shadow.ingredient(FluidValues.SIP), 180, 3600)
                           .save(consumer, location(Melting_folder + "fuel/reversed_shadow"));
 
         meltCastBlock(DreamtinkerFluids.molten_crying_obsidian.get(), Items.CRYING_OBSIDIAN, FluidValues.GLASS_BLOCK, consumer);

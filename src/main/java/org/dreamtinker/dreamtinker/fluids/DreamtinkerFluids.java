@@ -135,7 +135,7 @@ public class DreamtinkerFluids {
                               }
                           });
     public static final FlowingFluidObject<ForgeFlowingFluid> molten_lupi_antimony =
-            registerFluid(FLUIDS, "molten_lupi_antimony", 2500, 44, 7676, 15,
+            registerFluid(FLUIDS, "molten_lupi_antimony", 3600, 44, 7676, 15,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_BLACK, 0), 30000, 8) {
                               @Override
                               public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
@@ -246,7 +246,7 @@ public class DreamtinkerFluids {
             FLUIDS.register("molten_desire").type(createFluidType(1400, 15, 200, -1000)).bucket().invertedFlowing();
 
     public static final FlowingFluidObject<ForgeFlowingFluid> despair_essence =
-            registerFluid(FLUIDS, "despair_essence", 3900, 100, 1000000, 0,
+            registerFluid(FLUIDS, "despair_essence", 4130, 100, 1000000, 0,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_BLACK, 0), 0, 0) {});
 
     public static final FlowingFluidObject<ForgeFlowingFluid> molten_soul_steel =
