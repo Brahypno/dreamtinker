@@ -24,6 +24,9 @@ import java.util.List;
 import static org.dreamtinker.dreamtinker.tools.modifiers.events.OathGuardPaleSteelEvents.*;
 
 public class ForOath extends BattleModifier {
+    @Override
+    public boolean isNoLevels() {return false;}
+
     private static void grantGuardianAbsorption(
             ServerPlayer player,
             ServerLevel serverLevel,

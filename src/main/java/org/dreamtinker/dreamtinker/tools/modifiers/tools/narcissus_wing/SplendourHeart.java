@@ -108,6 +108,11 @@ public class SplendourHeart extends BattleModifier {
     }
 
     @Override
+    public void failedMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageAttempted) {
+        afterMeleeHit(tool, modifier, context, damageAttempted);
+    }
+
+    @Override
     public void addToolStats(IToolContext context, ModifierEntry modifier, ModifierStatsBuilder builder) {
         if (context.getPersistentData().contains(TAG_ADV_PERCENTAGE)){
             float per = context.getPersistentData().getFloat(TAG_ADV_PERCENTAGE);

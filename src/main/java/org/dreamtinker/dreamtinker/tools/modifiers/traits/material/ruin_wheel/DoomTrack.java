@@ -10,10 +10,13 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.common.Tags;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.GoliathDamage;
+import org.dreamtinker.dreamtinker.utils.DTMethodHandler;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
@@ -23,6 +26,10 @@ import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.IndestructibleItemEntity;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
+import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
+import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
+
+import javax.annotation.Nullable;
 
 import static org.dreamtinker.dreamtinker.utils.DTHelper.getPositiveAttributeBonus;
 
@@ -161,18 +168,36 @@ public class DoomTrack extends BattleModifier {
 
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        LivingEntity target = context.getLivingTarget();
+        deal_damage(tool, modifier, context.getLivingTarget(), context.getAttacker(), context.makeDamageSource(), damageDealt, null);
+
+    }
+
+    @Override
+    public void failedMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageAttempted) {
+        afterMeleeHit(tool, modifier, context, damageAttempted);
+    }
+
+    @Override
+    public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target, boolean notBlocked) {
+        deal_damage(null, modifier, target, attacker, projectile.damageSources().mobProjectile(projectile, attacker), 15 * modifier.getLevel(), projectile);
+        return false;
+    }
+
+
+    private void deal_damage(IToolStackView tool, ModifierEntry modifier, LivingEntity target, LivingEntity attacker, DamageSource source, float damageDealt, Projectile Projectile) {
         if (null != target && target.isAlive()){
-            DamageSource dmg = DreamtinkerDamageTypes.source(target.level().registryAccess(), DreamtinkerDamageTypes.ruin_wheel, context.makeDamageSource());
+            DamageSource dmg = DreamtinkerDamageTypes.source(target.level().registryAccess(), DreamtinkerDamageTypes.ruin_wheel, source);
             if (!target.isInvulnerableTo(dmg)){
-                float Theoretical_damage = Math.max(0.5f, DTModifierCheck.getMeleeDamage(context.getAttacker(), context.getTarget(), tool, true));
+                float Theoretical_damage = null != Projectile ? DTModifierCheck.getDamage(Projectile) :
+                                           Math.max(0.5f, DTModifierCheck.getMeleeDamage(attacker, target, tool, true));
                 Theoretical_damage = Math.max(Theoretical_damage, damageDealt);
                 Theoretical_damage *=
-                        proofByResistanceMultiplier(context.getAttacker(), target, dmg, modifier.getLevel(), context.isProjectile());
+                        proofByResistanceMultiplier(attacker, target, dmg, modifier.getLevel(), null != Projectile);
                 target.invulnerableTime = 0;
-                target.hurt(dmg, Theoretical_damage);
+                DTMethodHandler.invokeLivingHurt(target, dmg, Theoretical_damage);
                 spawnOrdainedRuinFx((ServerLevel) target.level(), target, modifier.getLevel());
             }
         }
     }
+
 }

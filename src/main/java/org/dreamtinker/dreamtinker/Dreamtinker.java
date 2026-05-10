@@ -1,5 +1,6 @@
 package org.dreamtinker.dreamtinker;
 
+import com.mojang.logging.LogUtils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -68,6 +69,7 @@ import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.curio.curio_hu
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.enigmatic_legacy.EL_events;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.malum.malum_events_handler;
 import org.dreamtinker.dreamtinker.world.data.DTDataPackProvider;
+import org.slf4j.Logger;
 import slimeknights.tconstruct.library.utils.Util;
 
 import java.util.List;
@@ -79,6 +81,7 @@ public class Dreamtinker {
 
     // Define mod id in a common place for everything to reference
     public static final String MODID = "dreamtinker";
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     private static List<? extends String> compact_config;
     private static Boolean compactRestriction;

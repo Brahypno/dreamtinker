@@ -38,7 +38,6 @@ import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.FirthMa
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.homunculusLifeCurseMaxEffectLevel;
 import static org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.WeaponTransformation.valueExpSoftCap;
 import static org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.knockArts.TAG_KNOCK;
-import static org.dreamtinker.dreamtinker.tools.modifiers.traits.material.ruin_wheel.DoomTrack.proofByResistanceMultiplier;
 
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
@@ -46,7 +45,6 @@ public class GeneralHurtHandler {
     private static final int allowed_extra_times = 1;
     private static final ThreadLocal<Integer> cry_extra_attack_depth = ThreadLocal.withInitial(() -> 0);
     private static final ThreadLocal<Integer> arcane_extra_attack_depth = ThreadLocal.withInitial(() -> 0);
-    private static final ThreadLocal<Integer> ruin_extra_attack_depth = ThreadLocal.withInitial(() -> 0);
 
     @SubscribeEvent(priority = EventPriority.LOW)
     static void SecondaryNoneEquipmentHurtHandler(LivingHurtEvent event) {
@@ -122,25 +120,6 @@ public class GeneralHurtHandler {
                         damageAmount *= (1 + FirthMark.get().floatValue() * 5);
                     }
                     data.putInt(tag, times);
-                }
-
-                int doom = Math.max(DTModifierCheck.getMainhandModifierLevel(offender, DreamtinkerModifiers.doom_track.getId()),
-                                    null != modifiers ? modifiers.getLevel(DreamtinkerModifiers.doom_track.getId()) : 0);
-                if (0 < doom){
-                    int depth = ruin_extra_attack_depth.get();
-                    if (depth < allowed_extra_times){
-                        try {
-                            ruin_extra_attack_depth.set(depth + 1);
-                            DamageSource ruin_dmg =
-                                    DreamtinkerDamageTypes.source(victim.level().registryAccess(), DreamtinkerDamageTypes.ruin_wheel, dmg);
-                            float damage = damageAmount *
-                                           proofByResistanceMultiplier(offender, victim, ruin_dmg, doom, true);
-                            victim.hurt(ruin_dmg, damage);
-                        }
-                        finally {
-                            ruin_extra_attack_depth.set(depth);
-                        }
-                    }
                 }
             }
 

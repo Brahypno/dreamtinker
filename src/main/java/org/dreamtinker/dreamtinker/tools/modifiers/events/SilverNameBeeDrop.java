@@ -1,28 +1,12 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.events;
 
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.storage.loot.LootParams;
-import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -30,14 +14,7 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
-import org.dreamtinker.dreamtinker.utils.LootHelper.LootEntryInspector;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.SilverNameBeeNum;
+import org.dreamtinker.dreamtinker.utils.LootHelper.DTLoots;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class SilverNameBeeDrop {
@@ -64,101 +41,8 @@ public class SilverNameBeeDrop {
               (livingAttacker.hasEffect(DreamtinkerEffects.SilverNameBee.get()) || DTModifierCheck.ModifierInHand(livingAttacker,
                                                                                                                   DreamtinkerModifiers.Ids.silver_name_bee))))
             return;
-
-        LootParams.Builder builder = new LootParams.Builder(serverLevel).withParameter(LootContextParams.THIS_ENTITY, victim)
-                                                                        .withParameter(LootContextParams.ORIGIN, victim.position())
-                                                                        .withParameter(LootContextParams.DAMAGE_SOURCE, event.getSource())
-                                                                        .withOptionalParameter(LootContextParams.KILLER_ENTITY, attacker)
-                                                                        .withOptionalParameter(LootContextParams.DIRECT_KILLER_ENTITY,
-                                                                                               event.getSource().getDirectEntity())
-                                                                        .withOptionalParameter(LootContextParams.LAST_DAMAGE_PLAYER,
-                                                                                               attacker instanceof ServerPlayer ? (ServerPlayer) attacker :
-                                                                                               null);
-
-        ItemStack originalTool = livingAttacker.getMainHandItem();
-        ItemStack lootingTool = originalTool.copy();
-
-        // 设置或追加 Looting 附魔为 1000 级
-        Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(lootingTool);
-        enchantments.put(Enchantments.MOB_LOOTING, 1000);
-        EnchantmentHelper.setEnchantments(enchantments, lootingTool);
-
-        builder.withOptionalParameter(LootContextParams.TOOL, lootingTool);
-
-        MinecraftServer server = serverLevel.getServer();
-        LootParams params = builder.create(LootContextParamSets.ENTITY);
-        ResourceLocation tableId = victim.getLootTable();
-        LootTable table = server.getLootData().getLootTable(tableId);
-
-        try {
-            rollRareEntries(table, victim, params, serverLevel);
-        }
-        catch (Exception ignored) {}
-    }
-
-    private static void rollRareEntries(LootTable table, LivingEntity entity, LootParams params, ServerLevel level) {
-        RandomSource rng = level.getRandom();
-        List<LootPoolEntryContainer> rareEntries = new ArrayList<>();
-
-        // 通过反射获取 pools 与 entries（避免对表结构做 AT）
-        List<LootPool> pools = LootEntryInspector.get(table, "pools");
-        if (pools != null){
-            for (LootPool pool : pools) {
-                List<LootPoolEntryContainer> entries = LootEntryInspector.get(pool, "entries");
-                if (entries == null)
-                    continue;
-                for (LootPoolEntryContainer entry : entries) {
-                    if (isRare(entry)){
-                        rareEntries.add(entry);
-                    }
-                }
-            }
-        }
-
-
-        if (!rareEntries.isEmpty()){
-            LootPoolEntryContainer chosen = rareEntries.get(rng.nextInt(rareEntries.size()));
-            entity.spawnAtLocation(LootEntryInspector.getItemStack(chosen));
-        }else {
-            Map<Item, Integer> totals = new HashMap<>();
-
-            for (int i = 0; i < 100; i++) {
-                List<ItemStack> round = table.getRandomItems(params);
-                for (ItemStack stack : round) {
-                    if (!stack.isEmpty() && stack.getItem() != Items.AIR){
-                        totals.merge(stack.getItem(), stack.getCount(), Integer::sum);
-                    }
-                }
-            }
-
-
-            if (!totals.isEmpty()){
-                Map.Entry<Item, Integer> smallestEntry = totals.entrySet().stream().min(Map.Entry.comparingByValue()).orElse(null);
-
-                if (smallestEntry != null){
-                    ItemStack smallest = new ItemStack(smallestEntry.getKey(), SilverNameBeeNum.get());
-                    //System.out.println("[DEBUG] 最小掉落: " + smallest.getCount() + " × " + smallest.getItem().getDescriptionId());
-                    entity.spawnAtLocation(smallest);
-                }
-            }
-
-        }
-
-    }
-
-    private static boolean isRare(LootPoolEntryContainer entry) {
-        // 1) 静态结构：entry 绑定的 conditions
-        LootItemCondition[] conditions = LootEntryInspector.getConditions(entry);
-        if (conditions != null){
-            for (LootItemCondition c : conditions) {
-                if (c != null && (LootEntryInspector.isLowChanceCondition(c) || LootEntryInspector.matchRareKeys(c))){
-                    return true;
-                }
-            }
-        }
-
-        // 2) 函数上的条件（需要 LootContext；使用固定种子使结果可复现）
-        return LootEntryInspector.hasRareFunctionCondition(entry) || LootEntryInspector.rarityfromitem(entry);
+        event.getDrops().add(new ItemEntity(serverLevel, victim.getX(), victim.getY(), victim.getZ(),
+                                            DTLoots.tryExtractRareLoot(serverLevel, victim, 1, event.getLootingLevel())));
     }
 
 }

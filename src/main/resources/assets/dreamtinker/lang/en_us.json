@@ -359,7 +359,7 @@
   "modifier.dreamtinker.despair_rain.description": "Reduce not critical damage by half;Gain 500% critical damage rate;HP can only be 1;",
   "modifier.dreamtinker.despair_wind": "Desolate Hush",
   "modifier.dreamtinker.despair_wind.flavor": "Inevitable",
-  "modifier.dreamtinker.despair_wind.description": "When attack, clear absorption, all armor and toughness and drop all items;Deal extra despair damage",
+  "modifier.dreamtinker.despair_wind.description": "When attack, clear absorption, all armor and toughness and drop all items;Deal extra despair damage that by pass invulnerability",
   "modifier.dreamtinker.ophelia": "Ophelia",
   "modifier.dreamtinker.ophelia.flavor": "Glided with the trembling water, lost to the slow green flow",
   "modifier.dreamtinker.ophelia.description": "Split damage received to 2*total effective level +1 damages with random source",

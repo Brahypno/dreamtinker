@@ -18,6 +18,7 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
+import org.dreamtinker.dreamtinker.utils.DTMethodHandler;
 import org.dreamtinker.dreamtinker.utils.MaskService;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.ResourceColorManager;
@@ -213,7 +214,7 @@ public class mei extends BattleModifier {
                     new DamageSource(
                             attacker.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DreamtinkerDamageTypes.NULL_VOID),
                             attacker, attacker);
-            target.hurt(dam, level * 2);
+            DTMethodHandler.invokeLivingHurt(target, dam, damage * level * 2);
         }
         return knockback;
     }

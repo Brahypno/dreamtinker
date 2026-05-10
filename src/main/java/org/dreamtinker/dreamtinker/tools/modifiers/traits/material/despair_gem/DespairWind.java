@@ -14,8 +14,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
+import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.utils.DTHelper;
+import org.dreamtinker.dreamtinker.utils.DTMethodHandler;
 import org.dreamtinker.dreamtinker.utils.MaskService;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
@@ -95,6 +97,9 @@ public class DespairWind extends BattleModifier {
 
     @Override
     public void failedMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageAttempted) {
+        DTMethodHandler.invokeLivingHurt(context.getLivingTarget(),
+                                         DreamtinkerDamageTypes.source(context.getLevel().registryAccess(), DreamtinkerDamageTypes.NULL_VOID,
+                                                                       context.makeDamageSource()), damageAttempted);
         if (null != context.getLivingTarget() && !context.getLivingTarget().level().isClientSide)
             remove_attributes(context.getLivingTarget());
     }

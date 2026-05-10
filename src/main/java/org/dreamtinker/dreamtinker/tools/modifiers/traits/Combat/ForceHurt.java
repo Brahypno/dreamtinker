@@ -1,6 +1,6 @@
-package org.dreamtinker.dreamtinker.tools.modifiers.traits.harvest;
+package org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat;
 
-import org.dreamtinker.dreamtinker.utils.LootHelper.DTLoots;
+import org.dreamtinker.dreamtinker.utils.DTMethodHandler;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -10,7 +10,7 @@ import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
-public class ForceDrop extends Modifier implements MeleeHitModifierHook {
+public class ForceHurt extends Modifier implements MeleeHitModifierHook {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
         hookBuilder.addHook(this, ModifierHooks.MELEE_HIT);
@@ -18,15 +18,13 @@ public class ForceDrop extends Modifier implements MeleeHitModifierHook {
 
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        if (null != context.getLivingTarget()){
-            DTLoots.dropAllDeathLootVanilla(context.getLivingTarget(), context.makeDamageSource());
-        }
+
     }
 
     @Override
     public void failedMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageAttempted) {
         if (null != context.getLivingTarget()){
-            DTLoots.dropAllDeathLootVanilla(context.getLivingTarget(), context.makeDamageSource());
+            DTMethodHandler.invokeLivingHurt(context.getLivingTarget(), context.makeDamageSource(), damageAttempted);
         }
     }
 

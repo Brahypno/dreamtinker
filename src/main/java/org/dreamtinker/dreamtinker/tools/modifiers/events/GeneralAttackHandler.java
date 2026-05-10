@@ -16,6 +16,7 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
+import org.dreamtinker.dreamtinker.utils.DTMethodHandler;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -51,7 +52,9 @@ public class GeneralAttackHandler {
                         int inv = victim.invulnerableTime;
                         victim.invulnerableTime = 0;
                         extra_attack_depth.set(depth + 1);
-                        victim.hurt(DreamtinkerDamageTypes.source(registryAccess, DreamtinkerDamageTypes.NULL_VOID, null, attacker), damageAmount);
+                        DTMethodHandler.invokeLivingHurt(victim,
+                                                         DreamtinkerDamageTypes.source(registryAccess, DreamtinkerDamageTypes.NULL_VOID, null, attacker),
+                                                         damageAmount);
                         victim.invulnerableTime = inv;
                     }
                     finally {
