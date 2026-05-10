@@ -31,7 +31,8 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
         tag(TinkerTags.Materials.NETHER_GATED).add(amber, scolecite);
         this.tag(TinkerTags.Materials.MELEE)
             .add(crying_obsidian, nigrescence_antimony, moonlight_ice, echo_alloy, metallivorous_stibium_lupus, amber, half_rotten_homunculus, desire_gem,
-                 despair_gem, scolecite, shiningFlint, cold_iron, SpikyShard, soul_steel, FifthStone, SpiralSpin, RuinWheelSteel)
+                 despair_gem, scolecite, shiningFlint, cold_iron, SpikyShard, soul_steel, FifthStone, SpiralSpin, RuinWheelSteel, OathGuardPaleSteel,
+                 ForlornOathSteel)
             .addOptional(nefarious, soul_etherium, soul_stained_steel, malignant_pewter, malignant_gluttony, shadowSilver, ArcaneGold,
                          WickedWeave, DarkMetal, MonsterSkin, PaladinBoneTool, TatteredCloth, WaterEssence, FireEssence, ManipulationEssence, Utherium,
                          forgotten_metal, Cloggrum, Froststeel);
@@ -47,7 +48,8 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
             .addOptional(spirit_fabric, soul_stained_steel, nefarious, etherium, soul_etherium, metallivorous_stibium_lupus, star_regulus, shadowSilver,
                          TatteredCloth, PaladinBoneTool, Utherium, forgotten_metal);
         this.tag(TinkerTags.Materials.BALANCED)
-            .add(valentinite, black_sapphire, scolecite, shiningFlint, RuinWheelSteel)
+            .add(valentinite, black_sapphire, scolecite, shiningFlint, RuinWheelSteel, OathGuardPaleSteel,
+                 ForlornOathSteel)
             .addOptional(MonsterSkin, astral_weave, GooeySlimeSkin);
         this.tag(TinkerTags.Materials.HEAVY)
             .add(crying_obsidian, amber, soul_steel)
