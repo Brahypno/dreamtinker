@@ -25,7 +25,7 @@
   "modules": [
     {
       "type": "tconstruct:conditional_melee_damage",
-      "each_level": 2.0,
+      "each_level": 2.5,
       "percent": false,
       "target": {
         "type": "mantle:or",

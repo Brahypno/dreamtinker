@@ -3,7 +3,7 @@
   "modules": [
     {
       "type": "tconstruct:conditional_melee_damage",
-      "each_level": 1.5,
+      "each_level": 2.0,
       "percent": false
     }
   ],

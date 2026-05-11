@@ -28,13 +28,15 @@
       "variables": {
         "armor": {
           "type": "tconstruct:entity",
-          "entity_type": "dreamtinker:armor",
+          "attribute": "minecraft:generic.armor",
+          "entity_type": "tconstruct:attribute",
           "fallback": 0.0,
           "which": "attacker"
         },
         "armor_toughness": {
           "type": "tconstruct:entity",
-          "entity_type": "dreamtinker:armor_toughness",
+          "attribute": "minecraft:generic.armor_toughness",
+          "entity_type": "tconstruct:attribute",
           "fallback": 0.0,
           "which": "attacker"
         }
@@ -69,13 +71,15 @@
       "variables": {
         "armor": {
           "type": "tconstruct:entity",
-          "entity_type": "dreamtinker:armor",
+          "attribute": "minecraft:generic.armor",
+          "entity_type": "tconstruct:attribute",
           "fallback": 0.0,
           "which": "attacker"
         },
         "armor_toughness": {
           "type": "tconstruct:entity",
-          "entity_type": "dreamtinker:armor_toughness",
+          "attribute": "minecraft:generic.armor_toughness",
+          "entity_type": "tconstruct:attribute",
           "fallback": 0.0,
           "which": "attacker"
         }

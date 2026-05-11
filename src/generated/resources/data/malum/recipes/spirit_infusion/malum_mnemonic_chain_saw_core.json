@@ -42,19 +42,19 @@
     "count": 1,
     "ingredient_list": [
       {
-        "item": "tconstruct:small_blade_cast"
+        "item": "dreamtinker:chain_saw_core_cast"
       },
       {
-        "item": "tconstruct:small_blade_sand_cast"
+        "item": "dreamtinker:chain_saw_core_sand_cast"
       },
       {
-        "item": "tconstruct:small_blade_red_sand_cast"
+        "item": "dreamtinker:chain_saw_core_red_sand_cast"
       }
     ]
   },
   "output": {
-    "item": "tconstruct:small_blade",
-    "nbt": "{Material:\"dreamtinker:malum_mnemonic_auric#mnemonic\"}"
+    "item": "dreamtinker:chain_saw_core",
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic\"}"
   },
   "spirits": [
     {

@@ -2,22 +2,22 @@
   "stats": {
     "tconstruct:maille": {},
     "tconstruct:plating_boots": {
-      "armor": 2.0,
+      "armor": 6.0,
       "durability": 494,
       "toughness": 2.0
     },
     "tconstruct:plating_chestplate": {
-      "armor": 7.0,
+      "armor": 8.0,
       "durability": 608,
       "toughness": 2.0
     },
     "tconstruct:plating_helmet": {
-      "armor": 2.0,
+      "armor": 3.0,
       "durability": 418,
       "toughness": 2.0
     },
     "tconstruct:plating_leggings": {
-      "armor": 3.5,
+      "armor": 6.0,
       "durability": 570,
       "toughness": 2.0
     },

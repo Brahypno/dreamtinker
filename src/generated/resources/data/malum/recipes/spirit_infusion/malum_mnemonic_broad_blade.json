@@ -42,19 +42,19 @@
     "count": 1,
     "ingredient_list": [
       {
-        "item": "dreamtinker:chain_saw_teeth_cast"
+        "item": "tconstruct:broad_blade_cast"
       },
       {
-        "item": "dreamtinker:chain_saw_teeth_sand_cast"
+        "item": "tconstruct:broad_blade_sand_cast"
       },
       {
-        "item": "dreamtinker:chain_saw_teeth_red_sand_cast"
+        "item": "tconstruct:broad_blade_red_sand_cast"
       }
     ]
   },
   "output": {
-    "item": "dreamtinker:chain_saw_teeth",
-    "nbt": "{Material:\"dreamtinker:malum_mnemonic_auric#mnemonic\"}"
+    "item": "tconstruct:broad_blade",
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic\"}"
   },
   "spirits": [
     {

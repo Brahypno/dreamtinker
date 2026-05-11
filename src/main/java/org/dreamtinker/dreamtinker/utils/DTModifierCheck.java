@@ -138,7 +138,7 @@ public class DTModifierCheck {
         if (null != stack && !stack.isEmpty() && stack.getItem() instanceof IModifiable){
             ToolStack toolStack = ToolStack.from(stack);
             for (ModifierEntry modifier : toolStack.getModifiers()) {
-                matched += modifier.getModifier().is(tag) ? 1 : 0;
+                matched += modifier.getModifier().is(tag) ? modifier.getLevel() : 0;
             }
         }
         return matched;

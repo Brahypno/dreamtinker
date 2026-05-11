@@ -27,7 +27,7 @@
   "ingredient": {
     "item": "malum:auric_embers"
   },
-  "material": "dreamtinker:malum_mnemonic_auric#auric",
+  "material": "dreamtinker:malum_mnemonic#auric",
   "needed": 4,
   "value": 1
 }

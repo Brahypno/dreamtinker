@@ -42,19 +42,19 @@
     "count": 1,
     "ingredient_list": [
       {
-        "item": "dreamtinker:nova_misc_cast"
+        "item": "tconstruct:small_blade_cast"
       },
       {
-        "item": "dreamtinker:nova_misc_sand_cast"
+        "item": "tconstruct:small_blade_sand_cast"
       },
       {
-        "item": "dreamtinker:nova_misc_red_sand_cast"
+        "item": "tconstruct:small_blade_red_sand_cast"
       }
     ]
   },
   "output": {
-    "item": "dreamtinker:nova_misc",
-    "nbt": "{Material:\"dreamtinker:malum_mnemonic_auric#mnemonic\"}"
+    "item": "tconstruct:small_blade",
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic\"}"
   },
   "spirits": [
     {

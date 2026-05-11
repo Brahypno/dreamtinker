@@ -54,7 +54,7 @@
   },
   "output": {
     "item": "tconstruct:tough_handle",
-    "nbt": "{Material:\"dreamtinker:malum_mnemonic_auric#auric\"}"
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic#auric\"}"
   },
   "spirits": [
     {

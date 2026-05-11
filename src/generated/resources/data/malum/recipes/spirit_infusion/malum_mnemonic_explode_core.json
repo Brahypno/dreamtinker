@@ -40,11 +40,11 @@
   ],
   "input": {
     "count": 1,
-    "item": "dreamtinker:wish_cast"
+    "item": "dreamtinker:explode_core"
   },
   "output": {
-    "item": "dreamtinker:wish_orthant",
-    "nbt": "{Material:\"dreamtinker:malum_mnemonic_auric#mnemonic\"}"
+    "item": "dreamtinker:explode_core",
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic\"}"
   },
   "spirits": [
     {

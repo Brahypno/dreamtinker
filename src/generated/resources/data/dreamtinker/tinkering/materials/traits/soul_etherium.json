@@ -16,6 +16,10 @@
       {
         "level": 1,
         "name": "dreamtinker:soul_blessing"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:open_soul"
       }
     ],
     "tconstruct:melee_harvest": [

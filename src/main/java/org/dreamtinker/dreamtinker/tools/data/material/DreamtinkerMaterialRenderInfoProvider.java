@@ -46,11 +46,11 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
         buildRenderInfo(DreamtinkerMaterialIds.shadowSilver).color(0xFF987A2C).fallbacks("metal").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.TransmutationGold).color(0xFFCC641A).fallbacks("metal").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.SpikyShard).color(0xFF738A99).fallbacks("bone").luminosity(4);
-        buildRenderInfo(DreamtinkerMaterialIds.FifthStone).color(0xFF5F8D96).fallbacks("stone").luminosity(6);
+        buildRenderInfo(DreamtinkerMaterialIds.FifthStone).color(0xFFD8CCB7).fallbacks("stone").luminosity(6);
         buildRenderInfo(DreamtinkerMaterialIds.SpiralSpin).color(0xFF444857).fallbacks("metal").luminosity(6);
         buildRenderInfo(DreamtinkerMaterialIds.RuinWheelSteel).color(0xFFFFF0B0).fallbacks("metal").luminosity(9);
         buildRenderInfo(DreamtinkerMaterialIds.OathGuardPaleSteel).color(0xFF2A2C38).fallbacks("metal").luminosity(10);
-        buildRenderInfo(DreamtinkerMaterialIds.ForlornOathSteel).color(0xFF0B0813).fallbacks("metal").luminosity(7);
+        buildRenderInfo(DreamtinkerMaterialIds.ForlornOathSteel).color(0xFFD3E4F6).fallbacks("metal").luminosity(7);
 
         buildRenderInfo(DreamtinkerMaterialIds.ArcaneGold).color(0xFFEDAE66).fallbacks("metal").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.Utherium).color(0xFF451B1F).fallbacks("gem", "metal").luminosity(11);
@@ -67,7 +67,7 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
 
         buildRenderInfo(DreamtinkerMaterialIds.spirit_fabric).color(0xFF6E2CA3).fallbacks("cloth").luminosity(5);
         buildRenderInfo(DreamtinkerMaterialIds.hallowed_gold).color(0xFFB86F22).fallbacks("metal").luminosity(7);
-        redirect(DreamtinkerMaterialIds.mnemonic_auric, DreamtinkerMaterialIds.mnemonic);
+        redirect(DreamtinkerMaterialIds.mnemonic, DreamtinkerMaterialIds.mnemonic);
         buildRenderInfo(DreamtinkerMaterialIds.mnemonic).color(0xFF7F08FC).fallbacks("gem").luminosity(9);
         buildRenderInfo(DreamtinkerMaterialIds.auric);
         buildRenderInfo(DreamtinkerMaterialIds.soul_stained_steel).color(0xFFBE86E9).fallbacks("metal").luminosity(12);
@@ -91,8 +91,8 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
 
         buildRenderInfo(DreamtinkerMaterialIds.TatteredCloth).color(0xFF5B5957).fallbacks("cloth").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.WickedWeave).color(0xFF384185).fallbacks("cloth").luminosity(0);
-        buildRenderInfo(DreamtinkerMaterialIds.PaladinBone).color(0xFF46514F).fallbacks("bone").luminosity(0);
-        buildRenderInfo(DreamtinkerMaterialIds.PaladinBoneTool).color(0xFF46514F).fallbacks("bone").luminosity(0);
+        buildRenderInfo(DreamtinkerMaterialIds.PaladinBone).color(0xFFF3F6DD).fallbacks("bone").luminosity(0);
+        buildRenderInfo(DreamtinkerMaterialIds.PaladinBoneTool).color(0xFFF3F6DD).fallbacks("bone").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.SoulGem).color(0xFFD2A4E6).fallbacks("gem").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.ShadowGem).color(0xFFE28BFF).fallbacks("gem").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.CrimsonGem).color(0xFFFF7C2B).fallbacks("gem").luminosity(0);

@@ -2,6 +2,8 @@ package org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -19,6 +21,10 @@ import org.dreamtinker.dreamtinker.utils.DTToolsPartsHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.combat.DamageDealtModifierHook;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
+import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.*;
 
@@ -28,11 +34,17 @@ import java.util.List;
 import static net.minecraft.nbt.Tag.TAG_FLOAT;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.*;
 
-public class OpenSoul extends BattleModifier {
+public class OpenSoul extends BattleModifier implements DamageDealtModifierHook {
     private static final ResourceLocation TAG_SOUL = new ResourceLocation(Dreamtinker.MODID, "open_soul");
 
     {
         MinecraftForge.EVENT_BUS.addListener(this::onLivingDeath);
+    }
+
+    @Override
+    protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.DAMAGE_DEALT);
+        super.registerHooks(hookBuilder);
     }
 
     @Override
@@ -109,5 +121,13 @@ public class OpenSoul extends BattleModifier {
             }
         }
         return false;
+    }
+
+    @Override
+    public void onDamageDealt(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, LivingEntity target, DamageSource source, float amount, boolean isDirectDamage) {
+        if (!context.getLevel().isClientSide){
+            ModDataNBT nbt = tool.getPersistentData();
+            nbt.putFloat(TAG_SOUL, nbt.getFloat(TAG_SOUL) + amount);
+        }
     }
 }

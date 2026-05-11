@@ -1,0 +1,8 @@
+{
+  "parent": "dreamtinker:malum_mnemonic",
+  "color": "FF7F08FC",
+  "fallbacks": [
+    "gem"
+  ],
+  "luminosity": 9
+}

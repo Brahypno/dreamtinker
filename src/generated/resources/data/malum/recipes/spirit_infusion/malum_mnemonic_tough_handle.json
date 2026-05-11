@@ -42,19 +42,19 @@
     "count": 1,
     "ingredient_list": [
       {
-        "item": "tconstruct:tough_binding_cast"
+        "item": "tconstruct:tough_handle_cast"
       },
       {
-        "item": "tconstruct:tough_binding_sand_cast"
+        "item": "tconstruct:tough_handle_sand_cast"
       },
       {
-        "item": "tconstruct:tough_binding_red_sand_cast"
+        "item": "tconstruct:tough_handle_red_sand_cast"
       }
     ]
   },
   "output": {
-    "item": "tconstruct:tough_binding",
-    "nbt": "{Material:\"dreamtinker:malum_mnemonic_auric#mnemonic\"}"
+    "item": "tconstruct:tough_handle",
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic\"}"
   },
   "spirits": [
     {

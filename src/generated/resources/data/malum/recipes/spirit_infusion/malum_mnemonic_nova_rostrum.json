@@ -40,11 +40,21 @@
   ],
   "input": {
     "count": 1,
-    "item": "dreamtinker:reason_cast"
+    "ingredient_list": [
+      {
+        "item": "dreamtinker:nova_rostrum_cast"
+      },
+      {
+        "item": "dreamtinker:nova_rostrum_sand_cast"
+      },
+      {
+        "item": "dreamtinker:nova_rostrum_red_sand_cast"
+      }
+    ]
   },
   "output": {
-    "item": "dreamtinker:reason_emanation",
-    "nbt": "{Material:\"dreamtinker:malum_mnemonic_auric#mnemonic\"}"
+    "item": "dreamtinker:nova_rostrum",
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic\"}"
   },
   "spirits": [
     {

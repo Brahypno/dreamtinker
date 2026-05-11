@@ -181,7 +181,7 @@
     "naughty_chaos": "#A7B7C3",
     "cosmogony_tetrad": "#B7A98A",
     "virtual_dodge": "#B7A98A",
-    "goliath_damage": "#1A2028",
+    "goliath_damage": "#D8CCB7",
     "four_warning": "#D7F1F0",
     "sweet_death": "#F28C28",
     "last_kiss": "#C96A88",
@@ -231,7 +231,7 @@
     "soul_etherium": "#7A59E2",
     "malum_spirit_fabric": "#6E2CA3",
     "malum_hallowed_gold": "#B86F22",
-    "malum_mnemonic_auric": "#7F08FC",
+    "malum_mnemonic": "#7F08FC",
     "malum_soul_stained_steel": "#BE86E9",
     "malum_malignant_pewter": "#C9B7D6",
     "malum_malignant_gluttony": "#1FA60A",
@@ -292,7 +292,7 @@
     "iesnium": "#79A7AF",
     "spiral_spin": "#444857",
     "ruin_wheel_steel": "#FFF0B0",
-    "forlorn_oath_steel": "#151926"
+    "forlorn_oath_steel": "#D3E4F6"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873",

@@ -16,13 +16,13 @@
     },
     {
       "type": "tconstruct:conditional_melee_damage",
-      "each_level": 2.0,
+      "each_level": 2.5,
       "percent": false,
       "target": "tconstruct:airborne"
     },
     {
       "type": "tconstruct:conditional_power",
-      "each_level": 2.0,
+      "each_level": 2.5,
       "percent": false,
       "target": "tconstruct:airborne"
     },
@@ -32,7 +32,7 @@
         "type": "mantle:inverted",
         "inverted_type": "mantle:on_ground"
       },
-      "flat": 1.0,
+      "flat": 2.0,
       "hooks": [
         "tconstruct:break_speed"
       ],

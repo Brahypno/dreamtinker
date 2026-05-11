@@ -7,14 +7,14 @@
       "melee_damage": 0.1
     },
     "tconstruct:handle": {
-      "durability": -0.6,
-      "melee_damage": -0.3,
-      "melee_speed": -0.2,
+      "durability": -0.2,
+      "melee_damage": -0.2,
+      "melee_speed": 0.4,
       "mining_speed": 0.05
     },
     "tconstruct:head": {
       "durability": 1450,
-      "melee_attack": 0.5,
+      "melee_attack": 0.0,
       "mining_speed": 1.5,
       "mining_tier": "minecraft:diamond"
     },
@@ -36,12 +36,12 @@
       "toughness": 2.0
     },
     "tconstruct:plating_helmet": {
-      "armor": 3.0,
+      "armor": 2.0,
       "durability": 264,
       "toughness": 2.0
     },
     "tconstruct:plating_leggings": {
-      "armor": 6.0,
+      "armor": 5.0,
       "durability": 360,
       "toughness": 2.0
     },

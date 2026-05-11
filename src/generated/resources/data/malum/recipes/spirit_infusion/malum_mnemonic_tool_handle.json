@@ -42,19 +42,19 @@
     "count": 1,
     "ingredient_list": [
       {
-        "item": "tconstruct:broad_axe_head_cast"
+        "item": "tconstruct:tool_handle_cast"
       },
       {
-        "item": "tconstruct:broad_axe_head_sand_cast"
+        "item": "tconstruct:tool_handle_sand_cast"
       },
       {
-        "item": "tconstruct:broad_axe_head_red_sand_cast"
+        "item": "tconstruct:tool_handle_red_sand_cast"
       }
     ]
   },
   "output": {
-    "item": "tconstruct:broad_axe_head",
-    "nbt": "{Material:\"dreamtinker:malum_mnemonic_auric#mnemonic\"}"
+    "item": "tconstruct:tool_handle",
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic\"}"
   },
   "spirits": [
     {

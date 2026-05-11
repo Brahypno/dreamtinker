@@ -42,19 +42,19 @@
     "count": 1,
     "ingredient_list": [
       {
-        "item": "tconstruct:hammer_head_cast"
+        "item": "tconstruct:tool_binding_cast"
       },
       {
-        "item": "tconstruct:hammer_head_sand_cast"
+        "item": "tconstruct:tool_binding_sand_cast"
       },
       {
-        "item": "tconstruct:hammer_head_red_sand_cast"
+        "item": "tconstruct:tool_binding_red_sand_cast"
       }
     ]
   },
   "output": {
-    "item": "tconstruct:hammer_head",
-    "nbt": "{Material:\"dreamtinker:malum_mnemonic_auric#mnemonic\"}"
+    "item": "tconstruct:tool_binding",
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic\"}"
   },
   "spirits": [
     {

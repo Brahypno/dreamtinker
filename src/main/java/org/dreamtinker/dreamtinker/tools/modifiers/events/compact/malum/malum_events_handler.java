@@ -42,17 +42,18 @@ public class malum_events_handler {
                 return;
             try {
                 reEnter.set(depth + 1);
+                ToolStack tool = ToolStack.from(stack);
                 if (0 < DTModifierCheck.getItemModifierNum(stack, DreamtinkerTagKeys.Modifiers.MALUM_EXPOSE_SOUL))
                     SoulDataHandler.exposeSoul(event.getEntity());
-                if (0 < ToolStack.from(stack).getModifierLevel(DreamtinkerModifiers.malum_base.getId()))
+                if (0 < tool.getModifierLevel(DreamtinkerModifiers.malum_base.getId()))
                     ((MalumScytheItem) ItemRegistry.CRUDE_SCYTHE.get()).hurtEvent(event, attacker, event.getEntity(), stack);
-                if (0 < ToolStack.from(stack).getModifierLevel(DreamtinkerModifiers.Ids.malum_tyrving))
+                for (int i = 0; i < tool.getModifierLevel(DreamtinkerModifiers.Ids.malum_tyrving); i++)
                     ((TyrvingItem) ItemRegistry.TYRVING.get()).hurtEvent(event, attacker, event.getEntity(), stack);
-                if (0 < ToolStack.from(stack).getModifierLevel(DreamtinkerModifiers.Ids.malum_world_of_weight))
+                if (0 < tool.getModifierLevel(DreamtinkerModifiers.Ids.malum_world_of_weight))
                     ((WeightOfWorldsItem) ItemRegistry.WEIGHT_OF_WORLDS.get()).hurtEvent(event, attacker, event.getEntity(), stack);
-                if (0 < ToolStack.from(stack).getModifierLevel(DreamtinkerModifiers.Ids.malum_edge_of_deliverance))
+                if (0 < tool.getModifierLevel(DreamtinkerModifiers.Ids.malum_edge_of_deliverance))
                     ((EdgeOfDeliveranceItem) ItemRegistry.EDGE_OF_DELIVERANCE.get()).hurtEvent(event, attacker, event.getEntity(), stack);
-                if (0 < ToolStack.from(stack).getModifierLevel(DreamtinkerModifiers.malum_erosion.getId()))
+                if (0 < tool.getModifierLevel(DreamtinkerModifiers.malum_erosion.getId()))
                     ((ErosionScepterItem) ItemRegistry.EROSION_SCEPTER.get()).hurtEvent(event, attacker, event.getEntity(), stack);
 
                 int levels = DTModifierCheck.getMainhandModifierLevel(attacker, DreamtinkerModifiers.malum_sol_tiferet.getId());

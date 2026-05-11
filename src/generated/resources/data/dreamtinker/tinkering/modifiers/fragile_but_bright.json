@@ -2,18 +2,6 @@
   "level_display": "tconstruct:default",
   "modules": [
     {
-      "type": "tconstruct:stat_boost",
-      "each_level": -1.5,
-      "operation": "add",
-      "stat": "tconstruct:armor"
-    },
-    {
-      "type": "tconstruct:stat_boost",
-      "each_level": -1.0,
-      "operation": "add",
-      "stat": "tconstruct:armor_toughness"
-    },
-    {
       "type": "tconstruct:attribute",
       "attribute": "dreamtinker:generic.fate_veil",
       "each_level": 0.06,

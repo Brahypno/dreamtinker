@@ -40,21 +40,11 @@
   ],
   "input": {
     "count": 1,
-    "ingredient_list": [
-      {
-        "item": "tconstruct:tool_handle_cast"
-      },
-      {
-        "item": "tconstruct:tool_handle_sand_cast"
-      },
-      {
-        "item": "tconstruct:tool_handle_red_sand_cast"
-      }
-    ]
+    "item": "dreamtinker:wish_cast"
   },
   "output": {
-    "item": "tconstruct:tool_handle",
-    "nbt": "{Material:\"dreamtinker:malum_mnemonic_auric#mnemonic\"}"
+    "item": "dreamtinker:wish_orthant",
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic\"}"
   },
   "spirits": [
     {

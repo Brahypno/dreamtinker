@@ -149,6 +149,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
 
         addTraits(DreamtinkerMaterialIds.etherium, RANGED, ranged_shoot, explosive_hit);
         addTraits(DreamtinkerMaterialIds.etherium, ARMOR,
+                  new ModifierEntry(ModifierIds.blastProtection, 2),
                   new ModifierEntry(ModifierIds.magicProtection, 2),
                   new ModifierEntry(etherium_protection.getId(), 1),
                   new ModifierEntry(explosive_defense.getId(), 1),
@@ -166,7 +167,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.soul_etherium, RANGED, cursed_ring_bound.getId(), ModifierIds.soulbound,
                   Ids.soul_form, open_soul.getId(), exiles_faulty.getId());
         addTraits(DreamtinkerMaterialIds.soul_etherium, ARMOR, cursed_ring_bound.getId(), ModifierIds.soulbound,
-                  Ids.soul_form, soul_blessing.getId());
+                  Ids.soul_form, soul_blessing.getId(), open_soul.getId());
 
 
         addDefaultTraits(DreamtinkerMaterialIds.spirit_fabric, malum_distortion);
@@ -176,8 +177,8 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.hallowed_gold, RANGED, TinkerModifiers.golden);
         addTraits(DreamtinkerMaterialIds.hallowed_gold, AMMO, Ids.light_arrow);
 
-        addDefaultTraits(DreamtinkerMaterialIds.mnemonic_auric, new ModifierEntry(Ids.malum_haunted, 2), new ModifierEntry(malum_hex_staff, 1));
-        addTraits(DreamtinkerMaterialIds.mnemonic_auric, AMMO, teleport_shooting, malum_magic_hit);
+        addDefaultTraits(DreamtinkerMaterialIds.mnemonic, new ModifierEntry(Ids.malum_haunted, 2), new ModifierEntry(malum_hex_staff, 1));
+        addTraits(DreamtinkerMaterialIds.mnemonic, AMMO, teleport_shooting, malum_magic_hit);
 
         addDefaultTraits(DreamtinkerMaterialIds.soul_stained_steel, new ModifierEntry(Ids.malum_haunted, 2), new ModifierEntry(Ids.malum_tyrving, 1));
         addTraits(DreamtinkerMaterialIds.soul_stained_steel, ARMOR, malum_soul_attributes);

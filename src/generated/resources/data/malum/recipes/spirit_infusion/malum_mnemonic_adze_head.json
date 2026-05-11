@@ -42,19 +42,19 @@
     "count": 1,
     "ingredient_list": [
       {
-        "item": "tconstruct:tough_handle_cast"
+        "item": "tconstruct:adze_head_cast"
       },
       {
-        "item": "tconstruct:tough_handle_sand_cast"
+        "item": "tconstruct:adze_head_sand_cast"
       },
       {
-        "item": "tconstruct:tough_handle_red_sand_cast"
+        "item": "tconstruct:adze_head_red_sand_cast"
       }
     ]
   },
   "output": {
-    "item": "tconstruct:tough_handle",
-    "nbt": "{Material:\"dreamtinker:malum_mnemonic_auric#mnemonic\"}"
+    "item": "tconstruct:adze_head",
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic\"}"
   },
   "spirits": [
     {

@@ -111,7 +111,7 @@ public class AwaitingHour extends BattleModifier {
         int scale = data.getInt(TAG_SCALE);
         int moth = data.getInt(TAG_MOTH);
         MaterialId id;
-        int threshold = Math.max(tool.getCurrentDurability() + tool.getDamage(), OmenInSight);
+        int threshold = Math.max((tool.getCurrentDurability() + tool.getDamage()) / 2, OmenInSight);
         if (scale < threshold && moth < threshold)
             return;
         else if (threshold <= scale){
@@ -151,7 +151,7 @@ public class AwaitingHour extends BattleModifier {
         if (tooltipKey.isShiftOrUnknown()){
             int scale = tool.getPersistentData().getInt(TAG_SCALE);
             int moth = tool.getPersistentData().getInt(TAG_MOTH);
-            int threshold = Math.max(tool.getCurrentDurability() + tool.getDamage(), OmenInSight);
+            int threshold = Math.max((tool.getCurrentDurability() + tool.getDamage()) / 2, OmenInSight);
             if (0 < moth)
                 tooltip.add(Component.translatable("modifier.dreamtinker.pupal_omen_moth.tooltip", moth, threshold));
             if (0 < scale)

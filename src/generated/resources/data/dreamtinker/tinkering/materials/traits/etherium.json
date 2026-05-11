@@ -21,6 +21,10 @@
     "tconstruct:armor": [
       {
         "level": 2,
+        "name": "tconstruct:blast_protection"
+      },
+      {
+        "level": 2,
         "name": "tconstruct:magic_protection"
       },
       {

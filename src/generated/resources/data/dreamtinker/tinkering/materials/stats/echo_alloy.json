@@ -7,15 +7,15 @@
       "melee_damage": 3.0
     },
     "tconstruct:handle": {
-      "durability": -0.5,
+      "durability": -0.3,
       "melee_damage": 0.5,
       "melee_speed": -0.5,
-      "mining_speed": -0.5
+      "mining_speed": -0.3
     },
     "tconstruct:head": {
       "durability": 400,
       "melee_attack": 3.0,
-      "mining_speed": 3.5,
+      "mining_speed": 6.5,
       "mining_tier": "minecraft:diamond"
     },
     "tconstruct:limb": {

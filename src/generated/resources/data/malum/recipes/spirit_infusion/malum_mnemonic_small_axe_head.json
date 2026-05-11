@@ -42,19 +42,19 @@
     "count": 1,
     "ingredient_list": [
       {
-        "item": "dreamtinker:nova_rostrum_cast"
+        "item": "tconstruct:small_axe_head_cast"
       },
       {
-        "item": "dreamtinker:nova_rostrum_sand_cast"
+        "item": "tconstruct:small_axe_head_sand_cast"
       },
       {
-        "item": "dreamtinker:nova_rostrum_red_sand_cast"
+        "item": "tconstruct:small_axe_head_red_sand_cast"
       }
     ]
   },
   "output": {
-    "item": "dreamtinker:nova_rostrum",
-    "nbt": "{Material:\"dreamtinker:malum_mnemonic_auric#mnemonic\"}"
+    "item": "tconstruct:small_axe_head",
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic\"}"
   },
   "spirits": [
     {
