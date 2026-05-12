@@ -1,15 +1,14 @@
 package org.dreamtinker.dreamtinker.utils.LootHelper;
 
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameRules;
+import org.dreamtinker.dreamtinker.Dreamtinker;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodType;
@@ -20,6 +19,8 @@ import java.util.List;
 
 import static org.dreamtinker.dreamtinker.utils.DTMethodHandler.findMethod;
 import static org.dreamtinker.dreamtinker.utils.DTMethodHandler.findSpecial;
+import static org.dreamtinker.dreamtinker.utils.LootHelper.LootTableItemScanner.getAllPossibleLootStacksGeneral;
+import static org.dreamtinker.dreamtinker.utils.LootHelper.LootTableItemScanner.getAllScannedLootStacksMinOne;
 
 public class DTLoots {
 
@@ -29,50 +30,6 @@ public class DTLoots {
     private static MethodHandle DROP_EQUIPMENT;
     private static MethodHandle DROP_EXPERIENCE;
 
-    public static ItemStack tryExtractRareLoot(ServerLevel level, LivingEntity target, float triggerRate, int lootinglevel) {
-        List<LootTableItemScanner.LootCandidate> candidates =
-                LootTableItemScanner.collect(
-                        level,
-                        target.getLootTable(),
-                        LootTableItemScanner.LootScanOptions.looting(lootinglevel),
-                        LootTableItemScanner.CandidateFilter
-                                .rareByItemOrDropRate()
-                                .and(LootTableItemScanner.CandidateFilter.estimatedRateBelow(0.25D))
-                );
-        candidates.removeIf(candidate -> candidate.item() == Items.AIR);
-        if (candidates.isEmpty())
-            return ItemStack.EMPTY;
-
-        if (level.random.nextFloat() >= triggerRate)
-            return ItemStack.EMPTY;
-        ItemStack stack = ItemStack.EMPTY;
-        for (int i = 0; i < candidates.size() * 2 && stack.isEmpty(); i++) {
-            LootTableItemScanner.LootCandidate candidate = pickByInverseRate(candidates, level.random);
-            stack = candidate.getRandomCountStack(level.random);
-        }
-        return stack;
-    }
-
-    private static LootTableItemScanner.LootCandidate pickByInverseRate(List<LootTableItemScanner.LootCandidate> candidates, RandomSource random) {
-        double totalWeight = 0.0D;
-
-        for (LootTableItemScanner.LootCandidate candidate : candidates) {
-            double rate = Math.max(0.001D, candidate.estimatedRate());
-            totalWeight += 1.0D / rate;
-        }
-
-        double roll = random.nextDouble() * totalWeight;
-
-        for (LootTableItemScanner.LootCandidate candidate : candidates) {
-            double rate = Math.max(0.001D, candidate.estimatedRate());
-            roll -= 1.0D / rate;
-
-            if (roll <= 0.0D)
-                return candidate;
-        }
-
-        return candidates.get(candidates.size() - 1);
-    }
 
     public static void dropAllDeathLootVanilla(LivingEntity victim, DamageSource source) {
         Entity attacker = source.getEntity();
@@ -87,6 +44,7 @@ public class DTLoots {
 
         victim.captureDrops(new ArrayList<>());
 
+        Collection<ItemEntity> all_drops = new ArrayList<>();
         try {
             if (victim.level().getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT)){
                 try {
@@ -121,38 +79,68 @@ public class DTLoots {
         finally {
             try {
                 drops = victim.captureDrops(null);
+                if ((drops == null || drops.isEmpty()) && victim.level() instanceof ServerLevel level){
+                    try {
+                        List<ItemStack> forcedStacks =
+                                getAllPossibleLootStacksGeneral(level, victim, tableId -> getAllScannedLootStacksMinOne(level, tableId, looting));
+                        for (ItemStack stack : forcedStacks) {
+                            if (stack.isEmpty())
+                                continue;
+
+                            all_drops.add(new ItemEntity(
+                                    level,
+                                    victim.getX(),
+                                    victim.getY(),
+                                    victim.getZ(),
+                                    stack
+                            ));
+                        }
+
+                        Dreamtinker.LOGGER.info(
+                                "Forced scanner loot fallback for {} : {} stacks",
+                                victim.getType(),
+                                forcedStacks.size()
+                        );
+                    }
+                    catch (Throwable t) {
+                        errors.add(new RuntimeException("scanner fallback loot failed", t));
+                    }
+                }
             }
             catch (Throwable t) {
                 errors.add(new RuntimeException("captureDrops(null) failed", t));
             }
         }
 
-        if (drops != null){
-            boolean cancelled = false;
 
+        try {
+            net.minecraftforge.common.ForgeHooks.onLivingDrops(victim, source, all_drops, looting, true);
+        }
+        catch (Throwable t) {
+            errors.add(new RuntimeException("onLivingDrops failed", t));
+        }
+        if (drops != null)
+            all_drops.addAll(drops);
+
+
+        for (ItemEntity drop : all_drops) {
             try {
-                cancelled = net.minecraftforge.common.ForgeHooks.onLivingDrops(victim, source, drops, looting, true);
+                victim.level().addFreshEntity(drop);
             }
             catch (Throwable t) {
-                errors.add(new RuntimeException("onLivingDrops failed", t));
-            }
-
-            if (!cancelled){
-                for (ItemEntity drop : drops) {
-                    try {
-                        victim.level().addFreshEntity(drop);
-                    }
-                    catch (Throwable t) {
-                        errors.add(new RuntimeException("addFreshEntity failed for " + drop.getItem(), t));
-                    }
-                }
+                errors.add(new RuntimeException("addFreshEntity failed for " + drop.getItem(), t));
             }
         }
 
         if (!errors.isEmpty()){
-            RuntimeException ex = new RuntimeException("dropAllDeathLootVanillaSafe had " + errors.size() + " error(s)");
-            errors.forEach(ex::addSuppressed);
-            throw ex;
+            Dreamtinker.LOGGER.warn(
+                    "dropAllDeathLootVanillaSafe had {} error(s) for {}",
+                    errors.size(),
+                    victim.getType()
+            );
+            for (Throwable error : errors) {
+                Dreamtinker.LOGGER.warn("Suppressed forced loot error", error);
+            }
         }
     }
 
@@ -193,6 +181,7 @@ public class DTLoots {
             }
 
             mh.invokeExact(entity, source, causedByPlayer);
+            Dreamtinker.LOGGER.info("Invoking LivingEntity#dropFromLootTable directly for {}", entity.getType());
         }
         catch (Throwable e) {
             throw new RuntimeException("Failed to invokespecial LivingEntity#dropFromLootTable", e);

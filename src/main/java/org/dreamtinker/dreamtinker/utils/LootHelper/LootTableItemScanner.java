@@ -13,16 +13,125 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
 
 import java.io.Reader;
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.Predicate;
+
+import static org.dreamtinker.dreamtinker.utils.LootHelper.LootTableFallbackResolver.resolveLootTableCandidates;
 
 public final class LootTableItemScanner {
     private LootTableItemScanner() {}
+
+    public static List<ItemStack> getAllPossibleLootStacksGeneral(ServerLevel level, LivingEntity victim, Function<ResourceLocation, List<ItemStack>> stackResolver
+    ) {
+        List<ItemStack> out = new ArrayList<>();
+
+        for (ResourceLocation tableId : resolveLootTableCandidates(level, victim)) {
+            List<ItemStack> stacks = stackResolver.apply(tableId);
+
+            if (stacks != null && !stacks.isEmpty())
+                out.addAll(stacks);
+        }
+
+        return out;
+    }
+
+
+    public static List<ItemStack> getAllScannedLootStacksMinOne(ServerLevel level, ResourceLocation lootTableId, int lootingLevel) {
+        List<LootTableItemScanner.LootCandidate> candidates =
+                LootTableItemScanner.collect(
+                        level,
+                        lootTableId,
+                        LootTableItemScanner.LootScanOptions.looting(lootingLevel)
+                );
+
+        List<ItemStack> stacks = new ArrayList<>();
+
+        for (LootTableItemScanner.LootCandidate candidate : candidates) {
+            ItemStack stack = candidate.getRandomCountStack(level.random);
+
+            if (stack.isEmpty()){
+                stack = candidate.getExpectedCountStack();
+            }
+
+            if (stack.isEmpty()){
+                stack = new ItemStack(candidate.item());
+            }
+
+            stack.setCount(Math.max(1, Math.min(stack.getCount(), stack.getMaxStackSize())));
+            stacks.add(stack);
+        }
+
+        return stacks;
+    }
+
+    public static List<ItemStack> tryExtractRareLoot(ServerLevel level, LivingEntity target, float triggerRate, int lootingLevel) {
+        List<ItemStack> out = new ArrayList<>();
+
+        List<LootTableItemScanner.LootCandidate> candidates =
+                LootTableItemScanner.collect(
+                        level,
+                        target.getLootTable(),
+                        LootTableItemScanner.LootScanOptions.looting(lootingLevel),
+                        LootTableItemScanner.CandidateFilter
+                                .rareByItemOrDropRate()
+                                .and(LootTableItemScanner.CandidateFilter.estimatedRateBelow(0.25D))
+                );
+
+        candidates.removeIf(candidate -> candidate.item() == Items.AIR);
+
+        if (candidates.isEmpty())
+            return out;
+
+        int maxRolls = 1 + Math.max(0, lootingLevel);
+
+        for (int roll = 0; roll < maxRolls; roll++) {
+            float rate = roll == 0 ? 1.0F : triggerRate / roll;
+
+            if (level.random.nextFloat() >= rate)
+                break;
+
+            ItemStack stack = ItemStack.EMPTY;
+
+            for (int i = 0; i < candidates.size() * 2 && stack.isEmpty(); i++) {
+                LootTableItemScanner.LootCandidate candidate = pickByInverseRate(candidates, level.random);
+                stack = candidate.getRandomCountStack(level.random);
+            }
+
+            if (!stack.isEmpty())
+                out.add(stack);
+        }
+
+        return out;
+    }
+
+    private static LootTableItemScanner.LootCandidate pickByInverseRate(List<LootTableItemScanner.LootCandidate> candidates, RandomSource random) {
+        double totalWeight = 0.0D;
+
+        for (LootTableItemScanner.LootCandidate candidate : candidates) {
+            double rate = Math.max(0.001D, candidate.estimatedRate());
+            totalWeight += 1.0D / rate;
+        }
+
+        double roll = random.nextDouble() * totalWeight;
+
+        for (LootTableItemScanner.LootCandidate candidate : candidates) {
+            double rate = Math.max(0.001D, candidate.estimatedRate());
+            roll -= 1.0D / rate;
+
+            if (roll <= 0.0D)
+                return candidate;
+        }
+
+        return candidates.get(candidates.size() - 1);
+    }
 
     public static List<LootCandidate> collect(ServerLevel level, ResourceLocation lootTableId) {
         return collect(level, lootTableId, LootScanOptions.none());

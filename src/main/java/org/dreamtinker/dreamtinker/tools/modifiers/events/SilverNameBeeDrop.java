@@ -6,6 +6,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -14,7 +15,11 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
-import org.dreamtinker.dreamtinker.utils.LootHelper.DTLoots;
+
+import java.util.List;
+
+import static org.dreamtinker.dreamtinker.utils.LootHelper.LootTableItemScanner.getAllPossibleLootStacksGeneral;
+import static org.dreamtinker.dreamtinker.utils.LootHelper.LootTableItemScanner.tryExtractRareLoot;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class SilverNameBeeDrop {
@@ -41,8 +46,20 @@ public class SilverNameBeeDrop {
               (livingAttacker.hasEffect(DreamtinkerEffects.SilverNameBee.get()) || DTModifierCheck.ModifierInHand(livingAttacker,
                                                                                                                   DreamtinkerModifiers.Ids.silver_name_bee))))
             return;
-        event.getDrops().add(new ItemEntity(serverLevel, victim.getX(), victim.getY(), victim.getZ(),
-                                            DTLoots.tryExtractRareLoot(serverLevel, victim, 1, event.getLootingLevel())));
+        List<ItemStack> forcedStacks =
+                getAllPossibleLootStacksGeneral(serverLevel, victim, tableId -> tryExtractRareLoot(serverLevel, victim, 1, event.getLootingLevel()));
+        for (ItemStack stack : forcedStacks) {
+            if (stack.isEmpty())
+                continue;
+
+            event.getDrops().add(new ItemEntity(
+                    level,
+                    victim.getX(),
+                    victim.getY(),
+                    victim.getZ(),
+                    stack
+            ));
+        }
     }
 
 }
