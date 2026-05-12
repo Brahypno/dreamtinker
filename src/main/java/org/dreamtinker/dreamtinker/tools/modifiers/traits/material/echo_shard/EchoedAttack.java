@@ -13,7 +13,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -21,6 +20,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
+import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -68,31 +68,62 @@ public class EchoedAttack extends BattleModifier {
         return knockback;
     }
 
+    public static void performSonicBoomSweep(IToolStackView tool, ServerLevel level, LivingEntity attacker, Projectile projectile) {
+        if (level.isClientSide)
+            return;
+        ModDataNBT nbt = tool.getPersistentData();
+        int count = nbt.getInt(TAG_ECHO_ENERGY);//In case count is modified due to below hook.
+        float damage = null != projectile ? DTModifierCheck.getDamage(projectile) : (float) attacker.getAttributeValue(Attributes.ATTACK_DAMAGE);
+        nbt.putInt(TAG_ECHO_ENERGY, count);
+
+        Vec3 start = attacker.position().add(0, attacker.getEyeHeight(), 0);
+        Vec3 direction = attacker.getLookAngle(); // 玩家视线方向
+        double maxDistance = 20.0;
+
+        // 记录已攻击的实体，防止重复
+        Set<LivingEntity> hitEntities = new HashSet<>();
+
+        // 每格进行检测
+        for (int i = 1; i <= maxDistance; i++) {
+            Vec3 pos = start.add(direction.scale(i));
+
+            // 发出粒子
+            level.sendParticles(ParticleTypes.SONIC_BOOM, pos.x, pos.y, pos.z, 1, 0, 0, 0, 0);
+
+            // 检测这格内的实体（半径1格球形范围）
+            List<LivingEntity> entities =
+                    level.getEntitiesOfClass(LivingEntity.class, new AABB(pos.x - 0.5, pos.y - 0.5, pos.z - 0.5, pos.x + 0.5, pos.y + 0.5, pos.z + 0.5),
+                                             e -> e != attacker && e.isAlive() && attacker.canAttack(e));
+
+            for (LivingEntity target : entities) {
+                if (hitEntities.contains(target))
+                    continue;
+
+                hitEntities.add(target);
+
+                // 造成伤害
+                target.hurt(target.level().damageSources().sonicBoom(attacker), damage);
+
+                // 计算击退（同 Warden）
+                double resist = target.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE);
+                double knockY = 0.5 * (1.0 - resist);
+                double knockXZ = 2.5 * (1.0 - resist);
+                target.push(direction.x * knockXZ, direction.y * knockY, direction.z * knockXZ);
+            }
+        }
+
+        // 播放音效
+        attacker.level().playSound(null, attacker.getOnPos(), SoundEvents.WARDEN_SONIC_BOOM, SoundSource.NEUTRAL, 3.0F, 1.0F);
+    }
+
     @Override
     public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
         ModDataNBT nbt = tool.getPersistentData();
         int count = nbt.getInt(TAG_ECHO_ENERGY);
         if (E_C <= count){
             count -= E_C;
-            performSonicBoomSweep(tool, (ServerLevel) context.getAttacker().level(), context.getAttacker());
+            performSonicBoomSweep(tool, (ServerLevel) context.getAttacker().level(), context.getAttacker(), null);
             nbt.putInt(TAG_ECHO_ENERGY, count);
-        }
-    }
-
-    @Override
-    public void onProjectileLaunch(IToolStackView tool, ModifierEntry modifier, LivingEntity shooter, ItemStack ammo, Projectile projectile, @Nullable AbstractArrow arrow, ModDataNBT persistentData, boolean primary) {
-        if (!(shooter.level() instanceof ServerLevel))
-            return;
-        ModDataNBT nbt = tool.getPersistentData();
-        int count = nbt.getInt(TAG_ECHO_ENERGY) + 1;
-        if (projectile instanceof AbstractArrow && null != arrow && Math.random() < ChargingChance){
-            ((AbstractArrow) projectile).setBaseDamage(((AbstractArrow) projectile).getBaseDamage() * 1.5);
-            count++;
-        }
-        if (E_C <= count){
-            count -= E_C;
-            nbt.putInt(TAG_ECHO_ENERGY, count);
-            performSonicBoomSweep(tool, (ServerLevel) shooter.level(), shooter);
         }
     }
 
@@ -143,59 +174,20 @@ public class EchoedAttack extends BattleModifier {
         }
     }
 
-    public static void performSonicBoomSweep(IToolStackView tool, ServerLevel level, LivingEntity attacker) {
-        if (level.isClientSide)
+    @Override
+    public void onProjectileLaunch(IToolStackView tool, ModifierEntry modifier, LivingEntity shooter, ItemStack ammo, Projectile projectile, @Nullable AbstractArrow arrow, ModDataNBT persistentData, boolean primary) {
+        if (!(shooter.level() instanceof ServerLevel))
             return;
-        //Sonic Boom damage depend on range modifier!
-        List<ModifierEntry> modifiers = tool.getModifierList();
-        Arrow arrow = new Arrow(level, attacker);
-        ModDataNBT persistentData = ModDataNBT.readFromNBT(arrow.getPersistentData());
         ModDataNBT nbt = tool.getPersistentData();
-        int count = nbt.getInt(TAG_ECHO_ENERGY);//In case count is modified due to below hook.
-        for (ModifierEntry entry : modifiers) {
-            entry.getHook(ModifierHooks.PROJECTILE_LAUNCH).onProjectileLaunch(tool, entry, attacker, arrow, arrow, persistentData, true);
+        int count = nbt.getInt(TAG_ECHO_ENERGY) + 1;
+        if (projectile instanceof AbstractArrow && null != arrow && Math.random() < ChargingChance){
+            ((AbstractArrow) projectile).setBaseDamage(((AbstractArrow) projectile).getBaseDamage() * 1.5);
+            count++;
         }
-        float damage = (float) (arrow.getDeltaMovement().length() * arrow.getBaseDamage());
-        nbt.putInt(TAG_ECHO_ENERGY, count);
-
-        //
-        Vec3 start = attacker.position().add(0, attacker.getEyeHeight(), 0);
-        Vec3 direction = attacker.getLookAngle(); // 玩家视线方向
-        double maxDistance = 20.0;
-
-        // 记录已攻击的实体，防止重复
-        Set<LivingEntity> hitEntities = new HashSet<>();
-
-        // 每格进行检测
-        for (int i = 1; i <= maxDistance; i++) {
-            Vec3 pos = start.add(direction.scale(i));
-
-            // 发出粒子
-            level.sendParticles(ParticleTypes.SONIC_BOOM, pos.x, pos.y, pos.z, 1, 0, 0, 0, 0);
-
-            // 检测这格内的实体（半径1格球形范围）
-            List<LivingEntity> entities =
-                    level.getEntitiesOfClass(LivingEntity.class, new AABB(pos.x - 0.5, pos.y - 0.5, pos.z - 0.5, pos.x + 0.5, pos.y + 0.5, pos.z + 0.5),
-                                             e -> e != attacker && e.isAlive() && attacker.canAttack(e));
-
-            for (LivingEntity target : entities) {
-                if (hitEntities.contains(target))
-                    continue;
-
-                hitEntities.add(target);
-
-                // 造成伤害
-                target.hurt(target.level().damageSources().sonicBoom(attacker), damage);
-
-                // 计算击退（同 Warden）
-                double resist = target.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE);
-                double knockY = 0.5 * (1.0 - resist);
-                double knockXZ = 2.5 * (1.0 - resist);
-                target.push(direction.x * knockXZ, direction.y * knockY, direction.z * knockXZ);
-            }
+        if (E_C <= count){
+            count -= E_C;
+            nbt.putInt(TAG_ECHO_ENERGY, count);
+            performSonicBoomSweep(tool, (ServerLevel) shooter.level(), shooter, projectile);
         }
-
-        // 播放音效
-        attacker.level().playSound(null, attacker.getOnPos(), SoundEvents.WARDEN_SONIC_BOOM, SoundSource.NEUTRAL, 3.0F, 1.0F);
     }
 }

@@ -1,7 +1,8 @@
 {
-  "color": "FF415099",
+  "color": "FF1A5C69",
   "fallbacks": [
     "crystal",
+    "gem",
     "metal"
   ],
   "generator": {
@@ -26,32 +27,32 @@
       "type": "tconstruct:grey_to_sprite",
       "palette": [
         {
-          "grey": 0,
-          "path": "dreamtinker:material/echo_shard/gradient_echo_shard_0"
+          "color": "FF000000",
+          "grey": 0
         },
         {
-          "grey": 63,
-          "path": "dreamtinker:material/echo_shard/gradient_echo_shard_1"
+          "color": "FF000711",
+          "grey": 63
         },
         {
-          "grey": 102,
-          "path": "dreamtinker:material/echo_shard/gradient_echo_shard_2"
+          "color": "FF04192A",
+          "grey": 102
         },
         {
-          "grey": 140,
-          "path": "dreamtinker:material/echo_shard/gradient_echo_shard_3"
+          "color": "FF0A344A",
+          "grey": 140
         },
         {
-          "grey": 178,
-          "path": "dreamtinker:material/echo_shard/gradient_echo_shard_4"
+          "color": "FF1A5C69",
+          "grey": 178
         },
         {
-          "grey": 216,
-          "path": "dreamtinker:material/echo_shard/gradient_echo_shard_5"
+          "color": "FF48BEB3",
+          "grey": 216
         },
         {
-          "grey": 255,
-          "path": "dreamtinker:material/echo_shard/gradient_echo_shard_6"
+          "color": "FFD8FFF6",
+          "grey": 255
         }
       ]
     }
