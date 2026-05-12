@@ -247,6 +247,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                           .addInput(TinkerFluids.moltenGold.ingredient(FluidValues.INGOT))
                           .addInput(DreamtinkerFluids.liquid_amber.ingredient(FluidValues.GEM))
                           .save(wrapped, prefix(TinkerFluids.moltenElectrum, folder));
+        AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_atonement_silver, FluidValues.INGOT)
+                          .addInput(TinkerFluids.moltenSilver.ingredient(FluidValues.INGOT))
+                          .addInput(DreamtinkerFluids.liquid_amber.ingredient(FluidValues.GEM))
+                          .save(wrapped, prefix(DreamtinkerFluids.molten_atonement_silver, folder));
         wrapped =
                 withCondition(consumer,
                               new AndCondition(tagFilled(DreamtinkerTagKeys.Items.arcaneGoldIngot), tagFilled(Dreamtinker.forgeItemTag("gems/cinnabar"))));
@@ -2773,6 +2777,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         materialRecipe(consumer, DreamtinkerMaterialIds.OathGuardPaleSteel, StrictNBTIngredient.of(ironHeart()), 1, 1,
                        materials_folder + "oath_guard");
         materialMeltingCasting(consumer, DreamtinkerMaterialIds.OathGuardPaleSteel, DreamtinkerFluids.molten_iron_heart, FluidValues.INGOT, materials_folder);
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.AtonementSilver, DreamtinkerFluids.molten_atonement_silver, FluidValues.INGOT,
+                               materials_folder);
 
     }
 

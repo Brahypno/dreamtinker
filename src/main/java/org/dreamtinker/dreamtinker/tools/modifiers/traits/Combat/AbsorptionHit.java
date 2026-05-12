@@ -52,8 +52,6 @@ public class AbsorptionHit extends BattleModifier {
     public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
         if (absorption.matches(context.getAttacker()) && null != context.getLivingTarget())
             context.getLivingTarget().addEffect(new MobEffectInstance(MobEffects.WEAKNESS, modifier.getLevel() * 20, modifier.getLevel()));
-        knockback *=
-                (1 + absorption_buff(modifier.getLevel() * tool.getMultiplier(ToolStats.ATTACK_DAMAGE), 0 < context.getAttacker().getAbsorptionAmount()));
         return knockback;
     }
 

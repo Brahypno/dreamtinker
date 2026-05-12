@@ -32,6 +32,7 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
         buildRenderInfo(DreamtinkerMaterialIds.half_rotten_homunculus).color(0xFF360100).fallbacks("bone").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.half_rotten_string).color(0xFF360100).fallbacks("bone").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.desire_gem).color(0xFF7AB97B).fallbacks("gem").luminosity(15);
+        buildRenderInfo(DreamtinkerMaterialIds.AtonementSilver).color(0xFFD8D2C4).fallbacks("metal").luminosity(15);
         buildRenderInfo(DreamtinkerMaterialIds.despair_gem).color(0xFF870721).fallbacks("gem").luminosity(15);
         buildRenderInfo(DreamtinkerMaterialIds.shadowskin);
         buildRenderInfo(DreamtinkerMaterialIds.soul_steel).color(0xFF3E5568).fallbacks("metal").luminosity(14);

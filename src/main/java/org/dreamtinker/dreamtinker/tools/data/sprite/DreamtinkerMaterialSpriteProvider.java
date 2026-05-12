@@ -359,6 +359,17 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFFEBB46D)  // 保持原亮金
                                                 .addARGB(255, 0xFFFFE4B0)  // 保持原高光
                                                 .build());
+        this.buildMaterial(DreamtinkerMaterialIds.AtonementSilver)
+            .ranged().meleeHarvest().armor().statType(INGOT).statType(STORAGE_BLOCK)
+            .fallbacks("metal")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(63, 0xFF3A2D2A)
+                                                .addARGB(102, 0xFF6A4938)
+                                                .addARGB(140, 0xFFA96D3F)
+                                                .addARGB(178, 0xFFD49A58)
+                                                .addARGB(216, 0xFFC9C8C0)
+                                                .addARGB(255, 0xFFFFF1C8)
+                                                .build());
 
         this.buildMaterial(DreamtinkerMaterialIds.ArcaneGold)
             .meleeHarvest().armor().ranged()

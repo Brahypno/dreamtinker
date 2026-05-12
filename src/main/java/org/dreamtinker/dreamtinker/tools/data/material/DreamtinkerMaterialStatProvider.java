@@ -59,6 +59,10 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new HeadMaterialStats(600, 2f, Tiers.DIAMOND, 4f),
                          HandleMaterialStats.multipliers().durability(1f).miningSpeed(.9f).attackDamage(.8f).attackSpeed(1.4f).build(),
                          StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.AtonementSilver,
+                         new HeadMaterialStats(600, 2f, Tiers.DIAMOND, 4f),
+                         HandleMaterialStats.multipliers().durability(1f).miningSpeed(.9f).attackDamage(.8f).attackSpeed(1.4f).build(),
+                         StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.despair_gem,
                          new HeadMaterialStats(300, 4f, DtTiers.WOLF_TIER, 9f),
                          HandleMaterialStats.multipliers().durability(.1f).miningSpeed(2.3f).attackDamage(2.3f).attackSpeed(2.3f).build(),
@@ -276,6 +280,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addMaterialStats(DreamtinkerMaterialIds.desire_gem,
                          new LimbMaterialStats(600, 0.7f, -0.3f, 0.3f),
                          new GripMaterialStats(0.8f, 0.3f, 6f));
+        addMaterialStats(DreamtinkerMaterialIds.AtonementSilver,
+                         new LimbMaterialStats(600, 0.7f, -0.3f, 0.3f),
+                         new GripMaterialStats(0.8f, 0.3f, 6f));
         addMaterialStats(DreamtinkerMaterialIds.soul_steel,
                          new LimbMaterialStats(600, 0.10f, 0.05f, 0f),
                          new GripMaterialStats(.05f, 0.05f, 2.5f));
@@ -402,6 +409,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                             StatlessMaterialStats.MAILLE);
         addMaterialStats(DreamtinkerMaterialIds.half_rotten_homunculus,
                          StatlessMaterialStats.MAILLE);
+        addArmorShieldStats(DreamtinkerMaterialIds.AtonementSilver,
+                            PlatingMaterialStats.builder().durabilityFactor(30).armor(4f, 6f, 4f, 3f).toughness(8).knockbackResistance(2f),
+                            StatlessMaterialStats.MAILLE);
         addArmorShieldStats(DreamtinkerMaterialIds.desire_gem,
                             PlatingMaterialStats.builder().durabilityFactor(15).armor(4f, 6f, 4f, 3f).toughness(8).knockbackResistance(2f),
                             StatlessMaterialStats.MAILLE);

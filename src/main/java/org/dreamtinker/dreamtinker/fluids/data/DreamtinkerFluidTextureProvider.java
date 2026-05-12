@@ -73,6 +73,7 @@ public class DreamtinkerFluidTextureProvider extends AbstractFluidTextureProvide
         tintedSlime(DreamtinkerFluids.gooey_slime, "earth").color(0xFF5A4D38);
         tintedMolten(DreamtinkerFluids.molten_iesnium).color(0xFF79A7AF);
         tintedOre(DreamtinkerFluids.molten_iron_heart, "iron");
+        tintedMolten(DreamtinkerFluids.molten_atonement_silver).color(0xFFE3B15F);
     }
 
     public void commonFluid(FluidType fluid) {

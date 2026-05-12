@@ -57,6 +57,10 @@
     {
       "id": "dreamtinker:forgotten_metal",
       "required": false
+    },
+    {
+      "id": "dreamtinker:atonement_silver",
+      "required": false
     }
   ]
 }
