@@ -12,10 +12,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.DreamtinkerModule;
 import org.dreamtinker.dreamtinker.common.Items.IronBallItem;
-import org.dreamtinker.dreamtinker.library.client.AggressiveFoxRender;
-import org.dreamtinker.dreamtinker.library.client.NarcissusFluidProjectileRenderer;
-import org.dreamtinker.dreamtinker.library.client.SlashOrbitRenderer;
-import org.dreamtinker.dreamtinker.library.client.WingSlashProjectileRenderer;
+import org.dreamtinker.dreamtinker.library.client.*;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DreamtinkerEntityTypes extends DreamtinkerModule {
@@ -53,6 +50,13 @@ public class DreamtinkerEntityTypes extends DreamtinkerModule {
                                       .sized(0.5F, 0.5F)
                                       .clientTrackingRange(4)
                                       .updateInterval(1).setShouldReceiveVelocityUpdates(true).setUpdateInterval(10));
+    public static final RegistryObject<EntityType<org.dreamtinker.dreamtinker.Entity.CrescentSlashProjectile>> CRESCENT_SLASH =
+            ENTITIES.register("crescent_slash", () ->
+                    EntityType.Builder.<org.dreamtinker.dreamtinker.Entity.CrescentSlashProjectile>of(
+                                      org.dreamtinker.dreamtinker.Entity.CrescentSlashProjectile::new, MobCategory.MISC)
+                                      .sized(0.5F, 0.5F)
+                                      .clientTrackingRange(4)
+                                      .updateInterval(1).setShouldReceiveVelocityUpdates(true).setUpdateInterval(10));
 
     @SubscribeEvent
     static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
@@ -62,5 +66,6 @@ public class DreamtinkerEntityTypes extends DreamtinkerModule {
         event.registerEntityRenderer(DreamtinkerEntityTypes.LIGHTNING_ENTITY.get(), LightningBoltRenderer::new);
         event.registerEntityRenderer(DreamtinkerEntityTypes.ThrownIronBall.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(DreamtinkerEntityTypes.WING_SLASH.get(), WingSlashProjectileRenderer::new);
+        event.registerEntityRenderer(DreamtinkerEntityTypes.CRESCENT_SLASH.get(), CrescentSlashProjectileRenderer::new);
     }
 }
