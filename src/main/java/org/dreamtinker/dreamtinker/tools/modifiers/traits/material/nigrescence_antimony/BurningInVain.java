@@ -26,6 +26,7 @@ import java.util.List;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.BurnInVainInAccuracy;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.BurnInVainRandomProj;
+import static org.dreamtinker.dreamtinker.utils.DTHelper.placeProjectileOutsideShooter;
 
 public class BurningInVain extends BattleModifier {
     Double maxInaccuracy = BurnInVainInAccuracy.get();
@@ -48,16 +49,32 @@ public class BurningInVain extends BattleModifier {
     public void onProjectileLaunch(IToolStackView tool, ModifierEntry modifier, LivingEntity shooter, Projectile projectile, @Nullable AbstractArrow arrow, ModDataNBT persistentData, boolean primary) {
         if (shooter.level().isClientSide)
             return;
-        ServerLevel world = (ServerLevel) shooter.level();
 
-        double px = shooter.getX(), pz = shooter.getZ();
-        DTHelper.clearProjectile(world, px, pz);
+        ServerLevel world = (ServerLevel) shooter.level();
+        DTHelper.clearProjectile(world, shooter.getX(), shooter.getZ());
+
         if (!BurnInVainRandomProj.get())
             return;
+
         Vec3 motion = projectile.getDeltaMovement();
-        Projectile newProj = createRandomProjectile(world, shooter, projectile.getX(), projectile.getY(), projectile.getZ(), motion);
-        if (newProj != null)
-            world.addFreshEntity(newProj);
+        Vec3 dir = motion.lengthSqr() > 1.0E-6D ? motion.normalize() : shooter.getLookAngle().normalize();
+        Vec3 spawnPos = getSafeProjectileSpawnPos(shooter, dir, projectile.getBbWidth(), projectile.getBbHeight());
+
+        Projectile newProj = createRandomProjectile(world, shooter, spawnPos.x, spawnPos.y, spawnPos.z, motion);
+        if (newProj == null)
+            return;
+
+        placeProjectileOutsideShooter(newProj, shooter, dir);
+        if (newProj.getDeltaMovement().lengthSqr() <= 1.0E-6D)
+            newProj.setDeltaMovement(motion);
+
+        world.addFreshEntity(newProj);
+    }
+
+    private static Vec3 getSafeProjectileSpawnPos(LivingEntity shooter, Vec3 dir, double projectileWidth, double projectileHeight) {
+        double distance = shooter.getBbWidth() * 0.5D + projectileWidth * 0.5D + 0.45D;
+        Vec3 eye = shooter.getEyePosition();
+        return eye.add(dir.scale(distance)).subtract(0.0D, projectileHeight * 0.5D, 0.0D);
     }
 
     @Override

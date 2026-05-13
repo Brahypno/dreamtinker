@@ -23,11 +23,14 @@ import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
+import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.shared.TinkerEffects;
 
 import javax.annotation.Nullable;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.WitherShootDangerPercentage;
+import static org.dreamtinker.dreamtinker.utils.DTHelper.MIN_PROJECTILE_SPEED_SQR;
+import static org.dreamtinker.dreamtinker.utils.DTHelper.placeProjectileOutsideShooter;
 
 public class WitherShoot extends NoLevelsModifier implements ArrowInterface {
     @Override
@@ -39,24 +42,35 @@ public class WitherShoot extends NoLevelsModifier implements ArrowInterface {
     public void onProjectileLaunch(IToolStackView tool, ModifierEntry modifier, LivingEntity shooter, Projectile projectile, @Nullable AbstractArrow arrow, ModDataNBT persistentData, boolean primary) {
         if (shooter.level().isClientSide)
             return;
-        ServerLevel world = (ServerLevel) shooter.level();
 
-        double px = shooter.getX(), pz = shooter.getZ();
-        DTHelper.clearProjectile(world, px, pz);
+        ServerLevel world = (ServerLevel) shooter.level();
+        DTHelper.clearProjectile(world, shooter.getX(), shooter.getZ());
 
         Vec3 motion = projectile.getDeltaMovement();
-        WitherSkull newProj = EntityType.WITHER_SKULL.create(shooter.level());
-        if (newProj != null){
-            if (shooter.getHealth() <= shooter.getMaxHealth() * WitherShootDangerPercentage.get())
-                newProj.setDangerous(true);
-            newProj.setOwner(shooter);
-            newProj.setPos(projectile.getX(), projectile.getY(), projectile.getZ());
-            newProj.setNoGravity(false);
-            float speed = (float) Math.sqrt(motion.x * motion.x + motion.y * motion.y + motion.z * motion.z);
-            float inaccuracy = shooter.level().random.nextFloat();
-            newProj.shoot(motion.x, motion.y, motion.z, speed, inaccuracy);
-            world.addFreshEntity(newProj);
-        }
+        Vec3 direction = motion.lengthSqr() > MIN_PROJECTILE_SPEED_SQR
+                         ? motion.normalize()
+                         : shooter.getLookAngle().normalize();
+
+        WitherSkull newProj = EntityType.WITHER_SKULL.create(world);
+        if (newProj == null)
+            return;
+
+        float speed = motion.lengthSqr() > MIN_PROJECTILE_SPEED_SQR
+                      ? (float) motion.length()
+                      : 1.0F;
+
+        if (shooter.getHealth() <= shooter.getMaxHealth() * WitherShootDangerPercentage.get())
+            newProj.setDangerous(true);
+
+        newProj.setOwner(shooter);
+        newProj.setNoGravity(false);
+
+        placeProjectileOutsideShooter(newProj, shooter, direction);
+
+        float accuracy = tool.getStats().get(ToolStats.ACCURACY);
+        newProj.shoot(direction.x, direction.y, direction.z, speed, Math.max(0.0F, 1.0F - accuracy));
+
+        world.addFreshEntity(newProj);
     }
 
     @Override

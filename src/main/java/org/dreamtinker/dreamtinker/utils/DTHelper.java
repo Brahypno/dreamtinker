@@ -21,20 +21,52 @@ import org.dreamtinker.dreamtinker.network.DNetwork;
 import org.dreamtinker.dreamtinker.network.S2CVibeBarFx;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.ProjLimit;
 
 public class DTHelper {
+    public static final double MIN_PROJECTILE_SPEED_SQR = 1.0E-6D;
+    public static final double PROJECTILE_SPAWN_EXTRA_DISTANCE = 0.45D;
+
     public static void clearProjectile(ServerLevel level, double px, double pz) {
         int viewDist = level.getServer().getPlayerList().getViewDistance();
-        double radius = viewDist * 16.0;
+        double radius = viewDist * 16.0D;
+
         AABB box = new AABB(px - radius, level.getMinBuildHeight(), pz - radius, px + radius, level.getMaxBuildHeight(), pz + radius);
-        Predicate<Projectile> all = p -> true;
-        List<Projectile> list = level.getEntitiesOfClass(Projectile.class, box, all);
-        if (ProjLimit.get() <= list.size())
-            for (Projectile old : list)
+
+        List<Projectile> list = level.getEntitiesOfClass(Projectile.class, box, Projectile::isAlive);
+
+        if (list.size() < ProjLimit.get()){
+            return;
+        }
+
+        for (Projectile old : list) {
+            if (isStalledProjectile(old))
                 old.remove(Entity.RemovalReason.DISCARDED);
+        }
+    }
+
+    public static void placeProjectileOutsideShooter(Projectile projectile, LivingEntity shooter, Vec3 direction) {
+        double distance = shooter.getBbWidth() * 0.5D
+                          + projectile.getBbWidth() * 0.5D
+                          + PROJECTILE_SPAWN_EXTRA_DISTANCE;
+
+        Vec3 eye = shooter.getEyePosition();
+
+        for (int i = 0; i < 8; i++) {
+            Vec3 pos = eye.add(direction.scale(distance));
+            projectile.setPos(pos.x, pos.y - projectile.getBbHeight() * 0.5D, pos.z);
+
+            if (!projectile.getBoundingBox().intersects(shooter.getBoundingBox()))
+                return;
+
+            distance += 0.25D;
+        }
+    }
+
+    private static boolean isStalledProjectile(Projectile projectile) {
+        return projectile.isAlive()
+               && projectile.getDeltaMovement().lengthSqr() <= MIN_PROJECTILE_SPEED_SQR;
     }
 
     public static void debugEffects(List<MobEffect> effects) {
