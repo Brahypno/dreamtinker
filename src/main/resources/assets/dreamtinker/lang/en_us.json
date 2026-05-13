@@ -882,6 +882,9 @@
   "modifier.dreamtinker.reprise_protection.flavor": "Dance once more.",
   "modifier.dreamtinker.reprise_protection.description": "Gain 25% Protection Reprise Per level. Protection Reprise would reduce damage based on uncapped protection value of current damage.",
   "modifier.dreamtinker.reprise_protection.reprise_protection": "Protection Reprise",
+"modifier.dreamtinker.eternity_defense": "Morning Dew",
+"modifier.dreamtinker.eternity_defense.flavor": "I know this world to be as fleeting as the morning dew.",
+"modifier.dreamtinker.eternity_defense.description": "Remembers damage types when struck and reduces repeated damage of remembered types. Each level increases remembered types by 1, up to 3.",
 
   "material.dreamtinker.echo_alloy": "Echo Alloy",
   "material.dreamtinker.echo_alloy.flavor": "Its echo of mystery, or echo of enigma",

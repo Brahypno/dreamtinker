@@ -882,6 +882,10 @@
   "modifier.dreamtinker.reprise_protection.flavor": "再度起舞吧",
   "modifier.dreamtinker.reprise_protection.description": "每级获得25%保护复演。保护复演会根据已有对该伤害的未封顶的保护值进行一定比例的减伤。",
   "modifier.dreamtinker.reprise_protection.reprise_protection": "保护复演",
+  "modifier.dreamtinker.eternity_defense": "白露泡影",
+  "modifier.dreamtinker.eternity_defense.flavor": "我知这世界，如露水般短暂",
+  "modifier.dreamtinker.eternity_defense.description": "受击时记住伤害类型并根据伤害类型减伤。每级增加1种记录，最多生效3级",
+
 
   "material.dreamtinker.echo_alloy": "回响合金",
   "material.dreamtinker.echo_alloy.flavor": "是神秘的回响，还是秘密的回响",

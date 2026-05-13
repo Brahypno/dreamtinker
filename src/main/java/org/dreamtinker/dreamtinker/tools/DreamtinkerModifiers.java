@@ -195,6 +195,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<LastBody> last_body = MODIFIERS.register("last_body", LastBody::new);
     public static final StaticModifier<ForceDrop> force_drop = MODIFIERS.register("force_drop", ForceDrop::new);
     public static final StaticModifier<ForceHurt> force_hurt = MODIFIERS.register("force_hurt", ForceHurt::new);
+    public static final StaticModifier<EternityDefense> eternity_defense = MODIFIERS.register("eternity_defense", EternityDefense::new);
 
     //etherium
     public static final StaticModifier<ELAstralBreak> astral_break = EL_MODIFIERS.register("astral_break", ELAstralBreak::new);
