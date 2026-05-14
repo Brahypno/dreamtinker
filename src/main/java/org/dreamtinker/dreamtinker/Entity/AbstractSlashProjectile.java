@@ -9,7 +9,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -496,13 +495,12 @@ public abstract class AbstractSlashProjectile extends Projectile implements Proj
             return;
         }
 
-        DamageSource source = this.makeDamageSource(owner);
 
         if (owner instanceof LivingEntity livingOwner){
             livingOwner.setLastHurtMob(target);
         }
 
-        boolean hurt = doHurt(target, source, damage);
+        boolean hurt = doHurt(target, damage);
 
         if (hurt){
             this.doPostHurtEffects(target, owner);
@@ -513,12 +511,8 @@ public abstract class AbstractSlashProjectile extends Projectile implements Proj
         }
     }
 
-    protected boolean doHurt(Entity target, DamageSource source, float amount) {
-        return target.hurt(source, amount);
-    }
-
-    protected DamageSource makeDamageSource(@Nullable Entity owner) {
-        return this.damageSources().indirectMagic(this, owner);
+    protected boolean doHurt(Entity target, float amount) {
+        return target.hurt(this.damageSources().indirectMagic(this, this.getOwner()), amount);
     }
 
     protected void doPostHurtEffects(Entity target, @Nullable Entity owner) {

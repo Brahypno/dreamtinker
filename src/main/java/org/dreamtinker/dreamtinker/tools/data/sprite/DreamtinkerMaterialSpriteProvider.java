@@ -168,17 +168,40 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(255, 0xFFFBF2DA)  // 极亮高光/反光
                                                 .build());
         this.buildMaterial(DreamtinkerMaterialIds.desire_gem)
-            .ranged().meleeHarvest().armor()
+            .meleeHarvest().armor()
             .fallbacks("gem")
-            .transformer(GreyToSpriteTransformer.builder()
-                                                .addARGB(0, 0xFFA12065)  // 暗玫红
-                                                .addARGB(63, 0xFFDE59A2)  // 亮粉
-                                                .addARGB(102, 0xFF91B83D)  // 果绿中深
-                                                .addARGB(140, 0xFF7AB97B)  // 青绿
-                                                .addARGB(178, 0xFF7AB97B)  // 青绿（保持段）
-                                                .addARGB(216, 0xFF5BDE5F)  // 高亮嫩绿
-                                                .addARGB(255, 0xFFAFEFB1)  // 淡薄荷高光
+            .transformer(GreyToSpriteTransformer.builderFromBlack()
+                                                .addARGB(63, 0xFF160B24)
+                                                .addARGB(102, 0xFF2A1644)
+                                                .addARGB(140, 0xFF48236F)
+                                                .addARGB(178, 0xFF6D3BA0)
+                                                .addARGB(216, 0xFFB38BE8)
+                                                .addARGB(255, 0xFFEDE4FF)
                                                 .build());
+        this.buildMaterial(DreamtinkerMaterialIds.musou)
+            .meleeHarvest().armor()
+            .fallbacks("gem")
+            .transformer(new FramesSpriteTransformer(
+                    Dreamtinker.getLocation("generator/desire"),
+                    GreyToSpriteTransformer.builderFromBlack()
+                                           .addARGB(63, 0xFF24113A)
+                                           .addARGB(102, 0xFF4A2380)
+                                           .addARGB(140, 0xFF7B3FD0)
+                                           .addARGB(178, 0xFFC26DFF)
+                                           .addARGB(216, 0xFFE9C8FF)
+                                           .addARGB(255, 0xFFFFFFFF)
+                                           .build(),
+
+                    // Frame 2
+                    GreyToSpriteTransformer.builderFromBlack()
+                                           .addARGB(63, 0xFF2E1648)
+                                           .addARGB(102, 0xFF5F2AA0)
+                                           .addARGB(140, 0xFF9A55F0)
+                                           .addARGB(178, 0xFFD996FF)
+                                           .addARGB(216, 0xFFF4DEFF)
+                                           .addARGB(255, 0xFFFFFFFF)
+                                           .build()
+            ));
         this.buildMaterial(DreamtinkerMaterialIds.despair_gem)
             .meleeHarvest().armor()
             .fallbacks("gem")

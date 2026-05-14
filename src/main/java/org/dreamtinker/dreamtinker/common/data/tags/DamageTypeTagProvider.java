@@ -5,13 +5,13 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.DamageTypeTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 import static net.minecraft.tags.DamageTypeTags.*;
+import static org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes.*;
 import static slimeknights.tconstruct.common.TinkerTags.DamageTypes.MELEE_PROTECTION;
 
 public class DamageTypeTagProvider extends DamageTypeTagsProvider {
@@ -21,19 +21,18 @@ public class DamageTypeTagProvider extends DamageTypeTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.@NotNull Provider Provider) {
-        tag(DAMAGES_HELMET).add(DreamtinkerDamageTypes.NULL_VOID);
-        tag(BYPASSES_ARMOR).add(DreamtinkerDamageTypes.NULL_VOID, DreamtinkerDamageTypes.rain_bow, DreamtinkerDamageTypes.edict_punishments);
-        tag(BYPASSES_SHIELD).add(DreamtinkerDamageTypes.NULL_VOID, DreamtinkerDamageTypes.edict_punishments);
-        tag(BYPASSES_INVULNERABILITY).add(DreamtinkerDamageTypes.NULL_VOID, DreamtinkerDamageTypes.arcane_damage/*, DreamtinkerDamageTypes.edict_punishments*/);
-        tag(BYPASSES_COOLDOWN).add(DreamtinkerDamageTypes.NULL_VOID, DreamtinkerDamageTypes.arcane_damage, DreamtinkerDamageTypes.edict_punishments);
-        tag(BYPASSES_EFFECTS).add(DreamtinkerDamageTypes.NULL_VOID, DreamtinkerDamageTypes.ruin_wheel);
-        tag(BYPASSES_RESISTANCE).add(DreamtinkerDamageTypes.NULL_VOID, DreamtinkerDamageTypes.ruin_wheel);
-        tag(BYPASSES_ENCHANTMENTS).add(DreamtinkerDamageTypes.NULL_VOID, DreamtinkerDamageTypes.rain_bow, DreamtinkerDamageTypes.arcane_damage);
-        tag(AVOIDS_GUARDIAN_THORNS).add(DreamtinkerDamageTypes.NULL_VOID);
-        tag(ALWAYS_HURTS_ENDER_DRAGONS).add(DreamtinkerDamageTypes.NULL_VOID, DreamtinkerDamageTypes.arcane_damage, DreamtinkerDamageTypes.edict_punishments,
-                                            DreamtinkerDamageTypes.ruin_wheel);
-        tag(WITCH_RESISTANT_TO).add(DreamtinkerDamageTypes.arcane_damage);
-        tag(MELEE_PROTECTION).add(DreamtinkerDamageTypes.tnt_arrow_force);
+        tag(DAMAGES_HELMET).add(NULL_VOID, many_wishes);
+        tag(BYPASSES_ARMOR).add(NULL_VOID, rain_bow, edict_punishments, many_wishes);
+        tag(BYPASSES_SHIELD).add(NULL_VOID, edict_punishments, many_wishes);
+        tag(BYPASSES_INVULNERABILITY).add(NULL_VOID, arcane_damage/*, edict_punishments*/);
+        tag(BYPASSES_COOLDOWN).add(NULL_VOID, arcane_damage, edict_punishments);
+        tag(BYPASSES_EFFECTS).add(NULL_VOID, ruin_wheel, many_wishes);
+        tag(BYPASSES_RESISTANCE).add(NULL_VOID, ruin_wheel);
+        tag(BYPASSES_ENCHANTMENTS).add(NULL_VOID, rain_bow, arcane_damage, many_wishes);
+        tag(AVOIDS_GUARDIAN_THORNS).add(NULL_VOID);
+        tag(ALWAYS_HURTS_ENDER_DRAGONS).add(NULL_VOID, arcane_damage, edict_punishments, ruin_wheel, many_wishes);
+        tag(WITCH_RESISTANT_TO).add(arcane_damage);
+        tag(MELEE_PROTECTION).add(tnt_arrow_force);
 
     }
 }

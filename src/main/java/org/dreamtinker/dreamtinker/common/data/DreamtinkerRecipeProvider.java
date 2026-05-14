@@ -334,7 +334,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                                          Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(DreamtinkerCommon.rainbow_honey.get()))
                                                                 .getPath()));
         ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.desire_gem.get())
-                                .setFluidAndTime(TinkerFluids.moltenDiamond, FluidValues.LARGE_GEM_BLOCK)
+                                .setFluidAndTime(DreamtinkerFluids.molten_orichalcum, FluidValues.METAL_BLOCK)
                                 .setCast(Items.NETHER_STAR, true)
                                 .save(consumer, location(Casting_folder + "desire_gem"));
         ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.shiningFlint.get())

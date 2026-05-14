@@ -10,8 +10,12 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
+import org.dreamtinker.dreamtinker.tools.modifiers.events.VisionaryDrops;
+import org.dreamtinker.dreamtinker.utils.DTMethodHandler;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import static org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes.many_wishes;
 
 public class CrescentSlashProjectile extends AbstractSlashProjectile {
     private static final EntityDataAccessor<Boolean> OVERRIDE_DAMAGE_AND_PIERCE =
@@ -29,48 +33,25 @@ public class CrescentSlashProjectile extends AbstractSlashProjectile {
         super(type, level, owner);
     }
 
-    public static CrescentSlashProjectile shootFrom(
+    public static void shootDangerousFrom(
             Level level,
             LivingEntity owner,
             float power,
             int maxLife,
             double speed
     ) {
-        return shootFrom(
+        shootFrom(
                 level,
                 owner,
                 owner.getLookAngle(),
                 power,
                 maxLife,
                 speed,
-                0xBFD5FF,
+                0xFF48236F,
                 230,
                 1.35F,
                 2.80F,
-                false
-        );
-    }
-
-    public static CrescentSlashProjectile shootFrom(
-            Level level,
-            LivingEntity owner,
-            float power,
-            int maxLife,
-            double speed,
-            boolean overrideDamageAndPierce
-    ) {
-        return shootFrom(
-                level,
-                owner,
-                owner.getLookAngle(),
-                power,
-                maxLife,
-                speed,
-                0xBFD5FF,
-                230,
-                1.35F,
-                2.80F,
-                overrideDamageAndPierce
+                true
         );
     }
 
@@ -136,35 +117,6 @@ public class CrescentSlashProjectile extends AbstractSlashProjectile {
                 lengthScale,
                 widthScale,
                 0.0F
-        );
-    }
-
-    public static CrescentSlashProjectile shootFrom(
-            Level level,
-            LivingEntity owner,
-            Vec3 direction,
-            float power,
-            int maxLife,
-            float maxDistance,
-            double speed,
-            int rgb,
-            int alpha,
-            float lengthScale,
-            float widthScale
-    ) {
-        return shootFrom(
-                level,
-                owner,
-                direction,
-                power,
-                maxLife,
-                maxDistance,
-                speed,
-                rgb,
-                alpha,
-                lengthScale,
-                widthScale,
-                false
         );
     }
 
@@ -229,7 +181,7 @@ public class CrescentSlashProjectile extends AbstractSlashProjectile {
 
     @Override
     protected double getEntityHitHalfHeight() {
-        return 0.85D;
+        return 0.8D;
     }
 
     @Override
@@ -252,29 +204,14 @@ public class CrescentSlashProjectile extends AbstractSlashProjectile {
     }
 
     @Override
-    protected DamageSource makeDamageSource(@Nullable Entity owner) {
-        if (this.isOverrideDamageAndPierce()){
-            return this.makeOverriddenDamageSource(owner);
+    protected boolean doHurt(Entity target, float amount) {
+        if (this.isOverrideDamageAndPierce() && target instanceof LivingEntity le){
+            DamageSource source = DreamtinkerDamageTypes.source(le.level().registryAccess(), many_wishes, this.getOwner(), this);
+            le.getPersistentData().putBoolean(VisionaryDrops.Visionary, true);
+            return DTMethodHandler.invokeLivingHurt(le, source, amount);
         }
 
-        return super.makeDamageSource(owner);
-    }
-
-    protected DamageSource makeOverriddenDamageSource(@Nullable Entity owner) {
-        return this.damageSources().indirectMagic(this, owner);
-    }
-
-    @Override
-    protected boolean doHurt(Entity target, DamageSource source, float amount) {
-        if (this.isOverrideDamageAndPierce()){
-            return this.doOverriddenHurt(target, source, amount);
-        }
-
-        return super.doHurt(target, source, amount);
-    }
-
-    protected boolean doOverriddenHurt(Entity target, DamageSource source, float amount) {
-        return target.hurt(source, amount);
+        return super.doHurt(target, amount);
     }
 
     @Override

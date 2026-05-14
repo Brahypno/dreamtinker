@@ -29,8 +29,7 @@ import static org.dreamtinker.dreamtinker.utils.LootHelper.LootTableFallbackReso
 public final class LootTableItemScanner {
     private LootTableItemScanner() {}
 
-    public static List<ItemStack> getAllPossibleLootStacksGeneral(ServerLevel level, LivingEntity victim, Function<ResourceLocation, List<ItemStack>> stackResolver
-    ) {
+    public static List<ItemStack> getAllPossibleLootStacksGeneral(ServerLevel level, LivingEntity victim, Function<ResourceLocation, List<ItemStack>> stackResolver) {
         List<ItemStack> out = new ArrayList<>();
 
         for (ResourceLocation tableId : resolveLootTableCandidates(level, victim)) {

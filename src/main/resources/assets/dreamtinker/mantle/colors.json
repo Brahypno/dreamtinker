@@ -214,8 +214,9 @@
     "broken_oath": "#D3E4F6",
     "forlorn_judgment": "#D3E4F6",
     "last_body": "#4E5F7D",
-    "reprise_protection": "#6F668A"
-
+    "reprise_protection": "#6F668A",
+    "to_the_moon": "#E9C8FF",
+    "many_wishes": "#F4DEFF"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
@@ -240,7 +241,7 @@
     "amber": "#FE9300",
     "half_rotten_homunculus": "#550703",
     "half_rotten_string": "#550703",
-    "desire_gem": "#7AB97B",
+    "desire_gem": "#B38BE8",
     "despair_gem": "#6D051A",
     "shadowskin": "#454444",
     "soul_steel": "#3E5568",

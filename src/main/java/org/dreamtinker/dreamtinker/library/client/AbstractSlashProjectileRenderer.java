@@ -89,6 +89,40 @@ public abstract class AbstractSlashProjectileRenderer<T extends AbstractSlashPro
         );
     }
 
+    protected static void renderCenteredHorizontalTexturedQuad(
+            VertexConsumer consumer,
+            PoseStack.Pose pose,
+            float length,
+            float width,
+            float y,
+            float texW,
+            float texH,
+            float texX0,
+            float texY0,
+            float texX1,
+            float texY1,
+            int light,
+            int r,
+            int g,
+            int b,
+            int a
+    ) {
+        float x0 = -length * 0.5F;
+        float x1 = length * 0.5F;
+        float z0 = -width * 0.5F;
+        float z1 = width * 0.5F;
+
+        float u0 = texX0 / texW;
+        float u1 = texX1 / texW;
+        float v0 = texY0 / texH;
+        float v1 = texY1 / texH;
+
+        vertex(consumer, pose, x0, y, z0, u0, v1, light, r, g, b, a);
+        vertex(consumer, pose, x1, y, z0, u1, v1, light, r, g, b, a);
+        vertex(consumer, pose, x1, y, z1, u1, v0, light, r, g, b, a);
+        vertex(consumer, pose, x0, y, z1, u0, v0, light, r, g, b, a);
+    }
+
     protected static void renderHorizontalSegment(
             VertexConsumer consumer,
             PoseStack.Pose pose,

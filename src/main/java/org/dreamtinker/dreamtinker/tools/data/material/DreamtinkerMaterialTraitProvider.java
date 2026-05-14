@@ -56,8 +56,8 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.half_rotten_homunculus, ARMOR, Ids.homunculusLifeCurse, Ids.homunculusGift);
         addDefaultTraits(DreamtinkerMaterialIds.half_rotten_string, anvil_hit.getId(), TinkerModifiers.necrotic.getId());
 
-        addDefaultTraits(DreamtinkerMaterialIds.desire_gem, absorption_hit);
-        addTraits(DreamtinkerMaterialIds.desire_gem, ARMOR, absorption_defense.getId());
+        addDefaultTraits(DreamtinkerMaterialIds.desire_gem, to_the_moon, many_wishes);
+        addTraits(DreamtinkerMaterialIds.desire_gem, ARMOR, eternity_defense);
 
         addDefaultTraits(DreamtinkerMaterialIds.AtonementSilver, absorption_hit);
         addTraits(DreamtinkerMaterialIds.AtonementSilver, ARMOR, absorption_defense.getId());

@@ -19,7 +19,7 @@
     "compact.ars_nouveau.EntityMeltingModuleMixin",
     "compact.ars_nouveau.AugmentCompatibilityValidatorMixin",
     "compact.ars_nouveau.MethodProjectileMixin",
-    "compact.ars_nouveau.PerkUtilMixin","compact.enigmaticlegacy.SuperpositionHandlerMixin"],
+    "compact.ars_nouveau.PerkUtilMixin","compact.enigmaticlegacy.SuperpositionHandlerMixin","LivingEntityMixin"],
   "client": ["HeatingStructureScreenMixin"
   ],
   "injectors": {

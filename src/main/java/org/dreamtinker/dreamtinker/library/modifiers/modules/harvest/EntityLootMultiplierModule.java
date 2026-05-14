@@ -53,9 +53,7 @@ public record EntityLootMultiplierModule(IJsonPredicate<LivingEntity> target, IJ
     }
 
     @Override
-    public void processLoot(
-            IToolStackView tool, ModifierEntry modifier,
-            List<ItemStack> generatedLoot, LootContext context) {
+    public void processLoot(IToolStackView tool, ModifierEntry modifier, List<ItemStack> generatedLoot, LootContext context) {
 
         // 1) 只处理 ENTITY loot，且防递归
         if (!context.hasParam(LootContextParams.THIS_ENTITY))

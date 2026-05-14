@@ -2,14 +2,18 @@
   "default": [
     {
       "level": 1,
-      "name": "dreamtinker:absorption_hit"
+      "name": "dreamtinker:to_the_moon"
+    },
+    {
+      "level": 1,
+      "name": "dreamtinker:many_wishes"
     }
   ],
   "perStat": {
     "tconstruct:armor": [
       {
         "level": 1,
-        "name": "dreamtinker:absorption_defense"
+        "name": "dreamtinker:eternity_defense"
       }
     ]
   }

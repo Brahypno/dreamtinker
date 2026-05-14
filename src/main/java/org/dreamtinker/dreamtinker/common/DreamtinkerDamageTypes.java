@@ -23,6 +23,7 @@ public class DreamtinkerDamageTypes {
     public static final ResourceKey<DamageType> tnt_arrow_force = create("tnt_arrow_force");
     public static final ResourceKey<DamageType> edict_punishments = create("edict_punishments");
     public static final ResourceKey<DamageType> ruin_wheel = create("ruin_wheel");
+    public static final ResourceKey<DamageType> many_wishes = create("many_wishes");
 
     private static ResourceKey<DamageType> create(String name) {
         return ResourceKey.create(Registries.DAMAGE_TYPE, Dreamtinker.getLocation(name));

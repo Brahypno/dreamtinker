@@ -48,7 +48,7 @@ public class CrescentSlashProjectileRenderer extends AbstractSlashProjectileRend
         float haloLength = coreLength * 1.10F;
         float haloWidth = coreWidth * 1.28F;
 
-        renderCenteredTexturedQuad(
+        renderCenteredHorizontalTexturedQuad(
                 consumer,
                 poseStack.last(),
                 haloLength,
