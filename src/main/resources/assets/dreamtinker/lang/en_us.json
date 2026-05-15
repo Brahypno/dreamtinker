@@ -885,12 +885,12 @@
   "modifier.dreamtinker.eternity_defense": "Morning Dew",
   "modifier.dreamtinker.eternity_defense.flavor": "I know this world to be as fleeting as the morning dew.",
   "modifier.dreamtinker.eternity_defense.description": "Remembers damage types when struck and reduces repeated damage of remembered types. Each level increases remembered types by 1, up to 3.",
-  "modifier.dreamtinker.to_the_moon": "Too the Moon",
-  "modifier.dreamtinker.to_the_moon.flavor": "",
+  "modifier.dreamtinker.to_the_moon": "To the Moon",
+  "modifier.dreamtinker.to_the_moon.flavor": "As eternity as lunar",
   "modifier.dreamtinker.to_the_moon.description": "At full Wishes, left click releases a crescent slash and enters an empowered state. Cannot release again during empowerment or cooldown.",
   "modifier.dreamtinker.many_wishes": "Many wishes",
-  "modifier.dreamtinker.many_wishes.flavor": "",
-  "modifier.dreamtinker.many_wishes.description": "Attack target could collecting wishes. Gain additional Wishes while empowered, and hits yield additional loot. Your attack speed would not less than 1.0.",
+  "modifier.dreamtinker.many_wishes.flavor": "Wish, never be altered",
+  "modifier.dreamtinker.many_wishes.description": "Attack target could collecting wishes. Gain additional Wishes while empowered, and hits yield additional loot and bypass some shield. Your attack speed would not less than 1.0.",
   "modifier.dreamtinker.many_wishes.tooltip": "Wishes: %s / %s",
 
 

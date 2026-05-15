@@ -25,6 +25,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.library.LootModifier.ExtraDropLootModifier;
 import org.dreamtinker.dreamtinker.library.LootModifier.KillerIsEnemyCondition;
+import org.dreamtinker.dreamtinker.library.client.particle.ColoredSweepOptions;
 import org.dreamtinker.dreamtinker.library.client.particle.VibeBarParticleOptions;
 import org.dreamtinker.dreamtinker.library.client.particle.VibeBarParticleType;
 import org.dreamtinker.dreamtinker.library.worldgen.ScatterReplaceOreConfiguration;
@@ -78,6 +79,14 @@ public abstract class DreamtinkerModule {
 
     public static final RegistryObject<ParticleType<VibeBarParticleOptions>> VIBE_BAR =
             PARTICLES.register("vibe_bar", VibeBarParticleType::new);
+
+    public static final RegistryObject<ParticleType<ColoredSweepOptions>> COLORED_SWEEP =
+            PARTICLES.register("colored_sweep", () -> new ParticleType<ColoredSweepOptions>(false, ColoredSweepOptions.DESERIALIZER) {
+                @Override
+                public Codec<ColoredSweepOptions> codec() {
+                    return ColoredSweepOptions.CODEC;
+                }
+            });
 
     public static final RegistryObject<RuleTestType<TagAndTagRuleTest>> TAG_AND_TAG =
             RULE_TESTS.register("tag_and_tag", () -> () -> TagAndTagRuleTest.CODEC);

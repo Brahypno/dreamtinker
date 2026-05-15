@@ -16,7 +16,7 @@ public final class WishPowerData {
     public static final ResourceLocation COOLDOWN_UNTIL_KEY = Dreamtinker.getLocation("wish_cooldown_until");
     public static final ResourceLocation LAST_HANDLED_BOOST_END_KEY = Dreamtinker.getLocation("wish_last_handled_boost_end");
 
-    public static final int MAX_WISH = 1;
+    public static final int MAX_WISH = 100;
 
     private WishPowerData() {}
 

@@ -2,6 +2,7 @@ package org.dreamtinker.dreamtinker.tools.modifiers.traits.material.desire_gem;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -10,8 +11,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
+import org.dreamtinker.dreamtinker.library.client.particle.ColoredSweepBurst;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.MeleeInterface;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
+import org.dreamtinker.dreamtinker.tools.modifiers.events.VisionaryDrops;
 import org.dreamtinker.dreamtinker.utils.DTMethodHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -91,9 +94,25 @@ public class VisionaryWishes extends Modifier implements MeleeInterface, Tooltip
     }
 
     @Override
+    public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
+        LivingEntity target = context.getLivingTarget();
+        if (context.getLevel() instanceof ServerLevel sl && null != target && target.isAlive() && WishPowerData.boosted(tool, context.getLevel())){
+            target.getPersistentData().putBoolean(VisionaryDrops.Visionary, true);
+            ColoredSweepBurst.create()
+                             .color(0x9A55F0, 0xC0)
+                             .shape(0.78F, 1.35F, 0.75F)
+                             .angle(0.25F)
+                             .offset(0.95F, -0.05F, 0.32F)
+                             .spawnFrom(context.getAttacker());
+        }
+        return knockback;
+    }
+
+    @Override
     public void failedMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageAttempted) {
         if (null == context.getLivingTarget() || !context.getLivingTarget().isAlive())
             return;
+        afterMeleeHit(tool, modifier, context, damageAttempted);
         if (WishPowerData.boosted(tool, context.getLevel())){
             DamageSource dmg =
                     DreamtinkerDamageTypes.source(context.getLevel().registryAccess(), DreamtinkerDamageTypes.many_wishes, context.makeDamageSource());

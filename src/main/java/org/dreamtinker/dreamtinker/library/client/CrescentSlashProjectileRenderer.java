@@ -91,4 +91,14 @@ public class CrescentSlashProjectileRenderer extends AbstractSlashProjectileRend
     public @NotNull ResourceLocation getTextureLocation(@NotNull CrescentSlashProjectile entity) {
         return TEXTURE;
     }
+
+    @Override
+    protected float getThicknessAlpha(CrescentSlashProjectile entity) {
+        return 0.30F;
+    }
+
+    @Override
+    protected float getThicknessAngle(CrescentSlashProjectile entity) {
+        return 32.0F;
+    }
 }

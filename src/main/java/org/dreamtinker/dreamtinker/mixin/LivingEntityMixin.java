@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = LivingEntity.class, priority = 500)
 public abstract class LivingEntityMixin {
-    @Inject(method = "getAttributeValue*", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "getAttributeValue(Lnet/minecraft/world/entity/ai/attributes/Attribute;)D", at = @At("RETURN"), cancellable = true)
     private void dreamtinker$attackSpeedFloor(Attribute attribute, CallbackInfoReturnable<Double> cir) {
         if (attribute == Attributes.ATTACK_SPEED)
             if (DTModifierCheck.ModifierInHand((LivingEntity) (Object) this, DreamtinkerModifiers.many_wishes.getId())){

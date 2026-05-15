@@ -12,6 +12,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.DreamtinkerModule;
 import org.dreamtinker.dreamtinker.library.client.DTItemProperties;
+import org.dreamtinker.dreamtinker.library.client.particle.ColoredSweepParticle;
 import org.dreamtinker.dreamtinker.library.client.particle.VibeBarParticle;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
 import slimeknights.tconstruct.common.ClientEventBase;
@@ -63,5 +64,6 @@ public class DtToolClientEvents extends ClientEventBase {
     @SubscribeEvent
     public static void onRegisterParticleProviders(RegisterParticleProvidersEvent e) {
         e.registerSpriteSet(DreamtinkerModule.VIBE_BAR.get(), VibeBarParticle.Provider::new);
+        e.registerSpriteSet(DreamtinkerModule.COLORED_SWEEP.get(), ColoredSweepParticle.Provider::new);
     }
 }

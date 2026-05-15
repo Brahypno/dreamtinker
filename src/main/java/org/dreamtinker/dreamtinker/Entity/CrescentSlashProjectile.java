@@ -40,46 +40,7 @@ public class CrescentSlashProjectile extends AbstractSlashProjectile {
             int maxLife,
             double speed
     ) {
-        shootFrom(
-                level,
-                owner,
-                owner.getLookAngle(),
-                power,
-                maxLife,
-                speed,
-                0xFF48236F,
-                230,
-                1.35F,
-                2.80F,
-                true
-        );
-    }
-
-    public static CrescentSlashProjectile shootFrom(
-            Level level,
-            LivingEntity owner,
-            Vec3 direction,
-            float power,
-            int maxLife,
-            double speed,
-            int rgb,
-            int alpha,
-            float lengthScale,
-            float widthScale
-    ) {
-        return shootFrom(
-                level,
-                owner,
-                direction,
-                power,
-                maxLife,
-                speed,
-                rgb,
-                alpha,
-                lengthScale,
-                widthScale,
-                false
-        );
+        shootFrom(level, owner, owner.getLookAngle(), power, maxLife, speed, 0xB86BFF, 230, 1.35F, 2.80F, true);
     }
 
     public static CrescentSlashProjectile shootFrom(
@@ -110,46 +71,6 @@ public class CrescentSlashProjectile extends AbstractSlashProjectile {
                 direction,
                 power,
                 maxLife,
-                overrideDamageAndPierce ? (byte) -1 : (byte) 0,
-                speed,
-                rgb,
-                alpha,
-                lengthScale,
-                widthScale,
-                0.0F
-        );
-    }
-
-    public static CrescentSlashProjectile shootFrom(
-            Level level,
-            LivingEntity owner,
-            Vec3 direction,
-            float power,
-            int maxLife,
-            float maxDistance,
-            double speed,
-            int rgb,
-            int alpha,
-            float lengthScale,
-            float widthScale,
-            boolean overrideDamageAndPierce
-    ) {
-        CrescentSlashProjectile projectile = new CrescentSlashProjectile(
-                DreamtinkerEntityTypes.CRESCENT_SLASH.get(),
-                level,
-                owner
-        );
-
-        projectile.setOverrideDamageAndPierce(overrideDamageAndPierce);
-
-        return shootProjectile(
-                projectile,
-                level,
-                owner,
-                direction,
-                power,
-                maxLife,
-                maxDistance,
                 overrideDamageAndPierce ? (byte) -1 : (byte) 0,
                 speed,
                 rgb,
@@ -228,4 +149,5 @@ public class CrescentSlashProjectile extends AbstractSlashProjectile {
             this.setOverrideDamageAndPierce(tag.getBoolean("OverrideDamageAndPierce"));
         }
     }
+
 }

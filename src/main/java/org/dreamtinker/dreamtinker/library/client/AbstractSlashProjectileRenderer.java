@@ -262,11 +262,53 @@ public abstract class AbstractSlashProjectileRenderer<T extends AbstractSlashPro
         VertexConsumer consumer = bufferSource.getBuffer(this.getRenderType(entity));
         int light = this.getRenderLight(entity, packedLight);
 
-        this.renderSlash(entity, partialTick, poseStack, consumer, light, r, g, b, a);
+        this.renderSlashWithThickness(entity, partialTick, poseStack, consumer, light, r, g, b, a);
 
         poseStack.popPose();
 
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
+    }
+
+    protected void renderSlashWithThickness(
+            T entity,
+            float partialTick,
+            PoseStack poseStack,
+            VertexConsumer consumer,
+            int light,
+            int r,
+            int g,
+            int b,
+            int a
+    ) {
+        this.renderSlash(entity, partialTick, poseStack, consumer, light, r, g, b, a);
+
+        float thicknessAlpha = this.getThicknessAlpha(entity);
+        if (thicknessAlpha <= 0.0F){
+            return;
+        }
+
+        poseStack.pushPose();
+        poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
+        this.renderSlash(entity, partialTick, poseStack, consumer, light, r, g, b, (int) (a * thicknessAlpha));
+        poseStack.popPose();
+
+        poseStack.pushPose();
+        poseStack.mulPose(Axis.XP.rotationDegrees(this.getThicknessAngle(entity)));
+        this.renderSlash(entity, partialTick, poseStack, consumer, light, r, g, b, (int) (a * thicknessAlpha * 0.65F));
+        poseStack.popPose();
+
+        poseStack.pushPose();
+        poseStack.mulPose(Axis.XP.rotationDegrees(-this.getThicknessAngle(entity)));
+        this.renderSlash(entity, partialTick, poseStack, consumer, light, r, g, b, (int) (a * thicknessAlpha * 0.65F));
+        poseStack.popPose();
+    }
+
+    protected float getThicknessAlpha(T entity) {
+        return 0.35F;
+    }
+
+    protected float getThicknessAngle(T entity) {
+        return 35.0F;
     }
 
     @Override

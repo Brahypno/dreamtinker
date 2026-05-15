@@ -57,7 +57,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.desire_gem,
                          new HeadMaterialStats(1000, 9f, Tiers.DIAMOND, 6.26f),
-                         HandleMaterialStats.multipliers().durability(1.25f).miningSpeed(1.0f).attackDamage(.9f).attackSpeed(1.4f).build(),
+                         HandleMaterialStats.multipliers().durability(1.25f).miningSpeed(1.0f).attackDamage(1.26f).attackSpeed(1.4f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.AtonementSilver,
                          new HeadMaterialStats(600, 2f, Tiers.DIAMOND, 4f),

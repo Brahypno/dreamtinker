@@ -70,153 +70,39 @@ public class WingSlashProjectileRenderer extends AbstractSlashProjectileRenderer
 
         float x0 = -(tailLength + bodyLength + headLength) * 0.5F;
 
-        this.renderSwordQiLayer(
-                consumer,
-                poseStack,
-                x0,
-                tailLength,
-                bodyLength,
-                headLength,
-                haloWidth,
-                light,
-                r,
-                g,
-                b,
-                (int) (a * 0.58F),
-                HALO_Y0,
-                HALO_Y1
-        );
+        this.renderSwordQiLayer(consumer, poseStack, x0, tailLength, bodyLength, headLength, haloWidth, light, r, g, b, (int) (a * 0.58F), HALO_Y0, HALO_Y1);
 
-        this.renderSwordQiLayer(
-                consumer,
-                poseStack,
-                x0,
-                tailLength,
-                bodyLength,
-                headLength,
-                coreWidth,
-                light,
-                r,
-                g,
-                b,
-                a,
-                CORE_Y0,
-                CORE_Y1
-        );
+        this.renderSwordQiLayer(consumer, poseStack, x0, tailLength, bodyLength, headLength, coreWidth, light, r, g, b, a, CORE_Y0, CORE_Y1);
 
-        poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
+        //poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
 
-        this.renderSwordQiLayer(
-                consumer,
-                poseStack,
-                x0,
-                tailLength,
-                bodyLength,
-                headLength,
-                haloWidth * 0.70F,
-                light,
-                r,
-                g,
-                b,
-                (int) (a * 0.34F),
-                HALO_Y0,
-                HALO_Y1
-        );
+        this.renderSwordQiLayer(consumer, poseStack, x0, tailLength, bodyLength, headLength, haloWidth * 0.70F, light, r, g, b, (int) (a * 0.34F), HALO_Y0,
+                                HALO_Y1);
 
-        this.renderSwordQiLayer(
-                consumer,
-                poseStack,
-                x0,
-                tailLength,
-                bodyLength,
-                headLength,
-                coreWidth * 0.72F,
-                light,
-                r,
-                g,
-                b,
-                (int) (a * 0.72F),
-                CORE_Y0,
-                CORE_Y1
-        );
+        this.renderSwordQiLayer(consumer, poseStack, x0, tailLength, bodyLength, headLength, coreWidth * 0.72F, light, r, g, b, (int) (a * 0.72F), CORE_Y0,
+                                CORE_Y1);
     }
 
-    private void renderSwordQiLayer(
-            VertexConsumer consumer,
-            PoseStack poseStack,
-            float startX,
-            float tailLength,
-            float bodyLength,
-            float headLength,
-            float width,
-            int light,
-            int r,
-            int g,
-            int b,
-            int a,
-            float texY0,
-            float texY1
-    ) {
+    private void renderSwordQiLayer(VertexConsumer consumer, PoseStack poseStack, float startX, float tailLength, float bodyLength, float headLength, float width, int light, int r, int g, int b, int a, float texY0, float texY1) {
         float x = startX;
 
-        renderHorizontalSegment(
-                consumer,
-                poseStack.last(),
-                x,
-                x + tailLength,
-                width * 1.10F,
-                TEX_W,
-                TEX_H,
-                TAIL_X0,
-                texY0,
-                TAIL_X1,
-                texY1,
-                light,
-                r,
-                g,
-                b,
-                a
-        );
+        renderHorizontalSegment(consumer, poseStack.last(), x, x + tailLength, width * 1.10F, TEX_W, TEX_H, TAIL_X0, texY0, TAIL_X1, texY1, light, r, g, b, a);
         x += tailLength;
 
-        renderHorizontalSegment(
-                consumer,
-                poseStack.last(),
-                x,
-                x + bodyLength,
-                width,
-                TEX_W,
-                TEX_H,
-                BODY_X0,
-                texY0,
-                BODY_X1,
-                texY1,
-                light,
-                r,
-                g,
-                b,
-                a
-        );
+        renderHorizontalSegment(consumer, poseStack.last(), x, x + bodyLength, width, TEX_W, TEX_H, BODY_X0, texY0, BODY_X1, texY1, light, r, g, b, a);
         x += bodyLength;
 
-        renderHorizontalSegment(
-                consumer,
-                poseStack.last(),
-                x,
-                x + headLength,
-                width * 0.95F,
-                TEX_W,
-                TEX_H,
-                HEAD_X0,
-                texY0,
-                HEAD_X1,
-                texY1,
-                light,
-                r,
-                g,
-                b,
-                a
-        );
+        renderHorizontalSegment(consumer, poseStack.last(), x, x + headLength, width * 0.95F, TEX_W, TEX_H, HEAD_X0, texY0, HEAD_X1, texY1, light, r, g, b, a);
+    }
+
+    @Override
+    protected float getThicknessAlpha(WingSlashProjectile entity) {
+        return 0.45F;
+    }
+
+    @Override
+    protected float getThicknessAngle(WingSlashProjectile entity) {
+        return 90.0F;
     }
 
     @Override
