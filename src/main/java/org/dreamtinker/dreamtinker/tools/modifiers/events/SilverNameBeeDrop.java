@@ -18,7 +18,6 @@ import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 
 import java.util.List;
 
-import static org.dreamtinker.dreamtinker.utils.LootHelper.LootTableItemScanner.getAllPossibleLootStacksGeneral;
 import static org.dreamtinker.dreamtinker.utils.LootHelper.LootTableItemScanner.tryExtractRareLoot;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
@@ -46,8 +45,7 @@ public class SilverNameBeeDrop {
               (livingAttacker.hasEffect(DreamtinkerEffects.SilverNameBee.get()) || DTModifierCheck.ModifierInHand(livingAttacker,
                                                                                                                   DreamtinkerModifiers.Ids.silver_name_bee))))
             return;
-        List<ItemStack> forcedStacks =
-                getAllPossibleLootStacksGeneral(serverLevel, victim, tableId -> tryExtractRareLoot(serverLevel, victim, 1, event.getLootingLevel()));
+        List<ItemStack> forcedStacks = tryExtractRareLoot(serverLevel, victim, 0.35f, event.getLootingLevel());
         for (ItemStack stack : forcedStacks) {
             if (stack.isEmpty())
                 continue;

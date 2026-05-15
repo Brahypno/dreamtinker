@@ -12,7 +12,6 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 
 import java.util.List;
 
-import static org.dreamtinker.dreamtinker.utils.LootHelper.LootTableItemScanner.getAllPossibleLootStacksGeneral;
 import static org.dreamtinker.dreamtinker.utils.LootHelper.LootTableItemScanner.tryExtractSomeLoot;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
@@ -29,8 +28,7 @@ public class VisionaryDrops {
         if (level.isClientSide || !(level instanceof ServerLevel serverLevel) || !victim.getPersistentData().getBoolean(VisionaryDrops.Visionary))
             return;
 
-        List<ItemStack> forcedStacks =
-                getAllPossibleLootStacksGeneral(serverLevel, victim, tableId -> tryExtractSomeLoot(serverLevel, victim, 1, event.getLootingLevel() * 2));
+        List<ItemStack> forcedStacks = tryExtractSomeLoot(serverLevel, victim, 0.6f, event.getLootingLevel() * 2);
         for (ItemStack stack : forcedStacks) {
             if (stack.isEmpty())
                 continue;
