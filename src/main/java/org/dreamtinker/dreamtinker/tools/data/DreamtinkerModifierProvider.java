@@ -158,12 +158,6 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.with_tears)
                 .addModules(CONSTANT_FORTUNE, ARMOR_FORTUNE, WEAPON_LOOTING, ARMOR_LOOTING, SEA_LUCK, ARMOR_LUCK)
                 .addModule(ProtectionModule.builder().eachLevel(-5f));
-        buildModifier(Ids.soul_form).levelDisplay(ModifierLevelDisplay.NO_LEVELS)
-                                    .addModules(ModifierSlotModule.slot(SlotType.ABILITY).flat(1),
-                                                ModifierSlotModule.slot(SlotType.DEFENSE).flat(1),
-                                                ModifierSlotModule.slot(DTSlotType.DELUSION).flat(1),
-                                                ModifierSlotModule.slot(SlotType.SOUL).flat(1),
-                                                ModifierSlotModule.slot(SlotType.UPGRADE).flat(1));
         buildModifier(Ids.wither_body).levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                                       .addModule(new EffectImmunityModule(MobEffects.POISON))
                                       .addModule(new EffectImmunityModule(MobEffects.WITHER))

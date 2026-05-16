@@ -136,6 +136,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<SoulBlessing> soul_blessing = MODIFIERS.register("soul_blessing", SoulBlessing::new);
     public static final StaticModifier<RandomHit> malum_distortion = MODIFIERS.register("malum_distortion", () -> new RandomHit(0.9f, 1.2f));
 
+    public static final StaticModifier<AllSlotsAddition> soul_form = MODIFIERS.register("soul_form", AllSlotsAddition::new);
     //etherium
     public static final StaticModifier<ExplosiveDefense> explosive_defense = MODIFIERS.register("explosive_defense", ExplosiveDefense::new);
     public static final StaticModifier<ExplosiveHit> explosive_hit = MODIFIERS.register("explosive_hit", ExplosiveHit::new);
@@ -326,7 +327,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId antimony_usage = id("antimony_usage");
         public static final ModifierId with_tears = id("with_tears");
         public static final ModifierId in_rain = id("in_rain");
-        public static final ModifierId soul_form = id("soul_form");
         public static final ModifierId wither_body = id("wither_body");
         public static final ModifierId continuous_explode = id("continuous_explode");
         public static final ModifierId soul_core = id("soul_core");

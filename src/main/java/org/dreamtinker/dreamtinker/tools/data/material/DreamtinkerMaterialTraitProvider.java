@@ -165,12 +165,10 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.nefarious, ARMOR, cursed_ring_bound.getId(), Ids.wither_body,
                   stone_heart.getId());
 
-        addTraits(DreamtinkerMaterialIds.soul_etherium, MELEE_HARVEST, cursed_ring_bound.getId(), ModifierIds.soulbound,
-                  Ids.soul_form, open_soul.getId(), exiles_faulty.getId(), Ids.el_etherium);
-        addTraits(DreamtinkerMaterialIds.soul_etherium, RANGED, cursed_ring_bound.getId(), ModifierIds.soulbound,
-                  Ids.soul_form, open_soul.getId(), exiles_faulty.getId());
+        addDefaultTraits(DreamtinkerMaterialIds.soul_etherium, cursed_ring_bound.getId(), ModifierIds.soulbound,
+                         soul_form.getId(), open_soul.getId(), exiles_faulty.getId(), Ids.el_etherium);
         addTraits(DreamtinkerMaterialIds.soul_etherium, ARMOR, cursed_ring_bound.getId(), ModifierIds.soulbound,
-                  Ids.soul_form, soul_blessing.getId(), open_soul.getId());
+                  soul_form.getId(), soul_blessing.getId(), open_soul.getId());
 
 
         addDefaultTraits(DreamtinkerMaterialIds.spirit_fabric, malum_distortion);
