@@ -1,3 +1,6 @@
 {
-  "parent": "dreamtinker:block/narcissus"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "dreamtinker:block/narcissus"
+  }
 }

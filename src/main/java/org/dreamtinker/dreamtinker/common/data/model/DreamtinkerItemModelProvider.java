@@ -63,7 +63,8 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-
+        withExistingParent(DreamtinkerCommon.narcissus.getId().getPath(), parent_item)
+                .texture("layer0", new ResourceLocation(Dreamtinker.MODID, "block/narcissus"));
         generateItemModel(DreamtinkerCommon.raw_stibnite, "");
         generateItemModel(DreamtinkerCommon.valentinite, "materials");
         generateItemModel(DreamtinkerCommon.nigrescence_antimony, "materials");

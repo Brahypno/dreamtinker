@@ -41,9 +41,9 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
         ResourceLocation crying_obsidian = new ResourceLocation("block/crying_obsidian");
         paneBlock(DreamtinkerCommon.crying_obsidian_plane.get(), "crying_obsidian_pane/", crying_obsidian, crying_obsidian, false, -1, false,
                   RenderType.solid());
-        simpleBlockWithItem(DreamtinkerCommon.narcissus.get(),
-                            models().cross("narcissus", modLoc("block/narcissus"))
-                                    .renderType("cutout").guiLight(BlockModel.GuiLight.FRONT));
+        simpleBlock(DreamtinkerCommon.narcissus.get(),
+                    models().cross("narcissus", modLoc("block/narcissus"))
+                            .renderType("cutout").guiLight(BlockModel.GuiLight.FRONT));
         simpleBlockWithItem(DreamtinkerCommon.potted_narcissus.get(),
                             models().withExistingParent("potted_narcissus", new ResourceLocation("minecraft", "block/flower_pot_cross"))
                                     .texture("plant", blockTexture(DreamtinkerCommon.narcissus.get()))
