@@ -195,9 +195,9 @@ public class mei extends BattleModifier {
                     }
                 }
                 if ((150 <= level || !RedShadeEnable.get()) && tool.getModifierLevel(DreamtinkerModifiers.despair_mist.getId()) < 1)
-                    MaskService.ensureOn(player, 0xDC3D3A3A, -1);
+                    MaskService.overlay(player, Dreamtinker.getLocation("modifier/mei"), 0xDC3D3A3A, 10, -1);
                 else if (100 <= level && tool.getModifierLevel(DreamtinkerModifiers.despair_mist.getId()) < 1)
-                    MaskService.ensureOn(player, 0xAC8A221C, -1);
+                    MaskService.overlay(player, Dreamtinker.getLocation("modifier/mei"), 0xAC8A221C, 10, -1);
             }
         }
     }

@@ -2,6 +2,7 @@ package org.dreamtinker.dreamtinker.tools.modifiers.events;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -15,6 +16,7 @@ public final class MaskCleanup {
     @SubscribeEvent
     public static void onLogout(net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent e) {
         if (e.getEntity() instanceof net.minecraft.server.level.ServerPlayer sp){
+            MaskService.clearSilent(sp);
             clearServerPlayer(sp);
         }
     }
@@ -32,15 +34,21 @@ public final class MaskCleanup {
         if (entity.level().isClientSide)
             return;
         if (entity instanceof ServerPlayer player){
+            MaskService.clear(player, 6);
             clearServerPlayer(player);
         }
     }
 
     private static void clearServerPlayer(ServerPlayer player) {
-        MaskService.sendMaskOff(player, 0);
-        MaskService.clear(player);
         BlockViewerService.sendBlockViewOff(player);
         BlockViewerService.clear(player);
+    }
+
+    @SubscribeEvent
+    public static void onServerTick(TickEvent.ServerTickEvent event) {
+        if (event.phase != TickEvent.Phase.END)
+            return;
+        MaskService.tick(event.getServer());
     }
 }
 

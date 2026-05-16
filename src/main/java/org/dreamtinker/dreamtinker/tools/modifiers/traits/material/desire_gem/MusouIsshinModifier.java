@@ -100,12 +100,12 @@ public class MusouIsshinModifier extends Modifier implements LeftClickHook {
         ItemStack stack = player.getItemBySlot(equipmentSlot);
         if (WishPowerData.updateState(tool, player.serverLevel(), COOLDOWN_DURATION)){
             if (!stack.isEmpty() && stack.is(TinkerTags.Items.MODIFIABLE))
-                VisionaryWishes.updateStack(stack, false);
+                VisionaryWishes.updateStack(stack, player, false);
         }
         if (!WishPowerData.canRelease(tool, player.level()))
             return;
         if (!stack.isEmpty() && stack.is(TinkerTags.Items.MODIFIABLE))
-            VisionaryWishes.updateStack(stack, true);
+            VisionaryWishes.updateStack(stack, player, true);
         ToolStack ts = ToolStack.from(stack);
 
         LivingEntity target = findTarget(player, SEARCH_RANGE);

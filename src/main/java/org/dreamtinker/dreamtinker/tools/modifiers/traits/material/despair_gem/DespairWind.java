@@ -12,8 +12,8 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
+import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.utils.DTHelper;
@@ -30,21 +30,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
 
-import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.DespairShade;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.RedShadeEnable;
 
 public class DespairWind extends BattleModifier {
-    @Override
-    public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
-        if (world.isClientSide)
-            return;
-        if (holder instanceof ServerPlayer player){
-            if ((isCorrectSlot || isSelected) && world.getGameTime() % 20 == 0)
-                if (world.random.nextFloat() < DespairShade.get())
-                    MaskService.ensureOn(player, RedShadeEnable.get() ? 0x568A221C : 0x6E3D3A3A, 100);
-            MaskService.ensureOff(player, 100);
-        }
-    }
 
     @Override
     public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
@@ -52,6 +40,10 @@ public class DespairWind extends BattleModifier {
         LivingEntity attacker = context.getAttacker();
         ArrayList<Attribute> attributes = new ArrayList<>(Arrays.asList(Attributes.ARMOR, Attributes.ARMOR_TOUGHNESS));
         if (null != target && !target.level().isClientSide){
+            if (context.getPlayerAttacker() instanceof ServerPlayer sp){
+                MaskService.colorIsolation(sp, Dreamtinker.getLocation("modifier/despair_wind"), RedShadeEnable.get() ? 0xFF8A221C : 0x6E3D3A3A, 50, 0.55F,
+                                           1.28F, 100, -1);
+            }
             DTHelper.sendVibeBarFx((ServerLevel) target.level(), attacker, target, 0xFF971E1E);
             for (Attribute attr : attributes) {
                 AttributeInstance attr_instance = target.getAttribute(attr);
@@ -92,6 +84,9 @@ public class DespairWind extends BattleModifier {
         LivingEntity victim = context.getLivingTarget();
         if (null != victim && !victim.level().isClientSide){
             remove_attributes(context.getLivingTarget());
+            if (context.getPlayerAttacker() instanceof ServerPlayer sp){
+                MaskService.remove(sp, Dreamtinker.getLocation("modifier/despair_wind"));
+            }
         }
     }
 
@@ -100,8 +95,7 @@ public class DespairWind extends BattleModifier {
         DTMethodHandler.invokeLivingHurt(context.getLivingTarget(),
                                          DreamtinkerDamageTypes.source(context.getLevel().registryAccess(), DreamtinkerDamageTypes.NULL_VOID,
                                                                        context.makeDamageSource()), damageAttempted);
-        if (null != context.getLivingTarget() && !context.getLivingTarget().level().isClientSide)
-            remove_attributes(context.getLivingTarget());
+        afterMeleeHit(tool, modifier, context, damageAttempted);
     }
 
     private void remove_attributes(LivingEntity entity) {

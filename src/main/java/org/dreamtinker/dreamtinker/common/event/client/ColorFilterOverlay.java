@@ -6,20 +6,25 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.client.ClientMask;
+import org.dreamtinker.dreamtinker.library.client.ColorMaskMode;
 
-// ColorFilterOverlay.java  (Client-only)
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class ColorFilterOverlay {
     public static final net.minecraftforge.client.gui.overlay.IGuiOverlay OVERLAY = (gui, g, pt, w, h) -> {
-        if (!ClientMask.enabled)
+        if (!ClientMask.enabled || ClientMask.mode != ColorMaskMode.OVERLAY)
             return;
+
         float fac = ClientMask.alphaFactor();
-        if (fac <= 0f)
+        if (fac <= 0F)
             return;
+
         int a = (int) (((ClientMask.argb >>> 24) & 0xFF) * fac) & 0xFF;
         int argb = (a << 24) | (ClientMask.argb & 0xFFFFFF);
-        g.fill(0, 0, w, h, argb);              // 整屏铺色
+
+        g.fill(0, 0, w, h, argb);
     };
+
+    private ColorFilterOverlay() {}
 
     @SubscribeEvent
     public static void onReg(RegisterGuiOverlaysEvent e) {
