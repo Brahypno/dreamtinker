@@ -56,6 +56,7 @@ import org.dreamtinker.dreamtinker.config.DreamtinkerConfig;
 import org.dreamtinker.dreamtinker.fluids.DreamtinkerFluids;
 import org.dreamtinker.dreamtinker.library.client.DreamtinkerClient;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
+import org.dreamtinker.dreamtinker.library.compact.eidolon.DTEidolonCompact;
 import org.dreamtinker.dreamtinker.library.event.PlayerLeftClickEvent;
 import org.dreamtinker.dreamtinker.library.tools.DTSlotType;
 import org.dreamtinker.dreamtinker.network.DNetwork;
@@ -160,6 +161,9 @@ public class Dreamtinker {
                                      SpawnPlacements.Type.ON_GROUND,
                                      Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                                      AggressiveFox::checkAggressiveFoxSpawnRules);
+            if (ModList.get().isLoaded("eidolon")){
+                event.enqueueWork(DTEidolonCompact::init);
+            }
             DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> DTSlotType::init);
         });
     }
