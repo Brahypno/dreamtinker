@@ -16,6 +16,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.boss.enderdragon.EndCrystal;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
@@ -32,6 +33,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.MemoryBase;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.dreamtinker.dreamtinker.utils.DTMethodHandler;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.TinkerDamageTypes;
@@ -51,6 +53,7 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
     private IToolStackView toolStackView;
     private static final EntityDataAccessor<FluidStack> FLUID;
     private static final EntityDataAccessor<Integer> CHASE_LIVING;
+    private static final EntityDataAccessor<Integer> COLOR;
     private float power;
     private int life = 30 * 20;
     private int knock_back;
@@ -88,88 +91,17 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
         return builder;
     }
 
-    @Override
-    protected boolean canHitEntity(@NotNull Entity p_36743_) {
-        return (getChaseLiving() < 1 ||
-                (p_36743_ instanceof LivingEntity entity && entity.isAlive() && !(p_36743_ instanceof ArmorStand))) &&
-               (super.canHitEntity(p_36743_) || !p_36743_.canBeHitByProjectile());
+    static {
+        FLUID = SynchedEntityData.defineId(NarcissusFluidProjectile.class, TinkerFluids.FLUID_DATA_SERIALIZER);
+        CHASE_LIVING = SynchedEntityData.defineId(NarcissusFluidProjectile.class, EntityDataSerializers.INT);
+        COLOR = SynchedEntityData.defineId(NarcissusFluidProjectile.class, EntityDataSerializers.INT);
     }
 
     @Override
-    public void tick() {
-        super.tick();
-        if (this.isRemoved())
-            return;
-
-        // 旋转 & 粒子（粒子只在客户端）
-        this.updateRotation();
-
-
-        // --- 追踪逻辑（不变，写回 vel） ---
-        Vec3 vel = this.getDeltaMovement();
-        if (getChaseLiving() > 1 && !this.onGround()){
-            List<LivingEntity> candidates = this.level().getEntitiesOfClass(
-                    LivingEntity.class,
-                    this.getBoundingBox().inflate(12),
-                    t -> t.isAlive()
-                         && t != this.getOwner()
-                         && !(this.getOwner() != null && t.isAlliedTo(this.getOwner()))
-                         && !(t instanceof ArmorStand)
-            );
-            if (!candidates.isEmpty()){
-                LivingEntity nearest = candidates.stream()
-                                                 .min(Comparator.comparingDouble(e -> e.distanceToSqr(this)))
-                                                 .get();
-                Vec3 aim = nearest.position().add(0, nearest.getBbHeight() * 0.5, 0).subtract(this.position());
-                vel = this.getDeltaMovement().add(aim.normalize()).scale(0.75 * Math.max(1, getChaseLiving() - 1));
-            }
-        }
-
-        // --- 连续实体碰撞：求最早命中时刻 t* ---
-        Vec3 from = this.position();
-        ResultTOI toi = sweepToFirstEntityHit(from, vel);
-        boolean impacted = false;
-
-        if (toi.hit != null && toi.hit.getType() != HitResult.Type.MISS){
-            // 把位置推进到命中点（略微回退 epsilon，避免下一帧重叠)
-            double t = Math.max(0.0, Math.min(1.0, toi.t));
-            Vec3 hitPos = from.add(vel.scale(t));
-            this.setPos(hitPos.x, hitPos.y, hitPos.z);
-
-            if (!ForgeEventFactory.onProjectileImpact(this, toi.hit)){
-                this.onHit(toi.hit); // 只实体命中
-            }
-            impacted = true;
-        }
-
-        if (!this.isRemoved() && !impacted){
-            // 未命中：推进到完整终点
-            Vec3 to = from.add(vel);
-            this.setPos(to.x, to.y, to.z);
-            if (level().isClientSide && life <= 590){
-                level().addParticle(ParticleTypes.SOUL_FIRE_FLAME, getX(), getY(), getZ(), 0, 0, 0);
-            }
-        }
-
-        if (!this.isRemoved()){
-            // 阻尼 & 重力
-            Vec3 v2 = this.getDeltaMovement();
-            if (!impacted)
-                v2 = vel; // onHit 可能修改了速度，命中过则尊重修改
-            v2 = v2.scale(0.99F);
-            if (!this.isNoGravity()){
-                FluidStack fluid = this.getFluid();
-                v2 = v2.add(0.0F, fluid.getFluid().getFluidType().isLighterThanAir() ? 0.06 : -0.06, 0.0F);
-            }
-            this.setDeltaMovement(v2);
-            --life;
-        }
-
-        if (this.getY() > this.level().getMaxBuildHeight() + 64
-            || this.getY() < this.level().getMinBuildHeight() - 64
-            || this.life <= 0){
-            this.discard();
-        }
+    protected boolean canHitEntity(@NotNull Entity p_36743_) {
+        return (getChaseLiving() < 1 || p_36743_ instanceof EndCrystal ||
+                (p_36743_ instanceof LivingEntity entity && entity.isAlive() && !(p_36743_ instanceof ArmorStand))) &&
+               (super.canHitEntity(p_36743_) || !p_36743_.canBeHitByProjectile());
     }
 
     /**
@@ -261,6 +193,97 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
     }
 
     @Override
+    public void tick() {
+        super.tick();
+        if (this.isRemoved())
+            return;
+
+        // 旋转 & 粒子（粒子只在客户端）
+        this.updateRotation();
+
+
+        // --- 追踪逻辑（不变，写回 vel） ---
+        Vec3 vel = this.getDeltaMovement();
+        if (getChaseLiving() > 1 && !this.onGround()){
+            List<Entity> candidates = this.level().getEntitiesOfClass(
+                    Entity.class,
+                    this.getBoundingBox().inflate(12),
+                    t -> t instanceof EndCrystal || t instanceof LivingEntity && t.isAlive()
+                                                    && t != this.getOwner()
+                                                    && !(this.getOwner() != null && t.isAlliedTo(this.getOwner()))
+                                                    && !(t instanceof ArmorStand)
+            );
+            if (!candidates.isEmpty()){
+                Entity nearest = candidates.stream()
+                                           .min(Comparator.comparingDouble(e -> e.distanceToSqr(this)))
+                                           .get();
+                Vec3 aim = nearest.position().add(0, nearest.getBbHeight() * 0.5, 0).subtract(this.position());
+                vel = this.getDeltaMovement().add(aim.normalize()).scale(0.75 * Math.max(1, getChaseLiving() - 1));
+            }
+        }
+
+        // --- 连续实体碰撞：求最早命中时刻 t* ---
+        Vec3 from = this.position();
+        ResultTOI toi = sweepToFirstEntityHit(from, vel);
+        boolean impacted = false;
+
+        if (toi.hit != null && toi.hit.getType() != HitResult.Type.MISS){
+            // 把位置推进到命中点（略微回退 epsilon，避免下一帧重叠)
+            double t = Math.max(0.0, Math.min(1.0, toi.t));
+            Vec3 hitPos = from.add(vel.scale(t));
+            this.setPos(hitPos.x, hitPos.y, hitPos.z);
+
+            if (!ForgeEventFactory.onProjectileImpact(this, toi.hit)){
+                this.onHit(toi.hit); // 只实体命中
+            }
+            impacted = true;
+        }
+
+        if (!this.isRemoved() && !impacted){
+            // 未命中：推进到完整终点
+            Vec3 to = from.add(vel);
+            this.setPos(to.x, to.y, to.z);
+            if (level().isClientSide && life <= 590){
+                level().addParticle(ParticleTypes.SOUL_FIRE_FLAME, getX(), getY(), getZ(), 0, 0, 0);
+            }
+        }
+
+        if (!this.isRemoved()){
+            // 阻尼 & 重力
+            Vec3 v2 = this.getDeltaMovement();
+            if (!impacted)
+                v2 = vel; // onHit 可能修改了速度，命中过则尊重修改
+            v2 = v2.scale(0.99F);
+            if (!this.isNoGravity()){
+                FluidStack fluid = this.getFluid();
+                v2 = v2.add(0.0F, fluid.getFluid().getFluidType().isLighterThanAir() ? 0.06 : -0.06, 0.0F);
+            }
+            this.setDeltaMovement(v2);
+            --life;
+        }
+
+        if (this.getY() > this.level().getMaxBuildHeight() + 64
+            || this.getY() < this.level().getMinBuildHeight() - 64
+            || this.life <= 0){
+            this.discard();
+        }
+    }
+
+
+    public boolean isCritArrow() {return this.crit;}
+
+    public void setCrit(boolean crit) {this.crit = crit;}
+
+    @Override
+    protected void onHit(HitResult p_37260_) {
+        HitResult.Type hitresult$type = p_37260_.getType();
+        if (hitresult$type == HitResult.Type.ENTITY){
+            this.onHitEntity((EntityHitResult) p_37260_);
+            this.level().gameEvent(GameEvent.PROJECTILE_LAND, p_37260_.getLocation(), GameEvent.Context.of(this, null));
+        }
+    }
+
+    @Override
     protected void onHitEntity(@NotNull EntityHitResult result) {
         Entity target = result.getEntity();
         int dmg = (int) this.getDamage();
@@ -272,7 +295,6 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
 
         Entity entity1 = this.getOwner();
         if (null != entity1){
-
             if (entity1 instanceof LivingEntity){
                 ((LivingEntity) entity1).setLastHurtMob(target);
             }
@@ -298,6 +320,8 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
                     if (this.isOnFire()){
                         target.setSecondsOnFire(5 * Math.max(1, this.level().random.nextInt(3)));
                     }
+            }else if (target instanceof EndCrystal ec){
+                ec.hurt(dmg(ec, entity1), dmg);
             }
         }
 
@@ -335,28 +359,6 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
                 }
             }
         }
-
-
-    }
-
-
-    public boolean isCritArrow() {return this.crit;}
-
-    public void setCrit(boolean crit) {this.crit = crit;}
-
-    @Override
-    protected void onHit(HitResult p_37260_) {
-        HitResult.Type hitresult$type = p_37260_.getType();
-        if (hitresult$type == HitResult.Type.ENTITY){
-            this.onHitEntity((EntityHitResult) p_37260_);
-            this.level().gameEvent(GameEvent.PROJECTILE_LAND, p_37260_.getLocation(), GameEvent.Context.of(this, null));
-        }
-    }
-
-    @Override
-    protected void defineSynchedData() {
-        this.entityData.define(FLUID, FluidStack.EMPTY);
-        this.entityData.define(CHASE_LIVING, 0);
     }
 
     public void recreateFromPacket(@NotNull ClientboundAddEntityPacket packet) {
@@ -413,6 +415,13 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
     }
 
     @Override
+    protected void defineSynchedData() {
+        this.entityData.define(FLUID, FluidStack.EMPTY);
+        this.entityData.define(CHASE_LIVING, 0);
+        this.entityData.define(COLOR, 0);
+    }
+
+    @Override
     public void setPower(float power) {
         this.power = power;
     }
@@ -426,17 +435,17 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
         return this.getFluid().getDisplayName();
     }
 
-    public void setTool(@NotNull IToolStackView tool) {
-        this.toolStackView = tool;
-        this.entityData.set(CHASE_LIVING, tool.getModifierLevel(DreamtinkerModifiers.Ids.soul_core) + 1);
+    public int getColor() {
+        return this.entityData.get(COLOR);
     }
 
     public IToolStackView getTool() {
         return this.toolStackView;
     }
 
-    static {
-        FLUID = SynchedEntityData.defineId(NarcissusFluidProjectile.class, TinkerFluids.FLUID_DATA_SERIALIZER);
-        CHASE_LIVING = SynchedEntityData.defineId(NarcissusFluidProjectile.class, EntityDataSerializers.INT);
+    public void setTool(@NotNull IToolStackView tool) {
+        this.toolStackView = tool;
+        this.entityData.set(CHASE_LIVING, tool.getModifierLevel(DreamtinkerModifiers.Ids.soul_core) + 1);
+        this.entityData.set(COLOR, DTHelper.materialToRender(0, tool.getMaterial(0)));
     }
 }

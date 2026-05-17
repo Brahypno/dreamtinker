@@ -11,6 +11,8 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.Entity.SlashOrbitEntity;
 import org.jetbrains.annotations.NotNull;
@@ -26,6 +28,7 @@ import org.joml.Matrix4f;
  * - 自发光（FULL_BRIGHT）
  * - 第一人称可见性优化（轻微仰角 TILT_DEG）
  */
+@OnlyIn(Dist.CLIENT)
 public class SlashOrbitRenderer extends EntityRenderer<SlashOrbitEntity> {
 
     private static final ResourceLocation TEX =
