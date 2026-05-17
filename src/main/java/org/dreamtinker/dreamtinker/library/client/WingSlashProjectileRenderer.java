@@ -6,10 +6,13 @@ import com.mojang.math.Axis;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.Entity.WingSlashProjectile;
 import org.jetbrains.annotations.NotNull;
 
+@OnlyIn(Dist.CLIENT)
 public class WingSlashProjectileRenderer extends AbstractSlashProjectileRenderer<WingSlashProjectile> {
     private static final ResourceLocation TEXTURE = new ResourceLocation(
             Dreamtinker.MODID,

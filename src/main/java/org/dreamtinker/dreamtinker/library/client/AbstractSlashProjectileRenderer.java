@@ -10,9 +10,12 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.dreamtinker.dreamtinker.Entity.AbstractSlashProjectile;
 import org.jetbrains.annotations.NotNull;
 
+@OnlyIn(Dist.CLIENT)
 public abstract class AbstractSlashProjectileRenderer<T extends AbstractSlashProjectile> extends EntityRenderer<T> {
     protected AbstractSlashProjectileRenderer(EntityRendererProvider.Context context) {
         super(context);

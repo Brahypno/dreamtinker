@@ -5,10 +5,13 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.Entity.CrescentSlashProjectile;
 import org.jetbrains.annotations.NotNull;
 
+@OnlyIn(Dist.CLIENT)
 public class CrescentSlashProjectileRenderer extends AbstractSlashProjectileRenderer<CrescentSlashProjectile> {
     private static final ResourceLocation TEXTURE = new ResourceLocation(
             Dreamtinker.MODID,

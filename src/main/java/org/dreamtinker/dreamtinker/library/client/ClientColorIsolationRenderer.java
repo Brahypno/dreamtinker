@@ -7,12 +7,15 @@ import net.minecraft.client.renderer.EffectInstance;
 import net.minecraft.client.renderer.PostChain;
 import net.minecraft.client.renderer.PostPass;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.List;
 
+@OnlyIn(Dist.CLIENT)
 public final class ClientColorIsolationRenderer {
     private static final ResourceLocation SHADER = Dreamtinker.getLocation("shaders/post/color_mask.json");
     private static PostChain chain;
