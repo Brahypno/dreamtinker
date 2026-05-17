@@ -14,12 +14,13 @@ import static org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.knockArt
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class GeneralDeathHandler {
-    @SubscribeEvent(priority = EventPriority.LOWEST)
+    @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
     public static void LivingDeathEvent(LivingDeathEvent event) {
         LivingEntity victim = event.getEntity();
         if (event.isCanceled()){
             if (victim.hasEffect(DreamtinkerEffects.cursed.get()))
                 event.setCanceled(false);
+
             return;
         }
         Level world = victim.level();

@@ -24,6 +24,7 @@ public class heal_handler {
         if (entity.hasEffect(DreamtinkerEffects.cursed.get())){
             event.setAmount(0);
             event.setCanceled(true);
+            return;
         }
         if (data.contains(TAG_BASE_HEALTH)){
             // 读取记录的基础血量上限
