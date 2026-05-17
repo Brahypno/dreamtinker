@@ -14,7 +14,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.tools.items.SilenceGlove;
+import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifierHook;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
@@ -33,7 +33,7 @@ public class addSilenceGloveCurio {
 
     public static void attachCaps(AttachCapabilitiesEvent<ItemStack> e) {
         ItemStack stack = e.getObject();
-        if (!(stack.getItem() instanceof SilenceGlove))
+        if (!stack.is(DreamtinkerTools.silence_glove.asItem()))
             return;
         if (!net.minecraftforge.fml.ModList.get().isLoaded("curios"))
             return;

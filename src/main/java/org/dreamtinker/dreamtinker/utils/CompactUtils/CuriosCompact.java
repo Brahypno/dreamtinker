@@ -1,11 +1,10 @@
 package org.dreamtinker.dreamtinker.utils.CompactUtils;
 
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.ModList;
-import org.dreamtinker.dreamtinker.tools.items.SilenceGlove;
+import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
@@ -120,10 +119,6 @@ public class CuriosCompact {
 
 
     private static boolean isSilentGlove(ItemStack st) {
-        if (st.isEmpty())
-            return false;
-        Item it = st.getItem();
-        // 任选一种判定方式：
-        return it instanceof SilenceGlove;
+        return st.is(DreamtinkerTools.silence_glove.asItem());
     }
 }

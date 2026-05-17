@@ -15,7 +15,6 @@ import org.dreamtinker.dreamtinker.library.modifiers.DreamtinkerHook;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.InteractionInterface;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
-import org.dreamtinker.dreamtinker.tools.items.SilenceGlove;
 import org.dreamtinker.dreamtinker.utils.CompactUtils.CuriosCompact;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -128,7 +127,7 @@ public class WeaponDreams extends NoLevelsModifier implements InteractionInterfa
             if (chosen.isEmpty() || !chosen.is(TinkerTags.Items.MODIFIABLE))
                 return;
             if (natural_order){
-                if (proxySnap.getItem() instanceof SilenceGlove){
+                if (proxySnap.is(DreamtinkerTools.silence_glove.asItem())){
                     ToolStack toolStack = ToolStack.from(proxySnap);
                     toolStack.getPersistentData().putInt(TAG_LAST_USE, chosenIdx);
                     toolStack.updateStack(proxySnap);

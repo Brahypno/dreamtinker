@@ -149,6 +149,7 @@ public class DreamtinkerCommon extends DreamtinkerModule {
     public static final RegistryObject<Item> larimar = ITEMS.register("larimar", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> amber = ITEMS.register("amber", () -> new Item(ITEM_PROPS.rarity(Rarity.RARE)));
     public static final RegistryObject<Item> despair_gem = ITEMS.register("despair_gem", () -> new Item(ITEM_PROPS.rarity(Rarity.EPIC)) {
+        @Override
         public boolean isFoil(ItemStack p_41453_) {
             return true;
         }

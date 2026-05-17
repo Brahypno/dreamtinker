@@ -2,6 +2,7 @@ package org.dreamtinker.dreamtinker.tools;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
@@ -33,6 +34,7 @@ import slimeknights.tconstruct.library.tools.item.IModifiable;
 import slimeknights.tconstruct.library.tools.item.ModifiableItem;
 import slimeknights.tconstruct.tools.data.sprite.TinkerMaterialSpriteProvider;
 import slimeknights.tconstruct.tools.data.sprite.TinkerPartSpriteProvider;
+import slimeknights.tconstruct.tools.item.ModifiableSwordItem;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -51,13 +53,19 @@ public class DreamtinkerTools extends DreamtinkerModule {
 
     public static final ItemObject<TNTArrow> tntarrow =
             MODI_TOOLS.register("tntarrow", () -> new TNTArrow((new Item.Properties()).stacksTo(4), DTtoolsDefinition.TNTARROW, 4));
-    public static final ItemObject<ModifiableItem> mashou = MODI_TOOLS.register("mashou", () -> new MaShou(UNSTACKABLE_PROPS, DTtoolsDefinition.MASHOU));
+    public static final ItemObject<ModifiableItem> mashou =
+            MODI_TOOLS.register("mashou", () -> new ModifiableSwordItem(UNSTACKABLE_PROPS, DTtoolsDefinition.MASHOU) {
+                @Override
+                public boolean canDisableShield(ItemStack stack, ItemStack shield, LivingEntity entity, LivingEntity attacker) {
+                    return true;
+                }
+            });
     public static final ItemObject<ModifiableItem> narcissus_wing =
             MODI_TOOLS.register("narcissus_wing", () -> new NarcissusWing(UNSTACKABLE_PROPS.rarity(Rarity.EPIC), DTtoolsDefinition.NarcissusWing));
     public static final EnumObject<ArmorItem.Type, UnderArmorItem> underPlate =
             MODI_TOOLS.registerEnum("under_plate", ArmorItem.Type.values(), type -> new UnderArmorItem(DTtoolsDefinition.UNDER_PLATE, type, UNSTACKABLE_PROPS));
     public static final ItemObject<ModifiableItem> silence_glove =
-            MODI_TOOLS.register("silence_glove", () -> new SilenceGlove(UNSTACKABLE_PROPS, DTtoolsDefinition.SilenceGlove));
+            MODI_TOOLS.register("silence_glove", () -> new ModifiableItem(UNSTACKABLE_PROPS, DTtoolsDefinition.SilenceGlove));
     public static final ItemObject<ChainSawBlade> chain_saw_blade =
             MODI_TOOLS.register("chain_saw_blade", () -> new ChainSawBlade(UNSTACKABLE_PROPS, DTtoolsDefinition.ChainSawBlade));
     public static final ItemObject<ModifiableItem> ritual_blade =

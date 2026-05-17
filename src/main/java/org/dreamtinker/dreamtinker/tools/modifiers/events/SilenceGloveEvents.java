@@ -17,7 +17,6 @@ import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
-import org.dreamtinker.dreamtinker.tools.items.SilenceGlove;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.silence_glove.WeaponDreams;
 import org.dreamtinker.dreamtinker.utils.CompactUtils.CuriosCompact;
 import slimeknights.tconstruct.common.TinkerTags;
@@ -56,7 +55,7 @@ public class SilenceGloveEvents {
             return;
 
         ItemStack silenceGlove = getSilenceGlove(player);
-        if (silenceGlove.isEmpty() || !(silenceGlove.getItem() instanceof SilenceGlove)){
+        if (silenceGlove.isEmpty() || !silenceGlove.is(DreamtinkerTools.silence_glove.asItem())){
             return; // No valid glove found
         }
 
