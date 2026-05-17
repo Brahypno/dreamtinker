@@ -31,17 +31,17 @@ public class SlashOrbitRenderer extends EntityRenderer<SlashOrbitEntity> {
     private static final ResourceLocation TEX =
             Dreamtinker.getLocation("textures/entity/slash_blade.png");
 
-    private static final float DENSITY = 1.35f; // 整体透明度乘子
-    private static final float MIN_ALPHA = 0.55f; // 最低透明度夹底
-    private static final int U_SLICES = 48;   // 沿弧方向
-    private static final int V_SLICES = 16;   // 沿径向方向
     private static final float R_MID_UV = 0.70f;
     private static final float R_HALF_T_UV = 0.11f;                   // 0.22/2
     private static final float R_IN_UV = R_MID_UV - R_HALF_T_UV;  // ≈0.59
     private static final float R_OUT_UV = R_MID_UV + R_HALF_T_UV;  // ≈0.81
-    private static final int MAX_INNER_LAYERS = 7;
-    private static final float STEP_OVERLAP = 0.70f; // 相邻层中心间距 = STEP_OVERLAP * 可见带宽
     private static final float MIN_STEP_WORLD = 0.01f; // 最小步长(防止停滞)
+    private static final float DENSITY = 1.65f;
+    private static final float MIN_ALPHA = 0.72f;
+    private static final int U_SLICES = 64;
+    private static final int V_SLICES = 16;
+    private static final int MAX_INNER_LAYERS = 16;
+    private static final float STEP_OVERLAP = 0.42f;
 
 
     public SlashOrbitRenderer(EntityRendererProvider.Context ctx) {
@@ -51,6 +51,36 @@ public class SlashOrbitRenderer extends EntityRenderer<SlashOrbitEntity> {
     @Override
     public @NotNull ResourceLocation getTextureLocation(SlashOrbitEntity e) {
         return TEX;
+    }
+
+    // === 渐变：与之前保持一致（可复用你已有版本） ==========================
+    private static float gradT(SlashOrbitEntity.GradMode mode, float alongArc01, float radial01, float hueRoll) {
+        return switch (mode) {
+            case SOLID -> 0f;               // 如不想随时间滚动可返回 0
+            case ANGULAR -> wrap01(alongArc01 + hueRoll);  // 沿弧角（此处用 u 近似）
+            case LENGTH -> wrap01(alongArc01);            // 与 ANGULAR 同义
+            case RADIAL -> wrap01(radial01 + hueRoll);    // 内→外
+            case TIME_RAINBOW -> wrap01(hueRoll);               // 纯时间
+        };
+    }
+
+
+    private static void putARGB(
+            VertexConsumer vc, Matrix4f m, Matrix3f n,
+            float x, float y, float z, float u, float v,
+            int argb, float mulA, int light, int ov) {
+        float a = ((argb >>> 24) & 255) / 255f * mulA;
+        float r = ((argb >> 16) & 255) / 255f;
+        float g = ((argb >> 8) & 255) / 255f;
+        float b = ((argb) & 255) / 255f;
+        vc.vertex(m, x, y, z).color(r, g, b, a).uv(u, v).overlayCoords(ov).uv2(light).normal(n, 0, 1, 0).endVertex();
+    }
+
+    // 将 UV -> 以 (0.5,0.5) 为中心的“归一半径”，再映射到贴图弧带的 [R_IN_UV, R_OUT_UV] → 0..1
+    private static float radial01FromUV(float u, float v) {
+        float du = u - 0.5f, dv = v - 0.5f;
+        float rad = Mth.clamp((float) Math.sqrt(du * du + dv * dv) / 0.5f, 0f, 1f); // 0..1
+        return Mth.clamp((rad - R_IN_UV) / (R_OUT_UV - R_IN_UV), 0f, 1f);
     }
 
     @Override
@@ -81,20 +111,15 @@ public class SlashOrbitRenderer extends EntityRenderer<SlashOrbitEntity> {
         float baseScale = r / R_MID_UV;
         pose.scale(baseScale, 1f, baseScale);
         // 基准缩放：让贴图“中径”对应世界半径 r（作为最外层）
-        java.util.ArrayList<Float> centers = new java.util.ArrayList<>(MAX_INNER_LAYERS);
-        for (float rc = r; rc >= r - th - 1e-4f && centers.size() < MAX_INNER_LAYERS; ) {
-            centers.add(rc);
+        float innerR = Math.max(0.05f, r - th);
+        float visibleBandWorld = Math.max(0.02f, R_HALF_T_UV * 2f * baseScale);
+        float stepWorld = Math.max(MIN_STEP_WORLD, visibleBandWorld * STEP_OVERLAP);
+        int layerCount = Mth.clamp((int) Math.ceil((r - innerR) / stepWorld) + 1, 1, MAX_INNER_LAYERS);
 
-            // 该层相对外层的缩放（= rc / r，防止除0）
-            float layerScaleRatio = Math.max(0.05f, rc / Math.max(0.05f, r));
-            float halfWorld = R_HALF_T_UV * baseScale * layerScaleRatio;
-            float step = Math.max(MIN_STEP_WORLD, STEP_OVERLAP * (2f * halfWorld)); // 恒定重叠率
-            rc -= step;
-        }
-
-        // 保险：若没覆盖到最里边界，再补一层“最内中心”
-        if (centers.isEmpty() || centers.get(centers.size() - 1) > r - th + 1e-3f){
-            centers.add(Math.max(r - th, 0.05f));
+        float[] centers = new float[layerCount];
+        for (int i = 0; i < layerCount; i++) {
+            float t = layerCount == 1 ? 0f : (float) i / (layerCount - 1);
+            centers[i] = Mth.lerp(t, r, innerR);
         }
 
         // —— 上色参数（保留你的方式）——
@@ -153,36 +178,6 @@ public class SlashOrbitRenderer extends EntityRenderer<SlashOrbitEntity> {
         }
 
         pose.popPose();
-    }
-
-
-    private static void putARGB(
-            VertexConsumer vc, Matrix4f m, Matrix3f n,
-            float x, float y, float z, float u, float v,
-            int argb, float mulA, int light, int ov) {
-        float a = ((argb >>> 24) & 255) / 255f * mulA;
-        float r = ((argb >> 16) & 255) / 255f;
-        float g = ((argb >> 8) & 255) / 255f;
-        float b = ((argb) & 255) / 255f;
-        vc.vertex(m, x, y, z).color(r, g, b, a).uv(u, v).overlayCoords(ov).uv2(light).normal(n, 0, 1, 0).endVertex();
-    }
-
-    // 将 UV -> 以 (0.5,0.5) 为中心的“归一半径”，再映射到贴图弧带的 [R_IN_UV, R_OUT_UV] → 0..1
-    private static float radial01FromUV(float u, float v) {
-        float du = u - 0.5f, dv = v - 0.5f;
-        float rad = Mth.clamp((float) Math.sqrt(du * du + dv * dv) / 0.5f, 0f, 1f); // 0..1
-        return Mth.clamp((rad - R_IN_UV) / (R_OUT_UV - R_IN_UV), 0f, 1f);
-    }
-
-    // === 渐变：与之前保持一致（可复用你已有版本） ==========================
-    private static float gradT(SlashOrbitEntity.GradMode mode, float alongArc01, float radial01, float hueRoll) {
-        return switch (mode) {
-            case SOLID -> wrap01(hueRoll);               // 如不想随时间滚动可返回 0
-            case ANGULAR -> wrap01(alongArc01 + hueRoll);  // 沿弧角（此处用 u 近似）
-            case LENGTH -> wrap01(alongArc01);            // 与 ANGULAR 同义
-            case RADIAL -> wrap01(radial01 + hueRoll);    // 内→外
-            case TIME_RAINBOW -> wrap01(hueRoll);               // 纯时间
-        };
     }
 
     private static float wrap01(float v) {

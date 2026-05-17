@@ -10,45 +10,44 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 
 public class SlashOrbitEntity extends Entity {
+    private static final float TWO_PI = (float) (Math.PI * 2.0);
 
     @Nullable
     private LivingEntity owner;
-
-    // 可调参数
-    public int blades = 6;             // 刀片数量（围成一圈）
-    public float bladeHalfAngle = 10f;   // 每片扇形的半角（度）
-    public float damage = 0f;            // =0 只渲染；>0 则造成伤害
-    public int hitCooldown = 4;        // 同一目标命中间隔（刻）
-    private static final EntityDataAccessor<Float> RADIUS =
-            SynchedEntityData.defineId(SlashOrbitEntity.class, EntityDataSerializers.FLOAT);
-    private static final EntityDataAccessor<Float> THICKNESS =
-            SynchedEntityData.defineId(SlashOrbitEntity.class, EntityDataSerializers.FLOAT);
-    private static final EntityDataAccessor<Integer> LIFE_TICKS =
-            SynchedEntityData.defineId(SlashOrbitEntity.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Float> OMEGA =
-            SynchedEntityData.defineId(SlashOrbitEntity.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Float> RADIUS = SynchedEntityData.defineId(SlashOrbitEntity.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Float> THICKNESS = SynchedEntityData.defineId(SlashOrbitEntity.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Integer> LIFE_TICKS = SynchedEntityData.defineId(SlashOrbitEntity.class, EntityDataSerializers.INT);
 
     public enum GradMode {SOLID, ANGULAR, RADIAL, LENGTH, TIME_RAINBOW}
 
-    private static final EntityDataAccessor<Integer> COL_A =
-            SynchedEntityData.defineId(SlashOrbitEntity.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> COL_B =
-            SynchedEntityData.defineId(SlashOrbitEntity.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Integer> MODE =
-            SynchedEntityData.defineId(SlashOrbitEntity.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Boolean> USE_HSV =
-            SynchedEntityData.defineId(SlashOrbitEntity.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Float> HUE_SHIFT_SPD =
-            SynchedEntityData.defineId(SlashOrbitEntity.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Float> OMEGA = SynchedEntityData.defineId(SlashOrbitEntity.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Integer> BLADES = SynchedEntityData.defineId(SlashOrbitEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Float> BLADE_HALF_ANGLE = SynchedEntityData.defineId(SlashOrbitEntity.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Integer> MOVE_MODE = SynchedEntityData.defineId(SlashOrbitEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> COL_A = SynchedEntityData.defineId(SlashOrbitEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> COL_B = SynchedEntityData.defineId(SlashOrbitEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> MODE = SynchedEntityData.defineId(SlashOrbitEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> USE_HSV = SynchedEntityData.defineId(SlashOrbitEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Float> HUE_SHIFT_SPD = SynchedEntityData.defineId(SlashOrbitEntity.class, EntityDataSerializers.FLOAT);
+    private final Int2IntOpenHashMap lastHitAge = new Int2IntOpenHashMap();
+    public float damage = 0f;      // =0 只渲染；>0 服务端造成伤害
+    public int hitCooldown = 4;    // 同一目标命中间隔 tick
+    public boolean discardOnBlockHit = false;
 
-    private final Int2IntOpenHashMap lastHitAge = new Int2IntOpenHashMap(); // entityId -> age
+    public SlashOrbitEntity(ServerLevel level, LivingEntity owner, float radius, int life, float omega, int blades, float damage) {
+        this(level, owner, radius, life, omega, blades, damage, 0.55f, 10f);
+    }
 
     public SlashOrbitEntity(EntityType<?> type, Level level) {
         super(type, level);
@@ -56,113 +55,187 @@ public class SlashOrbitEntity extends Entity {
         this.noCulling = true;
     }
 
-    public SlashOrbitEntity(
-            ServerLevel s, LivingEntity owner,
-            float radius, int life, float omega,
-            int blades, float damage) {
-        this(s, owner, radius, life, omega, blades, damage, 0);
+    public SlashOrbitEntity(ServerLevel level, LivingEntity owner, float radius, int life, float omega, int blades, float damage, float thickness) {
+        this(level, owner, radius, life, omega, blades, damage, thickness, 10f);
     }
 
-    public SlashOrbitEntity(
-            ServerLevel s, LivingEntity owner,
-            float radius, int life, float omega,
-            int blades, float damage, float thickness) {
-        this(DreamtinkerEntityTypes.SLASH_ORBIT.get(), s);
+    public SlashOrbitEntity(ServerLevel level, LivingEntity owner, float radius, int life, float omega, int blades, float damage, float thickness, float bladeHalfAngle) {
+        this(DreamtinkerEntityTypes.SLASH_ORBIT.get(), level);
         this.owner = owner;
+        this.damage = damage;
         setRadius(radius);
         setLife(life);
         setOmega(omega);
-        this.blades = blades;
-        this.damage = damage;
+        setBlades(blades);
         setThickness(thickness);
-        this.setPos(owner.getX(), owner.getY() + owner.getBbHeight() * 0.5, owner.getZ());
+        setBladeHalfAngle(bladeHalfAngle);
+        setMoveMode(MoveMode.FOLLOW_OWNER);
+        setPos(owner.getX(), owner.getY() + owner.getBbHeight() * 0.5D, owner.getZ());
     }
 
-    @Override
-    public void tick() {
-        if (!level().isClientSide && this.tickCount >= life()){
-            discard();
-            return; // 别再往下跑 super.tick() 之类的
-        }
-        super.tick();
-        if (!level().isClientSide && owner != null && owner.isAlive()){
-            setPos(owner.getX(), owner.getY() + owner.getBbHeight() * 0.5, owner.getZ());
-        }
-        if (!level().isClientSide && damage > 0f){
-            doHits();
-        }
+    public static SlashOrbitEntity projectile(ServerLevel level, LivingEntity owner, Vec3 pos, Vec3 motion, float radius, int life, float omega, int blades, float damage, float thickness) {
+        return projectile(level, owner, pos, motion, radius, life, omega, blades, damage, thickness, 10f, false);
     }
 
-    private void doHits() {
-        double y0 = getY() - 0.6, y1 = getY() + 0.6;
-        AABB box = new AABB(getX() - radius() - 0.8, y0, getZ() - radius() - 0.8,
-                            getX() + radius() + 0.8, y1, getZ() + radius() + 0.8);
-        float phase = omega() * tickCount;                 // 当前旋转角
-        float step = (float) (2 * Math.PI / blades); // 每片中心间隔
-        float half = (float) Math.toRadians(bladeHalfAngle);
-
-        for (LivingEntity t : level().getEntitiesOfClass(LivingEntity.class, box,
-                                                         e -> e != owner && e.isAlive() && !e.isSpectator())) {
-            double dx = t.getX() - getX(), dz = t.getZ() - getZ();
-            double d = Math.sqrt(dx * dx + dz * dz);
-            if (d < radius() - 0.5 || d > radius() + 0.5)
-                continue;    // 只打环带内
-
-            float ang = (float) Math.atan2(dz, dx);             // 目标极角
-            // 将角度对齐到某一“刀片扇形”中心
-            float local = wrapToPi(ang - phase);               // 与相位的差
-            float mod = (float) Math.IEEEremainder(local, step);
-            float distToBladeCenter = Math.abs(mod);
-            if (distToBladeCenter <= half){
-                int id = t.getId();
-                int last = lastHitAge.getOrDefault(id, -999);
-                if (tickCount - last >= hitCooldown && 0 < damage){
-                    t.hurt(level().damageSources().indirectMagic(this, owner), damage);
-                    lastHitAge.put(id, tickCount);
-                }
-            }
-        }
+    public static SlashOrbitEntity projectile(ServerLevel level, LivingEntity owner, Vec3 pos, Vec3 motion, float radius, int life, float omega, int blades, float damage, float thickness, float bladeHalfAngle, boolean discardOnBlockHit) {
+        SlashOrbitEntity e = new SlashOrbitEntity(DreamtinkerEntityTypes.SLASH_ORBIT.get(), level);
+        e.owner = owner;
+        e.damage = damage;
+        e.discardOnBlockHit = discardOnBlockHit;
+        e.setRadius(radius);
+        e.setLife(life);
+        e.setOmega(omega);
+        e.setBlades(blades);
+        e.setThickness(thickness);
+        e.setBladeHalfAngle(bladeHalfAngle);
+        e.setMoveMode(MoveMode.PROJECTILE);
+        e.setPos(pos.x, pos.y, pos.z);
+        e.setDeltaMovement(motion);
+        e.hasImpulse = true;
+        return e;
     }
 
     private static float wrapToPi(float a) {
-        while (a < -Math.PI)
-            a += (float) (2 * Math.PI);
-        while (a > Math.PI)
-            a -= (float) (2 * Math.PI);
+        a %= TWO_PI;
+        if (a <= -Math.PI)
+            a += TWO_PI;
+        if (a > Math.PI)
+            a -= TWO_PI;
         return a;
     }
 
     @Override
+    public void tick() {
+        if (!level().isClientSide && tickCount >= life()){
+            discard();
+            return;
+        }
+
+        super.tick();
+
+        if (!level().isClientSide){
+            if (moveMode() == MoveMode.FOLLOW_OWNER)
+                tickFollowOwner();
+            else
+                tickProjectile();
+
+            if (damage > 0f)
+                doHits();
+        }
+    }
+
+    private void tickFollowOwner() {
+        if (owner == null || !owner.isAlive() || owner.isRemoved()){
+            discard();
+            return;
+        }
+        setDeltaMovement(Vec3.ZERO);
+        setPos(owner.getX(), owner.getY() + owner.getBbHeight() * 0.5D, owner.getZ());
+        hasImpulse = true;
+    }
+
+    private void tickProjectile() {
+        Vec3 motion = getDeltaMovement();
+        if (motion.lengthSqr() <= 1.0E-7D)
+            return;
+
+        Vec3 from = position();
+        Vec3 to = from.add(motion);
+
+        if (discardOnBlockHit){
+            BlockHitResult hit = level().clip(new ClipContext(from, to, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
+            if (hit.getType() != HitResult.Type.MISS){
+                Vec3 p = hit.getLocation();
+                setPos(p.x, p.y, p.z);
+                discard();
+                return;
+            }
+        }
+
+        setPos(to.x, to.y, to.z);
+        hasImpulse = true;
+    }
+
+    private void doHits() {
+        float r = radius();
+        float halfWidth = Math.max(0.05f, thickness() * 0.5f);
+        float min = Math.max(0f, r - halfWidth);
+        float max = r + halfWidth;
+        double y0 = getY() - 0.75D, y1 = getY() + 0.75D;
+        AABB box = new AABB(getX() - max - 0.5D, y0, getZ() - max - 0.5D, getX() + max + 0.5D, y1, getZ() + max + 0.5D);
+
+        int bladeCount = blades();
+        float phase = wrapToPi(omega() * tickCount);
+        float step = TWO_PI / bladeCount;
+        float half = (float) Math.toRadians(bladeHalfAngle());
+
+        for (LivingEntity target : level().getEntitiesOfClass(LivingEntity.class, box, e -> e != owner && e.isAlive() && !e.isSpectator())) {
+            AABB bb = target.getBoundingBox();
+            double px = Mth.clamp(getX(), bb.minX, bb.maxX);
+            double pz = Mth.clamp(getZ(), bb.minZ, bb.maxZ);
+            double dx = px - getX(), dz = pz - getZ();
+            double dSqr = dx * dx + dz * dz;
+
+            if (dSqr < min * min || dSqr > max * max)
+                continue;
+
+            float ang = (float) Math.atan2(dz, dx);
+            float local = wrapToPi(ang - phase);
+            float mod = (float) Math.IEEEremainder(local, step);
+
+            if (Math.abs(mod) > half)
+                continue;
+
+            int id = target.getId();
+            int last = lastHitAge.getOrDefault(id, -999);
+            if (tickCount - last >= hitCooldown && target.hurt(level().damageSources().indirectMagic(this, owner), damage)){
+                lastHitAge.put(id, tickCount);
+            }
+        }
+    }
+
+    @Override
     protected void defineSynchedData() {
-        this.entityData.define(COL_A, 0xFFFFFFFF);   // ARGB：默认白
-        this.entityData.define(COL_B, 0xFFFFFFFF);
-        this.entityData.define(MODE, GradMode.SOLID.ordinal());
-        this.entityData.define(USE_HSV, true);
-        this.entityData.define(HUE_SHIFT_SPD, 0.0f); // >0 则随时间彩虹滚动
-        this.entityData.define(RADIUS, 2.60f);
-        this.entityData.define(THICKNESS, 0.35f);
-        this.entityData.define(LIFE_TICKS, 20);     // 1 秒 = 20 tick
-        this.entityData.define(OMEGA, .35f);
+        entityData.define(COL_A, 0xFFFFFFFF);
+        entityData.define(COL_B, 0xFFFFFFFF);
+        entityData.define(MODE, GradMode.SOLID.ordinal());
+        entityData.define(USE_HSV, true);
+        entityData.define(HUE_SHIFT_SPD, 0.0f);
+        entityData.define(RADIUS, 2.60f);
+        entityData.define(THICKNESS, 0.55f);
+        entityData.define(LIFE_TICKS, 20);
+        entityData.define(OMEGA, 0.35f);
+        entityData.define(BLADES, 6);
+        entityData.define(BLADE_HALF_ANGLE, 10f);
+        entityData.define(MOVE_MODE, MoveMode.FOLLOW_OWNER.ordinal());
     }
 
     public SlashOrbitEntity setSolidColor(int argb) {
-        this.entityData.set(COL_A, argb);
-        this.entityData.set(COL_B, argb);
-        this.entityData.set(MODE, GradMode.SOLID.ordinal());
+        entityData.set(COL_A, argb);
+        entityData.set(COL_B, argb);
+        entityData.set(MODE, GradMode.SOLID.ordinal());
         return this;
     }
 
-    public SlashOrbitEntity setGradient(int colA, int colB, GradMode m, boolean hsv) {
-        this.entityData.set(COL_A, colA);
-        this.entityData.set(COL_B, colB);
-        this.entityData.set(MODE, m.ordinal());
-        this.entityData.set(USE_HSV, hsv);
+    public SlashOrbitEntity setGradient(int colA, int colB, GradMode mode, boolean hsv) {
+        entityData.set(COL_A, colA);
+        entityData.set(COL_B, colB);
+        entityData.set(MODE, mode.ordinal());
+        entityData.set(USE_HSV, hsv);
         return this;
     }
 
-    public void setHueShift(float speed) { // 例如 0.15f
-        this.entityData.set(HUE_SHIFT_SPD, speed);
+    public SlashOrbitEntity setHueShift(float speed) {
+        entityData.set(HUE_SHIFT_SPD, speed);
+        return this;
     }
+
+    @Override
+    public boolean shouldBeSaved() {
+        return false;
+    }
+
+    public int colorA() {return entityData.get(COL_A);}
 
     @Override
     protected void readAdditionalSaveData(@NotNull CompoundTag nbt) {}
@@ -170,39 +243,46 @@ public class SlashOrbitEntity extends Entity {
     @Override
     protected void addAdditionalSaveData(@NotNull CompoundTag nbt) {}
 
-    // 读取（渲染器会用）
-    public int colorA() {return this.entityData.get(COL_A);}
+    public int colorB() {return entityData.get(COL_B);}
 
-    public int colorB() {return this.entityData.get(COL_B);}
+    public GradMode gradMode() {return GradMode.values()[Mth.clamp(entityData.get(MODE), 0, GradMode.values().length - 1)];}
 
-    public GradMode gradMode() {return GradMode.values()[Mth.clamp(this.entityData.get(MODE), 0, GradMode.values().length - 1)];}
+    public boolean useHSV() {return entityData.get(USE_HSV);}
 
-    public boolean useHSV() {return this.entityData.get(USE_HSV);}
+    public float hueShiftSpd() {return entityData.get(HUE_SHIFT_SPD);}
 
-    public float hueShiftSpd() {return this.entityData.get(HUE_SHIFT_SPD);}
+    public float radius() {return entityData.get(RADIUS);}
 
-    public float radius() {return this.entityData.get(RADIUS);}
+    public float thickness() {return entityData.get(THICKNESS);}
 
-    public float thickness() {return this.entityData.get(THICKNESS);}
+    public int life() {return Math.max(1, entityData.get(LIFE_TICKS));}
 
-    public int life() {return this.entityData.get(LIFE_TICKS);}
+    public float omega() {return entityData.get(OMEGA);}
 
-    public float omega() {return this.entityData.get(OMEGA);}
+    public int blades() {return Math.max(1, entityData.get(BLADES));}
 
-    public void setRadius(float v) {
-        this.entityData.set(RADIUS, v);
+    public float bladeHalfAngle() {return Mth.clamp(entityData.get(BLADE_HALF_ANGLE), 0.1f, 179f);}
+
+    public MoveMode moveMode() {return MoveMode.values()[Mth.clamp(entityData.get(MOVE_MODE), 0, MoveMode.values().length - 1)];}
+
+    public void setRadius(float v) {entityData.set(RADIUS, Math.max(0.05f, v));}
+
+    public void setThickness(float v) {entityData.set(THICKNESS, Math.max(0.02f, v));}
+
+    public void setLife(int t) {entityData.set(LIFE_TICKS, Math.max(1, t));}
+
+    public void setOmega(float v) {entityData.set(OMEGA, v);}
+
+    public void setBlades(int v) {entityData.set(BLADES, Math.max(1, v));}
+
+    public void setBladeHalfAngle(float v) {entityData.set(BLADE_HALF_ANGLE, Mth.clamp(v, 0.1f, 179f));}
+
+    public void setMoveMode(MoveMode mode) {entityData.set(MOVE_MODE, mode.ordinal());}
+
+    @Nullable
+    public LivingEntity getOwnerLiving() {
+        return owner;
     }
 
-    public void setThickness(float v) {
-        this.entityData.set(THICKNESS, v);
-    }
-
-    public void setLife(int t) {
-        this.entityData.set(LIFE_TICKS, t);
-    }
-
-    public void setOmega(float v) {
-        this.entityData.set(OMEGA, v);
-    }
-
+    public enum MoveMode {FOLLOW_OWNER, PROJECTILE}
 }
