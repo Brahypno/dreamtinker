@@ -101,7 +101,7 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
     protected boolean canHitEntity(@NotNull Entity p_36743_) {
         return (getChaseLiving() < 1 || p_36743_ instanceof EndCrystal ||
                 (p_36743_ instanceof LivingEntity entity && entity.isAlive() && !(p_36743_ instanceof ArmorStand))) &&
-               (super.canHitEntity(p_36743_) || !p_36743_.canBeHitByProjectile());
+               (super.canHitEntity(p_36743_) || !p_36743_.isSpectator() && !p_36743_.canBeHitByProjectile());
     }
 
     /**

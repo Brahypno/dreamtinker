@@ -428,13 +428,18 @@ public abstract class AbstractSlashProjectile extends Projectile implements Proj
         return hits;
     }
 
+    @Override
     protected boolean canHitEntity(Entity entity) {
         Entity owner = this.getOwner();
 
         return entity != owner
-               && super.canHitEntity(entity)
+               && this.canSlashHitEntity(entity)
                && !this.ignoredEntities.contains(entity.getId())
                && (this.piercedEntities == null || !this.piercedEntities.contains(entity.getId()));
+    }
+
+    protected boolean canSlashHitEntity(Entity target) {
+        return super.canHitEntity(target) || (!target.isSpectator() && !target.canBeHitByProjectile() && target instanceof LivingEntity && target.isAlive());
     }
 
     @Override
