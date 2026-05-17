@@ -66,7 +66,7 @@
   "modifier.dreamtinker.tooltip.as_one_6": "负面和正面",
   "modifier.dreamtinker.two_headed_seven": "双头七",
   "modifier.dreamtinker.two_headed_seven.flavor": "龙蛇本一体",
-  "modifier.dreamtinker.two_headed_seven.description": "击中实体时削减其护甲",
+  "modifier.dreamtinker.two_headed_seven.description": "击中实体时削减其护甲,并召唤闪电链",
   "modifier.dreamtinker.sharpened_with": "盈泪",
   "modifier.dreamtinker.sharpened_with.flavor": "虚幻的雨……",
   "modifier.dreamtinker.sharpened_with.description": "攻击敌人时召唤雨，在雨中时增伤。",

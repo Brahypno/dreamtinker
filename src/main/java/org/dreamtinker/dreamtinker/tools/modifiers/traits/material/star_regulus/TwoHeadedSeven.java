@@ -2,7 +2,6 @@ package org.dreamtinker.dreamtinker.tools.modifiers.traits.material.star_regulus
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -15,6 +14,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import org.dreamtinker.dreamtinker.Entity.DreamtinkerEntityTypes;
 import org.dreamtinker.dreamtinker.Entity.WiserLightBolt;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
+import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.modules.build.VolatileFlagModule;
@@ -43,32 +43,38 @@ public class TwoHeadedSeven extends BattleModifier {
         if (attacker.level().isClientSide)
             return false;
         ServerLevel level = (ServerLevel) attacker.level();
+        summonWiserLight(attacker, level, hit.getBlockPos(), projectile);
 
-        WiserLightBolt bolt = new WiserLightBolt(DreamtinkerEntityTypes.LIGHTNING_ENTITY.get(), level);
-        BlockPos pos = hit.getBlockPos();
-
-        bolt.setPos(pos.getX(), pos.getY(), pos.getZ());
-        if (attacker instanceof ServerPlayer player)
-            bolt.setCause(player);
-        bolt.setVisualOnly(false);
-        level.addFreshEntity(bolt);
         return false;
     }
 
     @Override
     public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target, boolean notBlocked) {
-        if (null == target)
-            return false;
-        AttributeModifier neg = new AttributeModifier(UUID.nameUUIDFromBytes(modifier.getId().toString().getBytes()), "def_suppress", Integer.MIN_VALUE,
-                                                      AttributeModifier.Operation.ADDITION);
-        AttributeInstance attr = target.getAttribute(Attributes.ARMOR);
-        if (null != attr && attr.getModifier(UUID.nameUUIDFromBytes(modifier.getId().toString().getBytes())) == null)
-            attr.addTransientModifier(neg);
-        attr = target.getAttribute(Attributes.ARMOR_TOUGHNESS);
-        if (null != attr && attr.getModifier(UUID.nameUUIDFromBytes(modifier.getId().toString().getBytes())) == null)
-            attr.addTransientModifier(neg);
-        target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 10, 10));
+        if (null != target && target.level() instanceof ServerLevel sl){
+
+            AttributeModifier neg = new AttributeModifier(UUID.nameUUIDFromBytes(modifier.getId().toString().getBytes()), "def_suppress", Integer.MIN_VALUE,
+                                                          AttributeModifier.Operation.ADDITION);
+            AttributeInstance attr = target.getAttribute(Attributes.ARMOR);
+            if (null != attr && attr.getModifier(UUID.nameUUIDFromBytes(modifier.getId().toString().getBytes())) == null)
+                attr.addTransientModifier(neg);
+            attr = target.getAttribute(Attributes.ARMOR_TOUGHNESS);
+            if (null != attr && attr.getModifier(UUID.nameUUIDFromBytes(modifier.getId().toString().getBytes())) == null)
+                attr.addTransientModifier(neg);
+            target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 10, 10));
+            summonWiserLight(attacker, sl, hit.getEntity().getOnPos(), projectile);
+        }
         return false;
+    }
+
+    private void summonWiserLight(@Nullable LivingEntity attacker, ServerLevel level, BlockPos pos, Projectile projectile) {
+        WiserLightBolt bolt = new WiserLightBolt(DreamtinkerEntityTypes.LIGHTNING_ENTITY.get(), level);
+
+        bolt.setPos(pos.getX(), pos.getY(), pos.getZ());
+        bolt.setOwner(attacker);
+        bolt.setChainCount(7);
+        bolt.setVisualOnly(false);
+        bolt.setDamage(DTModifierCheck.getDamage(projectile));
+        level.addFreshEntity(bolt);
     }
 
     @Override
