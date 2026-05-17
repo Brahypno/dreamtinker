@@ -48,7 +48,7 @@ public class DreamtinkerFluidTextureProvider extends AbstractFluidTextureProvide
         this.commonFluid(DreamtinkerFluids.liquid_arcana_juice.getType());
         this.commonFluid(DreamtinkerFluids.liquid_concentrated_gluttony.getType());
         this.commonFluid(DreamtinkerFluids.liquid_amber.getType());
-        tintedMolten(DreamtinkerFluids.molten_desire).color(0xFF48236F);
+        tintedMolten(DreamtinkerFluids.molten_desire).color(0xFFB38BE8);
         this.commonFluid(DreamtinkerFluids.despair_essence.getType());
         this.commonFluid(DreamtinkerFluids.molten_soul_steel.getType());
         this.commonFluid(DreamtinkerFluids.half_festering_blood.getType());

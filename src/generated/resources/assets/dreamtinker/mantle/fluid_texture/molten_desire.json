@@ -1,7 +1,7 @@
 {
   "camera": "tconstruct:fluid/molten/camera",
   "camera_opacity": 0.1,
-  "color": "FF48236F",
+  "color": "FFB38BE8",
   "flowing": "tconstruct:fluid/molten/flowing",
   "fog": {
     "calculate_color": true,

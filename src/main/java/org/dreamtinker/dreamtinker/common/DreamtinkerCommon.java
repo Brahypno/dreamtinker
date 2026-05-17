@@ -148,7 +148,11 @@ public class DreamtinkerCommon extends DreamtinkerModule {
     });
     public static final RegistryObject<Item> larimar = ITEMS.register("larimar", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> amber = ITEMS.register("amber", () -> new Item(ITEM_PROPS.rarity(Rarity.RARE)));
-    public static final RegistryObject<Item> despair_gem = ITEMS.register("despair_gem", () -> new Item(ITEM_PROPS.rarity(Rarity.EPIC)));
+    public static final RegistryObject<Item> despair_gem = ITEMS.register("despair_gem", () -> new Item(ITEM_PROPS.rarity(Rarity.EPIC)) {
+        public boolean isFoil(ItemStack p_41453_) {
+            return true;
+        }
+    });
     public static final RegistryObject<Item> desire_gem = ITEMS.register("desire_gem", () -> new Item(ITEM_PROPS.rarity(Rarity.RARE)));
     public static final RegistryObject<Item> rainbow_honey_crystal = ITEMS.register("rainbow_honey_crystal", () -> new Item(ITEM_PROPS));
     public static final RegistryObject<Item> poisonousHomunculus =
