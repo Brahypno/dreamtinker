@@ -469,7 +469,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                           .level(RandomLevelingValue.perLevel(0, 1))
                                           .time(RandomLevelingValue.random(20 * 4, 10))
                                           .build())
-                .addModule(MobEffectModule.builder(DreamtinkerEffects.cursed)
+                .addModule(MobEffectModule.builder(DreamtinkerEffects.cursed).applyBeforeMelee(true)
                                           .level(RandomLevelingValue.perLevel(0, 1))
                                           .time(RandomLevelingValue.random(20 * 4, 10))
                                           .build())
