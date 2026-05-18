@@ -96,11 +96,7 @@ public class DTLoots {
                             ));
                         }
 
-                        Dreamtinker.LOGGER.info(
-                                "Forced scanner loot fallback for {} : {} stacks",
-                                victim.getType(),
-                                forcedStacks.size()
-                        );
+                        //Dreamtinker.LOGGER.info("Forced scanner loot fallback for {} : {} stacks", victim.getType(), forcedStacks.size());
                     }
                     catch (Throwable t) {
                         errors.add(new RuntimeException("scanner fallback loot failed", t));
@@ -181,7 +177,7 @@ public class DTLoots {
             }
 
             mh.invokeExact(entity, source, causedByPlayer);
-            Dreamtinker.LOGGER.info("Invoking LivingEntity#dropFromLootTable directly for {}", entity.getType());
+            //Dreamtinker.LOGGER.info("Invoking LivingEntity#dropFromLootTable directly for {}", entity.getType());
         }
         catch (Throwable e) {
             throw new RuntimeException("Failed to invokespecial LivingEntity#dropFromLootTable", e);

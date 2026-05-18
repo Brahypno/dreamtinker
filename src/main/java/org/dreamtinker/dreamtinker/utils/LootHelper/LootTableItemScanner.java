@@ -11,20 +11,17 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.GsonHelper;
-import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.Rarity;
 
 import javax.annotation.Nullable;
 import java.io.Reader;
 import java.util.*;
 import java.util.function.Function;
-import java.util.function.Predicate;
 
+import static org.dreamtinker.dreamtinker.utils.LootHelper.LootScanCommon.*;
 import static org.dreamtinker.dreamtinker.utils.LootHelper.LootTableFallbackResolver.resolveLootTableCandidates;
 
 public final class LootTableItemScanner {
@@ -43,18 +40,17 @@ public final class LootTableItemScanner {
     }
 
     public static List<ItemStack> getAllScannedLootStacksMinOne(ServerLevel level, ResourceLocation lootTableId, int lootingLevel) {
-        List<LootTableItemScanner.LootCandidate> candidates = collectLootCandidates(level, lootTableId, lootingLevel);
+        List<LootCandidate> candidates = collectLootCandidates(level, lootTableId, lootingLevel);
         List<ItemStack> stacks = new ArrayList<>();
 
-        for (LootTableItemScanner.LootCandidate candidate : candidates)
+        for (LootCandidate candidate : candidates)
             stacks.add(toMinOneStack(candidate, level.random));
 
         return stacks;
     }
 
     public static List<ItemStack> tryExtractSomeLoot(ServerLevel level, LivingEntity target, float triggerRate, int lootingLevel) {
-        return tryExtractLoot(level, target, triggerRate, lootingLevel, null, LootTableItemScanner::pickByNaturalRate,
-                              LootTableItemScanner::getLootingExtraRollRate);
+        return tryExtractLoot(level, target, triggerRate, lootingLevel, null, LootScanCommon::pickByNaturalRate);
     }
 
     public static List<ItemStack> tryExtractRareLoot(ServerLevel level, LivingEntity target, float triggerRate, int lootingLevel) {
@@ -63,11 +59,10 @@ public final class LootTableItemScanner {
                 target,
                 triggerRate,
                 lootingLevel,
-                LootTableItemScanner.CandidateFilter
+                CandidateFilter
                         .rareByItemOrDropRate()
-                        .and(LootTableItemScanner.CandidateFilter.estimatedRateBelow(0.25D)),
-                LootTableItemScanner::pickByInverseRate,
-                LootTableItemScanner::getLootingExtraRollRate
+                        .and(CandidateFilter.estimatedRateBelow(0.25D)),
+                LootScanCommon::pickByInverseRate
         );
     }
 
@@ -76,79 +71,58 @@ public final class LootTableItemScanner {
             LivingEntity target,
             float triggerRate,
             int lootingLevel,
-            @Nullable LootTableItemScanner.CandidateFilter filter,
-            LootCandidatePicker picker,
-            ExtraRollRateFunction rateFunction
+            @Nullable CandidateFilter filter,
+            LootCandidatePicker picker
     ) {
-        List<ItemStack> out = new ArrayList<>();
-        List<LootTableItemScanner.LootCandidate> candidates = collectCandidatesFromPossibleTables(level, target, lootingLevel, filter);
+        List<LootCandidate> candidates = collectCandidatesFromPossibleTables(level, target, lootingLevel, null);
+        return LootScanCommon.tryExtractLootStacks(candidates, level.random, triggerRate, lootingLevel, filter, picker);
+    }
 
-        if (candidates.isEmpty())
-            return out;
+    private static List<LootCandidate> collectCandidatesFromPossibleTables(
+            ServerLevel level,
+            LivingEntity target,
+            int lootingLevel,
+            @Nullable CandidateFilter filter
+    ) {
+        List<LootCandidate> out = new ArrayList<>();
 
-        addRolledStack(out, candidates, level.random, picker);
+        for (ResourceLocation tableId : resolveLootTableCandidates(level, target)) {
+            List<LootCandidate> candidates = filter == null
+                                             ? LootTableItemScanner.collect(level, tableId,
+                                                                            LootTableItemScanner.LootScanOptions.looting(lootingLevel))
+                                             : LootTableItemScanner.collect(level, tableId,
+                                                                            LootTableItemScanner.LootScanOptions.looting(lootingLevel),
+                                                                            filter);
 
-        for (int roll = 1; roll <= Math.max(0, lootingLevel); roll++) {
-            float rate = rateFunction.get(triggerRate, roll);
-
-            if (level.random.nextFloat() >= rate)
-                continue;
-
-            addRolledStack(out, candidates, level.random, picker);
+            candidates.removeIf(candidate -> candidate.item() == Items.AIR);
+            out.addAll(candidates);
         }
 
         return out;
     }
 
-    private static float getLootingExtraRollRate(float triggerRate, int roll) {
-        if (roll <= 0)
-            return 1.0F;
-
-        return Mth.clamp(triggerRate / roll, 0.0F, 1.0F);
-    }
-
-    private static List<LootTableItemScanner.LootCandidate> collectLootCandidates(ServerLevel level, ResourceLocation lootTableId, int lootingLevel) {
+    private static List<LootCandidate> collectLootCandidates(ServerLevel level, ResourceLocation lootTableId, int lootingLevel) {
         return collectLootCandidates(level, lootTableId, lootingLevel, null);
     }
 
-    private static List<LootTableItemScanner.LootCandidate> collectLootCandidates(
+    private static List<LootCandidate> collectLootCandidates(
             ServerLevel level,
             ResourceLocation lootTableId,
             int lootingLevel,
-            @Nullable LootTableItemScanner.CandidateFilter filter
+            @Nullable CandidateFilter filter
     ) {
-        List<LootTableItemScanner.LootCandidate> candidates = filter == null
-                                                              ? LootTableItemScanner.collect(level, lootTableId,
-                                                                                             LootTableItemScanner.LootScanOptions.looting(lootingLevel))
-                                                              : LootTableItemScanner.collect(level, lootTableId,
-                                                                                             LootTableItemScanner.LootScanOptions.looting(lootingLevel),
-                                                                                             filter);
+        List<LootCandidate> candidates = filter == null
+                                         ? LootTableItemScanner.collect(level, lootTableId,
+                                                                        LootTableItemScanner.LootScanOptions.looting(lootingLevel))
+                                         : LootTableItemScanner.collect(level, lootTableId,
+                                                                        LootTableItemScanner.LootScanOptions.looting(lootingLevel),
+                                                                        filter);
 
-        candidates.removeIf(candidate -> candidate.item() == Items.AIR);
+        candidates.removeIf(candidate -> candidate.stack().isEmpty());
         return candidates;
     }
 
-    private static void addRolledStack(List<ItemStack> out, List<LootTableItemScanner.LootCandidate> candidates, RandomSource random, LootCandidatePicker picker
-    ) {
-        ItemStack stack = rollOneStack(candidates, random, picker);
-
-        if (!stack.isEmpty())
-            out.add(stack);
-    }
-
-    private static ItemStack rollOneStack(List<LootTableItemScanner.LootCandidate> candidates, RandomSource random, LootCandidatePicker picker
-    ) {
-        ItemStack stack = ItemStack.EMPTY;
-
-        for (int i = 0; i < candidates.size() * 2 && stack.isEmpty(); i++) {
-            LootTableItemScanner.LootCandidate candidate = picker.pick(candidates, random);
-            stack = candidate.getRandomCountStack(random);
-        }
-
-        return stack;
-    }
-
-    private static ItemStack toMinOneStack(LootTableItemScanner.LootCandidate candidate, RandomSource random) {
+    private static ItemStack toMinOneStack(LootCandidate candidate, net.minecraft.util.RandomSource random) {
         ItemStack stack = candidate.getRandomCountStack(random);
 
         if (stack.isEmpty())
@@ -161,78 +135,6 @@ public final class LootTableItemScanner {
         return stack;
     }
 
-    private static LootTableItemScanner.LootCandidate pickByInverseRate(List<LootTableItemScanner.LootCandidate> candidates, RandomSource random) {
-        double totalWeight = 0.0D;
-
-        for (LootTableItemScanner.LootCandidate candidate : candidates) {
-            double rate = Math.max(0.001D, candidate.estimatedRate());
-            totalWeight += 1.0D / rate;
-        }
-
-        double roll = random.nextDouble() * totalWeight;
-
-        for (LootTableItemScanner.LootCandidate candidate : candidates) {
-            double rate = Math.max(0.001D, candidate.estimatedRate());
-            roll -= 1.0D / rate;
-
-            if (roll <= 0.0D)
-                return candidate;
-        }
-
-        return candidates.get(candidates.size() - 1);
-    }
-
-    private static LootTableItemScanner.LootCandidate pickByNaturalRate(List<LootTableItemScanner.LootCandidate> candidates, RandomSource random) {
-        double totalWeight = 0.0D;
-
-        for (LootTableItemScanner.LootCandidate candidate : candidates)
-            totalWeight += Math.max(0.001D, candidate.estimatedRate());
-
-        double roll = random.nextDouble() * totalWeight;
-
-        for (LootTableItemScanner.LootCandidate candidate : candidates) {
-            roll -= Math.max(0.001D, candidate.estimatedRate());
-
-            if (roll <= 0.0D)
-                return candidate;
-        }
-
-        return candidates.get(candidates.size() - 1);
-    }
-
-    private static List<LootTableItemScanner.LootCandidate> collectCandidatesFromPossibleTables(
-            ServerLevel level,
-            LivingEntity target,
-            int lootingLevel,
-            @Nullable LootTableItemScanner.CandidateFilter filter
-    ) {
-        List<LootTableItemScanner.LootCandidate> out = new ArrayList<>();
-
-        for (ResourceLocation tableId : resolveLootTableCandidates(level, target)) {
-            List<LootTableItemScanner.LootCandidate> candidates = filter == null
-                                                                  ? LootTableItemScanner.collect(level, tableId,
-                                                                                                 LootTableItemScanner.LootScanOptions.looting(lootingLevel))
-                                                                  : LootTableItemScanner.collect(level, tableId,
-                                                                                                 LootTableItemScanner.LootScanOptions.looting(lootingLevel),
-                                                                                                 filter);
-
-            candidates.removeIf(candidate -> candidate.item() == Items.AIR);
-            out.addAll(candidates);
-        }
-
-        return out;
-    }
-
-    @FunctionalInterface
-    private interface LootCandidatePicker {
-        LootTableItemScanner.LootCandidate pick(List<LootTableItemScanner.LootCandidate> candidates, RandomSource random);
-    }
-
-    @FunctionalInterface
-    private interface ExtraRollRateFunction {
-        float get(float triggerRate, int roll);
-    }
-
     public static List<LootCandidate> collect(ServerLevel level, ResourceLocation lootTableId) {
         return collect(level, lootTableId, LootScanOptions.none());
     }
@@ -240,18 +142,6 @@ public final class LootTableItemScanner {
     public static List<LootCandidate> collect(ServerLevel level, ResourceLocation lootTableId, LootScanOptions options) {
         List<LootCandidate> out = new ArrayList<>();
         scanTable(level, lootTableId, ScanContext.root(), out, new HashSet<>(), options);
-        return out;
-    }
-
-    public static Set<Item> collectItems(ServerLevel level, ResourceLocation lootTableId) {
-        return collectItems(level, lootTableId, LootScanOptions.none());
-    }
-
-    public static Set<Item> collectItems(ServerLevel level, ResourceLocation lootTableId, LootScanOptions options) {
-        Set<Item> out = new LinkedHashSet<>();
-        for (LootCandidate candidate : collect(level, lootTableId, options)) {
-            out.add(candidate.item());
-        }
         return out;
     }
 
@@ -366,14 +256,16 @@ public final class LootTableItemScanner {
                 }
 
                 out.add(LootCandidate.of(
+                        SourceType.LOOT_TABLE,
                         currentTableId,
-                        item.get(),
+                        item.get().getDefaultInstance(),
                         path,
                         entryContext.reachRate,
                         entryContext.conditionRate,
                         entryContext.countRange,
                         entryContext.conditionTypes,
-                        entryContext.functionTypes
+                        entryContext.functionTypes,
+                        "loot_table"
                 ));
                 return;
             }
@@ -405,14 +297,16 @@ public final class LootTableItemScanner {
                     }
 
                     out.add(LootCandidate.of(
+                            SourceType.LOOT_TABLE,
                             currentTableId,
-                            item,
+                            item.getDefaultInstance(),
                             path + ".tag[" + BuiltInRegistries.ITEM.getKey(item) + "]",
                             itemReachRate,
                             entryContext.conditionRate,
                             entryContext.countRange,
                             entryContext.conditionTypes,
-                            entryContext.functionTypes
+                            entryContext.functionTypes,
+                            "loot_table"
                     ));
                 }
                 return;
@@ -499,41 +393,6 @@ public final class LootTableItemScanner {
         return 1.0D - Math.pow(1.0D - perRollRate, rolls);
     }
 
-    private static double averageNumberProvider(JsonElement element, double fallback) {
-        if (element == null || element.isJsonNull()){
-            return fallback;
-        }
-
-        if (element.isJsonPrimitive() && element.getAsJsonPrimitive().isNumber()){
-            return element.getAsDouble();
-        }
-
-        if (!element.isJsonObject()){
-            return fallback;
-        }
-
-        JsonObject obj = element.getAsJsonObject();
-        String type = normalizedType(getString(obj, "type", "constant"));
-
-        switch (type) {
-            case "constant" -> {
-                return getDouble(obj, "value", fallback);
-            }
-            case "uniform" -> {
-                double min = averageNumberProvider(obj.get("min"), fallback);
-                double max = averageNumberProvider(obj.get("max"), fallback);
-                return (min + max) * 0.5D;
-            }
-            case "binomial" -> {
-                double n = averageNumberProvider(obj.get("n"), 0.0D);
-                double p = averageNumberProvider(obj.get("p"), 0.0D);
-                return n * p;
-            }
-        }
-
-        return fallback;
-    }
-
     private static OwnerInfo readOwnerInfo(JsonObject owner, LootScanOptions options) {
         OwnerInfo info = new OwnerInfo();
 
@@ -592,72 +451,6 @@ public final class LootTableItemScanner {
         return info;
     }
 
-    private static CountRange readCountRange(JsonElement element, CountRange fallback) {
-        if (element == null || element.isJsonNull()){
-            return fallback;
-        }
-
-        if (element.isJsonPrimitive() && element.getAsJsonPrimitive().isNumber()){
-            int value = Math.max(0, element.getAsInt());
-            return new CountRange(value, value, value, value > 0 ? 1.0D : 0.0D);
-        }
-
-        if (!element.isJsonObject()){
-            return fallback;
-        }
-
-        JsonObject obj = element.getAsJsonObject();
-        String type = normalizedType(getString(obj, "type", "constant"));
-
-        switch (type) {
-            case "constant" -> {
-                int value = Math.max(0, (int) Math.floor(getDouble(obj, "value", fallback.expected())));
-                return new CountRange(value, value, value, value > 0 ? 1.0D : 0.0D);
-            }
-            case "uniform" -> {
-                double minRaw = averageNumberProvider(obj.get("min"), fallback.min());
-                double maxRaw = averageNumberProvider(obj.get("max"), fallback.max());
-
-                int min = Math.max(0, (int) Math.floor(Math.min(minRaw, maxRaw)));
-                int max = Math.max(min, (int) Math.floor(Math.max(minRaw, maxRaw)));
-                double expected = Math.max(0.0D, (minRaw + maxRaw) * 0.5D);
-
-                return new CountRange(min, max, expected, uniformNonEmptyChance(min, max));
-            }
-            case "binomial" -> {
-                double nRaw = averageNumberProvider(obj.get("n"), 0.0D);
-                double pRaw = averageNumberProvider(obj.get("p"), 0.0D);
-
-                int n = Math.max(0, (int) Math.floor(nRaw));
-                double p = clamp(pRaw, 0.0D, 1.0D);
-                double nonEmptyChance = n <= 0 ? 0.0D : 1.0D - Math.pow(1.0D - p, n);
-
-                return new CountRange(0, n, n * p, nonEmptyChance);
-            }
-        }
-
-        return fallback;
-    }
-
-    private static double uniformNonEmptyChance(int min, int max) {
-        if (max <= 0){
-            return 0.0D;
-        }
-
-        if (min > 0){
-            return 1.0D;
-        }
-
-        int total = max - min + 1;
-        int positive = max - Math.max(min, 1) + 1;
-
-        if (total <= 0){
-            return 0.0D;
-        }
-
-        return clamp((double) positive / (double) total, 0.0D, 1.0D);
-    }
-
     private static void readLimitCount(JsonObject fn, OwnerInfo info) {
         JsonElement limitElement = fn.get("limit");
         if (limitElement == null || !limitElement.isJsonObject()){
@@ -692,59 +485,57 @@ public final class LootTableItemScanner {
             conditionTypes.add(type);
         }
 
-        if ("random_chance".equals(type)){
-            return clamp(getDouble(condition, "chance", 1.0D), 0.0D, 1.0D);
-        }
-
-        if ("random_chance_with_looting".equals(type)){
-            double chance = getDouble(condition, "chance", 1.0D);
-            double lootingMultiplier = getDouble(condition, "looting_multiplier", 0.0D);
-            return clamp(chance + lootingMultiplier * options.lootingLevel(), 0.0D, 1.0D);
-        }
-
-        if ("all_of".equals(type)){
-            JsonArray terms = getArray(condition, "terms");
-            if (terms == null || terms.isEmpty()){
-                return Double.NaN;
+        switch (type) {
+            case "random_chance" -> {
+                return clamp(getDouble(condition, "chance", 1.0D), 0.0D, 1.0D);
             }
-
-            boolean hasKnown = false;
-            double rate = 1.0D;
-
-            for (JsonElement term : terms) {
-                double termRate = readKnownConditionChance(term, conditionTypes, options);
-                if (!Double.isNaN(termRate)){
-                    hasKnown = true;
-                    rate *= termRate;
+            case "random_chance_with_looting" -> {
+                double chance = getDouble(condition, "chance", 1.0D);
+                double lootingMultiplier = getDouble(condition, "looting_multiplier", 0.0D);
+                return clamp(chance + lootingMultiplier * options.lootingLevel(), 0.0D, 1.0D);
+            }
+            case "all_of" -> {
+                JsonArray terms = getArray(condition, "terms");
+                if (terms == null || terms.isEmpty()){
+                    return Double.NaN;
                 }
-            }
 
-            return hasKnown ? clamp(rate, 0.0D, 1.0D) : Double.NaN;
-        }
+                boolean hasKnown = false;
+                double rate = 1.0D;
 
-        if ("any_of".equals(type)){
-            JsonArray terms = getArray(condition, "terms");
-            if (terms == null || terms.isEmpty()){
-                return Double.NaN;
-            }
-
-            boolean hasKnown = false;
-            double missRate = 1.0D;
-
-            for (JsonElement term : terms) {
-                double termRate = readKnownConditionChance(term, conditionTypes, options);
-                if (!Double.isNaN(termRate)){
-                    hasKnown = true;
-                    missRate *= 1.0D - clamp(termRate, 0.0D, 1.0D);
+                for (JsonElement term : terms) {
+                    double termRate = readKnownConditionChance(term, conditionTypes, options);
+                    if (!Double.isNaN(termRate)){
+                        hasKnown = true;
+                        rate *= termRate;
+                    }
                 }
+
+                return hasKnown ? clamp(rate, 0.0D, 1.0D) : Double.NaN;
             }
+            case "any_of" -> {
+                JsonArray terms = getArray(condition, "terms");
+                if (terms == null || terms.isEmpty()){
+                    return Double.NaN;
+                }
 
-            return hasKnown ? clamp(1.0D - missRate, 0.0D, 1.0D) : Double.NaN;
-        }
+                boolean hasKnown = false;
+                double missRate = 1.0D;
 
-        if ("inverted".equals(type)){
-            double inner = readKnownConditionChance(condition.get("term"), conditionTypes, options);
-            return Double.isNaN(inner) ? Double.NaN : clamp(1.0D - inner, 0.0D, 1.0D);
+                for (JsonElement term : terms) {
+                    double termRate = readKnownConditionChance(term, conditionTypes, options);
+                    if (!Double.isNaN(termRate)){
+                        hasKnown = true;
+                        missRate *= 1.0D - clamp(termRate, 0.0D, 1.0D);
+                    }
+                }
+
+                return hasKnown ? clamp(1.0D - missRate, 0.0D, 1.0D) : Double.NaN;
+            }
+            case "inverted" -> {
+                double inner = readKnownConditionChance(condition.get("term"), conditionTypes, options);
+                return Double.isNaN(inner) ? Double.NaN : clamp(1.0D - inner, 0.0D, 1.0D);
+            }
         }
 
         return Double.NaN;
@@ -775,160 +566,6 @@ public final class LootTableItemScanner {
             return null;
         }
         return obj.getAsJsonArray(key);
-    }
-
-    private static String getString(JsonObject obj, String key, String fallback) {
-        if (obj == null || !obj.has(key) || !obj.get(key).isJsonPrimitive()){
-            return fallback;
-        }
-        return obj.get(key).getAsString();
-    }
-
-    private static boolean getBoolean(JsonObject obj, String key, boolean fallback) {
-        if (obj == null || !obj.has(key) || !obj.get(key).isJsonPrimitive()){
-            return fallback;
-        }
-        return obj.get(key).getAsBoolean();
-    }
-
-    private static double getDouble(JsonObject obj, String key, double fallback) {
-        if (obj == null || !obj.has(key) || !obj.get(key).isJsonPrimitive() || !obj.get(key).getAsJsonPrimitive().isNumber()){
-            return fallback;
-        }
-        return obj.get(key).getAsDouble();
-    }
-
-    private static String normalizedType(String id) {
-        if (id == null || id.isEmpty()){
-            return "";
-        }
-
-        ResourceLocation location = ResourceLocation.tryParse(id);
-        if (location == null){
-            return id;
-        }
-
-        return location.getPath();
-    }
-
-    private static double clamp(double value, double min, double max) {
-        return Math.max(min, Math.min(max, value));
-    }
-
-    public enum DropRateRarity {
-        GUARANTEED(0),
-        COMMON(1),
-        UNCOMMON(2),
-        RARE(3),
-        VERY_RARE(4),
-        ULTRA_RARE(5),
-        UNKNOWN(-1);
-
-        private final int rarityScore;
-
-        DropRateRarity(int rarityScore) {
-            this.rarityScore = rarityScore;
-        }
-
-        public static DropRateRarity fromRate(double rate) {
-            if (Double.isNaN(rate)){
-                return UNKNOWN;
-            }
-
-            if (rate >= 0.999D){
-                return GUARANTEED;
-            }
-            if (rate >= 0.25D){
-                return COMMON;
-            }
-            if (rate >= 0.10D){
-                return UNCOMMON;
-            }
-            if (rate >= 0.025D){
-                return RARE;
-            }
-            if (rate >= 0.005D){
-                return VERY_RARE;
-            }
-            return ULTRA_RARE;
-        }
-
-        public boolean atLeast(DropRateRarity threshold) {
-            return rarityScore >= threshold.rarityScore && rarityScore >= 0;
-        }
-    }
-
-    @FunctionalInterface
-    public interface CandidateFilter {
-        static CandidateFilter item(Predicate<Item> predicate) {
-            return candidate -> predicate.test(candidate.item());
-        }
-
-        static CandidateFilter itemId(Predicate<ResourceLocation> predicate) {
-            return candidate -> predicate.test(candidate.itemId());
-        }
-
-        static CandidateFilter itemRarityAtLeast(Rarity rarity) {
-            int threshold = itemRarityScore(rarity);
-            return candidate -> itemRarityScore(candidate.itemRarity()) >= threshold;
-        }
-
-        static CandidateFilter dropRateRarityAtLeast(DropRateRarity rarity) {
-            return candidate -> candidate.dropRateRarity().atLeast(rarity);
-        }
-
-        static CandidateFilter estimatedRateBelow(double maxRate) {
-            return candidate -> candidate.estimatedRate() <= maxRate;
-        }
-
-        static CandidateFilter estimatedRateAtLeast(double minRate) {
-            return candidate -> candidate.estimatedRate() >= minRate;
-        }
-
-        static CandidateFilter hasCondition(String key) {
-            return candidate -> candidate.hasCondition(key);
-        }
-
-        static CandidateFilter hasExactCondition(String key) {
-            return candidate -> candidate.hasExactCondition(key);
-        }
-
-        static CandidateFilter hasFunction(String key) {
-            return candidate -> candidate.hasFunction(key);
-        }
-
-        static CandidateFilter hasExactFunction(String key) {
-            return candidate -> candidate.hasExactFunction(key);
-        }
-
-        static CandidateFilter rareByItemOrDropRate() {
-            return itemRarityAtLeast(Rarity.RARE)
-                    .or(dropRateRarityAtLeast(DropRateRarity.RARE))
-                    .or(hasCondition("random_chance"))
-                    .or(hasCondition("killed"))
-                    .or(hasCondition("match_tool"))
-                    .or(hasCondition("damage_source_properties"))
-                    .or(hasCondition("entity_properties"));
-        }
-
-        private static int itemRarityScore(Rarity rarity) {
-            return switch (rarity) {
-                case COMMON -> 0;
-                case UNCOMMON -> 1;
-                case RARE -> 2;
-                case EPIC -> 3;
-            };
-        }
-
-        boolean test(LootCandidate candidate);
-
-        default CandidateFilter and(CandidateFilter other) {
-            return candidate -> test(candidate) && other.test(candidate);
-        }
-
-        default CandidateFilter or(CandidateFilter other) {
-            return candidate -> test(candidate) || other.test(candidate);
-        }
     }
 
     public record LootScanOptions(int lootingLevel) {
@@ -1000,174 +637,6 @@ public final class LootTableItemScanner {
             }
 
             return result;
-        }
-    }
-
-    public record LootCandidate(
-            ResourceLocation tableId,
-            Item item,
-            ResourceLocation itemId,
-            Rarity itemRarity,
-            String sourcePath,
-            double selectRate,
-            double conditionRate,
-            double estimatedRate,
-            DropRateRarity dropRateRarity,
-            CountRange countRange,
-            List<String> conditionTypes,
-            List<String> functionTypes
-    ) {
-        static LootCandidate of(
-                ResourceLocation tableId, Item item, String sourcePath, double selectRate, double conditionRate,
-                CountRange countRange, List<String> conditionTypes, List<String> functionTypes) {
-            double estimatedRate = Math.max(0.0D, selectRate * conditionRate * countRange.expected());
-
-            return new LootCandidate(
-                    tableId,
-                    item,
-                    BuiltInRegistries.ITEM.getKey(item),
-                    item.getDefaultInstance().getRarity(),
-                    sourcePath,
-                    clamp(selectRate, 0.0D, 1.0D),
-                    clamp(conditionRate, 0.0D, 1.0D),
-                    estimatedRate,
-                    DropRateRarity.fromRate(estimatedRate),
-                    countRange,
-                    List.copyOf(conditionTypes),
-                    List.copyOf(functionTypes)
-            );
-        }
-
-        public ItemStack getItemStack() {
-            return getExpectedCountStack();
-        }
-
-        public ItemStack getMinCountStack() {
-            return stackWithCount(countRange.min());
-        }
-
-        public ItemStack getMaxCountStack() {
-            return stackWithCount(countRange.max());
-        }
-
-        public ItemStack getExpectedCountStack() {
-            return stackWithCount((int) Math.round(countRange.expected()));
-        }
-
-        public ItemStack getRandomCountStack(RandomSource random) {
-            if (countRange.min() >= countRange.max()){
-                return stackWithCount(countRange.min());
-            }
-
-            return stackWithCount(Mth.nextInt(random, countRange.min(), countRange.max()));
-        }
-
-        private ItemStack stackWithCount(int count) {
-            if (count <= 0){
-                return ItemStack.EMPTY;
-            }
-
-            ItemStack stack = new ItemStack(item);
-            if (stack.isEmpty()){
-                return ItemStack.EMPTY;
-            }
-
-            stack.setCount(Math.min(count, stack.getMaxStackSize()));
-            return stack;
-        }
-
-        public boolean hasCondition(String key) {
-            for (String type : conditionTypes) {
-                if (type.contains(key)){
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public boolean hasExactCondition(String key) {
-            for (String type : conditionTypes) {
-                if (type.equals(key)){
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public boolean hasFunction(String key) {
-            for (String type : functionTypes) {
-                if (type.contains(key)){
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public boolean hasExactFunction(String key) {
-            for (String type : functionTypes) {
-                if (type.equals(key)){
-                    return true;
-                }
-            }
-            return false;
-        }
-    }
-
-    public record CountRange(int min, int max, double expected, double nonEmptyChance) {
-        public CountRange {
-            min = Math.max(0, min);
-            max = Math.max(min, max);
-            expected = Math.max(0.0D, expected);
-            nonEmptyChance = clamp(nonEmptyChance, 0.0D, 1.0D);
-        }
-
-        public static CountRange zero() {
-            return new CountRange(0, 0, 0.0D, 0.0D);
-        }
-
-        public static CountRange one() {
-            return new CountRange(1, 1, 1.0D, 1.0D);
-        }
-
-        public CountRange set(CountRange other) {
-            return other;
-        }
-
-        public CountRange add(CountRange other) {
-            return new CountRange(
-                    min + other.min,
-                    max + other.max,
-                    expected + other.expected,
-                    1.0D - (1.0D - nonEmptyChance) * (1.0D - other.nonEmptyChance)
-            );
-        }
-
-        public CountRange multiply(int value) {
-            if (value <= 0){
-                return zero();
-            }
-
-            return new CountRange(
-                    min * value,
-                    max * value,
-                    expected * value,
-                    1.0D - Math.pow(1.0D - nonEmptyChance, value)
-            );
-        }
-
-        public CountRange limit(int minLimit, int maxLimit) {
-            int newMin = Mth.clamp(min, minLimit, maxLimit);
-            int newMax = Mth.clamp(max, minLimit, maxLimit);
-            double newExpected = Mth.clamp(expected, minLimit, maxLimit);
-
-            double newNonEmptyChance = nonEmptyChance;
-            if (newMax <= 0){
-                newNonEmptyChance = 0.0D;
-            }else if (newMin > 0){
-                newNonEmptyChance = 1.0D;
-            }
-
-            return new CountRange(newMin, newMax, newExpected, newNonEmptyChance);
         }
     }
 }
