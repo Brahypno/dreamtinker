@@ -275,11 +275,10 @@ public class DreamtinkerCommon extends DreamtinkerModule {
     public static final ItemObject<BetterPaneBlock> crying_obsidian_plane = BLOCKS.register("crying_obsidian_pane", () -> new BetterPaneBlock(
             builder(MapColor.COLOR_BLACK, SoundType.STONE).requiresCorrectToolForDrops().instrument(NoteBlockInstrument.BASEDRUM).noOcclusion()
                                                           .strength(25.0F, 400.0F)), BLOCK_ITEM);
-    public static final ItemObject<FlowerBlock> narcissus = BLOCKS.register("narcissus", () -> new FlowerBlock(
+    public static final ItemObject<FlowerBlock> narcissus = BLOCKS.register("narcissus", () -> new NarcissusBlock(
             () -> MobEffects.NIGHT_VISION, 5, BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission()
                                                                        .instabreak().sound(SoundType.GRASS).offsetType(BlockBehaviour.OffsetType.XZ)
-                                                                       .pushReaction(PushReaction.DESTROY)) {
-    }, BLOCK_ITEM);
+                                                                       .pushReaction(PushReaction.DESTROY)) {}, BLOCK_ITEM);
     public static final ItemObject<FlowerPotBlock> potted_narcissus = BLOCKS.register("potted_narcissus", () -> new FlowerPotBlock(
             () -> (FlowerPotBlock) Blocks.FLOWER_POT, narcissus, BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission()
                                                                                           .instabreak().sound(SoundType.STONE)

@@ -1,6 +1,9 @@
 package org.dreamtinker.dreamtinker.world.worldgen;
 
-import net.minecraft.core.*;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
@@ -112,7 +115,7 @@ public class ModWorldGen {
         );
 
         // 一簇：每次尝试 24 下，水平扩散 6，竖直 2
-        var patchCfg = new RandomPatchConfiguration(24, 6, 2, inner);
+        var patchCfg = new RandomPatchConfiguration(32, 4, 1, inner);
         ctx.register(NARCISSUS_PATCH, new ConfiguredFeature<>(Feature.RANDOM_PATCH, patchCfg));
 
         RuleTest sandstone = new BlockMatchTest(Blocks.SANDSTONE);
@@ -195,15 +198,12 @@ public class ModWorldGen {
         Holder<ConfiguredFeature<?, ?>> cf = conf.getOrThrow(NARCISSUS_PATCH);
 
         ctx.register(NARCISSUS_PATCH_PLACED, new PlacedFeature(cf, List.of(
-                RarityFilter.onAverageOnceEvery(2),              // 稀有度（改大更稀有；或换成 CountPlacement）
+                RarityFilter.onAverageOnceEvery(2),
                 InSquarePlacement.spread(),
-                // 选“实体可站立的地表”，比 WORLD_SURFACE 更不容易落在水面
                 PlacementUtils.HEIGHTMAP,
-
-                // 只允许：当前位置是空气，且脚下是草方块
                 BlockPredicateFilter.forPredicate(BlockPredicate.allOf(
-                        BlockPredicate.matchesBlocks(Blocks.AIR),
-                        BlockPredicate.matchesBlocks(Vec3i.ZERO.below(), Blocks.GRASS_BLOCK)
+                        BlockPredicate.replaceable(),
+                        BlockPredicate.wouldSurvive(DreamtinkerCommon.narcissus.get().defaultBlockState(), BlockPos.ZERO)
                 )),
                 BiomeFilter.biome()
         )));
