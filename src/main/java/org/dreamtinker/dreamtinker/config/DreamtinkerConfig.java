@@ -173,7 +173,7 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.ConfigValue<List<? extends String>> TheWolfBlackList =
             builder.comment("Blacklist for the wolf, and despair mist").defineList("wolf_blacklist",
                                                                                    List.of("tconstruct:self_destructing", "minecraft:hero_of_the_village",
-                                                                                           "xaeroworldmap:no_world_map"), // 默认例子（可换）
+                                                                                           "xaeroworldmap:no_world_map", "minecraft:levitation"),
                                                                                    o -> o instanceof String s && isValidIdFormat(s));
 
     public static final ForgeConfigSpec.BooleanValue TheWolfWasEnable = builder.comment("Enable the Wolf Was modifier").define("TheWolfWasEnable", true);
