@@ -316,7 +316,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
         buildModifier(Ids.lunarProtection)
-                .addModule(DepthProtectionModule.builder().baselineHeight(40).neutralRange(0).eachLevel(-2.5f))
+                .addModule(DepthProtectionModule.builder().baselineHeight(30).neutralRange(0).eachLevel(-2.5f))
                 .addModule(AttributeModule.builder(ForgeMod.ENTITY_GRAVITY.get(), AttributeModifier.Operation.MULTIPLY_BASE)
                                           .tooltipStyle(AttributeModule.TooltipStyle.PERCENT).flat(-0.05f));
 
