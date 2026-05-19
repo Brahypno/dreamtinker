@@ -63,7 +63,7 @@ public class EwigeEiderkunft extends BattleModifier {
             ModDataNBT nbt = tool.getPersistentData();
             int breaks = nbt.getInt(TAG_TOMB);
             if (breaks > 0){
-                double buff = 13 * Math.log1p(breaks);
+                double buff = 13 * Math.log1p(breaks) / 100f;
                 consumer.accept(Attributes.ATTACK_DAMAGE,
                                 new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
                                                       Attributes.ATTACK_DAMAGE.getDescriptionId(),
