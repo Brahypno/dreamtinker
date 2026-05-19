@@ -18,7 +18,7 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
-import org.dreamtinker.dreamtinker.utils.DTMethodHandler;
+import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
 import org.dreamtinker.dreamtinker.utils.MaskService;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.ResourceColorManager;
@@ -205,8 +205,7 @@ public class mei extends BattleModifier {
     @Override
     public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
         LivingEntity attacker = context.getAttacker();
-        LivingEntity target = context.getLivingTarget();
-        if (attacker.level().isClientSide || null == target)
+        if (attacker.level().isClientSide)
             return knockback;
         int level = tool.getModifierLevel(this.getId());
         if (400 <= level){
@@ -214,7 +213,7 @@ public class mei extends BattleModifier {
                     new DamageSource(
                             attacker.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DreamtinkerDamageTypes.NULL_VOID),
                             attacker, attacker);
-            DTMethodHandler.invokeLivingHurt(target, dam, damage * level * 2);
+            DTDamageUtils.damageHandler(context.getTarget(), dam, damage * level * 2);
         }
         return knockback;
     }

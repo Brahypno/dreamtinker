@@ -1,6 +1,6 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat;
 
-import org.dreamtinker.dreamtinker.utils.DTMethodHandler;
+import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -23,9 +23,7 @@ public class ForceHurt extends Modifier implements MeleeHitModifierHook {
 
     @Override
     public void failedMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageAttempted) {
-        if (null != context.getLivingTarget()){
-            DTMethodHandler.invokeLivingHurt(context.getLivingTarget(), context.makeDamageSource(), damageAttempted);
-        }
+        DTDamageUtils.damageHandler(context.getLivingTarget(), context.makeDamageSource(), damageAttempted);
     }
 
 

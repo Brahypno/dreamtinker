@@ -8,15 +8,17 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.entity.PartEntity;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.GoliathDamage;
-import org.dreamtinker.dreamtinker.utils.DTMethodHandler;
+import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
@@ -101,7 +103,7 @@ public class DoomTrack extends BattleModifier {
         return target.getType().is(Tags.EntityTypes.BOSSES) ? (0.15F + 0.05F * level) : 0.0F;
     }
 
-    public static void spawnOrdainedRuinFx(ServerLevel level, LivingEntity target, int power) {
+    public static void spawnOrdainedRuinFx(ServerLevel level, Entity target, int power) {
         double x = target.getX();
         double y = target.getY() + target.getBbHeight() * 0.55D;
         double z = target.getZ();
@@ -184,17 +186,21 @@ public class DoomTrack extends BattleModifier {
     }
 
 
-    private void deal_damage(IToolStackView tool, ModifierEntry modifier, LivingEntity target, LivingEntity attacker, DamageSource source, float damageDealt, Projectile Projectile) {
+    private void deal_damage(IToolStackView tool, ModifierEntry modifier, Entity target, LivingEntity attacker, DamageSource source, float damageDealt, Projectile Projectile) {
         if (null != target && target.isAlive()){
+            LivingEntity victim = target instanceof LivingEntity ? (LivingEntity) target : null;
+            if (target instanceof PartEntity<?> pl){
+                victim = pl.getControllingPassenger();
+            }
             DamageSource dmg = DreamtinkerDamageTypes.source(target.level().registryAccess(), DreamtinkerDamageTypes.ruin_wheel, source);
             if (!target.isInvulnerableTo(dmg)){
                 float Theoretical_damage = null != Projectile ? DTModifierCheck.getDamage(Projectile) :
                                            Math.max(0.5f, DTModifierCheck.getMeleeDamage(attacker, target, tool, true));
                 Theoretical_damage = Math.max(Theoretical_damage, damageDealt);
                 Theoretical_damage *=
-                        proofByResistanceMultiplier(attacker, target, dmg, modifier.getLevel(), null != Projectile);
+                        proofByResistanceMultiplier(attacker, victim, dmg, modifier.getLevel(), null != Projectile);
                 target.invulnerableTime = 0;
-                DTMethodHandler.invokeLivingHurt(target, dmg, Theoretical_damage);
+                DTDamageUtils.damageHandler(target, dmg, Theoretical_damage);
                 spawnOrdainedRuinFx((ServerLevel) target.level(), target, modifier.getLevel());
             }
         }

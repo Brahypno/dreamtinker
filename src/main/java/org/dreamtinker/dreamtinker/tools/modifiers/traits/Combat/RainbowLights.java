@@ -2,9 +2,11 @@ package org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
+import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.dreamtinker.dreamtinker.utils.model.RainbowTextUtil;
 import org.jetbrains.annotations.NotNull;
@@ -23,15 +25,16 @@ public class RainbowLights extends BattleModifier {
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
         float Theoretical_damage = Math.max(0.5f, DTModifierCheck.getMeleeDamage(context.getAttacker(), context.getTarget(), tool, false));
         Theoretical_damage = Math.max(Theoretical_damage, damageDealt);
-        LivingEntity victim = context.getLivingTarget();
-        if (null != victim && !victim.level().isClientSide){
+        Entity victim = context.getTarget();
+        if (!victim.level().isClientSide){
             int inv = victim.invulnerableTime;
             for (int i = 0; i < 9 && victim.isAlive(); i++) {
                 DamageSource source =
                         DreamtinkerDamageTypes.randomSourceNotSame(victim.level().registryAccess(), context.makeDamageSource(), victim.level().random);
                 victim.invulnerableTime = 0;
-                victim.hurtDuration = 0;
-                victim.hurt(source, Theoretical_damage);
+                if (victim instanceof LivingEntity le)
+                    le.hurtDuration = 0;
+                DTDamageUtils.damageHandler(victim, source, Theoretical_damage);
             }
             victim.invulnerableTime = inv;
         }

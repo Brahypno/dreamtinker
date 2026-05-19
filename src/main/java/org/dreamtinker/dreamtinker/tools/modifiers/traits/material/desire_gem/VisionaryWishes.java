@@ -16,7 +16,7 @@ import org.dreamtinker.dreamtinker.library.client.particle.ColoredSweepBurst;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.MeleeInterface;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.VisionaryDrops;
-import org.dreamtinker.dreamtinker.utils.DTMethodHandler;
+import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
 import org.dreamtinker.dreamtinker.utils.MaskService;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -119,13 +119,11 @@ public class VisionaryWishes extends Modifier implements MeleeInterface, Tooltip
 
     @Override
     public void failedMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageAttempted) {
-        if (null == context.getLivingTarget() || !context.getLivingTarget().isAlive())
-            return;
         afterMeleeHit(tool, modifier, context, damageAttempted);
         if (WishPowerData.boosted(tool, context.getLevel())){
             DamageSource dmg =
                     DreamtinkerDamageTypes.source(context.getLevel().registryAccess(), DreamtinkerDamageTypes.many_wishes, context.makeDamageSource());
-            DTMethodHandler.invokeLivingHurt(context.getLivingTarget(), dmg, damageAttempted);
+            DTDamageUtils.damageHandler(context.getTarget(), dmg, damageAttempted);
         }
     }
 
