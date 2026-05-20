@@ -152,6 +152,13 @@ public class DTModifierCheck {
         return matched;
     }
 
+    public static int getEntityHandsModifierNum(LivingEntity entity, ModifierId id) {
+        int matched = 0;
+        matched += getMainhandModifierLevel(entity, id);
+        matched += getOffhandModifierLevel(entity, id);
+        return matched;
+    }
+
     public static int getEntityBodyModifierNum(LivingEntity entity, ModifierId id) {
         int matched = 0;
         matched += getHeadModifierLevel(entity, id);

@@ -14,11 +14,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class LivingEntityMixin {
     @Inject(method = "getAttributeValue(Lnet/minecraft/world/entity/ai/attributes/Attribute;)D", at = @At("RETURN"), cancellable = true)
     private void dreamtinker$attackSpeedFloor(Attribute attribute, CallbackInfoReturnable<Double> cir) {
-        if (attribute == Attributes.ATTACK_SPEED)
-            if (DTModifierCheck.ModifierInHand((LivingEntity) (Object) this, DreamtinkerModifiers.many_wishes.getId())){
+        if (attribute == Attributes.ATTACK_SPEED){
+            int wishes_level = DTModifierCheck.getEntityHandsModifierNum((LivingEntity) (Object) this, DreamtinkerModifiers.many_wishes.getId());
+            if (0 < wishes_level){
                 double value = cir.getReturnValueD();
-                if (value < 1.0D)
-                    cir.setReturnValue(1.0D);
+                if (value < 1.0D + 0.2 * wishes_level)
+                    cir.setReturnValue(1.0D + 0.2 * wishes_level);
             }
+        }
     }
 }
