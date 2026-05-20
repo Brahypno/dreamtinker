@@ -3,6 +3,7 @@ package org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.Level;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
@@ -10,6 +11,7 @@ import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifie
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.modules.build.RarityModule;
 import slimeknights.tconstruct.library.modifiers.modules.technical.SlotInChargeModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability;
@@ -26,6 +28,7 @@ public class Ophelia extends ArmorModifier {
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
         hookBuilder.addModule(new SlotInChargeModule(SLOT_KEY));
         hookBuilder.addHook(this, ModifierHooks.MODIFY_HURT);
+        hookBuilder.addModule(new RarityModule(Rarity.EPIC));
         super.registerHooks(hookBuilder);
     }
 

@@ -1,11 +1,14 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.material.lupus_antimony;
 
 import com.mojang.logging.LogUtils;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
@@ -88,7 +91,11 @@ public class TheWolfWonder extends BattleModifier {
             int amplifier = rand.nextInt(TheWolfWonderEffectAmplifier.get());
             try {
                 MobEffectInstance inst = new MobEffectInstance(effect, duration, amplifier, false, true);
-                target.forceAddEffect(inst, target);
+                DTForcedEffectKeys.forceAddAndRecordKey(
+                        target,
+                        inst,
+                        attacker
+                );
                 selected_effects.add(inst);
             }
             catch (Throwable t) {
@@ -137,5 +144,105 @@ public class TheWolfWonder extends BattleModifier {
 
     public static boolean isPotionEffectCached(MobEffect effect) {
         return BrewAble.contains(effect);
+    }
+
+    public static class DTForcedEffectKeys {
+        private static final String ROOT = "dreamtinker_forced_effect_keys";
+
+        public static boolean forceAddAndRecordKey(LivingEntity target, MobEffectInstance instance, @Nullable Entity source) {
+            if (target == null || instance == null)
+                return false;
+
+            try {
+                target.forceAddEffect(instance, source);
+            }
+            catch (Throwable ignored) {
+                try {
+                    target.addEffect(instance, source);
+                }
+                catch (Throwable ignored2) {}
+            }
+
+            return recordKey(target, instance.getEffect());
+        }
+
+        public static boolean recordKey(LivingEntity target, MobEffect effect) {
+            if (target == null || effect == null)
+                return false;
+
+            ResourceLocation id = BuiltInRegistries.MOB_EFFECT.getKey(effect);
+            if (id == null)
+                return false;
+
+            CompoundTag root = target.getPersistentData();
+            CompoundTag keys = root.getCompound(ROOT);
+
+            // 只存 key，值随便给一个 byte，占位即可
+            keys.putBoolean(id.toString(), true);
+
+            root.put(ROOT, keys);
+            return true;
+        }
+
+        public static boolean hasKey(LivingEntity target, MobEffect effect) {
+            if (target == null || effect == null)
+                return false;
+
+            ResourceLocation id = BuiltInRegistries.MOB_EFFECT.getKey(effect);
+            if (id == null)
+                return false;
+
+            return target.getPersistentData().getCompound(ROOT).contains(id.toString());
+        }
+
+        public static boolean hasKey(LivingEntity target, ResourceLocation id) {
+            if (target == null || id == null)
+                return false;
+            return target.getPersistentData().getCompound(ROOT).contains(id.toString());
+        }
+
+        public static boolean removeKey(LivingEntity target, MobEffect effect) {
+            if (target == null || effect == null)
+                return false;
+
+            ResourceLocation id = BuiltInRegistries.MOB_EFFECT.getKey(effect);
+            if (id == null)
+                return false;
+
+            return removeKey(target, id);
+        }
+
+        public static boolean removeKey(LivingEntity target, ResourceLocation id) {
+            if (target == null || id == null)
+                return false;
+
+            CompoundTag root = target.getPersistentData();
+            CompoundTag keys = root.getCompound(ROOT);
+            String key = id.toString();
+
+            if (!keys.contains(key))
+                return false;
+
+            keys.remove(key);
+
+            if (keys.isEmpty())
+                root.remove(ROOT);
+            else
+                root.put(ROOT, keys);
+
+            return true;
+        }
+
+        public static void clearKeys(LivingEntity target) {
+            if (target == null)
+                return;
+            target.getPersistentData().remove(ROOT);
+        }
+
+        public static CompoundTag getKeysTag(LivingEntity target) {
+            if (target == null)
+                return new CompoundTag();
+            return target.getPersistentData().getCompound(ROOT);
+        }
     }
 }
