@@ -4,8 +4,8 @@
     {
       "type": "tconstruct:freezing_attack",
       "seconds": {
-        "each_level": 4.0,
-        "flat": 8.0
+        "each_level": 10.0,
+        "flat": 20.0
       }
     },
     {
@@ -13,6 +13,11 @@
       "effect": "minecraft:poison",
       "level": {
         "per_level": 1.0
+      },
+      "target": {
+        "type": "mantle:inverted",
+        "effect": "minecraft:poison",
+        "inverted_type": "mantle:has_effect"
       },
       "time": {
         "flat": 260.0
@@ -27,6 +32,11 @@
       "level": {
         "per_level": 1.0
       },
+      "target": {
+        "type": "mantle:inverted",
+        "effect": "minecraft:regeneration",
+        "inverted_type": "mantle:has_effect"
+      },
       "time": {
         "flat": 260.0
       }
@@ -36,6 +46,11 @@
       "effect": "minecraft:wither",
       "level": {
         "per_level": 1.0
+      },
+      "target": {
+        "type": "mantle:inverted",
+        "effect": "minecraft:wither",
+        "inverted_type": "mantle:has_effect"
       },
       "time": {
         "flat": 260.0
