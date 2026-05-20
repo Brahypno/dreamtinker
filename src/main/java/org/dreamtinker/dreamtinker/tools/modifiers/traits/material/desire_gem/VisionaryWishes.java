@@ -4,12 +4,16 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.CombatRules;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.entity.PartEntity;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.library.client.particle.ColoredSweepBurst;
@@ -37,6 +41,8 @@ import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.tools.data.ModifierIds;
 
 import java.util.List;
+
+import static slimeknights.tconstruct.library.tools.helper.ArmorUtil.getDamageBeforeArmorAbsorb;
 
 public class VisionaryWishes extends Modifier implements MeleeInterface, TooltipModifierHook, InventoryTickModifierHook, ModifierTraitHook {
     private static final int BASE_HIT_GAIN = 6;
@@ -98,6 +104,20 @@ public class VisionaryWishes extends Modifier implements MeleeInterface, Tooltip
         if (WishPowerData.boosted(tool, context.getLevel())){
             damage *= 1.935F + 0.5f * (modifier.getLevel() - 1);
         }
+        LivingEntity target = context.getLivingTarget();
+        if (null == target && context.getTarget() instanceof PartEntity<?> pp){
+            target = pp.getControllingPassenger();
+        }
+        float armor = 0;
+        if (target != null){
+            armor = target.getArmorValue();
+        }
+        if (armor <= 0)
+            return damage;
+        float toughness = (float) target.getAttributeValue(Attributes.ARMOR_TOUGHNESS);
+        float b = CombatRules.getDamageAfterAbsorb(damage, armor, toughness);
+        float desired = Mth.lerp(0.2f * modifier.getLevel(), b, damage);
+        damage = getDamageBeforeArmorAbsorb(desired, armor, toughness);
 
         return damage;
     }

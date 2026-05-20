@@ -66,7 +66,6 @@ public class MusouIsshinModifier extends Modifier implements LeftClickHook {
     private static void shootCrescent(IToolStackView tool, ModifierEntry modifier, ServerPlayer player, LivingEntity target) {
         ServerLevel level = player.serverLevel();
 
-
         float power = 6.0F + (7.62f + 0.4f * (modifier.getLevel() - 1)) * DTModifierCheck.getMeleeDamage(player, target, tool, true);
         int maxLife = 40 + 20 * modifier.getLevel();
         double speed = 1.35D + 0.15D * modifier.getLevel();
