@@ -71,7 +71,8 @@ public class TheWolfAnswer extends BattleModifier {
     public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
         int types = 0;
         if (null != context.getLivingTarget())
-            types += context.getLivingTarget().getActiveEffects().size();
+            types += Math.max(context.getLivingTarget().getActiveEffects().size(),
+                              TheWolfWonder.DTForcedEffectKeys.getKeysTag(context.getLivingTarget()).size());
         return damage * (1 + types * TheWolfWasDevoter.get().floatValue() * tool.getMultiplier(ToolStats.ATTACK_DAMAGE));
     }
 
