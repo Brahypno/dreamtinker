@@ -10,6 +10,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.ForgeMod;
+import net.minecraftforge.entity.PartEntity;
 import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
@@ -42,29 +43,39 @@ public class BornWithMe extends BattleModifier {
             TooltipModifierHook.addPercentBoost(modifier.getModifier(), statName, (double) buff(modifier.getLevel()), tooltip);
     }
 
+    private static final float HEALTH_RATIO_EPS = 1.0E-3F;
+
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
         Level level = context.getLevel();
-        if (null != context.getLivingTarget() && context.getLivingTarget().isDeadOrDying() && !level.isClientSide){
+        LivingEntity victim = null != context.getLivingTarget() ? context.getLivingTarget() : context.getTarget() instanceof PartEntity<?> pe ?
+                                                                                              pe.getControllingPassenger() : null;
+
+        if (null != victim && !level.isClientSide){
             LivingEntity attacker = context.getAttacker();
-            AttributeInstance reach = attacker.getAttribute(ForgeMod.ENTITY_REACH.get());
-            double range = null != reach ? reach.getValue() + 0.5 : 1.5;
-            if (range > 0){
-                AABB attackerBox = attacker.getBoundingBox();
-                AABB searchBox = attackerBox.inflate(range, 0.75D, range);
-                Entity rootVehicle = attacker.getRootVehicle();
-                for (LivingEntity aoeTarget : level.getEntitiesOfClass(LivingEntity.class, searchBox,
-                                                                       aoeTarget -> aoeTarget != attacker
-                                                                                    && aoeTarget != rootVehicle
-                                                                                    && !aoeTarget.isDeadOrDying()
-                                                                                    && !attacker.isAlliedTo(aoeTarget)
-                                                                                    && (!(aoeTarget instanceof ArmorStand stand) || !stand.isMarker())
-                )) {
-                    if (aoeTarget.isAlive() && !aoeTarget.isRemoved())
-                        ToolAttackUtil.performAttack(tool,
-                                                     ToolAttackContext.attacker(attacker).target(aoeTarget).cooldown(1).applyAttributes().extraAttack()
-                                                                      .build());
-                    break;
+            boolean is_born =
+                    victim.isDeadOrDying() || attacker.getHealth() / attacker.getMaxHealth() <= victim.getHealth() / victim.getMaxHealth() + HEALTH_RATIO_EPS;
+            if (is_born){
+                AttributeInstance reach = attacker.getAttribute(ForgeMod.ENTITY_REACH.get());
+                double range = null != reach ? reach.getValue() + 0.5 : 1.5;
+                if (range > 0){
+                    AABB attackerBox = attacker.getBoundingBox();
+                    AABB searchBox = attackerBox.inflate(range, 0.75D, range);
+                    Entity rootVehicle = attacker.getRootVehicle();
+                    for (LivingEntity aoeTarget : level.getEntitiesOfClass(LivingEntity.class, searchBox,
+                                                                           aoeTarget -> aoeTarget != attacker
+                                                                                        && aoeTarget != victim
+                                                                                        && aoeTarget != rootVehicle
+                                                                                        && !aoeTarget.isDeadOrDying()
+                                                                                        && !attacker.isAlliedTo(aoeTarget)
+                                                                                        && (!(aoeTarget instanceof ArmorStand stand) || !stand.isMarker())
+                    )) {
+                        if (aoeTarget.isAlive() && !aoeTarget.isRemoved())
+                            ToolAttackUtil.performAttack(tool,
+                                                         ToolAttackContext.attacker(attacker).target(aoeTarget).cooldown(1).applyAttributes().extraAttack()
+                                                                          .build());
+                        break;
+                    }
                 }
             }
         }

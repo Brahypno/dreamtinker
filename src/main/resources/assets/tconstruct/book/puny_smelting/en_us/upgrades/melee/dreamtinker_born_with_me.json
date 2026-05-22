@@ -2,7 +2,7 @@
   "modifier_id": "dreamtinker:born_with_me",
   "text": [
     {
-      "text": "When killing a mob, perform an additional attack on mob within attack range. First level increase 70% extra attack damage, and the following one increase 20% per level."
+      "text": "When killing a mob or target health percent less than attacker, perform an additional attack on another mob within attack range. First level increase 70% extra attack damage, and the following one increase 20% per level."
     },
     {
       "text": "Deals damage to the attacker equal to 5% per level of the damage dealt by this extra attack. ",

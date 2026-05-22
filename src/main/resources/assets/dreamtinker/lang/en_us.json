@@ -807,7 +807,7 @@
   "modifier.dreamtinker.rainbow_lights.description": "Damage would be divided by 7, but deal extra 9 times damage with random type and same source.",
   "modifier.dreamtinker.born_with_me": "Cinder Cascade",
   "modifier.dreamtinker.born_with_me.flavor": "All born and ashen",
-  "modifier.dreamtinker.born_with_me.description": "When kill an entity, perform a full extra attack to nearby entity. Each level increases the extra attack damage. Extra attack would light self and target, and deals damage to the attacker equal to 5% per level of the damage dealt by this extra attack.",
+  "modifier.dreamtinker.born_with_me.description": "When kill an entity or hit an entity has less health than you, perform a full extra attack to nearby entity. Each level increases the extra attack damage. Extra attack would light self and target, and deals damage to the attacker equal to 5% per level of the damage dealt by this extra attack.",
   "modifier.dreamtinker.born_with_me.attack_damage": "damage if its extra attack",
   "modifier.dreamtinker.doom_track": "Doom Track",
   "modifier.dreamtinker.doom_track.flavor": "To advance, To crush, To declare, and to ruin all things.",

@@ -807,7 +807,7 @@
   "modifier.dreamtinker.rainbow_lights.description": "伤害降低为7分之一，但额外造成9次类型随机, 来源相同的伤害",
   "modifier.dreamtinker.born_with_me": "与烬同焚",
   "modifier.dreamtinker.born_with_me.flavor": "万相化灰",
-  "modifier.dreamtinker.born_with_me.description": "当杀死一个生物时，对攻击范围内的生物额外进行一次攻击。每级增加额外攻击伤害。额外攻击会点燃自身与目标并对自身造成相当于此次额外攻击所造成伤害每级5%的伤害",
+  "modifier.dreamtinker.born_with_me.description": "当杀死一个生物，或攻击目标生命小于自己时，对攻击范围内的其他生物额外进行一次攻击。每级增加额外攻击伤害。额外攻击会点燃自身与目标并对自身造成相当于此次额外攻击所造成伤害每级5%的伤害",
   "modifier.dreamtinker.born_with_me.attack_damage": "伤害如果它是额外攻击",
   "modifier.dreamtinker.doom_track": "宿轨",
   "modifier.dreamtinker.doom_track.flavor": "凡被它命中的，都只是被历史补完了毁灭",
