@@ -8,11 +8,18 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.EntityHitResult;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.entity.ProjectileWithPower;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeDamageModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileLaunchModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileShootModifierHook;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
@@ -23,8 +30,7 @@ import java.util.List;
 
 import static org.dreamtinker.dreamtinker.tools.modifiers.events.OathGuardPaleSteelEvents.*;
 
-public class ForOath extends BattleModifier {
-    @Override
+public class ForOath extends Modifier implements ProjectileHitModifierHook, ProjectileLaunchModifierHook, ProjectileShootModifierHook, MeleeDamageModifierHook, MeleeHitModifierHook {
     public boolean isNoLevels() {return false;}
 
     private static void grantGuardianAbsorption(
@@ -87,7 +93,7 @@ public class ForOath extends BattleModifier {
     }
 
     @Override
-    public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
+    public float getMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
         if (context.getAttacker() instanceof ServerPlayer player && context.getLevel() instanceof ServerLevel && context.getLivingTarget() != null){
             return applyOathEvilDamageBonus(context.getLivingTarget(), player, modifier.getLevel(), damage);
         }
@@ -138,4 +144,11 @@ public class ForOath extends BattleModifier {
         }
     }
 
+
+    @Override
+    protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.PROJECTILE_HIT, ModifierHooks.PROJECTILE_LAUNCH, ModifierHooks.PROJECTILE_SHOT, ModifierHooks.PROJECTILE_THROWN,
+                            ModifierHooks.MELEE_DAMAGE, ModifierHooks.MONSTER_MELEE_DAMAGE, ModifierHooks.MELEE_HIT);
+        super.registerHooks(hookBuilder);
+    }
 }

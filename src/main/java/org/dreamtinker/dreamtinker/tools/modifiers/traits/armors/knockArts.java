@@ -7,11 +7,13 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.TooltipFlag;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.armor.ModifyDamageModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
@@ -21,7 +23,7 @@ import java.util.List;
 
 import static net.minecraft.nbt.Tag.TAG_INT;
 
-public class knockArts extends ArmorModifier {
+public class knockArts extends Modifier implements ModifyDamageModifierHook, TooltipModifierHook {
 
     public boolean isNoLevels() {return false;}
 
@@ -29,7 +31,7 @@ public class knockArts extends ArmorModifier {
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        hookBuilder.addHook(this, ModifierHooks.MODIFY_HURT);
+        hookBuilder.addHook(this, ModifierHooks.MODIFY_HURT, ModifierHooks.TOOLTIP);
         super.registerHooks(hookBuilder);
     }
 

@@ -15,13 +15,16 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.fml.ModList;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
 import org.dreamtinker.dreamtinker.tools.items.UnderArmorItem;
 import org.dreamtinker.dreamtinker.utils.CompactUtils.arsNovaUtils;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.TinkerTags;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 import java.util.Arrays;
@@ -31,10 +34,10 @@ import java.util.Map;
 import static com.hollingsworth.arsnouveau.setup.registry.ItemsRegistry.SORCERER_BOOTS;
 import static org.dreamtinker.dreamtinker.Dreamtinker.configCompactDisabled;
 
-public class NovaMagicArmor extends ArmorModifier {
+public class NovaMagicArmor extends Modifier implements InventoryTickModifierHook {
     @SuppressWarnings({"removal"})
     @Override
-    public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
+    public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         if (holder instanceof Player player)
             SORCERER_BOOTS.asItem().onArmorTick(stack, world, player);
     }
@@ -76,5 +79,11 @@ public class NovaMagicArmor extends ArmorModifier {
             }
         }
 
+    }
+
+    @Override
+    protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.INVENTORY_TICK);
+        super.registerHooks(hookBuilder);
     }
 }

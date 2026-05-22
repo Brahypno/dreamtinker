@@ -11,17 +11,21 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import slimeknights.tconstruct.common.TinkerTags;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.armor.EquipmentChangeModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.technical.ArmorLevelModule;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.EquipmentChangeContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 import static slimeknights.tconstruct.library.modifiers.modules.armor.EffectImmunityModule.EFFECT_IMMUNITY;
 
-public class DarkDefense extends ArmorModifier {
+public class DarkDefense extends Modifier implements EquipmentChangeModifierHook, InventoryTickModifierHook {
     private static MobEffect rampahe = null;
     private static final ResourceLocation rampahe_location = new ResourceLocation("born_in_chaos_v1", "rampant_rampage");
 
@@ -49,7 +53,7 @@ public class DarkDefense extends ArmorModifier {
     }
 
     @Override
-    public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
+    public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         if (world.isClientSide && !(isCorrectSlot || isSelected))
             return;
         if (2 == itemSlot && isCorrectSlot && stack.is(Tags.Items.ARMORS_CHESTPLATES) && DTModifierCheck.ModifierALLBody(holder, this.getId())){
@@ -63,5 +67,11 @@ public class DarkDefense extends ArmorModifier {
             }else if (6.0f < holder.getHealth())
                 data.putBoolean("bic_dark_ramp_already", false);
         }
+    }
+
+    @Override
+    protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.EQUIPMENT_CHANGE, ModifierHooks.INVENTORY_TICK);
+        super.registerHooks(hookBuilder);
     }
 }

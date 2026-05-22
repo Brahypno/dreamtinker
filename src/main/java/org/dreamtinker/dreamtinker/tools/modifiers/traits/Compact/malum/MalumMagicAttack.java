@@ -1,22 +1,23 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum;
 
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.MeleeInterface;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeDamageModifierHook;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import team.lodestar.lodestone.registry.common.LodestoneAttributeRegistry;
 
-public class MalumMagicAttack extends Modifier implements MeleeInterface {
+public class MalumMagicAttack extends Modifier implements MeleeDamageModifierHook {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        this.MeleeInterfaceInit(hookBuilder);
+        hookBuilder.addHook(this, ModifierHooks.MELEE_DAMAGE, ModifierHooks.MONSTER_MELEE_DAMAGE);
         super.registerHooks(hookBuilder);
     }
 
-    public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
+    public float getMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
         if (null != context.getLivingTarget()){
             var magicResistance = context.getLivingTarget().getAttribute(LodestoneAttributeRegistry.MAGIC_RESISTANCE.get());
             if (magicResistance != null)

@@ -35,7 +35,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
@@ -43,6 +42,12 @@ import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.armor.DamageBlockModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.build.ModifierRemovalHook;
+import slimeknights.tconstruct.library.modifiers.hook.build.ValidateModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.build.ModifierTraitModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
@@ -58,7 +63,7 @@ import java.util.function.BiConsumer;
 
 import static com.aizistral.enigmaticlegacy.items.EldritchPan.uniqueGainLimit;
 
-public class EldritchPan extends BattleModifier implements DamageBlockModifierHook {
+public class EldritchPan extends Modifier implements MeleeHitModifierHook, DamageBlockModifierHook, InventoryTickModifierHook, ModifierRemovalHook, TooltipModifierHook, AttributesModifierHook, ValidateModifierHook {
     public static final ResourceLocation BLOODLUST_ID =
             new ResourceLocation("enigmaticlegacy", "growing_bloodlust");
     public static final ResourceLocation HUNGER_ID =
@@ -66,14 +71,15 @@ public class EldritchPan extends BattleModifier implements DamageBlockModifierHo
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        hookBuilder.addHook(this, ModifierHooks.DAMAGE_BLOCK);
+        hookBuilder.addHook(this, ModifierHooks.MELEE_HIT, ModifierHooks.DAMAGE_BLOCK, ModifierHooks.INVENTORY_TICK,
+                            ModifierHooks.REMOVE, ModifierHooks.TOOLTIP, ModifierHooks.ATTRIBUTES, ModifierHooks.VALIDATE);
         hookBuilder.addModule(new ModifierTraitModule(DreamtinkerModifiers.cursed_ring_bound.getId(), 1, true));
         hookBuilder.addModule(new ModifierTraitModule(TinkerModifiers.blocking.getId(), 1, true));
         super.registerHooks(hookBuilder);
     }
 
     @Override
-    public Component onModifierRemoved(IToolStackView tool, Modifier modifier) {
+    public Component onRemoved(IToolStackView tool, Modifier modifier) {
         tool.getPersistentData().putInt(CursedRingBound.TAG_DEEP_CURSE, Math.max(0, tool.getPersistentData().getInt(CursedRingBound.TAG_DEEP_CURSE) - 1));
         return null;
     }
@@ -162,7 +168,7 @@ public class EldritchPan extends BattleModifier implements DamageBlockModifierHo
     }
 
     @Override
-    public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
+    public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         if (world.isClientSide)
             return;
 

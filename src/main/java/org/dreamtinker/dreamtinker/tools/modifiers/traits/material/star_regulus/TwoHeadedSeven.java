@@ -13,10 +13,13 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import org.dreamtinker.dreamtinker.Entity.DreamtinkerEntityTypes;
 import org.dreamtinker.dreamtinker.Entity.WiserLightBolt;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.build.ToolStatsModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileHitModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.build.VolatileFlagModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.IndestructibleItemEntity;
@@ -29,9 +32,10 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class TwoHeadedSeven extends BattleModifier {
+public class TwoHeadedSeven extends Modifier implements ProjectileHitModifierHook, ToolStatsModifierHook {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.PROJECTILE_HIT, ModifierHooks.TOOL_STATS);
         hookBuilder.addModule(new VolatileFlagModule(IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY));
         super.registerHooks(hookBuilder);
     }

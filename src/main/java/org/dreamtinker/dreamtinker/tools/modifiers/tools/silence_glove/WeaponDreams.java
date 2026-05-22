@@ -3,6 +3,7 @@ package org.dreamtinker.dreamtinker.tools.modifiers.tools.silence_glove;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
@@ -12,7 +13,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import org.dreamtinker.dreamtinker.library.modifiers.DreamtinkerHook;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.InteractionInterface;
+import org.dreamtinker.dreamtinker.library.modifiers.hook.LeftClickHook;
+import org.dreamtinker.dreamtinker.library.modifiers.hook.RightClickHook;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.dreamtinker.dreamtinker.utils.CompactUtils.CuriosCompact;
@@ -20,6 +22,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.GeneralInteractionModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.InteractionSource;
 import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.capability.inventory.ToolInventoryCapability;
@@ -35,10 +40,10 @@ import java.util.List;
 import static org.dreamtinker.dreamtinker.tools.modifiers.events.weaponDreamsEnsureEnds.TAG_LAST_USE;
 import static org.dreamtinker.dreamtinker.tools.modifiers.events.weaponDreamsEnsureEnds.startChosenDisplay;
 
-public class WeaponDreams extends NoLevelsModifier implements InteractionInterface {
+public class WeaponDreams extends NoLevelsModifier implements LeftClickHook, RightClickHook, GeneralInteractionModifierHook {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        this.InteractionInterfaceInit(hookBuilder);
+        hookBuilder.addHook(this, DreamtinkerHook.LEFT_CLICK, DreamtinkerHook.RIGHT_CLICK, ModifierHooks.GENERAL_INTERACT);
         super.registerHooks(hookBuilder);
     }
 
@@ -47,6 +52,11 @@ public class WeaponDreams extends NoLevelsModifier implements InteractionInterfa
     @Override
     public int getUseDuration(IToolStackView tool, ModifierEntry modifier) {
         return 72000;
+    }
+
+    @Override
+    public InteractionResult onToolUse(IToolStackView tool, ModifierEntry modifier, Player player, InteractionHand hand, InteractionSource source) {
+        return InteractionResult.PASS;
     }
 
     @Override

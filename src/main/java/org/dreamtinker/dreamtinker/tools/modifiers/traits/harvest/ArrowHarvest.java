@@ -19,10 +19,11 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.ArrowInterface;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileHitModifierHook;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
@@ -31,7 +32,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-public class ArrowHarvest extends Modifier implements ArrowInterface {
+public class ArrowHarvest extends Modifier implements ProjectileHitModifierHook {
     private static float computeExplosionPower(Projectile projectile, float basePower, float speedFactor, float maxPower) {
         Vec3 v = projectile.getDeltaMovement();
         double speed = v.length(); // 实际飞行速度
@@ -169,7 +170,7 @@ public class ArrowHarvest extends Modifier implements ArrowInterface {
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        this.ArrowInterfaceInit(hookBuilder);
+        hookBuilder.addHook(this, ModifierHooks.PROJECTILE_HIT);
         super.registerHooks(hookBuilder);
     }
 

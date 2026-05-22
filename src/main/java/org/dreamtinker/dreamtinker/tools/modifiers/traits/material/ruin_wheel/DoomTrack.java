@@ -17,13 +17,17 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.entity.PartEntity;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.GoliathDamage;
 import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MonsterMeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileHitModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.build.RarityModule;
 import slimeknights.tconstruct.library.modifiers.modules.build.VolatileFlagModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
@@ -37,7 +41,7 @@ import javax.annotation.Nullable;
 
 import static org.dreamtinker.dreamtinker.utils.DTHelper.getPositiveAttributeBonus;
 
-public class DoomTrack extends BattleModifier {
+public class DoomTrack extends Modifier implements ProjectileHitModifierHook, MeleeHitModifierHook, MonsterMeleeHitModifierHook {
     private static final DustParticleOptions RUIN_GOLD_DUST =
             new DustParticleOptions(new Vector3f(0.95F, 0.58F, 0.16F), 0.85F);
     private static final DustParticleOptions RUIN_RED_DUST =
@@ -166,6 +170,7 @@ public class DoomTrack extends BattleModifier {
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
         hookBuilder.addModule(new VolatileFlagModule(IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY));
         hookBuilder.addModule(new RarityModule(Rarity.RARE));
         super.registerHooks(hookBuilder);
@@ -208,5 +213,8 @@ public class DoomTrack extends BattleModifier {
             }
         }
     }
-
+    @Override
+    public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
+        afterMeleeHit(tool, modifier, context, damage);
+    }
 }

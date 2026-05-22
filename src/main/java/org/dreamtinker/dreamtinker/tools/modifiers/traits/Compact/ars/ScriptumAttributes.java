@@ -4,9 +4,10 @@ import com.hollingsworth.arsnouveau.api.perk.PerkAttributes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.BasicInterface;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifierHook;
 import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
@@ -18,10 +19,10 @@ import java.util.function.BiConsumer;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.ArtsMaxManaBonus;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.ArtsRegenBonus;
 
-public class ScriptumAttributes extends NoLevelsModifier implements BasicInterface {
+public class ScriptumAttributes extends NoLevelsModifier implements AttributesModifierHook {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        this.BasicInterfaceInit(hookBuilder);
+        hookBuilder.addHook(this, ModifierHooks.ATTRIBUTES);
         super.registerHooks(hookBuilder);
     }
 

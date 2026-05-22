@@ -9,8 +9,11 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import org.dreamtinker.dreamtinker.common.DreamtinkerAttributes;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.armor.EquipmentChangeModifierHook;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.EquipmentChangeContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
@@ -19,7 +22,7 @@ import java.util.UUID;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.BrokenVesselBoost;
 
-public class broken_vessel extends ArmorModifier {
+public class broken_vessel extends Modifier implements EquipmentChangeModifierHook {
     public static final String TAG_BASE_HEALTH = "broken_vessel";
     private static final UUID HEALTH_BOOST_ID = UUID.fromString("c8b28a17-d5ec-4fa4-b555-bb1e8f7de4c8");
     private static final int MAX_HEALTH_MULTIPLIER = BrokenVesselBoost.get();
@@ -92,5 +95,11 @@ public class broken_vessel extends ArmorModifier {
                 return true;
         }
         return false;
+    }
+
+    @Override
+    protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.EQUIPMENT_CHANGE);
+        super.registerHooks(hookBuilder);
     }
 }

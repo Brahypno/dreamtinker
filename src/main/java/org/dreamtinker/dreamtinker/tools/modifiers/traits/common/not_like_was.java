@@ -6,11 +6,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.TooltipFlag;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.BasicInterface;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.build.ToolStatsModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
 import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolContext;
@@ -25,12 +27,12 @@ import java.util.List;
 import static net.minecraft.nbt.Tag.TAG_INT;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.UnbuildLimits;
 
-public class not_like_was extends NoLevelsModifier implements BasicInterface {
+public class not_like_was extends NoLevelsModifier implements ToolStatsModifierHook, TooltipModifierHook {
     public static final ResourceLocation TAG_CHANGE_TIMES = Dreamtinker.getLocation("not_like_was_changing");
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        this.BasicInterfaceInit(hookBuilder);
+        hookBuilder.addHook(this, ModifierHooks.TOOL_STATS, ModifierHooks.TOOLTIP);
         super.registerHooks(hookBuilder);
     }
 

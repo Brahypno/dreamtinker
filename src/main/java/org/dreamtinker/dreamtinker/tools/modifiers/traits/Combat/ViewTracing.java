@@ -9,10 +9,11 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.ArrowInterface;
 import org.dreamtinker.dreamtinker.utils.TargetTracker;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileLaunchModifierHook;
 import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
@@ -21,7 +22,7 @@ import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import javax.annotation.Nullable;
 import java.util.function.Predicate;
 
-public class ViewTracing extends NoLevelsModifier implements ArrowInterface {
+public class ViewTracing extends NoLevelsModifier implements ProjectileLaunchModifierHook {
     /**
      * 返回一个 Predicate，只匹配 viewer 当前目视射线命中的那个实体。
      * 若当前没有看到实体，则该 Predicate 永远返回 false。
@@ -98,7 +99,7 @@ public class ViewTracing extends NoLevelsModifier implements ArrowInterface {
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        this.ArrowInterfaceInit(hookBuilder);
+        hookBuilder.addHook(this, ModifierHooks.PROJECTILE_LAUNCH);
         super.registerHooks(hookBuilder);
     }
 

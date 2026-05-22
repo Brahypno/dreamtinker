@@ -32,15 +32,22 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.json.predicate.TinkerPredicate;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.build.ToolStatsModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MonsterMeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.EntityInteractionModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.InteractionSource;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.helper.ToolDamageUtil;
 import slimeknights.tconstruct.library.tools.nbt.IToolContext;
@@ -52,7 +59,7 @@ import slimeknights.tconstruct.tools.data.ModifierIds;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class DarkBlade extends BattleModifier {
+public class DarkBlade extends Modifier implements MeleeHitModifierHook, MonsterMeleeHitModifierHook, TooltipModifierHook, ToolStatsModifierHook, EntityInteractionModifierHook {
     private static final ResourceLocation barbed_attack = new ResourceLocation("born_in_chaos_v1", "barbedattack");
     private static final ResourceLocation light_rampage = new ResourceLocation("born_in_chaos_v1", "light_rampage");
     private static final ResourceLocation medium_rampage = new ResourceLocation("born_in_chaos_v1", "medium_rampage");
@@ -375,5 +382,12 @@ public class DarkBlade extends BattleModifier {
                     attacker.addEffect(new MobEffectInstance(LIGHT_RAMPAGE, 4 * 20, 0));
             }
         }
+    }
+
+    @Override
+    protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT, ModifierHooks.TOOLTIP, ModifierHooks.TOOL_STATS,
+                            ModifierHooks.ENTITY_INTERACT);
+        super.registerHooks(hookBuilder);
     }
 }

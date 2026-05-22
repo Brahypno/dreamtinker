@@ -14,10 +14,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.network.PacketDistributor;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.MiningInterface;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.mining.BlockBreakModifierHook;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolHarvestContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
@@ -25,10 +26,10 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import static com.aizistral.enigmaticlegacy.items.AstralBreaker.miningDepth;
 import static com.aizistral.enigmaticlegacy.items.AstralBreaker.miningRadius;
 
-public class ELAstralBreak extends Modifier implements MiningInterface {
+public class ELAstralBreak extends Modifier implements BlockBreakModifierHook {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        this.MiningInterfaceInit(hookBuilder);
+        hookBuilder.addHook(this, ModifierHooks.BLOCK_BREAK);
         super.registerHooks(hookBuilder);
     }
 

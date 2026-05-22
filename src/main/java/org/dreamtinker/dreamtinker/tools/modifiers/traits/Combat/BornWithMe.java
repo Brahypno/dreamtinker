@@ -11,11 +11,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.entity.PartEntity;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeDamageModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MonsterMeleeHitModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
@@ -23,13 +28,20 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 import java.util.List;
 
-public class BornWithMe extends BattleModifier {
+public class BornWithMe extends Modifier implements MeleeDamageModifierHook, MeleeHitModifierHook, MonsterMeleeHitModifierHook, TooltipModifierHook {
     private float buff(int level) {
         return .5f + .2f * level;
     }
 
     @Override
-    public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
+    protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.MELEE_DAMAGE, ModifierHooks.MONSTER_MELEE_DAMAGE, ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT,
+                            ModifierHooks.TOOLTIP);
+        super.registerHooks(hookBuilder);
+    }
+
+    @Override
+    public float getMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
         if (context.isExtraAttack()){
             damage *= (1 + buff(modifier.getLevel()));
         }
@@ -85,5 +97,9 @@ public class BornWithMe extends BattleModifier {
             context.getTarget().setSecondsOnFire(5);
             context.getAttacker().hurt(context.makeDamageSource(), expected);
         }
+    }
+    @Override
+    public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
+        afterMeleeHit(tool, modifier, context, damage);
     }
 }

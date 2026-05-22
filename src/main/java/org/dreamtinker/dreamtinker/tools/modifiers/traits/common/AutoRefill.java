@@ -9,10 +9,14 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.jetbrains.annotations.NotNull;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.GeneralInteractionModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.InteractionSource;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.UsingToolModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.build.StatBoostModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHelper;
@@ -21,14 +25,15 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 import static slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHelper.TANK_HELPER;
 
-public class AutoRefill extends BattleModifier {
+public class AutoRefill extends Modifier implements GeneralInteractionModifierHook, MeleeHitModifierHook, UsingToolModifierHook {
     private static final ResourceLocation TAG_LIQUID = Dreamtinker.getLocation("liquid_storage");
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder builder) {
-        super.registerHooks(builder);
+        builder.addHook(this, ModifierHooks.GENERAL_INTERACT, ModifierHooks.MELEE_HIT, ModifierHooks.TOOL_USING);
         builder.addModule(ToolTankHelper.TANK_HANDLER);
         builder.addModule(StatBoostModule.add(ToolTankHelper.CAPACITY_STAT).eachLevel(FluidType.BUCKET_VOLUME));
+        super.registerHooks(builder);
     }
 
     public int getPriority() {
@@ -83,5 +88,4 @@ public class AutoRefill extends BattleModifier {
         if (!context.getAttacker().level().isClientSide)
             restoreLiquidInUse(tool, modifier);
     }
-
 }

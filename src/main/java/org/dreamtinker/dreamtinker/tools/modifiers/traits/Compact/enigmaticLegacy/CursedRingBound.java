@@ -13,18 +13,23 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.Entity.AggressiveFox;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.armor.EquipmentChangeModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.GeneralInteractionModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.InteractionSource;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.EquipmentChangeContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class CursedRingBound extends ArmorModifier {
+public class CursedRingBound extends Modifier implements EquipmentChangeModifierHook, GeneralInteractionModifierHook, TooltipModifierHook {
     public static final ResourceLocation TAG_DEEP_CURSE = Dreamtinker.getLocation("deeper_curse");
 
     private boolean check(IToolStackView tool, ServerPlayer player) {
@@ -67,5 +72,11 @@ public class CursedRingBound extends ArmorModifier {
         }else {
             ItemLoreHelper.indicateCursedOnesOnly(tooltip);
         }
+    }
+
+    @Override
+    protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.EQUIPMENT_CHANGE, ModifierHooks.GENERAL_INTERACT, ModifierHooks.TOOLTIP);
+        super.registerHooks(hookBuilder);
     }
 }

@@ -17,7 +17,6 @@ import net.minecraftforge.entity.PartEntity;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.library.client.particle.ColoredSweepBurst;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.MeleeInterface;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.VisionaryDrops;
 import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
@@ -30,6 +29,8 @@ import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.build.ModifierTraitHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeDamageModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
@@ -44,7 +45,7 @@ import java.util.List;
 
 import static slimeknights.tconstruct.library.tools.helper.ArmorUtil.getDamageBeforeArmorAbsorb;
 
-public class VisionaryWishes extends Modifier implements MeleeInterface, TooltipModifierHook, InventoryTickModifierHook, ModifierTraitHook {
+public class VisionaryWishes extends Modifier implements MeleeDamageModifierHook, MeleeHitModifierHook, TooltipModifierHook, InventoryTickModifierHook, ModifierTraitHook {
     private static final int BASE_HIT_GAIN = 6;
     private static final int BOOSTED_HIT_GAIN = 10;
 
@@ -94,13 +95,14 @@ public class VisionaryWishes extends Modifier implements MeleeInterface, Tooltip
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        this.MeleeInterfaceInit(hookBuilder);
-        hookBuilder.addHook(this, ModifierHooks.TOOLTIP, ModifierHooks.INVENTORY_TICK, ModifierHooks.MODIFIER_TRAITS);
+        hookBuilder.addHook(this, ModifierHooks.MELEE_DAMAGE, ModifierHooks.MONSTER_MELEE_DAMAGE, ModifierHooks.MELEE_HIT, ModifierHooks.TOOLTIP,
+                            ModifierHooks.INVENTORY_TICK,
+                            ModifierHooks.MODIFIER_TRAITS);
         super.registerHooks(hookBuilder);
     }
 
     @Override
-    public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
+    public float getMeleeDamage(@NotNull IToolStackView tool, @NotNull ModifierEntry modifier, @NotNull ToolAttackContext context, float baseDamage, float damage) {
         if (WishPowerData.boosted(tool, context.getLevel())){
             damage *= 1.935F + 0.5f * (modifier.getLevel() - 1);
         }

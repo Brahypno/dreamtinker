@@ -7,13 +7,14 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.ArmorInterface;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.ArrowInterface;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.MeleeInterface;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.armor.ModifyDamageModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.armor.ProtectionModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeDamageModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileLaunchModifierHook;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
@@ -22,17 +23,15 @@ import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 
 import javax.annotation.Nullable;
 
-public class LightInDark extends Modifier implements ArrowInterface, MeleeInterface, ArmorInterface {
+public class LightInDark extends Modifier implements ProjectileLaunchModifierHook, MeleeDamageModifierHook, ProtectionModifierHook, ModifyDamageModifierHook {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        this.ArrowInterfaceInit(hookBuilder);
-        this.MeleeInterfaceInit(hookBuilder);
-        this.ArmorInterfaceInit(hookBuilder);
-        hookBuilder.addHook(this, ModifierHooks.MODIFY_HURT);
+        hookBuilder.addHook(this, ModifierHooks.PROJECTILE_LAUNCH, ModifierHooks.MELEE_DAMAGE, ModifierHooks.MONSTER_MELEE_DAMAGE,
+                            ModifierHooks.PROTECTION, ModifierHooks.MODIFY_HURT);
         super.registerHooks(hookBuilder);
     }
 
-    public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
+    public float getMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
         return damage * (1 + lightCurve(context.getAttacker()));
     }
 

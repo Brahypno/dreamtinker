@@ -8,9 +8,12 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
 import org.jetbrains.annotations.NotNull;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.armor.DamageBlockModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.build.ToolStatsModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.technical.SlotInChargeModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability;
@@ -25,7 +28,7 @@ import java.util.List;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.VirtualDodge;
 
-public class VirtualDodge extends ArmorModifier {
+public class VirtualDodge extends Modifier implements ToolStatsModifierHook, DamageBlockModifierHook {
     private static final TinkerDataCapability.TinkerDataKey<SlotInChargeModule.SlotInCharge> SLOT_KEY =
             TinkerDataCapability.TinkerDataKey.of(Dreamtinker.getLocation("virtual_dodge"));
 
@@ -41,6 +44,7 @@ public class VirtualDodge extends ArmorModifier {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
         hookBuilder.addModule(new SlotInChargeModule(SLOT_KEY));
+        hookBuilder.addHook(this, ModifierHooks.TOOL_STATS, ModifierHooks.DAMAGE_BLOCK);
         super.registerHooks(hookBuilder);
     }
 

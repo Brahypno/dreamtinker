@@ -5,10 +5,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
 import org.jetbrains.annotations.NotNull;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.armor.ModifyDamageModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.technical.SlotInChargeModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability;
@@ -20,14 +21,14 @@ import java.util.List;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.OuroboricHourglassMultiply;
 
-public class ouroboric_hourglass extends ArmorModifier {
+public class ouroboric_hourglass extends Modifier implements ModifyDamageModifierHook {
     private static final TinkerDataCapability.TinkerDataKey<SlotInChargeModule.SlotInCharge> SLOT_KEY =
             TinkerDataCapability.TinkerDataKey.of(Dreamtinker.getLocation("ouroboric_hourglass"));
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        hookBuilder.addModule(new SlotInChargeModule(SLOT_KEY));
         hookBuilder.addHook(this, ModifierHooks.MODIFY_HURT);
+        hookBuilder.addModule(new SlotInChargeModule(SLOT_KEY));
         super.registerHooks(hookBuilder);
     }
 

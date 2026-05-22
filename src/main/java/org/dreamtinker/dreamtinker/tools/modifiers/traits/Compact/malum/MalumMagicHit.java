@@ -12,14 +12,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.ArrowInterface;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.util.CombatHelper;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.gadgets.entity.EFLNExplosion;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.entity.ProjectileWithPower;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileFuseModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileHitModifierHook;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
@@ -30,10 +32,10 @@ import javax.annotation.Nullable;
 
 import static slimeknights.tconstruct.library.modifiers.modules.combat.ProjectileExplosionModule.EFLN;
 
-public class MalumMagicHit extends Modifier implements ArrowInterface {
+public class MalumMagicHit extends Modifier implements ProjectileHitModifierHook, ProjectileFuseModifierHook {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        this.ArrowInterfaceInit(hookBuilder);
+        hookBuilder.addHook(this, ModifierHooks.PROJECTILE_HIT, ModifierHooks.PROJECTILE_FUSE);
         super.registerHooks(hookBuilder);
     }
 

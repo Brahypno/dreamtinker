@@ -8,10 +8,11 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
 import org.jetbrains.annotations.NotNull;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.armor.ModifyDamageModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.technical.SlotInChargeModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability;
@@ -23,7 +24,7 @@ import java.util.List;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.AbsorptionDefenseRate;
 
-public class AbsorptionDefense extends ArmorModifier {
+public class AbsorptionDefense extends Modifier implements ModifyDamageModifierHook {
     private static final TinkerDataCapability.TinkerDataKey<SlotInChargeModule.SlotInCharge> SLOT_KEY =
             TinkerDataCapability.TinkerDataKey.of(Dreamtinker.getLocation("absorption_defense"));
 
@@ -54,9 +55,6 @@ public class AbsorptionDefense extends ArmorModifier {
                              Component.translatable(this.getTranslationKey() + ".description", AbsorptionDefenseRate.get().floatValue() * 100)
                                       .withStyle(ChatFormatting.GRAY));
     }
-
-    @Override
-    public boolean isNoLevels() {return false;}
 
     @Override
     public int getPriority() {

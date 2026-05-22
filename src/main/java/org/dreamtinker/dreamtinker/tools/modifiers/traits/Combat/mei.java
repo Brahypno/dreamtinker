@@ -16,7 +16,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
 import org.dreamtinker.dreamtinker.utils.MaskService;
@@ -24,7 +23,17 @@ import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.ResourceColorManager;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.build.ModifierRemovalHook;
+import slimeknights.tconstruct.library.modifiers.hook.build.ToolStatsModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.build.ValidateModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeDamageModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MonsterMeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
 import slimeknights.tconstruct.library.modifiers.util.ModifierLevelDisplay;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
@@ -43,7 +52,7 @@ import java.util.function.BiConsumer;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.RedShadeEnable;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.RedTime;
 
-public class mei extends BattleModifier {
+public class mei extends Modifier implements ModifierRemovalHook, ValidateModifierHook, ToolStatsModifierHook, AttributesModifierHook, InventoryTickModifierHook, MeleeHitModifierHook, MonsterMeleeHitModifierHook, MeleeDamageModifierHook {
     private final String mei_key_2 = "modifier.dreamtinker.mei_2";
     private final String mei_key_3 = "modifier.dreamtinker.mei_3";
     private final int max_level_second = RedTime.get();
@@ -51,6 +60,14 @@ public class mei extends BattleModifier {
     private static final ResourceLocation TAG_MLL = Dreamtinker.getLocation("mei_level");
     private final String tool_attribute_uuid = "1cbcb2dd-4df1-4fcf-a072-301ab051378d";
     private final String player_attribute_uuid = "548eef8b-d4db-44cc-9854-0063e4d2affb";
+
+    @Override
+    protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.REMOVE, ModifierHooks.VALIDATE, ModifierHooks.TOOL_STATS, ModifierHooks.ATTRIBUTES,
+                            ModifierHooks.INVENTORY_TICK,
+                            ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT, ModifierHooks.MELEE_DAMAGE, ModifierHooks.MONSTER_MELEE_DAMAGE);
+        super.registerHooks(hookBuilder);
+    }
 
     @Override
     public @NotNull Component getDisplayName(int level) {
@@ -67,7 +84,6 @@ public class mei extends BattleModifier {
             return Component.translatable(mei_key_3).withStyle((style) -> style.withColor(ResourceColorManager.getTextColor(mei_key_3)));
     }
 
-    @Override
     public @NotNull List<Component> getDescriptionList(int level) {
         if (level < 200)
             return this.getDescriptionList();
@@ -80,7 +96,7 @@ public class mei extends BattleModifier {
     }
 
     @Override
-    public Component onModifierRemoved(IToolStackView tool, Modifier modifier) {
+    public Component onRemoved(IToolStackView tool, Modifier modifier) {
         if (modifier.getId().equals(this.getId()))
             return refuseRemoveMessage(tool);
         return null;
@@ -151,7 +167,7 @@ public class mei extends BattleModifier {
     }
 
     @Override
-    public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
+    public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         if (world.isClientSide)
             return;
         if (world.getGameTime() % 20 == 0){
@@ -219,8 +235,13 @@ public class mei extends BattleModifier {
     }
 
     @Override
-    public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
+    public float getMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
         return damage * (500 <= tool.getModifierLevel(this.getId()) ? 10 : 1);
+    }
+
+    @Override
+    public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
+        beforeMeleeHit(tool, modifier, context, damage, 0, 0);
     }
 
     @Override

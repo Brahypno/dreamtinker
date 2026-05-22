@@ -13,12 +13,17 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.PacketDistributor;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.network.DNetwork;
 import org.dreamtinker.dreamtinker.network.PerfectOverlayMsg;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.build.ModifierRemovalHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.GeneralInteractionModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.UsingToolModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileLaunchModifierHook;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
@@ -29,19 +34,19 @@ import static net.minecraft.nbt.Tag.TAG_INT;
 import static org.dreamtinker.dreamtinker.Dreamtinker.MODID;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.IsoLdeEaseTime;
 
-public class Isolde extends BattleModifier {
+public class Isolde extends Modifier implements ProjectileLaunchModifierHook, InventoryTickModifierHook, UsingToolModifierHook, ModifierRemovalHook {
     private static final ResourceLocation TAG_ISOLDE_TIME = Dreamtinker.getLocation("isolde_time");
     private static final ResourceLocation TAG_ISOLDE = Dreamtinker.getLocation("isolde");
 
     @Override
-    public Component onModifierRemoved(IToolStackView tool, Modifier modifier) {
+    public Component onRemoved(IToolStackView tool, Modifier modifier) {
         tool.getPersistentData().remove(TAG_ISOLDE);
         tool.getPersistentData().remove(TAG_ISOLDE_TIME);
         return null;
     }
 
     @Override
-    public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
+    public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         if (world.isClientSide || !isSelected)
             return;
         if (holder.isUsingItem() && holder.getUseItem() == stack){
@@ -88,7 +93,7 @@ public class Isolde extends BattleModifier {
     }
 
     @Override
-    public void onProjectileLaunch(IToolStackView tool, ModifierEntry modifier, LivingEntity shooter, ItemStack ammo, Projectile projectile, @Nullable AbstractArrow arrow, ModDataNBT persistentData, boolean primary) {
+    public void onProjectileLaunch(IToolStackView tool, ModifierEntry modifier, LivingEntity shooter, Projectile projectile, @Nullable AbstractArrow arrow, ModDataNBT persistentData, boolean primary) {
         if (shooter.level().isClientSide)
             return;
         if (null == arrow)
@@ -104,4 +109,10 @@ public class Isolde extends BattleModifier {
         }
     }
 
+
+    @Override
+    protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.PROJECTILE_LAUNCH, ModifierHooks.INVENTORY_TICK, ModifierHooks.TOOL_USING, ModifierHooks.REMOVE);
+        super.registerHooks(hookBuilder);
+    }
 }

@@ -9,12 +9,17 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.CursedRingBound;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.build.ModifierRemovalHook;
+import slimeknights.tconstruct.library.modifiers.hook.build.ValidateModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MonsterMeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileHitModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.build.ModifierTraitModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
@@ -27,15 +32,17 @@ import javax.annotation.Nullable;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.ExilesFaultyAbsorbHPPercentage;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.ExilesFaultyCurseHPPercentage;
 
-public class ExilesFaulty extends BattleModifier {
+public class ExilesFaulty extends Modifier implements ProjectileHitModifierHook, MeleeHitModifierHook, MonsterMeleeHitModifierHook, ModifierRemovalHook, ValidateModifierHook {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT, ModifierHooks.REMOVE,
+                            ModifierHooks.VALIDATE);
         hookBuilder.addModule(new ModifierTraitModule(DreamtinkerModifiers.cursed_ring_bound.getId(), 1, true));
         super.registerHooks(hookBuilder);
     }
 
     @Override
-    public Component onModifierRemoved(IToolStackView tool, Modifier modifier) {
+    public Component onRemoved(IToolStackView tool, Modifier modifier) {
         tool.getPersistentData().remove(CursedRingBound.TAG_DEEP_CURSE);
         return null;
     }
@@ -91,5 +98,9 @@ public class ExilesFaulty extends BattleModifier {
             if (attackerHealth < attacker.getHealth())
                 attacker.setHealth(attackerHealth);
         }
+    }
+    @Override
+    public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
+        beforeMeleeHit(tool, modifier, context, damage, 0, 0);
     }
 }

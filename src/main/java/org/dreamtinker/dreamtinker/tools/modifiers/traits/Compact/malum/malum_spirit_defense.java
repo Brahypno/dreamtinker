@@ -10,10 +10,12 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
 import org.jetbrains.annotations.NotNull;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.armor.ModifyDamageModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.technical.SlotInChargeModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability;
@@ -26,7 +28,7 @@ import java.util.function.BiConsumer;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.SpiritDefence;
 
-public class malum_spirit_defense extends ArmorModifier {
+public class malum_spirit_defense extends Modifier implements ModifyDamageModifierHook, AttributesModifierHook {
     public static final EnumMap<EquipmentSlot, UUID> ARMOR_SLOT_UUIDS = new EnumMap<>(EquipmentSlot.class);
     private static final TinkerDataCapability.TinkerDataKey<SlotInChargeModule.SlotInCharge> SLOT_KEY =
             TinkerDataCapability.TinkerDataKey.of(Dreamtinker.getLocation("malum_spirit_defense"));
@@ -40,8 +42,8 @@ public class malum_spirit_defense extends ArmorModifier {
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.MODIFY_HURT, ModifierHooks.ATTRIBUTES);
         hookBuilder.addModule(new SlotInChargeModule(SLOT_KEY));
-        hookBuilder.addHook(this, ModifierHooks.MODIFY_DAMAGE);
         super.registerHooks(hookBuilder);
     }
 
@@ -78,7 +80,6 @@ public class malum_spirit_defense extends ArmorModifier {
                                               AttributeModifier.Operation.ADDITION));
     }
 
-    @Override
     public boolean isNoLevels() {return false;}
 
 

@@ -19,7 +19,6 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.TierSortingRegistry;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.AdvCountEvents;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
@@ -27,6 +26,16 @@ import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.behavior.ToolDamageModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.build.ModifierRemovalHook;
+import slimeknights.tconstruct.library.modifiers.hook.build.ToolStatsModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.build.VolatileDataModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.SlotType;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolContext;
@@ -40,7 +49,7 @@ import java.util.function.BiConsumer;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.TheSplendourHeart;
 
-public class SplendourHeart extends BattleModifier {
+public class SplendourHeart extends Modifier implements MeleeHitModifierHook, InventoryTickModifierHook, ToolDamageModifierHook, ModifierRemovalHook, TooltipModifierHook, ToolStatsModifierHook, AttributesModifierHook, VolatileDataModifierHook {
     //According to PS5 achievement, 83 bronze, 36 silver 14 gold, 1 pla=>83 easy, 36 normal, 15 hard
     //According to myself, tinker`s construct 3 have 21 easy, 13 normal, 3 hard achievements.
     //In total 104 easy, 49 normal 18 hard=>60.8% easy, 28.6% normal,10.6% hard. so that
@@ -53,13 +62,13 @@ public class SplendourHeart extends BattleModifier {
     }
 
     @Override
-    public Component onModifierRemoved(IToolStackView tool, Modifier modifier) {
+    public Component onRemoved(IToolStackView tool, Modifier modifier) {
         tool.getPersistentData().remove(TAG_ADV_PERCENTAGE);
         return null;
     }
 
     @Override
-    public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
+    public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         if (!world.isClientSide && holder instanceof ServerPlayer sp && world.getGameTime() % 20 == 0){
             var count = AdvCountEvents.AdvCountService.getCounts(sp);
             float old = tool.getPersistentData().getFloat(TAG_ADV_PERCENTAGE);
@@ -83,7 +92,7 @@ public class SplendourHeart extends BattleModifier {
     }
 
     @Override
-    public int modifierDamageTool(IToolStackView tool, ModifierEntry modifier, int amount, @Nullable LivingEntity holder) {
+    public int onDamageTool(IToolStackView tool, ModifierEntry modifier, int amount, @Nullable LivingEntity holder) {
         float per = tool.getPersistentData().getFloat(TAG_ADV_PERCENTAGE);
         float value = rangeToValue(per);
         return (int) (amount / value);
@@ -220,5 +229,12 @@ public class SplendourHeart extends BattleModifier {
             } // map to 550%-700%
             //highest tier, should show respect to that do such lots of advancements-----and this is not enough
         }
+    }
+
+    @Override
+    protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.MELEE_HIT, ModifierHooks.INVENTORY_TICK, ModifierHooks.TOOL_DAMAGE,
+                            ModifierHooks.REMOVE, ModifierHooks.TOOLTIP, ModifierHooks.TOOL_STATS, ModifierHooks.ATTRIBUTES, ModifierHooks.VOLATILE_DATA);
+        super.registerHooks(hookBuilder);
     }
 }

@@ -17,7 +17,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
 import org.dreamtinker.dreamtinker.utils.DTMessages;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
@@ -25,6 +24,12 @@ import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.armor.EquipmentChangeModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.armor.ModifyDamageModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.behavior.ToolDamageModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.build.ModifierRemovalHook;
+import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.KeybindInteractModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.build.VolatileFlagModule;
 import slimeknights.tconstruct.library.modifiers.modules.technical.SlotInChargeModule;
@@ -45,7 +50,7 @@ import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.*;
 import static org.dreamtinker.dreamtinker.utils.DTModifierCheck.getPossibleToolWithModifierTag;
 
 
-public class as_one extends ArmorModifier implements KeybindInteractModifierHook {
+public class as_one extends Modifier implements EquipmentChangeModifierHook, ModifyDamageModifierHook, InventoryTickModifierHook, ToolDamageModifierHook, ModifierRemovalHook, TooltipModifierHook, KeybindInteractModifierHook {
     private final int as_one_life = AsOneRe.get();
     private static final int SECOND_THRESHOLD = AsOneT.get();
     private static final TinkerDataCapability.TinkerDataKey<SlotInChargeModule.SlotInCharge> SLOT_KEY =
@@ -69,10 +74,10 @@ public class as_one extends ArmorModifier implements KeybindInteractModifierHook
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.EQUIPMENT_CHANGE, ModifierHooks.MODIFY_HURT, ModifierHooks.INVENTORY_TICK, ModifierHooks.TOOL_DAMAGE,
+                            ModifierHooks.REMOVE, ModifierHooks.TOOLTIP);
         hookBuilder.addModule(new SlotInChargeModule(SLOT_KEY));
         hookBuilder.addModule(new VolatileFlagModule(IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY));
-        hookBuilder.addHook(this, ModifierHooks.ARMOR_INTERACT);
-        hookBuilder.addHook(this, ModifierHooks.MODIFY_HURT);
         super.registerHooks(hookBuilder);
     }
 
@@ -141,7 +146,7 @@ public class as_one extends ArmorModifier implements KeybindInteractModifierHook
     }
 
     @Override
-    public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
+    public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         if (world.isClientSide)
             return;
         long this_time;
@@ -206,7 +211,7 @@ public class as_one extends ArmorModifier implements KeybindInteractModifierHook
     }
 
     @Override
-    public int modifierDamageTool(IToolStackView tool, ModifierEntry modifier, int amount, @org.jetbrains.annotations.Nullable LivingEntity holder) {return 0;}
+    public int onDamageTool(IToolStackView tool, ModifierEntry modifier, int amount, @org.jetbrains.annotations.Nullable LivingEntity holder) {return 0;}
 
 
     @Override
@@ -224,7 +229,7 @@ public class as_one extends ArmorModifier implements KeybindInteractModifierHook
     }
 
     @Override
-    public Component onModifierRemoved(IToolStackView tool, Modifier modifier) {
+    public Component onRemoved(IToolStackView tool, Modifier modifier) {
         tool.getPersistentData().remove(TAG_AS_ONE);
         tool.getPersistentData().remove(TAG_LAST);
         return null;

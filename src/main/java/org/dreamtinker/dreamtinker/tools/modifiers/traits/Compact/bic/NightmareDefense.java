@@ -9,12 +9,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
-public class NightmareDefense extends ArmorModifier {
+public class NightmareDefense extends Modifier implements InventoryTickModifierHook {
     private static MobEffect MAGIC_DEPLETION;
     private static final ResourceLocation magic_depletion = new ResourceLocation("born_in_chaos_v1", "magic_depletion");
 
@@ -24,12 +27,18 @@ public class NightmareDefense extends ArmorModifier {
     }
 
     @Override
-    public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
+    public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         if (world.isClientSide)
             return;
         if (2 == itemSlot && isCorrectSlot && stack.is(Tags.Items.ARMORS_CHESTPLATES) && DTModifierCheck.ModifierALLBody(holder, this.getId()))
             if (null != MAGIC_DEPLETION && holder.hasEffect(MAGIC_DEPLETION))
                 holder.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 30, 1, false, false));
 
+    }
+
+    @Override
+    protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.INVENTORY_TICK);
+        super.registerHooks(hookBuilder);
     }
 }

@@ -10,14 +10,24 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.dreamtinker.dreamtinker.utils.DTMessages;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.materials.definition.MaterialId;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.build.ToolStatsModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.build.ValidateModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeDamageModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MonsterMeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileLaunchModifierHook;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.*;
 import slimeknights.tconstruct.library.tools.stat.ModifierStatsBuilder;
@@ -28,7 +38,7 @@ import java.util.List;
 
 import static net.minecraft.util.Mth.clamp;
 
-public class AwaitingHour extends BattleModifier {
+public class AwaitingHour extends Modifier implements ProjectileLaunchModifierHook, MeleeDamageModifierHook, MeleeHitModifierHook, MonsterMeleeHitModifierHook, InventoryTickModifierHook, TooltipModifierHook, ToolStatsModifierHook, ValidateModifierHook {
     public static final ResourceLocation TAG_SCALE = Dreamtinker.getLocation("scale_worm_tool");
     public static final ResourceLocation TAG_MOTH = Dreamtinker.getLocation("moth_wing_tool");
     private final int OmenInSight = 120;
@@ -52,7 +62,7 @@ public class AwaitingHour extends BattleModifier {
     }
 
     @Override
-    public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
+    public float getMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
         int scale = tool.getPersistentData().getInt(TAG_SCALE);
         int moth = tool.getPersistentData().getInt(TAG_MOTH);
         if (scale < moth){
@@ -103,7 +113,7 @@ public class AwaitingHour extends BattleModifier {
 
     //I Know its not DRY. BUT　ＷＨＯ CARES!
     @Override
-    public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
+    public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         if (world.isClientSide)
             return;
 
@@ -157,5 +167,17 @@ public class AwaitingHour extends BattleModifier {
             if (0 < scale)
                 tooltip.add(Component.translatable("modifier.dreamtinker.pupal_omen_scale.tooltip", scale, threshold));
         }
+    }
+
+    @Override
+    protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.PROJECTILE_LAUNCH, ModifierHooks.MELEE_DAMAGE, ModifierHooks.MONSTER_MELEE_DAMAGE, ModifierHooks.MELEE_HIT,
+                            ModifierHooks.MONSTER_MELEE_HIT, ModifierHooks.INVENTORY_TICK, ModifierHooks.TOOLTIP, ModifierHooks.TOOL_STATS,
+                            ModifierHooks.VALIDATE);
+        super.registerHooks(hookBuilder);
+    }
+    @Override
+    public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
+        afterMeleeHit(tool, modifier, context, damage);
     }
 }

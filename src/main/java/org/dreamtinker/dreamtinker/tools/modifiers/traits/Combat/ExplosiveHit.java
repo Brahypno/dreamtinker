@@ -7,8 +7,13 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.common.ForgeMod;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
+import org.jetbrains.annotations.NotNull;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MonsterMeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileHitModifierHook;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
@@ -18,10 +23,11 @@ import javax.annotation.Nullable;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.ExplodeHitFire;
 
-public class ExplosiveHit extends BattleModifier {
+public class ExplosiveHit extends Modifier implements MonsterMeleeHitModifierHook, ProjectileHitModifierHook {
     @Override
-    public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        onMonsterMeleeHit(tool, modifier, context, damageDealt);
+    protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.MONSTER_MELEE_HIT, ModifierHooks.PROJECTILE_HIT);
+        super.registerHooks(hookBuilder);
     }
 
     @Override

@@ -20,8 +20,10 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
+import org.dreamtinker.dreamtinker.library.modifiers.DreamtinkerHook;
+import org.dreamtinker.dreamtinker.library.modifiers.hook.LeftClickHook;
 import org.jetbrains.annotations.NotNull;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.modules.build.RarityModule;
 import slimeknights.tconstruct.library.modifiers.modules.build.VolatileFlagModule;
@@ -38,11 +40,12 @@ import java.util.Map;
 
 import static org.dreamtinker.dreamtinker.tools.modifiers.traits.material.lupus_antimony.TheWolfWonder.filterMobEffects;
 
-public class DespairMist extends BattleModifier {
+public class DespairMist extends Modifier implements LeftClickHook {
     private final ResourceLocation TAG_MIST = Dreamtinker.getLocation("despair_mist");
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addHook(this, DreamtinkerHook.LEFT_CLICK);
         hookBuilder.addModule(new VolatileFlagModule(IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY));
         hookBuilder.addModule(new RarityModule(Rarity.EPIC));
         super.registerHooks(hookBuilder);
@@ -53,7 +56,6 @@ public class DespairMist extends BattleModifier {
         return 1000;
     }
 
-    @Override
     public boolean isNoLevels() {return false;}
 
     public void onLeftClickEmpty(IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot) {

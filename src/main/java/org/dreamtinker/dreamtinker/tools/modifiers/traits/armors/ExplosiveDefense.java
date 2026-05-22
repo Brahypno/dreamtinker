@@ -13,9 +13,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
 import org.jetbrains.annotations.NotNull;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.armor.DamageBlockModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.technical.SlotInChargeModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability;
@@ -28,7 +30,7 @@ import java.util.List;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.BaseExplodeDefenseRate;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.ExplodeDefenseRatePerLevel;
 
-public class ExplosiveDefense extends ArmorModifier {
+public class ExplosiveDefense extends Modifier implements DamageBlockModifierHook {
     private static final ThreadLocal<Boolean> DREAMTINKER_COUNTER_BLAST = ThreadLocal.withInitial(() -> false);
 
     private static final TinkerDataCapability.TinkerDataKey<SlotInChargeModule.SlotInCharge> SLOT_KEY =
@@ -37,6 +39,7 @@ public class ExplosiveDefense extends ArmorModifier {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
         hookBuilder.addModule(new SlotInChargeModule(SLOT_KEY));
+        hookBuilder.addHook(this, ModifierHooks.DAMAGE_BLOCK);
         super.registerHooks(hookBuilder);
     }
 

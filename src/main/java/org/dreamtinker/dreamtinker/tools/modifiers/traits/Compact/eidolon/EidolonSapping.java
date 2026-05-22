@@ -6,12 +6,16 @@ import elucent.eidolon.util.DamageTypeData;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MonsterMeleeHitModifierHook;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
-public class EidolonSapping extends BattleModifier {
+public class EidolonSapping extends Modifier implements MeleeHitModifierHook, MonsterMeleeHitModifierHook {
     public boolean isNoLevels() {return false;}
 
     private final String sap_time = "eidolon_sapping";
@@ -50,5 +54,11 @@ public class EidolonSapping extends BattleModifier {
                 }
             }
         }
+    }
+
+    @Override
+    protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
+        super.registerHooks(hookBuilder);
     }
 }

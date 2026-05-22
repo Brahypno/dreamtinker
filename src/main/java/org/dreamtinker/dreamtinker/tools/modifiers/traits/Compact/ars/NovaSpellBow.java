@@ -14,9 +14,10 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.CasterCapability;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.ArrowInterface;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileLaunchModifierHook;
 import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
@@ -27,10 +28,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class NovaSpellBow extends NoLevelsModifier implements ArrowInterface {
+public class NovaSpellBow extends NoLevelsModifier implements ProjectileLaunchModifierHook {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        this.ArrowInterfaceInit(hookBuilder);
+        hookBuilder.addHook(this, ModifierHooks.PROJECTILE_LAUNCH);
         hookBuilder.addModule(CasterCapability.CAST_HANDLER);
         super.registerHooks(hookBuilder);
     }

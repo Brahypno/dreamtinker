@@ -15,16 +15,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.dreamtinker.dreamtinker.Entity.WingSlashProjectile;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.ArmorInterface;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.ArrowInterface;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.BasicInterface;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.MeleeInterface;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.armor.ModifyDamageModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileHitModifierHook;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
@@ -38,7 +38,7 @@ import java.util.Locale;
 
 import static org.dreamtinker.dreamtinker.tools.modifiers.events.OathGuardPaleSteelEvents.oathBrokenSteelId;
 
-public class BrokenOath extends Modifier implements ArrowInterface, MeleeInterface, ArmorInterface, BasicInterface {
+public class BrokenOath extends Modifier implements ProjectileHitModifierHook, MeleeHitModifierHook, ModifyDamageModifierHook, TooltipModifierHook {
     private static final float MAX_DESPAIR = 100.0F;
 
     private static String formatDespair(float value) {
@@ -111,11 +111,7 @@ public class BrokenOath extends Modifier implements ArrowInterface, MeleeInterfa
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        hookBuilder.addHook(this, ModifierHooks.MODIFY_DAMAGE);
-        this.ArrowInterfaceInit(hookBuilder);
-        this.MeleeInterfaceInit(hookBuilder);
-        this.ArmorInterfaceInit(hookBuilder);
-        this.BasicInterfaceInit(hookBuilder);
+        hookBuilder.addHook(this, ModifierHooks.MODIFY_DAMAGE, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MELEE_HIT, ModifierHooks.TOOLTIP);
         super.registerHooks(hookBuilder);
     }
 

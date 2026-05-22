@@ -22,12 +22,15 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 import org.dreamtinker.dreamtinker.fluids.DreamtinkerFluids;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.TinkerTags;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MonsterMeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.GeneralInteractionModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.InteractionSource;
 import slimeknights.tconstruct.library.modifiers.modules.build.StatBoostModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
@@ -46,9 +49,10 @@ import java.util.List;
 import static slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHelper.TANK_HELPER;
 import static slimeknights.tconstruct.library.tools.helper.ToolAttackUtil.*;
 
-public class SelfSacrifice extends BattleModifier {
+public class SelfSacrifice extends Modifier implements MeleeHitModifierHook, MonsterMeleeHitModifierHook, GeneralInteractionModifierHook {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder builder) {
+        builder.addHook(this, ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT, ModifierHooks.GENERAL_INTERACT);
         super.registerHooks(builder);
         builder.addModule(ToolTankHelper.TANK_HANDLER);
         builder.addModule(StatBoostModule.add(ToolTankHelper.CAPACITY_STAT).eachLevel(FluidType.BUCKET_VOLUME));
@@ -265,5 +269,9 @@ public class SelfSacrifice extends BattleModifier {
         }
 
         return true;
+    }
+    @Override
+    public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
+        afterMeleeHit(tool, modifier, context, damage);
     }
 }

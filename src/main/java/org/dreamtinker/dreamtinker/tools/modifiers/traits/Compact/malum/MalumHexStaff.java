@@ -9,16 +9,17 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.InteractionInterface;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.GeneralInteractionModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.InteractionSource;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.UsingToolModifierHook;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
-public class MalumHexStaff extends Modifier implements InteractionInterface {
+public class MalumHexStaff extends Modifier implements GeneralInteractionModifierHook, UsingToolModifierHook {
     private final boolean Erosion;
 
     public MalumHexStaff(boolean erosion) {
@@ -27,7 +28,7 @@ public class MalumHexStaff extends Modifier implements InteractionInterface {
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        this.InteractionInterfaceInit(hookBuilder);
+        hookBuilder.addHook(this, ModifierHooks.GENERAL_INTERACT, ModifierHooks.TOOL_USING);
         super.registerHooks(hookBuilder);
     }
 

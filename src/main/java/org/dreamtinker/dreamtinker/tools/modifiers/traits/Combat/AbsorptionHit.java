@@ -7,12 +7,16 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.data.predicate.IJsonPredicate;
 import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.entity.ProjectileWithPower;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MonsterMeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileLaunchModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.combat.ConditionalMeleeDamageModule;
 import slimeknights.tconstruct.library.modifiers.modules.combat.ConditionalPowerModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
@@ -28,7 +32,7 @@ import java.util.List;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.AbsorptionHitRate;
 import static slimeknights.tconstruct.library.json.math.ModifierFormula.*;
 
-public class AbsorptionHit extends BattleModifier {
+public class AbsorptionHit extends Modifier implements MeleeHitModifierHook, MonsterMeleeHitModifierHook, ProjectileLaunchModifierHook {
     private static final IJsonPredicate<LivingEntity> absorption = LivingEntityPredicate.simple(entity -> 0 < entity.getAbsorptionAmount());
 
     @Override
@@ -45,6 +49,7 @@ public class AbsorptionHit extends BattleModifier {
                                                     .variable(MULTIPLIER).multiply()
                                                     .constant(1).add()
                                                     .variable(VALUE).multiply().build());
+        hookBuilder.addHook(this, ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT, ModifierHooks.PROJECTILE_LAUNCH);
         super.registerHooks(hookBuilder);
     }
 
@@ -90,10 +95,6 @@ public class AbsorptionHit extends BattleModifier {
         return Math.max(-0.9f, (addition ? 1 : -1) * level * AbsorptionHitRate.get().floatValue());
     }
 
-    @Override
-    public boolean isNoLevels() {return false;}
-
-    @Override
     public @NotNull List<Component> getDescriptionList(int level) {
         return Arrays.asList(Component.translatable(this.getTranslationKey() + ".flavor").withStyle(ChatFormatting.ITALIC),
                              Component.translatable(this.getTranslationKey() + ".description",

@@ -10,11 +10,17 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.utils.LootHelper.DTLoots;
 import org.jetbrains.annotations.NotNull;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.entity.ProjectileWithPower;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeDamageModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MonsterMeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileHitModifierHook;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
@@ -27,7 +33,7 @@ import java.util.List;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.TheWolfWasDevoter;
 
-public class TheWolfAnswer extends BattleModifier {
+public class TheWolfAnswer extends Modifier implements ProjectileHitModifierHook, MeleeDamageModifierHook, MeleeHitModifierHook, MonsterMeleeHitModifierHook {
     /**
      * Projectile persistent data key for the stat multiplier
      */
@@ -68,7 +74,7 @@ public class TheWolfAnswer extends BattleModifier {
     }
 
     @Override
-    public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
+    public float getMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
         int types = 0;
         if (null != context.getLivingTarget())
             types += Math.max(context.getLivingTarget().getActiveEffects().size(),
@@ -120,4 +126,15 @@ public class TheWolfAnswer extends BattleModifier {
         return -1000;
     }
 
+
+    @Override
+    protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MELEE_DAMAGE, ModifierHooks.MONSTER_MELEE_DAMAGE, ModifierHooks.MELEE_HIT,
+                            ModifierHooks.MONSTER_MELEE_HIT);
+        super.registerHooks(hookBuilder);
+    }
+    @Override
+    public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
+        afterMeleeHit(tool, modifier, context, damage);
+    }
 }

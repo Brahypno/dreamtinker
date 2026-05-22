@@ -4,10 +4,11 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.ArrowInterface;
 import org.dreamtinker.dreamtinker.utils.TargetTracker;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileLaunchModifierHook;
 import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.modifiers.modules.build.ModifierTraitModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
@@ -17,10 +18,10 @@ import slimeknights.tconstruct.tools.TinkerModifiers;
 
 import javax.annotation.Nullable;
 
-public class LoveShooting extends NoLevelsModifier implements ArrowInterface {
+public class LoveShooting extends NoLevelsModifier implements ProjectileLaunchModifierHook {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        this.ArrowInterfaceInit(hookBuilder);
+        hookBuilder.addHook(this, ModifierHooks.PROJECTILE_LAUNCH);
         hookBuilder.addModule(new ModifierTraitModule(TinkerModifiers.multishot.getId(), 1, false));
         super.registerHooks(hookBuilder);
     }

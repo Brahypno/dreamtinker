@@ -6,10 +6,11 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
 import org.jetbrains.annotations.NotNull;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.armor.ModifyDamageModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.technical.SlotInChargeModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability;
@@ -20,14 +21,14 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.ArtsManaShieldBase;
 
-public class NovaManaShield extends ArmorModifier {
+public class NovaManaShield extends Modifier implements ModifyDamageModifierHook {
     private static final TinkerDataCapability.TinkerDataKey<SlotInChargeModule.SlotInCharge> SLOT_KEY =
             TinkerDataCapability.TinkerDataKey.of(Dreamtinker.getLocation("nova_mana_shield"));
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.MODIFY_HURT);
         hookBuilder.addModule(new SlotInChargeModule(SLOT_KEY));
-        hookBuilder.addHook(this, ModifierHooks.MODIFY_DAMAGE);
         super.registerHooks(hookBuilder);
     }
 

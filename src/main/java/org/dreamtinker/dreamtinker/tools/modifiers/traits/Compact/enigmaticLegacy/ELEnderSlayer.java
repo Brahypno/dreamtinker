@@ -11,12 +11,15 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.data.predicate.IJsonPredicate;
 import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeDamageModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.build.ModifierTraitModule;
 import slimeknights.tconstruct.library.modifiers.modules.combat.ConditionalMeleeDamageModule;
 import slimeknights.tconstruct.library.modifiers.modules.combat.KnockbackModule;
@@ -29,11 +32,12 @@ import java.util.List;
 
 import static slimeknights.tconstruct.library.json.math.ModifierFormula.*;
 
-public class ELEnderSlayer extends BattleModifier {
+public class ELEnderSlayer extends Modifier implements MeleeDamageModifierHook, MeleeHitModifierHook {
     private static final IJsonPredicate<LivingEntity> ender = LivingEntityPredicate.tag(DreamtinkerTagKeys.EntityTypes.ENDER_ENTITY);
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.MELEE_DAMAGE, ModifierHooks.MONSTER_MELEE_DAMAGE, ModifierHooks.MELEE_HIT);
         hookBuilder.addModule(new ModifierTraitModule(DreamtinkerModifiers.cursed_ring_bound.getId(), 1, true));
         hookBuilder.addModule(ConditionalMeleeDamageModule.builder().target(ender).percent()
                                                           .formula()
@@ -58,7 +62,7 @@ public class ELEnderSlayer extends BattleModifier {
     }
 
     @Override
-    public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
+    public float getMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
         if (context.getAttacker() instanceof Player player && SuperpositionHandler.isTheCursedOne(player)){
             LivingEntity target = context.getLivingTarget();
             if (null != target && (EnigmaticItems.ENDER_SLAYER.isEndDweller(target) || target.getType().is(DreamtinkerTagKeys.EntityTypes.ENDER_ENTITY))){

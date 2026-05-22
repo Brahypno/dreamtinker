@@ -12,21 +12,35 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
+import org.dreamtinker.dreamtinker.library.modifiers.DreamtinkerHook;
+import org.dreamtinker.dreamtinker.library.modifiers.hook.LeftClickHook;
 import org.dreamtinker.dreamtinker.utils.DTMessages;
+import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.build.ModifierRemovalHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeDamageModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
-public class SignalAxe extends BattleModifier {
+public class SignalAxe extends Modifier implements MeleeDamageModifierHook, LeftClickHook, InventoryTickModifierHook, ModifierRemovalHook {
     private final ResourceLocation TAG_ATTACK_TIME = Dreamtinker.getLocation("attack_time");
     public static final ResourceLocation TAG_RIGHT_TIME = Dreamtinker.getLocation("right_attack_time");
 
     @Override
-    public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
+    protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.MELEE_DAMAGE, ModifierHooks.MONSTER_MELEE_DAMAGE, DreamtinkerHook.LEFT_CLICK, ModifierHooks.INVENTORY_TICK,
+                            ModifierHooks.REMOVE);
+        super.registerHooks(hookBuilder);
+    }
+
+    @Override
+    public float getMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
         LivingEntity attacker = context.getAttacker();
         if (attacker instanceof Player player){
             float bonus = player.getAttackStrengthScale(0) - 0.8f;
@@ -57,7 +71,7 @@ public class SignalAxe extends BattleModifier {
     }
 
     @Override
-    public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
+    public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         if (world.isClientSide || !isSelected)
             return;
         ModDataNBT nbt = tool.getPersistentData();
@@ -75,7 +89,7 @@ public class SignalAxe extends BattleModifier {
     }
 
     @Override
-    public Component onModifierRemoved(IToolStackView tool, Modifier modifier) {
+    public Component onRemoved(IToolStackView tool, Modifier modifier) {
         tool.getPersistentData().remove(TAG_ATTACK_TIME);
         tool.getPersistentData().remove(TAG_RIGHT_TIME);
         return null;

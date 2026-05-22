@@ -4,11 +4,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.biome.Biome;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.MeleeInterface;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MonsterMeleeHitModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.combat.ConditionalMeleeDamageModule;
 import slimeknights.tconstruct.library.modifiers.modules.mining.ConditionalMiningSpeedModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
@@ -17,10 +19,10 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 import static slimeknights.tconstruct.library.json.math.ModifierFormula.*;
 
-public class SharpenedWith extends Modifier implements MeleeInterface {
+public class SharpenedWith extends Modifier implements MeleeHitModifierHook, MonsterMeleeHitModifierHook {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        this.MeleeInterfaceInit(hookBuilder);
+        hookBuilder.addHook(this, ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
         hookBuilder.addModule(ConditionalMeleeDamageModule.builder().target(LivingEntityPredicate.RAINING).percent()
                                                           .formula()
                                                           .constant(0.16f).variable(LEVEL).multiply()

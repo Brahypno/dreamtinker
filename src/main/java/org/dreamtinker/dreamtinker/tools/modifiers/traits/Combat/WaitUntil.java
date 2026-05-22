@@ -11,11 +11,17 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.build.ModifierRemovalHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeDamageModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileLaunchModifierHook;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
@@ -25,20 +31,26 @@ import java.util.List;
 
 import static net.minecraft.nbt.Tag.TAG_INT;
 
-public class WaitUntil extends BattleModifier {
+public class WaitUntil extends Modifier implements ModifierRemovalHook, InventoryTickModifierHook, MeleeDamageModifierHook, ProjectileLaunchModifierHook, TooltipModifierHook {
     private static final ResourceLocation TAG_WAIT = new ResourceLocation(Dreamtinker.MODID, "wait_until");
 
     @Override
-    public Component onModifierRemoved(IToolStackView tool, Modifier modifier) {
+    protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.REMOVE, ModifierHooks.INVENTORY_TICK, ModifierHooks.MELEE_DAMAGE, ModifierHooks.MONSTER_MELEE_DAMAGE,
+                            ModifierHooks.PROJECTILE_LAUNCH, ModifierHooks.TOOLTIP);
+        super.registerHooks(hookBuilder);
+    }
+
+    @Override
+    public Component onRemoved(IToolStackView tool, Modifier modifier) {
         tool.getPersistentData().remove(TAG_WAIT);
         return null;
     }
 
-    @Override
     public boolean isNoLevels() {return false;}
 
     @Override
-    public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
+    public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         if (!world.isClientSide && world.getGameTime() % 20 == 0){
             ModDataNBT data = tool.getPersistentData();
             int wait_time = data.getInt(TAG_WAIT);
@@ -52,7 +64,7 @@ public class WaitUntil extends BattleModifier {
     }
 
     @Override
-    public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
+    public float getMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
         ModDataNBT dataNBT = tool.getPersistentData();
         int wait = dataNBT.getInt(TAG_WAIT);
         damage += wait;

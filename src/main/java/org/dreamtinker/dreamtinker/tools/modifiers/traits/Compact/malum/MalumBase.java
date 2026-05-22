@@ -4,18 +4,19 @@ import com.sammy.malum.registry.common.item.ItemRegistry;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.InteractionInterface;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.GeneralInteractionModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.InteractionSource;
 import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
-public class MalumBase extends NoLevelsModifier implements InteractionInterface {
+public class MalumBase extends NoLevelsModifier implements GeneralInteractionModifierHook {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        this.InteractionInterfaceInit(hookBuilder);
+        hookBuilder.addHook(this, ModifierHooks.GENERAL_INTERACT);
         super.registerHooks(hookBuilder);
     }
 

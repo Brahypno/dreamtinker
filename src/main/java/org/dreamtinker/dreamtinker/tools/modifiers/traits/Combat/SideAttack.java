@@ -12,12 +12,16 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.entity.ProjectileWithPower;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeDamageModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileHitModifierHook;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
@@ -28,7 +32,7 @@ import slimeknights.tconstruct.library.utils.Util;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class SideAttack extends BattleModifier {
+public class SideAttack extends Modifier implements MeleeDamageModifierHook, ProjectileHitModifierHook, TooltipModifierHook {
     /**
      * Projectile persistent data key for the stat multiplier
      */
@@ -59,7 +63,13 @@ public class SideAttack extends BattleModifier {
     public boolean isNoLevels() {return false;}
 
     @Override
-    public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
+    protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.MELEE_DAMAGE, ModifierHooks.MONSTER_MELEE_DAMAGE, ModifierHooks.PROJECTILE_HIT, ModifierHooks.TOOLTIP);
+        super.registerHooks(hookBuilder);
+    }
+
+    @Override
+    public float getMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
         if (null != context.getLivingTarget()){
             float dir = getFacingAngleDegHorizontal(context.getAttacker(), context.getLivingTarget());
             damage += damage * dir * (1.4f + (modifier.getEffectiveLevel() - 1) * 0.4f) * tool.getMultiplier(ToolStats.ATTACK_DAMAGE);

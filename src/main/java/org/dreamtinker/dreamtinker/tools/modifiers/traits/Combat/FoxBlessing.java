@@ -7,12 +7,14 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
 import org.dreamtinker.dreamtinker.Entity.AggressiveFox;
 import org.dreamtinker.dreamtinker.Entity.DreamtinkerEntityTypes;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.ArmorInterface;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.ArrowInterface;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.MeleeInterface;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.armor.OnAttackedModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MonsterMeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileHitModifierHook;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
@@ -23,13 +25,12 @@ import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class FoxBlessing extends Modifier implements ArrowInterface, MeleeInterface, ArmorInterface {
+public class FoxBlessing extends Modifier implements ProjectileHitModifierHook, MeleeHitModifierHook, MonsterMeleeHitModifierHook, OnAttackedModifierHook {
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        this.ArrowInterfaceInit(hookBuilder);
-        this.MeleeInterfaceInit(hookBuilder);
-        this.ArmorInterfaceInit(hookBuilder);
+        hookBuilder.addHook(this, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT,
+                            ModifierHooks.ON_ATTACKED);
         super.registerHooks(hookBuilder);
     }
 
@@ -60,6 +61,11 @@ public class FoxBlessing extends Modifier implements ArrowInterface, MeleeInterf
         if (null != spawner)
             SpawnWeaponFox(spawner, context.getLivingTarget());
         return knockback;
+    }
+
+    @Override
+    public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
+        beforeMeleeHit(tool, modifier, context, damage, 0, 0);
     }
 
     public void onAttacked(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount, boolean isDirectDamage) {

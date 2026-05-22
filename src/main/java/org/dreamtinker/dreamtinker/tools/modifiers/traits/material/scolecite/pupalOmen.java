@@ -14,7 +14,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerAttributes;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.dreamtinker.dreamtinker.utils.DTMessages;
 import org.jetbrains.annotations.NotNull;
@@ -24,6 +23,13 @@ import slimeknights.tconstruct.library.materials.definition.MaterialId;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.armor.ModifyDamageModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.armor.ProtectionModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.build.ModifierRemovalHook;
+import slimeknights.tconstruct.library.modifiers.hook.build.ValidateModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
@@ -35,13 +41,15 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
-public class pupalOmen extends ArmorModifier {
+public class pupalOmen extends Modifier implements ModifyDamageModifierHook, ProtectionModifierHook, InventoryTickModifierHook, ModifierRemovalHook, TooltipModifierHook, AttributesModifierHook, ValidateModifierHook {
     public static final ResourceLocation TAG_SCALE = Dreamtinker.getLocation("scale_worm_armor");
     public static final ResourceLocation TAG_MOTH = Dreamtinker.getLocation("moth_wing_armor");
     private final int OmenInSight = 120;
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.PROTECTION, ModifierHooks.INVENTORY_TICK, ModifierHooks.REMOVE, ModifierHooks.TOOLTIP,
+                            ModifierHooks.ATTRIBUTES, ModifierHooks.VALIDATE);
         hookBuilder.addHook(this, ModifierHooks.MODIFY_HURT);
         super.registerHooks(hookBuilder);
     }
@@ -63,7 +71,7 @@ public class pupalOmen extends ArmorModifier {
     }
 
     @Override
-    public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
+    public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         if (world.isClientSide)
             return;
 

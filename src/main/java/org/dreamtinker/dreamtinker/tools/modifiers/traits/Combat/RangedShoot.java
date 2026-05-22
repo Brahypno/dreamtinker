@@ -7,10 +7,12 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.ArrowInterface;
 import org.dreamtinker.dreamtinker.utils.ProjectileHitMemory;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileLaunchModifierHook;
 import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
@@ -23,12 +25,12 @@ import java.util.List;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.rangedHit;
 
-public class RangedShoot extends NoLevelsModifier implements ArrowInterface {
+public class RangedShoot extends NoLevelsModifier implements ProjectileHitModifierHook, ProjectileLaunchModifierHook {
     private static final String mark = "dreamtinker_ranged_shot";
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        this.ArrowInterfaceInit(hookBuilder);
+        hookBuilder.addHook(this, ModifierHooks.PROJECTILE_HIT, ModifierHooks.PROJECTILE_LAUNCH);
         super.registerHooks(hookBuilder);
     }
 

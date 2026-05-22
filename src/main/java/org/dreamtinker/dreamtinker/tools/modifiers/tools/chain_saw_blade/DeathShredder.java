@@ -32,15 +32,17 @@ import net.minecraftforge.fluids.FluidType;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerSounds;
 import org.dreamtinker.dreamtinker.library.client.sound.ClientSoundChecker;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.utils.DTMessages;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
-import slimeknights.tconstruct.library.modifiers.hook.interaction.GeneralInteractionModifierHook;
-import slimeknights.tconstruct.library.modifiers.hook.interaction.InteractionSource;
-import slimeknights.tconstruct.library.modifiers.hook.interaction.KeybindInteractModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeDamageModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MonsterMeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.*;
 import slimeknights.tconstruct.library.modifiers.modules.build.StatBoostModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.recipe.fuel.MeltingFuel;
@@ -62,7 +64,7 @@ import java.util.*;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.ChainSawEnergyCost;
 import static slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHelper.TANK_HELPER;
 
-public class DeathShredder extends BattleModifier implements KeybindInteractModifierHook {
+public class DeathShredder extends Modifier implements MeleeDamageModifierHook, MeleeHitModifierHook, MonsterMeleeHitModifierHook, InventoryTickModifierHook, UsingToolModifierHook, GeneralInteractionModifierHook, TooltipModifierHook, KeybindInteractModifierHook {
     public DeathShredder() {this.tiers = TierSortingRegistry.getSortedTiers();}
 
     private enum Modes {
@@ -121,11 +123,12 @@ public class DeathShredder extends BattleModifier implements KeybindInteractModi
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder builder) {
+        builder.addHook(this, ModifierHooks.MELEE_DAMAGE, ModifierHooks.MONSTER_MELEE_DAMAGE, ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT,
+                        ModifierHooks.INVENTORY_TICK, ModifierHooks.TOOL_USING, ModifierHooks.GENERAL_INTERACT, ModifierHooks.TOOLTIP);
         builder.addModule(ToolTankHelper.TANK_HANDLER);
         builder.addModule(ToolEnergyCapability.ENERGY_HANDLER);
         builder.addModule(StatBoostModule.add(ToolEnergyCapability.MAX_STAT).flat(5000 * 10));
         builder.addModule(StatBoostModule.add(ToolTankHelper.CAPACITY_STAT).flat(FluidType.BUCKET_VOLUME * 10));
-        builder.addHook(this, ModifierHooks.ARMOR_INTERACT);
         super.registerHooks(builder);
     }
 
@@ -336,7 +339,7 @@ public class DeathShredder extends BattleModifier implements KeybindInteractModi
     }
 
     @Override
-    public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
+    public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         if (!world.isClientSide && !holder.getUseItem().equals(stack)){
             ModDataNBT dataNBT = tool.getPersistentData();
             int rotation = dataNBT.getInt(TAG_ROTATIONAL_FORCE);
@@ -395,7 +398,7 @@ public class DeathShredder extends BattleModifier implements KeybindInteractModi
     }
 
     @Override
-    public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
+    public float getMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
         if (!context.getAttacker().isUsingItem())
             return damage;
         ModDataNBT dataNBT = tool.getPersistentData();
@@ -467,5 +470,9 @@ public class DeathShredder extends BattleModifier implements KeybindInteractModi
             float x = (p - 0.7f) / 0.3f;
             return 1.0f - 0.6f * x;
         }
+    }
+    @Override
+    public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
+        afterMeleeHit(tool, modifier, context, damage);
     }
 }

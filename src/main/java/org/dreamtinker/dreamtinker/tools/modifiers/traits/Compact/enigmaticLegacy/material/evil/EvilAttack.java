@@ -6,15 +6,14 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.ArmorInterface;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.ArrowInterface;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.BasicInterface;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.MeleeInterface;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.armor.ModifyDamageModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.build.ConditionalStatModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeDamageModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.build.ModifierTraitModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
@@ -23,15 +22,12 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.stat.FloatToolStat;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
-public class EvilAttack extends Modifier implements BasicInterface, MeleeInterface, ArmorInterface, ArrowInterface {
+public class EvilAttack extends Modifier implements ModifyDamageModifierHook, MeleeDamageModifierHook, ConditionalStatModifierHook {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        this.ArmorInterfaceInit(hookBuilder);
-        this.MeleeInterfaceInit(hookBuilder);
-        this.ArrowInterfaceInit(hookBuilder);
-        this.BasicInterfaceInit(hookBuilder);
         hookBuilder.addModule(new ModifierTraitModule(DreamtinkerModifiers.cursed_ring_bound.getId(), 1, true));
-        hookBuilder.addHook(this, ModifierHooks.MODIFY_HURT);
+        hookBuilder.addHook(this, ModifierHooks.MODIFY_HURT, ModifierHooks.MELEE_DAMAGE, ModifierHooks.MONSTER_MELEE_DAMAGE,
+                            ModifierHooks.CONDITIONAL_STAT);
         super.registerHooks(hookBuilder);
     }
 
@@ -42,7 +38,7 @@ public class EvilAttack extends Modifier implements BasicInterface, MeleeInterfa
     }
 
     @Override
-    public float onGetMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
+    public float getMeleeDamage(@NotNull IToolStackView tool, @NotNull ModifierEntry modifier, @NotNull ToolAttackContext context, float baseDamage, float damage) {
         int cursed = context.getAttacker() instanceof Player player ? SuperpositionHandler.getCurseAmount(player) + 1 : 1;
         return damage * cursed;
     }

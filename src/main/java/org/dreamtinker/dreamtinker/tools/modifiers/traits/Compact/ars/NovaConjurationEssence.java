@@ -15,10 +15,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileHitModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.combat.ConditionalMeleeDamageModule;
 import slimeknights.tconstruct.library.modifiers.modules.combat.ConditionalPowerModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
@@ -28,11 +30,12 @@ import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class NovaConjurationEssence extends BattleModifier {
+public class NovaConjurationEssence extends Modifier implements ProjectileHitModifierHook {
     private static final LivingEntityPredicate isSwiming = LivingEntityPredicate.simple(LivingEntity::isSwimming);
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.PROJECTILE_HIT);
         hookBuilder.addModule(ConditionalMeleeDamageModule.builder().target(isSwiming).eachLevel(2.0f));
         hookBuilder.addModule(ConditionalPowerModule.builder().target(isSwiming).eachLevel(2.0f));
         super.registerHooks(hookBuilder);

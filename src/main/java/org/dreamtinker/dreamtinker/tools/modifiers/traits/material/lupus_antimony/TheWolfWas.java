@@ -10,7 +10,6 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
@@ -23,6 +22,11 @@ import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
 import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.behavior.ToolDamageModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.build.ModifierRemovalHook;
+import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.build.RarityModule;
 import slimeknights.tconstruct.library.modifiers.modules.build.VolatileFlagModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
@@ -41,11 +45,11 @@ import java.util.List;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.*;
 import static org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds.metallivorous_stibium_lupus;
 
-public class TheWolfWas extends BattleModifier {
+public class TheWolfWas extends Modifier implements InventoryTickModifierHook, ToolDamageModifierHook, ModifierRemovalHook, TooltipModifierHook {
     public static final ResourceLocation TAG_WOLF = new ResourceLocation(Dreamtinker.MODID, "twwc");
 
     @Override
-    public int modifierDamageTool(IToolStackView tool, ModifierEntry modifier, int amount, @Nullable LivingEntity holder) {
+    public int onDamageTool(IToolStackView tool, ModifierEntry modifier, int amount, @Nullable LivingEntity holder) {
         if (holder == null)
             return amount;
         ModDataNBT nbt = tool.getPersistentData();
@@ -56,6 +60,7 @@ public class TheWolfWas extends BattleModifier {
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.INVENTORY_TICK, ModifierHooks.TOOL_DAMAGE, ModifierHooks.REMOVE, ModifierHooks.TOOLTIP);
         hookBuilder.addModule(new VolatileFlagModule(IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY));
         hookBuilder.addModule(new RarityModule(Rarity.RARE));
         super.registerHooks(hookBuilder);
@@ -75,13 +80,13 @@ public class TheWolfWas extends BattleModifier {
     }
 
     @Override
-    public Component onModifierRemoved(IToolStackView tool, Modifier modifier) {
+    public Component onRemoved(IToolStackView tool, Modifier modifier) {
         tool.getPersistentData().remove(TAG_WOLF);
         return null;
     }
 
     @Override
-    public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
+    public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         ToolStack toolstack = ToolStack.from(stack);
         if (holder == null)
             return;

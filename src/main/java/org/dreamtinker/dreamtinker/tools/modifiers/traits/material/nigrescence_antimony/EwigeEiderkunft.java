@@ -11,13 +11,18 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.utils.DTMessages;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.behavior.ToolDamageModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.build.ModifierRemovalHook;
+import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
@@ -26,11 +31,11 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
-public class EwigeEiderkunft extends BattleModifier {
+public class EwigeEiderkunft extends Modifier implements ToolDamageModifierHook, ModifierRemovalHook, TooltipModifierHook, AttributesModifierHook {
     private static final ResourceLocation TAG_TOMB = Dreamtinker.getLocation("ewige_widerkunft");
 
     @Override
-    public int modifierDamageTool(IToolStackView tool, ModifierEntry modifier, int amount, @Nullable LivingEntity holder) {
+    public int onDamageTool(IToolStackView tool, ModifierEntry modifier, int amount, @Nullable LivingEntity holder) {
         int current = tool.getCurrentDurability();
         ModDataNBT nbt = tool.getPersistentData();
         int breaks = nbt.getInt(TAG_TOMB) + 1;
@@ -84,7 +89,7 @@ public class EwigeEiderkunft extends BattleModifier {
     }
 
     @Override
-    public Component onModifierRemoved(IToolStackView tool, Modifier modifier) {
+    public Component onRemoved(IToolStackView tool, Modifier modifier) {
         if (0 < tool.getPersistentData().getInt(TAG_TOMB))
             return Component.translatable(this.getTranslationKey() + ".salvage").withStyle((style) -> style.withColor(this.getTextColor()));
         return null;
@@ -105,5 +110,11 @@ public class EwigeEiderkunft extends BattleModifier {
     @Override
     public int getPriority() {
         return Integer.MIN_VALUE;
+    }
+
+    @Override
+    protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.TOOL_DAMAGE, ModifierHooks.REMOVE, ModifierHooks.TOOLTIP, ModifierHooks.ATTRIBUTES);
+        super.registerHooks(hookBuilder);
     }
 }

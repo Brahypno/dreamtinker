@@ -7,10 +7,11 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.Level;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
 import org.jetbrains.annotations.NotNull;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.armor.ModifyDamageModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.build.RarityModule;
 import slimeknights.tconstruct.library.modifiers.modules.technical.SlotInChargeModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
@@ -18,7 +19,7 @@ import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
-public class Ophelia extends ArmorModifier {
+public class Ophelia extends Modifier implements ModifyDamageModifierHook {
 
     private static final ThreadLocal<Boolean> IN_PROGRESS = ThreadLocal.withInitial(() -> false);
     private static final TinkerDataCapability.TinkerDataKey<SlotInChargeModule.SlotInCharge> SLOT_KEY =
@@ -26,8 +27,8 @@ public class Ophelia extends ArmorModifier {
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        hookBuilder.addModule(new SlotInChargeModule(SLOT_KEY));
         hookBuilder.addHook(this, ModifierHooks.MODIFY_HURT);
+        hookBuilder.addModule(new SlotInChargeModule(SLOT_KEY));
         hookBuilder.addModule(new RarityModule(Rarity.EPIC));
         super.registerHooks(hookBuilder);
     }

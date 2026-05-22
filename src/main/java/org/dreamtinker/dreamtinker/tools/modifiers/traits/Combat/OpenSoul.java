@@ -15,14 +15,19 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.dreamtinker.dreamtinker.utils.DTToolsPartsHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.combat.DamageDealtModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MonsterMeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileHitModifierHook;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
@@ -34,7 +39,7 @@ import java.util.List;
 import static net.minecraft.nbt.Tag.TAG_FLOAT;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.*;
 
-public class OpenSoul extends BattleModifier implements DamageDealtModifierHook {
+public class OpenSoul extends Modifier implements DamageDealtModifierHook, InventoryTickModifierHook, MeleeHitModifierHook, MonsterMeleeHitModifierHook, TooltipModifierHook, ProjectileHitModifierHook {
     private static final ResourceLocation TAG_SOUL = new ResourceLocation(Dreamtinker.MODID, "open_soul");
 
     {
@@ -43,12 +48,13 @@ public class OpenSoul extends BattleModifier implements DamageDealtModifierHook 
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        hookBuilder.addHook(this, ModifierHooks.DAMAGE_DEALT);
+        hookBuilder.addHook(this, ModifierHooks.DAMAGE_DEALT, ModifierHooks.INVENTORY_TICK, ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT,
+                            ModifierHooks.TOOLTIP, ModifierHooks.PROJECTILE_HIT);
         super.registerHooks(hookBuilder);
     }
 
     @Override
-    public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
+    public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         if (world.isClientSide)
             return;
         if (!isSelected && !isCorrectSlot)

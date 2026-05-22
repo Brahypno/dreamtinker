@@ -13,9 +13,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.EntityHitResult;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.CasterCapability;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaCast.ModifiableSpellResolver;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.MeleeInterface;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MonsterMeleeHitModifierHook;
 import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
@@ -23,10 +25,10 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 import java.util.ArrayList;
 
-public class NovaEnchanterSword extends NoLevelsModifier implements MeleeInterface {
+public class NovaEnchanterSword extends NoLevelsModifier implements MeleeHitModifierHook, MonsterMeleeHitModifierHook {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        this.MeleeInterfaceInit(hookBuilder);
+        hookBuilder.addHook(this, ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
         hookBuilder.addModule(CasterCapability.CAST_HANDLER);
         super.registerHooks(hookBuilder);
     }

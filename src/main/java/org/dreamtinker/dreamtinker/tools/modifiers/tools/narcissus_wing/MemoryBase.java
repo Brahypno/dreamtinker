@@ -8,7 +8,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
@@ -19,11 +18,11 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Entity.NarcissusFluidProjectile;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.fluids.DreamtinkerFluids;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.fluid.FluidEffectManager;
@@ -49,7 +48,7 @@ import javax.annotation.Nullable;
 
 import static slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHelper.TANK_HELPER;
 
-public class MemoryBase extends BattleModifier {
+public class MemoryBase extends Modifier implements GeneralInteractionModifierHook {
     private final Fluid fallback_fluid = DreamtinkerFluids.blood_soul.get();
 
     public static int getLevel(IToolStackView toolStackView) {
@@ -65,6 +64,7 @@ public class MemoryBase extends BattleModifier {
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder builder) {
+        builder.addHook(this, ModifierHooks.GENERAL_INTERACT);
         super.registerHooks(builder);
         builder.addModule(ToolTankHelper.TANK_HANDLER);
         builder.addModule(StatBoostModule.add(ToolTankHelper.CAPACITY_STAT).eachLevel(FluidType.BUCKET_VOLUME));
@@ -159,7 +159,7 @@ public class MemoryBase extends BattleModifier {
                             // let modifiers set properties
                             for (ModifierEntry entry : tool.getModifierList()) {
                                 entry.getHook(ModifierHooks.PROJECTILE_LAUNCH)
-                                     .onProjectileLaunch(tool, entry, entity, ItemStack.EMPTY, spit, null, arrowData, shotIndex == primaryIndex);
+                                     .onProjectileLaunch(tool, entry, entity, spit, null, arrowData, shotIndex == primaryIndex);
                             }
 
                             // finally, fire the projectile

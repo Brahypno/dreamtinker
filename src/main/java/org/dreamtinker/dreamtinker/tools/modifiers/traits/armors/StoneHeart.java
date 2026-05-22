@@ -16,12 +16,15 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.TinkerTags;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.armor.DamageBlockModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.armor.ModifyDamageModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.technical.SlotInChargeModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability;
@@ -33,7 +36,7 @@ import java.util.List;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.StoneHeartProjReduce;
 
-public class StoneHeart extends ArmorModifier {
+public class StoneHeart extends Modifier implements ModifyDamageModifierHook, DamageBlockModifierHook, InventoryTickModifierHook {
 
     private static final TinkerDataCapability.TinkerDataKey<SlotInChargeModule.SlotInCharge> SLOT_KEY =
             TinkerDataCapability.TinkerDataKey.of(Dreamtinker.getLocation("stone_heart"));
@@ -41,7 +44,7 @@ public class StoneHeart extends ArmorModifier {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
         hookBuilder.addModule(new SlotInChargeModule(SLOT_KEY));
-        hookBuilder.addHook(this, ModifierHooks.MODIFY_HURT);
+        hookBuilder.addHook(this, ModifierHooks.MODIFY_HURT, ModifierHooks.DAMAGE_BLOCK, ModifierHooks.INVENTORY_TICK);
         super.registerHooks(hookBuilder);
     }
 
@@ -100,7 +103,7 @@ public class StoneHeart extends ArmorModifier {
     }
 
     @Override
-    public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
+    public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         if ((isCorrectSlot || isSelected) && !world.isClientSide && world.getGameTime() % 20 == 0)
             if (holder instanceof ServerPlayer player)
                 player.causeFoodExhaustion(4 * 1.0F);

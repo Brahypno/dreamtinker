@@ -14,18 +14,22 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.build.ModifierRemovalHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MonsterMeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileLaunchModifierHook;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
@@ -39,13 +43,13 @@ import static net.minecraft.nbt.Tag.TAG_INT;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.EchoAttackCharge;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.EchoAttackChargingChance;
 
-public class EchoedAttack extends BattleModifier {
+public class EchoedAttack extends Modifier implements ProjectileLaunchModifierHook, MeleeHitModifierHook, MonsterMeleeHitModifierHook, ModifierRemovalHook, TooltipModifierHook {
     private static final ResourceLocation TAG_ECHO_ENERGY = Dreamtinker.getLocation("echo_energy");
     private static final int E_C = EchoAttackCharge.get();
     private static final double ChargingChance = EchoAttackChargingChance.get();
 
     @Override
-    public Component onModifierRemoved(IToolStackView tool, Modifier modifier) {
+    public Component onRemoved(IToolStackView tool, Modifier modifier) {
         tool.getPersistentData().remove(TAG_ECHO_ENERGY);
         return null;
     }
@@ -175,7 +179,7 @@ public class EchoedAttack extends BattleModifier {
     }
 
     @Override
-    public void onProjectileLaunch(IToolStackView tool, ModifierEntry modifier, LivingEntity shooter, ItemStack ammo, Projectile projectile, @Nullable AbstractArrow arrow, ModDataNBT persistentData, boolean primary) {
+    public void onProjectileLaunch(IToolStackView tool, ModifierEntry modifier, LivingEntity shooter, Projectile projectile, @Nullable AbstractArrow arrow, ModDataNBT persistentData, boolean primary) {
         if (!(shooter.level() instanceof ServerLevel))
             return;
         ModDataNBT nbt = tool.getPersistentData();
@@ -189,5 +193,12 @@ public class EchoedAttack extends BattleModifier {
             nbt.putInt(TAG_ECHO_ENERGY, count);
             performSonicBoomSweep(tool, (ServerLevel) shooter.level(), shooter, projectile);
         }
+    }
+
+    @Override
+    protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.PROJECTILE_LAUNCH, ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT, ModifierHooks.REMOVE,
+                            ModifierHooks.TOOLTIP);
+        super.registerHooks(hookBuilder);
     }
 }

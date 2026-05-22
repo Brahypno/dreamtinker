@@ -14,10 +14,12 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.ArrowInterface;
 import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileLaunchModifierHook;
 import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
@@ -32,10 +34,10 @@ import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.WitherShootDa
 import static org.dreamtinker.dreamtinker.utils.DTHelper.MIN_PROJECTILE_SPEED_SQR;
 import static org.dreamtinker.dreamtinker.utils.DTHelper.placeProjectileOutsideShooter;
 
-public class WitherShoot extends NoLevelsModifier implements ArrowInterface {
+public class WitherShoot extends NoLevelsModifier implements ProjectileLaunchModifierHook, ProjectileHitModifierHook {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        this.ArrowInterfaceInit(hookBuilder);
+        hookBuilder.addHook(this, ModifierHooks.PROJECTILE_LAUNCH, ModifierHooks.PROJECTILE_HIT);
         super.registerHooks(hookBuilder);
     }
 

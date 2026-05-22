@@ -63,7 +63,7 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.desire_gem.Mu
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.desire_gem.VisionaryWishes;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem.*;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.echo_shard.EchoedAttack;
-import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.echo_shard.echoed_defence;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.echo_shard.EchoedDefence;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.lupus_antimony.TheWolfAnswer;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.lupus_antimony.TheWolfWas;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.lupus_antimony.TheWolfWonder;
@@ -109,7 +109,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             MALUM_MODIFIERS.register("spiritual_weapon_transformation", SpiritualWeaponTransformation::new);
     //echo Alloy
     public static final StaticModifier<EchoedAttack> echoed_attack = MODIFIERS.register("echoed_attack", EchoedAttack::new);
-    public static final StaticModifier<echoed_defence> echoed_defence = MODIFIERS.register("echoed_defence", echoed_defence::new);
+    public static final StaticModifier<EchoedDefence> echoed_defence = MODIFIERS.register("echoed_defence", EchoedDefence::new);
 
     //moonlight ice
     public static final StaticModifier<GlacialRiver> glacial_river = MODIFIERS.register("glacial_river", GlacialRiver::new);

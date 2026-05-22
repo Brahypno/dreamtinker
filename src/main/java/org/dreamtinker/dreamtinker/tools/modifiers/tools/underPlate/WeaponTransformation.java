@@ -14,12 +14,16 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.Tags;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.json.predicate.tool.ToolContextPredicate;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.build.ModifierTraitModule;
 import slimeknights.tconstruct.library.modifiers.modules.util.ModifierCondition;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
@@ -36,7 +40,7 @@ import java.util.function.BiConsumer;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.*;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.AsOneA;
 
-public class WeaponTransformation extends BattleModifier {
+public class WeaponTransformation extends Modifier implements InventoryTickModifierHook, TooltipModifierHook, AttributesModifierHook {
     @Override
     public int getPriority() {
         return -1000;
@@ -44,6 +48,7 @@ public class WeaponTransformation extends BattleModifier {
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.INVENTORY_TICK, ModifierHooks.TOOLTIP, ModifierHooks.ATTRIBUTES);
         hookBuilder.addModule(
                 new ModifierTraitModule(ModifierIds.thorns, 1, true, ModifierCondition.ANY_CONTEXT.with(ToolContextPredicate.tag(TinkerTags.Items.HELMETS))));
         super.registerHooks(hookBuilder);
@@ -144,7 +149,7 @@ public class WeaponTransformation extends BattleModifier {
     }
 
     @Override
-    public void modifierOnInventoryTick(@NotNull IToolStackView tool, @NotNull ModifierEntry modifier, @NotNull Level world, @NotNull LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, @NotNull ItemStack stack) {
+    public void onInventoryTick(@NotNull IToolStackView tool, @NotNull ModifierEntry modifier, @NotNull Level world, @NotNull LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, @NotNull ItemStack stack) {
         if (tool.isBroken())
             return;
         if (holder instanceof Player player && (isCorrectSlot || isSelected) && stack.is(Tags.Items.ARMORS_HELMETS) && stack.is(TinkerTags.Items.HELMETS)){

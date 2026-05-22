@@ -2,19 +2,20 @@ package org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.BasicInterface;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.build.ConditionalStatModifierHook;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.stat.FloatToolStat;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
-public class lightRangeBoost extends Modifier implements BasicInterface {
+public class lightRangeBoost extends Modifier implements ConditionalStatModifierHook {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        this.BasicInterfaceInit(hookBuilder);
+        hookBuilder.addHook(this, ModifierHooks.CONDITIONAL_STAT);
         super.registerHooks(hookBuilder);
     }
 

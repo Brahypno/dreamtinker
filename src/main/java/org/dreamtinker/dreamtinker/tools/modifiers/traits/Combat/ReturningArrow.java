@@ -13,9 +13,12 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.ArrowInterface;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileLaunchModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileShootModifierHook;
 import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
@@ -25,7 +28,7 @@ import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class ReturningArrow extends NoLevelsModifier implements ArrowInterface {
+public class ReturningArrow extends NoLevelsModifier implements ProjectileLaunchModifierHook, ProjectileShootModifierHook, ProjectileHitModifierHook {
     private static final String ORIGIN_X = "dreamtinker:return_origin_x";
     private static final String ORIGIN_Y = "dreamtinker:return_origin_y";
     private static final String ORIGIN_Z = "dreamtinker:return_origin_z";
@@ -145,7 +148,7 @@ public class ReturningArrow extends NoLevelsModifier implements ArrowInterface {
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        this.ArrowInterfaceInit(hookBuilder);
+        hookBuilder.addHook(this, ModifierHooks.PROJECTILE_LAUNCH, ModifierHooks.PROJECTILE_SHOT, ModifierHooks.PROJECTILE_HIT);
         super.registerHooks(hookBuilder);
     }
 

@@ -11,15 +11,18 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileHitModifierHook;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 
 import javax.annotation.Nullable;
 
-public class FeatherWake extends BattleModifier {
+public class FeatherWake extends Modifier implements ProjectileHitModifierHook {
     private static boolean isInFeatherFan(AABB box, Vec3 origin, Vec3 dir, double length, double baseWidth, double endWidth) {
         Vec3 center = box.getCenter();
         Vec3 rel = center.subtract(origin);
@@ -162,5 +165,11 @@ public class FeatherWake extends BattleModifier {
         spawnFeatherwakeSlash(projectile.level(), hitPos, dir, range);
 
         return false;
+    }
+
+    @Override
+    protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.PROJECTILE_HIT);
+        super.registerHooks(hookBuilder);
     }
 }

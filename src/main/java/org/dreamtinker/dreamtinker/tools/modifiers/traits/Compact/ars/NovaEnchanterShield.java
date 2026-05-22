@@ -11,15 +11,16 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.ShieldBlockEvent;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.InteractionInterface;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
 import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
-public class NovaEnchanterShield extends NoLevelsModifier implements InteractionInterface {
+public class NovaEnchanterShield extends NoLevelsModifier implements InventoryTickModifierHook {
     private static MobEffect MANA_REGEN_EFFECT = null;
     private static final ResourceLocation mana_regen = new ResourceLocation("ars_nouveau", "mana_regen");
     private static MobEffect SPELL_DAMAGE_EFFECT = null;
@@ -32,7 +33,7 @@ public class NovaEnchanterShield extends NoLevelsModifier implements Interaction
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        this.InteractionInterfaceInit(hookBuilder);
+        hookBuilder.addHook(this, ModifierHooks.INVENTORY_TICK);
         super.registerHooks(hookBuilder);
     }
 
@@ -41,7 +42,7 @@ public class NovaEnchanterShield extends NoLevelsModifier implements Interaction
     }
 
     @Override
-    public void modifierOnInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
+    public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         if (holder instanceof Player player)
             RepairingPerk.attemptRepair(stack, player);
     }

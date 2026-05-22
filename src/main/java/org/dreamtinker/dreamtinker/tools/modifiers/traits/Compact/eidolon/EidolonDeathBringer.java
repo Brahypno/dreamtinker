@@ -9,12 +9,16 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobType;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MonsterMeleeHitModifierHook;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
-public class EidolonDeathBringer extends BattleModifier {
+public class EidolonDeathBringer extends Modifier implements MeleeHitModifierHook, MonsterMeleeHitModifierHook {
     private static MobEffect unDeath;
     private static final ResourceLocation unDeathEffect =
             new ResourceLocation("eidolon", "undeath");
@@ -52,5 +56,11 @@ public class EidolonDeathBringer extends BattleModifier {
     @Override
     public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
         applyEffect(context);
+    }
+
+    @Override
+    protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
+        super.registerHooks(hookBuilder);
     }
 }

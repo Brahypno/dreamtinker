@@ -13,9 +13,14 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MonsterMeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileHitModifierHook;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
@@ -30,7 +35,7 @@ import java.util.stream.Collectors;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.*;
 
-public class TheWolfWonder extends BattleModifier {
+public class TheWolfWonder extends Modifier implements ProjectileHitModifierHook, MeleeHitModifierHook, MonsterMeleeHitModifierHook {
     private static final int minDuration = TheWolfWonderEffectMinTime.get() * 20;
     private static final int maxDuration = TheWolfWonderEffectMaxTime.get() * 20;
     private static final Set<ResourceLocation> BAD_CACHE = new HashSet<>();
@@ -244,5 +249,11 @@ public class TheWolfWonder extends BattleModifier {
                 return new CompoundTag();
             return target.getPersistentData().getCompound(ROOT);
         }
+    }
+
+    @Override
+    protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
+        super.registerHooks(hookBuilder);
     }
 }

@@ -13,10 +13,14 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.build.ModifierRemovalHook;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import team.lodestar.lodestone.helpers.EntityHelper;
@@ -32,7 +36,7 @@ import static org.dreamtinker.dreamtinker.common.effect.thirsty.Gluttony;
 import static org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers.as_one;
 import static org.dreamtinker.dreamtinker.utils.DTModifierCheck.haveModifierIn;
 
-public class MalumThirsty extends BattleModifier {
+public class MalumThirsty extends Modifier implements InventoryTickModifierHook, ModifierRemovalHook, AttributesModifierHook {
     private static final ResourceLocation TAG_GLU = Dreamtinker.getLocation("enhanced_glu");
     private static final ResourceLocation iron_spell_power = new ResourceLocation("irons_spellbooks", "spell_power");
 
@@ -52,13 +56,13 @@ public class MalumThirsty extends BattleModifier {
     }
 
     @Override
-    public Component onModifierRemoved(IToolStackView tool, Modifier modifier) {
+    public Component onRemoved(IToolStackView tool, Modifier modifier) {
         tool.getPersistentData().remove(TAG_GLU);
         return null;
     }
 
     @Override
-    public void modifierOnInventoryTick(@NotNull IToolStackView tool, @NotNull ModifierEntry modifier, @NotNull Level world, @NotNull LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, @NotNull ItemStack stack) {
+    public void onInventoryTick(@NotNull IToolStackView tool, @NotNull ModifierEntry modifier, @NotNull Level world, @NotNull LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, @NotNull ItemStack stack) {
         if (world.isClientSide)
             return;
         if ((!isCorrectSlot && !isSelected)){
@@ -99,5 +103,11 @@ public class MalumThirsty extends BattleModifier {
                                                       AttributeModifier.Operation.MULTIPLY_TOTAL));
             }
         }
+    }
+
+    @Override
+    protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.INVENTORY_TICK, ModifierHooks.REMOVE, ModifierHooks.ATTRIBUTES);
+        super.registerHooks(hookBuilder);
     }
 }

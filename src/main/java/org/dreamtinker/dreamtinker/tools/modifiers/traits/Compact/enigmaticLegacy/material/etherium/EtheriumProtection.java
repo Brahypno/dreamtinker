@@ -9,16 +9,18 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.armor.DamageBlockModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.armor.ModifyDamageModifierHook;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
-public class EtheriumProtection extends ArmorModifier {
+public class EtheriumProtection extends Modifier implements DamageBlockModifierHook, ModifyDamageModifierHook {
 
     private boolean has_shield(Player player) {
         return DTModifierCheck.ModifierALLBody(player, this.getId()) &&
@@ -27,7 +29,7 @@ public class EtheriumProtection extends ArmorModifier {
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        hookBuilder.addHook(this, ModifierHooks.MODIFY_HURT);
+        hookBuilder.addHook(this, ModifierHooks.DAMAGE_BLOCK, ModifierHooks.MODIFY_HURT);
         super.registerHooks(hookBuilder);
     }
 

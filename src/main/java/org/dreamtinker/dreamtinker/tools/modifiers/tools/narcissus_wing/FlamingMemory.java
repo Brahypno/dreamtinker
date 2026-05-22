@@ -5,11 +5,16 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraftforge.common.ForgeMod;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.BattleModifier;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.json.LevelingValue;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.build.ToolStatsModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MonsterMeleeHitModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.build.ModifierRequirementsModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
@@ -27,12 +32,13 @@ import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.flaming
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.flamingMemoryLifeDrain;
 import static org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers.memory_base;
 
-public class FlamingMemory extends BattleModifier {
+public class FlamingMemory extends Modifier implements MeleeHitModifierHook, MonsterMeleeHitModifierHook, ToolStatsModifierHook, AttributesModifierHook {
     private final Component errorMessage =
             Component.translatable("modifier.dreamtinker.flaming_memory.requirements");
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT, ModifierHooks.TOOL_STATS, ModifierHooks.ATTRIBUTES);
         hookBuilder.addModule(new FieryAttackModule(LevelingValue.eachLevel(5)));
         hookBuilder.addModule(ModifierRequirementsModule.builder().requireModifier(memory_base.getId(), 1)
                                                         .modifierKey(DreamtinkerModifiers.flaming_memory.getId()).build());
@@ -75,5 +81,9 @@ public class FlamingMemory extends BattleModifier {
 
         ToolStats.ATTACK_DAMAGE.multiply(builder, proj_damage * velocity * levels(context) * flamingMemoryStatusBoost.get());
         ToolStats.ATTACK_SPEED.multiply(builder, draw_speed * accuracy * levels(context) * flamingMemoryStatusBoost.get());
+    }
+    @Override
+    public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
+        afterMeleeHit(tool, modifier, context, damage);
     }
 }

@@ -17,6 +17,7 @@ import slimeknights.mantle.data.loadable.record.RecordLoadable;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MonsterMeleeHitModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.display.DisplayNameModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.ModifierModule;
 import slimeknights.tconstruct.library.modifiers.modules.build.SwappableSlotModule;
@@ -31,7 +32,7 @@ import slimeknights.tconstruct.tools.TinkerModifiers;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class SwappableCircleWeaponAttack implements ModifierModule, MeleeHitModifierHook, DisplayNameModifierHook, ModuleWithKey {
+public class SwappableCircleWeaponAttack implements ModifierModule, MeleeHitModifierHook, MonsterMeleeHitModifierHook, DisplayNameModifierHook, ModuleWithKey {
     private static final List<ModuleHook<?>> DEFAULT_HOOKS;
     public static final RecordLoadable<SwappableCircleWeaponAttack> LOADER;
     @Nullable
@@ -101,17 +102,21 @@ public class SwappableCircleWeaponAttack implements ModifierModule, MeleeHitModi
         return this.diameter;
     }
 
-    @Nullable
-    public ResourceLocation key() {
-        return this.key;
-    }
-
     static {
-        DEFAULT_HOOKS = HookProvider.defaultHooks(new ModuleHook[]{ModifierHooks.MELEE_HIT, ModifierHooks.DISPLAY_NAME});
+        DEFAULT_HOOKS = HookProvider.defaultHooks(new ModuleHook[]{ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT, ModifierHooks.DISPLAY_NAME});
         LOADER = RecordLoadable.create(ModuleWithKey.FIELD, StringLoadable.DEFAULT.requiredField("match", (m) -> m.match),
                                        FloatLoadable.ANY.defaultField("diameter", 0.0F, true, SwappableCircleWeaponAttack::diameter)
                 , SwappableCircleWeaponAttack::new);
 
 
+    }
+
+    @Nullable
+    public ResourceLocation key() {
+        return this.key;
+    }
+    @Override
+    public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
+        afterMeleeHit(tool, modifier, context, damage);
     }
 }

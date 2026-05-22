@@ -9,8 +9,11 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.Vec3;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseclass.ArmorModifier;
+import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.armor.DamageBlockModifierHook;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
@@ -19,7 +22,7 @@ import java.util.List;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.EchoDefenceRange;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.EchoDefenceSpeed;
 
-public class echoed_defence extends ArmorModifier {
+public class EchoedDefence extends Modifier implements DamageBlockModifierHook {
     public static final String BOUNCE_TAG = "redirect_bounce_count";
 
     @Override
@@ -69,4 +72,10 @@ public class echoed_defence extends ArmorModifier {
         return true;
     }
 
+
+    @Override
+    protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.DAMAGE_BLOCK);
+        super.registerHooks(hookBuilder);
+    }
 }

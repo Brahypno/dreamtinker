@@ -4,10 +4,11 @@ import com.sammy.malum.registry.common.AttributeRegistry;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import org.dreamtinker.dreamtinker.library.modifiers.base.baseinterface.BasicInterface;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifierHook;
 import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.modifiers.modules.build.ModifierRequirementsModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
@@ -21,13 +22,13 @@ import java.util.function.BiConsumer;
 import static org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers.weapon_transformation;
 import static org.dreamtinker.dreamtinker.tools.modifiers.tools.underPlate.WeaponTransformation.valueExpSoftCap;
 
-public class SpiritualWeaponTransformation extends NoLevelsModifier implements BasicInterface {
+public class SpiritualWeaponTransformation extends NoLevelsModifier implements AttributesModifierHook {
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
         hookBuilder.addModule(ModifierRequirementsModule.builder().requireModifier(weapon_transformation.getId(), 1)
                                                         .modifierKey(DreamtinkerModifiers.spiritual_weapon_transformation.getId()).build());
-        this.BasicInterfaceInit(hookBuilder);
+        hookBuilder.addHook(this, ModifierHooks.ATTRIBUTES);
         super.registerHooks(hookBuilder);
     }
 
