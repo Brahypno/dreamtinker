@@ -11,6 +11,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
@@ -230,6 +231,8 @@ public class DreamtinkerCommon extends DreamtinkerModule {
             super.appendHoverText(stack, level, tooltip, flag);
         }
     });
+    public static final RegistryObject<Item> eden_fruit = ITEMS.register("eden_fruit", () -> new Item(
+            new Item.Properties().rarity(Rarity.EPIC).food(Foods.ENCHANTED_GOLDEN_APPLE).fireResistant()));
     public static final RegistryObject<Item> void_pearl = ITEMS.register("void_pearl", () -> new void_pearl((new Item.Properties().rarity(
             Rarity.UNCOMMON)).stacksTo(16)));
 
@@ -250,6 +253,7 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         output.accept(persona_cast.get());
         output.accept(reason_cast.get());
         output.accept(white_peach.get());
+        output.accept(eden_fruit.get());
         output.accept(unborn_egg.get());
         output.accept(UnbornTurtleEgg.get());
         output.accept(UnbornDragonEgg.get());

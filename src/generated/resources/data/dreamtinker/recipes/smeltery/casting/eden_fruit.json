@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "item": "minecraft:enchanted_golden_apple"
+  },
+  "cast_consumed": true,
+  "cooling_time": 105,
+  "fluid": {
+    "amount": 100,
+    "tag": "dreamtinker:snake_essence"
+  },
+  "result": "dreamtinker:eden_fruit"
+}

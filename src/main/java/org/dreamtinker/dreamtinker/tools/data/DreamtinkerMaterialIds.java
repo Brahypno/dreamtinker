@@ -41,6 +41,7 @@ public class DreamtinkerMaterialIds {
     public static final MaterialId RuinWheelSteel = new MaterialId(new ResourceLocation(MODID, "ruin_wheel_steel"));
     public static final MaterialId OathGuardPaleSteel = new MaterialId(new ResourceLocation(MODID, "oath_guard_pale_steel"));
     public static final MaterialId ForlornOathSteel = new MaterialId(new ResourceLocation(MODID, "forlorn_oath_steel"));
+    public static final MaterialId deliverance = new MaterialId(new ResourceLocation(MODID, "deliverance"));
     public static final MaterialId AtonementSilver = new MaterialId(new ResourceLocation(MODID, "atonement_silver"));
     //Compact tag
     public static final MaterialId ArcaneGold = new MaterialId(new ResourceLocation(MODID, "arcane_gold"));//eidolon

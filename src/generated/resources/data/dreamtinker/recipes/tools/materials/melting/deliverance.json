@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_melting",
+  "input": "dreamtinker:deliverance",
+  "result": {
+    "amount": 10,
+    "fluid": "dreamtinker:unmelting_teardrop"
+  },
+  "temperature": 2300
+}

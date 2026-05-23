@@ -56,6 +56,7 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.SpiralSpin, 3, 25, true, false, null);
         addMaterial(DreamtinkerMaterialIds.RuinWheelSteel, 5, 55, true, false, null);
         addMaterial(DreamtinkerMaterialIds.AtonementSilver, 4, 35, false, false, tagFilled(Dreamtinker.forgeItemTag("ingots/silver")));
+        addMaterial(DreamtinkerMaterialIds.deliverance, 5, 55, false, false, null);
 
         addMaterial(DreamtinkerMaterialIds.ArcaneGold, 2, ORDER_REPAIR, false, false, tagFilled(DreamtinkerTagKeys.Items.arcaneGoldIngot));
         addMaterial(DreamtinkerMaterialIds.Utherium, 4, 45, false, false, tagFilled(DreamtinkerTagKeys.Items.utheriumIngot));

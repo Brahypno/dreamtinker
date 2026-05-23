@@ -566,6 +566,49 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(255, 0xFFFFFFFF)
                                                 .build());
 
+        this.buildMaterial(DreamtinkerMaterialIds.deliverance)
+            .meleeHarvest().armor()
+            .fallbacks("metal", "crystal")
+            .transformer(new FramesSpriteTransformer(
+                    Dreamtinker.getLocation("generator/etherium"),
+                    // Generator frame 0: skyfire erosion.
+                    GreyToSpriteTransformer.builderFromBlack()
+                                           .addARGB(63, 0xFF271919)
+                                           .addARGB(102, 0xFF542F26)
+                                           .addARGB(140, 0xFF97522E)
+                                           .addARGB(178, 0xFFE08430)
+                                           .addARGB(216, 0xFFFFBE52)
+                                           .addARGB(255, 0xFFFFF4CA)
+                                           .build(),
+                    // Generator frame 1: white-hot deliverance.
+                    GreyToSpriteTransformer.builderFromBlack()
+                                           .addARGB(63, 0xFF300C07)
+                                           .addARGB(102, 0xFF69180C)
+                                           .addARGB(140, 0xFFB13012)
+                                           .addARGB(178, 0xFFF4641A)
+                                           .addARGB(216, 0xFFFFB139)
+                                           .addARGB(255, 0xFFFFF2C3)
+                                           .build(),
+                    // Generator frame 2: frostfire threshold.
+                    GreyToSpriteTransformer.builderFromBlack()
+                                           .addARGB(63, 0xFF121E2C)
+                                           .addARGB(102, 0xFF23485C)
+                                           .addARGB(140, 0xFF528497)
+                                           .addARGB(178, 0xFF9CC6C6)
+                                           .addARGB(216, 0xFFE7DAAB)
+                                           .addARGB(255, 0xFFFFF7DA)
+                                           .build(),
+                    // Generator frame 3: frozen state.
+                    GreyToSpriteTransformer.builderFromBlack()
+                                           .addARGB(63, 0xFF0D192B)
+                                           .addARGB(102, 0xFF193E5B)
+                                           .addARGB(140, 0xFF347092)
+                                           .addARGB(178, 0xFF68B2CD)
+                                           .addARGB(216, 0xFFB8E8F2)
+                                           .addARGB(255, 0xFFF4FEFF)
+                                           .build()
+            ));
+
 
         addELMaterials();
         addMalumMaterials();

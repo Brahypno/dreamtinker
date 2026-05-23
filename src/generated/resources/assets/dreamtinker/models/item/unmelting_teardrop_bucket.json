@@ -1,0 +1,6 @@
+{
+  "parent": "forge:item/bucket_drip",
+  "flip_gas": false,
+  "fluid": "dreamtinker:unmelting_teardrop",
+  "loader": "tconstruct:fluid_container"
+}

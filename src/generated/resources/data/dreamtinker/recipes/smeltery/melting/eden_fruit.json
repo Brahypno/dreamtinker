@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "item": "dreamtinker:eden_fruit"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "dreamtinker:unmelting_teardrop"
+  },
+  "temperature": 2300,
+  "time": 50
+}

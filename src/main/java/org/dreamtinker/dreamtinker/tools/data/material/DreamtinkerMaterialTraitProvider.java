@@ -120,6 +120,9 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.ForlornOathSteel, broken_oath, forlorn_judgment);
         addTraits(DreamtinkerMaterialIds.ForlornOathSteel, ARMOR, broken_oath, last_body);
 
+        addDefaultTraits(DreamtinkerMaterialIds.deliverance, signet, burden_bearer);
+        addTraits(DreamtinkerMaterialIds.deliverance, ARMOR, metamorphosis, burden_bearer);
+
         addDefaultTraits(DreamtinkerMaterialIds.ArcaneGold, arcane_hit.getId());
         addTraits(DreamtinkerMaterialIds.ArcaneGold, ARMOR, TinkerModifiers.golden.getId(), ModifierIds.magicProtection, Ids.arcane_protection);
         addTraits(DreamtinkerMaterialIds.ArcaneGold, PlatingMaterialStats.SHIELD.getId(), ModifierIds.magicProtection, Ids.arcane_protection);

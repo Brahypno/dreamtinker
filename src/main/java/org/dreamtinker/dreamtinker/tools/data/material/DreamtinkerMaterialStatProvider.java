@@ -143,6 +143,10 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new HeadMaterialStats(800, 6f, Tiers.NETHERITE, 2f),
                          HandleMaterialStats.multipliers().durability(0.8f).attackDamage(1.20f).attackSpeed(1.20f).miningSpeed(1.20f).build(),
                          StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.deliverance,
+                         new HeadMaterialStats(7777, 9f, Tiers.NETHERITE, 7f),
+                         HandleMaterialStats.multipliers().durability(8.77f).miningSpeed(1.2f).attackDamage(1.35f).attackSpeed(1.15f).build(),
+                         StatlessMaterialStats.BINDING);
 
         addMaterialStats(DreamtinkerMaterialIds.Utherium,
                          new HeadMaterialStats(1000, 8.5f, Tiers.DIAMOND, 3.5f),
@@ -458,6 +462,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addArmorShieldStats(DreamtinkerMaterialIds.ForlornOathSteel,
                             PlatingMaterialStats.builder().durabilityFactor(60).armor(1f, 2f, 3f, 2f).toughness(2).knockbackResistance(0f),
                             StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
+        addArmorShieldStats(DreamtinkerMaterialIds.deliverance,
+                            PlatingMaterialStats.builder().durabilityFactor(80).armor(3f, 7f, 8f, 3f).toughness(4).knockbackResistance(0.15f),
+                            StatlessMaterialStats.MAILLE);
 
         addArmorShieldStats(DreamtinkerMaterialIds.Utherium,
                             PlatingMaterialStats.builder().durabilityFactor(30).armor(2f, 5f, 7f, 2f).toughness(3).knockbackResistance(0f),

@@ -76,6 +76,7 @@ public class FluidTagProvider extends FluidTagsProvider {
         fluidTag(DreamtinkerFluids.molten_iron_heart);
         fluidTag(DreamtinkerFluids.molten_atonement_silver);
         fluidTag(DreamtinkerFluids.snake_essence);
+        fluidTag(DreamtinkerFluids.unmelting_teardrop);
 
         this.tag(DreamtinkerTagKeys.Fluids.narcissus_wing_used).addTags(DreamtinkerFluids.blood_soul.getTag())
             .addOptionalTags(DreamtinkerFluids.liquid_arcana_juice.getTag(), DreamtinkerFluids.liquid_concentrated_gluttony.getTag(),

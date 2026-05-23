@@ -1,0 +1,24 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "dreamtinker:signet"
+    },
+    {
+      "level": 1,
+      "name": "dreamtinker:burden_bearer"
+    }
+  ],
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "dreamtinker:metamorphosis"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:burden_bearer"
+      }
+    ]
+  }
+}

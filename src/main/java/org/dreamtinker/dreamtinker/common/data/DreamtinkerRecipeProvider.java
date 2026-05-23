@@ -342,6 +342,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                 .setFluidAndTime(TinkerFluids.moltenGlass, FluidValues.GLASS_BLOCK)
                                 .setCast(Items.FLINT, true)
                                 .save(consumer, location(Casting_folder + "shining_flint"));
+        ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.eden_fruit.get())
+                                .setFluidAndTime(DreamtinkerFluids.snake_essence, FluidValues.GEM)
+                                .setCast(Items.ENCHANTED_GOLDEN_APPLE, true)
+                                .save(consumer, location(Casting_folder + "eden_fruit"));
         ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.deep_prismarine_shard.get())
                                 .setFluidAndTime(TinkerFluids.skySlime, FluidValues.SLIME_BLOCK)
                                 .setCast(Tags.Items.DUSTS_PRISMARINE, true)
@@ -565,6 +569,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.snake_fang.get()), DreamtinkerFluids.snake_essence, FluidValues.GEM, 0.5f)
                             .setDamagable(FluidValues.GEM_SHARD)
                             .save(consumer, location(Melting_folder + "snake_fang/gem"));
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.eden_fruit.get()), DreamtinkerFluids.unmelting_teardrop, FluidValues.NUGGET, 0.5f)
+                            .save(consumer, location(Melting_folder + "eden_fruit"));
 
         meltCast(DreamtinkerFluids.molten_orichalcum.get(), DreamtinkerCommon.orichalcum_nugget.get(), FluidValues.NUGGET, consumer);
         meltCast(DreamtinkerFluids.molten_orichalcum.get(), DreamtinkerCommon.orichalcum.get(), FluidValues.INGOT, consumer);
@@ -2786,6 +2792,9 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         materialMeltingCasting(consumer, DreamtinkerMaterialIds.OathGuardPaleSteel, DreamtinkerFluids.molten_iron_heart, FluidValues.INGOT, materials_folder);
         materialMeltingCasting(consumer, DreamtinkerMaterialIds.AtonementSilver, DreamtinkerFluids.molten_atonement_silver, FluidValues.INGOT,
                                materials_folder);
+        materialMeltingCasting(consumer, DreamtinkerMaterialIds.deliverance, DreamtinkerFluids.unmelting_teardrop, FluidValues.NUGGET,
+                               materials_folder);
+        materialRecipe(consumer, DreamtinkerMaterialIds.deliverance, Ingredient.of(DreamtinkerCommon.eden_fruit.get()), 1, 1, materials_folder + "eden_fruit");
 
     }
 

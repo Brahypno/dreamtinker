@@ -73,6 +73,7 @@ public class DreamtinkerEffects {
             });
     public static final RegistryObject<MobEffect> SoulFire = EFFECT.register("soul_fire", soulFire::new);
     public static final RegistryObject<PressingFrontEffect> PressingFront = EFFECT.register("pressing_front", PressingFrontEffect::new);
+    public static final RegistryObject<BurdenBearerEffect> BurdenBearer = EFFECT.register("burden_bearer", BurdenBearerEffect::new);
 
     public static final RegistryObject<MobEffect> ParadoxWound =
             EFFECT.register("paradox_wound", () -> new MobEffect(MobEffectCategory.NEUTRAL, 0xD8D4E8) {});

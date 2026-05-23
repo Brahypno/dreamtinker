@@ -53,6 +53,7 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
         buildRenderInfo(DreamtinkerMaterialIds.RuinWheelSteel).color(0xFFFFF0B0).fallbacks("metal").luminosity(9);
         buildRenderInfo(DreamtinkerMaterialIds.OathGuardPaleSteel).color(0xFF2A2C38).fallbacks("metal").luminosity(10);
         buildRenderInfo(DreamtinkerMaterialIds.ForlornOathSteel).color(0xFFD3E4F6).fallbacks("metal").luminosity(7);
+        buildRenderInfo(DreamtinkerMaterialIds.deliverance).color(0xFF68B2CD).fallbacks("metal", "crystal").luminosity(15);
 
         buildRenderInfo(DreamtinkerMaterialIds.ArcaneGold).color(0xFFEDAE66).fallbacks("metal").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.Utherium).color(0xFF451B1F).fallbacks("gem", "metal").luminosity(11);

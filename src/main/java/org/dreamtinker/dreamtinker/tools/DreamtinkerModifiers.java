@@ -58,6 +58,9 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.harvest.*;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.OathSteel.*;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian.Isolde;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian.SharpenedWith;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.deliverance.BurdenBearer;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.deliverance.Metamorphosis;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.deliverance.Signet;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.desire_gem.EternityDefense;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.desire_gem.MusouIsshinModifier;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.desire_gem.VisionaryWishes;
@@ -208,6 +211,9 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<EternityDefense> eternity_defense = MODIFIERS.register("eternity_defense", EternityDefense::new);
     public static final StaticModifier<MusouIsshinModifier> to_the_moon = MODIFIERS.register("to_the_moon", MusouIsshinModifier::new);
     public static final StaticModifier<VisionaryWishes> many_wishes = MODIFIERS.register("many_wishes", VisionaryWishes::new);
+    public static final StaticModifier<Signet> signet = MODIFIERS.register("signet", Signet::new);
+    public static final StaticModifier<Metamorphosis> metamorphosis = MODIFIERS.register("metamorphosis", Metamorphosis::new);
+    public static final StaticModifier<BurdenBearer> burden_bearer = MODIFIERS.register("burden_bearer", BurdenBearer::new);
 
     //etherium
     public static final StaticModifier<ELAstralBreak> astral_break = EL_MODIFIERS.register("astral_break", ELAstralBreak::new);

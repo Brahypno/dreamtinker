@@ -79,6 +79,7 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
         generateItemModel(DreamtinkerCommon.persona_cast, "cast");
         generateItemModel(DreamtinkerCommon.reason_cast, "cast");
         generateItemModel(DreamtinkerCommon.white_peach, "");
+        generateItemModel(DreamtinkerCommon.eden_fruit, "");
         generateItemModel(DreamtinkerCommon.unborn_egg, "");
         generateItemModel(DreamtinkerCommon.unborn_spawn_egg, "");
         generateItemModel(DreamtinkerCommon.echo_alloy, "materials");

@@ -216,7 +216,10 @@
     "last_body": "#4E5F7D",
     "reprise_protection": "#6F668A",
     "to_the_moon": "#C26DFF",
-    "many_wishes": "#D996FF"
+    "many_wishes": "#D996FF",
+    "signet": "#FF9A35",
+    "metamorphosis": "#B34A45",
+    "burden_bearer": "#68B2CD"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
@@ -227,6 +230,7 @@
     "metallivorous_stibium_lupus": "#E1B873",
     "star_regulus": "#8C1F1F",
     "crying_obsidian": "#3B2754",
+    "deliverance": "#68B2CD",
     "etherium": "#96E8E0",
     "nefarious": "#8513A0",
     "soul_etherium": "#7A59E2",

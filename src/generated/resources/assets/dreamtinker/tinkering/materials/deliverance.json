@@ -1,0 +1,162 @@
+{
+  "color": "FF68B2CD",
+  "fallbacks": [
+    "metal",
+    "crystal"
+  ],
+  "generator": {
+    "supported_stats": [
+      "tconstruct:head",
+      "tconstruct:handle",
+      "tconstruct:binding",
+      "tconstruct:repair_kit",
+      "tconstruct:armor_plating",
+      "tconstruct:plating_helmet",
+      "tconstruct:plating_chestplate",
+      "tconstruct:plating_leggings",
+      "tconstruct:plating_boots",
+      "tconstruct:plating_shield",
+      "tconstruct:maille",
+      "tconstruct:armor_maille"
+    ],
+    "transformer": {
+      "type": "tconstruct:frames",
+      "frames": [
+        {
+          "type": "tconstruct:grey_to_sprite",
+          "palette": [
+            {
+              "color": "FF000000",
+              "grey": 0
+            },
+            {
+              "color": "FF271919",
+              "grey": 63
+            },
+            {
+              "color": "FF542F26",
+              "grey": 102
+            },
+            {
+              "color": "FF97522E",
+              "grey": 140
+            },
+            {
+              "color": "FFE08430",
+              "grey": 178
+            },
+            {
+              "color": "FFFFBE52",
+              "grey": 216
+            },
+            {
+              "color": "FFFFF4CA",
+              "grey": 255
+            }
+          ]
+        },
+        {
+          "type": "tconstruct:grey_to_sprite",
+          "palette": [
+            {
+              "color": "FF000000",
+              "grey": 0
+            },
+            {
+              "color": "FF300C07",
+              "grey": 63
+            },
+            {
+              "color": "FF69180C",
+              "grey": 102
+            },
+            {
+              "color": "FFB13012",
+              "grey": 140
+            },
+            {
+              "color": "FFF4641A",
+              "grey": 178
+            },
+            {
+              "color": "FFFFB139",
+              "grey": 216
+            },
+            {
+              "color": "FFFFF2C3",
+              "grey": 255
+            }
+          ]
+        },
+        {
+          "type": "tconstruct:grey_to_sprite",
+          "palette": [
+            {
+              "color": "FF000000",
+              "grey": 0
+            },
+            {
+              "color": "FF121E2C",
+              "grey": 63
+            },
+            {
+              "color": "FF23485C",
+              "grey": 102
+            },
+            {
+              "color": "FF528497",
+              "grey": 140
+            },
+            {
+              "color": "FF9CC6C6",
+              "grey": 178
+            },
+            {
+              "color": "FFE7DAAB",
+              "grey": 216
+            },
+            {
+              "color": "FFFFF7DA",
+              "grey": 255
+            }
+          ]
+        },
+        {
+          "type": "tconstruct:grey_to_sprite",
+          "palette": [
+            {
+              "color": "FF000000",
+              "grey": 0
+            },
+            {
+              "color": "FF0D192B",
+              "grey": 63
+            },
+            {
+              "color": "FF193E5B",
+              "grey": 102
+            },
+            {
+              "color": "FF347092",
+              "grey": 140
+            },
+            {
+              "color": "FF68B2CD",
+              "grey": 178
+            },
+            {
+              "color": "FFB8E8F2",
+              "grey": 216
+            },
+            {
+              "color": "FFF4FEFF",
+              "grey": 255
+            }
+          ]
+        }
+      ],
+      "meta": "dreamtinker:generator/etherium"
+    }
+  },
+  "luminosity": 15
+}
