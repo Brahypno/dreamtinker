@@ -5,11 +5,13 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.dreamtinker.dreamtinker.utils.LootHelper.DTLoots;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -45,7 +47,7 @@ public class TheWolfAnswer extends Modifier implements ProjectileHitModifierHook
 
     @Override
     public void failedMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageAttempted) {
-        LivingEntity target = context.getLivingTarget();
+        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
         if (target == null || target.level().isClientSide)
             return;
         float curHP = target.getHealth();
@@ -76,9 +78,10 @@ public class TheWolfAnswer extends Modifier implements ProjectileHitModifierHook
     @Override
     public float getMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
         int types = 0;
-        if (null != context.getLivingTarget())
-            types += Math.max(context.getLivingTarget().getActiveEffects().size(),
-                              TheWolfWonder.DTForcedEffectKeys.getKeysTag(context.getLivingTarget()).size());
+        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
+        if (null != target)
+            types += Math.max(target.getActiveEffects().size(),
+                              TheWolfWonder.DTForcedEffectKeys.getKeysTag(target).size());
         return damage * (1 + types * TheWolfWasDevoter.get().floatValue() * tool.getMultiplier(ToolStats.ATTACK_DAMAGE));
     }
 
@@ -108,8 +111,9 @@ public class TheWolfAnswer extends Modifier implements ProjectileHitModifierHook
 
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        if (null != context.getLivingTarget() && !context.getLivingTarget().level().isClientSide){
-            context.getLivingTarget().invulnerableTime = 0;
+        Entity target = context.getTarget();
+        if (null != target && !target.level().isClientSide){
+            target.invulnerableTime = 0;
         }
     }
 

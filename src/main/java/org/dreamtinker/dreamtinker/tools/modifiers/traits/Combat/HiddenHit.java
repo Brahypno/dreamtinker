@@ -8,6 +8,7 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.phys.EntityHitResult;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -37,7 +38,7 @@ public class HiddenHit extends Modifier implements MeleeDamageModifierHook, Proj
 
     @Override
     public float getMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
-        if (context.getLivingTarget() instanceof Mob mob)
+        if (DTHelper.getLivingTarget(context.getTarget()) instanceof Mob mob)
             if (null == mob.getTarget() || !mob.getTarget().is(context.getAttacker()))
                 return damage + 3 * modifier.getLevel() * tool.getMultiplier(ToolStats.ATTACK_DAMAGE);
             else

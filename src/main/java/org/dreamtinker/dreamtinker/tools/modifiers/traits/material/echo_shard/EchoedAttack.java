@@ -9,6 +9,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -18,6 +19,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
@@ -133,7 +135,7 @@ public class EchoedAttack extends Modifier implements ProjectileLaunchModifierHo
 
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        hitEntity(tool, context.getAttacker(), context.getLivingTarget(), context);
+        hitEntity(tool, context.getAttacker(), DTHelper.getLivingTarget(context.getTarget()), context);
     }
 
     @Override
@@ -166,16 +168,15 @@ public class EchoedAttack extends Modifier implements ProjectileLaunchModifierHo
         for (ModifierEntry entry : modifiers) {
             damage = entry.getHook(ModifierHooks.MELEE_DAMAGE).getMeleeDamage(tool, entry, context, baseDamage, damage);
         }
-        if (null != context.getLivingTarget()){
-            context.getLivingTarget().setInvulnerable(false);
-            context.getLivingTarget().invulnerableTime = 9;
-            DamageSource dam;
-            if (context.getAttacker() instanceof Player player)
-                dam = context.getLivingTarget().level().damageSources().playerAttack(player);
-            else
-                dam = context.getLivingTarget().level().damageSources().mobAttack(context.getAttacker());
-            context.getLivingTarget().hurt(dam, damage);
-        }
+        Entity target = context.getTarget();
+        target.setInvulnerable(false);
+        target.invulnerableTime = 9;
+        DamageSource dam;
+        if (context.getAttacker() instanceof Player player)
+            dam = target.level().damageSources().playerAttack(player);
+        else
+            dam = target.level().damageSources().mobAttack(context.getAttacker());
+        target.hurt(dam, damage);
     }
 
     @Override

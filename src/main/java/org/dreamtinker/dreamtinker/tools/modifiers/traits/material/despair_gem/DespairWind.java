@@ -41,7 +41,7 @@ public class DespairWind extends Modifier implements ProjectileHitModifierHook, 
 
     @Override
     public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
-        LivingEntity target = context.getLivingTarget();
+        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
         LivingEntity attacker = context.getAttacker();
         ArrayList<Attribute> attributes = new ArrayList<>(Arrays.asList(Attributes.ARMOR, Attributes.ARMOR_TOUGHNESS));
         if (null != target && !target.level().isClientSide){
@@ -86,9 +86,9 @@ public class DespairWind extends Modifier implements ProjectileHitModifierHook, 
 
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        LivingEntity victim = context.getLivingTarget();
+        LivingEntity victim = DTHelper.getLivingTarget(context.getTarget());
         if (null != victim && !victim.level().isClientSide){
-            remove_attributes(context.getLivingTarget());
+            remove_attributes(victim);
             if (context.getPlayerAttacker() instanceof ServerPlayer sp){
                 MaskService.remove(sp, Dreamtinker.getLocation("modifier/despair_wind"));
             }

@@ -19,7 +19,7 @@ public class ForceHurt extends Modifier implements MeleeHitModifierHook, Monster
 
     @Override
     public void failedMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageAttempted) {
-        DTDamageUtils.damageHandler(context.getLivingTarget(), context.makeDamageSource(), damageAttempted);
+        DTDamageUtils.damageHandler(context.getTarget(), context.makeDamageSource(), damageAttempted);
     }
 
     @Override

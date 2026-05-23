@@ -20,6 +20,8 @@ import net.minecraftforge.common.TierSortingRegistry;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.AdvCountEvents;
+import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -168,7 +170,7 @@ public class SplendourHeart extends Modifier implements MeleeHitModifierHook, In
             float per = tool.getPersistentData().getFloat(TAG_ADV_PERCENTAGE);
             int level = java.util.Arrays.binarySearch(TheSplendourHeart.get().toArray(), (double) Math.nextUp(per));
             level = level < 0 ? -level - 1 : level;
-            LivingEntity victim = context.getLivingTarget();
+            LivingEntity victim = DTHelper.getLivingTarget(context.getTarget());
             float boost = rangeToValue(per);
             if (null != victim){
                 int depth = extra_attack_depth.get();
@@ -182,7 +184,8 @@ public class SplendourHeart extends Modifier implements MeleeHitModifierHook, In
                         int inv = victim.invulnerableTime;
                         victim.invulnerableTime = 0;
                         extra_attack_depth.set(depth + 1);
-                        victim.hurt(DreamtinkerDamageTypes.source(victim.level().registryAccess(), dmt, null, context.getAttacker()), damage * (boost + 1));
+                        DTDamageUtils.damageHandler(victim, DreamtinkerDamageTypes.source(victim.level().registryAccess(), dmt, null, context.getAttacker()),
+                                                    damage * (boost + 1));
                         victim.invulnerableTime = inv;
                     }
                     finally {

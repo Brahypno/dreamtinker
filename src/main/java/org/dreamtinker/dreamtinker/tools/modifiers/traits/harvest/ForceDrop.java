@@ -1,8 +1,10 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.harvest;
 
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.dreamtinker.dreamtinker.utils.LootHelper.DTLoots;
 import org.dreamtinker.dreamtinker.utils.LootHelper.GlobalLootModifierItemScanner;
 import org.jetbrains.annotations.NotNull;
@@ -28,12 +30,13 @@ public class ForceDrop extends Modifier implements MeleeHitModifierHook, Monster
 
     @Override
     public void failedMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageAttempted) {
-        if (null != context.getLivingTarget()){
-            DTLoots.dropAllDeathLootVanilla(context.getLivingTarget(), context.makeDamageSource());
+        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
+        if (null != target){
+            DTLoots.dropAllDeathLootVanilla(target, context.makeDamageSource());
             if (context.getLevel() instanceof ServerLevel sl)
-                for (ItemStack itemStack : GlobalLootModifierItemScanner.getAllScannedLootStacksMinOne(sl, context.getLivingTarget())) {
+                for (ItemStack itemStack : GlobalLootModifierItemScanner.getAllScannedLootStacksMinOne(sl, target)) {
                     ItemEntity entity =
-                            new ItemEntity(sl, context.getLivingTarget().getX(), context.getLivingTarget().getY(), context.getLivingTarget().getZ(), itemStack);
+                            new ItemEntity(sl, target.getX(), target.getY(), target.getZ(), itemStack);
                     sl.addFreshEntity(entity);
                 }
         }

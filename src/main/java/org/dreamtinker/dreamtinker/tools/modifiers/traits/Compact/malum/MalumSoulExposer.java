@@ -4,6 +4,7 @@ import com.sammy.malum.core.handlers.SoulDataHandler;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -34,8 +35,9 @@ public class MalumSoulExposer extends Modifier implements ProjectileHitModifierH
 
     @Override
     public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
-        if (null != context.getLivingTarget())
-            SoulDataHandler.exposeSoul(context.getLivingTarget());
+        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
+        if (null != target)
+            SoulDataHandler.exposeSoul(target);
 
     }
 

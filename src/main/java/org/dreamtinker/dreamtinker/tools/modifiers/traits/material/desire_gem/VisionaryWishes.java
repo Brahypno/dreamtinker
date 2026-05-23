@@ -13,13 +13,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.entity.PartEntity;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.library.client.particle.ColoredSweepBurst;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.VisionaryDrops;
 import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.dreamtinker.dreamtinker.utils.MaskService;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -77,7 +77,7 @@ public class VisionaryWishes extends Modifier implements MeleeDamageModifierHook
             return;
         }
 
-        LivingEntity target = context.getLivingTarget();
+        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
         if (target == null){
             return;
         }
@@ -106,10 +106,7 @@ public class VisionaryWishes extends Modifier implements MeleeDamageModifierHook
         if (WishPowerData.boosted(tool, context.getLevel())){
             damage *= 1.935F + 0.5f * (modifier.getLevel() - 1);
         }
-        LivingEntity target = context.getLivingTarget();
-        if (null == target && context.getTarget() instanceof PartEntity<?> pp){
-            target = pp.getControllingPassenger();
-        }
+        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
         float armor = 0;
         if (target != null){
             armor = target.getArmorValue();
@@ -126,7 +123,7 @@ public class VisionaryWishes extends Modifier implements MeleeDamageModifierHook
 
     @Override
     public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
-        LivingEntity target = context.getLivingTarget();
+        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
         if (context.getLevel() instanceof ServerLevel sl && null != target && target.isAlive() && WishPowerData.boosted(tool, context.getLevel())){
             target.getPersistentData().putBoolean(VisionaryDrops.Visionary, true);
             ColoredSweepBurst.create()

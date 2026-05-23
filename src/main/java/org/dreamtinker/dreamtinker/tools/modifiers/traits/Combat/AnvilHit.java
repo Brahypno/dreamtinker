@@ -2,6 +2,7 @@ package org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -30,34 +31,8 @@ public class AnvilHit extends Modifier implements MeleeHitModifierHook, MonsterM
         super.registerHooks(hookBuilder);
     }
 
-    @Override
-    public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        if (null != context.getLivingTarget() && context.getLivingTarget().level() instanceof ServerLevel level && !level.isClientSide)
-            spawnAnvilSmash(level, context.getLivingTarget(), modifier.getLevel(), 3, (int) damageDealt);
-    }
-
-    @Override
-    public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
-        if (null != context.getLivingTarget() && context.getLivingTarget().level() instanceof ServerLevel level && !level.isClientSide)
-            spawnAnvilSmash(level, context.getLivingTarget(), modifier.getLevel(), 3, (int) damage);
-    }
-
-
-    @Override
-    public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target, boolean notBlocked) {
-        if (null != target && target.level() instanceof ServerLevel level && !level.isClientSide){
-            String anvil_hit = "dreamtinker_anvil_hit_range";
-            if (!ProjectileHitMemory.hasTriggered(anvil_hit, projectile, target.getUUID())){
-                spawnAnvilSmash(level, target, modifier.getLevel(), 3, 100);
-                ProjectileHitMemory.markTriggered(anvil_hit, projectile, target.getUUID());
-            }
-
-        }
-        return false;
-    }
-
     private static void spawnAnvilSmash(
-            ServerLevel level, LivingEntity target,
+            ServerLevel level, Entity target,
             double spawnHeight, float dmgPerBlock, int dmgMax) {
         // 生成位置：目标正上方 spawnHeight 格
         BlockPos spawn = target.blockPosition().above((int) Math.max(3, spawnHeight));
@@ -80,5 +55,33 @@ public class AnvilHit extends Modifier implements MeleeHitModifierHook, MonsterM
         anvil.time = 1;
 
         //level.addFreshEntity(anvil);
+    }
+
+    @Override
+    public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
+        Entity target = context.getTarget();
+        if (target.level() instanceof ServerLevel level && !level.isClientSide)
+            spawnAnvilSmash(level, target, modifier.getLevel(), 3, (int) damageDealt);
+    }
+
+
+    @Override
+    public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target, boolean notBlocked) {
+        if (null != target && target.level() instanceof ServerLevel level && !level.isClientSide){
+            String anvil_hit = "dreamtinker_anvil_hit_range";
+            if (!ProjectileHitMemory.hasTriggered(anvil_hit, projectile, target.getUUID())){
+                spawnAnvilSmash(level, target, modifier.getLevel(), 3, 100);
+                ProjectileHitMemory.markTriggered(anvil_hit, projectile, target.getUUID());
+            }
+
+        }
+        return false;
+    }
+
+    @Override
+    public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
+        Entity target = context.getTarget();
+        if (target.level() instanceof ServerLevel level && !level.isClientSide)
+            spawnAnvilSmash(level, target, modifier.getLevel(), 3, (int) damage);
     }
 }

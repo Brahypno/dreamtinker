@@ -11,6 +11,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.CursedRingBound;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -55,7 +56,7 @@ public class ExilesFaulty extends Modifier implements ProjectileHitModifierHook,
 
     @Override
     public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
-        LivingEntity target = context.getLivingTarget();
+        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
         LivingEntity attacker = context.getAttacker();
         if (null != target && !target.level().isClientSide)
             curse_faulty(attacker, target, damage);

@@ -23,6 +23,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 import org.dreamtinker.dreamtinker.fluids.DreamtinkerFluids;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -106,18 +107,6 @@ public class SelfSacrifice extends Modifier implements MeleeHitModifierHook, Mon
         }
     }
 
-    @Override
-    public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        if (context.isFullyCharged() && context.getAttacker().equals(context.getLivingTarget())){
-            meltTarget(tool, modifier, context.getLivingTarget(), damageDealt);
-            if (!context.getAttacker().level().isClientSide){
-                context.getAttacker().addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, (int) (20 * damageDealt * 4), 1));
-                context.getAttacker().addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, (int) (20 * damageDealt * 4), 1));
-                context.getAttacker().addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, (int) (20 * damageDealt * 2), 0));
-            }
-        }
-    }
-
     public static boolean selfAttack(IToolStackView tool, ToolAttackContext context) {
 
         // calculate conditional damage from modifiers
@@ -154,7 +143,7 @@ public class SelfSacrifice extends Modifier implements MeleeHitModifierHook, Mon
         // track original health and motion before attack
         // Vec3 originalTargetMotion = targetEntity.getDeltaMovement();
         float oldHealth = 0.0F;
-        LivingEntity targetLiving = context.getLivingTarget();
+        LivingEntity targetLiving = DTHelper.getLivingTarget(context.getTarget());
         if (targetLiving != null){
             oldHealth = targetLiving.getHealth();
         }
@@ -270,6 +259,20 @@ public class SelfSacrifice extends Modifier implements MeleeHitModifierHook, Mon
 
         return true;
     }
+
+    @Override
+    public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
+        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
+        if (context.isFullyCharged() && context.getAttacker().equals(target)){
+            meltTarget(tool, modifier, target, damageDealt);
+            if (!context.getAttacker().level().isClientSide){
+                context.getAttacker().addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, (int) (20 * damageDealt * 4), 1));
+                context.getAttacker().addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, (int) (20 * damageDealt * 4), 1));
+                context.getAttacker().addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, (int) (20 * damageDealt * 2), 0));
+            }
+        }
+    }
+
     @Override
     public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
         afterMeleeHit(tool, modifier, context, damage);

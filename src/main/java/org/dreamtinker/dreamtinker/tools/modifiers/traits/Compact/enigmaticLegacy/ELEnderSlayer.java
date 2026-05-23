@@ -12,6 +12,7 @@ import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.data.predicate.IJsonPredicate;
 import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
@@ -55,7 +56,7 @@ public class ELEnderSlayer extends Modifier implements MeleeDamageModifierHook, 
     public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
         float knockbackPower = 1F;
         if (context.getAttacker() instanceof Player player && SuperpositionHandler.isTheCursedOne(player))
-            if (EnigmaticItems.ENDER_SLAYER.isEndDweller(context.getLivingTarget())){
+            if (EnigmaticItems.ENDER_SLAYER.isEndDweller(DTHelper.getLivingTarget(context.getTarget()))){
                 knockbackPower += EnderSlayer.endKnockbackBonus.getValue().asModifier(false) * modifier.getEffectiveLevel();
             }
         return knockback * knockbackPower;
@@ -64,7 +65,7 @@ public class ELEnderSlayer extends Modifier implements MeleeDamageModifierHook, 
     @Override
     public float getMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
         if (context.getAttacker() instanceof Player player && SuperpositionHandler.isTheCursedOne(player)){
-            LivingEntity target = context.getLivingTarget();
+            LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
             if (null != target && (EnigmaticItems.ENDER_SLAYER.isEndDweller(target) || target.getType().is(DreamtinkerTagKeys.EntityTypes.ENDER_ENTITY))){
                 if (player.level().dimension().equals(EnigmaticLegacy.PROXY.getEndKey()) && player.level() == target.level()){
                     if (target instanceof EnderMan

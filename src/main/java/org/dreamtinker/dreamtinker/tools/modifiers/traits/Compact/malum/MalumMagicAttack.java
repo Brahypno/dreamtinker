@@ -1,5 +1,7 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum;
 
+import net.minecraft.world.entity.LivingEntity;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -18,8 +20,9 @@ public class MalumMagicAttack extends Modifier implements MeleeDamageModifierHoo
     }
 
     public float getMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
-        if (null != context.getLivingTarget()){
-            var magicResistance = context.getLivingTarget().getAttribute(LodestoneAttributeRegistry.MAGIC_RESISTANCE.get());
+        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
+        if (null != target){
+            var magicResistance = target.getAttribute(LodestoneAttributeRegistry.MAGIC_RESISTANCE.get());
             if (magicResistance != null)
                 damage /= (float) Math.max(magicResistance.getValue(), 0.01f);
         }

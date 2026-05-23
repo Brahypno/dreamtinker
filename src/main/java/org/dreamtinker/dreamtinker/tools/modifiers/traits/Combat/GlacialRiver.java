@@ -35,9 +35,7 @@ public class GlacialRiver extends Modifier implements MeleeDamageModifierHook, M
 
     @Override
     public float getMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
-        if (null == context.getLivingTarget())
-            return damage;
-        Level level = context.getLivingTarget().level();
+        Level level = context.getLevel();
         float damageboost = 0;
         for (LivingEntity aoeTarget : level.getEntitiesOfClass(LivingEntity.class,
                                                                context.getAttacker().getBoundingBox().inflate(glacialRiverRange.get(), 0.25D, 5))) {
@@ -56,9 +54,7 @@ public class GlacialRiver extends Modifier implements MeleeDamageModifierHook, M
     @Override
     public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
         //cannot boost damage, so just do range HP set
-        if (null == context.getLivingTarget())
-            return;
-        Level level = context.getLivingTarget().level();
+        Level level = context.getLevel();
         for (LivingEntity aoeTarget : level.getEntitiesOfClass(LivingEntity.class,
                                                                context.getAttacker().getBoundingBox().inflate(glacialRiverRange.get(), 0.25D, 5))) {
             if (aoeTarget.isAlliedTo(context.getAttacker()))

@@ -33,6 +33,7 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
@@ -152,7 +153,7 @@ public class DarkBlade extends Modifier implements MeleeHitModifierHook, Monster
     }
 
     private void DarkBladeBasedOnToolTag(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context) {
-        LivingEntity target = context.getLivingTarget();
+        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
         LivingEntity attacker = context.getAttacker();
         Level level = attacker.level();
         if (null == target || level.isClientSide)

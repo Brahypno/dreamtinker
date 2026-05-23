@@ -111,7 +111,7 @@ public class RayAttack extends Modifier implements ProjectileHitModifierHook, Me
 
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        LivingEntity target = context.getLivingTarget();
+        Entity target = context.getTarget();
         if (null != target && !target.level().isClientSide){
             float Theoretical_damage = Math.max(0.5f, DTModifierCheck.getMeleeDamage(context.getAttacker(), context.getTarget(), tool, true));
             Theoretical_damage = Math.max(Theoretical_damage, damageDealt);

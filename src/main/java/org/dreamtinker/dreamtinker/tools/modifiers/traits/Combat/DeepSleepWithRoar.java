@@ -9,6 +9,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -48,12 +49,12 @@ public class DeepSleepWithRoar extends Modifier implements ProjectileHitModifier
     }
 
     public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
-        effectSender(context.getAttacker(), context.getLivingTarget());
+        effectSender(context.getAttacker(), DTHelper.getLivingTarget(context.getTarget()));
         return knockback;
     }
 
     public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
-        effectSender(context.getAttacker(), context.getLivingTarget());
+        effectSender(context.getAttacker(), DTHelper.getLivingTarget(context.getTarget()));
 
     }
 

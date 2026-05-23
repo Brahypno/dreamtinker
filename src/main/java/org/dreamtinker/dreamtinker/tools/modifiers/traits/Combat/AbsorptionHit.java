@@ -7,6 +7,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.data.predicate.IJsonPredicate;
 import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
@@ -55,8 +56,9 @@ public class AbsorptionHit extends Modifier implements MeleeHitModifierHook, Mon
 
     @Override
     public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
-        if (absorption.matches(context.getAttacker()) && null != context.getLivingTarget())
-            context.getLivingTarget().addEffect(new MobEffectInstance(MobEffects.WEAKNESS, modifier.getLevel() * 20, modifier.getLevel()));
+        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
+        if (absorption.matches(context.getAttacker()) && null != target)
+            target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, modifier.getLevel() * 20, modifier.getLevel()));
         return knockback;
     }
 

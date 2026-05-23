@@ -8,6 +8,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.jetbrains.annotations.ApiStatus.Internal;
 import slimeknights.mantle.data.loadable.primitive.BooleanLoadable;
 import slimeknights.mantle.data.loadable.primitive.EnumLoadable;
@@ -98,7 +99,7 @@ public record MobEffectsRemoverModule(IJsonPredicate<LivingEntity> target, Rando
 
     public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
         if (this.removeBeforeMelee && this.condition.matches(tool, modifier)){
-            this.removeEffects(this.removeOwner ? context.getAttacker() : context.getLivingTarget(), modifier.getEffectiveLevel());
+            this.removeEffects(this.removeOwner ? context.getAttacker() : DTHelper.getLivingTarget(context.getTarget()), modifier.getEffectiveLevel());
         }
 
         return knockback;
@@ -106,14 +107,14 @@ public record MobEffectsRemoverModule(IJsonPredicate<LivingEntity> target, Rando
 
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
         if (!this.removeBeforeMelee && this.condition.matches(tool, modifier)){
-            this.removeEffects(this.removeOwner ? context.getAttacker() : context.getLivingTarget(), modifier.getEffectiveLevel());
+            this.removeEffects(this.removeOwner ? context.getAttacker() : DTHelper.getLivingTarget(context.getTarget()), modifier.getEffectiveLevel());
         }
 
     }
 
     public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
         if (this.condition.matches(tool, modifier)){
-            this.removeEffects(this.removeOwner ? context.getAttacker() : context.getLivingTarget(), modifier.getEffectiveLevel());
+            this.removeEffects(this.removeOwner ? context.getAttacker() : DTHelper.getLivingTarget(context.getTarget()), modifier.getEffectiveLevel());
         }
 
     }

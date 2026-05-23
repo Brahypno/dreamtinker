@@ -42,7 +42,7 @@ public class SideAttack extends Modifier implements MeleeDamageModifierHook, Pro
      */
     private static final ResourceLocation BOW_MULTIPLIER = ToolStats.PROJECTILE_DAMAGE.getName().withSuffix("_bow_multiplier");
 
-    private static float getFacingAngleDegHorizontal(Entity attacker, LivingEntity target) {
+    private static float getFacingAngleDegHorizontal(Entity attacker, Entity target) {
         Vec3 a = attacker instanceof Projectile ? attacker.getDeltaMovement() : attacker.getLookAngle();
         Vec3 b = target.getLookAngle().scale(-1);
 
@@ -70,10 +70,8 @@ public class SideAttack extends Modifier implements MeleeDamageModifierHook, Pro
 
     @Override
     public float getMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
-        if (null != context.getLivingTarget()){
-            float dir = getFacingAngleDegHorizontal(context.getAttacker(), context.getLivingTarget());
-            damage += damage * dir * (1.4f + (modifier.getEffectiveLevel() - 1) * 0.4f) * tool.getMultiplier(ToolStats.ATTACK_DAMAGE);
-        }
+        float dir = getFacingAngleDegHorizontal(context.getAttacker(), context.getTarget());
+        damage += damage * dir * (1.4f + (modifier.getEffectiveLevel() - 1) * 0.4f) * tool.getMultiplier(ToolStats.ATTACK_DAMAGE);
         return damage;
     }
 

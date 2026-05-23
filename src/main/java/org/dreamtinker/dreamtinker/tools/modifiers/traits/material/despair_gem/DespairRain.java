@@ -8,6 +8,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -44,7 +45,7 @@ public class DespairRain extends Modifier implements MeleeDamageModifierHook, Me
 
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        LivingEntity victim = context.getLivingTarget();
+        LivingEntity victim = DTHelper.getLivingTarget(context.getTarget());
         if (null != victim){
             AttributeInstance attr_instance = victim.getAttribute(Attributes.MAX_HEALTH);
             if (null != attr_instance){

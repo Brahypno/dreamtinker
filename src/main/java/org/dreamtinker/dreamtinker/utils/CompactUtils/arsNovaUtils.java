@@ -23,6 +23,7 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.Spell.AugmentTinker;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import slimeknights.mantle.client.SafeClientAccess;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -43,12 +44,6 @@ public class arsNovaUtils {
                                     ToolAttackContext.attacker(shooter).target(target).hand(hand).applyStats(tool).defaultCooldown().build();
         List<ModifierEntry> modifiers = tool.getModifierList();
         // I don't think it's a good Idea let spell damage critical, but that still may happened.
-        float oldHealth = 0.0F;
-        LivingEntity targetLiving = context.getLivingTarget();
-        if (targetLiving != null){
-            oldHealth = targetLiving.getHealth();
-        }
-
         float baseKnockback = context.getBaseKnockback();
         float knockback = baseKnockback;
 
@@ -70,7 +65,7 @@ public class arsNovaUtils {
             entry.getHook(ModifierHooks.MELEE_HIT).afterMeleeHit(tool, entry, context, damage);
         }
         Entity targetEntity = context.getTarget();
-        LivingEntity targetLiving = context.getLivingTarget();
+        LivingEntity targetLiving = DTHelper.getLivingTarget(context.getTarget());
         if (targetLiving != null){
             EnchantmentHelper.doPostHurtEffects(targetLiving, shooter);//enchantment should not mater too much
         }

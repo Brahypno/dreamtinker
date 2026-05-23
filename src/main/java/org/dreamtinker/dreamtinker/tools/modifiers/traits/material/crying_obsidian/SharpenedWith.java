@@ -49,7 +49,7 @@ public class SharpenedWith extends Modifier implements MeleeHitModifierHook, Mon
     public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
         LivingEntity attacker = context.getAttacker();
         ServerLevel level = (ServerLevel) attacker.level();
-        BlockPos pos = null == context.getLivingTarget() ? attacker.getOnPos() : context.getLivingTarget().getOnPos();
+        BlockPos pos = null == context.getTarget() ? attacker.getOnPos() : context.getTarget().getOnPos();
         if (canRainAt(level, pos)){
             if (!level.isRaining())
                 level.setWeatherParameters(0, 6000, true, level.random.nextBoolean());

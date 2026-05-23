@@ -4,12 +4,14 @@ import com.sammy.malum.core.handlers.SpiritHarvestHandler;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -48,8 +50,9 @@ public class MalumEvolution extends Modifier implements MeleeDamageModifierHook,
 
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        if (0 < damageDealt && null != context.getLivingTarget() &&
-            0 < SpiritHarvestHandler.getSpiritData(context.getLivingTarget()).map((d) -> d.totalSpirits).orElse(0)){
+        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
+        if (0 < damageDealt && null != target &&
+            0 < SpiritHarvestHandler.getSpiritData(target).map((d) -> d.totalSpirits).orElse(0)){
             int haunted = tool.getPersistentData().getInt(Haunted);
             float charge = tool.getPersistentData().getFloat(haunted_change) + damageDealt;
             while (charge >= req(haunted + 1)) {

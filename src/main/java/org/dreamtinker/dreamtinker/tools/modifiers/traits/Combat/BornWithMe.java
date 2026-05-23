@@ -10,7 +10,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.ForgeMod;
-import net.minecraftforge.entity.PartEntity;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -60,8 +60,7 @@ public class BornWithMe extends Modifier implements MeleeDamageModifierHook, Mel
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
         Level level = context.getLevel();
-        LivingEntity victim = null != context.getLivingTarget() ? context.getLivingTarget() : context.getTarget() instanceof PartEntity<?> pe ?
-                                                                                              pe.getControllingPassenger() : null;
+        LivingEntity victim = DTHelper.getLivingTarget(context.getTarget());
 
         if (null != victim && !level.isClientSide){
             LivingEntity attacker = context.getAttacker();

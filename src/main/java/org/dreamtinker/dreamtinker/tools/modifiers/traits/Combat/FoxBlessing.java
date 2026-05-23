@@ -7,6 +7,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
 import org.dreamtinker.dreamtinker.Entity.AggressiveFox;
 import org.dreamtinker.dreamtinker.Entity.DreamtinkerEntityTypes;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -57,9 +58,9 @@ public class FoxBlessing extends Modifier implements ProjectileHitModifierHook, 
     }
 
     public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
-        LivingEntity spawner = null != context.getLivingTarget() ? context.getLivingTarget() : context.getAttacker();
-        if (null != spawner)
-            SpawnWeaponFox(spawner, context.getLivingTarget());
+        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
+        LivingEntity spawner = null != target ? target : context.getAttacker();
+        SpawnWeaponFox(spawner, target);
         return knockback;
     }
 

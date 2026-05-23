@@ -15,7 +15,6 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.entity.PartEntity;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.GoliathDamage;
 import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
@@ -39,6 +38,7 @@ import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 
 import javax.annotation.Nullable;
 
+import static org.dreamtinker.dreamtinker.utils.DTHelper.getLivingTarget;
 import static org.dreamtinker.dreamtinker.utils.DTHelper.getPositiveAttributeBonus;
 
 public class DoomTrack extends Modifier implements ProjectileHitModifierHook, MeleeHitModifierHook, MonsterMeleeHitModifierHook {
@@ -178,7 +178,7 @@ public class DoomTrack extends Modifier implements ProjectileHitModifierHook, Me
 
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        deal_damage(tool, modifier, context.getLivingTarget(), context.getAttacker(), context.makeDamageSource(), damageDealt, null);
+        deal_damage(tool, modifier, context.getTarget(), context.getAttacker(), context.makeDamageSource(), damageDealt, null);
 
     }
 
@@ -194,23 +194,26 @@ public class DoomTrack extends Modifier implements ProjectileHitModifierHook, Me
     }
 
 
-    private void deal_damage(IToolStackView tool, ModifierEntry modifier, Entity target, LivingEntity attacker, DamageSource source, float damageDealt, Projectile Projectile) {
-        if (null != target && target.isAlive()){
-            LivingEntity victim = target instanceof LivingEntity ? (LivingEntity) target : null;
-            if (target instanceof PartEntity<?> pl){
-                victim = pl.getControllingPassenger();
-            }
-            DamageSource dmg = DreamtinkerDamageTypes.source(target.level().registryAccess(), DreamtinkerDamageTypes.ruin_wheel, source);
-            if (!target.isInvulnerableTo(dmg)){
-                float Theoretical_damage = null != Projectile ? DTModifierCheck.getDamage(Projectile) :
-                                           Math.max(0.5f, DTModifierCheck.getMeleeDamage(attacker, target, tool, true));
-                Theoretical_damage = Math.max(Theoretical_damage, damageDealt);
-                Theoretical_damage *=
-                        proofByResistanceMultiplier(attacker, victim, dmg, modifier.getLevel(), null != Projectile);
-                target.invulnerableTime = 0;
-                DTDamageUtils.damageHandler(target, dmg, Theoretical_damage);
-                spawnOrdainedRuinFx((ServerLevel) target.level(), target, modifier.getLevel());
-            }
+    private void deal_damage(IToolStackView tool, ModifierEntry modifier, @Nullable Entity target, @Nullable LivingEntity attacker, DamageSource source, float damageDealt, @Nullable Projectile projectile) {
+        if (target == null || attacker == null){
+            return;
+        }
+
+        LivingEntity victim = getLivingTarget(target);
+        if (victim == null || !victim.isAlive()){
+            return;
+        }
+
+        DamageSource dmg = DreamtinkerDamageTypes.source(victim.level().registryAccess(), DreamtinkerDamageTypes.ruin_wheel, source);
+        if (!victim.isInvulnerableTo(dmg)){
+            float theoreticalDamage = projectile != null ? DTModifierCheck.getDamage(projectile) :
+                                      Math.max(0.5f, DTModifierCheck.getMeleeDamage(attacker, target, tool, true));
+            theoreticalDamage = Math.max(theoreticalDamage, damageDealt);
+            theoreticalDamage *=
+                    proofByResistanceMultiplier(attacker, victim, dmg, modifier.getLevel(), projectile != null);
+            victim.invulnerableTime = 0;
+            DTDamageUtils.damageHandler(target, dmg, theoreticalDamage);
+            spawnOrdainedRuinFx((ServerLevel) victim.level(), victim, modifier.getLevel());
         }
     }
     @Override

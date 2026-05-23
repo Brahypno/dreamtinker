@@ -17,6 +17,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -92,8 +93,8 @@ public class WeaponBooks extends Modifier implements MeleeDamageModifierHook, Me
         float knockbackPower = 1F;
         if (context.getAttacker() instanceof Player player && !player.level().isClientSide){
             if (0 < tool.getModifierLevel(this.getId()) && SuperpositionHandler.isTheCursedOne(player)){
-                if (null != context.getLivingTarget())
-                    context.getLivingTarget().setSecondsOnFire(20);
+                if (null != context.getTarget())
+                    context.getTarget().setSecondsOnFire(20);
             }
             if (1 == tool.getModifierLevel(this.getId()) && SuperpositionHandler.isTheCursedOne(player)){
                 knockbackPower += TheTwist.knockbackBonus.getValue().asModifier(false);
@@ -112,14 +113,16 @@ public class WeaponBooks extends Modifier implements MeleeDamageModifierHook, Me
         if (context.getAttacker() instanceof Player player)
             if (1 == tool.getModifierLevel(this.getId())){
                 if (SuperpositionHandler.isTheCursedOne(player) || player instanceof ServerPlayer sp && sp.getAbilities().instabuild){
-                    if (null != context.getLivingTarget() && OmniconfigHandler.isBossOrPlayer(context.getLivingTarget()))
+                    if (null != DTHelper.getLivingTarget(context.getTarget()) &&
+                        OmniconfigHandler.isBossOrPlayer(DTHelper.getLivingTarget(context.getTarget())))
                         bonus += damage * TheTwist.bossDamageBonus.getValue().asModifier(false);
 
                 }else
                     damage = 0;
             }else if (2 <= tool.getModifierLevel(this.getId())){
                 if (SuperpositionHandler.isTheWorthyOne(player) || player instanceof ServerPlayer sp && sp.getAbilities().instabuild){
-                    if (null != context.getLivingTarget() && OmniconfigHandler.isBossOrPlayer(context.getLivingTarget())){
+                    if (null != DTHelper.getLivingTarget(context.getTarget()) &&
+                        OmniconfigHandler.isBossOrPlayer(DTHelper.getLivingTarget(context.getTarget()))){
                         if (3 <= tool.getModifierLevel(this.getId()))
                             bonus += damage * TheTwist.bossDamageBonus.getValue().asModifier(false);
                         bonus += damage * TheInfinitum.bossDamageBonus.getValue().asModifier(false);
@@ -150,7 +153,7 @@ public class WeaponBooks extends Modifier implements MeleeDamageModifierHook, Me
                     lifesteal += (float) (damageDealt * (GrowingBloodlustEffect.lifestealBoost.getValue() * amplifier));
                 }
                 player.heal(lifesteal);
-                LivingEntity target = context.getLivingTarget();
+                LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
                 if (null != target){
                     target.addEffect(new MobEffectInstance(MobEffects.WITHER, 160, 3, false, true));
                     target.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 500, 3, false, true));

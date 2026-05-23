@@ -23,6 +23,7 @@ import slimeknights.tconstruct.library.client.materials.MaterialRenderInfo;
 import slimeknights.tconstruct.library.client.materials.MaterialRenderInfoLoader;
 import slimeknights.tconstruct.library.materials.definition.MaterialVariant;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,6 +67,17 @@ public class DTHelper {
 
             distance += 0.25D;
         }
+    }
+
+    @Nullable
+    public static LivingEntity getLivingTarget(@Nullable Entity target) {
+        if (target instanceof LivingEntity living){
+            return living;
+        }
+        if (target instanceof PartEntity<?> part && part.getParent() instanceof LivingEntity living){
+            return living;
+        }
+        return null;
     }
 
     private static boolean isStalledProjectile(Projectile projectile) {

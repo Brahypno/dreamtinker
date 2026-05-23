@@ -32,6 +32,7 @@ import net.minecraftforge.fluids.FluidType;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerSounds;
 import org.dreamtinker.dreamtinker.library.client.sound.ClientSoundChecker;
+import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.dreamtinker.dreamtinker.utils.DTMessages;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
@@ -357,7 +358,7 @@ public class DeathShredder extends Modifier implements MeleeDamageModifierHook, 
         if (!context.getAttacker().isUsingItem())
             return 0;
         int mode = tool.getPersistentData().getInt(TAG_MOD);
-        LivingEntity target = context.getLivingTarget();
+        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
         if (null != target && !target.level().isClientSide){
             if (Modes.ELECTRIC.ordinal() != mode)
                 for (Attribute attr : attributes) {
@@ -384,7 +385,7 @@ public class DeathShredder extends Modifier implements MeleeDamageModifierHook, 
 
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        LivingEntity target = context.getLivingTarget();
+        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
         if (null != target && !target.level().isClientSide){//always clear this
             for (Attribute attr : attributes) {
                 AttributeInstance attr_instance = target.getAttribute(attr);
@@ -393,7 +394,7 @@ public class DeathShredder extends Modifier implements MeleeDamageModifierHook, 
             }
             Tier tier = tool.getStats().get(ToolStats.HARVEST_TIER);
             int idx = tiers.indexOf(tier);
-            context.getLivingTarget().invulnerableTime -= 2 * (idx + 1);
+            target.invulnerableTime -= 2 * (idx + 1);
         }
     }
 
