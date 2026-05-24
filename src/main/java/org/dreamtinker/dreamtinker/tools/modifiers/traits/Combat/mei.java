@@ -210,10 +210,9 @@ public class mei extends Modifier implements ModifierRemovalHook, ValidateModifi
                         }
                     }
                 }
-                if ((150 <= level || !RedShadeEnable.get()) && tool.getModifierLevel(DreamtinkerModifiers.despair_mist.getId()) < 1)
-                    MaskService.overlay(player, Dreamtinker.getLocation("modifier/mei"), 0xDC3D3A3A, 10, -1);
-                else if (100 <= level && tool.getModifierLevel(DreamtinkerModifiers.despair_mist.getId()) < 1)
-                    MaskService.overlay(player, Dreamtinker.getLocation("modifier/mei"), 0xAC8A221C, 10, -1);
+                if (100 <= level && tool.getModifierLevel(DreamtinkerModifiers.despair_mist.getId()) < 1)
+                    MaskService.colorIsolation(player, Dreamtinker.getLocation("modifier/mei"), RedShadeEnable.get() ? 0xFF8A221C : 0x6E3D3A3A, 60, 0.65F,
+                                               1.28F, 10, -1);
             }
         }
     }
