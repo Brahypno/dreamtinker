@@ -1,5 +1,6 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.events;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -7,18 +8,25 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.RangedAttackMob;
+import net.minecraft.world.inventory.MerchantMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.ShieldBlockEvent;
+import net.minecraftforge.event.entity.player.CriticalHitEvent;
+import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.event.level.ExplosionEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -27,16 +35,20 @@ import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.items.TNTArrow;
+import org.dreamtinker.dreamtinker.utils.DTMessages;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import slimeknights.tconstruct.common.TinkerTags;
+import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.homunculusGiftDiscount;
+import static org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.SignalAxe.TAG_RIGHT_TIME;
 import static org.dreamtinker.dreamtinker.utils.DTModifierCheck.ModifierInHand;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
-public class GeneralShortEvents {
+public class ShortEvents {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void ExplosionEvent(ExplosionEvent.Detonate event) {
         if (event.isCanceled())
@@ -118,6 +130,43 @@ public class GeneralShortEvents {
             }
         }
 
+    }
+
+    @SubscribeEvent
+    public static void onMerchantMenuOpened(PlayerContainerEvent.Open e) {
+        if (!(e.getContainer() instanceof MerchantMenu menu))
+            return;
+
+        // 你的判定：比如玩家/村民有某标签、状态或物品
+        int homunculusGift = DTModifierCheck.getEntityModifierNum(e.getEntity(), DreamtinkerModifiers.Ids.homunculusGift);
+        if (homunculusGift <= 0)
+            return;
+
+        // 获取并修改当次会话的报价列表
+        MerchantOffers offers = menu.getOffers();
+
+        for (MerchantOffer o : offers) {
+            int dec = Mth.floor(o.getBaseCostA().getCount() * homunculusGift * homunculusGiftDiscount.get());
+            o.addToSpecialPriceDiff(-dec);
+        }
+
+        // 通知客户端刷新（必要时）
+        menu.broadcastChanges();
+    }
+
+    @SubscribeEvent
+    static void onCritical(CriticalHitEvent event) {
+        if (event.getResult() != Event.Result.DENY){
+            LivingEntity living = event.getEntity();
+            if (0 < ModifierUtil.getPersistentInt(living.getItemBySlot(EquipmentSlot.MAINHAND), TAG_RIGHT_TIME, 0)){
+                if (event.getResult() != Event.Result.ALLOW){
+                    DTMessages.clientChat(Component.translatable("modifier.dreamtinker.signal_axe.critical")
+                                                   .withStyle(DreamtinkerModifiers.signal_axe.get().getDisplayName().getStyle()), false);
+                    event.setResult(Event.Result.ALLOW);
+                }
+                event.setDamageModifier(event.getDamageModifier() + 0.4f);
+            }
+        }
     }
 
     private static double getDetectionRadius(Mob mob) {

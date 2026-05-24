@@ -13,7 +13,7 @@ import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import static org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.knockArts.TAG_KNOCK;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
-public class GeneralDeathHandler {
+public class DeathHandler {
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
     public static void LivingDeathEvent(LivingDeathEvent event) {
         LivingEntity victim = event.getEntity();

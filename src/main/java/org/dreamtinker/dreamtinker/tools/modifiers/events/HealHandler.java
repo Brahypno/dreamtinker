@@ -14,7 +14,7 @@ import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.BrokenVesselB
 import static org.dreamtinker.dreamtinker.tools.modifiers.traits.material.nigrescence_antimony.broken_vessel.TAG_BASE_HEALTH;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
-public class heal_handler {
+public class HealHandler {
     @SubscribeEvent
     public static void LivingHealEvent(LivingHealEvent event) {
         LivingEntity entity = event.getEntity();
@@ -46,6 +46,5 @@ public class heal_handler {
             entity.setHealth(rain_cap);
             entity.setAbsorptionAmount(entity.getAbsorptionAmount() + current - rain_cap);
         }
-
     }
 }

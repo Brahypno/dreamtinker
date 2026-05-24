@@ -18,7 +18,7 @@ import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.thunderCurse;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
-public class thundering_curse {
+public class ThunderingCurse {
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         Player player = event.player;

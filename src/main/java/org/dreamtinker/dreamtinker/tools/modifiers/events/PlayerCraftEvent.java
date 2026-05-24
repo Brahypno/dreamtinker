@@ -27,9 +27,9 @@ import static org.dreamtinker.dreamtinker.tools.modifiers.traits.common.not_like
 import static org.dreamtinker.dreamtinker.utils.DTModifierCheck.getMaterialForTier;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
-public class GeneralPlayerCraftEvent {
+public class PlayerCraftEvent {
     @SubscribeEvent
-    public static void PlayerCraftEvent(PlayerEvent.ItemCraftedEvent event) {
+    public static void ItemCraftedEvent(PlayerEvent.ItemCraftedEvent event) {
         if (event.getEntity().level().isClientSide)
             return;
         ItemStack item = event.getCrafting();
