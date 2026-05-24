@@ -1,13 +1,8 @@
 {
   "type": "tconstruct:casting_basin",
-  "cast": [
-    {
-      "item": "minecraft:basalt"
-    },
-    {
-      "item": "minecraft:gravel"
-    }
-  ],
+  "cast": {
+    "item": "minecraft:end_stone"
+  },
   "cast_consumed": true,
   "cooling_time": 75,
   "fluid": {

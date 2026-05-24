@@ -81,7 +81,8 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
         simpleBlockWithItem(DreamTinkerSmeltery.chiseledAshenBricks.get(),
                             models().cubeAll(itemKey(DreamTinkerSmeltery.chiseledAshenBricks.get()).getPath(),
                                              modLoc("block/transmute/ashen/chiseled_ashen_bricks")));
-        this.axisBlock(DreamTinkerSmeltery.ashenStone.get(), "ashen_stone", modLoc("block/transmute/ashen/ashen_stone"), true);
+        simpleBlockWithItem(DreamTinkerSmeltery.ashenStone.get(),
+                            models().cubeAll(itemKey(DreamTinkerSmeltery.ashenStone.get()).getPath(), modLoc("block/transmute/ashen/ashen_stone")));
         this.axisBlock(DreamTinkerSmeltery.polishedAshenStone.get(), "polished_ashen_stone", modLoc("block/transmute/ashen/polished_ashen_stone"), true);
         this.slabWithItem(DreamTinkerSmeltery.ashenBricks.getSlab(), modLoc("block/ashen_bricks"), modLoc("block/transmute/ashen/ashen_bricks"));
         slabWithItem(DreamTinkerSmeltery.ashenRoad.getSlab(), modLoc("block/ashen_road"), modLoc("block/transmute/ashen/ashen_road"));

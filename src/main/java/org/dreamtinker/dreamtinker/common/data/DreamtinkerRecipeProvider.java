@@ -2138,8 +2138,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                            .save(consumer, location(folder + "ingot_gauge"));
 
         // stone
-        ashenCasting(consumer, DreamTinkerSmeltery.ashenStone, Ingredient.of(Blocks.BASALT, Blocks.GRAVEL), Casting_folder + "stone_from_ender");
-        ashenCasting(consumer, DreamTinkerSmeltery.polishedAshenStone, Ingredient.of(Blocks.POLISHED_BASALT), Casting_folder + "polished_from_ender");
+        ashenCasting(consumer, DreamTinkerSmeltery.ashenStone, Ingredient.of(Blocks.END_STONE), Casting_folder + "stone_from_ender");
+        ashenCasting(consumer, DreamTinkerSmeltery.polishedAshenStone, Ingredient.of(Blocks.END_STONE_BRICKS), Casting_folder + "polished_from_ender");
         // glass
         MeltingRecipeBuilder.melting(Ingredient.of(DreamTinkerSmeltery.ashenGlass), DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK * 4, 2f)
                             .addByproduct(TinkerFluids.moltenQuartz.result(FluidValues.GEM))
