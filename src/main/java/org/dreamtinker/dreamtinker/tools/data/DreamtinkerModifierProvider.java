@@ -60,7 +60,6 @@ import slimeknights.tconstruct.library.json.LevelingValue;
 import slimeknights.tconstruct.library.json.RandomLevelingValue;
 import slimeknights.tconstruct.library.json.predicate.TinkerPredicate;
 import slimeknights.tconstruct.library.json.predicate.tool.HasModifierPredicate;
-import slimeknights.tconstruct.library.json.predicate.tool.ToolContextPredicate;
 import slimeknights.tconstruct.library.json.variable.block.BlockVariable;
 import slimeknights.tconstruct.library.json.variable.entity.AttributeEntityVariable;
 import slimeknights.tconstruct.library.json.variable.melee.EntityMeleeVariable;
@@ -84,7 +83,6 @@ import slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHelper;
 import slimeknights.tconstruct.library.tools.capability.inventory.InventoryMenuModule;
 import slimeknights.tconstruct.library.tools.capability.inventory.InventoryModule;
 import slimeknights.tconstruct.library.tools.definition.module.ToolHooks;
-import slimeknights.tconstruct.library.tools.nbt.IToolContext;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.shared.TinkerAttributes;
 import slimeknights.tconstruct.shared.TinkerEffects;
@@ -239,7 +237,6 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                    .addModule(StatBoostModule.multiplyAll(ToolStats.DURABILITY).amount(0, -0.25f));
         buildModifier(Ids.full_concentration).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
         buildModifier(Ids.thundering_curse).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
-        buildModifier(Ids.why_i_cry);
         buildModifier(Ids.MorningLordEULA).addModule(
                 ConditionalMiningSpeedModule.builder()
                                             .customVariable("light", new BlockLightVariable(LightLayer.BLOCK, 15))
@@ -266,10 +263,8 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                                        .variable(MULTIPLIER).multiply() // * multiplier
                                                        .variable(VALUE).add() // + baseValue
                                                        .build());
-        buildModifier(Ids.AsSand).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
         buildModifier(Ids.FragileButBright)
                 .addModule(AttributeModule.builder(DreamtinkerAttributes.FATE_VEIL.get(), AttributeModifier.Operation.ADDITION).eachLevel(0.06f));
-        buildModifier(Ids.homunculusLifeCurse).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
         buildModifier(Ids.homunculusGift).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
         buildModifier(Ids.peaches_in_memory)
                 .addModule(AttributeModule.builder(TinkerAttributes.BAD_EFFECT_DURATION, AttributeModifier.Operation.MULTIPLY_TOTAL).amount(0.1f, 0.1f))
@@ -353,13 +348,12 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.aggressiveFoxUsage)
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
 
-        IJsonPredicate<IToolContext> ancientTool = ToolContextPredicate.tag(TinkerTags.Items.ANCIENT_TOOLS);
         buildModifier(Ids.five_creations)
                 .tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION).levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                 .addModule(new SwappableToolTraitsModule(null, "traits", ToolHooks.REBALANCED_TRAIT))
                 .addModule(new SwappableCircleWeaponAttack(null, "designs", 6));
         buildModifier(Ids.golden_face);
-        buildModifier(Ids.arcane_hit);
+        buildModifier(arcane_hit.getId());
         buildModifier(Ids.arcane_protection)
                 .addModule(MaxArmorAttributeModule.builder(TinkerAttributes.GOOD_EFFECT_DURATION, AttributeModifier.Operation.MULTIPLY_BASE)
                                                   .heldTag(TinkerTags.Items.HELD)
@@ -382,8 +376,6 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(MobEffectsRemoverModule.builder().level(RandomLevelingValue.perLevel(0, 1)).category(MobEffectCategory.HARMFUL).build())
                 .addModule(MobEffectsRemoverModule.builder().level(RandomLevelingValue.perLevel(0, 1)).category(MobEffectCategory.NEUTRAL).build());
 
-        buildModifier(Ids.four_warning)
-                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
         buildModifier(Ids.sweet_death)
                 .addModule(StatBoostModule.add(ToolStats.BLOCK_AMOUNT).eachLevel(40.0f))
                 .addModule(StatBoostModule.add(ToolStats.BLOCK_ANGLE).eachLevel(90f))

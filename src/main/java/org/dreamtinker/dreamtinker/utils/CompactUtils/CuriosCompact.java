@@ -1,9 +1,11 @@
 package org.dreamtinker.dreamtinker.utils.CompactUtils;
 
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.ModList;
+import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
@@ -15,7 +17,9 @@ import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public class CuriosCompact {
     private CuriosCompact() {}
@@ -36,6 +40,13 @@ public class CuriosCompact {
         if (!ModList.get().isLoaded("curios"))
             return List.of();
         return doFindListItemStack(player);
+    }
+
+    public static void damageAllCurios(LivingEntity target, int amount, Predicate<ItemStack> filter) {
+        if (!ModList.get().isLoaded("curios") || Dreamtinker.configCompactDisabled("curios")
+            || target.level().isClientSide || amount <= 0)
+            return;
+        doDamageAllCurios(target, amount, filter);
     }
 
     private static int doFindModifierNum(Player player, ModifierId id) {
@@ -62,6 +73,20 @@ public class CuriosCompact {
             return result;
         });
         return List.of();
+    }
+
+    private static void doDamageAllCurios(LivingEntity target, int amount, Predicate<ItemStack> filter) {
+        CuriosApi.getCuriosInventory(target).ifPresent(inv -> {
+            for (Map.Entry<String, ICurioStacksHandler> entry : inv.getCurios().entrySet()) {
+                IDynamicStackHandler stacks = entry.getValue().getStacks();
+                for (int i = 0; i < stacks.getSlots(); i++) {
+                    ItemStack stack = stacks.getStackInSlot(i);
+                    if (!stack.isEmpty() && stack.isDamageableItem() && (filter == null || filter.test(stack))){
+                        stack.hurtAndBreak(amount, target, entity -> {});
+                    }
+                }
+            }
+        });
     }
 
     private static Optional<ItemStack> doFindModifierItem(Player player, ModifierId id) {

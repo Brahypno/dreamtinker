@@ -66,7 +66,6 @@ import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.ars_nouveau.ArsPlayerCraftEvent;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.ars_nouveau.SpellEvents;
-import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.curio.curio_hurt_handler;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.enigmatic_legacy.EL_events;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.compact.malum.malum_events_handler;
 import org.dreamtinker.dreamtinker.world.data.DTDataPackProvider;
@@ -126,13 +125,11 @@ public class Dreamtinker {
 
     }
 
-    @SuppressWarnings({"removal"})
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
             IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
             if (ModList.get().isLoaded("curios") && !configCompactDisabled("curios")){
                 forgeEventBus.addGenericListener(ItemStack.class, addSilenceGloveCurio::attachCaps);
-                forgeEventBus.addListener(curio_hurt_handler::LivingHurtEvent);
             }
             if (ModList.get().isLoaded("enigmaticlegacy") && !configCompactDisabled("enigmaticlegacy")){
                 forgeEventBus.addGenericListener(ItemStack.class, addUnholyWater::attachCaps);

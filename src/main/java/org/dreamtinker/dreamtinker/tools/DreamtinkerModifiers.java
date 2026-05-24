@@ -64,6 +64,7 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.desire_gem.Vi
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem.*;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.echo_shard.EchoedAttack;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.echo_shard.EchoedDefence;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.fifth_stone.FourWarning;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.lupus_antimony.TheWolfAnswer;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.lupus_antimony.TheWolfWas;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.lupus_antimony.TheWolfWonder;
@@ -135,6 +136,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<OpenSoul> open_soul = MODIFIERS.register("open_soul", OpenSoul::new);
     public static final StaticModifier<SoulBlessing> soul_blessing = MODIFIERS.register("soul_blessing", SoulBlessing::new);
     public static final StaticModifier<RandomHit> malum_distortion = MODIFIERS.register("malum_distortion", () -> new RandomHit(0.9f, 1.2f));
+    public static final StaticModifier<WhyICry> why_i_cry = MODIFIERS.register("why_i_cry", WhyICry::new);
 
     public static final StaticModifier<AllSlotsAddition> soul_form = MODIFIERS.register("soul_form", AllSlotsAddition::new);
     //etherium
@@ -166,6 +168,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<blockViewer> OreViewer = MODIFIERS.register("ore_viewer", () -> new blockViewer(Tags.Blocks.ORES.location(), 0.8f));
     public static final StaticModifier<HiddenHit> hiddenHit = MODIFIERS.register("hidden_hit", HiddenHit::new);
     public static final StaticModifier<knockArts> knockArts = MODIFIERS.register("knock_arts", knockArts::new);
+    public static final StaticModifier<AsSand> as_sand = MODIFIERS.register("as_sand", AsSand::new);
     public static final StaticModifier<TheEnd> TheEnd = MODIFIERS.register("the_end", TheEnd::new);
     public static final StaticModifier<knockBacker> SunAway = MODIFIERS.register("solar_away", knockBacker::new);
     public static final StaticModifier<DeathShredder> death_shredder = MODIFIERS.register("death_shredder", DeathShredder::new);
@@ -199,6 +202,9 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<LastBody> last_body = MODIFIERS.register("last_body", LastBody::new);
     public static final StaticModifier<ForceDrop> force_drop = MODIFIERS.register("force_drop", ForceDrop::new);
     public static final StaticModifier<ForceHurt> force_hurt = MODIFIERS.register("force_hurt", ForceHurt::new);
+    public static final StaticModifier<HomunculusLifeCurse> homunculus_life_curse = MODIFIERS.register("homunculus_life_curse", HomunculusLifeCurse::new);
+    public static final StaticModifier<ArcaneHit> arcane_hit = MODIFIERS.register("arcane_hit", ArcaneHit::new);
+    public static final StaticModifier<FourWarning> four_warning = MODIFIERS.register("four_warning", FourWarning::new);
     public static final StaticModifier<EternityDefense> eternity_defense = MODIFIERS.register("eternity_defense", EternityDefense::new);
     public static final StaticModifier<MusouIsshinModifier> to_the_moon = MODIFIERS.register("to_the_moon", MusouIsshinModifier::new);
     public static final StaticModifier<VisionaryWishes> many_wishes = MODIFIERS.register("many_wishes", VisionaryWishes::new);
@@ -335,13 +341,10 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId huge_ego = id("huge_ego");
         public static final ModifierId full_concentration = id("full_concentration");
         public static final ModifierId thundering_curse = id("thundering_curse");
-        public static final ModifierId why_i_cry = id("why_i_cry");
         public static final ModifierId ykhEULA = id("ykh_eula");
         public static final ModifierId MorningLordEULA = id("morning_lord_eula");
         public static final ModifierId EULA = id("eula");
-        public static final ModifierId AsSand = id("as_sand");
         public static final ModifierId FragileButBright = id("fragile_but_bright");
-        public static final ModifierId homunculusLifeCurse = id("homunculus_life_curse");
         public static final ModifierId homunculusGift = id("homunculus_gift");
         public static final ModifierId peaches_in_memory = id("peaches_in_memory");
         public static final ModifierId weapon_slots = id("weapon_slots");
@@ -361,7 +364,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId aggressiveFoxUsage = id("aggressive_fox_usage");
         public static final ModifierId five_creations = id("five_creations");
         public static final ModifierId golden_face = id("golden_face");
-        public static final ModifierId arcane_hit = id("arcane_hit");
         public static final ModifierId arcane_protection = id("arcane_protection");
         public static final ModifierId drinker_magic = id("drinker_magic");
         public static final ModifierId monster_blood = id("monster_blood");
@@ -376,7 +378,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId torrent = id("torrent");
         public static final ModifierId poison = id("poison");
         public static final ModifierId weakness = id("weakness");
-        public static final ModifierId four_warning = id("four_warning");
         public static final ModifierId sweet_death = id("sweet_death");
         public static final ModifierId last_kiss = id("last_kiss");
         public static final ModifierId curse_fire = id("curse_fire");

@@ -46,14 +46,14 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.crying_obsidian, ARMOR, Ids.in_rain, Ids.with_tears);
 
         addTraits(DreamtinkerMaterialIds.larimar, MELEE_HARVEST, Ids.ykhEULA, Ids.MorningLordEULA, Ids.EULA);
-        addTraits(DreamtinkerMaterialIds.larimar, RANGED, Ids.why_i_cry, deep_sleep_with_roar.getId());
+        addTraits(DreamtinkerMaterialIds.larimar, RANGED, why_i_cry.getId(), deep_sleep_with_roar.getId());
 
-        addTraits(DreamtinkerMaterialIds.amber, MELEE_HARVEST, wait_until.getId(), Ids.AsSand);
-        addTraits(DreamtinkerMaterialIds.amber, RANGED, wait_until.getId(), Ids.AsSand);
+        addTraits(DreamtinkerMaterialIds.amber, MELEE_HARVEST, wait_until.getId(), as_sand.getId());
+        addTraits(DreamtinkerMaterialIds.amber, RANGED, wait_until.getId(), as_sand.getId());
         addTraits(DreamtinkerMaterialIds.amber, ARMOR, Ids.FragileButBright);
 
         addDefaultTraits(DreamtinkerMaterialIds.half_rotten_homunculus, anvil_hit.getId(), TinkerModifiers.necrotic.getId());
-        addTraits(DreamtinkerMaterialIds.half_rotten_homunculus, ARMOR, Ids.homunculusLifeCurse, Ids.homunculusGift);
+        addTraits(DreamtinkerMaterialIds.half_rotten_homunculus, ARMOR, homunculus_life_curse.getId(), Ids.homunculusGift);
         addDefaultTraits(DreamtinkerMaterialIds.half_rotten_string, anvil_hit.getId(), TinkerModifiers.necrotic.getId());
 
         addDefaultTraits(DreamtinkerMaterialIds.desire_gem, to_the_moon, many_wishes);
@@ -105,8 +105,8 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.SpikyShard, ARMOR, new ModifierEntry(ModifierIds.thorns, 2));
 
         addDefaultTraits(DreamtinkerMaterialIds.FifthStone, goliath_damage);
-        addTraits(DreamtinkerMaterialIds.FifthStone, RANGED, Ids.four_warning);
-        addTraits(DreamtinkerMaterialIds.FifthStone, AMMO, Ids.four_warning);
+        addTraits(DreamtinkerMaterialIds.FifthStone, RANGED, four_warning.getId());
+        addTraits(DreamtinkerMaterialIds.FifthStone, AMMO, four_warning.getId());
 
         addDefaultTraits(DreamtinkerMaterialIds.SpiralSpin, ModifierIds.pierce, side_attack.getId());
         addTraits(DreamtinkerMaterialIds.SpiralSpin, RANGED, ModifierIds.pierce, side_attack.getId(), view_tracing.getId());
@@ -120,7 +120,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.ForlornOathSteel, broken_oath, forlorn_judgment);
         addTraits(DreamtinkerMaterialIds.ForlornOathSteel, ARMOR, broken_oath, last_body);
 
-        addDefaultTraits(DreamtinkerMaterialIds.ArcaneGold, Ids.arcane_hit);
+        addDefaultTraits(DreamtinkerMaterialIds.ArcaneGold, arcane_hit.getId());
         addTraits(DreamtinkerMaterialIds.ArcaneGold, ARMOR, TinkerModifiers.golden.getId(), ModifierIds.magicProtection, Ids.arcane_protection);
         addTraits(DreamtinkerMaterialIds.ArcaneGold, PlatingMaterialStats.SHIELD.getId(), ModifierIds.magicProtection, Ids.arcane_protection);
 

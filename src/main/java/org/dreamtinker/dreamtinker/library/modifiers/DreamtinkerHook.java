@@ -2,6 +2,7 @@ package org.dreamtinker.dreamtinker.library.modifiers;
 
 import net.minecraft.resources.ResourceLocation;
 import org.dreamtinker.dreamtinker.library.modifiers.hook.LeftClickHook;
+import org.dreamtinker.dreamtinker.library.modifiers.hook.ProjectileHurtHook;
 import org.dreamtinker.dreamtinker.library.modifiers.hook.RightClickHook;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.module.ModuleHook;
@@ -13,4 +14,7 @@ public class DreamtinkerHook {
             ModifierHooks.register(new ResourceLocation(MODID, "left_click"), LeftClickHook.class, LeftClickHook.AllMerger::new, new LeftClickHook() {});
     public static final ModuleHook<RightClickHook> RIGHT_CLICK =
             ModifierHooks.register(new ResourceLocation(MODID, "right_click"), RightClickHook.class, RightClickHook.AllMerger::new, new RightClickHook() {});
+    public static final ModuleHook<ProjectileHurtHook> PROJECTILE_HURT =
+            ModifierHooks.register(new ResourceLocation(MODID, "projectile_hurt"), ProjectileHurtHook.class, ProjectileHurtHook.AllMerger::new,
+                                   new ProjectileHurtHook() {});
 }
