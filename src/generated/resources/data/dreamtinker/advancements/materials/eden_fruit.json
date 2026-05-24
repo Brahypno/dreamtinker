@@ -1,0 +1,38 @@
+{
+  "parent": "dreamtinker:materials/snake_fang",
+  "criteria": {
+    "has_eden_fruit": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dreamtinker:eden_fruit"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.dreamtinker.materials.eden_fruit.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "dreamtinker:eden_fruit"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.dreamtinker.materials.eden_fruit.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_eden_fruit"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

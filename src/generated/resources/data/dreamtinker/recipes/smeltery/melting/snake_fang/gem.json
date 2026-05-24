@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "ingredient": {
+    "item": "dreamtinker:snake_fang"
+  },
+  "result": {
+    "amount": 100,
+    "fluid": "dreamtinker:snake_essence",
+    "unit_size": 25
+  },
+  "temperature": 2300,
+  "time": 50
+}

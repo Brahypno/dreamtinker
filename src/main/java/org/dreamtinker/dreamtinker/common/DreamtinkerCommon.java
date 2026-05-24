@@ -7,7 +7,9 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
@@ -203,6 +205,23 @@ public class DreamtinkerCommon extends DreamtinkerModule {
     public static final RegistryObject<DTBookItem> hypnagogic_transmute =
             ITEMS.register("hypnagogic_transmute", () -> new DTBookItem(UNSTACKABLE_PROPS, DTBookItem.BookType.HYPNAGOGIC_TRANSMUTE));
 
+    public static final RegistryObject<Item> snake_fang =
+            ITEMS.register("snake_fang", () -> new SwordItem(Tiers.NETHERITE, 1, -1.6F, ITEM_PROPS.rarity(Rarity.COMMON)) {
+                @Override
+                public boolean hurtEnemy(@NotNull ItemStack stack, @NotNull LivingEntity target, @NotNull LivingEntity attacker) {
+                    boolean hurt = super.hurtEnemy(stack, target, attacker);
+                    if (hurt && !target.level().isClientSide){
+                        target.addEffect(new MobEffectInstance(MobEffects.POISON, 20 * 30, 3), attacker);
+                    }
+                    return hurt;
+                }
+
+                @Override
+                public void appendHoverText(@NotNull ItemStack stack, Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.dreamtinker.snake_fang").withStyle(s -> s.withColor(TextColor.fromRgb(0xFFB6C1))));
+                    super.appendHoverText(stack, level, tooltip, flag);
+                }
+            });
     protected static final Item.Properties FOOD_PROPS = new Item.Properties();
     public static final RegistryObject<Item> white_peach = ITEMS.register("white_peach", () -> new Item(
             FOOD_PROPS.rarity(Rarity.COMMON).food((new FoodProperties.Builder()).nutrition(2).saturationMod(6F).build())) {
@@ -216,6 +235,7 @@ public class DreamtinkerCommon extends DreamtinkerModule {
 
     public static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         output.accept(hypnagogic_transmute.get());
+        output.accept(snake_fang.get());
         output.accept(echo_alloy.get());
         output.accept(raw_stibnite.get());
         output.accept(valentinite.get());

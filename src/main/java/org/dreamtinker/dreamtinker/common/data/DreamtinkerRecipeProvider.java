@@ -93,6 +93,7 @@ import slimeknights.tconstruct.library.recipe.melting.MeltingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.modifiers.adding.IncrementalModifierRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.modifiers.adding.ModifierRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.modifiers.adding.SwappableModifierRecipeBuilder;
+import slimeknights.tconstruct.library.recipe.modifiers.severing.SeveringRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.partbuilder.ItemPartRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.partbuilder.PartRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.partbuilder.recycle.PartBuilderToolRecycleBuilder;
@@ -561,6 +562,9 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         meltCast(DreamtinkerFluids.molten_bee_gem.get(), DreamtinkerCommon.rainbow_honey_crystal.get(), FluidValues.GEM, consumer);
         meltCast(DreamtinkerFluids.molten_black_sapphire.get(), DreamtinkerCommon.black_sapphire.get(), FluidValues.GEM, consumer);
         meltCast(DreamtinkerFluids.molten_scolecite.get(), DreamtinkerCommon.scolecite.get(), FluidValues.GEM, consumer);
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.snake_fang.get()), DreamtinkerFluids.snake_essence, FluidValues.GEM, 0.5f)
+                            .setDamagable(FluidValues.GEM_SHARD)
+                            .save(consumer, location(Melting_folder + "snake_fang/gem"));
 
         meltCast(DreamtinkerFluids.molten_orichalcum.get(), DreamtinkerCommon.orichalcum_nugget.get(), FluidValues.NUGGET, consumer);
         meltCast(DreamtinkerFluids.molten_orichalcum.get(), DreamtinkerCommon.orichalcum.get(), FluidValues.INGOT, consumer);
@@ -1102,6 +1106,9 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                 .addSpirit(SpiritTypeRegistry.SACRED_SPIRIT, 6)
                 .addSpirit(SpiritTypeRegistry.ELDRITCH_SPIRIT, 6)
                 .build(consumer, "malum_" + "liquid_arcana_juice_bucket");
+
+        SeveringRecipeBuilder.severing(EntityIngredient.of(EntityType.ENDER_DRAGON), DreamtinkerCommon.snake_fang.get())
+                             .save(consumer, location(serving_folder + "snake_fang"));
     }
 
     String partFolder = "tools/parts/";

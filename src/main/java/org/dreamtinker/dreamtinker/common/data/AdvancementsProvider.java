@@ -237,6 +237,25 @@ public class AdvancementsProvider extends GenericDataProvider {
                 )
         );
 
+        Advancement snakeFang =
+                builder(DreamtinkerCommon.snake_fang.get(),
+                        resource("materials/snake_fang"),
+                        dreamtinkerRoot,
+                        FrameType.TASK,
+                        builder -> builder.addCriterion(
+                                "has_snake_fang",
+                                hasItem(DreamtinkerCommon.snake_fang.get())
+                        ));
+
+        builder(DreamtinkerCommon.eden_fruit.get(),
+                resource("materials/eden_fruit"),
+                snakeFang,
+                FrameType.TASK,
+                builder -> builder.addCriterion(
+                        "has_eden_fruit",
+                        hasItem(DreamtinkerCommon.eden_fruit.get())
+                ));
+
         /*
          * Ruin Wheel Steel material icon
          */

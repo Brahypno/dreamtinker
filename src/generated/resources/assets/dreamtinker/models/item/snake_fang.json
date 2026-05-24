@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "dreamtinker:item/materials/snake_fang"
+  }
+}

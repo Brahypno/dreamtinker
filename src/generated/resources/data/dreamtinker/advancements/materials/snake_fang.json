@@ -1,0 +1,39 @@
+{
+  "parent": "dreamtinker:root",
+  "criteria": {
+    "has_snake_fang": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dreamtinker:snake_fang"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.dreamtinker.materials.snake_fang.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "dreamtinker:snake_fang",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.dreamtinker.materials.snake_fang.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_snake_fang"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1218,6 +1218,8 @@
   "item.dreamtinker.spiral_spin": "Spiral Spin",
   "item.dreamtinker.iron_golem_heart": "Heart of Iron Golem",
   "tooltip.dreamtinker.iron_golem_heart": "15% chance obtainable if iron golem killed by enemy",
+  "item.dreamtinker.snake_fang": "Snake Fang",
+  "tooltip.dreamtinker.snake_fang": "Only Obtainable when kill ender dragon with 'Severing'",
 
   "block.dreamtinker.metallivorous_stibium_lupus_block": "Lupus Metallorum Block",
   "block.dreamtinker.crying_obsidian_pane": "Crying Obsidian Pane",
@@ -1502,6 +1504,11 @@
   "fluid.dreamtinker.molten_atonement_silver.fluid_effect": "Molten Atonement Silver",
   "block.dreamtinker.molten_atonement_silver": "Molten Atonement Silver",
   "item.dreamtinker.molten_atonement_silver_bucket": "Molten Atonement Silver Bucket",
+  "fluid_type.dreamtinker.snake_essence": "Snake Essence",
+  "fluid.dreamtinker.snake_essence": "Snake Essence",
+  "fluid.dreamtinker.snake_essence.fluid_effect": "Snake Essence",
+  "block.dreamtinker.snake_essence_fluid": "Snake Essence",
+  "item.dreamtinker.snake_essence_bucket": "Snake Essence Bucket",
 
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "bleed",
   "fluid_effect.tconstruct.damage.explosion": "explosion",
@@ -1572,7 +1579,10 @@
   "advancements.dreamtinker.materials.transmutation_gold_ingot.description": "Gold is only one form at which change arrives.",
   "advancements.dreamtinker.materials.shadow_silver_ingot.title": "Shadow Silver",
   "advancements.dreamtinker.materials.shadow_silver_ingot.description": "Silver`s shadow ego",
-
+"advancements.dreamtinker.materials.snake_fang.title": "Snake Fang",
+"advancements.dreamtinker.materials.snake_fang.description": "Dragon and serpent are one",
+"advancements.dreamtinker.materials.eden_fruit.title": "Fruit of Eden",
+"advancements.dreamtinker.materials.eden_fruit.description": "Knowing good and evil",
   "stat.tconstruct.harvest_tier.dreamtinker.lupus": "Lupus",
   "stat.tconstruct.harvest_tier.dreamtinker.netheritte": "Netheritte",
   "stat.tconstruct.harvest_tier.dreamtinker.transmutation_gold": "Transmutation Gold",
