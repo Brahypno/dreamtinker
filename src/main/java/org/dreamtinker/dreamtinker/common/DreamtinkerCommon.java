@@ -233,7 +233,7 @@ public class DreamtinkerCommon extends DreamtinkerModule {
     });
     public static final RegistryObject<Item> eden_fruit = ITEMS.register("eden_fruit", () -> new Item(
             new Item.Properties().rarity(Rarity.EPIC).food(Foods.ENCHANTED_GOLDEN_APPLE).fireResistant()));
-    public static final RegistryObject<Item> void_pearl = ITEMS.register("void_pearl", () -> new void_pearl((new Item.Properties().rarity(
+    public static final RegistryObject<Item> void_pearl = ITEMS.register("void_pearl", () -> new voidPearl((new Item.Properties().rarity(
             Rarity.UNCOMMON)).stacksTo(16)));
 
     public static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {

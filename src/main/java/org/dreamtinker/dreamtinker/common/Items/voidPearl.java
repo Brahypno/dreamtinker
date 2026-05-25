@@ -27,6 +27,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.EntityTeleportEvent;
+import org.dreamtinker.dreamtinker.Entity.DreamtinkerEntityTypes;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.jetbrains.annotations.NotNull;
 
@@ -34,8 +35,8 @@ import java.util.List;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.voidPearlDamage;
 
-public class void_pearl extends EnderpearlItem {
-    public void_pearl(Properties p_41188_) {
+public class voidPearl extends EnderpearlItem {
+    public voidPearl(Properties p_41188_) {
         super(p_41188_);
     }
 
@@ -109,13 +110,15 @@ public class void_pearl extends EnderpearlItem {
         }
     }
 
-    private static class ThrownVoidPearl extends ThrownEnderpearl {
-        public ThrownVoidPearl(EntityType<? extends ThrownEnderpearl> p_37491_, Level p_37492_) {
+    public static class ThrownVoidPearl extends ThrownEnderpearl {
+        public ThrownVoidPearl(EntityType<? extends ThrownVoidPearl> p_37491_, Level p_37492_) {
             super(p_37491_, p_37492_);
         }
 
         public ThrownVoidPearl(Level p_37499_, LivingEntity p_37500_) {
-            super(p_37499_, p_37500_);
+            this(DreamtinkerEntityTypes.VOID_PEARL.get(), p_37499_);
+            this.setOwner(p_37500_);
+            this.setPos(p_37500_.getX(), p_37500_.getEyeY() - 0.1D, p_37500_.getZ());
         }
 
         @Override

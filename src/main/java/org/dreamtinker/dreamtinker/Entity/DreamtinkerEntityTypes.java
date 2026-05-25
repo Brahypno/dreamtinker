@@ -12,11 +12,16 @@ import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.DreamtinkerModule;
 import org.dreamtinker.dreamtinker.common.Items.IronBallItem;
+import org.dreamtinker.dreamtinker.common.Items.voidPearl.ThrownVoidPearl;
 import org.dreamtinker.dreamtinker.library.client.*;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DreamtinkerEntityTypes extends DreamtinkerModule {
 
+    public static final RegistryObject<EntityType<ThrownVoidPearl>> VOID_PEARL =
+            ENTITIES.register("void_pearl", () -> EntityType.Builder.<ThrownVoidPearl>of(ThrownVoidPearl::new, MobCategory.MISC)
+                                                                    .sized(0.25F, 0.25F).clientTrackingRange(4)
+                                                                    .updateInterval(10));
     public static final RegistryObject<EntityType<NarcissusFluidProjectile>> NarcissusSpitEntity =
             ENTITIES.register("narcissus_fluid_spit",
                               () -> EntityType.Builder.<NarcissusFluidProjectile>of(NarcissusFluidProjectile::new, MobCategory.MISC).sized(1F, 1F)
@@ -60,6 +65,7 @@ public class DreamtinkerEntityTypes extends DreamtinkerModule {
 
     @SubscribeEvent
     static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(DreamtinkerEntityTypes.VOID_PEARL.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(DreamtinkerEntityTypes.NarcissusSpitEntity.get(), NarcissusFluidProjectileRenderer::new);
         event.registerEntityRenderer(DreamtinkerEntityTypes.SLASH_ORBIT.get(), SlashOrbitRenderer::new);
         event.registerEntityRenderer(DreamtinkerEntityTypes.AggressiveFOX.get(), AggressiveFoxRender::new);
