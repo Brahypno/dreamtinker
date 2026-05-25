@@ -367,7 +367,7 @@ public class DeathShredder extends Modifier implements MeleeDamageModifierHook, 
                         AttributeModifier cur = attr_instance.getModifier(uuid);
                         if (cur == null){
                             attr_instance.removeModifier(uuid);
-                            attr_instance.addPermanentModifier(new AttributeModifier(uuid, attr.getDescriptionId(), -0.4f,
+                            attr_instance.addPermanentModifier(new AttributeModifier(uuid, this.getTranslationKey(), -0.4f,
                                                                                      AttributeModifier.Operation.MULTIPLY_BASE));
                         }
                     }

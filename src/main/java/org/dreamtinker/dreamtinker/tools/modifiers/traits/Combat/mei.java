@@ -150,19 +150,19 @@ public class mei extends Modifier implements ModifierRemovalHook, ValidateModifi
         }else {
             mod = 0.13 * level / 100;
         }
-        consumer.accept(Attributes.ATTACK_DAMAGE, new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.ATTACK_DAMAGE.getDescriptionId(), mod,
+        consumer.accept(Attributes.ATTACK_DAMAGE, new AttributeModifier(UUID.fromString(tool_attribute_uuid), this.getTranslationKey(), mod,
                                                                         AttributeModifier.Operation.MULTIPLY_BASE));
-        consumer.accept(Attributes.ATTACK_SPEED, new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.ATTACK_SPEED.getDescriptionId(), mod,
+        consumer.accept(Attributes.ATTACK_SPEED, new AttributeModifier(UUID.fromString(tool_attribute_uuid), this.getTranslationKey(), mod,
                                                                        AttributeModifier.Operation.MULTIPLY_BASE));
         if (200 <= level){
-            consumer.accept(Attributes.ARMOR, new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.ARMOR.getDescriptionId(), mod,
+            consumer.accept(Attributes.ARMOR, new AttributeModifier(UUID.fromString(tool_attribute_uuid), this.getTranslationKey(), mod,
                                                                     AttributeModifier.Operation.MULTIPLY_BASE));
             consumer.accept(Attributes.ARMOR_TOUGHNESS,
-                            new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.ARMOR_TOUGHNESS.getDescriptionId(), mod,
+                            new AttributeModifier(UUID.fromString(tool_attribute_uuid), this.getTranslationKey(), mod,
                                                   AttributeModifier.Operation.MULTIPLY_BASE));
         }
         if (300 <= level && tool.getModifierLevel(DreamtinkerModifiers.despair_mist.getId()) < 1)
-            consumer.accept(Attributes.MOVEMENT_SPEED, new AttributeModifier(UUID.fromString(tool_attribute_uuid), Attributes.MOVEMENT_SPEED.getDescriptionId(),
+            consumer.accept(Attributes.MOVEMENT_SPEED, new AttributeModifier(UUID.fromString(tool_attribute_uuid), this.getTranslationKey(),
                                                                              2.0 * (level - 100) / 100 + .1, AttributeModifier.Operation.MULTIPLY_BASE));
     }
 
@@ -205,7 +205,7 @@ public class mei extends Modifier implements ModifierRemovalHook, ValidateModifi
                         AttributeModifier cur = attr_instance.getModifier(UUID.fromString(player_attribute_uuid));
                         if ((cur == null) || mod < cur.getAmount()){
                             attr_instance.removeModifier(UUID.fromString(player_attribute_uuid));
-                            attr_instance.addPermanentModifier(new AttributeModifier(UUID.fromString(player_attribute_uuid), attr.getDescriptionId(), mod,
+                            attr_instance.addPermanentModifier(new AttributeModifier(UUID.fromString(player_attribute_uuid), this.getTranslationKey(), mod,
                                                                                      AttributeModifier.Operation.MULTIPLY_BASE));
                         }
                     }

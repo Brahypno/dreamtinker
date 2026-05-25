@@ -80,7 +80,7 @@ public class MalumEvolution extends Modifier implements MeleeDamageModifierHook,
         if (!tool.isBroken() && slot == EquipmentSlot.MAINHAND && 0 < tool.getPersistentData().getInt(Haunted))
             consumer.accept(LodestoneAttributeRegistry.MAGIC_DAMAGE.get(),
                             new AttributeModifier(magic_damage,
-                                                  LodestoneAttributeRegistry.MAGIC_DAMAGE.get().getDescriptionId(),
+                                                  this.getTranslationKey(),
                                                   2.0 * tool.getPersistentData().getInt(Haunted),
                                                   AttributeModifier.Operation.ADDITION));
     }

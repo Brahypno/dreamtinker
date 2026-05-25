@@ -76,7 +76,7 @@ public class addSilenceGloveCurio {
             }
             attributes.put(Attributes.ATTACK_SPEED,
                            new AttributeModifier(UUID.nameUUIDFromBytes((stack + "silence_attack_speed").getBytes()),
-                                                 Attributes.ATTACK_SPEED.getDescriptionId(),
+                                                 stack.getDescriptionId(),
                                                  tool.getStats().get(ToolStats.ATTACK_SPEED) - SilenceGloveBaseLineAttackSpeed.get(),
                                                  AttributeModifier.Operation.ADDITION));
 

@@ -40,14 +40,15 @@ public class broken_vessel extends Modifier implements EquipmentChangeModifierHo
         if (!data.contains(TAG_BASE_HEALTH)){
             data.putFloat(TAG_BASE_HEALTH, (float) attr.getBaseValue());
             attr.removeModifier(HEALTH_BOOST_ID);
-            attr.addPermanentModifier(new AttributeModifier(HEALTH_BOOST_ID, TAG_BASE_HEALTH, attr.getBaseValue() * MAX_HEALTH_MULTIPLIER,  // 加 baseValue，即翻倍
-                                                            AttributeModifier.Operation.ADDITION));
+            attr.addPermanentModifier(
+                    new AttributeModifier(HEALTH_BOOST_ID, this.getTranslationKey(), attr.getBaseValue() * MAX_HEALTH_MULTIPLIER,  // 加 baseValue，即翻倍
+                                          AttributeModifier.Operation.ADDITION));
 
             AttributeInstance attr2 = entity.getAttribute(DreamtinkerAttributes.BLOOD_IN_SHELL.get());
             if (attr2 != null){
                 attr2.removeModifier(HEALTH_BOOST_ID);
                 attr2.addPermanentModifier(
-                        new AttributeModifier(HEALTH_BOOST_ID, TAG_BASE_HEALTH, attr.getBaseValue() * MAX_HEALTH_MULTIPLIER,  // 加 baseValue，即翻倍
+                        new AttributeModifier(HEALTH_BOOST_ID, this.getTranslationKey(), attr.getBaseValue() * MAX_HEALTH_MULTIPLIER,  // 加 baseValue，即翻倍
                                               AttributeModifier.Operation.ADDITION));
             }
         }

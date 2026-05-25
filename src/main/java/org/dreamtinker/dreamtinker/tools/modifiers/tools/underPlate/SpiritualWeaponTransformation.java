@@ -50,13 +50,13 @@ public class SpiritualWeaponTransformation extends NoLevelsModifier implements A
                 case CHEST -> {
                     consumer.accept(LodestoneAttributeRegistry.MAGIC_DAMAGE.get(),
                                     new AttributeModifier(uuid,
-                                                          LodestoneAttributeRegistry.MAGIC_DAMAGE.get().getDescriptionId(),
+                                                          this.getTranslationKey(),
                                                           multi,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
 
                     consumer.accept(LodestoneAttributeRegistry.MAGIC_RESISTANCE.get(),
                                     new AttributeModifier(uuid,
-                                                          LodestoneAttributeRegistry.MAGIC_RESISTANCE.get().getDescriptionId(),
+                                                          this.getTranslationKey(),
                                                           Math.min(0.4, multi / 4),
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                 }
@@ -64,36 +64,36 @@ public class SpiritualWeaponTransformation extends NoLevelsModifier implements A
                 case LEGS -> {
                     consumer.accept(AttributeRegistry.ARCANE_RESONANCE.get(),
                                     new AttributeModifier(uuid,
-                                                          AttributeRegistry.SOUL_WARD_RECOVERY_RATE.get().getDescriptionId(),
+                                                          this.getTranslationKey(),
                                                           multi,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                     consumer.accept(AttributeRegistry.MALIGNANT_CONVERSION.get(),
                                     new AttributeModifier(uuid,
-                                                          AttributeRegistry.MALIGNANT_CONVERSION.get().getDescriptionId(),
+                                                          this.getTranslationKey(),
                                                           -multi,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                 }
                 case FEET -> {
                     consumer.accept(AttributeRegistry.SOUL_WARD_INTEGRITY.get(),
                                     new AttributeModifier(uuid,
-                                                          AttributeRegistry.SOUL_WARD_INTEGRITY.get().getDescriptionId(),
+                                                          this.getTranslationKey(),
                                                           multi,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                     consumer.accept(AttributeRegistry.SOUL_WARD_RECOVERY_RATE.get(),
                                     new AttributeModifier(uuid,
-                                                          AttributeRegistry.SOUL_WARD_RECOVERY_RATE.get().getDescriptionId(),
+                                                          this.getTranslationKey(),
                                                           -multi / 2,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                 }
                 case HEAD -> {
                     consumer.accept(AttributeRegistry.SCYTHE_PROFICIENCY.get(),
                                     new AttributeModifier(uuid,
-                                                          AttributeRegistry.SCYTHE_PROFICIENCY.get().getDescriptionId(),
+                                                          this.getTranslationKey(),
                                                           multi,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                     consumer.accept(AttributeRegistry.SCYTHE_PROFICIENCY.get(),
                                     new AttributeModifier(uuid,
-                                                          AttributeRegistry.SCYTHE_PROFICIENCY.get().getDescriptionId(),
+                                                          this.getTranslationKey(),
                                                           -multi / 2,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                 }

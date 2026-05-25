@@ -38,7 +38,7 @@ public class DespairRain extends Modifier implements MeleeDamageModifierHook, Me
         if (!tool.isBroken())
             consumer.accept(TinkerAttributes.CRITICAL_DAMAGE.get(),
                             new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
-                                                  TinkerAttributes.CRITICAL_DAMAGE.get().getDescriptionId(),
+                                                  this.getTranslationKey(),
                                                   4 + modifier.getLevel(),
                                                   AttributeModifier.Operation.MULTIPLY_TOTAL));
     }
@@ -56,7 +56,7 @@ public class DespairRain extends Modifier implements MeleeDamageModifierHook, Me
                     debuff = cur.getAmount();
                 attr_instance.removeModifier(uuid);
                 attr_instance.addTransientModifier(
-                        new AttributeModifier(uuid, Attributes.MAX_HEALTH.getDescriptionId(), debuff - damageDealt * 0.1f * modifier.getLevel(),
+                        new AttributeModifier(uuid, this.getTranslationKey(), debuff - damageDealt * 0.1f * modifier.getLevel(),
                                               AttributeModifier.Operation.ADDITION));
             }
 

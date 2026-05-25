@@ -38,6 +38,9 @@ import java.util.List;
 import java.util.UUID;
 
 public class arsNovaUtils {
+    private static final String MAX_MANA_ARMOR_NAME = "attribute_modifier.dreamtinker.max_mana_armor";
+    private static final String MANA_REGEN_ARMOR_NAME = "attribute_modifier.dreamtinker.mana_regen_armor";
+
     public static void MeleeSpellDamagePre(LivingEntity shooter, Entity target, InteractionHand hand, ToolStack tool, float damage) {
         ToolAttackContext context = InteractionHand.MAIN_HAND == hand ?
                                     ToolAttackContext.attacker(shooter).target(target).hand(hand).applyAttributes().defaultCooldown().build() :
@@ -103,9 +106,10 @@ public class arsNovaUtils {
             IPerkHolder<ItemStack> perkHolder = PerkUtil.getPerkHolder(stack);
             if (perkHolder != null){
                 attributes.put((Attribute) PerkAttributes.MAX_MANA.get(),
-                               new AttributeModifier(uuid, "max_mana_armor", (double) (30 * (perkHolder.getTier() + 1)), AttributeModifier.Operation.ADDITION));
+                               new AttributeModifier(uuid, MAX_MANA_ARMOR_NAME, (double) (30 * (perkHolder.getTier() + 1)),
+                                                     AttributeModifier.Operation.ADDITION));
                 attributes.put((Attribute) PerkAttributes.MANA_REGEN_BONUS.get(),
-                               new AttributeModifier(uuid, "mana_regen_armor", (double) (perkHolder.getTier() + 1), AttributeModifier.Operation.ADDITION));
+                               new AttributeModifier(uuid, MANA_REGEN_ARMOR_NAME, (double) (perkHolder.getTier() + 1), AttributeModifier.Operation.ADDITION));
 
                 for (PerkInstance perkInstance : perkHolder.getPerkInstances()) {
                     IPerk perk = perkInstance.getPerk();

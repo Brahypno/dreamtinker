@@ -31,13 +31,13 @@ public class ScriptumAttributes extends NoLevelsModifier implements AttributesMo
         if (!tool.isBroken()){
             consumer.accept(PerkAttributes.MANA_REGEN_BONUS.get(),
                             new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
-                                                  PerkAttributes.MANA_REGEN_BONUS.get().getDescriptionId(),
+                                                  this.getTranslationKey(),
                                                   Math.min(ArtsRegenBonus.get(),
                                                            tool.getStats().get(ToolStats.ATTACK_SPEED) + tool.getStats().get(ToolStats.VELOCITY)),
                                                   AttributeModifier.Operation.ADDITION));
             consumer.accept(PerkAttributes.MAX_MANA.get(),
                             new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
-                                                  PerkAttributes.MAX_MANA.get().getDescriptionId(),
+                                                  this.getTranslationKey(),
                                                   Math.min(ArtsMaxManaBonus.get(),
                                                            3 * tool.getStats().get(ToolStats.MINING_SPEED) * tool.getStats().get(ToolStats.DRAW_SPEED)),
                                                   AttributeModifier.Operation.ADDITION));

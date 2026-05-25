@@ -79,18 +79,18 @@ public class WeaponTransformation extends Modifier implements InventoryTickModif
                 case CHEST -> {
                     consumer.accept(Attributes.LUCK,
                                     new AttributeModifier(uuid,
-                                                          Attributes.LUCK.getDescriptionId(),
+                                                          this.getTranslationKey(),
                                                           multi,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
 
                     consumer.accept(TinkerAttributes.BAD_EFFECT_DURATION.get(),
                                     new AttributeModifier(uuid,
-                                                          TinkerAttributes.BAD_EFFECT_DURATION.get().getDescriptionId(),
+                                                          this.getTranslationKey(),
                                                           Math.min(0.4, multi / 4),
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                     consumer.accept(Attributes.ATTACK_SPEED,
                                     new AttributeModifier(uuid,
-                                                          Attributes.ATTACK_SPEED.getDescriptionId(),
+                                                          this.getTranslationKey(),
                                                           multi,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
 
@@ -99,47 +99,47 @@ public class WeaponTransformation extends Modifier implements InventoryTickModif
                 case LEGS -> {//see hurt event
                     consumer.accept(TinkerAttributes.GOOD_EFFECT_DURATION.get(),
                                     new AttributeModifier(uuid,
-                                                          TinkerAttributes.BAD_EFFECT_DURATION.get().getDescriptionId(),
+                                                          this.getTranslationKey(),
                                                           -Math.min(0.35, multi / 4),
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                     consumer.accept(TinkerAttributes.EXPERIENCE_MULTIPLIER.get(),
                                     new AttributeModifier(uuid,
-                                                          TinkerAttributes.EXPERIENCE_MULTIPLIER.get().getDescriptionId(),
+                                                          this.getTranslationKey(),
                                                           multi * 4,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                 }
                 case FEET -> {
                     consumer.accept(Attributes.ATTACK_DAMAGE,
                                     new AttributeModifier(uuid,
-                                                          Attributes.ATTACK_DAMAGE.getDescriptionId(),
+                                                          this.getTranslationKey(),
                                                           multi,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
 
                     consumer.accept(TinkerAttributes.MINING_SPEED_MULTIPLIER.get(),
                                     new AttributeModifier(uuid,
-                                                          TinkerAttributes.MINING_SPEED_MULTIPLIER.get().getDescriptionId(),
+                                                          this.getTranslationKey(),
                                                           multi,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                     consumer.accept(Attributes.MOVEMENT_SPEED,
                                     new AttributeModifier(uuid,
-                                                          Attributes.MOVEMENT_SPEED.getDescriptionId(),
+                                                          this.getTranslationKey(),
                                                           -Math.min(multi, 0.15),
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                 }
                 case HEAD -> {
                     consumer.accept(Attributes.MAX_HEALTH,
                                     new AttributeModifier(uuid,
-                                                          Attributes.MAX_HEALTH.getDescriptionId(),
+                                                          this.getTranslationKey(),
                                                           multi,
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                     consumer.accept(Attributes.KNOCKBACK_RESISTANCE,
                                     new AttributeModifier(uuid,
-                                                          Attributes.KNOCKBACK_RESISTANCE.getDescriptionId(),
+                                                          this.getTranslationKey(),
                                                           -Math.min(.50f, multi),
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                     consumer.accept(ForgeMod.ENTITY_GRAVITY.get(),
                                     new AttributeModifier(uuid,
-                                                          ForgeMod.ENTITY_GRAVITY.get().getDescriptionId(),
+                                                          this.getTranslationKey(),
                                                           Math.min(.25f, multi),
                                                           AttributeModifier.Operation.MULTIPLY_TOTAL));
                 }

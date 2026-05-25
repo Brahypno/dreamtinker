@@ -72,7 +72,7 @@ public class RainbowCatcher extends Modifier implements InventoryTickModifierHoo
         if (!tool.isBroken() && tool.getPersistentData().getBoolean(TAG_IN_RAIN))
             consumer.accept(TinkerAttributes.JUMP_COUNT.get(),
                             new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
-                                                  TinkerAttributes.JUMP_COUNT.get().getDescriptionId(),
+                                                  this.getTranslationKey(),
                                                   modifier.getLevel() * 2,
                                                   AttributeModifier.Operation.ADDITION));
     }

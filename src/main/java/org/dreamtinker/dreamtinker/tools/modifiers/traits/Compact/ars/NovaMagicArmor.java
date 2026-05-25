@@ -71,7 +71,7 @@ public class NovaMagicArmor extends Modifier implements InventoryTickModifierHoo
                         Attribute attr = e.getKey();
                         AttributeModifier mod = e.getValue();
                         AttributeModifier scaled = new AttributeModifier(
-                                mod.getId(), mod.getName(), mod.getAmount(), mod.getOperation()
+                                mod.getId(), this.getTranslationKey(), mod.getAmount(), mod.getOperation()
                         );
                         event.addModifier(attr, scaled);
                     }

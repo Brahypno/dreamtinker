@@ -258,12 +258,12 @@ public class EldritchPan extends Modifier implements MeleeHitModifierHook, Damag
                 String tool_attribute_uuid = "50c030b6-e8ef-4a99-9a6a-9c231b2365a8";
                 consumer.accept(Attributes.ATTACK_DAMAGE,
                                 new AttributeModifier(UUID.fromString(tool_attribute_uuid),
-                                                      Attributes.ATTACK_DAMAGE.getDescriptionId(),
+                                                      this.getTranslationKey(),
                                                       com.aizistral.enigmaticlegacy.items.EldritchPan.uniqueDamageGain.getValue() * kills,
                                                       AttributeModifier.Operation.ADDITION));
                 consumer.accept(Attributes.ARMOR,
                                 new AttributeModifier(UUID.fromString(tool_attribute_uuid),
-                                                      Attributes.ARMOR.getDescriptionId(),
+                                                      this.getTranslationKey(),
                                                       com.aizistral.enigmaticlegacy.items.EldritchPan.uniqueArmorGain.getValue() * kills,
                                                       AttributeModifier.Operation.ADDITION));
             }

@@ -1711,6 +1711,8 @@
 
   "attribute.name.dreamtinker.generic.fate_veil": "命运面纱",
   "attribute.name.dreamtinker.generic.blood_in_shell": "壳中心",
+  "attribute_modifier.dreamtinker.max_mana_armor": "魔力护甲：最大魔力",
+  "attribute_modifier.dreamtinker.mana_regen_armor": "魔力护甲：魔力恢复",
 
   "item.tconstruct.creative_slot.delusions": "创造妄见槽",
   "stat.tconstruct.slot.prefix.delusions": "妄见槽：",

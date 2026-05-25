@@ -21,7 +21,6 @@ import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.StarReg
 
 public class star_regulus extends Item {
     private static final UUID HEALTH_BOOST_ID = UUID.fromString("e7a5d3c2-91f8-4b67-a1e3-cf0a9b8d6e5f");
-    private static final String TAG_STAR_REGULUS = "star_regulus";
 
     public star_regulus(Item.Properties p_41383_) {
         super(p_41383_);
@@ -42,7 +41,7 @@ public class star_regulus extends Item {
             AttributeInstance attr = player.getAttribute(Attributes.MAX_HEALTH);
             if (attr != null && attr.getModifier(HEALTH_BOOST_ID) == null){
                 attr.addPermanentModifier(
-                        new AttributeModifier(HEALTH_BOOST_ID, TAG_STAR_REGULUS, StarRegulusMaxHP.get(), AttributeModifier.Operation.ADDITION));
+                        new AttributeModifier(HEALTH_BOOST_ID, this.getDescriptionId(), StarRegulusMaxHP.get(), AttributeModifier.Operation.ADDITION));
             }
         }
 

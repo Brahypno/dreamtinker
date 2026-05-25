@@ -111,7 +111,7 @@ public class SplendourHeart extends Modifier implements MeleeHitModifierHook, In
             level = level <= 0 ? -(level) - 1 : level;
             consumer.accept(ForgeMod.ENTITY_REACH.get(),
                             new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
-                                                  ForgeMod.ENTITY_REACH.get().getDescriptionId(),
+                                                  this.getTranslationKey(),
                                                   level,
                                                   AttributeModifier.Operation.ADDITION));
         }

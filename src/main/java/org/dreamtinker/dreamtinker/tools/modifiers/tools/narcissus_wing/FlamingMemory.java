@@ -67,7 +67,7 @@ public class FlamingMemory extends Modifier implements MeleeHitModifierHook, Mon
         if (!tool.isBroken())
             consumer.accept(ForgeMod.ENTITY_REACH.get(),
                             new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
-                                                  ForgeMod.ENTITY_REACH.get().getDescriptionId(),
+                                                  this.getTranslationKey(),
                                                   3 + levels(tool),
                                                   AttributeModifier.Operation.ADDITION));
     }

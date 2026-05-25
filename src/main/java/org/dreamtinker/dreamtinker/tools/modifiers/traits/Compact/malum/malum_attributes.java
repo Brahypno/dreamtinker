@@ -50,7 +50,7 @@ public class malum_attributes extends Modifier implements AttributesModifierHook
                 Attribute attr = e.getKey();
                 AttributeModifier mod = e.getValue();
                 AttributeModifier scaled = new AttributeModifier(
-                        mod.getId(), mod.getName(), mod.getAmount() * modifierEntry.getLevel(), mod.getOperation()
+                        mod.getId(), this.getTranslationKey(), mod.getAmount() * modifierEntry.getLevel(), mod.getOperation()
                 );
                 biConsumer.accept(attr, scaled);
             }

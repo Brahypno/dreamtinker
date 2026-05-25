@@ -20,15 +20,11 @@ public class PressingFrontEffect extends MobEffect {
     private static final UUID GRAVITY_UUID =
             UUID.fromString("d4f0f1bc-1e7a-49d8-9b77-9e4a2b0f6671");
 
-    private static final String ARMOR_NAME = "dreamtinker_pressing_front_armor";
-    private static final String TOUGHNESS_NAME = "dreamtinker_pressing_front_toughness";
-    private static final String GRAVITY_NAME = "dreamtinker_pressing_front_gravity";
-
     public PressingFrontEffect() {
         super(MobEffectCategory.HARMFUL, 0xB8842A);
     }
 
-    private static void applyGravityModifier(LivingEntity entity, int amplifier) {
+    private void applyGravityModifier(LivingEntity entity, int amplifier) {
         AttributeInstance gravity = entity.getAttribute(ForgeMod.ENTITY_GRAVITY.get());
         if (gravity == null){
             return;
@@ -40,13 +36,13 @@ public class PressingFrontEffect extends MobEffect {
 
         gravity.addTransientModifier(new AttributeModifier(
                 GRAVITY_UUID,
-                GRAVITY_NAME,
+                this.getDescriptionId(),
                 gravityBonus,
                 AttributeModifier.Operation.MULTIPLY_TOTAL
         ));
     }
 
-    private static void applyDynamicArmorReduction(LivingEntity entity, int amplifier) {
+    private void applyDynamicArmorReduction(LivingEntity entity, int amplifier) {
         AttributeInstance armor = entity.getAttribute(Attributes.ARMOR);
         AttributeInstance toughness = entity.getAttribute(Attributes.ARMOR_TOUGHNESS);
 
@@ -61,7 +57,7 @@ public class PressingFrontEffect extends MobEffect {
             if (armorReduction > 0.0D){
                 armor.addTransientModifier(new AttributeModifier(
                         ARMOR_UUID,
-                        ARMOR_NAME,
+                        this.getDescriptionId(),
                         -armorReduction,
                         AttributeModifier.Operation.ADDITION
                 ));
@@ -75,7 +71,7 @@ public class PressingFrontEffect extends MobEffect {
             if (toughnessReduction > 0.0D){
                 toughness.addTransientModifier(new AttributeModifier(
                         TOUGHNESS_UUID,
-                        TOUGHNESS_NAME,
+                        this.getDescriptionId(),
                         -toughnessReduction,
                         AttributeModifier.Operation.ADDITION
                 ));

@@ -162,28 +162,28 @@ public class pupalOmen extends Modifier implements ModifyDamageModifierHook, Pro
         if (moth < scale){
             consumer.accept(Attributes.ARMOR,
                             new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
-                                                  Attributes.ARMOR.getDescriptionId(),
+                                                  this.getTranslationKey(),
                                                   buff * 0.04,
                                                   AttributeModifier.Operation.ADDITION));
             consumer.accept(Attributes.ARMOR_TOUGHNESS,
                             new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
-                                                  Attributes.ARMOR_TOUGHNESS.getDescriptionId(),
+                                                  this.getTranslationKey(),
                                                   buff * 0.02,
                                                   AttributeModifier.Operation.ADDITION));
             consumer.accept(Attributes.KNOCKBACK_RESISTANCE,
                             new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
-                                                  Attributes.KNOCKBACK_RESISTANCE.getDescriptionId(),
+                                                  this.getTranslationKey(),
                                                   buff * 0.04,
                                                   AttributeModifier.Operation.ADDITION));
             consumer.accept(DreamtinkerAttributes.BLOOD_IN_SHELL.get(),
                             new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
-                                                  DreamtinkerAttributes.BLOOD_IN_SHELL.get().getDescriptionId(),
+                                                  this.getTranslationKey(),
                                                   buff * 0.04,
                                                   AttributeModifier.Operation.ADDITION));
         }else if (scale < moth){
             consumer.accept(DreamtinkerAttributes.FATE_VEIL.get(),
                             new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
-                                                  DreamtinkerAttributes.FATE_VEIL.get().getDescriptionId(),
+                                                  this.getTranslationKey(),
                                                   buff * 0.15,
                                                   AttributeModifier.Operation.ADDITION));
         }

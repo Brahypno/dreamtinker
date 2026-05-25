@@ -56,8 +56,9 @@ public class TwoHeadedSeven extends Modifier implements ProjectileHitModifierHoo
     public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target, boolean notBlocked) {
         if (null != target && target.level() instanceof ServerLevel sl){
 
-            AttributeModifier neg = new AttributeModifier(UUID.nameUUIDFromBytes(modifier.getId().toString().getBytes()), "def_suppress", Integer.MIN_VALUE,
-                                                          AttributeModifier.Operation.ADDITION);
+            AttributeModifier neg =
+                    new AttributeModifier(UUID.nameUUIDFromBytes(modifier.getId().toString().getBytes()), this.getTranslationKey(), Integer.MIN_VALUE,
+                                          AttributeModifier.Operation.ADDITION);
             AttributeInstance attr = target.getAttribute(Attributes.ARMOR);
             if (null != attr && attr.getModifier(UUID.nameUUIDFromBytes(modifier.getId().toString().getBytes())) == null)
                 attr.addTransientModifier(neg);

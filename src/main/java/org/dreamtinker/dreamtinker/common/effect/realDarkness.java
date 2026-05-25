@@ -39,7 +39,7 @@ public class realDarkness extends MobEffect {
         var inst = map.getInstance(Attributes.FOLLOW_RANGE);
         if (inst != null && inst.getModifier(FOLLOW_RANGE_UUID) == null){
             // MULTIPLY_TOTAL = -1.0 ⇒ 最终值 = 基础*(1-1)=0（再加上其他来源，基本≈0）
-            inst.addPermanentModifier(new AttributeModifier(FOLLOW_RANGE_UUID, "obscured_follow_range_zero", -1.0, // -100%
+            inst.addPermanentModifier(new AttributeModifier(FOLLOW_RANGE_UUID, this.getDescriptionId(), -1.0, // -100%
                                                             AttributeModifier.Operation.MULTIPLY_TOTAL));
         }
     }

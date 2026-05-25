@@ -71,17 +71,17 @@ public class EwigeEiderkunft extends Modifier implements ToolDamageModifierHook,
                 double buff = 13 * Math.log1p(breaks) / 100f;
                 consumer.accept(Attributes.ATTACK_DAMAGE,
                                 new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
-                                                      Attributes.ATTACK_DAMAGE.getDescriptionId(),
+                                                      this.getTranslationKey(),
                                                       buff,
                                                       AttributeModifier.Operation.MULTIPLY_TOTAL));
                 consumer.accept(Attributes.ATTACK_SPEED,
                                 new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
-                                                      Attributes.ATTACK_SPEED.getDescriptionId(),
+                                                      this.getTranslationKey(),
                                                       buff,
                                                       AttributeModifier.Operation.MULTIPLY_TOTAL));
                 consumer.accept(Attributes.ATTACK_KNOCKBACK,
                                 new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
-                                                      Attributes.ATTACK_KNOCKBACK.getDescriptionId(),
+                                                      this.getTranslationKey(),
                                                       buff,
                                                       AttributeModifier.Operation.MULTIPLY_TOTAL));
             }

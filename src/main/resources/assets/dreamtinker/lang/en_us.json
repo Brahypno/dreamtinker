@@ -1715,6 +1715,8 @@
 
   "attribute.name.dreamtinker.generic.fate_veil": "Fate Veil",
   "attribute.name.dreamtinker.generic.blood_in_shell": "Shell Heart",
+  "attribute_modifier.dreamtinker.max_mana_armor": "Mana Armor: Maximum Mana",
+  "attribute_modifier.dreamtinker.mana_regen_armor": "Mana Armor: Mana Regeneration",
 
   "item.tconstruct.creative_slot.delusions": "Creative Delusion Slot",
   "stat.tconstruct.slot.prefix.delusions": "Delusion Slots: ",

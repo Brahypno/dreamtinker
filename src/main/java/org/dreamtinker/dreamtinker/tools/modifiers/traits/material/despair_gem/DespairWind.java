@@ -57,7 +57,7 @@ public class DespairWind extends Modifier implements ProjectileHitModifierHook, 
                     AttributeModifier cur = attr_instance.getModifier(uuid);
                     if ((cur == null)){
                         attr_instance.removeModifier(uuid);
-                        attr_instance.addPermanentModifier(new AttributeModifier(uuid, attr.getDescriptionId(), -1,
+                        attr_instance.addPermanentModifier(new AttributeModifier(uuid, this.getTranslationKey(), -1,
                                                                                  AttributeModifier.Operation.MULTIPLY_TOTAL));
                     }
                 }

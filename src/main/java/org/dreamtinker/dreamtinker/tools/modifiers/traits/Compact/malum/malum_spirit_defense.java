@@ -65,17 +65,17 @@ public class malum_spirit_defense extends Modifier implements ModifyDamageModifi
             return;
         consumer.accept(AttributeRegistry.ARCANE_RESONANCE.get(),
                         new AttributeModifier(ARMOR_SLOT_UUIDS.get(slot),
-                                              AttributeRegistry.ARCANE_RESONANCE.get().getDescriptionId(),
+                                              this.getTranslationKey(),
                                               SpiritDefence.get() * modifier.getLevel(),
                                               AttributeModifier.Operation.ADDITION));
         consumer.accept(AttributeRegistry.SOUL_WARD_CAP.get(),
                         new AttributeModifier(ARMOR_SLOT_UUIDS.get(slot),
-                                              AttributeRegistry.SOUL_WARD_CAP.get().getDescriptionId(),
+                                              this.getTranslationKey(),
                                               SpiritDefence.get() * modifier.getLevel(),
                                               AttributeModifier.Operation.ADDITION));
         consumer.accept(AttributeRegistry.SOUL_WARD_INTEGRITY.get(),
                         new AttributeModifier(ARMOR_SLOT_UUIDS.get(slot),
-                                              AttributeRegistry.SOUL_WARD_INTEGRITY.get().getDescriptionId(),
+                                              this.getTranslationKey(),
                                               SpiritDefence.get() * modifier.getLevel(),
                                               AttributeModifier.Operation.ADDITION));
     }
