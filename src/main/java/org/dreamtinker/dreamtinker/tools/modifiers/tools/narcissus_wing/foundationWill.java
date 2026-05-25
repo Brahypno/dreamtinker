@@ -43,19 +43,20 @@ import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.behavior.ProcessLootModifierHook;
-import slimeknights.tconstruct.library.modifiers.hook.combat.LootingModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.build.ModifierTraitHook;
 import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.KeybindInteractModifierHook;
 import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
-import slimeknights.tconstruct.library.tools.context.LootingContext;
 import slimeknights.tconstruct.library.tools.helper.ToolHarvestLogic;
 import slimeknights.tconstruct.library.tools.item.ModifiableItem;
+import slimeknights.tconstruct.library.tools.nbt.IToolContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.tools.TinkerModifiers;
+import slimeknights.tconstruct.tools.data.ModifierIds;
 
 import javax.annotation.Nullable;
 import java.util.ArrayDeque;
@@ -63,18 +64,18 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class foundationWill extends NoLevelsModifier implements LeftClickHook, ProcessLootModifierHook, KeybindInteractModifierHook, TooltipModifierHook, LootingModifierHook {
+public class foundationWill extends NoLevelsModifier implements ModifierTraitHook, LeftClickHook, ProcessLootModifierHook, KeybindInteractModifierHook, TooltipModifierHook {
     private final ResourceLocation TAG_MOD = Dreamtinker.getLocation("foundation_mode");
+
+    private static int getLevel(IToolContext toolStackView) {
+        return toolStackView.getModifierLevel(DreamtinkerModifiers.foundation_will.getId()) +
+               toolStackView.getModifierLevel(TinkerModifiers.expanded.get()) * 2;
+    }
 
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
         hookBuilder.addHook(this, ModifierHooks.PROCESS_LOOT, DreamtinkerHook.LEFT_CLICK, ModifierHooks.ARMOR_INTERACT, ModifierHooks.TOOLTIP,
-                            ModifierHooks.WEAPON_LOOTING);
+                            ModifierHooks.MODIFIER_TRAITS);
         super.registerHooks(hookBuilder);
-    }
-
-    private static int getLevel(IToolStackView toolStackView) {
-        return toolStackView.getModifierLevel(DreamtinkerModifiers.foundation_will.getId()) +
-               toolStackView.getModifierLevel(TinkerModifiers.expanded.get()) * 2;
     }
 
     @Override
@@ -103,6 +104,14 @@ public class foundationWill extends NoLevelsModifier implements LeftClickHook, P
     }
 
     @Override
+    public void addTraits(IToolContext context, ModifierEntry self, ModifierTraitHook.TraitBuilder builder, boolean firstEncounter) {
+        if (context.getPersistentData().getInt(TAG_MOD) == 0){
+            builder.add(ModifierIds.looting, getLevel(context));
+            builder.add(TinkerModifiers.severing.getId(), getLevel(context));
+        }
+    }
+
+    @Override
     public int getPriority() {
         return Integer.MIN_VALUE;
     }
@@ -117,14 +126,6 @@ public class foundationWill extends NoLevelsModifier implements LeftClickHook, P
                 net.minecraftforge.items.ItemHandlerHelper.giveItemToPlayer(sp, st);
         }
         list.clear();
-    }
-
-    @Override
-    public int updateLooting(IToolStackView iToolStackView, ModifierEntry modifierEntry, LootingContext lootingContext, int i) {
-        ModDataNBT dataNBT = iToolStackView.getPersistentData();
-        if (0 == dataNBT.getInt(TAG_MOD))
-            return i + 3 * getLevel(iToolStackView);
-        return i;
     }
 
     @Override
