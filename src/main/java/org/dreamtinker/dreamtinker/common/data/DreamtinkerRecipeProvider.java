@@ -1518,10 +1518,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
         SwappableModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.five_creations, "designs")
                                       .setTools(TinkerTags.Items.BONUS_SLOTS)
-                                      .addInput(DreamtinkerCommon.UnbornDragonEgg.get(), 5)
+                                      .addInput(DreamtinkerCommon.snake_fang.get(), 5)
                                       .addInput(DreamtinkerCommon.poisonousHomunculus.get(), 5)
                                       .addInput(DreamtinkerCommon.evilHomunculus.get(), 5)
-                                      .addInput(DreamtinkerCommon.rainbow_honey_crystal.get(), 5)
+                                      .addInput(DreamtinkerCommon.rainbow_honey_crystal.get(), 1)
                                       .addInput(DreamtinkerCommon.shiningFlint.get(), 5)
                                       .disallowCrystal()
                                       .save(consumer, wrap(DreamtinkerModifiers.Ids.five_creations, slotlessFolder, "_designs"));

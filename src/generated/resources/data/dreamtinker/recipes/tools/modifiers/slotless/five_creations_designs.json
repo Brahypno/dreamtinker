@@ -4,7 +4,7 @@
   "inputs": [
     {
       "amount_needed": 5,
-      "item": "dreamtinker:unborn_dragon_egg"
+      "item": "dreamtinker:snake_fang"
     },
     {
       "amount_needed": 5,
@@ -15,7 +15,6 @@
       "item": "dreamtinker:evil_homunculus"
     },
     {
-      "amount_needed": 5,
       "item": "dreamtinker:rainbow_honey_crystal"
     },
     {
