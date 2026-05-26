@@ -467,6 +467,10 @@
   "modifier.dreamtinker.solar_away": "太阳之距",
   "modifier.dreamtinker.solar_away.flavor": "不靠近我而是远离我吗",
   "modifier.dreamtinker.solar_away.description": "受击时，对伤害者施加基于主手的击退",
+  "modifier.dreamtinker.sunless": "不落日",
+  "modifier.dreamtinker.sunless.flavor": "日冕之下，行止受裁",
+  "modifier.dreamtinker.sunless.description": "失昼持有者的敌对行动会接受裁定；被无效化的行动会留下日冕灼痕",
+  "modifier.dreamtinker.sunless.salvage": "不落日拒绝消散",
   "modifier.dreamtinker.death_shredder": "死亡绞肉",
   "modifier.dreamtinker.death_shredder.flavor": "滋-滋-",
   "modifier.dreamtinker.death_shredder.description": "当有燃料或能量且于正确的模式下， 且副手为空时主手右键交互会对面前的生物造成多次伤害； 受温度限制",
@@ -1565,6 +1569,7 @@
   "effect.dreamtinker.pressing_front": "压境",
   "effect.dreamtinker.burden_bearer": "负轭者",
   "effect.dreamtinker.paradox_wound": "逆向创伤",
+  "effect.dreamtinker.daylost": "失昼",
 
   "advancements.dreamtinker.root.title": "工匠幻梦",
   "advancements.dreamtinker.root.description": "欢迎来到幻梦世界",
@@ -1630,6 +1635,7 @@
   "death.attack.dreamtinker.tnt_arrow_force": "因不安全使用镇爆箭而自杀了",
   "death.attack.dreamtinker.edict_punishments": "因违背戒律而死",
   "death.attack.dreamtinker.ruin_wheel": "被命运的车轮碾压",
+  "death.attack.dreamtinker.solar_judgment": "在日冕裁定中灼尽",
 
   "entity.dreamtinker.aggressive_fox": "武装狐狸",
 

@@ -24,11 +24,11 @@ public class DamageTypeTagProvider extends DamageTypeTagsProvider {
         tag(DAMAGES_HELMET).add(NULL_VOID, many_wishes);
         tag(BYPASSES_ARMOR).add(NULL_VOID, rain_bow, edict_punishments, many_wishes);
         tag(BYPASSES_SHIELD).add(NULL_VOID, edict_punishments, many_wishes);
-        tag(BYPASSES_INVULNERABILITY).add(NULL_VOID, arcane_damage/*, edict_punishments*/);
-        tag(BYPASSES_COOLDOWN).add(NULL_VOID, arcane_damage, edict_punishments);
-        tag(BYPASSES_EFFECTS).add(NULL_VOID, ruin_wheel, many_wishes);
-        tag(BYPASSES_RESISTANCE).add(NULL_VOID, ruin_wheel);
-        tag(BYPASSES_ENCHANTMENTS).add(NULL_VOID, rain_bow, arcane_damage, many_wishes);
+        tag(BYPASSES_INVULNERABILITY).add(NULL_VOID, arcane_damage, solar_judgment/*, edict_punishments*/);
+        tag(BYPASSES_COOLDOWN).add(NULL_VOID, arcane_damage, edict_punishments, solar_judgment);
+        tag(BYPASSES_EFFECTS).add(NULL_VOID, ruin_wheel, many_wishes, solar_judgment);
+        tag(BYPASSES_RESISTANCE).add(NULL_VOID, ruin_wheel, solar_judgment);
+        tag(BYPASSES_ENCHANTMENTS).add(NULL_VOID, rain_bow, arcane_damage, many_wishes, solar_judgment);
         tag(AVOIDS_GUARDIAN_THORNS).add(NULL_VOID);
         tag(ALWAYS_HURTS_ENDER_DRAGONS).add(NULL_VOID, arcane_damage, edict_punishments, ruin_wheel, many_wishes);
         tag(WITCH_RESISTANT_TO).add(arcane_damage);

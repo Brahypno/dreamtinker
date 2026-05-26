@@ -1,0 +1,6 @@
+{
+  "effects": "burning",
+  "exhaustion": 1.0,
+  "message_id": "dreamtinker.solar_judgment",
+  "scaling": "always"
+}

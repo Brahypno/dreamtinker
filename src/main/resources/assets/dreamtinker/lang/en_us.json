@@ -467,6 +467,10 @@
   "modifier.dreamtinker.solar_away": "Solar Away",
   "modifier.dreamtinker.solar_away.flavor": "The one who won’t be getting closer, but running away from you",
   "modifier.dreamtinker.solar_away.description": "When on hit, apply knock back based on main hand weapon",
+  "modifier.dreamtinker.sunless": "Sunless",
+  "modifier.dreamtinker.sunless.flavor": "All deeds are weighed under the corona",
+  "modifier.dreamtinker.sunless.description": "Hostile actions from Daylost bearers are judged; nullified actions leave Corona Scorch",
+  "modifier.dreamtinker.sunless.salvage": "Sunless refuses to disperse",
   "modifier.dreamtinker.death_shredder": "Death Shredder",
   "modifier.dreamtinker.death_shredder.flavor": "ZI-ZI-ZI-",
   "modifier.dreamtinker.death_shredder.description": "When filled with fuel or enough energy and in correct mode, Main hand right interaction with offhand empty would deal damage to living entities in front you per tick\n Also have temperature threshold",
@@ -1566,6 +1570,7 @@
   "effect.dreamtinker.pressing_front": "Pressing Front",
   "effect.dreamtinker.burden_bearer": "Burden Bearer",
   "effect.dreamtinker.paradox_wound": "Paradox Wound",
+  "effect.dreamtinker.daylost": "Daylost",
 
   "advancements.dreamtinker.root.title": "Dream Tinker",
   "advancements.dreamtinker.root.description": "Welcome Dream Tinker",
@@ -1630,6 +1635,7 @@
   "death.attack.dreamtinker.tnt_arrow_force": "Suicide By not safely using TnT Arrow",
   "death.attack.dreamtinker.edict_punishments": "Suicide By against the edict",
   "death.attack.dreamtinker.ruin_wheel": "Cursed by The Falling fate wheel",
+  "death.attack.dreamtinker.solar_judgment": "was burned away by solar judgment",
 
   "entity.dreamtinker.aggressive_fox": "Armed Fox",
 

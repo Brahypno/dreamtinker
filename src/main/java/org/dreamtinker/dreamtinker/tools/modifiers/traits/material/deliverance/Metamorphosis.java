@@ -23,6 +23,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
+import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
@@ -33,23 +34,31 @@ import slimeknights.tconstruct.library.modifiers.hook.armor.DamageBlockModifierH
 import slimeknights.tconstruct.library.modifiers.hook.armor.ModifyDamageModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.armor.OnAttackedModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.build.ModifierTraitHook;
 import slimeknights.tconstruct.library.modifiers.hook.combat.DamageDealtModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.technical.SlotInChargeModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
+import slimeknights.tconstruct.library.tools.nbt.IToolContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
+import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
-public class Metamorphosis extends Modifier implements DamageDealtModifierHook, AttributesModifierHook, InventoryTickModifierHook, DamageBlockModifierHook, OnAttackedModifierHook, ModifyDamageModifierHook {
+public class Metamorphosis extends Modifier implements DamageDealtModifierHook, AttributesModifierHook, InventoryTickModifierHook,
+        DamageBlockModifierHook, OnAttackedModifierHook, ModifyDamageModifierHook, ModifierTraitHook {
     private static final ThreadLocal<Boolean> DAMAGE_DEALT_IN_PROGRESS = ThreadLocal.withInitial(() -> false);
     private static final TinkerDataCapability.TinkerDataKey<SlotInChargeModule.SlotInCharge> SLOT_KEY =
             TinkerDataCapability.TinkerDataKey.of(Dreamtinker.getLocation("metamorphosis"));
     private static final ResourceLocation COLLAPSED = Dreamtinker.getLocation("metamorphosis_collapsed");
+    private static final ResourceLocation SUNLESS_TRAIT = Dreamtinker.getLocation("metamorphosis_sunless_trait");
     private static final String FROST_FIELD_TICK = Dreamtinker.getLocation("metamorphosis_frost_field_tick").toString();
+    private static final String SUNLESS_ENTRY_COUNT = Dreamtinker.getLocation("metamorphosis_sunless_entry_count").toString();
+    private static final String BELOW_SUNLESS_LINE = Dreamtinker.getLocation("metamorphosis_below_sunless_line").toString();
+    private static final String SUNLESS_ACTIVE = Dreamtinker.getLocation("metamorphosis_sunless_active").toString();
     private static final UUID ATTACK_DAMAGE_ID = UUID.fromString("b3594501-c1f7-43bb-a287-ed6a7238c453");
     private static final UUID KNOCKBACK_RESISTANCE_ID = UUID.fromString("390ba9e0-5369-4dd6-b10b-d7ce05d4e37b");
     private static final float BASE_THRESHOLD = 0.35F;
@@ -68,8 +77,28 @@ public class Metamorphosis extends Modifier implements DamageDealtModifierHook, 
         if (entity == null || entity.getMaxHealth() <= 0.0F){
             return false;
         }
-        float threshold = Math.min(0.50F, BASE_THRESHOLD + 0.05F * Math.max(0, level - 1));
-        return entity.getHealth() / entity.getMaxHealth() <= threshold;
+        return entity.getHealth() / entity.getMaxHealth() <= collapsedThreshold(level);
+    }
+
+    private static float collapsedThreshold(int level) {
+        return Math.min(0.50F, BASE_THRESHOLD + 0.05F * Math.max(0, level - 1));
+    }
+
+    private static boolean isBelowSunlessLine(LivingEntity entity, int level) {
+        return entity.getMaxHealth() > 0.0F
+               && entity.getHealth() / entity.getMaxHealth() <= collapsedThreshold(level) * 0.5F;
+    }
+
+    private static void syncSunlessTrait(IToolStackView tool, ItemStack stack, boolean active) {
+        if (tool.getPersistentData().getBoolean(SUNLESS_TRAIT) == active){
+            return;
+        }
+        tool.getPersistentData().putBoolean(SUNLESS_TRAIT, active);
+        if (tool instanceof ToolStack toolStack){
+            toolStack.updateStack(stack);
+        }else {
+            ToolStack.from(stack).updateStack(stack);
+        }
     }
 
     private static void applyCollapseImmunities(LivingEntity holder) {
@@ -86,7 +115,7 @@ public class Metamorphosis extends Modifier implements DamageDealtModifierHook, 
         }
 
         DamageSource freezeSource = DreamtinkerDamageTypes.source(serverLevel.registryAccess(), DamageTypes.FREEZE, source);
-        AABB box = center.getBoundingBox().inflate(radius, 1.0D, radius);
+        AABB box = center.getBoundingBox().inflate(radius, 2.0D, radius);
         for (LivingEntity target : serverLevel.getEntitiesOfClass(LivingEntity.class, box, target -> canAffect(attacker, target))) {
             target.setTicksFrozen(Math.min(target.getTicksRequiredToFreeze(), target.getTicksFrozen() + freezeTicks));
             target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, FIELD_TIME, Math.min(3, level), false, true));
@@ -110,7 +139,7 @@ public class Metamorphosis extends Modifier implements DamageDealtModifierHook, 
         }
 
         DamageSource fireSource = DreamtinkerDamageTypes.source(serverLevel.registryAccess(), DamageTypes.IN_FIRE, null, attacker);
-        AABB box = center.getBoundingBox().inflate(radius, 0.75D, radius);
+        AABB box = center.getBoundingBox().inflate(radius, 1.75D, radius);
         for (LivingEntity target : serverLevel.getEntitiesOfClass(LivingEntity.class, box, target -> canAffect(attacker, target))) {
             target.setSecondsOnFire(3);
             dealExtraDamage(target, fireSource, damage);
@@ -142,8 +171,15 @@ public class Metamorphosis extends Modifier implements DamageDealtModifierHook, 
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
         hookBuilder.addModule(new SlotInChargeModule(SLOT_KEY));
         hookBuilder.addHook(this, ModifierHooks.DAMAGE_DEALT, ModifierHooks.ATTRIBUTES, ModifierHooks.INVENTORY_TICK, ModifierHooks.DAMAGE_BLOCK,
-                            ModifierHooks.ON_ATTACKED, ModifierHooks.MODIFY_HURT);
+                            ModifierHooks.ON_ATTACKED, ModifierHooks.MODIFY_HURT, ModifierHooks.MODIFIER_TRAITS);
         super.registerHooks(hookBuilder);
+    }
+
+    @Override
+    public void addTraits(IToolContext context, ModifierEntry self, ModifierTraitHook.TraitBuilder builder, boolean firstEncounter) {
+        if (context.getPersistentData().getBoolean(SUNLESS_TRAIT)){
+            builder.add(DreamtinkerModifiers.sunless.getId(), 1);
+        }
     }
 
     @Override
@@ -214,6 +250,26 @@ public class Metamorphosis extends Modifier implements DamageDealtModifierHook, 
         boolean collapsed = isCorrectSlot && isCollapsed(holder, modifier);
         tool.getPersistentData().putBoolean(COLLAPSED, collapsed);
 
+        if (holder.getHealth() >= holder.getMaxHealth()){
+            holder.getPersistentData().remove(SUNLESS_ENTRY_COUNT);
+            holder.getPersistentData().remove(BELOW_SUNLESS_LINE);
+            holder.getPersistentData().remove(SUNLESS_ACTIVE);
+        }else if (isCorrectSlot){
+            boolean belowLine = isBelowSunlessLine(holder, modifier.getLevel());
+            boolean wasBelowLine = holder.getPersistentData().getBoolean(BELOW_SUNLESS_LINE);
+            if (belowLine && !wasBelowLine){
+                int entries = holder.getPersistentData().getInt(SUNLESS_ENTRY_COUNT) + 1;
+                holder.getPersistentData().putInt(SUNLESS_ENTRY_COUNT, entries);
+                holder.getPersistentData().putBoolean(BELOW_SUNLESS_LINE, true);
+                if (entries >= 3){
+                    holder.getPersistentData().putBoolean(SUNLESS_ACTIVE, true);
+                }
+            }else if (!belowLine && wasBelowLine){
+                holder.getPersistentData().remove(BELOW_SUNLESS_LINE);
+            }
+        }
+        syncSunlessTrait(tool, stack, isCorrectSlot && holder.getPersistentData().getBoolean(SUNLESS_ACTIVE));
+
         if (!collapsed)
             return;
 
@@ -235,6 +291,6 @@ public class Metamorphosis extends Modifier implements DamageDealtModifierHook, 
 
     @Override
     public float modifyDamageTaken(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount, boolean isDirectDamage) {
-        return Math.min(amount, context.getEntity().getMaxHealth());
+        return isCollapsed(context.getEntity(), modifier) ? Math.min(amount, context.getEntity().getMaxHealth()) : amount;
     }
 }

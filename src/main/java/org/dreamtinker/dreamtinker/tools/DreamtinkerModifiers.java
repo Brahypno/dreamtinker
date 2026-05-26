@@ -201,6 +201,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<HealOath> heal_oath = MODIFIERS.register("heal_oath", HealOath::new);
     public static final StaticModifier<ForOath> for_oath = MODIFIERS.register("for_oath", ForOath::new);
     public static final StaticModifier<ReturningArrow> returning_arrow = MODIFIERS.register("returning_arrow", ReturningArrow::new);
+    public static final StaticModifier<Sunless> sunless = MODIFIERS.register("sunless", Sunless::new);
     public static final StaticModifier<BrokenOath> broken_oath = MODIFIERS.register("broken_oath", BrokenOath::new);
     public static final StaticModifier<ForOath> forlorn_judgment = MODIFIERS.register("forlorn_judgment", ForOath::new);
     public static final StaticModifier<LastBody> last_body = MODIFIERS.register("last_body", LastBody::new);
