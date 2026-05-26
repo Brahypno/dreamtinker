@@ -1,0 +1,39 @@
+{
+  "type": "tconstruct:modifier_salvage",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "botania"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "botania"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "modifier": "dreamtinker:botania_pure_smeltery",
+  "slots": {
+    "upgrades": 1
+  },
+  "tools": [
+    {
+      "tag": "tconstruct:modifiable/interactable"
+    },
+    {
+      "tag": "tconstruct:modifiable/armor/worn"
+    }
+  ]
+}

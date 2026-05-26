@@ -20,6 +20,7 @@ import org.dreamtinker.dreamtinker.library.modifiers.modules.armor.RepriseProtec
 import org.dreamtinker.dreamtinker.library.modifiers.modules.armor.ResonanceArmorModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.MobEffectsRemoverModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.SelfMobEffectModule;
+import org.dreamtinker.dreamtinker.library.modifiers.modules.harvest.AutoPureDaisyModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.harvest.BlockLootMultiplierModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.harvest.EntityLootMultiplierModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.weapon.SwappableCircleWeaponAttack;
@@ -307,6 +308,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             ModifierModule.LOADER.register(Dreamtinker.getLocation("entity_loot_multiplier"), EntityLootMultiplierModule.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("armor_resonance_module"), ResonanceArmorModule.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("reprise_protection_module"), RepriseProtectionModule.LOADER);
+            ModifierModule.LOADER.register(Dreamtinker.getLocation("bontania_auto_pure_module"), AutoPureDaisyModule.LOADER);
+
         }
     }
 
@@ -447,6 +450,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId undergarden_killer = id("undergarden_killer");
         public static final ModifierId undergarden_miner = id("undergarden_miner");
         public static final ModifierId undergarden_protection = id("undergarden_protection");
+
+        public static final ModifierId botania_pure_smeltery = id("botania_pure_smeltery");
 
         private static ModifierId id(String name) {
             return new ModifierId(Dreamtinker.MODID, name);

@@ -1959,6 +1959,15 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(1)
                              .save(wrapped, prefix(DreamtinkerModifiers.Ids.otherworld_precious, slotlessFolder));
 
+        wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("botania"));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.botania_pure_smeltery)
+                             .setTools(ingredientFromTags(TinkerTags.Items.INTERACTABLE, TinkerTags.Items.WORN_ARMOR))
+                             .addInput(ItemNameIngredient.from(new ResourceLocation("botania", "pure_daisy")))
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .setMaxLevel(4)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.Ids.botania_pure_smeltery, upgradeSalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.Ids.botania_pure_smeltery, upgradeFolder));
+
         String tinkersThinking = "tinkers_thinking";
         wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(tinkersThinking));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.rainbow_lights)

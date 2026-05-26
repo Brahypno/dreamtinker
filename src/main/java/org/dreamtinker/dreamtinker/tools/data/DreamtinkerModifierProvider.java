@@ -37,6 +37,7 @@ import org.dreamtinker.dreamtinker.library.modifiers.modules.armor.RepriseProtec
 import org.dreamtinker.dreamtinker.library.modifiers.modules.armor.ResonanceArmorModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.MobEffectsRemoverModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.SelfMobEffectModule;
+import org.dreamtinker.dreamtinker.library.modifiers.modules.harvest.AutoPureDaisyModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.harvest.BlockLootMultiplierModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.harvest.EntityLootMultiplierModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.weapon.SwappableCircleWeaponAttack;
@@ -566,6 +567,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         addNovaModifiers();
         addUGModifiers();
         addOCCModifiers();
+        addBOTANIAModifiers();
 
     }
 
@@ -901,6 +903,16 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModules(ModifierSlotModule.slot(DTSlotType.DELUSION).eachLevel(1));
     }
+
+    private void addBOTANIAModifiers() {
+        buildModifier(Ids.botania_pure_smeltery, DreamtinkerMaterialDataProvider.modLoaded("botania"))
+                .priority(110) // want to be higher than bonking and alike
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(InventoryMenuModule.SHIFT)
+                .addModule(new AutoPureDaisyModule(20, InventoryModule.builder().slotsPerLevel(2)));
+
+    }
+
 
     @Override
     public @NotNull String getName() {

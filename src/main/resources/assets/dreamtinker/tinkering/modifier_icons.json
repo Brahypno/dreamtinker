@@ -23,5 +23,6 @@
   "dreamtinker:soul_core":        ["dreamtinker:item/unborn_sniffer_egg"],
   "dreamtinker:soul_upgrade":        ["dreamtinker:item/twist_obsidian_pane", "tconstruct:gui/modifiers/plus"],
   "dreamtinker:strong_explode":        ["tconstruct:item/gadgets/efln"],
-  "dreamtinker:weapon_books":     ["enigmaticlegacy:item/the_infinitum"]
+  "dreamtinker:weapon_books":     ["enigmaticlegacy:item/the_infinitum"],
+  "dreamtinker:botania_pure_smeltery":     ["botania:block/pure_daisy"]
 }

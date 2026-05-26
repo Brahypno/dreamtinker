@@ -1,0 +1,41 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "botania"
+          },
+          {
+            "type": "dreamtinker:mod_compact_config",
+            "modid": "botania"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:single_level",
+  "modules": [
+    {
+      "type": "tconstruct:inventory_menu",
+      "on_key": "shift"
+    },
+    {
+      "type": "dreamtinker:bontania_auto_pure_module",
+      "multiplier": 20.0,
+      "output_pattern": "tconstruct:result",
+      "slots": {
+        "each_level": 2
+      }
+    }
+  ],
+  "priority": 110,
+  "tooltip_display": "always"
+}
