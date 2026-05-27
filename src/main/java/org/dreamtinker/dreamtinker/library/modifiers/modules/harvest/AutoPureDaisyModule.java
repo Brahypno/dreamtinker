@@ -99,6 +99,7 @@ public record AutoPureDaisyModule(float multiplier, InventoryModule input, Inven
     private static boolean initialized = false;
     private static boolean available = false;
     private static boolean built = false;
+    private static boolean reloadListenerRegistered = false;
     private static Method MATCHES;
     private static Method GET_OUTPUT_STATE;
     private static Method GET_TIME;
@@ -119,9 +120,24 @@ public record AutoPureDaisyModule(float multiplier, InventoryModule input, Inven
         return ModList.get().isLoaded(BOTANIA_MODID);
     }
 
-    private static void invalidateDaisyCache() {
+    private static synchronized void invalidateDaisyCache() {
         CACHE.clear();
         built = false;
+        initialized = false;
+        available = false;
+        MATCHES = null;
+        GET_OUTPUT_STATE = null;
+        GET_TIME = null;
+    }
+
+    private static synchronized void ensureReloadListenerRegistered() {
+        if (reloadListenerRegistered)
+            return;
+        RecipeCacheInvalidator.addReloadListener(client -> {
+            if (!client)
+                invalidateDaisyCache();
+        });
+        reloadListenerRegistered = true;
     }
 
     @Nullable
@@ -249,10 +265,7 @@ public record AutoPureDaisyModule(float multiplier, InventoryModule input, Inven
 
         builder.addModule(input);
         builder.addModule(output);
-        RecipeCacheInvalidator.addReloadListener(client -> {
-            if (!client)
-                invalidateDaisyCache();
-        });
+        ensureReloadListenerRegistered();
     }
 
     private void processItems(IToolStackView tool, ModifierEntry modifier, LivingEntity holder, float amount) {

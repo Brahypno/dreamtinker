@@ -16,7 +16,22 @@ public class ClientSoundChecker {
     public static final Int2ObjectMap<AbstractTickableSoundInstance> ENTITY_SOUND_INSTANCE_MAP = new Int2ObjectOpenHashMap<>();
 
     public static void clearSoundCacheFor(Entity entity) {
-        ENTITY_SOUND_INSTANCE_MAP.remove(entity.getId());
+        AbstractTickableSoundInstance sound = ENTITY_SOUND_INSTANCE_MAP.remove(entity.getId());
+        if (sound instanceof EntityLoopSound entitySound)
+            entitySound.requestStop();
+    }
+
+    public static void removeSoundIfCurrent(Entity entity, AbstractTickableSoundInstance sound) {
+        if (ENTITY_SOUND_INSTANCE_MAP.get(entity.getId()) == sound)
+            ENTITY_SOUND_INSTANCE_MAP.remove(entity.getId());
+    }
+
+    public static void clearAllSoundCaches() {
+        for (AbstractTickableSoundInstance sound : ENTITY_SOUND_INSTANCE_MAP.values()) {
+            if (sound instanceof EntityLoopSound entitySound)
+                entitySound.requestStop();
+        }
+        ENTITY_SOUND_INSTANCE_MAP.clear();
     }
 
     public static void playWorldSound(@Nullable Object soundEmitter, byte type) {

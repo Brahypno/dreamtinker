@@ -9,6 +9,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.level.LevelEvent;
+import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
@@ -29,7 +31,7 @@ public class moonlightConversion {
     // 当蓝冰掉落到世界中（被玩家丢出）
     @SubscribeEvent
     public static void onEntityJoinWorld(EntityJoinLevelEvent event) {
-        if (!(event.getEntity() instanceof ItemEntity item))
+        if (event.getLevel().isClientSide || !(event.getEntity() instanceof ItemEntity item))
             return;
         if (item.getItem().getItem() != Items.BLUE_ICE)
             return;
@@ -74,5 +76,17 @@ public class moonlightConversion {
                 iterator.remove();
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void onLevelUnload(LevelEvent.Unload event) {
+        if (!(event.getLevel() instanceof Level level) || level.isClientSide)
+            return;
+        trackedBlueIce.entrySet().removeIf(entry -> entry.getValue().level() == level);
+    }
+
+    @SubscribeEvent
+    public static void onServerStopped(ServerStoppedEvent event) {
+        trackedBlueIce.clear();
     }
 }

@@ -52,7 +52,8 @@ public abstract class EntityLoopSound extends AbstractTickableSoundInstance {
 
     @Override
     public void tick() {
-        if (shouldStop || entity == null || !entity.isAlive()){
+        if (shouldStop || !entity.isAlive() || !canPlaySound()){
+            ClientSoundChecker.removeSoundIfCurrent(entity, this);
             this.stop();
             return;
         }

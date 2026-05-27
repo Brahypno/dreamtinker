@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.library.client.ClientColorIsolationRenderer;
 import org.dreamtinker.dreamtinker.library.client.ClientMask;
+import org.dreamtinker.dreamtinker.library.client.sound.ClientSoundChecker;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID, value = Dist.CLIENT)
 public final class ClientMaskEvents {
@@ -23,6 +24,7 @@ public final class ClientMaskEvents {
     @SubscribeEvent
     public static void onLogout(ClientPlayerNetworkEvent.LoggingOut event) {
         ClientMask.clearNow();
+        ClientSoundChecker.clearAllSoundCaches();
     }
 
     @SubscribeEvent

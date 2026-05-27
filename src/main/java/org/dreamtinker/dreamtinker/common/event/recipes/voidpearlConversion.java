@@ -7,6 +7,8 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.level.LevelEvent;
+import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
@@ -27,7 +29,7 @@ public class voidpearlConversion {
     // 当蓝冰掉落到世界中（被玩家丢出）
     @SubscribeEvent
     public static void onEntityJoinWorld(EntityJoinLevelEvent event) {
-        if (!(event.getEntity() instanceof ItemEntity item))
+        if (event.getLevel().isClientSide || !(event.getEntity() instanceof ItemEntity item))
             return;
         if (!item.getItem().is(Tags.Items.ENDER_PEARLS))
             return;
@@ -49,11 +51,16 @@ public class voidpearlConversion {
             // 如果已消失或不在当前世界，移除
             if (!item.isAlive()){
                 iterator.remove();
+                trackedPosition.remove(entry.getKey());
                 continue;
             }
             if (item.getItem().is(DreamtinkerCommon.void_pearl.get())){
                 Vec3 pos = item.position();
                 Vec3 tgt = trackedPosition.get(entry.getKey());
+                if (tgt == null){
+                    iterator.remove();
+                    continue;
+                }
                 Vec3 delta = tgt.subtract(pos);
                 double dist = delta.length();
 
@@ -85,10 +92,33 @@ public class voidpearlConversion {
                         // 返航时悬浮，不受重力；短暂不可拾取避免被路过玩家截胡
                         item.setNoGravity(true);
                         item.setPickUpDelay(40);
-                    }else
+                    }else {
                         iterator.remove();
+                        trackedPosition.remove(entry.getKey());
+                    }
                 }
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void onLevelUnload(LevelEvent.Unload event) {
+        if (!(event.getLevel() instanceof Level level) || level.isClientSide)
+            return;
+
+        Iterator<Map.Entry<UUID, ItemEntity>> iterator = trackedEnderPearl.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<UUID, ItemEntity> entry = iterator.next();
+            if (entry.getValue().level() == level){
+                trackedPosition.remove(entry.getKey());
+                iterator.remove();
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onServerStopped(ServerStoppedEvent event) {
+        trackedEnderPearl.clear();
+        trackedPosition.clear();
     }
 }

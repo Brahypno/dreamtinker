@@ -8,18 +8,21 @@
   "mixins": [
     "isInvertedHealAndHarmMixin",
     "ProjectileMixin",
+    "LivingEntityMixin",
     "GeneralCompact.ExtraSCYTHEModifier",
     "compact.enigmaticlegacy.EnigmaticEventHandlerMixin",
+    "compact.enigmaticlegacy.SuperpositionHandlerMixin",
     "compact.malum.HiddenTagRegistryMixin",
     "compact.malum.EdgeOfDeliveranceItemMixin",
     "compact.malum.SpiritInfusionRecipeBuilderAccessor",
     "compact.malum.SpiritInfusionRecipeBuilderResultMixin",
+    "compact.malum.MalumScytheItemMixin",
     "compact.ars_nouveau.AlterationTableRendererMixin",
     "compact.ars_nouveau.ArmorUpgradeRecipeCategoryMixin",
     "compact.ars_nouveau.EntityMeltingModuleMixin",
     "compact.ars_nouveau.AugmentCompatibilityValidatorMixin",
     "compact.ars_nouveau.MethodProjectileMixin",
-    "compact.ars_nouveau.PerkUtilMixin","compact.enigmaticlegacy.SuperpositionHandlerMixin","LivingEntityMixin"],
+    "compact.ars_nouveau.PerkUtilMixin"],
   "client": ["HeatingStructureScreenMixin"
   ],
   "injectors": {

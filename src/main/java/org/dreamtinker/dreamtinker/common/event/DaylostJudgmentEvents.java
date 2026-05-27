@@ -17,6 +17,7 @@ import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -302,6 +303,13 @@ public final class DaylostJudgmentEvents {
                 REPLAYING_DELAYED_ATTACK.set(false);
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void onServerStopped(ServerStoppedEvent event) {
+        DELAYED_ATTACKS.clear();
+        REDUCED_ATTACKS.clear();
+        REPLAYING_DELAYED_ATTACK.remove();
     }
 
     private static void removeBeneficialEffects(LivingEntity attacker, int amount) {
