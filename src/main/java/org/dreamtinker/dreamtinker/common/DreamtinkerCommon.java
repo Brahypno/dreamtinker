@@ -158,6 +158,12 @@ public class DreamtinkerCommon extends DreamtinkerModule {
             return true;
         }
     });
+    public static final RegistryObject<Item> whimsy_coin = ITEMS.register("whimsy_coin", () -> new Item(ITEM_PROPS.rarity(Rarity.RARE)) {
+        public void appendHoverText(@NotNull ItemStack stack, Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
+            tooltip.add(Component.translatable("tooltip.dreamtinker.whimsy_coin").withStyle(s -> s.withColor(TextColor.fromRgb(0xFFB6C1))));
+            super.appendHoverText(stack, level, tooltip, flag);
+        }
+    });
     public static final RegistryObject<Item> rainbow_honey_crystal = ITEMS.register("rainbow_honey_crystal", () -> new Item(ITEM_PROPS));
     public static final RegistryObject<Item> poisonousHomunculus =
             ITEMS.register("poisonous_homunculus", () -> new ContainerFoodItem.FluidContainerFoodItem(
@@ -263,6 +269,7 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         output.accept(amber.get());
         output.accept(despair_gem.get());
         output.accept(desire_gem.get());
+        output.accept(whimsy_coin.get());
         output.accept(poisonousHomunculus.get());
         output.accept(evilHomunculus.get());
         output.accept(soul_steel.get());

@@ -84,6 +84,7 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.scolecite.Fea
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.scolecite.pupalOmen;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.star_regulus.TwoHeadedSeven;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.star_regulus.as_one;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.whimsyGold.RhinegoldCatModifier;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
 import slimeknights.tconstruct.library.modifiers.modules.ModifierModule;
 import slimeknights.tconstruct.library.modifiers.util.ModifierDeferredRegister;
@@ -216,6 +217,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<Signet> signet = MODIFIERS.register("signet", Signet::new);
     public static final StaticModifier<Metamorphosis> metamorphosis = MODIFIERS.register("metamorphosis", Metamorphosis::new);
     public static final StaticModifier<BurdenBearer> burden_bearer = MODIFIERS.register("burden_bearer", BurdenBearer::new);
+    public static final StaticModifier<RhinegoldCatModifier> rhinegold_cat = MODIFIERS.register("rhinegold_cat", RhinegoldCatModifier::new);
 
     //etherium
     public static final StaticModifier<ELAstralBreak> astral_break = EL_MODIFIERS.register("astral_break", ELAstralBreak::new);
@@ -374,6 +376,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId aggressiveFoxUsage = id("aggressive_fox_usage");
         public static final ModifierId five_creations = id("five_creations");
         public static final ModifierId golden_face = id("golden_face");
+        public static final ModifierId whimsy_face = id("whimsy_face");
         public static final ModifierId arcane_protection = id("arcane_protection");
         public static final ModifierId drinker_magic = id("drinker_magic");
         public static final ModifierId monster_blood = id("monster_blood");

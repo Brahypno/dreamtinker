@@ -219,7 +219,9 @@
     "many_wishes": "#D996FF",
     "signet": "#FF9A35",
     "metamorphosis": "#B34A45",
-    "burden_bearer": "#68B2CD"
+    "burden_bearer": "#68B2CD",
+    "whimsy_face": "#E7BE55",
+    "rhinegold_cat": "#F2D783"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
@@ -298,7 +300,8 @@
     "spiral_spin": "#444857",
     "ruin_wheel_steel": "#FFF0B0",
     "forlorn_oath_steel": "#D3E4F6",
-    "atonement_silver": "#FFF6D8"
+    "atonement_silver": "#FFF6D8",
+    "whimsy_gold": "#C5C1D5"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873",

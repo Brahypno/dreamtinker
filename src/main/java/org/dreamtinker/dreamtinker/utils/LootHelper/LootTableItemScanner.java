@@ -66,7 +66,7 @@ public final class LootTableItemScanner {
         );
     }
 
-    private static List<ItemStack> tryExtractLoot(
+    public static List<ItemStack> tryExtractLoot(
             ServerLevel level,
             LivingEntity target,
             float triggerRate,

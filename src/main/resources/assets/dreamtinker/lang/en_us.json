@@ -909,6 +909,12 @@
   "modifier.dreamtinker.burden_bearer": "Burden Bearer",
   "modifier.dreamtinker.burden_bearer.flavor": "Their fall is yours to bear",
   "modifier.dreamtinker.burden_bearer.description": "When an ally dies within 16 blocks, gain Burden Bearer for 20 seconds. Further nearby allied deaths refresh its duration and increase its level.",
+  "modifier.dreamtinker.whimsy_face": "Luring Gold",
+  "modifier.dreamtinker.whimsy_face.flavor": "I will die over petty change",
+  "modifier.dreamtinker.whimsy_face.description": "Attracts hostile attention and greatly increases visibility",
+  "modifier.dreamtinker.rhinegold_cat": "As Whimsy as a Cat",
+  "modifier.dreamtinker.rhinegold_cat.flavor": "A gilded paw always finds something valuable",
+  "modifier.dreamtinker.rhinegold_cat.description": "Strikes can mark and pilfer creatures; defeating marked creatures may yield additional treasures",
 
 
   "material.dreamtinker.echo_alloy": "Echo Alloy",
@@ -1096,6 +1102,8 @@
   "material.dreamtinker.forlorn_oath_steel.flavor": "",
   "material.dreamtinker.atonement_silver": "Atonement Silver",
   "material.dreamtinker.atonement_silver.flavor": "Pain sealed in amber, mercy sharpened in silver.",
+  "material.dreamtinker.whimsy_gold": "Whimsy Gold",
+  "material.dreamtinker.whimsy_gold.flavor": "Gold made light enough to follow a curious paw",
 
   "itemGroup.dreamtinker.tool": "Dreamtinker | tool",
   "itemGroup.dreamtinker.part": "Dreamtinker | part",
@@ -1186,6 +1194,8 @@
   "item.dreamtinker.amber": "Amber",
   "item.dreamtinker.despair_gem": "Despair Gem",
   "item.dreamtinker.desire_gem": "Desire Gem",
+  "item.dreamtinker.whimsy_coin": "Whimsy Coin",
+  "tooltip.dreamtinker.whimsy_coin": "Obtained from cat morning gifts",
   "item.dreamtinker.poisonous_homunculus": "Poisonous Homunculus",
   "item.dreamtinker.evil_homunculus": "Evil Homunculus",
   "item.dreamtinker.soul_steel": "Living Soul steel",

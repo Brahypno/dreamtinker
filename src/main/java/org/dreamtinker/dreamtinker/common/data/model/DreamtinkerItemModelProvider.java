@@ -88,6 +88,7 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
         generateItemModel(DreamtinkerCommon.amber, "materials");
         generateItemModel(DreamtinkerCommon.despair_gem, "materials");
         generateItemModel(DreamtinkerCommon.desire_gem, "materials");
+        generateItemModel(DreamtinkerCommon.whimsy_coin, "materials");
         generateItemModel(DreamtinkerCommon.poisonousHomunculus, "materials");
         generateItemModel(DreamtinkerCommon.evilHomunculus, "materials");
         generateItemModel(DreamtinkerCommon.soul_steel, "materials");

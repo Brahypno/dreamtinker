@@ -237,6 +237,17 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFF45556C)
                                                 .addARGB(255, 0xFF87C7FF)
                                                 .build());
+        this.buildMaterial(DreamtinkerMaterialIds.whimsyGold)
+            .meleeHarvest()
+            .fallbacks("crystal", "gem", "metal")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(63, 0xFF05040A)
+                                                .addARGB(102, 0xFF181020)
+                                                .addARGB(140, 0xFF38284A)
+                                                .addARGB(178, 0xFF817289)
+                                                .addARGB(216, 0xFFC29A52)
+                                                .addARGB(255, 0xFFF2EDE2)
+                                                .build());
         this.buildMaterial(DreamtinkerMaterialIds.rainbow_honey_crystal)
             .meleeHarvest().armor()
             .fallbacks("crystal")

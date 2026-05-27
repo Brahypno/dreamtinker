@@ -354,6 +354,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(new SwappableToolTraitsModule(null, "traits", ToolHooks.REBALANCED_TRAIT))
                 .addModule(new SwappableCircleWeaponAttack(null, "designs", 6));
         buildModifier(Ids.golden_face);
+        buildModifier(Ids.whimsy_face);
         buildModifier(arcane_hit.getId());
         buildModifier(Ids.arcane_protection)
                 .addModule(MaxArmorAttributeModule.builder(TinkerAttributes.GOOD_EFFECT_DURATION, AttributeModifier.Operation.MULTIPLY_BASE)

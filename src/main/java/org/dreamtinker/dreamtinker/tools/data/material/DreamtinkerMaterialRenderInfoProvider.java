@@ -37,6 +37,7 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
         buildRenderInfo(DreamtinkerMaterialIds.despair_gem).color(0xFF870721).fallbacks("gem").luminosity(15);
         buildRenderInfo(DreamtinkerMaterialIds.shadowskin);
         buildRenderInfo(DreamtinkerMaterialIds.soul_steel).color(0xFF3E5568).fallbacks("metal").luminosity(14);
+        buildRenderInfo(DreamtinkerMaterialIds.whimsyGold).color(0xFF817289).fallbacks("crystal", "gem", "metal").luminosity(15);
         buildRenderInfo(DreamtinkerMaterialIds.rainbow_honey_crystal).color(0xFFB9C532).fallbacks("gem").luminosity(14);
         buildRenderInfo(DreamtinkerMaterialIds.black_sapphire).color(0xFF1A1F26).fallbacks("gem").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.scolecite).color(0xFF6C6E73).fallbacks("gem").luminosity(15);

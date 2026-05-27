@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material",
+  "ingredient": {
+    "item": "dreamtinker:whimsy_coin"
+  },
+  "material": "dreamtinker:whimsy_gold",
+  "needed": 1,
+  "value": 1
+}

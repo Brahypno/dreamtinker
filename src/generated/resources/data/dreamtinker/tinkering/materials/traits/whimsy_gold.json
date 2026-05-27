@@ -1,0 +1,14 @@
+{
+  "perStat": {
+    "tconstruct:melee_harvest": [
+      {
+        "level": 1,
+        "name": "dreamtinker:rhinegold_cat"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:whimsy_face"
+      }
+    ]
+  }
+}

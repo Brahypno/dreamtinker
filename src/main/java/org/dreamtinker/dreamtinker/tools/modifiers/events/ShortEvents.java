@@ -69,7 +69,7 @@ public class ShortEvents {
     public static void LivingVisibilityEvent(LivingEvent.LivingVisibilityEvent event) {
         if (event.isCanceled())
             return;
-        int multi = DTModifierCheck.getEntityModifierNum(event.getEntity(), DreamtinkerModifiers.Ids.golden_face);
+        int multi = revealedLevel(event.getEntity(), 2);
         if (0 < multi)
             event.modifyVisibility(Mth.clamp(0.5 * multi + 1.5, 1.0, 4.0));
         int hidden_multi = DTModifierCheck.getEntityModifierNum(event.getEntity(), DreamtinkerModifiers.Ids.hidden_shape);
@@ -90,8 +90,7 @@ public class ShortEvents {
                 mob.setTarget(null);
             }
         }
-        boolean is_otto =
-                null != event.getNewTarget() && 0 < DTModifierCheck.getEntityModifierNum(event.getNewTarget(), DreamtinkerModifiers.Ids.golden_face);
+        boolean is_otto = null != event.getNewTarget() && 0 < revealedLevel(event.getNewTarget(), 1);
         if (!is_otto){
             LivingEntity best = findBestRevealedTarget(mob);
             if (best == null)
@@ -191,7 +190,7 @@ public class ShortEvents {
                 box,
                 e -> e.isAlive()
                      && e != mob
-                     && 0 < DTModifierCheck.getEntityModifierNum(e, DreamtinkerModifiers.Ids.golden_face)
+                     && 0 < revealedLevel(e, 1)
                      && mob.canAttack(e)
                      && mob.hasLineOfSight(e) // 仍建议保留：避免隔墙点名
         );
@@ -206,7 +205,7 @@ public class ShortEvents {
         double bestDist2 = Double.MAX_VALUE;
 
         for (LivingEntity e : candidates) {
-            int amp = DTModifierCheck.getEntityModifierNum(e, DreamtinkerModifiers.Ids.golden_face);
+            int amp = revealedLevel(e, 1);
             double dist2 = mob.distanceToSqr(e);
 
             if (best == null){
@@ -234,6 +233,11 @@ public class ShortEvents {
         }
 
         return best;
+    }
+
+    private static int revealedLevel(LivingEntity entity, int whimsyWeight) {
+        return DTModifierCheck.getEntityModifierNum(entity, DreamtinkerModifiers.Ids.golden_face)
+               + whimsyWeight * DTModifierCheck.getEntityModifierNum(entity, DreamtinkerModifiers.Ids.whimsy_face);
     }
 }
 

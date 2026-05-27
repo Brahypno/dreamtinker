@@ -1,0 +1,14 @@
+{
+  "name": "minecraft:gameplay/cat_morning_gift",
+  "pools": [
+    {
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "dreamtinker:whimsy_coin"
+        }
+      ],
+      "name": "main"
+    }
+  ]
+}

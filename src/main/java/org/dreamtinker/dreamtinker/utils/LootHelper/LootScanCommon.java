@@ -65,7 +65,7 @@ public final class LootScanCommon {
 
         addRolledStack(out, candidates, random, picker);
 
-        for (int roll = 1; roll <= Math.max(0, lootingLevel); roll++) {
+        for (int roll = 1; roll <= Math.max(1, lootingLevel); roll++) {
             float rate = getLootingExtraRollRate(triggerRate, roll);
 
             if (random.nextFloat() >= rate)

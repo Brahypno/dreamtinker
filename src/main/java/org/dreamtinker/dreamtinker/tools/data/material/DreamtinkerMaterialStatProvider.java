@@ -71,6 +71,10 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new HeadMaterialStats(600, 8f, Tiers.DIAMOND, 2.50f),
                          HandleMaterialStats.multipliers().durability(.95f).miningSpeed(1.05f).attackDamage(1.05f).attackSpeed(1.05f).build(),
                          StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.whimsyGold,
+                         new HeadMaterialStats(600, 8f, Tiers.DIAMOND, 2.50f),
+                         HandleMaterialStats.multipliers().durability(.95f).miningSpeed(1.05f).attackDamage(1.05f).attackSpeed(1.05f).build(),
+                         StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.rainbow_honey_crystal,
                          new HeadMaterialStats(700, 7f, Tiers.DIAMOND, 2.75f),
                          HandleMaterialStats.multipliers().durability(1.1f).miningSpeed(1.5f).attackDamage(1.2f).attackSpeed(1.1f).build(),

@@ -25,6 +25,7 @@ public class DreamtinkerMaterialIds {
     public static final MaterialId despair_gem = new MaterialId(new ResourceLocation(MODID, "despair_gem"));
     public static final MaterialId shadowskin = new MaterialId(new ResourceLocation(MODID, "shadowskin"));
     public static final MaterialId soul_steel = new MaterialId(new ResourceLocation(MODID, "soul_steel"));
+    public static final MaterialId whimsyGold = new MaterialId(new ResourceLocation(MODID, "whimsy_gold"));
     public static final MaterialId rainbow_honey_crystal = new MaterialId(new ResourceLocation(MODID, "rainbow_honey_crystal"));
     public static final MaterialId black_sapphire = new MaterialId(new ResourceLocation(MODID, "black_sapphire"));
     public static final MaterialId scolecite = new MaterialId(new ResourceLocation(MODID, "scolecite"));

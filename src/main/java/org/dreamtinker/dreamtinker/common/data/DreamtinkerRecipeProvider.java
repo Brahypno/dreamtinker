@@ -2753,6 +2753,9 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         materialRecipe(consumer, DreamtinkerMaterialIds.soul_steel, Ingredient.of(DreamtinkerCommon.soulSteelBlock.get()), 9, 1,
                        materials_folder + "soul_steel_block");
 
+        materialRecipe(consumer, DreamtinkerMaterialIds.whimsyGold, Ingredient.of(DreamtinkerCommon.whimsy_coin.get()), 1, 1,
+                       materials_folder + "whimsy_gold");
+
         materialMeltingCasting(consumer, DreamtinkerMaterialIds.rainbow_honey_crystal, DreamtinkerFluids.molten_bee_gem, FluidValues.GEM,
                                materials_folder);
         materialRecipe(consumer, DreamtinkerMaterialIds.rainbow_honey_crystal, Ingredient.of(DreamtinkerCommon.rainbow_honey_crystal.get()), 1, 1,

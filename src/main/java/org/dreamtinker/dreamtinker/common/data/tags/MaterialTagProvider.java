@@ -20,7 +20,7 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
     protected void addTags() {
         this.tag(TinkerTags.Materials.EXCLUDE_FROM_LOOT)
             .add(moonlight_ice, nigrescence_antimony, metallivorous_stibium_lupus, echo_alloy, star_regulus, half_rotten_homunculus, desire_gem, despair_gem,
-                 RuinWheelSteel, PermanenceScale, PermanenceWing, scolecite, SpiralSpin, ForlornOathSteel, deliverance)
+                 RuinWheelSteel, PermanenceScale, PermanenceWing, scolecite, SpiralSpin, ForlornOathSteel, deliverance, whimsyGold)
             .addOptional(etherium, nefarious, soul_etherium,
                          soul_stained_steel, malignant_pewter, malignant_gluttony, malignant_lead, PaladinBone, forgotten_metal);
 
@@ -37,7 +37,7 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
                          WickedWeave, DarkMetal, MonsterSkin, PaladinBoneTool, TatteredCloth, WaterEssence, FireEssence, ManipulationEssence, Utherium,
                          forgotten_metal, Cloggrum, Froststeel);
         this.tag(TinkerTags.Materials.HARVEST)
-            .add(larimar, rainbow_honey_crystal, TransmutationGold)
+            .add(larimar, rainbow_honey_crystal, TransmutationGold, whimsyGold)
             .addOptional(hallowed_gold, Regalium, Iesnium);
         this.tag(TinkerTags.Materials.GENERAL)
             .add(valentinite, black_sapphire, orichalcum)

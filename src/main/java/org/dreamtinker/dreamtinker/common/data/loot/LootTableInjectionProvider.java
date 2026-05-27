@@ -44,6 +44,10 @@ public class LootTableInjectionProvider extends AbstractLootTableInjectionProvid
                 .addToPool("main", LootItem.lootTableItem(DreamtinkerCommon.rainbow_honey.get())
                                            .setWeight(1) // all treasure from fishing is the same weight
                                            .build());
+        inject("cat_morning_gift", new ResourceLocation("gameplay/cat_morning_gift"))
+                .addToPool("main", LootItem.lootTableItem(DreamtinkerCommon.whimsy_coin.get())
+                                           .setWeight(1)
+                                           .build());
     }
 
     @Override
