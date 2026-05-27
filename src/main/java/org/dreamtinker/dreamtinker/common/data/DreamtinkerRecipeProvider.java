@@ -1,7 +1,6 @@
 package org.dreamtinker.dreamtinker.common.data;
 
 import com.aizistral.enigmaticlegacy.registries.EnigmaticItems;
-import com.hollingsworth.arsnouveau.setup.registry.ItemsRegistry;
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import com.sammy.malum.data.recipe.builder.SpiritInfusionRecipeBuilder;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
@@ -120,9 +119,11 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Consumer;
 
-import static elucent.eidolon.registries.Registry.*;
-
 public class DreamtinkerRecipeProvider extends RecipeProvider implements IMaterialRecipeHelper, IToolRecipeHelper, IConditionBuilder, IRecipeHelper, ICommonRecipeHelper, ISmelteryRecipeHelper {
+
+    private static Ingredient itemNameIngredient(String modid, String path) {
+        return ItemNameIngredient.from(new ResourceLocation(modid, path));
+    }
 
     public DreamtinkerRecipeProvider(PackOutput p_248933_) {
         super(p_248933_);
@@ -627,13 +628,13 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
     private void addCompactEidolonMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
         Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("eidolon"));
-        MeltingRecipeBuilder.melting(Ingredient.of(GOLD_INLAY.get()),
+        MeltingRecipeBuilder.melting(itemNameIngredient("eidolon", "gold_inlay"),
                                      DreamtinkerFluids.molten_arcane_gold.get(), FluidValues.INGOT * 2, 0.05f)
                             .save(wrapped, location(Melting_folder + "arcane_gold/inlay"));
-        MeltingRecipeBuilder.melting(Ingredient.of(PEWTER_INLAY.get()),
+        MeltingRecipeBuilder.melting(itemNameIngredient("eidolon", "pewter_inlay"),
                                      TinkerFluids.moltenPewter, FluidValues.INGOT * 2, 0.05f)
                             .save(wrapped, location(Melting_folder + "pewter/inlay"));
-        MeltingRecipeBuilder.melting(Ingredient.of(PEWTER_BLEND.get()),
+        MeltingRecipeBuilder.melting(itemNameIngredient("eidolon", "pewter_blend"),
                                      TinkerFluids.moltenPewter, FluidValues.INGOT, 0.05f)
                             .setOre(IMeltingContainer.OreRateType.METAL)
                             .save(wrapped, location(Melting_folder + "pewter/blend"));
@@ -838,15 +839,15 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
     private void addEidolonMaterialRecipes(Consumer<FinishedRecipe> consumer) {
         Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("eidolon"));
-        materialRecipe(wrapped, DreamtinkerMaterialIds.TatteredCloth, Ingredient.of(TATTERED_CLOTH.get()), 1, 2,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.TatteredCloth, itemNameIngredient("eidolon", "tattered_cloth"), 1, 2,
                        materials_folder + "tattered_cloth");
-        materialRecipe(wrapped, DreamtinkerMaterialIds.WickedWeave, Ingredient.of(WICKED_WEAVE.get()), 1, 2,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.WickedWeave, itemNameIngredient("eidolon", "wicked_weave"), 1, 2,
                        materials_folder + "wicked_weave");
-        materialRecipe(wrapped, DreamtinkerMaterialIds.PaladinBoneTool, Ingredient.of(IMBUED_BONES.get()), 1, 1,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.PaladinBoneTool, itemNameIngredient("eidolon", "imbued_bones"), 1, 1,
                        materials_folder + "paladin_bone_tool");
-        materialRecipe(wrapped, DreamtinkerMaterialIds.SoulGem, Ingredient.of(SOUL_SHARD.get()), 1, 4,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.SoulGem, itemNameIngredient("eidolon", "soul_shard"), 1, 4,
                        materials_folder + "soul_gem");
-        materialRecipe(wrapped, DreamtinkerMaterialIds.CrimsonGem, Ingredient.of(CRIMSON_GEM.get()), 1, 1,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.CrimsonGem, itemNameIngredient("eidolon", "crimson_gem"), 1, 1,
                        materials_folder + "crimson_gem");
         materialRecipe(wrapped, DreamtinkerMaterialIds.ShadowGem, Ingredient.of(Dreamtinker.forgeItemTag("gems/shadow_gem")), 1, 1,
                        materials_folder + "shadow_gem/gem");
@@ -892,25 +893,25 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
     private void addNovaMaterialRecipes(Consumer<FinishedRecipe> consumer) {
         Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"));
-        materialRecipe(wrapped, DreamtinkerMaterialIds.AbjurationEssence, Ingredient.of(ItemsRegistry.ABJURATION_ESSENCE.get()), 1, 1,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.AbjurationEssence, itemNameIngredient("ars_nouveau", "abjuration_essence"), 1, 1,
                        materials_folder + "abjuration_essence");
-        materialRecipe(wrapped, DreamtinkerMaterialIds.ConjurationEssence, Ingredient.of(ItemsRegistry.CONJURATION_ESSENCE.get()), 1, 1,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.ConjurationEssence, itemNameIngredient("ars_nouveau", "conjuration_essence"), 1, 1,
                        materials_folder + "conjuration_essence");
-        materialRecipe(wrapped, DreamtinkerMaterialIds.AirEssence, Ingredient.of(ItemsRegistry.AIR_ESSENCE.get()), 1, 1,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.AirEssence, itemNameIngredient("ars_nouveau", "air_essence"), 1, 1,
                        materials_folder + "air_essence");
-        materialRecipe(wrapped, DreamtinkerMaterialIds.EarthEssence, Ingredient.of(ItemsRegistry.EARTH_ESSENCE.get()), 1, 1,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.EarthEssence, itemNameIngredient("ars_nouveau", "earth_essence"), 1, 1,
                        materials_folder + "earth_essence");
-        materialRecipe(wrapped, DreamtinkerMaterialIds.FireEssence, Ingredient.of(ItemsRegistry.FIRE_ESSENCE.get()), 1, 1,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.FireEssence, itemNameIngredient("ars_nouveau", "fire_essence"), 1, 1,
                        materials_folder + "fire_essence");
-        materialRecipe(wrapped, DreamtinkerMaterialIds.ManipulationEssence, Ingredient.of(ItemsRegistry.MANIPULATION_ESSENCE.get()), 1, 1,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.ManipulationEssence, itemNameIngredient("ars_nouveau", "manipulation_essence"), 1, 1,
                        materials_folder + "manipulation_essence");
-        materialRecipe(wrapped, DreamtinkerMaterialIds.WaterEssence, Ingredient.of(ItemsRegistry.WATER_ESSENCE.get()), 1, 1,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.WaterEssence, itemNameIngredient("ars_nouveau", "water_essence"), 1, 1,
                        materials_folder + "water_essence");
-        materialRecipe(wrapped, DreamtinkerMaterialIds.WildenHorn, Ingredient.of(ItemsRegistry.WILDEN_HORN.get()), 1, 1,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.WildenHorn, itemNameIngredient("ars_nouveau", "wilden_horn"), 1, 1,
                        materials_folder + "wilden_horn");
-        materialRecipe(wrapped, DreamtinkerMaterialIds.WildenWing, Ingredient.of(ItemsRegistry.WILDEN_WING.get()), 1, 1,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.WildenWing, itemNameIngredient("ars_nouveau", "wilden_wing"), 1, 1,
                        materials_folder + "wilden_wing");
-        materialRecipe(wrapped, DreamtinkerMaterialIds.WildenSpike, Ingredient.of(ItemsRegistry.WILDEN_SPIKE.get()), 1, 1,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.WildenSpike, itemNameIngredient("ars_nouveau", "wilden_spike"), 1, 1,
                        materials_folder + "wilden_spike");
     }
 
@@ -1745,7 +1746,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("eidolon"));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.eidolon_sapping)
                              .setTools(TinkerTags.Items.MELEE)
-                             .addInput(SAPPING_SWORD.get(), 1)
+                             .addInput(itemNameIngredient("eidolon", "sapping_sword"))
                              .setSlots(SlotType.UPGRADE, 1)
                              .setMaxLevel(3)
                              .saveSalvage(wrapped, prefix(DreamtinkerModifiers.eidolon_sapping, upgradeSalvage))
@@ -1756,16 +1757,16 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(Dreamtinker.forgeItemTag("bones"), 6)
                              .addInput(Items.SKELETON_SKULL, 1)
                              .addInput(Items.WITHER_SKELETON_SKULL, 1)
-                             .addInput(DEATH_ESSENCE.get(), 2)
+                             .addInput(SizedIngredient.of(itemNameIngredient("eidolon", "death_essence"), 2))
                              .setSlots(SlotType.UPGRADE, 1)
                              .setMaxLevel(1)
                              .saveSalvage(wrapped, prefix(DreamtinkerModifiers.eidolon_death_bringer, upgradeSalvage))
                              .save(wrapped, prefix(DreamtinkerModifiers.eidolon_death_bringer, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.eidolon_bone_chill)
                              .setTools(TinkerTags.Items.MELEE)
-                             .addInput(WRAITH_HEART.get(), 1)
-                             .addInput(PEWTER_INLAY.get(), 2)
-                             .addInput(LESSER_SOUL_GEM.get(), 2)
+                             .addInput(itemNameIngredient("eidolon", "wraith_heart"))
+                             .addInput(SizedIngredient.of(itemNameIngredient("eidolon", "pewter_inlay"), 2))
+                             .addInput(SizedIngredient.of(itemNameIngredient("eidolon", "lesser_soul_gem"), 2))
                              .addInput(Dreamtinker.forgeItemTag("gems/shadow_gem"), 1)
                              .setSlots(SlotType.UPGRADE, 1)
                              .setMaxLevel(1)
@@ -1774,7 +1775,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.ashen_soul)
                              .setTools(TinkerTags.Items.MODIFIABLE)
-                             .addInput(LESSER_SOUL_GEM.get(), 2)
+                             .addInput(SizedIngredient.of(itemNameIngredient("eidolon", "lesser_soul_gem"), 2))
                              .setMaxLevel(1)
                              .save(wrapped, prefix(DreamtinkerModifiers.Ids.ashen_soul, slotlessFolder));
 
@@ -1832,66 +1833,66 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(Tags.Items.GEMS_EMERALD, 2)
                              .addInput(Tags.Items.ENDER_PEARLS, 3)
                              .addInput(Items.TOTEM_OF_UNDYING, 1)
-                             .addInput(ItemsRegistry.WILDEN_TRIBUTE, 1)
+                             .addInput(itemNameIngredient("ars_nouveau", "wilden_tribute"))
                              .disallowCrystal()
                              .setMaxLevel(2)
                              .save(wrapped, wrap(DreamtinkerModifiers.Ids.nova_spell_tiers, slotlessFolder, "_archmage"));
         ModifierRecipeBuilder.modifier(NovaRegistry.nova_magic_armor)
                              .setTools(under_plates)
-                             .addInput(ItemsRegistry.MAGE_FIBER, 4)
+                             .addInput(SizedIngredient.of(itemNameIngredient("ars_nouveau", "magebloom_fiber"), 4))
                              .addInput(Tags.Items.INGOTS_GOLD, 8)
                              .setMaxLevel(1)
                              .save(wrapped, wrap(NovaRegistry.nova_magic_armor, slotlessFolder, "_mage"));
         ModifierRecipeBuilder.modifier(NovaRegistry.nova_magic_armor)
                              .setTools(under_plates)
-                             .addInput(ItemsRegistry.MAGE_FIBER, 4)
+                             .addInput(SizedIngredient.of(itemNameIngredient("ars_nouveau", "magebloom_fiber"), 4))
                              .addInput(Tags.Items.GEMS_DIAMOND, 8)
                              .setMaxLevel(2)
                              .save(wrapped, wrap(NovaRegistry.nova_magic_armor, slotlessFolder, "_archmage"));
         ModifierRecipeBuilder.modifier(NovaRegistry.nova_magic_armor)
                              .setTools(TinkerTags.Items.WORN_ARMOR)
-                             .addInput(ItemsRegistry.WILDEN_TRIBUTE, 6)
+                             .addInput(SizedIngredient.of(itemNameIngredient("ars_nouveau", "wilden_tribute"), 6))
                              .addInput(Items.TOTEM_OF_UNDYING, 1)
-                             .addInput(ItemsRegistry.MAGE_BLOOM, 3)
-                             .addInput(ItemsRegistry.BLANK_PARCHMENT, 2)
+                             .addInput(SizedIngredient.of(itemNameIngredient("ars_nouveau", "magebloom"), 3))
+                             .addInput(SizedIngredient.of(itemNameIngredient("ars_nouveau", "blank_parchment"), 2))
                              .setSlots(SlotType.ABILITY, 1)
                              .setMaxLevel(1)
                              .saveSalvage(wrapped, wrap(NovaRegistry.nova_magic_armor, abilitySalvage, "_1"))
                              .save(wrapped, wrap(NovaRegistry.nova_magic_armor, abilityFolder, "_1"));
         ModifierRecipeBuilder.modifier(NovaRegistry.nova_magic_armor)
                              .setTools(TinkerTags.Items.WORN_ARMOR)
-                             .addInput(ItemsRegistry.MAGE_FIBER, 8)
+                             .addInput(SizedIngredient.of(itemNameIngredient("ars_nouveau", "magebloom_fiber"), 8))
                              .addInput(Tags.Items.INGOTS_GOLD, 8)
                              .addInput(Tags.Items.INGOTS_GOLD, 8)
                              .setLevelRange(2, 2)
                              .save(wrapped, wrap(NovaRegistry.nova_magic_armor, slotlessFolder, "_general_mage"));
         ModifierRecipeBuilder.modifier(NovaRegistry.nova_magic_armor)
                              .setTools(TinkerTags.Items.WORN_ARMOR)
-                             .addInput(ItemsRegistry.MAGE_FIBER, 8)
+                             .addInput(SizedIngredient.of(itemNameIngredient("ars_nouveau", "magebloom_fiber"), 8))
                              .addInput(Tags.Items.GEMS_DIAMOND, 8)
                              .addInput(Tags.Items.GEMS_DIAMOND, 8)
                              .setLevelRange(3, 3)
                              .save(wrapped, wrap(NovaRegistry.nova_magic_armor, slotlessFolder, "_general_archmage"));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.nova_mana_reduce)
                              .setTools(TinkerTags.Items.ARMOR)
-                             .addInput(ItemsRegistry.GREATER_EXPERIENCE_GEM, 6)
-                             .addInput(ItemsRegistry.BLANK_THREAD, 1)
-                             .addInput(ItemsRegistry.MAGE_BLOOM, 3)
-                             .addInput(ItemsRegistry.BLANK_PARCHMENT, 2)
+                             .addInput(SizedIngredient.of(itemNameIngredient("ars_nouveau", "greater_experience_gem"), 6))
+                             .addInput(itemNameIngredient("ars_nouveau", "blank_thread"))
+                             .addInput(SizedIngredient.of(itemNameIngredient("ars_nouveau", "magebloom"), 3))
+                             .addInput(SizedIngredient.of(itemNameIngredient("ars_nouveau", "blank_parchment"), 2))
                              .setSlots(SlotType.UPGRADE, 1)
                              .setMaxLevel(1)
                              .saveSalvage(wrapped, wrap(DreamtinkerModifiers.Ids.nova_mana_reduce, upgradeSalvage, "_1"))
                              .save(wrapped, wrap(DreamtinkerModifiers.Ids.nova_mana_reduce, upgradeFolder, "_1"));
         IncrementalModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.nova_spell_slots)
                                         .setTools(Ingredient.of(NovaRegistry.per_aspera_scriptum.get()))
-                                        .setInput(com.hollingsworth.arsnouveau.setup.registry.BlockRegistry.SOURCE_GEM_BLOCK.asItem(), 1, 64)
+                                        .setInput(itemNameIngredient("ars_nouveau", "source_gem_block"), 1, 64)
                                         .setSlots(SlotType.UPGRADE, 1)
                                         .setMaxLevel(10)
                                         .saveSalvage(wrapped, prefix(DreamtinkerModifiers.Ids.nova_spell_slots, upgradeSalvage))
                                         .save(wrapped, prefix(DreamtinkerModifiers.Ids.nova_spell_slots, upgradeFolder));
         ModifierRecipeBuilder.modifier(NovaRegistry.nova_enchanter_sword)
                              .setTools(TinkerTags.Items.MELEE_PRIMARY)
-                             .addInput(com.hollingsworth.arsnouveau.setup.registry.BlockRegistry.SOURCE_GEM_BLOCK.asItem(), 2)
+                             .addInput(SizedIngredient.of(itemNameIngredient("ars_nouveau", "source_gem_block"), 2))
                              .addInput(Tags.Items.STORAGE_BLOCKS_GOLD, 2)
                              .addInput(Tags.Items.GEMS_DIAMOND, 1)
                              .addInput(Items.DIAMOND_SWORD, 1)
@@ -1901,27 +1902,27 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .save(wrapped, prefix(NovaRegistry.nova_enchanter_sword, abilityFolder));
         ModifierRecipeBuilder.modifier(NovaRegistry.nova_wand)
                              .setTools(TinkerTags.Items.SPECIAL_TOOLS)
-                             .addInput(ItemsRegistry.SOURCE_GEM, 4)
+                             .addInput(SizedIngredient.of(itemNameIngredient("ars_nouveau", "source_gem"), 4))
                              .addInput(Tags.Items.INGOTS_GOLD, 2)
-                             .addInput(ItemsRegistry.AIR_ESSENCE, 1)
-                             .addInput(ItemsRegistry.MANIPULATION_ESSENCE, 1)
+                             .addInput(itemNameIngredient("ars_nouveau", "air_essence"))
+                             .addInput(itemNameIngredient("ars_nouveau", "manipulation_essence"))
                              .setSlots(SlotType.ABILITY, 1)
                              .setMaxLevel(1)
                              .saveSalvage(wrapped, prefix(NovaRegistry.nova_wand, abilitySalvage))
                              .save(wrapped, prefix(NovaRegistry.nova_wand, abilityFolder));
         ModifierRecipeBuilder.modifier(NovaRegistry.nova_spell_bow)
                              .setTools(TinkerTags.Items.BOWS)
-                             .addInput(ItemsRegistry.SOURCE_GEM, 1)
+                             .addInput(itemNameIngredient("ars_nouveau", "source_gem"))
                              .addInput(Tags.Items.STORAGE_BLOCKS_GOLD, 1)
-                             .addInput(ItemsRegistry.MANIPULATION_ESSENCE, 1)
+                             .addInput(itemNameIngredient("ars_nouveau", "manipulation_essence"))
                              .setSlots(SlotType.ABILITY, 1)
                              .setMaxLevel(1)
                              .saveSalvage(wrapped, prefix(NovaRegistry.nova_spell_bow, abilitySalvage))
                              .save(wrapped, prefix(NovaRegistry.nova_spell_bow, abilityFolder));
         ModifierRecipeBuilder.modifier(NovaRegistry.nova_enchanter_shield)
                              .setTools(TinkerTags.Items.SHIELDS)
-                             .addInput(com.hollingsworth.arsnouveau.setup.registry.BlockRegistry.SOURCE_GEM_BLOCK.asItem(), 2)
-                             .addInput(com.hollingsworth.arsnouveau.setup.registry.BlockRegistry.SOURCE_GEM_BLOCK.asItem(), 2)
+                             .addInput(SizedIngredient.of(itemNameIngredient("ars_nouveau", "source_gem_block"), 2))
+                             .addInput(SizedIngredient.of(itemNameIngredient("ars_nouveau", "source_gem_block"), 2))
                              .addInput(Items.SHIELD, 1)
                              .setSlots(SlotType.UPGRADE, 1)
                              .setMaxLevel(1)
@@ -1929,9 +1930,9 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .save(wrapped, prefix(NovaRegistry.nova_enchanter_shield, upgradeFolder));
         ModifierRecipeBuilder.modifier(NovaRegistry.nova_mana_shield)
                              .setTools(TinkerTags.Items.ARMOR)
-                             .addInput(com.hollingsworth.arsnouveau.setup.registry.BlockRegistry.SOURCE_GEM_BLOCK.asItem(), 16)
-                             .addInput(com.hollingsworth.arsnouveau.setup.registry.BlockRegistry.SOURCE_GEM_BLOCK.asItem(), 16)
-                             .addInput(ItemsRegistry.ABJURATION_ESSENCE, 9)
+                             .addInput(SizedIngredient.of(itemNameIngredient("ars_nouveau", "source_gem_block"), 16))
+                             .addInput(SizedIngredient.of(itemNameIngredient("ars_nouveau", "source_gem_block"), 16))
+                             .addInput(SizedIngredient.of(itemNameIngredient("ars_nouveau", "abjuration_essence"), 9))
                              .setSlots(SlotType.UPGRADE, 1)
                              .setMaxLevel(3)
                              .saveSalvage(wrapped, prefix(NovaRegistry.nova_mana_shield, upgradeSalvage))
@@ -1939,10 +1940,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.cosmogony_tetrad)
                              .setTools(TinkerTags.Items.MODIFIABLE)
-                             .addInput(ItemsRegistry.EARTH_ESSENCE, 1)
-                             .addInput(ItemsRegistry.WATER_ESSENCE, 1)
-                             .addInput(ItemsRegistry.AIR_ESSENCE, 1)
-                             .addInput(ItemsRegistry.FIRE_ESSENCE, 1)
+                             .addInput(itemNameIngredient("ars_nouveau", "earth_essence"))
+                             .addInput(itemNameIngredient("ars_nouveau", "water_essence"))
+                             .addInput(itemNameIngredient("ars_nouveau", "air_essence"))
+                             .addInput(itemNameIngredient("ars_nouveau", "fire_essence"))
                              .setMaxLevel(1)
                              .save(wrapped, prefix(DreamtinkerModifiers.Ids.cosmogony_tetrad, slotlessFolder));
         String OCC = "occultism";
