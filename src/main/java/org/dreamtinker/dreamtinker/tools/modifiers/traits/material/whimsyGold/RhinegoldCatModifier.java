@@ -110,7 +110,8 @@ public class RhinegoldCatModifier extends Modifier implements ProcessLootModifie
 
     private static List<ItemStack> tryTable(ServerLevel level, LivingEntity victim, float triggerRate, int looting, CandidateFilter filter) {
         try {
-            return LootTableItemScanner.tryExtractLoot(level, victim, triggerRate, looting, filter, LootScanCommon::pickByInverseRate);
+            return LootTableItemScanner.tryExtractLoot(level, victim, triggerRate, looting, LootScanCommon.LootRollMode.RARE, filter,
+                                                       LootScanCommon::pickByInverseRate);
         }
         catch (Throwable ignored) {
             return List.of();
@@ -119,7 +120,8 @@ public class RhinegoldCatModifier extends Modifier implements ProcessLootModifie
 
     private static List<ItemStack> tryGlm(ServerLevel level, LivingEntity victim, float triggerRate, int looting, CandidateFilter filter) {
         try {
-            return GlobalLootModifierItemScanner.tryExtractLoot(level, victim, triggerRate, looting, filter, LootScanCommon::pickByInverseRate);
+            return GlobalLootModifierItemScanner.tryExtractLoot(level, victim, triggerRate, looting, LootScanCommon.LootRollMode.NATURAL, filter,
+                                                                LootScanCommon::pickByInverseRate);
         }
         catch (Throwable ignored) {
             return List.of();

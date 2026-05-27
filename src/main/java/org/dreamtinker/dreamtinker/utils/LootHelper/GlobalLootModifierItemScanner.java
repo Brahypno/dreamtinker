@@ -94,7 +94,7 @@ public final class GlobalLootModifierItemScanner {
                 level,
                 target,
                 triggerRate,
-                lootingLevel,
+                lootingLevel, LootRollMode.RARE,
                 null,
                 LootScanCommon::pickByNaturalRate
         );
@@ -105,7 +105,7 @@ public final class GlobalLootModifierItemScanner {
                 level,
                 target,
                 triggerRate,
-                lootingLevel,
+                lootingLevel, LootRollMode.RARE,
                 CandidateFilter.rareByItemOrDropRate()
                                .and(CandidateFilter.estimatedRateBelow(0.25D)),
                 LootScanCommon::pickByInverseRate
@@ -116,7 +116,7 @@ public final class GlobalLootModifierItemScanner {
             ServerLevel level,
             LivingEntity target,
             float triggerRate,
-            int lootingLevel,
+            int lootingLevel, LootRollMode mode,
             @Nullable CandidateFilter filter,
             LootCandidatePicker picker
     ) {
@@ -124,7 +124,7 @@ public final class GlobalLootModifierItemScanner {
                 level,
                 target,
                 triggerRate,
-                lootingLevel,
+                lootingLevel, mode,
                 filter,
                 picker,
                 Options.defaultOptions()
@@ -135,7 +135,7 @@ public final class GlobalLootModifierItemScanner {
             ServerLevel level,
             LivingEntity target,
             float triggerRate,
-            int lootingLevel,
+            int lootingLevel, LootRollMode mode,
             @Nullable CandidateFilter filter,
             LootCandidatePicker picker,
             Options options
@@ -153,8 +153,8 @@ public final class GlobalLootModifierItemScanner {
 
         addRolledStack(out, candidates, level.random, picker);
 
-        for (int roll = 1; roll <= Math.max(0, lootingLevel); roll++) {
-            float rate = LootScanCommon.getLootingExtraRollRate(triggerRate, roll);
+        for (int roll = 0; roll <= Math.max(0, lootingLevel); roll++) {
+            float rate = LootScanCommon.getLootingExtraRollRate(triggerRate, roll, mode);
 
             if (level.random.nextFloat() >= rate)
                 continue;

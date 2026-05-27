@@ -50,7 +50,7 @@ public final class LootTableItemScanner {
     }
 
     public static List<ItemStack> tryExtractSomeLoot(ServerLevel level, LivingEntity target, float triggerRate, int lootingLevel) {
-        return tryExtractLoot(level, target, triggerRate, lootingLevel, null, LootScanCommon::pickByNaturalRate);
+        return tryExtractLoot(level, target, triggerRate, lootingLevel, LootScanCommon.LootRollMode.NATURAL, null, LootScanCommon::pickByNaturalRate);
     }
 
     public static List<ItemStack> tryExtractRareLoot(ServerLevel level, LivingEntity target, float triggerRate, int lootingLevel) {
@@ -58,10 +58,10 @@ public final class LootTableItemScanner {
                 level,
                 target,
                 triggerRate,
-                lootingLevel,
+                lootingLevel, LootRollMode.RARE,
                 CandidateFilter
                         .rareByItemOrDropRate()
-                        .and(CandidateFilter.estimatedRateBelow(0.25D)),
+                        .and(CandidateFilter.estimatedRateBelow(0.30D)),
                 LootScanCommon::pickByInverseRate
         );
     }
@@ -70,12 +70,12 @@ public final class LootTableItemScanner {
             ServerLevel level,
             LivingEntity target,
             float triggerRate,
-            int lootingLevel,
+            int lootingLevel, LootRollMode mode,
             @Nullable CandidateFilter filter,
             LootCandidatePicker picker
     ) {
         List<LootCandidate> candidates = collectCandidatesFromPossibleTables(level, target, lootingLevel, null);
-        return LootScanCommon.tryExtractLootStacks(candidates, level.random, triggerRate, lootingLevel, filter, picker);
+        return LootScanCommon.tryExtractLootStacks(candidates, level.random, triggerRate, lootingLevel, mode, filter, picker);
     }
 
     private static List<LootCandidate> collectCandidatesFromPossibleTables(

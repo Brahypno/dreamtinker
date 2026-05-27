@@ -48,7 +48,7 @@ public final class LootScanCommon {
             List<LootCandidate> candidates,
             RandomSource random,
             float triggerRate,
-            int lootingLevel,
+            int lootingLevel, LootRollMode mode,
             @Nullable CandidateFilter filter,
             LootCandidatePicker picker
     ) {
@@ -65,8 +65,8 @@ public final class LootScanCommon {
 
         addRolledStack(out, candidates, random, picker);
 
-        for (int roll = 1; roll <= Math.max(1, lootingLevel); roll++) {
-            float rate = getLootingExtraRollRate(triggerRate, roll);
+        for (int roll = 0; roll <= Math.max(0, lootingLevel); roll++) {
+            float rate = getLootingExtraRollRate(triggerRate, roll, mode);
 
             if (random.nextFloat() >= rate)
                 continue;
@@ -115,10 +115,18 @@ public final class LootScanCommon {
         return candidates.get(candidates.size() - 1);
     }
 
-    public static float getLootingExtraRollRate(float triggerRate, int roll) {
+    public static float getLootingExtraRollRate(float triggerRate, int roll, LootRollMode mode) {
         if (roll <= 0)
             return 1.0F;
-        return Mth.clamp(triggerRate / roll, 0.0F, 1.0F);
+
+        return switch (mode) {
+            case NATURAL -> Mth.clamp(triggerRate / roll, 0.0F, 1.0F);
+
+            case RARE -> {
+                float rate = triggerRate * (float) Math.pow(0.72D, roll - 1);
+                yield Mth.clamp(rate, 0.0F, 0.85F);
+            }
+        };
     }
 
     public static ItemStack rollOneStack(List<LootCandidate> candidates, RandomSource random, LootCandidatePicker picker) {
@@ -282,6 +290,8 @@ public final class LootScanCommon {
     public static double clamp(double value, double min, double max) {
         return Math.max(min, Math.min(max, value));
     }
+
+    public enum LootRollMode {NATURAL, RARE}
 
     public enum SourceType {LOOT_TABLE, GLOBAL_LOOT_MODIFIER, FORCED_SCANNER_FALLBACK}
 

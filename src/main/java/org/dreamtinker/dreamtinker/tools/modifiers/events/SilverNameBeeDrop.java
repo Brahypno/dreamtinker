@@ -45,7 +45,7 @@ public class SilverNameBeeDrop {
               (livingAttacker.hasEffect(DreamtinkerEffects.SilverNameBee.get()) || DTModifierCheck.ModifierInHand(livingAttacker,
                                                                                                                   DreamtinkerModifiers.Ids.silver_name_bee))))
             return;
-        List<ItemStack> forcedStacks = tryExtractRareLoot(serverLevel, victim, 0.35f, event.getLootingLevel());
+        List<ItemStack> forcedStacks = tryExtractRareLoot(serverLevel, victim, 0.40f, event.getLootingLevel());
         for (ItemStack stack : forcedStacks) {
             if (stack.isEmpty())
                 continue;
