@@ -43,17 +43,11 @@ public class DreamtinkerTagKeys {
             return TagKey.create(ForgeRegistries.FLUIDS.getRegistryKey(), new ResourceLocation("forge", name));
         }
 
-        private static TagKey<Fluid> dtTag(String name) {
-            return TagKey.create(ForgeRegistries.FLUIDS.getRegistryKey(), new ResourceLocation(Dreamtinker.MODID, name));
-        }
-
         public static final TagKey<Fluid> molten_echo_shard = forgeTag("molten_echo_shard");
         public static final TagKey<Fluid> molten_echo = forgeTag("molten_echo");
         public static final TagKey<Fluid> molten_crying_obsidian = forgeTag("molten_crying_obsidian");
         public static final TagKey<Fluid> molten_orichalcum = forgeTag("molten_orichalcum");
         public static final TagKey<Fluid> molten_arcane_gold = forgeTag("molten_arcane_gold");
-
-        public static final TagKey<Fluid> narcissus_wing_used = dtTag("narcissus_wing_used");
     }
 
     public static class Items {

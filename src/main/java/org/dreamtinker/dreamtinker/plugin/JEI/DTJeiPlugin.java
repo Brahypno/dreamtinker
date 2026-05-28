@@ -22,7 +22,6 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.library.recipe.virtual.WorldRitualEntry;
-import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.dreamtinker.dreamtinker.utils.DTToolsPartsHelper;
 import org.jetbrains.annotations.NotNull;
@@ -198,19 +197,6 @@ public final class DTJeiPlugin implements IModPlugin {
                 EntityIngredient.of(EntityType.PLAYER),
                 null, null, null, null, rainbowHoneyRate.get(),
                 "In rain",  // underwater
-                false   // drowning
-        ));
-
-        list.add(new WorldRitualEntry(
-                WorldRitualEntry.Trigger.USE_ITEM,
-                Ingredient.of(DreamtinkerTools.narcissus_wing),
-                FluidIngredient.of(DreamtinkerTagKeys.Fluids.narcissus_wing_used, 50),
-                null,
-                null,
-                null,
-                null,
-                null, null, null, null, null,
-                "Available Fluids",  // underwater
                 false   // drowning
         ));
 

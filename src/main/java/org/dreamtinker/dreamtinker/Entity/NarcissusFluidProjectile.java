@@ -344,7 +344,7 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
                                         null != toolStackView ? (toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) + 1) * dmg : dmg);
 
                     }
-                    FluidEffectContext.Entity context = this.buildContext().location(result.getLocation()).target(this.getOwner());
+                    FluidEffectContext.Entity context = this.buildContext().location(result.getLocation()).target(target);
                     int hate = 1;
                     if (null != toolStackView)
                         hate = Math.max(1, toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.hate_memory) + 1);
