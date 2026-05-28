@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "in_structure=false": {
       "model": "dreamtinker:block/ashen_accelerator"
+    },
+    "in_structure=true": {
+      "model": "dreamtinker:block/transmute/ashen/ashen_accelerator_active"
     }
   }
 }

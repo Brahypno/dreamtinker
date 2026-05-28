@@ -122,11 +122,13 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
         glassBlock(DreamTinkerSmeltery.ashenSoulGlass.get(), DreamTinkerSmeltery.ashenSoulGlassPane.get(), "transmute/soul_glass/",
                    Dreamtinker.getLocation("block/transmute/soul_glass"), Dreamtinker.getLocation("block/transmute/glass_top"), -1, true, translucent);
 
-        simpleBlockWithItem(DreamTinkerSmeltery.ashenHeater.get(),
-                            models().cubeAll(itemKey(DreamTinkerSmeltery.ashenHeater.get()).getPath(), modLoc("block/transmute/ashen/ashen_heater")));
+        structureBlock(DreamTinkerSmeltery.ashenHeater.get(),
+                       models().cubeAll(itemKey(DreamTinkerSmeltery.ashenHeater.get()).getPath(), modLoc("block/transmute/ashen/ashen_heater")),
+                       models().getExistingFile(modLoc("block/transmute/ashen/ashen_heater_active")));
 
-        simpleBlockWithItem(DreamTinkerSmeltery.ashenAccel.get(),
-                            models().cubeAll(itemKey(DreamTinkerSmeltery.ashenAccel.get()).getPath(), modLoc("block/transmute/ashen/ashen_accelerator")));
+        structureBlock(DreamTinkerSmeltery.ashenAccel.get(),
+                       models().cubeAll(itemKey(DreamTinkerSmeltery.ashenAccel.get()).getPath(), modLoc("block/transmute/ashen/ashen_accelerator")),
+                       models().getExistingFile(modLoc("block/transmute/ashen/ashen_accelerator_active")));
 
         cubeAllIntTextureBlock(DreamTinkerSmeltery.ashenAlloySwitch.get(), "transmute/ashen_alloy_switch", AshenButtonBlock.Function_Set, 1);
         cubeAllIntTextureBlock(DreamTinkerSmeltery.ashenMeltSwitch.get(), "transmute/ashen_melt_switch", AshenButtonBlock.Function_Set, 2);
@@ -303,6 +305,20 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
               .with(HorizontalDirectionalBlock.FACING, dir)
               .addModels(new ConfiguredModel(active, 0, y, false));
         }
+        itemModels().withExistingParent(itemKey(block).getPath(), inactive.getLocation());
+    }
+
+    private void structureBlock(Block block, ModelFile inactive, ModelFile active) {
+        var vb = getVariantBuilder(block);
+
+        vb.partialState()
+          .with(SearedBlock.IN_STRUCTURE, false)
+          .addModels(new ConfiguredModel(inactive));
+
+        vb.partialState()
+          .with(SearedBlock.IN_STRUCTURE, true)
+          .addModels(new ConfiguredModel(active));
+
         itemModels().withExistingParent(itemKey(block).getPath(), inactive.getLocation());
     }
 

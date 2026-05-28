@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "in_structure=false": {
       "model": "dreamtinker:block/ashen_heater"
+    },
+    "in_structure=true": {
+      "model": "dreamtinker:block/transmute/ashen/ashen_heater_active"
     }
   }
 }
