@@ -16,7 +16,6 @@
     "compact.malum.EdgeOfDeliveranceItemMixin",
     "compact.malum.SpiritInfusionRecipeBuilderAccessor",
     "compact.malum.SpiritInfusionRecipeBuilderResultMixin",
-    "compact.malum.MalumScytheItemMixin",
     "compact.ars_nouveau.AlterationTableRendererMixin",
     "compact.ars_nouveau.ArmorUpgradeRecipeCategoryMixin",
     "compact.ars_nouveau.EntityMeltingModuleMixin",

@@ -21,6 +21,7 @@ public abstract class ExtraSCYTHEModifier {
 
 
     // 重入保护，防止 addModifier -> rebuildStats -> 再次注入导致死循环
+    @Unique
     private static final ThreadLocal<Boolean> AVOID_RECURSION = ThreadLocal.withInitial(() -> false);
 
     // 直接拿 ToolStack 的 this
