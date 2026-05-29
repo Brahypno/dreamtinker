@@ -1638,6 +1638,10 @@
   "jei.dreamtinker.celestial_type.sun": "Day Time",
   "jei.dreamtinker.celestial_type.moon_phase": "Night with Moon Phase: ",
   "jei.dreamtinker.chance": "Chance",
+  "jei.dreamtinker.min_y": "Min Y: %s",
+  "jei.dreamtinker.condition.drowning": "Drowning",
+  "jei.dreamtinker.condition.under_water": "Under Water",
+  "jei.dreamtinker.condition.in_rain": "In Rain",
 
   "death.attack.dreamtinker.null_void": "consumed by nothingness",
   "death.attack.dreamtinker.rain_bow": "vanished like rainbow",

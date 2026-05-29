@@ -19,6 +19,7 @@ import org.dreamtinker.dreamtinker.common.data.tags.ModifierTagProvider;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.armor.RepriseProtectionModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.armor.ResonanceArmorModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.MobEffectsRemoverModule;
+import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.NarcissusFluidFeedbackModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.SelfMobEffectModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.harvest.AutoPureDaisyModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.harvest.BlockLootMultiplierModule;
@@ -306,6 +307,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         if (event.getRegistryKey() == Registries.RECIPE_SERIALIZER){
             ModifierModule.LOADER.register(Dreamtinker.getLocation("swappable_circle_weapon_attack"), SwappableCircleWeaponAttack.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("effects_remover"), MobEffectsRemoverModule.LOADER);
+            ModifierModule.LOADER.register(Dreamtinker.getLocation("narcissus_fluid_feedback"), NarcissusFluidFeedbackModule.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("self_mob_effect"), SelfMobEffectModule.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("block_loot_multiplier"), BlockLootMultiplierModule.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("entity_loot_multiplier"), EntityLootMultiplierModule.LOADER);

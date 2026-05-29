@@ -1638,6 +1638,10 @@
   "jei.dreamtinker.celestial_type.sun": "白日",
   "jei.dreamtinker.celestial_type.moon_phase": "夜与月相: ",
   "jei.dreamtinker.chance": "概率",
+  "jei.dreamtinker.min_y": "最低 Y：%s",
+  "jei.dreamtinker.condition.drowning": "处于溺水状态",
+  "jei.dreamtinker.condition.under_water": "水下",
+  "jei.dreamtinker.condition.in_rain": "雨中",
 
   "death.attack.dreamtinker.null_void": "被虚无吞没",
   "death.attack.dreamtinker.rain_bow": "消失，犹如彩虹一般",

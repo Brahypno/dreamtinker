@@ -16,6 +16,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 import org.dreamtinker.dreamtinker.Entity.NarcissusFluidProjectile;
+import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.NarcissusFluidFeedbackModule;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
@@ -69,6 +70,7 @@ public class MemoryBase extends Modifier implements GeneralInteractionModifierHo
         builder.addHook(this, ModifierHooks.GENERAL_INTERACT);
         super.registerHooks(builder);
         builder.addModule(ToolTankHelper.TANK_HANDLER);
+        builder.addModule(NarcissusFluidFeedbackModule.builder().build());
         builder.addModule(StatBoostModule.add(ToolTankHelper.CAPACITY_STAT).eachLevel(FluidType.BUCKET_VOLUME));
     }
 

@@ -137,7 +137,7 @@ public final class WorldRitualCategory implements IRecipeCategory<WorldRitualEnt
                             40, 8, 0xFFFFFF, false);
         int y = 70;
         if (recipe.minY() != null){
-            graphics.drawString(font, "Min Y: " + recipe.minY(), 8, y, 0xAAFFAA, false);
+            graphics.drawString(font, Component.translatable("jei.dreamtinker.min_y", recipe.minY()), 8, y, 0xAAFFAA, false);
             y += 10;
         }
         if (recipe.chance() != null){
@@ -147,11 +147,18 @@ public final class WorldRitualCategory implements IRecipeCategory<WorldRitualEnt
             y += 10;
         }
         if (Boolean.TRUE.equals(recipe.drowning())){
-            graphics.drawString(font, "Drowning", 8, y, 0xFF6666, false);
+            graphics.drawString(font, Component.translatable("jei.dreamtinker.condition.drowning"), 8, y, 0xFF6666, false);
             y += 10;
         }
-        if (null != recipe.text())
-            graphics.drawString(font, recipe.text(), 8, y, 0xFF6666, false);
+        if (null != recipe.text()){
+            for (var line : font.split(Component.translatable(recipe.text()), 154)) {
+                graphics.drawString(font, line, 8, y, 0xFF6666, false);
+                y += 10;
+                if (y > 86){
+                    break;
+                }
+            }
+        }
     }
 
     /**

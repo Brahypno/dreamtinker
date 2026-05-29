@@ -134,7 +134,7 @@ public final class DTJeiPlugin implements IModPlugin {
                 null,
                 null,
                 null, null, null, null, null,
-                "Under Water",  // underwater
+                "jei.dreamtinker.condition.under_water",  // underwater
                 true   // drowning
         ));
         list.add(new WorldRitualEntry(
@@ -196,7 +196,7 @@ public final class DTJeiPlugin implements IModPlugin {
                 null,
                 EntityIngredient.of(EntityType.PLAYER),
                 null, null, null, null, rainbowHoneyRate.get(),
-                "In rain",  // underwater
+                "jei.dreamtinker.condition.in_rain",  // underwater
                 false   // drowning
         ));
 

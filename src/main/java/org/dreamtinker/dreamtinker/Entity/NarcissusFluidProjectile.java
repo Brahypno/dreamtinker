@@ -31,6 +31,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
+import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.NarcissusFluidFeedbacks;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.MemoryBase;
 import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
@@ -328,6 +329,7 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
         FluidStack fluid = this.getFluid();
         Level level = this.level();
         if (!level.isClientSide && !fluid.isEmpty()){
+            FluidStack feedbackFluid = fluid.copy();
             FluidEffects recipe = FluidEffectManager.INSTANCE.find(fluid.getFluid());
             if (null != entity1){
                 if (recipe.hasEntityEffects()){
@@ -349,13 +351,17 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
                     if (null != toolStackView)
                         hate = Math.max(1, toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.hate_memory) + 1);
 
-                    int consumed = recipe.applyToEntity(fluid, this.power / hate, context, IFluidHandler.FluidAction.EXECUTE);
+                    int consumed = recipe.applyToEntity(fluid, NarcissusFluidFeedbacks.applyProjectileCatalyst(this, this.power / hate), context,
+                                                        IFluidHandler.FluidAction.EXECUTE);
                     fluid.shrink(consumed);
                     if (fluid.isEmpty()){
                         this.discard();
                     }else {
                         this.setFluid(fluid);
                     }
+                }
+                if (entity1 instanceof LivingEntity livingOwner){
+                    NarcissusFluidFeedbacks.onProjectileHit(this, livingOwner, target, feedbackFluid);
                 }
             }
         }
