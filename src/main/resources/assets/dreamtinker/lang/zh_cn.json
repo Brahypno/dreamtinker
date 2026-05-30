@@ -1580,6 +1580,11 @@
   "effect.dreamtinker.burden_bearer": "负轭者",
   "effect.dreamtinker.paradox_wound": "逆向创伤",
   "effect.dreamtinker.daylost": "失昼",
+  "effect.dreamtinker.temptation": "诱惑",
+  "item.minecraft.potion.effect.temptation": "诱惑药水",
+  "item.minecraft.splash_potion.effect.temptation": "喷溅型诱惑药水",
+  "item.minecraft.lingering_potion.effect.temptation": "滞留型诱惑药水",
+  "item.minecraft.tipped_arrow.effect.temptation": "诱惑之箭",
 
   "advancements.dreamtinker.root.title": "工匠幻梦",
   "advancements.dreamtinker.root.description": "欢迎来到幻梦世界",
@@ -1664,6 +1669,7 @@
 
   "tooltip.dreamtinker.mob_jar": "现在它可以被摆放在熔炼炉内部以熔炼内部实体。\n可以用法术治愈内部实体",
   "tooltip.dreamtinker.cursed_scroll": "现在部分匠魂强化会被视作诅咒附魔。",
+  "tooltip.dreamtinker.temptation_edicts": "唯一的禁止之事，就是输给诱惑。但是诱惑的通道已经被封堵。",
 
   "item.dreamtinker.ashen_brick": "烬灰砖",
   "block.dreamtinker.ender_mortar": "末影砂浆",

@@ -1,0 +1,22 @@
+{
+  "type": "tconstruct:alloy",
+  "inputs": [
+    {
+      "amount": 100,
+      "catalyst": true,
+      "tag": "dreamtinker:molten_desire"
+    },
+    {
+      "amount": 100,
+      "tag": "tconstruct:tooltips/gem_large"
+    }
+  ],
+  "result": {
+    "amount": 250,
+    "nbt": {
+      "Potion": "dreamtinker:temptation"
+    },
+    "tag": "forge:potion"
+  },
+  "temperature": 100
+}

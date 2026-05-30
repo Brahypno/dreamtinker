@@ -1581,6 +1581,11 @@
   "effect.dreamtinker.burden_bearer": "Burden Bearer",
   "effect.dreamtinker.paradox_wound": "Paradox Wound",
   "effect.dreamtinker.daylost": "Daylost",
+  "effect.dreamtinker.temptation": "Temptation",
+  "item.minecraft.potion.effect.temptation": "Potion of Temptation",
+  "item.minecraft.splash_potion.effect.temptation": "Splash Potion of Temptation",
+  "item.minecraft.lingering_potion.effect.temptation": "Lingering Potion of Temptation",
+  "item.minecraft.tipped_arrow.effect.temptation": "Arrow of Temptation",
 
   "advancements.dreamtinker.root.title": "Dream Tinker",
   "advancements.dreamtinker.root.description": "Welcome Dream Tinker",
@@ -1664,6 +1669,7 @@
 
   "tooltip.dreamtinker.mob_jar": "Now This jar block can be put inside any Transmute and melt entity inside\n Use spell to heal entity inside.",
   "tooltip.dreamtinker.cursed_scroll": "Now Some Tinkers` modifier would be treated as curse Enchantment.",
+  "tooltip.dreamtinker.temptation_edicts": "The one taboo was to succumb to temptation. But the path to temptation had already been sealed.",
 
   "item.dreamtinker.ashen_brick": "Ashen Brick",
   "block.dreamtinker.ender_mortar": "Ender Mortar",

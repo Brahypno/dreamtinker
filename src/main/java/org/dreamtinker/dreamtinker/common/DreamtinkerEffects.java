@@ -1,11 +1,15 @@
 package org.dreamtinker.dreamtinker.common;
 
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraftforge.event.entity.living.MobEffectEvent;
@@ -16,6 +20,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.effect.*;
+import org.dreamtinker.dreamtinker.utils.DTMessages;
 
 import java.util.List;
 
@@ -75,11 +80,45 @@ public class DreamtinkerEffects {
     public static final RegistryObject<PressingFrontEffect> PressingFront = EFFECT.register("pressing_front", PressingFrontEffect::new);
     public static final RegistryObject<BurdenBearerEffect> BurdenBearer = EFFECT.register("burden_bearer", BurdenBearerEffect::new);
     public static final RegistryObject<DaylostEffect> Daylost = EFFECT.register("daylost", DaylostEffect::new);
+    public static final RegistryObject<MobEffect> Temptation =
+            EFFECT.register("temptation", () -> new MobEffect(MobEffectCategory.NEUTRAL, 0x2B2730) {
+                @Override
+                public List<ItemStack> getCurativeItems() {return List.of();}
+            });
 
     public static final RegistryObject<MobEffect> ParadoxWound =
             EFFECT.register("paradox_wound", () -> new MobEffect(MobEffectCategory.NEUTRAL, 0xD8D4E8) {});
     public static final RegistryObject<Potion> ParadoxWoundPotion =
             POTIONS.register("paradox_wound", () -> new Potion(new MobEffectInstance(DreamtinkerEffects.ParadoxWound.get(), 20 * 45)));
+    public static final RegistryObject<Potion> TemptationPotion =
+            POTIONS.register("temptation", () -> new Potion(new MobEffectInstance(DreamtinkerEffects.Temptation.get(), 20 * 45)));
+
+    @SubscribeEvent
+    public static void applyTemptationEdicts(MobEffectEvent.Added event) {
+        MobEffectInstance instance = event.getEffectInstance();
+        if (instance.getEffect() != DreamtinkerEffects.Temptation.get()){
+            return;
+        }
+
+        LivingEntity entity = event.getEntity();
+        entity.level().registryAccess().registryOrThrow(Registries.MOB_EFFECT)
+              .getTag(DreamtinkerTagKeys.MobEffects.EDICTS)
+              .ifPresent(edicts -> {
+                  if (entity instanceof Player){
+                      DTMessages.clientChat(Component.translatable("tooltip.dreamtinker.temptation_edicts"), true);
+                  }
+                  for (Holder<MobEffect> effect : edicts) {
+                      entity.addEffect(new MobEffectInstance(
+                              effect.value(),
+                              instance.getDuration(),
+                              instance.getAmplifier(),
+                              instance.isAmbient(),
+                              instance.isVisible(),
+                              instance.showIcon()
+                      ));
+                  }
+              });
+    }
 
     @SubscribeEvent
     public static void allowBossEffects(MobEffectEvent.Applicable event) {

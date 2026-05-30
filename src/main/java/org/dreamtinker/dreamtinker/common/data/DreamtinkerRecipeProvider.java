@@ -41,6 +41,7 @@ import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
+import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.fluids.DreamtinkerFluids;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
@@ -70,6 +71,7 @@ import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.common.json.ConfigEnabledCondition;
 import slimeknights.tconstruct.common.registration.CastItemObject;
 import slimeknights.tconstruct.fluids.TinkerFluids;
+import slimeknights.tconstruct.fluids.fluids.PotionFluidType;
 import slimeknights.tconstruct.library.data.recipe.*;
 import slimeknights.tconstruct.library.materials.definition.MaterialId;
 import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
@@ -244,6 +246,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                           .addInput(TinkerFluids.meatSoup.getTag(), FluidValues.BOWL * 2)
                           .addInput(TinkerFluids.moltenEmerald.getTag(), FluidValues.GEM)
                           .save(consumer, prefix(DreamtinkerFluids.molten_bee_gem, folder));
+        AlloyRecipeBuilder.alloy(PotionFluidType.potionResult(DreamtinkerEffects.TemptationPotion.get(), FluidValues.BOTTLE), 100)
+                          .addCatalyst(FluidIngredient.of(DreamtinkerFluids.molten_desire.getTag(), FluidValues.GEM))
+                          .addInput(TinkerTags.Fluids.LARGE_GEM_TOOLTIPS, FluidValues.GEM)
+                          .save(consumer, location(folder + "temptation_potion"));
         wrapped = withCondition(consumer, tagFilled(Dreamtinker.forgeItemTag("ingots/silver")));
         AlloyRecipeBuilder.alloy(TinkerFluids.moltenElectrum, FluidValues.INGOT * 2)
                           .addInput(TinkerFluids.moltenGold.ingredient(FluidValues.INGOT))
