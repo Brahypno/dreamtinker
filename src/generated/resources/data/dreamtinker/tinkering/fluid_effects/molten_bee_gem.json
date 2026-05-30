@@ -1,0 +1,46 @@
+{
+  "block_effects": [
+    {
+      "type": "tconstruct:conditional",
+      "block": {
+        "type": "tconstruct:harvest_tier",
+        "tier": "minecraft:stone"
+      },
+      "effect": {
+        "type": "tconstruct:break_block",
+        "enchantments": {
+          "minecraft:fortune": 1
+        },
+        "hardness": 25.0
+      }
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "tconstruct:damage",
+      "damage": 2.0,
+      "damage_type": {
+        "melee": "tconstruct:fluid_spike_melee",
+        "ranged": "tconstruct:fluid_spike_ranged"
+      }
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "action": "add",
+      "effect": "minecraft:poison",
+      "level": 1,
+      "time": 100
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "action": "add",
+      "effect": "minecraft:regeneration",
+      "level": 1,
+      "time": 60
+    }
+  ],
+  "fluid": {
+    "amount": 25,
+    "tag": "dreamtinker:molten_bee_gem"
+  }
+}

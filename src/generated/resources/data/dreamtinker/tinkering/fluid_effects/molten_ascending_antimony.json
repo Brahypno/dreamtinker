@@ -19,7 +19,7 @@
       "effect": {
         "type": "tconstruct:break_block",
         "enchantments": {
-          "minecraft:fortune": 3
+          "minecraft:fortune": 5
         },
         "hardness": 50.0
       }

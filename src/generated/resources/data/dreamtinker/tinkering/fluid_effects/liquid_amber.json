@@ -1,0 +1,28 @@
+{
+  "block_effects": [
+    {
+      "type": "tconstruct:place_block",
+      "block": "minecraft:honey_block"
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "tconstruct:mob_effect",
+      "action": "add",
+      "effect": "minecraft:slowness",
+      "level": 4,
+      "time": 180
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "action": "add",
+      "effect": "minecraft:mining_fatigue",
+      "level": 3,
+      "time": 180
+    }
+  ],
+  "fluid": {
+    "amount": 25,
+    "tag": "dreamtinker:liquid_amber"
+  }
+}

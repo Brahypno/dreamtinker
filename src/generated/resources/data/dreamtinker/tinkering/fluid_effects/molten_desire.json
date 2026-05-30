@@ -1,0 +1,37 @@
+{
+  "entity_effects": [
+    {
+      "type": "tconstruct:damage",
+      "damage": 1.0,
+      "damage_type": {
+        "melee": "tconstruct:fluid_magic_melee",
+        "ranged": "tconstruct:fluid_magic_ranged"
+      }
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "action": "add",
+      "effect": "minecraft:speed",
+      "level": 4,
+      "time": 120
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "action": "add",
+      "effect": "minecraft:strength",
+      "level": 3,
+      "time": 120
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "action": "add",
+      "effect": "minecraft:nausea",
+      "level": 2,
+      "time": 120
+    }
+  ],
+  "fluid": {
+    "amount": 25,
+    "tag": "dreamtinker:molten_desire"
+  }
+}

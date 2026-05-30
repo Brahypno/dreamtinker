@@ -1,0 +1,37 @@
+{
+  "block_effects": [
+    {
+      "type": "tconstruct:place_block",
+      "block": "minecraft:frosted_ice"
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "tconstruct:damage",
+      "damage": 2.0,
+      "damage_type": {
+        "melee": "minecraft:freeze",
+        "ranged": "minecraft:freeze"
+      }
+    },
+    {
+      "type": "tconstruct:freeze",
+      "action": "add",
+      "time": 200
+    },
+    {
+      "type": "tconstruct:extinguish"
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "action": "add",
+      "effect": "minecraft:slowness",
+      "level": 2,
+      "time": 120
+    }
+  ],
+  "fluid": {
+    "amount": 50,
+    "tag": "dreamtinker:unmelting_teardrop"
+  }
+}

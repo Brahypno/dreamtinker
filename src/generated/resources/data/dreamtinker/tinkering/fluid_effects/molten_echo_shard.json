@@ -46,7 +46,7 @@
     }
   ],
   "fluid": {
-    "amount": 50,
+    "amount": 25,
     "tag": "dreamtinker:molten_echo_shard"
   }
 }

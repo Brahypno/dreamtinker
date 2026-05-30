@@ -4,7 +4,7 @@
       "type": "tconstruct:mob_effect",
       "action": "add",
       "effect": "minecraft:instant_health",
-      "level": 1,
+      "level": 2,
       "time": 100
     }
   ],

@@ -16,6 +16,10 @@ import net.minecraftforge.registries.RegisterEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.DreamtinkerModule;
 import org.dreamtinker.dreamtinker.common.data.tags.ModifierTagProvider;
+import org.dreamtinker.dreamtinker.library.modifiers.fluid.block.AutoTagCycleBlockFluidEffect;
+import org.dreamtinker.dreamtinker.library.modifiers.fluid.entity.ConditionalDamageFluidEffect;
+import org.dreamtinker.dreamtinker.library.modifiers.fluid.entity.DespairScalingDamageFluidEffect;
+import org.dreamtinker.dreamtinker.library.modifiers.fluid.entity.DrainLifeFluidEffect;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.armor.RepriseProtectionModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.armor.ResonanceArmorModule;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.MobEffectsRemoverModule;
@@ -87,6 +91,7 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.star_regulus.
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.star_regulus.as_one;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.whimsyGold.RhinegoldCatModifier;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
+import slimeknights.tconstruct.library.modifiers.fluid.FluidEffect;
 import slimeknights.tconstruct.library.modifiers.modules.ModifierModule;
 import slimeknights.tconstruct.library.modifiers.util.ModifierDeferredRegister;
 import slimeknights.tconstruct.library.modifiers.util.StaticModifier;
@@ -314,6 +319,11 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             ModifierModule.LOADER.register(Dreamtinker.getLocation("armor_resonance_module"), ResonanceArmorModule.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("reprise_protection_module"), RepriseProtectionModule.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("bontania_auto_pure_module"), AutoPureDaisyModule.LOADER);
+
+            FluidEffect.ENTITY_EFFECTS.register(Dreamtinker.getLocation("drain_life_fluid"), DrainLifeFluidEffect.LOADER);
+            FluidEffect.ENTITY_EFFECTS.register(Dreamtinker.getLocation("conditional_damage_fluid"), ConditionalDamageFluidEffect.LOADER);
+            FluidEffect.ENTITY_EFFECTS.register(Dreamtinker.getLocation("despair_scaling_damage_fluid"), DespairScalingDamageFluidEffect.LOADER);
+            FluidEffect.BLOCK_EFFECTS.register(Dreamtinker.getLocation("auto_tag_cycle_block_fluid"), AutoTagCycleBlockFluidEffect.LOADER);
 
         }
     }

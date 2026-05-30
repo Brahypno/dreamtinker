@@ -1,0 +1,33 @@
+{
+  "entity_effects": [
+    {
+      "type": "dreamtinker:conditional_damage_fluid",
+      "damage": 5.0,
+      "damage_type": {
+        "melee": "minecraft:freeze",
+        "ranged": "minecraft:freeze"
+      },
+      "fallback_damage": 2.0,
+      "target": "mantle:water_sensitive"
+    },
+    {
+      "type": "tconstruct:remove_effect",
+      "effect": "minecraft:strength"
+    },
+    {
+      "type": "tconstruct:remove_effect",
+      "effect": "minecraft:regeneration"
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "action": "add",
+      "effect": "minecraft:weakness",
+      "level": 2,
+      "time": 140
+    }
+  ],
+  "fluid": {
+    "amount": 10,
+    "tag": "dreamtinker:molten_cold_iron"
+  }
+}

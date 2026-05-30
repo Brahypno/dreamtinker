@@ -1,0 +1,39 @@
+{
+  "block_effects": [
+    {
+      "type": "tconstruct:mob_effect_cloud",
+      "effects": [
+        {
+          "effect": "minecraft:regeneration",
+          "level": 4,
+          "time": 100
+        }
+      ]
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "tconstruct:cure_effects",
+      "item": "minecraft:milk_bucket"
+    },
+    {
+      "type": "tconstruct:remove_effect",
+      "effect": "minecraft:wither"
+    },
+    {
+      "type": "tconstruct:remove_effect",
+      "effect": "minecraft:poison"
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "action": "add",
+      "effect": "minecraft:regeneration",
+      "level": 4,
+      "time": 100
+    }
+  ],
+  "fluid": {
+    "amount": 50,
+    "tag": "dreamtinker:liquid_pure_soul"
+  }
+}

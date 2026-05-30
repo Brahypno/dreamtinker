@@ -1,0 +1,37 @@
+{
+  "block_effects": [
+    {
+      "type": "tconstruct:conditional",
+      "block": {
+        "type": "tconstruct:harvest_tier",
+        "tier": "minecraft:diamond"
+      },
+      "effect": {
+        "type": "tconstruct:break_block",
+        "enchantments": {
+          "minecraft:silk_touch": 1
+        },
+        "hardness": 65.0
+      }
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "tconstruct:damage",
+      "damage": 3.0,
+      "damage_type": {
+        "melee": "tconstruct:fluid_spike_melee",
+        "ranged": "tconstruct:fluid_spike_ranged"
+      }
+    },
+    {
+      "type": "tconstruct:freeze",
+      "action": "add",
+      "time": 30
+    }
+  ],
+  "fluid": {
+    "amount": 25,
+    "tag": "dreamtinker:molten_black_sapphire"
+  }
+}

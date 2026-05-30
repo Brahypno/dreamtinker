@@ -1,0 +1,29 @@
+{
+  "block_effects": [
+    {
+      "type": "dreamtinker:auto_tag_cycle_block_fluid",
+      "chance": 0.35,
+      "skip_self": true
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "tconstruct:mob_effect",
+      "action": "add",
+      "effect": "minecraft:luck",
+      "level": 3,
+      "time": 200
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "action": "add",
+      "effect": "minecraft:glowing",
+      "level": 1,
+      "time": 120
+    }
+  ],
+  "fluid": {
+    "amount": 10,
+    "tag": "dreamtinker:molten_transmutation_gold"
+  }
+}

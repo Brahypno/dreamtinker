@@ -1,0 +1,33 @@
+{
+  "entity_effects": [
+    {
+      "type": "dreamtinker:despair_scaling_damage_fluid",
+      "damage": 20.0,
+      "damage_type": {
+        "melee": "dreamtinker:null_void",
+        "ranged": "dreamtinker:null_void"
+      },
+      "max_bonus": 100.0,
+      "missing_health_ratio": 1.5,
+      "negative_effect_bonus": 3.0
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "action": "add",
+      "effect": "minecraft:weakness",
+      "level": 2,
+      "time": 180
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "action": "add",
+      "effect": "minecraft:slowness",
+      "level": 2,
+      "time": 180
+    }
+  ],
+  "fluid": {
+    "amount": 50,
+    "tag": "dreamtinker:despair_essence"
+  }
+}

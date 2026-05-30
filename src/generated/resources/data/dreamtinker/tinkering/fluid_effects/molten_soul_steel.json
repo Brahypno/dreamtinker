@@ -1,0 +1,31 @@
+{
+  "entity_effects": [
+    {
+      "type": "tconstruct:damage",
+      "damage": 2.0,
+      "damage_type": {
+        "melee": "tconstruct:fluid_magic_melee",
+        "ranged": "tconstruct:fluid_magic_ranged"
+      }
+    },
+    {
+      "type": "dreamtinker:drain_life_fluid",
+      "damage": 2.0,
+      "damage_type": {
+        "melee": "minecraft:magic",
+        "ranged": "minecraft:magic"
+      }
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "action": "add",
+      "effect": "minecraft:resistance",
+      "level": 2,
+      "time": 100
+    }
+  ],
+  "fluid": {
+    "amount": 10,
+    "tag": "dreamtinker:molten_soul_steel"
+  }
+}

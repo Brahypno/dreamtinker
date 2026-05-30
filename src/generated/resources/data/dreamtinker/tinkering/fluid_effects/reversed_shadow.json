@@ -1,0 +1,35 @@
+{
+  "block_effects": [
+    {
+      "type": "tconstruct:move_block",
+      "push": false,
+      "sound": "minecraft:block.soul_sand.place"
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "tconstruct:damage",
+      "damage": 6.0,
+      "damage_type": {
+        "melee": "tconstruct:fluid_magic_melee",
+        "ranged": "tconstruct:fluid_magic_ranged"
+      }
+    },
+    {
+      "type": "tconstruct:push_entity",
+      "each_level": 2.0,
+      "flat": 2.0
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "action": "add",
+      "effect": "minecraft:nausea",
+      "level": 1,
+      "time": 120
+    }
+  ],
+  "fluid": {
+    "amount": 50,
+    "tag": "dreamtinker:reversed_shadow"
+  }
+}

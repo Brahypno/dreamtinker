@@ -1,0 +1,35 @@
+{
+  "entity_effects": [
+    {
+      "type": "dreamtinker:conditional_damage_fluid",
+      "damage": 5.0,
+      "damage_type": {
+        "melee": "minecraft:magic",
+        "ranged": "minecraft:magic"
+      },
+      "fallback_damage": 3.0,
+      "target": {
+        "type": "mantle:has_effect",
+        "effect": "minecraft:levitation"
+      }
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "action": "add",
+      "effect": "tconstruct:antigravity",
+      "level": 1,
+      "time": 120
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "action": "add",
+      "effect": "minecraft:slowness",
+      "level": 1,
+      "time": 100
+    }
+  ],
+  "fluid": {
+    "amount": 10,
+    "tag": "dreamtinker:molten_orichalcum"
+  }
+}

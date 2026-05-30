@@ -1,0 +1,30 @@
+{
+  "block_effects": [
+    {
+      "type": "tconstruct:interact"
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "tconstruct:damage",
+      "damage": 2.0,
+      "damage_type": {
+        "melee": "minecraft:out_of_world",
+        "ranged": "minecraft:out_of_world"
+      }
+    },
+    {
+      "type": "tconstruct:teleport",
+      "chances": {
+        "each_level": 5
+      },
+      "diameter": {
+        "each_level": 6
+      }
+    }
+  ],
+  "fluid": {
+    "amount": 250,
+    "tag": "dreamtinker:molten_ender_ash"
+  }
+}

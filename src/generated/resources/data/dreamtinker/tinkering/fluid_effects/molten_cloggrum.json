@@ -1,0 +1,45 @@
+{
+  "block_effects": [
+    {
+      "type": "tconstruct:move_block",
+      "push": true,
+      "sound": "minecraft:block.lever.click"
+    }
+  ],
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:mod_loaded",
+          "modid": "undergarden"
+        }
+      ]
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "tconstruct:damage",
+      "damage": 3.0,
+      "damage_type": {
+        "melee": "tconstruct:fluid_impact_melee",
+        "ranged": "tconstruct:fluid_impact_ranged"
+      }
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "action": "add",
+      "effect": "minecraft:mining_fatigue",
+      "level": 1,
+      "time": 120
+    }
+  ],
+  "fluid": {
+    "amount": 10,
+    "tag": "dreamtinker:molten_cloggrum"
+  }
+}
