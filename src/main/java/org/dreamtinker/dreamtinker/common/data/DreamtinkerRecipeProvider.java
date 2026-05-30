@@ -22,6 +22,7 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
@@ -1108,8 +1109,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                 .addSpirit(SpiritTypeRegistry.ELDRITCH_SPIRIT, 6)
                 .addSpirit(SpiritTypeRegistry.INFERNAL_SPIRIT, 6)
                 .build(consumer, "malum_" + DreamtinkerCommon.malignant_gluttony.getId().getPath());
-        new SpiritInfusionRecipeBuilder(Items.BUCKET, 1, new ItemStack(
-                Objects.requireNonNull(ForgeRegistries.ITEMS.getValue(Dreamtinker.getLocation("liquid_arcana_juice_bucket")))))
+        new SpiritInfusionRecipeBuilder(Items.GLASS_BOTTLE, 1,
+                                        PotionUtils.setPotion(new ItemStack(Items.POTION, 4), DreamtinkerEffects.ArcanaJuicePotion.get()))
                 .addExtraItem(ItemRegistry.NULL_SLATE.get(), 8)
                 .addExtraItem(ItemRegistry.MNEMONIC_FRAGMENT.get(), 8)
                 .addExtraItem(ItemRegistry.CURSED_SAP.get(), 2)
@@ -1118,7 +1119,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                 .addSpirit(SpiritTypeRegistry.AQUEOUS_SPIRIT, 6)
                 .addSpirit(SpiritTypeRegistry.SACRED_SPIRIT, 6)
                 .addSpirit(SpiritTypeRegistry.ELDRITCH_SPIRIT, 6)
-                .build(consumer, "malum_" + "liquid_arcana_juice_bucket");
+                .build(consumer, "malum_potion/arcana_juice");
 
         SeveringRecipeBuilder.severing(EntityIngredient.of(EntityType.ENDER_DRAGON), DreamtinkerCommon.snake_fang.get())
                              .save(consumer, location(serving_folder + "snake_fang"));

@@ -1,5 +1,6 @@
 package org.dreamtinker.dreamtinker.common;
 
+import com.sammy.malum.registry.common.MobEffectRegistry;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -92,6 +93,8 @@ public class DreamtinkerEffects {
             POTIONS.register("paradox_wound", () -> new Potion(new MobEffectInstance(DreamtinkerEffects.ParadoxWound.get(), 20 * 45)));
     public static final RegistryObject<Potion> TemptationPotion =
             POTIONS.register("temptation", () -> new Potion(new MobEffectInstance(DreamtinkerEffects.Temptation.get(), 20 * 45)));
+    public static final RegistryObject<Potion> ArcanaJuicePotion =
+            MALUM_POTIONS.register("arcana_juice", () -> new Potion(new MobEffectInstance(MobEffectRegistry.ECHOING_ARCANA.get(), 10 * 20, 3)));
 
     @SubscribeEvent
     public static void applyTemptationEdicts(MobEffectEvent.Added event) {

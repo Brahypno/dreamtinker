@@ -65,6 +65,7 @@ public abstract class DreamtinkerModule {
     public static final DeferredRegister<MobEffect> EL_EFFECT = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, MODID);
     public static final DeferredRegister<MobEffect> MALUM_EFFECT = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, MODID);
     public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTIONS, Dreamtinker.MODID);
+    public static final DeferredRegister<Potion> MALUM_POTIONS = DeferredRegister.create(ForgeRegistries.POTIONS, Dreamtinker.MODID);
     public static final FluidDeferredRegister FLUIDS = new FluidDeferredRegister(MODID);
     public static final FluidDeferredRegister EL_FLUIDS = new FluidDeferredRegister(MODID);
     public static final FluidDeferredRegister MALUM_FLUIDS = new FluidDeferredRegister(MODID);
@@ -135,6 +136,7 @@ public abstract class DreamtinkerModule {
             MALUM_FLUIDS.register(bus);
             MALUM_ITEMS.register(bus);
             MALUM_EFFECT.register(bus);
+            MALUM_POTIONS.register(bus);
         }
         if (ModList.get().isLoaded("ars_nouveau")){
             NOVA_MODI_TOOLS.register(bus);

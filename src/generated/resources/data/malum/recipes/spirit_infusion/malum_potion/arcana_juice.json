@@ -20,10 +20,12 @@
   ],
   "input": {
     "count": 1,
-    "item": "minecraft:bucket"
+    "item": "minecraft:glass_bottle"
   },
   "output": {
-    "item": "dreamtinker:liquid_arcana_juice_bucket"
+    "count": 4,
+    "item": "minecraft:potion",
+    "nbt": "{Potion:\"dreamtinker:arcana_juice\"}"
   },
   "spirits": [
     {
