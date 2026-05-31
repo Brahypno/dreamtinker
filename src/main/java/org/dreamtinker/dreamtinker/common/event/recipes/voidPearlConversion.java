@@ -22,11 +22,10 @@ import java.util.UUID;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.voidPearlDropRate;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
-public class voidpearlConversion {
+public class voidPearlConversion {
     private static final Map<UUID, ItemEntity> trackedEnderPearl = new HashMap<>();
     private static final Map<UUID, Vec3> trackedPosition = new HashMap<>();
 
-    // 当蓝冰掉落到世界中（被玩家丢出）
     @SubscribeEvent
     public static void onEntityJoinWorld(EntityJoinLevelEvent event) {
         if (event.getLevel().isClientSide || !(event.getEntity() instanceof ItemEntity item))
@@ -84,17 +83,27 @@ public class voidpearlConversion {
                     item.noPhysics = true;
                 }
             }else {
-                int minY = level.getMinBuildHeight();
-                if (item.getY() < (minY + 1)){
-                    // 1% 概率
-                    if (level.getRandom().nextFloat() < voidPearlDropRate.get()){
-                        item.setItem(new ItemStack(DreamtinkerCommon.void_pearl.get()));
-                        // 返航时悬浮，不受重力；短暂不可拾取避免被路过玩家截胡
+                double conversionLine = level.getMinBuildHeight() - 56.0D;
+
+                if (item.getY() < conversionLine){
+                    int inputCount = item.getItem().getCount();
+                    int outputCount = 0;
+
+                    for (int i = 0; i < inputCount; i++) {
+                        if (level.getRandom().nextFloat() < voidPearlDropRate.get()){
+                            outputCount++;
+                        }
+                    }
+
+                    if (outputCount > 0){
+                        item.setItem(new ItemStack(DreamtinkerCommon.void_pearl.get(), outputCount));
                         item.setNoGravity(true);
                         item.setPickUpDelay(40);
+                        // 继续使用 trackedPosition 作为返航目标
                     }else {
                         iterator.remove();
                         trackedPosition.remove(entry.getKey());
+                        // 不 discard，让原版虚空自然移除
                     }
                 }
             }
