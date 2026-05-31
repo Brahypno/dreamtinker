@@ -3,11 +3,11 @@
   "allow_crystal": true,
   "inputs": [
     {
-      "amount_needed": 4,
+      "amount_needed": 5,
       "item": "minecraft:prismarine"
     },
     {
-      "amount_needed": 15,
+      "amount_needed": 5,
       "tag": "forge:gems/prismarine"
     }
   ],

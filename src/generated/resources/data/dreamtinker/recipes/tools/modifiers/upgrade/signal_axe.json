@@ -3,15 +3,12 @@
   "allow_crystal": true,
   "inputs": [
     {
-      "amount_needed": 2,
       "item": "minecraft:red_candle"
     },
     {
-      "amount_needed": 2,
       "item": "minecraft:green_candle"
     },
     {
-      "amount_needed": 2,
       "item": "minecraft:blue_candle"
     }
   ],

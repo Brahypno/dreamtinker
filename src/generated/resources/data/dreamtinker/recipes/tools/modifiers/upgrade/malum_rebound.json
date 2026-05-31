@@ -27,7 +27,8 @@
   ],
   "inputs": [
     {
-      "item": "malum:crude_scythe"
+      "amount_needed": 2,
+      "item": "malum:processed_soulstone"
     }
   ],
   "level": {

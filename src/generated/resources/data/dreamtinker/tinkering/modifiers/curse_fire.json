@@ -3,13 +3,15 @@
   "modules": [
     {
       "type": "tconstruct:mob_effect",
+      "apply_before_melee": true,
       "effect": "dreamtinker:soul_fire",
       "level": {
+        "flat": 1.0,
         "per_level": 1.0
       },
       "time": {
-        "flat": 80.0,
-        "random": 10.0
+        "flat": 120.0,
+        "per_level": 20.0
       }
     },
     {

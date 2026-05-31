@@ -4,9 +4,9 @@
     "item": "tconstruct:ender_slime_crystal_block"
   },
   "cast_consumed": true,
-  "cooling_time": 127,
+  "cooling_time": 44,
   "fluid": {
-    "amount": 810,
+    "amount": 100,
     "tag": "dreamtinker:molten_ascending_antimony"
   },
   "result": "tconstruct:budding_ender_slime_crystal"

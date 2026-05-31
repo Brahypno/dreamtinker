@@ -3,7 +3,6 @@
   "allow_crystal": true,
   "inputs": [
     {
-      "amount_needed": 2,
       "item": "dreamtinker:fox_fur"
     },
     {

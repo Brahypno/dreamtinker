@@ -7,14 +7,12 @@
       "item": "minecraft:blue_ice"
     },
     {
-      "amount_needed": 2,
       "item": "dreamtinker:soul_steel_block"
     },
     {
       "item": "dreamtinker:soul_cast"
     },
     {
-      "amount_needed": 3,
       "item": "dreamtinker:poisonous_homunculus"
     }
   ],

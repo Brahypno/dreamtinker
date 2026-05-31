@@ -462,9 +462,9 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                           .time(RandomLevelingValue.random(20 * 2, 10))
                                           .build());
         buildModifier(Ids.curse_fire)
-                .addModule(MobEffectModule.builder(DreamtinkerEffects.SoulFire)
-                                          .level(RandomLevelingValue.perLevel(0, 1))
-                                          .time(RandomLevelingValue.random(20 * 4, 10))
+                .addModule(MobEffectModule.builder(DreamtinkerEffects.SoulFire).applyBeforeMelee(true)
+                                          .level(RandomLevelingValue.perLevel(1, 1))
+                                          .time(RandomLevelingValue.perLevel(20 * 6, 20))
                                           .build())
                 .addModule(MobEffectModule.builder(DreamtinkerEffects.cursed).applyBeforeMelee(true)
                                           .level(RandomLevelingValue.perLevel(0, 1))
