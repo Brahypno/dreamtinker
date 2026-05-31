@@ -205,7 +205,7 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
 
         // --- 追踪逻辑（不变，写回 vel） ---
         Vec3 vel = this.getDeltaMovement();
-        if (getChaseLiving() > 1 && !this.onGround()){
+        if (0 < getChaseLiving() && !this.onGround()){
             List<Entity> candidates = this.level().getEntitiesOfClass(
                     Entity.class,
                     this.getBoundingBox().inflate(12),
@@ -219,7 +219,7 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
                                            .min(Comparator.comparingDouble(e -> e.distanceToSqr(this)))
                                            .get();
                 Vec3 aim = nearest.position().add(0, nearest.getBbHeight() * 0.5, 0).subtract(this.position());
-                vel = this.getDeltaMovement().add(aim.normalize()).scale(0.75 * Math.max(1, getChaseLiving() - 1));
+                vel = this.getDeltaMovement().add(aim.normalize()).scale(0.75 * getChaseLiving());
             }
         }
 
@@ -373,11 +373,6 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
         double y = packet.getYa();
         double z = packet.getZa();
 
-        for (int i = 0; i < 7; ++i) {
-            double offset = 1.4 + 0.1 * (double) i;
-            this.level().addParticle(ParticleTypes.SOUL_FIRE_FLAME, this.getX(), this.getY() * .4 - 1, this.getZ(), x * offset, y, z * offset);
-        }
-
         this.setDeltaMovement(x, y, z);
     }
 
@@ -408,7 +403,7 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
     }
 
     public int getChaseLiving() {
-        return this.entityData.get(CHASE_LIVING) + 1;
+        return this.entityData.get(CHASE_LIVING);
     }
 
     public void setFluid(FluidStack fluid) {
