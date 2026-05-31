@@ -11,6 +11,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
@@ -70,17 +71,17 @@ public class SoulBlessing extends Modifier implements InventoryTickModifierHook,
                 if (0 == ts.getPersistentData().getInt(TAG_SOUL_BOUND)){
                     Entity killer = event.getSource().getDirectEntity();
                     int hitRadius = SoulBoundRange.get();
-                    List<Entity> nearbyEntities =
-                            entity.level().getEntities(null, new AABB(entity.position().subtract(hitRadius, hitRadius, hitRadius),
-                                                                      entity.position().add(hitRadius, hitRadius, hitRadius)));
+                    List<LivingEntity> nearbyEntities =
+                            entity.level().getEntitiesOfClass(LivingEntity.class, new AABB(entity.position().subtract(hitRadius, hitRadius, hitRadius),
+                                                                                           entity.position().add(hitRadius, hitRadius, hitRadius)));
 
                     // 遍历实体列表
-                    for (Entity scapegoat : nearbyEntities) {
-                        if (scapegoat instanceof LivingEntity livingEntity && !scapegoat.is(entity) && (null == killer || !scapegoat.is(killer))){
+                    for (LivingEntity scapegoat : nearbyEntities) {
+                        if (!scapegoat.is(entity) && (!scapegoat.getType().is(Tags.EntityTypes.BOSSES) || null == killer || !scapegoat.is(killer))){
                             ts.getPersistentData().putInt(TAG_SOUL_BOUND, SoulBoundCoolDown.get());
-                            livingEntity.invulnerableTime = 0;
-                            livingEntity.setHealth(0.0F);
-                            livingEntity.die(event.getSource());
+                            scapegoat.invulnerableTime = 0;
+                            scapegoat.setHealth(0.0F);
+                            scapegoat.die(event.getSource());
                             event.setCanceled(true);
                             entity.deathTime = 0;
                             entity.setHealth(Math.max(entity.getMaxHealth() * 0.10F, entity.getHealth()));
