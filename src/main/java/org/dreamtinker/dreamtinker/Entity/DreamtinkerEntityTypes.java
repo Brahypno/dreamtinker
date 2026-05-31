@@ -13,7 +13,7 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.DreamtinkerModule;
 import org.dreamtinker.dreamtinker.common.Items.IronBallItem;
 import org.dreamtinker.dreamtinker.common.Items.voidPearl.ThrownVoidPearl;
-import org.dreamtinker.dreamtinker.library.client.*;
+import org.dreamtinker.dreamtinker.library.client.entity.*;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DreamtinkerEntityTypes extends DreamtinkerModule {
