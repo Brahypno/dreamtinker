@@ -251,6 +251,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                           .addCatalyst(FluidIngredient.of(DreamtinkerFluids.molten_desire.getTag(), FluidValues.GEM))
                           .addInput(TinkerTags.Fluids.LARGE_GEM_TOOLTIPS, FluidValues.GEM)
                           .save(consumer, location(folder + "temptation_potion"));
+        AlloyRecipeBuilder.alloy(PotionFluidType.potionResult(DreamtinkerEffects.SoulFirePotion.get(), FluidValues.BOTTLE), 100)
+                          .addCatalyst(FluidIngredient.of(DreamtinkerFluids.molten_ender_ash.getTag(), FluidValues.BRICK))
+                          .addInput(TinkerTags.Fluids.CLAY_TOOLTIPS, FluidValues.BRICK)
+                          .save(consumer, location(folder + "soul_fire_potion"));
         wrapped = withCondition(consumer, tagFilled(Dreamtinker.forgeItemTag("ingots/silver")));
         AlloyRecipeBuilder.alloy(TinkerFluids.moltenElectrum, FluidValues.INGOT * 2)
                           .addInput(TinkerFluids.moltenGold.ingredient(FluidValues.INGOT))

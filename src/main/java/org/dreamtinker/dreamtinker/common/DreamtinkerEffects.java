@@ -91,6 +91,8 @@ public class DreamtinkerEffects {
             EFFECT.register("paradox_wound", () -> new MobEffect(MobEffectCategory.NEUTRAL, 0xD8D4E8) {});
     public static final RegistryObject<Potion> ParadoxWoundPotion =
             POTIONS.register("paradox_wound", () -> new Potion(new MobEffectInstance(DreamtinkerEffects.ParadoxWound.get(), 20 * 45)));
+    public static final RegistryObject<Potion> SoulFirePotion =
+            POTIONS.register("soul_fire", () -> new Potion(new MobEffectInstance(DreamtinkerEffects.SoulFire.get(), 20 * 45)));
     public static final RegistryObject<Potion> TemptationPotion =
             POTIONS.register("temptation", () -> new Potion(new MobEffectInstance(DreamtinkerEffects.Temptation.get(), 20 * 45)));
     public static final RegistryObject<Potion> ArcanaJuicePotion =

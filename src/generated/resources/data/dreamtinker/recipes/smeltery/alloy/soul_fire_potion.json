@@ -1,0 +1,22 @@
+{
+  "type": "tconstruct:alloy",
+  "inputs": [
+    {
+      "amount": 250,
+      "catalyst": true,
+      "tag": "dreamtinker:molten_ender_ash"
+    },
+    {
+      "amount": 250,
+      "tag": "tconstruct:tooltips/clay"
+    }
+  ],
+  "result": {
+    "amount": 250,
+    "nbt": {
+      "Potion": "dreamtinker:soul_fire"
+    },
+    "tag": "forge:potion"
+  },
+  "temperature": 100
+}
