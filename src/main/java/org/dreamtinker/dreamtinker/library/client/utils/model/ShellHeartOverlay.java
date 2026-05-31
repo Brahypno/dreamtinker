@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.utils.model;
+package org.dreamtinker.dreamtinker.library.client.utils.model;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;

@@ -7,8 +7,8 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.utils.BlockViewerService;
-import org.dreamtinker.dreamtinker.utils.MaskService;
+import org.dreamtinker.dreamtinker.library.client.utils.BlockViewerService;
+import org.dreamtinker.dreamtinker.library.client.utils.MaskService;
 
 // 监听登出并清理该玩家的遮罩状态
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE, modid = Dreamtinker.MODID)

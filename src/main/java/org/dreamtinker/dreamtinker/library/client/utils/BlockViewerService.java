@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.utils;
+package org.dreamtinker.dreamtinker.library.client.utils;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;

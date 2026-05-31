@@ -15,9 +15,9 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.phys.EntityHitResult;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
+import org.dreamtinker.dreamtinker.library.client.utils.MaskService;
 import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
 import org.dreamtinker.dreamtinker.utils.DTHelper;
-import org.dreamtinker.dreamtinker.utils.MaskService;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -146,6 +146,7 @@ public class DespairWind extends Modifier implements ProjectileHitModifierHook, 
         hookBuilder.addHook(this, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
         super.registerHooks(hookBuilder);
     }
+
     @Override
     public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
         afterMeleeHit(tool, modifier, context, damage);

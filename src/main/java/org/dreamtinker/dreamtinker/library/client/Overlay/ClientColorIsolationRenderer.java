@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.library.client;
+package org.dreamtinker.dreamtinker.library.client.Overlay;
 
 
 import com.mojang.blaze3d.shaders.Uniform;

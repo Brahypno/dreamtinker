@@ -7,8 +7,8 @@ import net.minecraftforge.client.event.RenderLevelStageEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.library.client.ClientColorIsolationRenderer;
-import org.dreamtinker.dreamtinker.library.client.ClientMask;
+import org.dreamtinker.dreamtinker.library.client.Overlay.ClientColorIsolationRenderer;
+import org.dreamtinker.dreamtinker.library.client.Overlay.ClientMask;
 import org.dreamtinker.dreamtinker.library.client.sound.ClientSoundChecker;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID, value = Dist.CLIENT)

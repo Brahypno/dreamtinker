@@ -1,11 +1,11 @@
-package org.dreamtinker.dreamtinker.utils;
+package org.dreamtinker.dreamtinker.library.client.utils;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraftforge.network.PacketDistributor;
-import org.dreamtinker.dreamtinker.library.client.ColorMaskMode;
+import org.dreamtinker.dreamtinker.library.client.Overlay.ColorMaskMode;
 import org.dreamtinker.dreamtinker.network.DNetwork;
 import org.dreamtinker.dreamtinker.network.S2CColorMaskToggle;
 

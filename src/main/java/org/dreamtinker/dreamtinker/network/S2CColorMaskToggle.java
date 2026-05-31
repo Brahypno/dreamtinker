@@ -3,8 +3,8 @@ package org.dreamtinker.dreamtinker.network;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkEvent;
-import org.dreamtinker.dreamtinker.library.client.ClientMask;
-import org.dreamtinker.dreamtinker.library.client.ColorMaskMode;
+import org.dreamtinker.dreamtinker.library.client.Overlay.ClientMask;
+import org.dreamtinker.dreamtinker.library.client.Overlay.ColorMaskMode;
 
 import java.util.function.Supplier;
 

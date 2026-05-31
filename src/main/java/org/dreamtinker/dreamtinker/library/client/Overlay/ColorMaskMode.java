@@ -1,4 +1,4 @@
-package org.dreamtinker.dreamtinker.library.client;
+package org.dreamtinker.dreamtinker.library.client.Overlay;
 
 public enum ColorMaskMode {
     NONE,

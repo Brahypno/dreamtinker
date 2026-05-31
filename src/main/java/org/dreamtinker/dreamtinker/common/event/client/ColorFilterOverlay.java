@@ -5,8 +5,8 @@ import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
-import org.dreamtinker.dreamtinker.library.client.ClientMask;
-import org.dreamtinker.dreamtinker.library.client.ColorMaskMode;
+import org.dreamtinker.dreamtinker.library.client.Overlay.ClientMask;
+import org.dreamtinker.dreamtinker.library.client.Overlay.ColorMaskMode;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class ColorFilterOverlay {
