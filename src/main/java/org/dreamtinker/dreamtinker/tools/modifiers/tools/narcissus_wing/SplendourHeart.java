@@ -4,13 +4,19 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
@@ -19,6 +25,8 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.TierSortingRegistry;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
+import org.dreamtinker.dreamtinker.library.modifiers.DreamtinkerHook;
+import org.dreamtinker.dreamtinker.library.modifiers.hook.ProjectileHurtHook;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.AdvCountEvents;
 import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
 import org.dreamtinker.dreamtinker.utils.DTHelper;
@@ -37,13 +45,16 @@ import slimeknights.tconstruct.library.modifiers.hook.build.VolatileDataModifier
 import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
+import slimeknights.tconstruct.library.modifiers.modules.build.VolatileFlagModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
+import slimeknights.tconstruct.library.tools.IndestructibleItemEntity;
 import slimeknights.tconstruct.library.tools.SlotType;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
-import slimeknights.tconstruct.library.tools.nbt.IToolContext;
-import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
-import slimeknights.tconstruct.library.tools.nbt.ToolDataNBT;
+import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
+import slimeknights.tconstruct.library.tools.nbt.*;
 import slimeknights.tconstruct.library.tools.stat.*;
+import slimeknights.tconstruct.tools.TinkerModifiers;
+import slimeknights.tconstruct.tools.logic.ModifierEvents;
 
 import java.util.List;
 import java.util.UUID;
@@ -51,7 +62,7 @@ import java.util.function.BiConsumer;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.TheSplendourHeart;
 
-public class SplendourHeart extends Modifier implements MeleeHitModifierHook, InventoryTickModifierHook, ToolDamageModifierHook, ModifierRemovalHook, TooltipModifierHook, ToolStatsModifierHook, AttributesModifierHook, VolatileDataModifierHook {
+public class SplendourHeart extends Modifier implements MeleeHitModifierHook, InventoryTickModifierHook, ToolDamageModifierHook, ModifierRemovalHook, TooltipModifierHook, ToolStatsModifierHook, AttributesModifierHook, VolatileDataModifierHook, ProjectileHurtHook {
     //According to PS5 achievement, 83 bronze, 36 silver 14 gold, 1 pla=>83 easy, 36 normal, 15 hard
     //According to myself, tinker`s construct 3 have 21 easy, 13 normal, 3 hard achievements.
     //In total 104 easy, 49 normal 18 hard=>60.8% easy, 28.6% normal,10.6% hard. so that
@@ -194,6 +205,38 @@ public class SplendourHeart extends Modifier implements MeleeHitModifierHook, In
                 }
             }
         }
+        if (context.isExtraAttack())
+            return;
+        double range = 3 + tool.getModifierLevel(TinkerModifiers.expanded.getId());
+        // allow having no range until modified with range
+        if (range > 0){
+            double rangeSq = range * range;
+            LivingEntity attacker = context.getAttacker();
+            Entity target = context.getTarget();
+            Level level = attacker.level();
+            for (LivingEntity aoeTarget : level.getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(range, 0.25D, range))) {
+                if (tool.isBroken()){
+                    break;
+                }
+                if (aoeTarget != attacker && aoeTarget != target && !attacker.isAlliedTo(aoeTarget) && ToolAttackUtil.isAttackable(attacker, aoeTarget)
+                    && !(aoeTarget instanceof ArmorStand stand && stand.isMarker()) && target.distanceToSqr(aoeTarget) < rangeSq){
+                    ToolAttackUtil.performAttack(tool, context.withAOETarget(aoeTarget));
+                }
+            }
+
+            level.playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, attacker.getSoundSource(), 1.0F, 1.0F);
+        }
+    }
+
+    @Override
+    public float modifyProjectileHurt(
+            ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile,
+            DamageSource source, @Nullable LivingEntity attacker, LivingEntity target, float amount) {
+        if (attacker instanceof ServerPlayer player){
+            int kills = player.getStats().getValue(Stats.ENTITY_KILLED.get(target.getType()));
+            return amount * (1.0F + kills * 0.01F);
+        }
+        return amount;
     }
 
     private String rangeToText(float d) {
@@ -237,7 +280,10 @@ public class SplendourHeart extends Modifier implements MeleeHitModifierHook, In
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
         hookBuilder.addHook(this, ModifierHooks.MELEE_HIT, ModifierHooks.INVENTORY_TICK, ModifierHooks.TOOL_DAMAGE,
-                            ModifierHooks.REMOVE, ModifierHooks.TOOLTIP, ModifierHooks.TOOL_STATS, ModifierHooks.ATTRIBUTES, ModifierHooks.VOLATILE_DATA);
+                            ModifierHooks.REMOVE, ModifierHooks.TOOLTIP, ModifierHooks.TOOL_STATS, ModifierHooks.ATTRIBUTES, ModifierHooks.VOLATILE_DATA,
+                            DreamtinkerHook.PROJECTILE_HURT);
+        hookBuilder.addModule(new VolatileFlagModule(ModifierEvents.SOULBOUND));
+        hookBuilder.addModule(new VolatileFlagModule(IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY));
         super.registerHooks(hookBuilder);
     }
 }

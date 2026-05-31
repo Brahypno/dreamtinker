@@ -174,7 +174,6 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                                         .trait(DreamtinkerModifiers.memory_base, 1)//malkuth
                                         .trait(DreamtinkerModifiers.foundation_will, 1)//Yesod
                                         .trait(DreamtinkerModifiers.splendour_heart, 1)//Hod
-                                        .trait(ModifierIds.soulbound, 1)
                                         .trait(DreamtinkerModifiers.malum_sol_tiferet)//Tiferet
                                         .trait(DreamtinkerModifiers.Ids.nova_ashen_resolve)//Netzach
                                         .build())
@@ -184,8 +183,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                 .module(new MiningSpeedModifierModule(1.5f, BlockPredicate.or(BlockPredicate.tag(BlockTags.MINEABLE_WITH_SHOVEL),
                                                                               BlockPredicate.set(Blocks.COBWEB))),
                         MiningSpeedModifierModule.blocks(0.10f, Blocks.VINE, Blocks.GLOW_LICHEN), MiningSpeedModifierModule.tag(BlockTags.WOOL, 0.3f))
-                .module(new CircleAOEIterator(1, true))
-                .module(new CircleWeaponAttack(3));
+                .module(new CircleAOEIterator(1, true));
         define(DTtoolsDefinition.SilenceGlove)
                 .module(MaterialStatsModule.stats()
                                            .stat(HeadMaterialStats.ID)

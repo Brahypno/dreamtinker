@@ -84,10 +84,6 @@
         },
         {
           "level": 1,
-          "name": "tconstruct:soulbound"
-        },
-        {
-          "level": 1,
           "name": "dreamtinker:malum_sol_tiferet"
         },
         {
@@ -146,10 +142,6 @@
       "type": "tconstruct:circle_aoe",
       "3D": true,
       "diameter": 1
-    },
-    {
-      "type": "tconstruct:circle_melee",
-      "diameter": 3.0
     }
   ]
 }

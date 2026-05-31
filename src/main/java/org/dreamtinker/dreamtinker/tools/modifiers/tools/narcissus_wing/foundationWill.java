@@ -16,10 +16,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -40,6 +37,8 @@ import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.utils.DTMessages;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
+import slimeknights.mantle.data.predicate.item.ItemPredicate;
+import slimeknights.tconstruct.library.json.predicate.tool.ToolContextPredicate;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.behavior.ProcessLootModifierHook;
@@ -47,6 +46,7 @@ import slimeknights.tconstruct.library.modifiers.hook.build.ModifierTraitHook;
 import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.KeybindInteractModifierHook;
 import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
+import slimeknights.tconstruct.library.modifiers.modules.combat.LootingModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.helper.ToolHarvestLogic;
 import slimeknights.tconstruct.library.tools.item.ModifiableItem;
@@ -56,7 +56,6 @@ import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.tools.TinkerModifiers;
-import slimeknights.tconstruct.tools.data.ModifierIds;
 
 import javax.annotation.Nullable;
 import java.util.ArrayDeque;
@@ -64,17 +63,24 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import static slimeknights.tconstruct.common.TinkerTags.Items.MELEE;
+
 public class foundationWill extends NoLevelsModifier implements ModifierTraitHook, LeftClickHook, ProcessLootModifierHook, KeybindInteractModifierHook, TooltipModifierHook {
-    private final ResourceLocation TAG_MOD = Dreamtinker.getLocation("foundation_mode");
+    private static final ResourceLocation TAG_MOD = Dreamtinker.getLocation("foundation_mode");
 
     private static int getLevel(IToolContext toolStackView) {
         return toolStackView.getModifierLevel(DreamtinkerModifiers.foundation_will.getId()) +
                toolStackView.getModifierLevel(TinkerModifiers.expanded.get()) * 2;
     }
 
+    private static final ToolContextPredicate harvestPredicate = ToolContextPredicate.simple(context -> context.getPersistentData().getInt(TAG_MOD) == 0);
+
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
         hookBuilder.addHook(this, ModifierHooks.PROCESS_LOOT, DreamtinkerHook.LEFT_CLICK, ModifierHooks.ARMOR_INTERACT, ModifierHooks.TOOLTIP,
                             ModifierHooks.MODIFIER_TRAITS);
+        hookBuilder.addModule(
+                LootingModule.builder().toolItem(ItemPredicate.or(ItemPredicate.set(Items.AIR), ItemPredicate.tag(MELEE))).toolContext(harvestPredicate)
+                             .weapon());
         super.registerHooks(hookBuilder);
     }
 
@@ -105,10 +111,8 @@ public class foundationWill extends NoLevelsModifier implements ModifierTraitHoo
 
     @Override
     public void addTraits(IToolContext context, ModifierEntry self, ModifierTraitHook.TraitBuilder builder, boolean firstEncounter) {
-        if (context.getPersistentData().getInt(TAG_MOD) == 0){
-            builder.add(ModifierIds.looting, getLevel(context));
+        if (context.getPersistentData().getInt(TAG_MOD) == 0)
             builder.add(TinkerModifiers.severing.getId(), getLevel(context));
-        }
     }
 
     @Override

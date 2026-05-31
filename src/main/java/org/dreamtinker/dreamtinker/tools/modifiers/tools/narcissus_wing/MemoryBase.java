@@ -22,6 +22,7 @@ import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import slimeknights.tconstruct.fluids.TinkerFluids;
+import slimeknights.tconstruct.library.json.LevelingValue;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -31,6 +32,7 @@ import slimeknights.tconstruct.library.modifiers.hook.build.ConditionalStatModif
 import slimeknights.tconstruct.library.modifiers.hook.interaction.GeneralInteractionModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.InteractionSource;
 import slimeknights.tconstruct.library.modifiers.modules.build.StatBoostModule;
+import slimeknights.tconstruct.library.modifiers.modules.util.ModifierCondition;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.capability.EntityModifierCapability;
 import slimeknights.tconstruct.library.tools.capability.PersistentDataCapability;
@@ -43,6 +45,7 @@ import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.modifiers.ability.interaction.BlockingModifier;
+import slimeknights.tconstruct.tools.modules.combat.SpillingModule;
 
 import javax.annotation.Nullable;
 
@@ -70,8 +73,9 @@ public class MemoryBase extends Modifier implements GeneralInteractionModifierHo
         builder.addHook(this, ModifierHooks.GENERAL_INTERACT);
         super.registerHooks(builder);
         builder.addModule(ToolTankHelper.TANK_HANDLER);
+        builder.addModule(new SpillingModule(LevelingValue.eachLevel(1), ModifierCondition.ANY_TOOL));
         builder.addModule(NarcissusFluidFeedbackModule.builder().build());
-        builder.addModule(StatBoostModule.add(ToolTankHelper.CAPACITY_STAT).eachLevel(FluidType.BUCKET_VOLUME));
+        builder.addModule(StatBoostModule.add(ToolTankHelper.CAPACITY_STAT).amount(FluidType.BUCKET_VOLUME, FluidType.BUCKET_VOLUME));
     }
 
     @Override
@@ -79,11 +83,11 @@ public class MemoryBase extends Modifier implements GeneralInteractionModifierHo
         return 2700; // my custom splt, so should be earlier enough
     }
 
-    private static int getSupplementalFluidAmount(LivingEntity entity) {
+    private int getSupplementalFluidAmount(LivingEntity entity) {
         if (entity instanceof Player player && player.getAbilities().instabuild){
             return Integer.MAX_VALUE;
         }
-        return (int) (Math.max(0, entity.getHealth() - 1) * MB_PER_HEART / HEALTH_PER_HEART);
+        return (int) (Math.max(0, entity.getHealth() - HEALTH_PER_HEART) * MB_PER_HEART / HEALTH_PER_HEART);
     }
 
     private static int addFluidAmounts(int tankAmount, int supplementalAmount) {
@@ -109,7 +113,7 @@ public class MemoryBase extends Modifier implements GeneralInteractionModifierHo
             // launch if the fluid has effects, cannot simulate as we don't know the target yet
             FluidStack fluid = TANK_HELPER.getFluid(tool);
             int tankAmount = fluid.getAmount();
-            int supplementalAmount = getSupplementalFluidAmount(player);
+            int supplementalAmount = getSupplementalFluidAmount(player) * getLevel(tool);
             if (fluid.isEmpty()){
                 fluid = new FluidStack(fallback_fluid, supplementalAmount);
             }
@@ -128,8 +132,9 @@ public class MemoryBase extends Modifier implements GeneralInteractionModifierHo
         if (!world.isClientSide){
             int chargeTime = getUseDuration(tool, modifier) - timeLeft;
             if (chargeTime > 0){
+                int level = getLevel(tool);
                 // find the fluid to spit
-                int supplementalAmount = getSupplementalFluidAmount(entity);
+                int supplementalAmount = getSupplementalFluidAmount(entity) * level;
                 FluidStack fluid = TANK_HELPER.getFluid(tool);
                 int originalAmount = fluid.getAmount();
                 if (fluid.isEmpty()){
@@ -142,7 +147,6 @@ public class MemoryBase extends Modifier implements GeneralInteractionModifierHo
                     // power - size of each individual projectile
                     float power = charge * ConditionalStatModifierHook.getModifiedStat(tool, entity, ToolStats.PROJECTILE_DAMAGE);
                     // level acts like multishot level, meaning higher produces more projectiles
-                    int level = getLevel(tool);
                     // amount is the amount per projectile, total cost is amount times level (every other shot is free)
                     // if its 0, that means we have only a couple mb left
                     int maxPossibleAmount = addFluidAmounts(originalAmount, supplementalAmount);
@@ -195,7 +199,7 @@ public class MemoryBase extends Modifier implements GeneralInteractionModifierHo
                             int tankCost = Math.min(originalAmount, totalCost);
                             int missingAmount = totalCost - tankCost;
                             if (missingAmount > 0){
-                                entity.setHealth(Math.max(1, entity.getHealth() - missingAmount * HEALTH_PER_HEART / MB_PER_HEART));
+                                entity.setHealth(Math.max(HEALTH_PER_HEART, entity.getHealth() - missingAmount * HEALTH_PER_HEART / MB_PER_HEART / level));
                             }
                             fluid.setAmount(originalAmount);
                             fluid.shrink(tankCost);

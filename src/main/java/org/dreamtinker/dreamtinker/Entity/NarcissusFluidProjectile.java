@@ -339,12 +339,13 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
                 if (recipe.hasEntityEffects()){
                     int times = null != toolStackView ? Math.max(1, MemoryBase.getLevel(toolStackView) / 3) : 1;
                     DamageSource damagesource = dmg(target, entity1);
+                    ToolAttackContext attackContext = ToolAttackContext.attacker((LivingEntity) this.getOwner()).target(target).cooldown(1)
+                                                                       .applyAttributes()
+                                                                       .build();
                     for (int i = 0; i < times; i++) {
                         target.invulnerableTime = 0;
                         if (toolStackView != null && entity1.level() == target.level()){
-                            ToolAttackUtil.performAttack(toolStackView,
-                                                         ToolAttackContext.attacker((LivingEntity) this.getOwner()).target(target).cooldown(1).applyAttributes()
-                                                                          .build());
+                            ToolAttackUtil.performAttack(toolStackView, attackContext);
                         }else
                             target.hurt(damagesource,
                                         null != toolStackView ? (toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) + 1) * dmg : dmg);

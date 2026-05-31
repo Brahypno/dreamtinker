@@ -197,7 +197,7 @@
   "modifier.dreamtinker.huge_ego.description": "每级获得一个升级槽;但每级减少25%工具耐久",
   "modifier.dreamtinker.splendour_heart": "骄盛之心",
   "modifier.dreamtinker.splendour_heart.flavor": "总有一处乐园需要人来建成",
-  "modifier.dreamtinker.splendour_heart.description": "随已完成进度的数量，逐步提升工具能力",
+  "modifier.dreamtinker.splendour_heart.description": "随已完成进度的数量，逐步提升工具数值，槽位，并能够额外造成伤害。工具会在死亡重生时留在物品栏。",
   "modifier.dreamtinker.tooltip.splendour_heart": "进度已履行: ",
   "modifier.dreamtinker.tooltip.splendour_heart_entry": "要想改变什么，人只能依靠自己",
   "modifier.dreamtinker.tooltip.splendour_heart_easy": "我将越过荆棘",
