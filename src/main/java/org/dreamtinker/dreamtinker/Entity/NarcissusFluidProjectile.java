@@ -1,6 +1,5 @@
 package org.dreamtinker.dreamtinker.Entity;
 
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
@@ -31,6 +30,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
+import org.dreamtinker.dreamtinker.library.client.trail.DTClientTrail;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.NarcissusFluidFeedbacks;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.MemoryBase;
@@ -59,6 +59,8 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
     private int life = 30 * 20;
     private int knock_back;
     private boolean crit;
+    public final DTClientTrail shortTrail = new DTClientTrail(8, 0.0004D);
+    public final DTClientTrail trail = new DTClientTrail(24, 0.0004D);
 
 
     public NarcissusFluidProjectile(EntityType<? extends NarcissusFluidProjectile> type, Level level) {
@@ -244,9 +246,6 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
             // 未命中：推进到完整终点
             Vec3 to = from.add(vel);
             this.setPos(to.x, to.y, to.z);
-            if (level().isClientSide && life <= 590){
-                level().addParticle(ParticleTypes.SOUL_FIRE_FLAME, getX(), getY(), getZ(), 0, 0, 0);
-            }
         }
 
         if (!this.isRemoved()){
@@ -261,6 +260,11 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
             }
             this.setDeltaMovement(v2);
             --life;
+            if (this.level().isClientSide){
+                Vec3 p = this.getTrailRenderPosition();
+                this.shortTrail.tick(p, v2, 5, 0.055D, 0.10D, 0.72F);
+                this.trail.tick(p, v2, 12, 0.095D, 0.15D, 0.96F);
+            }
         }
 
         if (this.getY() > this.level().getMaxBuildHeight() + 64
@@ -372,8 +376,16 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
         double x = packet.getXa();
         double y = packet.getYa();
         double z = packet.getZa();
+        Vec3 motion = new Vec3(x, y, z);
+        this.setDeltaMovement(motion);
+        if (false && this.level().isClientSide){
+            this.shortTrail.seedLine(this.position(), motion, 5, 0.35D);
+            this.trail.seedLine(this.position(), motion, 5, 0.35D);
+        }
+    }
 
-        this.setDeltaMovement(x, y, z);
+    public Vec3 getTrailRenderPosition() {
+        return this.position();
     }
 
     public void addAdditionalSaveData(@NotNull CompoundTag nbt) {
@@ -449,4 +461,5 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
         this.entityData.set(CHASE_LIVING, tool.getModifierLevel(DreamtinkerModifiers.Ids.soul_core) + 1);
         this.entityData.set(COLOR, DTHelper.materialToRender(0, tool.getMaterial(0)));
     }
+
 }

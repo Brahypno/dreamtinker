@@ -10,12 +10,14 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.Entity.NarcissusFluidProjectile;
+import org.dreamtinker.dreamtinker.library.client.trail.DTTrailRenderer;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
@@ -25,6 +27,12 @@ public class NarcissusFluidProjectileRenderer<T extends NarcissusFluidProjectile
     private TextureAtlasSprite s0, s1;
     private static final ResourceLocation TEX =
             Dreamtinker.getLocation("textures/entity/narcissus_fluid_projectile.png");
+    private static final ResourceLocation NARCISSUS_MASK_TRAIL_TEX =
+            Dreamtinker.getLocation("textures/entity/narcissus_fluid_trail_mask.png");
+    private static final ResourceLocation NARCISSUS_COLORED_TRAIL_TEX =
+            Dreamtinker.getLocation("textures/entity/narcissus_fluid_trail_colored.png");
+    private static final ResourceLocation CONCENTRATED_TRAIL_TEX =
+            Dreamtinker.getLocation("textures/entity/narcissus_fluid_concentrated_trail.png");
 
     public NarcissusFluidProjectileRenderer(EntityRendererProvider.Context ctx) {
         super(ctx);
@@ -35,6 +43,14 @@ public class NarcissusFluidProjectileRenderer<T extends NarcissusFluidProjectile
 
     @Override
     public void render(NarcissusFluidProjectile e, float yaw, float pt, PoseStack pose, MultiBufferSource buf, int light) {
+        // 外层：宽、淡、主色
+        DTTrailRenderer.renderEntityTrailVolume(pose, buf, e, pt, e.trail, NARCISSUS_MASK_TRAIL_TEX, e.getColor(), 0.14F, 0.18F, 4, 0.28f);
+
+        // 中层：正常主色
+        DTTrailRenderer.renderEntityTrailVolume(pose, buf, e, pt, e.trail, NARCISSUS_COLORED_TRAIL_TEX, e.getColor(), 0.13F, 0.62F, 4, 0.36f);
+
+        // 内层：白色/淡色亮芯
+        DTTrailRenderer.renderEntityTrailVolume(pose, buf, e, pt, e.shortTrail, CONCENTRATED_TRAIL_TEX, 0xF8FFF6E8, 0.045F, 0.88F, 5, 0.34f);
         pose.pushPose();
 
         // 体积大小
@@ -103,5 +119,10 @@ public class NarcissusFluidProjectileRenderer<T extends NarcissusFluidProjectile
         vc.vertex(m, w, h, 0).color(r, g, b, a).uv(u1, v0).overlayCoords(overlay).uv2(light).normal(n, 0, 0, -1).endVertex();
         vc.vertex(m, w, -h, 0).color(r, g, b, a).uv(u1, v1).overlayCoords(overlay).uv2(light).normal(n, 0, 0, -1).endVertex();
         vc.vertex(m, -w, -h, 0).color(r, g, b, a).uv(u0, v1).overlayCoords(overlay).uv2(light).normal(n, 0, 0, -1).endVertex();
+    }
+
+    @Override
+    protected int getBlockLightLevel(NarcissusFluidProjectile entity, BlockPos pos) {
+        return 15;
     }
 }
