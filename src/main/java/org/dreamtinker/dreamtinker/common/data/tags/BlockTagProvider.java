@@ -119,7 +119,6 @@ public class BlockTagProvider extends BlockTagsProvider {
         this.tag(DreamtinkerTagKeys.Blocks.TRANSMUTE_WALL)
             .addTags(DreamtinkerTagKeys.Blocks.ASHEN_BLOCKS)
             .addTags(DreamtinkerTagKeys.Blocks.TRANSMUTE_ACCEL)
-            .addTags(DreamtinkerTagKeys.Blocks.TRANSMUTE_ALLOY_SWITCH)
             .addTags(DreamtinkerTagKeys.Blocks.TRANSMUTE_MELTING_SWITCH)
             .addTag(DreamtinkerTagKeys.Blocks.ASHEN_TANKS)
             .add(DreamTinkerSmeltery.ashenGlass.get(), DreamTinkerSmeltery.ashenSoulGlass.get(), DreamTinkerSmeltery.ashenTintedGlass.get(),
@@ -127,7 +126,6 @@ public class BlockTagProvider extends BlockTagsProvider {
                  DreamTinkerSmeltery.ashenChute.get(), DreamTinkerSmeltery.ashenDuct.get());
         this.tag(DreamtinkerTagKeys.Blocks.TRANSMUTE_FLOOR)
             .addTags(DreamtinkerTagKeys.Blocks.ASHEN_BLOCKS)
-            .addTags(DreamtinkerTagKeys.Blocks.TRANSMUTE_ALLOY_SWITCH)
             .addTags(DreamtinkerTagKeys.Blocks.TRANSMUTE_MELTING_SWITCH)
             .addTags(DreamtinkerTagKeys.Blocks.TRANSMUTE_HEATER)
             .add(DreamTinkerSmeltery.ashenGlass.get(), DreamTinkerSmeltery.ashenSoulGlass.get(), DreamTinkerSmeltery.ashenTintedGlass.get(),

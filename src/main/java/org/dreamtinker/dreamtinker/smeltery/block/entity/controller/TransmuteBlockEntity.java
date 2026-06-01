@@ -1,16 +1,19 @@
 package org.dreamtinker.dreamtinker.smeltery.block.entity.controller;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.LeverBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.ItemHandlerHelper;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.smeltery.DreamTinkerSmeltery;
+import org.dreamtinker.dreamtinker.smeltery.block.component.AshenAlloySwitchBlock;
 import org.dreamtinker.dreamtinker.smeltery.block.component.AshenButtonBlock;
 import org.dreamtinker.dreamtinker.smeltery.block.entity.module.SuperByproductMeltingModuleInventory;
 import org.dreamtinker.dreamtinker.smeltery.block.entity.multiblock.TransmuteMultiblock;
@@ -27,6 +30,9 @@ import slimeknights.tconstruct.smeltery.block.entity.module.alloying.SmelteryAll
 import slimeknights.tconstruct.smeltery.block.entity.multiblock.HeatingStructureMultiblock;
 
 import javax.annotation.Nullable;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.TransmuteAcceleratorTemperature;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.TransmuteHeaterTemperature;
@@ -56,6 +62,8 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
     private final SmelteryAlloyTank alloyTank = new SmelteryAlloyTank(tank);
     private final MultiAlloyingModule alloyingModule = new MultiAlloyingModule(this, alloyTank);
     private boolean allowAlloying = false;
+    private final Set<BlockPos> poweredExternalAlloySwitches = new HashSet<>();
+    private boolean internalAlloySwitchOn = false;
 
     public TransmuteBlockEntity(BlockPos pos, BlockState state) {
         super(DreamTinkerSmeltery.Transmute.get(), pos, state, NAME);
@@ -150,6 +158,10 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
             // perimeter: to prevent double counting, frame just added on X and floor
             fuelRate = 1 + (2 * ((dx + 2) * dy) + 2 * (dy * dz) + ((dx + 2) * (dz + 2))) / BLOCKS_PER_FUEL;
             updateHeatBuff();
+        }else {
+            poweredExternalAlloySwitches.clear();
+            internalAlloySwitchOn = false;
+            updateAllowAlloyingFromCache();
         }
     }
 
@@ -200,6 +212,9 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
         if (heaterUpdateQueue){
             checkHeatBuff();
             heaterUpdateQueue = false;
+            if ((level.getGameTime() & 31) == 0){
+                validateExternalAlloySwitchCache();
+            }
         }
     }
 
@@ -213,42 +228,48 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
     }
 
     protected void checkHeatBuff() {
-        boolean previous_allowAlloying = allowAlloying;
         accelerator = 0;
         heater = 0;
-        allowAlloying = false;
+        internalAlloySwitchOn = false;
+
         if (structure != null && level != null){
             BlockPos min = structure.getMinPos();
             BlockPos max = structure.getMaxPos();
+
             for (int x = min.getX(); x <= max.getX(); x++) {
                 for (int y = min.getY(); y <= max.getY(); y++) {
                     for (int z = min.getZ(); z <= max.getZ(); z++) {
                         BlockPos pos = new BlockPos(x, y, z);
                         BlockState state = level.getBlockState(pos);
-                        if (!state.hasProperty(ControllerBlock.IN_STRUCTURE) || !state.getValue(ControllerBlock.IN_STRUCTURE))
+
+                        if (!state.hasProperty(ControllerBlock.IN_STRUCTURE) || !state.getValue(ControllerBlock.IN_STRUCTURE)){
                             continue;
+                        }
+
                         if (isHeaterBlock(state.getBlock())){
                             heater++;
                         }
+
                         if (isAccelBlock(state.getBlock())){
                             accelerator++;
                         }
-                        if (!allowAlloying && isAlloySwitchBlock(state.getBlock()) &&
-                            state.hasProperty(AshenButtonBlock.Function_Set) && state.getValue(AshenButtonBlock.Function_Set) == 1)
-                            allowAlloying = true;
 
-                        if (isMeltSwitchBlock(state.getBlock()) &&
-                            state.hasProperty(AshenButtonBlock.Function_Set) &&
-                            meltingInventory instanceof SuperByproductMeltingModuleInventory meltingModuleInventory){
-                            meltingModuleInventory.updateMeltType(
-                                    SuperByproductMeltingModuleInventory.MeltType.toMeltType(state.getValue(AshenButtonBlock.Function_Set)));
+                        if (isAlloySwitchBlock(state.getBlock()) && state.hasProperty(AshenButtonBlock.Function_Set) &&
+                            state.getValue(AshenButtonBlock.Function_Set) == 1){
+                            internalAlloySwitchOn = true;
+                        }
+
+                        if (isMeltSwitchBlock(state.getBlock()) && state.hasProperty(AshenButtonBlock.Function_Set) &&
+                            meltingInventory instanceof SuperByproductMeltingModuleInventory inv){
+                            inv.updateMeltType(SuperByproductMeltingModuleInventory.MeltType.toMeltType(state.getValue(AshenButtonBlock.Function_Set)));
                         }
                     }
                 }
             }
-            if (!previous_allowAlloying && allowAlloying)
-                alloyingModule.clearCachedRecipes();
         }
+
+        rebuildExternalAlloySwitchCache();
+        updateAllowAlloyingFromCache();
     }
 
     /**
@@ -293,6 +314,106 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
         // can ignore removing a fluid as that is handled internally by the module
         if (allowAlloying && type == FluidChange.ADDED){
             alloyingModule.clearCachedRecipes();
+        }
+    }
+
+    public void setExternalAlloySwitch(BlockPos switchPos, boolean powered) {
+        if (level == null || level.isClientSide){
+            return;
+        }
+
+        boolean changed = powered
+                          ? poweredExternalAlloySwitches.add(switchPos.immutable())
+                          : poweredExternalAlloySwitches.remove(switchPos);
+
+        if (changed){
+            updateAllowAlloyingFromCache();
+        }
+    }
+
+    private void updateAllowAlloyingFromCache() {
+        boolean old = allowAlloying;
+        allowAlloying = internalAlloySwitchOn || !poweredExternalAlloySwitches.isEmpty();
+
+        if (old != allowAlloying){
+            if (allowAlloying){
+                alloyingModule.clearCachedRecipes();
+            }
+
+            setChanged();
+
+            if (level != null && !level.isClientSide){
+                BlockState state = getBlockState();
+                level.sendBlockUpdated(worldPosition, state, state, Block.UPDATE_ALL);
+            }
+        }
+    }
+
+    public void rebuildExternalAlloySwitchCache() {
+        if (level == null || level.isClientSide || structure == null){
+            poweredExternalAlloySwitches.clear();
+            return;
+        }
+
+        poweredExternalAlloySwitches.clear();
+
+        BlockPos min = structure.getMinPos();
+        BlockPos max = structure.getMaxPos();
+
+        for (BlockPos structurePos : BlockPos.betweenClosed(min, max)) {
+            BlockState structureState = level.getBlockState(structurePos);
+
+            if (!structureState.hasProperty(ControllerBlock.IN_STRUCTURE) || !structureState.getValue(ControllerBlock.IN_STRUCTURE)){
+                continue;
+            }
+
+            for (Direction direction : Direction.values()) {
+                BlockPos switchPos = structurePos.relative(direction);
+                BlockState switchState = level.getBlockState(switchPos);
+
+                if (!isValidPoweredExternalAlloySwitch(structurePos, switchPos, switchState)){
+                    continue;
+                }
+
+                poweredExternalAlloySwitches.add(switchPos.immutable());
+            }
+        }
+    }
+
+    private boolean isValidPoweredExternalAlloySwitch(BlockPos structurePos, BlockPos switchPos, BlockState switchState) {
+        if (!isAlloySwitchBlock(switchState.getBlock())){
+            return false;
+        }
+
+        if (!switchState.hasProperty(LeverBlock.POWERED) || !switchState.getValue(LeverBlock.POWERED)){
+            return false;
+        }
+
+        return AshenAlloySwitchBlock.getAttachedPos(switchState, switchPos).equals(structurePos);
+    }
+
+    private void validateExternalAlloySwitchCache() {
+        if (level == null || level.isClientSide || poweredExternalAlloySwitches.isEmpty()){
+            return;
+        }
+
+        boolean changed = false;
+        Iterator<BlockPos> iterator = poweredExternalAlloySwitches.iterator();
+
+        while (iterator.hasNext()) {
+            BlockPos switchPos = iterator.next();
+            BlockState state = level.getBlockState(switchPos);
+
+            if (!isAlloySwitchBlock(state.getBlock())
+                || !state.hasProperty(LeverBlock.POWERED)
+                || !state.getValue(LeverBlock.POWERED)){
+                iterator.remove();
+                changed = true;
+            }
+        }
+
+        if (changed){
+            updateAllowAlloyingFromCache();
         }
     }
 }

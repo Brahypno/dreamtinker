@@ -130,7 +130,6 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
                        models().cubeAll(itemKey(DreamTinkerSmeltery.ashenAccel.get()).getPath(), modLoc("block/transmute/ashen/ashen_accelerator")),
                        models().getExistingFile(modLoc("block/transmute/ashen/ashen_accelerator_active")));
 
-        cubeAllIntTextureBlock(DreamTinkerSmeltery.ashenAlloySwitch.get(), "transmute/ashen_alloy_switch", AshenButtonBlock.Function_Set, 1);
         cubeAllIntTextureBlock(DreamTinkerSmeltery.ashenMeltSwitch.get(), "transmute/ashen_melt_switch", AshenButtonBlock.Function_Set, 2);
     }
 

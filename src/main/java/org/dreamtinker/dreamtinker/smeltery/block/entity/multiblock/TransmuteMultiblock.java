@@ -49,8 +49,7 @@ public class TransmuteMultiblock extends HeatingStructureMultiblock<TransmuteBlo
         int maxX = maxPos.getX();
         int maxY = maxPos.getY();
         int maxZ = maxPos.getZ();
-
-        int alloy_switch_count = 0;
+        
         int melt_switch_count = 0;
 
         for (int x = minX; x <= maxX; x++) {
@@ -63,11 +62,6 @@ public class TransmuteMultiblock extends HeatingStructureMultiblock<TransmuteBlo
                     BlockPos pos = new BlockPos(x, y, z);
                     BlockState state = level.getBlockState(pos);
 
-                    if (isValidAlloySwitch(state)){
-                        alloy_switch_count++;
-                        if (alloy_switch_count > 1)
-                            return false;
-                    }
                     if (isValidMeltingSwitch(state)){
                         melt_switch_count++;
                         if (melt_switch_count > 1)
@@ -81,12 +75,6 @@ public class TransmuteMultiblock extends HeatingStructureMultiblock<TransmuteBlo
     }
 
     @SuppressWarnings("deprecation")
-    protected boolean isValidAlloySwitch(BlockState state) {
-        return state.hasProperty(AshenButtonBlock.Function_Set) &&
-               state.getBlock().builtInRegistryHolder().is(DreamtinkerTagKeys.Blocks.TRANSMUTE_ALLOY_SWITCH);
-    }
-
-    @SuppressWarnings("deprecation")
     protected boolean isValidMeltingSwitch(BlockState state) {
         return state.hasProperty(AshenButtonBlock.Function_Set) &&
                state.getBlock().builtInRegistryHolder().is(DreamtinkerTagKeys.Blocks.TRANSMUTE_MELTING_SWITCH);
@@ -94,7 +82,7 @@ public class TransmuteMultiblock extends HeatingStructureMultiblock<TransmuteBlo
 
     @Override
     public boolean shouldUpdate(Level world, MultiblockStructureData structure, BlockPos pos, BlockState state) {
-        return isValidAlloySwitch(state) || isValidMeltingSwitch(state) || super.shouldUpdate(world, structure, pos, state);
+        return isValidMeltingSwitch(state) || super.shouldUpdate(world, structure, pos, state);
     }
 
     @Nullable

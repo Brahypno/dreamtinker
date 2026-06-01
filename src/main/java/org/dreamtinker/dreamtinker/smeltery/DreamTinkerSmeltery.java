@@ -21,6 +21,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.DreamtinkerModule;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
+import org.dreamtinker.dreamtinker.smeltery.block.component.AshenAlloySwitchBlock;
 import org.dreamtinker.dreamtinker.smeltery.block.component.AshenButtonBlock;
 import org.dreamtinker.dreamtinker.smeltery.block.component.AshenTankBlock;
 import org.dreamtinker.dreamtinker.smeltery.block.controller.TransmuteControllerBlock;
@@ -95,7 +96,7 @@ public class DreamTinkerSmeltery extends DreamtinkerModule {
         ashenAccel = BLOCKS.register("ashen_accelerator", block, TOOLTIP_BLOCK_ITEM);
 
 
-        ashenAlloySwitch = BLOCKS.register("ashen_alloy_switch", () -> new AshenButtonBlock(properties, false, 1), TOOLTIP_BLOCK_ITEM);
+        ashenAlloySwitch = BLOCKS.register("ashen_alloy_switch", () -> new AshenAlloySwitchBlock(properties), TOOLTIP_BLOCK_ITEM);
         ashenMeltSwitch = BLOCKS.register("ashen_melt_switch", () -> new AshenButtonBlock(properties, false, 2), TOOLTIP_BLOCK_ITEM);
     }
 
