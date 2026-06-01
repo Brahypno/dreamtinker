@@ -51,42 +51,23 @@ public class CrescentSlashProjectileRenderer extends AbstractSlashProjectileRend
         float haloLength = coreLength * 1.10F;
         float haloWidth = coreWidth * 1.28F;
 
-        renderCenteredHorizontalTexturedQuad(
-                consumer,
-                poseStack.last(),
-                haloLength,
-                haloWidth,
-                0.0F,
-                TEX_W,
-                TEX_H,
-                0.0F,
-                HALO_Y0,
-                TEX_W,
-                HALO_Y1,
-                light,
-                r,
-                g,
-                b,
-                (int) (a * 0.52F)
+        float depth = 0.18F * entity.getWidthScale() * Mth.clamp(powerScale, 0.90F, 1.20F);
+
+        renderCenteredExtrudedTexturedQuad(
+                consumer, poseStack.last(),
+                coreLength, coreWidth, depth,
+                TEX_W, TEX_H,
+                0.0F, CORE_Y0, TEX_W, CORE_Y1,
+                light, r, g, b, a,
+                0.32F
         );
 
-        renderCenteredTexturedQuad(
-                consumer,
-                poseStack.last(),
-                coreLength,
-                coreWidth,
-                0.0F,
-                TEX_W,
-                TEX_H,
-                0.0F,
-                CORE_Y0,
-                TEX_W,
-                CORE_Y1,
-                light,
-                r,
-                g,
-                b,
-                a
+        renderCenteredHorizontalTexturedQuad(
+                consumer, poseStack.last(),
+                haloLength, haloWidth, 0.0F,
+                TEX_W, TEX_H,
+                0.0F, HALO_Y0, TEX_W, HALO_Y1,
+                light, r, g, b, alpha(a, 0.42F)
         );
     }
 
@@ -97,11 +78,11 @@ public class CrescentSlashProjectileRenderer extends AbstractSlashProjectileRend
 
     @Override
     protected float getThicknessAlpha(CrescentSlashProjectile entity) {
-        return 0.30F;
+        return 0.10F;
     }
 
     @Override
     protected float getThicknessAngle(CrescentSlashProjectile entity) {
-        return 32.0F;
+        return 22.0F;
     }
 }

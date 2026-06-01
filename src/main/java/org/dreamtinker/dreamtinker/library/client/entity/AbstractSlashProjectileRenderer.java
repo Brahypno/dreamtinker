@@ -127,61 +127,16 @@ public abstract class AbstractSlashProjectileRenderer<T extends AbstractSlashPro
     }
 
     protected static void renderHorizontalSegment(
-            VertexConsumer consumer,
-            PoseStack.Pose pose,
-            float x0,
-            float x1,
-            float width,
-            float texW,
-            float texH,
-            float texX0,
-            float texY0,
-            float texX1,
-            float texY1,
-            int light,
-            int r,
-            int g,
-            int b,
-            int a
+            VertexConsumer consumer, PoseStack.Pose pose,
+            float x0, float x1, float width, float texW, float texH, float texX0, float texY0, float texX1, float texY1, int light, int r, int g, int b, int a
     ) {
-        renderTexturedQuad(
-                consumer,
-                pose,
-                x0,
-                -width * 0.5F,
-                x1,
-                width * 0.5F,
-                0.0F,
-                texW,
-                texH,
-                texX0,
-                texY0,
-                texX1,
-                texY1,
-                light,
-                r,
-                g,
-                b,
-                a
-        );
+        renderTexturedQuad(consumer, pose, x0, -width * 0.5F, x1, width * 0.5F, 0.0F,
+                           texW, texH, texX0, texY0, texX1, texY1, light, r, g, b, a);
     }
 
-    private static void vertex(
-            VertexConsumer consumer,
-            PoseStack.Pose pose,
-            float x,
-            float y,
-            float z,
-            float u,
-            float v,
-            int light,
-            int r,
-            int g,
-            int b,
-            int a
-    ) {
+    protected static void vertex(VertexConsumer consumer, PoseStack.Pose pose, float x, float y, float z, float u, float v, int light, int r, int g, int b, int a) {
         consumer.vertex(pose.pose(), x, y, z)
-                .color(r, g, b, a)
+                .color(r, g, b, Mth.clamp(a, 0, 255))
                 .uv(u, v)
                 .overlayCoords(0)
                 .uv2(light)
@@ -272,16 +227,73 @@ public abstract class AbstractSlashProjectileRenderer<T extends AbstractSlashPro
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 
+    protected static int alpha(int a, float scale) {
+        return Mth.clamp((int) (a * scale), 0, 255);
+    }
+
+    protected float getThicknessAlpha(T entity) {
+        return 0.35F;
+    }
+
+    protected float getThicknessAngle(T entity) {
+        return 35.0F;
+    }
+
+    @Override
+    public abstract @NotNull ResourceLocation getTextureLocation(@NotNull T entity);
+
+    protected static void renderExtrudedHorizontalSegment(VertexConsumer consumer, PoseStack.Pose pose, float x0, float x1, float width, float depth, float texW, float texH, float texX0, float texY0, float texX1, float texY1, int light, int r, int g, int b, int a, float sideAlpha) {
+        float y0 = -width * 0.5F, y1 = width * 0.5F;
+        float z0 = -depth * 0.5F, z1 = depth * 0.5F;
+        float u0 = texX0 / texW, u1 = texX1 / texW;
+        float v0 = texY0 / texH, v1 = texY1 / texH;
+        int sa = alpha(a, sideAlpha);
+
+        renderFace(consumer, pose, x0, x1, y0, y1, z1, u0, u1, v0, v1, light, r, g, b, a, false);
+        renderFace(consumer, pose, x0, x1, y0, y1, z0, u0, u1, v0, v1, light, r, g, b, a, true);
+        renderEdgeY(consumer, pose, x0, x1, y1, z0, z1, u0, u1, v0, light, r, g, b, sa);
+        renderEdgeY(consumer, pose, x0, x1, y0, z1, z0, u0, u1, v1, light, r, g, b, sa);
+        renderEdgeX(consumer, pose, x0, y0, y1, z0, z1, u0, v0, v1, light, r, g, b, sa);
+        renderEdgeX(consumer, pose, x1, y0, y1, z1, z0, u1, v0, v1, light, r, g, b, sa);
+    }
+
+    protected static void renderCenteredExtrudedTexturedQuad(VertexConsumer consumer, PoseStack.Pose pose, float length, float width, float depth, float texW, float texH, float texX0, float texY0, float texX1, float texY1, int light, int r, int g, int b, int a, float sideAlpha) {
+        renderExtrudedHorizontalSegment(consumer, pose, -length * 0.5F, length * 0.5F, width, depth, texW, texH, texX0, texY0, texX1, texY1, light, r, g, b, a,
+                                        sideAlpha);
+    }
+
+    protected static void renderFace(VertexConsumer consumer, PoseStack.Pose pose, float x0, float x1, float y0, float y1, float z, float u0, float u1, float v0, float v1, int light, int r, int g, int b, int a, boolean reverse) {
+        if (reverse){
+            vertex(consumer, pose, x1, y0, z, u1, v1, light, r, g, b, a);
+            vertex(consumer, pose, x0, y0, z, u0, v1, light, r, g, b, a);
+            vertex(consumer, pose, x0, y1, z, u0, v0, light, r, g, b, a);
+            vertex(consumer, pose, x1, y1, z, u1, v0, light, r, g, b, a);
+            return;
+        }
+
+        vertex(consumer, pose, x0, y0, z, u0, v1, light, r, g, b, a);
+        vertex(consumer, pose, x1, y0, z, u1, v1, light, r, g, b, a);
+        vertex(consumer, pose, x1, y1, z, u1, v0, light, r, g, b, a);
+        vertex(consumer, pose, x0, y1, z, u0, v0, light, r, g, b, a);
+    }
+
+    protected static void renderEdgeY(VertexConsumer consumer, PoseStack.Pose pose, float x0, float x1, float y, float z0, float z1, float u0, float u1, float v, int light, int r, int g, int b, int a) {
+        vertex(consumer, pose, x0, y, z0, u0, v, light, r, g, b, a);
+        vertex(consumer, pose, x0, y, z1, u0, v, light, r, g, b, a);
+        vertex(consumer, pose, x1, y, z1, u1, v, light, r, g, b, a);
+        vertex(consumer, pose, x1, y, z0, u1, v, light, r, g, b, a);
+    }
+
+    protected static void renderEdgeX(VertexConsumer consumer, PoseStack.Pose pose, float x, float y0, float y1, float z0, float z1, float u, float v0, float v1, int light, int r, int g, int b, int a) {
+        vertex(consumer, pose, x, y0, z0, u, v1, light, r, g, b, a);
+        vertex(consumer, pose, x, y0, z1, u, v1, light, r, g, b, a);
+        vertex(consumer, pose, x, y1, z1, u, v0, light, r, g, b, a);
+        vertex(consumer, pose, x, y1, z0, u, v0, light, r, g, b, a);
+    }
+
     protected void renderSlashWithThickness(
-            T entity,
-            float partialTick,
-            PoseStack poseStack,
-            VertexConsumer consumer,
-            int light,
-            int r,
-            int g,
-            int b,
-            int a
+            T entity, float partialTick, PoseStack poseStack, VertexConsumer consumer,
+            int light, int r, int g, int b, int a
     ) {
         this.renderSlash(entity, partialTick, poseStack, consumer, light, r, g, b, a);
 
@@ -305,15 +317,4 @@ public abstract class AbstractSlashProjectileRenderer<T extends AbstractSlashPro
         this.renderSlash(entity, partialTick, poseStack, consumer, light, r, g, b, (int) (a * thicknessAlpha * 0.65F));
         poseStack.popPose();
     }
-
-    protected float getThicknessAlpha(T entity) {
-        return 0.35F;
-    }
-
-    protected float getThicknessAngle(T entity) {
-        return 35.0F;
-    }
-
-    @Override
-    public abstract @NotNull ResourceLocation getTextureLocation(@NotNull T entity);
 }

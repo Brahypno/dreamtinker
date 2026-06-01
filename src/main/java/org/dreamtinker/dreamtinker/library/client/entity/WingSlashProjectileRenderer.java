@@ -51,61 +51,44 @@ public class WingSlashProjectileRenderer extends AbstractSlashProjectileRenderer
     }
 
     @Override
-    protected void renderSlash(
-            WingSlashProjectile entity,
-            float partialTick,
-            PoseStack poseStack,
-            VertexConsumer consumer,
-            int light,
-            int r,
-            int g,
-            int b,
-            int a
-    ) {
+    protected void renderSlash(WingSlashProjectile entity, float partialTick, PoseStack poseStack, VertexConsumer consumer, int light, int r, int g, int b, int a) {
         float powerScale = Mth.clamp(entity.getPower() / 8.0F, 0.75F, 1.35F);
-
         float tailLength = 0.34F * entity.getLengthScale() * Mth.lerp(powerScale - 0.75F, 0.95F, 1.08F);
         float bodyLength = 0.72F * entity.getLengthScale() * powerScale;
         float headLength = 0.54F * Mth.clamp(entity.getLengthScale(), 0.85F, 1.18F);
-
         float coreWidth = 0.30F * entity.getWidthScale() * Mth.clamp(powerScale, 0.85F, 1.20F);
         float haloWidth = coreWidth * 1.75F;
-
+        float depth = 0.105F * entity.getWidthScale() * Mth.clamp(powerScale, 0.85F, 1.25F);
         float x0 = -(tailLength + bodyLength + headLength) * 0.5F;
 
-        this.renderSwordQiLayer(consumer, poseStack, x0, tailLength, bodyLength, headLength, haloWidth, light, r, g, b, (int) (a * 0.58F), HALO_Y0, HALO_Y1);
-
-        this.renderSwordQiLayer(consumer, poseStack, x0, tailLength, bodyLength, headLength, coreWidth, light, r, g, b, a, CORE_Y0, CORE_Y1);
-
-        //poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
-
-        this.renderSwordQiLayer(consumer, poseStack, x0, tailLength, bodyLength, headLength, haloWidth * 0.70F, light, r, g, b, (int) (a * 0.34F), HALO_Y0,
-                                HALO_Y1);
-
-        this.renderSwordQiLayer(consumer, poseStack, x0, tailLength, bodyLength, headLength, coreWidth * 0.72F, light, r, g, b, (int) (a * 0.72F), CORE_Y0,
-                                CORE_Y1);
+        this.renderSwordQiLayer(consumer, poseStack, x0, tailLength, bodyLength, headLength, haloWidth, depth * 0.65F, light, r, g, b, alpha(a, 0.48F), 0.16F,
+                                HALO_Y0, HALO_Y1);
+        this.renderSwordQiLayer(consumer, poseStack, x0, tailLength, bodyLength, headLength, coreWidth, depth, light, r, g, b, a, 0.35F, CORE_Y0, CORE_Y1);
     }
 
-    private void renderSwordQiLayer(VertexConsumer consumer, PoseStack poseStack, float startX, float tailLength, float bodyLength, float headLength, float width, int light, int r, int g, int b, int a, float texY0, float texY1) {
+    private void renderSwordQiLayer(VertexConsumer consumer, PoseStack poseStack, float startX, float tailLength, float bodyLength, float headLength, float width, float depth, int light, int r, int g, int b, int a, float sideAlpha, float texY0, float texY1) {
         float x = startX;
 
-        renderHorizontalSegment(consumer, poseStack.last(), x, x + tailLength, width * 1.10F, TEX_W, TEX_H, TAIL_X0, texY0, TAIL_X1, texY1, light, r, g, b, a);
+        renderExtrudedHorizontalSegment(consumer, poseStack.last(), x, x + tailLength, width * 1.10F, depth * 0.72F, TEX_W, TEX_H, TAIL_X0, texY0, TAIL_X1,
+                                        texY1, light, r, g, b, a, sideAlpha);
         x += tailLength;
 
-        renderHorizontalSegment(consumer, poseStack.last(), x, x + bodyLength, width, TEX_W, TEX_H, BODY_X0, texY0, BODY_X1, texY1, light, r, g, b, a);
+        renderExtrudedHorizontalSegment(consumer, poseStack.last(), x, x + bodyLength, width, depth, TEX_W, TEX_H, BODY_X0, texY0, BODY_X1, texY1, light, r, g,
+                                        b, a, sideAlpha);
         x += bodyLength;
 
-        renderHorizontalSegment(consumer, poseStack.last(), x, x + headLength, width * 0.95F, TEX_W, TEX_H, HEAD_X0, texY0, HEAD_X1, texY1, light, r, g, b, a);
+        renderExtrudedHorizontalSegment(consumer, poseStack.last(), x, x + headLength, width * 0.95F, depth * 0.82F, TEX_W, TEX_H, HEAD_X0, texY0, HEAD_X1,
+                                        texY1, light, r, g, b, a, sideAlpha);
     }
 
     @Override
     protected float getThicknessAlpha(WingSlashProjectile entity) {
-        return 0.45F;
+        return 0.08F;
     }
 
     @Override
     protected float getThicknessAngle(WingSlashProjectile entity) {
-        return 90.0F;
+        return 24.0F;
     }
 
     @Override
