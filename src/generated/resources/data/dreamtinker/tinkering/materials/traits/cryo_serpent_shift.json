@@ -1,0 +1,18 @@
+{
+  "perStat": {
+    "tconstruct:melee_harvest": [
+      {
+        "level": 1,
+        "name": "dreamtinker:ultra_logic"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:obol_of_all_rivers"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:ford_the_broken_crossing"
+      }
+    ]
+  }
+}

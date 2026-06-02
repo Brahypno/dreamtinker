@@ -21,6 +21,7 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
     protected void addMaterialRenderInfo() {
         buildRenderInfo(DreamtinkerMaterialIds.echo_alloy).color(0xFF1A5C69).fallbacks("crystal", "gem", "metal").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.moonlight_ice).color(0xFFFFFFFF).fallbacks("metal", "crystal").luminosity(15);
+        buildRenderInfo(DreamtinkerMaterialIds.cryo_serpent_shift).color(0xFFB4B3F2).fallbacks("metal", "crystal").luminosity(15);
         buildRenderInfo(DreamtinkerMaterialIds.valentinite).color(0xFFF6E07E).fallbacks("crystal").luminosity(7);
         buildRenderInfo(DreamtinkerMaterialIds.nigrescence_antimony).color(0xFF332222).fallbacks("crystal").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.nigrescence_string).color(0xFF332222).fallbacks("crystal").luminosity(0);

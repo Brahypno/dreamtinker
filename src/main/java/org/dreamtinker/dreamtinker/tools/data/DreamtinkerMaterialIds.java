@@ -10,6 +10,7 @@ import static slimeknights.tconstruct.library.materials.definition.MaterialVaria
 public class DreamtinkerMaterialIds {
     public static final MaterialId echo_alloy = new MaterialId(new ResourceLocation(MODID, "echo_alloy"));
     public static final MaterialId moonlight_ice = new MaterialId(new ResourceLocation(MODID, "moonlight_ice"));
+    public static final MaterialId cryo_serpent_shift = new MaterialId(new ResourceLocation(MODID, "cryo_serpent_shift"));
     public static final MaterialId valentinite = new MaterialId(new ResourceLocation(MODID, "valentinite"));
     public static final MaterialId nigrescence_antimony = new MaterialId(new ResourceLocation(MODID, "nigrescence_antimony"));
     public static final MaterialId nigrescence_string = new MaterialId(new ResourceLocation(MODID, "nigrescence_string"));

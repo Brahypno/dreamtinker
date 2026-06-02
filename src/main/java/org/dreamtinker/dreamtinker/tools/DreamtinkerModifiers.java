@@ -62,6 +62,9 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.*;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.common.*;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.harvest.*;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.OathSteel.*;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.Serpent_Shift.Cryo.DeathCrossing;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.Serpent_Shift.Cryo.RemoverHit;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.Serpent_Shift.ReasonBeyondReasonModifier;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian.Isolde;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.crying_obsidian.SharpenedWith;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.deliverance.BurdenBearer;
@@ -224,6 +227,10 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<Metamorphosis> metamorphosis = MODIFIERS.register("metamorphosis", Metamorphosis::new);
     public static final StaticModifier<BurdenBearer> burden_bearer = MODIFIERS.register("burden_bearer", BurdenBearer::new);
     public static final StaticModifier<RhinegoldCatModifier> rhinegold_cat = MODIFIERS.register("rhinegold_cat", RhinegoldCatModifier::new);
+
+    public static final StaticModifier<ReasonBeyondReasonModifier> ultra_logic = MODIFIERS.register("ultra_logic", ReasonBeyondReasonModifier::new);
+    public static final StaticModifier<RemoverHit> obol_of_all_rivers = MODIFIERS.register("obol_of_all_rivers", RemoverHit::new);
+    public static final StaticModifier<DeathCrossing> ford_the_broken_crossing = MODIFIERS.register("ford_the_broken_crossing", DeathCrossing::new);
 
     //etherium
     public static final StaticModifier<ELAstralBreak> astral_break = EL_MODIFIERS.register("astral_break", ELAstralBreak::new);

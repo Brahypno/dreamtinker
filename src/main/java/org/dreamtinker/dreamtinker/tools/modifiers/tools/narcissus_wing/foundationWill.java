@@ -96,7 +96,7 @@ public class foundationWill extends NoLevelsModifier implements ModifierTraitHoo
         DTMessages.clientChat(Component.translatable("modifier.dreamtinker.tooltip.foundation_will")
                                        .append(Component.translatable("modifier.dreamtinker.foundation_will" + "_" + mod))
                                        .withStyle(this.getDisplayName().getStyle()), false);
-        return true;
+        return false;
     }
 
     @Override

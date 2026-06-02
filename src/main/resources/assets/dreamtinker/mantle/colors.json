@@ -221,7 +221,10 @@
     "metamorphosis": "#B34A45",
     "burden_bearer": "#68B2CD",
     "whimsy_face": "#E7BE55",
-    "rhinegold_cat": "#F2D783"
+    "rhinegold_cat": "#F2D783",
+    "ultra_logic": "#B4B3F2",
+    "obol_of_all_rivers": "#7B73D6",
+    "ford_the_broken_crossing": "#5148A8"
 },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
@@ -301,7 +304,8 @@
     "ruin_wheel_steel": "#FFF0B0",
     "forlorn_oath_steel": "#D3E4F6",
     "atonement_silver": "#FFF6D8",
-    "whimsy_gold": "#C5C1D5"
+    "whimsy_gold": "#C5C1D5",
+    "cryo_serpent_shift":"#B4B3F2"
   },
     "harvest_tier.dreamtinker": {
       "lupus":      "#E1B873",

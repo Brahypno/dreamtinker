@@ -1,0 +1,10 @@
+{
+  "type": "tconstruct:material_fluid",
+  "fluid": {
+    "amount": 100,
+    "tag": "dreamtinker:snake_essence"
+  },
+  "input": "dreamtinker:moonlight_ice",
+  "output": "dreamtinker:cryo_serpent_shift",
+  "temperature": 2300
+}

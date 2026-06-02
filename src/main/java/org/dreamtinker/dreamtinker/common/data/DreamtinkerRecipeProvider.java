@@ -2703,6 +2703,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
         materialComposite(consumer, MaterialIds.string, DreamtinkerMaterialIds.nigrescence_string, DreamtinkerFluids.molten_nigrescence_antimony,
                           FluidValues.GEM, materials_folder);
+        materialComposite(consumer, DreamtinkerMaterialIds.moonlight_ice, DreamtinkerMaterialIds.cryo_serpent_shift, DreamtinkerFluids.snake_essence,
+                          FluidValues.GEM, materials_folder);
 
         materialRecipe(consumer, DreamtinkerMaterialIds.star_regulus, Ingredient.of(DreamtinkerCommon.regulus.get()), 1, 1,
                        materials_folder + "star_regulus");

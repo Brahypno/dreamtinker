@@ -45,6 +45,16 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFFCFE6F9)
                                                 .addARGB(255, 0xFFEFFAFF)
                                                 .build());
+        this.buildMaterial(DreamtinkerMaterialIds.cryo_serpent_shift)
+            .meleeHarvest().armor().ranged().fallbacks("metal")
+            .transformer(GreyToSpriteTransformer.builderFromBlack()
+                                                .addARGB(63, 0xFF1B153F)
+                                                .addARGB(102, 0xFF302A72)
+                                                .addARGB(140, 0xFF5148A8)
+                                                .addARGB(178, 0xFF7B73D6)
+                                                .addARGB(216, 0xFFB4B3F2)
+                                                .addARGB(255, 0xFFE8ECFF)
+                                                .build());
         this.buildMaterial(DreamtinkerMaterialIds.valentinite)
             .statType(HandleMaterialStats.ID).statType(StatlessMaterialStats.BINDING.getIdentifier()).repairKit().maille().statType(LimbMaterialStats.ID)
             .fallbacks("crystal")

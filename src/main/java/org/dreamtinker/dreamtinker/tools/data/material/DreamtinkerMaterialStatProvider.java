@@ -144,14 +144,19 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new HeadMaterialStats(400, 8f, Tiers.DIAMOND, 1f),
                          HandleMaterialStats.multipliers().durability(1.5f).attackDamage(1.05f).attackSpeed(1.05f).miningSpeed(1.05f).build(),
                          StatlessMaterialStats.BINDING);
-
         addMaterialStats(DreamtinkerMaterialIds.ForlornOathSteel,
                          new HeadMaterialStats(800, 6f, Tiers.NETHERITE, 2f),
                          HandleMaterialStats.multipliers().durability(0.8f).attackDamage(1.20f).attackSpeed(1.20f).miningSpeed(1.20f).build(),
                          StatlessMaterialStats.BINDING);
+
         addMaterialStats(DreamtinkerMaterialIds.deliverance,
                          new HeadMaterialStats(7777, 9f, Tiers.NETHERITE, 7f),
                          HandleMaterialStats.multipliers().durability(8.77f).miningSpeed(1.2f).attackDamage(1.35f).attackSpeed(1.15f).build(),
+                         StatlessMaterialStats.BINDING);
+
+        addMaterialStats(DreamtinkerMaterialIds.cryo_serpent_shift,
+                         new HeadMaterialStats(618, 12f, Tiers.NETHERITE, 7f),
+                         HandleMaterialStats.multipliers().durability(0.5f).miningSpeed(2.15f).attackDamage(1.35f).attackSpeed(2.15f).build(),
                          StatlessMaterialStats.BINDING);
 
         addMaterialStats(DreamtinkerMaterialIds.Utherium,
@@ -337,6 +342,10 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new LimbMaterialStats(500, 0.2f, 0.4f, -0.1f),
                          new GripMaterialStats(0.8f, -0.1f, 2f));
 
+        addMaterialStats(DreamtinkerMaterialIds.cryo_serpent_shift,
+                         new LimbMaterialStats(518, 1.2f, 0.6f, -0.1f),
+                         new GripMaterialStats(0.5f, -0.1f, 7f));
+
         addMaterialStats(DreamtinkerMaterialIds.ArcaneGold,
                          new LimbMaterialStats(32, 0.1f, 0.15f, -0.2f),
                          new GripMaterialStats(-0.2f, 0.15f, 1f));
@@ -470,6 +479,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                             StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
         addArmorShieldStats(DreamtinkerMaterialIds.deliverance,
                             PlatingMaterialStats.builder().durabilityFactor(80).armor(3f, 7f, 8f, 3f).toughness(4).knockbackResistance(0.15f),
+                            StatlessMaterialStats.MAILLE);
+        addArmorShieldStats(DreamtinkerMaterialIds.cryo_serpent_shift,
+                            PlatingMaterialStats.builder().durabilityFactor(51).armor(1f, 5f, 6f, 1f).toughness(7).knockbackResistance(5f),
                             StatlessMaterialStats.MAILLE);
 
         addArmorShieldStats(DreamtinkerMaterialIds.Utherium,
