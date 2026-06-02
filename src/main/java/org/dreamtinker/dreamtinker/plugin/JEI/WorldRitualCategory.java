@@ -115,8 +115,8 @@ public final class WorldRitualCategory implements IRecipeCategory<WorldRitualEnt
         }
 
         // 输出（物品优先；否则用方块图标）
-        if (r.resultItem() != null && !r.resultItem().isEmpty()){
-            b.addSlot(RecipeIngredientRole.OUTPUT, 140, y).addItemStack(r.resultItem());
+        if (r.resultItems() != null && !r.resultItems().isEmpty()){
+            b.addSlot(RecipeIngredientRole.OUTPUT, 140, y).addItemStacks(r.resultItems());
         }else if (r.resultBlockIcon() != null && !r.resultBlockIcon().isEmpty()){
             b.addSlot(RecipeIngredientRole.OUTPUT, 140, y).addItemStack(r.resultBlockIcon());
         }

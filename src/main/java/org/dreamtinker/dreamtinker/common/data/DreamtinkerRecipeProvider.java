@@ -53,8 +53,7 @@ import org.dreamtinker.dreamtinker.tools.DreamtinkerToolParts;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerTools;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.dreamtinker.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvider;
-import org.dreamtinker.dreamtinker.utils.CastLookup;
-import org.dreamtinker.dreamtinker.utils.DTToolsPartsHelper;
+import org.dreamtinker.dreamtinker.utils.DTPartInfoLookup;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.recipe.condition.TagFilledCondition;
 import slimeknights.mantle.recipe.crafting.ShapedRetexturedRecipeBuilder;
@@ -119,7 +118,10 @@ import slimeknights.tconstruct.tools.stats.StatlessMaterialStats;
 import slimeknights.tconstruct.world.TinkerWorld;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public class DreamtinkerRecipeProvider extends RecipeProvider implements IMaterialRecipeHelper, IToolRecipeHelper, IConditionBuilder, IRecipeHelper, ICommonRecipeHelper, ISmelteryRecipeHelper {
@@ -1220,30 +1222,11 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
     }
 
     private void malumCompactMaterialBuilder(Consumer<FinishedRecipe> consumer, MaterialVariantId id, Item item, MaterialStatsId statsId, int count) {
-        List<ToolPartItem> Parts = DTToolsPartsHelper.getPartList(statsId);
-        Map<ToolPartItem, CastLookup.CastTriple> map = CastLookup.findCastsForParts(Parts);
-        for (ToolPartItem part : Parts) {
-            Ingredient castItem = Ingredient.of(map.get(part).asListPresent().toArray(new ItemLike[0])); // 可能为 null（没注册）
-            if (part == DreamtinkerToolParts.memoryOrthant.get())
-                castItem = Ingredient.of(DreamtinkerCommon.memory_cast.get());
-            if (part == DreamtinkerToolParts.reasonEmanation.get())
-                castItem = Ingredient.of(DreamtinkerCommon.reason_cast.get());
-            if (part == DreamtinkerToolParts.explode_core.get())
-                castItem = Ingredient.of(DreamtinkerToolParts.explode_core.get());
-            if (part == DreamtinkerToolParts.wishOrthant.get())
-                castItem = Ingredient.of(DreamtinkerCommon.wish_cast.get());
-            if (part == DreamtinkerToolParts.chainSawCore.get())
-                castItem = Ingredient.of(DreamTinkerSmeltery.chainSawCoreCast.values().toArray(new ItemLike[0]));
-            if (part == DreamtinkerToolParts.chainSawTeeth.get())
-                castItem = Ingredient.of(DreamTinkerSmeltery.chainSawTeethCast.values().toArray(new ItemLike[0]));
-            if (part == DreamtinkerToolParts.NovaMisc.get())
-                castItem = Ingredient.of(DreamTinkerSmeltery.NovaMiscCast.values().toArray(new ItemLike[0]));
-            if (part == DreamtinkerToolParts.NovaRostrum.get())
-                castItem = Ingredient.of(DreamTinkerSmeltery.NovaRostrumCast.values().toArray(new ItemLike[0]));
-            if (part == DreamtinkerToolParts.NovaCover.get())
-                castItem = Ingredient.of(DreamTinkerSmeltery.NovaCoverCast.values().toArray(new ItemLike[0]));
-            if (part == DreamtinkerToolParts.NovaWrapper.get())
-                castItem = Ingredient.of(DreamTinkerSmeltery.NovaWrapperCast.values().toArray(new ItemLike[0]));
+        List<ToolPartItem> parts = DTPartInfoLookup.partList(statsId);
+        for (ToolPartItem part : parts) {
+            Ingredient castItem = DTPartInfoLookup.datagenCastIngredient(part);
+            if (castItem.isEmpty())
+                continue;
             CompoundTag nbt = new CompoundTag();
             nbt.putString("Material", id.toString());
             ItemStack stack = new ItemStack(part, count);

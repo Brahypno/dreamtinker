@@ -13,7 +13,7 @@ public record WorldRitualEntry(
         @Nullable Ingredient catalyst,            // 催化物（如 蓝冰 / 羽毛 / 末影珍珠 / 打火石）
         @Nullable FluidIngredient fluid,               // 需要的流体（如 水 1000mB）
         @Nullable Ingredient needBlocksAsItems, // 需要附近存在/被替换的方块（用物品图标展示）
-        @Nullable ItemStack resultItem,           // 产物（物品）
+        @Nullable List<ItemStack> resultItems,    // 产物（物品）
         @Nullable ItemStack resultBlockIcon,      // 产物（方块，用图标展示）
         @Nullable EntityIngredient entityIngredient,
         @Nullable List<Integer> moonPhases,              // 月相 0~7
@@ -24,6 +24,26 @@ public record WorldRitualEntry(
         @Nullable String text,             // 是否需要水下环境
         @Nullable Boolean drowning                // 是否需要处于溺水状态
 ) {
+    public WorldRitualEntry(
+            Trigger trigger,
+            @Nullable Ingredient catalyst,
+            @Nullable FluidIngredient fluid,
+            @Nullable Ingredient needBlocksAsItems,
+            @Nullable ItemStack resultItem,
+            @Nullable ItemStack resultBlockIcon,
+            @Nullable EntityIngredient entityIngredient,
+            @Nullable List<Integer> moonPhases,
+            @Nullable Boolean daytime,
+            @Nullable Integer minY,
+            @Nullable Integer radius,
+            @Nullable Double chance,
+            @Nullable String text,
+            @Nullable Boolean drowning) {
+        this(trigger, catalyst, fluid, needBlocksAsItems,
+             resultItem == null || resultItem.isEmpty() ? List.of() : List.of(resultItem),
+             resultBlockIcon, entityIngredient, moonPhases, daytime, minY, radius, chance, text, drowning);
+    }
+
     public enum Trigger {
         ITEM_IN_FLUID,       // 物品进入流体（例：蓝冰扔水里）
         KILL_ENTITY,         // 击杀实体（例：白天极限高度击杀凋零骷髅）

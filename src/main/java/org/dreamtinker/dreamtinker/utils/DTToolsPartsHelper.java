@@ -13,10 +13,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.tags.ITagManager;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.common.TinkerTags;
-import slimeknights.tconstruct.library.materials.MaterialRegistry;
-import slimeknights.tconstruct.library.materials.definition.MaterialId;
-import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
-import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
@@ -26,43 +22,12 @@ import slimeknights.tconstruct.library.tools.item.IModifiable;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
-import slimeknights.tconstruct.library.tools.part.ToolPartItem;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 import javax.annotation.Nullable;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class DTToolsPartsHelper {
-    private static final Map<MaterialStatsId, List<ToolPartItem>> CACHE = new HashMap<>();
-
-    public static List<ToolPartItem> getPartList(MaterialStatsId statsId) {
-        return CACHE.computeIfAbsent(statsId, DTToolsPartsHelper::scanParts);
-    }
-
-    private static List<ToolPartItem> scanParts(MaterialStatsId statsId) {
-        return ForgeRegistries.ITEMS.getValues().stream()
-                                    .filter(item -> item instanceof ToolPartItem part
-                                                    && part.getStatType() == statsId)
-                                    .map(item -> (ToolPartItem) item)
-                                    .toList();
-    }
-
-    public static ItemStack getPart(MaterialId id, MaterialStatsId statsId, @Nullable RandomSource rdm) {
-        if (!MaterialRegistry.isFullyLoaded())
-            return ItemStack.EMPTY;
-        MaterialVariantId mli = MaterialRegistry.getMaterial(id).getIdentifier();
-
-        List<ToolPartItem> Parts = getPartList(statsId);
-        if (Parts.isEmpty())
-            return ItemStack.EMPTY;
-        ToolPartItem part = Parts.get(0);
-        if (rdm != null)
-            part = Parts.get(rdm.nextInt(Parts.size()));
-        return part.withMaterial(mli);
-    }
-
     public static boolean startToolInteract(Player player, EquipmentSlot slotType, TooltipKey modifierKey) {
         if (!player.isSpectator()){
             ItemStack helmet = player.getItemBySlot(slotType);

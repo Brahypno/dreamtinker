@@ -7,6 +7,7 @@ import mezz.jei.api.registration.IModIngredientRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
+import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
@@ -14,6 +15,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
@@ -23,16 +25,19 @@ import org.dreamtinker.dreamtinker.common.DreamtinkerCommon;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.library.recipe.virtual.WorldRitualEntry;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
-import org.dreamtinker.dreamtinker.utils.DTToolsPartsHelper;
+import org.dreamtinker.dreamtinker.utils.DTPartInfoLookup;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.recipe.ingredient.EntityIngredient;
 import slimeknights.mantle.recipe.ingredient.FluidIngredient;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.materials.MaterialRegistry;
 import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
+import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
 import slimeknights.tconstruct.library.tools.part.ToolPartItem;
 import slimeknights.tconstruct.shared.TinkerCommons;
+import slimeknights.tconstruct.tools.stats.HandleMaterialStats;
 import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
+import slimeknights.tconstruct.tools.stats.StatlessMaterialStats;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -44,6 +49,12 @@ import static org.dreamtinker.dreamtinker.plugin.JEI.WorldRitualCategory.WORLD_R
 
 @JeiPlugin
 public final class DTJeiPlugin implements IModPlugin {
+    private static final List<MaterialStatsId> MOONLIGHT_PART_STATS = List.of(
+            HeadMaterialStats.ID,
+            StatlessMaterialStats.BINDING.getIdentifier(),
+            HandleMaterialStats.ID
+    );
+
     @Override
     public @NotNull ResourceLocation getPluginUid() {return WorldRitualCategory.UID;}
 
@@ -70,16 +81,25 @@ public final class DTJeiPlugin implements IModPlugin {
         List<WorldRitualEntry> list = new ArrayList<>();
 
         // A) 蓝冰 + 水 + 月相 → 工具部件
-        List<ToolPartItem> headParts = DTToolsPartsHelper.getPartList(HeadMaterialStats.ID);
-        if (!MaterialRegistry.isFullyLoaded()){
+        Level level = Minecraft.getInstance().level;
+        if (level != null && MaterialRegistry.isFullyLoaded()){
             MaterialVariantId mli = MaterialRegistry.getMaterial(DreamtinkerMaterialIds.moonlight_ice.getId()).getIdentifier();
-            for (ToolPartItem item : headParts) {
+            Map<Integer, List<ItemStack>> partsByCost = new TreeMap<>();
+            for (MaterialStatsId statsId : MOONLIGHT_PART_STATS) {
+                for (ToolPartItem item : DTPartInfoLookup.partList(statsId)) {
+                    int cost = DTPartInfoLookup.runtimeCost(level.getRecipeManager(), level.registryAccess(), item);
+                    partsByCost.computeIfAbsent(cost, ignored -> new ArrayList<>())
+                               .add(DTPartInfoLookup.withMaterial(item, mli, 1));
+                }
+            }
+            for (Map.Entry<Integer, List<ItemStack>> entry : partsByCost.entrySet()) {
+                ItemStack blueIce = new ItemStack(Items.BLUE_ICE, entry.getKey());
                 list.add(new WorldRitualEntry(
                         WorldRitualEntry.Trigger.ITEM_IN_FLUID,
-                        Ingredient.of(Items.BLUE_ICE),
+                        Ingredient.of(blueIce),
                         FluidIngredient.of(Fluids.WATER, 1000),
                         null,
-                        item.withMaterial(mli),
+                        entry.getValue(),
                         null,
                         null,                                   // 没有实体条件
                         java.util.List.of(0, 4), null, null, null, null, null, null

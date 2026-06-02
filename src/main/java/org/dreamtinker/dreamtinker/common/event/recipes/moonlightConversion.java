@@ -1,6 +1,7 @@
 package org.dreamtinker.dreamtinker.common.event.recipes;
 
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -15,18 +16,28 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
-import org.dreamtinker.dreamtinker.utils.DTToolsPartsHelper;
+import org.dreamtinker.dreamtinker.utils.DTPartInfoLookup;
+import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
+import slimeknights.tconstruct.tools.stats.HandleMaterialStats;
 import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
+import slimeknights.tconstruct.tools.stats.StatlessMaterialStats;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class moonlightConversion {
     // 缓存: 正在被跟踪的蓝冰掉落物
     private static final Map<UUID, ItemEntity> trackedBlueIce = new HashMap<>();
+    private static final Map<UUID, Long> nextConversionTick = new HashMap<>();
+    private static final Map<UUID, Long> nextHintTick = new HashMap<>();
+
+    private static final int CONVERSION_INTERVAL = 20;
+    private static final int HINT_INTERVAL = 20;
+    private static final List<MaterialStatsId> MOONLIGHT_PART_STATS = List.of(
+            HeadMaterialStats.ID,
+            StatlessMaterialStats.BINDING.getIdentifier(),
+            HandleMaterialStats.ID
+    );
 
     // 当蓝冰掉落到世界中（被玩家丢出）
     @SubscribeEvent
@@ -44,38 +55,79 @@ public class moonlightConversion {
     public static void onWorldTick(TickEvent.LevelTickEvent event) {
         if (event.phase != TickEvent.Phase.END || event.level.isClientSide)
             return;
+
         Level level = event.level;
+        long gameTime = level.getGameTime();
+        int moonPhase = level.getMoonPhase();
+        boolean allowedMoonlight = level.isNight() && (moonPhase == 0 || moonPhase == 4);
+
         Iterator<Map.Entry<UUID, ItemEntity>> iterator = trackedBlueIce.entrySet().iterator();
+
         while (iterator.hasNext()) {
             Map.Entry<UUID, ItemEntity> entry = iterator.next();
+            UUID id = entry.getKey();
             ItemEntity item = entry.getValue();
-            if (level != item.level())
-                continue;
-            // 如果已消失或不在当前世界，移除
-            if (!item.isAlive()){
+
+            if (item == null || item.isRemoved() || !item.isAlive() || item.level() != level || !item.getItem().is(Items.BLUE_ICE)){
                 iterator.remove();
+                nextConversionTick.remove(id);
+                nextHintTick.remove(id);
                 continue;
             }
 
-            // 检查其当前位置是否为水
-            int moonPhase = level.getMoonPhase();
-            boolean isAllowedPhase = (moonPhase == 0 || moonPhase == 4) && level.isNight();
+            if (!item.isInWater())
+                continue;
 
-            if (item.isInWater()){
-                if (!isAllowedPhase){//
-                    level.playSound(item, item.blockPosition(), SoundEvents.NOTE_BLOCK_BASS.get(), SoundSource.BLOCKS, 0.5F, 0.8F);
-                    level.addParticle(ParticleTypes.SMOKE, item.getX(), item.getY() + 0.2, item.getZ(), 0, 0.01, 0);
-                    continue;
-                }
-                // 转换蓝冰
-                ItemStack result = DTToolsPartsHelper.getPart(DreamtinkerMaterialIds.moonlight_ice.getId(), HeadMaterialStats.ID, level.random);
-                if (!result.isEmpty()){
-                    level.addFreshEntity(new ItemEntity(level, item.getX(), item.getY(), item.getZ(), result));
-                }
-                item.discard(); // 移除原蓝冰
-                iterator.remove();
+            if (!allowedMoonlight){
+                showWrongMoonHint(level, item, id, gameTime);
+                continue;
             }
+
+            if (gameTime < nextConversionTick.getOrDefault(id, 0L))
+                continue;
+
+            convertBlueIceByCost(level, item, iterator, id, gameTime);
         }
+    }
+
+    private static void convertBlueIceByCost(Level level, ItemEntity item, Iterator<Map.Entry<UUID, ItemEntity>> iterator, UUID id, long gameTime) {
+        ItemStack stack = item.getItem();
+        int maxCost = stack.getCount();
+
+        DTPartInfoLookup.CostedPart result = DTPartInfoLookup.runtimePartWithCost(level.getRecipeManager(), level.registryAccess(),
+                                                                                  DreamtinkerMaterialIds.moonlight_ice.getId(), MOONLIGHT_PART_STATS, maxCost,
+                                                                                  level.random);
+
+        if (result.isEmpty())
+            return;
+
+        level.addFreshEntity(new ItemEntity(level, item.getX(), item.getY(), item.getZ(), result.stack()));
+
+        stack.shrink(result.cost());
+        nextConversionTick.put(id, gameTime + CONVERSION_INTERVAL);
+
+        if (stack.isEmpty()){
+            item.discard();
+            iterator.remove();
+            nextConversionTick.remove(id);
+            nextHintTick.remove(id);
+        }else {
+            item.setItem(stack);
+        }
+    }
+
+    private static void showWrongMoonHint(Level level, ItemEntity item, UUID id, long gameTime) {
+        if (gameTime < nextHintTick.getOrDefault(id, 0L))
+            return;
+
+        nextHintTick.put(id, gameTime + HINT_INTERVAL);
+
+        if (!(level instanceof ServerLevel serverLevel))
+            return;
+
+        serverLevel.sendParticles(ParticleTypes.SMOKE, item.getX(), item.getY() + 0.25D, item.getZ(), 4, 0.15D, 0.08D, 0.15D, 0.01D);
+        serverLevel.sendParticles(ParticleTypes.SNOWFLAKE, item.getX(), item.getY() + 0.25D, item.getZ(), 3, 0.12D, 0.06D, 0.12D, 0.005D);
+        level.playSound(null, item.blockPosition(), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.BLOCKS, 0.35F, 0.55F + level.random.nextFloat() * 0.15F);
     }
 
     @SubscribeEvent
@@ -88,5 +140,6 @@ public class moonlightConversion {
     @SubscribeEvent
     public static void onServerStopped(ServerStoppedEvent event) {
         trackedBlueIce.clear();
+        DTPartInfoLookup.clearCaches();
     }
 }
