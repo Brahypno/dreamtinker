@@ -2540,7 +2540,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                             .setDamagable(darkMetalArmorSizes)
                             .addByproduct(TinkerFluids.moltenNetherite.result(FluidValues.INGOT))
                             .addByproduct(TinkerFluids.moltenDiamond.result(FluidValues.GEM * 4))
-                            .save(consumer, location(metalFolder + "dark_metal/boots"));
+                            .save(wrapped, location(metalFolder + "dark_metal/boots"));
         MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "darkwarblade")), DreamtinkerFluids.molten_dark_metal.get(),
                                      FluidValues.METAL_BLOCK * 2 + FluidValues.NUGGET)
                             .setDamagable(FluidValues.INGOT)
@@ -2552,7 +2552,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                      DreamtinkerFluids.molten_dark_metal.get(),
                                      FluidValues.NUGGET * 3)
                             .setDamagable(FluidValues.NUGGET / 2)
-                            .save(consumer, location(metalFolder + "dark_metal/dagger"));
+                            .save(wrapped, location(metalFolder + "dark_metal/dagger"));
         MeltingRecipeBuilder.melting(CompoundIngredient.of(ItemNameIngredient.from(new ResourceLocation(BIC, "sharpened_dark_metal_sword")),
                                                            ItemNameIngredient.from(new ResourceLocation(BIC, "spider_bite_sword"))),
                                      DreamtinkerFluids.molten_dark_metal.get(),
@@ -2574,7 +2574,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "great_reaper_axe")), DreamtinkerFluids.molten_dark_metal.get(),
                                      FluidValues.INGOT * 4 + FluidValues.NUGGET * 2)
                             .setDamagable(FluidValues.NUGGET)
-                            .save(consumer, location(metalFolder + "dark_metal/greater_axe"));
+                            .save(wrapped, location(metalFolder + "dark_metal/greater_axe"));
         MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "skullbreaker_hammer")), DreamtinkerFluids.molten_dark_metal.get(),
                                      FluidValues.METAL_BLOCK + FluidValues.NUGGET * 2)
                             .setDamagable(FluidValues.INGOT)
@@ -2648,25 +2648,25 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         /*
         SeveringRecipeBuilder.severing(EntityIngredient.of(DreamtinkerTagKeys.EntityTypes.ROTSPAWN),
                                        ForgeRegistries.ITEMS.getValue(new ResourceLocation(undergarden, "utheric_shard")))
-                             .save(consumer, location(serving_folder + "utherium_shard"));
+                             .save(wrapped, location(serving_folder + "utherium_shard"));
         EntityMeltingRecipeBuilder.melting(EntityIngredient.of(ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(undergarden, "forgotten_guardian"))),
                                            DreamtinkerFluids.molten_forgotten_metal.result(FluidValues.NUGGET))
                                   .save(wrapped, location(Entity_Melting_folder + "molten_forgotten_metal/entity"));
         SeveringRecipeBuilder.severing(EntityIngredient.of(ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(undergarden, "forgotten_guardian"))),
                                        ForgeRegistries.ITEMS.getValue(new ResourceLocation(undergarden, "forgotten_nugget")))
-                             .save(consumer, location(serving_folder + "forgetten_metal"));
+                             .save(wrapped, location(serving_folder + "forgetten_metal"));
 
         SeveringRecipeBuilder.severing(EntityIngredient.of(ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(undergarden, "scintling"))),
                                        ForgeRegistries.ITEMS.getValue(new ResourceLocation(undergarden, "goo_ball")))
-                             .save(consumer, location(serving_folder + "goo_ball"));
+                             .save(wrapped, location(serving_folder + "goo_ball"));
         ItemCastingRecipeBuilder.tableRecipe(ForgeRegistries.ITEMS.getValue(new ResourceLocation(undergarden, "goo_ball")))
                                 .setCoolingTime(IMeltingRecipe.getTemperature(DreamtinkerFluids.gooey_slime), FluidValues.SLIMEBALL)
                                 .setFluid(FluidIngredient.of(new FluidStack(DreamtinkerFluids.gooey_slime.get(), FluidValues.SLIMEBALL)))
-                                .save(consumer, location(Casting_folder + "gooey_slime"));
+                                .save(wrapped, location(Casting_folder + "gooey_slime"));
         ItemCastingRecipeBuilder.tableRecipe(ForgeRegistries.ITEMS.getValue(new ResourceLocation(undergarden, "cloggrum_bars")))
                                 .setCoolingTime(IMeltingRecipe.getTemperature(DreamtinkerFluids.molten_cloggrum), FluidValues.NUGGET * 3)
                                 .setFluid(FluidIngredient.of(new FluidStack(DreamtinkerFluids.molten_cloggrum.get(), FluidValues.NUGGET * 3)))
-                                .save(consumer, location(Casting_folder + "cloggrum/bars"));
+                                .save(wrapped, location(Casting_folder + "cloggrum/bars"));
          */
     }
 

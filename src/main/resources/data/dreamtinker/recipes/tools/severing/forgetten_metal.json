@@ -1,5 +1,29 @@
 {
   "type": "tconstruct:severing",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "undergarden"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "undergarden"
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "entity": {
     "type": "undergarden:forgotten_guardian"
   },
