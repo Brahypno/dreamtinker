@@ -28,7 +28,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          HandleMaterialStats.multipliers().durability(0.7f).miningSpeed(0.7f).attackDamage(1.5f).attackSpeed(0.5f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.moonlight_ice,
-                         new HeadMaterialStats(100, 0.1f, Tiers.NETHERITE, 7.0f));
+                         new HeadMaterialStats(100, 0.1f, Tiers.NETHERITE, 7.0f),
+                         HandleMaterialStats.multipliers().durability(0.5f).miningSpeed(1.1f).attackDamage(1.2f).attackSpeed(1.0f).build(),
+                         StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.valentinite,
                          HandleMaterialStats.multipliers().durability(0.9f).miningSpeed(1.1f).attackDamage(1.1f).attackSpeed(1.1f).build(),
                          StatlessMaterialStats.BINDING);

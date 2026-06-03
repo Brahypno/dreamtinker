@@ -35,7 +35,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(255, 0xFFD8FFF6)
                                                 .build());
         this.buildMaterial(DreamtinkerMaterialIds.moonlight_ice)
-            .statType(HeadMaterialStats.ID).repairKit().fallbacks("metal")
+            .meleeHarvest().fallbacks("metal")
             .transformer(GreyToSpriteTransformer.builder()
                                                 .addARGB(0, 0xFF081829)
                                                 .addARGB(63, 0xFF0F2E52)
