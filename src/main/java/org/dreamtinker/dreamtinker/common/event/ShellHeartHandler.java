@@ -10,6 +10,7 @@ import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -85,19 +86,35 @@ public class ShellHeartHandler {
         if (entity.level().isClientSide() || entity.isDeadOrDying() || event.isCanceled()){
             return;
         }
+
         DamageSource source = event.getSource();
         if (entity.isInvulnerableTo(source)){
             return;
         }
+
         ShellHeartProvider.getShellHeart(entity).ifPresent(shellHeart -> {
-            float currentAbsorption = shellHeart.get();
-            float damageDeduction = Math.min(event.getAmount(), currentAbsorption);
-            shellHeart.add(-damageDeduction);
-            event.setAmount(event.getAmount() - damageDeduction);
+            float damage = event.getAmount();
+            float currentShellHeart = shellHeart.get();
+            float toughness = getShellHeartToughness(entity);
+            if (damage <= 0.0F || currentShellHeart <= 0.0F || toughness <= 0.0F){
+                return;
+            }
+
+            float blocked = Math.min(damage, currentShellHeart * toughness);
+            float consumed = blocked / toughness;
+
+            shellHeart.add(-consumed);
+            event.setAmount(damage - blocked);
+
             if (entity instanceof ServerPlayer player){
                 ShellHeartProvider.syncToClient(player);
             }
         });
+    }
+
+    private static float getShellHeartToughness(LivingEntity entity) {
+        AttributeInstance attr = entity.getAttribute(DreamtinkerAttributes.SHELL_HEART_TOUGHNESS.get());
+        return attr == null ? 1.0F : Mth.clamp((float) attr.getValue(), 0.001F, 4096.0F);
     }
 
     @SubscribeEvent

@@ -1767,6 +1767,8 @@
 
   "attribute.name.dreamtinker.generic.fate_veil": "Fate Veil",
   "attribute.name.dreamtinker.generic.blood_in_shell": "Shell Heart",
+  "attribute.name.generic.shell_heart_toughness": "Shell Heart Toughness",
+
   "attribute_modifier.dreamtinker.max_mana_armor": "Mana Armor: Maximum Mana",
   "attribute_modifier.dreamtinker.mana_regen_armor": "Mana Armor: Mana Regeneration",
 

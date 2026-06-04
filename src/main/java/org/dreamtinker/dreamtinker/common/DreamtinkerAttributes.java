@@ -21,6 +21,7 @@ public class DreamtinkerAttributes {
     private static final AttributeDeferredRegister ATTRIBUTES = new AttributeDeferredRegister(Dreamtinker.MODID);
     public static final RegistryObject<Attribute> FATE_VEIL = ATTRIBUTES.register("generic.fate_veil", 0.0, 0, 0.98f, true);
     public static final RegistryObject<Attribute> BLOOD_IN_SHELL = ATTRIBUTES.register("generic.blood_in_shell", 0.0, 0, 4096f, true);
+    public static final RegistryObject<Attribute> SHELL_HEART_TOUGHNESS = ATTRIBUTES.register("generic.shell_heart_toughness", 1.0, 0.001, 4096f, true);
 
     @SuppressWarnings({"removal"})
     public DreamtinkerAttributes() {
@@ -33,6 +34,7 @@ public class DreamtinkerAttributes {
         // general attributes
         addToAll(event, FATE_VEIL);
         addToAll(event, BLOOD_IN_SHELL);
+        addToAll(event, SHELL_HEART_TOUGHNESS);
     }
 
 
