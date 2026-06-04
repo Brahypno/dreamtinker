@@ -3,6 +3,7 @@ package org.dreamtinker.dreamtinker.utils.LootHelper;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -63,7 +64,7 @@ public class DTLoots {
             }
 
             try {
-                invokeLivingDropEquipment(victim);
+                dropAllEquipmentLikeDeath(victim);
             }
             catch (Throwable t) {
                 errors.add(new RuntimeException("dropEquipment failed", t));
@@ -238,6 +239,27 @@ public class DTLoots {
         }
         catch (Throwable e) {
             throw new RuntimeException("Failed to invokespecial LivingEntity#dropExperience", e);
+        }
+    }
+
+    public static void dropAllEquipmentLikeDeath(LivingEntity e) {
+        for (EquipmentSlot slot : EquipmentSlot.values()) {
+            ItemStack stack = e.getItemBySlot(slot);
+            if (stack.isEmpty())
+                continue;
+
+            // 可选：尊重“消失诅咒”，死亡会直接消失，这里仿真
+            if (net.minecraft.world.item.enchantment.EnchantmentHelper.hasVanishingCurse(stack)){
+                e.setItemSlot(slot, ItemStack.EMPTY);
+                continue;
+            }
+
+            ItemEntity drop = e.spawnAtLocation(stack.copy(), 0.5f);
+            if (drop != null){
+                drop.setDefaultPickUpDelay();
+                drop.setDeltaMovement(drop.getDeltaMovement().add(0.0, 0.2, 0.0));
+            }
+            e.setItemSlot(slot, ItemStack.EMPTY);
         }
     }
 

@@ -2,15 +2,12 @@ package org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.phys.EntityHitResult;
 import org.dreamtinker.dreamtinker.Dreamtinker;
@@ -36,6 +33,7 @@ import java.util.Arrays;
 import java.util.UUID;
 
 import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.RedShadeEnable;
+import static org.dreamtinker.dreamtinker.utils.LootHelper.DTLoots.dropAllEquipmentLikeDeath;
 
 public class DespairWind extends Modifier implements ProjectileHitModifierHook, MeleeHitModifierHook, MonsterMeleeHitModifierHook {
 
@@ -120,26 +118,6 @@ public class DespairWind extends Modifier implements ProjectileHitModifierHook, 
         return false;
     }
 
-    private static void dropAllEquipmentLikeDeath(LivingEntity e) {
-        for (EquipmentSlot slot : EquipmentSlot.values()) {
-            ItemStack stack = e.getItemBySlot(slot);
-            if (stack.isEmpty())
-                continue;
-
-            // 可选：尊重“消失诅咒”，死亡会直接消失，这里仿真
-            if (net.minecraft.world.item.enchantment.EnchantmentHelper.hasVanishingCurse(stack)){
-                e.setItemSlot(slot, ItemStack.EMPTY);
-                continue;
-            }
-
-            ItemEntity drop = e.spawnAtLocation(stack.copy(), 0.5f);
-            if (drop != null){
-                drop.setDefaultPickUpDelay();
-                drop.setDeltaMovement(drop.getDeltaMovement().add(0.0, 0.2, 0.0));
-            }
-            e.setItemSlot(slot, ItemStack.EMPTY);
-        }
-    }
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
