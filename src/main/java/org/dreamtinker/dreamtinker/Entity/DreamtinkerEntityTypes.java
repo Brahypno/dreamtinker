@@ -1,6 +1,5 @@
 package org.dreamtinker.dreamtinker.Entity;
 
-import net.minecraft.client.renderer.entity.LightningBoltRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -37,7 +36,7 @@ public class DreamtinkerEntityTypes extends DreamtinkerModule {
                                       .sized(0.6F, 0.7F) // 和原版狐狸一样
             );
     public static final RegistryObject<EntityType<IronBallItem.ThrownIronBall>> ThrownIronBall =
-            ENTITIES.register("ironball",
+            ENTITIES.register("iron_ball",
                               () -> EntityType.Builder.<IronBallItem.ThrownIronBall>of(IronBallItem.ThrownIronBall::new, MobCategory.MISC).sized(0.25F, 0.25F)
                                                       .clientTrackingRange(4)
                                                       .updateInterval(10));
@@ -69,7 +68,7 @@ public class DreamtinkerEntityTypes extends DreamtinkerModule {
         event.registerEntityRenderer(DreamtinkerEntityTypes.NarcissusSpitEntity.get(), NarcissusFluidProjectileRenderer::new);
         event.registerEntityRenderer(DreamtinkerEntityTypes.SLASH_ORBIT.get(), SlashOrbitRenderer::new);
         event.registerEntityRenderer(DreamtinkerEntityTypes.AggressiveFOX.get(), AggressiveFoxRender::new);
-        event.registerEntityRenderer(DreamtinkerEntityTypes.LIGHTNING_ENTITY.get(), LightningBoltRenderer::new);
+        event.registerEntityRenderer(DreamtinkerEntityTypes.LIGHTNING_ENTITY.get(), WiserLightBoltRenderer::new);
         event.registerEntityRenderer(DreamtinkerEntityTypes.ThrownIronBall.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(DreamtinkerEntityTypes.WING_SLASH.get(), WingSlashProjectileRenderer::new);
         event.registerEntityRenderer(DreamtinkerEntityTypes.CRESCENT_SLASH.get(), CrescentSlashProjectileRenderer::new);
