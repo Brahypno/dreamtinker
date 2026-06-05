@@ -1,34 +1,154 @@
 {
   "variants": {
-    "function_set=0,in_structure=false": {
+    "facing=east,function_set=0,in_structure=false": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_0",
+      "y": 90
+    },
+    "facing=east,function_set=0,in_structure=true": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_0",
+      "y": 90
+    },
+    "facing=east,function_set=1,in_structure=false": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_1",
+      "y": 90
+    },
+    "facing=east,function_set=1,in_structure=true": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_1",
+      "y": 90
+    },
+    "facing=east,function_set=2,in_structure=false": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_2",
+      "y": 90
+    },
+    "facing=east,function_set=2,in_structure=true": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_2",
+      "y": 90
+    },
+    "facing=east,function_set=3,in_structure=false": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_2",
+      "y": 90
+    },
+    "facing=east,function_set=3,in_structure=true": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_2",
+      "y": 90
+    },
+    "facing=east,function_set=4,in_structure=false": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_2",
+      "y": 90
+    },
+    "facing=east,function_set=4,in_structure=true": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_2",
+      "y": 90
+    },
+    "facing=north,function_set=0,in_structure=false": {
       "model": "dreamtinker:transmute/ashen_melt_switch_0"
     },
-    "function_set=0,in_structure=true": {
+    "facing=north,function_set=0,in_structure=true": {
       "model": "dreamtinker:transmute/ashen_melt_switch_0"
     },
-    "function_set=1,in_structure=false": {
+    "facing=north,function_set=1,in_structure=false": {
       "model": "dreamtinker:transmute/ashen_melt_switch_1"
     },
-    "function_set=1,in_structure=true": {
+    "facing=north,function_set=1,in_structure=true": {
       "model": "dreamtinker:transmute/ashen_melt_switch_1"
     },
-    "function_set=2,in_structure=false": {
+    "facing=north,function_set=2,in_structure=false": {
       "model": "dreamtinker:transmute/ashen_melt_switch_2"
     },
-    "function_set=2,in_structure=true": {
+    "facing=north,function_set=2,in_structure=true": {
       "model": "dreamtinker:transmute/ashen_melt_switch_2"
     },
-    "function_set=3,in_structure=false": {
+    "facing=north,function_set=3,in_structure=false": {
       "model": "dreamtinker:transmute/ashen_melt_switch_2"
     },
-    "function_set=3,in_structure=true": {
+    "facing=north,function_set=3,in_structure=true": {
       "model": "dreamtinker:transmute/ashen_melt_switch_2"
     },
-    "function_set=4,in_structure=false": {
+    "facing=north,function_set=4,in_structure=false": {
       "model": "dreamtinker:transmute/ashen_melt_switch_2"
     },
-    "function_set=4,in_structure=true": {
+    "facing=north,function_set=4,in_structure=true": {
       "model": "dreamtinker:transmute/ashen_melt_switch_2"
+    },
+    "facing=south,function_set=0,in_structure=false": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_0",
+      "y": 180
+    },
+    "facing=south,function_set=0,in_structure=true": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_0",
+      "y": 180
+    },
+    "facing=south,function_set=1,in_structure=false": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_1",
+      "y": 180
+    },
+    "facing=south,function_set=1,in_structure=true": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_1",
+      "y": 180
+    },
+    "facing=south,function_set=2,in_structure=false": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_2",
+      "y": 180
+    },
+    "facing=south,function_set=2,in_structure=true": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_2",
+      "y": 180
+    },
+    "facing=south,function_set=3,in_structure=false": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_2",
+      "y": 180
+    },
+    "facing=south,function_set=3,in_structure=true": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_2",
+      "y": 180
+    },
+    "facing=south,function_set=4,in_structure=false": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_2",
+      "y": 180
+    },
+    "facing=south,function_set=4,in_structure=true": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_2",
+      "y": 180
+    },
+    "facing=west,function_set=0,in_structure=false": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_0",
+      "y": 270
+    },
+    "facing=west,function_set=0,in_structure=true": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_0",
+      "y": 270
+    },
+    "facing=west,function_set=1,in_structure=false": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_1",
+      "y": 270
+    },
+    "facing=west,function_set=1,in_structure=true": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_1",
+      "y": 270
+    },
+    "facing=west,function_set=2,in_structure=false": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_2",
+      "y": 270
+    },
+    "facing=west,function_set=2,in_structure=true": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_2",
+      "y": 270
+    },
+    "facing=west,function_set=3,in_structure=false": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_2",
+      "y": 270
+    },
+    "facing=west,function_set=3,in_structure=true": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_2",
+      "y": 270
+    },
+    "facing=west,function_set=4,in_structure=false": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_2",
+      "y": 270
+    },
+    "facing=west,function_set=4,in_structure=true": {
+      "model": "dreamtinker:transmute/ashen_melt_switch_2",
+      "y": 270
     }
   }
 }

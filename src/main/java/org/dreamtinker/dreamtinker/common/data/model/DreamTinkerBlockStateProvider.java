@@ -130,7 +130,8 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
                        models().cubeAll(itemKey(DreamTinkerSmeltery.ashenAccel.get()).getPath(), modLoc("block/transmute/ashen/ashen_accelerator")),
                        models().getExistingFile(modLoc("block/transmute/ashen/ashen_accelerator_active")));
 
-        cubeAllIntTextureBlock(DreamTinkerSmeltery.ashenMeltSwitch.get(), "transmute/ashen_melt_switch", AshenButtonBlock.Function_Set, 2);
+        frontTextureIntStructureStates(DreamTinkerSmeltery.ashenMeltSwitch.get(), "transmute/ashen_melt_switch",
+                                       AshenButtonBlock.Function_Set, 2, modLoc("block/transmute/ashen/ashen_bricks"));
     }
 
     protected void slabWithItem(SlabBlock slab, ResourceLocation doubleSlabModel, ResourceLocation texture) {
@@ -334,6 +335,43 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
 
             return ConfiguredModel.builder().modelFile(builtModels[clamped]).build();
         });
+
+        simpleBlockItem(block, builtModels[0]);
+    }
+
+    private void frontTextureIntStructureStates(Block block, String name, IntegerProperty textureProperty, int maxValue, ResourceLocation sideTexture) {
+        BlockModelBuilder[] builtModels = new BlockModelBuilder[maxValue + 1];
+
+        for (int i = 0; i <= maxValue; i++) {
+            builtModels[i] = models().withExistingParent(name + "_" + i, mcLoc("block/cube"))
+                                     .texture("down", sideTexture)
+                                     .texture("up", sideTexture)
+                                     .texture("north", modLoc("block/" + name + "_" + i))
+                                     .texture("south", sideTexture)
+                                     .texture("east", sideTexture)
+                                     .texture("west", sideTexture)
+                                     .texture("particle", sideTexture);
+        }
+
+        var vb = getVariantBuilder(block);
+        for (Direction dir : Direction.Plane.HORIZONTAL) {
+            int y = ((int) dir.toYRot() + 180) % 360;
+            for (int textureIndex : textureProperty.getPossibleValues()) {
+                ModelFile model = builtModels[Math.min(textureIndex, maxValue)];
+
+                vb.partialState()
+                  .with(SearedBlock.IN_STRUCTURE, false)
+                  .with(textureProperty, textureIndex)
+                  .with(HorizontalDirectionalBlock.FACING, dir)
+                  .addModels(new ConfiguredModel(model, 0, y, false));
+
+                vb.partialState()
+                  .with(SearedBlock.IN_STRUCTURE, true)
+                  .with(textureProperty, textureIndex)
+                  .with(HorizontalDirectionalBlock.FACING, dir)
+                  .addModels(new ConfiguredModel(model, 0, y, false));
+            }
+        }
 
         simpleBlockItem(block, builtModels[0]);
     }

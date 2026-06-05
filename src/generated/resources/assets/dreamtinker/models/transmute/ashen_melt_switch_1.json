@@ -1,6 +1,12 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cube",
   "textures": {
-    "all": "dreamtinker:block/transmute/ashen_melt_switch_1"
+    "down": "dreamtinker:block/transmute/ashen/ashen_bricks",
+    "east": "dreamtinker:block/transmute/ashen/ashen_bricks",
+    "north": "dreamtinker:block/transmute/ashen_melt_switch_1",
+    "particle": "dreamtinker:block/transmute/ashen/ashen_bricks",
+    "south": "dreamtinker:block/transmute/ashen/ashen_bricks",
+    "up": "dreamtinker:block/transmute/ashen/ashen_bricks",
+    "west": "dreamtinker:block/transmute/ashen/ashen_bricks"
   }
 }

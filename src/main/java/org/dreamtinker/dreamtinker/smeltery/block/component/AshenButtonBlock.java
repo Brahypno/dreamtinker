@@ -1,14 +1,19 @@
 package org.dreamtinker.dreamtinker.smeltery.block.component;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -24,12 +29,38 @@ public class AshenButtonBlock extends SearedBlock {
     public AshenButtonBlock(Properties properties, boolean requiredBlockEntity, int local_max) {
         super(properties, requiredBlockEntity);
         local_max_property = local_max;
+        this.registerDefaultState(this.defaultBlockState()
+                                      .setValue(Function_Set, 0)
+                                      .setValue(HorizontalDirectionalBlock.FACING, Direction.NORTH));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(Function_Set);
+        builder.add(Function_Set, HorizontalDirectionalBlock.FACING);
+    }
+
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return this.defaultBlockState().setValue(HorizontalDirectionalBlock.FACING, context.getHorizontalDirection().getOpposite());
+    }
+
+    @Deprecated
+    @Override
+    public BlockState rotate(BlockState state, Rotation rotation) {
+        if (state.getValue(SearedBlock.IN_STRUCTURE)){
+            return state;
+        }
+        return state.setValue(HorizontalDirectionalBlock.FACING, rotation.rotate(state.getValue(HorizontalDirectionalBlock.FACING)));
+    }
+
+    @Deprecated
+    @Override
+    public BlockState mirror(BlockState state, Mirror mirror) {
+        if (state.getValue(SearedBlock.IN_STRUCTURE)){
+            return state;
+        }
+        return state.rotate(mirror.getRotation(state.getValue(HorizontalDirectionalBlock.FACING)));
     }
 
     @Override

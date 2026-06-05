@@ -63,7 +63,6 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
     private final MultiAlloyingModule alloyingModule = new MultiAlloyingModule(this, alloyTank);
     private boolean allowAlloying = false;
     private final Set<BlockPos> poweredExternalAlloySwitches = new HashSet<>();
-    private boolean internalAlloySwitchOn = false;
 
     public TransmuteBlockEntity(BlockPos pos, BlockState state) {
         super(DreamTinkerSmeltery.Transmute.get(), pos, state, NAME);
@@ -160,7 +159,6 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
             updateHeatBuff();
         }else {
             poweredExternalAlloySwitches.clear();
-            internalAlloySwitchOn = false;
             updateAllowAlloyingFromCache();
         }
     }
@@ -230,7 +228,6 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
     protected void checkHeatBuff() {
         accelerator = 0;
         heater = 0;
-        internalAlloySwitchOn = false;
 
         if (structure != null && level != null){
             BlockPos min = structure.getMinPos();
@@ -252,11 +249,6 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
 
                         if (isAccelBlock(state.getBlock())){
                             accelerator++;
-                        }
-
-                        if (isAlloySwitchBlock(state.getBlock()) && state.hasProperty(AshenButtonBlock.Function_Set) &&
-                            state.getValue(AshenButtonBlock.Function_Set) == 1){
-                            internalAlloySwitchOn = true;
                         }
 
                         if (isMeltSwitchBlock(state.getBlock()) && state.hasProperty(AshenButtonBlock.Function_Set) &&
@@ -333,7 +325,7 @@ public class TransmuteBlockEntity extends HeatingStructureBlockEntity {
 
     private void updateAllowAlloyingFromCache() {
         boolean old = allowAlloying;
-        allowAlloying = internalAlloySwitchOn || !poweredExternalAlloySwitches.isEmpty();
+        allowAlloying = !poweredExternalAlloySwitches.isEmpty();
 
         if (old != allowAlloying){
             if (allowAlloying){
