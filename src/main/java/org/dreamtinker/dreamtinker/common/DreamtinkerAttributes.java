@@ -19,7 +19,7 @@ import slimeknights.mantle.registration.deferred.AttributeDeferredRegister;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE, modid = Dreamtinker.MODID)
 public class DreamtinkerAttributes {
     private static final AttributeDeferredRegister ATTRIBUTES = new AttributeDeferredRegister(Dreamtinker.MODID);
-    public static final RegistryObject<Attribute> FATE_VEIL = ATTRIBUTES.register("generic.fate_veil", 0.0, 0, 0.98f, true);
+    public static final RegistryObject<Attribute> FATE_VEIL = ATTRIBUTES.register("generic.fate_veil", 0.0, 0, 4096f, true);
     public static final RegistryObject<Attribute> BLOOD_IN_SHELL = ATTRIBUTES.register("generic.blood_in_shell", 0.0, 0, 4096f, true);
     public static final RegistryObject<Attribute> SHELL_HEART_TOUGHNESS = ATTRIBUTES.register("generic.shell_heart_toughness", 1.0, 0.001, 4096f, true);
 
@@ -59,22 +59,31 @@ public class DreamtinkerAttributes {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     static void FateVeilDamageReduction(LivingDamageEvent event) {
         LivingEntity entity = event.getEntity();
-        if (entity.level().isClientSide() || entity.isDeadOrDying()){
+
+        if (entity.level().isClientSide() || entity.isDeadOrDying())
             return;
-        }
+
         DamageSource source = event.getSource();
-        if (entity.isInvulnerableTo(source)){
+        if (entity.isInvulnerableTo(source))
             return;
-        }
+
         AttributeInstance attr = entity.getAttribute(DreamtinkerAttributes.FATE_VEIL.get());
-        float veil = attr == null ? 0.0f : Mth.clamp((float) attr.getValue(), 0.0f, 0.98f);
-        if (veil <= 0)
+        float points = attr == null ? 0.0F : Math.max(0.0F, (float) attr.getValue());
+
+        if (points <= 0.0F)
             return;
-        float damage = event.getAmount();
-        float pool = entity.getHealth();
-        if (damage > 0.0F && pool > 0.0F){
-            float reduction = (veil * pool + veil * veil * damage) / (pool + damage);
-            event.setAmount(damage * (1.0F - reduction));
-        }
+
+        float health = Math.max(1.0F, entity.getHealth());
+        float damage = Math.max(0.0F, event.getAmount());
+
+        if (damage <= 0.0F)
+            return;
+
+        float baseReduction = 0.98F * points / (points + 100.0F);
+        float pressure = damage / (damage + health);
+        float lifeFactor = Mth.lerp(pressure, 1.10F, 0.85F);
+
+        float reduction = Mth.clamp(baseReduction * lifeFactor, 0.0F, 0.98F);
+        event.setAmount(damage * (1.0F - reduction));
     }
 }

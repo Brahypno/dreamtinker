@@ -265,7 +265,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                                        .variable(VALUE).add() // + baseValue
                                                        .build());
         buildModifier(Ids.FragileButBright)
-                .addModule(AttributeModule.builder(DreamtinkerAttributes.FATE_VEIL.get(), AttributeModifier.Operation.ADDITION).eachLevel(0.06f));
+                .addModule(AttributeModule.builder(DreamtinkerAttributes.FATE_VEIL.get(), AttributeModifier.Operation.ADDITION).eachLevel(8f));
         buildModifier(Ids.homunculusGift).levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL);
         buildModifier(Ids.peaches_in_memory)
                 .addModule(AttributeModule.builder(TinkerAttributes.BAD_EFFECT_DURATION, AttributeModifier.Operation.MULTIPLY_TOTAL).amount(0.1f, 0.1f))
@@ -519,7 +519,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(ProtectionModule.builder()
                                            .sources(DamageSourcePredicate.ANY, DamageSourcePredicate.ANY)
                                            .flat(3.0f))
-                .addModule(AttributeModule.builder(DreamtinkerAttributes.FATE_VEIL, AttributeModifier.Operation.ADDITION).flat(.2f));
+                .addModule(AttributeModule.builder(DreamtinkerAttributes.FATE_VEIL, AttributeModifier.Operation.ADDITION).flat(25f));
 
         buildModifier(Ids.reprise_protection)
                 .addModule(new RepriseProtectionModule.Builder().percentage(LevelingValue.eachLevel(0.25f)).build(), ModifierHooks.MODIFY_HURT);
