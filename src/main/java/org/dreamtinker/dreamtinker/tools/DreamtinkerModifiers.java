@@ -55,6 +55,7 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegac
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.etherium.EtheriumProtection;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.evil.EvilAttack;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.soul_aether.ExilesFaulty;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.legendary_monsters.SoulRage;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum.*;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.occ.OtherWorldView;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.occ.OtherworldHarvest;
@@ -77,6 +78,9 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.despair_gem.*
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.echo_shard.EchoedAttack;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.echo_shard.EchoedDefence;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.fifth_stone.FourWarning;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.livingSoulSteel.AdaptionAlgorithm;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.livingSoulSteel.AdaptionAlgorithmDamage;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.livingSoulSteel.AdaptionAlgorithmProtection;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.lupus_antimony.TheWolfAnswer;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.lupus_antimony.TheWolfWas;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.material.lupus_antimony.TheWolfWonder;
@@ -108,6 +112,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static ModifierDeferredRegister MALUM_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     public static ModifierDeferredRegister EIDOLON_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     public static ModifierDeferredRegister BIC_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
+    public static ModifierDeferredRegister LM_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     public static final StaticModifier<OtherworldHarvest> occ_harvest =
             OCC_MODIFIERS.register("occ_harvest", OtherworldHarvest::new);
     //Mashuo
@@ -137,6 +142,12 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<TheWolfWonder> the_wolf_wonder = MODIFIERS.register("the_wolf_wonder", TheWolfWonder::new);
     public static final StaticModifier<TheWolfAnswer> the_wolf_answer = MODIFIERS.register("the_wolf_answer", TheWolfAnswer::new);
     public static final StaticModifier<TheWolfWas> the_wolf_was = MODIFIERS.register("the_wolf_was", TheWolfWas::new);
+    // living soul steel
+    public static final StaticModifier<AdaptionAlgorithm> adaption_algorithm = MODIFIERS.register("adaption_algorithm", AdaptionAlgorithm::new);
+    public static final StaticModifier<AdaptionAlgorithmDamage> adaption_algorithm_damage =
+            MODIFIERS.register("adaption_algorithm_damage", AdaptionAlgorithmDamage::new);
+    public static final StaticModifier<AdaptionAlgorithmProtection> adaption_algorithm_protection =
+            MODIFIERS.register("adaption_algorithm_protection", AdaptionAlgorithmProtection::new);
     // star regulus
     public static final StaticModifier<as_one> as_one = MODIFIERS.register("as_one", as_one::new);
     public static final StaticModifier<TwoHeadedSeven> two_headed_seven = MODIFIERS.register("two_headed_seven", TwoHeadedSeven::new);
@@ -290,6 +301,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             BIC_MODIFIERS.register("bic_dark_blade", DarkBlade::new);
     public static final StaticModifier<NightmareDefense> bic_nightmare_defense =
             BIC_MODIFIERS.register("bic_nightmare_defense", NightmareDefense::new);
+    public static final StaticModifier<SoulRage> soul_rage =
+            LM_MODIFIERS.register("soul_rage", SoulRage::new);
     public static final StaticModifier<OtherWorldView> occ_view =
             OCC_MODIFIERS.register("occ_view", OtherWorldView::new);
 
@@ -307,6 +320,9 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         }
         if (ModList.get().isLoaded("born_in_chaos_v1")){
             BIC_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        }
+        if (ModList.get().isLoaded("legendary_monsters")){
+            LM_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         }
         if (ModList.get().isLoaded("occultism")){
             OCC_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());

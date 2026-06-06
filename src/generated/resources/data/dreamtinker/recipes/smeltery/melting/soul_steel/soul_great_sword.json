@@ -1,0 +1,37 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "legendary_monsters"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "legendary_monsters"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ingredient": {
+    "item": "legendary_monsters:soul_great_sword"
+  },
+  "result": {
+    "amount": 540,
+    "fluid": "dreamtinker:molten_soul_steel",
+    "unit_size": 10
+  },
+  "temperature": 1000,
+  "time": 33
+}

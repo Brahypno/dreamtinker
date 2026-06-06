@@ -68,10 +68,14 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
 
         addDefaultTraits(DreamtinkerMaterialIds.shadowskin, Ids.shadow_blessing, TinkerModifiers.overslime.getId());
 
-        addDefaultTraits(DreamtinkerMaterialIds.soul_steel, ModifierIds.soulbound, ModifierIds.ductile, Ids.golden_face);
-        addTraits(DreamtinkerMaterialIds.soul_steel, MELEE_HARVEST, ModifierIds.soulbound, ModifierIds.ductile, ModifierIds.swiftstrike, Ids.golden_face);
-        addTraits(DreamtinkerMaterialIds.soul_steel, RANGED, ModifierIds.soulbound, ModifierIds.ductile, ModifierIds.pierce, Ids.golden_face);
-        addTraits(DreamtinkerMaterialIds.soul_steel, ARMOR, ModifierIds.soulbound, ModifierIds.ductile, ModifierIds.magicProtection, Ids.golden_face);
+        addDefaultTraits(DreamtinkerMaterialIds.soul_steel, ModifierIds.soulbound, adaption_algorithm.getId(), adaption_algorithm_damage.getId(),
+                         Ids.golden_face);
+        addTraits(DreamtinkerMaterialIds.soul_steel, MELEE_HARVEST, ModifierIds.soulbound, adaption_algorithm.getId(), adaption_algorithm_damage.getId(),
+                  Ids.golden_face);
+        addTraits(DreamtinkerMaterialIds.soul_steel, RANGED, ModifierIds.soulbound, adaption_algorithm.getId(), adaption_algorithm_damage.getId(),
+                  Ids.golden_face);
+        addTraits(DreamtinkerMaterialIds.soul_steel, ARMOR, ModifierIds.soulbound, adaption_algorithm.getId(), adaption_algorithm_protection.getId(),
+                  Ids.golden_face);
 
         addTraits(DreamtinkerMaterialIds.whimsyGold, MELEE_HARVEST, rhinegold_cat.getId(), Ids.whimsy_face);
 

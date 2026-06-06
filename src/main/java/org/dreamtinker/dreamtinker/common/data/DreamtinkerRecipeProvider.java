@@ -241,8 +241,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                           .save(consumer, prefix(DreamtinkerFluids.despair_essence, folder));
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_soul_steel, FluidValues.INGOT)
                           .addInput(TinkerFluids.moltenSteel.getTag(), FluidValues.INGOT)
-                          .addInput(TinkerFluids.moltenCobalt.getTag(), FluidValues.INGOT)
-                          .addInput(TinkerFluids.liquidSoul.getTag(), FluidValues.GLASS_BLOCK * 2)
+                          .addInput(DreamtinkerFluids.blood_soul.getTag(), FluidValues.GLASS_BLOCK * 2)
                           .save(consumer, prefix(DreamtinkerFluids.molten_soul_steel, folder));
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_bee_gem, FluidValues.GEM * 2)
                           .addInput(DreamtinkerFluids.rainbow_honey.getTag(), FluidValues.BOTTLE)
@@ -426,6 +425,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         addCompactMalumMeltingCastingRecipes(consumer);
         addCompactEidolonMeltingCastingRecipes(consumer);
         addCompactBICMeltingCastingRecipes(consumer);
+        addCompactLegendaryMonstersMeltingCastingRecipes(consumer);
         addCompactUGMeltingCastingRecipes(consumer);
         addCompactOCMeltingCastingRecipes(consumer);
 
@@ -2591,6 +2591,14 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                           EntityIngredient.of(DreamtinkerTagKeys.EntityTypes.CHAOS_BOSS),
                                           DreamtinkerFluids.molten_dark_metal.result(FluidValues.NUGGET), 1)
                                   .save(wrapped, location(Entity_Melting_folder + "molten_dark_metal/boss"));
+    }
+
+    private void addCompactLegendaryMonstersMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
+        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("legendary_monsters"));
+        MeltingRecipeBuilder.melting(itemNameIngredient("legendary_monsters", "soul_great_sword"),
+                                     DreamtinkerFluids.molten_soul_steel, FluidValues.INGOT * 6, 0.5f)
+                            .setDamagable(FluidValues.NUGGET)
+                            .save(wrapped, location(Melting_folder + "soul_steel/soul_great_sword"));
     }
 
     private void addCompactUGMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {

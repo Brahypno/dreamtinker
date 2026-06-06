@@ -6,7 +6,11 @@
     },
     {
       "level": 1,
-      "name": "tconstruct:ductile"
+      "name": "dreamtinker:adaption_algorithm"
+    },
+    {
+      "level": 1,
+      "name": "dreamtinker:adaption_algorithm_damage"
     },
     {
       "level": 1,
@@ -21,11 +25,11 @@
       },
       {
         "level": 1,
-        "name": "tconstruct:ductile"
+        "name": "dreamtinker:adaption_algorithm"
       },
       {
         "level": 1,
-        "name": "tconstruct:magic_protection"
+        "name": "dreamtinker:adaption_algorithm_protection"
       },
       {
         "level": 1,
@@ -39,11 +43,11 @@
       },
       {
         "level": 1,
-        "name": "tconstruct:ductile"
+        "name": "dreamtinker:adaption_algorithm"
       },
       {
         "level": 1,
-        "name": "tconstruct:swiftstrike"
+        "name": "dreamtinker:adaption_algorithm_damage"
       },
       {
         "level": 1,
@@ -57,11 +61,11 @@
       },
       {
         "level": 1,
-        "name": "tconstruct:ductile"
+        "name": "dreamtinker:adaption_algorithm"
       },
       {
         "level": 1,
-        "name": "tconstruct:pierce"
+        "name": "dreamtinker:adaption_algorithm_damage"
       },
       {
         "level": 1,
