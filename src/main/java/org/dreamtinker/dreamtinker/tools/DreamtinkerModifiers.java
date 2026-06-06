@@ -492,6 +492,10 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
 
         public static final ModifierId botania_pure_smeltery = id("botania_pure_smeltery");
 
+        public static final ModifierId not_end_er = id("not_end_er");
+        public static final ModifierId ender_end = id("ender_end");
+        public static final ModifierId ender_protection = id("ender_protection");
+
         private static ModifierId id(String name) {
             return new ModifierId(Dreamtinker.MODID, name);
         }

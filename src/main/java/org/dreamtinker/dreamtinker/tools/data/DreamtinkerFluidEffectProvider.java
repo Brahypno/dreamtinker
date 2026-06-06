@@ -368,6 +368,9 @@ public class DreamtinkerFluidEffectProvider extends AbstractFluidEffectProvider 
                 .addEntityEffects(FluidMobEffect.builder()
                                                 .effect(MobEffects.MOVEMENT_SLOWDOWN, 180, 2)
                                                 .buildEntity(TimeAction.ADD));
+        addMetal(DreamtinkerFluids.molten_enderitium)
+                .addCondition(modLoaded("legendary_monsters"))
+                .magicDamage(3);
         /*
         compatFluid("undergarden", FluidTags.create(new ResourceLocation("undergarden", "virulent")), FluidValues.SIP)
                 .addCondition(modLoaded("undergarden"))

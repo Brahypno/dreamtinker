@@ -97,6 +97,10 @@
     {
       "id": "dreamtinker:froststeel",
       "required": false
+    },
+    {
+      "id": "dreamtinker:legendary_monsters_enderitium",
+      "required": false
     }
   ]
 }

@@ -1,0 +1,102 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "legendary_monsters"
+          },
+          {
+            "type": "dreamtinker:mod_compact_config",
+            "modid": "legendary_monsters"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:conditional_melee_damage",
+      "formula": [
+        "$level",
+        0.2,
+        "*",
+        "$multiplier",
+        "*",
+        1.0,
+        "+",
+        "$damage",
+        "*"
+      ],
+      "percent": true,
+      "target": {
+        "type": "mantle:tag",
+        "tag": "forge:ender_entity"
+      }
+    },
+    {
+      "type": "tconstruct:conditional_power",
+      "formula": [
+        "$level",
+        0.2,
+        "*",
+        "$multiplier",
+        "*",
+        1.0,
+        "+",
+        "$damage",
+        "*"
+      ],
+      "percent": true,
+      "target": {
+        "type": "mantle:tag",
+        "tag": "forge:ender_entity"
+      }
+    },
+    {
+      "type": "tconstruct:knockback",
+      "entity": {
+        "type": "mantle:tag",
+        "tag": "forge:ender_entity"
+      },
+      "formula": [
+        "$level",
+        0.2,
+        "*",
+        1.0,
+        "+",
+        "$knockback",
+        "*"
+      ]
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "effect": "minecraft:weakness",
+      "hooks": [
+        "tconstruct:melee_hit",
+        "tconstruct:monster_melee_hit"
+      ],
+      "level": {
+        "flat": 1.0,
+        "per_level": 1.0
+      },
+      "target": {
+        "type": "mantle:tag",
+        "tag": "forge:ender_entity"
+      },
+      "time": {
+        "flat": 40.0,
+        "random": 10.0
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

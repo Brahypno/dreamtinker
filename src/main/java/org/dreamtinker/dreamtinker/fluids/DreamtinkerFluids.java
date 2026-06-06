@@ -333,6 +333,9 @@ public class DreamtinkerFluids {
     public static final FlowingFluidObject<ForgeFlowingFluid> unmelting_teardrop =
             registerFluid(FLUIDS, "unmelting_teardrop", 2600, 100, 100, 15,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.ICE, 15), 10, 4) {});
+    public static final FlowingFluidObject<ForgeFlowingFluid> molten_enderitium =
+            registerFluid(FLUIDS, "molten_enderitium", 1600, 100, 100, 10,
+                          supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.METAL, 10), 10, 4) {});
 
     private static FlowingFluidObject<SlimeFluid> registerSlime(FluidDeferredRegister register, String name, int temp, int viscosity, int density, int lightLevel, Function<Supplier<? extends FlowingFluid>, LiquidBlock> blockFunction) {
         return register.register(name).tickRate(50).type(createFluidType(temp, lightLevel, viscosity, density)).block(blockFunction).bucket()
@@ -351,9 +354,9 @@ public class DreamtinkerFluids {
         output.accept(molten_crying_obsidian);
         output.accept(molten_void);
         output.accept(liquid_trist);
+        output.accept(liquid_pure_soul);
         if (ModList.get().isLoaded("enigmaticlegacy") && !configCompactDisabled("enigmaticlegacy")){
             output.accept(unstable_liquid_aether);
-            output.accept(liquid_pure_soul);
             output.accept(molten_evil);
             output.accept(molten_soul_aether);
             output.accept(unholy_water);
@@ -400,7 +403,9 @@ public class DreamtinkerFluids {
         acceptMolten(output, molten_froststeel);
         acceptMolten(output, molten_regalium);
         acceptMolten(output, gooey_slime);
-
+        if (ModList.get().isLoaded("legendary_monsters") && !configCompactDisabled("legendary_monsters")){
+            output.accept(molten_enderitium);
+        }
     }
 
     @SubscribeEvent

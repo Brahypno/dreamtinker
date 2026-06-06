@@ -59,6 +59,10 @@
     {
       "id": "#dreamtinker:molten_iesnium",
       "required": false
+    },
+    {
+      "id": "#dreamtinker:molten_enderitium",
+      "required": false
     }
   ]
 }

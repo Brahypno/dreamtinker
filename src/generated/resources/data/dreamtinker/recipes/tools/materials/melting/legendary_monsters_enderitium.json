@@ -1,0 +1,33 @@
+{
+  "type": "tconstruct:material_melting",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "legendary_monsters"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "legendary_monsters"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "input": "dreamtinker:legendary_monsters_enderitium",
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_enderitium"
+  },
+  "temperature": 1300
+}

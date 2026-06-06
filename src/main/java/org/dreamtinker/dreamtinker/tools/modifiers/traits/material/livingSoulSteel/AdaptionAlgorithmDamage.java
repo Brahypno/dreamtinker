@@ -48,7 +48,7 @@ public class AdaptionAlgorithmDamage extends NoLevelsModifier implements MeleeDa
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
-        hookBuilder.addHook(this, ModifierHooks.MELEE_DAMAGE, ModifierHooks.MONSTER_MELEE_DAMAGE, DreamtinkerHook.PROJECTILE_HURT);
+        hookBuilder.addHook(this, ModifierHooks.MELEE_DAMAGE, DreamtinkerHook.PROJECTILE_HURT);
         if (ModList.get().isLoaded("legendary_monsters") && !configCompactDisabled("legendary_monsters"))
             hookBuilder.addModule(new ModifierTraitModule(DreamtinkerModifiers.soul_rage.getId(), 1, false));
 

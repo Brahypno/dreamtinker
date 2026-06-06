@@ -35,7 +35,7 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
                  AtonementSilver, ForlornOathSteel, deliverance, cryo_serpent_shift)
             .addOptional(nefarious, soul_etherium, soul_stained_steel, malignant_pewter, malignant_gluttony, shadowSilver, ArcaneGold,
                          WickedWeave, DarkMetal, MonsterSkin, PaladinBoneTool, TatteredCloth, WaterEssence, FireEssence, ManipulationEssence, Utherium,
-                         forgotten_metal, Cloggrum, Froststeel);
+                         forgotten_metal, Cloggrum, Froststeel, legendary_monsters_enderitium);
         this.tag(TinkerTags.Materials.HARVEST)
             .add(larimar, rainbow_honey_crystal, TransmutationGold, whimsyGold)
             .addOptional(hallowed_gold, Regalium, Iesnium);
@@ -46,7 +46,7 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
         this.tag(TinkerTags.Materials.LIGHT)
             .add(nigrescence_string, echo_alloy, larimar, half_rotten_string, desire_gem, cold_iron, TransmutationGold, orichalcum, FifthStone, SpiralSpin)
             .addOptional(spirit_fabric, soul_stained_steel, nefarious, etherium, soul_etherium, metallivorous_stibium_lupus, star_regulus, shadowSilver,
-                         TatteredCloth, PaladinBoneTool, Utherium, forgotten_metal, AtonementSilver);
+                         TatteredCloth, PaladinBoneTool, Utherium, forgotten_metal, AtonementSilver, legendary_monsters_enderitium);
         this.tag(TinkerTags.Materials.BALANCED)
             .add(valentinite, black_sapphire, scolecite, shiningFlint, RuinWheelSteel, OathGuardPaleSteel,
                  ForlornOathSteel)
@@ -55,7 +55,8 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
             .add(crying_obsidian, amber, soul_steel)
             .addOptional(hallowed_gold, ArcaneGold, WickedWeave);
         tag(TinkerTags.Materials.COMPATABILITY_METALS)
-                .add(RuinWheelSteel, ForlornOathSteel, AtonementSilver);
+                .add(RuinWheelSteel, ForlornOathSteel, AtonementSilver)
+                .addOptional(legendary_monsters_enderitium);
         tag(TinkerTags.Materials.COMPATABILITY_BLOCKS)
                 .add(echo_alloy, amber, black_sapphire, ForlornOathSteel)
                 .addOptional();

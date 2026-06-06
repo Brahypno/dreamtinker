@@ -106,4 +106,6 @@ public class DreamtinkerMaterialIds {
     public static final MaterialId WildenHorn = new MaterialId(new ResourceLocation(MODID, "nova_wilden_horn"));
     public static final MaterialId WildenWing = new MaterialId(new ResourceLocation(MODID, "nova_wilden_wing"));
     public static final MaterialId WildenSpike = new MaterialId(new ResourceLocation(MODID, "nova_wilden_spike"));
+    //legendary monsters
+    public static final MaterialId legendary_monsters_enderitium = new MaterialId(new ResourceLocation(MODID, "legendary_monsters_enderitium"));
 }

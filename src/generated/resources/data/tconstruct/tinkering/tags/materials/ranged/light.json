@@ -61,6 +61,10 @@
     {
       "id": "dreamtinker:atonement_silver",
       "required": false
+    },
+    {
+      "id": "dreamtinker:legendary_monsters_enderitium",
+      "required": false
     }
   ]
 }

@@ -1,0 +1,31 @@
+{
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:mod_loaded",
+          "modid": "legendary_monsters"
+        }
+      ]
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "tconstruct:damage",
+      "damage": 3.0,
+      "damage_type": {
+        "melee": "tconstruct:fluid_magic_melee",
+        "ranged": "tconstruct:fluid_magic_ranged"
+      }
+    }
+  ],
+  "fluid": {
+    "amount": 10,
+    "tag": "dreamtinker:molten_enderitium"
+  }
+}

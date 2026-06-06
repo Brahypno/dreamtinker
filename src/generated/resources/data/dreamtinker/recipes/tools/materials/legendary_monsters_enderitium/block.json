@@ -1,0 +1,33 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "legendary_monsters"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "legendary_monsters"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ingredient": {
+    "item": "legendary_monsters:enderitium_block"
+  },
+  "material": "dreamtinker:legendary_monsters_enderitium",
+  "needed": 1,
+  "value": 9
+}

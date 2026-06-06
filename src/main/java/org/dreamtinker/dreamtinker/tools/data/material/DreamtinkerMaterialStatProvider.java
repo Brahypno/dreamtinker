@@ -181,7 +181,6 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new HeadMaterialStats(600, 20.0f, Tiers.DIAMOND, 2.5f),
                          HandleMaterialStats.multipliers().durability(1.05f).miningSpeed(1.20f).build(),
                          StatlessMaterialStats.BINDING);
-
         addMaterialStats(DreamtinkerMaterialIds.Iesnium,
                          new HeadMaterialStats(600, 8.0f, Tiers.DIAMOND, 3f),
                          HandleMaterialStats.multipliers().durability(1.05f).miningSpeed(1.20f).build(),
@@ -192,6 +191,14 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addEidolonMeleeHarvest();
         addBICMeleeHarvest();
         addNovaMeleeHarvest();
+        addLMMeleeHarvest();
+    }
+
+    private void addLMMeleeHarvest() {
+        addMaterialStats(DreamtinkerMaterialIds.legendary_monsters_enderitium,
+                         new HeadMaterialStats(1500, 4f, Tiers.NETHERITE, 5.5f),
+                         HandleMaterialStats.multipliers().durability(1.2f).miningSpeed(1.1f).attackDamage(1.40f).attackSpeed(1.10f).build(),
+                         StatlessMaterialStats.BINDING);
     }
 
     private void addELMeleeHarvest() {

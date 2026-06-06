@@ -248,6 +248,9 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.WildenSpike, Ids.weakness);
         addDefaultTraits(DreamtinkerMaterialIds.WildenWing, Ids.balanced_arrow);
 
+        addTraits(DreamtinkerMaterialIds.legendary_monsters_enderitium, MELEE_HARVEST, Ids.not_end_er, Ids.ender_end);
+        addTraits(DreamtinkerMaterialIds.legendary_monsters_enderitium, ARMOR, Ids.ender_protection);
+
 
     }
 

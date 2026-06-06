@@ -32,13 +32,22 @@ public class EntityTypeTagProvider extends EntityTypeTagsProvider {
             .addOptional(new ResourceLocation("stalwart_dungeons", "propulk"))
             .addOptional(new ResourceLocation("stalwart_dungeons", "shelterer"))
             .addOptionalTag(DreamtinkerTagKeys.EntityTypes.common("farlanders", "endermen"))
-            .addOptional(new ResourceLocation("hmag", "entities/ender_executor"));
+            .addOptional(new ResourceLocation("hmag", "entities/ender_executor"))
+            .addOptional(new ResourceLocation("legendary_monsters", "shulker_mimic"))
+            .addOptional(new ResourceLocation("legendary_monsters", "endersent"))
+            .addOptional(new ResourceLocation("legendary_monsters", "flame_drifter"))
+            .addOptional(new ResourceLocation("legendary_monsters", "annihilation_pursuer"))
+            .addOptional(new ResourceLocation("legendary_monsters", "chorusling"))
+            .addOptional(new ResourceLocation("legendary_monsters", "flameborn_warrior"))
+            .addOptional(new ResourceLocation("legendary_monsters", "flameborn_guard"))
+            .addOptional(new ResourceLocation("legendary_monsters", "flameborn_warrior"))
+            .addOptional(new ResourceLocation("legendary_monsters", "the_obliterator"));
         this.tag(DreamtinkerTagKeys.EntityTypes.CHAOS_ELITE)
             .addOptional(new ResourceLocation("born_in_chaos_v1", "fallen_chaos_knight"))
             .addOptional(new ResourceLocation("born_in_chaos_v1", "nightmare_stalker"))
             .addOptional(new ResourceLocation("born_in_chaos_v1", "skeleton_thrasher"))
             .addOptional(new ResourceLocation("born_in_chaos_v1", "diamond_termite"));
-        ;
+
         this.tag(DreamtinkerTagKeys.EntityTypes.CHAOS_BOSS)
             .addOptional(new ResourceLocation("born_in_chaos_v1", "missioner"))
             .addOptional(new ResourceLocation("born_in_chaos_v1", "lifestealer"))

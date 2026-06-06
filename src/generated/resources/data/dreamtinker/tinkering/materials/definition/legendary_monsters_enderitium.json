@@ -1,0 +1,28 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "legendary_monsters"
+          },
+          {
+            "type": "dreamtinker:mod_compact_config",
+            "modid": "legendary_monsters"
+          }
+        ]
+      }
+    ]
+  },
+  "craftable": false,
+  "hidden": false,
+  "sortOrder": 20,
+  "tier": 3
+}

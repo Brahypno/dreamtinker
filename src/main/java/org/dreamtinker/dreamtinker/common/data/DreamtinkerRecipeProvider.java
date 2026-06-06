@@ -778,6 +778,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         addBICMaterialRecipes(consumer);
         addNovaMaterialRecipes(consumer);
         addUGMaterialRecipes(consumer);
+        addLegendaryMonstersMaterialRecipes(consumer);
 
     }
 
@@ -935,6 +936,19 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                           slimeskinFolder, "undergarden_gooey_slime");
         materialComposite(wrapped, DreamtinkerMaterialIds.GooeySlimeSkin, MaterialIds.leather, TinkerFluids.venom, FluidValues.SIP, slimeskinFolder,
                           "undergarden_gooey_slime_cleaning");
+    }
+
+    private void addLegendaryMonstersMaterialRecipes(Consumer<FinishedRecipe> consumer) {
+        String legendaryMonsters = "legendary_monsters";
+        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(legendaryMonsters));
+        materialMeltingCasting(wrapped, DreamtinkerMaterialIds.legendary_monsters_enderitium, DreamtinkerFluids.molten_enderitium, FluidValues.INGOT,
+                               materials_folder);
+        materialRecipe(wrapped, DreamtinkerMaterialIds.legendary_monsters_enderitium, itemNameIngredient(legendaryMonsters, "enderitium_ingot"), 1, 1,
+                       materials_folder + "legendary_monsters_enderitium/ingot");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.legendary_monsters_enderitium, itemNameIngredient(legendaryMonsters, "enderitium_gem"), 1, 9,
+                       materials_folder + "legendary_monsters_enderitium/gem");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.legendary_monsters_enderitium, itemNameIngredient(legendaryMonsters, "enderitium_block"), 9, 1,
+                       materials_folder + "legendary_monsters_enderitium/block");
     }
 
     String common_folder = "common/";
@@ -2594,11 +2608,28 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
     }
 
     private void addCompactLegendaryMonstersMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
+        String legendaryMonsters = "legendary_monsters";
         Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("legendary_monsters"));
         MeltingRecipeBuilder.melting(itemNameIngredient("legendary_monsters", "soul_great_sword"),
                                      DreamtinkerFluids.molten_soul_steel, FluidValues.INGOT * 6, 0.5f)
                             .setDamagable(FluidValues.NUGGET)
                             .save(wrapped, location(Melting_folder + "soul_steel/soul_great_sword"));
+        MeltingRecipeBuilder.melting(itemNameIngredient(legendaryMonsters, "enderitium_ingot"),
+                                     DreamtinkerFluids.molten_enderitium, FluidValues.INGOT, 1.0f)
+                            .save(wrapped, location(Melting_folder + "enderitium/ingot"));
+        MeltingRecipeBuilder.melting(itemNameIngredient(legendaryMonsters, "enderitium_gem"),
+                                     DreamtinkerFluids.molten_enderitium, FluidValues.NUGGET, 1.0f)
+                            .save(wrapped, location(Melting_folder + "enderitium/gem"));
+        MeltingRecipeBuilder.melting(itemNameIngredient(legendaryMonsters, "enderitium_block"),
+                                     DreamtinkerFluids.molten_enderitium, FluidValues.METAL_BLOCK, 1.0f)
+                            .save(wrapped, location(Melting_folder + "enderitium/block"));
+        MeltingRecipeBuilder.melting(itemNameIngredient(legendaryMonsters, "enderitium_ore"),
+                                     DreamtinkerFluids.molten_enderitium, FluidValues.NUGGET, 1.5f)
+                            .setOre(IMeltingContainer.OreRateType.METAL)
+                            .save(wrapped, location(Melting_folder + "enderitium/ore"));
+        fluid(wrapped, "enderitium", DreamtinkerFluids.molten_enderitium)
+                .baseUnit(FluidValues.INGOT).damageUnit(FluidValues.NUGGET)
+                .common(ToolsBySuffix(legendaryMonsters));
     }
 
     private void addCompactUGMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {

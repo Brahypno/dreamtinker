@@ -44,6 +44,42 @@
     {
       "id": "hmag:entities/ender_executor",
       "required": false
+    },
+    {
+      "id": "legendary_monsters:shulker_mimic",
+      "required": false
+    },
+    {
+      "id": "legendary_monsters:endersent",
+      "required": false
+    },
+    {
+      "id": "legendary_monsters:flame_drifter",
+      "required": false
+    },
+    {
+      "id": "legendary_monsters:annihilation_pursuer",
+      "required": false
+    },
+    {
+      "id": "legendary_monsters:chorusling",
+      "required": false
+    },
+    {
+      "id": "legendary_monsters:flameborn_warrior",
+      "required": false
+    },
+    {
+      "id": "legendary_monsters:flameborn_guard",
+      "required": false
+    },
+    {
+      "id": "legendary_monsters:flameborn_warrior",
+      "required": false
+    },
+    {
+      "id": "legendary_monsters:the_obliterator",
+      "required": false
     }
   ]
 }

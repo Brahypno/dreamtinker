@@ -67,7 +67,6 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.Froststeel, 2, 25, false, false, tagFilled(DreamtinkerTagKeys.Items.FroststeelIngot));
         addMaterial(DreamtinkerMaterialIds.Regalium, 3, 25, false, false, tagFilled(DreamtinkerTagKeys.Items.RegaliumIngot));
         addMaterial(DreamtinkerMaterialIds.GooeySlimeSkin, 2, 35, false, false, modLoaded("undergarden"));
-
         addMaterial(DreamtinkerMaterialIds.Iesnium, 3, 25, false, false, tagFilled(DreamtinkerTagKeys.Items.IesniumIngot));
 
         addMaterial(DreamtinkerMaterialIds.etherium, 4, 40, false, false, modLoaded("enigmaticlegacy"));
@@ -114,6 +113,8 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.WildenHorn, 1, 10, true, false, modLoaded("ars_nouveau"));
         addMaterial(DreamtinkerMaterialIds.WildenWing, 1, 10, true, false, modLoaded("ars_nouveau"));
         addMaterial(DreamtinkerMaterialIds.WildenSpike, 1, 10, true, false, modLoaded("ars_nouveau"));
+
+        addMaterial(DreamtinkerMaterialIds.legendary_monsters_enderitium, 3, 20, false, false, modLoaded("legendary_monsters"));
     }
 
     @Override

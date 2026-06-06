@@ -1,0 +1,35 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "legendary_monsters"
+          },
+          {
+            "type": "dreamtinker:mod_compact_config",
+            "modid": "legendary_monsters"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:stat_boost",
+      "each_level": -1.0,
+      "flat": -1.0,
+      "operation": "add",
+      "stat": "tconstruct:attack_damage"
+    }
+  ],
+  "tooltip_display": "always"
+}

@@ -1,0 +1,41 @@
+{
+  "type": "tconstruct:damagable_melting",
+  "conditions": [
+    {
+      "type": "forge:item_exists",
+      "item": "legendary_monsters:enderitium_axe"
+    },
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "legendary_monsters"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "legendary_monsters"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ingredient": {
+    "item": "legendary_monsters:enderitium_axe"
+  },
+  "result": {
+    "amount": 270,
+    "fluid": "dreamtinker:molten_enderitium",
+    "unit_size": 10
+  },
+  "temperature": 1300,
+  "time": 130
+}

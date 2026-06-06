@@ -489,7 +489,6 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFFFCD87D)
                                                 .addARGB(255, 0xFFFFEFB2)
                                                 .build());
-
         this.buildMaterial(DreamtinkerMaterialIds.Iesnium)
             .meleeHarvest()
             .fallbacks("metal")
@@ -1221,6 +1220,17 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(178, 0xFF6E694F)
                                                 .addARGB(216, 0xFF7C7960)
                                                 .addARGB(255, 0xFF999E7F)
+                                                .build());
+        this.buildMaterial(DreamtinkerMaterialIds.legendary_monsters_enderitium)
+            .meleeHarvest()
+            .fallbacks("metal")
+            .transformer(GreyToSpriteTransformer.builderFromBlack()
+                                                .addARGB(63, 0xFF132D36)
+                                                .addARGB(102, 0xFF18343D)
+                                                .addARGB(140, 0xFF24423A)
+                                                .addARGB(178, 0xFF2E574D)
+                                                .addARGB(216, 0xFF629F4A)
+                                                .addARGB(255, 0xFF83C480)
                                                 .build());
     }
 }

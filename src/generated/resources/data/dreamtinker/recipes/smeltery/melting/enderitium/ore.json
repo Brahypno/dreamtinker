@@ -1,0 +1,37 @@
+{
+  "type": "tconstruct:ore_melting",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "legendary_monsters"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "legendary_monsters"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ingredient": {
+    "item": "legendary_monsters:enderitium_ore"
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 10,
+    "fluid": "dreamtinker:molten_enderitium"
+  },
+  "temperature": 1300,
+  "time": 112
+}

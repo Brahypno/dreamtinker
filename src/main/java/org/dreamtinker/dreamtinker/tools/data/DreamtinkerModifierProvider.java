@@ -406,6 +406,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                                        .formula()
                                                        .variable(LEVEL).constant(.5f).multiply()
                                                        .variable(MULTIPLIER).multiply()
+                                                       .constant(1).add()
                                                        .variable(VALUE).multiply().build())
                 .addModule(KnockbackModule.builder().entity(ender)
                                           .formula()
@@ -569,6 +570,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         addUGModifiers();
         addOCCModifiers();
         addBOTANIAModifiers();
+        addLMModifiers();
 
     }
 
@@ -912,6 +914,37 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(InventoryMenuModule.SHIFT)
                 .addModule(new AutoPureDaisyModule(20, InventoryModule.builder().slotsPerLevel(2)));
 
+    }
+
+    private void addLMModifiers() {
+        IJsonPredicate<LivingEntity> ender = LivingEntityPredicate.tag(DreamtinkerTagKeys.EntityTypes.ENDER_ENTITY);
+        buildModifier(Ids.not_end_er, DreamtinkerMaterialDataProvider.modLoaded("legendary_monsters"))
+                .addModule(StatBoostModule.add(ToolStats.ATTACK_DAMAGE).amount(-1f, -1f));
+        buildModifier(Ids.ender_end, DreamtinkerMaterialDataProvider.modLoaded("legendary_monsters"))
+                .addModule(ConditionalMeleeDamageModule.builder().target(ender).percent()
+                                                       .formula()
+                                                       .variable(LEVEL).constant(.2f).multiply()
+                                                       .variable(MULTIPLIER).multiply()
+                                                       .constant(1).add()
+                                                       .variable(VALUE).multiply().build())
+                .addModule(ConditionalPowerModule.builder().target(ender).percent()
+                                                 .formula()
+                                                 .variable(LEVEL).constant(.2f).multiply()
+                                                 .variable(MULTIPLIER).multiply()
+                                                 .constant(1).add()
+                                                 .variable(VALUE).multiply().build())
+                .addModule(KnockbackModule.builder().entity(ender)
+                                          .formula()
+                                          .variable(LEVEL).constant(0.2f).multiply()
+                                          .constant(1).add()
+                                          .variable(VALUE).multiply().build())
+                .addModule(MobEffectModule.builder(MobEffects.WEAKNESS)
+                                          .level(RandomLevelingValue.perLevel(1, 1))
+                                          .time(RandomLevelingValue.random(20 * 2, 10))
+                                          .target(ender).build(),
+                           ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
+        buildModifier(Ids.ender_protection, DreamtinkerMaterialDataProvider.modLoaded("legendary_monsters"))
+                .addModule(ProtectionModule.builder().attacker(ender).eachLevel(4f));
     }
 
 

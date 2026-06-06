@@ -121,6 +121,8 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
         buildRenderInfo(DreamtinkerMaterialIds.WildenWing).color(0xFFD0B595).fallbacks("bone").luminosity(4);
         buildRenderInfo(DreamtinkerMaterialIds.WildenSpike).color(0xFFE09A55).fallbacks("bone").luminosity(4);
 
+        buildRenderInfo(DreamtinkerMaterialIds.legendary_monsters_enderitium).color(0xFF2E574D).fallbacks("metal").luminosity(10);
+
     }
 
     @Override

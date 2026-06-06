@@ -1,0 +1,37 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "legendary_monsters"
+          },
+          {
+            "type": "dreamtinker:mod_compact_config",
+            "modid": "legendary_monsters"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:protection",
+      "attacker": {
+        "type": "mantle:tag",
+        "tag": "forge:ender_entity"
+      },
+      "damage_source": "mantle:can_protect",
+      "each_level": 4.0
+    }
+  ],
+  "tooltip_display": "always"
+}

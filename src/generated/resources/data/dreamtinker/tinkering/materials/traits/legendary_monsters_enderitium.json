@@ -1,0 +1,20 @@
+{
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "dreamtinker:ender_protection"
+      }
+    ],
+    "tconstruct:melee_harvest": [
+      {
+        "level": 1,
+        "name": "dreamtinker:not_end_er"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:ender_end"
+      }
+    ]
+  }
+}
