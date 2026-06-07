@@ -15,6 +15,9 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.MobEffectEvent;
+import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.utils.DTMessages;
@@ -38,6 +41,7 @@ import slimeknights.tconstruct.library.tools.IndestructibleItemEntity;
 import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability;
 import slimeknights.tconstruct.library.tools.context.EquipmentChangeContext;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
+import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
@@ -48,6 +52,7 @@ import java.util.*;
 import static net.minecraft.nbt.Tag.TAG_INT;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.*;
 import static org.dreamtinker.dreamtinker.utils.DTModifierCheck.getPossibleToolWithModifierTag;
+import static org.dreamtinker.dreamtinker.utils.DTModifierCheck.slots;
 
 
 public class as_one extends Modifier implements EquipmentChangeModifierHook, ModifyDamageModifierHook, InventoryTickModifierHook, ToolDamageModifierHook, ModifierRemovalHook, TooltipModifierHook, KeybindInteractModifierHook {
@@ -98,6 +103,7 @@ public class as_one extends Modifier implements EquipmentChangeModifierHook, Mod
 
     {
         MinecraftForge.EVENT_BUS.addListener(this::onLivingDeath);
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, this::onEffectApplicable);
     }
 
     @Override
@@ -251,6 +257,45 @@ public class as_one extends Modifier implements EquipmentChangeModifierHook, Mod
         ResourceLocation key = ForgeRegistries.MOB_EFFECTS.getKey(effect.getEffect());
         return null != key &&
                !CONFIG_BLACKLIST.contains(key) && !key.getPath().contains("test") && !key.getPath().contains("ceshi");//exclude testing effect as well
+    }
+
+    public void onEffectApplicable(MobEffectEvent.Applicable event) {
+        LivingEntity entity = event.getEntity();
+        MobEffectInstance instance = event.getEffectInstance();
+
+        if (entity.level().isClientSide || !filterMobEffects(instance))
+            return;
+        if (!asOneBlocksEffectInstance(instance))
+            return;
+        if (hasAsOneBlockingTool(entity, instance))
+            event.setResult(Event.Result.DENY);
+    }
+
+    private boolean asOneBlocksEffectInstance(MobEffectInstance instance) {
+        if (instance.getAmplifier() >= AsOneA.get())
+            return false;
+        return instance.getDuration() > AsOneTT.get();
+    }
+
+    private boolean hasAsOneBlockingTool(LivingEntity entity, MobEffectInstance instance) {
+        for (EquipmentSlot slot : slots)
+            if (asOneStackBlocks(entity.getItemBySlot(slot), instance))
+                return true;
+
+        if (entity instanceof Player player)
+            for (ItemStack item : player.getInventory().items)
+                if (asOneStackBlocks(item, instance))
+                    return true;
+
+        return false;
+    }
+
+    private boolean asOneStackBlocks(ItemStack stack, MobEffectInstance instance) {
+        if (stack.isEmpty() || DTModifierCheck.getItemModifierNum(stack, this.getId()) <= 0)
+            return false;
+
+        Modes mode = Modes.fromInt(ModifierUtil.getPersistentInt(stack, TAG_MOD, 0));
+        return EFFECTS.get(mode).contains(instance.getEffect().getCategory());
     }
 }
 

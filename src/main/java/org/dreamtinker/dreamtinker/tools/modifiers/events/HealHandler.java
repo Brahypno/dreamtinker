@@ -10,6 +10,7 @@ import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 
+import static org.dreamtinker.dreamtinker.common.DreamtinkerEffects.hasActiveCursedTime;
 import static org.dreamtinker.dreamtinker.config.DreamtinkerConfig.BrokenVesselBoost;
 import static org.dreamtinker.dreamtinker.tools.modifiers.traits.material.nigrescence_antimony.broken_vessel.TAG_BASE_HEALTH;
 
@@ -21,7 +22,7 @@ public class HealHandler {
         CompoundTag data = entity.getPersistentData();
         float current = entity.getHealth();
         float heal = event.getAmount();
-        if (entity.hasEffect(DreamtinkerEffects.cursed.get())){
+        if (entity.hasEffect(DreamtinkerEffects.cursed.get()) || hasActiveCursedTime(entity)){
             event.setAmount(0);
             event.setCanceled(true);
             return;

@@ -10,6 +10,7 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 
+import static org.dreamtinker.dreamtinker.common.DreamtinkerEffects.hasActiveCursedTime;
 import static org.dreamtinker.dreamtinker.tools.modifiers.traits.armors.knockArts.TAG_KNOCK;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
@@ -18,7 +19,7 @@ public class DeathHandler {
     public static void LivingDeathEvent(LivingDeathEvent event) {
         LivingEntity victim = event.getEntity();
         if (event.isCanceled()){
-            if (victim.hasEffect(DreamtinkerEffects.cursed.get()))
+            if (victim.hasEffect(DreamtinkerEffects.cursed.get()) || hasActiveCursedTime(victim))
                 event.setCanceled(false);
 
             return;

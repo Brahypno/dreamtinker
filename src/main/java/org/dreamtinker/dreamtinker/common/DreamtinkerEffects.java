@@ -3,33 +3,37 @@ package org.dreamtinker.dreamtinker.common;
 import com.sammy.malum.registry.common.MobEffectRegistry;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
-import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraftforge.event.entity.living.MobEffectEvent;
 import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.registries.RegistryObject;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.effect.*;
+import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.utils.DTMessages;
 
 import java.util.List;
 
 import static org.dreamtinker.dreamtinker.DreamtinkerModule.*;
+import static org.dreamtinker.dreamtinker.utils.DTModifierCheck.getPossibleToolWithModifier;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class DreamtinkerEffects {
     public DreamtinkerEffects() {}
+
+    private static final String CURSED_END_TIME_KEY = "dreamtinker:cursed_end_time";
 
     public static final RegistryObject<MobEffect> SilverNameBee =
             EFFECT.register("silver_name_bee", () -> new MobEffect(MobEffectCategory.BENEFICIAL, 0x7f7f7f) {});
@@ -125,16 +129,57 @@ public class DreamtinkerEffects {
               });
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
     public static void allowBossEffects(MobEffectEvent.Applicable event) {
-        LivingEntity entity = event.getEntity();
         MobEffectInstance instance = event.getEffectInstance();
 
-        if (instance.getEffect() == DreamtinkerEffects.SoulFire.get()){
-            if (entity instanceof EnderDragon || entity instanceof WitherBoss){
-                event.setResult(Event.Result.ALLOW);
-            }
+        if (instance.getEffect() == DreamtinkerEffects.SoulFire.get() ||
+            (instance.getEffect() == DreamtinkerEffects.cursed.get() && !hasAsOneCurseImmunity(event.getEntity()))){
+            event.setResult(Event.Result.ALLOW);
         }
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
+    public static void recordAddedCursed(MobEffectEvent.Added event) {
+        MobEffectInstance instance = event.getEffectInstance();
+        if (instance.getEffect() != DreamtinkerEffects.cursed.get() || hasAsOneCurseImmunity(event.getEntity()))
+            return;
+        recordCursedTime(event.getEntity(), instance);
+    }
+
+    private static boolean hasAsOneCurseImmunity(LivingEntity entity) {
+        if (entity.level().isClientSide)
+            return false;
+        return getPossibleToolWithModifier(entity, DreamtinkerModifiers.as_one.getId()) != null;
+    }
+
+    private static long getEffectEndTime(LivingEntity entity, MobEffectInstance instance) {
+        int duration = instance.getDuration();
+        if (duration < 0)
+            return Long.MAX_VALUE;
+        return entity.level().getGameTime() + duration;
+    }
+
+    private static void recordCursedTime(LivingEntity entity, MobEffectInstance instance) {
+        if (entity.level().isClientSide)
+            return;
+
+        long endTime = getEffectEndTime(entity, instance);
+        CompoundTag data = entity.getPersistentData();
+        data.putLong(CURSED_END_TIME_KEY, Math.max(data.getLong(CURSED_END_TIME_KEY), endTime));
+    }
+
+    public static boolean hasActiveCursedTime(LivingEntity entity) {
+        CompoundTag data = entity.getPersistentData();
+        if (!data.contains(CURSED_END_TIME_KEY))
+            return false;
+
+        long endTime = data.getLong(CURSED_END_TIME_KEY);
+        if (endTime > entity.level().getGameTime())
+            return true;
+
+        data.remove(CURSED_END_TIME_KEY);
+        return false;
     }
 
     @SubscribeEvent
