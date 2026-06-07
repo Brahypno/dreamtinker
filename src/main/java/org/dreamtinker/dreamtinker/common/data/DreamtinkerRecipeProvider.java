@@ -1788,6 +1788,16 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(1)
                              .save(wrapped, prefix(DreamtinkerModifiers.Ids.ashen_soul, slotlessFolder));
 
+        wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("legendary_monsters"));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.annihilator_armor_power)
+                             .setTools(TinkerTags.Items.WORN_ARMOR)
+                             .addInput(ItemNameIngredient.from(new ResourceLocation("legendary_monsters", "portal_shard")))
+                             .addInput(ItemNameIngredient.from(new ResourceLocation("legendary_monsters", "enderitium_upgrade_smithing_template")))
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .setMaxLevel(1)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.annihilator_armor_power, upgradeSalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.annihilator_armor_power, upgradeFolder));
+
         wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.bic_dark_armor_plate)
                              .setTools(TinkerTags.Items.DURABILITY)

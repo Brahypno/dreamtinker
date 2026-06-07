@@ -10,6 +10,10 @@
     {
       "id": "dreamtinker:nova_mana_reduce",
       "required": false
+    },
+    {
+      "id": "dreamtinker:annihilator_armor_power",
+      "required": false
     }
   ]
 }

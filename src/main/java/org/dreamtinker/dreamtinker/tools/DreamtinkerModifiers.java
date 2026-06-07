@@ -56,6 +56,7 @@ import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegac
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.evil.EvilAttack;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.soul_aether.ExilesFaulty;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.legendary_monsters.SoulRage;
+import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.legendary_monsters.annihilatorArmorPower;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.malum.*;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.occ.OtherWorldView;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.occ.OtherworldHarvest;
@@ -301,10 +302,12 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             BIC_MODIFIERS.register("bic_dark_blade", DarkBlade::new);
     public static final StaticModifier<NightmareDefense> bic_nightmare_defense =
             BIC_MODIFIERS.register("bic_nightmare_defense", NightmareDefense::new);
-    public static final StaticModifier<SoulRage> soul_rage =
-            LM_MODIFIERS.register("soul_rage", SoulRage::new);
     public static final StaticModifier<OtherWorldView> occ_view =
             OCC_MODIFIERS.register("occ_view", OtherWorldView::new);
+
+    public static final StaticModifier<SoulRage> soul_rage = LM_MODIFIERS.register("soul_rage", SoulRage::new);
+    public static final StaticModifier<annihilatorArmorPower> annihilator_armor_power =
+            LM_MODIFIERS.register("annihilator_armor_power", annihilatorArmorPower::new);
 
     @SuppressWarnings({"removal"})
     public DreamtinkerModifiers() {
