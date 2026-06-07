@@ -816,6 +816,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                        materials_folder + "soul_stained_steel");
         materialMeltingCasting(wrapped, DreamtinkerMaterialIds.soul_stained_steel, DreamtinkerFluids.molten_soul_stained_steel, 130,
                                materials_folder);
+        materialRecipe(wrapped, DreamtinkerMaterialIds.malignant_lead, Ingredient.of(ItemRegistry.MALIGNANT_LEAD.get()), 1, 1,
+                       materials_folder + "malignant_lead_ingot");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.malignant_lead, Ingredient.of(ItemRegistry.BLOCK_OF_MALIGNANT_LEAD.get()), 9, 1,
+                       materials_folder + "malignant_lead_block");
         materialRecipe(wrapped, DreamtinkerMaterialIds.malignant_pewter, Ingredient.of(ItemRegistry.MALIGNANT_PEWTER_PLATING.get()), 1, 2,
                        materials_folder + "malignant_pewter");
         materialMeltingCasting(wrapped, DreamtinkerMaterialIds.malignant_pewter, DreamtinkerFluids.molten_malignant_pewter, 130,
