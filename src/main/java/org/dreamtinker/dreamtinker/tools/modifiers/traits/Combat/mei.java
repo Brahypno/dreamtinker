@@ -18,7 +18,7 @@ import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.library.client.utils.MaskService;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
-import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
+import org.dreamtinker.dreamtinker.utils.DamageProbe;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.ResourceColorManager;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -228,7 +228,7 @@ public class mei extends Modifier implements ModifierRemovalHook, ValidateModifi
                     new DamageSource(
                             attacker.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DreamtinkerDamageTypes.NULL_VOID),
                             attacker, attacker);
-            DTDamageUtils.damageHandler(context.getTarget(), dam, damage * level * 2);
+            DamageProbe.damageHandler(context.getTarget(), dam, damage * level * 2);
         }
         return knockback;
     }

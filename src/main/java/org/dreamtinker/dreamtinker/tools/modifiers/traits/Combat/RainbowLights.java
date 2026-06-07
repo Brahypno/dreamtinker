@@ -6,8 +6,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.library.client.utils.model.RainbowTextUtil;
-import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
+import org.dreamtinker.dreamtinker.utils.DamageProbe;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -45,7 +45,7 @@ public class RainbowLights extends Modifier implements MeleeDamageModifierHook, 
                 victim.invulnerableTime = 0;
                 if (victim instanceof LivingEntity le)
                     le.hurtDuration = 0;
-                DTDamageUtils.damageHandler(victim, source, Theoretical_damage);
+                DamageProbe.damageHandler(victim, source, Theoretical_damage);
             }
             victim.invulnerableTime = inv;
         }

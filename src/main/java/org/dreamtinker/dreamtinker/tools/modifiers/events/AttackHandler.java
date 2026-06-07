@@ -12,8 +12,8 @@ import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
-import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
+import org.dreamtinker.dreamtinker.utils.DamageProbe;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class AttackHandler {
@@ -40,9 +40,9 @@ public class AttackHandler {
                         int inv = victim.invulnerableTime;
                         victim.invulnerableTime = 0;
                         extra_attack_depth.set(depth + 1);
-                        DTDamageUtils.damageHandler(victim,
-                                                    DreamtinkerDamageTypes.source(registryAccess, DreamtinkerDamageTypes.NULL_VOID, null, attacker),
-                                                    damageAmount);
+                        DamageProbe.finalDamageMethod(victim,
+                                                      DreamtinkerDamageTypes.source(registryAccess, DreamtinkerDamageTypes.NULL_VOID, null, attacker),
+                                                      damageAmount);
                         victim.invulnerableTime = inv;
                     }
                     finally {

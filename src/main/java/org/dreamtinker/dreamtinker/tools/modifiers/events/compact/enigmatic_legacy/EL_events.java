@@ -26,9 +26,9 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
-import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
 import org.dreamtinker.dreamtinker.utils.DTMessages;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
+import org.dreamtinker.dreamtinker.utils.DamageProbe;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
@@ -137,7 +137,7 @@ public class EL_events {
             entity.invulnerableTime = 0;
 
             float damage = 6.0F;
-            boolean hurt = DTDamageUtils.damageHandler(entity, level.damageSources().playerAttack(attacker), damage);
+            boolean hurt = DamageProbe.damageHandler(entity, level.damageSources().playerAttack(attacker), damage);
 
             if (!hurt && entity.isAlive()){
                 data.remove(TAG_DESOLATION_DROP_OWNER);

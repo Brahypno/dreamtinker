@@ -12,7 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.VisionaryDrops;
-import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
+import org.dreamtinker.dreamtinker.utils.DamageProbe;
 import org.jetbrains.annotations.NotNull;
 
 import static org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes.many_wishes;
@@ -129,7 +129,7 @@ public class CrescentSlashProjectile extends AbstractSlashProjectile {
         if (this.isOverrideDamageAndPierce()){
             DamageSource source = DreamtinkerDamageTypes.source(target.level().registryAccess(), many_wishes, this.getOwner(), this);
             target.getPersistentData().putBoolean(VisionaryDrops.Visionary, true);
-            return DTDamageUtils.damageHandler(target, source, amount);
+            return DamageProbe.damageHandler(target, source, amount);
         }
 
         return super.doHurt(target, amount);

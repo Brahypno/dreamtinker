@@ -1,6 +1,7 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat;
 
-import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
+import org.dreamtinker.dreamtinker.Dreamtinker;
+import org.dreamtinker.dreamtinker.utils.DamageProbe;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -19,11 +20,17 @@ public class ForceHurt extends Modifier implements MeleeHitModifierHook, Monster
 
     @Override
     public void failedMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageAttempted) {
-        DTDamageUtils.damageHandler(context.getTarget(), context.makeDamageSource(), damageAttempted);
+        DamageProbe.Result result = DamageProbe.finalDamageMethod(context.getTarget(), context.makeDamageSource(), 400);
+        Dreamtinker.LOGGER.debug(result.debugText());
+    }
+
+    @Override
+    public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
+        failedMeleeHit(tool, modifier, context, damage);
     }
 
     @Override
     public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
-        afterMeleeHit(tool, modifier, context, damage);
+        failedMeleeHit(tool, modifier, context, damage);
     }
 }

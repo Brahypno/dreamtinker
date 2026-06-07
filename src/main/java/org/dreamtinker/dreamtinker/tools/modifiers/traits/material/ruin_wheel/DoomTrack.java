@@ -17,8 +17,8 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.common.Tags;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Combat.GoliathDamage;
-import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
+import org.dreamtinker.dreamtinker.utils.DamageProbe;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -212,10 +212,11 @@ public class DoomTrack extends Modifier implements ProjectileHitModifierHook, Me
             theoreticalDamage *=
                     proofByResistanceMultiplier(attacker, victim, dmg, modifier.getLevel(), projectile != null);
             victim.invulnerableTime = 0;
-            DTDamageUtils.damageHandler(target, dmg, theoreticalDamage);
+            DamageProbe.damageHandler(target, dmg, theoreticalDamage);
             spawnOrdainedRuinFx((ServerLevel) victim.level(), victim, modifier.getLevel());
         }
     }
+
     @Override
     public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
         afterMeleeHit(tool, modifier, context, damage);

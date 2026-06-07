@@ -19,8 +19,8 @@ import org.dreamtinker.dreamtinker.library.client.particle.ColoredSweepBurst;
 import org.dreamtinker.dreamtinker.library.client.utils.MaskService;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.VisionaryDrops;
-import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
 import org.dreamtinker.dreamtinker.utils.DTHelper;
+import org.dreamtinker.dreamtinker.utils.DamageProbe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.client.TooltipKey;
@@ -142,7 +142,7 @@ public class VisionaryWishes extends Modifier implements MeleeDamageModifierHook
         if (WishPowerData.boosted(tool, context.getLevel())){
             DamageSource dmg =
                     DreamtinkerDamageTypes.source(context.getLevel().registryAccess(), DreamtinkerDamageTypes.many_wishes, context.makeDamageSource());
-            DTDamageUtils.damageHandler(context.getTarget(), dmg, damageAttempted);
+            DamageProbe.damageHandler(context.getTarget(), dmg, damageAttempted);
         }
     }
 

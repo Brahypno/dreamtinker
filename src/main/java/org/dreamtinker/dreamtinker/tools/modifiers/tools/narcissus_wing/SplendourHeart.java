@@ -28,9 +28,9 @@ import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.library.modifiers.DreamtinkerHook;
 import org.dreamtinker.dreamtinker.library.modifiers.hook.ProjectileHurtHook;
 import org.dreamtinker.dreamtinker.tools.modifiers.events.AdvCountEvents;
-import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
 import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
+import org.dreamtinker.dreamtinker.utils.DamageProbe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.client.TooltipKey;
@@ -195,8 +195,8 @@ public class SplendourHeart extends Modifier implements MeleeHitModifierHook, In
                         int inv = victim.invulnerableTime;
                         victim.invulnerableTime = 0;
                         extra_attack_depth.set(depth + 1);
-                        DTDamageUtils.damageHandler(victim, DreamtinkerDamageTypes.source(victim.level().registryAccess(), dmt, null, context.getAttacker()),
-                                                    damage * (boost + 1));
+                        DamageProbe.damageHandler(victim, DreamtinkerDamageTypes.source(victim.level().registryAccess(), dmt, null, context.getAttacker()),
+                                                  damage * (boost + 1));
                         victim.invulnerableTime = inv;
                     }
                     finally {

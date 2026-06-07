@@ -34,8 +34,8 @@ import org.dreamtinker.dreamtinker.library.client.trail.DTClientTrail;
 import org.dreamtinker.dreamtinker.library.modifiers.modules.combat.NarcissusFluidFeedbacks;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.modifiers.tools.narcissus_wing.MemoryBase;
-import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
 import org.dreamtinker.dreamtinker.utils.DTHelper;
+import org.dreamtinker.dreamtinker.utils.DamageProbe;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.TinkerDamageTypes;
 import slimeknights.tconstruct.fluids.TinkerFluids;
@@ -304,9 +304,9 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
                 ((LivingEntity) entity1).setLastHurtMob(target);
             }
             if (target instanceof LivingEntity livingentity &&
-                DTDamageUtils.damageHandler(livingentity, dmg(livingentity, entity1),
-                                            null != toolStackView ? (toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) + 1) * dmg :
-                                            dmg)){
+                DamageProbe.damageHandler(livingentity, dmg(livingentity, entity1),
+                                          null != toolStackView ? (toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) + 1) * dmg :
+                                          dmg)){
                 if (this.knock_back > 0){
                     double d0 = Math.max(0.0F, (double) 1.0F - livingentity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
                     Vec3 vec3 =

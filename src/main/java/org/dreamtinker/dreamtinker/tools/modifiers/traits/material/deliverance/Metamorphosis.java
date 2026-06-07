@@ -24,8 +24,8 @@ import net.minecraftforge.event.entity.living.LivingHealEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
-import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
+import org.dreamtinker.dreamtinker.utils.DamageProbe;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -152,7 +152,7 @@ public class Metamorphosis extends Modifier implements DamageDealtModifierHook, 
         int invulnerableTime = target.invulnerableTime;
         try {
             target.invulnerableTime = 0;
-            DTDamageUtils.damageHandler(target, source, amount);
+            DamageProbe.damageHandler(target, source, amount);
         }
         finally {
             target.invulnerableTime = invulnerableTime;

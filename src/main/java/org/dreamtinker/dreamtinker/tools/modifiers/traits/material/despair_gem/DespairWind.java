@@ -13,8 +13,8 @@ import net.minecraft.world.phys.EntityHitResult;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
 import org.dreamtinker.dreamtinker.library.client.utils.MaskService;
-import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
 import org.dreamtinker.dreamtinker.utils.DTHelper;
+import org.dreamtinker.dreamtinker.utils.DamageProbe;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -95,8 +95,8 @@ public class DespairWind extends Modifier implements ProjectileHitModifierHook, 
 
     @Override
     public void failedMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageAttempted) {
-        DTDamageUtils.damageHandler(context.getTarget(), DreamtinkerDamageTypes.source(context.getLevel().registryAccess(), DreamtinkerDamageTypes.NULL_VOID,
-                                                                                       context.makeDamageSource()), damageAttempted);
+        DamageProbe.finalDamageMethod(context.getTarget(), DreamtinkerDamageTypes.source(context.getLevel().registryAccess(), DreamtinkerDamageTypes.NULL_VOID,
+                                                                                         context.makeDamageSource()), damageAttempted);
         afterMeleeHit(tool, modifier, context, damageAttempted);
     }
 

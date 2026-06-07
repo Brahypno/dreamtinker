@@ -11,7 +11,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
-import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
+import org.dreamtinker.dreamtinker.utils.DamageProbe;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -98,9 +98,9 @@ public class soulFire extends MobEffect {
         if (entity.tickCount % 20 == 0){
             LivingEntity attacker = entity.getLastAttacker();
             double damage = null != attacker ? attacker.getAttributeValue(Attributes.ATTACK_DAMAGE) : 2;
-            DTDamageUtils.damageHandler(entity, DreamtinkerDamageTypes.source(world.registryAccess(), DreamtinkerDamageTypes.arcane_damage, null,
-                                                                              entity.getLastAttacker()),
-                                        (float) damage * (amplifier + 1));
+            DamageProbe.damageHandler(entity, DreamtinkerDamageTypes.source(world.registryAccess(), DreamtinkerDamageTypes.arcane_damage, null,
+                                                                            entity.getLastAttacker()),
+                                      (float) damage * (amplifier + 1));
         }
 
         MobEffectInstance ent = entity.getEffect(this);

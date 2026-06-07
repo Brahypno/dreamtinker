@@ -19,9 +19,9 @@ import net.minecraft.world.phys.Vec3;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.Entity.SlashOrbitEntity;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
-import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
 import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
+import org.dreamtinker.dreamtinker.utils.DamageProbe;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -86,7 +86,7 @@ public class Signet extends Modifier implements MeleeHitModifierHook, MonsterMel
         int invulnerableTime = target.invulnerableTime;
         try {
             target.invulnerableTime = 0;
-            DTDamageUtils.damageHandler(target, source, amount);
+            DamageProbe.damageHandler(target, source, amount);
         }
         finally {
             target.invulnerableTime = invulnerableTime;

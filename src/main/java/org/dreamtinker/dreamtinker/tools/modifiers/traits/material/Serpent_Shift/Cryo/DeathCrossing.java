@@ -26,8 +26,8 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.common.DreamtinkerDamageTypes;
-import org.dreamtinker.dreamtinker.utils.DTDamageUtils;
 import org.dreamtinker.dreamtinker.utils.DTHelper;
+import org.dreamtinker.dreamtinker.utils.DamageProbe;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -150,7 +150,7 @@ public class DeathCrossing extends Modifier implements MeleeDamageModifierHook, 
         int invulnerableTime = target.invulnerableTime;
         try {
             target.invulnerableTime = 0;
-            DTDamageUtils.damageHandler(target, source, Math.max(0.0F, amount));
+            DamageProbe.damageHandler(target, source, Math.max(0.0F, amount));
         }
         finally {
             target.invulnerableTime = invulnerableTime;
