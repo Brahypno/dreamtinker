@@ -25,12 +25,12 @@
     }
   ],
   "ingredient": {
-    "item": "malum:soul_stained_steel_ingot"
+    "item": "malum:malignant_pewter_ingot"
   },
   "result": {
     "amount": 90,
-    "fluid": "dreamtinker:molten_soul_stained_steel"
+    "fluid": "dreamtinker:molten_malignant_pewter"
   },
-  "temperature": 900,
-  "time": 190
+  "temperature": 1500,
+  "time": 40
 }

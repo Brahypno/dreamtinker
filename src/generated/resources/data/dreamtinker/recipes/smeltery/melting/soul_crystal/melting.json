@@ -1,9 +1,5 @@
 {
-  "type": "tconstruct:casting_table",
-  "cast": {
-    "item": "dreamtinker:void_pearl"
-  },
-  "cast_consumed": true,
+  "type": "tconstruct:melting",
   "conditions": [
     {
       "type": "forge:or",
@@ -28,10 +24,13 @@
       ]
     }
   ],
-  "cooling_time": 31,
-  "fluid": {
-    "amount": 810,
-    "fluid": "dreamtinker:molten_ascending_antimony"
+  "ingredient": {
+    "item": "enigmaticlegacy:soul_crystal"
   },
-  "result": "enigmaticlegacy:void_pearl"
+  "result": {
+    "amount": 100,
+    "fluid": "dreamtinker:liquid_pure_soul"
+  },
+  "temperature": 300,
+  "time": 133
 }

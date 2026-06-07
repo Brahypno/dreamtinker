@@ -210,8 +210,8 @@ dependencies {
 
     implementation fg.deobf("curse.maven:curios-309927:6418456")
     implementation fg.deobf("curse.maven:patchouli-306770:6164575")
-    implementation fg.deobf("curse.maven:caelus-308989:5281700")
-    implementation fg.deobf("curse.maven:enigmatic-legacy-336184:5600004")
+    //implementation fg.deobf("curse.maven:caelus-308989:5281700")
+    //implementation fg.deobf("curse.maven:enigmatic-legacy-336184:5600004")
 
     implementation fg.deobf("curse.maven:lodestone-616457:6213794")
     implementation fg.deobf("curse.maven:malum-484064:6646111")

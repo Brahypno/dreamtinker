@@ -1,9 +1,5 @@
 {
-  "type": "tconstruct:casting_table",
-  "cast": {
-    "item": "minecraft:heart_of_the_sea"
-  },
-  "cast_consumed": true,
+  "type": "tconstruct:melting",
   "conditions": [
     {
       "type": "forge:or",
@@ -17,21 +13,24 @@
           "values": [
             {
               "type": "forge:mod_loaded",
-              "modid": "enigmaticlegacy"
+              "modid": "malum"
             },
             {
               "type": "dreamtinker:mod_compact_config",
-              "modid": "enigmaticlegacy"
+              "modid": "malum"
             }
           ]
         }
       ]
     }
   ],
-  "cooling_time": 31,
-  "fluid": {
-    "amount": 810,
-    "fluid": "dreamtinker:molten_ascending_antimony"
+  "ingredient": {
+    "item": "malum:soul_stained_steel_nugget"
   },
-  "result": "enigmaticlegacy:ocean_stone"
+  "result": {
+    "amount": 10,
+    "fluid": "dreamtinker:molten_soul_stained_steel"
+  },
+  "temperature": 900,
+  "time": 32
 }

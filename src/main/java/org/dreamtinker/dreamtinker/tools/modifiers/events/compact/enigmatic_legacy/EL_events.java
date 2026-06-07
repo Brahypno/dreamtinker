@@ -1,10 +1,9 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.events.compact.enigmatic_legacy;
 
-import com.aizistral.enigmaticlegacy.handlers.SuperpositionHandler;
-import com.aizistral.enigmaticlegacy.items.EldritchPan;
-import com.aizistral.enigmaticlegacy.items.TheInfinitum;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.IntTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -26,6 +25,7 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
+import org.dreamtinker.dreamtinker.utils.CompactUtils.EnigmaticLegacyCompact;
 import org.dreamtinker.dreamtinker.utils.DTMessages;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.dreamtinker.dreamtinker.utils.DamageProbe;
@@ -37,14 +37,14 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
-import static com.aizistral.enigmaticlegacy.items.EldritchPan.*;
 import static org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.EldritchPan.TAG_PAN;
 
 public class EL_events {
+
     private static boolean addKillIfNotPresent(ItemStack pan, ResourceLocation mob) {
-        List<ResourceLocation> kills = getUniqueKills(pan);
-        if (kills.size() < uniqueGainLimit.getValue() && !kills.contains(mob)){
-            addUniqueKill(pan, mob);
+        List<ResourceLocation> kills = EnigmaticLegacyCompact.eldritchPanUniqueKills(pan);
+        if (kills.size() < EnigmaticLegacyCompact.eldritchPanUniqueGainLimit() && !kills.contains(mob)){
+            EnigmaticLegacyCompact.addEldritchPanUniqueKill(pan, mob);
             return true;
         }else {
             return false;
@@ -55,9 +55,9 @@ public class EL_events {
         LivingEntity entity = event.getEntity();
         if (entity.level().isClientSide || event.isCanceled())
             return;
-        if (entity instanceof Player player && SuperpositionHandler.isTheWorthyOne(player))
+        if (entity instanceof Player player && EnigmaticLegacyCompact.isTheWorthyOne(player))
             if (2 <= DTModifierCheck.getMainhandModifierLevel(player, DreamtinkerModifiers.weapon_books.getId()))
-                if (Math.random() <= TheInfinitum.undeadProbability.getValue().asMultiplier(false)){
+                if (Math.random() <= EnigmaticLegacyCompact.infinitumUndeadProbabilityMultiplier()){
                     event.setCanceled(true);
                     player.setHealth(1);
                 }
@@ -72,7 +72,7 @@ public class EL_events {
                                                    .withStyle(ChatFormatting.GOLD), false);
                     ToolStack toolstack = ToolStack.from(weapon);
                     ModDataNBT nbt = toolstack.getPersistentData();
-                    nbt.putInt(TAG_PAN, EldritchPan.getKillCount(weapon));
+                    nbt.putInt(TAG_PAN, EnigmaticLegacyCompact.eldritchPanKillCount(weapon));
                     toolstack.updateStack(weapon);
                 }
             }
@@ -159,11 +159,11 @@ public class EL_events {
 
     public static void onLivingDrops(LivingDropsEvent event) {
         if (event.isRecentlyHit() && event.getSource() != null && event.getSource().getEntity() instanceof Player player &&
-            SuperpositionHandler.isTheCursedOne((Player) event.getSource().getEntity())){
+            EnigmaticLegacyCompact.isTheCursedOne((Player) event.getSource().getEntity())){
             LivingEntity killed = event.getEntity();
 
-            if (killed instanceof EnderDragon && SuperpositionHandler.isTheWorthyOne(player)){
-                SuperpositionHandler.setPersistentInteger(player, "AbyssalHeartsGained", 0);
+            if (killed instanceof EnderDragon && EnigmaticLegacyCompact.isTheWorthyOne(player)){
+                setPersistentTag(player, "AbyssalHeartsGained", IntTag.valueOf(0));
             }
         }
         LivingEntity entity = event.getEntity();
@@ -255,5 +255,17 @@ public class EL_events {
         players.sort(Comparator.comparingDouble(player -> player.distanceToSqr(entity)));
 
         return players;
+    }
+
+    public static void setPersistentTag(Player player, String tag, Tag value) {
+        CompoundTag data = player.getPersistentData();
+        CompoundTag persistent;
+        if (!data.contains("PlayerPersisted")){
+            data.put("PlayerPersisted", persistent = new CompoundTag());
+        }else {
+            persistent = data.getCompound("PlayerPersisted");
+        }
+
+        persistent.put(tag, value);
     }
 }

@@ -129,7 +129,7 @@ public class DreamtinkerCommon extends DreamtinkerModule {
 
     public static final RegistryObject<Item> deep_prismarine_shard = ITEMS.register("deep_prismarine_shard", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
 
-    public static final RegistryObject<Item> soul_etherium = EL_ITEMS.register(
+    public static final RegistryObject<Item> soul_etherium = ITEMS.register(
             "soul_etherium",
             () -> new Item(new Item.Properties().rarity(Rarity.EPIC)) {
                 public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag flag) {

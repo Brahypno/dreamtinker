@@ -1,8 +1,5 @@
 package org.dreamtinker.dreamtinker.common.effect;
 
-import com.aizistral.enigmaticlegacy.handlers.SuperpositionHandler;
-import com.aizistral.enigmaticlegacy.registries.EnigmaticItems;
-import com.aizistral.enigmaticlegacy.triggers.UseUnholyGrailTrigger;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -10,6 +7,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import org.dreamtinker.dreamtinker.utils.CompactUtils.EnigmaticLegacyCompact;
 
 public class unholy extends MobEffect {
 
@@ -24,7 +22,7 @@ public class unholy extends MobEffect {
         // 维持：每秒把隐藏效果续命一点，防止被耗尽
         int refresh = 40; // 2秒
         Player player = (Player) p_19467_;
-        boolean isTheWorthyOne = SuperpositionHandler.isTheCursedOne(player) && EnigmaticItems.FORBIDDEN_FRUIT.haveConsumedFruit(player);
+        boolean isTheWorthyOne = EnigmaticLegacyCompact.isTheCursedOne(player) && EnigmaticLegacyCompact.haveConsumedForbiddenFruit(player);
         if (!isTheWorthyOne){
             p_19467_.addEffect(new MobEffectInstance(MobEffects.WITHER, refresh, (p_19468_ + 1) * 3 - 1, true, false, false));
             p_19467_.addEffect(new MobEffectInstance(MobEffects.POISON, refresh, (p_19468_ + 1) * 2 - 1, true, false, false));
@@ -40,7 +38,7 @@ public class unholy extends MobEffect {
             p_19467_.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, refresh, p_19468_, true, false, false));
             //player.addEffect(new MobEffectInstance(MobEffects.HEAL, 1, 0, false, true));
         }
-        UseUnholyGrailTrigger.INSTANCE.trigger((ServerPlayer) player, isTheWorthyOne);
+        EnigmaticLegacyCompact.triggerUseUnholyGrail((ServerPlayer) player, isTheWorthyOne);
 
     }
 

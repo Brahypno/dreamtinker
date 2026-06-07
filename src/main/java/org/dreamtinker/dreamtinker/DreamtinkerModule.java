@@ -49,7 +49,6 @@ import static org.dreamtinker.dreamtinker.Dreamtinker.MODID;
 public abstract class DreamtinkerModule {
     protected static final Item.Properties UNSTACKABLE_PROPS = new Item.Properties().stacksTo(1);
 
-    public static final DeferredRegister<Item> EL_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
     public static final DeferredRegister<Item> MALUM_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
 
@@ -62,12 +61,10 @@ public abstract class DreamtinkerModule {
 
 
     public static final DeferredRegister<MobEffect> EFFECT = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, MODID);
-    public static final DeferredRegister<MobEffect> EL_EFFECT = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, MODID);
     public static final DeferredRegister<MobEffect> MALUM_EFFECT = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, MODID);
     public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTIONS, Dreamtinker.MODID);
     public static final DeferredRegister<Potion> MALUM_POTIONS = DeferredRegister.create(ForgeRegistries.POTIONS, Dreamtinker.MODID);
     public static final FluidDeferredRegister FLUIDS = new FluidDeferredRegister(MODID);
-    public static final FluidDeferredRegister EL_FLUIDS = new FluidDeferredRegister(MODID);
     public static final FluidDeferredRegister MALUM_FLUIDS = new FluidDeferredRegister(MODID);
     public static final DeferredRegister<Codec<? extends IGlobalLootModifier>> LOOT_MODIFIERS =
             DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MODID);
@@ -127,11 +124,6 @@ public abstract class DreamtinkerModule {
         LOOT_CONDITION_TYPES.register(bus);
         PARTICLES.register(bus);
         BLOCK_ENTITIES.register(bus);
-        if (ModList.get().isLoaded("enigmaticlegacy")){
-            EL_FLUIDS.register(bus);
-            EL_ITEMS.register(bus);
-            EL_EFFECT.register(bus);
-        }
         if (ModList.get().isLoaded("malum")){
             MALUM_FLUIDS.register(bus);
             MALUM_ITEMS.register(bus);

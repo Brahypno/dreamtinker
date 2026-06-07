@@ -1,18 +1,19 @@
 package org.dreamtinker.dreamtinker.mixin.compact.enigmaticlegacy;
 
-import com.aizistral.enigmaticlegacy.handlers.EnigmaticEventHandler;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Slice;
 
 import static org.dreamtinker.dreamtinker.Dreamtinker.configCompactDisabled;
 
-@Mixin(value = EnigmaticEventHandler.class, remap = false)
+@Pseudo
+@Mixin(targets = "com.aizistral.enigmaticlegacy.handlers.EnigmaticEventHandler", remap = false)
 public abstract class EnigmaticEventHandlerMixin {
     @ModifyVariable(
             method = "onEntityHurt(Lnet/minecraftforge/event/entity/living/LivingHurtEvent;)V",

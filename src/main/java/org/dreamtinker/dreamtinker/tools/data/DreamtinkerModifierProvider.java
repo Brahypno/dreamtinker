@@ -1,7 +1,5 @@
 package org.dreamtinker.dreamtinker.tools.data;
 
-import com.aizistral.enigmaticlegacy.api.materials.EnigmaticMaterials;
-import com.aizistral.enigmaticlegacy.registries.EnigmaticEnchantments;
 import com.hollingsworth.arsnouveau.setup.registry.ModPotions;
 import com.sammy.malum.registry.common.AttributeRegistry;
 import com.sammy.malum.registry.common.item.EnchantmentRegistry;
@@ -575,25 +573,26 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
     }
 
     private void addELModifiers() {
-        buildModifier(Ids.el_by_pass_worthy, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
-                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
-        buildModifier(Ids.el_nemesis_curse, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
-                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                .addModule(EnchantmentModule.builder(EnigmaticEnchantments.NEMESIS).level(1).constant());
-        buildModifier(Ids.el_sorrow, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
-                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                .addModule(EnchantmentModule.builder(EnigmaticEnchantments.SORROW).level(1).constant());
-        buildModifier(Ids.el_eternal_binding, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
-                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                .addModule(EnchantmentModule.builder(EnigmaticEnchantments.ETERNAL_BINDING).level(1).constant());
-        buildModifier(Ids.el_etherium, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
-                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
-                .addModule(SetStatModule.set(ToolStats.HARVEST_TIER).value(EnigmaticMaterials.ETHERIUM));
-
-        buildModifier(Ids.blighted_sigil, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
-                .tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
-                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                .addModules(ModifierSlotModule.slot(DTSlotType.DELUSION).eachLevel(1));
+        // Moved to src/main/resources so data generation does not directly require Enigmatic Legacy classes.
+        //        buildModifier(Ids.el_by_pass_worthy, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
+        //                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+        //        buildModifier(Ids.el_nemesis_curse, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
+        //                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+        //                .addModule(EnchantmentModule.builder(EnigmaticEnchantments.NEMESIS).level(1).constant());
+        //        buildModifier(Ids.el_sorrow, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
+        //                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+        //                .addModule(EnchantmentModule.builder(EnigmaticEnchantments.SORROW).level(1).constant());
+        //        buildModifier(Ids.el_eternal_binding, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
+        //                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+        //                .addModule(EnchantmentModule.builder(EnigmaticEnchantments.ETERNAL_BINDING).level(1).constant());
+        //        buildModifier(Ids.el_etherium, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
+        //                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+        //                .addModule(SetStatModule.set(ToolStats.HARVEST_TIER).value(EnigmaticMaterials.ETHERIUM));
+        //
+        //        buildModifier(Ids.blighted_sigil, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
+        //                .tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
+        //                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+        //                .addModules(ModifierSlotModule.slot(DTSlotType.DELUSION).eachLevel(1));
     }
 
     private void addMalumModifiers() {

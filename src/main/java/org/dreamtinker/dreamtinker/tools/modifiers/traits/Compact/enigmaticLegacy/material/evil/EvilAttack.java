@@ -1,12 +1,12 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.evil;
 
-import com.aizistral.enigmaticlegacy.handlers.SuperpositionHandler;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
+import org.dreamtinker.dreamtinker.utils.CompactUtils.EnigmaticLegacyCompact;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -33,20 +33,20 @@ public class EvilAttack extends Modifier implements ModifyDamageModifierHook, Me
 
     @Override
     public float modifyDamageTaken(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount, boolean isDirectDamage) {
-        int cursed = context.getEntity() instanceof Player player ? SuperpositionHandler.getCurseAmount(player) + 1 : 1;
+        int cursed = context.getEntity() instanceof Player player ? EnigmaticLegacyCompact.getCurseAmount(player) + 1 : 1;
         return amount * cursed;
     }
 
     @Override
     public float getMeleeDamage(@NotNull IToolStackView tool, @NotNull ModifierEntry modifier, @NotNull ToolAttackContext context, float baseDamage, float damage) {
-        int cursed = context.getAttacker() instanceof Player player ? SuperpositionHandler.getCurseAmount(player) + 1 : 1;
+        int cursed = context.getAttacker() instanceof Player player ? EnigmaticLegacyCompact.getCurseAmount(player) + 1 : 1;
         return damage * cursed;
     }
 
     @Override
     public float modifyStat(IToolStackView tool, ModifierEntry modifier, LivingEntity living, FloatToolStat stat, float baseValue, float multiplier) {
         if (ToolStats.DRAW_SPEED == stat || ToolStats.VELOCITY == stat){
-            int cursed = living instanceof Player player ? SuperpositionHandler.getCurseAmount(player) + 1 : 1;
+            int cursed = living instanceof Player player ? EnigmaticLegacyCompact.getCurseAmount(player) + 1 : 1;
             baseValue *= cursed;
 
         }

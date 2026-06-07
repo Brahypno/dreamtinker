@@ -187,22 +187,22 @@ public class DreamtinkerFluids {
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_BLACK, 0), 10, 0) {});
 
     public static final FlowingFluidObject<ForgeFlowingFluid> unstable_liquid_aether =
-            registerFluid(EL_FLUIDS, "unstable_liquid_aether", 1600, 400, 10, 15,
+            registerFluid(FLUIDS, "unstable_liquid_aether", 1600, 400, 10, 15,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.SNOW, 15), 10, 0) {});
     public static final FlowingFluidObject<ForgeFlowingFluid> liquid_pure_soul =
             registerFluid(FLUIDS, "liquid_pure_soul", 600, 400, 10, 15,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.LAPIS, 15), 10, 0) {});
     public static final FlowingFluidObject<ForgeFlowingFluid> molten_nefariousness =
-            registerFluid(EL_FLUIDS, "molten_nefariousness", 1200, 400, 10, 6,
+            registerFluid(FLUIDS, "molten_nefariousness", 1200, 400, 10, 6,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_PURPLE, 9), 10, 0) {});
     public static final FlowingFluidObject<ForgeFlowingFluid> molten_evil =
-            registerFluid(EL_FLUIDS, "molten_evil", 1400, 400, 10, 6,
+            registerFluid(FLUIDS, "molten_evil", 1400, 400, 10, 6,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_PURPLE, 9), 10, 0) {});
     public static final FlowingFluidObject<ForgeFlowingFluid> molten_soul_aether =
-            registerFluid(EL_FLUIDS, "molten_soul_aether", 2345, 400, 10, 15,
+            registerFluid(FLUIDS, "molten_soul_aether", 2345, 400, 10, 15,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.CRIMSON_STEM, 15), 10, 0) {});
     public static final FlowingFluidObject<ForgeFlowingFluid> unholy_water =
-            registerFluid(EL_FLUIDS, "unholy_water", 15, 10, 1, 2,
+            registerFluid(FLUIDS, "unholy_water", 15, 10, 1, 2,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.WATER, 15), 0, 0) {
                               @Override
                               public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {

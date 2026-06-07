@@ -1,7 +1,5 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy;
 
-import com.aizistral.enigmaticlegacy.handlers.SuperpositionHandler;
-import com.aizistral.enigmaticlegacy.helpers.ItemLoreHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -13,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.Entity.AggressiveFox;
+import org.dreamtinker.dreamtinker.utils.CompactUtils.EnigmaticLegacyCompact;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -35,8 +34,8 @@ public class CursedRingBound extends Modifier implements EquipmentChangeModifier
     private boolean check(IToolStackView tool, ServerPlayer player) {
         boolean worthy_check = 0 < tool.getPersistentData().getInt(TAG_DEEP_CURSE);
         return player.getAbilities().instabuild ||
-               (SuperpositionHandler.isTheCursedOne(player) &&
-                (!worthy_check || SuperpositionHandler.isTheWorthyOne(player)));
+               (EnigmaticLegacyCompact.isTheCursedOne(player) &&
+                (!worthy_check || EnigmaticLegacyCompact.isTheWorthyOne(player)));
     }
 
     @Override
@@ -68,9 +67,9 @@ public class CursedRingBound extends Modifier implements EquipmentChangeModifier
     @Override
     public void addTooltip(IToolStackView tool, @NotNull ModifierEntry modifier, @Nullable Player player, List<Component> tooltip, TooltipKey tooltipKey, TooltipFlag tooltipFlag) {
         if (0 < tool.getPersistentData().getInt(TAG_DEEP_CURSE) && tooltipKey.isShiftOrUnknown()){
-            ItemLoreHelper.indicateWorthyOnesOnly(tooltip);
+            EnigmaticLegacyCompact.indicateWorthyOnesOnly(tooltip, player);
         }else {
-            ItemLoreHelper.indicateCursedOnesOnly(tooltip);
+            EnigmaticLegacyCompact.indicateCursedOnesOnly(tooltip, player);
         }
     }
 

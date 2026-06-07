@@ -1,19 +1,20 @@
 package org.dreamtinker.dreamtinker.mixin.compact.enigmaticlegacy;
 
-import com.aizistral.enigmaticlegacy.handlers.SuperpositionHandler;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static org.dreamtinker.dreamtinker.Dreamtinker.configCompactDisabled;
 
-@Mixin(value = SuperpositionHandler.class, remap = false)
+@Pseudo
+@Mixin(targets = "com.aizistral.enigmaticlegacy.handlers.SuperpositionHandler", remap = false)
 public abstract class SuperpositionHandlerMixin {
 
     // 方法签名：getCurseAmount(Lnet/minecraft/world/item/ItemStack;)I

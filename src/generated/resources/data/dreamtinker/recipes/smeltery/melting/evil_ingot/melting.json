@@ -25,12 +25,12 @@
     }
   ],
   "ingredient": {
-    "item": "enigmaticlegacy:evil_essence"
+    "item": "enigmaticlegacy:evil_ingot"
   },
   "result": {
-    "amount": 100,
-    "fluid": "dreamtinker:molten_nefariousness"
+    "amount": 90,
+    "fluid": "dreamtinker:molten_evil"
   },
-  "temperature": 900,
-  "time": 32
+  "temperature": 1100,
+  "time": 208
 }

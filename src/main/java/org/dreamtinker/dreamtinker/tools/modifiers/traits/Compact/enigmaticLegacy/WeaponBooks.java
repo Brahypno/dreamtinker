@@ -1,10 +1,5 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy;
 
-import com.aizistral.enigmaticlegacy.config.OmniconfigHandler;
-import com.aizistral.enigmaticlegacy.effects.GrowingBloodlustEffect;
-import com.aizistral.enigmaticlegacy.handlers.SuperpositionHandler;
-import com.aizistral.enigmaticlegacy.items.TheInfinitum;
-import com.aizistral.enigmaticlegacy.items.TheTwist;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -17,6 +12,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
+import org.dreamtinker.dreamtinker.utils.CompactUtils.EnigmaticLegacyCompact;
 import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import org.jetbrains.annotations.NotNull;
@@ -92,16 +88,15 @@ public class WeaponBooks extends Modifier implements MeleeDamageModifierHook, Me
     public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
         float knockbackPower = 1F;
         if (context.getAttacker() instanceof Player player && !player.level().isClientSide){
-            if (0 < tool.getModifierLevel(this.getId()) && SuperpositionHandler.isTheCursedOne(player)){
-                if (null != context.getTarget())
-                    context.getTarget().setSecondsOnFire(20);
+            if (0 < tool.getModifierLevel(this.getId()) && EnigmaticLegacyCompact.isTheCursedOne(player)){
+                context.getTarget().setSecondsOnFire(20);
             }
-            if (1 == tool.getModifierLevel(this.getId()) && SuperpositionHandler.isTheCursedOne(player)){
-                knockbackPower += TheTwist.knockbackBonus.getValue().asModifier(false);
-            }else if (2 <= tool.getModifierLevel(this.getId()) && SuperpositionHandler.isTheWorthyOne(player)){
-                if (3 <= tool.getModifierLevel(this.getId()) && SuperpositionHandler.isTheWorthyOne(player))
-                    knockbackPower += TheTwist.knockbackBonus.getValue().asModifier(false);
-                knockbackPower += TheInfinitum.knockbackBonus.getValue().asModifier(false);
+            if (1 == tool.getModifierLevel(this.getId()) && EnigmaticLegacyCompact.isTheCursedOne(player)){
+                knockbackPower += EnigmaticLegacyCompact.twistKnockbackBonusModifier();
+            }else if (2 <= tool.getModifierLevel(this.getId()) && EnigmaticLegacyCompact.isTheWorthyOne(player)){
+                if (3 <= tool.getModifierLevel(this.getId()) && EnigmaticLegacyCompact.isTheWorthyOne(player))
+                    knockbackPower += EnigmaticLegacyCompact.twistKnockbackBonusModifier();
+                knockbackPower += EnigmaticLegacyCompact.infinitumKnockbackBonusModifier();
             }
         }
         return knockback * knockbackPower;
@@ -110,26 +105,20 @@ public class WeaponBooks extends Modifier implements MeleeDamageModifierHook, Me
     @Override
     public float getMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
         float bonus = 0;
-        if (context.getAttacker() instanceof Player player)
-            if (1 == tool.getModifierLevel(this.getId())){
-                if (SuperpositionHandler.isTheCursedOne(player) || player instanceof ServerPlayer sp && sp.getAbilities().instabuild){
-                    if (null != DTHelper.getLivingTarget(context.getTarget()) &&
-                        OmniconfigHandler.isBossOrPlayer(DTHelper.getLivingTarget(context.getTarget())))
-                        bonus += damage * TheTwist.bossDamageBonus.getValue().asModifier(false);
-
-                }else
-                    damage = 0;
-            }else if (2 <= tool.getModifierLevel(this.getId())){
-                if (SuperpositionHandler.isTheWorthyOne(player) || player instanceof ServerPlayer sp && sp.getAbilities().instabuild){
-                    if (null != DTHelper.getLivingTarget(context.getTarget()) &&
-                        OmniconfigHandler.isBossOrPlayer(DTHelper.getLivingTarget(context.getTarget()))){
+        if (context.getAttacker() instanceof Player player){
+            if (EnigmaticLegacyCompact.isTheCursedOne(player) || player instanceof ServerPlayer sp && sp.getAbilities().instabuild){
+                LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
+                if (null != target && EnigmaticLegacyCompact.isBossOrPlayer(target))
+                    if (1 == tool.getModifierLevel(this.getId())){
+                        bonus += damage * EnigmaticLegacyCompact.twistBossDamageBonusModifier();
+                    }else if (2 <= tool.getModifierLevel(this.getId())){
                         if (3 <= tool.getModifierLevel(this.getId()))
-                            bonus += damage * TheTwist.bossDamageBonus.getValue().asModifier(false);
-                        bonus += damage * TheInfinitum.bossDamageBonus.getValue().asModifier(false);
-
+                            bonus += damage * EnigmaticLegacyCompact.twistBossDamageBonusModifier();
+                        bonus += damage * EnigmaticLegacyCompact.infinitumBossDamageBonusModifier();
                     }
-                }else {
-                    damage = 0;
+            }else {
+                damage = 0;
+                if (2 <= tool.getModifierLevel(this.getId())){
                     player.addEffect(new MobEffectInstance(MobEffects.WITHER, 160, 3, false, true));
                     player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 500, 3, false, true));
                     player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 300, 3, false, true));
@@ -138,6 +127,7 @@ public class WeaponBooks extends Modifier implements MeleeDamageModifierHook, Me
                     player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 100, 3, false, true));
                 }
             }
+        }
         return damage + bonus;
     }
 
@@ -145,12 +135,12 @@ public class WeaponBooks extends Modifier implements MeleeDamageModifierHook, Me
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
         if (2 <= tool.getModifierLevel(this.getId()))
             if (context.getAttacker() instanceof Player player && !player.level().isClientSide
-                && (SuperpositionHandler.isTheWorthyOne(player) || player instanceof ServerPlayer sp && sp.getAbilities().instabuild)){
+                && (EnigmaticLegacyCompact.isTheWorthyOne(player) || player instanceof ServerPlayer sp && sp.getAbilities().instabuild)){
                 float lifesteal = damageDealt * 0.1F;
 
                 if (null != getBloodlust() && player.hasEffect(getBloodlust())){
                     int amplifier = 1 + player.getEffect(getBloodlust()).getAmplifier();
-                    lifesteal += (float) (damageDealt * (GrowingBloodlustEffect.lifestealBoost.getValue() * amplifier));
+                    lifesteal += (float) (damageDealt * (EnigmaticLegacyCompact.bloodlustLifestealBoost() * amplifier));
                 }
                 player.heal(lifesteal);
                 LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
@@ -168,7 +158,7 @@ public class WeaponBooks extends Modifier implements MeleeDamageModifierHook, Me
     private void onLivingDeath(LivingDeathEvent event) {
         if (event.getEntity() instanceof Player player && !event.getEntity().level().isClientSide){
             if (2 <= DTModifierCheck.getMainhandModifierLevel(player, this.getId()) &&
-                Math.random() <= TheInfinitum.undeadProbability.getValue().asMultiplier(false)){
+                Math.random() <= EnigmaticLegacyCompact.infinitumUndeadProbabilityMultiplier()){
                 event.setCanceled(true);
                 player.setHealth(1.0F);
             }

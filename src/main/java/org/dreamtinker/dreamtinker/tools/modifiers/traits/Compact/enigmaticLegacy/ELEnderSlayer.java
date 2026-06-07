@@ -1,10 +1,5 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy;
 
-import com.aizistral.enigmaticlegacy.EnigmaticLegacy;
-import com.aizistral.enigmaticlegacy.handlers.SuperpositionHandler;
-import com.aizistral.enigmaticlegacy.items.EnderSlayer;
-import com.aizistral.enigmaticlegacy.objects.RegisteredMeleeAttack;
-import com.aizistral.enigmaticlegacy.registries.EnigmaticItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
@@ -12,6 +7,7 @@ import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
 import org.dreamtinker.dreamtinker.common.DreamtinkerTagKeys;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
+import org.dreamtinker.dreamtinker.utils.CompactUtils.EnigmaticLegacyCompact;
 import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.data.predicate.IJsonPredicate;
@@ -42,7 +38,7 @@ public class ELEnderSlayer extends Modifier implements MeleeDamageModifierHook, 
         hookBuilder.addModule(new ModifierTraitModule(DreamtinkerModifiers.cursed_ring_bound.getId(), 1, true));
         hookBuilder.addModule(ConditionalMeleeDamageModule.builder().target(ender).percent()
                                                           .formula()
-                                                          .variable(LEVEL).constant(EnderSlayer.endDamageBonus.getValue().asModifier(false)).multiply()
+                                                          .variable(LEVEL).constant(EnigmaticLegacyCompact.enderSlayerEndDamageBonusModifier()).multiply()
                                                           .variable(MULTIPLIER).multiply()
                                                           .variable(VALUE).multiply().build());
         hookBuilder.addModule(KnockbackModule.builder().entity(ender)
@@ -55,21 +51,21 @@ public class ELEnderSlayer extends Modifier implements MeleeDamageModifierHook, 
     @Override
     public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
         float knockbackPower = 1F;
-        if (context.getAttacker() instanceof Player player && SuperpositionHandler.isTheCursedOne(player))
-            if (EnigmaticItems.ENDER_SLAYER.isEndDweller(DTHelper.getLivingTarget(context.getTarget()))){
-                knockbackPower += EnderSlayer.endKnockbackBonus.getValue().asModifier(false) * modifier.getEffectiveLevel();
+        if (context.getAttacker() instanceof Player player && EnigmaticLegacyCompact.isTheCursedOne(player))
+            if (EnigmaticLegacyCompact.isEndDweller(DTHelper.getLivingTarget(context.getTarget()))){
+                knockbackPower += EnigmaticLegacyCompact.enderSlayerEndKnockbackBonusModifier() * modifier.getEffectiveLevel();
             }
         return knockback * knockbackPower;
     }
 
     @Override
     public float getMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
-        if (context.getAttacker() instanceof Player player && SuperpositionHandler.isTheCursedOne(player)){
+        if (context.getAttacker() instanceof Player player && EnigmaticLegacyCompact.isTheCursedOne(player)){
             LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
-            if (null != target && (EnigmaticItems.ENDER_SLAYER.isEndDweller(target) || target.getType().is(DreamtinkerTagKeys.EntityTypes.ENDER_ENTITY))){
-                if (player.level().dimension().equals(EnigmaticLegacy.PROXY.getEndKey()) && player.level() == target.level()){
+            if (null != target && (EnigmaticLegacyCompact.isEndDweller(target) || target.getType().is(DreamtinkerTagKeys.EntityTypes.ENDER_ENTITY))){
+                if (EnigmaticLegacyCompact.isTheEnd(player.level()) && player.level() == target.level()){
                     if (target instanceof EnderMan
-                        && RegisteredMeleeAttack.getRegisteredAttackStregth(player) >= 1F){
+                        && EnigmaticLegacyCompact.registeredAttackStrength(player) >= 1F){
                         damage = (damage + 100F) * 10F;
                     }
                     target.getPersistentData().putBoolean("EnderSlayerVictim", true);

@@ -13,11 +13,11 @@
           "values": [
             {
               "type": "forge:mod_loaded",
-              "modid": "enigmaticlegacy"
+              "modid": "malum"
             },
             {
               "type": "dreamtinker:mod_compact_config",
-              "modid": "enigmaticlegacy"
+              "modid": "malum"
             }
           ]
         }
@@ -25,12 +25,12 @@
     }
   ],
   "ingredient": {
-    "item": "enigmaticlegacy:soul_crystal"
+    "item": "malum:malignant_pewter_nugget"
   },
   "result": {
-    "amount": 100,
-    "fluid": "dreamtinker:liquid_pure_soul"
+    "amount": 10,
+    "fluid": "dreamtinker:molten_malignant_pewter"
   },
-  "temperature": 300,
-  "time": 21
+  "temperature": 1500,
+  "time": 40
 }

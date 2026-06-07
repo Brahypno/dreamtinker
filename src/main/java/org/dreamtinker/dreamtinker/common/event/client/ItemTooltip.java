@@ -1,6 +1,5 @@
 package org.dreamtinker.dreamtinker.common.event.client;
 
-import com.aizistral.enigmaticlegacy.registries.EnigmaticItems;
 import com.hollingsworth.arsnouveau.api.registry.PerkRegistry;
 import com.hollingsworth.arsnouveau.setup.registry.BlockRegistry;
 import net.minecraft.ChatFormatting;
@@ -19,6 +18,7 @@ import org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig;
 import org.dreamtinker.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
 import org.dreamtinker.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.dreamtinker.dreamtinker.tools.items.UnderArmorItem;
+import org.dreamtinker.dreamtinker.utils.CompactUtils.EnigmaticLegacyCompact;
 import org.dreamtinker.dreamtinker.utils.CompactUtils.arsNovaUtils;
 import org.dreamtinker.dreamtinker.utils.DTModifierCheck;
 import slimeknights.tconstruct.common.TinkerTags;
@@ -46,7 +46,7 @@ public class ItemTooltip {
             }
         }
         if (ModList.get().isLoaded("enigmaticlegacy") && !configCompactDisabled("enigmaticlegacy")){
-            if (Screen.hasShiftDown() && e.getItemStack().getItem().equals(EnigmaticItems.CURSED_SCROLL.asItem())){
+            if (Screen.hasShiftDown() && EnigmaticLegacyCompact.isCursedScroll(e.getItemStack())){
                 e.getToolTip().add(Component.translatable("tooltip.dreamtinker.cursed_scroll").withStyle(ChatFormatting.RED));
             }
         }

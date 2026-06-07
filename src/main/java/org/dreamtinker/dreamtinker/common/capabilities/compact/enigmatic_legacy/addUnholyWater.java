@@ -1,8 +1,6 @@
 package org.dreamtinker.dreamtinker.common.capabilities.compact.enigmatic_legacy;
 
-import com.aizistral.enigmaticlegacy.registries.EnigmaticItems;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -13,18 +11,19 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.fluids.DreamtinkerFluids;
+import org.dreamtinker.dreamtinker.utils.CompactUtils.EnigmaticLegacyCompact;
 
 import javax.annotation.Nullable;
 
 public class addUnholyWater {
     public static void attachCaps(AttachCapabilitiesEvent<ItemStack> e) {
         ItemStack stack = e.getObject();
-        if (stack.getItem().equals(EnigmaticItems.UNHOLY_GRAIL)){
+        if (EnigmaticLegacyCompact.isUnholyGrail(stack)){
             // 若对方已实现就不要重复挂
             //if (stack.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM).isPresent())
             //    return;
 
-            e.addCapability(new ResourceLocation(Dreamtinker.MODID, "infinite_unholy_water"),
+            e.addCapability(Dreamtinker.getLocation("infinite_unholy_water"),
                             new ICapabilityProvider() {
                                 private final LazyOptional<IFluidHandlerItem> cap =
                                         LazyOptional.of(() -> new InfiniteWaterHandler(stack));
@@ -74,7 +73,7 @@ public class addUnholyWater {
         public FluidStack drain(FluidStack resource, FluidAction action) {
             if (resource.isEmpty() || resource.getFluid() != DreamtinkerFluids.unholy_water.get())
                 return FluidStack.EMPTY;
-            return new FluidStack(DreamtinkerFluids.unholy_water.get(), resource.getAmount());
+            return new FluidStack(DreamtinkerFluids.unholy_water.get(), Math.min(1000, resource.getAmount()));
         }
 
         @Override

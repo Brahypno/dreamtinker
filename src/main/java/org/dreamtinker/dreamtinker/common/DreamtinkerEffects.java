@@ -34,7 +34,7 @@ public class DreamtinkerEffects {
     public static final RegistryObject<MobEffect> SilverNameBee =
             EFFECT.register("silver_name_bee", () -> new MobEffect(MobEffectCategory.BENEFICIAL, 0x7f7f7f) {});
     public static final RegistryObject<MobEffect> RealDarkness = EFFECT.register("real_darkness", realDarkness::new);
-    public static final RegistryObject<MobEffect> unholy = EL_EFFECT.register("unholy", unholy::new);
+    public static final RegistryObject<MobEffect> unholy = EFFECT.register("unholy", unholy::new);
     public static final RegistryObject<MobEffect> cursed = EFFECT.register("cursed", () -> new MobEffect(MobEffectCategory.HARMFUL, 0xA64DFF) {});
     public static final RegistryObject<thirsty> thirsty = MALUM_EFFECT.register("thirsty", thirsty::new);
 

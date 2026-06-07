@@ -13,11 +13,11 @@
           "values": [
             {
               "type": "forge:mod_loaded",
-              "modid": "enigmaticlegacy"
+              "modid": "malum"
             },
             {
               "type": "dreamtinker:mod_compact_config",
-              "modid": "enigmaticlegacy"
+              "modid": "malum"
             }
           ]
         }
@@ -25,12 +25,12 @@
     }
   ],
   "ingredient": {
-    "item": "enigmaticlegacy:evil_ingot"
+    "item": "malum:soul_stained_steel_ingot"
   },
   "result": {
     "amount": 90,
-    "fluid": "dreamtinker:molten_evil"
+    "fluid": "dreamtinker:molten_soul_stained_steel"
   },
-  "temperature": 1100,
-  "time": 35
+  "temperature": 900,
+  "time": 32
 }

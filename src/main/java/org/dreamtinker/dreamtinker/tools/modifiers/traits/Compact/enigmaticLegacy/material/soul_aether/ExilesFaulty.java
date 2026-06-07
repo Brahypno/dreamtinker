@@ -1,6 +1,5 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.soul_aether;
 
-import com.aizistral.enigmaticlegacy.handlers.SuperpositionHandler;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
@@ -11,6 +10,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import org.dreamtinker.dreamtinker.common.DreamtinkerEffects;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
 import org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.CursedRingBound;
+import org.dreamtinker.dreamtinker.utils.CompactUtils.EnigmaticLegacyCompact;
 import org.dreamtinker.dreamtinker.utils.DTHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -87,7 +87,7 @@ public class ExilesFaulty extends Modifier implements ProjectileHitModifierHook,
             attacker.setAbsorptionAmount(
                     Math.min(attacker.getAbsorptionAmount() + damage, attacker.getMaxHealth()));
         if (attacker instanceof Player player){
-            float cursesPercentage = (float) (SuperpositionHandler.getCurseAmount(player) * ExilesFaultyCurseHPPercentage.get());
+            float cursesPercentage = (float) (EnigmaticLegacyCompact.getCurseAmount(player) * ExilesFaultyCurseHPPercentage.get());
             if (target != null){
                 float targetHealth = 1 < cursesPercentage ? 1 : target.getMaxHealth() * (1 - cursesPercentage);
                 if (targetHealth < target.getHealth())

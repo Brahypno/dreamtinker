@@ -1,5 +1,9 @@
 {
-  "type": "tconstruct:melting",
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "item": "dreamtinker:void_pearl"
+  },
+  "cast_consumed": true,
   "conditions": [
     {
       "type": "forge:or",
@@ -13,24 +17,21 @@
           "values": [
             {
               "type": "forge:mod_loaded",
-              "modid": "malum"
+              "modid": "enigmaticlegacy"
             },
             {
               "type": "dreamtinker:mod_compact_config",
-              "modid": "malum"
+              "modid": "enigmaticlegacy"
             }
           ]
         }
       ]
     }
   ],
-  "ingredient": {
-    "item": "malum:malignant_pewter_nugget"
+  "cooling_time": 31,
+  "fluid": {
+    "amount": 810,
+    "fluid": "dreamtinker:molten_ascending_antimony"
   },
-  "result": {
-    "amount": 10,
-    "fluid": "dreamtinker:molten_malignant_pewter"
-  },
-  "temperature": 1500,
-  "time": 80
+  "result": "enigmaticlegacy:void_pearl"
 }

@@ -1,8 +1,5 @@
 package org.dreamtinker.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy;
 
-import com.aizistral.enigmaticlegacy.effects.GrowingBloodlustEffect;
-import com.aizistral.enigmaticlegacy.handlers.SuperpositionHandler;
-import com.aizistral.enigmaticlegacy.helpers.ItemLoreHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
@@ -32,10 +29,9 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.tools.DreamtinkerModifiers;
+import org.dreamtinker.dreamtinker.utils.CompactUtils.EnigmaticLegacyCompact;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -61,13 +57,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
-import static com.aizistral.enigmaticlegacy.items.EldritchPan.uniqueGainLimit;
-
 public class EldritchPan extends Modifier implements MeleeHitModifierHook, DamageBlockModifierHook, InventoryTickModifierHook, ModifierRemovalHook, TooltipModifierHook, AttributesModifierHook, ValidateModifierHook {
-    public static final ResourceLocation BLOODLUST_ID =
-            new ResourceLocation("enigmaticlegacy", "growing_bloodlust");
-    public static final ResourceLocation HUNGER_ID =
-            new ResourceLocation("enigmaticlegacy", "growing_hunger");
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
@@ -145,24 +135,20 @@ public class EldritchPan extends Modifier implements MeleeHitModifierHook, Damag
     private static final ResourceLocation TAG_PAN_TICKS = new ResourceLocation(Dreamtinker.MODID, "eldritch_tick");
 
     public static MobEffect getBloodlust() {
-        if (!ModList.get().isLoaded("enigmaticlegacy"))
-            return null;
-        return ForgeRegistries.MOB_EFFECTS.getValue(BLOODLUST_ID);
+        return EnigmaticLegacyCompact.growingBloodlust();
     }
 
     public static MobEffect getHunger() {
-        if (!ModList.get().isLoaded("enigmaticlegacy"))
-            return null;
-        return ForgeRegistries.MOB_EFFECTS.getValue(HUNGER_ID);
+        return EnigmaticLegacyCompact.growingHunger();
     }
 
     @Override
     public void addTooltip(IToolStackView tool, @NotNull ModifierEntry modifier, @Nullable Player player, List<Component> tooltip, TooltipKey tooltipKey, TooltipFlag tooltipFlag) {
         if (tooltipKey.isShiftOrUnknown()){
             int kills = tool.getPersistentData().getInt(TAG_PAN);
-            ItemLoreHelper.addLocalizedString(tooltip, "tooltip.enigmaticlegacy.eldritchPanKills1", ChatFormatting.GOLD, new Object[]{kills});
-            if (kills >= uniqueGainLimit.getValue()){
-                ItemLoreHelper.addLocalizedString(tooltip, "tooltip.enigmaticlegacy.eldritchPanKillsMax");
+            EnigmaticLegacyCompact.addLocalizedString(tooltip, "tooltip.enigmaticlegacy.eldritchPanKills1", ChatFormatting.GOLD, kills);
+            if (kills >= EnigmaticLegacyCompact.eldritchPanUniqueGainLimit()){
+                EnigmaticLegacyCompact.addLocalizedString(tooltip, "tooltip.enigmaticlegacy.eldritchPanKillsMax");
             }
         }
     }
@@ -176,9 +162,8 @@ public class EldritchPan extends Modifier implements MeleeHitModifierHook, Damag
             if (isSelected){
                 int currentTicks = tool.getPersistentData().getInt(TAG_PAN_TICKS);
 
-                if (SuperpositionHandler.cannotHunger(player)){
-                    int bloodlustAmplifier = currentTicks / GrowingBloodlustEffect
-                            .ticksPerLevel.getValue();
+                if (EnigmaticLegacyCompact.cannotHunger(player)){
+                    int bloodlustAmplifier = currentTicks / EnigmaticLegacyCompact.bloodlustTicksPerLevel();
 
                     bloodlustAmplifier = Math.min(bloodlustAmplifier, 9);
 
@@ -186,8 +171,7 @@ public class EldritchPan extends Modifier implements MeleeHitModifierHook, Damag
                         player.addEffect(new MobEffectInstance(getBloodlust(),
                                                                MobEffectInstance.INFINITE_DURATION, bloodlustAmplifier, true, true));
                 }else {
-                    int hungerAmplifier = currentTicks / GrowingBloodlustEffect
-                            .ticksPerLevel.getValue();
+                    int hungerAmplifier = currentTicks / EnigmaticLegacyCompact.bloodlustTicksPerLevel();
 
                     hungerAmplifier = Math.min(hungerAmplifier, 9);
 
@@ -196,7 +180,7 @@ public class EldritchPan extends Modifier implements MeleeHitModifierHook, Damag
                                                                MobEffectInstance.INFINITE_DURATION, hungerAmplifier, true, true));
                 }
 
-                com.aizistral.enigmaticlegacy.items.EldritchPan.HOLDING_DURATIONS.put(player, ++currentTicks);
+                EnigmaticLegacyCompact.setEldritchPanHoldingDuration(player, ++currentTicks);
                 tool.getPersistentData().putInt(TAG_PAN_TICKS, ++currentTicks);
             }else {
                 tool.getPersistentData().putInt(TAG_PAN_TICKS, 0);
@@ -211,17 +195,17 @@ public class EldritchPan extends Modifier implements MeleeHitModifierHook, Damag
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
         if (context.getAttacker() instanceof Player player && !player.level().isClientSide){
-            if (SuperpositionHandler.isTheWorthyOne(player)){
-                float lifesteal = (float) (damageDealt * com.aizistral.enigmaticlegacy.items.EldritchPan.lifeSteal.getValue());
+            if (EnigmaticLegacyCompact.isTheWorthyOne(player)){
+                float lifesteal = (float) (damageDealt * EnigmaticLegacyCompact.eldritchPanLifeSteal());
 
                 if (null != getBloodlust() && player.hasEffect(getBloodlust())){
                     int amplifier = 1 + player.getEffect(getBloodlust()).getAmplifier();
-                    lifesteal += (float) ((damageDealt) * (GrowingBloodlustEffect.lifestealBoost.getValue() * amplifier));
+                    lifesteal += (float) ((damageDealt) * (EnigmaticLegacyCompact.bloodlustLifestealBoost() * amplifier));
                 }
 
                 player.heal(lifesteal);
-                float hungersteal = (float) com.aizistral.enigmaticlegacy.items.EldritchPan.hungerSteal.getValue();
-                boolean noHunger = SuperpositionHandler.cannotHunger(player);
+                float hungersteal = (float) EnigmaticLegacyCompact.eldritchPanHungerSteal();
+                boolean noHunger = EnigmaticLegacyCompact.cannotHunger(player);
 
                 if (context.getTarget() instanceof ServerPlayer victim){
                     FoodData victimFood = victim.getFoodData();
@@ -259,12 +243,12 @@ public class EldritchPan extends Modifier implements MeleeHitModifierHook, Damag
                 consumer.accept(Attributes.ATTACK_DAMAGE,
                                 new AttributeModifier(UUID.fromString(tool_attribute_uuid),
                                                       this.getTranslationKey(),
-                                                      com.aizistral.enigmaticlegacy.items.EldritchPan.uniqueDamageGain.getValue() * kills,
+                                                      EnigmaticLegacyCompact.eldritchPanUniqueDamageGain() * kills,
                                                       AttributeModifier.Operation.ADDITION));
                 consumer.accept(Attributes.ARMOR,
                                 new AttributeModifier(UUID.fromString(tool_attribute_uuid),
                                                       this.getTranslationKey(),
-                                                      com.aizistral.enigmaticlegacy.items.EldritchPan.uniqueArmorGain.getValue() * kills,
+                                                      EnigmaticLegacyCompact.eldritchPanUniqueArmorGain() * kills,
                                                       AttributeModifier.Operation.ADDITION));
             }
         }
