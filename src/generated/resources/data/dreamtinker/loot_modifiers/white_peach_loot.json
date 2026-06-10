@@ -19,7 +19,7 @@
     }
   ],
   "drop": {
-    "base_chance": 0.2,
+    "base_chance": 0.1,
     "loot_bonus_count_bonus": 1,
     "max_count": 16
   },

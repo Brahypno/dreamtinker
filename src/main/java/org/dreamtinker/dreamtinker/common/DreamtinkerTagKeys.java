@@ -51,7 +51,7 @@ public class DreamtinkerTagKeys {
     }
 
     public static class Items {
-        private static TagKey<Item> forgeTag(String name) {
+        public static TagKey<Item> forgeTag(String name) {
             return TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("forge", name));
         }
 

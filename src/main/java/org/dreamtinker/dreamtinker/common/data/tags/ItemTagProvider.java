@@ -147,6 +147,7 @@ public class ItemTagProvider extends ItemTagsProvider {
             .addTags(Items.raw_stibnite, Items.raw_orichalcum, Items.raw_coldIron, Items.raw_ShadowSilver, Items.raw_TransmutationGold);
 
         this.tag(ItemTags.FOX_FOOD).add(white_peach.get());
+        this.tag(Items.forgeTag("peach")).add(white_peach.get());
         addItemsTags(narcissus.asItem(), ItemTags.SMALL_FLOWERS, ItemTags.FLOWERS);
 
         this.tag(ItemTags.BEACON_PAYMENT_ITEMS)

@@ -76,7 +76,7 @@ public class DreamtinkerGlobalLootModifierProvider extends GlobalLootModifierPro
             ExtraDropBuilder.create(Ingredient.of(DreamtinkerCommon.white_peach.get()))
                             .condition(noSilkTouch())
                             .blocks(BlockPredicate.tag(DreamtinkerTagKeys.Blocks.drop_peach))
-                            .drop(0.2D, 1.0D, 16, 1)
+                            .drop(0.1D, 1.0D, 16, 1)
                             .build()
         );
     }
