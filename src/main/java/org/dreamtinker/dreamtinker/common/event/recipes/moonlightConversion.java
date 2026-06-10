@@ -31,6 +31,7 @@ public class moonlightConversion {
     private static final Map<UUID, Long> nextConversionTick = new HashMap<>();
     private static final Map<UUID, Long> nextHintTick = new HashMap<>();
 
+    private static final int TRACKING_INTERVAL = 5;
     private static final int CONVERSION_INTERVAL = 20;
     private static final int HINT_INTERVAL = 20;
     private static final List<MaterialStatsId> MOONLIGHT_PART_STATS = List.of(
@@ -58,6 +59,9 @@ public class moonlightConversion {
 
         Level level = event.level;
         long gameTime = level.getGameTime();
+        if (gameTime % TRACKING_INTERVAL != 0)
+            return;
+
         int moonPhase = level.getMoonPhase();
         boolean allowedMoonlight = level.isNight() && (moonPhase == 0 || moonPhase == 4);
 
@@ -134,12 +138,21 @@ public class moonlightConversion {
     public static void onLevelUnload(LevelEvent.Unload event) {
         if (!(event.getLevel() instanceof Level level) || level.isClientSide)
             return;
-        trackedBlueIce.entrySet().removeIf(entry -> entry.getValue().level() == level);
+        trackedBlueIce.entrySet().removeIf(entry -> {
+            boolean removing = entry.getValue().level() == level;
+            if (removing){
+                nextConversionTick.remove(entry.getKey());
+                nextHintTick.remove(entry.getKey());
+            }
+            return removing;
+        });
     }
 
     @SubscribeEvent
     public static void onServerStopped(ServerStoppedEvent event) {
         trackedBlueIce.clear();
+        nextConversionTick.clear();
+        nextHintTick.clear();
         DTPartInfoLookup.clearCaches();
     }
 }

@@ -17,6 +17,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.entity.PartEntity;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.dreamtinker.dreamtinker.Dreamtinker;
 import org.dreamtinker.dreamtinker.network.DNetwork;
 import org.dreamtinker.dreamtinker.network.S2CVibeBarFx;
 import slimeknights.tconstruct.library.client.materials.MaterialRenderInfo;
@@ -89,7 +90,7 @@ public class DTHelper {
         for (MobEffect effect : effects) {
             ResourceLocation id = ForgeRegistries.MOB_EFFECTS.getKey(effect);
             String key = effect.getDescriptionId();
-            System.out.println("Random effect → {" + id + "} ({" + key + "})");
+            Dreamtinker.LOGGER.debug("Random effect -> {} ({})", id, key);
         }
     }
 

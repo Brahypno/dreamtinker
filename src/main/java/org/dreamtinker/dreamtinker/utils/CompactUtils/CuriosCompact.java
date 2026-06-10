@@ -50,29 +50,33 @@ public class CuriosCompact {
     }
 
     private static int doFindModifierNum(Player player, ModifierId id) {
-        CuriosApi.getCuriosInventory(player).map(h -> {
+        return CuriosApi.getCuriosInventory(player).map(h -> {
             int result = 0;
-            for (String ids : h.getCurios().keySet()) {
-                ItemStack st = getFirstFromSlot(h, ids);
-                if (st.is(TinkerTags.Items.MODIFIABLE))
-                    result += ModifierUtil.getModifierLevel(st, id);
+            for (ICurioStacksHandler handler : h.getCurios().values()) {
+                IDynamicStackHandler stacks = handler.getStacks();
+                for (int i = 0; i < stacks.getSlots(); i++) {
+                    ItemStack stack = stacks.getStackInSlot(i);
+                    if (stack.is(TinkerTags.Items.MODIFIABLE))
+                        result += ModifierUtil.getModifierLevel(stack, id);
+                }
             }
             return result;
-        });
-        return 0;
+        }).orElse(0);
     }
 
     private static List<ItemStack> doFindListItemStack(Player player) {
-        CuriosApi.getCuriosInventory(player).map(h -> {
+        return CuriosApi.getCuriosInventory(player).map(h -> {
             List<ItemStack> result = new ArrayList<>();
-            for (String ids : h.getCurios().keySet()) {
-                ItemStack st = getFirstFromSlot(h, ids);
-                if (st.is(TinkerTags.Items.MODIFIABLE))
-                    result.add(st);
+            for (ICurioStacksHandler handler : h.getCurios().values()) {
+                IDynamicStackHandler stacks = handler.getStacks();
+                for (int i = 0; i < stacks.getSlots(); i++) {
+                    ItemStack stack = stacks.getStackInSlot(i);
+                    if (stack.is(TinkerTags.Items.MODIFIABLE))
+                        result.add(stack);
+                }
             }
             return result;
-        });
-        return List.of();
+        }).orElse(List.of());
     }
 
     private static void doDamageAllCurios(LivingEntity target, int amount, Predicate<ItemStack> filter) {
@@ -92,10 +96,13 @@ public class CuriosCompact {
     private static Optional<ItemStack> doFindModifierItem(Player player, ModifierId id) {
         LazyOptional<ICuriosItemHandler> opt = CuriosApi.getCuriosInventory(player);
         return Optional.of(opt.map(h -> {
-            for (String ids : h.getCurios().keySet()) {
-                ItemStack st = getFirstFromSlot(h, ids);
-                if (st.is(TinkerTags.Items.MODIFIABLE) && 0 < ModifierUtil.getModifierLevel(st, id))
-                    return st;
+            for (ICurioStacksHandler handler : h.getCurios().values()) {
+                IDynamicStackHandler stacks = handler.getStacks();
+                for (int i = 0; i < stacks.getSlots(); i++) {
+                    ItemStack stack = stacks.getStackInSlot(i);
+                    if (stack.is(TinkerTags.Items.MODIFIABLE) && 0 < ModifierUtil.getModifierLevel(stack, id))
+                        return stack;
+                }
             }
             return ItemStack.EMPTY;
         }).orElse(ItemStack.EMPTY));

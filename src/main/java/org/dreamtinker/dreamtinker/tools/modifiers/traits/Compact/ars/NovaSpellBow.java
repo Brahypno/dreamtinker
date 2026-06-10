@@ -56,7 +56,6 @@ public class NovaSpellBow extends NoLevelsModifier implements ProjectileLaunchMo
             return;
         ItemStack bowStack = player.getItemInHand(shooter.getUsedItemHand());
         ItemStack specialAMMO = findAmmo(player);
-        System.out.println(specialAMMO);
 
         // 5) 取施法器 & spell
         ISpellCaster caster = CasterCapability.getSpellCaster(tool);

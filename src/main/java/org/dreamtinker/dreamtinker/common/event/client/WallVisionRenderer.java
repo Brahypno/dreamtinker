@@ -27,12 +27,21 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.dreamtinker.dreamtinker.Dreamtinker;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = Dreamtinker.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class WallVisionRenderer {
+    private static final int CACHE_REFRESH_TICKS = 5;
+    private static final List<HighlightedBlock> HIGHLIGHT_CACHE = new ArrayList<>();
+    private static Level cachedLevel;
+    private static BlockPos cachedCenter;
+    private static TagKey<Block> cachedTag;
+    private static int cachedRadius = -1;
+    private static long nextCacheRefreshTick = -1L;
 
     @SubscribeEvent
     public static void onRenderLevel(RenderLevelStageEvent event) {
-        // 只在特定阶段渲染，避免和别的通道打架
         if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_TRANSLUCENT_BLOCKS)
             return;
 
@@ -48,10 +57,11 @@ public class WallVisionRenderer {
         TagKey<Block> tag = ClientWallVisionState.getHighlightTag();
         if (tag == null)
             return;
-        // 渲染范围（自己调）
+
         int radius = ClientWallVisionState.Radius();
         if (radius <= 0)
             return;
+
         PoseStack poseStack = event.getPoseStack();
         Camera camera = event.getCamera();
         Vec3 camPos = camera.getPosition();
@@ -59,15 +69,45 @@ public class WallVisionRenderer {
         double camX = camPos.x();
         double camY = camPos.y();
         double camZ = camPos.z();
-        
+
         BlockPos center = player.blockPosition();
+        refreshHighlightCache(level, center, tag, radius);
 
         MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
         VertexConsumer builder = buffer.getBuffer(ModRenderTypes.WALL_VISION_LINES);
 
         poseStack.pushPose();
-        // 把世界坐标移到相机原点，避免抖动
         poseStack.translate(-camX, -camY, -camZ);
+
+        for (HighlightedBlock block : HIGHLIGHT_CACHE) {
+            BlockPos pos = block.pos();
+            block.shape().forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) -> {
+                LevelRenderer.renderLineBox(
+                        poseStack,
+                        builder,
+                        pos.getX() + minX, pos.getY() + minY, pos.getZ() + minZ,
+                        pos.getX() + maxX, pos.getY() + maxY, pos.getZ() + maxZ,
+                        0.1F, 0.8F, 1.0F, 1.0F
+                );
+            });
+        }
+
+        poseStack.popPose();
+        buffer.endBatch(ModRenderTypes.WALL_VISION_LINES);
+    }
+
+    private static void refreshHighlightCache(Level level, BlockPos center, TagKey<Block> tag, int radius) {
+        long gameTime = level.getGameTime();
+        if (level == cachedLevel && radius == cachedRadius && tag == cachedTag && center.equals(cachedCenter) && gameTime < nextCacheRefreshTick){
+            return;
+        }
+
+        HIGHLIGHT_CACHE.clear();
+        cachedLevel = level;
+        cachedCenter = center.immutable();
+        cachedTag = tag;
+        cachedRadius = radius;
+        nextCacheRefreshTick = gameTime + CACHE_REFRESH_TICKS;
 
         BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
         for (int dx = -radius; dx <= radius; dx++) {
@@ -79,35 +119,19 @@ public class WallVisionRenderer {
                         continue;
 
                     VoxelShape shape = state.getShape(level, pos, CollisionContext.empty());
-                    if (shape.isEmpty())
-                        continue;
-
-                    // 通过墙也可见：lines 本身不做深度测试（RenderType.lines 默认是深度测试的，
-                    // 你可以自定义一个 render type 或者直接开启线模式 + 禁用深度，简单做法如下）
-                    shape.forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) -> {
-                        LevelRenderer.renderLineBox(
-                                poseStack,
-                                builder,
-                                pos.getX() + minX, pos.getY() + minY, pos.getZ() + minZ,
-                                pos.getX() + maxX, pos.getY() + maxY, pos.getZ() + maxZ,
-                                0.1F, 0.8F, 1.0F, 1.0F  // 线条颜色 RGBA：青蓝发光感
-                        );
-                    });
+                    if (!shape.isEmpty())
+                        HIGHLIGHT_CACHE.add(new HighlightedBlock(pos.immutable(), shape));
                 }
             }
         }
-
-        poseStack.popPose();
-        buffer.endBatch(RenderType.lines());
     }
+
+    private record HighlightedBlock(BlockPos pos, VoxelShape shape) {}
 
     @OnlyIn(Dist.CLIENT)
     public static class ClientWallVisionState {
         private static boolean enabled = false;
         private static int Radius = 0;
-
-
-        // 当前生效的 tag（方块 tag 为例）
         private static TagKey<Block> highlightTag = null;
 
         public static void setEnabled(boolean value, int radius) {
@@ -127,7 +151,6 @@ public class WallVisionRenderer {
     }
 
     public static class ModRenderTypes extends RenderType {
-        // 只是为了调用父类私有构造，直接照抄就行
         private ModRenderTypes(
                 String name, VertexFormat format, VertexFormat.Mode mode,
                 int bufferSize, boolean affectsCrumbling, boolean sortOnUpload,
@@ -140,20 +163,17 @@ public class WallVisionRenderer {
                 DefaultVertexFormat.POSITION_COLOR,
                 VertexFormat.Mode.LINES,
                 256,
-                false,  // affectsCrumbling
-                false,  // sortOnUpload
+                false,
+                false,
                 RenderType.CompositeState.builder()
                                          .setShaderState(RENDERTYPE_LINES_SHADER)
-                                         .setLineState(new LineStateShard(java.util.OptionalDouble.of(2.0))) // 线条粗一点
+                                         .setLineState(new LineStateShard(java.util.OptionalDouble.of(2.0)))
                                          .setLayeringState(VIEW_OFFSET_Z_LAYERING)
                                          .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-                                         .setDepthTestState(NO_DEPTH_TEST) // ★ 关键：不做深度测试
+                                         .setDepthTestState(NO_DEPTH_TEST)
                                          .setCullState(NO_CULL)
                                          .setWriteMaskState(COLOR_WRITE)
                                          .createCompositeState(false)
         );
     }
-
-
 }
-

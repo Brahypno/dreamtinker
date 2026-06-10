@@ -25,6 +25,7 @@ import static org.dreamtinker.dreamtinker.config.DreamtinkerCachedConfig.voidPea
 public class voidPearlConversion {
     private static final Map<UUID, ItemEntity> trackedEnderPearl = new HashMap<>();
     private static final Map<UUID, Vec3> trackedPosition = new HashMap<>();
+    private static final int FALL_CHECK_INTERVAL = 5;
 
     @SubscribeEvent
     public static void onEntityJoinWorld(EntityJoinLevelEvent event) {
@@ -58,6 +59,7 @@ public class voidPearlConversion {
                 Vec3 tgt = trackedPosition.get(entry.getKey());
                 if (tgt == null){
                     iterator.remove();
+                    trackedPosition.remove(entry.getKey());
                     continue;
                 }
                 Vec3 delta = tgt.subtract(pos);
@@ -83,6 +85,9 @@ public class voidPearlConversion {
                     item.noPhysics = true;
                 }
             }else {
+                if (level.getGameTime() % FALL_CHECK_INTERVAL != 0)
+                    continue;
+
                 double conversionLine = level.getMinBuildHeight() - 56.0D;
 
                 if (item.getY() < conversionLine){

@@ -61,17 +61,23 @@ public abstract class EntityMeltingModuleMixin {
     public void dreamtinker$interactWithEntities(CallbackInfoReturnable<Boolean> cir) {
         if (!(ModList.get().isLoaded("ars_nouveau") && !configCompactDisabled("ars_nouveau")))
             return;
-        int minX = Mth.floor(bounds.get().minX);
-        int minY = Mth.floor(bounds.get().minY);
-        int minZ = Mth.floor(bounds.get().minZ);
-        int maxX = Mth.floor(bounds.get().maxX);
-        int maxY = Mth.floor(bounds.get().maxY);
-        int maxZ = Mth.floor(bounds.get().maxZ);
+
+        Level level = getLevel();
+        if (level == null)
+            return;
+
+        AABB box = bounds.get();
+        int minX = Mth.floor(box.minX);
+        int minY = Mth.floor(box.minY);
+        int minZ = Mth.floor(box.minZ);
+        int maxX = Mth.floor(box.maxX);
+        int maxY = Mth.floor(box.maxY);
+        int maxZ = Mth.floor(box.maxZ);
 
         Boolean canMelt = null;
         boolean melted = false;
         for (BlockPos pos : BlockPos.betweenClosed(minX, minY, minZ, maxX, maxY, maxZ)) {
-            BlockEntity be = getLevel().getBlockEntity(pos);
+            BlockEntity be = level.getBlockEntity(pos);
             if (be instanceof MobJarTile tile && tile.getEntity() instanceof LivingEntity le){
                 Entity entity = tile.getEntity();
                 EntityType<?> type = entity.getType();
@@ -104,6 +110,8 @@ public abstract class EntityMeltingModuleMixin {
                             melted = true;
                         }
                     }
+                }else if (canMelt == Boolean.FALSE){
+                    break;
                 }
             }
         }

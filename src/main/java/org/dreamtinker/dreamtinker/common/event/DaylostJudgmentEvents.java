@@ -220,7 +220,12 @@ public final class DaylostJudgmentEvents {
     @SubscribeEvent
     public static void buildSunlessPressure(TickEvent.PlayerTickEvent event) {
         if (event.phase != TickEvent.Phase.END || event.player.level().isClientSide()
-            || event.player.level().getGameTime() % 20 != 0 || getSunlessLevel(event.player) <= 0){
+            || event.player.level().getGameTime() % 20 != 0){
+            return;
+        }
+
+        int sunlessLevel = getSunlessLevel(event.player);
+        if (sunlessLevel <= 0){
             return;
         }
 
@@ -230,11 +235,11 @@ public final class DaylostJudgmentEvents {
         }
         if (hasHangingSun(player)){
             addCoronaScorch(player, HANGING_SUN_SCORCH_PER_SECOND);
-            applyHangingSunPressure(player);
+            applyHangingSunPressure(player, sunlessLevel);
         }else {
             addCoronaScorch(player, PASSIVE_SCORCH_PER_SECOND);
         }
-        applyTargetingDaylost(player);
+        applyTargetingDaylost(player, sunlessLevel);
     }
 
     @SubscribeEvent(priority = EventPriority.HIGH)
@@ -422,7 +427,7 @@ public final class DaylostJudgmentEvents {
         return Math.max(0.40F, 0.75F - getCoronaScorch(entity) * 0.0035F);
     }
 
-    private static void applyHangingSunPressure(ServerPlayer player) {
+    private static void applyHangingSunPressure(ServerPlayer player, int sunlessLevel) {
         if (!(player.level() instanceof ServerLevel level)){
             return;
         }
@@ -430,7 +435,7 @@ public final class DaylostJudgmentEvents {
                 LivingEntity.class,
                 player.getBoundingBox().inflate(HANGING_SUN_RANGE),
                 target -> target != player && target.isAlive() && !target.isAlliedTo(player)
-        ).forEach(target -> applyDaylostFromSunless(target, player, getSunlessLevel(player)));
+        ).forEach(target -> applyDaylostFromSunless(target, player, sunlessLevel));
 
         float recoil = HANGING_SUN_MELTDOWN_BASE_DAMAGE
                        + getCoronaScorch(player) * HANGING_SUN_MELTDOWN_DAMAGE_PER_SCORCH;
@@ -440,7 +445,7 @@ public final class DaylostJudgmentEvents {
         );
     }
 
-    private static void applyTargetingDaylost(ServerPlayer player) {
+    private static void applyTargetingDaylost(ServerPlayer player, int sunlessLevel) {
         if (!(player.level() instanceof ServerLevel level)){
             return;
         }
@@ -448,7 +453,7 @@ public final class DaylostJudgmentEvents {
                 Mob.class,
                 player.getBoundingBox().inflate(TARGETING_RANGE),
                 mob -> mob.isAlive() && mob.getTarget() == player
-        ).forEach(mob -> applyDaylostFromSunless(mob, player, getSunlessLevel(player)));
+        ).forEach(mob -> applyDaylostFromSunless(mob, player, sunlessLevel));
     }
 
     private record ReducedAttack(UUID attackerId, long tick) {}

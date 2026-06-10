@@ -94,7 +94,7 @@ public class DTModifierCheck {
 
     public static boolean haveModifierIn(LivingEntity entity, ModifierId modifierId) {
         return ModifierInBody(entity, modifierId) || ModifierInHand(entity, modifierId) ||
-               entity instanceof Player player && ItemStack.EMPTY != CuriosCompact.findFirstItemWithModifier(player, modifierId);
+               entity instanceof Player player && !CuriosCompact.findFirstItemWithModifier(player, modifierId).isEmpty();
     }
 
 
