@@ -29,19 +29,19 @@
   "spirits": [
     {
       "type": "wicked",
-      "count": 6
+      "count": 3
     },
     {
       "type": "sacred",
-      "count": 6
+      "count": 3
     },
     {
       "type": "eldritch",
-      "count": 6
+      "count": 3
     },
     {
       "type": "infernal",
-      "count": 6
+      "count": 3
     }
   ]
 }

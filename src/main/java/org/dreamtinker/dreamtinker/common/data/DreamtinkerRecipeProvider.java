@@ -2,6 +2,7 @@ package org.dreamtinker.dreamtinker.common.data;
 
 import com.sammy.malum.core.systems.spirit.MalumSpiritType;
 import com.sammy.malum.data.recipe.builder.SpiritInfusionRecipeBuilder;
+import com.sammy.malum.data.recipe.builder.VoidFavorRecipeBuilder;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
 import com.sammy.malum.registry.common.block.BlockRegistry;
 import com.sammy.malum.registry.common.item.ItemRegistry;
@@ -1129,13 +1130,13 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                 .addExtraItem(ItemRegistry.MALIGNANT_PEWTER_INGOT.get(), 1)
                 .addExtraItem(ItemRegistry.CURSED_SAP.get(), 3)
                 .addExtraItem(ItemRegistry.FUSED_CONSCIOUSNESS.get(), 1)
-                .addSpirit(SpiritTypeRegistry.WICKED_SPIRIT, 6)
-                .addSpirit(SpiritTypeRegistry.SACRED_SPIRIT, 6)
-                .addSpirit(SpiritTypeRegistry.ELDRITCH_SPIRIT, 6)
-                .addSpirit(SpiritTypeRegistry.INFERNAL_SPIRIT, 6)
-                .build(consumer, "malum_" + DreamtinkerCommon.malignant_gluttony.getId().getPath());
+                .addSpirit(SpiritTypeRegistry.WICKED_SPIRIT, 3)
+                .addSpirit(SpiritTypeRegistry.SACRED_SPIRIT, 3)
+                .addSpirit(SpiritTypeRegistry.ELDRITCH_SPIRIT, 3)
+                .addSpirit(SpiritTypeRegistry.INFERNAL_SPIRIT, 3)
+                .build(consumer, DreamtinkerCommon.malignant_gluttony.getId().getPath());
         new SpiritInfusionRecipeBuilder(Items.GLASS_BOTTLE, 1,
-                                        PotionUtils.setPotion(new ItemStack(Items.POTION, 4), DreamtinkerEffects.ArcanaJuicePotion.get()))
+                                        PotionUtils.setPotion(new ItemStack(Items.POTION, 8), DreamtinkerEffects.ArcanaJuicePotion.get()))
                 .addExtraItem(ItemRegistry.NULL_SLATE.get(), 8)
                 .addExtraItem(ItemRegistry.MNEMONIC_FRAGMENT.get(), 8)
                 .addExtraItem(ItemRegistry.CURSED_SAP.get(), 2)
@@ -1144,7 +1145,9 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                 .addSpirit(SpiritTypeRegistry.AQUEOUS_SPIRIT, 6)
                 .addSpirit(SpiritTypeRegistry.SACRED_SPIRIT, 6)
                 .addSpirit(SpiritTypeRegistry.ELDRITCH_SPIRIT, 6)
-                .build(consumer, "malum_potion/arcana_juice");
+                .build(consumer, "potion/arcana_juice");
+        new VoidFavorRecipeBuilder(Ingredient.of(Tags.Items.ENDER_PEARLS), new ItemStack(DreamtinkerCommon.void_pearl.get()))
+                .build(consumer, "void_pearl");
 
         SeveringRecipeBuilder.severing(EntityIngredient.of(EntityType.ENDER_DRAGON), DreamtinkerCommon.snake_fang.get())
                              .save(consumer, location(serving_folder + "snake_fang"));
