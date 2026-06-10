@@ -4,10 +4,10 @@
     "item": "minecraft:flint"
   },
   "cast_consumed": true,
-  "cooling_time": 80,
+  "cooling_time": 89,
   "fluid": {
     "amount": 250,
-    "tag": "tconstruct:molten_clay"
+    "tag": "tconstruct:seared_stone"
   },
   "result": "dreamtinker:fifth_stone"
 }
