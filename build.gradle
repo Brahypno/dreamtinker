@@ -101,8 +101,6 @@ minecraft {
 
         server {
             property 'forge.enabledGameTestNamespaces', mod_id
-            arg "-mixin.config=${mod_id}.mixins.json"
-            arg "-mixin.config=${mod_id}.compact.mixins.json"
             args '--nogui'
         }
 

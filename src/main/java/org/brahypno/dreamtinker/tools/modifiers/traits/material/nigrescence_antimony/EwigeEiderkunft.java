@@ -1,0 +1,120 @@
+package org.brahypno.dreamtinker.tools.modifiers.traits.material.nigrescence_antimony;
+
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import org.brahypno.dreamtinker.Dreamtinker;
+import org.brahypno.dreamtinker.utils.DTMessages;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import slimeknights.mantle.client.TooltipKey;
+import slimeknights.tconstruct.library.modifiers.Modifier;
+import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.behavior.ToolDamageModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.build.ModifierRemovalHook;
+import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
+import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
+import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
+import slimeknights.tconstruct.library.tools.nbt.ToolStack;
+
+import java.util.List;
+import java.util.UUID;
+import java.util.function.BiConsumer;
+
+public class EwigeEiderkunft extends Modifier implements ToolDamageModifierHook, ModifierRemovalHook, TooltipModifierHook, AttributesModifierHook {
+    private static final ResourceLocation TAG_TOMB = Dreamtinker.getLocation("ewige_widerkunft");
+
+    @Override
+    public int onDamageTool(IToolStackView tool, ModifierEntry modifier, int amount, @Nullable LivingEntity holder) {
+        int current = tool.getCurrentDurability();
+        ModDataNBT nbt = tool.getPersistentData();
+        int breaks = nbt.getInt(TAG_TOMB) + 1;
+
+        long tomb_number = amount * Math.round(Math.log1p(breaks));
+        if (current - tomb_number <= 1){
+            nbt.putInt(TAG_TOMB, breaks);
+            tool.setDamage(0);
+            if (holder != null){
+                DTMessages.clientChat(Component.literal("13=1").withStyle(this.getDisplayName()
+                                                                              .getStyle()), false);
+                holder.level().explode(holder,
+                                       holder.level().damageSources().explosion(holder, holder),
+                                       null,
+                                       holder.getX(),
+                                       holder.getY(),
+                                       holder.getZ(),
+                                       (float) Math.sqrt(breaks % 13),
+                                       true,
+                                       Level.ExplosionInteraction.MOB);
+            }
+            return 0;
+        }
+        return Math.toIntExact(tomb_number);
+    }
+
+    @Override
+    public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
+        if (!tool.isBroken() && modifier.getLevel() > 0 && EquipmentSlot.MAINHAND == slot){
+            ModDataNBT nbt = tool.getPersistentData();
+            int breaks = nbt.getInt(TAG_TOMB);
+            if (breaks > 0){
+                double buff = 13 * Math.log1p(breaks) / 100f;
+                consumer.accept(Attributes.ATTACK_DAMAGE,
+                                new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
+                                                      this.getTranslationKey(),
+                                                      buff,
+                                                      AttributeModifier.Operation.MULTIPLY_TOTAL));
+                consumer.accept(Attributes.ATTACK_SPEED,
+                                new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
+                                                      this.getTranslationKey(),
+                                                      buff,
+                                                      AttributeModifier.Operation.MULTIPLY_TOTAL));
+                consumer.accept(Attributes.ATTACK_KNOCKBACK,
+                                new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
+                                                      this.getTranslationKey(),
+                                                      buff,
+                                                      AttributeModifier.Operation.MULTIPLY_TOTAL));
+            }
+        }
+    }
+
+    @Override
+    public Component onRemoved(IToolStackView tool, Modifier modifier) {
+        if (0 < tool.getPersistentData().getInt(TAG_TOMB))
+            return Component.translatable(this.getTranslationKey() + ".salvage").withStyle((style) -> style.withColor(this.getTextColor()));
+        return null;
+    }
+
+    @Override
+    public void addTooltip(IToolStackView tool, @NotNull ModifierEntry modifier, @javax.annotation.Nullable Player player, List<Component> tooltip, TooltipKey tooltipKey, TooltipFlag tooltipFlag) {
+        if (tool instanceof ToolStack && tooltipKey.isShiftOrUnknown()){
+            ModDataNBT nbt = tool.getPersistentData();
+            int count = nbt.getInt(TAG_TOMB);
+            if (count > 0){
+                tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.ewige_widerkunft").append(String.valueOf(count))
+                                     .withStyle(this.getDisplayName().getStyle()));
+            }
+        }
+    }
+
+    @Override
+    public int getPriority() {
+        return Integer.MIN_VALUE;
+    }
+
+    @Override
+    protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.TOOL_DAMAGE, ModifierHooks.REMOVE, ModifierHooks.TOOLTIP, ModifierHooks.ATTRIBUTES);
+        super.registerHooks(hookBuilder);
+    }
+}

@@ -1,0 +1,273 @@
+package org.brahypno.dreamtinker.smeltery;
+
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTab.Output;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.registries.RegistryObject;
+import org.brahypno.dreamtinker.Dreamtinker;
+import org.brahypno.dreamtinker.DreamtinkerModule;
+import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
+import org.brahypno.dreamtinker.smeltery.block.component.AshenAlloySwitchBlock;
+import org.brahypno.dreamtinker.smeltery.block.component.AshenButtonBlock;
+import org.brahypno.dreamtinker.smeltery.block.component.AshenTankBlock;
+import org.brahypno.dreamtinker.smeltery.block.controller.TransmuteControllerBlock;
+import org.brahypno.dreamtinker.smeltery.block.entity.component.AshenTankBlockEntity;
+import org.brahypno.dreamtinker.smeltery.block.entity.component.TransmuteComponentBlockEntity;
+import org.brahypno.dreamtinker.smeltery.block.entity.controller.TransmuteBlockEntity;
+import org.brahypno.dreamtinker.tools.DreamtinkerToolParts;
+import slimeknights.mantle.registration.object.BuildingBlockObject;
+import slimeknights.mantle.registration.object.EnumObject;
+import slimeknights.mantle.registration.object.FenceBuildingBlockObject;
+import slimeknights.mantle.registration.object.ItemObject;
+import slimeknights.mantle.util.RetexturedHelper;
+import slimeknights.tconstruct.common.registration.CastItemObject;
+import slimeknights.tconstruct.shared.block.ClearGlassPaneBlock;
+import slimeknights.tconstruct.shared.block.PlaceBlockDispenserBehavior;
+import slimeknights.tconstruct.shared.block.SoulGlassPaneBlock;
+import slimeknights.tconstruct.smeltery.block.component.*;
+import slimeknights.tconstruct.smeltery.block.controller.ControllerBlock;
+import slimeknights.tconstruct.smeltery.block.entity.component.SmelteryInputOutputBlockEntity;
+import slimeknights.tconstruct.smeltery.item.TankItem;
+
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+
+import static org.brahypno.dreamtinker.Dreamtinker.configCompactDisabled;
+
+public class DreamTinkerSmeltery extends DreamtinkerModule {
+
+    private static final BlockBehaviour.StatePredicate NEVER = (state, level, pos) -> false;
+    private static final Item.Properties ITEM_PROPS = (new Item.Properties()).stacksTo(64);
+    public static final RegistryObject<CreativeModeTab> tabSmeltery = TABS.register(
+            "smeltery", () -> CreativeModeTab.builder().title(Dreamtinker.makeTranslation("itemGroup", "smeltery"))
+                                             .icon(() -> new ItemStack(DreamTinkerSmeltery.transmuteController))
+                                             .displayItems(DreamTinkerSmeltery::addTabItems)
+                                             .withTabsBefore(DreamtinkerToolParts.PART.getId())
+                                             .build());
+    static Supplier<BlockBehaviour.Properties> ashen =
+            () -> builder(MapColor.TERRACOTTA_BROWN, SoundType.BASALT)
+                    .instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops()
+                    .strength(9.0F, 35f).lightLevel(s -> s.getValue(
+                            ControllerBlock.ACTIVE) ? 13 : 0);
+
+    public static final ItemObject<Block> enderMortar =
+            BLOCKS.register("ender_mortar", builder(MapColor.COLOR_LIGHT_GRAY, SoundType.SCULK).instrument(NoteBlockInstrument.SNARE)
+                                                                                               .strength(3.0f).friction(0.8F),
+                            TOOLTIP_BLOCK_ITEM);
+
+    public static final RegistryObject<Item> ashenBrick = ITEMS.register("ashen_brick", () -> new Item(ITEM_PROPS));
+
+    public static final ItemObject<Block> ashenLamp =
+            BLOCKS.register("ashen_lamp", () -> new SearedBlock(ashenSolidProps(1).lightLevel(state -> 15), false), TOOLTIP_BLOCK_ITEM);
+
+    // ashen blocks
+    public static final ItemObject<Block> ashenStone, polishedAshenStone, chiseledAshenBricks, ashenHeater, ashenAccel, ashenAlloySwitch, ashenMeltSwitch;
+    public static final FenceBuildingBlockObject ashenBricks;
+    public static final BuildingBlockObject ashenRoad;
+
+    static {
+        Properties properties = ashenSolidProps(1);
+        Supplier<SearedPillarBlock> pillar = () -> new SearedPillarBlock(properties, false);
+        ashenStone = BLOCKS.register("ashen_stone", pillar, TOOLTIP_BLOCK_ITEM);
+        polishedAshenStone = BLOCKS.register("polished_ashen_stone", pillar, TOOLTIP_BLOCK_ITEM);
+        Supplier<SearedBlock> block = () -> new SearedBlock(properties, false);
+        ashenBricks = BLOCKS.registerFenceBuilding("ashen_bricks", block, TOOLTIP_BLOCK_ITEM);
+        ashenRoad = BLOCKS.registerBuilding("ashen_road", block, TOOLTIP_BLOCK_ITEM);
+        chiseledAshenBricks = BLOCKS.register("chiseled_ashen_bricks", block, TOOLTIP_BLOCK_ITEM);
+
+        ashenHeater = BLOCKS.register("ashen_heater", block, TOOLTIP_BLOCK_ITEM);
+
+        ashenAccel = BLOCKS.register("ashen_accelerator", block, TOOLTIP_BLOCK_ITEM);
+
+
+        ashenAlloySwitch = BLOCKS.register("ashen_alloy_switch", () -> new AshenAlloySwitchBlock(properties), TOOLTIP_BLOCK_ITEM);
+        ashenMeltSwitch = BLOCKS.register("ashen_melt_switch", () -> new AshenButtonBlock(properties, false, 2), TOOLTIP_BLOCK_ITEM);
+    }
+
+    // glass
+    public static final ItemObject<SearedGlassBlock> ashenGlass;
+    public static final ItemObject<ClearGlassPaneBlock> ashenGlassPane;
+    public static final ItemObject<SearedTintedGlassBlock> ashenTintedGlass;
+
+    static {
+        Properties ashen = ashenNonSolidProps(SoundType.GLASS);
+        ashenGlass = BLOCKS.register("ashen_glass", () -> new SearedGlassBlock(ashen), TOOLTIP_BLOCK_ITEM);
+        ashenTintedGlass = BLOCKS.register("ashen_tinted_glass", () -> new SearedTintedGlassBlock(ashen), TOOLTIP_BLOCK_ITEM);
+        ashenGlassPane = BLOCKS.register("ashen_glass_pane", () -> new ClearGlassPaneBlock(ashen), TOOLTIP_BLOCK_ITEM);
+    }
+
+    // soul glass
+    public static final ItemObject<SearedSoulGlassBlock> ashenSoulGlass;
+    public static final ItemObject<SoulGlassPaneBlock> ashenSoulGlassPane;
+
+    static {
+        Properties ashen = ashenNonSolidProps(SoundType.GLASS).noCollission().speedFactor(0.1f).isViewBlocking((state, getter, pos) -> true);
+        ashenSoulGlass = BLOCKS.register("ashen_soul_glass", () -> new SearedSoulGlassBlock(ashen), TOOLTIP_BLOCK_ITEM);
+        ashenSoulGlassPane = BLOCKS.register("ashen_soul_glass_pane", () -> new SoulGlassPaneBlock(ashen), TOOLTIP_BLOCK_ITEM);
+    }
+
+    public static final ItemObject<Block> ashenDrain, ashenDuct, ashenChute;
+
+    static {
+        Properties ashen = ashenSolidProps(2);
+        ashenDrain = BLOCKS.register("ashen_drain", () -> new SearedDrainBlock(ashen), TOOLTIP_BLOCK_ITEM);
+        ashenDuct = BLOCKS.register("ashen_duct", () -> new SearedDuctBlock(ashen), TOOLTIP_BLOCK_ITEM);
+        ashenChute = BLOCKS.register("ashen_chute", () -> new RetexturedOrientableSmelteryBlock(ashen, SmelteryInputOutputBlockEntity.ChuteBlockEntity::new),
+                                     TOOLTIP_BLOCK_ITEM);
+    }
+
+    public static final ItemObject<SearedLadderBlock> ashenLadder;
+
+    static {
+        Properties ashen = ashenNonSolidProps(SoundType.BASALT);
+        ashenLadder = BLOCKS.register("ashen_ladder", () -> new SearedLadderBlock(ashen), TOOLTIP_BLOCK_ITEM);
+    }
+
+    public static final EnumObject<SearedTankBlock.TankType, AshenTankBlock> ashenTank;
+
+    static {
+        Properties ashen = ashenNonSolidProps(SoundType.BASALT).lightLevel(SearedTankBlock.LIGHT_GETTER);
+        ashenTank = BLOCKS.registerEnum("ashen", SearedTankBlock.TankType.values(),
+                                        type -> new AshenTankBlock(ashen, type.getCapacity(), PushReaction.DESTROY),
+                                        b -> new TankItem(b, ITEM_PROPS, true));
+    }
+
+    public static final RegistryObject<BlockEntityType<AshenTankBlockEntity>> tank = BLOCK_ENTITIES.register("tank", AshenTankBlockEntity::new, set -> {
+        set.addAll(ashenTank.values());
+    });
+
+    private static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, Output output) {
+        output.accept(enderMortar);
+        output.accept(ashenBrick.get());
+
+        output.accept(transmuteController);
+
+        output.accept(ashenDrain);
+        output.accept(ashenDuct);
+        output.accept(ashenChute);
+
+        ashenTank.forEach((searedTankBlock) -> output.accept(searedTankBlock));
+
+        output.accept(ashenStone);
+        output.accept(polishedAshenStone);
+        accept(output, ashenBricks);
+        accept(output, ashenRoad);
+        output.accept(ashenLamp);
+        output.accept(chiseledAshenBricks);
+        output.accept(ashenHeater);
+        output.accept(ashenAccel);
+        output.accept(ashenAlloySwitch);
+        output.accept(ashenMeltSwitch);
+
+
+        output.accept(ashenLadder);
+        output.accept(ashenGlass);
+        output.accept(ashenTintedGlass);
+        output.accept(ashenSoulGlass);
+        output.accept(ashenGlassPane);
+        output.accept(ashenSoulGlassPane);
+
+        // casts
+        addCasts(output, CastItemObject::get);
+        addCasts(output, CastItemObject::getSand);
+        addCasts(output, CastItemObject::getRedSand);
+        Predicate<ItemStack> variant = stack -> {
+            output.accept(stack);
+            return false;
+        };
+        RetexturedHelper.addTagVariants(variant, transmuteController, DreamtinkerTagKeys.Items.ASHEN_BLOCKS);
+        RetexturedHelper.addTagVariants(variant, ashenDrain, DreamtinkerTagKeys.Items.ASHEN_BLOCKS);
+        RetexturedHelper.addTagVariants(variant, ashenDuct, DreamtinkerTagKeys.Items.ASHEN_BLOCKS);
+        RetexturedHelper.addTagVariants(variant, ashenChute, DreamtinkerTagKeys.Items.ASHEN_BLOCKS);
+
+
+    }
+
+    public static final RegistryObject<BlockEntityType<TransmuteComponentBlockEntity>> transmuteComponent =
+            BLOCK_ENTITIES.register("transmute_component", TransmuteComponentBlockEntity::new, set -> {
+                set.add(ashenStone.get(), polishedAshenStone.get(), chiseledAshenBricks.get(), ashenLadder.get(), ashenLamp.get(), ashenGlass.get(),
+                        ashenSoulGlass.get(), ashenTintedGlass.get());
+                set.addAll(ashenBricks.values());
+                set.addAll(ashenRoad.values());
+                set.add(ashenAlloySwitch.get());
+                set.add(ashenMeltSwitch.get());
+            });
+
+    // controllers
+    public static final ItemObject<TransmuteControllerBlock> transmuteController =
+            BLOCKS.register("transmute_controller", () -> new TransmuteControllerBlock(ashen.get()), TOOLTIP_BLOCK_ITEM);
+    public static final RegistryObject<BlockEntityType<TransmuteBlockEntity>>
+            Transmute = BLOCK_ENTITIES.register("transmute", TransmuteBlockEntity::new, transmuteController);
+
+
+    public static final CastItemObject chainSawCoreCast = MODI_TOOLS.registerCast(DreamtinkerToolParts.chainSawCore.getId().getPath(), ITEM_PROPS);
+    public static final CastItemObject chainSawTeethCast = MODI_TOOLS.registerCast(DreamtinkerToolParts.chainSawTeeth.getId().getPath(), ITEM_PROPS);
+
+    public static final CastItemObject NovaCoverCast = MODI_TOOLS.registerCast(DreamtinkerToolParts.NovaCover.getId().getPath(), ITEM_PROPS);
+    public static final CastItemObject NovaRostrumCast = MODI_TOOLS.registerCast(DreamtinkerToolParts.NovaRostrum.getId().getPath(), ITEM_PROPS);
+    public static final CastItemObject NovaWrapperCast = MODI_TOOLS.registerCast(DreamtinkerToolParts.NovaWrapper.getId().getPath(), ITEM_PROPS);
+    public static final CastItemObject NovaMiscCast = MODI_TOOLS.registerCast(DreamtinkerToolParts.NovaMisc.getId().getPath(), ITEM_PROPS);
+
+
+    @SubscribeEvent
+    void commonSetup(FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            Consumer<Block> dispenserBehavior = block -> DispenserBlock.registerBehavior(block.asItem(), PlaceBlockDispenserBehavior.INSTANCE);
+            ashenTank.forEach(dispenserBehavior);
+        });
+    }
+
+    private static void addCasts(CreativeModeTab.Output output, Function<CastItemObject, ItemLike> getter) {
+        accept(output, getter, chainSawCoreCast);
+        accept(output, getter, chainSawTeethCast);
+        if (ModList.get().isLoaded("ars_nouveau") && !configCompactDisabled("ars_nouveau")){
+            accept(output, getter, NovaCoverCast);
+            accept(output, getter, NovaRostrumCast);
+            accept(output, getter, NovaWrapperCast);
+            accept(output, getter, NovaMiscCast);
+        }
+    }
+
+
+    /**
+     * Properties for an opaque ashen block, such as bricks.
+     */
+    private static Properties ashenSolidProps(int factor) {
+        return structureProps(MapColor.COLOR_GRAY, SoundType.METAL).strength(3.0F * factor, 9.0F * factor);
+    }
+
+    /**
+     * Properties for a transparent ashen block, such as glass.
+     */
+    private static Properties ashenNonSolidProps(SoundType sound) {
+        return structureNonSolid(MapColor.COLOR_PURPLE, sound).strength(3.0F, 9.0F);
+    }
+
+    private static Properties structureProps(MapColor color, SoundType sound) {
+        return builder(color, sound).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().isValidSpawn(SearedBlock.VALID_SPAWN);
+    }
+
+    /**
+     * Properties for transparent smeltery or foundry blocks, such as glass.
+     */
+    private static Properties structureNonSolid(MapColor color, SoundType sound) {
+        return structureProps(color, sound).isValidSpawn((state, level, pos, entityType) -> false).isRedstoneConductor(NEVER).isSuffocating(NEVER)
+                                           .isViewBlocking(NEVER).noOcclusion();
+    }
+}

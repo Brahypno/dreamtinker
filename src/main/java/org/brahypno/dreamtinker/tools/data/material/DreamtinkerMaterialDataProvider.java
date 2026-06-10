@@ -1,0 +1,133 @@
+package org.brahypno.dreamtinker.tools.data.material;
+
+import net.minecraft.data.PackOutput;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraftforge.common.crafting.conditions.AndCondition;
+import net.minecraftforge.common.crafting.conditions.ICondition;
+import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
+import net.minecraftforge.common.crafting.conditions.OrCondition;
+import org.brahypno.dreamtinker.Dreamtinker;
+import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
+import org.brahypno.dreamtinker.common.json.DTConfigEnabledCondition;
+import org.brahypno.dreamtinker.tools.data.DreamtinkerMaterialIds;
+import org.jetbrains.annotations.NotNull;
+import slimeknights.mantle.recipe.condition.TagFilledCondition;
+import slimeknights.tconstruct.common.json.ConfigEnabledCondition;
+import slimeknights.tconstruct.library.data.material.AbstractMaterialDataProvider;
+
+public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvider {
+    public DreamtinkerMaterialDataProvider(PackOutput packOutput) {
+        super(packOutput);
+    }
+
+    @Override
+    protected void addMaterials() {
+        addMaterial(DreamtinkerMaterialIds.echo_alloy, 4, 35, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.moonlight_ice, 3, 35, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.cryo_serpent_shift, 4, 45, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.valentinite, 2, 5, true, false, null);
+        addMaterial(DreamtinkerMaterialIds.nigrescence_antimony, 3, 23, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.nigrescence_string, 3, 23, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.metallivorous_stibium_lupus, 5, 45, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.star_regulus, 6, 50, true, false, null);
+        addMaterial(DreamtinkerMaterialIds.crying_obsidian, 3, 30, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.larimar, 2, 10, true, false, null);
+        addMaterial(DreamtinkerMaterialIds.amber, 2, 10, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.half_rotten_homunculus, 3, 20, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.half_rotten_string, 3, 20, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.desire_gem, 4, 45, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.despair_gem, 6, 75, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.shadowskin, 4, 35, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.soul_steel, 3, 25, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.whimsyGold, 4, 35, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.OathGuardPaleSteel, 3, 25, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.ForlornOathSteel, 4, 35, true, false, null);
+        addMaterial(DreamtinkerMaterialIds.rainbow_honey_crystal, 3, 25, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.black_sapphire, 4, 35, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.scolecite, 2, 5, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.PermanenceScale, 4, 5, false, true, null);
+        addMaterial(DreamtinkerMaterialIds.PermanenceWing, 4, 5, false, true, null);
+        addMaterial(DreamtinkerMaterialIds.shiningFlint, 2, 5, true, false, null);
+        addMaterial(DreamtinkerMaterialIds.orichalcum, 2, 5, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.cold_iron, 2, 6, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.shadowSilver, 2, 10, false, false, tagFilled(Dreamtinker.forgeItemTag("ingots/silver")));
+        addMaterial(DreamtinkerMaterialIds.TransmutationGold, 3, 7, false, false, null);
+        addMaterial(DreamtinkerMaterialIds.SpikyShard, 2, 5, true, false, null);
+        addMaterial(DreamtinkerMaterialIds.FifthStone, 2, 15, true, false, null);
+        addMaterial(DreamtinkerMaterialIds.SpiralSpin, 3, 25, true, false, null);
+        addMaterial(DreamtinkerMaterialIds.RuinWheelSteel, 5, 55, true, false, null);
+        addMaterial(DreamtinkerMaterialIds.AtonementSilver, 4, 35, false, false, tagFilled(Dreamtinker.forgeItemTag("ingots/silver")));
+        addMaterial(DreamtinkerMaterialIds.deliverance, 5, 55, false, false, null);
+
+        addMaterial(DreamtinkerMaterialIds.ArcaneGold, 2, ORDER_REPAIR, false, false, tagFilled(DreamtinkerTagKeys.Items.arcaneGoldIngot));
+        addMaterial(DreamtinkerMaterialIds.Utherium, 4, 45, false, false, tagFilled(DreamtinkerTagKeys.Items.utheriumIngot));
+        addMaterial(DreamtinkerMaterialIds.forgotten_metal, 4, 50, false, false, tagFilled(DreamtinkerTagKeys.Items.forgottenMetalIngot));
+        addMaterial(DreamtinkerMaterialIds.Cloggrum, 2, 20, false, false, tagFilled(DreamtinkerTagKeys.Items.CloggrumIngot));
+        addMaterial(DreamtinkerMaterialIds.Froststeel, 2, 25, false, false, tagFilled(DreamtinkerTagKeys.Items.FroststeelIngot));
+        addMaterial(DreamtinkerMaterialIds.Regalium, 3, 25, false, false, tagFilled(DreamtinkerTagKeys.Items.RegaliumIngot));
+        addMaterial(DreamtinkerMaterialIds.GooeySlimeSkin, 2, 35, false, false, modLoaded("undergarden"));
+        addMaterial(DreamtinkerMaterialIds.Iesnium, 3, 25, false, false, tagFilled(DreamtinkerTagKeys.Items.IesniumIngot));
+
+        addMaterial(DreamtinkerMaterialIds.etherium, 4, 40, false, false, modLoaded("enigmaticlegacy"));
+        addMaterial(DreamtinkerMaterialIds.nefarious, 4, 40, false, false, modLoaded("enigmaticlegacy"));
+        addMaterial(DreamtinkerMaterialIds.soul_etherium, 5, 50, false, false, modLoaded("enigmaticlegacy"));
+
+        addMaterial(DreamtinkerMaterialIds.spirit_fabric, 2, 10, true, false, modLoaded("malum"));
+        addMaterial(DreamtinkerMaterialIds.hallowed_gold, 2, 15, true, false, modLoaded("malum"));
+        addMaterial(DreamtinkerMaterialIds.mnemonic, 2, 30, false, false, modLoaded("malum"));
+        addMaterial(DreamtinkerMaterialIds.soul_stained_steel, 3, 30, false, false, modLoaded("malum"));
+        addMaterial(DreamtinkerMaterialIds.malignant_lead, 3, 35, false, false, modLoaded("malum"));
+        addMaterial(DreamtinkerMaterialIds.malignant_pewter, 4, 45, false, false, modLoaded("malum"));
+        addMaterial(DreamtinkerMaterialIds.malignant_gluttony, 5, 50, false, false, modLoaded("malum"));
+        addMaterial(DreamtinkerMaterialIds.soul_rock, 2, 10, true, false, modLoaded("malum"));
+        addMaterial(DreamtinkerMaterialIds.spirits, 1, 30, true, false, modLoaded("malum"));
+        addMaterial(DreamtinkerMaterialIds.blazing_quartz, 2, 30, true, false, modLoaded("malum"));
+        addMaterial(DreamtinkerMaterialIds.grim_talc, 2, 30, true, false, modLoaded("malum"));
+        addMaterial(DreamtinkerMaterialIds.astral_weave, 2, 30, true, false, modLoaded("malum"));
+        addMaterial(DreamtinkerMaterialIds.null_slate, 2, 30, true, false, modLoaded("malum"));
+
+        addMaterial(DreamtinkerMaterialIds.TatteredCloth, 2, 5, true, false, modLoaded("eidolon"));
+        addMaterial(DreamtinkerMaterialIds.WickedWeave, 3, 7, true, false, modLoaded("eidolon"));
+        addMaterial(DreamtinkerMaterialIds.PaladinBone, 3, 15, false, false, modLoaded("eidolon"));
+        addMaterial(DreamtinkerMaterialIds.PaladinBoneTool, 2, 10, true, false, modLoaded("eidolon"));
+        addMaterial(DreamtinkerMaterialIds.SoulGem, 2, 10, true, false, modLoaded("eidolon"));
+        addMaterial(DreamtinkerMaterialIds.CrimsonGem, 3, 15, true, false, modLoaded("eidolon"));
+        addMaterial(DreamtinkerMaterialIds.ShadowGem, 3, 15, true, false, modLoaded("eidolon"));
+
+        addMaterial(DreamtinkerMaterialIds.DarkMetal, 3, 15, false, false, modLoaded("born_in_chaos_v1"));
+        addMaterial(DreamtinkerMaterialIds.MonsterSkin, 2, 5, true, false, modLoaded("born_in_chaos_v1"));
+        addMaterial(DreamtinkerMaterialIds.LifeStealerBone, 2, 10, true, false, modLoaded("born_in_chaos_v1"));
+        addMaterial(DreamtinkerMaterialIds.KrampusHorn, 2, 10, true, false, modLoaded("born_in_chaos_v1"));
+        addMaterial(DreamtinkerMaterialIds.NightMareClaw, 2, 10, true, false, modLoaded("born_in_chaos_v1"));
+        addMaterial(DreamtinkerMaterialIds.InfernalEmber, 2, 10, true, false, modLoaded("born_in_chaos_v1"));
+        addMaterial(DreamtinkerMaterialIds.HoundFang, 2, 10, true, false, modLoaded("born_in_chaos_v1"));
+
+        addMaterial(DreamtinkerMaterialIds.AbjurationEssence, 2, 10, true, false, modLoaded("ars_nouveau"));
+        addMaterial(DreamtinkerMaterialIds.ConjurationEssence, 2, 10, true, false, modLoaded("ars_nouveau"));
+        addMaterial(DreamtinkerMaterialIds.AirEssence, 2, 10, true, false, modLoaded("ars_nouveau"));
+        addMaterial(DreamtinkerMaterialIds.EarthEssence, 2, 10, true, false, modLoaded("ars_nouveau"));
+        addMaterial(DreamtinkerMaterialIds.FireEssence, 2, 10, true, false, modLoaded("ars_nouveau"));
+        addMaterial(DreamtinkerMaterialIds.ManipulationEssence, 2, 10, true, false, modLoaded("ars_nouveau"));
+        addMaterial(DreamtinkerMaterialIds.WaterEssence, 2, 10, true, false, modLoaded("ars_nouveau"));
+        addMaterial(DreamtinkerMaterialIds.WildenHorn, 1, 10, true, false, modLoaded("ars_nouveau"));
+        addMaterial(DreamtinkerMaterialIds.WildenWing, 1, 10, true, false, modLoaded("ars_nouveau"));
+        addMaterial(DreamtinkerMaterialIds.WildenSpike, 1, 10, true, false, modLoaded("ars_nouveau"));
+
+        addMaterial(DreamtinkerMaterialIds.legendary_monsters_enderitium, 3, 20, false, false, modLoaded("legendary_monsters"));
+    }
+
+    @Override
+    public @NotNull String getName() {
+        return "Dreamtinker Material Data Provider";
+    }
+
+    public static ICondition modLoaded(String modId) {
+        return new OrCondition(ConfigEnabledCondition.FORCE_INTEGRATION_MATERIALS,
+                               new AndCondition(new ModLoadedCondition(modId), new DTConfigEnabledCondition(modId)));
+    }
+
+    public static ICondition tagFilled(TagKey<Item> tagKey) {
+        return new OrCondition(ConfigEnabledCondition.FORCE_INTEGRATION_MATERIALS, new TagFilledCondition<>(tagKey));
+    }
+}

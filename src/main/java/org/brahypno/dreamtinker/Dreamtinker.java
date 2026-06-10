@@ -1,0 +1,238 @@
+package org.brahypno.dreamtinker;
+
+import com.mojang.logging.LogUtils;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerPotBlock;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
+import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.data.event.GatherDataEvent;
+import net.minecraftforge.event.server.ServerStartingEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
+import org.brahypno.dreamtinker.Entity.AggressiveFox;
+import org.brahypno.dreamtinker.Entity.DreamtinkerEntityTypes;
+import org.brahypno.dreamtinker.common.DreamtinkerAttributes;
+import org.brahypno.dreamtinker.common.DreamtinkerCommon;
+import org.brahypno.dreamtinker.common.DreamtinkerEffects;
+import org.brahypno.dreamtinker.common.DreamtinkerSounds;
+import org.brahypno.dreamtinker.common.capabilities.compact.curio.addSilenceGloveCurio;
+import org.brahypno.dreamtinker.common.capabilities.compact.enigmatic_legacy.addUnholyWater;
+import org.brahypno.dreamtinker.common.capabilities.compact.malum.addConcentratedGluttonyBottle;
+import org.brahypno.dreamtinker.common.data.AdvancementsProvider;
+import org.brahypno.dreamtinker.common.data.DTCurio;
+import org.brahypno.dreamtinker.common.data.DreamtinkerRecipeProvider;
+import org.brahypno.dreamtinker.common.data.loot.DreamtinkerGlobalLootModifierProvider;
+import org.brahypno.dreamtinker.common.data.loot.DreamtinkerLootTableProvider;
+import org.brahypno.dreamtinker.common.data.loot.LootTableInjectionProvider;
+import org.brahypno.dreamtinker.common.data.tags.*;
+import org.brahypno.dreamtinker.common.event.advancements.star_regulus_boost;
+import org.brahypno.dreamtinker.common.json.DTConfigEnabledCondition;
+import org.brahypno.dreamtinker.config.DreamtinkerClientConfig;
+import org.brahypno.dreamtinker.config.DreamtinkerConfig;
+import org.brahypno.dreamtinker.fluids.DreamtinkerFluids;
+import org.brahypno.dreamtinker.library.client.DreamtinkerClient;
+import org.brahypno.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
+import org.brahypno.dreamtinker.library.compact.eidolon.DTEidolonCompact;
+import org.brahypno.dreamtinker.library.event.PlayerLeftClickEvent;
+import org.brahypno.dreamtinker.library.tools.DTSlotType;
+import org.brahypno.dreamtinker.network.DNetwork;
+import org.brahypno.dreamtinker.smeltery.DreamTinkerSmeltery;
+import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
+import org.brahypno.dreamtinker.tools.DreamtinkerToolParts;
+import org.brahypno.dreamtinker.tools.DreamtinkerTools;
+import org.brahypno.dreamtinker.tools.modifiers.events.compact.ars_nouveau.ArsPlayerCraftEvent;
+import org.brahypno.dreamtinker.tools.modifiers.events.compact.ars_nouveau.SpellEvents;
+import org.brahypno.dreamtinker.tools.modifiers.events.compact.enigmatic_legacy.EL_events;
+import org.brahypno.dreamtinker.tools.modifiers.events.compact.malum.malum_events_handler;
+import org.brahypno.dreamtinker.world.data.DTDataPackProvider;
+import org.slf4j.Logger;
+import slimeknights.tconstruct.library.utils.Util;
+
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+
+// The value here should match an entry in the META-INF/mods.toml file
+@Mod(Dreamtinker.MODID)
+public class Dreamtinker {
+
+    // Define mod id in a common place for everything to reference
+    public static final String MODID = "dreamtinker";
+    public static final Logger LOGGER = LogUtils.getLogger();
+
+    private static List<? extends String> compact_config;
+    private static Boolean compactRestriction;
+
+    @SuppressWarnings({"removal"})
+    public Dreamtinker() {
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, DreamtinkerConfig.specs, "DreamTinkerConfig.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, DreamtinkerClientConfig.specs, "DreamTinkerClientConfig.toml");
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
+        modEventBus.register(new DreamtinkerEntityTypes());
+        modEventBus.register(new DreamtinkerAttributes());
+        modEventBus.register(new DreamtinkerFluids());
+        modEventBus.register(new DreamtinkerEffects());
+        modEventBus.register(new DreamtinkerToolParts());
+        modEventBus.register(new DreamtinkerTools());
+        modEventBus.register(new DreamTinkerSmeltery());
+        modEventBus.register(new DreamtinkerCommon());
+        modEventBus.register(new DreamtinkerSounds());
+        modEventBus.register(new DreamtinkerModifiers());
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> DreamtinkerClient::onConstruct);
+        DreamtinkerModule.initRegisters(modEventBus);
+        if (ModList.get().isLoaded("ars_nouveau")){
+            new NovaRegistry();
+        }
+
+        CraftingHelper.register(DTConfigEnabledCondition.SERIALIZER);
+        // Register the commonSetup method for modloading
+        modEventBus.addListener(this::commonSetup);
+        // Register ourselves for server and other game events we are interested in
+
+        MinecraftForge.EVENT_BUS.register(this);
+
+        forgeEventBus.addListener(EventPriority.HIGHEST, PlayerLeftClickEvent::onLeftClickBlock);
+        forgeEventBus.addListener(EventPriority.HIGHEST, PlayerLeftClickEvent::onLeftClick);
+        forgeEventBus.addListener(EventPriority.HIGHEST, PlayerLeftClickEvent::onLeftClickEntity);
+        forgeEventBus.addListener(star_regulus_boost::onServerTick);
+
+        DNetwork.registerPackets();
+        modEventBus.addListener(this::gatherData);
+
+    }
+
+    private void commonSetup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            IEventBus forgeEventBus = MinecraftForge.EVENT_BUS;
+            if (ModList.get().isLoaded("curios") && !configCompactDisabled("curios")){
+                forgeEventBus.addGenericListener(ItemStack.class, addSilenceGloveCurio::attachCaps);
+            }
+            if (ModList.get().isLoaded("enigmaticlegacy") && !configCompactDisabled("enigmaticlegacy")){
+                forgeEventBus.addGenericListener(ItemStack.class, addUnholyWater::attachCaps);
+                forgeEventBus.addListener(EL_events::onLivingDeath);
+                forgeEventBus.addListener(EventPriority.LOWEST, EL_events::onLivingDrops);
+                forgeEventBus.addListener(EL_events::onEntityJoinLevel);
+            }
+            if (ModList.get().isLoaded("malum") && !configCompactDisabled("malum")){
+                forgeEventBus.addGenericListener(ItemStack.class, addConcentratedGluttonyBottle::attachCaps);
+                forgeEventBus.addListener(malum_events_handler::MalumLivingHurtEvent);
+                forgeEventBus.addListener(malum_events_handler::MalumLivingDeathEvent);
+            }
+            if (ModList.get().isLoaded("ars_nouveau") && !configCompactDisabled("ars_nouveau")){
+                forgeEventBus.addListener(ArsPlayerCraftEvent::PlayerCraftEvent);
+                forgeEventBus.addListener(EventPriority.HIGHEST, SpellEvents::PreSpellDamageEvent);
+                forgeEventBus.addListener(EventPriority.HIGHEST, SpellEvents::PostSpellDamageEvent);
+                forgeEventBus.addListener(EventPriority.HIGHEST, SpellEvents::SpellProjectileHitEvent);
+                forgeEventBus.addListener(EventPriority.HIGHEST, SpellEvents::SpellCostCalcEvent);
+                forgeEventBus.addListener(EventPriority.HIGHEST, SpellEvents::PreEffectResolveEvent);
+                forgeEventBus.addListener(SpellEvents::EffectResolveEvent);
+                NovaRegistry.postInit();
+            }
+
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(DreamtinkerCommon.narcissus.getId(), DreamtinkerCommon.potted_narcissus);
+            SpawnPlacements.register(DreamtinkerEntityTypes.AggressiveFOX.get(),
+                                     SpawnPlacements.Type.ON_GROUND,
+                                     Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                                     AggressiveFox::checkAggressiveFoxSpawnRules);
+            if (ModList.get().isLoaded("eidolon")){
+                event.enqueueWork(DTEidolonCompact::init);
+            }
+            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> DTSlotType::init);
+        });
+    }
+
+    // You can use SubscribeEvent and let the Event Bus discover methods to call
+    @SubscribeEvent
+    public void onServerStarting(ServerStartingEvent event) {
+
+    }
+
+    public static ResourceLocation getLocation(String name) {return new ResourceLocation(MODID, name);}
+
+    public static String makeTranslationKey(String base, String name) {
+        return Util.makeTranslationKey(base, getLocation(name));
+    }
+
+    public static MutableComponent makeTranslation(String base, String name) {
+        return Component.translatable(makeTranslationKey(base, name));
+    }
+
+    public static TagKey<Block> mcBlockTag(String name) {
+        return TagKey.create(ForgeRegistries.BLOCKS.getRegistryKey(), new ResourceLocation("minecraft", name));
+    }
+
+    public static TagKey<Item> mcItemTag(String name) {
+        return TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("minecraft", name));
+    }
+
+    public static TagKey<Item> forgeItemTag(String name) {
+        return TagKey.create(ForgeRegistries.ITEMS.getRegistryKey(), new ResourceLocation("forge", name));
+    }
+
+    public static TagKey<Block> forgeBlockTag(String name) {
+        return TagKey.create(ForgeRegistries.BLOCKS.getRegistryKey(), new ResourceLocation("forge", name));
+    }
+
+    public void gatherData(final GatherDataEvent event) {
+        DataGenerator generator = event.getGenerator();
+        PackOutput output = generator.getPackOutput();
+        ExistingFileHelper helper = event.getExistingFileHelper();
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+
+        generator.addProvider(event.includeClient(), new FluidTagProvider(output, lookupProvider, Dreamtinker.MODID, helper));
+        generator.addProvider(event.includeServer(), new EntityTypeTagProvider(output, lookupProvider, helper));
+
+
+        BlockTagProvider blockTags = new BlockTagProvider(output, lookupProvider, Dreamtinker.MODID, helper);
+        generator.addProvider(event.includeClient(), blockTags);
+        generator.addProvider(event.includeServer(),
+                              new ItemTagProvider(output, lookupProvider, blockTags.contentsGetter(), Dreamtinker.MODID, helper));
+
+
+        generator.addProvider(event.includeClient(), new DreamtinkerRecipeProvider(output));
+
+        generator.addProvider(event.includeServer(), new DreamtinkerLootTableProvider(output));
+        DatapackBuiltinEntriesProvider provider = new DTDataPackProvider(output, lookupProvider);
+
+        generator.addProvider(event.includeServer(), provider);
+        generator.addProvider(event.includeServer(), new DamageTypeTagProvider(output, provider.getRegistryProvider(), helper));
+        generator.addProvider(event.includeServer(), new LootTableInjectionProvider(output));
+
+        generator.addProvider(event.includeServer(), new DTCurio(output, helper, provider.getRegistryProvider()));
+        generator.addProvider(event.includeServer(), new AdvancementsProvider(output));
+        generator.addProvider(event.includeServer(), new DTMobEffectTagsProvider(output, event.getLookupProvider(), event.getExistingFileHelper()));
+        generator.addProvider(event.includeServer(), new DreamtinkerGlobalLootModifierProvider(output));
+    }
+
+    public static boolean configCompactDisabled(String modId) {
+        if (null == compact_config)
+            compact_config = DreamtinkerConfig.ModCompactBlackList.get();
+        compactRestriction = DreamtinkerConfig.MOD_COMPACT_MATERIALS_CONFIG.get();
+        return compactRestriction && compact_config.contains(modId);
+    }
+
+}

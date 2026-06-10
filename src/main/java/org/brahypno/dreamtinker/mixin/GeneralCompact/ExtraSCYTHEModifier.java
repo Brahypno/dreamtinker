@@ -1,0 +1,74 @@
+package org.brahypno.dreamtinker.mixin.GeneralCompact;
+
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraftforge.fml.ModList;
+import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
+import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import slimeknights.tconstruct.library.tools.nbt.ToolStack;
+
+import static org.brahypno.dreamtinker.Dreamtinker.configCompactDisabled;
+
+@Mixin(value = ToolStack.class, remap = false)
+public abstract class ExtraSCYTHEModifier {
+
+
+    // 重入保护，防止 addModifier -> rebuildStats -> 再次注入导致死循环
+    @Unique
+    private static final ThreadLocal<Boolean> AVOID_RECURSION = ThreadLocal.withInitial(() -> false);
+
+    // 直接拿 ToolStack 的 this
+    @Unique
+    private ToolStack dreamtinker$self() {
+        return (ToolStack) (Object) this;
+    }
+
+    @Inject(method = "rebuildStats", at = @At("TAIL"))
+    private void dreamtinker$appendExtraModifierAtTail(CallbackInfo ci) {
+        // 若已在递归中或 A 不存在，直接退出
+        boolean extra_malum = false;
+        boolean extra_eidolon = false;
+        if (!AVOID_RECURSION.get() && ModList.get().isLoaded("malum") && !configCompactDisabled("malum") &&
+            dreamtinker$self().hasTag(dreamtinker$malumTag("scythe"))){
+            extra_malum = true;
+        }
+        if (!AVOID_RECURSION.get() && ModList.get().isLoaded("eidolon") && !configCompactDisabled("eidolon") &&
+            dreamtinker$self().hasTag(DreamtinkerTagKeys.Items.dt_scythe)){
+            extra_eidolon = true;
+        }
+
+        ToolStack tool = dreamtinker$self();
+
+        // 已有该 modifier 就不重复添加（不改动原有 traits / 既有 modifiers）
+        if (tool.getModifierLevel(DreamtinkerModifiers.malum_base.getId()) > 0)
+            extra_malum = false;
+        if (tool.getModifierLevel(DreamtinkerModifiers.eidolon_reaper.getId()) > 0)
+            extra_eidolon = false;
+
+
+        try {
+            AVOID_RECURSION.set(true);
+            if (extra_malum)
+                tool.addModifier(DreamtinkerModifiers.malum_base.getId(), 1);
+            if (extra_eidolon)
+                tool.addModifier(DreamtinkerModifiers.eidolon_reaper.getId(), 1);
+            // addModifier 通常会触发一次 rebuild；有了 AVOID_RECURSION，不会再次进入
+        }
+        finally {
+            AVOID_RECURSION.set(false);
+        }
+    }
+
+    @Unique
+    private static TagKey<Item> dreamtinker$malumTag(String name) {
+        return ItemTags.create(new ResourceLocation("malum", name));
+    }
+}
+

@@ -1,0 +1,104 @@
+package org.brahypno.dreamtinker.tools.modifiers.tools.underPlate;
+
+import com.sammy.malum.registry.common.AttributeRegistry;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
+import org.jetbrains.annotations.NotNull;
+import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifierHook;
+import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
+import slimeknights.tconstruct.library.modifiers.modules.build.ModifierRequirementsModule;
+import slimeknights.tconstruct.library.module.ModuleHookMap;
+import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
+import slimeknights.tconstruct.library.tools.stat.ToolStats;
+import team.lodestar.lodestone.registry.common.LodestoneAttributeRegistry;
+
+import java.util.UUID;
+import java.util.function.BiConsumer;
+
+import static org.brahypno.dreamtinker.tools.DreamtinkerModifiers.weapon_transformation;
+import static org.brahypno.dreamtinker.tools.modifiers.tools.underPlate.WeaponTransformation.valueExpSoftCap;
+
+public class SpiritualWeaponTransformation extends NoLevelsModifier implements AttributesModifierHook {
+
+    @Override
+    protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
+        hookBuilder.addModule(ModifierRequirementsModule.builder().requireModifier(weapon_transformation.getId(), 1)
+                                                        .modifierKey(DreamtinkerModifiers.spiritual_weapon_transformation.getId()).build());
+        hookBuilder.addHook(this, ModifierHooks.ATTRIBUTES);
+        super.registerHooks(hookBuilder);
+    }
+
+    @Override
+    public int getPriority() {
+        return -1000;
+    }
+
+    @Override
+    public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
+        if (tool.isBroken())
+            return;
+        float armor = tool.getStats().get(ToolStats.ARMOR);
+        float toughness = tool.getStats().get(ToolStats.ARMOR_TOUGHNESS);
+        float multi = valueExpSoftCap(armor, toughness);
+        UUID uuid = UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes());
+        if (modifier.getLevel() > 0){
+            switch (slot) {
+                case CHEST -> {
+                    consumer.accept(LodestoneAttributeRegistry.MAGIC_DAMAGE.get(),
+                                    new AttributeModifier(uuid,
+                                                          this.getTranslationKey(),
+                                                          multi,
+                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
+
+                    consumer.accept(LodestoneAttributeRegistry.MAGIC_RESISTANCE.get(),
+                                    new AttributeModifier(uuid,
+                                                          this.getTranslationKey(),
+                                                          Math.min(0.4, multi / 4),
+                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
+                }
+
+                case LEGS -> {
+                    consumer.accept(AttributeRegistry.ARCANE_RESONANCE.get(),
+                                    new AttributeModifier(uuid,
+                                                          this.getTranslationKey(),
+                                                          multi,
+                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
+                    consumer.accept(AttributeRegistry.MALIGNANT_CONVERSION.get(),
+                                    new AttributeModifier(uuid,
+                                                          this.getTranslationKey(),
+                                                          -multi,
+                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
+                }
+                case FEET -> {
+                    consumer.accept(AttributeRegistry.SOUL_WARD_INTEGRITY.get(),
+                                    new AttributeModifier(uuid,
+                                                          this.getTranslationKey(),
+                                                          multi,
+                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
+                    consumer.accept(AttributeRegistry.SOUL_WARD_RECOVERY_RATE.get(),
+                                    new AttributeModifier(uuid,
+                                                          this.getTranslationKey(),
+                                                          -multi / 2,
+                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
+                }
+                case HEAD -> {
+                    consumer.accept(AttributeRegistry.SCYTHE_PROFICIENCY.get(),
+                                    new AttributeModifier(uuid,
+                                                          this.getTranslationKey(),
+                                                          multi,
+                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
+                    consumer.accept(AttributeRegistry.SCYTHE_PROFICIENCY.get(),
+                                    new AttributeModifier(uuid,
+                                                          this.getTranslationKey(),
+                                                          -multi / 2,
+                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
+                }
+                default -> {}
+            }
+        }
+    }
+}
