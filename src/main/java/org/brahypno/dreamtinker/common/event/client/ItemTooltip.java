@@ -13,8 +13,6 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerCommon;
-import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
-import org.brahypno.dreamtinker.config.DreamtinkerCachedConfig;
 import org.brahypno.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.brahypno.dreamtinker.tools.items.UnderArmorItem;
@@ -49,12 +47,6 @@ public class ItemTooltip {
             if (Screen.hasShiftDown() && EnigmaticLegacyCompact.isCursedScroll(e.getItemStack())){
                 e.getToolTip().add(Component.translatable("tooltip.dreamtinker.cursed_scroll").withStyle(ChatFormatting.RED));
             }
-        }
-        if (e.getItemStack().is(DreamtinkerTagKeys.Items.TRANSMUTE_HEATER)){
-            e.getToolTip().add(Component.translatable("tooltip.dreamtinker.transmute_heater", DreamtinkerCachedConfig.TransmuteHeaterTemperature.get()));
-        }
-        if (e.getItemStack().is(DreamtinkerTagKeys.Items.TRANSMUTE_ACCEL)){
-            e.getToolTip().add(Component.translatable("tooltip.dreamtinker.transmute_accel", DreamtinkerCachedConfig.TransmuteAcceleratorTemperature.get()));
         }
         if (e.getItemStack().getItem().equals(TinkerToolParts.fakeIngot.asItem()) &&
             DTModifierCheck.getExpectedMaterialPart(e.getItemStack(), DreamtinkerMaterialIds.RuinWheelSteel)){

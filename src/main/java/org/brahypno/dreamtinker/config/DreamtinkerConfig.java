@@ -18,17 +18,6 @@ public class DreamtinkerConfig {
 
     static {
         builder.pop();
-        builder.push("Transmute Configuration");
-    }
-
-    public static final ForgeConfigSpec.IntValue TransmuteHeaterTemperature =
-            builder.comment("The default temperature provided by each heater block").defineInRange("TransmuteHeaterTemperature", 500, 0, 10000);
-    public static final ForgeConfigSpec.IntValue TransmuteFuelAccelerator =
-            builder.comment("The accelerator fuel rate provided by each block").defineInRange("TransmuteFuelAccelerator", 15, 0, 20000);
-
-
-    static {
-        builder.pop();
         builder.push("Tool Configuration");
     }
 

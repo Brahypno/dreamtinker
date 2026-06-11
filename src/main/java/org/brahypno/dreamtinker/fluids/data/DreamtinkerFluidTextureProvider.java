@@ -41,7 +41,6 @@ public class DreamtinkerFluidTextureProvider extends AbstractFluidTextureProvide
         this.commonFluid(DreamtinkerFluids.molten_soul_aether.getType());
         this.commonFluid(DreamtinkerFluids.unholy_water.getType());
         this.commonFluid(DreamtinkerFluids.reversed_shadow.getType());
-        this.commonFluid(DreamtinkerFluids.blood_soul.getType());
         this.commonFluid(DreamtinkerFluids.molten_soul_stained_steel.getType());
         this.commonFluid(DreamtinkerFluids.molten_malignant_pewter.getType());
         this.commonFluid(DreamtinkerFluids.molten_malignant_gluttony.getType());
@@ -63,7 +62,6 @@ public class DreamtinkerFluidTextureProvider extends AbstractFluidTextureProvide
         this.commonFluid(DreamtinkerFluids.mercury.getType());
         this.commonFluid(DreamtinkerFluids.molten_arcane_gold.getType());
         this.commonFluid(DreamtinkerFluids.molten_dark_metal.getType());
-        tintedStone(DreamtinkerFluids.molten_ender_ash).color(0xFFAA87CD);
         tintedMolten(DreamtinkerFluids.molten_utherium).color(0xFFC3434C);
         tintedMolten(DreamtinkerFluids.molten_forgotten_metal).color(0xFF28AB8A);
         tintedStone(DreamtinkerFluids.molten_cloggrum).color(0xFF564137);

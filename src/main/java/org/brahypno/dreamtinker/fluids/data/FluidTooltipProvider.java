@@ -1,12 +1,9 @@
 package org.brahypno.dreamtinker.fluids.data;
 
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
 import org.brahypno.dreamtinker.Dreamtinker;
-import org.brahypno.dreamtinker.smeltery.DreamTinkerSmeltery;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.fluid.tooltip.AbstractFluidTooltipProvider;
-import slimeknights.tconstruct.TConstruct;
 
 public class FluidTooltipProvider extends AbstractFluidTooltipProvider {
     public FluidTooltipProvider(PackOutput packOutput) {
@@ -15,7 +12,6 @@ public class FluidTooltipProvider extends AbstractFluidTooltipProvider {
 
     @Override
     protected void addFluids() {
-        addRedirect(DreamTinkerSmeltery.Transmute.getId(), new ResourceLocation(TConstruct.MOD_ID, "ingots"));
     }
 
     @Override

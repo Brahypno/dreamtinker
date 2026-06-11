@@ -1,28 +1,6 @@
 {
   "values": [
     "dreamtinker:crying_obsidian_pane",
-    "dreamtinker:black_sapphire_ore",
-    "dreamtinker:ashen_bricks",
-    "dreamtinker:ashen_road",
-    "dreamtinker:ashen_heater",
-    "dreamtinker:ashen_accelerator",
-    "dreamtinker:ashen_stone",
-    "dreamtinker:polished_ashen_stone",
-    "dreamtinker:ashen_ladder",
-    "dreamtinker:ashen_lamp",
-    "dreamtinker:ashen_glass",
-    "dreamtinker:ashen_soul_glass",
-    "dreamtinker:ashen_tinted_glass",
-    "dreamtinker:ashen_glass_pane",
-    "dreamtinker:ashen_soul_glass_pane",
-    "dreamtinker:ashen_alloy_switch",
-    "dreamtinker:ashen_melt_switch",
-    "dreamtinker:ashen_drain",
-    "dreamtinker:ashen_chute",
-    "dreamtinker:transmute_controller",
-    "dreamtinker:ashen_fuel_tank",
-    "dreamtinker:ashen_fuel_gauge",
-    "dreamtinker:ashen_ingot_tank",
-    "dreamtinker:ashen_ingot_gauge"
+    "dreamtinker:black_sapphire_ore"
   ]
 }

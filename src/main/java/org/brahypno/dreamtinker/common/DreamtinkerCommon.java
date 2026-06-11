@@ -21,19 +21,24 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
 import net.minecraftforge.registries.RegistryObject;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.DreamtinkerModule;
-import org.brahypno.dreamtinker.common.Items.*;
+import org.brahypno.dreamtinker.common.Items.IronBallItem;
+import org.brahypno.dreamtinker.common.Items.star_regulus;
+import org.brahypno.dreamtinker.common.Items.valentinite;
+import org.brahypno.dreamtinker.common.Items.voidPearl;
 import org.brahypno.dreamtinker.common.data.model.DreamTinkerBlockStateProvider;
 import org.brahypno.dreamtinker.common.data.model.DreamtinkerItemModelProvider;
-import org.brahypno.dreamtinker.common.data.render.RenderFluidProvider;
 import org.brahypno.dreamtinker.fluids.DreamtinkerFluids;
+import org.brahypno.esotericismtinker.common.EsotericismTinkerCommon;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.data.predicate.block.BlockPredicate;
 import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
@@ -45,12 +50,8 @@ import slimeknights.tconstruct.shared.block.BetterPaneBlock;
 import java.util.List;
 import java.util.function.Function;
 
-import static org.brahypno.dreamtinker.Dreamtinker.MODID;
-
+@Mod.EventBusSubscriber(modid = Dreamtinker.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DreamtinkerCommon extends DreamtinkerModule {
-    public static final RegistryObject<CreativeModeTab> ITEM =
-            TABS.register("ore", () -> CreativeModeTab.builder().title(Component.translatable("itemGroup." + MODID + ".item")).icon(() -> new ItemStack(
-                    DreamtinkerCommon.metallivorous_stibium_lupus.get())).displayItems(DreamtinkerCommon::addTabs).build());
     protected static final Item.Properties ITEM_PROPS = new Item.Properties();
     //star antimony
     public static final RegistryObject<Item> raw_stibnite = ITEMS.register("raw_stibnite", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
@@ -209,8 +210,6 @@ public class DreamtinkerCommon extends DreamtinkerModule {
     public static final RegistryObject<IronBallItem> spiral_spin =
             ITEMS.register("spiral_spin", () -> new IronBallItem(ITEM_PROPS.rarity(Rarity.COMMON)));
 
-    public static final RegistryObject<DTBookItem> hypnagogic_transmute =
-            ITEMS.register("hypnagogic_transmute", () -> new DTBookItem(UNSTACKABLE_PROPS, DTBookItem.BookType.HYPNAGOGIC_TRANSMUTE));
 
     public static final RegistryObject<Item> snake_fang =
             ITEMS.register("snake_fang", () -> new SwordItem(Tiers.NETHERITE, 1, -1.6F, ITEM_PROPS.rarity(Rarity.COMMON)) {
@@ -243,7 +242,6 @@ public class DreamtinkerCommon extends DreamtinkerModule {
             Rarity.UNCOMMON)).stacksTo(16)));
 
     public static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
-        output.accept(hypnagogic_transmute.get());
         output.accept(snake_fang.get());
         output.accept(echo_alloy.get());
         output.accept(raw_stibnite.get());
@@ -434,7 +432,6 @@ public class DreamtinkerCommon extends DreamtinkerModule {
 
         generator.addProvider(client, new DreamtinkerItemModelProvider(output, existingFileHelper));
         generator.addProvider(client, new DreamTinkerBlockStateProvider(output, existingFileHelper));
-        generator.addProvider(client, new RenderFluidProvider(output));
     }
 
     public static BlockPredicate BLOCK_OF_UNDER_GARDEN = BlockPredicate.simple(state -> {
@@ -452,6 +449,13 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         if (event.getRegistryKey() == Registries.RECIPE_SERIALIZER){
             LivingEntityPredicate.LOADER.register(Dreamtinker.getLocation("living_of_undergarden"), LIVING_OF_UNDER_GARDEN.getLoader());
             BlockPredicate.LOADER.register(Dreamtinker.getLocation("block_of_undergarden"), BLOCK_OF_UNDER_GARDEN.getLoader());
+        }
+    }
+
+    @SubscribeEvent
+    public static void buildCreativeTabContents(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey().equals(EsotericismTinkerCommon.ITEM_TAB_KEY)){
+            addTabs(event.getParameters(), event);
         }
     }
 }

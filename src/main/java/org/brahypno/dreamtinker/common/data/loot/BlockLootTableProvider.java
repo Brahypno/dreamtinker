@@ -15,13 +15,11 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerCommon;
-import org.brahypno.dreamtinker.smeltery.DreamTinkerSmeltery;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.loot.function.RetexturedLootFunction;
 import slimeknights.mantle.registration.object.BuildingBlockObject;
 import slimeknights.mantle.registration.object.FenceBuildingBlockObject;
 import slimeknights.tconstruct.library.tools.part.IMaterialItem;
-import slimeknights.tconstruct.library.utils.NBTTags;
 
 import java.util.Set;
 import java.util.function.Function;
@@ -43,7 +41,6 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
     protected void generate() {
         this.addDecorative();
         this.addWorld();
-        addTransmute();
     }
 
     private void addDecorative() {
@@ -87,37 +84,6 @@ public class BlockLootTableProvider extends BlockLootSubProvider {
                                                     Enchantments.BLOCK_FORTUNE))));
     }
 
-    private void addTransmute() {
-        this.dropSelf(DreamTinkerSmeltery.ashenStone.get());
-        this.dropSelf(DreamTinkerSmeltery.polishedAshenStone.get());
-        this.registerFenceBuildingLootTables(DreamTinkerSmeltery.ashenBricks);
-        this.dropSelf(DreamTinkerSmeltery.chiseledAshenBricks.get());
-        this.registerBuildingLootTables(DreamTinkerSmeltery.ashenRoad);
-        this.dropSelf(DreamTinkerSmeltery.ashenHeater.get());
-        this.dropSelf(DreamTinkerSmeltery.ashenAccel.get());
-
-        this.dropSelf(DreamTinkerSmeltery.ashenLadder.get());
-        this.dropSelf(DreamTinkerSmeltery.ashenGlass.get());
-        this.dropSelf(DreamTinkerSmeltery.ashenSoulGlass.get());
-        this.dropSelf(DreamTinkerSmeltery.ashenTintedGlass.get());
-        this.dropSelf(DreamTinkerSmeltery.ashenGlassPane.get());
-        this.dropSelf(DreamTinkerSmeltery.ashenSoulGlassPane.get());
-        this.dropTable(DreamTinkerSmeltery.ashenDrain.get());
-        this.dropTable(DreamTinkerSmeltery.ashenChute.get());
-        this.dropTable(DreamTinkerSmeltery.ashenDuct.get());
-        Function<Block, LootTable.Builder> dropTank = block -> droppingWithFunctions(block, builder ->
-                builder.apply(COPY_NAME)
-                       .apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy(NBTTags.TANK, NBTTags.TANK)));
-        DreamTinkerSmeltery.ashenTank.forEach(block -> this.add(block, dropTank));
-
-        this.dropSelf(DreamTinkerSmeltery.ashenLamp.get());
-        this.dropSelf(DreamTinkerSmeltery.enderMortar.get());
-        this.dropTable(DreamTinkerSmeltery.transmuteController.get());
-        this.dropSelf(DreamTinkerSmeltery.ashenAlloySwitch.get());
-        this.dropSelf(DreamTinkerSmeltery.ashenMeltSwitch.get());
-
-
-    }
 
     private void registerFenceBuildingLootTables(FenceBuildingBlockObject object) {
         registerBuildingLootTables(object);

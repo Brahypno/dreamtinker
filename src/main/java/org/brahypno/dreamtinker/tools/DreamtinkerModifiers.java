@@ -39,7 +39,6 @@ import org.brahypno.dreamtinker.tools.modifiers.tools.narcissus_wing.FlamingMemo
 import org.brahypno.dreamtinker.tools.modifiers.tools.narcissus_wing.MemoryBase;
 import org.brahypno.dreamtinker.tools.modifiers.tools.narcissus_wing.SplendourHeart;
 import org.brahypno.dreamtinker.tools.modifiers.tools.narcissus_wing.foundationWill;
-import org.brahypno.dreamtinker.tools.modifiers.tools.ritual_blade.SelfSacrifice;
 import org.brahypno.dreamtinker.tools.modifiers.tools.silence_glove.WeaponDreams;
 import org.brahypno.dreamtinker.tools.modifiers.tools.underPlate.SpiritualWeaponTransformation;
 import org.brahypno.dreamtinker.tools.modifiers.tools.underPlate.WeaponTransformation;
@@ -202,7 +201,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<LoveShooting> love_shooting = MODIFIERS.register("love_shooting", LoveShooting::new);
     public static final StaticModifier<TeleportShoot> teleport_shooting = MODIFIERS.register("teleport_shooting", TeleportShoot::new);
     public static final StaticModifier<FoxBlessing> fox_blessing = MODIFIERS.register("fox_blessing", FoxBlessing::new);
-    public static final StaticModifier<SelfSacrifice> self_sacrifice = MODIFIERS.register("self_sacrifice", SelfSacrifice::new);
     public static final StaticModifier<VirtualDodge> virtual_dodge = MODIFIERS.register("virtual_dodge", VirtualDodge::new);
     public static final StaticModifier<GoliathDamage> goliath_damage = MODIFIERS.register("goliath_damage", GoliathDamage::new);
     public static final StaticModifier<SilkyCrystal> silky_crystal = MODIFIERS.register("silky_crystal", SilkyCrystal::new);

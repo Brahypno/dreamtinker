@@ -21,6 +21,7 @@ import org.brahypno.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
 import org.brahypno.dreamtinker.smeltery.DreamTinkerSmeltery;
 import org.brahypno.dreamtinker.tools.DreamtinkerToolParts;
 import org.brahypno.dreamtinker.tools.DreamtinkerTools;
+import org.brahypno.esotericismtinker.common.EsotericismTinkerTagKeys;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.registration.object.EnumObject;
@@ -53,16 +54,17 @@ public class ItemTagProvider extends ItemTagsProvider {
                  DreamtinkerToolParts.NovaCover.get());
 
         addItemsTags(DreamtinkerTools.mashou, MULTIPART_TOOL, DURABILITY, HARVEST, MELEE_PRIMARY, INTERACTABLE_RIGHT, SWORD, BROAD_TOOLS, BONUS_SLOTS,
-                     ItemTags.SWORDS, AOE);
+                     ItemTags.SWORDS, AOE, EsotericismTinkerTagKeys.Items.EsotericismTinkerTools);
         addItemsTags(DreamtinkerTools.narcissus_wing, MULTIPART_TOOL, DURABILITY, HARVEST_PRIMARY, MELEE_PRIMARY, INTERACTABLE_RIGHT, SCYTHES, BROAD_TOOLS,
-                     BONUS_SLOTS, AOE, RANGED, ItemTags.PICKAXES);
-        addItemsTags(DreamtinkerTools.tntarrow, MULTIPART_TOOL, AMMO, UNSALVAGABLE, UNSWAPPABLE, SINGLE_USE, MELEE, ItemTags.ARROWS, BONUS_SLOTS);
+                     BONUS_SLOTS, AOE, RANGED, ItemTags.PICKAXES, EsotericismTinkerTagKeys.Items.EsotericismTinkerTools);
+        addItemsTags(DreamtinkerTools.tntarrow, MULTIPART_TOOL, AMMO, UNSALVAGABLE, UNSWAPPABLE, SINGLE_USE, MELEE, ItemTags.ARROWS, BONUS_SLOTS,
+                     EsotericismTinkerTagKeys.Items.EsotericismTinkerTools);
         addItemsTags(DreamtinkerTools.chain_saw_blade, MULTIPART_TOOL, DURABILITY, HARVEST_PRIMARY, MELEE_PRIMARY, INTERACTABLE_RIGHT, AOE, BROAD_TOOLS,
-                     BONUS_SLOTS, ItemTags.AXES);
-        addItemsOptionalTags(NovaRegistry.per_aspera_scriptum, MULTIPART_TOOL, MELEE_WEAPON, BROAD_RANGED, BONUS_SLOTS, HARVEST, LAUNCHERS, HELD);
-        addItemsTags(DreamtinkerTools.silence_glove, DURABILITY, MELEE, BONUS_SLOTS, ANCIENT_TOOLS, STAFFS, SHIELDS, Items.HANDS, Items.CURIOS);
-        addItemsTags(DreamtinkerTools.ritual_blade, MULTIPART_TOOL, DURABILITY, HARVEST, MELEE_PRIMARY, INTERACTABLE_RIGHT, SMALL_TOOLS, BONUS_SLOTS,
-                     ItemTags.SWORDS);
+                     BONUS_SLOTS, ItemTags.AXES, EsotericismTinkerTagKeys.Items.EsotericismTinkerTools);
+        addItemsOptionalTags(NovaRegistry.per_aspera_scriptum, MULTIPART_TOOL, MELEE_WEAPON, BROAD_RANGED, BONUS_SLOTS, HARVEST, LAUNCHERS, HELD,
+                             EsotericismTinkerTagKeys.Items.EsotericismTinkerTools);
+        addItemsTags(DreamtinkerTools.silence_glove, DURABILITY, MELEE, BONUS_SLOTS, ANCIENT_TOOLS, STAFFS, SHIELDS, Items.HANDS, Items.CURIOS,
+                     EsotericismTinkerTagKeys.Items.EsotericismTinkerTools);
         this.tag(DreamtinkerTagKeys.Items.modTag("occultism", "tools/knives"))
             .add(TinkerTools.cleaver.get());
 
@@ -118,7 +120,7 @@ public class ItemTagProvider extends ItemTagsProvider {
 
         this.tag(Tags.Items.INGOTS)
             .add(metallivorous_stibium_lupus.get(), regulus.get(), soul_steel.get(), orichalcum.get(), cold_iron_ingot.get(), shadow_silver_ingot.get(),
-                 transmutation_gold_ingot.get(), DreamTinkerSmeltery.ashenBrick.get())
+                 transmutation_gold_ingot.get())
             .addOptional(soul_etherium.getId())
             .addOptional(malignant_gluttony.getId())
             .addOptional(new ResourceLocation("born_in_chaos_v1", "dark_metal_ingot"));
@@ -187,33 +189,9 @@ public class ItemTagProvider extends ItemTagsProvider {
         this.copy(Blocks.RawTransmutationGoldBlock, Items.RawTransmutationGoldBlock);
         this.copy(Tags.Blocks.ORES, Tags.Items.ORES);
 
-        addSmeltery();
-        this.tag(TinkerTags.Items.TINKERS_GUIDES)
-            .add(hypnagogic_transmute.get());
-
         this.tag(Items.CursedDroplet)
             .addOptional(new ResourceLocation("l2complements", "cursed_droplet"));
     }
-
-    private void addSmeltery() {
-        this.copy(DreamtinkerTagKeys.Blocks.ASHEN_BLOCKS, DreamtinkerTagKeys.Items.ASHEN_BLOCKS);
-        this.copy(Blocks.ASHEN_TANKS, Items.ASHEN_TANKS);
-        this.copy(Blocks.TRANSMUTE_BLOCKS, Items.TRANSMUTE_BLOCKS);
-        this.copy(Blocks.TRANSMUTE_HEATER, Items.TRANSMUTE_HEATER);
-        this.copy(Blocks.TRANSMUTE_ACCEL, Items.TRANSMUTE_ACCEL);
-        this.tag(Items.TRANSMUTE)
-            .addTag(Items.ASHEN_BLOCKS)
-            .addTag(Items.ASHEN_TANKS)
-            .addTag(Items.TRANSMUTE_HEATER)
-            .addTag(Items.TRANSMUTE_ACCEL)
-            .addTag(Items.ASHEN_TANKS)
-            .add(DreamTinkerSmeltery.transmuteController.asItem(), DreamTinkerSmeltery.ashenLadder.asItem(),
-                 DreamTinkerSmeltery.ashenDrain.asItem(), DreamTinkerSmeltery.ashenChute.asItem(), DreamTinkerSmeltery.ashenDuct.asItem(),
-                 DreamTinkerSmeltery.ashenGlass.asItem(), DreamTinkerSmeltery.ashenSoulGlass.asItem(), DreamTinkerSmeltery.ashenTintedGlass.asItem());
-
-
-    }
-
 
     private TagKey<Item> getArmorTag(ArmorItem.Type slotType) {
         return switch (slotType) {

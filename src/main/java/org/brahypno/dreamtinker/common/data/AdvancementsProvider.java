@@ -19,6 +19,7 @@ import org.brahypno.dreamtinker.common.DreamtinkerCommon;
 import org.brahypno.dreamtinker.fluids.DreamtinkerFluids;
 import org.brahypno.dreamtinker.tools.DreamtinkerTools;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerMaterialIds;
+import org.brahypno.esotericismtinker.common.EsotericismTinkerCommon;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.data.GenericDataProvider;
 import slimeknights.mantle.data.predicate.IJsonPredicate;
@@ -60,7 +61,7 @@ public class AdvancementsProvider extends GenericDataProvider {
 
     protected void generate() {
         Advancement dreamtinkerRoot = builderSilentRoot(
-                DreamtinkerCommon.hypnagogic_transmute.get(),
+                EsotericismTinkerCommon.hypnagogic_transmute.get(),
                 resource("root"),
                 resource("textures/block/transmute/ashen/ashen_road_back.png"),
                 FrameType.TASK,
@@ -335,7 +336,7 @@ public class AdvancementsProvider extends GenericDataProvider {
     }
 
     private CriterionTriggerInstance hasItem(ItemLike item) {
-        return InventoryChangeTrigger.TriggerInstance.hasItems(new ItemPredicate[]{ItemPredicate.Builder.item().of(new ItemLike[]{item}).build()});
+        return InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(new ItemLike[]{item}).build());
     }
 
     protected Advancement builder(ItemLike display, ResourceLocation name, @Nullable ResourceLocation background, FrameType frame, Consumer<Advancement.Builder> consumer) {
@@ -347,7 +348,7 @@ public class AdvancementsProvider extends GenericDataProvider {
     }
 
     protected Advancement builder(ItemStack display, ResourceLocation name, Advancement parent, FrameType frame, Consumer<Advancement.Builder> consumer) {
-        return this.builder((ItemStack) display, name, (ResourceLocation) ((ResourceLocation) null), frame, (builder) -> {
+        return this.builder(display, name, (ResourceLocation) null, frame, (builder) -> {
             builder.parent(parent);
             consumer.accept(builder);
         });

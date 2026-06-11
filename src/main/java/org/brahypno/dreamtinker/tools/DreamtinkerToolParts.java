@@ -8,6 +8,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.RegistryObject;
 import org.brahypno.dreamtinker.Dreamtinker;
+import org.brahypno.esotericismtinker.tools.EsotericismTinkerTools;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.materials.MaterialRegistry;
 import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
@@ -43,7 +44,7 @@ public class DreamtinkerToolParts {
                                                            return DreamtinkerToolParts.explode_core.get().withMaterialForDisplay(material);
                                                        })
                                                        .displayItems(DreamtinkerToolParts::addTabItems)
-                                                       .withTabsBefore(DreamtinkerTools.TOOL.getId())
+                                                       .withTabsBefore(EsotericismTinkerTools.TOOL.getId())
                                                        .withSearchBar().build());
 
     public static final RegistryObject<ToolPartItem> explode_core = ITEMS.register("explode_core", () -> new ToolPartItem(ITEM_DROPS, HeadMaterialStats.ID));

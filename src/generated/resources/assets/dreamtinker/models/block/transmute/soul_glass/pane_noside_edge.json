@@ -1,8 +1,0 @@
-{
-  "parent": "tconstruct:block/template/pane/noside_edge",
-  "render_type": "minecraft:translucent",
-  "textures": {
-    "edge": "dreamtinker:block/transmute/glass_top",
-    "pane": "dreamtinker:block/transmute/soul_glass"
-  }
-}

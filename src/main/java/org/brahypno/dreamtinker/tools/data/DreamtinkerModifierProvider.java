@@ -39,9 +39,9 @@ import org.brahypno.dreamtinker.library.modifiers.modules.harvest.AutoPureDaisyM
 import org.brahypno.dreamtinker.library.modifiers.modules.harvest.BlockLootMultiplierModule;
 import org.brahypno.dreamtinker.library.modifiers.modules.harvest.EntityLootMultiplierModule;
 import org.brahypno.dreamtinker.library.modifiers.modules.weapon.SwappableCircleWeaponAttack;
-import org.brahypno.dreamtinker.library.tools.DTSlotType;
 import org.brahypno.dreamtinker.tools.DreamtinkerTools;
 import org.brahypno.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvider;
+import org.brahypno.esotericismtinker.library.tools.EsotericismSlotType;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.data.predicate.IJsonPredicate;
 import slimeknights.mantle.data.predicate.block.BlockPredicate;
@@ -161,13 +161,13 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                       .addModule(new EffectImmunityModule(MobEffects.REGENERATION));
         buildModifier(Ids.soul_upgrade).tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
                                        .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                                       .addModules(ModifierSlotModule.slot(DTSlotType.DELUSION).eachLevel(1));
+                                       .addModules(ModifierSlotModule.slot(EsotericismSlotType.DELUSION).eachLevel(1));
         buildModifier(Ids.abyss_inside).tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
                                        .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                                       .addModules(ModifierSlotModule.slot(DTSlotType.DELUSION).eachLevel(1));
+                                       .addModules(ModifierSlotModule.slot(EsotericismSlotType.DELUSION).eachLevel(1));
         buildModifier(Ids.meta_morphosis).tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
                                          .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                                         .addModules(ModifierSlotModule.slot(DTSlotType.DELUSION).eachLevel(1));
+                                         .addModules(ModifierSlotModule.slot(EsotericismSlotType.DELUSION).eachLevel(1));
         buildModifier(Ids.continuous_explode)
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModule(new VolatileFlagModule(IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY));
@@ -335,7 +335,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
 
         buildModifier(Ids.soul_unchanged)
-                .addModules(ModifierSlotModule.slot(DTSlotType.DELUSION).eachLevel(1))
+                .addModules(ModifierSlotModule.slot(EsotericismSlotType.DELUSION).eachLevel(1))
                 .addModule(new VolatileFlagModule(IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY));
         buildModifier(Ids.sun_changed)
                 .addModule(BlockLootMultiplierModule.builder()
@@ -592,7 +592,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         //        buildModifier(Ids.blighted_sigil, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
         //                .tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
         //                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-        //                .addModules(ModifierSlotModule.slot(DTSlotType.DELUSION).eachLevel(1));
+        //                .addModules(ModifierSlotModule.slot(EsotericismSlotType.DELUSION).eachLevel(1));
     }
 
     private void addMalumModifiers() {
@@ -636,7 +636,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.many_us, DreamtinkerMaterialDataProvider.modLoaded("malum"))
                 .tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                .addModules(ModifierSlotModule.slot(DTSlotType.DELUSION).eachLevel(1));
+                .addModules(ModifierSlotModule.slot(EsotericismSlotType.DELUSION).eachLevel(1));
 
 
     }
@@ -679,7 +679,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.ashen_soul, DreamtinkerMaterialDataProvider.modLoaded("eidolon"))
                 .tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                .addModules(ModifierSlotModule.slot(DTSlotType.DELUSION).eachLevel(1));
+                .addModules(ModifierSlotModule.slot(EsotericismSlotType.DELUSION).eachLevel(1));
     }
 
     private void addBICModifiers() {
@@ -794,7 +794,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.naughty_chaos, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"))
                 .tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                .addModules(ModifierSlotModule.slot(DTSlotType.DELUSION).eachLevel(1));
+                .addModules(ModifierSlotModule.slot(EsotericismSlotType.DELUSION).eachLevel(1));
     }
 
     private void addNovaModifiers() {
@@ -847,7 +847,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.cosmogony_tetrad, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"))
                 .tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                .addModules(ModifierSlotModule.slot(DTSlotType.DELUSION).eachLevel(1));
+                .addModules(ModifierSlotModule.slot(EsotericismSlotType.DELUSION).eachLevel(1));
     }
 
     private void addUGModifiers() {
@@ -903,7 +903,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.otherworld_precious, DreamtinkerMaterialDataProvider.modLoaded("occultism1"))
                 .tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                .addModules(ModifierSlotModule.slot(DTSlotType.DELUSION).eachLevel(1));
+                .addModules(ModifierSlotModule.slot(EsotericismSlotType.DELUSION).eachLevel(1));
     }
 
     private void addBOTANIAModifiers() {

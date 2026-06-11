@@ -61,8 +61,6 @@ public class DreamtinkerCachedConfig {
     public static final ConfigLazy<Double> ArtsMaxManaBonus = lazDoubleInSpec(DreamtinkerConfig.ArtsMaxManaBonus);
     public static final ConfigLazy<Integer> UnbuildLimits = lazIntInSpec(DreamtinkerConfig.UnbuildLimits);
     public static final ConfigLazy<Double> AsOneTT = lazDoubleInSpec(DreamtinkerConfig.AsOneTT);
-    public static final ConfigLazy<Integer> TransmuteHeaterTemperature = lazIntInSpec(DreamtinkerConfig.TransmuteHeaterTemperature);
-    public static final ConfigLazy<Integer> TransmuteAcceleratorTemperature = lazIntInSpec(DreamtinkerConfig.TransmuteFuelAccelerator);
     public static final ConfigLazy<Double> VirtualDodge = lazDoubleInSpec(DreamtinkerConfig.VirtualDodge);
     public static final ConfigLazy<Double> FirthMark = lazDoubleInSpec(DreamtinkerConfig.FirthMark);
     public static final ConfigLazy<Double> BaseExplodeDefenseRate = lazDoubleInSpec(DreamtinkerConfig.BaseExplodeDefenseRate);
@@ -136,7 +134,7 @@ public class DreamtinkerCachedConfig {
         };
 
         // 用类型实参把 T 钉死为 List<Double>
-        return ConfigLazy.<java.util.List<Double>>of(
+        return ConfigLazy.of(
                 raw,
                 defSup,
                 (java.util.List<Double> list) -> {                // validator：长度/边界
@@ -177,7 +175,7 @@ public class DreamtinkerCachedConfig {
         java.util.function.Supplier<java.util.List<String>> defSup = () ->
                 java.util.List.copyOf(toStrings.apply(cfg.getDefault()));
 
-        return ConfigLazy.<java.util.List<String>>of(
+        return ConfigLazy.of(
                 raw,
                 defSup,
                 (java.util.List<String> xs) -> xs != null,                 // 验证：非空即可

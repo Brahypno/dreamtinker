@@ -14,7 +14,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LiquidBlock;
@@ -23,16 +22,17 @@ import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.data.event.GatherDataEvent;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraftforge.fml.common.Mod;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerEffects;
 import org.brahypno.dreamtinker.fluids.data.DreamtinkerFluidTextureProvider;
 import org.brahypno.dreamtinker.fluids.data.FluidTooltipProvider;
-import org.brahypno.dreamtinker.tools.DreamtinkerToolParts;
+import org.brahypno.esotericismtinker.fluids.EsotericismTinkerFluids;
 import slimeknights.mantle.fluid.InvertedFluid;
 import slimeknights.mantle.registration.deferred.FluidDeferredRegister;
 import slimeknights.mantle.registration.object.FlowingFluidObject;
@@ -47,19 +47,13 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static org.brahypno.dreamtinker.Dreamtinker.configCompactDisabled;
-import static org.brahypno.dreamtinker.DreamtinkerModule.*;
+import static org.brahypno.dreamtinker.DreamtinkerModule.FLUIDS;
+import static org.brahypno.dreamtinker.DreamtinkerModule.MALUM_FLUIDS;
 import static slimeknights.mantle.Mantle.commonResource;
 import static slimeknights.tconstruct.fluids.TinkerFluids.withoutMolten;
 
+@Mod.EventBusSubscriber(modid = Dreamtinker.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DreamtinkerFluids {
-    public static final RegistryObject<CreativeModeTab> tabFluids = TABS.register(
-            "fluids", () -> CreativeModeTab.builder().title(Dreamtinker.makeTranslation("itemGroup", "fluids"))
-                                           .icon(() -> new ItemStack(DreamtinkerFluids.liquid_amber))
-                                           .displayItems(DreamtinkerFluids::addTabItems)
-                                           .withTabsBefore(DreamtinkerToolParts.PART.getId())
-                                           .withSearchBar()
-                                           .build());
-
 
     public static FluidType.Properties createFluidType(int temperature, int lightLevel, int viscosity, int density) {
         return FluidType.Properties.create().temperature(temperature) // 设置流体的温度
@@ -75,6 +69,7 @@ public class DreamtinkerFluids {
         return register.register(name).type(createFluidType(temp, lightLevel, viscosity, density)).block(blockFunction).bucket().flowing();
     }
 
+    //fluids
     public static final FlowingFluidObject<SlimeFluid> gooey_slime =
             registerSlime(FLUIDS, "gooey_slime", 350, 100, 100, 15,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.WATER, 12), 10, 4) {});
@@ -217,9 +212,6 @@ public class DreamtinkerFluids {
             registerFluid(FLUIDS, "reversed_shadow", 1500, 300, 10, 15,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.CRIMSON_NYLIUM, 15), 20, 10) {});
 
-    public static final FlowingFluidObject<ForgeFlowingFluid> blood_soul =
-            registerFluid(FLUIDS, "blood_soul", 37, 100, 10, 7,
-                          supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.CRIMSON_NYLIUM, 7), 0, 0) {});
 
     public static final FlowingFluidObject<ForgeFlowingFluid> molten_soul_stained_steel =
             registerFluid(MALUM_FLUIDS, "molten_soul_stained_steel", 1200, 100, 10, 7,
@@ -299,10 +291,6 @@ public class DreamtinkerFluids {
             registerFluid(FLUIDS, "molten_dark_metal", 1200, 1000, 10000, 10,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.METAL, 10), 10, 4) {});
 
-    public static final FlowingFluidObject<ForgeFlowingFluid> molten_ender_ash =
-            registerFluid(FLUIDS, "molten_ender_ash", 1800, 1000, 10000, 10,
-                          supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.COLOR_PURPLE, 2), 0, 0) {});
-
     public static final FlowingFluidObject<ForgeFlowingFluid> molten_utherium =
             registerFluid(FLUIDS, "molten_utherium", 1800, 100, 100, 10,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.METAL, 12), 10, 4) {});
@@ -369,7 +357,6 @@ public class DreamtinkerFluids {
         }
 
         output.accept(reversed_shadow);
-        output.accept(blood_soul);
         output.accept(liquid_amber);
         output.accept(molten_desire);
         output.accept(despair_essence);
@@ -391,7 +378,6 @@ public class DreamtinkerFluids {
         if (ModList.get().isLoaded("born_in_chaos_v1") && !configCompactDisabled("born_in_chaos_v1")){
             output.accept(molten_dark_metal);
         }
-        output.accept(molten_ender_ash);
 
         //output.accept(mercury);
         //output.accept(molten_arcane_gold);
@@ -461,5 +447,12 @@ public class DreamtinkerFluids {
      */
     protected static boolean acceptIfTag(CreativeModeTab.Output output, ItemLike item, TagKey<Item> tagCondition) {
         return acceptIfTag(output, item, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS, tagCondition);
+    }
+
+    @SubscribeEvent
+    public static void buildCreativeTabContents(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey().equals(EsotericismTinkerFluids.tabFluids.getKey())){
+            addTabItems(event.getParameters(), event);
+        }
     }
 }

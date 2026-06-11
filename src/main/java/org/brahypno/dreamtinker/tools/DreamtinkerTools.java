@@ -6,12 +6,12 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraftforge.fml.common.Mod;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.DreamtinkerModule;
-import org.brahypno.dreamtinker.common.DreamtinkerCommon;
 import org.brahypno.dreamtinker.common.data.tags.MaterialTagProvider;
 import org.brahypno.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerArmorModel;
@@ -25,6 +25,8 @@ import org.brahypno.dreamtinker.tools.data.material.DreamtinkerMaterialTraitProv
 import org.brahypno.dreamtinker.tools.data.sprite.DreamtinkerMaterialSpriteProvider;
 import org.brahypno.dreamtinker.tools.data.sprite.DreamtinkerPartSpriteProvider;
 import org.brahypno.dreamtinker.tools.items.*;
+import org.brahypno.esotericismtinker.tools.EsotericismTinkerTools;
+import org.brahypno.esotericismtinker.tools.data.sprite.EsotericismPartSpriteProvider;
 import slimeknights.mantle.registration.object.EnumObject;
 import slimeknights.mantle.registration.object.ItemObject;
 import slimeknights.tconstruct.library.client.data.material.GeneratorPartTextureJsonGenerator;
@@ -39,17 +41,11 @@ import slimeknights.tconstruct.tools.item.ModifiableSwordItem;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+@Mod.EventBusSubscriber(modid = Dreamtinker.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DreamtinkerTools extends DreamtinkerModule {
     public DreamtinkerTools() {
         DtTiers.init();
-        //DTSlotType.init();
     }
-
-    public static final RegistryObject<CreativeModeTab> TOOL =
-            DreamtinkerModule.TABS.register("tool", () -> CreativeModeTab.builder().title(Dreamtinker.makeTranslation("itemGroup", "tool"))
-                                                                         .icon(() -> DreamtinkerTools.mashou.get().getRenderTool())
-                                                                         .displayItems(DreamtinkerTools::addTabItems)
-                                                                         .withTabsBefore(DreamtinkerCommon.ITEM.getId()).withSearchBar().build());
 
     public static final ItemObject<TNTArrow> tntarrow =
             MODI_TOOLS.register("tntarrow", () -> new TNTArrow((new Item.Properties()).stacksTo(4), DTtoolsDefinition.TNTARROW, 4));
@@ -68,34 +64,12 @@ public class DreamtinkerTools extends DreamtinkerModule {
             MODI_TOOLS.register("silence_glove", () -> new ModifiableItem(UNSTACKABLE_PROPS, DTtoolsDefinition.SilenceGlove));
     public static final ItemObject<ChainSawBlade> chain_saw_blade =
             MODI_TOOLS.register("chain_saw_blade", () -> new ChainSawBlade(UNSTACKABLE_PROPS, DTtoolsDefinition.ChainSawBlade));
-    public static final ItemObject<ModifiableItem> ritual_blade =
-            MODI_TOOLS.register("ritual_blade", () -> new ModifiableItem(UNSTACKABLE_PROPS, DTtoolsDefinition.RitualBlade));
 
     @SubscribeEvent
-    void gatherData(final GatherDataEvent event) {
-        DataGenerator generator = event.getGenerator();
-        PackOutput output = generator.getPackOutput();
-        ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
-        generator.addProvider(event.includeClient(), new DreamtinkerMaterialDataProvider(output));
-        generator.addProvider(event.includeClient(), new DreamtinkerMaterialStatProvider(output));
-        generator.addProvider(event.includeClient(), new DreamtinkerMaterialTraitProvider(output));
-
-        generator.addProvider(event.includeClient(),
-                              new DreamtinkerMaterialRenderInfoProvider(output, new DreamtinkerMaterialSpriteProvider(), existingFileHelper));
-        generator.addProvider(event.includeClient(),
-                              new MaterialPartTextureGenerator(output, existingFileHelper, new TinkerPartSpriteProvider(),
-                                                               new DreamtinkerMaterialSpriteProvider()));
-
-        generator.addProvider(event.includeClient(),
-                              new MaterialPartTextureGenerator(output, existingFileHelper, new DreamtinkerPartSpriteProvider(),
-                                                               new TinkerMaterialSpriteProvider(),
-                                                               new DreamtinkerMaterialSpriteProvider()));
-        generator.addProvider(event.includeClient(), new DreamtinkerToolItemModelProvider(output, existingFileHelper));
-        generator.addProvider(event.includeClient(), new DreamtinkerArmorModel(output));
-        generator.addProvider(event.includeServer(), new DreamtinkerToolDefinitionProvider(output));
-        generator.addProvider(event.includeServer(), new DreamtinkerStationLayout(output));
-        generator.addProvider(event.includeClient(), new MaterialTagProvider(output, existingFileHelper));
-        generator.addProvider(event.includeClient(), new GeneratorPartTextureJsonGenerator(output, Dreamtinker.MODID, new DreamtinkerPartSpriteProvider()));
+    public static void buildCreativeTabContents(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey().equals(EsotericismTinkerTools.TOOL.getKey())){
+            addTabItems(event.getParameters(), event);
+        }
     }
 
     /**
@@ -107,7 +81,6 @@ public class DreamtinkerTools extends DreamtinkerModule {
 
         // small tools
         acceptTool(output, tntarrow);
-        acceptTool(output, ritual_blade);
         // broad tools
         acceptTool(output, mashou);
         acceptTool(output, narcissus_wing);
@@ -136,5 +109,35 @@ public class DreamtinkerTools extends DreamtinkerModule {
      */
     private static void acceptTools(Consumer<ItemStack> output, EnumObject<?, ? extends IModifiable> tools) {
         tools.forEach(tool -> ToolBuildHandler.addVariants(output, tool, ""));
+    }
+
+    @SubscribeEvent
+    void gatherData(final GatherDataEvent event) {
+        DataGenerator generator = event.getGenerator();
+        PackOutput output = generator.getPackOutput();
+        ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+        generator.addProvider(event.includeClient(), new DreamtinkerMaterialDataProvider(output));
+        generator.addProvider(event.includeClient(), new DreamtinkerMaterialStatProvider(output));
+        generator.addProvider(event.includeClient(), new DreamtinkerMaterialTraitProvider(output));
+
+        generator.addProvider(event.includeClient(),
+                              new DreamtinkerMaterialRenderInfoProvider(output, new DreamtinkerMaterialSpriteProvider(), existingFileHelper));
+        generator.addProvider(event.includeClient(),
+                              new MaterialPartTextureGenerator(output, existingFileHelper, new TinkerPartSpriteProvider(),
+                                                               new DreamtinkerMaterialSpriteProvider()));
+        generator.addProvider(event.includeClient(),
+                              new MaterialPartTextureGenerator(output, existingFileHelper, new EsotericismPartSpriteProvider(),
+                                                               new DreamtinkerMaterialSpriteProvider()));
+
+        generator.addProvider(event.includeClient(),
+                              new MaterialPartTextureGenerator(output, existingFileHelper, new DreamtinkerPartSpriteProvider(),
+                                                               new TinkerMaterialSpriteProvider(),
+                                                               new DreamtinkerMaterialSpriteProvider()));
+        generator.addProvider(event.includeClient(), new DreamtinkerToolItemModelProvider(output, existingFileHelper));
+        generator.addProvider(event.includeClient(), new DreamtinkerArmorModel(output));
+        generator.addProvider(event.includeServer(), new DreamtinkerToolDefinitionProvider(output));
+        generator.addProvider(event.includeServer(), new DreamtinkerStationLayout(output));
+        generator.addProvider(event.includeClient(), new MaterialTagProvider(output, existingFileHelper));
+        generator.addProvider(event.includeClient(), new GeneratorPartTextureJsonGenerator(output, Dreamtinker.MODID, new DreamtinkerPartSpriteProvider()));
     }
 }

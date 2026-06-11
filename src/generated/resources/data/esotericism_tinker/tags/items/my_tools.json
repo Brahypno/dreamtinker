@@ -8,9 +8,6 @@
       "id": "dreamtinker:per_aspera_scriptum",
       "required": false
     },
-    "dreamtinker:under_plate_helmet",
-    "dreamtinker:under_plate_chestplate",
-    "dreamtinker:under_plate_leggings",
-    "dreamtinker:under_plate_boots"
+    "dreamtinker:silence_glove"
   ]
 }

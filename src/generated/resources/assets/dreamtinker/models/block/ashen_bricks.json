@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "dreamtinker:block/transmute/ashen/ashen_bricks"
-  }
-}

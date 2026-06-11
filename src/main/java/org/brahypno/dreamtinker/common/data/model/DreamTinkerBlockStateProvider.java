@@ -7,22 +7,18 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.IronBarsBlock;
+import net.minecraft.world.level.block.PipeBlock;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerCommon;
-import org.brahypno.dreamtinker.smeltery.DreamTinkerSmeltery;
-import org.brahypno.dreamtinker.smeltery.block.component.AshenButtonBlock;
 import slimeknights.mantle.client.model.builder.ColoredModelBuilder;
 import slimeknights.mantle.client.model.builder.ConnectedModelBuilder;
 import slimeknights.mantle.client.model.builder.MantleItemLayerBuilder;
 import slimeknights.tconstruct.TConstruct;
-import slimeknights.tconstruct.smeltery.block.component.SearedBlock;
-import slimeknights.tconstruct.smeltery.block.component.SearedTankBlock;
-import slimeknights.tconstruct.smeltery.block.controller.ControllerBlock;
 
 import javax.annotation.Nullable;
 
@@ -33,6 +29,10 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
 
     public DreamTinkerBlockStateProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
         super(output, Dreamtinker.MODID, existingFileHelper);
+    }
+
+    public static String resourceString(String res) {
+        return String.format("%s:%s", Dreamtinker.MODID, res);
     }
 
     @Override
@@ -72,102 +72,14 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
         singleTextureParentBlock(DreamtinkerCommon.UnbornDragonEgg.get(), "unborn_dragon_egg", mcLoc("block/dragon_egg"), "all");
         snifferEggBlock(DreamtinkerCommon.UnbornSnifferEgg.get(), "unborn_sniffer_egg");
         singleTextureParentBlock(DreamtinkerCommon.UnbornTurtleEgg.get(), "unborn_turtle_egg", mcLoc("block/template_turtle_egg"), "all");
-
-        simpleBlockWithItem(DreamTinkerSmeltery.enderMortar.get(), cubeAll(DreamTinkerSmeltery.enderMortar.get()));
-        simpleBlockWithItem(DreamTinkerSmeltery.ashenBricks.get(),
-                            models().cubeAll(itemKey(DreamTinkerSmeltery.ashenBricks.get()).getPath(), modLoc("block/transmute/ashen/ashen_bricks")));
-        simpleBlockWithItem(DreamTinkerSmeltery.ashenRoad.get(),
-                            models().cubeAll(itemKey(DreamTinkerSmeltery.ashenRoad.get()).getPath(), modLoc("block/transmute/ashen/ashen_road")));
-        simpleBlockWithItem(DreamTinkerSmeltery.chiseledAshenBricks.get(),
-                            models().cubeAll(itemKey(DreamTinkerSmeltery.chiseledAshenBricks.get()).getPath(),
-                                             modLoc("block/transmute/ashen/chiseled_ashen_bricks")));
-        simpleBlockWithItem(DreamTinkerSmeltery.ashenStone.get(),
-                            models().cubeAll(itemKey(DreamTinkerSmeltery.ashenStone.get()).getPath(), modLoc("block/transmute/ashen/ashen_stone")));
-        this.axisBlock(DreamTinkerSmeltery.polishedAshenStone.get(), "polished_ashen_stone", modLoc("block/transmute/ashen/polished_ashen_stone"), true);
-        this.slabWithItem(DreamTinkerSmeltery.ashenBricks.getSlab(), modLoc("block/ashen_bricks"), modLoc("block/transmute/ashen/ashen_bricks"));
-        slabWithItem(DreamTinkerSmeltery.ashenRoad.getSlab(), modLoc("block/ashen_road"), modLoc("block/transmute/ashen/ashen_road"));
-        stairsWithItem(DreamTinkerSmeltery.ashenBricks.getStairs(), modLoc("block/transmute/ashen/ashen_bricks"));
-        stairsWithItem(DreamTinkerSmeltery.ashenRoad.getStairs(), modLoc("block/transmute/ashen/ashen_road"));
-        fenceWithItem(DreamTinkerSmeltery.ashenBricks.getFence(), modLoc("block/transmute/ashen/ashen_bricks"));
-        controllerStates(DreamTinkerSmeltery.transmuteController.get(),
-                         models().getExistingFile(modLoc("block/transmute/controller/transmute_unformed")),
-                         models().getExistingFile(modLoc("block/transmute/controller/transmute_inactive")),
-                         models().getExistingFile(modLoc("block/transmute/controller/transmute_active")));
-        simpleBlockWithItem(DreamTinkerSmeltery.ashenLamp.get(),
-                            models().cubeAll(itemKey(DreamTinkerSmeltery.ashenLamp.get()).getPath(), modLoc("block/transmute/ashen/ashen_lamp")));
-
-        structureStates(DreamTinkerSmeltery.ashenChute.get(),
-                        models().getExistingFile(modLoc("block/transmute/io/chute_inactive")),
-                        models().getExistingFile(modLoc("block/transmute/io/chute_active")));
-        structureStates(DreamTinkerSmeltery.ashenDrain.get(),
-                        models().getExistingFile(modLoc("block/transmute/io/drain_inactive")),
-                        models().getExistingFile(modLoc("block/transmute/io/drain_active")));
-        structureStates(DreamTinkerSmeltery.ashenDuct.get(),
-                        models().getExistingFile(modLoc("block/transmute/io/duct_inactive")),
-                        models().getExistingFile(modLoc("block/transmute/io/duct_active")));
-
-        simpleBlockWithItem(DreamTinkerSmeltery.ashenTank.get(SearedTankBlock.TankType.FUEL_TANK),
-                            models().getExistingFile(modLoc("block/transmute/tank/fuel_tank")));
-        simpleBlockWithItem(DreamTinkerSmeltery.ashenTank.get(SearedTankBlock.TankType.FUEL_GAUGE),
-                            models().getExistingFile(modLoc("block/transmute/tank/fuel_gauge")));
-        simpleBlockWithItem(DreamTinkerSmeltery.ashenTank.get(SearedTankBlock.TankType.INGOT_TANK),
-                            models().getExistingFile(modLoc("block/transmute/tank/ingot_tank")));
-        simpleBlockWithItem(DreamTinkerSmeltery.ashenTank.get(SearedTankBlock.TankType.INGOT_GAUGE),
-                            models().getExistingFile(modLoc("block/transmute/tank/ingot_gauge")));
-
-        RenderType translucent = RenderType.translucent();
-        glassBlock(DreamTinkerSmeltery.ashenGlass.get(), DreamTinkerSmeltery.ashenGlassPane.get(), "transmute/glass/",
-                   Dreamtinker.getLocation("block/transmute/glass"), -1,
-                   true, null);
-        glassBlock(DreamTinkerSmeltery.ashenSoulGlass.get(), DreamTinkerSmeltery.ashenSoulGlassPane.get(), "transmute/soul_glass/",
-                   Dreamtinker.getLocation("block/transmute/soul_glass"), Dreamtinker.getLocation("block/transmute/glass_top"), -1, true, translucent);
-
-        structureBlock(DreamTinkerSmeltery.ashenHeater.get(),
-                       models().cubeAll(itemKey(DreamTinkerSmeltery.ashenHeater.get()).getPath(), modLoc("block/transmute/ashen/ashen_heater")),
-                       models().getExistingFile(modLoc("block/transmute/ashen/ashen_heater_active")));
-
-        structureBlock(DreamTinkerSmeltery.ashenAccel.get(),
-                       models().cubeAll(itemKey(DreamTinkerSmeltery.ashenAccel.get()).getPath(), modLoc("block/transmute/ashen/ashen_accelerator")),
-                       models().getExistingFile(modLoc("block/transmute/ashen/ashen_accelerator_active")));
-
-        frontTextureIntStructureStates(DreamTinkerSmeltery.ashenMeltSwitch.get(), "transmute/ashen_melt_switch",
-                                       AshenButtonBlock.Function_Set, 2, modLoc("block/transmute/ashen/ashen_bricks"));
-    }
-
-    protected void slabWithItem(SlabBlock slab, ResourceLocation doubleSlabModel, ResourceLocation texture) {
-        // 1) blockstate + block models
-        slabBlock(slab, doubleSlabModel, texture);
-
-        // 2) item model: item/<slabname>.json -> parent: block/<slabname>
-        String name = ForgeRegistries.BLOCKS.getKey(slab).getPath();
-        itemModels().withExistingParent(name, modLoc("block/" + name));
-    }
-
-    protected void stairsWithItem(StairBlock stair, ResourceLocation texture) {
-        // 1) blockstate + block models
-        stairsBlock(stair, texture);
-
-        // 2) item model: item/<slabname>.json -> parent: block/<slabname>
-        String name = ForgeRegistries.BLOCKS.getKey(stair).getPath();
-        itemModels().withExistingParent(name, modLoc("block/" + name));
-    }
-
-    protected void fenceWithItem(FenceBlock block, ResourceLocation texture) {
-        // 1) blockstate + block models
-        fenceBlock(block, texture);
-
-        // 2) item model: item/<slabname>.json -> parent: block/<slabname>
-        String name = ForgeRegistries.BLOCKS.getKey(block).getPath();
-        ModelFile inv = models().fenceInventory(name + "_inventory", texture);
-        itemModels().withExistingParent(name, modLoc("block/" + name + "_inventory"));
     }
 
     public void axisBlock(Block block, String location, ResourceLocation texture, boolean horizontal) {
         ResourceLocation endTexture = horizontal ? texture.withSuffix("_top") : texture;
         ModelFile model = this.models().cubeColumn(resourceString(location), texture, endTexture);
         this.axisBlock(block, model,
-                       (ModelFile) (horizontal ? this.models().cubeColumnHorizontal(resourceString(location + "_horizontal"), texture, endTexture) :
-                                    model));
+                       horizontal ? this.models().cubeColumnHorizontal(resourceString(location + "_horizontal"), texture, endTexture) :
+                       model);
         this.simpleBlockItem(block, model);
     }
 
@@ -179,10 +91,6 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
                 .modelForState().modelFile(horizontal).rotationX(90).addModel()
                 .partialState().with(RotatedPillarBlock.AXIS, Direction.Axis.X)
                 .modelForState().modelFile(horizontal).rotationX(90).rotationY(90).addModel();
-    }
-
-    public static String resourceString(String res) {
-        return String.format("%s:%s", Dreamtinker.MODID, res);
     }
 
     /**
@@ -261,148 +169,6 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
 
     private ResourceLocation itemKey(ItemLike item) {
         return BuiltInRegistries.ITEM.getKey(item.asItem());
-    }
-
-
-    private void controllerStates(Block block, ModelFile unformed, ModelFile inactive, ModelFile active) {
-        var vb = getVariantBuilder(block);
-
-        for (Direction dir : Direction.Plane.HORIZONTAL) {
-            int y = ((int) dir.toYRot() + 180) % 360;
-            vb.partialState()
-              .with(SearedBlock.IN_STRUCTURE, false)
-              .with(HorizontalDirectionalBlock.FACING, dir)
-              .addModels(new ConfiguredModel(unformed, 0, y, false));
-
-            vb.partialState()
-              .with(SearedBlock.IN_STRUCTURE, true)
-              .with(ControllerBlock.ACTIVE, false)
-              .with(HorizontalDirectionalBlock.FACING, dir)
-              .addModels(new ConfiguredModel(inactive, 0, y, false));
-
-            vb.partialState()
-              .with(SearedBlock.IN_STRUCTURE, true)
-              .with(ControllerBlock.ACTIVE, true)
-              .with(HorizontalDirectionalBlock.FACING, dir)
-              .addModels(new ConfiguredModel(active, 0, y, false));
-        }
-        itemModels().withExistingParent(itemKey(block).getPath(), inactive.getLocation());
-    }
-
-    private void structureStates(Block block, ModelFile inactive, ModelFile active) {
-        var vb = getVariantBuilder(block);
-
-        for (Direction dir : Direction.Plane.HORIZONTAL) {
-            int y = ((int) dir.toYRot()) % 360;
-
-            vb.partialState()
-              .with(SearedBlock.IN_STRUCTURE, false)
-              .with(HorizontalDirectionalBlock.FACING, dir)
-              .addModels(new ConfiguredModel(inactive, 0, y, false));
-
-            vb.partialState()
-              .with(SearedBlock.IN_STRUCTURE, true)
-              .with(HorizontalDirectionalBlock.FACING, dir)
-              .addModels(new ConfiguredModel(active, 0, y, false));
-        }
-        itemModels().withExistingParent(itemKey(block).getPath(), inactive.getLocation());
-    }
-
-    private void structureBlock(Block block, ModelFile inactive, ModelFile active) {
-        var vb = getVariantBuilder(block);
-
-        vb.partialState()
-          .with(SearedBlock.IN_STRUCTURE, false)
-          .addModels(new ConfiguredModel(inactive));
-
-        vb.partialState()
-          .with(SearedBlock.IN_STRUCTURE, true)
-          .addModels(new ConfiguredModel(active));
-
-        itemModels().withExistingParent(itemKey(block).getPath(), inactive.getLocation());
-    }
-
-    protected void cubeAllIntTextureBlock(Block block, String name, IntegerProperty textureProperty, int maxValue) {
-        BlockModelBuilder[] builtModels = new BlockModelBuilder[maxValue + 1];
-
-        for (int i = 0; i <= maxValue; i++) {
-            builtModels[i] = models().cubeAll(name + "_" + i, modLoc("block/" + name + "_" + i));
-        }
-
-        getVariantBuilder(block).forAllStates(state -> {
-            int textureIndex = state.getValue(textureProperty);
-            int clamped = Math.max(0, Math.min(textureIndex, maxValue));
-
-            return ConfiguredModel.builder().modelFile(builtModels[clamped]).build();
-        });
-
-        simpleBlockItem(block, builtModels[0]);
-    }
-
-    private void frontTextureIntStructureStates(Block block, String name, IntegerProperty textureProperty, int maxValue, ResourceLocation sideTexture) {
-        BlockModelBuilder[] builtModels = new BlockModelBuilder[maxValue + 1];
-
-        for (int i = 0; i <= maxValue; i++) {
-            builtModels[i] = models().withExistingParent(name + "_" + i, mcLoc("block/cube"))
-                                     .texture("down", sideTexture)
-                                     .texture("up", sideTexture)
-                                     .texture("north", modLoc("block/" + name + "_" + i))
-                                     .texture("south", sideTexture)
-                                     .texture("east", sideTexture)
-                                     .texture("west", sideTexture)
-                                     .texture("particle", sideTexture);
-        }
-
-        var vb = getVariantBuilder(block);
-        for (Direction dir : Direction.Plane.HORIZONTAL) {
-            int y = ((int) dir.toYRot() + 180) % 360;
-            for (int textureIndex : textureProperty.getPossibleValues()) {
-                ModelFile model = builtModels[Math.min(textureIndex, maxValue)];
-
-                vb.partialState()
-                  .with(SearedBlock.IN_STRUCTURE, false)
-                  .with(textureProperty, textureIndex)
-                  .with(HorizontalDirectionalBlock.FACING, dir)
-                  .addModels(new ConfiguredModel(model, 0, y, false));
-
-                vb.partialState()
-                  .with(SearedBlock.IN_STRUCTURE, true)
-                  .with(textureProperty, textureIndex)
-                  .with(HorizontalDirectionalBlock.FACING, dir)
-                  .addModels(new ConfiguredModel(model, 0, y, false));
-            }
-        }
-
-        simpleBlockItem(block, builtModels[0]);
-    }
-
-    /**
-     * Adds models for a glass block with a glass pane
-     */
-    public void glassBlock(Block glass, IronBarsBlock pane, String baseName, ResourceLocation front, int tint, boolean solidEdge, @Nullable RenderType renderType) {
-        glassBlock(glass, pane, baseName, front, front.withSuffix("_top"), tint, solidEdge, renderType);
-    }
-
-    /**
-     * Adds models for a glass block with a glass pane
-     */
-    public void glassBlock(Block glass, IronBarsBlock pane, String baseName, ResourceLocation front, ResourceLocation edge, int tint, boolean solidEdge, @Nullable RenderType renderType) {
-        // make block model
-        BlockModelBuilder block = models().cubeAll(BLOCK_FOLDER + "/" + baseName + "block", front);
-        ConnectedModelBuilder<BlockModelBuilder> cBuilder = block.customLoader(ConnectedModelBuilder::new);
-        cBuilder.connected("all", "cornerless_full");
-        if (tint != -1){
-            cBuilder.color(tint);
-        }
-        if (renderType != null){
-            block.renderType(renderType.name);
-        }else {
-            // glass generally wants cutout
-            block.renderType(RenderType.cutout().name);
-        }
-        simpleBlockWithItem(glass, block);
-        // make pane models
-        paneBlock(pane, baseName + "pane_", front, edge, true, tint, solidEdge, renderType);
     }
 
     private void singleTextureParentBlock(Block block, String name, ResourceLocation parent, String name2) {

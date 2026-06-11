@@ -150,8 +150,6 @@ public class DreamtinkerFluidEffectProvider extends AbstractFluidEffectProvider 
                 .addBlockEffect(
                         new MobEffectCloudFluidEffect(FluidMobEffect.builder().effect(TinkerEffects.bleeding.get(), 100, 3).buildCloud().effects()));
 
-        addFluid(DreamtinkerFluids.blood_soul, 20)
-                .addEntityEffects(FluidMobEffect.builder().effect(MobEffects.HEAL, 100, 2).buildEntity(TimeAction.ADD));
         addMetal(DreamtinkerFluids.molten_soul_stained_steel)
                 .addCondition(modLoaded("malum"))
                 .magicDamage(2)
@@ -281,10 +279,6 @@ public class DreamtinkerFluidEffectProvider extends AbstractFluidEffectProvider 
                 .magicDamage(3)
                 .addEntityEffect(new FireFluidEffect(TimeAction.ADD, 5))
                 .addEntityEffects(FluidMobEffect.builder().effect(MobEffects.WITHER, 120, 1).buildEntity(TimeAction.ADD));
-        addFluid(DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK)
-                .addDamage(2.0f, new DamageFluidEffect.DamageTypePair(DamageTypes.FELL_OUT_OF_WORLD, DamageTypes.FELL_OUT_OF_WORLD))
-                .addEntityEffect(new RandomTeleportFluidEffect(LevelingInt.eachLevel(6), LevelingInt.eachLevel(5)))
-                .addBlockEffect(BlockInteractFluidEffect.INSTANCE);
         addMetal(DreamtinkerFluids.molten_utherium)
                 .addCondition(modLoaded("undergarden"))
                 .magicDamage(3)

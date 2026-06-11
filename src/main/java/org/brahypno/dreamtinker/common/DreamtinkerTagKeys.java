@@ -127,13 +127,6 @@ public class DreamtinkerTagKeys {
         public static final TagKey<Item> TransmutationGoldBlock = forgeTag("storage_blocks/transmutation_gold");
         public static final TagKey<Item> RawTransmutationGoldBlock = forgeTag("storage_blocks/raw_transmutation_gold");
 
-        public static final TagKey<Item> ASHEN_BLOCKS = dreamtinkerTag("ashen_blocks");
-        public static final TagKey<Item> ASHEN_TANKS = dreamtinkerTag("ashen_tanks");
-        public static final TagKey<Item> TRANSMUTE_BLOCKS = dreamtinkerTag("transmute_blocks");
-        public static final TagKey<Item> TRANSMUTE = dreamtinkerTag("transmute");
-        public static final TagKey<Item> TRANSMUTE_HEATER = dreamtinkerTag("transmute_heater");
-        public static final TagKey<Item> TRANSMUTE_ACCEL = dreamtinkerTag("transmute_accelerator");
-
     }
 
     public static class Blocks {
@@ -170,14 +163,6 @@ public class DreamtinkerTagKeys {
         public static final TagKey<Block> TransmutationGoldOre = forgeTag("ores/transmutation_gold");
         public static final TagKey<Block> TransmutationGoldBlock = forgeTag("storage_blocks/transmutation_gold");
         public static final TagKey<Block> RawTransmutationGoldBlock = forgeTag("storage_blocks/raw_transmutation_gold");
-
-        public static final TagKey<Block> ASHEN_BLOCKS = dreamtinkerTag("ashen_blocks");
-        public static final TagKey<Block> TRANSMUTE_BLOCKS = dreamtinkerTag("transmute_blocks");
-        public static final TagKey<Block> ASHEN_TANKS = dreamtinkerTag("ashen_tanks");
-        public static final TagKey<Block> TRANSMUTE_HEATER = dreamtinkerTag("transmute_heater");
-        public static final TagKey<Block> TRANSMUTE_ACCEL = dreamtinkerTag("transmute_accelerator");
-        public static final TagKey<Block> TRANSMUTE_ALLOY_SWITCH = dreamtinkerTag("transmute_alloyer_switch");
-        public static final TagKey<Block> TRANSMUTE_MELTING_SWITCH = dreamtinkerTag("transmute_melting_switch");
         /**
          * Blocks that make up the transmute structure
          */

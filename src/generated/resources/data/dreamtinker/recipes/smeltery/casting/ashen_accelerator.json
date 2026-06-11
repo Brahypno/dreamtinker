@@ -7,7 +7,7 @@
   "cooling_time": 802,
   "fluid": {
     "amount": 9000,
-    "tag": "dreamtinker:molten_ender_ash"
+    "tag": "esotericism_tinker:molten_ender_ash"
   },
-  "result": "dreamtinker:ashen_accelerator"
+  "result": "esotericism_tinker:ashen_accelerator"
 }

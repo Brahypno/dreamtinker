@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "dreamtinker:ashen_bricks"
-  },
-  "result": "dreamtinker:ashen_bricks_stairs"
-}

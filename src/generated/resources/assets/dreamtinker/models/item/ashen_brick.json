@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "dreamtinker:item/materials/ashen_brick"
-  }
-}

@@ -29,7 +29,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.CompoundIngredient;
-import net.minecraftforge.common.crafting.DifferenceIngredient;
 import net.minecraftforge.common.crafting.IntersectionIngredient;
 import net.minecraftforge.common.crafting.StrictNBTIngredient;
 import net.minecraftforge.common.crafting.conditions.AndCondition;
@@ -37,7 +36,6 @@ import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraftforge.common.crafting.conditions.OrCondition;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.brahypno.dreamtinker.Dreamtinker;
@@ -46,7 +44,6 @@ import org.brahypno.dreamtinker.common.DreamtinkerEffects;
 import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
 import org.brahypno.dreamtinker.fluids.DreamtinkerFluids;
 import org.brahypno.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
-import org.brahypno.dreamtinker.library.tools.DTSlotType;
 import org.brahypno.dreamtinker.smeltery.DreamTinkerSmeltery;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.brahypno.dreamtinker.tools.DreamtinkerToolParts;
@@ -54,9 +51,12 @@ import org.brahypno.dreamtinker.tools.DreamtinkerTools;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.brahypno.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvider;
 import org.brahypno.dreamtinker.utils.DTPartInfoLookup;
+import org.brahypno.esotericismtinker.common.EsotericismTinkerCommon;
+import org.brahypno.esotericismtinker.fluids.EsotericismTinkerFluids;
+import org.brahypno.esotericismtinker.library.tools.EsotericismSlotType;
+import org.brahypno.esotericismtinker.smeltery.EsotericismTinkerSmeltery;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.recipe.condition.TagFilledCondition;
-import slimeknights.mantle.recipe.crafting.ShapedRetexturedRecipeBuilder;
 import slimeknights.mantle.recipe.data.ICommonRecipeHelper;
 import slimeknights.mantle.recipe.data.IRecipeHelper;
 import slimeknights.mantle.recipe.data.ItemNameIngredient;
@@ -79,14 +79,12 @@ import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
 import slimeknights.tconstruct.library.recipe.FluidValues;
 import slimeknights.tconstruct.library.recipe.alloying.AlloyRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.casting.ItemCastingRecipeBuilder;
-import slimeknights.tconstruct.library.recipe.casting.container.ContainerFillingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.casting.material.CompositeCastingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.casting.material.MaterialCastingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.casting.material.MaterialFluidRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.casting.material.PartSwapCastingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.entitymelting.EntityMeltingRecipeBuilder;
 import slimeknights.tconstruct.library.recipe.fuel.MeltingFuelBuilder;
-import slimeknights.tconstruct.library.recipe.ingredient.NoContainerIngredient;
 import slimeknights.tconstruct.library.recipe.ingredient.ToolHookIngredient;
 import slimeknights.tconstruct.library.recipe.melting.IMeltingContainer;
 import slimeknights.tconstruct.library.recipe.melting.IMeltingRecipe;
@@ -102,11 +100,7 @@ import slimeknights.tconstruct.library.recipe.tinkerstation.building.ToolBuildin
 import slimeknights.tconstruct.library.tools.SlotType;
 import slimeknights.tconstruct.library.tools.definition.module.ToolHooks;
 import slimeknights.tconstruct.library.tools.part.ToolPartItem;
-import slimeknights.tconstruct.shared.TinkerCommons;
-import slimeknights.tconstruct.shared.TinkerMaterials;
-import slimeknights.tconstruct.shared.block.SlimeType;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
-import slimeknights.tconstruct.smeltery.block.component.SearedTankBlock;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.TinkerToolParts;
 import slimeknights.tconstruct.tools.TinkerTools;
@@ -161,10 +155,6 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         toolBuilding(consumer, DreamtinkerTools.mashou, folder);
         toolBuilding(consumer, DreamtinkerTools.narcissus_wing, folder);
         toolBuilding(consumer, DreamtinkerTools.chain_saw_blade, folder);
-        ToolBuildingRecipeBuilder.toolBuildingRecipe(DreamtinkerTools.ritual_blade.get())
-                                 .addExtraRequirement(Ingredient.of(TinkerModifiers.silkyCloth))
-                                 .addExtraRequirement(Ingredient.of(Blocks.GLASS))
-                                 .save(consumer, prefix(id(DreamtinkerTools.ritual_blade), folder));
 
         Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"));
         toolBuilding(wrapped, NovaRegistry.per_aspera_scriptum, folder);
@@ -240,7 +230,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                           .save(consumer, prefix(DreamtinkerFluids.despair_essence, folder));
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_soul_steel, FluidValues.INGOT)
                           .addInput(TinkerFluids.moltenSteel.getTag(), FluidValues.INGOT)
-                          .addInput(DreamtinkerFluids.blood_soul.getTag(), FluidValues.GLASS_BLOCK * 2)
+                          .addInput(EsotericismTinkerFluids.blood_soul.getTag(), FluidValues.GLASS_BLOCK * 2)
                           .save(consumer, prefix(DreamtinkerFluids.molten_soul_steel, folder));
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_bee_gem, FluidValues.GEM * 2)
                           .addInput(DreamtinkerFluids.rainbow_honey.getTag(), FluidValues.BOTTLE)
@@ -252,7 +242,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                           .addInput(TinkerTags.Fluids.LARGE_GEM_TOOLTIPS, FluidValues.GEM)
                           .save(consumer, location(folder + "temptation_potion"));
         AlloyRecipeBuilder.alloy(PotionFluidType.potionResult(DreamtinkerEffects.SoulFirePotion.get(), FluidValues.BOTTLE), 100)
-                          .addCatalyst(FluidIngredient.of(DreamtinkerFluids.molten_ender_ash.getTag(), FluidValues.BRICK))
+                          .addCatalyst(FluidIngredient.of(EsotericismTinkerFluids.molten_ender_ash.getTag(), FluidValues.BRICK))
                           .addInput(TinkerTags.Fluids.CLAY_TOOLTIPS, FluidValues.BRICK)
                           .save(consumer, location(folder + "soul_fire_potion"));
         wrapped = withCondition(consumer, tagFilled(Dreamtinker.forgeItemTag("ingots/silver")));
@@ -278,6 +268,11 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
     private void addCastingRecipes(Consumer<FinishedRecipe> consumer) {
         // Pure Fluid Recipes
         Consumer<FinishedRecipe> wrapped;
+        ItemCastingRecipeBuilder.tableRecipe(EsotericismTinkerCommon.hypnagogic_transmute.get())
+                                .setFluid(DreamtinkerFluids.molten_nigrescence_antimony.getLocalTag(), FluidValues.GEM)
+                                .setCoolingTime(100)
+                                .setCast(Items.BOOK, true)
+                                .save(consumer, location(Casting_folder + "hypnagogic_transmute"));
 
         ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.regulus.get())
                                 .setFluid(DreamtinkerFluids.liquid_smoky_antimony.getLocalTag(), FluidValues.INGOT)
@@ -362,10 +357,6 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                 .setFluidAndTime(TinkerFluids.skySlime, FluidValues.SLIME_BLOCK)
                                 .setCast(Tags.Items.DUSTS_PRISMARINE, true)
                                 .save(consumer, location(Casting_folder + "deep_prismarine_shard"));
-        ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.hypnagogic_transmute.get())
-                                .setFluidAndTime(DreamtinkerFluids.molten_nigrescence_antimony, FluidValues.GEM)
-                                .setCast(Items.BOOK, true)
-                                .save(consumer, prefix(DreamtinkerCommon.hypnagogic_transmute, "common/"));
         ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.fifth_stone.get())
                                 .setFluidAndTime(TinkerFluids.searedStone, FluidValues.BRICK)
                                 .setCast(Items.FLINT, true)
@@ -1172,10 +1163,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                     .save(consumer, location(partFolder + "explode_core_cast"));
         CompositeCastingRecipeBuilder.table(DreamtinkerToolParts.explode_core.get(), 8)
                                      .save(consumer, this.location(castFolder + "explode_core_composite"));
-        MaterialCastingRecipeBuilder.tableRecipe(TinkerToolParts.shieldCore.get())
-                                    .setCast(DreamtinkerTagKeys.Items.modTag("doors"), true)
-                                    .setItemCost(4)
-                                    .save(consumer, location(partFolder + "shield_core_cast"));
+
         partRecipes(consumer, DreamtinkerToolParts.chainSawTeeth, DreamTinkerSmeltery.chainSawTeethCast, 12, partFolder, castFolder);
         partRecipes(consumer, DreamtinkerToolParts.chainSawCore, DreamTinkerSmeltery.chainSawCoreCast, 8, partFolder, castFolder);
         partRecipes(consumer, DreamtinkerToolParts.NovaCover, DreamTinkerSmeltery.NovaCoverCast, 2, partFolder, castFolder);
@@ -1355,7 +1343,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setTools(Ingredient.of(DreamtinkerTools.narcissus_wing.get()))
                              .addInput(DreamtinkerCommon.UnbornTurtleEgg.get(), 1)
                              .setMaxLevel(1)
-                             .setSlots(DTSlotType.DELUSION, 1)
+                             .setSlots(EsotericismSlotType.DELUSION, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.soul_core, soulSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.soul_core, soulFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.soul_core)
@@ -1363,7 +1351,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(DreamtinkerCommon.UnbornTurtleEgg.get(), 1)
                              .addInput(DreamtinkerCommon.UnbornSnifferEgg.get(), 1)
                              .setMaxLevel(3)
-                             .setSlots(DTSlotType.DELUSION, 1)
+                             .setSlots(EsotericismSlotType.DELUSION, 1)
                              .save(consumer, wrap(DreamtinkerModifiers.Ids.soul_core, soulFolder, "_1"));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.icy_memory)
                              .setTools(Ingredient.of(DreamtinkerTools.narcissus_wing.get()))
@@ -1379,7 +1367,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(DreamtinkerCommon.UnbornDragonEgg.get())
                              .addInput(DreamtinkerCommon.despair_gem.get())
                              .setLevelRange(3, 3)
-                             .setSlots(DTSlotType.DELUSION, 1)
+                             .setSlots(EsotericismSlotType.DELUSION, 1)
                              .disallowCrystal()
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.icy_memory, soulSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.icy_memory, soulFolder));
@@ -1390,7 +1378,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(Items.IRON_AXE)
                              .addInput(Tags.Items.TOOLS_CROSSBOWS)
                              .setMaxLevel(3)
-                             .setSlots(DTSlotType.DELUSION, 1)
+                             .setSlots(EsotericismSlotType.DELUSION, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.hate_memory, soulSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.hate_memory, soulFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.huge_ego)
@@ -1415,7 +1403,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(Items.IRON_AXE)
                              .addInput(Items.IRON_AXE)
                              .setMaxLevel(4)
-                             .setSlots(DTSlotType.DELUSION, 1)
+                             .setSlots(EsotericismSlotType.DELUSION, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.all_slayer, soulSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.all_slayer, soulFolder));
 
@@ -1425,7 +1413,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(Tags.Items.STORAGE_BLOCKS_GOLD)
                              .addInput(TinkerModifiers.silkyCloth, 5)
                              .addInput(TinkerModifiers.silkyCloth)
-                             .setSlots(DTSlotType.DELUSION, 1)
+                             .setSlots(EsotericismSlotType.DELUSION, 1)
                              .setMaxLevel(5)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.the_romantic, soulSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.the_romantic, soulFolder));
@@ -1433,7 +1421,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setTools(TinkerTags.Items.WORN_ARMOR)
                              .addInput(DreamtinkerCommon.void_pearl.get(), 4)
                              .addInput(Items.ENDER_EYE, 8)
-                             .setSlots(DTSlotType.DELUSION, 1)
+                             .setSlots(EsotericismSlotType.DELUSION, 1)
                              .setMaxLevel(3)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.virtual_dodge, soulSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.virtual_dodge, soulFolder));
@@ -1442,7 +1430,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(Items.SKELETON_SKULL, 1)
                              .addInput(Items.WITHER_SKELETON_SKULL, 1)
                              .addInput(Items.HONEY_BLOCK, 4)
-                             .setSlots(DTSlotType.DELUSION, 1)
+                             .setSlots(EsotericismSlotType.DELUSION, 1)
                              .setMaxLevel(2)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.sweet_death, soulSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.sweet_death, soulFolder));
@@ -1452,14 +1440,14 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(Items.DISC_FRAGMENT_5, 1)
                              .addInput(Items.WHITE_TULIP, 1)
                              .addInput(Items.CHERRY_SAPLING, 1)
-                             .setSlots(DTSlotType.DELUSION, 1)
+                             .setSlots(EsotericismSlotType.DELUSION, 1)
                              .setMaxLevel(2)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.last_kiss, soulSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.last_kiss, soulFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.born_with_me)
                              .setTools(TinkerTags.Items.MELEE_PRIMARY)
                              .addInput(Items.BLADE_POTTERY_SHERD, 1)
-                             .setSlots(DTSlotType.DELUSION, 1)
+                             .setSlots(EsotericismSlotType.DELUSION, 1)
                              .setMaxLevel(3)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.born_with_me, soulSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.born_with_me, soulFolder));
@@ -1468,7 +1456,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(Items.COMPASS, 2)
                              .addInput(Items.BELL)
                              .addInput(Items.CLOCK)
-                             .setSlots(DTSlotType.DELUSION, 1)
+                             .setSlots(EsotericismSlotType.DELUSION, 1)
                              .setMaxLevel(1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.weapon_dreams_order, soulSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.weapon_dreams_order, soulFolder));
@@ -1476,7 +1464,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                         .setTools(TinkerTags.Items.HARVEST_PRIMARY)
                                         .setInput(DreamtinkerCommon.amber.get(), 1, 40)
                                         .setMaxLevel(3)
-                                        .setSlots(DTSlotType.DELUSION, 1)
+                                        .setSlots(EsotericismSlotType.DELUSION, 1)
                                         .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.falsify_fate, soulSalvage))
                                         .save(consumer, prefix(DreamtinkerModifiers.Ids.falsify_fate, soulFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.weapon_dreams_filter)
@@ -1484,7 +1472,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(Items.REPEATER, 2)
                              .addInput(Items.COMPARATOR)
                              .addInput(Items.OBSERVER)
-                             .setSlots(DTSlotType.DELUSION, 1)
+                             .setSlots(EsotericismSlotType.DELUSION, 1)
                              .setMaxLevel(1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.weapon_dreams_filter, soulSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.weapon_dreams_filter, soulFolder));
@@ -1497,7 +1485,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(BlockRegistry.BLOCK_OF_ASTRAL_WEAVE.get(), 3)
                              .addInput(ItemRegistry.TOPHAT.get())
                              .addInput(BlockRegistry.WICKED_SPIRITED_GLASS.get(), 16)
-                             .setSlots(DTSlotType.DELUSION, 1)
+                             .setSlots(EsotericismSlotType.DELUSION, 1)
                              .setMaxLevel(1)
                              .saveSalvage(withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("malum")),
                                           prefix(DreamtinkerModifiers.spiritual_weapon_transformation, soulSalvage))
@@ -1514,7 +1502,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setMaxLevel(1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.TheEnd, upgradeSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.TheEnd, upgradeFolder));
-        SwappableModifierRecipeBuilder.modifier(ModifierIds.rebalanced, DTSlotType.DELUSION.getName())
+        SwappableModifierRecipeBuilder.modifier(ModifierIds.rebalanced, EsotericismSlotType.DELUSION.getName())
                                       .setTools(TinkerTags.Items.BONUS_SLOTS)
                                       .addInput(DreamtinkerCommon.void_pearl.get(), 1)
                                       .addInput(Items.END_CRYSTAL, 1)
@@ -1522,7 +1510,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                                       .addInput(Items.AMETHYST_BLOCK, 1)
                                       .addInput(Items.AMETHYST_BLOCK, 1)
                                       .disallowCrystal()
-                                      .save(consumer, wrap(DreamtinkerModifiers.Ids.five_creations, slotlessFolder, "_" + DTSlotType.DELUSION.getName()));
+                                      .save(consumer,
+                                            wrap(DreamtinkerModifiers.Ids.five_creations, slotlessFolder, "_" + EsotericismSlotType.DELUSION.getName()));
         SwappableModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.five_creations, "traits")
                                       .setTools(ToolHookIngredient.of(TinkerTags.Items.BONUS_SLOTS, ToolHooks.REBALANCED_TRAIT))
                                       .addInput(TinkerTags.Items.ANCIENT_TOOLS)
@@ -1645,7 +1634,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(itemNameIngredient("enigmaticlegacy", "abyssal_heart"))
                              .setLevelRange(3, 3)
                              .disallowCrystal()
-                             .setSlots(DTSlotType.DELUSION, 1)
+                             .setSlots(EsotericismSlotType.DELUSION, 1)
                              .saveSalvage(wrapped, prefix(DreamtinkerModifiers.weapon_books, soulSalvage))
                              .save(wrapped, prefix(DreamtinkerModifiers.weapon_books, soulFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.eldritch_pan)
@@ -2029,344 +2018,16 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
 
     private void addTransmuteRecipes(Consumer<FinishedRecipe> consumer) {
         String folder = "smeltery/ashen/";
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, DreamTinkerSmeltery.enderMortar, 2)
-                              .requires(TinkerCommons.slimeball.get(SlimeType.ENDER))
-                              .requires(Items.POPPED_CHORUS_FRUIT)
-                              .requires(Tags.Items.GRAVEL)
-                              .unlockedBy("has_item", has(TinkerCommons.slimeball.get(SlimeType.ENDER)))
-                              .save(consumer, prefix(DreamTinkerSmeltery.enderMortar, folder));
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, DreamTinkerSmeltery.enderMortar, 8)
-                              .requires(TinkerWorld.congealedSlime.get(SlimeType.ENDER))
-                              .requires(Items.POPPED_CHORUS_FRUIT).requires(Items.POPPED_CHORUS_FRUIT).requires(Items.POPPED_CHORUS_FRUIT)
-                              .requires(Items.POPPED_CHORUS_FRUIT)
-                              .requires(Tags.Items.GRAVEL).requires(Tags.Items.GRAVEL).requires(Tags.Items.GRAVEL).requires(Tags.Items.GRAVEL)
-                              .unlockedBy("has_item", has(TinkerCommons.slimeball.get(SlimeType.ENDER)))
-                              .save(consumer, wrap(DreamTinkerSmeltery.enderMortar, folder, "_multiple"));
 
-        // scorched bricks from grout
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(DreamTinkerSmeltery.enderMortar), RecipeCategory.BUILDING_BLOCKS,
-                                            DreamTinkerSmeltery.ashenBrick.get(), 0.3f,
-                                            200)
-                                  .unlockedBy("has_item", has(DreamTinkerSmeltery.enderMortar))
-                                  .save(consumer, prefix(DreamTinkerSmeltery.ashenBrick, folder));
-        Consumer<Consumer<FinishedRecipe>> fastMortar = c ->
-                SimpleCookingRecipeBuilder.blasting(Ingredient.of(DreamTinkerSmeltery.enderMortar), RecipeCategory.BUILDING_BLOCKS,
-                                                    DreamTinkerSmeltery.ashenBrick.get(),
-                                                    0.3f, 100)
-                                          .unlockedBy("has_item", has(DreamTinkerSmeltery.enderMortar)).save(c);
-        // block from bricks
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, DreamTinkerSmeltery.ashenBricks)
-                           .define('b', DreamTinkerSmeltery.ashenBrick.get())
-                           .pattern("bb")
-                           .pattern("bb")
-                           .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenBrick.get()))
-                           .save(consumer, wrap(DreamTinkerSmeltery.ashenBricks, folder, "_from_brick"));
-
-        // ladder from bricks
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, DreamTinkerSmeltery.ashenLadder, 4)
-                           .define('b', DreamTinkerSmeltery.ashenBrick.get())
-                           .define('B', DreamtinkerTagKeys.Items.ASHEN_BLOCKS)
-                           .pattern("b b")
-                           .pattern("b b")
-                           .pattern("BBB")
-                           .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenBrick.get()))
-                           .save(consumer, prefix(DreamTinkerSmeltery.ashenLadder, folder));
-
-        // stone -> polished
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, DreamTinkerSmeltery.polishedAshenStone, 4)
-                           .define('b', DreamTinkerSmeltery.ashenStone)
-                           .pattern("bb")
-                           .pattern("bb")
-                           .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenStone))
-                           .save(consumer, wrap(DreamTinkerSmeltery.polishedAshenStone, folder, "_crafting"));
-        // polished -> bricks
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, DreamTinkerSmeltery.ashenBricks, 4)
-                           .define('b', DreamTinkerSmeltery.polishedAshenStone)
-                           .pattern("bb")
-                           .pattern("bb")
-                           .unlockedBy("has_item", has(DreamTinkerSmeltery.polishedAshenStone))
-                           .save(consumer, wrap(DreamTinkerSmeltery.ashenBricks, folder, "_crafting"));
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, DreamTinkerSmeltery.ashenDrain)
-                           .define('#', DreamTinkerSmeltery.ashenBrick.get())
-                           .define('C', TinkerMaterials.knightmetal.getIngotTag())
-                           .pattern("# #")
-                           .pattern("C C")
-                           .pattern("# #")
-                           .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenBrick.get()))
-                           .save(consumer, location(folder + "drain"));
-        ShapedRetexturedRecipeBuilder.fromShaped(
-                                             ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, DreamTinkerSmeltery.ashenDrain)
-                                                                .define('#', DreamtinkerTagKeys.Items.TRANSMUTE)
-                                                                .define('C', TinkerMaterials.knightmetal.getIngotTag())
-                                                                .pattern("C#C")
-                                                                .unlockedBy("has_item", has(DreamtinkerTagKeys.Items.TRANSMUTE_BLOCKS)))
-                                     .setSource(DreamtinkerTagKeys.Items.TRANSMUTE_BLOCKS)
-                                     .build(consumer, location(folder + "drain_retextured"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, DreamTinkerSmeltery.ashenChute)
-                           .define('#', DreamTinkerSmeltery.ashenBrick.get())
-                           .define('C', TinkerMaterials.knightmetal.getIngotTag())
-                           .pattern("#C#")
-                           .pattern("   ")
-                           .pattern("#C#")
-                           .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenBrick.get()))
-                           .save(consumer, location(folder + "chute"));
-        ShapedRetexturedRecipeBuilder.fromShaped(
-                                             ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, DreamTinkerSmeltery.ashenChute)
-                                                                .define('#', DreamtinkerTagKeys.Items.TRANSMUTE_BLOCKS)
-                                                                .define('C', TinkerMaterials.knightmetal.getIngotTag())
-                                                                .pattern("C")
-                                                                .pattern("#")
-                                                                .pattern("C")
-                                                                .unlockedBy("has_item", has(DreamtinkerTagKeys.Items.TRANSMUTE_BLOCKS)))
-                                     .setSource(DreamtinkerTagKeys.Items.TRANSMUTE_BLOCKS)
-                                     .build(consumer, location(folder + "chute_retextured"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, DreamTinkerSmeltery.ashenDuct)
-                           .define('#', DreamTinkerSmeltery.ashenBrick.get())
-                           .define('C', Tags.Items.INGOTS_GOLD)
-                           .pattern("# #")
-                           .pattern("C C")
-                           .pattern("# #")
-                           .unlockedBy("has_item", has(Tags.Items.INGOTS_GOLD))
-                           .save(consumer, location(folder + "duct"));
-        ShapedRetexturedRecipeBuilder.fromShaped(
-                                             ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, DreamTinkerSmeltery.ashenDuct)
-                                                                .define('#', DreamtinkerTagKeys.Items.TRANSMUTE_BLOCKS)
-                                                                .define('C', Tags.Items.INGOTS_GOLD)
-                                                                .pattern("C#C")
-                                                                .unlockedBy("has_item", has(DreamtinkerTagKeys.Items.TRANSMUTE_BLOCKS)))
-                                     .setSource(DreamtinkerTagKeys.Items.TRANSMUTE_BLOCKS)
-                                     .build(consumer, location(folder + "duct_retextured"));
-        // stone -> road
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(DreamTinkerSmeltery.ashenStone), RecipeCategory.BUILDING_BLOCKS, DreamTinkerSmeltery.ashenRoad, 0.1f,
-                                            200)
-                                  .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenStone))
-                                  .save(consumer, wrap(DreamTinkerSmeltery.ashenRoad, folder, "_smelting"));
-        // brick slabs -> chiseled
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, DreamTinkerSmeltery.chiseledAshenBricks)
-                           .define('s', DreamTinkerSmeltery.ashenBricks.getSlab())
-                           .pattern("s")
-                           .pattern("s")
-                           .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenBricks.getSlab()))
-                           .save(consumer, wrap(DreamTinkerSmeltery.chiseledAshenBricks, folder, "_crafting"));
-        // stonecutting
-        this.ashenStonecutter(consumer, DreamTinkerSmeltery.polishedAshenStone, folder);
-        this.ashenStonecutter(consumer, DreamTinkerSmeltery.ashenBricks, folder);
-        this.ashenStonecutter(consumer, DreamTinkerSmeltery.chiseledAshenBricks, folder);
-        // tanks
-        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, DreamTinkerSmeltery.ashenTank.get(SearedTankBlock.TankType.FUEL_TANK))
-                           .define('#', DreamTinkerSmeltery.ashenBrick.get())
-                           .define('B', Tags.Items.GEMS_QUARTZ)
-                           .pattern("###")
-                           .pattern("#B#")
-                           .pattern("###")
-                           .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenBrick.get()))
-                           .save(consumer, location(folder + "fuel_tank"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, DreamTinkerSmeltery.ashenTank.get(SearedTankBlock.TankType.FUEL_GAUGE))
-                           .define('#', DreamTinkerSmeltery.ashenBrick.get())
-                           .define('B', Tags.Items.GEMS_QUARTZ)
-                           .pattern("#B#")
-                           .pattern("BBB")
-                           .pattern("#B#")
-                           .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenBrick.get()))
-                           .save(consumer, location(folder + "fuel_gauge"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, DreamTinkerSmeltery.ashenTank.get(SearedTankBlock.TankType.INGOT_TANK))
-                           .define('#', DreamTinkerSmeltery.ashenBrick.get())
-                           .define('B', Tags.Items.GEMS_QUARTZ)
-                           .pattern("#B#")
-                           .pattern("#B#")
-                           .pattern("#B#")
-                           .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenBrick.get()))
-                           .save(consumer, location(folder + "ingot_tank"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, DreamTinkerSmeltery.ashenTank.get(SearedTankBlock.TankType.INGOT_GAUGE))
-                           .define('#', DreamTinkerSmeltery.ashenBrick.get())
-                           .define('B', Tags.Items.GEMS_QUARTZ)
-                           .pattern("B#B")
-                           .pattern("#B#")
-                           .pattern("B#B")
-                           .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenBrick.get()))
-                           .save(consumer, location(folder + "ingot_gauge"));
-
-        // stone
-        ashenCasting(consumer, DreamTinkerSmeltery.ashenStone, Ingredient.of(Blocks.END_STONE), Casting_folder + "stone_from_ender");
-        ashenCasting(consumer, DreamTinkerSmeltery.polishedAshenStone, Ingredient.of(Blocks.END_STONE_BRICKS), Casting_folder + "polished_from_ender");
-        // glass
-        MeltingRecipeBuilder.melting(Ingredient.of(DreamTinkerSmeltery.ashenGlass), DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK * 4, 2f)
-                            .addByproduct(TinkerFluids.moltenQuartz.result(FluidValues.GEM))
-                            .save(consumer, location(Melting_folder + "glass"));
-        MeltingRecipeBuilder.melting(Ingredient.of(DreamTinkerSmeltery.ashenSoulGlass), DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK * 4, 2f)
-                            .addByproduct(TinkerFluids.liquidSoul.result(FluidValues.GLASS_BLOCK))
-                            .save(consumer, location(Melting_folder + "glass_soul"));
-        MeltingRecipeBuilder.melting(Ingredient.of(DreamTinkerSmeltery.ashenTintedGlass), DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK * 4, 2f)
-                            .addByproduct(TinkerFluids.moltenGlass.result(FluidValues.GLASS_BLOCK))
-                            .addByproduct(TinkerFluids.moltenAmethyst.result(FluidValues.GEM * 2))
-                            .save(consumer, location(Melting_folder + "glass_tinted"));
-        // panes
-        MeltingRecipeBuilder.melting(Ingredient.of(DreamTinkerSmeltery.ashenGlassPane), DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK, 1.0f)
-                            .addByproduct(TinkerFluids.moltenQuartz.result(FluidValues.GEM_SHARD))
-                            .save(consumer, location(Melting_folder + "pane"));
-        MeltingRecipeBuilder.melting(Ingredient.of(DreamTinkerSmeltery.ashenSoulGlassPane), DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK, 1.0f)
-                            .addByproduct(TinkerFluids.liquidSoul.result(FluidValues.GLASS_PANE))
-                            .save(consumer, location(Melting_folder + "pane_soul"));
-        // controller
-        ItemCastingRecipeBuilder.retexturedBasinRecipe(ItemOutput.fromItem(DreamTinkerSmeltery.transmuteController))
-                                .setCast(DreamtinkerTagKeys.Items.TRANSMUTE_BLOCKS, true)
-                                .setFluidAndTime(TinkerFluids.moltenKnightmetal, FluidValues.INGOT * 4)
-                                .save(consumer, prefix(DreamTinkerSmeltery.transmuteController, Casting_folder));
-        // stairs, slabs, and fences
-        this.slabStairsCrafting(consumer, DreamTinkerSmeltery.ashenBricks, folder, true);
-        this.slabStairsCrafting(consumer, DreamTinkerSmeltery.ashenRoad, folder, true);
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, DreamTinkerSmeltery.ashenBricks.getFence(), 6)
-                           .define('B', DreamTinkerSmeltery.ashenBricks)
-                           .define('b', DreamTinkerSmeltery.ashenBrick.get())
-                           .pattern("BbB")
-                           .pattern("BbB")
-                           .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenBricks))
-                           .save(consumer, prefix(id(DreamTinkerSmeltery.ashenBricks.getFence()), folder));
-
-        // casting
-        String castingFolder = "smeltery/casting/ashen/";
-        ItemCastingRecipeBuilder.basinRecipe(DreamTinkerSmeltery.ashenStone)
-                                .setFluidAndTime(DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK_BLOCK)
-                                .save(consumer, location(castingFolder + "stone_from_ashen"));
-        cast(DreamtinkerFluids.molten_ender_ash.get(), DreamTinkerSmeltery.ashenBrick.get(), FluidValues.BRICK, consumer);
-
-
-        MeltingRecipeBuilder.melting(Ingredient.of(DreamTinkerSmeltery.enderMortar), DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK * 2, 1.5f)
-                            .save(consumer, location(Melting_folder + "transmute/martar"));
-
-        MeltingRecipeBuilder.melting(CompoundIngredient.of(Ingredient.of(DreamtinkerTagKeys.Items.ASHEN_BLOCKS),
-                                                           Ingredient.of(DreamTinkerSmeltery.ashenLadder, DreamTinkerSmeltery.ashenBricks.getStairs(),
-                                                                         DreamTinkerSmeltery.ashenRoad.getStairs())),
-                                     DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK_BLOCK, 2.0f)
-                            .save(consumer, location(Melting_folder + "block"));
-        MeltingRecipeBuilder.melting(
-                                    Ingredient.of(DreamTinkerSmeltery.ashenBricks.getSlab(), DreamTinkerSmeltery.ashenBricks.getSlab(), DreamTinkerSmeltery.ashenRoad.getSlab()),
-                                    DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK_BLOCK / 2, 1.5f)
-                            .save(consumer, location(Melting_folder + "slab"));
-        MeltingRecipeBuilder.melting(Ingredient.of(DreamTinkerSmeltery.ashenBrick.get()), DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK, 1.0f)
-                            .save(consumer, location(Melting_folder + "brick"));
-        MeltingRecipeBuilder.melting(Ingredient.of(DreamTinkerSmeltery.ashenBricks.getFence()), DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK * 3, 1.0f)
-                            .save(consumer, location(Melting_folder + "fence"));
-
-        MeltingRecipeBuilder.melting(Ingredient.of(DreamTinkerSmeltery.transmuteController), TinkerFluids.moltenKnightmetal, FluidValues.INGOT * 4, 3.5f)
-                            .addByproduct(DreamtinkerFluids.molten_ender_ash.result(FluidValues.BRICK * 4))
-                            .save(consumer, location(Melting_folder + "knightmetal/transmute_controller"));
-
-        // scorched glass
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, DreamTinkerSmeltery.ashenGlass)
-                           .define('b', DreamTinkerSmeltery.ashenBrick.get())
-                           .define('G', Tags.Items.GEMS_QUARTZ)
-                           .pattern(" b ")
-                           .pattern("bGb")
-                           .pattern(" b ")
-                           .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenBrick.get()))
-                           .save(consumer, prefix(DreamTinkerSmeltery.ashenGlass, folder));
-        ItemCastingRecipeBuilder.basinRecipe(DreamTinkerSmeltery.ashenGlass)
-                                .setFluidAndTime(TinkerFluids.moltenQuartz, FluidValues.GEM)
-                                .setCast(DreamTinkerSmeltery.ashenBricks, true)
-                                .save(consumer, location(castingFolder + "glass"));
-        ItemCastingRecipeBuilder.basinRecipe(DreamTinkerSmeltery.ashenLamp)
-                                .setFluidAndTime(DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK_BLOCK)
-                                .setCast(Blocks.GLOWSTONE, true)
-                                .save(consumer, location(castingFolder + "lamp"));
-        ItemCastingRecipeBuilder.basinRecipe(DreamTinkerSmeltery.ashenSoulGlass)
-                                .setFluidAndTime(DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK_BLOCK)
-                                .setCast(TinkerCommons.soulGlass, true)
-                                .save(consumer, location(castingFolder + "glass_soul"));
-        ItemCastingRecipeBuilder.basinRecipe(DreamTinkerSmeltery.ashenTintedGlass)
-                                .setFluidAndTime(DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK_BLOCK)
-                                .setCast(Tags.Items.GLASS_TINTED, true)
-                                .save(consumer, location(castingFolder + "glass_tinted"));
-        // discount for casting panes
-        ItemCastingRecipeBuilder.tableRecipe(DreamTinkerSmeltery.ashenGlassPane)
-                                .setFluidAndTime(TinkerFluids.moltenQuartz, FluidValues.GEM_SHARD)
-                                .setCast(DreamTinkerSmeltery.ashenBrick.get(), true)
-                                .save(consumer, location(castingFolder + "glass_pane"));
-        ItemCastingRecipeBuilder.tableRecipe(DreamTinkerSmeltery.ashenSoulGlassPane)
-                                .setFluidAndTime(DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK)
-                                .setCast(TinkerCommons.soulGlassPane, true)
-                                .save(consumer, location(castingFolder + "glass_pane_soul"));
-
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, DreamTinkerSmeltery.ashenLamp)
-                           .define('b', DreamTinkerSmeltery.ashenBrick.get())
-                           .define('G', Blocks.GLOWSTONE)
-                           .pattern(" b ")
-                           .pattern("bGb")
-                           .pattern(" b ")
-                           .unlockedBy("has_item", has(Blocks.GLOWSTONE))
-                           .save(consumer, prefix(DreamTinkerSmeltery.ashenLamp, folder));
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, DreamTinkerSmeltery.ashenSoulGlass)
-                           .define('b', DreamTinkerSmeltery.ashenBrick.get())
-                           .define('G', TinkerCommons.soulGlass)
-                           .pattern(" b ")
-                           .pattern("bGb")
-                           .pattern(" b ")
-                           .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenBrick.get()))
-                           .save(consumer, prefix(DreamTinkerSmeltery.ashenSoulGlass, folder));
-        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, DreamTinkerSmeltery.ashenTintedGlass)
-                           .define('b', DreamTinkerSmeltery.ashenBrick.get())
-                           .define('G', Tags.Items.GLASS_TINTED)
-                           .pattern(" b ")
-                           .pattern("bGb")
-                           .pattern(" b ")
-                           .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenBrick.get()))
-                           .save(consumer, prefix(DreamTinkerSmeltery.ashenTintedGlass, folder));
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, DreamTinkerSmeltery.ashenGlassPane, 16)
-                           .define('#', DreamTinkerSmeltery.ashenGlass)
-                           .pattern("###")
-                           .pattern("###")
-                           .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenGlass))
-                           .save(consumer, prefix(DreamTinkerSmeltery.ashenGlassPane, folder));
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, DreamTinkerSmeltery.ashenSoulGlassPane, 16)
-                           .define('#', DreamTinkerSmeltery.ashenSoulGlass)
-                           .pattern("###")
-                           .pattern("###")
-                           .unlockedBy("has_item", has(DreamTinkerSmeltery.ashenSoulGlass))
-                           .save(consumer, prefix(DreamTinkerSmeltery.ashenSoulGlassPane, folder));
-        // tanks
-        MeltingRecipeBuilder.melting(NoContainerIngredient.of(DreamTinkerSmeltery.ashenTank.get(SearedTankBlock.TankType.FUEL_TANK)),
-                                     DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK * 8, 3f)
-                            .addByproduct(TinkerFluids.moltenQuartz.result(FluidValues.GEM))
-                            .save(consumer, location(Melting_folder + "fuel_tank"));
-        MeltingRecipeBuilder.melting(NoContainerIngredient.of(DreamTinkerSmeltery.ashenTank.get(SearedTankBlock.TankType.INGOT_TANK)),
-                                     DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK * 6, 2.5f)
-                            .addByproduct(TinkerFluids.moltenQuartz.result(FluidValues.GEM * 3))
-                            .save(consumer, location(Melting_folder + "ingot_tank"));
-        MeltingRecipeBuilder.melting(
-                                    NoContainerIngredient.of(DreamTinkerSmeltery.ashenTank.get(SearedTankBlock.TankType.FUEL_GAUGE), DreamTinkerSmeltery.ashenTank.get(
-                                            SearedTankBlock.TankType.INGOT_GAUGE)), DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK * 4, 2f)
-                            .addByproduct(TinkerFluids.moltenQuartz.result(FluidValues.GEM * 5))
-                            .save(consumer, location(Melting_folder + "gauge"));
-        // tank filling - scorched
-        ContainerFillingRecipeBuilder.basinRecipe(DreamTinkerSmeltery.ashenTank.get(SearedTankBlock.TankType.INGOT_TANK), FluidValues.INGOT)
-                                     .save(consumer, location(folder + "filling/ashen_ingot_tank"));
-        ContainerFillingRecipeBuilder.basinRecipe(DreamTinkerSmeltery.ashenTank.get(SearedTankBlock.TankType.INGOT_GAUGE), FluidValues.INGOT)
-                                     .save(consumer, location(folder + "filling/ashen_ingot_gauge"));
-        ContainerFillingRecipeBuilder.basinRecipe(DreamTinkerSmeltery.ashenTank.get(SearedTankBlock.TankType.FUEL_TANK), FluidType.BUCKET_VOLUME / 4)
-                                     .save(consumer, location(folder + "filling/ashen_fuel_tank"));
-        ContainerFillingRecipeBuilder.basinRecipe(DreamTinkerSmeltery.ashenTank.get(SearedTankBlock.TankType.FUEL_GAUGE), FluidType.BUCKET_VOLUME / 4)
-                                     .save(consumer, location(folder + "filling/ashen_fuel_gauge"));
-        ItemCastingRecipeBuilder.basinRecipe(DreamTinkerSmeltery.ashenHeater)
+        ItemCastingRecipeBuilder.basinRecipe(EsotericismTinkerSmeltery.ashenHeater)
                                 .setCast(DreamtinkerCommon.UnbornDragonEgg, true)
-                                .setFluidAndTime(DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK_BLOCK * 9)
+                                .setFluidAndTime(EsotericismTinkerFluids.molten_ender_ash, FluidValues.BRICK_BLOCK * 9)
                                 .save(consumer, location(Casting_folder + "ashen_heater"));
-        ItemCastingRecipeBuilder.basinRecipe(DreamTinkerSmeltery.ashenAccel)
+        ItemCastingRecipeBuilder.basinRecipe(EsotericismTinkerSmeltery.ashenAccel)
                                 .setCast(DreamtinkerCommon.UnbornSnifferEgg, true)
-                                .setFluidAndTime(DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK_BLOCK * 9)
+                                .setFluidAndTime(EsotericismTinkerFluids.molten_ender_ash, FluidValues.BRICK_BLOCK * 9)
                                 .save(consumer, location(Casting_folder + "ashen_accelerator"));
 
-        ItemCastingRecipeBuilder.tableRecipe(DreamTinkerSmeltery.ashenAlloySwitch)
-                                .setCast(TinkerSmeltery.smelteryController, true)
-                                .setFluidAndTime(DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK_BLOCK * 9)
-                                .save(consumer, location(Casting_folder + "ashen_alloy_switch"));
-
-        ItemCastingRecipeBuilder.basinRecipe(DreamTinkerSmeltery.ashenMeltSwitch)
-                                .setCast(TinkerSmeltery.foundryController, true)
-                                .setFluidAndTime(DreamtinkerFluids.molten_ender_ash, FluidValues.BRICK_BLOCK * 9)
-                                .save(consumer, location(Casting_folder + "ashen_melt_switch"));
 
     }
 
@@ -2426,17 +2087,6 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
         return CompoundIngredient.of(tagIngredients);
     }
 
-    private void ashenStonecutter(Consumer<FinishedRecipe> consumer, ItemLike output, String folder) {
-        SingleItemRecipeBuilder.stonecutting(
-                                       CompoundIngredient.of(
-                                               Ingredient.of(DreamTinkerSmeltery.ashenStone),
-                                               DifferenceIngredient.of(Ingredient.of(DreamtinkerTagKeys.Items.ASHEN_BLOCKS), Ingredient.of(output))), RecipeCategory.BUILDING_BLOCKS,
-                                       output,
-                                       1)
-                               .unlockedBy("has_stone", has(DreamTinkerSmeltery.ashenStone))
-                               .unlockedBy("has_bricks", has(DreamtinkerTagKeys.Items.ASHEN_BLOCKS))
-                               .save(consumer, wrap(id(output), folder, "_stonecutting"));
-    }
 
     /**
      * Adds a recipe to create the given seared block using molten clay on stone

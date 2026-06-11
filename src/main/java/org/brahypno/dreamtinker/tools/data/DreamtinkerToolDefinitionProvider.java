@@ -7,10 +7,10 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.ToolActions;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
-import org.brahypno.dreamtinker.library.tools.DTSlotType;
 import org.brahypno.dreamtinker.tools.DTtoolsDefinition;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.brahypno.dreamtinker.tools.DreamtinkerToolParts;
+import org.brahypno.esotericismtinker.library.tools.EsotericismSlotType;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.data.predicate.block.BlockPredicate;
 import slimeknights.tconstruct.common.TinkerTags;
@@ -21,7 +21,6 @@ import slimeknights.tconstruct.library.tools.definition.module.ToolHooks;
 import slimeknights.tconstruct.library.tools.definition.module.ToolModule;
 import slimeknights.tconstruct.library.tools.definition.module.aoe.*;
 import slimeknights.tconstruct.library.tools.definition.module.build.*;
-import slimeknights.tconstruct.library.tools.definition.module.display.FixedMaterialToolName;
 import slimeknights.tconstruct.library.tools.definition.module.material.DefaultMaterialsModule;
 import slimeknights.tconstruct.library.tools.definition.module.material.MaterialStatsModule;
 import slimeknights.tconstruct.library.tools.definition.module.material.MaterialTraitsModule;
@@ -32,15 +31,11 @@ import slimeknights.tconstruct.library.tools.definition.module.weapon.CircleWeap
 import slimeknights.tconstruct.library.tools.nbt.MultiplierNBT;
 import slimeknights.tconstruct.library.tools.nbt.StatsNBT;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
-import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.TinkerToolActions;
 import slimeknights.tconstruct.tools.TinkerToolParts;
 import slimeknights.tconstruct.tools.data.ModifierIds;
 import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
 import slimeknights.tconstruct.tools.stats.StatlessMaterialStats;
-
-import static slimeknights.tconstruct.tools.TinkerToolParts.smallBlade;
-import static slimeknights.tconstruct.tools.TinkerToolParts.toolHandle;
 
 public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDataProvider {
     public DreamtinkerToolDefinitionProvider(PackOutput packOutput) {
@@ -57,12 +52,12 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
     DefaultMaterialsModule ancientTwoParts = DefaultMaterialsModule.builder().material(randomMaterial, randomMaterial).build();
     DefaultMaterialsModule ancientThreeParts = DefaultMaterialsModule.builder().material(randomMaterial, randomMaterial, randomMaterial).build();
     ToolModule large_soul_weapon_slots = ToolSlotsModule.builder()
-                                                        .slots(DTSlotType.DELUSION, 1)
+                                                        .slots(EsotericismSlotType.DELUSION, 1)
                                                         .slots(SlotType.ABILITY, 1)
                                                         .slots(SlotType.UPGRADE, 2).build();
 
     ToolModule small_soul_weapon_slots = ToolSlotsModule.builder()
-                                                        .slots(DTSlotType.DELUSION, 2)
+                                                        .slots(EsotericismSlotType.DELUSION, 2)
                                                         .slots(SlotType.ABILITY, 1)
                                                         .slots(SlotType.UPGRADE, 3).build();
 
@@ -129,7 +124,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
         DefaultMaterialsModule underPlateMaterials = DefaultMaterialsModule.builder().material(tier2Material, tier2Material, tier2Material).build();
         ToolModule plateSlots =
                 ToolSlotsModule.builder()
-                               .slots(DTSlotType.DELUSION, 2)
+                               .slots(EsotericismSlotType.DELUSION, 2)
                                .slots(SlotType.ABILITY, 2)
                                .slots(SlotType.UPGRADE, 1)
                                .slots(SlotType.DEFENSE, 1).build();
@@ -168,7 +163,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                                                              .set(ToolStats.DRAW_SPEED, 1.5f)
                                                              .set(ToolStats.ATTACK_SPEED, 1.2f)
                                                              .set(ToolStats.DURABILITY, 4.07f).build()))
-                .module(new ToolSlotsModule(ImmutableMap.of(DTSlotType.DELUSION, 3, SlotType.ABILITY, 1, SlotType.UPGRADE, 2)))
+                .module(new ToolSlotsModule(ImmutableMap.of(EsotericismSlotType.DELUSION, 3, SlotType.ABILITY, 1, SlotType.UPGRADE, 2)))
                 // traits
                 .module(ToolTraitsModule.builder()
                                         .trait(DreamtinkerModifiers.memory_base, 1)//malkuth
@@ -229,11 +224,9 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                                         .trait(ModifierIds.stripping).build())
                 // behavior
                 .module(ToolActionsModule.of(ToolActions.AXE_DIG, ToolActions.SWORD_DIG, TinkerToolActions.SHIELD_DISABLE))
-                .module(new ToolModule[]{
-                        new IsEffectiveModule(BlockPredicate.or(BlockPredicate.tag(TinkerTags.Blocks.MINABLE_WITH_SWORD),
+                .module(new IsEffectiveModule(BlockPredicate.or(BlockPredicate.tag(TinkerTags.Blocks.MINABLE_WITH_SWORD),
                                                                 BlockPredicate.tag(BlockTags.MINEABLE_WITH_AXE)), false),
-                        MiningSpeedModifierModule.blocks(7.5f, Blocks.COBWEB)
-                })
+                        MiningSpeedModifierModule.blocks(7.5f, Blocks.COBWEB))
                 .module(new ConditionalAOEIterator(
                         BlockPredicate.tag(TinkerTags.Blocks.TREE_LOGS), new TreeAOEIterator(0, 0),
                         BoxAOEIterator.builder(0, 4, 0).addWidth(2).addDepth(2).direction(IBoxExpansion.HEIGHT).build()));
@@ -256,36 +249,6 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                                         .trait(NovaRegistry.nova_scriptum_attributes).build())
                 .module(large_soul_weapon_slots);
         // behavior;
-        define(DTtoolsDefinition.RitualBlade)
-                // parts
-                .module(PartStatsModule.parts()
-                                       .part(smallBlade)
-                                       .part(toolHandle).build())
-                .module(defaultTwoParts)
-                // stats
-                .module(new SetStatsModule(StatsNBT.builder()
-                                                   .set(ToolStats.ATTACK_DAMAGE, 4f)
-                                                   .set(ToolStats.ATTACK_SPEED, 1.0f)
-                                                   .set(ToolStats.BLOCK_AMOUNT, 10)
-                                                   .set(ToolStats.USE_ITEM_SPEED, 1.0f).build()))
-                .module(new MultiplyStatsModule(MultiplierNBT.builder()
-                                                             .set(ToolStats.ATTACK_DAMAGE, 0.75f)
-                                                             .set(ToolStats.MINING_SPEED, 0.75f)
-                                                             .set(ToolStats.DURABILITY, 0.75f).build()))
-                .smallToolStartingSlots()
-                // traits
-                .module(ToolTraitsModule.builder()
-                                        .trait(TinkerModifiers.silky, 1)
-                                        .trait(ModifierIds.spilling)
-                                        .trait(DreamtinkerModifiers.self_sacrifice)
-                                        .trait(TinkerModifiers.melting)
-                                        .trait(TinkerModifiers.silkyShears).build())
-                // behavior
-                .module(ToolActionsModule.of(ToolActions.SWORD_DIG, ToolActions.HOE_DIG))
-                .module(IsEffectiveModule.tag(TinkerTags.Blocks.MINABLE_WITH_DAGGER))
-                .module(MiningSpeedModifierModule.blocks(7.5f, Blocks.COBWEB))
-                // faster tool name logic
-                .module(FixedMaterialToolName.FIRST);
     }
 
     @Override

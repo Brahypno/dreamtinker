@@ -1,0 +1,13 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "item": "minecraft:book"
+  },
+  "cast_consumed": true,
+  "cooling_time": 100,
+  "fluid": {
+    "amount": 100,
+    "tag": "dreamtinker:molten_nigrescence_antimony"
+  },
+  "result": "esotericism_tinker:hypnagogic_transmute"
+}

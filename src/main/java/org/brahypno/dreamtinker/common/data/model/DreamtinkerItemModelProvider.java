@@ -138,7 +138,6 @@ public class DreamtinkerItemModelProvider extends ItemModelProvider {
         cast(DreamTinkerSmeltery.NovaMiscCast);
         cast(DreamTinkerSmeltery.NovaRostrumCast);
         cast(DreamTinkerSmeltery.NovaWrapperCast);
-        generateItemModel(DreamTinkerSmeltery.ashenBrick, "materials");
     }
 
     private MaterialModelBuilder<ItemModelBuilder> part(ResourceLocation part, String texture) {
