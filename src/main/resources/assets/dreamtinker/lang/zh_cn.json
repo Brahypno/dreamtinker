@@ -953,6 +953,8 @@
     "modifier.dreamtinker.ender_protection.flavor":  "终末亦会庇护",
     "modifier.dreamtinker.ender_protection.description":  "每级降低来自末影生物的4%伤害。",
     "modifier.dreamtinker.ender_protection.resistance":  "对末地生物",
+
+
     "material.dreamtinker.echo_alloy":  "回响合金",
     "material.dreamtinker.echo_alloy.flavor":  "是神秘的回响，还是秘密的回响",
     "material.dreamtinker.moonlight_ice":  "月光冰",
@@ -1144,11 +1146,9 @@
     "material.dreamtinker.whimsy_gold.flavor":  "轻灵到足以追随好奇之爪的黄金",
     "material.dreamtinker.legendary_monsters_enderitium":  "终末金属",
     "material.dreamtinker.legendary_monsters_enderitium.flavor":  " ",
-    "itemGroup.dreamtinker.tool":  "工匠幻梦 | 工具",
+
     "itemGroup.dreamtinker.part":  "工匠幻梦 | 部件",
-    "itemGroup.dreamtinker.item":  "工匠幻梦 | 道具",
-    "itemGroup.dreamtinker.fluids":  "工匠幻梦 | 流体",
-    "itemGroup.dreamtinker.smeltery":  "工匠幻梦 | 嬗变",
+
     "item.dreamtinker.explode_core":  "镇爆核心",
     "item.dreamtinker.tntarrow":  "镇爆箭",
     "item.dreamtinker.tntarrow.description":  "一种消耗性的，造成范围伤害的特种箭矢，其射程小于范围！",
@@ -1285,6 +1285,8 @@
     "tooltip.dreamtinker.iron_golem_heart":  "铁傀儡被敌对生物杀死15%掉落",
     "item.dreamtinker.snake_fang":  "蛇牙",
     "tooltip.dreamtinker.snake_fang":  "使用“肢解”击杀末影龙获得。",
+
+
     "block.dreamtinker.metallivorous_stibium_lupus_block":  "狼锑块",
     "block.dreamtinker.crying_obsidian_pane":  "哭泣的黑曜石板",
     "block.dreamtinker.narcissus":  "水仙",
@@ -1317,6 +1319,8 @@
     "block.dreamtinker.unborn_sniffer_egg":  "未能延续之嗅探兽蛋",
     "block.dreamtinker.unborn_dragon_egg":  "未能死去之龙蛋",
     "block.dreamtinker.unborn_dragon_egg.tooltip":  "答案毋庸置疑——",
+
+
     "fluid_type.dreamtinker.molten_echo_alloy":  "熔融回响合金",
     "fluid.dreamtinker.molten_echo_alloy":  "熔融回响合金",
     "fluid.dreamtinker.molten_echo_alloy.fluid_effect":  "造成流血伤害，施加发光与流血，并能精准采集钻石级方块",
@@ -1572,6 +1576,8 @@
     "fluid.dreamtinker.molten_enderitium.fluid_effect":  "造成3点魔法伤害",
     "block.dreamtinker.molten_enderitium":  "熔融终末金属",
     "item.dreamtinker.molten_enderitium_bucket":  "熔融终末金属桶",
+
+
     "fluid_effect.tconstruct.damage":  "%s伤害",
     "fluid_effect.tconstruct.damage.tconstruct.bleed":  "%s流血伤害",
     "fluid_effect.tconstruct.damage.tconstruct.self_destruct":  "%s自毁伤害",
@@ -1594,8 +1600,11 @@
     "fluid_effect.dreamtinker.despair_scaling_damage_fluid":  "%s伤害，至多根据绝望额外增加%s伤害",
     "fluid_effect.dreamtinker.despair_scaling_damage_fluid.dreamtinker.null_void":  "%s归虚伤害，至多根据绝望额外增加%s伤害",
     "fluid_effect.dreamtinker.auto_tag_cycle_block_fluid":  "随机将方块转化为同标签变体",
+
+
     "fluid.dreamtinker.virulent":  "致毒混合物",
     "fluid.dreamtinker.virulent.fluid_effect":  "这份致毒混合物十分危险",
+
     "pattern.dreamtinker.explode_core":  "镇爆核心",
     "pattern.dreamtinker.memory_orthant":  "记忆象限",
     "pattern.dreamtinker.wish_orthant":  "愿望象限",
@@ -1608,6 +1617,8 @@
     "pattern.dreamtinker.nova_rostrum":  "新生撞角",
     "pattern.dreamtinker.nova_wrapper":  "新生外壳",
     "pattern.dreamtinker.nova_misc":  "新生纹饰",
+
+
     "effect.dreamtinker.silver_name_bee":  "银账本",
     "effect.dreamtinker.real_darkness":  "真实黑暗",
     "effect.dreamtinker.unholy":  "不洁",
@@ -1635,14 +1646,15 @@
     "item.minecraft.tipped_arrow.effect.paradox_wound":  "逆向创伤之箭",
     "effect.dreamtinker.daylost":  "失昼",
     "effect.dreamtinker.temptation":  "诱惑",
-    "item.minecraft.potion.effect.temptation":  "诱惑药水",
-    "item.minecraft.splash_potion.effect.temptation":  "喷溅型诱惑药水",
-    "item.minecraft.lingering_potion.effect.temptation":  "滞留型诱惑药水",
+    "item.minecraft.potion.effect.temptation":  "诱惑汀剂",
+    "item.minecraft.splash_potion.effect.temptation":  "喷溅型诱惑汀剂",
+    "item.minecraft.lingering_potion.effect.temptation":  "滞留型诱惑汀剂",
     "item.minecraft.tipped_arrow.effect.temptation":  "诱惑之箭",
     "item.minecraft.potion.effect.arcana_juice":  "奥术回响药水",
     "item.minecraft.splash_potion.effect.arcana_juice":  "喷溅型奥术回响药水",
     "item.minecraft.lingering_potion.effect.arcana_juice":  "滞留型奥术回响药水",
     "item.minecraft.tipped_arrow.effect.arcana_juice":  "奥术回响之箭",
+
     "advancements.dreamtinker.root.title":  "工匠幻梦",
     "advancements.dreamtinker.root.description":  "欢迎来到幻梦世界",
     "advancements.dreamtinker.materials.raw_stibnite.title":  "粗辉锑",
@@ -1681,12 +1693,17 @@
     "advancements.dreamtinker.materials.snake_fang.description":  "龙蛇本一体",
     "advancements.dreamtinker.materials.eden_fruit.title":  "伊甸之果",
     "advancements.dreamtinker.materials.eden_fruit.description":  "知晓善恶",
+
+
     "stat.tconstruct.harvest_tier.dreamtinker.lupus":  "狼",
     "stat.tconstruct.harvest_tier.dreamtinker.netheritte":  "下界合全",
     "stat.tconstruct.harvest_tier.dreamtinker.transmutation_gold":  "曜金",
     "stat.tconstruct.harvest_tier.enigmaticlegacy.etherium":  "以太",
+
     "key.categories.dreamtinker":  "工匠幻梦",
     "key.dreamtinker.tool_interact":  "工具交互",
+
+
     "jei.dreamtinker.category":  "世界仪式",
     "jei.dreamtinker.category.item_in_fluid":  "触发：弃置流体中",
     "jei.dreamtinker.category.kill_entity":  "触发：献祭",
@@ -1702,6 +1719,8 @@
     "jei.dreamtinker.condition.drowning":  "处于溺水状态",
     "jei.dreamtinker.condition.under_water":  "水下",
     "jei.dreamtinker.condition.in_rain":  "雨中",
+
+
     "death.attack.dreamtinker.null_void":  "%1$s被虚无吞没",
     "death.attack.dreamtinker.rain_bow":  "%1$s如彩虹般消逝",
     "death.attack.dreamtinker.arcane_damage":  "%1$s被秘仪咒杀",
@@ -1709,27 +1728,40 @@
     "death.attack.dreamtinker.edict_punishments":  "%1$s因违背戒律而死",
     "death.attack.dreamtinker.ruin_wheel":  "%1$s被命运的车轮碾碎",
     "death.attack.dreamtinker.solar_judgment":  "%1$s在日冕裁定中灼尽",
+
+
     "entity.dreamtinker.aggressive_fox":  "武装狐狸",
     "sound.dreamtinker.chainsaw_start":  "电锯启动",
     "sound.dreamtinker.chainsaw_loop":  "电锯运转",
     "sound.dreamtinker.chainsaw_stop":  "电锯停机",
     "stat.dreamtinker.tool.display.designs":  "范围攻击",
+
+
     "dreamtinker.glyph_name.glyph_tinker":  "匠魂之力",
     "dreamtinker.glyph_desc.glyph_tinker":  "仅在本模组提供的历艰成书和施法强化上有效，容许弹射物，法术效果触发部分匠魂的词条与属性。类似强化但连续使用仅生效一次。效果部分限定在伤害相关类型上。用工匠的挖掘等级提高强化数值。",
+
     "tooltip.dreamtinker.mob_jar":  "现在它可以被摆放在熔炼炉内部以熔炼内部实体。\n可以用法术治愈内部实体",
     "tooltip.dreamtinker.cursed_scroll":  "现在部分匠魂强化会被视作诅咒附魔。",
     "tooltip.dreamtinker.temptation_edicts":  "唯一的禁止之事，就是输给诱惑。但是诱惑的通道已经被封堵。",
+
+
     "block.dreamtinker.ashen_heater":  "烬灰加热器",
     "block.dreamtinker.ashen_heater.tooltip":  "将未死的恨意转化为嬗变炉的热量\n只能用来搭建嬗变炉底板",
     "tooltip.dreamtinker.transmute_heater":  "当位于嬗变炉结构内，增加 %d 温度",
     "block.dreamtinker.ashen_accelerator":  "烬灰加速器",
     "block.dreamtinker.ashen_accelerator.tooltip":  "将延续的渴求加速嬗变\n只能用来搭建嬗变炉墙面",
     "tooltip.dreamtinker.transmute_accel":  "当位于嬗变炉结构内，增加 %d 燃料速率",
+
+
     "attribute.name.dreamtinker.generic.fate_veil":  "命运面纱",
     "attribute.name.dreamtinker.generic.blood_in_shell":  "壳中心",
     "attribute.name.generic.shell_heart_toughness":  "壳心强韧",
+
+
     "attribute_modifier.dreamtinker.max_mana_armor":  "魔力护甲：最大魔力",
     "attribute_modifier.dreamtinker.mana_regen_armor":  "魔力护甲：魔力恢复",
+
+
     "command.dreamtinker.shellheart.set":  "已将 %2$s 名玩家的壳心值设为 %1$s。",
     "command.dreamtinker.shellheart.add":  "已为 %2$s 名玩家增加 %1$s 点壳心。",
     "command.dreamtinker.shellheart.color":  "已将 %2$s 名玩家的壳心颜色设为 %1$s。",

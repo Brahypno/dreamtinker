@@ -953,6 +953,8 @@
     "modifier.dreamtinker.ender_protection.flavor":  "Even the End may shelter you.",
     "modifier.dreamtinker.ender_protection.description":  "Reduces damage from ender creatures by 4% per level.",
     "modifier.dreamtinker.ender_protection.resistance":  "Against End creatures",
+
+
     "material.dreamtinker.echo_alloy":  "Echo Alloy",
     "material.dreamtinker.echo_alloy.flavor":  "Its echo of mystery, or echo of enigma",
     "material.dreamtinker.moonlight_ice":  "Moonlight Ice",
@@ -1144,11 +1146,10 @@
     "material.dreamtinker.whimsy_gold.flavor":  "Gold made light enough to follow a curious paw",
     "material.dreamtinker.legendary_monsters_enderitium":  "Enderitium",
     "material.dreamtinker.legendary_monsters_enderitium.flavor":  " ",
-    "itemGroup.dreamtinker.tool":  "Dreamtinker | tool",
+
+
     "itemGroup.dreamtinker.part":  "Dreamtinker | part",
-    "itemGroup.dreamtinker.item":  "Dreamtinker | item",
-    "itemGroup.dreamtinker.fluids":  "Dreamtinker | fluids",
-    "itemGroup.dreamtinker.smeltery":  "Dreamtinker | Transmute",
+
     "item.dreamtinker.explode_core":  "Explode Core",
     "item.dreamtinker.tntarrow":  "TNT Arrow",
     "item.dreamtinker.tntarrow.description":  "a consumable, special arrow deal range damage\nEffect range less than exploding range！！",
@@ -1285,6 +1286,7 @@
     "tooltip.dreamtinker.iron_golem_heart":  "15% chance obtainable if iron golem killed by enemy",
     "item.dreamtinker.snake_fang":  "Snake Fang",
     "tooltip.dreamtinker.snake_fang":  "Only Obtainable when kill ender dragon with \u0027Severing\u0027",
+
     "block.dreamtinker.metallivorous_stibium_lupus_block":  "Lupus Metallorum Block",
     "block.dreamtinker.crying_obsidian_pane":  "Crying Obsidian Pane",
     "block.dreamtinker.narcissus":  "Narcissus",
@@ -1317,6 +1319,8 @@
     "block.dreamtinker.unborn_sniffer_egg":  "non-Preservation Sniffer Egg",
     "block.dreamtinker.unborn_dragon_egg":  "Undead Dragon Egg",
     "block.dreamtinker.unborn_dragon_egg.tooltip":  "The conclusion is irrefutable.",
+
+
     "fluid_type.dreamtinker.molten_echo_alloy":  "Molten echo Alloy",
     "fluid.dreamtinker.molten_echo_alloy":  "Molten echo Alloy",
     "fluid.dreamtinker.molten_echo_alloy.fluid_effect":  "Deals bleeding damage, applies Glowing and Bleeding, and can silk-touch mine diamond-tier blocks.",
@@ -1573,6 +1577,7 @@
     "block.dreamtinker.molten_enderitium":  "Molten Enderitium",
     "item.dreamtinker.molten_enderitium_bucket":  "Molten Enderitium Bucket",
     "fluid_effect.tconstruct.damage":  "%s Damage",
+
     "fluid_effect.tconstruct.damage.tconstruct.bleed":  "%s Bleeding Damage",
     "fluid_effect.tconstruct.damage.tconstruct.self_destruct":  "%s Self-Destruct Damage",
     "fluid_effect.tconstruct.damage.tconstruct.fluid.impact":  "%s Impact Damage",
@@ -1594,8 +1599,10 @@
     "fluid_effect.dreamtinker.despair_scaling_damage_fluid":  "%s Damage, plus up to %s bonus damage from despair",
     "fluid_effect.dreamtinker.despair_scaling_damage_fluid.dreamtinker.null_void":  "%s Null-Void Damage, plus up to %s bonus damage from despair",
     "fluid_effect.dreamtinker.auto_tag_cycle_block_fluid":  "Randomly transmutes blocks into matching tagged variants",
+
     "fluid.dreamtinker.virulent":  "Virulent Mix",
     "fluid.dreamtinker.virulent.fluid_effect":  "This Virulent Mix is very dangerous",
+
     "pattern.dreamtinker.explode_core":  "explode core",
     "pattern.dreamtinker.memory_orthant":  "Memory Orthant",
     "pattern.dreamtinker.wish_orthant":  "Wish Orthant",
@@ -1608,6 +1615,8 @@
     "pattern.dreamtinker.nova_rostrum":  "Nova Rostrum",
     "pattern.dreamtinker.nova_wrapper":  "Nova Wrapper",
     "pattern.dreamtinker.nova_misc":  "Nova decoration",
+
+
     "effect.dreamtinker.silver_name_bee":  "silver ledger",
     "effect.dreamtinker.real_darkness":  "Real Darkness",
     "effect.dreamtinker.unholy":  "Unholy",
@@ -1643,6 +1652,8 @@
     "item.minecraft.splash_potion.effect.arcana_juice":  "Splash Potion of Echoing Arcana",
     "item.minecraft.lingering_potion.effect.arcana_juice":  "Lingering Potion of Echoing Arcana",
     "item.minecraft.tipped_arrow.effect.arcana_juice":  "Arrow of Echoing Arcana",
+
+
     "advancements.dreamtinker.root.title":  "Dream Tinker",
     "advancements.dreamtinker.root.description":  "Welcome Dream Tinker",
     "advancements.dreamtinker.materials.raw_stibnite.title":  "Raw Stibnite",
@@ -1681,12 +1692,15 @@
     "advancements.dreamtinker.materials.snake_fang.description":  "Dragon and serpent are one",
     "advancements.dreamtinker.materials.eden_fruit.title":  "Fruit of Eden",
     "advancements.dreamtinker.materials.eden_fruit.description":  "Knowing good and evil",
+
     "stat.tconstruct.harvest_tier.dreamtinker.lupus":  "Lupus",
     "stat.tconstruct.harvest_tier.dreamtinker.netheritte":  "Netheritte",
     "stat.tconstruct.harvest_tier.dreamtinker.transmutation_gold":  "Transmutation Gold",
     "stat.tconstruct.harvest_tier.enigmaticlegacy.etherium":  "Etherium",
+
     "key.categories.dreamtinker":  "Dreamtinker",
     "key.dreamtinker.tool_interact":  "Tool Interact",
+
     "jei.dreamtinker.category":  "World Ritual",
     "jei.dreamtinker.category.item_in_fluid":  "Trigger: Put Item in Fluid",
     "jei.dreamtinker.category.kill_entity":  "Trigger: Sacrifice",
@@ -1702,6 +1716,7 @@
     "jei.dreamtinker.condition.drowning":  "Drowning",
     "jei.dreamtinker.condition.under_water":  "Under Water",
     "jei.dreamtinker.condition.in_rain":  "In Rain",
+
     "death.attack.dreamtinker.null_void":  "%1$s was consumed by nothingness",
     "death.attack.dreamtinker.rain_bow":  "%1$s vanished like a rainbow",
     "death.attack.dreamtinker.arcane_damage":  "%1$s was cursed by arcane arts",
@@ -1709,27 +1724,33 @@
     "death.attack.dreamtinker.edict_punishments":  "%1$s died for defying an edict",
     "death.attack.dreamtinker.ruin_wheel":  "%1$s was crushed by the wheel of fate",
     "death.attack.dreamtinker.solar_judgment":  "%1$s was burned away by solar judgment",
+
     "entity.dreamtinker.aggressive_fox":  "Armed Fox",
     "sound.dreamtinker.chainsaw_start":  "ChainSaw Starting",
     "sound.dreamtinker.chainsaw_loop":  "ChainSaw Running",
     "sound.dreamtinker.chainsaw_stop":  "ChainSaw Stopping",
     "stat.dreamtinker.tool.display.designs":  "Circle Attack",
+
     "dreamtinker.glyph_name.glyph_tinker":  "Tinker ability",
     "dreamtinker.glyph_desc.glyph_tinker":  "Only working in the Per Aspera Scriptum other casting modifier and allow tinkers` modifiers\u0026tool status being used. Like amplify but not triggered continuously and mostly limited on glyph that deal damage. Use tool harvest tier to increase amplify",
+
     "tooltip.dreamtinker.mob_jar":  "Now This jar block can be put inside any Transmute and melt entity inside\n Use spell to heal entity inside.",
     "tooltip.dreamtinker.cursed_scroll":  "Now Some Tinkers` modifier would be treated as curse Enchantment.",
     "tooltip.dreamtinker.temptation_edicts":  "The one taboo was to succumb to temptation. But the path to temptation had already been sealed.",
+
     "block.dreamtinker.ashen_heater":  "Ashen Heater",
     "block.dreamtinker.ashen_heater.tooltip":  "Convert undead hate into heat for the Transmute.\nCan only be used for the floor of the transmute.",
     "tooltip.dreamtinker.transmute_heater":  "Increase %d temperature for the Transmute when put in structure",
     "block.dreamtinker.ashen_accelerator":  "Ashen Accelerator",
     "block.dreamtinker.ashen_accelerator.tooltip":  "Use preservation wish to increase fuel rate for the Transmute.\nCan only be used for the wall of the transmute.",
     "tooltip.dreamtinker.transmute_accel":  "Increase %d fuel rate for the Transmute when put in structure",
+
     "attribute.name.dreamtinker.generic.fate_veil":  "Fate Veil",
     "attribute.name.dreamtinker.generic.blood_in_shell":  "Shell Heart",
     "attribute.name.generic.shell_heart_toughness":  "Shell Heart Toughness",
     "attribute_modifier.dreamtinker.max_mana_armor":  "Mana Armor: Maximum Mana",
     "attribute_modifier.dreamtinker.mana_regen_armor":  "Mana Armor: Mana Regeneration",
+
     "command.dreamtinker.shellheart.set":  "Set shell heart to %s for %s player(s).",
     "command.dreamtinker.shellheart.add":  "Added %s shell heart to %s player(s).",
     "command.dreamtinker.shellheart.color":  "Set shell heart colour to %s for %s player(s).",
