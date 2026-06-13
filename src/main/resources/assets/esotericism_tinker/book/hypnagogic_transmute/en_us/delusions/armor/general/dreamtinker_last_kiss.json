@@ -1,0 +1,12 @@
+{
+  "modifier_id": "dreamtinker:last_kiss",
+  "text": [
+    {"text": "Increase 0.4 use item speed and decrease 20% block amount and 25% block angle. If block in 3s per level, gain regeneration 2s per level with amplify same as modifier level" }
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable/shields",
+  "effects": [
+    "Requires 1 delusion slot",
+    "Maximum of 2 levels"
+  ]
+}

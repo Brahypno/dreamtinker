@@ -1,0 +1,18 @@
+{
+  "modifier_id": "dreamtinker:born_with_me",
+  "text": [
+    {
+      "text": "当杀死一个生物，或目标生命小于自己时，对攻击范围内的其他生物额外进行一次攻击。首级增加50%额外攻击伤害，之后每级增加20%额外攻击伤害。"
+    },
+    {
+      "text": "额外攻击会点燃自身和受击者，并对自身造成相当于此次额外攻击所造成伤害5%的伤害",
+      "paragraph": true
+    }
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable/melee/primary",
+  "effects": [
+    "需要1个妄见槽",
+    "最高3级"
+  ]
+}

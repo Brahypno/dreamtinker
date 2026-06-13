@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:last_kiss",
+  "text": [
+    {"text": "每级增加0.4使用时移速，但减少25%格挡值和35%格挡角度。如果本次格挡时间不足每级3秒，则获得每级2s，与级别相同的生命回复"}
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable/shields",
+    "effects": [
+      "可以逐级强化",
+      "最高2级",
+      "每级需要1个妄见槽"
+    ]
+}

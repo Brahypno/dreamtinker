@@ -1,0 +1,11 @@
+{
+  "title": "Larimar Ore",
+  "item": "dreamtinker:larimar_ore",
+  "text": [
+    {
+      "text": "Larimar Ore is a uncommon ore found in beach between elevation of 45 and 70.",
+      "paragraph": true
+    }
+  ]
+}
+

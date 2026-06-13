@@ -1,0 +1,16 @@
+{
+  "title": "Rose Cold Iron Ore",
+  "item": {
+    "tag": "forge:ores/cold_iron"
+  },
+  "text": [
+    {
+      "text": "Rose Cold Iron is iron altered by a deep and uncanny cold, changed into a strange metal."
+    },
+    {
+      "text": "It generates in two ranges: between Y=-24 and Y=56 at lower altitudes, and between Y=120 and Y=320 at higher altitudes and could be found in cold biomes.",
+      "paragraph": true
+    }
+  ]
+}
+

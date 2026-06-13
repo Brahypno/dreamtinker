@@ -44,6 +44,11 @@ public class ItemTagProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.@NotNull Provider Provider) {
+        this.tag(EsotericismTinkerTagKeys.Items.EXPLORATION_RITUAL_PRODUCTS)
+            .add(void_pearl.get());
+        this.tag(EsotericismTinkerTagKeys.Items.EXPLORATION_ORES)
+            .add(amberOre.asItem(), larimarOre.asItem(), scoleciteOre.asItem(), blackSapphireOre.asItem(), coldIronOre.asItem(), ShadowSilverOre.asItem(),
+                 TransmutationGoldOre.asItem(), OrichalcumOre.asItem());
         //tools
         this.tag(Items.weapon_slot_excluded).add(DreamtinkerTools.silence_glove.get());
         this.tag(TinkerTags.Items.TOOL_PARTS)
