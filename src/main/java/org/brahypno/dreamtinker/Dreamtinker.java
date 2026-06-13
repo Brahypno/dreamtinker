@@ -2,6 +2,7 @@ package org.brahypno.dreamtinker;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
@@ -31,6 +32,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.MissingMappingsEvent;
 import org.brahypno.dreamtinker.Entity.AggressiveFox;
 import org.brahypno.dreamtinker.Entity.DreamtinkerEntityTypes;
 import org.brahypno.dreamtinker.common.DreamtinkerAttributes;
@@ -65,7 +67,11 @@ import org.brahypno.dreamtinker.tools.modifiers.events.compact.ars_nouveau.Spell
 import org.brahypno.dreamtinker.tools.modifiers.events.compact.enigmatic_legacy.EL_events;
 import org.brahypno.dreamtinker.tools.modifiers.events.compact.malum.malum_events_handler;
 import org.brahypno.dreamtinker.world.data.DTDataPackProvider;
+import org.brahypno.esotericismtinker.common.EsotericismTinkerCommon;
+import org.brahypno.esotericismtinker.smeltery.EsotericismTinkerSmeltery;
+import org.brahypno.esotericismtinker.tools.EsotericismTinkerTools;
 import org.slf4j.Logger;
+import slimeknights.mantle.registration.RegistrationHelper;
 import slimeknights.tconstruct.library.utils.Util;
 
 import java.util.List;
@@ -84,6 +90,7 @@ public class Dreamtinker {
 
     @SuppressWarnings({"removal"})
     public Dreamtinker() {
+        MinecraftForge.EVENT_BUS.addListener(Dreamtinker::missingMappings);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, DreamtinkerConfig.specs, "DreamTinkerConfig.toml");
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, DreamtinkerClientConfig.specs, "DreamTinkerClientConfig.toml");
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -227,6 +234,61 @@ public class Dreamtinker {
             compact_config = DreamtinkerConfig.ModCompactBlackList.get();
         compactRestriction = DreamtinkerConfig.MOD_COMPACT_MATERIALS_CONFIG.get();
         return compactRestriction && compact_config.contains(modId);
+    }
+
+    private static void missingMappings(MissingMappingsEvent event) {
+        RegistrationHelper.handleMissingMappings(event, MODID, Registries.BLOCK, name -> switch (name) {
+            // moved to esotericism tinker
+            case "ender_mortar" -> EsotericismTinkerSmeltery.enderMortar.get();
+            case "ashen_lamp" -> EsotericismTinkerSmeltery.ashenLamp.get();
+            case "ashen_stone" -> EsotericismTinkerSmeltery.ashenStone.get();
+            case "polished_ashen_stone" -> EsotericismTinkerSmeltery.polishedAshenStone.get();
+            case "ashen_bricks" -> EsotericismTinkerSmeltery.ashenBricks.get();
+            case "ashen_bricks_slab" -> EsotericismTinkerSmeltery.ashenBricks.getSlab();
+            case "ashen_bricks_stairs" -> EsotericismTinkerSmeltery.ashenBricks.getStairs();
+            case "ashen_bricks_fence" -> EsotericismTinkerSmeltery.ashenBricks.getFence();
+            case "ashen_road" -> EsotericismTinkerSmeltery.ashenRoad.get();
+            case "ashen_road_slab" -> EsotericismTinkerSmeltery.ashenRoad.getSlab();
+            case "ashen_road_stairs" -> EsotericismTinkerSmeltery.ashenRoad.getStairs();
+            case "chiseled_ashen_bricks" -> EsotericismTinkerSmeltery.chiseledAshenBricks.get();
+            case "ashen_heater" -> EsotericismTinkerSmeltery.ashenHeater.get();
+            case "ashen_accelerator" -> EsotericismTinkerSmeltery.ashenAccel.get();
+            case "ashen_alloy_switch" -> EsotericismTinkerSmeltery.ashenAlloySwitch.get();
+            case "ashen_melt_switch" -> EsotericismTinkerSmeltery.ashenMeltSwitch.get();
+            case "ashen_glass" -> EsotericismTinkerSmeltery.ashenGlass.get();
+            case "ashen_glass_pane" -> EsotericismTinkerSmeltery.ashenGlassPane.get();
+            case "ashen_tinted_glass" -> EsotericismTinkerSmeltery.ashenTintedGlass.get();
+            case "ashen_soul_glass" -> EsotericismTinkerSmeltery.ashenSoulGlass.get();
+            case "ashen_soul_glass_pane" -> EsotericismTinkerSmeltery.ashenSoulGlassPane.get();
+            default -> null;
+        });
+        RegistrationHelper.handleMissingMappings(event, MODID, Registries.ITEM, name -> switch (name) {
+            case "ender_mortar" -> EsotericismTinkerSmeltery.enderMortar.asItem();
+            case "ashen_brick" -> EsotericismTinkerSmeltery.ashenBrick.get();
+            case "ashen_lamp" -> EsotericismTinkerSmeltery.ashenLamp.asItem();
+            case "ashen_stone" -> EsotericismTinkerSmeltery.ashenStone.asItem();
+            case "polished_ashen_stone" -> EsotericismTinkerSmeltery.polishedAshenStone.asItem();
+            case "ashen_bricks" -> EsotericismTinkerSmeltery.ashenBricks.asItem();
+            case "ashen_bricks_slab" -> EsotericismTinkerSmeltery.ashenBricks.getSlab().asItem();
+            case "ashen_bricks_stairs" -> EsotericismTinkerSmeltery.ashenBricks.getStairs().asItem();
+            case "ashen_bricks_fence" -> EsotericismTinkerSmeltery.ashenBricks.getFence().asItem();
+            case "ashen_road" -> EsotericismTinkerSmeltery.ashenRoad.asItem();
+            case "ashen_road_slab" -> EsotericismTinkerSmeltery.ashenRoad.getSlab().asItem();
+            case "ashen_road_stairs" -> EsotericismTinkerSmeltery.ashenRoad.getStairs().asItem();
+            case "chiseled_ashen_bricks" -> EsotericismTinkerSmeltery.chiseledAshenBricks.asItem();
+            case "ashen_heater" -> EsotericismTinkerSmeltery.ashenHeater.asItem();
+            case "ashen_accelerator" -> EsotericismTinkerSmeltery.ashenAccel.asItem();
+            case "ashen_alloy_switch" -> EsotericismTinkerSmeltery.ashenAlloySwitch.asItem();
+            case "ashen_melt_switch" -> EsotericismTinkerSmeltery.ashenMeltSwitch.asItem();
+            case "ashen_glass" -> EsotericismTinkerSmeltery.ashenGlass.asItem();
+            case "ashen_glass_pane" -> EsotericismTinkerSmeltery.ashenGlassPane.asItem();
+            case "ashen_tinted_glass" -> EsotericismTinkerSmeltery.ashenTintedGlass.asItem();
+            case "ashen_soul_glass" -> EsotericismTinkerSmeltery.ashenSoulGlass.asItem();
+            case "ashen_soul_glass_pane" -> EsotericismTinkerSmeltery.ashenSoulGlassPane.asItem();
+            case "hypnagogic_transmute" -> EsotericismTinkerCommon.hypnagogic_transmute.get();
+            case "ritual_blade" -> EsotericismTinkerTools.ritual_blade.asItem();
+            default -> null;
+        });
     }
 
 }
