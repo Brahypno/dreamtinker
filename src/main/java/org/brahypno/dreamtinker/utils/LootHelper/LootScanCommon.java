@@ -357,6 +357,7 @@ public final class LootScanCommon {
                 case UNCOMMON -> 1;
                 case RARE -> 2;
                 case EPIC -> 3;
+                default -> 1;
             };
         }
 
