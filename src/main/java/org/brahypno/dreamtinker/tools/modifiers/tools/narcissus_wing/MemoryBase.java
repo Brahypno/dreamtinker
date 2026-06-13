@@ -22,21 +22,21 @@ import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import slimeknights.tconstruct.fluids.TinkerFluids;
-import slimeknights.tconstruct.library.json.LevelingValue;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.fluid.FluidEffectManager;
 import slimeknights.tconstruct.library.modifiers.fluid.FluidEffects;
 import slimeknights.tconstruct.library.modifiers.hook.build.ConditionalStatModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.GeneralInteractionModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.InteractionSource;
 import slimeknights.tconstruct.library.modifiers.modules.build.StatBoostModule;
-import slimeknights.tconstruct.library.modifiers.modules.util.ModifierCondition;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.capability.EntityModifierCapability;
 import slimeknights.tconstruct.library.tools.capability.PersistentDataCapability;
 import slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHelper;
+import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.helper.ToolDamageUtil;
 import slimeknights.tconstruct.library.tools.item.ranged.ModifiableLauncherItem;
@@ -45,13 +45,12 @@ import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.modifiers.ability.interaction.BlockingModifier;
-import slimeknights.tconstruct.tools.modules.combat.SpillingModule;
 
 import javax.annotation.Nullable;
 
 import static slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHelper.TANK_HELPER;
 
-public class MemoryBase extends Modifier implements GeneralInteractionModifierHook {
+public class MemoryBase extends Modifier implements GeneralInteractionModifierHook, MeleeHitModifierHook {
     private static final int MB_PER_HEART = 50;
     private static final float HEALTH_PER_HEART = 2.0f;
 
@@ -70,17 +69,16 @@ public class MemoryBase extends Modifier implements GeneralInteractionModifierHo
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder builder) {
-        builder.addHook(this, ModifierHooks.GENERAL_INTERACT);
+        builder.addHook(this, ModifierHooks.GENERAL_INTERACT, ModifierHooks.MELEE_HIT);
         super.registerHooks(builder);
         builder.addModule(ToolTankHelper.TANK_HANDLER);
-        builder.addModule(new SpillingModule(LevelingValue.eachLevel(1), ModifierCondition.ANY_TOOL));
         builder.addModule(NarcissusFluidFeedbackModule.builder().build());
         builder.addModule(StatBoostModule.add(ToolTankHelper.CAPACITY_STAT).amount(FluidType.BUCKET_VOLUME, FluidType.BUCKET_VOLUME));
     }
 
     @Override
     public int getPriority() {
-        return 2700; // my custom splt, so should be earlier enough
+        return 3000; // my custom splt, so should be earlier enough
     }
 
     private int getSupplementalFluidAmount(LivingEntity entity) {
@@ -125,6 +123,7 @@ public class MemoryBase extends Modifier implements GeneralInteractionModifierHo
         }
         return InteractionResult.PASS;
     }
+
 
     @Override
     public void onStoppedUsing(IToolStackView tool, ModifierEntry modifier, LivingEntity entity, int timeLeft) {
@@ -212,5 +211,27 @@ public class MemoryBase extends Modifier implements GeneralInteractionModifierHo
             }
 
         }
+    }
+
+    private static final ThreadLocal<Boolean> DAMAGE_DEALT_IN_PROGRESS = ThreadLocal.withInitial(() -> false);
+
+    @Override
+    public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
+        if (!context.isProjectile() && !context.isExtraAttack() && !Boolean.TRUE.equals(DAMAGE_DEALT_IN_PROGRESS.get()) &&
+            0 < tool.getModifierLevel(DreamtinkerModifiers.flaming_memory.getId())){
+            DAMAGE_DEALT_IN_PROGRESS.set(true);
+            try {
+                onStoppedUsing(tool, modifier, context.getAttacker(), 0);
+            }
+            finally {
+                DAMAGE_DEALT_IN_PROGRESS.remove();
+            }
+        }
+
+    }
+
+    @Override
+    public void failedMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
+        afterMeleeHit(tool, modifier, context, damageDealt);
     }
 }

@@ -1,11 +1,13 @@
 {
   "tool": "dreamtinker:narcissus_wing",
   "text": [
-  { "text": "Right Interaction of Narcissus wing could launch memory projectile; Expanded is effective for this tool"}
+  { "text": "If all that is must one day wither, why is my yearning as clear as ever?" },
+  { "text": "Right Interaction of Narcissus wing could launch memory projectile; Expanded is effective for this tool", "paragraph": true }
   ],
   "properties": [
     "2 Attack Speed 120% Attacking Multiplier",
     "3.7 Draw Speed 150% Drawing Multiplier",
+    "1.00 Arrow Velocity 0.75 Accuracy",
     "407% Durability Multiplier",
     "A set of Modifiers"
   ]

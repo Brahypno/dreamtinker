@@ -37,8 +37,8 @@ public class DTLoots {
         int looting = net.minecraftforge.common.ForgeHooks.getLootingLevel(victim, attacker, source);
         if (attacker instanceof Player player)
             victim.setLastHurtByPlayer(player);
-        else if (attacker != null)
-            victim.setLastHurtMob(attacker);
+        else if (attacker instanceof LivingEntity livingAttacker)
+            victim.setLastHurtByMob(livingAttacker);
 
         Collection<ItemEntity> drops = null;
         List<Throwable> errors = new ArrayList<>();

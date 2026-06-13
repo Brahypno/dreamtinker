@@ -129,10 +129,6 @@ public class SplendourHeart extends Modifier implements MeleeHitModifierHook, In
 
     }
 
-    @Override
-    public void failedMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageAttempted) {
-        afterMeleeHit(tool, modifier, context, damageAttempted);
-    }
 
     @Override
     public void addToolStats(IToolContext context, ModifierEntry modifier, ModifierStatsBuilder builder) {
@@ -192,12 +188,15 @@ public class SplendourHeart extends Modifier implements MeleeHitModifierHook, In
                                 0 == level ? context.getAttacker() instanceof Player ? DamageTypes.PLAYER_ATTACK : DamageTypes.MOB_ATTACK :
                                 1 == level ? DreamtinkerDamageTypes.arcane_damage :
                                 2 == level ? DamageTypes.SONIC_BOOM : DreamtinkerDamageTypes.NULL_VOID;
-                        int inv = victim.invulnerableTime;
                         victim.invulnerableTime = 0;
                         extra_attack_depth.set(depth + 1);
-                        DamageProbe.damageHandler(victim, DreamtinkerDamageTypes.source(victim.level().registryAccess(), dmt, null, context.getAttacker()),
-                                                  damage * (boost + 1));
-                        victim.invulnerableTime = inv;
+                        if (2 <= level)
+                            DamageProbe.damageHandler(victim, DreamtinkerDamageTypes.source(victim.level().registryAccess(), dmt, null, context.getAttacker()),
+                                                      damage * (boost + 1));
+                        else
+                            DamageProbe.finalDamageMethod(victim,
+                                                          DreamtinkerDamageTypes.source(victim.level().registryAccess(), dmt, null, context.getAttacker()),
+                                                          damage * (boost + 1));
                     }
                     finally {
                         extra_attack_depth.set(depth);
@@ -285,5 +284,10 @@ public class SplendourHeart extends Modifier implements MeleeHitModifierHook, In
         hookBuilder.addModule(new VolatileFlagModule(ModifierEvents.SOULBOUND));
         hookBuilder.addModule(new VolatileFlagModule(IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY));
         super.registerHooks(hookBuilder);
+    }
+
+    @Override
+    public void failedMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageAttempted) {
+        afterMeleeHit(tool, modifier, context, damageAttempted);
     }
 }

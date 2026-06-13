@@ -46,13 +46,13 @@ public class EidolonReaper extends NoLevelsModifier implements ProcessLootModifi
     @Override
     public void processLoot(IToolStackView tool, ModifierEntry modifier, List<ItemStack> generatedLoot, LootContext context) {
         if (context.hasParam(LootContextParams.DAMAGE_SOURCE)){
-            Entity entity = (Entity) context.getParamOrNull(LootContextParams.THIS_ENTITY);
+            Entity entity = context.getParamOrNull(LootContextParams.THIS_ENTITY);
             DamageSource dmg = context.getParam(LootContextParams.DAMAGE_SOURCE);
             if (dmg.getEntity() != null && dmg.getEntity() instanceof LivingEntity source && entity instanceof LivingEntity lv && lv.isInvertedHealAndHarm()){
                 if (!(entity instanceof Player))
                     generatedLoot.removeIf(i -> !(i.getItem() instanceof ArmorItem));
                 int looting = context.getLootingModifier();
-                if (null != soul_shard() && source.hasEffect(soul_shard()))
+                if (null != SoulShard && source.hasEffect(SoulShard))
                     looting += 2;
                 ItemStack drop = new ItemStack(Registry.SOUL_SHARD.get(), source.level().random.nextInt(2 + looting));
                 generatedLoot.add(drop);
