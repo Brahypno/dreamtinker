@@ -1,17 +1,22 @@
 package org.brahypno.dreamtinker.common;
 
 import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
 import org.brahypno.dreamtinker.Dreamtinker;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DreamtinkerDamageTypes {
     private DreamtinkerDamageTypes() {}
@@ -53,5 +58,37 @@ public class DreamtinkerDamageTypes {
         if (chosen == null)
             chosen = reg.getHolderOrThrow(DamageTypes.GENERIC);
         return new DamageSource(chosen, original.getDirectEntity(), original.getEntity());
+    }
+
+    @SafeVarargs
+    @Nullable
+    public static ResourceKey<DamageType> getRandomDamageTypeWithTags(Level level, RandomSource random, TagKey<DamageType>... tags) {
+        Registry<DamageType> registry = level.registryAccess().registryOrThrow(net.minecraft.core.registries.Registries.DAMAGE_TYPE);
+        List<ResourceKey<DamageType>> candidates = new ArrayList<>();
+
+        for (var entry : registry.entrySet()) {
+            ResourceKey<DamageType> key = entry.getKey();
+            Holder.Reference<DamageType> holder = registry.getHolderOrThrow(key);
+
+            if (hasAllTags(holder, tags)){
+                candidates.add(key);
+            }
+        }
+
+        if (candidates.isEmpty()){
+            return null;
+        }
+
+        return candidates.get(random.nextInt(candidates.size()));
+    }
+
+    @SafeVarargs
+    private static boolean hasAllTags(Holder<DamageType> holder, TagKey<DamageType>... tags) {
+        for (TagKey<DamageType> tag : tags) {
+            if (!holder.is(tag)){
+                return false;
+            }
+        }
+        return true;
     }
 }

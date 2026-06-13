@@ -14,7 +14,6 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.boss.enderdragon.EndCrystal;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -57,7 +56,6 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
     private static final EntityDataAccessor<Integer> COLOR;
     private float power;
     private int life = 30 * 20;
-    private int knock_back;
     private boolean crit;
     public final DTClientTrail shortTrail = new DTClientTrail(8, 0.0004D);
     public final DTClientTrail trail = new DTClientTrail(24, 0.0004D);
@@ -66,7 +64,6 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
     public NarcissusFluidProjectile(EntityType<? extends NarcissusFluidProjectile> type, Level level) {
         super(type, level);
         this.power = 2.0F;
-        this.knock_back = 1;
     }
 
 
@@ -303,30 +300,21 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
             if (entity1 instanceof LivingEntity){
                 ((LivingEntity) entity1).setLastHurtMob(target);
             }
-            if (target instanceof LivingEntity livingentity &&
-                DamageProbe.damageHandler(livingentity, dmg(livingentity, entity1),
+            target.invulnerableTime = 0;
+            if (DamageProbe.damageHandler(target, dmg(target, entity1),
                                           null != toolStackView ? (toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) + 1) * dmg :
                                           dmg)){
-                if (this.knock_back > 0){
-                    double d0 = Math.max(0.0F, (double) 1.0F - livingentity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
-                    Vec3 vec3 =
-                            this.getDeltaMovement().multiply(1.0F, 0.0F, 1.0F).normalize()
-                                .scale((double) this.knock_back * 0.6 * d0);
-                    if (vec3.lengthSqr() > (double) 0.0F){
-                        livingentity.push(vec3.x, 0.1, vec3.z);
-                    }
-                }
 
                 if (!this.level().isClientSide && entity1 instanceof LivingEntity){
-                    EnchantmentHelper.doPostHurtEffects(livingentity, entity1);
-                    EnchantmentHelper.doPostDamageEffects((LivingEntity) entity1, livingentity);
+                    LivingEntity living_target = DTHelper.getLivingTarget(target);
+                    if (null != living_target)
+                        EnchantmentHelper.doPostHurtEffects(living_target, entity1);
+                    EnchantmentHelper.doPostDamageEffects((LivingEntity) entity1, target);
                 }
                 if (!this.level().isClientSide)
                     if (this.isOnFire()){
                         target.setSecondsOnFire(5 * Math.max(1, this.level().random.nextInt(3)));
                     }
-            }else if (target instanceof EndCrystal ec){
-                ec.hurt(dmg(ec, entity1), dmg);
             }
         }
 
@@ -339,7 +327,11 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
                 if (recipe.hasEntityEffects()){
                     int times = null != toolStackView ? Math.max(1, MemoryBase.getLevel(toolStackView) / 3) : 1;
                     DamageSource damagesource = dmg(target, entity1);
-                    ToolAttackContext attackContext = ToolAttackContext.attacker((LivingEntity) this.getOwner()).target(target).cooldown(1)
+                    ToolAttackContext attackContext = 0 < toolStackView.getModifierLevel(DreamtinkerModifiers.flaming_memory.getId()) ?
+                                                      ToolAttackContext.attacker((LivingEntity) this.getOwner()).target(target).cooldown(1)
+                                                                       .applyAttributes().projectile(this)
+                                                                       .build() :
+                                                      ToolAttackContext.attacker((LivingEntity) this.getOwner()).target(target).cooldown(1)
                                                                        .applyAttributes()
                                                                        .build();
                     for (int i = 0; i < times; i++) {
@@ -347,8 +339,9 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
                         if (toolStackView != null && entity1.level() == target.level()){
                             ToolAttackUtil.performAttack(toolStackView, attackContext);
                         }else
-                            target.hurt(damagesource,
-                                        null != toolStackView ? (toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) + 1) * dmg : dmg);
+                            DamageProbe.damageHandler(target, damagesource,
+                                                      null != toolStackView ? (toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) + 1) * dmg :
+                                                      dmg);
 
                     }
                     FluidEffectContext.Entity context = this.buildContext().location(result.getLocation()).target(target);
@@ -379,7 +372,7 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
         double z = packet.getZa();
         Vec3 motion = new Vec3(x, y, z);
         this.setDeltaMovement(motion);
-        if (false && this.level().isClientSide){
+        if (false){
             this.shortTrail.seedLine(this.position(), motion, 5, 0.35D);
             this.trail.seedLine(this.position(), motion, 5, 0.35D);
         }
@@ -392,7 +385,6 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
     public void addAdditionalSaveData(@NotNull CompoundTag nbt) {
         super.addAdditionalSaveData(nbt);
         nbt.putFloat("power", this.power);
-        nbt.putInt("knock_back", this.knock_back);
         nbt.putBoolean("nas_crit", this.crit);
 
         FluidStack fluid = this.getFluid();
@@ -405,7 +397,6 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
     public void readAdditionalSaveData(@NotNull CompoundTag nbt) {
         super.readAdditionalSaveData(nbt);
         this.power = nbt.getFloat("power");
-        this.knock_back = nbt.getInt("knock_back");
         this.crit = nbt.getBoolean("nas_crit");
 
         this.setFluid(FluidStack.loadFluidStackFromNBT(nbt.getCompound("fluid")));

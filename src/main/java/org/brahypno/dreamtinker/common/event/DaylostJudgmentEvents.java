@@ -26,6 +26,7 @@ import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerDamageTypes;
 import org.brahypno.dreamtinker.common.DreamtinkerEffects;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
+import org.brahypno.dreamtinker.utils.DamageProbe;
 import slimeknights.tconstruct.library.tools.item.IModifiable;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
@@ -200,10 +201,10 @@ public final class DaylostJudgmentEvents {
             multiplier *= OVER_SUN_SOLAR_REDUCTION;
         }
         float solarDamage = event.getAmount() * multiplier;
-        daylostEntity.hurt(
-                DreamtinkerDamageTypes.source(daylostEntity.level().registryAccess(), DreamtinkerDamageTypes.solar_judgment, event.getSource()),
-                solarDamage
-        );
+        DamageProbe.finalDamageMethod(daylostEntity,
+                                      DreamtinkerDamageTypes.source(daylostEntity.level().registryAccess(), DreamtinkerDamageTypes.solar_judgment,
+                                                                    event.getSource()),
+                                      solarDamage);
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)

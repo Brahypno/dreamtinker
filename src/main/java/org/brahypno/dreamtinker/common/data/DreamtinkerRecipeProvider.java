@@ -1343,7 +1343,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setTools(Ingredient.of(DreamtinkerTools.narcissus_wing.get()))
                              .addInput(DreamtinkerCommon.UnbornTurtleEgg.get(), 1)
                              .setMaxLevel(1)
-                             .setSlots(EsotericismSlotType.DELUSION, 1)
+                             .setSlots(SlotType.UPGRADE, 1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.soul_core, soulSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.soul_core, soulFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.soul_core)

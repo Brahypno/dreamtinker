@@ -1,6 +1,5 @@
 package org.brahypno.dreamtinker.tools.modifiers.tools.narcissus_wing;
 
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -29,13 +28,9 @@ import java.util.UUID;
 import java.util.function.BiConsumer;
 
 import static org.brahypno.dreamtinker.config.DreamtinkerCachedConfig.flamingMemoryStatusBoost;
-import static org.brahypno.dreamtinker.config.DreamtinkerConfig.flamingMemoryLifeDrain;
 import static org.brahypno.dreamtinker.tools.DreamtinkerModifiers.memory_base;
 
 public class FlamingMemory extends Modifier implements MeleeHitModifierHook, MonsterMeleeHitModifierHook, ToolStatsModifierHook, AttributesModifierHook {
-    private final Component errorMessage =
-            Component.translatable("modifier.dreamtinker.flaming_memory.requirements");
-
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
         hookBuilder.addHook(this, ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT, ModifierHooks.TOOL_STATS, ModifierHooks.ATTRIBUTES);
@@ -51,16 +46,6 @@ public class FlamingMemory extends Modifier implements MeleeHitModifierHook, Mon
                tool.getModifierLevel(DreamtinkerModifiers.Ids.soul_core) + tool.getModifierLevel(TinkerModifiers.expanded.get()) * 2;
     }
 
-    @Override
-    public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
-        context.getAttacker().setHealth(Math.max(context.getAttacker().getHealth() - 2, 1));
-        return knockback;
-    }
-
-    @Override
-    public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        context.getAttacker().heal((float) (damageDealt * levels(tool) * flamingMemoryLifeDrain.get()));
-    }
 
     @Override
     public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
@@ -80,7 +65,7 @@ public class FlamingMemory extends Modifier implements MeleeHitModifierHook, Mon
         float draw_speed = builder.getStat(ToolStats.DRAW_SPEED);
 
         ToolStats.ATTACK_DAMAGE.multiply(builder, proj_damage * velocity * levels(context) * flamingMemoryStatusBoost.get());
-        ToolStats.ATTACK_SPEED.multiply(builder, draw_speed * accuracy * levels(context) * flamingMemoryStatusBoost.get());
+        ToolStats.ATTACK_SPEED.multiply(builder, 1 + draw_speed * accuracy * levels(context) * flamingMemoryStatusBoost.get());
     }
 
     @Override

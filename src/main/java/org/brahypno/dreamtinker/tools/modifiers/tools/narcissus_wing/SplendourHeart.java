@@ -6,6 +6,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -129,10 +131,6 @@ public class SplendourHeart extends Modifier implements MeleeHitModifierHook, In
 
     }
 
-    @Override
-    public void failedMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageAttempted) {
-        afterMeleeHit(tool, modifier, context, damageAttempted);
-    }
 
     @Override
     public void addToolStats(IToolContext context, ModifierEntry modifier, ModifierStatsBuilder builder) {
@@ -191,13 +189,16 @@ public class SplendourHeart extends Modifier implements MeleeHitModifierHook, In
                         ResourceKey<DamageType> dmt =
                                 0 == level ? context.getAttacker() instanceof Player ? DamageTypes.PLAYER_ATTACK : DamageTypes.MOB_ATTACK :
                                 1 == level ? DreamtinkerDamageTypes.arcane_damage :
-                                2 == level ? DamageTypes.SONIC_BOOM : DreamtinkerDamageTypes.NULL_VOID;
-                        int inv = victim.invulnerableTime;
+                                2 == level ? dmtRandom(context.getLevel(), context.getLevel().random) : DreamtinkerDamageTypes.NULL_VOID;
                         victim.invulnerableTime = 0;
                         extra_attack_depth.set(depth + 1);
-                        DamageProbe.damageHandler(victim, DreamtinkerDamageTypes.source(victim.level().registryAccess(), dmt, null, context.getAttacker()),
-                                                  damage * (boost + 1));
-                        victim.invulnerableTime = inv;
+                        if (level < 2)
+                            DamageProbe.damageHandler(victim, DreamtinkerDamageTypes.source(victim.level().registryAccess(), dmt, null, context.getAttacker()),
+                                                      damage * (boost + 1));
+                        else
+                            DamageProbe.finalDamageMethod(victim,
+                                                          DreamtinkerDamageTypes.source(victim.level().registryAccess(), dmt, null, context.getAttacker()),
+                                                          damage * (boost + 1));
                     }
                     finally {
                         extra_attack_depth.set(depth);
@@ -285,5 +286,17 @@ public class SplendourHeart extends Modifier implements MeleeHitModifierHook, In
         hookBuilder.addModule(new VolatileFlagModule(ModifierEvents.SOULBOUND));
         hookBuilder.addModule(new VolatileFlagModule(IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY));
         super.registerHooks(hookBuilder);
+    }
+
+    @Override
+    public void failedMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageAttempted) {
+        afterMeleeHit(tool, modifier, context, damageAttempted);
+    }
+
+    @NotNull
+    private ResourceKey<DamageType> dmtRandom(Level level, RandomSource random) {
+        ResourceKey<DamageType> dmt =
+                DreamtinkerDamageTypes.getRandomDamageTypeWithTags(level, random, DamageTypeTags.BYPASSES_ARMOR, DamageTypeTags.BYPASSES_ENCHANTMENTS);
+        return null == dmt ? DamageTypes.SONIC_BOOM : dmt;
     }
 }

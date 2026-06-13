@@ -163,15 +163,20 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                                                              .set(ToolStats.DRAW_SPEED, 1.5f)
                                                              .set(ToolStats.ATTACK_SPEED, 1.2f)
                                                              .set(ToolStats.DURABILITY, 4.07f).build()))
-                .module(new ToolSlotsModule(ImmutableMap.of(EsotericismSlotType.DELUSION, 3, SlotType.ABILITY, 1, SlotType.UPGRADE, 2)))
+                .module(new ToolSlotsModule(ImmutableMap.of(EsotericismSlotType.DELUSION, 3, SlotType.ABILITY, 1)))
                 // traits
                 .module(ToolTraitsModule.builder()
                                         .trait(DreamtinkerModifiers.memory_base, 1)//malkuth
-                                        .trait(DreamtinkerModifiers.foundation_will, 1)//Yesod
+                                        .trait(DreamtinkerModifiers.foundation_will, 1)//Yesod---need revise
                                         .trait(DreamtinkerModifiers.splendour_heart, 1)//Hod
                                         .trait(DreamtinkerModifiers.malum_sol_tiferet)//Tiferet
                                         .trait(DreamtinkerModifiers.Ids.nova_ashen_resolve)//Netzach
                                         .build())
+                //flaming memory Geburah
+                //Keter  超越、神意、源头
+                //Chokmah 原初冲动、阳性创造力
+                //Binah 结构、孕育、限制
+                // Chesed 扩张、恩典、秩序
                 // behavior
                 .module(ToolActionsModule.of(ToolActions.SWORD_DIG, ToolActions.PICKAXE_DIG, ToolActions.SHOVEL_DIG, TinkerToolActions.SHIELD_DISABLE))
                 .module(IsEffectiveModule.tag(BlockTags.MINEABLE_WITH_PICKAXE))
