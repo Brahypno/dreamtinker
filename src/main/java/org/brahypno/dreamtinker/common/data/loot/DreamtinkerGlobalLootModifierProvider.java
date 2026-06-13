@@ -26,7 +26,8 @@ import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
 
 import java.util.Optional;
 
-import static org.brahypno.dreamtinker.common.data.DreamtinkerRecipeProvider.ironHeart;
+import static org.brahypno.dreamtinker.tools.data.material.DreamtinkerMaterialRecipeProvider.ironHeart;
+
 
 public class DreamtinkerGlobalLootModifierProvider extends GlobalLootModifierProvider {
     public DreamtinkerGlobalLootModifierProvider(PackOutput output) {
