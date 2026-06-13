@@ -1,0 +1,9 @@
+{
+  "values": [
+    "dreamtinker:born_with_me",
+    {
+      "id": "dreamtinker:weapon_books",
+      "required": false
+    }
+  ]
+}

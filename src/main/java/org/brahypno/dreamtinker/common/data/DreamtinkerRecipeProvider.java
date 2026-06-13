@@ -1351,7 +1351,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(DreamtinkerCommon.UnbornTurtleEgg.get(), 1)
                              .addInput(DreamtinkerCommon.UnbornSnifferEgg.get(), 1)
                              .setMaxLevel(3)
-                             .setSlots(EsotericismSlotType.DELUSION, 1)
+                             .setSlots(SlotType.UPGRADE, 1)
                              .save(consumer, wrap(DreamtinkerModifiers.Ids.soul_core, soulFolder, "_1"));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.icy_memory)
                              .setTools(Ingredient.of(DreamtinkerTools.narcissus_wing.get()))

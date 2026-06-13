@@ -5,6 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
+import org.brahypno.esotericismtinker.common.EsotericismTinkerTagKeys;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.data.tinkering.AbstractModifierTagProvider;
@@ -96,8 +97,24 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
                          Ids.malum_world_of_weight, malum_magic_attack.getId(), malum_range_accelerator.getId(), malum_evolution.getId());
         this.tag(TinkerTags.Modifiers.OVERSLIME_FRIEND)
             .add(Ids.shadow_blessing, over_sticky.getId(), Ids.sticky_string);
+
         this.tag(TinkerTags.Modifiers.EXTRACT_MODIFIER_BLACKLIST)
             .addOptional(Ids.nova_spell_tiers);
+
+        this.tag(EsotericismTinkerTagKeys.Modifiers.GENERAL_DELUSIONS)
+            .add(Ids.weapon_dreams_order, Ids.weapon_dreams_filter);
+        this.tag(EsotericismTinkerTagKeys.Modifiers.MELEE_DELUSIONS)
+            .add(born_with_me.getId())
+            .addOptional(weapon_books.getId());
+        this.tag(EsotericismTinkerTagKeys.Modifiers.DAMAGE_DELUSIONS)
+            .add(Ids.all_slayer, Ids.the_romantic);
+        this.tag(EsotericismTinkerTagKeys.Modifiers.HARVEST_DELUSIONS)
+            .add(Ids.falsify_fate);
+        this.tag(EsotericismTinkerTagKeys.Modifiers.RANGED_DELUSIONS)
+            .add(Ids.icy_memory, Ids.hate_memory);
+        this.tag(EsotericismTinkerTagKeys.Modifiers.GENERAL_ARMOR_DELUSIONS)
+            .add(virtual_dodge.getId(), Ids.sweet_death, Ids.last_kiss)
+            .addOptional(spiritual_weapon_transformation.getId());
     }
 
     @Override

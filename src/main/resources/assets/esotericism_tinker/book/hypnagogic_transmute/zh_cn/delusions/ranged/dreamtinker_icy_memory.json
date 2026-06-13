@@ -1,15 +1,15 @@
 {
-  "modifier_id": "dreamtinker:soul_core",
+  "modifier_id": "dreamtinker:icy_memory",
   "text": [
     {
-      "text": "每级增加0.5弹射物力量与拉弓速度；增强记忆弹追踪生命的速度"
+      "text": "修改记忆弹伤害为魔法、音爆、绝望伤害。每级增加记忆弹伤害100%。"
     }
   ],
   "more_text_space": true,
   "tools": "dreamtinker:narcissus_wing",
     "effects": [
       "最高3级",
-      "每级需要1个升级槽",
+      "每级需要1个妄见槽",
       "需要记忆，王国之门作为前置"
     ]
 }

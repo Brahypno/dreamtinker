@@ -1,0 +1,11 @@
+{
+  "title": "Amber Ore",
+  "item": "dreamtinker:amber_ore",
+  "text": [
+    {
+      "text": "Amber Ore is an uncommon ore that generates in nether between Y=10 and Y=120.",
+      "paragraph": true
+    }
+  ]
+}
+

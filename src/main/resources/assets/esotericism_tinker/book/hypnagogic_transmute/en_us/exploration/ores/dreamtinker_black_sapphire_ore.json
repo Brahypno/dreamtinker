@@ -1,0 +1,11 @@
+{
+  "title": "Black Sapphire Ore",
+  "item": "dreamtinker:black_sapphire_ore",
+  "text": [
+    {
+      "text": "Black Sapphire Ore is a rare ore that generates in The End between Y=30 and Y=56.",
+      "paragraph": true
+    }
+  ]
+}
+
