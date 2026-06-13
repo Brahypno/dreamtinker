@@ -35,8 +35,8 @@ public class ProjectileTargetTracing {
                                                                                   !(owner != null && target.isAlliedTo(owner)) &&
                                                                                   (!entity.level().isClientSide() || target != Minecraft.getInstance().player));
 
-        if (!entities.isEmpty()){
-            LivingEntity nearest = entities.stream().min(Comparator.comparingDouble((e) -> e.distanceToSqr(entity))).get();
+        LivingEntity nearest = entities.stream().min(Comparator.comparingDouble((e) -> e.distanceToSqr(entity))).orElse(null);
+        if (nearest != null){
             Vec3 diff = nearest.position().add(0, nearest.getBbHeight() / 2, 0).subtract(entity.position());
             Vec3 newMotion = entity.getDeltaMovement().add(diff.normalize()).scale(0.75);
             entity.setDeltaMovement(newMotion);

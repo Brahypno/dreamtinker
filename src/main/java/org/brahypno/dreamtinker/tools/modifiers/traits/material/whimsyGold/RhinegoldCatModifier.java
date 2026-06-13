@@ -164,7 +164,7 @@ public class RhinegoldCatModifier extends Modifier implements ProcessLootModifie
             default -> 8;
         };
 
-        if (isGemLike(stack) || stack.getRarity().ordinal() >= Rarity.RARE.ordinal())
+        if (isGemLike(stack) || LootScanCommon.itemRarityAtLeast(stack, Rarity.RARE))
             cap = Math.max(1, cap / 2);
         if (isGoldLike(stack))
             cap += 1;
@@ -184,7 +184,7 @@ public class RhinegoldCatModifier extends Modifier implements ProcessLootModifie
                 return false;
             if (rate > 0.35D && !isShiny(stack))
                 return false;
-            if (stack.getMaxStackSize() <= 1 && stack.getRarity().ordinal() >= Rarity.EPIC.ordinal())
+            if (stack.getMaxStackSize() <= 1 && LootScanCommon.itemRarityAtLeast(stack, Rarity.EPIC))
                 return false;
 
             boolean catLikes = isGoldLike(stack) || isGemLike(stack) || isMetalLike(stack) || isShiny(stack);
@@ -207,7 +207,7 @@ public class RhinegoldCatModifier extends Modifier implements ProcessLootModifie
             boolean valuable = isShiny(stack) || isGoldLike(stack) || isGemLike(stack) || isMetalLike(stack);
             boolean rareByRate = candidate.dropRateRarity().atLeast(LootScanCommon.DropRateRarity.RARE);
             boolean veryRareByRate = candidate.dropRateRarity().atLeast(LootScanCommon.DropRateRarity.VERY_RARE);
-            boolean rareByItem = stack.getRarity().ordinal() >= Rarity.RARE.ordinal();
+            boolean rareByItem = LootScanCommon.itemRarityAtLeast(stack, Rarity.RARE);
 
             boolean interestingCondition = candidate.hasCondition("random_chance")
                                            || candidate.hasCondition("random_chance_with_looting")

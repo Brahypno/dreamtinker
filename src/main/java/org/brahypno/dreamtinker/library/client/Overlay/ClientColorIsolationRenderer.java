@@ -111,7 +111,7 @@ public final class ClientColorIsolationRenderer {
             set(effect, "GrayStrength", ClientMask.grayStrength);
             set(effect, "VividStrength", ClientMask.vividStrength);
             set(effect, "EffectStrength", strength * ClientMask.argbAlphaFactor());
-            set(effect, "Mode", ClientMask.mode.ordinal());
+            set(effect, "Mode", ClientMask.mode.id());
         }
     }
 

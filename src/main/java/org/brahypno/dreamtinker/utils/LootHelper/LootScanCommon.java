@@ -320,52 +320,8 @@ public final class LootScanCommon {
         public boolean atLeast(DropRateRarity threshold) {return rarityScore >= threshold.rarityScore && rarityScore >= 0;}
     }
 
-    @FunctionalInterface
-    public interface CandidateFilter {
-        static CandidateFilter item(Predicate<Item> predicate) {return candidate -> predicate.test(candidate.stack().getItem());}
-
-        static CandidateFilter itemId(Predicate<ResourceLocation> predicate) {return candidate -> predicate.test(candidate.itemId());}
-
-        static CandidateFilter itemRarityAtLeast(Rarity rarity) {
-            int threshold = itemRarityScore(rarity);
-            return candidate -> itemRarityScore(candidate.itemRarity()) >= threshold;
-        }
-
-        static CandidateFilter dropRateRarityAtLeast(DropRateRarity rarity) {return candidate -> candidate.dropRateRarity().atLeast(rarity);}
-
-        static CandidateFilter estimatedRateBelow(double maxRate) {return candidate -> candidate.estimatedRate() <= maxRate;}
-
-        static CandidateFilter estimatedRateAtLeast(double minRate) {return candidate -> candidate.estimatedRate() >= minRate;}
-
-        static CandidateFilter hasCondition(String key) {return candidate -> candidate.hasCondition(key);}
-
-        static CandidateFilter hasExactCondition(String key) {return candidate -> candidate.hasExactCondition(key);}
-
-        static CandidateFilter hasFunction(String key) {return candidate -> candidate.hasFunction(key);}
-
-        static CandidateFilter hasExactFunction(String key) {return candidate -> candidate.hasExactFunction(key);}
-
-        static CandidateFilter rareByItemOrDropRate() {
-            return itemRarityAtLeast(Rarity.RARE).or(dropRateRarityAtLeast(DropRateRarity.RARE)).or(hasCondition("random_chance")).or(hasCondition("killed"))
-                                                 .or(hasCondition("match_tool")).or(hasCondition("damage_source_properties"))
-                                                 .or(hasCondition("entity_properties"));
-        }
-
-        private static int itemRarityScore(Rarity rarity) {
-            return switch (rarity) {
-                case COMMON -> 0;
-                case UNCOMMON -> 1;
-                case RARE -> 2;
-                case EPIC -> 3;
-                default -> 1;
-            };
-        }
-
-        boolean test(LootCandidate candidate);
-
-        default CandidateFilter and(CandidateFilter other) {return candidate -> test(candidate) && other.test(candidate);}
-
-        default CandidateFilter or(CandidateFilter other) {return candidate -> test(candidate) || other.test(candidate);}
+    public static boolean itemRarityAtLeast(ItemStack stack, Rarity threshold) {
+        return !stack.isEmpty() && itemRarityAtLeast(stack.getRarity(), threshold);
     }
 
     @FunctionalInterface
@@ -408,6 +364,57 @@ public final class LootScanCommon {
                 newNonEmptyChance = 1.0D;
             return new CountRange(newMin, newMax, newExpected, newNonEmptyChance);
         }
+    }
+
+    public static boolean itemRarityAtLeast(Rarity rarity, Rarity threshold) {
+        return itemRarityScore(rarity) >= itemRarityScore(threshold);
+    }
+
+    private static int itemRarityScore(Rarity rarity) {
+        return switch (rarity) {
+            case COMMON -> 0;
+            case UNCOMMON -> 1;
+            case RARE -> 2;
+            case EPIC -> 3;
+            default -> 1;
+        };
+    }
+
+    @FunctionalInterface
+    public interface CandidateFilter {
+        static CandidateFilter item(Predicate<Item> predicate) {return candidate -> predicate.test(candidate.stack().getItem());}
+
+        static CandidateFilter itemId(Predicate<ResourceLocation> predicate) {return candidate -> predicate.test(candidate.itemId());}
+
+        static CandidateFilter itemRarityAtLeast(Rarity rarity) {
+            return candidate -> LootScanCommon.itemRarityAtLeast(candidate.itemRarity(), rarity);
+        }
+
+        static CandidateFilter dropRateRarityAtLeast(DropRateRarity rarity) {return candidate -> candidate.dropRateRarity().atLeast(rarity);}
+
+        static CandidateFilter estimatedRateBelow(double maxRate) {return candidate -> candidate.estimatedRate() <= maxRate;}
+
+        static CandidateFilter estimatedRateAtLeast(double minRate) {return candidate -> candidate.estimatedRate() >= minRate;}
+
+        static CandidateFilter hasCondition(String key) {return candidate -> candidate.hasCondition(key);}
+
+        static CandidateFilter hasExactCondition(String key) {return candidate -> candidate.hasExactCondition(key);}
+
+        static CandidateFilter hasFunction(String key) {return candidate -> candidate.hasFunction(key);}
+
+        static CandidateFilter hasExactFunction(String key) {return candidate -> candidate.hasExactFunction(key);}
+
+        static CandidateFilter rareByItemOrDropRate() {
+            return itemRarityAtLeast(Rarity.RARE).or(dropRateRarityAtLeast(DropRateRarity.RARE)).or(hasCondition("random_chance")).or(hasCondition("killed"))
+                                                 .or(hasCondition("match_tool")).or(hasCondition("damage_source_properties"))
+                                                 .or(hasCondition("entity_properties"));
+        }
+
+        boolean test(LootCandidate candidate);
+
+        default CandidateFilter and(CandidateFilter other) {return candidate -> test(candidate) && other.test(candidate);}
+
+        default CandidateFilter or(CandidateFilter other) {return candidate -> test(candidate) || other.test(candidate);}
     }
 
     public record LootCandidate(
