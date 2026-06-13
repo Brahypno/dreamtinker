@@ -28,7 +28,7 @@ public record S2CColorMaskToggle(boolean enable, ColorMaskMode mode, int argb, i
 
     public void encode(FriendlyByteBuf buf) {
         buf.writeBoolean(enable);
-        buf.writeVarInt(mode.ordinal());
+        buf.writeVarInt(mode.id());
         buf.writeInt(argb);
         buf.writeVarInt(range);
         buf.writeFloat(grayStrength);
