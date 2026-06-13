@@ -1,21 +1,14 @@
 package org.brahypno.dreamtinker.library.compact.ars_nouveau;
 
-import com.hollingsworth.arsnouveau.api.enchanting_apparatus.EnchantmentRecipe;
 import com.hollingsworth.arsnouveau.api.item.ICasterTool;
 import com.hollingsworth.arsnouveau.api.perk.PerkSlot;
 import com.hollingsworth.arsnouveau.api.registry.GlyphRegistry;
 import com.hollingsworth.arsnouveau.api.registry.PerkRegistry;
 import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.DreamtinkerModule;
 import org.brahypno.dreamtinker.library.compact.ars_nouveau.NovaBook.ModifiableSpellBook;
@@ -38,13 +31,6 @@ public class NovaRegistry extends DreamtinkerModule {
             NOVA_MODI_TOOLS.register("per_aspera_scriptum", () -> new ModifiableSpellBook(UNSTACKABLE_PROPS, NovaRegistry.PerAsperaScriptum));
     public static final ToolDefinition PerAsperaScriptum = ToolDefinition.create(NovaRegistry.per_aspera_scriptum);
 
-    public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS =
-            DeferredRegister.create(ForgeRegistries.Keys.RECIPE_SERIALIZERS, Dreamtinker.MODID);
-    public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(ForgeRegistries.Keys.RECIPE_TYPES, Dreamtinker.MODID);
-    public static final RegistryObject<RecipeType<EnchantmentRecipe>> MODIFIABLE_ENCHANTMENT_TYPE =
-            RECIPE_TYPES.register("modifier_enchantment", () -> new ModRecipeType<>());
-    public static final RegistryObject<RecipeSerializer<EnchantmentRecipe>> MODIFIABLE_ENCHANTMENT_SERIALIZER =
-            RECIPE_SERIALIZERS.register("modifier_enchantment", () -> new EnchantmentRecipe.Serializer());
     public static final Capability<ICasterTool> Caster_CAP = CapabilityManager.get(new CapabilityToken<>() {});
 
     public static ModifierDeferredRegister ARS_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
@@ -126,14 +112,5 @@ public class NovaRegistry extends DreamtinkerModule {
         PerkRegistry.registerPerkProvider(DreamtinkerTools.underPlate.get(ArmorItem.Type.LEGGINGS), stack -> new ModifiableArmorPekHolder(stack, large_slots));
 
         PerkRegistry.registerPerkProvider(DreamtinkerTools.underPlate.get(ArmorItem.Type.HELMET), stack -> new ModifiableArmorPekHolder(stack, small_slots));
-    }
-
-    private static class ModRecipeType<T extends Recipe<?>> implements RecipeType<T> {
-        private ModRecipeType() {
-        }
-
-        public String toString() {
-            return ForgeRegistries.RECIPE_TYPES.getKey(this).toString();
-        }
     }
 }
