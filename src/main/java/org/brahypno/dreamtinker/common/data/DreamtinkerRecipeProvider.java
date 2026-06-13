@@ -1318,7 +1318,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .addInput(Tags.Items.STORAGE_BLOCKS_EMERALD, 1)
                              .addInput(Tags.Items.GEMS_EMERALD, 1)
                              .setMaxLevel(1)
-                             .setSlots(SlotType.ABILITY, 1)
+                             .setSlots(SlotType.UPGRADE, 1)
                              .save(consumer, wrap(DreamtinkerModifiers.life_looting, abilityFolder, "_1"));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.soul_upgrade)
                              .setTools(TinkerTags.Items.MODIFIABLE)
@@ -1609,7 +1609,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IMateri
                              .setTools(TinkerTags.Items.MODIFIABLE)
                              .addInput(itemNameIngredient("enigmaticlegacy", "lore_inscriber"))
                              .setMaxLevel(1)
-                             .setSlots(SlotType.ABILITY, 1)
+                             .setSlots(SlotType.UPGRADE, 1)
                              .saveSalvage(wrapped, prefix(DreamtinkerModifiers.life_looting, abilitySalvage))
                              .save(wrapped, prefix(DreamtinkerModifiers.life_looting, abilityFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.weapon_books)

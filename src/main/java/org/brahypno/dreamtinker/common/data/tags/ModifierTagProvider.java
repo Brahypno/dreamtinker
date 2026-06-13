@@ -52,7 +52,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
         this.tag(TinkerTags.Modifiers.RANGED_UPGRADES)
             .add(Ids.icy_memory, Ids.hate_memory, Ids.soul_core, Ids.wrath, Ids.torrent);
         this.tag(TinkerTags.Modifiers.GENERAL_UPGRADES)
-            .add(Ids.weapon_dreams_order, Ids.weapon_dreams_filter, TheEnd.getId())
+            .add(Ids.weapon_dreams_order, Ids.weapon_dreams_filter, TheEnd.getId(), life_looting.getId())
             .addOptional(Ids.bic_dark_armor_plate);
         this.tag(TinkerTags.Modifiers.HARVEST_UPGRADES)
             .add(Ids.falsify_fate);
@@ -80,8 +80,6 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
         this.tag(TinkerTags.Modifiers.GENERAL_ARMOR_ABILITIES)
             .add(Ids.curse_fire)
             .addOptional(nova_magic_armor.getId());
-        this.tag(TinkerTags.Modifiers.GENERAL_ABILITIES)
-            .add(life_looting.getId());
 
         this.tag(TinkerTags.Modifiers.BLOCK_WHILE_CHARGING)
             .add(memory_base.getId());

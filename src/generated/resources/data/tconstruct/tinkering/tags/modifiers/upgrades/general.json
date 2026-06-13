@@ -3,6 +3,7 @@
     "dreamtinker:weapon_dreams_order",
     "dreamtinker:weapon_dreams_filter",
     "dreamtinker:the_end",
+    "dreamtinker:life_looting",
     {
       "id": "dreamtinker:bic_dark_armor_plate",
       "required": false
