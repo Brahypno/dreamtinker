@@ -4,12 +4,12 @@ import com.hollingsworth.arsnouveau.api.enchanting_apparatus.ArmorUpgradeRecipe;
 import com.hollingsworth.arsnouveau.client.jei.ArmorUpgradeRecipeCategory;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.recipe.IFocusGroup;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import org.brahypno.dreamtinker.tools.DreamtinkerTools;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import slimeknights.tconstruct.library.tools.item.IModifiableDisplay;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class ArmorUpgradeRecipeCategoryMixin {
         List<ItemStack> mutable = new ArrayList<>(original);
         // 在这里加你的东西
         if (0 < recipe.tier && !configCompactDisabled("ars_nouveau"))
-            mutable.addAll(DreamtinkerTools.underPlate.values().stream().map(Item::getDefaultInstance).toList());
+            mutable.addAll(DreamtinkerTools.underPlate.values().stream().map(IModifiableDisplay::getDisplayStack).toList());
         return mutable;
     }
 }
