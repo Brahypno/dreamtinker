@@ -107,7 +107,7 @@ public class Dreamtinker {
         modEventBus.register(new DreamtinkerModifiers());
         DreamtinkerModule.initRegisters(modEventBus);
         if (ModList.get().isLoaded("ars_nouveau")){
-            new NovaRegistry();
+            NovaRegistry.NovaInit(modEventBus);
         }
 
         CraftingHelper.register(DTConfigEnabledCondition.SERIALIZER);

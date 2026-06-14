@@ -1,0 +1,17 @@
+{
+  "modifier_id": "dreamtinker:nova_reactive",
+  "text": [
+    {
+      "text": "This modifier is not obtainable from Tinker`s anvil or station. But only from Enchanting Apparatus."
+    },
+    {
+      "text": "Its working exactly the same with Reactive Enchantment. To change the spell, you need remove the modifier and reapply it with the new spell."
+    }
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable",
+  "effects": [
+    "Requires 1 upgrade slot On first Level",
+    "Triple Level"
+  ]
+}

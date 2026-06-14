@@ -1,0 +1,59 @@
+{
+  "type": "esotericism_tinker:modifiable_enchantment",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "ars_nouveau"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "ars_nouveau"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "level": 2,
+  "pedestalItems": [
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "item": "ars_nouveau:air_essence"
+    },
+    {
+      "item": "ars_nouveau:earth_essence"
+    },
+    {
+      "item": "ars_nouveau:fire_essence"
+    },
+    {
+      "item": "ars_nouveau:water_essence"
+    }
+  ],
+  "result": "dreamtinker:nova_reactive",
+  "source": 6000,
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

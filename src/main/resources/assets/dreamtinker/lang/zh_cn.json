@@ -953,7 +953,9 @@
     "modifier.dreamtinker.ender_protection.flavor":  "终末亦会庇护",
     "modifier.dreamtinker.ender_protection.description":  "每级降低来自末影生物的4%伤害。",
     "modifier.dreamtinker.ender_protection.resistance":  "对末地生物",
-
+    "modifier.dreamtinker.nova_reactive":  "反应",
+    "modifier.dreamtinker.nova_reactive.flavor":  "与新生魔艺的反应相同",
+    "modifier.dreamtinker.nova_reactive.description":  "未见",
 
     "material.dreamtinker.echo_alloy":  "回响合金",
     "material.dreamtinker.echo_alloy.flavor":  "是神秘的回响，还是秘密的回响",

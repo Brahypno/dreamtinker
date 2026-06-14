@@ -953,7 +953,9 @@
     "modifier.dreamtinker.ender_protection.flavor":  "Even the End may shelter you.",
     "modifier.dreamtinker.ender_protection.description":  "Reduces damage from ender creatures by 4% per level.",
     "modifier.dreamtinker.ender_protection.resistance":  "Against End creatures",
-
+    "modifier.dreamtinker.nova_reactive":  "Reactive",
+    "modifier.dreamtinker.nova_reactive.flavor":  "Like Reactive in Ars Nouveau",
+    "modifier.dreamtinker.nova_reactive.description":  "Unexpected",
 
     "material.dreamtinker.echo_alloy":  "Echo Alloy",
     "material.dreamtinker.echo_alloy.flavor":  "Its echo of mystery, or echo of enigma",

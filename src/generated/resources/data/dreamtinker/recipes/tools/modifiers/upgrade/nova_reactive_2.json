@@ -1,0 +1,59 @@
+{
+  "type": "esotericism_tinker:modifiable_enchantment",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "ars_nouveau"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "ars_nouveau"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "level": 3,
+  "pedestalItems": [
+    {
+      "tag": "forge:gems/emerald"
+    },
+    {
+      "tag": "forge:gems/emerald"
+    },
+    {
+      "tag": "forge:gems/emerald"
+    },
+    {
+      "tag": "forge:gems/emerald"
+    },
+    {
+      "tag": "forge:ender_pearls"
+    },
+    {
+      "item": "ars_nouveau:abjuration_essence"
+    },
+    {
+      "item": "ars_nouveau:conjuration_essence"
+    },
+    {
+      "item": "ars_nouveau:manipulation_essence"
+    }
+  ],
+  "result": "dreamtinker:nova_reactive",
+  "source": 9000,
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

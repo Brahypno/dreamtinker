@@ -1,0 +1,45 @@
+{
+  "type": "dreamtinker:reactive_modifiable_enchantment",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "ars_nouveau"
+            },
+            {
+              "type": "dreamtinker:mod_compact_config",
+              "modid": "ars_nouveau"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "pedestalItems": [
+    {
+      "item": "ars_nouveau:spell_parchment"
+    },
+    {
+      "item": "ars_nouveau:source_gem_block"
+    },
+    {
+      "tag": "forge:storage_blocks/lapis"
+    }
+  ],
+  "slots": {
+    "upgrades": 1
+  },
+  "source": 3000,
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}
