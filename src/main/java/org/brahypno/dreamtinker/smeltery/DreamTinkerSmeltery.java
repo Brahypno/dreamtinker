@@ -20,7 +20,7 @@ import slimeknights.tconstruct.smeltery.block.component.SearedBlock;
 
 import java.util.function.Function;
 
-import static org.brahypno.dreamtinker.Dreamtinker.configCompactDisabled;
+import static org.brahypno.esotericismtinker.EsotericismTinker.configCompactDisabled;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DreamTinkerSmeltery extends DreamtinkerModule {

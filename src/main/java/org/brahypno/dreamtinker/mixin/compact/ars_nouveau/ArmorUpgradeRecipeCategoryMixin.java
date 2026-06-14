@@ -14,7 +14,7 @@ import slimeknights.tconstruct.library.tools.item.IModifiableDisplay;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.brahypno.dreamtinker.Dreamtinker.configCompactDisabled;
+import static org.brahypno.esotericismtinker.EsotericismTinker.configCompactDisabled;
 
 @Mixin(value = ArmorUpgradeRecipeCategory.class, remap = false)
 public class ArmorUpgradeRecipeCategoryMixin {

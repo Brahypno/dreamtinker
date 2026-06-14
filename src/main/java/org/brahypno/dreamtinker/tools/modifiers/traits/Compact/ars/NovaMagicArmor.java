@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.hollingsworth.arsnouveau.setup.registry.ItemsRegistry.SORCERER_BOOTS;
-import static org.brahypno.dreamtinker.Dreamtinker.configCompactDisabled;
+import static org.brahypno.esotericismtinker.EsotericismTinker.configCompactDisabled;
 
 public class NovaMagicArmor extends Modifier implements InventoryTickModifierHook {
     @SuppressWarnings({"removal"})

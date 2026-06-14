@@ -31,8 +31,8 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.brahypno.dreamtinker.Dreamtinker.configCompactDisabled;
 import static org.brahypno.dreamtinker.utils.CompactUtils.arsNovaUtils.isTinker;
+import static org.brahypno.esotericismtinker.EsotericismTinker.configCompactDisabled;
 
 @Mixin(value = MethodProjectile.class, remap = false)
 public class MethodProjectileMixin {
@@ -81,7 +81,7 @@ public class MethodProjectileMixin {
             ToolStack toolStack = ToolStack.from(resolver.spellContext.getCasterTool());
             ArrayList<EntityProjectileSpell> projectiles = new ArrayList<>();
             EntityProjectileSpell projectileSpell = new EntityProjectileSpell(world, resolver);
-            projectileSpell.setPos((double) pos.getX(), (double) (pos.getY() + 1), (double) pos.getZ());
+            projectileSpell.setPos(pos.getX(), pos.getY() + 1, pos.getZ());
             projectiles.add(projectileSpell);
             int numSplits = stats.getBuffCount(AugmentSplit.INSTANCE);
 
@@ -94,13 +94,13 @@ public class MethodProjectileMixin {
                 BlockPos projPos = pos.relative(offset, i);
                 projPos = projPos.offset(0, 2, 0);
                 EntityProjectileSpell spell = new EntityProjectileSpell(world, resolver);
-                spell.setPos((double) projPos.getX(), (double) projPos.getY(), (double) projPos.getZ());
+                spell.setPos(projPos.getX(), projPos.getY(), projPos.getZ());
                 projectiles.add(spell);
             }
             int counter = 0;
 
             for (EntityProjectileSpell proj : projectiles) {
-                proj.setDeltaMovement(new Vec3((double) 0.0F, -0.1, (double) 0.0F));
+                proj.setDeltaMovement(new Vec3(0.0F, -0.1, 0.0F));
                 ModifierNBT modifiers = toolStack.getModifiers();
                 EntityModifierCapability.getCapability(proj).addModifiers(modifiers);
                 ModDataNBT arrowData = PersistentDataCapability.getOrWarn(proj);

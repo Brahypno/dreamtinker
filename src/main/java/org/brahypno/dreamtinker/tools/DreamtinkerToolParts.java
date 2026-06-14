@@ -22,9 +22,9 @@ import slimeknights.tconstruct.tools.stats.LimbMaterialStats;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import static org.brahypno.dreamtinker.Dreamtinker.configCompactDisabled;
 import static org.brahypno.dreamtinker.DreamtinkerModule.ITEMS;
 import static org.brahypno.dreamtinker.DreamtinkerModule.TABS;
+import static org.brahypno.esotericismtinker.EsotericismTinker.configCompactDisabled;
 
 
 public class DreamtinkerToolParts {
@@ -97,8 +97,6 @@ public class DreamtinkerToolParts {
             accept(output, NovaRostrum);
             accept(output, NovaWrapper);
         }
-
-
     }
 
 
