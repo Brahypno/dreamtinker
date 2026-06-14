@@ -16,7 +16,7 @@
               "modid": "malum"
             },
             {
-              "type": "dreamtinker:mod_compact_config",
+              "type": "esotericism_tinker:mod_compact_config",
               "modid": "malum"
             }
           ]
@@ -43,8 +43,7 @@
     "item": "dreamtinker:explode_core"
   },
   "output": {
-    "item": "dreamtinker:explode_core",
-    "nbt": "{Material:\"dreamtinker:malum_mnemonic#auric\"}"
+    "item": "dreamtinker:explode_core"
   },
   "spirits": [
     {

@@ -22,7 +22,7 @@ import org.brahypno.dreamtinker.utils.DTModifierCheck;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.tools.TinkerToolParts;
 
-import static org.brahypno.dreamtinker.Dreamtinker.configCompactDisabled;
+import static org.brahypno.esotericismtinker.EsotericismTinker.configCompactDisabled;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ItemTooltip {

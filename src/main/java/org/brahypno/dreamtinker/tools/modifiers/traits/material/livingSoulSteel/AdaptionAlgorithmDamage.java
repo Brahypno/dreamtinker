@@ -24,7 +24,7 @@ import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 
 import javax.annotation.Nullable;
 
-import static org.brahypno.dreamtinker.Dreamtinker.configCompactDisabled;
+import static org.brahypno.esotericismtinker.EsotericismTinker.configCompactDisabled;
 
 public class AdaptionAlgorithmDamage extends NoLevelsModifier implements MeleeDamageModifierHook, ProjectileHurtHook {
     public static float killStatGain(ServerPlayer player, EntityType<?> type) {

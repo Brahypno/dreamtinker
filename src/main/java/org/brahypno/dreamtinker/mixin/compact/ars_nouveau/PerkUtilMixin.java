@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import slimeknights.tconstruct.common.TinkerTags;
 
-import static org.brahypno.dreamtinker.Dreamtinker.configCompactDisabled;
+import static org.brahypno.esotericismtinker.EsotericismTinker.configCompactDisabled;
 
 @Mixin(value = PerkUtil.class, remap = false)
 public class PerkUtilMixin {

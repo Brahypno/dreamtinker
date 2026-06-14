@@ -9,8 +9,8 @@ import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
 import net.minecraftforge.common.crafting.conditions.OrCondition;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
-import org.brahypno.dreamtinker.common.json.DTConfigEnabledCondition;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerMaterialIds;
+import org.brahypno.esotericismtinker.common.json.ETConfigEnabledCondition;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.recipe.condition.TagFilledCondition;
 import slimeknights.tconstruct.common.json.ConfigEnabledCondition;
@@ -124,7 +124,7 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
 
     public static ICondition modLoaded(String modId) {
         return new OrCondition(ConfigEnabledCondition.FORCE_INTEGRATION_MATERIALS,
-                               new AndCondition(new ModLoadedCondition(modId), new DTConfigEnabledCondition(modId)));
+                               new AndCondition(new ModLoadedCondition(modId), new ETConfigEnabledCondition(modId)));
     }
 
     public static ICondition tagFilled(TagKey<Item> tagKey) {

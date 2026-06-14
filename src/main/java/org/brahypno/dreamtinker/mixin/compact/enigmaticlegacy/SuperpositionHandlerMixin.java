@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static org.brahypno.dreamtinker.Dreamtinker.configCompactDisabled;
+import static org.brahypno.esotericismtinker.EsotericismTinker.configCompactDisabled;
 
 @Pseudo
 @Mixin(targets = "com.aizistral.enigmaticlegacy.handlers.SuperpositionHandler", remap = false)

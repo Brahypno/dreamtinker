@@ -46,9 +46,9 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import static org.brahypno.dreamtinker.Dreamtinker.configCompactDisabled;
 import static org.brahypno.dreamtinker.DreamtinkerModule.FLUIDS;
 import static org.brahypno.dreamtinker.DreamtinkerModule.MALUM_FLUIDS;
+import static org.brahypno.esotericismtinker.EsotericismTinker.configCompactDisabled;
 import static slimeknights.mantle.Mantle.commonResource;
 import static slimeknights.tconstruct.fluids.TinkerFluids.withoutMolten;
 

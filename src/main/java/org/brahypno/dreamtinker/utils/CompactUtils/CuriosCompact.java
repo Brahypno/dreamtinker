@@ -5,7 +5,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.ModList;
-import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.tools.DreamtinkerTools;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
@@ -20,6 +19,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
+
+import static org.brahypno.esotericismtinker.EsotericismTinker.configCompactDisabled;
 
 public class CuriosCompact {
     private CuriosCompact() {}
@@ -43,7 +44,7 @@ public class CuriosCompact {
     }
 
     public static void damageAllCurios(LivingEntity target, int amount, Predicate<ItemStack> filter) {
-        if (!ModList.get().isLoaded("curios") || Dreamtinker.configCompactDisabled("curios")
+        if (!ModList.get().isLoaded("curios") || configCompactDisabled("curios")
             || target.level().isClientSide || amount <= 0)
             return;
         doDamageAllCurios(target, amount, filter);

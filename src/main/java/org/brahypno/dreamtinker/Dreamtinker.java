@@ -17,7 +17,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
@@ -50,7 +49,6 @@ import org.brahypno.dreamtinker.common.data.loot.DreamtinkerLootTableProvider;
 import org.brahypno.dreamtinker.common.data.loot.LootTableInjectionProvider;
 import org.brahypno.dreamtinker.common.data.tags.*;
 import org.brahypno.dreamtinker.common.event.advancements.star_regulus_boost;
-import org.brahypno.dreamtinker.common.json.DTConfigEnabledCondition;
 import org.brahypno.dreamtinker.config.DreamtinkerClientConfig;
 import org.brahypno.dreamtinker.config.DreamtinkerConfig;
 import org.brahypno.dreamtinker.fluids.DreamtinkerFluids;
@@ -74,8 +72,9 @@ import org.slf4j.Logger;
 import slimeknights.mantle.registration.RegistrationHelper;
 import slimeknights.tconstruct.library.utils.Util;
 
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
+
+import static org.brahypno.esotericismtinker.EsotericismTinker.configCompactDisabled;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(Dreamtinker.MODID)
@@ -84,9 +83,6 @@ public class Dreamtinker {
     // Define mod id in a common place for everything to reference
     public static final String MODID = "dreamtinker";
     public static final Logger LOGGER = LogUtils.getLogger();
-
-    private static List<? extends String> compact_config;
-    private static Boolean compactRestriction;
 
     @SuppressWarnings({"removal"})
     public Dreamtinker() {
@@ -110,7 +106,6 @@ public class Dreamtinker {
             NovaRegistry.NovaInit(modEventBus);
         }
 
-        CraftingHelper.register(DTConfigEnabledCondition.SERIALIZER);
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
         // Register ourselves for server and other game events we are interested in
@@ -227,13 +222,6 @@ public class Dreamtinker {
         generator.addProvider(event.includeServer(), new AdvancementsProvider(output));
         generator.addProvider(event.includeServer(), new DTMobEffectTagsProvider(output, event.getLookupProvider(), event.getExistingFileHelper()));
         generator.addProvider(event.includeServer(), new DreamtinkerGlobalLootModifierProvider(output));
-    }
-
-    public static boolean configCompactDisabled(String modId) {
-        if (null == compact_config)
-            compact_config = DreamtinkerConfig.ModCompactBlackList.get();
-        compactRestriction = DreamtinkerConfig.MOD_COMPACT_MATERIALS_CONFIG.get();
-        return compactRestriction && compact_config.contains(modId);
     }
 
     private static void missingMappings(MissingMappingsEvent event) {

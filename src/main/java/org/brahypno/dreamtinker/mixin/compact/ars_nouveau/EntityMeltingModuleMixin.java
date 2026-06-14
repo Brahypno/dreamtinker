@@ -26,7 +26,7 @@ import slimeknights.tconstruct.smeltery.block.entity.module.EntityMeltingModule;
 import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 
-import static org.brahypno.dreamtinker.Dreamtinker.configCompactDisabled;
+import static org.brahypno.esotericismtinker.EsotericismTinker.configCompactDisabled;
 import static slimeknights.tconstruct.smeltery.block.entity.module.EntityMeltingModule.getDefaultFluid;
 
 @Mixin(value = EntityMeltingModule.class, remap = false)

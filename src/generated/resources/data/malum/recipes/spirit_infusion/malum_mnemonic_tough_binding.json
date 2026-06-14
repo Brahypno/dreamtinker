@@ -16,7 +16,7 @@
               "modid": "malum"
             },
             {
-              "type": "dreamtinker:mod_compact_config",
+              "type": "esotericism_tinker:mod_compact_config",
               "modid": "malum"
             }
           ]
@@ -53,8 +53,7 @@
     ]
   },
   "output": {
-    "item": "tconstruct:tough_binding",
-    "nbt": "{Material:\"dreamtinker:malum_mnemonic\"}"
+    "item": "tconstruct:tough_binding"
   },
   "spirits": [
     {
