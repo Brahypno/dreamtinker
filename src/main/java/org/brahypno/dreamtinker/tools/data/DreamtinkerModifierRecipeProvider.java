@@ -1,5 +1,6 @@
 package org.brahypno.dreamtinker.tools.data;
 
+import com.hollingsworth.arsnouveau.setup.registry.ItemsRegistry;
 import com.sammy.malum.registry.common.block.BlockRegistry;
 import com.sammy.malum.registry.common.item.ItemRegistry;
 import com.sammy.malum.registry.common.item.ItemTagRegistry;
@@ -18,10 +19,12 @@ import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerCommon;
 import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
 import org.brahypno.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
+import org.brahypno.dreamtinker.library.compact.ars_nouveau.ReactiveModifiableEnchantmentRecipeBuilder;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.brahypno.dreamtinker.tools.DreamtinkerToolParts;
 import org.brahypno.dreamtinker.tools.DreamtinkerTools;
 import org.brahypno.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvider;
+import org.brahypno.esotericismtinker.library.compact.ars_nouveau.recipe.builder.ModifiableEnchantmentRecipeBuilder;
 import org.brahypno.esotericismtinker.library.tools.EsotericismSlotType;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.recipe.data.ICommonRecipeHelper;
@@ -762,6 +765,40 @@ public class DreamtinkerModifierRecipeProvider implements ICommonRecipeHelper {
                              .addInput(itemNameIngredient("ars_nouveau", "fire_essence"))
                              .setMaxLevel(1)
                              .save(wrapped, prefix(DreamtinkerModifiers.Ids.cosmogony_tetrad, slotlessFolder));
+
+        ReactiveModifiableEnchantmentRecipeBuilder.reactive()
+                                                  .setTools(Ingredient.of(TinkerTags.Items.MODIFIABLE))
+                                                  .addPedestalItem(itemNameIngredient("ars_nouveau", "spell_parchment"))
+                                                  .addPedestalItem(itemNameIngredient("ars_nouveau", "source_gem_block"))
+                                                  .addPedestalItem(Tags.Items.STORAGE_BLOCKS_LAPIS)
+                                                  .slot(SlotType.UPGRADE, 1)
+                                                  .source(3000)
+                                                  .save(wrapped, prefix(DreamtinkerModifiers.Ids.nova_reactive, upgradeFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.nova_reactive)
+                             .setTools(TinkerTags.Items.MODIFIABLE)
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .setMaxLevel(1)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.Ids.nova_reactive, upgradeSalvage));
+
+        ModifiableEnchantmentRecipeBuilder.modifier(DreamtinkerModifiers.Ids.nova_reactive, 2)
+                                          .setTools(Ingredient.of(TinkerTags.Items.MODIFIABLE))
+                                          .addPedestalItem(4, Ingredient.of(Items.BLAZE_POWDER))
+                                          .addPedestalItem(ItemsRegistry.AIR_ESSENCE)
+                                          .addPedestalItem(ItemsRegistry.EARTH_ESSENCE)
+                                          .addPedestalItem(ItemsRegistry.FIRE_ESSENCE)
+                                          .addPedestalItem(ItemsRegistry.WATER_ESSENCE)
+                                          .source(6000)
+                                          .save(wrapped, wrap(DreamtinkerModifiers.Ids.nova_reactive, upgradeFolder, "_1"));
+        ModifiableEnchantmentRecipeBuilder.modifier(DreamtinkerModifiers.Ids.nova_reactive, 3)
+                                          .setTools(Ingredient.of(TinkerTags.Items.MODIFIABLE))
+                                          .addPedestalItem(4, Ingredient.of(Tags.Items.GEMS_EMERALD))
+                                          .addPedestalItem(Ingredient.of(Tags.Items.ENDER_PEARLS))
+                                          .addPedestalItem(ItemsRegistry.ABJURATION_ESSENCE)
+                                          .addPedestalItem(ItemsRegistry.CONJURATION_ESSENCE)
+                                          .addPedestalItem(ItemsRegistry.MANIPULATION_ESSENCE)
+                                          .source(9000)
+                                          .save(wrapped, wrap(DreamtinkerModifiers.Ids.nova_reactive, upgradeFolder, "_2"));
+
         String OCC = "occultism";
         wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(OCC));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.occ_view)

@@ -484,6 +484,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId nova_water_essence = id("nova_water_essence");
         public static final ModifierId nova_mana_reduce = id("nova_mana_reduce");
         public static final ModifierId nova_ashen_resolve = id("nova_ashen_resolve");
+        public static final ModifierId nova_reactive = id("nova_reactive");
 
         public static final ModifierId undergarden_rot_killer = id("undergarden_rot_killer");
         public static final ModifierId undergarden_rot_protection = id("undergarden_rot_protection");

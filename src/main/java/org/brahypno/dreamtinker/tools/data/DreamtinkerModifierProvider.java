@@ -848,6 +848,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModules(ModifierSlotModule.slot(EsotericismSlotType.DELUSION).eachLevel(1));
+                
     }
 
     private void addUGModifiers() {

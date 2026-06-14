@@ -1,19 +1,27 @@
 package org.brahypno.dreamtinker.library.compact.ars_nouveau;
 
+import com.hollingsworth.arsnouveau.api.ArsNouveauAPI;
 import com.hollingsworth.arsnouveau.api.item.ICasterTool;
 import com.hollingsworth.arsnouveau.api.perk.PerkSlot;
 import com.hollingsworth.arsnouveau.api.registry.GlyphRegistry;
 import com.hollingsworth.arsnouveau.api.registry.PerkRegistry;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.DreamtinkerModule;
 import org.brahypno.dreamtinker.library.compact.ars_nouveau.NovaBook.ModifiableSpellBook;
 import org.brahypno.dreamtinker.library.compact.ars_nouveau.Spell.AugmentTinker;
 import org.brahypno.dreamtinker.tools.DreamtinkerTools;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.NovaReactive;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.ars.*;
 import slimeknights.mantle.registration.object.ItemObject;
 import slimeknights.tconstruct.library.modifiers.util.ModifierDeferredRegister;
@@ -35,15 +43,27 @@ public class NovaRegistry extends DreamtinkerModule {
 
     public static ModifierDeferredRegister ARS_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
 
-    public NovaRegistry() {
-        NovaInit();
-    }
+    public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS =
+            DeferredRegister.create(ForgeRegistries.Keys.RECIPE_SERIALIZERS, Dreamtinker.MODID);
+    public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(ForgeRegistries.Keys.RECIPE_TYPES, Dreamtinker.MODID);
+    public static final RegistryObject<RecipeType<ReactiveModifiableEnchantmentRecipe>> REACTIVE_MODIFIABLE_ENCHANTMENT_TYPE =
+            RECIPE_TYPES.register("reactive_modifiable_enchantment", () -> new RecipeType<>() {
+                @Override
+                public String toString() {
+                    return Dreamtinker.MODID + ":reactive_modifiable_enchantment";
+                }
+            });
+
+    public static final RegistryObject<RecipeSerializer<ReactiveModifiableEnchantmentRecipe>> REACTIVE_MODIFIABLE_ENCHANTMENT_SERIALIZER =
+            RECIPE_SERIALIZERS.register("reactive_modifiable_enchantment", ReactiveModifiableEnchantmentRecipeSerializer::new);
 
     @SuppressWarnings({"removal"})
-    public void NovaInit() {
+    public static void NovaInit(IEventBus modBus) {
+        NovaRegistry.RECIPE_TYPES.register(modBus);
+        NovaRegistry.RECIPE_SERIALIZERS.register(modBus);
         GlyphRegistry.registerSpell(AugmentTinker.INSTANCE);
-        ARS_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
-
+        ARS_MODIFIERS.register(modBus);
+        modBus.addListener(NovaRegistry::commonSetup);
     }
 
 
@@ -67,6 +87,8 @@ public class NovaRegistry extends DreamtinkerModule {
             ARS_MODIFIERS.register("nova_mana_shield", NovaManaShield::new);
     public static final StaticModifier<NovaAshenResolve> nova_ashen_resolve =
             ARS_MODIFIERS.register("nova_ashen_resolve", NovaAshenResolve::new);
+    public static final StaticModifier<NovaReactive> nova_reactive =
+            ARS_MODIFIERS.register("nova_reactive", NovaReactive::new);
 
     private static final List<List<List<PerkSlot>>> small_slots = Arrays.asList(
             Arrays.asList(
@@ -112,5 +134,11 @@ public class NovaRegistry extends DreamtinkerModule {
         PerkRegistry.registerPerkProvider(DreamtinkerTools.underPlate.get(ArmorItem.Type.LEGGINGS), stack -> new ModifiableArmorPekHolder(stack, large_slots));
 
         PerkRegistry.registerPerkProvider(DreamtinkerTools.underPlate.get(ArmorItem.Type.HELMET), stack -> new ModifiableArmorPekHolder(stack, small_slots));
+    }
+
+    private static void commonSetup(FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> ArsNouveauAPI.getInstance()
+                                             .getEnchantingRecipeTypes()
+                                             .add(REACTIVE_MODIFIABLE_ENCHANTMENT_TYPE.get()));
     }
 }

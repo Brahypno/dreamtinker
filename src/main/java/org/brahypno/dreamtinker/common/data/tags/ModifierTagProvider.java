@@ -47,6 +47,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             .addOptional(new ResourceLocation("mushroom_daydream.arrogant"));
         this.tag(DreamtinkerTagKeys.Modifiers.EL_CURSED_RELIEF)
             .addOptional(weapon_books.getId(), eldritch_pan.getId(), exiles_faulty.getId());
+
         this.tag(TinkerTags.Modifiers.MELEE_UPGRADES)
             .add(born_with_me.getId())
             .addOptional(Ids.malum_haunted, Ids.malum_animated, Ids.bic_frostbitten, Ids.bic_intoxicating);
@@ -54,7 +55,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             .add(Ids.icy_memory, Ids.hate_memory, Ids.soul_core, Ids.wrath, Ids.torrent);
         this.tag(TinkerTags.Modifiers.GENERAL_UPGRADES)
             .add(Ids.weapon_dreams_order, Ids.weapon_dreams_filter, TheEnd.getId(), life_looting.getId())
-            .addOptional(Ids.bic_dark_armor_plate);
+            .addOptional(Ids.bic_dark_armor_plate, Ids.nova_reactive);
         this.tag(TinkerTags.Modifiers.HARVEST_UPGRADES)
             .add(Ids.falsify_fate);
         this.tag(TinkerTags.Modifiers.SPECIAL_DEFENSE)

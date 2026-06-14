@@ -19,6 +19,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerCommon;
@@ -78,6 +79,10 @@ public final class DTJeiPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration reg) {
+        if (ModList.get().isLoaded("ars_nouveau")){
+            ArsJeiCompact.registerRecipes(reg);
+        }
+
         List<WorldRitualEntry> list = new ArrayList<>();
 
         // A) 蓝冰 + 水 + 月相 → 工具部件

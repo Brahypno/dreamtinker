@@ -1,0 +1,17 @@
+{
+  "modifier_id": "dreamtinker:nova_reactive",
+  "text": [
+    {
+      "text": "这个升级无法通过工作站或工匠砧获得，只能通过附魔装置获得。"
+    },
+    {
+      "text": "它与反应附魔的工作方式完全相同。要更改法术，您需要移除升级并使用新法术重新应用它。"
+    }
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable",
+  "effects": [
+    "第一级需要1个升级槽",
+    "最高3级"
+  ]
+}
