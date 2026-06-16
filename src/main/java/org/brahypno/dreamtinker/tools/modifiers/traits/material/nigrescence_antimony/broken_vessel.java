@@ -8,13 +8,19 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerAttributes;
+import org.brahypno.esotericismtinker.library.modifiers.EsotericismTinkerHook;
+import org.brahypno.esotericismtinker.library.modifiers.hook.LivingHealHealHook;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.armor.EquipmentChangeModifierHook;
+import slimeknights.tconstruct.library.modifiers.modules.technical.SlotInChargeModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
+import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability;
 import slimeknights.tconstruct.library.tools.context.EquipmentChangeContext;
+import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
@@ -22,8 +28,10 @@ import java.util.UUID;
 
 import static org.brahypno.dreamtinker.config.DreamtinkerConfig.BrokenVesselBoost;
 
-public class broken_vessel extends Modifier implements EquipmentChangeModifierHook {
+public class broken_vessel extends Modifier implements EquipmentChangeModifierHook, LivingHealHealHook {
     public static final String TAG_BASE_HEALTH = "broken_vessel";
+    private static final TinkerDataCapability.TinkerDataKey<SlotInChargeModule.SlotInCharge> SLOT_KEY =
+            TinkerDataCapability.TinkerDataKey.of(Dreamtinker.getLocation("broken_vessel"));
     private static final UUID HEALTH_BOOST_ID = UUID.fromString("c8b28a17-d5ec-4fa4-b555-bb1e8f7de4c8");
     private static final int MAX_HEALTH_MULTIPLIER = BrokenVesselBoost.get();
 
@@ -99,8 +107,33 @@ public class broken_vessel extends Modifier implements EquipmentChangeModifierHo
     }
 
     @Override
+    public float onHeal(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, float amount) {
+        int chargeLevel = SlotInChargeModule.getLevel(context.getTinkerData(), SLOT_KEY, slotType);
+        if (chargeLevel <= 0){
+            return amount;
+        }
+        LivingEntity entity = context.getEntity();
+        CompoundTag data = entity.getPersistentData();
+        if (!data.contains(TAG_BASE_HEALTH)){
+            return amount;
+        }
+
+        float current = entity.getHealth();
+        float cap = data.getFloat(TAG_BASE_HEALTH) / (1 + BrokenVesselBoost.get());
+        if (cap <= current){
+            entity.setHealth(cap);
+            return 0.0F;
+        }
+        if (cap < current + amount){
+            return cap - current;
+        }
+        return amount;
+    }
+
+    @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
-        hookBuilder.addHook(this, ModifierHooks.EQUIPMENT_CHANGE);
+        hookBuilder.addModule(new SlotInChargeModule(SLOT_KEY));
+        hookBuilder.addHook(this, ModifierHooks.EQUIPMENT_CHANGE, EsotericismTinkerHook.HEAL);
         super.registerHooks(hookBuilder);
     }
 }

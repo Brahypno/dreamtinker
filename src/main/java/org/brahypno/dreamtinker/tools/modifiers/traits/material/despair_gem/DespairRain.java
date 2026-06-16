@@ -6,18 +6,20 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import org.brahypno.dreamtinker.utils.DTHelper;
+import org.brahypno.esotericismtinker.library.modifiers.EsotericismTinkerHook;
+import org.brahypno.esotericismtinker.library.modifiers.hook.LivingHealHealHook;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.armor.EquipmentChangeModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeDamageModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.combat.MonsterMeleeHitModifierHook;
-import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
+import slimeknights.tconstruct.library.tools.context.EquipmentChangeContext;
+import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.shared.TinkerAttributes;
@@ -25,7 +27,8 @@ import slimeknights.tconstruct.shared.TinkerAttributes;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
-public class DespairRain extends Modifier implements MeleeDamageModifierHook, MeleeHitModifierHook, MonsterMeleeHitModifierHook, InventoryTickModifierHook, AttributesModifierHook {
+public class DespairRain extends Modifier implements MeleeDamageModifierHook, MeleeHitModifierHook, MonsterMeleeHitModifierHook, EquipmentChangeModifierHook, AttributesModifierHook,
+        LivingHealHealHook {
     public boolean isNoLevels() {return false;}
 
     @Override
@@ -63,20 +66,30 @@ public class DespairRain extends Modifier implements MeleeDamageModifierHook, Me
         }
     }
 
+    @Override
+    public void onEquip(IToolStackView tool, ModifierEntry modifier, EquipmentChangeContext context) {
+        if (context.getLevel().isClientSide)
+            return;
+        context.getEntity().setHealth(modifier.getLevel());
+    }
 
     @Override
-    public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
-        if (world.isClientSide)
-            return;
-        if ((isCorrectSlot || isSelected) && world.getGameTime() % 20 == 0)
-            holder.setHealth(modifier.getLevel());
-
+    public float onHeal(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, float amount) {
+        if (slotType != EquipmentSlot.MAINHAND){
+            return amount;
+        }
+        LivingEntity entity = context.getEntity();
+        float current = entity.getHealth();
+        int rainCap = modifier.getLevel();
+        entity.setHealth(rainCap);
+        entity.setAbsorptionAmount(entity.getAbsorptionAmount() + current - rainCap);
+        return 0.0F;
     }
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
         hookBuilder.addHook(this, ModifierHooks.MELEE_DAMAGE, ModifierHooks.MONSTER_MELEE_DAMAGE, ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT,
-                            ModifierHooks.INVENTORY_TICK, ModifierHooks.ATTRIBUTES);
+                            ModifierHooks.EQUIPMENT_CHANGE, ModifierHooks.ATTRIBUTES, EsotericismTinkerHook.HEAL);
         super.registerHooks(hookBuilder);
     }
 

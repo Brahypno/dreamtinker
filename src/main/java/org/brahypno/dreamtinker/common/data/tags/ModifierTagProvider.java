@@ -26,7 +26,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
     protected void addTags() {
         final String TIAC = "tinkers_advanced";
         final String TIT = "tinkers_thinking";
-        tag(DreamtinkerTagKeys.Modifiers.ArmorWorkingWhenUnequipped)
+        tag(EsotericismTinkerTagKeys.Modifiers.ArmorWorkingWhenUnequipped)
                 .add(as_one.getId());
         this.tag(DreamtinkerTagKeys.Modifiers.EL_CURSED_MODIFIERS)
             .add(ModifierIds.weak, ModifierIds.blindshot, ModifierIds.erratic, ModifierIds.vintage, ModifierIds.flamestance,

@@ -1,4 +1,4 @@
-﻿package org.brahypno.dreamtinker.tools.modifiers.events.compact.enigmatic_legacy;
+package org.brahypno.dreamtinker.tools.modifiers.events.compact.enigmatic_legacy;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;

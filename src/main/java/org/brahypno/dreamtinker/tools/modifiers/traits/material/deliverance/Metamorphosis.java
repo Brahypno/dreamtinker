@@ -19,13 +19,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.LivingHealEvent;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerDamageTypes;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.brahypno.dreamtinker.utils.DamageProbe;
-import org.brahypno.esotericismtinker.utils.ETModifierCheck;
+import org.brahypno.esotericismtinker.library.modifiers.EsotericismTinkerHook;
+import org.brahypno.esotericismtinker.library.modifiers.hook.LivingHealHealHook;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -49,7 +48,7 @@ import java.util.UUID;
 import java.util.function.BiConsumer;
 
 public class Metamorphosis extends Modifier implements DamageDealtModifierHook, AttributesModifierHook, InventoryTickModifierHook,
-        DamageBlockModifierHook, OnAttackedModifierHook, ModifyDamageModifierHook, ModifierTraitHook {
+        DamageBlockModifierHook, OnAttackedModifierHook, ModifyDamageModifierHook, ModifierTraitHook, LivingHealHealHook {
     private static final ThreadLocal<Boolean> DAMAGE_DEALT_IN_PROGRESS = ThreadLocal.withInitial(() -> false);
     private static final TinkerDataCapability.TinkerDataKey<SlotInChargeModule.SlotInCharge> SLOT_KEY =
             TinkerDataCapability.TinkerDataKey.of(Dreamtinker.getLocation("metamorphosis"));
@@ -64,10 +63,6 @@ public class Metamorphosis extends Modifier implements DamageDealtModifierHook, 
     private static final float BASE_THRESHOLD = 0.35F;
     private static final int FIELD_TIME = 80;
     private static final float FIELD_DAMAGE_SCALE = 0.35F;
-
-    {
-        MinecraftForge.EVENT_BUS.addListener(this::onLivingHeal);
-    }
 
     private static boolean isCollapsed(LivingEntity entity, ModifierEntry modifier) {
         return isCollapsed(entity, modifier.getLevel());
@@ -171,7 +166,7 @@ public class Metamorphosis extends Modifier implements DamageDealtModifierHook, 
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
         hookBuilder.addModule(new SlotInChargeModule(SLOT_KEY));
         hookBuilder.addHook(this, ModifierHooks.DAMAGE_DEALT, ModifierHooks.ATTRIBUTES, ModifierHooks.INVENTORY_TICK, ModifierHooks.DAMAGE_BLOCK,
-                            ModifierHooks.ON_ATTACKED, ModifierHooks.MODIFY_HURT, ModifierHooks.MODIFIER_TRAITS);
+                            ModifierHooks.ON_ATTACKED, ModifierHooks.MODIFY_HURT, ModifierHooks.MODIFIER_TRAITS, EsotericismTinkerHook.HEAL);
         super.registerHooks(hookBuilder);
     }
 
@@ -281,12 +276,12 @@ public class Metamorphosis extends Modifier implements DamageDealtModifierHook, 
         }
     }
 
-    private void onLivingHeal(LivingHealEvent event) {
-        LivingEntity entity = event.getEntity();
-        int level = ETModifierCheck.getEntityBodyModifierNum(entity, this.getId());
-        if (level > 0 && isCollapsed(entity, level)){
-            event.setAmount(event.getAmount() * Math.max(0.15F, 0.55F - 0.10F * level));
-        }
+    @Override
+    public float onHeal(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, float amount) {
+        int chargeLevel = SlotInChargeModule.getLevel(context.getTinkerData(), SLOT_KEY, slotType);
+        return chargeLevel > 0 && isCollapsed(context.getEntity(), chargeLevel)
+               ? amount * Math.max(0.15F, 0.55F - 0.10F * chargeLevel)
+               : amount;
     }
 
     @Override
