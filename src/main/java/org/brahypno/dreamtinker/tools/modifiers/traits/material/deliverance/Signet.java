@@ -180,7 +180,7 @@ public class Signet extends Modifier implements MeleeHitModifierHook, MonsterMel
         DamageSource source = highHealth
                               ? DreamtinkerDamageTypes.source(context.getLevel().registryAccess(), DamageTypes.FREEZE,
                                                               context.makeDamageSource())
-                              : DreamtinkerDamageTypes.source(context.getLevel().registryAccess(), DreamtinkerDamageTypes.NULL_VOID,
+                              : DreamtinkerDamageTypes.source(context.getLevel().registryAccess(), DreamtinkerDamageTypes.solar_judgment,
                                                               context.makeDamageSource());
         float extraDamage = Math.max(7.7F, damageBasis * (7.7F + 0.7F * modifier.getLevel()));
 
