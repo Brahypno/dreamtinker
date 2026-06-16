@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import org.brahypno.dreamtinker.library.compact.ars_nouveau.NovaBook.ModifiableSpellBook;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 
 public class ArsPlayerCraftEvent {
     public static void PlayerCraftEvent(PlayerEvent.ItemCraftedEvent event) {
@@ -17,7 +17,7 @@ public class ArsPlayerCraftEvent {
             return;
         ItemStack item = event.getCrafting();
         if (item.getItem() instanceof ModifiableSpellBook && event.getEntity() instanceof ServerPlayer player){
-            int level = DTModifierCheck.getItemModifierNum(item, DreamtinkerModifiers.Ids.nova_spell_tiers);
+            int level = ETModifierCheck.getItemModifierNum(item, DreamtinkerModifiers.Ids.nova_spell_tiers);
             ResourceLocation novice = ItemsRegistry.NOVICE_SPELLBOOK.registryObject.getId();
             ResourceLocation mage = ItemsRegistry.APPRENTICE_SPELLBOOK.registryObject.getId();
             ResourceLocation arch = ItemsRegistry.ARCHMAGE_SPELLBOOK.registryObject.getId();

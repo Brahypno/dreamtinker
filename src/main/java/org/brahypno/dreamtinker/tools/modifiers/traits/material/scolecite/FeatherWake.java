@@ -11,7 +11,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -108,7 +108,7 @@ public class FeatherWake extends Modifier implements ProjectileHitModifierHook {
 
         dir = dir.normalize();
 
-        float projectileDamage = DTModifierCheck.getDamage(projectile);
+        float projectileDamage = ETModifierCheck.getDamage(projectile);
         if (projectileDamage <= 0.0F){
             return false;
         }

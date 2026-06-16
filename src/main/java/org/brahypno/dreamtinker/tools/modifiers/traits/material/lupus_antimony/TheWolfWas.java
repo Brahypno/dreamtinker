@@ -11,7 +11,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.client.TooltipKey;
@@ -137,9 +137,9 @@ public class TheWolfWas extends Modifier implements InventoryTickModifierHook, T
         int possible_tier = Math.min(tier + 1, TheWolfWasMaxTier.get());
 
         // 6. 随机挑一个新的 MaterialVariantId
-        MaterialVariantId choice = DTModifierCheck.getMaterialForTier(possible_tier, rand, statsId);
+        MaterialVariantId choice = ETModifierCheck.getMaterialForTier(possible_tier, rand, statsId);
         while (choice == MaterialIds.wood && tier <= possible_tier) {
-            choice = DTModifierCheck.getMaterialForTier(--possible_tier, rand, statsId);
+            choice = ETModifierCheck.getMaterialForTier(--possible_tier, rand, statsId);
         }
         if (MaterialRegistry.getMaterial(choice.getId()).getTier() < tier)
             return;

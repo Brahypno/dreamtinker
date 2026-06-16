@@ -20,8 +20,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
-import org.brahypno.dreamtinker.utils.CompactUtils.CuriosCompact;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.CompactUtils.CuriosCompact;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
@@ -174,7 +174,7 @@ public class OathGuardPaleSteelEvents {
                           && !player.isSpectator()
                           && !player.isCreative()
                           && player != target
-                          && DTModifierCheck.haveModifierIn(player, modifierId)
+                          && ETModifierCheck.haveModifierIn(player, modifierId)
                           && isGuardianProtectedTarget(player, target)
         );
     }

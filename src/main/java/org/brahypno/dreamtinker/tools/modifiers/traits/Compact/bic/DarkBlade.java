@@ -34,7 +34,7 @@ import org.brahypno.dreamtinker.common.DreamtinkerDamageTypes;
 import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.brahypno.dreamtinker.utils.DTHelper;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.common.TinkerTags;
@@ -366,7 +366,7 @@ public class DarkBlade extends Modifier implements MeleeHitModifierHook, Monster
             return;
         Entity killer = event.getSource().getEntity();
         if (killer instanceof LivingEntity attacker){
-            if (0 < DTModifierCheck.getMainhandModifierLevel(attacker, DreamtinkerModifiers.bic_dark_blade.getId()) &&
+            if (0 < ETModifierCheck.getMainhandModifierLevel(attacker, DreamtinkerModifiers.bic_dark_blade.getId()) &&
                 attacker.getMainHandItem().is(Dreamtinker.mcItemTag("axes"))){
                 if (null != RAMPANT_RAMPAGE && attacker.hasEffect(RAMPANT_RAMPAGE)){
                     attacker.addEffect(new MobEffectInstance(RAMPANT_RAMPAGE, 9 * 20, 0));

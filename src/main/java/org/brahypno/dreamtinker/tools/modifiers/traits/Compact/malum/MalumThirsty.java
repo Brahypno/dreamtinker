@@ -34,7 +34,7 @@ import java.util.function.BiConsumer;
 
 import static org.brahypno.dreamtinker.common.effect.thirsty.Gluttony;
 import static org.brahypno.dreamtinker.tools.DreamtinkerModifiers.as_one;
-import static org.brahypno.dreamtinker.utils.DTModifierCheck.haveModifierIn;
+import static org.brahypno.esotericismtinker.utils.ETModifierCheck.haveModifierIn;
 
 public class MalumThirsty extends Modifier implements InventoryTickModifierHook, ModifierRemovalHook, AttributesModifierHook {
     private static final ResourceLocation TAG_GLU = Dreamtinker.getLocation("enhanced_glu");

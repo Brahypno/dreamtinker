@@ -13,7 +13,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerDamageTypes;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -55,7 +55,7 @@ public class RainbowCatcher extends Modifier implements InventoryTickModifierHoo
         boolean prev = stat.contains(TAG_IN_RAIN) && stat.getBoolean(TAG_IN_RAIN);
         float blocked_dmg = stat.getFloat(TAG_RAIN_BLOCK);
         boolean early_check =
-                (!isSelected && !isCorrectSlot) && DTModifierCheck.ModifierInBody(holder, this.getId());//unequipped but still have ability to block damage.
+                (!isSelected && !isCorrectSlot) && ETModifierCheck.ModifierInBody(holder, this.getId());//unequipped but still have ability to block damage.
         if (0 < blocked_dmg)
             if (cur != prev && !cur || (!isSelected && !isCorrectSlot)){
                 holder.hurt(DreamtinkerDamageTypes.source(holder.level().registryAccess(), DreamtinkerDamageTypes.rain_bow, null, null),

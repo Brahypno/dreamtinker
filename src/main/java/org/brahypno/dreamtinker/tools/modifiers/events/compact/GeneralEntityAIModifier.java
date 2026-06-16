@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.Mod;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.Entity.AggressiveFox;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class GeneralEntityAIModifier {
@@ -48,6 +48,6 @@ public class GeneralEntityAIModifier {
     }
 
     private static boolean isScaryLivingEntity(LivingEntity e) {
-        return DTModifierCheck.haveModifierIn(e, DreamtinkerModifiers.Ids.monster_blood);
+        return ETModifierCheck.haveModifierIn(e, DreamtinkerModifiers.Ids.monster_blood);
     }
 }

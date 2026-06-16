@@ -15,8 +15,8 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import org.brahypno.dreamtinker.Dreamtinker;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
 import org.brahypno.dreamtinker.utils.DTToolsPartsHelper;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -84,7 +84,7 @@ public class OpenSoul extends Modifier implements DamageDealtModifierHook, Inven
         LivingEntity entity = event.getEntity();
         if (entity.level().isClientSide || event.isCanceled())
             return;
-        ToolStack tool = DTModifierCheck.getToolWithModifier(entity, this.getId());
+        ToolStack tool = ETModifierCheck.getToolWithModifier(entity, this.getId());
         if (null != tool){
             ModDataNBT toolData = tool.getPersistentData();
             float count = toolData.getFloat(TAG_SOUL);

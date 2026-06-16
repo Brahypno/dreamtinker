@@ -17,8 +17,8 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.common.Tags;
 import org.brahypno.dreamtinker.common.DreamtinkerDamageTypes;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Combat.GoliathDamage;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
 import org.brahypno.dreamtinker.utils.DamageProbe;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -206,8 +206,8 @@ public class DoomTrack extends Modifier implements ProjectileHitModifierHook, Me
 
         DamageSource dmg = DreamtinkerDamageTypes.source(victim.level().registryAccess(), DreamtinkerDamageTypes.ruin_wheel, source);
         if (!victim.isInvulnerableTo(dmg)){
-            float theoreticalDamage = projectile != null ? DTModifierCheck.getDamage(projectile) :
-                                      Math.max(0.5f, DTModifierCheck.getMeleeDamage(attacker, target, tool, true));
+            float theoreticalDamage = projectile != null ? ETModifierCheck.getDamage(projectile) :
+                                      Math.max(0.5f, ETModifierCheck.getMeleeDamage(attacker, target, tool, true));
             theoreticalDamage = Math.max(theoreticalDamage, damageDealt);
             theoreticalDamage *=
                     proofByResistanceMultiplier(attacker, victim, dmg, modifier.getLevel(), projectile != null);

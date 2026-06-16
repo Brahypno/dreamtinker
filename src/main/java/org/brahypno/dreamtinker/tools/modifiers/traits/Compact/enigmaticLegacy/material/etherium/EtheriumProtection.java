@@ -10,7 +10,7 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.phys.Vec3;
 import org.brahypno.dreamtinker.utils.CompactUtils.EnigmaticLegacyCompact;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -34,7 +34,7 @@ public class EtheriumProtection extends Modifier implements DamageBlockModifierH
     }
 
     private boolean has_shield(Player player) {
-        return DTModifierCheck.ModifierALLBody(player, this.getId()) &&
+        return ETModifierCheck.ModifierALLBody(player, this.getId()) &&
                player.getHealth() / player.getMaxHealth() <= EnigmaticLegacyCompact.etheriumShieldThresholdMultiplier(player);
     }
 

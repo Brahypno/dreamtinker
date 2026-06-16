@@ -2,7 +2,7 @@ package org.brahypno.dreamtinker.mixin;
 
 import net.minecraft.world.entity.LivingEntity;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -16,7 +16,7 @@ public abstract class isInvertedHealAndHarmMixin {
     private void dreamtinker$overrideMobType(CallbackInfoReturnable<Boolean> cir) {
         LivingEntity self = (LivingEntity) (Object) this;
         Boolean original = cir.getReturnValue();
-        if (!original && DTModifierCheck.haveModifierIn(self, DreamtinkerModifiers.Ids.wither_body))
+        if (!original && ETModifierCheck.haveModifierIn(self, DreamtinkerModifiers.Ids.wither_body))
             cir.setReturnValue(true);
     }
 }

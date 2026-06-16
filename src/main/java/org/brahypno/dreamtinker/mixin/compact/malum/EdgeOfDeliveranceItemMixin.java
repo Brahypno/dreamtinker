@@ -8,7 +8,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -44,7 +44,7 @@ public class EdgeOfDeliveranceItemMixin {
             DamageSource instance, TagKey<DamageType> p_270890_) {
         boolean base = instance.is(p_270890_);
         return base ||
-               !configCompactDisabled("malum") && 0 < DTModifierCheck.getItemModifierNum(TL_STACK.get(), DreamtinkerTagKeys.Modifiers.MALUM_EXPOSE_SOUL);
+               !configCompactDisabled("malum") && 0 < ETModifierCheck.getItemModifierNum(TL_STACK.get(), DreamtinkerTagKeys.Modifiers.MALUM_EXPOSE_SOUL);
     }
 
     @Inject(method = "hurtEvent(Lnet/minecraftforge/event/entity/living/LivingHurtEvent;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;)V",

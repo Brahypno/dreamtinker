@@ -38,8 +38,8 @@ import net.minecraftforge.fml.common.Mod;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerCommon;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
 import org.brahypno.dreamtinker.utils.DTToolsPartsHelper;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.TinkerTags;
 
@@ -109,7 +109,7 @@ public class AggressiveFox extends Fox implements NeutralMob {
                                                                           !this.isDefending() && !isAngry()));
 
         this.goalSelector.addGoal(4, new LeapAtTargetGoal(this, 0.4F));
-        this.targetSelector.addGoal(3, (new HurtByTargetGoal(this, new Class[0])).setAlertOthers(new Class[0]));
+        this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setAlertOthers());
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, LivingEntity.class, 10, true, false, this::isAngryAt));
         this.targetSelector.addGoal(8, new ResetUniversalAngerTargetGoal<>(this, true));
     }
@@ -219,8 +219,8 @@ public class AggressiveFox extends Fox implements NeutralMob {
     }
 
     public static AttributeSupplier.@NotNull Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MOVEMENT_SPEED, (double) 0.3F).add(Attributes.MAX_HEALTH, (double) 20.0F)
-                  .add(Attributes.FOLLOW_RANGE, (double) 32.0F).add(Attributes.ATTACK_DAMAGE, (double) 4.0F)
+        return Mob.createMobAttributes().add(Attributes.MOVEMENT_SPEED, 0.3F).add(Attributes.MAX_HEALTH, 20.0F)
+                  .add(Attributes.FOLLOW_RANGE, 32.0F).add(Attributes.ATTACK_DAMAGE, 4.0F)
                   .add(Attributes.ATTACK_KNOCKBACK, 1.0f)
                   .add(Attributes.ARMOR, 2.0f).add(Attributes.ARMOR_TOUGHNESS, 2.0f);
     }
@@ -281,7 +281,7 @@ public class AggressiveFox extends Fox implements NeutralMob {
 
     @Override
     public int getRemainingPersistentAngerTime() {
-        return (Integer) this.entityData.get(DATA_REMAINING_ANGER_TIME);
+        return this.entityData.get(DATA_REMAINING_ANGER_TIME);
     }
 
     @Override
@@ -309,7 +309,7 @@ public class AggressiveFox extends Fox implements NeutralMob {
         if (this.level().isClientSide)
             return false;
         return stack.equals(storedWeapon) || ItemStack.isSameItemSameTags(stack, storedWeapon) ||
-               0 < DTModifierCheck.getItemModifierNum(stack, DreamtinkerModifiers.Ids.aggressiveFoxUsage);
+               0 < ETModifierCheck.getItemModifierNum(stack, DreamtinkerModifiers.Ids.aggressiveFoxUsage);
     }
 
     static {

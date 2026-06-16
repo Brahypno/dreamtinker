@@ -1,4 +1,4 @@
-package org.brahypno.dreamtinker.tools.modifiers.events.compact.enigmatic_legacy;
+﻿package org.brahypno.dreamtinker.tools.modifiers.events.compact.enigmatic_legacy;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -27,8 +27,8 @@ import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.brahypno.dreamtinker.utils.CompactUtils.EnigmaticLegacyCompact;
 import org.brahypno.dreamtinker.utils.DTMessages;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
 import org.brahypno.dreamtinker.utils.DamageProbe;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
@@ -56,7 +56,7 @@ public class EL_events {
         if (entity.level().isClientSide || event.isCanceled())
             return;
         if (entity instanceof Player player && EnigmaticLegacyCompact.isTheWorthyOne(player))
-            if (2 <= DTModifierCheck.getMainhandModifierLevel(player, DreamtinkerModifiers.weapon_books.getId()))
+            if (2 <= ETModifierCheck.getMainhandModifierLevel(player, DreamtinkerModifiers.weapon_books.getId()))
                 if (Math.random() <= EnigmaticLegacyCompact.infinitumUndeadProbabilityMultiplier()){
                     event.setCanceled(true);
                     player.setHealth(1);
@@ -64,7 +64,7 @@ public class EL_events {
         if (event.getSource().getDirectEntity() instanceof ServerPlayer attacker){
             ItemStack weapon = attacker.getMainHandItem();
 
-            if (0 < DTModifierCheck.getMainhandModifierLevel(attacker, DreamtinkerModifiers.eldritch_pan.getId())){
+            if (0 < ETModifierCheck.getMainhandModifierLevel(attacker, DreamtinkerModifiers.eldritch_pan.getId())){
                 ResourceLocation killedType = ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType());
 
                 if (addKillIfNotPresent(weapon, killedType)){
@@ -232,7 +232,7 @@ public class EL_events {
     }
 
     private static boolean isQualifiedDesolationPlayer(ServerPlayer player) {
-        return DTModifierCheck.haveModifierIn(player, DreamtinkerModifiers.desolation_ring.getId());
+        return ETModifierCheck.haveModifierIn(player, DreamtinkerModifiers.desolation_ring.getId());
     }
 
     private static List<ServerPlayer> findQualifiedDesolationPlayers(ServerLevel level, Entity entity) {

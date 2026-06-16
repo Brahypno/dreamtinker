@@ -8,9 +8,9 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraftforge.fml.ModList;
-import org.brahypno.dreamtinker.library.modifiers.DreamtinkerHook;
-import org.brahypno.dreamtinker.library.modifiers.hook.ProjectileHurtHook;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
+import org.brahypno.esotericismtinker.library.modifiers.EsotericismTinkerHook;
+import org.brahypno.esotericismtinker.library.modifiers.hook.ProjectileHurtHook;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeDamageModifierHook;
@@ -48,7 +48,7 @@ public class AdaptionAlgorithmDamage extends NoLevelsModifier implements MeleeDa
 
     @Override
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
-        hookBuilder.addHook(this, ModifierHooks.MELEE_DAMAGE, DreamtinkerHook.PROJECTILE_HURT);
+        hookBuilder.addHook(this, ModifierHooks.MELEE_DAMAGE, EsotericismTinkerHook.PROJECTILE_HURT);
         if (ModList.get().isLoaded("legendary_monsters") && !configCompactDisabled("legendary_monsters"))
             hookBuilder.addModule(new ModifierTraitModule(DreamtinkerModifiers.soul_rage.getId(), 1, false));
 

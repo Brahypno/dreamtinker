@@ -54,7 +54,6 @@ import org.brahypno.dreamtinker.config.DreamtinkerConfig;
 import org.brahypno.dreamtinker.fluids.DreamtinkerFluids;
 import org.brahypno.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
 import org.brahypno.dreamtinker.library.compact.eidolon.DTEidolonCompact;
-import org.brahypno.dreamtinker.library.event.PlayerLeftClickEvent;
 import org.brahypno.dreamtinker.network.DNetwork;
 import org.brahypno.dreamtinker.smeltery.DreamTinkerSmeltery;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
@@ -66,8 +65,10 @@ import org.brahypno.dreamtinker.tools.modifiers.events.compact.enigmatic_legacy.
 import org.brahypno.dreamtinker.tools.modifiers.events.compact.malum.malum_events_handler;
 import org.brahypno.dreamtinker.world.data.DTDataPackProvider;
 import org.brahypno.esotericismtinker.common.EsotericismTinkerCommon;
+import org.brahypno.esotericismtinker.library.event.PlayerLeftClickEvent;
 import org.brahypno.esotericismtinker.smeltery.EsotericismTinkerSmeltery;
 import org.brahypno.esotericismtinker.tools.EsotericismTinkerTools;
+import org.brahypno.esotericismtinker.utils.CompactUtils.CuriosCompact;
 import org.slf4j.Logger;
 import slimeknights.mantle.registration.RegistrationHelper;
 import slimeknights.tconstruct.library.utils.Util;
@@ -102,6 +103,7 @@ public class Dreamtinker {
         modEventBus.register(new DreamtinkerSounds());
         modEventBus.register(new DreamtinkerModifiers());
         DreamtinkerModule.initRegisters(modEventBus);
+        CuriosCompact.registerPreferredModifiable(stack -> stack.is(DreamtinkerTools.silence_glove.asItem()));
         if (ModList.get().isLoaded("ars_nouveau")){
             NovaRegistry.NovaInit(modEventBus);
         }

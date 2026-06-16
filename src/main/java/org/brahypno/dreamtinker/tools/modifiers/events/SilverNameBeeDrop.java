@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.Mod;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerEffects;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 
 import java.util.List;
 
@@ -42,7 +42,7 @@ public class SilverNameBeeDrop {
 
         // 如果攻击者是生物，则可以检查药水效果
         if (!(attacker instanceof LivingEntity livingAttacker &&
-              (livingAttacker.hasEffect(DreamtinkerEffects.SilverNameBee.get()) || DTModifierCheck.ModifierInHand(livingAttacker,
+              (livingAttacker.hasEffect(DreamtinkerEffects.SilverNameBee.get()) || ETModifierCheck.ModifierInHand(livingAttacker,
                                                                                                                   DreamtinkerModifiers.Ids.silver_name_bee))))
             return;
         List<ItemStack> forcedStacks = tryExtractRareLoot(serverLevel, victim, 0.40f, event.getLootingLevel());

@@ -21,7 +21,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.utils.DTMessages;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -51,8 +51,8 @@ import java.util.*;
 
 import static net.minecraft.nbt.Tag.TAG_INT;
 import static org.brahypno.dreamtinker.config.DreamtinkerConfig.*;
-import static org.brahypno.dreamtinker.utils.DTModifierCheck.getPossibleToolWithModifierTag;
-import static org.brahypno.dreamtinker.utils.DTModifierCheck.slots;
+import static org.brahypno.esotericismtinker.utils.ETModifierCheck.getPossibleToolWithModifierTag;
+import static org.brahypno.esotericismtinker.utils.ETModifierCheck.slots;
 
 
 public class as_one extends Modifier implements EquipmentChangeModifierHook, ModifyDamageModifierHook, InventoryTickModifierHook, ToolDamageModifierHook, ModifierRemovalHook, TooltipModifierHook, KeybindInteractModifierHook {
@@ -224,7 +224,7 @@ public class as_one extends Modifier implements EquipmentChangeModifierHook, Mod
     public float modifyDamageTaken(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float amount, boolean isDirectDamage) {
         int level = SlotInChargeModule.getLevel(context.getTinkerData(), SLOT_KEY, slotType);
 
-        if (0 < level || DTModifierCheck.verifyIfOffArmor(tool, context)){
+        if (0 < level || ETModifierCheck.verifyIfOffArmor(tool, context)){
             level = Math.max(modifier.getLevel(), level);
             amount *= AsOneS.get().floatValue() / level;
             if (context.getEntity().getMaxHealth() < amount)
@@ -291,7 +291,7 @@ public class as_one extends Modifier implements EquipmentChangeModifierHook, Mod
     }
 
     private boolean asOneStackBlocks(ItemStack stack, MobEffectInstance instance) {
-        if (stack.isEmpty() || DTModifierCheck.getItemModifierNum(stack, this.getId()) <= 0)
+        if (stack.isEmpty() || ETModifierCheck.getItemModifierNum(stack, this.getId()) <= 0)
             return false;
 
         Modes mode = Modes.fromInt(ModifierUtil.getPersistentInt(stack, TAG_MOD, 0));

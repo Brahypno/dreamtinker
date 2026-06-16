@@ -27,7 +27,7 @@ import org.brahypno.dreamtinker.utils.DTMessages;
 import java.util.List;
 
 import static org.brahypno.dreamtinker.DreamtinkerModule.*;
-import static org.brahypno.dreamtinker.utils.DTModifierCheck.getPossibleToolWithModifier;
+import static org.brahypno.esotericismtinker.utils.ETModifierCheck.getPossibleToolWithModifier;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class DreamtinkerEffects {

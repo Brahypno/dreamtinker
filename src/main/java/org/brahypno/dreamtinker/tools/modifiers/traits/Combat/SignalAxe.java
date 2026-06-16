@@ -12,9 +12,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import org.brahypno.dreamtinker.Dreamtinker;
-import org.brahypno.dreamtinker.library.modifiers.DreamtinkerHook;
-import org.brahypno.dreamtinker.library.modifiers.hook.LeftClickHook;
 import org.brahypno.dreamtinker.utils.DTMessages;
+import org.brahypno.esotericismtinker.library.modifiers.EsotericismTinkerHook;
+import org.brahypno.esotericismtinker.library.modifiers.hook.LeftClickHook;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -34,7 +34,8 @@ public class SignalAxe extends Modifier implements MeleeDamageModifierHook, Left
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        hookBuilder.addHook(this, ModifierHooks.MELEE_DAMAGE, ModifierHooks.MONSTER_MELEE_DAMAGE, DreamtinkerHook.LEFT_CLICK, ModifierHooks.INVENTORY_TICK,
+        hookBuilder.addHook(this, ModifierHooks.MELEE_DAMAGE, ModifierHooks.MONSTER_MELEE_DAMAGE, EsotericismTinkerHook.LEFT_CLICK,
+                            ModifierHooks.INVENTORY_TICK,
                             ModifierHooks.REMOVE);
         super.registerHooks(hookBuilder);
     }

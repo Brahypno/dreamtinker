@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import static org.brahypno.dreamtinker.tools.DreamtinkerModifiers.as_one;
-import static org.brahypno.dreamtinker.utils.DTModifierCheck.haveModifierIn;
+import static org.brahypno.esotericismtinker.utils.ETModifierCheck.haveModifierIn;
 
 public class StrongHeavy extends Modifier implements InventoryTickModifierHook {
     @Override

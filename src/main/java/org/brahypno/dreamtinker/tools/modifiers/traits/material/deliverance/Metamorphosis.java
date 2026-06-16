@@ -24,8 +24,8 @@ import net.minecraftforge.event.entity.living.LivingHealEvent;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerDamageTypes;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
 import org.brahypno.dreamtinker.utils.DamageProbe;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -283,7 +283,7 @@ public class Metamorphosis extends Modifier implements DamageDealtModifierHook, 
 
     private void onLivingHeal(LivingHealEvent event) {
         LivingEntity entity = event.getEntity();
-        int level = DTModifierCheck.getEntityBodyModifierNum(entity, this.getId());
+        int level = ETModifierCheck.getEntityBodyModifierNum(entity, this.getId());
         if (level > 0 && isCollapsed(entity, level)){
             event.setAmount(event.getAmount() * Math.max(0.15F, 0.55F - 0.10F * level));
         }

@@ -20,7 +20,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.utils.DTHelper;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -79,7 +79,7 @@ public class EchoedAttack extends Modifier implements ProjectileLaunchModifierHo
             return;
         ModDataNBT nbt = tool.getPersistentData();
         int count = nbt.getInt(TAG_ECHO_ENERGY);//In case count is modified due to below hook.
-        float damage = null != projectile ? DTModifierCheck.getDamage(projectile) : (float) attacker.getAttributeValue(Attributes.ATTACK_DAMAGE);
+        float damage = null != projectile ? ETModifierCheck.getDamage(projectile) : (float) attacker.getAttributeValue(Attributes.ATTACK_DAMAGE);
         nbt.putInt(TAG_ECHO_ENERGY, count);
 
         Vec3 start = attacker.position().add(0, attacker.getEyeHeight(), 0);

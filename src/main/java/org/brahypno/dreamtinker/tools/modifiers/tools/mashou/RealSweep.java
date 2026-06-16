@@ -17,8 +17,8 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import org.brahypno.dreamtinker.Entity.SlashOrbitEntity;
-import org.brahypno.dreamtinker.library.modifiers.DreamtinkerHook;
-import org.brahypno.dreamtinker.library.modifiers.hook.LeftClickHook;
+import org.brahypno.esotericismtinker.library.modifiers.EsotericismTinkerHook;
+import org.brahypno.esotericismtinker.library.modifiers.hook.LeftClickHook;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
@@ -33,7 +33,7 @@ import static org.brahypno.dreamtinker.utils.DTHelper.materialToRender;
 public class RealSweep extends NoLevelsModifier implements LeftClickHook {
     @Override
     public void registerHooks(ModuleHookMap.Builder hookBuilder) {
-        hookBuilder.addHook(this, DreamtinkerHook.LEFT_CLICK);
+        hookBuilder.addHook(this, EsotericismTinkerHook.LEFT_CLICK);
         super.registerHooks(hookBuilder);
     }
 

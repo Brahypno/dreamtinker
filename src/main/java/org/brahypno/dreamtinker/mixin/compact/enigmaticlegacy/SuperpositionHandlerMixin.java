@@ -4,7 +4,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
@@ -22,7 +22,7 @@ public abstract class SuperpositionHandlerMixin {
     private static void dreamtinker$injectCurseAmountBeforeReturn(ItemStack stack, CallbackInfoReturnable<Integer> cir) {
         if (!configCompactDisabled("enigmaticlegacy")){
             int total = cir.getReturnValue() +
-                        DTModifierCheck.getItemModifierNum(stack, DreamtinkerTagKeys.Modifiers.EL_CURSED_MODIFIERS);
+                        ETModifierCheck.getItemModifierNum(stack, DreamtinkerTagKeys.Modifiers.EL_CURSED_MODIFIERS);
 
             cir.setReturnValue(total);
         }
@@ -32,7 +32,7 @@ public abstract class SuperpositionHandlerMixin {
     private static void dreamtinker$injectBeforeWorthyReturn(Player player, CallbackInfoReturnable<Boolean> cir) {
         if (!configCompactDisabled("enigmaticlegacy") &&
             !cir.getReturnValue())
-            cir.setReturnValue(DTModifierCheck.haveModifierIn(player, DreamtinkerModifiers.Ids.el_by_pass_worthy));
+            cir.setReturnValue(ETModifierCheck.haveModifierIn(player, DreamtinkerModifiers.Ids.el_by_pass_worthy));
 
     }
 }

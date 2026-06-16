@@ -12,8 +12,8 @@ import net.minecraftforge.fml.common.Mod;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerDamageTypes;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
 import org.brahypno.dreamtinker.utils.DamageProbe;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class AttackHandler {
@@ -33,7 +33,7 @@ public class AttackHandler {
             return;
         RegistryAccess registryAccess = world.registryAccess();
         if (dmgEntity instanceof LivingEntity attacker){
-            if (DTModifierCheck.haveModifierIn(attacker, DreamtinkerModifiers.despair_wind.getId())){
+            if (ETModifierCheck.haveModifierIn(attacker, DreamtinkerModifiers.despair_wind.getId())){
                 int depth = extra_attack_depth.get();
                 if (depth < allowed_extra_times){
                     try {

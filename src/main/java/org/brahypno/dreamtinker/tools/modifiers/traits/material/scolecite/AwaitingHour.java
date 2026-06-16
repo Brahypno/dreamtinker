@@ -12,7 +12,7 @@ import net.minecraft.world.level.Level;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.brahypno.dreamtinker.utils.DTMessages;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.materials.definition.MaterialId;
@@ -100,7 +100,7 @@ public class AwaitingHour extends Modifier implements ProjectileLaunchModifierHo
             resourceLocation = TAG_MOTH;
         }
 
-        int evolution = (int) (data.getInt(resourceLocation) + clamp(3 + Math.ceil(DTModifierCheck.getDamage(projectile)), 3f, 12f));
+        int evolution = (int) (data.getInt(resourceLocation) + clamp(3 + Math.ceil(ETModifierCheck.getDamage(projectile)), 3f, 12f));
         data.putInt(resourceLocation, evolution);
     }
 

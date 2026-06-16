@@ -36,7 +36,7 @@ import org.brahypno.dreamtinker.common.DreamtinkerEffects;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.brahypno.dreamtinker.tools.items.TNTArrow;
 import org.brahypno.dreamtinker.utils.DTMessages;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 
@@ -45,7 +45,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.brahypno.dreamtinker.config.DreamtinkerCachedConfig.homunculusGiftDiscount;
 import static org.brahypno.dreamtinker.tools.modifiers.traits.Combat.SignalAxe.TAG_RIGHT_TIME;
-import static org.brahypno.dreamtinker.utils.DTModifierCheck.ModifierInHand;
+import static org.brahypno.esotericismtinker.utils.ETModifierCheck.ModifierInHand;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class ShortEvents {
@@ -72,7 +72,7 @@ public class ShortEvents {
         int multi = revealedLevel(event.getEntity(), 2);
         if (0 < multi)
             event.modifyVisibility(Mth.clamp(0.5 * multi + 1.5, 1.0, 4.0));
-        int hidden_multi = DTModifierCheck.getEntityModifierNum(event.getEntity(), DreamtinkerModifiers.Ids.hidden_shape);
+        int hidden_multi = ETModifierCheck.getEntityModifierNum(event.getEntity(), DreamtinkerModifiers.Ids.hidden_shape);
         if (0 < hidden_multi)
             event.modifyVisibility(0.25 + 0.75 * Math.pow(0.60, hidden_multi));
     }
@@ -113,13 +113,13 @@ public class ShortEvents {
         if (0 < damage && source.getEntity() instanceof LivingEntity attacker){
             ItemStack activeStack = blocker.getUseItem();
             if (!activeStack.isEmpty() && activeStack.is(TinkerTags.Items.MODIFIABLE)){//Block amount already handled
-                int sweet = DTModifierCheck.getItemModifierNum(activeStack, DreamtinkerModifiers.Ids.sweet_death);
+                int sweet = ETModifierCheck.getItemModifierNum(activeStack, DreamtinkerModifiers.Ids.sweet_death);
                 if (0 < sweet && (/*originalDamage <= damage ||*/ activeStack.getUseDuration() - blocker.getUseItemRemainingTicks() <= 20 * 3 * sweet)){
                     // 伤害被完全格挡，或格挡持续时间不足2秒，则触发反伤
                     attacker.hurt(DreamtinkerDamageTypes.source(attacker.level().registryAccess(), DamageTypes.INDIRECT_MAGIC, null, blocker),
                                   damage * (0.25F * sweet));
                 }
-                int kiss = DTModifierCheck.getItemModifierNum(activeStack, DreamtinkerModifiers.Ids.last_kiss);
+                int kiss = ETModifierCheck.getItemModifierNum(activeStack, DreamtinkerModifiers.Ids.last_kiss);
                 if (0 < kiss && (activeStack.getUseDuration() - blocker.getUseItemRemainingTicks() <= 20 * 3 * kiss)){
                     AtomicInteger i = new AtomicInteger();
                     blocker.getActiveEffects().removeIf(effect -> effect.getEffect().getCategory() == MobEffectCategory.HARMFUL &&
@@ -137,7 +137,7 @@ public class ShortEvents {
             return;
 
         // 你的判定：比如玩家/村民有某标签、状态或物品
-        int homunculusGift = DTModifierCheck.getEntityModifierNum(e.getEntity(), DreamtinkerModifiers.Ids.homunculusGift);
+        int homunculusGift = ETModifierCheck.getEntityModifierNum(e.getEntity(), DreamtinkerModifiers.Ids.homunculusGift);
         if (homunculusGift <= 0)
             return;
 
@@ -236,8 +236,8 @@ public class ShortEvents {
     }
 
     private static int revealedLevel(LivingEntity entity, int whimsyWeight) {
-        return DTModifierCheck.getEntityModifierNum(entity, DreamtinkerModifiers.Ids.golden_face)
-               + whimsyWeight * DTModifierCheck.getEntityModifierNum(entity, DreamtinkerModifiers.Ids.whimsy_face);
+        return ETModifierCheck.getEntityModifierNum(entity, DreamtinkerModifiers.Ids.golden_face)
+               + whimsyWeight * ETModifierCheck.getEntityModifierNum(entity, DreamtinkerModifiers.Ids.whimsy_face);
     }
 }
 

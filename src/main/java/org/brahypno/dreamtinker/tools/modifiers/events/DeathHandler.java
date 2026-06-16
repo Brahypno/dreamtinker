@@ -8,7 +8,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerEffects;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 
 import static org.brahypno.dreamtinker.common.DreamtinkerEffects.hasActiveCursedTime;
 import static org.brahypno.dreamtinker.tools.modifiers.traits.armors.knockArts.TAG_KNOCK;
@@ -27,6 +27,6 @@ public class DeathHandler {
         Level world = victim.level();
         if (world.isClientSide() || event.isCanceled())
             return;
-        DTModifierCheck.resetPersistentTagValue(victim, TAG_KNOCK);
+        ETModifierCheck.resetPersistentTagValue(victim, TAG_KNOCK);
     }
 }

@@ -9,7 +9,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import org.brahypno.dreamtinker.common.DreamtinkerEffects;
 import org.brahypno.dreamtinker.tools.modifiers.events.OathGuardPaleSteelEvents;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 
 public class BurdenBearer extends Modifier {
@@ -32,7 +32,7 @@ public class BurdenBearer extends Modifier {
                 player -> player.isAlive()
                           && !player.isSpectator()
                           && player != fallen
-                          && DTModifierCheck.haveModifierIn(player, getId())
+                          && ETModifierCheck.haveModifierIn(player, getId())
                           && OathGuardPaleSteelEvents.isGuardianProtectedTarget(player, fallen))) {
             grantBurden(holder, fallen);
         }
@@ -41,7 +41,7 @@ public class BurdenBearer extends Modifier {
     private void grantBurden(ServerPlayer holder, LivingEntity fallen) {
         MobEffectInstance current = holder.getEffect(DreamtinkerEffects.BurdenBearer.get());
         int currentLevel = current == null ? 0 : current.getAmplifier() + 1;
-        int armorModifierLevel = DTModifierCheck.getEntityBodyModifierNum(holder, getId());
+        int armorModifierLevel = ETModifierCheck.getEntityBodyModifierNum(holder, getId());
         int levelGain = Math.max(1, armorModifierLevel / 2);
         int amplifier = currentLevel + levelGain - 1;
         holder.addEffect(new MobEffectInstance(DreamtinkerEffects.BurdenBearer.get(), EFFECT_DURATION, amplifier, false, true, true), fallen);

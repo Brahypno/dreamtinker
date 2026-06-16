@@ -4,8 +4,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
-import org.brahypno.dreamtinker.library.modifiers.DreamtinkerHook;
-import org.brahypno.dreamtinker.library.modifiers.hook.ProjectileHurtHook;
+import org.brahypno.esotericismtinker.library.modifiers.EsotericismTinkerHook;
+import org.brahypno.esotericismtinker.library.modifiers.hook.ProjectileHurtHook;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
@@ -22,7 +22,7 @@ public class FourWarning extends NoLevelsModifier implements ProjectileHurtHook 
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        hookBuilder.addHook(this, DreamtinkerHook.PROJECTILE_HURT);
+        hookBuilder.addHook(this, EsotericismTinkerHook.PROJECTILE_HURT);
         super.registerHooks(hookBuilder);
     }
 

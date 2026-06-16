@@ -6,8 +6,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import org.brahypno.dreamtinker.common.DreamtinkerDamageTypes;
 import org.brahypno.dreamtinker.library.client.utils.model.RainbowTextUtil;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
 import org.brahypno.dreamtinker.utils.DamageProbe;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -34,7 +34,7 @@ public class RainbowLights extends Modifier implements MeleeDamageModifierHook, 
     }
 
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        float Theoretical_damage = Math.max(0.5f, DTModifierCheck.getMeleeDamage(context.getAttacker(), context.getTarget(), tool, false));
+        float Theoretical_damage = Math.max(0.5f, ETModifierCheck.getMeleeDamage(context.getAttacker(), context.getTarget(), tool, false));
         Theoretical_damage = Math.max(Theoretical_damage, damageDealt);
         Entity victim = context.getTarget();
         if (!victim.level().isClientSide){

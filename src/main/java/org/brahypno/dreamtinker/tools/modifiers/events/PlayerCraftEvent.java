@@ -24,7 +24,7 @@ import java.util.List;
 import static org.brahypno.dreamtinker.common.DreamtinkerTagKeys.Materials.*;
 import static org.brahypno.dreamtinker.config.DreamtinkerCachedConfig.UnbuildLimits;
 import static org.brahypno.dreamtinker.tools.modifiers.traits.common.not_like_was.TAG_CHANGE_TIMES;
-import static org.brahypno.dreamtinker.utils.DTModifierCheck.getMaterialForTier;
+import static org.brahypno.esotericismtinker.utils.ETModifierCheck.getMaterialForTier;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class PlayerCraftEvent {

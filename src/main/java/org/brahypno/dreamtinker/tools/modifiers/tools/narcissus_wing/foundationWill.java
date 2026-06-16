@@ -31,10 +31,10 @@ import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.brahypno.dreamtinker.Dreamtinker;
-import org.brahypno.dreamtinker.library.modifiers.DreamtinkerHook;
-import org.brahypno.dreamtinker.library.modifiers.hook.LeftClickHook;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.brahypno.dreamtinker.utils.DTMessages;
+import org.brahypno.esotericismtinker.library.modifiers.EsotericismTinkerHook;
+import org.brahypno.esotericismtinker.library.modifiers.hook.LeftClickHook;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.mantle.data.predicate.item.ItemPredicate;
@@ -76,7 +76,7 @@ public class foundationWill extends NoLevelsModifier implements ModifierTraitHoo
     private static final ToolContextPredicate harvestPredicate = ToolContextPredicate.simple(context -> context.getPersistentData().getInt(TAG_MOD) == 0);
 
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        hookBuilder.addHook(this, ModifierHooks.PROCESS_LOOT, DreamtinkerHook.LEFT_CLICK, ModifierHooks.ARMOR_INTERACT, ModifierHooks.TOOLTIP,
+        hookBuilder.addHook(this, ModifierHooks.PROCESS_LOOT, EsotericismTinkerHook.LEFT_CLICK, ModifierHooks.ARMOR_INTERACT, ModifierHooks.TOOLTIP,
                             ModifierHooks.MODIFIER_TRAITS);
         hookBuilder.addModule(
                 LootingModule.builder().toolItem(ItemPredicate.or(ItemPredicate.set(Items.AIR), ItemPredicate.tag(MELEE))).toolContext(harvestPredicate)

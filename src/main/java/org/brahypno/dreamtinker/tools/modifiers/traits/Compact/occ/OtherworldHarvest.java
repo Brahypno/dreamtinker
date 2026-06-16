@@ -15,8 +15,8 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.brahypno.dreamtinker.library.modifiers.DreamtinkerHook;
-import org.brahypno.dreamtinker.library.modifiers.hook.LeftClickHook;
+import org.brahypno.esotericismtinker.library.modifiers.EsotericismTinkerHook;
+import org.brahypno.esotericismtinker.library.modifiers.hook.LeftClickHook;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -59,7 +59,7 @@ public class OtherworldHarvest extends NoLevelsModifier implements LeftClickHook
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        hookBuilder.addHook(this, DreamtinkerHook.LEFT_CLICK, ModifierHooks.BREAK_SPEED);
+        hookBuilder.addHook(this, EsotericismTinkerHook.LEFT_CLICK, ModifierHooks.BREAK_SPEED);
     }
 
     @Override

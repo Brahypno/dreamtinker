@@ -14,7 +14,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 
 import java.util.ArrayList;
 
@@ -30,7 +30,7 @@ public class ModifiableInfinityGuiSpellBook extends InfinityGuiSpellBook {
                 int tier = mb.getTier(heldStack).value;
                 this.spellValidator = new CombinedSpellValidator(
                         new ISpellValidator[]{ArsNouveauAPI.getInstance().getSpellCraftingSpellValidator(), new GlyphMaxTierValidator(tier)});
-                int ui_slots = DTModifierCheck.getItemModifierNum(heldStack, DreamtinkerModifiers.Ids.nova_spell_slots);
+                int ui_slots = ETModifierCheck.getItemModifierNum(heldStack, DreamtinkerModifiers.Ids.nova_spell_slots);
                 numLinks += ui_slots;
             }
         }

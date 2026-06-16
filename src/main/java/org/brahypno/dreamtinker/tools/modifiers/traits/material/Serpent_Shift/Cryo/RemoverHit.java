@@ -7,8 +7,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
 import org.brahypno.dreamtinker.utils.DTHelper;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
 import org.brahypno.dreamtinker.utils.LootHelper.DTLoots;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -56,7 +56,7 @@ public class RemoverHit extends Modifier implements MeleeHitModifierHook, Projec
         if (null != attacker && null != target){
             if (target.isAlive() && !(target instanceof Player)){
                 double attack = Math.max(attacker.getMaxHealth(), attacker.getAttributeValue(Attributes.ATTACK_DAMAGE));
-                attack = Math.max(attack, DTModifierCheck.getDamage(projectile));
+                attack = Math.max(attack, ETModifierCheck.getDamage(projectile));
                 if (target.getHealth() <= attack){
                     DTLoots.dropAllDeathLootVanilla(target, target.level().damageSources().mobProjectile(projectile, attacker));
                     target.remove(Entity.RemovalReason.DISCARDED);

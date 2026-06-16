@@ -27,12 +27,12 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.TierSortingRegistry;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerDamageTypes;
-import org.brahypno.dreamtinker.library.modifiers.DreamtinkerHook;
-import org.brahypno.dreamtinker.library.modifiers.hook.ProjectileHurtHook;
 import org.brahypno.dreamtinker.tools.modifiers.events.AdvCountEvents;
 import org.brahypno.dreamtinker.utils.DTHelper;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
 import org.brahypno.dreamtinker.utils.DamageProbe;
+import org.brahypno.esotericismtinker.library.modifiers.EsotericismTinkerHook;
+import org.brahypno.esotericismtinker.library.modifiers.hook.ProjectileHurtHook;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.client.TooltipKey;
@@ -185,7 +185,7 @@ public class SplendourHeart extends Modifier implements MeleeHitModifierHook, In
                 int depth = extra_attack_depth.get();
                 if (depth < allowed_extra_times){
                     try {
-                        float damage = DTModifierCheck.getMeleeDamage(context.getAttacker(), context.getTarget(), tool, 2 < level);
+                        float damage = ETModifierCheck.getMeleeDamage(context.getAttacker(), context.getTarget(), tool, 2 < level);
                         ResourceKey<DamageType> dmt =
                                 0 == level ? context.getAttacker() instanceof Player ? DamageTypes.PLAYER_ATTACK : DamageTypes.MOB_ATTACK :
                                 1 == level ? DreamtinkerDamageTypes.arcane_damage :
@@ -282,7 +282,7 @@ public class SplendourHeart extends Modifier implements MeleeHitModifierHook, In
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
         hookBuilder.addHook(this, ModifierHooks.MELEE_HIT, ModifierHooks.INVENTORY_TICK, ModifierHooks.TOOL_DAMAGE,
                             ModifierHooks.REMOVE, ModifierHooks.TOOLTIP, ModifierHooks.TOOL_STATS, ModifierHooks.ATTRIBUTES, ModifierHooks.VOLATILE_DATA,
-                            DreamtinkerHook.PROJECTILE_HURT);
+                            EsotericismTinkerHook.PROJECTILE_HURT);
         hookBuilder.addModule(new VolatileFlagModule(ModifierEvents.SOULBOUND));
         hookBuilder.addModule(new VolatileFlagModule(IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY));
         super.registerHooks(hookBuilder);

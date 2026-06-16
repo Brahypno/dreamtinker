@@ -20,8 +20,8 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import org.brahypno.dreamtinker.Dreamtinker;
-import org.brahypno.dreamtinker.library.modifiers.DreamtinkerHook;
-import org.brahypno.dreamtinker.library.modifiers.hook.LeftClickHook;
+import org.brahypno.esotericismtinker.library.modifiers.EsotericismTinkerHook;
+import org.brahypno.esotericismtinker.library.modifiers.hook.LeftClickHook;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -45,7 +45,7 @@ public class DespairMist extends Modifier implements LeftClickHook {
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        hookBuilder.addHook(this, DreamtinkerHook.LEFT_CLICK);
+        hookBuilder.addHook(this, EsotericismTinkerHook.LEFT_CLICK);
         hookBuilder.addModule(new VolatileFlagModule(IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY));
         hookBuilder.addModule(new RarityModule(Rarity.EPIC));
         super.registerHooks(hookBuilder);

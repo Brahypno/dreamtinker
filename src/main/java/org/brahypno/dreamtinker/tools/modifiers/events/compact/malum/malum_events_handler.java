@@ -19,7 +19,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import slimeknights.tconstruct.library.tools.item.IModifiable;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import team.lodestar.lodestone.helpers.RandomHelper;
@@ -43,7 +43,7 @@ public class malum_events_handler {
             try {
                 reEnter.set(depth + 1);
                 ToolStack tool = ToolStack.from(stack);
-                if (0 < DTModifierCheck.getItemModifierNum(stack, DreamtinkerTagKeys.Modifiers.MALUM_EXPOSE_SOUL))
+                if (0 < ETModifierCheck.getItemModifierNum(stack, DreamtinkerTagKeys.Modifiers.MALUM_EXPOSE_SOUL))
                     SoulDataHandler.exposeSoul(event.getEntity());
                 if (0 < tool.getModifierLevel(DreamtinkerModifiers.malum_base.getId()))
                     ((MalumScytheItem) ItemRegistry.CRUDE_SCYTHE.get()).hurtEvent(event, attacker, event.getEntity(), stack);
@@ -56,7 +56,7 @@ public class malum_events_handler {
                 if (0 < tool.getModifierLevel(DreamtinkerModifiers.malum_erosion.getId()))
                     ((ErosionScepterItem) ItemRegistry.EROSION_SCEPTER.get()).hurtEvent(event, attacker, event.getEntity(), stack);
 
-                int levels = DTModifierCheck.getMainhandModifierLevel(attacker, DreamtinkerModifiers.malum_sol_tiferet.getId());
+                int levels = ETModifierCheck.getMainhandModifierLevel(attacker, DreamtinkerModifiers.malum_sol_tiferet.getId());
                 if (0 < levels && null != target && !target.level().isClientSide &&
                     crossedWhichN(target, event.getAmount() - target.getAbsorptionAmount(), levels + 1))
                     MalumLivingEntityDataCapability.getCapabilityOptional(target).ifPresent(c -> {

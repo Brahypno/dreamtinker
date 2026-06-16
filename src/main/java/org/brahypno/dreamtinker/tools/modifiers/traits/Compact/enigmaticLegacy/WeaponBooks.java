@@ -14,7 +14,7 @@ import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.brahypno.dreamtinker.utils.CompactUtils.EnigmaticLegacyCompact;
 import org.brahypno.dreamtinker.utils.DTHelper;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -157,7 +157,7 @@ public class WeaponBooks extends Modifier implements MeleeDamageModifierHook, Me
 
     private void onLivingDeath(LivingDeathEvent event) {
         if (event.getEntity() instanceof Player player && !event.getEntity().level().isClientSide){
-            if (2 <= DTModifierCheck.getMainhandModifierLevel(player, this.getId()) &&
+            if (2 <= ETModifierCheck.getMainhandModifierLevel(player, this.getId()) &&
                 Math.random() <= EnigmaticLegacyCompact.infinitumUndeadProbabilityMultiplier()){
                 event.setCanceled(true);
                 player.setHealth(1.0F);

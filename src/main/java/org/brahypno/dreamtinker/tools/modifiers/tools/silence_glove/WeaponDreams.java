@@ -12,12 +12,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import org.brahypno.dreamtinker.library.modifiers.DreamtinkerHook;
-import org.brahypno.dreamtinker.library.modifiers.hook.LeftClickHook;
-import org.brahypno.dreamtinker.library.modifiers.hook.RightClickHook;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.brahypno.dreamtinker.tools.DreamtinkerTools;
-import org.brahypno.dreamtinker.utils.CompactUtils.CuriosCompact;
+import org.brahypno.esotericismtinker.library.modifiers.EsotericismTinkerHook;
+import org.brahypno.esotericismtinker.library.modifiers.hook.LeftClickHook;
+import org.brahypno.esotericismtinker.library.modifiers.hook.RightClickHook;
+import org.brahypno.esotericismtinker.utils.CompactUtils.CuriosCompact;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.tconstruct.common.TinkerTags;
@@ -43,7 +43,7 @@ import static org.brahypno.dreamtinker.tools.modifiers.events.weaponDreamsEnsure
 public class WeaponDreams extends NoLevelsModifier implements LeftClickHook, RightClickHook, GeneralInteractionModifierHook {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        hookBuilder.addHook(this, DreamtinkerHook.LEFT_CLICK, DreamtinkerHook.RIGHT_CLICK, ModifierHooks.GENERAL_INTERACT);
+        hookBuilder.addHook(this, EsotericismTinkerHook.LEFT_CLICK, EsotericismTinkerHook.RIGHT_CLICK, ModifierHooks.GENERAL_INTERACT);
         super.registerHooks(hookBuilder);
     }
 
@@ -148,31 +148,26 @@ public class WeaponDreams extends NoLevelsModifier implements LeftClickHook, Rig
             // ===== 服务端：不要再调用 player.attack()，直接执行业务逻辑（chosen → 钩子 → 回写 → 还原） =====
             ServerPlayer sp = (ServerPlayer) player;
             int cooldownTicks = computeProxyCooldownTicks(tool);
-            try {
-                // 临时换手仅为让某些钩子/附魔读取到正确主手；也可直接不用换手，仅把 chosen 传入钩子
-                update_hand(player, chosen);
-                // 1) 刚切换为 chosen 时，立即让客户端主手槽显示 chosen
-                Boolean MainEmpty = false;
-                if (proxySnap.isEmpty()){
-                    MainEmpty = true;
-                    proxySnap = CuriosCompact.findPreferredGlove(player);
-                }
-                startChosenDisplay(sp, chosenIdx, proxySnap, cooldownTicks, MainEmpty);
-
-                player.attackStrengthTicker = (int) Math.ceil(player.getCurrentItemAttackStrengthDelay());
-
-                // 你的实际攻击逻辑（不要再调 player.attack）
-                if (null != target)
-                    chosen.getItem().onLeftClickEntity(chosen, player, target);
-                else if (null == state){
-                    IToolStackView chosen_tool = ToolStack.from(chosen);
-                    for (ModifierEntry chosen_entry : chosen_tool.getModifierList()) {
-                        chosen_entry.getHook(DreamtinkerHook.LEFT_CLICK).onLeftClickEmpty(chosen_tool, chosen_entry, player, level, equipmentSlot);
-                    }
-                }
+            // 临时换手仅为让某些钩子/附魔读取到正确主手；也可直接不用换手，仅把 chosen 传入钩子
+            update_hand(player, chosen);
+            // 1) 刚切换为 chosen 时，立即让客户端主手槽显示 chosen
+            Boolean MainEmpty = false;
+            if (proxySnap.isEmpty()){
+                MainEmpty = true;
+                proxySnap = CuriosCompact.findPreferredGlove(player);
             }
-            finally {
-                // 还原主手（服务端权威）
+            startChosenDisplay(sp, chosenIdx, proxySnap, cooldownTicks, MainEmpty);
+
+            player.attackStrengthTicker = (int) Math.ceil(player.getCurrentItemAttackStrengthDelay());
+
+            // 你的实际攻击逻辑（不要再调 player.attack）
+            if (null != target)
+                chosen.getItem().onLeftClickEntity(chosen, player, target);
+            else if (null == state){
+                IToolStackView chosen_tool = ToolStack.from(chosen);
+                for (ModifierEntry chosen_entry : chosen_tool.getModifierList()) {
+                    chosen_entry.getHook(EsotericismTinkerHook.LEFT_CLICK).onLeftClickEmpty(chosen_tool, chosen_entry, player, level, equipmentSlot);
+                }
             }
         }
     }

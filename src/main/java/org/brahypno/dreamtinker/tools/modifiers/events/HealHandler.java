@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.Mod;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerEffects;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 
 import static org.brahypno.dreamtinker.common.DreamtinkerEffects.hasActiveCursedTime;
 import static org.brahypno.dreamtinker.config.DreamtinkerConfig.BrokenVesselBoost;
@@ -41,7 +41,7 @@ public class HealHandler {
                 entity.setHealth(cap);
             }
         }
-        int rain_cap = DTModifierCheck.getMainhandModifierLevel(entity, DreamtinkerModifiers.despair_rain.getId());
+        int rain_cap = ETModifierCheck.getMainhandModifierLevel(entity, DreamtinkerModifiers.despair_rain.getId());
         if (0 < rain_cap){
             event.setAmount(0f);
             entity.setHealth(rain_cap);

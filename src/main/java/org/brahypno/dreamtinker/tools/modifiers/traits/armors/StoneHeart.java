@@ -16,7 +16,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
 import org.brahypno.dreamtinker.Dreamtinker;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -55,12 +55,12 @@ public class StoneHeart extends Modifier implements ModifyDamageModifierHook, Da
 
     private void LivingHealEvent(LivingHealEvent event) {
         LivingEntity entity = event.getEntity();
-        if (DTModifierCheck.haveModifierIn(entity, this.getId()))
+        if (ETModifierCheck.haveModifierIn(entity, this.getId()))
             event.setAmount(event.getAmount() * 0.2F);
     }
 
     public void onEat(LivingEntityUseItemEvent.Finish e) {
-        if (!(e.getEntity() instanceof Player p) || p.level().isClientSide || !DTModifierCheck.haveModifierIn(p, this.getId()))
+        if (!(e.getEntity() instanceof Player p) || p.level().isClientSide || !ETModifierCheck.haveModifierIn(p, this.getId()))
             return;
         var fd = p.getFoodData();
         if (!fd.needsFood())

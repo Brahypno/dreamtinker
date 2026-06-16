@@ -18,7 +18,7 @@ import org.brahypno.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.brahypno.dreamtinker.tools.items.UnderArmorItem;
 import org.brahypno.dreamtinker.utils.CompactUtils.EnigmaticLegacyCompact;
 import org.brahypno.dreamtinker.utils.CompactUtils.arsNovaUtils;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.tools.TinkerToolParts;
 
@@ -34,7 +34,7 @@ public class ItemTooltip {
         }
         if (ModList.get().isLoaded("ars_nouveau") && !configCompactDisabled("ars_nouveau")){
             if (null != e.getEntity() && e.getItemStack().is(TinkerTags.Items.ARMOR) &&
-                0 < DTModifierCheck.getItemModifierNum(e.getItemStack(), NovaRegistry.nova_magic_armor.getId())){
+                0 < ETModifierCheck.getItemModifierNum(e.getItemStack(), NovaRegistry.nova_magic_armor.getId())){
                 if (!(e.getItemStack().getItem() instanceof UnderArmorItem) && null != PerkRegistry.getPerkProvider(e.getItemStack().getItem()))
                     return;//They would have their own ones.
                 arsNovaUtils.appendHoverText(e.getItemStack(), e.getEntity().level(), e.getToolTip(), e.getFlags());
@@ -49,7 +49,7 @@ public class ItemTooltip {
             }
         }
         if (e.getItemStack().getItem().equals(TinkerToolParts.fakeIngot.asItem()) &&
-            DTModifierCheck.getExpectedMaterialPart(e.getItemStack(), DreamtinkerMaterialIds.RuinWheelSteel)){
+            ETModifierCheck.getExpectedMaterialPart(e.getItemStack(), DreamtinkerMaterialIds.RuinWheelSteel)){
             e.getToolTip()
              .add(Component.translatable("material.dreamtinker.ruin_wheel_steel.hint").withStyle(ChatFormatting.ITALIC)
                            .withStyle(Style.EMPTY.withColor(0xFFF0B0)));

@@ -16,7 +16,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
 import org.brahypno.dreamtinker.library.compact.ars_nouveau.Spell.AugmentTinker;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 
 import java.util.HashSet;
 import java.util.List;
@@ -34,7 +34,7 @@ public class ModifiableSpellResolver extends SpellResolver {
         if (manaCap == null)
             return false;
         boolean canCast = totalCost <= manaCap.getCurrentMana() || (entity instanceof Player player && player.isCreative());
-        canCast |= DTModifierCheck.ModifierInHand(entity, DreamtinkerModifiers.Ids.nova_ashen_resolve);
+        canCast |= ETModifierCheck.ModifierInHand(entity, DreamtinkerModifiers.Ids.nova_ashen_resolve);
         if (!canCast && !entity.getCommandSenderWorld().isClientSide && !silent){
             PortUtil.sendMessageNoSpam(entity, Component.translatable("ars_nouveau.spell.no_mana"));
             if (entity instanceof ServerPlayer serverPlayer)

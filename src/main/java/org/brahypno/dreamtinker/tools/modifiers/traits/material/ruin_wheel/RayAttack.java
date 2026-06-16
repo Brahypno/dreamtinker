@@ -11,7 +11,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.brahypno.dreamtinker.common.DreamtinkerDamageTypes;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -113,7 +113,7 @@ public class RayAttack extends Modifier implements ProjectileHitModifierHook, Me
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
         Entity target = context.getTarget();
         if (null != target && !target.level().isClientSide){
-            float Theoretical_damage = Math.max(0.5f, DTModifierCheck.getMeleeDamage(context.getAttacker(), context.getTarget(), tool, true));
+            float Theoretical_damage = Math.max(0.5f, ETModifierCheck.getMeleeDamage(context.getAttacker(), context.getTarget(), tool, true));
             Theoretical_damage = Math.max(Theoretical_damage, damageDealt);
             DamageSource dmg = DreamtinkerDamageTypes.source(target.level().registryAccess(), DreamtinkerDamageTypes.ruin_wheel, context.makeDamageSource());
             triggerBarrelRuin(context.getAttacker(), target, dmg, Theoretical_damage, modifier.getLevel());
@@ -122,7 +122,7 @@ public class RayAttack extends Modifier implements ProjectileHitModifierHook, Me
 
     @Override
     public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target, boolean notBlocked) {
-        float damage = DTModifierCheck.getDamage(projectile);
+        float damage = ETModifierCheck.getDamage(projectile);
         if (null != target && null != attacker && attacker.isAlive() && !attacker.level().isClientSide){
             DamageSource dmg = DreamtinkerDamageTypes.source(target.level().registryAccess(), DreamtinkerDamageTypes.ruin_wheel, projectile, attacker);
             triggerBarrelRuin(attacker, target, dmg, damage, modifier.getLevel());
@@ -132,7 +132,7 @@ public class RayAttack extends Modifier implements ProjectileHitModifierHook, Me
 
     @Override
     public boolean onProjectileHitsBlock(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, BlockHitResult hit, @Nullable LivingEntity owner) {
-        float damage = DTModifierCheck.getDamage(projectile);
+        float damage = ETModifierCheck.getDamage(projectile);
         if (null != owner && owner.isAlive() && !owner.level().isClientSide){
             DamageSource dmg = DreamtinkerDamageTypes.source(owner.level().registryAccess(), DreamtinkerDamageTypes.ruin_wheel, projectile, owner);
             triggerBarrelRuin(owner, projectile, dmg, damage, modifier.getLevel());

@@ -13,7 +13,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import org.brahypno.dreamtinker.Entity.DreamtinkerEntityTypes;
 import org.brahypno.dreamtinker.Entity.WiserLightBolt;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -78,7 +78,7 @@ public class TwoHeadedSeven extends Modifier implements ProjectileHitModifierHoo
         bolt.setOwner(attacker);
         bolt.setChainCount(7);
         bolt.setVisualOnly(false);
-        bolt.setDamage(DTModifierCheck.getDamage(projectile));
+        bolt.setDamage(ETModifierCheck.getDamage(projectile));
         level.addFreshEntity(bolt);
     }
 

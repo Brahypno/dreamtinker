@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.EntityHitResult;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.brahypno.dreamtinker.utils.DTHelper;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -114,7 +114,7 @@ public class ForOath extends Modifier implements ProjectileHitModifierHook, Proj
     @Override
     public boolean onProjectileHitEntity(ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile, EntityHitResult hit, @Nullable LivingEntity attacker, @Nullable LivingEntity target, boolean notBlocked) {
         if (notBlocked && attacker instanceof ServerPlayer player && projectile.level() instanceof ServerLevel && target != null){
-            float damage = DTModifierCheck.getDamage(projectile);
+            float damage = ETModifierCheck.getDamage(projectile);
             if (damage > 0.0F){
                 damage = applyOathEvilDamageBonus(target, player, modifier.getLevel(), damage);
                 if (projectile instanceof AbstractArrow arrow){
@@ -132,7 +132,7 @@ public class ForOath extends Modifier implements ProjectileHitModifierHook, Proj
     public void onProjectileLaunch(IToolStackView tool, ModifierEntry modifier, LivingEntity shooter, Projectile projectile, @Nullable AbstractArrow arrow, ModDataNBT persistentData, boolean primary) {
         if (shooter instanceof ServerPlayer player
             && shooter.level() instanceof ServerLevel serverLevel){
-            float damage = arrow != null ? (float) arrow.getBaseDamage() : DTModifierCheck.getDamage(projectile);
+            float damage = arrow != null ? (float) arrow.getBaseDamage() : ETModifierCheck.getDamage(projectile);
             grantGuardianAbsorption(player, serverLevel, damage, modifier.getLevel());
         }
 
@@ -142,7 +142,7 @@ public class ForOath extends Modifier implements ProjectileHitModifierHook, Proj
     public void onProjectileShoot(IToolStackView tool, ModifierEntry modifier, @Nullable LivingEntity shooter, ItemStack ammo, Projectile projectile, @Nullable AbstractArrow arrow, ModDataNBT persistentData, boolean primary) {
         if (shooter instanceof ServerPlayer player
             && shooter.level() instanceof ServerLevel serverLevel){
-            float damage = arrow != null ? (float) arrow.getBaseDamage() : DTModifierCheck.getDamage(projectile);
+            float damage = arrow != null ? (float) arrow.getBaseDamage() : ETModifierCheck.getDamage(projectile);
             grantGuardianAbsorption(player, serverLevel, damage, modifier.getLevel());
         }
     }

@@ -14,9 +14,9 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import org.brahypno.dreamtinker.Entity.CrescentSlashProjectile;
-import org.brahypno.dreamtinker.library.modifiers.DreamtinkerHook;
-import org.brahypno.dreamtinker.library.modifiers.hook.LeftClickHook;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.library.modifiers.EsotericismTinkerHook;
+import org.brahypno.esotericismtinker.library.modifiers.hook.LeftClickHook;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -66,7 +66,7 @@ public class MusouIsshinModifier extends Modifier implements LeftClickHook {
     private static void shootCrescent(IToolStackView tool, ModifierEntry modifier, ServerPlayer player, LivingEntity target) {
         ServerLevel level = player.serverLevel();
 
-        float power = 6.0F + (7.62f + 0.4f * (modifier.getLevel() - 1)) * DTModifierCheck.getMeleeDamage(player, target, tool, true);
+        float power = 6.0F + (7.62f + 0.4f * (modifier.getLevel() - 1)) * ETModifierCheck.getMeleeDamage(player, target, tool, true);
         int maxLife = 40 + 20 * modifier.getLevel();
         double speed = 1.35D + 0.15D * modifier.getLevel();
 
@@ -81,7 +81,7 @@ public class MusouIsshinModifier extends Modifier implements LeftClickHook {
 
     @Override
     public void registerHooks(ModuleHookMap.Builder hookBuilder) {
-        hookBuilder.addHook(this, DreamtinkerHook.LEFT_CLICK);
+        hookBuilder.addHook(this, EsotericismTinkerHook.LEFT_CLICK);
         hookBuilder.addModule(new RarityModule(Rarity.RARE));
         super.registerHooks(hookBuilder);
     }

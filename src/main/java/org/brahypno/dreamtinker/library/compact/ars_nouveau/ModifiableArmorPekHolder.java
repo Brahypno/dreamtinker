@@ -3,7 +3,7 @@ package org.brahypno.dreamtinker.library.compact.ars_nouveau;
 import com.hollingsworth.arsnouveau.api.perk.ArmorPerkHolder;
 import com.hollingsworth.arsnouveau.api.perk.PerkSlot;
 import net.minecraft.world.item.ItemStack;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -18,7 +18,7 @@ public class ModifiableArmorPekHolder extends ArmorPerkHolder {
     }
 
     public List<PerkSlot> getSlotsForTier() {
-        int level = DTModifierCheck.getItemModifierNum(stack, NovaRegistry.nova_magic_armor.getId());
+        int level = ETModifierCheck.getItemModifierNum(stack, NovaRegistry.nova_magic_armor.getId());
         level = Math.min(Math.max(level - 1, 0), slotsForTierWithLevels.size());
         List<PerkSlot> slots = new ArrayList<>(this.slotsForTierWithLevels.get(level).get(this.getTier()));
         slots.sort(Comparator.comparingInt((a) -> -a.value));

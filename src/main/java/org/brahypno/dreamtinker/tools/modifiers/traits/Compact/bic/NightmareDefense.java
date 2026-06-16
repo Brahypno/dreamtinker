@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -30,7 +30,7 @@ public class NightmareDefense extends Modifier implements InventoryTickModifierH
     public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         if (world.isClientSide)
             return;
-        if (2 == itemSlot && isCorrectSlot && stack.is(Tags.Items.ARMORS_CHESTPLATES) && DTModifierCheck.ModifierALLBody(holder, this.getId()))
+        if (2 == itemSlot && isCorrectSlot && stack.is(Tags.Items.ARMORS_CHESTPLATES) && ETModifierCheck.ModifierALLBody(holder, this.getId()))
             if (null != MAGIC_DEPLETION && holder.hasEffect(MAGIC_DEPLETION))
                 holder.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 30, 1, false, false));
 

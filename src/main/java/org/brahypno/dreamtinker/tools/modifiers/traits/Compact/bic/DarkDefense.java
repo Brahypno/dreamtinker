@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -34,7 +34,7 @@ public class DarkDefense extends Modifier implements EquipmentChangeModifierHook
     }
 
     public void onEquip(IToolStackView tool, ModifierEntry modifier, EquipmentChangeContext context) {
-        if (DTModifierCheck.ModifierALLBody(context.getEntity(), this.getId()) && !tool.isBroken() &&
+        if (ETModifierCheck.ModifierALLBody(context.getEntity(), this.getId()) && !tool.isBroken() &&
             ArmorLevelModule.validSlot(tool, context.getChangedSlot(), TinkerTags.Items.HELD_ARMOR)){
             context.getTinkerData().ifPresent((data) -> ((Multiset) data.computeIfAbsent(EFFECT_IMMUNITY)).add(MobEffects.WITHER));
         }
@@ -56,7 +56,7 @@ public class DarkDefense extends Modifier implements EquipmentChangeModifierHook
     public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         if (world.isClientSide && !(isCorrectSlot || isSelected))
             return;
-        if (2 == itemSlot && isCorrectSlot && stack.is(Tags.Items.ARMORS_CHESTPLATES) && DTModifierCheck.ModifierALLBody(holder, this.getId())){
+        if (2 == itemSlot && isCorrectSlot && stack.is(Tags.Items.ARMORS_CHESTPLATES) && ETModifierCheck.ModifierALLBody(holder, this.getId())){
             if (holder.hasEffect(MobEffects.WITHER))
                 holder.removeEffect(MobEffects.WITHER);
             CompoundTag data = holder.getPersistentData();

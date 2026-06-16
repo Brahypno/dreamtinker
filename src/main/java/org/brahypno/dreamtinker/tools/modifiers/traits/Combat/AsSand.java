@@ -5,10 +5,10 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
-import org.brahypno.dreamtinker.library.modifiers.DreamtinkerHook;
-import org.brahypno.dreamtinker.library.modifiers.hook.ProjectileHurtHook;
-import org.brahypno.dreamtinker.utils.CompactUtils.CuriosCompact;
 import org.brahypno.dreamtinker.utils.DTHelper;
+import org.brahypno.esotericismtinker.library.modifiers.EsotericismTinkerHook;
+import org.brahypno.esotericismtinker.library.modifiers.hook.ProjectileHurtHook;
+import org.brahypno.esotericismtinker.utils.CompactUtils.CuriosCompact;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -40,7 +40,7 @@ public class AsSand extends Modifier implements MeleeHitModifierHook, MonsterMel
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        hookBuilder.addHook(this, ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT, DreamtinkerHook.PROJECTILE_HURT);
+        hookBuilder.addHook(this, ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT, EsotericismTinkerHook.PROJECTILE_HURT);
         super.registerHooks(hookBuilder);
     }
 

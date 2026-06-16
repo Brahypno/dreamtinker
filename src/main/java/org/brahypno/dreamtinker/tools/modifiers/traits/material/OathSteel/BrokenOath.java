@@ -15,7 +15,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.brahypno.dreamtinker.Entity.WingSlashProjectile;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -132,7 +132,7 @@ public class BrokenOath extends Modifier implements ProjectileHitModifierHook, M
             return false;
         }
 
-        float damage = DTModifierCheck.getDamage(projectile);
+        float damage = ETModifierCheck.getDamage(projectile);
         if (damage <= 0.0F){
             damage = (float) projectile.getDeltaMovement().length();
         }

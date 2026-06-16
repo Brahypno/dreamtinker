@@ -9,8 +9,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.TooltipFlag;
 import org.brahypno.dreamtinker.Dreamtinker;
-import org.brahypno.dreamtinker.library.modifiers.DreamtinkerHook;
-import org.brahypno.dreamtinker.library.modifiers.hook.ProjectileHurtHook;
+import org.brahypno.esotericismtinker.library.modifiers.EsotericismTinkerHook;
+import org.brahypno.esotericismtinker.library.modifiers.hook.ProjectileHurtHook;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -41,7 +41,7 @@ public class knockArts extends Modifier implements ModifyDamageModifierHook, Mel
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
         hookBuilder.addHook(this, ModifierHooks.MODIFY_HURT, ModifierHooks.MELEE_DAMAGE, ModifierHooks.MONSTER_MELEE_DAMAGE,
-                            DreamtinkerHook.PROJECTILE_HURT, ModifierHooks.TOOLTIP);
+                            EsotericismTinkerHook.PROJECTILE_HURT, ModifierHooks.TOOLTIP);
         super.registerHooks(hookBuilder);
     }
 

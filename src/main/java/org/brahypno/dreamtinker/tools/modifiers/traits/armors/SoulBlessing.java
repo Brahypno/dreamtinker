@@ -15,7 +15,7 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -64,8 +64,8 @@ public class SoulBlessing extends Modifier implements InventoryTickModifierHook,
         LivingEntity entity = event.getEntity();
         if (entity.level().isClientSide || event.isCanceled())
             return;
-        for (EquipmentSlot slot : DTModifierCheck.slots) {
-            if (0 < DTModifierCheck.getModifierLevel(entity, DreamtinkerModifiers.soul_blessing.getId(), slot)){
+        for (EquipmentSlot slot : ETModifierCheck.slots) {
+            if (0 < ETModifierCheck.getModifierLevel(entity, DreamtinkerModifiers.soul_blessing.getId(), slot)){
                 ItemStack stack = entity.getItemBySlot(slot);
                 ToolStack ts = ToolStack.from(stack);
                 if (0 == ts.getPersistentData().getInt(TAG_SOUL_BOUND)){

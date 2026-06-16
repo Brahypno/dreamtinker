@@ -17,7 +17,7 @@ import net.minecraftforge.fml.ModList;
 import org.brahypno.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
 import org.brahypno.dreamtinker.tools.items.UnderArmorItem;
 import org.brahypno.dreamtinker.utils.CompactUtils.arsNovaUtils;
-import org.brahypno.dreamtinker.utils.DTModifierCheck;
+import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -62,7 +62,7 @@ public class NovaMagicArmor extends Modifier implements InventoryTickModifierHoo
     private void NovaWearAttributes(ItemAttributeModifierEvent event) {
         ItemStack stack = event.getItemStack();
         if (stack.getItem() instanceof ArmorItem armorItem && ModList.get().isLoaded("ars_nouveau") && !configCompactDisabled("ars_nouveau")){
-            if (stack.is(TinkerTags.Items.ARMOR) && 0 < DTModifierCheck.getItemModifierNum(stack, NovaRegistry.nova_magic_armor.getId())){
+            if (stack.is(TinkerTags.Items.ARMOR) && 0 < ETModifierCheck.getItemModifierNum(stack, NovaRegistry.nova_magic_armor.getId())){
                 if (!(stack.getItem() instanceof UnderArmorItem) && null != PerkRegistry.getPerkProvider(stack.getItem()))
                     return;//They would have their own ones.
                 EquipmentSlot slot = event.getSlotType();
