@@ -54,6 +54,7 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
     private static final EntityDataAccessor<FluidStack> FLUID;
     private static final EntityDataAccessor<Integer> CHASE_LIVING;
     private static final EntityDataAccessor<Integer> COLOR;
+    private int initialFluid;
     private float power;
     private int life = 30 * 20;
     private boolean crit;
@@ -78,6 +79,7 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
         this.setFluid(fluid);
         this.setPower(power);
         this.setTool(tool);
+        this.initialFluid = fluid.getAmount();
     }
 
     private FluidEffectContext.Builder buildContext() {
@@ -102,6 +104,10 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
         return (getChaseLiving() < 1 || p_36743_ instanceof EndCrystal ||
                 (p_36743_ instanceof LivingEntity entity && entity.isAlive() && !(p_36743_ instanceof ArmorStand))) &&
                (super.canHitEntity(p_36743_) || !p_36743_.isSpectator() && !p_36743_.canBeHitByProjectile());
+    }
+
+    public float getInitialFluid() {
+        return initialFluid;
     }
 
     /**
@@ -349,8 +355,9 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
                     if (null != toolStackView)
                         hate = Math.max(1, toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.hate_memory) + 1);
 
-                    int consumed = recipe.applyToEntity(fluid, NarcissusFluidFeedbacks.applyProjectileCatalyst(this, this.power / hate), context,
-                                                        IFluidHandler.FluidAction.EXECUTE);
+                    int consumed = recipe.applyToEntity(fluid, this.power, context, IFluidHandler.FluidAction.EXECUTE);
+                    if (0 == consumed)
+                        consumed = Math.max(100, initialFluid) / hate;
                     fluid.shrink(consumed);
                     if (fluid.isEmpty()){
                         this.discard();

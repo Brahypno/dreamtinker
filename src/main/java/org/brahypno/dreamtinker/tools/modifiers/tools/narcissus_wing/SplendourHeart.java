@@ -47,7 +47,6 @@ import slimeknights.tconstruct.library.modifiers.hook.build.VolatileDataModifier
 import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
-import slimeknights.tconstruct.library.modifiers.modules.build.VolatileFlagModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.IndestructibleItemEntity;
 import slimeknights.tconstruct.library.tools.SlotType;
@@ -64,12 +63,25 @@ import java.util.function.BiConsumer;
 
 import static org.brahypno.dreamtinker.config.DreamtinkerCachedConfig.TheSplendourHeart;
 
-public class SplendourHeart extends Modifier implements MeleeHitModifierHook, InventoryTickModifierHook, ToolDamageModifierHook, ModifierRemovalHook, TooltipModifierHook, ToolStatsModifierHook, AttributesModifierHook, VolatileDataModifierHook, ProjectileHurtHook {
-    //According to PS5 achievement, 83 bronze, 36 silver 14 gold, 1 pla=>83 easy, 36 normal, 15 hard
-    //According to myself, tinker`s construct 3 have 21 easy, 13 normal, 3 hard achievements.
-    //In total 104 easy, 49 normal 18 hard=>60.8% easy, 28.6% normal,10.6% hard. so that
-    // 2 choice, number or percentage, I choose percentage. <25% negative 25-45% normal 45%-65% high 65-80% super 81%-100% excellent
-    private final ResourceLocation TAG_ADV_PERCENTAGE = Dreamtinker.getLocation("adv_percentage");
+public class SplendourHeart extends Modifier implements MeleeHitModifierHook, InventoryTickModifierHook,
+        ToolDamageModifierHook, ModifierRemovalHook, TooltipModifierHook, ToolStatsModifierHook,
+        AttributesModifierHook, VolatileDataModifierHook, ProjectileHurtHook {
+
+    private static final ResourceLocation TAG_ADV_PERCENTAGE = Dreamtinker.getLocation("adv_percentage");
+
+    private static final int ALLOWED_EXTRA_TIMES = 1;
+    private static final ThreadLocal<Integer> EXTRA_ATTACK_DEPTH = ThreadLocal.withInitial(() -> 0);
+
+    @Nullable
+    private static SplendourData getSplendourData(IModDataView data) {
+        if (!data.contains(TAG_ADV_PERCENTAGE)){
+            return null;
+        }
+
+        float percentage = data.getFloat(TAG_ADV_PERCENTAGE);
+        int level = splendourLevel(percentage);
+        return new SplendourData(percentage, level, rangeToValue(percentage, level));
+    }
 
     @Override
     public int getPriority() {
@@ -82,210 +94,170 @@ public class SplendourHeart extends Modifier implements MeleeHitModifierHook, In
         return null;
     }
 
+    private static int splendourLevel(float percentage) {
+        List<? extends Double> ranges = TheSplendourHeart.get();
+
+        int level = 0;
+        while (level < ranges.size() && percentage >= ranges.get(level)) {
+            level++;
+        }
+
+        return level;
+    }
+
+    private static String rangeToText(int level) {
+        return switch (level) {
+            case 0 -> "_entry";
+            case 1 -> "_easy";
+            case 2 -> "_normal";
+            case 3 -> "_high";
+            default -> "_excellent";
+        };
+    }
+
+    private static float rangeToValue(float percentage, int level) {
+        List<? extends Double> ranges = TheSplendourHeart.get();
+
+        return switch (level) {
+            case 0 -> (float) (((percentage - ranges.get(0)) / ranges.get(0) / 2.0D) + 1.0D);
+            case 1 -> (float) (((percentage - ranges.get(0)) / (ranges.get(1) - ranges.get(0))) + 1.0D);
+            case 2 -> (float) (3.0D + 1.5D * Math.pow((percentage - ranges.get(1)) / (ranges.get(2) - ranges.get(1)), 1.25D));
+            case 3 -> (float) (4.5D + 2.0D * Math.pow((percentage - ranges.get(2)) / (ranges.get(3) - ranges.get(2)), 1.45D));
+            default -> (float) (6.5D + 1.5D * Math.pow((percentage - ranges.get(3)) / (ranges.get(4) - ranges.get(3)), 1.75D));
+        };
+    }
+
+    private static String percent(float value) {
+        return String.format("%.2f", value * 100) + "%";
+    }
+
     @Override
-    public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
-        if (!world.isClientSide && holder instanceof ServerPlayer sp && world.getGameTime() % 20 == 0){
-            var count = AdvCountEvents.AdvCountService.getCounts(sp);
-            float old = tool.getPersistentData().getFloat(TAG_ADV_PERCENTAGE);
-            float cur = (float) count.done() / count.total();
-            if (cur != old){
-                tool.getPersistentData().putFloat(TAG_ADV_PERCENTAGE, (float) count.done() / count.total());
-            }
+    public void onInventoryTick(
+            IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder,
+            int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
+        if (world.isClientSide || !(holder instanceof ServerPlayer sp) || world.getGameTime() % 20 != 0){
+            return;
+        }
+
+        var count = AdvCountEvents.AdvCountService.getCounts(sp);
+        double total = count.total();
+        float cur = total <= 0.0D ? 0.0F : (float) (count.done() / total);
+
+        ModDataNBT data = tool.getPersistentData();
+        if (!data.contains(TAG_ADV_PERCENTAGE) || data.getFloat(TAG_ADV_PERCENTAGE) != cur){
+            data.putFloat(TAG_ADV_PERCENTAGE, cur);
         }
     }
 
     @Override
-    public void addTooltip(IToolStackView tool, @NotNull ModifierEntry modifier, @javax.annotation.Nullable Player player, List<Component> tooltip, TooltipKey tooltipKey, TooltipFlag tooltipFlag) {
-        if (tool.getPersistentData().contains(TAG_ADV_PERCENTAGE)){
-            float per = tool.getPersistentData().getFloat(TAG_ADV_PERCENTAGE);
-            tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.splendour_heart").append(String.format("%.2f", per * 100) + "%")
-                                 .withStyle(this.getDisplayName().getStyle()));
-            tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.splendour_heart" + rangeToText(per))
-                                 .append(": " + String.format("%.2f", rangeToValue(per) * 100) + "%")
-                                 .withStyle(this.getDisplayName().getStyle()));
+    public void addTooltip(
+            IToolStackView tool, @NotNull ModifierEntry modifier, @Nullable Player player,
+            List<Component> tooltip, TooltipKey tooltipKey, TooltipFlag tooltipFlag) {
+        SplendourData splendour = getSplendourData(tool.getPersistentData());
+        if (splendour == null){
+            return;
         }
+
+        tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.splendour_heart")
+                             .append(percent(splendour.percentage()))
+                             .withStyle(this.getDisplayName().getStyle()));
+
+        tooltip.add(Component.translatable("modifier.dreamtinker.tooltip.splendour_heart" + rangeToText(splendour.level()))
+                             .append(": " + percent(splendour.value()))
+                             .withStyle(this.getDisplayName().getStyle()));
     }
 
     @Override
     public int onDamageTool(IToolStackView tool, ModifierEntry modifier, int amount, @Nullable LivingEntity holder) {
-        float per = tool.getPersistentData().getFloat(TAG_ADV_PERCENTAGE);
-        float value = rangeToValue(per);
-        return (int) (amount / value);
-    }
-
-    private static final int allowed_extra_times = 1;
-    private static final ThreadLocal<Integer> extra_attack_depth = ThreadLocal.withInitial(() -> 0);
-
-    @Override
-    public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
-        if (!tool.isBroken()){
-            float per = tool.getPersistentData().getFloat(TAG_ADV_PERCENTAGE);
-            int level = java.util.Arrays.binarySearch(TheSplendourHeart.get().toArray(), (double) Math.nextUp(per));
-            level = level <= 0 ? -(level) - 1 : level;
-            consumer.accept(ForgeMod.ENTITY_REACH.get(),
-                            new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
-                                                  this.getTranslationKey(),
-                                                  level,
-                                                  AttributeModifier.Operation.ADDITION));
+        SplendourData splendour = getSplendourData(tool.getPersistentData());
+        if (splendour == null){
+            return amount;
         }
 
+        return (int) (amount / splendour.value());
     }
 
+    @Override
+    public void addAttributes(
+            IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot,
+            BiConsumer<Attribute, AttributeModifier> consumer) {
+        SplendourData splendour = getSplendourData(tool.getPersistentData());
+        if (tool.isBroken() || splendour == null){
+            return;
+        }
+
+        consumer.accept(ForgeMod.ENTITY_REACH.get(),
+                        new AttributeModifier(
+                                UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
+                                this.getTranslationKey(),
+                                splendour.level(),
+                                AttributeModifier.Operation.ADDITION));
+    }
 
     @Override
     public void addToolStats(IToolContext context, ModifierEntry modifier, ModifierStatsBuilder builder) {
-        if (context.getPersistentData().contains(TAG_ADV_PERCENTAGE)){
-            float per = context.getPersistentData().getFloat(TAG_ADV_PERCENTAGE);
-            float value = rangeToValue(per);
-            int level = java.util.Arrays.binarySearch(TheSplendourHeart.get().toArray(), (double) Math.nextUp(per));
-            level = level <= 0 ? -(level) - 1 : level;
-            for (IToolStat<?> e : ToolStats.getAllStats()) {
-                if (e.supports(context.getItem())){
-                    if (e instanceof CapacityStat cps){
-                        cps.multiply(builder, 1 + value);
-                    }else if (e instanceof FloatToolStat fts){
-                        fts.multiply(builder, value);
-                    }
-                }
+        SplendourData splendour = getSplendourData(context.getPersistentData());
+        if (splendour == null){
+            return;
+        }
+
+        for (IToolStat<?> stat : ToolStats.getAllStats()) {
+            if (!stat.supports(context.getItem())){
+                continue;
             }
-            if (1 <= level){
-                Tier tier = builder.getStat(ToolStats.HARVEST_TIER);
-                int idx = Math.min(TierSortingRegistry.getSortedTiers().indexOf(tier) + level * 2, TierSortingRegistry.getSortedTiers().size() - 1);
-                Tier expected = TierSortingRegistry.getSortedTiers().get(idx);
-                ToolStats.HARVEST_TIER.update(builder, expected);
+
+            if (stat instanceof CapacityStat capacityStat){
+                capacityStat.multiply(builder, splendour.value());
+            }else if (stat instanceof FloatToolStat floatToolStat){
+                floatToolStat.multiply(builder, splendour.value());
             }
+        }
+
+        if (splendour.level() >= 1){
+            Tier tier = builder.getStat(ToolStats.HARVEST_TIER);
+            int oldIndex = TierSortingRegistry.getSortedTiers().indexOf(tier);
+            int newIndex = Math.min(oldIndex + splendour.level() * 2, TierSortingRegistry.getSortedTiers().size() - 1);
+            ToolStats.HARVEST_TIER.update(builder, TierSortingRegistry.getSortedTiers().get(newIndex));
         }
     }
 
     @Override
     public void addVolatileData(IToolContext context, ModifierEntry modifier, ToolDataNBT volatileData) {
-        if (context.getPersistentData().contains(TAG_ADV_PERCENTAGE)){
-            float per = context.getPersistentData().getFloat(TAG_ADV_PERCENTAGE);
-            int level = java.util.Arrays.binarySearch(TheSplendourHeart.get().toArray(), (double) Math.nextUp(per));
-            level = level < 0 ? -level - 1 : level;
-            if (1 < level){
-                for (SlotType st : SlotType.getAllSlotTypes())
-                    if (st != SlotType.ABILITY)
-                        volatileData.addSlots(st, (int) Math.pow(level, 2));
-                    else
-                        volatileData.addSlots(st, (int) Math.pow(level, 1));
+        SplendourData splendour = getSplendourData(context.getPersistentData());
+        if (splendour == null){
+            return;
+        }
+
+        volatileData.putBoolean(ModifierEvents.SOULBOUND, true);
+        volatileData.putBoolean(IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY, true);
+
+        if (splendour.level() <= 1){
+            return;
+        }
+
+        for (SlotType slotType : SlotType.getAllSlotTypes()) {
+            if (slotType != SlotType.ABILITY){
+                volatileData.addSlots(slotType, splendour.level());
+            }else {
+                volatileData.addSlots(slotType, 2 * splendour.level());
             }
         }
     }
 
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        if (tool.getPersistentData().contains(TAG_ADV_PERCENTAGE)){
-            float per = tool.getPersistentData().getFloat(TAG_ADV_PERCENTAGE);
-            int level = java.util.Arrays.binarySearch(TheSplendourHeart.get().toArray(), (double) Math.nextUp(per));
-            level = level < 0 ? -level - 1 : level;
-            LivingEntity victim = DTHelper.getLivingTarget(context.getTarget());
-            float boost = rangeToValue(per);
-            if (null != victim){
-                int depth = extra_attack_depth.get();
-                if (depth < allowed_extra_times){
-                    try {
-                        float damage = ETModifierCheck.getMeleeDamage(context.getAttacker(), context.getTarget(), tool, 2 < level);
-                        ResourceKey<DamageType> dmt =
-                                0 == level ? context.getAttacker() instanceof Player ? DamageTypes.PLAYER_ATTACK : DamageTypes.MOB_ATTACK :
-                                1 == level ? DreamtinkerDamageTypes.arcane_damage :
-                                2 == level ? dmtRandom(context.getLevel(), context.getLevel().random) : DreamtinkerDamageTypes.NULL_VOID;
-                        victim.invulnerableTime = 0;
-                        extra_attack_depth.set(depth + 1);
-                        if (level < 2)
-                            DamageProbe.damageHandler(victim, DreamtinkerDamageTypes.source(victim.level().registryAccess(), dmt, null, context.getAttacker()),
-                                                      damage * (boost + 1));
-                        else
-                            DamageProbe.finalDamageMethod(victim,
-                                                          DreamtinkerDamageTypes.source(victim.level().registryAccess(), dmt, null, context.getAttacker()),
-                                                          damage * (boost + 1));
-                    }
-                    finally {
-                        extra_attack_depth.set(depth);
-                    }
-                }
-            }
-        }
-        if (context.isExtraAttack())
+        SplendourData splendour = getSplendourData(tool.getPersistentData());
+        if (splendour == null){
             return;
-        double range = 3 + tool.getModifierLevel(TinkerModifiers.expanded.getId());
-        // allow having no range until modified with range
-        if (range > 0){
-            double rangeSq = range * range;
-            LivingEntity attacker = context.getAttacker();
-            Entity target = context.getTarget();
-            Level level = attacker.level();
-            for (LivingEntity aoeTarget : level.getEntitiesOfClass(LivingEntity.class, target.getBoundingBox().inflate(range, 0.25D, range))) {
-                if (tool.isBroken()){
-                    break;
-                }
-                if (aoeTarget != attacker && aoeTarget != target && !attacker.isAlliedTo(aoeTarget) && ToolAttackUtil.isAttackable(attacker, aoeTarget)
-                    && !(aoeTarget instanceof ArmorStand stand && stand.isMarker()) && target.distanceToSqr(aoeTarget) < rangeSq){
-                    ToolAttackUtil.performAttack(tool, context.withAOETarget(aoeTarget));
-                }
-            }
-
-            level.playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, attacker.getSoundSource(), 1.0F, 1.0F);
         }
-    }
 
-    @Override
-    public float modifyProjectileHurt(
-            ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier, Projectile projectile,
-            DamageSource source, @Nullable LivingEntity attacker, LivingEntity target, float amount) {
-        if (attacker instanceof ServerPlayer player){
-            int kills = player.getStats().getValue(Stats.ENTITY_KILLED.get(target.getType()));
-            return amount * (1.0F + kills * 0.01F);
+        applySplendourExtraDamage(tool, context, splendour);
+
+        if (context.isExtraAttack()){
+            return;
         }
-        return amount;
-    }
 
-    private String rangeToText(float d) {
-        int level = java.util.Arrays.binarySearch(TheSplendourHeart.get().toArray(), (double) Math.nextUp(d));
-        level = level <= 0 ? -(level) - 1 : level;
-
-        switch (level) {
-            case 0 -> {return "_entry";}
-            case 1 -> {return "_easy";}
-            case 2 -> {return "_normal";}
-            case 3 -> {return "_high";}
-            default -> {return "_excellent";}
-        }
-    }
-
-    private float rangeToValue(float d) {
-        int level = java.util.Arrays.binarySearch(TheSplendourHeart.get().toArray(), (double) Math.nextUp(d));
-        level = level < 0 ? -level - 1 : level;
-        switch (level) {
-            case 0 -> {return (float) ((d - TheSplendourHeart.get().get(0)) / TheSplendourHeart.get().get(0) / 2) + 1;}//map to -50%-0
-            case 1 -> {
-                return (float) (d - (TheSplendourHeart.get().get(0)) / (TheSplendourHeart.get().get(1) - TheSplendourHeart.get().get(0)) + 1);
-            }//map to 0-100%
-            case 2 -> {
-                return (float) (3.0D + 1.5D * Math.pow((d - TheSplendourHeart.get().get(1)) /
-                                                       (TheSplendourHeart.get().get(2) - TheSplendourHeart.get().get(1)), 1.25D));
-            } // map to 200%-350%
-
-            case 3 -> {
-                return (float) (4.5D + 2.0D * Math.pow((d - TheSplendourHeart.get().get(2)) /
-                                                       (TheSplendourHeart.get().get(3) - TheSplendourHeart.get().get(2)), 1.45D));
-            } // map to 350%-550%
-            default -> {
-                return (float) (6.5D + 1.5D * Math.pow((d - TheSplendourHeart.get().get(3)) /
-                                                       (TheSplendourHeart.get().get(4) - TheSplendourHeart.get().get(3)), 1.75D));
-            } // map to 550%-700%
-            //highest tier, should show respect to that do such lots of advancements-----and this is not enough
-        }
-    }
-
-    @Override
-    protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
-        hookBuilder.addHook(this, ModifierHooks.MELEE_HIT, ModifierHooks.INVENTORY_TICK, ModifierHooks.TOOL_DAMAGE,
-                            ModifierHooks.REMOVE, ModifierHooks.TOOLTIP, ModifierHooks.TOOL_STATS, ModifierHooks.ATTRIBUTES, ModifierHooks.VOLATILE_DATA,
-                            EsotericismTinkerHook.PROJECTILE_HURT);
-        hookBuilder.addModule(new VolatileFlagModule(ModifierEvents.SOULBOUND));
-        hookBuilder.addModule(new VolatileFlagModule(IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY));
-        super.registerHooks(hookBuilder);
+        performSplendourSweep(tool, context);
     }
 
     @Override
@@ -293,10 +265,112 @@ public class SplendourHeart extends Modifier implements MeleeHitModifierHook, In
         afterMeleeHit(tool, modifier, context, damageAttempted);
     }
 
+    @Override
+    public float modifyProjectileHurt(
+            ModifierNBT modifiers, ModDataNBT persistentData, ModifierEntry modifier,
+            Projectile projectile, DamageSource source, @Nullable LivingEntity attacker,
+            LivingEntity target, float amount) {
+        if (!persistentData.contains(TAG_ADV_PERCENTAGE)){
+            return amount;
+        }
+
+        if (attacker instanceof ServerPlayer player){
+            int kills = player.getStats().getValue(Stats.ENTITY_KILLED.get(target.getType()));
+            return amount * (1.0F + kills * 0.01F);
+        }
+
+        return amount;
+    }
+
+    private void applySplendourExtraDamage(IToolStackView tool, ToolAttackContext context, SplendourData splendour) {
+        LivingEntity victim = DTHelper.getLivingTarget(context.getTarget());
+        if (victim == null){
+            return;
+        }
+
+        int depth = EXTRA_ATTACK_DEPTH.get();
+        if (depth >= ALLOWED_EXTRA_TIMES){
+            return;
+        }
+
+        try {
+            float damage = ETModifierCheck.getMeleeDamage(context.getAttacker(), context.getTarget(), tool, splendour.level() > 2);
+            ResourceKey<DamageType> damageType = damageTypeFor(context, splendour.level());
+            DamageSource source = DreamtinkerDamageTypes.source(victim.level().registryAccess(), damageType, null, context.getAttacker());
+
+            victim.invulnerableTime = 0;
+            EXTRA_ATTACK_DEPTH.set(depth + 1);
+
+            if (splendour.level() < 2){
+                DamageProbe.damageHandler(victim, source, damage * splendour.value());
+            }else {
+                DamageProbe.finalDamageMethod(victim, source, damage * splendour.value());
+            }
+        }
+        finally {
+            EXTRA_ATTACK_DEPTH.set(depth);
+        }
+    }
+
+    private void performSplendourSweep(IToolStackView tool, ToolAttackContext context) {
+        double range = 3 + tool.getModifierLevel(TinkerModifiers.expanded.getId());
+        if (range <= 0){
+            return;
+        }
+
+        double rangeSq = range * range;
+        LivingEntity attacker = context.getAttacker();
+        Entity target = context.getTarget();
+        Level level = attacker.level();
+
+        for (LivingEntity aoeTarget : level.getEntitiesOfClass(
+                LivingEntity.class,
+                target.getBoundingBox().inflate(range, 0.25D, range))) {
+            if (tool.isBroken()){
+                break;
+            }
+
+            if (aoeTarget != attacker
+                && aoeTarget != target
+                && !attacker.isAlliedTo(aoeTarget)
+                && ToolAttackUtil.isAttackable(attacker, aoeTarget)
+                && !(aoeTarget instanceof ArmorStand stand && stand.isMarker())
+                && target.distanceToSqr(aoeTarget) < rangeSq){
+                ToolAttackUtil.performAttack(tool, context.withAOETarget(aoeTarget));
+            }
+        }
+
+        level.playSound(null, attacker.getX(), attacker.getY(), attacker.getZ(), SoundEvents.PLAYER_ATTACK_SWEEP, attacker.getSoundSource(), 1.0F, 1.0F);
+    }
+
+    private ResourceKey<DamageType> damageTypeFor(ToolAttackContext context, int level) {
+        return switch (level) {
+            case 0 -> context.getAttacker() instanceof Player ? DamageTypes.PLAYER_ATTACK : DamageTypes.MOB_ATTACK;
+            case 1 -> DreamtinkerDamageTypes.arcane_damage;
+            case 2 -> dmtRandom(context.getLevel(), context.getLevel().random);
+            default -> DreamtinkerDamageTypes.NULL_VOID;
+        };
+    }
+
     @NotNull
     private ResourceKey<DamageType> dmtRandom(Level level, RandomSource random) {
-        ResourceKey<DamageType> dmt =
-                DreamtinkerDamageTypes.getRandomDamageTypeWithTags(level, random, DamageTypeTags.BYPASSES_ARMOR, DamageTypeTags.BYPASSES_ENCHANTMENTS);
-        return null == dmt ? DamageTypes.SONIC_BOOM : dmt;
+        ResourceKey<DamageType> damageType = DreamtinkerDamageTypes.getRandomDamageTypeWithTags(
+                level,
+                random,
+                DamageTypeTags.BYPASSES_ARMOR,
+                DamageTypeTags.BYPASSES_ENCHANTMENTS);
+
+        return damageType == null ? DamageTypes.SONIC_BOOM : damageType;
     }
+
+    @Override
+    protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
+        hookBuilder.addHook(this, ModifierHooks.MELEE_HIT, ModifierHooks.INVENTORY_TICK, ModifierHooks.TOOL_DAMAGE, ModifierHooks.REMOVE,
+                            ModifierHooks.TOOLTIP, ModifierHooks.TOOL_STATS, ModifierHooks.ATTRIBUTES, ModifierHooks.VOLATILE_DATA,
+                            EsotericismTinkerHook.PROJECTILE_HURT);
+
+        super.registerHooks(hookBuilder);
+    }
+
+    private record SplendourData(float percentage, int level, float value) {}
 }
