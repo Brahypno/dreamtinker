@@ -1,13 +1,17 @@
 package org.brahypno.dreamtinker.common.event.recipes;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.level.LevelEvent;
@@ -72,14 +76,14 @@ public class moonlightConversion {
             UUID id = entry.getKey();
             ItemEntity item = entry.getValue();
 
-            if (item == null || item.isRemoved() || !item.isAlive() || item.level() != level || !item.getItem().is(Items.BLUE_ICE)){
+            if (item == null || item.isRemoved() || !item.isAlive() || !item.getItem().is(Items.BLUE_ICE)){
                 iterator.remove();
                 nextConversionTick.remove(id);
                 nextHintTick.remove(id);
                 continue;
             }
 
-            if (!item.isInWater())
+            if (!isTouchingWater(level, item))
                 continue;
 
             if (!allowedMoonlight){
@@ -154,5 +158,31 @@ public class moonlightConversion {
         nextConversionTick.clear();
         nextHintTick.clear();
         DTPartInfoLookup.clearCaches();
+    }
+
+    private static boolean isTouchingWater(Level level, ItemEntity item) {
+        AABB box = item.getBoundingBox().inflate(0.05D);
+
+        int minX = Mth.floor(box.minX);
+        int maxX = Mth.floor(box.maxX);
+        int minY = Mth.floor(box.minY);
+        int maxY = Mth.floor(box.maxY);
+        int minZ = Mth.floor(box.minZ);
+        int maxZ = Mth.floor(box.maxZ);
+
+        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
+
+        for (int x = minX; x <= maxX; x++) {
+            for (int y = minY; y <= maxY; y++) {
+                for (int z = minZ; z <= maxZ; z++) {
+                    pos.set(x, y, z);
+                    if (level.getFluidState(pos).is(FluidTags.WATER)){
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 }
