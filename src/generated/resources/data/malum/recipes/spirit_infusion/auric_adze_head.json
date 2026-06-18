@@ -53,7 +53,8 @@
     ]
   },
   "output": {
-    "item": "tconstruct:adze_head"
+    "item": "tconstruct:adze_head",
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic#auric\"}"
   },
   "spirits": [
     {

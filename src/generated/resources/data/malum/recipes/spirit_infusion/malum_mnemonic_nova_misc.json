@@ -53,7 +53,8 @@
     ]
   },
   "output": {
-    "item": "dreamtinker:nova_misc"
+    "item": "dreamtinker:nova_misc",
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic\"}"
   },
   "spirits": [
     {

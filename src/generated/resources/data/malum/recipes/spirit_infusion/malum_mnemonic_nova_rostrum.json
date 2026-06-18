@@ -53,7 +53,8 @@
     ]
   },
   "output": {
-    "item": "dreamtinker:nova_rostrum"
+    "item": "dreamtinker:nova_rostrum",
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic\"}"
   },
   "spirits": [
     {

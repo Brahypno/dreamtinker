@@ -24,7 +24,8 @@
   },
   "output": {
     "count": 8,
-    "item": "minecraft:potion"
+    "item": "minecraft:potion",
+    "nbt": "{Potion:\"dreamtinker:arcana_juice\"}"
   },
   "spirits": [
     {

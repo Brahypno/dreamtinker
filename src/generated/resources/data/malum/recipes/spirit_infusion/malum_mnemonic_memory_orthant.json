@@ -43,7 +43,8 @@
     "item": "dreamtinker:memory_cast"
   },
   "output": {
-    "item": "dreamtinker:memory_orthant"
+    "item": "dreamtinker:memory_orthant",
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic\"}"
   },
   "spirits": [
     {

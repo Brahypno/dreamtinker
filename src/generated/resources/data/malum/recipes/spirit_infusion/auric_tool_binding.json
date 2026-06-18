@@ -53,7 +53,8 @@
     ]
   },
   "output": {
-    "item": "tconstruct:tool_binding"
+    "item": "tconstruct:tool_binding",
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic#auric\"}"
   },
   "spirits": [
     {

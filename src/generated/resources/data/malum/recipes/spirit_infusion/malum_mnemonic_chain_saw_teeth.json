@@ -53,7 +53,8 @@
     ]
   },
   "output": {
-    "item": "dreamtinker:chain_saw_teeth"
+    "item": "dreamtinker:chain_saw_teeth",
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic\"}"
   },
   "spirits": [
     {

@@ -53,7 +53,8 @@
     ]
   },
   "output": {
-    "item": "tconstruct:small_blade"
+    "item": "tconstruct:small_blade",
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic\"}"
   },
   "spirits": [
     {

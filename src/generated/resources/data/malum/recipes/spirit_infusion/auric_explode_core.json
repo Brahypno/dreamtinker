@@ -43,7 +43,8 @@
     "item": "dreamtinker:explode_core"
   },
   "output": {
-    "item": "dreamtinker:explode_core"
+    "item": "dreamtinker:explode_core",
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic#auric\"}"
   },
   "spirits": [
     {

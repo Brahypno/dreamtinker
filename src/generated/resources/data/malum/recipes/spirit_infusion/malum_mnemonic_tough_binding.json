@@ -53,7 +53,8 @@
     ]
   },
   "output": {
-    "item": "tconstruct:tough_binding"
+    "item": "tconstruct:tough_binding",
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic\"}"
   },
   "spirits": [
     {

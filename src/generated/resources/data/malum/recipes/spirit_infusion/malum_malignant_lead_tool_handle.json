@@ -53,7 +53,8 @@
     ]
   },
   "output": {
-    "item": "tconstruct:tool_handle"
+    "item": "tconstruct:tool_handle",
+    "nbt": "{Material:\"dreamtinker:malum_malignant_lead\"}"
   },
   "spirits": [
     {

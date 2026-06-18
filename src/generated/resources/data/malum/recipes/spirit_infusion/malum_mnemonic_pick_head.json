@@ -53,7 +53,8 @@
     ]
   },
   "output": {
-    "item": "tconstruct:pick_head"
+    "item": "tconstruct:pick_head",
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic\"}"
   },
   "spirits": [
     {

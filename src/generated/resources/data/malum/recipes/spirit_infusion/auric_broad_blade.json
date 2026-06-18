@@ -53,7 +53,8 @@
     ]
   },
   "output": {
-    "item": "tconstruct:broad_blade"
+    "item": "tconstruct:broad_blade",
+    "nbt": "{Material:\"dreamtinker:malum_mnemonic#auric\"}"
   },
   "spirits": [
     {

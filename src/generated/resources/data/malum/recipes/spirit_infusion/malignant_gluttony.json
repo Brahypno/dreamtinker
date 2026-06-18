@@ -23,7 +23,8 @@
     "item": "malum:the_vessel"
   },
   "output": {
-    "item": "dreamtinker:malignant_gluttony"
+    "item": "dreamtinker:malignant_gluttony",
+    "nbt": "{Damage:0}"
   },
   "spirits": [
     {
