@@ -31,7 +31,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerSounds;
-import org.brahypno.dreamtinker.library.client.sound.ClientSoundChecker;
 import org.brahypno.dreamtinker.utils.DTHelper;
 import org.brahypno.dreamtinker.utils.DTMessages;
 import org.jetbrains.annotations.NotNull;
@@ -256,8 +255,6 @@ public class DeathShredder extends Modifier implements MeleeDamageModifierHook, 
             if (rotation < MAX_FORCE_FUEL / 2)//Minimum starting one
                 return;
         }
-
-        ClientSoundChecker.playWorldSound(entity, (byte) 1);
         boolean flag = false;
         for (int i = 0; i < Math.min(fuel_availables, electric_availables) && i < possibleList.size(); i++) {
             Entity victim = possibleList.get(i);
@@ -328,7 +325,6 @@ public class DeathShredder extends Modifier implements MeleeDamageModifierHook, 
 
     @Override
     public void onStoppedUsing(IToolStackView tool, ModifierEntry modifier, LivingEntity entity, int timeLeft) {
-        ClientSoundChecker.clearSoundCacheFor(entity);
         entity.level().playSound(
                 null,                      // 播给周围所有玩家
                 entity.getX(), entity.getY(), entity.getZ(),
