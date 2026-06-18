@@ -68,7 +68,8 @@ public class ItemTagProvider extends ItemTagsProvider {
                      BONUS_SLOTS, ItemTags.AXES, EsotericismTinkerTagKeys.Items.EsotericismTinkerTools);
         addItemsOptionalTags(NovaRegistry.per_aspera_scriptum, MULTIPART_TOOL, MELEE_WEAPON, BROAD_RANGED, BONUS_SLOTS, HARVEST, LAUNCHERS, HELD,
                              EsotericismTinkerTagKeys.Items.EsotericismTinkerTools);
-        addItemsTags(DreamtinkerTools.silence_glove, DURABILITY, MELEE, BONUS_SLOTS, ANCIENT_TOOLS, STAFFS, SHIELDS, Items.HANDS, Items.CURIOS,
+        addItemsTags(DreamtinkerTools.silence_glove, DURABILITY, MELEE, BONUS_SLOTS, ANCIENT_TOOLS, STAFFS, SHIELDS, Items.HANDS,
+                     EsotericismTinkerTagKeys.Items.CURIOS,
                      EsotericismTinkerTagKeys.Items.EsotericismTinkerTools);
         this.tag(DreamtinkerTagKeys.Items.modTag("occultism", "tools/knives"))
             .add(TinkerTools.cleaver.get());

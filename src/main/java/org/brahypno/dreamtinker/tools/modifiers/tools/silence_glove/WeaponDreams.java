@@ -37,17 +37,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.brahypno.dreamtinker.tools.modifiers.events.weaponDreamsEnsureEnds.TAG_LAST_USE;
-import static org.brahypno.dreamtinker.tools.modifiers.events.weaponDreamsEnsureEnds.startChosenDisplay;
+import static org.brahypno.dreamtinker.tools.modifiers.events.weaponDreamsEnsureEnds.*;
 
 public class WeaponDreams extends NoLevelsModifier implements LeftClickHook, RightClickHook, GeneralInteractionModifierHook {
+    private static final ThreadLocal<Boolean> IN_ATTACK = ThreadLocal.withInitial(() -> false);
+
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
         hookBuilder.addHook(this, EsotericismTinkerHook.LEFT_CLICK, EsotericismTinkerHook.RIGHT_CLICK, ModifierHooks.GENERAL_INTERACT);
         super.registerHooks(hookBuilder);
     }
-
-    private static final ThreadLocal<Boolean> IN_ATTACK = ThreadLocal.withInitial(() -> false);
 
     @Override
     public int getUseDuration(IToolStackView tool, ModifierEntry modifier) {
@@ -64,13 +63,15 @@ public class WeaponDreams extends NoLevelsModifier implements LeftClickHook, Rig
         return Integer.MAX_VALUE;
     }
 
-    @Override
-    public void onRightClickEmpty(IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot) {
-        if (IN_ATTACK.get())
+    private static void handleClientAttack(Player player, @Nullable Entity target) {
+        if (target == null)
             return;
-        if (player instanceof ServerPlayer sp && !level.isClientSide && player.getMainHandItem().isEmpty() && !player.isUsingItem()){
+
+        try {
             IN_ATTACK.set(true);
-            sp.gameMode.useItem(sp, level, CuriosCompact.findPreferredGlove(player), InteractionHand.MAIN_HAND);
+            player.attack(target);
+        }
+        finally {
             IN_ATTACK.set(false);
         }
     }
@@ -90,91 +91,67 @@ public class WeaponDreams extends NoLevelsModifier implements LeftClickHook, Rig
         left_click_3_in_one(event, tool, entry, player, level, equipmentSlot, target, null);
     }
 
-    private void left_click_3_in_one(@Nullable AttackEntityEvent event, IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot, @Nullable Entity target, @Nullable BlockState state) {
-        if (player == null)
-            return;
-
-        // 我们自己触发的二次/递归攻击，直接放行默认流程
-        if (IN_ATTACK.get())
-            return;
-        if (null != event)
-            event.setCanceled(true); // 我们接管
-        ItemStack proxy = player.getMainHandItem();
-        if (player.getCooldowns().isOnCooldown(DreamtinkerTools.silence_glove.asItem()))
-            return;
-
-        if (level.isClientSide){
-            // ===== 客户端：拦截默认，临时换手后调用 player.attack()（只在客户端调！） =====
-            try {
-                IN_ATTACK.set(true); // 二次事件放行
-                // 这行会：1) 再触发一次客户端 AttackEntityEvent（被 IN_ATTACK 放行，默认链按 chosen 走）
-                //       2) 发送服务端攻击包
-                if (null != target)
-                    player.attack(target);
-            }
-            finally {
-                // 当帧结束前还原显示；服务端随后也会通过背包同步/强制包让客户端回到一致的 proxy
-                IN_ATTACK.set(false);
-            }
-        }else {
-            // —— 按你的方式判断是否启用代理 & 取 InventoryModule —— //
-            ModifierEntry weapon_slots = tool.getModifier(DreamtinkerModifiers.Ids.weapon_slots);
-            if (weapon_slots.getLevel() < 1)
-                return;
-
-            List<ItemStack> frames = new ArrayList<>();
-            weapon_slots.getHook(ToolInventoryCapability.HOOK).getAllStacks(tool, weapon_slots, frames);
-            boolean tool_filter = 1 <= tool.getModifier(DreamtinkerModifiers.Ids.weapon_dreams_filter).getLevel();
-            boolean natural_order = 1 <= tool.getModifier(DreamtinkerModifiers.Ids.weapon_dreams_order).getLevel();
-            int chosenIdx;
-            int last_idx = !tool.getPersistentData().contains(TAG_LAST_USE) ? -1 : tool.getPersistentData().getInt(TAG_LAST_USE);
-
-            chosenIdx = chooseIndex(level, frames, state, natural_order, tool_filter, last_idx);
-            if (chosenIdx < 0)
-                return;
-            ItemStack chosen = frames.get(chosenIdx);
-            ItemStack proxySnap = proxy.copy();
-            if (chosen.isEmpty() || !chosen.is(TinkerTags.Items.MODIFIABLE))
-                return;
-            if (natural_order){
-                if (proxySnap.is(DreamtinkerTools.silence_glove.asItem())){
-                    ToolStack toolStack = ToolStack.from(proxySnap);
-                    toolStack.getPersistentData().putInt(TAG_LAST_USE, chosenIdx);
-                    toolStack.updateStack(proxySnap);
-                }else
-                    tool.getPersistentData().putInt(TAG_LAST_USE, chosenIdx);
-            }
-
-            // ===== 服务端：不要再调用 player.attack()，直接执行业务逻辑（chosen → 钩子 → 回写 → 还原） =====
-            ServerPlayer sp = (ServerPlayer) player;
-            int cooldownTicks = computeProxyCooldownTicks(tool);
-            // 临时换手仅为让某些钩子/附魔读取到正确主手；也可直接不用换手，仅把 chosen 传入钩子
-            update_hand(player, chosen);
-            // 1) 刚切换为 chosen 时，立即让客户端主手槽显示 chosen
-            Boolean MainEmpty = false;
-            if (proxySnap.isEmpty()){
-                MainEmpty = true;
-                proxySnap = CuriosCompact.findPreferredGlove(player);
-            }
-            startChosenDisplay(sp, chosenIdx, proxySnap, cooldownTicks, MainEmpty);
-
-            player.attackStrengthTicker = (int) Math.ceil(player.getCurrentItemAttackStrengthDelay());
-
-            // 你的实际攻击逻辑（不要再调 player.attack）
-            if (null != target)
-                chosen.getItem().onLeftClickEntity(chosen, player, target);
-            else if (null == state){
-                IToolStackView chosen_tool = ToolStack.from(chosen);
-                for (ModifierEntry chosen_entry : chosen_tool.getModifierList()) {
-                    chosen_entry.getHook(EsotericismTinkerHook.LEFT_CLICK).onLeftClickEmpty(chosen_tool, chosen_entry, player, level, equipmentSlot);
-                }
-            }
+    private static void callChosenLeftClickEmpty(ItemStack chosen, Player player, Level level, EquipmentSlot equipmentSlot) {
+        IToolStackView chosenTool = ToolStack.from(chosen);
+        for (ModifierEntry chosenEntry : chosenTool.getModifierList()) {
+            chosenEntry.getHook(EsotericismTinkerHook.LEFT_CLICK)
+                       .onLeftClickEmpty(chosenTool, chosenEntry, player, level, equipmentSlot);
         }
     }
 
-    private void update_hand(Player player, ItemStack stack) {
+    private static void update_hand(Player player, ItemStack stack) {
         player.setItemInHand(InteractionHand.MAIN_HAND, stack);
         player.getInventory().setChanged();
+    }
+
+    public static int chooseIndex(Level level, List<ItemStack> frames, @Nullable BlockState targetState, boolean noRandomCycle, boolean requireUsable, int lastIndex) {
+        List<Integer> nonEmpty = new ArrayList<>();
+        for (int i = 0; i < frames.size(); i++) {
+            if (!frames.get(i).isEmpty())
+                nonEmpty.add(i);
+        }
+
+        if (nonEmpty.isEmpty())
+            return -1;
+
+        List<Integer> usable = Collections.emptyList();
+        if (requireUsable){
+            usable = new ArrayList<>();
+            for (int i : nonEmpty) {
+                ItemStack stack = frames.get(i);
+                if ((targetState != null && canHarvest(targetState, stack)) || stack.is(TinkerTags.Items.MELEE_PRIMARY)){
+                    usable.add(i);
+                }
+            }
+        }
+
+        if (requireUsable && !usable.isEmpty()){
+            if (noRandomCycle)
+                return naturalCycle(usable, lastIndex);
+            if (usable.size() == 1)
+                return usable.get(0);
+            return usable.get(level.random.nextInt(usable.size()));
+        }
+
+        if (noRandomCycle)
+            return naturalCycle(nonEmpty, lastIndex);
+        if (nonEmpty.size() == 1)
+            return nonEmpty.get(0);
+        return nonEmpty.get(level.random.nextInt(nonEmpty.size()));
+    }
+
+    public static int naturalCycle(List<Integer> candidates, int lastIndex) {
+        if (candidates.isEmpty())
+            return -1;
+        if (candidates.size() == 1)
+            return candidates.get(0);
+
+        for (int idx : candidates) {
+            if (idx > lastIndex)
+                return idx;
+        }
+
+        return candidates.get(0);
     }
 
     public static int computeProxyCooldownTicks(IToolStackView toolStackView) {
@@ -182,94 +159,182 @@ public class WeaponDreams extends NoLevelsModifier implements LeftClickHook, Rig
         return Math.max(1, net.minecraft.util.Mth.ceil(20f / chosenSpeed));
     }
 
-    public static int chooseIndex(
-            Level level,
-            List<ItemStack> frames,
-            @Nullable BlockState targetState,
-            boolean NoRandomCycle,
-            boolean RequireUsable,
-            int lastIndex) {
+    private static void rightClickEmptyFromProxy(ServerPlayer sp, Level level) {
+        endChosen(sp);
 
-        // 收集所有非空
-        List<Integer> nonEmpty = new ArrayList<>();
-        for (int i = 0; i < frames.size(); i++) {
-            if (!frames.get(i).isEmpty()){
-                nonEmpty.add(i);
-            }
+        ItemStack proxyStack = CuriosCompact.findPreferredGlove(sp);
+        if (proxyStack.isEmpty())
+            return;
+
+        if (sp.getCooldowns().isOnCooldown(DreamtinkerTools.silence_glove.asItem()))
+            return;
+
+        ToolStack proxyTool = ToolStack.from(proxyStack);
+        ModifierEntry weaponSlots = proxyTool.getModifier(DreamtinkerModifiers.Ids.weapon_slots);
+        if (weaponSlots.getLevel() < 1)
+            return;
+
+        List<ItemStack> frames = new ArrayList<>();
+        weaponSlots.getHook(ToolInventoryCapability.HOOK)
+                   .getAllStacks(proxyTool, weaponSlots, frames);
+
+        boolean toolFilter = 1 <= proxyTool.getModifier(DreamtinkerModifiers.Ids.weapon_dreams_filter).getLevel();
+        boolean naturalOrder = 1 <= proxyTool.getModifier(DreamtinkerModifiers.Ids.weapon_dreams_order).getLevel();
+
+        int lastIdx = !proxyTool.getPersistentData().contains(TAG_LAST_USE)
+                      ? -1
+                      : proxyTool.getPersistentData().getInt(TAG_LAST_USE);
+
+        int chosenIdx = chooseIndex(level, frames, null, naturalOrder, toolFilter, lastIdx);
+        if (chosenIdx < 0)
+            return;
+
+        ItemStack chosen = borrowChosen(proxyStack, proxyTool, weaponSlots, frames, chosenIdx, naturalOrder);
+
+        if (chosen.isEmpty())
+            return;
+
+        int cooldownTicks = computeProxyCooldownTicks(proxyTool);
+        ItemStack proxySnap = proxyStack.copy();
+
+        update_hand(sp, chosen);
+        startChosenDisplay(sp, chosenIdx, proxySnap, cooldownTicks, true);
+
+        try {
+            IN_ATTACK.set(true);
+            sp.gameMode.useItem(sp, level, chosen, InteractionHand.MAIN_HAND);
         }
-        if (nonEmpty.isEmpty())
-            return -1; // 没东西可选
-        lastIndex = (lastIndex) % nonEmpty.size();
-
-
-        // B 只有在有 targetState 时才有意义，否则直接当没开 B
-
-        List<Integer> usable = Collections.emptyList();
-        if (RequireUsable){
-            usable = new ArrayList<>();
-            for (int i : nonEmpty) {
-                ItemStack s = frames.get(i);
-                if (targetState != null && canHarvest(targetState, s) || s.is(TinkerTags.Items.MELEE_PRIMARY))
-                    usable.add(i);
-            }
-        }
-
-        // ========== 情况分发 ==========
-
-        if (RequireUsable && !usable.isEmpty()){
-            // 有 B 且存在可用工具
-            if (NoRandomCycle){
-                // A + B：在 usable 中自然循环
-                return naturalCycle(usable, lastIndex);
-            }else {
-                // 仅 B：在 usable 中随机
-                if (usable.size() == 1){
-                    return usable.get(0);
-                }
-                return usable.get(level.random.nextInt(usable.size()));
-            }
-        }
-
-        // 走到这里两种情况：
-        // 1) 没开 B
-        // 2) 开了 B 但 usable 为空，需要按你说的回退到“非空逻辑”，由 A 决定选法
-
-        if (NoRandomCycle){
-            // 无 B 或 A+B 但无 usable：在 nonEmpty 中自然循环
-            return naturalCycle(nonEmpty, lastIndex);
-        }else {
-            // 无 A：在 nonEmpty 中随机
-            if (nonEmpty.size() == 1)
-                return nonEmpty.get(0);
-            return nonEmpty.get(level.random.nextInt(nonEmpty.size()));
+        finally {
+            IN_ATTACK.set(false);
         }
     }
 
-    // 自然循环: 从 lastIndex 之后找下一个候选，没有就回到第一个
-    public static int naturalCycle(List<Integer> candidates, int lastIndex) {
 
-        if (candidates.isEmpty()){
-            return -1;
-        }
-        if (candidates.size() == 1){
-            return candidates.get(0);
-        }
+    @Override
+    public void onRightClickEmpty(
+            IToolStackView tool, ModifierEntry entry, Player player,
+            Level level, EquipmentSlot equipmentSlot) {
+        if (IN_ATTACK.get())
+            return;
 
-        int chosen = candidates.get(0);
+        if (!(player instanceof ServerPlayer sp) || level.isClientSide || player.isUsingItem())
+            return;
 
-        for (int idx : candidates) {
-            if (idx > lastIndex){
-                chosen = idx;
-                break;
-            }
-        }
+        if (!player.getMainHandItem().isEmpty())
+            return;
+
+        rightClickEmptyFromProxy(sp, level);
+    }
+
+    private static ItemStack borrowChosen(
+            ItemStack proxyStack, ToolStack proxyTool, ModifierEntry weaponSlots,
+            List<ItemStack> frames, int chosenIdx, boolean naturalOrder) {
+        ItemStack chosen = frames.get(chosenIdx).copy();
+
+        if (chosen.isEmpty() || !chosen.is(TinkerTags.Items.MODIFIABLE))
+            return ItemStack.EMPTY;
+
+        if (naturalOrder)
+            proxyTool.getPersistentData().putInt(TAG_LAST_USE, chosenIdx);
+
+        weaponSlots.getHook(ToolInventoryCapability.HOOK)
+                   .setStack(proxyTool, weaponSlots, chosenIdx, ItemStack.EMPTY);
+
+        proxyTool.updateStack(proxyStack);
+
         return chosen;
     }
 
-    // 工具是否可用于该方块（只依赖 stack + state）
+    private void left_click_3_in_one(
+            @Nullable AttackEntityEvent event, IToolStackView tool, ModifierEntry entry,
+            Player player, Level level, EquipmentSlot equipmentSlot,
+            @Nullable Entity target, @Nullable BlockState state) {
+        if (player == null)
+            return;
+
+        if (IN_ATTACK.get())
+            return;
+
+        if (event != null)
+            event.setCanceled(true);
+
+        if (player.getCooldowns().isOnCooldown(DreamtinkerTools.silence_glove.asItem()))
+            return;
+
+        if (level.isClientSide){
+            try {
+                IN_ATTACK.set(true);
+
+                if (target != null)
+                    player.attack(target);
+            }
+            finally {
+                IN_ATTACK.set(false);
+            }
+
+            return;
+        }
+
+        ItemStack proxyStack = player.getMainHandItem();
+        boolean mainEmpty = proxyStack.isEmpty();
+
+        if (mainEmpty)
+            proxyStack = CuriosCompact.findPreferredGlove(player);
+
+        if (proxyStack.isEmpty())
+            return;
+
+        ToolStack proxyTool = ToolStack.from(proxyStack);
+        ModifierEntry weaponSlots = proxyTool.getModifier(DreamtinkerModifiers.Ids.weapon_slots);
+
+        if (weaponSlots.getLevel() < 1)
+            return;
+
+        List<ItemStack> frames = new ArrayList<>();
+        weaponSlots.getHook(ToolInventoryCapability.HOOK).getAllStacks(proxyTool, weaponSlots, frames);
+
+        boolean toolFilter = 1 <= proxyTool.getModifier(DreamtinkerModifiers.Ids.weapon_dreams_filter).getLevel();
+        boolean naturalOrder = 1 <= proxyTool.getModifier(DreamtinkerModifiers.Ids.weapon_dreams_order).getLevel();
+
+        int lastIdx = !proxyTool.getPersistentData().contains(TAG_LAST_USE)
+                      ? -1
+                      : proxyTool.getPersistentData().getInt(TAG_LAST_USE);
+
+        int chosenIdx = chooseIndex(level, frames, state, naturalOrder, toolFilter, lastIdx);
+
+        if (chosenIdx < 0)
+            return;
+
+        ItemStack chosen = borrowChosen(proxyStack, proxyTool, weaponSlots, frames, chosenIdx, naturalOrder);
+
+        if (chosen.isEmpty())
+            return;
+
+        ServerPlayer sp = (ServerPlayer) player;
+        int cooldownTicks = computeProxyCooldownTicks(proxyTool);
+        ItemStack proxySnap = proxyStack.copy();
+
+        update_hand(player, chosen);
+        startChosenDisplay(sp, chosenIdx, proxySnap, cooldownTicks, mainEmpty);
+
+        player.attackStrengthTicker = (int) Math.ceil(player.getCurrentItemAttackStrengthDelay());
+
+        if (target != null){
+            chosen.getItem().onLeftClickEntity(chosen, player, target);
+            return;
+        }
+
+        if (state == null){
+            IToolStackView chosenTool = ToolStack.from(chosen);
+
+            for (ModifierEntry chosenEntry : chosenTool.getModifierList()) {
+                chosenEntry.getHook(EsotericismTinkerHook.LEFT_CLICK)
+                           .onLeftClickEmpty(chosenTool, chosenEntry, player, level, equipmentSlot);
+            }
+        }
+    }
+
     private static boolean canHarvest(BlockState state, ItemStack stack) {
         return IsEffectiveToolHook.isEffective(ToolStack.from(stack), state);
     }
-
-
 }

@@ -74,11 +74,13 @@ public class addSilenceGloveCurio {
                 );
                 attributes.put(attr, scaled);
             }
-            attributes.put(Attributes.ATTACK_SPEED,
-                           new AttributeModifier(UUID.nameUUIDFromBytes((stack + "silence_attack_speed").getBytes()),
-                                                 stack.getDescriptionId(),
-                                                 tool.getStats().get(ToolStats.ATTACK_SPEED) - SilenceGloveBaseLineAttackSpeed.get(),
-                                                 AttributeModifier.Operation.ADDITION));
+            double speed = tool.getStats().get(ToolStats.ATTACK_SPEED) - SilenceGloveBaseLineAttackSpeed.get();
+            if (0 < speed)
+                attributes.put(Attributes.ATTACK_SPEED,
+                               new AttributeModifier(UUID.nameUUIDFromBytes((stack + "silence_attack_speed").getBytes()),
+                                                     stack.getDescriptionId(),
+                                                     speed,
+                                                     AttributeModifier.Operation.ADDITION));
 
             return attributes;
         }
