@@ -113,13 +113,13 @@ public class ShortEvents {
         if (0 < damage && source.getEntity() instanceof LivingEntity attacker){
             ItemStack activeStack = blocker.getUseItem();
             if (!activeStack.isEmpty() && activeStack.is(TinkerTags.Items.MODIFIABLE)){//Block amount already handled
-                int sweet = ETModifierCheck.getItemModifierNum(activeStack, DreamtinkerModifiers.Ids.sweet_death);
+                int sweet = ModifierUtil.getModifierLevel(activeStack, DreamtinkerModifiers.Ids.sweet_death);
                 if (0 < sweet && (/*originalDamage <= damage ||*/ activeStack.getUseDuration() - blocker.getUseItemRemainingTicks() <= 20 * 3 * sweet)){
                     // 伤害被完全格挡，或格挡持续时间不足2秒，则触发反伤
                     attacker.hurt(DreamtinkerDamageTypes.source(attacker.level().registryAccess(), DamageTypes.INDIRECT_MAGIC, null, blocker),
                                   damage * (0.25F * sweet));
                 }
-                int kiss = ETModifierCheck.getItemModifierNum(activeStack, DreamtinkerModifiers.Ids.last_kiss);
+                int kiss = ModifierUtil.getModifierLevel(activeStack, DreamtinkerModifiers.Ids.last_kiss);
                 if (0 < kiss && (activeStack.getUseDuration() - blocker.getUseItemRemainingTicks() <= 20 * 3 * kiss)){
                     AtomicInteger i = new AtomicInteger();
                     blocker.getActiveEffects().removeIf(effect -> effect.getEffect().getCategory() == MobEffectCategory.HARMFUL &&

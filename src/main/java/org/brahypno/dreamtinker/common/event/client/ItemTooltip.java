@@ -20,6 +20,7 @@ import org.brahypno.dreamtinker.utils.CompactUtils.EnigmaticLegacyCompact;
 import org.brahypno.dreamtinker.utils.CompactUtils.arsNovaUtils;
 import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import slimeknights.tconstruct.common.TinkerTags;
+import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.tools.TinkerToolParts;
 
 import static org.brahypno.esotericismtinker.EsotericismTinker.configCompactDisabled;
@@ -34,7 +35,7 @@ public class ItemTooltip {
         }
         if (ModList.get().isLoaded("ars_nouveau") && !configCompactDisabled("ars_nouveau")){
             if (null != e.getEntity() && e.getItemStack().is(TinkerTags.Items.ARMOR) &&
-                0 < ETModifierCheck.getItemModifierNum(e.getItemStack(), NovaRegistry.nova_magic_armor.getId())){
+                0 < ModifierUtil.getModifierLevel(e.getItemStack(), NovaRegistry.nova_magic_armor.getId())){
                 if (!(e.getItemStack().getItem() instanceof UnderArmorItem) && null != PerkRegistry.getPerkProvider(e.getItemStack().getItem()))
                     return;//They would have their own ones.
                 arsNovaUtils.appendHoverText(e.getItemStack(), e.getEntity().level(), e.getToolTip(), e.getFlags());

@@ -1,0 +1,20 @@
+{
+  "type": "esotericism_tinker:selenic_tinker_part",
+  "duration": 200,
+  "input": {
+    "item": "minecraft:blue_ice"
+  },
+  "lunar_phase": [
+    "full_moon",
+    "new_moon"
+  ],
+  "tconstruct_runtime_part": {
+    "material": "dreamtinker:moonlight_ice",
+    "stats": [
+      "tconstruct:head",
+      "tconstruct:binding",
+      "tconstruct:repair_kit",
+      "tconstruct:handle"
+    ]
+  }
+}

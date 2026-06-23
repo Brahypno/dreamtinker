@@ -291,7 +291,7 @@ public class as_one extends Modifier implements EquipmentChangeModifierHook, Mod
     }
 
     private boolean asOneStackBlocks(ItemStack stack, MobEffectInstance instance) {
-        if (stack.isEmpty() || ETModifierCheck.getItemModifierNum(stack, this.getId()) <= 0)
+        if (stack.isEmpty() || ModifierUtil.getModifierLevel(stack, this.getId()) <= 0)
             return false;
 
         Modes mode = Modes.fromInt(ModifierUtil.getPersistentInt(stack, TAG_MOD, 0));

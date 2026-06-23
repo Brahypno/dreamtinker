@@ -32,6 +32,7 @@ import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileHitModifi
 import slimeknights.tconstruct.library.module.ModuleHook;
 import slimeknights.tconstruct.library.tools.capability.EntityModifierCapability;
 import slimeknights.tconstruct.library.tools.capability.PersistentDataCapability;
+import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
@@ -135,9 +136,9 @@ public class SpellEvents {
                 event.currentCost *= (1 - lost);
         }
         event.currentCost -= 10 * ETModifierCheck.getEntityModifierNum(caster, DreamtinkerModifiers.Ids.nova_mana_reduce);
-        event.currentCost -= 0 < ETModifierCheck.getItemModifierNum(event.context.getCasterTool(), NovaRegistry.nova_enchanter_sword.getId()) ?
+        event.currentCost -= 0 < ModifierUtil.getModifierLevel(event.context.getCasterTool(), NovaRegistry.nova_enchanter_sword.getId()) ?
                              AugmentAmplify.INSTANCE.getCastingCost() : 0;
-        event.currentCost -= 0 < ETModifierCheck.getItemModifierNum(event.context.getCasterTool(), NovaRegistry.nova_spell_bow.getId()) ?
+        event.currentCost -= 0 < ModifierUtil.getModifierLevel(event.context.getCasterTool(), NovaRegistry.nova_spell_bow.getId()) ?
                              MethodProjectile.INSTANCE.getCastingCost() : 0;
     }
 

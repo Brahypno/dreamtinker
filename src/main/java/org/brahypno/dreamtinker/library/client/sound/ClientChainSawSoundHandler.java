@@ -9,7 +9,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
-import org.brahypno.esotericismtinker.utils.ETModifierCheck;
+import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class ClientChainSawSoundHandler {
@@ -47,6 +47,6 @@ public final class ClientChainSawSoundHandler {
         if (stack.isEmpty())
             return false;
 
-        return 0 < ETModifierCheck.getItemModifierNum(stack, DreamtinkerModifiers.death_shredder.getId());
+        return 0 < ModifierUtil.getModifierLevel(stack, DreamtinkerModifiers.death_shredder.getId());
     }
 }

@@ -1,14 +1,11 @@
 package org.brahypno.dreamtinker.utils;
 
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.brahypno.dreamtinker.common.DreamtinkerCommon;
 import org.brahypno.dreamtinker.smeltery.DreamTinkerSmeltery;
@@ -17,9 +14,6 @@ import slimeknights.tconstruct.library.materials.MaterialRegistry;
 import slimeknights.tconstruct.library.materials.definition.MaterialId;
 import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
 import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
-import slimeknights.tconstruct.library.recipe.TinkerRecipeTypes;
-import slimeknights.tconstruct.library.recipe.casting.material.MaterialCastingRecipe;
-import slimeknights.tconstruct.library.recipe.partbuilder.IPartBuilderRecipe;
 import slimeknights.tconstruct.library.tools.part.ToolPartItem;
 
 import java.util.*;
@@ -39,9 +33,6 @@ public final class DTPartInfoLookup {
 
     private DTPartInfoLookup() {}
 
-    public static void rebuildRuntime(Level level) {
-        rebuildRuntime(level.getRecipeManager(), level.registryAccess());
-    }
 
     public static List<ToolPartItem> partList(MaterialStatsId statsId) {
         return PARTS.computeIfAbsent(statsId, DTPartInfoLookup::scanParts);
@@ -53,17 +44,6 @@ public final class DTPartInfoLookup {
                                 .toList();
     }
 
-    public static List<ToolPartItem> runtimeParts(RecipeManager recipes, RegistryAccess access, MaterialStatsId statsId, int cost) {
-        return partList(statsId).stream()
-                                .filter(part -> runtimeCost(recipes, access, part) == cost)
-                                .toList();
-    }
-
-    public static List<ToolPartItem> runtimeParts(RecipeManager recipes, RegistryAccess access, List<MaterialStatsId> statsIds, int cost) {
-        return statsIds.stream()
-                       .flatMap(statsId -> runtimeParts(recipes, access, statsId, cost).stream())
-                       .toList();
-    }
 
     public static ItemStack datagenPart(MaterialId material, MaterialStatsId statsId, int cost, RandomSource random) {
         if (!MaterialRegistry.isFullyLoaded())
@@ -75,47 +55,12 @@ public final class DTPartInfoLookup {
         return withMaterial(part, MaterialRegistry.getMaterial(material).getIdentifier(), 1);
     }
 
-    public static ItemStack runtimePart(RecipeManager recipes, RegistryAccess access, MaterialId material, MaterialStatsId statsId, int cost, RandomSource random) {
-        if (!MaterialRegistry.isFullyLoaded())
-            return ItemStack.EMPTY;
-        List<ToolPartItem> parts = List.of();
-        for (int candidateCost = cost; candidateCost > 0 && parts.isEmpty(); candidateCost--) {
-            parts = runtimeParts(recipes, access, statsId, candidateCost);
-        }
-        if (parts.isEmpty())
-            return ItemStack.EMPTY;
-        ToolPartItem part = random == null ? parts.get(0) : parts.get(random.nextInt(parts.size()));
-        return withMaterial(part, MaterialRegistry.getMaterial(material).getIdentifier(), 1);
-    }
-
-    public static ItemStack runtimePart(RecipeManager recipes, RegistryAccess access, MaterialId material, List<MaterialStatsId> statsIds, int cost, RandomSource random) {
-        CostedPart result = runtimePartWithCost(recipes, access, material, statsIds, cost, random);
-        return result.stack();
-    }
-
     public static ItemStack withMaterial(ToolPartItem part, MaterialVariantId material, int count) {
         ItemStack stack = part.withMaterial(material);
         stack.setCount(count);
         return stack;
     }
 
-    public static void rebuildRuntime(RecipeManager recipes, RegistryAccess access) {
-        RUNTIME.clear();
-        recipes.getAllRecipesFor(TinkerRecipeTypes.PART_BUILDER.get()).stream()
-               .sorted(Comparator.comparing(IPartBuilderRecipe::getCost))
-               .forEach(recipe -> putRuntimeCost(recipe, access));
-        recipes.getAllRecipesFor(TinkerRecipeTypes.CASTING_TABLE.get()).stream()
-               .sorted(Comparator.comparing(recipe -> recipe.getId().toString()))
-               .filter(MaterialCastingRecipe.class::isInstance)
-               .map(MaterialCastingRecipe.class::cast)
-               .forEach(recipe -> putRuntimeCast(recipe, access));
-        runtimeBuilt = true;
-    }
-
-    public static void ensureRuntime(RecipeManager recipes, RegistryAccess access) {
-        if (!runtimeBuilt)
-            rebuildRuntime(recipes, access);
-    }
 
     public static void clearRuntime() {
         RUNTIME.clear();
@@ -127,19 +72,6 @@ public final class DTPartInfoLookup {
         DATAGEN_CASTS.clear();
         itemsByPath = null;
         clearRuntime();
-    }
-
-    public static PartInfo runtimeInfo(RecipeManager recipes, RegistryAccess access, ToolPartItem part) {
-        ensureRuntime(recipes, access);
-        return RUNTIME.getOrDefault(part, datagenInfo(part));
-    }
-
-    public static int runtimeCost(RecipeManager recipes, RegistryAccess access, ToolPartItem part) {
-        return runtimeInfo(recipes, access, part).cost();
-    }
-
-    public static Ingredient runtimeCastIngredient(RecipeManager recipes, RegistryAccess access, ToolPartItem part) {
-        return runtimeInfo(recipes, access, part).castIngredient();
     }
 
     public static PartInfo datagenInfo(ToolPartItem part) {
@@ -154,42 +86,6 @@ public final class DTPartInfoLookup {
         return datagenInfo(part).castIngredient();
     }
 
-    private static void putRuntimeCost(IPartBuilderRecipe recipe, RegistryAccess access) {
-        ItemStack output = recipe.getResultItem(access);
-        if (!output.isEmpty()){
-            PartInfo old = RUNTIME.get(output.getItem());
-            List<ItemStack> casts = old == null ? List.of() : old.casts();
-            RUNTIME.putIfAbsent(output.getItem(), new PartInfo(recipe.getCost(), casts));
-        }
-    }
-
-    public static CostedPart runtimePartWithCost(
-            RecipeManager recipes, RegistryAccess access, MaterialId material,
-            MaterialStatsId statsId, int maxCost, RandomSource random) {
-        return runtimePartWithCost(recipes, access, material, List.of(statsId), maxCost, random);
-    }
-
-    public static CostedPart runtimePartWithCost(
-            RecipeManager recipes, RegistryAccess access, MaterialId material,
-            List<MaterialStatsId> statsIds, int maxCost, RandomSource random) {
-        if (!MaterialRegistry.isFullyLoaded())
-            return CostedPart.empty();
-
-        for (int candidateCost = maxCost; candidateCost > 0; candidateCost--) {
-            List<ToolPartItem> parts = runtimeParts(recipes, access, statsIds, candidateCost);
-
-            if (parts.isEmpty())
-                continue;
-
-            ToolPartItem part = random == null ? parts.get(0) : parts.get(random.nextInt(parts.size()));
-            ItemStack stack = withMaterial(part, MaterialRegistry.getMaterial(material).getIdentifier(), 1);
-
-            return new CostedPart(stack, candidateCost);
-        }
-
-        return CostedPart.empty();
-    }
-
     private static List<ItemStack> datagenCastStacks(ToolPartItem part) {
         return DATAGEN_CASTS.computeIfAbsent(part, DTPartInfoLookup::scanDatagenCastStacks);
     }
@@ -200,24 +96,6 @@ public final class DTPartInfoLookup {
                                                     && part.getStatType() == statsId)
                                     .map(item -> (ToolPartItem) item)
                                     .toList();
-    }
-
-    private static void putRuntimeCast(MaterialCastingRecipe recipe, RegistryAccess access) {
-        ItemStack output = recipe.getResultItem(access);
-        if (output.isEmpty())
-            return;
-        PartInfo old = RUNTIME.get(output.getItem());
-        List<ItemStack> casts = old == null ? new ArrayList<>() : new ArrayList<>(old.casts());
-        addCastItems(casts, recipe.getCast().getItems());
-        int cost = old == null ? DEFAULT_COST : old.cost();
-        RUNTIME.put(output.getItem(), new PartInfo(cost, List.copyOf(casts)));
-    }
-
-    private static void addCastItems(List<ItemStack> out, ItemStack[] stacks) {
-        for (ItemStack stack : stacks) {
-            if (!stack.isEmpty() && out.stream().noneMatch(existing -> ItemStack.isSameItemSameTags(existing, stack)))
-                out.add(stack.copy());
-        }
     }
 
     private static List<ItemStack> scanDatagenCastStacks(ToolPartItem part) {

@@ -362,17 +362,17 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
                                 .setFluid(FluidIngredient.of(DreamtinkerFluids.molten_nigrescence_antimony.getTag(), FluidValues.GEM * 3))
                                 .setCoolingTime(10)
                                 .save(consumer, location(Casting_folder + "unborn_egg"));
-        ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.UnbornTurtleEgg.get())
+        ItemCastingRecipeBuilder.basinRecipe(DreamtinkerCommon.UnbornTurtleEgg.get())
                                 .setCast(Items.TURTLE_EGG, true)
                                 .setFluid(FluidIngredient.of(DreamtinkerFluids.molten_nigrescence_antimony.getTag(), FluidValues.GEM * 3))
                                 .setCoolingTime(10)
                                 .save(consumer, location(Casting_folder + "unborn_turtle_egg"));
-        ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.UnbornSnifferEgg.get())
+        ItemCastingRecipeBuilder.basinRecipe(DreamtinkerCommon.UnbornSnifferEgg.get())
                                 .setCast(Items.SNIFFER_EGG, true)
                                 .setFluid(FluidIngredient.of(DreamtinkerFluids.molten_nigrescence_antimony.getTag(), FluidValues.GEM * 3))
                                 .setCoolingTime(10)
                                 .save(consumer, location(Casting_folder + "unborn_sniffer_egg"));
-        ItemCastingRecipeBuilder.tableRecipe(DreamtinkerCommon.UnbornDragonEgg.get())
+        ItemCastingRecipeBuilder.basinRecipe(DreamtinkerCommon.UnbornDragonEgg.get())
                                 .setCast(Items.DRAGON_EGG, true)
                                 .setFluid(FluidIngredient.of(DreamtinkerFluids.molten_albedo_stibium.getTag(), FluidValues.GEM * 3))
                                 .setCoolingTime(10)

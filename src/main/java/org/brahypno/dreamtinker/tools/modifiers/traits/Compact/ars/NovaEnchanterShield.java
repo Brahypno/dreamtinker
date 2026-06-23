@@ -11,13 +11,13 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.ShieldBlockEvent;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
 import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
+import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 public class NovaEnchanterShield extends NoLevelsModifier implements InventoryTickModifierHook {
@@ -49,7 +49,7 @@ public class NovaEnchanterShield extends NoLevelsModifier implements InventoryTi
 
     private void shieldEvent(ShieldBlockEvent e) {
         if (!e.getEntity().level().isClientSide && e.getEntity() instanceof Player player && player.isBlocking()){
-            if (0 < ETModifierCheck.getItemModifierNum(player.getUseItem(), this.getId())){
+            if (0 < ModifierUtil.getModifierLevel(player.getUseItem(), this.getId())){
                 if (null != MANA_REGEN_EFFECT)
                     player.addEffect(new MobEffectInstance(MANA_REGEN_EFFECT, 200, 1));
                 if (null != SPELL_DAMAGE_EFFECT)

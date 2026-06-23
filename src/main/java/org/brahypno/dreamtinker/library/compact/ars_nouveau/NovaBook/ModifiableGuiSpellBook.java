@@ -2,7 +2,10 @@ package org.brahypno.dreamtinker.library.compact.ars_nouveau.NovaBook;
 
 import com.hollingsworth.arsnouveau.api.ArsNouveauAPI;
 import com.hollingsworth.arsnouveau.api.registry.GlyphRegistry;
-import com.hollingsworth.arsnouveau.api.spell.*;
+import com.hollingsworth.arsnouveau.api.spell.AbstractAugment;
+import com.hollingsworth.arsnouveau.api.spell.AbstractCastMethod;
+import com.hollingsworth.arsnouveau.api.spell.AbstractEffect;
+import com.hollingsworth.arsnouveau.api.spell.AbstractSpellPart;
 import com.hollingsworth.arsnouveau.client.ClientInfo;
 import com.hollingsworth.arsnouveau.client.gui.Color;
 import com.hollingsworth.arsnouveau.client.gui.book.GuiSpellBook;
@@ -24,7 +27,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
-import org.brahypno.esotericismtinker.utils.ETModifierCheck;
+import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -44,8 +47,8 @@ public class ModifiableGuiSpellBook extends GuiSpellBook {
                         new ArrayList<>(GlyphRegistry.getSpellpartMap().values().stream().filter(AbstractSpellPart::shouldShowInSpellBook).toList());
                 int tier = mb.getTier(heldStack).value;
                 this.spellValidator = new CombinedSpellValidator(
-                        new ISpellValidator[]{ArsNouveauAPI.getInstance().getSpellCraftingSpellValidator(), new GlyphMaxTierValidator(tier)});
-                int ui_slots = ETModifierCheck.getItemModifierNum(heldStack, DreamtinkerModifiers.Ids.nova_spell_slots);
+                        ArsNouveauAPI.getInstance().getSpellCraftingSpellValidator(), new GlyphMaxTierValidator(tier));
+                int ui_slots = ModifierUtil.getModifierLevel(heldStack, DreamtinkerModifiers.Ids.nova_spell_slots);
                 numLinks = Math.min(20, numLinks + ui_slots);
                 twoRows = this.numLinks > 10;
             }
@@ -225,7 +228,7 @@ public class ModifiableGuiSpellBook extends GuiSpellBook {
         int row_offset = page == 0 ? 2 : 0;
 
         for (int i = 0; i < sorted.size(); ++i) {
-            AbstractSpellPart part = (AbstractSpellPart) sorted.get(i);
+            AbstractSpellPart part = sorted.get(i);
             if (!foundForms && part instanceof AbstractCastMethod){
                 foundForms = true;
                 ++adjustedRowsPlaced;

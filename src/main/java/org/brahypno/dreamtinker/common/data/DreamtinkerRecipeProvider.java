@@ -27,6 +27,8 @@ import org.brahypno.dreamtinker.tools.data.DreamtinkerModifierRecipeProvider;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerPartToolBuildingRecipeProvider;
 import org.brahypno.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvider;
 import org.brahypno.dreamtinker.tools.data.material.DreamtinkerMaterialRecipeProvider;
+import org.brahypno.esotericismtinker.library.recipe.MoonPhase;
+import org.brahypno.esotericismtinker.library.recipe.selenic.builder.SelenicTinkerPartRecipeBuilder;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.recipe.data.ICommonRecipeHelper;
 import slimeknights.mantle.recipe.data.IRecipeHelper;
@@ -34,6 +36,9 @@ import slimeknights.mantle.recipe.ingredient.EntityIngredient;
 import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
 import slimeknights.tconstruct.library.recipe.modifiers.severing.SeveringRecipeBuilder;
 import slimeknights.tconstruct.tools.TinkerToolParts;
+import slimeknights.tconstruct.tools.stats.HandleMaterialStats;
+import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
+import slimeknights.tconstruct.tools.stats.StatlessMaterialStats;
 
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -56,6 +61,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IRecipe
         DreamtinkerEntityTransmuteRecipeProvider entityTransmute = new DreamtinkerEntityTransmuteRecipeProvider();
 
         addCraftingRecipes(consumer);
+        addSelenicRecipes(consumer);
         smeltery.addMeltingRecipes(consumer);
         smeltery.addCastingRecipes(consumer);
         smeltery.addAlloyRecipes(consumer);
@@ -241,6 +247,17 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IRecipe
         wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("malum"));
 
         fake_block_to_ingot(wrapped, DreamtinkerMaterialIds.malignant_gluttony, DreamtinkerCommon.malignant_gluttony.get());
+    }
+
+    public void addSelenicRecipes(Consumer<FinishedRecipe> consumer) {
+        SelenicTinkerPartRecipeBuilder.parts(DreamtinkerMaterialIds.moonlight_ice, HeadMaterialStats.ID, StatlessMaterialStats.BINDING.getIdentifier(),
+                                             StatlessMaterialStats.REPAIR_KIT.getIdentifier(),
+                                             HandleMaterialStats.ID)
+                                      .input(Ingredient.of(Items.BLUE_ICE))
+                                      .phases(MoonPhase.FULL_MOON, MoonPhase.NEW_MOON)
+                                      .save(consumer, location("selenic/parts/moonlight_ice"));
+
+
     }
 
     private void night_one_receipts(Consumer<FinishedRecipe> consumer, Item ingotLike, Item BlockLike) {

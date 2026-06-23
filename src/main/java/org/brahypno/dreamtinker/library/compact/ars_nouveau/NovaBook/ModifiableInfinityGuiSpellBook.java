@@ -3,7 +3,6 @@ package org.brahypno.dreamtinker.library.compact.ars_nouveau.NovaBook;
 import com.hollingsworth.arsnouveau.api.ArsNouveauAPI;
 import com.hollingsworth.arsnouveau.api.registry.GlyphRegistry;
 import com.hollingsworth.arsnouveau.api.spell.ISpellCaster;
-import com.hollingsworth.arsnouveau.api.spell.ISpellValidator;
 import com.hollingsworth.arsnouveau.api.util.CasterUtil;
 import com.hollingsworth.arsnouveau.client.gui.book.InfinityGuiSpellBook;
 import com.hollingsworth.arsnouveau.client.gui.buttons.GuiSpellSlot;
@@ -14,7 +13,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
-import org.brahypno.esotericismtinker.utils.ETModifierCheck;
+import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 
 import java.util.ArrayList;
 
@@ -29,8 +28,8 @@ public class ModifiableInfinityGuiSpellBook extends InfinityGuiSpellBook {
                 this.unlockedSpells = new ArrayList<>(GlyphRegistry.getSpellpartMap().values());
                 int tier = mb.getTier(heldStack).value;
                 this.spellValidator = new CombinedSpellValidator(
-                        new ISpellValidator[]{ArsNouveauAPI.getInstance().getSpellCraftingSpellValidator(), new GlyphMaxTierValidator(tier)});
-                int ui_slots = ETModifierCheck.getItemModifierNum(heldStack, DreamtinkerModifiers.Ids.nova_spell_slots);
+                        ArsNouveauAPI.getInstance().getSpellCraftingSpellValidator(), new GlyphMaxTierValidator(tier));
+                int ui_slots = ModifierUtil.getModifierLevel(heldStack, DreamtinkerModifiers.Ids.nova_spell_slots);
                 numLinks += ui_slots;
             }
         }

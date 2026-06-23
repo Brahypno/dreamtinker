@@ -39,9 +39,9 @@ import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerCommon;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.brahypno.dreamtinker.utils.DTToolsPartsHelper;
-import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.TinkerTags;
+import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -309,7 +309,7 @@ public class AggressiveFox extends Fox implements NeutralMob {
         if (this.level().isClientSide)
             return false;
         return stack.equals(storedWeapon) || ItemStack.isSameItemSameTags(stack, storedWeapon) ||
-               0 < ETModifierCheck.getItemModifierNum(stack, DreamtinkerModifiers.Ids.aggressiveFoxUsage);
+               0 < ModifierUtil.getModifierLevel(stack, DreamtinkerModifiers.Ids.aggressiveFoxUsage);
     }
 
     static {
