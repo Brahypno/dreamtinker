@@ -34,7 +34,7 @@
       "translate": "advancements.dreamtinker.tools.six_finger.description"
     },
     "frame": "goal",
-    "hidden": false,
+    "hidden": true,
     "icon": {
       "item": "dreamtinker:silence_glove",
       "nbt": "{tic_materials:[\"tconstruct:iron\",\"dreamtinker:black_sapphire\",\"dreamtinker:shadowskin\"]}"

@@ -63,7 +63,7 @@ public class AdvancementsProvider extends GenericDataProvider {
         Advancement dreamtinkerRoot = builderSilentRoot(
                 EsotericismTinkerCommon.hypnagogic_transmute.get(),
                 resource("root"),
-                resource("textures/block/transmute/ashen/ashen_road_back.png"),
+                resource("textures/gui/advancement_background.png"),
                 FrameType.TASK,
                 builder -> builder.addCriterion("tick", PlayerTrigger.TriggerInstance.tick())
         );
@@ -88,16 +88,16 @@ public class AdvancementsProvider extends GenericDataProvider {
         MaterialNBT nbt = MaterialNBT.of(MaterialVariant.of(MaterialIds.iron, ""), MaterialVariant.of(DreamtinkerMaterialIds.black_sapphire, ""),
                                          MaterialVariant.of(DreamtinkerMaterialIds.shadowskin, ""));
         ItemStack silence_glove = ToolBuildHandler.buildItemFromMaterials(DreamtinkerTools.silence_glove.get(), nbt);
-        builder(silence_glove,
-                resource("tools/six_finger"),
-                getSilenceGlove,
-                FrameType.GOAL,
-                builder -> builder.addCriterion(
-                        "damage",
-                        InventoryChangeTrigger.TriggerInstance.hasItems(
-                                ToolStackItemPredicate.ofTool(sixHandPredicate)
-                        )
-                ));
+        builderHidden(silence_glove,
+                      resource("tools/six_finger"),
+                      getSilenceGlove,
+                      FrameType.GOAL,
+                      builder -> builder.addCriterion(
+                              "damage",
+                              InventoryChangeTrigger.TriggerInstance.hasItems(
+                                      ToolStackItemPredicate.ofTool(sixHandPredicate)
+                              )
+                      ));
 
         /*
          * Materials line:

@@ -7,7 +7,7 @@
   },
   "display": {
     "announce_to_chat": false,
-    "background": "dreamtinker:textures/block/transmute/ashen/ashen_road_back.png",
+    "background": "dreamtinker:textures/gui/advancement_background.png",
     "description": {
       "translate": "advancements.dreamtinker.root.description"
     },
