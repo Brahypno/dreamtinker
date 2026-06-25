@@ -237,7 +237,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.malignant_gluttony,
                          new HeadMaterialStats(1200, 3.0f, Tiers.NETHERITE, 0f),
-                         HandleMaterialStats.multipliers().durability(0.5f).miningSpeed(0.6f).attackDamage(1.2f).attackSpeed(1.2f).build(),
+                         HandleMaterialStats.multipliers().durability(0.5f).miningSpeed(0.6f).attackDamage(1.7f).attackSpeed(1.6f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.astral_weave,
                          StatlessMaterialStats.BINDING);
