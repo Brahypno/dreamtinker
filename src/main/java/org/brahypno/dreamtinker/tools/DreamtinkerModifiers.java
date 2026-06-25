@@ -20,15 +20,8 @@ import org.brahypno.dreamtinker.library.modifiers.fluid.block.AutoTagCycleBlockF
 import org.brahypno.dreamtinker.library.modifiers.fluid.entity.ConditionalDamageFluidEffect;
 import org.brahypno.dreamtinker.library.modifiers.fluid.entity.DespairScalingDamageFluidEffect;
 import org.brahypno.dreamtinker.library.modifiers.fluid.entity.DrainLifeFluidEffect;
-import org.brahypno.dreamtinker.library.modifiers.modules.armor.RepriseProtectionModule;
-import org.brahypno.dreamtinker.library.modifiers.modules.armor.ResonanceArmorModule;
-import org.brahypno.dreamtinker.library.modifiers.modules.combat.MobEffectsRemoverModule;
 import org.brahypno.dreamtinker.library.modifiers.modules.combat.NarcissusFluidFeedbackModule;
-import org.brahypno.dreamtinker.library.modifiers.modules.combat.SelfMobEffectModule;
 import org.brahypno.dreamtinker.library.modifiers.modules.harvest.AutoPureDaisyModule;
-import org.brahypno.dreamtinker.library.modifiers.modules.harvest.BlockLootMultiplierModule;
-import org.brahypno.dreamtinker.library.modifiers.modules.harvest.EntityLootMultiplierModule;
-import org.brahypno.dreamtinker.library.modifiers.modules.weapon.SwappableCircleWeaponAttack;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerEnchantmentToModifierProvider;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerFluidEffectProvider;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerModifierProvider;
@@ -163,7 +156,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<RandomHit> malum_distortion = MODIFIERS.register("malum_distortion", () -> new RandomHit(0.9f, 1.2f));
     public static final StaticModifier<WhyICry> why_i_cry = MODIFIERS.register("why_i_cry", WhyICry::new);
 
-    public static final StaticModifier<AllSlotsAddition> soul_form = MODIFIERS.register("soul_form", AllSlotsAddition::new);
     //etherium
     public static final StaticModifier<ExplosiveDefense> explosive_defense = MODIFIERS.register("explosive_defense", ExplosiveDefense::new);
     public static final StaticModifier<ExplosiveHit> explosive_hit = MODIFIERS.register("explosive_hit", ExplosiveHit::new);
@@ -334,14 +326,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     @SubscribeEvent
     void registerSerializers(RegisterEvent event) {
         if (event.getRegistryKey() == Registries.RECIPE_SERIALIZER){
-            ModifierModule.LOADER.register(Dreamtinker.getLocation("swappable_circle_weapon_attack"), SwappableCircleWeaponAttack.LOADER);
-            ModifierModule.LOADER.register(Dreamtinker.getLocation("effects_remover"), MobEffectsRemoverModule.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("narcissus_fluid_feedback"), NarcissusFluidFeedbackModule.LOADER);
-            ModifierModule.LOADER.register(Dreamtinker.getLocation("self_mob_effect"), SelfMobEffectModule.LOADER);
-            ModifierModule.LOADER.register(Dreamtinker.getLocation("block_loot_multiplier"), BlockLootMultiplierModule.LOADER);
-            ModifierModule.LOADER.register(Dreamtinker.getLocation("entity_loot_multiplier"), EntityLootMultiplierModule.LOADER);
-            ModifierModule.LOADER.register(Dreamtinker.getLocation("armor_resonance_module"), ResonanceArmorModule.LOADER);
-            ModifierModule.LOADER.register(Dreamtinker.getLocation("reprise_protection_module"), RepriseProtectionModule.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("bontania_auto_pure_module"), AutoPureDaisyModule.LOADER);
 
             FluidEffect.ENTITY_EFFECTS.register(Dreamtinker.getLocation("drain_life_fluid"), DrainLifeFluidEffect.LOADER);
@@ -365,6 +350,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     }
 
     public static class Ids {
+        public static final ModifierId soul_form = id("soul_form");
         public static final ModifierId soul_upgrade = id("soul_upgrade");
         public static final ModifierId abyss_inside = id("abyss_inside");
         public static final ModifierId meta_morphosis = id("meta_morphosis");

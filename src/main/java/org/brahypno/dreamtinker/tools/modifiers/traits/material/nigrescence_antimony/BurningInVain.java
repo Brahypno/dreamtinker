@@ -12,6 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.brahypno.dreamtinker.utils.DTHelper;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -31,7 +32,6 @@ import java.util.List;
 
 import static org.brahypno.dreamtinker.config.DreamtinkerConfig.BurnInVainInAccuracy;
 import static org.brahypno.dreamtinker.config.DreamtinkerConfig.BurnInVainRandomProj;
-import static org.brahypno.dreamtinker.utils.DTHelper.placeProjectileOutsideShooter;
 
 public class BurningInVain extends Modifier implements ProjectileLaunchModifierHook, InventoryTickModifierHook, ToolStatsModifierHook {
     Double maxInaccuracy = BurnInVainInAccuracy.get();
@@ -69,7 +69,7 @@ public class BurningInVain extends Modifier implements ProjectileLaunchModifierH
         if (newProj == null)
             return;
 
-        placeProjectileOutsideShooter(newProj, shooter, dir);
+        ETHelper.placeProjectileOutsideShooter(newProj, shooter, dir);
         if (newProj.getDeltaMovement().lengthSqr() <= 1.0E-6D)
             newProj.setDeltaMovement(motion);
 

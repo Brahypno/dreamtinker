@@ -9,7 +9,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
@@ -33,7 +32,7 @@ import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerDamageTypes;
 import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
-import org.brahypno.dreamtinker.utils.DTHelper;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
@@ -153,7 +152,7 @@ public class DarkBlade extends Modifier implements MeleeHitModifierHook, Monster
     }
 
     private void DarkBladeBasedOnToolTag(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context) {
-        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
+        LivingEntity target = ETHelper.getLivingTarget(context.getTarget());
         LivingEntity attacker = context.getAttacker();
         Level level = attacker.level();
         if (null == target || level.isClientSide)
@@ -196,8 +195,8 @@ public class DarkBlade extends Modifier implements MeleeHitModifierHook, Monster
 
                 if (null != BONE_FRACTURE && !target.hasEffect(BONE_FRACTURE) && lacksEffect(attacker, OVERLY_HEAVY_WEAPON)){
                     target.removeEffect(MobEffects.REGENERATION);
-                    level.playSound((Player) null, target.blockPosition(),
-                                    (SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("born_in_chaos_v1:dark_warlblade_atak")),
+                    level.playSound(null, target.blockPosition(),
+                                    ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("born_in_chaos_v1:dark_warlblade_atak")),
                                     SoundSource.NEUTRAL, 1.3F, 0.9F);
                     ((ServerLevel) level).sendParticles(ParticleTypes.CRIT, target.getX(), target.getY() + (double) 1.0F, target.getZ(), 9, 0.3, 0.3, 0.3, 0.2);
                     ((ServerLevel) level).sendParticles(
@@ -242,10 +241,10 @@ public class DarkBlade extends Modifier implements MeleeHitModifierHook, Monster
             if (TinkerPredicate.AIRBORNE.matches(attacker) && !attacker.isInWater() && !attacker.isInLava()){
                 if (null != STUN && !target.hasEffect(STUN) && !target.isBlocking()){
                     target.addEffect(new MobEffectInstance(STUN, 25, 0, false, false));
-                    ((ServerLevel) level).playSound((Player) null, target.blockPosition(), (SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(
+                    level.playSound(null, target.blockPosition(), ForgeRegistries.SOUND_EVENTS.getValue(
                             new ResourceLocation("born_in_chaos_v1:skeleton_trasher_attack")), SoundSource.NEUTRAL, 0.6F, 1.0F);
                     target.setDeltaMovement(
-                            new Vec3(target.getDeltaMovement().x() * (double) 5.0F, (double) 0.0F, target.getDeltaMovement().z() * (double) 5.0F));
+                            new Vec3(target.getDeltaMovement().x() * (double) 5.0F, 0.0F, target.getDeltaMovement().z() * (double) 5.0F));
 
                 }
             }
@@ -329,8 +328,8 @@ public class DarkBlade extends Modifier implements MeleeHitModifierHook, Monster
                         sl.sendParticles((SimpleParticleType) ForgeRegistries.PARTICLE_TYPES.getValue(new ResourceLocation("born_in_chaos_v1:swap")),
                                          target.getX() + (double) 0.5F,
                                          target.getY() + (double) 0.5F, target.getZ() + (double) 0.5F, 1, 0.1, 0.1, 0.1, 0.1);
-                        sl.playSound((Player) null, target.blockPosition(),
-                                     (SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.iron_golem.damage")), SoundSource.NEUTRAL,
+                        sl.playSound(null, target.blockPosition(),
+                                     ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("entity.iron_golem.damage")), SoundSource.NEUTRAL,
                                      1.0F, 1.0F);
                         player.swing(InteractionHand.MAIN_HAND, true);
                         ToolDamageUtil.damage(tool, 1, player, null);

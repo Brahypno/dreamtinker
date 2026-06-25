@@ -15,6 +15,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.brahypno.dreamtinker.utils.DTHelper;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -32,7 +33,6 @@ import javax.annotation.Nullable;
 
 import static org.brahypno.dreamtinker.config.DreamtinkerConfig.WitherShootDangerPercentage;
 import static org.brahypno.dreamtinker.utils.DTHelper.MIN_PROJECTILE_SPEED_SQR;
-import static org.brahypno.dreamtinker.utils.DTHelper.placeProjectileOutsideShooter;
 
 public class WitherShoot extends NoLevelsModifier implements ProjectileLaunchModifierHook, ProjectileHitModifierHook {
     @Override
@@ -67,7 +67,7 @@ public class WitherShoot extends NoLevelsModifier implements ProjectileLaunchMod
         newProj.setOwner(shooter);
         newProj.setNoGravity(false);
 
-        placeProjectileOutsideShooter(newProj, shooter, direction);
+        ETHelper.placeProjectileOutsideShooter(newProj, shooter, direction);
 
         float accuracy = tool.getStats().get(ToolStats.ACCURACY);
         newProj.shoot(direction.x, direction.y, direction.z, speed, Math.max(0.0F, 1.0F - accuracy));

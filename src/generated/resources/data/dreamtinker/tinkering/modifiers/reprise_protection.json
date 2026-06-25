@@ -2,7 +2,7 @@
   "level_display": "tconstruct:default",
   "modules": [
     {
-      "type": "dreamtinker:reprise_protection_module",
+      "type": "esotericism_tinker:reprise_protection_module",
       "hooks": [
         "tconstruct:modify_hurt"
       ]

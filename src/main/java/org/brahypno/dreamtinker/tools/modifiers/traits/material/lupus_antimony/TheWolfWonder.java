@@ -14,7 +14,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
-import org.brahypno.dreamtinker.utils.DTHelper;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -53,7 +53,7 @@ public class TheWolfWonder extends Modifier implements ProjectileHitModifierHook
 
     @Override
     public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
-        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
+        LivingEntity target = ETHelper.getLivingTarget(context.getTarget());
         if (target == null)
             return;
         long types = target.getActiveEffects().stream().filter(e -> e.getEffect().getCategory() == MobEffectCategory.HARMFUL).count();

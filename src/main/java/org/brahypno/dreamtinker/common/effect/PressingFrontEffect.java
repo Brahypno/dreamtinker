@@ -9,7 +9,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
-import org.brahypno.dreamtinker.utils.DTHelper;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
@@ -51,7 +51,7 @@ public class PressingFrontEffect extends MobEffect {
         removeModifier(toughness, TOUGHNESS_UUID);
 
         if (armor != null){
-            double positiveArmor = DTHelper.getPositiveAttributeBonus(entity, Attributes.ARMOR);
+            double positiveArmor = ETHelper.getPositiveAttributeBonus(entity, Attributes.ARMOR);
             double armorReduction = calculateArmorReduction(positiveArmor, amplifier);
 
             if (armorReduction > 0.0D){
@@ -65,7 +65,7 @@ public class PressingFrontEffect extends MobEffect {
         }
 
         if (toughness != null){
-            double positiveToughness = DTHelper.getPositiveAttributeBonus(entity, Attributes.ARMOR_TOUGHNESS);
+            double positiveToughness = ETHelper.getPositiveAttributeBonus(entity, Attributes.ARMOR_TOUGHNESS);
             double toughnessReduction = calculateToughnessReduction(positiveToughness, amplifier);
 
             if (toughnessReduction > 0.0D){

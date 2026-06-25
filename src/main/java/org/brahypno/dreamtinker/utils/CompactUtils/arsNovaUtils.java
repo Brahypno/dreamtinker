@@ -23,12 +23,11 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import org.brahypno.dreamtinker.library.compact.ars_nouveau.Spell.AugmentTinker;
 import org.brahypno.dreamtinker.tools.DreamtinkerTools;
-import org.brahypno.dreamtinker.utils.DTHelper;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import slimeknights.mantle.client.SafeClientAccess;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
-import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.helper.ModifierLootingHandler;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
@@ -52,13 +51,12 @@ public class arsNovaUtils {
 
         for (ModifierEntry entry : modifiers) {
             knockback =
-                    ((MeleeHitModifierHook) entry.getHook(ModifierHooks.MELEE_HIT)).beforeMeleeHit(tool, entry, context, damage, baseKnockback, knockback);
+                    entry.getHook(ModifierHooks.MELEE_HIT).beforeMeleeHit(tool, entry, context, damage, baseKnockback, knockback);
         }
         LivingEntity attackerLiving = context.getAttacker();
         EquipmentSlot sourceSlot = context.getSlotType();
         ModifierLootingHandler.setLootingSlot(attackerLiving, sourceSlot);
         // And I dont do knock back
-        return;
     }
 
     public static void MeleeSpellDamagePost(LivingEntity shooter, Entity target, InteractionHand hand, ToolStack tool, float damage) {
@@ -68,11 +66,11 @@ public class arsNovaUtils {
             entry.getHook(ModifierHooks.MELEE_HIT).afterMeleeHit(tool, entry, context, damage);
         }
         Entity targetEntity = context.getTarget();
-        LivingEntity targetLiving = DTHelper.getLivingTarget(context.getTarget());
+        LivingEntity targetLiving = ETHelper.getLivingTarget(context.getTarget());
         if (targetLiving != null){
             EnchantmentHelper.doPostHurtEffects(targetLiving, shooter);//enchantment should not mater too much
         }
-        float speed = (Float) tool.getStats().get(ToolStats.ATTACK_SPEED);
+        float speed = tool.getStats().get(ToolStats.ATTACK_SPEED);
         int time = Math.round(20.0F / speed);
         if (time < targetEntity.invulnerableTime){
             targetEntity.invulnerableTime = (targetEntity.invulnerableTime + time) / 2;
@@ -105,11 +103,11 @@ public class arsNovaUtils {
             UUID uuid = UUID.nameUUIDFromBytes((stack.getItem() + type.getName()).getBytes());
             IPerkHolder<ItemStack> perkHolder = PerkUtil.getPerkHolder(stack);
             if (perkHolder != null){
-                attributes.put((Attribute) PerkAttributes.MAX_MANA.get(),
-                               new AttributeModifier(uuid, MAX_MANA_ARMOR_NAME, (double) (30 * (perkHolder.getTier() + 1)),
+                attributes.put(PerkAttributes.MAX_MANA.get(),
+                               new AttributeModifier(uuid, MAX_MANA_ARMOR_NAME, 30 * (perkHolder.getTier() + 1),
                                                      AttributeModifier.Operation.ADDITION));
-                attributes.put((Attribute) PerkAttributes.MANA_REGEN_BONUS.get(),
-                               new AttributeModifier(uuid, MANA_REGEN_ARMOR_NAME, (double) (perkHolder.getTier() + 1), AttributeModifier.Operation.ADDITION));
+                attributes.put(PerkAttributes.MANA_REGEN_BONUS.get(),
+                               new AttributeModifier(uuid, MANA_REGEN_ARMOR_NAME, perkHolder.getTier() + 1, AttributeModifier.Operation.ADDITION));
 
                 for (PerkInstance perkInstance : perkHolder.getPerkInstances()) {
                     IPerk perk = perkInstance.getPerk();
@@ -128,7 +126,7 @@ public class arsNovaUtils {
         if (perkProvider != null && SafeClientAccess.getTooltipKey().equals(TooltipKey.NORMAL)){
             IPerkHolder<ItemStack> var7 = perkProvider.getPerkHolder(stack);
             if (var7 instanceof ArmorPerkHolder armorPerkHolder){
-                tooltip.add(Component.translatable("ars_nouveau.tier", new Object[]{armorPerkHolder.getTier() + 1}).withStyle(ChatFormatting.GOLD));
+                tooltip.add(Component.translatable("ars_nouveau.tier", armorPerkHolder.getTier() + 1).withStyle(ChatFormatting.GOLD));
             }
 
             perkProvider.getPerkHolder(stack).appendPerkTooltip(tooltip, stack);

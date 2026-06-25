@@ -27,7 +27,7 @@
       }
     },
     {
-      "type": "dreamtinker:self_mob_effect",
+      "type": "esotericism_tinker:self_mob_effect",
       "effect_tag": "dreamtinker:edicts",
       "level": {
         "per_level": 1.0

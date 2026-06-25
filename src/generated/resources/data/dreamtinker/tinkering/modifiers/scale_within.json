@@ -2,7 +2,7 @@
   "level_display": "tconstruct:no_levels",
   "modules": [
     {
-      "type": "dreamtinker:armor_resonance_module",
+      "type": "esotericism_tinker:armor_resonance_module",
       "hooks": [
         "tconstruct:modify_hurt"
       ],

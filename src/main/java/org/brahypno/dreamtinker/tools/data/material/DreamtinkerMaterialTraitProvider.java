@@ -11,6 +11,7 @@ import slimeknights.tconstruct.tools.stats.PlatingMaterialStats;
 
 import static org.brahypno.dreamtinker.library.compact.ars_nouveau.NovaRegistry.nova_conjuration_essence;
 import static org.brahypno.dreamtinker.tools.DreamtinkerModifiers.*;
+import static org.brahypno.dreamtinker.tools.DreamtinkerModifiers.Ids.soul_form;
 import static slimeknights.tconstruct.library.materials.MaterialRegistry.*;
 
 public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataProvider {
@@ -176,9 +177,9 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
                   stone_heart.getId());
 
         addDefaultTraits(DreamtinkerMaterialIds.soul_etherium, cursed_ring_bound.getId(), ModifierIds.soulbound,
-                         soul_form.getId(), open_soul.getId(), exiles_faulty.getId(), Ids.el_etherium);
+                         soul_form, open_soul.getId(), exiles_faulty.getId(), Ids.el_etherium);
         addTraits(DreamtinkerMaterialIds.soul_etherium, ARMOR, cursed_ring_bound.getId(), ModifierIds.soulbound,
-                  soul_form.getId(), soul_blessing.getId(), open_soul.getId());
+                  soul_form, soul_blessing.getId(), open_soul.getId());
 
 
         addDefaultTraits(DreamtinkerMaterialIds.spirit_fabric, malum_distortion);

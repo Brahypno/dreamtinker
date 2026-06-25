@@ -19,6 +19,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import org.brahypno.dreamtinker.Entity.SlashOrbitEntity;
 import org.brahypno.esotericismtinker.library.modifiers.EsotericismTinkerHook;
 import org.brahypno.esotericismtinker.library.modifiers.hook.LeftClickHook;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
@@ -27,8 +28,6 @@ import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 
 import static org.brahypno.dreamtinker.config.DreamtinkerCachedConfig.realSweepRange;
-import static org.brahypno.dreamtinker.utils.DTHelper.autoEndColor;
-import static org.brahypno.dreamtinker.utils.DTHelper.materialToRender;
 
 public class RealSweep extends NoLevelsModifier implements LeftClickHook {
     @Override
@@ -42,8 +41,8 @@ public class RealSweep extends NoLevelsModifier implements LeftClickHook {
             AttributeInstance reach = player.getAttribute(ForgeMod.ENTITY_REACH.get());
             double range = null != reach ? Math.min(realSweepRange.get(), reach.getValue()) : 1;
             if (range > 0){
-                int columnA = materialToRender(0xEE050008, tool.getMaterial(0));
-                int colB = materialToRender(autoEndColor(columnA, 2.8f, 1.15f, 1.1f), tool.getMaterial(1));
+                int columnA = ETHelper.materialToRender(0xEE050008, tool.getMaterial(0));
+                int colB = ETHelper.materialToRender(ETHelper.autoEndColor(columnA, 2.8f, 1.15f, 1.1f), tool.getMaterial(1));
 
                 SlashOrbitEntity e = new SlashOrbitEntity((ServerLevel) level, player, 6, 10, 0.70f, 6, 0, 1.8f);
                 e.setGradient(columnA, colB, SlashOrbitEntity.GradMode.ANGULAR, true)

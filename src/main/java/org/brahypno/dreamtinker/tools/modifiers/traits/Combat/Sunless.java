@@ -7,7 +7,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
 import org.brahypno.dreamtinker.common.event.DaylostJudgmentEvents;
-import org.brahypno.dreamtinker.utils.DTHelper;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -60,13 +60,13 @@ public class Sunless extends Modifier implements ModifierRemovalHook, OnAttacked
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
         DaylostJudgmentEvents.applyDaylostFromSunless(
-                DTHelper.getLivingTarget(context.getTarget()), context.getAttacker(), modifier.getLevel());
+                ETHelper.getLivingTarget(context.getTarget()), context.getAttacker(), modifier.getLevel());
     }
 
     @Override
     public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
         DaylostJudgmentEvents.applyDaylostFromSunless(
-                DTHelper.getLivingTarget(context.getTarget()), context.getAttacker(), modifier.getLevel());
+                ETHelper.getLivingTarget(context.getTarget()), context.getAttacker(), modifier.getLevel());
     }
 
     @Override

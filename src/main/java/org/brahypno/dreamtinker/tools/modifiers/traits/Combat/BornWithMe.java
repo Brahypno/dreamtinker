@@ -10,7 +10,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.ForgeMod;
-import org.brahypno.dreamtinker.utils.DTHelper;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -52,7 +52,7 @@ public class BornWithMe extends Modifier implements MeleeDamageModifierHook, Mel
     public void addTooltip(IToolStackView tool, @NotNull ModifierEntry modifier, @javax.annotation.Nullable Player player, List<Component> tooltip, TooltipKey tooltipKey, TooltipFlag tooltipFlag) {
         Component statName = TooltipModifierHook.statName(modifier.getModifier(), ToolStats.ATTACK_DAMAGE);
         if (ToolStats.ATTACK_DAMAGE.supports(tool.getItem()))
-            TooltipModifierHook.addPercentBoost(modifier.getModifier(), statName, (double) buff(modifier.getLevel()), tooltip);
+            TooltipModifierHook.addPercentBoost(modifier.getModifier(), statName, buff(modifier.getLevel()), tooltip);
     }
 
     private static final float HEALTH_RATIO_EPS = 1.0E-3F;
@@ -60,7 +60,7 @@ public class BornWithMe extends Modifier implements MeleeDamageModifierHook, Mel
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
         Level level = context.getLevel();
-        LivingEntity victim = DTHelper.getLivingTarget(context.getTarget());
+        LivingEntity victim = ETHelper.getLivingTarget(context.getTarget());
 
         if (null != victim && !level.isClientSide){
             LivingEntity attacker = context.getAttacker();

@@ -11,8 +11,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
-import org.brahypno.dreamtinker.utils.DTHelper;
 import org.brahypno.dreamtinker.utils.LootHelper.DTLoots;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -47,7 +47,7 @@ public class TheWolfAnswer extends Modifier implements ProjectileHitModifierHook
 
     @Override
     public void failedMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageAttempted) {
-        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
+        LivingEntity target = ETHelper.getLivingTarget(context.getTarget());
         if (target == null || target.level().isClientSide)
             return;
         float curHP = target.getHealth();
@@ -78,7 +78,7 @@ public class TheWolfAnswer extends Modifier implements ProjectileHitModifierHook
     @Override
     public float getMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
         int types = 0;
-        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
+        LivingEntity target = ETHelper.getLivingTarget(context.getTarget());
         if (null != target)
             types += Math.max(target.getActiveEffects().size(),
                               TheWolfWonder.DTForcedEffectKeys.getKeysTag(target).size());

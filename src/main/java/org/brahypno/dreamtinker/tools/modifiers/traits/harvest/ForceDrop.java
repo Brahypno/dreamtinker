@@ -4,9 +4,9 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
-import org.brahypno.dreamtinker.utils.DTHelper;
 import org.brahypno.dreamtinker.utils.LootHelper.DTLoots;
 import org.brahypno.dreamtinker.utils.LootHelper.GlobalLootModifierItemScanner;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -30,7 +30,7 @@ public class ForceDrop extends Modifier implements MeleeHitModifierHook, Monster
 
     @Override
     public void failedMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageAttempted) {
-        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
+        LivingEntity target = ETHelper.getLivingTarget(context.getTarget());
         if (null != target){
             DTLoots.dropAllDeathLootVanilla(target, context.makeDamageSource());
             if (context.getLevel() instanceof ServerLevel sl)

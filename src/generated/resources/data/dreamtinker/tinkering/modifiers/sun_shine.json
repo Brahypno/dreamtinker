@@ -2,7 +2,7 @@
   "level_display": "tconstruct:default",
   "modules": [
     {
-      "type": "dreamtinker:effects_remover",
+      "type": "esotericism_tinker:effects_remover",
       "apply_before_melee": true,
       "level": {
         "per_level": 1.0
@@ -10,7 +10,7 @@
       "mob_effect_category": "beneficial"
     },
     {
-      "type": "dreamtinker:effects_remover",
+      "type": "esotericism_tinker:effects_remover",
       "apply_before_melee": true,
       "level": {
         "per_level": 1.0
@@ -18,7 +18,7 @@
       "mob_effect_category": "harmful"
     },
     {
-      "type": "dreamtinker:effects_remover",
+      "type": "esotericism_tinker:effects_remover",
       "apply_before_melee": true,
       "level": {
         "per_level": 1.0

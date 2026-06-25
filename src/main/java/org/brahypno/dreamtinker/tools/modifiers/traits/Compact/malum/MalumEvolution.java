@@ -11,7 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import org.brahypno.dreamtinker.Dreamtinker;
-import org.brahypno.dreamtinker.utils.DTHelper;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -50,7 +50,7 @@ public class MalumEvolution extends Modifier implements MeleeDamageModifierHook,
 
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
+        LivingEntity target = ETHelper.getLivingTarget(context.getTarget());
         if (0 < damageDealt && null != target &&
             0 < SpiritHarvestHandler.getSpiritData(target).map((d) -> d.totalSpirits).orElse(0)){
             int haunted = tool.getPersistentData().getInt(Haunted);

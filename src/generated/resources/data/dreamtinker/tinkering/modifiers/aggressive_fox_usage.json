@@ -1,4 +1,10 @@
 {
   "level_display": "tconstruct:no_levels",
+  "modules": [
+    {
+      "type": "esotericism_tinker:self_destory_module",
+      "entity": "dreamtinker:aggressive_fox"
+    }
+  ],
   "tooltip_display": "always"
 }

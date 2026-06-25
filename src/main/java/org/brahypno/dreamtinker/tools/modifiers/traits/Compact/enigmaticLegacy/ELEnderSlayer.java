@@ -8,7 +8,7 @@ import net.minecraft.world.entity.player.Player;
 import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.brahypno.dreamtinker.utils.CompactUtils.EnigmaticLegacyCompact;
-import org.brahypno.dreamtinker.utils.DTHelper;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.data.predicate.IJsonPredicate;
 import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
@@ -52,7 +52,7 @@ public class ELEnderSlayer extends Modifier implements MeleeDamageModifierHook, 
     public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
         float knockbackPower = 1F;
         if (context.getAttacker() instanceof Player player && EnigmaticLegacyCompact.isTheCursedOne(player))
-            if (EnigmaticLegacyCompact.isEndDweller(DTHelper.getLivingTarget(context.getTarget()))){
+            if (EnigmaticLegacyCompact.isEndDweller(ETHelper.getLivingTarget(context.getTarget()))){
                 knockbackPower += EnigmaticLegacyCompact.enderSlayerEndKnockbackBonusModifier() * modifier.getEffectiveLevel();
             }
         return knockback * knockbackPower;
@@ -61,7 +61,7 @@ public class ELEnderSlayer extends Modifier implements MeleeDamageModifierHook, 
     @Override
     public float getMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
         if (context.getAttacker() instanceof Player player && EnigmaticLegacyCompact.isTheCursedOne(player)){
-            LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
+            LivingEntity target = ETHelper.getLivingTarget(context.getTarget());
             if (null != target && (EnigmaticLegacyCompact.isEndDweller(target) || target.getType().is(DreamtinkerTagKeys.EntityTypes.ENDER_ENTITY))){
                 if (EnigmaticLegacyCompact.isTheEnd(player.level()) && player.level() == target.level()){
                     if (target instanceof EnderMan

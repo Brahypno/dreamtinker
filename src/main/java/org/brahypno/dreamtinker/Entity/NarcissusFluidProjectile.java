@@ -33,8 +33,8 @@ import org.brahypno.dreamtinker.library.client.trail.DTClientTrail;
 import org.brahypno.dreamtinker.library.modifiers.modules.combat.NarcissusFluidFeedbacks;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.brahypno.dreamtinker.tools.modifiers.tools.narcissus_wing.MemoryBase;
-import org.brahypno.dreamtinker.utils.DTHelper;
 import org.brahypno.dreamtinker.utils.DamageProbe;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.TinkerDamageTypes;
 import slimeknights.tconstruct.fluids.TinkerFluids;
@@ -312,7 +312,7 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
                                           dmg)){
 
                 if (!this.level().isClientSide && entity1 instanceof LivingEntity){
-                    LivingEntity living_target = DTHelper.getLivingTarget(target);
+                    LivingEntity living_target = ETHelper.getLivingTarget(target);
                     if (null != living_target)
                         EnchantmentHelper.doPostHurtEffects(living_target, entity1);
                     EnchantmentHelper.doPostDamageEffects((LivingEntity) entity1, target);
@@ -458,7 +458,7 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
     public void setTool(@NotNull IToolStackView tool) {
         this.toolStackView = tool;
         this.entityData.set(CHASE_LIVING, tool.getModifierLevel(DreamtinkerModifiers.Ids.soul_core) + 1);
-        this.entityData.set(COLOR, DTHelper.materialToRender(0, tool.getMaterial(0)));
+        this.entityData.set(COLOR, ETHelper.materialToRender(0, tool.getMaterial(0)));
     }
 
 }

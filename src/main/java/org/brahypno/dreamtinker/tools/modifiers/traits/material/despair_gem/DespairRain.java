@@ -6,9 +6,9 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import org.brahypno.dreamtinker.utils.DTHelper;
 import org.brahypno.esotericismtinker.library.modifiers.EsotericismTinkerHook;
 import org.brahypno.esotericismtinker.library.modifiers.hook.LivingHealHealHook;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -48,7 +48,7 @@ public class DespairRain extends Modifier implements MeleeDamageModifierHook, Me
 
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        LivingEntity victim = DTHelper.getLivingTarget(context.getTarget());
+        LivingEntity victim = ETHelper.getLivingTarget(context.getTarget());
         if (null != victim){
             AttributeInstance attr_instance = victim.getAttribute(Attributes.MAX_HEALTH);
             if (null != attr_instance){

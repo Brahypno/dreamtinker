@@ -5,6 +5,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import org.brahypno.dreamtinker.utils.LootHelper.DTLoots;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
@@ -22,7 +23,7 @@ public final class DamageProbe {
         if (entity == null)
             return false;
 
-        LivingEntity victim = DTHelper.getLivingTarget(entity);
+        LivingEntity victim = ETHelper.getLivingTarget(entity);
         if (victim != null && !victim.level().isClientSide)
             return DTMethodHandler.invokeLivingHurt(victim, damageSource, damageAmount);
 
@@ -30,7 +31,7 @@ public final class DamageProbe {
     }
 
     public static Result finalDamageMethod(@Nullable Entity entity, DamageSource source, float amount) {
-        LivingEntity victim = DTHelper.getLivingTarget(entity);
+        LivingEntity victim = ETHelper.getLivingTarget(entity);
         Result result = new Result(entity, victim, source, amount);
 
         if (entity == null || source == null || amount <= 0.0F)

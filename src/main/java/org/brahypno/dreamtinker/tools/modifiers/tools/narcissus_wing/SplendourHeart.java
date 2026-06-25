@@ -28,10 +28,10 @@ import net.minecraftforge.common.TierSortingRegistry;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerDamageTypes;
 import org.brahypno.dreamtinker.tools.modifiers.events.AdvCountEvents;
-import org.brahypno.dreamtinker.utils.DTHelper;
 import org.brahypno.dreamtinker.utils.DamageProbe;
 import org.brahypno.esotericismtinker.library.modifiers.EsotericismTinkerHook;
 import org.brahypno.esotericismtinker.library.modifiers.hook.ProjectileHurtHook;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -283,7 +283,7 @@ public class SplendourHeart extends Modifier implements MeleeHitModifierHook, In
     }
 
     private void applySplendourExtraDamage(IToolStackView tool, ToolAttackContext context, SplendourData splendour) {
-        LivingEntity victim = DTHelper.getLivingTarget(context.getTarget());
+        LivingEntity victim = ETHelper.getLivingTarget(context.getTarget());
         if (victim == null){
             return;
         }

@@ -2,7 +2,7 @@
   "level_display": "tconstruct:no_levels",
   "modules": [
     {
-      "type": "dreamtinker:entity_loot_multiplier",
+      "type": "esotericism_tinker:entity_loot_multiplier",
       "chance": {
         "flat": 1.0
       },

@@ -28,19 +28,22 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 import net.minecraftforge.fluids.FluidType;
+import org.brahypno.dreamtinker.Entity.DreamtinkerEntityTypes;
 import org.brahypno.dreamtinker.common.DreamtinkerAttributes;
 import org.brahypno.dreamtinker.common.DreamtinkerEffects;
 import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
-import org.brahypno.dreamtinker.library.modifiers.modules.armor.RepriseProtectionModule;
-import org.brahypno.dreamtinker.library.modifiers.modules.armor.ResonanceArmorModule;
-import org.brahypno.dreamtinker.library.modifiers.modules.combat.MobEffectsRemoverModule;
-import org.brahypno.dreamtinker.library.modifiers.modules.combat.SelfMobEffectModule;
 import org.brahypno.dreamtinker.library.modifiers.modules.harvest.AutoPureDaisyModule;
-import org.brahypno.dreamtinker.library.modifiers.modules.harvest.BlockLootMultiplierModule;
-import org.brahypno.dreamtinker.library.modifiers.modules.harvest.EntityLootMultiplierModule;
-import org.brahypno.dreamtinker.library.modifiers.modules.weapon.SwappableCircleWeaponAttack;
 import org.brahypno.dreamtinker.tools.DreamtinkerTools;
 import org.brahypno.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvider;
+import org.brahypno.esotericismtinker.library.modifiers.modules.armor.RepriseProtectionModule;
+import org.brahypno.esotericismtinker.library.modifiers.modules.armor.ResonanceArmorModule;
+import org.brahypno.esotericismtinker.library.modifiers.modules.build.AllSlotModule;
+import org.brahypno.esotericismtinker.library.modifiers.modules.combat.MobEffectsRemoverModule;
+import org.brahypno.esotericismtinker.library.modifiers.modules.combat.SelfMobEffectModule;
+import org.brahypno.esotericismtinker.library.modifiers.modules.harvest.BlockLootMultiplierModule;
+import org.brahypno.esotericismtinker.library.modifiers.modules.harvest.EntityLootMultiplierModule;
+import org.brahypno.esotericismtinker.library.modifiers.modules.weapon.SelfDestroyModule;
+import org.brahypno.esotericismtinker.library.modifiers.modules.weapon.SwappableCircleWeaponAttack;
 import org.brahypno.esotericismtinker.library.tools.EsotericismSlotType;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.data.predicate.IJsonPredicate;
@@ -110,6 +113,8 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(AttributeModule.builder(ForgeMod.BLOCK_REACH.get(), AttributeModifier.Operation.ADDITION).slots(EquipmentSlot.MAINHAND).eachLevel(1))
                 .addModule(
                         AttributeModule.builder(ForgeMod.ENTITY_REACH.get(), AttributeModifier.Operation.ADDITION).slots(EquipmentSlot.MAINHAND).eachLevel(1));
+        buildModifier(Ids.soul_form)
+                .addModule(AllSlotModule.builder().amount(1, 0));
         buildModifier(Ids.strong_explode)
                 .priority(-100)
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
@@ -345,7 +350,8 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.force_to_explosion)
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
         buildModifier(Ids.aggressiveFoxUsage)
-                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(new SelfDestroyModule(DreamtinkerEntityTypes.AggressiveFOX.get()));
 
         buildModifier(Ids.five_creations)
                 .tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION).levelDisplay(ModifierLevelDisplay.NO_LEVELS)
@@ -848,7 +854,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModules(ModifierSlotModule.slot(EsotericismSlotType.DELUSION).eachLevel(1));
-                
+
     }
 
     private void addUGModifiers() {

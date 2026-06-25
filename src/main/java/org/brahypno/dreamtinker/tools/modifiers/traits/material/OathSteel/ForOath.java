@@ -9,7 +9,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.EntityHitResult;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
-import org.brahypno.dreamtinker.utils.DTHelper;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -95,7 +95,7 @@ public class ForOath extends Modifier implements ProjectileHitModifierHook, Proj
 
     @Override
     public float getMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
-        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
+        LivingEntity target = ETHelper.getLivingTarget(context.getTarget());
         if (context.getAttacker() instanceof ServerPlayer player && context.getLevel() instanceof ServerLevel && target != null){
             return applyOathEvilDamageBonus(target, player, modifier.getLevel(), damage);
         }
@@ -104,7 +104,7 @@ public class ForOath extends Modifier implements ProjectileHitModifierHook, Proj
 
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
+        LivingEntity target = ETHelper.getLivingTarget(context.getTarget());
         if (context.getAttacker() instanceof ServerPlayer player && context.getLevel() instanceof ServerLevel && target != null &&
             damageDealt > 0.0F){
             consumeOathEvil(target, player, modifier.getLevel());

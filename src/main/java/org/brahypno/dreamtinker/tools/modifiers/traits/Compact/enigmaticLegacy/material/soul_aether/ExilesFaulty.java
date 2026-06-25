@@ -11,7 +11,7 @@ import org.brahypno.dreamtinker.common.DreamtinkerEffects;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.CursedRingBound;
 import org.brahypno.dreamtinker.utils.CompactUtils.EnigmaticLegacyCompact;
-import org.brahypno.dreamtinker.utils.DTHelper;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -56,7 +56,7 @@ public class ExilesFaulty extends Modifier implements ProjectileHitModifierHook,
 
     @Override
     public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
-        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
+        LivingEntity target = ETHelper.getLivingTarget(context.getTarget());
         LivingEntity attacker = context.getAttacker();
         if (null != target && !target.level().isClientSide)
             curse_faulty(attacker, target, damage);

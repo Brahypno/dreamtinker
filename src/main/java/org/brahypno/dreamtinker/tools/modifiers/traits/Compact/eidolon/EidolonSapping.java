@@ -6,7 +6,7 @@ import elucent.eidolon.util.DamageTypeData;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
-import org.brahypno.dreamtinker.utils.DTHelper;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -33,7 +33,7 @@ public class EidolonSapping extends Modifier implements MeleeHitModifierHook, Mo
     }
 
     private void sapping(ToolAttackContext context, int level) {
-        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
+        LivingEntity target = ETHelper.getLivingTarget(context.getTarget());
         if (null == target || target.level().isClientSide)
             return;
         LivingEntity attacker = context.getAttacker();

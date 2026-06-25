@@ -6,8 +6,8 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
-import org.brahypno.dreamtinker.utils.DTHelper;
 import org.brahypno.dreamtinker.utils.LootHelper.DTLoots;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -38,7 +38,7 @@ public class RemoverHit extends Modifier implements MeleeHitModifierHook, Projec
     @Override
     public void failedMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageAttempted) {
         if (!context.getTarget().isRemoved()){
-            LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
+            LivingEntity target = ETHelper.getLivingTarget(context.getTarget());
             if (null != target && target.isAlive() && !(target instanceof Player)){
                 LivingEntity attacker = context.getAttacker();
                 double attack = Math.max(attacker.getMaxHealth(), attacker.getAttributeValue(Attributes.ATTACK_DAMAGE));

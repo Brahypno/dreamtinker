@@ -1,7 +1,7 @@
 package org.brahypno.dreamtinker.tools.modifiers.traits.Compact.malum;
 
 import net.minecraft.world.entity.LivingEntity;
-import org.brahypno.dreamtinker.utils.DTHelper;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -20,7 +20,7 @@ public class MalumMagicAttack extends Modifier implements MeleeDamageModifierHoo
     }
 
     public float getMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
-        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
+        LivingEntity target = ETHelper.getLivingTarget(context.getTarget());
         if (null != target){
             var magicResistance = target.getAttribute(LodestoneAttributeRegistry.MAGIC_RESISTANCE.get());
             if (magicResistance != null)

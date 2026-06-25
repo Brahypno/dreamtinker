@@ -31,8 +31,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerSounds;
-import org.brahypno.dreamtinker.utils.DTHelper;
 import org.brahypno.dreamtinker.utils.DTMessages;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -354,7 +354,7 @@ public class DeathShredder extends Modifier implements MeleeDamageModifierHook, 
         if (!context.getAttacker().isUsingItem())
             return 0;
         int mode = tool.getPersistentData().getInt(TAG_MOD);
-        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
+        LivingEntity target = ETHelper.getLivingTarget(context.getTarget());
         if (null != target && !target.level().isClientSide){
             if (Modes.ELECTRIC.ordinal() != mode)
                 for (Attribute attr : attributes) {
@@ -381,7 +381,7 @@ public class DeathShredder extends Modifier implements MeleeDamageModifierHook, 
 
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
+        LivingEntity target = ETHelper.getLivingTarget(context.getTarget());
         if (null != target && !target.level().isClientSide){//always clear this
             for (Attribute attr : attributes) {
                 AttributeInstance attr_instance = target.getAttribute(attr);

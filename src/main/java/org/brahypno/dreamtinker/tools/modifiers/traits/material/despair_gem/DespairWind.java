@@ -15,6 +15,7 @@ import org.brahypno.dreamtinker.common.DreamtinkerDamageTypes;
 import org.brahypno.dreamtinker.library.client.utils.MaskService;
 import org.brahypno.dreamtinker.utils.DTHelper;
 import org.brahypno.dreamtinker.utils.DamageProbe;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -39,7 +40,7 @@ public class DespairWind extends Modifier implements ProjectileHitModifierHook, 
 
     @Override
     public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
-        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
+        LivingEntity target = ETHelper.getLivingTarget(context.getTarget());
         LivingEntity attacker = context.getAttacker();
         ArrayList<Attribute> attributes = new ArrayList<>(Arrays.asList(Attributes.ARMOR, Attributes.ARMOR_TOUGHNESS));
         if (null != target && !target.level().isClientSide){
@@ -84,7 +85,7 @@ public class DespairWind extends Modifier implements ProjectileHitModifierHook, 
 
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        LivingEntity victim = DTHelper.getLivingTarget(context.getTarget());
+        LivingEntity victim = ETHelper.getLivingTarget(context.getTarget());
         if (null != victim && !victim.level().isClientSide){
             remove_attributes(victim);
             if (context.getPlayerAttacker() instanceof ServerPlayer sp){

@@ -19,7 +19,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.brahypno.dreamtinker.Dreamtinker;
-import org.brahypno.dreamtinker.utils.DTHelper;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
@@ -135,7 +135,7 @@ public class EchoedAttack extends Modifier implements ProjectileLaunchModifierHo
 
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        hitEntity(tool, context.getAttacker(), DTHelper.getLivingTarget(context.getTarget()), context);
+        hitEntity(tool, context.getAttacker(), ETHelper.getLivingTarget(context.getTarget()), context);
     }
 
     @Override

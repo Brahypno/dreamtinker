@@ -19,8 +19,8 @@ import net.minecraft.world.phys.Vec3;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.Entity.SlashOrbitEntity;
 import org.brahypno.dreamtinker.common.DreamtinkerDamageTypes;
-import org.brahypno.dreamtinker.utils.DTHelper;
 import org.brahypno.dreamtinker.utils.DamageProbe;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
@@ -145,7 +145,7 @@ public class Signet extends Modifier implements MeleeHitModifierHook, MonsterMel
             return;
         }
 
-        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
+        LivingEntity target = ETHelper.getLivingTarget(context.getTarget());
         float damageBasis = Math.max(damageDealt, ETModifierCheck.getMeleeDamage(context.getAttacker(), target, tool, false));
         if (damageBasis <= 0.0F){
             damageBasis = context.getBaseDamage();

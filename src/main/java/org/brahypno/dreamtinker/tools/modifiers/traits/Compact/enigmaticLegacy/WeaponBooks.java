@@ -13,7 +13,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.brahypno.dreamtinker.utils.CompactUtils.EnigmaticLegacyCompact;
-import org.brahypno.dreamtinker.utils.DTHelper;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -107,8 +107,8 @@ public class WeaponBooks extends Modifier implements MeleeDamageModifierHook, Me
         float bonus = 0;
         if (context.getAttacker() instanceof Player player){
             if (EnigmaticLegacyCompact.isTheCursedOne(player) || player instanceof ServerPlayer sp && sp.getAbilities().instabuild){
-                LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
-                if (null != target && EnigmaticLegacyCompact.isBossOrPlayer(target))
+                LivingEntity target = ETHelper.getLivingTarget(context.getTarget());
+                if (EnigmaticLegacyCompact.isBossOrPlayer(target))
                     if (1 == tool.getModifierLevel(this.getId())){
                         bonus += damage * EnigmaticLegacyCompact.twistBossDamageBonusModifier();
                     }else if (2 <= tool.getModifierLevel(this.getId())){
@@ -143,7 +143,7 @@ public class WeaponBooks extends Modifier implements MeleeDamageModifierHook, Me
                     lifesteal += (float) (damageDealt * (EnigmaticLegacyCompact.bloodlustLifestealBoost() * amplifier));
                 }
                 player.heal(lifesteal);
-                LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
+                LivingEntity target = ETHelper.getLivingTarget(context.getTarget());
                 if (null != target){
                     target.addEffect(new MobEffectInstance(MobEffects.WITHER, 160, 3, false, true));
                     target.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 500, 3, false, true));

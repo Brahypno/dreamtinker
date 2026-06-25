@@ -6,7 +6,7 @@ import com.hollingsworth.arsnouveau.api.spell.SpellValidationError;
 import com.hollingsworth.arsnouveau.common.spell.validation.AugmentCompatibilityValidator;
 import com.hollingsworth.arsnouveau.common.spell.validation.SpellPhraseValidator;
 import org.brahypno.dreamtinker.library.compact.ars_nouveau.Spell.AugmentTinker;
-import org.brahypno.dreamtinker.utils.DTHelper;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -61,7 +61,7 @@ public class AugmentCompatibilityValidatorMixin {
                                                                       spell -> dreamtinker$getSpellPosition(spell) == error.getPosition() &&
                                                                                dreamtinker$getSpellPart(spell) instanceof AugmentTinker);
                                       return containsSpell ||
-                                             DTHelper.containsTranslationKey(error.makeTextComponentExisting(), AugmentTinker.INSTANCE.getLocalizationKey());
+                                             ETHelper.containsTranslationKey(error.makeTextComponentExisting(), AugmentTinker.INSTANCE.getLocalizationKey());
                                   });
     }
 }

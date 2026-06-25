@@ -2,7 +2,7 @@
   "level_display": "tconstruct:default",
   "modules": [
     {
-      "type": "dreamtinker:block_loot_multiplier",
+      "type": "esotericism_tinker:block_loot_multiplier",
       "blocks": {
         "type": "mantle:tag",
         "tag": "forge:ores"

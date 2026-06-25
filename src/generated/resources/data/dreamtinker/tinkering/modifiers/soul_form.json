@@ -1,0 +1,10 @@
+{
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "esotericism_tinker:all_slot_module",
+      "flat": 1
+    }
+  ],
+  "tooltip_display": "always"
+}

@@ -18,6 +18,7 @@ import net.minecraftforge.common.Tags;
 import org.brahypno.dreamtinker.common.DreamtinkerDamageTypes;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Combat.GoliathDamage;
 import org.brahypno.dreamtinker.utils.DamageProbe;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
@@ -38,8 +39,6 @@ import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 
 import javax.annotation.Nullable;
 
-import static org.brahypno.dreamtinker.utils.DTHelper.getLivingTarget;
-import static org.brahypno.dreamtinker.utils.DTHelper.getPositiveAttributeBonus;
 
 public class DoomTrack extends Modifier implements ProjectileHitModifierHook, MeleeHitModifierHook, MonsterMeleeHitModifierHook {
     private static final DustParticleOptions RUIN_GOLD_DUST =
@@ -72,11 +71,11 @@ public class DoomTrack extends Modifier implements ProjectileHitModifierHook, Me
     }
 
     private static float armorProof(LivingEntity target, int level) {
-        return (float) (Math.sqrt(getPositiveAttributeBonus(target, Attributes.ARMOR)) * (0.70F + 0.15F * level));
+        return (float) (Math.sqrt(ETHelper.getPositiveAttributeBonus(target, Attributes.ARMOR)) * (0.70F + 0.15F * level));
     }
 
     private static float toughnessProof(LivingEntity target, int level) {
-        return (float) (Math.sqrt(getPositiveAttributeBonus(target, Attributes.ARMOR_TOUGHNESS)) * (0.45F + 0.15F * level));
+        return (float) (Math.sqrt(ETHelper.getPositiveAttributeBonus(target, Attributes.ARMOR_TOUGHNESS)) * (0.45F + 0.15F * level));
     }
 
     private static float sizeProof(LivingEntity attacker, LivingEntity target, int level) {
@@ -199,7 +198,7 @@ public class DoomTrack extends Modifier implements ProjectileHitModifierHook, Me
             return;
         }
 
-        LivingEntity victim = getLivingTarget(target);
+        LivingEntity victim = ETHelper.getLivingTarget(target);
         if (victim == null || !victim.isAlive()){
             return;
         }

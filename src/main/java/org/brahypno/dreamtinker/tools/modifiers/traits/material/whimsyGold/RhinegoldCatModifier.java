@@ -20,11 +20,11 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraftforge.common.Tags;
 import org.brahypno.dreamtinker.Dreamtinker;
-import org.brahypno.dreamtinker.utils.DTHelper;
 import org.brahypno.dreamtinker.utils.LootHelper.GlobalLootModifierItemScanner;
 import org.brahypno.dreamtinker.utils.LootHelper.LootScanCommon;
 import org.brahypno.dreamtinker.utils.LootHelper.LootScanCommon.CandidateFilter;
 import org.brahypno.dreamtinker.utils.LootHelper.LootTableItemScanner;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -298,7 +298,7 @@ public class RhinegoldCatModifier extends Modifier implements ProcessLootModifie
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
         if (!(context.getAttacker().level() instanceof ServerLevel level))
             return;
-        LivingEntity target = DTHelper.getLivingTarget(context.getTarget());
+        LivingEntity target = ETHelper.getLivingTarget(context.getTarget());
         if (null == target || target instanceof Player)
             return;
         if (target.getType().is(ENTITY_BLACKLIST))

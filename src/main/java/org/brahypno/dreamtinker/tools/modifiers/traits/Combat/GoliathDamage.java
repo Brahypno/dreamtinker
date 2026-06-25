@@ -4,9 +4,9 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
-import org.brahypno.dreamtinker.utils.DTHelper;
 import org.brahypno.esotericismtinker.library.modifiers.EsotericismTinkerHook;
 import org.brahypno.esotericismtinker.library.modifiers.hook.ProjectileHurtHook;
+import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -23,8 +23,8 @@ import javax.annotation.Nullable;
 
 public class GoliathDamage extends NoLevelsModifier implements MeleeDamageModifierHook, ProjectileHurtHook {
     public static float goliathPercentage(LivingEntity attacker, Entity target) {
-        double attacker_volume = DTHelper.getMultipartVolume(attacker);
-        double target_volume = DTHelper.getMultipartVolume(target);
+        double attacker_volume = ETHelper.getMultipartVolume(attacker);
+        double target_volume = ETHelper.getMultipartVolume(target);
         double multi = 1.0 + 0.35D * Math.log((target_volume / attacker_volume));
         return (float) Math.max(multi, 0.70D);
     }
