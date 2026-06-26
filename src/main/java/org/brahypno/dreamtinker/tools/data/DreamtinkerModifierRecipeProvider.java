@@ -283,7 +283,7 @@ public class DreamtinkerModifierRecipeProvider implements ICommonRecipeHelper {
                                                 DreamtinkerTools.underPlate.get(ArmorItem.Type.CHESTPLATE),
                                                 DreamtinkerTools.underPlate.get(ArmorItem.Type.LEGGINGS),
                                                 DreamtinkerTools.underPlate.get(ArmorItem.Type.BOOTS));
-        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.spiritual_weapon_transformation)
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.spiritual_weapon_transformation)
                              .setTools(under_plates)
                              .addInput(BlockRegistry.BLOCK_OF_ASTRAL_WEAVE.get(), 3)
                              .addInput(ItemRegistry.TOPHAT.get())
@@ -291,9 +291,9 @@ public class DreamtinkerModifierRecipeProvider implements ICommonRecipeHelper {
                              .setSlots(EsotericismSlotType.DELUSION, 1)
                              .setMaxLevel(1)
                              .saveSalvage(withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("malum")),
-                                          prefix(DreamtinkerModifiers.spiritual_weapon_transformation, soulSalvage))
+                                          prefix(DreamtinkerModifiers.Ids.spiritual_weapon_transformation, soulSalvage))
                              .save(withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("malum")),
-                                   prefix(DreamtinkerModifiers.spiritual_weapon_transformation, soulFolder));
+                                   prefix(DreamtinkerModifiers.Ids.spiritual_weapon_transformation, soulFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.TheEnd)
                              .setTools(TinkerTags.Items.SPECIAL_TOOLS)
                              .addInput(Blocks.DIRT, 2)

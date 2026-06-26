@@ -41,7 +41,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
                   the_wolf_wonder, the_wolf_answer, the_wolf_was);
 
         addTraits(DreamtinkerMaterialIds.star_regulus, RANGED, two_headed_seven.getId(), ModifierIds.soulbound);
-        addTraits(DreamtinkerMaterialIds.star_regulus, ARMOR, as_one.getId(), fly.getId(), ModifierIds.soulbound);
+        addTraits(DreamtinkerMaterialIds.star_regulus, ARMOR, as_one.getId(), Ids.fly, ModifierIds.soulbound);
 
         addTraits(DreamtinkerMaterialIds.crying_obsidian, MELEE_HARVEST, sharpened_with);
         addTraits(DreamtinkerMaterialIds.crying_obsidian, RANGED, isolde);
@@ -55,7 +55,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.amber, ARMOR, Ids.FragileButBright);
 
         addDefaultTraits(DreamtinkerMaterialIds.half_rotten_homunculus, anvil_hit.getId(), TinkerModifiers.necrotic.getId());
-        addTraits(DreamtinkerMaterialIds.half_rotten_homunculus, ARMOR, homunculus_life_curse.getId(), Ids.homunculusGift);
+        addTraits(DreamtinkerMaterialIds.half_rotten_homunculus, ARMOR, Ids.homunculus_life_curse, Ids.homunculusGift);
         addDefaultTraits(DreamtinkerMaterialIds.half_rotten_string, anvil_hit.getId(), TinkerModifiers.necrotic.getId());
 
         addDefaultTraits(DreamtinkerMaterialIds.desire_gem, to_the_moon, many_wishes);
@@ -93,7 +93,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.PermanenceWing, RANGED, feather_wake.getId(), Ids.with_wing_with_scale);
         addTraits(DreamtinkerMaterialIds.PermanenceWing, ARMOR, Ids.wing_without, Ids.with_wing_with_scale);
 
-        addDefaultTraits(DreamtinkerMaterialIds.shiningFlint, ModifierIds.jagged, Ids.fiber_glass_fragments, light_emanation.getId(), light_in_dark.getId());
+        addDefaultTraits(DreamtinkerMaterialIds.shiningFlint, ModifierIds.jagged, Ids.fiber_glass_fragments, Ids.light_emanation, light_in_dark.getId());
         addTraits(DreamtinkerMaterialIds.shiningFlint, AMMO, ModifierIds.keen, ModifierIds.spike);
 
         addDefaultTraits(DreamtinkerMaterialIds.orichalcum, Ids.lunarRejection);
@@ -167,7 +167,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
                   new ModifierEntry(ModifierIds.magicProtection, 2),
                   new ModifierEntry(etherium_protection.getId(), 1),
                   new ModifierEntry(explosive_defense.getId(), 1),
-                  new ModifierEntry(fly.getId(), 1));
+                  new ModifierEntry(Ids.fly, 1));
 
         addTraits(DreamtinkerMaterialIds.nefarious, MELEE_HARVEST, cursed_ring_bound.getId(), Ids.wither_body,
                   evil_attack.getId());

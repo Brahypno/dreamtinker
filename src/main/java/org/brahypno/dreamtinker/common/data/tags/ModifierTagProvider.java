@@ -37,8 +37,8 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
                  broken_vessel.getId(), ewige_widerkunft.getId(), ouroboric_hourglass.getId(), burning_in_vain.getId(),
                  the_wolf_was.getId(), Ids.with_tears, isolde.getId(), mei.getId(), explosive_hit.getId(), Ids.wither_body,
                  stone_heart.getId(), splendour_heart.getId(), why_i_cry.getId(), Ids.huge_ego, wait_until.getId(),
-                 Ids.thundering_curse, homunculus_life_curse.getId(), absorption_defense.getId(), despair_rain.getId(), despair_wind.getId(),
-                 light_in_dark.getId(), light_emanation.getId(), hiddenHit.getId(), signal_axe.getId(), Ids.golden_face)
+                 Ids.thundering_curse, Ids.homunculus_life_curse, absorption_defense.getId(), despair_rain.getId(), despair_wind.getId(),
+                 light_in_dark.getId(), Ids.light_emanation, hiddenHit.getId(), signal_axe.getId(), Ids.golden_face)
             .addOptional(cursed_ring_bound.getId(), evil_attack.getId(), eldritch_pan.getId(), malum_thirsty.getId(),
                          Ids.el_nemesis_curse, Ids.el_sorrow, Ids.el_eternal_binding)
             .addOptional(new ResourceLocation(TIAC, "fragile"), new ResourceLocation(TIAC, "disintegrate"), new ResourceLocation(TIAC, "heavy_material"),
@@ -90,7 +90,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             .addOptional(Ids.malum_ascension, Ids.malum_rebound);
         this.tag(TinkerTags.Modifiers.GENERAL_ARMOR_UPGRADES)
             .add(virtual_dodge.getId(), Ids.sweet_death, Ids.last_kiss)
-            .addOptional(spiritual_weapon_transformation.getId(), Ids.nova_mana_reduce, annihilator_armor_power.getId());
+            .addOptional(Ids.spiritual_weapon_transformation, Ids.nova_mana_reduce, annihilator_armor_power.getId());
         this.tag(DreamtinkerTagKeys.Modifiers.MALUM_EXPOSE_SOUL)
             .addOptional(malum_hex_staff.getId(), malum_base.getId(), malum_distortion.getId(), malum_spirit_attributes.getId(),
                          Ids.malum_animated, Ids.malum_rebound, Ids.malum_ascension, Ids.malum_haunted, Ids.malum_replenishing, Ids.malum_spirit_plunder,
@@ -115,7 +115,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             .add(Ids.icy_memory, Ids.hate_memory);
         this.tag(EsotericismTinkerTagKeys.Modifiers.GENERAL_ARMOR_DELUSIONS)
             .add(virtual_dodge.getId(), Ids.sweet_death, Ids.last_kiss)
-            .addOptional(spiritual_weapon_transformation.getId());
+            .addOptional(Ids.spiritual_weapon_transformation);
     }
 
     @Override

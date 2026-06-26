@@ -7,12 +7,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -35,6 +33,8 @@ import org.brahypno.dreamtinker.utils.DTMessages;
 import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
+import slimeknights.tconstruct.library.json.RandomLevelingValue;
+import slimeknights.tconstruct.library.json.predicate.tool.ToolStackPredicate;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -44,6 +44,8 @@ import slimeknights.tconstruct.library.modifiers.hook.combat.MonsterMeleeHitModi
 import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.*;
 import slimeknights.tconstruct.library.modifiers.modules.build.StatBoostModule;
+import slimeknights.tconstruct.library.modifiers.modules.combat.MeleeAttributeModule;
+import slimeknights.tconstruct.library.modifiers.modules.combat.MobEffectModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.recipe.fuel.MeltingFuel;
 import slimeknights.tconstruct.library.recipe.fuel.MeltingFuelLookup;
@@ -59,7 +61,9 @@ import slimeknights.tconstruct.shared.TinkerEffects;
 import slimeknights.tconstruct.tools.modifiers.ability.interaction.BlockingModifier;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
 
 import static org.brahypno.dreamtinker.config.DreamtinkerCachedConfig.ChainSawEnergyCost;
 import static slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHelper.TANK_HELPER;
@@ -75,7 +79,7 @@ public class DeathShredder extends Modifier implements MeleeDamageModifierHook, 
 
     private final List<Tier> tiers;
 
-    private final ResourceLocation TAG_MOD = Dreamtinker.getLocation("working_mode");
+    private static final ResourceLocation TAG_MOD = Dreamtinker.getLocation("working_mode");
     private final ResourceLocation TAG_FUEL_DURATION = Dreamtinker.getLocation("fuel_duration");
     private final ResourceLocation TAG_HEAT = Dreamtinker.getLocation("chainsaw_heat");
     private final ResourceLocation TAG_ROTATIONAL_FORCE = Dreamtinker.getLocation("rotational_force");
@@ -85,10 +89,6 @@ public class DeathShredder extends Modifier implements MeleeDamageModifierHook, 
     private final float MAX_HEAT_ELECTRIC = 90;
     private final int MAX_FORCE_MIX = 120;
     private final float MAX_HEAT_MIX = 120;
-
-
-    private final ArrayList<Attribute> attributes = new ArrayList<>(Arrays.asList(Attributes.ARMOR, Attributes.ARMOR_TOUGHNESS));
-    private final UUID uuid = UUID.nameUUIDFromBytes(("death_shredder").getBytes());
 
     @Override
     public boolean startInteract(IToolStackView tool, ModifierEntry modifier, Player player, EquipmentSlot slot, TooltipKey keyModifier) {
@@ -121,6 +121,11 @@ public class DeathShredder extends Modifier implements MeleeDamageModifierHook, 
         return recipe;
     }
 
+    private static final ToolStackPredicate isElectric =
+            ToolStackPredicate.simple(iToolContext -> iToolContext.getPersistentData().getInt(TAG_MOD) == (Modes.ELECTRIC.ordinal()));
+    private static final ToolStackPredicate isMIX =
+            ToolStackPredicate.simple(iToolContext -> iToolContext.getPersistentData().getInt(TAG_MOD) == (Modes.MIX.ordinal()));
+
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder builder) {
         builder.addHook(this, ModifierHooks.MELEE_DAMAGE, ModifierHooks.MONSTER_MELEE_DAMAGE, ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT,
@@ -129,6 +134,20 @@ public class DeathShredder extends Modifier implements MeleeDamageModifierHook, 
         builder.addModule(ToolEnergyCapability.ENERGY_HANDLER);
         builder.addModule(StatBoostModule.add(ToolEnergyCapability.MAX_STAT).flat(5000 * 10));
         builder.addModule(StatBoostModule.add(ToolTankHelper.CAPACITY_STAT).flat(FluidType.BUCKET_VOLUME * 10));
+        builder.addModule(MeleeAttributeModule.builder(Attributes.ARMOR, AttributeModifier.Operation.MULTIPLY_BASE).tool(isElectric).flat(-0.4f));
+        builder.addModule(
+                MeleeAttributeModule.builder(Attributes.ARMOR_TOUGHNESS, AttributeModifier.Operation.MULTIPLY_BASE).tool(isElectric).flat(-0.4f));
+        builder.addModule(MobEffectModule.builder(TinkerEffects.bleeding.get())
+                                         .level(RandomLevelingValue.flat(1))
+                                         .time(RandomLevelingValue.perLevel(20 * 5, 10))
+                                         .tool(isElectric.inverted())
+                                         .build());
+        builder.addModule(MobEffectModule.builder(MobEffects.MOVEMENT_SLOWDOWN)
+                                         .level(RandomLevelingValue.flat(1))
+                                         .time(RandomLevelingValue.perLevel(20 * 5, 10))
+                                         .tool(isMIX)
+                                         .build());
+
         super.registerHooks(builder);
     }
 
@@ -350,44 +369,9 @@ public class DeathShredder extends Modifier implements MeleeDamageModifierHook, 
     }
 
     @Override
-    public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
-        if (!context.getAttacker().isUsingItem())
-            return 0;
-        int mode = tool.getPersistentData().getInt(TAG_MOD);
-        LivingEntity target = ETHelper.getLivingTarget(context.getTarget());
-        if (null != target && !target.level().isClientSide){
-            if (Modes.ELECTRIC.ordinal() != mode)
-                for (Attribute attr : attributes) {
-                    AttributeInstance attr_instance = target.getAttribute(attr);
-                    if (null != attr_instance){
-                        AttributeModifier cur = attr_instance.getModifier(uuid);
-                        if (cur == null){
-                            attr_instance.removeModifier(uuid);
-                            attr_instance.addPermanentModifier(new AttributeModifier(uuid, this.getTranslationKey(), -0.4f,
-                                                                                     AttributeModifier.Operation.MULTIPLY_BASE));
-                        }
-                    }
-                }
-            if (Modes.ELECTRIC.ordinal() != mode){
-                target.addEffect(new MobEffectInstance(TinkerEffects.bleeding.get(), 20 * 5, 1));
-            }
-            if (Modes.MIX.ordinal() == mode){
-                target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 5, 1));
-            }
-        }
-
-        return 0;
-    }
-
-    @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
         LivingEntity target = ETHelper.getLivingTarget(context.getTarget());
         if (null != target && !target.level().isClientSide){//always clear this
-            for (Attribute attr : attributes) {
-                AttributeInstance attr_instance = target.getAttribute(attr);
-                if (null != attr_instance)
-                    attr_instance.removeModifier(uuid);
-            }
             Tier tier = tool.getStats().get(ToolStats.HARVEST_TIER);
             int idx = tiers.indexOf(tier);
             target.invulnerableTime -= 2 * (idx + 1);

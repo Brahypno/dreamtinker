@@ -5,35 +5,29 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.Projectile;
+import org.brahypno.esotericismtinker.library.modifiers.modules.combat.AbsorptionGainModule;
 import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.data.predicate.IJsonPredicate;
 import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
+import slimeknights.tconstruct.library.json.LevelingValue;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
-import slimeknights.tconstruct.library.modifiers.entity.ProjectileWithPower;
 import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
-import slimeknights.tconstruct.library.modifiers.hook.combat.MonsterMeleeHitModifierHook;
-import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileLaunchModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.combat.ConditionalMeleeDamageModule;
 import slimeknights.tconstruct.library.modifiers.modules.combat.ConditionalPowerModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
-import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
-import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
-import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.brahypno.dreamtinker.config.DreamtinkerCachedConfig.AbsorptionHitRate;
 import static slimeknights.tconstruct.library.json.math.ModifierFormula.*;
 
-public class AbsorptionHit extends Modifier implements MeleeHitModifierHook, MonsterMeleeHitModifierHook, ProjectileLaunchModifierHook {
+public class AbsorptionHit extends Modifier implements MeleeHitModifierHook {
     private static final IJsonPredicate<LivingEntity> absorption = LivingEntityPredicate.simple(entity -> 0 < entity.getAbsorptionAmount());
 
     @Override
@@ -50,7 +44,11 @@ public class AbsorptionHit extends Modifier implements MeleeHitModifierHook, Mon
                                                     .variable(MULTIPLIER).multiply()
                                                     .constant(1).add()
                                                     .variable(VALUE).multiply().build());
-        hookBuilder.addHook(this, ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT, ModifierHooks.PROJECTILE_LAUNCH);
+        hookBuilder.addModule(AbsorptionGainModule.builder()
+                                                  .ratio(LevelingValue.flat(AbsorptionHitRate.get().floatValue()))
+                                                  .maxRatio(LevelingValue.flat(2.0f))
+                                                  .buildWeapon());
+        hookBuilder.addHook(this, ModifierHooks.MELEE_HIT);
         super.registerHooks(hookBuilder);
     }
 
@@ -62,40 +60,6 @@ public class AbsorptionHit extends Modifier implements MeleeHitModifierHook, Mon
         return knockback;
     }
 
-    @Override
-    public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
-        if (context.isCritical() && !context.getAttacker().level().isClientSide)
-            onMonsterMeleeHit(tool, modifier, context, damageDealt);
-    }
-
-    @Override
-    public void onMonsterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage) {
-        float absorption = context.getAttacker().getAbsorptionAmount();
-        float max_absorption = context.getAttacker().getMaxHealth() * 2;
-        if (absorption < max_absorption)
-            context.getAttacker()
-                   .setAbsorptionAmount(
-                           Math.min(absorption + damage * absorption_buff(modifier.getLevel() * tool.getMultiplier(ToolStats.ATTACK_DAMAGE), true),
-                                    max_absorption));
-    }
-
-    @Override
-    public void onProjectileLaunch(IToolStackView tool, ModifierEntry modifier, LivingEntity shooter, Projectile projectile, @Nullable AbstractArrow arrow, ModDataNBT persistentData, boolean primary) {
-        if (shooter.level().isClientSide)
-            return;
-        float power = Math.max(ProjectileWithPower.getDamage(projectile), 1);
-        float absorption = shooter.getAbsorptionAmount();
-        if (power > 0 && absorption < shooter.getMaxHealth() * 2){
-            shooter.setAbsorptionAmount(
-                    (float) Math.min(absorption + projectile.getDeltaMovement().length() *
-                                                  absorption_buff(modifier.getLevel() * tool.getMultiplier(ToolStats.VELOCITY), true),
-                                     shooter.getMaxHealth() * 2));
-        }
-    }
-
-    private float absorption_buff(float level, boolean addition) {
-        return Math.max(-0.9f, (addition ? 1 : -1) * level * AbsorptionHitRate.get().floatValue());
-    }
 
     public @NotNull List<Component> getDescriptionList(int level) {
         return Arrays.asList(Component.translatable(this.getTranslationKey() + ".flavor").withStyle(ChatFormatting.ITALIC),

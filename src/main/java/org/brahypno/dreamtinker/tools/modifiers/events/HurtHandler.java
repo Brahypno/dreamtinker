@@ -20,6 +20,7 @@ import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 import static net.minecraft.tags.DamageTypeTags.IS_PROJECTILE;
+import static org.brahypno.dreamtinker.config.DreamtinkerCachedConfig.homunculusLifeCurseMaxEffectLevel;
 import static org.brahypno.dreamtinker.tools.modifiers.tools.underPlate.WeaponTransformation.valueExpSoftCap;
 
 
@@ -59,7 +60,17 @@ public class HurtHandler {
                     offender.heal(damageAmount * drink_magic * 0.05f);
                 }
             }
+            int homunculus_life_curse = ETModifierCheck.getEntityModifierNum(offender, DreamtinkerModifiers.Ids.homunculus_life_curse);
+            if (0 < homunculus_life_curse){
+                damageAmount = homunculusLifeDamage(offender, damageAmount, homunculus_life_curse);
+            }
             event.setAmount(damageAmount);
         }
+    }
+
+    private static float homunculusLifeDamage(LivingEntity attacker, float amount, int level) {
+        float multiplier = (1 - attacker.getHealth() / attacker.getMaxHealth())
+                           * Math.min(homunculusLifeCurseMaxEffectLevel.get() + 1, level + 1);
+        return amount * multiplier;
     }
 }

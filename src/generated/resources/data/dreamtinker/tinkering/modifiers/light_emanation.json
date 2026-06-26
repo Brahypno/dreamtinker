@@ -1,0 +1,84 @@
+{
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:conditional_stat",
+      "formula": [
+        "$value",
+        "$level",
+        1.0,
+        "$block_light",
+        7.0,
+        "-",
+        0.03125,
+        "*",
+        "+",
+        "*",
+        "+"
+      ],
+      "percent": false,
+      "stat": "tconstruct:accuracy",
+      "variables": {
+        "block_light": {
+          "type": "tconstruct:entity",
+          "entity_type": "tconstruct:light",
+          "fallback": 7.0,
+          "light_layer": "block"
+        }
+      }
+    },
+    {
+      "type": "tconstruct:conditional_stat",
+      "formula": [
+        "$value",
+        "$level",
+        1.0,
+        "$block_light",
+        7.0,
+        "-",
+        0.03125,
+        "*",
+        "+",
+        "*",
+        "+"
+      ],
+      "percent": false,
+      "stat": "tconstruct:draw_speed",
+      "variables": {
+        "block_light": {
+          "type": "tconstruct:entity",
+          "entity_type": "tconstruct:light",
+          "fallback": 7.0,
+          "light_layer": "block"
+        }
+      }
+    },
+    {
+      "type": "tconstruct:conditional_stat",
+      "formula": [
+        "$value",
+        "$level",
+        1.0,
+        "$block_light",
+        7.0,
+        "-",
+        0.03125,
+        "*",
+        "+",
+        "*",
+        "+"
+      ],
+      "percent": false,
+      "stat": "tconstruct:projectile_damage",
+      "variables": {
+        "block_light": {
+          "type": "tconstruct:entity",
+          "entity_type": "tconstruct:light",
+          "fallback": 7.0,
+          "light_layer": "block"
+        }
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}
