@@ -12,7 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.brahypno.dreamtinker.common.DreamtinkerDamageTypes;
 import org.brahypno.dreamtinker.tools.modifiers.events.VisionaryDrops;
-import org.brahypno.dreamtinker.utils.DamageProbe;
+import org.brahypno.esotericismtinker.utils.damage.DamageProbe;
 import org.jetbrains.annotations.NotNull;
 
 import static org.brahypno.dreamtinker.common.DreamtinkerDamageTypes.many_wishes;

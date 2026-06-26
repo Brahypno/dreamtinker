@@ -29,8 +29,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerSounds;
-import org.brahypno.dreamtinker.utils.DTMessages;
 import org.brahypno.esotericismtinker.utils.ETHelper;
+import org.brahypno.esotericismtinker.utils.MessagesUtil;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.json.RandomLevelingValue;
@@ -100,9 +100,9 @@ public class DeathShredder extends Modifier implements MeleeDamageModifierHook, 
         int mod = (dataNBT.getInt(TAG_MOD) + 1) % 3;
         dataNBT.putInt(TAG_MOD, mod);
         //ToolEnergyCapability.setEnergy(tool, 500000);
-        DTMessages.clientChat(Component.translatable("modifier.dreamtinker.tooltip.death_shredder")
-                                       .append(Component.translatable("modifier.dreamtinker.mod.death_shredder" + "_" + mod))
-                                       .withStyle(this.getDisplayName().getStyle()), false);
+        MessagesUtil.clientChat(Component.translatable("modifier.dreamtinker.tooltip.death_shredder")
+                                         .append(Component.translatable("modifier.dreamtinker.mod.death_shredder" + "_" + mod))
+                                         .withStyle(this.getDisplayName().getStyle()), false);
         return true;
     }
 

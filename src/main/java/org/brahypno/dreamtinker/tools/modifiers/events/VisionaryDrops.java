@@ -12,7 +12,7 @@ import org.brahypno.dreamtinker.Dreamtinker;
 
 import java.util.List;
 
-import static org.brahypno.dreamtinker.utils.LootHelper.LootTableItemScanner.tryExtractSomeLoot;
+import static org.brahypno.esotericismtinker.utils.LootHelper.LootTableItemScanner.tryExtractSomeLoot;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class VisionaryDrops {

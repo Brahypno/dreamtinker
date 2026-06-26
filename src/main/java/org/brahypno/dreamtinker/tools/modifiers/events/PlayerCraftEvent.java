@@ -10,7 +10,7 @@ import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.brahypno.dreamtinker.tools.items.NarcissusWing;
-import org.brahypno.dreamtinker.utils.DTMessages;
+import org.brahypno.esotericismtinker.utils.MessagesUtil;
 import slimeknights.tconstruct.library.materials.MaterialRegistry;
 import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -40,11 +40,11 @@ public class PlayerCraftEvent {
                 tool.getPersistentData().putInt(TAG_CHANGE_TIMES, ++times);
                 tool.updateStack(item);
                 if (UnbuildLimits.get() <= times){
-                    event.getEntity().sendSystemMessage(Component.translatable("modifier.dreamtinker.tooltip.not_like_was_1").append(String.valueOf(times))
-                                                                 .withStyle(DreamtinkerModifiers.not_like_was.get().getDisplayName().getStyle()));
+                    MessagesUtil.clientChat(Component.translatable("modifier.dreamtinker.tooltip.not_like_was_1").append(String.valueOf(times))
+                                                     .withStyle(DreamtinkerModifiers.not_like_was.get().getDisplayName().getStyle()), false);
                 }else {
-                    event.getEntity().sendSystemMessage(Component.translatable("modifier.dreamtinker.not_like_was.flavor")
-                                                                 .withStyle(DreamtinkerModifiers.not_like_was.get().getDisplayName().getStyle()));
+                    MessagesUtil.clientChat(Component.translatable("modifier.dreamtinker.not_like_was.flavor")
+                                                     .withStyle(DreamtinkerModifiers.not_like_was.get().getDisplayName().getStyle()), false);
                 }
             }
             int mei_level = tool.getModifiers().getLevel(DreamtinkerModifiers.mei.getId());
@@ -52,8 +52,8 @@ public class PlayerCraftEvent {
                 event.getEntity().level().getLevelData().isHardcore()){
                 tool.removeModifier(DreamtinkerModifiers.mei.getId(), mei_level);
                 tool.addModifier(DreamtinkerModifiers.acheron.getId(), mei_level);
-                event.getEntity().sendSystemMessage(Component.translatable("modifier.dreamtinker.acheron.flavor")
-                                                             .withStyle(DreamtinkerModifiers.acheron.get().getDisplayName().getStyle()));
+                MessagesUtil.clientChat(Component.translatable("modifier.dreamtinker.acheron.flavor")
+                                                 .withStyle(DreamtinkerModifiers.acheron.get().getDisplayName().getStyle()), false);
                 tool.updateStack(item);
             }
             MaterialNBT mats = tool.getMaterials();
@@ -76,8 +76,8 @@ public class PlayerCraftEvent {
                     mats = mats.replaceMaterial(spiral, getMaterialForTier(2, rand, statList.get(spiral)));
                     tool.setMaterials(mats);
                     tool.updateStack(item);
-                    DTMessages.clientChat(Component.translatable("material.dreamtinker.ruin_wheel_steel_transform")
-                                                   .withStyle(DreamtinkerModifiers.doom_track.get().getDisplayName().getStyle()), false);
+                    MessagesUtil.clientChat(Component.translatable("material.dreamtinker.ruin_wheel_steel_transform")
+                                                     .withStyle(DreamtinkerModifiers.doom_track.get().getDisplayName().getStyle()), false);
                 }
             }
             if (item.getItem() instanceof NarcissusWing){

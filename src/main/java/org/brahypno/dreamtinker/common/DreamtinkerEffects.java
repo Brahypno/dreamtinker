@@ -22,7 +22,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.effect.*;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
-import org.brahypno.dreamtinker.utils.DTMessages;
+import org.brahypno.esotericismtinker.utils.MessagesUtil;
 
 import java.util.List;
 
@@ -114,7 +114,7 @@ public class DreamtinkerEffects {
               .getTag(DreamtinkerTagKeys.MobEffects.EDICTS)
               .ifPresent(edicts -> {
                   if (entity instanceof Player){
-                      DTMessages.clientChat(Component.translatable("tooltip.dreamtinker.temptation_edicts"), true);
+                      MessagesUtil.clientChat(Component.translatable("tooltip.dreamtinker.temptation_edicts"), true);
                   }
                   for (Holder<MobEffect> effect : edicts) {
                       entity.addEffect(new MobEffectInstance(

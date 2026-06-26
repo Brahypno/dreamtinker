@@ -20,8 +20,8 @@ import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.brahypno.dreamtinker.Dreamtinker;
-import org.brahypno.dreamtinker.utils.DTMessages;
 import org.brahypno.esotericismtinker.utils.ETModifierCheck;
+import org.brahypno.esotericismtinker.utils.MessagesUtil;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -95,9 +95,9 @@ public class as_one extends Modifier implements EquipmentChangeModifierHook, Mod
         ModDataNBT dataNBT = tool.getPersistentData();
         int mod = (dataNBT.getInt(TAG_MOD) + 1) % (Modes.values().length);
         dataNBT.putInt(TAG_MOD, mod);
-        DTMessages.clientChat(Component.translatable("modifier.dreamtinker.tooltip.as_one_mode"
-                                               , Component.translatable("modifier.dreamtinker.tooltip.as_one" + "_" + mod))
-                                       .withStyle(this.getDisplayName().getStyle()), false);
+        MessagesUtil.clientChat(Component.translatable("modifier.dreamtinker.tooltip.as_one_mode"
+                                                 , Component.translatable("modifier.dreamtinker.tooltip.as_one" + "_" + mod))
+                                         .withStyle(this.getDisplayName().getStyle()), false);
         return true;
     }
 

@@ -11,7 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.brahypno.dreamtinker.Dreamtinker;
-import org.brahypno.dreamtinker.utils.DTMessages;
+import org.brahypno.esotericismtinker.utils.MessagesUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.client.TooltipKey;
@@ -45,8 +45,8 @@ public class EwigeEiderkunft extends Modifier implements ToolDamageModifierHook,
             nbt.putInt(TAG_TOMB, breaks);
             tool.setDamage(0);
             if (holder != null){
-                DTMessages.clientChat(Component.literal("13=1").withStyle(this.getDisplayName()
-                                                                              .getStyle()), false);
+                MessagesUtil.clientChat(Component.literal("13=1").withStyle(this.getDisplayName()
+                                                                                .getStyle()), false);
                 holder.level().explode(holder,
                                        holder.level().damageSources().explosion(holder, holder),
                                        null,

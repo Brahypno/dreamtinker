@@ -16,7 +16,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import org.brahypno.dreamtinker.library.compact.ars_nouveau.CasterCapability;
-import org.brahypno.dreamtinker.utils.DTMessages;
+import org.brahypno.esotericismtinker.utils.MessagesUtil;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -62,12 +62,12 @@ public class NovaCastTool extends NoLevelsModifier implements SlotStackModifierH
             if (!player.level().isClientSide)
                 PortUtil.sendMessage(player, Component.translatable("ars_nouveau.alert.spell_set"));
             else
-                DTMessages.clientChat(Component.translatable("ars_nouveau.alert.spell_set").withStyle(Style.EMPTY.withColor(ChatFormatting.GOLD)), false);
+                MessagesUtil.clientChat(Component.translatable("ars_nouveau.alert.spell_set").withStyle(Style.EMPTY.withColor(ChatFormatting.GOLD)), false);
         }else {
             if (!player.level().isClientSide)
                 PortUtil.sendMessage(player, Component.translatable("ars_nouveau.sword.invalid"));
             else
-                DTMessages.clientChat(Component.translatable("ars_nouveau.sword.invalid").withStyle(Style.EMPTY.withColor(ChatFormatting.RED)), false);
+                MessagesUtil.clientChat(Component.translatable("ars_nouveau.sword.invalid").withStyle(Style.EMPTY.withColor(ChatFormatting.RED)), false);
         }
     }
 

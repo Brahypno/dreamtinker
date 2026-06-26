@@ -12,9 +12,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import org.brahypno.dreamtinker.Dreamtinker;
-import org.brahypno.dreamtinker.utils.DTMessages;
 import org.brahypno.esotericismtinker.library.modifiers.EsotericismTinkerHook;
 import org.brahypno.esotericismtinker.library.modifiers.hook.LeftClickHook;
+import org.brahypno.esotericismtinker.utils.MessagesUtil;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -83,7 +83,7 @@ public class SignalAxe extends Modifier implements MeleeDamageModifierHook, Left
 
             if (nbt.getInt(TAG_RIGHT_TIME) < 2 &&
                 attack_time * world.random.nextFloat() * (world.random.nextInt(2) + 1) < world.getGameTime() - tag.getLong(TAG_ATTACK_TIME.getPath())){
-                DTMessages.clientChat(Component.translatable("modifier.dreamtinker.signal_axe.ready").withStyle(this.getDisplayName().getStyle()), false);
+                MessagesUtil.clientChat(Component.translatable("modifier.dreamtinker.signal_axe.ready").withStyle(this.getDisplayName().getStyle()), false);
                 nbt.putInt(TAG_RIGHT_TIME, 2);
             }
         }

@@ -11,8 +11,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
-import org.brahypno.dreamtinker.utils.LootHelper.DTLoots;
 import org.brahypno.esotericismtinker.utils.ETHelper;
+import org.brahypno.esotericismtinker.utils.LootHelper.LootResolver;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -71,7 +71,7 @@ public class TheWolfAnswer extends Modifier implements ProjectileHitModifierHook
                              .mobAttack(context.getAttacker());
             target.setHealth(0);
             target.die(dam);
-            DTLoots.dropAllDeathLootVanilla(target, dam);
+            LootResolver.dropAllDeathLootVanilla(target, dam);
         }
     }
 

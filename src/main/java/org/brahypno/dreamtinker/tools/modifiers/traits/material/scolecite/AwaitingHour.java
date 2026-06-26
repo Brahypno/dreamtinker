@@ -11,8 +11,8 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerMaterialIds;
-import org.brahypno.dreamtinker.utils.DTMessages;
 import org.brahypno.esotericismtinker.utils.ETModifierCheck;
+import org.brahypno.esotericismtinker.utils.MessagesUtil;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.materials.definition.MaterialId;
@@ -149,7 +149,7 @@ public class AwaitingHour extends Modifier implements ProjectileLaunchModifierHo
         toolStack.setMaterials(mats);
         toolStack.updateStack(stack);
         if (holder instanceof Player player){
-            DTMessages.clientChat(
+            MessagesUtil.clientChat(
                     Component.translatable(
                                      threshold <= scale ? "modifier.dreamtinker.pupal_omen.success_scale" : "modifier.dreamtinker.pupal_omen.success_wing")
                              .withStyle(this.getDisplayName().getStyle()), false);

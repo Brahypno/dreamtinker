@@ -28,11 +28,11 @@ import net.minecraftforge.common.TierSortingRegistry;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerDamageTypes;
 import org.brahypno.dreamtinker.tools.modifiers.events.AdvCountEvents;
-import org.brahypno.dreamtinker.utils.DamageProbe;
 import org.brahypno.esotericismtinker.library.modifiers.EsotericismTinkerHook;
 import org.brahypno.esotericismtinker.library.modifiers.hook.ProjectileHurtHook;
 import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.brahypno.esotericismtinker.utils.ETModifierCheck;
+import org.brahypno.esotericismtinker.utils.damage.DamageProbe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.client.TooltipKey;
@@ -303,6 +303,8 @@ public class SplendourHeart extends Modifier implements MeleeHitModifierHook, In
 
             if (splendour.level() < 2){
                 DamageProbe.damageHandler(victim, source, damage * splendour.value());
+            }else if (splendour.level() < 3){
+                DamageProbe.mediumDamageMethod(victim, source, damage * splendour.value());
             }else {
                 DamageProbe.finalDamageMethod(victim, source, damage * splendour.value());
             }

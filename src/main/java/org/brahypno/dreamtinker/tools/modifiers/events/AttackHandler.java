@@ -12,8 +12,8 @@ import net.minecraftforge.fml.common.Mod;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerDamageTypes;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
-import org.brahypno.dreamtinker.utils.DamageProbe;
 import org.brahypno.esotericismtinker.utils.ETModifierCheck;
+import org.brahypno.esotericismtinker.utils.damage.DamageProbe;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class AttackHandler {

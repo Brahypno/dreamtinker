@@ -35,8 +35,8 @@ import org.brahypno.dreamtinker.common.DreamtinkerDamageTypes;
 import org.brahypno.dreamtinker.common.DreamtinkerEffects;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.brahypno.dreamtinker.tools.items.TNTArrow;
-import org.brahypno.dreamtinker.utils.DTMessages;
 import org.brahypno.esotericismtinker.utils.ETModifierCheck;
+import org.brahypno.esotericismtinker.utils.MessagesUtil;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 
@@ -159,8 +159,8 @@ public class ShortEvents {
             LivingEntity living = event.getEntity();
             if (0 < ModifierUtil.getPersistentInt(living.getItemBySlot(EquipmentSlot.MAINHAND), TAG_RIGHT_TIME, 0)){
                 if (event.getResult() != Event.Result.ALLOW){
-                    DTMessages.clientChat(Component.translatable("modifier.dreamtinker.signal_axe.critical")
-                                                   .withStyle(DreamtinkerModifiers.signal_axe.get().getDisplayName().getStyle()), false);
+                    MessagesUtil.clientChat(Component.translatable("modifier.dreamtinker.signal_axe.critical")
+                                                     .withStyle(DreamtinkerModifiers.signal_axe.get().getDisplayName().getStyle()), false);
                     event.setResult(Event.Result.ALLOW);
                 }
                 event.setDamageModifier(event.getDamageModifier() + 0.4f);

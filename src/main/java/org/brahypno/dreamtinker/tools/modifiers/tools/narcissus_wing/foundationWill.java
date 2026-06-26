@@ -32,9 +32,9 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
-import org.brahypno.dreamtinker.utils.DTMessages;
 import org.brahypno.esotericismtinker.library.modifiers.EsotericismTinkerHook;
 import org.brahypno.esotericismtinker.library.modifiers.hook.LeftClickHook;
+import org.brahypno.esotericismtinker.utils.MessagesUtil;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.mantle.data.predicate.item.ItemPredicate;
@@ -93,9 +93,9 @@ public class foundationWill extends NoLevelsModifier implements ModifierTraitHoo
         ModDataNBT dataNBT = tool.getPersistentData();
         int mod = (dataNBT.getInt(TAG_MOD) + 1) % 2;
         dataNBT.putInt(TAG_MOD, mod);
-        DTMessages.clientChat(Component.translatable("modifier.dreamtinker.tooltip.foundation_will")
-                                       .append(Component.translatable("modifier.dreamtinker.foundation_will" + "_" + mod))
-                                       .withStyle(this.getDisplayName().getStyle()), false);
+        MessagesUtil.clientChat(Component.translatable("modifier.dreamtinker.tooltip.foundation_will")
+                                         .append(Component.translatable("modifier.dreamtinker.foundation_will" + "_" + mod))
+                                         .withStyle(this.getDisplayName().getStyle()), false);
         return false;
     }
 

@@ -18,7 +18,7 @@ import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 
 import java.util.List;
 
-import static org.brahypno.dreamtinker.utils.LootHelper.LootTableItemScanner.tryExtractRareLoot;
+import static org.brahypno.esotericismtinker.utils.LootHelper.LootTableItemScanner.tryExtractRareLoot;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class SilverNameBeeDrop {

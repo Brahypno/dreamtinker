@@ -17,7 +17,7 @@ import static org.brahypno.dreamtinker.config.DreamtinkerConfig.AsOneA;
 
 public class star_regulus_boost {
     // 要检测的进度 ID
-    private static final ResourceLocation TAG_MO = new ResourceLocation(Dreamtinker.MODID, "magnum_opus");
+    private static final ResourceLocation TAG_MO = new ResourceLocation(Dreamtinker.MODID, "materials/magnum_opus");
     private static int tickCounter = 0;
     private static final int amp = AsOneA.get();
 

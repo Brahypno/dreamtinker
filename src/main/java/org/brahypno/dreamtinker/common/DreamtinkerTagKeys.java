@@ -85,6 +85,7 @@ public class DreamtinkerTagKeys {
         public static final TagKey<Item> CloggrumIngot = forgeTag("ingots/cloggrum");
         public static final TagKey<Item> FroststeelIngot = forgeTag("ingots/froststeel");
         public static final TagKey<Item> RegaliumIngot = forgeTag("ingots/regalium");
+        public static final TagKey<Item> ObsidianIngot = forgeTag("ingots/obsidian");
 
         public static TagKey<Item> modTag(String modid, String path) {
             return TagKey.create(Registries.ITEM, new ResourceLocation(modid, path));

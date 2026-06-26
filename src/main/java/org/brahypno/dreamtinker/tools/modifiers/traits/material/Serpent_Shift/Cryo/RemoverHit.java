@@ -6,9 +6,9 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
-import org.brahypno.dreamtinker.utils.LootHelper.DTLoots;
 import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.brahypno.esotericismtinker.utils.ETModifierCheck;
+import org.brahypno.esotericismtinker.utils.LootHelper.LootResolver;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -43,7 +43,7 @@ public class RemoverHit extends Modifier implements MeleeHitModifierHook, Projec
                 LivingEntity attacker = context.getAttacker();
                 double attack = Math.max(attacker.getMaxHealth(), attacker.getAttributeValue(Attributes.ATTACK_DAMAGE));
                 if (target.getHealth() <= attack){
-                    DTLoots.dropAllDeathLootVanilla(target, context.makeDamageSource());
+                    LootResolver.dropAllDeathLootVanilla(target, context.makeDamageSource());
                     target.remove(Entity.RemovalReason.DISCARDED);
                 }else
                     target.setHealth((float) (target.getHealth() - attack));
@@ -58,7 +58,7 @@ public class RemoverHit extends Modifier implements MeleeHitModifierHook, Projec
                 double attack = Math.max(attacker.getMaxHealth(), attacker.getAttributeValue(Attributes.ATTACK_DAMAGE));
                 attack = Math.max(attack, ETModifierCheck.getDamage(projectile));
                 if (target.getHealth() <= attack){
-                    DTLoots.dropAllDeathLootVanilla(target, target.level().damageSources().mobProjectile(projectile, attacker));
+                    LootResolver.dropAllDeathLootVanilla(target, target.level().damageSources().mobProjectile(projectile, attacker));
                     target.remove(Entity.RemovalReason.DISCARDED);
                 }else
                     target.setHealth((float) (target.getHealth() - attack));

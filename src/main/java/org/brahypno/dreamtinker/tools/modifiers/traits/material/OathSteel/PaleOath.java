@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerMaterialIds;
-import org.brahypno.dreamtinker.utils.DTMessages;
+import org.brahypno.esotericismtinker.utils.MessagesUtil;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.materials.definition.MaterialId;
@@ -82,7 +82,7 @@ public class PaleOath extends Modifier implements ProtectionModifierHook, Invent
         toolStack.setMaterials(mats);
         toolStack.updateStack(stack);
         if (holder instanceof Player){
-            DTMessages.clientChat(
+            MessagesUtil.clientChat(
                     Component.translatable("modifier.dreamtinker.pale_oath.success_scale").withStyle(this.getDisplayName().getStyle()), false);
         }
     }
