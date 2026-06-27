@@ -80,7 +80,7 @@ public class as_one extends Modifier implements EquipmentChangeModifierHook, Mod
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
         hookBuilder.addHook(this, ModifierHooks.EQUIPMENT_CHANGE, ModifierHooks.MODIFY_HURT, ModifierHooks.INVENTORY_TICK, ModifierHooks.TOOL_DAMAGE,
-                            ModifierHooks.REMOVE, ModifierHooks.TOOLTIP);
+                            ModifierHooks.REMOVE, ModifierHooks.TOOLTIP, ModifierHooks.ARMOR_INTERACT);
         hookBuilder.addModule(new SlotInChargeModule(SLOT_KEY));
         hookBuilder.addModule(new VolatileFlagModule(IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY));
         super.registerHooks(hookBuilder);

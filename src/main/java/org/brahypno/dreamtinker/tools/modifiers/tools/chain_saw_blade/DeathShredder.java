@@ -129,7 +129,8 @@ public class DeathShredder extends Modifier implements MeleeDamageModifierHook, 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder builder) {
         builder.addHook(this, ModifierHooks.MELEE_DAMAGE, ModifierHooks.MONSTER_MELEE_DAMAGE, ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT,
-                        ModifierHooks.INVENTORY_TICK, ModifierHooks.TOOL_USING, ModifierHooks.GENERAL_INTERACT, ModifierHooks.TOOLTIP);
+                        ModifierHooks.INVENTORY_TICK, ModifierHooks.TOOL_USING, ModifierHooks.GENERAL_INTERACT, ModifierHooks.TOOLTIP,
+                        ModifierHooks.ARMOR_INTERACT);
         builder.addModule(ToolTankHelper.TANK_HANDLER);
         builder.addModule(ToolEnergyCapability.ENERGY_HANDLER);
         builder.addModule(StatBoostModule.add(ToolEnergyCapability.MAX_STAT).flat(5000 * 10));

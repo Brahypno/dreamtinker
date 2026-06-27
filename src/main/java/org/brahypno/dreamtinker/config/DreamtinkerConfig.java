@@ -172,7 +172,7 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.DoubleValue AsOneAB =
             builder.comment("Max Absorption value get when damage larger than max health").defineInRange("AsOneAB", 1000.0, 0, 2000);
     public static final ForgeConfigSpec.ConfigValue<List<? extends String>> TheAsOneBlackList =
-            builder.comment("Effect in this black would not be removed").defineList("as_one_blacklist", List.of("modid:effect"),
+            builder.comment("Effect in this black would not be removed").defineList("as_one_blacklist", List.of("minecraft:night_vision"),
                                                                                     o -> o instanceof String s && isValidIdFormat(s));
 
 
