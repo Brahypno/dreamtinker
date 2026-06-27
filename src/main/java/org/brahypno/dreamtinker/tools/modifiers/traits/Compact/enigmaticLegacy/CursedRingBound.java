@@ -14,13 +14,13 @@ import org.brahypno.dreamtinker.Entity.AggressiveFox;
 import org.brahypno.dreamtinker.utils.CompactUtils.EnigmaticLegacyCompact;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
-import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.armor.EquipmentChangeModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.GeneralInteractionModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.InteractionSource;
+import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.EquipmentChangeContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
@@ -28,7 +28,7 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class CursedRingBound extends Modifier implements EquipmentChangeModifierHook, GeneralInteractionModifierHook, TooltipModifierHook {
+public class CursedRingBound extends NoLevelsModifier implements EquipmentChangeModifierHook, GeneralInteractionModifierHook, TooltipModifierHook {
     public static final ResourceLocation TAG_DEEP_CURSE = Dreamtinker.getLocation("deeper_curse");
 
     private boolean check(IToolStackView tool, ServerPlayer player) {
