@@ -962,6 +962,9 @@
   "modifier.dreamtinker.nova_reactive": "反应",
   "modifier.dreamtinker.nova_reactive.flavor": "与新生魔艺的反应相同",
   "modifier.dreamtinker.nova_reactive.description": "未见",
+  "modifier.dreamtinker.huge_explosion": "巨型爆炸",
+  "modifier.dreamtinker.huge_explosion.flavor": "一箭落下，轰然尽毁。",
+  "modifier.dreamtinker.huge_explosion.description": "投射物命中时产生大型爆炸，造成42点爆炸伤害。",
 
   "_comment.dreamtinker.materials": "======材料======",
   "material.dreamtinker.echo_alloy": "回响合金",

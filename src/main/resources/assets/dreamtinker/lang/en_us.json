@@ -962,6 +962,9 @@
   "modifier.dreamtinker.nova_reactive": "Reactive",
   "modifier.dreamtinker.nova_reactive.flavor": "Like Reactive in Ars Nouveau",
   "modifier.dreamtinker.nova_reactive.description": "Unexpected",
+  "modifier.dreamtinker.huge_explosion": "Huge Explosion",
+  "modifier.dreamtinker.huge_explosion.flavor": "A single arrow, a catastrophic blast.",
+  "modifier.dreamtinker.huge_explosion.description": "Projectiles create a large explosion on impact, dealing 42 explosion damage to nearby.",
 
   "_comment.dreamtinker.materials": "======Materials======",
   "material.dreamtinker.echo_alloy": "Echo Alloy",

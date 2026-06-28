@@ -406,6 +406,12 @@ public class DreamtinkerModifierRecipeProvider implements ICommonRecipeHelper {
                                         .setTools(protectableTools)
                                         .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.reprise_protection, defenseSalvage))
                                         .save(consumer, prefix(DreamtinkerModifiers.Ids.reprise_protection, defenseFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.huge_explosion)
+                             .addInput(Items.TNT, 4)
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .setTools(TinkerTags.Items.AMMO)
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.huge_explosion, upgradeSalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.Ids.huge_explosion, upgradeFolder));
         // Start of enigmaticlegacy modifiers
         wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.life_looting)
