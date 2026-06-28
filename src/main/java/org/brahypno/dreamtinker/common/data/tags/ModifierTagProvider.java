@@ -69,7 +69,8 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             .addOptional(ender_slayer.getId());
         this.tag(TinkerTags.Modifiers.BONUS_SLOTLESS)
             .add(Ids.huge_ego, Ids.five_creations, Ids.soul_upgrade, Ids.abyss_inside, Ids.meta_morphosis)
-            .addOptional(Ids.many_us, Ids.blighted_sigil, Ids.ashen_soul, Ids.naughty_chaos, Ids.cosmogony_tetrad, Ids.otherworld_precious);
+            .addOptional(Ids.many_us, Ids.blighted_sigil, Ids.ashen_soul, Ids.naughty_chaos, Ids.cosmogony_tetrad, Ids.otherworld_precious,
+                         Ids.divineMaledictus);
         this.tag(COSMETIC_SLOTLESS)
             .addOptional(occ_view.getId());
 

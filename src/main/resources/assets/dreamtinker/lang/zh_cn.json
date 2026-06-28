@@ -965,6 +965,12 @@
   "modifier.dreamtinker.huge_explosion": "巨型爆炸",
   "modifier.dreamtinker.huge_explosion.flavor": "一箭落下，轰然尽毁。",
   "modifier.dreamtinker.huge_explosion.description": "投射物命中时产生大型爆炸，造成42点爆炸伤害。",
+  "modifier.dreamtinker.unbreakable": "小小永恒",
+  "modifier.dreamtinker.unbreakable.flavor": "我的小小永恒之力",
+  "modifier.dreamtinker.unbreakable.description": "常规使用时不消耗工具耐久",
+  "modifier.dreamtinker.divine_maledictus": "神与暗黑",
+  "modifier.dreamtinker.divine_maledictus.flavor": "DID",
+  "modifier.dreamtinker.divine_maledictus.description": "这份相反带来一份额外的妄见槽",
 
   "_comment.dreamtinker.materials": "======材料======",
   "material.dreamtinker.echo_alloy": "回响合金",

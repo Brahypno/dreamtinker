@@ -1,0 +1,21 @@
+{
+  "level_display": "tconstruct:no_levels",
+  "modules": [
+    {
+      "type": "tconstruct:stat_boost",
+      "flat": 10.0,
+      "operation": "multiply_all",
+      "stat": "tconstruct:durability"
+    },
+    {
+      "type": "tconstruct:durability_color",
+      "color": "FFFFFF"
+    },
+    {
+      "type": "tconstruct:reduce_tool_damage",
+      "flat": 1.0
+    }
+  ],
+  "priority": 100,
+  "tooltip_display": "always"
+}

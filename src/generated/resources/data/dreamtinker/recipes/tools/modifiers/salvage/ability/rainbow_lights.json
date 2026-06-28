@@ -1,29 +1,5 @@
 {
   "type": "tconstruct:modifier_salvage",
-  "conditions": [
-    {
-      "type": "forge:or",
-      "values": [
-        {
-          "type": "tconstruct:config",
-          "prop": "force_integration_materials"
-        },
-        {
-          "type": "forge:and",
-          "values": [
-            {
-              "type": "forge:mod_loaded",
-              "modid": "tinkers_thinking"
-            },
-            {
-              "type": "esotericism_tinker:mod_compact_config",
-              "modid": "tinkers_thinking"
-            }
-          ]
-        }
-      ]
-    }
-  ],
   "modifier": "dreamtinker:rainbow_lights",
   "slots": {
     "abilities": 1

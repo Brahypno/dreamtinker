@@ -1,5 +1,9 @@
 {
-  "level_display": "tconstruct:single_level",
+  "condition": {
+    "type": "forge:mod_loaded",
+    "modid": "forbidden_arcanus"
+  },
+  "level_display": "tconstruct:default",
   "modules": [
     {
       "type": "tconstruct:modifier_slot",

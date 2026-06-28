@@ -28,6 +28,10 @@
     {
       "id": "dreamtinker:otherworld_precious",
       "required": false
+    },
+    {
+      "id": "dreamtinker:divine_maledictus",
+      "required": false
     }
   ]
 }

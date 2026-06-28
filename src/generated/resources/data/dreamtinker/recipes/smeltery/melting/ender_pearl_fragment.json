@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "item": "forbidden_arcanus:ender_pearl_fragment"
+  },
+  "result": {
+    "amount": 62,
+    "tag": "forge:ender"
+  },
+  "temperature": 477,
+  "time": 10
+}

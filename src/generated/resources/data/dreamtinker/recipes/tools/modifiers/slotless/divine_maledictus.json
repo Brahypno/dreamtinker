@@ -1,0 +1,41 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "forbidden_arcanus"
+            },
+            {
+              "type": "esotericism_tinker:mod_compact_config",
+              "modid": "forbidden_arcanus"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "item": "forbidden_arcanus:divine_pact"
+    },
+    {
+      "item": "forbidden_arcanus:maledictus_pact"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:divine_maledictus",
+  "tools": {
+    "tag": "tconstruct:modifiable"
+  }
+}

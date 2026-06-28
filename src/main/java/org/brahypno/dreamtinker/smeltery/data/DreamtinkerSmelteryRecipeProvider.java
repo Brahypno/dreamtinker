@@ -323,7 +323,9 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
         meltByName(fa, "deorum_chain", DreamtinkerFluids.molten_arcane_gold.get(), FluidValues.INGOT + FluidValues.NUGGET * 2, wrapped);
         MeltingRecipeBuilder.melting(itemNameIngredient(fa, "obsidian_with_iron"), TinkerFluids.moltenObsidian, FluidValues.INGOT, 0.2f)
                             .setOre(IMeltingContainer.OreRateType.METAL)
-                            .save(consumer, location(Melting_folder + "obsidian" + "/melting"));
+                            .save(consumer, location(Melting_folder + "obsidian_with_iron"));
+        MeltingRecipeBuilder.melting(itemNameIngredient(fa, "ender_pearl_fragment"), TinkerFluids.moltenEnder, FluidValues.SLIMEBALL / 4, 0.2f)
+                            .save(consumer, location(Melting_folder + "ender_pearl_fragment"));
 
         MeltingRecipeBuilder.melting(StrictNBTIngredient.of(ironHeart()),
                                      DreamtinkerFluids.molten_iron_heart, FluidValues.INGOT, 0.5f)

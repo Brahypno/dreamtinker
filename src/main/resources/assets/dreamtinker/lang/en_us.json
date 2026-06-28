@@ -965,6 +965,12 @@
   "modifier.dreamtinker.huge_explosion": "Huge Explosion",
   "modifier.dreamtinker.huge_explosion.flavor": "A single arrow, a catastrophic blast.",
   "modifier.dreamtinker.huge_explosion.description": "Projectiles create a large explosion on impact, dealing 42 explosion damage to nearby.",
+  "modifier.dreamtinker.unbreakable": "little eternal",
+  "modifier.dreamtinker.unbreakable.flavor": "My little Eternal",
+  "modifier.dreamtinker.unbreakable.description": "Tool would not consume damage on regular usage",
+  "modifier.dreamtinker.divine_maledictus": "Divine Maledictus",
+  "modifier.dreamtinker.divine_maledictus.flavor": "DID",
+  "modifier.dreamtinker.divine_maledictus.description": "This converse bring one extra delusion slot",
 
   "_comment.dreamtinker.materials": "======Materials======",
   "material.dreamtinker.echo_alloy": "Echo Alloy",

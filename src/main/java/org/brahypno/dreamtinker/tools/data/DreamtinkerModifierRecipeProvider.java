@@ -846,8 +846,24 @@ public class DreamtinkerModifierRecipeProvider implements ICommonRecipeHelper {
                              .addInput(DreamtinkerCommon.rainbow_honey_crystal.get())
                              .setSlots(SlotType.ABILITY, 1)
                              .setMaxLevel(1)
-                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.rainbow_lights, abilitySalvage))
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.rainbow_lights, abilitySalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.rainbow_lights, abilityFolder));
+        String fa = "forbidden_arcanus";
+        wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(fa));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.unbreakable)
+                             .setTools(Ingredient.of(TinkerTags.Items.DURABILITY))
+                             .addInput(ItemNameIngredient.from(new ResourceLocation(fa, "darkstone_upgrade_smithing_template")))
+                             .addInput(ItemNameIngredient.from(new ResourceLocation(fa, "eternal_stella")))
+                             .setSlots(SlotType.ABILITY, 1)
+                             .setMaxLevel(1)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.Ids.unbreakable, abilitySalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.Ids.unbreakable, abilityFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.divineMaledictus)
+                             .setTools(Ingredient.of(TinkerTags.Items.MODIFIABLE))
+                             .addInput(ItemNameIngredient.from(new ResourceLocation(fa, "divine_pact")))
+                             .addInput(ItemNameIngredient.from(new ResourceLocation(fa, "maledictus_pact")))
+                             .setMaxLevel(1)
+                             .save(wrapped, prefix(DreamtinkerModifiers.Ids.divineMaledictus, slotlessFolder));
 
     }
 
