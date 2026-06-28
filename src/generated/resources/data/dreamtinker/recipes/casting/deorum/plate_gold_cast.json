@@ -1,0 +1,20 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/plate"
+  },
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:plates/deorum"
+    }
+  ],
+  "cooling_time": 57,
+  "fluid": {
+    "amount": 90,
+    "tag": "dreamtinker:molten_arcane_gold"
+  },
+  "result": {
+    "tag": "forge:plates/deorum"
+  }
+}

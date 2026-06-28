@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:ore_melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:geore_clusters/deorum"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:geore_clusters/deorum"
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 360,
+    "fluid": "dreamtinker:molten_arcane_gold"
+  },
+  "temperature": 700,
+  "time": 142
+}

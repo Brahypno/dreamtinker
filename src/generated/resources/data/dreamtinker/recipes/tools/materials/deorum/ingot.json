@@ -1,0 +1,24 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "mantle:tag_filled",
+          "tag": "forge:ingots/deorum"
+        }
+      ]
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:ingots/deorum"
+  },
+  "material": "dreamtinker:arcane_gold",
+  "needed": 1,
+  "value": 1
+}

@@ -313,6 +313,14 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
         fluid(consumer, "arcane_gold", DreamtinkerFluids.molten_arcane_gold).optional()
                                                                             .baseUnit(FluidValues.INGOT).damageUnit(FluidValues.NUGGET)
                                                                             .metal().dust().plate().gear().coin().sheetmetal().geore().oreberry();
+        fluid(consumer, "deorum", DreamtinkerFluids.molten_arcane_gold).optional()
+                                                                       .baseUnit(FluidValues.INGOT).damageUnit(FluidValues.NUGGET)
+                                                                       .metal().dust().plate().gear().coin().sheetmetal().geore().oreberry();
+        String fa = "forbidden_arcanus";
+        wrapped = withCondition(consumer, modLoaded(fa));
+        meltByName(fa, "deorum_door", DreamtinkerFluids.molten_arcane_gold.get(), FluidValues.INGOT * 2, wrapped);
+        meltByName(fa, "deorum_pressure_plate", DreamtinkerFluids.molten_arcane_gold.get(), FluidValues.INGOT * 2, wrapped);
+        meltByName(fa, "deorum_chain", DreamtinkerFluids.molten_arcane_gold.get(), FluidValues.INGOT + FluidValues.NUGGET * 2, wrapped);
 
         MeltingRecipeBuilder.melting(StrictNBTIngredient.of(ironHeart()),
                                      DreamtinkerFluids.molten_iron_heart, FluidValues.INGOT, 0.5f)

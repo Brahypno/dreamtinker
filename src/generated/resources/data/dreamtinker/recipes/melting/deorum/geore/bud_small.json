@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:ore_melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:geore_small_buds/deorum"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:geore_small_buds/deorum"
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_arcane_gold"
+  },
+  "temperature": 700,
+  "time": 57
+}

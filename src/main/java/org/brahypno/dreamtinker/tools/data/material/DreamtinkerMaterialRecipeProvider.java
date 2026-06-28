@@ -176,6 +176,7 @@ public class DreamtinkerMaterialRecipeProvider implements IMaterialRecipeHelper,
         standardMetalMaterial(consumer, DreamtinkerMaterialIds.shadowSilver, DreamtinkerFluids.molten_shadow_silver, "shadow_silver", materials_folder);
 
         standardMetalMaterial(consumer, DreamtinkerMaterialIds.ArcaneGold, DreamtinkerFluids.molten_arcane_gold, "arcane_gold", materials_folder);
+        standardMetalMaterialWOMaterial(consumer, DreamtinkerMaterialIds.ArcaneGold, "deorum", materials_folder);
 
         standardMetalMaterial(consumer, DreamtinkerMaterialIds.TransmutationGold, DreamtinkerFluids.molten_transmutation_gold, "transmutation_gold",
                               materials_folder);
@@ -393,6 +394,10 @@ public class DreamtinkerMaterialRecipeProvider implements IMaterialRecipeHelper,
     private void standardMetalMaterial(Consumer<FinishedRecipe> consumer, MaterialId materialId, FlowingFluidObject<ForgeFlowingFluid> fluid, String name, String folder) {
         materialMeltingCasting(consumer, materialId, fluid, FluidValues.INGOT, folder);
 
+        standardMetalMaterialWOMaterial(consumer, materialId, name, folder);
+    }
+
+    private void standardMetalMaterialWOMaterial(Consumer<FinishedRecipe> consumer, MaterialId materialId, String name, String folder) {
         TagKey<Item> ingots = forgeTag("ingots", name);
         Consumer<FinishedRecipe> wrapped = withCondition(consumer, tagFilled(ingots));
         materialRecipe(wrapped, materialId, Ingredient.of(ingots), 1, 1, folder + name + "/ingot");

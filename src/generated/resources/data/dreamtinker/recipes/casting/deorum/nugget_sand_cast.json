@@ -1,0 +1,21 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/single_use/nugget"
+  },
+  "cast_consumed": true,
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:nuggets/deorum"
+    }
+  ],
+  "cooling_time": 19,
+  "fluid": {
+    "amount": 10,
+    "tag": "dreamtinker:molten_arcane_gold"
+  },
+  "result": {
+    "tag": "forge:nuggets/deorum"
+  }
+}

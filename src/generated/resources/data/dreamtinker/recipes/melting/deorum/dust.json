@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:dusts/deorum"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:dusts/deorum"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_arcane_gold"
+  },
+  "temperature": 700,
+  "time": 43
+}

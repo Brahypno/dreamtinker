@@ -1,0 +1,21 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/single_use/coin"
+  },
+  "cast_consumed": true,
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:coins/deorum"
+    }
+  ],
+  "cooling_time": 33,
+  "fluid": {
+    "amount": 30,
+    "tag": "dreamtinker:molten_arcane_gold"
+  },
+  "result": {
+    "tag": "forge:coins/deorum"
+  }
+}

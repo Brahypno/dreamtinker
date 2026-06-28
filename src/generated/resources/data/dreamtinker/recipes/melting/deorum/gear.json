@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:gears/deorum"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:gears/deorum"
+  },
+  "result": {
+    "amount": 360,
+    "fluid": "dreamtinker:molten_arcane_gold"
+  },
+  "temperature": 700,
+  "time": 114
+}
