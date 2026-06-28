@@ -30,7 +30,7 @@ public class RainbowLights extends Modifier implements MeleeDamageModifierHook, 
 
     @Override
     public float getMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
-        return damage * modifier.getEffectiveLevel() / 7.0f;
+        return damage / (7.0f + modifier.getLevel());
     }
 
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
@@ -39,7 +39,7 @@ public class RainbowLights extends Modifier implements MeleeDamageModifierHook, 
         Entity victim = context.getTarget();
         if (!victim.level().isClientSide){
             int inv = victim.invulnerableTime;
-            for (int i = 0; i < 9 && victim.isAlive(); i++) {
+            for (int i = 0; i < 9 + modifier.getLevel() && victim.isAlive(); i++) {
                 DamageSource source =
                         DreamtinkerDamageTypes.randomSourceNotSame(victim.level().registryAccess(), context.makeDamageSource(), victim.level().random);
                 victim.invulnerableTime = 0;
