@@ -115,7 +115,7 @@ public class DreamtinkerPartToolBuildingRecipeProvider implements IToolRecipeHel
         armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.AbjurationEssence);
         armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.EarthEssence);
 
-
+        armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.dragon_scale);
     }
 
     public void addToolBuildingRecipes(Consumer<FinishedRecipe> consumer) {

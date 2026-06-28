@@ -629,6 +629,18 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                            .build()
             ));
 
+        this.buildMaterial(DreamtinkerMaterialIds.dragon_scale)
+            .meleeHarvest().ranged().armor().arrowShaft().shieldCore()
+            .fallbacks("mental")
+            .transformer(GreyToSpriteTransformer.builderFromBlack()
+                                                .addARGB(63, 0xFF121018) // 近黑紫，末地主体暗部
+                                                .addARGB(102, 0xFF211A2B) // 深灰黑紫
+                                                .addARGB(140, 0xFF372D46) // 暗紫灰鳞片
+                                                .addARGB(178, 0xFF574867) // 中灰紫
+                                                .addARGB(216, 0xFF8B7CA1) // 冷淡紫高光
+                                                .addARGB(255, 0xFFD8D0E8) // 灰白紫亮边
+                                                .build());
+
 
         addELMaterials();
         addMalumMaterials();

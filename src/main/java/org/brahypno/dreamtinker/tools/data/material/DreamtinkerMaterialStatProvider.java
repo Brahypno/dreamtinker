@@ -159,6 +159,11 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          HandleMaterialStats.multipliers().durability(0.5f).miningSpeed(2.15f).attackDamage(1.35f).attackSpeed(2.15f).build(),
                          StatlessMaterialStats.BINDING);
 
+        addMaterialStats(DreamtinkerMaterialIds.dragon_scale,
+                         new HeadMaterialStats(2660, 12f, Tiers.NETHERITE, 8f),
+                         HandleMaterialStats.multipliers().durability(1.0f).miningSpeed(1.60f).attackDamage(1.20f).attackSpeed(1.10f).build(),
+                         StatlessMaterialStats.BINDING);
+
         addMaterialStats(DreamtinkerMaterialIds.Utherium,
                          new HeadMaterialStats(1000, 8.5f, Tiers.DIAMOND, 3.5f),
                          HandleMaterialStats.multipliers().durability(1.2f).attackDamage(1.15f).attackSpeed(1.05f).build(),
@@ -352,6 +357,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addMaterialStats(DreamtinkerMaterialIds.cryo_serpent_shift,
                          new LimbMaterialStats(518, 1.2f, 0.6f, -0.1f),
                          new GripMaterialStats(0.5f, -0.1f, 7f));
+        addMaterialStats(DreamtinkerMaterialIds.dragon_scale,
+                         new LimbMaterialStats(2660, 0.2f, 0.1f, 0.1f),
+                         new GripMaterialStats(1.0f, 0.5f, 8f));
 
         addMaterialStats(DreamtinkerMaterialIds.ArcaneGold,
                          new LimbMaterialStats(32, 0.1f, 0.15f, -0.2f),
@@ -490,6 +498,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addArmorShieldStats(DreamtinkerMaterialIds.cryo_serpent_shift,
                             PlatingMaterialStats.builder().durabilityFactor(51).armor(1f, 5f, 6f, 1f).toughness(7).knockbackResistance(5f),
                             StatlessMaterialStats.MAILLE);
+        addArmorShieldStats(DreamtinkerMaterialIds.dragon_scale,
+                            PlatingMaterialStats.builder().durabilityFactor(45).armor(6f, 8f, 10f, 5.5f).toughness(3.5f).knockbackResistance(0.15f),
+                            StatlessMaterialStats.MAILLE);
 
         addArmorShieldStats(DreamtinkerMaterialIds.Utherium,
                             PlatingMaterialStats.builder().durabilityFactor(30).armor(2f, 5f, 7f, 2f).toughness(3).knockbackResistance(0f),
@@ -590,6 +601,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         this.addMaterialStats(DreamtinkerMaterialIds.WildenHorn, StatlessMaterialStats.ARROW_SHAFT);
         this.addMaterialStats(DreamtinkerMaterialIds.WildenSpike, StatlessMaterialStats.ARROW_SHAFT);
         this.addMaterialStats(DreamtinkerMaterialIds.WildenWing, StatlessMaterialStats.ARROW_SHAFT);
+
+
+        this.addMaterialStats(DreamtinkerMaterialIds.dragon_scale, StatlessMaterialStats.ARROW_SHAFT);
 
     }
 

@@ -24,6 +24,7 @@ import net.minecraftforge.common.crafting.conditions.OrCondition;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerCommon;
+import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
 import org.brahypno.dreamtinker.fluids.DreamtinkerFluids;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.jetbrains.annotations.NotNull;
@@ -204,6 +205,9 @@ public class DreamtinkerMaterialRecipeProvider implements IMaterialRecipeHelper,
         materialMeltingCasting(consumer, DreamtinkerMaterialIds.deliverance, DreamtinkerFluids.unmelting_teardrop, FluidValues.NUGGET,
                                materials_folder);
         materialRecipe(consumer, DreamtinkerMaterialIds.deliverance, Ingredient.of(DreamtinkerCommon.eden_fruit.get()), 1, 1, materials_folder + "eden_fruit");
+
+        materialRecipe(consumer, DreamtinkerMaterialIds.dragon_scale, Ingredient.of(DreamtinkerTagKeys.Items.dragonScale), 1, 1,
+                       materials_folder + "dragon_scale");
 
     }
 

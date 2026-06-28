@@ -131,6 +131,8 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.deliverance, signet, burden_bearer);
         addTraits(DreamtinkerMaterialIds.deliverance, ARMOR, metamorphosis, burden_bearer);
 
+        addDefaultTraits(DreamtinkerMaterialIds.dragon_scale, ModifierIds.draconic);
+
         addDefaultTraits(DreamtinkerMaterialIds.ArcaneGold, arcane_hit.getId());
         addTraits(DreamtinkerMaterialIds.ArcaneGold, ARMOR, TinkerModifiers.golden.getId(), ModifierIds.magicProtection, Ids.arcane_protection);
         addTraits(DreamtinkerMaterialIds.ArcaneGold, PlatingMaterialStats.SHIELD.getId(), ModifierIds.magicProtection, Ids.arcane_protection);

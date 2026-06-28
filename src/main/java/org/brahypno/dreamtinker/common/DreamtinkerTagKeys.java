@@ -92,6 +92,7 @@ public class DreamtinkerTagKeys {
         }
 
         public static final TagKey<Item> arcaneGoldIngot = forgeTag("ingots/arcane_gold");
+        public static final TagKey<Item> dragonScale = forgeTag("dragon_scales");
 
         public static final TagKey<Item> DarkMetalNuggets = forgeTag("nuggets/dark_metal");
         public static final TagKey<Item> DarkMetalIngot = forgeTag("ingots/dark_metal");
