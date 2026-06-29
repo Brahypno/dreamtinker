@@ -236,6 +236,8 @@ dependencies {
     //implementation fg.deobf("curse.maven:modonomicon-538392:7446143")
     //runtimeOnly fg.deobf("com.klikli_dev:occultism-${minecraft_version}:${occultism_version}") { transitive = false }
     //implementation fg.deobf("curse.maven:legendary-monsters-944035:8170235") { transitive = false }
+    //implementation fg.deobf("curse.maven:valhelsia-core-416935:5189548")
+    //implementation fg.deobf("curse.maven:forbidden-arcanus-309858:5198323") { transitive = false }
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

@@ -232,7 +232,11 @@
     "not_end_er": "#2E574D",
     "ender_end": "#2E574D",
     "ender_protection": "#2E574D",
-    "nova_reactive": "#F7D349"
+    "nova_reactive": "#F7D349",
+    "faa_aureal_attack": "#C6E6EC",
+    "faa_aureal_protection": "#C6E6EC",
+    "faa_corruption_attack": "#433441",
+    "faa_corruption_defense": "#433441"
   },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
@@ -315,7 +319,8 @@
     "whimsy_gold": "#C5C1D5",
     "cryo_serpent_shift": "#B4B3F2",
     "legendary_monsters_enderitium": "#2E574D",
-    "dragon_scale": "#8B7CA1"
+    "dragon_scale": "#8B7CA1",
+    "faa_dark_nether_star": "#7D36D8"
   },
   "harvest_tier.dreamtinker": {
     "lupus": "#E1B873",

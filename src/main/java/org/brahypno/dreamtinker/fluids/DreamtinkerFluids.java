@@ -325,6 +325,10 @@ public class DreamtinkerFluids {
             registerFluid(FLUIDS, "molten_enderitium", 1600, 100, 100, 10,
                           supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.METAL, 10), 10, 4) {});
 
+    public static final FlowingFluidObject<ForgeFlowingFluid> molten_dark_neither_star =
+            registerFluid(FLUIDS, "molten_dark_neither_star", 1600, 100, 100, 10,
+                          supplier -> new BurningLiquidBlock(supplier, FluidDeferredRegister.createProperties(MapColor.METAL, 10), 10, 4) {});
+
     private static FlowingFluidObject<SlimeFluid> registerSlime(FluidDeferredRegister register, String name, int temp, int viscosity, int density, int lightLevel, Function<Supplier<? extends FlowingFluid>, LiquidBlock> blockFunction) {
         return register.register(name).tickRate(50).type(createFluidType(temp, lightLevel, viscosity, density)).block(blockFunction).bucket()
                        .flowing(SlimeFluid.Source::new, SlimeFluid.Flowing::new);
@@ -391,6 +395,10 @@ public class DreamtinkerFluids {
         acceptMolten(output, gooey_slime);
         if (ModList.get().isLoaded("legendary_monsters") && !configCompactDisabled("legendary_monsters")){
             output.accept(molten_enderitium);
+        }
+
+        if (ModList.get().isLoaded("forbidden_arcanus") && !configCompactDisabled("forbidden_arcanus")){
+            output.accept(molten_dark_neither_star);
         }
     }
 

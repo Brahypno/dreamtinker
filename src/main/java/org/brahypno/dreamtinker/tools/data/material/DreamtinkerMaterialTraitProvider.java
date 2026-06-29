@@ -131,7 +131,6 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.deliverance, signet, burden_bearer);
         addTraits(DreamtinkerMaterialIds.deliverance, ARMOR, metamorphosis, burden_bearer);
 
-        addDefaultTraits(DreamtinkerMaterialIds.dragon_scale, ModifierIds.draconic);
 
         addDefaultTraits(DreamtinkerMaterialIds.ArcaneGold, arcane_hit.getId());
         addTraits(DreamtinkerMaterialIds.ArcaneGold, ARMOR, TinkerModifiers.golden.getId(), ModifierIds.magicProtection, Ids.arcane_protection);
@@ -254,6 +253,10 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.legendary_monsters_enderitium, MELEE_HARVEST, Ids.not_end_er, Ids.ender_end);
         addTraits(DreamtinkerMaterialIds.legendary_monsters_enderitium, ARMOR, Ids.ender_protection);
 
+
+        addDefaultTraits(DreamtinkerMaterialIds.dragon_scale, ModifierIds.draconic);
+        addDefaultTraits(DreamtinkerMaterialIds.faa_dark_nether_star, Ids.faa_aureal_attack, Ids.faa_corruption_attack);
+        addTraits(DreamtinkerMaterialIds.faa_dark_nether_star, ARMOR, Ids.faa_aureal_protection, corruption_defense.getId());
 
     }
 

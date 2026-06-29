@@ -1,0 +1,30 @@
+{
+  "condition": {
+    "type": "forge:mod_loaded",
+    "modid": "forbidden_arcanus"
+  },
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:protection",
+      "formula": [
+        "$aureal",
+        50.0,
+        "/",
+        "$level",
+        "*",
+        "$protection",
+        "+"
+      ],
+      "variables": {
+        "aureal": {
+          "type": "tconstruct:entity",
+          "entity_type": "dreamtinker:faa_aureal",
+          "fallback": 0.0,
+          "which": "target"
+        }
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

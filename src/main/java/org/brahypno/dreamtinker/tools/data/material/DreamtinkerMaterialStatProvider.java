@@ -197,14 +197,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addBICMeleeHarvest();
         addNovaMeleeHarvest();
         addLMMeleeHarvest();
+        addFAAMeleeHarvest();
     }
 
-    private void addLMMeleeHarvest() {
-        addMaterialStats(DreamtinkerMaterialIds.legendary_monsters_enderitium,
-                         new HeadMaterialStats(1500, 4f, Tiers.NETHERITE, 5.5f),
-                         HandleMaterialStats.multipliers().durability(1.2f).miningSpeed(1.1f).attackDamage(1.40f).attackSpeed(1.10f).build(),
-                         StatlessMaterialStats.BINDING);
-    }
 
     private void addELMeleeHarvest() {
         addMaterialStats(DreamtinkerMaterialIds.etherium,
@@ -281,6 +276,20 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          HandleMaterialStats.multipliers().durability(1.05f).miningSpeed(1.05f).attackDamage(1.05f).attackSpeed(1.05f).build(),
                          StatlessMaterialStats.BINDING);
 
+    }
+
+    private void addLMMeleeHarvest() {
+        addMaterialStats(DreamtinkerMaterialIds.legendary_monsters_enderitium,
+                         new HeadMaterialStats(1500, 4f, Tiers.NETHERITE, 5.5f),
+                         HandleMaterialStats.multipliers().durability(1.2f).miningSpeed(1.1f).attackDamage(1.40f).attackSpeed(1.10f).build(),
+                         StatlessMaterialStats.BINDING);
+    }
+
+    private void addFAAMeleeHarvest() {
+        addMaterialStats(DreamtinkerMaterialIds.faa_dark_nether_star,
+                         new HeadMaterialStats(900, 12f, Tiers.NETHERITE, 6f),
+                         HandleMaterialStats.multipliers().durability(1.2f).miningSpeed(1.1f).attackDamage(1.20f).attackSpeed(1.10f).build(),
+                         StatlessMaterialStats.BINDING);
     }
 
     private void addRanged() {
@@ -419,6 +428,12 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new GripMaterialStats(-0.05f, 0.10f, 1.5f),
                          StatlessMaterialStats.BOWSTRING);
         addMaterialStats(DreamtinkerMaterialIds.GooeySlimeSkin, StatlessMaterialStats.BOWSTRING);
+
+        addMaterialStats(DreamtinkerMaterialIds.faa_dark_nether_star,
+                         new LimbMaterialStats(900, 0.05f, 0.2f, -0.1f),
+                         new GripMaterialStats(0.3f, 0.10f, 6f),
+                         StatlessMaterialStats.BOWSTRING);
+
     }
 
     private void addArmor() {
@@ -498,9 +513,6 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addArmorShieldStats(DreamtinkerMaterialIds.cryo_serpent_shift,
                             PlatingMaterialStats.builder().durabilityFactor(51).armor(1f, 5f, 6f, 1f).toughness(7).knockbackResistance(5f),
                             StatlessMaterialStats.MAILLE);
-        addArmorShieldStats(DreamtinkerMaterialIds.dragon_scale,
-                            PlatingMaterialStats.builder().durabilityFactor(45).armor(6f, 8f, 10f, 5.5f).toughness(3.5f).knockbackResistance(0.15f),
-                            StatlessMaterialStats.MAILLE);
 
         addArmorShieldStats(DreamtinkerMaterialIds.Utherium,
                             PlatingMaterialStats.builder().durabilityFactor(30).armor(2f, 5f, 7f, 2f).toughness(3).knockbackResistance(0f),
@@ -565,6 +577,14 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                             StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
 
         addMaterialStats(DreamtinkerMaterialIds.GooeySlimeSkin, StatlessMaterialStats.CUIRASS);
+
+        addArmorShieldStats(DreamtinkerMaterialIds.dragon_scale,
+                            PlatingMaterialStats.builder().durabilityFactor(45).armor(6f, 8f, 10f, 5.5f).toughness(3.5f).knockbackResistance(0.15f),
+                            StatlessMaterialStats.MAILLE);
+
+        addArmorShieldStats(DreamtinkerMaterialIds.faa_dark_nether_star,
+                            PlatingMaterialStats.builder().durabilityFactor(30).armor(4f, 6f, 8f, 3f).toughness(3.5f).knockbackResistance(0.15f),
+                            StatlessMaterialStats.MAILLE);
     }
 
     private void addAmmo() {

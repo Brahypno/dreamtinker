@@ -1,5 +1,11 @@
 {
   "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "forbidden_arcanus"
+    }
+  ],
   "ingredient": {
     "item": "forbidden_arcanus:ender_pearl_fragment"
   },

@@ -1,0 +1,60 @@
+{
+  "condition": {
+    "type": "forge:mod_loaded",
+    "modid": "forbidden_arcanus"
+  },
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:conditional_power",
+      "formula": [
+        "$aureal",
+        500.0,
+        "/",
+        "$level",
+        "*",
+        "$multiplier",
+        "*",
+        1.0,
+        "+",
+        "$damage",
+        "*"
+      ],
+      "percent": true,
+      "variables": {
+        "aureal": {
+          "type": "tconstruct:entity",
+          "entity_type": "dreamtinker:faa_aureal",
+          "fallback": 0.0,
+          "which": "attacker"
+        }
+      }
+    },
+    {
+      "type": "tconstruct:conditional_melee_damage",
+      "formula": [
+        "$aureal",
+        500.0,
+        "/",
+        "$level",
+        "*",
+        "$multiplier",
+        "*",
+        1.0,
+        "+",
+        "$damage",
+        "*"
+      ],
+      "percent": true,
+      "variables": {
+        "aureal": {
+          "type": "tconstruct:entity",
+          "entity_type": "dreamtinker:faa_aureal",
+          "fallback": 0.0,
+          "which": "attacker"
+        }
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

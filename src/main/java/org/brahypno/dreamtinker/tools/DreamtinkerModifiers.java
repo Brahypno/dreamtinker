@@ -6,12 +6,14 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.DreamtinkerModule;
@@ -46,6 +48,7 @@ import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.m
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.etherium.EtheriumProtection;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.evil.EvilAttack;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.soul_aether.ExilesFaulty;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.faa.CorruptionDefense;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.legendary_monsters.SoulRage;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.legendary_monsters.annihilatorArmorPower;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.malum.*;
@@ -92,6 +95,10 @@ import org.brahypno.dreamtinker.tools.modifiers.traits.material.scolecite.pupalO
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.star_regulus.TwoHeadedSeven;
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.star_regulus.as_one;
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.whimsyGold.RhinegoldCatModifier;
+import org.brahypno.dreamtinker.utils.CompactUtils.ForbiddenArcanusAurealCompact;
+import slimeknights.mantle.data.predicate.block.BlockPredicate;
+import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
+import slimeknights.tconstruct.library.json.variable.entity.EntityVariable;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
 import slimeknights.tconstruct.library.modifiers.fluid.FluidEffect;
 import slimeknights.tconstruct.library.modifiers.modules.ModifierModule;
@@ -100,7 +107,6 @@ import slimeknights.tconstruct.library.modifiers.util.StaticModifier;
 
 
 public final class DreamtinkerModifiers extends DreamtinkerModule {
-    public static ModifierDeferredRegister OCC_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
 
     public static ModifierDeferredRegister MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     public static ModifierDeferredRegister EL_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
@@ -108,8 +114,11 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static ModifierDeferredRegister EIDOLON_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     public static ModifierDeferredRegister BIC_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     public static ModifierDeferredRegister LM_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
-    public static final StaticModifier<OtherworldHarvest> occ_harvest =
-            OCC_MODIFIERS.register("occ_harvest", OtherworldHarvest::new);
+    public static final EntityVariable AUREAL =
+            EntityVariable.simple(entity -> entity instanceof Player player ? ForbiddenArcanusAurealCompact.getAureal(player) : 0);
+    public static final EntityVariable CORRUPTION =
+            EntityVariable.simple(entity -> entity instanceof Player player ? ForbiddenArcanusAurealCompact.getCorruption(player) : 0);
+    public static ModifierDeferredRegister OCC_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     //Mashuo
     public static final StaticModifier<RealSweep> real_sweep = MODIFIERS.register("real_sweep", RealSweep::new);
     public static final StaticModifier<StrongHeavy> strong_heavy = MODIFIERS.register("strong_heavy", StrongHeavy::new);
@@ -293,6 +302,17 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<SoulRage> soul_rage = LM_MODIFIERS.register("soul_rage", SoulRage::new);
     public static final StaticModifier<annihilatorArmorPower> annihilator_armor_power =
             LM_MODIFIERS.register("annihilator_armor_power", annihilatorArmorPower::new);
+    public static final StaticModifier<OtherworldHarvest> occ_harvest = OCC_MODIFIERS.register("occ_harvest", OtherworldHarvest::new);
+    public static ModifierDeferredRegister FAA_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
+    public static final StaticModifier<CorruptionDefense> corruption_defense = FAA_MODIFIERS.register("faa_corruption_defense", CorruptionDefense::new);
+    public static BlockPredicate BLOCK_OF_UNDER_GARDEN = BlockPredicate.simple(state -> {
+        ResourceLocation id = ForgeRegistries.BLOCKS.getKey(state.getBlock());
+        return id != null && id.getNamespace().matches("undergarden");
+    });
+    public static LivingEntityPredicate LIVING_OF_UNDER_GARDEN = LivingEntityPredicate.simple(le -> {
+        ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(le.getType());
+        return id != null && id.getNamespace().matches("undergarden");
+    });
 
     @SuppressWarnings({"removal"})
     public DreamtinkerModifiers() {
@@ -315,8 +335,10 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         if (ModList.get().isLoaded("occultism")){
             OCC_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         }
+        if (ModList.get().isLoaded("forbidden_arcanus")){
+            FAA_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        }
     }
-
 
     @SubscribeEvent
     void registerSerializers(RegisterEvent event) {
@@ -329,6 +351,12 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             FluidEffect.ENTITY_EFFECTS.register(Dreamtinker.getLocation("despair_scaling_damage_fluid"), DespairScalingDamageFluidEffect.LOADER);
             FluidEffect.BLOCK_EFFECTS.register(Dreamtinker.getLocation("auto_tag_cycle_block_fluid"), AutoTagCycleBlockFluidEffect.LOADER);
 
+            LivingEntityPredicate.LOADER.register(Dreamtinker.getLocation("living_of_undergarden"), LIVING_OF_UNDER_GARDEN.getLoader());
+            BlockPredicate.LOADER.register(Dreamtinker.getLocation("block_of_undergarden"), BLOCK_OF_UNDER_GARDEN.getLoader());
+
+            EntityVariable.LOADER.register(Dreamtinker.getLocation("faa_aureal"), AUREAL.getLoader());
+
+            EntityVariable.LOADER.register(Dreamtinker.getLocation("faa_corruption"), CORRUPTION.getLoader());
         }
     }
 
@@ -485,6 +513,10 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId not_end_er = id("not_end_er");
         public static final ModifierId ender_end = id("ender_end");
         public static final ModifierId ender_protection = id("ender_protection");
+
+        public static final ModifierId faa_aureal_protection = id("faa_aureal_protection");
+        public static final ModifierId faa_aureal_attack = id("faa_aureal_attack");
+        public static final ModifierId faa_corruption_attack = id("faa_corruption_attack");
 
         private static ModifierId id(String name) {
             return new ModifierId(Dreamtinker.MODID, name);

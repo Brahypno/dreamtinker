@@ -1,0 +1,12 @@
+{
+  "type": "tconstruct:melting",
+  "ingredient": {
+    "item": "forbidden_arcanus:dark_nether_star_block"
+  },
+  "result": {
+    "amount": 900,
+    "fluid": "dreamtinker:molten_dark_neither_star"
+  },
+  "temperature": 1300,
+  "time": 15
+}

@@ -73,6 +73,7 @@ import slimeknights.tconstruct.library.json.variable.mining.BlockLightVariable;
 import slimeknights.tconstruct.library.json.variable.mining.BlockMiningSpeedVariable;
 import slimeknights.tconstruct.library.json.variable.mining.BlockTemperatureVariable;
 import slimeknights.tconstruct.library.json.variable.power.EntityPowerVariable;
+import slimeknights.tconstruct.library.json.variable.protection.EntityProtectionVariable;
 import slimeknights.tconstruct.library.json.variable.stat.EntityConditionalStatVariable;
 import slimeknights.tconstruct.library.json.variable.tool.ToolStatVariable;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -104,8 +105,6 @@ import slimeknights.tconstruct.tools.modules.combat.FreezingAttackModule;
 import team.lodestar.lodestone.registry.common.LodestoneAttributeRegistry;
 
 import static net.minecraft.tags.DamageTypeTags.BYPASSES_ENCHANTMENTS;
-import static org.brahypno.dreamtinker.common.DreamtinkerCommon.BLOCK_OF_UNDER_GARDEN;
-import static org.brahypno.dreamtinker.common.DreamtinkerCommon.LIVING_OF_UNDER_GARDEN;
 import static org.brahypno.dreamtinker.library.compact.ars_nouveau.NovaRegistry.nova_magic_armor;
 import static org.brahypno.dreamtinker.tools.DreamtinkerModifiers.*;
 import static slimeknights.tconstruct.common.TinkerTags.Items.*;
@@ -463,6 +462,137 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                            ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
         buildModifier(Ids.ender_protection, DreamtinkerMaterialDataProvider.modLoaded("legendary_monsters"))
                 .addModule(ProtectionModule.builder().attacker(ender).eachLevel(4f));
+    }
+
+    private static final float UNDERPLATE_ARMOR_FACTOR = 0.8f;
+
+    private void addMalumModifiers() {
+        buildModifier(Ids.malum_rebound, DreamtinkerMaterialDataProvider.modLoaded("malum"))
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(EnchantmentModule.builder(EnchantmentRegistry.REBOUND.get()).level(1).constant())
+                .addModule(ModifierRequirementsModule.builder().requireModifier(malum_base.getId(), 1)
+                                                     .requirement(HasModifierPredicate.hasModifier(Ids.malum_ascension, 1).inverted())
+                                                     .modifierKey(Ids.malum_rebound).build());
+        buildModifier(Ids.malum_ascension, DreamtinkerMaterialDataProvider.modLoaded("malum"))
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(EnchantmentModule.builder(EnchantmentRegistry.ASCENSION.get()).level(1).constant())
+                .addModule(ModifierRequirementsModule.builder().requireModifier(malum_base.getId(), 1)
+                                                     .requirement(HasModifierPredicate.hasModifier(Ids.malum_rebound, 1).inverted())
+                                                     .modifierKey(Ids.malum_ascension).build());
+        buildModifier(Ids.malum_animated, DreamtinkerMaterialDataProvider.modLoaded("malum"))
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(EnchantmentModule.builder(EnchantmentRegistry.ANIMATED.get()).level(2).constant())
+                .addModule(ModifierRequirementsModule.builder()
+                                                     .requirement(HasModifierPredicate.hasModifier(Ids.malum_haunted, 1).inverted())
+                                                     .modifierKey(Ids.malum_animated).build());
+        buildModifier(Ids.malum_haunted, DreamtinkerMaterialDataProvider.modLoaded("malum"))
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(EnchantmentModule.builder(EnchantmentRegistry.HAUNTED.get()).level(2).constant())
+                .addModule(ModifierRequirementsModule.builder()
+                                                     .requirement(HasModifierPredicate.hasModifier(Ids.malum_animated, 1).inverted())
+                                                     .modifierKey(Ids.malum_haunted).build());
+        buildModifier(Ids.malum_spirit_plunder, DreamtinkerMaterialDataProvider.modLoaded("malum"))
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(AttributeModule.builder(AttributeRegistry.SPIRIT_SPOILS, AttributeModifier.Operation.ADDITION).eachLevel(2.0f));
+
+        buildModifier(Ids.malum_tyrving, DreamtinkerMaterialDataProvider.modLoaded("malum"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+        buildModifier(Ids.malum_world_of_weight, DreamtinkerMaterialDataProvider.modLoaded("malum"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+        buildModifier(Ids.malum_edge_of_deliverance, DreamtinkerMaterialDataProvider.modLoaded("malum"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+        buildModifier(Ids.malum_sol_tiferet, not(DreamtinkerMaterialDataProvider.modLoaded("malum")))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+
+        buildModifier(Ids.many_us, DreamtinkerMaterialDataProvider.modLoaded("malum"))
+                .tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModules(ModifierSlotModule.slot(EsotericismSlotType.DELUSION).flat(1));
+        buildModifier(Ids.spiritual_weapon_transformation, not(DreamtinkerMaterialDataProvider.modLoaded("malum")))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(ModifierRequirementsModule.builder().requireModifier(weapon_transformation.getId(), 1)
+                                                     .modifierKey(Ids.spiritual_weapon_transformation).build())
+                .addModule(underplateAttribute(LodestoneAttributeRegistry.MAGIC_DAMAGE.get(), true, EquipmentSlot.CHEST))
+                .addModule(underplateAttribute(LodestoneAttributeRegistry.MAGIC_RESISTANCE.get(), false, EquipmentSlot.CHEST, 0.25f, 0.4f))
+                .addModule(underplateAttribute(AttributeRegistry.ARCANE_RESONANCE.get(), true, EquipmentSlot.LEGS))
+                .addModule(underplateAttribute(AttributeRegistry.MALIGNANT_CONVERSION.get(), false, EquipmentSlot.LEGS))
+                .addModule(underplateAttribute(AttributeRegistry.SOUL_WARD_INTEGRITY.get(), true, EquipmentSlot.FEET))
+                .addModule(underplateAttribute(AttributeRegistry.SOUL_WARD_RECOVERY_RATE.get(), false, EquipmentSlot.FEET, 0.5f, Float.MAX_VALUE))
+                .addModule(underplateAttribute(AttributeRegistry.SCYTHE_PROFICIENCY.get(), true, EquipmentSlot.HEAD))
+                .addModule(underplateAttribute(AttributeRegistry.SOUL_WARD_CAP.get(), false, EquipmentSlot.HEAD, 0.5f, Float.MAX_VALUE));
+
+
+    }
+
+    private static final float UNDERPLATE_TOUGHNESS_FACTOR = 0.8f;
+
+
+    //below are custom methods
+    private static final float UNDERPLATE_K1 = 20.0f;
+    private static final float UNDERPLATE_P1 = -0.08f;
+    private static final float UNDERPLATE_K2 = 400.0f;
+    private static final float UNDERPLATE_P2 = -0.17f;
+
+    private static AttributeModule underplateAttribute(Attribute attribute, boolean positive, EquipmentSlot slot) {
+        return underplateAttribute(attribute, positive, slot, 1.0f, Float.MAX_VALUE);
+    }
+
+    private static AttributeModule underplateAttribute(
+            Attribute attribute,
+            boolean positive,
+            EquipmentSlot slot,
+            float scale,
+            float cap
+    ) {
+        AttributeModule.Builder builder = AttributeModule.builder(attribute, AttributeModifier.Operation.MULTIPLY_TOTAL)
+                                                         .slots(slot)
+                                                         .tooltipStyle(AttributeModule.TooltipStyle.ATTRIBUTE)
+                                                         .customVariable("armor", new ToolStatVariable(ToolStats.ARMOR))
+                                                         .customVariable("toughness", new ToolStatVariable(ToolStats.ARMOR_TOUGHNESS));
+
+        var formula = builder.formula();
+
+        appendUnderplateSoftcapFormula(formula);
+
+        formula
+                .constant(scale).multiply()
+                .constant(cap).min();
+
+        if (!positive){
+            formula.constant(-1.0f).multiply();
+        }
+
+        return formula.build();
+    }
+
+    private static void appendUnderplateSoftcapFormula(AttributeModule.Builder.FormulaVariableBuilder formula) {
+        appendUnderplateU(formula);
+        formula
+                .constant(UNDERPLATE_K1).divide()
+                .constant(1.0f).add()
+                .constant(UNDERPLATE_P1).power();
+
+        appendUnderplateU(formula);
+        formula
+                .constant(UNDERPLATE_K2).divide()
+                .constant(1.0f).add()
+                .constant(UNDERPLATE_P2).power();
+
+        formula
+                .multiply()
+                .constant(-1.0f).multiply()
+                .constant(1.0f).add()
+                .constant(UNDERPLATE_MAX).multiply();
+    }
+
+    private static void appendUnderplateU(AttributeModule.Builder.FormulaVariableBuilder formula) {
+        formula
+                .customVariable("armor")
+                .constant(UNDERPLATE_ARMOR_FACTOR).multiply()
+                .customVariable("toughness")
+                .constant(UNDERPLATE_TOUGHNESS_FACTOR).multiply()
+                .add()
+                .constant(0.0f).max();
     }
 
     @Override
@@ -953,138 +1083,55 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         addOCCModifiers();
         addBOTANIAModifiers();
         addLMModifiers();
+        addFAAModifiers();
 
     }
 
-    //below are custom methods
+    private void addFAAModifiers() {
+        buildModifier(Ids.faa_aureal_protection, modLoaded("forbidden_arcanus"))
+                .addModule(ProtectionModule.builder().source(DamageSourcePredicate.ANY)
+                                           .formula()
+                                           .customVariable("aureal",
+                                                           new EntityProtectionVariable(AUREAL, EntityProtectionVariable.WhichEntity.TARGET, 0.0f))
+                                           .constant(50).divide()
+                                           .variable(LEVEL).multiply()
+                                           .variable(VALUE).add().build());
+        buildModifier(Ids.faa_aureal_attack, modLoaded("forbidden_arcanus"))
+                .addModule(ConditionalPowerModule.builder().percent().formula()
+                                                 .customVariable("aureal",
+                                                                 new EntityPowerVariable(AUREAL, EntityMeleeVariable.WhichEntity.ATTACKER, 0.0f))
+                                                 .constant(500).divide()
+                                                 .variable(LEVEL).multiply()
+                                                 .variable(MULTIPLIER).multiply()
+                                                 .constant(1).add()
+                                                 .variable(VALUE).multiply().build())
+                .addModule(ConditionalMeleeDamageModule.builder().percent().formula()
+                                                       .customVariable("aureal",
+                                                                       new EntityMeleeVariable(AUREAL, EntityMeleeVariable.WhichEntity.ATTACKER, 0.0f))
+                                                       .constant(500).divide()
+                                                       .variable(LEVEL).multiply()
+                                                       .variable(MULTIPLIER).multiply()
+                                                       .constant(1).add()
+                                                       .variable(VALUE).multiply().build());
 
-    private static final float UNDERPLATE_ARMOR_FACTOR = 0.8f;
-    private static final float UNDERPLATE_TOUGHNESS_FACTOR = 0.8f;
-    private static final float UNDERPLATE_K1 = 20.0f;
-    private static final float UNDERPLATE_P1 = -0.08f;
-    private static final float UNDERPLATE_K2 = 400.0f;
-    private static final float UNDERPLATE_P2 = -0.17f;
-
-    private static AttributeModule underplateAttribute(Attribute attribute, boolean positive, EquipmentSlot slot) {
-        return underplateAttribute(attribute, positive, slot, 1.0f, Float.MAX_VALUE);
+        buildModifier(Ids.faa_corruption_attack, modLoaded("forbidden_arcanus"))
+                .addModule(ConditionalPowerModule.builder().percent().formula()
+                                                 .customVariable("corruption",
+                                                                 new EntityPowerVariable(CORRUPTION, EntityMeleeVariable.WhichEntity.ATTACKER, 0.0f))
+                                                 .constant(125).divide()
+                                                 .variable(LEVEL).multiply()
+                                                 .variable(MULTIPLIER).multiply()
+                                                 .constant(1).add()
+                                                 .variable(VALUE).multiply().build())
+                .addModule(ConditionalMeleeDamageModule.builder().percent().formula()
+                                                       .customVariable("corruption",
+                                                                       new EntityMeleeVariable(CORRUPTION, EntityMeleeVariable.WhichEntity.ATTACKER, 0.0f))
+                                                       .constant(125).divide()
+                                                       .variable(LEVEL).multiply()
+                                                       .variable(MULTIPLIER).multiply()
+                                                       .constant(1).add()
+                                                       .variable(VALUE).multiply().build());
     }
-
-    private static AttributeModule underplateAttribute(
-            Attribute attribute,
-            boolean positive,
-            EquipmentSlot slot,
-            float scale,
-            float cap
-    ) {
-        AttributeModule.Builder builder = AttributeModule.builder(attribute, AttributeModifier.Operation.MULTIPLY_TOTAL)
-                                                         .slots(slot)
-                                                         .tooltipStyle(AttributeModule.TooltipStyle.ATTRIBUTE)
-                                                         .customVariable("armor", new ToolStatVariable(ToolStats.ARMOR))
-                                                         .customVariable("toughness", new ToolStatVariable(ToolStats.ARMOR_TOUGHNESS));
-
-        var formula = builder.formula();
-
-        appendUnderplateSoftcapFormula(formula);
-
-        formula
-                .constant(scale).multiply()
-                .constant(cap).min();
-
-        if (!positive){
-            formula.constant(-1.0f).multiply();
-        }
-
-        return formula.build();
-    }
-
-    private static void appendUnderplateSoftcapFormula(AttributeModule.Builder.FormulaVariableBuilder formula) {
-        appendUnderplateU(formula);
-        formula
-                .constant(UNDERPLATE_K1).divide()
-                .constant(1.0f).add()
-                .constant(UNDERPLATE_P1).power();
-
-        appendUnderplateU(formula);
-        formula
-                .constant(UNDERPLATE_K2).divide()
-                .constant(1.0f).add()
-                .constant(UNDERPLATE_P2).power();
-
-        formula
-                .multiply()
-                .constant(-1.0f).multiply()
-                .constant(1.0f).add()
-                .constant(UNDERPLATE_MAX).multiply();
-    }
-
-    private static void appendUnderplateU(AttributeModule.Builder.FormulaVariableBuilder formula) {
-        formula
-                .customVariable("armor")
-                .constant(UNDERPLATE_ARMOR_FACTOR).multiply()
-                .customVariable("toughness")
-                .constant(UNDERPLATE_TOUGHNESS_FACTOR).multiply()
-                .add()
-                .constant(0.0f).max();
-    }
-
-    private void addMalumModifiers() {
-        buildModifier(Ids.malum_rebound, DreamtinkerMaterialDataProvider.modLoaded("malum"))
-                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                .addModule(EnchantmentModule.builder(EnchantmentRegistry.REBOUND.get()).level(1).constant())
-                .addModule(ModifierRequirementsModule.builder().requireModifier(malum_base.getId(), 1)
-                                                     .requirement(HasModifierPredicate.hasModifier(Ids.malum_ascension, 1).inverted())
-                                                     .modifierKey(Ids.malum_rebound).build());
-        buildModifier(Ids.malum_ascension, DreamtinkerMaterialDataProvider.modLoaded("malum"))
-                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                .addModule(EnchantmentModule.builder(EnchantmentRegistry.ASCENSION.get()).level(1).constant())
-                .addModule(ModifierRequirementsModule.builder().requireModifier(malum_base.getId(), 1)
-                                                     .requirement(HasModifierPredicate.hasModifier(Ids.malum_rebound, 1).inverted())
-                                                     .modifierKey(Ids.malum_ascension).build());
-        buildModifier(Ids.malum_animated, DreamtinkerMaterialDataProvider.modLoaded("malum"))
-                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                .addModule(EnchantmentModule.builder(EnchantmentRegistry.ANIMATED.get()).level(2).constant())
-                .addModule(ModifierRequirementsModule.builder()
-                                                     .requirement(HasModifierPredicate.hasModifier(Ids.malum_haunted, 1).inverted())
-                                                     .modifierKey(Ids.malum_animated).build());
-        buildModifier(Ids.malum_haunted, DreamtinkerMaterialDataProvider.modLoaded("malum"))
-                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                .addModule(EnchantmentModule.builder(EnchantmentRegistry.HAUNTED.get()).level(2).constant())
-                .addModule(ModifierRequirementsModule.builder()
-                                                     .requirement(HasModifierPredicate.hasModifier(Ids.malum_animated, 1).inverted())
-                                                     .modifierKey(Ids.malum_haunted).build());
-        buildModifier(Ids.malum_spirit_plunder, DreamtinkerMaterialDataProvider.modLoaded("malum"))
-                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-                .addModule(AttributeModule.builder(AttributeRegistry.SPIRIT_SPOILS, AttributeModifier.Operation.ADDITION).eachLevel(2.0f));
-
-        buildModifier(Ids.malum_tyrving, DreamtinkerMaterialDataProvider.modLoaded("malum"))
-                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
-        buildModifier(Ids.malum_world_of_weight, DreamtinkerMaterialDataProvider.modLoaded("malum"))
-                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
-        buildModifier(Ids.malum_edge_of_deliverance, DreamtinkerMaterialDataProvider.modLoaded("malum"))
-                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
-        buildModifier(Ids.malum_sol_tiferet, not(DreamtinkerMaterialDataProvider.modLoaded("malum")))
-                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
-
-        buildModifier(Ids.many_us, DreamtinkerMaterialDataProvider.modLoaded("malum"))
-                .tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
-                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
-                .addModules(ModifierSlotModule.slot(EsotericismSlotType.DELUSION).flat(1));
-        buildModifier(Ids.spiritual_weapon_transformation, not(DreamtinkerMaterialDataProvider.modLoaded("malum")))
-                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
-                .addModule(ModifierRequirementsModule.builder().requireModifier(weapon_transformation.getId(), 1)
-                                                     .modifierKey(Ids.spiritual_weapon_transformation).build())
-                .addModule(underplateAttribute(LodestoneAttributeRegistry.MAGIC_DAMAGE.get(), true, EquipmentSlot.CHEST))
-                .addModule(underplateAttribute(LodestoneAttributeRegistry.MAGIC_RESISTANCE.get(), false, EquipmentSlot.CHEST, 0.25f, 0.4f))
-                .addModule(underplateAttribute(AttributeRegistry.ARCANE_RESONANCE.get(), true, EquipmentSlot.LEGS))
-                .addModule(underplateAttribute(AttributeRegistry.MALIGNANT_CONVERSION.get(), false, EquipmentSlot.LEGS))
-                .addModule(underplateAttribute(AttributeRegistry.SOUL_WARD_INTEGRITY.get(), true, EquipmentSlot.FEET))
-                .addModule(underplateAttribute(AttributeRegistry.SOUL_WARD_RECOVERY_RATE.get(), false, EquipmentSlot.FEET, 0.5f, Float.MAX_VALUE))
-                .addModule(underplateAttribute(AttributeRegistry.SCYTHE_PROFICIENCY.get(), true, EquipmentSlot.HEAD))
-                .addModule(underplateAttribute(AttributeRegistry.SOUL_WARD_CAP.get(), false, EquipmentSlot.HEAD, 0.5f, Float.MAX_VALUE));
-
-
-    }
-
 
     @Override
     public @NotNull String getName() {

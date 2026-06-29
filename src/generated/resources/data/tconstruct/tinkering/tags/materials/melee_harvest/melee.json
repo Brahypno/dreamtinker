@@ -101,6 +101,10 @@
     {
       "id": "dreamtinker:legendary_monsters_enderitium",
       "required": false
+    },
+    {
+      "id": "dreamtinker:faa_dark_nether_star",
+      "required": false
     }
   ]
 }

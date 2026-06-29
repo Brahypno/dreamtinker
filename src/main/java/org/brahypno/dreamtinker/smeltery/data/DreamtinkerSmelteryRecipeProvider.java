@@ -323,9 +323,14 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
         meltByName(fa, "deorum_chain", DreamtinkerFluids.molten_arcane_gold.get(), FluidValues.INGOT + FluidValues.NUGGET * 2, wrapped);
         MeltingRecipeBuilder.melting(itemNameIngredient(fa, "obsidian_with_iron"), TinkerFluids.moltenObsidian, FluidValues.INGOT, 0.2f)
                             .setOre(IMeltingContainer.OreRateType.METAL)
-                            .save(consumer, location(Melting_folder + "obsidian_with_iron"));
+                            .save(wrapped, location(Melting_folder + "obsidian_with_iron"));
         MeltingRecipeBuilder.melting(itemNameIngredient(fa, "ender_pearl_fragment"), TinkerFluids.moltenEnder, FluidValues.SLIMEBALL / 4, 0.2f)
-                            .save(consumer, location(Melting_folder + "ender_pearl_fragment"));
+                            .save(wrapped, location(Melting_folder + "ender_pearl_fragment"));
+        MeltingRecipeBuilder.melting(itemNameIngredient(fa, "dark_nether_star"), DreamtinkerFluids.molten_dark_neither_star, FluidValues.GEM, 0.2f)
+                            .save(consumer, location(Melting_folder + "dark_nether_star"));
+        MeltingRecipeBuilder.melting(itemNameIngredient(fa, "dark_nether_star_block"), DreamtinkerFluids.molten_dark_neither_star, FluidValues.LARGE_GEM_BLOCK,
+                                     0.2f)
+                            .save(consumer, location(Melting_folder + "dark_nether_star_block"));
 
         MeltingRecipeBuilder.melting(StrictNBTIngredient.of(ironHeart()),
                                      DreamtinkerFluids.molten_iron_heart, FluidValues.INGOT, 0.5f)

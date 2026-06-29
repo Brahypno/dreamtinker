@@ -1,0 +1,33 @@
+{
+  "type": "tconstruct:material_fluid",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "forbidden_arcanus"
+            },
+            {
+              "type": "esotericism_tinker:mod_compact_config",
+              "modid": "forbidden_arcanus"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "fluid": {
+    "amount": 100,
+    "tag": "dreamtinker:molten_dark_neither_star"
+  },
+  "output": "dreamtinker:faa_dark_nether_star",
+  "temperature": 1300
+}

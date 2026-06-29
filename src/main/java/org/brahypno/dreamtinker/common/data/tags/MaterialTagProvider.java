@@ -22,7 +22,7 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
             .add(moonlight_ice, nigrescence_antimony, metallivorous_stibium_lupus, echo_alloy, star_regulus, half_rotten_homunculus, desire_gem, despair_gem,
                  RuinWheelSteel, PermanenceScale, PermanenceWing, scolecite, SpiralSpin, ForlornOathSteel, deliverance, whimsyGold, cryo_serpent_shift)
             .addOptional(etherium, nefarious, soul_etherium,
-                         soul_stained_steel, malignant_pewter, malignant_gluttony, malignant_lead, PaladinBone, forgotten_metal);
+                         soul_stained_steel, malignant_pewter, malignant_gluttony, malignant_lead, PaladinBone, forgotten_metal, faa_dark_nether_star);
 
         this.tag(TinkerTags.Materials.NETHER)
             .add(amber, scolecite)
@@ -35,13 +35,13 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
                  AtonementSilver, ForlornOathSteel, deliverance, cryo_serpent_shift)
             .addOptional(nefarious, soul_etherium, soul_stained_steel, malignant_pewter, malignant_gluttony, shadowSilver, ArcaneGold,
                          WickedWeave, DarkMetal, MonsterSkin, PaladinBoneTool, TatteredCloth, WaterEssence, FireEssence, ManipulationEssence, Utherium,
-                         forgotten_metal, Cloggrum, Froststeel, legendary_monsters_enderitium);
+                         forgotten_metal, Cloggrum, Froststeel, legendary_monsters_enderitium, faa_dark_nether_star);
         this.tag(TinkerTags.Materials.HARVEST)
             .add(larimar, rainbow_honey_crystal, TransmutationGold, whimsyGold)
             .addOptional(hallowed_gold, Regalium, Iesnium);
         this.tag(TinkerTags.Materials.GENERAL)
             .add(valentinite, black_sapphire, orichalcum)
-            .addOptional(etherium, spirit_fabric, astral_weave);
+            .addOptional(etherium, spirit_fabric, astral_weave, dragon_scale);
 
         this.tag(TinkerTags.Materials.LIGHT)
             .add(nigrescence_string, echo_alloy, larimar, half_rotten_string, desire_gem, cold_iron, TransmutationGold, orichalcum, FifthStone, SpiralSpin)
@@ -50,10 +50,10 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
         this.tag(TinkerTags.Materials.BALANCED)
             .add(valentinite, black_sapphire, scolecite, shiningFlint, RuinWheelSteel, OathGuardPaleSteel,
                  ForlornOathSteel)
-            .addOptional(MonsterSkin, astral_weave, GooeySlimeSkin);
+            .addOptional(MonsterSkin, astral_weave, GooeySlimeSkin, dragon_scale);
         this.tag(TinkerTags.Materials.HEAVY)
             .add(crying_obsidian, amber, soul_steel)
-            .addOptional(hallowed_gold, ArcaneGold, WickedWeave);
+            .addOptional(hallowed_gold, ArcaneGold, WickedWeave, faa_dark_nether_star);
         tag(TinkerTags.Materials.COMPATABILITY_METALS)
                 .add(RuinWheelSteel, ForlornOathSteel, AtonementSilver)
                 .addOptional(legendary_monsters_enderitium);

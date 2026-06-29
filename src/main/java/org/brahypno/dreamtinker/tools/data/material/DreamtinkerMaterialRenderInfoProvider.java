@@ -123,6 +123,7 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
 
         buildRenderInfo(DreamtinkerMaterialIds.legendary_monsters_enderitium).color(0xFF2E574D).fallbacks("metal").luminosity(10);
         buildRenderInfo(DreamtinkerMaterialIds.dragon_scale).color(0xFF8B7CA1).fallbacks("metal").luminosity(0);
+        buildRenderInfo(DreamtinkerMaterialIds.faa_dark_nether_star).color(0xFF7D36D8).fallbacks("gem", "crystal").luminosity(15);
 
     }
 

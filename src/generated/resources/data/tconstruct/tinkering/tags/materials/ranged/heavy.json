@@ -14,6 +14,10 @@
     {
       "id": "dreamtinker:eidolon_wicked_wave",
       "required": false
+    },
+    {
+      "id": "dreamtinker:faa_dark_nether_star",
+      "required": false
     }
   ]
 }

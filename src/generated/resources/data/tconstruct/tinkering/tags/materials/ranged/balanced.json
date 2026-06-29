@@ -18,6 +18,10 @@
     {
       "id": "dreamtinker:undergarden_gooey_slime",
       "required": false
+    },
+    {
+      "id": "dreamtinker:dragon_scale",
+      "required": false
     }
   ]
 }

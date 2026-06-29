@@ -116,6 +116,7 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
 
         addMaterial(DreamtinkerMaterialIds.legendary_monsters_enderitium, 3, 20, false, false, modLoaded("legendary_monsters"));
         addMaterial(DreamtinkerMaterialIds.dragon_scale, 4, 40, true, false, tagFilled(DreamtinkerTagKeys.Items.dragonScale));
+        addMaterial(DreamtinkerMaterialIds.faa_dark_nether_star, 4, 40, false, false, modLoaded("forbidden_arcanus"));
     }
 
     @Override

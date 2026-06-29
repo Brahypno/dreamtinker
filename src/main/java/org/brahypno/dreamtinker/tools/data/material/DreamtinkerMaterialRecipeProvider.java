@@ -219,6 +219,7 @@ public class DreamtinkerMaterialRecipeProvider implements IMaterialRecipeHelper,
         addNovaMaterialRecipes(consumer);
         addUGMaterialRecipes(consumer);
         addLegendaryMonstersMaterialRecipes(consumer);
+        addFAAMaterialRecipes(consumer);
 
     }
 
@@ -393,6 +394,17 @@ public class DreamtinkerMaterialRecipeProvider implements IMaterialRecipeHelper,
                        materials_folder + "legendary_monsters_enderitium/gem");
         materialRecipe(wrapped, DreamtinkerMaterialIds.legendary_monsters_enderitium, itemNameIngredient(legendaryMonsters, "enderitium_block"), 9, 1,
                        materials_folder + "legendary_monsters_enderitium/block");
+    }
+
+    private void addFAAMaterialRecipes(Consumer<FinishedRecipe> consumer) {
+        String faa = "forbidden_arcanus";
+        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(faa));
+        materialMeltingCasting(wrapped, DreamtinkerMaterialIds.faa_dark_nether_star, DreamtinkerFluids.molten_dark_neither_star, FluidValues.GEM,
+                               materials_folder);
+        materialRecipe(wrapped, DreamtinkerMaterialIds.faa_dark_nether_star, itemNameIngredient(faa, "dark_nether_star"), 1, 1,
+                       materials_folder + "dark_nether_star");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.faa_dark_nether_star, itemNameIngredient(faa, "dark_nether_star_block"), 9, 1,
+                       materials_folder + "dark_nether_star_block");
     }
 
     private void standardMetalMaterial(Consumer<FinishedRecipe> consumer, MaterialId materialId, FlowingFluidObject<ForgeFlowingFluid> fluid, String name, String folder) {

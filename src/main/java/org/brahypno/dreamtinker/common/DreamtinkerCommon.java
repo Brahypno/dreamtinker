@@ -1,12 +1,10 @@
 package org.brahypno.dreamtinker.common;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextColor;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -26,8 +24,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegisterEvent;
 import net.minecraftforge.registries.RegistryObject;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.DreamtinkerModule;
@@ -40,8 +36,6 @@ import org.brahypno.dreamtinker.common.data.model.DreamtinkerItemModelProvider;
 import org.brahypno.dreamtinker.fluids.DreamtinkerFluids;
 import org.brahypno.esotericismtinker.common.EsotericismTinkerCommon;
 import org.jetbrains.annotations.NotNull;
-import slimeknights.mantle.data.predicate.block.BlockPredicate;
-import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
 import slimeknights.mantle.item.ContainerFoodItem;
 import slimeknights.mantle.registration.object.ItemObject;
 import slimeknights.tconstruct.library.recipe.FluidValues;
@@ -432,24 +426,6 @@ public class DreamtinkerCommon extends DreamtinkerModule {
 
         generator.addProvider(client, new DreamtinkerItemModelProvider(output, existingFileHelper));
         generator.addProvider(client, new DreamTinkerBlockStateProvider(output, existingFileHelper));
-    }
-
-    public static BlockPredicate BLOCK_OF_UNDER_GARDEN = BlockPredicate.simple(state -> {
-        ResourceLocation id = ForgeRegistries.BLOCKS.getKey(state.getBlock());
-        return id != null && id.getNamespace().matches("undergarden");
-    });
-    public static LivingEntityPredicate LIVING_OF_UNDER_GARDEN = LivingEntityPredicate.simple(le -> {
-        ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(le.getType());
-        return id != null && id.getNamespace().matches("undergarden");
-    });
-
-
-    @SubscribeEvent
-    void registerRecipeSerializers(RegisterEvent event) {
-        if (event.getRegistryKey() == Registries.RECIPE_SERIALIZER){
-            LivingEntityPredicate.LOADER.register(Dreamtinker.getLocation("living_of_undergarden"), LIVING_OF_UNDER_GARDEN.getLoader());
-            BlockPredicate.LOADER.register(Dreamtinker.getLocation("block_of_undergarden"), BLOCK_OF_UNDER_GARDEN.getLoader());
-        }
     }
 
     @SubscribeEvent

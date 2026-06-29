@@ -1,0 +1,24 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "dreamtinker:faa_aureal_attack"
+    },
+    {
+      "level": 1,
+      "name": "dreamtinker:faa_corruption_attack"
+    }
+  ],
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "dreamtinker:faa_aureal_protection"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:faa_corruption_defense"
+      }
+    ]
+  }
+}
