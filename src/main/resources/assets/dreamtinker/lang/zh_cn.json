@@ -986,6 +986,9 @@
   "modifier.dreamtinker.faa_corruption_defense": "腐化防御",
   "modifier.dreamtinker.faa_corruption_defense.flavor": "黑暗庇护其不愿割舍之物",
   "modifier.dreamtinker.faa_corruption_defense.description": "根据穿戴者的腐化提高伤害减免。",
+  "modifier.dreamtinker.sentient_will": "感知意志",
+  "modifier.dreamtinker.sentient_will.flavor": "何物感知",
+  "modifier.dreamtinker.sentient_will.description": "具有感知工具的能力",
 
   "_comment.dreamtinker.materials": "======材料======",
   "material.dreamtinker.echo_alloy": "回响合金",
@@ -1183,6 +1186,11 @@
   "material.dreamtinker.dragon_scale.flavor": " ",
   "material.dreamtinker.faa_dark_nether_star": "暗黑下界之星",
   "material.dreamtinker.faa_dark_nether_star.flavor": " ",
+  "material.dreamtinker.blm_sentient": "原始感知",
+  "material.dreamtinker.blm_sentient.corrosive": "腐蚀感知",
+  "material.dreamtinker.blm_sentient.destructive": "破坏感知",
+  "material.dreamtinker.blm_sentient.vengeful": "复仇感知",
+  "material.dreamtinker.blm_sentient.steadfast": "坚毅感知",
 
   "_comment.dreamtinker.creative_tabs": "======创造标签页======",
   "itemGroup.dreamtinker.part": "工匠幻梦 | 部件",

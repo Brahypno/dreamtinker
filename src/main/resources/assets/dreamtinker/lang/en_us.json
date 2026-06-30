@@ -986,6 +986,9 @@
   "modifier.dreamtinker.faa_corruption_defense": "Corruption Defense",
   "modifier.dreamtinker.faa_corruption_defense.flavor": "Darkness armors what it cannot spare",
   "modifier.dreamtinker.faa_corruption_defense.description": "Reduce damage based on Corruption value",
+  "modifier.dreamtinker.sentient_will": "Sentient Will",
+  "modifier.dreamtinker.sentient_will.flavor": "Who`s Sentient",
+  "modifier.dreamtinker.sentient_will.description": "Have ability of Sentient Will",
 
   "_comment.dreamtinker.materials": "======Materials======",
   "material.dreamtinker.echo_alloy": "Echo Alloy",
@@ -1183,6 +1186,11 @@
   "material.dreamtinker.dragon_scale.flavor": " ",
   "material.dreamtinker.faa_dark_nether_star": "Dark Nether Star",
   "material.dreamtinker.faa_dark_nether_star.flavor": " ",
+  "material.dreamtinker.blm_sentient": "Raw Sentient",
+  "material.dreamtinker.blm_sentient.corrosive": "Corrosive Sentient",
+  "material.dreamtinker.blm_sentient.destructive": "Destructive Sentient",
+  "material.dreamtinker.blm_sentient.vengeful": "Vengeful Sentient",
+  "material.dreamtinker.blm_sentient.steadfast": "Steadfast Sentient",
 
   "_comment.dreamtinker.creative_tabs": "======Creative Tabs======",
   "itemGroup.dreamtinker.part": "Dreamtinker | part",

@@ -111,4 +111,10 @@ public class DreamtinkerMaterialIds {
     //inspired by FAA
     public static final MaterialId dragon_scale = new MaterialId(new ResourceLocation(MODID, "dragon_scale"));
     public static final MaterialId faa_dark_nether_star = new MaterialId(new ResourceLocation(MODID, "faa_dark_nether_star"));
+    //blood magic
+    public static final MaterialId blm_sentient = new MaterialId(new ResourceLocation(MODID, "blm_sentient"));
+    public static final MaterialVariantId blm_sentient_corrosive = create(blm_sentient, "corrosive");
+    public static final MaterialVariantId blm_sentient_destructive = create(blm_sentient, "destructive");
+    public static final MaterialVariantId blm_sentient_vengeful = create(blm_sentient, "vengeful");
+    public static final MaterialVariantId blm_sentient_steadfast = create(blm_sentient, "steadfast");
 }

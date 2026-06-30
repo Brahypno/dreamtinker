@@ -198,6 +198,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addNovaMeleeHarvest();
         addLMMeleeHarvest();
         addFAAMeleeHarvest();
+        addBLMMeleeHarvest();
     }
 
 
@@ -289,6 +290,13 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addMaterialStats(DreamtinkerMaterialIds.faa_dark_nether_star,
                          new HeadMaterialStats(900, 12f, Tiers.NETHERITE, 6f),
                          HandleMaterialStats.multipliers().durability(1.2f).miningSpeed(1.1f).attackDamage(1.20f).attackSpeed(1.10f).build(),
+                         StatlessMaterialStats.BINDING);
+    }
+
+    private void addBLMMeleeHarvest() {
+        addMaterialStats(DreamtinkerMaterialIds.blm_sentient,
+                         new HeadMaterialStats(520, 6f, Tiers.NETHERITE, 1f),
+                         HandleMaterialStats.multipliers().durability(1.0f).miningSpeed(1.1f).attackDamage(1.05f).attackSpeed(1.05f).build(),
                          StatlessMaterialStats.BINDING);
     }
 

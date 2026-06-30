@@ -41,7 +41,7 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
             .addOptional(hallowed_gold, Regalium, Iesnium);
         this.tag(TinkerTags.Materials.GENERAL)
             .add(valentinite, black_sapphire, orichalcum)
-            .addOptional(etherium, spirit_fabric, astral_weave, dragon_scale);
+            .addOptional(etherium, spirit_fabric, astral_weave, dragon_scale, blm_sentient);
 
         this.tag(TinkerTags.Materials.LIGHT)
             .add(nigrescence_string, echo_alloy, larimar, half_rotten_string, desire_gem, cold_iron, TransmutationGold, orichalcum, FifthStone, SpiralSpin)

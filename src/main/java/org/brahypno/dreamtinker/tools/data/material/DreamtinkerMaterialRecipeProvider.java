@@ -220,6 +220,7 @@ public class DreamtinkerMaterialRecipeProvider implements IMaterialRecipeHelper,
         addUGMaterialRecipes(consumer);
         addLegendaryMonstersMaterialRecipes(consumer);
         addFAAMaterialRecipes(consumer);
+        addBLMMaterialRecipes(consumer);
 
     }
 
@@ -405,6 +406,25 @@ public class DreamtinkerMaterialRecipeProvider implements IMaterialRecipeHelper,
                        materials_folder + "dark_nether_star");
         materialRecipe(wrapped, DreamtinkerMaterialIds.faa_dark_nether_star, itemNameIngredient(faa, "dark_nether_star_block"), 9, 1,
                        materials_folder + "dark_nether_star_block");
+    }
+
+    private void addBLMMaterialRecipes(Consumer<FinishedRecipe> consumer) {
+        String bloodmagic = "bloodmagic";
+        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(bloodmagic));
+        materialRecipe(wrapped, DreamtinkerMaterialIds.blm_sentient, itemNameIngredient(bloodmagic, "basemonstersoul"), 1, 1,
+                       materials_folder + "bloodmagic_sentient/raw");
+
+        materialRecipe(wrapped, DreamtinkerMaterialIds.blm_sentient_corrosive, itemNameIngredient(bloodmagic, "basemonstersoul_corrosive"), 1, 1,
+                       materials_folder + "bloodmagic_sentient/corrosive");
+
+        materialRecipe(wrapped, DreamtinkerMaterialIds.blm_sentient_destructive, itemNameIngredient(bloodmagic, "basemonstersoul_destructive"), 1, 1,
+                       materials_folder + "bloodmagic_sentient/destructive");
+
+        materialRecipe(wrapped, DreamtinkerMaterialIds.blm_sentient_vengeful, itemNameIngredient(bloodmagic, "basemonstersoul_vengeful"), 1, 1,
+                       materials_folder + "bloodmagic_sentient/vengeful");
+
+        materialRecipe(wrapped, DreamtinkerMaterialIds.blm_sentient_steadfast, itemNameIngredient(bloodmagic, "basemonstersoul_steadfast"), 1, 1,
+                       materials_folder + "bloodmagic_sentient/steadfast");
     }
 
     private void standardMetalMaterial(Consumer<FinishedRecipe> consumer, MaterialId materialId, FlowingFluidObject<ForgeFlowingFluid> fluid, String name, String folder) {

@@ -258,6 +258,8 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.faa_dark_nether_star, Ids.faa_aureal_attack, Ids.faa_corruption_attack);
         addTraits(DreamtinkerMaterialIds.faa_dark_nether_star, ARMOR, Ids.faa_aureal_protection, corruption_defense.getId());
 
+        addDefaultTraits(DreamtinkerMaterialIds.blm_sentient, sentient_will);
+
     }
 
     @Override

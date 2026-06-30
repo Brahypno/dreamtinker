@@ -647,6 +647,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
         addEidolonMaterials();
         addBICMaterials();
         addNovaMaterials();
+        addBLMMaterials();
     }
 
     protected void addELMaterials() {
@@ -1243,6 +1244,64 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(178, 0xFF2E574D)
                                                 .addARGB(216, 0xFF629F4A)
                                                 .addARGB(255, 0xFF83C480)
+                                                .build());
+    }
+
+    protected void addBLMMaterials() {
+        this.buildMaterial(DreamtinkerMaterialIds.blm_sentient)
+            .meleeHarvest()
+            .fallbacks("gem", "crystal")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(63, 0xFF002426)
+                                                .addARGB(102, 0xFF00494D)
+                                                .addARGB(140, 0xFF007A80)
+                                                .addARGB(178, 0xFF00AAAA)
+                                                .addARGB(216, 0xFF69E6E6)
+                                                .addARGB(255, 0xFFE6FFFF)
+                                                .build());
+        this.buildMaterial(DreamtinkerMaterialIds.blm_sentient_corrosive)
+            .meleeHarvest()
+            .fallbacks("gem", "crystal")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(63, 0xFF102610)
+                                                .addARGB(102, 0xFF1F5A1F)
+                                                .addARGB(140, 0xFF35A835)
+                                                .addARGB(178, 0xFF55FF55)
+                                                .addARGB(216, 0xFFA8FFA8)
+                                                .addARGB(255, 0xFFF0FFF0)
+                                                .build());
+        this.buildMaterial(DreamtinkerMaterialIds.blm_sentient_destructive)
+            .meleeHarvest()
+            .fallbacks("gem", "crystal")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(63, 0xFF2B1600)
+                                                .addARGB(102, 0xFF6B3A00)
+                                                .addARGB(140, 0xFFB87300)
+                                                .addARGB(178, 0xFFFFAA00)
+                                                .addARGB(216, 0xFFFFD36B)
+                                                .addARGB(255, 0xFFFFF4D6)
+                                                .build());
+        this.buildMaterial(DreamtinkerMaterialIds.blm_sentient_vengeful)
+            .meleeHarvest()
+            .fallbacks("gem", "crystal")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(63, 0xFF2B0808)
+                                                .addARGB(102, 0xFF6B1818)
+                                                .addARGB(140, 0xFFB83232)
+                                                .addARGB(178, 0xFFFF5555)
+                                                .addARGB(216, 0xFFFFA3A3)
+                                                .addARGB(255, 0xFFFFEFEF)
+                                                .build());
+        this.buildMaterial(DreamtinkerMaterialIds.blm_sentient_steadfast)
+            .meleeHarvest()
+            .fallbacks("gem", "crystal")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(63, 0xFF260826)
+                                                .addARGB(102, 0xFF5A185A)
+                                                .addARGB(140, 0xFFA832A8)
+                                                .addARGB(178, 0xFFFF55FF)
+                                                .addARGB(216, 0xFFFFA8FF)
+                                                .addARGB(255, 0xFFFFF0FF)
                                                 .build());
     }
 }

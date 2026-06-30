@@ -40,6 +40,7 @@ import org.brahypno.dreamtinker.tools.modifiers.traits.Combat.*;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.bic.DarkBlade;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.bic.DarkDefense;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.bic.NightmareDefense;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.bloodmagic.SentientWillModifier;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.eidolon.EidolonDeathBringer;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.eidolon.EidolonReaper;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.eidolon.EidolonSapping;
@@ -113,12 +114,10 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static ModifierDeferredRegister MALUM_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     public static ModifierDeferredRegister EIDOLON_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     public static ModifierDeferredRegister BIC_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
-    public static ModifierDeferredRegister LM_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
-    public static final EntityVariable AUREAL =
-            EntityVariable.simple(entity -> entity instanceof Player player ? ForbiddenArcanusAurealCompact.getAureal(player) : 0);
-    public static final EntityVariable CORRUPTION =
-            EntityVariable.simple(entity -> entity instanceof Player player ? ForbiddenArcanusAurealCompact.getCorruption(player) : 0);
     public static ModifierDeferredRegister OCC_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
+    public static ModifierDeferredRegister LM_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
+    public static ModifierDeferredRegister FAA_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
+    public static ModifierDeferredRegister BLM_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     //Mashuo
     public static final StaticModifier<RealSweep> real_sweep = MODIFIERS.register("real_sweep", RealSweep::new);
     public static final StaticModifier<StrongHeavy> strong_heavy = MODIFIERS.register("strong_heavy", StrongHeavy::new);
@@ -298,13 +297,19 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             BIC_MODIFIERS.register("bic_nightmare_defense", NightmareDefense::new);
     public static final StaticModifier<OtherWorldView> occ_view =
             OCC_MODIFIERS.register("occ_view", OtherWorldView::new);
+    public static final StaticModifier<OtherworldHarvest> occ_harvest = OCC_MODIFIERS.register("occ_harvest", OtherworldHarvest::new);
 
     public static final StaticModifier<SoulRage> soul_rage = LM_MODIFIERS.register("soul_rage", SoulRage::new);
     public static final StaticModifier<annihilatorArmorPower> annihilator_armor_power =
             LM_MODIFIERS.register("annihilator_armor_power", annihilatorArmorPower::new);
-    public static final StaticModifier<OtherworldHarvest> occ_harvest = OCC_MODIFIERS.register("occ_harvest", OtherworldHarvest::new);
-    public static ModifierDeferredRegister FAA_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
+
     public static final StaticModifier<CorruptionDefense> corruption_defense = FAA_MODIFIERS.register("faa_corruption_defense", CorruptionDefense::new);
+    public static final StaticModifier<SentientWillModifier> sentient_will = BLM_MODIFIERS.register("sentient_will", SentientWillModifier::new);
+
+    public static final EntityVariable AUREAL =
+            EntityVariable.simple(entity -> entity instanceof Player player ? ForbiddenArcanusAurealCompact.getAureal(player) : 0);
+    public static final EntityVariable CORRUPTION =
+            EntityVariable.simple(entity -> entity instanceof Player player ? ForbiddenArcanusAurealCompact.getCorruption(player) : 0);
     public static BlockPredicate BLOCK_OF_UNDER_GARDEN = BlockPredicate.simple(state -> {
         ResourceLocation id = ForgeRegistries.BLOCKS.getKey(state.getBlock());
         return id != null && id.getNamespace().matches("undergarden");
@@ -337,6 +342,9 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         }
         if (ModList.get().isLoaded("forbidden_arcanus")){
             FAA_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        }
+        if (ModList.get().isLoaded("bloodmagic")){
+            BLM_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         }
     }
 
