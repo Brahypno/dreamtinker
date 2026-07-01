@@ -1,4 +1,4 @@
-package org.brahypno.dreamtinker.utils.CompactUtils;
+package org.brahypno.dreamtinker.utils.CompactUtils.bloodmagic;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;

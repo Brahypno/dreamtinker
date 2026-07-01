@@ -989,6 +989,9 @@
   "modifier.dreamtinker.sentient_will": "Sentient Will",
   "modifier.dreamtinker.sentient_will.flavor": "Who`s Sentient",
   "modifier.dreamtinker.sentient_will.description": "Have ability of Sentient Will",
+  "modifier.dreamtinker.blm_living_armor": "Living Armor",
+  "modifier.dreamtinker.blm_living_armor.flavor": "There is soul in blood!",
+  "modifier.dreamtinker.blm_living_armor.description": "Like living armor in Blood Magic, but you don`t have to wear full set",
 
   "_comment.dreamtinker.materials": "======Materials======",
   "material.dreamtinker.echo_alloy": "Echo Alloy",

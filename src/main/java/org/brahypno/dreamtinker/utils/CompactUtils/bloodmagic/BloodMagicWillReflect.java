@@ -1,4 +1,4 @@
-package org.brahypno.dreamtinker.utils.CompactUtils;
+package org.brahypno.dreamtinker.utils.CompactUtils.bloodmagic;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;

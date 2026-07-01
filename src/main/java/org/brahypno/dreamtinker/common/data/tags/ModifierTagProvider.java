@@ -14,8 +14,7 @@ import slimeknights.tconstruct.tools.data.ModifierIds;
 
 import static org.brahypno.dreamtinker.library.compact.ars_nouveau.NovaRegistry.*;
 import static org.brahypno.dreamtinker.tools.DreamtinkerModifiers.*;
-import static slimeknights.tconstruct.common.TinkerTags.Modifiers.COSMETIC_SLOTLESS;
-import static slimeknights.tconstruct.common.TinkerTags.Modifiers.DAMAGE_UPGRADES;
+import static slimeknights.tconstruct.common.TinkerTags.Modifiers.*;
 
 public class ModifierTagProvider extends AbstractModifierTagProvider {
     public ModifierTagProvider(PackOutput packOutput, ExistingFileHelper existingFileHelper) {
@@ -73,6 +72,9 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
                          Ids.divineMaledictus);
         this.tag(COSMETIC_SLOTLESS)
             .addOptional(occ_view.getId());
+
+        this.tag(CHESTPLATE_ABILITIES)
+            .addOptional(living_armor.getId());
 
         this.tag(TinkerTags.Modifiers.MELEE_ABILITIES)
             .add(Ids.continuous_explode, flaming_memory.getId(), Ids.curse_fire, rainbow_lights.getId())

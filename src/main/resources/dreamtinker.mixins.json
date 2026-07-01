@@ -6,8 +6,8 @@
   "refmap": "dreamtinker.refmap.json",
   "mixins": [
     "isInvertedHealAndHarmMixin",
-    "ProjectileMixin",
     "LivingEntityMixin",
+    "ProjectileMixin",
     "GeneralCompact.ExtraSCYTHEModifier"
   ],
   "client": [
