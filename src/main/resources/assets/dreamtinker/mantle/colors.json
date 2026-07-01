@@ -236,7 +236,8 @@
     "faa_aureal_attack": "#C6E6EC",
     "faa_aureal_protection": "#C6E6EC",
     "faa_corruption_attack": "#433441",
-    "faa_corruption_defense": "#433441"
+    "faa_corruption_defense": "#433441",
+    "blm_living_armor": "#9A3A4A"
   },
   "material.dreamtinker": {
     "echo_alloy": "#034150",

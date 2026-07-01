@@ -989,6 +989,9 @@
   "modifier.dreamtinker.sentient_will": "感知意志",
   "modifier.dreamtinker.sentient_will.flavor": "何物感知",
   "modifier.dreamtinker.sentient_will.description": "具有感知工具的能力",
+  "modifier.dreamtinker.blm_living_armor": "束灵护甲",
+  "modifier.dreamtinker.blm_living_armor.flavor": "血中有灵魂",
+  "modifier.dreamtinker.blm_living_armor.description": "就像血魔法的束灵护甲，但不需要穿一整套。",
 
   "_comment.dreamtinker.materials": "======材料======",
   "material.dreamtinker.echo_alloy": "回响合金",

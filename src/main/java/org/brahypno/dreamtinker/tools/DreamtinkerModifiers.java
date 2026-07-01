@@ -41,6 +41,7 @@ import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.bic.DarkBlade;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.bic.DarkDefense;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.bic.NightmareDefense;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.bloodmagic.SentientWillModifier;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.bloodmagic.livingArmorModifier;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.eidolon.EidolonDeathBringer;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.eidolon.EidolonReaper;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.eidolon.EidolonSapping;
@@ -305,6 +306,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
 
     public static final StaticModifier<CorruptionDefense> corruption_defense = FAA_MODIFIERS.register("faa_corruption_defense", CorruptionDefense::new);
     public static final StaticModifier<SentientWillModifier> sentient_will = BLM_MODIFIERS.register("sentient_will", SentientWillModifier::new);
+    public static final StaticModifier<livingArmorModifier> living_armor = BLM_MODIFIERS.register("blm_living_armor", livingArmorModifier::new);
 
     public static final EntityVariable AUREAL =
             EntityVariable.simple(entity -> entity instanceof Player player ? ForbiddenArcanusAurealCompact.getAureal(player) : 0);

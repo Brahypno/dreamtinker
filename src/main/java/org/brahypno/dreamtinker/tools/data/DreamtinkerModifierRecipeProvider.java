@@ -67,6 +67,7 @@ public class DreamtinkerModifierRecipeProvider implements ICommonRecipeHelper {
         String compatFolder = "tools/modifiers/compat/";
         String worktableFolder = "tools/modifiers/worktable/";
         String soulFolder = "tools/modifiers/soul/";
+        String delusionFolder = "tools/modifiers/delusion/";
         // salvage
         String salvageFolder = "tools/modifiers/salvage/";
         String upgradeSalvage = salvageFolder + "upgrade/";
@@ -74,6 +75,7 @@ public class DreamtinkerModifierRecipeProvider implements ICommonRecipeHelper {
         String defenseSalvage = salvageFolder + "defense/";
         String compatSalvage = salvageFolder + "compat/";
         String soulSalvage = salvageFolder + "soul/";
+        String delusionSalvage = salvageFolder + "delusion/";
         Consumer<FinishedRecipe> wrapped;
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.strong_explode)
                              .setTools(Ingredient.of(DreamtinkerTools.tntarrow.get()))
@@ -147,15 +149,15 @@ public class DreamtinkerModifierRecipeProvider implements ICommonRecipeHelper {
                              .addInput(DreamtinkerCommon.UnbornTurtleEgg.get(), 1)
                              .setMaxLevel(1)
                              .setSlots(SlotType.UPGRADE, 1)
-                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.soul_core, soulSalvage))
-                             .save(consumer, prefix(DreamtinkerModifiers.Ids.soul_core, soulFolder));
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.soul_core, delusionSalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.Ids.soul_core, delusionFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.soul_core)
                              .setTools(Ingredient.of(DreamtinkerTools.narcissus_wing.get()))
                              .addInput(DreamtinkerCommon.UnbornTurtleEgg.get(), 1)
                              .addInput(DreamtinkerCommon.UnbornSnifferEgg.get(), 1)
                              .setMaxLevel(3)
                              .setSlots(SlotType.UPGRADE, 1)
-                             .save(consumer, wrap(DreamtinkerModifiers.Ids.soul_core, soulFolder, "_1"));
+                             .save(consumer, wrap(DreamtinkerModifiers.Ids.soul_core, delusionFolder, "_1"));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.icy_memory)
                              .setTools(Ingredient.of(DreamtinkerTools.narcissus_wing.get()))
                              .addInput(DreamtinkerCommon.unborn_egg.get())
@@ -172,8 +174,8 @@ public class DreamtinkerModifierRecipeProvider implements ICommonRecipeHelper {
                              .setLevelRange(3, 3)
                              .setSlots(EsotericismSlotType.DELUSION, 1)
                              .disallowCrystal()
-                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.icy_memory, soulSalvage))
-                             .save(consumer, prefix(DreamtinkerModifiers.Ids.icy_memory, soulFolder));
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.icy_memory, delusionSalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.Ids.icy_memory, delusionFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.hate_memory)
                              .setTools(Ingredient.of(DreamtinkerTools.narcissus_wing.get()))
                              .addInput(DreamtinkerCommon.unborn_egg.get())
@@ -182,8 +184,8 @@ public class DreamtinkerModifierRecipeProvider implements ICommonRecipeHelper {
                              .addInput(Tags.Items.TOOLS_CROSSBOWS)
                              .setMaxLevel(3)
                              .setSlots(EsotericismSlotType.DELUSION, 1)
-                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.hate_memory, soulSalvage))
-                             .save(consumer, prefix(DreamtinkerModifiers.Ids.hate_memory, soulFolder));
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.hate_memory, delusionSalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.Ids.hate_memory, delusionFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.huge_ego)
                              .addInput(DreamtinkerCommon.twist_obsidian_pane.get(), 1)
                              .addInput(Tags.Items.GEMS_EMERALD, 1)
@@ -207,8 +209,8 @@ public class DreamtinkerModifierRecipeProvider implements ICommonRecipeHelper {
                              .addInput(Items.IRON_AXE)
                              .setMaxLevel(4)
                              .setSlots(EsotericismSlotType.DELUSION, 1)
-                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.all_slayer, soulSalvage))
-                             .save(consumer, prefix(DreamtinkerModifiers.Ids.all_slayer, soulFolder));
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.all_slayer, delusionSalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.Ids.all_slayer, delusionFolder));
 
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.the_romantic)
                              .setTools(TinkerTags.Items.MELEE_PRIMARY)
@@ -218,16 +220,16 @@ public class DreamtinkerModifierRecipeProvider implements ICommonRecipeHelper {
                              .addInput(TinkerModifiers.silkyCloth)
                              .setSlots(EsotericismSlotType.DELUSION, 1)
                              .setMaxLevel(5)
-                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.the_romantic, soulSalvage))
-                             .save(consumer, prefix(DreamtinkerModifiers.Ids.the_romantic, soulFolder));
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.the_romantic, delusionSalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.Ids.the_romantic, delusionFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.virtual_dodge)
                              .setTools(TinkerTags.Items.WORN_ARMOR)
                              .addInput(DreamtinkerCommon.void_pearl.get(), 4)
                              .addInput(Items.ENDER_EYE, 8)
                              .setSlots(EsotericismSlotType.DELUSION, 1)
                              .setMaxLevel(3)
-                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.virtual_dodge, soulSalvage))
-                             .save(consumer, prefix(DreamtinkerModifiers.virtual_dodge, soulFolder));
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.virtual_dodge, delusionSalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.virtual_dodge, delusionFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.sweet_death)
                              .setTools(TinkerTags.Items.SHIELDS)
                              .addInput(Items.SKELETON_SKULL, 1)
@@ -235,8 +237,8 @@ public class DreamtinkerModifierRecipeProvider implements ICommonRecipeHelper {
                              .addInput(Items.HONEY_BLOCK, 4)
                              .setSlots(EsotericismSlotType.DELUSION, 1)
                              .setMaxLevel(2)
-                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.sweet_death, soulSalvage))
-                             .save(consumer, prefix(DreamtinkerModifiers.Ids.sweet_death, soulFolder));
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.sweet_death, delusionSalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.Ids.sweet_death, delusionFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.last_kiss)
                              .setTools(TinkerTags.Items.SHIELDS)
                              .addInput(Items.CLOCK, 1)
@@ -245,15 +247,15 @@ public class DreamtinkerModifierRecipeProvider implements ICommonRecipeHelper {
                              .addInput(Items.CHERRY_SAPLING, 1)
                              .setSlots(EsotericismSlotType.DELUSION, 1)
                              .setMaxLevel(2)
-                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.last_kiss, soulSalvage))
-                             .save(consumer, prefix(DreamtinkerModifiers.Ids.last_kiss, soulFolder));
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.last_kiss, delusionSalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.Ids.last_kiss, delusionFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.born_with_me)
                              .setTools(TinkerTags.Items.MELEE_PRIMARY)
                              .addInput(Items.BLADE_POTTERY_SHERD, 1)
                              .setSlots(EsotericismSlotType.DELUSION, 1)
                              .setMaxLevel(3)
-                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.born_with_me, soulSalvage))
-                             .save(consumer, prefix(DreamtinkerModifiers.born_with_me, soulFolder));
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.born_with_me, delusionSalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.born_with_me, delusionFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.weapon_dreams_order)
                              .setTools(Ingredient.of(DreamtinkerTools.silence_glove.get()))
                              .addInput(Items.COMPASS, 2)
@@ -261,15 +263,15 @@ public class DreamtinkerModifierRecipeProvider implements ICommonRecipeHelper {
                              .addInput(Items.CLOCK)
                              .setSlots(EsotericismSlotType.DELUSION, 1)
                              .setMaxLevel(1)
-                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.weapon_dreams_order, soulSalvage))
-                             .save(consumer, prefix(DreamtinkerModifiers.Ids.weapon_dreams_order, soulFolder));
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.weapon_dreams_order, delusionSalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.Ids.weapon_dreams_order, delusionFolder));
         IncrementalModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.falsify_fate)
                                         .setTools(TinkerTags.Items.HARVEST_PRIMARY)
                                         .setInput(DreamtinkerCommon.amber.get(), 1, 40)
                                         .setMaxLevel(3)
                                         .setSlots(EsotericismSlotType.DELUSION, 1)
-                                        .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.falsify_fate, soulSalvage))
-                                        .save(consumer, prefix(DreamtinkerModifiers.Ids.falsify_fate, soulFolder));
+                                        .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.falsify_fate, delusionSalvage))
+                                        .save(consumer, prefix(DreamtinkerModifiers.Ids.falsify_fate, delusionFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.weapon_dreams_filter)
                              .setTools(Ingredient.of(DreamtinkerTools.silence_glove.get()))
                              .addInput(Items.REPEATER, 2)
@@ -277,8 +279,8 @@ public class DreamtinkerModifierRecipeProvider implements ICommonRecipeHelper {
                              .addInput(Items.OBSERVER)
                              .setSlots(EsotericismSlotType.DELUSION, 1)
                              .setMaxLevel(1)
-                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.weapon_dreams_filter, soulSalvage))
-                             .save(consumer, prefix(DreamtinkerModifiers.Ids.weapon_dreams_filter, soulFolder));
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.weapon_dreams_filter, delusionSalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.Ids.weapon_dreams_filter, delusionFolder));
         Ingredient under_plates = Ingredient.of(DreamtinkerTools.underPlate.get(ArmorItem.Type.HELMET),
                                                 DreamtinkerTools.underPlate.get(ArmorItem.Type.CHESTPLATE),
                                                 DreamtinkerTools.underPlate.get(ArmorItem.Type.LEGGINGS),
@@ -291,9 +293,9 @@ public class DreamtinkerModifierRecipeProvider implements ICommonRecipeHelper {
                              .setSlots(EsotericismSlotType.DELUSION, 1)
                              .setMaxLevel(1)
                              .saveSalvage(withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("malum")),
-                                          prefix(DreamtinkerModifiers.Ids.spiritual_weapon_transformation, soulSalvage))
+                                          prefix(DreamtinkerModifiers.Ids.spiritual_weapon_transformation, delusionSalvage))
                              .save(withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("malum")),
-                                   prefix(DreamtinkerModifiers.Ids.spiritual_weapon_transformation, soulFolder));
+                                   prefix(DreamtinkerModifiers.Ids.spiritual_weapon_transformation, delusionFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.TheEnd)
                              .setTools(TinkerTags.Items.SPECIAL_TOOLS)
                              .addInput(Blocks.DIRT, 2)
@@ -444,8 +446,8 @@ public class DreamtinkerModifierRecipeProvider implements ICommonRecipeHelper {
                              .setLevelRange(3, 3)
                              .disallowCrystal()
                              .setSlots(EsotericismSlotType.DELUSION, 1)
-                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.weapon_books, soulSalvage))
-                             .save(wrapped, prefix(DreamtinkerModifiers.weapon_books, soulFolder));
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.weapon_books, delusionSalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.weapon_books, delusionFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.eldritch_pan)
                              .setTools(TinkerTags.Items.MELEE_PRIMARY)
                              .addInput(itemNameIngredient("enigmaticlegacy", "eldritch_pan"))
@@ -864,7 +866,15 @@ public class DreamtinkerModifierRecipeProvider implements ICommonRecipeHelper {
                              .addInput(ItemNameIngredient.from(new ResourceLocation(fa, "maledictus_pact")))
                              .setMaxLevel(1)
                              .save(wrapped, prefix(DreamtinkerModifiers.Ids.divineMaledictus, slotlessFolder));
-
+        String blm = "bloodmagic";
+        wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(blm));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.living_armor)
+                             .setTools(Ingredient.of(TinkerTags.Items.CHESTPLATES))
+                             .addInput(ItemNameIngredient.from(new ResourceLocation(blm, "reagentbinding")))
+                             .setSlots(EsotericismSlotType.DELUSION, 1)
+                             .setMaxLevel(1)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.living_armor, delusionSalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.living_armor, delusionFolder));
     }
 
     @Override

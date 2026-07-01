@@ -18,6 +18,10 @@
     {
       "id": "dreamtinker:dragon_scale",
       "required": false
+    },
+    {
+      "id": "dreamtinker:blm_sentient",
+      "required": false
     }
   ]
 }
