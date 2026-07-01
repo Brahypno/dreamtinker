@@ -22,6 +22,7 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import static net.minecraft.tags.DamageTypeTags.IS_PROJECTILE;
 import static org.brahypno.dreamtinker.config.DreamtinkerCachedConfig.homunculusLifeCurseMaxEffectLevel;
 import static org.brahypno.dreamtinker.tools.modifiers.tools.underPlate.WeaponTransformation.valueExpSoftCap;
+import static org.brahypno.dreamtinker.tools.modifiers.traits.armors.knockArts.TAG_KNOCK;
 
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
@@ -53,6 +54,7 @@ public class HurtHandler {
                         }
                 }
             }
+            damageAmount += ETModifierCheck.getPersistentTagValue(offender, DreamtinkerModifiers.knockArts.getId(), TAG_KNOCK);
             if (dmg.is(TinkerTags.DamageTypes.MAGIC_PROTECTION)){
                 int drink_magic = ETModifierCheck.getEntityModifierNum(offender, DreamtinkerModifiers.Ids.drinker_magic);
                 if (0 < drink_magic){
