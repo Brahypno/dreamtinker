@@ -237,7 +237,8 @@
     "faa_aureal_protection": "#C6E6EC",
     "faa_corruption_attack": "#433441",
     "faa_corruption_defense": "#433441",
-    "blm_living_armor": "#9A3A4A"
+    "blm_living_armor": "#9A3A4A",
+    "blm_hellforged": "#162622"
   },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
@@ -330,7 +331,8 @@
     "blm_sentient.corrosive": "#55FF55",
     "blm_sentient.destructive": "#FFAA00",
     "blm_sentient.vengeful": "#FF5555",
-    "blm_sentient.steadfast": "#FF55FF"
+    "blm_sentient.steadfast": "#FF55FF",
+    "blm_hellforged": "#162622"
   },
   "harvest_tier.dreamtinker": {
     "lupus": "#E1B873",

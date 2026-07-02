@@ -76,6 +76,7 @@ public class FluidTagProvider extends FluidTagsProvider {
         fluidTag(DreamtinkerFluids.unmelting_teardrop);
         fluidTag(DreamtinkerFluids.molten_enderitium);
         fluidTag(DreamtinkerFluids.molten_dark_neither_star);
+        fluidTag(DreamtinkerFluids.molten_hellforged);
 
         tag(TinkerTags.Fluids.GLASS_TOOLTIPS).addTag(DreamtinkerFluids.molten_crying_obsidian.getTag());
         this.tag(TinkerTags.Fluids.METAL_TOOLTIPS)

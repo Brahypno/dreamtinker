@@ -1,0 +1,28 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "bloodmagic"
+          },
+          {
+            "type": "esotericism_tinker:mod_compact_config",
+            "modid": "bloodmagic"
+          }
+        ]
+      }
+    ]
+  },
+  "craftable": false,
+  "hidden": false,
+  "sortOrder": 40,
+  "tier": 4
+}

@@ -118,6 +118,7 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.dragon_scale, 4, 40, true, false, tagFilled(DreamtinkerTagKeys.Items.dragonScale));
         addMaterial(DreamtinkerMaterialIds.faa_dark_nether_star, 4, 40, false, false, modLoaded("forbidden_arcanus"));
         addMaterial(DreamtinkerMaterialIds.blm_sentient, 2, 20, true, false, modLoaded("bloodmagic"));
+        addMaterial(DreamtinkerMaterialIds.blm_hellforge, 4, 40, false, false, modLoaded("bloodmagic"));
     }
 
     @Override

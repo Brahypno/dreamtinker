@@ -59,6 +59,8 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             .add(Ids.falsify_fate);
         this.tag(TinkerTags.Modifiers.SPECIAL_DEFENSE)
             .add(Ids.reprise_protection);
+        this.tag(CHESTPLATE_UPGRADES)
+            .addOptional(living_armor.getId());
 
         this.tag(TinkerTags.Modifiers.GENERAL_SLOTLESS)
             .add(mei.getId(), fox_blessing.getId())
@@ -73,8 +75,6 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
         this.tag(COSMETIC_SLOTLESS)
             .addOptional(occ_view.getId());
 
-        this.tag(CHESTPLATE_ABILITIES)
-            .addOptional(living_armor.getId());
 
         this.tag(TinkerTags.Modifiers.MELEE_ABILITIES)
             .add(Ids.continuous_explode, flaming_memory.getId(), Ids.curse_fire, rainbow_lights.getId())
@@ -119,6 +119,8 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
         this.tag(EsotericismTinkerTagKeys.Modifiers.GENERAL_ARMOR_DELUSIONS)
             .add(virtual_dodge.getId(), Ids.sweet_death, Ids.last_kiss)
             .addOptional(Ids.spiritual_weapon_transformation);
+        this.tag(EsotericismTinkerTagKeys.Modifiers.CHESTPLATE_DELUSIONS)
+            .addOptional(living_armor.getId());
     }
 
     @Override

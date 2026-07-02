@@ -298,6 +298,11 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new HeadMaterialStats(520, 6f, Tiers.NETHERITE, 1f),
                          HandleMaterialStats.multipliers().durability(1.0f).miningSpeed(1.1f).attackDamage(1.05f).attackSpeed(1.05f).build(),
                          StatlessMaterialStats.BINDING);
+
+        addMaterialStats(DreamtinkerMaterialIds.blm_hellforge,
+                         new HeadMaterialStats(1020, 12f, Tiers.NETHERITE, 4f),
+                         HandleMaterialStats.multipliers().durability(1.2f).miningSpeed(1.3f).attackDamage(1.15f).attackSpeed(1.15f).build(),
+                         StatlessMaterialStats.BINDING);
     }
 
     private void addRanged() {
@@ -588,10 +593,15 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
 
         addArmorShieldStats(DreamtinkerMaterialIds.dragon_scale,
                             PlatingMaterialStats.builder().durabilityFactor(45).armor(6f, 8f, 10f, 5.5f).toughness(3.5f).knockbackResistance(0.15f),
-                            StatlessMaterialStats.MAILLE);
+                            StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
 
         addArmorShieldStats(DreamtinkerMaterialIds.faa_dark_nether_star,
                             PlatingMaterialStats.builder().durabilityFactor(30).armor(4f, 6f, 8f, 3f).toughness(3.5f).knockbackResistance(0.15f),
+                            StatlessMaterialStats.MAILLE);
+
+
+        addArmorShieldStats(DreamtinkerMaterialIds.blm_hellforge,
+                            PlatingMaterialStats.builder().durabilityFactor(30).armor(4f, 6f, 8f, 3f).toughness(2f).knockbackResistance(0.15f),
                             StatlessMaterialStats.MAILLE);
     }
 

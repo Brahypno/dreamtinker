@@ -1,0 +1,21 @@
+{
+  "type": "tconstruct:casting_basin",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:storage_blocks/hellforged"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "bloodmagic"
+    }
+  ],
+  "cooling_time": 225,
+  "fluid": {
+    "amount": 810,
+    "tag": "dreamtinker:molten_hellforged"
+  },
+  "result": {
+    "tag": "forge:storage_blocks/hellforged"
+  }
+}

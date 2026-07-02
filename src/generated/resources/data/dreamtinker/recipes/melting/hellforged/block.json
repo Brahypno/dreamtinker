@@ -1,0 +1,22 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:storage_blocks/hellforged"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "bloodmagic"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:storage_blocks/hellforged"
+  },
+  "result": {
+    "amount": 810,
+    "fluid": "dreamtinker:molten_hellforged"
+  },
+  "temperature": 1300,
+  "time": 225
+}

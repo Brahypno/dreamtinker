@@ -238,6 +238,7 @@ dependencies {
     //implementation fg.deobf("curse.maven:legendary-monsters-944035:8170235") { transitive = false }
     //implementation fg.deobf("curse.maven:valhelsia-core-416935:5189548")
     //implementation fg.deobf("curse.maven:forbidden-arcanus-309858:5198323") { transitive = false }
+    //implementation fg.deobf("curse.maven:blood-magic-224791:7956981")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

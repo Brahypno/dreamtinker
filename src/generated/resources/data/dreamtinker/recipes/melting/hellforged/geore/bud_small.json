@@ -1,0 +1,23 @@
+{
+  "type": "tconstruct:ore_melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:geore_small_buds/hellforged"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "bloodmagic"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:geore_small_buds/hellforged"
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_hellforged"
+  },
+  "temperature": 1300,
+  "time": 75
+}

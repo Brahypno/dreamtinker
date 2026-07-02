@@ -4,13 +4,14 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import org.brahypno.dreamtinker.utils.CompactUtils.bloodmagic.BloodMagicTconLivingStats;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import wayoftime.bloodmagic.core.living.LivingStats;
 
 @SuppressWarnings("target")
+@Pseudo
 @Mixin(targets = "wayoftime.bloodmagic.core.living.LivingStats", remap = false)
 public abstract class LivingStatsMixin {
     @Inject(
@@ -53,7 +54,7 @@ public abstract class LivingStatsMixin {
             at = @At("HEAD"),
             cancellable = true
     )
-    private static void dreamtinker$toTconPlayer(Player player, LivingStats stats, CallbackInfo ci) {
+    private static void dreamtinker$toTconPlayer(Player player, Object stats, CallbackInfo ci) {
         if (player == null){
             return;
         }
