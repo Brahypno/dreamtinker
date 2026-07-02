@@ -1,0 +1,46 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "mantle:tag_filled",
+          "tag": "forge:nuggets/hellforged"
+        }
+      ]
+    },
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "bloodmagic"
+            },
+            {
+              "type": "esotericism_tinker:mod_compact_config",
+              "modid": "bloodmagic"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:nuggets/hellforged"
+  },
+  "material": "dreamtinker:blm_hellforge",
+  "needed": 9,
+  "value": 1
+}

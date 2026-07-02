@@ -1303,5 +1303,17 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFFFFA8FF)
                                                 .addARGB(255, 0xFFFFF0FF)
                                                 .build());
+
+        this.buildMaterial(DreamtinkerMaterialIds.blm_hellforge)
+            .meleeHarvest().armor()
+            .fallbacks("mental", "crystal")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(63, 0xFF162622)
+                                                .addARGB(102, 0xFF244039)
+                                                .addARGB(140, 0xFF3D6B61)
+                                                .addARGB(178, 0xFF61A092)
+                                                .addARGB(216, 0xFFA5DDD4)
+                                                .addARGB(255, 0xFFE0F6F5)
+                                                .build());
     }
 }

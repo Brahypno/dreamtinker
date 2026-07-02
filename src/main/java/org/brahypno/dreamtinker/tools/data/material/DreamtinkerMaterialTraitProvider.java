@@ -259,6 +259,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.faa_dark_nether_star, ARMOR, Ids.faa_aureal_protection, corruption_defense.getId());
 
         addDefaultTraits(DreamtinkerMaterialIds.blm_sentient, sentient_will);
+        addDefaultTraits(DreamtinkerMaterialIds.blm_hellforge, hellforged);
 
     }
 

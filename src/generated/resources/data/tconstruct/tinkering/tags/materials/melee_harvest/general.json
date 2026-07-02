@@ -22,6 +22,10 @@
     {
       "id": "dreamtinker:blm_sentient",
       "required": false
+    },
+    {
+      "id": "dreamtinker:blm_hellforge",
+      "required": false
     }
   ]
 }

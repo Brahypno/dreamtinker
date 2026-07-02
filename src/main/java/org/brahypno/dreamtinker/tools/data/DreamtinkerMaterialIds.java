@@ -117,4 +117,5 @@ public class DreamtinkerMaterialIds {
     public static final MaterialVariantId blm_sentient_destructive = create(blm_sentient, "destructive");
     public static final MaterialVariantId blm_sentient_vengeful = create(blm_sentient, "vengeful");
     public static final MaterialVariantId blm_sentient_steadfast = create(blm_sentient, "steadfast");
+    public static final MaterialId blm_hellforge = new MaterialId(new ResourceLocation(MODID, "blm_hellforge"));
 }

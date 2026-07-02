@@ -425,6 +425,7 @@ public class DreamtinkerMaterialRecipeProvider implements IMaterialRecipeHelper,
 
         materialRecipe(wrapped, DreamtinkerMaterialIds.blm_sentient_steadfast, itemNameIngredient(bloodmagic, "basemonstersoul_steadfast"), 1, 1,
                        materials_folder + "bloodmagic_sentient/steadfast");
+        standardMetalMaterial(wrapped, DreamtinkerMaterialIds.blm_hellforge, DreamtinkerFluids.molten_hellforged, "hellforged", materials_folder);
     }
 
     private void standardMetalMaterial(Consumer<FinishedRecipe> consumer, MaterialId materialId, FlowingFluidObject<ForgeFlowingFluid> fluid, String name, String folder) {

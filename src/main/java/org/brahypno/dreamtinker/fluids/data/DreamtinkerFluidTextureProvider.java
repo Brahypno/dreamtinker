@@ -75,6 +75,7 @@ public class DreamtinkerFluidTextureProvider extends AbstractFluidTextureProvide
         tintedSlime(DreamtinkerFluids.unmelting_teardrop, "venom").color(0xFF68B2CD);
         tintedMolten(DreamtinkerFluids.molten_enderitium).color(0xFF2E574D);
         tintedMolten(DreamtinkerFluids.molten_dark_neither_star).color(0xFF5831B3);
+        tintedMolten(DreamtinkerFluids.molten_hellforged).color(0xFF162622);
     }
 
     public void commonFluid(FluidType fluid) {

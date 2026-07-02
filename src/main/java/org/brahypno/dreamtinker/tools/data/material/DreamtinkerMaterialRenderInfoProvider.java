@@ -130,6 +130,8 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
         buildRenderInfo(DreamtinkerMaterialIds.blm_sentient_destructive).color(0xFFFFAA00).fallbacks("gem", "crystal").luminosity(15);
         buildRenderInfo(DreamtinkerMaterialIds.blm_sentient_vengeful).color(0xFFFF5555).fallbacks("gem", "crystal").luminosity(15);
         buildRenderInfo(DreamtinkerMaterialIds.blm_sentient_steadfast).color(0xFFFF55FF).fallbacks("gem", "crystal").luminosity(15);
+        buildRenderInfo(DreamtinkerMaterialIds.blm_sentient).color(0xFF00AAAA).fallbacks("gem", "crystal").luminosity(15);
+        buildRenderInfo(DreamtinkerMaterialIds.blm_hellforge).color(0xFFA5DDD4).fallbacks("metal", "crystal").luminosity(15);
 
     }
 

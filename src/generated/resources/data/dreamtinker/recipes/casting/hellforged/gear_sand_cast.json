@@ -1,0 +1,25 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/single_use/gear"
+  },
+  "cast_consumed": true,
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:gears/hellforged"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "bloodmagic"
+    }
+  ],
+  "cooling_time": 150,
+  "fluid": {
+    "amount": 360,
+    "tag": "dreamtinker:molten_hellforged"
+  },
+  "result": {
+    "tag": "forge:gears/hellforged"
+  }
+}

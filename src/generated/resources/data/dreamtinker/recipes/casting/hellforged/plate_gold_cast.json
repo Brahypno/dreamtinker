@@ -1,0 +1,24 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/plate"
+  },
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:plates/hellforged"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "bloodmagic"
+    }
+  ],
+  "cooling_time": 75,
+  "fluid": {
+    "amount": 90,
+    "tag": "dreamtinker:molten_hellforged"
+  },
+  "result": {
+    "tag": "forge:plates/hellforged"
+  }
+}

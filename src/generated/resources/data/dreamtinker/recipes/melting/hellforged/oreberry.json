@@ -1,0 +1,22 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "forge:item_exists",
+      "item": "oreberriesreplanted:hellforged_oreberry"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "bloodmagic"
+    }
+  ],
+  "ingredient": {
+    "item": "oreberriesreplanted:hellforged_oreberry"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "dreamtinker:molten_hellforged"
+  },
+  "temperature": 1300,
+  "time": 25
+}

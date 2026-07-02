@@ -316,6 +316,10 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
         fluid(consumer, "deorum", DreamtinkerFluids.molten_arcane_gold).optional()
                                                                        .baseUnit(FluidValues.INGOT).damageUnit(FluidValues.NUGGET)
                                                                        .metal().dust().plate().gear().coin().sheetmetal().geore().oreberry();
+
+        MeltingRecipeBuilder.melting(StrictNBTIngredient.of(ironHeart()),
+                                     DreamtinkerFluids.molten_iron_heart, FluidValues.INGOT, 0.5f)
+                            .save(consumer, location(Melting_folder + "iron_heart"));
         String fa = "forbidden_arcanus";
         wrapped = withCondition(consumer, modLoaded(fa));
         meltByName(fa, "deorum_door", DreamtinkerFluids.molten_arcane_gold.get(), FluidValues.INGOT * 2, wrapped);
@@ -332,9 +336,11 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
                                      0.2f)
                             .save(consumer, location(Melting_folder + "dark_nether_star_block"));
 
-        MeltingRecipeBuilder.melting(StrictNBTIngredient.of(ironHeart()),
-                                     DreamtinkerFluids.molten_iron_heart, FluidValues.INGOT, 0.5f)
-                            .save(consumer, location(Melting_folder + "iron_heart"));
+        String blm = "bloodmagic";
+        wrapped = withCondition(consumer, modLoaded(blm));
+        fluid(wrapped, "hellforged", DreamtinkerFluids.molten_hellforged).optional()
+                                                                         .baseUnit(FluidValues.INGOT).damageUnit(FluidValues.NUGGET)
+                                                                         .metal().dust().plate().gear().coin().sheetmetal().geore().oreberry();
 
     }
 

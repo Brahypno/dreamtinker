@@ -1,0 +1,24 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/nugget"
+  },
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:nuggets/hellforged"
+    },
+    {
+      "type": "forge:mod_loaded",
+      "modid": "bloodmagic"
+    }
+  ],
+  "cooling_time": 25,
+  "fluid": {
+    "amount": 10,
+    "tag": "dreamtinker:molten_hellforged"
+  },
+  "result": {
+    "tag": "forge:nuggets/hellforged"
+  }
+}
