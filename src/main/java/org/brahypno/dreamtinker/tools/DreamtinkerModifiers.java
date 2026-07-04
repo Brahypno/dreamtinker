@@ -170,7 +170,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<ExplosiveHit> explosive_hit = MODIFIERS.register("explosive_hit", ExplosiveHit::new);
     public static final StaticModifier<RangedShoot> ranged_shoot = MODIFIERS.register("ranged_shoot", RangedShoot::new);
 
-    public static final StaticModifier<WitherShoot> wither_shoot = MODIFIERS.register("wither_shoot", WitherShoot::new);
     public static final StaticModifier<StoneHeart> stone_heart = MODIFIERS.register("stone_heart", StoneHeart::new);
     public static final StaticModifier<LifeLooting> life_looting = MODIFIERS.register("life_looting", LifeLooting::new);
 
@@ -404,6 +403,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId with_tears = id("with_tears");
         public static final ModifierId in_rain = id("in_rain");
         public static final ModifierId wither_body = id("wither_body");
+        public static final ModifierId wither_shoot = id("wither_shoot");
         public static final ModifierId continuous_explode = id("continuous_explode");
         public static final ModifierId soul_core = id("soul_core");
         public static final ModifierId icy_memory = id("icy_memory");

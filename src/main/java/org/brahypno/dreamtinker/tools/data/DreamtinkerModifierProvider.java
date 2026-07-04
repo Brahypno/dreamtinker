@@ -10,6 +10,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobType;
@@ -40,9 +41,7 @@ import org.brahypno.esotericismtinker.library.modifiers.modules.armor.FlightModu
 import org.brahypno.esotericismtinker.library.modifiers.modules.armor.RepriseProtectionModule;
 import org.brahypno.esotericismtinker.library.modifiers.modules.armor.ResonanceArmorModule;
 import org.brahypno.esotericismtinker.library.modifiers.modules.build.AllSlotModule;
-import org.brahypno.esotericismtinker.library.modifiers.modules.combat.ExplosionLikeProjectileDamageModule;
-import org.brahypno.esotericismtinker.library.modifiers.modules.combat.MobEffectsRemoverModule;
-import org.brahypno.esotericismtinker.library.modifiers.modules.combat.SelfMobEffectModule;
+import org.brahypno.esotericismtinker.library.modifiers.modules.combat.*;
 import org.brahypno.esotericismtinker.library.modifiers.modules.harvest.BlockLootMultiplierModule;
 import org.brahypno.esotericismtinker.library.modifiers.modules.harvest.EntityLootMultiplierModule;
 import org.brahypno.esotericismtinker.library.modifiers.modules.weapon.SelfDestroyModule;
@@ -103,6 +102,8 @@ import slimeknights.tconstruct.tools.modules.MeltingModule;
 import slimeknights.tconstruct.tools.modules.armor.DepthProtectionModule;
 import slimeknights.tconstruct.tools.modules.combat.FreezingAttackModule;
 import team.lodestar.lodestone.registry.common.LodestoneAttributeRegistry;
+
+import java.util.List;
 
 import static net.minecraft.tags.DamageTypeTags.BYPASSES_ENCHANTMENTS;
 import static org.brahypno.dreamtinker.library.compact.ars_nouveau.NovaRegistry.nova_magic_armor;
@@ -654,6 +655,18 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                       .addModule(new EffectImmunityModule(MobEffects.POISON))
                                       .addModule(new EffectImmunityModule(MobEffects.WITHER))
                                       .addModule(new EffectImmunityModule(MobEffects.REGENERATION));
+        buildModifier(Ids.wither_shoot).levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                                       .addModule(ProjectileSpawnModule.builder(EntityType.WITHER_SKULL)
+                                                                       .fallbackSpeed(LevelingValue.flat(1.0f))
+                                                                       .dangerousHealthRatio(LevelingValue.flat(0.5f))
+                                                                       .build())
+                                       .addModule(ProjectileCloudOnHitModule.builder()
+                                                                            .effects(List.of(
+                                                                                    new ProjectileCloudOnHitModule.CloudEffect(MobEffects.WITHER, 60, 0, false,
+                                                                                                                               false, true),
+                                                                                    new ProjectileCloudOnHitModule.CloudEffect(TinkerEffects.bleeding.get(), 60,
+                                                                                                                               0, false, false, true)
+                                                                            )).build());
         buildModifier(Ids.soul_upgrade).tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
                                        .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                                        .addModules(ModifierSlotModule.slot(EsotericismSlotType.DELUSION).flat(1));

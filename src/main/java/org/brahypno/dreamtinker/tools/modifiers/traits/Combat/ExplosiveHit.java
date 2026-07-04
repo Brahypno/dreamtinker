@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
+import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.combat.MonsterMeleeHitModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.ranged.ProjectileHitModifierHook;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
@@ -23,10 +24,10 @@ import javax.annotation.Nullable;
 
 import static org.brahypno.dreamtinker.config.DreamtinkerConfig.ExplodeHitFire;
 
-public class ExplosiveHit extends Modifier implements MonsterMeleeHitModifierHook, ProjectileHitModifierHook {
+public class ExplosiveHit extends Modifier implements MonsterMeleeHitModifierHook, ProjectileHitModifierHook, MeleeHitModifierHook {
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-        hookBuilder.addHook(this, ModifierHooks.MONSTER_MELEE_HIT, ModifierHooks.PROJECTILE_HIT);
+        hookBuilder.addHook(this, ModifierHooks.MONSTER_MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MELEE_HIT);
         super.registerHooks(hookBuilder);
     }
 
@@ -38,6 +39,11 @@ public class ExplosiveHit extends Modifier implements MonsterMeleeHitModifierHoo
             double range = null != reach ? reach.getValue() + 1 : 2;
             explode(context.getTarget(), (float) range);
         }
+    }
+
+    @Override
+    public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
+        onMonsterMeleeHit(tool, modifier, context, damageDealt);
     }
 
     @Override

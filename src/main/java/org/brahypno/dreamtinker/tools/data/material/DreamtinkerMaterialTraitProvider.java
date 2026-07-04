@@ -172,7 +172,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
 
         addTraits(DreamtinkerMaterialIds.nefarious, MELEE_HARVEST, cursed_ring_bound.getId(), Ids.wither_body,
                   evil_attack.getId());
-        addTraits(DreamtinkerMaterialIds.nefarious, RANGED, cursed_ring_bound.getId(), wither_shoot.getId(),
+        addTraits(DreamtinkerMaterialIds.nefarious, RANGED, cursed_ring_bound.getId(), Ids.wither_shoot,
                   Ids.wither_body, evil_attack.getId());
         addTraits(DreamtinkerMaterialIds.nefarious, ARMOR, cursed_ring_bound.getId(), Ids.wither_body,
                   stone_heart.getId());
