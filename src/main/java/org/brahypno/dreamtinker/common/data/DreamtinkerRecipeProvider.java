@@ -1,5 +1,6 @@
 package org.brahypno.dreamtinker.common.data;
 
+import com.hollingsworth.arsnouveau.setup.registry.ItemsRegistry;
 import com.sammy.malum.data.recipe.builder.SpiritInfusionRecipeBuilder;
 import com.sammy.malum.data.recipe.builder.VoidFavorRecipeBuilder;
 import com.sammy.malum.registry.common.SpiritTypeRegistry;
@@ -7,6 +8,7 @@ import com.sammy.malum.registry.common.item.ItemRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -32,6 +34,7 @@ import org.brahypno.esotericismtinker.library.recipe.selenic.builder.SelenicTink
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.recipe.data.ICommonRecipeHelper;
 import slimeknights.mantle.recipe.data.IRecipeHelper;
+import slimeknights.mantle.recipe.data.ItemNameIngredient;
 import slimeknights.mantle.recipe.ingredient.EntityIngredient;
 import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
 import slimeknights.tconstruct.library.recipe.modifiers.severing.SeveringRecipeBuilder;
@@ -234,13 +237,41 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IRecipe
                 .build(consumer, "potion/arcana_juice");
         new VoidFavorRecipeBuilder(Ingredient.of(Tags.Items.ENDER_PEARLS), new ItemStack(DreamtinkerCommon.void_pearl.get()))
                 .build(consumer, "void_pearl");
+        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"));
+
+        new VoidFavorRecipeBuilder(itemNameIngredient("ars_nouveau", "water_essence"), new ItemStack(SpiritTypeRegistry.AQUEOUS_SPIRIT.spiritShard.get(), 3))
+                .build(wrapped, "ars_nouveau/aqueous_spirit");
+        new SpiritInfusionRecipeBuilder(itemNameIngredient("ars_nouveau", "source_gem"), 1, new ItemStack(ItemsRegistry.WATER_ESSENCE.asItem()))
+                .addSpirit(SpiritTypeRegistry.AQUEOUS_SPIRIT, 3)
+                .build(wrapped, "ars_nouveau/water_essence");
+        new VoidFavorRecipeBuilder(itemNameIngredient("ars_nouveau", "fire_essence"), new ItemStack(SpiritTypeRegistry.INFERNAL_SPIRIT.spiritShard.get(), 3))
+                .build(wrapped, "ars_nouveau/infernal_spirit");
+        new SpiritInfusionRecipeBuilder(itemNameIngredient("ars_nouveau", "source_gem"), 1, new ItemStack(ItemsRegistry.FIRE_ESSENCE.asItem()))
+                .addSpirit(SpiritTypeRegistry.INFERNAL_SPIRIT, 3)
+                .build(wrapped, "ars_nouveau/fire_essence");
+        new VoidFavorRecipeBuilder(itemNameIngredient("ars_nouveau", "earth_essence"), new ItemStack(SpiritTypeRegistry.EARTHEN_SPIRIT.spiritShard.get(), 3))
+                .build(wrapped, "ars_nouveau/earthen_spirit");
+        new SpiritInfusionRecipeBuilder(itemNameIngredient("ars_nouveau", "source_gem"), 1, new ItemStack(ItemsRegistry.EARTH_ESSENCE.asItem()))
+                .addSpirit(SpiritTypeRegistry.EARTHEN_SPIRIT, 3)
+                .build(wrapped, "ars_nouveau/earth_essence");
+        new VoidFavorRecipeBuilder(itemNameIngredient("ars_nouveau", "air_essence"), new ItemStack(SpiritTypeRegistry.AERIAL_SPIRIT.spiritShard.get(), 3))
+                .build(wrapped, "ars_nouveau/aerial_spirit");
+        new SpiritInfusionRecipeBuilder(itemNameIngredient("ars_nouveau", "source_gem"), 1, new ItemStack(ItemsRegistry.AIR_ESSENCE.asItem()))
+                .addSpirit(SpiritTypeRegistry.AERIAL_SPIRIT, 3)
+                .build(wrapped, "ars_nouveau/air_essence");
+        new VoidFavorRecipeBuilder(itemNameIngredient("ars_nouveau", "abjuration_essence"),
+                                   new ItemStack(SpiritTypeRegistry.SACRED_SPIRIT.spiritShard.get(), 3))
+                .build(wrapped, "ars_nouveau/sacred_spirit");
+        new SpiritInfusionRecipeBuilder(itemNameIngredient("ars_nouveau", "source_gem"), 1, new ItemStack(ItemsRegistry.ABJURATION_ESSENCE.asItem()))
+                .addSpirit(SpiritTypeRegistry.SACRED_SPIRIT, 3)
+                .build(wrapped, "ars_nouveau/abjuration_essence");
 
         SeveringRecipeBuilder.severing(EntityIngredient.of(EntityType.ENDER_DRAGON), DreamtinkerCommon.snake_fang.get())
                              .save(consumer, location(serving_folder + "snake_fang"));
 
 
         String el = "enigmaticlegacy";
-        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(el));
+        wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(el));
         fake_block_to_ingot(wrapped, DreamtinkerMaterialIds.soul_etherium, DreamtinkerCommon.soul_etherium.get());
 
 
@@ -294,6 +325,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IRecipe
                               .save(consumer, location(
                                       partFolder + "fake_block_to_ingots/" +
                                       (id.getVariant().isBlank() || id.getVariant().isEmpty() ? id.getId().getPath() : id.getVariant())));
+    }
+
+    private static Ingredient itemNameIngredient(String modid, String path) {
+        return ItemNameIngredient.from(new ResourceLocation(modid, path));
     }
 
     @Override

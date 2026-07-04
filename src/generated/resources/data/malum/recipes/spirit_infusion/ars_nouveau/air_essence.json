@@ -1,0 +1,41 @@
+{
+  "type": "malum:spirit_infusion",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "ars_nouveau"
+            },
+            {
+              "type": "esotericism_tinker:mod_compact_config",
+              "modid": "ars_nouveau"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "extra_items": [],
+  "input": {
+    "count": 1,
+    "item": "ars_nouveau:source_gem"
+  },
+  "output": {
+    "item": "ars_nouveau:air_essence"
+  },
+  "spirits": [
+    {
+      "type": "aerial",
+      "count": 3
+    }
+  ]
+}
