@@ -86,10 +86,8 @@ public class TheWolfWas extends Modifier implements InventoryTickModifierHook, T
     }
 
     @Override
-    public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
+    public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, @NotNull LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
         ToolStack toolstack = ToolStack.from(stack);
-        if (holder == null)
-            return;
         if (stack.isEmpty())
             return;
         ModDataNBT nbt = toolstack.getPersistentData();

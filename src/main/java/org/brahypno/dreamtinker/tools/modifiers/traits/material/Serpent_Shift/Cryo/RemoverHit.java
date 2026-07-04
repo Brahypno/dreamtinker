@@ -9,6 +9,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.brahypno.esotericismtinker.utils.LootHelper.LootResolver;
+import org.brahypno.esotericismtinker.utils.damage.DamageProbe;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -46,7 +47,7 @@ public class RemoverHit extends Modifier implements MeleeHitModifierHook, Projec
                     LootResolver.dropAllDeathLootVanilla(target, context.makeDamageSource());
                     target.remove(Entity.RemovalReason.DISCARDED);
                 }else
-                    target.setHealth((float) (target.getHealth() - attack));
+                    DamageProbe.finalDamageMethod(target, context.makeDamageSource(), (float) (target.getHealth() - attack));
             }
         }
     }

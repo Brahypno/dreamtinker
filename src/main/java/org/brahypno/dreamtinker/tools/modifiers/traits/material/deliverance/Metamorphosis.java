@@ -42,7 +42,6 @@ import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
-import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
 import java.util.UUID;
 import java.util.function.BiConsumer;
@@ -89,11 +88,6 @@ public class Metamorphosis extends Modifier implements DamageDealtModifierHook, 
             return;
         }
         tool.getPersistentData().putBoolean(SUNLESS_TRAIT, active);
-        if (tool instanceof ToolStack toolStack){
-            toolStack.updateStack(stack);
-        }else {
-            ToolStack.from(stack).updateStack(stack);
-        }
     }
 
     private static void applyCollapseImmunities(LivingEntity holder) {
@@ -144,14 +138,8 @@ public class Metamorphosis extends Modifier implements DamageDealtModifierHook, 
     }
 
     private static void dealExtraDamage(LivingEntity target, DamageSource source, float amount) {
-        int invulnerableTime = target.invulnerableTime;
-        try {
-            target.invulnerableTime = 0;
-            DamageProbe.damageHandler(target, source, amount);
-        }
-        finally {
-            target.invulnerableTime = invulnerableTime;
-        }
+        DamageProbe.clearDamageGuards(target);
+        DamageProbe.mediumDamageMethod(target, source, amount);
     }
 
     private static boolean canAffect(LivingEntity owner, LivingEntity target) {

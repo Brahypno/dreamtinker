@@ -3,7 +3,6 @@ package org.brahypno.dreamtinker.tools.modifiers.traits.Combat;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import org.brahypno.dreamtinker.common.DreamtinkerDamageTypes;
 import org.brahypno.dreamtinker.library.client.utils.model.RainbowTextUtil;
 import org.brahypno.esotericismtinker.utils.ETModifierCheck;
@@ -42,9 +41,7 @@ public class RainbowLights extends Modifier implements MeleeDamageModifierHook, 
             for (int i = 0; i < 9 + modifier.getLevel() && victim.isAlive(); i++) {
                 DamageSource source =
                         DreamtinkerDamageTypes.randomSourceNotSame(victim.level().registryAccess(), context.makeDamageSource(), victim.level().random);
-                victim.invulnerableTime = 0;
-                if (victim instanceof LivingEntity le)
-                    le.hurtDuration = 0;
+                DamageProbe.clearDamageGuards(victim);
                 DamageProbe.damageHandler(victim, source, Theoretical_damage);
             }
             victim.invulnerableTime = inv;

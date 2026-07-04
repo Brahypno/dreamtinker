@@ -12,6 +12,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.brahypno.dreamtinker.common.DreamtinkerDamageTypes;
 import org.brahypno.esotericismtinker.utils.ETModifierCheck;
+import org.brahypno.esotericismtinker.utils.damage.DamageProbe;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -98,7 +99,7 @@ public class RayAttack extends Modifier implements ProjectileHitModifierHook, Me
             candidates.sort(Comparator.comparingDouble(entity -> entity.distanceToSqr(center)));
 
             for (LivingEntity pierceTarget : candidates) {
-                boolean hurt = pierceTarget.hurt(branchSource, damage);
+                boolean hurt = DamageProbe.mediumDamageBoolean(pierceTarget, branchSource, damage);
                 if (hurt){
                     hitEntities.add(pierceTarget.getUUID());
                     damage *= 0.70F;
@@ -112,7 +113,7 @@ public class RayAttack extends Modifier implements ProjectileHitModifierHook, Me
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
         Entity target = context.getTarget();
-        if (null != target && !target.level().isClientSide){
+        if (!target.level().isClientSide){
             float Theoretical_damage = Math.max(0.5f, ETModifierCheck.getMeleeDamage(context.getAttacker(), context.getTarget(), tool, true));
             Theoretical_damage = Math.max(Theoretical_damage, damageDealt);
             DamageSource dmg = DreamtinkerDamageTypes.source(target.level().registryAccess(), DreamtinkerDamageTypes.ruin_wheel, context.makeDamageSource());

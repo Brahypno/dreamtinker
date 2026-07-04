@@ -4,15 +4,13 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
 import org.brahypno.esotericismtinker.utils.ETHelper;
-import org.brahypno.esotericismtinker.utils.LootHelper.LootResolver;
+import org.brahypno.esotericismtinker.utils.damage.DamageProbe;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -47,32 +45,9 @@ public class TheWolfAnswer extends Modifier implements ProjectileHitModifierHook
 
     @Override
     public void failedMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageAttempted) {
-        LivingEntity target = ETHelper.getLivingTarget(context.getTarget());
-        if (target == null || target.level().isClientSide)
+        if (context.getLevel().isClientSide)
             return;
-        float curHP = target.getHealth();
-        if (damageAttempted < curHP){
-            target.setHealth(curHP - damageAttempted);
-            if (target.getHealth() < curHP){
-                if (context.getAttacker() instanceof Player player)
-                    target.setLastHurtByPlayer(player);
-                else
-                    target.setLastHurtByMob(context.getAttacker());
-            }
-        }else {
-            DamageSource dam;
-            if (context.getAttacker() instanceof Player player)
-                dam = context.getAttacker().level()
-                             .damageSources()
-                             .playerAttack(player);
-            else
-                dam = context.getAttacker().level()
-                             .damageSources()
-                             .mobAttack(context.getAttacker());
-            target.setHealth(0);
-            target.die(dam);
-            LootResolver.dropAllDeathLootVanilla(target, dam);
-        }
+        DamageProbe.finalDamageMethod(context.getTarget(), context.makeDamageSource(), damageAttempted);
     }
 
     @Override
@@ -112,9 +87,7 @@ public class TheWolfAnswer extends Modifier implements ProjectileHitModifierHook
     @Override
     public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
         Entity target = context.getTarget();
-        if (null != target && !target.level().isClientSide){
-            target.invulnerableTime = 0;
-        }
+        DamageProbe.cachedDamageGuardCount(target);
     }
 
     @Override

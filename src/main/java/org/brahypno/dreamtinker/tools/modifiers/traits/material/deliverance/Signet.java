@@ -83,14 +83,8 @@ public class Signet extends Modifier implements MeleeHitModifierHook, MonsterMel
     }
 
     private static void dealExtraDamage(LivingEntity target, DamageSource source, float amount) {
-        int invulnerableTime = target.invulnerableTime;
-        try {
-            target.invulnerableTime = 0;
-            DamageProbe.damageHandler(target, source, amount);
-        }
-        finally {
-            target.invulnerableTime = invulnerableTime;
-        }
+        DamageProbe.clearDamageGuards(target);
+        DamageProbe.mediumDamageMethod(target, source, amount);
     }
 
     private static boolean canHit(LivingEntity attacker, Entity rootVehicle, LivingEntity target) {

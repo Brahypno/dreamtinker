@@ -21,6 +21,7 @@ import net.minecraft.world.phys.Vec3;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.brahypno.esotericismtinker.utils.ETModifierCheck;
+import org.brahypno.esotericismtinker.utils.damage.DamageProbe;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -108,7 +109,7 @@ public class EchoedAttack extends Modifier implements ProjectileLaunchModifierHo
                 hitEntities.add(target);
 
                 // 造成伤害
-                target.hurt(target.level().damageSources().sonicBoom(attacker), damage);
+                DamageProbe.damageHandler(target, target.level().damageSources().sonicBoom(attacker), damage);
 
                 // 计算击退（同 Warden）
                 double resist = target.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE);

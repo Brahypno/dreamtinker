@@ -211,7 +211,7 @@ public class DoomTrack extends Modifier implements ProjectileHitModifierHook, Me
             theoreticalDamage *=
                     proofByResistanceMultiplier(attacker, victim, dmg, modifier.getLevel(), projectile != null);
             victim.invulnerableTime = 0;
-            DamageProbe.damageHandler(target, dmg, theoreticalDamage);
+            DamageProbe.mediumDamageMethod(target, dmg, theoreticalDamage);
             spawnOrdainedRuinFx((ServerLevel) victim.level(), victim, modifier.getLevel());
         }
     }

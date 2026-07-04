@@ -142,7 +142,7 @@ public class VisionaryWishes extends Modifier implements MeleeDamageModifierHook
         if (WishPowerData.boosted(tool, context.getLevel())){
             DamageSource dmg =
                     DreamtinkerDamageTypes.source(context.getLevel().registryAccess(), DreamtinkerDamageTypes.many_wishes, context.makeDamageSource());
-            DamageProbe.damageHandler(context.getTarget(), dmg, damageAttempted);
+            DamageProbe.mediumDamageMethod(context.getTarget(), dmg, damageAttempted);
         }
     }
 
