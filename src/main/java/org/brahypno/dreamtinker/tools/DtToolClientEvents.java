@@ -14,7 +14,7 @@ import org.brahypno.dreamtinker.DreamtinkerModule;
 import org.brahypno.dreamtinker.library.client.DTItemProperties;
 import org.brahypno.dreamtinker.library.client.particle.ColoredSweepParticle;
 import org.brahypno.dreamtinker.library.client.particle.VibeBarParticle;
-import org.brahypno.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
+import org.brahypno.dreamtinker.library.compat.ars_nouveau.NovaRegistry;
 import slimeknights.tconstruct.common.ClientEventBase;
 import slimeknights.tconstruct.library.client.model.TinkerItemProperties;
 import slimeknights.tconstruct.library.client.model.tools.ToolModel;

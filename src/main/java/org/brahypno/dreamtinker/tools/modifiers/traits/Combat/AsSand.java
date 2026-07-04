@@ -7,7 +7,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import org.brahypno.esotericismtinker.library.modifiers.EsotericismTinkerHook;
 import org.brahypno.esotericismtinker.library.modifiers.hook.ProjectileHurtHook;
-import org.brahypno.esotericismtinker.utils.CompactUtils.CuriosCompact;
+import org.brahypno.esotericismtinker.utils.CompatUtils.CuriosCompat;
 import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -35,7 +35,7 @@ public class AsSand extends Modifier implements MeleeHitModifierHook, MonsterMel
                 stack.hurtAndBreak(amount, target, entity -> entity.broadcastBreakEvent(slot));
             }
         }
-        CuriosCompact.damageAllCurios(target, amount, stack -> true);
+        CuriosCompat.damageAllCurios(target, amount, stack -> true);
     }
 
     @Override

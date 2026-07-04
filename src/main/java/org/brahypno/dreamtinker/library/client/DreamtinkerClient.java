@@ -9,7 +9,7 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.brahypno.dreamtinker.library.client.Overlay.PerfectOverlay;
-import org.brahypno.dreamtinker.library.compact.eidolon.DTEidolonCompact;
+import org.brahypno.dreamtinker.library.compat.eidolon.DTEidolonCompat;
 
 import static org.brahypno.dreamtinker.Dreamtinker.MODID;
 
@@ -23,7 +23,7 @@ public class DreamtinkerClient {
     @SubscribeEvent
     public static void clientSetup(final FMLClientSetupEvent event) {
         if (ModList.get().isLoaded("eidolon")){
-            MinecraftForge.EVENT_BUS.addListener((Event e) -> DTEidolonCompact.onAnyForgeEvent(e));
+            MinecraftForge.EVENT_BUS.addListener((Event e) -> DTEidolonCompat.onAnyForgeEvent(e));
         }
     }
 }

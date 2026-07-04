@@ -558,18 +558,18 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
                           .save(wrapped, prefix(DreamtinkerFluids.molten_transmutation_gold, folder));
     }
 
-    public void addCompactMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
-        addCompactELMeltingCastingRecipes(consumer);
-        addCompactMalumMeltingCastingRecipes(consumer);
-        addCompactEidolonMeltingCastingRecipes(consumer);
-        addCompactBICMeltingCastingRecipes(consumer);
-        addCompactLegendaryMonstersMeltingCastingRecipes(consumer);
-        addCompactUGMeltingCastingRecipes(consumer);
-        addCompactOCMeltingCastingRecipes(consumer);
+    public void addCompatMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
+        addCompatELMeltingCastingRecipes(consumer);
+        addCompatMalumMeltingCastingRecipes(consumer);
+        addCompatEidolonMeltingCastingRecipes(consumer);
+        addCompatBICMeltingCastingRecipes(consumer);
+        addCompatLegendaryMonstersMeltingCastingRecipes(consumer);
+        addCompatUGMeltingCastingRecipes(consumer);
+        addCompatOCMeltingCastingRecipes(consumer);
 
     }
 
-    private void addCompactEidolonMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
+    private void addCompatEidolonMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
         Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("eidolon"));
         MeltingRecipeBuilder.melting(itemNameIngredient("eidolon", "gold_inlay"),
                                      DreamtinkerFluids.molten_arcane_gold.get(), FluidValues.INGOT * 2, 0.05f)
@@ -583,7 +583,7 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
                             .save(wrapped, location(Melting_folder + "pewter/blend"));
     }
 
-    private void addCompactELMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
+    private void addCompatELMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
         String el = "enigmaticlegacy";
         Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(el));
         metalBySuffix(el, "etherium", DreamtinkerFluids.unstable_liquid_aether.get(), wrapped);
@@ -639,7 +639,7 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
 
     }
 
-    private void addCompactMalumMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
+    private void addCompatMalumMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
         Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("malum"));
         MeltingRecipeBuilder.melting(Ingredient.of(ItemRegistry.SOUL_STAINED_STEEL_PLATING.get()), DreamtinkerFluids.molten_soul_stained_steel,
                                      65,//FluidValues.NUGGET * 6.5,
@@ -672,7 +672,7 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
                 .common(ToolsBySuffix("malum"));
     }
 
-    private void addCompactBICMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
+    private void addCompatBICMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
         String BIC = "born_in_chaos_v1";
         Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(BIC));
         MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(BIC, "dark_metal_deposit")),
@@ -780,7 +780,7 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
                                   .save(wrapped, location(Entity_Melting_folder + "molten_dark_metal/boss"));
     }
 
-    private void addCompactLegendaryMonstersMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
+    private void addCompatLegendaryMonstersMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
         String legendaryMonsters = "legendary_monsters";
         Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("legendary_monsters"));
         MeltingRecipeBuilder.melting(itemNameIngredient("legendary_monsters", "soul_great_sword"),
@@ -805,7 +805,7 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
                 .common(ToolsBySuffix(legendaryMonsters));
     }
 
-    private void addCompactUGMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
+    private void addCompatUGMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
         String undergarden = "undergarden";
         Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(undergarden));
 
@@ -882,7 +882,7 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
          */
     }
 
-    private void addCompactOCMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
+    private void addCompatOCMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
         String occultism = "occultism";
 
         fluid(consumer, "iesnium", DreamtinkerFluids.molten_iesnium)

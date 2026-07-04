@@ -6,7 +6,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.ToolActions;
 import org.brahypno.dreamtinker.Dreamtinker;
-import org.brahypno.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
+import org.brahypno.dreamtinker.library.compat.ars_nouveau.NovaRegistry;
 import org.brahypno.dreamtinker.tools.DTtoolsDefinition;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.brahypno.dreamtinker.tools.DreamtinkerToolParts;

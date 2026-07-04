@@ -13,11 +13,11 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerCommon;
-import org.brahypno.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
+import org.brahypno.dreamtinker.library.compat.ars_nouveau.NovaRegistry;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerMaterialIds;
 import org.brahypno.dreamtinker.tools.items.UnderArmorItem;
-import org.brahypno.dreamtinker.utils.CompactUtils.EnigmaticLegacyCompact;
-import org.brahypno.dreamtinker.utils.CompactUtils.arsNovaUtils;
+import org.brahypno.dreamtinker.utils.CompatUtils.EnigmaticLegacyCompat;
+import org.brahypno.dreamtinker.utils.CompatUtils.arsNovaUtils;
 import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
@@ -45,7 +45,7 @@ public class ItemTooltip {
             }
         }
         if (ModList.get().isLoaded("enigmaticlegacy") && !configCompactDisabled("enigmaticlegacy")){
-            if (Screen.hasShiftDown() && EnigmaticLegacyCompact.isCursedScroll(e.getItemStack())){
+            if (Screen.hasShiftDown() && EnigmaticLegacyCompat.isCursedScroll(e.getItemStack())){
                 e.getToolTip().add(Component.translatable("tooltip.dreamtinker.cursed_scroll").withStyle(ChatFormatting.RED));
             }
         }

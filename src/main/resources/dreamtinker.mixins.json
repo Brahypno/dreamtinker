@@ -1,14 +1,14 @@
 {
   "required": true,
   "package": "org.brahypno.dreamtinker.mixin",
-  "plugin": "org.brahypno.dreamtinker.mixin.GenericCompactMixinPlugin",
+  "plugin": "org.brahypno.dreamtinker.mixin.GenericCompatMixinPlugin",
   "compatibilityLevel": "JAVA_17",
   "refmap": "dreamtinker.refmap.json",
   "mixins": [
     "isInvertedHealAndHarmMixin",
     "LivingEntityMixin",
     "ProjectileMixin",
-    "GeneralCompact.ExtraSCYTHEModifier"
+    "GeneralCompat.ExtraSCYTHEModifier"
   ],
   "client": [
   ],

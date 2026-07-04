@@ -17,7 +17,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
 import org.brahypno.dreamtinker.common.DreamtinkerTagKeys.Blocks;
 import org.brahypno.dreamtinker.common.DreamtinkerTagKeys.Items;
-import org.brahypno.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
+import org.brahypno.dreamtinker.library.compat.ars_nouveau.NovaRegistry;
 import org.brahypno.dreamtinker.smeltery.DreamTinkerSmeltery;
 import org.brahypno.dreamtinker.tools.DreamtinkerToolParts;
 import org.brahypno.dreamtinker.tools.DreamtinkerTools;

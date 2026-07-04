@@ -37,26 +37,26 @@ import org.brahypno.dreamtinker.tools.modifiers.tools.narcissus_wing.foundationW
 import org.brahypno.dreamtinker.tools.modifiers.tools.silence_glove.WeaponDreams;
 import org.brahypno.dreamtinker.tools.modifiers.tools.underPlate.WeaponTransformation;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Combat.*;
-import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.bic.DarkBlade;
-import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.bic.DarkDefense;
-import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.bic.NightmareDefense;
-import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.bloodmagic.HellforgedModifier;
-import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.bloodmagic.SentientWillModifier;
-import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.bloodmagic.livingArmorModifier;
-import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.eidolon.EidolonDeathBringer;
-import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.eidolon.EidolonReaper;
-import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.eidolon.EidolonSapping;
-import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.*;
-import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.etherium.ELAstralBreak;
-import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.etherium.EtheriumProtection;
-import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.evil.EvilAttack;
-import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.enigmaticLegacy.material.soul_aether.ExilesFaulty;
-import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.faa.CorruptionDefense;
-import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.legendary_monsters.SoulRage;
-import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.legendary_monsters.annihilatorArmorPower;
-import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.malum.*;
-import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.occ.OtherWorldView;
-import org.brahypno.dreamtinker.tools.modifiers.traits.Compact.occ.OtherworldHarvest;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.bic.DarkBlade;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.bic.DarkDefense;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.bic.NightmareDefense;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.bloodmagic.HellforgedModifier;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.bloodmagic.SentientWillModifier;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.bloodmagic.livingArmorModifier;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.eidolon.EidolonDeathBringer;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.eidolon.EidolonReaper;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.eidolon.EidolonSapping;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.enigmaticLegacy.*;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.enigmaticLegacy.material.etherium.ELAstralBreak;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.enigmaticLegacy.material.etherium.EtheriumProtection;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.enigmaticLegacy.material.evil.EvilAttack;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.enigmaticLegacy.material.soul_aether.ExilesFaulty;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.faa.CorruptionDefense;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.legendary_monsters.SoulRage;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.legendary_monsters.annihilatorArmorPower;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.malum.*;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.occ.OtherWorldView;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.occ.OtherworldHarvest;
 import org.brahypno.dreamtinker.tools.modifiers.traits.armors.*;
 import org.brahypno.dreamtinker.tools.modifiers.traits.common.*;
 import org.brahypno.dreamtinker.tools.modifiers.traits.harvest.ArrowHarvest;
@@ -98,7 +98,7 @@ import org.brahypno.dreamtinker.tools.modifiers.traits.material.scolecite.pupalO
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.star_regulus.TwoHeadedSeven;
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.star_regulus.as_one;
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.whimsyGold.RhinegoldCatModifier;
-import org.brahypno.dreamtinker.utils.CompactUtils.ForbiddenArcanusAurealCompact;
+import org.brahypno.dreamtinker.utils.CompatUtils.ForbiddenArcanusAurealCompat;
 import slimeknights.mantle.data.predicate.block.BlockPredicate;
 import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
 import slimeknights.tconstruct.library.json.variable.entity.EntityVariable;
@@ -310,9 +310,9 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<HellforgedModifier> hellforged = BLM_MODIFIERS.register("blm_hellforged", HellforgedModifier::new);
 
     public static final EntityVariable AUREAL =
-            EntityVariable.simple(entity -> entity instanceof Player player ? ForbiddenArcanusAurealCompact.getAureal(player) : 0);
+            EntityVariable.simple(entity -> entity instanceof Player player ? ForbiddenArcanusAurealCompat.getAureal(player) : 0);
     public static final EntityVariable CORRUPTION =
-            EntityVariable.simple(entity -> entity instanceof Player player ? ForbiddenArcanusAurealCompact.getCorruption(player) : 0);
+            EntityVariable.simple(entity -> entity instanceof Player player ? ForbiddenArcanusAurealCompat.getCorruption(player) : 0);
     public static BlockPredicate BLOCK_OF_UNDER_GARDEN = BlockPredicate.simple(state -> {
         ResourceLocation id = ForgeRegistries.BLOCKS.getKey(state.getBlock());
         return id != null && id.getNamespace().matches("undergarden");

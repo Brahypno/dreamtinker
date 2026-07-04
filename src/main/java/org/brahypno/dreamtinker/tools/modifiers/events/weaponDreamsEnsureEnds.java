@@ -14,7 +14,7 @@ import org.brahypno.dreamtinker.network.DNetwork;
 import org.brahypno.dreamtinker.network.S2CUseRemainPacket;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.brahypno.dreamtinker.tools.DreamtinkerTools;
-import org.brahypno.esotericismtinker.utils.CompactUtils.CuriosCompact;
+import org.brahypno.esotericismtinker.utils.CompatUtils.CuriosCompat;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.tools.capability.inventory.ToolInventoryCapability;
 import slimeknights.tconstruct.library.tools.item.IModifiable;
@@ -98,7 +98,7 @@ public class weaponDreamsEnsureEnds {
         if (!pending.empty)
             return pending.proxySnap.copy();
 
-        ItemStack curioProxy = CuriosCompact.findPreferredGlove(sp);
+        ItemStack curioProxy = CuriosCompat.findPreferredGlove(sp);
         if (!curioProxy.isEmpty())
             return curioProxy;
 

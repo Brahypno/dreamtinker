@@ -20,7 +20,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
-import org.brahypno.esotericismtinker.utils.CompactUtils.CuriosCompact;
+import org.brahypno.esotericismtinker.utils.CompatUtils.CuriosCompat;
 import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
@@ -192,7 +192,7 @@ public class OathGuardPaleSteelEvents {
             applyOathValue(player.getArmorSlots(), amount, modifierId, dataKey);
             applyOathValue(player.getHandSlots(), amount, modifierId, dataKey);
 
-            List<ItemStack> extraStacks = CuriosCompact.getCurioStacks(player);
+            List<ItemStack> extraStacks = CuriosCompat.getCurioStacks(player);
             if (extraStacks != null){
                 applyOathValue(extraStacks, amount, modifierId, dataKey);
             }

@@ -12,7 +12,7 @@ import slimeknights.tconstruct.library.data.tinkering.AbstractModifierTagProvide
 import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.data.ModifierIds;
 
-import static org.brahypno.dreamtinker.library.compact.ars_nouveau.NovaRegistry.*;
+import static org.brahypno.dreamtinker.library.compat.ars_nouveau.NovaRegistry.*;
 import static org.brahypno.dreamtinker.tools.DreamtinkerModifiers.*;
 import static slimeknights.tconstruct.common.TinkerTags.Modifiers.*;
 

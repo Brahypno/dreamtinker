@@ -15,7 +15,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerCommon;
-import org.brahypno.dreamtinker.library.compact.ars_nouveau.Spell.AugmentTinker;
+import org.brahypno.dreamtinker.library.compat.ars_nouveau.Spell.AugmentTinker;
 import org.brahypno.dreamtinker.smeltery.DreamTinkerSmeltery;
 import org.brahypno.dreamtinker.tools.DreamtinkerToolParts;
 import slimeknights.mantle.registration.object.FluidObject;

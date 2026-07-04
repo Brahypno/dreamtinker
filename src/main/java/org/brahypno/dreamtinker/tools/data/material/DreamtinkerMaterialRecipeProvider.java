@@ -211,7 +211,7 @@ public class DreamtinkerMaterialRecipeProvider implements IMaterialRecipeHelper,
 
     }
 
-    public void addCompactMaterialRecipes(Consumer<FinishedRecipe> consumer) {
+    public void addCompatMaterialRecipes(Consumer<FinishedRecipe> consumer) {
         addELMaterialRecipes(consumer);
         addMalumMaterialRecipes(consumer);
         addEidolonMaterialRecipes(consumer);

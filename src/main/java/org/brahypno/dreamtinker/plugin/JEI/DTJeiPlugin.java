@@ -71,7 +71,7 @@ public final class DTJeiPlugin implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration reg) {
         if (ModList.get().isLoaded("ars_nouveau")){
-            ArsJeiCompact.registerRecipes(reg);
+            ArsJeiCompat.registerRecipes(reg);
         }
 
         List<WorldRitualEntry> list = new ArrayList<>();

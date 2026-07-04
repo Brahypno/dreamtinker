@@ -17,7 +17,7 @@ import org.brahypno.dreamtinker.tools.DreamtinkerTools;
 import org.brahypno.esotericismtinker.library.modifiers.EsotericismTinkerHook;
 import org.brahypno.esotericismtinker.library.modifiers.hook.LeftClickHook;
 import org.brahypno.esotericismtinker.library.modifiers.hook.RightClickHook;
-import org.brahypno.esotericismtinker.utils.CompactUtils.CuriosCompact;
+import org.brahypno.esotericismtinker.utils.CompatUtils.CuriosCompat;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.tconstruct.common.TinkerTags;
@@ -162,7 +162,7 @@ public class WeaponDreams extends NoLevelsModifier implements LeftClickHook, Rig
     private static void rightClickEmptyFromProxy(ServerPlayer sp, Level level) {
         endChosen(sp);
 
-        ItemStack proxyStack = CuriosCompact.findPreferredGlove(sp);
+        ItemStack proxyStack = CuriosCompat.findPreferredGlove(sp);
         if (proxyStack.isEmpty())
             return;
 
@@ -279,7 +279,7 @@ public class WeaponDreams extends NoLevelsModifier implements LeftClickHook, Rig
         boolean mainEmpty = proxyStack.isEmpty();
 
         if (mainEmpty)
-            proxyStack = CuriosCompact.findPreferredGlove(player);
+            proxyStack = CuriosCompat.findPreferredGlove(player);
 
         if (proxyStack.isEmpty())
             return;

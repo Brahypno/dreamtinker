@@ -393,10 +393,10 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new LimbMaterialStats(1000, 0.2f, -0.05f, -0.1f),
                          new GripMaterialStats(0.2f, 0.05f, 3.5f));
 
-        addCompactRanged();
+        addCompatRanged();
     }
 
-    private void addCompactRanged() {
+    private void addCompatRanged() {
         addMaterialStats(DreamtinkerMaterialIds.etherium,
                          new LimbMaterialStats(3000, 0.7f, 0.7f, 0.6f),
                          new GripMaterialStats(0.0f, 0.6f, 4f),

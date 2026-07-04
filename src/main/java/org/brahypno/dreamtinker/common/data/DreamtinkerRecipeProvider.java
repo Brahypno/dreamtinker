@@ -69,8 +69,8 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IRecipe
         smeltery.addCastingRecipes(consumer);
         smeltery.addAlloyRecipes(consumer);
         material.addMaterialRecipes(consumer);
-        material.addCompactMaterialRecipes(consumer);
-        smeltery.addCompactMeltingCastingRecipes(consumer);
+        material.addCompatMaterialRecipes(consumer);
+        smeltery.addCompatMeltingCastingRecipes(consumer);
 
         partToolBuilding.addPartRecipes(consumer);
         partToolBuilding.addToolBuildingRecipes(consumer);

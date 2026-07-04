@@ -38,9 +38,9 @@ import org.brahypno.dreamtinker.common.DreamtinkerAttributes;
 import org.brahypno.dreamtinker.common.DreamtinkerCommon;
 import org.brahypno.dreamtinker.common.DreamtinkerEffects;
 import org.brahypno.dreamtinker.common.DreamtinkerSounds;
-import org.brahypno.dreamtinker.common.capabilities.compact.curio.addSilenceGloveCurio;
-import org.brahypno.dreamtinker.common.capabilities.compact.enigmatic_legacy.addUnholyWater;
-import org.brahypno.dreamtinker.common.capabilities.compact.malum.addConcentratedGluttonyBottle;
+import org.brahypno.dreamtinker.common.capabilities.compat.curio.addSilenceGloveCurio;
+import org.brahypno.dreamtinker.common.capabilities.compat.enigmatic_legacy.addUnholyWater;
+import org.brahypno.dreamtinker.common.capabilities.compat.malum.addConcentratedGluttonyBottle;
 import org.brahypno.dreamtinker.common.data.AdvancementsProvider;
 import org.brahypno.dreamtinker.common.data.DTCurio;
 import org.brahypno.dreamtinker.common.data.DreamtinkerRecipeProvider;
@@ -52,23 +52,23 @@ import org.brahypno.dreamtinker.common.event.advancements.star_regulus_boost;
 import org.brahypno.dreamtinker.config.DreamtinkerClientConfig;
 import org.brahypno.dreamtinker.config.DreamtinkerConfig;
 import org.brahypno.dreamtinker.fluids.DreamtinkerFluids;
-import org.brahypno.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
-import org.brahypno.dreamtinker.library.compact.eidolon.DTEidolonCompact;
+import org.brahypno.dreamtinker.library.compat.ars_nouveau.NovaRegistry;
+import org.brahypno.dreamtinker.library.compat.eidolon.DTEidolonCompat;
 import org.brahypno.dreamtinker.network.DNetwork;
 import org.brahypno.dreamtinker.smeltery.DreamTinkerSmeltery;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.brahypno.dreamtinker.tools.DreamtinkerToolParts;
 import org.brahypno.dreamtinker.tools.DreamtinkerTools;
-import org.brahypno.dreamtinker.tools.modifiers.events.compact.ars_nouveau.ArsPlayerCraftEvent;
-import org.brahypno.dreamtinker.tools.modifiers.events.compact.ars_nouveau.SpellEvents;
-import org.brahypno.dreamtinker.tools.modifiers.events.compact.enigmatic_legacy.EL_events;
-import org.brahypno.dreamtinker.tools.modifiers.events.compact.malum.malum_events_handler;
+import org.brahypno.dreamtinker.tools.modifiers.events.compat.ars_nouveau.ArsPlayerCraftEvent;
+import org.brahypno.dreamtinker.tools.modifiers.events.compat.ars_nouveau.SpellEvents;
+import org.brahypno.dreamtinker.tools.modifiers.events.compat.enigmatic_legacy.EL_events;
+import org.brahypno.dreamtinker.tools.modifiers.events.compat.malum.malum_events_handler;
 import org.brahypno.dreamtinker.world.data.DTDataPackProvider;
 import org.brahypno.esotericismtinker.common.EsotericismTinkerCommon;
 import org.brahypno.esotericismtinker.library.event.PlayerLeftClickEvent;
 import org.brahypno.esotericismtinker.smeltery.EsotericismTinkerSmeltery;
 import org.brahypno.esotericismtinker.tools.EsotericismTinkerTools;
-import org.brahypno.esotericismtinker.utils.CompactUtils.CuriosCompact;
+import org.brahypno.esotericismtinker.utils.CompatUtils.CuriosCompat;
 import org.slf4j.Logger;
 import slimeknights.mantle.registration.RegistrationHelper;
 import slimeknights.tconstruct.library.utils.Util;
@@ -103,7 +103,7 @@ public class Dreamtinker {
         modEventBus.register(new DreamtinkerSounds());
         modEventBus.register(new DreamtinkerModifiers());
         DreamtinkerModule.initRegisters(modEventBus);
-        CuriosCompact.registerPreferredModifiable(stack -> stack.is(DreamtinkerTools.silence_glove.asItem()));
+        CuriosCompat.registerPreferredModifiable(stack -> stack.is(DreamtinkerTools.silence_glove.asItem()));
         if (ModList.get().isLoaded("ars_nouveau")){
             NovaRegistry.NovaInit(modEventBus);
         }
@@ -158,7 +158,7 @@ public class Dreamtinker {
                                      Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                                      AggressiveFox::checkAggressiveFoxSpawnRules);
             if (ModList.get().isLoaded("eidolon")){
-                event.enqueueWork(DTEidolonCompact::init);
+                event.enqueueWork(DTEidolonCompat::init);
             }
         });
     }

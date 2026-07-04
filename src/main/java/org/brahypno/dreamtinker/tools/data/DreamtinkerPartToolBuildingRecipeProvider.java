@@ -12,7 +12,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.crafting.CompoundIngredient;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerCommon;
-import org.brahypno.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
+import org.brahypno.dreamtinker.library.compat.ars_nouveau.NovaRegistry;
 import org.brahypno.dreamtinker.smeltery.DreamTinkerSmeltery;
 import org.brahypno.dreamtinker.tools.DreamtinkerToolParts;
 import org.brahypno.dreamtinker.tools.DreamtinkerTools;
@@ -94,15 +94,15 @@ public class DreamtinkerPartToolBuildingRecipeProvider implements IToolRecipeHel
         wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("malum"));
         armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.spirit_fabric);
 
-        malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.mnemonic, ItemRegistry.MNEMONIC_FRAGMENT.get(), HeadMaterialStats.ID, 1);
-        malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.mnemonic, ItemRegistry.MNEMONIC_FRAGMENT.get(), HandleMaterialStats.ID, 1);
-        malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.mnemonic, ItemRegistry.MNEMONIC_FRAGMENT.get(),
-                                    StatlessMaterialStats.BINDING.getIdentifier(), 1);
-        malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.auric, ItemRegistry.AURIC_EMBERS.get(), HeadMaterialStats.ID, 1);
-        malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.auric, ItemRegistry.AURIC_EMBERS.get(), HandleMaterialStats.ID, 1);
-        malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.auric, ItemRegistry.AURIC_EMBERS.get(), StatlessMaterialStats.BINDING.getIdentifier(), 1);
+        malumCompatMaterialBuilder(wrapped, DreamtinkerMaterialIds.mnemonic, ItemRegistry.MNEMONIC_FRAGMENT.get(), HeadMaterialStats.ID, 1);
+        malumCompatMaterialBuilder(wrapped, DreamtinkerMaterialIds.mnemonic, ItemRegistry.MNEMONIC_FRAGMENT.get(), HandleMaterialStats.ID, 1);
+        malumCompatMaterialBuilder(wrapped, DreamtinkerMaterialIds.mnemonic, ItemRegistry.MNEMONIC_FRAGMENT.get(),
+                                   StatlessMaterialStats.BINDING.getIdentifier(), 1);
+        malumCompatMaterialBuilder(wrapped, DreamtinkerMaterialIds.auric, ItemRegistry.AURIC_EMBERS.get(), HeadMaterialStats.ID, 1);
+        malumCompatMaterialBuilder(wrapped, DreamtinkerMaterialIds.auric, ItemRegistry.AURIC_EMBERS.get(), HandleMaterialStats.ID, 1);
+        malumCompatMaterialBuilder(wrapped, DreamtinkerMaterialIds.auric, ItemRegistry.AURIC_EMBERS.get(), StatlessMaterialStats.BINDING.getIdentifier(), 1);
 
-        malumCompactMaterialBuilder(wrapped, DreamtinkerMaterialIds.malignant_lead, ItemRegistry.MALIGNANT_LEAD.get(), HandleMaterialStats.ID, 1);
+        malumCompatMaterialBuilder(wrapped, DreamtinkerMaterialIds.malignant_lead, ItemRegistry.MALIGNANT_LEAD.get(), HandleMaterialStats.ID, 1);
 
         wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("eidolon"));
         armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.WickedWeave);
@@ -173,7 +173,7 @@ public class DreamtinkerPartToolBuildingRecipeProvider implements IToolRecipeHel
         }
     }
 
-    private void malumCompactMaterialBuilder(Consumer<FinishedRecipe> consumer, MaterialVariantId id, Item item, MaterialStatsId statsId, int count) {
+    private void malumCompatMaterialBuilder(Consumer<FinishedRecipe> consumer, MaterialVariantId id, Item item, MaterialStatsId statsId, int count) {
         List<ToolPartItem> parts = DTPartInfoLookup.partList(statsId);
         for (ToolPartItem part : parts) {
             Ingredient castItem = DTPartInfoLookup.datagenCastIngredient(part);

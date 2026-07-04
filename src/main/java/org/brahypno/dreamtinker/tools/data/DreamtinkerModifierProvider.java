@@ -106,7 +106,7 @@ import team.lodestar.lodestone.registry.common.LodestoneAttributeRegistry;
 import java.util.List;
 
 import static net.minecraft.tags.DamageTypeTags.BYPASSES_ENCHANTMENTS;
-import static org.brahypno.dreamtinker.library.compact.ars_nouveau.NovaRegistry.nova_magic_armor;
+import static org.brahypno.dreamtinker.library.compat.ars_nouveau.NovaRegistry.nova_magic_armor;
 import static org.brahypno.dreamtinker.tools.DreamtinkerModifiers.*;
 import static slimeknights.tconstruct.common.TinkerTags.Items.*;
 import static slimeknights.tconstruct.library.json.math.ModifierFormula.*;

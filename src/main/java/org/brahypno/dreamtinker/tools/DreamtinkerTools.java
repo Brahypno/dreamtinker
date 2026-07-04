@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.Mod;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.DreamtinkerModule;
 import org.brahypno.dreamtinker.common.data.tags.MaterialTagProvider;
-import org.brahypno.dreamtinker.library.compact.ars_nouveau.NovaRegistry;
+import org.brahypno.dreamtinker.library.compat.ars_nouveau.NovaRegistry;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerArmorModel;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerStationLayout;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerToolDefinitionProvider;

@@ -9,7 +9,7 @@ import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.data.ModifierIds;
 import slimeknights.tconstruct.tools.stats.PlatingMaterialStats;
 
-import static org.brahypno.dreamtinker.library.compact.ars_nouveau.NovaRegistry.nova_conjuration_essence;
+import static org.brahypno.dreamtinker.library.compat.ars_nouveau.NovaRegistry.nova_conjuration_essence;
 import static org.brahypno.dreamtinker.tools.DreamtinkerModifiers.*;
 import static org.brahypno.dreamtinker.tools.DreamtinkerModifiers.Ids.soul_form;
 import static slimeknights.tconstruct.library.materials.MaterialRegistry.*;

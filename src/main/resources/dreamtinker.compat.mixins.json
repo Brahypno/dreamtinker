@@ -1,0 +1,28 @@
+{
+  "required": false,
+  "package": "org.brahypno.dreamtinker.mixin",
+  "plugin": "org.brahypno.dreamtinker.mixin.GenericCompatMixinPlugin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "dreamtinker.refmap.json",
+  "mixins": [
+    "compat.ars_nouveau.AlterationTableRendererMixin",
+    "compat.ars_nouveau.ArmorUpgradeRecipeCategoryMixin",
+    "compat.ars_nouveau.AugmentCompatibilityValidatorMixin",
+    "compat.ars_nouveau.EntityMeltingModuleMixin",
+    "compat.ars_nouveau.MethodProjectileMixin",
+    "compat.ars_nouveau.PerkUtilMixin",
+    "compat.bloodmagic.LivingStatsMixin",
+    "compat.bloodmagic.LivingUtilMixin",
+    "compat.enigmaticlegacy.EnigmaticEventHandlerMixin",
+    "compat.enigmaticlegacy.SuperpositionHandlerMixin",
+    "compat.legendary_monsters.LMannLeggingsMixin",
+    "compat.malum.EdgeOfDeliveranceItemMixin",
+    "compat.malum.HiddenTagRegistryMixin",
+    "compat.malum.SpiritInfusionRecipeBuilderAccessor",
+    "compat.malum.SpiritInfusionRecipeBuilderResultMixin"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}
