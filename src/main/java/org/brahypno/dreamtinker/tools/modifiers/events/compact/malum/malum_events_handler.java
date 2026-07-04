@@ -91,7 +91,7 @@ public class malum_events_handler {
         DamageSource dmg = event.getSource();
         if (null != dmg.getEntity() && dmg.getEntity() instanceof Player player){
             ItemStack stack = player.getMainHandItem();
-            if (0 < ToolStack.from(stack).getModifierLevel(DreamtinkerModifiers.Ids.malum_world_of_weight))
+            if (0 < ETModifierCheck.getEntityHandsModifierNum(player, DreamtinkerModifiers.Ids.malum_world_of_weight))
                 ((WeightOfWorldsItem) ItemRegistry.WEIGHT_OF_WORLDS.get()).killEvent(event, player, event.getEntity(), stack);
         }
     }
