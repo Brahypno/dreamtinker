@@ -246,6 +246,7 @@ public class DreamtinkerCommon extends DreamtinkerModule {
     public static void addTabItems(CreativeModeTab.ItemDisplayParameters itemDisplayParameters, CreativeModeTab.Output output) {
         output.accept(snake_fang.get());
         output.accept(echo_alloy.get());
+        output.accept(deep_prismarine_shard.get());
         output.accept(raw_stibnite.get());
         output.accept(valentinite.get());
         output.accept(nigrescence_antimony.get());
