@@ -1,5 +1,5 @@
 {
-  "color": "FF1A5C69",
+  "color": "FF47E590",
   "fallbacks": [
     "crystal",
     "gem",
@@ -27,31 +27,31 @@
       "type": "tconstruct:grey_to_sprite",
       "palette": [
         {
-          "color": "FF000000",
+          "color": "FF241243",
           "grey": 0
         },
         {
-          "color": "FF000711",
+          "color": "FF2E1B53",
           "grey": 63
         },
         {
-          "color": "FF04192A",
+          "color": "FF5C29A8",
           "grey": 102
         },
         {
-          "color": "FF0A344A",
+          "color": "FF915CE2",
           "grey": 140
         },
         {
-          "color": "FF1A5C69",
+          "color": "FF20ADC1",
           "grey": 178
         },
         {
-          "color": "FF48BEB3",
+          "color": "FF47E590",
           "grey": 216
         },
         {
-          "color": "FFD8FFF6",
+          "color": "FF9FEAA8",
           "grey": 255
         }
       ]
