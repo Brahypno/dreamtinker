@@ -2,23 +2,16 @@ package org.brahypno.dreamtinker.smeltery.data;
 
 import com.sammy.malum.registry.common.block.BlockRegistry;
 import com.sammy.malum.registry.common.item.ItemRegistry;
-import net.minecraft.ChatFormatting;
 import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.StringTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.CompoundIngredient;
-import net.minecraftforge.common.crafting.StrictNBTIngredient;
 import net.minecraftforge.common.crafting.conditions.AndCondition;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
@@ -80,25 +73,6 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
 
     public static ICondition tagFilled(TagKey<Item> tagKey) {
         return new OrCondition(ConfigEnabledCondition.FORCE_INTEGRATION_MATERIALS, new TagFilledCondition<>(tagKey));
-    }
-
-    public static ItemStack ironHeart() {
-        ItemStack stack = new ItemStack(Items.IRON_BLOCK);
-
-        stack.setHoverName(
-                Component.translatable("item.dreamtinker.iron_golem_heart")
-                         .withStyle(style -> style.withItalic(false))
-        );
-
-        CompoundTag display = stack.getOrCreateTagElement("display");
-
-        ListTag lore = new ListTag();
-        lore.add(StringTag.valueOf(Component.Serializer.toJson(Component.translatable("tooltip.dreamtinker.iron_golem_heart")
-                                                                        .withStyle(style -> style.withItalic(false).withColor(ChatFormatting.GRAY)))));
-
-        display.put("Lore", lore);
-
-        return stack;
     }
 
     public static SmelteryRecipeBuilder.CommonRecipe[] armorBySuffix(String modid) {
@@ -317,7 +291,7 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
                                                                        .baseUnit(FluidValues.INGOT).damageUnit(FluidValues.NUGGET)
                                                                        .metal().dust().plate().gear().coin().sheetmetal().geore().oreberry();
 
-        MeltingRecipeBuilder.melting(StrictNBTIngredient.of(ironHeart()),
+        MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.iron_golem_heart.get()),
                                      DreamtinkerFluids.molten_iron_heart, FluidValues.INGOT, 0.5f)
                             .save(consumer, location(Melting_folder + "iron_heart"));
         String fa = "forbidden_arcanus";

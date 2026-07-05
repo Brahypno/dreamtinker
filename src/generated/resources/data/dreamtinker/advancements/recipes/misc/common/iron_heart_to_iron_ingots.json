@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_iron_heart": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dreamtinker:iron_golem_heart"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "dreamtinker:common/iron_heart_to_iron_ingots"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_iron_heart",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "dreamtinker:common/iron_heart_to_iron_ingots"
+    ]
+  },
+  "sends_telemetry_event": false
+}

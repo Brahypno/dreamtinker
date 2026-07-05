@@ -5,20 +5,13 @@ import com.sammy.malum.registry.common.SpiritTypeRegistry;
 import com.sammy.malum.registry.common.block.BlockRegistry;
 import com.sammy.malum.registry.common.item.ItemRegistry;
 import com.sammy.malum.registry.common.item.ItemTagRegistry;
-import net.minecraft.ChatFormatting;
 import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.StringTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.common.crafting.StrictNBTIngredient;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.OrCondition;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
@@ -52,25 +45,6 @@ public class DreamtinkerMaterialRecipeProvider implements IMaterialRecipeHelper,
 
     private static Ingredient itemNameIngredient(String modid, String path) {
         return ItemNameIngredient.from(new ResourceLocation(modid, path));
-    }
-
-    public static ItemStack ironHeart() {
-        ItemStack stack = new ItemStack(Items.IRON_BLOCK);
-
-        stack.setHoverName(
-                Component.translatable("item.dreamtinker.iron_golem_heart")
-                         .withStyle(style -> style.withItalic(false))
-        );
-
-        CompoundTag display = stack.getOrCreateTagElement("display");
-
-        ListTag lore = new ListTag();
-        lore.add(StringTag.valueOf(Component.Serializer.toJson(Component.translatable("tooltip.dreamtinker.iron_golem_heart")
-                                                                        .withStyle(style -> style.withItalic(false).withColor(ChatFormatting.GRAY)))));
-
-        display.put("Lore", lore);
-
-        return stack;
     }
 
     private static TagKey<Item> forgeTag(String category, String name) {
@@ -197,7 +171,7 @@ public class DreamtinkerMaterialRecipeProvider implements IMaterialRecipeHelper,
         standardMetalMaterial(consumer, DreamtinkerMaterialIds.Froststeel, DreamtinkerFluids.molten_froststeel, "froststeel", materials_folder);
         standardMetalMaterial(consumer, DreamtinkerMaterialIds.Regalium, DreamtinkerFluids.molten_regalium, "regalium", materials_folder);
         standardMetalMaterial(consumer, DreamtinkerMaterialIds.Iesnium, DreamtinkerFluids.molten_iesnium, "iesnium", materials_folder);
-        materialRecipe(consumer, DreamtinkerMaterialIds.OathGuardPaleSteel, StrictNBTIngredient.of(ironHeart()), 1, 1,
+        materialRecipe(consumer, DreamtinkerMaterialIds.OathGuardPaleSteel, Ingredient.of(DreamtinkerCommon.iron_golem_heart.get()), 1, 1,
                        materials_folder + "oath_guard");
         materialMeltingCasting(consumer, DreamtinkerMaterialIds.OathGuardPaleSteel, DreamtinkerFluids.molten_iron_heart, FluidValues.INGOT, materials_folder);
         materialMeltingCasting(consumer, DreamtinkerMaterialIds.AtonementSilver, DreamtinkerFluids.molten_atonement_silver, FluidValues.INGOT,

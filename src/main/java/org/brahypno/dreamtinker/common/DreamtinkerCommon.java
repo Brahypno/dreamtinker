@@ -121,6 +121,14 @@ public class DreamtinkerCommon extends DreamtinkerModule {
             ITEMS.register("soul_steel", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
     public static final RegistryObject<Item> black_sapphire =
             ITEMS.register("black_sapphire", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
+    public static final RegistryObject<Item> iron_golem_heart =
+            ITEMS.register("iron_golem_heart", () -> new Item(ITEM_PROPS.rarity(Rarity.UNCOMMON)) {
+                @Override
+                public void appendHoverText(@NotNull ItemStack stack, Level level, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
+                    tooltip.add(Component.translatable("tooltip.dreamtinker.iron_golem_heart"));
+                    super.appendHoverText(stack, level, tooltip, flag);
+                }
+            });
 
     public static final RegistryObject<Item> deep_prismarine_shard = ITEMS.register("deep_prismarine_shard", () -> new Item(ITEM_PROPS.rarity(Rarity.COMMON)));
 
@@ -268,6 +276,7 @@ public class DreamtinkerCommon extends DreamtinkerModule {
         output.accept(rainbow_honey.get());
         output.accept(rainbow_honey_crystal.get());
         output.accept(black_sapphire.get());
+        output.accept(iron_golem_heart.get());
         output.accept(scolecite.get());
         output.accept(shiningFlint.get());
         output.accept(orichalcum_nugget.get());

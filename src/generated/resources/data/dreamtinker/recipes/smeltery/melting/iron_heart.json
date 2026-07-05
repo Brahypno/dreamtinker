@@ -1,10 +1,7 @@
 {
   "type": "tconstruct:melting",
   "ingredient": {
-    "type": "forge:nbt",
-    "count": 1,
-    "item": "minecraft:iron_block",
-    "nbt": "{display:{Lore:['{\"italic\":false,\"color\":\"gray\",\"translate\":\"tooltip.dreamtinker.iron_golem_heart\"}'],Name:'{\"italic\":false,\"translate\":\"item.dreamtinker.iron_golem_heart\"}'}}"
+    "item": "dreamtinker:iron_golem_heart"
   },
   "result": {
     "amount": 90,

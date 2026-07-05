@@ -13,7 +13,6 @@ import net.minecraft.world.level.storage.loot.predicates.InvertedLootItemConditi
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
-import net.minecraftforge.common.crafting.StrictNBTIngredient;
 import net.minecraftforge.common.data.GlobalLootModifierProvider;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerCommon;
@@ -25,8 +24,6 @@ import slimeknights.mantle.data.predicate.block.BlockPredicate;
 import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
 
 import java.util.Optional;
-
-import static org.brahypno.dreamtinker.tools.data.material.DreamtinkerMaterialRecipeProvider.ironHeart;
 
 
 public class DreamtinkerGlobalLootModifierProvider extends GlobalLootModifierProvider {
@@ -84,7 +81,7 @@ public class DreamtinkerGlobalLootModifierProvider extends GlobalLootModifierPro
 
     private void addIronHeartFromIronGolemKilledByHostileMob() {
         add("iron_heart_from_iron_golem",
-            ExtraDropBuilder.create(StrictNBTIngredient.of(ironHeart()))
+            ExtraDropBuilder.create(Ingredient.of(DreamtinkerCommon.iron_golem_heart.get()))
                             .condition(KillerIsEnemyCondition.INSTANCE)
                             .entities(LivingEntityPredicate.set(EntityType.IRON_GOLEM))
                             .drop(0.15D, 0.0D, 1, 0)

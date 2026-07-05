@@ -24,7 +24,7 @@ import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.brahypno.dreamtinker.tools.DreamtinkerToolParts;
 import org.brahypno.dreamtinker.tools.DreamtinkerTools;
 import org.brahypno.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvider;
-import org.brahypno.esotericismtinker.library.compact.ars_nouveau.recipe.builder.ModifiableEnchantmentRecipeBuilder;
+import org.brahypno.esotericismtinker.library.compat.ars_nouveau.recipe.builder.ModifiableEnchantmentRecipeBuilder;
 import org.brahypno.esotericismtinker.library.tools.EsotericismSlotType;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.recipe.data.ICommonRecipeHelper;

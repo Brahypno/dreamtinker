@@ -210,6 +210,10 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IRecipe
         night_one_receipts(consumer, DreamtinkerCommon.transmutation_gold_ingot.get(), DreamtinkerCommon.TransmutationGoldBlock.asItem());
         night_one_receipts(consumer, DreamtinkerCommon.transmutation_gold_nugget.get(), DreamtinkerCommon.transmutation_gold_ingot.get());
         night_one_receipts(consumer, DreamtinkerCommon.metallivorous_stibium_lupus.get(), DreamtinkerCommon.metallivorous_stibium_lupus_block.asItem());
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.IRON_INGOT, 9)
+                              .requires(DreamtinkerCommon.iron_golem_heart.get())
+                              .unlockedBy("has_iron_heart", has(DreamtinkerCommon.iron_golem_heart.get()))
+                              .save(consumer, location(common_folder + "iron_heart_to_iron_ingots"));
 
         fake_block_to_ingot(consumer, DreamtinkerMaterialIds.echo_alloy, DreamtinkerCommon.echo_alloy.get());
         fake_block_to_ingot(consumer, DreamtinkerMaterialIds.black_sapphire, DreamtinkerCommon.black_sapphire.get());

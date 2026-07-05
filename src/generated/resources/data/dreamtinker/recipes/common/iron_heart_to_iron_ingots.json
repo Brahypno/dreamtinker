@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "dreamtinker:iron_golem_heart"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "minecraft:iron_ingot"
+  }
+}
