@@ -29,14 +29,16 @@ public class ScriptumAttributes extends NoLevelsModifier implements AttributesMo
     @Override
     public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
         if (!tool.isBroken()){
-            consumer.accept(PerkAttributes.MANA_REGEN_BONUS.get(),
-                            new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
+            Attribute attribute = PerkAttributes.MANA_REGEN_BONUS.get();
+            consumer.accept(attribute,
+                            new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
                                                   this.getTranslationKey(),
                                                   Math.min(ArtsRegenBonus.get(),
                                                            tool.getStats().get(ToolStats.ATTACK_SPEED) + tool.getStats().get(ToolStats.VELOCITY)),
                                                   AttributeModifier.Operation.ADDITION));
-            consumer.accept(PerkAttributes.MAX_MANA.get(),
-                            new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
+            attribute = PerkAttributes.MAX_MANA.get();
+            consumer.accept(attribute,
+                            new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
                                                   this.getTranslationKey(),
                                                   Math.min(ArtsMaxManaBonus.get(),
                                                            3 * tool.getStats().get(ToolStats.MINING_SPEED) * tool.getStats().get(ToolStats.DRAW_SPEED)),

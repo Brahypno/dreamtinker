@@ -63,18 +63,21 @@ public class malum_spirit_defense extends Modifier implements ModifyDamageModifi
     public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
         if (!tool.isBroken() && EquipmentSlot.MAINHAND == slot || EquipmentSlot.OFFHAND == slot)
             return;
-        consumer.accept(AttributeRegistry.ARCANE_RESONANCE.get(),
-                        new AttributeModifier(ARMOR_SLOT_UUIDS.get(slot),
+        Attribute attribute = AttributeRegistry.ARCANE_RESONANCE.get();
+        consumer.accept(attribute,
+                        new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
                                               this.getTranslationKey(),
                                               SpiritDefence.get() * modifier.getLevel(),
                                               AttributeModifier.Operation.ADDITION));
-        consumer.accept(AttributeRegistry.SOUL_WARD_CAP.get(),
-                        new AttributeModifier(ARMOR_SLOT_UUIDS.get(slot),
+        attribute = AttributeRegistry.SOUL_WARD_CAP.get();
+        consumer.accept(attribute,
+                        new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
                                               this.getTranslationKey(),
                                               SpiritDefence.get() * modifier.getLevel(),
                                               AttributeModifier.Operation.ADDITION));
-        consumer.accept(AttributeRegistry.SOUL_WARD_INTEGRITY.get(),
-                        new AttributeModifier(ARMOR_SLOT_UUIDS.get(slot),
+        attribute = AttributeRegistry.SOUL_WARD_INTEGRITY.get();
+        consumer.accept(attribute,
+                        new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
                                               this.getTranslationKey(),
                                               SpiritDefence.get() * modifier.getLevel(),
                                               AttributeModifier.Operation.ADDITION));

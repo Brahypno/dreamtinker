@@ -411,13 +411,15 @@ public class SentientWillModifier extends NoLevelsModifier implements ToolStatsM
         float health = SentientWillState.healthBonusDelta(tool) * level;
 
         if (movement != 0){
-            consumer.accept(Attributes.MOVEMENT_SPEED,
-                            new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + Attributes.MOVEMENT_SPEED.getDescriptionId()).getBytes()),
+            Attribute attribute = Attributes.MOVEMENT_SPEED;
+            consumer.accept(attribute,
+                            new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
                                                   "Sentient will movement speed", movement, AttributeModifier.Operation.ADDITION));
         }
         if (health != 0){
-            consumer.accept(Attributes.MAX_HEALTH,
-                            new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + Attributes.MAX_HEALTH.getDescriptionId()).getBytes()),
+            Attribute attribute = Attributes.MAX_HEALTH;
+            consumer.accept(attribute,
+                            new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
                                                   "Sentient will health bonus", health, AttributeModifier.Operation.ADDITION));
         }
     }

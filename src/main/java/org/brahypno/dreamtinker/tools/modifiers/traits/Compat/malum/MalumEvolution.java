@@ -38,8 +38,6 @@ import static org.brahypno.dreamtinker.config.DreamtinkerConfig.CancerousPredato
 public class MalumEvolution extends Modifier implements MeleeDamageModifierHook, MeleeHitModifierHook, MonsterMeleeHitModifierHook, TooltipModifierHook, AttributesModifierHook {
     private static final ResourceLocation Haunted = Dreamtinker.getLocation("haunted");
     private static final ResourceLocation haunted_change = Dreamtinker.getLocation("haunted_charge");
-    private static final UUID magic_damage = UUID.fromString("a3c5d2f1-7b24-4e8a-9f0b-12c4d6e8fa90");
-
     @Override
     public float getMeleeDamage(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float baseDamage, float damage) {
         ItemStack item = context.getAttacker().getItemInHand(context.getHand());
@@ -77,12 +75,14 @@ public class MalumEvolution extends Modifier implements MeleeDamageModifierHook,
 
     @Override
     public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
-        if (!tool.isBroken() && slot == EquipmentSlot.MAINHAND && 0 < tool.getPersistentData().getInt(Haunted))
-            consumer.accept(LodestoneAttributeRegistry.MAGIC_DAMAGE.get(),
-                            new AttributeModifier(magic_damage,
+        if (!tool.isBroken() && slot == EquipmentSlot.MAINHAND && 0 < tool.getPersistentData().getInt(Haunted)){
+            Attribute attribute = LodestoneAttributeRegistry.MAGIC_DAMAGE.get();
+            consumer.accept(attribute,
+                            new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
                                                   this.getTranslationKey(),
                                                   2.0 * tool.getPersistentData().getInt(Haunted),
                                                   AttributeModifier.Operation.ADDITION));
+        }
     }
 
 

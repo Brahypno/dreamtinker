@@ -168,11 +168,15 @@ public class Metamorphosis extends Modifier implements DamageDealtModifierHook, 
     @Override
     public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
         if (slot.getType() == EquipmentSlot.Type.ARMOR && !tool.isBroken() && tool.getPersistentData().getBoolean(COLLAPSED)){
-            consumer.accept(Attributes.ATTACK_DAMAGE,
-                            new AttributeModifier(ATTACK_DAMAGE_ID, this.getTranslationKey(),
+            Attribute attribute = Attributes.ATTACK_DAMAGE;
+            consumer.accept(attribute,
+                            new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
+                                                  this.getTranslationKey(),
                                                   0.25D + 0.20D * modifier.getLevel(), AttributeModifier.Operation.MULTIPLY_TOTAL));
-            consumer.accept(Attributes.KNOCKBACK_RESISTANCE,
-                            new AttributeModifier(KNOCKBACK_RESISTANCE_ID, this.getTranslationKey(),
+            attribute = Attributes.KNOCKBACK_RESISTANCE;
+            consumer.accept(attribute,
+                            new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
+                                                  this.getTranslationKey(),
                                                   Math.min(1.0D, 0.35D + 0.15D * modifier.getLevel()),
                                                   AttributeModifier.Operation.ADDITION));
         }

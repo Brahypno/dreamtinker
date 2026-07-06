@@ -38,12 +38,14 @@ public class DespairRain extends Modifier implements MeleeDamageModifierHook, Me
 
     @Override
     public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
-        if (!tool.isBroken())
-            consumer.accept(TinkerAttributes.CRITICAL_DAMAGE.get(),
-                            new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
+        if (!tool.isBroken()){
+            Attribute attribute = TinkerAttributes.CRITICAL_DAMAGE.get();
+            consumer.accept(attribute,
+                            new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
                                                   this.getTranslationKey(),
                                                   4 + modifier.getLevel(),
                                                   AttributeModifier.Operation.MULTIPLY_TOTAL));
+        }
     }
 
     @Override

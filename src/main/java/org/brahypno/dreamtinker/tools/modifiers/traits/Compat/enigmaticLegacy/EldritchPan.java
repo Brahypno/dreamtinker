@@ -34,6 +34,8 @@ import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.brahypno.dreamtinker.utils.CompatUtils.EnigmaticLegacyCompat;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.client.TooltipKey;
+import slimeknights.tconstruct.common.TinkerTags;
+import slimeknights.tconstruct.library.json.predicate.tool.ToolContextPredicate;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -45,6 +47,7 @@ import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHoo
 import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.build.ModifierTraitModule;
+import slimeknights.tconstruct.library.modifiers.modules.util.ModifierCondition;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
@@ -64,7 +67,9 @@ public class EldritchPan extends Modifier implements MeleeHitModifierHook, Damag
         hookBuilder.addHook(this, ModifierHooks.MELEE_HIT, ModifierHooks.DAMAGE_BLOCK, ModifierHooks.INVENTORY_TICK,
                             ModifierHooks.REMOVE, ModifierHooks.TOOLTIP, ModifierHooks.ATTRIBUTES, ModifierHooks.VALIDATE);
         hookBuilder.addModule(new ModifierTraitModule(DreamtinkerModifiers.cursed_ring_bound.getId(), 1, true));
-        hookBuilder.addModule(new ModifierTraitModule(TinkerModifiers.blocking.getId(), 1, true));
+        hookBuilder.addModule(new ModifierTraitModule(TinkerModifiers.blocking.getId(), 1, true,
+                                                      ModifierCondition.ANY_CONTEXT.with(
+                                                              ToolContextPredicate.tag(TinkerTags.Items.INTERACTABLE_RIGHT).inverted())));
         super.registerHooks(hookBuilder);
     }
 
@@ -239,14 +244,15 @@ public class EldritchPan extends Modifier implements MeleeHitModifierHook, Damag
             ModDataNBT nbt = tool.getPersistentData();
             int kills = nbt.getInt(TAG_PAN);
             if (kills > 0){
-                String tool_attribute_uuid = "50c030b6-e8ef-4a99-9a6a-9c231b2365a8";
-                consumer.accept(Attributes.ATTACK_DAMAGE,
-                                new AttributeModifier(UUID.fromString(tool_attribute_uuid),
+                Attribute attribute = Attributes.ATTACK_DAMAGE;
+                consumer.accept(attribute,
+                                new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
                                                       this.getTranslationKey(),
                                                       EnigmaticLegacyCompat.eldritchPanUniqueDamageGain() * kills,
                                                       AttributeModifier.Operation.ADDITION));
-                consumer.accept(Attributes.ARMOR,
-                                new AttributeModifier(UUID.fromString(tool_attribute_uuid),
+                attribute = Attributes.ARMOR;
+                consumer.accept(attribute,
+                                new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
                                                       this.getTranslationKey(),
                                                       EnigmaticLegacyCompat.eldritchPanUniqueArmorGain() * kills,
                                                       AttributeModifier.Operation.ADDITION));

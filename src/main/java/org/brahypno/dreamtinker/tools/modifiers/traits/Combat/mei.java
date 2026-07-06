@@ -150,20 +150,31 @@ public class mei extends Modifier implements ModifierRemovalHook, ValidateModifi
         }else {
             mod = 0.13 * level / 100;
         }
-        consumer.accept(Attributes.ATTACK_DAMAGE, new AttributeModifier(UUID.fromString(tool_attribute_uuid), this.getTranslationKey(), mod,
-                                                                        AttributeModifier.Operation.MULTIPLY_BASE));
-        consumer.accept(Attributes.ATTACK_SPEED, new AttributeModifier(UUID.fromString(tool_attribute_uuid), this.getTranslationKey(), mod,
-                                                                       AttributeModifier.Operation.MULTIPLY_BASE));
+        Attribute attribute = Attributes.ATTACK_DAMAGE;
+        consumer.accept(attribute,
+                        new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
+                                              this.getTranslationKey(), mod, AttributeModifier.Operation.MULTIPLY_BASE));
+        attribute = Attributes.ATTACK_SPEED;
+        consumer.accept(attribute,
+                        new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
+                                              this.getTranslationKey(), mod, AttributeModifier.Operation.MULTIPLY_BASE));
         if (200 <= level){
-            consumer.accept(Attributes.ARMOR, new AttributeModifier(UUID.fromString(tool_attribute_uuid), this.getTranslationKey(), mod,
-                                                                    AttributeModifier.Operation.MULTIPLY_BASE));
-            consumer.accept(Attributes.ARMOR_TOUGHNESS,
-                            new AttributeModifier(UUID.fromString(tool_attribute_uuid), this.getTranslationKey(), mod,
+            attribute = Attributes.ARMOR;
+            consumer.accept(attribute,
+                            new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
+                                                  this.getTranslationKey(), mod, AttributeModifier.Operation.MULTIPLY_BASE));
+            attribute = Attributes.ARMOR_TOUGHNESS;
+            consumer.accept(attribute,
+                            new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
+                                                  this.getTranslationKey(), mod, AttributeModifier.Operation.MULTIPLY_BASE));
+        }
+        if (300 <= level && tool.getModifierLevel(DreamtinkerModifiers.despair_mist.getId()) < 1){
+            attribute = Attributes.MOVEMENT_SPEED;
+            consumer.accept(attribute,
+                            new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
+                                                  this.getTranslationKey(), 2.0 * (level - 100) / 100 + .1,
                                                   AttributeModifier.Operation.MULTIPLY_BASE));
         }
-        if (300 <= level && tool.getModifierLevel(DreamtinkerModifiers.despair_mist.getId()) < 1)
-            consumer.accept(Attributes.MOVEMENT_SPEED, new AttributeModifier(UUID.fromString(tool_attribute_uuid), this.getTranslationKey(),
-                                                                             2.0 * (level - 100) / 100 + .1, AttributeModifier.Operation.MULTIPLY_BASE));
     }
 
     @Override

@@ -73,75 +73,96 @@ public class WeaponTransformation extends Modifier implements InventoryTickModif
         float armor = tool.getStats().get(ToolStats.ARMOR);
         float toughness = tool.getStats().get(ToolStats.ARMOR_TOUGHNESS);
         float multi = valueExpSoftCap(armor, toughness);
-        UUID uuid = UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes());
         if (modifier.getLevel() > 0){
             switch (slot) {
                 case CHEST -> {
-                    consumer.accept(Attributes.LUCK,
-                                    new AttributeModifier(uuid,
-                                                          this.getTranslationKey(),
-                                                          multi,
-                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
+                    Attribute attribute = Attributes.LUCK;
+                    consumer.accept(attribute,
+                                    new AttributeModifier(
+                                            UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
+                                            this.getTranslationKey(),
+                                            multi,
+                                            AttributeModifier.Operation.MULTIPLY_TOTAL));
 
-                    consumer.accept(TinkerAttributes.BAD_EFFECT_DURATION.get(),
-                                    new AttributeModifier(uuid,
-                                                          this.getTranslationKey(),
-                                                          Math.min(0.4, multi / 4),
-                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
-                    consumer.accept(Attributes.ATTACK_SPEED,
-                                    new AttributeModifier(uuid,
-                                                          this.getTranslationKey(),
-                                                          multi,
-                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
+                    attribute = TinkerAttributes.BAD_EFFECT_DURATION.get();
+                    consumer.accept(attribute,
+                                    new AttributeModifier(
+                                            UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
+                                            this.getTranslationKey(),
+                                            Math.min(0.4, multi / 4),
+                                            AttributeModifier.Operation.MULTIPLY_TOTAL));
+                    attribute = Attributes.ATTACK_SPEED;
+                    consumer.accept(attribute,
+                                    new AttributeModifier(
+                                            UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
+                                            this.getTranslationKey(),
+                                            multi,
+                                            AttributeModifier.Operation.MULTIPLY_TOTAL));
 
                 }
 
                 case LEGS -> {//see hurt event
-                    consumer.accept(TinkerAttributes.GOOD_EFFECT_DURATION.get(),
-                                    new AttributeModifier(uuid,
-                                                          this.getTranslationKey(),
-                                                          -Math.min(0.35, multi / 4),
-                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
-                    consumer.accept(TinkerAttributes.EXPERIENCE_MULTIPLIER.get(),
-                                    new AttributeModifier(uuid,
-                                                          this.getTranslationKey(),
-                                                          multi * 4,
-                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
+                    Attribute attribute = TinkerAttributes.GOOD_EFFECT_DURATION.get();
+                    consumer.accept(attribute,
+                                    new AttributeModifier(
+                                            UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
+                                            this.getTranslationKey(),
+                                            -Math.min(0.35, multi / 4),
+                                            AttributeModifier.Operation.MULTIPLY_TOTAL));
+                    attribute = TinkerAttributes.EXPERIENCE_MULTIPLIER.get();
+                    consumer.accept(attribute,
+                                    new AttributeModifier(
+                                            UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
+                                            this.getTranslationKey(),
+                                            multi * 4,
+                                            AttributeModifier.Operation.MULTIPLY_TOTAL));
                 }
                 case FEET -> {
-                    consumer.accept(Attributes.ATTACK_DAMAGE,
-                                    new AttributeModifier(uuid,
-                                                          this.getTranslationKey(),
-                                                          multi,
-                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
+                    Attribute attribute = Attributes.ATTACK_DAMAGE;
+                    consumer.accept(attribute,
+                                    new AttributeModifier(
+                                            UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
+                                            this.getTranslationKey(),
+                                            multi,
+                                            AttributeModifier.Operation.MULTIPLY_TOTAL));
 
-                    consumer.accept(TinkerAttributes.MINING_SPEED_MULTIPLIER.get(),
-                                    new AttributeModifier(uuid,
-                                                          this.getTranslationKey(),
-                                                          multi,
-                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
-                    consumer.accept(Attributes.MOVEMENT_SPEED,
-                                    new AttributeModifier(uuid,
-                                                          this.getTranslationKey(),
-                                                          -Math.min(multi, 0.15),
-                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
+                    attribute = TinkerAttributes.MINING_SPEED_MULTIPLIER.get();
+                    consumer.accept(attribute,
+                                    new AttributeModifier(
+                                            UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
+                                            this.getTranslationKey(),
+                                            multi,
+                                            AttributeModifier.Operation.MULTIPLY_TOTAL));
+                    attribute = Attributes.MOVEMENT_SPEED;
+                    consumer.accept(attribute,
+                                    new AttributeModifier(
+                                            UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
+                                            this.getTranslationKey(),
+                                            -Math.min(multi, 0.15),
+                                            AttributeModifier.Operation.MULTIPLY_TOTAL));
                 }
                 case HEAD -> {
-                    consumer.accept(Attributes.MAX_HEALTH,
-                                    new AttributeModifier(uuid,
-                                                          this.getTranslationKey(),
-                                                          multi,
-                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
-                    consumer.accept(Attributes.KNOCKBACK_RESISTANCE,
-                                    new AttributeModifier(uuid,
-                                                          this.getTranslationKey(),
-                                                          -Math.min(.50f, multi),
-                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
-                    consumer.accept(ForgeMod.ENTITY_GRAVITY.get(),
-                                    new AttributeModifier(uuid,
-                                                          this.getTranslationKey(),
-                                                          Math.min(.25f, multi),
-                                                          AttributeModifier.Operation.MULTIPLY_TOTAL));
+                    Attribute attribute = Attributes.MAX_HEALTH;
+                    consumer.accept(attribute,
+                                    new AttributeModifier(
+                                            UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
+                                            this.getTranslationKey(),
+                                            multi,
+                                            AttributeModifier.Operation.MULTIPLY_TOTAL));
+                    attribute = Attributes.KNOCKBACK_RESISTANCE;
+                    consumer.accept(attribute,
+                                    new AttributeModifier(
+                                            UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
+                                            this.getTranslationKey(),
+                                            -Math.min(.50f, multi),
+                                            AttributeModifier.Operation.MULTIPLY_TOTAL));
+                    attribute = ForgeMod.ENTITY_GRAVITY.get();
+                    consumer.accept(attribute,
+                                    new AttributeModifier(
+                                            UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
+                                            this.getTranslationKey(),
+                                            Math.min(.25f, multi),
+                                            AttributeModifier.Operation.MULTIPLY_TOTAL));
                 }
                 default -> {}
             }

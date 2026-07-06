@@ -69,18 +69,21 @@ public class EwigeEiderkunft extends Modifier implements ToolDamageModifierHook,
             int breaks = nbt.getInt(TAG_TOMB);
             if (breaks > 0){
                 double buff = 13 * Math.log1p(breaks) / 100f;
-                consumer.accept(Attributes.ATTACK_DAMAGE,
-                                new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
+                Attribute attribute = Attributes.ATTACK_DAMAGE;
+                consumer.accept(attribute,
+                                new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
                                                       this.getTranslationKey(),
                                                       buff,
                                                       AttributeModifier.Operation.MULTIPLY_TOTAL));
-                consumer.accept(Attributes.ATTACK_SPEED,
-                                new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
+                attribute = Attributes.ATTACK_SPEED;
+                consumer.accept(attribute,
+                                new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
                                                       this.getTranslationKey(),
                                                       buff,
                                                       AttributeModifier.Operation.MULTIPLY_TOTAL));
-                consumer.accept(Attributes.ATTACK_KNOCKBACK,
-                                new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
+                attribute = Attributes.ATTACK_KNOCKBACK;
+                consumer.accept(attribute,
+                                new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
                                                       this.getTranslationKey(),
                                                       buff,
                                                       AttributeModifier.Operation.MULTIPLY_TOTAL));

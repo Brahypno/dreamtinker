@@ -97,8 +97,10 @@ public class MalumThirsty extends Modifier implements InventoryTickModifierHook,
             if (iron_spell_power_exists)
                 attributes.add(ForgeRegistries.ATTRIBUTES.getValue(iron_spell_power));
             for (int i = 0; i < attributes.size(); i++) {
-                consumer.accept(attributes.get(i),
-                                new AttributeModifier(SLOT_UUIDS.get(slot), this.getTranslationKey(),
+                Attribute attribute = attributes.get(i);
+                consumer.accept(attribute,
+                                new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
+                                                      this.getTranslationKey(),
                                                       0.2f * extra_glu / (i + 1),
                                                       AttributeModifier.Operation.MULTIPLY_TOTAL));
             }

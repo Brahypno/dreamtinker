@@ -186,9 +186,10 @@ public class SplendourHeart extends Modifier implements MeleeHitModifierHook, In
             return;
         }
 
-        consumer.accept(ForgeMod.ENTITY_REACH.get(),
+        Attribute attribute = ForgeMod.ENTITY_REACH.get();
+        consumer.accept(attribute,
                         new AttributeModifier(
-                                UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
+                                UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
                                 this.getTranslationKey(),
                                 splendour.level(),
                                 AttributeModifier.Operation.ADDITION));

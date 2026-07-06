@@ -247,8 +247,9 @@ public class DeathCrossing extends Modifier implements MeleeDamageModifierHook, 
     @Override
     public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
         if (!tool.isBroken() && slot == EquipmentSlot.MAINHAND && getCharge(tool) > 0){
-            consumer.accept(ForgeMod.ENTITY_REACH.get(),
-                            new AttributeModifier(UUID.nameUUIDFromBytes(this.getId().toString().getBytes()),
+            Attribute attribute = ForgeMod.ENTITY_REACH.get();
+            consumer.accept(attribute,
+                            new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
                                                   this.getTranslationKey(),
                                                   modifier.getLevel(),
                                                   AttributeModifier.Operation.ADDITION));

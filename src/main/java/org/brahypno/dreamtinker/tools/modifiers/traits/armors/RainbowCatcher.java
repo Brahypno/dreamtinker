@@ -69,12 +69,14 @@ public class RainbowCatcher extends Modifier implements InventoryTickModifierHoo
 
     @Override
     public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
-        if (!tool.isBroken() && tool.getPersistentData().getBoolean(TAG_IN_RAIN))
-            consumer.accept(TinkerAttributes.JUMP_COUNT.get(),
-                            new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
+        if (!tool.isBroken() && tool.getPersistentData().getBoolean(TAG_IN_RAIN)){
+            Attribute attribute = TinkerAttributes.JUMP_COUNT.get();
+            consumer.accept(attribute,
+                            new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
                                                   this.getTranslationKey(),
                                                   modifier.getLevel() * 2,
                                                   AttributeModifier.Operation.ADDITION));
+        }
     }
 
     @Override

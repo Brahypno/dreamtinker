@@ -160,29 +160,34 @@ public class pupalOmen extends Modifier implements ModifyDamageModifierHook, Pro
         int moth = tool.getPersistentData().getInt(TAG_MOTH);
         int buff = Math.min(OmenInSight, Math.abs(scale - moth));
         if (moth < scale){
-            consumer.accept(Attributes.ARMOR,
-                            new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
+            Attribute attribute = Attributes.ARMOR;
+            consumer.accept(attribute,
+                            new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
                                                   this.getTranslationKey(),
                                                   buff * 0.04,
                                                   AttributeModifier.Operation.ADDITION));
-            consumer.accept(Attributes.ARMOR_TOUGHNESS,
-                            new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
+            attribute = Attributes.ARMOR_TOUGHNESS;
+            consumer.accept(attribute,
+                            new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
                                                   this.getTranslationKey(),
                                                   buff * 0.02,
                                                   AttributeModifier.Operation.ADDITION));
-            consumer.accept(Attributes.KNOCKBACK_RESISTANCE,
-                            new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
+            attribute = Attributes.KNOCKBACK_RESISTANCE;
+            consumer.accept(attribute,
+                            new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
                                                   this.getTranslationKey(),
                                                   buff * 0.04,
                                                   AttributeModifier.Operation.ADDITION));
-            consumer.accept(DreamtinkerAttributes.BLOOD_IN_SHELL.get(),
-                            new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
+            attribute = DreamtinkerAttributes.BLOOD_IN_SHELL.get();
+            consumer.accept(attribute,
+                            new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
                                                   this.getTranslationKey(),
                                                   buff * 0.04,
                                                   AttributeModifier.Operation.ADDITION));
         }else if (scale < moth){
-            consumer.accept(DreamtinkerAttributes.FATE_VEIL.get(),
-                            new AttributeModifier(UUID.nameUUIDFromBytes((slot + "." + this.getId()).getBytes()),
+            Attribute attribute = DreamtinkerAttributes.FATE_VEIL.get();
+            consumer.accept(attribute,
+                            new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
                                                   this.getTranslationKey(),
                                                   buff * 0.15,
                                                   AttributeModifier.Operation.ADDITION));

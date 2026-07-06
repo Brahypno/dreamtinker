@@ -23,6 +23,7 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 import javax.annotation.Nullable;
 import java.util.Map;
+import java.util.UUID;
 import java.util.function.BiConsumer;
 
 public class malum_attributes extends Modifier implements AttributesModifierHook, ToolStatsModifierHook {
@@ -50,7 +51,8 @@ public class malum_attributes extends Modifier implements AttributesModifierHook
                 Attribute attr = e.getKey();
                 AttributeModifier mod = e.getValue();
                 AttributeModifier scaled = new AttributeModifier(
-                        mod.getId(), this.getTranslationKey(), mod.getAmount() * modifierEntry.getLevel(), mod.getOperation()
+                        UUID.nameUUIDFromBytes((equipmentSlot.getName() + "." + getId() + "." + attr.getDescriptionId()).getBytes()),
+                        this.getTranslationKey(), mod.getAmount() * modifierEntry.getLevel(), mod.getOperation()
                 );
                 biConsumer.accept(attr, scaled);
             }

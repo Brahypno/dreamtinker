@@ -49,12 +49,14 @@ public class FlamingMemory extends Modifier implements MeleeHitModifierHook, Mon
 
     @Override
     public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
-        if (!tool.isBroken())
-            consumer.accept(ForgeMod.ENTITY_REACH.get(),
-                            new AttributeModifier(UUID.nameUUIDFromBytes((this.getId() + "." + slot.getName()).getBytes()),
+        if (!tool.isBroken()){
+            Attribute attribute = ForgeMod.ENTITY_REACH.get();
+            consumer.accept(attribute,
+                            new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
                                                   this.getTranslationKey(),
                                                   3 + levels(tool),
                                                   AttributeModifier.Operation.ADDITION));
+        }
     }
 
     @Override
