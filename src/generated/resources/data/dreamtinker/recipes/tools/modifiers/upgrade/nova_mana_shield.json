@@ -27,15 +27,15 @@
   ],
   "inputs": [
     {
-      "amount_needed": 16,
-      "item": "ars_nouveau:source_gem_block"
+      "amount_needed": 6,
+      "item": "ars_nouveau:source_gem"
     },
     {
-      "amount_needed": 16,
-      "item": "ars_nouveau:source_gem_block"
+      "amount_needed": 6,
+      "item": "ars_nouveau:source_gem"
     },
     {
-      "amount_needed": 9,
+      "amount_needed": 3,
       "item": "ars_nouveau:abjuration_essence"
     }
   ],

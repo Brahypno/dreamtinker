@@ -757,9 +757,9 @@ public class DreamtinkerModifierRecipeProvider implements ICommonRecipeHelper {
                              .save(wrapped, prefix(NovaRegistry.nova_enchanter_shield, upgradeFolder));
         ModifierRecipeBuilder.modifier(NovaRegistry.nova_mana_shield)
                              .setTools(TinkerTags.Items.ARMOR)
-                             .addInput(SizedIngredient.of(itemNameIngredient("ars_nouveau", "source_gem_block"), 16))
-                             .addInput(SizedIngredient.of(itemNameIngredient("ars_nouveau", "source_gem_block"), 16))
-                             .addInput(SizedIngredient.of(itemNameIngredient("ars_nouveau", "abjuration_essence"), 9))
+                             .addInput(SizedIngredient.of(itemNameIngredient("ars_nouveau", "source_gem"), 6))
+                             .addInput(SizedIngredient.of(itemNameIngredient("ars_nouveau", "source_gem"), 6))
+                             .addInput(SizedIngredient.of(itemNameIngredient("ars_nouveau", "abjuration_essence"), 3))
                              .setSlots(SlotType.UPGRADE, 1)
                              .setMaxLevel(3)
                              .saveSalvage(wrapped, prefix(NovaRegistry.nova_mana_shield, upgradeSalvage))
