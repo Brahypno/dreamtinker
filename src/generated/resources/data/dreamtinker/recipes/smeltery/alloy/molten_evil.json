@@ -1,5 +1,29 @@
 {
   "type": "tconstruct:alloy",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "enigmaticlegacy"
+            },
+            {
+              "type": "esotericism_tinker:mod_compact_config",
+              "modid": "enigmaticlegacy"
+            }
+          ]
+        }
+      ]
+    }
+  ],
   "inputs": [
     {
       "amount": 400,

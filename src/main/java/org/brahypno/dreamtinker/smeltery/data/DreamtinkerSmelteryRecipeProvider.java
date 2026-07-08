@@ -462,22 +462,10 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
                           .addInput(DreamtinkerFluids.molten_ascending_antimony.getTag(), FluidValues.INGOT)
                           .addInput(DreamtinkerFluids.liquid_pure_soul.getTag(), FluidValues.GLASS_BLOCK)
                           .save(consumer, prefix(DreamtinkerFluids.liquid_smoky_antimony, folder));
-        AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_evil, FluidValues.INGOT * 2)
-                          .addInput(DreamtinkerFluids.molten_nefariousness.getTag(), FluidValues.GEM * 4)
-                          .addInput(DreamtinkerFluids.liquid_trist.getTag(), FluidValues.NUGGET * 4)
-                          .addInput(TinkerFluids.moltenNetherite.getTag(), FluidValues.INGOT)
-                          .save(consumer, prefix(DreamtinkerFluids.molten_evil, folder));
         AlloyRecipeBuilder.alloy(FluidOutput.fromFluid(DreamtinkerFluids.liquid_pure_soul.get(), FluidValues.GEM), 1600)
                           .addInput(DreamtinkerFluids.liquid_trist.getTag(), FluidValues.NUGGET)
                           .addInput(TinkerFluids.liquidSoul.getTag(), FluidValues.GLASS_BLOCK * 10)
                           .save(consumer, prefix(DreamtinkerFluids.liquid_pure_soul, folder));
-        AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_soul_aether, FluidValues.INGOT)
-                          .addInput(DreamtinkerFluids.molten_nefariousness.getTag(), FluidValues.GEM)
-                          .addInput(DreamtinkerFluids.liquid_pure_soul.getTag(), FluidValues.GEM)
-                          .addInput(DreamtinkerFluids.unstable_liquid_aether.getTag(), FluidValues.INGOT)
-                          .addInput(DreamtinkerFluids.molten_void.getTag(), FluidValues.SLIMEBALL)
-                          .addInput(DreamtinkerTagKeys.Fluids.molten_echo_shard, FluidValues.GEM)
-                          .save(consumer, prefix(DreamtinkerFluids.molten_soul_aether, folder));
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.reversed_shadow, FluidValues.SLIMEBALL)
                           .addInput(DreamtinkerFluids.molten_void.getTag(), FluidValues.SLIMEBALL * 2)
                           .addInput(TinkerFluids.moltenEnder.getTag(), FluidValues.SLIMEBALL * 2)
@@ -523,6 +511,20 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
                           .addInput(TinkerFluids.moltenSilver.ingredient(FluidValues.INGOT))
                           .addInput(DreamtinkerFluids.liquid_amber.ingredient(FluidValues.GEM))
                           .save(wrapped, prefix(DreamtinkerFluids.molten_atonement_silver, folder));
+        String el = "enigmaticlegacy";
+        wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(el));
+        AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_evil, FluidValues.INGOT * 2)
+                          .addInput(DreamtinkerFluids.molten_nefariousness.getTag(), FluidValues.GEM * 4)
+                          .addInput(DreamtinkerFluids.liquid_trist.getTag(), FluidValues.NUGGET * 4)
+                          .addInput(TinkerFluids.moltenNetherite.getTag(), FluidValues.INGOT)
+                          .save(wrapped, prefix(DreamtinkerFluids.molten_evil, folder));
+        AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_soul_aether, FluidValues.INGOT)
+                          .addInput(DreamtinkerFluids.molten_nefariousness.getTag(), FluidValues.GEM)
+                          .addInput(DreamtinkerFluids.liquid_pure_soul.getTag(), FluidValues.GEM)
+                          .addInput(DreamtinkerFluids.unstable_liquid_aether.getTag(), FluidValues.INGOT)
+                          .addInput(DreamtinkerFluids.molten_void.getTag(), FluidValues.SLIMEBALL)
+                          .addInput(DreamtinkerTagKeys.Fluids.molten_echo_shard, FluidValues.GEM)
+                          .save(wrapped, prefix(DreamtinkerFluids.molten_soul_aether, folder));
         wrapped =
                 withCondition(consumer,
                               new AndCondition(tagFilled(DreamtinkerTagKeys.Items.arcaneGoldIngot), tagFilled(Dreamtinker.forgeItemTag("gems/cinnabar"))));
