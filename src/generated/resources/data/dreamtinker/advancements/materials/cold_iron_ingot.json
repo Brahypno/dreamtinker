@@ -1,5 +1,5 @@
 {
-  "parent": "dreamtinker:root",
+  "parent": "dreamtinker:materials",
   "criteria": {
     "has_cold_iron_ingot": {
       "conditions": {

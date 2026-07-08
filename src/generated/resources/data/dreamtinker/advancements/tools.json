@@ -1,0 +1,31 @@
+{
+  "parent": "dreamtinker:root",
+  "criteria": {
+    "tick": {
+      "conditions": {},
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.dreamtinker.tools.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "esotericism_tinker:ritual_blade",
+      "nbt": "{Damage:0,tic_broken:0b,tic_display:1b,tic_materials:[\"tconstruct:ui_render#head\",\"tconstruct:ui_render#handle\",\"tconstruct:ui_render#extra\",\"tconstruct:ui_render#large\",\"tconstruct:ui_render#extra_large\"]}"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.dreamtinker.tools.title"
+    }
+  },
+  "requirements": [
+    [
+      "tick"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

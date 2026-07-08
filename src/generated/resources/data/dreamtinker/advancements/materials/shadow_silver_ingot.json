@@ -1,5 +1,5 @@
 {
-  "parent": "dreamtinker:root",
+  "parent": "dreamtinker:materials",
   "criteria": {
     "has_shadow_silver_ingot": {
       "conditions": {

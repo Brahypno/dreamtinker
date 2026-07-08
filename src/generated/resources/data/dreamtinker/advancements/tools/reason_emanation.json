@@ -1,12 +1,12 @@
 {
-  "parent": "dreamtinker:materials",
+  "parent": "dreamtinker:tools/reason_emanation_cast",
   "criteria": {
-    "has_snake_fang": {
+    "has_reason_emanation": {
       "conditions": {
         "items": [
           {
             "items": [
-              "dreamtinker:snake_fang"
+              "dreamtinker:reason_emanation"
             ]
           }
         ]
@@ -17,22 +17,22 @@
   "display": {
     "announce_to_chat": false,
     "description": {
-      "translate": "advancements.dreamtinker.materials.snake_fang.description"
+      "translate": "advancements.dreamtinker.tools.reason_emanation.description"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "dreamtinker:snake_fang",
-      "nbt": "{Damage:0}"
+      "item": "dreamtinker:reason_emanation",
+      "nbt": "{Material:\"dreamtinker:star_regulus\"}"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.dreamtinker.materials.snake_fang.title"
+      "translate": "advancements.dreamtinker.tools.reason_emanation.title"
     }
   },
   "requirements": [
     [
-      "has_snake_fang"
+      "has_reason_emanation"
     ]
   ],
   "sends_telemetry_event": true

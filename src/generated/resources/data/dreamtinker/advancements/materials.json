@@ -1,4 +1,5 @@
 {
+  "parent": "dreamtinker:root",
   "criteria": {
     "tick": {
       "conditions": {},
@@ -7,18 +8,17 @@
   },
   "display": {
     "announce_to_chat": false,
-    "background": "dreamtinker:textures/gui/advancement_background.png",
     "description": {
-      "translate": "advancements.dreamtinker.root.description"
+      "translate": "advancements.dreamtinker.materials.description"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "esotericism_tinker:hypnagogic_transmute"
+      "item": "dreamtinker:amber"
     },
-    "show_toast": true,
+    "show_toast": false,
     "title": {
-      "translate": "advancements.dreamtinker.root.title"
+      "translate": "advancements.dreamtinker.materials.title"
     }
   },
   "requirements": [

@@ -1,5 +1,5 @@
 {
-  "parent": "dreamtinker:root",
+  "parent": "dreamtinker:materials",
   "criteria": {
     "has_orichalcum_ingot": {
       "conditions": {

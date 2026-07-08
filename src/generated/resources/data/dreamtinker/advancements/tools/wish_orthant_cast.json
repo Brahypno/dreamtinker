@@ -1,12 +1,12 @@
 {
-  "parent": "dreamtinker:materials",
+  "parent": "dreamtinker:tools",
   "criteria": {
-    "has_snake_fang": {
+    "has_wish_orthant_cast": {
       "conditions": {
         "items": [
           {
             "items": [
-              "dreamtinker:snake_fang"
+              "dreamtinker:wish_cast"
             ]
           }
         ]
@@ -17,22 +17,21 @@
   "display": {
     "announce_to_chat": false,
     "description": {
-      "translate": "advancements.dreamtinker.materials.snake_fang.description"
+      "translate": "advancements.dreamtinker.tools.wish_orthant_cast.description"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "dreamtinker:snake_fang",
-      "nbt": "{Damage:0}"
+      "item": "dreamtinker:wish_cast"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancements.dreamtinker.materials.snake_fang.title"
+      "translate": "advancements.dreamtinker.tools.wish_orthant_cast.title"
     }
   },
   "requirements": [
     [
-      "has_snake_fang"
+      "has_wish_orthant_cast"
     ]
   ],
   "sends_telemetry_event": true

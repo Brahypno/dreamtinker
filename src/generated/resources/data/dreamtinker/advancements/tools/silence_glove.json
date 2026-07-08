@@ -1,5 +1,5 @@
 {
-  "parent": "dreamtinker:root",
+  "parent": "dreamtinker:tools",
   "criteria": {
     "crafted_silence_glove": {
       "conditions": {

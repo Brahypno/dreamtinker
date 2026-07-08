@@ -1,0 +1,114 @@
+{
+  "parent": "dreamtinker:tools/reason_emanation",
+  "criteria": {
+    "has_memory_orthant": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dreamtinker:memory_orthant"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_narcissus_wing": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dreamtinker:narcissus_wing"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_persona_orthant": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dreamtinker:persona_orthant"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_reason_emanation": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dreamtinker:reason_emanation"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_soul_orthant": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dreamtinker:soul_orthant"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_wish_orthant": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dreamtinker:wish_orthant"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.dreamtinker.tools.narcissus_wing.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "dreamtinker:narcissus_wing",
+      "nbt": "{Damage:0,tic_broken:0b,tic_display:1b,tic_materials:[\"tconstruct:ui_render#head\",\"tconstruct:ui_render#handle\",\"tconstruct:ui_render#extra\",\"tconstruct:ui_render#large\",\"tconstruct:ui_render#extra_large\"]}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.dreamtinker.tools.narcissus_wing.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_memory_orthant"
+    ],
+    [
+      "has_wish_orthant"
+    ],
+    [
+      "has_soul_orthant"
+    ],
+    [
+      "has_persona_orthant"
+    ],
+    [
+      "has_reason_emanation"
+    ],
+    [
+      "has_narcissus_wing"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

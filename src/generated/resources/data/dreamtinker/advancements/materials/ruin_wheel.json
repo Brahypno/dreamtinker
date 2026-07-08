@@ -1,5 +1,5 @@
 {
-  "parent": "dreamtinker:root",
+  "parent": "dreamtinker:materials",
   "criteria": {
     "has_ruin_wheel_steel_material": {
       "conditions": {
