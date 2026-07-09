@@ -85,7 +85,24 @@
     {
       "type": "tconstruct:protection",
       "damage_source": "mantle:can_protect",
-      "each_level": -5.0
+      "formula": [
+        -1.25,
+        "$rain",
+        "+",
+        "$level",
+        "*"
+      ],
+      "variables": {
+        "rain": {
+          "type": "tconstruct:entity",
+          "condition_type": "mantle:raining_at",
+          "entity_type": "tconstruct:conditional",
+          "fallback": 0.0,
+          "if_false": 0.0,
+          "if_true": 2.5,
+          "which": "target"
+        }
+      }
     }
   ],
   "tooltip_display": "always"

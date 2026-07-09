@@ -66,6 +66,7 @@ import slimeknights.tconstruct.library.json.predicate.TinkerPredicate;
 import slimeknights.tconstruct.library.json.predicate.tool.HasModifierPredicate;
 import slimeknights.tconstruct.library.json.variable.block.BlockVariable;
 import slimeknights.tconstruct.library.json.variable.entity.AttributeEntityVariable;
+import slimeknights.tconstruct.library.json.variable.entity.ConditionalEntityVariable;
 import slimeknights.tconstruct.library.json.variable.entity.EntityLightVariable;
 import slimeknights.tconstruct.library.json.variable.melee.EntityMeleeVariable;
 import slimeknights.tconstruct.library.json.variable.mining.BlockLightVariable;
@@ -650,7 +651,18 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         LootingModule ARMOR_LOOTING = LootingModule.builder().toolItem(armor).armor(ARMOR_SLOTS);
         buildModifier(Ids.with_tears)
                 .addModules(CONSTANT_FORTUNE, ARMOR_FORTUNE, WEAPON_LOOTING, ARMOR_LOOTING, SEA_LUCK, ARMOR_LUCK)
-                .addModule(ProtectionModule.builder().eachLevel(-5f));
+                .addModule(ProtectionModule.builder()
+                                           .customVariable("rain", new EntityProtectionVariable(
+                                                   new ConditionalEntityVariable(LivingEntityPredicate.RAINING, 2.5f, 0.0f),
+                                                   EntityProtectionVariable.WhichEntity.TARGET,
+                                                   0.0f))
+                                           .formula()
+                                           .constant(-1.25f)
+                                           .customVariable("rain")
+                                           .add()
+                                           .variable(LEVEL)
+                                           .multiply()
+                                           .build());
         buildModifier(Ids.wither_body).levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                                       .addModule(new EffectImmunityModule(MobEffects.POISON))
                                       .addModule(new EffectImmunityModule(MobEffects.WITHER))
