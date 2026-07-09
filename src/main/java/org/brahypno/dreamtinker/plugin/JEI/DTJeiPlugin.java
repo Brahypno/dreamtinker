@@ -2,7 +2,9 @@ package org.brahypno.dreamtinker.plugin.JEI;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IModIngredientRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
@@ -22,6 +24,9 @@ import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerCommon;
 import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
 import org.brahypno.dreamtinker.library.recipe.virtual.WorldRitualEntry;
+import org.brahypno.dreamtinker.plugin.JEI.narcissus.NarcissusFluidFeedbackCache;
+import org.brahypno.dreamtinker.plugin.JEI.narcissus.NarcissusFluidFeedbackCategory;
+import org.brahypno.dreamtinker.tools.DreamtinkerTools;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.recipe.ingredient.EntityIngredient;
 import slimeknights.tconstruct.common.TinkerTags;
@@ -46,6 +51,8 @@ public final class DTJeiPlugin implements IModPlugin {
             StatlessMaterialStats.BINDING.getIdentifier(),
             HandleMaterialStats.ID
     );
+    public static final RecipeType<NarcissusFluidFeedbackCache.Page> NARCISSUS_FEEDBACK =
+            RecipeType.create(Dreamtinker.MODID, "narcissus_fluid_feedback", NarcissusFluidFeedbackCache.Page.class);
 
     @Override
     public @NotNull ResourceLocation getPluginUid() {return WorldRitualCategory.UID;}
@@ -65,7 +72,8 @@ public final class DTJeiPlugin implements IModPlugin {
     @Override
     public void registerCategories(IRecipeCategoryRegistration reg) {
         IGuiHelper g = reg.getJeiHelpers().getGuiHelper();
-        reg.addRecipeCategories(new WorldRitualCategory(g));
+        reg.addRecipeCategories(new WorldRitualCategory(g),
+                                new NarcissusFluidFeedbackCategory(g));
     }
 
     @Override
@@ -190,10 +198,13 @@ public final class DTJeiPlugin implements IModPlugin {
         ));
 
         reg.addRecipes(WORLD_RITUAL, list);
+        NarcissusFluidFeedbackCache.rebuild(reg.getIngredientManager().getAllIngredients(VanillaTypes.ITEM_STACK));
+        reg.addRecipes(NARCISSUS_FEEDBACK, NarcissusFluidFeedbackCache.pages());
     }
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration reg) {
+        reg.addRecipeCatalyst(new ItemStack(DreamtinkerTools.narcissus_wing.get()));
     }
 
     @SafeVarargs

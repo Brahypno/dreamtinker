@@ -2,6 +2,7 @@ package org.brahypno.dreamtinker.library.modifiers.modules.combat;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.FluidTags;
@@ -380,12 +381,62 @@ public final class NarcissusFluidFeedbacks {
         }
     }
 
-    private static ResolvedFluidFeedback resolveFeedback(Fluid fluid, ResourceLocation id) {
+    public static ResolvedFluidFeedback resolveFeedback(FluidStack fluid) {
+        if (fluid.isEmpty()){
+            return null;
+        }
+        ResourceLocation id = ForgeRegistries.FLUIDS.getKey(fluid.getFluid());
+        return id == null ? null : resolveFeedback(fluid.getFluid(), id);
+    }
+
+    public static ResolvedFluidFeedback resolveFeedback(Fluid fluid) {
+        ResourceLocation id = ForgeRegistries.FLUIDS.getKey(fluid);
+        return id == null ? null : resolveFeedback(fluid, id);
+    }
+
+    public static ResolvedFluidFeedback resolveFeedback(Fluid fluid, ResourceLocation id) {
         ResolvedFluidFeedback override = OVERRIDES.get(id);
         if (override != null){
             return override;
         }
         return CACHE.computeIfAbsent(fluid, key -> resolveCategory(key).select(id));
+    }
+
+    public static FeedbackDisplay displayFor(Mode mode) {
+        return switch (mode) {
+            case FORGE_EDGE -> FeedbackDisplay.effect(mode, MobEffects.DAMAGE_BOOST, 20 * 6, 0);
+            case FORGE_RIVET, SLIME_STICK, DROWNED_DRENCHED_STRIKE, DROWNED_SINKING_GUARD ->
+                    FeedbackDisplay.effect(mode, MobEffects.MOVEMENT_SLOWDOWN, 20 * 4, 0);
+            case SLIME_DRIFT -> FeedbackDisplay.effect(mode, MobEffects.SLOW_FALLING, 20 * 6, 0);
+            case SHARD_STEP, GLASS_PRISM_STEP, WATER_FLOW, WITHER_SMOKE_STEP -> FeedbackDisplay.effect(mode, MobEffects.MOVEMENT_SPEED, 20 * 6, 0);
+            case GLASS_SHATTER -> FeedbackDisplay.effect(mode, MobEffects.WEAKNESS, 20 * 5, 0);
+            case REAGENT_OVERDOSE -> FeedbackDisplay.effects(mode,
+                                                             new MobEffectInstance(MobEffects.DAMAGE_BOOST, 20 * 6, 0),
+                                                             new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20 * 6, 0),
+                                                             new MobEffectInstance(MobEffects.DIG_SPEED, 20 * 6, 0));
+            case DROWNED_BREATH -> FeedbackDisplay.effect(mode, MobEffects.WATER_BREATHING, 20 * 8, 0);
+            case FALLBACK_ABSORPTION, FORGE_BULWARK, MASON_PLASTER, PRISM_AEGIS, WITHER_ASH_GUARD ->
+                    FeedbackDisplay.effect(mode, MobEffects.ABSORPTION, 20 * 6, 0);
+            default -> FeedbackDisplay.text(mode);
+        };
+    }
+
+    public record FeedbackDisplay(Mode mode, List<MobEffectInstance> effects, Component text) {
+        public static FeedbackDisplay text(Mode mode) {
+            return new FeedbackDisplay(mode, List.of(), Component.translatable(modeKey(mode)));
+        }
+
+        public static FeedbackDisplay effect(Mode mode, MobEffect effect, int duration, int amplifier) {
+            return new FeedbackDisplay(mode, List.of(new MobEffectInstance(effect, duration, amplifier)), Component.translatable(modeKey(mode)));
+        }
+
+        public static FeedbackDisplay effects(Mode mode, MobEffectInstance... effects) {
+            return new FeedbackDisplay(mode, List.of(effects), Component.translatable(modeKey(mode)));
+        }
+
+        private static String modeKey(Mode mode) {
+            return "jei.dreamtinker.narcissus_feedback.mode." + mode.name().toLowerCase(Locale.ROOT);
+        }
     }
 
     private static Category resolveCategory(Fluid fluid) {
