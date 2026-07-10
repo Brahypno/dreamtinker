@@ -1643,6 +1643,11 @@
   "fluid.dreamtinker.molten_dark_neither_star.fluid_effect": "Deals 3 magic damage.",
   "block.dreamtinker.molten_dark_neither_star": "Molten Dark Nether Star",
   "item.dreamtinker.molten_dark_neither_star_bucket": "Molten Dark Nether Star Bucket",
+  "fluid_type.dreamtinker.molten_hellforged": "Molten HellForged",
+  "fluid.dreamtinker.molten_hellforged": "Molten HellForged",
+  "fluid.dreamtinker.molten_hellforged.fluid_effect": "Deals 3 magic damage.",
+  "block.dreamtinker.molten_hellforged": "Molten HellForged",
+  "item.dreamtinker.molten_hellforged_bucket": "Molten HellForged Bucket",
 
   "_comment.dreamtinker.fluid_effects": "======Fluid Effects======",
   "fluid_effect.tconstruct.damage": "%s Damage",

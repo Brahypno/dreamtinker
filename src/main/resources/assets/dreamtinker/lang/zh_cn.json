@@ -1643,7 +1643,11 @@
   "fluid.dreamtinker.molten_dark_neither_star.fluid_effect": "造成3点魔法伤害",
   "block.dreamtinker.molten_dark_neither_star": "熔融暗黑下界之星",
   "item.dreamtinker.molten_dark_neither_star_bucket": "熔融暗黑下界之星桶",
-
+  "fluid_type.dreamtinker.molten_hellforged": "熔融狱锻",
+  "fluid.dreamtinker.molten_hellforged": "熔融狱锻",
+  "fluid.dreamtinker.molten_hellforged.fluid_effect": "Deals 3 magic damage.",
+  "block.dreamtinker.molten_hellforged": "熔融狱锻",
+  "item.dreamtinker.molten_hellforged_bucket": "熔融狱锻桶",
   "_comment.dreamtinker.fluid_effects": "======流体效果======",
   "fluid_effect.tconstruct.damage": "%s伤害",
   "fluid_effect.tconstruct.damage.tconstruct.bleed": "%s流血伤害",
