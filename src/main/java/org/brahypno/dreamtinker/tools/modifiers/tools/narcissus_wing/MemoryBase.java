@@ -161,7 +161,8 @@ public class MemoryBase extends Modifier implements GeneralInteractionModifierHo
                         float startAngle = ModifiableLauncherItem.getAngleStart(shots);
                         int primaryIndex = shots / 2;
                         for (int shotIndex = 0; shotIndex < shots; shotIndex++) {
-                            NarcissusFluidProjectile spit = new NarcissusFluidProjectile(world, entity, new FluidStack(fluid, amount), power, tool);
+                            NarcissusFluidProjectile spit = new NarcissusFluidProjectile(world, entity, new FluidStack(fluid, amount), power,
+                                                                                         entity.getItemInHand(entity.getUsedItemHand()));
                             if (charge == 1.0F){
                                 spit.setCrit(true);
                             }

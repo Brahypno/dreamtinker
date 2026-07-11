@@ -1,6 +1,7 @@
 package org.brahypno.dreamtinker.Entity;
 
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -18,6 +19,7 @@ import net.minecraft.world.entity.boss.enderdragon.EndCrystal;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -43,36 +45,46 @@ import slimeknights.tconstruct.library.modifiers.fluid.FluidEffectContext;
 import slimeknights.tconstruct.library.modifiers.fluid.FluidEffectManager;
 import slimeknights.tconstruct.library.modifiers.fluid.FluidEffects;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
+import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
+import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
 import java.util.Comparator;
 import java.util.List;
 
 public class NarcissusFluidProjectile extends Projectile implements ProjectileWithPower {
-    private IToolStackView toolStackView;
-    private static final EntityDataAccessor<FluidStack> FLUID;
-    private static final EntityDataAccessor<Integer> CHASE_LIVING;
-    private static final EntityDataAccessor<Integer> COLOR;
+    private static final EntityDataAccessor<FluidStack> FLUID = SynchedEntityData.defineId(
+            NarcissusFluidProjectile.class, TinkerFluids.FLUID_DATA_SERIALIZER
+    );
+    private static final EntityDataAccessor<Integer> CHASE_LIVING = SynchedEntityData.defineId(
+            NarcissusFluidProjectile.class, EntityDataSerializers.INT
+    );
+    private static final EntityDataAccessor<Integer> COLOR = SynchedEntityData.defineId(
+            NarcissusFluidProjectile.class, EntityDataSerializers.INT
+    );
+    private static final EntityDataAccessor<ItemStack> TOOL = SynchedEntityData.defineId(
+            NarcissusFluidProjectile.class, EntityDataSerializers.ITEM_STACK
+    );
+
     private int initialFluid;
     private float power;
     private int life = 30 * 20;
     private boolean crit;
+
     public final DTClientTrail shortTrail = new DTClientTrail(8, 0.0004D);
     public final DTClientTrail trail = new DTClientTrail(24, 0.0004D);
-
 
     public NarcissusFluidProjectile(EntityType<? extends NarcissusFluidProjectile> type, Level level) {
         super(type, level);
         this.power = 2.0F;
     }
 
-
     public NarcissusFluidProjectile(Level level) {
         this(DreamtinkerEntityTypes.NarcissusSpitEntity.get(), level);
     }
 
-    public NarcissusFluidProjectile(Level level, LivingEntity owner, FluidStack fluid, float power, IToolStackView tool) {
+    public NarcissusFluidProjectile(Level level, LivingEntity owner, FluidStack fluid, float power, ItemStack tool) {
         this(level);
         this.setPos(owner.getX(), owner.getEyeY() - 0.1, owner.getZ());
         this.setOwner(owner);
@@ -86,6 +98,7 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
         Level level = this.level();
         FluidEffectContext.Builder builder = FluidEffectContext.builder(level).projectile(this);
         Entity owner = this.getOwner();
+
         if (owner != null){
             builder.user(owner);
         }
@@ -93,344 +106,499 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
         return builder;
     }
 
-    static {
-        FLUID = SynchedEntityData.defineId(NarcissusFluidProjectile.class, TinkerFluids.FLUID_DATA_SERIALIZER);
-        CHASE_LIVING = SynchedEntityData.defineId(NarcissusFluidProjectile.class, EntityDataSerializers.INT);
-        COLOR = SynchedEntityData.defineId(NarcissusFluidProjectile.class, EntityDataSerializers.INT);
+    @Override
+    protected void defineSynchedData() {
+        this.entityData.define(FLUID, FluidStack.EMPTY);
+        this.entityData.define(CHASE_LIVING, 0);
+        this.entityData.define(COLOR, 0);
+        this.entityData.define(TOOL, ItemStack.EMPTY);
     }
 
     @Override
-    protected boolean canHitEntity(@NotNull Entity p_36743_) {
-        return (getChaseLiving() < 1 || p_36743_ instanceof EndCrystal ||
-                (p_36743_ instanceof LivingEntity entity && entity.isAlive() && !(p_36743_ instanceof ArmorStand))) &&
-               (super.canHitEntity(p_36743_) || !p_36743_.isSpectator() && !p_36743_.canBeHitByProjectile());
+    protected boolean canHitEntity(@NotNull Entity entity) {
+        return (
+                       this.getChaseLiving() < 1
+                       || entity instanceof EndCrystal
+                       || entity instanceof LivingEntity living
+                          && living.isAlive()
+                          && !(entity instanceof ArmorStand)
+               ) && (
+                       super.canHitEntity(entity)
+                       || !entity.isSpectator()
+                          && !entity.canBeHitByProjectile()
+               );
     }
 
     public float getInitialFluid() {
-        return initialFluid;
+        return this.initialFluid;
     }
 
-    /**
-     * @param hit 可能为 null
-     * @param t   命中最早时刻 ∈[0,1]；未命中时无意义
-     */ // --- 辅助结构 ---
-    private record ResultTOI(EntityHitResult hit, double t) {
-    }
+    private record ResultTOI(EntityHitResult hit, double t) {}
 
-    private ResultTOI sweepToFirstEntityHit(Vec3 from, Vec3 vel) {
-        final int SAMPLES = 6;
+    private ResultTOI sweepToFirstEntityHit(Vec3 from, Vec3 velocity) {
+        final int samples = 6;
         final double inflate = 1.0;
-        final double EPS = 1e-4;
-        final int MAX_BISECT = 12;
+        final double epsilon = 1.0E-4;
+        final int maxBisect = 12;
 
-        double tLo = 0.0;
+        double lowerTime = 0.0;
 
-        for (int i = 1; i <= SAMPLES; i++) {
-            double t = (double) i / (double) SAMPLES;
+        for (int i = 1; i <= samples; i++) {
+            double upperTime = (double) i / samples;
+            Vec3 segmentStart = from.add(velocity.scale(lowerTime));
+            Vec3 segmentEnd = from.add(velocity.scale(upperTime));
+            Vec3 segment = segmentEnd.subtract(segmentStart);
 
-            Vec3 midFrom = from.add(vel.scale(tLo));
-            Vec3 midTo = from.add(vel.scale(t));
-            Vec3 seg = midTo.subtract(midFrom);
-
-            // 关键：把 AABB 移到本段起点 midFrom 再 expandTowards
-            AABB boxAtSegStart = this.getBoundingBox().move(
-                    midFrom.x - this.getX(),
-                    midFrom.y - this.getY(),
-                    midFrom.z - this.getZ()
+            AABB boxAtSegmentStart = this.getBoundingBox().move(
+                    segmentStart.x - this.getX(),
+                    segmentStart.y - this.getY(),
+                    segmentStart.z - this.getZ()
             );
-            AABB sweepBox = boxAtSegStart.expandTowards(seg).inflate(inflate);
+            AABB sweepBox = boxAtSegmentStart.expandTowards(segment).inflate(inflate);
 
-            EntityHitResult hr = ProjectileUtil.getEntityHitResult(
-                    this.level(), this, midFrom, midTo, sweepBox, this::canHitEntity
+            EntityHitResult hit = ProjectileUtil.getEntityHitResult(
+                    this.level(),
+                    this,
+                    segmentStart,
+                    segmentEnd,
+                    sweepBox,
+                    this::canHitEntity
             );
 
-            if (hr != null && hr.getType() != HitResult.Type.MISS){
-                double lo = tLo, hi = t;
-                EntityHitResult best = hr;
+            if (hit != null && hit.getType() != HitResult.Type.MISS){
+                double low = lowerTime;
+                double high = upperTime;
+                EntityHitResult best = hit;
 
-                for (int k = 0; k < MAX_BISECT && hi - lo > EPS; k++) {
-                    double midT = (lo + hi) * 0.5;
+                for (int j = 0; j < maxBisect && high - low > epsilon; j++) {
+                    double middleTime = (low + high) * 0.5;
+                    Vec3 start = from.add(velocity.scale(low));
+                    Vec3 end = from.add(velocity.scale(middleTime));
+                    Vec3 delta = end.subtract(start);
 
-                    Vec3 a = from.add(vel.scale(lo));
-                    Vec3 b = from.add(vel.scale(midT));
-                    Vec3 d = b.subtract(a);
-
-                    // 同样：AABB 移到 a 再 expandTowards
-                    AABB boxAtA = this.getBoundingBox().move(
-                            a.x - this.getX(),
-                            a.y - this.getY(),
-                            a.z - this.getZ()
+                    AABB boxAtStart = this.getBoundingBox().move(
+                            start.x - this.getX(),
+                            start.y - this.getY(),
+                            start.z - this.getZ()
                     );
-                    AABB sweepBox2 = boxAtA.expandTowards(d).inflate(inflate);
+                    AABB bisectSweepBox = boxAtStart.expandTowards(delta).inflate(inflate);
 
                     EntityHitResult test = ProjectileUtil.getEntityHitResult(
-                            this.level(), this, a, b, sweepBox2, this::canHitEntity
+                            this.level(),
+                            this,
+                            start,
+                            end,
+                            bisectSweepBox,
+                            this::canHitEntity
                     );
 
                     if (test != null && test.getType() != HitResult.Type.MISS){
                         best = test;
-                        hi = midT;
+                        high = middleTime;
                     }else {
-                        lo = midT;
+                        low = middleTime;
                     }
                 }
 
-                return new ResultTOI(best, hi);
+                return new ResultTOI(best, high);
             }
 
-            tLo = t;
+            lowerTime = upperTime;
         }
 
         return new ResultTOI(null, 1.0);
     }
 
-    private DamageSource dmg(Entity target, Entity entity1) {
-        Entity causingEntity = target.level() == entity1.level() ? entity1 : null;
-        Entity direct = null == causingEntity ? this : null;
+    private DamageSource dmg(Entity target, Entity owner) {
+        Entity causingEntity = target.level() == owner.level() ? owner : null;
+        Entity directEntity = causingEntity == null ? this : null;
+
+        ItemStack tool = this.getStoredTool();
+        int icyLevel = ModifierUtil.getModifierLevel(tool, DreamtinkerModifiers.Ids.icy_memory);
+
         ResourceKey<DamageType> type =
-                null != toolStackView && 2 < toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) ?
-                DreamtinkerDamageTypes.NULL_VOID :
-                null != toolStackView && 1 < toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) ?
-                DamageTypes.SONIC_BOOM :
-                null != toolStackView && 0 < toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) ?
-                TinkerDamageTypes.FLUID_COLD.melee() :
+                icyLevel > 2 ? DreamtinkerDamageTypes.NULL_VOID :
+                icyLevel > 1 ? DamageTypes.SONIC_BOOM :
+                icyLevel > 0 ? TinkerDamageTypes.FLUID_COLD.melee() :
                 DamageTypes.MOB_PROJECTILE;
-        return DreamtinkerDamageTypes.source(target.level().registryAccess(), type, direct, causingEntity);
+
+        return DreamtinkerDamageTypes.source(
+                target.level().registryAccess(),
+                type,
+                directEntity,
+                causingEntity
+        );
     }
 
     @Override
     public void tick() {
         super.tick();
-        if (this.isRemoved())
-            return;
 
-        // 旋转 & 粒子（粒子只在客户端）
+        if (this.isRemoved()){
+            return;
+        }
+
         this.updateRotation();
 
+        Vec3 velocity = this.getDeltaMovement();
 
-        // --- 追踪逻辑（不变，写回 vel） ---
-        Vec3 vel = this.getDeltaMovement();
-        if (0 < getChaseLiving() && !this.onGround()){
+        if (this.getChaseLiving() > 0 && !this.onGround()){
             List<Entity> candidates = this.level().getEntitiesOfClass(
                     Entity.class,
                     this.getBoundingBox().inflate(12),
-                    t -> t instanceof EndCrystal || t instanceof LivingEntity && t.isAlive()
-                                                    && t != this.getOwner()
-                                                    && !(this.getOwner() != null && t.isAlliedTo(this.getOwner()))
-                                                    && !(t instanceof ArmorStand)
+                    target -> target instanceof EndCrystal
+                              || target instanceof LivingEntity living
+                                 && living.isAlive()
+                                 && target != this.getOwner()
+                                 && !(this.getOwner() != null && target.isAlliedTo(this.getOwner()))
+                                 && !(target instanceof ArmorStand)
             );
+
             if (!candidates.isEmpty()){
                 Entity nearest = candidates.stream()
-                                           .min(Comparator.comparingDouble(e -> e.distanceToSqr(this)))
-                                           .get();
-                Vec3 aim = nearest.position().add(0, nearest.getBbHeight() * 0.5, 0).subtract(this.position());
-                vel = this.getDeltaMovement().add(aim.normalize()).scale(0.75 * getChaseLiving());
+                                           .min(Comparator.comparingDouble(target -> target.distanceToSqr(this)))
+                                           .orElse(null);
+
+                if (nearest != null){
+                    Vec3 aim = nearest.position()
+                                      .add(0, nearest.getBbHeight() * 0.5, 0)
+                                      .subtract(this.position());
+
+                    if (aim.lengthSqr() > 1.0E-7){
+                        velocity = this.getDeltaMovement()
+                                       .add(aim.normalize())
+                                       .scale(0.75 * this.getChaseLiving());
+                    }
+                }
             }
         }
 
-        // --- 连续实体碰撞：求最早命中时刻 t* ---
         Vec3 from = this.position();
-        ResultTOI toi = sweepToFirstEntityHit(from, vel);
+        ResultTOI timeOfImpact = this.sweepToFirstEntityHit(from, velocity);
         boolean impacted = false;
 
-        if (toi.hit != null && toi.hit.getType() != HitResult.Type.MISS){
-            // 把位置推进到命中点（略微回退 epsilon，避免下一帧重叠)
-            double t = Math.max(0.0, Math.min(1.0, toi.t));
-            Vec3 hitPos = from.add(vel.scale(t));
-            this.setPos(hitPos.x, hitPos.y, hitPos.z);
+        if (timeOfImpact.hit() != null && timeOfImpact.hit().getType() != HitResult.Type.MISS){
+            double time = Mth.clamp(timeOfImpact.t(), 0.0, 1.0);
+            Vec3 hitPosition = from.add(velocity.scale(time));
+            this.setPos(hitPosition.x, hitPosition.y, hitPosition.z);
 
-            if (!ForgeEventFactory.onProjectileImpact(this, toi.hit)){
-                this.onHit(toi.hit); // 只实体命中
+            if (!ForgeEventFactory.onProjectileImpact(this, timeOfImpact.hit())){
+                this.onHit(timeOfImpact.hit());
             }
+
             impacted = true;
         }
 
         if (!this.isRemoved() && !impacted){
-            // 未命中：推进到完整终点
-            Vec3 to = from.add(vel);
-            this.setPos(to.x, to.y, to.z);
+            Vec3 destination = from.add(velocity);
+            this.setPos(destination.x, destination.y, destination.z);
         }
 
         if (!this.isRemoved()){
-            // 阻尼 & 重力
-            Vec3 v2 = this.getDeltaMovement();
-            if (!impacted)
-                v2 = vel; // onHit 可能修改了速度，命中过则尊重修改
-            v2 = v2.scale(0.99F);
+            Vec3 newVelocity = this.getDeltaMovement();
+
+            if (!impacted){
+                newVelocity = velocity;
+            }
+
+            newVelocity = newVelocity.scale(0.99F);
+
             if (!this.isNoGravity()){
                 FluidStack fluid = this.getFluid();
-                v2 = v2.add(0.0F, fluid.getFluid().getFluidType().isLighterThanAir() ? 0.06 : -0.06, 0.0F);
+                double gravity = !fluid.isEmpty() && fluid.getFluid().getFluidType().isLighterThanAir()
+                                 ? 0.06
+                                 : -0.06;
+                newVelocity = newVelocity.add(0.0, gravity, 0.0);
             }
-            this.setDeltaMovement(v2);
-            --life;
+
+            this.setDeltaMovement(newVelocity);
+            --this.life;
+
             if (this.level().isClientSide){
-                Vec3 p = this.getTrailRenderPosition();
-                this.shortTrail.tick(p, v2, 5, 0.055D, 0.10D, 0.72F);
-                this.trail.tick(p, v2, 12, 0.095D, 0.15D, 0.96F);
+                Vec3 position = this.getTrailRenderPosition();
+                this.shortTrail.tick(position, newVelocity, 5, 0.055D, 0.10D, 0.72F);
+                this.trail.tick(position, newVelocity, 12, 0.095D, 0.15D, 0.96F);
             }
         }
 
-        if (this.getY() > this.level().getMaxBuildHeight() + 64
-            || this.getY() < this.level().getMinBuildHeight() - 64
-            || this.life <= 0){
+        if (
+                this.getY() > this.level().getMaxBuildHeight() + 64
+                || this.getY() < this.level().getMinBuildHeight() - 64
+                || this.life <= 0
+        ){
             this.discard();
         }
     }
 
+    public boolean isCritArrow() {
+        return this.crit;
+    }
 
-    public boolean isCritArrow() {return this.crit;}
-
-    public void setCrit(boolean crit) {this.crit = crit;}
+    public void setCrit(boolean crit) {
+        this.crit = crit;
+    }
 
     @Override
-    protected void onHit(HitResult p_37260_) {
-        HitResult.Type hitresult$type = p_37260_.getType();
-        if (hitresult$type == HitResult.Type.ENTITY){
-            this.onHitEntity((EntityHitResult) p_37260_);
-            this.level().gameEvent(GameEvent.PROJECTILE_LAND, p_37260_.getLocation(), GameEvent.Context.of(this, null));
+    protected void onHit(HitResult result) {
+        if (result.getType() == HitResult.Type.ENTITY){
+            this.onHitEntity((EntityHitResult) result);
+            this.level().gameEvent(
+                    GameEvent.PROJECTILE_LAND,
+                    result.getLocation(),
+                    GameEvent.Context.of(this, null)
+            );
         }
     }
 
     @Override
     protected void onHitEntity(@NotNull EntityHitResult result) {
         Entity target = result.getEntity();
-        int dmg = (int) this.getDamage();
+        Entity owner = this.getOwner();
+        ItemStack toolStack = this.getStoredTool();
+
+        int damage = (int) this.getDamage();
 
         if (this.isCritArrow()){
-            long j = this.random.nextInt(dmg / 2 + 2);
-            dmg = (int) Math.min(j + (long) dmg, 2147483647L);
+            long bonus = this.random.nextInt(damage / 2 + 2);
+            damage = (int) Math.min(bonus + (long) damage, Integer.MAX_VALUE);
         }
 
-        Entity entity1 = this.getOwner();
-        if (null != entity1){
-            if (entity1 instanceof LivingEntity){
-                ((LivingEntity) entity1).setLastHurtMob(target);
+        if (owner != null){
+            if (owner instanceof LivingEntity livingOwner){
+                livingOwner.setLastHurtMob(target);
             }
-            target.invulnerableTime = 0;
-            if (DamageProbe.damageHandler(target, dmg(target, entity1),
-                                          null != toolStackView ? (toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) + 1) * dmg :
-                                          dmg)){
 
-                if (!this.level().isClientSide && entity1 instanceof LivingEntity){
-                    LivingEntity living_target = ETHelper.getLivingTarget(target);
-                    if (null != living_target)
-                        EnchantmentHelper.doPostHurtEffects(living_target, entity1);
-                    EnchantmentHelper.doPostDamageEffects((LivingEntity) entity1, target);
-                }
-                if (!this.level().isClientSide)
-                    if (this.isOnFire()){
-                        target.setSecondsOnFire(5 * Math.max(1, this.level().random.nextInt(3)));
+            target.invulnerableTime = 0;
+
+            int icyLevel = ModifierUtil.getModifierLevel(toolStack, DreamtinkerModifiers.Ids.icy_memory);
+            boolean damaged = DamageProbe.damageHandler(
+                    target,
+                    this.dmg(target, owner),
+                    (icyLevel + 1) * damage
+            );
+
+            if (damaged){
+                if (!this.level().isClientSide && owner instanceof LivingEntity livingOwner){
+                    LivingEntity livingTarget = ETHelper.getLivingTarget(target);
+
+                    if (livingTarget != null){
+                        EnchantmentHelper.doPostHurtEffects(livingTarget, livingOwner);
                     }
+
+                    EnchantmentHelper.doPostDamageEffects(livingOwner, target);
+                }
+
+                if (!this.level().isClientSide && this.isOnFire()){
+                    target.setSecondsOnFire(5 * Math.max(1, this.level().random.nextInt(3)));
+                }
             }
         }
 
         FluidStack fluid = this.getFluid();
         Level level = this.level();
-        if (!level.isClientSide && !fluid.isEmpty()){
-            FluidStack feedbackFluid = fluid.copy();
-            FluidEffects recipe = FluidEffectManager.INSTANCE.find(fluid.getFluid());
-            if (null != entity1){
-                if (recipe.hasEntityEffects()){
-                    int times = null != toolStackView ? Math.max(1, MemoryBase.getLevel(toolStackView) / 3) : 1;
-                    DamageSource damagesource = dmg(target, entity1);
-                    ToolAttackContext attackContext = 0 < toolStackView.getModifierLevel(DreamtinkerModifiers.flaming_memory.getId()) ?
-                                                      ToolAttackContext.attacker((LivingEntity) this.getOwner()).target(target).cooldown(1)
-                                                                       .applyAttributes().projectile(this)
-                                                                       .build() :
-                                                      ToolAttackContext.attacker((LivingEntity) this.getOwner()).target(target).cooldown(1)
-                                                                       .applyAttributes()
-                                                                       .build();
-                    for (int i = 0; i < times; i++) {
-                        target.invulnerableTime = 0;
-                        if (toolStackView != null && entity1.level() == target.level()){
-                            ToolAttackUtil.performAttack(toolStackView, attackContext);
-                        }else
-                            DamageProbe.damageHandler(target, damagesource,
-                                                      null != toolStackView ? (toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) + 1) * dmg :
-                                                      dmg);
 
-                    }
-                    FluidEffectContext.Entity context = this.buildContext().location(result.getLocation()).target(target);
-                    int hate = 1;
-                    if (null != toolStackView)
-                        hate = Math.max(1, toolStackView.getModifierLevel(DreamtinkerModifiers.Ids.hate_memory) + 1);
+        if (level.isClientSide || fluid.isEmpty()){
+            return;
+        }
 
-                    int consumed = recipe.applyToEntity(fluid, this.power, context, IFluidHandler.FluidAction.EXECUTE);
-                    if (0 == consumed)
-                        consumed = Math.max(100, initialFluid) / hate;
-                    fluid.shrink(consumed);
-                    if (fluid.isEmpty()){
-                        this.discard();
-                    }else {
-                        this.setFluid(fluid);
-                    }
-                }
-                if (entity1 instanceof LivingEntity livingOwner){
-                    NarcissusFluidFeedbacks.onProjectileHit(this, livingOwner, target, feedbackFluid);
-                }
+        FluidStack feedbackFluid = fluid.copy();
+        FluidEffects recipe = FluidEffectManager.INSTANCE.find(fluid.getFluid());
+
+        if (owner != null){
+            if (recipe.hasEntityEffects()){
+                this.applyEntityEffects(result, target, owner, toolStack, fluid, recipe, damage);
+            }
+
+            if (owner instanceof LivingEntity livingOwner){
+                NarcissusFluidFeedbacks.onProjectileHit(
+                        this,
+                        livingOwner,
+                        target,
+                        feedbackFluid
+                );
             }
         }
     }
 
+    private void applyEntityEffects(
+            EntityHitResult result, Entity target, Entity owner, ItemStack toolStack,
+            FluidStack fluid, FluidEffects recipe, int damage) {
+        IToolStackView tool = toolStack.isEmpty() ? null : ToolStack.from(toolStack);
+        int times = tool != null ? Math.max(1, MemoryBase.getLevel(tool) / 3) : 1;
+        int icyLevel = ModifierUtil.getModifierLevel(toolStack, DreamtinkerModifiers.Ids.icy_memory);
+        DamageSource damageSource = this.dmg(target, owner);
+
+        ToolAttackContext attackContext = null;
+
+        if (tool != null && owner instanceof LivingEntity livingOwner){
+            ToolAttackContext.Builder builder = ToolAttackContext.attacker(livingOwner)
+                                                                 .target(target)
+                                                                 .cooldown(1)
+                                                                 .applyAttributes();
+
+            if (ModifierUtil.getModifierLevel(toolStack, DreamtinkerModifiers.flaming_memory.getId()) > 0){
+                builder.projectile(this);
+            }
+
+            attackContext = builder.build();
+        }
+
+        for (int i = 0; i < times; i++) {
+            target.invulnerableTime = 0;
+
+            if (tool != null && attackContext != null && owner.level() == target.level()){
+                ToolAttackUtil.performAttack(tool, attackContext);
+            }else {
+                DamageProbe.damageHandler(
+                        target,
+                        damageSource,
+                        (icyLevel + 1) * damage
+                );
+            }
+        }
+
+        FluidEffectContext.Entity context = this.buildContext()
+                                                .location(result.getLocation())
+                                                .target(target);
+
+        int hateLevel = ModifierUtil.getModifierLevel(toolStack, DreamtinkerModifiers.Ids.hate_memory);
+        int hate = Math.max(1, hateLevel + 1);
+        int consumed = recipe.applyToEntity(
+                fluid,
+                this.power,
+                context,
+                IFluidHandler.FluidAction.EXECUTE
+        );
+
+        if (consumed == 0){
+            consumed = Math.max(100, this.initialFluid) / hate;
+        }
+
+        fluid.shrink(consumed);
+
+        if (fluid.isEmpty()){
+            this.discard();
+        }else {
+            this.setFluid(fluid);
+        }
+    }
+
+    @Override
     public void recreateFromPacket(@NotNull ClientboundAddEntityPacket packet) {
         super.recreateFromPacket(packet);
-        double x = packet.getXa();
-        double y = packet.getYa();
-        double z = packet.getZa();
-        Vec3 motion = new Vec3(x, y, z);
+
+        Vec3 motion = new Vec3(
+                packet.getXa(),
+                packet.getYa(),
+                packet.getZa()
+        );
         this.setDeltaMovement(motion);
-        if (false){
-            this.shortTrail.seedLine(this.position(), motion, 5, 0.35D);
-            this.trail.seedLine(this.position(), motion, 5, 0.35D);
-        }
     }
 
     public Vec3 getTrailRenderPosition() {
         return this.position();
     }
 
+    @Override
     public void addAdditionalSaveData(@NotNull CompoundTag nbt) {
         super.addAdditionalSaveData(nbt);
+
         nbt.putFloat("power", this.power);
+        nbt.putInt("initial_fluid", this.initialFluid);
+        nbt.putInt("life", this.life);
         nbt.putBoolean("nas_crit", this.crit);
 
         FluidStack fluid = this.getFluid();
+
         if (!fluid.isEmpty()){
             nbt.put("fluid", fluid.writeToNBT(new CompoundTag()));
         }
 
+        ItemStack tool = this.getStoredTool();
+
+        if (!tool.isEmpty()){
+            nbt.put("tool", tool.save(new CompoundTag()));
+        }
     }
 
+    @Override
     public void readAdditionalSaveData(@NotNull CompoundTag nbt) {
         super.readAdditionalSaveData(nbt);
-        this.power = nbt.getFloat("power");
+
+        this.power = nbt.contains("power", Tag.TAG_FLOAT)
+                     ? nbt.getFloat("power")
+                     : 2.0F;
         this.crit = nbt.getBoolean("nas_crit");
 
-        this.setFluid(FluidStack.loadFluidStackFromNBT(nbt.getCompound("fluid")));
+        if (nbt.contains("life", Tag.TAG_INT)){
+            this.life = nbt.getInt("life");
+        }
+
+        if (nbt.contains("fluid", Tag.TAG_COMPOUND)){
+            this.setFluid(FluidStack.loadFluidStackFromNBT(nbt.getCompound("fluid")));
+        }else {
+            this.setFluid(FluidStack.EMPTY);
+        }
+
+        if (nbt.contains("initial_fluid", Tag.TAG_INT)){
+            this.initialFluid = nbt.getInt("initial_fluid");
+        }else {
+            this.initialFluid = this.getFluid().getAmount();
+        }
+
+        if (nbt.contains("tool", Tag.TAG_COMPOUND)){
+            this.setTool(ItemStack.of(nbt.getCompound("tool")));
+        }else {
+            this.setTool(ItemStack.EMPTY);
+        }
     }
 
     public FluidStack getFluid() {
         return this.entityData.get(FLUID);
     }
 
+    public void setFluid(FluidStack fluid) {
+        this.entityData.set(FLUID, fluid.copy());
+    }
+
     public int getChaseLiving() {
         return this.entityData.get(CHASE_LIVING);
     }
 
-    public void setFluid(FluidStack fluid) {
-        this.entityData.set(FLUID, fluid);
+    public int getColor() {
+        return this.entityData.get(COLOR);
+    }
+
+    private ItemStack getStoredTool() {
+        return this.entityData.get(TOOL);
+    }
+
+    public ItemStack getTool() {
+        return this.getStoredTool().copy();
+    }
+
+    public void setTool(ItemStack stack) {
+        if (stack.isEmpty()){
+            this.entityData.set(TOOL, ItemStack.EMPTY);
+            this.entityData.set(CHASE_LIVING, 0);
+            this.entityData.set(COLOR, 0);
+            return;
+        }
+
+        ItemStack copy = stack.copy();
+        copy.setCount(1);
+        this.entityData.set(TOOL, copy);
+
+        int soulCoreLevel = ModifierUtil.getModifierLevel(copy, DreamtinkerModifiers.Ids.soul_core);
+        IToolStackView tool = ToolStack.from(copy);
+
+        this.entityData.set(CHASE_LIVING, soulCoreLevel + 1);
+        this.entityData.set(COLOR, ETHelper.materialToRender(0, tool.getMaterial(0)));
     }
 
     @Override
     public float getPower() {
         return this.power;
-    }
-
-    @Override
-    protected void defineSynchedData() {
-        this.entityData.define(FLUID, FluidStack.EMPTY);
-        this.entityData.define(CHASE_LIVING, 0);
-        this.entityData.define(COLOR, 0);
     }
 
     @Override
@@ -440,25 +608,17 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
 
     @Override
     public float getDamage() {
-        return Mth.ceil(Mth.clamp(this.getDeltaMovement().length() * this.power, 0.0F, Integer.MAX_VALUE));
+        return Mth.ceil(
+                Mth.clamp(
+                        this.getDeltaMovement().length() * this.power,
+                        0.0F,
+                        Integer.MAX_VALUE
+                )
+        );
     }
 
+    @Override
     protected @NotNull Component getTypeName() {
         return this.getFluid().getDisplayName();
     }
-
-    public int getColor() {
-        return this.entityData.get(COLOR);
-    }
-
-    public IToolStackView getTool() {
-        return this.toolStackView;
-    }
-
-    public void setTool(@NotNull IToolStackView tool) {
-        this.toolStackView = tool;
-        this.entityData.set(CHASE_LIVING, tool.getModifierLevel(DreamtinkerModifiers.Ids.soul_core) + 1);
-        this.entityData.set(COLOR, ETHelper.materialToRender(0, tool.getMaterial(0)));
-    }
-
 }
