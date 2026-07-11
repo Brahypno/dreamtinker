@@ -471,13 +471,9 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
                           .addInput(TinkerFluids.moltenEnder.getTag(), FluidValues.SLIMEBALL * 2)
                           .save(consumer, prefix(DreamtinkerFluids.reversed_shadow, folder));
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_echo_alloy, FluidValues.GEM)
-                          .addInput(DreamtinkerTagKeys.Fluids.molten_echo_shard, FluidValues.GEM)
-                          .addInput(TinkerFluids.moltenEnder.getTag(), FluidValues.SLIMEBALL * 2)
-                          .save(consumer, prefix(DreamtinkerFluids.molten_echo_alloy, folder));
-        AlloyRecipeBuilder.alloy(DreamtinkerFluids.molten_echo_alloy, FluidValues.GEM)
                           .addInput(DreamtinkerTagKeys.Fluids.molten_echo, FluidValues.GEM)
                           .addInput(TinkerFluids.moltenEnder.getTag(), FluidValues.SLIMEBALL * 2)
-                          .save(consumer, wrap(DreamtinkerFluids.molten_echo_alloy, folder, "_1"));
+                          .save(consumer, prefix(DreamtinkerFluids.molten_echo_alloy, folder));
         AlloyRecipeBuilder.alloy(DreamtinkerFluids.despair_essence, FluidValues.GEM)
                           .addInput(DreamtinkerTagKeys.Fluids.molten_crying_obsidian, FluidValues.GLASS_BLOCK * 3)
                           .addInput(DreamtinkerFluids.liquid_amber.getTag(), FluidValues.GEM * 4)
