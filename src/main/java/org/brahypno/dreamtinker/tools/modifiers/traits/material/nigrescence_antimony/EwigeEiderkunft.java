@@ -40,7 +40,7 @@ public class EwigeEiderkunft extends Modifier implements ToolDamageModifierHook,
         ModDataNBT nbt = tool.getPersistentData();
         int breaks = nbt.getInt(TAG_TOMB) + 1;
 
-        long tomb_number = amount * Math.round(Math.log1p(breaks));
+        long tomb_number = amount * Math.round(13 * Math.log1p(breaks));
         if (current - tomb_number <= 1){
             nbt.putInt(TAG_TOMB, breaks);
             tool.setDamage(0);
@@ -64,11 +64,11 @@ public class EwigeEiderkunft extends Modifier implements ToolDamageModifierHook,
 
     @Override
     public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
-        if (!tool.isBroken() && modifier.getLevel() > 0 && EquipmentSlot.MAINHAND == slot){
+        if (!tool.isBroken() && modifier.getLevel() > 0){
             ModDataNBT nbt = tool.getPersistentData();
             int breaks = nbt.getInt(TAG_TOMB);
             if (breaks > 0){
-                double buff = 13 * Math.log1p(breaks) / 100f;
+                double buff = 13 * Math.sqrt(breaks) / 100f / (EquipmentSlot.MAINHAND == slot ? 1 : 2);
                 Attribute attribute = Attributes.ATTACK_DAMAGE;
                 consumer.accept(attribute,
                                 new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
