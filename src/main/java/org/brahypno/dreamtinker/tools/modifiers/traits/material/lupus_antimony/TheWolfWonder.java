@@ -15,6 +15,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.brahypno.esotericismtinker.utils.ETHelper;
+import org.brahypno.esotericismtinker.utils.damage.DamageProbe;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -49,6 +50,12 @@ public class TheWolfWonder extends Modifier implements ProjectileHitModifierHook
     public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
         onMonsterMeleeHit(tool, modifier, context, damage);
         return knockback;
+    }
+
+    @Override
+    public void afterMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageDealt) {
+        Entity target = context.getTarget();
+        DamageProbe.cachedDamageGuardCount(target);
     }
 
     @Override
@@ -250,6 +257,13 @@ public class TheWolfWonder extends Modifier implements ProjectileHitModifierHook
                 return new CompoundTag();
             return target.getPersistentData().getCompound(ROOT);
         }
+    }
+
+    @Override
+    public void failedMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damageAttempted) {
+        if (context.getLevel().isClientSide)
+            return;
+        DamageProbe.finalDamageMethod(context.getTarget(), context.makeDamageSource(), damageAttempted);
     }
 
     @Override

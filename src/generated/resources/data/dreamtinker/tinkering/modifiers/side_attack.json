@@ -1,0 +1,112 @@
+{
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:conditional_melee_damage",
+      "formula": [
+        "$attacker_x",
+        "$target_x",
+        "*",
+        "$attacker_z",
+        "$target_z",
+        "*",
+        "+",
+        0.0,
+        "max",
+        0.4,
+        "$level",
+        "*",
+        1.0,
+        "+",
+        "*",
+        "$multiplier",
+        "*",
+        1.0,
+        "+",
+        "$damage",
+        "*"
+      ],
+      "percent": true,
+      "variables": {
+        "attacker_x": {
+          "type": "tconstruct:entity",
+          "entity_type": "esotericism_tinker:horizontal_look_x",
+          "fallback": 0.0,
+          "which": "attacker"
+        },
+        "attacker_z": {
+          "type": "tconstruct:entity",
+          "entity_type": "esotericism_tinker:horizontal_look_z",
+          "fallback": 0.0,
+          "which": "attacker"
+        },
+        "target_x": {
+          "type": "tconstruct:entity",
+          "entity_type": "esotericism_tinker:horizontal_look_x",
+          "fallback": 0.0,
+          "which": "target"
+        },
+        "target_z": {
+          "type": "tconstruct:entity",
+          "entity_type": "esotericism_tinker:horizontal_look_z",
+          "fallback": 0.0,
+          "which": "target"
+        }
+      }
+    },
+    {
+      "type": "tconstruct:conditional_power",
+      "formula": [
+        "$attacker_x",
+        "$target_x",
+        "*",
+        "$attacker_z",
+        "$target_z",
+        "*",
+        "+",
+        0.0,
+        "max",
+        0.4,
+        "$level",
+        "*",
+        1.0,
+        "+",
+        "*",
+        "$multiplier",
+        "*",
+        1.0,
+        "+",
+        "$damage",
+        "*"
+      ],
+      "percent": true,
+      "variables": {
+        "attacker_x": {
+          "type": "tconstruct:entity",
+          "entity_type": "esotericism_tinker:horizontal_look_x",
+          "fallback": 0.0,
+          "which": "attacker"
+        },
+        "attacker_z": {
+          "type": "tconstruct:entity",
+          "entity_type": "esotericism_tinker:horizontal_look_z",
+          "fallback": 0.0,
+          "which": "attacker"
+        },
+        "target_x": {
+          "type": "tconstruct:entity",
+          "entity_type": "esotericism_tinker:horizontal_look_x",
+          "fallback": 0.0,
+          "which": "target"
+        },
+        "target_z": {
+          "type": "tconstruct:entity",
+          "entity_type": "esotericism_tinker:horizontal_look_z",
+          "fallback": 0.0,
+          "which": "target"
+        }
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

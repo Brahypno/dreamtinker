@@ -82,7 +82,6 @@ import org.brahypno.dreamtinker.tools.modifiers.traits.material.fifth_stone.Four
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.livingSoulSteel.AdaptionAlgorithm;
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.livingSoulSteel.AdaptionAlgorithmDamage;
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.livingSoulSteel.AdaptionAlgorithmProtection;
-import org.brahypno.dreamtinker.tools.modifiers.traits.material.lupus_antimony.TheWolfAnswer;
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.lupus_antimony.TheWolfWas;
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.lupus_antimony.TheWolfWonder;
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.nigrescence_antimony.BurningInVain;
@@ -143,7 +142,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<BurningInVain> burning_in_vain = MODIFIERS.register("burning_in_vain", BurningInVain::new);
     //lupi
     public static final StaticModifier<TheWolfWonder> the_wolf_wonder = MODIFIERS.register("the_wolf_wonder", TheWolfWonder::new);
-    public static final StaticModifier<TheWolfAnswer> the_wolf_answer = MODIFIERS.register("the_wolf_answer", TheWolfAnswer::new);
     public static final StaticModifier<TheWolfWas> the_wolf_was = MODIFIERS.register("the_wolf_was", TheWolfWas::new);
     // living soul steel
     public static final StaticModifier<AdaptionAlgorithm> adaption_algorithm = MODIFIERS.register("adaption_algorithm", AdaptionAlgorithm::new);
@@ -205,7 +203,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<SilkyCrystal> silky_crystal = MODIFIERS.register("silky_crystal", SilkyCrystal::new);
     public static final StaticModifier<ArrowHarvest> arrow_harvest = MODIFIERS.register("arrow_harvest", ArrowHarvest::new);
     public static final StaticModifier<OverSticky> over_sticky = MODIFIERS.register("over_sticky", OverSticky::new);
-    public static final StaticModifier<SideAttack> side_attack = MODIFIERS.register("side_attack", SideAttack::new);
     public static final StaticModifier<ViewTracing> view_tracing = MODIFIERS.register("view_tracing", ViewTracing::new);
     public static final StaticModifier<BornWithMe> born_with_me = MODIFIERS.register("born_with_me", BornWithMe::new);
     public static final StaticModifier<RainbowLights> rainbow_lights = MODIFIERS.register("rainbow_lights", RainbowLights::new);
@@ -321,6 +318,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(le.getType());
         return id != null && id.getNamespace().matches("undergarden");
     });
+    public static final EntityVariable WOLF_EFFECTS =
+            EntityVariable.simple(entity -> Math.max(TheWolfWonder.DTForcedEffectKeys.getKeysTag(entity).size(), entity.getActiveEffects().size()));
 
     @SuppressWarnings({"removal"})
     public DreamtinkerModifiers() {
@@ -366,8 +365,9 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             BlockPredicate.LOADER.register(Dreamtinker.getLocation("block_of_undergarden"), BLOCK_OF_UNDER_GARDEN.getLoader());
 
             EntityVariable.LOADER.register(Dreamtinker.getLocation("faa_aureal"), AUREAL.getLoader());
-
             EntityVariable.LOADER.register(Dreamtinker.getLocation("faa_corruption"), CORRUPTION.getLoader());
+
+            EntityVariable.LOADER.register(Dreamtinker.getLocation("wolf_effects"), WOLF_EFFECTS.getLoader());
         }
     }
 
@@ -399,6 +399,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId long_tool = id("long_tool");
         public static final ModifierId strong_explode = id("strong_explode");
 
+        public static final ModifierId the_wolf_answer = id("the_wolf_answer");
         public static final ModifierId antimony_usage = id("antimony_usage");
         public static final ModifierId with_tears = id("with_tears");
         public static final ModifierId in_rain = id("in_rain");
@@ -467,6 +468,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId unbreakable = id("unbreakable");
         public static final ModifierId divineMaledictus = id("divine_maledictus");
         public static final ModifierId HuaiPuBaoYu = id("huai_pu_bao_yu");
+        public static final ModifierId side_attack = id("side_attack");
 
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");

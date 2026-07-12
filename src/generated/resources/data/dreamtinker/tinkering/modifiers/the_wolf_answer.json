@@ -1,0 +1,49 @@
+{
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:conditional_melee_damage",
+      "formula": [
+        "$wolf_effects",
+        6.66,
+        "*",
+        1.0,
+        "+",
+        "$damage",
+        "*"
+      ],
+      "percent": true,
+      "variables": {
+        "wolf_effects": {
+          "type": "tconstruct:entity",
+          "entity_type": "dreamtinker:wolf_effects",
+          "fallback": 0.0,
+          "which": "target"
+        }
+      }
+    },
+    {
+      "type": "tconstruct:conditional_power",
+      "formula": [
+        "$wolf_effects",
+        6.66,
+        "*",
+        1.0,
+        "+",
+        "$damage",
+        "*"
+      ],
+      "percent": true,
+      "variables": {
+        "wolf_effects": {
+          "type": "tconstruct:entity",
+          "entity_type": "dreamtinker:wolf_effects",
+          "fallback": 0.0,
+          "which": "target"
+        }
+      }
+    }
+  ],
+  "priority": -1000,
+  "tooltip_display": "always"
+}

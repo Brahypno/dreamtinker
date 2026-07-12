@@ -109,6 +109,8 @@ import java.util.List;
 import static net.minecraft.tags.DamageTypeTags.BYPASSES_ENCHANTMENTS;
 import static org.brahypno.dreamtinker.library.compat.ars_nouveau.NovaRegistry.nova_magic_armor;
 import static org.brahypno.dreamtinker.tools.DreamtinkerModifiers.*;
+import static org.brahypno.esotericismtinker.tools.EsotericismTinkerModifiers.HORIZONTAL_LOOK_X;
+import static org.brahypno.esotericismtinker.tools.EsotericismTinkerModifiers.HORIZONTAL_LOOK_Z;
 import static slimeknights.tconstruct.common.TinkerTags.Items.*;
 import static slimeknights.tconstruct.library.json.math.ModifierFormula.*;
 import static slimeknights.tconstruct.library.tools.definition.ModifiableArmorMaterial.ARMOR_SLOTS;
@@ -626,6 +628,26 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                          .addModule(StatBoostModule.multiplyBase(ToolStats.ARMOR_TOUGHNESS).eachLevel(0.1f))
                                          .addModule(StatBoostModule.multiplyBase(ToolStats.KNOCKBACK_RESISTANCE).eachLevel(0.1f))
                                          .addModule(StatBoostModule.multiplyBase(ToolStats.BLOCK_AMOUNT).eachLevel(0.1f));
+        buildModifier(Ids.the_wolf_answer)
+                .priority(-1000)
+                .addModule(ConditionalMeleeDamageModule.builder().percent()
+                                                       .customVariable("wolf_effects",
+                                                                       new EntityMeleeVariable(WOLF_EFFECTS, EntityMeleeVariable.WhichEntity.TARGET, 0.0f))
+                                                       .formula()
+                                                       .customVariable("wolf_effects")
+                                                       .constant(6.66f).multiply()
+                                                       .constant(1.0f).add()
+                                                       .variable(VALUE).multiply()
+                                                       .build())
+                .addModule(ConditionalPowerModule.builder().percent()
+                                                 .customVariable("wolf_effects",
+                                                                 new EntityPowerVariable(WOLF_EFFECTS, EntityMeleeVariable.WhichEntity.TARGET, 0.0f))
+                                                 .formula()
+                                                 .customVariable("wolf_effects")
+                                                 .constant(6.66f).multiply()
+                                                 .constant(1.0f).add()
+                                                 .variable(VALUE).multiply()
+                                                 .build());
         buildModifier(Ids.in_rain)
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                 .addModule(BlockDamageSourceModule.source(new DamageTypePredicate(DamageTypes.HOT_FLOOR)).build())
@@ -1106,6 +1128,60 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 // ranged
                 .addModule(StatBoostModule.multiplyConditional(ToolStats.PROJECTILE_DAMAGE).eachLevel(0.5f))
                 .addModule(StatBoostModule.multiplyConditional(ToolStats.ACCURACY).eachLevel(0.2f));
+
+        buildModifier(Ids.side_attack)
+                .addModule(ConditionalMeleeDamageModule.builder().percent()
+                                                       .customVariable("attacker_x",
+                                                                       new EntityMeleeVariable(HORIZONTAL_LOOK_X, EntityMeleeVariable.WhichEntity.ATTACKER,
+                                                                                               0.0f))
+                                                       .customVariable("attacker_z",
+                                                                       new EntityMeleeVariable(HORIZONTAL_LOOK_Z, EntityMeleeVariable.WhichEntity.ATTACKER,
+                                                                                               0.0f))
+                                                       .customVariable("target_x",
+                                                                       new EntityMeleeVariable(HORIZONTAL_LOOK_X, EntityMeleeVariable.WhichEntity.TARGET, 0.0f))
+                                                       .customVariable("target_z",
+                                                                       new EntityMeleeVariable(HORIZONTAL_LOOK_Z, EntityMeleeVariable.WhichEntity.TARGET, 0.0f))
+                                                       .formula()
+                                                       // dir = max(attacker · target, 0)
+                                                       .customVariable("attacker_x").customVariable("target_x").multiply()
+                                                       .customVariable("attacker_z").customVariable("target_z").multiply()
+                                                       .add()
+                                                       .constant(0.0f).max()
+
+                                                       // 1.4 + (level - 1) * 0.4 = 1 + level * 0.4
+                                                       .constant(0.4f).variable(LEVEL).multiply()
+                                                       .constant(1.0f).add()
+                                                       .multiply()
+
+                                                       .variable(MULTIPLIER).multiply()
+                                                       .constant(1.0f).add()
+                                                       .variable(VALUE).multiply()
+                                                       .build())
+                .addModule(ConditionalPowerModule.builder().percent()
+                                                 .customVariable("attacker_x",
+                                                                 new EntityPowerVariable(HORIZONTAL_LOOK_X, EntityMeleeVariable.WhichEntity.ATTACKER, 0.0f))
+                                                 .customVariable("attacker_z",
+                                                                 new EntityPowerVariable(HORIZONTAL_LOOK_Z, EntityMeleeVariable.WhichEntity.ATTACKER, 0.0f))
+                                                 .customVariable("target_x",
+                                                                 new EntityPowerVariable(HORIZONTAL_LOOK_X, EntityMeleeVariable.WhichEntity.TARGET, 0.0f))
+                                                 .customVariable("target_z",
+                                                                 new EntityPowerVariable(HORIZONTAL_LOOK_Z, EntityMeleeVariable.WhichEntity.TARGET, 0.0f))
+                                                 .formula()
+                                                 // dir = max(attacker · target, 0)
+                                                 .customVariable("attacker_x").customVariable("target_x").multiply()
+                                                 .customVariable("attacker_z").customVariable("target_z").multiply()
+                                                 .add()
+                                                 .constant(0.0f).max()
+
+                                                 // 1.4 + (level - 1) * 0.4 = 1 + level * 0.4
+                                                 .constant(0.4f).variable(LEVEL).multiply()
+                                                 .constant(1.0f).add()
+                                                 .multiply()
+
+                                                 .variable(MULTIPLIER).multiply()
+                                                 .constant(1.0f).add()
+                                                 .variable(VALUE).multiply()
+                                                 .build());
 
         addELModifiers();
         addMalumModifiers();

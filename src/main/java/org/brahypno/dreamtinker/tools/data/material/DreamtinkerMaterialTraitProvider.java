@@ -36,10 +36,8 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.nigrescence_antimony, ARMOR, broken_vessel, ouroboric_hourglass);
         addTraits(DreamtinkerMaterialIds.nigrescence_string, RANGED, burning_in_vain);
 
-        addTraits(DreamtinkerMaterialIds.metallivorous_stibium_lupus, MELEE_HARVEST,
-                  the_wolf_wonder, the_wolf_answer, the_wolf_was);
-        addTraits(DreamtinkerMaterialIds.metallivorous_stibium_lupus, RANGED,
-                  the_wolf_wonder, the_wolf_answer, the_wolf_was);
+        addDefaultTraits(DreamtinkerMaterialIds.metallivorous_stibium_lupus,
+                         the_wolf_wonder.getId(), Ids.the_wolf_answer, the_wolf_was.getId());
 
         addTraits(DreamtinkerMaterialIds.star_regulus, RANGED, two_headed_seven.getId(), ModifierIds.soulbound);
         addTraits(DreamtinkerMaterialIds.star_regulus, ARMOR, as_one.getId(), Ids.fly, ModifierIds.soulbound);
@@ -117,9 +115,9 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.FifthStone, RANGED, four_warning.getId());
         addTraits(DreamtinkerMaterialIds.FifthStone, AMMO, four_warning.getId());
 
-        addDefaultTraits(DreamtinkerMaterialIds.SpiralSpin, ModifierIds.pierce, side_attack.getId());
-        addTraits(DreamtinkerMaterialIds.SpiralSpin, RANGED, ModifierIds.pierce, side_attack.getId(), view_tracing.getId());
-        addTraits(DreamtinkerMaterialIds.SpiralSpin, AMMO, ModifierIds.pierce, side_attack.getId(), view_tracing.getId());
+        addDefaultTraits(DreamtinkerMaterialIds.SpiralSpin, ModifierIds.pierce, Ids.side_attack);
+        addTraits(DreamtinkerMaterialIds.SpiralSpin, RANGED, ModifierIds.pierce, Ids.side_attack, view_tracing.getId());
+        addTraits(DreamtinkerMaterialIds.SpiralSpin, AMMO, ModifierIds.pierce, Ids.side_attack, view_tracing.getId());
 
         addDefaultTraits(DreamtinkerMaterialIds.RuinWheelSteel, doom_track.getId(), doom_ray.getId(), Ids.pressing_front);
 

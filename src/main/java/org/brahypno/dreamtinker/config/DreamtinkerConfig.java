@@ -130,9 +130,7 @@ public class DreamtinkerConfig {
             builder.comment("Inaccuracy of Projectile sending from this Modifier").defineInRange("BurnInVainInAccuracy", 5.0, 0, 1000);
 
     static {builder.comment("\nMetallivorous Stibium Lupus: ");}
-
-    public static final ForgeConfigSpec.DoubleValue TheWolfWasDevoter =
-            builder.comment("Damage boost of the wolf was;").defineInRange("TheWolfWasDevoter", 6.66, 0, 100);
+    
     public static final ForgeConfigSpec.IntValue TheWolfWonderEffectNum =
             builder.comment("Number of effective that applied on target;")
                    .defineInRange("TheWolfWonderEffectNum", 6, 0, 100);
