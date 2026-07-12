@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "forge:item_exists",
+      "item": "oreberriesreplanted:jade_oreberry"
+    }
+  ],
+  "ingredient": {
+    "item": "oreberriesreplanted:jade_oreberry"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "dreamtinker:molten_jade"
+  },
+  "temperature": 600,
+  "time": 18
+}

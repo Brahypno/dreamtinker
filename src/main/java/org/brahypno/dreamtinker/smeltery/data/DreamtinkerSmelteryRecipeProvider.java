@@ -538,6 +538,7 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
         addCompatLegendaryMonstersMeltingCastingRecipes(consumer);
         addCompatUGMeltingCastingRecipes(consumer);
         addCompatOCMeltingCastingRecipes(consumer);
+        addCompatGoetyMeltingCastingRecipes(consumer);
 
     }
 
@@ -755,7 +756,7 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
     private void addCompatLegendaryMonstersMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
         String legendaryMonsters = "legendary_monsters";
         Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("legendary_monsters"));
-        MeltingRecipeBuilder.melting(itemNameIngredient("legendary_monsters", "soul_great_sword"),
+        MeltingRecipeBuilder.melting(itemNameIngredient(legendaryMonsters, "soul_great_sword"),
                                      DreamtinkerFluids.molten_soul_steel, FluidValues.INGOT * 6, 0.5f)
                             .setDamagable(FluidValues.NUGGET)
                             .save(wrapped, location(Melting_folder + "soul_steel/soul_great_sword"));
@@ -863,6 +864,79 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
                 .metal().dust().plate().gear().coin().sheetmetal().geore().oreberry()
                 .common(ToolsBySuffix(occultism))
                 .common(armorBySuffix(occultism));
+    }
+
+    private void addCompatGoetyMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
+        String goety = "goety";
+        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(goety));
+
+        MeltingRecipeBuilder.melting(itemNameIngredient(goety, "jade"),
+                                     DreamtinkerFluids.molten_jade, FluidValues.GEM, 0.5f)
+                            .save(wrapped, location(Melting_folder + "jade/jade"));
+
+        MeltingRecipeBuilder.melting(itemNameIngredient(goety, "jade_ore"),
+                                     DreamtinkerFluids.molten_jade, FluidValues.GEM, 0.5f)
+                            .save(wrapped, location(Melting_folder + "jade/jade_ore"));
+
+        MeltingRecipeBuilder.melting(itemNameIngredient(goety, "jade_block"),
+                                     DreamtinkerFluids.molten_jade, FluidValues.GEM * 9, 0.5f)
+                            .save(wrapped, location(Melting_folder + "jade/jade_block"));
+
+        MeltingRecipeBuilder.melting(itemNameIngredient(goety, "jade_tiles"),
+                                     DreamtinkerFluids.molten_jade, FluidValues.GEM, 0.5f)
+                            .save(wrapped, location(Melting_folder + "jade/jade_tiles"));
+
+        MeltingRecipeBuilder.melting(itemNameIngredient(goety, "jade_pillar"),
+                                     DreamtinkerFluids.molten_jade, FluidValues.GEM, 0.5f)
+                            .save(wrapped, location(Melting_folder + "jade/jade_pillar"));
+
+        MeltingRecipeBuilder.melting(itemNameIngredient(goety, "jade_stairs"),
+                                     DreamtinkerFluids.molten_jade, FluidValues.GEM, 0.5f)
+                            .save(wrapped, location(Melting_folder + "jade/jade_stairs"));
+
+        MeltingRecipeBuilder.melting(itemNameIngredient(goety, "jade_slab"),
+                                     DreamtinkerFluids.molten_jade, FluidValues.GEM / 2, 0.5f)
+                            .save(wrapped, location(Melting_folder + "jade/jade_slab"));
+
+        MeltingRecipeBuilder.melting(itemNameIngredient(goety, "silt_jade_tiles"),
+                                     DreamtinkerFluids.molten_jade, FluidValues.GEM, 0.5f)
+                            .save(wrapped, location(Melting_folder + "jade/silt_jade_tiles"));
+
+        MeltingRecipeBuilder.melting(itemNameIngredient(goety, "silt_jade_stairs"),
+                                     DreamtinkerFluids.molten_jade, FluidValues.GEM, 0.5f)
+                            .save(wrapped, location(Melting_folder + "jade/silt_jade_stairs"));
+
+        MeltingRecipeBuilder.melting(itemNameIngredient(goety, "silt_jade_slab"),
+                                     DreamtinkerFluids.molten_jade, FluidValues.GEM / 2, 0.5f)
+                            .save(wrapped, location(Melting_folder + "jade/silt_jade_slab"));
+
+        MeltingRecipeBuilder.melting(itemNameIngredient(goety, "snowy_jade_tiles"),
+                                     DreamtinkerFluids.molten_jade, FluidValues.GEM, 0.5f)
+                            .save(wrapped, location(Melting_folder + "jade/snowy_jade_tiles"));
+
+        MeltingRecipeBuilder.melting(itemNameIngredient(goety, "snowy_jade_stairs"),
+                                     DreamtinkerFluids.molten_jade, FluidValues.GEM, 0.5f)
+                            .save(wrapped, location(Melting_folder + "jade/snowy_jade_stairs"));
+
+        MeltingRecipeBuilder.melting(itemNameIngredient(goety, "snowy_jade_slab"),
+                                     DreamtinkerFluids.molten_jade, FluidValues.GEM / 2, 0.5f)
+                            .save(wrapped, location(Melting_folder + "jade/snowy_jade_slab"));
+
+        MeltingRecipeBuilder.melting(itemNameIngredient(goety, "jade_light"),
+                                     DreamtinkerFluids.molten_jade, FluidValues.GEM * 2, 0.5f)
+                            .save(wrapped, location(Melting_folder + "jade/jade_light"));
+
+        MeltingRecipeBuilder.melting(itemNameIngredient(goety, "jade_crystal_lamp"),
+                                     DreamtinkerFluids.molten_jade, FluidValues.GEM * 2, 0.5f)
+                            .save(wrapped, location(Melting_folder + "jade/jade_crystal_lamp"));
+
+        MeltingRecipeBuilder.melting(itemNameIngredient(goety, "half_jade_crystal_lamp"),
+                                     DreamtinkerFluids.molten_jade, FluidValues.GEM * 2, 0.5f)
+                            .save(wrapped, location(Melting_folder + "jade/half_jade_crystal_lamp"));
+        fluid(consumer, "jade", DreamtinkerFluids.molten_jade)
+                .optional()
+                .baseUnit(FluidValues.GEM).damageUnit(FluidValues.NUGGET).ore()
+                .metal().dust().plate().gear().coin().sheetmetal().geore().oreberry();
     }
 
     private void meltCast(Fluid fluid, ItemLike ingredient, int amount, Consumer<FinishedRecipe> consumer) {

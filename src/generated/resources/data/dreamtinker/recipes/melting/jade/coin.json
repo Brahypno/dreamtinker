@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:coins/jade"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:coins/jade"
+  },
+  "result": {
+    "amount": 30,
+    "fluid": "dreamtinker:molten_jade"
+  },
+  "temperature": 600,
+  "time": 36
+}

@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:plates/jade"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:plates/jade"
+  },
+  "result": {
+    "amount": 90,
+    "fluid": "dreamtinker:molten_jade"
+  },
+  "temperature": 600,
+  "time": 53
+}

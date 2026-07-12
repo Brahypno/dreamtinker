@@ -183,6 +183,8 @@ public class DreamtinkerMaterialRecipeProvider implements IMaterialRecipeHelper,
         materialRecipe(consumer, DreamtinkerMaterialIds.dragon_scale, Ingredient.of(DreamtinkerTagKeys.Items.dragonScale), 1, 1,
                        materials_folder + "dragon_scale");
 
+        standardGemMaterial(consumer, DreamtinkerMaterialIds.jade, DreamtinkerFluids.molten_jade, "jade", materials_folder);
+
     }
 
     public void addCompatMaterialRecipes(Consumer<FinishedRecipe> consumer) {

@@ -191,6 +191,11 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          HandleMaterialStats.multipliers().durability(1.05f).miningSpeed(1.20f).build(),
                          StatlessMaterialStats.BINDING);
 
+        addMaterialStats(DreamtinkerMaterialIds.jade,
+                         new HeadMaterialStats(400, 8.0f, Tiers.IRON, 1f),
+                         HandleMaterialStats.multipliers().durability(1.05f).attackDamage(1.10f).miningSpeed(1.20f).build(),
+                         StatlessMaterialStats.BINDING);
+
         addELMeleeHarvest();
         addMalumMeleeHarvest();
         addEidolonMeleeHarvest();
@@ -392,6 +397,12 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addMaterialStats(DreamtinkerMaterialIds.forgotten_metal,
                          new LimbMaterialStats(1000, 0.2f, -0.05f, -0.1f),
                          new GripMaterialStats(0.2f, 0.05f, 3.5f));
+
+
+        addMaterialStats(DreamtinkerMaterialIds.jade,
+                         new LimbMaterialStats(400, 0.2f, 0.2f, 0.2f),
+                         new GripMaterialStats(0.2f, 0.20f, 1f),
+                         StatlessMaterialStats.BOWSTRING);
 
         addCompatRanged();
     }
@@ -642,6 +653,7 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
 
 
         this.addMaterialStats(DreamtinkerMaterialIds.dragon_scale, StatlessMaterialStats.ARROW_SHAFT);
+        this.addMaterialStats(DreamtinkerMaterialIds.jade, StatlessMaterialStats.ARROW_SHAFT);
 
     }
 

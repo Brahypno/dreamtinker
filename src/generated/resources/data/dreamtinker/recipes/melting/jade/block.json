@@ -1,0 +1,18 @@
+{
+  "type": "tconstruct:melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:storage_blocks/jade"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:storage_blocks/jade"
+  },
+  "result": {
+    "amount": 810,
+    "fluid": "dreamtinker:molten_jade"
+  },
+  "temperature": 600,
+  "time": 160
+}

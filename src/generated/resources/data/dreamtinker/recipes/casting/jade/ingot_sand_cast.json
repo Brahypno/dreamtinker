@@ -1,0 +1,21 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/single_use/ingot"
+  },
+  "cast_consumed": true,
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:ingots/jade"
+    }
+  ],
+  "cooling_time": 53,
+  "fluid": {
+    "amount": 90,
+    "tag": "dreamtinker:molten_jade"
+  },
+  "result": {
+    "tag": "forge:ingots/jade"
+  }
+}

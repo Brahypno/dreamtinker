@@ -1,0 +1,20 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "tag": "tconstruct:casts/multi_use/plate"
+  },
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:plates/jade"
+    }
+  ],
+  "cooling_time": 53,
+  "fluid": {
+    "amount": 90,
+    "tag": "dreamtinker:molten_jade"
+  },
+  "result": {
+    "tag": "forge:plates/jade"
+  }
+}

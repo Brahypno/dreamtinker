@@ -1,0 +1,34 @@
+{
+  "block_effects": [
+    {
+      "type": "tconstruct:mob_effect_cloud",
+      "effects": [
+        {
+          "effect": "minecraft:resistance",
+          "level": 1,
+          "time": 160
+        }
+      ]
+    }
+  ],
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "registry": "minecraft:fluid",
+      "tag": "dreamtinker:molten_jade"
+    }
+  ],
+  "entity_effects": [
+    {
+      "type": "tconstruct:mob_effect",
+      "action": "add",
+      "effect": "minecraft:resistance",
+      "level": 1,
+      "time": 100
+    }
+  ],
+  "fluid": {
+    "amount": 100,
+    "tag": "dreamtinker:molten_jade"
+  }
+}

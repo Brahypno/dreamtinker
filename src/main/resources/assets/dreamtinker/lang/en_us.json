@@ -1002,6 +1002,9 @@
   "modifier.dreamtinker.blm_hellforged.tooltip.tier_damage": "Blood Orb tier %s grants +%s melee damage.",
   "modifier.dreamtinker.blm_hellforged.tooltip.lp": "Soul Network: %s / %s LP",
   "modifier.dreamtinker.blm_hellforged.tooltip.mining": "LP available: mining speed +%s%%, consuming %s LP after each block broken.",
+  "modifier.dreamtinker.huai_pu_bao_yu": "Huai Pu Bao Yu",
+  "modifier.dreamtinker.huai_pu_bao_yu.flavor": "Uncarved jade conceals its radiance.",
+  "modifier.dreamtinker.huai_pu_bao_yu.description": "Increases Conditional melee damage and mining speed by 50%, Conditional projectile damage by 50%",
 
   "_comment.dreamtinker.materials": "======Materials======",
   "material.dreamtinker.echo_alloy": "Echo Alloy",
@@ -1206,6 +1209,8 @@
   "material.dreamtinker.blm_sentient.steadfast": "Steadfast Sentient",
   "material.dreamtinker.blm_hellforge": "Hellforged",
   "material.dreamtinker.blm_hellforge.flavor": " ",
+  "material.dreamtinker.jade": "Jade",
+  "material.dreamtinker.jade.flavor": "Uncarved jade conceals its radiance.",
 
   "_comment.dreamtinker.creative_tabs": "======Creative Tabs======",
   "itemGroup.dreamtinker.part": "Dreamtinker | part",
@@ -1648,6 +1653,11 @@
   "fluid.dreamtinker.molten_hellforged.fluid_effect": "Deals 3 magic damage.",
   "block.dreamtinker.molten_hellforged": "Molten HellForged",
   "item.dreamtinker.molten_hellforged_bucket": "Molten HellForged Bucket",
+  "fluid_type.dreamtinker.molten_jade": "Molten Jade",
+  "fluid.dreamtinker.molten_jade": "Molten Jade",
+  "fluid.dreamtinker.molten_jade.fluid_effect": "Apply damage Resistance",
+  "block.dreamtinker.molten_jade": "Molten Jade",
+  "item.dreamtinker.molten_jade_bucket": "Molten Jade Bucket",
 
   "_comment.dreamtinker.fluid_effects": "======Fluid Effects======",
   "fluid_effect.tconstruct.damage": "%s Damage",

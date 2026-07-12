@@ -77,6 +77,7 @@ public class FluidTagProvider extends FluidTagsProvider {
         fluidTag(DreamtinkerFluids.molten_enderitium);
         fluidTag(DreamtinkerFluids.molten_dark_neither_star);
         fluidTag(DreamtinkerFluids.molten_hellforged);
+        fluidTag(DreamtinkerFluids.molten_jade);
 
         tag(TinkerTags.Fluids.GLASS_TOOLTIPS).addTag(DreamtinkerFluids.molten_crying_obsidian.getTag());
         this.tag(TinkerTags.Fluids.METAL_TOOLTIPS)
@@ -94,7 +95,7 @@ public class FluidTagProvider extends FluidTagsProvider {
                              DreamtinkerFluids.molten_enderitium.getTag());
         this.tag(TinkerTags.Fluids.LARGE_GEM_TOOLTIPS)
             .addTags(DreamtinkerFluids.molten_echo_alloy.getTag(), DreamtinkerFluids.molten_black_sapphire.getTag(),
-                     DreamtinkerFluids.molten_dark_neither_star.getTag());
+                     DreamtinkerFluids.molten_dark_neither_star.getTag(), DreamtinkerFluids.molten_jade.getTag());
         this.tag(DreamtinkerTagKeys.Fluids.molten_echo_shard).addTags(DreamtinkerFluids.molten_echo_shard.getTag());
         this.tag(DreamtinkerTagKeys.Fluids.molten_echo).addTags(DreamtinkerFluids.molten_echo_shard.getTag());//Maybe someone like name of molten echo? IDK
         this.tag(DreamtinkerTagKeys.Fluids.molten_crying_obsidian).addTags(DreamtinkerFluids.molten_crying_obsidian.getTag());

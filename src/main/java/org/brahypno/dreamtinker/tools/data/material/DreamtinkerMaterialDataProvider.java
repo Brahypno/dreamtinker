@@ -119,6 +119,9 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.faa_dark_nether_star, 4, 40, false, false, modLoaded("forbidden_arcanus"));
         addMaterial(DreamtinkerMaterialIds.blm_sentient, 2, 20, true, false, modLoaded("bloodmagic"));
         addMaterial(DreamtinkerMaterialIds.blm_hellforge, 4, 40, false, false, modLoaded("bloodmagic"));
+
+
+        addMaterial(DreamtinkerMaterialIds.jade, 2, 20, false, false, tagFilled(Dreamtinker.forgeItemTag("gems/jade")));
     }
 
     @Override

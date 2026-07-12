@@ -1,0 +1,9 @@
+{
+  "type": "tconstruct:material_fluid",
+  "fluid": {
+    "amount": 100,
+    "tag": "dreamtinker:molten_jade"
+  },
+  "output": "dreamtinker:jade",
+  "temperature": 600
+}

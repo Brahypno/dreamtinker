@@ -1,0 +1,19 @@
+{
+  "type": "tconstruct:ore_melting",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:geore_large_buds/jade"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:geore_large_buds/jade"
+  },
+  "rate": "metal",
+  "result": {
+    "amount": 270,
+    "fluid": "dreamtinker:molten_jade"
+  },
+  "temperature": 600,
+  "time": 107
+}

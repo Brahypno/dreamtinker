@@ -382,6 +382,11 @@ public class DreamtinkerFluidEffectProvider extends AbstractFluidEffectProvider 
                         new ResourceLocation("undergarden", "gooey")), 10 * 20, 3).buildCloud().effects()));
 
          */
+        compatFluid(DreamtinkerFluids.molten_jade.getTag(), FluidValues.GEM)
+                .addEntityEffects(FluidMobEffect.builder().effect(MobEffects.DAMAGE_RESISTANCE, 100, 1).buildEntity(TimeAction.ADD))
+                .addBlockEffect(new MobEffectCloudFluidEffect(
+                        FluidMobEffect.builder().effect(MobEffects.DAMAGE_RESISTANCE, 160, 1).buildCloud().effects()
+                ));
     }
 
     @Override

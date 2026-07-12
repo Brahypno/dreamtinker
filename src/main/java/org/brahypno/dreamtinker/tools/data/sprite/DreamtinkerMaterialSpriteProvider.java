@@ -642,6 +642,18 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(255, 0xFFD8D0E8) // 灰白紫亮边
                                                 .build());
 
+        this.buildMaterial(DreamtinkerMaterialIds.jade)
+            .meleeHarvest().ranged().armor().arrowShaft().shieldCore()
+            .fallbacks("gem", "crystal")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(63, 0xFF0B3024) // 墨绿近黑，叶缝与根部最深暗部
+                                                .addARGB(102, 0xFF14533B) // 深翡翠绿，叶片背光面
+                                                .addARGB(140, 0xFF237B53) // 中暗翠绿，主体叶片
+                                                .addARGB(178, 0xFF50A779) // 明亮玉绿色，叶缘与凸起
+                                                .addARGB(216, 0xFF98CDB0) // 浅灰青绿，白绿过渡与白菜帮
+                                                .addARGB(255, 0xFFE1EEE7) // 莹润青白，白菜帮高光
+                                                .build());
+
 
         addELMaterials();
         addMalumMaterials();

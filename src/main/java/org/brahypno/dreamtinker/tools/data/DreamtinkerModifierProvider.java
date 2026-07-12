@@ -1098,6 +1098,14 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         buildModifier(Ids.divineMaledictus, modLoaded("forbidden_arcanus"))
                 .tooltipDisplay(BasicModifier.TooltipDisplay.TINKER_STATION)
                 .addModules(ModifierSlotModule.slot(EsotericismSlotType.DELUSION).flat(1));
+        buildModifier(Ids.HuaiPuBaoYu)
+                .addModule(new RarityModule(Rarity.RARE))
+                // melee harvest
+                .addModule(StatBoostModule.multiplyConditional(ToolStats.ATTACK_DAMAGE).eachLevel(0.5f))
+                .addModule(StatBoostModule.multiplyConditional(ToolStats.MINING_SPEED).eachLevel(0.5f))
+                // ranged
+                .addModule(StatBoostModule.multiplyConditional(ToolStats.PROJECTILE_DAMAGE).eachLevel(0.5f))
+                .addModule(StatBoostModule.multiplyConditional(ToolStats.ACCURACY).eachLevel(0.2f));
 
         addELModifiers();
         addMalumModifiers();

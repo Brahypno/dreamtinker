@@ -466,6 +466,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId huge_explosion = id("huge_explosion");
         public static final ModifierId unbreakable = id("unbreakable");
         public static final ModifierId divineMaledictus = id("divine_maledictus");
+        public static final ModifierId HuaiPuBaoYu = id("huai_pu_bao_yu");
 
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");

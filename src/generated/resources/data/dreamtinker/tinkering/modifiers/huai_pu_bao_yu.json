@@ -1,0 +1,34 @@
+{
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:rarity",
+      "rarity": "rare"
+    },
+    {
+      "type": "tconstruct:stat_boost",
+      "each_level": 0.5,
+      "operation": "multiply_conditional",
+      "stat": "tconstruct:attack_damage"
+    },
+    {
+      "type": "tconstruct:stat_boost",
+      "each_level": 0.5,
+      "operation": "multiply_conditional",
+      "stat": "tconstruct:mining_speed"
+    },
+    {
+      "type": "tconstruct:stat_boost",
+      "each_level": 0.5,
+      "operation": "multiply_conditional",
+      "stat": "tconstruct:projectile_damage"
+    },
+    {
+      "type": "tconstruct:stat_boost",
+      "each_level": 0.2,
+      "operation": "multiply_conditional",
+      "stat": "tconstruct:accuracy"
+    }
+  ],
+  "tooltip_display": "always"
+}

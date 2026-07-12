@@ -11,6 +11,7 @@ import slimeknights.tconstruct.tools.stats.PlatingMaterialStats;
 
 import static org.brahypno.dreamtinker.library.compat.ars_nouveau.NovaRegistry.nova_conjuration_essence;
 import static org.brahypno.dreamtinker.tools.DreamtinkerModifiers.*;
+import static org.brahypno.dreamtinker.tools.DreamtinkerModifiers.Ids.HuaiPuBaoYu;
 import static org.brahypno.dreamtinker.tools.DreamtinkerModifiers.Ids.soul_form;
 import static slimeknights.tconstruct.library.materials.MaterialRegistry.*;
 
@@ -260,6 +261,9 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
 
         addDefaultTraits(DreamtinkerMaterialIds.blm_sentient, sentient_will);
         addDefaultTraits(DreamtinkerMaterialIds.blm_hellforge, hellforged);
+
+
+        addDefaultTraits(DreamtinkerMaterialIds.jade, HuaiPuBaoYu);
 
     }
 

@@ -133,6 +133,9 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
         buildRenderInfo(DreamtinkerMaterialIds.blm_sentient).color(0xFF00AAAA).fallbacks("gem", "crystal").luminosity(15);
         buildRenderInfo(DreamtinkerMaterialIds.blm_hellforge).color(0xFFA5DDD4).fallbacks("metal", "crystal").luminosity(15);
 
+
+        buildRenderInfo(DreamtinkerMaterialIds.jade).color(0xFF50A779).fallbacks("gem", "crystal").luminosity(15);
+
     }
 
     @Override

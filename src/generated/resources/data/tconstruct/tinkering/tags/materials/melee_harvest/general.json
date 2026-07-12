@@ -26,6 +26,10 @@
     {
       "id": "dreamtinker:blm_hellforge",
       "required": false
+    },
+    {
+      "id": "dreamtinker:jade",
+      "required": false
     }
   ]
 }
