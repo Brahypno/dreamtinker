@@ -19,256 +19,408 @@ import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 
-/**
- * 水平回旋斩渲染器（只狼风格）
- * 特性：
- * - 多道同心弧叠加（RINGS/RING_STEP）
- * - 贴图U重复 + 滚动（U_REPEAT/SCROLL_SPD）
- * - 颜色渐变（SOLID/ANGULAR/RADIAL/LENGTH/TIME_RAINBOW + HSV/RGB）
- * - 自发光（FULL_BRIGHT）
- * - 第一人称可见性优化（轻微仰角 TILT_DEG）
- */
 @OnlyIn(Dist.CLIENT)
 public class SlashOrbitRenderer extends EntityRenderer<SlashOrbitEntity> {
-
     private static final ResourceLocation TEX =
             Dreamtinker.getLocation("textures/entity/slash_blade.png");
+    private static final RenderType RENDER_TYPE = RenderType.entityTranslucent(TEX);
 
     private static final float R_MID_UV = 0.70f;
-    private static final float R_HALF_T_UV = 0.11f;                   // 0.22/2
-    private static final float R_IN_UV = R_MID_UV - R_HALF_T_UV;  // ≈0.59
-    private static final float R_OUT_UV = R_MID_UV + R_HALF_T_UV;  // ≈0.81
-    private static final float MIN_STEP_WORLD = 0.01f; // 最小步长(防止停滞)
+    private static final float R_HALF_T_UV = 0.11f;
+    private static final float R_IN_UV = R_MID_UV - R_HALF_T_UV;
+    private static final float R_OUT_UV = R_MID_UV + R_HALF_T_UV;
+
+    private static final float MIN_STEP_WORLD = 0.01f;
     private static final float DENSITY = 1.65f;
     private static final float MIN_ALPHA = 0.72f;
-    private static final int U_SLICES = 64;
-    private static final int V_SLICES = 16;
-    private static final int MAX_INNER_LAYERS = 16;
     private static final float STEP_OVERLAP = 0.42f;
 
+    /**
+     * SOLID/TIME_RAINBOW: 1 quad/layer
+     * ANGULAR/LENGTH: ANGULAR_SLICES quads/layer
+     * RADIAL: RADIAL_U_SLICES * RADIAL_V_SLICES quads/layer
+     */
+    private static final int ANGULAR_SLICES = 32;
+    private static final int RADIAL_U_SLICES = 32;
+    private static final int RADIAL_V_SLICES = 8;
+    private static final int MAX_INNER_LAYERS = 16;
 
-    public SlashOrbitRenderer(EntityRendererProvider.Context ctx) {
-        super(ctx);
+    private static final int RADIAL_STRIDE = RADIAL_V_SLICES + 1;
+    private static final float[] RADIAL_T =
+            createRadialParameters();
+
+    /**
+     * EntityRenderer is used on the render thread, so these scratch buffers can
+     * be reused without allocating arrays for every entity and every frame.
+     */
+    private final int[] angularColors = new int[ANGULAR_SLICES + 1];
+    private final int[] radialColors =
+            new int[(RADIAL_U_SLICES + 1) * RADIAL_STRIDE];
+
+    private int mixColorA;
+    private int mixColorB;
+    private boolean mixHsv;
+    private float hueA;
+    private float saturationA;
+    private float valueA;
+    private float hueB;
+    private float saturationB;
+    private float valueB;
+
+    public SlashOrbitRenderer(EntityRendererProvider.Context context) {
+        super(context);
     }
 
     @Override
-    public @NotNull ResourceLocation getTextureLocation(SlashOrbitEntity e) {
+    public @NotNull ResourceLocation getTextureLocation(SlashOrbitEntity entity) {
         return TEX;
     }
 
-    // === 渐变：与之前保持一致（可复用你已有版本） ==========================
-    private static float gradT(SlashOrbitEntity.GradMode mode, float alongArc01, float radial01, float hueRoll) {
-        return switch (mode) {
-            case SOLID -> 0f;               // 如不想随时间滚动可返回 0
-            case ANGULAR -> wrap01(alongArc01 + hueRoll);  // 沿弧角（此处用 u 近似）
-            case LENGTH -> wrap01(alongArc01);            // 与 ANGULAR 同义
-            case RADIAL -> wrap01(radial01 + hueRoll);    // 内→外
-            case TIME_RAINBOW -> wrap01(hueRoll);               // 纯时间
-        };
-    }
-
-
-    private static void putARGB(
-            VertexConsumer vc, Matrix4f m, Matrix3f n,
-            float x, float y, float z, float u, float v,
-            int argb, float mulA, int light, int ov) {
-        float a = ((argb >>> 24) & 255) / 255f * mulA;
-        float r = ((argb >> 16) & 255) / 255f;
-        float g = ((argb >> 8) & 255) / 255f;
-        float b = ((argb) & 255) / 255f;
-        vc.vertex(m, x, y, z).color(r, g, b, a).uv(u, v).overlayCoords(ov).uv2(light).normal(n, 0, 1, 0).endVertex();
-    }
-
-    // 将 UV -> 以 (0.5,0.5) 为中心的“归一半径”，再映射到贴图弧带的 [R_IN_UV, R_OUT_UV] → 0..1
-    private static float radial01FromUV(float u, float v) {
-        float du = u - 0.5f, dv = v - 0.5f;
-        float rad = Mth.clamp((float) Math.sqrt(du * du + dv * dv) / 0.5f, 0f, 1f); // 0..1
-        return Mth.clamp((rad - R_IN_UV) / (R_OUT_UV - R_IN_UV), 0f, 1f);
-    }
-
     @Override
-    public void render(SlashOrbitEntity e, float yaw, float pt, PoseStack pose, MultiBufferSource buf, int packed) {
-        float age = e.tickCount + pt;
-        float life = Math.max(1f, e.life());
-        float fade = 1f - age / life;
-        if (Float.isNaN(fade) || Float.isInfinite(fade))
-            fade = 1f;
-        fade = Mth.clamp(fade * DENSITY, MIN_ALPHA, 1f);
-        if (fade <= 0f)
+    public void render(
+            SlashOrbitEntity entity, float yaw, float partialTick,
+            PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+        float age = entity.tickCount + partialTick;
+        float life = Math.max(1f, entity.life());
+        if (age >= life){
             return;
-
-        float r = e.radius();
-        float th = Math.max(0.02f, e.thickness()); // 视觉厚度由“圈层叠加”体现
-
-        float phaseDeg = (float) Math.toDegrees(e.omega() * age);
-
-        VertexConsumer vc = buf.getBuffer(RenderType.entityTranslucent(TEX));
-        int light = LightTexture.FULL_BRIGHT, ov = OverlayTexture.NO_OVERLAY;
-
-        pose.pushPose();
-        // 轻微仰角 + 围绕Y旋转
-        pose.mulPose(Axis.XP.rotationDegrees(-6f));
-        pose.mulPose(Axis.YP.rotationDegrees(phaseDeg));
-
-        // 基准缩放：让贴图“中径”对应世界半径 r（作为最外层）
-        float baseScale = r / R_MID_UV;
-        pose.scale(baseScale, 1f, baseScale);
-        // 基准缩放：让贴图“中径”对应世界半径 r（作为最外层）
-        float innerR = Math.max(0.05f, r - th);
-        float visibleBandWorld = Math.max(0.02f, R_HALF_T_UV * 2f * baseScale);
-        float stepWorld = Math.max(MIN_STEP_WORLD, visibleBandWorld * STEP_OVERLAP);
-        int layerCount = Mth.clamp((int) Math.ceil((r - innerR) / stepWorld) + 1, 1, MAX_INNER_LAYERS);
-
-        float[] centers = new float[layerCount];
-        for (int i = 0; i < layerCount; i++) {
-            float t = layerCount == 1 ? 0f : (float) i / (layerCount - 1);
-            centers[i] = Mth.lerp(t, r, innerR);
         }
 
-        // —— 上色参数（保留你的方式）——
-        int colA = e.colorA(), colB = e.colorB();
-        SlashOrbitEntity.GradMode mode = e.gradMode();
-        boolean useHSV = e.useHSV();
-        float hueRoll = e.hueShiftSpd() * (e.tickCount + pt);
+        float fade = Mth.clamp((1f - age / life) * DENSITY, MIN_ALPHA, 1f);
+        float radius = entity.radius();
+        float thickness = Math.max(0.02f, entity.thickness());
+        int layerCount = getLayerCount(radius, thickness);
+        float innerRadius = Math.max(0.05f, radius - thickness);
 
-        // —— 按“外→内”绘制（半透明排序更稳）——
-        for (float rCenter : centers) {
-            float layerScaleRatio = Math.max(0.05f, (rCenter / R_MID_UV) / baseScale);  // 相对最外层的缩放
-            pose.pushPose();
-            pose.scale(layerScaleRatio, 1f, layerScaleRatio);
+        prepareColorMixer(entity.colorA(), entity.colorB(), entity.useHSV());
 
-            // —— 你的细分四边形绘制保持不变（仅把 m/n 与 alpha 换成当前层的）—— //
-            Matrix4f m = pose.last().pose();
-            Matrix3f n = pose.last().normal();
+        SlashOrbitEntity.GradMode mode = entity.gradMode();
+        float hueRoll = entity.hueShiftSpd() * age;
+        if (mode == SlashOrbitEntity.GradMode.ANGULAR
+            || mode == SlashOrbitEntity.GradMode.LENGTH){
+            prepareAngularColors(mode, hueRoll);
+        }else if (mode == SlashOrbitEntity.GradMode.RADIAL){
+            prepareRadialColors(hueRoll);
+        }
 
-            for (int iu = 0; iu < U_SLICES; iu++) {
-                float u0 = (float) iu / U_SLICES;
-                float u1 = (float) (iu + 1) / U_SLICES;
-                for (int iv = 0; iv < V_SLICES; iv++) {
-                    float v0 = (float) iv / V_SLICES;
-                    float v1 = (float) (iv + 1) / V_SLICES;
+        poseStack.pushPose();
+        poseStack.mulPose(Axis.XP.rotationDegrees(-6f));
+        poseStack.mulPose(Axis.YP.rotationDegrees(
+                (float) Math.toDegrees(entity.omega() * age)));
 
-                    // 径向参数（贴图中心归一半径→映射到 [R_IN_UV,R_OUT_UV]）
-                    float radial00 = radial01FromUV(u0, v1);
-                    float radial10 = radial01FromUV(u1, v1);
-                    float radial11 = radial01FromUV(u1, v0);
-                    float radial01 = radial01FromUV(u0, v0);
+        Matrix4f pose = poseStack.last().pose();
+        Matrix3f normal = poseStack.last().normal();
+        VertexConsumer consumer = bufferSource.getBuffer(RENDER_TYPE);
 
-                    // 颜色渐变（完全保留原逻辑）
-                    int c00 = mix(colA, colB, gradT(mode, u0, radial00, hueRoll), useHSV);
-                    int c10 = mix(colA, colB, gradT(mode, u1, radial10, hueRoll), useHSV);
-                    int c11 = mix(colA, colB, gradT(mode, u1, radial11, hueRoll), useHSV);
-                    int c01 = mix(colA, colB, gradT(mode, u0, radial01, hueRoll), useHSV);
+        for (int layer = 0; layer < layerCount; layer++) {
+            float layerT = layerCount == 1
+                           ? 0f
+                           : (float) layer / (layerCount - 1);
+            float layerRadius = Mth.lerp(layerT, radius, innerRadius);
+            float scale = layerRadius / R_MID_UV;
 
-                    // 顶点位置（单位方 [0,1]^2 → [-1,1]^2；v 轴反向）
-                    float x0 = Mth.lerp(u0, -1f, 1f);
-                    float x1 = Mth.lerp(u1, -1f, 1f);
-                    float z0 = Mth.lerp(1f - v1, -1f, 1f);
-                    float z1 = Mth.lerp(1f - v0, -1f, 1f);
-
-                    // 两个三角（正面）
-                    putARGB(vc, m, n, x0, 0, z0, u0, v1, c00, fade, light, ov);
-                    putARGB(vc, m, n, x1, 0, z0, u1, v1, c10, fade, light, ov);
-                    putARGB(vc, m, n, x1, 0, z1, u1, v0, c11, fade, light, ov);
-
-                    putARGB(vc, m, n, x0, 0, z0, u0, v1, c00, fade, light, ov);
-                    putARGB(vc, m, n, x1, 0, z1, u1, v0, c11, fade, light, ov);
-                    putARGB(vc, m, n, x0, 0, z1, u0, v0, c01, fade, light, ov);
-                }
+            switch (mode) {
+                case SOLID -> renderSolidLayer(
+                        consumer, pose, normal, scale, mixColorA, fade);
+                case TIME_RAINBOW -> renderSolidLayer(
+                        consumer, pose, normal, scale,
+                        mixPrepared(wrap01(hueRoll)), fade);
+                case ANGULAR, LENGTH -> renderAngularLayer(
+                        consumer, pose, normal, scale, fade);
+                case RADIAL -> renderRadialLayer(
+                        consumer, pose, normal, scale, fade);
             }
-
-            pose.popPose();
         }
 
-        pose.popPose();
+        poseStack.popPose();
     }
 
-    private static float wrap01(float v) {
-        v %= 1f;
-        if (v < 0)
-            v += 1f;
-        return v;
+    private static int getLayerCount(float radius, float thickness) {
+        float baseScale = radius / R_MID_UV;
+        float innerRadius = Math.max(0.05f, radius - thickness);
+        float visibleBandWorld =
+                Math.max(0.02f, (R_OUT_UV - R_IN_UV) * baseScale);
+        float stepWorld =
+                Math.max(MIN_STEP_WORLD, visibleBandWorld * STEP_OVERLAP);
+        return Mth.clamp(
+                (int) Math.ceil((radius - innerRadius) / stepWorld) + 1,
+                1, MAX_INNER_LAYERS);
     }
 
-    private static int mix(int a, int b, float t, boolean hsv) {
+    private void prepareAngularColors(
+            SlashOrbitEntity.GradMode mode, float hueRoll) {
+        for (int i = 0; i <= ANGULAR_SLICES; i++) {
+            float alongArc = (float) i / ANGULAR_SLICES;
+            float gradient = mode == SlashOrbitEntity.GradMode.ANGULAR
+                             ? wrap01(alongArc + hueRoll)
+                             : wrap01(alongArc);
+            angularColors[i] = mixPrepared(gradient);
+        }
+    }
+
+    private void prepareRadialColors(float hueRoll) {
+        for (int i = 0; i < RADIAL_T.length; i++) {
+            radialColors[i] = mixPrepared(wrap01(RADIAL_T[i] + hueRoll));
+        }
+    }
+
+    private static void renderSolidLayer(
+            VertexConsumer consumer, Matrix4f pose, Matrix3f normal,
+            float scale, int color, float alpha) {
+        putQuad(
+                consumer, pose, normal, scale,
+                0f, 1f, 0f, 1f,
+                color, color, color, color, alpha);
+    }
+
+    private void renderAngularLayer(
+            VertexConsumer consumer, Matrix4f pose, Matrix3f normal,
+            float scale, float alpha) {
+        for (int uIndex = 0; uIndex < ANGULAR_SLICES; uIndex++) {
+            float u0 = (float) uIndex / ANGULAR_SLICES;
+            float u1 = (float) (uIndex + 1) / ANGULAR_SLICES;
+            int color0 = angularColors[uIndex];
+            int color1 = angularColors[uIndex + 1];
+
+            putQuad(
+                    consumer, pose, normal, scale,
+                    u0, u1, 0f, 1f,
+                    color0, color1, color1, color0, alpha);
+        }
+    }
+
+    private void renderRadialLayer(
+            VertexConsumer consumer, Matrix4f pose, Matrix3f normal,
+            float scale, float alpha) {
+        for (int uIndex = 0; uIndex < RADIAL_U_SLICES; uIndex++) {
+            float u0 = (float) uIndex / RADIAL_U_SLICES;
+            float u1 = (float) (uIndex + 1) / RADIAL_U_SLICES;
+
+            for (int vIndex = 0; vIndex < RADIAL_V_SLICES; vIndex++) {
+                float v0 = (float) vIndex / RADIAL_V_SLICES;
+                float v1 = (float) (vIndex + 1) / RADIAL_V_SLICES;
+
+                int lowerLeft = radialIndex(uIndex, vIndex + 1);
+                int lowerRight = radialIndex(uIndex + 1, vIndex + 1);
+                int upperRight = radialIndex(uIndex + 1, vIndex);
+                int upperLeft = radialIndex(uIndex, vIndex);
+
+                putQuad(
+                        consumer, pose, normal, scale,
+                        u0, u1, v0, v1,
+                        radialColors[lowerLeft],
+                        radialColors[lowerRight],
+                        radialColors[upperRight],
+                        radialColors[upperLeft],
+                        alpha);
+            }
+        }
+    }
+
+    private static void putQuad(
+            VertexConsumer consumer, Matrix4f pose, Matrix3f normal,
+            float scale, float u0, float u1, float v0, float v1,
+            int color00, int color10, int color11, int color01,
+            float alpha) {
+        float x0 = (u0 * 2f - 1f) * scale;
+        float x1 = (u1 * 2f - 1f) * scale;
+        float z0 = (1f - v1 * 2f) * scale;
+        float z1 = (1f - v0 * 2f) * scale;
+
+        putVertex(consumer, pose, normal, x0, z0, u0, v1, color00, alpha);
+        putVertex(consumer, pose, normal, x1, z0, u1, v1, color10, alpha);
+        putVertex(consumer, pose, normal, x1, z1, u1, v0, color11, alpha);
+        putVertex(consumer, pose, normal, x0, z1, u0, v0, color01, alpha);
+    }
+
+    private static void putVertex(
+            VertexConsumer consumer, Matrix4f pose, Matrix3f normal,
+            float x, float z, float u, float v, int argb, float alpha) {
+        float vertexAlpha = ((argb >>> 24) & 255) / 255f * alpha;
+        float red = ((argb >>> 16) & 255) / 255f;
+        float green = ((argb >>> 8) & 255) / 255f;
+        float blue = (argb & 255) / 255f;
+
+        consumer.vertex(pose, x, 0f, z)
+                .color(red, green, blue, vertexAlpha)
+                .uv(u, v)
+                .overlayCoords(OverlayTexture.NO_OVERLAY)
+                .uv2(LightTexture.FULL_BRIGHT)
+                .normal(normal, 0f, 1f, 0f)
+                .endVertex();
+    }
+
+    private static float[] createRadialParameters() {
+        float[] result =
+                new float[(RADIAL_U_SLICES + 1) * RADIAL_STRIDE];
+
+        for (int uIndex = 0; uIndex <= RADIAL_U_SLICES; uIndex++) {
+            float u = (float) uIndex / RADIAL_U_SLICES;
+            for (int vIndex = 0; vIndex <= RADIAL_V_SLICES; vIndex++) {
+                float v = (float) vIndex / RADIAL_V_SLICES;
+                result[radialIndex(uIndex, vIndex)] =
+                        radial01FromUv(u, v);
+            }
+        }
+        return result;
+    }
+
+    private static int radialIndex(int uIndex, int vIndex) {
+        return uIndex * RADIAL_STRIDE + vIndex;
+    }
+
+    private static float radial01FromUv(float u, float v) {
+        float du = u - 0.5f;
+        float dv = v - 0.5f;
+        float normalizedRadius =
+                Mth.clamp((float) Math.sqrt(du * du + dv * dv) / 0.5f, 0f, 1f);
+        return Mth.clamp(
+                (normalizedRadius - R_IN_UV) / (R_OUT_UV - R_IN_UV),
+                0f, 1f);
+    }
+
+    private void prepareColorMixer(int colorA, int colorB, boolean hsv) {
+        mixColorA = colorA;
+        mixColorB = colorB;
+        mixHsv = hsv && colorA != colorB;
+
+        if (mixHsv){
+            decodeHsv(colorA, true);
+            decodeHsv(colorB, false);
+        }
+    }
+
+    private void decodeHsv(int argb, boolean first) {
+        float red = ((argb >>> 16) & 255) / 255f;
+        float green = ((argb >>> 8) & 255) / 255f;
+        float blue = (argb & 255) / 255f;
+        float max = Math.max(red, Math.max(green, blue));
+        float min = Math.min(red, Math.min(green, blue));
+        float delta = max - min;
+
+        float hue = 0f;
+        if (delta > 1.0E-6f){
+            if (max == red){
+                hue = ((green - blue) / delta) % 6f;
+            }else if (max == green){
+                hue = (blue - red) / delta + 2f;
+            }else {
+                hue = (red - green) / delta + 4f;
+            }
+            hue /= 6f;
+            if (hue < 0f){
+                hue += 1f;
+            }
+        }
+
+        float saturation = max == 0f ? 0f : delta / max;
+        if (first){
+            hueA = hue;
+            saturationA = saturation;
+            valueA = max;
+        }else {
+            hueB = hue;
+            saturationB = saturation;
+            valueB = max;
+        }
+    }
+
+    private int mixPrepared(float t) {
         t = Mth.clamp(t, 0f, 1f);
-        return hsv ? lerpHSV_ARGB(a, b, t) : lerpRGB_ARGB(a, b, t);
-    }
-
-    private static int lerpRGB_ARGB(int a, int b, float t) {
-        int aa = (int) Mth.lerp(t, (a >>> 24) & 255, (b >>> 24) & 255);
-        int rr = (int) Mth.lerp(t, (a >> 16) & 255, (b >> 16) & 255);
-        int gg = (int) Mth.lerp(t, (a >> 8) & 255, (b >> 8) & 255);
-        int bb = (int) Mth.lerp(t, a & 255, b & 255);
-        return (aa << 24) | (rr << 16) | (gg << 8) | bb;
-    }
-
-    private static int lerpHSV_ARGB(int a, int b, float t) {
-        float[] ah = rgbToHsv(((a >> 16) & 255) / 255f, ((a >> 8) & 255) / 255f, (a & 255) / 255f);
-        float[] bh = rgbToHsv(((b >> 16) & 255) / 255f, ((b >> 8) & 255) / 255f, (b & 255) / 255f);
-        float dh = (((bh[0] - ah[0] + 1f) + 0.5f) % 1f) - 0.5f;  // 最近环向差
-        float h = (ah[0] + dh * t + 1f) % 1f;
-        float s = Mth.lerp(t, ah[1], bh[1]);
-        float v = Mth.lerp(t, ah[2], bh[2]);
-        int rgb = hsvToRgb(h, s, v);
-        int aa = (int) Mth.lerp(t, (a >>> 24) & 255, (b >>> 24) & 255);
-        return (aa << 24) | rgb;
-    }
-
-    private static float[] rgbToHsv(float r, float g, float b) {
-        float max = Math.max(r, Math.max(g, b)), min = Math.min(r, Math.min(g, b)), d = max - min;
-        float h = 0f;
-        if (d > 1e-6){
-            if (max == r)
-                h = (g - b) / d % 6f;
-            else if (max == g)
-                h = (b - r) / d + 2f;
-            else
-                h = (r - g) / d + 4f;
-            h /= 6f;
-            if (h < 0)
-                h += 1f;
+        if (mixColorA == mixColorB || t <= 0f){
+            return mixColorA;
         }
-        float s = max == 0 ? 0 : d / max;
-        return new float[]{h, s, max};
+        if (t >= 1f){
+            return mixColorB;
+        }
+        return mixHsv ? mixHsv(t) : mixRgb(t);
     }
 
-    private static int hsvToRgb(float h, float s, float v) {
-        float i = (float) Math.floor(h * 6f), f = h * 6f - i;
-        float p = v * (1 - s), q = v * (1 - f * s), t = v * (1 - (1 - f) * s);
-        float R, G, B;
-        switch (((int) i) % 6) {
+    private int mixRgb(float t) {
+        int alpha = lerpChannel(
+                (mixColorA >>> 24) & 255, (mixColorB >>> 24) & 255, t);
+        int red = lerpChannel(
+                (mixColorA >>> 16) & 255, (mixColorB >>> 16) & 255, t);
+        int green = lerpChannel(
+                (mixColorA >>> 8) & 255, (mixColorB >>> 8) & 255, t);
+        int blue = lerpChannel(
+                mixColorA & 255, mixColorB & 255, t);
+        return alpha << 24 | red << 16 | green << 8 | blue;
+    }
+
+    private int mixHsv(float t) {
+        float hueDelta = hueB - hueA;
+        if (hueDelta > 0.5f){
+            hueDelta -= 1f;
+        }else if (hueDelta < -0.5f){
+            hueDelta += 1f;
+        }
+
+        float hue = wrap01(hueA + hueDelta * t);
+        float saturation = Mth.lerp(t, saturationA, saturationB);
+        float value = Mth.lerp(t, valueA, valueB);
+        int rgb = hsvToRgb(hue, saturation, value);
+        int alpha = lerpChannel(
+                (mixColorA >>> 24) & 255, (mixColorB >>> 24) & 255, t);
+        return alpha << 24 | rgb;
+    }
+
+    private static int lerpChannel(int from, int to, float t) {
+        return Mth.clamp((int) (from + (to - from) * t + 0.5f), 0, 255);
+    }
+
+    private static int hsvToRgb(float hue, float saturation, float value) {
+        float sector = hue * 6f;
+        int index = Mth.floor(sector) % 6;
+        float fraction = sector - Mth.floor(sector);
+        float p = value * (1f - saturation);
+        float q = value * (1f - fraction * saturation);
+        float t = value * (1f - (1f - fraction) * saturation);
+
+        float red;
+        float green;
+        float blue;
+        switch (index) {
             case 0 -> {
-                R = v;
-                G = t;
-                B = p;
+                red = value;
+                green = t;
+                blue = p;
             }
             case 1 -> {
-                R = q;
-                G = v;
-                B = p;
+                red = q;
+                green = value;
+                blue = p;
             }
             case 2 -> {
-                R = p;
-                G = v;
-                B = t;
+                red = p;
+                green = value;
+                blue = t;
             }
             case 3 -> {
-                R = p;
-                G = q;
-                B = v;
+                red = p;
+                green = q;
+                blue = value;
             }
             case 4 -> {
-                R = t;
-                G = p;
-                B = v;
+                red = t;
+                green = p;
+                blue = value;
             }
             default -> {
-                R = v;
-                G = p;
-                B = q;
+                red = value;
+                green = p;
+                blue = q;
             }
         }
-        return ((int) (R * 255 + 0.5) << 16) | ((int) (G * 255 + 0.5) << 8) | ((int) (B * 255 + 0.5));
+
+        int packedRed = Mth.clamp((int) (red * 255f + 0.5f), 0, 255);
+        int packedGreen = Mth.clamp((int) (green * 255f + 0.5f), 0, 255);
+        int packedBlue = Mth.clamp((int) (blue * 255f + 0.5f), 0, 255);
+        return packedRed << 16 | packedGreen << 8 | packedBlue;
+    }
+
+    private static float wrap01(float value) {
+        value %= 1f;
+        return value < 0f ? value + 1f : value;
     }
 }

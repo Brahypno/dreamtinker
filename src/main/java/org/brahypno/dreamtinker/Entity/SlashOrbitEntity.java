@@ -52,7 +52,7 @@ public class SlashOrbitEntity extends Entity {
     public SlashOrbitEntity(EntityType<?> type, Level level) {
         super(type, level);
         this.noPhysics = true;
-        this.noCulling = true;
+        this.noCulling = false;
     }
 
     public SlashOrbitEntity(ServerLevel level, LivingEntity owner, float radius, int life, float omega, int blades, float damage, float thickness) {
@@ -102,6 +102,20 @@ public class SlashOrbitEntity extends Entity {
         if (a > Math.PI)
             a -= TWO_PI;
         return a;
+    }
+
+    @Override
+    public AABB getBoundingBoxForCulling() {
+        double horizontal = this.radius() + this.thickness() + 0.5D;
+        double vertical = 0.75D + horizontal * 0.12D;
+        return new AABB(
+                this.getX() - horizontal,
+                this.getY() - vertical,
+                this.getZ() - horizontal,
+                this.getX() + horizontal,
+                this.getY() + vertical,
+                this.getZ() + horizontal
+        );
     }
 
     @Override
@@ -157,39 +171,54 @@ public class SlashOrbitEntity extends Entity {
     }
 
     private void doHits() {
-        float r = radius();
-        float halfWidth = Math.max(0.05f, thickness() * 0.5f);
-        float min = Math.max(0f, r - halfWidth);
-        float max = r + halfWidth;
-        double y0 = getY() - 0.75D, y1 = getY() + 0.75D;
-        AABB box = new AABB(getX() - max - 0.5D, y0, getZ() - max - 0.5D, getX() + max + 0.5D, y1, getZ() + max + 0.5D);
+        float radius = this.radius();
+        float halfWidth = Math.max(0.05F, this.thickness() * 0.5F);
+        float minimum = Math.max(0.0F, radius - halfWidth);
+        float maximum = radius + halfWidth;
+        double minimumSqr = minimum * minimum;
+        double maximumSqr = maximum * maximum;
+        double y0 = this.getY() - 0.75D;
+        double y1 = this.getY() + 0.75D;
+        AABB searchBox = new AABB(
+                this.getX() - maximum - 0.5D, y0, this.getZ() - maximum - 0.5D,
+                this.getX() + maximum + 0.5D, y1, this.getZ() + maximum + 0.5D
+        );
 
-        int bladeCount = blades();
-        float phase = wrapToPi(omega() * tickCount);
+        int bladeCount = this.blades();
+        float phase = wrapToPi(this.omega() * this.tickCount);
         float step = TWO_PI / bladeCount;
-        float half = (float) Math.toRadians(bladeHalfAngle());
+        float halfAngle = (float) Math.toRadians(this.bladeHalfAngle());
 
-        for (LivingEntity target : level().getEntitiesOfClass(LivingEntity.class, box, e -> e != owner && e.isAlive() && !e.isSpectator())) {
-            AABB bb = target.getBoundingBox();
-            double px = Mth.clamp(getX(), bb.minX, bb.maxX);
-            double pz = Mth.clamp(getZ(), bb.minZ, bb.maxZ);
-            double dx = px - getX(), dz = pz - getZ();
-            double dSqr = dx * dx + dz * dz;
-
-            if (dSqr < min * min || dSqr > max * max)
-                continue;
-
-            float ang = (float) Math.atan2(dz, dx);
-            float local = wrapToPi(ang - phase);
-            float mod = (float) Math.IEEEremainder(local, step);
-
-            if (Math.abs(mod) > half)
-                continue;
-
+        for (LivingEntity target : this.level().getEntitiesOfClass(
+                LivingEntity.class,
+                searchBox,
+                entity -> entity != this.owner && entity.isAlive() && !entity.isSpectator()
+        )) {
             int id = target.getId();
-            int last = lastHitAge.getOrDefault(id, -999);
-            if (tickCount - last >= hitCooldown && target.hurt(level().damageSources().indirectMagic(this, owner), damage)){
-                lastHitAge.put(id, tickCount);
+            int lastHit = this.lastHitAge.getOrDefault(id, Integer.MIN_VALUE / 2);
+            if (this.tickCount - lastHit < this.hitCooldown){
+                continue;
+            }
+
+            AABB targetBox = target.getBoundingBox();
+            double nearestX = Mth.clamp(this.getX(), targetBox.minX, targetBox.maxX);
+            double nearestZ = Mth.clamp(this.getZ(), targetBox.minZ, targetBox.maxZ);
+            double dx = nearestX - this.getX();
+            double dz = nearestZ - this.getZ();
+            double distanceSqr = dx * dx + dz * dz;
+            if (distanceSqr < minimumSqr || distanceSqr > maximumSqr){
+                continue;
+            }
+
+            float angle = (float) Math.atan2(dz, dx);
+            float local = wrapToPi(angle - phase);
+            float modulo = (float) Math.IEEEremainder(local, step);
+            if (Math.abs(modulo) > halfAngle){
+                continue;
+            }
+
+            if (target.hurt(this.level().damageSources().indirectMagic(this, this.owner), this.damage)){
+                this.lastHitAge.put(id, this.tickCount);
             }
         }
     }

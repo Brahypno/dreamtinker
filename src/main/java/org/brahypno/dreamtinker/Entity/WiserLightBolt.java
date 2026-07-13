@@ -38,6 +38,8 @@ public class WiserLightBolt extends LightningBolt {
     private UUID ownerUUID;
     private int chainCount = 0;
     private boolean chainDone = false;
+    private int cachedChainArcCount = -1;
+    private List<ChainArc> cachedChainArcs = List.of();
 
 
     public WiserLightBolt(PlayMessages.SpawnEntity packet, Level world) {
@@ -278,9 +280,17 @@ public class WiserLightBolt extends LightningBolt {
 
     public List<ChainArc> getChainArcs() {
         CompoundTag tag = this.entityData.get(CHAIN_ARCS);
-        List<ChainArc> arcs = new ArrayList<>();
         int count = tag.getInt("Count");
+        if (count == this.cachedChainArcCount)
+            return this.cachedChainArcs;
 
+        if (count <= 0){
+            this.cachedChainArcCount = count;
+            this.cachedChainArcs = List.of();
+            return this.cachedChainArcs;
+        }
+
+        List<ChainArc> arcs = new ArrayList<>(count);
         for (int i = 0; i < count; i++) {
             CompoundTag arc = tag.getCompound("Arc" + i);
             Vec3 from = new Vec3(arc.getDouble("FX"), arc.getDouble("FY"), arc.getDouble("FZ"));
@@ -288,6 +298,8 @@ public class WiserLightBolt extends LightningBolt {
             arcs.add(new ChainArc(from, to));
         }
 
+        this.cachedChainArcCount = count;
+        this.cachedChainArcs = arcs;
         return arcs;
     }
 

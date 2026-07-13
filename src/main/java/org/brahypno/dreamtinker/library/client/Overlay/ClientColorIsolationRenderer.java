@@ -1,6 +1,5 @@
 package org.brahypno.dreamtinker.library.client.Overlay;
 
-
 import com.mojang.blaze3d.shaders.Uniform;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EffectInstance;
@@ -13,99 +12,157 @@ import org.brahypno.dreamtinker.Dreamtinker;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
 public final class ClientColorIsolationRenderer {
-    private static final ResourceLocation SHADER = Dreamtinker.getLocation("shaders/post/color_mask.json");
+    private static final ResourceLocation SHADER =
+            Dreamtinker.getLocation("shaders/post/color_mask.json");
+
     private static PostChain chain;
     private static int lastWidth = -1;
     private static int lastHeight = -1;
-    private static Field POST_CHAIN_PASSES;
-    private static Field POST_PASS_EFFECT;
+    private static Field postChainPasses;
+
+    /**
+     * 本次客户端连接中的永久熔断状态。失败后不再逐帧重试，避免日志刷屏和重复创建 PostChain。
+     * 新连接会由 ClientMaskEvents 显式调用 resetFailureState()，允许再次尝试一次。
+     */
+    private static boolean permanentlyDisabled;
+    private static boolean failureLogged;
 
     private ClientColorIsolationRenderer() {}
 
     public static void render(float partialTick) {
-        Minecraft mc = Minecraft.getInstance();
-
-        if (!ClientMask.enabled || (ClientMask.mode != ColorMaskMode.COLOR_ISOLATION && ClientMask.mode != ColorMaskMode.ATMOSPHERE))
+        if (!isPostEffectRequested()){
             return;
+        }
+        if (permanentlyDisabled){
+            ClientMask.clearNow();
+            return;
+        }
 
-        if (mc.level == null || mc.player == null || mc.player.isDeadOrDying()){
+        Minecraft minecraft = Minecraft.getInstance();
+        if (minecraft.level == null
+            || minecraft.player == null
+            || minecraft.player.isDeadOrDying()){
             ClientMask.clearNow();
             return;
         }
 
         float strength = ClientMask.alphaFactor();
-        if (strength <= 0F)
+        if (strength <= 0.0F){
             return;
+        }
 
-        ensureChain();
+        try {
+            ensureChain(minecraft);
+            resizeIfNeeded(minecraft);
+            updateUniforms(strength);
+            chain.process(partialTick);
+            minecraft.getMainRenderTarget().bindWrite(false);
+        }
+        catch (IOException | ReflectiveOperationException | RuntimeException exception) {
+            disablePermanently("Color isolation post-processing failed and was disabled for this connection", exception);
+        }
+    }
 
-        if (chain == null)
-            return;
-        resizeIfNeeded();
+    private static boolean isPostEffectRequested() {
+        return ClientMask.enabled
+               && (ClientMask.mode == ColorMaskMode.COLOR_ISOLATION
+                   || ClientMask.mode == ColorMaskMode.ATMOSPHERE);
+    }
 
-        updateUniforms(strength);
+    public static boolean isPermanentlyDisabled() {
+        return permanentlyDisabled;
+    }
 
-        chain.process(partialTick);
-        mc.getMainRenderTarget().bindWrite(false);
+    /**
+     * 仅应在新的客户端连接开始时调用。资源/映射错误仍存在时，只会再次失败并记录一次。
+     */
+    public static void resetFailureState() {
+        close();
+        permanentlyDisabled = false;
+        failureLogged = false;
+        postChainPasses = null;
     }
 
     public static void close() {
-        if (chain != null){
-            chain.close();
-            chain = null;
-        }
+        PostChain oldChain = chain;
+        chain = null;
         lastWidth = -1;
         lastHeight = -1;
-    }
 
-    private static void resizeIfNeeded() {
-        Minecraft mc = Minecraft.getInstance();
-        int width = mc.getWindow().getWidth();
-        int height = mc.getWindow().getHeight();
-
-        if (width != lastWidth || height != lastHeight){
-            lastWidth = width;
-            lastHeight = height;
-            if (chain != null)
-                chain.resize(width, height);
+        if (oldChain == null){
+            return;
+        }
+        try {
+            oldChain.close();
+        }
+        catch (RuntimeException exception) {
+            if (!permanentlyDisabled){
+                Dreamtinker.LOGGER.warn("Failed to close color isolation shader cleanly", exception);
+            }
         }
     }
 
     public static void resize(int width, int height) {
-        if (chain != null)
-            chain.resize(width, height);
-    }
-
-    private static void ensureChain() {
-        if (chain != null)
+        if (chain == null || permanentlyDisabled){
             return;
-
-        Minecraft mc = Minecraft.getInstance();
-
+        }
         try {
-            chain = new PostChain(mc.getTextureManager(), mc.getResourceManager(), mc.getMainRenderTarget(), SHADER);
-            lastWidth = mc.getWindow().getWidth();
-            lastHeight = mc.getWindow().getHeight();
-            chain.resize(mc.getWindow().getWidth(), mc.getWindow().getHeight());
+            chain.resize(width, height);
+            lastWidth = width;
+            lastHeight = height;
         }
-        catch (IOException e) {
-            Dreamtinker.LOGGER.error("Failed to load color isolation shader", e);
-            ClientMask.clearNow();
-            chain = null;
+        catch (RuntimeException exception) {
+            disablePermanently("Color isolation shader resize failed and was disabled for this connection", exception);
         }
     }
 
-    private static void updateUniforms(float strength) {
-        if (chain == null)
+    private static void ensureChain(Minecraft minecraft) throws IOException {
+        if (chain != null){
             return;
+        }
 
+        PostChain newChain = new PostChain(
+                minecraft.getTextureManager(),
+                minecraft.getResourceManager(),
+                minecraft.getMainRenderTarget(),
+                SHADER
+        );
+
+        int width = minecraft.getWindow().getWidth();
+        int height = minecraft.getWindow().getHeight();
+        try {
+            newChain.resize(width, height);
+        }
+        catch (RuntimeException exception) {
+            newChain.close();
+            throw exception;
+        }
+
+        chain = newChain;
+        lastWidth = width;
+        lastHeight = height;
+    }
+
+    private static void resizeIfNeeded(Minecraft minecraft) {
+        int width = minecraft.getWindow().getWidth();
+        int height = minecraft.getWindow().getHeight();
+        if (width == lastWidth && height == lastHeight){
+            return;
+        }
+
+        chain.resize(width, height);
+        lastWidth = width;
+        lastHeight = height;
+    }
+
+    private static void updateUniforms(float strength) throws ReflectiveOperationException {
         for (PostPass pass : getPasses(chain)) {
             EffectInstance effect = pass.getEffect();
-
             set(effect, "TargetColor", ClientMask.targetR(), ClientMask.targetG(), ClientMask.targetB());
             set(effect, "Range", ClientMask.range01());
             set(effect, "GrayStrength", ClientMask.grayStrength);
@@ -117,35 +174,32 @@ public final class ClientColorIsolationRenderer {
 
     private static void set(EffectInstance effect, String name, int value) {
         Uniform uniform = effect.getUniform(name);
-        if (uniform != null)
+        if (uniform != null){
             uniform.set(value);
+        }
     }
 
     private static void set(EffectInstance effect, String name, float value) {
         Uniform uniform = effect.getUniform(name);
-        if (uniform != null)
+        if (uniform != null){
             uniform.set(value);
+        }
     }
 
     private static void set(EffectInstance effect, String name, float x, float y, float z) {
         Uniform uniform = effect.getUniform(name);
-        if (uniform != null)
+        if (uniform != null){
             uniform.set(x, y, z);
+        }
     }
 
     @SuppressWarnings("unchecked")
-    private static List<PostPass> getPasses(PostChain chain) {
-        try {
-            if (POST_CHAIN_PASSES == null){
-                POST_CHAIN_PASSES = findField(PostChain.class, "passes", "f_110009_");
-                POST_CHAIN_PASSES.setAccessible(true);
-            }
-            return (List<PostPass>) POST_CHAIN_PASSES.get(chain);
+    private static List<PostPass> getPasses(PostChain postChain) throws ReflectiveOperationException {
+        if (postChainPasses == null){
+            postChainPasses = findField(PostChain.class, "passes", "f_110009_");
+            postChainPasses.setAccessible(true);
         }
-        catch (ReflectiveOperationException e) {
-            Dreamtinker.LOGGER.error("Failed to access PostChain passes", e);
-            return java.util.Collections.emptyList();
-        }
+        return (List<PostPass>) postChainPasses.get(postChain);
     }
 
     private static Field findField(Class<?> owner, String... names) throws NoSuchFieldException {
@@ -153,8 +207,24 @@ public final class ClientColorIsolationRenderer {
             try {
                 return owner.getDeclaredField(name);
             }
-            catch (NoSuchFieldException ignored) {}
+            catch (NoSuchFieldException ignored) {
+                // 尝试下一个开发/生产映射名称。
+            }
         }
-        throw new NoSuchFieldException("Cannot find field in " + owner.getName() + ": " + java.util.Arrays.toString(names));
+        throw new NoSuchFieldException(
+                "Cannot find field in " + owner.getName() + ": " + Arrays.toString(names)
+        );
+    }
+
+    private static void disablePermanently(String message, Exception exception) {
+        boolean firstFailure = !permanentlyDisabled;
+        permanentlyDisabled = true;
+        close();
+        ClientMask.clearNow();
+
+        if (firstFailure && !failureLogged){
+            failureLogged = true;
+            Dreamtinker.LOGGER.error(message, exception);
+        }
     }
 }

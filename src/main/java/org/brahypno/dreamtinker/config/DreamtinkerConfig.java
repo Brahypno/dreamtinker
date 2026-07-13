@@ -130,7 +130,7 @@ public class DreamtinkerConfig {
             builder.comment("Inaccuracy of Projectile sending from this Modifier").defineInRange("BurnInVainInAccuracy", 5.0, 0, 1000);
 
     static {builder.comment("\nMetallivorous Stibium Lupus: ");}
-    
+
     public static final ForgeConfigSpec.IntValue TheWolfWonderEffectNum =
             builder.comment("Number of effective that applied on target;")
                    .defineInRange("TheWolfWonderEffectNum", 6, 0, 100);
@@ -194,8 +194,6 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.IntValue rangedHit =
             builder.comment("Distance for ranged hit start positive").defineInRange("rangedHit", 10, 1, 64);
 
-    public static final ForgeConfigSpec.DoubleValue WitherShootDangerPercentage =
-            builder.comment("Current health percentage for wither shoot dangerous skull").defineInRange("WitherShootDangerPercentage", 0.5, 0, 1);
     public static final ForgeConfigSpec.DoubleValue StoneHeartProjReduce =
             builder.comment("Amount percentage reduced of stone heart").defineInRange("StoneHeartProjReduce", 0.2, 0, 100);
 

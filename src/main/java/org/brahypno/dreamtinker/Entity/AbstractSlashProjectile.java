@@ -331,28 +331,97 @@ public abstract class AbstractSlashProjectile extends Projectile implements Proj
 
     protected void processHitsAlongPath(Vec3 from, Vec3 to, HitResult blockHitResult) {
         this.ignoredEntities.clear();
-
-        for (EntityHitResult entityHitResult : this.findHitEntities(from, to)) {
-            if (this.isRemoved()){
+        if (!this.canPierceEntities()){
+            if (this.processNearestEntityHit(from, to)){
                 return;
             }
+        }else {
+            for (EntityHitResult entityHitResult : this.findHitEntities(from, to)) {
+                if (this.isRemoved()){
+                    return;
+                }
+                Entity hitEntity = entityHitResult.getEntity();
+                if (this.isPlayerHitDenied(hitEntity)){
+                    continue;
+                }
+                this.handleImpact(entityHitResult);
+                if (this.isRemoved()){
+                    return;
+                }
+            }
+        }
 
-            Entity hitEntity = entityHitResult.getEntity();
+        if (!this.isRemoved()
+            && blockHitResult != null
+            && blockHitResult.getType() != HitResult.Type.MISS){
+            this.handleImpact(blockHitResult);
+        }
+    }
 
+    /**
+     * 非穿透剑气不再创建完整命中列表和排序。只有 Forge 事件明确
+     * SKIP_ENTITY 时，才继续在同一候选集合中寻找下一个最近目标。
+     */
+    private boolean processNearestEntityHit(Vec3 from, Vec3 to) {
+        Vec3 movement = to.subtract(from);
+        if (movement.lengthSqr() < 1.0E-7D){
+            return false;
+        }
+
+        double halfWidth = Math.max(0.0D, this.getEntityHitHalfWidth());
+        double halfHeight = Math.max(0.0D, this.getEntityHitHalfHeight());
+        double padding = this.getEntitySearchPadding() + Math.max(halfWidth, halfHeight);
+        AABB searchBox = new AABB(from, to).inflate(padding);
+        List<Entity> candidates = this.level().getEntities(this, searchBox, this::canHitEntity);
+
+        while (!candidates.isEmpty()) {
+            EntityHitResult nearestHit = null;
+            double nearestDistanceSqr = Double.MAX_VALUE;
+            for (Entity entity : candidates) {
+                if (!this.canHitEntity(entity)){
+                    continue;
+                }
+
+                double pickRadius = entity.getPickRadius();
+                AABB hitBox = entity.getBoundingBox().inflate(
+                        halfWidth + pickRadius,
+                        halfHeight + pickRadius,
+                        halfWidth + pickRadius
+                );
+                Optional<Vec3> location = hitBox.clip(from, to);
+                Vec3 hitLocation;
+                if (location.isPresent()){
+                    hitLocation = location.get();
+                }else if (hitBox.contains(from)){
+                    hitLocation = from;
+                }else {
+                    continue;
+                }
+
+                double distanceSqr = hitLocation.distanceToSqr(from);
+                if (distanceSqr < nearestDistanceSqr){
+                    nearestDistanceSqr = distanceSqr;
+                    nearestHit = new EntityHitResult(entity, hitLocation);
+                }
+            }
+
+            if (nearestHit == null){
+                return false;
+            }
+
+            Entity hitEntity = nearestHit.getEntity();
             if (this.isPlayerHitDenied(hitEntity)){
+                this.ignoredEntities.add(hitEntity.getId());
                 continue;
             }
 
-            this.handleImpact(entityHitResult);
-
-            if (this.isRemoved() || !this.canPierceEntities()){
-                return;
+            int ignoredBefore = this.ignoredEntities.size();
+            this.handleImpact(nearestHit);
+            if (this.isRemoved() || this.ignoredEntities.size() == ignoredBefore){
+                return true;
             }
         }
-
-        if (!this.isRemoved() && blockHitResult != null && blockHitResult.getType() != HitResult.Type.MISS){
-            this.handleImpact(blockHitResult);
-        }
+        return false;
     }
 
     protected boolean isPlayerHitDenied(Entity target) {

@@ -10,7 +10,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
-import org.joml.Vector3f;
 
 @OnlyIn(Dist.CLIENT)
 public class ColoredSweepParticle extends TextureSheetParticle {
@@ -18,7 +17,9 @@ public class ColoredSweepParticle extends TextureSheetParticle {
     private final float scaleX;
     private final float scaleY;
 
-    protected ColoredSweepParticle(ClientLevel level, double x, double y, double z, SpriteSet sprites, ColoredSweepOptions options) {
+    protected ColoredSweepParticle(
+            ClientLevel level, double x, double y, double z,
+            SpriteSet sprites, ColoredSweepOptions options) {
         super(level, x, y, z);
         this.sprites = sprites;
         this.lifetime = 4;
@@ -43,45 +44,54 @@ public class ColoredSweepParticle extends TextureSheetParticle {
         this.xo = this.x;
         this.yo = this.y;
         this.zo = this.z;
-
         if (this.age++ >= this.lifetime){
             this.remove();
             return;
         }
-
         this.setSpriteFromAge(this.sprites);
     }
 
     @Override
     public void render(VertexConsumer consumer, Camera camera, float partialTick) {
         Vec3 cameraPos = camera.getPosition();
+        float centerX = (float) (Mth.lerp(partialTick, this.xo, this.x) - cameraPos.x());
+        float centerY = (float) (Mth.lerp(partialTick, this.yo, this.y) - cameraPos.y());
+        float centerZ = (float) (Mth.lerp(partialTick, this.zo, this.z) - cameraPos.z());
 
-        float x = (float) (Mth.lerp(partialTick, this.xo, this.x) - cameraPos.x());
-        float y = (float) (Mth.lerp(partialTick, this.yo, this.y) - cameraPos.y());
-        float z = (float) (Mth.lerp(partialTick, this.zo, this.z) - cameraPos.z());
+        Quaternionf rotation = camera.rotation();
+        float qx = rotation.x();
+        float qy = rotation.y();
+        float qz = rotation.z();
+        float qw = rotation.w();
 
-        Quaternionf rotation = new Quaternionf(camera.rotation());
+        float rightX = 1.0F - 2.0F * (qy * qy + qz * qz);
+        float rightY = 2.0F * (qx * qy + qz * qw);
+        float rightZ = 2.0F * (qx * qz - qy * qw);
+        float upX = 2.0F * (qx * qy - qz * qw);
+        float upY = 1.0F - 2.0F * (qx * qx + qz * qz);
+        float upZ = 2.0F * (qy * qz + qx * qw);
 
         float renderRoll = Mth.lerp(partialTick, this.oRoll, this.roll);
-        if (renderRoll != 0.0F){
-            rotation.rotateZ(renderRoll);
-        }
+        float cos = Mth.cos(renderRoll);
+        float sin = Mth.sin(renderRoll);
+
+        // 等价于 camera.rotation() * rotateZ(renderRoll)，但不创建 Quaternionf/Vector3f。
+        float axisXX = rightX * cos + upX * sin;
+        float axisXY = rightY * cos + upY * sin;
+        float axisXZ = rightZ * cos + upZ * sin;
+        float axisYX = -rightX * sin + upX * cos;
+        float axisYY = -rightY * sin + upY * cos;
+        float axisYZ = -rightZ * sin + upZ * cos;
 
         float size = this.getQuadSize(partialTick);
         float halfX = size * this.scaleX;
         float halfY = size * this.scaleY;
-
-        Vector3f[] corners = new Vector3f[]{
-                new Vector3f(-halfX, -halfY, 0.0F),
-                new Vector3f(-halfX, halfY, 0.0F),
-                new Vector3f(halfX, halfY, 0.0F),
-                new Vector3f(halfX, -halfY, 0.0F)
-        };
-
-        for (Vector3f corner : corners) {
-            corner.rotate(rotation);
-            corner.add(x, y, z);
-        }
+        float xX = axisXX * halfX;
+        float xY = axisXY * halfX;
+        float xZ = axisXZ * halfX;
+        float yX = axisYX * halfY;
+        float yY = axisYY * halfY;
+        float yZ = axisYZ * halfY;
 
         float u0 = this.getU0();
         float u1 = this.getU1();
@@ -89,10 +99,18 @@ public class ColoredSweepParticle extends TextureSheetParticle {
         float v1 = this.getV1();
         int light = this.getLightColor(partialTick);
 
-        consumer.vertex(corners[0].x(), corners[0].y(), corners[0].z()).uv(u1, v1).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(light).endVertex();
-        consumer.vertex(corners[1].x(), corners[1].y(), corners[1].z()).uv(u1, v0).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(light).endVertex();
-        consumer.vertex(corners[2].x(), corners[2].y(), corners[2].z()).uv(u0, v0).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(light).endVertex();
-        consumer.vertex(corners[3].x(), corners[3].y(), corners[3].z()).uv(u0, v1).color(this.rCol, this.gCol, this.bCol, this.alpha).uv2(light).endVertex();
+        vertex(consumer, centerX - xX - yX, centerY - xY - yY, centerZ - xZ - yZ, u1, v1, light);
+        vertex(consumer, centerX - xX + yX, centerY - xY + yY, centerZ - xZ + yZ, u1, v0, light);
+        vertex(consumer, centerX + xX + yX, centerY + xY + yY, centerZ + xZ + yZ, u0, v0, light);
+        vertex(consumer, centerX + xX - yX, centerY + xY - yY, centerZ + xZ - yZ, u0, v1, light);
+    }
+
+    private void vertex(VertexConsumer consumer, float x, float y, float z, float u, float v, int light) {
+        consumer.vertex(x, y, z)
+                .uv(u, v)
+                .color(this.rCol, this.gCol, this.bCol, this.alpha)
+                .uv2(light)
+                .endVertex();
     }
 
     @Override
@@ -109,7 +127,10 @@ public class ColoredSweepParticle extends TextureSheetParticle {
 
         @Nullable
         @Override
-        public Particle createParticle(ColoredSweepOptions options, ClientLevel level, double x, double y, double z, double xd, double yd, double zd) {
+        public Particle createParticle(
+                ColoredSweepOptions options, ClientLevel level,
+                double x, double y, double z,
+                double xd, double yd, double zd) {
             return new ColoredSweepParticle(level, x, y, z, this.sprites, options);
         }
     }

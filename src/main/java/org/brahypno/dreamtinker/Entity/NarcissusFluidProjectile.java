@@ -50,7 +50,6 @@ import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
-import java.util.Comparator;
 import java.util.List;
 
 public class NarcissusFluidProjectile extends Projectile implements ProjectileWithPower {
@@ -71,6 +70,12 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
     private float power;
     private int life = 30 * 20;
     private boolean crit;
+    private static final int HOMING_SCAN_INTERVAL = 4;
+    private static final double HOMING_RANGE = 12.0D;
+    private static final double HOMING_KEEP_RANGE_SQR = 14.0D * 14.0D;
+
+    private int homingTargetId = -1;
+    private int nextHomingScanTick;
 
     public final DTClientTrail shortTrail = new DTClientTrail(8, 0.0004D);
     public final DTClientTrail trail = new DTClientTrail(24, 0.0004D);
@@ -116,12 +121,11 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
 
     @Override
     protected boolean canHitEntity(@NotNull Entity entity) {
-        return (
-                       this.getChaseLiving() < 1
-                       || entity instanceof EndCrystal
-                       || entity instanceof LivingEntity living
-                          && living.isAlive()
-                          && !(entity instanceof ArmorStand)
+        return (this.getChaseLiving() < 1
+                || entity instanceof EndCrystal
+                || entity instanceof LivingEntity living
+                   && living.isAlive()
+                   && !(entity instanceof ArmorStand)
                ) && (
                        super.canHitEntity(entity)
                        || !entity.isSpectator()
@@ -133,80 +137,140 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
         return this.initialFluid;
     }
 
-    private record ResultTOI(EntityHitResult hit, double t) {}
+    /**
+     * ProjectileUtil 本身就会返回整条线段上距离起点最近的实体交点。
+     * 不需要再拆成 6 段并做最多 12 次二分，因此每 Tick 最多只做一次实体碰撞查询。
+     */
+    private EntityHitResult findFirstEntityHit(Vec3 from, Vec3 velocity) {
+        Vec3 destination = from.add(velocity);
+        AABB sweepBox = this.getBoundingBox().expandTowards(velocity).inflate(1.0D);
+        return ProjectileUtil.getEntityHitResult(
+                this.level(), this, from, destination, sweepBox, this::canHitEntity
+        );
+    }
 
-    private ResultTOI sweepToFirstEntityHit(Vec3 from, Vec3 velocity) {
-        final int samples = 6;
-        final double inflate = 1.0;
-        final double epsilon = 1.0E-4;
-        final int maxBisect = 12;
-
-        double lowerTime = 0.0;
-
-        for (int i = 1; i <= samples; i++) {
-            double upperTime = (double) i / samples;
-            Vec3 segmentStart = from.add(velocity.scale(lowerTime));
-            Vec3 segmentEnd = from.add(velocity.scale(upperTime));
-            Vec3 segment = segmentEnd.subtract(segmentStart);
-
-            AABB boxAtSegmentStart = this.getBoundingBox().move(
-                    segmentStart.x - this.getX(),
-                    segmentStart.y - this.getY(),
-                    segmentStart.z - this.getZ()
-            );
-            AABB sweepBox = boxAtSegmentStart.expandTowards(segment).inflate(inflate);
-
-            EntityHitResult hit = ProjectileUtil.getEntityHitResult(
-                    this.level(),
-                    this,
-                    segmentStart,
-                    segmentEnd,
-                    sweepBox,
-                    this::canHitEntity
-            );
-
-            if (hit != null && hit.getType() != HitResult.Type.MISS){
-                double low = lowerTime;
-                double high = upperTime;
-                EntityHitResult best = hit;
-
-                for (int j = 0; j < maxBisect && high - low > epsilon; j++) {
-                    double middleTime = (low + high) * 0.5;
-                    Vec3 start = from.add(velocity.scale(low));
-                    Vec3 end = from.add(velocity.scale(middleTime));
-                    Vec3 delta = end.subtract(start);
-
-                    AABB boxAtStart = this.getBoundingBox().move(
-                            start.x - this.getX(),
-                            start.y - this.getY(),
-                            start.z - this.getZ()
-                    );
-                    AABB bisectSweepBox = boxAtStart.expandTowards(delta).inflate(inflate);
-
-                    EntityHitResult test = ProjectileUtil.getEntityHitResult(
-                            this.level(),
-                            this,
-                            start,
-                            end,
-                            bisectSweepBox,
-                            this::canHitEntity
-                    );
-
-                    if (test != null && test.getType() != HitResult.Type.MISS){
-                        best = test;
-                        high = middleTime;
-                    }else {
-                        low = middleTime;
-                    }
-                }
-
-                return new ResultTOI(best, high);
-            }
-
-            lowerTime = upperTime;
+    private Vec3 applyHoming(Vec3 velocity) {
+        if (this.getChaseLiving() <= 0 || this.onGround()){
+            return velocity;
         }
 
-        return new ResultTOI(null, 1.0);
+        Entity owner = this.getOwner();
+        Entity target = this.getCachedHomingTarget(owner);
+        if (target == null && this.tickCount >= this.nextHomingScanTick){
+            target = this.findHomingTarget(owner);
+        }
+        if (target == null){
+            return velocity;
+        }
+
+        Vec3 aim = target.position()
+                         .add(0.0D, target.getBbHeight() * 0.5D, 0.0D)
+                         .subtract(this.position());
+        if (aim.lengthSqr() <= 1.0E-7D){
+            return velocity;
+        }
+        return velocity.add(aim.normalize()).scale(0.75D * this.getChaseLiving());
+    }
+
+    private Entity getCachedHomingTarget(Entity owner) {
+        if (this.homingTargetId < 0){
+            return null;
+        }
+
+        Entity target = this.level().getEntity(this.homingTargetId);
+        if (!this.isValidHomingTarget(target, owner)
+            || target.distanceToSqr(this) > HOMING_KEEP_RANGE_SQR){
+            this.homingTargetId = -1;
+            this.nextHomingScanTick = this.tickCount;
+            return null;
+        }
+        return target;
+    }
+
+    private Entity findHomingTarget(Entity owner) {
+        this.nextHomingScanTick = this.tickCount + HOMING_SCAN_INTERVAL;
+        List<Entity> candidates = this.level().getEntitiesOfClass(
+                Entity.class,
+                this.getBoundingBox().inflate(HOMING_RANGE),
+                target -> this.isValidHomingTarget(target, owner)
+        );
+
+        Entity nearest = null;
+        double nearestDistanceSqr = Double.MAX_VALUE;
+        for (Entity candidate : candidates) {
+            double distanceSqr = candidate.distanceToSqr(this);
+            if (distanceSqr < nearestDistanceSqr){
+                nearest = candidate;
+                nearestDistanceSqr = distanceSqr;
+            }
+        }
+
+        this.homingTargetId = nearest == null ? -1 : nearest.getId();
+        return nearest;
+    }
+
+    private boolean isValidHomingTarget(Entity target, Entity owner) {
+        if (target instanceof EndCrystal){
+            return true;
+        }
+        return target instanceof LivingEntity living
+               && living.isAlive()
+               && target != owner
+               && (owner == null || !target.isAlliedTo(owner))
+               && !(target instanceof ArmorStand);
+    }
+
+    private Vec3 applyDragAndGravity(Vec3 velocity) {
+        Vec3 result = velocity.scale(0.99F);
+        if (!this.isNoGravity()){
+            FluidStack fluid = this.getFluid();
+            double gravity = !fluid.isEmpty() && fluid.getFluid().getFluidType().isLighterThanAir()
+                             ? 0.06D
+                             : -0.06D;
+            result = result.add(0.0D, gravity, 0.0D);
+        }
+        return result;
+    }
+
+    /**
+     * 客户端只进行无碰撞的视觉预测，让运动和拖尾保持平滑。
+     * 索敌、实体扫描、Forge impact 事件和伤害逻辑全部只在服务端执行。
+     */
+    private void tickClientVisuals() {
+        Vec3 velocity = this.getDeltaMovement();
+        Vec3 destination = this.position().add(velocity);
+        this.setPos(destination.x, destination.y, destination.z);
+
+        Vec3 newVelocity = this.applyDragAndGravity(velocity);
+        this.setDeltaMovement(newVelocity);
+
+        Vec3 trailPosition = this.getTrailRenderPosition();
+        this.shortTrail.tick(trailPosition, newVelocity, 5, 0.055D, 0.10D, 0.72F);
+        this.trail.tick(trailPosition, newVelocity, 12, 0.095D, 0.15D, 0.96F);
+    }
+
+    private void tickServerPhysics() {
+        Vec3 velocity = this.applyHoming(this.getDeltaMovement());
+        Vec3 from = this.position();
+        EntityHitResult hit = this.findFirstEntityHit(from, velocity);
+        boolean impacted = hit != null && hit.getType() != HitResult.Type.MISS;
+
+        if (impacted){
+            Vec3 hitPosition = hit.getLocation();
+            this.setPos(hitPosition.x, hitPosition.y, hitPosition.z);
+            if (!ForgeEventFactory.onProjectileImpact(this, hit)){
+                this.onHit(hit);
+            }
+        }else if (!this.isRemoved()){
+            Vec3 destination = from.add(velocity);
+            this.setPos(destination.x, destination.y, destination.z);
+        }
+
+        if (!this.isRemoved()){
+            Vec3 nextVelocity = impacted ? this.getDeltaMovement() : velocity;
+            this.setDeltaMovement(this.applyDragAndGravity(nextVelocity));
+            --this.life;
+        }
     }
 
     private DamageSource dmg(Entity target, Entity owner) {
@@ -233,99 +297,20 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
     @Override
     public void tick() {
         super.tick();
-
         if (this.isRemoved()){
             return;
         }
 
         this.updateRotation();
-
-        Vec3 velocity = this.getDeltaMovement();
-
-        if (this.getChaseLiving() > 0 && !this.onGround()){
-            List<Entity> candidates = this.level().getEntitiesOfClass(
-                    Entity.class,
-                    this.getBoundingBox().inflate(12),
-                    target -> target instanceof EndCrystal
-                              || target instanceof LivingEntity living
-                                 && living.isAlive()
-                                 && target != this.getOwner()
-                                 && !(this.getOwner() != null && target.isAlliedTo(this.getOwner()))
-                                 && !(target instanceof ArmorStand)
-            );
-
-            if (!candidates.isEmpty()){
-                Entity nearest = candidates.stream()
-                                           .min(Comparator.comparingDouble(target -> target.distanceToSqr(this)))
-                                           .orElse(null);
-
-                if (nearest != null){
-                    Vec3 aim = nearest.position()
-                                      .add(0, nearest.getBbHeight() * 0.5, 0)
-                                      .subtract(this.position());
-
-                    if (aim.lengthSqr() > 1.0E-7){
-                        velocity = this.getDeltaMovement()
-                                       .add(aim.normalize())
-                                       .scale(0.75 * this.getChaseLiving());
-                    }
-                }
-            }
+        if (this.level().isClientSide){
+            this.tickClientVisuals();
+            return;
         }
 
-        Vec3 from = this.position();
-        ResultTOI timeOfImpact = this.sweepToFirstEntityHit(from, velocity);
-        boolean impacted = false;
-
-        if (timeOfImpact.hit() != null && timeOfImpact.hit().getType() != HitResult.Type.MISS){
-            double time = Mth.clamp(timeOfImpact.t(), 0.0, 1.0);
-            Vec3 hitPosition = from.add(velocity.scale(time));
-            this.setPos(hitPosition.x, hitPosition.y, hitPosition.z);
-
-            if (!ForgeEventFactory.onProjectileImpact(this, timeOfImpact.hit())){
-                this.onHit(timeOfImpact.hit());
-            }
-
-            impacted = true;
-        }
-
-        if (!this.isRemoved() && !impacted){
-            Vec3 destination = from.add(velocity);
-            this.setPos(destination.x, destination.y, destination.z);
-        }
-
-        if (!this.isRemoved()){
-            Vec3 newVelocity = this.getDeltaMovement();
-
-            if (!impacted){
-                newVelocity = velocity;
-            }
-
-            newVelocity = newVelocity.scale(0.99F);
-
-            if (!this.isNoGravity()){
-                FluidStack fluid = this.getFluid();
-                double gravity = !fluid.isEmpty() && fluid.getFluid().getFluidType().isLighterThanAir()
-                                 ? 0.06
-                                 : -0.06;
-                newVelocity = newVelocity.add(0.0, gravity, 0.0);
-            }
-
-            this.setDeltaMovement(newVelocity);
-            --this.life;
-
-            if (this.level().isClientSide){
-                Vec3 position = this.getTrailRenderPosition();
-                this.shortTrail.tick(position, newVelocity, 5, 0.055D, 0.10D, 0.72F);
-                this.trail.tick(position, newVelocity, 12, 0.095D, 0.15D, 0.96F);
-            }
-        }
-
-        if (
-                this.getY() > this.level().getMaxBuildHeight() + 64
-                || this.getY() < this.level().getMinBuildHeight() - 64
-                || this.life <= 0
-        ){
+        this.tickServerPhysics();
+        if (this.getY() > this.level().getMaxBuildHeight() + 64
+            || this.getY() < this.level().getMinBuildHeight() - 64
+            || this.life <= 0){
             this.discard();
         }
     }

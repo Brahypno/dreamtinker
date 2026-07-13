@@ -5,16 +5,19 @@ import net.minecraft.client.particle.*;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
 public class VibeBarParticle extends TextureSheetParticle {
+    private static final double TWO_PI = Math.PI * 2.0D;
+
     private final int targetId;
-    private final Vec3 barDir;     // 水平单位向量
-    private final Vec3 attackDir;  // 与 barDir 垂直的水平单位向量（≈ attacker->target）
+    private final double barDirX;
+    private final double barDirZ;
+    private final double attackDirX;
+    private final double attackDirZ;
     private final float along;
     private final float amplitude;
     private final float frequencyHz;
@@ -26,39 +29,43 @@ public class VibeBarParticle extends TextureSheetParticle {
             ClientLevel level, SpriteSet sprites, VibeBarParticleOptions opt,
             double x, double y, double z) {
         super(level, x, y, z, 0, 0, 0);
-
         this.targetId = opt.targetId();
 
-        Vec3 d = new Vec3(opt.barDirX(), 0, opt.barDirZ());
-        if (d.lengthSqr() < 1.0e-6)
-            d = new Vec3(1, 0, 0);
-        this.barDir = d.normalize();
-        this.attackDir = new Vec3(barDir.z, 0, -barDir.x).normalize();
+        double directionX = opt.barDirX();
+        double directionZ = opt.barDirZ();
+        double lengthSqr = directionX * directionX + directionZ * directionZ;
+        if (lengthSqr < 1.0E-6D){
+            directionX = 1.0D;
+            directionZ = 0.0D;
+        }else {
+            double inverseLength = 1.0D / Math.sqrt(lengthSqr);
+            directionX *= inverseLength;
+            directionZ *= inverseLength;
+        }
 
+        this.barDirX = directionX;
+        this.barDirZ = directionZ;
+        this.attackDirX = directionZ;
+        this.attackDirZ = -directionX;
         this.along = opt.along();
         this.amplitude = opt.amplitude();
         this.frequencyHz = opt.frequencyHz();
         this.yFrac = opt.yFrac();
         this.phase = opt.phase();
-
         this.lifetime = opt.lifetimeTicks();
 
-        // 颜色（ARGB）
         int argb = opt.argb();
-        float a = ((argb >>> 24) & 255) / 255f;
-        float r = ((argb >>> 16) & 255) / 255f;
-        float g = ((argb >>> 8) & 255) / 255f;
-        float b = (argb & 255) / 255f;
-
+        float a = ((argb >>> 24) & 255) / 255.0F;
+        float r = ((argb >>> 16) & 255) / 255.0F;
+        float g = ((argb >>> 8) & 255) / 255.0F;
+        float b = (argb & 255) / 255.0F;
         this.setColor(r, g, b);
         this.alpha = a;
         this.baseAlpha = a;
 
-        // 粒子视觉参数：大小、重力、速度（我们自己控制位置，所以速度为 0）
-        this.quadSize = 1.30f;     // 0.06~0.16 都可调
-        this.gravity = 0.0f;
+        this.quadSize = 1.30F;
+        this.gravity = 0.0F;
         this.hasPhysics = false;
-
         this.pickSprite(sprites);
     }
 
@@ -69,37 +76,32 @@ public class VibeBarParticle extends TextureSheetParticle {
             return;
         }
 
-        Entity e = this.level.getEntity(this.targetId);
-        if (!(e instanceof LivingEntity target) || !target.isAlive()){
+        Entity entity = this.level.getEntity(this.targetId);
+        if (!(entity instanceof LivingEntity target) || !target.isAlive()){
             if (this.age < 2)
-                return; // 容错等一下
+                return;
             this.remove();
             return;
         }
 
-        double y = target.getY() + target.getBbHeight() * this.yFrac;
-        Vec3 base = new Vec3(target.getX(), y, target.getZ());
+        long gameTime = this.level.getGameTime();
+        double timeSec = gameTime * 0.05D;
+        double wave = Math.sin(timeSec * this.frequencyHz * TWO_PI + this.phase);
+        double hop = ((hashNoise(target.getId(), gameTime) - 0.5D) * 2.0D) * 0.35D;
+        double jitter = (wave * 0.75D + hop * 0.25D) * this.amplitude;
 
-        double timeSec = this.level.getGameTime() / 20.0;
+        double nextX = target.getX() + this.barDirX * this.along + this.attackDirX * jitter;
+        double nextY = target.getY() + target.getBbHeight() * this.yFrac;
+        double nextZ = target.getZ() + this.barDirZ * this.along + this.attackDirZ * jitter;
 
-        double s = Math.sin(timeSec * this.frequencyHz * (Math.PI * 2.0) + this.phase);
-        double hop = ((hashNoise(target.getId(), this.level.getGameTime()) - 0.5) * 2.0) * 0.35;
-        double jitter = (s * 0.75 + hop * 0.25) * this.amplitude;
-
-        Vec3 p = base.add(this.barDir.scale(this.along))
-                     .add(this.attackDir.scale(jitter));
-
-        // 维护上一帧坐标，保证插值正常
         this.xo = this.x;
         this.yo = this.y;
         this.zo = this.z;
+        this.setPos(nextX, nextY, nextZ);
 
-        this.setPos(p.x, p.y, p.z);
-
-        float flicker = 0.75f + 0.25f * (float) Math.sin(timeSec * 20.0 + this.phase);
-        this.alpha = Mth.clamp(this.baseAlpha * flicker, 0f, 1f);
+        float flicker = 0.75F + 0.25F * (float) Math.sin(timeSec * 20.0D + this.phase);
+        this.alpha = Mth.clamp(this.baseAlpha * flicker, 0.0F, 1.0F);
     }
-
 
     @Override
     public @NotNull ParticleRenderType getRenderType() {
@@ -108,17 +110,16 @@ public class VibeBarParticle extends TextureSheetParticle {
 
     @Override
     public int getLightColor(float partialTick) {
-        // 可选：fullbright，更像电
         return 0xF000F0;
     }
 
-    private static double hashNoise(int id, long t) {
-        long x = (id * 1103515245L + 12345L) ^ (t * 1013904223L);
-        x ^= (x >>> 16);
+    private static double hashNoise(int id, long time) {
+        long x = (id * 1103515245L + 12345L) ^ (time * 1013904223L);
+        x ^= x >>> 16;
         x *= 0x7feb352dL;
-        x ^= (x >>> 15);
+        x ^= x >>> 15;
         x *= 0x846ca68bL;
-        x ^= (x >>> 16);
+        x ^= x >>> 16;
         return (x & 0xFFFF) / (double) 0xFFFF;
     }
 
@@ -126,14 +127,16 @@ public class VibeBarParticle extends TextureSheetParticle {
     public static class Provider implements ParticleProvider<VibeBarParticleOptions> {
         private final SpriteSet sprites;
 
-        public Provider(SpriteSet sprites) {this.sprites = sprites;}
+        public Provider(SpriteSet sprites) {
+            this.sprites = sprites;
+        }
 
         @Override
         public Particle createParticle(
                 VibeBarParticleOptions opt, ClientLevel level,
                 double x, double y, double z,
                 double xd, double yd, double zd) {
-            return new VibeBarParticle(level, sprites, opt, x, y, z);
+            return new VibeBarParticle(level, this.sprites, opt, x, y, z);
         }
     }
 }

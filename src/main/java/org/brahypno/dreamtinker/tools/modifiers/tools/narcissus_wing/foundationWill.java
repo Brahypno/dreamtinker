@@ -153,6 +153,8 @@ public class foundationWill extends NoLevelsModifier implements ModifierTraitHoo
         ModDataNBT dataNBT = tool.getPersistentData();
         if (1 == dataNBT.getInt(TAG_MOD))
             foundationWillWrapper(tool, player, level, equipmentSlot);
+        else
+            addGlow(player, level, equipmentSlot);
     }
 
     private void addGlow(Player player, Level level, EquipmentSlot equipmentSlot) {
