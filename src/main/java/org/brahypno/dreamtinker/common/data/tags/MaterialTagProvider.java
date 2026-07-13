@@ -3,6 +3,7 @@ package org.brahypno.dreamtinker.common.data.tags;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.brahypno.dreamtinker.Dreamtinker;
+import org.brahypno.esotericismtinker.common.EsotericismTinkerTagKeys;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.data.tinkering.AbstractMaterialTagProvider;
@@ -69,6 +70,24 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
             .addOptional(FireEssence);
         this.tag(ROTATING_WHEEL)
             .add(SpiralSpin);
+
+        this.tag(EsotericismTinkerTagKeys.Materials.ESOTERICISM_MATERIALS)
+            .add(echo_alloy, moonlight_ice, cryo_serpent_shift, valentinite, nigrescence_antimony, nigrescence_string,
+                 metallivorous_stibium_lupus, star_regulus, crying_obsidian, larimar, amber, half_rotten_homunculus,
+                 half_rotten_string, desire_gem, despair_gem, shadowskin, soul_steel, whimsyGold, OathGuardPaleSteel,
+                 ForlornOathSteel, rainbow_honey_crystal, black_sapphire, scolecite, PermanenceScale, PermanenceWing,
+                 shiningFlint, orichalcum, cold_iron, TransmutationGold, SpikyShard, FifthStone, SpiralSpin,
+                 RuinWheelSteel, deliverance)
+            .addOptional(shadowSilver, AtonementSilver, ArcaneGold, Utherium, forgotten_metal, Cloggrum, Froststeel,
+                         Regalium, GooeySlimeSkin, Iesnium, etherium, nefarious, soul_etherium, spirit_fabric,
+                         hallowed_gold, mnemonic, soul_stained_steel, malignant_lead, malignant_pewter,
+                         malignant_gluttony, soul_rock, spirits, blazing_quartz, grim_talc, astral_weave, null_slate,
+                         TatteredCloth, WickedWeave, PaladinBone, PaladinBoneTool, SoulGem, CrimsonGem, ShadowGem,
+                         DarkMetal, MonsterSkin, LifeStealerBone, KrampusHorn, NightMareClaw, InfernalEmber, HoundFang,
+                         AbjurationEssence, ConjurationEssence, AirEssence, EarthEssence, FireEssence,
+                         ManipulationEssence, WaterEssence, WildenHorn, WildenWing, WildenSpike,
+                         legendary_monsters_enderitium, dragon_scale, faa_dark_nether_star, blm_sentient, blm_hellforge,
+                         jade);
 
     }
 

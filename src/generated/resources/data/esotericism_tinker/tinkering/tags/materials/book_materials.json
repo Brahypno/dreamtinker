@@ -1,0 +1,262 @@
+{
+  "values": [
+    "dreamtinker:echo_alloy",
+    "dreamtinker:moonlight_ice",
+    "dreamtinker:cryo_serpent_shift",
+    "dreamtinker:valentinite",
+    "dreamtinker:nigrescence_antimony",
+    "dreamtinker:nigrescence_string",
+    "dreamtinker:metallivorous_stibium_lupus",
+    "dreamtinker:star_regulus",
+    "dreamtinker:crying_obsidian",
+    "dreamtinker:larimar",
+    "dreamtinker:amber",
+    "dreamtinker:half_rotten_homunculus",
+    "dreamtinker:half_rotten_string",
+    "dreamtinker:desire_gem",
+    "dreamtinker:despair_gem",
+    "dreamtinker:shadowskin",
+    "dreamtinker:soul_steel",
+    "dreamtinker:whimsy_gold",
+    "dreamtinker:oath_guard_pale_steel",
+    "dreamtinker:forlorn_oath_steel",
+    "dreamtinker:rainbow_honey_crystal",
+    "dreamtinker:black_sapphire",
+    "dreamtinker:scolecite",
+    "dreamtinker:permanence_scale",
+    "dreamtinker:permanence_wing",
+    "dreamtinker:shining_flint",
+    "dreamtinker:orichalcum",
+    "dreamtinker:cold_iron",
+    "dreamtinker:transmutation_gold",
+    "dreamtinker:spiky_shard",
+    "dreamtinker:fifth_stone",
+    "dreamtinker:spiral_spin",
+    "dreamtinker:ruin_wheel_steel",
+    "dreamtinker:deliverance",
+    {
+      "id": "dreamtinker:shadow_silver",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:atonement_silver",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:arcane_gold",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:utherium",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:forgotten_metal",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:cloggrum",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:froststeel",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:regalium",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:undergarden_gooey_slime",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:iesnium",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:etherium",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:nefarious",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:soul_etherium",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_spirit_fabric",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_hallowed_gold",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_mnemonic",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_soul_stained_steel",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_malignant_lead",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_malignant_pewter",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_malignant_gluttony",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_soul_rock",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_spirits",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_blazing_quartz",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_grim_talc",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_astral_weave",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:malum_null_slate",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:eidolon_tattered_cloth",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:eidolon_wicked_wave",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:eidolon_paladin_bone",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:eidolon_paladin_bone_tool",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:eidolon_soul_gem",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:eidolon_crimson_gem",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:eidolon_shadow_gem",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:bic_dark_metal",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:bic_monster_skin",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:bic_life_steal_bone",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:bic_krampus_horn",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:bic_nightmare_claw",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:bic_infernal_ember",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:bic_hound_fang",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:nova_abjuration_essence",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:nova_conjuration_essence",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:nova_air_essence",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:nova_earth_essence",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:nova_fire_essence",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:nova_manipulation_essence",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:nova_water_essence",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:nova_wilden_horn",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:nova_wilden_wing",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:nova_wilden_spike",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:legendary_monsters_enderitium",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:dragon_scale",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:faa_dark_nether_star",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:blm_sentient",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:blm_hellforge",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:jade",
+      "required": false
+    }
+  ]
+}
