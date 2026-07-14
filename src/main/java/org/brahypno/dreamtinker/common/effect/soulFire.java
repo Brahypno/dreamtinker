@@ -101,6 +101,7 @@ public class soulFire extends MobEffect {
             DamageProbe.damageHandler(entity, DreamtinkerDamageTypes.source(world.registryAccess(), DreamtinkerDamageTypes.arcane_damage, null,
                                                                             entity.getLastAttacker()),
                                       (float) damage * (amplifier + 1));
+            entity.setLastHurtByMob(attacker);
         }
 
         MobEffectInstance ent = entity.getEffect(this);
