@@ -190,7 +190,7 @@ public class ArrowHarvest extends Modifier implements ProjectileHitModifierHook 
 
         // 例如根据爆炸强度给不同等级时运
         int fortune = explosionPower >= 6.0F ? 3 : explosionPower >= 4.0F ? 2 : 1;
-        ItemStack lootTool = makeFortuneTool((int) (explosionPower + modifier.getLevel() - 1));
+        ItemStack lootTool = makeFortuneTool(fortune);
 
         explodeWithFortuneDrops(
                 level,

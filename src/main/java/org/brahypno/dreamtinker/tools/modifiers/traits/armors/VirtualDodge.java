@@ -4,31 +4,36 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.armor.DamageBlockModifierHook;
-import slimeknights.tconstruct.library.modifiers.hook.build.ToolStatsModifierHook;
+import slimeknights.tconstruct.library.modifiers.hook.behavior.AttributesModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.technical.SlotInChargeModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
-import slimeknights.tconstruct.library.tools.nbt.IToolContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
-import slimeknights.tconstruct.library.tools.stat.ModifierStatsBuilder;
-import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
+import java.util.function.BiConsumer;
 
 import static org.brahypno.dreamtinker.config.DreamtinkerCachedConfig.VirtualDodge;
 
-public class VirtualDodge extends Modifier implements ToolStatsModifierHook, DamageBlockModifierHook {
+public class VirtualDodge extends Modifier implements DamageBlockModifierHook, AttributesModifierHook {
     private static final TinkerDataCapability.TinkerDataKey<SlotInChargeModule.SlotInCharge> SLOT_KEY =
             TinkerDataCapability.TinkerDataKey.of(Dreamtinker.getLocation("virtual_dodge"));
 
@@ -44,7 +49,7 @@ public class VirtualDodge extends Modifier implements ToolStatsModifierHook, Dam
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
         hookBuilder.addModule(new SlotInChargeModule(SLOT_KEY));
-        hookBuilder.addHook(this, ModifierHooks.TOOL_STATS, ModifierHooks.DAMAGE_BLOCK);
+        hookBuilder.addHook(this, ModifierHooks.DAMAGE_BLOCK, ModifierHooks.ATTRIBUTES);
         super.registerHooks(hookBuilder);
     }
 
@@ -53,9 +58,21 @@ public class VirtualDodge extends Modifier implements ToolStatsModifierHook, Dam
     }
 
     @Override
-    public void addToolStats(IToolContext context, ModifierEntry modifier, ModifierStatsBuilder builder) {
-        ToolStats.ARMOR.multiply(builder, 1 - buffRate(modifier.getLevel()));
-        ToolStats.ARMOR_TOUGHNESS.multiply(builder, 1 - buffRate(modifier.getLevel()));
+    public void addAttributes(IToolStackView tool, ModifierEntry modifier, EquipmentSlot slot, BiConsumer<Attribute, AttributeModifier> consumer) {
+        if (!tool.isBroken() && modifier.getLevel() > 0){
+            Attribute attribute = Attributes.ARMOR;
+            consumer.accept(attribute,
+                            new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
+                                                  this.getTranslationKey(),
+                                                  -buffRate(modifier.getLevel()),
+                                                  AttributeModifier.Operation.MULTIPLY_BASE));
+            attribute = Attributes.ARMOR_TOUGHNESS;
+            consumer.accept(attribute,
+                            new AttributeModifier(UUID.nameUUIDFromBytes((slot.getName() + "." + getId() + "." + attribute.getDescriptionId()).getBytes()),
+                                                  this.getTranslationKey(),
+                                                  -buffRate(modifier.getLevel()),
+                                                  AttributeModifier.Operation.MULTIPLY_BASE));
+        }
     }
 
 
@@ -67,11 +84,11 @@ public class VirtualDodge extends Modifier implements ToolStatsModifierHook, Dam
             ServerLevel world = (ServerLevel) context.getLevel();
             if (world.random.nextFloat() < buffRate){
                 LivingEntity entity = context.getEntity();
-                /*
+
                 world.playSound(null, context.getEntity(), SoundEvents.ILLUSIONER_MIRROR_MOVE,
                                 entity instanceof Player ? SoundSource.PLAYERS : SoundSource.HOSTILE, 3.0F, 1.0F);
 
-                 */
+
                 world.sendParticles(
                         ParticleTypes.REVERSE_PORTAL,
                         entity.getX(),
