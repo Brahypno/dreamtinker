@@ -2,10 +2,7 @@
   "level_display": "tconstruct:default",
   "modules": [
     {
-      "type": "esotericism_tinker:reprise_protection_module",
-      "hooks": [
-        "tconstruct:modify_hurt"
-      ]
+      "type": "esotericism_tinker:reprise_protection_module"
     }
   ],
   "tooltip_display": "always"

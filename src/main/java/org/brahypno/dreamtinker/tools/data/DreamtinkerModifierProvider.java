@@ -1059,18 +1059,18 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(MaterialRepairModule.material(DreamtinkerMaterialIds.scolecite).constant(500));
         buildModifier(Ids.scale_within)
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
-                .addModule(new ResonanceArmorModule.Builder().percentage(LevelingValue.flat(0.4f)).build(), ModifierHooks.MODIFY_HURT)
+                .addModule(new ResonanceArmorModule.Builder().percentage(LevelingValue.flat(0.4f)).build())
                 .addModule(AttributeModule.builder(DreamtinkerAttributes.BLOOD_IN_SHELL, AttributeModifier.Operation.ADDITION).flat(6f));
         buildModifier(Ids.wing_without)
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
-                .addModule(new RepriseProtectionModule.Builder().percentage(LevelingValue.flat(0.5f)).build(), ModifierHooks.MODIFY_HURT)
+                .addModule(new RepriseProtectionModule.Builder().percentage(LevelingValue.flat(0.5f)).build())
                 .addModule(ProtectionModule.builder()
                                            .sources(DamageSourcePredicate.ANY, DamageSourcePredicate.ANY)
                                            .flat(3.0f))
                 .addModule(AttributeModule.builder(DreamtinkerAttributes.FATE_VEIL, AttributeModifier.Operation.ADDITION).flat(25f));
 
         buildModifier(Ids.reprise_protection)
-                .addModule(new RepriseProtectionModule.Builder().percentage(LevelingValue.eachLevel(0.25f)).build(), ModifierHooks.MODIFY_HURT);
+                .addModule(new RepriseProtectionModule.Builder().percentage(LevelingValue.eachLevel(0.25f)).build());
 
 
         buildModifier(Ids.carapace_fall)
