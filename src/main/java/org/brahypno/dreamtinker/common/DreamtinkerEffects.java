@@ -132,11 +132,11 @@ public class DreamtinkerEffects {
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
     public static void allowBossEffects(MobEffectEvent.Applicable event) {
         MobEffectInstance instance = event.getEffectInstance();
-
-        if (instance.getEffect() == DreamtinkerEffects.SoulFire.get() ||
-            (instance.getEffect() == DreamtinkerEffects.cursed.get() && !hasAsOneCurseImmunity(event.getEntity()))){
-            event.setResult(Event.Result.ALLOW);
-        }
+        if (event.getResult() != Event.Result.ALLOW)
+            if (instance.getEffect() == DreamtinkerEffects.SoulFire.get() && !(event.getEntity() instanceof Player) ||
+                (instance.getEffect() == DreamtinkerEffects.cursed.get() && !hasAsOneCurseImmunity(event.getEntity()))){
+                event.setResult(Event.Result.ALLOW);
+            }
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
