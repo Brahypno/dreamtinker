@@ -1,0 +1,19 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "thermal"
+    }
+  ],
+  "type": "thermal:pulverizer",
+  "ingredient": {
+    "item": "dreamtinker:transmutation_gold_ingot"
+  },
+  "result": [
+    {
+      "item": "dreamtinker:transmutation_gold_dust",
+      "count": 1
+    }
+  ],
+  "experience": 0.0
+}

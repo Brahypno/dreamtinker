@@ -1,0 +1,17 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "occultism"
+    }
+  ],
+  "type": "occultism:crushing",
+  "ingredient": {
+    "item": "dreamtinker:transmutation_gold_ingot"
+  },
+  "result": {
+    "item": "dreamtinker:transmutation_gold_dust",
+    "count": 1
+  },
+  "crushing_time": 200
+}

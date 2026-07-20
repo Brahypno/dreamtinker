@@ -1,0 +1,18 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "immersiveengineering"
+    }
+  ],
+  "type": "immersiveengineering:crusher",
+  "energy": 6000,
+  "input": {
+    "item": "dreamtinker:transmutation_gold_ingot"
+  },
+  "result": {
+    "item": "dreamtinker:transmutation_gold_dust",
+    "count": 1
+  },
+  "secondaries": []
+}
