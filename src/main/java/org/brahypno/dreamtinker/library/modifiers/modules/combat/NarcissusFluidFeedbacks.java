@@ -36,8 +36,8 @@ public final class NarcissusFluidFeedbacks {
     public static final String NEXT_SHOT = "next_shot";
     public static final String GUARD = "guard";
     public static final String MELEE = "melee";
-    public static final String CATALYST = "catalyst";
-    public static final String PROJECTILE_CATALYST = "dreamtinker:narcissus_fluid_catalyst";
+    public static final String INFUSION = "infusion";
+    public static final String PROJECTILE_INFUSION = "dreamtinker:narcissus_fluid_infusion";
 
     private static final Map<ResourceLocation, ResolvedFluidFeedback> OVERRIDES = new HashMap<>();
     private static final Map<Fluid, ResolvedFluidFeedback> CACHE = new IdentityHashMap<>();
@@ -123,21 +123,21 @@ public final class NarcissusFluidFeedbacks {
         CACHE.clear();
     }
 
-    public static float applyProjectileCatalyst(Projectile projectile, float power) {
+    public static float applyProjectileInfusion(Projectile projectile, float power) {
         CompoundTag data = projectile.getPersistentData();
-        if (!data.contains(PROJECTILE_CATALYST)){
+        if (!data.contains(PROJECTILE_INFUSION)){
             return power;
         }
-        float catalyst = Mth.clamp(data.getFloat(PROJECTILE_CATALYST), 0.0f, 8.0f);
-        data.remove(PROJECTILE_CATALYST);
-        return power * (1.0f + catalyst * 0.12f);
+        float infusion = Mth.clamp(data.getFloat(PROJECTILE_INFUSION), 0.0f, 8.0f);
+        data.remove(PROJECTILE_INFUSION);
+        return power * (1.0f + infusion * 0.12f);
     }
 
     public static void consumeInventoryTick(LivingEntity holder, int modifierLevel) {
         clearExpired(holder, NEXT_SHOT);
         clearExpired(holder, GUARD);
         clearExpired(holder, MELEE);
-        clearExpired(holder, CATALYST);
+        clearExpired(holder, INFUSION);
     }
 
     public static void consumeProjectileLaunch(LivingEntity shooter, Projectile projectile, int modifierLevel) {
@@ -155,9 +155,9 @@ public final class NarcissusFluidFeedbacks {
                 powerProjectile.setPower(powerProjectile.getPower() * damageMul);
             }
         }
-        CompoundTag catalyst = takePending(shooter, CATALYST);
-        if (catalyst != null){
-            projectile.getPersistentData().putFloat(PROJECTILE_CATALYST, scale(catalyst, modifierLevel));
+        CompoundTag infusion = takePending(shooter, INFUSION);
+        if (infusion != null){
+            projectile.getPersistentData().putFloat(PROJECTILE_INFUSION, scale(infusion, modifierLevel));
         }
     }
 
@@ -455,7 +455,7 @@ public final class NarcissusFluidFeedbacks {
         FORGE_RIVET(MELEE),
         FORGE_EDGE(MELEE),
         FORGE_BULWARK(null),
-        FORGE_TEMPER(CATALYST),
+        FORGE_TEMPER(INFUSION),
         SLIME_BOUNCE(null),
         SLIME_CUSHION(GUARD),
         SLIME_RICOCHET(NEXT_SHOT),
@@ -464,17 +464,17 @@ public final class NarcissusFluidFeedbacks {
         SLIME_REBOUND_GUARD(GUARD),
         SLIME_ELASTIC_STRIKE(MELEE),
         SLIME_DRIFT(null),
-        PRISM_AMPLIFY(CATALYST),
+        PRISM_AMPLIFY(INFUSION),
         PRISM_DUPLICATE(NEXT_SHOT),
         PRISM_FOCUS(NEXT_SHOT),
         PRISM_LOCK(NEXT_SHOT),
         PRISM_CRIT(NEXT_SHOT),
         PRISM_AEGIS(GUARD),
-        PRISM_ECHO(CATALYST),
+        PRISM_ECHO(INFUSION),
         PRISM_CONDENSE(NEXT_SHOT),
         SHARD_QUICKEN(null),
-        SHARD_REFUND(CATALYST),
-        SHARD_CHAIN(CATALYST),
+        SHARD_REFUND(INFUSION),
+        SHARD_CHAIN(INFUSION),
         SHARD_SPARK(NEXT_SHOT),
         SHARD_MARK(NEXT_SHOT),
         SHARD_EDGE(MELEE),
@@ -492,13 +492,13 @@ public final class NarcissusFluidFeedbacks {
         GLASS_MIRROR(GUARD),
         GLASS_LENS(NEXT_SHOT),
         GLASS_SHATTER(null),
-        GLASS_ECHO(CATALYST),
+        GLASS_ECHO(INFUSION),
         GLASS_PRISM_STEP(null),
         GLASS_NEEDLE(MELEE),
         GLASS_WARD(GUARD),
         REAGENT_PURGE(null),
-        REAGENT_CATALYZE(CATALYST),
-        REAGENT_DISTILL(CATALYST),
+        REAGENT_CATALYZE(INFUSION),
+        REAGENT_DISTILL(INFUSION),
         REAGENT_ADAPT(GUARD),
         REAGENT_OVERDOSE(null),
         REAGENT_STIMULATE(MELEE),
@@ -511,7 +511,7 @@ public final class NarcissusFluidFeedbacks {
         WATER_WASH(null),
         WATER_RIPTIDE(NEXT_SHOT),
         WATER_SOAK_GUARD(GUARD),
-        WATER_REFRESH(CATALYST),
+        WATER_REFRESH(INFUSION),
         DROWNED_TIDE_PULL(MELEE),
         DROWNED_DRENCHED_STRIKE(MELEE),
         DROWNED_UNDERCURRENT(NEXT_SHOT),
@@ -523,7 +523,7 @@ public final class NarcissusFluidFeedbacks {
         WITHER_BONE_EDGE(MELEE),
         WITHER_ASH_GUARD(GUARD),
         WITHER_BLACKENED_STRIKE(MELEE),
-        WITHER_DECAY_REFUND(CATALYST),
+        WITHER_DECAY_REFUND(INFUSION),
         WITHER_SKULL_MEMORY(NEXT_SHOT),
         WITHER_SMOKE_STEP(null),
         WITHER_FATAL_MARK(MELEE),
@@ -532,7 +532,7 @@ public final class NarcissusFluidFeedbacks {
         FALLBACK_COOLDOWN(null),
         FALLBACK_NEXT_DAMAGE(MELEE),
         FALLBACK_NEXT_GUARD(GUARD),
-        FALLBACK_COST_REDUCE(CATALYST),
+        FALLBACK_COST_REDUCE(INFUSION),
         FALLBACK_PROJECTILE_BOOST(NEXT_SHOT),
         FALLBACK_CLEANSE(null),
         FALLBACK_ABSORPTION(null);

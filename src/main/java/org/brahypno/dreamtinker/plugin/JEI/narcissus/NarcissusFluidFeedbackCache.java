@@ -7,6 +7,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.brahypno.dreamtinker.library.modifiers.modules.combat.NarcissusFluidFeedbacks;
+import slimeknights.tconstruct.library.modifiers.fluid.FluidEffectManager;
 
 import java.util.*;
 
@@ -53,6 +54,12 @@ public final class NarcissusFluidFeedbackCache {
 
         ResourceLocation id = ForgeRegistries.FLUIDS.getKey(fluid.getFluid());
         if (id == null || ENTRIES.containsKey(id)){
+            return;
+        }
+
+        // Keep JEI in sync with MemoryBase: only fluids with registered Tinkers' Construct
+        // fluid effects are valid Narcissus ammunition.
+        if (!FluidEffectManager.INSTANCE.find(fluid.getFluid()).hasEffects()){
             return;
         }
 
