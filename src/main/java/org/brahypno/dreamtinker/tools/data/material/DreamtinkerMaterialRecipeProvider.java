@@ -250,7 +250,7 @@ public class DreamtinkerMaterialRecipeProvider implements IMaterialRecipeHelper,
         materialRecipe(wrapped, DreamtinkerMaterialIds.refined, Ingredient.of(ItemRegistry.PROCESSED_SOULSTONE.get()), 1, 1,
                        materials_folder + "soul_rock/refined");
 
-        materialRecipe(consumer, DreamtinkerMaterialIds.blazing_quartz, Ingredient.of(ItemRegistry.BLAZING_QUARTZ.get()), 1, 1,
+        materialRecipe(wrapped, DreamtinkerMaterialIds.blazing_quartz, Ingredient.of(ItemRegistry.BLAZING_QUARTZ.get()), 1, 1,
                        materials_folder + "blazing_quartz");
         for (MalumSpiritType types : SpiritTypeRegistry.SPIRITS.values()) {
             String name = types.identifier;

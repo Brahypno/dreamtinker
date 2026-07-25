@@ -7,12 +7,12 @@
       "tag": "dreamtinker:molten_lupi_antimony"
     },
     {
-      "amount": 90,
+      "amount": 10,
       "tag": "tconstruct:tooltips/metal"
     }
   ],
   "result": {
-    "amount": 100,
+    "amount": 10,
     "fluid": "dreamtinker:molten_albedo_stibium"
   },
   "temperature": 1500

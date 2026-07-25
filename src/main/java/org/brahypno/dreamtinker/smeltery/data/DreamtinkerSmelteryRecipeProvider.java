@@ -454,9 +454,9 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
     public void addAlloyRecipes(Consumer<FinishedRecipe> consumer) {
         String folder = "smeltery/alloy/";
         Consumer<FinishedRecipe> wrapped;
-        AlloyRecipeBuilder.alloy(FluidOutput.fromFluid(DreamtinkerFluids.molten_albedo_stibium.get(), FluidValues.GEM), 1500)
+        AlloyRecipeBuilder.alloy(FluidOutput.fromFluid(DreamtinkerFluids.molten_albedo_stibium.get(), FluidValues.NUGGET), 1500)
                           .addCatalyst(FluidIngredient.of(DreamtinkerFluids.molten_lupi_antimony.getTag(), FluidValues.INGOT))
-                          .addInput(TinkerTags.Fluids.METAL_TOOLTIPS, FluidValues.INGOT)
+                          .addInput(TinkerTags.Fluids.METAL_TOOLTIPS, FluidValues.NUGGET)
                           .save(consumer, prefix(DreamtinkerFluids.molten_albedo_stibium, folder));
         AlloyRecipeBuilder.alloy(FluidOutput.fromFluid(DreamtinkerFluids.liquid_smoky_antimony.get(), FluidValues.INGOT * 2), 3600)
                           .addInput(DreamtinkerFluids.molten_ascending_antimony.getTag(), FluidValues.INGOT)
