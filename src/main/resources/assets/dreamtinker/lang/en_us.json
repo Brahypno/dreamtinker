@@ -1019,6 +1019,12 @@
   "modifier.dreamtinker.huai_pu_bao_yu": "Huai Pu Bao Yu",
   "modifier.dreamtinker.huai_pu_bao_yu.flavor": "Uncarved jade conceals its radiance.",
   "modifier.dreamtinker.huai_pu_bao_yu.description": "Increases Conditional melee damage and mining speed by 50%, Conditional projectile damage by 50%",
+  "modifier.dreamtinker.cold_breaker": "Storm Approaching",
+  "modifier.dreamtinker.cold_breaker.flavor": "Veryyyy Colddddd",
+  "modifier.dreamtinker.cold_breaker.description": "Increase 33% damage in cold biome",
+  "modifier.dreamtinker.cold_breaker.attack_damage": " Attack Damage in cold biome",
+  "modifier.dreamtinker.cold_breaker.projectile_damage": "Projectile Damage in cold biome",
+
   "_comment.dreamtinker.materials": "======Materials======",
   "material.dreamtinker.echo_alloy": "Echo Alloy",
   "material.dreamtinker.echo_alloy.flavor": "Its echo of mystery, or echo of enigma",

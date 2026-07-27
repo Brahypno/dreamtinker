@@ -539,6 +539,7 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
         addCompatUGMeltingCastingRecipes(consumer);
         addCompatOCMeltingCastingRecipes(consumer);
         addCompatGoetyMeltingCastingRecipes(consumer);
+        addCompatAquamiraeMeltingCastingRecipes(consumer);
 
     }
 
@@ -937,6 +938,14 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
                 .optional()
                 .baseUnit(FluidValues.GEM).damageUnit(FluidValues.NUGGET).ore()
                 .metal().dust().plate().gear().coin().sheetmetal().geore().oreberry();
+    }
+
+    private void addCompatAquamiraeMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
+        String aquamirae = "ob_aquamirae";
+        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(aquamirae));
+
+        MeltingRecipeBuilder.melting(itemNameIngredient(aquamirae, "oxygen_tank"), TinkerFluids.moltenIron, FluidValues.INGOT * 6, 0.5f)
+                            .save(wrapped, location(Melting_folder + "ob_aquamirae/oxygen_tank"));
     }
 
     private void meltCast(Fluid fluid, ItemLike ingredient, int amount, Consumer<FinishedRecipe> consumer) {

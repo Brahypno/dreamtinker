@@ -1182,6 +1182,9 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                                  .constant(1.0f).add()
                                                  .variable(VALUE).multiply()
                                                  .build());
+        buildModifier(Ids.cold_breaker)
+                .addModule(ConditionalMeleeDamageModule.builder().attacker(IN_COLD_BIOME).amount(0, 0.33f))
+                .addModule(ConditionalPowerModule.builder().holder(IN_COLD_BIOME).amount(0, 0.33f));
 
         addELModifiers();
         addMalumModifiers();

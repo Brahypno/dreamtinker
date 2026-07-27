@@ -1019,6 +1019,12 @@
   "modifier.dreamtinker.huai_pu_bao_yu": "怀璞抱玉",
   "modifier.dreamtinker.huai_pu_bao_yu.flavor": "璞玉藏辉，含章未曜。",
   "modifier.dreamtinker.huai_pu_bao_yu.description": "每级提升50%条件近战伤害和条件挖掘速度、50%条件弹射物伤害。",
+  "modifier.dreamtinker.cold_breaker": "风暴具现",
+  "modifier.dreamtinker.cold_breaker.flavor": "寒冷之风暴",
+  "modifier.dreamtinker.cold_breaker.description": "每级在寒冷地形增加33%伤害",
+  "modifier.dreamtinker.cold_breaker.attack_damage": "寒冷生物群系中的攻击伤害",
+  "modifier.dreamtinker.cold_breaker.projectile_damage": "寒冷生物群系中的弹射物伤害",
+
   "_comment.dreamtinker.materials": "======材料======",
   "material.dreamtinker.echo_alloy": "回响合金",
   "material.dreamtinker.echo_alloy.flavor": "是神秘的回响，还是秘密的回响",

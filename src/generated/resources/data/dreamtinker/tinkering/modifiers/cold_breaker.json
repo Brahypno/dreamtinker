@@ -1,0 +1,18 @@
+{
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:conditional_melee_damage",
+      "attacker": "dreamtinker:in_cold_biome",
+      "each_level": 0.33,
+      "percent": false
+    },
+    {
+      "type": "tconstruct:conditional_power",
+      "each_level": 0.33,
+      "holder": "dreamtinker:in_cold_biome",
+      "percent": false
+    }
+  ],
+  "tooltip_display": "always"
+}

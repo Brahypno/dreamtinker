@@ -875,6 +875,16 @@ public class DreamtinkerModifierRecipeProvider implements ICommonRecipeHelper {
                              .setMaxLevel(1)
                              .saveSalvage(wrapped, prefix(DreamtinkerModifiers.living_armor, delusionSalvage))
                              .save(wrapped, prefix(DreamtinkerModifiers.living_armor, delusionFolder));
+
+        String aquamirae = "aquamirae";
+        wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(aquamirae));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.cold_breaker)
+                             .setTools(Ingredient.of(TinkerTags.Items.MELEE))
+                             .addInput(ItemNameIngredient.from(new ResourceLocation(aquamirae, "rune_of_the_storm")))
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .setMaxLevel(1)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.Ids.cold_breaker, upgradeSalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.Ids.cold_breaker, upgradeFolder));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package org.brahypno.dreamtinker.tools;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -106,6 +107,8 @@ import slimeknights.tconstruct.library.modifiers.fluid.FluidEffect;
 import slimeknights.tconstruct.library.modifiers.modules.ModifierModule;
 import slimeknights.tconstruct.library.modifiers.util.ModifierDeferredRegister;
 import slimeknights.tconstruct.library.modifiers.util.StaticModifier;
+
+import static slimeknights.mantle.data.predicate.entity.LivingEntityPredicate.simple;
 
 
 public final class DreamtinkerModifiers extends DreamtinkerModule {
@@ -314,12 +317,19 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         ResourceLocation id = ForgeRegistries.BLOCKS.getKey(state.getBlock());
         return id != null && id.getNamespace().matches("undergarden");
     });
-    public static LivingEntityPredicate LIVING_OF_UNDER_GARDEN = LivingEntityPredicate.simple(le -> {
+    public static LivingEntityPredicate LIVING_OF_UNDER_GARDEN = simple(le -> {
         ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(le.getType());
         return id != null && id.getNamespace().matches("undergarden");
     });
     public static final EntityVariable WOLF_EFFECTS =
             EntityVariable.simple(entity -> Math.max(TheWolfWonder.DTForcedEffectKeys.getKeysTag(entity).size(), entity.getActiveEffects().size()));
+    public static final LivingEntityPredicate IN_COLD_BIOME = LivingEntityPredicate.simple(entity -> {
+        BlockPos pos = entity.blockPosition();
+        return entity.level()
+                     .getBiome(pos)
+                     .value()
+                     .getTemperature(pos) <= 0.0F;
+    });
 
     @SuppressWarnings({"removal"})
     public DreamtinkerModifiers() {
@@ -364,10 +374,13 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             LivingEntityPredicate.LOADER.register(Dreamtinker.getLocation("living_of_undergarden"), LIVING_OF_UNDER_GARDEN.getLoader());
             BlockPredicate.LOADER.register(Dreamtinker.getLocation("block_of_undergarden"), BLOCK_OF_UNDER_GARDEN.getLoader());
 
+            LivingEntityPredicate.LOADER.register(Dreamtinker.getLocation("in_cold_biome"), IN_COLD_BIOME.getLoader());
+
             EntityVariable.LOADER.register(Dreamtinker.getLocation("faa_aureal"), AUREAL.getLoader());
             EntityVariable.LOADER.register(Dreamtinker.getLocation("faa_corruption"), CORRUPTION.getLoader());
 
             EntityVariable.LOADER.register(Dreamtinker.getLocation("wolf_effects"), WOLF_EFFECTS.getLoader());
+
         }
     }
 
@@ -469,6 +482,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId divineMaledictus = id("divine_maledictus");
         public static final ModifierId HuaiPuBaoYu = id("huai_pu_bao_yu");
         public static final ModifierId side_attack = id("side_attack");
+        public static final ModifierId cold_breaker = id("cold_breaker");
 
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");
