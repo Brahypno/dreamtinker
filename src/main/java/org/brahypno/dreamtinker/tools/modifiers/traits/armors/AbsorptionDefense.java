@@ -42,7 +42,7 @@ public class AbsorptionDefense extends Modifier implements ModifyDamageModifierH
             float absorption = context.getEntity().getAbsorptionAmount();
             if (0 < absorption){
                 amount *= Math.max(0.1f, 1 - level * AbsorptionDefenseRate.get().floatValue());
-                if (absorption < amount && source.getEntity() instanceof LivingEntity entity)
+                if (absorption <= amount && source.getEntity() instanceof LivingEntity entity)
                     entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, level * 20, level));
             }
         }
@@ -50,9 +50,10 @@ public class AbsorptionDefense extends Modifier implements ModifyDamageModifierH
     }
 
     @Override
-    public @NotNull List<Component> getDescriptionList(int level) {
+    public @NotNull List<Component> getDescriptionList() {
         return Arrays.asList(Component.translatable(this.getTranslationKey() + ".flavor").withStyle(ChatFormatting.ITALIC),
-                             Component.translatable(this.getTranslationKey() + ".description", AbsorptionDefenseRate.get().floatValue() * 100)
+                             Component.translatable(this.getTranslationKey() + ".description",
+                                                    String.format("%.0f%%", AbsorptionDefenseRate.get() * 100))
                                       .withStyle(ChatFormatting.GRAY));
     }
 
