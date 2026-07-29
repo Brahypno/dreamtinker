@@ -7,6 +7,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -96,8 +97,9 @@ public class soulFire extends MobEffect {
             spawnSoulBurning(entity, amplifier);
         }
         if (entity.tickCount % 20 == 0){
-            LivingEntity attacker = entity.getLastAttacker();
-            double damage = null != attacker ? attacker.getAttributeValue(Attributes.ATTACK_DAMAGE) : 2;
+            LivingEntity attacker = entity.getLastHurtByMob();
+            AttributeInstance attack = null != attacker ? attacker.getAttribute(Attributes.ATTACK_DAMAGE) : null;
+            double damage = null != attack ? attack.getValue() : 2;
             DamageProbe.damageHandler(entity, DreamtinkerDamageTypes.source(world.registryAccess(), DreamtinkerDamageTypes.arcane_damage, null,
                                                                             entity.getLastAttacker()),
                                       (float) damage * (amplifier + 1));
