@@ -24,7 +24,7 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
                  RuinWheelSteel, PermanenceScale, PermanenceWing, scolecite, SpiralSpin, ForlornOathSteel, deliverance, whimsyGold, cryo_serpent_shift)
             .addOptional(etherium, nefarious, soul_etherium,
                          soul_stained_steel, malignant_pewter, malignant_gluttony, malignant_lead, PaladinBone, forgotten_metal, faa_dark_nether_star,
-                         ship_graveyard_echo, abyssal_amethyst);
+                         ship_graveyard_echo, abyssal_amethyst, sharp_bones, esca, angler_fang, fin);
 
         this.tag(TinkerTags.Materials.NETHER)
             .add(amber, scolecite)
@@ -38,19 +38,19 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
             .addOptional(nefarious, soul_etherium, soul_stained_steel, malignant_pewter, malignant_gluttony, shadowSilver, ArcaneGold,
                          WickedWeave, DarkMetal, MonsterSkin, PaladinBoneTool, TatteredCloth, WaterEssence, FireEssence, ManipulationEssence, Utherium,
                          forgotten_metal, Cloggrum, Froststeel, legendary_monsters_enderitium, faa_dark_nether_star,
-                         ship_graveyard_echo, abyssal_amethyst);
+                         ship_graveyard_echo, abyssal_amethyst, sharp_bones, angler_fang, fin);
         this.tag(TinkerTags.Materials.HARVEST)
             .add(larimar, rainbow_honey_crystal, TransmutationGold, whimsyGold)
             .addOptional(hallowed_gold, Regalium, Iesnium);
         this.tag(TinkerTags.Materials.GENERAL)
             .add(valentinite, black_sapphire, orichalcum)
-            .addOptional(etherium, spirit_fabric, astral_weave, dragon_scale, blm_sentient, blm_hellforge, jade);
+            .addOptional(etherium, spirit_fabric, astral_weave, dragon_scale, blm_sentient, blm_hellforge, jade, esca);
 
         this.tag(TinkerTags.Materials.LIGHT)
             .add(nigrescence_string, echo_alloy, larimar, half_rotten_string, desire_gem, cold_iron, TransmutationGold, orichalcum, FifthStone, SpiralSpin)
             .addOptional(spirit_fabric, soul_stained_steel, nefarious, etherium, soul_etherium, metallivorous_stibium_lupus, star_regulus, shadowSilver,
                          TatteredCloth, PaladinBoneTool, Utherium, forgotten_metal, AtonementSilver, legendary_monsters_enderitium,
-                         ship_graveyard_echo);
+                         ship_graveyard_echo, sharp_bones, esca, angler_fang);
         this.tag(TinkerTags.Materials.BALANCED)
             .add(valentinite, black_sapphire, scolecite, shiningFlint, RuinWheelSteel, OathGuardPaleSteel,
                  ForlornOathSteel)
@@ -90,7 +90,7 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
                          AbjurationEssence, ConjurationEssence, AirEssence, EarthEssence, FireEssence,
                          ManipulationEssence, WaterEssence, WildenHorn, WildenWing, WildenSpike,
                          legendary_monsters_enderitium, dragon_scale, faa_dark_nether_star, blm_sentient, blm_hellforge,
-                         jade, ship_graveyard_echo, abyssal_amethyst);
+                         jade, ship_graveyard_echo, abyssal_amethyst, sharp_bones, esca, angler_fang, fin);
 
     }
 

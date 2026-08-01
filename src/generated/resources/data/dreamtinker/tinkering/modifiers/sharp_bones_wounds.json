@@ -1,0 +1,63 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "aquamirae"
+          },
+          {
+            "type": "esotericism_tinker:mod_compact_config",
+            "modid": "aquamirae"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:mob_effect",
+      "effect": "tconstruct:bleeding",
+      "hooks": [
+        "tconstruct:melee_hit",
+        "tconstruct:projectile_hit",
+        "tconstruct:monster_melee_hit"
+      ],
+      "level": {
+        "per_level": 1.0
+      },
+      "target": {
+        "type": "mantle:inverted",
+        "inverted_type": "dreamtinker:has_armor"
+      },
+      "time": {
+        "flat": 80.0
+      }
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "effect": "tconstruct:pierce",
+      "hooks": [
+        "tconstruct:melee_hit",
+        "tconstruct:projectile_hit",
+        "tconstruct:monster_melee_hit"
+      ],
+      "level": {
+        "per_level": 1.0
+      },
+      "target": "dreamtinker:has_armor",
+      "time": {
+        "flat": 80.0
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

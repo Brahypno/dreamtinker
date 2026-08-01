@@ -1,0 +1,24 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "dreamtinker:sharp_bones_wounds"
+    },
+    {
+      "level": 1,
+      "name": "dreamtinker:aquamirae_sharp_bones_fury"
+    }
+  ],
+  "perStat": {
+    "tconstruct:ammo": [
+      {
+        "level": 1,
+        "name": "dreamtinker:sharp_bones_wounds"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:aquamirae_sharp_bones_fury"
+      }
+    ]
+  }
+}

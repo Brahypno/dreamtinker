@@ -1,0 +1,32 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "aquamirae"
+          },
+          {
+            "type": "esotericism_tinker:mod_compact_config",
+            "modid": "aquamirae"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:no_levels",
+  "modules": [
+    {
+      "type": "tconstruct:effect_immunity",
+      "effect": "minecraft:darkness"
+    }
+  ],
+  "tooltip_display": "always"
+}

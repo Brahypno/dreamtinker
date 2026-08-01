@@ -61,6 +61,7 @@ public class DreamtinkerPartToolBuildingRecipeProvider implements IToolRecipeHel
         wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("aquamirae"));
         armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.ship_graveyard_echo);
         armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.abyssal_amethyst);
+        armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.fin);
 
         //explode_core
         PartRecipeBuilder.partRecipe(DreamtinkerToolParts.explode_core.get()).setPattern(this.id(DreamtinkerToolParts.explode_core.get()))

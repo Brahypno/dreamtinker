@@ -167,6 +167,19 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.abyssal_amethyst, ARMOR,
                   Ids.aquamirae_amethyst_resilience, abyssal_radiance.getId());
 
+        addDefaultTraits(DreamtinkerMaterialIds.sharp_bones,
+                         Ids.sharp_bones_wounds, Ids.aquamirae_sharp_bones_fury);
+        addTraits(DreamtinkerMaterialIds.sharp_bones, AMMO,
+                  Ids.sharp_bones_wounds, Ids.aquamirae_sharp_bones_fury);
+        addDefaultTraits(DreamtinkerMaterialIds.esca, Ids.esca_lure);
+        addTraits(DreamtinkerMaterialIds.esca, ARMOR, Ids.esca_darkness);
+        addDefaultTraits(DreamtinkerMaterialIds.angler_fang, Ids.angler_fang);
+        addTraits(DreamtinkerMaterialIds.angler_fang, AMMO, Ids.angler_fang);
+        addDefaultTraits(DreamtinkerMaterialIds.fin,
+                         Ids.aquamirae_fin_fury, terrible_blade.getId());
+        addTraits(DreamtinkerMaterialIds.fin, ARMOR,
+                  Ids.aquamirae_fin_resilience, terrible_armor.getId());
+
         addDefaultTraits(DreamtinkerMaterialIds.etherium,
                          new ModifierEntry(ModifierIds.smite, 2),
                          new ModifierEntry(explosive_hit.getId(), 1),

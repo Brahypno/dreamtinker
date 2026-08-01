@@ -121,6 +121,10 @@ public class DreamtinkerMaterialIds {
     // Aquamirae
     public static final MaterialId ship_graveyard_echo = new MaterialId(new ResourceLocation(MODID, "ship_graveyard_echo"));
     public static final MaterialId abyssal_amethyst = new MaterialId(new ResourceLocation(MODID, "abyssal_amethyst"));
+    public static final MaterialId sharp_bones = new MaterialId(new ResourceLocation(MODID, "sharp_bones"));
+    public static final MaterialId esca = new MaterialId(new ResourceLocation(MODID, "esca"));
+    public static final MaterialId angler_fang = new MaterialId(new ResourceLocation(MODID, "angler_fang"));
+    public static final MaterialId fin = new MaterialId(new ResourceLocation(MODID, "fin"));
     //goety??
     public static final MaterialId jade = new MaterialId(new ResourceLocation(MODID, "jade"));
 }

@@ -1,0 +1,61 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "aquamirae"
+          },
+          {
+            "type": "esotericism_tinker:mod_compact_config",
+            "modid": "aquamirae"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:conditional_melee_damage",
+      "each_level": 1.0,
+      "percent": false,
+      "target": "dreamtinker:unaware"
+    },
+    {
+      "type": "tconstruct:conditional_power",
+      "formula": [
+        "$level",
+        0.1,
+        "*",
+        1.0,
+        "+",
+        "$damage",
+        "*"
+      ],
+      "percent": true,
+      "target": "dreamtinker:unaware"
+    },
+    {
+      "type": "tconstruct:mob_effect",
+      "effect": "minecraft:glowing",
+      "hooks": [
+        "tconstruct:melee_hit",
+        "tconstruct:projectile_hit",
+        "tconstruct:monster_melee_hit"
+      ],
+      "level": {},
+      "time": {
+        "flat": 80.0
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

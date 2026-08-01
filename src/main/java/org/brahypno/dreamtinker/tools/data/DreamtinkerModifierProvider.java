@@ -1,5 +1,7 @@
 package org.brahypno.dreamtinker.tools.data;
 
+// import dev.obscuria.aquamirae.registry.AquamiraeAttributes; // Datagen-only hard reference.
+
 import com.hollingsworth.arsnouveau.setup.registry.ModPotions;
 import com.sammy.malum.registry.common.AttributeRegistry;
 import com.sammy.malum.registry.common.item.EnchantmentRegistry;
@@ -68,6 +70,7 @@ import slimeknights.tconstruct.library.json.variable.block.BlockVariable;
 import slimeknights.tconstruct.library.json.variable.entity.AttributeEntityVariable;
 import slimeknights.tconstruct.library.json.variable.entity.ConditionalEntityVariable;
 import slimeknights.tconstruct.library.json.variable.entity.EntityLightVariable;
+import slimeknights.tconstruct.library.json.variable.entity.EntityVariable;
 import slimeknights.tconstruct.library.json.variable.melee.EntityMeleeVariable;
 import slimeknights.tconstruct.library.json.variable.mining.BlockLightVariable;
 import slimeknights.tconstruct.library.json.variable.mining.BlockMiningSpeedVariable;
@@ -1186,6 +1189,9 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(ConditionalMeleeDamageModule.builder().attacker(IN_COLD_BIOME).amount(0, 0.33f))
                 .addModule(ConditionalPowerModule.builder().holder(IN_COLD_BIOME).amount(0, 0.33f));
 
+        addAquamiraeModifiers();
+        // addAquamiraeFinAttributesForDatagen(); // Datagen-only hard reference.
+        // addAquamiraeSharpBonesFuryForDatagen(); // Datagen-only hard reference.
         // addAquamiraeModifiers(); // Hard references are only enabled temporarily for datagen.
         addELModifiers();
         addMalumModifiers();
@@ -1200,8 +1206,83 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
 
     }
 
-    /*
     private void addAquamiraeModifiers() {
+        buildModifier(Ids.sharp_bones_wounds, DreamtinkerMaterialDataProvider.modLoaded("aquamirae"))
+                .addModule(MobEffectModule.builder(TinkerEffects.bleeding.get())
+                                          .target(HAS_ARMOR.inverted())
+                                          .level(RandomLevelingValue.perLevel(0, 1))
+                                          .time(RandomLevelingValue.flat(80))
+                                          .build(),
+                           ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT)
+                .addModule(MobEffectModule.builder(TinkerEffects.pierce.get())
+                                          .target(HAS_ARMOR)
+                                          .level(RandomLevelingValue.perLevel(0, 1))
+                                          .time(RandomLevelingValue.flat(80))
+                                          .build(),
+                           ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
+
+        buildModifier(Ids.esca_lure, DreamtinkerMaterialDataProvider.modLoaded("aquamirae"))
+                .addModule(ConditionalMeleeDamageModule.builder().target(UNAWARE).amount(0, 1.0f))
+                .addModule(ConditionalPowerModule.builder().target(UNAWARE).percent().formula()
+                                                 .variable(LEVEL).constant(0.10f).multiply()
+                                                 .constant(1.0f).add()
+                                                 .variable(VALUE).multiply().build())
+                .addModule(MobEffectModule.builder(MobEffects.GLOWING)
+                                          .level(RandomLevelingValue.flat(0))
+                                          .time(RandomLevelingValue.flat(80))
+                                          .build(),
+                           ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
+        buildModifier(Ids.esca_darkness, DreamtinkerMaterialDataProvider.modLoaded("aquamirae"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(new EffectImmunityModule(MobEffects.DARKNESS));
+
+        AttributeEntityVariable maxHealth = new AttributeEntityVariable(Attributes.MAX_HEALTH);
+        buildModifier(Ids.angler_fang, DreamtinkerMaterialDataProvider.modLoaded("aquamirae"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(ConditionalMeleeDamageModule.builder().percent()
+                                                       .customVariable("health",
+                                                                       new EntityMeleeVariable(EntityVariable.HEALTH, EntityMeleeVariable.WhichEntity.ATTACKER,
+                                                                                               20.0f))
+                                                       .customVariable("max_health",
+                                                                       new EntityMeleeVariable(maxHealth, EntityMeleeVariable.WhichEntity.ATTACKER, 20.0f))
+                                                       .customVariable("full_health_multiplier",
+                                                                       new EntityMeleeVariable(FULL_HEALTH_MULTIPLIER, EntityMeleeVariable.WhichEntity.TARGET,
+                                                                                               1.0f))
+                                                       .formula()
+                                                       .customVariable("max_health").customVariable("health").subtract()
+                                                       .constant(2.0f).divide().floor()
+                                                       .constant(0.05f).multiply().constant(1.5f).min()
+                                                       .customVariable("full_health_multiplier").multiply()
+                                                       .constant(1.0f).add().variable(VALUE).multiply().build())
+                .addModule(ConditionalPowerModule.builder().percent()
+                                                 .customVariable("health",
+                                                                 new EntityPowerVariable(EntityVariable.HEALTH, EntityMeleeVariable.WhichEntity.ATTACKER,
+                                                                                         20.0f))
+                                                 .customVariable("max_health",
+                                                                 new EntityPowerVariable(maxHealth, EntityMeleeVariable.WhichEntity.ATTACKER, 20.0f))
+                                                 .customVariable("full_health_multiplier",
+                                                                 new EntityPowerVariable(FULL_HEALTH_MULTIPLIER, EntityMeleeVariable.WhichEntity.TARGET, 1.0f))
+                                                 .formula()
+                                                 .customVariable("max_health").customVariable("health").subtract()
+                                                 .constant(2.0f).divide().floor()
+                                                 .constant(0.05f).multiply().constant(1.5f).min()
+                                                 .customVariable("full_health_multiplier").multiply()
+                                                 .constant(1.0f).add().variable(VALUE).multiply().build());
+
+
+    /*
+        buildModifier(Ids.aquamirae_fin_fury, DreamtinkerMaterialDataProvider.modLoaded("aquamirae"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(AttributeModule.builder(AquamiraeAttributes.DEPTHS_FURY, AttributeModifier.Operation.MULTIPLY_BASE)
+                                          .amount(0.4f, 0));
+        buildModifier(Ids.aquamirae_fin_resilience, DreamtinkerMaterialDataProvider.modLoaded("aquamirae"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(AttributeModule.builder(AquamiraeAttributes.DEPTHS_RESILIENCE, AttributeModifier.Operation.MULTIPLY_BASE)
+                                          .amount(0.15f, 0));
+        buildModifier(Ids.aquamirae_sharp_bones_fury, DreamtinkerMaterialDataProvider.modLoaded("aquamirae"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(AttributeModule.builder(AquamiraeAttributes.DEPTHS_FURY, AttributeModifier.Operation.MULTIPLY_BASE)
+                                          .amount(0.2f, 0));
         buildModifier(Ids.aquamirae_echo_fury, DreamtinkerMaterialDataProvider.modLoaded("aquamirae"))
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                 .addModule(AttributeModule.builder(AquamiraeAttributes.DEPTHS_FURY, AttributeModifier.Operation.MULTIPLY_BASE).amount(0.4f, 0));
@@ -1230,6 +1311,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
     }
     */
+    }
 
     private void addFAAModifiers() {
         buildModifier(Ids.faa_aureal_protection, modLoaded("forbidden_arcanus"))

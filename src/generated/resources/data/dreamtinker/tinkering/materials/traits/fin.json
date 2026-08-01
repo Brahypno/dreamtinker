@@ -1,0 +1,24 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "dreamtinker:aquamirae_fin_fury"
+    },
+    {
+      "level": 1,
+      "name": "dreamtinker:terrible_blade"
+    }
+  ],
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "dreamtinker:aquamirae_fin_resilience"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:terrible_armor"
+      }
+    ]
+  }
+}

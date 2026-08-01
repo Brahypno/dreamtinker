@@ -7,6 +7,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.Tags;
@@ -39,6 +40,8 @@ import org.brahypno.dreamtinker.tools.modifiers.tools.silence_glove.WeaponDreams
 import org.brahypno.dreamtinker.tools.modifiers.tools.underPlate.WeaponTransformation;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Combat.*;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.aquamirae.AbyssalRadiance;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.aquamirae.TerribleArmor;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.aquamirae.TerribleBlade;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.aquamirae.VoidReenactment;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.bic.DarkBlade;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.bic.DarkDefense;
@@ -139,6 +142,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<EchoedDefence> echoed_defence = MODIFIERS.register("echoed_defence", EchoedDefence::new);
     public static final StaticModifier<VoidReenactment> void_reenactment = MODIFIERS.register("void_reenactment", VoidReenactment::new);
     public static final StaticModifier<AbyssalRadiance> abyssal_radiance = MODIFIERS.register("abyssal_radiance", AbyssalRadiance::new);
+    public static final StaticModifier<TerribleBlade> terrible_blade = MODIFIERS.register("terrible_blade", TerribleBlade::new);
+    public static final StaticModifier<TerribleArmor> terrible_armor = MODIFIERS.register("terrible_armor", TerribleArmor::new);
 
     //moonlight ice
     public static final StaticModifier<GlacialRiver> glacial_river = MODIFIERS.register("glacial_river", GlacialRiver::new);
@@ -335,6 +340,9 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
                      .getTemperature(pos) <= 0.0F;
     });
     public static final LivingEntityPredicate HAS_ARMOR = LivingEntityPredicate.simple(entity -> entity.getArmorValue() > 0);
+    public static final LivingEntityPredicate UNAWARE = LivingEntityPredicate.simple(entity -> entity instanceof Mob mob && mob.getTarget() == null);
+    public static final EntityVariable FULL_HEALTH_MULTIPLIER = EntityVariable.simple(
+            entity -> entity.getHealth() >= entity.getMaxHealth() ? 2.0f : 1.0f);
 
     @SuppressWarnings({"removal"})
     public DreamtinkerModifiers() {
@@ -381,11 +389,13 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
 
             LivingEntityPredicate.LOADER.register(Dreamtinker.getLocation("in_cold_biome"), IN_COLD_BIOME.getLoader());
             LivingEntityPredicate.LOADER.register(Dreamtinker.getLocation("has_armor"), HAS_ARMOR.getLoader());
+            LivingEntityPredicate.LOADER.register(Dreamtinker.getLocation("unaware"), UNAWARE.getLoader());
 
             EntityVariable.LOADER.register(Dreamtinker.getLocation("faa_aureal"), AUREAL.getLoader());
             EntityVariable.LOADER.register(Dreamtinker.getLocation("faa_corruption"), CORRUPTION.getLoader());
 
             EntityVariable.LOADER.register(Dreamtinker.getLocation("wolf_effects"), WOLF_EFFECTS.getLoader());
+            EntityVariable.LOADER.register(Dreamtinker.getLocation("full_health_multiplier"), FULL_HEALTH_MULTIPLIER.getLoader());
 
         }
     }
@@ -494,6 +504,13 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId aquamirae_amethyst_fury = id("aquamirae_amethyst_fury");
         public static final ModifierId aquamirae_amethyst_resilience = id("aquamirae_amethyst_resilience");
         public static final ModifierId crystal_shatter = id("crystal_shatter");
+        public static final ModifierId sharp_bones_wounds = id("sharp_bones_wounds");
+        public static final ModifierId aquamirae_sharp_bones_fury = id("aquamirae_sharp_bones_fury");
+        public static final ModifierId esca_lure = id("esca_lure");
+        public static final ModifierId esca_darkness = id("esca_darkness");
+        public static final ModifierId angler_fang = id("angler_fang");
+        public static final ModifierId aquamirae_fin_fury = id("aquamirae_fin_fury");
+        public static final ModifierId aquamirae_fin_resilience = id("aquamirae_fin_resilience");
 
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");

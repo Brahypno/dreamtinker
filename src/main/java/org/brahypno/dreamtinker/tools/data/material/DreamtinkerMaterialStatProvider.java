@@ -201,8 +201,20 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          HandleMaterialStats.multipliers().durability(1.10f).miningSpeed(1.05f).attackDamage(1.10f).attackSpeed(1.10f).build(),
                          StatlessMaterialStats.BINDING);
         addMaterialStats(DreamtinkerMaterialIds.abyssal_amethyst,
-                         new HeadMaterialStats(2200, 8.0f, Tiers.NETHERITE, 2.0f),
+                         new HeadMaterialStats(2200, 8.0f, Tiers.NETHERITE, 3.0f),
                          HandleMaterialStats.multipliers().durability(1.20f).miningSpeed(1.00f).attackDamage(1.15f).attackSpeed(0.90f).build(),
+                         StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.sharp_bones,
+                         new HeadMaterialStats(250, 4.0f, Tiers.STONE, 1.0f),
+                         HandleMaterialStats.multipliers().durability(0.80f).miningSpeed(1.00f).attackDamage(1.00f).attackSpeed(1.10f).build(),
+                         StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.angler_fang,
+                         new HeadMaterialStats(750, 6.0f, Tiers.IRON, 2.0f),
+                         HandleMaterialStats.multipliers().durability(1.05f).miningSpeed(0.95f).attackDamage(1.05f).attackSpeed(1.10f).build(),
+                         StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.fin,
+                         new HeadMaterialStats(750, 4.0f, Tiers.IRON, 1.0f),
+                         HandleMaterialStats.multipliers().durability(0.75f).attackSpeed(1.10f).build(),
                          StatlessMaterialStats.BINDING);
 
         addELMeleeHarvest();
@@ -472,7 +484,15 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new GripMaterialStats(0.10f, 0.15f, 2.0f));
         addMaterialStats(DreamtinkerMaterialIds.abyssal_amethyst,
                          new LimbMaterialStats(2200, -0.10f, 0.35f, 0.20f),
-                         new GripMaterialStats(0.20f, 0.20f, 2.0f));
+                         new GripMaterialStats(0.20f, 0.20f, 3.0f));
+        addMaterialStats(DreamtinkerMaterialIds.sharp_bones,
+                         new LimbMaterialStats(120, 0.05f, 0.0f, 0.05f),
+                         new GripMaterialStats(-0.20f, 0.05f, 1.5f));
+        addMaterialStats(DreamtinkerMaterialIds.esca,
+                         StatlessMaterialStats.BOWSTRING);
+        addMaterialStats(DreamtinkerMaterialIds.angler_fang,
+                         new LimbMaterialStats(750, 0.10f, 0.05f, 0.05f),
+                         new GripMaterialStats(0.05f, 0.10f, 2.0f));
 
     }
 
@@ -636,6 +656,10 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addArmorShieldStats(DreamtinkerMaterialIds.abyssal_amethyst,
                             PlatingMaterialStats.builder().durabilityFactor(80).armor(3, 5, 7, 2).toughness(2),
                             StatlessMaterialStats.SHIELD_CORE);
+        addArmorShieldStats(DreamtinkerMaterialIds.fin,
+                            PlatingMaterialStats.builder().durabilityFactor(50).armor(1, 2, 6, 4),
+                            StatlessMaterialStats.MAILLE);
+        addMaterialStats(DreamtinkerMaterialIds.esca, StatlessMaterialStats.MAILLE);
     }
 
     private void addAmmo() {
@@ -676,6 +700,10 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
 
         this.addMaterialStats(DreamtinkerMaterialIds.dragon_scale, StatlessMaterialStats.ARROW_SHAFT);
         this.addMaterialStats(DreamtinkerMaterialIds.jade, StatlessMaterialStats.ARROW_SHAFT);
+        this.addMaterialStats(DreamtinkerMaterialIds.sharp_bones,
+                              StatlessMaterialStats.ARROW_HEAD, StatlessMaterialStats.ARROW_SHAFT);
+        this.addMaterialStats(DreamtinkerMaterialIds.esca, StatlessMaterialStats.FLETCHING);
+        this.addMaterialStats(DreamtinkerMaterialIds.angler_fang, StatlessMaterialStats.ARROW_HEAD);
 
     }
 
@@ -683,6 +711,10 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addMaterialStats(DreamtinkerMaterialIds.shadowskin, StatlessMaterialStats.REPAIR_KIT);
         addMaterialStats(DreamtinkerMaterialIds.ship_graveyard_echo, StatlessMaterialStats.REPAIR_KIT);
         addMaterialStats(DreamtinkerMaterialIds.abyssal_amethyst, StatlessMaterialStats.REPAIR_KIT);
+        addMaterialStats(DreamtinkerMaterialIds.sharp_bones, StatlessMaterialStats.REPAIR_KIT);
+        addMaterialStats(DreamtinkerMaterialIds.esca, StatlessMaterialStats.BINDING, StatlessMaterialStats.REPAIR_KIT);
+        addMaterialStats(DreamtinkerMaterialIds.angler_fang, StatlessMaterialStats.REPAIR_KIT);
+        addMaterialStats(DreamtinkerMaterialIds.fin, StatlessMaterialStats.REPAIR_KIT);
     }
 
     @Override

@@ -122,6 +122,10 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
 
         addMaterial(DreamtinkerMaterialIds.ship_graveyard_echo, 4, 40, true, false, modLoaded("aquamirae"));
         addMaterial(DreamtinkerMaterialIds.abyssal_amethyst, 4, 45, true, false, modLoaded("aquamirae"));
+        addMaterial(DreamtinkerMaterialIds.sharp_bones, 2, 10, true, false, modLoaded("aquamirae"));
+        addMaterial(DreamtinkerMaterialIds.esca, 2, 10, true, false, modLoaded("aquamirae"));
+        addMaterial(DreamtinkerMaterialIds.angler_fang, 3, 25, true, false, modLoaded("aquamirae"));
+        addMaterial(DreamtinkerMaterialIds.fin, 2, 10, true, false, modLoaded("aquamirae"));
 
         addMaterial(DreamtinkerMaterialIds.jade, 2, 20, false, false, tagFilled(Dreamtinker.forgeItemTag("gems/jade")));
     }

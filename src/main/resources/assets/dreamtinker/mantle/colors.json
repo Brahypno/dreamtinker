@@ -246,7 +246,16 @@
     "aquamirae_echo_fury": "#4DCADE",
     "aquamirae_echo_resilience": "#4DCADE",
     "aquamirae_amethyst_fury": "#E73EE7",
-    "aquamirae_amethyst_resilience": "#E73EE7"
+    "aquamirae_amethyst_resilience": "#E73EE7",
+    "sharp_bones_wounds": "#CBC6A5",
+    "aquamirae_sharp_bones_fury": "#E8E5D2",
+    "esca_lure": "#23CFD5",
+    "esca_darkness": "#00989C",
+    "angler_fang": "#64A63A",
+    "terrible_blade": "#57E4F5",
+    "terrible_armor": "#2381A0",
+    "aquamirae_fin_fury": "#3AC2D5",
+    "aquamirae_fin_resilience": "#164769"
   },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
@@ -343,7 +352,11 @@
     "blm_hellforged": "#162622",
     "jade": "#50A779",
     "ship_graveyard_echo": "#4DCADE",
-    "abyssal_amethyst": "#E73EE7"
+    "abyssal_amethyst": "#E73EE7",
+    "sharp_bones": "#E8E5D2",
+    "esca": "#23CFD5",
+    "angler_fang": "#64A63A",
+    "fin": "#3AC2D5"
   },
   "harvest_tier.dreamtinker": {
     "lupus": "#E1B873",

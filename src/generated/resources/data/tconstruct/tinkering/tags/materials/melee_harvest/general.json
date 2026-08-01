@@ -30,6 +30,10 @@
     {
       "id": "dreamtinker:jade",
       "required": false
+    },
+    {
+      "id": "dreamtinker:esca",
+      "required": false
     }
   ]
 }

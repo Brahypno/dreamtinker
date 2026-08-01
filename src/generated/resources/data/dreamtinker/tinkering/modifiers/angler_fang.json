@@ -1,0 +1,114 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "aquamirae"
+          },
+          {
+            "type": "esotericism_tinker:mod_compact_config",
+            "modid": "aquamirae"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:no_levels",
+  "modules": [
+    {
+      "type": "tconstruct:conditional_melee_damage",
+      "formula": [
+        "$max_health",
+        "$health",
+        "-",
+        2.0,
+        "/",
+        "floor",
+        0.05,
+        "*",
+        1.5,
+        "min",
+        "$full_health_multiplier",
+        "*",
+        1.0,
+        "+",
+        "$damage",
+        "*"
+      ],
+      "percent": true,
+      "variables": {
+        "full_health_multiplier": {
+          "type": "tconstruct:entity",
+          "entity_type": "dreamtinker:full_health_multiplier",
+          "fallback": 1.0,
+          "which": "target"
+        },
+        "health": {
+          "type": "tconstruct:entity",
+          "entity_type": "tconstruct:health",
+          "fallback": 20.0,
+          "which": "attacker"
+        },
+        "max_health": {
+          "type": "tconstruct:entity",
+          "attribute": "minecraft:generic.max_health",
+          "entity_type": "tconstruct:attribute",
+          "fallback": 20.0,
+          "which": "attacker"
+        }
+      }
+    },
+    {
+      "type": "tconstruct:conditional_power",
+      "formula": [
+        "$max_health",
+        "$health",
+        "-",
+        2.0,
+        "/",
+        "floor",
+        0.05,
+        "*",
+        1.5,
+        "min",
+        "$full_health_multiplier",
+        "*",
+        1.0,
+        "+",
+        "$damage",
+        "*"
+      ],
+      "percent": true,
+      "variables": {
+        "full_health_multiplier": {
+          "type": "tconstruct:entity",
+          "entity_type": "dreamtinker:full_health_multiplier",
+          "fallback": 1.0,
+          "which": "target"
+        },
+        "health": {
+          "type": "tconstruct:entity",
+          "entity_type": "tconstruct:health",
+          "fallback": 20.0,
+          "which": "attacker"
+        },
+        "max_health": {
+          "type": "tconstruct:entity",
+          "attribute": "minecraft:generic.max_health",
+          "entity_type": "tconstruct:attribute",
+          "fallback": 20.0,
+          "which": "attacker"
+        }
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

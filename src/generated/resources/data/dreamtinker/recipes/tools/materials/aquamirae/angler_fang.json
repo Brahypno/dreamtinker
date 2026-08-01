@@ -1,0 +1,33 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "aquamirae"
+            },
+            {
+              "type": "esotericism_tinker:mod_compact_config",
+              "modid": "aquamirae"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ingredient": {
+    "item": "aquamirae:angler_fang"
+  },
+  "material": "dreamtinker:angler_fang",
+  "needed": 1,
+  "value": 1
+}

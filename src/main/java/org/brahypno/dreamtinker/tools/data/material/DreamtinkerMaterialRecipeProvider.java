@@ -414,6 +414,18 @@ public class DreamtinkerMaterialRecipeProvider implements IMaterialRecipeHelper,
         materialRecipe(wrapped, DreamtinkerMaterialIds.abyssal_amethyst,
                        itemNameIngredient("aquamirae", "abyssal_amethyst"), 1, 1,
                        materials_folder + "aquamirae/abyssal_amethyst");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.sharp_bones,
+                       itemNameIngredient("aquamirae", "sharp_bones"), 1, 1,
+                       materials_folder + "aquamirae/sharp_bones");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.esca,
+                       itemNameIngredient("aquamirae", "esca"), 1, 1,
+                       materials_folder + "aquamirae/esca");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.angler_fang,
+                       itemNameIngredient("aquamirae", "angler_fang"), 1, 1,
+                       materials_folder + "aquamirae/angler_fang");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.fin,
+                       itemNameIngredient("aquamirae", "fin"), 1, 1,
+                       materials_folder + "aquamirae/fin");
     }
 
     private void standardMetalMaterial(Consumer<FinishedRecipe> consumer, MaterialId materialId, FlowingFluidObject<ForgeFlowingFluid> fluid, String name, String folder) {

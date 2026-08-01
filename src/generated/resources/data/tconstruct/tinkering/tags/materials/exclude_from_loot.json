@@ -64,6 +64,22 @@
     {
       "id": "dreamtinker:abyssal_amethyst",
       "required": false
+    },
+    {
+      "id": "dreamtinker:sharp_bones",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:esca",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:angler_fang",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:fin",
+      "required": false
     }
   ]
 }
