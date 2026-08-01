@@ -1,0 +1,30 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "dreamtinker:aquamirae_echo_fury"
+    },
+    {
+      "level": 1,
+      "name": "dreamtinker:void_reenactment"
+    }
+  ],
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "dreamtinker:aquamirae_echo_resilience"
+      }
+    ],
+    "tconstruct:melee_harvest": [
+      {
+        "level": 1,
+        "name": "dreamtinker:aquamirae_echo_fury"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:void_reenactment"
+      }
+    ]
+  }
+}

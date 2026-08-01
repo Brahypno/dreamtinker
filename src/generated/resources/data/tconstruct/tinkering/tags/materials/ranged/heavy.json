@@ -18,6 +18,10 @@
     {
       "id": "dreamtinker:faa_dark_nether_star",
       "required": false
+    },
+    {
+      "id": "dreamtinker:abyssal_amethyst",
+      "required": false
     }
   ]
 }

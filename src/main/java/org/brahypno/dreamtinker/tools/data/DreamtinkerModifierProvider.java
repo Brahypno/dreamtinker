@@ -1186,6 +1186,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(ConditionalMeleeDamageModule.builder().attacker(IN_COLD_BIOME).amount(0, 0.33f))
                 .addModule(ConditionalPowerModule.builder().holder(IN_COLD_BIOME).amount(0, 0.33f));
 
+        // addAquamiraeModifiers(); // Hard references are only enabled temporarily for datagen.
         addELModifiers();
         addMalumModifiers();
         addEidolonModifiers();
@@ -1198,6 +1199,37 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         addFAAModifiers();
 
     }
+
+    /*
+    private void addAquamiraeModifiers() {
+        buildModifier(Ids.aquamirae_echo_fury, DreamtinkerMaterialDataProvider.modLoaded("aquamirae"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(AttributeModule.builder(AquamiraeAttributes.DEPTHS_FURY, AttributeModifier.Operation.MULTIPLY_BASE).amount(0.4f, 0));
+        buildModifier(Ids.aquamirae_echo_resilience, DreamtinkerMaterialDataProvider.modLoaded("aquamirae"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(AttributeModule.builder(AquamiraeAttributes.DEPTHS_RESILIENCE, AttributeModifier.Operation.MULTIPLY_BASE).amount(0.15f, 0));
+        buildModifier(Ids.aquamirae_amethyst_fury, DreamtinkerMaterialDataProvider.modLoaded("aquamirae"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(AttributeModule.builder(AquamiraeAttributes.DEPTHS_FURY, AttributeModifier.Operation.MULTIPLY_BASE).amount(0.6f, 0));
+        buildModifier(Ids.aquamirae_amethyst_resilience, DreamtinkerMaterialDataProvider.modLoaded("aquamirae"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(AttributeModule.builder(AquamiraeAttributes.DEPTHS_RESILIENCE, AttributeModifier.Operation.MULTIPLY_BASE).amount(0.2f, 0));
+
+        buildModifier(Ids.crystal_shatter, DreamtinkerMaterialDataProvider.modLoaded("aquamirae"))
+                .addModule(MobEffectModule.builder(AquamiraeEffects.ARMOR_SHATTER.get())
+                                          .target(HAS_ARMOR)
+                                          .level(RandomLevelingValue.perLevel(0, 1))
+                                          .time(RandomLevelingValue.flat(120))
+                                          .build(),
+                           ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT)
+                .addModule(MobEffectModule.builder(AquamiraeEffects.HEALTH_SHATTER.get())
+                                          .target(HAS_ARMOR.inverted())
+                                          .level(RandomLevelingValue.perLevel(0, 1))
+                                          .time(RandomLevelingValue.flat(120))
+                                          .build(),
+                           ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
+    }
+    */
 
     private void addFAAModifiers() {
         buildModifier(Ids.faa_aureal_protection, modLoaded("forbidden_arcanus"))

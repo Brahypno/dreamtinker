@@ -38,6 +38,8 @@ import org.brahypno.dreamtinker.tools.modifiers.tools.narcissus_wing.foundationW
 import org.brahypno.dreamtinker.tools.modifiers.tools.silence_glove.WeaponDreams;
 import org.brahypno.dreamtinker.tools.modifiers.tools.underPlate.WeaponTransformation;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Combat.*;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.aquamirae.AbyssalRadiance;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.aquamirae.VoidReenactment;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.bic.DarkBlade;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.bic.DarkDefense;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.bic.NightmareDefense;
@@ -135,6 +137,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     //echo Alloy
     public static final StaticModifier<EchoedAttack> echoed_attack = MODIFIERS.register("echoed_attack", EchoedAttack::new);
     public static final StaticModifier<EchoedDefence> echoed_defence = MODIFIERS.register("echoed_defence", EchoedDefence::new);
+    public static final StaticModifier<VoidReenactment> void_reenactment = MODIFIERS.register("void_reenactment", VoidReenactment::new);
+    public static final StaticModifier<AbyssalRadiance> abyssal_radiance = MODIFIERS.register("abyssal_radiance", AbyssalRadiance::new);
 
     //moonlight ice
     public static final StaticModifier<GlacialRiver> glacial_river = MODIFIERS.register("glacial_river", GlacialRiver::new);
@@ -330,6 +334,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
                      .value()
                      .getTemperature(pos) <= 0.0F;
     });
+    public static final LivingEntityPredicate HAS_ARMOR = LivingEntityPredicate.simple(entity -> entity.getArmorValue() > 0);
 
     @SuppressWarnings({"removal"})
     public DreamtinkerModifiers() {
@@ -375,6 +380,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             BlockPredicate.LOADER.register(Dreamtinker.getLocation("block_of_undergarden"), BLOCK_OF_UNDER_GARDEN.getLoader());
 
             LivingEntityPredicate.LOADER.register(Dreamtinker.getLocation("in_cold_biome"), IN_COLD_BIOME.getLoader());
+            LivingEntityPredicate.LOADER.register(Dreamtinker.getLocation("has_armor"), HAS_ARMOR.getLoader());
 
             EntityVariable.LOADER.register(Dreamtinker.getLocation("faa_aureal"), AUREAL.getLoader());
             EntityVariable.LOADER.register(Dreamtinker.getLocation("faa_corruption"), CORRUPTION.getLoader());
@@ -483,6 +489,11 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId HuaiPuBaoYu = id("huai_pu_bao_yu");
         public static final ModifierId side_attack = id("side_attack");
         public static final ModifierId cold_breaker = id("cold_breaker");
+        public static final ModifierId aquamirae_echo_fury = id("aquamirae_echo_fury");
+        public static final ModifierId aquamirae_echo_resilience = id("aquamirae_echo_resilience");
+        public static final ModifierId aquamirae_amethyst_fury = id("aquamirae_amethyst_fury");
+        public static final ModifierId aquamirae_amethyst_resilience = id("aquamirae_amethyst_resilience");
+        public static final ModifierId crystal_shatter = id("crystal_shatter");
 
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");

@@ -24,6 +24,45 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
 
     @Override
     protected void addAllMaterials() {
+        this.buildMaterial(DreamtinkerMaterialIds.ship_graveyard_echo)
+            .meleeHarvest().ranged().armor().shieldCore().statType(StatlessMaterialStats.REPAIR_KIT)
+            .fallbacks("crystal", "gem")
+            .transformer(new FramesSpriteTransformer(
+                    Dreamtinker.getLocation("generator/etherium"),
+                    GreyToSpriteTransformer.builder()
+                                           .addARGB(0, 0xFF064597).addARGB(63, 0xFF2480B5)
+                                           .addARGB(102, 0xFF2C9CBD).addARGB(140, 0xFF4DCADE)
+                                           .addARGB(178, 0xFF5DE7EE).addARGB(216, 0xFF6DF8FE)
+                                           .addARGB(255, 0xFFC5FDFF).build(),
+                    GreyToSpriteTransformer.builder()
+                                           .addARGB(0, 0xFF064597).addARGB(63, 0xFF2480B5)
+                                           .addARGB(102, 0xFF4DCADE).addARGB(140, 0xFF5DE7EE)
+                                           .addARGB(178, 0xFF6DF8FE).addARGB(216, 0xFFC5FDFF)
+                                           .addARGB(255, 0xFFC5FDFF).build(),
+                    GreyToSpriteTransformer.builder()
+                                           .addARGB(0, 0xFF2480B5).addARGB(63, 0xFF2C9CBD)
+                                           .addARGB(102, 0xFF4DCADE).addARGB(140, 0xFF5DE7EE)
+                                           .addARGB(178, 0xFF6DF8FE).addARGB(216, 0xFFC5FDFF)
+                                           .addARGB(255, 0xFFC5FDFF).build(),
+                    GreyToSpriteTransformer.builder()
+                                           .addARGB(0, 0xFF064597).addARGB(63, 0xFF064597)
+                                           .addARGB(102, 0xFF064597).addARGB(140, 0xFF2480B5)
+                                           .addARGB(178, 0xFF2C9CBD).addARGB(216, 0xFF4DCADE)
+                                           .addARGB(255, 0xFF6DF8FE).build()));
+
+        this.buildMaterial(DreamtinkerMaterialIds.abyssal_amethyst)
+            .meleeHarvest().ranged().armor().shieldCore().statType(StatlessMaterialStats.REPAIR_KIT)
+            .fallbacks("gem", "crystal")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(0, 0xFF513139)
+                                                .addARGB(63, 0xFF74495B)
+                                                .addARGB(102, 0xFF843570)
+                                                .addARGB(140, 0xFFA46E99)
+                                                .addARGB(178, 0xFFE73EE7)
+                                                .addARGB(216, 0xFFFF42FF)
+                                                .addARGB(255, 0xFFFFFFFF)
+                                                .build());
+
         this.buildMaterial(DreamtinkerMaterialIds.echo_alloy)
             .ranged().meleeHarvest().armor().fallbacks("crystal", "metal").statType(STORAGE_BLOCK)
             .transformer(GreyToSpriteTransformer.builder()

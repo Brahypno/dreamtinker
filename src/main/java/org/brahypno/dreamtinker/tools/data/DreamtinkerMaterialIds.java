@@ -118,6 +118,9 @@ public class DreamtinkerMaterialIds {
     public static final MaterialVariantId blm_sentient_vengeful = create(blm_sentient, "vengeful");
     public static final MaterialVariantId blm_sentient_steadfast = create(blm_sentient, "steadfast");
     public static final MaterialId blm_hellforge = new MaterialId(new ResourceLocation(MODID, "blm_hellforge"));
+    // Aquamirae
+    public static final MaterialId ship_graveyard_echo = new MaterialId(new ResourceLocation(MODID, "ship_graveyard_echo"));
+    public static final MaterialId abyssal_amethyst = new MaterialId(new ResourceLocation(MODID, "abyssal_amethyst"));
     //goety??
     public static final MaterialId jade = new MaterialId(new ResourceLocation(MODID, "jade"));
 }

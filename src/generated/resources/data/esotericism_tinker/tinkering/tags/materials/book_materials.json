@@ -257,6 +257,14 @@
     {
       "id": "dreamtinker:jade",
       "required": false
+    },
+    {
+      "id": "dreamtinker:ship_graveyard_echo",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:abyssal_amethyst",
+      "required": false
     }
   ]
 }

@@ -197,6 +197,7 @@ public class DreamtinkerMaterialRecipeProvider implements IMaterialRecipeHelper,
         addLegendaryMonstersMaterialRecipes(consumer);
         addFAAMaterialRecipes(consumer);
         addBLMMaterialRecipes(consumer);
+        addAquamiraeMaterialRecipes(consumer);
 
     }
 
@@ -402,6 +403,17 @@ public class DreamtinkerMaterialRecipeProvider implements IMaterialRecipeHelper,
         materialRecipe(wrapped, DreamtinkerMaterialIds.blm_sentient_steadfast, itemNameIngredient(bloodmagic, "basemonstersoul_steadfast"), 1, 1,
                        materials_folder + "bloodmagic_sentient/steadfast");
         standardMetalMaterial(wrapped, DreamtinkerMaterialIds.blm_hellforge, DreamtinkerFluids.molten_hellforged, "hellforged", materials_folder);
+    }
+
+    private void addAquamiraeMaterialRecipes(Consumer<FinishedRecipe> consumer) {
+        Consumer<FinishedRecipe> wrapped =
+                withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("aquamirae"));
+        materialRecipe(wrapped, DreamtinkerMaterialIds.ship_graveyard_echo,
+                       itemNameIngredient("aquamirae", "ship_graveyard_echo"), 1, 1,
+                       materials_folder + "aquamirae/ship_graveyard_echo");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.abyssal_amethyst,
+                       itemNameIngredient("aquamirae", "abyssal_amethyst"), 1, 1,
+                       materials_folder + "aquamirae/abyssal_amethyst");
     }
 
     private void standardMetalMaterial(Consumer<FinishedRecipe> consumer, MaterialId materialId, FlowingFluidObject<ForgeFlowingFluid> fluid, String name, String folder) {

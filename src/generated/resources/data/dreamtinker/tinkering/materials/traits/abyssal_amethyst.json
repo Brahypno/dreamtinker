@@ -1,0 +1,24 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "dreamtinker:aquamirae_amethyst_fury"
+    },
+    {
+      "level": 1,
+      "name": "dreamtinker:crystal_shatter"
+    }
+  ],
+  "perStat": {
+    "tconstruct:armor": [
+      {
+        "level": 1,
+        "name": "dreamtinker:aquamirae_amethyst_resilience"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:abyssal_radiance"
+      }
+    ]
+  }
+}

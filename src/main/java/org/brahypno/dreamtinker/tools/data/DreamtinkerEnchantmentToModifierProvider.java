@@ -29,6 +29,7 @@ public class DreamtinkerEnchantmentToModifierProvider extends AbstractEnchantmen
         addOptional(new ResourceLocation("farmersdelight", "backstabbing"), DreamtinkerModifiers.Ids.side_attack, true);
 
         addOptional(new ResourceLocation("ars_nouveau", "reactive"), DreamtinkerModifiers.Ids.nova_reactive, true);
+
     }
 
     @Override

@@ -65,6 +65,8 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
         buildRenderInfo(DreamtinkerMaterialIds.Regalium).color(0xFFD8964A).fallbacks("gem", "metal").luminosity(10);
         buildRenderInfo(DreamtinkerMaterialIds.GooeySlimeSkin).color(0xFF6E694F).fallbacks("cloth").luminosity(9);
         buildRenderInfo(DreamtinkerMaterialIds.Iesnium).color(0xFF28AB8A).fallbacks("metal").luminosity(15);
+        buildRenderInfo(DreamtinkerMaterialIds.ship_graveyard_echo).color(0xFF4DCADE).fallbacks("crystal", "gem").luminosity(15);
+        buildRenderInfo(DreamtinkerMaterialIds.abyssal_amethyst).color(0xFFE73EE7).fallbacks("gem", "crystal").luminosity(10);
 
         buildRenderInfo(DreamtinkerMaterialIds.etherium).color(0xFF96E8E0).fallbacks("metal", "crystal").luminosity(15);
         buildRenderInfo(DreamtinkerMaterialIds.nefarious).color(0xFF8513A0).fallbacks("metal", "crystal", "gem").luminosity(8);

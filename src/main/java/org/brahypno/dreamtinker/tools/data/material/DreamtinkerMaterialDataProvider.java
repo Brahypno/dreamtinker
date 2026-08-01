@@ -120,6 +120,8 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.blm_sentient, 2, 20, true, false, modLoaded("bloodmagic"));
         addMaterial(DreamtinkerMaterialIds.blm_hellforge, 4, 40, false, false, modLoaded("bloodmagic"));
 
+        addMaterial(DreamtinkerMaterialIds.ship_graveyard_echo, 4, 40, true, false, modLoaded("aquamirae"));
+        addMaterial(DreamtinkerMaterialIds.abyssal_amethyst, 4, 45, true, false, modLoaded("aquamirae"));
 
         addMaterial(DreamtinkerMaterialIds.jade, 2, 20, false, false, tagFilled(Dreamtinker.forgeItemTag("gems/jade")));
     }

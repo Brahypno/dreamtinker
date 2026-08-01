@@ -155,6 +155,18 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
 
         addDefaultTraits(DreamtinkerMaterialIds.Iesnium, occ_harvest);
 
+        addDefaultTraits(DreamtinkerMaterialIds.ship_graveyard_echo,
+                         Ids.aquamirae_echo_fury, void_reenactment.getId());
+        addTraits(DreamtinkerMaterialIds.ship_graveyard_echo, MELEE_HARVEST,
+                  Ids.aquamirae_echo_fury, void_reenactment.getId());
+        addTraits(DreamtinkerMaterialIds.ship_graveyard_echo, ARMOR,
+                  Ids.aquamirae_echo_resilience);
+
+        addDefaultTraits(DreamtinkerMaterialIds.abyssal_amethyst,
+                         Ids.aquamirae_amethyst_fury, Ids.crystal_shatter);
+        addTraits(DreamtinkerMaterialIds.abyssal_amethyst, ARMOR,
+                  Ids.aquamirae_amethyst_resilience, abyssal_radiance.getId());
+
         addDefaultTraits(DreamtinkerMaterialIds.etherium,
                          new ModifierEntry(ModifierIds.smite, 2),
                          new ModifierEntry(explosive_hit.getId(), 1),

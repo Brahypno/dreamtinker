@@ -239,7 +239,14 @@
     "faa_corruption_defense": "#433441",
     "blm_living_armor": "#9A3A4A",
     "blm_hellforged": "#162622",
-    "huai_pu_bao_yu": "#50A779"
+    "huai_pu_bao_yu": "#50A779",
+    "void_reenactment": "#4DCADE",
+    "abyssal_radiance": "#E73EE7",
+    "crystal_shatter": "#E73EE7",
+    "aquamirae_echo_fury": "#4DCADE",
+    "aquamirae_echo_resilience": "#4DCADE",
+    "aquamirae_amethyst_fury": "#E73EE7",
+    "aquamirae_amethyst_resilience": "#E73EE7"
   },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
@@ -334,7 +341,9 @@
     "blm_sentient.vengeful": "#FF5555",
     "blm_sentient.steadfast": "#FF55FF",
     "blm_hellforged": "#162622",
-    "jade": "#50A779"
+    "jade": "#50A779",
+    "ship_graveyard_echo": "#4DCADE",
+    "abyssal_amethyst": "#E73EE7"
   },
   "harvest_tier.dreamtinker": {
     "lupus": "#E1B873",

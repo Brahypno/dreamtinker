@@ -196,6 +196,15 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          HandleMaterialStats.multipliers().durability(1.05f).attackDamage(1.10f).miningSpeed(1.20f).build(),
                          StatlessMaterialStats.BINDING);
 
+        addMaterialStats(DreamtinkerMaterialIds.ship_graveyard_echo,
+                         new HeadMaterialStats(750, 6.0f, Tiers.DIAMOND, 2.0f),
+                         HandleMaterialStats.multipliers().durability(1.10f).miningSpeed(1.05f).attackDamage(1.10f).attackSpeed(1.10f).build(),
+                         StatlessMaterialStats.BINDING);
+        addMaterialStats(DreamtinkerMaterialIds.abyssal_amethyst,
+                         new HeadMaterialStats(2200, 8.0f, Tiers.NETHERITE, 2.0f),
+                         HandleMaterialStats.multipliers().durability(1.20f).miningSpeed(1.00f).attackDamage(1.15f).attackSpeed(0.90f).build(),
+                         StatlessMaterialStats.BINDING);
+
         addELMeleeHarvest();
         addMalumMeleeHarvest();
         addEidolonMeleeHarvest();
@@ -458,6 +467,13 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new GripMaterialStats(0.3f, 0.10f, 6f),
                          StatlessMaterialStats.BOWSTRING);
 
+        addMaterialStats(DreamtinkerMaterialIds.ship_graveyard_echo,
+                         new LimbMaterialStats(750, 0.20f, 0.15f, 0.15f),
+                         new GripMaterialStats(0.10f, 0.15f, 2.0f));
+        addMaterialStats(DreamtinkerMaterialIds.abyssal_amethyst,
+                         new LimbMaterialStats(2200, -0.10f, 0.35f, 0.20f),
+                         new GripMaterialStats(0.20f, 0.20f, 2.0f));
+
     }
 
     private void addArmor() {
@@ -614,6 +630,12 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addArmorShieldStats(DreamtinkerMaterialIds.blm_hellforge,
                             PlatingMaterialStats.builder().durabilityFactor(30).armor(4f, 6f, 8f, 3f).toughness(2f).knockbackResistance(0.15f),
                             StatlessMaterialStats.MAILLE);
+        addArmorShieldStats(DreamtinkerMaterialIds.ship_graveyard_echo,
+                            PlatingMaterialStats.builder().durabilityFactor(65).armor(2, 4, 4, 6).toughness(2),
+                            StatlessMaterialStats.SHIELD_CORE);
+        addArmorShieldStats(DreamtinkerMaterialIds.abyssal_amethyst,
+                            PlatingMaterialStats.builder().durabilityFactor(80).armor(3, 5, 7, 2).toughness(2),
+                            StatlessMaterialStats.SHIELD_CORE);
     }
 
     private void addAmmo() {
@@ -659,6 +681,8 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
 
     private void addMisc() {
         addMaterialStats(DreamtinkerMaterialIds.shadowskin, StatlessMaterialStats.REPAIR_KIT);
+        addMaterialStats(DreamtinkerMaterialIds.ship_graveyard_echo, StatlessMaterialStats.REPAIR_KIT);
+        addMaterialStats(DreamtinkerMaterialIds.abyssal_amethyst, StatlessMaterialStats.REPAIR_KIT);
     }
 
     @Override
