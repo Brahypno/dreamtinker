@@ -15,19 +15,23 @@ import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
+import org.brahypno.dreamtinker.utils.EquippedModifierSnapshot;
 import org.brahypno.esotericismtinker.utils.CompatUtils.CuriosCompat;
-import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
 import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.WeakHashMap;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class OathGuardPaleSteelEvents {
@@ -38,6 +42,7 @@ public class OathGuardPaleSteelEvents {
 
     private static final String PALE_OATH_EVIL = "dreamtinker_pale_oath_evil";
     private static final float MAX_PALE_OATH_EVIL = 100.0F;
+    private static final Map<ServerPlayer, ProtectedTargets> PROTECTED_TARGET_CACHE = new WeakHashMap<>();
 
 
     @SubscribeEvent
@@ -59,9 +64,9 @@ public class OathGuardPaleSteelEvents {
             return;
         }
 
-        List<ServerPlayer> guardians = findOathGuardians(level, target, DreamtinkerModifiers.pale_oath.getId());
-
-        List<ServerPlayer> des = findOathGuardians(level, target, DreamtinkerModifiers.broken_oath.getId());
+        OathParticipants participants = findOathParticipants(level, target);
+        List<ServerPlayer> guardians = participants.guardians();
+        List<ServerPlayer> des = participants.brokenGuardians();
         if (!guardians.isEmpty()){
             addEvilToOffenderIfPresent(target, event.getSource(), guardians, event.getAmount());
 
@@ -116,14 +121,15 @@ public class OathGuardPaleSteelEvents {
         if (target instanceof Villager){
             amount += 15.0F;
         }
-        List<ServerPlayer> guardians = findOathGuardians(level, target, DreamtinkerModifiers.pale_oath.getId());
+        OathParticipants participants = findOathParticipants(level, target);
+        List<ServerPlayer> guardians = participants.guardians();
 
         // 死亡时附近也没有白誓钢守护者，那就没人承担“失败”
         if (!guardians.isEmpty()){
             addEvilToOffenderIfPresent(target, event.getSource(), guardians, 25);
             changeFracture(guardians, (int) amount);
         }
-        List<ServerPlayer> des = findOathGuardians(level, target, DreamtinkerModifiers.broken_oath.getId());
+        List<ServerPlayer> des = participants.brokenGuardians();
 
         // 死亡时附近也没有白誓钢守护者，那就没人承担“失败”
         if (!des.isEmpty()){
@@ -166,17 +172,61 @@ public class OathGuardPaleSteelEvents {
         return false;
     }
 
-    private static List<ServerPlayer> findOathGuardians(ServerLevel level, LivingEntity target, ModifierId modifierId) {
-        return level.getEntitiesOfClass(
+    /**
+     * Returns the living entities protected by this player, reusing the same spatial query for every
+     * armor piece/hook invoked during the current tick.
+     */
+    public static List<LivingEntity> findProtectedTargets(ServerPlayer player) {
+        long gameTime = player.level().getGameTime();
+        synchronized (PROTECTED_TARGET_CACHE) {
+            ProtectedTargets cached = PROTECTED_TARGET_CACHE.get(player);
+            if (cached != null && cached.gameTime() == gameTime) {
+                return cached.targets();
+            }
+            List<LivingEntity> targets = player.level().getEntitiesOfClass(
+                    LivingEntity.class,
+                    player.getBoundingBox().inflate(16.0D),
+                    target -> target != player
+                              && target.isAlive()
+                              && isGuardianProtectedTarget(player, target));
+            List<LivingEntity> immutableTargets = List.copyOf(targets);
+            PROTECTED_TARGET_CACHE.put(player, new ProtectedTargets(gameTime, immutableTargets));
+            return immutableTargets;
+        }
+    }
+
+    /** One player query, followed by cheap classification from the shared one-tick equipment snapshot. */
+    private static OathParticipants findOathParticipants(ServerLevel level, LivingEntity target) {
+        List<ServerPlayer> nearby = level.getEntitiesOfClass(
                 ServerPlayer.class,
                 target.getBoundingBox().inflate(16.0D),
                 player -> player.isAlive()
                           && !player.isSpectator()
                           && !player.isCreative()
                           && player != target
-                          && ETModifierCheck.haveModifierIn(player, modifierId)
                           && isGuardianProtectedTarget(player, target)
         );
+
+        List<ServerPlayer> guardians = new ArrayList<>();
+        List<ServerPlayer> brokenGuardians = new ArrayList<>();
+        for (ServerPlayer player : nearby) {
+            if (EquippedModifierSnapshot.has(player, DreamtinkerModifiers.pale_oath.getId())){
+                guardians.add(player);
+            }
+            if (EquippedModifierSnapshot.has(player, DreamtinkerModifiers.broken_oath.getId())){
+                brokenGuardians.add(player);
+            }
+        }
+        return new OathParticipants(guardians, brokenGuardians);
+    }
+
+    @SubscribeEvent
+    public static void onServerStopped(ServerStoppedEvent event) {
+        synchronized (PROTECTED_TARGET_CACHE) {
+            PROTECTED_TARGET_CACHE.clear();
+        }
+        EquippedModifierSnapshot.clear();
+        GUARDIAN_TRANSFER.remove();
     }
 
     private static void changeFracture(List<ServerPlayer> guardians, int amount) {
@@ -307,5 +357,9 @@ public class OathGuardPaleSteelEvents {
             addOathEvil(offender, guardian, damage);
         }
     }
+
+    private record OathParticipants(List<ServerPlayer> guardians, List<ServerPlayer> brokenGuardians) {}
+
+    private record ProtectedTargets(long gameTime, List<LivingEntity> targets) {}
 
 }

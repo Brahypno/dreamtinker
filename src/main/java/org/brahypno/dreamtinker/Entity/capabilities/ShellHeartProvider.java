@@ -46,7 +46,8 @@ public class ShellHeartProvider implements ICapabilityProvider, INBTSerializable
     public CompoundTag serializeNBT() {
         CompoundTag tag = new CompoundTag();
         tag.putFloat("ShellHeart", backend.get());
-        tag.putFloat("ShellHeartColor", backend.getHeartColour());
+        // ARGB is a packed 32-bit bit pattern, not a floating-point value.
+        tag.putInt("ShellHeartColor", backend.getHeartColour());
         return tag;
     }
 

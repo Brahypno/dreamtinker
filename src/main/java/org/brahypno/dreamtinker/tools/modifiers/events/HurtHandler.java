@@ -13,6 +13,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
+import org.brahypno.dreamtinker.utils.EquippedModifierSnapshot;
 import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
@@ -56,13 +57,13 @@ public class HurtHandler {
             }
             damageAmount += ETModifierCheck.getPersistentTagValue(offender, DreamtinkerModifiers.knockArts.getId(), TAG_KNOCK);
             if (dmg.is(TinkerTags.DamageTypes.MAGIC_PROTECTION)){
-                int drink_magic = ETModifierCheck.getEntityModifierNum(offender, DreamtinkerModifiers.Ids.drinker_magic);
+                int drink_magic = EquippedModifierSnapshot.getLevel(offender, DreamtinkerModifiers.Ids.drinker_magic);
                 if (0 < drink_magic){
                     damageAmount *= (1 + drink_magic * 0.05f);
                     offender.heal(damageAmount * drink_magic * 0.05f);
                 }
             }
-            int homunculus_life_curse = ETModifierCheck.getEntityModifierNum(offender, DreamtinkerModifiers.Ids.homunculus_life_curse);
+            int homunculus_life_curse = EquippedModifierSnapshot.getLevel(offender, DreamtinkerModifiers.Ids.homunculus_life_curse);
             if (0 < homunculus_life_curse){
                 damageAmount = homunculusLifeDamage(offender, damageAmount, homunculus_life_curse);
             }

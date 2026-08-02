@@ -27,28 +27,15 @@ import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 
 import javax.annotation.Nullable;
-import java.util.List;
-
 import static org.brahypno.dreamtinker.tools.modifiers.events.OathGuardPaleSteelEvents.*;
 
 public class ForOath extends Modifier implements ProjectileHitModifierHook, ProjectileLaunchModifierHook, ProjectileShootModifierHook, MeleeDamageModifierHook, MeleeHitModifierHook {
     public boolean isNoLevels() {return false;}
 
-    private static void grantGuardianAbsorption(
-            ServerPlayer player,
-            ServerLevel serverLevel,
-            float damage,
-            int modifierLevel
-    ) {
+    private static void grantGuardianAbsorption(ServerPlayer player, float damage, int modifierLevel) {
         if (damage <= 0)
             return;
-        List<LivingEntity> protectedTargets = serverLevel.getEntitiesOfClass(
-                LivingEntity.class,
-                player.getBoundingBox().inflate(16.0D),
-                target -> target != player
-                          && target.isAlive()
-                          && isGuardianProtectedTarget(player, target));
-        for (LivingEntity target : protectedTargets) {
+        for (LivingEntity target : findProtectedTargets(player)) {
             if (target.getAbsorptionAmount() < 2 * target.getMaxHealth())
                 target.setAbsorptionAmount(target.getAbsorptionAmount() + damage * 0.1f * modifierLevel);
         }
@@ -87,8 +74,8 @@ public class ForOath extends Modifier implements ProjectileHitModifierHook, Proj
 
     @Override
     public float beforeMeleeHit(IToolStackView tool, ModifierEntry modifier, ToolAttackContext context, float damage, float baseKnockback, float knockback) {
-        if (context.getAttacker() instanceof ServerPlayer player && context.getLevel() instanceof ServerLevel serverLevel){
-            grantGuardianAbsorption(player, serverLevel, damage, modifier.getLevel());
+        if (context.getAttacker() instanceof ServerPlayer player && context.getLevel() instanceof ServerLevel){
+            grantGuardianAbsorption(player, damage, modifier.getLevel());
         }
         return knockback;
     }
@@ -131,9 +118,9 @@ public class ForOath extends Modifier implements ProjectileHitModifierHook, Proj
     @Override
     public void onProjectileLaunch(IToolStackView tool, ModifierEntry modifier, LivingEntity shooter, Projectile projectile, @Nullable AbstractArrow arrow, ModDataNBT persistentData, boolean primary) {
         if (shooter instanceof ServerPlayer player
-            && shooter.level() instanceof ServerLevel serverLevel){
+            && shooter.level() instanceof ServerLevel){
             float damage = arrow != null ? (float) arrow.getBaseDamage() : ETModifierCheck.getDamage(projectile);
-            grantGuardianAbsorption(player, serverLevel, damage, modifier.getLevel());
+            grantGuardianAbsorption(player, damage, modifier.getLevel());
         }
 
     }
@@ -141,9 +128,9 @@ public class ForOath extends Modifier implements ProjectileHitModifierHook, Proj
     @Override
     public void onProjectileShoot(IToolStackView tool, ModifierEntry modifier, @Nullable LivingEntity shooter, ItemStack ammo, Projectile projectile, @Nullable AbstractArrow arrow, ModDataNBT persistentData, boolean primary) {
         if (shooter instanceof ServerPlayer player
-            && shooter.level() instanceof ServerLevel serverLevel){
+            && shooter.level() instanceof ServerLevel){
             float damage = arrow != null ? (float) arrow.getBaseDamage() : ETModifierCheck.getDamage(projectile);
-            grantGuardianAbsorption(player, serverLevel, damage, modifier.getLevel());
+            grantGuardianAbsorption(player, damage, modifier.getLevel());
         }
     }
 

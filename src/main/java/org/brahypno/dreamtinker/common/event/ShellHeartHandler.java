@@ -119,7 +119,11 @@ public class ShellHeartHandler {
 
     @SubscribeEvent
     public static void attachCapabilities(AttachCapabilitiesEvent<Entity> event) {
-        event.addCapability(new ResourceLocation(Dreamtinker.MODID, "shell_heart"), new ShellHeartProvider());
+        // Shell Heart is queried only from LivingEntity. Avoid allocating a backend and LazyOptional
+        // for item entities, XP orbs, projectiles and every other non-living entity in the world.
+        if (event.getObject() instanceof LivingEntity){
+            event.addCapability(new ResourceLocation(Dreamtinker.MODID, "shell_heart"), new ShellHeartProvider());
+        }
     }
 
     @SubscribeEvent

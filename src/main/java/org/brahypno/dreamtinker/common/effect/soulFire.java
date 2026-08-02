@@ -2,7 +2,6 @@ package org.brahypno.dreamtinker.common.effect;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -27,7 +26,6 @@ public class soulFire extends MobEffect {
         if (!(entity.level() instanceof ServerLevel sl))
             return;
 
-        RandomSource r = entity.getRandom();
         double w = entity.getBbWidth();
         double h = entity.getBbHeight();
 
@@ -37,46 +35,21 @@ public class soulFire extends MobEffect {
             default -> 10;
         };
 
-        // 底部魂火
-        for (int i = 0; i < baseCount; i++) {
-            double angle = r.nextDouble() * Math.PI * 2.0;
-            double radius = w * (0.25 + r.nextDouble() * 0.20);
-
-            double x = entity.getX() + Math.cos(angle) * radius;
-            double y = entity.getY() + r.nextDouble() * (h * 0.35);
-            double z = entity.getZ() + Math.sin(angle) * radius;
-
-            double vx = (r.nextDouble() - 0.5) * 0.02;
-            double vy = 0.02 + r.nextDouble() * 0.04;
-            double vz = (r.nextDouble() - 0.5) * 0.02;
-
-            sl.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, x, y, z, 1, vx, vy, vz, 0.0);
-        }
-
-        // 中段魂火
-        for (int i = 0; i < Math.max(2, baseCount / 2); i++) {
-            double angle = r.nextDouble() * Math.PI * 2.0;
-            double radius = w * (0.15 + r.nextDouble() * 0.15);
-
-            double x = entity.getX() + Math.cos(angle) * radius;
-            double y = entity.getY() + h * (0.35 + r.nextDouble() * 0.45);
-            double z = entity.getZ() + Math.sin(angle) * radius;
-
-            double vx = (r.nextDouble() - 0.5) * 0.015;
-            double vy = 0.015 + r.nextDouble() * 0.03;
-            double vz = (r.nextDouble() - 0.5) * 0.015;
-
-            sl.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, x, y, z, 1, vx, vy, vz, 0.0);
-        }
-
-        // 魂雾
-        for (int i = 0; i < 2; i++) {
-            double x = entity.getX() + (r.nextDouble() - 0.5) * w * 0.8;
-            double y = entity.getY() + r.nextDouble() * h;
-            double z = entity.getZ() + (r.nextDouble() - 0.5) * w * 0.8;
-
-            sl.sendParticles(ParticleTypes.SOUL, x, y, z, 1, 0.0, 0.02, 0.0, 0.0);
-        }
+        /*
+         * sendParticles already lets the client randomize `count` particles from one packet.
+         * The former loops emitted 11-17 packets every two ticks per burning entity. These three
+         * batched calls retain the lower flame, upper flame and soul-mist layers while reducing that
+         * traffic to exactly three particle packets per emission.
+         */
+        sl.sendParticles(ParticleTypes.SOUL_FIRE_FLAME,
+                         entity.getX(), entity.getY() + h * 0.18D, entity.getZ(),
+                         baseCount, w * 0.45D, h * 0.18D, w * 0.45D, 0.035D);
+        sl.sendParticles(ParticleTypes.SOUL_FIRE_FLAME,
+                         entity.getX(), entity.getY() + h * 0.58D, entity.getZ(),
+                         Math.max(2, baseCount / 2), w * 0.30D, h * 0.23D, w * 0.30D, 0.025D);
+        sl.sendParticles(ParticleTypes.SOUL,
+                         entity.getX(), entity.getY() + h * 0.50D, entity.getZ(),
+                         2, w * 0.40D, h * 0.50D, w * 0.40D, 0.02D);
     }
 
     @Override
@@ -121,4 +94,3 @@ public class soulFire extends MobEffect {
     }
 
 }
-

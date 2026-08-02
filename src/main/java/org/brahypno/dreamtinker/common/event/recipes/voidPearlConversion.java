@@ -39,7 +39,7 @@ public class voidPearlConversion {
 
     @SubscribeEvent
     public static void onWorldTick(TickEvent.LevelTickEvent event) {
-        if (event.phase != TickEvent.Phase.END || event.level.isClientSide)
+        if (event.phase != TickEvent.Phase.END || event.level.isClientSide || trackedEnderPearl.isEmpty())
             return;
         Level level = event.level;
         Iterator<Map.Entry<UUID, ItemEntity>> iterator = trackedEnderPearl.entrySet().iterator();

@@ -40,12 +40,12 @@ public class SlashOrbitRenderer extends EntityRenderer<SlashOrbitEntity> {
      * ANGULAR/LENGTH: ANGULAR_SLICES quads/layer
      * RADIAL: RADIAL_U_SLICES * RADIAL_V_SLICES quads/layer
      */
-    private static final int ANGULAR_SLICES = 32;
-    private static final int RADIAL_U_SLICES = 32;
-    private static final int RADIAL_V_SLICES = 8;
-    private static final int MAX_INNER_LAYERS = 16;
+    private static final int MAX_ANGULAR_SLICES = 16;
+    private static final int MAX_RADIAL_U_SLICES = 16;
+    private static final int MAX_RADIAL_V_SLICES = 4;
+    private static final int MAX_INNER_LAYERS = 8;
 
-    private static final int RADIAL_STRIDE = RADIAL_V_SLICES + 1;
+    private static final int RADIAL_STRIDE = MAX_RADIAL_V_SLICES + 1;
     private static final float[] RADIAL_T =
             createRadialParameters();
 
@@ -53,9 +53,9 @@ public class SlashOrbitRenderer extends EntityRenderer<SlashOrbitEntity> {
      * EntityRenderer is used on the render thread, so these scratch buffers can
      * be reused without allocating arrays for every entity and every frame.
      */
-    private final int[] angularColors = new int[ANGULAR_SLICES + 1];
+    private final int[] angularColors = new int[MAX_ANGULAR_SLICES + 1];
     private final int[] radialColors =
-            new int[(RADIAL_U_SLICES + 1) * RADIAL_STRIDE];
+            new int[(MAX_RADIAL_U_SLICES + 1) * RADIAL_STRIDE];
 
     private int mixColorA;
     private int mixColorB;
@@ -89,7 +89,8 @@ public class SlashOrbitRenderer extends EntityRenderer<SlashOrbitEntity> {
         float fade = Mth.clamp((1f - age / life) * DENSITY, MIN_ALPHA, 1f);
         float radius = entity.radius();
         float thickness = Math.max(0.02f, entity.thickness());
-        int layerCount = getLayerCount(radius, thickness);
+        MeshLod lod = selectLod(this.entityRenderDispatcher.distanceToSqr(entity));
+        int layerCount = getLayerCount(radius, thickness, lod.maxLayers());
         float innerRadius = Math.max(0.05f, radius - thickness);
 
         prepareColorMixer(entity.colorA(), entity.colorB(), entity.useHSV());
@@ -126,16 +127,17 @@ public class SlashOrbitRenderer extends EntityRenderer<SlashOrbitEntity> {
                         consumer, pose, normal, scale,
                         mixPrepared(wrap01(hueRoll)), fade);
                 case ANGULAR, LENGTH -> renderAngularLayer(
-                        consumer, pose, normal, scale, fade);
+                        consumer, pose, normal, scale, fade, lod.angularSlices());
                 case RADIAL -> renderRadialLayer(
-                        consumer, pose, normal, scale, fade);
+                        consumer, pose, normal, scale, fade,
+                        lod.radialUSlices(), lod.radialVSlices());
             }
         }
 
         poseStack.popPose();
     }
 
-    private static int getLayerCount(float radius, float thickness) {
+    private static int getLayerCount(float radius, float thickness, int maxLayers) {
         float baseScale = radius / R_MID_UV;
         float innerRadius = Math.max(0.05f, radius - thickness);
         float visibleBandWorld =
@@ -144,13 +146,23 @@ public class SlashOrbitRenderer extends EntityRenderer<SlashOrbitEntity> {
                 Math.max(MIN_STEP_WORLD, visibleBandWorld * STEP_OVERLAP);
         return Mth.clamp(
                 (int) Math.ceil((radius - innerRadius) / stepWorld) + 1,
-                1, MAX_INNER_LAYERS);
+                1, maxLayers);
+    }
+
+    private static MeshLod selectLod(double distanceSqr) {
+        if (distanceSqr <= 16.0D * 16.0D){
+            return new MeshLod(16, 16, 4, MAX_INNER_LAYERS);
+        }
+        if (distanceSqr <= 32.0D * 32.0D){
+            return new MeshLod(8, 8, 2, 4);
+        }
+        return new MeshLod(4, 4, 1, 2);
     }
 
     private void prepareAngularColors(
             SlashOrbitEntity.GradMode mode, float hueRoll) {
-        for (int i = 0; i <= ANGULAR_SLICES; i++) {
-            float alongArc = (float) i / ANGULAR_SLICES;
+        for (int i = 0; i <= MAX_ANGULAR_SLICES; i++) {
+            float alongArc = (float) i / MAX_ANGULAR_SLICES;
             float gradient = mode == SlashOrbitEntity.GradMode.ANGULAR
                              ? wrap01(alongArc + hueRoll)
                              : wrap01(alongArc);
@@ -175,12 +187,13 @@ public class SlashOrbitRenderer extends EntityRenderer<SlashOrbitEntity> {
 
     private void renderAngularLayer(
             VertexConsumer consumer, Matrix4f pose, Matrix3f normal,
-            float scale, float alpha) {
-        for (int uIndex = 0; uIndex < ANGULAR_SLICES; uIndex++) {
-            float u0 = (float) uIndex / ANGULAR_SLICES;
-            float u1 = (float) (uIndex + 1) / ANGULAR_SLICES;
-            int color0 = angularColors[uIndex];
-            int color1 = angularColors[uIndex + 1];
+            float scale, float alpha, int slices) {
+        int colorStep = MAX_ANGULAR_SLICES / slices;
+        for (int uIndex = 0; uIndex < slices; uIndex++) {
+            float u0 = (float) uIndex / slices;
+            float u1 = (float) (uIndex + 1) / slices;
+            int color0 = angularColors[uIndex * colorStep];
+            int color1 = angularColors[(uIndex + 1) * colorStep];
 
             putQuad(
                     consumer, pose, normal, scale,
@@ -191,19 +204,26 @@ public class SlashOrbitRenderer extends EntityRenderer<SlashOrbitEntity> {
 
     private void renderRadialLayer(
             VertexConsumer consumer, Matrix4f pose, Matrix3f normal,
-            float scale, float alpha) {
-        for (int uIndex = 0; uIndex < RADIAL_U_SLICES; uIndex++) {
-            float u0 = (float) uIndex / RADIAL_U_SLICES;
-            float u1 = (float) (uIndex + 1) / RADIAL_U_SLICES;
+            float scale, float alpha, int uSlices, int vSlices) {
+        int uColorStep = MAX_RADIAL_U_SLICES / uSlices;
+        int vColorStep = MAX_RADIAL_V_SLICES / vSlices;
+        for (int uIndex = 0; uIndex < uSlices; uIndex++) {
+            float u0 = (float) uIndex / uSlices;
+            float u1 = (float) (uIndex + 1) / uSlices;
 
-            for (int vIndex = 0; vIndex < RADIAL_V_SLICES; vIndex++) {
-                float v0 = (float) vIndex / RADIAL_V_SLICES;
-                float v1 = (float) (vIndex + 1) / RADIAL_V_SLICES;
+            for (int vIndex = 0; vIndex < vSlices; vIndex++) {
+                float v0 = (float) vIndex / vSlices;
+                float v1 = (float) (vIndex + 1) / vSlices;
 
-                int lowerLeft = radialIndex(uIndex, vIndex + 1);
-                int lowerRight = radialIndex(uIndex + 1, vIndex + 1);
-                int upperRight = radialIndex(uIndex + 1, vIndex);
-                int upperLeft = radialIndex(uIndex, vIndex);
+                int colorU0 = uIndex * uColorStep;
+                int colorU1 = (uIndex + 1) * uColorStep;
+                int colorV0 = vIndex * vColorStep;
+                int colorV1 = (vIndex + 1) * vColorStep;
+
+                int lowerLeft = radialIndex(colorU0, colorV1);
+                int lowerRight = radialIndex(colorU1, colorV1);
+                int upperRight = radialIndex(colorU1, colorV0);
+                int upperLeft = radialIndex(colorU0, colorV0);
 
                 putQuad(
                         consumer, pose, normal, scale,
@@ -252,12 +272,12 @@ public class SlashOrbitRenderer extends EntityRenderer<SlashOrbitEntity> {
 
     private static float[] createRadialParameters() {
         float[] result =
-                new float[(RADIAL_U_SLICES + 1) * RADIAL_STRIDE];
+                new float[(MAX_RADIAL_U_SLICES + 1) * RADIAL_STRIDE];
 
-        for (int uIndex = 0; uIndex <= RADIAL_U_SLICES; uIndex++) {
-            float u = (float) uIndex / RADIAL_U_SLICES;
-            for (int vIndex = 0; vIndex <= RADIAL_V_SLICES; vIndex++) {
-                float v = (float) vIndex / RADIAL_V_SLICES;
+        for (int uIndex = 0; uIndex <= MAX_RADIAL_U_SLICES; uIndex++) {
+            float u = (float) uIndex / MAX_RADIAL_U_SLICES;
+            for (int vIndex = 0; vIndex <= MAX_RADIAL_V_SLICES; vIndex++) {
+                float v = (float) vIndex / MAX_RADIAL_V_SLICES;
                 result[radialIndex(uIndex, vIndex)] =
                         radial01FromUv(u, v);
             }
@@ -423,4 +443,10 @@ public class SlashOrbitRenderer extends EntityRenderer<SlashOrbitEntity> {
         value %= 1f;
         return value < 0f ? value + 1f : value;
     }
+
+    /**
+     * Close RADIAL rendering is capped at 16*4*8 = 512 quads instead of the former
+     * 32*8*16 = 4096; medium/far entities become progressively cheaper.
+     */
+    private record MeshLod(int angularSlices, int radialUSlices, int radialVSlices, int maxLayers) {}
 }

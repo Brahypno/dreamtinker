@@ -3,7 +3,6 @@ package org.brahypno.dreamtinker.library.client;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
@@ -23,7 +22,7 @@ public class DreamtinkerClient {
     @SubscribeEvent
     public static void clientSetup(final FMLClientSetupEvent event) {
         if (ModList.get().isLoaded("eidolon")){
-            MinecraftForge.EVENT_BUS.addListener((Event e) -> DTEidolonCompat.onAnyForgeEvent(e));
+            DTEidolonCompat.registerCodexPostInitListener(MinecraftForge.EVENT_BUS);
         }
     }
 }

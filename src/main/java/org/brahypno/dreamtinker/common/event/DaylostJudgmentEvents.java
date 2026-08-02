@@ -14,7 +14,6 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.monster.Enemy;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.server.ServerStoppedEvent;
@@ -26,9 +25,8 @@ import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerDamageTypes;
 import org.brahypno.dreamtinker.common.DreamtinkerEffects;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
+import org.brahypno.dreamtinker.utils.EquippedModifierSnapshot;
 import org.brahypno.esotericismtinker.utils.damage.DamageProbe;
-import slimeknights.tconstruct.library.tools.item.IModifiable;
-import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -117,8 +115,12 @@ public final class DaylostJudgmentEvents {
 
         LivingEntity defender = event.getEntity();
         MobEffectInstance daylost = attacker.getEffect(DreamtinkerEffects.Daylost.get());
+        if (daylost == null || attacker == defender){
+            return;
+        }
+        // Sunless requires an equipment traversal; do it only after the cheap Daylost test succeeds.
         int sunlessLevel = getSunlessLevel(defender);
-        if (daylost == null || sunlessLevel <= 0 || attacker == defender){
+        if (sunlessLevel <= 0){
             return;
         }
 
@@ -187,8 +189,11 @@ public final class DaylostJudgmentEvents {
 
         LivingEntity daylostEntity = event.getEntity();
         MobEffectInstance daylost = daylostEntity.getEffect(DreamtinkerEffects.Daylost.get());
+        if (attacker == daylostEntity || daylost == null){
+            return;
+        }
         int sunlessLevel = getSunlessLevel(attacker);
-        if (attacker == daylostEntity || daylost == null || sunlessLevel <= 0){
+        if (sunlessLevel <= 0){
             return;
         }
 
@@ -287,6 +292,9 @@ public final class DaylostJudgmentEvents {
         if (event.phase != TickEvent.Phase.END || event.level.isClientSide() || !(event.level instanceof ServerLevel level)){
             return;
         }
+        if (DELAYED_ATTACKS.isEmpty() && REDUCED_ATTACKS.isEmpty()){
+            return;
+        }
 
         long now = level.getGameTime();
         REDUCED_ATTACKS.entrySet().removeIf(entry -> entry.getValue().tick() < now);
@@ -331,13 +339,7 @@ public final class DaylostJudgmentEvents {
     }
 
     private static int getSunlessLevel(LivingEntity entity) {
-        int level = 0;
-        for (ItemStack stack : entity.getAllSlots()) {
-            if (!stack.isEmpty() && stack.getItem() instanceof IModifiable){
-                level += ToolStack.from(stack).getModifierLevel(DreamtinkerModifiers.sunless.getId());
-            }
-        }
-        return level;
+        return EquippedModifierSnapshot.getLevel(entity, DreamtinkerModifiers.sunless.getId());
     }
 
     public static void applyDaylostFromSunless(@javax.annotation.Nullable LivingEntity target, LivingEntity owner, int level) {

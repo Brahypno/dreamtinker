@@ -32,7 +32,7 @@ import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
 import java.util.List;
 
-import static org.brahypno.dreamtinker.tools.modifiers.events.OathGuardPaleSteelEvents.isGuardianProtectedTarget;
+import static org.brahypno.dreamtinker.tools.modifiers.events.OathGuardPaleSteelEvents.findProtectedTargets;
 import static org.brahypno.dreamtinker.tools.modifiers.events.OathGuardPaleSteelEvents.oathPaleSteelId;
 
 public class PaleOath extends Modifier implements ProtectionModifierHook, InventoryTickModifierHook, TooltipModifierHook, ValidateModifierHook, ModifierRemovalHook {
@@ -44,12 +44,8 @@ public class PaleOath extends Modifier implements ProtectionModifierHook, Invent
 
     @Override
     public float getProtectionModifier(IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType, DamageSource source, float modifierValue) {
-        if (context.getLevel() instanceof ServerLevel sl && context.getEntity() instanceof ServerPlayer sp)
-            modifierValue += sl.getEntitiesOfClass(
-                    LivingEntity.class,
-                    context.getEntity().getBoundingBox().inflate(16.0D),
-                    target -> target.isAlive()
-                              && isGuardianProtectedTarget(sp, target)).size() * 2.5f;
+        if (context.getLevel() instanceof ServerLevel && context.getEntity() instanceof ServerPlayer sp)
+            modifierValue += findProtectedTargets(sp).size() * 2.5f;
         return modifierValue;
     }
 

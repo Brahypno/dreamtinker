@@ -166,35 +166,46 @@ public class EldritchPan extends Modifier implements MeleeHitModifierHook, Damag
         if (holder instanceof Player player)
             if (isSelected){
                 int currentTicks = tool.getPersistentData().getInt(TAG_PAN_TICKS);
+                int nextTicks = currentTicks == Integer.MAX_VALUE ? Integer.MAX_VALUE : currentTicks + 1;
+                int amplifier = Math.min(currentTicks / EnigmaticLegacyCompat.bloodlustTicksPerLevel(), 9);
 
                 if (EnigmaticLegacyCompat.cannotHunger(player)){
-                    int bloodlustAmplifier = currentTicks / EnigmaticLegacyCompat.bloodlustTicksPerLevel();
-
-                    bloodlustAmplifier = Math.min(bloodlustAmplifier, 9);
-
-                    if (null != getBloodlust())
-                        player.addEffect(new MobEffectInstance(getBloodlust(),
-                                                               MobEffectInstance.INFINITE_DURATION, bloodlustAmplifier, true, true));
+                    updateHeldEffect(player, getBloodlust(), getHunger(), amplifier);
                 }else {
-                    int hungerAmplifier = currentTicks / EnigmaticLegacyCompat.bloodlustTicksPerLevel();
-
-                    hungerAmplifier = Math.min(hungerAmplifier, 9);
-
-                    if (null != getHunger())
-                        player.addEffect(new MobEffectInstance(getHunger(),
-                                                               MobEffectInstance.INFINITE_DURATION, hungerAmplifier, true, true));
+                    updateHeldEffect(player, getHunger(), getBloodlust(), amplifier);
                 }
 
-                EnigmaticLegacyCompat.setEldritchPanHoldingDuration(player, ++currentTicks);
-                tool.getPersistentData().putInt(TAG_PAN_TICKS, ++currentTicks);
+                // The old pair of pre-increments made the external and tool counters diverge by one
+                // and advanced the tool counter twice per tick.
+                EnigmaticLegacyCompat.setEldritchPanHoldingDuration(player, nextTicks);
+                tool.getPersistentData().putInt(TAG_PAN_TICKS, nextTicks);
             }else {
-                tool.getPersistentData().putInt(TAG_PAN_TICKS, 0);
+                if (tool.getPersistentData().getInt(TAG_PAN_TICKS) != 0){
+                    tool.getPersistentData().putInt(TAG_PAN_TICKS, 0);
+                }
                 if (null != getHunger())
                     player.removeEffect(getHunger());
                 if (null != getBloodlust())
                     player.removeEffect(getBloodlust());
             }
 
+    }
+
+    private static void updateHeldEffect(Player player, @Nullable MobEffect desired, @Nullable MobEffect opposite, int amplifier) {
+        if (opposite != null && player.hasEffect(opposite)){
+            player.removeEffect(opposite);
+        }
+        if (desired == null){
+            return;
+        }
+
+        MobEffectInstance active = player.getEffect(desired);
+        if (active == null
+            || active.getAmplifier() != amplifier
+            || active.getDuration() != MobEffectInstance.INFINITE_DURATION){
+            player.addEffect(new MobEffectInstance(
+                    desired, MobEffectInstance.INFINITE_DURATION, amplifier, true, true));
+        }
     }
 
     @Override

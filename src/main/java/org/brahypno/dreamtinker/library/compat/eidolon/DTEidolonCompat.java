@@ -5,6 +5,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModList;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerCommon;
@@ -29,14 +31,34 @@ public final class DTEidolonCompat {
         addAltarEntry(TinkerWorld.heads.get(TinkerHeadType.PIGLIN_BRUTE), "skull", 5.0D, 5.0D);
     }
 
-    public static void onAnyForgeEvent(Event event) {
-        if (injectedCodex)
-            return;
+    /**
+     * Eidolon is optional, so its event type is resolved reflectively. Registering that exact class
+     * avoids the former catch-all listener being invoked for every Forge event on the client.
+     */
+    public static void registerCodexPostInitListener(IEventBus eventBus) {
         if (!ModList.get().isLoaded("eidolon"))
             return;
+        try {
+            Class<?> rawEventClass = Class.forName("elucent.eidolon.codex.CodexEvents$PostInit");
+            if (!Event.class.isAssignableFrom(rawEventClass)){
+                Dreamtinker.LOGGER.error("Eidolon Codex PostInit is not a Forge event: {}", rawEventClass.getName());
+                return;
+            }
+            @SuppressWarnings("unchecked")
+            Class<? extends Event> eventClass = (Class<? extends Event>) rawEventClass;
+            registerTypedListener(eventBus, eventClass);
+        }
+        catch (ClassNotFoundException e) {
+            Dreamtinker.LOGGER.error("Failed to locate Eidolon Codex PostInit event", e);
+        }
+    }
 
-        String name = event.getClass().getName();
-        if (!name.equals("elucent.eidolon.codex.CodexEvents$PostInit"))
+    private static <T extends Event> void registerTypedListener(IEventBus eventBus, Class<T> eventClass) {
+        eventBus.addListener(EventPriority.NORMAL, false, eventClass, DTEidolonCompat::onCodexPostInit);
+    }
+
+    private static void onCodexPostInit(Event event) {
+        if (injectedCodex)
             return;
 
         injectedCodex = true;

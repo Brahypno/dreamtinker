@@ -54,15 +54,17 @@ public class RainbowCatcher extends Modifier implements InventoryTickModifierHoo
         boolean cur = holder.isInWaterOrRain() && !holder.isInWater();
         boolean prev = stat.contains(TAG_IN_RAIN) && stat.getBoolean(TAG_IN_RAIN);
         float blocked_dmg = stat.getFloat(TAG_RAIN_BLOCK);
-        boolean early_check =
-                (!isSelected && !isCorrectSlot) && ETModifierCheck.ModifierInBody(holder, this.getId());//unequipped but still have ability to block damage.
-        if (0 < blocked_dmg)
+        if (0 < blocked_dmg) {
+            // Body/Curios scanning matters only while delayed damage actually exists.
+            boolean early_check =
+                    (!isSelected && !isCorrectSlot) && ETModifierCheck.ModifierInBody(holder, this.getId());//unequipped but still have ability to block damage.
             if (cur != prev && !cur || (!isSelected && !isCorrectSlot)){
                 holder.hurt(DreamtinkerDamageTypes.source(holder.level().registryAccess(), DreamtinkerDamageTypes.rain_bow, null, null),
                             Math.min(Integer.MAX_VALUE, blocked_dmg * (early_check ? 1 : 3)));
                 stat.remove(TAG_RAIN_BLOCK);
 
             }
+        }
         if (cur != prev)
             stat.putBoolean(TAG_IN_RAIN, cur);
     }

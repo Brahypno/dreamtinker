@@ -9,7 +9,10 @@ import org.brahypno.dreamtinker.library.client.Overlay.ColorMaskMode;
 import org.brahypno.dreamtinker.network.DNetwork;
 import org.brahypno.dreamtinker.network.S2CColorMaskToggle;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.UUID;
 
 public final class MaskService {
     private static final Map<UUID, Map<ResourceLocation, Instance>> ACTIVE = new HashMap<>();
@@ -136,9 +139,14 @@ public final class MaskService {
         if (map == null || map.isEmpty())
             return null;
 
-        return map.values().stream()
-                  .max(Comparator.comparingInt((Instance i) -> i.priority).thenComparingLong(i -> i.order))
-                  .orElse(null);
+        Instance selected = null;
+        for (Instance candidate : map.values()) {
+            if (selected == null || candidate.priority > selected.priority
+                || candidate.priority == selected.priority && candidate.order > selected.order){
+                selected = candidate;
+            }
+        }
+        return selected;
     }
 
     private static void sendOn(ServerPlayer sp, Instance i, int fadeIn) {
@@ -159,11 +167,17 @@ public final class MaskService {
         if (server == null || ACTIVE.isEmpty())
             return;
 
-        for (ServerPlayer sp : server.getPlayerList().getPlayers()) {
-            UUID uuid = sp.getUUID();
-            Map<ResourceLocation, Instance> map = ACTIVE.get(uuid);
-            if (map == null || map.isEmpty())
+        Iterator<Map.Entry<UUID, Map<ResourceLocation, Instance>>> activeIterator = ACTIVE.entrySet().iterator();
+        while (activeIterator.hasNext()) {
+            Map.Entry<UUID, Map<ResourceLocation, Instance>> activeEntry = activeIterator.next();
+            UUID uuid = activeEntry.getKey();
+            Map<ResourceLocation, Instance> map = activeEntry.getValue();
+            ServerPlayer sp = server.getPlayerList().getPlayer(uuid);
+            if (sp == null){
+                activeIterator.remove();
+                SENT.remove(uuid);
                 continue;
+            }
 
             long now = sp.serverLevel().getGameTime();
             boolean changed = false;
@@ -192,7 +206,7 @@ public final class MaskService {
                 continue;
 
             if (map.isEmpty()){
-                ACTIVE.remove(uuid);
+                activeIterator.remove();
                 if (removedVisible)
                     sendOffIfNeeded(sp, fadeOut);
             }else {
@@ -203,20 +217,7 @@ public final class MaskService {
         }
     }
 
-    private static final class SentState {
-        final boolean enabled;
-        final ColorMaskMode mode;
-        final int argb, range;
-        final float grayStrength, vividStrength;
-
-        SentState(boolean enabled, ColorMaskMode mode, int argb, int range, float grayStrength, float vividStrength) {
-            this.enabled = enabled;
-            this.mode = mode;
-            this.argb = argb;
-            this.range = range;
-            this.grayStrength = grayStrength;
-            this.vividStrength = vividStrength;
-        }
+    private record SentState(boolean enabled, ColorMaskMode mode, int argb, int range, float grayStrength, float vividStrength) {
 
         boolean sameAs(Instance i) {
             return enabled && i != null && mode == i.mode && argb == i.argb && range == i.range && Float.compare(grayStrength, i.grayStrength) == 0 &&

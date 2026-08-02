@@ -186,8 +186,17 @@ public class WiserLightBolt extends LightningBolt {
                                                  target -> target.isAlive() && target != from && !(target instanceof ItemEntity) &&
                                                            !this.hitEntities.contains(target) && !this.chainHitEntities.contains(target.getUUID()) &&
                                                            this.isChainTarget(owner, target));
-        targets.sort(Comparator.comparingDouble(target -> target.distanceToSqr(from)));
-        return targets.isEmpty() ? null : targets.get(0);
+        // Only the nearest target is needed; a linear minimum avoids sorting the whole candidate list.
+        Entity nearest = null;
+        double nearestDistanceSqr = Double.MAX_VALUE;
+        for (Entity target : targets) {
+            double distanceSqr = target.distanceToSqr(from);
+            if (distanceSqr < nearestDistanceSqr){
+                nearest = target;
+                nearestDistanceSqr = distanceSqr;
+            }
+        }
+        return nearest;
     }
 
     private boolean isChainTarget(@Nullable LivingEntity owner, Entity target) {

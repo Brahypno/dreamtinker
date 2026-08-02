@@ -2,7 +2,6 @@ package org.brahypno.dreamtinker.tools.modifiers.traits.Compat.aquamirae;
 
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -13,7 +12,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.phys.EntityHitResult;
-import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.level.LevelEvent;
+import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.brahypno.dreamtinker.Dreamtinker;
@@ -35,7 +36,7 @@ import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 import slimeknights.tconstruct.tools.data.ModifierIds;
 
 import javax.annotation.Nullable;
-import java.util.UUID;
+import java.util.*;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class VoidReenactment extends Modifier implements MeleeHitModifierHook, ProjectileHitModifierHook {
@@ -44,10 +45,10 @@ public class VoidReenactment extends Modifier implements MeleeHitModifierHook, P
      */
     private static final DustParticleOptions ECHO_DUST =
             new DustParticleOptions(new Vector3f(0x4D / 255.0F, 0xCA / 255.0F, 0xDE / 255.0F), 0.8F);
-    private static final String PENDING = "dreamtinker_void_reenactment_pending";
-    private static final String DUE_TIME = "dreamtinker_void_reenactment_due";
-    private static final String DAMAGE = "dreamtinker_void_reenactment_damage";
-    private static final String ATTACKER = "dreamtinker_void_reenactment_attacker";
+    /**
+     * Only levels that currently contain a scheduled echo are present here.
+     */
+    private static final Map<ServerLevel, EchoQueue> PENDING_ECHOES = new IdentityHashMap<>();
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
@@ -73,20 +74,17 @@ public class VoidReenactment extends Modifier implements MeleeHitModifierHook, P
                         SoundSource.PLAYERS, 0.4F, 0.75F + level.random.nextFloat() * 0.1F);
     }
 
-    private static void schedule(LivingEntity target, @Nullable LivingEntity attacker, float damage, int level) {
-        if (target.level().isClientSide || damage <= 0){
+    private static void schedule(LivingEntity target, @Nullable LivingEntity attacker, float damage, int modifierLevel) {
+        if (!(target.level() instanceof ServerLevel serverLevel) || damage <= 0){
             return;
         }
-        CompoundTag data = target.getPersistentData();
-        if (data.getBoolean(PENDING)){
-            return;
-        }
-        data.putBoolean(PENDING, true);
-        data.putLong(DUE_TIME, target.level().getGameTime() + 10);
-        data.putFloat(DAMAGE, damage * echoRatio(level));
-        if (attacker != null){
-            data.putUUID(ATTACKER, attacker.getUUID());
-        }
+        EchoQueue queue = PENDING_ECHOES.computeIfAbsent(serverLevel, ignored -> new EchoQueue());
+        queue.schedule(new PendingEcho(
+                serverLevel.getGameTime() + 10L,
+                target.getUUID(),
+                attacker == null ? null : attacker.getUUID(),
+                damage * echoRatio(modifierLevel)
+        ));
     }
 
     @Override
@@ -108,24 +106,44 @@ public class VoidReenactment extends Modifier implements MeleeHitModifierHook, P
     }
 
     @SubscribeEvent
-    public static void applyPendingEcho(LivingEvent.LivingTickEvent event) {
-        LivingEntity target = event.getEntity();
-        if (!(target.level() instanceof ServerLevel level)){
+    public static void applyPendingEcho(TickEvent.LevelTickEvent event) {
+        if (event.phase != TickEvent.Phase.END || !(event.level instanceof ServerLevel level)){
             return;
         }
-        CompoundTag data = target.getPersistentData();
-        if (!data.getBoolean(PENDING) || level.getGameTime() < data.getLong(DUE_TIME)){
+        EchoQueue queue = PENDING_ECHOES.get(level);
+        if (queue == null){
             return;
         }
 
-        float damage = data.getFloat(DAMAGE);
-        UUID attackerId = data.hasUUID(ATTACKER) ? data.getUUID(ATTACKER) : null;
-        data.remove(PENDING);
-        data.remove(DUE_TIME);
-        data.remove(DAMAGE);
-        data.remove(ATTACKER);
+        long now = level.getGameTime();
+        PendingEcho echo;
+        while ((echo = queue.pollDue(now)) != null) {
+            executeEcho(level, echo);
+        }
+        if (queue.isEmpty()){
+            PENDING_ECHOES.remove(level);
+        }
+    }
 
-        Entity attacker = attackerId == null ? null : level.getEntity(attackerId);
+    @SubscribeEvent
+    public static void onLevelUnload(LevelEvent.Unload event) {
+        if (event.getLevel() instanceof ServerLevel level){
+            PENDING_ECHOES.remove(level);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onServerStopped(ServerStoppedEvent event) {
+        PENDING_ECHOES.clear();
+    }
+
+    private static void executeEcho(ServerLevel level, PendingEcho echo) {
+        Entity targetEntity = level.getEntity(echo.targetId());
+        if (!(targetEntity instanceof LivingEntity target) || !target.isAlive()){
+            return;
+        }
+
+        Entity attacker = echo.attackerId() == null ? null : level.getEntity(echo.attackerId());
         DamageSource source = attacker instanceof Player player
                               ? target.damageSources().playerAttack(player)
                               : attacker instanceof LivingEntity living
@@ -136,12 +154,45 @@ public class VoidReenactment extends Modifier implements MeleeHitModifierHook, P
             // The echo lands inside the original hit's immunity window. Clear it for this damage only,
             // otherwise vanilla rejects the smaller follow-up hit.
             target.invulnerableTime = 0;
-            if (target.hurt(source, damage)){
+            if (target.hurt(source, echo.damage())){
                 playEchoEffect(level, target);
             }
         }
         finally {
             target.invulnerableTime = invulnerableTime;
+        }
+    }
+
+    private record PendingEcho(long dueTime, UUID targetId, @Nullable UUID attackerId, float damage) {}
+
+    /**
+     * Priority queue makes a level tick proportional to echoes that are due, not to all living entities.
+     */
+    private static final class EchoQueue {
+        private final PriorityQueue<PendingEcho> byDueTime =
+                new PriorityQueue<>(Comparator.comparingLong(PendingEcho::dueTime));
+        private final Map<UUID, PendingEcho> byTarget = new HashMap<>();
+
+        private void schedule(PendingEcho echo) {
+            // Preserve the old PENDING flag semantics: one outstanding echo per target.
+            if (byTarget.putIfAbsent(echo.targetId(), echo) == null){
+                byDueTime.add(echo);
+            }
+        }
+
+        @Nullable
+        private PendingEcho pollDue(long now) {
+            PendingEcho next = byDueTime.peek();
+            if (next == null || next.dueTime() > now){
+                return null;
+            }
+            byDueTime.remove();
+            byTarget.remove(next.targetId(), next);
+            return next;
+        }
+
+        private boolean isEmpty() {
+            return byDueTime.isEmpty();
         }
     }
 }

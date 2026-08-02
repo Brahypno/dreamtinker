@@ -28,7 +28,10 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import static org.brahypno.dreamtinker.config.DreamtinkerConfig.BurnInVainInAccuracy;
 import static org.brahypno.dreamtinker.config.DreamtinkerConfig.BurnInVainRandomProj;
@@ -49,6 +52,9 @@ public class BurningInVain extends Modifier implements ProjectileLaunchModifierH
     }
 
     private static final List<EntityType<? extends Projectile>> PROJECTILE_TYPES = new ArrayList<>();
+    private static final Set<EntityType<?>> TESTED_PROJECTILE_TYPES = new HashSet<>();
+    private static Iterator<EntityType<?>> projectileTypeCandidates;
+    private static final int TYPE_DISCOVERY_BUDGET_PER_SHOT = 16;
 
     @Override
     public void onProjectileLaunch(IToolStackView tool, ModifierEntry modifier, LivingEntity shooter, Projectile projectile, @Nullable AbstractArrow arrow, ModDataNBT persistentData, boolean primary) {
@@ -65,7 +71,8 @@ public class BurningInVain extends Modifier implements ProjectileLaunchModifierH
         Vec3 dir = motion.lengthSqr() > 1.0E-6D ? motion.normalize() : shooter.getLookAngle().normalize();
         Vec3 spawnPos = getSafeProjectileSpawnPos(shooter, dir, projectile.getBbWidth(), projectile.getBbHeight());
 
-        Projectile newProj = createRandomProjectile(world, shooter, spawnPos.x, spawnPos.y, spawnPos.z, motion);
+        Projectile newProj = createRandomProjectile(
+                world, shooter, spawnPos.x, spawnPos.y, spawnPos.z, motion, projectile.getType());
         if (newProj == null)
             return;
 
@@ -92,22 +99,13 @@ public class BurningInVain extends Modifier implements ProjectileLaunchModifierH
     }
 
     @SuppressWarnings("unchecked")
-    private Projectile createRandomProjectile(ServerLevel level, LivingEntity shooter, double px, double py, double pz, Vec3 motion) {
-        // 第一次调用时，构建投射物类型列表
-        if (PROJECTILE_TYPES.isEmpty()){
-            for (EntityType<?> type : ForgeRegistries.ENTITY_TYPES.getValues()) {
-                try {
-                    Entity test = type.create(level);
-                    if (test instanceof Projectile){
-                        //noinspection unchecked
-                        PROJECTILE_TYPES.add((EntityType<? extends Projectile>) type);
-                    }
-                }
-                catch (Exception e) {
-                    // 某些实体类型可能不支持 create(world)，直接跳过
-                }
-            }
-        }
+    private Projectile createRandomProjectile(
+            ServerLevel level, LivingEntity shooter, double px, double py, double pz,
+            Vec3 motion, EntityType<?> fallbackType) {
+        /* Discover only a small registry slice per shot. The old first shot instantiated every
+         * registered EntityType in one frame, causing a visible hitch in large modpacks. */
+        discoverProjectileTypes(level, TYPE_DISCOVERY_BUDGET_PER_SHOT);
+        addKnownProjectileType(fallbackType);
         if (PROJECTILE_TYPES.isEmpty())
             return null;
 
@@ -128,6 +126,36 @@ public class BurningInVain extends Modifier implements ProjectileLaunchModifierH
         if (newProj instanceof WitherSkull)
             ((WitherSkull) newProj).setDangerous(level.random.nextFloat() < 0.15);
         return newProj;
+    }
+
+    private static void discoverProjectileTypes(ServerLevel level, int budget) {
+        if (projectileTypeCandidates == null){
+            projectileTypeCandidates = new ArrayList<>(ForgeRegistries.ENTITY_TYPES.getValues()).iterator();
+        }
+
+        int remaining = Math.max(1, budget);
+        while (remaining-- > 0 && projectileTypeCandidates.hasNext()) {
+            EntityType<?> type = projectileTypeCandidates.next();
+            if (!TESTED_PROJECTILE_TYPES.add(type)){
+                continue;
+            }
+            try {
+                Entity test = type.create(level);
+                if (test instanceof Projectile){
+                    addKnownProjectileType(type);
+                }
+            }
+            catch (RuntimeException ignored) {
+                // Some modded types cannot be constructed without their normal spawn context.
+            }
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private static void addKnownProjectileType(EntityType<?> type) {
+        if (!PROJECTILE_TYPES.contains(type)){
+            PROJECTILE_TYPES.add((EntityType<? extends Projectile>) type);
+        }
     }
 
 

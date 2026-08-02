@@ -106,7 +106,9 @@ public class ViewTracing extends NoLevelsModifier implements ProjectileLaunchMod
     @Override
     public void onProjectileLaunch(IToolStackView tool, ModifierEntry modifier, LivingEntity shooter, Projectile projectile, @Nullable AbstractArrow arrow, ModDataNBT persistentData, boolean primary) {
         if (projectile instanceof TargetTracker mode){
-            mode.dreamtinker$setMode(lookedEntityPredicate(shooter, 16.0D));
+            // The ray trace already resolves one exact target. Store its entity ID instead of
+            // rescanning a 12-block cube every projectile tick to rediscover the same entity.
+            mode.dreamtinker$lockTarget(getLookedEntity(shooter, 16.0D));
         }
     }
 }

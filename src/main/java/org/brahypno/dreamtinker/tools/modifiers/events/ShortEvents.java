@@ -35,7 +35,7 @@ import org.brahypno.dreamtinker.common.DreamtinkerDamageTypes;
 import org.brahypno.dreamtinker.common.DreamtinkerEffects;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.brahypno.dreamtinker.tools.items.TNTArrow;
-import org.brahypno.esotericismtinker.utils.ETModifierCheck;
+import org.brahypno.dreamtinker.utils.EquippedModifierSnapshot;
 import org.brahypno.esotericismtinker.utils.MessagesUtil;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
@@ -72,7 +72,7 @@ public class ShortEvents {
         int multi = revealedLevel(event.getEntity(), 2);
         if (0 < multi)
             event.modifyVisibility(Mth.clamp(0.5 * multi + 1.5, 1.0, 4.0));
-        int hidden_multi = ETModifierCheck.getEntityModifierNum(event.getEntity(), DreamtinkerModifiers.Ids.hidden_shape);
+        int hidden_multi = EquippedModifierSnapshot.getLevel(event.getEntity(), DreamtinkerModifiers.Ids.hidden_shape);
         if (0 < hidden_multi)
             event.modifyVisibility(0.25 + 0.75 * Math.pow(0.60, hidden_multi));
     }
@@ -137,7 +137,7 @@ public class ShortEvents {
             return;
 
         // 你的判定：比如玩家/村民有某标签、状态或物品
-        int homunculusGift = ETModifierCheck.getEntityModifierNum(e.getEntity(), DreamtinkerModifiers.Ids.homunculusGift);
+        int homunculusGift = EquippedModifierSnapshot.getLevel(e.getEntity(), DreamtinkerModifiers.Ids.homunculusGift);
         if (homunculusGift <= 0)
             return;
 
@@ -236,8 +236,7 @@ public class ShortEvents {
     }
 
     private static int revealedLevel(LivingEntity entity, int whimsyWeight) {
-        return ETModifierCheck.getEntityModifierNum(entity, DreamtinkerModifiers.Ids.golden_face)
-               + whimsyWeight * ETModifierCheck.getEntityModifierNum(entity, DreamtinkerModifiers.Ids.whimsy_face);
+        return EquippedModifierSnapshot.getLevel(entity, DreamtinkerModifiers.Ids.golden_face)
+               + whimsyWeight * EquippedModifierSnapshot.getLevel(entity, DreamtinkerModifiers.Ids.whimsy_face);
     }
 }
-

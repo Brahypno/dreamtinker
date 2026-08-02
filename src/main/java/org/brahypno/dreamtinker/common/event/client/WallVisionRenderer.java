@@ -18,6 +18,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -29,6 +30,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.brahypno.dreamtinker.Dreamtinker;
+import org.brahypno.dreamtinker.config.DreamtinkerClientConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,16 +47,6 @@ public class WallVisionRenderer {
      * <p>
      * 玩家跨方块移动时不受该值限制，会尽快开始新扫描。
      */
-    private static final int CACHE_REFRESH_TICKS = 5;
-
-    /**
-     * 每个客户端 tick 最多检查的方块数。
-     * <p>
-     * 若仍有客户端 tick 卡顿，可降至 4096；
-     * 若机器性能较好、希望刷新更快，可提高至 16384。
-     */
-    private static final int SCAN_BUDGET_PER_TICK = 8192;
-
     /**
      * 服务端同步过来的半径最终会被钳制到该值。
      * <p>
@@ -67,8 +59,6 @@ public class WallVisionRenderer {
      * <p>
      * 16384 个线框已经非常多，继续提高通常只会让 GPU 和内存压力暴涨。
      */
-    private static final int MAX_HIGHLIGHTS = 16_384;
-
     private static final CollisionContext EMPTY_CONTEXT = CollisionContext.empty();
 
     /**
@@ -156,6 +146,7 @@ public class WallVisionRenderer {
             return;
         }
 
+        // RenderLevelStageEvent already exposes the mutable pose stack used for this stage.
         PoseStack poseStack = event.getPoseStack();
         Camera camera = event.getCamera();
         Vec3 camPos = camera.getPosition();
@@ -171,6 +162,9 @@ public class WallVisionRenderer {
         );
 
         for (HighlightedBlock block : snapshot) {
+            if (!event.getFrustum().isVisible(block.bounds())){
+                continue;
+            }
             renderHighlightedBlock(
                     poseStack,
                     builder,
@@ -227,7 +221,7 @@ public class WallVisionRenderer {
 
         activeScan.process(
                 level,
-                SCAN_BUDGET_PER_TICK
+                DreamtinkerClientConfig.WALL_VISION_SCAN_BUDGET.get()
         );
 
         /*
@@ -246,7 +240,7 @@ public class WallVisionRenderer {
 
         highlightCache = activeScan.results();
         cachedCenter = activeScan.center();
-        nextRefreshTick = gameTime + CACHE_REFRESH_TICKS;
+        nextRefreshTick = gameTime + DreamtinkerClientConfig.WALL_VISION_STATIONARY_REFRESH_TICKS.get();
         activeScan = null;
     }
 
@@ -340,7 +334,8 @@ public class WallVisionRenderer {
             int x,
             int y,
             int z,
-            VoxelShape shape
+            VoxelShape shape,
+            AABB bounds
     ) {}
 
     /**
@@ -356,9 +351,10 @@ public class WallVisionRenderer {
         private final int side;
         private final int planeSize;
         private final int totalPositions;
+        private final int maxHighlights;
 
         private final ArrayList<HighlightedBlock> results =
-                new ArrayList<>(Math.min(1024, MAX_HIGHLIGHTS));
+                new ArrayList<>(1024);
 
         private final BlockPos.MutableBlockPos cursor =
                 new BlockPos.MutableBlockPos();
@@ -377,6 +373,7 @@ public class WallVisionRenderer {
             this.side = radius * 2 + 1;
             this.planeSize = side * side;
             this.totalPositions = planeSize * side;
+            this.maxHighlights = DreamtinkerClientConfig.WALL_VISION_MAX_HIGHLIGHTS.get();
         }
 
         private void process(
@@ -387,7 +384,7 @@ public class WallVisionRenderer {
 
             while (remaining-- > 0
                    && nextIndex < totalPositions
-                   && results.size() < MAX_HIGHLIGHTS) {
+                   && results.size() < maxHighlights) {
                 processNextPosition(level);
             }
 
@@ -396,7 +393,7 @@ public class WallVisionRenderer {
              *
              * 防止标签过宽时，仍继续无意义地遍历剩余几十万个方块。
              */
-            if (results.size() >= MAX_HIGHLIGHTS){
+            if (results.size() >= maxHighlights){
                 nextIndex = totalPositions;
             }
         }
@@ -408,6 +405,12 @@ public class WallVisionRenderer {
             int remainder = index % planeSize;
             int dy = remainder / side - radius;
             int dz = remainder % side - radius;
+
+            // "Radius" is spherical. Reject cube corners before chunk/state/shape lookups; at radius
+            // 32 this removes roughly half of the expensive world accesses.
+            if (dx * dx + dy * dy + dz * dz > radius * radius){
+                return;
+            }
 
             cursor.set(
                     center.getX() + dx,
@@ -442,7 +445,8 @@ public class WallVisionRenderer {
                             cursor.getX(),
                             cursor.getY(),
                             cursor.getZ(),
-                            shape
+                            shape,
+                            new AABB(cursor)
                     )
             );
         }
