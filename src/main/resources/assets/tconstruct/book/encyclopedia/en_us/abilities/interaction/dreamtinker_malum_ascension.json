@@ -1,0 +1,16 @@
+{
+  "modifier_id": "dreamtinker:malum_ascension",
+  "text": [
+    {
+      "text": "Grants Malum's Ascension enchantment to a compatible scythe."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/melee/weapon",
+  "effects": [
+    "Level 1 requires 1 ability slot",
+    "Levels 2–3 each require 1 upgrade slot",
+    "Only applies to Malum scythes",
+    "Ascension requires Spirit Blade to apply and exclude with Rebound",
+    "Maximum level: 3"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:bic_frostbitten",
+  "text": [
+    {
+      "text": "攻击施加寒骨效果（生于混沌）"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/melee",
+  "effects": [
+    "需要1个升级槽",
+    "最高3级"
+  ]
+}

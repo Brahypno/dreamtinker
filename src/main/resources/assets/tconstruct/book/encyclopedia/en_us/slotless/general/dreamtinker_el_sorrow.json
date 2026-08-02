@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:el_sorrow",
+  "text": [
+    {
+      "text": "Each modified armor piece has a 10% chance to inflict a random negative effect when you are damaged."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/armor",
+  "effects": [
+    "Slotless",
+    "Maximum level: 1"
+  ]
+}

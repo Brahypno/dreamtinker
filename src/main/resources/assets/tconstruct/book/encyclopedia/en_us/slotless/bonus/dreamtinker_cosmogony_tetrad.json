@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:cosmogony_tetrad",
+  "text": [
+    {
+      "text": "Grants one additional delusion slot."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable",
+  "effects": [
+    "Slotless",
+    "Maximum level: 1"
+  ]
+}

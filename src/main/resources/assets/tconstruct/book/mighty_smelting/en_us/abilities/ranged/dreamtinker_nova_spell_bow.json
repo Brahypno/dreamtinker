@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:nova_spell_bow",
+  "text": [
+    {
+      "text": "Firing an arrow also casts an inscribed Projectile spell; augment arrows may be consumed to strengthen the spell, but cannot serve as ammunition."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/ranged/bows",
+  "effects": [
+    "Requires 1 ability slot",
+    "Maximum level: 1"
+  ]
+}

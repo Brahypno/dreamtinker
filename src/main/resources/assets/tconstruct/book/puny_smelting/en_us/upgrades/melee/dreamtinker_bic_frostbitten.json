@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:bic_frostbitten",
+  "text": [
+    {
+      "text": "Attacks apply Born in Chaos' Bone Chilling effect."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/melee",
+  "effects": [
+    "Requires 1 upgrade slot",
+    "Maximum level: 3"
+  ]
+}

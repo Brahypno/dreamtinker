@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:otherworld_precious",
+  "text": [
+    {
+      "text": "来自异界的珍宝为你带来一份额外的妄见槽"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/armor/helmets",
+  "effects": [
+    "不消耗槽位",
+    "最高1级"
+  ]
+}

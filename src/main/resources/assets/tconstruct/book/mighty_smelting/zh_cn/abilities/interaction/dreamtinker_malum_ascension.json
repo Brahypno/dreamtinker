@@ -1,0 +1,16 @@
+{
+  "modifier_id": "dreamtinker:malum_ascension",
+  "text": [
+    {
+      "text": "为兼容的灵灾镰刀附加飞腾附魔。"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/melee/weapon",
+  "effects": [
+    "第1级需要1个能力槽",
+    "第2至3级各需要1个升级槽",
+    "仅适用于灵灾镰刀",
+    "飞腾需要灵魂锋刃作为前置且与回旋互斥",
+    "最高3级"
+  ]
+}

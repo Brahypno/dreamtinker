@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:el_nemesis_curse",
+  "text": [
+    {
+      "text": "Melee attack got 35% pay back"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/melee/primary",
+  "effects": [
+    "不消耗槽位",
+    "最高1级"
+  ]
+}

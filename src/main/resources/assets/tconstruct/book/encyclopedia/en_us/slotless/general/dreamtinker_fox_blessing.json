@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:fox_blessing",
+  "text": [
+    {
+      "text": "Attacking or being attacked summons a limited number of armed foxes to assist you."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/held",
+  "effects": [
+    "Slotless",
+    "Maximum level: 1"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "modifier_id": "dreamtinker:malum_animated",
+  "text": [
+    {
+      "text": "Grants Malum's level-2 Animated enchantment; it is incompatible with Haunted."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/melee/weapon",
+  "effects": [
+    "Requires 1 upgrade slot",
+    "Only applies to Malum scythes",
+    "Animated and exclude with Haunted",
+    "Maximum level: 2"
+  ]
+}

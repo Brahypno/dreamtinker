@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:huge_ego",
+  "text": [
+    {
+      "text": "Each level grants one upgrade slot but reduces tool durability by 25%."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable",
+  "effects": [
+    "Slotless",
+    "Maximum level: 3"
+  ]
+}

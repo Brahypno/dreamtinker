@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:el_nemesis_curse",
+  "text": [
+    {
+      "text": "Returns 35% of melee attack damage to the wielder."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/melee/primary",
+  "effects": [
+    "Slotless",
+    "Maximum level: 1"
+  ]
+}

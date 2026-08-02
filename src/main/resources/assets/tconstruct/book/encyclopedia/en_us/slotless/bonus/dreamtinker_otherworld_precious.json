@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:otherworld_precious",
+  "text": [
+    {
+      "text": "Grants one additional delusion slot to a helmet."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/armor/helmets",
+  "effects": [
+    "Slotless",
+    "Maximum level: 1"
+  ]
+}

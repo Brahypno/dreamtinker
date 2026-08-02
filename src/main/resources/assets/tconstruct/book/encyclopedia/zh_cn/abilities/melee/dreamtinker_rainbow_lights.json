@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:rainbow_lights",
+  "text": [
+    {
+      "text": "伤害降低为7分之一，但额外造成9次类型随机, 来源相同的伤害；升级可会造成更多类型的伤害"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/melee/primary",
+  "effects": [
+    "需要1个能力槽",
+    "最高1级"
+  ]
+}

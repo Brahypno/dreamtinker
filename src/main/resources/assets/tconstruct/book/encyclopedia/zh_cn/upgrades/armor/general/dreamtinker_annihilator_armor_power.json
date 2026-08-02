@@ -1,0 +1,15 @@
+{
+  "modifier_id": "dreamtinker:annihilator_armor_power",
+  "text": [
+    {
+      "text": "每个部位均提供 +3 护甲、+1 护甲韧性与 +100% 击退抗性。头盔：仅获得上述通用属性。胸甲：生命值不高于一半时触发湮灭超新星，并获得 3 秒无敌。护腿：暴击时有 25% 概率造成无视护甲的范围伤害，数值为当前武器伤害的一半。靴子：免疫虚弱与缓慢。"
+    }
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable/armor/worn",
+  "effects": [
+    "需要1个升级槽",
+    "需要下界合金",
+    "最高1级"
+  ]
+}

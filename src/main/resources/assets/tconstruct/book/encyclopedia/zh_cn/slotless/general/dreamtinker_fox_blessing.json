@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:fox_blessing",
+  "text": [
+    {
+      "text": "当攻击/受击时，召唤有数量限制的武装狐狸帮你"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/held",
+  "effects": [
+    "不消耗槽位",
+    "最高1级"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "modifier_id": "dreamtinker:mossy_symbiosis",
+  "text": [
+    {
+      "text": "采掘工具右键释放毒雾，伤害并使周围敌人中毒；命中敌人后治疗使用者。"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/harvest",
+  "effects": [
+    "右键使用",
+    "需要1个能力槽",
+    "最高1级"
+  ]
+}

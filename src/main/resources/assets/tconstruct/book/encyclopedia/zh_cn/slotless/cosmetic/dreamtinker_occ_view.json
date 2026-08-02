@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:occ_view",
+  "text": [
+    {
+      "text": "戴上时获得第三只眼的效果，类似于异界眼镜"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/armor/helmets",
+  "effects": [
+    "不消耗槽位",
+    "最高1级"
+  ]
+}

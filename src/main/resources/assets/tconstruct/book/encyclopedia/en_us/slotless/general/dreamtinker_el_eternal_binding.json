@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:el_eternal_binding",
+  "text": [
+    {
+      "text": "Keeps the modified tool or armor bound to you after death."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable",
+  "effects": [
+    "Slotless",
+    "Maximum level: 1"
+  ]
+}

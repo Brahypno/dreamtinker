@@ -1,0 +1,14 @@
+{
+  "modifier_id": "dreamtinker:mossy_symbiosis",
+  "text": [
+    {
+      "text": "Right-click a harvest tool to release a poisonous cloud that damages nearby enemies and heals the user if it hits."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/harvest",
+  "effects": [
+    "Activated by right-click",
+    "Requires 1 ability slot",
+    "Maximum level: 1"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "modifier_id": "dreamtinker:flaming_memory",
+  "text": [
+    {
+      "text": "增加实体距离，近战攻击数值，击中目标后发射记忆弹。记忆弹改为额外造成弹射物伤害。"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/melee",
+  "effects": [
+    "需要1个能力槽",
+    "需要记忆，王国之门作为前置",
+    "最高1级"
+  ]
+}

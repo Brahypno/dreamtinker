@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:force_to_explosion",
+  "text": [
+    {
+      "text": "Makes TNT arrows lose their area-hit attack and instead explode without directly damaging living entities."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/ammo/thrown",
+  "effects": [
+    "Requires 1 ability slot",
+    "Maximum level: 1"
+  ]
+}

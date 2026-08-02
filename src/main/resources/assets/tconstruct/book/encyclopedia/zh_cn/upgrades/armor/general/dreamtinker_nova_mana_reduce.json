@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:nova_mana_reduce",
+  "text": [
+    {
+      "text": "减少10*强化等级的魔力消耗"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/armor",
+  "effects": [
+    "需要1个升级槽",
+    "最高1级"
+  ]
+}

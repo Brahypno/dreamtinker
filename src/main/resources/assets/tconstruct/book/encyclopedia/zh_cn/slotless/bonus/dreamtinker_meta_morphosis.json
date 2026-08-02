@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:meta_morphosis",
+  "text": [
+    {
+      "text": "这份痛苦使你获得一个额外的妄见槽"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable",
+  "effects": [
+    "不消耗槽位",
+    "最高1级"
+  ]
+}

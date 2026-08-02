@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:nova_enchanter_sword",
+  "text": [
+    {
+      "text": "近战以触发法术。会在开头增加触摸符文，在结尾增加额外的强化符文"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/melee/primary",
+  "effects": [
+    "需要1个能力槽",
+    "最高1级"
+  ]
+}

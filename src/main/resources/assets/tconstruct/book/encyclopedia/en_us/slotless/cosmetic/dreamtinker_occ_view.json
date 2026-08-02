@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:occ_view",
+  "text": [
+    {
+      "text": "Grants the Third Eye effect while the helmet is worn, like Otherworld Goggles."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/armor/helmets",
+  "effects": [
+    "Slotless",
+    "Maximum level: 1"
+  ]
+}

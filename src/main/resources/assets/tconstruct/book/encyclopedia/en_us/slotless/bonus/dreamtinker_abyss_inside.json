@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:abyss_inside",
+  "text": [
+    {
+      "text": "This secret grants you One extra Delusion Slot"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable",
+  "effects": [
+    "Slotless",
+    "Maximum level: 1"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:blm_living_armor",
+  "text": [
+    {
+      "text": "Grants Blood Magic's Living Armor benefits from each chestplate without requiring a full armor set."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/armor/chestplate",
+  "effects": [
+    "Requires 1 delusion slot",
+    "Maximum level: 1"
+  ]
+}

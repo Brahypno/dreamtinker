@@ -1,0 +1,15 @@
+{
+  "modifier_id": "dreamtinker:annihilator_armor_power",
+  "text": [
+    {
+      "text": "Each piece grants +3 armor, +1 armor toughness, and +100% knockback resistance. Helmet: Grants the shared stat bonuses only. Chestplate: At half health or lower, triggers an Annihilation Supernova and grants 3 seconds of invulnerability. Leggings: Critical hits have a 25% chance to deal armor-bypassing area damage equal to half the current weapon damage. Boots: Protect against Weakness and Slowness."
+    }
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable/armor/worn",
+  "effects": [
+    "Requires 1 upgrade slot",
+    "Requires Netherite",
+    "Maximum level: 1"
+  ]
+}

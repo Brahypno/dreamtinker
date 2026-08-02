@@ -1,0 +1,14 @@
+{
+  "modifier_id": "dreamtinker:weapon_dreams_filter",
+  "text": [
+    {
+      "text": "Makes the Silence Glove favor tools suited to the current action, such as choosing a valid mining tool."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/special",
+  "effects": [
+    "Requires 1 delusion slot",
+    "Need 'Weapon Arts' to apply",
+    "Maximum level: 1"
+  ]
+}

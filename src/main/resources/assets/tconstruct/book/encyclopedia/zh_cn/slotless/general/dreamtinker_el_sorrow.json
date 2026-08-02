@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:el_sorrow",
+  "text": [
+    {
+      "text": "每件附有该诅咒附魔的盔甲都有10%概率让你获得随机一种负面效果。伤害越高，负面效果等级越高。"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/armor",
+  "effects": [
+    "不消耗槽位",
+    "最高1级"
+  ]
+}

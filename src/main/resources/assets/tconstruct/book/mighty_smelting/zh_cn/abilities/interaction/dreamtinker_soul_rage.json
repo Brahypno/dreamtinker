@@ -1,0 +1,14 @@
+{
+  "modifier_id": "dreamtinker:soul_rage",
+  "text": [
+    {
+      "text": "近战工具右键后，短暂获得传奇怪物的灵魂狂怒效果。"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/melee",
+  "effects": [
+    "右键使用",
+    "需要1个能力槽",
+    "最高1级"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "modifier_id": "dreamtinker:malum_rebound",
+  "text": [
+    {
+      "text": "为兼容的灵灾镰刀附加回旋附魔。"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/melee/weapon",
+  "effects": [
+    "第1级需要1个能力槽",
+    "第2至3级各需要1个升级槽",
+    "仅适用于灵灾镰刀",
+    "回旋需要灵魂锋刃作为前置且与飞腾互斥",
+    "最高3级"
+  ]
+}

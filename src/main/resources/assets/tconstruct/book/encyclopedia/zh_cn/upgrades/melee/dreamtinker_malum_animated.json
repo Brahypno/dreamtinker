@@ -1,0 +1,15 @@
+{
+  "modifier_id": "dreamtinker:malum_animated",
+  "text": [
+    {
+      "text": "附加灵灾的2级舞刃附魔；与缚灵互斥。"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/melee/weapon",
+  "effects": [
+    "需要1个升级槽",
+    "仅适用于灵灾镰刀",
+    "舞刃与缚灵互斥",
+    "最高2级"
+  ]
+}

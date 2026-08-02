@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:desolation_ring",
+  "text": [
+    {
+      "text": "Reduces nearby piglins, zombified piglins, iron golems, and non-boss End creatures to 1 health, then damages them; the original ring takes priority."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable",
+  "effects": [
+    "Requires 1 ability slot",
+    "Maximum level: 1"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:huge_ego",
+  "text": [
+    {
+      "text": "每级获得一个升级槽;但每级减少25%工具耐久"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable",
+  "effects": [
+    "不消耗槽位",
+    "最高3级"
+  ]
+}

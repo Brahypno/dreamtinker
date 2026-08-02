@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:blm_living_armor",
+  "text": [
+    {
+      "text": "就像血魔法的束灵护甲，但不需要穿一整套。"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/armor/chestplate",
+  "effects": [
+    "需要1个妄见槽",
+    "最高1级"
+  ]
+}

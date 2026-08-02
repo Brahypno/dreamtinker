@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:divine_maledictus",
+  "text": [
+    {
+      "text": "这份相反带来一份额外的妄见槽"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable",
+  "effects": [
+    "不消耗槽位",
+    "最高1级"
+  ]
+}

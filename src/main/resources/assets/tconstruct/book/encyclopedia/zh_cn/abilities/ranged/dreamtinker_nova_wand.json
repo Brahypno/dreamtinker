@@ -1,0 +1,14 @@
+{
+  "modifier_id": "dreamtinker:nova_wand",
+  "text": [
+    {
+      "text": "总是以弹射物->加速开头。右键点击以释放"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/special",
+  "effects": [
+    "右键使用",
+    "需要1个能力槽",
+    "最高1级"
+  ]
+}

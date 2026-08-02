@@ -1,0 +1,14 @@
+{
+  "modifier_id": "dreamtinker:flaming_memory",
+  "text": [
+    {
+      "text": "Increases reach and melee stats; melee hits launch a fiery Memory projectile that deals projectile damage."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/melee",
+  "effects": [
+    "Requires 1 ability slot",
+    "Need 'Memory, Gate of the Kingdom' to apply",
+    "Maximum level: 1"
+  ]
+}

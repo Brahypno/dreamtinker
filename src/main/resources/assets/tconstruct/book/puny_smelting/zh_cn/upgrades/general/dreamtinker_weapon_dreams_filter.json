@@ -1,0 +1,14 @@
+{
+  "modifier_id": "dreamtinker:weapon_dreams_filter",
+  "text": [
+    {
+      "text": "在进行如采掘等行为时，静默手套选择工具时会尽量选择有效工具"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/special",
+  "effects": [
+    "需要1个妄见槽",
+    "需要工具艺术作为前置",
+    "最高1级"
+  ]
+}

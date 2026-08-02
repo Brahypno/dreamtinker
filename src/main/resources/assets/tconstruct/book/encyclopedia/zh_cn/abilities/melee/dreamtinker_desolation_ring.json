@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:desolation_ring",
+  "text": [
+    {
+      "text": "在猪灵，僵尸猪灵，铁傀儡或非boss的末地生物出现时，将其血量设为1并造成一次玩家伤害。优先级在荒芜之缚后"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable",
+  "effects": [
+    "需要1个能力槽",
+    "最高1级"
+  ]
+}
