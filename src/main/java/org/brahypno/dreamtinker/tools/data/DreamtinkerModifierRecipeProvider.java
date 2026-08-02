@@ -606,6 +606,93 @@ public class DreamtinkerModifierRecipeProvider implements ICommonRecipeHelper {
                              .saveSalvage(wrapped, prefix(DreamtinkerModifiers.annihilator_armor_power, upgradeSalvage))
                              .save(wrapped, prefix(DreamtinkerModifiers.annihilator_armor_power, upgradeFolder));
 
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.soul_rage)
+                             .setTools(TinkerTags.Items.MELEE_PRIMARY)
+                             .addInput(itemNameIngredient("legendary_monsters", "corrupted_soul"))
+                             .setSlots(SlotType.ABILITY, 1).setMaxLevel(1)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.soul_rage, abilitySalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.soul_rage, abilityFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.shulker_counter)
+                             .setTools(ingredientFromTags(TinkerTags.Items.HELMETS, TinkerTags.Items.SHIELDS))
+                             .addInput(itemNameIngredient("legendary_monsters", "large_shulker_shell"))
+                             .setSlots(SlotType.UPGRADE, 1).setMaxLevel(1)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.Ids.shulker_counter, upgradeSalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.Ids.shulker_counter, upgradeFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.frost_seal)
+                             .setTools(TinkerTags.Items.SHIELDS)
+                             .addInput(itemNameIngredient("legendary_monsters", "frozen_rune"))
+                             .addInput(itemNameIngredient("legendary_monsters", "primal_ice_shard"))
+                             .setSlots(SlotType.UPGRADE, 1).setMaxLevel(1)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.Ids.frost_seal, upgradeSalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.Ids.frost_seal, upgradeFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.ancient_counterspike)
+                             .setTools(TinkerTags.Items.SHIELDS)
+                             .addInput(itemNameIngredient("legendary_monsters", "ancient_spike"))
+                             .addInput(itemNameIngredient("legendary_monsters", "chiseled_ancient_dripstone_shard"))
+                             .addInput(itemNameIngredient("legendary_monsters", "molten_metal_ingot"))
+                             .setSlots(SlotType.ABILITY, 1).setMaxLevel(1)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.ancient_counterspike, abilitySalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.ancient_counterspike, abilityFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.withering_charge)
+                             .setTools(TinkerTags.Items.MELEE_PRIMARY)
+                             .addInput(itemNameIngredient("legendary_monsters", "withered_bone"))
+                             .addInput(itemNameIngredient("legendary_monsters", "withered_horn"))
+                             .setSlots(SlotType.ABILITY, 1).setMaxLevel(1)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.withering_charge, abilitySalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.withering_charge, abilityFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.mossy_symbiosis)
+                             .setTools(ingredientFromTags(TinkerTags.Items.CHESTPLATES, TinkerTags.Items.HARVEST_PRIMARY))
+                             .addInput(itemNameIngredient("legendary_monsters", "nature_crystal"))
+                             .setSlots(SlotType.ABILITY, 1).setMaxLevel(1)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.mossy_symbiosis, abilitySalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.mossy_symbiosis, abilityFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.atmospheric_leap)
+                             .setTools(TinkerTags.Items.BOOTS)
+                             .addInput(itemNameIngredient("legendary_monsters", "air_rune"))
+                             .addInput(itemNameIngredient("legendary_monsters", "cloud_rod"))
+                             .setSlots(SlotType.UPGRADE, 1).setMaxLevel(1)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.atmospheric_leap, upgradeSalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.atmospheric_leap, upgradeFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.lightning_strike)
+                             .setTools(TinkerTags.Items.SPECIAL_TOOLS)
+                             .addInput(itemNameIngredient("legendary_monsters", "axe_of_lightning"))
+                             .addInput(itemNameIngredient("legendary_monsters", "air_rune"))
+                             .setSlots(SlotType.ABILITY, 1).setMaxLevel(1)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.lightning_strike, abilitySalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.lightning_strike, abilityFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.chorus_blink)
+                             .setTools(TinkerTags.Items.SPECIAL_TOOLS)
+                             .addInput(itemNameIngredient("legendary_monsters", "chorus_crystal"))
+                             .addInput(itemNameIngredient("legendary_monsters", "infected_chorus_fruit"))
+                             .setSlots(SlotType.UPGRADE, 1).setMaxLevel(1)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.chorus_blink, upgradeSalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.chorus_blink, upgradeFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.fiery_breath)
+                             .setTools(TinkerTags.Items.SPECIAL_TOOLS)
+                             .addInput(itemNameIngredient("legendary_monsters", "lava_eaters_skin"))
+                             .setSlots(SlotType.ABILITY, 1).setMaxLevel(1)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.fiery_breath, abilitySalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.fiery_breath, abilityFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.monstrous_shock)
+                             .setTools(TinkerTags.Items.MELEE_PRIMARY)
+                             .addInput(itemNameIngredient("legendary_monsters", "anchor_handle"))
+                             .addInput(itemNameIngredient("legendary_monsters", "molten_metal_ingot"))
+                             .setSlots(SlotType.ABILITY, 1).setMaxLevel(1)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.monstrous_shock, abilitySalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.monstrous_shock, abilityFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.annihilation_burst)
+                             .setTools(TinkerTags.Items.MELEE_PRIMARY)
+                             .addInput(itemNameIngredient("legendary_monsters", "portal_shard"))
+                             .addInput(itemNameIngredient("legendary_monsters", "bottle_of_annihilation"))
+                             .setSlots(SlotType.ABILITY, 1).setMaxLevel(1)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.annihilation_burst, abilitySalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.annihilation_burst, abilityFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.legendary_reverie)
+                             .setTools(TinkerTags.Items.BONUS_SLOTS)
+                             .addInput(itemNameIngredient("legendary_monsters", "corrupted_soul"))
+                             .setMaxLevel(1)
+                             .save(wrapped, prefix(DreamtinkerModifiers.Ids.legendary_reverie, slotlessFolder));
+
         wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.bic_dark_armor_plate)
                              .setTools(TinkerTags.Items.DURABILITY)

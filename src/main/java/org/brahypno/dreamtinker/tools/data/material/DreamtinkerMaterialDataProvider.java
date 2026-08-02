@@ -115,6 +115,8 @@ public class DreamtinkerMaterialDataProvider extends AbstractMaterialDataProvide
         addMaterial(DreamtinkerMaterialIds.WildenSpike, 1, 10, true, false, modLoaded("ars_nouveau"));
 
         addMaterial(DreamtinkerMaterialIds.legendary_monsters_enderitium, 3, 20, false, false, modLoaded("legendary_monsters"));
+        addMaterial(DreamtinkerMaterialIds.legendary_monsters_dinosaur_bone, 3, 21, true, false, modLoaded("legendary_monsters"));
+        addMaterial(DreamtinkerMaterialIds.legendary_monsters_molten_metal, 3, 22, true, false, modLoaded("legendary_monsters"));
         addMaterial(DreamtinkerMaterialIds.dragon_scale, 4, 40, true, false, tagFilled(DreamtinkerTagKeys.Items.dragonScale));
         addMaterial(DreamtinkerMaterialIds.faa_dark_nether_star, 4, 40, false, false, modLoaded("forbidden_arcanus"));
         addMaterial(DreamtinkerMaterialIds.blm_sentient, 2, 20, true, false, modLoaded("bloodmagic"));

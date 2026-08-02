@@ -1,0 +1,15 @@
+{
+  "modifier_id": "dreamtinker:chorus_blink",
+  "text": [
+    {
+      "text": "手杖右键后，随机传送至约8格范围内的安全位置。"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/special",
+  "effects": [
+    "右键使用",
+    "冷却3秒",
+    "需要1个升级槽",
+    "最高1级"
+  ]
+}

@@ -36,5 +36,8 @@ public class DNetwork {
         CHANNEL.registerMessage(packetId++, ShellHeartSyncPacket.class, ShellHeartSyncPacket::encode, ShellHeartSyncPacket::decode,
                                 ShellHeartSyncPacket::handle,
                                 Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        CHANNEL.registerMessage(packetId++, S2CDinosaurShockwavePacket.class, S2CDinosaurShockwavePacket::encode,
+                                S2CDinosaurShockwavePacket::decode, S2CDinosaurShockwavePacket::handle,
+                                Optional.of(NetworkDirection.PLAY_TO_CLIENT));
     }
 }

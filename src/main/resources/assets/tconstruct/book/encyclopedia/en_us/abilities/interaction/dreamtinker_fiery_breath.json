@@ -1,0 +1,15 @@
+{
+  "modifier_id": "dreamtinker:fiery_breath",
+  "text": [
+    {
+      "text": "Right-click the staff to breathe fire in a forward cone, damaging, igniting, and knocking enemies back."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/special",
+  "effects": [
+    "Activated by right-click",
+    "4-second cooldown",
+    "Requires 1 ability slot",
+    "Maximum level: 1"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "modifier_id": "dreamtinker:mossy_symbiosis",
+  "text": [
+    {
+      "text": "胸甲受击时释放毒雾，伤害并使周围敌人中毒；命中敌人后治疗穿戴者。自动触发有5秒冷却。"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/armor/chestplates",
+  "effects": [
+    "仅适用于胸甲",
+    "需要1个能力槽",
+    "最高1级"
+  ]
+}

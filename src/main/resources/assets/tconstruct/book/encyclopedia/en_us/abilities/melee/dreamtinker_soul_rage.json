@@ -1,0 +1,14 @@
+{
+  "modifier_id": "dreamtinker:soul_rage",
+  "text": [
+    {
+      "text": "Right-click a melee tool to briefly gain Legendary Monsters' Soul Rage effect."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/melee",
+  "effects": [
+    "Activated by right-click",
+    "Requires 1 ability slot",
+    "Maximum level: 1"
+  ]
+}

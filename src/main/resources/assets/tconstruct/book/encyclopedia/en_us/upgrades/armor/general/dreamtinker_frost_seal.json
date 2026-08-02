@@ -1,0 +1,14 @@
+{
+  "modifier_id": "dreamtinker:frost_seal",
+  "text": [
+    {
+      "text": "When the shield is struck directly, it has a 30% chance to freeze the attacker for 3 seconds; active blocking raises the chance to 60%."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/shields",
+  "effects": [
+    "Shields only",
+    "Requires 1 upgrade slot",
+    "Maximum level: 1"
+  ]
+}

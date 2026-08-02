@@ -1,0 +1,14 @@
+{
+  "modifier_id": "dreamtinker:ancient_counterspike",
+  "text": [
+    {
+      "text": "While blocking, reflects 5 damage plus 25% of the incoming damage and has a 50% chance to inflict Bleeding for 5 seconds."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/shields",
+  "effects": [
+    "Shields only",
+    "Requires 1 ability slot",
+    "Maximum level: 1"
+  ]
+}

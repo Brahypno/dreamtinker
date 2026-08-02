@@ -372,6 +372,10 @@ public class DreamtinkerMaterialRecipeProvider implements IMaterialRecipeHelper,
                        materials_folder + "legendary_monsters_enderitium/gem");
         materialRecipe(wrapped, DreamtinkerMaterialIds.legendary_monsters_enderitium, itemNameIngredient(legendaryMonsters, "enderitium_block"), 9, 1,
                        materials_folder + "legendary_monsters_enderitium/block");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.legendary_monsters_dinosaur_bone, itemNameIngredient(legendaryMonsters, "dinosaur_bone"), 1, 1,
+                       materials_folder + "legendary_monsters_dinosaur_bone/bone");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.legendary_monsters_molten_metal, itemNameIngredient(legendaryMonsters, "molten_metal_ingot"), 1, 1,
+                       materials_folder + "legendary_monsters_molten_metal/ingot");
     }
 
     private void addFAAMaterialRecipes(Consumer<FinishedRecipe> consumer) {

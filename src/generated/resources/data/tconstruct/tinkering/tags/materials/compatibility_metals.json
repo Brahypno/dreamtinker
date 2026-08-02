@@ -6,6 +6,10 @@
     {
       "id": "dreamtinker:legendary_monsters_enderitium",
       "required": false
+    },
+    {
+      "id": "dreamtinker:legendary_monsters_molten_metal",
+      "required": false
     }
   ]
 }

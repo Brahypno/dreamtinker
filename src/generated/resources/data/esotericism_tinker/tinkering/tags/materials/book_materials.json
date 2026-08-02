@@ -239,6 +239,14 @@
       "required": false
     },
     {
+      "id": "dreamtinker:legendary_monsters_dinosaur_bone",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:legendary_monsters_molten_metal",
+      "required": false
+    },
+    {
       "id": "dreamtinker:dragon_scale",
       "required": false
     },

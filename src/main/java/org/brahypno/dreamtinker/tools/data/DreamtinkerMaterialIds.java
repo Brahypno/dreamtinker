@@ -108,6 +108,8 @@ public class DreamtinkerMaterialIds {
     public static final MaterialId WildenSpike = new MaterialId(new ResourceLocation(MODID, "nova_wilden_spike"));
     //legendary monsters
     public static final MaterialId legendary_monsters_enderitium = new MaterialId(new ResourceLocation(MODID, "legendary_monsters_enderitium"));
+    public static final MaterialId legendary_monsters_dinosaur_bone = new MaterialId(new ResourceLocation(MODID, "legendary_monsters_dinosaur_bone"));
+    public static final MaterialId legendary_monsters_molten_metal = new MaterialId(new ResourceLocation(MODID, "legendary_monsters_molten_metal"));
     //inspired by FAA
     public static final MaterialId dragon_scale = new MaterialId(new ResourceLocation(MODID, "dragon_scale"));
     public static final MaterialId faa_dark_nether_star = new MaterialId(new ResourceLocation(MODID, "faa_dark_nether_star"));

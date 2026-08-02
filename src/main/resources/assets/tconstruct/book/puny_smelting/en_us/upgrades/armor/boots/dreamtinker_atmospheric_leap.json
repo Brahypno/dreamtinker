@@ -1,0 +1,14 @@
+{
+  "modifier_id": "dreamtinker:atmospheric_leap",
+  "text": [
+    {
+      "text": "While wearing the boots, sneak and press Tool Interact to leap upward. Also halves fall damage."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/armor/boots",
+  "effects": [
+    "Activated by Tool Interact",
+    "Requires 1 upgrade slot",
+    "Maximum level: 1"
+  ]
+}

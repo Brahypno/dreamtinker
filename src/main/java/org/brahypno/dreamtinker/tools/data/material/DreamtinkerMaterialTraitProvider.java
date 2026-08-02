@@ -276,6 +276,11 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
 
         addTraits(DreamtinkerMaterialIds.legendary_monsters_enderitium, MELEE_HARVEST, Ids.not_end_er, Ids.ender_end);
         addTraits(DreamtinkerMaterialIds.legendary_monsters_enderitium, ARMOR, Ids.ender_protection);
+        addDefaultTraits(DreamtinkerMaterialIds.legendary_monsters_dinosaur_bone, ModifierIds.reinforced);
+        addTraits(DreamtinkerMaterialIds.legendary_monsters_dinosaur_bone, MELEE_HARVEST,
+                  ModifierIds.reinforced, dinosaur_bone_shockwave.getId());
+        addTraits(DreamtinkerMaterialIds.legendary_monsters_molten_metal, MELEE_HARVEST,
+                  monstrous_anchor_force.getId());
 
 
         addDefaultTraits(DreamtinkerMaterialIds.dragon_scale, ModifierIds.draconic);

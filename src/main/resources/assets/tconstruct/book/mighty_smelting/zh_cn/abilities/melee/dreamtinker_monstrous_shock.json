@@ -1,0 +1,15 @@
+{
+  "modifier_id": "dreamtinker:monstrous_shock",
+  "text": [
+    {
+      "text": "蓄力后松开以向上跃起；随后落地时伤害并短暂眩晕周围敌人。"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/melee",
+  "effects": [
+    "蓄力使用",
+    "需要1个能力槽",
+    "需要“头槌”作为前置",
+    "最高1级"
+  ]
+}

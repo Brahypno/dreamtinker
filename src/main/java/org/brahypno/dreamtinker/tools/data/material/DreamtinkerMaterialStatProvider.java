@@ -310,6 +310,16 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new HeadMaterialStats(1500, 4f, Tiers.NETHERITE, 5.5f),
                          HandleMaterialStats.multipliers().durability(1.2f).miningSpeed(1.1f).attackDamage(1.40f).attackSpeed(1.10f).build(),
                          StatlessMaterialStats.BINDING);
+        // Dinosaur Bone Club: 1650 durability, 6 speed, iron harvest level, final attack attribute 8 (8 - 4 = 4 head attack).
+        addMaterialStats(DreamtinkerMaterialIds.legendary_monsters_dinosaur_bone,
+                         new HeadMaterialStats(1650, 6f, Tiers.IRON, 4f),
+                         HandleMaterialStats.multipliers().durability(1.35f).miningSpeed(0.8f).attackDamage(1.2f).attackSpeed(0.75f).build(),
+                         StatlessMaterialStats.BINDING, StatlessMaterialStats.SHIELD_CORE, StatlessMaterialStats.REPAIR_KIT);
+        // Molten Metal uses the Monstrous Anchor as its source tool: 1100 durability, 6 speed, iron harvest level, final attack attribute 13.
+        addMaterialStats(DreamtinkerMaterialIds.legendary_monsters_molten_metal,
+                         new HeadMaterialStats(1100, 6f, Tiers.IRON, 9f),
+                         HandleMaterialStats.multipliers().durability(1.25f).miningSpeed(0.85f).attackDamage(1.35f).attackSpeed(0.65f).build(),
+                         StatlessMaterialStats.BINDING, StatlessMaterialStats.SHIELD_CORE, StatlessMaterialStats.REPAIR_KIT);
     }
 
     private void addFAAMeleeHarvest() {

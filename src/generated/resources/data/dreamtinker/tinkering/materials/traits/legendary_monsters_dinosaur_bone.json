@@ -1,0 +1,20 @@
+{
+  "default": [
+    {
+      "level": 1,
+      "name": "tconstruct:reinforced"
+    }
+  ],
+  "perStat": {
+    "tconstruct:melee_harvest": [
+      {
+        "level": 1,
+        "name": "tconstruct:reinforced"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:dinosaur_bone_shockwave"
+      }
+    ]
+  }
+}

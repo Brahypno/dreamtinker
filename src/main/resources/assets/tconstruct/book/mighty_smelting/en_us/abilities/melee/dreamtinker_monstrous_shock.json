@@ -1,0 +1,15 @@
+{
+  "modifier_id": "dreamtinker:monstrous_shock",
+  "text": [
+    {
+      "text": "Charge and release to leap upward; landing soon afterward damages and briefly stuns nearby enemies."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/melee",
+  "effects": [
+    "Charged activation",
+    "Requires 1 ability slot",
+    "Requires Drill Attack",
+    "Maximum level: 1"
+  ]
+}

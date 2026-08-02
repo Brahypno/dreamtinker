@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:legendary_reverie",
+  "text": [
+    {
+      "text": "Adds 1 Delusion modifier slot to the tool."
+    }
+  ],
+  "effects": [
+    "Single use",
+    "Fixed at level 1",
+    "Slotless"
+  ]
+}

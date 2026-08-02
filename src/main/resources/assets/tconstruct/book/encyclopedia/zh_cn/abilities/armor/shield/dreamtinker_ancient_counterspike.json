@@ -1,0 +1,14 @@
+{
+  "modifier_id": "dreamtinker:ancient_counterspike",
+  "text": [
+    {
+      "text": "使用盾牌格挡时，对攻击者反射5点加所受伤害25%的伤害，并有50%概率使其流血5秒。"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/shields",
+  "effects": [
+    "仅适用于盾牌",
+    "需要1个能力槽",
+    "最高1级"
+  ]
+}

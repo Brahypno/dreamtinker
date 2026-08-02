@@ -125,6 +125,14 @@
     {
       "id": "dreamtinker:fin",
       "required": false
+    },
+    {
+      "id": "dreamtinker:legendary_monsters_dinosaur_bone",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:legendary_monsters_molten_metal",
+      "required": false
     }
   ]
 }

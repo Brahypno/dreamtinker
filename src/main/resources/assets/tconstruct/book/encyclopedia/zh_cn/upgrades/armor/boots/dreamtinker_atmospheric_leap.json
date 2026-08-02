@@ -1,0 +1,14 @@
+{
+  "modifier_id": "dreamtinker:atmospheric_leap",
+  "text": [
+    {
+      "text": "穿戴靴子时，潜行并按下工具交互键即可向上跃升；同时使摔落伤害减半。"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/armor/boots",
+  "effects": [
+    "工具交互键触发",
+    "需要1个升级槽",
+    "最高1级"
+  ]
+}

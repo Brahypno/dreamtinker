@@ -1,0 +1,14 @@
+{
+  "modifier_id": "dreamtinker:withering_charge",
+  "text": [
+    {
+      "text": "Hold right-click to charge, then release to rush forward, damaging and withering enemies ahead."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/melee",
+  "effects": [
+    "Charged activation",
+    "Requires 1 ability slot",
+    "Maximum level: 1"
+  ]
+}

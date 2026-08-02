@@ -14,6 +14,14 @@
     {
       "id": "dreamtinker:annihilator_armor_power",
       "required": false
+    },
+    {
+      "id": "dreamtinker:shulker_counter",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:frost_seal",
+      "required": false
     }
   ]
 }

@@ -128,6 +128,8 @@ public class DreamtinkerMaterialRenderInfoProvider extends AbstractMaterialRende
         buildRenderInfo(DreamtinkerMaterialIds.WildenSpike).color(0xFFE09A55).fallbacks("bone").luminosity(4);
 
         buildRenderInfo(DreamtinkerMaterialIds.legendary_monsters_enderitium).color(0xFF2E574D).fallbacks("metal").luminosity(10);
+        buildRenderInfo(DreamtinkerMaterialIds.legendary_monsters_dinosaur_bone).color(0xFFA9AAAA).fallbacks("bone").luminosity(0);
+        buildRenderInfo(DreamtinkerMaterialIds.legendary_monsters_molten_metal).color(0xFF737E82).fallbacks("metal").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.dragon_scale).color(0xFF8B7CA1).fallbacks("metal").luminosity(0);
         buildRenderInfo(DreamtinkerMaterialIds.faa_dark_nether_star).color(0xFF7D36D8).fallbacks("gem", "crystal").luminosity(15);
 

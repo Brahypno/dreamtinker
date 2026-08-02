@@ -1,0 +1,15 @@
+{
+  "modifier_id": "dreamtinker:lightning_strike",
+  "text": [
+    {
+      "text": "Right-click the staff to call lightning onto the nearest visible enemy in front of you within 16 blocks."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/special",
+  "effects": [
+    "Activated by right-click",
+    "5-second cooldown",
+    "Requires 1 ability slot",
+    "Maximum level: 1"
+  ]
+}

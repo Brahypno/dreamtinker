@@ -1,0 +1,38 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "legendary_monsters"
+            },
+            {
+              "type": "esotericism_tinker:mod_compact_config",
+              "modid": "legendary_monsters"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "item": "legendary_monsters:corrupted_soul"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:legendary_reverie",
+  "tools": {
+    "tag": "tconstruct:modifiable/bonus_slots"
+  }
+}

@@ -58,6 +58,7 @@ import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.enigmaticLegacy.ma
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.enigmaticLegacy.material.evil.EvilAttack;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.enigmaticLegacy.material.soul_aether.ExilesFaulty;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.faa.CorruptionDefense;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.legendary_monsters.LegendaryMonstersCompatModifiers.*;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.legendary_monsters.SoulRage;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.legendary_monsters.annihilatorArmorPower;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.malum.*;
@@ -312,6 +313,21 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<SoulRage> soul_rage = LM_MODIFIERS.register("soul_rage", SoulRage::new);
     public static final StaticModifier<annihilatorArmorPower> annihilator_armor_power =
             LM_MODIFIERS.register("annihilator_armor_power", annihilatorArmorPower::new);
+    public static final StaticModifier<AncientCounterspike> ancient_counterspike =
+            LM_MODIFIERS.register("ancient_counterspike", AncientCounterspike::new);
+    public static final StaticModifier<WitheringCharge> withering_charge = LM_MODIFIERS.register("withering_charge", WitheringCharge::new);
+    public static final StaticModifier<MossySymbiosis> mossy_symbiosis = LM_MODIFIERS.register("mossy_symbiosis", MossySymbiosis::new);
+    public static final StaticModifier<AtmosphericLeap> atmospheric_leap = LM_MODIFIERS.register("atmospheric_leap", AtmosphericLeap::new);
+    public static final StaticModifier<LightningStrike> lightning_strike = LM_MODIFIERS.register("lightning_strike", LightningStrike::new);
+    public static final StaticModifier<ChorusBlink> chorus_blink = LM_MODIFIERS.register("chorus_blink", ChorusBlink::new);
+    public static final StaticModifier<FieryBreath> fiery_breath = LM_MODIFIERS.register("fiery_breath", FieryBreath::new);
+    public static final StaticModifier<DinosaurBoneShockwave> dinosaur_bone_shockwave =
+            LM_MODIFIERS.register("dinosaur_bone_shockwave", DinosaurBoneShockwave::new);
+    public static final StaticModifier<MonstrousAnchorForce> monstrous_anchor_force =
+            LM_MODIFIERS.register("monstrous_anchor_force", MonstrousAnchorForce::new);
+    public static final StaticModifier<MonstrousShock> monstrous_shock = LM_MODIFIERS.register("monstrous_shock", MonstrousShock::new);
+    public static final StaticModifier<AnnihilationBurst> annihilation_burst =
+            LM_MODIFIERS.register("annihilation_burst", AnnihilationBurst::new);
 
     public static final StaticModifier<CorruptionDefense> corruption_defense = FAA_MODIFIERS.register("faa_corruption_defense", CorruptionDefense::new);
     public static final StaticModifier<SentientWillModifier> sentient_will = BLM_MODIFIERS.register("sentient_will", SentientWillModifier::new);
@@ -570,6 +586,9 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId not_end_er = id("not_end_er");
         public static final ModifierId ender_end = id("ender_end");
         public static final ModifierId ender_protection = id("ender_protection");
+        public static final ModifierId shulker_counter = id("shulker_counter");
+        public static final ModifierId frost_seal = id("frost_seal");
+        public static final ModifierId legendary_reverie = id("legendary_reverie");
 
         public static final ModifierId faa_aureal_protection = id("faa_aureal_protection");
         public static final ModifierId faa_aureal_attack = id("faa_aureal_attack");

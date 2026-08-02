@@ -1,0 +1,14 @@
+{
+  "modifier_id": "dreamtinker:mossy_symbiosis",
+  "text": [
+    {
+      "text": "When the chestplate is struck, releases a poisonous cloud that damages nearby enemies and heals the wearer if it hits. Automatic activation has a 5-second cooldown."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/armor/chestplates",
+  "effects": [
+    "Chestplates only",
+    "Requires 1 ability slot",
+    "Maximum level: 1"
+  ]
+}

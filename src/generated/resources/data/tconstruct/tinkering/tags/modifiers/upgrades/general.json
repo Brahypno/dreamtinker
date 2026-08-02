@@ -11,6 +11,10 @@
     {
       "id": "dreamtinker:nova_reactive",
       "required": false
+    },
+    {
+      "id": "dreamtinker:chorus_blink",
+      "required": false
     }
   ]
 }

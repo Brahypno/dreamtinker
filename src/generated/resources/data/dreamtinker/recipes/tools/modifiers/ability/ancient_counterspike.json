@@ -1,0 +1,47 @@
+{
+  "type": "tconstruct:modifier",
+  "allow_crystal": true,
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "legendary_monsters"
+            },
+            {
+              "type": "esotericism_tinker:mod_compact_config",
+              "modid": "legendary_monsters"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "item": "legendary_monsters:ancient_spike"
+    },
+    {
+      "item": "legendary_monsters:chiseled_ancient_dripstone_shard"
+    },
+    {
+      "item": "legendary_monsters:molten_metal_ingot"
+    }
+  ],
+  "level": 1,
+  "result": "dreamtinker:ancient_counterspike",
+  "slots": {
+    "abilities": 1
+  },
+  "tools": {
+    "tag": "tconstruct:modifiable/shields"
+  }
+}

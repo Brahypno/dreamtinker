@@ -1,0 +1,15 @@
+{
+  "modifier_id": "dreamtinker:lightning_strike",
+  "text": [
+    {
+      "text": "手杖右键召唤雷电，劈向前方16格内最近的可见敌人。"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/special",
+  "effects": [
+    "右键使用",
+    "冷却5秒",
+    "需要1个能力槽",
+    "最高1级"
+  ]
+}

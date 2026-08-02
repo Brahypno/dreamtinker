@@ -7,6 +7,34 @@
     {
       "id": "dreamtinker:malum_rebound",
       "required": false
+    },
+    {
+      "id": "dreamtinker:soul_rage",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:withering_charge",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:lightning_strike",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:fiery_breath",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:monstrous_shock",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:annihilation_burst",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:mossy_symbiosis",
+      "required": false
     }
   ]
 }

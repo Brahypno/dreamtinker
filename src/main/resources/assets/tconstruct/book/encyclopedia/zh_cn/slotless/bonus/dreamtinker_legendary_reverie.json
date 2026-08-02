@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:legendary_reverie",
+  "text": [
+    {
+      "text": "为工具增加1个妄见强化槽。"
+    }
+  ],
+  "effects": [
+    "单次使用",
+    "固定1级",
+    "无需槽位"
+  ]
+}

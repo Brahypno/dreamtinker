@@ -255,7 +255,22 @@
     "terrible_blade": "#57E4F5",
     "terrible_armor": "#2381A0",
     "aquamirae_fin_fury": "#3AC2D5",
-    "aquamirae_fin_resilience": "#164769"
+    "aquamirae_fin_resilience": "#164769",
+    "shulker_counter": "#BA68C8",
+    "frost_seal": "#8FE9FF",
+    "annihilator_armor_power": "#B8A876",
+    "ancient_counterspike": "#C68A5B",
+    "withering_charge": "#4C6B43",
+    "mossy_symbiosis": "#6E8F3A",
+    "atmospheric_leap": "#DCEBFF",
+    "lightning_strike": "#F7E66A",
+    "chorus_blink": "#A660C7",
+    "fiery_breath": "#EF6B32",
+    "monstrous_shock": "#737E82",
+    "annihilation_burst": "#4A8F76",
+    "legendary_reverie": "#E6D7FF",
+    "dinosaur_bone_shockwave": "#A9AAAA",
+    "monstrous_anchor_force": "#737E82"
   },
   "material.dreamtinker": {
     "echo_alloy": "#034150",
@@ -356,7 +371,9 @@
     "sharp_bones": "#E8E5D2",
     "esca": "#23CFD5",
     "angler_fang": "#64A63A",
-    "fin": "#3AC2D5"
+    "fin": "#3AC2D5",
+    "legendary_monsters_dinosaur_bone": "#A9AAAA",
+    "legendary_monsters_molten_metal": "#737E82"
   },
   "harvest_tier.dreamtinker": {
     "lupus": "#E1B873",

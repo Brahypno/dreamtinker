@@ -1347,6 +1347,28 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(216, 0xFF629F4A)
                                                 .addARGB(255, 0xFF83C480)
                                                 .build());
+        this.buildMaterial(DreamtinkerMaterialIds.legendary_monsters_dinosaur_bone)
+            .meleeHarvest().shieldCore().repairKit()
+            .fallbacks("bone")
+            .transformer(GreyToSpriteTransformer.builderFromBlack()
+                                                .addARGB(63, 0xFF594F55)
+                                                .addARGB(102, 0xFF7B706A)
+                                                .addARGB(140, 0xFF8D8987)
+                                                .addARGB(178, 0xFFA9AAAA)
+                                                .addARGB(216, 0xFFDEDED0)
+                                                .addARGB(255, 0xFFF2F4F3)
+                                                .build());
+        this.buildMaterial(DreamtinkerMaterialIds.legendary_monsters_molten_metal)
+            .meleeHarvest().shieldCore().repairKit()
+            .fallbacks("metal")
+            .transformer(GreyToSpriteTransformer.builderFromBlack()
+                                                .addARGB(63, 0xFF383D41)
+                                                .addARGB(102, 0xFF535C60)
+                                                .addARGB(140, 0xFF737E82)
+                                                .addARGB(178, 0xFF949DA0)
+                                                .addARGB(216, 0xFFCACED0)
+                                                .addARGB(255, 0xFFFFFFFF)
+                                                .build());
     }
 
     protected void addBLMMaterials() {

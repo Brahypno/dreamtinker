@@ -54,13 +54,15 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             .add(Ids.icy_memory, Ids.hate_memory, Ids.soul_core, Ids.wrath, Ids.torrent);
         this.tag(TinkerTags.Modifiers.GENERAL_UPGRADES)
             .add(Ids.weapon_dreams_order, Ids.weapon_dreams_filter, TheEnd.getId(), life_looting.getId())
-            .addOptional(Ids.bic_dark_armor_plate, Ids.nova_reactive);
+            .addOptional(Ids.bic_dark_armor_plate, Ids.nova_reactive, chorus_blink.getId());
         this.tag(TinkerTags.Modifiers.HARVEST_UPGRADES)
             .add(Ids.falsify_fate);
         this.tag(TinkerTags.Modifiers.SPECIAL_DEFENSE)
             .add(Ids.reprise_protection);
         this.tag(CHESTPLATE_UPGRADES)
             .addOptional(living_armor.getId());
+        this.tag(TinkerTags.Modifiers.BOOT_UPGRADES)
+            .addOptional(atmospheric_leap.getId());
 
         this.tag(TinkerTags.Modifiers.GENERAL_SLOTLESS)
             .add(mei.getId(), fox_blessing.getId())
@@ -71,29 +73,38 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
         this.tag(TinkerTags.Modifiers.BONUS_SLOTLESS)
             .add(Ids.huge_ego, Ids.five_creations, Ids.soul_upgrade, Ids.abyss_inside, Ids.meta_morphosis)
             .addOptional(Ids.many_us, Ids.blighted_sigil, Ids.ashen_soul, Ids.naughty_chaos, Ids.cosmogony_tetrad, Ids.otherworld_precious,
-                         Ids.divineMaledictus);
+                         Ids.divineMaledictus, Ids.legendary_reverie);
         this.tag(COSMETIC_SLOTLESS)
             .addOptional(occ_view.getId());
 
 
         this.tag(TinkerTags.Modifiers.MELEE_ABILITIES)
             .add(Ids.continuous_explode, flaming_memory.getId(), Ids.curse_fire, rainbow_lights.getId())
-            .addOptional(weapon_books.getId(), desolation_ring.getId(), eldritch_pan.getId(), nova_enchanter_sword.getId());
+            .addOptional(weapon_books.getId(), desolation_ring.getId(), eldritch_pan.getId(), nova_enchanter_sword.getId(),
+                         soul_rage.getId(), withering_charge.getId(), monstrous_shock.getId(), annihilation_burst.getId());
+        this.tag(TinkerTags.Modifiers.HARVEST_ABILITIES)
+            .addOptional(mossy_symbiosis.getId());
         this.tag(TinkerTags.Modifiers.RANGED_ABILITIES)
             .add(Ids.force_to_explosion, love_shooting.getId(), Ids.curse_fire)
             .addOptional(nova_spell_bow.getId(), nova_wand.getId());
         this.tag(TinkerTags.Modifiers.GENERAL_ARMOR_ABILITIES)
             .add(Ids.curse_fire)
             .addOptional(nova_magic_armor.getId());
+        this.tag(TinkerTags.Modifiers.SHIELD_ABILITIES)
+            .addOptional(ancient_counterspike.getId());
+        this.tag(TinkerTags.Modifiers.CHESTPLATE_ABILITIES)
+            .addOptional(mossy_symbiosis.getId());
 
         this.tag(TinkerTags.Modifiers.BLOCK_WHILE_CHARGING)
             .add(memory_base.getId());
         this.tag(TinkerTags.Modifiers.INTERACTION_ABILITIES)
             //.add()
-            .addOptional(Ids.malum_ascension, Ids.malum_rebound);
+            .addOptional(Ids.malum_ascension, Ids.malum_rebound, soul_rage.getId(), withering_charge.getId(), lightning_strike.getId(),
+                         fiery_breath.getId(), monstrous_shock.getId(), annihilation_burst.getId(), mossy_symbiosis.getId());
         this.tag(TinkerTags.Modifiers.GENERAL_ARMOR_UPGRADES)
             .add(virtual_dodge.getId(), Ids.sweet_death, Ids.last_kiss)
-            .addOptional(Ids.spiritual_weapon_transformation, Ids.nova_mana_reduce, annihilator_armor_power.getId());
+            .addOptional(Ids.spiritual_weapon_transformation, Ids.nova_mana_reduce, annihilator_armor_power.getId(),
+                         Ids.shulker_counter, Ids.frost_seal);
         this.tag(DreamtinkerTagKeys.Modifiers.MALUM_EXPOSE_SOUL)
             .addOptional(malum_hex_staff.getId(), malum_base.getId(), malum_distortion.getId(), malum_spirit_attributes.getId(),
                          Ids.malum_animated, Ids.malum_rebound, Ids.malum_ascension, Ids.malum_haunted, Ids.malum_replenishing, Ids.malum_spirit_plunder,

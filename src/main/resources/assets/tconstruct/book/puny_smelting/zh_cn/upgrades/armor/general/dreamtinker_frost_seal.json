@@ -1,0 +1,14 @@
+{
+  "modifier_id": "dreamtinker:frost_seal",
+  "text": [
+    {
+      "text": "盾牌受到直接攻击时有30%概率冻结攻击者3秒；主动格挡会将概率提高至60%。"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/shields",
+  "effects": [
+    "仅适用于盾牌",
+    "需要1个升级槽",
+    "最高1级"
+  ]
+}

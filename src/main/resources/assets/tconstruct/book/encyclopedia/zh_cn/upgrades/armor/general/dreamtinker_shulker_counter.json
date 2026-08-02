@@ -1,0 +1,15 @@
+{
+  "modifier_id": "dreamtinker:shulker_counter",
+  "text": [
+    {
+      "text": "安装在头盔上时免疫飘浮。安装在盾牌上时，受到直接攻击有30%概率令攻击者飘浮3秒；主动格挡会将概率提高至60%。"
+    }
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable/armor",
+  "effects": [
+    "适用于头盔或盾牌",
+    "需要1个升级槽",
+    "最高1级"
+  ]
+}

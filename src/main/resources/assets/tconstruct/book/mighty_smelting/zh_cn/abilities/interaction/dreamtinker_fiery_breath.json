@@ -1,0 +1,15 @@
+{
+  "modifier_id": "dreamtinker:fiery_breath",
+  "text": [
+    {
+      "text": "手杖右键向前方锥形区域喷火，伤害、点燃并击退敌人。"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/special",
+  "effects": [
+    "右键使用",
+    "冷却4秒",
+    "需要1个能力槽",
+    "最高1级"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "legendary_monsters"
+          },
+          {
+            "type": "esotericism_tinker:mod_compact_config",
+            "modid": "legendary_monsters"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:no_levels",
+  "modules": [
+    {
+      "type": "tconstruct:mob_effect",
+      "chance": {
+        "each_level": 0.3
+      },
+      "effect": "legendary_monsters:freeze",
+      "hooks": [
+        "tconstruct:on_attacked"
+      ],
+      "level": {
+        "flat": 1.0
+      },
+      "time": {
+        "flat": 60.0
+      },
+      "tool": {
+        "type": "mantle:tag",
+        "tag": "tconstruct:modifiable/shields"
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

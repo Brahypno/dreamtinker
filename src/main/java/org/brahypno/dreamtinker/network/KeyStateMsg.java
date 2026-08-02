@@ -5,6 +5,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraftforge.network.NetworkEvent;
 import org.brahypno.dreamtinker.library.client.PlayerKeyStateProvider;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.legendary_monsters.LegendaryMonstersCompatModifiers;
 import org.brahypno.dreamtinker.utils.DTToolsPartsHelper;
 import slimeknights.mantle.client.TooltipKey;
 
@@ -39,8 +40,10 @@ public record KeyStateMsg(KeyKind kind, boolean down) {
             sp.getCapability(PlayerKeyStateProvider.PlayerKeyState.CAP).ifPresent(cap -> {
                 cap.set(m.kind(), m.down());   // 注意：KeyStateMsg 是 record -> 访问器是 kind()/down()
             });
-            if (KeyKind.TOOL_INTERACT == m.kind() && m.down())
+            if (KeyKind.TOOL_INTERACT == m.kind() && m.down()){
                 DTToolsPartsHelper.startToolInteract(sp, EquipmentSlot.MAINHAND, TooltipKey.UNKNOWN);
+                LegendaryMonstersCompatModifiers.AtmosphericLeap.tryActivate(sp);
+            }
         });
 
         c.setPacketHandled(true);

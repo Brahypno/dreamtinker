@@ -66,6 +66,7 @@ import slimeknights.tconstruct.library.json.LevelingValue;
 import slimeknights.tconstruct.library.json.RandomLevelingValue;
 import slimeknights.tconstruct.library.json.predicate.TinkerPredicate;
 import slimeknights.tconstruct.library.json.predicate.tool.HasModifierPredicate;
+import slimeknights.tconstruct.library.json.predicate.tool.ToolStackPredicate;
 import slimeknights.tconstruct.library.json.variable.block.BlockVariable;
 import slimeknights.tconstruct.library.json.variable.entity.AttributeEntityVariable;
 import slimeknights.tconstruct.library.json.variable.entity.ConditionalEntityVariable;
@@ -90,6 +91,7 @@ import slimeknights.tconstruct.library.modifiers.modules.build.*;
 import slimeknights.tconstruct.library.modifiers.modules.combat.*;
 import slimeknights.tconstruct.library.modifiers.modules.display.DurabilityBarColorModule;
 import slimeknights.tconstruct.library.modifiers.modules.mining.ConditionalMiningSpeedModule;
+import slimeknights.tconstruct.library.modifiers.modules.util.ModifierCondition;
 import slimeknights.tconstruct.library.modifiers.util.ModifierLevelDisplay;
 import slimeknights.tconstruct.library.tools.IndestructibleItemEntity;
 import slimeknights.tconstruct.library.tools.SlotType;
@@ -469,6 +471,28 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                            ModifierHooks.MELEE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
         buildModifier(Ids.ender_protection, DreamtinkerMaterialDataProvider.modLoaded("legendary_monsters"))
                 .addModule(ProtectionModule.builder().attacker(ender).eachLevel(4f));
+        buildModifier(Ids.legendary_reverie, DreamtinkerMaterialDataProvider.modLoaded("legendary_monsters"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModules(ModifierSlotModule.slot(EsotericismSlotType.DELUSION).flat(1));
+        buildModifier(Ids.shulker_counter, DreamtinkerMaterialDataProvider.modLoaded("legendary_monsters"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(new EffectImmunityModule(MobEffects.LEVITATION,
+                                                    ModifierCondition.ANY_TOOL.with(ToolStackPredicate.tag(TinkerTags.Items.HELMETS))))
+                .addModule(MobEffectModule.builder(MobEffects.LEVITATION)
+                                          .level(RandomLevelingValue.flat(1))
+                                          .time(RandomLevelingValue.flat(60))
+                                          .chance(LevelingValue.eachLevel(0.30f))
+                                          .toolTag(TinkerTags.Items.SHIELDS)
+                                          .build(), ModifierHooks.ON_ATTACKED);
+        // Datagen-only hard reference; generated JSON lives in src/main/resources.
+        // buildModifier(Ids.frost_seal, DreamtinkerMaterialDataProvider.modLoaded("legendary_monsters"))
+        //         .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+        //         .addModule(MobEffectModule.builder(ModEffects.FREEZE.get())
+        //                                   .level(RandomLevelingValue.flat(1))
+        //                                   .time(RandomLevelingValue.flat(60))
+        //                                   .chance(LevelingValue.eachLevel(0.30f))
+        //                                   .toolTag(TinkerTags.Items.SHIELDS)
+        //                                   .build(), ModifierHooks.ON_ATTACKED);
     }
 
     private static final float UNDERPLATE_ARMOR_FACTOR = 0.8f;

@@ -32,6 +32,10 @@
     {
       "id": "dreamtinker:divine_maledictus",
       "required": false
+    },
+    {
+      "id": "dreamtinker:legendary_reverie",
+      "required": false
     }
   ]
 }
