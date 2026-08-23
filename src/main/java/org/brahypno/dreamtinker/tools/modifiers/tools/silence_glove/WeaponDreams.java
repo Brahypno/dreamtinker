@@ -36,11 +36,38 @@ import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Supplier;
 
 import static org.brahypno.dreamtinker.tools.modifiers.events.weaponDreamsEnsureEnds.*;
 
 public class WeaponDreams extends NoLevelsModifier implements LeftClickHook, RightClickHook, GeneralInteractionModifierHook {
-    private static final ThreadLocal<Boolean> IN_ATTACK = ThreadLocal.withInitial(() -> false);
+    private static final ThreadLocal<Boolean> DISPATCHING_BORROWED_ACTION = ThreadLocal.withInitial(() -> false);
+
+    public static boolean isDispatchingBorrowedAction() {
+        return DISPATCHING_BORROWED_ACTION.get();
+    }
+
+    public static void dispatchBorrowedAction(Runnable action) {
+        boolean previous = DISPATCHING_BORROWED_ACTION.get();
+        try {
+            DISPATCHING_BORROWED_ACTION.set(true);
+            action.run();
+        }
+        finally {
+            DISPATCHING_BORROWED_ACTION.set(previous);
+        }
+    }
+
+    public static <T> T dispatchBorrowedAction(Supplier<T> action) {
+        boolean previous = DISPATCHING_BORROWED_ACTION.get();
+        try {
+            DISPATCHING_BORROWED_ACTION.set(true);
+            return action.get();
+        }
+        finally {
+            DISPATCHING_BORROWED_ACTION.set(previous);
+        }
+    }
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
@@ -63,19 +90,6 @@ public class WeaponDreams extends NoLevelsModifier implements LeftClickHook, Rig
         return Integer.MAX_VALUE;
     }
 
-    private static void handleClientAttack(Player player, @Nullable Entity target) {
-        if (target == null)
-            return;
-
-        try {
-            IN_ATTACK.set(true);
-            player.attack(target);
-        }
-        finally {
-            IN_ATTACK.set(false);
-        }
-    }
-
     @Override
     public void onLeftClickEmpty(IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot) {
         left_click_3_in_one(null, tool, entry, player, level, equipmentSlot, null, null);
@@ -89,14 +103,6 @@ public class WeaponDreams extends NoLevelsModifier implements LeftClickHook, Rig
     @Override
     public void onLeftClickEntity(AttackEntityEvent event, IToolStackView tool, ModifierEntry entry, Player player, Level level, EquipmentSlot equipmentSlot, Entity target) {
         left_click_3_in_one(event, tool, entry, player, level, equipmentSlot, target, null);
-    }
-
-    private static void callChosenLeftClickEmpty(ItemStack chosen, Player player, Level level, EquipmentSlot equipmentSlot) {
-        IToolStackView chosenTool = ToolStack.from(chosen);
-        for (ModifierEntry chosenEntry : chosenTool.getModifierList()) {
-            chosenEntry.getHook(EsotericismTinkerHook.LEFT_CLICK)
-                       .onLeftClickEmpty(chosenTool, chosenEntry, player, level, equipmentSlot);
-        }
     }
 
     private static void update_hand(Player player, ItemStack stack) {
@@ -140,6 +146,19 @@ public class WeaponDreams extends NoLevelsModifier implements LeftClickHook, Rig
         return nonEmpty.get(level.random.nextInt(nonEmpty.size()));
     }
 
+    public static List<ItemStack> readWeaponSlots(IToolStackView tool, ModifierEntry weaponSlots) {
+        ToolInventoryCapability.InventoryModifierHook inventory =
+                weaponSlots.getHook(ToolInventoryCapability.HOOK);
+        int slotCount = inventory.getSlots(tool, weaponSlots);
+        List<ItemStack> frames = new ArrayList<>(slotCount);
+
+        for (int slot = 0; slot < slotCount; slot++) {
+            frames.add(inventory.getStack(tool, weaponSlots, slot).copy());
+        }
+
+        return frames;
+    }
+
     public static int naturalCycle(List<Integer> candidates, int lastIndex) {
         if (candidates.isEmpty())
             return -1;
@@ -159,62 +178,95 @@ public class WeaponDreams extends NoLevelsModifier implements LeftClickHook, Rig
         return Math.max(1, net.minecraft.util.Mth.ceil(20f / chosenSpeed));
     }
 
-    private static void rightClickEmptyFromProxy(ServerPlayer sp, Level level) {
-        endChosen(sp);
+    /**
+     * Checks whether an empty main hand can currently proxy at least one stored
+     * weapon from the Curios glove. This is read-only and safe to call from the
+     * client interaction event before the server starts the borrow transaction.
+     */
+    public static boolean canBorrowFromCurio(Player player) {
+        if (!player.getMainHandItem().isEmpty()
+            || player.getCooldowns().isOnCooldown(DreamtinkerTools.silence_glove.asItem()))
+            return false;
 
-        ItemStack proxyStack = CuriosCompat.findPreferredGlove(sp);
-        if (proxyStack.isEmpty())
-            return;
-
-        if (sp.getCooldowns().isOnCooldown(DreamtinkerTools.silence_glove.asItem()))
-            return;
+        ItemStack proxyStack = CuriosCompat.findPreferredGlove(player);
+        if (proxyStack.isEmpty() || !proxyStack.is(DreamtinkerTools.silence_glove.asItem()))
+            return false;
 
         ToolStack proxyTool = ToolStack.from(proxyStack);
         ModifierEntry weaponSlots = proxyTool.getModifier(DreamtinkerModifiers.Ids.weapon_slots);
         if (weaponSlots.getLevel() < 1)
+            return false;
+
+        for (ItemStack stack : readWeaponSlots(proxyTool, weaponSlots)) {
+            if (!stack.isEmpty() && stack.is(TinkerTags.Items.MODIFIABLE))
+                return true;
+        }
+        return false;
+    }
+
+    /**
+     * Settles any previous loan and snapshots the glove state used by the next loan.
+     * Both click paths go through this method so slot numbering and source tracking
+     * cannot drift apart again.
+     */
+    public static @Nullable BorrowContext beginBorrow(ServerPlayer player) {
+        endChosen(player);
+
+        if (player.getCooldowns().isOnCooldown(DreamtinkerTools.silence_glove.asItem()))
+            return null;
+
+        boolean proxyInCurio = player.getMainHandItem().isEmpty();
+        ItemStack proxyStack = proxyInCurio
+                               ? CuriosCompat.findPreferredGlove(player)
+                               : player.getMainHandItem();
+        if (proxyStack.isEmpty() || !proxyStack.is(DreamtinkerTools.silence_glove.asItem()))
+            return null;
+
+        ToolStack proxyTool = ToolStack.from(proxyStack);
+        ModifierEntry weaponSlots = proxyTool.getModifier(DreamtinkerModifiers.Ids.weapon_slots);
+        if (weaponSlots.getLevel() < 1)
+            return null;
+
+        List<ItemStack> frames = readWeaponSlots(proxyTool, weaponSlots);
+        boolean requireUsable = proxyTool.getModifier(DreamtinkerModifiers.Ids.weapon_dreams_filter).getLevel() >= 1;
+        boolean naturalOrder = proxyTool.getModifier(DreamtinkerModifiers.Ids.weapon_dreams_order).getLevel() >= 1;
+        int lastUsedIndex = proxyTool.getPersistentData().contains(TAG_LAST_USE)
+                            ? proxyTool.getPersistentData().getInt(TAG_LAST_USE)
+                            : -1;
+
+        return new BorrowContext(
+                player, proxyStack, proxyTool, weaponSlots, frames,
+                proxyInCurio, requireUsable, naturalOrder, lastUsedIndex
+        );
+    }
+
+    private static void rightClickEmptyFromProxy(ServerPlayer sp, Level level) {
+        BorrowContext borrow = beginBorrow(sp);
+        if (borrow == null || !borrow.proxyInCurio())
             return;
 
-        List<ItemStack> frames = new ArrayList<>();
-        weaponSlots.getHook(ToolInventoryCapability.HOOK)
-                   .getAllStacks(proxyTool, weaponSlots, frames);
-
-        boolean toolFilter = 1 <= proxyTool.getModifier(DreamtinkerModifiers.Ids.weapon_dreams_filter).getLevel();
-        boolean naturalOrder = 1 <= proxyTool.getModifier(DreamtinkerModifiers.Ids.weapon_dreams_order).getLevel();
-
-        int lastIdx = !proxyTool.getPersistentData().contains(TAG_LAST_USE)
-                      ? -1
-                      : proxyTool.getPersistentData().getInt(TAG_LAST_USE);
-
-        int chosenIdx = chooseIndex(level, frames, null, naturalOrder, toolFilter, lastIdx);
+        int chosenIdx = chooseIndex(
+                level, borrow.frames(), null,
+                borrow.naturalOrder(), borrow.requireUsable(), borrow.lastUsedIndex()
+        );
         if (chosenIdx < 0)
             return;
 
-        ItemStack chosen = borrowChosen(proxyStack, proxyTool, weaponSlots, frames, chosenIdx, naturalOrder);
-
+        ItemStack chosen = borrow.borrow(chosenIdx);
         if (chosen.isEmpty())
             return;
 
-        int cooldownTicks = computeProxyCooldownTicks(proxyTool);
-        ItemStack proxySnap = proxyStack.copy();
-
-        update_hand(sp, chosen);
-        startChosenDisplay(sp, chosenIdx, proxySnap, cooldownTicks, true);
-
-        try {
-            IN_ATTACK.set(true);
-            sp.gameMode.useItem(sp, level, chosen, InteractionHand.MAIN_HAND);
-        }
-        finally {
-            IN_ATTACK.set(false);
-        }
+        dispatchBorrowedAction(
+                () -> sp.gameMode.useItem(sp, level, sp.getMainHandItem(), InteractionHand.MAIN_HAND)
+        );
+        syncBorrowedUseState(sp);
     }
-
 
     @Override
     public void onRightClickEmpty(
             IToolStackView tool, ModifierEntry entry, Player player,
             Level level, EquipmentSlot equipmentSlot) {
-        if (IN_ATTACK.get())
+        if (DISPATCHING_BORROWED_ACTION.get())
             return;
 
         if (!(player instanceof ServerPlayer sp) || level.isClientSide || player.isUsingItem())
@@ -226,25 +278,6 @@ public class WeaponDreams extends NoLevelsModifier implements LeftClickHook, Rig
         rightClickEmptyFromProxy(sp, level);
     }
 
-    private static ItemStack borrowChosen(
-            ItemStack proxyStack, ToolStack proxyTool, ModifierEntry weaponSlots,
-            List<ItemStack> frames, int chosenIdx, boolean naturalOrder) {
-        ItemStack chosen = frames.get(chosenIdx).copy();
-
-        if (chosen.isEmpty() || !chosen.is(TinkerTags.Items.MODIFIABLE))
-            return ItemStack.EMPTY;
-
-        if (naturalOrder)
-            proxyTool.getPersistentData().putInt(TAG_LAST_USE, chosenIdx);
-
-        weaponSlots.getHook(ToolInventoryCapability.HOOK)
-                   .setStack(proxyTool, weaponSlots, chosenIdx, ItemStack.EMPTY);
-
-        proxyTool.updateStack(proxyStack);
-
-        return chosen;
-    }
-
     private void left_click_3_in_one(
             @Nullable AttackEntityEvent event, IToolStackView tool, ModifierEntry entry,
             Player player, Level level, EquipmentSlot equipmentSlot,
@@ -252,70 +285,42 @@ public class WeaponDreams extends NoLevelsModifier implements LeftClickHook, Rig
         if (player == null)
             return;
 
-        if (IN_ATTACK.get())
+        if (DISPATCHING_BORROWED_ACTION.get())
             return;
 
         if (event != null)
             event.setCanceled(true);
 
-        if (player.getCooldowns().isOnCooldown(DreamtinkerTools.silence_glove.asItem()))
+        if (level.isClientSide && player.getCooldowns().isOnCooldown(DreamtinkerTools.silence_glove.asItem()))
             return;
 
         if (level.isClientSide){
-            try {
-                IN_ATTACK.set(true);
-
+            dispatchBorrowedAction(() -> {
                 if (target != null)
                     player.attack(target);
-            }
-            finally {
-                IN_ATTACK.set(false);
-            }
+            });
 
             return;
         }
 
-        ItemStack proxyStack = player.getMainHandItem();
-        boolean mainEmpty = proxyStack.isEmpty();
-
-        if (mainEmpty)
-            proxyStack = CuriosCompat.findPreferredGlove(player);
-
-        if (proxyStack.isEmpty())
+        if (!(player instanceof ServerPlayer sp))
             return;
 
-        ToolStack proxyTool = ToolStack.from(proxyStack);
-        ModifierEntry weaponSlots = proxyTool.getModifier(DreamtinkerModifiers.Ids.weapon_slots);
-
-        if (weaponSlots.getLevel() < 1)
+        BorrowContext borrow = beginBorrow(sp);
+        if (borrow == null)
             return;
 
-        List<ItemStack> frames = new ArrayList<>();
-        weaponSlots.getHook(ToolInventoryCapability.HOOK).getAllStacks(proxyTool, weaponSlots, frames);
-
-        boolean toolFilter = 1 <= proxyTool.getModifier(DreamtinkerModifiers.Ids.weapon_dreams_filter).getLevel();
-        boolean naturalOrder = 1 <= proxyTool.getModifier(DreamtinkerModifiers.Ids.weapon_dreams_order).getLevel();
-
-        int lastIdx = !proxyTool.getPersistentData().contains(TAG_LAST_USE)
-                      ? -1
-                      : proxyTool.getPersistentData().getInt(TAG_LAST_USE);
-
-        int chosenIdx = chooseIndex(level, frames, state, naturalOrder, toolFilter, lastIdx);
+        int chosenIdx = chooseIndex(
+                level, borrow.frames(), state,
+                borrow.naturalOrder(), borrow.requireUsable(), borrow.lastUsedIndex()
+        );
 
         if (chosenIdx < 0)
             return;
 
-        ItemStack chosen = borrowChosen(proxyStack, proxyTool, weaponSlots, frames, chosenIdx, naturalOrder);
-
+        ItemStack chosen = borrow.borrow(chosenIdx);
         if (chosen.isEmpty())
             return;
-
-        ServerPlayer sp = (ServerPlayer) player;
-        int cooldownTicks = computeProxyCooldownTicks(proxyTool);
-        ItemStack proxySnap = proxyStack.copy();
-
-        update_hand(player, chosen);
-        startChosenDisplay(sp, chosenIdx, proxySnap, cooldownTicks, mainEmpty);
 
         player.attackStrengthTicker = (int) Math.ceil(player.getCurrentItemAttackStrengthDelay());
 
@@ -336,5 +341,78 @@ public class WeaponDreams extends NoLevelsModifier implements LeftClickHook, Rig
 
     private static boolean canHarvest(BlockState state, ItemStack stack) {
         return IsEffectiveToolHook.isEffective(ToolStack.from(stack), state);
+    }
+
+    public static final class BorrowContext {
+        private final ServerPlayer player;
+        private final ItemStack proxyStack;
+        private final ToolStack proxyTool;
+        private final ModifierEntry weaponSlots;
+        private final List<ItemStack> frames;
+        private final boolean proxyInCurio;
+        private final boolean requireUsable;
+        private final boolean naturalOrder;
+        private final int lastUsedIndex;
+        private boolean borrowed;
+
+        private BorrowContext(
+                ServerPlayer player, ItemStack proxyStack, ToolStack proxyTool,
+                ModifierEntry weaponSlots, List<ItemStack> frames,
+                boolean proxyInCurio, boolean requireUsable,
+                boolean naturalOrder, int lastUsedIndex) {
+            this.player = player;
+            this.proxyStack = proxyStack;
+            this.proxyTool = proxyTool;
+            this.weaponSlots = weaponSlots;
+            this.frames = frames;
+            this.proxyInCurio = proxyInCurio;
+            this.requireUsable = requireUsable;
+            this.naturalOrder = naturalOrder;
+            this.lastUsedIndex = lastUsedIndex;
+        }
+
+        public List<ItemStack> frames() {
+            return Collections.unmodifiableList(frames);
+        }
+
+        public boolean proxyInCurio() {
+            return proxyInCurio;
+        }
+
+        public boolean requireUsable() {
+            return requireUsable;
+        }
+
+        public boolean naturalOrder() {
+            return naturalOrder;
+        }
+
+        public int lastUsedIndex() {
+            return lastUsedIndex;
+        }
+
+        public ItemStack borrow(int slot) {
+            if (borrowed || slot < 0 || slot >= frames.size())
+                return ItemStack.EMPTY;
+
+            ItemStack chosen = frames.get(slot).copy();
+            if (chosen.isEmpty() || !chosen.is(TinkerTags.Items.MODIFIABLE))
+                return ItemStack.EMPTY;
+
+            borrowed = true;
+            if (naturalOrder)
+                proxyTool.getPersistentData().putInt(TAG_LAST_USE, slot);
+
+            weaponSlots.getHook(ToolInventoryCapability.HOOK)
+                       .setStack(proxyTool, weaponSlots, slot, ItemStack.EMPTY);
+            proxyTool.updateStack(proxyStack);
+
+            update_hand(player, chosen);
+            startChosenDisplay(
+                    player, slot, proxyStack.copy(),
+                    computeProxyCooldownTicks(proxyTool), proxyInCurio
+            );
+            return player.getMainHandItem();
+        }
     }
 }

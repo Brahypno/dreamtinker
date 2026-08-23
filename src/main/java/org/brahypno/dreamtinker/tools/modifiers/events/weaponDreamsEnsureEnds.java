@@ -5,6 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -28,10 +29,13 @@ import java.util.UUID;
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class weaponDreamsEnsureEnds {
     public static final ResourceLocation TAG_LAST_USE = Dreamtinker.getLocation("weapon_dreams_last_use");
+    private static final String TAG_BORROW_SESSION = Dreamtinker.MODID + ":weapon_dreams_session";
 
     private static final Map<UUID, Pending> PENDING = new HashMap<>();
 
-    public static void startChosenDisplay(ServerPlayer sp, int slot, ItemStack proxySnap, int cooldownTicks, boolean mainEmpty) {
+    public static void startChosenDisplay(ServerPlayer sp, int slot, ItemStack proxySnap, int cooldownTicks, boolean proxyInCurio) {
+        UUID session = UUID.randomUUID();
+        markBorrowed(sp.getMainHandItem(), session);
         int slotId = 36 + sp.getInventory().selected;
 
         sp.connection.send(new ClientboundContainerSetSlotPacket(
@@ -42,14 +46,13 @@ public class weaponDreamsEnsureEnds {
         ));
 
         PENDING.put(sp.getUUID(), new Pending(
-                UUID.randomUUID(),
+                session,
                 proxySnap,
                 16,
-                false,
                 sp.getInventory().selected,
                 cooldownTicks,
                 slot,
-                mainEmpty
+                proxyInCurio
         ));
     }
 
@@ -61,11 +64,39 @@ public class weaponDreamsEnsureEnds {
         finishChosen(sp, pending);
     }
 
+    public static void syncBorrowedUseState(ServerPlayer sp) {
+        Pending pending = PENDING.get(sp.getUUID());
+        if (pending == null || pending.useStateSynced || !sp.isUsingItem()
+            || !belongsToSession(sp.getUseItem(), pending.session))
+            return;
+
+        // Fast-forward the borrowed item's first use to the designed full-charge
+        // window. Never increase the remaining time if it has already charged
+        // further, and do this only once for the current borrow transaction.
+        int acceleratedRemaining = (int) (sp.getUseItem().getUseDuration() * 0.4F);
+        sp.useItemRemaining = Math.min(sp.getUseItemRemainingTicks(), acceleratedRemaining);
+        pending.useStateSynced = true;
+        DNetwork.CHANNEL.send(
+                PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> sp),
+                new S2CUseRemainPacket(sp.getId(), 0, sp.getUseItemRemainingTicks(), true)
+        );
+    }
+
     private static void finishChosen(ServerPlayer sp, Pending pending) {
-        ItemStack candidate = sp.getInventory().getItem(pending.selectedAtStart).copy();
+        if (sp.isUsingItem() && belongsToSession(sp.getUseItem(), pending.session))
+            sp.stopUsingItem();
+
+        int borrowedSlot = findBorrowedSlot(sp, pending.session);
+        ItemStack candidate = ItemStack.EMPTY;
+        if (borrowedSlot >= 0){
+            candidate = sp.getInventory().getItem(borrowedSlot).copy();
+            clearBorrowMarker(candidate);
+            sp.getInventory().setItem(borrowedSlot, ItemStack.EMPTY);
+        }
+
         ItemStack proxyForWrite = getProxyForWrite(sp, pending);
 
-        if (!candidate.isEmpty() && proxyForWrite.getItem() instanceof IModifiable){
+        if (proxyForWrite.getItem() instanceof IModifiable){
             ToolStack silenceGlove = ToolStack.from(proxyForWrite);
             ModifierEntry entry = silenceGlove.getModifier(DreamtinkerModifiers.Ids.weapon_slots);
 
@@ -77,25 +108,56 @@ public class weaponDreamsEnsureEnds {
             }
         }
 
-        ItemStack restore = pending.empty ? ItemStack.EMPTY : proxyForWrite.copy();
+        if (!pending.proxyInCurio){
+            ItemStack displaced = sp.getInventory().getItem(pending.selectedAtStart).copy();
+            sp.getInventory().setItem(pending.selectedAtStart, ItemStack.EMPTY);
+            if (!displaced.isEmpty() && !sp.getInventory().add(displaced))
+                sp.drop(displaced, false);
 
-        sp.getInventory().setItem(pending.selectedAtStart, restore);
+            sp.getInventory().setItem(pending.selectedAtStart, proxyForWrite.copy());
+        }
         sp.getInventory().setChanged();
 
         sp.getCooldowns().addCooldown(DreamtinkerTools.silence_glove.get(), pending.cooldownTicks);
 
+        ItemStack displayed = sp.getInventory().getItem(pending.selectedAtStart).copy();
         int slotId = 36 + pending.selectedAtStart;
 
         sp.connection.send(new ClientboundContainerSetSlotPacket(
                 sp.inventoryMenu.containerId,
                 sp.inventoryMenu.incrementStateId(),
                 slotId,
-                restore.copy()
+                displayed
         ));
     }
 
+    private static void markBorrowed(ItemStack stack, UUID session) {
+        if (!stack.isEmpty())
+            stack.getOrCreateTag().putUUID(TAG_BORROW_SESSION, session);
+    }
+
+    private static boolean belongsToSession(ItemStack stack, UUID session) {
+        return !stack.isEmpty()
+               && stack.hasTag()
+               && stack.getTag().hasUUID(TAG_BORROW_SESSION)
+               && session.equals(stack.getTag().getUUID(TAG_BORROW_SESSION));
+    }
+
+    private static void clearBorrowMarker(ItemStack stack) {
+        if (stack.hasTag())
+            stack.getTag().remove(TAG_BORROW_SESSION);
+    }
+
+    private static int findBorrowedSlot(ServerPlayer sp, UUID session) {
+        for (int slot = 0; slot < sp.getInventory().getContainerSize(); slot++) {
+            if (belongsToSession(sp.getInventory().getItem(slot), session))
+                return slot;
+        }
+        return -1;
+    }
+
     private static ItemStack getProxyForWrite(ServerPlayer sp, Pending pending) {
-        if (!pending.empty)
+        if (!pending.proxyInCurio)
             return pending.proxySnap.copy();
 
         ItemStack curioProxy = CuriosCompat.findPreferredGlove(sp);
@@ -120,29 +182,20 @@ public class weaponDreamsEnsureEnds {
             }
 
             Pending pending = entry.getValue();
+            int borrowedSlot = findBorrowedSlot(sp, pending.session);
+            boolean borrowedInOriginalSlot = borrowedSlot == pending.selectedAtStart;
+            boolean usingBorrowed = sp.isUsingItem() && belongsToSession(sp.getUseItem(), pending.session);
 
-            if (sp.isUsingItem() && sp.getTicksUsingItem() < sp.getUseItemRemainingTicks()){
-                sp.useItemRemaining = (int) (sp.getUseItem().getUseDuration() * 0.4);
+            if (usingBorrowed)
+                syncBorrowedUseState(sp);
 
-                S2CUseRemainPacket packet = new S2CUseRemainPacket(
-                        sp.getId(),
-                        0,
-                        sp.useItemRemaining,
-                        true
-                );
-
-                DNetwork.CHANNEL.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> sp), packet);
-            }
-
-            if (sp.getInventory().selected == pending.selectedAtStart){
+            if (sp.getInventory().selected == pending.selectedAtStart && borrowedInOriginalSlot){
                 if (pending.ticks > 0){
                     pending.ticks--;
                     continue;
                 }
 
-                if (pending.waitCooldown && sp.getAttackStrengthScale(0) < 1.0F)
-                    continue;
-                if (isMining(sp) || sp.isUsingItem())
+                if (isMining(sp) || usingBorrowed)
                     continue;
             }
 
@@ -153,6 +206,20 @@ public class weaponDreamsEnsureEnds {
 
     private static boolean isMining(ServerPlayer sp) {
         return sp.gameMode.isDestroyingBlock;
+    }
+
+    @SubscribeEvent
+    public static void onItemToss(ItemTossEvent event) {
+        if (!(event.getPlayer() instanceof ServerPlayer sp))
+            return;
+
+        Pending pending = PENDING.get(sp.getUUID());
+        ItemStack tossed = event.getEntity().getItem();
+        if (pending == null || !belongsToSession(tossed, pending.session))
+            return;
+
+        clearBorrowMarker(tossed);
+        endChosen(sp);
     }
 
     @SubscribeEvent
@@ -180,21 +247,20 @@ public class weaponDreamsEnsureEnds {
         final UUID session;
         final ItemStack proxySnap;
         final int selectedAtStart;
-        final boolean waitCooldown;
         int ticks;
         final int cooldownTicks;
         final int slot;
-        final boolean empty;
+        final boolean proxyInCurio;
+        boolean useStateSynced;
 
-        Pending(UUID session, ItemStack proxySnap, int ticks, boolean waitCooldown, int selectedAtStart, int cooldownTicks, int slot, boolean empty) {
+        Pending(UUID session, ItemStack proxySnap, int ticks, int selectedAtStart, int cooldownTicks, int slot, boolean proxyInCurio) {
             this.session = session;
             this.proxySnap = proxySnap.copy();
             this.ticks = ticks;
-            this.waitCooldown = waitCooldown;
             this.selectedAtStart = selectedAtStart;
             this.cooldownTicks = cooldownTicks;
             this.slot = slot;
-            this.empty = empty;
+            this.proxyInCurio = proxyInCurio;
         }
     }
 }

@@ -15,16 +15,11 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.brahypno.dreamtinker.Dreamtinker;
-import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
-import org.brahypno.dreamtinker.tools.DreamtinkerTools;
 import org.brahypno.dreamtinker.tools.modifiers.tools.silence_glove.WeaponDreams;
-import org.brahypno.esotericismtinker.utils.CompatUtils.CuriosCompat;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
-import slimeknights.tconstruct.library.modifiers.hook.interaction.InteractionSource;
 import slimeknights.tconstruct.library.modifiers.hook.ranged.BowAmmoModifierHook;
-import slimeknights.tconstruct.library.tools.capability.inventory.ToolInventoryCapability;
 import slimeknights.tconstruct.library.tools.item.ranged.ModifiableBowItem;
 import slimeknights.tconstruct.library.tools.item.ranged.ModifiableCrossbowItem;
 import slimeknights.tconstruct.library.tools.nbt.IModDataView;
@@ -35,97 +30,115 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.brahypno.dreamtinker.tools.modifiers.events.weaponDreamsEnsureEnds.TAG_LAST_USE;
-import static org.brahypno.dreamtinker.tools.modifiers.events.weaponDreamsEnsureEnds.startChosenDisplay;
-import static org.brahypno.dreamtinker.tools.modifiers.tools.silence_glove.WeaponDreams.computeProxyCooldownTicks;
 import static slimeknights.tconstruct.library.tools.item.IModifiable.DEFER_OFFHAND;
 import static slimeknights.tconstruct.library.tools.item.IModifiable.NO_INTERACTION;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class SilenceGloveEvents {
-    private static final ThreadLocal<Boolean> REENTRY = ThreadLocal.withInitial(() -> Boolean.FALSE);
+    /* ========== 右键方块：从饰品栏借出后重放原版物品交互 ========== */
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+        if (WeaponDreams.isDispatchingBorrowedAction()
+            || event.getHand() != InteractionHand.MAIN_HAND
+            || !WeaponDreams.canBorrowFromCurio(event.getEntity()))
+            return;
+
+        if (event.getLevel().isClientSide){
+            // The block-use packet has already been queued. Returning success here
+            // prevents the empty client hand from also sending a second use-item
+            // packet for the same click; the server replays both vanilla phases.
+            event.setCancellationResult(InteractionResult.SUCCESS);
+            event.setCanceled(true);
+            return;
+        }
+
+        if (!(event.getEntity() instanceof ServerPlayer player))
+            return;
+
+        WeaponDreams.BorrowContext borrow = WeaponDreams.beginBorrow(player);
+        if (borrow == null || !borrow.proxyInCurio())
+            return;
+
+        int selectedSlot = pickUsable(
+                borrow.frames(), player, borrow.naturalOrder(),
+                borrow.requireUsable(), borrow.lastUsedIndex()
+        );
+        // useOn() has no side-effect-free general predicate. If the ordinary
+        // right-click filter finds nothing (for example a hoe), keep the same
+        // non-empty fallback used by the left-click selector.
+        if (selectedSlot < 0){
+            selectedSlot = WeaponDreams.chooseIndex(
+                    player.level(), borrow.frames(),
+                    player.level().getBlockState(event.getPos()),
+                    borrow.naturalOrder(), false, borrow.lastUsedIndex()
+            );
+        }
+        if (selectedSlot < 0 || borrow.borrow(selectedSlot).isEmpty())
+            return;
+
+        InteractionResult result = WeaponDreams.dispatchBorrowedAction(() -> {
+            ItemStack borrowed = player.getMainHandItem();
+            InteractionResult blockResult = player.gameMode.useItemOn(
+                    player, player.level(), borrowed,
+                    InteractionHand.MAIN_HAND, event.getHitVec()
+            );
+            if (blockResult == InteractionResult.PASS){
+                return player.gameMode.useItem(
+                        player, player.level(), player.getMainHandItem(), InteractionHand.MAIN_HAND
+                );
+            }
+            return blockResult;
+        });
+
+        weaponDreamsEnsureEnds.syncBorrowedUseState(player);
+        event.setCancellationResult(result);
+        event.setCanceled(true);
+    }
 
     /* ========== 右键空气/物品：随机 use ========== */
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
-        if (Boolean.TRUE.equals(REENTRY.get()))
+        if (WeaponDreams.isDispatchingBorrowedAction())
             return;
         Player player = event.getEntity();
         if (player == null || player.level().isClientSide)
             return;
 
-        ItemStack silenceGlove = getSilenceGlove(player);
-        if (silenceGlove.isEmpty() || !silenceGlove.is(DreamtinkerTools.silence_glove.asItem())){
-            return; // No valid glove found
-        }
+        if (!(player instanceof ServerPlayer serverPlayer))
+            return;
 
-        if (player.getCooldowns().isOnCooldown(DreamtinkerTools.silence_glove.asItem())){
-            return; // On cooldown
-        }
-
-        selectAndUseTool(player, silenceGlove, event.getHand() == InteractionHand.OFF_HAND);
-    }
-
-    /**
-     * Retrieves the Silence Glove from the player's main hand or Curios.
-     */
-    private static ItemStack getSilenceGlove(Player player) {
-        ItemStack mainHand = player.getMainHandItem();
-        if (!mainHand.isEmpty()){
-            return mainHand;
-        }
-        return CuriosCompat.findPreferredGlove(player);
+        selectAndUseTool(event, serverPlayer);
     }
 
     /**
      * Selects a usable tool from the glove's inventory and triggers its use.
      */
-    private static void selectAndUseTool(Player player, ItemStack silenceGlove, boolean mainHandWasEmpty) {
-        ToolStack gloveTool = ToolStack.from(silenceGlove);
-        ModifierEntry weaponSlotsEntry = gloveTool.getModifier(DreamtinkerModifiers.Ids.weapon_slots);
-        if (weaponSlotsEntry.getLevel() < 1){
-            return; // No weapon slots available
-        }
+    private static void selectAndUseTool(PlayerInteractEvent.RightClickItem event, ServerPlayer player) {
+        WeaponDreams.BorrowContext borrow = WeaponDreams.beginBorrow(player);
+        if (borrow == null)
+            return;
 
-        List<ItemStack> storedTools = new ArrayList<>();
-        weaponSlotsEntry.getHook(ToolInventoryCapability.HOOK).getAllStacks(gloveTool, weaponSlotsEntry, storedTools);
-
-        boolean requireUsable = gloveTool.getModifier(DreamtinkerModifiers.Ids.weapon_dreams_filter).getLevel() >= 1;
-        boolean naturalOrder = gloveTool.getModifier(DreamtinkerModifiers.Ids.weapon_dreams_order).getLevel() >= 1;
-        int lastUsedIndex = gloveTool.getPersistentData().contains(TAG_LAST_USE)
-                            ? gloveTool.getPersistentData().getInt(TAG_LAST_USE)
-                            : -1;
-
-        int selectedSlot = pickUsable(storedTools, player, naturalOrder, requireUsable, lastUsedIndex);
-        if (selectedSlot < 0 || selectedSlot >= storedTools.size()){
+        int selectedSlot = pickUsable(
+                borrow.frames(), player, borrow.naturalOrder(),
+                borrow.requireUsable(), borrow.lastUsedIndex()
+        );
+        if (selectedSlot < 0){
             return; // No valid tool selected
         }
 
-        ItemStack selectedTool = storedTools.get(selectedSlot);
-        if (selectedTool.isEmpty() || !selectedTool.is(TinkerTags.Items.MODIFIABLE)){
+        ItemStack selectedTool = borrow.borrow(selectedSlot);
+        if (selectedTool.isEmpty()){
             return; // Invalid tool
         }
 
-        // Update last used index for natural order
-        if (naturalOrder){
-            gloveTool.getPersistentData().putInt(TAG_LAST_USE, selectedSlot);
-            gloveTool.updateStack(silenceGlove);
-        }
-
-        // Temporarily swap and use the tool
-        ItemStack originalMainHand = player.getMainHandItem();
-        try {
-            REENTRY.set(true);
-            player.setItemInHand(InteractionHand.MAIN_HAND, selectedTool);
-            player.getInventory().setChanged();
-            startChosenDisplay((ServerPlayer) player, selectedSlot, silenceGlove, computeProxyCooldownTicks(gloveTool), mainHandWasEmpty);
-
-            selectedTool.use(player.level(), player, InteractionHand.MAIN_HAND);
-        }
-        finally {
-            REENTRY.set(false);
-            // Note: The tool is not automatically restored; rely on game mechanics or other events for cleanup
-        }
+        InteractionResult result = WeaponDreams.dispatchBorrowedAction(
+                () -> player.gameMode.useItem(
+                        player, player.level(), player.getMainHandItem(), InteractionHand.MAIN_HAND
+                )
+        );
+        weaponDreamsEnsureEnds.syncBorrowedUseState(player);
+        event.setCancellationResult(result);
+        event.setCanceled(true);
     }
 
 
@@ -143,7 +156,6 @@ public class SilenceGloveEvents {
         }
         if (nonEmpty.isEmpty())
             return -1; // 没东西可选
-        lastIndex = (lastIndex) % nonEmpty.size();
         List<Integer> usable = nonEmpty.stream().filter(index -> isUsable(stacks.get(index), player, RequireUsable))
                                        .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
         if (usable.isEmpty())
@@ -160,11 +172,13 @@ public class SilenceGloveEvents {
             return false;
         }
 
-        // Check general modifier interactions
+        if (!requireUsable)
+            return true;
+
+        // Do not call onToolUse() as a predicate: it is the real action hook and
+        // may mutate the tool or player before the selected stack is borrowed.
         for (ModifierEntry entry : tool.getModifierList()) {
-            InteractionResult result = entry.getHook(ModifierHooks.GENERAL_INTERACT)
-                                            .onToolUse(tool, entry, player, InteractionHand.MAIN_HAND, InteractionSource.RIGHT_CLICK);
-            if (result.consumesAction() && (!requireUsable || entry.getHook(ModifierHooks.GENERAL_INTERACT).getUseDuration(tool, entry) > 0)){
+            if (entry.getHook(ModifierHooks.GENERAL_INTERACT).getUseDuration(tool, entry) > 0){
                 return true;
             }
         }
@@ -174,8 +188,9 @@ public class SilenceGloveEvents {
         if (stack.getItem() instanceof ModifiableBowItem || stack.getItem() instanceof ModifiableCrossbowItem){
             result = bow_use(player.level(), player, InteractionHand.MAIN_HAND, stack).getResult();
         }
-        return (result == InteractionResult.CONSUME || result == InteractionResult.SUCCESS) &&
-               (!requireUsable || (stack.getUseDuration() > 0 && tool.getStats().get(ToolStats.DRAW_SPEED) > 0));
+        return (result == InteractionResult.CONSUME || result == InteractionResult.SUCCESS)
+               && stack.getUseDuration() > 0
+               && tool.getStats().get(ToolStats.DRAW_SPEED) > 0;
     }
 
     private static boolean shouldInteract(@Nullable LivingEntity player, ToolStack toolStack, InteractionHand hand) {

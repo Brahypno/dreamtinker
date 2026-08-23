@@ -65,10 +65,8 @@ import org.brahypno.dreamtinker.tools.modifiers.events.compat.enigmatic_legacy.E
 import org.brahypno.dreamtinker.tools.modifiers.events.compat.malum.malum_events_handler;
 import org.brahypno.dreamtinker.world.data.DTDataPackProvider;
 import org.brahypno.esotericismtinker.common.EsotericismTinkerCommon;
-import org.brahypno.esotericismtinker.library.event.PlayerLeftClickEvent;
 import org.brahypno.esotericismtinker.smeltery.EsotericismTinkerSmeltery;
 import org.brahypno.esotericismtinker.tools.EsotericismTinkerTools;
-import org.brahypno.esotericismtinker.utils.CompatUtils.CuriosCompat;
 import org.slf4j.Logger;
 import slimeknights.mantle.registration.RegistrationHelper;
 import slimeknights.tconstruct.library.utils.Util;
@@ -103,7 +101,6 @@ public class Dreamtinker {
         modEventBus.register(new DreamtinkerSounds());
         modEventBus.register(new DreamtinkerModifiers());
         DreamtinkerModule.initRegisters(modEventBus);
-        CuriosCompat.registerPreferredModifiable(stack -> stack.is(DreamtinkerTools.silence_glove.asItem()));
         if (ModList.get().isLoaded("ars_nouveau")){
             NovaRegistry.NovaInit(modEventBus);
         }
@@ -114,9 +111,6 @@ public class Dreamtinker {
 
         MinecraftForge.EVENT_BUS.register(this);
 
-        forgeEventBus.addListener(EventPriority.HIGHEST, PlayerLeftClickEvent::onLeftClickBlock);
-        forgeEventBus.addListener(EventPriority.HIGHEST, PlayerLeftClickEvent::onLeftClick);
-        forgeEventBus.addListener(EventPriority.HIGHEST, PlayerLeftClickEvent::onLeftClickEntity);
         forgeEventBus.addListener(star_regulus_boost::onServerTick);
 
         DNetwork.registerPackets();
