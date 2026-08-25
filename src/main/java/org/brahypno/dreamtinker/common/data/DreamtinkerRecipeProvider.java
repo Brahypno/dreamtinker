@@ -22,6 +22,7 @@ import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerCommon;
 import org.brahypno.dreamtinker.common.DreamtinkerEffects;
 import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
+import org.brahypno.dreamtinker.library.compat.goety.GoetyCompat;
 import org.brahypno.dreamtinker.smeltery.data.DreamtinkerEntityTransmuteRecipeProvider;
 import org.brahypno.dreamtinker.smeltery.data.DreamtinkerSmelteryRecipeProvider;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerMaterialIds;
@@ -65,6 +66,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IRecipe
 
         addCraftingRecipes(consumer);
         addSelenicRecipes(consumer);
+        addGoetyTestRecipes(consumer);
         smeltery.addMeltingRecipes(consumer);
         smeltery.addCastingRecipes(consumer);
         smeltery.addAlloyRecipes(consumer);
@@ -77,6 +79,14 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IRecipe
         modifier.addModifierRecipes(consumer);
         entityTransmute.addEntityMeltingRecipes(consumer);
         entityTransmute.addTransmuteRecipes(consumer);
+    }
+
+    /**
+     * Simple integration recipe used to exercise variable-cost tool-part transmutation end to end.
+     */
+    private void addGoetyTestRecipes(Consumer<FinishedRecipe> consumer) {
+        Consumer<FinishedRecipe> goetyRecipes = withCondition(
+                consumer, DreamtinkerMaterialDataProvider.modLoaded(GoetyCompat.MOD_ID));
     }
 
     String serving_folder = "tools/severing/";

@@ -23,7 +23,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerCommon;
 import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
+import org.brahypno.dreamtinker.library.compat.goety.GoetyCompat;
 import org.brahypno.dreamtinker.library.recipe.virtual.WorldRitualEntry;
+import org.brahypno.dreamtinker.plugin.JEI.goety.GoetyJeiCompat;
 import org.brahypno.dreamtinker.plugin.JEI.narcissus.NarcissusFluidFeedbackCache;
 import org.brahypno.dreamtinker.plugin.JEI.narcissus.NarcissusFluidFeedbackCategory;
 import org.brahypno.dreamtinker.tools.DreamtinkerTools;
@@ -74,10 +76,16 @@ public final class DTJeiPlugin implements IModPlugin {
         IGuiHelper g = reg.getJeiHelpers().getGuiHelper();
         reg.addRecipeCategories(new WorldRitualCategory(g),
                                 new NarcissusFluidFeedbackCategory(g));
+        if (ModList.get().isLoaded(GoetyCompat.MOD_ID)){
+            GoetyJeiCompat.registerCategories(reg, g);
+        }
     }
 
     @Override
     public void registerRecipes(IRecipeRegistration reg) {
+        if (ModList.get().isLoaded(GoetyCompat.MOD_ID)){
+            GoetyJeiCompat.registerRecipes(reg);
+        }
         if (ModList.get().isLoaded("ars_nouveau")){
             ArsJeiCompat.registerRecipes(reg);
         }

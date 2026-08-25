@@ -54,6 +54,7 @@ import org.brahypno.dreamtinker.config.DreamtinkerConfig;
 import org.brahypno.dreamtinker.fluids.DreamtinkerFluids;
 import org.brahypno.dreamtinker.library.compat.ars_nouveau.NovaRegistry;
 import org.brahypno.dreamtinker.library.compat.eidolon.DTEidolonCompat;
+import org.brahypno.dreamtinker.library.compat.goety.GoetyCompat;
 import org.brahypno.dreamtinker.network.DNetwork;
 import org.brahypno.dreamtinker.smeltery.DreamTinkerSmeltery;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
@@ -101,6 +102,9 @@ public class Dreamtinker {
         modEventBus.register(new DreamtinkerSounds());
         modEventBus.register(new DreamtinkerModifiers());
         DreamtinkerModule.initRegisters(modEventBus);
+        if (ModList.get().isLoaded(GoetyCompat.MOD_ID)){
+            GoetyCompat.register(modEventBus);
+        }
         if (ModList.get().isLoaded("ars_nouveau")){
             NovaRegistry.NovaInit(modEventBus);
         }

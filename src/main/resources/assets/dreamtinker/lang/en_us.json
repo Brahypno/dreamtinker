@@ -2398,5 +2398,6 @@
   "command.dreamtinker.shellheart.color": "Set shell heart colour to %s for %s player(s).",
   "command.dreamtinker.shellheart.invalid_colour": "Invalid shell heart colour: %s",
   "jei.dreamtinker.narcissus_feedback.slot.infusion": "Infusion",
-  "jei.dreamtinker.narcissus_feedback.infusion": "Infuses the next Narcissus fluid projectile, increasing its power."
+  "jei.dreamtinker.narcissus_feedback.infusion": "Infuses the next Narcissus fluid projectile, increasing its power.",
+  "jei.dreamtinker.goety_material_transmutation": "Tool Part Transmutation"
 }

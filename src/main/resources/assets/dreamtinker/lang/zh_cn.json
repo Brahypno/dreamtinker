@@ -2399,5 +2399,6 @@
   "command.dreamtinker.shellheart.color": "已将 %2$s 名玩家的壳心颜色设为 %1$s。",
   "command.dreamtinker.shellheart.invalid_colour": "无效的壳心颜色：%s",
   "jei.dreamtinker.narcissus_feedback.slot.infusion": "灌注",
-  "jei.dreamtinker.narcissus_feedback.infusion": "灌注下一枚水仙流体弹，提高其威力。"
+  "jei.dreamtinker.narcissus_feedback.infusion": "灌注下一枚水仙流体弹，提高其威力。",
+  "jei.dreamtinker.goety_material_transmutation": "工具部件嬗变"
 }

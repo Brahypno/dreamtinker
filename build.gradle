@@ -143,17 +143,20 @@ repositories {
         dir 'libs'
     }
     maven {
-        name 'DVS1 Maven FS'
-        url 'https://dvs1.progwml6.com/files/maven'
-    }
-    mavenLocal()
-    maven {
-        name 'cursemaven'
-        url "https://cfa2.cursemaven.com"
+        name = 'CurseMaven'
+        url = 'https://cursemaven.com/'
         content {
-            includeGroup "curse.maven"
+            includeGroup 'curse.maven'
         }
     }
+    maven {
+        name 'DVS1 Maven FS'
+        url 'https://dvs1.progwml6.com/files/maven'
+        content {
+            excludeGroup 'curse.maven'
+        }
+    }
+    mavenLocal()
     maven { // CraftTweaker, Immersive Engineering, JEI
         name 'BlameJared Maven'
         url 'https://maven.blamejared.com'
@@ -243,6 +246,7 @@ dependencies {
 
     //implementation fg.deobf("curse.maven:aquamirae-536254:8542566")
     //implementation fg.deobf("curse.maven:fragmentum-1123970:8506891")
+    implementation fg.deobf("curse.maven:goety-586095:8710866") { transitive = false }
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
