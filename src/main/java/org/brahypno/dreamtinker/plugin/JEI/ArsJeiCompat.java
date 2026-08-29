@@ -1,5 +1,6 @@
 package org.brahypno.dreamtinker.plugin.JEI;
 
+import mezz.jei.api.registration.IExtraIngredientRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
@@ -13,11 +14,40 @@ import org.brahypno.dreamtinker.library.compat.ars_nouveau.NovaRegistry;
 import org.brahypno.dreamtinker.library.compat.ars_nouveau.ReactiveModifiableEnchantmentRecipe;
 import org.brahypno.esotericismtinker.library.compat.ars_nouveau.recipe.ModifiableEnchantmentRecipe;
 import org.brahypno.esotericismtinker.plugin.JEI.ModifiableEnchantmentCategory;
+import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierManager;
+import slimeknights.tconstruct.plugin.jei.TConstructJEIConstants;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ArsJeiCompat {
+
+    /**
+     * Adds modifiers from DreamTinker's extra enchantment recipe type to JEI's modifier search index.
+     */
+    public static void registerExtraIngredients(IExtraIngredientRegistration registration) {
+        if (!ModList.get().isLoaded("ars_nouveau")
+            || !ModList.get().isLoaded("esotericism_tinker")){
+            return;
+        }
+
+        Level level = Minecraft.getInstance().level;
+        if (level == null){
+            return;
+        }
+
+        List<ModifierEntry> modifiers = level.getRecipeManager()
+                                             .getAllRecipesFor(NovaRegistry.REACTIVE_MODIFIABLE_ENCHANTMENT_TYPE.get())
+                                             .stream()
+                                             .map(recipe -> new ModifierEntry(
+                                                     ModifierManager.getValue(recipe.getModifierId()), 1))
+                                             .distinct()
+                                             .toList();
+        if (!modifiers.isEmpty()){
+            registration.addExtraIngredients(TConstructJEIConstants.MODIFIER_TYPE, modifiers);
+        }
+    }
 
     public static void registerRecipes(IRecipeRegistration registration) {
         if (!ModList.get().isLoaded("ars_nouveau")
