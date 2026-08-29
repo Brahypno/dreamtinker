@@ -1,0 +1,44 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "goety"
+          },
+          {
+            "type": "esotericism_tinker:mod_compact_config",
+            "modid": "goety"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:effect_immunity",
+      "effect": "minecraft:darkness",
+      "tool": {
+        "type": "mantle:tag",
+        "tag": "tconstruct:modifiable/armor/helmets"
+      }
+    },
+    {
+      "type": "tconstruct:effect_immunity",
+      "effect": "minecraft:blindness",
+      "tool": {
+        "type": "mantle:tag",
+        "tag": "tconstruct:modifiable/armor/helmets"
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

@@ -1,0 +1,33 @@
+{
+  "type": "tconstruct:material",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "goety"
+            },
+            {
+              "type": "esotericism_tinker:mod_compact_config",
+              "modid": "goety"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ingredient": {
+    "item": "goety:cursed_ingot"
+  },
+  "material": "dreamtinker:goety_cursed_metal",
+  "needed": 1,
+  "value": 1
+}

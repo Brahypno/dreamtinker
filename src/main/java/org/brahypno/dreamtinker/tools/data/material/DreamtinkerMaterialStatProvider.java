@@ -217,6 +217,13 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          HandleMaterialStats.multipliers().durability(0.75f).attackSpeed(1.10f).build(),
                          StatlessMaterialStats.BINDING);
 
+        // Goety's dark tier: 166 durability, 8 mining speed, netherite tier, and 6 final sword attack (6 - 4 = 2 head attack).
+        // Goety has no separate handle statistics, so the handle uses a conservative netherite-metal fallback.
+        addMaterialStats(DreamtinkerMaterialIds.goety_dark_metal,
+                         new HeadMaterialStats(166, 8.0f, Tiers.NETHERITE, 2.0f),
+                         HandleMaterialStats.multipliers().durability(1.10f).miningSpeed(1.05f).attackDamage(1.15f).attackSpeed(1.00f).build(),
+                         StatlessMaterialStats.BINDING);
+
         addELMeleeHarvest();
         addMalumMeleeHarvest();
         addEidolonMeleeHarvest();
@@ -670,6 +677,14 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                             PlatingMaterialStats.builder().durabilityFactor(50).armor(1, 2, 6, 4),
                             StatlessMaterialStats.MAILLE);
         addMaterialStats(DreamtinkerMaterialIds.esca, StatlessMaterialStats.MAILLE);
+
+        // Plating armor values are the source armor values minus the modifiable armor's built-in point.
+        addArmorShieldStats(DreamtinkerMaterialIds.goety_dark_metal,
+                            PlatingMaterialStats.builder().durabilityFactor(15).armor(2, 5, 7, 2).toughness(2).knockbackResistance(0.3f),
+                            StatlessMaterialStats.MAILLE);
+        addArmorShieldStats(DreamtinkerMaterialIds.goety_cursed_metal,
+                            PlatingMaterialStats.builder().durabilityFactor(15).armor(1, 4, 5, 1).toughness(2),
+                            StatlessMaterialStats.MAILLE, StatlessMaterialStats.REPAIR_KIT);
     }
 
     private void addAmmo() {

@@ -25,7 +25,8 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
             .addOptional(etherium, nefarious, soul_etherium,
                          soul_stained_steel, malignant_pewter, malignant_gluttony, malignant_lead, PaladinBone, forgotten_metal, faa_dark_nether_star,
                          ship_graveyard_echo, abyssal_amethyst, sharp_bones, esca, angler_fang, fin,
-                         legendary_monsters_dinosaur_bone, legendary_monsters_molten_metal);
+                         legendary_monsters_dinosaur_bone, legendary_monsters_molten_metal,
+                         goety_dark_metal, goety_cursed_metal);
 
         this.tag(TinkerTags.Materials.NETHER)
             .add(amber, scolecite)
@@ -40,7 +41,7 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
                          WickedWeave, DarkMetal, MonsterSkin, PaladinBoneTool, TatteredCloth, WaterEssence, FireEssence, ManipulationEssence, Utherium,
                          forgotten_metal, Cloggrum, Froststeel, legendary_monsters_enderitium, faa_dark_nether_star,
                          ship_graveyard_echo, abyssal_amethyst, sharp_bones, angler_fang, fin,
-                         legendary_monsters_dinosaur_bone, legendary_monsters_molten_metal);
+                         legendary_monsters_dinosaur_bone, legendary_monsters_molten_metal, goety_dark_metal);
         this.tag(TinkerTags.Materials.HARVEST)
             .add(larimar, rainbow_honey_crystal, TransmutationGold, whimsyGold)
             .addOptional(hallowed_gold, Regalium, Iesnium);
@@ -93,7 +94,8 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
                          ManipulationEssence, WaterEssence, WildenHorn, WildenWing, WildenSpike,
                          legendary_monsters_enderitium, legendary_monsters_dinosaur_bone, legendary_monsters_molten_metal,
                          dragon_scale, faa_dark_nether_star, blm_sentient, blm_hellforge,
-                         jade, ship_graveyard_echo, abyssal_amethyst, sharp_bones, esca, angler_fang, fin);
+                         jade, ship_graveyard_echo, abyssal_amethyst, sharp_bones, esca, angler_fang, fin,
+                         goety_dark_metal, goety_cursed_metal);
 
     }
 

@@ -88,6 +88,14 @@
     {
       "id": "dreamtinker:legendary_monsters_molten_metal",
       "required": false
+    },
+    {
+      "id": "dreamtinker:goety_dark_metal",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:goety_cursed_metal",
+      "required": false
     }
   ]
 }

@@ -54,7 +54,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             .add(Ids.icy_memory, Ids.hate_memory, Ids.soul_core, Ids.wrath, Ids.torrent);
         this.tag(TinkerTags.Modifiers.GENERAL_UPGRADES)
             .add(Ids.weapon_dreams_order, Ids.weapon_dreams_filter, TheEnd.getId(), life_looting.getId())
-            .addOptional(Ids.bic_dark_armor_plate, Ids.nova_reactive, chorus_blink.getId());
+            .addOptional(Ids.bic_dark_armor_plate, Ids.nova_reactive, chorus_blink.getId(), Ids.goety_soul_eater);
         this.tag(TinkerTags.Modifiers.HARVEST_UPGRADES)
             .add(Ids.falsify_fate);
         this.tag(TinkerTags.Modifiers.SPECIAL_DEFENSE)

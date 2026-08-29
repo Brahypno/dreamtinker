@@ -289,6 +289,14 @@
     {
       "id": "dreamtinker:fin",
       "required": false
+    },
+    {
+      "id": "dreamtinker:goety_dark_metal",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:goety_cursed_metal",
+      "required": false
     }
   ]
 }

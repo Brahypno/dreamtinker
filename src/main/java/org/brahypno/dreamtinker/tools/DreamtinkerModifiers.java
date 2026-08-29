@@ -24,6 +24,7 @@ import org.brahypno.dreamtinker.library.modifiers.fluid.block.AutoTagCycleBlockF
 import org.brahypno.dreamtinker.library.modifiers.fluid.entity.ConditionalDamageFluidEffect;
 import org.brahypno.dreamtinker.library.modifiers.fluid.entity.DespairScalingDamageFluidEffect;
 import org.brahypno.dreamtinker.library.modifiers.fluid.entity.DrainLifeFluidEffect;
+import org.brahypno.dreamtinker.library.modifiers.modules.armor.ArmorValueReductionModule;
 import org.brahypno.dreamtinker.library.modifiers.modules.combat.NarcissusFluidFeedbackModule;
 import org.brahypno.dreamtinker.library.modifiers.modules.harvest.AutoPureDaisyModule;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerEnchantmentToModifierProvider;
@@ -394,6 +395,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         if (event.getRegistryKey() == Registries.RECIPE_SERIALIZER){
             ModifierModule.LOADER.register(Dreamtinker.getLocation("narcissus_fluid_feedback"), NarcissusFluidFeedbackModule.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("bontania_auto_pure_module"), AutoPureDaisyModule.LOADER);
+            ModifierModule.LOADER.register(Dreamtinker.getLocation("armor_value_reduction"), ArmorValueReductionModule.LOADER);
 
             FluidEffect.ENTITY_EFFECTS.register(Dreamtinker.getLocation("drain_life_fluid"), DrainLifeFluidEffect.LOADER);
             FluidEffect.ENTITY_EFFECTS.register(Dreamtinker.getLocation("conditional_damage_fluid"), ConditionalDamageFluidEffect.LOADER);
@@ -527,6 +529,14 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId angler_fang = id("angler_fang");
         public static final ModifierId aquamirae_fin_fury = id("aquamirae_fin_fury");
         public static final ModifierId aquamirae_fin_resilience = id("aquamirae_fin_resilience");
+
+        public static final ModifierId goety_dark_metal_attack = id("goety_dark_metal_attack");
+        public static final ModifierId goety_dark_metal_defense = id("goety_dark_metal_defense");
+        public static final ModifierId goety_dark_metal_repair = id("goety_dark_metal_repair");
+        public static final ModifierId goety_cursed_metal = id("goety_cursed_metal");
+        public static final ModifierId goety_magic_resistance = id("goety_magic_resistance");
+        public static final ModifierId goety_fire_explosion_resistance = id("goety_fire_explosion_resistance");
+        public static final ModifierId goety_soul_eater = id("goety_soul_eater");
 
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");

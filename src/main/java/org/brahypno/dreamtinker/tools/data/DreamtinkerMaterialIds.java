@@ -127,6 +127,8 @@ public class DreamtinkerMaterialIds {
     public static final MaterialId esca = new MaterialId(new ResourceLocation(MODID, "esca"));
     public static final MaterialId angler_fang = new MaterialId(new ResourceLocation(MODID, "angler_fang"));
     public static final MaterialId fin = new MaterialId(new ResourceLocation(MODID, "fin"));
-    //goety??
+    // Goety
+    public static final MaterialId goety_dark_metal = new MaterialId(new ResourceLocation(MODID, "goety_dark_metal"));
+    public static final MaterialId goety_cursed_metal = new MaterialId(new ResourceLocation(MODID, "goety_cursed_metal"));
     public static final MaterialId jade = new MaterialId(new ResourceLocation(MODID, "jade"));
 }

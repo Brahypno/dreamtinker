@@ -1,0 +1,36 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "goety"
+          },
+          {
+            "type": "esotericism_tinker:mod_compact_config",
+            "modid": "goety"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:no_levels",
+  "modules": [
+    {
+      "type": "dreamtinker:armor_value_reduction",
+      "damage_source": {
+        "type": "mantle:tag",
+        "tag": "minecraft:witch_resistant_to"
+      },
+      "ratio": 0.04
+    }
+  ],
+  "tooltip_display": "always"
+}

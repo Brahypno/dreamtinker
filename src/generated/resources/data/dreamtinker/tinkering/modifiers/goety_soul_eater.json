@@ -1,0 +1,26 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "goety"
+          },
+          {
+            "type": "esotericism_tinker:mod_compact_config",
+            "modid": "goety"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:default",
+  "tooltip_display": "always"
+}

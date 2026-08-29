@@ -750,6 +750,34 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
         addBICMaterials();
         addNovaMaterials();
         addBLMMaterials();
+        addGoetyMaterials();
+    }
+
+    protected void addGoetyMaterials() {
+        this.buildMaterial(DreamtinkerMaterialIds.goety_dark_metal)
+            .meleeHarvest().armor()
+            .fallbacks("metal")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(0, 0xFF050509)
+                                                .addARGB(63, 0xFF111014)
+                                                .addARGB(102, 0xFF1A1921)
+                                                .addARGB(140, 0xFF20202C)
+                                                .addARGB(178, 0xFF292B37)
+                                                .addARGB(216, 0xFF3D3F4B)
+                                                .addARGB(255, 0xFF585960)
+                                                .build());
+        this.buildMaterial(DreamtinkerMaterialIds.goety_cursed_metal)
+            .armor()
+            .fallbacks("metal")
+            .transformer(GreyToSpriteTransformer.builder()
+                                                .addARGB(0, 0xFF020507)
+                                                .addARGB(63, 0xFF060D12)
+                                                .addARGB(102, 0xFF0C171D)
+                                                .addARGB(140, 0xFF101E24)
+                                                .addARGB(178, 0xFF172831)
+                                                .addARGB(216, 0xFF213842)
+                                                .addARGB(255, 0xFF2E4854)
+                                                .build());
     }
 
     protected void addELMaterials() {

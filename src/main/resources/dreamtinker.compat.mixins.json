@@ -15,6 +15,7 @@
     "compat.bloodmagic.LivingUtilMixin",
     "compat.enigmaticlegacy.EnigmaticEventHandlerMixin",
     "compat.enigmaticlegacy.SuperpositionHandlerMixin",
+    "compat.goety.SEHelperMixin",
     "compat.legendary_monsters.LMannLeggingsMixin",
     "compat.malum.EdgeOfDeliveranceItemMixin",
     "compat.malum.HiddenTagRegistryMixin",

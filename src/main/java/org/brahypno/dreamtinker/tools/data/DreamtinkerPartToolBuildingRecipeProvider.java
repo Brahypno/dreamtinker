@@ -63,6 +63,10 @@ public class DreamtinkerPartToolBuildingRecipeProvider implements IToolRecipeHel
         armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.abyssal_amethyst);
         armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.fin);
 
+        wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("goety"));
+        armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.goety_dark_metal);
+        armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.goety_cursed_metal);
+
         //explode_core
         PartRecipeBuilder.partRecipe(DreamtinkerToolParts.explode_core.get()).setPattern(this.id(DreamtinkerToolParts.explode_core.get()))
                          .setPatternItem(Ingredient.of(DreamtinkerToolParts.explode_core.get())).setCost(8)

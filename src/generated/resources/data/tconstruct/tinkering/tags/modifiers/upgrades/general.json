@@ -15,6 +15,10 @@
     {
       "id": "dreamtinker:chorus_blink",
       "required": false
+    },
+    {
+      "id": "dreamtinker:goety_soul_eater",
+      "required": false
     }
   ]
 }

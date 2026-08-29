@@ -9,6 +9,7 @@ import elucent.eidolon.registries.EidolonAttributes;
 import elucent.eidolon.registries.EidolonPotions;
 import elucent.eidolon.registries.Registry;
 import net.minecraft.data.PackOutput;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffects;
@@ -36,6 +37,7 @@ import org.brahypno.dreamtinker.Entity.DreamtinkerEntityTypes;
 import org.brahypno.dreamtinker.common.DreamtinkerAttributes;
 import org.brahypno.dreamtinker.common.DreamtinkerEffects;
 import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
+import org.brahypno.dreamtinker.library.modifiers.modules.armor.ArmorValueReductionModule;
 import org.brahypno.dreamtinker.library.modifiers.modules.harvest.AutoPureDaisyModule;
 import org.brahypno.dreamtinker.tools.DreamtinkerTools;
 import org.brahypno.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvider;
@@ -1227,6 +1229,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         addBOTANIAModifiers();
         addLMModifiers();
         addFAAModifiers();
+        addGoetyModifiers();
 
     }
 
@@ -1381,6 +1384,31 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                                        .variable(MULTIPLIER).multiply()
                                                        .constant(1).add()
                                                        .variable(VALUE).multiply().build());
+    }
+
+    private void addGoetyModifiers() {
+        buildModifier(Ids.goety_dark_metal_attack, DreamtinkerMaterialDataProvider.modLoaded("goety"));
+        buildModifier(Ids.goety_dark_metal_repair, DreamtinkerMaterialDataProvider.modLoaded("goety"));
+        buildModifier(Ids.goety_dark_metal_defense, DreamtinkerMaterialDataProvider.modLoaded("goety"))
+                .addModule(new EffectImmunityModule(
+                        MobEffects.DARKNESS,
+                        ModifierCondition.ANY_TOOL.with(ToolStackPredicate.tag(TinkerTags.Items.HELMETS))))
+                .addModule(new EffectImmunityModule(
+                        MobEffects.BLINDNESS,
+                        ModifierCondition.ANY_TOOL.with(ToolStackPredicate.tag(TinkerTags.Items.HELMETS))));
+        buildModifier(Ids.goety_cursed_metal, DreamtinkerMaterialDataProvider.modLoaded("goety"))
+                .addModule(ReduceToolDamageModule.builder().maxLevel(2).eachLevel(0.125f));
+        buildModifier(Ids.goety_magic_resistance, DreamtinkerMaterialDataProvider.modLoaded("goety"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(new ArmorValueReductionModule(
+                        DamageSourcePredicate.tag(DamageTypeTags.WITCH_RESISTANT_TO), 1 / 25f));
+        buildModifier(Ids.goety_fire_explosion_resistance, DreamtinkerMaterialDataProvider.modLoaded("goety"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(new ArmorValueReductionModule(
+                        DamageSourcePredicate.or(DamageSourcePredicate.tag(DamageTypeTags.IS_FIRE),
+                                                 DamageSourcePredicate.tag(DamageTypeTags.IS_EXPLOSION)),
+                        1 / 10f));
+        buildModifier(Ids.goety_soul_eater, DreamtinkerMaterialDataProvider.modLoaded("goety"));
     }
 
     @Override

@@ -198,6 +198,7 @@ public class DreamtinkerMaterialRecipeProvider implements IMaterialRecipeHelper,
         addFAAMaterialRecipes(consumer);
         addBLMMaterialRecipes(consumer);
         addAquamiraeMaterialRecipes(consumer);
+        addGoetyMaterialRecipes(consumer);
 
     }
 
@@ -430,6 +431,16 @@ public class DreamtinkerMaterialRecipeProvider implements IMaterialRecipeHelper,
         materialRecipe(wrapped, DreamtinkerMaterialIds.fin,
                        itemNameIngredient("aquamirae", "fin"), 1, 1,
                        materials_folder + "aquamirae/fin");
+    }
+
+    private void addGoetyMaterialRecipes(Consumer<FinishedRecipe> consumer) {
+        Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("goety"));
+        materialRecipe(wrapped, DreamtinkerMaterialIds.goety_dark_metal,
+                       itemNameIngredient("goety", "dark_ingot"), 1, 1,
+                       materials_folder + "goety/dark_metal");
+        materialRecipe(wrapped, DreamtinkerMaterialIds.goety_cursed_metal,
+                       itemNameIngredient("goety", "cursed_ingot"), 1, 1,
+                       materials_folder + "goety/cursed_metal");
     }
 
     private void standardMetalMaterial(Consumer<FinishedRecipe> consumer, MaterialId materialId, FlowingFluidObject<ForgeFlowingFluid> fluid, String name, String folder) {

@@ -180,6 +180,15 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.fin, ARMOR,
                   Ids.aquamirae_fin_resilience, terrible_armor.getId());
 
+        addDefaultTraits(DreamtinkerMaterialIds.goety_dark_metal,
+                         Ids.goety_dark_metal_attack, Ids.goety_dark_metal_repair);
+        addTraits(DreamtinkerMaterialIds.goety_dark_metal, ARMOR,
+                  Ids.goety_dark_metal_defense, Ids.goety_dark_metal_repair,
+                  Ids.goety_magic_resistance, Ids.goety_fire_explosion_resistance);
+        addDefaultTraits(DreamtinkerMaterialIds.goety_cursed_metal, Ids.goety_cursed_metal);
+        addTraits(DreamtinkerMaterialIds.goety_cursed_metal, ARMOR,
+                  Ids.goety_cursed_metal, Ids.goety_magic_resistance, Ids.goety_fire_explosion_resistance);
+
         addDefaultTraits(DreamtinkerMaterialIds.etherium,
                          new ModifierEntry(ModifierIds.smite, 2),
                          new ModifierEntry(explosive_hit.getId(), 1),
