@@ -22,6 +22,7 @@ import org.brahypno.dreamtinker.smeltery.DreamTinkerSmeltery;
 import org.brahypno.dreamtinker.tools.DreamtinkerToolParts;
 import org.brahypno.dreamtinker.tools.DreamtinkerTools;
 import org.brahypno.esotericismtinker.common.EsotericismTinkerTagKeys;
+import org.brahypno.esotericismtinker.tools.EsotericismTinkerTools;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.mantle.registration.object.EnumObject;
@@ -76,6 +77,15 @@ public class ItemTagProvider extends ItemTagsProvider {
 
         this.tag(Items.dt_scythe).add(TinkerTools.scythe.asItem(), TinkerTools.kama.asItem(), DreamtinkerTools.narcissus_wing.asItem());
         this.tag(ItemTagRegistry.SCYTHE).addTags(Items.dt_scythe);
+        this.tag(Items.modTag("goety:grave_glove_boost"))
+            .add(TinkerTools.scythe.asItem(), TinkerTools.kama.asItem(), DreamtinkerTools.narcissus_wing.asItem());
+        this.tag(Items.modTag("goety:thrash_glove_boost"))
+            .addTags(Items.dt_hammer);
+        this.tag(Items.modTag("goetyawaken", "dauntless_glove_boost"))
+            .add(TinkerTools.cleaver.asItem())
+            .addOptional(new ResourceLocation("cloudertinker", "giantsword"));
+        this.tag(Items.modTag("goetyawaken", "assassin_glove_boost"))
+            .add(TinkerTools.dagger.asItem(), EsotericismTinkerTools.ritual_blade.asItem());
         this.tag(Items.dt_hammer).add(TinkerTools.veinHammer.asItem(), TinkerTools.sledgeHammer.asItem());
         this.tag(ItemTagRegistry.HIDDEN_UNTIL_BLACK_CRYSTAL)
             .addOptional(malignant_gluttony.getId());
