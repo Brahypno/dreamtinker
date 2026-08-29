@@ -186,6 +186,8 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
                   Ids.goety_dark_metal_defense, Ids.goety_dark_metal_repair,
                   Ids.goety_magic_resistance, Ids.goety_fire_explosion_resistance);
         addDefaultTraits(DreamtinkerMaterialIds.goety_cursed_metal, Ids.goety_cursed_metal);
+        addTraits(DreamtinkerMaterialIds.goety_cursed_metal, MELEE_HARVEST,
+                  Ids.goety_cursed_metal, Ids.goety_eerie_pickaxe);
         addTraits(DreamtinkerMaterialIds.goety_cursed_metal, ARMOR,
                   Ids.goety_cursed_metal, Ids.goety_magic_resistance, Ids.goety_fire_explosion_resistance);
 

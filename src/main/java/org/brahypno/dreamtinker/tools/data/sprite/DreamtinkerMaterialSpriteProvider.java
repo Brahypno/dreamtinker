@@ -767,7 +767,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(255, 0xFF585960)
                                                 .build());
         this.buildMaterial(DreamtinkerMaterialIds.goety_cursed_metal)
-            .armor()
+            .meleeHarvest().armor()
             .fallbacks("metal")
             .transformer(GreyToSpriteTransformer.builder()
                                                 .addARGB(0, 0xFF020507)

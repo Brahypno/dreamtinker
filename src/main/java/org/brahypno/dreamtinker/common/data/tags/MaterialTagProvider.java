@@ -44,7 +44,7 @@ public class MaterialTagProvider extends AbstractMaterialTagProvider {
                          legendary_monsters_dinosaur_bone, legendary_monsters_molten_metal, goety_dark_metal);
         this.tag(TinkerTags.Materials.HARVEST)
             .add(larimar, rainbow_honey_crystal, TransmutationGold, whimsyGold)
-            .addOptional(hallowed_gold, Regalium, Iesnium);
+            .addOptional(hallowed_gold, Regalium, Iesnium, goety_cursed_metal);
         this.tag(TinkerTags.Materials.GENERAL)
             .add(valentinite, black_sapphire, orichalcum)
             .addOptional(etherium, spirit_fabric, astral_weave, dragon_scale, blm_sentient, blm_hellforge, jade, esca);

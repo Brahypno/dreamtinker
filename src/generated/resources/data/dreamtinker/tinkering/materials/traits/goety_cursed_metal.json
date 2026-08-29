@@ -19,6 +19,16 @@
         "level": 1,
         "name": "dreamtinker:goety_fire_explosion_resistance"
       }
+    ],
+    "tconstruct:melee_harvest": [
+      {
+        "level": 1,
+        "name": "dreamtinker:goety_cursed_metal"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:goety_eerie_pickaxe"
+      }
     ]
   }
 }

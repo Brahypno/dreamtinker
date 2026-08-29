@@ -4,10 +4,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.tools.modifiers.events.compat.goety.GoetyMaterialEvents;
-import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.goety.GoetyDarkMetalAttackModifier;
-import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.goety.GoetyDarkMetalDefenseModifier;
-import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.goety.GoetyDarkMetalRepairModifier;
-import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.goety.GoetySoulEaterModifier;
+import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.goety.*;
 import slimeknights.tconstruct.library.modifiers.util.ModifierDeferredRegister;
 
 /**
@@ -21,6 +18,7 @@ public final class GoetyCompat {
         MODIFIERS.register("goety_dark_metal_attack", GoetyDarkMetalAttackModifier::new);
         MODIFIERS.register("goety_dark_metal_defense", GoetyDarkMetalDefenseModifier::new);
         MODIFIERS.register("goety_dark_metal_repair", GoetyDarkMetalRepairModifier::new);
+        MODIFIERS.register("goety_eerie_pickaxe", GoetyEeriePickaxeModifier::new);
         MODIFIERS.register("goety_soul_eater", GoetySoulEaterModifier::new);
     }
 

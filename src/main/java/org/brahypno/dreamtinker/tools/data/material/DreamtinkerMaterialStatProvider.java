@@ -223,6 +223,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                          new HeadMaterialStats(166, 8.0f, Tiers.NETHERITE, 2.0f),
                          HandleMaterialStats.multipliers().durability(1.10f).miningSpeed(1.05f).attackDamage(1.15f).attackSpeed(1.00f).build(),
                          StatlessMaterialStats.BINDING);
+        // Goety's Eerie Pickaxe defaults: 1280 durability, 8 speed, diamond harvest tier, and 4 final attack (4 - 4 = 0 head attack).
+        addMaterialStats(DreamtinkerMaterialIds.goety_cursed_metal,
+                         new HeadMaterialStats(1280, 8.0f, Tiers.DIAMOND, 0.0f));
 
         addELMeleeHarvest();
         addMalumMeleeHarvest();

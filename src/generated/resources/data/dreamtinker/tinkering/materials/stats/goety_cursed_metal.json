@@ -1,5 +1,11 @@
 {
   "stats": {
+    "tconstruct:head": {
+      "durability": 1280,
+      "melee_attack": 0.0,
+      "mining_speed": 8.0,
+      "mining_tier": "minecraft:diamond"
+    },
     "tconstruct:maille": {},
     "tconstruct:plating_boots": {
       "armor": 1.0,
