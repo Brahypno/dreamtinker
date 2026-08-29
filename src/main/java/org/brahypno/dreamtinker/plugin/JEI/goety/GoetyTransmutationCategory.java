@@ -20,10 +20,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.registries.ForgeRegistries;
-import slimeknights.tconstruct.library.materials.MaterialRegistry;
-import slimeknights.tconstruct.library.tools.part.ToolPartItem;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * JEI view of a dynamic Goety ritual. The center and result always use the same part item.
@@ -39,7 +38,6 @@ public final class GoetyTransmutationCategory implements IRecipeCategory<GoetyTr
             {71, 42}, {86, 42}, {41, 102}, {26, 102},
             {41, 42}, {86, 102}, {71, 102}, {26, 42}
     };
-    private static final Map<ToolPartItem, List<ItemStack>> MATERIAL_INPUT_CACHE = new IdentityHashMap<>();
     private static final Map<String, ItemStack> RESEARCH_SCROLL_CACHE = new HashMap<>();
     private static boolean researchScrollCacheBuilt;
 
@@ -55,10 +53,6 @@ public final class GoetyTransmutationCategory implements IRecipeCategory<GoetyTr
         pedestal = renderFull(new ItemStack(ModItems.PEDESTAL_DUMMY.get()));
         icon = gui.createDrawableItemStack(darkAltar);
         arrow = gui.createDrawable(new ResourceLocation("goety", "textures/gui/jei/arrow.png"), 0, 0, 64, 46);
-    }
-
-    static void clearMaterialCache() {
-        MATERIAL_INPUT_CACHE.clear();
     }
 
     @Override
@@ -85,7 +79,7 @@ public final class GoetyTransmutationCategory implements IRecipeCategory<GoetyTr
     @Override
     public void setRecipe(IRecipeLayoutBuilder layout, GoetyTransmutationJeiDisplay display, IFocusGroup focuses) {
         layout.addSlot(RecipeIngredientRole.INPUT, RITUAL_CENTER_X, RITUAL_CENTER_Y - 15)
-              .addItemStacks(MATERIAL_INPUT_CACHE.computeIfAbsent(display.part(), this::createMaterialInputs));
+              .addItemStacks(display.inputs());
         layout.addSlot(RecipeIngredientRole.CATALYST, RITUAL_CENTER_X, RITUAL_CENTER_Y)
               .addItemStack(darkAltar);
         for (int index = 0; index < display.cost(); index++) {
@@ -96,7 +90,7 @@ public final class GoetyTransmutationCategory implements IRecipeCategory<GoetyTr
                   .addItemStack(pedestal);
         }
         layout.addSlot(RecipeIngredientRole.OUTPUT, RITUAL_CENTER_X + OUTPUT_OFFSET_X, RITUAL_CENTER_Y - 15)
-              .addItemStack(display.part().withMaterial(display.recipe().material()));
+              .addItemStacks(display.outputs());
         layout.addSlot(RecipeIngredientRole.CATALYST, RITUAL_CENTER_X + OUTPUT_OFFSET_X, RITUAL_CENTER_Y)
               .addItemStack(darkAltar);
         layout.addSlot(RecipeIngredientRole.RENDER_ONLY, 0, 0)
@@ -135,20 +129,6 @@ public final class GoetyTransmutationCategory implements IRecipeCategory<GoetyTr
             researchScrollCacheBuilt = true;
         }
         return RESEARCH_SCROLL_CACHE.getOrDefault(researchId, ItemStack.EMPTY);
-    }
-
-    private List<ItemStack> createMaterialInputs(ToolPartItem part) {
-        if (!MaterialRegistry.isFullyLoaded()){
-            return List.of();
-        }
-        List<ItemStack> inputs = new ArrayList<>();
-        for (var material : MaterialRegistry.getInstance().getVisibleMaterials()) {
-            if (part.canUseMaterial(material.getIdentifier())
-                && part.getStatType().canUseMaterial(material.getIdentifier())){
-                inputs.add(part.withMaterial(material.getIdentifier()));
-            }
-        }
-        return List.copyOf(inputs);
     }
 
     @Override

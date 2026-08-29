@@ -1,0 +1,38 @@
+{
+  "type": "dreamtinker:goety_material_transmutation",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "goety"
+            },
+            {
+              "type": "esotericism_tinker:mod_compact_config",
+              "modid": "goety"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "craftType": "forge",
+  "duration": 10,
+  "input_materials": [
+    "tconstruct:iron"
+  ],
+  "material": "dreamtinker:goety_cursed_metal",
+  "ritual_type": "dreamtinker:tinker_material_transmutation",
+  "soulCost": 1,
+  "unit_input": {
+    "item": "goety:cursed_ingot"
+  }
+}

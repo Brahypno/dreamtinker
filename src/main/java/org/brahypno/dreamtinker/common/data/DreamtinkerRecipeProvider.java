@@ -23,6 +23,7 @@ import org.brahypno.dreamtinker.common.DreamtinkerCommon;
 import org.brahypno.dreamtinker.common.DreamtinkerEffects;
 import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
 import org.brahypno.dreamtinker.library.compat.goety.GoetyCompat;
+import org.brahypno.dreamtinker.library.compat.goety.GoetyMaterialTransmutationRecipeBuilder;
 import org.brahypno.dreamtinker.smeltery.data.DreamtinkerEntityTransmuteRecipeProvider;
 import org.brahypno.dreamtinker.smeltery.data.DreamtinkerSmelteryRecipeProvider;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerMaterialIds;
@@ -40,6 +41,7 @@ import slimeknights.mantle.recipe.ingredient.EntityIngredient;
 import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
 import slimeknights.tconstruct.library.recipe.modifiers.severing.SeveringRecipeBuilder;
 import slimeknights.tconstruct.tools.TinkerToolParts;
+import slimeknights.tconstruct.tools.data.material.MaterialIds;
 import slimeknights.tconstruct.tools.stats.HandleMaterialStats;
 import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
 import slimeknights.tconstruct.tools.stats.StatlessMaterialStats;
@@ -66,7 +68,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IRecipe
 
         addCraftingRecipes(consumer);
         addSelenicRecipes(consumer);
-        addGoetyTestRecipes(consumer);
+        addGoetyRecipes(consumer);
         smeltery.addMeltingRecipes(consumer);
         smeltery.addCastingRecipes(consumer);
         smeltery.addAlloyRecipes(consumer);
@@ -81,12 +83,24 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IRecipe
         entityTransmute.addTransmuteRecipes(consumer);
     }
 
-    /**
-     * Simple integration recipe used to exercise variable-cost tool-part transmutation end to end.
-     */
-    private void addGoetyTestRecipes(Consumer<FinishedRecipe> consumer) {
+    private void addGoetyRecipes(Consumer<FinishedRecipe> consumer) {
         Consumer<FinishedRecipe> goetyRecipes = withCondition(
                 consumer, DreamtinkerMaterialDataProvider.modLoaded(GoetyCompat.MOD_ID));
+
+        GoetyMaterialTransmutationRecipeBuilder.transmute(
+                                                       DreamtinkerMaterialIds.goety_cursed_metal,
+                                                       itemNameIngredient("goety", "cursed_ingot"))
+                                               .inputMaterial(MaterialIds.iron)
+                                               .soulCost(1)
+                                               .duration(10)
+                                               .save(goetyRecipes, location("compat/goety/material_transmutation/iron_to_cursed_metal"));
+        GoetyMaterialTransmutationRecipeBuilder.transmute(
+                                                       DreamtinkerMaterialIds.goety_dark_metal,
+                                                       itemNameIngredient("goety", "dark_ingot"))
+                                               .inputMaterial(DreamtinkerMaterialIds.goety_cursed_metal)
+                                               .soulCost(5)
+                                               .duration(30)
+                                               .save(goetyRecipes, location("compat/goety/material_transmutation/cursed_to_dark_metal"));
     }
 
     String serving_folder = "tools/severing/";

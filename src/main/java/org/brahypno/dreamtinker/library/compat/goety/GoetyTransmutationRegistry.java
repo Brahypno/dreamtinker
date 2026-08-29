@@ -2,6 +2,7 @@ package org.brahypno.dreamtinker.library.compat.goety;
 
 import com.Polarice3.Goety.Goety;
 import com.Polarice3.Goety.common.ritual.ModRitualFactory;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import net.minecraft.core.registries.Registries;
@@ -14,6 +15,9 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import org.brahypno.dreamtinker.Dreamtinker;
 import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Registrations limited to Goety's public ritual factory registry.
@@ -40,6 +44,7 @@ public final class GoetyTransmutationRegistry {
                 throw new JsonParseException("Invalid material in " + id);
             }
             Ingredient input = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "unit_input"));
+            List<MaterialVariantId> inputMaterials = readInputMaterials(id, json);
             return new GoetyMaterialTransmutationRecipe(
                     id,
                     GsonHelper.getAsString(json, "group", ""),
@@ -50,7 +55,24 @@ public final class GoetyTransmutationRegistry {
                     GsonHelper.getAsInt(json, "duration", 100),
                     GsonHelper.getAsInt(json, "soulCost", 0),
                     material,
+                    inputMaterials,
                     GsonHelper.getAsString(json, "research", ""));
+        }
+
+        private static List<MaterialVariantId> readInputMaterials(ResourceLocation recipeId, JsonObject json) {
+            if (!json.has("input_materials")){
+                return List.of();
+            }
+            JsonArray array = GsonHelper.getAsJsonArray(json, "input_materials");
+            List<MaterialVariantId> materials = new ArrayList<>(array.size());
+            array.forEach(element -> {
+                MaterialVariantId material = MaterialVariantId.tryParse(GsonHelper.convertToString(element, "input_materials"));
+                if (material == null){
+                    throw new JsonParseException("Invalid input material in " + recipeId + ": " + element);
+                }
+                materials.add(material);
+            });
+            return List.copyOf(materials);
         }
 
         @Override
@@ -62,6 +84,13 @@ public final class GoetyTransmutationRegistry {
             return new GoetyMaterialTransmutationRecipe(
                     id, buffer.readUtf(), buffer.readUtf(), buffer.readResourceLocation(),
                     Ingredient.fromNetwork(buffer), buffer.readVarInt(), buffer.readVarInt(), material,
+                    buffer.readList(network -> {
+                        MaterialVariantId input = MaterialVariantId.tryParse(network.readUtf());
+                        if (input == null){
+                            throw new IllegalArgumentException("Invalid synced input material in " + id);
+                        }
+                        return input;
+                    }),
                     buffer.readUtf());
         }
 
@@ -74,6 +103,7 @@ public final class GoetyTransmutationRegistry {
             recipe.unitInput().toNetwork(buffer);
             buffer.writeVarInt(recipe.getDuration());
             buffer.writeVarInt(recipe.getSoulCost());
+            buffer.writeCollection(recipe.inputMaterials(), (network, input) -> network.writeUtf(input.toString()));
             buffer.writeUtf(recipe.getResearch());
         }
     }

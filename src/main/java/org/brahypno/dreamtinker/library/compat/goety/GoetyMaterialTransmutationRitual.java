@@ -9,8 +9,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
-import org.brahypno.esotericismtinker.utils.PartInfoLookup;
-import slimeknights.tconstruct.library.tools.part.ToolPartItem;
 
 import java.util.List;
 
@@ -26,16 +24,8 @@ public final class GoetyMaterialTransmutationRitual extends Ritual {
         return (GoetyMaterialTransmutationRecipe) recipe;
     }
 
-    private static int partCost(Level level, ItemStack stack) {
-        return stack.getItem() instanceof ToolPartItem part ? PartInfoLookup.runtimeCost(level, part) : 0;
-    }
-
-    private boolean validCenter(ItemStack stack) {
-        if (stack.getCount() != 1 || !(stack.getItem() instanceof ToolPartItem part)){
-            return false;
-        }
-        return part.canUseMaterial(transmutation().material().getId())
-               && part.getStatType().canUseMaterial(transmutation().material().getId());
+    private GoetyTransmutationTarget target(Level level, ItemStack stack) {
+        return GoetyTransmutationTarget.find(level, stack, transmutation());
     }
 
     private boolean validOfferings(Level level, BlockPos pos, int remaining) {
@@ -50,17 +40,18 @@ public final class GoetyMaterialTransmutationRitual extends Ritual {
 
     @Override
     public boolean identify(Level level, BlockPos pos, Player player, ItemStack activation) {
-        return validCenter(activation) && validOfferings(level, pos, partCost(level, activation));
+        GoetyTransmutationTarget target = target(level, activation);
+        return target != null && validOfferings(level, pos, target.cost());
     }
 
     @Override
     public boolean isValid(
             Level level, BlockPos pos, DarkAltarBlockEntity altar, Player player,
             ItemStack activation, List<Ingredient> ignored) {
-        int required = partCost(level, activation);
+        GoetyTransmutationTarget target = target(level, activation);
+        int required = target == null ? 0 : target.cost();
         int consumed = altar.consumedIngredients.size();
-        return required > 0 && validCenter(activation)
-               && validOfferings(level, pos, required - consumed);
+        return required > 0 && validOfferings(level, pos, required - consumed);
     }
 
     @Override
@@ -71,7 +62,8 @@ public final class GoetyMaterialTransmutationRitual extends Ritual {
             return false;
         }
         ItemStack center = altar.itemStackHandler.map(handler -> handler.getStackInSlot(0)).orElse(ItemStack.EMPTY);
-        int required = partCost(level, center);
+        GoetyTransmutationTarget target = target(level, center);
+        int required = target == null ? 0 : target.cost();
         if (required <= 0 || required > 12){
             return false;
         }
@@ -97,10 +89,11 @@ public final class GoetyMaterialTransmutationRitual extends Ritual {
 
     @Override
     public void finish(Level level, BlockPos pos, DarkAltarBlockEntity altar, Player player, ItemStack activation) {
-        if (!(activation.getItem() instanceof ToolPartItem part)){
+        GoetyTransmutationTarget target = target(level, activation);
+        if (target == null){
             return;
         }
-        ItemStack result = part.setMaterial(activation.copyWithCount(1), transmutation().material());
+        ItemStack result = target.result();
         result.onCraftedBy(level, player, 1);
         super.finish(level, pos, altar, player, activation);
         altar.itemStackHandler.ifPresent(handler -> handler.setStackInSlot(0, result));

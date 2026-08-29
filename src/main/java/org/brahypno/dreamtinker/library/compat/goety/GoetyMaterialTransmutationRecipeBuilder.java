@@ -1,5 +1,6 @@
 package org.brahypno.dreamtinker.library.compat.goety;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
@@ -12,6 +13,8 @@ import org.brahypno.dreamtinker.Dreamtinker;
 import org.jetbrains.annotations.Nullable;
 import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -21,7 +24,8 @@ import java.util.function.Consumer;
 public final class GoetyMaterialTransmutationRecipeBuilder implements RecipeBuilder {
     private final MaterialVariantId material;
     private final Ingredient unitInput;
-    private int duration = 100;
+    private final List<MaterialVariantId> inputMaterials = new ArrayList<>();
+    private int duration = 10;
     private int soulCost;
     private String group = "";
     private String craftType = "forge";
@@ -50,6 +54,21 @@ public final class GoetyMaterialTransmutationRecipeBuilder implements RecipeBuil
             throw new IllegalArgumentException("soulCost cannot be negative");
         }
         this.soulCost = soulCost;
+        return this;
+    }
+
+    /**
+     * Restricts the material that may be replaced. Calls preserve the given matching order.
+     */
+    public GoetyMaterialTransmutationRecipeBuilder inputMaterial(MaterialVariantId material) {
+        inputMaterials.add(Objects.requireNonNull(material, "material"));
+        return this;
+    }
+
+    public GoetyMaterialTransmutationRecipeBuilder inputMaterials(MaterialVariantId... materials) {
+        for (MaterialVariantId material : materials) {
+            inputMaterial(material);
+        }
         return this;
     }
 
@@ -87,16 +106,23 @@ public final class GoetyMaterialTransmutationRecipeBuilder implements RecipeBuil
         if (unitInput.isEmpty()){
             throw new IllegalStateException("Unit input cannot be empty: " + id);
         }
-        consumer.accept(new Result(id, material, unitInput, duration, soulCost, group, craftType, research));
+        consumer.accept(new Result(id, material, unitInput, List.copyOf(inputMaterials), duration, soulCost,
+                                   group, craftType, research));
     }
 
     private record Result(ResourceLocation id, MaterialVariantId material, Ingredient unitInput,
+                          List<MaterialVariantId> inputMaterials,
                           int duration, int soulCost, String group, String craftType,
                           String research) implements FinishedRecipe {
         @Override
         public void serializeRecipeData(JsonObject json) {
             json.addProperty("material", material.toString());
             json.add("unit_input", unitInput.toJson());
+            if (!inputMaterials.isEmpty()){
+                JsonArray inputs = new JsonArray();
+                inputMaterials.forEach(input -> inputs.add(input.toString()));
+                json.add("input_materials", inputs);
+            }
             json.addProperty("ritual_type", Dreamtinker.getLocation("tinker_material_transmutation").toString());
             json.addProperty("craftType", craftType);
             json.addProperty("duration", duration);
