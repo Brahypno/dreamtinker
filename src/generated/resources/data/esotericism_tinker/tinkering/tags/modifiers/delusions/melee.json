@@ -4,6 +4,10 @@
     {
       "id": "dreamtinker:weapon_books",
       "required": false
+    },
+    {
+      "id": "dreamtinker:goety_death_scythe",
+      "required": false
     }
   ]
 }

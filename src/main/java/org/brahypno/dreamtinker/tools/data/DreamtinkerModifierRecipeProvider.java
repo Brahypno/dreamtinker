@@ -281,6 +281,13 @@ public class DreamtinkerModifierRecipeProvider implements ICommonRecipeHelper {
                              .setMaxLevel(1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.weapon_dreams_filter, delusionSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.Ids.weapon_dreams_filter, delusionFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.goety_death_scythe)
+                             .setTools(DreamtinkerTagKeys.Items.dt_scythe)
+                             .setSlots(EsotericismSlotType.DELUSION, 1)
+                             .setMaxLevel(1)
+                             .saveSalvage(
+                                     withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("goety")),
+                                     prefix(DreamtinkerModifiers.Ids.goety_death_scythe, delusionSalvage));
         Ingredient under_plates = Ingredient.of(DreamtinkerTools.underPlate.get(ArmorItem.Type.HELMET),
                                                 DreamtinkerTools.underPlate.get(ArmorItem.Type.CHESTPLATE),
                                                 DreamtinkerTools.underPlate.get(ArmorItem.Type.LEGGINGS),

@@ -20,6 +20,7 @@ public final class GoetyCompat {
         MODIFIERS.register("goety_dark_metal_repair", GoetyDarkMetalRepairModifier::new);
         MODIFIERS.register("goety_eerie_pickaxe", GoetyEeriePickaxeModifier::new);
         MODIFIERS.register("goety_soul_eater", GoetySoulEaterModifier::new);
+        MODIFIERS.register("goety_death_scythe", GoetyDeathScytheModifier::new);
     }
 
     private GoetyCompat() {}

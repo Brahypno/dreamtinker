@@ -20,19 +20,27 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.registries.ForgeRegistries;
+import slimeknights.tconstruct.library.json.IntRange;
+import slimeknights.tconstruct.library.modifiers.ModifierEntry;
+import slimeknights.tconstruct.library.modifiers.ModifierManager;
+import slimeknights.tconstruct.plugin.jei.TConstructJEIConstants;
+import slimeknights.tconstruct.plugin.jei.modifiers.ModifierIngredientRenderer;
+import slimeknights.tconstruct.plugin.jei.modifiers.SlotIngredientRenderer;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * JEI view of a dynamic Goety ritual. The center and result always use the same part item.
+ * JEI view of dynamic Goety rituals that transform or modify the center item.
  */
 public final class GoetyTransmutationCategory implements IRecipeCategory<GoetyTransmutationJeiDisplay> {
     private static final int WIDTH = 176;
-    private static final int HEIGHT = 140;
+    private static final int HEIGHT = 154;
     private static final int RITUAL_CENTER_X = 56;
     private static final int RITUAL_CENTER_Y = 72;
     private static final int OUTPUT_OFFSET_X = 75;
+    private static final int SOUL_COST_Y = 124;
+    private static final int DURATION_Y = 134;
     private static final int[][] PEDESTAL_POSITIONS = {
             {56, 42}, {86, 72}, {56, 102}, {26, 72},
             {71, 42}, {86, 42}, {41, 102}, {26, 102},
@@ -46,6 +54,7 @@ public final class GoetyTransmutationCategory implements IRecipeCategory<GoetyTr
     private final IDrawable arrow;
     private final ItemStack darkAltar;
     private final ItemStack pedestal;
+    private final ModifierIngredientRenderer modifierRenderer = new ModifierIngredientRenderer(124, 10);
 
     public GoetyTransmutationCategory(IGuiHelper gui) {
         background = gui.createBlankDrawable(WIDTH, HEIGHT);
@@ -82,10 +91,10 @@ public final class GoetyTransmutationCategory implements IRecipeCategory<GoetyTr
               .addItemStacks(display.inputs());
         layout.addSlot(RecipeIngredientRole.CATALYST, RITUAL_CENTER_X, RITUAL_CENTER_Y)
               .addItemStack(darkAltar);
-        for (int index = 0; index < display.cost(); index++) {
+        for (int index = 0; index < display.pedestalInputs().size(); index++) {
             int[] position = PEDESTAL_POSITIONS[index];
             layout.addSlot(RecipeIngredientRole.INPUT, position[0], position[1] - 5)
-                  .addIngredients(display.recipe().unitInput());
+                  .addIngredients(display.pedestalInputs().get(index));
             layout.addSlot(RecipeIngredientRole.RENDER_ONLY, position[0], position[1])
                   .addItemStack(pedestal);
         }
@@ -99,6 +108,17 @@ public final class GoetyTransmutationCategory implements IRecipeCategory<GoetyTr
         if (!researchScroll.isEmpty()){
             layout.addSlot(RecipeIngredientRole.CATALYST, 0, 16)
                   .addItemStack(researchScroll);
+        }
+        if (display.modifier() != null){
+            layout.addSlot(RecipeIngredientRole.OUTPUT, (WIDTH - 124) / 2, 15)
+                  .setCustomRenderer(TConstructJEIConstants.MODIFIER_TYPE, modifierRenderer)
+                  .addIngredient(TConstructJEIConstants.MODIFIER_TYPE,
+                                 new ModifierEntry(ModifierManager.getValue(display.modifier()), display.level().min()));
+        }
+        if (display.slots() != null){
+            layout.addSlot(RecipeIngredientRole.INPUT, WIDTH - 34, DURATION_Y - 8)
+                  .setCustomRenderer(TConstructJEIConstants.SLOT_TYPE, SlotIngredientRenderer.INPUT)
+                  .addIngredient(TConstructJEIConstants.SLOT_TYPE, display.slots());
         }
     }
 
@@ -143,10 +163,29 @@ public final class GoetyTransmutationCategory implements IRecipeCategory<GoetyTr
         Component craftType = Component.literal(Component.translatable("jei.goety.craftType").getString())
                                        .append(Component.translatable("jei.goety.craftType." + display.recipe().getCraftType()));
         drawCentered(graphics, font, craftType, 5);
+        Component level = levelText(display.level());
+        if (level != null){
+            graphics.drawString(font, level, (WIDTH - font.width(level)) / 2, 25, 0xFF808080, false);
+        }
         drawCentered(graphics, font,
-                     Component.translatable("jei.goety.soulCost", display.recipe().getSoulCost()), 120);
+                     Component.translatable("jei.goety.soulCost", display.recipe().getSoulCost()), SOUL_COST_Y);
         drawCentered(graphics, font,
-                     Component.translatable("jei.goety.duration", display.recipe().getDuration()), 130);
+                     Component.translatable("jei.goety.duration", display.recipe().getDuration()), DURATION_Y);
+    }
+
+    private static Component levelText(IntRange level) {
+        if (level == null)
+            return null;
+        if (level.min() == 1 && level.max() < ModifierEntry.VALID_LEVEL.max()){
+            return Component.translatable("jei.tconstruct.modifiers.level.max", level.max());
+        }
+        if (level.min() == level.max()){
+            return Component.translatable("jei.tconstruct.modifiers.level.exact", level.min());
+        }
+        if (level.max() == ModifierEntry.VALID_LEVEL.max()){
+            return Component.translatable("jei.tconstruct.modifiers.level.min", level.min());
+        }
+        return Component.translatable("jei.tconstruct.modifiers.level.range", level.min(), level.max());
     }
 
     private static void drawCentered(

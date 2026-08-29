@@ -1,0 +1,16 @@
+{
+  "modifier_id": "dreamtinker:goety_death_scythe",
+  "text": [
+    {
+      "text": "A sufficiently charged attack releases a giant scythe slash that pierces creatures and deals the tool's displayed attack damage. Melee and slash hits apply Sapped for 2 seconds; repeated hits have a 10% chance to increase its level, up to Sapped V."
+    }
+  ],
+  "more_text_space": true,
+  "tool_filter": "dreamtinker:tools/scythe",
+  "effects": [
+    "Obtained through Goety's Necroturgy ritual",
+    "Requires a scythe containing Dark Metal",
+    "Requires 1 Delusion slot",
+    "Maximum level: 1"
+  ]
+}

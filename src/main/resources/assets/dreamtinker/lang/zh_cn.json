@@ -1141,6 +1141,10 @@
   "modifier.dreamtinker.goety_soul_eater": "噬魂",
   "modifier.dreamtinker.goety_soul_eater.flavor": "饥渴的灵魂永不满足",
   "modifier.dreamtinker.goety_soul_eater.description": "视为同等级的 Goety 噬魂附魔。等级越高，获得的灵魂越多；",
+  "modifier.dreamtinker.goety_death_scythe": "死神之镰",
+  "modifier.dreamtinker.goety_death_scythe.flavor": "锋刃可行于空气之中。",
+  "modifier.dreamtinker.goety_death_scythe.description": "攻击蓄力充分时释放可穿透生物的巨镰剑气，造成工具面板攻击伤害。近战与剑气命中会施加2秒侵蚀；重复命中有10%概率提升等级，最高侵蚀V。",
+  "modifier.dreamtinker.goety_death_scythe.requirements": "需要含黑暗金属材料的镰刀和1个空余妄见槽，并通过死灵术仪式施加。",
 
   "_comment.dreamtinker.materials": "======材料======",
   "material.dreamtinker.echo_alloy": "回响合金",
@@ -2436,5 +2440,5 @@
   "command.dreamtinker.shellheart.invalid_colour": "无效的壳心颜色：%s",
   "jei.dreamtinker.narcissus_feedback.slot.infusion": "灌注",
   "jei.dreamtinker.narcissus_feedback.infusion": "灌注下一枚水仙流体弹，提高其威力。",
-  "jei.dreamtinker.goety_material_transmutation": "工具部件嬗变"
+  "jei.dreamtinker.goety_material_transmutation": "工匠黑暗仪式"
 }

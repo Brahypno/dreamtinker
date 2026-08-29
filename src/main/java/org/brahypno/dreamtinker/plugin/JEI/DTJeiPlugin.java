@@ -5,10 +5,7 @@ import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.RecipeType;
-import mezz.jei.api.registration.IModIngredientRegistration;
-import mezz.jei.api.registration.IRecipeCatalystRegistration;
-import mezz.jei.api.registration.IRecipeCategoryRegistration;
-import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
@@ -68,6 +65,17 @@ public final class DTJeiPlugin implements IModPlugin {
             samples.add(WorldRitualCategory.CelestialTypes.CelestialIcon.moon(i));
 
         reg.register(CELESTIAL, samples, new WorldRitualCategory.CelestialTypes.CelestialHelper(), new WorldRitualCategory.CelestialTypes.CelestialRenderer());
+    }
+
+    @Override
+    public void registerExtraIngredients(IExtraIngredientRegistration reg) {
+        if (ModList.get().isLoaded(GoetyCompat.MOD_ID)){
+            GoetyJeiCompat.registerExtraIngredients(reg);
+        }
+        if (ModList.get().isLoaded("ars_nouveau")
+            && ModList.get().isLoaded("esotericism_tinker")){
+            ArsJeiCompat.registerExtraIngredients(reg);
+        }
     }
 
 

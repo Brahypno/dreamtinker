@@ -1,0 +1,66 @@
+{
+  "type": "dreamtinker:goety_modifier_ritual",
+  "activation_item": {
+    "tag": "dreamtinker:tools/scythe"
+  },
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "goety"
+            },
+            {
+              "type": "esotericism_tinker:mod_compact_config",
+              "modid": "goety"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "craftType": "necroturgy",
+  "duration": 30,
+  "ingredients": [
+    {
+      "tag": "forge:bones"
+    },
+    {
+      "tag": "forge:bones"
+    },
+    {
+      "tag": "minecraft:soul_fire_base_blocks"
+    },
+    {
+      "tag": "forge:gems/lapis"
+    },
+    {
+      "item": "goety:unholy_blood"
+    },
+    {
+      "item": "minecraft:dragon_breath"
+    },
+    {
+      "item": "goety:ectoplasm"
+    },
+    {
+      "item": "goety:savage_tooth"
+    }
+  ],
+  "level": 1,
+  "modifier": "dreamtinker:goety_death_scythe",
+  "required_material": "dreamtinker:goety_dark_metal",
+  "ritual_type": "dreamtinker:tinker_modifier",
+  "slots": {
+    "delusions": 1
+  },
+  "soulCost": 1
+}

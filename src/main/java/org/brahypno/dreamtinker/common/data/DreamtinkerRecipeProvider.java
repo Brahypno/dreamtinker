@@ -9,6 +9,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -24,6 +25,7 @@ import org.brahypno.dreamtinker.common.DreamtinkerEffects;
 import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
 import org.brahypno.dreamtinker.library.compat.goety.GoetyCompat;
 import org.brahypno.dreamtinker.library.compat.goety.GoetyMaterialTransmutationRecipeBuilder;
+import org.brahypno.dreamtinker.library.compat.goety.GoetyModifierRitualRecipeBuilder;
 import org.brahypno.dreamtinker.smeltery.data.DreamtinkerEntityTransmuteRecipeProvider;
 import org.brahypno.dreamtinker.smeltery.data.DreamtinkerSmelteryRecipeProvider;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerMaterialIds;
@@ -101,6 +103,23 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IRecipe
                                                .soulCost(5)
                                                .duration(30)
                                                .save(goetyRecipes, location("compat/goety/material_transmutation/cursed_to_dark_metal"));
+        GoetyModifierRitualRecipeBuilder.modifier(
+                                                Ingredient.of(DreamtinkerTagKeys.Items.dt_scythe),
+                                                DreamtinkerMaterialIds.goety_dark_metal,
+                                                org.brahypno.dreamtinker.tools.DreamtinkerModifiers.Ids.goety_death_scythe)
+                                        .slots(org.brahypno.esotericismtinker.library.tools.EsotericismSlotType.DELUSION, 1)
+                                        .level(1)
+                                        .addInput(Ingredient.of(Tags.Items.BONES))
+                                        .addInput(Ingredient.of(Tags.Items.BONES))
+                                        .addInput(Ingredient.of(ItemTags.SOUL_FIRE_BASE_BLOCKS))
+                                        .addInput(Ingredient.of(Tags.Items.GEMS_LAPIS))
+                                        .addInput(itemNameIngredient("goety", "unholy_blood"))
+                                        .addInput(Ingredient.of(Items.DRAGON_BREATH))
+                                        .addInput(itemNameIngredient("goety", "ectoplasm"))
+                                        .addInput(itemNameIngredient("goety", "savage_tooth"))
+                                        .soulCost(1)
+                                        .duration(30)
+                                        .save(goetyRecipes, location("compat/goety/modifiers/death_scythe"));
     }
 
     String serving_folder = "tools/severing/";

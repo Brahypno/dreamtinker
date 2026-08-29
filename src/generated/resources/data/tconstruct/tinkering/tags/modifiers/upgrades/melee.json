@@ -16,6 +16,10 @@
     {
       "id": "dreamtinker:bic_intoxicating",
       "required": false
+    },
+    {
+      "id": "dreamtinker:goety_death_scythe",
+      "required": false
     }
   ]
 }
