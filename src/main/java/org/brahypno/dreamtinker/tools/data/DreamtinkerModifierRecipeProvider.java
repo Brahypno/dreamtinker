@@ -288,6 +288,38 @@ public class DreamtinkerModifierRecipeProvider implements ICommonRecipeHelper {
                              .saveSalvage(
                                      withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("goety")),
                                      prefix(DreamtinkerModifiers.Ids.goety_death_scythe, delusionSalvage));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.goety_blade_of_ender)
+                             .setTools(TinkerTags.Items.SWORD)
+                             .setSlots(EsotericismSlotType.DELUSION, 1)
+                             .setMaxLevel(1)
+                             .saveSalvage(
+                                     withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("goety")),
+                                     prefix(DreamtinkerModifiers.Ids.goety_blade_of_ender, delusionSalvage));
+        wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("goety"));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.goety_soul_eater)
+                             .setTools(TinkerTags.Items.MELEE)
+                             .addInput(itemNameIngredient("goety", "ectoplasm"))
+                             .addInput(itemNameIngredient("goety", "grave_dust"))
+                             .addInput(itemNameIngredient("goety", "dark_fabric"))
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .setMaxLevel(5)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.Ids.goety_soul_eater, upgradeSalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.Ids.goety_soul_eater, upgradeFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.goety_velocity)
+                             .setTools(TinkerTags.Items.SWORD)
+                             .addInput(itemNameIngredient("goety", "wind_core"))
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .setMaxLevel(5)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.Ids.goety_velocity, upgradeSalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.Ids.goety_velocity, upgradeFolder));
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.goety_radius)
+                             .setTools(TinkerTags.Items.SWORD)
+                             .addInput(itemNameIngredient("goety", "magic_emerald"))
+                             .addInput(Items.FIREWORK_ROCKET)
+                             .setSlots(SlotType.UPGRADE, 1)
+                             .setMaxLevel(2)
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.Ids.goety_radius, upgradeSalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.Ids.goety_radius, upgradeFolder));
         Ingredient under_plates = Ingredient.of(DreamtinkerTools.underPlate.get(ArmorItem.Type.HELMET),
                                                 DreamtinkerTools.underPlate.get(ArmorItem.Type.CHESTPLATE),
                                                 DreamtinkerTools.underPlate.get(ArmorItem.Type.LEGGINGS),

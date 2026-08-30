@@ -1,0 +1,21 @@
+{
+  "modifier_id": "dreamtinker:goety_blade_of_ender",
+  "text": [
+    {
+      "text": "Melee hits apply Void Touched for 5 seconds. A fully charged attack releases a piercing void slash that deals 9 damage and lasts 0.5 seconds."
+    },
+    {
+      "text": "Right-click to backstep with a 1-second cooldown. Sprint-right-click to dash forward, dealing 9 damage and applying Void Touched along the path, with a 7-second cooldown. Neither movement nor void slashes work during cooldown.",
+      "paragraph": true
+    }
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable/melee/sword",
+  "effects": [
+    "Obtained through Goety's End ritual",
+    "Requires a sword containing Dark Metal",
+    "Requires 1 Delusion slot",
+    "+1 entity reach",
+    "Maximum level: 1"
+  ]
+}

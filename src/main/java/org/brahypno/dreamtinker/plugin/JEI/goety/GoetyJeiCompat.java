@@ -1,11 +1,22 @@
 package org.brahypno.dreamtinker.plugin.JEI.goety;
 
+import com.Polarice3.Goety.api.ritual.RitualType;
+import com.Polarice3.Goety.common.blocks.ModBlocks;
 import com.Polarice3.Goety.common.crafting.ModRecipeSerializer;
+import com.Polarice3.Goety.common.crafting.RitualRecipe;
+import com.Polarice3.Goety.common.items.research.ResearchScroll;
+import com.Polarice3.Goety.compat.jei.JeiRecipeTypes;
 import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.recipe.IFocus;
+import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
+import mezz.jei.api.recipe.advanced.IRecipeManagerPlugin;
+import mezz.jei.api.recipe.category.IRecipeCategory;
+import mezz.jei.api.registration.IAdvancedRegistration;
 import mezz.jei.api.registration.IExtraIngredientRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -33,11 +44,16 @@ import java.util.*;
 public final class GoetyJeiCompat {
     public static final RecipeType<GoetyTransmutationJeiDisplay> RECIPE_TYPE = RecipeType.create(
             Dreamtinker.MODID, "goety_material_transmutation", GoetyTransmutationJeiDisplay.class);
+    private static volatile List<GoetyTransmutationJeiDisplay> registeredDisplays = List.of();
 
     private GoetyJeiCompat() {}
 
     public static void registerCategories(IRecipeCategoryRegistration registration, IGuiHelper gui) {
         registration.addRecipeCategories(new GoetyTransmutationCategory(gui));
+    }
+
+    public static void registerAdvanced(IAdvancedRegistration registration) {
+        registration.addRecipeManagerPlugin(new FocusedRecipeManager());
     }
 
     /**
@@ -124,7 +140,26 @@ public final class GoetyJeiCompat {
             }
         }
 
-        registration.addRecipes(RECIPE_TYPE, displays);
+        registeredDisplays = List.copyOf(displays);
+        registration.addRecipes(RECIPE_TYPE, registeredDisplays);
+    }
+
+    public static void hideNativeRitualDisplays(IJeiRuntime runtime) {
+        var level = Minecraft.getInstance().level;
+        if (level == null)
+            return;
+        List<RitualRecipe> customRituals = level.getRecipeManager()
+                                                .getAllRecipesFor(ModRecipeSerializer.RITUAL_TYPE.get()).stream()
+                                                .filter(recipe -> recipe instanceof GoetyMaterialTransmutationRecipe
+                                                                  || recipe instanceof GoetyModifierRitualRecipe)
+                                                .toList();
+        if (customRituals.isEmpty())
+            return;
+        var recipeManager = runtime.getRecipeManager();
+        recipeManager.hideRecipes(JeiRecipeTypes.RITUAL, customRituals);
+        for (var ritualType : RitualType.getAllRitualType()) {
+            recipeManager.hideRecipes(JeiRecipeTypes.getRitual(ritualType.getName()), customRituals);
+        }
     }
 
     private static List<MaterialVariantId> inputCandidates(GoetyMaterialTransmutationRecipe recipe) {
@@ -156,5 +191,87 @@ public final class GoetyJeiCompat {
             inputs.add(input);
             outputs.add(output);
         }
+    }
+
+    /**
+     * Owns lookup for this dynamic category so static item-only matching cannot bypass material checks.
+     */
+    private static final class FocusedRecipeManager implements IRecipeManagerPlugin {
+        @Override
+        public <V> List<RecipeType<?>> getRecipeTypes(IFocus<V> focus) {
+            return matchingDisplays(focus).isEmpty() ? List.of() : List.of(RECIPE_TYPE);
+        }
+
+        @Override
+        @SuppressWarnings("unchecked")
+        public <T, V> List<T> getRecipes(IRecipeCategory<T> category, IFocus<V> focus) {
+            if (!category.getRecipeType().equals(RECIPE_TYPE))
+                return List.of();
+            return (List<T>) matchingDisplays(focus);
+        }
+
+        @Override
+        @SuppressWarnings("unchecked")
+        public <T> List<T> getRecipes(IRecipeCategory<T> category) {
+            if (!category.getRecipeType().equals(RECIPE_TYPE))
+                return List.of();
+            return (List<T>) registeredDisplays;
+        }
+    }
+
+    private static List<GoetyTransmutationJeiDisplay> matchingDisplays(IFocus<?> focus) {
+        Object ingredient = focus.getTypedValue().getIngredient();
+        RecipeIngredientRole role = focus.getRole();
+        if (ingredient instanceof ItemStack stack){
+            return registeredDisplays.stream()
+                                     .filter(display -> matchesItemFocus(display, stack, role))
+                                     .toList();
+        }
+        if (role == RecipeIngredientRole.OUTPUT && ingredient instanceof ModifierEntry modifier){
+            return registeredDisplays.stream()
+                                     .filter(display -> display.modifier() != null
+                                                        && display.modifier().equals(modifier.getId()))
+                                     .toList();
+        }
+        return List.of();
+    }
+
+    private static boolean matchesItemFocus(
+            GoetyTransmutationJeiDisplay display, ItemStack stack, RecipeIngredientRole role) {
+        return switch (role) {
+            case INPUT -> isToolOrPart(stack)
+                          ? acceptsFocusedInput(display, stack)
+                          : display.pedestalInputs().stream().anyMatch(ingredient -> ingredient.test(stack));
+            case OUTPUT -> display.outputs().stream().anyMatch(output -> output.is(stack.getItem()));
+            case CATALYST -> stack.is(ModBlocks.DARK_ALTAR.get().asItem())
+                             || matchesResearchScroll(display, stack);
+            default -> false;
+        };
+    }
+
+    private static boolean isToolOrPart(ItemStack stack) {
+        return stack.getItem() instanceof IModifiable || stack.getItem() instanceof ToolPartItem;
+    }
+
+    private static boolean matchesResearchScroll(GoetyTransmutationJeiDisplay display, ItemStack stack) {
+        return stack.getItem() instanceof ResearchScroll scroll && scroll.research != null
+               && scroll.research.getId().equals(display.recipe().getResearch());
+    }
+
+    private static boolean acceptsFocusedInput(GoetyTransmutationJeiDisplay display, ItemStack focused) {
+        if (display.inputs().stream().noneMatch(input -> input.is(focused.getItem())))
+            return false;
+        ItemStack input = focused.copyWithCount(1);
+        if (display.recipe() instanceof GoetyModifierRitualRecipe modifierRecipe){
+            return GoetyModifierRitualTarget.findForDisplay(input, modifierRecipe) != null;
+        }
+        if (display.recipe() instanceof GoetyMaterialTransmutationRecipe transmutation){
+            var level = Minecraft.getInstance().level;
+            if (level == null)
+                return false;
+            GoetyTransmutationTarget target = GoetyTransmutationTarget.find(level, input, transmutation);
+            return target != null && target.cost() == display.pedestalInputs().size();
+        }
+        return false;
     }
 }

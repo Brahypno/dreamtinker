@@ -1408,7 +1408,8 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                         DamageSourcePredicate.or(DamageSourcePredicate.tag(DamageTypeTags.IS_FIRE),
                                                  DamageSourcePredicate.tag(DamageTypeTags.IS_EXPLOSION)),
                         1 / 10f));
-        buildModifier(Ids.goety_soul_eater, DreamtinkerMaterialDataProvider.modLoaded("goety"));
+        buildModifier(Ids.goety_velocity, DreamtinkerMaterialDataProvider.modLoaded("goety"));
+        buildModifier(Ids.goety_radius, DreamtinkerMaterialDataProvider.modLoaded("goety"));
     }
 
     @Override

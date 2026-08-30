@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:goety_velocity",
+  "text": [
+    {
+      "text": "每级使末影之刃的虚空剑气速度提高三分之一，在固定0.5秒寿命内显著增加飞行距离，但会缩小剑气体积。"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/melee/sword",
+  "effects": [
+    "每级需要1个升级槽",
+    "最高5级"
+  ]
+}

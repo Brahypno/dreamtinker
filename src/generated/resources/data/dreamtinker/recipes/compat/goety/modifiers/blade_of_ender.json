@@ -1,0 +1,66 @@
+{
+  "type": "dreamtinker:goety_modifier_ritual",
+  "activation_item": {
+    "tag": "tconstruct:modifiable/melee/sword"
+  },
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "goety"
+            },
+            {
+              "type": "esotericism_tinker:mod_compact_config",
+              "modid": "goety"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "craftType": "end",
+  "duration": 30,
+  "ingredients": [
+    {
+      "item": "goety:void_echo"
+    },
+    {
+      "item": "goety:void_echo"
+    },
+    {
+      "tag": "forge:gems/quartz"
+    },
+    {
+      "item": "goety:dark_ingot"
+    },
+    {
+      "item": "minecraft:ender_eye"
+    },
+    {
+      "item": "minecraft:dragon_breath"
+    },
+    {
+      "item": "minecraft:phantom_membrane"
+    },
+    {
+      "item": "goety:wind_core"
+    }
+  ],
+  "level": 1,
+  "modifier": "dreamtinker:goety_blade_of_ender",
+  "required_material": "dreamtinker:goety_dark_metal",
+  "ritual_type": "dreamtinker:tinker_modifier",
+  "slots": {
+    "delusions": 1
+  },
+  "soulCost": 10
+}

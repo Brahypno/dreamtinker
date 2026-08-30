@@ -539,6 +539,9 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId goety_fire_explosion_resistance = id("goety_fire_explosion_resistance");
         public static final ModifierId goety_soul_eater = id("goety_soul_eater");
         public static final ModifierId goety_death_scythe = id("goety_death_scythe");
+        public static final ModifierId goety_blade_of_ender = id("goety_blade_of_ender");
+        public static final ModifierId goety_velocity = id("goety_velocity");
+        public static final ModifierId goety_radius = id("goety_radius");
 
 
         public static final ModifierId el_nemesis_curse = id("el_nemesis_curse");

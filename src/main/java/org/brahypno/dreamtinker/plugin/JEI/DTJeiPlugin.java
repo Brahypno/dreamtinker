@@ -6,6 +6,7 @@ import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.*;
+import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
@@ -86,6 +87,13 @@ public final class DTJeiPlugin implements IModPlugin {
                                 new NarcissusFluidFeedbackCategory(g));
         if (ModList.get().isLoaded(GoetyCompat.MOD_ID)){
             GoetyJeiCompat.registerCategories(reg, g);
+        }
+    }
+
+    @Override
+    public void registerAdvanced(IAdvancedRegistration reg) {
+        if (ModList.get().isLoaded(GoetyCompat.MOD_ID)){
+            GoetyJeiCompat.registerAdvanced(reg);
         }
     }
 
@@ -221,6 +229,13 @@ public final class DTJeiPlugin implements IModPlugin {
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration reg) {
         reg.addRecipeCatalyst(new ItemStack(DreamtinkerTools.narcissus_wing.get()));
+    }
+
+    @Override
+    public void onRuntimeAvailable(IJeiRuntime runtime) {
+        if (ModList.get().isLoaded(GoetyCompat.MOD_ID)){
+            GoetyJeiCompat.hideNativeRitualDisplays(runtime);
+        }
     }
 
     @SafeVarargs

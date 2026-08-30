@@ -15,6 +15,7 @@ import slimeknights.tconstruct.library.tools.SlotType.SlotCount;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 /**
@@ -27,7 +28,7 @@ public final class GoetyModifierRitualRecipeBuilder {
     private final List<Ingredient> ingredients = new ArrayList<>();
     private int duration = 30;
     private int soulCost = 1;
-    private final String craftType = "necroturgy";
+    private String craftType;
     private SlotCount slots;
     private IntRange level;
 
@@ -56,6 +57,14 @@ public final class GoetyModifierRitualRecipeBuilder {
         return this;
     }
 
+    public GoetyModifierRitualRecipeBuilder craftType(String value) {
+        Objects.requireNonNull(value, "craftType");
+        if (value.isBlank())
+            throw new IllegalArgumentException("craftType cannot be blank");
+        craftType = value;
+        return this;
+    }
+
     public GoetyModifierRitualRecipeBuilder slots(SlotType type, int count) {
         if (count <= 0)
             throw new IllegalArgumentException("Slot count must be positive");
@@ -80,6 +89,8 @@ public final class GoetyModifierRitualRecipeBuilder {
             throw new IllegalStateException("Goety modifier ritual needs a slot cost: " + id);
         if (level == null)
             throw new IllegalStateException("Goety modifier ritual needs a level range: " + id);
+        if (craftType == null)
+            throw new IllegalStateException("Goety modifier ritual needs a craftType: " + id);
         consumer.accept(new Result(id, tools, material, modifier, slots, level,
                                    List.copyOf(ingredients), duration, soulCost, craftType));
     }

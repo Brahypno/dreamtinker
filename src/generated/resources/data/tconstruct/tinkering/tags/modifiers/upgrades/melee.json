@@ -20,6 +20,22 @@
     {
       "id": "dreamtinker:goety_death_scythe",
       "required": false
+    },
+    {
+      "id": "dreamtinker:goety_blade_of_ender",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:goety_velocity",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:goety_radius",
+      "required": false
+    },
+    {
+      "id": "dreamtinker:goety_soul_eater",
+      "required": false
     }
   ]
 }

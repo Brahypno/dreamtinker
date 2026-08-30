@@ -8,6 +8,10 @@
     {
       "id": "dreamtinker:goety_death_scythe",
       "required": false
+    },
+    {
+      "id": "dreamtinker:goety_blade_of_ender",
+      "required": false
     }
   ]
 }

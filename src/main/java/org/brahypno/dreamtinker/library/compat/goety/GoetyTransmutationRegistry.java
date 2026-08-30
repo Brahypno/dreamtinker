@@ -134,7 +134,7 @@ public final class GoetyTransmutationRegistry {
             inputJson.forEach(element -> ingredients.add(Ingredient.fromJson(element)));
             return new GoetyModifierRitualRecipe(
                     id, GsonHelper.getAsString(json, "group", ""),
-                    GsonHelper.getAsString(json, "craftType", "necroturgy"),
+                    GsonHelper.getAsString(json, "craftType"),
                     new ResourceLocation(GsonHelper.getAsString(json, "ritual_type", "dreamtinker:tinker_modifier")),
                     tools, ingredients, GsonHelper.getAsInt(json, "duration", 30),
                     GsonHelper.getAsInt(json, "soulCost", 1), material, modifier, slots, level,

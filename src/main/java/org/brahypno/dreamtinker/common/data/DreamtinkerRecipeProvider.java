@@ -109,6 +109,7 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IRecipe
                                                 org.brahypno.dreamtinker.tools.DreamtinkerModifiers.Ids.goety_death_scythe)
                                         .slots(org.brahypno.esotericismtinker.library.tools.EsotericismSlotType.DELUSION, 1)
                                         .level(1)
+                                        .craftType("necroturgy")
                                         .addInput(Ingredient.of(Tags.Items.BONES))
                                         .addInput(Ingredient.of(Tags.Items.BONES))
                                         .addInput(Ingredient.of(ItemTags.SOUL_FIRE_BASE_BLOCKS))
@@ -120,6 +121,24 @@ public class DreamtinkerRecipeProvider extends RecipeProvider implements IRecipe
                                         .soulCost(1)
                                         .duration(30)
                                         .save(goetyRecipes, location("compat/goety/modifiers/death_scythe"));
+        GoetyModifierRitualRecipeBuilder.modifier(
+                                                Ingredient.of(slimeknights.tconstruct.common.TinkerTags.Items.SWORD),
+                                                DreamtinkerMaterialIds.goety_dark_metal,
+                                                org.brahypno.dreamtinker.tools.DreamtinkerModifiers.Ids.goety_blade_of_ender)
+                                        .slots(org.brahypno.esotericismtinker.library.tools.EsotericismSlotType.DELUSION, 1)
+                                        .level(1)
+                                        .craftType("end")
+                                        .addInput(itemNameIngredient("goety", "void_echo"))
+                                        .addInput(itemNameIngredient("goety", "void_echo"))
+                                        .addInput(Ingredient.of(Tags.Items.GEMS_QUARTZ))
+                                        .addInput(itemNameIngredient("goety", "dark_ingot"))
+                                        .addInput(Ingredient.of(Items.ENDER_EYE))
+                                        .addInput(Ingredient.of(Items.DRAGON_BREATH))
+                                        .addInput(Ingredient.of(Items.PHANTOM_MEMBRANE))
+                                        .addInput(itemNameIngredient("goety", "wind_core"))
+                                        .soulCost(10)
+                                        .duration(30)
+                                        .save(goetyRecipes, location("compat/goety/modifiers/blade_of_ender"));
     }
 
     String serving_folder = "tools/severing/";

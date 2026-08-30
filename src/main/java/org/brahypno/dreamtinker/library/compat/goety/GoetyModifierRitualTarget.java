@@ -15,16 +15,35 @@ public record GoetyModifierRitualTarget(ItemStack result) {
         return check(input, recipe).target();
     }
 
+    /**
+     * Builds a JEI preview for a structurally valid tool. Missing display-only levels and slots are
+     * supplied on a copy, while real ritual validation remains strict in {@link #check}.
+     */
+    public static GoetyModifierRitualTarget findForDisplay(ItemStack input, GoetyModifierRitualRecipe recipe) {
+        if (!matchesToolAndMaterial(input, recipe))
+            return null;
+        ItemStack preview = input.copyWithCount(1);
+        ToolStack tool = ToolStack.from(preview);
+        int resultLevel = tool.getUpgrades().getLevel(recipe.modifier()) + 1;
+        if (resultLevel > recipe.level().max())
+            return null;
+        if (resultLevel < recipe.level().min()){
+            tool.addModifier(recipe.modifier(), recipe.level().min() - resultLevel);
+        }
+        var slots = recipe.slots();
+        int missingSlots = slots.count() - tool.getFreeSlots(slots.type());
+        if (missingSlots > 0){
+            tool.getPersistentData().addSlots(slots.type(), missingSlots);
+        }
+        tool.updateStack(preview);
+        return find(preview, recipe);
+    }
+
     public static Check check(ItemStack input, GoetyModifierRitualRecipe recipe) {
-        if (input.getCount() != 1 || !recipe.tools().test(input) || !(input.getItem() instanceof IModifiable)){
+        if (!matchesToolAndMaterial(input, recipe)){
             return Check.INVALID;
         }
         ToolStack tool = ToolStack.from(input);
-        boolean hasMaterial = tool.getMaterials().getList().stream()
-                                  .anyMatch(material -> material.getVariant().sameVariant(recipe.requiredMaterial()));
-        if (!hasMaterial){
-            return Check.INVALID;
-        }
         int resultLevel = tool.getUpgrades().getLevel(recipe.modifier()) + 1;
         if (resultLevel < recipe.level().min()){
             return new Check(null, Component.translatable(
@@ -54,6 +73,14 @@ public record GoetyModifierRitualTarget(ItemStack result) {
         }
         output.updateStack(result);
         return new Check(new GoetyModifierRitualTarget(result), null);
+    }
+
+    private static boolean matchesToolAndMaterial(ItemStack input, GoetyModifierRitualRecipe recipe) {
+        if (input.getCount() != 1 || !recipe.tools().test(input) || !(input.getItem() instanceof IModifiable)){
+            return false;
+        }
+        return ToolStack.from(input).getMaterials().getList().stream()
+                        .anyMatch(material -> material.getVariant().sameVariant(recipe.requiredMaterial()));
     }
 
     public record Check(@Nullable GoetyModifierRitualTarget target, @Nullable Component error) {

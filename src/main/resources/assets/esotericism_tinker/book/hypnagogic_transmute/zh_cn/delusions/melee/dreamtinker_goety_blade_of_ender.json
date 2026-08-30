@@ -1,0 +1,21 @@
+{
+  "modifier_id": "dreamtinker:goety_blade_of_ender",
+  "text": [
+    {
+      "text": "近战命中施加5秒虚空之蚀。完全蓄力攻击释放可穿透实体的虚空剑气，造成9点伤害并存在0.5秒。"
+    },
+    {
+      "text": "右键后撤并进入1秒冷却；冲刺时右键向前突刺，对路径上的敌人造成9点伤害并施加虚空之蚀，随后进入7秒冷却。冷却期间无法位移或释放剑气。",
+      "paragraph": true
+    }
+  ],
+  "more_text_space": true,
+  "tool_filter": "tconstruct:modifiable/melee/sword",
+  "effects": [
+    "需要通过诡厄巫法的末地仪式获取",
+    "需要含有黑暗金属材料的剑",
+    "需要1个妄见槽",
+    "+1实体触及距离",
+    "最高1级"
+  ]
+}

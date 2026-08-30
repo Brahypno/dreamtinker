@@ -20,14 +20,22 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.brahypno.dreamtinker.library.compat.goety.GoetyMaterialTransmutationRecipe;
+import org.brahypno.dreamtinker.library.compat.goety.GoetyModifierRitualRecipe;
+import org.brahypno.dreamtinker.library.compat.goety.GoetyModifierRitualTarget;
+import org.brahypno.dreamtinker.library.compat.goety.GoetyTransmutationTarget;
 import slimeknights.tconstruct.library.json.IntRange;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierManager;
+import slimeknights.tconstruct.library.tools.item.IModifiable;
+import slimeknights.tconstruct.library.tools.part.ToolPartItem;
 import slimeknights.tconstruct.plugin.jei.TConstructJEIConstants;
 import slimeknights.tconstruct.plugin.jei.modifiers.ModifierIngredientRenderer;
 import slimeknights.tconstruct.plugin.jei.modifiers.SlotIngredientRenderer;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -87,8 +95,11 @@ public final class GoetyTransmutationCategory implements IRecipeCategory<GoetyTr
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder layout, GoetyTransmutationJeiDisplay display, IFocusGroup focuses) {
-        layout.addSlot(RecipeIngredientRole.INPUT, RITUAL_CENTER_X, RITUAL_CENTER_Y - 15)
-              .addItemStacks(display.inputs());
+        List<ItemStack> inputs = new ArrayList<>(display.inputs());
+        List<ItemStack> outputs = new ArrayList<>(display.outputs());
+        applyFocusedTool(display, focuses, inputs, outputs);
+        layout.addSlot(RecipeIngredientRole.RENDER_ONLY, RITUAL_CENTER_X, RITUAL_CENTER_Y - 15)
+              .addItemStacks(inputs);
         layout.addSlot(RecipeIngredientRole.CATALYST, RITUAL_CENTER_X, RITUAL_CENTER_Y)
               .addItemStack(darkAltar);
         for (int index = 0; index < display.pedestalInputs().size(); index++) {
@@ -99,7 +110,7 @@ public final class GoetyTransmutationCategory implements IRecipeCategory<GoetyTr
                   .addItemStack(pedestal);
         }
         layout.addSlot(RecipeIngredientRole.OUTPUT, RITUAL_CENTER_X + OUTPUT_OFFSET_X, RITUAL_CENTER_Y - 15)
-              .addItemStacks(display.outputs());
+              .addItemStacks(outputs);
         layout.addSlot(RecipeIngredientRole.CATALYST, RITUAL_CENTER_X + OUTPUT_OFFSET_X, RITUAL_CENTER_Y)
               .addItemStack(darkAltar);
         layout.addSlot(RecipeIngredientRole.RENDER_ONLY, 0, 0)
@@ -119,6 +130,42 @@ public final class GoetyTransmutationCategory implements IRecipeCategory<GoetyTr
             layout.addSlot(RecipeIngredientRole.INPUT, WIDTH - 34, DURATION_Y - 8)
                   .setCustomRenderer(TConstructJEIConstants.SLOT_TYPE, SlotIngredientRenderer.INPUT)
                   .addIngredient(TConstructJEIConstants.SLOT_TYPE, display.slots());
+        }
+    }
+
+    private static void applyFocusedTool(
+            GoetyTransmutationJeiDisplay display, IFocusGroup focuses,
+            List<ItemStack> inputs, List<ItemStack> outputs) {
+        ItemStack focused = focuses.getItemStackFocuses(RecipeIngredientRole.INPUT)
+                                   .map(focus -> focus.getTypedValue().getIngredient())
+                                   .filter(stack -> stack.getItem() instanceof IModifiable
+                                                    || stack.getItem() instanceof ToolPartItem)
+                                   .findFirst()
+                                   .map(stack -> stack.copyWithCount(1))
+                                   .orElse(ItemStack.EMPTY);
+        if (focused.isEmpty())
+            return;
+
+        ItemStack result = ItemStack.EMPTY;
+        if (display.recipe() instanceof GoetyModifierRitualRecipe modifierRecipe){
+            GoetyModifierRitualTarget target = GoetyModifierRitualTarget.findForDisplay(focused, modifierRecipe);
+            if (target != null){
+                result = target.result();
+            }
+        }else if (display.recipe() instanceof GoetyMaterialTransmutationRecipe transmutation){
+            var level = Minecraft.getInstance().level;
+            if (level != null){
+                GoetyTransmutationTarget target = GoetyTransmutationTarget.find(level, focused, transmutation);
+                if (target != null && target.cost() == display.pedestalInputs().size()){
+                    result = target.result();
+                }
+            }
+        }
+        if (!result.isEmpty()){
+            inputs.clear();
+            inputs.add(focused);
+            outputs.clear();
+            outputs.add(result);
         }
     }
 

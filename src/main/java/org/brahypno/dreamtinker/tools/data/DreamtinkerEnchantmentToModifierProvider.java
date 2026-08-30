@@ -30,6 +30,8 @@ public class DreamtinkerEnchantmentToModifierProvider extends AbstractEnchantmen
 
         addOptional(new ResourceLocation("ars_nouveau", "reactive"), DreamtinkerModifiers.Ids.nova_reactive, true);
         addOptional(new ResourceLocation("goety", "soul_eater"), DreamtinkerModifiers.Ids.goety_soul_eater, true);
+        addOptional(new ResourceLocation("goety", "velocity"), DreamtinkerModifiers.Ids.goety_velocity, true);
+        addOptional(new ResourceLocation("goety", "radius"), DreamtinkerModifiers.Ids.goety_radius, true);
 
     }
 

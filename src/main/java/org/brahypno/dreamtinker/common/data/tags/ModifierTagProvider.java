@@ -50,7 +50,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
         this.tag(TinkerTags.Modifiers.MELEE_UPGRADES)
             .add(born_with_me.getId())
             .addOptional(Ids.malum_haunted, Ids.malum_animated, Ids.bic_frostbitten, Ids.bic_intoxicating,
-                         Ids.goety_death_scythe);
+                         Ids.goety_death_scythe, Ids.goety_blade_of_ender, Ids.goety_velocity, Ids.goety_radius, Ids.goety_soul_eater);
         this.tag(TinkerTags.Modifiers.RANGED_UPGRADES)
             .add(Ids.icy_memory, Ids.hate_memory, Ids.soul_core, Ids.wrath, Ids.torrent);
         this.tag(TinkerTags.Modifiers.GENERAL_UPGRADES)
@@ -121,7 +121,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             .add(Ids.weapon_dreams_order, Ids.weapon_dreams_filter);
         this.tag(EsotericismTinkerTagKeys.Modifiers.MELEE_DELUSIONS)
             .add(born_with_me.getId())
-            .addOptional(weapon_books.getId(), Ids.goety_death_scythe);
+            .addOptional(weapon_books.getId(), Ids.goety_death_scythe, Ids.goety_blade_of_ender);
         this.tag(EsotericismTinkerTagKeys.Modifiers.DAMAGE_DELUSIONS)
             .add(Ids.all_slayer, Ids.the_romantic);
         this.tag(EsotericismTinkerTagKeys.Modifiers.HARVEST_DELUSIONS)

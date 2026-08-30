@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:goety_soul_eater",
+  "text": [
+    {
+      "text": "Counts as Goety's Soul Eater enchantment at the same level. Higher levels increase the amount of soul energy gained."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/melee",
+  "effects": [
+    "Requires 1 upgrade slot per level",
+    "Maximum of 5 levels"
+  ]
+}

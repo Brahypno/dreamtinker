@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:goety_radius",
+  "text": [
+    {
+      "text": "Each level adds 0.25 to the Blade of Ender's void-slash radius and offsets part of Velocity's size reduction."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/melee/sword",
+  "effects": [
+    "Requires 1 upgrade slot per level",
+    "Maximum of 2 levels"
+  ]
+}

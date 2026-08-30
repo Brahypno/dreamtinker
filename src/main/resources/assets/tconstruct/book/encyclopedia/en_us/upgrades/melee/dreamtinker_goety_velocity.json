@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:goety_velocity",
+  "text": [
+    {
+      "text": "Each level increases the Blade of Ender's void-slash speed by one third, greatly extending its travel distance during the fixed 0.5-second lifetime, but reducing its size."
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/melee/sword",
+  "effects": [
+    "Requires 1 upgrade slot per level",
+    "Maximum of 5 levels"
+  ]
+}

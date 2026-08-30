@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:goety_soul_eater",
+  "text": [
+    {
+      "text": "视为同等级的 Goety 噬魂附魔。等级越高，获得的灵魂能量越多。"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/melee",
+  "effects": [
+    "每级需要1个升级槽",
+    "最高5级"
+  ]
+}

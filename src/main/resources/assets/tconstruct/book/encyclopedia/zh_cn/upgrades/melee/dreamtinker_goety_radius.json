@@ -1,0 +1,13 @@
+{
+  "modifier_id": "dreamtinker:goety_radius",
+  "text": [
+    {
+      "text": "每级使末影之刃虚空剑气的半径增加0.25，并可抵消高速造成的部分体积缩减。"
+    }
+  ],
+  "tool_filter": "tconstruct:modifiable/melee/sword",
+  "effects": [
+    "每级需要1个升级槽",
+    "最高2级"
+  ]
+}
