@@ -18,6 +18,7 @@
     "compat.goety.DarkAltarBlockEntityMixin",
     "compat.goety.ScytheSlashMixin",
     "compat.goety.SEHelperMixin",
+    "compat.goety.SwordProjectileMixin",
     "compat.legendary_monsters.LMannLeggingsMixin",
     "compat.malum.EdgeOfDeliveranceItemMixin",
     "compat.malum.HiddenTagRegistryMixin",

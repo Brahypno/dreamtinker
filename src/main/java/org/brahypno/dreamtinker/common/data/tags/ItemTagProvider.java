@@ -79,6 +79,7 @@ public class ItemTagProvider extends ItemTagsProvider {
         this.tag(ItemTagRegistry.SCYTHE).addTags(Items.dt_scythe);
         this.tag(Items.modTag("goety:grave_glove_boost"))
             .add(TinkerTools.scythe.asItem(), TinkerTools.kama.asItem(), DreamtinkerTools.narcissus_wing.asItem());
+        this.tag(Items.GOETY_MAGIC_SWORD_SHOOTABLE).addTag(SWORD);
         this.tag(Items.modTag("goety:thrash_glove_boost"))
             .addTags(Items.dt_hammer);
         this.tag(Items.modTag("goetyawaken", "dauntless_glove_boost"))
