@@ -38,6 +38,16 @@ public class DreamtinkerClientConfig {
             builder.comment("Refresh interval while the player remains in the same block. Movement refreshes immediately.")
                    .defineInRange("stationaryRefreshTicks", 40, 5, 200);
 
+    static {
+        builder.pop();
+        builder.push("Trail Performance");
+    }
+
+    public static final ForgeConfigSpec.BooleanValue TRAIL_DISTANCE_LOD =
+            builder.comment(
+                           "Use every second/fourth trail point beyond 32/64 blocks. Keeps endpoints and all visual layers. Disable for full detail at every distance.")
+                   .define("distanceLod", true);
+
     public static final ForgeConfigSpec specs = builder.pop().build();
 
 }

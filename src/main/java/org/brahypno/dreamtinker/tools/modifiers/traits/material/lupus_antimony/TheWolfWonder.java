@@ -101,7 +101,7 @@ public class TheWolfWonder extends Modifier implements ProjectileHitModifierHook
                 continue;
             // 随机持续时长与等级
             int duration = minDuration + rand.nextInt(Math.max(1, maxDuration - minDuration + 1));
-            int amplifier = rand.nextInt(TheWolfWonderEffectAmplifier.get());
+            int amplifier = rand.nextInt(Math.max(1, TheWolfWonderEffectAmplifier.get()));
             try {
                 MobEffectInstance inst = new MobEffectInstance(effect, duration, amplifier, false, true);
                 DTForcedEffectKeys.forceAddAndRecordKey(

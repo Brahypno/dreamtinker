@@ -52,6 +52,8 @@ public class StrongHeavy extends Modifier implements InventoryTickModifierHook {
     }
 
     private boolean isAllowedVehicle(Player player, Snapshot last) {
+        if (last == null)
+            return false;
         Entity carrier = player.getRootVehicle();
         if (player.getRootVehicle().isAlive() && !carrier.equals(player)){
             long dt = Math.max(1, player.level().getGameTime() - last.tick());

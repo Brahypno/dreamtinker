@@ -15,10 +15,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.event.VanillaGameEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.living.LivingHealEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.living.ShieldBlockEvent;
+import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -366,8 +364,48 @@ public class EdictSeriesEvents {
         if (mul <= 1.0f)
             return;
 
-        event.setAmount(event.getAmount() * mul);
+        event.setAmount(NextHitBonusHelper.multiplyFinite(event.getAmount(), mul));
         NextHitBonusHelper.clear(player);
+    }
+
+    @SubscribeEvent
+    public static void onEdictAdded(MobEffectEvent.Added event) {
+        if (event.getEntity() instanceof ServerPlayer player){
+            NextHitSource source = NextHitBonusHelper.sourceForEffect(event.getEffectInstance().getEffect());
+            if (source != null){
+                if (event.getOldEffectInstance() == null){
+                    // A new effect lifetime must not revive a bonus saved by an earlier lifetime.
+                    NextHitBonusHelper.clearSource(player, source);
+                }else {
+                    // Refreshing a still-active effect retains legitimate stacks, but compacts old NBT.
+                    NextHitBonusHelper.peekCombinedMultiplier(player);
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void onEdictRemoved(MobEffectEvent.Remove event) {
+        if (!event.isCanceled() && event.getEntity() instanceof ServerPlayer player){
+            NextHitSource source = NextHitBonusHelper.sourceForEffect(event.getEffect());
+            if (source != null)
+                NextHitBonusHelper.clearSource(player, source);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onEdictExpired(MobEffectEvent.Expired event) {
+        if (event.getEffectInstance() != null && event.getEntity() instanceof ServerPlayer player){
+            NextHitSource source = NextHitBonusHelper.sourceForEffect(event.getEffectInstance().getEffect());
+            if (source != null)
+                NextHitBonusHelper.clearSource(player, source);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onEdictPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
+        if (event.getEntity() instanceof ServerPlayer player)
+            NextHitBonusHelper.peekCombinedMultiplier(player);
     }
 
     public enum NextHitSource {
@@ -398,6 +436,7 @@ public class EdictSeriesEvents {
 
     public static final class NextHitBonusHelper {
         private static final String ROOT = "dreamtinker_next_hit";
+        // Legacy fields are only read once during migration; new NBT has at most five float entries.
         private static final String LIST = "entries";
 
         private static final String KEY_MUL = "mul";
@@ -418,19 +457,12 @@ public class EdictSeriesEvents {
         private NextHitBonusHelper() {}
 
         public static void push(ServerPlayer player, float multiplier, NextHitSource source) {
-            if (multiplier <= 1.0f || source == null)
+            if (!validMultiplier(multiplier) || source == null || !sourceStillActive(player, source))
                 return;
 
-            CompoundTag root = getOrCreateRoot(player);
-            ListTag list = getOrCreateEntryList(root);
-
-            CompoundTag entry = new CompoundTag();
-            entry.putFloat(KEY_MUL, multiplier);
-            entry.putString(KEY_SOURCE, source.id());
-
-            list.add(entry);
-            root.put(LIST, list);
-            player.getPersistentData().put(ROOT, root);
+            CompoundTag bonuses = readBonuses(player);
+            merge(bonuses, source, multiplier);
+            storeBonuses(player, bonuses);
         }
 
         /**
@@ -458,76 +490,84 @@ public class EdictSeriesEvents {
         }
 
         private static float collect(ServerPlayer player, boolean consumeValidEntries) {
-            CompoundTag data = player.getPersistentData();
-            if (!data.contains(ROOT, Tag.TAG_COMPOUND))
-                return 1.0f;
-
-            CompoundTag root = data.getCompound(ROOT);
-            if (!root.contains(LIST, Tag.TAG_LIST)){
-                data.remove(ROOT);
-                return 1.0f;
-            }
-
-            ListTag oldList = root.getList(LIST, Tag.TAG_COMPOUND);
-            if (oldList.isEmpty()){
-                data.remove(ROOT);
-                return 1.0f;
-            }
-
+            CompoundTag bonuses = readBonuses(player);
             float combined = 1.0f;
-            ListTag keptList = new ListTag();
-
-            for (int i = 0; i < oldList.size(); i++) {
-                CompoundTag entry = oldList.getCompound(i);
-
-                if (!entry.contains(KEY_MUL, Tag.TAG_FLOAT) || !entry.contains(KEY_SOURCE, Tag.TAG_STRING)){
-                    continue;
-                }
-
-                float mul = entry.getFloat(KEY_MUL);
-                if (mul <= 1.0f){
-                    continue;
-                }
-
-                NextHitSource source = NextHitSource.byId(entry.getString(KEY_SOURCE));
-                if (source == null){
-                    continue;
-                }
-
-                if (!sourceStillActive(player, source)){
-                    continue;
-                }
-
-                combined *= mul;
-
-                // peek 时保留有效项；pop 时消费有效项
-                if (!consumeValidEntries){
-                    keptList.add(entry.copy());
-                }
+            for (NextHitSource source : EFFECTS.keySet()) {
+                float multiplier = bonuses.getFloat(source.id());
+                if (validMultiplier(multiplier))
+                    combined = multiplyFinite(combined, multiplier);
             }
-
-            if (keptList.isEmpty()){
-                data.remove(ROOT);
+            if (consumeValidEntries){
+                clear(player);
             }else {
-                root.put(LIST, keptList);
-                data.put(ROOT, root);
+                storeBonuses(player, bonuses);
             }
-
             return combined;
         }
 
+        private static boolean validMultiplier(float multiplier) {
+            return Float.isFinite(multiplier) && multiplier > 1.0f;
+        }
+
+        private static float multiplyFinite(float first, float second) {
+            return (float) Math.min((double) first * second, Float.MAX_VALUE);
+        }
+
+        private static void merge(CompoundTag bonuses, NextHitSource source, float multiplier) {
+            float previous = bonuses.getFloat(source.id());
+            bonuses.putFloat(source.id(), multiplyFinite(validMultiplier(previous) ? previous : 1.0f, multiplier));
+        }
+
+        private static NextHitSource sourceForEffect(MobEffect effect) {
+            for (Map.Entry<NextHitSource, Supplier<MobEffect>> entry : EFFECTS.entrySet()) {
+                if (entry.getValue().get() == effect)
+                    return entry.getKey();
+            }
+            return null;
+        }
+
+        private static void clearSource(ServerPlayer player, NextHitSource source) {
+            CompoundTag bonuses = readBonuses(player);
+            bonuses.remove(source.id());
+            storeBonuses(player, bonuses);
+        }
+
         private static boolean sourceStillActive(ServerPlayer player, NextHitSource source) {
-            Supplier<net.minecraft.world.effect.MobEffect> supplier = EFFECTS.get(source);
+            Supplier<MobEffect> supplier = EFFECTS.get(source);
             return supplier != null && player.hasEffect(supplier.get());
         }
 
-        private static CompoundTag getOrCreateRoot(ServerPlayer player) {
+        private static CompoundTag readBonuses(ServerPlayer player) {
             CompoundTag data = player.getPersistentData();
-            return data.contains(ROOT, Tag.TAG_COMPOUND) ? data.getCompound(ROOT) : new CompoundTag();
+            CompoundTag bonuses = new CompoundTag();
+            if (!data.contains(ROOT, Tag.TAG_COMPOUND))
+                return bonuses;
+
+            CompoundTag root = data.getCompound(ROOT);
+            for (NextHitSource source : EFFECTS.keySet()) {
+                float multiplier = root.getFloat(source.id());
+                if (validMultiplier(multiplier) && sourceStillActive(player, source))
+                    bonuses.putFloat(source.id(), multiplier);
+            }
+
+            // Preserve valid bonuses from old saves without retaining the unbounded per-trigger list.
+            ListTag entries = root.getList(LIST, Tag.TAG_COMPOUND);
+            for (int i = 0; i < entries.size(); i++) {
+                CompoundTag entry = entries.getCompound(i);
+                NextHitSource source = NextHitSource.byId(entry.getString(KEY_SOURCE));
+                float multiplier = entry.getFloat(KEY_MUL);
+                if (source != null && validMultiplier(multiplier) && sourceStillActive(player, source))
+                    merge(bonuses, source, multiplier);
+            }
+            return bonuses;
         }
 
-        private static ListTag getOrCreateEntryList(CompoundTag root) {
-            return root.contains(LIST, Tag.TAG_LIST) ? root.getList(LIST, Tag.TAG_COMPOUND) : new ListTag();
+        private static void storeBonuses(ServerPlayer player, CompoundTag bonuses) {
+            if (bonuses.isEmpty()){
+                clear(player);
+            }else {
+                player.getPersistentData().put(ROOT, bonuses);
+            }
         }
     }
 }

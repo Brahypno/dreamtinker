@@ -21,6 +21,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -63,6 +64,7 @@ import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 import javax.annotation.Nullable;
+import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.util.*;
 
@@ -99,6 +101,8 @@ public record AutoPureDaisyModule(float multiplier, InventoryModule input, Inven
     private static boolean initialized = false;
     private static boolean available = false;
     private static boolean built = false;
+    private static WeakReference<RecipeManager> cachedRecipeManager = new WeakReference<>(null);
+    private static List<?> daisyRecipes = List.of();
     private static boolean reloadListenerRegistered = false;
     private static Method MATCHES;
     private static Method GET_OUTPUT_STATE;
@@ -123,6 +127,8 @@ public record AutoPureDaisyModule(float multiplier, InventoryModule input, Inven
     private static synchronized void invalidateDaisyCache() {
         CACHE.clear();
         built = false;
+        cachedRecipeManager = new WeakReference<>(null);
+        daisyRecipes = List.of();
         initialized = false;
         available = false;
         MATCHES = null;
@@ -141,19 +147,26 @@ public record AutoPureDaisyModule(float multiplier, InventoryModule input, Inven
     }
 
     @Nullable
-    private static DaisyResult getDaisyResult(Level level, ItemStack stack) {
+    private static synchronized DaisyResult getDaisyResult(Level level, ItemStack stack) {
         if (!isBotaniaLoaded())
             return null;
         if (level == null || level.isClientSide || stack.isEmpty() || !(stack.getItem() instanceof BlockItem))
             return null;
-        if (!built)
+        if (!built || cachedRecipeManager.get() != level.getRecipeManager())
             rebuildDaisyCache(level);
-        return CACHE.get(stack.getItem());
+        Item item = stack.getItem();
+        if (CACHE.containsKey(item))
+            return CACHE.get(item);
+        DaisyResult result = findDaisyResult(level, (BlockItem) item);
+        CACHE.put(item, result); // Cache misses as well as matches.
+        return result;
     }
 
     private static void rebuildDaisyCache(Level level) {
         CACHE.clear();
         built = true;
+        daisyRecipes = List.of();
+        cachedRecipeManager = new WeakReference<>(level == null ? null : level.getRecipeManager());
 
         if (!isBotaniaLoaded())
             return;
@@ -164,32 +177,26 @@ public record AutoPureDaisyModule(float multiplier, InventoryModule input, Inven
         if (type == null)
             return;
 
-        List<?> recipes;
         try {
-            recipes = level.getRecipeManager().getAllRecipesFor((RecipeType) type);
+            daisyRecipes = List.copyOf(level.getRecipeManager().getAllRecipesFor((RecipeType) type));
         }
         catch (Throwable ignored) {
-            return;
         }
 
-        for (Object recipe : recipes) {
-            scanPureDaisyRecipe(level, recipe);
-        }
     }
 
-    private static void scanPureDaisyRecipe(Level level, Object recipe) {
-        for (Item item : BuiltInRegistries.ITEM) {
-            if (!(item instanceof BlockItem blockItem))
-                continue;
-
+    @Nullable
+    private static DaisyResult findDaisyResult(Level level, BlockItem blockItem) {
+        // The old cache was keyed by Block.asItem(), not every alias BlockItem.
+        if (blockItem.getBlock().asItem() != blockItem || blockItem == Items.AIR)
+            return null;
+        // Preserve recipe priority and state order, but only inspect the input
+        // actually present in the tool. No recipes x all items x all states scan.
+        for (Object recipe : daisyRecipes) {
             for (BlockState inputState : blockItem.getBlock().getStateDefinition().getPossibleStates()) {
                 try {
                     boolean matched = Boolean.TRUE.equals(MATCHES.invoke(recipe, level, DUMMY_POS, null, inputState));
                     if (!matched)
-                        continue;
-
-                    Item inputItem = inputState.getBlock().asItem();
-                    if (inputItem == Items.AIR)
                         continue;
 
                     BlockState outputState = (BlockState) GET_OUTPUT_STATE.invoke(recipe);
@@ -207,14 +214,14 @@ public record AutoPureDaisyModule(float multiplier, InventoryModule input, Inven
                             time = i;
                     }
 
-                    CACHE.putIfAbsent(inputItem, new DaisyResult(new ItemStack(outputItem), time));
-                    break;
+                    return new DaisyResult(new ItemStack(outputItem), time);
                 }
                 catch (Throwable ignored) {
                     // 特殊 Pure Daisy recipe 不适合工具内库存处理，直接跳过，保持兼容静默。
                 }
             }
         }
+        return null;
     }
 
     private static boolean initReflection() {

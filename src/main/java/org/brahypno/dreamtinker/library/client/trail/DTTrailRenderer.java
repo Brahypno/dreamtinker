@@ -9,7 +9,9 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import org.brahypno.dreamtinker.config.DreamtinkerClientConfig;
 import org.brahypno.dreamtinker.library.client.DTRenderTypes;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
@@ -25,6 +27,25 @@ public final class DTTrailRenderer {
 
     private DTTrailRenderer() {}
 
+    public record Layer(ResourceLocation texture, float halfWidth, float alphaMultiplier, int radialPlanes, float planeAlpha) {}
+
+    /**
+     * All layers share point interpolation, fade ages, LOD selection and frames.
+     */
+    public static void renderEntityTrailLayers(
+            PoseStack pose, MultiBufferSource buffer, Entity entity, float partialTicks,
+            DTClientTrail trail, int argb, Layer[] layers) {
+        Workspace workspace = WORKSPACE.get();
+        int count = prepare(workspace, trail, partialTicks);
+        if (count < 2)
+            return;
+        for (Layer layer : layers) {
+            fillStyle(workspace, count, layer.halfWidth(), layer.alphaMultiplier(), argb);
+            renderPrepared(pose, buffer, entity, partialTicks, workspace, count,
+                           layer.texture(), layer.radialPlanes(), layer.planeAlpha());
+        }
+    }
+
     public static void renderEntityTrail(
             PoseStack pose, MultiBufferSource buffer, Entity entity, float partialTicks,
             DTClientTrail trail, ResourceLocation texture, int argb, float halfWidth,
@@ -39,18 +60,41 @@ public final class DTTrailRenderer {
             PoseStack pose, MultiBufferSource buffer, Entity entity, float partialTicks,
             DTClientTrail trail, ResourceLocation texture, int argb, float halfWidth,
             float alphaMultiplier, int radialPlanes, float planeAlpha) {
-        List<DTClientTrail.Point> points = trail.points();
-        int count = points.size();
+        Workspace workspace = WORKSPACE.get();
+        int count = prepare(workspace, trail, partialTicks);
         if (count < 2)
             return;
+        fillStyle(workspace, count, halfWidth, alphaMultiplier, argb);
+        renderPrepared(pose, buffer, entity, partialTicks, workspace, count, texture, radialPlanes, planeAlpha);
+    }
 
-        Workspace workspace = WORKSPACE.get();
-        workspace.ensureCapacity(count);
-        fillPoints(workspace, points, count, partialTicks, trail, halfWidth, alphaMultiplier, argb);
-
+    private static int prepare(Workspace workspace, DTClientTrail trail, float partialTicks) {
+        List<DTClientTrail.Point> points = trail.points();
+        int originalCount = points.size();
+        if (originalCount < 2)
+            return 0;
         Vec3 camera = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
+        int step = sampleStep(trail.bounds(), camera);
+        int count = (originalCount - 2 + step) / step + 1;
+        workspace.ensureCapacity(count);
+        fillPoints(workspace, points, count, originalCount, step, partialTicks, trail);
         buildFrames(workspace, count, camera.x, camera.y, camera.z);
+        return count;
+    }
 
+    private static int sampleStep(AABB bounds, Vec3 camera) {
+        if (!DreamtinkerClientConfig.TRAIL_DISTANCE_LOD.get() || bounds == null)
+            return 1;
+        double dx = Math.max(0.0D, Math.max(bounds.minX - camera.x, camera.x - bounds.maxX));
+        double dy = Math.max(0.0D, Math.max(bounds.minY - camera.y, camera.y - bounds.maxY));
+        double dz = Math.max(0.0D, Math.max(bounds.minZ - camera.z, camera.z - bounds.maxZ));
+        double distanceSqr = dx * dx + dy * dy + dz * dz;
+        return distanceSqr <= 32.0D * 32.0D ? 1 : distanceSqr <= 64.0D * 64.0D ? 2 : 4;
+    }
+
+    private static void renderPrepared(
+            PoseStack pose, MultiBufferSource buffer, Entity entity, float partialTicks,
+            Workspace workspace, int count, ResourceLocation texture, int radialPlanes, float planeAlpha) {
         double originX = Mth.lerp(partialTicks, entity.xo, entity.getX());
         double originY = Mth.lerp(partialTicks, entity.yo, entity.getY());
         double originZ = Mth.lerp(partialTicks, entity.zo, entity.getZ());
@@ -73,15 +117,19 @@ public final class DTTrailRenderer {
                 double dx = workspace.x[next] - workspace.x[i];
                 double dy = workspace.y[next] - workspace.y[i];
                 double dz = workspace.z[next] - workspace.z[i];
+                double cos1 = cos0;
+                double sin1 = sin0;
+                // Preserve twist and UV positions when intermediate samples are omitted.
+                for (int step = workspace.sampleIndex[i]; step < workspace.sampleIndex[next]; step++) {
+                    double nextCos = cos1 * TWIST_COS - sin1 * TWIST_SIN;
+                    sin1 = sin1 * TWIST_COS + cos1 * TWIST_SIN;
+                    cos1 = nextCos;
+                }
                 if (dx * dx + dy * dy + dz * dz < EPSILON){
-                    double nextCos = cos0 * TWIST_COS - sin0 * TWIST_SIN;
-                    sin0 = sin0 * TWIST_COS + cos0 * TWIST_SIN;
-                    cos0 = nextCos;
+                    sin0 = sin1;
+                    cos0 = cos1;
                     continue;
                 }
-
-                double cos1 = cos0 * TWIST_COS - sin0 * TWIST_SIN;
-                double sin1 = sin0 * TWIST_COS + cos0 * TWIST_SIN;
 
                 double side0X = (workspace.axisAX[i] * cos0 + workspace.axisBX[i] * sin0) * workspace.width[i];
                 double side0Y = (workspace.axisAY[i] * cos0 + workspace.axisBY[i] * sin0) * workspace.width[i];
@@ -92,8 +140,8 @@ public final class DTTrailRenderer {
 
                 int color0 = multiplyAlpha(workspace.color[i], planeAlpha);
                 int color1 = multiplyAlpha(workspace.color[next], planeAlpha);
-                float v0 = i / (float) (count - 1);
-                float v1 = next / (float) (count - 1);
+                float v0 = workspace.v[i];
+                float v1 = workspace.v[next];
                 drawSegment(
                         consumer, matrix, normal,
                         workspace.x[i], workspace.y[i], workspace.z[i],
@@ -111,17 +159,26 @@ public final class DTTrailRenderer {
     }
 
     private static void fillPoints(
-            Workspace workspace, List<DTClientTrail.Point> points, int count, float partialTicks,
-            DTClientTrail trail, float halfWidth, float alphaMultiplier, int argb) {
-        int color = normalizeArgb(argb, 0xFFFFFFFF);
+            Workspace workspace, List<DTClientTrail.Point> points, int count, int originalCount, int step,
+            float partialTicks, DTClientTrail trail) {
         for (int i = 0; i < count; i++) {
-            DTClientTrail.Point point = points.get(i);
+            int sourceIndex = Math.min(i * step, originalCount - 1);
+            DTClientTrail.Point point = points.get(sourceIndex);
+            workspace.sampleIndex[i] = sourceIndex;
+            workspace.v[i] = sourceIndex / (float) (originalCount - 1);
             workspace.x[i] = point.getX(partialTicks);
             workspace.y[i] = point.getY(partialTicks);
             workspace.z[i] = point.getZ(partialTicks);
-            float fade = 1.0F - Mth.clamp(
+            workspace.fade[i] = 1.0F - Mth.clamp(
                     (point.getAge() - partialTicks) / trail.lifespan(), 0.0F, 1.0F
             );
+        }
+    }
+
+    private static void fillStyle(Workspace workspace, int count, float halfWidth, float alphaMultiplier, int argb) {
+        int color = normalizeArgb(argb, 0xFFFFFFFF);
+        for (int i = 0; i < count; i++) {
+            float fade = workspace.fade[i];
             workspace.width[i] = halfWidth * fade;
             workspace.color[i] = multiplyAlpha(color, alphaMultiplier * fade * fade);
         }
@@ -254,6 +311,9 @@ public final class DTTrailRenderer {
         private double[] axisBZ = new double[32];
         private float[] width = new float[32];
         private int[] color = new int[32];
+        private float[] fade = new float[32];
+        private float[] v = new float[32];
+        private int[] sampleIndex = new int[32];
 
         private void ensureCapacity(int required) {
             if (required <= x.length)
@@ -272,6 +332,9 @@ public final class DTTrailRenderer {
             axisBZ = new double[capacity];
             width = new float[capacity];
             color = new int[capacity];
+            fade = new float[capacity];
+            v = new float[capacity];
+            sampleIndex = new int[capacity];
         }
     }
 

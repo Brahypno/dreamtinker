@@ -18,6 +18,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -89,7 +90,7 @@ public final class NarcissusFluidFeedbacks {
     private NarcissusFluidFeedbacks() {}
 
     public static void onProjectileHit(NarcissusFluidProjectile projectile, LivingEntity owner, Entity target, FluidStack fluid) {
-        if (owner.level().isClientSide || fluid.isEmpty()){
+        if (projectile.level().isClientSide || target.level() != projectile.level() || owner.isRemoved() || fluid.isEmpty()){
             return;
         }
         ResourceLocation id = ForgeRegistries.FLUIDS.getKey(fluid.getFluid());
@@ -98,8 +99,14 @@ public final class NarcissusFluidFeedbacks {
         }
         ResolvedFluidFeedback feedback = resolveFeedback(fluid.getFluid(), id);
         Mode mode = feedback.mode();
+        // Target-local splashes still work after the shooter changes dimension.
+        // All other modes mutate the shooter (cooldown, pending buffs, movement,
+        // healing, etc.) and require a local owner instead of acting remotely.
+        if (owner.level() != target.level() && mode != Mode.SLIME_SPLASH && mode != Mode.GLASS_SHATTER){
+            return;
+        }
         float quality = Mth.clamp(projectile.getPower(), 0.5f, 12.0f);
-        mode.apply(new Context(owner, target, fluid, id, feedback.category(), quality));
+        mode.apply(new Context(projectile, owner, target, fluid, id, feedback.category(), quality));
     }
 
     public static void registerOverride(ResourceLocation fluidId, String category, Mode mode) {
@@ -362,13 +369,22 @@ public final class NarcissusFluidFeedbacks {
     }
 
     private static void splash(Context context, float radius, float damage, MobEffect effect) {
+        Level impactLevel = context.target.level();
         AABB bounds = context.target.getBoundingBox().inflate(radius);
-        for (LivingEntity target : context.owner.level()
-                                                .getEntitiesOfClass(LivingEntity.class, bounds, entity -> entity != context.owner && entity.isAlive())) {
-            if (damage > 0){
-                target.hurt(context.owner.damageSources().indirectMagic(context.owner, context.owner), damage);
+        for (LivingEntity target : impactLevel.getEntitiesOfClass(
+                LivingEntity.class, bounds, entity -> entity != context.owner && entity.isAlive())) {
+            if (target.level() != impactLevel){
+                continue;
             }
-            target.addEffect(new MobEffectInstance(effect, duration(context.quality, 35, 90), 0));
+            if (damage > 0){
+                boolean localOwner = context.owner.level() == impactLevel;
+                DamageSource source = impactLevel.damageSources().indirectMagic(
+                        localOwner ? context.owner : context.projectile, localOwner ? context.owner : null);
+                target.hurt(source, damage);
+            }
+            if (target.level() == impactLevel){
+                target.addEffect(new MobEffectInstance(effect, duration(context.quality, 35, 90), 0));
+            }
         }
     }
 
@@ -588,7 +604,8 @@ public final class NarcissusFluidFeedbacks {
         }
     }
 
-    private record Context(LivingEntity owner, Entity target, FluidStack fluid, ResourceLocation fluidId, String category, float quality) {}
+    private record Context(NarcissusFluidProjectile projectile, LivingEntity owner, Entity target, FluidStack fluid,
+                           ResourceLocation fluidId, String category, float quality) {}
 
     public record ResolvedFluidFeedback(String category, Mode mode) {
         public ResolvedFluidFeedback {

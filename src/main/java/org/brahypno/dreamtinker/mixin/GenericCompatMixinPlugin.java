@@ -10,6 +10,8 @@ import java.util.*;
 
 public class GenericCompatMixinPlugin implements IMixinConfigPlugin {
     private static final String COMPAT_SEGMENT = ".compat.";
+    private static final String ARS_JEI_MIXIN =
+            "org.brahypno.dreamtinker.mixin.compat.ars_nouveau.ArmorUpgradeRecipeCategoryMixin";
 
     private final Map<String, Boolean> cache = new HashMap<>();
     private Set<String> loadedModIds = Collections.emptySet();
@@ -63,7 +65,9 @@ public class GenericCompatMixinPlugin implements IMixinConfigPlugin {
         if (modid == null)
             return true;
 
-        return cache.computeIfAbsent(mixinClassName, ignored -> loadedModIds.contains(modid) && hasClassResource(targetClassName));
+        return cache.computeIfAbsent(mixinClassName, ignored -> loadedModIds.contains(modid)
+                                                                && (!ARS_JEI_MIXIN.equals(mixinClassName) || loadedModIds.contains("jei"))
+                                                                && hasClassResource(targetClassName));
     }
 
     @Override

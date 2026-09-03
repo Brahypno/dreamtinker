@@ -91,7 +91,8 @@ public class DreamtinkerConfig {
 
     public static final ForgeConfigSpec.IntValue ProjLimit =
             builder.comment(
-                           "Numbers of dangling projectile allowed when shooting. This is aim to reduce cases like Dragon fire Ball stay still in air and cause system lagging")
+                           "Cleanup threshold for stalled projectiles within 32 blocks of the shooter (AABB), regardless of origin or owner. " +
+                           "Only projectiles at least 20 ticks old count; 0 cleans every eligible projectile when shooting.")
                    .defineInRange("ProjLimit", 9, 0, 1000);
 
     static {builder.comment("Moonlight Ice: ");}
@@ -266,4 +267,3 @@ public class DreamtinkerConfig {
         return s != null && s.indexOf(':') > 0 && !s.contains(" ");
     }
 }
-

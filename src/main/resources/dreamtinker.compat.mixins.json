@@ -5,8 +5,6 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "dreamtinker.refmap.json",
   "mixins": [
-    "compat.ars_nouveau.AlterationTableRendererMixin",
-    "compat.ars_nouveau.ArmorUpgradeRecipeCategoryMixin",
     "compat.ars_nouveau.AugmentCompatibilityValidatorMixin",
     "compat.ars_nouveau.EntityMeltingModuleMixin",
     "compat.ars_nouveau.MethodProjectileMixin",
@@ -25,7 +23,10 @@
     "compat.malum.SpiritInfusionRecipeBuilderAccessor",
     "compat.malum.SpiritInfusionRecipeBuilderResultMixin"
   ],
-  "client": [],
+  "client": [
+    "compat.ars_nouveau.AlterationTableRendererMixin",
+    "compat.ars_nouveau.ArmorUpgradeRecipeCategoryMixin"
+  ],
   "injectors": {
     "defaultRequire": 0
   }

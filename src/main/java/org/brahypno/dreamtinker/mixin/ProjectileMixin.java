@@ -7,7 +7,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import org.brahypno.dreamtinker.utils.ProjectileTargetTracing;
 import org.brahypno.dreamtinker.utils.TargetTracker;
-import org.brahypno.dreamtinker.utils.DTHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -106,7 +105,6 @@ public abstract class ProjectileMixin extends Entity implements TargetTracker {
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void dreamtinker$moveTowardsTarget(CallbackInfo ci) {
-        DTHelper.trackProjectileTick((Projectile) (Object) this);
         if ((dreamtinker$targetMode != null || dreamtinker$trackedTargetId >= 0) && !onGround()){
             ProjectileTargetTracing.moveTowardsTarget(this);
         }

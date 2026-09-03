@@ -19,6 +19,10 @@ import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 @OnlyIn(Dist.CLIENT)
 public class SlashOrbitRenderer extends EntityRenderer<SlashOrbitEntity> {
     private static final ResourceLocation TEX =
@@ -44,6 +48,10 @@ public class SlashOrbitRenderer extends EntityRenderer<SlashOrbitEntity> {
     private static final int MAX_RADIAL_U_SLICES = 16;
     private static final int MAX_RADIAL_V_SLICES = 4;
     private static final int MAX_INNER_LAYERS = 8;
+    private static final MeshLod NEAR_LOD = new MeshLod(16, 16, 4, MAX_INNER_LAYERS);
+    private static final MeshLod MEDIUM_LOD = new MeshLod(8, 8, 2, 4);
+    private static final MeshLod FAR_LOD = new MeshLod(4, 4, 1, 2);
+    private static final int MAX_CACHED_GRADIENTS = 64;
 
     private static final int RADIAL_STRIDE = MAX_RADIAL_V_SLICES + 1;
     private static final float[] RADIAL_T =
@@ -56,7 +64,9 @@ public class SlashOrbitRenderer extends EntityRenderer<SlashOrbitEntity> {
     private final int[] angularColors = new int[MAX_ANGULAR_SLICES + 1];
     private final int[] radialColors =
             new int[(MAX_RADIAL_U_SLICES + 1) * RADIAL_STRIDE];
+    private final Map<GradientKey, int[]> gradientCache = new LinkedHashMap<>(16, 0.75F, true);
 
+    private boolean mixerReady;
     private int mixColorA;
     private int mixColorB;
     private boolean mixHsv;
@@ -97,12 +107,12 @@ public class SlashOrbitRenderer extends EntityRenderer<SlashOrbitEntity> {
 
         SlashOrbitEntity.GradMode mode = entity.gradMode();
         float hueRoll = entity.hueShiftSpd() * age;
-        if (mode == SlashOrbitEntity.GradMode.ANGULAR
-            || mode == SlashOrbitEntity.GradMode.LENGTH){
-            prepareAngularColors(mode, hueRoll);
-        }else if (mode == SlashOrbitEntity.GradMode.RADIAL){
-            prepareRadialColors(hueRoll);
+        if (mode == SlashOrbitEntity.GradMode.ANGULAR || mode == SlashOrbitEntity.GradMode.LENGTH
+            || mode == SlashOrbitEntity.GradMode.RADIAL){
+            prepareGradientColors(mode, hueRoll, lod,
+                                  mode == SlashOrbitEntity.GradMode.LENGTH || entity.hueShiftSpd() == 0.0F);
         }
+        int solidColor = mode == SlashOrbitEntity.GradMode.TIME_RAINBOW ? mixPrepared(wrap01(hueRoll)) : mixColorA;
 
         poseStack.pushPose();
         poseStack.mulPose(Axis.XP.rotationDegrees(-6f));
@@ -121,11 +131,8 @@ public class SlashOrbitRenderer extends EntityRenderer<SlashOrbitEntity> {
             float scale = layerRadius / R_MID_UV;
 
             switch (mode) {
-                case SOLID -> renderSolidLayer(
-                        consumer, pose, normal, scale, mixColorA, fade);
-                case TIME_RAINBOW -> renderSolidLayer(
-                        consumer, pose, normal, scale,
-                        mixPrepared(wrap01(hueRoll)), fade);
+                case SOLID, TIME_RAINBOW -> renderSolidLayer(
+                        consumer, pose, normal, scale, solidColor, fade);
                 case ANGULAR, LENGTH -> renderAngularLayer(
                         consumer, pose, normal, scale, fade, lod.angularSlices());
                 case RADIAL -> renderRadialLayer(
@@ -151,17 +158,39 @@ public class SlashOrbitRenderer extends EntityRenderer<SlashOrbitEntity> {
 
     private static MeshLod selectLod(double distanceSqr) {
         if (distanceSqr <= 16.0D * 16.0D){
-            return new MeshLod(16, 16, 4, MAX_INNER_LAYERS);
+            return NEAR_LOD;
         }
         if (distanceSqr <= 32.0D * 32.0D){
-            return new MeshLod(8, 8, 2, 4);
+            return MEDIUM_LOD;
         }
-        return new MeshLod(4, 4, 1, 2);
+        return FAR_LOD;
+    }
+
+    private void prepareGradientColors(SlashOrbitEntity.GradMode mode, float hueRoll, MeshLod lod, boolean cacheable) {
+        int[] output = mode == SlashOrbitEntity.GradMode.RADIAL ? radialColors : angularColors;
+        GradientKey key = cacheable ? new GradientKey(mixColorA, mixColorB, mixHsv, mode, lod) : null;
+        int[] cached = key == null ? null : gradientCache.get(key);
+        if (cached != null){
+            System.arraycopy(cached, 0, output, 0, output.length);
+            return;
+        }
+        if (mode == SlashOrbitEntity.GradMode.RADIAL){
+            prepareRadialColors(hueRoll, lod.radialUSlices(), lod.radialVSlices());
+        }else {
+            prepareAngularColors(mode, hueRoll, lod.angularSlices());
+        }
+        if (key != null){
+            if (gradientCache.size() >= MAX_CACHED_GRADIENTS){
+                gradientCache.remove(gradientCache.keySet().iterator().next());
+            }
+            gradientCache.put(key, Arrays.copyOf(output, output.length));
+        }
     }
 
     private void prepareAngularColors(
-            SlashOrbitEntity.GradMode mode, float hueRoll) {
-        for (int i = 0; i <= MAX_ANGULAR_SLICES; i++) {
+            SlashOrbitEntity.GradMode mode, float hueRoll, int slices) {
+        int step = MAX_ANGULAR_SLICES / slices;
+        for (int i = 0; i <= MAX_ANGULAR_SLICES; i += step) {
             float alongArc = (float) i / MAX_ANGULAR_SLICES;
             float gradient = mode == SlashOrbitEntity.GradMode.ANGULAR
                              ? wrap01(alongArc + hueRoll)
@@ -170,9 +199,14 @@ public class SlashOrbitRenderer extends EntityRenderer<SlashOrbitEntity> {
         }
     }
 
-    private void prepareRadialColors(float hueRoll) {
-        for (int i = 0; i < RADIAL_T.length; i++) {
-            radialColors[i] = mixPrepared(wrap01(RADIAL_T[i] + hueRoll));
+    private void prepareRadialColors(float hueRoll, int uSlices, int vSlices) {
+        int uStep = MAX_RADIAL_U_SLICES / uSlices;
+        int vStep = MAX_RADIAL_V_SLICES / vSlices;
+        for (int u = 0; u <= MAX_RADIAL_U_SLICES; u += uStep) {
+            for (int v = 0; v <= MAX_RADIAL_V_SLICES; v += vStep) {
+                int index = radialIndex(u, v);
+                radialColors[index] = mixPrepared(wrap01(RADIAL_T[index] + hueRoll));
+            }
         }
     }
 
@@ -300,9 +334,14 @@ public class SlashOrbitRenderer extends EntityRenderer<SlashOrbitEntity> {
     }
 
     private void prepareColorMixer(int colorA, int colorB, boolean hsv) {
+        boolean useHsv = hsv && colorA != colorB;
+        if (mixerReady && mixColorA == colorA && mixColorB == colorB && mixHsv == useHsv){
+            return;
+        }
+        mixerReady = true;
         mixColorA = colorA;
         mixColorB = colorB;
-        mixHsv = hsv && colorA != colorB;
+        mixHsv = useHsv;
 
         if (mixHsv){
             decodeHsv(colorA, true);
@@ -449,4 +488,6 @@ public class SlashOrbitRenderer extends EntityRenderer<SlashOrbitEntity> {
      * 32*8*16 = 4096; medium/far entities become progressively cheaper.
      */
     private record MeshLod(int angularSlices, int radialUSlices, int radialVSlices, int maxLayers) {}
+
+    private record GradientKey(int colorA, int colorB, boolean hsv, SlashOrbitEntity.GradMode mode, MeshLod lod) {}
 }

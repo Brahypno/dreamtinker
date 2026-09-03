@@ -27,11 +27,7 @@ import slimeknights.tconstruct.library.tools.stat.ModifierStatsBuilder;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.brahypno.dreamtinker.config.DreamtinkerConfig.BurnInVainInAccuracy;
 import static org.brahypno.dreamtinker.config.DreamtinkerConfig.BurnInVainRandomProj;
@@ -62,7 +58,7 @@ public class BurningInVain extends Modifier implements ProjectileLaunchModifierH
             return;
 
         ServerLevel world = (ServerLevel) shooter.level();
-        DTHelper.clearProjectile(world, shooter.getX(), shooter.getZ());
+        DTHelper.clearProjectile(world, shooter);
 
         if (!BurnInVainRandomProj.get())
             return;

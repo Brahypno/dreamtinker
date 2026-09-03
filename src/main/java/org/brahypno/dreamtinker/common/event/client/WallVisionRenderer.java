@@ -1,23 +1,26 @@
 package org.brahypno.dreamtinker.common.event.client;
 
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.*;
+import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.LevelRenderer;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.SectionPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.chunk.ChunkStatus;
+import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -25,16 +28,17 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
+import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
+import net.minecraftforge.event.TagsUpdatedEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.config.DreamtinkerClientConfig;
+import org.joml.Matrix4f;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Mod.EventBusSubscriber(
         value = Dist.CLIENT,
@@ -68,6 +72,13 @@ public class WallVisionRenderer {
      * 而不是 clear() 后永久保留历史最大容量。
      */
     private static List<HighlightedBlock> highlightCache = List.of();
+    private static Map<Long, SectionMesh> meshCache = Map.of();
+    private static List<HighlightedBlock> meshSource;
+    private static int meshSourceSize;
+    private static BufferBuilder meshBuilder;
+    private static final PoseStack IDENTITY_POSE = new PoseStack();
+    private static final Matrix4f FRAME_MATRIX = new Matrix4f();
+    private static final Matrix4f SECTION_MATRIX = new Matrix4f();
 
     private static Level cachedLevel;
     private static BlockPos cachedCenter;
@@ -135,6 +146,7 @@ public class WallVisionRenderer {
 
         List<HighlightedBlock> snapshot = highlightCache;
         if (snapshot.isEmpty()){
+            releaseMeshes();
             return;
         }
 
@@ -146,39 +158,49 @@ public class WallVisionRenderer {
             return;
         }
 
-        // RenderLevelStageEvent already exposes the mutable pose stack used for this stage.
-        PoseStack poseStack = event.getPoseStack();
         Camera camera = event.getCamera();
         Vec3 camPos = camera.getPosition();
+        syncMeshes(snapshot);
 
-        MultiBufferSource.BufferSource buffer = mc.renderBuffers().bufferSource();
-        VertexConsumer builder = buffer.getBuffer(ModRenderTypes.WALL_VISION_LINES);
-
-        poseStack.pushPose();
-        poseStack.translate(
-                -camPos.x(),
-                -camPos.y(),
-                -camPos.z()
-        );
-
-        for (HighlightedBlock block : snapshot) {
-            if (!event.getFrustum().isVisible(block.bounds())){
-                continue;
+        ModRenderTypes.WALL_VISION_LINES.setupRenderState();
+        try {
+            FRAME_MATRIX.set(RenderSystem.getModelViewMatrix()).mul(event.getPoseStack().last().pose());
+            for (SectionMesh mesh : meshCache.values()) {
+                if (!event.getFrustum().isVisible(mesh.bounds)){
+                    continue;
+                }
+                mesh.uploadIfDirty();
+                SECTION_MATRIX.set(FRAME_MATRIX).translate(
+                        (float) (mesh.x - camPos.x), (float) (mesh.y - camPos.y), (float) (mesh.z - camPos.z));
+                mesh.buffer.bind();
+                mesh.buffer.drawWithShader(SECTION_MATRIX, event.getProjectionMatrix(), RenderSystem.getShader());
             }
-            renderHighlightedBlock(
-                    poseStack,
-                    builder,
-                    block
-            );
         }
-
-        poseStack.popPose();
-        buffer.endBatch(ModRenderTypes.WALL_VISION_LINES);
+        finally {
+            VertexBuffer.unbind();
+            ModRenderTypes.WALL_VISION_LINES.clearRenderState();
+        }
     }
 
     @SubscribeEvent
     public static void onClientLogout(ClientPlayerNetworkEvent.LoggingOut event) {
         resetClientState();
+    }
+
+    @SubscribeEvent
+    public static void onTagsUpdated(TagsUpdatedEvent event) {
+        if (event.getUpdateCause() == TagsUpdatedEvent.UpdateCause.CLIENT_PACKET_RECEIVED){
+            Minecraft.getInstance().execute(WallVisionRenderer::invalidateRenderCache);
+        }
+    }
+
+    @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = Dreamtinker.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static final class ReloadEvents {
+        @SubscribeEvent
+        public static void registerReloadListener(RegisterClientReloadListenersEvent event) {
+            event.registerReloadListener((ResourceManagerReloadListener) manager ->
+                    Minecraft.getInstance().execute(WallVisionRenderer::invalidateRenderCache));
+        }
     }
 
     private static void updateHighlightCache(
@@ -254,6 +276,7 @@ public class WallVisionRenderer {
          * 在没有其他引用时可以正常回收。
          */
         highlightCache = List.of();
+        releaseMeshes();
         activeScan = null;
 
         cachedLevel = level;
@@ -278,28 +301,54 @@ public class WallVisionRenderer {
         return gameTime >= nextRefreshTick;
     }
 
-    private static void renderHighlightedBlock(
-            PoseStack poseStack,
-            VertexConsumer builder,
-            HighlightedBlock block
-    ) {
-        block.shape().forAllBoxes(
-                (minX, minY, minZ, maxX, maxY, maxZ) ->
-                        LevelRenderer.renderLineBox(
-                                poseStack,
-                                builder,
-                                block.x() + minX,
-                                block.y() + minY,
-                                block.z() + minZ,
-                                block.x() + maxX,
-                                block.y() + maxY,
-                                block.z() + maxZ,
-                                0.1F,
-                                0.8F,
-                                1.0F,
-                                1.0F
-                        )
-        );
+    private static long sectionKey(HighlightedBlock block) {
+        return SectionPos.asLong(block.x() >> 4, block.y() >> 4, block.z() >> 4);
+    }
+
+    private static void syncMeshes(List<HighlightedBlock> snapshot) {
+        if (meshSource != snapshot){
+            Map<Long, List<HighlightedBlock>> grouped = new LinkedHashMap<>();
+            for (HighlightedBlock block : snapshot) {
+                grouped.computeIfAbsent(sectionKey(block), key -> new ArrayList<>()).add(block);
+            }
+            Map<Long, SectionMesh> previous = new HashMap<>(meshCache);
+            Map<Long, SectionMesh> next = new LinkedHashMap<>();
+            for (Map.Entry<Long, List<HighlightedBlock>> entry : grouped.entrySet()) {
+                SectionMesh mesh = previous.remove(entry.getKey());
+                if (mesh == null || !mesh.blocks.equals(entry.getValue())){
+                    if (mesh != null)
+                        mesh.close();
+                    mesh = new SectionMesh(entry.getValue());
+                }
+                next.put(entry.getKey(), mesh);
+            }
+            previous.values().forEach(SectionMesh::close);
+            meshCache = next;
+            meshSource = snapshot;
+            meshSourceSize = snapshot.size();
+        }else if (meshSourceSize < snapshot.size()){
+            // Initial progressive scan: append only new results to affected sections.
+            for (int i = meshSourceSize; i < snapshot.size(); i++) {
+                HighlightedBlock block = snapshot.get(i);
+                long key = sectionKey(block);
+                SectionMesh mesh = meshCache.get(key);
+                if (mesh == null){
+                    mesh = new SectionMesh(new ArrayList<>(List.of(block)));
+                    meshCache.put(key, mesh);
+                }else {
+                    mesh.add(block);
+                }
+            }
+            meshSourceSize = snapshot.size();
+        }
+    }
+
+    private static void releaseMeshes() {
+        meshCache.values().forEach(SectionMesh::close);
+        meshCache = Map.of();
+        meshSource = null;
+        meshSourceSize = 0;
+        meshBuilder = null;
     }
 
     /**
@@ -307,6 +356,7 @@ public class WallVisionRenderer {
      */
     private static void invalidateRenderCache() {
         highlightCache = List.of();
+        releaseMeshes();
         activeScan = null;
 
         cachedLevel = null;
@@ -334,9 +384,71 @@ public class WallVisionRenderer {
             int x,
             int y,
             int z,
-            VoxelShape shape,
+            List<AABB> boxes,
             AABB bounds
     ) {}
+
+    /**
+     * Geometry is relative to a section origin, preserving far-coordinate precision.
+     */
+    private static final class SectionMesh {
+        private final int x, y, z;
+        private final List<HighlightedBlock> blocks;
+        private AABB bounds;
+        private VertexBuffer buffer;
+        private boolean dirty = true;
+
+        private SectionMesh(List<HighlightedBlock> blocks) {
+            this.blocks = blocks;
+            HighlightedBlock first = blocks.get(0);
+            x = first.x() & ~15;
+            y = first.y() & ~15;
+            z = first.z() & ~15;
+            bounds = first.bounds();
+            for (int i = 1; i < blocks.size(); i++) {
+                bounds = bounds.minmax(blocks.get(i).bounds());
+            }
+        }
+
+        private void add(HighlightedBlock block) {
+            blocks.add(block);
+            bounds = bounds.minmax(block.bounds());
+            dirty = true;
+        }
+
+        private void uploadIfDirty() {
+            if (!dirty)
+                return;
+            if (meshBuilder == null)
+                meshBuilder = new BufferBuilder(32768);
+            meshBuilder.begin(VertexFormat.Mode.LINES, DefaultVertexFormat.POSITION_COLOR_NORMAL);
+            for (HighlightedBlock block : blocks) {
+                for (AABB box : block.boxes()) {
+                    LevelRenderer.renderLineBox(IDENTITY_POSE, meshBuilder,
+                                                block.x() - x + box.minX, block.y() - y + box.minY, block.z() - z + box.minZ,
+                                                block.x() - x + box.maxX, block.y() - y + box.maxY, block.z() - z + box.maxZ,
+                                                0.1F, 0.8F, 1.0F, 1.0F);
+                }
+            }
+            if (buffer == null)
+                buffer = new VertexBuffer(VertexBuffer.Usage.STATIC);
+            buffer.bind();
+            buffer.upload(meshBuilder.end());
+            VertexBuffer.unbind();
+            dirty = false;
+        }
+
+        private void close() {
+            if (buffer != null){
+                VertexBuffer released = buffer;
+                buffer = null;
+                if (RenderSystem.isOnRenderThread())
+                    released.close();
+                else
+                    RenderSystem.recordRenderCall(released::close);
+            }
+        }
+    }
 
     /**
      * 单轮渐进式扫描状态。
@@ -355,6 +467,9 @@ public class WallVisionRenderer {
 
         private final ArrayList<HighlightedBlock> results =
                 new ArrayList<>(1024);
+        private final Map<VoxelShape, List<AABB>> shapeBoxes = new IdentityHashMap<>();
+        private final IdentityHashMap<BlockState, Boolean> tagMatches = new IdentityHashMap<>();
+        private final Long2ObjectOpenHashMap<SectionMatch> sections = new Long2ObjectOpenHashMap<>();
 
         private final BlockPos.MutableBlockPos cursor =
                 new BlockPos.MutableBlockPos();
@@ -380,21 +495,32 @@ public class WallVisionRenderer {
                 Level level,
                 int budget
         ) {
-            int remaining = Math.max(1, budget);
-
-            while (remaining-- > 0
-                   && nextIndex < totalPositions
-                   && results.size() < maxHighlights) {
-                processNextPosition(level);
-            }
-
             /*
-             * 匹配数量达到上限后立即结束扫描。
-             *
-             * 防止标签过宽时，仍继续无意义地遍历剩余几十万个方块。
+             * Section references are kept only for this tick's scan budget. This
+             * avoids retaining unloaded client chunks between ticks, while still
+             * replacing thousands of repeated world lookups with palette checks.
              */
-            if (results.size() >= maxHighlights){
-                nextIndex = totalPositions;
+            sections.clear();
+            try {
+                int remaining = Math.max(1, budget);
+
+                while (remaining-- > 0
+                       && nextIndex < totalPositions
+                       && results.size() < maxHighlights) {
+                    processNextPosition(level);
+                }
+
+                /*
+                 * 匹配数量达到上限后立即结束扫描。
+                 *
+                 * 防止标签过宽时，仍继续无意义地遍历剩余几十万个方块。
+                 */
+                if (results.size() >= maxHighlights){
+                    nextIndex = totalPositions;
+                }
+            }
+            finally {
+                sections.clear();
             }
         }
 
@@ -418,15 +544,17 @@ public class WallVisionRenderer {
                     center.getZ() + dz
             );
 
-            /*
-             * 不访问未加载区块，避免无意义查找或意外触发额外工作。
-             */
-            if (!level.hasChunkAt(cursor)){
+            SectionMatch section = section(level, cursor.getX(), cursor.getY(), cursor.getZ());
+            if (!section.hasTargets()){
                 return;
             }
 
-            BlockState state = level.getBlockState(cursor);
-            if (!state.is(tag)){
+            BlockState state = section.section().getBlockState(
+                    cursor.getX() & 15,
+                    cursor.getY() & 15,
+                    cursor.getZ() & 15
+            );
+            if (!matchesTag(state)){
                 return;
             }
 
@@ -445,10 +573,51 @@ public class WallVisionRenderer {
                             cursor.getX(),
                             cursor.getY(),
                             cursor.getZ(),
-                            shape,
-                            new AABB(cursor)
+                            shapeBoxes.computeIfAbsent(shape, value -> List.copyOf(value.toAabbs())),
+                            shape.bounds().move(cursor.getX(), cursor.getY(), cursor.getZ())
                     )
             );
+        }
+
+        private boolean matchesTag(BlockState state) {
+            return tagMatches.computeIfAbsent(state, value -> value.is(tag));
+        }
+
+        private SectionMatch section(Level level, int x, int y, int z) {
+            if (y < level.getMinBuildHeight() || y >= level.getMaxBuildHeight()){
+                return SectionMatch.UNAVAILABLE;
+            }
+
+            int sectionX = x >> 4;
+            int sectionY = y >> 4;
+            int sectionZ = z >> 4;
+            long key = SectionPos.asLong(sectionX, sectionY, sectionZ);
+            SectionMatch cached = sections.get(key);
+            if (cached != null){
+                return cached;
+            }
+
+            /*
+             * The false flag is important on the client: it returns null instead
+             * of creating or waiting for a chunk that is not already loaded.
+             */
+            ChunkAccess chunk = level.getChunk(sectionX, sectionZ, ChunkStatus.FULL, false);
+            if (chunk == null){
+                sections.put(key, SectionMatch.UNAVAILABLE);
+                return SectionMatch.UNAVAILABLE;
+            }
+
+            LevelChunkSection chunkSection = chunk.getSection(level.getSectionIndex(y));
+            SectionMatch match = new SectionMatch(
+                    chunkSection,
+                    chunkSection.maybeHas(this::matchesTag)
+            );
+            sections.put(key, match);
+            return match;
+        }
+
+        private record SectionMatch(LevelChunkSection section, boolean hasTargets) {
+            private static final SectionMatch UNAVAILABLE = new SectionMatch(null, false);
         }
 
         private boolean isFinished() {
@@ -553,7 +722,7 @@ public class WallVisionRenderer {
 
         public static final RenderType WALL_VISION_LINES = create(
                 "dreamtinker:wall_vision_lines",
-                DefaultVertexFormat.POSITION_COLOR,
+                DefaultVertexFormat.POSITION_COLOR_NORMAL,
                 VertexFormat.Mode.LINES,
                 256,
                 false,

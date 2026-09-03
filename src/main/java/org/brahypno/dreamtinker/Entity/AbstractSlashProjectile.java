@@ -29,6 +29,9 @@ import java.util.List;
 import java.util.Optional;
 
 public abstract class AbstractSlashProjectile extends Projectile implements ProjectileWithPower {
+    private static final int MAX_RETAINED_HITS = 256;
+    private static final Comparator<EntityHitResult> HIT_ORDER =
+            Comparator.comparingDouble(hit -> ((PathHit) hit).distanceSqr);
     private static final EntityDataAccessor<Integer> COLOR =
             SynchedEntityData.defineId(AbstractSlashProjectile.class, EntityDataSerializers.INT);
 
@@ -69,6 +72,7 @@ public abstract class AbstractSlashProjectile extends Projectile implements Proj
 
     private int life;
     private double traveledDistance;
+    private List<EntityHitResult> hitBuffer = new ArrayList<>();
 
     protected AbstractSlashProjectile(EntityType<? extends AbstractSlashProjectile> type, Level level) {
         super(type, level);
@@ -336,17 +340,29 @@ public abstract class AbstractSlashProjectile extends Projectile implements Proj
                 return;
             }
         }else {
-            for (EntityHitResult entityHitResult : this.findHitEntities(from, to)) {
-                if (this.isRemoved()){
-                    return;
+            List<EntityHitResult> hits = this.findHitEntities(from, to);
+            try {
+                for (EntityHitResult entityHitResult : hits) {
+                    if (this.isRemoved()){
+                        return;
+                    }
+                    Entity hitEntity = entityHitResult.getEntity();
+                    if (this.isPlayerHitDenied(hitEntity)){
+                        continue;
+                    }
+                    this.handleImpact(entityHitResult);
+                    if (this.isRemoved()){
+                        return;
+                    }
                 }
-                Entity hitEntity = entityHitResult.getEntity();
-                if (this.isPlayerHitDenied(hitEntity)){
-                    continue;
-                }
-                this.handleImpact(entityHitResult);
-                if (this.isRemoved()){
-                    return;
+            }
+            finally {
+                if (hits == this.hitBuffer){
+                    int count = hits.size();
+                    hits.clear(); // Do not retain targets between ticks or after removal.
+                    if (count > MAX_RETAINED_HITS){
+                        this.hitBuffer = new ArrayList<>();
+                    }
                 }
             }
         }
@@ -463,6 +479,7 @@ public abstract class AbstractSlashProjectile extends Projectile implements Proj
     }
 
     protected List<EntityHitResult> findHitEntities(Vec3 from, Vec3 to) {
+        this.hitBuffer.clear();
         Vec3 movement = to.subtract(from);
 
         if (movement.lengthSqr() < 1.0E-7D){
@@ -474,7 +491,7 @@ public abstract class AbstractSlashProjectile extends Projectile implements Proj
         double padding = this.getEntitySearchPadding() + Math.max(halfWidth, halfHeight);
 
         AABB searchBox = new AABB(from, to).inflate(padding);
-        List<EntityHitResult> hits = new ArrayList<>();
+        List<EntityHitResult> hits = this.hitBuffer;
 
         for (Entity entity : this.level().getEntities(this, searchBox, this::canHitEntity)) {
             double pickRadius = entity.getPickRadius();
@@ -487,14 +504,25 @@ public abstract class AbstractSlashProjectile extends Projectile implements Proj
             Optional<Vec3> location = hitBox.clip(from, to);
 
             if (location.isPresent()){
-                hits.add(new EntityHitResult(entity, location.get()));
+                hits.add(new PathHit(entity, location.get(), from));
             }else if (hitBox.contains(from)){
-                hits.add(new EntityHitResult(entity, from));
+                hits.add(new PathHit(entity, from, from));
             }
         }
 
-        hits.sort(Comparator.comparingDouble(hit -> hit.getLocation().distanceToSqr(from)));
+        // TimSort is stable, so equal-distance hits retain the query order.
+        // Compute each distance once instead of on every comparator invocation.
+        hits.sort(HIT_ORDER);
         return hits;
+    }
+
+    private static final class PathHit extends EntityHitResult {
+        private final double distanceSqr;
+
+        private PathHit(Entity entity, Vec3 location, Vec3 from) {
+            super(entity, location);
+            distanceSqr = location.distanceToSqr(from);
+        }
     }
 
     @Override
@@ -608,6 +636,7 @@ public abstract class AbstractSlashProjectile extends Projectile implements Proj
 
     @Override
     protected void addAdditionalSaveData(@NotNull CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
         tag.putFloat("Power", this.getPower());
         tag.putInt("Life", this.life);
         tag.putInt("MaxLife", this.getMaxLife());
@@ -624,6 +653,7 @@ public abstract class AbstractSlashProjectile extends Projectile implements Proj
 
     @Override
     protected void readAdditionalSaveData(@NotNull CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
         this.setPower(tag.getFloat("Power"));
         this.life = tag.getInt("Life");
 

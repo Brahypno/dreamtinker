@@ -18,7 +18,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.Entity.NarcissusFluidProjectile;
-import org.brahypno.dreamtinker.library.client.trail.DTClientTrail;
 import org.brahypno.dreamtinker.library.client.trail.DTTrailRenderer;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix3f;
@@ -35,6 +34,10 @@ public class NarcissusFluidProjectileRenderer<T extends NarcissusFluidProjectile
     private static final ResourceLocation CONCENTRATED_TRAIL_TEX =
             Dreamtinker.getLocation("textures/entity/narcissus_fluid_concentrated_trail.png");
     private static final RenderType PROJECTILE_RENDER_TYPE = RenderType.entityTranslucent(TEX);
+    private static final DTTrailRenderer.Layer[] LONG_TRAIL_LAYERS = {
+            new DTTrailRenderer.Layer(NARCISSUS_MASK_TRAIL_TEX, 0.14F, 0.18F, 4, 0.28F),
+            new DTTrailRenderer.Layer(NARCISSUS_COLORED_TRAIL_TEX, 0.13F, 0.62F, 4, 0.36F)
+    };
 
     /**
      * 这是一个很宽松的硬上限；实际剔除主要依赖完整拖尾包围盒的视锥测试。
@@ -64,17 +67,8 @@ public class NarcissusFluidProjectileRenderer<T extends NarcissusFluidProjectile
 
     @Override
     public void render(T entity, float yaw, float partialTicks, PoseStack pose, MultiBufferSource buffer, int light) {
-        // 可见时完全保留原来的三层体积拖尾，不做层数或采样降级。
-        DTTrailRenderer.renderEntityTrailVolume(
-                pose, buffer, entity, partialTicks, entity.trail,
-                NARCISSUS_MASK_TRAIL_TEX, entity.getColor(),
-                0.14F, 0.18F, 4, 0.28F
-        );
-        DTTrailRenderer.renderEntityTrailVolume(
-                pose, buffer, entity, partialTicks, entity.trail,
-                NARCISSUS_COLORED_TRAIL_TEX, entity.getColor(),
-                0.13F, 0.62F, 4, 0.36F
-        );
+        DTTrailRenderer.renderEntityTrailLayers(
+                pose, buffer, entity, partialTicks, entity.trail, entity.getColor(), LONG_TRAIL_LAYERS);
         DTTrailRenderer.renderEntityTrailVolume(
                 pose, buffer, entity, partialTicks, entity.shortTrail,
                 CONCENTRATED_TRAIL_TEX, 0xF8FFF6E8,
@@ -109,18 +103,14 @@ public class NarcissusFluidProjectileRenderer<T extends NarcissusFluidProjectile
     }
 
     private static AABB getVisualBounds(NarcissusFluidProjectile entity) {
-        AABB entityBounds = entity.getBoundingBoxForCulling();
-        BoundsAccumulator bounds = new BoundsAccumulator(entityBounds);
-        includeTrail(bounds, entity.trail);
-        includeTrail(bounds, entity.shortTrail);
-        return bounds.toAabb().inflate(VISUAL_BOUNDS_INFLATE);
-    }
-
-    private static void includeTrail(BoundsAccumulator bounds, DTClientTrail trail) {
-        for (DTClientTrail.Point point : trail.points()) {
-            Vec3 position = point.getRawPosition();
-            bounds.include(position.x, position.y, position.z);
-        }
+        AABB bounds = entity.getBoundingBoxForCulling();
+        AABB longBounds = entity.trail.bounds();
+        AABB shortBounds = entity.shortTrail.bounds();
+        if (longBounds != null)
+            bounds = bounds.minmax(longBounds);
+        if (shortBounds != null)
+            bounds = bounds.minmax(shortBounds);
+        return bounds.inflate(VISUAL_BOUNDS_INFLATE);
     }
 
     private static double distanceToSqr(AABB bounds, double x, double y, double z) {
@@ -170,34 +160,4 @@ public class NarcissusFluidProjectileRenderer<T extends NarcissusFluidProjectile
         return 15;
     }
 
-    private static final class BoundsAccumulator {
-        private double minX;
-        private double minY;
-        private double minZ;
-        private double maxX;
-        private double maxY;
-        private double maxZ;
-
-        private BoundsAccumulator(AABB bounds) {
-            minX = bounds.minX;
-            minY = bounds.minY;
-            minZ = bounds.minZ;
-            maxX = bounds.maxX;
-            maxY = bounds.maxY;
-            maxZ = bounds.maxZ;
-        }
-
-        private void include(double x, double y, double z) {
-            minX = Math.min(minX, x);
-            minY = Math.min(minY, y);
-            minZ = Math.min(minZ, z);
-            maxX = Math.max(maxX, x);
-            maxY = Math.max(maxY, y);
-            maxZ = Math.max(maxZ, z);
-        }
-
-        private AABB toAabb() {
-            return new AABB(minX, minY, minZ, maxX, maxY, maxZ);
-        }
-    }
 }

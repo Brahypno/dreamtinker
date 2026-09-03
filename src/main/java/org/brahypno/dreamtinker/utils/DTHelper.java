@@ -1,115 +1,43 @@
 package org.brahypno.dreamtinker.utils;
 
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
-import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
-import net.minecraftforge.event.server.ServerStoppedEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.PacketDistributor;
-import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.network.DNetwork;
 import org.brahypno.dreamtinker.network.S2CVibeBarFx;
 
-import java.util.*;
+import java.util.List;
 
 import static org.brahypno.dreamtinker.config.DreamtinkerConfig.ProjLimit;
 
-@Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class DTHelper {
     public static final double MIN_PROJECTILE_SPEED_SQR = 1.0E-6D;
     public static final double PROJECTILE_SPAWN_EXTRA_DISTANCE = 0.45D;
-    private static final Map<ServerLevel, ProjectileIndex> PROJECTILES = new IdentityHashMap<>();
-
-    public static void clearProjectile(ServerLevel level, double px, double pz) {
-        ProjectileIndex index = PROJECTILES.get(level);
-        if (index != null){
-            index.clearStalledWhenAtLimit(ProjLimit.get());
-        }
-    }
+    private static final double PROJECTILE_CLEANUP_RANGE = 32.0D;
+    private static final int PROJECTILE_CLEANUP_MIN_AGE = 20;
 
     /**
-     * O(1) state maintenance called from the Projectile tick mixin.
+     * Clean nearby stalled projectiles regardless of their owner or spawning mechanism.
      */
-    public static void trackProjectileTick(Projectile projectile) {
-        if (projectile.level() instanceof ServerLevel level){
-            PROJECTILES.computeIfAbsent(level, ignored -> new ProjectileIndex()).update(projectile);
-        }
-    }
-
-    @SubscribeEvent
-    public static void onEntityJoin(EntityJoinLevelEvent event) {
-        if (event.getLevel() instanceof ServerLevel level && event.getEntity() instanceof Projectile projectile){
-            PROJECTILES.computeIfAbsent(level, ignored -> new ProjectileIndex()).update(projectile);
-        }
-    }
-
-    @SubscribeEvent
-    public static void onEntityLeave(EntityLeaveLevelEvent event) {
-        if (event.getLevel() instanceof ServerLevel level && event.getEntity() instanceof Projectile projectile){
-            ProjectileIndex index = PROJECTILES.get(level);
-            if (index != null){
-                index.remove(projectile);
-                if (index.isEmpty()){
-                    PROJECTILES.remove(level);
-                }
+    public static void clearProjectile(ServerLevel level, LivingEntity shooter) {
+        List<Projectile> stalled = level.getEntitiesOfClass(
+                Projectile.class, shooter.getBoundingBox().inflate(PROJECTILE_CLEANUP_RANGE),
+                projectile -> projectile.tickCount >= PROJECTILE_CLEANUP_MIN_AGE
+                              && isStalledProjectile(projectile)
+        );
+        // Count only eligible stalled projectiles, not every live projectile in the dimension.
+        if (stalled.size() >= ProjLimit.get()){
+            for (Projectile projectile : stalled) {
+                projectile.discard();
             }
         }
-    }
-
-    @SubscribeEvent
-    public static void onServerStopped(ServerStoppedEvent event) {
-        PROJECTILES.clear();
     }
 
     private static boolean isStalledProjectile(Projectile projectile) {
         return projectile.isAlive()
                && projectile.getDeltaMovement().lengthSqr() <= MIN_PROJECTILE_SPEED_SQR;
-    }
-
-    private static final class ProjectileIndex {
-        private final Set<Projectile> live = Collections.newSetFromMap(new IdentityHashMap<>());
-        private final Set<Projectile> stalled = Collections.newSetFromMap(new IdentityHashMap<>());
-
-        private void update(Projectile projectile) {
-            if (!projectile.isAlive()){
-                remove(projectile);
-                return;
-            }
-            live.add(projectile);
-            if (isStalledProjectile(projectile)){
-                stalled.add(projectile);
-            }else {
-                stalled.remove(projectile);
-            }
-        }
-
-        private void remove(Projectile projectile) {
-            live.remove(projectile);
-            stalled.remove(projectile);
-        }
-
-        private void clearStalledWhenAtLimit(int limit) {
-            if (live.size() < limit || stalled.isEmpty()){
-                return;
-            }
-            // Removing an entity fires EntityLeaveLevelEvent, so iterate over a stable copy.
-            for (Projectile projectile : new ArrayList<>(stalled)) {
-                if (isStalledProjectile(projectile)){
-                    projectile.remove(Entity.RemovalReason.DISCARDED);
-                }else {
-                    stalled.remove(projectile);
-                }
-            }
-        }
-
-        private boolean isEmpty() {
-            return live.isEmpty();
-        }
     }
 
     public static void sendVibeBarFx(

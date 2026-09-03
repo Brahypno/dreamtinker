@@ -62,9 +62,9 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
     private static final EntityDataAccessor<Integer> COLOR = SynchedEntityData.defineId(
             NarcissusFluidProjectile.class, EntityDataSerializers.INT
     );
-    private static final EntityDataAccessor<ItemStack> TOOL = SynchedEntityData.defineId(
-            NarcissusFluidProjectile.class, EntityDataSerializers.ITEM_STACK
-    );
+    // Only server-side attacks/save data use the full tool. Clients render from
+    // COLOR/CHASE_LIVING/FLUID, so do not send every modifier and material NBT.
+    private ItemStack storedTool = ItemStack.EMPTY;
 
     private int initialFluid;
     private float power;
@@ -73,6 +73,7 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
     private static final int HOMING_SCAN_INTERVAL = 4;
     private static final double HOMING_RANGE = 12.0D;
     private static final double HOMING_KEEP_RANGE_SQR = 14.0D * 14.0D;
+    private static final double COLLISION_SEARCH_RANGE = 16.0D;
 
     private int homingTargetId = -1;
     private int nextHomingScanTick;
@@ -101,14 +102,18 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
 
     private FluidEffectContext.Builder buildContext() {
         Level level = this.level();
-        FluidEffectContext.Builder builder = FluidEffectContext.builder(level).projectile(this);
+        FluidEffectContext.Builder builder = FluidEffectContext.builder(level).projectile(this).stack(this.getStoredTool());
         Entity owner = this.getOwner();
 
-        if (owner != null){
+        if (isLocalOwner(owner, level)){
             builder.user(owner);
         }
 
         return builder;
+    }
+
+    private static boolean isLocalOwner(Entity owner, Level level) {
+        return owner != null && !owner.isRemoved() && owner.level() == level;
     }
 
     @Override
@@ -116,7 +121,6 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
         this.entityData.define(FLUID, FluidStack.EMPTY);
         this.entityData.define(CHASE_LIVING, 0);
         this.entityData.define(COLOR, 0);
-        this.entityData.define(TOOL, ItemStack.EMPTY);
     }
 
     @Override
@@ -138,12 +142,15 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
     }
 
     /**
-     * ProjectileUtil 本身就会返回整条线段上距离起点最近的实体交点。
-     * 不需要再拆成 6 段并做最多 12 次二分，因此每 Tick 最多只做一次实体碰撞查询。
+     * 候选查询被限制在当前位置附近的固定范围内，不随灵魂核心的速度无限扩大。
+     * 低速时仍使用较小的扫掠盒，避免每个普通弹丸都扫描完整的局部区域。
+     * 对这些候选仍使用完整位移线段求最近交点，不改变速度或伤害计算。
+     * 极高速单 Tick 越过此范围以外的实体时，不扫描远处线段。
      */
     private EntityHitResult findFirstEntityHit(Vec3 from, Vec3 velocity) {
         Vec3 destination = from.add(velocity);
-        AABB sweepBox = this.getBoundingBox().expandTowards(velocity).inflate(1.0D);
+        AABB localRange = this.getBoundingBox().inflate(COLLISION_SEARCH_RANGE);
+        AABB sweepBox = this.getBoundingBox().expandTowards(velocity).inflate(1.0D).intersect(localRange);
         return ProjectileUtil.getEntityHitResult(
                 this.level(), this, from, destination, sweepBox, this::canHitEntity
         );
@@ -338,6 +345,9 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
     @Override
     protected void onHitEntity(@NotNull EntityHitResult result) {
         Entity target = result.getEntity();
+        if (this.level().isClientSide || target.level() != this.level()){
+            return;
+        }
         Entity owner = this.getOwner();
         ItemStack toolStack = this.getStoredTool();
 
@@ -349,7 +359,7 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
         }
 
         if (owner != null){
-            if (owner instanceof LivingEntity livingOwner){
+            if (isLocalOwner(owner, target.level()) && owner instanceof LivingEntity livingOwner){
                 livingOwner.setLastHurtMob(target);
             }
 
@@ -363,7 +373,7 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
             );
 
             if (damaged){
-                if (!this.level().isClientSide && owner instanceof LivingEntity livingOwner){
+                if (isLocalOwner(owner, target.level()) && owner instanceof LivingEntity livingOwner){
                     LivingEntity livingTarget = ETHelper.getLivingTarget(target);
 
                     if (livingTarget != null){
@@ -373,7 +383,7 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
                     EnchantmentHelper.doPostDamageEffects(livingOwner, target);
                 }
 
-                if (!this.level().isClientSide && this.isOnFire()){
+                if (target.level() == this.level() && this.isOnFire()){
                     target.setSecondsOnFire(5 * Math.max(1, this.level().random.nextInt(3)));
                 }
             }
@@ -382,7 +392,12 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
         FluidStack fluid = this.getFluid();
         Level level = this.level();
 
-        if (level.isClientSide || fluid.isEmpty()){
+        // Damage/Forge callbacks are allowed to teleport the target.
+        if (target.level() != level){
+            return;
+        }
+        if (fluid.isEmpty()){
+            this.discard();
             return;
         }
 
@@ -394,7 +409,7 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
                 this.applyEntityEffects(result, target, owner, toolStack, fluid, recipe, damage);
             }
 
-            if (owner instanceof LivingEntity livingOwner){
+            if (target.level() == level && owner instanceof LivingEntity livingOwner && !owner.isRemoved()){
                 NarcissusFluidFeedbacks.onProjectileHit(
                         this,
                         livingOwner,
@@ -402,6 +417,11 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
                         feedbackFluid
                 );
             }
+        }
+        // No entity effects means there is no fluid-consumption callback to end the projectile.
+        // Keep this hit's normal damage/feedback, then remove the projectile unconditionally.
+        if (!recipe.hasEntityEffects()){
+            this.discard();
         }
     }
 
@@ -412,10 +432,11 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
         int times = tool != null ? Math.max(1, MemoryBase.getLevel(tool) / 3) : 1;
         int icyLevel = ModifierUtil.getModifierLevel(toolStack, DreamtinkerModifiers.Ids.icy_memory);
         DamageSource damageSource = this.dmg(target, owner);
+        Level damageOwnerLevel = owner.level();
 
         ToolAttackContext attackContext = null;
 
-        if (tool != null && owner instanceof LivingEntity livingOwner){
+        if (tool != null && isLocalOwner(owner, target.level()) && owner instanceof LivingEntity livingOwner){
             ToolAttackContext.Builder builder = ToolAttackContext.attacker(livingOwner)
                                                                  .target(target)
                                                                  .cooldown(1)
@@ -429,11 +450,18 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
         }
 
         for (int i = 0; i < times; i++) {
+            if (target.level() != this.level()){
+                return;
+            }
             target.invulnerableTime = 0;
 
-            if (tool != null && attackContext != null && owner.level() == target.level()){
+            if (tool != null && attackContext != null && isLocalOwner(owner, target.level())){
                 ToolAttackUtil.performAttack(tool, attackContext);
             }else {
+                if (owner.level() != damageOwnerLevel){
+                    damageSource = this.dmg(target, owner);
+                    damageOwnerLevel = owner.level();
+                }
                 DamageProbe.damageHandler(
                         target,
                         damageSource,
@@ -442,6 +470,9 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
             }
         }
 
+        if (target.level() != this.level()){
+            return;
+        }
         FluidEffectContext.Entity context = this.buildContext()
                                                 .location(result.getLocation())
                                                 .target(target);
@@ -455,16 +486,19 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
                 IFluidHandler.FluidAction.EXECUTE
         );
 
-        if (consumed == 0){
-            consumed = Math.max(100, this.initialFluid) / hate;
+        if (consumed <= 0){
+            consumed = Math.max(1, Math.max(100, this.initialFluid) / hate);
         }
 
-        fluid.shrink(consumed);
+        // Do not mutate the value held by SynchedEntityData before set(): doing
+        // so makes the new copy compare equal and can suppress the dirty flag.
+        FluidStack remaining = fluid.copy();
+        remaining.shrink(consumed);
 
-        if (fluid.isEmpty()){
+        if (remaining.isEmpty()){
             this.discard();
         }else {
-            this.setFluid(fluid);
+            this.setFluid(remaining);
         }
     }
 
@@ -555,16 +589,19 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
     }
 
     private ItemStack getStoredTool() {
-        return this.entityData.get(TOOL);
+        return this.storedTool;
     }
 
+    /**
+     * Server-side tool snapshot; clients deliberately do not receive the tool NBT.
+     */
     public ItemStack getTool() {
         return this.getStoredTool().copy();
     }
 
     public void setTool(ItemStack stack) {
         if (stack.isEmpty()){
-            this.entityData.set(TOOL, ItemStack.EMPTY);
+            this.storedTool = ItemStack.EMPTY;
             this.entityData.set(CHASE_LIVING, 0);
             this.entityData.set(COLOR, 0);
             return;
@@ -572,7 +609,7 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
 
         ItemStack copy = stack.copy();
         copy.setCount(1);
-        this.entityData.set(TOOL, copy);
+        this.storedTool = copy;
 
         int soulCoreLevel = ModifierUtil.getModifierLevel(copy, DreamtinkerModifiers.Ids.soul_core);
         IToolStackView tool = ToolStack.from(copy);
