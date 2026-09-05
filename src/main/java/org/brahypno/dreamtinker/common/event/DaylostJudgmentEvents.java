@@ -21,12 +21,12 @@ import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.brahypno.changelib.DamageHelper.DamageProbe;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerDamageTypes;
 import org.brahypno.dreamtinker.common.DreamtinkerEffects;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.brahypno.dreamtinker.utils.EquippedModifierSnapshot;
-import org.brahypno.esotericismtinker.utils.damage.DamageProbe;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;

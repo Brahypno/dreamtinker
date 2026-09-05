@@ -23,12 +23,12 @@ import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.brahypno.changelib.DamageHelper.DamageProbe;
 import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.brahypno.dreamtinker.utils.CompatUtils.EnigmaticLegacyCompat;
 import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.brahypno.esotericismtinker.utils.MessagesUtil;
-import org.brahypno.esotericismtinker.utils.damage.DamageProbe;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 

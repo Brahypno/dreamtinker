@@ -9,11 +9,11 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.brahypno.changelib.DamageHelper.DamageProbe;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerDamageTypes;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.brahypno.esotericismtinker.utils.ETModifierCheck;
-import org.brahypno.esotericismtinker.utils.damage.DamageProbe;
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class AttackHandler {

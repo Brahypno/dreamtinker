@@ -10,9 +10,9 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.brahypno.changelib.DamageHelper.DamageProbe;
 import org.brahypno.dreamtinker.common.DreamtinkerDamageTypes;
 import org.brahypno.dreamtinker.tools.modifiers.events.VisionaryDrops;
-import org.brahypno.esotericismtinker.utils.damage.DamageProbe;
 import org.jetbrains.annotations.NotNull;
 
 import static org.brahypno.dreamtinker.common.DreamtinkerDamageTypes.many_wishes;

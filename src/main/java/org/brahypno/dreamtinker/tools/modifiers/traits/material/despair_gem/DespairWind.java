@@ -8,12 +8,12 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.phys.EntityHitResult;
+import org.brahypno.changelib.DamageHelper.DamageProbe;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerDamageTypes;
 import org.brahypno.dreamtinker.library.client.utils.MaskService;
 import org.brahypno.dreamtinker.utils.DTHelper;
 import org.brahypno.esotericismtinker.utils.ETHelper;
-import org.brahypno.esotericismtinker.utils.damage.DamageProbe;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -29,8 +29,8 @@ import slimeknights.tconstruct.library.tools.nbt.ModifierNBT;
 
 import javax.annotation.Nullable;
 
+import static org.brahypno.changelib.LootHelper.LootResolver.dropAllEquipmentLikeDeath;
 import static org.brahypno.dreamtinker.config.DreamtinkerCachedConfig.RedShadeEnable;
-import static org.brahypno.esotericismtinker.utils.LootHelper.LootResolver.dropAllEquipmentLikeDeath;
 
 public class DespairWind extends Modifier implements ProjectileHitModifierHook, MeleeHitModifierHook, MonsterMeleeHitModifierHook {
 
