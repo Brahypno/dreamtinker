@@ -356,7 +356,7 @@
   "modifier.dreamtinker.homunculus_gift.description": "Decrease Merchant price 3% per level; Configurable",
   "modifier.dreamtinker.absorption_hit": "Rekindled Gleam",
   "modifier.dreamtinker.absorption_hit.flavor": "Every wound denied to flesh returns as light upon the blade.",
-  "modifier.dreamtinker.absorption_hit.description": "When have absorption, boost %s damage/projectile damage per level and apply weakness; When critical hit, gain absorption.",
+  "modifier.dreamtinker.absorption_hit.description": "When you have absorption, gain 15% damage and projectile damage per level and apply Weakness on fully charged melee hits; critical hits grant absorption.",
   "modifier.dreamtinker.absorption_hit.attack_damage": "Damage when with absorption",
   "modifier.dreamtinker.absorption_hit.projectile_damage": "Projectile Damage when with absorption",
   "modifier.dreamtinker.absorption_defense": "Requital Fracture",

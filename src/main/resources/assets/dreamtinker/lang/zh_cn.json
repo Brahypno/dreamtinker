@@ -356,7 +356,7 @@
   "modifier.dreamtinker.homunculus_gift.description": "每等级减少3%村民交易价格。可配置",
   "modifier.dreamtinker.absorption_hit": "辉返",
   "modifier.dreamtinker.absorption_hit.flavor": "每一道未落入血肉的伤口，都将化作刃上的光",
-  "modifier.dreamtinker.absorption_hit.description": "在有伤害吸收时每级增加%s伤害或弹射物力量；当暴击时获得一定的伤害吸收；",
+  "modifier.dreamtinker.absorption_hit.description": "拥有伤害吸收时，每级增加15%伤害和弹射物力量；完全蓄力的近战攻击施加虚弱，暴击时获得伤害吸收。",
   "modifier.dreamtinker.absorption_hit.attack_damage": "伤害,当有伤害吸收",
   "modifier.dreamtinker.absorption_hit.projectile_damage": "弹射物力量,当有伤害吸收",
   "modifier.dreamtinker.absorption_defense": "偿裂",

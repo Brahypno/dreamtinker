@@ -8,11 +8,14 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import org.brahypno.dreamtinker.Dreamtinker;
+import org.brahypno.dreamtinker.library.modifiers.variable.SlotInChargeReductionVariable;
 import org.jetbrains.annotations.NotNull;
+import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.hook.armor.ModifyDamageModifierHook;
+import slimeknights.tconstruct.library.modifiers.modules.armor.AdjustDamageModule;
 import slimeknights.tconstruct.library.modifiers.modules.technical.SlotInChargeModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.capability.TinkerDataCapability;
@@ -25,12 +28,24 @@ import java.util.List;
 import static org.brahypno.dreamtinker.config.DreamtinkerCachedConfig.AbsorptionDefenseRate;
 
 public class AbsorptionDefense extends Modifier implements ModifyDamageModifierHook {
+    private static final net.minecraft.resources.ResourceLocation TRACKER = Dreamtinker.getLocation("absorption_defense");
     private static final TinkerDataCapability.TinkerDataKey<SlotInChargeModule.SlotInCharge> SLOT_KEY =
-            TinkerDataCapability.TinkerDataKey.of(Dreamtinker.getLocation("absorption_defense"));
+            TinkerDataCapability.TinkerDataKey.of(TRACKER);
 
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
         hookBuilder.addModule(new SlotInChargeModule(SLOT_KEY));
+        hookBuilder.addHook(AdjustDamageModule.builder()
+                                              .holder(LivingEntityPredicate.simple(entity -> entity.getAbsorptionAmount() > 0))
+                                              .customVariable("reduction", new SlotInChargeReductionVariable(TRACKER))
+                                              .formula()
+                                              .variable(slimeknights.tconstruct.library.json.math.ModifierFormula.VALUE)
+                                              .constant(1.0f)
+                                              .customVariable("reduction").subtract()
+                                              .constant(0.1f).max()
+                                              .multiply()
+                                              .build(),
+                            ModifierHooks.MODIFY_HURT);
         hookBuilder.addHook(this, ModifierHooks.MODIFY_HURT);
         super.registerHooks(hookBuilder);
     }
@@ -41,7 +56,6 @@ public class AbsorptionDefense extends Modifier implements ModifyDamageModifierH
         if (0 < level){
             float absorption = context.getEntity().getAbsorptionAmount();
             if (0 < absorption){
-                amount *= Math.max(0.1f, 1 - level * AbsorptionDefenseRate.get().floatValue());
                 if (absorption <= amount && source.getEntity() instanceof LivingEntity entity)
                     entity.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, level * 20, level));
             }

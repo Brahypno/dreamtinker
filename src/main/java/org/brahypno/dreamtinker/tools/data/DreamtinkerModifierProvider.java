@@ -631,6 +631,29 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
 
     @Override
     protected void addModifiers() {
+        buildModifier(Ids.absorption_hit)
+                .addModule(ConditionalMeleeDamageModule.builder().attacker(HAS_ABSORPTION).percent()
+                                                       .formula()
+                                                       .variable(LEVEL).constant(0.15f).multiply()
+                                                       .variable(MULTIPLIER).multiply()
+                                                       .constant(1).add()
+                                                       .variable(VALUE).multiply().build())
+                .addModule(ConditionalPowerModule.builder().holder(HAS_ABSORPTION).percent()
+                                                 .formula()
+                                                 .variable(LEVEL).constant(0.15f).multiply()
+                                                 .variable(MULTIPLIER).multiply()
+                                                 .constant(1).add()
+                                                 .variable(VALUE).multiply().build())
+                .addModule(AbsorptionGainModule.builder()
+                                               .ratio(LevelingValue.flat(0.15f))
+                                               .maxRatio(LevelingValue.flat(2.0f))
+                                               .buildWeapon())
+                .addModule(MobEffectModule.builder(MobEffects.WEAKNESS)
+                                          .holder(HAS_ABSORPTION)
+                                          .applyBeforeMelee(true)
+                                          .level(RandomLevelingValue.perLevel(1, 1))
+                                          .time(RandomLevelingValue.perLevel(0, 20))
+                                          .buildWeapon(), ModifierHooks.MELEE_HIT);
         buildModifier(Ids.fly)
                 .addModule(new FlightModule());
         buildModifier(Ids.long_tool)

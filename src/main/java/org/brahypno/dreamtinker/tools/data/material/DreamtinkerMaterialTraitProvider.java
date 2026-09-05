@@ -60,7 +60,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.desire_gem, to_the_moon, many_wishes);
         addTraits(DreamtinkerMaterialIds.desire_gem, ARMOR, eternity_defense);
 
-        addDefaultTraits(DreamtinkerMaterialIds.AtonementSilver, absorption_hit);
+        addDefaultTraits(DreamtinkerMaterialIds.AtonementSilver, Ids.absorption_hit);
         addTraits(DreamtinkerMaterialIds.AtonementSilver, ARMOR, absorption_defense.getId());
 
         addDefaultTraits(DreamtinkerMaterialIds.despair_gem, despair_mist.getId(), despair_rain.getId(), despair_wind.getId(), Ids.peaches_in_memory);

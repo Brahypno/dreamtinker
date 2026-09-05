@@ -38,16 +38,17 @@ import org.brahypno.dreamtinker.network.DNetwork;
 import org.brahypno.dreamtinker.network.S2CDinosaurShockwavePacket;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.jetbrains.annotations.NotNull;
+import slimeknights.mantle.data.predicate.damage.DamageTypePredicate;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
-import slimeknights.tconstruct.library.modifiers.hook.armor.ModifyDamageModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.armor.OnAttackedModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.GeneralInteractionModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.InteractionSource;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
 import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
+import slimeknights.tconstruct.library.modifiers.modules.armor.AdjustDamageModule;
 import slimeknights.tconstruct.library.modifiers.modules.build.ModifierRequirementsModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
@@ -215,18 +216,16 @@ public final class LegendaryMonstersCompatModifiers {
         }
     }
 
-    public static class AtmosphericLeap extends NoLevelsModifier implements ModifyDamageModifierHook {
+    public static class AtmosphericLeap extends NoLevelsModifier {
         @Override
         protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-            hookBuilder.addHook(this, ModifierHooks.MODIFY_DAMAGE);
+            hookBuilder.addHook(AdjustDamageModule.builder()
+                                                  .source(new DamageTypePredicate(DamageTypes.FALL))
+                                                  .formula()
+                                                  .variable(slimeknights.tconstruct.library.json.math.ModifierFormula.VALUE)
+                                                  .constant(0.5f).multiply().build(),
+                                ModifierHooks.MODIFY_DAMAGE, ModifierHooks.TOOLTIP);
             super.registerHooks(hookBuilder);
-        }
-
-        @Override
-        public float modifyDamageTaken(
-                IToolStackView tool, ModifierEntry modifier, EquipmentContext context, EquipmentSlot slotType,
-                DamageSource source, float amount, boolean isDirectDamage) {
-            return slotType == EquipmentSlot.FEET && source.is(DamageTypes.FALL) ? amount * 0.5f : amount;
         }
 
         public static boolean tryActivate(ServerPlayer player) {

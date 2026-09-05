@@ -1,0 +1,60 @@
+{
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:conditional_melee_damage",
+      "attacker": "dreamtinker:has_absorption",
+      "formula": [
+        "$level",
+        0.15,
+        "*",
+        "$multiplier",
+        "*",
+        1.0,
+        "+",
+        "$damage",
+        "*"
+      ],
+      "percent": true
+    },
+    {
+      "type": "tconstruct:conditional_power",
+      "formula": [
+        "$level",
+        0.15,
+        "*",
+        "$multiplier",
+        "*",
+        1.0,
+        "+",
+        "$damage",
+        "*"
+      ],
+      "holder": "dreamtinker:has_absorption",
+      "percent": true
+    },
+    {
+      "type": "dreamtinker:absorption_gain",
+      "ratio": {
+        "flat": 0.15
+      }
+    },
+    {
+      "type": "tconstruct:weapon_mob_effect",
+      "apply_before_melee": true,
+      "effect": "minecraft:weakness",
+      "holder": "dreamtinker:has_absorption",
+      "hooks": [
+        "tconstruct:melee_hit"
+      ],
+      "level": {
+        "flat": 1.0,
+        "per_level": 1.0
+      },
+      "time": {
+        "per_level": 20.0
+      }
+    }
+  ],
+  "tooltip_display": "always"
+}

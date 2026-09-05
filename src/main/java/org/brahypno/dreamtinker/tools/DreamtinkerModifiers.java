@@ -27,6 +27,7 @@ import org.brahypno.dreamtinker.library.modifiers.fluid.entity.DrainLifeFluidEff
 import org.brahypno.dreamtinker.library.modifiers.modules.armor.ArmorValueReductionModule;
 import org.brahypno.dreamtinker.library.modifiers.modules.combat.NarcissusFluidFeedbackModule;
 import org.brahypno.dreamtinker.library.modifiers.modules.harvest.AutoPureDaisyModule;
+import org.brahypno.dreamtinker.library.modifiers.variable.SlotInChargeReductionVariable;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerEnchantmentToModifierProvider;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerFluidEffectProvider;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerModifierProvider;
@@ -106,9 +107,11 @@ import org.brahypno.dreamtinker.tools.modifiers.traits.material.star_regulus.Two
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.star_regulus.as_one;
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.whimsyGold.RhinegoldCatModifier;
 import org.brahypno.dreamtinker.utils.CompatUtils.ForbiddenArcanusAurealCompat;
+import org.brahypno.esotericismtinker.library.modifiers.modules.combat.AbsorptionGainModule;
 import slimeknights.mantle.data.predicate.block.BlockPredicate;
 import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
 import slimeknights.tconstruct.library.json.variable.entity.EntityVariable;
+import slimeknights.tconstruct.library.json.variable.protection.ProtectionVariable;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
 import slimeknights.tconstruct.library.modifiers.fluid.FluidEffect;
 import slimeknights.tconstruct.library.modifiers.modules.ModifierModule;
@@ -188,7 +191,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<DeepSleepWithRoar> deep_sleep_with_roar = MODIFIERS.register("deep_sleep_with_roar", DeepSleepWithRoar::new);
     public static final StaticModifier<WaitUntil> wait_until = MODIFIERS.register("wait_until", WaitUntil::new);
     public static final StaticModifier<AnvilHit> anvil_hit = MODIFIERS.register("anvil_hit", AnvilHit::new);
-    public static final StaticModifier<AbsorptionHit> absorption_hit = MODIFIERS.register("absorption_hit", AbsorptionHit::new);
     public static final StaticModifier<AbsorptionDefense> absorption_defense = MODIFIERS.register("absorption_defense", AbsorptionDefense::new);
     public static final StaticModifier<DespairMist> despair_mist = MODIFIERS.register("despair_mist", DespairMist::new);
     public static final StaticModifier<DespairRain> despair_rain = MODIFIERS.register("despair_rain", DespairRain::new);
@@ -356,6 +358,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
                      .value()
                      .getTemperature(pos) <= 0.0F;
     });
+    public static final LivingEntityPredicate HAS_ABSORPTION = LivingEntityPredicate.simple(entity -> entity.getAbsorptionAmount() > 0);
     public static final LivingEntityPredicate HAS_ARMOR = LivingEntityPredicate.simple(entity -> entity.getArmorValue() > 0);
     public static final LivingEntityPredicate UNAWARE = LivingEntityPredicate.simple(entity -> entity instanceof Mob mob && mob.getTarget() == null);
     public static final EntityVariable FULL_HEALTH_MULTIPLIER = EntityVariable.simple(
@@ -396,6 +399,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             ModifierModule.LOADER.register(Dreamtinker.getLocation("narcissus_fluid_feedback"), NarcissusFluidFeedbackModule.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("bontania_auto_pure_module"), AutoPureDaisyModule.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("armor_value_reduction"), ArmorValueReductionModule.LOADER);
+            ModifierModule.LOADER.register(Dreamtinker.getLocation("absorption_gain"), AbsorptionGainModule.Weapon.LOADER);
 
             FluidEffect.ENTITY_EFFECTS.register(Dreamtinker.getLocation("drain_life_fluid"), DrainLifeFluidEffect.LOADER);
             FluidEffect.ENTITY_EFFECTS.register(Dreamtinker.getLocation("conditional_damage_fluid"), ConditionalDamageFluidEffect.LOADER);
@@ -406,6 +410,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             BlockPredicate.LOADER.register(Dreamtinker.getLocation("block_of_undergarden"), BLOCK_OF_UNDER_GARDEN.getLoader());
 
             LivingEntityPredicate.LOADER.register(Dreamtinker.getLocation("in_cold_biome"), IN_COLD_BIOME.getLoader());
+            LivingEntityPredicate.LOADER.register(Dreamtinker.getLocation("has_absorption"), HAS_ABSORPTION.getLoader());
             LivingEntityPredicate.LOADER.register(Dreamtinker.getLocation("has_armor"), HAS_ARMOR.getLoader());
             LivingEntityPredicate.LOADER.register(Dreamtinker.getLocation("unaware"), UNAWARE.getLoader());
 
@@ -414,6 +419,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
 
             EntityVariable.LOADER.register(Dreamtinker.getLocation("wolf_effects"), WOLF_EFFECTS.getLoader());
             EntityVariable.LOADER.register(Dreamtinker.getLocation("full_health_multiplier"), FULL_HEALTH_MULTIPLIER.getLoader());
+            ProtectionVariable.LOADER.register(Dreamtinker.getLocation("slot_in_charge_reduction"), SlotInChargeReductionVariable.LOADER);
 
         }
     }
@@ -431,6 +437,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     }
 
     public static class Ids {
+        public static final ModifierId absorption_hit = id("absorption_hit");
         public static final ModifierId fly = id("fly");
         public static final ModifierId soul_form = id("soul_form");
         public static final ModifierId soul_upgrade = id("soul_upgrade");
