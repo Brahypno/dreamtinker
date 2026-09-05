@@ -5,8 +5,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IIngredientAcceptor;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
-import mezz.jei.api.gui.builder.ITooltipBuilder;
-import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredientHelper;
@@ -16,7 +14,7 @@ import mezz.jei.api.ingredients.subtypes.UidContext;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
-import mezz.jei.api.recipe.category.IRecipeCategory;
+import mezz.jei.api.recipe.category.AbstractRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -24,6 +22,7 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import org.brahypno.dreamtinker.Dreamtinker;
@@ -37,34 +36,18 @@ import java.util.List;
 
 import static org.brahypno.dreamtinker.plugin.JEI.WorldRitualCategory.CelestialTypes.CELESTIAL;
 
-public final class WorldRitualCategory implements IRecipeCategory<WorldRitualEntry> {
+public final class WorldRitualCategory extends AbstractRecipeCategory<WorldRitualEntry> {
     public static final ResourceLocation UID = new ResourceLocation(Dreamtinker.MODID, "jei");
     public static final RecipeType<WorldRitualEntry> WORLD_RITUAL =
             RecipeType.create("dreamtinker", "world_ritual", WorldRitualEntry.class);
-    private final IDrawable bg, icon;
-    private final Component title = Component.translatable("jei.dreamtinker.category");
     private final EntityIngredientRenderer entityRenderer = new EntityIngredientRenderer(32);
     private final CelestialTypes.CelestialRenderer celestialRenderer;
 
     public WorldRitualCategory(IGuiHelper g) {
-        // 空白背景，自己排
-        this.bg = g.createBlankDrawable(170, 90);
-        this.icon = g.createDrawableItemLike(Items.GRASS_BLOCK);
+        super(WORLD_RITUAL, Component.translatable("jei.dreamtinker.category"),
+              g.createDrawableItemLike(Items.GRASS_BLOCK), 170, 90);
         this.celestialRenderer = new CelestialTypes.CelestialRenderer();
     }
-
-    @Override
-    public @NotNull RecipeType<WorldRitualEntry> getRecipeType() {return WORLD_RITUAL;}
-
-    @Override
-    @SuppressWarnings({"removal"})
-    public IDrawable getBackground() {return bg;}
-
-    @Override
-    public IDrawable getIcon() {return icon;}
-
-    @Override
-    public @NotNull Component getTitle() {return title;}
 
     @Override
     public void setRecipe(@NotNull IRecipeLayoutBuilder b, WorldRitualEntry r, @NotNull IFocusGroup foci) {
@@ -244,18 +227,17 @@ public final class WorldRitualCategory implements IRecipeCategory<WorldRitualEnt
             }
 
             @Override
-            @SuppressWarnings({"removal"})
-            public List<Component> getTooltip(CelestialIcon celestialIcon, TooltipFlag tooltipFlag) {
-                return List.of();
+            @SuppressWarnings("removal")
+            public List<Component> getTooltip(CelestialIcon icon, TooltipFlag flag) {
+                return getTooltip(icon, null, flag);
             }
 
             @Override
-            public void getTooltip(ITooltipBuilder tooltip, CelestialIcon icon, TooltipFlag flag) {
+            public List<Component> getTooltip(CelestialIcon icon, Player player, TooltipFlag flag) {
                 if (icon.kind == CelestialIcon.Kind.sun){
-                    tooltip.add(Component.translatable("jei.dreamtinker.celestial_type.sun"));
-                }else {
-                    tooltip.add(Component.translatable("jei.dreamtinker.celestial_type.moon_phase").append(String.valueOf(icon.phase)));
+                    return List.of(Component.translatable("jei.dreamtinker.celestial_type.sun"));
                 }
+                return List.of(Component.translatable("jei.dreamtinker.celestial_type.moon_phase").append(String.valueOf(icon.phase)));
             }
         }
 
@@ -267,18 +249,18 @@ public final class WorldRitualCategory implements IRecipeCategory<WorldRitualEnt
 
             @Override
             public IIngredientType<CelestialIcon> getIngredientType() {
-                return null;
+                return CELESTIAL;
             }
 
             @Override
             public @NotNull String getDisplayName(CelestialIcon ingredient) {
-                return ingredient.kind == CelestialIcon.Kind.sun ? Component.translatable("jei.dreamtinker.celestial_type.sun").toString() :
-                       Component.translatable("jei.dreamtinker.celestial_type.moon_phase").toString() + ingredient.phase;
+                return ingredient.kind == CelestialIcon.Kind.sun ? Component.translatable("jei.dreamtinker.celestial_type.sun").getString() :
+                       Component.translatable("jei.dreamtinker.celestial_type.moon_phase").getString() + ingredient.phase;
             }
 
             @Override
             public @NotNull String getUniqueId(@NotNull CelestialIcon celestialIcon, UidContext uidContext) {
-                return UID_NS + "_" + uidContext.toString().toLowerCase(); // dreamtinker:celestial/sun 或 /moon:4
+                return UID_NS + "/" + celestialIcon;
             }
 
             @Override
@@ -305,7 +287,7 @@ public final class WorldRitualCategory implements IRecipeCategory<WorldRitualEnt
             public @NotNull Iterable<Integer> getColors(@NotNull CelestialIcon ingredient) {return List.of();}
 
             @Override
-            public boolean isValidIngredient(CelestialIcon ingredient) {return true;}
+            public boolean isValidIngredient(CelestialIcon ingredient) {return ingredient != null;}
 
             @Override
             public boolean isIngredientOnServer(CelestialIcon ingredient) {return true;}

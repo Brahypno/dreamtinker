@@ -44,7 +44,7 @@
       "target": "dreamtinker:unaware"
     },
     {
-      "type": "tconstruct:mob_effect",
+      "type": "tconstruct:weapon_mob_effect",
       "effect": "minecraft:glowing",
       "hooks": [
         "tconstruct:melee_hit",

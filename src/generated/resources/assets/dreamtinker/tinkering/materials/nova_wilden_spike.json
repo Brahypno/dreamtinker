@@ -9,32 +9,14 @@
     ],
     "transformer": {
       "type": "tconstruct:grey_to_sprite",
-      "palette": [
-        {
-          "color": "FF3A1A15",
-          "grey": 63
-        },
-        {
-          "color": "FF6A3A25",
-          "grey": 102
-        },
-        {
-          "color": "FF9A5A35",
-          "grey": 140
-        },
-        {
-          "color": "FFC07A45",
-          "grey": 178
-        },
-        {
-          "color": "FFE09A55",
-          "grey": 216
-        },
-        {
-          "color": "FFF0B565",
-          "grey": 255
-        }
-      ]
+      "palette": {
+        "063": "FF3A1A15",
+        "102": "FF6A3A25",
+        "140": "FF9A5A35",
+        "178": "FFC07A45",
+        "216": "FFE09A55",
+        "255": "FFF0B565"
+      }
     }
   },
   "luminosity": 4

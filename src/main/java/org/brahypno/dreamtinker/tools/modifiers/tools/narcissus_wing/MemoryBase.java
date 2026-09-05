@@ -39,12 +39,11 @@ import slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHelper;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.helper.ToolDamageUtil;
+import slimeknights.tconstruct.library.tools.item.IModifiable;
 import slimeknights.tconstruct.library.tools.item.ranged.ModifiableLauncherItem;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
-import slimeknights.tconstruct.tools.TinkerModifiers;
-import slimeknights.tconstruct.tools.modifiers.ability.interaction.BlockingModifier;
 
 import javax.annotation.Nullable;
 
@@ -57,7 +56,7 @@ public class MemoryBase extends Modifier implements GeneralInteractionModifierHo
     private final Fluid fallback_fluid = TinkerFluids.liquidSoul.get();
 
     public static int getLevel(IToolStackView toolStackView) {
-        return toolStackView.getModifierLevel(DreamtinkerModifiers.memory_base.getId()) + toolStackView.getModifierLevel(TinkerModifiers.expanded.get()) * 2;
+        return toolStackView.getModifierLevel(DreamtinkerModifiers.memory_base.getId()) + toolStackView.getVolatileData().getInt(IModifiable.EXPANDED) * 2;
     }
 
     @Override
@@ -102,7 +101,7 @@ public class MemoryBase extends Modifier implements GeneralInteractionModifierHo
 
     @Override
     public @NotNull UseAnim getUseAction(IToolStackView tool, ModifierEntry modifier) {
-        return BlockingModifier.blockWhileCharging(tool, UseAnim.BOW);
+        return ModifierUtil.blockWhileCharging(tool, UseAnim.BOW);
     }
 
     @Override

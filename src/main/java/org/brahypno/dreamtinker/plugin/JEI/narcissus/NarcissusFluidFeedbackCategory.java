@@ -3,13 +3,11 @@ package org.brahypno.dreamtinker.plugin.JEI.narcissus;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.builder.ITooltipBuilder;
-import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import mezz.jei.api.recipe.RecipeType;
-import mezz.jei.api.recipe.category.IRecipeCategory;
+import mezz.jei.api.recipe.category.AbstractRecipeCategory;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -27,39 +25,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
-public final class NarcissusFluidFeedbackCategory implements IRecipeCategory<NarcissusFluidFeedbackCache.Page> {
+public final class NarcissusFluidFeedbackCategory extends AbstractRecipeCategory<NarcissusFluidFeedbackCache.Page> {
     private static final int X = 6;
     private static final int Y = 5;
     private static final int ROW_H = 18;
 
-    private final IDrawable bg;
-    private final IDrawable icon;
-    private final Component title = Component.translatable("jei.dreamtinker.narcissus_feedback.title");
-
     public NarcissusFluidFeedbackCategory(IGuiHelper helper) {
-        this.bg = helper.createBlankDrawable(170, 150);
-        this.icon = helper.createDrawableIngredient(ForgeTypes.FLUID_STACK, new FluidStack(Fluids.WATER, 1000));
-    }
-
-    @Override
-    public @NotNull RecipeType<NarcissusFluidFeedbackCache.Page> getRecipeType() {
-        return DTJeiPlugin.NARCISSUS_FEEDBACK;
-    }
-
-    @Override
-    public @NotNull Component getTitle() {
-        return title;
-    }
-
-    @SuppressWarnings("removal")
-    @Override
-    public IDrawable getBackground() {
-        return bg;
-    }
-
-    @Override
-    public IDrawable getIcon() {
-        return icon;
+        super(DTJeiPlugin.NARCISSUS_FEEDBACK, Component.translatable("jei.dreamtinker.narcissus_feedback.title"),
+              helper.createDrawableIngredient(ForgeTypes.FLUID_STACK, new FluidStack(Fluids.WATER, 1000)), 170, 150);
     }
 
     @Override

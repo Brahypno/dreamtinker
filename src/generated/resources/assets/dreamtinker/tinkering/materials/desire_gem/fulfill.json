@@ -23,69 +23,27 @@
       "frames": [
         {
           "type": "tconstruct:grey_to_sprite",
-          "palette": [
-            {
-              "color": "FF000000",
-              "grey": 0
-            },
-            {
-              "color": "FF24113A",
-              "grey": 63
-            },
-            {
-              "color": "FF4A2380",
-              "grey": 102
-            },
-            {
-              "color": "FF7B3FD0",
-              "grey": 140
-            },
-            {
-              "color": "FFC26DFF",
-              "grey": 178
-            },
-            {
-              "color": "FFE9C8FF",
-              "grey": 216
-            },
-            {
-              "color": "FFFFFFFF",
-              "grey": 255
-            }
-          ]
+          "palette": {
+            "000": "FF000000",
+            "063": "FF24113A",
+            "102": "FF4A2380",
+            "140": "FF7B3FD0",
+            "178": "FFC26DFF",
+            "216": "FFE9C8FF",
+            "255": "FFFFFFFF"
+          }
         },
         {
           "type": "tconstruct:grey_to_sprite",
-          "palette": [
-            {
-              "color": "FF000000",
-              "grey": 0
-            },
-            {
-              "color": "FF2E1648",
-              "grey": 63
-            },
-            {
-              "color": "FF5F2AA0",
-              "grey": 102
-            },
-            {
-              "color": "FF9A55F0",
-              "grey": 140
-            },
-            {
-              "color": "FFD996FF",
-              "grey": 178
-            },
-            {
-              "color": "FFF4DEFF",
-              "grey": 216
-            },
-            {
-              "color": "FFFFFFFF",
-              "grey": 255
-            }
-          ]
+          "palette": {
+            "000": "FF000000",
+            "063": "FF2E1648",
+            "102": "FF5F2AA0",
+            "140": "FF9A55F0",
+            "178": "FFD996FF",
+            "216": "FFF4DEFF",
+            "255": "FFFFFFFF"
+          }
         }
       ],
       "meta": "dreamtinker:generator/desire"

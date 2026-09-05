@@ -14,7 +14,7 @@ import slimeknights.tconstruct.library.modifiers.modules.build.ModifierTraitModu
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
-import slimeknights.tconstruct.tools.TinkerModifiers;
+import slimeknights.tconstruct.tools.data.ModifierIds;
 
 import javax.annotation.Nullable;
 
@@ -22,7 +22,7 @@ public class LoveShooting extends NoLevelsModifier implements ProjectileLaunchMo
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
         hookBuilder.addHook(this, ModifierHooks.PROJECTILE_LAUNCH);
-        hookBuilder.addModule(new ModifierTraitModule(TinkerModifiers.multishot.getId(), 1, false));
+        hookBuilder.addModule(new ModifierTraitModule(ModifierIds.multishot, 1, false));
         super.registerHooks(hookBuilder);
     }
 

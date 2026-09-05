@@ -18,40 +18,16 @@
     ],
     "transformer": {
       "type": "tconstruct:grey_to_sprite",
-      "palette": [
-        {
-          "color": "FF000000",
-          "grey": 0
-        },
-        {
-          "color": "FF2A0204",
-          "grey": 25
-        },
-        {
-          "grey": 26,
-          "path": "dreamtinker:generator/star_regulus"
-        },
-        {
-          "grey": 63,
-          "path": "dreamtinker:generator/star_regulus"
-        },
-        {
-          "color": "FF3A0105",
-          "grey": 140
-        },
-        {
-          "color": "FFA30B13",
-          "grey": 178
-        },
-        {
-          "color": "FFFF3442",
-          "grey": 216
-        },
-        {
-          "color": "FFFFD8DD",
-          "grey": 255
-        }
-      ]
+      "palette": {
+        "000": "FF000000",
+        "025": "FF2A0204",
+        "026": "dreamtinker:generator/star_regulus",
+        "063": "dreamtinker:generator/star_regulus",
+        "140": "FF3A0105",
+        "178": "FFA30B13",
+        "216": "FFFF3442",
+        "255": "FFFFD8DD"
+      }
     }
   },
   "luminosity": 15

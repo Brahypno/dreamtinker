@@ -30,7 +30,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
         this.tag(DreamtinkerTagKeys.Modifiers.EL_CURSED_MODIFIERS)
             .add(ModifierIds.weak, ModifierIds.blindshot, ModifierIds.erratic, ModifierIds.vintage, ModifierIds.flamestance,
                  ModifierIds.crystalbound, ModifierIds.crystalstrike, ModifierIds.dense, ModifierIds.spiny,
-                 TinkerModifiers.decay.getId(),
+                 ModifierIds.decay,
                  TinkerModifiers.selfDestructive.getId())
             .add(strong_heavy.getId(), glacial_river.getId(),
                  broken_vessel.getId(), ewige_widerkunft.getId(), ouroboric_hourglass.getId(), burning_in_vain.getId(),

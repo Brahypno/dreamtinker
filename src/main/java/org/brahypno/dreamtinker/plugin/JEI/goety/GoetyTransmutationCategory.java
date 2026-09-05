@@ -11,8 +11,7 @@ import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import mezz.jei.api.recipe.RecipeType;
-import mezz.jei.api.recipe.category.IRecipeCategory;
+import mezz.jei.api.recipe.category.AbstractRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -41,7 +40,7 @@ import java.util.Map;
 /**
  * JEI view of dynamic Goety rituals that transform or modify the center item.
  */
-public final class GoetyTransmutationCategory implements IRecipeCategory<GoetyTransmutationJeiDisplay> {
+public final class GoetyTransmutationCategory extends AbstractRecipeCategory<GoetyTransmutationJeiDisplay> {
     private static final int WIDTH = 176;
     private static final int HEIGHT = 154;
     private static final int RITUAL_CENTER_X = 56;
@@ -57,40 +56,21 @@ public final class GoetyTransmutationCategory implements IRecipeCategory<GoetyTr
     private static final Map<String, ItemStack> RESEARCH_SCROLL_CACHE = new HashMap<>();
     private static boolean researchScrollCacheBuilt;
 
-    private final IDrawable background;
-    private final IDrawable icon;
     private final IDrawable arrow;
     private final ItemStack darkAltar;
     private final ItemStack pedestal;
     private final ModifierIngredientRenderer modifierRenderer = new ModifierIngredientRenderer(124, 10);
 
     public GoetyTransmutationCategory(IGuiHelper gui) {
-        background = gui.createBlankDrawable(WIDTH, HEIGHT);
+        super(GoetyJeiCompat.RECIPE_TYPE, Component.translatable("jei.dreamtinker.goety_material_transmutation"),
+              createIcon(gui), WIDTH, HEIGHT);
         darkAltar = renderFull(new ItemStack(ModBlocks.DARK_ALTAR.get()));
         pedestal = renderFull(new ItemStack(ModItems.PEDESTAL_DUMMY.get()));
-        icon = gui.createDrawableItemStack(darkAltar);
         arrow = gui.createDrawable(new ResourceLocation("goety", "textures/gui/jei/arrow.png"), 0, 0, 64, 46);
     }
 
-    @Override
-    public RecipeType<GoetyTransmutationJeiDisplay> getRecipeType() {
-        return GoetyJeiCompat.RECIPE_TYPE;
-    }
-
-    @Override
-    public Component getTitle() {
-        return Component.translatable("jei.dreamtinker.goety_material_transmutation");
-    }
-
-    @Override
-    @SuppressWarnings("removal")
-    public IDrawable getBackground() {
-        return background;
-    }
-
-    @Override
-    public IDrawable getIcon() {
-        return icon;
+    private static IDrawable createIcon(IGuiHelper gui) {
+        return gui.createDrawableItemStack(renderFull(new ItemStack(ModBlocks.DARK_ALTAR.get())));
     }
 
     @Override

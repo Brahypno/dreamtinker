@@ -2,7 +2,7 @@
   "level_display": "tconstruct:default",
   "modules": [
     {
-      "type": "tconstruct:mob_effect",
+      "type": "tconstruct:weapon_mob_effect",
       "apply_before_melee": true,
       "effect": "dreamtinker:soul_fire",
       "level": {
@@ -15,7 +15,7 @@
       }
     },
     {
-      "type": "tconstruct:mob_effect",
+      "type": "tconstruct:weapon_mob_effect",
       "apply_before_melee": true,
       "effect": "dreamtinker:cursed",
       "level": {

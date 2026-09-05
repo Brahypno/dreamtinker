@@ -53,9 +53,9 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.amber, RANGED, wait_until.getId(), as_sand.getId());
         addTraits(DreamtinkerMaterialIds.amber, ARMOR, Ids.FragileButBright);
 
-        addDefaultTraits(DreamtinkerMaterialIds.half_rotten_homunculus, anvil_hit.getId(), TinkerModifiers.necrotic.getId());
+        addDefaultTraits(DreamtinkerMaterialIds.half_rotten_homunculus, anvil_hit.getId(), ModifierIds.necrotic);
         addTraits(DreamtinkerMaterialIds.half_rotten_homunculus, ARMOR, Ids.homunculus_life_curse, Ids.homunculusGift);
-        addDefaultTraits(DreamtinkerMaterialIds.half_rotten_string, anvil_hit.getId(), TinkerModifiers.necrotic.getId());
+        addDefaultTraits(DreamtinkerMaterialIds.half_rotten_string, anvil_hit.getId(), ModifierIds.necrotic);
 
         addDefaultTraits(DreamtinkerMaterialIds.desire_gem, to_the_moon, many_wishes);
         addTraits(DreamtinkerMaterialIds.desire_gem, ARMOR, eternity_defense);
@@ -141,7 +141,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.forgotten_metal, Ids.undergarden_killer, Ids.undergarden_miner);
         addTraits(DreamtinkerMaterialIds.forgotten_metal, ARMOR, Ids.undergarden_protection);
 
-        addDefaultTraits(DreamtinkerMaterialIds.Cloggrum, TinkerModifiers.knockback);
+        addDefaultTraits(DreamtinkerMaterialIds.Cloggrum, ModifierIds.knockback);
         addTraits(DreamtinkerMaterialIds.Cloggrum, ARMOR, ModifierIds.projectileProtection);
 
         addDefaultTraits(DreamtinkerMaterialIds.Froststeel, Ids.slowness);
@@ -257,7 +257,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.PaladinBone, Ids.eidolon_soul_hearts, Ids.eidolon_paladin_bone);
         addDefaultTraits(DreamtinkerMaterialIds.PaladinBoneTool, ModifierIds.smite, ModifierIds.pierce);
         addTraits(DreamtinkerMaterialIds.SoulGem, AMMO, ModifierIds.spike, ModifierIds.smite);
-        addTraits(DreamtinkerMaterialIds.CrimsonGem, AMMO, teleport_shooting.getId(), Ids.heavy_arrow, Ids.light_arrow, TinkerModifiers.necrotic.getId());
+        addTraits(DreamtinkerMaterialIds.CrimsonGem, AMMO, teleport_shooting.getId(), Ids.heavy_arrow, Ids.light_arrow, ModifierIds.necrotic);
         addTraits(DreamtinkerMaterialIds.ShadowGem, AMMO, ModifierIds.spike, Ids.eidolon_bone_chill, Ids.eidolon_vulnerable);
 
 
@@ -266,7 +266,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
                   ModifierIds.projectileProtection, ModifierIds.worldbound);
         addTraits(DreamtinkerMaterialIds.DarkMetal, MELEE_HARVEST, bic_dark_blade.getId(), ModifierIds.worldbound);
 
-        addDefaultTraits(DreamtinkerMaterialIds.MonsterSkin, TinkerModifiers.tanned.getId(), bic_nightmare_defense.getId(), Ids.monster_blood);
+        addDefaultTraits(DreamtinkerMaterialIds.MonsterSkin, ModifierIds.tanned, bic_nightmare_defense.getId(), Ids.monster_blood);
         addDefaultTraits(DreamtinkerMaterialIds.LifeStealerBone, Ids.bic_life_stealer);
         addDefaultTraits(DreamtinkerMaterialIds.KrampusHorn, Ids.bic_krampus_horn);
         addDefaultTraits(DreamtinkerMaterialIds.NightMareClaw, Ids.bic_nightmare_claw);

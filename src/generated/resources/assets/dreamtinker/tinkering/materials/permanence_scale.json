@@ -26,77 +26,29 @@
       "frames": [
         {
           "type": "tconstruct:grey_to_sprite",
-          "palette": [
-            {
-              "color": "FF000000",
-              "grey": 0
-            },
-            {
-              "color": "FF0B0503",
-              "grey": 25
-            },
-            {
-              "color": "FF120804",
-              "grey": 26
-            },
-            {
-              "color": "FF3A2410",
-              "grey": 102
-            },
-            {
-              "color": "FF553817",
-              "grey": 140
-            },
-            {
-              "color": "FF6B4F25",
-              "grey": 178
-            },
-            {
-              "color": "FF88733E",
-              "grey": 216
-            },
-            {
-              "color": "FFA89561",
-              "grey": 255
-            }
-          ]
+          "palette": {
+            "000": "FF000000",
+            "025": "FF0B0503",
+            "026": "FF120804",
+            "102": "FF3A2410",
+            "140": "FF553817",
+            "178": "FF6B4F25",
+            "216": "FF88733E",
+            "255": "FFA89561"
+          }
         },
         {
           "type": "tconstruct:grey_to_sprite",
-          "palette": [
-            {
-              "color": "FF000000",
-              "grey": 0
-            },
-            {
-              "color": "FF100704",
-              "grey": 25
-            },
-            {
-              "color": "FF1B0D06",
-              "grey": 26
-            },
-            {
-              "color": "FF4B3115",
-              "grey": 102
-            },
-            {
-              "color": "FF6B4B20",
-              "grey": 140
-            },
-            {
-              "color": "FF84622F",
-              "grey": 178
-            },
-            {
-              "color": "FFA28A4B",
-              "grey": 216
-            },
-            {
-              "color": "FFC0AD76",
-              "grey": 255
-            }
-          ]
+          "palette": {
+            "000": "FF000000",
+            "025": "FF100704",
+            "026": "FF1B0D06",
+            "102": "FF4B3115",
+            "140": "FF6B4B20",
+            "178": "FF84622F",
+            "216": "FFA28A4B",
+            "255": "FFC0AD76"
+          }
         }
       ],
       "meta": "dreamtinker:generator/ruin_steel"

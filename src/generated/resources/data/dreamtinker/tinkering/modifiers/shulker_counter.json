@@ -32,7 +32,7 @@
       }
     },
     {
-      "type": "tconstruct:mob_effect",
+      "type": "tconstruct:counter_mob_effect",
       "chance": {
         "each_level": 0.3
       },

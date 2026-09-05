@@ -17,11 +17,12 @@ import slimeknights.tconstruct.library.modifiers.hook.combat.MonsterMeleeHitModi
 import slimeknights.tconstruct.library.modifiers.modules.build.ModifierRequirementsModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
+import slimeknights.tconstruct.library.tools.item.IModifiable;
 import slimeknights.tconstruct.library.tools.nbt.IToolContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.stat.ModifierStatsBuilder;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
-import slimeknights.tconstruct.tools.TinkerModifiers;
+import slimeknights.tconstruct.tools.data.ModifierIds;
 import slimeknights.tconstruct.tools.modules.combat.FieryAttackModule;
 
 import java.util.UUID;
@@ -41,9 +42,12 @@ public class FlamingMemory extends Modifier implements MeleeHitModifierHook, Mon
     }
 
     private int levels(IToolContext tool) {
+        int expanded = tool instanceof IToolStackView stack
+                       ? stack.getVolatileData().getInt(IModifiable.EXPANDED)
+                       : tool.getModifierLevel(ModifierIds.expanded);
         return tool.getModifierLevel(this.getId()) + tool.getModifierLevel(DreamtinkerModifiers.memory_base.getId()) +
                tool.getModifierLevel(DreamtinkerModifiers.Ids.icy_memory) + tool.getModifierLevel(DreamtinkerModifiers.Ids.hate_memory) +
-               tool.getModifierLevel(DreamtinkerModifiers.Ids.soul_core) + tool.getModifierLevel(TinkerModifiers.expanded.get()) * 2;
+               tool.getModifierLevel(DreamtinkerModifiers.Ids.soul_core) + expanded * 2;
     }
 
 

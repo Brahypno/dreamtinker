@@ -49,6 +49,7 @@ import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
 import slimeknights.tconstruct.library.modifiers.modules.combat.LootingModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.helper.ToolHarvestLogic;
+import slimeknights.tconstruct.library.tools.item.IModifiable;
 import slimeknights.tconstruct.library.tools.item.ModifiableItem;
 import slimeknights.tconstruct.library.tools.nbt.IToolContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
@@ -56,6 +57,7 @@ import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.tools.TinkerModifiers;
+import slimeknights.tconstruct.tools.data.ModifierIds;
 
 import javax.annotation.Nullable;
 import java.util.ArrayDeque;
@@ -69,8 +71,11 @@ public class foundationWill extends NoLevelsModifier implements ModifierTraitHoo
     private static final ResourceLocation TAG_MOD = Dreamtinker.getLocation("foundation_mode");
 
     private static int getLevel(IToolContext toolStackView) {
+        int expanded = toolStackView instanceof IToolStackView stack
+                       ? stack.getVolatileData().getInt(IModifiable.EXPANDED)
+                       : toolStackView.getModifierLevel(ModifierIds.expanded);
         return toolStackView.getModifierLevel(DreamtinkerModifiers.foundation_will.getId()) +
-               toolStackView.getModifierLevel(TinkerModifiers.expanded.get()) * 2;
+               expanded * 2;
     }
 
     private static final ToolContextPredicate harvestPredicate = ToolContextPredicate.simple(context -> context.getPersistentData().getInt(TAG_MOD) == 0);

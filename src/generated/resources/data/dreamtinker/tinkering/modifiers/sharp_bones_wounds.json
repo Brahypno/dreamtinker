@@ -24,7 +24,7 @@
   "level_display": "tconstruct:default",
   "modules": [
     {
-      "type": "tconstruct:mob_effect",
+      "type": "tconstruct:weapon_mob_effect",
       "effect": "tconstruct:bleeding",
       "hooks": [
         "tconstruct:melee_hit",
@@ -43,7 +43,7 @@
       }
     },
     {
-      "type": "tconstruct:mob_effect",
+      "type": "tconstruct:weapon_mob_effect",
       "effect": "tconstruct:pierce",
       "hooks": [
         "tconstruct:melee_hit",

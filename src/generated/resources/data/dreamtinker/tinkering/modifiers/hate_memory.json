@@ -9,7 +9,7 @@
       }
     },
     {
-      "type": "tconstruct:mob_effect",
+      "type": "tconstruct:weapon_mob_effect",
       "effect": "minecraft:poison",
       "level": {
         "per_level": 1.0
@@ -24,7 +24,7 @@
       }
     },
     {
-      "type": "tconstruct:mob_effect",
+      "type": "tconstruct:weapon_mob_effect",
       "chance": {
         "each_level": 0.99
       },
@@ -42,7 +42,7 @@
       }
     },
     {
-      "type": "tconstruct:mob_effect",
+      "type": "tconstruct:weapon_mob_effect",
       "effect": "minecraft:wither",
       "level": {
         "per_level": 1.0
@@ -57,7 +57,7 @@
       }
     },
     {
-      "type": "tconstruct:mob_effect",
+      "type": "tconstruct:weapon_mob_effect",
       "effect": "minecraft:weakness",
       "level": {
         "per_level": 1.0
@@ -67,7 +67,7 @@
       }
     },
     {
-      "type": "tconstruct:mob_effect",
+      "type": "tconstruct:weapon_mob_effect",
       "effect": "minecraft:strength",
       "level": {
         "flat": 1.0,
@@ -78,7 +78,7 @@
       }
     },
     {
-      "type": "tconstruct:mob_effect",
+      "type": "tconstruct:weapon_mob_effect",
       "effect": "minecraft:slowness",
       "level": {
         "flat": 3.0
@@ -88,7 +88,7 @@
       }
     },
     {
-      "type": "tconstruct:mob_effect",
+      "type": "tconstruct:weapon_mob_effect",
       "effect": "minecraft:speed",
       "level": {
         "flat": 2.0
@@ -98,7 +98,7 @@
       }
     },
     {
-      "type": "tconstruct:mob_effect",
+      "type": "tconstruct:weapon_mob_effect",
       "effect": "minecraft:luck",
       "level": {
         "flat": 3.0
@@ -108,7 +108,7 @@
       }
     },
     {
-      "type": "tconstruct:mob_effect",
+      "type": "tconstruct:weapon_mob_effect",
       "effect": "minecraft:unluck",
       "level": {
         "flat": 2.0
@@ -118,7 +118,7 @@
       }
     },
     {
-      "type": "tconstruct:mob_effect",
+      "type": "tconstruct:weapon_mob_effect",
       "chance": {
         "each_level": 0.3
       },

@@ -58,7 +58,7 @@
       }
     },
     {
-      "type": "tconstruct:mob_effect",
+      "type": "tconstruct:weapon_mob_effect",
       "chance": {
         "each_level": 0.3
       },

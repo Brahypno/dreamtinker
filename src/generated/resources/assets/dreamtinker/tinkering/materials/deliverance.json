@@ -24,135 +24,51 @@
       "frames": [
         {
           "type": "tconstruct:grey_to_sprite",
-          "palette": [
-            {
-              "color": "FF000000",
-              "grey": 0
-            },
-            {
-              "color": "FF271919",
-              "grey": 63
-            },
-            {
-              "color": "FF542F26",
-              "grey": 102
-            },
-            {
-              "color": "FF97522E",
-              "grey": 140
-            },
-            {
-              "color": "FFE08430",
-              "grey": 178
-            },
-            {
-              "color": "FFFFBE52",
-              "grey": 216
-            },
-            {
-              "color": "FFFFF4CA",
-              "grey": 255
-            }
-          ]
+          "palette": {
+            "000": "FF000000",
+            "063": "FF271919",
+            "102": "FF542F26",
+            "140": "FF97522E",
+            "178": "FFE08430",
+            "216": "FFFFBE52",
+            "255": "FFFFF4CA"
+          }
         },
         {
           "type": "tconstruct:grey_to_sprite",
-          "palette": [
-            {
-              "color": "FF000000",
-              "grey": 0
-            },
-            {
-              "color": "FF300C07",
-              "grey": 63
-            },
-            {
-              "color": "FF69180C",
-              "grey": 102
-            },
-            {
-              "color": "FFB13012",
-              "grey": 140
-            },
-            {
-              "color": "FFF4641A",
-              "grey": 178
-            },
-            {
-              "color": "FFFFB139",
-              "grey": 216
-            },
-            {
-              "color": "FFFFF2C3",
-              "grey": 255
-            }
-          ]
+          "palette": {
+            "000": "FF000000",
+            "063": "FF300C07",
+            "102": "FF69180C",
+            "140": "FFB13012",
+            "178": "FFF4641A",
+            "216": "FFFFB139",
+            "255": "FFFFF2C3"
+          }
         },
         {
           "type": "tconstruct:grey_to_sprite",
-          "palette": [
-            {
-              "color": "FF000000",
-              "grey": 0
-            },
-            {
-              "color": "FF121E2C",
-              "grey": 63
-            },
-            {
-              "color": "FF23485C",
-              "grey": 102
-            },
-            {
-              "color": "FF528497",
-              "grey": 140
-            },
-            {
-              "color": "FF9CC6C6",
-              "grey": 178
-            },
-            {
-              "color": "FFE7DAAB",
-              "grey": 216
-            },
-            {
-              "color": "FFFFF7DA",
-              "grey": 255
-            }
-          ]
+          "palette": {
+            "000": "FF000000",
+            "063": "FF121E2C",
+            "102": "FF23485C",
+            "140": "FF528497",
+            "178": "FF9CC6C6",
+            "216": "FFE7DAAB",
+            "255": "FFFFF7DA"
+          }
         },
         {
           "type": "tconstruct:grey_to_sprite",
-          "palette": [
-            {
-              "color": "FF000000",
-              "grey": 0
-            },
-            {
-              "color": "FF0D192B",
-              "grey": 63
-            },
-            {
-              "color": "FF193E5B",
-              "grey": 102
-            },
-            {
-              "color": "FF347092",
-              "grey": 140
-            },
-            {
-              "color": "FF68B2CD",
-              "grey": 178
-            },
-            {
-              "color": "FFB8E8F2",
-              "grey": 216
-            },
-            {
-              "color": "FFF4FEFF",
-              "grey": 255
-            }
-          ]
+          "palette": {
+            "000": "FF000000",
+            "063": "FF0D192B",
+            "102": "FF193E5B",
+            "140": "FF347092",
+            "178": "FF68B2CD",
+            "216": "FFB8E8F2",
+            "255": "FFF4FEFF"
+          }
         }
       ],
       "meta": "dreamtinker:generator/etherium"

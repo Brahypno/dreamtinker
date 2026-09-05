@@ -52,13 +52,13 @@ import slimeknights.tconstruct.library.recipe.fuel.MeltingFuelLookup;
 import slimeknights.tconstruct.library.tools.capability.ToolEnergyCapability;
 import slimeknights.tconstruct.library.tools.capability.fluid.ToolTankHelper;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
+import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
 import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.shared.TinkerEffects;
-import slimeknights.tconstruct.tools.modifiers.ability.interaction.BlockingModifier;
 
 import javax.annotation.Nullable;
 import java.util.Comparator;
@@ -188,12 +188,12 @@ public class DeathShredder extends Modifier implements MeleeDamageModifierHook, 
                                          .level(RandomLevelingValue.flat(1))
                                          .time(RandomLevelingValue.perLevel(20 * 5, 10))
                                          .tool(isElectric.inverted())
-                                         .build());
+                                         .buildWeapon());
         builder.addModule(MobEffectModule.builder(MobEffects.MOVEMENT_SLOWDOWN)
                                          .level(RandomLevelingValue.flat(1))
                                          .time(RandomLevelingValue.perLevel(20 * 5, 10))
                                          .tool(isMIX)
-                                         .build());
+                                         .buildWeapon());
 
         super.registerHooks(builder);
     }
@@ -210,7 +210,7 @@ public class DeathShredder extends Modifier implements MeleeDamageModifierHook, 
 
     @Override
     public @NotNull UseAnim getUseAction(IToolStackView tool, ModifierEntry modifier) {
-        return BlockingModifier.blockWhileCharging(tool, UseAnim.BOW);
+        return ModifierUtil.blockWhileCharging(tool, UseAnim.BOW);
     }
 
     @Override

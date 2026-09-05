@@ -30,135 +30,51 @@
       "frames": [
         {
           "type": "tconstruct:grey_to_sprite",
-          "palette": [
-            {
-              "color": "FF000000",
-              "grey": 0
-            },
-            {
-              "color": "FF8BB5BE",
-              "grey": 63
-            },
-            {
-              "color": "FFD0C1D0",
-              "grey": 102
-            },
-            {
-              "color": "FFC9E8E1",
-              "grey": 140
-            },
-            {
-              "color": "FFB8F1EA",
-              "grey": 178
-            },
-            {
-              "color": "FFF7E5F7",
-              "grey": 216
-            },
-            {
-              "color": "FFCBFEF6",
-              "grey": 255
-            }
-          ]
+          "palette": {
+            "000": "FF000000",
+            "063": "FF8BB5BE",
+            "102": "FFD0C1D0",
+            "140": "FFC9E8E1",
+            "178": "FFB8F1EA",
+            "216": "FFF7E5F7",
+            "255": "FFCBFEF6"
+          }
         },
         {
           "type": "tconstruct:grey_to_sprite",
-          "palette": [
-            {
-              "color": "FF000000",
-              "grey": 0
-            },
-            {
-              "color": "FFA3FFF9",
-              "grey": 63
-            },
-            {
-              "color": "FFD8FFFF",
-              "grey": 102
-            },
-            {
-              "color": "FFE0FFFF",
-              "grey": 140
-            },
-            {
-              "color": "FFF4FFFF",
-              "grey": 178
-            },
-            {
-              "color": "FFFFFFFF",
-              "grey": 216
-            },
-            {
-              "color": "FFFFFFFF",
-              "grey": 255
-            }
-          ]
+          "palette": {
+            "000": "FF000000",
+            "063": "FFA3FFF9",
+            "102": "FFD8FFFF",
+            "140": "FFE0FFFF",
+            "178": "FFF4FFFF",
+            "216": "FFFFFFFF",
+            "255": "FFFFFFFF"
+          }
         },
         {
           "type": "tconstruct:grey_to_sprite",
-          "palette": [
-            {
-              "color": "FF000000",
-              "grey": 0
-            },
-            {
-              "color": "FF7E90A1",
-              "grey": 63
-            },
-            {
-              "color": "FFB9A3B9",
-              "grey": 102
-            },
-            {
-              "color": "FFADDDD3",
-              "grey": 140
-            },
-            {
-              "color": "FFA7E9DF",
-              "grey": 178
-            },
-            {
-              "color": "FFF3D9F3",
-              "grey": 216
-            },
-            {
-              "color": "FFBEFDF2",
-              "grey": 255
-            }
-          ]
+          "palette": {
+            "000": "FF000000",
+            "063": "FF7E90A1",
+            "102": "FFB9A3B9",
+            "140": "FFADDDD3",
+            "178": "FFA7E9DF",
+            "216": "FFF3D9F3",
+            "255": "FFBEFDF2"
+          }
         },
         {
           "type": "tconstruct:grey_to_sprite",
-          "palette": [
-            {
-              "color": "FF000000",
-              "grey": 0
-            },
-            {
-              "color": "FF664666",
-              "grey": 63
-            },
-            {
-              "color": "FF8A658A",
-              "grey": 102
-            },
-            {
-              "color": "FF77C6B5",
-              "grey": 140
-            },
-            {
-              "color": "FFE4B9E4",
-              "grey": 178
-            },
-            {
-              "color": "FF8BE1CF",
-              "grey": 216
-            },
-            {
-              "color": "FFA4FCE9",
-              "grey": 255
-            }
-          ]
+          "palette": {
+            "000": "FF000000",
+            "063": "FF664666",
+            "102": "FF8A658A",
+            "140": "FF77C6B5",
+            "178": "FFE4B9E4",
+            "216": "FF8BE1CF",
+            "255": "FFA4FCE9"
+          }
         }
       ],
       "meta": "dreamtinker:generator/etherium"

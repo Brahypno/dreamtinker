@@ -2,6 +2,7 @@ package org.brahypno.dreamtinker.tools.modifiers.traits.Compat;
 
 import com.hollingsworth.arsnouveau.ArsNouveau;
 import net.minecraft.resources.ResourceLocation;
+import slimeknights.tconstruct.library.json.LevelingInt;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -19,7 +20,8 @@ public class NovaReactive extends Modifier implements RawDataModifierHook {
     protected void registerHooks(ModuleHookMap.Builder hookBuilder) {
         super.registerHooks(hookBuilder);
         hookBuilder.addHook(this, ModifierHooks.RAW_DATA);
-        hookBuilder.addModule(EnchantmentModule.builder(com.hollingsworth.arsnouveau.setup.registry.EnchantmentRegistry.REACTIVE_ENCHANTMENT.get()).level(1)
+        hookBuilder.addModule(EnchantmentModule.builder(com.hollingsworth.arsnouveau.setup.registry.EnchantmentRegistry.REACTIVE_ENCHANTMENT.get())
+                                               .level(LevelingInt.eachLevel(1))
                                                .constant());
     }
 

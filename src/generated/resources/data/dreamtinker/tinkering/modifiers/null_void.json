@@ -2,7 +2,7 @@
   "level_display": "tconstruct:default",
   "modules": [
     {
-      "type": "tconstruct:mob_effect",
+      "type": "tconstruct:weapon_mob_effect",
       "effect": "minecraft:darkness",
       "hooks": [
         "tconstruct:melee_hit",
@@ -17,7 +17,7 @@
       }
     },
     {
-      "type": "tconstruct:mob_effect",
+      "type": "tconstruct:weapon_mob_effect",
       "effect": "dreamtinker:real_darkness",
       "hooks": [
         "tconstruct:melee_hit",

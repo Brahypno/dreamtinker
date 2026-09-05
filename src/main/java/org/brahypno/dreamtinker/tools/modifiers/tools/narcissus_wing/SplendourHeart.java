@@ -52,9 +52,9 @@ import slimeknights.tconstruct.library.tools.IndestructibleItemEntity;
 import slimeknights.tconstruct.library.tools.SlotType;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.helper.ToolAttackUtil;
+import slimeknights.tconstruct.library.tools.item.IModifiable;
 import slimeknights.tconstruct.library.tools.nbt.*;
 import slimeknights.tconstruct.library.tools.stat.*;
-import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.logic.ModifierEvents;
 
 import java.util.List;
@@ -316,7 +316,7 @@ public class SplendourHeart extends Modifier implements MeleeHitModifierHook, In
     }
 
     private void performSplendourSweep(IToolStackView tool, ToolAttackContext context) {
-        double range = 3 + tool.getModifierLevel(TinkerModifiers.expanded.getId());
+        double range = 3 + tool.getVolatileData().getInt(IModifiable.EXPANDED);
         if (range <= 0){
             return;
         }

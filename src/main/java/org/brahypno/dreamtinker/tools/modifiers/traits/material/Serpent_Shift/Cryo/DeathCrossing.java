@@ -43,9 +43,9 @@ import slimeknights.tconstruct.library.modifiers.hook.interaction.KeybindInterac
 import slimeknights.tconstruct.library.modifiers.hook.interaction.UsingToolModifierHook;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
+import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
-import slimeknights.tconstruct.tools.modifiers.ability.interaction.BlockingModifier;
 
 import java.util.List;
 import java.util.UUID;
@@ -171,7 +171,7 @@ public class DeathCrossing extends Modifier implements MeleeDamageModifierHook, 
 
     @Override
     public @NotNull UseAnim getUseAction(IToolStackView tool, ModifierEntry modifier) {
-        return BlockingModifier.blockWhileCharging(tool, UseAnim.BOW);
+        return ModifierUtil.blockWhileCharging(tool, UseAnim.BOW);
     }
 
     @Override

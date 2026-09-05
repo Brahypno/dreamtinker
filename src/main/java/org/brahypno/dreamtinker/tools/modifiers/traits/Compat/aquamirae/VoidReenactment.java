@@ -21,6 +21,7 @@ import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.esotericismtinker.utils.ETModifierCheck;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
+import slimeknights.tconstruct.library.json.LevelingInt;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -53,7 +54,7 @@ public class VoidReenactment extends Modifier implements MeleeHitModifierHook, P
     @Override
     protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
         hookBuilder.addHook(this, ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT);
-        hookBuilder.addModule(EnchantmentModule.builder(Enchantments.SMITE).level(2).constant());
+        hookBuilder.addModule(EnchantmentModule.builder(Enchantments.SMITE).level(LevelingInt.eachLevel(2)).constant());
         hookBuilder.addModule(new ModifierTraitModule(ModifierIds.smite, 2, false));
         super.registerHooks(hookBuilder);
     }

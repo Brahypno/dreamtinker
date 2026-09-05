@@ -47,13 +47,12 @@ import slimeknights.tconstruct.library.modifiers.hook.combat.MeleeHitModifierHoo
 import slimeknights.tconstruct.library.modifiers.hook.display.TooltipModifierHook;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
 import slimeknights.tconstruct.library.modifiers.modules.build.ModifierTraitModule;
-import slimeknights.tconstruct.library.modifiers.modules.util.ModifierCondition;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
 import slimeknights.tconstruct.library.tools.context.ToolAttackContext;
 import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.nbt.ModDataNBT;
-import slimeknights.tconstruct.tools.TinkerModifiers;
+import slimeknights.tconstruct.tools.data.ModifierIds;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -67,9 +66,8 @@ public class EldritchPan extends Modifier implements MeleeHitModifierHook, Damag
         hookBuilder.addHook(this, ModifierHooks.MELEE_HIT, ModifierHooks.DAMAGE_BLOCK, ModifierHooks.INVENTORY_TICK,
                             ModifierHooks.REMOVE, ModifierHooks.TOOLTIP, ModifierHooks.ATTRIBUTES, ModifierHooks.VALIDATE);
         hookBuilder.addModule(new ModifierTraitModule(DreamtinkerModifiers.cursed_ring_bound.getId(), 1, true));
-        hookBuilder.addModule(new ModifierTraitModule(TinkerModifiers.blocking.getId(), 1, true,
-                                                      ModifierCondition.ANY_CONTEXT.with(
-                                                              ToolContextPredicate.tag(TinkerTags.Items.INTERACTABLE_RIGHT).inverted())));
+        hookBuilder.addModule(new ModifierTraitModule(ModifierIds.blocking, 1, true,
+                                                      ToolContextPredicate.tag(TinkerTags.Items.INTERACTABLE_RIGHT).inverted()));
         super.registerHooks(hookBuilder);
     }
 
