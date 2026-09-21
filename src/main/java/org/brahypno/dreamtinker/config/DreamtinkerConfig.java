@@ -144,7 +144,7 @@ public class DreamtinkerConfig {
     public static final ForgeConfigSpec.IntValue TheWolfWonderSurpriseNumber =
             builder.comment("This is a surprise!").defineInRange("TheWolfWonderSurpriseNumber", 7, 0, 6666);
     public static final ForgeConfigSpec.BooleanValue TheWolfWonderPotionEffectOnly =
-            builder.comment("Enable this means The wolf wonder would only apply Potion effects").define("TheWolfWonderPotionEffectOnly", false);
+            builder.comment("Enable this means The wolf wonder would only apply Potion effects").define("TheWolfWonderPotionEffectOnly", true);
     public static final ForgeConfigSpec.ConfigValue<List<? extends String>> TheWolfBlackList =
             builder.comment("Blacklist for the wolf, and despair mist").defineList("wolf_blacklist",
                                                                                    List.of("tconstruct:self_destructing", "minecraft:hero_of_the_village",
