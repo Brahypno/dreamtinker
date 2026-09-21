@@ -69,9 +69,11 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
         simpleBlockWithItem(DreamtinkerCommon.DeepslateTransmutationGoldOre.get(), cubeAll(DreamtinkerCommon.DeepslateTransmutationGoldOre.get()));
         simpleBlockWithItem(DreamtinkerCommon.TransmutationGoldBlock.get(), cubeAll(DreamtinkerCommon.TransmutationGoldBlock.get()));
         simpleBlockWithItem(DreamtinkerCommon.RawTransmutationGoldBlock.get(), cubeAll(DreamtinkerCommon.RawTransmutationGoldBlock.get()));
-        singleTextureParentBlock(DreamtinkerCommon.UnbornDragonEgg.get(), "unborn_dragon_egg", mcLoc("block/dragon_egg"), "all");
+        // Vanilla's dragon egg item model is the block model itself, so no dedicated item texture is needed
+        simpleBlockItem(DreamtinkerCommon.UnbornDragonEgg.get(),
+                        singleTextureParentBlock(DreamtinkerCommon.UnbornDragonEgg.get(), "unborn_dragon_egg", mcLoc("block/dragon_egg"), "all"));
         snifferEggBlock(DreamtinkerCommon.UnbornSnifferEgg.get(), "unborn_sniffer_egg");
-        singleTextureParentBlock(DreamtinkerCommon.UnbornTurtleEgg.get(), "unborn_turtle_egg", mcLoc("block/template_turtle_egg"), "all");
+        spriteItemParentBlock(DreamtinkerCommon.UnbornTurtleEgg.get(), "unborn_turtle_egg", mcLoc("block/template_turtle_egg"), "all");
     }
 
     public void axisBlock(Block block, String location, ResourceLocation texture, boolean horizontal) {
@@ -171,13 +173,24 @@ public class DreamTinkerBlockStateProvider extends BlockStateProvider {
         return BuiltInRegistries.ITEM.getKey(item.asItem());
     }
 
-    private void singleTextureParentBlock(Block block, String name, ResourceLocation parent, String name2) {
-        simpleBlock(block,
-                    models().withExistingParent(name, parent)
-                            .texture(name2, modLoc("block/" + name))
-                            .texture("particle", modLoc("block/" + name)));
-        generatedItem(name);
+    /**
+     * Creates a block model inheriting all geometry from a vanilla parent, feeding it our own block texture.
+     * The returned model can be used directly as the item model, like vanilla does for the dragon egg.
+     */
+    private ModelFile singleTextureParentBlock(Block block, String name, ResourceLocation parent, String textureKey) {
+        ModelFile model = models().withExistingParent(name, parent)
+                                  .texture(textureKey, modLoc("block/" + name))
+                                  .texture("particle", modLoc("block/" + name));
+        simpleBlock(block, model);
+        return model;
+    }
 
+    /**
+     * Same as {@link #singleTextureParentBlock}, for blocks whose vanilla item is a flat sprite (sniffer and turtle eggs)
+     */
+    private void spriteItemParentBlock(Block block, String name, ResourceLocation parent, String textureKey) {
+        singleTextureParentBlock(block, name, parent, textureKey);
+        generatedItem(name);
     }
 
     private void snifferEggBlock(Block block, String name) {
