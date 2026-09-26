@@ -4,5 +4,6 @@
   "pattern_item": {
     "tag": "tconstruct:casts/sand"
   },
-  "result": "dreamtinker:nova_rostrum_sand_cast"
+  "result": "dreamtinker:nova_rostrum_sand_cast",
+  "title_key": "tconstruct:sand_cast"
 }

@@ -68,6 +68,5 @@
       "type": "tconstruct:effect_immunity",
       "effect": "minecraft:wither"
     }
-  ],
-  "tooltip_display": "always"
+  ]
 }

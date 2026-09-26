@@ -41,6 +41,5 @@
       "type": "tconstruct:effect_immunity",
       "effect": "dreamtinker:soul_fire"
     }
-  ],
-  "tooltip_display": "always"
+  ]
 }

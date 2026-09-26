@@ -25,6 +25,5 @@
     "type": "tconstruct:unique",
     "first_unique": false,
     "unique_until": 3
-  },
-  "tooltip_display": "always"
+  }
 }

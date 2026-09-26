@@ -39,6 +39,5 @@
       "percent": true,
       "require_effective": false
     }
-  ],
-  "tooltip_display": "always"
+  ]
 }

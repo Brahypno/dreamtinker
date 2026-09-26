@@ -29,6 +29,5 @@
       "damage_source": "mantle:can_protect",
       "each_level": 1.75
     }
-  ],
-  "tooltip_display": "always"
+  ]
 }

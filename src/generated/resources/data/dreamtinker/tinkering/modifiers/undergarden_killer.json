@@ -55,6 +55,5 @@
       "percent": true,
       "target": "dreamtinker:living_of_undergarden"
     }
-  ],
-  "tooltip_display": "always"
+  ]
 }

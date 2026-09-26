@@ -35,6 +35,5 @@
       "operation": "add",
       "stat": "tconstruct:draw_speed"
     }
-  ],
-  "tooltip_display": "always"
+  ]
 }

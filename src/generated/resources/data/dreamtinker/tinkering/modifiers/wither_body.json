@@ -13,6 +13,5 @@
       "type": "tconstruct:effect_immunity",
       "effect": "minecraft:regeneration"
     }
-  ],
-  "tooltip_display": "always"
+  ]
 }

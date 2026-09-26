@@ -29,6 +29,5 @@
       "operation": "multiply_conditional",
       "stat": "tconstruct:accuracy"
     }
-  ],
-  "tooltip_display": "always"
+  ]
 }

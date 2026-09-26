@@ -34,7 +34,7 @@
       "percent": true
     },
     {
-      "type": "dreamtinker:absorption_gain",
+      "type": "esotericism_tinker:absorption_gain",
       "ratio": {
         "flat": 0.15
       }
@@ -55,6 +55,5 @@
         "per_level": 20.0
       }
     }
-  ],
-  "tooltip_display": "always"
+  ]
 }

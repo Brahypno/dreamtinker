@@ -28,6 +28,5 @@
       "stat": "tconstruct:harvest_tier",
       "value": "enigmaticlegacy:etherium"
     }
-  ],
-  "tooltip_display": "always"
+  ]
 }

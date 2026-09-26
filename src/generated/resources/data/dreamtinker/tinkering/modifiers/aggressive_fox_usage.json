@@ -5,6 +5,5 @@
       "type": "esotericism_tinker:self_destory_module",
       "entity": "dreamtinker:aggressive_fox"
     }
-  ],
-  "tooltip_display": "always"
+  ]
 }

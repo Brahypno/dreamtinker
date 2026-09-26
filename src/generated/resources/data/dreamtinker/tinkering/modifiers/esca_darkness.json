@@ -27,6 +27,5 @@
       "type": "tconstruct:effect_immunity",
       "effect": "minecraft:darkness"
     }
-  ],
-  "tooltip_display": "always"
+  ]
 }
