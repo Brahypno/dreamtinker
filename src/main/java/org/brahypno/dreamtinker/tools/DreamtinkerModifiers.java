@@ -107,7 +107,6 @@ import org.brahypno.dreamtinker.tools.modifiers.traits.material.star_regulus.Two
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.star_regulus.as_one;
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.whimsyGold.RhinegoldCatModifier;
 import org.brahypno.dreamtinker.utils.CompatUtils.ForbiddenArcanusAurealCompat;
-import org.brahypno.esotericismtinker.library.modifiers.modules.combat.AbsorptionGainModule;
 import slimeknights.mantle.data.predicate.block.BlockPredicate;
 import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
 import slimeknights.tconstruct.library.json.variable.entity.EntityVariable;
@@ -399,7 +398,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             ModifierModule.LOADER.register(Dreamtinker.getLocation("narcissus_fluid_feedback"), NarcissusFluidFeedbackModule.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("bontania_auto_pure_module"), AutoPureDaisyModule.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("armor_value_reduction"), ArmorValueReductionModule.LOADER);
-            ModifierModule.LOADER.register(Dreamtinker.getLocation("absorption_gain"), AbsorptionGainModule.Weapon.LOADER);
 
             FluidEffect.ENTITY_EFFECTS.register(Dreamtinker.getLocation("drain_life_fluid"), DrainLifeFluidEffect.LOADER);
             FluidEffect.ENTITY_EFFECTS.register(Dreamtinker.getLocation("conditional_damage_fluid"), ConditionalDamageFluidEffect.LOADER);

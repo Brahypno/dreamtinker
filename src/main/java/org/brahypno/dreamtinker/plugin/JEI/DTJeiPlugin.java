@@ -31,6 +31,7 @@ import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.recipe.ingredient.EntityIngredient;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.materials.stats.MaterialStatsId;
+import slimeknights.tconstruct.library.tools.item.IModifiableDisplay;
 import slimeknights.tconstruct.shared.TinkerCommons;
 import slimeknights.tconstruct.tools.stats.HandleMaterialStats;
 import slimeknights.tconstruct.tools.stats.HeadMaterialStats;
@@ -228,7 +229,13 @@ public final class DTJeiPlugin implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration reg) {
-        reg.addRecipeCatalyst(new ItemStack(DreamtinkerTools.narcissus_wing.get()));
+        // JEI ignores a catalyst call without recipe types, so the wing has to name its category
+        Item wing = DreamtinkerTools.narcissus_wing.get();
+        reg.addRecipeCatalyst(new ItemStack(wing), NARCISSUS_FEEDBACK);
+        // tools are matched by subtype, so the display tool is registered as well
+        if (wing instanceof IModifiableDisplay display){
+            reg.addRecipeCatalyst(display.getRenderTool(), NARCISSUS_FEEDBACK);
+        }
     }
 
     @Override

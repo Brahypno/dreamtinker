@@ -55,6 +55,11 @@ public final class GoetyTransmutationCategory extends AbstractRecipeCategory<Goe
     };
     private static final Map<String, ItemStack> RESEARCH_SCROLL_CACHE = new HashMap<>();
     private static boolean researchScrollCacheBuilt;
+    /**
+     * Icons per ritual craft type, resolved once instead of on every layout.
+     */
+    private static final Map<String, ItemStack> CRAFT_TYPE_CACHE = new HashMap<>();
+    private static boolean craftTypeCacheBuilt;
 
     private final IDrawable arrow;
     private final ItemStack darkAltar;
@@ -155,12 +160,14 @@ public final class GoetyTransmutationCategory extends AbstractRecipeCategory<Goe
     }
 
     private static ItemStack craftTypeIcon(GoetyTransmutationJeiDisplay display) {
-        for (var ritualType : RitualType.getAllRitualType()) {
-            if (display.recipe().getCraftType().equals(ritualType.getName())){
-                return ritualType.getJeiIcon();
+        if (!craftTypeCacheBuilt){
+            for (var ritualType : RitualType.getAllRitualType()) {
+                CRAFT_TYPE_CACHE.putIfAbsent(ritualType.getName(), ritualType.getJeiIcon());
             }
+            craftTypeCacheBuilt = true;
         }
-        return new ItemStack(Items.OBSIDIAN);
+        ItemStack icon = CRAFT_TYPE_CACHE.get(display.recipe().getCraftType());
+        return icon != null ? icon : new ItemStack(Items.OBSIDIAN);
     }
 
     private static ItemStack researchScroll(String researchId) {

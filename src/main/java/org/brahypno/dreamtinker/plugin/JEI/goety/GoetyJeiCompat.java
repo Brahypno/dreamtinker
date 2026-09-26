@@ -26,6 +26,7 @@ import org.brahypno.dreamtinker.library.compat.goety.GoetyMaterialTransmutationR
 import org.brahypno.dreamtinker.library.compat.goety.GoetyModifierRitualRecipe;
 import org.brahypno.dreamtinker.library.compat.goety.GoetyModifierRitualTarget;
 import org.brahypno.dreamtinker.library.compat.goety.GoetyTransmutationTarget;
+import slimeknights.tconstruct.common.recipe.RecipeCacheInvalidator;
 import slimeknights.tconstruct.library.materials.MaterialRegistry;
 import slimeknights.tconstruct.library.materials.definition.MaterialVariant;
 import slimeknights.tconstruct.library.materials.definition.MaterialVariantId;
@@ -45,6 +46,16 @@ public final class GoetyJeiCompat {
     public static final RecipeType<GoetyTransmutationJeiDisplay> RECIPE_TYPE = RecipeType.create(
             Dreamtinker.MODID, "goety_material_transmutation", GoetyTransmutationJeiDisplay.class);
     private static volatile List<GoetyTransmutationJeiDisplay> registeredDisplays = List.of();
+
+    /**
+     * Display inputs per item and material. Building one is expensive and the same pair repeats for
+     * every ritual, so it is built once and dropped when the material registry reloads.
+     */
+    private static final Map<DisplayInputKey, ItemStack> DISPLAY_INPUT_CACHE = new HashMap<>();
+
+    static {
+        RecipeCacheInvalidator.addReloadListener(client -> DISPLAY_INPUT_CACHE.clear());
+    }
 
     private GoetyJeiCompat() {}
 
@@ -172,6 +183,16 @@ public final class GoetyJeiCompat {
     }
 
     private static ItemStack displayInput(Item item, MaterialVariantId material) {
+        // only tool parts and tools can ever be a display input, so the cache stays small
+        if (!(item instanceof ToolPartItem) && !(item instanceof IModifiable)){
+            return ItemStack.EMPTY;
+        }
+
+        return DISPLAY_INPUT_CACHE.computeIfAbsent(new DisplayInputKey(item, material),
+                                                   key -> buildDisplayInput(key.item(), key.material()));
+    }
+
+    private static ItemStack buildDisplayInput(Item item, MaterialVariantId material) {
         if (item instanceof ToolPartItem part){
             return part.canUseMaterial(material.getId()) ? part.withMaterial(material) : ItemStack.EMPTY;
         }
@@ -180,6 +201,8 @@ public final class GoetyJeiCompat {
         }
         return ItemStack.EMPTY;
     }
+
+    private record DisplayInputKey(Item item, MaterialVariantId material) {}
 
     private record DisplayKey(Item item, int cost) {}
 
