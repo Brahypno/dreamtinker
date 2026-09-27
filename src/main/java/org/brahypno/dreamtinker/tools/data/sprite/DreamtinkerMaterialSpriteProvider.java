@@ -64,7 +64,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .build());
 
         this.buildMaterial(DreamtinkerMaterialIds.sharp_bones)
-            .meleeHarvest().ranged().arrowHead().arrowShaft().repairKit()
+            .meleeHarvest().ranged().arrowHead().arrowShaft().ribcage().repairKit()
             .fallbacks("bone")
             .transformer(GreyToSpriteTransformer.builder()
                                                 .addARGB(0, 0xFF7B7E6B)
@@ -244,7 +244,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(255, 0xFFFFDA25)  // 近金黄高光
                                                 .build());
         this.buildMaterial(DreamtinkerMaterialIds.half_rotten_homunculus)
-            .statType(HandleMaterialStats.ID).statType(StatlessMaterialStats.BINDING.getIdentifier()).maille().repairKit()
+            .statType(HandleMaterialStats.ID).statType(StatlessMaterialStats.BINDING.getIdentifier()).slime().repairKit()
             .fallbacks("bone")
             .transformer(GreyToSpriteTransformer.builder()
                                                 .addARGB(0, 0xFF000000)  // 最暗凝块
@@ -317,7 +317,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
 
         buildMaterial(DreamtinkerMaterialIds.shadowskin)
                 .fallbacks("cloth")
-                .cuirass().maille()
+                .cuirass().slime()
                 .colorMapper(GreyToColorMapping.builderFromBlack()
                                                .addARGB(63, 0xFF050505)
                                                .addARGB(102, 0xFF0A0A0A)
@@ -349,7 +349,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(255, 0xFFF2EDE2)
                                                 .build());
         this.buildMaterial(DreamtinkerMaterialIds.rainbow_honey_crystal)
-            .meleeHarvest().armor()
+            .meleeHarvest().slime()
             .fallbacks("crystal")
             .transformer(GreyToSpriteTransformer.builder()
                                                 .addARGB(63, 0xFF6A6A1A)
@@ -1042,7 +1042,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(255, 0xFFFCF7ED)
                                                 .build());
         this.buildMaterial(DreamtinkerMaterialIds.astral_weave)
-            .fletching().maille().statType(StatlessMaterialStats.BINDING).statType(StatlessMaterialStats.BOWSTRING).repairKit()
+            .fletching().maille().laces().statType(StatlessMaterialStats.BINDING).statType(StatlessMaterialStats.BOWSTRING).repairKit()
             .fallbacks("cloth")
             .transformer(GreyToSpriteTransformer.builder()
                                                 .addARGB(63, 0xFF3B2B51)
@@ -1067,7 +1067,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
 
     protected void addEidolonMaterials() {
         this.buildMaterial(DreamtinkerMaterialIds.TatteredCloth)
-            .statType(StatlessMaterialStats.BINDING).statType(StatlessMaterialStats.BOWSTRING).repairKit()
+            .statType(StatlessMaterialStats.BINDING).statType(StatlessMaterialStats.BOWSTRING).laces().repairKit()
             .fallbacks("cloth")
             .transformer(GreyToSpriteTransformer.builder()
                                                 .addARGB(63, 0xFF313237)
@@ -1100,7 +1100,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(255, 0xFFF3F6DD)
                                                 .build());
         this.buildMaterial(DreamtinkerMaterialIds.PaladinBoneTool)
-            .meleeHarvest()
+            .meleeHarvest().ribcage()
             .fallbacks("bone")
             .transformer(GreyToSpriteTransformer.builder()
                                                 .addARGB(63, 0xFF161C18)
@@ -1158,7 +1158,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(255, 0xFF9899A1)
                                                 .build());
         this.buildMaterial(DreamtinkerMaterialIds.MonsterSkin)
-            .statType(StatlessMaterialStats.BINDING).statType(StatlessMaterialStats.BOWSTRING).armor().cuirass()
+            .statType(StatlessMaterialStats.BINDING).statType(StatlessMaterialStats.BOWSTRING).cuirass().slime()
             .fallbacks("cloth")
             .transformer(GreyToSpriteTransformer.builder()
                                                 .addARGB(63, 0xFF18161B)
@@ -1169,7 +1169,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(255, 0xFF605D78)
                                                 .build());
         this.buildMaterial(DreamtinkerMaterialIds.LifeStealerBone)
-            .arrowShaft()
+            .arrowShaft().ribcage()
             .fallbacks("bone")
             .transformer(GreyToSpriteTransformer.builder()
                                                 .addARGB(63, 0xFF0C0E0F)
@@ -1180,7 +1180,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(255, 0xFF455054)
                                                 .build());
         this.buildMaterial(DreamtinkerMaterialIds.KrampusHorn)
-            .arrowShaft()
+            .arrowShaft().ribcage()
             .fallbacks("bone")
             .transformer(GreyToSpriteTransformer.builder()
                                                 .addARGB(63, 0xFF17021C)
@@ -1318,7 +1318,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(255, 0xFFCAAFFF)    // 最浅淡紫（高光）
                                                 .build());
         this.buildMaterial(DreamtinkerMaterialIds.WildenHorn)
-            .arrowShaft()
+            .arrowShaft().ribcage()
             .fallbacks("bone")
             .transformer(GreyToSpriteTransformer.builder()
                                                 .addARGB(63, 0xFF3A4A35)     // 最深暗灰绿（暗部）
@@ -1329,7 +1329,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(255, 0xFFF0F5E5)    // 最浅灰白（高光）
                                                 .build());
         this.buildMaterial(DreamtinkerMaterialIds.WildenWing)
-            .arrowShaft()
+            .arrowShaft().shell()
             .fallbacks("bone")
             .transformer(GreyToSpriteTransformer.builder()
                                                 .addARGB(63, 0xFF2A2015)     // 最深暗棕（暗部）
@@ -1353,7 +1353,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
 
 
         this.buildMaterial(DreamtinkerMaterialIds.GooeySlimeSkin)
-            .statType(StatlessMaterialStats.BOWSTRING).cuirass()
+            .statType(StatlessMaterialStats.BOWSTRING).slime().cuirass()
             .fallbacks("cloth")
             .transformer(GreyToSpriteTransformer.builder()
                                                 .addARGB(0, 0xFF493F30)
@@ -1376,7 +1376,7 @@ public class DreamtinkerMaterialSpriteProvider extends AbstractMaterialSpritePro
                                                 .addARGB(255, 0xFF83C480)
                                                 .build());
         this.buildMaterial(DreamtinkerMaterialIds.legendary_monsters_dinosaur_bone)
-            .meleeHarvest().shieldCore().repairKit()
+            .meleeHarvest().shieldCore().ribcage().repairKit()
             .fallbacks("bone")
             .transformer(GreyToSpriteTransformer.builderFromBlack()
                                                 .addARGB(63, 0xFF594F55)

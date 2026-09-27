@@ -1,0 +1,54 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "ars_nouveau"
+          },
+          {
+            "type": "esotericism_tinker:mod_compact_config",
+            "modid": "ars_nouveau"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:protection",
+      "damage_source": {
+        "type": "mantle:and",
+        "predicates": [
+          "mantle:any",
+          {
+            "type": "mantle:tag",
+            "tag": "minecraft:is_projectile"
+          }
+        ]
+      },
+      "each_level": 10.0
+    },
+    {
+      "type": "tconstruct:attribute",
+      "attribute": "forge:entity_gravity",
+      "each_level": -0.05,
+      "operation": "multiply_total",
+      "slots": [
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ],
+      "tooltip_style": "percent"
+    }
+  ]
+}

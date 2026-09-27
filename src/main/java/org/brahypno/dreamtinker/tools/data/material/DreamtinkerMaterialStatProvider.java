@@ -533,8 +533,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addArmorShieldStats(DreamtinkerMaterialIds.amber,
                             PlatingMaterialStats.builder().durabilityFactor(15).armor(2f, 3f, 3f, 2f).toughness(0).knockbackResistance(0.2f),
                             StatlessMaterialStats.MAILLE);
+        // slime suit body: flesh and rotten blood, mirrors blood slime
         addMaterialStats(DreamtinkerMaterialIds.half_rotten_homunculus,
-                         StatlessMaterialStats.MAILLE);
+                         new SlimeStats(150, 125));
         addArmorShieldStats(DreamtinkerMaterialIds.AtonementSilver,
                             PlatingMaterialStats.builder().durabilityFactor(30).armor(4f, 6f, 4f, 3f).toughness(2).knockbackResistance(2f),
                             StatlessMaterialStats.MAILLE);
@@ -544,13 +545,14 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addArmorShieldStats(DreamtinkerMaterialIds.despair_gem,
                             PlatingMaterialStats.builder().durabilityFactor(200).armor(13f, 13f, 13f, 13f).toughness(13).knockbackResistance(13f),
                             StatlessMaterialStats.MAILLE);
-        addMaterialStats(DreamtinkerMaterialIds.shadowskin, StatlessMaterialStats.MAILLE, StatlessMaterialStats.CUIRASS);
+        // slime suit body: a skin woven from living shadow, keeps the cuirass layer
+        addMaterialStats(DreamtinkerMaterialIds.shadowskin, new SlimeStats(150, 200), StatlessMaterialStats.CUIRASS);
         addArmorShieldStats(DreamtinkerMaterialIds.soul_steel,
                             PlatingMaterialStats.builder().durabilityFactor(29).armor(1, 4, 6, 1).toughness(1),
                             StatlessMaterialStats.MAILLE);
-        addArmorShieldStats(DreamtinkerMaterialIds.rainbow_honey_crystal,
-                            PlatingMaterialStats.builder().durabilityFactor(30).armor(2, 4, 3, 2).toughness(2),
-                            StatlessMaterialStats.MAILLE);
+        // slime suit body: edible honey armor, mirrors honey slime
+        addMaterialStats(DreamtinkerMaterialIds.rainbow_honey_crystal,
+                         new SlimeStats(200, 0));
         addArmorShieldStats(DreamtinkerMaterialIds.black_sapphire,
                             PlatingMaterialStats.builder().durabilityFactor(100).armor(2, 2, 2, 2).toughness(0),
                             StatlessMaterialStats.MAILLE);
@@ -593,6 +595,17 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addArmorShieldStats(DreamtinkerMaterialIds.cryo_serpent_shift,
                             PlatingMaterialStats.builder().durabilityFactor(51).armor(1f, 5f, 6f, 1f).toughness(7).knockbackResistance(5f),
                             StatlessMaterialStats.MAILLE);
+
+        // slime suit framework: ribcage / shell / laces only carry a repair amount and the material's trait
+        addMaterialStats(DreamtinkerMaterialIds.sharp_bones, RepairStats.ribcage(150));
+        addMaterialStats(DreamtinkerMaterialIds.LifeStealerBone, RepairStats.ribcage(150));
+        addMaterialStats(DreamtinkerMaterialIds.KrampusHorn, RepairStats.ribcage(275));
+        addMaterialStats(DreamtinkerMaterialIds.WildenHorn, RepairStats.ribcage(175));
+        addMaterialStats(DreamtinkerMaterialIds.legendary_monsters_dinosaur_bone, RepairStats.ribcage(250));
+        addMaterialStats(DreamtinkerMaterialIds.PaladinBoneTool, RepairStats.ribcage(175));
+        addMaterialStats(DreamtinkerMaterialIds.WildenWing, RepairStats.shell(175));
+        addMaterialStats(DreamtinkerMaterialIds.TatteredCloth, RepairStats.laces(111));
+        addMaterialStats(DreamtinkerMaterialIds.astral_weave, RepairStats.laces(200));
 
         addArmorShieldStats(DreamtinkerMaterialIds.Utherium,
                             PlatingMaterialStats.builder().durabilityFactor(30).armor(2f, 5f, 7f, 2f).toughness(3).knockbackResistance(0f),
@@ -644,9 +657,9 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
         addArmorShieldStats(DreamtinkerMaterialIds.DarkMetal,
                             PlatingMaterialStats.builder().durabilityFactor(40).armor(2f, 4f, 6f, 2f).toughness(2).knockbackResistance(0f),
                             StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
-        addArmorShieldStats(DreamtinkerMaterialIds.MonsterSkin,
-                            PlatingMaterialStats.builder().durabilityFactor(20).armor(2f, 2f, 3f, 1f).toughness(1).knockbackResistance(0f),
-                            StatlessMaterialStats.MAILLE, StatlessMaterialStats.CUIRASS);
+        // slime suit body: thick monster hide, keeps the cuirass layer
+        addMaterialStats(DreamtinkerMaterialIds.MonsterSkin,
+                         new SlimeStats(150, 75), StatlessMaterialStats.CUIRASS);
 
         addArmorShieldStats(DreamtinkerMaterialIds.AbjurationEssence,
                             PlatingMaterialStats.builder().durabilityFactor(16).armor(2, 5, 4, 2).toughness(0f).knockbackResistance(0f),
@@ -656,7 +669,8 @@ public class DreamtinkerMaterialStatProvider extends AbstractMaterialStatsDataPr
                             PlatingMaterialStats.builder().durabilityFactor(16).armor(2, 5, 4, 2).toughness(0f).knockbackResistance(0f),
                             StatlessMaterialStats.MAILLE, StatlessMaterialStats.SHIELD_CORE);
 
-        addMaterialStats(DreamtinkerMaterialIds.GooeySlimeSkin, StatlessMaterialStats.CUIRASS);
+        // slime suit body: a gooey slime from the Undergarden, which also still serves as an armor cuirass layer
+        addMaterialStats(DreamtinkerMaterialIds.GooeySlimeSkin, new SlimeStats(75, 150), StatlessMaterialStats.CUIRASS);
 
         addArmorShieldStats(DreamtinkerMaterialIds.dragon_scale,
                             PlatingMaterialStats.builder().durabilityFactor(45).armor(6f, 8f, 10f, 5.5f).toughness(3.5f).knockbackResistance(0.15f),

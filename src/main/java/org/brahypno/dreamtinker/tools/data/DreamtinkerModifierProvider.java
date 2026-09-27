@@ -11,6 +11,7 @@ import elucent.eidolon.registries.Registry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
@@ -108,6 +109,7 @@ import slimeknights.tconstruct.shared.TinkerEffects;
 import slimeknights.tconstruct.tools.data.ModifierIds;
 import slimeknights.tconstruct.tools.modules.MeltingModule;
 import slimeknights.tconstruct.tools.modules.armor.DepthProtectionModule;
+import slimeknights.tconstruct.tools.modules.armor.KnockbackCounterModule;
 import slimeknights.tconstruct.tools.modules.combat.FreezingAttackModule;
 import team.lodestar.lodestone.registry.common.LodestoneAttributeRegistry;
 
@@ -208,6 +210,15 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .showInTooltips(ShowInTooltips.BONUS_SLOT)
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                 .addModules(ModifierSlotModule.slot(EsotericismSlotType.DELUSION).flat(1));
+        // slime suit framework part trait for the laces. The material's own eidolon_vulnerable only fires on
+        // attacks, so on boots it returns the curse instead, using the armor side ON_ATTACKED hook.
+        buildModifier(Ids.tattered_wraps, DreamtinkerMaterialDataProvider.modLoaded("eidolon"))
+                .addModule(MobEffectModule.builder(EidolonPotions.VULNERABLE_EFFECT.get())
+                                          .chance(LevelingValue.flat(0.5f))
+                                          .level(RandomLevelingValue.flat(1))
+                                          .time(RandomLevelingValue.perLevel(20 * 3, 10))
+                                          .counterDurabilityUsage(1)
+                                          .buildCounter());
     }
 
     private void addBICModifiers() {
@@ -377,6 +388,23 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                 .addModules(ModifierSlotModule.slot(EsotericismSlotType.DELUSION).flat(1));
 
+        // slime suit framework part trait for the horn ribcage. Its own traits are ammo only, so the frame
+        // charges instead: ribcages are in tconstruct:modifiable/melee/unarmed, which ToolEvents feeds into melee.
+        buildModifier(Ids.wilden_charge, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"))
+                .addModule(ConditionalMeleeDamageModule.builder().attacker(LivingEntityPredicate.SPRINTING)
+                                                       .formula()
+                                                       .variable(LEVEL).constant(2f).multiply()
+                                                       .variable(VALUE).add()
+                                                       .build());
+        // slime suit framework part trait for the wing shell. Its own trait is ammo only, so the membrane
+        // turns away what flies at it and eases the fall, both of which are plain armor modules.
+        buildModifier(Ids.wilden_membrane, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"))
+                .addModule(ProtectionModule.builder()
+                                           .sources(DamageSourcePredicate.ANY, DamageSourcePredicate.tag(DamageTypeTags.IS_PROJECTILE))
+                                           .eachLevel(10f))
+                .addModule(AttributeModule.builder(ForgeMod.ENTITY_GRAVITY.get(), AttributeModifier.Operation.MULTIPLY_TOTAL)
+                                          .slots(ARMOR_SLOTS).percent().eachLevel(-0.05f));
+
     }
 
     private void addUGModifiers() {
@@ -496,6 +524,14 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         //                                   .chance(LevelingValue.eachLevel(0.30f))
         //                                   .toolTag(TinkerTags.Items.SHIELDS)
         //                                   .build(), ModifierHooks.ON_ATTACKED);
+        // slime suit framework part trait: a dinosaur bone ribcage, whose shockwave throws attackers off
+        buildModifier(Ids.rex_ribs, DreamtinkerMaterialDataProvider.modLoaded("legendary_monsters"))
+                .addModule(KnockbackCounterModule.builder()
+                                                 .chance(LevelingValue.eachLevel(0.25f))
+                                                 .constant(LevelingValue.flat(1.5f))
+                                                 .random(LevelingValue.flat(0.5f))
+                                                 .durabilityUsage(1)
+                                                 .build());
     }
 
     private static final float UNDERPLATE_ARMOR_FACTOR = 0.8f;
@@ -554,8 +590,6 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(underplateAttribute(AttributeRegistry.SOUL_WARD_RECOVERY_RATE.get(), false, EquipmentSlot.FEET, 0.5f, Float.MAX_VALUE))
                 .addModule(underplateAttribute(AttributeRegistry.SCYTHE_PROFICIENCY.get(), true, EquipmentSlot.HEAD))
                 .addModule(underplateAttribute(AttributeRegistry.SOUL_WARD_CAP.get(), false, EquipmentSlot.HEAD, 0.5f, Float.MAX_VALUE));
-
-
     }
 
     private static final float UNDERPLATE_TOUGHNESS_FACTOR = 0.8f;
@@ -1240,6 +1274,8 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(ConditionalMeleeDamageModule.builder().attacker(IN_COLD_BIOME).amount(0, 0.33f))
                 .addModule(ConditionalPowerModule.builder().holder(IN_COLD_BIOME).amount(0, 0.33f));
 
+        // slime suit framework part traits live with their compatibility section below, each conditioned on its mod.
+
         addAquamiraeModifiers();
         // addAquamiraeFinAttributesForDatagen(); // Datagen-only hard reference.
         // addAquamiraeSharpBonesFuryForDatagen(); // Datagen-only hard reference.
@@ -1320,7 +1356,6 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                                  .constant(0.05f).multiply().constant(1.5f).min()
                                                  .customVariable("full_health_multiplier").multiply()
                                                  .constant(1.0f).add().variable(VALUE).multiply().build());
-
 
     /*
         buildModifier(Ids.aquamirae_fin_fury, DreamtinkerMaterialDataProvider.modLoaded("aquamirae"))

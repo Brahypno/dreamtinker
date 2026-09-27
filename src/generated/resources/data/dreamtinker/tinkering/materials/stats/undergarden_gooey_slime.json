@@ -1,6 +1,10 @@
 {
   "stats": {
     "tconstruct:bowstring": {},
-    "tconstruct:cuirass": {}
+    "tconstruct:cuirass": {},
+    "tconstruct:slime": {
+      "durability": 75,
+      "overslime_capacity": 150
+    }
   }
 }

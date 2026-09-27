@@ -4,5 +4,13 @@
       "level": 1,
       "name": "dreamtinker:eidolon_vulnerable"
     }
-  ]
+  ],
+  "perStat": {
+    "tconstruct:laces": [
+      {
+        "level": 1,
+        "name": "dreamtinker:tattered_wraps"
+      }
+    ]
+  }
 }

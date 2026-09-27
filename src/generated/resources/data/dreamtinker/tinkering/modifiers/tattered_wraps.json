@@ -1,0 +1,41 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "eidolon"
+          },
+          {
+            "type": "esotericism_tinker:mod_compact_config",
+            "modid": "eidolon"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:counter_mob_effect",
+      "chance": {
+        "flat": 0.5
+      },
+      "effect": "eidolon:vulnerable",
+      "level": {
+        "flat": 1.0
+      },
+      "time": {
+        "flat": 60.0,
+        "per_level": 10.0
+      }
+    }
+  ]
+}

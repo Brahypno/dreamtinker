@@ -110,6 +110,11 @@ public class DreamtinkerMaterialRecipeProvider implements IMaterialRecipeHelper,
         materialRecipe(consumer, DreamtinkerMaterialIds.despair_gem, Ingredient.of(DreamtinkerCommon.despair_gem.get()), 1, 1,
                        materials_folder + "despair_gem");
 
+        // direct fluid mapping so shadowskin can be poured in a basin, required for the slime suit body
+        MaterialFluidRecipeBuilder.material(DreamtinkerMaterialIds.shadowskin)
+                                  .setFluid(DreamtinkerFluids.molten_void.ingredient(FluidValues.SLIMEBALL))
+                                  .setTemperature(1000)
+                                  .save(consumer, this.location(slimeskinFolder + "casting/shadowskin"));
         materialComposite(consumer, MaterialIds.leather, DreamtinkerMaterialIds.shadowskin, DreamtinkerFluids.molten_void, FluidValues.SLIMEBALL,
                           slimeskinFolder, "shadowskin");
         materialComposite(consumer, DreamtinkerMaterialIds.shadowskin, MaterialIds.leather, TinkerFluids.venom, FluidValues.SIP, slimeskinFolder,
@@ -305,6 +310,11 @@ public class DreamtinkerMaterialRecipeProvider implements IMaterialRecipeHelper,
 
         materialRecipe(wrapped, DreamtinkerMaterialIds.MonsterSkin, ItemNameIngredient.from(new ResourceLocation(BIC, "monster_skin")), 1, 1,
                        materials_folder + "monster_skin");
+        // direct fluid mapping so monster skin can be poured in a basin, required for the slime suit body
+        MaterialFluidRecipeBuilder.material(DreamtinkerMaterialIds.MonsterSkin)
+                                  .setFluid(DreamtinkerFluids.molten_dark_metal.ingredient(FluidValues.INGOT))
+                                  .setTemperature(900)
+                                  .save(wrapped, this.location(slimeskinFolder + "casting/monsterskin"));
         materialComposite(wrapped, MaterialIds.leather, DreamtinkerMaterialIds.MonsterSkin, DreamtinkerFluids.molten_dark_metal, FluidValues.INGOT,
                           slimeskinFolder, "monsterskin");
         materialComposite(wrapped, DreamtinkerMaterialIds.MonsterSkin, MaterialIds.leather, TinkerFluids.venom, FluidValues.SIP, slimeskinFolder,
@@ -356,6 +366,12 @@ public class DreamtinkerMaterialRecipeProvider implements IMaterialRecipeHelper,
     private void addUGMaterialRecipes(Consumer<FinishedRecipe> consumer) {
         Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded("undergarden"));
 
+        // direct fluid mapping so the gooey slime can be poured in a basin, required for the slime suit body
+        MaterialFluidRecipeBuilder.material(DreamtinkerMaterialIds.GooeySlimeSkin)
+                                  .setFluid(DreamtinkerFluids.gooey_slime.ingredient(FluidValues.SLIMEBALL))
+                                  .setTemperature(50)
+                                  .save(wrapped, this.location(
+                                          slimeskinFolder + "casting/undergarden_gooey_slime"));
         materialComposite(wrapped, MaterialIds.leather, DreamtinkerMaterialIds.GooeySlimeSkin, DreamtinkerFluids.gooey_slime, FluidValues.SLIMEBALL,
                           slimeskinFolder, "undergarden_gooey_slime");
         materialComposite(wrapped, DreamtinkerMaterialIds.GooeySlimeSkin, MaterialIds.leather, TinkerFluids.venom, FluidValues.SIP, slimeskinFolder,

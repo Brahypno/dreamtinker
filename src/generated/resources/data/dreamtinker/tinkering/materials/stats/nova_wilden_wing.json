@@ -1,5 +1,8 @@
 {
   "stats": {
-    "tconstruct:arrow_shaft": {}
+    "tconstruct:arrow_shaft": {},
+    "tconstruct:shell": {
+      "repair_amount": 175
+    }
   }
 }

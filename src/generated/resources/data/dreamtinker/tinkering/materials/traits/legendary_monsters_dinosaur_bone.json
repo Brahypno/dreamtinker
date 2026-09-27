@@ -15,6 +15,16 @@
         "level": 1,
         "name": "dreamtinker:dinosaur_bone_shockwave"
       }
+    ],
+    "tconstruct:ribcage": [
+      {
+        "level": 1,
+        "name": "tconstruct:reinforced"
+      },
+      {
+        "level": 1,
+        "name": "dreamtinker:rex_ribs"
+      }
     ]
   }
 }

@@ -9,7 +9,9 @@
       "tconstruct:handle",
       "tconstruct:binding",
       "tconstruct:repair_kit",
-      "tconstruct:shield_core"
+      "tconstruct:shield_core",
+      "tconstruct:ribcage",
+      "tconstruct:slimesuit_overlay"
     ],
     "transformer": {
       "type": "tconstruct:grey_to_sprite",

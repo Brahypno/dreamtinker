@@ -23,6 +23,9 @@
       "draw_speed": 0.05,
       "durability": 150,
       "velocity": -0.1
+    },
+    "tconstruct:ribcage": {
+      "repair_amount": 175
     }
   }
 }

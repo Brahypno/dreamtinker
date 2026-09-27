@@ -14,6 +14,9 @@
       "mining_tier": "minecraft:iron"
     },
     "tconstruct:repair_kit": {},
+    "tconstruct:ribcage": {
+      "repair_amount": 250
+    },
     "tconstruct:shield_core": {}
   }
 }

@@ -614,6 +614,12 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId faa_aureal_attack = id("faa_aureal_attack");
         public static final ModifierId faa_corruption_attack = id("faa_corruption_attack");
 
+        // slime suit framework part traits that the material itself cannot express in that slot
+        public static final ModifierId rex_ribs = id("rex_ribs");
+        public static final ModifierId wilden_charge = id("wilden_charge");
+        public static final ModifierId wilden_membrane = id("wilden_membrane");
+        public static final ModifierId tattered_wraps = id("tattered_wraps");
+
         private static ModifierId id(String name) {
             return new ModifierId(Dreamtinker.MODID, name);
         }

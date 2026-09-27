@@ -3,6 +3,9 @@
     "tconstruct:binding": {},
     "tconstruct:bowstring": {},
     "tconstruct:fletching": {},
+    "tconstruct:laces": {
+      "repair_amount": 200
+    },
     "tconstruct:maille": {}
   }
 }

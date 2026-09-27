@@ -8,6 +8,7 @@ import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.data.ModifierIds;
 import slimeknights.tconstruct.tools.stats.PlatingMaterialStats;
+import slimeknights.tconstruct.tools.stats.RepairStats;
 
 import static org.brahypno.dreamtinker.library.compat.ars_nouveau.NovaRegistry.nova_conjuration_essence;
 import static org.brahypno.dreamtinker.tools.DreamtinkerModifiers.*;
@@ -66,7 +67,9 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.despair_gem, despair_mist.getId(), despair_rain.getId(), despair_wind.getId(), Ids.peaches_in_memory);
         addTraits(DreamtinkerMaterialIds.despair_gem, ARMOR, ophelia.getId(), requiem.getId(), Ids.peaches_in_memory);
 
-        addDefaultTraits(DreamtinkerMaterialIds.shadowskin, Ids.shadow_blessing, TinkerModifiers.overslime.getId());
+        // overslime_friend keeps the slime suit from paying the overslime armor penalty
+        addDefaultTraits(DreamtinkerMaterialIds.shadowskin, Ids.shadow_blessing, TinkerModifiers.overslime.getId(),
+                         ModifierIds.overslimeFriend);
 
         addDefaultTraits(DreamtinkerMaterialIds.soul_steel, ModifierIds.soulbound, adaption_algorithm.getId(), adaption_algorithm_damage.getId(),
                          Ids.golden_face);
@@ -150,7 +153,10 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.Regalium, silky_crystal);
         addTraits(DreamtinkerMaterialIds.Regalium, AMMO, arrow_harvest);
 
-        addDefaultTraits(DreamtinkerMaterialIds.GooeySlimeSkin, over_sticky, TinkerModifiers.overslime);
+        // overslime_friend keeps the slime suit from paying the overslime armor penalty
+        addDefaultTraits(DreamtinkerMaterialIds.GooeySlimeSkin,
+                         new ModifierEntry(over_sticky, 1), new ModifierEntry(TinkerModifiers.overslime, 1),
+                         new ModifierEntry(ModifierIds.overslimeFriend, 1));
         addTraits(DreamtinkerMaterialIds.GooeySlimeSkin, RANGED, Ids.sticky_string);
 
         addDefaultTraits(DreamtinkerMaterialIds.Iesnium, occ_harvest);
@@ -303,6 +309,15 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
 
 
         addDefaultTraits(DreamtinkerMaterialIds.jade, HuaiPuBaoYu);
+
+        // slime suit framework parts. Materials whose own traits already fire in the frame's slot keep their
+        // default list untouched (a ribcage is in tconstruct:modifiable/melee/unarmed, so melee traits work
+        // there). Only the three materials whose own traits cannot fire in their slot get a frame trait.
+        addTraits(DreamtinkerMaterialIds.WildenHorn, RepairStats.RIBCAGE.getId(), Ids.wilden_charge);
+        addTraits(DreamtinkerMaterialIds.legendary_monsters_dinosaur_bone, RepairStats.RIBCAGE.getId(),
+                  ModifierIds.reinforced, Ids.rex_ribs);
+        addTraits(DreamtinkerMaterialIds.WildenWing, RepairStats.SHELL.getId(), Ids.wilden_membrane);
+        addTraits(DreamtinkerMaterialIds.TatteredCloth, RepairStats.LACES.getId(), Ids.tattered_wraps);
 
     }
 

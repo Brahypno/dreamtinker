@@ -4,5 +4,13 @@
       "level": 1,
       "name": "dreamtinker:balanced_arrow"
     }
-  ]
+  ],
+  "perStat": {
+    "tconstruct:shell": [
+      {
+        "level": 1,
+        "name": "dreamtinker:wilden_membrane"
+      }
+    ]
+  }
 }

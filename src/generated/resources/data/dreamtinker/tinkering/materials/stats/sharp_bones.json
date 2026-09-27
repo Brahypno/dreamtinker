@@ -26,6 +26,9 @@
       "durability": 120,
       "velocity": 0.0
     },
-    "tconstruct:repair_kit": {}
+    "tconstruct:repair_kit": {},
+    "tconstruct:ribcage": {
+      "repair_amount": 150
+    }
   }
 }

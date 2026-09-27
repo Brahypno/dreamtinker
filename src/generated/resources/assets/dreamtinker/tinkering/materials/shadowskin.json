@@ -8,8 +8,8 @@
       "tconstruct:cuirass",
       "tconstruct:armor_cuirass",
       "tconstruct:repair_kit",
-      "tconstruct:maille",
-      "tconstruct:armor_maille"
+      "tconstruct:slime",
+      "tconstruct:slimesuit"
     ],
     "transformer": {
       "type": "tconstruct:recolor_sprite",

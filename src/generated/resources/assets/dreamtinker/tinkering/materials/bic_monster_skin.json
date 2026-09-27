@@ -7,17 +7,11 @@
     "supported_stats": [
       "tconstruct:binding",
       "tconstruct:bowstring",
-      "tconstruct:armor_plating",
-      "tconstruct:plating_helmet",
-      "tconstruct:plating_chestplate",
-      "tconstruct:plating_leggings",
-      "tconstruct:plating_boots",
-      "tconstruct:plating_shield",
-      "tconstruct:repair_kit",
-      "tconstruct:maille",
-      "tconstruct:armor_maille",
       "tconstruct:cuirass",
-      "tconstruct:armor_cuirass"
+      "tconstruct:armor_cuirass",
+      "tconstruct:repair_kit",
+      "tconstruct:slime",
+      "tconstruct:slimesuit"
     ],
     "transformer": {
       "type": "tconstruct:grey_to_sprite",

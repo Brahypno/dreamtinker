@@ -1,0 +1,39 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "ars_nouveau"
+          },
+          {
+            "type": "esotericism_tinker:mod_compact_config",
+            "modid": "ars_nouveau"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:conditional_melee_damage",
+      "attacker": "mantle:sprinting",
+      "formula": [
+        "$level",
+        2.0,
+        "*",
+        "$damage",
+        "+"
+      ],
+      "percent": false
+    }
+  ]
+}

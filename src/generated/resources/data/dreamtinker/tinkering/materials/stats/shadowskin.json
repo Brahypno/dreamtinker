@@ -1,7 +1,10 @@
 {
   "stats": {
     "tconstruct:cuirass": {},
-    "tconstruct:maille": {},
-    "tconstruct:repair_kit": {}
+    "tconstruct:repair_kit": {},
+    "tconstruct:slime": {
+      "durability": 150,
+      "overslime_capacity": 200
+    }
   }
 }

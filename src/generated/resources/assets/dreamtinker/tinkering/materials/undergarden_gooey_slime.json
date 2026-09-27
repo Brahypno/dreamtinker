@@ -6,9 +6,11 @@
   "generator": {
     "supported_stats": [
       "tconstruct:bowstring",
+      "tconstruct:slime",
+      "tconstruct:slimesuit",
+      "tconstruct:repair_kit",
       "tconstruct:cuirass",
-      "tconstruct:armor_cuirass",
-      "tconstruct:repair_kit"
+      "tconstruct:armor_cuirass"
     ],
     "transformer": {
       "type": "tconstruct:grey_to_sprite",

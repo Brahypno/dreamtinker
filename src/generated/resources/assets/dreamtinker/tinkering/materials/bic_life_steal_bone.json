@@ -5,7 +5,10 @@
   ],
   "generator": {
     "supported_stats": [
-      "tconstruct:arrow_shaft"
+      "tconstruct:arrow_shaft",
+      "tconstruct:ribcage",
+      "tconstruct:slimesuit_overlay",
+      "tconstruct:repair_kit"
     ],
     "transformer": {
       "type": "tconstruct:grey_to_sprite",

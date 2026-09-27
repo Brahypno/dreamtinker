@@ -8,5 +8,13 @@
       "level": 1,
       "name": "dreamtinker:balanced_arrow"
     }
-  ]
+  ],
+  "perStat": {
+    "tconstruct:ribcage": [
+      {
+        "level": 1,
+        "name": "dreamtinker:wilden_charge"
+      }
+    ]
+  }
 }
