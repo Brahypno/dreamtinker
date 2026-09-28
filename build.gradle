@@ -95,6 +95,13 @@ minecraft {
         }
 
         client {
+            // Client-only memory budget; leave room for IDEA, Gradle and native allocations.
+            jvmArgs '-Xms2G', '-Xmx5G', '-XX:+UseG1GC',
+                    '-Xlog:gc*,safepoint:file=gc.log:time,uptime,level,tags:filecount=3,filesize=5M'
+            property 'forge.logging.console.level', 'info'
+            property 'forge.logging.markers', ''
+            // gc.log lives in run/ so JVM logging works before Minecraft creates logs/.
+
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
             property 'forge.enabledGameTestNamespaces', mod_id
         }
@@ -249,6 +256,8 @@ dependencies {
     //implementation fg.deobf("curse.maven:aquamirae-536254:8542566")
     //implementation fg.deobf("curse.maven:fragmentum-1123970:8506891")
     implementation fg.deobf("curse.maven:goety-586095:8710866") { transitive = false }
+
+    implementation fg.deobf("curse.maven:spark-361579:4738952")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
