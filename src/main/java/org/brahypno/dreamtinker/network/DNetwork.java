@@ -23,8 +23,6 @@ public class DNetwork {
     public static void registerPackets() {
         CHANNEL.registerMessage(packetId++, PerfectOverlayMsg.class, PerfectOverlayMsg::encode, PerfectOverlayMsg::decode, PerfectOverlayMsg::handle,
                                 Optional.of(NetworkDirection.PLAY_TO_CLIENT));
-        CHANNEL.registerMessage(packetId++, S2CColorMaskToggle.class, S2CColorMaskToggle::encode, S2CColorMaskToggle::decode, S2CColorMaskToggle::handle,
-                                Optional.of(NetworkDirection.PLAY_TO_CLIENT));
         CHANNEL.registerMessage(packetId++, KeyStateMsg.class, KeyStateMsg::encode, KeyStateMsg::decode, KeyStateMsg::handle,
                                 Optional.of(NetworkDirection.PLAY_TO_SERVER));
         CHANNEL.registerMessage(packetId++, S2CUseRemainPacket.class, S2CUseRemainPacket::encode, S2CUseRemainPacket::decode, S2CUseRemainPacket::handle,
