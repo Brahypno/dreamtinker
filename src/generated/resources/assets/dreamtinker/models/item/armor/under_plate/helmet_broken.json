@@ -6,12 +6,9 @@
     "maille": "dreamtinker:item/tool/armor/under_plate/helmet/maille_broken",
     "maille1": "dreamtinker:item/tool/armor/under_plate/helmet/maille1_broken"
   },
-  "modifier_roots": [
-    "tconstruct:item/tool/armor/plate/helmet/modifiers/broken/",
-    "tconstruct:item/tool/armor/plate/helmet/modifiers/"
-  ],
-  "first_modifiers": [
-    "tconstruct:trim"
+  "modifier_maps": [
+    "dreamtinker:under_plate_helmet_broken",
+    "dreamtinker:under_plate_helmet"
   ],
   "parts": [
     {

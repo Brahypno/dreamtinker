@@ -11,16 +11,10 @@
     "large_core": "dreamtinker:item/tool/chain_saw_blade/large/core",
     "large_handle": "dreamtinker:item/tool/chain_saw_blade/large/handle_broken"
   },
-  "modifier_roots": {
-    "small": [
-      "dreamtinker:item/tool/chain_saw_blade/modifiers/broken/",
-      "dreamtinker:item/tool/chain_saw_blade/modifiers/"
-    ],
-    "large": [
-      "dreamtinker:item/tool/chain_saw_blade/large/modifiers/broken/",
-      "dreamtinker:item/tool/chain_saw_blade/large/modifiers/"
-    ]
-  },
+  "modifier_maps": [
+    "dreamtinker:chain_saw_blade_broken",
+    "dreamtinker:chain_saw_blade"
+  ],
   "large": true,
   "large_offset": [
     -2,
@@ -42,12 +36,6 @@
     {
       "name": "handle",
       "index": 2
-    }
-  ],
-  "first_modifiers": [
-    {
-      "name": "tconstruct:tank",
-      "forced": true
     }
   ]
 }

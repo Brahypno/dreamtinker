@@ -6,12 +6,9 @@
     "maille": "dreamtinker:item/tool/armor/under_plate/boots/maille_broken",
     "maille1": "dreamtinker:item/tool/armor/under_plate/boots/maille1_broken"
   },
-  "modifier_roots": [
-    "tconstruct:item/tool/armor/plate/boots/modifiers/broken/",
-    "tconstruct:item/tool/armor/plate/boots/modifiers/"
-  ],
-  "first_modifiers": [
-    "tconstruct:trim"
+  "modifier_maps": [
+    "dreamtinker:under_plate_boots_broken",
+    "dreamtinker:under_plate_boots"
   ],
   "parts": [
     {

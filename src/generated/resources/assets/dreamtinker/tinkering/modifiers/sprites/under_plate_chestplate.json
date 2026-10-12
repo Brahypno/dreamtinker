@@ -1,0 +1,16 @@
+{
+  "constant": {
+    "_trim": {
+      "type": "tconstruct:crafted",
+      "model": {
+        "type": "tconstruct:armor_trim",
+        "slot": "chestplate"
+      },
+      "modifier": "tconstruct:trim"
+    }
+  },
+  "modifiers": {
+    "tconstruct:diamond": "tconstruct:item/tool/armor/plate/chestplate/modifiers/tconstruct_diamond",
+    "tconstruct:netherite": "tconstruct:item/tool/armor/plate/chestplate/modifiers/tconstruct_netherite"
+  }
+}

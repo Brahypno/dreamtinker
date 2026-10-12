@@ -13,16 +13,6 @@
     "large_persona": "dreamtinker:item/tool/narcissus_wing/large/persona_orthant",
     "large_reason": "dreamtinker:item/tool/narcissus_wing/large/reason_emanation"
   },
-  "modifier_roots": {
-    "small": [
-      "dreamtinker:item/tool/narcissus_wing/modifiers/1/",
-      "dreamtinker:item/tool/narcissus_wing/modifiers/"
-    ],
-    "large": [
-      "dreamtinker:item/tool/narcissus_wing/large/modifiers/1/",
-      "dreamtinker:item/tool/narcissus_wing/large/modifiers/"
-    ]
-  },
   "large": true,
   "large_offset": [
     -2,

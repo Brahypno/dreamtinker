@@ -1,0 +1,82 @@
+{
+  "constant": {
+    "_tank": [
+      {
+        "type": "tconstruct:tank",
+        "full": "dreamtinker:item/tool/chain_saw_blade/modifiers/tconstruct_tank_full",
+        "full_large": "dreamtinker:item/tool/chain_saw_blade/large/modifiers/tconstruct_tank_full",
+        "partial": "dreamtinker:item/tool/chain_saw_blade/modifiers/tconstruct_tank_partial",
+        "partial_large": "dreamtinker:item/tool/chain_saw_blade/large/modifiers/tconstruct_tank_partial"
+      },
+      {
+        "texture": "dreamtinker:item/tool/chain_saw_blade/modifiers/tconstruct_tank",
+        "texture_large": "dreamtinker:item/tool/chain_saw_blade/large/modifiers/tconstruct_tank"
+      }
+    ]
+  },
+  "modifiers": {
+    "tconstruct:antiaquatic": {
+      "texture": "dreamtinker:item/tool/chain_saw_blade/modifiers/tconstruct_antiaquatic",
+      "texture_large": "dreamtinker:item/tool/chain_saw_blade/large/modifiers/tconstruct_antiaquatic"
+    },
+    "tconstruct:bane_of_sssss": {
+      "texture": "dreamtinker:item/tool/chain_saw_blade/modifiers/tconstruct_bane_of_sssss",
+      "texture_large": "dreamtinker:item/tool/chain_saw_blade/large/modifiers/tconstruct_bane_of_sssss"
+    },
+    "tconstruct:blasting": {
+      "texture": "dreamtinker:item/tool/chain_saw_blade/modifiers/tconstruct_blasting",
+      "texture_large": "dreamtinker:item/tool/chain_saw_blade/large/modifiers/tconstruct_blasting"
+    },
+    "tconstruct:cooling": {
+      "texture": "dreamtinker:item/tool/chain_saw_blade/modifiers/tconstruct_cooling",
+      "texture_large": "dreamtinker:item/tool/chain_saw_blade/large/modifiers/tconstruct_cooling"
+    },
+    "tconstruct:diamond": {
+      "texture": "dreamtinker:item/tool/chain_saw_blade/modifiers/tconstruct_diamond",
+      "texture_large": "dreamtinker:item/tool/chain_saw_blade/large/modifiers/tconstruct_diamond"
+    },
+    "tconstruct:emerald": {
+      "texture": "dreamtinker:item/tool/chain_saw_blade/modifiers/tconstruct_emerald",
+      "texture_large": "dreamtinker:item/tool/chain_saw_blade/large/modifiers/tconstruct_emerald"
+    },
+    "tconstruct:experienced": {
+      "texture": "dreamtinker:item/tool/chain_saw_blade/modifiers/tconstruct_experienced",
+      "texture_large": "dreamtinker:item/tool/chain_saw_blade/large/modifiers/tconstruct_experienced"
+    },
+    "tconstruct:fiery": {
+      "luminosity": 10,
+      "texture": "dreamtinker:item/tool/chain_saw_blade/modifiers/tconstruct_fiery",
+      "texture_large": "dreamtinker:item/tool/chain_saw_blade/large/modifiers/tconstruct_fiery"
+    },
+    "tconstruct:haste": {
+      "luminosity": 7,
+      "texture": "dreamtinker:item/tool/chain_saw_blade/modifiers/tconstruct_haste",
+      "texture_large": "dreamtinker:item/tool/chain_saw_blade/large/modifiers/tconstruct_haste"
+    },
+    "tconstruct:hydraulic": {
+      "texture": "dreamtinker:item/tool/chain_saw_blade/modifiers/tconstruct_hydraulic",
+      "texture_large": "dreamtinker:item/tool/chain_saw_blade/large/modifiers/tconstruct_hydraulic"
+    },
+    "tconstruct:lightspeed": {
+      "luminosity": 15,
+      "texture": "dreamtinker:item/tool/chain_saw_blade/modifiers/tconstruct_lightspeed",
+      "texture_large": "dreamtinker:item/tool/chain_saw_blade/large/modifiers/tconstruct_lightspeed"
+    },
+    "tconstruct:luck": {
+      "texture": "dreamtinker:item/tool/chain_saw_blade/modifiers/tconstruct_luck",
+      "texture_large": "dreamtinker:item/tool/chain_saw_blade/large/modifiers/tconstruct_luck"
+    },
+    "tconstruct:netherite": {
+      "texture": "dreamtinker:item/tool/chain_saw_blade/modifiers/tconstruct_netherite",
+      "texture_large": "dreamtinker:item/tool/chain_saw_blade/large/modifiers/tconstruct_netherite"
+    },
+    "tconstruct:overforced": {
+      "texture": "dreamtinker:item/tool/chain_saw_blade/modifiers/tconstruct_overforced",
+      "texture_large": "dreamtinker:item/tool/chain_saw_blade/large/modifiers/tconstruct_overforced"
+    },
+    "tconstruct:sharpness": {
+      "texture": "dreamtinker:item/tool/chain_saw_blade/modifiers/tconstruct_sharpness",
+      "texture_large": "dreamtinker:item/tool/chain_saw_blade/large/modifiers/tconstruct_sharpness"
+    }
+  }
+}

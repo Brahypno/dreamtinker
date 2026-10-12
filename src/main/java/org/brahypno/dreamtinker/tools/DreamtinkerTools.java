@@ -14,10 +14,7 @@ import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.DreamtinkerModule;
 import org.brahypno.dreamtinker.common.data.tags.MaterialTagProvider;
 import org.brahypno.dreamtinker.library.compat.ars_nouveau.NovaRegistry;
-import org.brahypno.dreamtinker.tools.data.DreamtinkerArmorModel;
-import org.brahypno.dreamtinker.tools.data.DreamtinkerStationLayout;
-import org.brahypno.dreamtinker.tools.data.DreamtinkerToolDefinitionProvider;
-import org.brahypno.dreamtinker.tools.data.DreamtinkerToolItemModelProvider;
+import org.brahypno.dreamtinker.tools.data.*;
 import org.brahypno.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvider;
 import org.brahypno.dreamtinker.tools.data.material.DreamtinkerMaterialRenderInfoProvider;
 import org.brahypno.dreamtinker.tools.data.material.DreamtinkerMaterialStatProvider;
@@ -134,6 +131,7 @@ public class DreamtinkerTools extends DreamtinkerModule {
                                                                new TinkerMaterialSpriteProvider(),
                                                                new DreamtinkerMaterialSpriteProvider()));
         generator.addProvider(event.includeClient(), new DreamtinkerToolItemModelProvider(output, existingFileHelper));
+        generator.addProvider(event.includeClient(), new DreamtinkerModifierModelMapProvider(output));
         generator.addProvider(event.includeClient(), new DreamtinkerArmorModel(output));
         generator.addProvider(event.includeServer(), new DreamtinkerToolDefinitionProvider(output));
         generator.addProvider(event.includeServer(), new DreamtinkerStationLayout(output));

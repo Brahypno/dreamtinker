@@ -6,9 +6,6 @@
     "arrow_handle": "dreamtinker:item/tool/tntarrow/arrow_handle",
     "arrow_wing": "dreamtinker:item/tool/tntarrow/arrow_wing"
   },
-  "modifier_roots": [
-    "dreamtinker:item/tool/tntarrow/modifiers/"
-  ],
   "parts": [
     {
       "name": "explore_core",

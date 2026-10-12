@@ -13,16 +13,10 @@
     "large_mashou_handle": "dreamtinker:item/tool/mashou/large/mashou_handle",
     "large_mashou_end": "dreamtinker:item/tool/mashou/large/mashou_end"
   },
-  "modifier_roots": {
-    "small": [
-      "dreamtinker:item/tool/mashou/modifiers/broken/",
-      "dreamtinker:item/tool/mashou/modifiers/"
-    ],
-    "large": [
-      "dreamtinker:item/tool/mashou/large/modifiers/broken/",
-      "dreamtinker:item/tool/mashou/large/modifiers/"
-    ]
-  },
+  "modifier_maps": [
+    "dreamtinker:mashou_broken",
+    "dreamtinker:mashou"
+  ],
   "large": true,
   "large_offset": [
     -2,

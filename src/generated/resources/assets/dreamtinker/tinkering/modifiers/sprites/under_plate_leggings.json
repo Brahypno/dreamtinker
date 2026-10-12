@@ -1,0 +1,16 @@
+{
+  "constant": {
+    "_trim": {
+      "type": "tconstruct:crafted",
+      "model": {
+        "type": "tconstruct:armor_trim",
+        "slot": "leggings"
+      },
+      "modifier": "tconstruct:trim"
+    }
+  },
+  "modifiers": {
+    "tconstruct:diamond": "tconstruct:item/tool/armor/plate/leggings/modifiers/tconstruct_diamond",
+    "tconstruct:netherite": "tconstruct:item/tool/armor/plate/leggings/modifiers/tconstruct_netherite"
+  }
+}

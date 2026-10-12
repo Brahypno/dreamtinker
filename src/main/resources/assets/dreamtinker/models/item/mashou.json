@@ -14,26 +14,47 @@
     "large_mashou_handle": "dreamtinker:item/tool/mashou/large/mashou_handle",
     "large_mashou_end": "dreamtinker:item/tool/mashou/large/mashou_end"
   },
-  "modifier_roots": {
-    "small": [ "dreamtinker:item/tool/mashou/modifiers/" ],
-    "large": [ "dreamtinker:item/tool/mashou/large/modifiers/" ]
-  },
+  "modifier_maps": [
+    "dreamtinker:mashou"
+  ],
   "large": true,
-  "large_offset": [-2, 2],
+  "large_offset": [
+    -2,
+    2
+  ],
   "parts": [
-   {"name": "mashou_blade", "index": 0 },
-   {"name": "mashou_line","index": 1 },
-   {"name": "mashou_binding", "index": 2 },
-   {"name": "mashou_handle", "index": 3 },
-   {"name": "mashou_end", "index": 4 }
+    {
+      "name": "mashou_blade",
+      "index": 0
+    },
+    {
+      "name": "mashou_line",
+      "index": 1
+    },
+    {
+      "name": "mashou_binding",
+      "index": 2
+    },
+    {
+      "name": "mashou_handle",
+      "index": 3
+    },
+    {
+      "name": "mashou_end",
+      "index": 4
+    }
   ],
   "overrides": [
     {
-      "predicate": { "tconstruct:charging": 2 },
+      "predicate": {
+        "tconstruct:charging": 2
+      },
       "model": "dreamtinker:item/tool/mashou/blocking"
     },
     {
-      "predicate": { "tconstruct:broken": 1 },
+      "predicate": {
+        "tconstruct:broken": 1
+      },
       "model": "dreamtinker:item/tool/mashou/broken"
     }
   ]
