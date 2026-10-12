@@ -26,7 +26,7 @@
       "variables": {
         "living_attacker": {
           "type": "tconstruct:entity",
-          "entity_type": 1.0,
+          "entity_type": "dreamtinker:entity_present",
           "fallback": 0.0,
           "which": "attacker"
         },

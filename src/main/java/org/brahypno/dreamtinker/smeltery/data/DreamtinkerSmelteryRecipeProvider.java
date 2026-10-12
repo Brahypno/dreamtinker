@@ -305,10 +305,10 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
         MeltingRecipeBuilder.melting(itemNameIngredient(fa, "ender_pearl_fragment"), TinkerFluids.moltenEnder, FluidValues.SLIMEBALL / 4, 0.2f)
                             .save(wrapped, location(Melting_folder + "ender_pearl_fragment"));
         MeltingRecipeBuilder.melting(itemNameIngredient(fa, "dark_nether_star"), DreamtinkerFluids.molten_dark_neither_star, FluidValues.GEM, 0.2f)
-                            .save(consumer, location(Melting_folder + "dark_nether_star"));
+                            .save(wrapped, location(Melting_folder + "dark_nether_star"));
         MeltingRecipeBuilder.melting(itemNameIngredient(fa, "dark_nether_star_block"), DreamtinkerFluids.molten_dark_neither_star, FluidValues.LARGE_GEM_BLOCK,
                                      0.2f)
-                            .save(consumer, location(Melting_folder + "dark_nether_star_block"));
+                            .save(wrapped, location(Melting_folder + "dark_nether_star_block"));
 
         String blm = "bloodmagic";
         wrapped = withCondition(consumer, modLoaded(blm));

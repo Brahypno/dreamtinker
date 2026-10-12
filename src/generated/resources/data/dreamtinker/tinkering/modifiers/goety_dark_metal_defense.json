@@ -24,6 +24,9 @@
   "level_display": "tconstruct:default",
   "modules": [
     {
+      "type": "dreamtinker:goety_dark_metal_healing"
+    },
+    {
       "type": "tconstruct:effect_immunity",
       "effect": "minecraft:darkness",
       "tool": {

@@ -7,7 +7,7 @@ import com.sammy.malum.data.recipe.builder.SpiritInfusionRecipeBuilder;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
@@ -16,7 +16,8 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public abstract class SpiritInfusionRecipeBuilderResultMixin {
 
     // 编译器生成的外部类引用（内部类 Result -> 外部类 SpiritInfusionRecipeBuilder）
-    @Unique
+    @SuppressWarnings("target") // The annotation processor cannot see the synthetic outer-instance field.
+    @Shadow
     @Final
     SpiritInfusionRecipeBuilder this$0;
 

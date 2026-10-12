@@ -40,10 +40,7 @@ import org.brahypno.dreamtinker.Entity.DreamtinkerEntityTypes;
 import org.brahypno.dreamtinker.common.DreamtinkerAttributes;
 import org.brahypno.dreamtinker.common.DreamtinkerEffects;
 import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
-import org.brahypno.dreamtinker.library.modifiers.modules.armor.ArmorLevelTrackerModule;
-import org.brahypno.dreamtinker.library.modifiers.modules.armor.ArmorValueReductionModule;
-import org.brahypno.dreamtinker.library.modifiers.modules.armor.ConditionalDamageBlockModule;
-import org.brahypno.dreamtinker.library.modifiers.modules.armor.LodestoneArmorAttributesModule;
+import org.brahypno.dreamtinker.library.modifiers.modules.armor.*;
 import org.brahypno.dreamtinker.library.modifiers.modules.harvest.AutoPureDaisyModule;
 import org.brahypno.dreamtinker.library.modifiers.modules.harvest.HoneyLootModule;
 import org.brahypno.dreamtinker.library.modifiers.variable.DamageSourceIsHolderVariable;
@@ -659,7 +656,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .showInTooltips(ShowInTooltips.BONUS_SLOT)
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                 .addModules(ModifierSlotModule.slot(EsotericismSlotType.DELUSION).flat(1));
-        buildModifier(Ids.spiritual_weapon_transformation, not(DreamtinkerMaterialDataProvider.modLoaded("malum")))
+        buildModifier(Ids.spiritual_weapon_transformation, DreamtinkerMaterialDataProvider.modLoaded("malum"))
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                 .addModule(ModifierRequirementsModule.builder().requireModifier(weapon_transformation.getId(), 1)
                                                      .modifierKey(Ids.spiritual_weapon_transformation).build())
@@ -778,7 +775,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                                        .customVariable("slot_level", new SlotInChargeLevelVariable(Ids.requiem))
                                                        .constant(0).greaterThan().multiply()
                                                        .constant(1)
-                                                       .customVariable("living_attacker", new EntityProtectionVariable(new EntityVariable.Constant(1),
+                                                       .customVariable("living_attacker", new EntityProtectionVariable(ENTITY_PRESENT,
                                                                                                                        EntityProtectionVariable.WhichEntity.ATTACKER,
                                                                                                                        0))
                                                        .subtract()
@@ -1159,7 +1156,6 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(new SwappableCircleWeaponAttack(null, "designs", 6));
         buildModifier(Ids.golden_face);
         buildModifier(Ids.whimsy_face);
-        buildModifier(arcane_hit.getId());
         buildModifier(Ids.arcane_protection)
                 .addModule(MaxArmorAttributeModule.builder(TinkerAttributes.GOOD_EFFECT_DURATION, AttributeModifier.Operation.MULTIPLY_BASE)
                                                   .heldTag(TinkerTags.Items.HELD)
@@ -1627,9 +1623,9 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         // Moved to src/main/resources; uncomment only when regenerating this hard-reference modifier.
         // buildModifier(Ids.goety_soul_eater, DreamtinkerMaterialDataProvider.modLoaded("goety"))
         //         .addModule(EnchantmentModule.builder(ModEnchantments.SOUL_EATER.get()).level(LevelingInt.eachLevel(1)).constant());
-        buildModifier(Ids.goety_dark_metal_attack, DreamtinkerMaterialDataProvider.modLoaded("goety"));
-        buildModifier(Ids.goety_dark_metal_repair, DreamtinkerMaterialDataProvider.modLoaded("goety"));
+        // Attack and repair keep their Java implementations; same-ID JSON definitions do not add behavior to them.
         buildModifier(Ids.goety_dark_metal_defense, DreamtinkerMaterialDataProvider.modLoaded("goety"))
+                .addModule(GoetyDarkMetalHealingModule.INSTANCE)
                 .addModule(new EffectImmunityModule(
                         MobEffects.DARKNESS,
                         LevelingInt.flat(255),

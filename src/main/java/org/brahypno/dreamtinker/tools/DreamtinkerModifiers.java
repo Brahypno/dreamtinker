@@ -26,10 +26,7 @@ import org.brahypno.dreamtinker.library.modifiers.fluid.block.AutoTagCycleBlockF
 import org.brahypno.dreamtinker.library.modifiers.fluid.entity.ConditionalDamageFluidEffect;
 import org.brahypno.dreamtinker.library.modifiers.fluid.entity.DespairScalingDamageFluidEffect;
 import org.brahypno.dreamtinker.library.modifiers.fluid.entity.DrainLifeFluidEffect;
-import org.brahypno.dreamtinker.library.modifiers.modules.armor.ArmorLevelTrackerModule;
-import org.brahypno.dreamtinker.library.modifiers.modules.armor.ArmorValueReductionModule;
-import org.brahypno.dreamtinker.library.modifiers.modules.armor.ConditionalDamageBlockModule;
-import org.brahypno.dreamtinker.library.modifiers.modules.armor.LodestoneArmorAttributesModule;
+import org.brahypno.dreamtinker.library.modifiers.modules.armor.*;
 import org.brahypno.dreamtinker.library.modifiers.modules.combat.NarcissusFluidFeedbackModule;
 import org.brahypno.dreamtinker.library.modifiers.modules.harvest.AutoPureDaisyModule;
 import org.brahypno.dreamtinker.library.modifiers.modules.harvest.HoneyLootModule;
@@ -358,6 +355,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
 
     public static final EntityVariable LIGHT_CURVE = EntityVariable.simple(DreamtinkerModifiers::lightCurve);
     public static final EntityVariable EFFECT_COUNT = EntityVariable.simple(entity -> entity.getActiveEffects().size());
+    public static final EntityVariable ENTITY_PRESENT = EntityVariable.simple(entity -> 1);
     public static final LivingEntityPredicate SERVER_PLAYER = LivingEntityPredicate.simple(entity -> entity instanceof ServerPlayer);
     public static final ToolVariable SCRIPTUM_REGEN_CAP =
             ToolVariable.simple(tool -> org.brahypno.dreamtinker.config.DreamtinkerCachedConfig.ArtsRegenBonus.get().floatValue());
@@ -422,6 +420,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             ModifierModule.LOADER.register(Dreamtinker.getLocation("lodestone_armor_attributes"), LodestoneArmorAttributesModule.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("armor_level_tracker"), ArmorLevelTrackerModule.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("conditional_damage_block"), ConditionalDamageBlockModule.LOADER);
+            ModifierModule.LOADER.register(Dreamtinker.getLocation("goety_dark_metal_healing"), GoetyDarkMetalHealingModule.LOADER);
 
             FluidEffect.ENTITY_EFFECTS.register(Dreamtinker.getLocation("drain_life_fluid"), DrainLifeFluidEffect.LOADER);
             FluidEffect.ENTITY_EFFECTS.register(Dreamtinker.getLocation("conditional_damage_fluid"), ConditionalDamageFluidEffect.LOADER);
@@ -441,6 +440,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             EntityVariable.LOADER.register(Dreamtinker.getLocation("curse_multiplier"), CURSE_MULTIPLIER.getLoader());
             EntityVariable.LOADER.register(Dreamtinker.getLocation("light_curve"), LIGHT_CURVE.getLoader());
             EntityVariable.LOADER.register(Dreamtinker.getLocation("effect_count"), EFFECT_COUNT.getLoader());
+            EntityVariable.LOADER.register(Dreamtinker.getLocation("entity_present"), ENTITY_PRESENT.getLoader());
             LivingEntityPredicate.LOADER.register(Dreamtinker.getLocation("server_player"), SERVER_PLAYER.getLoader());
             ToolVariable.register(Dreamtinker.getLocation("scriptum_regen_cap"), SCRIPTUM_REGEN_CAP.getLoader());
             ToolVariable.register(Dreamtinker.getLocation("scriptum_mana_cap"), SCRIPTUM_MANA_CAP.getLoader());

@@ -1,5 +1,6 @@
 {
   "required": false,
+  "minVersion": "0.8.5",
   "package": "org.brahypno.dreamtinker.mixin",
   "plugin": "org.brahypno.dreamtinker.mixin.GenericCompatMixinPlugin",
   "compatibilityLevel": "JAVA_17",
