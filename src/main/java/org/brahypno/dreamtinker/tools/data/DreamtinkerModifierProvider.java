@@ -11,7 +11,6 @@ import elucent.eidolon.registries.Registry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
@@ -40,6 +39,7 @@ import org.brahypno.dreamtinker.common.DreamtinkerEffects;
 import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
 import org.brahypno.dreamtinker.library.modifiers.modules.armor.ArmorValueReductionModule;
 import org.brahypno.dreamtinker.library.modifiers.modules.harvest.AutoPureDaisyModule;
+import org.brahypno.dreamtinker.library.modifiers.modules.harvest.HoneyLootModule;
 import org.brahypno.dreamtinker.tools.DreamtinkerTools;
 import org.brahypno.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvider;
 import org.brahypno.esotericismtinker.library.modifiers.modules.armor.FlightModule;
@@ -92,6 +92,9 @@ import slimeknights.tconstruct.library.modifiers.modules.behavior.ReduceToolDama
 import slimeknights.tconstruct.library.modifiers.modules.build.*;
 import slimeknights.tconstruct.library.modifiers.modules.combat.*;
 import slimeknights.tconstruct.library.modifiers.modules.display.DurabilityBarColorModule;
+import slimeknights.tconstruct.library.modifiers.modules.interaction.edible.EdibleConsumeDurabilityModule;
+import slimeknights.tconstruct.library.modifiers.modules.interaction.edible.EdibleModule;
+import slimeknights.tconstruct.library.modifiers.modules.interaction.edible.EdibleRepresentativeItemModule;
 import slimeknights.tconstruct.library.modifiers.modules.mining.ConditionalMiningSpeedModule;
 import slimeknights.tconstruct.library.modifiers.modules.util.ModifierCondition;
 import slimeknights.tconstruct.library.modifiers.util.ModifierLevelDisplay;
@@ -665,6 +668,27 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
 
     @Override
     protected void addModifiers() {
+        buildModifier(Ids.honey_tasty)
+                .addModule(EdibleModule.EDIBLE_TRAIT)
+                .addModule(new EdibleRepresentativeItemModule(Items.HONEY_BOTTLE))
+                .addModule(StatBoostModule.add(EdibleModule.HUNGER).eachLevel(1))
+                .addModule(StatBoostModule.add(EdibleModule.SATURATION).eachLevel(0.4f))
+                .addModule(StatBoostModule.add(EdibleModule.COUNTER_CHANCE).eachLevel(0.15f))
+                // Effect levels are one-based; the old amplifier was the modifier level.
+                .addModule(MobEffectModule.builder(MobEffects.MOVEMENT_SPEED)
+                                          .level(RandomLevelingValue.perLevel(1, 1))
+                                          .time(RandomLevelingValue.flat(15 * 20))
+                                          .buildEdible(), ModifierHooks.EDIBLE_EFFECT)
+                .addModule(MobEffectModule.builder(MobEffects.DIG_SPEED)
+                                          .level(RandomLevelingValue.perLevel(1, 1))
+                                          .time(RandomLevelingValue.flat(15 * 20))
+                                          .buildEdible(), ModifierHooks.EDIBLE_EFFECT)
+                .addModule(MobEffectModule.builder(MobEffects.HUNGER)
+                                          .level(RandomLevelingValue.perLevel(1, 1))
+                                          .time(RandomLevelingValue.flat(15 * 20))
+                                          .buildEdible(), ModifierHooks.EDIBLE_EFFECT)
+                .addModule(new EdibleConsumeDurabilityModule(LevelingInt.eachLevel(30)))
+                .addModule(HoneyLootModule.INSTANCE);
         buildModifier(Ids.absorption_hit)
                 .addModule(ConditionalMeleeDamageModule.builder().attacker(HAS_ABSORPTION).percent()
                                                        .formula()

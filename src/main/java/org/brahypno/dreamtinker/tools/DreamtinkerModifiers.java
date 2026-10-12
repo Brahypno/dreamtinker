@@ -27,6 +27,7 @@ import org.brahypno.dreamtinker.library.modifiers.fluid.entity.DrainLifeFluidEff
 import org.brahypno.dreamtinker.library.modifiers.modules.armor.ArmorValueReductionModule;
 import org.brahypno.dreamtinker.library.modifiers.modules.combat.NarcissusFluidFeedbackModule;
 import org.brahypno.dreamtinker.library.modifiers.modules.harvest.AutoPureDaisyModule;
+import org.brahypno.dreamtinker.library.modifiers.modules.harvest.HoneyLootModule;
 import org.brahypno.dreamtinker.library.modifiers.variable.SlotInChargeReductionVariable;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerEnchantmentToModifierProvider;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerFluidEffectProvider;
@@ -69,7 +70,6 @@ import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.occ.OtherworldHarv
 import org.brahypno.dreamtinker.tools.modifiers.traits.armors.*;
 import org.brahypno.dreamtinker.tools.modifiers.traits.common.*;
 import org.brahypno.dreamtinker.tools.modifiers.traits.harvest.ArrowHarvest;
-import org.brahypno.dreamtinker.tools.modifiers.traits.harvest.HoneyTastyModifier;
 import org.brahypno.dreamtinker.tools.modifiers.traits.harvest.LifeLooting;
 import org.brahypno.dreamtinker.tools.modifiers.traits.harvest.SilkyCrystal;
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.OathSteel.*;
@@ -197,7 +197,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<Requiem> requiem = MODIFIERS.register("requiem", Requiem::new);
     public static final StaticModifier<Ophelia> ophelia = MODIFIERS.register("ophelia", Ophelia::new);
     public static final StaticModifier<WeaponDreams> weapon_dreams = MODIFIERS.register("weapon_dreams", WeaponDreams::new);
-    public static final StaticModifier<HoneyTastyModifier> HoneyTastyModifier = MODIFIERS.register("honey_tasty", HoneyTastyModifier::new);
     public static final StaticModifier<RainbowCatcher> rainbowCatcher = MODIFIERS.register("rainbow_catcher", RainbowCatcher::new);
     public static final StaticModifier<not_like_was> not_like_was = MODIFIERS.register("not_like_was", not_like_was::new);
     public static final StaticModifier<LightInDark> light_in_dark = MODIFIERS.register("light_in_dark", LightInDark::new);
@@ -398,6 +397,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             ModifierModule.LOADER.register(Dreamtinker.getLocation("narcissus_fluid_feedback"), NarcissusFluidFeedbackModule.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("bontania_auto_pure_module"), AutoPureDaisyModule.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("armor_value_reduction"), ArmorValueReductionModule.LOADER);
+            ModifierModule.LOADER.register(Dreamtinker.getLocation("honey_loot"), HoneyLootModule.LOADER);
 
             FluidEffect.ENTITY_EFFECTS.register(Dreamtinker.getLocation("drain_life_fluid"), DrainLifeFluidEffect.LOADER);
             FluidEffect.ENTITY_EFFECTS.register(Dreamtinker.getLocation("conditional_damage_fluid"), ConditionalDamageFluidEffect.LOADER);
@@ -435,6 +435,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     }
 
     public static class Ids {
+        public static final ModifierId honey_tasty = id("honey_tasty");
         public static final ModifierId absorption_hit = id("absorption_hit");
         public static final ModifierId fly = id("fly");
         public static final ModifierId soul_form = id("soul_form");

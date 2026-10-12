@@ -1,0 +1,84 @@
+{
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:trait",
+      "fixed_level": true,
+      "level": 1,
+      "name": "tconstruct:edible"
+    },
+    {
+      "type": "tconstruct:edible_representative_item",
+      "representative_item": "minecraft:honey_bottle"
+    },
+    {
+      "type": "tconstruct:stat_boost",
+      "each_level": 1.0,
+      "operation": "add",
+      "stat": "tconstruct:hunger"
+    },
+    {
+      "type": "tconstruct:stat_boost",
+      "each_level": 0.4,
+      "operation": "add",
+      "stat": "tconstruct:saturation"
+    },
+    {
+      "type": "tconstruct:stat_boost",
+      "each_level": 0.15,
+      "operation": "add",
+      "stat": "tconstruct:edible_counter_chance"
+    },
+    {
+      "type": "tconstruct:edible_mob_effect",
+      "effect": "minecraft:speed",
+      "hooks": [
+        "tconstruct:edible_effect"
+      ],
+      "level": {
+        "flat": 1.0,
+        "per_level": 1.0
+      },
+      "time": {
+        "flat": 300.0
+      }
+    },
+    {
+      "type": "tconstruct:edible_mob_effect",
+      "effect": "minecraft:haste",
+      "hooks": [
+        "tconstruct:edible_effect"
+      ],
+      "level": {
+        "flat": 1.0,
+        "per_level": 1.0
+      },
+      "time": {
+        "flat": 300.0
+      }
+    },
+    {
+      "type": "tconstruct:edible_mob_effect",
+      "effect": "minecraft:hunger",
+      "hooks": [
+        "tconstruct:edible_effect"
+      ],
+      "level": {
+        "flat": 1.0,
+        "per_level": 1.0
+      },
+      "time": {
+        "flat": 300.0
+      }
+    },
+    {
+      "type": "tconstruct:edible_consume_durability",
+      "durability_usage": {
+        "each_level": 30
+      }
+    },
+    {
+      "type": "dreamtinker:honey_loot"
+    }
+  ]
+}

@@ -82,8 +82,8 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
 
         addTraits(DreamtinkerMaterialIds.whimsyGold, MELEE_HARVEST, rhinegold_cat.getId(), Ids.whimsy_face);
 
-        addDefaultTraits(DreamtinkerMaterialIds.rainbow_honey_crystal, HoneyTastyModifier);
-        addTraits(DreamtinkerMaterialIds.rainbow_honey_crystal, ARMOR, HoneyTastyModifier, rainbowCatcher);
+        addDefaultTraits(DreamtinkerMaterialIds.rainbow_honey_crystal, Ids.honey_tasty);
+        addTraits(DreamtinkerMaterialIds.rainbow_honey_crystal, ARMOR, Ids.honey_tasty, rainbowCatcher.getId());
 
         addDefaultTraits(DreamtinkerMaterialIds.black_sapphire, not_like_was);
 
