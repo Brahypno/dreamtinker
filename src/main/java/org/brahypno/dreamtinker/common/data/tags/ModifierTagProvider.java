@@ -37,8 +37,8 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
                  the_wolf_was.getId(), Ids.with_tears, isolde.getId(), mei.getId(), explosive_hit.getId(), Ids.wither_body,
                  stone_heart.getId(), splendour_heart.getId(), why_i_cry.getId(), Ids.huge_ego, wait_until.getId(),
                  Ids.thundering_curse, Ids.homunculus_life_curse, absorption_defense.getId(), despair_rain.getId(), despair_wind.getId(),
-                 light_in_dark.getId(), Ids.light_emanation, hiddenHit.getId(), signal_axe.getId(), Ids.golden_face)
-            .addOptional(cursed_ring_bound.getId(), evil_attack.getId(), eldritch_pan.getId(), malum_thirsty.getId(),
+                 Ids.light_in_dark, Ids.light_emanation, hiddenHit.getId(), signal_axe.getId(), Ids.golden_face)
+            .addOptional(cursed_ring_bound.getId(), Ids.evil_attack, eldritch_pan.getId(), malum_thirsty.getId(),
                          Ids.el_nemesis_curse, Ids.el_sorrow, Ids.el_eternal_binding)
             .addOptional(new ResourceLocation(TIAC, "fragile"), new ResourceLocation(TIAC, "disintegrate"), new ResourceLocation(TIAC, "heavy_material"),
                          new ResourceLocation(TIAC, "blazing"))
@@ -107,10 +107,10 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
             .addOptional(Ids.spiritual_weapon_transformation, Ids.nova_mana_reduce, annihilator_armor_power.getId(),
                          Ids.shulker_counter, Ids.frost_seal);
         this.tag(DreamtinkerTagKeys.Modifiers.MALUM_EXPOSE_SOUL)
-            .addOptional(malum_hex_staff.getId(), malum_base.getId(), malum_distortion.getId(), malum_spirit_attributes.getId(),
+            .addOptional(malum_hex_staff.getId(), malum_base.getId(), malum_distortion.getId(), Ids.malum_spirit_attributes,
                          Ids.malum_animated, Ids.malum_rebound, Ids.malum_ascension, Ids.malum_haunted, Ids.malum_replenishing, Ids.malum_spirit_plunder,
-                         malum_soul_attributes.getId(), malum_malignant_attributes.getId(), Ids.malum_edge_of_deliverance, Ids.malum_tyrving,
-                         Ids.malum_world_of_weight, malum_magic_attack.getId(), malum_range_accelerator.getId(), malum_evolution.getId());
+                         Ids.malum_soul_attributes, Ids.malum_malignant_attributes, Ids.malum_edge_of_deliverance, Ids.malum_tyrving,
+                         Ids.malum_world_of_weight, Ids.malum_magic_attack, malum_range_accelerator.getId(), malum_evolution.getId());
         this.tag(TinkerTags.Modifiers.OVERSLIME_FRIEND)
             .add(Ids.shadow_blessing, over_sticky.getId(), Ids.sticky_string);
 

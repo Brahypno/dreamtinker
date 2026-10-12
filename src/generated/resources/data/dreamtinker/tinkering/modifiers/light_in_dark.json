@@ -1,0 +1,87 @@
+{
+  "level_display": "tconstruct:no_levels",
+  "modules": [
+    {
+      "type": "esotericism_tinker:projectile_velocity",
+      "formula": [
+        "$light_curve"
+      ],
+      "percent": true,
+      "variables": {
+        "light_curve": {
+          "type": "tconstruct:entity",
+          "entity_type": "dreamtinker:light_curve",
+          "fallback": 0.0,
+          "which": "attacker"
+        }
+      }
+    },
+    {
+      "type": "tconstruct:conditional_melee_damage",
+      "formula": [
+        "$damage",
+        1.0,
+        "$light_curve",
+        "+",
+        "*"
+      ],
+      "hooks": [
+        "tconstruct:melee_damage",
+        "tconstruct:monster_melee_damage"
+      ],
+      "percent": false,
+      "variables": {
+        "light_curve": {
+          "type": "tconstruct:entity",
+          "entity_type": "dreamtinker:light_curve",
+          "fallback": 0.0,
+          "which": "attacker"
+        }
+      }
+    },
+    {
+      "type": "tconstruct:protection",
+      "formula": [
+        "$protection",
+        1.0,
+        "$light_curve",
+        "+",
+        "*"
+      ],
+      "hooks": [
+        "tconstruct:protection"
+      ],
+      "variables": {
+        "light_curve": {
+          "type": "tconstruct:entity",
+          "entity_type": "dreamtinker:light_curve",
+          "fallback": 0.0,
+          "which": "target"
+        }
+      }
+    },
+    {
+      "type": "tconstruct:adjust_damage",
+      "formula": [
+        "$protection",
+        1.0,
+        "$light_curve",
+        "-",
+        "*"
+      ],
+      "hooks": [
+        "tconstruct:modify_hurt"
+      ],
+      "percent": false,
+      "tooltip_value": 1.0,
+      "variables": {
+        "light_curve": {
+          "type": "tconstruct:entity",
+          "entity_type": "dreamtinker:light_curve",
+          "fallback": 0.0,
+          "which": "target"
+        }
+      }
+    }
+  ]
+}

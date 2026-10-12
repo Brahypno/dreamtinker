@@ -65,7 +65,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.AtonementSilver, ARMOR, absorption_defense.getId());
 
         addDefaultTraits(DreamtinkerMaterialIds.despair_gem, despair_mist.getId(), despair_rain.getId(), despair_wind.getId(), Ids.peaches_in_memory);
-        addTraits(DreamtinkerMaterialIds.despair_gem, ARMOR, ophelia.getId(), requiem.getId(), Ids.peaches_in_memory);
+        addTraits(DreamtinkerMaterialIds.despair_gem, ARMOR, ophelia.getId(), Ids.requiem, Ids.peaches_in_memory);
 
         // overslime_friend keeps the slime suit from paying the overslime armor penalty
         addDefaultTraits(DreamtinkerMaterialIds.shadowskin, Ids.shadow_blessing, TinkerModifiers.overslime.getId(),
@@ -95,7 +95,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.PermanenceWing, RANGED, feather_wake.getId(), Ids.with_wing_with_scale);
         addTraits(DreamtinkerMaterialIds.PermanenceWing, ARMOR, Ids.wing_without, Ids.with_wing_with_scale);
 
-        addDefaultTraits(DreamtinkerMaterialIds.shiningFlint, ModifierIds.jagged, Ids.fiber_glass_fragments, Ids.light_emanation, light_in_dark.getId());
+        addDefaultTraits(DreamtinkerMaterialIds.shiningFlint, ModifierIds.jagged, Ids.fiber_glass_fragments, Ids.light_emanation, Ids.light_in_dark);
         addTraits(DreamtinkerMaterialIds.shiningFlint, AMMO, ModifierIds.keen, ModifierIds.spike);
 
         addDefaultTraits(DreamtinkerMaterialIds.orichalcum, Ids.lunarRejection);
@@ -128,7 +128,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.OathGuardPaleSteel, ARMOR, pale_oath, heal_oath);
 
         addDefaultTraits(DreamtinkerMaterialIds.ForlornOathSteel, broken_oath, forlorn_judgment);
-        addTraits(DreamtinkerMaterialIds.ForlornOathSteel, ARMOR, broken_oath, last_body);
+        addTraits(DreamtinkerMaterialIds.ForlornOathSteel, ARMOR, broken_oath.getId(), Ids.last_body);
 
         addDefaultTraits(DreamtinkerMaterialIds.deliverance, signet, burden_bearer);
         addTraits(DreamtinkerMaterialIds.deliverance, ARMOR, metamorphosis, burden_bearer);
@@ -212,9 +212,9 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
                   new ModifierEntry(Ids.fly, 1));
 
         addTraits(DreamtinkerMaterialIds.nefarious, MELEE_HARVEST, cursed_ring_bound.getId(), Ids.wither_body,
-                  evil_attack.getId());
+                  Ids.evil_attack);
         addTraits(DreamtinkerMaterialIds.nefarious, RANGED, cursed_ring_bound.getId(), Ids.wither_shoot,
-                  Ids.wither_body, evil_attack.getId());
+                  Ids.wither_body, Ids.evil_attack);
         addTraits(DreamtinkerMaterialIds.nefarious, ARMOR, cursed_ring_bound.getId(), Ids.wither_body,
                   stone_heart.getId());
 
@@ -225,7 +225,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
 
 
         addDefaultTraits(DreamtinkerMaterialIds.spirit_fabric, malum_distortion);
-        addTraits(DreamtinkerMaterialIds.spirit_fabric, ARMOR, malum_spirit_attributes);
+        addTraits(DreamtinkerMaterialIds.spirit_fabric, ARMOR, Ids.malum_spirit_attributes);
 
         addDefaultTraits(DreamtinkerMaterialIds.spirit_fabric, new ModifierEntry(ModifierIds.luck, 2));
         addTraits(DreamtinkerMaterialIds.hallowed_gold, RANGED, TinkerModifiers.golden);
@@ -235,16 +235,16 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.mnemonic, AMMO, teleport_shooting, malum_magic_hit);
 
         addDefaultTraits(DreamtinkerMaterialIds.soul_stained_steel, new ModifierEntry(Ids.malum_haunted, 2), new ModifierEntry(Ids.malum_tyrving, 1));
-        addTraits(DreamtinkerMaterialIds.soul_stained_steel, ARMOR, malum_soul_attributes);
+        addTraits(DreamtinkerMaterialIds.soul_stained_steel, ARMOR, Ids.malum_soul_attributes);
         addTraits(DreamtinkerMaterialIds.soul_stained_steel, RANGED, new ModifierEntry(Ids.malum_haunted, 2), new ModifierEntry(malum_range_accelerator, 1));
 
         addDefaultTraits(DreamtinkerMaterialIds.malignant_lead, malum_catalyst_lobber);
         addTraits(DreamtinkerMaterialIds.malignant_pewter, MELEE_HARVEST,
                   malum_distortion.getId(), Ids.malum_world_of_weight,
                   Ids.malum_edge_of_deliverance);
-        addTraits(DreamtinkerMaterialIds.malignant_pewter, ARMOR, malum_malignant_attributes);
+        addTraits(DreamtinkerMaterialIds.malignant_pewter, ARMOR, Ids.malum_malignant_attributes);
 
-        addTraits(DreamtinkerMaterialIds.malignant_gluttony, MELEE_HARVEST, Ids.malum_haunted, malum_magic_attack.getId(), malum_erosion.getId(),
+        addTraits(DreamtinkerMaterialIds.malignant_gluttony, MELEE_HARVEST, Ids.malum_haunted, Ids.malum_magic_attack, malum_erosion.getId(),
                   Ids.thundering_curse, malum_thirsty.getId(), malum_evolution.getId());
         addTraits(DreamtinkerMaterialIds.malignant_gluttony, ARMOR, Ids.thundering_curse, malum_thirsty.getId(), malum_spirit_defense.getId());
         addDefaultTraits(DreamtinkerMaterialIds.soul_rock, Ids.malum_spirit_plunder);
@@ -302,7 +302,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
 
         addDefaultTraits(DreamtinkerMaterialIds.dragon_scale, ModifierIds.draconic);
         addDefaultTraits(DreamtinkerMaterialIds.faa_dark_nether_star, Ids.faa_aureal_attack, Ids.faa_corruption_attack);
-        addTraits(DreamtinkerMaterialIds.faa_dark_nether_star, ARMOR, Ids.faa_aureal_protection, corruption_defense.getId());
+        addTraits(DreamtinkerMaterialIds.faa_dark_nether_star, ARMOR, Ids.faa_aureal_protection, Ids.faa_corruption_defense);
 
         addDefaultTraits(DreamtinkerMaterialIds.blm_sentient, sentient_will);
         addDefaultTraits(DreamtinkerMaterialIds.blm_hellforge, hellforged);

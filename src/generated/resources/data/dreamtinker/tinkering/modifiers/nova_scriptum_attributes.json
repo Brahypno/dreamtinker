@@ -1,0 +1,95 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "ars_nouveau"
+          },
+          {
+            "type": "esotericism_tinker:mod_compact_config",
+            "modid": "ars_nouveau"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:no_levels",
+  "modules": [
+    {
+      "type": "tconstruct:attribute",
+      "attribute": "ars_nouveau:ars_nouveau.perk.mana_regen",
+      "formula": [
+        "$attack_speed",
+        "$velocity",
+        "+",
+        "$cap",
+        "min"
+      ],
+      "operation": "addition",
+      "slots": [
+        "mainhand",
+        "offhand",
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ],
+      "tool": "tconstruct:not_broken",
+      "unique": "dreamtinker.modifier.nova_scriptum_attributes.mana_regen",
+      "variables": {
+        "attack_speed": {
+          "type": "tconstruct:tool_stat",
+          "stat": "tconstruct:attack_speed"
+        },
+        "cap": "dreamtinker:scriptum_regen_cap",
+        "velocity": {
+          "type": "tconstruct:tool_stat",
+          "stat": "tconstruct:velocity"
+        }
+      }
+    },
+    {
+      "type": "tconstruct:attribute",
+      "attribute": "ars_nouveau:ars_nouveau.perk.max_mana",
+      "formula": [
+        3.0,
+        "$mining_speed",
+        "*",
+        "$draw_speed",
+        "*",
+        "$cap",
+        "min"
+      ],
+      "operation": "addition",
+      "slots": [
+        "mainhand",
+        "offhand",
+        "feet",
+        "legs",
+        "chest",
+        "head"
+      ],
+      "tool": "tconstruct:not_broken",
+      "unique": "dreamtinker.modifier.nova_scriptum_attributes.max_mana",
+      "variables": {
+        "cap": "dreamtinker:scriptum_mana_cap",
+        "draw_speed": {
+          "type": "tconstruct:tool_stat",
+          "stat": "tconstruct:draw_speed"
+        },
+        "mining_speed": {
+          "type": "tconstruct:tool_stat",
+          "stat": "tconstruct:mining_speed"
+        }
+      }
+    }
+  ]
+}

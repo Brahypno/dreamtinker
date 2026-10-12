@@ -1,0 +1,115 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "enigmaticlegacy"
+          },
+          {
+            "type": "esotericism_tinker:mod_compact_config",
+            "modid": "enigmaticlegacy"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:no_levels",
+  "modules": [
+    {
+      "type": "tconstruct:trait",
+      "fixed_level": true,
+      "level": 1,
+      "name": "dreamtinker:cursed_ring_bound"
+    },
+    {
+      "type": "tconstruct:adjust_damage",
+      "formula": [
+        "$protection",
+        "$curse_multiplier",
+        "*"
+      ],
+      "hooks": [
+        "tconstruct:modify_hurt"
+      ],
+      "percent": false,
+      "tooltip_value": 1.0,
+      "variables": {
+        "curse_multiplier": {
+          "type": "tconstruct:entity",
+          "entity_type": "dreamtinker:curse_multiplier",
+          "fallback": 1.0,
+          "which": "target"
+        }
+      }
+    },
+    {
+      "type": "tconstruct:conditional_melee_damage",
+      "formula": [
+        "$damage",
+        "$curse_multiplier",
+        "*"
+      ],
+      "hooks": [
+        "tconstruct:melee_damage",
+        "tconstruct:monster_melee_damage"
+      ],
+      "percent": false,
+      "variables": {
+        "curse_multiplier": {
+          "type": "tconstruct:entity",
+          "entity_type": "dreamtinker:curse_multiplier",
+          "fallback": 1.0,
+          "which": "attacker"
+        }
+      }
+    },
+    {
+      "type": "tconstruct:conditional_stat",
+      "formula": [
+        "$value",
+        "$curse_multiplier",
+        "*"
+      ],
+      "hooks": [
+        "tconstruct:conditional_stat"
+      ],
+      "percent": false,
+      "stat": "tconstruct:draw_speed",
+      "variables": {
+        "curse_multiplier": {
+          "type": "tconstruct:entity",
+          "entity_type": "dreamtinker:curse_multiplier",
+          "fallback": 1.0
+        }
+      }
+    },
+    {
+      "type": "tconstruct:conditional_stat",
+      "formula": [
+        "$value",
+        "$curse_multiplier",
+        "*"
+      ],
+      "hooks": [
+        "tconstruct:conditional_stat"
+      ],
+      "percent": false,
+      "stat": "tconstruct:velocity",
+      "variables": {
+        "curse_multiplier": {
+          "type": "tconstruct:entity",
+          "entity_type": "dreamtinker:curse_multiplier",
+          "fallback": 1.0
+        }
+      }
+    }
+  ]
+}

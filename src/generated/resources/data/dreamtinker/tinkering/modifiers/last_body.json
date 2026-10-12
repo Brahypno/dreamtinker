@@ -1,0 +1,83 @@
+{
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "dreamtinker:armor_level_tracker",
+      "tracker": "dreamtinker:last_body"
+    },
+    {
+      "type": "tconstruct:adjust_damage",
+      "formula": [
+        "$protection",
+        1.0,
+        0.14,
+        "$slot_level",
+        0.08,
+        "*",
+        "+",
+        "$despair",
+        100.0,
+        "/",
+        0.1,
+        "*",
+        "+",
+        "duplicate",
+        0.5,
+        "$health",
+        "$max_health",
+        "/",
+        "-",
+        0.5,
+        "/",
+        "*",
+        "min",
+        "$health",
+        "$max_health",
+        "/",
+        0.5,
+        "<",
+        "*",
+        "$slot_level",
+        0.0,
+        ">",
+        "*",
+        "$protection",
+        0.0,
+        ">",
+        "*",
+        "-",
+        "*"
+      ],
+      "holder": "dreamtinker:server_player",
+      "hooks": [
+        "tconstruct:modify_hurt"
+      ],
+      "percent": false,
+      "tooltip_value": 1.0,
+      "variables": {
+        "despair": {
+          "type": "tconstruct:mod_data",
+          "key": "dreamtinker:broken_oath_despair",
+          "source": "persistent"
+        },
+        "health": {
+          "type": "tconstruct:entity",
+          "entity_type": "tconstruct:health",
+          "fallback": 0.0,
+          "which": "target"
+        },
+        "max_health": {
+          "type": "tconstruct:entity",
+          "attribute": "minecraft:generic.max_health",
+          "entity_type": "tconstruct:attribute",
+          "fallback": 1.0,
+          "which": "target"
+        },
+        "slot_level": {
+          "type": "dreamtinker:slot_in_charge_level",
+          "tracker": "dreamtinker:last_body"
+        }
+      }
+    }
+  ]
+}

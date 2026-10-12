@@ -2,6 +2,7 @@ package org.brahypno.dreamtinker.tools.data;
 
 // import dev.obscuria.aquamirae.registry.AquamiraeAttributes; // Datagen-only hard reference.
 
+import com.hollingsworth.arsnouveau.api.perk.PerkAttributes;
 import com.hollingsworth.arsnouveau.setup.registry.ModPotions;
 import com.sammy.malum.registry.common.AttributeRegistry;
 import com.sammy.malum.registry.common.item.EnchantmentRegistry;
@@ -9,6 +10,7 @@ import elucent.eidolon.registries.EidolonAttributes;
 import elucent.eidolon.registries.EidolonPotions;
 import elucent.eidolon.registries.Registry;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -32,14 +34,20 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
+import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
 import net.minecraftforge.fluids.FluidType;
 import org.brahypno.dreamtinker.Entity.DreamtinkerEntityTypes;
 import org.brahypno.dreamtinker.common.DreamtinkerAttributes;
 import org.brahypno.dreamtinker.common.DreamtinkerEffects;
 import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
+import org.brahypno.dreamtinker.library.modifiers.modules.armor.ArmorLevelTrackerModule;
 import org.brahypno.dreamtinker.library.modifiers.modules.armor.ArmorValueReductionModule;
+import org.brahypno.dreamtinker.library.modifiers.modules.armor.ConditionalDamageBlockModule;
+import org.brahypno.dreamtinker.library.modifiers.modules.armor.LodestoneArmorAttributesModule;
 import org.brahypno.dreamtinker.library.modifiers.modules.harvest.AutoPureDaisyModule;
 import org.brahypno.dreamtinker.library.modifiers.modules.harvest.HoneyLootModule;
+import org.brahypno.dreamtinker.library.modifiers.variable.DamageSourceIsHolderVariable;
+import org.brahypno.dreamtinker.library.modifiers.variable.SlotInChargeLevelVariable;
 import org.brahypno.dreamtinker.tools.DreamtinkerTools;
 import org.brahypno.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvider;
 import org.brahypno.esotericismtinker.library.modifiers.modules.armor.FlightModule;
@@ -71,10 +79,7 @@ import slimeknights.tconstruct.library.json.predicate.TinkerPredicate;
 import slimeknights.tconstruct.library.json.predicate.tool.HasModifierPredicate;
 import slimeknights.tconstruct.library.json.predicate.tool.ToolStackPredicate;
 import slimeknights.tconstruct.library.json.variable.block.BlockVariable;
-import slimeknights.tconstruct.library.json.variable.entity.AttributeEntityVariable;
-import slimeknights.tconstruct.library.json.variable.entity.ConditionalEntityVariable;
-import slimeknights.tconstruct.library.json.variable.entity.EntityLightVariable;
-import slimeknights.tconstruct.library.json.variable.entity.EntityVariable;
+import slimeknights.tconstruct.library.json.variable.entity.*;
 import slimeknights.tconstruct.library.json.variable.melee.EntityMeleeVariable;
 import slimeknights.tconstruct.library.json.variable.mining.BlockLightVariable;
 import slimeknights.tconstruct.library.json.variable.mining.BlockMiningSpeedVariable;
@@ -82,6 +87,8 @@ import slimeknights.tconstruct.library.json.variable.mining.BlockTemperatureVari
 import slimeknights.tconstruct.library.json.variable.power.EntityPowerVariable;
 import slimeknights.tconstruct.library.json.variable.protection.EntityProtectionVariable;
 import slimeknights.tconstruct.library.json.variable.stat.EntityConditionalStatVariable;
+import slimeknights.tconstruct.library.json.variable.tool.ModDataSource;
+import slimeknights.tconstruct.library.json.variable.tool.ModDataVariable;
 import slimeknights.tconstruct.library.json.variable.tool.ToolStatVariable;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
 import slimeknights.tconstruct.library.modifiers.modules.armor.*;
@@ -121,6 +128,7 @@ import java.util.List;
 import static net.minecraft.tags.DamageTypeTags.BYPASSES_ENCHANTMENTS;
 import static org.brahypno.dreamtinker.library.compat.ars_nouveau.NovaRegistry.nova_magic_armor;
 import static org.brahypno.dreamtinker.tools.DreamtinkerModifiers.*;
+import static org.brahypno.dreamtinker.tools.modifiers.events.OathGuardPaleSteelEvents.oathBrokenSteelId;
 import static org.brahypno.esotericismtinker.tools.EsotericismTinkerModifiers.HORIZONTAL_LOOK_X;
 import static org.brahypno.esotericismtinker.tools.EsotericismTinkerModifiers.HORIZONTAL_LOOK_Z;
 import static slimeknights.tconstruct.common.TinkerTags.Items.*;
@@ -150,6 +158,25 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
     }
 
     private void addELModifiers() {
+        var evilAttack = buildModifier(Ids.evil_attack, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(new ModifierTraitModule(cursed_ring_bound.getId(), 1, true))
+                .addModule(AdjustDamageModule.builder().source(DamageSourcePredicate.ANY).formula()
+                                             .variable(VALUE)
+                                             .customVariable("curse_multiplier",
+                                                             new EntityProtectionVariable(CURSE_MULTIPLIER, EntityProtectionVariable.WhichEntity.TARGET, 1))
+                                             .multiply().build(), ModifierHooks.MODIFY_HURT)
+                .addModule(ConditionalMeleeDamageModule.builder().formula()
+                                                       .variable(VALUE)
+                                                       .customVariable("curse_multiplier",
+                                                                       new EntityMeleeVariable(CURSE_MULTIPLIER, EntityMeleeVariable.WhichEntity.ATTACKER, 1))
+                                                       .multiply().build(), ModifierHooks.MELEE_DAMAGE, ModifierHooks.MONSTER_MELEE_DAMAGE);
+        for (var stat : List.of(ToolStats.DRAW_SPEED, ToolStats.VELOCITY)) {
+            evilAttack.addModule(ConditionalStatModule.stat(stat).formula()
+                                                      .variable(VALUE)
+                                                      .customVariable("curse_multiplier", new EntityConditionalStatVariable(CURSE_MULTIPLIER, 1))
+                                                      .multiply().build(), ModifierHooks.CONDITIONAL_STAT);
+        }
         // Moved to src/main/resources so data generation does not directly require Enigmatic Legacy classes.
         //        buildModifier(Ids.el_by_pass_worthy, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
         //                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
@@ -340,6 +367,21 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
     }
 
     private void addNovaModifiers() {
+        buildModifier(Ids.nova_scriptum_attributes, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(AttributeModule.builder(PerkAttributes.MANA_REGEN_BONUS, AttributeModifier.Operation.ADDITION)
+                                          .unique("dreamtinker.modifier.nova_scriptum_attributes.mana_regen")
+                                          .tool(ToolStackPredicate.NOT_BROKEN).formula()
+                                          .customVariable("attack_speed", new ToolStatVariable(ToolStats.ATTACK_SPEED))
+                                          .customVariable("velocity", new ToolStatVariable(ToolStats.VELOCITY)).add()
+                                          .customVariable("cap", SCRIPTUM_REGEN_CAP).min().build())
+                .addModule(AttributeModule.builder(PerkAttributes.MAX_MANA, AttributeModifier.Operation.ADDITION)
+                                          .unique("dreamtinker.modifier.nova_scriptum_attributes.max_mana")
+                                          .tool(ToolStackPredicate.NOT_BROKEN).formula()
+                                          .constant(3)
+                                          .customVariable("mining_speed", new ToolStatVariable(ToolStats.MINING_SPEED)).multiply()
+                                          .customVariable("draw_speed", new ToolStatVariable(ToolStats.DRAW_SPEED)).multiply()
+                                          .customVariable("cap", SCRIPTUM_MANA_CAP).min().build());
         buildModifier(Ids.nova_spell_tiers, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau")).levelDisplay(new ModifierLevelDisplay.UniqueForLevels(3));
         buildModifier(Ids.nova_creative_tiers, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau")).levelDisplay(ModifierLevelDisplay.NO_LEVELS);
         buildModifier(Ids.nova_spell_slots, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"));
@@ -540,6 +582,42 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
     private static final float UNDERPLATE_ARMOR_FACTOR = 0.8f;
 
     private void addMalumModifiers() {
+        buildModifier(Ids.malum_spirit_attributes, DreamtinkerMaterialDataProvider.modLoaded("malum"))
+                .addModule(new LodestoneArmorAttributesModule(new ResourceLocation("malum", "soul_hunter_cloak"), 0.1));
+        buildModifier(Ids.malum_soul_attributes, DreamtinkerMaterialDataProvider.modLoaded("malum"))
+                .addModule(new LodestoneArmorAttributesModule(new ResourceLocation("malum", "soul_stained_steel_leggings"), 0.1));
+        buildModifier(Ids.malum_malignant_attributes, DreamtinkerMaterialDataProvider.modLoaded("malum"))
+                .addModule(new LodestoneArmorAttributesModule(new ResourceLocation("malum", "malignant_stronghold_boots"), 0.1));
+        // The integration condition also permits force_integration_materials without Lodestone installed.
+        ModLoadedCondition lodestoneLoaded = new ModLoadedCondition("lodestone");
+        EntityVariable magicResistance = new LoadConditionEntityVariable(
+                new AttributeEntityVariable(LodestoneAttributeRegistry.MAGIC_RESISTANCE), new EntityVariable.Constant(1), lodestoneLoaded);
+        EntityVariable magicProficiency = new LoadConditionEntityVariable(
+                new AttributeEntityVariable(LodestoneAttributeRegistry.MAGIC_PROFICIENCY), new EntityVariable.Constant(1), lodestoneLoaded);
+        buildModifier(Ids.malum_magic_attack, DreamtinkerMaterialDataProvider.modLoaded("malum")).priority(200)
+                                                                                                 .addModule(ConditionalMeleeDamageModule.builder().formula()
+                                                                                                                                        .variable(VALUE)
+                                                                                                                                        .customVariable(
+                                                                                                                                                "resistance",
+                                                                                                                                                new EntityMeleeVariable(
+                                                                                                                                                        magicResistance,
+                                                                                                                                                        EntityMeleeVariable.WhichEntity.TARGET,
+                                                                                                                                                        1))
+                                                                                                                                        .constant(0.01f).max()
+                                                                                                                                        .divide()
+                                                                                                                                        .customVariable(
+                                                                                                                                                "proficiency",
+                                                                                                                                                new EntityMeleeVariable(
+                                                                                                                                                        magicProficiency,
+                                                                                                                                                        EntityMeleeVariable.WhichEntity.ATTACKER,
+                                                                                                                                                        1))
+                                                                                                                                        .constant(1).subtract()
+                                                                                                                                        .variable(LEVEL)
+                                                                                                                                        .multiply()
+                                                                                                                                        .constant(1).add()
+                                                                                                                                        .multiply().build(),
+                                                                                                            ModifierHooks.MELEE_DAMAGE,
+                                                                                                            ModifierHooks.MONSTER_MELEE_DAMAGE);
         buildModifier(Ids.malum_rebound, DreamtinkerMaterialDataProvider.modLoaded("malum"))
                 .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
                 .addModule(EnchantmentModule.builder(EnchantmentRegistry.REBOUND.get()).level(LevelingInt.eachLevel(1)).constant())
@@ -668,6 +746,74 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
 
     @Override
     protected void addModifiers() {
+        buildModifier(Ids.light_in_dark).levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                                        .addModule(ProjectileVelocityModule.builder().percent().formula()
+                                                                           .customVariable("light_curve", new EntityPowerVariable(LIGHT_CURVE,
+                                                                                                                                  EntityMeleeVariable.WhichEntity.ATTACKER,
+                                                                                                                                  0))
+                                                                           .build())
+                                        .addModule(ConditionalMeleeDamageModule.builder().formula()
+                                                                               .variable(VALUE).constant(1)
+                                                                               .customVariable("light_curve", new EntityMeleeVariable(LIGHT_CURVE,
+                                                                                                                                      EntityMeleeVariable.WhichEntity.ATTACKER,
+                                                                                                                                      0))
+                                                                               .add().multiply().build(), ModifierHooks.MELEE_DAMAGE,
+                                                   ModifierHooks.MONSTER_MELEE_DAMAGE)
+                                        .addModule(ProtectionModule.builder().source(DamageSourcePredicate.ANY).formula()
+                                                                   .variable(VALUE).constant(1)
+                                                                   .customVariable("light_curve", new EntityProtectionVariable(LIGHT_CURVE,
+                                                                                                                               EntityProtectionVariable.WhichEntity.TARGET,
+                                                                                                                               0))
+                                                                   .add().multiply().build(), ModifierHooks.PROTECTION)
+                                        .addModule(AdjustDamageModule.builder().source(DamageSourcePredicate.ANY).formula()
+                                                                     .variable(VALUE).constant(1)
+                                                                     .customVariable("light_curve", new EntityProtectionVariable(LIGHT_CURVE,
+                                                                                                                                 EntityProtectionVariable.WhichEntity.TARGET,
+                                                                                                                                 0))
+                                                                     .subtract().multiply().build(), ModifierHooks.MODIFY_HURT);
+        buildModifier(Ids.requiem)
+                .addModule(new ArmorLevelTrackerModule(Ids.requiem))
+                .addModule(ConditionalDamageBlockModule.builder().formula()
+                                                       .variable(VALUE).constant(0).greaterThan()
+                                                       .customVariable("slot_level", new SlotInChargeLevelVariable(Ids.requiem))
+                                                       .constant(0).greaterThan().multiply()
+                                                       .constant(1)
+                                                       .customVariable("living_attacker", new EntityProtectionVariable(new EntityVariable.Constant(1),
+                                                                                                                       EntityProtectionVariable.WhichEntity.ATTACKER,
+                                                                                                                       0))
+                                                       .subtract()
+                                                       .customVariable("self_damage", DamageSourceIsHolderVariable.INSTANCE).max()
+                                                       .multiply().build())
+                .addModule(new VolatileFlagModule(IndestructibleItemEntity.INDESTRUCTIBLE_ENTITY))
+                .addModule(AdjustDamageModule.builder().source(DamageSourcePredicate.ANY).formula()
+                                             .variable(VALUE)
+                                             .customVariable("defender_effects",
+                                                             new EntityProtectionVariable(EFFECT_COUNT, EntityProtectionVariable.WhichEntity.TARGET, 0))
+                                             .customVariable("slot_level", new SlotInChargeLevelVariable(Ids.requiem)).multiply().subtract()
+                                             .customVariable("attacker_effects",
+                                                             new EntityProtectionVariable(EFFECT_COUNT, EntityProtectionVariable.WhichEntity.ATTACKER, 0))
+                                             .customVariable("slot_level").multiply().subtract().build(), ModifierHooks.MODIFY_HURT);
+        buildModifier(Ids.last_body)
+                .addModule(new ArmorLevelTrackerModule(Ids.last_body))
+                .addModule(AdjustDamageModule.builder().source(DamageSourcePredicate.ANY).holder(SERVER_PLAYER).formula()
+                                             .variable(VALUE).constant(1)
+                                             .constant(0.14f)
+                                             .customVariable("slot_level", new SlotInChargeLevelVariable(Ids.last_body)).constant(0.08f).multiply().add()
+                                             .customVariable("despair", new ModDataVariable(oathBrokenSteelId, ModDataSource.PERSISTENT))
+                                             .constant(100).divide().constant(0.10f).multiply().add()
+                                             .duplicate()
+                                             .constant(0.5f)
+                                             .customVariable("health",
+                                                             new EntityProtectionVariable(EntityVariable.HEALTH, EntityProtectionVariable.WhichEntity.TARGET,
+                                                                                          0))
+                                             .customVariable("max_health", new EntityProtectionVariable(new AttributeEntityVariable(Attributes.MAX_HEALTH),
+                                                                                                        EntityProtectionVariable.WhichEntity.TARGET, 1))
+                                             .divide().subtract().constant(0.5f).divide()
+                                             .multiply().min()
+                                             .customVariable("health").customVariable("max_health").divide().constant(0.5f).lessThan().multiply()
+                                             .customVariable("slot_level").constant(0).greaterThan().multiply()
+                                             .variable(VALUE).constant(0).greaterThan().multiply()
+                                             .subtract().multiply().build(), ModifierHooks.MODIFY_HURT);
         buildModifier(Ids.honey_tasty)
                 .addModule(EdibleModule.EDIBLE_TRAIT)
                 .addModule(new EdibleRepresentativeItemModule(Items.HONEY_BOTTLE))
@@ -1425,6 +1571,13 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
     }
 
     private void addFAAModifiers() {
+        buildModifier(Ids.faa_corruption_defense, DreamtinkerMaterialDataProvider.modLoaded("forbidden_arcanus"))
+                .addModule(AdjustDamageModule.builder().source(DamageSourcePredicate.ANY).formula()
+                                             .variable(VALUE)
+                                             .customVariable("corruption",
+                                                             new EntityProtectionVariable(CORRUPTION, EntityProtectionVariable.WhichEntity.TARGET, 0))
+                                             .variable(LEVEL)
+                                             .multiply().subtract().build(), ModifierHooks.MODIFY_HURT);
         buildModifier(Ids.faa_aureal_protection, modLoaded("forbidden_arcanus"))
                 .addModule(ProtectionModule.builder().source(DamageSourcePredicate.ANY)
                                            .formula()
@@ -1471,6 +1624,9 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
     }
 
     private void addGoetyModifiers() {
+        // Moved to src/main/resources; uncomment only when regenerating this hard-reference modifier.
+        // buildModifier(Ids.goety_soul_eater, DreamtinkerMaterialDataProvider.modLoaded("goety"))
+        //         .addModule(EnchantmentModule.builder(ModEnchantments.SOUL_EATER.get()).level(LevelingInt.eachLevel(1)).constant());
         buildModifier(Ids.goety_dark_metal_attack, DreamtinkerMaterialDataProvider.modLoaded("goety"));
         buildModifier(Ids.goety_dark_metal_repair, DreamtinkerMaterialDataProvider.modLoaded("goety"));
         buildModifier(Ids.goety_dark_metal_defense, DreamtinkerMaterialDataProvider.modLoaded("goety"))

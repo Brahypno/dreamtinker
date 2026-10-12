@@ -1,0 +1,32 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "malum"
+          },
+          {
+            "type": "esotericism_tinker:mod_compact_config",
+            "modid": "malum"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "dreamtinker:lodestone_armor_attributes",
+      "armor": "malum:soul_hunter_cloak",
+      "armor_penalty_per_level": 0.1
+    }
+  ]
+}

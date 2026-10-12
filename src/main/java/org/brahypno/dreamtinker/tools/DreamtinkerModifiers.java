@@ -5,8 +5,10 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -24,10 +26,15 @@ import org.brahypno.dreamtinker.library.modifiers.fluid.block.AutoTagCycleBlockF
 import org.brahypno.dreamtinker.library.modifiers.fluid.entity.ConditionalDamageFluidEffect;
 import org.brahypno.dreamtinker.library.modifiers.fluid.entity.DespairScalingDamageFluidEffect;
 import org.brahypno.dreamtinker.library.modifiers.fluid.entity.DrainLifeFluidEffect;
+import org.brahypno.dreamtinker.library.modifiers.modules.armor.ArmorLevelTrackerModule;
 import org.brahypno.dreamtinker.library.modifiers.modules.armor.ArmorValueReductionModule;
+import org.brahypno.dreamtinker.library.modifiers.modules.armor.ConditionalDamageBlockModule;
+import org.brahypno.dreamtinker.library.modifiers.modules.armor.LodestoneArmorAttributesModule;
 import org.brahypno.dreamtinker.library.modifiers.modules.combat.NarcissusFluidFeedbackModule;
 import org.brahypno.dreamtinker.library.modifiers.modules.harvest.AutoPureDaisyModule;
 import org.brahypno.dreamtinker.library.modifiers.modules.harvest.HoneyLootModule;
+import org.brahypno.dreamtinker.library.modifiers.variable.DamageSourceIsHolderVariable;
+import org.brahypno.dreamtinker.library.modifiers.variable.SlotInChargeLevelVariable;
 import org.brahypno.dreamtinker.library.modifiers.variable.SlotInChargeReductionVariable;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerEnchantmentToModifierProvider;
 import org.brahypno.dreamtinker.tools.data.DreamtinkerFluidEffectProvider;
@@ -58,9 +65,7 @@ import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.eidolon.EidolonSap
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.enigmaticLegacy.*;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.enigmaticLegacy.material.etherium.ELAstralBreak;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.enigmaticLegacy.material.etherium.EtheriumProtection;
-import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.enigmaticLegacy.material.evil.EvilAttack;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.enigmaticLegacy.material.soul_aether.ExilesFaulty;
-import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.faa.CorruptionDefense;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.legendary_monsters.LegendaryMonstersCompatModifiers.*;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.legendary_monsters.SoulRage;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.legendary_monsters.annihilatorArmorPower;
@@ -68,11 +73,17 @@ import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.malum.*;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.occ.OtherWorldView;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.occ.OtherworldHarvest;
 import org.brahypno.dreamtinker.tools.modifiers.traits.armors.*;
-import org.brahypno.dreamtinker.tools.modifiers.traits.common.*;
+import org.brahypno.dreamtinker.tools.modifiers.traits.common.AutoRefill;
+import org.brahypno.dreamtinker.tools.modifiers.traits.common.TheEnd;
+import org.brahypno.dreamtinker.tools.modifiers.traits.common.blockViewer;
+import org.brahypno.dreamtinker.tools.modifiers.traits.common.not_like_was;
 import org.brahypno.dreamtinker.tools.modifiers.traits.harvest.ArrowHarvest;
 import org.brahypno.dreamtinker.tools.modifiers.traits.harvest.LifeLooting;
 import org.brahypno.dreamtinker.tools.modifiers.traits.harvest.SilkyCrystal;
-import org.brahypno.dreamtinker.tools.modifiers.traits.material.OathSteel.*;
+import org.brahypno.dreamtinker.tools.modifiers.traits.material.OathSteel.BrokenOath;
+import org.brahypno.dreamtinker.tools.modifiers.traits.material.OathSteel.ForOath;
+import org.brahypno.dreamtinker.tools.modifiers.traits.material.OathSteel.HealOath;
+import org.brahypno.dreamtinker.tools.modifiers.traits.material.OathSteel.PaleOath;
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.Serpent_Shift.Cryo.DeathCrossing;
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.Serpent_Shift.Cryo.RemoverHit;
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.Serpent_Shift.ReasonBeyondReasonModifier;
@@ -84,7 +95,10 @@ import org.brahypno.dreamtinker.tools.modifiers.traits.material.deliverance.Sign
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.desire_gem.EternityDefense;
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.desire_gem.MusouIsshinModifier;
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.desire_gem.VisionaryWishes;
-import org.brahypno.dreamtinker.tools.modifiers.traits.material.despair_gem.*;
+import org.brahypno.dreamtinker.tools.modifiers.traits.material.despair_gem.DespairMist;
+import org.brahypno.dreamtinker.tools.modifiers.traits.material.despair_gem.DespairRain;
+import org.brahypno.dreamtinker.tools.modifiers.traits.material.despair_gem.DespairWind;
+import org.brahypno.dreamtinker.tools.modifiers.traits.material.despair_gem.Ophelia;
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.echo_shard.EchoedAttack;
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.echo_shard.EchoedDefence;
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.fifth_stone.FourWarning;
@@ -106,11 +120,13 @@ import org.brahypno.dreamtinker.tools.modifiers.traits.material.scolecite.pupalO
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.star_regulus.TwoHeadedSeven;
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.star_regulus.as_one;
 import org.brahypno.dreamtinker.tools.modifiers.traits.material.whimsyGold.RhinegoldCatModifier;
+import org.brahypno.dreamtinker.utils.CompatUtils.EnigmaticLegacyCompat;
 import org.brahypno.dreamtinker.utils.CompatUtils.ForbiddenArcanusAurealCompat;
 import slimeknights.mantle.data.predicate.block.BlockPredicate;
 import slimeknights.mantle.data.predicate.entity.LivingEntityPredicate;
 import slimeknights.tconstruct.library.json.variable.entity.EntityVariable;
 import slimeknights.tconstruct.library.json.variable.protection.ProtectionVariable;
+import slimeknights.tconstruct.library.json.variable.tool.ToolVariable;
 import slimeknights.tconstruct.library.modifiers.ModifierId;
 import slimeknights.tconstruct.library.modifiers.fluid.FluidEffect;
 import slimeknights.tconstruct.library.modifiers.modules.ModifierModule;
@@ -129,7 +145,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static ModifierDeferredRegister BIC_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     public static ModifierDeferredRegister OCC_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     public static ModifierDeferredRegister LM_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
-    public static ModifierDeferredRegister FAA_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     public static ModifierDeferredRegister BLM_MODIFIERS = ModifierDeferredRegister.create(Dreamtinker.MODID);
     //Mashuo
     public static final StaticModifier<RealSweep> real_sweep = MODIFIERS.register("real_sweep", RealSweep::new);
@@ -194,12 +209,10 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<DespairMist> despair_mist = MODIFIERS.register("despair_mist", DespairMist::new);
     public static final StaticModifier<DespairRain> despair_rain = MODIFIERS.register("despair_rain", DespairRain::new);
     public static final StaticModifier<DespairWind> despair_wind = MODIFIERS.register("despair_wind", DespairWind::new);
-    public static final StaticModifier<Requiem> requiem = MODIFIERS.register("requiem", Requiem::new);
     public static final StaticModifier<Ophelia> ophelia = MODIFIERS.register("ophelia", Ophelia::new);
     public static final StaticModifier<WeaponDreams> weapon_dreams = MODIFIERS.register("weapon_dreams", WeaponDreams::new);
     public static final StaticModifier<RainbowCatcher> rainbowCatcher = MODIFIERS.register("rainbow_catcher", RainbowCatcher::new);
     public static final StaticModifier<not_like_was> not_like_was = MODIFIERS.register("not_like_was", not_like_was::new);
-    public static final StaticModifier<LightInDark> light_in_dark = MODIFIERS.register("light_in_dark", LightInDark::new);
     public static final StaticModifier<LunarDurabilityDefense> lunar_defense = MODIFIERS.register("lunar_defense", LunarDurabilityDefense::new);
     public static final StaticModifier<blockViewer> OreViewer = MODIFIERS.register("ore_viewer", () -> new blockViewer(Tags.Blocks.ORES.location(), 0.8f));
     public static final StaticModifier<HiddenHit> hiddenHit = MODIFIERS.register("hidden_hit", HiddenHit::new);
@@ -234,7 +247,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<Sunless> sunless = MODIFIERS.register("sunless", Sunless::new);
     public static final StaticModifier<BrokenOath> broken_oath = MODIFIERS.register("broken_oath", BrokenOath::new);
     public static final StaticModifier<ForOath> forlorn_judgment = MODIFIERS.register("forlorn_judgment", ForOath::new);
-    public static final StaticModifier<LastBody> last_body = MODIFIERS.register("last_body", LastBody::new);
     public static final StaticModifier<ArcaneHit> arcane_hit = MODIFIERS.register("arcane_hit", ArcaneHit::new);
     public static final StaticModifier<FourWarning> four_warning = MODIFIERS.register("four_warning", FourWarning::new);
     public static final StaticModifier<EternityDefense> eternity_defense = MODIFIERS.register("eternity_defense", EternityDefense::new);
@@ -255,7 +267,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
 
     public static final StaticModifier<CursedRingBound> cursed_ring_bound = EL_MODIFIERS.register("cursed_ring_bound", CursedRingBound::new);
     //evil
-    public static final StaticModifier<EvilAttack> evil_attack = EL_MODIFIERS.register("evil_attack", EvilAttack::new);
     public static final StaticModifier<ELEnderSlayer> ender_slayer = EL_MODIFIERS.register("ender_slayer", ELEnderSlayer::new);
     public static final StaticModifier<WeaponBooks> weapon_books = EL_MODIFIERS.register("weapon_books", WeaponBooks::new);
     public static final StaticModifier<EldritchPan> eldritch_pan = EL_MODIFIERS.register("eldritch_pan", EldritchPan::new);
@@ -264,19 +275,11 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
 
     //Malum modifiers
     public static final StaticModifier<MalumBase> malum_base = MALUM_MODIFIERS.register("malum_base", MalumBase::new);
-    public static final StaticModifier<malum_attributes> malum_spirit_attributes =
-            MALUM_MODIFIERS.register("malum_spirit_attributes", () -> new malum_attributes(1));
-    public static final StaticModifier<malum_attributes> malum_soul_attributes =
-            MALUM_MODIFIERS.register("malum_soul_attributes", () -> new malum_attributes(2));
-    public static final StaticModifier<malum_attributes> malum_malignant_attributes =
-            MALUM_MODIFIERS.register("malum_malignant_attributes", () -> new malum_attributes(3));
 
     public static final StaticModifier<MalumHexStaff> malum_hex_staff =
             MALUM_MODIFIERS.register("malum_hex_staff", () -> new MalumHexStaff(false));
     public static final StaticModifier<range_accelerator> malum_range_accelerator =
             MALUM_MODIFIERS.register("malum_spirit_accelerator", () -> new range_accelerator(malumTag("spirit")));
-    public static final StaticModifier<MalumMagicAttack> malum_magic_attack =
-            MALUM_MODIFIERS.register("malum_magic_attack", MalumMagicAttack::new);
     public static final StaticModifier<MalumHexStaff> malum_erosion =
             MALUM_MODIFIERS.register("malum_erosion", () -> new MalumHexStaff(true));
     public static final StaticModifier<MalumThirsty> malum_thirsty =
@@ -330,7 +333,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<AnnihilationBurst> annihilation_burst =
             LM_MODIFIERS.register("annihilation_burst", AnnihilationBurst::new);
 
-    public static final StaticModifier<CorruptionDefense> corruption_defense = FAA_MODIFIERS.register("faa_corruption_defense", CorruptionDefense::new);
     public static final StaticModifier<SentientWillModifier> sentient_will = BLM_MODIFIERS.register("sentient_will", SentientWillModifier::new);
     public static final StaticModifier<livingArmorModifier> living_armor = BLM_MODIFIERS.register("blm_living_armor", livingArmorModifier::new);
     public static final StaticModifier<HellforgedModifier> hellforged = BLM_MODIFIERS.register("blm_hellforged", HellforgedModifier::new);
@@ -339,6 +341,28 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             EntityVariable.simple(entity -> entity instanceof Player player ? ForbiddenArcanusAurealCompat.getAureal(player) : 0);
     public static final EntityVariable CORRUPTION =
             EntityVariable.simple(entity -> entity instanceof Player player ? ForbiddenArcanusAurealCompat.getCorruption(player) : 0);
+    public static final EntityVariable CURSE_MULTIPLIER =
+            EntityVariable.simple(entity -> entity instanceof Player player ? EnigmaticLegacyCompat.getCurseAmount(player) + 1 : 1);
+
+    private static float lightCurve(LivingEntity entity) {
+        int brightness = entity.level().getRawBrightness(entity.blockPosition(), entity.level().getSkyDarken());
+        brightness = Math.max(0, Math.min(15, brightness));
+        if (brightness <= 3){
+            return 0.25f * (1.0f - brightness / 3.0f);
+        }else if (brightness <= 11){
+            double t = (brightness - 4) / 7.0;
+            return (float) (-0.25f * (1.0f - 2.0f * Math.abs(t - 0.5f)));
+        }
+        return 0.25f * ((brightness - 12) / 3.0f);
+    }
+
+    public static final EntityVariable LIGHT_CURVE = EntityVariable.simple(DreamtinkerModifiers::lightCurve);
+    public static final EntityVariable EFFECT_COUNT = EntityVariable.simple(entity -> entity.getActiveEffects().size());
+    public static final LivingEntityPredicate SERVER_PLAYER = LivingEntityPredicate.simple(entity -> entity instanceof ServerPlayer);
+    public static final ToolVariable SCRIPTUM_REGEN_CAP =
+            ToolVariable.simple(tool -> org.brahypno.dreamtinker.config.DreamtinkerCachedConfig.ArtsRegenBonus.get().floatValue());
+    public static final ToolVariable SCRIPTUM_MANA_CAP =
+            ToolVariable.simple(tool -> org.brahypno.dreamtinker.config.DreamtinkerCachedConfig.ArtsMaxManaBonus.get().floatValue());
     public static BlockPredicate BLOCK_OF_UNDER_GARDEN = BlockPredicate.simple(state -> {
         ResourceLocation id = ForgeRegistries.BLOCKS.getKey(state.getBlock());
         return id != null && id.getNamespace().matches("undergarden");
@@ -383,9 +407,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         if (ModList.get().isLoaded("occultism")){
             OCC_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         }
-        if (ModList.get().isLoaded("forbidden_arcanus")){
-            FAA_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        }
         if (ModList.get().isLoaded("bloodmagic")){
             BLM_MODIFIERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         }
@@ -398,6 +419,9 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             ModifierModule.LOADER.register(Dreamtinker.getLocation("bontania_auto_pure_module"), AutoPureDaisyModule.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("armor_value_reduction"), ArmorValueReductionModule.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("honey_loot"), HoneyLootModule.LOADER);
+            ModifierModule.LOADER.register(Dreamtinker.getLocation("lodestone_armor_attributes"), LodestoneArmorAttributesModule.LOADER);
+            ModifierModule.LOADER.register(Dreamtinker.getLocation("armor_level_tracker"), ArmorLevelTrackerModule.LOADER);
+            ModifierModule.LOADER.register(Dreamtinker.getLocation("conditional_damage_block"), ConditionalDamageBlockModule.LOADER);
 
             FluidEffect.ENTITY_EFFECTS.register(Dreamtinker.getLocation("drain_life_fluid"), DrainLifeFluidEffect.LOADER);
             FluidEffect.ENTITY_EFFECTS.register(Dreamtinker.getLocation("conditional_damage_fluid"), ConditionalDamageFluidEffect.LOADER);
@@ -414,6 +438,14 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
 
             EntityVariable.LOADER.register(Dreamtinker.getLocation("faa_aureal"), AUREAL.getLoader());
             EntityVariable.LOADER.register(Dreamtinker.getLocation("faa_corruption"), CORRUPTION.getLoader());
+            EntityVariable.LOADER.register(Dreamtinker.getLocation("curse_multiplier"), CURSE_MULTIPLIER.getLoader());
+            EntityVariable.LOADER.register(Dreamtinker.getLocation("light_curve"), LIGHT_CURVE.getLoader());
+            EntityVariable.LOADER.register(Dreamtinker.getLocation("effect_count"), EFFECT_COUNT.getLoader());
+            LivingEntityPredicate.LOADER.register(Dreamtinker.getLocation("server_player"), SERVER_PLAYER.getLoader());
+            ToolVariable.register(Dreamtinker.getLocation("scriptum_regen_cap"), SCRIPTUM_REGEN_CAP.getLoader());
+            ToolVariable.register(Dreamtinker.getLocation("scriptum_mana_cap"), SCRIPTUM_MANA_CAP.getLoader());
+            ProtectionVariable.LOADER.register(Dreamtinker.getLocation("slot_in_charge_level"), SlotInChargeLevelVariable.LOADER);
+            ProtectionVariable.LOADER.register(Dreamtinker.getLocation("damage_source_is_holder"), DamageSourceIsHolderVariable.LOADER);
 
             EntityVariable.LOADER.register(Dreamtinker.getLocation("wolf_effects"), WOLF_EFFECTS.getLoader());
             EntityVariable.LOADER.register(Dreamtinker.getLocation("full_health_multiplier"), FULL_HEALTH_MULTIPLIER.getLoader());
@@ -435,6 +467,16 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     }
 
     public static class Ids {
+        public static final ModifierId faa_corruption_defense = id("faa_corruption_defense");
+        public static final ModifierId nova_scriptum_attributes = id("nova_scriptum_attributes");
+        public static final ModifierId malum_magic_attack = id("malum_magic_attack");
+        public static final ModifierId malum_spirit_attributes = id("malum_spirit_attributes");
+        public static final ModifierId malum_soul_attributes = id("malum_soul_attributes");
+        public static final ModifierId malum_malignant_attributes = id("malum_malignant_attributes");
+        public static final ModifierId evil_attack = id("evil_attack");
+        public static final ModifierId last_body = id("last_body");
+        public static final ModifierId requiem = id("requiem");
+        public static final ModifierId light_in_dark = id("light_in_dark");
         public static final ModifierId honey_tasty = id("honey_tasty");
         public static final ModifierId absorption_hit = id("absorption_hit");
         public static final ModifierId fly = id("fly");

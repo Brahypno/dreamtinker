@@ -67,8 +67,6 @@ public class NovaRegistry extends DreamtinkerModule {
     }
 
 
-    public static final StaticModifier<ScriptumAttributes> nova_scriptum_attributes =
-            ARS_MODIFIERS.register("nova_scriptum_attributes", ScriptumAttributes::new);
     public static final StaticModifier<NovaMagicArmor> nova_magic_armor =
             ARS_MODIFIERS.register("nova_magic_armor", NovaMagicArmor::new);
     public static final StaticModifier<NovaConjurationEssence> nova_conjuration_essence =

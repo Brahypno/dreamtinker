@@ -251,7 +251,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                                                              .set(ToolStats.DURABILITY, 1.5f).build())) // gets effectively 2x durability from having 2 heads
                 .module(ToolTraitsModule.builder()
                                         .trait(DreamtinkerModifiers.Ids.nova_spell_tiers)
-                                        .trait(NovaRegistry.nova_scriptum_attributes).build())
+                                        .trait(DreamtinkerModifiers.Ids.nova_scriptum_attributes).build())
                 .module(large_soul_weapon_slots);
         // behavior;
     }

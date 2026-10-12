@@ -1,0 +1,50 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "forbidden_arcanus"
+          },
+          {
+            "type": "esotericism_tinker:mod_compact_config",
+            "modid": "forbidden_arcanus"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:adjust_damage",
+      "formula": [
+        "$protection",
+        "$corruption",
+        "$level",
+        "*",
+        "-"
+      ],
+      "hooks": [
+        "tconstruct:modify_hurt"
+      ],
+      "percent": false,
+      "tooltip_value": 1.0,
+      "variables": {
+        "corruption": {
+          "type": "tconstruct:entity",
+          "entity_type": "dreamtinker:faa_corruption",
+          "fallback": 0.0,
+          "which": "target"
+        }
+      }
+    }
+  ]
+}

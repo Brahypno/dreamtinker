@@ -1,0 +1,87 @@
+{
+  "condition": {
+    "type": "forge:or",
+    "values": [
+      {
+        "type": "tconstruct:config",
+        "prop": "force_integration_materials"
+      },
+      {
+        "type": "forge:and",
+        "values": [
+          {
+            "type": "forge:mod_loaded",
+            "modid": "malum"
+          },
+          {
+            "type": "esotericism_tinker:mod_compact_config",
+            "modid": "malum"
+          }
+        ]
+      }
+    ]
+  },
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:conditional_melee_damage",
+      "formula": [
+        "$damage",
+        "$resistance",
+        0.01,
+        "max",
+        "/",
+        "$proficiency",
+        1.0,
+        "-",
+        "$level",
+        "*",
+        1.0,
+        "+",
+        "*"
+      ],
+      "hooks": [
+        "tconstruct:melee_damage",
+        "tconstruct:monster_melee_damage"
+      ],
+      "percent": false,
+      "variables": {
+        "proficiency": {
+          "type": "tconstruct:entity",
+          "conditions": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "lodestone"
+            }
+          ],
+          "entity_type": "mantle:load_condition",
+          "fallback": 1.0,
+          "if_false": 1.0,
+          "if_true": {
+            "type": "tconstruct:attribute",
+            "attribute": "lodestone:magic_proficiency"
+          },
+          "which": "attacker"
+        },
+        "resistance": {
+          "type": "tconstruct:entity",
+          "conditions": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "lodestone"
+            }
+          ],
+          "entity_type": "mantle:load_condition",
+          "fallback": 1.0,
+          "if_false": 1.0,
+          "if_true": {
+            "type": "tconstruct:attribute",
+            "attribute": "lodestone:magic_resistance"
+          },
+          "which": "target"
+        }
+      }
+    }
+  ],
+  "priority": 200
+}

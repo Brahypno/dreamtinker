@@ -1,0 +1,82 @@
+{
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "dreamtinker:armor_level_tracker",
+      "tracker": "dreamtinker:requiem"
+    },
+    {
+      "type": "dreamtinker:conditional_damage_block",
+      "formula": [
+        "$protection",
+        0.0,
+        ">",
+        "$slot_level",
+        0.0,
+        ">",
+        "*",
+        1.0,
+        "$living_attacker",
+        "-",
+        "$self_damage",
+        "max",
+        "*"
+      ],
+      "percent": false,
+      "variables": {
+        "living_attacker": {
+          "type": "tconstruct:entity",
+          "entity_type": 1.0,
+          "fallback": 0.0,
+          "which": "attacker"
+        },
+        "self_damage": "dreamtinker:damage_source_is_holder",
+        "slot_level": {
+          "type": "dreamtinker:slot_in_charge_level",
+          "tracker": "dreamtinker:requiem"
+        }
+      }
+    },
+    {
+      "type": "tconstruct:volatile_flag",
+      "flag": "tconstruct:indestructible"
+    },
+    {
+      "type": "tconstruct:adjust_damage",
+      "formula": [
+        "$protection",
+        "$defender_effects",
+        "$slot_level",
+        "*",
+        "-",
+        "$attacker_effects",
+        "$slot_level",
+        "*",
+        "-"
+      ],
+      "hooks": [
+        "tconstruct:modify_hurt"
+      ],
+      "percent": false,
+      "tooltip_value": 1.0,
+      "variables": {
+        "attacker_effects": {
+          "type": "tconstruct:entity",
+          "entity_type": "dreamtinker:effect_count",
+          "fallback": 0.0,
+          "which": "attacker"
+        },
+        "defender_effects": {
+          "type": "tconstruct:entity",
+          "entity_type": "dreamtinker:effect_count",
+          "fallback": 0.0,
+          "which": "target"
+        },
+        "slot_level": {
+          "type": "dreamtinker:slot_in_charge_level",
+          "tracker": "dreamtinker:requiem"
+        }
+      }
+    }
+  ]
+}
