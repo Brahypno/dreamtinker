@@ -27,7 +27,7 @@
     "enigmaticlegacy:item/eldritch_pan"
   ],
   "dreamtinker:ender_slayer": [
-    "minecraft:item/ender_slayer"
+    "minecraft:item/ender_eye"
   ],
   "dreamtinker:flaming_memory": [
     "dreamtinker:item/materials/nigrescence_antimony"
@@ -57,7 +57,8 @@
     "malum:item/ritual_staff"
   ],
   "dreamtinker:malum_rebound": [
-    "malum:item/crude_scythe"
+    "malum:item/crude_scythe",
+    "tconstruct:gui/modifiers/ranged/returning"
   ],
   "dreamtinker:malum_spirit_plunder": [
     "malum:item/spirit_shard"
@@ -83,5 +84,155 @@
   ],
   "dreamtinker:botania_pure_smeltery": [
     "botania:block/pure_daisy"
+  ],
+  "dreamtinker:blighted_sigil": [
+    "enigmaticlegacy:item/darkest_scroll"
+  ],
+  "dreamtinker:el_sorrow": [
+    "enigmaticlegacy:item/cursed_scroll"
+  ],
+  "dreamtinker:malum_animated": [
+    "malum:item/crude_scythe",
+    "tconstruct:gui/modifiers/melee/swiftstrike"
+  ],
+  "dreamtinker:many_us": [
+    "malum:item/spirit_pouch",
+    "tconstruct:gui/modifiers/plus"
+  ],
+  "dreamtinker:spiritual_weapon_transformation": [
+    "malum:item/tophat"
+  ],
+  "dreamtinker:eidolon_sapping": [
+    "eidolon:item/sapping_sword"
+  ],
+  "dreamtinker:eidolon_death_bringer": [
+    "eidolon:item/deathbringer_scythe"
+  ],
+  "dreamtinker:eidolon_bone_chill": [
+    "eidolon:item/bonechill_wand"
+  ],
+  "dreamtinker:ashen_soul": [
+    "eidolon:item/lesser_soul_gem"
+  ],
+  "dreamtinker:bic_dark_armor_plate": [
+    "born_in_chaos_v1:item/plastinatiemnoistali"
+  ],
+  "dreamtinker:bic_frostbitten": [
+    "born_in_chaos_v1:item/permafrost_shard"
+  ],
+  "dreamtinker:bic_intoxicating": [
+    "born_in_chaos_v1:item/botlintocs"
+  ],
+  "dreamtinker:naughty_chaos": [
+    "born_in_chaos_v1:item/chaossemt"
+  ],
+  "dreamtinker:nova_enchanter_sword": [
+    "ars_nouveau:item/enchanters_sword"
+  ],
+  "dreamtinker:nova_enchanter_shield": [
+    "ars_nouveau:item/enchanters_shield"
+  ],
+  "dreamtinker:nova_wand": [
+    "ars_nouveau:item/wand"
+  ],
+  "dreamtinker:nova_spell_bow": [
+    "ars_nouveau:item/spellbow"
+  ],
+  "dreamtinker:nova_spell_tiers": [
+    "ars_nouveau:item/spellbook_purple"
+  ],
+  "dreamtinker:nova_magic_armor": [
+    "ars_nouveau:item/magebloom_fiber"
+  ],
+  "dreamtinker:nova_spell_slots": [
+    "ars_nouveau:item/glyph_template"
+  ],
+  "dreamtinker:nova_mana_reduce": [
+    "ars_nouveau:item/amulet_of_mana_regen"
+  ],
+  "dreamtinker:nova_mana_shield": [
+    "ars_nouveau:item/shield"
+  ],
+  "dreamtinker:cosmogony_tetrad": [
+    "ars_nouveau:item/fire_essence"
+  ],
+  "dreamtinker:occ_view": [
+    "occultism:item/armor/otherworld_goggles"
+  ],
+  "dreamtinker:otherworld_precious": [
+    "occultism:item/awakened_feather"
+  ],
+  "dreamtinker:soul_rage": [
+    "legendary_monsters:item/soul_great_sword_2d"
+  ],
+  "dreamtinker:annihilator_armor_power": [
+    "legendary_monsters:item/annihilator_chestplate"
+  ],
+  "dreamtinker:ancient_counterspike": [
+    "legendary_monsters:item/ancient_spike"
+  ],
+  "dreamtinker:withering_charge": [
+    "legendary_monsters:item/withered_scythe_2d2"
+  ],
+  "dreamtinker:mossy_symbiosis": [
+    "legendary_monsters:item/nature_crystal_lush"
+  ],
+  "dreamtinker:atmospheric_leap": [
+    "legendary_monsters:item/cloud_rod"
+  ],
+  "dreamtinker:lightning_strike": [
+    "legendary_monsters:item/axe_of_lightning2d"
+  ],
+  "dreamtinker:chorus_blink": [
+    "legendary_monsters:item/chorus_crystal"
+  ],
+  "dreamtinker:fiery_breath": [
+    "legendary_monsters:item/lava_eaters_skin2"
+  ],
+  "dreamtinker:monstrous_shock": [
+    "legendary_monsters:item/anchor_handle"
+  ],
+  "dreamtinker:annihilation_burst": [
+    "legendary_monsters:item/bottle_of_annihilation"
+  ],
+  "dreamtinker:legendary_reverie": [
+    "legendary_monsters:item/corrupted_soul"
+  ],
+  "dreamtinker:shulker_counter": [
+    "legendary_monsters:item/large_shulker_shell"
+  ],
+  "dreamtinker:frost_seal": [
+    "legendary_monsters:item/frozen_rune2"
+  ],
+  "dreamtinker:unbreakable": [
+    "forbidden_arcanus:item/eternal_stella"
+  ],
+  "dreamtinker:divine_maledictus": [
+    "forbidden_arcanus:item/enhancer/divine_pact"
+  ],
+  "dreamtinker:blm_living_armor": [
+    "bloodmagic:item/livingplate"
+  ],
+  "dreamtinker:cold_breaker": [
+    "aquamirae:item/rune_of_the_storm"
+  ],
+  "dreamtinker:goety_death_scythe": [
+    "goety:item/death_scythe"
+  ],
+  "dreamtinker:goety_blade_of_ender": [
+    "goety:item/blade_of_ender"
+  ],
+  "dreamtinker:goety_velocity": [
+    "goety:item/wind_core"
+  ],
+  "dreamtinker:goety_radius": [
+    "goety:item/magic_emerald"
+  ],
+  "dreamtinker:goety_soul_eater": [
+    "goety:item/soul_energy"
+  ],
+  "dreamtinker:nova_reactive": [
+    "ars_nouveau:item/blank_parchment",
+    "ars_nouveau:item/scroll_runes"
   ]
 }
