@@ -50,6 +50,7 @@ import org.brahypno.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvi
 import org.brahypno.esotericismtinker.library.modifiers.modules.armor.FlightModule;
 import org.brahypno.esotericismtinker.library.modifiers.modules.armor.RepriseProtectionModule;
 import org.brahypno.esotericismtinker.library.modifiers.modules.armor.ResonanceArmorModule;
+import org.brahypno.esotericismtinker.library.modifiers.modules.behavior.IncreaseToolDamageModule;
 import org.brahypno.esotericismtinker.library.modifiers.modules.build.AllSlotModule;
 import org.brahypno.esotericismtinker.library.modifiers.modules.combat.*;
 import org.brahypno.esotericismtinker.library.modifiers.modules.harvest.BlockLootMultiplierModule;
@@ -743,6 +744,20 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
 
     @Override
     protected void addModifiers() {
+        buildModifier(Ids.lunar_defense)
+                .addModule(AdjustDamageModule.builder().formula()
+                                             .variable(VALUE)
+                                             .variable(LEVEL).subtract()
+                                             .build(), ModifierHooks.MODIFY_HURT, ModifierHooks.TOOLTIP)
+                .addModule(IncreaseToolDamageModule.builder().eachLevel(1.0f), ModifierHooks.TOOL_DAMAGE);
+        buildModifier(Ids.deep_sleep_with_roar)
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(SelfMobEffectModule.builder()
+                                              .transferNegativeEffects()
+                                              .removeSelfEffects(false)
+                                              .applyBeforeMelee(true)
+                                              .chance(LevelingValue.flat(1))
+                                              .build());
         buildModifier(Ids.light_in_dark).levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                                         .addModule(ProjectileVelocityModule.builder().percent().formula()
                                                                            .customVariable("light_curve", new EntityPowerVariable(LIGHT_CURVE,

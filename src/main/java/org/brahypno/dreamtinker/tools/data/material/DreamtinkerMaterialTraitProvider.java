@@ -48,7 +48,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.crying_obsidian, ARMOR, Ids.in_rain, Ids.with_tears);
 
         addTraits(DreamtinkerMaterialIds.larimar, MELEE_HARVEST, Ids.ykhEULA, Ids.MorningLordEULA, Ids.EULA);
-        addTraits(DreamtinkerMaterialIds.larimar, RANGED, why_i_cry.getId(), deep_sleep_with_roar.getId());
+        addTraits(DreamtinkerMaterialIds.larimar, RANGED, why_i_cry.getId(), Ids.deep_sleep_with_roar);
 
         addTraits(DreamtinkerMaterialIds.amber, MELEE_HARVEST, wait_until.getId(), as_sand.getId());
         addTraits(DreamtinkerMaterialIds.amber, RANGED, wait_until.getId(), as_sand.getId());
@@ -99,7 +99,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.shiningFlint, AMMO, ModifierIds.keen, ModifierIds.spike);
 
         addDefaultTraits(DreamtinkerMaterialIds.orichalcum, Ids.lunarRejection);
-        addTraits(DreamtinkerMaterialIds.orichalcum, ARMOR, Ids.lunarProtection, lunar_defense.getId());
+        addTraits(DreamtinkerMaterialIds.orichalcum, ARMOR, Ids.lunarProtection, Ids.lunar_defense);
 
         addDefaultTraits(DreamtinkerMaterialIds.cold_iron, Ids.slowness);
         addTraits(DreamtinkerMaterialIds.cold_iron, ARMOR, OreViewer.getId());

@@ -199,7 +199,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<StoneHeart> stone_heart = MODIFIERS.register("stone_heart", StoneHeart::new);
     public static final StaticModifier<LifeLooting> life_looting = MODIFIERS.register("life_looting", LifeLooting::new);
 
-    public static final StaticModifier<DeepSleepWithRoar> deep_sleep_with_roar = MODIFIERS.register("deep_sleep_with_roar", DeepSleepWithRoar::new);
     public static final StaticModifier<WaitUntil> wait_until = MODIFIERS.register("wait_until", WaitUntil::new);
     public static final StaticModifier<AnvilHit> anvil_hit = MODIFIERS.register("anvil_hit", AnvilHit::new);
     public static final StaticModifier<AbsorptionDefense> absorption_defense = MODIFIERS.register("absorption_defense", AbsorptionDefense::new);
@@ -210,7 +209,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<WeaponDreams> weapon_dreams = MODIFIERS.register("weapon_dreams", WeaponDreams::new);
     public static final StaticModifier<RainbowCatcher> rainbowCatcher = MODIFIERS.register("rainbow_catcher", RainbowCatcher::new);
     public static final StaticModifier<not_like_was> not_like_was = MODIFIERS.register("not_like_was", not_like_was::new);
-    public static final StaticModifier<LunarDurabilityDefense> lunar_defense = MODIFIERS.register("lunar_defense", LunarDurabilityDefense::new);
     public static final StaticModifier<blockViewer> OreViewer = MODIFIERS.register("ore_viewer", () -> new blockViewer(Tags.Blocks.ORES.location(), 0.8f));
     public static final StaticModifier<HiddenHit> hiddenHit = MODIFIERS.register("hidden_hit", HiddenHit::new);
     public static final StaticModifier<knockArts> knockArts = MODIFIERS.register("knock_arts", knockArts::new);
@@ -467,6 +465,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     }
 
     public static class Ids {
+        public static final ModifierId deep_sleep_with_roar = id("deep_sleep_with_roar");
+        public static final ModifierId lunar_defense = id("lunar_defense");
         public static final ModifierId faa_corruption_defense = id("faa_corruption_defense");
         public static final ModifierId nova_scriptum_attributes = id("nova_scriptum_attributes");
         public static final ModifierId malum_magic_attack = id("malum_magic_attack");

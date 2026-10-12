@@ -1,0 +1,27 @@
+{
+  "level_display": "tconstruct:default",
+  "modules": [
+    {
+      "type": "tconstruct:adjust_damage",
+      "damage_source": "mantle:can_protect",
+      "formula": [
+        "$protection",
+        "$level",
+        "-"
+      ],
+      "hooks": [
+        "tconstruct:modify_hurt",
+        "tconstruct:tooltip"
+      ],
+      "percent": false,
+      "tooltip_value": 1.0
+    },
+    {
+      "type": "esotericism_tinker:increase_tool_damage",
+      "each_level": 1.0,
+      "hooks": [
+        "tconstruct:tool_damage"
+      ]
+    }
+  ]
+}

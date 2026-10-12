@@ -1,0 +1,14 @@
+{
+  "level_display": "tconstruct:no_levels",
+  "modules": [
+    {
+      "type": "esotericism_tinker:self_mob_effect",
+      "apply_before_melee": true,
+      "chance": {
+        "flat": 1.0
+      },
+      "remove_self_effects": false,
+      "transfer_negative_effects": true
+    }
+  ]
+}
