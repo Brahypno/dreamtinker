@@ -28,6 +28,7 @@ import org.brahypno.dreamtinker.library.modifiers.fluid.entity.DespairScalingDam
 import org.brahypno.dreamtinker.library.modifiers.fluid.entity.DrainLifeFluidEffect;
 import org.brahypno.dreamtinker.library.modifiers.modules.armor.*;
 import org.brahypno.dreamtinker.library.modifiers.modules.combat.NarcissusFluidFeedbackModule;
+import org.brahypno.dreamtinker.library.modifiers.modules.combat.ProjectileTrackingModule;
 import org.brahypno.dreamtinker.library.modifiers.modules.harvest.AutoPureDaisyModule;
 import org.brahypno.dreamtinker.library.modifiers.modules.harvest.HoneyLootModule;
 import org.brahypno.dreamtinker.library.modifiers.variable.DamageSourceIsHolderVariable;
@@ -215,7 +216,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<knockBacker> SunAway = MODIFIERS.register("solar_away", knockBacker::new);
     public static final StaticModifier<DeathShredder> death_shredder = MODIFIERS.register("death_shredder", DeathShredder::new);
     public static final StaticModifier<SignalAxe> signal_axe = MODIFIERS.register("signal_axe", SignalAxe::new);
-    public static final StaticModifier<LoveShooting> love_shooting = MODIFIERS.register("love_shooting", LoveShooting::new);
     public static final StaticModifier<TeleportShoot> teleport_shooting = MODIFIERS.register("teleport_shooting", TeleportShoot::new);
     public static final StaticModifier<FoxBlessing> fox_blessing = MODIFIERS.register("fox_blessing", FoxBlessing::new);
     public static final StaticModifier<VirtualDodge> virtual_dodge = MODIFIERS.register("virtual_dodge", VirtualDodge::new);
@@ -223,7 +223,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<SilkyCrystal> silky_crystal = MODIFIERS.register("silky_crystal", SilkyCrystal::new);
     public static final StaticModifier<ArrowHarvest> arrow_harvest = MODIFIERS.register("arrow_harvest", ArrowHarvest::new);
     public static final StaticModifier<OverSticky> over_sticky = MODIFIERS.register("over_sticky", OverSticky::new);
-    public static final StaticModifier<ViewTracing> view_tracing = MODIFIERS.register("view_tracing", ViewTracing::new);
     public static final StaticModifier<BornWithMe> born_with_me = MODIFIERS.register("born_with_me", BornWithMe::new);
     public static final StaticModifier<RainbowLights> rainbow_lights = MODIFIERS.register("rainbow_lights", RainbowLights::new);
     public static final StaticModifier<AutoRefill> auto_refill = MODIFIERS.register("auto_refill", AutoRefill::new);
@@ -407,6 +406,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     void registerSerializers(RegisterEvent event) {
         if (event.getRegistryKey() == Registries.RECIPE_SERIALIZER){
             ModifierModule.LOADER.register(Dreamtinker.getLocation("narcissus_fluid_feedback"), NarcissusFluidFeedbackModule.LOADER);
+            ModifierModule.LOADER.register(Dreamtinker.getLocation("projectile_tracking"), ProjectileTrackingModule.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("bontania_auto_pure_module"), AutoPureDaisyModule.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("armor_value_reduction"), ArmorValueReductionModule.LOADER);
             ModifierModule.LOADER.register(Dreamtinker.getLocation("honey_loot"), HoneyLootModule.LOADER);
@@ -471,6 +471,8 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId evil_attack = id("evil_attack");
         public static final ModifierId last_body = id("last_body");
         public static final ModifierId requiem = id("requiem");
+        public static final ModifierId love_shooting = id("love_shooting");
+        public static final ModifierId view_tracing = id("view_tracing");
         public static final ModifierId light_in_dark = id("light_in_dark");
         public static final ModifierId honey_tasty = id("honey_tasty");
         public static final ModifierId absorption_hit = id("absorption_hit");

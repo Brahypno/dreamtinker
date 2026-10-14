@@ -41,6 +41,7 @@ import org.brahypno.dreamtinker.common.DreamtinkerAttributes;
 import org.brahypno.dreamtinker.common.DreamtinkerEffects;
 import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
 import org.brahypno.dreamtinker.library.modifiers.modules.armor.*;
+import org.brahypno.dreamtinker.library.modifiers.modules.combat.ProjectileTrackingModule;
 import org.brahypno.dreamtinker.library.modifiers.modules.harvest.AutoPureDaisyModule;
 import org.brahypno.dreamtinker.library.modifiers.modules.harvest.HoneyLootModule;
 import org.brahypno.dreamtinker.library.modifiers.variable.DamageSourceIsHolderVariable;
@@ -753,6 +754,14 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
 
     @Override
     protected void addModifiers() {
+        buildModifier(Ids.love_shooting)
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(ProjectileTrackingModule.builder().target(LivingEntityPredicate.set(EntityType.PLAYER).inverted()).build())
+                .addModule(new ModifierTraitModule(ModifierIds.multishot, 1, false));
+        buildModifier(Ids.view_tracing)
+                .priority(10)
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(ProjectileTrackingModule.builder().lookTarget(16.0f).build());
         buildModifier(Ids.lunar_defense)
                 .addModule(AdjustDamageModule.builder().formula()
                                              .variable(VALUE)

@@ -384,7 +384,7 @@ public class DreamtinkerModifierRecipeProvider implements ICommonRecipeHelper {
                              .setMaxLevel(1)
                              .saveSalvage(consumer, prefix(DreamtinkerModifiers.signal_axe, upgradeSalvage))
                              .save(consumer, prefix(DreamtinkerModifiers.signal_axe, upgradeFolder));
-        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.love_shooting)
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.love_shooting)
                              .setTools(TinkerTags.Items.RANGED)
                              .addInput(Items.BUDDING_AMETHYST, 11)
                              .addInput(TinkerWorld.earthGeode.getBudding(), 11)
@@ -393,8 +393,8 @@ public class DreamtinkerModifierRecipeProvider implements ICommonRecipeHelper {
                              .addInput(TinkerWorld.enderGeode.getBudding(), 11)
                              .setSlots(SlotType.ABILITY, 1)
                              .setMaxLevel(1)
-                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.love_shooting, abilitySalvage))
-                             .save(consumer, prefix(DreamtinkerModifiers.love_shooting, abilityFolder));
+                             .saveSalvage(consumer, prefix(DreamtinkerModifiers.Ids.love_shooting, abilitySalvage))
+                             .save(consumer, prefix(DreamtinkerModifiers.Ids.love_shooting, abilityFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.curse_fire)
                              .setTools(ingredientFromTags(TinkerTags.Items.MELEE, TinkerTags.Items.BOWS, TinkerTags.Items.FISHING_RODS,
                                                           TinkerTags.Items.WORN_ARMOR, TinkerTags.Items.SHIELDS))

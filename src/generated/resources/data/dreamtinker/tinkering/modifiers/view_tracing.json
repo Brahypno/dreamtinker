@@ -1,0 +1,10 @@
+{
+  "level_display": "tconstruct:no_levels",
+  "modules": [
+    {
+      "type": "dreamtinker:projectile_tracking",
+      "look_target": true
+    }
+  ],
+  "priority": 10
+}

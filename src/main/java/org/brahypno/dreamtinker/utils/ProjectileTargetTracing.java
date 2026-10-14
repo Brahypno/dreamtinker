@@ -4,8 +4,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -15,6 +20,46 @@ public class ProjectileTargetTracing {
     private static final double TARGET_RANGE = 12.0D;
     private static final double LOCKED_KEEP_RANGE_SQR = 20.0D * 20.0D;
     private static final int RESCAN_INTERVAL_TICKS = 4;
+
+    /**
+     * Resolves the launch-time look target, respecting blocks in front of the entity.
+     */
+    @Nullable
+    public static Entity getLookedEntity(LivingEntity viewer, double range) {
+        Vec3 eyePos = viewer.getEyePosition();
+        Vec3 look = viewer.getLookAngle();
+        Vec3 end = eyePos.add(look.scale(range));
+        HitResult blockHit = viewer.level().clip(new ClipContext(
+                eyePos, end, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, viewer));
+
+        double maxDistanceSq = range * range;
+        if (blockHit.getType() != HitResult.Type.MISS){
+            maxDistanceSq = blockHit.getLocation().distanceToSqr(eyePos);
+        }
+        AABB searchBox = viewer.getBoundingBox().expandTowards(look.scale(range)).inflate(3.0D, 3.0D, 3.0D);
+        Entity best = null;
+        double bestDistanceSq = maxDistanceSq;
+        for (Entity candidate : viewer.level().getEntities(viewer, searchBox, e -> e.isPickable() && !e.isSpectator())) {
+            float pickRadius = Math.max(0.3F, candidate.getPickRadius());
+            AABB box = candidate.getBoundingBox().inflate(pickRadius);
+            EntityHitResult hit = box.clip(eyePos, end).map(pos -> new EntityHitResult(candidate, pos)).orElse(null);
+            if (box.contains(eyePos)){
+                if (0.0D <= bestDistanceSq){
+                    best = candidate;
+                    bestDistanceSq = 0.0D;
+                }
+                continue;
+            }
+            if (hit != null){
+                double distSq = eyePos.distanceToSqr(hit.getLocation());
+                if (distSq < bestDistanceSq){
+                    best = candidate;
+                    bestDistanceSq = distSq;
+                }
+            }
+        }
+        return best;
+    }
 
     public static void moveTowardsTarget(final Entity entity) {
         if (null == entity)

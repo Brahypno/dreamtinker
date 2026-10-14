@@ -1,0 +1,22 @@
+{
+  "level_display": "tconstruct:no_levels",
+  "modules": [
+    {
+      "type": "dreamtinker:projectile_tracking",
+      "look_target": false,
+      "target": {
+        "type": "mantle:inverted",
+        "entities": [
+          "minecraft:player"
+        ],
+        "inverted_type": "mantle:set"
+      }
+    },
+    {
+      "type": "tconstruct:trait",
+      "fixed_level": false,
+      "level": 1,
+      "name": "tconstruct:multishot"
+    }
+  ]
+}

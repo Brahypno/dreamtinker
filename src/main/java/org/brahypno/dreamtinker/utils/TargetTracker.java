@@ -1,6 +1,8 @@
 package org.brahypno.dreamtinker.utils;
 
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import slimeknights.mantle.data.predicate.IJsonPredicate;
 
 import javax.annotation.Nullable;
 import java.util.function.Predicate;
@@ -10,6 +12,15 @@ public interface TargetTracker {
     Predicate<Entity> dreamtinker$getMode();
 
     void dreamtinker$setMode(final Predicate<Entity> targetMode);
+
+    /**
+     * Adapts a Mantle/Tinkers' Construct target predicate to the existing tracking mode.
+     * The predicate is evaluated again for cached targets, so changing entity conditions
+     * can invalidate a target and allow the projectile to select another one.
+     */
+    default void dreamtinker$setTargetPredicate(IJsonPredicate<LivingEntity> target) {
+        dreamtinker$setMode(entity -> entity instanceof LivingEntity living && target.matches(living));
+    }
 
     @Nullable
     Entity dreamtinker$getTrackedTarget();

@@ -86,7 +86,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
         this.tag(TinkerTags.Modifiers.HARVEST_ABILITIES)
             .addOptional(mossy_symbiosis.getId());
         this.tag(TinkerTags.Modifiers.RANGED_ABILITIES)
-            .add(Ids.force_to_explosion, love_shooting.getId(), Ids.curse_fire)
+            .add(Ids.force_to_explosion, Ids.love_shooting, Ids.curse_fire)
             .addOptional(nova_spell_bow.getId(), nova_wand.getId());
         this.tag(TinkerTags.Modifiers.GENERAL_ARMOR_ABILITIES)
             .add(Ids.curse_fire)

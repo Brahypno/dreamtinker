@@ -119,8 +119,8 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addTraits(DreamtinkerMaterialIds.FifthStone, AMMO, four_warning.getId());
 
         addDefaultTraits(DreamtinkerMaterialIds.SpiralSpin, ModifierIds.pierce, Ids.side_attack);
-        addTraits(DreamtinkerMaterialIds.SpiralSpin, RANGED, ModifierIds.pierce, Ids.side_attack, view_tracing.getId());
-        addTraits(DreamtinkerMaterialIds.SpiralSpin, AMMO, ModifierIds.pierce, Ids.side_attack, view_tracing.getId());
+        addTraits(DreamtinkerMaterialIds.SpiralSpin, RANGED, ModifierIds.pierce, Ids.side_attack, Ids.view_tracing);
+        addTraits(DreamtinkerMaterialIds.SpiralSpin, AMMO, ModifierIds.pierce, Ids.side_attack, Ids.view_tracing);
 
         addDefaultTraits(DreamtinkerMaterialIds.RuinWheelSteel, doom_track.getId(), doom_ray.getId(), Ids.pressing_front);
 
