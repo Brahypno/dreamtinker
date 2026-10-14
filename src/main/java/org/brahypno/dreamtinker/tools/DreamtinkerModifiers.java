@@ -46,7 +46,6 @@ import org.brahypno.dreamtinker.tools.modifiers.tools.narcissus_wing.foundationW
 import org.brahypno.dreamtinker.tools.modifiers.tools.silence_glove.WeaponDreams;
 import org.brahypno.dreamtinker.tools.modifiers.tools.underPlate.WeaponTransformation;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Combat.*;
-import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.aquamirae.AbyssalRadiance;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.aquamirae.TerribleArmor;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.aquamirae.TerribleBlade;
 import org.brahypno.dreamtinker.tools.modifiers.traits.Compat.aquamirae.VoidReenactment;
@@ -157,7 +156,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
     public static final StaticModifier<EchoedAttack> echoed_attack = MODIFIERS.register("echoed_attack", EchoedAttack::new);
     public static final StaticModifier<EchoedDefence> echoed_defence = MODIFIERS.register("echoed_defence", EchoedDefence::new);
     public static final StaticModifier<VoidReenactment> void_reenactment = MODIFIERS.register("void_reenactment", VoidReenactment::new);
-    public static final StaticModifier<AbyssalRadiance> abyssal_radiance = MODIFIERS.register("abyssal_radiance", AbyssalRadiance::new);
     public static final StaticModifier<TerribleBlade> terrible_blade = MODIFIERS.register("terrible_blade", TerribleBlade::new);
     public static final StaticModifier<TerribleArmor> terrible_armor = MODIFIERS.register("terrible_armor", TerribleArmor::new);
 
@@ -283,8 +281,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             MALUM_MODIFIERS.register("malum_evolution", MalumEvolution::new);
     public static final StaticModifier<malum_spirit_defense> malum_spirit_defense =
             MALUM_MODIFIERS.register("malum_spirit_defense", malum_spirit_defense::new);
-    public static final StaticModifier<MalumSolTiferet> malum_sol_tiferet =
-            MALUM_MODIFIERS.register("malum_sol_tiferet", MalumSolTiferet::new);
     public static final StaticModifier<malumCatalystLobber> malum_catalyst_lobber =
             MALUM_MODIFIERS.register("malum_catalyst_lobber", malumCatalystLobber::new);
     public static final StaticModifier<MalumSoulExposer> malum_expose_soul =
@@ -316,7 +312,6 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
             LM_MODIFIERS.register("ancient_counterspike", AncientCounterspike::new);
     public static final StaticModifier<WitheringCharge> withering_charge = LM_MODIFIERS.register("withering_charge", WitheringCharge::new);
     public static final StaticModifier<MossySymbiosis> mossy_symbiosis = LM_MODIFIERS.register("mossy_symbiosis", MossySymbiosis::new);
-    public static final StaticModifier<AtmosphericLeap> atmospheric_leap = LM_MODIFIERS.register("atmospheric_leap", AtmosphericLeap::new);
     public static final StaticModifier<LightningStrike> lightning_strike = LM_MODIFIERS.register("lightning_strike", LightningStrike::new);
     public static final StaticModifier<ChorusBlink> chorus_blink = LM_MODIFIERS.register("chorus_blink", ChorusBlink::new);
     public static final StaticModifier<FieryBreath> fiery_breath = LM_MODIFIERS.register("fiery_breath", FieryBreath::new);
@@ -569,6 +564,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId aquamirae_echo_resilience = id("aquamirae_echo_resilience");
         public static final ModifierId aquamirae_amethyst_fury = id("aquamirae_amethyst_fury");
         public static final ModifierId aquamirae_amethyst_resilience = id("aquamirae_amethyst_resilience");
+        public static final ModifierId abyssal_radiance = id("abyssal_radiance");
         public static final ModifierId crystal_shatter = id("crystal_shatter");
         public static final ModifierId sharp_bones_wounds = id("sharp_bones_wounds");
         public static final ModifierId aquamirae_sharp_bones_fury = id("aquamirae_sharp_bones_fury");
@@ -652,6 +648,7 @@ public final class DreamtinkerModifiers extends DreamtinkerModule {
         public static final ModifierId shulker_counter = id("shulker_counter");
         public static final ModifierId frost_seal = id("frost_seal");
         public static final ModifierId legendary_reverie = id("legendary_reverie");
+        public static final ModifierId atmospheric_leap = id("atmospheric_leap");
 
         public static final ModifierId faa_aureal_protection = id("faa_aureal_protection");
         public static final ModifierId faa_aureal_attack = id("faa_aureal_attack");

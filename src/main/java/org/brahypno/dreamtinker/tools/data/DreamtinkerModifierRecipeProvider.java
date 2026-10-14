@@ -685,13 +685,13 @@ public class DreamtinkerModifierRecipeProvider implements ICommonRecipeHelper {
                              .setSlots(SlotType.ABILITY, 1).setMaxLevel(1)
                              .saveSalvage(wrapped, prefix(DreamtinkerModifiers.mossy_symbiosis, abilitySalvage))
                              .save(wrapped, prefix(DreamtinkerModifiers.mossy_symbiosis, abilityFolder));
-        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.atmospheric_leap)
+        ModifierRecipeBuilder.modifier(DreamtinkerModifiers.Ids.atmospheric_leap)
                              .setTools(TinkerTags.Items.BOOTS)
                              .addInput(itemNameIngredient("legendary_monsters", "air_rune"))
                              .addInput(itemNameIngredient("legendary_monsters", "cloud_rod"))
                              .setSlots(SlotType.UPGRADE, 1).setMaxLevel(1)
-                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.atmospheric_leap, upgradeSalvage))
-                             .save(wrapped, prefix(DreamtinkerModifiers.atmospheric_leap, upgradeFolder));
+                             .saveSalvage(wrapped, prefix(DreamtinkerModifiers.Ids.atmospheric_leap, upgradeSalvage))
+                             .save(wrapped, prefix(DreamtinkerModifiers.Ids.atmospheric_leap, upgradeFolder));
         ModifierRecipeBuilder.modifier(DreamtinkerModifiers.lightning_strike)
                              .setTools(TinkerTags.Items.SPECIAL_TOOLS)
                              .addInput(itemNameIngredient("legendary_monsters", "axe_of_lightning"))

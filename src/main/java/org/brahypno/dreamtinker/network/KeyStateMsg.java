@@ -42,7 +42,7 @@ public record KeyStateMsg(KeyKind kind, boolean down) {
             });
             if (KeyKind.TOOL_INTERACT == m.kind() && m.down()){
                 DTToolsPartsHelper.startToolInteract(sp, EquipmentSlot.MAINHAND, TooltipKey.UNKNOWN);
-                LegendaryMonstersCompatModifiers.AtmosphericLeap.tryActivate(sp);
+                LegendaryMonstersCompatModifiers.tryAtmosphericLeap(sp);
             }
         });
 

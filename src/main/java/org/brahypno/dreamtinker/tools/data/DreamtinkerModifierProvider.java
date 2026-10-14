@@ -423,7 +423,9 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                           .buildWeapon());
 
         buildModifier(Ids.nova_mana_reduce, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"));
-        buildModifier(Ids.nova_ashen_resolve, not(DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau")))
+        // Keep the marker available without Ars Nouveau; the spell behavior lives in compatibility events.
+        buildModifier(Ids.nova_ashen_resolve)
+                .translationKey("modifier.dreamtinker.nova_ashen_resolve_fulfill")
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
 
         buildModifier(Ids.cosmogony_tetrad, DreamtinkerMaterialDataProvider.modLoaded("ars_nouveau"))
@@ -516,6 +518,11 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
     }
 
     private void addLMModifiers() {
+        buildModifier(Ids.atmospheric_leap, DreamtinkerMaterialDataProvider.modLoaded("legendary_monsters"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(AdjustDamageModule.builder().source(new DamageTypePredicate(DamageTypes.FALL))
+                                             .formula().variable(VALUE).constant(0.5f).multiply().build(),
+                           ModifierHooks.MODIFY_DAMAGE, ModifierHooks.TOOLTIP);
         IJsonPredicate<LivingEntity> ender = LivingEntityPredicate.tag(DreamtinkerTagKeys.EntityTypes.ENDER_ENTITY);
         buildModifier(Ids.not_end_er, DreamtinkerMaterialDataProvider.modLoaded("legendary_monsters"))
                 .addModule(StatBoostModule.add(ToolStats.ATTACK_DAMAGE).amount(-1f, -1f));
@@ -650,7 +657,9 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
         buildModifier(Ids.malum_edge_of_deliverance, DreamtinkerMaterialDataProvider.modLoaded("malum"))
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
-        buildModifier(Ids.malum_sol_tiferet, not(DreamtinkerMaterialDataProvider.modLoaded("malum")))
+        // Keep the marker available without Malum; the combat behavior lives in compatibility events.
+        buildModifier(Ids.malum_sol_tiferet)
+                .translationKey("modifier.dreamtinker.malum_sol_tiferet_fulfill")
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
 
         buildModifier(Ids.many_us, DreamtinkerMaterialDataProvider.modLoaded("malum"))
@@ -1476,6 +1485,7 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
     }
 
     private void addAquamiraeModifiers() {
+        buildModifier(Ids.abyssal_radiance, DreamtinkerMaterialDataProvider.modLoaded("aquamirae"));
         buildModifier(Ids.sharp_bones_wounds, DreamtinkerMaterialDataProvider.modLoaded("aquamirae"))
                 .addModule(MobEffectModule.builder(TinkerEffects.bleeding.get())
                                           .target(HAS_ARMOR.inverted())

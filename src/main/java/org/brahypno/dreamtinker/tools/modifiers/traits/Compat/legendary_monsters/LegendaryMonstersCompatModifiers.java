@@ -38,7 +38,6 @@ import org.brahypno.dreamtinker.network.DNetwork;
 import org.brahypno.dreamtinker.network.S2CDinosaurShockwavePacket;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.jetbrains.annotations.NotNull;
-import slimeknights.mantle.data.predicate.damage.DamageTypePredicate;
 import slimeknights.tconstruct.common.TinkerTags;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
 import slimeknights.tconstruct.library.modifiers.ModifierHooks;
@@ -48,7 +47,6 @@ import slimeknights.tconstruct.library.modifiers.hook.interaction.GeneralInterac
 import slimeknights.tconstruct.library.modifiers.hook.interaction.InteractionSource;
 import slimeknights.tconstruct.library.modifiers.hook.interaction.InventoryTickModifierHook;
 import slimeknights.tconstruct.library.modifiers.impl.NoLevelsModifier;
-import slimeknights.tconstruct.library.modifiers.modules.armor.AdjustDamageModule;
 import slimeknights.tconstruct.library.modifiers.modules.build.ModifierRequirementsModule;
 import slimeknights.tconstruct.library.module.ModuleHookMap;
 import slimeknights.tconstruct.library.tools.context.EquipmentContext;
@@ -216,38 +214,25 @@ public final class LegendaryMonstersCompatModifiers {
         }
     }
 
-    public static class AtmosphericLeap extends NoLevelsModifier {
-        @Override
-        protected void registerHooks(ModuleHookMap.@NotNull Builder hookBuilder) {
-            hookBuilder.addHook(AdjustDamageModule.builder()
-                                                  .source(new DamageTypePredicate(DamageTypes.FALL))
-                                                  .formula()
-                                                  .variable(slimeknights.tconstruct.library.json.math.ModifierFormula.VALUE)
-                                                  .constant(0.5f).multiply().build(),
-                                ModifierHooks.MODIFY_DAMAGE, ModifierHooks.TOOLTIP);
-            super.registerHooks(hookBuilder);
+    public static boolean tryAtmosphericLeap(ServerPlayer player) {
+        if (!player.isShiftKeyDown())
+            return false;
+        ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
+        if (boots.isEmpty() || !boots.is(TinkerTags.Items.BOOTS) || player.getCooldowns().isOnCooldown(boots.getItem()))
+            return false;
+        ToolStack tool = ToolStack.from(boots);
+        if (tool.isBroken() || tool.getModifierLevel(DreamtinkerModifiers.Ids.atmospheric_leap) < 1)
+            return false;
+        Vec3 motion = player.getDeltaMovement();
+        player.setDeltaMovement(motion.x, Math.max(0.85, motion.y + 0.65), motion.z);
+        player.hurtMarked = true;
+        player.fallDistance = 0;
+        player.getCooldowns().addCooldown(boots.getItem(), 60);
+        if (player.level() instanceof ServerLevel server){
+            server.sendParticles(ParticleTypes.CLOUD, player.getX(), player.getY(), player.getZ(), 24, 0.5, 0.15, 0.5, 0.08);
+            server.playSound(null, player.blockPosition(), SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 0.7f, 1.6f);
         }
-
-        public static boolean tryActivate(ServerPlayer player) {
-            if (!player.isShiftKeyDown())
-                return false;
-            ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
-            if (boots.isEmpty() || !boots.is(TinkerTags.Items.BOOTS) || player.getCooldowns().isOnCooldown(boots.getItem()))
-                return false;
-            ToolStack tool = ToolStack.from(boots);
-            if (tool.isBroken() || tool.getModifierLevel(DreamtinkerModifiers.atmospheric_leap.getId()) < 1)
-                return false;
-            Vec3 motion = player.getDeltaMovement();
-            player.setDeltaMovement(motion.x, Math.max(0.85, motion.y + 0.65), motion.z);
-            player.hurtMarked = true;
-            player.fallDistance = 0;
-            player.getCooldowns().addCooldown(boots.getItem(), 60);
-            if (player.level() instanceof ServerLevel server){
-                server.sendParticles(ParticleTypes.CLOUD, player.getX(), player.getY(), player.getZ(), 24, 0.5, 0.15, 0.5, 0.08);
-                server.playSound(null, player.blockPosition(), SoundEvents.ENDER_DRAGON_FLAP, SoundSource.PLAYERS, 0.7f, 1.6f);
-            }
-            return true;
-        }
+        return true;
     }
 
     public static class LightningStrike extends ImmediateActiveModifier {

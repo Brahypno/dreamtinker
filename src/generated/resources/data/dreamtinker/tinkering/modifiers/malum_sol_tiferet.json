@@ -1,28 +1,4 @@
 {
-  "condition": {
-    "type": "forge:not",
-    "value": {
-      "type": "forge:or",
-      "values": [
-        {
-          "type": "tconstruct:config",
-          "prop": "force_integration_materials"
-        },
-        {
-          "type": "forge:and",
-          "values": [
-            {
-              "type": "forge:mod_loaded",
-              "modid": "malum"
-            },
-            {
-              "type": "esotericism_tinker:mod_compact_config",
-              "modid": "malum"
-            }
-          ]
-        }
-      ]
-    }
-  },
-  "level_display": "tconstruct:no_levels"
+  "level_display": "tconstruct:no_levels",
+  "translation_key": "modifier.dreamtinker.malum_sol_tiferet_fulfill"
 }

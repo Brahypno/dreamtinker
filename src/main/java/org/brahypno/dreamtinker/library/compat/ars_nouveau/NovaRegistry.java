@@ -83,8 +83,6 @@ public class NovaRegistry extends DreamtinkerModule {
             ARS_MODIFIERS.register("nova_enchanter_shield", NovaEnchanterShield::new);
     public static final StaticModifier<NovaManaShield> nova_mana_shield =
             ARS_MODIFIERS.register("nova_mana_shield", NovaManaShield::new);
-    public static final StaticModifier<NovaAshenResolve> nova_ashen_resolve =
-            ARS_MODIFIERS.register("nova_ashen_resolve", NovaAshenResolve::new);
     public static final StaticModifier<NovaReactive> nova_reactive =
             ARS_MODIFIERS.register("nova_reactive", NovaReactive::new);
 

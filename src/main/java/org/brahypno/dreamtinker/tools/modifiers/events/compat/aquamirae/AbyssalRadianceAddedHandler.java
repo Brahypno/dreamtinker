@@ -58,7 +58,7 @@ public final class AbyssalRadianceAddedHandler {
 
         int maximumStrength = 0;
         for (ItemStack armor : entity.getArmorSlots()) {
-            maximumStrength += ModifierUtil.getModifierLevel(armor, DreamtinkerModifiers.abyssal_radiance.getId());
+            maximumStrength += ModifierUtil.getModifierLevel(armor, DreamtinkerModifiers.Ids.abyssal_radiance);
         }
         if (maximumStrength <= 0){
             return;

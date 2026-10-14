@@ -169,7 +169,7 @@ public class DreamtinkerToolDefinitionProvider extends AbstractToolDefinitionDat
                                         .trait(DreamtinkerModifiers.memory_base, 1)//malkuth
                                         .trait(DreamtinkerModifiers.foundation_will, 1)//Yesod---need revise
                                         .trait(DreamtinkerModifiers.splendour_heart, 1)//Hod
-                                        .trait(DreamtinkerModifiers.malum_sol_tiferet)//Tiferet
+                                        .trait(DreamtinkerModifiers.Ids.malum_sol_tiferet)//Tiferet
                                         .trait(DreamtinkerModifiers.Ids.nova_ashen_resolve)//Netzach
                                         .build())
                 //flaming memory Geburah

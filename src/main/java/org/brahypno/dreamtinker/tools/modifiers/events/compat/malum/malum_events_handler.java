@@ -56,7 +56,7 @@ public class malum_events_handler {
                 if (0 < tool.getModifierLevel(DreamtinkerModifiers.malum_erosion.getId()))
                     ((ErosionScepterItem) ItemRegistry.EROSION_SCEPTER.get()).hurtEvent(event, attacker, event.getEntity(), stack);
 
-                int levels = ETModifierCheck.getMainhandModifierLevel(attacker, DreamtinkerModifiers.malum_sol_tiferet.getId());
+                int levels = ETModifierCheck.getMainhandModifierLevel(attacker, DreamtinkerModifiers.Ids.malum_sol_tiferet);
                 if (0 < levels && null != target && !target.level().isClientSide &&
                     crossedWhichN(target, event.getAmount() - target.getAbsorptionAmount(), levels + 1))
                     MalumLivingEntityDataCapability.getCapabilityOptional(target).ifPresent(c -> {

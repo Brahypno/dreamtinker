@@ -63,7 +63,7 @@ public class ModifierTagProvider extends AbstractModifierTagProvider {
         this.tag(CHESTPLATE_UPGRADES)
             .addOptional(living_armor.getId());
         this.tag(TinkerTags.Modifiers.BOOT_UPGRADES)
-            .addOptional(atmospheric_leap.getId());
+            .addOptional(Ids.atmospheric_leap);
 
         this.tag(TinkerTags.Modifiers.GENERAL_SLOTLESS)
             .add(mei.getId(), fox_blessing.getId())

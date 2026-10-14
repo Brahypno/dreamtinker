@@ -171,7 +171,7 @@ public class DreamtinkerMaterialTraitProvider extends AbstractMaterialTraitDataP
         addDefaultTraits(DreamtinkerMaterialIds.abyssal_amethyst,
                          Ids.aquamirae_amethyst_fury, Ids.crystal_shatter);
         addTraits(DreamtinkerMaterialIds.abyssal_amethyst, ARMOR,
-                  Ids.aquamirae_amethyst_resilience, abyssal_radiance.getId());
+                  Ids.aquamirae_amethyst_resilience, Ids.abyssal_radiance);
 
         addDefaultTraits(DreamtinkerMaterialIds.sharp_bones,
                          Ids.sharp_bones_wounds, Ids.aquamirae_sharp_bones_fury);
