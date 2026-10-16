@@ -2,6 +2,7 @@ package org.brahypno.dreamtinker.plugin.JEI;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
+import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IIngredientAcceptor;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -23,6 +24,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import org.brahypno.dreamtinker.Dreamtinker;
@@ -33,6 +35,7 @@ import slimeknights.mantle.plugin.jei.entity.EntityIngredientRenderer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static org.brahypno.dreamtinker.plugin.JEI.WorldRitualCategory.CelestialTypes.CELESTIAL;
 
@@ -84,9 +87,12 @@ public final class WorldRitualCategory extends AbstractRecipeCategory<WorldRitua
             IIngredientAcceptor<?> ent = b.addSlot(RecipeIngredientRole.INPUT, x, y - 5)
                                           .setCustomRenderer(MantleJEIConstants.ENTITY_TYPE, entityRenderer)
                                           .addIngredients(MantleJEIConstants.ENTITY_TYPE, r.entityIngredient().getDisplay());
-            // 把对应的刷怪蛋作为“隐形输入”，便于 JEI 的聚焦/联动
+            // Match TConstruct's entity categories: JEI filters empty stacks, but null
+            // preserves the index for entities without spawn eggs (such as players).
+            List<ItemStack> eggStacks = r.entityIngredient().getEggs().stream()
+                                         .map(stack -> stack.isEmpty() ? null : stack).toList();
             IIngredientAcceptor<?> eggs = b.addInvisibleIngredients(RecipeIngredientRole.INPUT)
-                                           .addItemStacks(r.entityIngredient().getEggs());
+                                           .addIngredients(VanillaTypes.ITEM_STACK, eggStacks);
             b.createFocusLink(ent, eggs);
             x += 43;
         }
@@ -116,7 +122,7 @@ public final class WorldRitualCategory extends AbstractRecipeCategory<WorldRitua
 
         // 标题行（字符串版）
         graphics.drawString(font,
-                            Component.translatable("jei.dreamtinker.category." + recipe.trigger().name().toLowerCase()),
+                            Component.translatable("jei.dreamtinker.category." + recipe.trigger().name().toLowerCase(Locale.ROOT)),
                             40, 8, 0xFFFFFF, false);
         int y = 70;
         if (recipe.minY() != null){
@@ -216,14 +222,16 @@ public final class WorldRitualCategory extends AbstractRecipeCategory<WorldRitua
 
                 if (icon.kind == CelestialIcon.Kind.sun){
                     // 从 16×16 里裁 1px 边 -> 绘制 21×21（放大 1.5x）
-                    g.blit(SUN, dx, dy, CROP, CROP, DRAW, DRAW, TEX_CELL, TEX_CELL);
+                    g.blit(SUN, dx, dy, DRAW, DRAW, CROP, CROP, SRC, SRC, TEX_CELL, TEX_CELL);
                 }else {
                     int p = Mth.clamp(icon.phase, 0, 7);
                     int u = (p % 4) * TEX_CELL;
                     int v = (p / 4) * TEX_CELL;
                     // 同样裁 1px，再按 21×21 画
-                    g.blit(MOON, dx, dy, u + CROP, v + CROP, DRAW, DRAW, 64, 32);
+                    g.blit(MOON, dx, dy, DRAW, DRAW, u + CROP, v + CROP, SRC, SRC, 64, 32);
                 }
+                RenderSystem.defaultBlendFunc();
+                RenderSystem.disableBlend();
             }
 
             @Override

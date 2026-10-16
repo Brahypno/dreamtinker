@@ -23,16 +23,20 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
 
 public final class NarcissusFluidFeedbackCategory extends AbstractRecipeCategory<NarcissusFluidFeedbackCache.Page> {
     private static final int X = 6;
     private static final int Y = 5;
     private static final int ROW_H = 18;
+    private static final int WIDTH = 170;
+    private static final int NAME_X = 28;
+    private static final int CATEGORY_X = 94;
+    private static final int FEEDBACK_X = 132;
 
     public NarcissusFluidFeedbackCategory(IGuiHelper helper) {
         super(DTJeiPlugin.NARCISSUS_FEEDBACK, Component.translatable("jei.dreamtinker.narcissus_feedback.title"),
-              helper.createDrawableIngredient(ForgeTypes.FLUID_STACK, new FluidStack(Fluids.WATER, 1000)), 170, 150);
+              helper.createDrawableIngredient(ForgeTypes.FLUID_STACK, new FluidStack(Fluids.WATER, 1000)), WIDTH,
+              Y + NarcissusFluidFeedbackCache.ROWS * ROW_H + 1);
     }
 
     @Override
@@ -42,7 +46,9 @@ public final class NarcissusFluidFeedbackCategory extends AbstractRecipeCategory
             NarcissusFluidFeedbackCache.Entry entry = entries.get(i);
             builder.addSlot(RecipeIngredientRole.INPUT, X, Y + i * ROW_H)
                    .addIngredient(ForgeTypes.FLUID_STACK, entry.fluid())
+                   .setFluidRenderer(1000, false, 16, 16)
                    .addRichTooltipCallback((recipeSlotView, tooltip) -> addEntryTooltip(tooltip, entry));
+            builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStack(entry.source());
         }
     }
 
@@ -56,12 +62,11 @@ public final class NarcissusFluidFeedbackCategory extends AbstractRecipeCategory
             NarcissusFluidFeedbackCache.Entry entry = entries.get(i);
             int y = Y + i * ROW_H;
 
-            drawTextTrimmed(graphics, minecraft, entry.fluid().getDisplayName(), 28, y + 4, 60, 0x404040);
-            graphics.drawString(minecraft.font, Component.translatable(categoryShortKey(entry)).withStyle(ChatFormatting.GRAY), 94, y + 4, 0x606060, false);
-            drawFeedback(graphics, minecraft, entry, 132, y);
+            drawTextTrimmed(graphics, minecraft, entry.fluid().getDisplayName(), NAME_X, y + 4, CATEGORY_X - NAME_X - 6, 0x404040);
+            drawTextTrimmed(graphics, minecraft, Component.translatable(categoryShortKey(entry)),
+                            CATEGORY_X, y + 4, FEEDBACK_X - CATEGORY_X - 4, 0x606060);
+            drawFeedback(graphics, minecraft, entry, FEEDBACK_X, y);
         }
-
-        drawEffectHoverTooltip(recipe, graphics, mouseX, mouseY);
     }
 
     private void drawFeedback(GuiGraphics graphics, Minecraft minecraft, NarcissusFluidFeedbackCache.Entry entry, int x, int y) {
@@ -76,7 +81,7 @@ public final class NarcissusFluidFeedbackCategory extends AbstractRecipeCategory
             return;
         }
 
-        graphics.drawString(minecraft.font, Component.translatable(modeShortKey(entry)), x, y + 5, 0x404040, false);
+        drawTextTrimmed(graphics, minecraft, Component.translatable(modeShortKey(entry)), x, y + 5, WIDTH - x - 4, 0x404040);
     }
 
     private static void drawTextTrimmed(GuiGraphics graphics, Minecraft minecraft, Component text, int x, int y, int width, int color) {
@@ -90,27 +95,19 @@ public final class NarcissusFluidFeedbackCategory extends AbstractRecipeCategory
         graphics.drawString(minecraft.font, Component.literal(trimmed), x, y, color, false);
     }
 
-    private void drawEffectHoverTooltip(NarcissusFluidFeedbackCache.Page recipe, GuiGraphics graphics, double mouseX, double mouseY) {
+    @Override
+    public void getTooltip(
+            ITooltipBuilder tooltip, NarcissusFluidFeedbackCache.Page recipe, @NotNull IRecipeSlotsView slots,
+            double mouseX, double mouseY) {
+        // Let JEI draw the tooltip after the recipe slots, including text-only feedback.
+        if (mouseX < NAME_X || mouseX >= WIDTH || mouseY < Y || mouseY >= Y + recipe.entries().size() * ROW_H){
+            return;
+        }
+
         int row = (int) ((mouseY - Y) / ROW_H);
-        if (row < 0 || row >= recipe.entries().size()){
-            return;
-        }
-
-        int iconX = 132;
-        int iconY = Y + row * ROW_H;
-        if (mouseX < iconX || mouseX >= iconX + 18 || mouseY < iconY || mouseY >= iconY + 18){
-            return;
-        }
-
         NarcissusFluidFeedbackCache.Entry entry = recipe.entries().get(row);
-        List<MobEffectInstance> effects = entry.display().effects();
-        if (effects.isEmpty()){
-            return;
-        }
-
-        List<Component> tooltip = new ArrayList<>();
-        PotionUtils.addPotionTooltip(effects, tooltip, 1.0F);
-        graphics.renderTooltip(Minecraft.getInstance().font, tooltip, Optional.empty(), (int) mouseX, (int) mouseY);
+        tooltip.add(entry.fluid().getDisplayName());
+        addEntryTooltip(tooltip, entry);
     }
 
     private static void addEntryTooltip(ITooltipBuilder tooltip, NarcissusFluidFeedbackCache.Entry entry) {
@@ -118,10 +115,10 @@ public final class NarcissusFluidFeedbackCategory extends AbstractRecipeCategory
                                            Component.translatable(categoryKey(entry))).withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.translatable(modeKey(entry)).withStyle(ChatFormatting.YELLOW));
 
-        List<Component> effects = new ArrayList<>();
-        PotionUtils.addPotionTooltip(entry.display().effects(), effects, 1.0F);
-        for (Component effectLine : effects) {
-            tooltip.add(effectLine);
+        if (!entry.display().effects().isEmpty()){
+            List<Component> effects = new ArrayList<>();
+            PotionUtils.addPotionTooltip(entry.display().effects(), effects, 1.0F);
+            tooltip.addAll(effects);
         }
     }
 
