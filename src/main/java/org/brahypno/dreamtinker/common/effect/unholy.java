@@ -21,8 +21,8 @@ public class unholy extends MobEffect {
             return;
         // 维持：每秒把隐藏效果续命一点，防止被耗尽
         int refresh = 40; // 2秒
-        Player player = (Player) p_19467_;
-        boolean isTheWorthyOne = EnigmaticLegacyCompat.isTheCursedOne(player) && EnigmaticLegacyCompat.haveConsumedForbiddenFruit(player);
+        boolean isTheWorthyOne = p_19467_ instanceof Player player && EnigmaticLegacyCompat.isTheCursedOne(player) &&
+                                EnigmaticLegacyCompat.haveConsumedForbiddenFruit(player);
         if (!isTheWorthyOne){
             p_19467_.addEffect(new MobEffectInstance(MobEffects.WITHER, refresh, (p_19468_ + 1) * 3 - 1, true, false, false));
             p_19467_.addEffect(new MobEffectInstance(MobEffects.POISON, refresh, (p_19468_ + 1) * 2 - 1, true, false, false));
@@ -38,7 +38,8 @@ public class unholy extends MobEffect {
             p_19467_.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, refresh, p_19468_, true, false, false));
             //player.addEffect(new MobEffectInstance(MobEffects.HEAL, 1, 0, false, true));
         }
-        EnigmaticLegacyCompat.triggerUseUnholyGrail((ServerPlayer) player, isTheWorthyOne);
+        if (p_19467_ instanceof ServerPlayer player)
+            EnigmaticLegacyCompat.triggerUseUnholyGrail(player, isTheWorthyOne);
 
     }
 

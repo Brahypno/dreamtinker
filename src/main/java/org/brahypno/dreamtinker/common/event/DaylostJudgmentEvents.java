@@ -16,6 +16,7 @@ import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.*;
+import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -62,7 +63,7 @@ public final class DaylostJudgmentEvents {
     private static final double ALLY_DEATH_RANGE = 24.0D;
     private static final double JUDGMENT_OWNER_SEARCH_RANGE = 32.0D;
     private static final ThreadLocal<Boolean> REPLAYING_DELAYED_ATTACK = ThreadLocal.withInitial(() -> false);
-    private static final List<DelayedAttack> DELAYED_ATTACKS = new ArrayList<>();
+    private static final Map<ServerLevel, List<DelayedAttack>> DELAYED_ATTACKS = new IdentityHashMap<>();
     private static final Map<UUID, ReducedAttack> REDUCED_ATTACKS = new ConcurrentHashMap<>();
 
     private DaylostJudgmentEvents() {}
@@ -151,13 +152,13 @@ public final class DaylostJudgmentEvents {
             case 0 -> REDUCED_ATTACKS.put(defender.getUUID(), new ReducedAttack(attacker.getUUID(), defender.level().getGameTime()));
             case 1 -> {
                 event.setCanceled(true);
-                DELAYED_ATTACKS.add(new DelayedAttack(
-                        (ServerLevel) defender.level(),
+                ServerLevel level = (ServerLevel) defender.level();
+                DELAYED_ATTACKS.computeIfAbsent(level, ignored -> new ArrayList<>()).add(new DelayedAttack(
                         defender,
                         attacker,
                         event.getSource(),
                         event.getAmount(),
-                        defender.level().getGameTime() + DELAY_TICKS
+                        level.getGameTime() + DELAY_TICKS
                 ));
             }
             default -> {
@@ -299,10 +300,14 @@ public final class DaylostJudgmentEvents {
         long now = level.getGameTime();
         REDUCED_ATTACKS.entrySet().removeIf(entry -> entry.getValue().tick() < now);
 
-        Iterator<DelayedAttack> iterator = DELAYED_ATTACKS.iterator();
+        List<DelayedAttack> attacks = DELAYED_ATTACKS.get(level);
+        if (attacks == null){
+            return;
+        }
+        Iterator<DelayedAttack> iterator = attacks.iterator();
         while (iterator.hasNext()) {
             DelayedAttack attack = iterator.next();
-            if (attack.level() != level || attack.executeAt() > now){
+            if (attack.executeAt() > now){
                 continue;
             }
             iterator.remove();
@@ -316,6 +321,16 @@ public final class DaylostJudgmentEvents {
             finally {
                 REPLAYING_DELAYED_ATTACK.set(false);
             }
+        }
+        if (attacks.isEmpty()){
+            DELAYED_ATTACKS.remove(level);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onLevelUnload(LevelEvent.Unload event) {
+        if (event.getLevel() instanceof ServerLevel level){
+            DELAYED_ATTACKS.remove(level);
         }
     }
 
@@ -461,5 +476,5 @@ public final class DaylostJudgmentEvents {
 
     private record ReducedAttack(UUID attackerId, long tick) {}
 
-    private record DelayedAttack(ServerLevel level, LivingEntity target, LivingEntity attacker, DamageSource source, float amount, long executeAt) {}
+    private record DelayedAttack(LivingEntity target, LivingEntity attacker, DamageSource source, float amount, long executeAt) {}
 }

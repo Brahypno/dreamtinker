@@ -87,16 +87,13 @@ public class TheWolfWas extends Modifier implements InventoryTickModifierHook, T
 
     @Override
     public void onInventoryTick(IToolStackView tool, ModifierEntry modifier, Level world, @NotNull LivingEntity holder, int itemSlot, boolean isSelected, boolean isCorrectSlot, ItemStack stack) {
-        ToolStack toolstack = ToolStack.from(stack);
-        if (stack.isEmpty())
+        if (world.isClientSide || stack.isEmpty() || !TheWolfWasEnable.get())
             return;
-        ModDataNBT nbt = toolstack.getPersistentData();
+        ModDataNBT nbt = tool.getPersistentData();
         int count = nbt.getInt(TAG_WOLF);
         if (count < TheWolfWasDamage.get())
             return;
         if (1 < tool.getModifierLevel(DreamtinkerModifiers.despair_mist.getId()))
-            return;
-        if (!TheWolfWasEnable.get())
             return;
 
         // 2. 拿到原生 MaterialNBT
@@ -148,6 +145,7 @@ public class TheWolfWas extends Modifier implements InventoryTickModifierHook, T
         //System.out.println(newMats);
 
         // 8. 直接在 ToolStack 上设置并保存
+        ToolStack toolstack = ToolStack.from(stack);
         toolstack.setMaterials(newMats);
         toolstack.updateStack(stack);
     }

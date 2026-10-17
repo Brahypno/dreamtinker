@@ -6,6 +6,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BeehiveBlock;
 import net.minecraft.world.level.block.entity.BeehiveBlockEntity;
@@ -30,6 +31,8 @@ public class rainbowHoney {
             return;
 
         ItemStack hand = e.getItemStack();
+        if (!hand.is(Items.GLASS_BOTTLE))
+            return;
         BlockState state = level.getBlockState(e.getPos());
         BlockPos pos = e.getPos();
         if (!state.is(BlockTags.BEEHIVES))
@@ -44,7 +47,9 @@ public class rainbowHoney {
 
             // 消耗瓶子 & 给产物
             hand.shrink(1);
-            if (!e.getEntity().addItem(out)){
+            if (hand.isEmpty()){
+                e.getEntity().setItemInHand(e.getHand(), out);
+            }else if (!e.getEntity().addItem(out)){
                 e.getEntity().drop(out, false);
             }
 

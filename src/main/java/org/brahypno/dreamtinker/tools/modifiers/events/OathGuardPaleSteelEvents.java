@@ -13,6 +13,7 @@ import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.animal.allay.Allay;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.server.ServerStoppedEvent;
@@ -43,6 +44,7 @@ public class OathGuardPaleSteelEvents {
     private static final String PALE_OATH_EVIL = "dreamtinker_pale_oath_evil";
     private static final float MAX_PALE_OATH_EVIL = 100.0F;
     private static final Map<ServerPlayer, ProtectedTargets> PROTECTED_TARGET_CACHE = new WeakHashMap<>();
+    private static final OathParticipants NO_PARTICIPANTS = new OathParticipants(List.of(), List.of());
 
 
     @SubscribeEvent
@@ -139,6 +141,12 @@ public class OathGuardPaleSteelEvents {
 
     }
 
+    /** Entity types that can pass the holder-specific protection checks below. */
+    public static boolean canBeGuardianProtectedTarget(LivingEntity target) {
+        return target instanceof ServerPlayer || target instanceof Villager
+               || target instanceof Allay || target instanceof TamableAnimal;
+    }
+
     public static boolean isGuardianProtectedTarget(ServerPlayer holder, LivingEntity target) {
         if (target == holder){
             return false;
@@ -197,6 +205,10 @@ public class OathGuardPaleSteelEvents {
 
     /** One player query, followed by cheap classification from the shared one-tick equipment snapshot. */
     private static OathParticipants findOathParticipants(ServerLevel level, LivingEntity target) {
+        // All other entity types are rejected by isGuardianProtectedTarget for every player.
+        if (!canBeGuardianProtectedTarget(target)){
+            return NO_PARTICIPANTS;
+        }
         List<ServerPlayer> nearby = level.getEntitiesOfClass(
                 ServerPlayer.class,
                 target.getBoundingBox().inflate(16.0D),
@@ -218,6 +230,16 @@ public class OathGuardPaleSteelEvents {
             }
         }
         return new OathParticipants(guardians, brokenGuardians);
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void onServerTick(TickEvent.ServerTickEvent event) {
+        if (event.phase == TickEvent.Phase.END){
+            synchronized (PROTECTED_TARGET_CACHE) {
+                // A tick-local result must not retain nearby entities after the armor is removed.
+                PROTECTED_TARGET_CACHE.clear();
+            }
+        }
     }
 
     @SubscribeEvent

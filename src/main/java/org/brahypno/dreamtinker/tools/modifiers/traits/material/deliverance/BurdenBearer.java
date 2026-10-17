@@ -25,6 +25,9 @@ public class BurdenBearer extends Modifier {
         if (event.isCanceled() || !(fallen.level() instanceof ServerLevel level)){
             return;
         }
+        if (!OathGuardPaleSteelEvents.canBeGuardianProtectedTarget(fallen)){
+            return;
+        }
 
         for (ServerPlayer holder : level.getEntitiesOfClass(
                 ServerPlayer.class,
@@ -32,8 +35,8 @@ public class BurdenBearer extends Modifier {
                 player -> player.isAlive()
                           && !player.isSpectator()
                           && player != fallen
-                          && ETModifierCheck.haveModifierIn(player, getId())
-                          && OathGuardPaleSteelEvents.isGuardianProtectedTarget(player, fallen))) {
+                          && OathGuardPaleSteelEvents.isGuardianProtectedTarget(player, fallen)
+                          && ETModifierCheck.haveModifierIn(player, getId()))) {
             grantBurden(holder, fallen);
         }
     }

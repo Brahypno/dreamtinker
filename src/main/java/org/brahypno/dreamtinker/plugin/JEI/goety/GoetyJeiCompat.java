@@ -92,6 +92,9 @@ public final class GoetyJeiCompat {
             return;
         }
 
+        List<Item> displayItems = ForgeRegistries.ITEMS.getValues().stream()
+                                                .filter(item -> item instanceof ToolPartItem || item instanceof IModifiable)
+                                                .toList();
         List<GoetyTransmutationJeiDisplay> displays = new ArrayList<>();
         for (var ritual : level.getRecipeManager().getAllRecipesFor(ModRecipeSerializer.RITUAL_TYPE.get())) {
             if (!(ritual instanceof GoetyMaterialTransmutationRecipe transmutation)){
@@ -99,7 +102,7 @@ public final class GoetyJeiCompat {
             }
             List<MaterialVariantId> candidates = inputCandidates(transmutation);
             Map<DisplayKey, DisplayBuilder> grouped = new LinkedHashMap<>();
-            for (Item item : ForgeRegistries.ITEMS.getValues()) {
+            for (Item item : displayItems) {
                 for (MaterialVariantId candidate : candidates) {
                     ItemStack input = displayInput(item, candidate);
                     if (input.isEmpty()){
@@ -123,7 +126,7 @@ public final class GoetyJeiCompat {
                 continue;
             List<ItemStack> inputs = new ArrayList<>();
             List<ItemStack> outputs = new ArrayList<>();
-            for (Item item : ForgeRegistries.ITEMS.getValues()) {
+            for (Item item : displayItems) {
                 if (!(item instanceof IModifiable modifiable))
                     continue;
                 ItemStack input = ToolBuildHandler.createSingleMaterial(

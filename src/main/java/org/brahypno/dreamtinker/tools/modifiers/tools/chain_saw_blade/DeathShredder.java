@@ -275,6 +275,15 @@ public class DeathShredder extends Modifier implements MeleeDamageModifierHook, 
             return;
         }
 
+        boolean usesFuel = mode != Modes.ELECTRIC.ordinal();
+        boolean usesElectricity = mode != Modes.FUEL.ordinal();
+        int cost = Math.max(0, ChainSawEnergyCost.get());
+        int energy = Math.max(0, ToolEnergyCapability.getEnergy(tool));
+        if (usesElectricity && cost > 0 && energy < cost){
+            entity.stopUsingItem();
+            return;
+        }
+
         AttributeInstance reach = entity.getAttribute(ForgeMod.ENTITY_REACH.get());
         double range = null != reach ? reach.getValue() : 2.5D;
         Vec3 srcVec = entity.getEyePosition();
@@ -289,19 +298,9 @@ public class DeathShredder extends Modifier implements MeleeDamageModifierHook, 
                     return collisionBB.contains(srcVec) || collisionBB.clip(srcVec, destVec).isPresent();
                 }
         );
-        targets.sort(Comparator.comparingDouble(entity::distanceToSqr));
-
-        boolean usesFuel = mode != Modes.ELECTRIC.ordinal();
-        boolean usesElectricity = mode != Modes.FUEL.ordinal();
-        int cost = Math.max(0, ChainSawEnergyCost.get());
-        int energy = Math.max(0, ToolEnergyCapability.getEnergy(tool));
         int available = Math.max(1, targets.size()); // Retain the existing idle/warm-up running cost.
         if (usesElectricity && cost > 0)
             available = Math.min(available, energy / cost);
-        if (available == 0){
-            entity.stopUsingItem();
-            return;
-        }
 
         FuelState fuel = usesFuel ? prepareFuel(tool, available) : new FuelState(0, 1, 0);
         if (usesFuel)
@@ -325,6 +324,7 @@ public class DeathShredder extends Modifier implements MeleeDamageModifierHook, 
         int usedUnits = 1;
         int hits = 0;
         if (rotation >= MAX_FORCE_FUEL / 2 && heat <= 0.9F * maxHeat){
+            targets.sort(Comparator.comparingDouble(entity::distanceToSqr));
             for (LivingEntity victim : targets) {
                 if (hits >= available || tool.isBroken())
                     break;

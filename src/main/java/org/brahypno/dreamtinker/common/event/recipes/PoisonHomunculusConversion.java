@@ -24,13 +24,12 @@ public class PoisonHomunculusConversion {
     @SubscribeEvent
     public static void LivingHurtEvent(LivingHurtEvent event) {
         LivingEntity victim = event.getEntity();
-        ServerLevel level = (ServerLevel) victim.level();
+        if (!(victim.level() instanceof ServerLevel level) || event.isCanceled() || !event.getSource().is(DamageTypes.FALLING_ANVIL))
+            return;
         boolean is_illager = false, is_villager = false;
         if (victim.getType().is(Tags.EntityTypes.BOSSES))
             return;
 
-        if (victim.level().isClientSide || event.isCanceled() || !event.getSource().is(DamageTypes.FALLING_ANVIL))
-            return;
         if (victim instanceof AbstractVillager || victim.getType() == EntityType.VILLAGER)
             is_villager = true;
         if (victim instanceof AbstractIllager || victim.getType().is(TinkerTags.EntityTypes.ILLAGERS))

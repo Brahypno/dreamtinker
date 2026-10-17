@@ -17,16 +17,24 @@ public class KeyPress {
     private static boolean lastToolInteract = false;
     private static boolean lastMode = false;
 
+    public static void resetKeyState() {
+        lastToolInteract = false;
+        lastMode = false;
+    }
+
     @SubscribeEvent
     public static void onClientTickTick(TickEvent.ClientTickEvent event) {
         if (event.phase != TickEvent.Phase.END)
             return;
         var mc = Minecraft.getInstance();
-        if (mc.player == null)
+        if (mc.player == null){
+            resetKeyState();
             return;
+        }
 
-        boolean weapon_interact = TOOL_INTERACT.isDown(); // 是否正按着
-        boolean mode = KEY_MODE.isDown();
+        // Apply focus before comparing states, so a stale key cannot send down/up every tick.
+        boolean weapon_interact = mc.isWindowActive() && TOOL_INTERACT.isDown();
+        boolean mode = mc.isWindowActive() && KEY_MODE.isDown();
 
         if (weapon_interact != lastToolInteract){
             DNetwork.CHANNEL.sendToServer(new KeyStateMsg(KeyStateMsg.KeyKind.TOOL_INTERACT, weapon_interact));
@@ -37,16 +45,5 @@ public class KeyPress {
             lastMode = mode;
         }
 
-        // 可选：窗口失焦时清空（避免卡住“按下”状态）
-        if (!mc.isWindowActive()){
-            if (lastToolInteract){
-                DNetwork.CHANNEL.sendToServer(new KeyStateMsg(KeyStateMsg.KeyKind.TOOL_INTERACT, false));
-                lastToolInteract = false;
-            }
-            if (lastMode){
-                DNetwork.CHANNEL.sendToServer(new KeyStateMsg(KeyStateMsg.KeyKind.MODE, false));
-                lastMode = false;
-            }
-        }
     }
 }

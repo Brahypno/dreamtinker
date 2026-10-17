@@ -158,20 +158,26 @@ public class as_one extends Modifier implements EquipmentChangeModifierHook, Mod
         long this_time;
         if ((this_time = world.getGameTime()) % 20 == 0){
             ModDataNBT toolData = tool.getPersistentData();
-            int as_one_cnt = Math.min(toolData.getInt(TAG_AS_ONE) + 1, 99);
+            int as_one_cnt = toolData.getInt(TAG_AS_ONE);
             if (as_one_cnt < 99){
                 CompoundTag tag = toolData.contains(TAG_LAST) ? toolData.getCompound(TAG_LAST) : new CompoundTag();
-                long last_second = tag.contains(TAG_LAST.getPath()) ? tag.getLong(TAG_LAST.getPath()) : this_time;
-                if (last_second + SECOND_THRESHOLD * 20L <= this_time){
+                if (!tag.contains(TAG_LAST.getPath())){
                     tag.putLong(TAG_LAST.getPath(), this_time);
                     toolData.put(TAG_LAST, tag);
-                    toolData.putInt(TAG_AS_ONE, as_one_cnt);
+                }else if (tag.getLong(TAG_LAST.getPath()) + SECOND_THRESHOLD * 20L <= this_time){
+                    tag.putLong(TAG_LAST.getPath(), this_time);
+                    toolData.put(TAG_LAST, tag);
+                    toolData.putInt(TAG_AS_ONE, as_one_cnt + 1);
                 }
             }
             if (tool.isBroken())
                 tool.setDamage(0);
         }
-        List<MobEffectInstance> snapshot = holder.getActiveEffects().stream().filter(as_one::filterMobEffects).toList();
+        Collection<MobEffectInstance> effects = holder.getActiveEffects();
+        if (effects.isEmpty()){
+            return;
+        }
+        List<MobEffectInstance> snapshot = effects.stream().filter(as_one::filterMobEffects).toList();
         Modes mode = Modes.fromInt(tool.getPersistentData().getInt(TAG_MOD));
         for (MobEffectInstance inst : snapshot) {
             int amp = inst.getAmplifier();

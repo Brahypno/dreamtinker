@@ -30,9 +30,10 @@ public final class AdvCountEvents {
 
     @SubscribeEvent
     public static void onDatapackSync(OnDatapackSyncEvent e) {
-        MinecraftServer server = e.getPlayer() == null ? e.getPlayerList().getServer() : e.getPlayer().getServer();
-        if (server != null){
-            AdvCountService.rebuildForServer(server);
+        if (e.getPlayer() == null){
+            AdvCountService.rebuildForServer(e.getPlayerList().getServer());
+        }else {
+            AdvCountService.DONE_BY_PLAYER.remove(e.getPlayer().getUUID());
         }
     }
 
@@ -53,6 +54,15 @@ public final class AdvCountEvents {
         if (e.getEntity() instanceof ServerPlayer sp){
             Advancement adv = e.getAdvancement();
             AdvCountService.onPlayerEarned(sp, adv);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onAdvRevoke(AdvancementEvent.AdvancementProgressEvent e) {
+        if (e.getProgressType() == AdvancementEvent.AdvancementProgressEvent.ProgressType.REVOKE
+            && e.getEntity() instanceof ServerPlayer sp
+            && AdvCountService.COUNTED_SET.contains(e.getAdvancement())){
+            AdvCountService.DONE_BY_PLAYER.remove(sp.getUUID());
         }
     }
 
@@ -141,8 +151,11 @@ public final class AdvCountEvents {
          */
         public static void onPlayerEarned(ServerPlayer sp, Advancement adv) {
             if (!COUNTED_SET.isEmpty() && COUNTED_SET.contains(adv)){
-                DONE_BY_PLAYER.computeIfAbsent(sp.getUUID(), id -> new AtomicInteger(initDoneFor(sp)))
-                              .incrementAndGet();
+                // Earn fires after completion. A later lazy scan already includes this advancement.
+                DONE_BY_PLAYER.computeIfPresent(sp.getUUID(), (id, done) -> {
+                    done.incrementAndGet();
+                    return done;
+                });
             }
         }
     }

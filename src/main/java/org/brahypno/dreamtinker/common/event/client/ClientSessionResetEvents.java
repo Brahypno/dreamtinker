@@ -17,11 +17,13 @@ public final class ClientSessionResetEvents {
      */
     @SubscribeEvent
     public static void onLogin(ClientPlayerNetworkEvent.LoggingIn event) {
+        KeyPress.resetKeyState();
         resetVisualState();
     }
 
     @SubscribeEvent
     public static void onLogout(ClientPlayerNetworkEvent.LoggingOut event) {
+        KeyPress.resetKeyState();
         resetVisualState();
         ClientSoundChecker.clearAllSoundCaches();
         DTTrailRenderer.clearWorkspace();

@@ -15,6 +15,7 @@ import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerCommon;
 
 import java.util.HashMap;
+import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
@@ -23,8 +24,7 @@ import static org.brahypno.dreamtinker.config.DreamtinkerCachedConfig.voidPearlD
 
 @Mod.EventBusSubscriber(modid = Dreamtinker.MODID)
 public class voidPearlConversion {
-    private static final Map<UUID, ItemEntity> trackedEnderPearl = new HashMap<>();
-    private static final Map<UUID, Vec3> trackedPosition = new HashMap<>();
+    private static final Map<Level, Map<UUID, TrackedPearl>> trackedByLevel = new IdentityHashMap<>();
     private static final int FALL_CHECK_INTERVAL = 5;
 
     @SubscribeEvent
@@ -33,35 +33,30 @@ public class voidPearlConversion {
             return;
         if (!item.getItem().is(Tags.Items.ENDER_PEARLS))
             return;
-        trackedEnderPearl.put(item.getUUID(), item);
-        trackedPosition.put(item.getUUID(), item.position());
+        trackedByLevel.computeIfAbsent(event.getLevel(), ignored -> new HashMap<>())
+                      .put(item.getUUID(), new TrackedPearl(item, item.position()));
     }
 
     @SubscribeEvent
     public static void onWorldTick(TickEvent.LevelTickEvent event) {
-        if (event.phase != TickEvent.Phase.END || event.level.isClientSide || trackedEnderPearl.isEmpty())
+        if (event.phase != TickEvent.Phase.END || event.level.isClientSide)
             return;
         Level level = event.level;
-        Iterator<Map.Entry<UUID, ItemEntity>> iterator = trackedEnderPearl.entrySet().iterator();
+        Map<UUID, TrackedPearl> tracked = trackedByLevel.get(level);
+        if (tracked == null)
+            return;
+        Iterator<TrackedPearl> iterator = tracked.values().iterator();
         while (iterator.hasNext()) {
-            Map.Entry<UUID, ItemEntity> entry = iterator.next();
-            ItemEntity item = entry.getValue();
-            if (level != item.level())
-                continue;
+            TrackedPearl pearl = iterator.next();
+            ItemEntity item = pearl.item();
             // 如果已消失或不在当前世界，移除
-            if (!item.isAlive()){
+            if (level != item.level() || !item.isAlive()){
                 iterator.remove();
-                trackedPosition.remove(entry.getKey());
                 continue;
             }
             if (item.getItem().is(DreamtinkerCommon.void_pearl.get())){
                 Vec3 pos = item.position();
-                Vec3 tgt = trackedPosition.get(entry.getKey());
-                if (tgt == null){
-                    iterator.remove();
-                    trackedPosition.remove(entry.getKey());
-                    continue;
-                }
+                Vec3 tgt = pearl.origin();
                 Vec3 delta = tgt.subtract(pos);
                 double dist = delta.length();
 
@@ -72,7 +67,6 @@ public class voidPearlConversion {
                     item.setNoGravity(true);
                     item.setPickUpDelay(0);
                     item.setUnlimitedLifetime();
-                    trackedPosition.remove(entry.getKey());
                     iterator.remove();
                 }else {
                     // 朝目标移动：速度随距离缩放，带一点阻尼
@@ -104,14 +98,16 @@ public class voidPearlConversion {
                         item.setItem(new ItemStack(DreamtinkerCommon.void_pearl.get(), outputCount));
                         item.setNoGravity(true);
                         item.setPickUpDelay(40);
-                        // 继续使用 trackedPosition 作为返航目标
+                        // 继续使用入世界时的位置作为返航目标
                     }else {
                         iterator.remove();
-                        trackedPosition.remove(entry.getKey());
                         // 不 discard，让原版虚空自然移除
                     }
                 }
             }
+        }
+        if (tracked.isEmpty()){
+            trackedByLevel.remove(level);
         }
     }
 
@@ -120,19 +116,13 @@ public class voidPearlConversion {
         if (!(event.getLevel() instanceof Level level) || level.isClientSide)
             return;
 
-        Iterator<Map.Entry<UUID, ItemEntity>> iterator = trackedEnderPearl.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<UUID, ItemEntity> entry = iterator.next();
-            if (entry.getValue().level() == level){
-                trackedPosition.remove(entry.getKey());
-                iterator.remove();
-            }
-        }
+        trackedByLevel.remove(level);
     }
 
     @SubscribeEvent
     public static void onServerStopped(ServerStoppedEvent event) {
-        trackedEnderPearl.clear();
-        trackedPosition.clear();
+        trackedByLevel.clear();
     }
+
+    private record TrackedPearl(ItemEntity item, Vec3 origin) {}
 }
