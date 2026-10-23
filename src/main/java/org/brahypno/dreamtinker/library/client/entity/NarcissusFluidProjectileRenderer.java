@@ -67,12 +67,13 @@ public class NarcissusFluidProjectileRenderer<T extends NarcissusFluidProjectile
 
     @Override
     public void render(T entity, float yaw, float partialTicks, PoseStack pose, MultiBufferSource buffer, int light) {
+        int argb = DTTrailRenderer.normalizeArgb(entity.getColor(), 0xCC2376DD);
         DTTrailRenderer.renderEntityTrailLayers(
-                pose, buffer, entity, partialTicks, entity.trail, entity.getColor(), LONG_TRAIL_LAYERS);
+                pose, buffer, entity, partialTicks, entity.trail, argb, LONG_TRAIL_LAYERS);
         DTTrailRenderer.renderEntityTrailVolume(
                 pose, buffer, entity, partialTicks, entity.shortTrail,
-                CONCENTRATED_TRAIL_TEX, 0xF8FFF6E8,
-                0.045F, 0.88F, 5, 0.34F
+                CONCENTRATED_TRAIL_TEX, argb,
+                0.032F, 0.55F, 5, 0.28F
         );
 
         pose.pushPose();
@@ -89,11 +90,6 @@ public class NarcissusFluidProjectileRenderer<T extends NarcissusFluidProjectile
         }
 
         VertexConsumer consumer = buffer.getBuffer(PROJECTILE_RENDER_TYPE);
-        int argb = entity.getColor() == 0 ? 0xCC2376DD : entity.getColor();
-        if ((argb & 0xFF000000) == 0){
-            argb |= 0xFF000000;
-        }
-
         pose.mulPose(Axis.YP.rotationDegrees(90.0F));
         drawBillboardTex(
                 pose, consumer, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY,

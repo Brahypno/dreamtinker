@@ -62,9 +62,11 @@ public class DTClientTrail {
         int maxAge = Math.max(1, (int) (lifespan * ageFactor));
         for (int i = count - 1; i >= 0; i--) {
             float t = count <= 1 ? 0.0F : i / (float) (count - 1);
-            append(headPosition.x - dirX * i * spacing,
-                   headPosition.y - dirY * i * spacing,
-                   headPosition.z - dirZ * i * spacing, (int) (maxAge * t * t));
+            Point point = append(headPosition.x - dirX * i * spacing,
+                                 headPosition.y - dirY * i * spacing,
+                                 headPosition.z - dirZ * i * spacing, maxAge * t * t);
+            if (Double.isFinite(lengthSqr))
+                point.startInterpolation(point.x - velocity.x, point.y - velocity.y, point.z - velocity.z, 1.0F);
         }
         lastAddedPosition = headPosition;
         bootstrapped = true;
@@ -106,7 +108,11 @@ public class DTClientTrail {
         double startZ = lastAddedPosition.z;
         for (int i = 1; i <= steps; i++) {
             double t = i / (double) steps;
-            addPoint(startX + dx * t, startY + dy * t, startZ + dz * t);
+            Point point = addPoint(startX + dx * t, startY + dy * t, startZ + dz * t);
+            if (point != null){
+                point.age = 1.0F - (float) t;
+                point.startInterpolation(startX, startY, startZ, (float) t);
+            }
         }
         lastAddedPosition = worldPosition;
     }
@@ -115,9 +121,9 @@ public class DTClientTrail {
         addPoint(worldPosition.x, worldPosition.y, worldPosition.z);
     }
 
-    private void addPoint(double x, double y, double z) {
+    private Point addPoint(double x, double y, double z) {
         if (!finite(x, y, z)){
-            return;
+            return null;
         }
         if (size > 0){
             Point last = pointAt(size - 1);
@@ -125,13 +131,14 @@ public class DTClientTrail {
             double dy = last.y - y;
             double dz = last.z - z;
             if (dx * dx + dy * dy + dz * dz < minDistanceSqr){
-                return;
+                return null;
             }
         }
-        append(x, y, z, 0);
+        return append(x, y, z, 0);
     }
 
-    private void append(double x, double y, double z, int age) {
+    private Point append(double x, double y, double z, float age) {
+        Point previous = size == 0 ? null : pointAt(size - 1);
         // Projectile instances also exist on dedicated servers, where trails are
         // never ticked. Allocate the buffer only when the first point is added.
         if (ring == null)
@@ -147,8 +154,10 @@ public class DTClientTrail {
             ring[slot] = point;
         }
         point.reset(x, y, z, age);
+        point.transportFrame(previous);
         size++;
         boundsDirty = true;
+        return point;
     }
 
     private Point pointAt(int index) {
@@ -159,16 +168,21 @@ public class DTClientTrail {
         int expiredPrefix = 0;
         for (int i = 0; i < size; i++) {
             Point point = pointAt(i);
+            // Once a tick is complete, its samples stay fixed in world space.
+            point.oldX = point.x;
+            point.oldY = point.y;
+            point.oldZ = point.z;
+            point.birthFraction = 0.0F;
             point.age++;
-            if (point.age > lifespan){
+            if (point.age >= lifespan + 1.0F){
                 expiredPrefix++;
             }
         }
         if (expiredPrefix > 0){
             head = (head + expiredPrefix) & (MAX_POINTS - 1);
             size -= expiredPrefix;
-            boundsDirty = true;
         }
+        boundsDirty = true;
     }
 
     /**
@@ -245,7 +259,10 @@ public class DTClientTrail {
         private final DTClientTrail owner;
         private double oldX, oldY, oldZ;
         private double x, y, z;
-        private int age;
+        private double axisX = 1.0D, axisY, axisZ;
+        // Age at the end of this tick; the rendered time is age - 1 + partialTicks.
+        private float age;
+        private float birthFraction;
         private Vec3 rawPosition;
 
         public Point(Vec3 position) {
@@ -257,24 +274,78 @@ public class DTClientTrail {
             this.owner = owner;
         }
 
-        private void reset(double x, double y, double z, int age) {
+        private void reset(double x, double y, double z, float age) {
             this.oldX = this.x = x;
             this.oldY = this.y = y;
             this.oldZ = this.z = z;
             this.age = age;
+            this.birthFraction = 0.0F;
             this.rawPosition = null;
         }
 
+        private void startInterpolation(double oldX, double oldY, double oldZ, float birthFraction) {
+            this.oldX = oldX;
+            this.oldY = oldY;
+            this.oldZ = oldZ;
+            this.birthFraction = birthFraction;
+        }
+
+        private float interpolation(float partialTicks) {
+            // Unborn samples collapse onto the moving head until it reaches them.
+            return birthFraction > 0.0F ? Mth.clamp(partialTicks / birthFraction, 0.0F, 1.0F) : partialTicks;
+        }
+
+        private void transportFrame(Point previous) {
+            axisX = previous == null ? 1.0D : previous.axisX;
+            axisY = previous == null ? 0.0D : previous.axisY;
+            axisZ = previous == null ? 0.0D : previous.axisZ;
+            if (previous == null)
+                return;
+            double dx = x - previous.x;
+            double dy = y - previous.y;
+            double dz = z - previous.z;
+            double lengthSqr = dx * dx + dy * dy + dz * dz;
+            if (lengthSqr < 1.0E-7D)
+                return;
+            double projection = (axisX * dx + axisY * dy + axisZ * dz) / lengthSqr;
+            axisX -= dx * projection;
+            axisY -= dy * projection;
+            axisZ -= dz * projection;
+            double axisLengthSqr = axisX * axisX + axisY * axisY + axisZ * axisZ;
+            if (axisLengthSqr < 1.0E-7D){
+                if (dy * dy < 0.81D * lengthSqr){
+                    axisX = -dz;
+                    axisY = 0.0D;
+                    axisZ = dx;
+                }else {
+                    axisX = 0.0D;
+                    axisY = dz;
+                    axisZ = -dy;
+                }
+                axisLengthSqr = axisX * axisX + axisY * axisY + axisZ * axisZ;
+            }
+            double inverseLength = 1.0D / Math.sqrt(axisLengthSqr);
+            axisX *= inverseLength;
+            axisY *= inverseLength;
+            axisZ *= inverseLength;
+        }
+
+        double axisX() {return axisX;}
+
+        double axisY() {return axisY;}
+
+        double axisZ() {return axisZ;}
+
         public double getX(float partialTicks) {
-            return oldX + (x - oldX) * partialTicks;
+            return oldX + (x - oldX) * interpolation(partialTicks);
         }
 
         public double getY(float partialTicks) {
-            return oldY + (y - oldY) * partialTicks;
+            return oldY + (y - oldY) * interpolation(partialTicks);
         }
 
         public double getZ(float partialTicks) {
-            return oldZ + (z - oldZ) * partialTicks;
+            return oldZ + (z - oldZ) * interpolation(partialTicks);
         }
 
         public Vec3 getRawPosition() {
@@ -284,7 +355,7 @@ public class DTClientTrail {
             return rawPosition;
         }
 
-        public int getAge() {
+        public float getAge() {
             return age;
         }
 

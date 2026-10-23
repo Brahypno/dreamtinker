@@ -252,8 +252,8 @@ public class NarcissusFluidProjectile extends Projectile implements ProjectileWi
         this.setDeltaMovement(newVelocity);
 
         Vec3 trailPosition = this.getTrailRenderPosition();
-        this.shortTrail.tick(trailPosition, newVelocity, 5, 0.055D, 0.10D, 0.72F);
-        this.trail.tick(trailPosition, newVelocity, 12, 0.095D, 0.15D, 0.96F);
+        this.shortTrail.tick(trailPosition, velocity, 5, 0.055D, 0.10D, 0.72F);
+        this.trail.tick(trailPosition, velocity, 12, 0.095D, 0.15D, 0.96F);
     }
 
     private void tickServerPhysics() {

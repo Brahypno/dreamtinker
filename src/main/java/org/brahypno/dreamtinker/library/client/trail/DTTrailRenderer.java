@@ -20,9 +20,6 @@ import java.util.List;
 
 public final class DTTrailRenderer {
     private static final double EPSILON = 1.0E-7D;
-    private static final double TWIST_STEP = 0.37D;
-    private static final double TWIST_COS = Math.cos(TWIST_STEP);
-    private static final double TWIST_SIN = Math.sin(TWIST_STEP);
     private static final ThreadLocal<Workspace> WORKSPACE = ThreadLocal.withInitial(Workspace::new);
 
     private DTTrailRenderer() {}
@@ -78,7 +75,7 @@ public final class DTTrailRenderer {
         int count = (originalCount - 2 + step) / step + 1;
         workspace.ensureCapacity(count);
         fillPoints(workspace, points, count, originalCount, step, partialTicks, trail);
-        buildFrames(workspace, count, camera.x, camera.y, camera.z);
+        buildFrames(workspace, count);
         return count;
     }
 
@@ -109,34 +106,24 @@ public final class DTTrailRenderer {
         double halfStep = Math.PI / (planes * 2.0D);
         for (int plane = 0; plane < planes; plane++) {
             double angle = halfStep + Math.PI * plane / planes;
-            double cos0 = Math.cos(angle);
-            double sin0 = Math.sin(angle);
+            double cos = Math.cos(angle);
+            double sin = Math.sin(angle);
 
             for (int i = 0; i < count - 1; i++) {
                 int next = i + 1;
                 double dx = workspace.x[next] - workspace.x[i];
                 double dy = workspace.y[next] - workspace.y[i];
                 double dz = workspace.z[next] - workspace.z[i];
-                double cos1 = cos0;
-                double sin1 = sin0;
-                // Preserve twist and UV positions when intermediate samples are omitted.
-                for (int step = workspace.sampleIndex[i]; step < workspace.sampleIndex[next]; step++) {
-                    double nextCos = cos1 * TWIST_COS - sin1 * TWIST_SIN;
-                    sin1 = sin1 * TWIST_COS + cos1 * TWIST_SIN;
-                    cos1 = nextCos;
-                }
                 if (dx * dx + dy * dy + dz * dz < EPSILON){
-                    sin0 = sin1;
-                    cos0 = cos1;
                     continue;
                 }
 
-                double side0X = (workspace.axisAX[i] * cos0 + workspace.axisBX[i] * sin0) * workspace.width[i];
-                double side0Y = (workspace.axisAY[i] * cos0 + workspace.axisBY[i] * sin0) * workspace.width[i];
-                double side0Z = (workspace.axisAZ[i] * cos0 + workspace.axisBZ[i] * sin0) * workspace.width[i];
-                double side1X = (workspace.axisAX[next] * cos1 + workspace.axisBX[next] * sin1) * workspace.width[next];
-                double side1Y = (workspace.axisAY[next] * cos1 + workspace.axisBY[next] * sin1) * workspace.width[next];
-                double side1Z = (workspace.axisAZ[next] * cos1 + workspace.axisBZ[next] * sin1) * workspace.width[next];
+                double side0X = (workspace.axisAX[i] * cos + workspace.axisBX[i] * sin) * workspace.width[i];
+                double side0Y = (workspace.axisAY[i] * cos + workspace.axisBY[i] * sin) * workspace.width[i];
+                double side0Z = (workspace.axisAZ[i] * cos + workspace.axisBZ[i] * sin) * workspace.width[i];
+                double side1X = (workspace.axisAX[next] * cos + workspace.axisBX[next] * sin) * workspace.width[next];
+                double side1Y = (workspace.axisAY[next] * cos + workspace.axisBY[next] * sin) * workspace.width[next];
+                double side1Z = (workspace.axisAZ[next] * cos + workspace.axisBZ[next] * sin) * workspace.width[next];
 
                 int color0 = multiplyAlpha(workspace.color[i], planeAlpha);
                 int color1 = multiplyAlpha(workspace.color[next], planeAlpha);
@@ -150,9 +137,6 @@ public final class DTTrailRenderer {
                         side1X, side1Y, side1Z,
                         color0, color1, v0, v1
                 );
-
-                cos0 = cos1;
-                sin0 = sin1;
             }
         }
         pose.popPose();
@@ -164,13 +148,15 @@ public final class DTTrailRenderer {
         for (int i = 0; i < count; i++) {
             int sourceIndex = Math.min(i * step, originalCount - 1);
             DTClientTrail.Point point = points.get(sourceIndex);
-            workspace.sampleIndex[i] = sourceIndex;
             workspace.v[i] = sourceIndex / (float) (originalCount - 1);
             workspace.x[i] = point.getX(partialTicks);
             workspace.y[i] = point.getY(partialTicks);
             workspace.z[i] = point.getZ(partialTicks);
+            workspace.axisAX[i] = point.axisX();
+            workspace.axisAY[i] = point.axisY();
+            workspace.axisAZ[i] = point.axisZ();
             workspace.fade[i] = 1.0F - Mth.clamp(
-                    (point.getAge() - partialTicks) / trail.lifespan(), 0.0F, 1.0F
+                    (point.getAge() - 1.0F + partialTicks) / trail.lifespan(), 0.0F, 1.0F
             );
         }
     }
@@ -184,8 +170,7 @@ public final class DTTrailRenderer {
         }
     }
 
-    private static void buildFrames(
-            Workspace workspace, int count, double cameraX, double cameraY, double cameraZ) {
+    private static void buildFrames(Workspace workspace, int count) {
         for (int i = 0; i < count; i++) {
             int previous = Math.max(0, i - 1);
             int next = Math.min(count - 1, i + 1);
@@ -204,18 +189,11 @@ public final class DTTrailRenderer {
                 tangentZ *= inverseLength;
             }
 
-            double toCameraX = workspace.x[i] - cameraX;
-            double toCameraY = workspace.y[i] - cameraY;
-            double toCameraZ = workspace.z[i] - cameraZ;
-            if (toCameraX * toCameraX + toCameraY * toCameraY + toCameraZ * toCameraZ < EPSILON){
-                toCameraX = 0.0D;
-                toCameraY = 1.0D;
-                toCameraZ = 0.0D;
-            }
-
-            double axisAX = toCameraY * tangentZ - toCameraZ * tangentY;
-            double axisAY = toCameraZ * tangentX - toCameraX * tangentZ;
-            double axisAZ = toCameraX * tangentY - toCameraY * tangentX;
+            // Transported sample axes keep the cross-section independent of the camera and LOD.
+            double projection = workspace.axisAX[i] * tangentX + workspace.axisAY[i] * tangentY + workspace.axisAZ[i] * tangentZ;
+            double axisAX = workspace.axisAX[i] - tangentX * projection;
+            double axisAY = workspace.axisAY[i] - tangentY * projection;
+            double axisAZ = workspace.axisAZ[i] - tangentZ * projection;
             double axisALengthSqr = axisAX * axisAX + axisAY * axisAY + axisAZ * axisAZ;
             if (axisALengthSqr < EPSILON || !finite(axisAX, axisAY, axisAZ)){
                 if (Math.abs(tangentY) < 0.9D){
@@ -313,7 +291,6 @@ public final class DTTrailRenderer {
         private int[] color = new int[32];
         private float[] fade = new float[32];
         private float[] v = new float[32];
-        private int[] sampleIndex = new int[32];
 
         private void ensureCapacity(int required) {
             if (required <= x.length)
@@ -334,7 +311,6 @@ public final class DTTrailRenderer {
             color = new int[capacity];
             fade = new float[capacity];
             v = new float[capacity];
-            sampleIndex = new int[capacity];
         }
     }
 
