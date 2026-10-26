@@ -10,6 +10,7 @@
     "compat.ars_nouveau.EntityMeltingModuleMixin",
     "compat.ars_nouveau.MethodProjectileMixin",
     "compat.ars_nouveau.PerkUtilMixin",
+    "compat.ars_nouveau.SpellPartPositionAccessor",
     "compat.bloodmagic.LivingStatsMixin",
     "compat.bloodmagic.LivingUtilMixin",
     "compat.enigmaticlegacy.EnigmaticEventHandlerMixin",
@@ -26,6 +27,7 @@
   ],
   "client": [
     "compat.ars_nouveau.AlterationTableRendererMixin",
+    "compat.ars_nouveau.GuiSpellBookAccessor",
     "compat.ars_nouveau.ArmorUpgradeRecipeCategoryMixin"
   ],
   "injectors": {

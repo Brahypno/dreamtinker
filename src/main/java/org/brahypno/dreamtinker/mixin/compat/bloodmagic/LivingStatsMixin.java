@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import wayoftime.bloodmagic.core.living.LivingStats;
 
 @SuppressWarnings("target")
 @Pseudo
@@ -54,7 +55,7 @@ public abstract class LivingStatsMixin {
             at = @At("HEAD"),
             cancellable = true
     )
-    private static void dreamtinker$toTconPlayer(Player player, Object stats, CallbackInfo ci) {
+    private static void dreamtinker$toTconPlayer(Player player, LivingStats stats, CallbackInfo ci) {
         if (player == null){
             return;
         }

@@ -8,40 +8,14 @@ import com.hollingsworth.arsnouveau.common.spell.validation.SpellPhraseValidator
 import org.brahypno.dreamtinker.library.compat.ars_nouveau.Spell.AugmentTinker;
 import org.brahypno.esotericismtinker.utils.ETHelper;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.lang.reflect.Field;
 import java.util.List;
 
 @Mixin(value = AugmentCompatibilityValidator.class, remap = false)
 public class AugmentCompatibilityValidatorMixin {
-
-    @Unique
-    private static int dreamtinker$getSpellPosition(Object spell) {
-        try {
-            Field field = spell.getClass().getDeclaredField("position");
-            field.setAccessible(true);
-            return field.getInt(spell);
-        }
-        catch (ReflectiveOperationException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Unique
-    private static Object dreamtinker$getSpellPart(Object spell) {
-        try {
-            Field field = spell.getClass().getDeclaredField("spellPart");
-            field.setAccessible(true);
-            return field.get(spell);
-        }
-        catch (ReflectiveOperationException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     @Inject(
             method = "validatePhrase",
@@ -58,8 +32,8 @@ public class AugmentCompatibilityValidatorMixin {
 
                                       boolean containsSpell = spells != null &&
                                                               spells.stream().anyMatch(
-                                                                      spell -> dreamtinker$getSpellPosition(spell) == error.getPosition() &&
-                                                                               dreamtinker$getSpellPart(spell) instanceof AugmentTinker);
+                                                                      spell -> ((SpellPartPositionAccessor) (Object) spell).dreamtinker$getPosition() == error.getPosition() &&
+                                                                               ((SpellPartPositionAccessor) (Object) spell).dreamtinker$getSpellPart() instanceof AugmentTinker);
                                       return containsSpell ||
                                              ETHelper.containsTranslationKey(error.makeTextComponentExisting(), AugmentTinker.INSTANCE.getLocalizationKey());
                                   });

@@ -27,9 +27,9 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
+import org.brahypno.dreamtinker.mixin.compat.ars_nouveau.GuiSpellBookAccessor;
 import slimeknights.tconstruct.library.tools.helper.ModifierUtil;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -140,7 +140,7 @@ public class ModifiableGuiSpellBook extends GuiSpellBook {
             int manaLength = 96;
             if (this.maxManaCache > 0){
                 manaLength =
-                        (int) Mth.clamp((float) manaLength * ((float) (this.maxManaCache - getCurrentCostCacheReflect()) / (float) this.maxManaCache), -1.0F,
+                        (int) Mth.clamp((float) manaLength * ((float) (this.maxManaCache - getCurrentCostCache()) / (float) this.maxManaCache), -1.0F,
                                         96.0F);
             }else {
                 manaLength = 0;
@@ -164,7 +164,7 @@ public class ModifiableGuiSpellBook extends GuiSpellBook {
             }
 
             if (ArsNouveauAPI.ENABLE_DEBUG_NUMBERS && this.minecraft != null){
-                String text = getCurrentCostCacheReflect() + "  /  " + this.maxManaCache;
+                String text = getCurrentCostCache() + "  /  " + this.maxManaCache;
                 int maxWidth = this.minecraft.font.width(this.maxManaCache + "  /  " + this.maxManaCache);
                 int offset = offsetLeft - maxWidth / 2 + (maxWidth - this.minecraft.font.width(text));
                 graphics.drawString(this.minecraft.font, text, offset + 55, yOffset - 10, 16777215, false);
@@ -175,32 +175,11 @@ public class ModifiableGuiSpellBook extends GuiSpellBook {
         }
     }
 
-    private static Field CURRENT_COST_CACHE;
-
-    private static Field costField() {
-        if (CURRENT_COST_CACHE == null){
-            try {
-                Field f = GuiSpellBook.class.getDeclaredField("currentCostCache");
-                f.setAccessible(true);
-                CURRENT_COST_CACHE = f;
-            }
-            catch (ReflectiveOperationException e) {
-                throw new RuntimeException("Cannot access GuiSpellBook#currentCostCache", e);
-            }
-        }
-        return CURRENT_COST_CACHE;
-    }
-
     /**
      * 只读获取 currentCostCache
      */
-    public int getCurrentCostCacheReflect() {
-        try {
-            return costField().getInt(this);
-        }
-        catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
+    public int getCurrentCostCache() {
+        return ((GuiSpellBookAccessor) this).dreamtinker$getCurrentCostCache();
     }
 
     private void layoutAllGlyphs(int page) {

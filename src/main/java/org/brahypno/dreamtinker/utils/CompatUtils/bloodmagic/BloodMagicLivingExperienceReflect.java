@@ -3,19 +3,17 @@ package org.brahypno.dreamtinker.utils.CompatUtils.bloodmagic;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.fml.ModList;
+import org.brahypno.dreamtinker.Dreamtinker;
+import wayoftime.bloodmagic.core.LivingArmorRegistrar;
+import wayoftime.bloodmagic.core.living.LivingUpgrade;
+import wayoftime.bloodmagic.core.living.LivingUtil;
 
-import java.lang.invoke.MethodHandle;
-import java.lang.invoke.MethodHandles;
-import java.lang.invoke.MethodType;
-import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
+/** Optional Blood Magic facade; external types stay in the implementation class. */
 public final class BloodMagicLivingExperienceReflect {
     private static final String BLOOD_MAGIC_MODID = "bloodmagic";
-
-    private static final String LIVING_UTIL = "wayoftime.bloodmagic.core.living.LivingUtil";
-    private static final String LIVING_UPGRADE = "wayoftime.bloodmagic.core.living.LivingUpgrade";
-    private static final String LIVING_ARMOR_REGISTRAR = "wayoftime.bloodmagic.core.LivingArmorRegistrar";
-    private static final String APACHE_PAIR = "org.apache.commons.lang3.tuple.Pair";
+    private static final AtomicBoolean FAILURE_REPORTED = new AtomicBoolean();
 
     public static final ResourceLocation ARROW_PROTECT = bm("arrow_protect");
     public static final ResourceLocation FALL_PROTECT = bm("fall_protect");
@@ -47,16 +45,6 @@ public final class BloodMagicLivingExperienceReflect {
     public static final ResourceLocation DOWNGRADE_SWIM_DECREASE = bm("downgrade/swim_decrease");
     public static final ResourceLocation DOWNGRADE_SPEED_DECREASE = bm("downgrade/speed_decrease");
 
-    private static volatile boolean initialized;
-    private static volatile boolean available;
-
-    private static Class<?> livingUpgradeClass;
-    private static MethodHandle upgradeMapGetter;
-    private static MethodHandle applyNewExperience;
-    private static MethodHandle applyExperienceToUpgradeCap;
-    private static MethodHandle pairGetLeft;
-    private static MethodHandle pairGetRight;
-
     private BloodMagicLivingExperienceReflect() {}
 
     public static boolean isLoaded() {
@@ -64,124 +52,61 @@ public final class BloodMagicLivingExperienceReflect {
     }
 
     public static ExperienceResult applyNewExperience(Player player, ResourceLocation upgradeId, double experience) {
-        if (player == null || upgradeId == null || experience <= 0 || !ensureReady()){
+        if (player == null || upgradeId == null || experience <= 0 || !isLoaded())
             return ExperienceResult.empty();
-        }
-
         try {
-            Object upgrade = getUpgrade(upgradeId);
-            if (upgrade == null){
-                return ExperienceResult.empty();
-            }
-
-            Object pair = applyNewExperience.invoke(player, upgrade, experience);
-            Object stats = pairGetLeft.invoke(pair);
-            Object didUpgrade = pairGetRight.invoke(pair);
-
-            return new ExperienceResult(stats, didUpgrade instanceof Boolean value && value, experience);
-        }
-        catch (Throwable ignored) {
+            return Loaded.applyNewExperience(player, upgradeId, experience);
+        } catch (RuntimeException exception) {
+            reportFailure(exception);
             return ExperienceResult.empty();
         }
     }
 
     public static CapResult applyExperienceToUpgradeCap(Player player, ResourceLocation upgradeId, double experience) {
-        if (player == null || upgradeId == null || experience <= 0 || !ensureReady()){
+        if (player == null || upgradeId == null || experience <= 0 || !isLoaded())
             return CapResult.empty();
-        }
-
         try {
-            Object upgrade = getUpgrade(upgradeId);
-            if (upgrade == null){
-                return CapResult.empty();
-            }
-
-            Object pair = applyExperienceToUpgradeCap.invoke(player, upgrade, experience);
-            Object stats = pairGetLeft.invoke(pair);
-            Object applied = pairGetRight.invoke(pair);
-
-            double appliedExperience = applied instanceof Number number ? number.doubleValue() : 0;
-            return new CapResult(stats, appliedExperience);
-        }
-        catch (Throwable ignored) {
+            return Loaded.applyExperienceToUpgradeCap(player, upgradeId, experience);
+        } catch (RuntimeException exception) {
+            reportFailure(exception);
             return CapResult.empty();
         }
     }
 
     public static Object getUpgrade(ResourceLocation upgradeId) {
-        if (upgradeId == null || !ensureReady()){
-            return null;
-        }
-
-        try {
-            Object raw = upgradeMapGetter.invoke();
-            if (!(raw instanceof Map<?, ?> map)){
-                return null;
-            }
-
-            Object upgrade = map.get(upgradeId);
-            return livingUpgradeClass.isInstance(upgrade) ? upgrade : null;
-        }
-        catch (Throwable ignored) {
-            return null;
-        }
+        return upgradeId != null && isLoaded() ? Loaded.getUpgrade(upgradeId) : null;
     }
 
-    private static boolean ensureReady() {
-        if (initialized){
-            return available;
-        }
-
-        synchronized(BloodMagicLivingExperienceReflect.class) {
-            if (initialized){
-                return available;
-            }
-
-            available = initHandles();
-            initialized = true;
-            return available;
-        }
-    }
-
-    private static boolean initHandles() {
-        if (!isLoaded()){
-            return false;
-        }
-
-        try {
-            MethodHandles.Lookup lookup = MethodHandles.publicLookup();
-
-            Class<?> livingUtilClass = Class.forName(LIVING_UTIL);
-            livingUpgradeClass = Class.forName(LIVING_UPGRADE);
-            Class<?> livingArmorRegistrarClass = Class.forName(LIVING_ARMOR_REGISTRAR);
-            Class<?> pairClass = Class.forName(APACHE_PAIR);
-
-            upgradeMapGetter = lookup.findStaticGetter(livingArmorRegistrarClass, "UPGRADE_MAP", Map.class);
-
-            applyNewExperience = lookup.findStatic(
-                    livingUtilClass,
-                    "applyNewExperience",
-                    MethodType.methodType(pairClass, Player.class, livingUpgradeClass, double.class)
-            );
-
-            applyExperienceToUpgradeCap = lookup.findStatic(
-                    livingUtilClass,
-                    "applyExperienceToUpgradeCap",
-                    MethodType.methodType(pairClass, Player.class, livingUpgradeClass, double.class)
-            );
-
-            pairGetLeft = lookup.findVirtual(pairClass, "getLeft", MethodType.methodType(Object.class));
-            pairGetRight = lookup.findVirtual(pairClass, "getRight", MethodType.methodType(Object.class));
-
-            return true;
-        }
-        catch (Throwable ignored) {
-            return false;
-        }
+    private static void reportFailure(RuntimeException exception) {
+        if (FAILURE_REPORTED.compareAndSet(false, true))
+            Dreamtinker.LOGGER.warn("Failed to apply Blood Magic living experience; later attempts remain enabled", exception);
     }
 
     private static ResourceLocation bm(String path) {
         return new ResourceLocation(BLOOD_MAGIC_MODID, path);
+    }
+
+    private static final class Loaded {
+        private static Object getUpgrade(ResourceLocation upgradeId) {
+            return LivingArmorRegistrar.UPGRADE_MAP.get(upgradeId);
+        }
+
+        private static ExperienceResult applyNewExperience(Player player, ResourceLocation upgradeId, double experience) {
+            LivingUpgrade upgrade = LivingArmorRegistrar.UPGRADE_MAP.get(upgradeId);
+            if (upgrade == null)
+                return ExperienceResult.empty();
+            var result = LivingUtil.applyNewExperience(player, upgrade, experience);
+            return new ExperienceResult(result.getLeft(), Boolean.TRUE.equals(result.getRight()), experience);
+        }
+
+        private static CapResult applyExperienceToUpgradeCap(Player player, ResourceLocation upgradeId, double experience) {
+            LivingUpgrade upgrade = LivingArmorRegistrar.UPGRADE_MAP.get(upgradeId);
+            if (upgrade == null)
+                return CapResult.empty();
+            var result = LivingUtil.applyExperienceToUpgradeCap(player, upgrade, experience);
+            Double applied = result.getRight();
+            return new CapResult(result.getLeft(), applied != null ? applied : 0);
+        }
     }
 
     public record ExperienceResult(Object stats, boolean didUpgrade, double attemptedExperience) {
