@@ -1,0 +1,42 @@
+{
+  "type": "ars_nouveau:glyph",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "ars_nouveau"
+            },
+            {
+              "type": "esotericism_tinker:mod_compact_config",
+              "modid": "ars_nouveau"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "count": 1,
+  "exp": 55,
+  "inputItems": [
+    {
+      "item": {
+        "item": "tconstruct:pattern"
+      }
+    },
+    {
+      "item": {
+        "item": "tconstruct:blank_sand_cast"
+      }
+    }
+  ],
+  "output": "dreamtinker:glyph_tinker"
+}

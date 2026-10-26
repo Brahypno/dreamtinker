@@ -1,0 +1,54 @@
+{
+  "type": "eidolon:worktable",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "eidolon"
+            },
+            {
+              "type": "esotericism_tinker:mod_compact_config",
+              "modid": "eidolon"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "key": {
+    "b": {
+      "item": "eidolon:imbued_bones"
+    },
+    "h": {
+      "item": "eidolon:holy_symbol"
+    },
+    "s": {
+      "item": "eidolon:silver_ingot"
+    },
+    "t": {
+      "item": "eidolon:tattered_cloth"
+    },
+    "w": {
+      "item": "tconstruct:helmet_plating_cast"
+    }
+  },
+  "pattern": [
+    "bsb",
+    "sws",
+    "   "
+  ],
+  "reagents": "ht t",
+  "result": {
+    "item": "tconstruct:helmet_plating",
+    "nbt": "{Material:\"dreamtinker:eidolon_paladin_bone\"}"
+  }
+}

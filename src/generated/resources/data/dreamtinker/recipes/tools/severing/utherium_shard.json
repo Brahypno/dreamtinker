@@ -1,0 +1,33 @@
+{
+  "type": "tconstruct:severing",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "undergarden"
+            },
+            {
+              "type": "esotericism_tinker:mod_compact_config",
+              "modid": "undergarden"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "entity": {
+    "tag": "undergarden:rotspawn"
+  },
+  "looting_bonus": 0.01,
+  "per_level_chance": 0.05,
+  "result": "undergarden:utheric_shard"
+}

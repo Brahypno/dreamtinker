@@ -1,0 +1,57 @@
+{
+  "type": "eidolon:worktable",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "eidolon"
+            },
+            {
+              "type": "esotericism_tinker:mod_compact_config",
+              "modid": "eidolon"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "key": {
+    "a": {
+      "item": "eidolon:enchanted_ash"
+    },
+    "b": {
+      "item": "eidolon:imbued_bones"
+    },
+    "h": {
+      "item": "eidolon:holy_symbol"
+    },
+    "l": {
+      "item": "eidolon:lesser_soul_gem"
+    },
+    "s": {
+      "item": "eidolon:silver_ingot"
+    },
+    "w": {
+      "item": "tconstruct:leggings_plating_cast"
+    }
+  },
+  "pattern": [
+    "bsb",
+    "sws",
+    "s s"
+  ],
+  "reagents": "hlal",
+  "result": {
+    "item": "tconstruct:leggings_plating",
+    "nbt": "{Material:\"dreamtinker:eidolon_paladin_bone\"}"
+  }
+}

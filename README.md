@@ -1,9 +1,11 @@
 # dreamtinker
 
 Additional optional integration APIs use `compileOnly` dependencies. `gradlew runData --offline` also loads the
-`datagenRuntimeOnly` mods and their required dependencies, so compatibility modifier providers stay
+`datagenRuntimeOnly` mods and their required dependencies, so compatibility data providers stay
 enabled and write their JSON to `src/generated/resources`. No dependency or provider uncommenting
 is needed for data generation. These extra mods are not added to ordinary client/server runs.
+Compatibility recipes, modifier definitions, and fluid effects are generated from Java providers;
+their JSON belongs in `src/generated/resources/data`, without copies in `src/main/resources/data`.
 
 ## check wiki for detailed infomation!
 

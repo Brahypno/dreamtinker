@@ -1,0 +1,36 @@
+{
+  "type": "mekanism:crushing",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "mekanism"
+            },
+            {
+              "type": "esotericism_tinker:mod_compact_config",
+              "modid": "mekanism"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "input": {
+    "ingredient": {
+      "item": "dreamtinker:transmutation_gold_ingot"
+    }
+  },
+  "output": {
+    "count": 1,
+    "item": "dreamtinker:transmutation_gold_dust"
+  }
+}

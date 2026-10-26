@@ -19,6 +19,10 @@ import org.brahypno.dreamtinker.common.DreamtinkerCommon;
 import org.brahypno.dreamtinker.common.DreamtinkerDamageTypes;
 import org.brahypno.dreamtinker.common.DreamtinkerEffects;
 import org.brahypno.dreamtinker.fluids.DreamtinkerFluids;
+import org.brahypno.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvider;
+import quek.undergarden.registry.UGEffects;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.FluidTags;
 import org.brahypno.dreamtinker.library.modifiers.fluid.block.AutoTagCycleBlockFluidEffect;
 import org.brahypno.dreamtinker.library.modifiers.fluid.entity.ConditionalDamageFluidEffect;
 import org.brahypno.dreamtinker.library.modifiers.fluid.entity.DespairScalingDamageFluidEffect;
@@ -365,23 +369,20 @@ public class DreamtinkerFluidEffectProvider extends AbstractFluidEffectProvider 
         addMetal(DreamtinkerFluids.molten_enderitium)
                 .addCondition(modLoaded("legendary_monsters"))
                 .magicDamage(3);
-        /*
-        compatFluid("undergarden", FluidTags.create(new ResourceLocation("undergarden", "virulent")), FluidValues.SIP)
-                .addCondition(modLoaded("undergarden"))
+        addFluid("virulent", FluidTags.create(new ResourceLocation("undergarden", "virulent")), FluidValues.SIP)
+                .addCondition(new ModLoadedCondition("undergarden"))
+                .addCondition(DreamtinkerMaterialDataProvider.modLoaded("undergarden"))
                 .addEntityEffects(FluidMobEffect.builder()
-                                                .effect(ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("undergarden", "virulence")), 10 * 20, 1)
+                                                .effect(UGEffects.VIRULENCE.get(), 10 * 20, 1)
                                                 .buildEntity(TimeAction.ADD))
-                .addBlockEffect(new MobEffectCloudFluidEffect(FluidMobEffect.builder().effect(ForgeRegistries.MOB_EFFECTS.getValue(
-                        new ResourceLocation("undergarden", "virulence")), 10 * 20, 3).buildCloud().effects()));
-        compatFluid("undergarden", DreamtinkerFluids.gooey_slime.getTag(), FluidValues.SIP)
-                .addCondition(modLoaded("undergarden"))
+                .addBlockEffect(new MobEffectCloudFluidEffect(FluidMobEffect.builder().effect(UGEffects.VIRULENCE.get(), 10 * 20, 3).buildCloud().effects()));
+        addFluid("gooey_slime", DreamtinkerFluids.gooey_slime.getTag(), FluidValues.SIP)
+                .addCondition(new ModLoadedCondition("undergarden"))
+                .addCondition(DreamtinkerMaterialDataProvider.modLoaded("undergarden"))
                 .addEntityEffects(FluidMobEffect.builder()
-                                                .effect(ForgeRegistries.MOB_EFFECTS.getValue(new ResourceLocation("undergarden", "gooey")), 10 * 20, 1)
+                                                .effect(UGEffects.GOOEY.get(), 10 * 20, 1)
                                                 .buildEntity(TimeAction.ADD))
-                .addBlockEffect(new MobEffectCloudFluidEffect(FluidMobEffect.builder().effect(ForgeRegistries.MOB_EFFECTS.getValue(
-                        new ResourceLocation("undergarden", "gooey")), 10 * 20, 3).buildCloud().effects()));
-
-         */
+                .addBlockEffect(new MobEffectCloudFluidEffect(FluidMobEffect.builder().effect(UGEffects.GOOEY.get(), 10 * 20, 3).buildCloud().effects()));
         compatFluid(DreamtinkerFluids.molten_jade.getTag(), FluidValues.GEM)
                 .addEntityEffects(FluidMobEffect.builder().effect(MobEffects.DAMAGE_RESISTANCE, 100, 1).buildEntity(TimeAction.ADD))
                 .addBlockEffect(new MobEffectCloudFluidEffect(

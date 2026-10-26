@@ -1,0 +1,37 @@
+{
+  "type": "tconstruct:casting_table",
+  "cast": {
+    "item": "dreamtinker:void_pearl"
+  },
+  "cast_consumed": true,
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "enigmaticlegacy"
+            },
+            {
+              "type": "esotericism_tinker:mod_compact_config",
+              "modid": "enigmaticlegacy"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "cooling_time": 31,
+  "fluid": {
+    "amount": 810,
+    "fluid": "dreamtinker:molten_ascending_antimony"
+  },
+  "result": "enigmaticlegacy:void_pearl"
+}

@@ -253,7 +253,8 @@ dependencies {
 
     implementation fg.deobf("com.hollingsworth.ars_nouveau:ars_nouveau-${minecraft_version}:${arts_version}")
 
-    //implementation fg.deobf("curse.maven:the-undergarden-379849:5182632")  comment this out so as to save speed, To improve again in 1.21
+    compileOnly fg.deobf("curse.maven:the-undergarden-379849:5182632")
+    datagenRuntimeOnly fg.deobf("curse.maven:the-undergarden-379849:5182632")
     //implementation fg.deobf("curse.maven:smartbrainlib-661293:5654964")
     //implementation fg.deobf("curse.maven:modonomicon-538392:7446143")
     //runtimeOnly fg.deobf("com.klikli_dev:occultism-${minecraft_version}:${occultism_version}") { transitive = false }

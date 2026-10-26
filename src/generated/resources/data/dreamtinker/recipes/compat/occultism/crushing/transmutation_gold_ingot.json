@@ -1,0 +1,35 @@
+{
+  "type": "occultism:crushing",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "occultism"
+            },
+            {
+              "type": "esotericism_tinker:mod_compact_config",
+              "modid": "occultism"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "crushing_time": 200,
+  "ingredient": {
+    "item": "dreamtinker:transmutation_gold_ingot"
+  },
+  "result": {
+    "count": 1,
+    "item": "dreamtinker:transmutation_gold_dust"
+  }
+}

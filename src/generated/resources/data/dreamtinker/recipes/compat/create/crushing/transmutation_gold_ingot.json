@@ -1,0 +1,39 @@
+{
+  "type": "create:crushing",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "create"
+            },
+            {
+              "type": "esotericism_tinker:mod_compact_config",
+              "modid": "create"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "dreamtinker:transmutation_gold_ingot"
+    }
+  ],
+  "processingTime": 100,
+  "results": [
+    {
+      "count": 1,
+      "item": "dreamtinker:transmutation_gold_dust"
+    }
+  ]
+}

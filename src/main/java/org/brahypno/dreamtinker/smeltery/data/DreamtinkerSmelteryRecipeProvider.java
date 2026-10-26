@@ -51,6 +51,7 @@ import slimeknights.tconstruct.library.recipe.fuel.MeltingFuelBuilder;
 import slimeknights.tconstruct.library.recipe.melting.IMeltingContainer;
 import slimeknights.tconstruct.library.recipe.melting.IMeltingRecipe;
 import slimeknights.tconstruct.library.recipe.melting.MeltingRecipeBuilder;
+import slimeknights.tconstruct.library.recipe.modifiers.severing.SeveringRecipeBuilder;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 import slimeknights.tconstruct.world.TinkerWorld;
 
@@ -561,6 +562,12 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
         String el = "enigmaticlegacy";
         Consumer<FinishedRecipe> wrapped = withCondition(consumer, DreamtinkerMaterialDataProvider.modLoaded(el));
         metalBySuffix(el, "etherium", DreamtinkerFluids.unstable_liquid_aether.get(), wrapped);
+        cast(DreamtinkerFluids.unstable_liquid_aether.get(), compatItem(el, "etherium_ingot"), FluidValues.INGOT, wrapped);
+        cast(DreamtinkerFluids.unstable_liquid_aether.get(), compatItem(el, "etherium_nugget"), FluidValues.NUGGET, wrapped);
+        ItemCastingRecipeBuilder.basinRecipe(compatItem(el, "etherium_block"))
+                                .setCoolingTime(IMeltingRecipe.getTemperature(DreamtinkerFluids.unstable_liquid_aether), FluidValues.METAL_BLOCK)
+                                .setFluid(DreamtinkerFluids.unstable_liquid_aether.get(), FluidValues.METAL_BLOCK)
+                                .save(wrapped, location(Casting_folder + "etherium_block/block"));
         MeltingRecipeBuilder.melting(itemNameIngredient(el, "etherium_ore"), DreamtinkerFluids.unstable_liquid_aether, FluidValues.INGOT, 0.5F)
                             .addByproduct(DreamtinkerFluids.reversed_shadow.result(30))
                             .setOre(IMeltingContainer.OreRateType.METAL)
@@ -594,22 +601,24 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
                 .common(armorBySuffix(el));
 
         meltByName(el, "evil_ingot", DreamtinkerFluids.molten_evil.get(), FluidValues.INGOT, wrapped);
+        cast(DreamtinkerFluids.molten_evil.get(), compatItem(el, "evil_ingot"), FluidValues.INGOT, wrapped);
 
         meltByName(el, "evil_essence", DreamtinkerFluids.molten_nefariousness.get(), FluidValues.GEM, wrapped);
+        cast(DreamtinkerFluids.molten_nefariousness.get(), compatItem(el, "evil_essence"), FluidValues.GEM, wrapped);
 
         meltByName(el, "soul_crystal", DreamtinkerFluids.liquid_pure_soul.get(), FluidValues.GEM, wrapped);
+        cast(DreamtinkerFluids.liquid_pure_soul.get(), compatItem(el, "soul_crystal"), FluidValues.GEM, wrapped);
         meltCast(DreamtinkerFluids.molten_soul_aether.get(), DreamtinkerCommon.soul_etherium.get(), FluidValues.INGOT, wrapped);
-        // Moved to src/main/resources so data generation does not directly require Enigmatic Legacy item instances.
-        //        ItemCastingRecipeBuilder.tableRecipe(ForgeRegistries.ITEMS.getValue(new ResourceLocation(el, "void_pearl")))
-        //                                .setCoolingTime(2000, 10)
-        //                                .setCast(DreamtinkerCommon.void_pearl.get(), true)
-        //                                .setFluid(FluidIngredient.of(new FluidStack(DreamtinkerFluids.molten_ascending_antimony.get(), FluidValues.METAL_BLOCK)))
-        //                                .save(wrapped, location(Casting_folder + "void_pearl/ascending"));
-        //        ItemCastingRecipeBuilder.tableRecipe(ForgeRegistries.ITEMS.getValue(new ResourceLocation(el, "ocean_stone")))
-        //                                .setCoolingTime(2000, 10)
-        //                                .setCast(Items.HEART_OF_THE_SEA, true)
-        //                                .setFluid(FluidIngredient.of(new FluidStack(DreamtinkerFluids.molten_ascending_antimony.get(), FluidValues.METAL_BLOCK)))
-        //                                .save(wrapped, location(Casting_folder + "ocean_stone/ascending"));
+        ItemCastingRecipeBuilder.tableRecipe(compatItem(el, "void_pearl"))
+                                .setCoolingTime(31)
+                                .setCast(DreamtinkerCommon.void_pearl.get(), true)
+                                .setFluid(DreamtinkerFluids.molten_ascending_antimony.get(), FluidValues.METAL_BLOCK)
+                                .save(wrapped, location(Casting_folder + "void_pearl/ascending"));
+        ItemCastingRecipeBuilder.tableRecipe(compatItem(el, "ocean_stone"))
+                                .setCoolingTime(31)
+                                .setCast(Items.HEART_OF_THE_SEA, true)
+                                .setFluid(DreamtinkerFluids.molten_ascending_antimony.get(), FluidValues.METAL_BLOCK)
+                                .save(wrapped, location(Casting_folder + "ocean_stone/ascending"));
 
     }
 
@@ -831,29 +840,27 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
         MeltingRecipeBuilder.melting(ItemNameIngredient.from(new ResourceLocation(undergarden, "goo_ball")),
                                      DreamtinkerFluids.gooey_slime, FluidValues.SLIMEBALL, 0.5f)
                             .save(wrapped, location(Melting_folder + "gooey_slime/ball"));
-        /*
         SeveringRecipeBuilder.severing(EntityIngredient.of(DreamtinkerTagKeys.EntityTypes.ROTSPAWN),
-                                       ForgeRegistries.ITEMS.getValue(new ResourceLocation(undergarden, "utheric_shard")))
-                             .save(wrapped, location(serving_folder + "utherium_shard"));
+                                       compatItem(undergarden, "utheric_shard"))
+                             .save(wrapped, location("tools/severing/utherium_shard"));
         EntityMeltingRecipeBuilder.melting(EntityIngredient.of(ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(undergarden, "forgotten_guardian"))),
                                            DreamtinkerFluids.molten_forgotten_metal.result(FluidValues.NUGGET))
                                   .save(wrapped, location(Entity_Melting_folder + "molten_forgotten_metal/entity"));
         SeveringRecipeBuilder.severing(EntityIngredient.of(ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(undergarden, "forgotten_guardian"))),
-                                       ForgeRegistries.ITEMS.getValue(new ResourceLocation(undergarden, "forgotten_nugget")))
-                             .save(wrapped, location(serving_folder + "forgetten_metal"));
+                                       compatItem(undergarden, "forgotten_nugget"))
+                             .save(wrapped, location("tools/severing/forgetten_metal"));
 
         SeveringRecipeBuilder.severing(EntityIngredient.of(ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(undergarden, "scintling"))),
-                                       ForgeRegistries.ITEMS.getValue(new ResourceLocation(undergarden, "goo_ball")))
-                             .save(wrapped, location(serving_folder + "goo_ball"));
-        ItemCastingRecipeBuilder.tableRecipe(ForgeRegistries.ITEMS.getValue(new ResourceLocation(undergarden, "goo_ball")))
+                                       compatItem(undergarden, "goo_ball"))
+                             .save(wrapped, location("tools/severing/goo_ball"));
+        ItemCastingRecipeBuilder.tableRecipe(compatItem(undergarden, "goo_ball"))
                                 .setCoolingTime(IMeltingRecipe.getTemperature(DreamtinkerFluids.gooey_slime), FluidValues.SLIMEBALL)
                                 .setFluid(FluidIngredient.of(new FluidStack(DreamtinkerFluids.gooey_slime.get(), FluidValues.SLIMEBALL)))
                                 .save(wrapped, location(Casting_folder + "gooey_slime"));
-        ItemCastingRecipeBuilder.tableRecipe(ForgeRegistries.ITEMS.getValue(new ResourceLocation(undergarden, "cloggrum_bars")))
+        ItemCastingRecipeBuilder.tableRecipe(compatItem(undergarden, "cloggrum_bars"))
                                 .setCoolingTime(IMeltingRecipe.getTemperature(DreamtinkerFluids.molten_cloggrum), FluidValues.NUGGET * 3)
                                 .setFluid(FluidIngredient.of(new FluidStack(DreamtinkerFluids.molten_cloggrum.get(), FluidValues.NUGGET * 3)))
                                 .save(wrapped, location(Casting_folder + "cloggrum/bars"));
-         */
     }
 
     private void addCompatOCMeltingCastingRecipes(Consumer<FinishedRecipe> consumer) {
@@ -953,6 +960,14 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
                             .save(consumer, location(
                                     Melting_folder + Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(ingredient.asItem())).getPath() + "/" + key2));
         cast(fluid, ingredient, amount, consumer);
+    }
+
+    private static Item compatItem(String modId, String path) {
+        ResourceLocation id = new ResourceLocation(modId, path);
+        Item item = ForgeRegistries.ITEMS.getValue(id);
+        if (item == null || item == Items.AIR)
+            throw new IllegalStateException("Missing datagen item: " + id);
+        return item;
     }
 
     private void meltCastBlock(Fluid fluid, ItemLike ingredient, int amount, Consumer<FinishedRecipe> consumer) {

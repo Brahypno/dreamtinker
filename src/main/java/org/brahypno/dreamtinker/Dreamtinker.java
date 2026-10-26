@@ -44,6 +44,7 @@ import org.brahypno.dreamtinker.common.capabilities.compat.malum.addConcentrated
 import org.brahypno.dreamtinker.common.data.AdvancementsProvider;
 import org.brahypno.dreamtinker.common.data.DTCurio;
 import org.brahypno.dreamtinker.common.data.DreamtinkerRecipeProvider;
+import org.brahypno.dreamtinker.common.data.DreamtinkerCompatRecipeProvider;
 import org.brahypno.dreamtinker.common.data.loot.DreamtinkerGlobalLootModifierProvider;
 import org.brahypno.dreamtinker.common.data.loot.DreamtinkerLootTableProvider;
 import org.brahypno.dreamtinker.common.data.loot.LootTableInjectionProvider;
@@ -210,6 +211,7 @@ public class Dreamtinker {
 
 
         generator.addProvider(event.includeClient(), new DreamtinkerRecipeProvider(output));
+        generator.addProvider(event.includeServer(), new DreamtinkerCompatRecipeProvider(output));
 
         generator.addProvider(event.includeServer(), new DreamtinkerLootTableProvider(output));
         DatapackBuiltinEntriesProvider provider = new DTDataPackProvider(output, lookupProvider);

@@ -1,0 +1,36 @@
+{
+  "type": "immersiveengineering:crusher",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "immersiveengineering"
+            },
+            {
+              "type": "esotericism_tinker:mod_compact_config",
+              "modid": "immersiveengineering"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "energy": 6000,
+  "input": {
+    "item": "dreamtinker:transmutation_gold_ingot"
+  },
+  "result": {
+    "count": 1,
+    "item": "dreamtinker:transmutation_gold_dust"
+  },
+  "secondaries": []
+}

@@ -1,0 +1,33 @@
+{
+  "type": "tconstruct:casting_table",
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "undergarden"
+            },
+            {
+              "type": "esotericism_tinker:mod_compact_config",
+              "modid": "undergarden"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "cooling_time": 31,
+  "fluid": {
+    "amount": 30,
+    "fluid": "dreamtinker:molten_cloggrum"
+  },
+  "result": "undergarden:cloggrum_bars"
+}
