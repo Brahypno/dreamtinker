@@ -1,6 +1,12 @@
 package org.brahypno.dreamtinker.tools.data;
 
-// import dev.obscuria.aquamirae.registry.AquamiraeAttributes; // Datagen-only hard reference.
+import com.aizistral.enigmaticlegacy.api.materials.EnigmaticMaterials;
+import com.aizistral.enigmaticlegacy.registries.EnigmaticEnchantments;
+import com.Polarice3.Goety.common.enchantments.ModEnchantments;
+import dev.obscuria.aquamirae.registry.AquamiraeAttributes;
+import dev.obscuria.aquamirae.registry.AquamiraeEffects;
+import net.mcreator.borninchaosv.init.BornInChaosV1ModMobEffects;
+import net.miauczel.legendary_monsters.effect.ModEffects;
 
 import com.hollingsworth.arsnouveau.api.perk.PerkAttributes;
 import com.hollingsworth.arsnouveau.setup.registry.ModPotions;
@@ -176,26 +182,25 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                                       .customVariable("curse_multiplier", new EntityConditionalStatVariable(CURSE_MULTIPLIER, 1))
                                                       .multiply().build(), ModifierHooks.CONDITIONAL_STAT);
         }
-        // Moved to src/main/resources so data generation does not directly require Enigmatic Legacy classes.
-        //        buildModifier(Ids.el_by_pass_worthy, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
-        //                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
-        //        buildModifier(Ids.el_nemesis_curse, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
-        //                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-        //                .addModule(EnchantmentModule.builder(EnigmaticEnchantments.NEMESIS).level(1).constant());
-        //        buildModifier(Ids.el_sorrow, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
-        //                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-        //                .addModule(EnchantmentModule.builder(EnigmaticEnchantments.SORROW).level(1).constant());
-        //        buildModifier(Ids.el_eternal_binding, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
-        //                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-        //                .addModule(EnchantmentModule.builder(EnigmaticEnchantments.ETERNAL_BINDING).level(1).constant());
-        //        buildModifier(Ids.el_etherium, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
-        //                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
-        //                .addModule(SetStatModule.set(ToolStats.HARVEST_TIER).value(EnigmaticMaterials.ETHERIUM));
-        //
-        //        buildModifier(Ids.blighted_sigil, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
-        //                .showInTooltips(ShowInTooltips.BONUS_SLOT)
-        //                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
-        //                .addModules(ModifierSlotModule.slot(EsotericismSlotType.DELUSION).eachLevel(1));
+        buildModifier(Ids.el_by_pass_worthy, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS);
+        buildModifier(Ids.el_nemesis_curse, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(EnchantmentModule.builder(EnigmaticEnchantments.NEMESIS).level(1).constant());
+        buildModifier(Ids.el_sorrow, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(EnchantmentModule.builder(EnigmaticEnchantments.SORROW).level(1).constant());
+        buildModifier(Ids.el_eternal_binding, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModule(EnchantmentModule.builder(EnigmaticEnchantments.ETERNAL_BINDING).level(1).constant());
+        buildModifier(Ids.el_etherium, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(SetStatModule.set(ToolStats.HARVEST_TIER).value(EnigmaticMaterials.ETHERIUM));
+
+        buildModifier(Ids.blighted_sigil, DreamtinkerMaterialDataProvider.modLoaded("enigmaticlegacy"))
+                .showInTooltips(ShowInTooltips.BONUS_SLOT)
+                .levelDisplay(ModifierLevelDisplay.SINGLE_LEVEL)
+                .addModules(ModifierSlotModule.slot(EsotericismSlotType.DELUSION).eachLevel(1));
     }
 
     private static final float UNDERPLATE_MAX = 10.0f;
@@ -265,7 +270,6 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                 .addModule(StatBoostModule.multiplyBase(ToolStats.MINING_SPEED).flat(-0.25f))
                 .addModule(ModifierRequirementsModule.builder().requireModifier(ModifierIds.netherite, 1)
                                                      .modifierKey(Ids.bic_dark_armor_plate).build());
-/*
         buildModifier(Ids.bic_frostbitten, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"))
                 .addModule(MobEffectModule.builder(BornInChaosV1ModMobEffects.BONE_CHILLING.get())
                                           .level(RandomLevelingValue.perLevel(0, 2))
@@ -358,7 +362,6 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                           .time(RandomLevelingValue.perLevel(20 * 2, 10))
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
-*/
         buildModifier(Ids.naughty_chaos, DreamtinkerMaterialDataProvider.modLoaded("born_in_chaos_v1"))
                 .showInTooltips(ShowInTooltips.BONUS_SLOT)
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
@@ -566,15 +569,14 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                           .chance(LevelingValue.eachLevel(0.30f))
                                           .toolTag(TinkerTags.Items.SHIELDS)
                                           .buildCounter(), ModifierHooks.ON_ATTACKED);
-        // Datagen-only hard reference; generated JSON lives in src/main/resources.
-        // buildModifier(Ids.frost_seal, DreamtinkerMaterialDataProvider.modLoaded("legendary_monsters"))
-        //         .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
-        //         .addModule(MobEffectModule.builder(ModEffects.FREEZE.get())
-        //                                   .level(RandomLevelingValue.flat(1))
-        //                                   .time(RandomLevelingValue.flat(60))
-        //                                   .chance(LevelingValue.eachLevel(0.30f))
-        //                                   .toolTag(TinkerTags.Items.SHIELDS)
-        //                                   .build(), ModifierHooks.ON_ATTACKED);
+        buildModifier(Ids.frost_seal, DreamtinkerMaterialDataProvider.modLoaded("legendary_monsters"))
+                .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
+                .addModule(MobEffectModule.builder(ModEffects.FREEZE.get())
+                                          .level(RandomLevelingValue.flat(1))
+                                          .time(RandomLevelingValue.flat(60))
+                                          .chance(LevelingValue.eachLevel(0.30f))
+                                          .toolTag(TinkerTags.Items.SHIELDS)
+                                          .build(), ModifierHooks.ON_ATTACKED);
         // slime suit framework part trait: a dinosaur bone ribcage, whose shockwave throws attackers off
         buildModifier(Ids.rex_ribs, DreamtinkerMaterialDataProvider.modLoaded("legendary_monsters"))
                 .addModule(KnockbackCounterModule.builder()
@@ -1476,9 +1478,6 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
         // slime suit framework part traits live with their compatibility section below, each conditioned on its mod.
 
         addAquamiraeModifiers();
-        // addAquamiraeFinAttributesForDatagen(); // Datagen-only hard reference.
-        // addAquamiraeSharpBonesFuryForDatagen(); // Datagen-only hard reference.
-        // addAquamiraeModifiers(); // Hard references are only enabled temporarily for datagen.
         addELModifiers();
         addMalumModifiers();
         addEidolonModifiers();
@@ -1557,7 +1556,6 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                                  .customVariable("full_health_multiplier").multiply()
                                                  .constant(1.0f).add().variable(VALUE).multiply().build());
 
-    /*
         buildModifier(Ids.aquamirae_fin_fury, DreamtinkerMaterialDataProvider.modLoaded("aquamirae"))
                 .levelDisplay(ModifierLevelDisplay.NO_LEVELS)
                 .addModule(AttributeModule.builder(AquamiraeAttributes.DEPTHS_FURY, AttributeModifier.Operation.MULTIPLY_BASE)
@@ -1596,8 +1594,6 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
                                           .time(RandomLevelingValue.flat(120))
                                           .build(),
                            ModifierHooks.MELEE_HIT, ModifierHooks.PROJECTILE_HIT, ModifierHooks.MONSTER_MELEE_HIT);
-    }
-    */
     }
 
     private void addFAAModifiers() {
@@ -1654,9 +1650,8 @@ public class DreamtinkerModifierProvider extends AbstractModifierProvider implem
     }
 
     private void addGoetyModifiers() {
-        // Moved to src/main/resources; uncomment only when regenerating this hard-reference modifier.
-        // buildModifier(Ids.goety_soul_eater, DreamtinkerMaterialDataProvider.modLoaded("goety"))
-        //         .addModule(EnchantmentModule.builder(ModEnchantments.SOUL_EATER.get()).level(LevelingInt.eachLevel(1)).constant());
+        buildModifier(Ids.goety_soul_eater, DreamtinkerMaterialDataProvider.modLoaded("goety"))
+                .addModule(EnchantmentModule.builder(ModEnchantments.SOUL_EATER.get()).level(LevelingInt.eachLevel(1)).constant());
         // Attack and repair keep their Java implementations; same-ID JSON definitions do not add behavior to them.
         buildModifier(Ids.goety_dark_metal_defense, DreamtinkerMaterialDataProvider.modLoaded("goety"))
                 .addModule(GoetyDarkMetalHealingModule.INSTANCE)

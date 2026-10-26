@@ -9,6 +9,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.fml.ModList;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -22,15 +23,12 @@ import slimeknights.tconstruct.library.tools.nbt.IToolStackView;
 import slimeknights.tconstruct.library.tools.stat.ToolStats;
 import slimeknights.tconstruct.tools.data.ModifierIds;
 
-import java.lang.reflect.Method;
 import java.util.EnumMap;
 import java.util.Map;
 
 public class annihilatorArmorPower extends NoLevelsModifier implements InventoryTickModifierHook {
     private static final Map<EquipmentSlot, ResourceLocation> IDS = new EnumMap<>(EquipmentSlot.class);
     private static final Map<EquipmentSlot, Item> ITEMS = new EnumMap<>(EquipmentSlot.class);
-    private static Method inventoryTick;
-    private static Method onArmorTick;
     private static boolean resolved;
 
     static {
@@ -45,14 +43,9 @@ public class annihilatorArmorPower extends NoLevelsModifier implements Inventory
         if (item == null)
             return;
 
-        try {
-            if (inventoryTick != null)
-                inventoryTick.invoke(item, stack, level, entity, slotId, selected);
-
-            if (slot == EquipmentSlot.CHEST && onArmorTick != null && entity instanceof Player player)
-                onArmorTick.invoke(item, stack, level, player);
-        }
-        catch (Throwable ignored) {}
+        item.inventoryTick(stack, level, entity, slotId, selected);
+        if (slot == EquipmentSlot.CHEST && entity instanceof Player player)
+            item.onArmorTick(stack, level, player);
     }
 
     private static void resolve() {
@@ -60,25 +53,12 @@ public class annihilatorArmorPower extends NoLevelsModifier implements Inventory
             return;
         resolved = true;
 
-        try {
-            Class<?> clazz = Class.forName("net.miauczel.legendary_monsters.item.custom.customArmor.armorItem.AnnihilatorArmorItem");
-
-            inventoryTick = clazz.getMethod("inventoryTick", ItemStack.class, Level.class, Entity.class, int.class, boolean.class);
-            inventoryTick.setAccessible(true);
-
-            onArmorTick = clazz.getMethod("onArmorTick", ItemStack.class, Level.class, Player.class);
-            onArmorTick.setAccessible(true);
-
-            for (Map.Entry<EquipmentSlot, ResourceLocation> entry : IDS.entrySet()) {
-                Item item = ForgeRegistries.ITEMS.getValue(entry.getValue());
-                if (item != null && clazz.isInstance(item))
-                    ITEMS.put(entry.getKey(), item);
-            }
-        }
-        catch (Throwable ignored) {
-            ITEMS.clear();
-            inventoryTick = null;
-            onArmorTick = null;
+        if (!ModList.get().isLoaded("legendary_monsters"))
+            return;
+        for (Map.Entry<EquipmentSlot, ResourceLocation> entry : IDS.entrySet()) {
+            Item item = ForgeRegistries.ITEMS.getValue(entry.getValue());
+            if (item != null)
+                ITEMS.put(entry.getKey(), item);
         }
     }
 

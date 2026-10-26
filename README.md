@@ -1,5 +1,10 @@
 # dreamtinker
 
+Additional optional integration APIs use `compileOnly` dependencies. `gradlew runData --offline` also loads the
+`datagenRuntimeOnly` mods and their required dependencies, so compatibility modifier providers stay
+enabled and write their JSON to `src/generated/resources`. No dependency or provider uncommenting
+is needed for data generation. These extra mods are not added to ordinary client/server runs.
+
 ## check wiki for detailed infomation!
 
 ## This mod aims to add dream thing, that is unreal, or even troll
