@@ -24,7 +24,10 @@
   "level_display": "tconstruct:default",
   "modules": [
     {
-      "type": "tconstruct:mob_effect",
+      "type": "tconstruct:weapon_mob_effect",
+      "chance": {
+        "each_level": 0.25
+      },
       "effect": "aquamirae:armor_shatter",
       "hooks": [
         "tconstruct:melee_hit",
@@ -40,7 +43,10 @@
       }
     },
     {
-      "type": "tconstruct:mob_effect",
+      "type": "tconstruct:weapon_mob_effect",
+      "chance": {
+        "each_level": 0.25
+      },
       "effect": "aquamirae:health_shatter",
       "hooks": [
         "tconstruct:melee_hit",

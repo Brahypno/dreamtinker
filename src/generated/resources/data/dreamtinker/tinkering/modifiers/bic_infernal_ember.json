@@ -24,7 +24,10 @@
   "level_display": "tconstruct:default",
   "modules": [
     {
-      "type": "tconstruct:mob_effect",
+      "type": "tconstruct:weapon_mob_effect",
+      "chance": {
+        "each_level": 0.25
+      },
       "effect": "born_in_chaos_v1:infernal_flame",
       "hooks": [
         "tconstruct:melee_hit",

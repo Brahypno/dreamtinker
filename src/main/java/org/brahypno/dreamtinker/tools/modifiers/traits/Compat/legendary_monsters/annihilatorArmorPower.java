@@ -8,8 +8,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.tconstruct.library.modifiers.ModifierEntry;
@@ -36,6 +36,7 @@ public class annihilatorArmorPower extends NoLevelsModifier implements Inventory
         IDS.put(EquipmentSlot.FEET, new ResourceLocation("legendary_monsters", "annihilator_boots"));
     }
 
+    @SuppressWarnings({"removal"})
     public static void tickAnnihilatorArmorLike(EquipmentSlot slot, ItemStack stack, Level level, Entity entity, int slotId, boolean selected) {
         resolve();
 

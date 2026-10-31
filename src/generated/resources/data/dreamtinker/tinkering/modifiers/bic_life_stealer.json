@@ -24,7 +24,10 @@
   "level_display": "tconstruct:no_levels",
   "modules": [
     {
-      "type": "tconstruct:mob_effect",
+      "type": "tconstruct:weapon_mob_effect",
+      "chance": {
+        "each_level": 0.25
+      },
       "effect": "born_in_chaos_v1:lifesteal",
       "hooks": [
         "tconstruct:melee_hit",
@@ -40,7 +43,10 @@
       }
     },
     {
-      "type": "tconstruct:mob_effect",
+      "type": "tconstruct:weapon_mob_effect",
+      "chance": {
+        "each_level": 0.25
+      },
       "effect": "born_in_chaos_v1:stun",
       "hooks": [
         "tconstruct:melee_hit",
@@ -56,7 +62,10 @@
       }
     },
     {
-      "type": "tconstruct:mob_effect",
+      "type": "tconstruct:weapon_mob_effect",
+      "chance": {
+        "each_level": 0.25
+      },
       "effect": "minecraft:wither",
       "hooks": [
         "tconstruct:melee_hit",
