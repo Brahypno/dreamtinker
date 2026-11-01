@@ -12,6 +12,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.crafting.CompoundIngredient;
 import org.brahypno.dreamtinker.Dreamtinker;
 import org.brahypno.dreamtinker.common.DreamtinkerCommon;
+import org.brahypno.dreamtinker.common.DreamtinkerTagKeys;
 import org.brahypno.dreamtinker.library.compat.ars_nouveau.NovaRegistry;
 import org.brahypno.dreamtinker.smeltery.DreamTinkerSmeltery;
 import org.brahypno.dreamtinker.tools.DreamtinkerToolParts;
@@ -46,6 +47,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
+
+import static org.brahypno.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvider.tagFilled;
 
 public class DreamtinkerPartToolBuildingRecipeProvider implements IToolRecipeHelper {
 
@@ -123,6 +126,7 @@ public class DreamtinkerPartToolBuildingRecipeProvider implements IToolRecipeHel
         armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.AbjurationEssence);
         armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.EarthEssence);
 
+        wrapped = withCondition(consumer, tagFilled(DreamtinkerTagKeys.Items.dragonScale));
         armorPlatingBuilder(wrapped, DreamtinkerMaterialIds.dragon_scale);
     }
 

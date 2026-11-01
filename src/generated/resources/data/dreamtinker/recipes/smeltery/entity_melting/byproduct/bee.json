@@ -1,0 +1,18 @@
+{
+  "type": "esotericism_tinker:byproduct_entity_melting",
+  "byproducts": [
+    {
+      "amount": 5,
+      "fluid": "tconstruct:venom"
+    }
+  ],
+  "damage": 2,
+  "entity": {
+    "tag": "forge:bees"
+  },
+  "priority": 0,
+  "result": {
+    "amount": 25,
+    "tag": "forge:honey"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "type": "esotericism_tinker:byproduct_entity_melting",
+  "byproducts": [
+    {
+      "amount": 5,
+      "fluid": "dreamtinker:molten_void"
+    }
+  ],
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "legendary_monsters"
+            },
+            {
+              "type": "esotericism_tinker:mod_compact_config",
+              "modid": "legendary_monsters"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "damage": 2,
+  "entity": {
+    "type": "legendary_monsters:endersent"
+  },
+  "priority": 0,
+  "result": {
+    "amount": 25,
+    "tag": "forge:ender"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "type": "esotericism_tinker:byproduct_entity_melting",
+  "byproducts": [
+    {
+      "amount": 5,
+      "tag": "forge:ender"
+    }
+  ],
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "legendary_monsters"
+            },
+            {
+              "type": "esotericism_tinker:mod_compact_config",
+              "modid": "legendary_monsters"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "damage": 3,
+  "entity": {
+    "type": "legendary_monsters:shulker_mimic"
+  },
+  "priority": 0,
+  "result": {
+    "amount": 50,
+    "nbt": {
+      "Potion": "tconstruct:_levitation"
+    },
+    "tag": "forge:potion"
+  }
+}

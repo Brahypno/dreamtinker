@@ -1,0 +1,21 @@
+{
+  "type": "esotericism_tinker:byproduct_entity_melting",
+  "byproducts": [
+    {
+      "amount": 10,
+      "fluid": "tconstruct:meat_soup"
+    }
+  ],
+  "damage": 4,
+  "entity": {
+    "type": "minecraft:ravager"
+  },
+  "priority": 0,
+  "result": {
+    "amount": 50,
+    "nbt": {
+      "Potion": "minecraft:strength"
+    },
+    "tag": "forge:potion"
+  }
+}

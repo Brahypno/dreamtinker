@@ -1,0 +1,18 @@
+{
+  "type": "esotericism_tinker:byproduct_entity_melting",
+  "byproducts": [
+    {
+      "amount": 5,
+      "tag": "forge:molten_steel"
+    }
+  ],
+  "damage": 2,
+  "entity": {
+    "type": "tconstruct:sky_slime"
+  },
+  "priority": 0,
+  "result": {
+    "amount": 25,
+    "fluid": "tconstruct:sky_slime"
+  }
+}

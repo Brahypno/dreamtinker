@@ -1,0 +1,18 @@
+{
+  "type": "esotericism_tinker:byproduct_entity_melting",
+  "byproducts": [
+    {
+      "amount": 5,
+      "fluid": "dreamtinker:molten_void"
+    }
+  ],
+  "damage": 2,
+  "entity": {
+    "type": "minecraft:enderman"
+  },
+  "priority": 0,
+  "result": {
+    "amount": 25,
+    "tag": "forge:ender"
+  }
+}

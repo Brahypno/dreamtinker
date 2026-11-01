@@ -1,0 +1,42 @@
+{
+  "type": "esotericism_tinker:byproduct_entity_melting",
+  "byproducts": [
+    {
+      "amount": 5,
+      "fluid": "dreamtinker:molten_cloggrum"
+    }
+  ],
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "tconstruct:config",
+          "prop": "force_integration_materials"
+        },
+        {
+          "type": "forge:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "undergarden"
+            },
+            {
+              "type": "esotericism_tinker:mod_compact_config",
+              "modid": "undergarden"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "damage": 2,
+  "entity": {
+    "type": "undergarden:forgotten_guardian"
+  },
+  "priority": 0,
+  "result": {
+    "amount": 10,
+    "fluid": "dreamtinker:molten_forgotten_metal"
+  }
+}

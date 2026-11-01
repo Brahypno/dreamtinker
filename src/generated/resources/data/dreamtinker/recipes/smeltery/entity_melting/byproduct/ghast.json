@@ -1,0 +1,21 @@
+{
+  "type": "esotericism_tinker:byproduct_entity_melting",
+  "byproducts": [
+    {
+      "amount": 10,
+      "fluid": "dreamtinker:liquid_trist"
+    }
+  ],
+  "damage": 2,
+  "entity": {
+    "tag": "forge:ghasts"
+  },
+  "priority": 0,
+  "result": {
+    "amount": 50,
+    "nbt": {
+      "Potion": "minecraft:regeneration"
+    },
+    "tag": "forge:potion"
+  }
+}
