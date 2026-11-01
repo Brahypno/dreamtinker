@@ -1,0 +1,12 @@
+{
+  "type": "esotericism_tinker:transmute_v2",
+  "ingredient": {
+    "item": "dreamtinker:metallivorous_stibium_lupus"
+  },
+  "result": {
+    "amount": 80,
+    "fluid": "dreamtinker:molten_ascending_antimony"
+  },
+  "temperature": 3300,
+  "time": 241
+}

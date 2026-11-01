@@ -1,17 +1,10 @@
 {
-  "type": "tconstruct:ore_melting",
-  "byproducts": [
-    {
-      "amount": 30,
-      "fluid": "dreamtinker:molten_ascending_antimony"
-    }
-  ],
+  "type": "tconstruct:melting",
   "ingredient": {
     "item": "dreamtinker:metallivorous_stibium_lupus"
   },
-  "rate": "gem",
   "result": {
-    "amount": 45,
+    "amount": 90,
     "fluid": "dreamtinker:molten_lupi_antimony"
   },
   "temperature": 3300,

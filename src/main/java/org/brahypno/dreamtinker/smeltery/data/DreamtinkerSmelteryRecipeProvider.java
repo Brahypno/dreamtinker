@@ -27,6 +27,7 @@ import org.brahypno.dreamtinker.fluids.DreamtinkerFluids;
 import org.brahypno.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvider;
 import org.brahypno.esotericismtinker.common.EsotericismTinkerCommon;
 import org.brahypno.esotericismtinker.fluids.EsotericismTinkerFluids;
+import org.brahypno.esotericismtinker.smeltery.data.TransmuteMeltingRecipeBuilder;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.recipe.condition.TagFilledCondition;
 import slimeknights.mantle.recipe.data.ItemNameIngredient;
@@ -126,17 +127,19 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
 
 
         MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.metallivorous_stibium_lupus.get()),
-                                     DreamtinkerFluids.molten_lupi_antimony, FluidValues.INGOT / 2, 2.0f)
-                            .addByproduct(DreamtinkerFluids.molten_ascending_antimony.result(FluidValues.NUGGET * 3))
-                            .setOre(IMeltingContainer.OreRateType.GEM)
+                                     DreamtinkerFluids.molten_lupi_antimony, FluidValues.INGOT, 2.0f)
                             .save(consumer, location(Melting_folder + "foundry/metallivorous_stibium_lupus/ingot"));
+        TransmuteMeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.metallivorous_stibium_lupus.get()),
+                                              DreamtinkerFluids.molten_ascending_antimony.result(FluidValues.NUGGET * 8), 3300, 241)
+                                     .save(consumer, location(Melting_folder + "transmute/metallivorous_stibium_lupus/ingot"));
         cast(DreamtinkerFluids.molten_lupi_antimony.get(), DreamtinkerCommon.metallivorous_stibium_lupus.get(), FluidValues.INGOT, consumer);
 
         MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.metallivorous_stibium_lupus_block.get()),
-                                     DreamtinkerFluids.molten_lupi_antimony, FluidValues.METAL_BLOCK / 2, 2.0f)
-                            .addByproduct(DreamtinkerFluids.molten_ascending_antimony.result(FluidValues.INGOT * 3))
-                            .setOre(IMeltingContainer.OreRateType.GEM)
+                                     DreamtinkerFluids.molten_lupi_antimony, FluidValues.METAL_BLOCK, 2.0f)
                             .save(consumer, location(Melting_folder + "foundry/metallivorous_stibium_lupus/block"));
+        TransmuteMeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.metallivorous_stibium_lupus_block.get()),
+                                              DreamtinkerFluids.molten_ascending_antimony.result(FluidValues.INGOT * 8), 3300, 241)
+                                     .save(consumer, location(Melting_folder + "transmute/metallivorous_stibium_lupus/block"));
         ItemCastingRecipeBuilder.basinRecipe(DreamtinkerCommon.metallivorous_stibium_lupus_block.get())
                                 .setFluidAndTime(DreamtinkerFluids.molten_lupi_antimony, FluidValues.METAL_BLOCK)
                                 .save(consumer, location(Casting_folder + "metallivorous_stibium_lupus/block"));
