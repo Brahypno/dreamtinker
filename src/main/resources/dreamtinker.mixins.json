@@ -12,6 +12,7 @@
     "GeneralCompat.ExtraSCYTHEModifier"
   ],
   "client": [
+    "client.NarcissusHandRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

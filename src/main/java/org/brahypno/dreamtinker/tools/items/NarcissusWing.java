@@ -5,14 +5,18 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.brahypno.dreamtinker.Dreamtinker;
+import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
 import slimeknights.mantle.client.SafeClientAccess;
+import slimeknights.tconstruct.library.modifiers.hook.interaction.GeneralInteractionModifierHook;
 import slimeknights.tconstruct.library.tools.definition.ToolDefinition;
 import slimeknights.tconstruct.library.tools.item.ModifiableItem;
+import slimeknights.tconstruct.library.tools.nbt.ToolStack;
 
 import java.util.List;
 import java.util.UUID;
@@ -23,6 +27,19 @@ public class NarcissusWing extends ModifiableItem {
 
     public NarcissusWing(Properties properties, ToolDefinition toolDefinition) {
         super(properties, toolDefinition);
+    }
+
+    /** Uses MemoryBase's actual stored drawtime and charge curve. Returns -1 when this stack is not charging. */
+    public static float getDrawProgress(LivingEntity entity, ItemStack stack, float partialTick) {
+        if (!entity.isAlive() || !entity.isUsingItem() || !(stack.getItem() instanceof NarcissusWing)
+            || !ItemStack.isSameItemSameTags(entity.getUseItem(), stack))
+            return -1;
+        ToolStack tool = ToolStack.from(stack);
+        if (tool.isBroken() || tool.getModifierLevel(DreamtinkerModifiers.flaming_memory.getId()) > 0
+            || !GeneralInteractionModifierHook.getActiveModifier(tool).getId().equals(DreamtinkerModifiers.memory_base.getId())
+            || tool.getPersistentData().getInt(GeneralInteractionModifierHook.KEY_DRAWTIME) <= 0)
+            return -1;
+        return GeneralInteractionModifierHook.getToolCharge(tool, entity.getTicksUsingItem() + partialTick);
     }
 
     @Override

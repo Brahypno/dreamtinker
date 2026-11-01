@@ -37,5 +37,8 @@ public class DNetwork {
         CHANNEL.registerMessage(packetId++, S2CDinosaurShockwavePacket.class, S2CDinosaurShockwavePacket::encode,
                                 S2CDinosaurShockwavePacket::decode, S2CDinosaurShockwavePacket::handle,
                                 Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        CHANNEL.registerMessage(packetId++, S2CNarcissusSigilShot.class, S2CNarcissusSigilShot::encode,
+                                S2CNarcissusSigilShot::decode, S2CNarcissusSigilShot::handle,
+                                Optional.of(NetworkDirection.PLAY_TO_CLIENT));
     }
 }

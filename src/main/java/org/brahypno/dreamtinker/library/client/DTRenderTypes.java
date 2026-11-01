@@ -10,11 +10,21 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public final class DTRenderTypes extends RenderStateShard {
+    // POSITION_COLOR is unlit: both layers remain readable without world lighting or a texture.
+    public static final RenderType NARCISSUS_SIGIL_CORE = sigil("dreamtinker_narcissus_sigil_core", false);
+    public static final RenderType NARCISSUS_SIGIL_GLOW = sigil("dreamtinker_narcissus_sigil_glow", true);
     private static final Map<ResourceLocation, RenderType> ADDITIVE_TRAILS = new ConcurrentHashMap<>();
     private static final Map<ResourceLocation, RenderType> ADDITIVE_TRAIL_STRIPS = new ConcurrentHashMap<>();
 
     private DTRenderTypes() {
         super("dreamtinker_render_types", null, null);
+    }
+
+    private static RenderType sigil(String name, boolean glow) {
+        return RenderType.create(name, DefaultVertexFormat.POSITION_COLOR, VertexFormat.Mode.QUADS, 4096, false, true,
+                                 RenderType.CompositeState.builder().setShaderState(POSITION_COLOR_SHADER)
+                                                          .setTransparencyState(glow ? ADDITIVE_TRANSPARENCY : TRANSLUCENT_TRANSPARENCY)
+                                                          .setCullState(NO_CULL).setWriteMaskState(COLOR_WRITE).createCompositeState(false));
     }
 
     public static RenderType additiveTrail(ResourceLocation texture) {

@@ -48,6 +48,15 @@ public class DreamtinkerClientConfig {
                            "Use every second/fourth trail point beyond 32/64 blocks. Keeps endpoints and all visual layers. Disable for full detail at every distance.")
                    .define("distanceLod", true);
 
+    static {
+        builder.pop();
+        builder.push("Narcissus Sigil");
+    }
+
+    public static final ForgeConfigSpec.DoubleValue NARCISSUS_SIGIL_SIZE_FACTOR =
+            builder.comment("Display size multiplier for the charging sigil. Does not change its muzzle position or projectile behavior.")
+                   .defineInRange("sizeFactor", 1.0, 0.1, 4.0);
+
     public static final ForgeConfigSpec specs = builder.pop().build();
 
 }

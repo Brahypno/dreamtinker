@@ -1,5 +1,6 @@
 package org.brahypno.dreamtinker.tools.modifiers.tools.narcissus_wing;
 
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -15,9 +16,13 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidType;
+import net.minecraftforge.network.PacketDistributor;
 import org.brahypno.dreamtinker.Entity.NarcissusFluidProjectile;
 import org.brahypno.dreamtinker.library.modifiers.modules.combat.NarcissusFluidFeedbackModule;
 import org.brahypno.dreamtinker.tools.DreamtinkerModifiers;
+import org.brahypno.dreamtinker.tools.items.NarcissusWing;
+import org.brahypno.dreamtinker.network.DNetwork;
+import org.brahypno.dreamtinker.network.S2CNarcissusSigilShot;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
@@ -159,6 +164,11 @@ public class MemoryBase extends Modifier implements GeneralInteractionModifierHo
                         int shots = 1 + 2 * (level - 1);
                         float startAngle = ModifiableLauncherItem.getAngleStart(shots);
                         int primaryIndex = shots / 2;
+                        // Automatic FlamingMemory attacks call this method with timeLeft=0: no charging sigil for those.
+                        boolean chargedUse = timeLeft > 0 && entity.isUsingItem() && entity.getUseItem().getItem() instanceof NarcissusWing
+                                             && tool.getModifierLevel(DreamtinkerModifiers.flaming_memory.getId()) == 0
+                                             && GeneralInteractionModifierHook.getActiveModifier(tool).getId().equals(modifier.getId());
+                        IntArrayList spawned = chargedUse ? new IntArrayList() : null;
                         for (int shotIndex = 0; shotIndex < shots; shotIndex++) {
                             NarcissusFluidProjectile spit = new NarcissusFluidProjectile(world, entity, new FluidStack(fluid, amount), power,
                                                                                          entity.getItemInHand(entity.getUsedItemHand()));
@@ -186,11 +196,17 @@ public class MemoryBase extends Modifier implements GeneralInteractionModifierHo
                             }
 
                             // finally, fire the projectile
-                            world.addFreshEntity(spit);
+                            if (world.addFreshEntity(spit) && spawned != null)
+                                spawned.add(spit.getId());
                             world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.FIRE_AMBIENT, SoundSource.PLAYERS, 1.0F,
                                             1.0F / (world.getRandom().nextFloat() * 0.4F + 1.2F) + charge * 0.5F + (angle / 10f));
 
                         }
+
+                        if (spawned != null && !spawned.isEmpty())
+                            DNetwork.CHANNEL.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> entity),
+                                                  new S2CNarcissusSigilShot(entity.getId(), entity.getUsedItemHand(), charge,
+                                                                           world.getGameTime(), spawned.toIntArray()));
 
                         // consume the fluid and durability
                         if (!(entity instanceof Player p && p.getAbilities().instabuild)){
