@@ -1,0 +1,18 @@
+{
+  "type": "esotericism_tinker:transmute_v2",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:sheetmetals/silver"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:sheetmetals/silver"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "dreamtinker:molten_shadow_silver"
+  },
+  "temperature": 1000,
+  "time": 22
+}

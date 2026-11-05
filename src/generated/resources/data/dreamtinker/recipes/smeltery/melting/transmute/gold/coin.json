@@ -1,0 +1,18 @@
+{
+  "type": "esotericism_tinker:transmute_v2",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:coins/gold"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:coins/gold"
+  },
+  "result": {
+    "amount": 3,
+    "fluid": "dreamtinker:molten_transmutation_gold"
+  },
+  "temperature": 1200,
+  "time": 13
+}

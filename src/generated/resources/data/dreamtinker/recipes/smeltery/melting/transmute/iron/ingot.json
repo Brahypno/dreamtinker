@@ -1,0 +1,18 @@
+{
+  "type": "esotericism_tinker:transmute_v2",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:ingots/iron"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:ingots/iron"
+  },
+  "result": {
+    "amount": 10,
+    "fluid": "dreamtinker:molten_cold_iron"
+  },
+  "temperature": 800,
+  "time": 20
+}

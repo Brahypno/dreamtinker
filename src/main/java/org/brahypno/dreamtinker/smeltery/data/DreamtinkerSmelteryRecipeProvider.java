@@ -28,6 +28,7 @@ import org.brahypno.dreamtinker.tools.data.material.DreamtinkerMaterialDataProvi
 import org.brahypno.esotericismtinker.common.EsotericismTinkerCommon;
 import org.brahypno.esotericismtinker.fluids.EsotericismTinkerFluids;
 import org.brahypno.esotericismtinker.smeltery.data.TransmuteMeltingRecipeBuilder;
+import org.brahypno.esotericismtinker.smeltery.data.TransmuteMeltingRecipeHelper;
 import org.jetbrains.annotations.NotNull;
 import slimeknights.mantle.recipe.condition.TagFilledCondition;
 import slimeknights.mantle.recipe.data.ItemNameIngredient;
@@ -71,6 +72,11 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
 
     private static Ingredient itemNameIngredient(String modid, String path) {
         return ItemNameIngredient.from(new ResourceLocation(modid, path));
+    }
+
+    private void transmuteMetal(Consumer<FinishedRecipe> consumer, String metal, FluidObject<?> result) {
+        TransmuteMeltingRecipeHelper.fluid(consumer, location(metal), result).optional().divideBy(9).block().ingot().dust().plate().gear().rod().coin()
+                                    .sheetmetal().wire().ore().rawOre().nugget();
     }
 
     public static ICondition tagFilled(TagKey<Item> tagKey) {
@@ -143,6 +149,11 @@ public class DreamtinkerSmelteryRecipeProvider implements IConditionBuilder, ISm
         ItemCastingRecipeBuilder.basinRecipe(DreamtinkerCommon.metallivorous_stibium_lupus_block.get())
                                 .setFluidAndTime(DreamtinkerFluids.molten_lupi_antimony, FluidValues.METAL_BLOCK)
                                 .save(consumer, location(Casting_folder + "metallivorous_stibium_lupus/block"));
+
+        transmuteMetal(consumer, "gold", DreamtinkerFluids.molten_transmutation_gold);
+        transmuteMetal(consumer, "silver", DreamtinkerFluids.molten_shadow_silver);
+        transmuteMetal(consumer, "copper", DreamtinkerFluids.molten_orichalcum);
+        transmuteMetal(consumer, "iron", DreamtinkerFluids.molten_cold_iron);
 
 
         MeltingRecipeBuilder.melting(Ingredient.of(DreamtinkerCommon.nigrescence_antimony.get()),

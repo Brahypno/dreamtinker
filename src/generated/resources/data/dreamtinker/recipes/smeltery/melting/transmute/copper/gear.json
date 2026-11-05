@@ -1,0 +1,18 @@
+{
+  "type": "esotericism_tinker:transmute_v2",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:gears/copper"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:gears/copper"
+  },
+  "result": {
+    "amount": 40,
+    "fluid": "dreamtinker:molten_orichalcum"
+  },
+  "temperature": 900,
+  "time": 42
+}

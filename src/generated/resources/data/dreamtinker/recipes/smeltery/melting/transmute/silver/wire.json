@@ -1,0 +1,18 @@
+{
+  "type": "esotericism_tinker:transmute_v2",
+  "conditions": [
+    {
+      "type": "mantle:tag_filled",
+      "tag": "forge:wires/silver"
+    }
+  ],
+  "ingredient": {
+    "tag": "forge:wires/silver"
+  },
+  "result": {
+    "amount": 5,
+    "fluid": "dreamtinker:molten_shadow_silver"
+  },
+  "temperature": 1000,
+  "time": 16
+}
