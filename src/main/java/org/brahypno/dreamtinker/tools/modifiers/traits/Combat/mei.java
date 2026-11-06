@@ -221,7 +221,7 @@ public class mei extends Modifier implements ModifierRemovalHook, ValidateModifi
                         }
                     }
                 }
-                if (100 <= level && tool.getModifierLevel(DreamtinkerModifiers.despair_mist.getId()) < 1)
+                if (300 < level && tool.getModifierLevel(DreamtinkerModifiers.despair_mist.getId()) < 1)
                     MaskService.colorIsolation(player, Dreamtinker.getLocation("modifier/mei"), RedShadeEnable.get() ? 0xFF8A221C : 0x6E3D3A3A, 60, 0.65F,
                                                1.28F, 10, -1);
             }
